@@ -1,0 +1,1915 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "91728",
+        "NumPVSuccesses": "917280",
+        "Existence_NumChecks": "922208",
+        "NumNodeSuccesses": "183456",
+        "Existence_NumDcCalls": "2"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "Existence_MissingReference_measurementQualifier": "336",
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "175",
+        "StatsCheck_3_Sigma": "746",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "42"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "1"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/ek7gq6ylyjwn8'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "19"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSTotalAllIndustries_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "37"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/dtp1j5zqvcccc'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "55"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSConstruction_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "73"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/c8rcs7p2lxtmc'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "91"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/d0yc8nnyhs7jb'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "109"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/nss2f8esebgh1'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "127"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/5cz584gnzv8dh'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "145"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSWholesaleTrade_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "163"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSRetailTrade_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "181"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/1ezw091537gm3'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "199"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSInformation_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "217"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/rqr5n4gthnej'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "235"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSFinanceInsurance_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "253"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSRealEstateRentalLeasing_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "271"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/51t0gkfryfrx8'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "289"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/3jpp0hc5h7xm7'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "307"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSEducationalServices_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "325"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSHealthCareSocialAssistance_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "343"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/4evxdg8gcqz6d'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "361"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSArtsEntertainmentRecreation_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "379"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSAccommodationFoodServices_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "397"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSOtherServices_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "415"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/dh0dv0wd6zlt6'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "433"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/zfpwsc9xb57zc'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "451"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_JobPosting_NAICSPublicAdministration_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "469"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/xw5ybx88r89q4'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "487"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/hy3xj0zkhx0mb'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "505"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:dc/tq6l9rmwbrv71'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "BLSJolts_StatisticalVariables.mcf",
+      "lineNumber": "525"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'Adjusted', property: 'measurementQualifier', node: 'dcid:Count_Worker_Hire_NAICSTotalAllIndustries_Adjusted'",
+    "counterKey": "Existence_MissingReference_measurementQualifier"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/xzy9ssjshx7wf",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2010-06",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "278.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "37244"
+          }]
+        }]
+      }, {
+        "date": "2010-07",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "185.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "37245"
+          }]
+        }]
+      }, {
+        "date": "2010-08",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "145.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "37246"
+          }]
+        }]
+      }, {
+        "date": "2020-10",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "194.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "37368"
+          }]
+        }]
+      }, {
+        "date": "2020-11",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "128.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "37369"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010-05",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "58.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "37243"
+          }]
+        }]
+      }, {
+        "date": "2010-06",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "278.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "37244"
+          }]
+        }]
+      }],
+      "percentDifference": 379.31
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_InvoluntarySeparation_NAICSPublicAdministration_Adjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "258.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "68210"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "336.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "68211"
+          }]
+        }]
+      }, {
+        "date": "2020-05",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "181.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "68212"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2020-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "78.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "68209"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "258.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "68210"
+          }]
+        }]
+      }],
+      "percentDifference": 230.77
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_InvoluntarySeparation_NAICSWholesaleTrade_Adjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "236.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "63569"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "250.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "63570"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2020-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "50.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "63568"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "236.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "63569"
+          }]
+        }]
+      }],
+      "percentDifference": 372.0
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_Hire_NAICSRetailTrade_Adjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2021-06",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1020.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "17993"
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/r2twx21lqtve9",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2010-06",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "242.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67820"
+          }]
+        }]
+      }, {
+        "date": "2010-07",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "154.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67821"
+          }]
+        }]
+      }, {
+        "date": "2010-08",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "122.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67822"
+          }]
+        }]
+      }, {
+        "date": "2010-09",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "84.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67823"
+          }]
+        }]
+      }, {
+        "date": "2020-10",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "152.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67944"
+          }]
+        }]
+      }, {
+        "date": "2020-11",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "98.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67945"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2010-05",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "40.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67819"
+          }]
+        }]
+      }, {
+        "date": "2010-06",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "242.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67820"
+          }]
+        }]
+      }],
+      "percentDifference": 505.0
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/jjct6j0cgc4h6",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "431.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "64115"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "343.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "64116"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2020-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "114.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "64114"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "431.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "64115"
+          }]
+        }]
+      }],
+      "percentDifference": 278.07
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/xw5ybx88r89q4",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2022-05",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "378.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "7357"
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/z0zgdmlnv3rjf",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2016-06",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "86.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "82907"
+          }]
+        }]
+      }, {
+        "date": "2020-05",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "84.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "82954"
+          }]
+        }]
+      }, {
+        "date": "2020-06",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "89.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "82955"
+          }]
+        }]
+      }, {
+        "date": "2020-07",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "91.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "82956"
+          }]
+        }]
+      }, {
+        "date": "2020-08",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "85.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "82957"
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/6wcg2gb583g06",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2021-08",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "210.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "55123"
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_Separation_NAICSOtherServices_Unadjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "935.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "44459"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "879.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "44460"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2020-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "154.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "44458"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "935.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "44459"
+          }]
+        }]
+      }],
+      "percentDifference": 507.14
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_InvoluntarySeparation_NAICSTotalAllIndustries_Adjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "12767.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "61658"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "8855.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "61659"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2020-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1880.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "61657"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "12767.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "61658"
+          }]
+        }]
+      }],
+      "percentDifference": 579.1
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/ew37qh0g26d9b",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2021-09",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "62.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "79967"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2023-01",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "11.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "79983"
+          }]
+        }]
+      }, {
+        "date": "2023-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "48.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "79984"
+          }]
+        }]
+      }],
+      "percentDifference": 336.36
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_OtherSeparation_NAICSOtherServices_Adjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2011-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "35.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "82571"
+          }]
+        }]
+      }, {
+        "date": "2014-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "28.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "82608"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2012-06",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "82586"
+          }]
+        }]
+      }, {
+        "date": "2012-07",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "16.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "82587"
+          }]
+        }]
+      }],
+      "percentDifference": 1500.0
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_Separation_NAICSRetailTrade_Adjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1852.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "33266"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1343.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "33267"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2020-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "852.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "33265"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1852.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "33266"
+          }]
+        }]
+      }],
+      "percentDifference": 117.37
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_OtherSeparation_NAICSInformation_Unadjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2001-01",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "19.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "87090"
+          }]
+        }]
+      }, {
+        "date": "2001-07",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "21.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "87096"
+          }]
+        }]
+      }, {
+        "date": "2016-01",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "19.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "87270"
+          }]
+        }]
+      }, {
+        "date": "2023-01",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "19.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "87354"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2013-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "1.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "87235"
+          }]
+        }]
+      }, {
+        "date": "2013-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "9.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "87236"
+          }]
+        }]
+      }],
+      "percentDifference": 800.0
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/8hlwxsmtxsx08",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "876.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "31901"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "832.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "31902"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2020-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "351.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "31900"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "876.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "31901"
+          }]
+        }]
+      }],
+      "percentDifference": 149.57
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/6gx0hj3yk35kf",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2022-11",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "303.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "48859"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2003-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "41.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "48622"
+          }]
+        }]
+      }, {
+        "date": "2003-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "92.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "48623"
+          }]
+        }]
+      }],
+      "percentDifference": 124.39
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_JobPosting_NAICSOtherServices_Unadjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2021-05",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "461.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "13897"
+          }]
+        }]
+      }, {
+        "date": "2021-09",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "467.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "13901"
+          }]
+        }]
+      }, {
+        "date": "2021-10",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "484.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "13902"
+          }]
+        }]
+      }, {
+        "date": "2022-01",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "508.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "13905"
+          }]
+        }]
+      }, {
+        "date": "2022-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "477.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "13908"
+          }]
+        }]
+      }, {
+        "date": "2022-07",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "489.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "13911"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2006-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "82.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "13714"
+          }]
+        }]
+      }, {
+        "date": "2006-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "195.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "13715"
+          }]
+        }]
+      }],
+      "percentDifference": 137.8
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/vl9vt8hr76eeb",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "37.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "61931"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "62.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "61932"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2016-12",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "2.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "61892"
+          }]
+        }]
+      }, {
+        "date": "2017-01",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "12.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "61893"
+          }]
+        }]
+      }],
+      "percentDifference": 500.0
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_OtherSeparation_NAICSFinanceInsurance_Adjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2021-09",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "57.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "80240"
+          }]
+        }]
+      }, {
+        "date": "2021-10",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "44.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "80241"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2023-01",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "5.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "80256"
+          }]
+        }]
+      }, {
+        "date": "2023-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "40.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "80257"
+          }]
+        }]
+      }],
+      "percentDifference": 700.0
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_InvoluntarySeparation_NAICSArtsEntertainmentRecreation_Adjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "622.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "66845"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "380.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "66846"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2020-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "63.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "66844"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "622.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "66845"
+          }]
+        }]
+      }],
+      "percentDifference": 887.3
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "dc/300weyjd58gnd",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2010-05",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "507.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "29599"
+          }]
+        }]
+      }, {
+        "date": "2020-08",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "318.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "29722"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2009-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "23.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "29585"
+          }]
+        }]
+      }, {
+        "date": "2009-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "142.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "29586"
+          }]
+        }]
+      }],
+      "percentDifference": 517.39
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_InvoluntarySeparation_NAICSOtherServices_Adjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "893.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67391"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "823.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67392"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2020-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "80.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67390"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "893.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "67391"
+          }]
+        }]
+      }],
+      "percentDifference": 1016.25
+    }]
+  }, {
+    "placeDcid": "country/USA",
+    "statVarDcid": "Count_Worker_InvoluntarySeparation_NAICSInformation_Unadjusted",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "188.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "72032"
+          }]
+        }]
+      }, {
+        "date": "2020-04",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "170.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "72033"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2020-02",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "26.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "72031"
+          }]
+        }]
+      }, {
+        "date": "2020-03",
+        "values": [{
+          "value": {
+            "type": "NUMBER",
+            "value": "188.0",
+            "column": "Value"
+          },
+          "locations": [{
+            "file": "BLSJolts.csv",
+            "lineNumber": "72032"
+          }]
+        }]
+      }],
+      "percentDifference": 623.08
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true,
+    "observationAbout": false,
+    "allowNanSvobs": false
+  }
+}
