@@ -153,7 +153,7 @@ def write_csv(filename, reader, output, features, stat_vars):
                     new_row[sv] = row[c]
 
                 #Exclude comma from median values
-                
+
             writer.writerow(new_row)
 
 
