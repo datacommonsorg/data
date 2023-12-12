@@ -7,7 +7,6 @@ The data is downloaded from
 Currently, we have data from 2010-2019 and observations for the Statistical
 Variables listed in
 `stat_vars.csv` for US states, counties, and places (cities).
-
 ## Generate Import Files
 
 To generate TMCF and CSV files, from parent directory (`subject_tables`), run:

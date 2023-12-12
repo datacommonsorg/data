@@ -19,10 +19,12 @@ import json
 import os
 import requests
 import zipfile
+import re
 from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
+
 flags.DEFINE_string('output', None, 'Path to folder for output files')
 flags.DEFINE_string('download_id', None, 'Download id for input data')
 flags.DEFINE_string('features', None, 'JSON of feature maps')
@@ -118,11 +120,6 @@ def write_csv(filename, reader, output, features, stat_vars):
                         valid_columns[c] = sv
                 continue
 
-            #new_row = {
-            #'observationDate': observation_date,
-            # TODO: Expand to support other prefixes?
-            #'observationAbout': 'dcid:geoId/' + row['GEO_ID'].split('US')[1]
-        # }
             geo = row['GEO_ID'].split('US')
             if geo[1] == "":
                 new_row = {
@@ -154,6 +151,9 @@ def write_csv(filename, reader, output, features, stat_vars):
                     new_row[sv] = row[c][:-1]
                 else:
                     new_row[sv] = row[c]
+
+                #Exclude comma from median values
+                
             writer.writerow(new_row)
 
 
