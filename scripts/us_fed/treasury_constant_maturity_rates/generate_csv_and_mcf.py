@@ -73,7 +73,7 @@ def generate_csv():
 
     in_df = pd.read_csv(CSV_URL,
                         na_values="ND",
-                        storage_options={"User-Agent": "Mozilla/5.0"})
+                        storage_options={"User-Agent": "Python-Pandas"})
 
     out_df["date"] = in_df["Series Description"][header_rows:]
     for maturity in MATURITIES:
