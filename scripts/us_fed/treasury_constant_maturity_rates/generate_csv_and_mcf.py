@@ -71,7 +71,9 @@ def generate_csv():
     name_template = "Market yield on U.S. Treasury securities at {}   constant"\
                     " maturity, quoted on investment basis"
 
-    in_df = pd.read_csv(CSV_URL, na_values="ND")
+    in_df = pd.read_csv(CSV_URL,
+                        na_values="ND",
+                        storage_options={"User-Agent": "Python-Pandas"})
 
     out_df["date"] = in_df["Series Description"][header_rows:]
     for maturity in MATURITIES:
