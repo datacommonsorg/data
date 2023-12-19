@@ -68,7 +68,7 @@ def generate_csv():
 
     out_df = pd.DataFrame()
     header_rows = 5
-    name_template = "Market yield on U.S. Treasury securities at {}   constant"\
+    name_template = "Market yield on U.S. Treasury securities at {}  constant"\
                     " maturity, quoted on investment basis"
 
     in_df = pd.read_csv(CSV_URL,
