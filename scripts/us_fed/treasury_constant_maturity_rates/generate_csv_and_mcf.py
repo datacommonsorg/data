@@ -67,7 +67,7 @@ def generate_csv():
     maturity rate csv file downloaded from Federal Reserve'''
 
     out_df = pd.DataFrame()
-    header_rows = 0
+    header_rows = 5
     name_template = "Market yield on U.S. Treasury securities at {}  constant"\
                     " maturity, quoted on investment basis"
 
