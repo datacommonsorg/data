@@ -67,13 +67,14 @@ def generate_csv():
     maturity rate csv file downloaded from Federal Reserve'''
 
     out_df = pd.DataFrame()
-    header_rows = 5
-    name_template = "Market yield on U.S. Treasury securities at {}   constant"\
+    header_rows = 0
+    name_template = "Market yield on U.S. Treasury securities at {}  constant"\
                     " maturity, quoted on investment basis"
 
     in_df = pd.read_csv(CSV_URL,
                         na_values="ND",
                         storage_options={"User-Agent": "Python-Pandas"})
+    in_df.to_csv('orig_treasury_constant_maturity_rates.csv', index=False)
 
     out_df["date"] = in_df["Series Description"][header_rows:]
     for maturity in MATURITIES:
