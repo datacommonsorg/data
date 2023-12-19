@@ -11,16 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-Configurations for the executor.
+"""Configurations for the executor.
 
 The app endpoints accept a configs field that allows customization of all the
 configurations. See main.py.
 """
 
+import dataclasses
 import os
 from typing import List
-import dataclasses
 
 from google.cloud import logging
 
@@ -32,6 +31,7 @@ def _production():
 @dataclasses.dataclass
 class ExecutorConfig:
     """Configurations for the executor."""
+
     # ID of the Google Cloud project that hosts the executor. The project
     # needs to enable App Engine and Cloud Scheduler.
     gcp_project_id: str = 'google.com:datcom-data'
@@ -102,9 +102,13 @@ class ExecutorConfig:
     # ID of the location where Cloud Scheduler is hosted.
     scheduler_location: str = 'us-central1'
     # Maximum time a user script can run for in seconds.
-    user_script_timeout: float = 600
+    user_script_timeout: float = 3600
+    # Arguments for the user script
+    user_script_args: List[str] = ()
+    # Environment variables for the user script
+    user_script_env: dict = None
     # Maximum time venv creation can take in seconds.
-    venv_create_timeout: float = 600
+    venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.
     file_download_timeout: float = 600
     # Maximum time downloading the repo can take in seconds.

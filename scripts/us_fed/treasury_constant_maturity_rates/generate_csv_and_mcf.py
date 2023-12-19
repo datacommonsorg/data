@@ -74,7 +74,6 @@ def generate_csv():
     in_df = pd.read_csv(CSV_URL,
                         na_values="ND",
                         storage_options={"User-Agent": "Python-Pandas"})
-    in_df.to_csv('orig_treasury_constant_maturity_rates.csv', index=False)
 
     out_df["date"] = in_df["Series Description"][header_rows:]
     for maturity in MATURITIES:
