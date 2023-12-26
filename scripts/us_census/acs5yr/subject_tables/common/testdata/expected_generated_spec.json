@@ -91,7 +91,8 @@
         "Percent Female",
         "Percent Male",
         "Total",
-        "id"
+        "id",
+        "Geography"
     ],
     "ignoreTokens XXXXX": [
         "Estimate"
