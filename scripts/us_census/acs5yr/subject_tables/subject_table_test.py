@@ -53,18 +53,7 @@ def _get_paths(table_dir):
         A tuple of the paths to the spec, CSV, Stat Var MCF, column map and test
         zip file.
     """
-    paths = {
-        'table_dir': [
-            '/scripts/us_census/acs5yr/subject_tables/S0701',
-            '/scripts/us_census/acs5yr/subject_tables/S0701/S0701_spec.json'
-        ],
-        'testdata': [
-            '/scripts/us_census/acs5yr/subject_tables/S0701/testdata/S0701_cleaned.csv',
-            '/scripts/us_census/acs5yr/subject_tables/S0701/testdata/column_map.json',
-            '/scripts/us_census/acs5yr/subject_tables/S0701/testdata/S0701_output.mcf',
-            '/scripts/us_census/acs5yr/subject_tables/S0701/testdata/S0701_test.zip'
-        ]
-    }
+    paths = {}
 
     # Find spec, Expects spec to be in table_dir
     for filename in os.listdir(table_dir):
