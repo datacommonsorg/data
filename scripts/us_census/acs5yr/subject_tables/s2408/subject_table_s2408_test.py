@@ -80,35 +80,42 @@ class TestSubjectTableS2408(unittest.TestCase):
             with self.subTest(table=table_dir_path, file_key=file_key):
                 self.assertTrue(file_key in paths)
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            # generate CSV, MCF and Column Map
-            set_column_map(paths['zip'], paths['spec'], tmp_dir)
-            process_subject_tables(table_prefix='test',
-                                   input_path=paths['zip'],
-                                   output_dir=tmp_dir,
-                                   column_map_path=os.path.join(
-                                       tmp_dir, 'column_map.json'),
-                                   spec_path=paths['spec'],
-                                   debug=False,
-                                   delimiter='!!',
-                                   has_percent=True)
+        #with tempfile.TemporaryDirectory() as tmp_dir:
+        # generate CSV, MCF and Column Map
+        tmp_dir = "/usr/local/google/home/mogalluru/datacommonsAug/data/scripts/us_census/acs5yr/subject_tables/s2408/test_op"
+        set_column_map(paths['zip'], paths['spec'], tmp_dir)
+        process_subject_tables(table_prefix='test',
+                               input_path=paths['zip'],
+                               output_dir=tmp_dir,
+                               column_map_path=os.path.join(
+                                   tmp_dir, 'column_map.json'),
+                               spec_path=paths['spec'],
+                               debug=False,
+                               delimiter='!!',
+                               has_percent=True)
 
-            test_mcf_path = os.path.join(tmp_dir, 'test_output.mcf')
-            test_cmap_path = os.path.join(tmp_dir, 'column_map.json')
-            test_csv_path = os.path.join(tmp_dir, 'test_cleaned.csv')
+        test_mcf_path = os.path.join(tmp_dir, 'test_output.mcf')
+        test_cmap_path = os.path.join(tmp_dir, 'column_map.json')
+        test_csv_path = os.path.join(tmp_dir, 'test_cleaned.csv')
 
-            with self.subTest(table=table_dir_path):
-                # Test StatVar MCF
-                test_mcf, expected_mcf = _read_files(test_mcf_path,
-                                                     paths['mcf'])
-                self.assertEqual(test_mcf, expected_mcf)
+        with self.subTest(table=table_dir_path):
+            # Test StatVar MCF
+            test_mcf, expected_mcf = _read_files(test_mcf_path, paths['mcf'])
+            self.assertEqual(test_mcf, expected_mcf)
 
-                # Test Column Map
-                test_cmap, expected_cmap = _read_files(test_cmap_path,
-                                                       paths['cmap'])
-                self.assertEqual(test_cmap, expected_cmap)
+            # Test Column Map
+            test_cmap, expected_cmap = _read_files(test_cmap_path,
+                                                   paths['cmap'])
+            self.assertEqual(test_cmap, expected_cmap)
 
-                # Test CSV
-                test_csv, expected_csv = _read_files(test_csv_path,
-                                                     paths['csv'])
-                self.assertEqual(test_csv, expected_csv)
+            # Test CSV
+            test_csv, expected_csv = _read_files(test_csv_path, paths['csv'])
+            self.assertEqual(test_csv, expected_csv)
+
+
+def main(argv):
+    a = ProcessTest(unittest.TestCase)
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,7 +1,7 @@
 {
   "overwrite_dcids": {
-		"Count_Person_5OrMoreYears_Native": "Count_Person_Native"
-	},
+    "Count_Person_5OrMoreYears_Native": "Count_Person_Native"
+  },
   "populationType": {
     "_DEFAULT": "Person"
   },
@@ -59,7 +59,7 @@
     "languageSpokenAtHome": {
       "Speak Spanish at home": "Spanish",
       "Speak Spanish at home MOE": "Spanish",
-      "Spanish or Spanish Creole":"SpanishOrSpanishCreole",
+      "Spanish or Spanish Creole": "SpanishOrSpanishCreole",
       "Speak only English at home": "OnlyEnglish",
       "Speak only English at home MOE": "OnlyEnglish",
       "People who speak only English at home": "OnlyEnglish"
@@ -71,14 +71,15 @@
     }
   },
   "universePVs": [
-  {
-    "populationType": "Person",
-    "constraintProperties": ["educationalAttainment"],
-    "dependentPVs": 
     {
-      "age": "[25 - Years]"
+      "populationType": "Person",
+      "constraintProperties": [
+        "educationalAttainment"
+      ],
+      "dependentPVs": {
+        "age": "[25 - Years]"
+      }
     }
-  }
   ],
   "denominators": {
     "Total!!Estimate!!Total population 5 years and over": [
@@ -217,7 +218,7 @@
       "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
       "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Below poverty level",
       "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level",
-      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level"      
+      "Percent distribution of people who speak a language other than English at home!!Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!At or above poverty level"
     ],
     "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": [
       "Percent distribution of people who speak a language other than English at home!!Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate",
@@ -292,6 +293,7 @@
   },
   "ignoreColumns": [
     "id",
+    "Geography",
     "Geographic Area Name",
     "Percent",
     "Percent MOE",
@@ -299,6 +301,14 @@
     "Percent speak Spanish at home MOE",
     "Percent speak only English at home",
     "Percent speak only English at home MOE",
-    "PERCENT IMPUTED"
+    "PERCENT IMPUTED",
+    "Annotation of Estimate",
+    "Annotation of Margin of Error",
+    "Annotation of Percent distribution of people who speak a language other than English at home",
+    "Annotation of People who speak only English at home",
+    "Annotation of Total",
+    "Annotation of Speak a language other than English at home",
+    "Annotation of Percent speak only English at home",
+    "Annotation of Speak only English at home"
   ]
 }

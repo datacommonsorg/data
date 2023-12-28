@@ -19,7 +19,6 @@
 			"Margin of Error!!Total Uninsured MOE!!$50,000 to $74,999.1": "Margin of Error!!Total Uninsured MOE!!Total household population!!$50,000 to $74,999",
 			"Estimate!!Total Uninsured!!Did not work!!Civilian noninstitutionalized workers 16 years and over": "Estimate!!Total Uninsured!!Civilian noninstitutionalized workers 16 years and over",
 			"Margin of Error!!Total Uninsured MOE!!Did not work!!Civilian noninstitutionalized workers 16 years and over": "Margin of Error!!Total Uninsured MOE!!Civilian noninstitutionalized workers 16 years and over"
-
 		}
 	},
 	"overwrite_dcids": {
@@ -286,27 +285,34 @@
 			"workerStatus": "Worker"
 		}
 	},
-	"universePVs": [{
-		"populationType": "Person",
-		"constraintProperties": ["healthInsurance"],
-		"dependentPVs": {
-			"armedForcesStatus": "Civilian",
-			"institutionalization": "USC_NonInstitutionalized"
+	"universePVs": [
+		{
+			"populationType": "Person",
+			"constraintProperties": [
+				"healthInsurance"
+			],
+			"dependentPVs": {
+				"armedForcesStatus": "Civilian",
+				"institutionalization": "USC_NonInstitutionalized"
+			}
+		},
+		{
+			"populationType": "Person",
+			"obs_props": {
+				"mprop": "earnings"
+			},
+			"dependentPVs": {
+				"age": "[16 - Years]",
+				"incomeStatus": "WithEarnings"
+			}
 		}
-	},
-	{
-		"populationType": "Person",
-		"obs_props": { "mprop": "earnings"},
-		"dependentPVs": {
-			"age": "[16 - Years]",
-			"incomeStatus": "WithEarnings"
-		}
-	}],
+	],
 	"measurementDenominator": {
 		"Estimate!!Women's earnings as a percentage of men's earning!!Civilian employed population 16 years and over with earnings": "Estimate!!Median earnings (dollars) for male!!Civilian employed population 16 years and over with earnings"
 	},
 	"ignoreColumns": [
 		"id",
+		"Geography",
 		"Geographic Area Name",
 		"Total",
 		"Total MOE",
@@ -327,8 +333,8 @@
 		"Estimate!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999",
 		"Margin of Error!!Total Uninsured!!HOUSEHOLD INCOME (IN 2019 INFLATION ADJUSTED DOLLARS)!!Total household population!!$50,000 to $74,999"
 	],
-	"denominators":{
-			"Uninsured Population!!Estimate!!Total population": [
+	"denominators": {
+		"Uninsured Population!!Estimate!!Total population": [
 			"Uninsured Population!!Estimate!!AGE!!Under 18 years",
 			"Uninsured Population!!Estimate!!AGE!!Under 18 years!!Under 6 years",
 			"Uninsured Population!!Estimate!!AGE!!Under 18 years!!6 to 17 years",
@@ -554,7 +560,6 @@
 			"Uninsured Population!!Margin of Error!!$50,000 to $74,999",
 			"Uninsured Population!!Margin of Error!!$75,000 or more"
 		],
-
 		"Uninsured Population!!Estimate!!HOUSEHOLD INCOME (IN 2013 INFLATION ADJUSTED DOLLARS)!!Total household population": [
 			"Uninsured Population!!Estimate!!Under $25,000",
 			"Uninsured Population!!Estimate!!$25,000 to $49,999",
@@ -603,7 +608,6 @@
 			"Uninsured Population!!Margin of Error!!$75,000 to $99,999",
 			"Uninsured Population!!Margin of Error!!$100,000 and over"
 		],
-
 		"Uninsured Population!!Estimate!!RATIO OF INCOME TO POVERTY LEVEL IN THE PAST 12 MONTHS!!Civilian noninstitutionalized population for whom poverty status is determined": [
 			"Uninsured Population!!Estimate!!Below 50 percent of the poverty level",
 			"Uninsured Population!!Estimate!!50 to 99 percent of the poverty level",
@@ -736,7 +740,6 @@
 			"Margin of Error!!Total Uninsured MOE!!Natural resources, construction, and maintenance occupations",
 			"Margin of Error!!Total Uninsured MOE!!Production, transportation, and material moving occupations"
 		],
-
 		"Estimate!!Total Uninsured!!EARNINGS IN THE PAST 12 MONTHS (IN 2017 INFLATION ADJUSTED DOLLARS)!!Civilian noninstitutionalized population 16 years and over with earnings": [
 			"Estimate!!Total Uninsured!!$1 to $4,999 or loss",
 			"Estimate!!Total Uninsured!!$5,000 to $14,999",

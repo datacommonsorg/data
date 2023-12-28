@@ -26,7 +26,7 @@ from sys import path
 from typing import Any, Union
 
 from census_api_helpers import *
-from .status_file_utils import sync_status_list
+from status_file_utils import sync_status_list
 
 FLAGS = flags.FLAGS
 
@@ -169,7 +169,7 @@ def get_table_url_list(dataset: str,
                     s_level_list.append(s_level)
     ret_list = []
     for year in year_list:
-        if year in available_years:
+        if int(year) in available_years:
             print('Compiling urls for', year)
             for s_level in s_level_list:
                 if s_level in geo_config[year]['summary_levels']:

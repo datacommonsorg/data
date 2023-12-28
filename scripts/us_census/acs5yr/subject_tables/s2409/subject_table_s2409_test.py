@@ -19,7 +19,7 @@ import tempfile
 import unittest
 
 from .process import set_column_map
-from .data_loader import process_subject_tables
+from .data_loader_s2409 import process_subject_tables
 
 # Allows the unittest to access table directories in relative path. Also used to
 # import modules for generating cleaned CSV, MCF and Column Map

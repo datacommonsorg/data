@@ -104,7 +104,9 @@
         {
             "populationType": "schema:Person",
             "constraintProperties": [],
-            "obs_props": { "mprop": "earnings"},
+            "obs_props": {
+                "mprop": "earnings"
+            },
             "dependentPVs": {
                 "age": "[16 - Years]",
                 "incomeStatus": "WithEarnings"
@@ -116,7 +118,9 @@
                 "workerClassification",
                 "establishmentOwnership"
             ],
-            "obs_props": { "mprop": "earnings"},
+            "obs_props": {
+                "mprop": "earnings"
+            },
             "dependentPVs": {
                 "age": "[16 - Years]",
                 "employment": "BLS_Employed",
@@ -162,7 +166,14 @@
     "denominators": {},
     "ignoreColumns": [
         "id",
+        "Geography",
         "Geographic Area Name",
-        "Margin of Error"
+        "Margin of Error",
+        "Annotation of Estimate",
+        "Annotation of Women's earnings as a percentage of men's earning",
+        "Annotation of Median earnings (dollars) for female",
+        "Annotation of Median earnings (dollars) for male",
+        "Annotation of Median earnings (dollars)",
+        "Annotation of Margin of Error"
     ]
 }

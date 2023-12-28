@@ -73,14 +73,19 @@
   ],
   "denominators": {},
   "ignoreColumns": [
-    "id",
+    "Geography",
     "Geographic Area Name",
     "Percent Imputed",
     "PERCENT IMPUTED",
     "Total",
     "Total MOE",
     "Percent with a disability",
-    "Percent with a disability MOE"
+    "Percent with a disability MOE",
+    "Annotation of Estimate",
+    "Annotation of Margin of Error",
+    "Annotation of With a disability",
+    "Annotation of Percent with a disability",
+    "Annotation of Total"
   ],
   "ignoreTokens": [
     "DISABILITY TYPE BY DETAILED AGE",
