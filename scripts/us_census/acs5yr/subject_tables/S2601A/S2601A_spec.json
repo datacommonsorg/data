@@ -261,7 +261,9 @@
   "universePVs": [
     {
       "populationType": "Person",
-      "obs_props": { "mprop": "earnings"},
+      "obs_props": {
+        "mprop": "earnings"
+      },
       "dependentPVs": {
         "incomeStatus": "WithEarnings"
       }
@@ -363,7 +365,7 @@
     }
   ],
   "ignoreColumns": [
-    "ID",
+    "id",
     "Geography",
     "Geographic Area Name",
     "Per capita income (dollars)",
