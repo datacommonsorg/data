@@ -1,14 +1,28 @@
-2023-12-29 10:41:17,657 MainProcess  One or more mandatory properties of the stat_var is missing. 
+2023-12-29 12:28:30,064 MainProcess  One or more mandatory properties of the stat_var is missing. 
+ Dump of the stat_var:: {'Node': 'dcid:Person_Civilian_NonInstitutionalized', 'populationType': 'schema:Person', 'institutionalization': 'dcs:USC_NonInstitutionalized', 'armedForcesStatus': 'dcs:Civilian', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
+2023-12-29 12:28:30,073 MainProcess  One or more mandatory properties of the stat_var is missing. 
+ Dump of the stat_var:: {'Node': 'dcid:Person_Civilian_NonInstitutionalized', 'populationType': 'schema:Person', 'institutionalization': 'dcs:USC_NonInstitutionalized', 'armedForcesStatus': 'dcs:Civilian', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
+2023-12-29 12:28:30,082 MainProcess  One or more mandatory properties of the stat_var is missing. 
+ Dump of the stat_var:: {'Node': 'dcid:Person_Civilian_NonInstitutionalized', 'populationType': 'schema:Person', 'institutionalization': 'dcs:USC_NonInstitutionalized', 'armedForcesStatus': 'dcs:Civilian', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
+2023-12-29 12:28:30,090 MainProcess  One or more mandatory properties of the stat_var is missing. 
+ Dump of the stat_var:: {'Node': 'dcid:Person_Civilian_NonInstitutionalized', 'populationType': 'schema:Person', 'institutionalization': 'dcs:USC_NonInstitutionalized', 'armedForcesStatus': 'dcs:Civilian', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
+2023-12-29 12:28:30,099 MainProcess  One or more mandatory properties of the stat_var is missing. 
+ Dump of the stat_var:: {'Node': 'dcid:Person_Civilian_NonInstitutionalized', 'populationType': 'schema:Person', 'institutionalization': 'dcs:USC_NonInstitutionalized', 'armedForcesStatus': 'dcs:Civilian', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
+2023-12-29 12:28:30,107 MainProcess  One or more mandatory properties of the stat_var is missing. 
+ Dump of the stat_var:: {'Node': 'dcid:Person_Civilian_NonInstitutionalized', 'populationType': 'schema:Person', 'institutionalization': 'dcs:USC_NonInstitutionalized', 'armedForcesStatus': 'dcs:Civilian', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
+2023-12-29 12:28:30,115 MainProcess  One or more mandatory properties of the stat_var is missing. 
+ Dump of the stat_var:: {'Node': 'dcid:Person_Civilian_NonInstitutionalized', 'populationType': 'schema:Person', 'institutionalization': 'dcs:USC_NonInstitutionalized', 'armedForcesStatus': 'dcs:Civilian', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
+2023-12-29 12:30:21,163 MainProcess  One or more mandatory properties of the stat_var is missing. 
  Dump of the stat_var:: {'Node': 'dcid:Person', 'populationType': 'schema:Person', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
-2023-12-29 10:41:17,661 MainProcess  One or more mandatory properties of the stat_var is missing. 
+2023-12-29 12:30:21,166 MainProcess  One or more mandatory properties of the stat_var is missing. 
  Dump of the stat_var:: {'Node': 'dcid:Person', 'populationType': 'schema:Person', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
-2023-12-29 10:41:17,664 MainProcess  One or more mandatory properties of the stat_var is missing. 
+2023-12-29 12:30:21,170 MainProcess  One or more mandatory properties of the stat_var is missing. 
  Dump of the stat_var:: {'Node': 'dcid:Person', 'populationType': 'schema:Person', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
-2023-12-29 10:41:17,667 MainProcess  One or more mandatory properties of the stat_var is missing. 
+2023-12-29 12:30:21,173 MainProcess  One or more mandatory properties of the stat_var is missing. 
  Dump of the stat_var:: {'Node': 'dcid:Person', 'populationType': 'schema:Person', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
-2023-12-29 10:41:17,670 MainProcess  One or more mandatory properties of the stat_var is missing. 
+2023-12-29 12:30:21,176 MainProcess  One or more mandatory properties of the stat_var is missing. 
  Dump of the stat_var:: {'Node': 'dcid:Person', 'populationType': 'schema:Person', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
-2023-12-29 10:41:17,673 MainProcess  One or more mandatory properties of the stat_var is missing. 
+2023-12-29 12:30:21,179 MainProcess  One or more mandatory properties of the stat_var is missing. 
  Dump of the stat_var:: {'Node': 'dcid:Person', 'populationType': 'schema:Person', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
-2023-12-29 10:41:17,676 MainProcess  One or more mandatory properties of the stat_var is missing. 
+2023-12-29 12:30:21,182 MainProcess  One or more mandatory properties of the stat_var is missing. 
  Dump of the stat_var:: {'Node': 'dcid:Person', 'populationType': 'schema:Person', 'typeOf': 'dcs:StatisticalVariable'} (generate_col_map.py:375)
