@@ -31,7 +31,7 @@ class GenerateColMapTest(unittest.TestCase):
         base_path = os.path.dirname(__file__)
         spec_path = os.path.join(base_path, "./testdata/spec_s2702.json")
         input_csv_path = os.path.join(base_path,
-                                      "./testdata/ACSST5Y2013_S2702.csv")
+                                      "./testdata/ACSST5Y2013_S2702_data_with_overlays.csv")
         expected_map_path = os.path.join(
             base_path, "./testdata/column_map_from_csv_expected.json")
 
