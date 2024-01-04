@@ -1,18 +1,23 @@
-Deploy to GKE
+# Deploy Executor to GKE
 
-Import-automation executor can also be deployed to gke. After committing new changes, please do the following to deploy.
+Import-automation executor can also be deployed to Google Kubernetes Engine
+(GKE). After committing new changes, please do the following to deploy.
 
-1. From repo root, run: `cd import-automation/executor`
+1. Make sure the local repo is clean without pending changes.
 
-2. build and push image: `./gke/push_image.sh`
+1. From repo root, run: `cd import-automation/executor`.
 
-3. Replace image tag in deployment.yaml with the value of `git rev-parse --short=7 HEAD`.
+1. build and push image: `./gke/push_image.sh`. This build a new docker image
+   with tag `prod` and the current git commit hash.
 
-4. Update GKE with the following.
+1. Update GKE with the following command (replace GCP_PROJECT with actual
+   project id):
 
 ```sh
+export PROJECT_ID=<GCP_PROJECT>
+
 gcloud container clusters get-credentials datacommons-us-central1 \
-  --region us-central1 --project datcom-website-dev
+  --region us-central1 --project $PROJECT_ID
 
 kubectl apply -f gke/deployment.yaml
 ```
