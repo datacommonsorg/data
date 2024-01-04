@@ -25,7 +25,7 @@ steps:
           --tag gcr.io/datcom-ci/datacommons-import-automation-executor:${_TAG} \
           --tag gcr.io/datcom-ci/datacommons-import-automation-executor:prod \
           .
-        docker push gcr.io/datcom-ci/datacommons-import-automation-executor:${_TAG
+        docker push gcr.io/datcom-ci/datacommons-import-automation-executor:${_TAG}
         docker push gcr.io/datcom-ci/datacommons-import-automation-executor:prod
 
 timeout: 600s

@@ -17,5 +17,6 @@ set -e
 
 gcloud builds submit . \
   --async \
-  --project=$PROJECT_ID \
-  --config=gke/cloudbuild.push_image.yaml
+  --project=datcom-ci \
+  --config=gke/cloudbuild.push_image.yaml \
+  --substitutions=_TAG=$(git rev-parse --short=7 HEAD)
