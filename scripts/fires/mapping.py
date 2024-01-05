@@ -170,7 +170,8 @@ CAUSE_DCID_MAP = {
         "FireCauseUnknown",
     "Yarddebris":
         "YardDebris",
-    "Unknown": "Unknown"
+    "Unknown":
+        "Unknown"
 }
 
 POOSTATE_GEOID_MAP = {

@@ -256,11 +256,11 @@ def process_df(df):
     # Convert costs to currency labelled string
     df["Costs"] = df["EstimatedCostToDate"].apply(get_cost)
     # Convert burned area to Unit labelled string
-    
+
     df['BurnedArea'] = df['DiscoveryAcres'].apply(get_area,
-                                              args=('daily_acres',
-                                                    _DAILY_ACRES_MAP))
-    
+                                                  args=('daily_acres',
+                                                        _DAILY_ACRES_MAP))
+
     # Causes to Cause Enum IDs
     df["FireCause"] = df["FireCause"].apply(get_cause)
     df["FireCauseGeneral"] = df["FireCauseGeneral"].apply(get_cause)
@@ -299,12 +299,12 @@ def process_df(df):
         "IrwinID", "wfigsFireID", "ParentFire", "InitialResponseDateTime",
         "InitialResponseAcres"
     ]
-    
+
     return df[col_list]
 
 
 def main(_) -> None:
-    
+
     df = get_data(POST_OCT_2022_FIRE_LOCATIONS_URL)
 
     storage_client = storage.Client(_GCS_PROJECT_ID)

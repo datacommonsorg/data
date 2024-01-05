@@ -116,15 +116,15 @@ def create_fire_id(irwin_id):
 def extract_geojsons(df):
     df["geojson_dp1"] = df["geojson"].apply(lambda x: get_gj_dp(x))
     #df["fire_id"] = df["irwin_IrwinID"].apply(create_fire_id)
-    
+
     df["fire_id"] = df["poly_IRWINID"].apply(create_fire_id)
-    
+
     # df["typeOf"] = df["irwin_IncidentTypeCategory"].apply(
     #     lambda x: _FIRE_INCIDENT_MAP[x])
-    
-    df["typeOf"] = df[df["attr_IncidentTypeCategory"].notnull()]["attr_IncidentTypeCategory"].apply(
-        lambda x: _FIRE_INCIDENT_MAP[x])
-    
+
+    df["typeOf"] = df[df["attr_IncidentTypeCategory"].notnull(
+    )]["attr_IncidentTypeCategory"].apply(lambda x: _FIRE_INCIDENT_MAP[x])
+
     df = df[["typeOf", "fire_id", "geojson_dp1"]]
     return df
 
@@ -133,9 +133,9 @@ def main(_) -> None:
     df = get_data(_PERIMETER_URL)
     df = extract_geojsons(df)
     df = df.to_csv("perimeter_data.csv",
-              index=False,
-              doublequote=False,
-              escapechar='\\')
+                   index=False,
+                   doublequote=False,
+                   escapechar='\\')
 
 
 if __name__ == "__main__":
