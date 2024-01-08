@@ -124,8 +124,6 @@ def read_worldbank(iso3166alpha3, fetchFromSource):
                 if df is None:
                     df = pd.DataFrame(columns=cols)
                 else:
-                    # df = df.append(pd.DataFrame([cols], columns=df.columns),
-                    #               ignore_index=True)
                     df.loc[len(df.index)] = cols
 
         df = df.rename(columns=WORLDBANK_COL_REMAP)
@@ -273,9 +271,9 @@ def download_indicator_data(worldbank_countries, indicator_codes,
         # Map country codes to ISO.
         country_df['ISO3166Alpha3'] = country_code
 
-        # Add new row to main datframe.
-        # worldbank_dataframe = worldbank_dataframe.append(country_df)
+        # Add new table to main dataframe.
         wb_dfs.append(country_df)
+    # COmbine tables to get a single dataframe
     worldbank_dataframe = pd.concat(wb_dfs)
 
     # Map indicator codes to unique Statistical Variable.
