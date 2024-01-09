@@ -635,17 +635,6 @@ measuredProperty: dcs:amount
 transferType: dcs:OutwardRemittance
 
 
-Node: dcid:WorldBank/VC_IHR_PSRC_P5
-name: "Intentional homicides (per 100,000 people)"
-description: "Intentional homicides are estimates of unlawful homicides purposely inflicted as a result of domestic disputes, interpersonal violence, violent conflicts over land resources, intergang violence over turf or control, and predatory violence and killing by armed groups. Intentional homicide does not include all intentional killing; the difference is usually in the organization of the killing. Individuals or small groups usually commit homicide, whereas killing in armed conflict is usually committed by fairly cohesive groups of up to several hundred members and is thus usually excluded. UN Office on Drugs and Crime's International Homicide Statistics database."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:CriminalActivities
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-measurementDenominator: dcs:Count_Person
-crimeType: dcs:MurderAndNonNegligentManslaughter
-
-
 Node: dcid:WorldBank/SH_DYN_MORT
 name: "Mortality rate, under-5 (per 1,000 live births)"
 description: "Under-five mortality rate is the probability per 1,000 that a newborn baby will die before reaching age five, if subject to age-specific mortality rates of the specified year. Estimates Developed by the UN Inter-agency Group for Child Mortality Estimation (UNICEF, WHO, World Bank, UN DESA Population Division) at www.childmortality.org."
