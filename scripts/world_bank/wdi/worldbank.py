@@ -365,7 +365,7 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
 
 def main(_):
     # Load statistical variable configuration file.
-    indicator_codes = pd.read_csv(FLAGS.indicatorSchemaFile)
+    indicator_codes = pd.read_csv(FLAGS.indicatorSchemaFile, dtype=str)
 
     # Add source description to note.
     def add_source_to_description(row):
