@@ -207,8 +207,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
     """
     # All the statistical observation properties that we included.
     properties_of_stat_var_observation = ([
-        'measurementMethod', 'measurementDenominator', 'scalingFactor',
-        'sourceScalingFactor', 'unit'
+        'measurementMethod', 'scalingFactor','unit'
     ])
     # List of tuples to return.
     tmcfs_for_stat_vars = []
@@ -329,6 +328,80 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
                 ])
     # Include the Stat Observation columns in the output CSV.
     df = df.merge(indicator_codes[stat_var_obs_cols], on='IndicatorCode')
+
+    # Coverting dcid to existing dcid
+    df['StatisticalVariable'] = df['StatisticalVariable'].astype(str)
+    resolution_to_existing_dcid = {
+        'dcs:WorldBank/SE_TER_CUAT_BA_FE_ZS': 'Count_Person_25OrMoreYears_Female_BachelorsDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears_Female',
+        'dcs:WorldBank/SE_TER_CUAT_BA_MA_ZS': 'Count_Person_25OrMoreYears_Male_BachelorsDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears_Male',
+        'dcs:WorldBank/SE_TER_CUAT_BA_ZS': 'Count_Person_25OrMoreYears_BachelorsDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears',
+        'dcs:WorldBank/SE_TER_CUAT_DO_FE_ZS': 'Count_Person_25OrMoreYears_Female_DoctorateDegree_AsFractionOf_Count_Person_25OrMoreYears_Female',
+        'dcs:WorldBank/SE_TER_CUAT_DO_MA_ZS': 'Count_Person_25OrMoreYears_Male_DoctorateDegree_AsFractionOf_Count_Person_25OrMoreYears_Male',
+        'dcs:WorldBank/SE_TER_CUAT_DO_ZS': 'Count_Person_25OrMoreYears_DoctorateDegree_AsFractionOf_Count_Person_25OrMoreYears',
+        'dcs:WorldBank/SE_TER_CUAT_MS_FE_ZS': 'Count_Person_25OrMoreYears_Female_MastersDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears_Female',
+        'dcs:WorldBank/SE_TER_CUAT_MS_MA_ZS': 'Count_Person_25OrMoreYears_Male_MastersDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears_Male',
+        'dcs:WorldBank/SE_TER_CUAT_MS_ZS': 'Count_Person_25OrMoreYears_MastersDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears',
+        'dcs:WorldBank/SE_TER_CUAT_ST_FE_ZS': 'Count_Person_25OrMoreYears_Female_TertiaryEducation_AsFractionOf_Count_Person_25OrMoreYears_Female',
+        'dcs:WorldBank/SE_TER_CUAT_ST_MA_ZS': 'Count_Person_25OrMoreYears_Male_TertiaryEducation_AsFractionOf_Count_Person_25OrMoreYears_Male',
+        'dcs:WorldBank/SE_TER_CUAT_ST_ZS': 'Count_Person_25OrMoreYears_TertiaryEducation_AsFractionOf_Count_Person_25OrMoreYears',
+        'dcs:WorldBank/SH_STA_OWGH_FE_ZS': 'Count_Person_Upto4Years_Female_Overweight_AsFractionOf_Count_Person_Upto4Years_Female',
+        'dcs:WorldBank/SH_STA_OWGH_MA_ZS': 'Count_Person_Upto4Years_Male_Overweight_AsFractionOf_Count_Person_Upto4Years_Male',
+        'dcs:WorldBank/SH_STA_OWGH_ZS': 'Count_Person_Upto4Years_Overweight_AsFractionOf_Count_Person_Upto4Years',
+        'dcs:WorldBank/SH_STA_SUIC_FE_P5': 'Count_Death_IntentionalSelfHarm_Female_AsFractionOf_Count_Person_Female',
+        'dcs:WorldBank/SH_STA_SUIC_MA_P5': 'Count_Death_IntentionalSelfHarm_Male_AsFractionOf_Count_Person_Male',
+        'dcs:WorldBank/SH_STA_SUIC_P5': 'Count_Death_IntentionalSelfHarm_AsFractionOf_Count_Person',
+        'dcs:WorldBank/SL_TLF_ACTI_FE_ZS': 'Count_Person_15To64Years_Female_InLaborForce_AsFractionOf_Count_Person_15To64Years_Female',
+        'dcs:WorldBank/SL_TLF_ACTI_MA_ZS': 'Count_Person_15To64Years_Male_InLaborForce_AsFractionOf_Count_Person_15To64Years_Male',
+        'dcs:WorldBank/SL_TLF_ACTI_ZS': 'Count_Person_15To64Years_InLaborForce_AsFractionOf_Count_Person_15To64Years',
+        'dcs:WorldBank/SL_TLF_TOTL_FE_ZS': 'Count_Person_15OrMoreYears_InLaborForce_Female_AsFractionOf_Count_Person_InLaborForce',
+        'dcs:WorldBank/VC_IHR_PSRC_FE_P5': 'Count_CriminalActivities_MurderAndNonNegligentManslaughter_Female_AsFractionOf_Count_Person_Female',
+        'dcs:WorldBank/VC_IHR_PSRC_MA_P5': 'Count_CriminalActivities_MurderAndNonNegligentManslaughter_Male_AsFractionOf_Count_Person_Male',
+        'dcs:WorldBank/VC_IHR_PSRC_P5': 'Count_CriminalActivities_MurderAndNonNegligentManslaughter_AsFractionOf_Count_Person',
+        'dcs:WorldBank/SP_RUR_TOTL': 'Count_Person_Rural',
+        'dcs:WorldBank/SP_URB_TOTL': 'Count_Person_Urban',
+        'dcs:WorldBank/SP_DYN_IMRT_IN': 'Count_Death_0Years_AsFractionOf_Count_BirthEvent_LiveBirth',
+        'dcs:WorldBank/SP_DYN_IMRT_MA_IN': 'Count_Death_0Years_Male_AsFractionOf_Count_BirthEvent_LiveBirth_Male',
+        'dcs:WorldBank/SP_DYN_IMRT_FE_IN': 'Count_Death_0Years_Female_AsFractionOf_Count_BirthEvent_LiveBirth_Female',
+        'dcs:WorldBank/SH_DTH_IMRT': 'Count_Death_0Years',
+        'dcs:WorldBank/SL_TLF_0714_ZS': 'Count_Person_7To14Years_Employed_AsFractionOf_Count_Person_7To14Years',
+        'dcs:WorldBank/SL_TLF_0714_MA_ZS': 'Count_Person_7To14Years_Male_Employed_AsFractionOf_Count_Person_7To14Years_Male',
+        'dcs:WorldBank/SL_TLF_0714_FE_ZS': 'Count_Person_7To14Years_Female_Employed_AsFractionOf_Count_Person_7To14Years_Female',
+        'dcs:WorldBank/SH_SVR_WAST_ZS': 'Count_Person_Upto4Years_SevereWasting_AsFractionOf_Count_Person_Upto4Years',
+        'dcs:WorldBank/SH_SVR_WAST_MA_ZS': 'Count_Person_Upto4Years_Male_SevereWasting_AsFractionOf_Count_Person_Upto4Years_Male',
+        'dcs:WorldBank/SH_SVR_WAST_FE_ZS': 'Count_Person_Upto4Years_Female_SevereWasting_AsFractionOf_Count_Person_Upto4Years_Female',
+        'dcs:WorldBank/SH_STA_WAST_ZS': 'Count_Person_Upto4Years_Wasting_AsFractionOf_Count_Person_Upto4Years',
+        'dcs:WorldBank/SH_STA_WAST_MA_ZS': 'Count_Person_Upto4Years_Male_Wasting_AsFractionOf_Count_Person_Upto4Years_Male',
+        'dcs:WorldBank/SH_STA_WAST_FE_ZS': 'Count_Person_Upto4Years_Female_Wasting_AsFractionOf_Count_Person_Upto4Years_Female',
+        'dcs:WorldBank/SH_XPD_CHEX_PC_CD': 'Amount_EconomicActivity_ExpenditureActivity_HealthcareExpenditure_AsFractionOf_Count_Person',
+        'dcs:WorldBank/SH_ALC_PCAP_LI': 'Amount_Consumption_Alcohol_15OrMoreYears_AsFractionOf_Count_Person_15OrMoreYears',
+        'dcs:WorldBank/SI_POV_GINI': 'GiniIndex_EconomicActivity',
+        'dcs:WorldBank/SE_XPD_TOTL_GB_ZS': 'Amount_EconomicActivity_ExpenditureActivity_EducationExpenditure_Government_AsFractionOf_Amount_EconomicActivity_ExpenditureActivity_Government',
+        'dcs:WorldBank/SE_XPD_TOTL_GD_ZS': 'Amount_EconomicActivity_ExpenditureActivity_EducationExpenditure_Government_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
+        'dcs:WorldBank/MS_MIL_XPND_CD': 'Amount_EconomicActivity_ExpenditureActivity_MilitaryExpenditure_Government',
+        'dcs:WorldBank/MS_MIL_XPND_GD_ZS': 'Amount_EconomicActivity_ExpenditureActivity_MilitaryExpenditure_Government_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
+        'dcs:WorldBank/CM_MKT_LCAP_GD_ZS': 'Amount_Stock_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
+        'dcs:WorldBank/CM_MKT_LCAP_CD': 'Amount_Stock',
+        'dcs:WorldBank/BX_TRF_PWKR_DT_GD_ZS': 'Amount_Remittance_InwardRemittance_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
+        'dcs:WorldBank/BX_TRF_PWKR_CD_DT': 'Amount_Remittance_InwardRemittance',
+        'dcs:WorldBank/BM_TRF_PWKR_CD_DT': 'Amount_Remittance_OutwardRemittance',
+        'dcs:WorldBank/SH_DYN_MORT': 'MortalityRate_Person_Upto4Years_AsFractionOf_Count_BirthEvent_LiveBirth',
+        'dcs:WorldBank/SH_PRV_SMOK': 'Count_Person_15OrMoreYears_Smoking_AsFractionOf_Count_Person_15OrMoreYears',
+        'dcs:WorldBank/SH_PRV_SMOK_FE': 'Count_Person_15OrMoreYears_Female_Smoking_AsFractionOf_Count_Person_15OrMoreYears_Female',
+        'dcs:WorldBank/SH_PRV_SMOK_MA': 'Count_Person_15OrMoreYears_Male_Smoking_AsFractionOf_Count_Person_15OrMoreYears_Male',
+        'dcs:WorldBank/SH_STA_DIAB_ZS': 'Count_Person_20To79Years_Diabetes_AsFractionOf_Count_Person_20To79Years',
+        'dcs:WorldBank/SP_DYN_CBRT_IN': 'Count_BirthEvent_LiveBirth_AsFractionOf_Count_Person',
+        'dcs:WorldBank/SP_DYN_LE00_FE_IN': 'LifeExpectancy_Person_Female',
+        'dcs:WorldBank/SP_DYN_LE00_MA_IN': 'LifeExpectancy_Person_Male',
+        'dcs:WorldBank/EG_ELC_FOSL_ZS': 'Amount_Production_ElectricityFromOilGasOrCoalSources_AsFractionOf_Amount_Production_Energy',
+        'dcs:WorldBank/EG_ELC_NUCL_ZS': 'Amount_Production_ElectricityFromNuclearSources_AsFractionOf_Amount_Production_Energy',
+        'dcs:WorldBank/EG_FEC_RNEW_ZS': 'Amount_Consumption_RenewableEnergy_AsFractionOf_Amount_Consumption_Energy',
+        'dcs:WorldBank/EN_POP_EL5M_ZS': 'Count_Person_ResidingLessThan5MetersAboveSeaLevel_AsFractionOf_Count_Person',
+        'dcs:WorldBank/IT_CEL_SETS_P2': 'Count_Product_MobileCellularSubscription_AsFractionOf_Count_Person',
+        'dcs:WorldBank/SE_XPD_TERT_ZS': 'Amount_EconomicActivity_ExpenditureActivity_TertiaryEducationExpenditure_Government_AsFractionOf_Amount_EconomicActivity_ExpenditureActivity_EducationExpenditure_Government',
+        'dcs:WorldBank/SH_XPD_CHEX_PP_CD': 'Amount_EconomicActivity_ExpenditureActivity_HealthcareExpenditure_AsFractionOf_Count_Person',
+        'dcs:WorldBank/SH_XPD_CHEX_PC_CD':'Amount_EconomicActivity_ExpenditureActivity_HealthcareExpenditure_AsFractionOf_Count_Person'
+    }
+    df = df.replace({'StatisticalVariable': resolution_to_existing_dcid})
     df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
                                             float_format='%.10f',
                                             index=False)
@@ -363,7 +436,7 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
 
 def main(_):
     # Load statistical variable configuration file.
-    indicator_codes = pd.read_csv(FLAGS.indicatorSchemaFile)
+    indicator_codes = pd.read_csv(FLAGS.indicatorSchemaFile, dtype=str)
 
     # Add source description to note.
     def add_source_to_description(row):
