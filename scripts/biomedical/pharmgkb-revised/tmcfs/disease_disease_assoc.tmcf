@@ -1,0 +1,11 @@
+Node: E:disease_disease->E1
+typeOf: dcs:DiseaseDiseaseAssociation
+dcid: C:disease_disease->dcid
+name: C:disease_disease->name
+isPharmacodynamicRelationship: C:disease_disease->PD
+isPharmacokineticRelationship: C:disease_disease->PK
+relationshipAssociationType: C:disease_disease->Association
+relationshipEvidenceType: C:disease_disease->Evidence	
+pubMedID: C:disease_disease->PMIDs	
+entity1: C:disease_disease->Entity1_dcid
+entity2: C:disease_disease->Entity2_dcid

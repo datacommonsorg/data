@@ -1,0 +1,11 @@
+Node: E:gene_gene->E1
+typeOf: dcs:GeneGeneAssociation
+dcid: C:gene_gene->dcid
+name: C:gene_gene->name
+isPharmacodynamicRelationship: C:gene_gene->PD
+isPharmacokineticRelationship: C:gene_gene->PK
+relationshipAssociationType: C:gene_gene->Association
+relationshipEvidenceType: C:gene_gene->Evidence	
+pubMedID: C:gene_gene->PMIDs	
+entity1: C:gene_gene->Entity1_dcid
+entity2: C:gene_gene->Entity2_dcid

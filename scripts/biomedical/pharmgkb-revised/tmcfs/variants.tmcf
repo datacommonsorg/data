@@ -1,0 +1,5 @@
+Node: E:variants->E1
+typeOf: dcs:GeneticVariant
+dcid: C:variants->dcid
+name: C:variants->Variant Name
+pharmGKBID: C:variants->Variant ID
