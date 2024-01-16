@@ -1,0 +1,8 @@
+Node: E:USDA_AgricultureSurvey->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:USDA_AgricultureSurvey->variableMeasured
+observationDate: C:USDA_AgricultureSurvey->observationDate
+observationAbout: C:USDA_AgricultureSurvey->observationAbout
+observationPeriod: "P1Y"
+value: C:USDA_AgricultureSurvey->value
+unit: C:USDA_AgricultureSurvey->unit

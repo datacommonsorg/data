@@ -1,0 +1,203 @@
+{
+    "year_range": "03-06",
+    "data_cols": [
+        "Births",
+        "Average Birth Weight",
+        "Average Age of Mother",
+        "Average LMP Gestational Age"
+    ],
+    "cprop_cols": [],
+    "geo": {
+        "col": "State",
+        "type": "State"
+    },
+    "populationType": {
+        "Births": {
+            "populationType": "BirthEvent",
+            "measuredProperty": "count",
+            "statType": "measuredValue",
+            "typeOf": "StatisticalVariable",
+            "medicalStatus": "LiveBirth"
+        },
+        "Average Age of Mother": {
+            "populationType": "BirthEvent",
+            "measuredProperty": "mothersAge",
+            "statType": "meanValue",
+            "typeOf": "StatisticalVariable",
+            "medicalStatus": "LiveBirth",
+            "unit": "Years"
+        },
+        "Average LMP Gestational Age": {
+            "populationType": "BirthEvent",
+            "measuredProperty": "lmpGestationalAge",
+            "statType": "meanValue",
+            "typeOf": "StatisticalVariable",
+            "medicalStatus": "LiveBirth",
+            "unit": "Week"
+        },
+        "Average Birth Weight": {
+            "populationType": "BirthEvent",
+            "measuredProperty": "birthWeight",
+            "statType": "meanValue",
+            "typeOf": "StatisticalVariable",
+            "medicalStatus": "LiveBirth",
+            "unit": "Gram"
+        }
+    },
+    "filename": {
+        "MAge": {
+            "14": {
+                "mothersAge": "[- 14 Years]"
+            },
+            "15": {
+                "mothersAge": "[15 Years]"
+            },
+            "16": {
+                "mothersAge": "[16 Years]"
+            },
+            "17": {
+                "mothersAge": "[17 Years]"
+            },
+            "18": {
+                "mothersAge": "[18 Years]"
+            },
+            "19": {
+                "mothersAge": "[19 Years]"
+            },
+            "20": {
+                "mothersAge": "[20 Years]"
+            },
+            "21": {
+                "mothersAge": "[21 Years]"
+            },
+            "22": {
+                "mothersAge": "[22 Years]"
+            },
+            "23": {
+                "mothersAge": "[23 Years]"
+            },
+            "24": {
+                "mothersAge": "[24 Years]"
+            },
+            "25": {
+                "mothersAge": "[25 Years]"
+            },
+            "26": {
+                "mothersAge": "[26 Years]"
+            },
+            "27": {
+                "mothersAge": "[27 Years]"
+            },
+            "28": {
+                "mothersAge": "[28 Years]"
+            },
+            "29": {
+                "mothersAge": "[29 Years]"
+            },
+            "30": {
+                "mothersAge": "[30 Years]"
+            },
+            "31": {
+                "mothersAge": "[31 Years]"
+            },
+            "32": {
+                "mothersAge": "[32 Years]"
+            },
+            "33": {
+                "mothersAge": "[33 Years]"
+            },
+            "34": {
+                "mothersAge": "[34 Years]"
+            },
+            "35": {
+                "mothersAge": "[35 Years]"
+            },
+            "36": {
+                "mothersAge": "[36 Years]"
+            },
+            "37": {
+                "mothersAge": "[37 Years]"
+            },
+            "38": {
+                "mothersAge": "[38 Years]"
+            },
+            "39": {
+                "mothersAge": "[39 Years]"
+            },
+            "40": {
+                "mothersAge": "[40 Years]"
+            },
+            "41": {
+                "mothersAge": "[41 Years]"
+            },
+            "42": {
+                "mothersAge": "[42 Years]"
+            },
+            "43": {
+                "mothersAge": "[43 Years]"
+            },
+            "44": {
+                "mothersAge": "[44 Years]"
+            },
+            "45": {
+                "mothersAge": "[45 Years]"
+            },
+            "46": {
+                "mothersAge": "[46 Years]"
+            },
+            "47": {
+                "mothersAge": "[47 Years]"
+            },
+            "48": {
+                "mothersAge": "[48 Years]"
+            },
+            "49": {
+                "mothersAge": "[49 Years]"
+            },
+            "All": {},
+            "50+": {
+                "mothersAge": "[50 - Years]"
+            }
+        },
+        "MRace": {
+            "All": {},
+            "1002-5": {
+                "mothersRace": "AmericanIndianOrAlaskaNativeAlone"
+            },
+            "A-PI": {
+                "mothersRace": "AsianOrPacificIslander"
+            },
+            "2054-5": {
+                "mothersRace": "BlackOrAfricanAmericanAlone"
+            },
+            "2106-3": {
+                "mothersRace": "WhiteAlone"
+            }
+        },
+        "MEth": {
+            "9": {
+                "mothersEthnicity": "CDC_EthnicityUnknownOrNotStated"
+            },
+            "All": {},
+            "2135-2": {
+                "mothersEthnicity": "HispanicOrLatino"
+            },
+            "2186-5": {
+                "mothersEthnicity": "NotHispanicOrLatino"
+            }
+        },
+        "MtalStatus": {
+            "1": {
+                "mothersMaritalStatus": "NowMarried"
+            },
+            "2": {
+                "mothersMaritalStatus": "Unmarried"
+            },
+            "9": {
+                "mothersMaritalStatus": "CDC_MaritalStatusUnknownOrNotStated"
+            },
+            "All": {}
+        }
+    },
+    "pvs": {}
+}

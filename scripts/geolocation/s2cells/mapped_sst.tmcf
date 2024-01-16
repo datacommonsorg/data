@@ -1,0 +1,6 @@
+Node: E:sst->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Mean_Temperature_SeaSurface
+observationAbout: C:sst->observationAbout
+observationDate: C:sst->observationDate
+value: C:sst->value

@@ -1,0 +1,135 @@
+Node: dcid:Count_BirthEvent_LiveBirth
+populationType: dcs:BirthEvent
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+
+Node: dcid:Mean_MothersAge_BirthEvent_LiveBirth
+populationType: dcs:BirthEvent
+measuredProperty: dcs:mothersAge
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+
+Node: dcid:Mean_OeGestationalAge_BirthEvent_LiveBirth
+populationType: dcs:BirthEvent
+measuredProperty: dcs:oeGestationalAge
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+
+Node: dcid:Mean_LmpGestationalAge_BirthEvent_LiveBirth
+populationType: dcs:BirthEvent
+measuredProperty: dcs:lmpGestationalAge
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+
+Node: dcid:Mean_BirthWeight_BirthEvent_LiveBirth
+populationType: dcs:BirthEvent
+measuredProperty: dcs:birthWeight
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+
+Node: dcid:Mean_PrePregnancyBMI_BirthEvent_LiveBirth
+populationType: dcs:BirthEvent
+measuredProperty: dcs:prePregnancyBMI
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+
+Node: dcid:Mean_PrenatalVisitCount_BirthEvent_LiveBirth
+populationType: dcs:BirthEvent
+measuredProperty: dcs:prenatalVisitCount
+statType: dcs:meanValue
+medicalStatus: dcs:LiveBirth
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Mean_IntervalSinceLastBirth_BirthEvent_LiveBirth
+populationType: dcs:BirthEvent
+measuredProperty: dcs:intervalSinceLastBirth
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+
+Node: dcid:Mean_IntervalSinceLastPregnancyOutcomeNotLiveBirth_BirthEvent_LiveBirth
+populationType: dcs:BirthEvent
+measuredProperty: dcs:intervalSinceLastPregnancyOutcomeNotLiveBirth
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+
+Node: dcid:Count_BirthEvent_LiveBirth_MotherWhiteAlone
+populationType: dcs:BirthEvent
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+mothersRace: dcs:WhiteAlone
+
+Node: dcid:Mean_MothersAge_BirthEvent_LiveBirth_MotherWhiteAlone
+populationType: dcs:BirthEvent
+measuredProperty: dcs:mothersAge
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+mothersRace: dcs:WhiteAlone
+
+Node: dcid:Mean_OeGestationalAge_BirthEvent_LiveBirth_MotherWhiteAlone
+populationType: dcs:BirthEvent
+measuredProperty: dcs:oeGestationalAge
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+mothersRace: dcs:WhiteAlone
+
+Node: dcid:Mean_LmpGestationalAge_BirthEvent_LiveBirth_MotherWhiteAlone
+populationType: dcs:BirthEvent
+measuredProperty: dcs:lmpGestationalAge
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+mothersRace: dcs:WhiteAlone
+
+Node: dcid:Mean_BirthWeight_BirthEvent_LiveBirth_MotherWhiteAlone
+populationType: dcs:BirthEvent
+measuredProperty: dcs:birthWeight
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+mothersRace: dcs:WhiteAlone
+
+Node: dcid:Mean_PrePregnancyBMI_BirthEvent_LiveBirth_MotherWhiteAlone
+populationType: dcs:BirthEvent
+measuredProperty: dcs:prePregnancyBMI
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+mothersRace: dcs:WhiteAlone
+
+Node: dcid:Mean_PrenatalVisitCount_BirthEvent_LiveBirth_MotherWhiteAlone
+populationType: dcs:BirthEvent
+measuredProperty: dcs:prenatalVisitCount
+statType: dcs:meanValue
+medicalStatus: dcs:LiveBirth
+typeOf: dcs:StatisticalVariable
+mothersRace: dcs:WhiteAlone
+
+Node: dcid:Mean_IntervalSinceLastBirth_BirthEvent_LiveBirth_MotherWhiteAlone
+populationType: dcs:BirthEvent
+measuredProperty: dcs:intervalSinceLastBirth
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+mothersRace: dcs:WhiteAlone
+
+Node: dcid:Mean_IntervalSinceLastPregnancyOutcomeNotLiveBirth_BirthEvent_LiveBirth_MotherWhiteAlone
+populationType: dcs:BirthEvent
+measuredProperty: dcs:intervalSinceLastPregnancyOutcomeNotLiveBirth
+statType: dcs:meanValue
+typeOf: dcs:StatisticalVariable
+medicalStatus: dcs:LiveBirth
+mothersRace: dcs:WhiteAlone
+

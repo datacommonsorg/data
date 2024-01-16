@@ -1,0 +1,94 @@
+{
+  "populationType": {
+    "_DEFAULT": "Person"
+  },
+  "measurement": {
+    "_DEFAULT": {
+      "measuredProperty": "count",
+      "statType": "measuredValue"
+    },
+    "Margin of Error": {
+      "measuredProperty": "count",
+      "statType": "marginOfError"
+    }
+  },
+  "pvs": {
+    "age": {
+      "Under 5 years": "[- 5 Years]",
+      "5 to 17 years": "[5 17 Years]",
+      "18 to 34 years": "[18 34 Years]",
+      "35 to 64 years": "[35 64 Years]",
+      "65 to 74 years": "[65 74 Years]",
+      "75 years and over": "[75 - Years]",
+      "Population under 5 years": "[- 5 Years]",
+      "Population 5 to 17 years": "[5 17 Years]",
+      "Population 18 to 34 years": "[18 34 Years]",
+      "Population 35 to 64 years": "[35 64 Years]",
+      "Population 65 to 74 years": "[65 74 Years]",
+      "Population 75 years and over": "[75 - Years]",
+      "Population under 18 years": "[- 18 Years]",
+      "Population 18 to 64 years": "[18 64 Years]",
+      "Population 65 years and over": "[65 - Years]"
+    },
+    "race": {
+      "One race": "OneRace",
+      "White alone": "WhiteAlone",
+      "Black or African American alone": "BlackOrAfricanAmericanAlone",
+      "American Indian and Alaska Native alone": "AmericanIndianOrAlaskaNativeAlone",
+      "Asian alone": "AsianAlone",
+      "Native Hawaiian and Other Pacific Islander alone": "NativeHawaiianOrOtherPacificIslanderAlone",
+      "Some other race alone": "SomeOtherRaceAlone",
+      "Two or more races": "TwoOrMoreRaces",
+      "Hispanic or Latino (of any race)": "HispanicOrLatino",
+      "White alone, not Hispanic or Latino": "WhiteAloneNotHispanicOrLatino"
+    },
+    "disabilityStatus": {
+      "With a disability": "WithDisability",
+      "With a disability MOE": "WithDisability",
+      "With a hearing difficulty": "HearingDifficulty",
+      "With a vision difficulty": "VisionDifficulty",
+      "With a cognitive difficulty": "CognitiveDifficulty",
+      "With an ambulatory difficulty": "AmbulatoryDifficulty",
+      "With a self-care difficulty": "SelfCareDifficulty",
+      "With an independent living difficulty": "IndependentLivingDifficulty"
+    },
+    "gender": {
+      "Male": "Male",
+      "Female": "Female"
+    }
+  },
+  "enumSpecializations": {},
+  "inferredSpec": {},
+  "universePVs": [
+    {
+      "populationType": "Person",
+      "constraintProperties": [
+        "WithDisability"
+      ],
+      "dependentPVs": {
+        "armedForceStatus": "Civilian",
+        "institutionalization": "USC_NonInstitutionalized"
+      }
+    }
+  ],
+  "denominators": {},
+  "ignoreColumns": [
+    "id",
+    "Geographic Area Name",
+    "Percent Imputed",
+    "PERCENT IMPUTED",
+    "Total",
+    "Total MOE",
+    "Percent with a disability",
+    "Percent with a disability MOE"
+  ],
+  "ignoreTokens": [
+    "DISABILITY TYPE BY DETAILED AGE",
+    "SEX",
+    "AGE",
+    "RACE AND HISPANIC OR LATINO ORIGIN",
+    "Subject",
+    "Estimate",
+    "Total civilian noninstitutionalized population"
+  ]
+}

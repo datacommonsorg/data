@@ -1,0 +1,1671 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "5044284",
+        "NumPVSuccesses": "147965664",
+        "Existence_NumChecks": "129469956",
+        "NumNodeSuccesses": "18495708",
+        "Existence_NumDcCalls": "3"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StatsCheck_MaxPercentFluctuationGreaterThan100": "39",
+        "StatsCheck_3_Sigma": "278",
+        "StrSplit_EmptyToken_value": "36991416",
+        "Sanity_MissingOrEmpty_value": "36991416",
+        "StatsCheck_MaxPercentFluctuationGreaterThan500": "51"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E5'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E5', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E4'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E4', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMinTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E3'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E3', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Kurtosis_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E8'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E8', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'Skewness_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E7'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E7', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'StandardDeviation_DailyMaxTemperature', property: 'value', node: 'E:WeatherVariability_Counties->E6'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "WeatherVariability_Counties.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:WeatherVariability_Counties->E6', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }],
+  "statsCheckSummary": [{
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "StandardDeviation_DailyMinTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1992",
+        "values": [{
+          "value": 8.972849684495193,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "161621"
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "StandardDeviation_DailyMinTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1981-02",
+        "values": [{
+          "value": 9.235190993088942,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1989125"
+          }]
+        }]
+      }, {
+        "date": "1989-12",
+        "values": [{
+          "value": 10.200191556490385,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2318573"
+          }]
+        }]
+      }, {
+        "date": "1996-02",
+        "values": [{
+          "value": 9.819237342247597,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2548565"
+          }]
+        }]
+      }, {
+        "date": "2021-02",
+        "values": [{
+          "value": 9.49340069110577,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3480965"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1983-08",
+        "values": [{
+          "value": 2.151410146859976,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2082365"
+          }]
+        }]
+      }, {
+        "date": "1983-09",
+        "values": [{
+          "value": 6.483798452524039,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2085473"
+          }]
+        }]
+      }],
+      "percentDifference": 201.37
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Skewness_DailyMinTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2006",
+        "values": [{
+          "value": -0.010254619671748235,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "205133"
+          }]
+        }]
+      }, {
+        "date": "2007",
+        "values": [{
+          "value": -0.2927127251258263,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "208241"
+          }]
+        }]
+      }],
+      "percentDifference": -2754.45
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Skewness_DailyMinTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2000-11",
+        "values": [{
+          "value": 1.4588306133563702,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2725721"
+          }]
+        }]
+      }, {
+        "date": "2004-03",
+        "values": [{
+          "value": 1.3008077768179087,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2850041"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2000-09",
+        "values": [{
+          "value": 0.0014613527518052322,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2719505"
+          }]
+        }]
+      }, {
+        "date": "2000-10",
+        "values": [{
+          "value": -0.9825292147122897,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2722613"
+          }]
+        }]
+      }],
+      "percentDifference": -67334.23
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Skewness_DailyMaxTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1984",
+        "values": [{
+          "value": -0.1140037096463717,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "264185"
+          }]
+        }]
+      }, {
+        "date": "1985",
+        "values": [{
+          "value": -0.42088851928710935,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "267293"
+          }]
+        }]
+      }],
+      "percentDifference": -269.19
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Skewness_DailyMaxTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1998-09",
+        "values": [{
+          "value": -1.350845689039964,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "4174049"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2012-10",
+        "values": [{
+          "value": 6.820421952467698E-4,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "4699301"
+          }]
+        }]
+      }, {
+        "date": "2012-11",
+        "values": [{
+          "value": -0.5149242694561298,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "4702409"
+          }]
+        }]
+      }],
+      "percentDifference": -75597.42
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "ConsecutiveDryDays",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1999",
+        "values": [{
+          "value": 49.43076923076923,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "55949"
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "ConsecutiveDryDays",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1981-01",
+        "values": [{
+          "value": 29.66923076923077,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "456881"
+          }]
+        }]
+      }, {
+        "date": "1986-01",
+        "values": [{
+          "value": 31.0,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "643361"
+          }]
+        }]
+      }, {
+        "date": "1989-03",
+        "values": [{
+          "value": 24.353846153846153,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "761465"
+          }]
+        }]
+      }, {
+        "date": "1989-11",
+        "values": [{
+          "value": 28.246153846153845,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "786329"
+          }]
+        }]
+      }, {
+        "date": "1999-10",
+        "values": [{
+          "value": 27.092307692307692,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1156181"
+          }]
+        }]
+      }, {
+        "date": "2002-12",
+        "values": [{
+          "value": 31.0,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1274285"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1995-05",
+        "values": [{
+          "value": 3.076923076923077,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "991457"
+          }]
+        }]
+      }, {
+        "date": "1995-06",
+        "values": [{
+          "value": 12.423076923076923,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "994565"
+          }]
+        }]
+      }],
+      "percentDifference": 303.75
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Kurtosis_DailyMaxTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1990",
+        "values": [{
+          "value": -0.1402296653160682,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "282833"
+          }]
+        }]
+      }, {
+        "date": "1991",
+        "values": [{
+          "value": -0.9876482450045072,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "285941"
+          }]
+        }]
+      }],
+      "percentDifference": -604.31
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Kurtosis_DailyMaxTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1984-02",
+        "values": [{
+          "value": 2.1489523080679085,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3630149"
+          }]
+        }]
+      }, {
+        "date": "1989-08",
+        "values": [{
+          "value": 1.4764110858623798,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3835277"
+          }]
+        }]
+      }, {
+        "date": "1994-10",
+        "values": [{
+          "value": 2.6460101787860575,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "4027973"
+          }]
+        }]
+      }, {
+        "date": "1998-09",
+        "values": [{
+          "value": 2.196971951998197,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "4174049"
+          }]
+        }]
+      }, {
+        "date": "2009-12",
+        "values": [{
+          "value": 1.465307147686298,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "4593629"
+          }]
+        }]
+      }, {
+        "date": "2010-08",
+        "values": [{
+          "value": 3.0641747107872597,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "4618493"
+          }]
+        }]
+      }, {
+        "date": "2012-06",
+        "values": [{
+          "value": 2.5089252178485575,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "4686869"
+          }]
+        }]
+      }, {
+        "date": "2016-07",
+        "values": [{
+          "value": 1.499853046123798,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "4839161"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1981-10",
+        "values": [{
+          "value": -0.0014046687346238357,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3543125"
+          }]
+        }]
+      }, {
+        "date": "1981-11",
+        "values": [{
+          "value": -0.7299163818359375,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3546233"
+          }]
+        }]
+      }],
+      "percentDifference": -51863.6
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "StandardDeviation_DailyMaxTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1989-12",
+        "values": [{
+          "value": 11.25857684795673,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3847709"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1985-08",
+        "values": [{
+          "value": 3.541471275916466,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3686093"
+          }]
+        }]
+      }, {
+        "date": "1985-09",
+        "values": [{
+          "value": 9.013034292367788,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3689201"
+          }]
+        }]
+      }],
+      "percentDifference": 154.5
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "StandardDeviation_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2015",
+        "values": [{
+          "value": 10.602536245492788,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "105677"
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "StandardDeviation_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1989-09",
+        "values": [{
+          "value": 20.445278695913462,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "780113"
+          }]
+        }]
+      }, {
+        "date": "1990-07",
+        "values": [{
+          "value": 16.702095853365385,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "811193"
+          }]
+        }]
+      }, {
+        "date": "2007-05",
+        "values": [{
+          "value": 17.74847130408654,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1439009"
+          }]
+        }]
+      }, {
+        "date": "2014-10",
+        "values": [{
+          "value": 18.64593224158654,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1715621"
+          }]
+        }]
+      }, {
+        "date": "2015-05",
+        "values": [{
+          "value": 25.031159855769232,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1737377"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1986-01",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "643361"
+          }]
+        }]
+      }, {
+        "date": "1986-02",
+        "values": [{
+          "value": 1.5478625957782453,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "646469"
+          }]
+        }]
+      }],
+      "percentDifference": 1.5478625958E8
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Skewness_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1986-01",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "643361"
+          }]
+        }]
+      }, {
+        "date": "2002-12",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1274285"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2002-12",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1274285"
+          }]
+        }]
+      }, {
+        "date": "2003-01",
+        "values": [{
+          "value": 4.512199519230769,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1277393"
+          }]
+        }]
+      }],
+      "percentDifference": 4.5121995192E8
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "HeavyPrecipitationIndex",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1987-01",
+        "values": [{
+          "value": 95.20030048076923,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "680657"
+          }]
+        }]
+      }, {
+        "date": "1988-10",
+        "values": [{
+          "value": 98.24293870192308,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "745925"
+          }]
+        }]
+      }, {
+        "date": "1991-02",
+        "values": [{
+          "value": 93.43221153846154,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "832949"
+          }]
+        }]
+      }, {
+        "date": "1999-11",
+        "values": [{
+          "value": 98.85024038461539,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1159289"
+          }]
+        }]
+      }, {
+        "date": "2004-12",
+        "values": [{
+          "value": 97.44664963942307,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1348877"
+          }]
+        }]
+      }, {
+        "date": "2012-09",
+        "values": [{
+          "value": 94.34246544471154,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1637921"
+          }]
+        }]
+      }, {
+        "date": "2013-11",
+        "values": [{
+          "value": 98.42022235576923,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1681433"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2002-12",
+        "values": [{
+          "value": 0.0,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1274285"
+          }]
+        }]
+      }, {
+        "date": "2003-01",
+        "values": [{
+          "value": 60.50021784855769,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1277393"
+          }]
+        }]
+      }],
+      "percentDifference": 6.05002178486E9
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Kurtosis_DailyMinTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1984-02",
+        "values": [{
+          "value": 1.9505345271183894,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2101013"
+          }]
+        }]
+      }, {
+        "date": "1992-01",
+        "values": [{
+          "value": 1.741974346454327,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2396273"
+          }]
+        }]
+      }, {
+        "date": "1994-02",
+        "values": [{
+          "value": 1.3719005878155048,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2473973"
+          }]
+        }]
+      }, {
+        "date": "1995-07",
+        "values": [{
+          "value": 1.4300546499399038,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2526809"
+          }]
+        }]
+      }, {
+        "date": "2000-11",
+        "values": [{
+          "value": 1.8368013822115385,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2725721"
+          }]
+        }]
+      }, {
+        "date": "2001-03",
+        "values": [{
+          "value": 1.6301605224609375,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2738153"
+          }]
+        }]
+      }, {
+        "date": "2004-03",
+        "values": [{
+          "value": 1.6442535400390625,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2850041"
+          }]
+        }]
+      }, {
+        "date": "2015-06",
+        "values": [{
+          "value": 1.3089038555438701,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3269621"
+          }]
+        }]
+      }, {
+        "date": "2019-02",
+        "values": [{
+          "value": 1.3813981276292067,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3406373"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "1993-04",
+        "values": [{
+          "value": 4.999802662776066E-4,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2442893"
+          }]
+        }]
+      }, {
+        "date": "1993-05",
+        "values": [{
+          "value": -0.9378686171311599,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2446001"
+          }]
+        }]
+      }],
+      "percentDifference": -187681.13
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Kurtosis_DailyMinTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "2021",
+        "values": [{
+          "value": 0.002727220608637883,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "251753"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1983",
+        "values": [{
+          "value": -0.3931307866023137,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "133649"
+          }]
+        }]
+      }, {
+        "date": "1984",
+        "values": [{
+          "value": -0.798916743351863,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "136757"
+          }]
+        }]
+      }],
+      "percentDifference": -103.22
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Kurtosis_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P5Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1982",
+        "values": [{
+          "value": 35.95186298076923,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "382289"
+          }]
+        }]
+      }, {
+        "date": "1987",
+        "values": [{
+          "value": 86.96293569711538,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "385397"
+          }]
+        }]
+      }],
+      "percentDifference": 141.89
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Kurtosis_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan500",
+      "problemPoints": [{
+        "date": "2021-10",
+        "values": [{
+          "value": 0.3516475384051983,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1976693"
+          }]
+        }]
+      }, {
+        "date": "2021-11",
+        "values": [{
+          "value": 19.93701923076923,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "1979801"
+          }]
+        }]
+      }],
+      "percentDifference": 5569.6
+    }]
+  }, {
+    "placeDcid": "geoId/31109",
+    "statVarDcid": "Kurtosis_DailyPrecipitation",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1990",
+        "values": [{
+          "value": 123.79118088942307,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "27977"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1988",
+        "values": [{
+          "value": 32.855904447115385,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "21761"
+          }]
+        }]
+      }, {
+        "date": "1989",
+        "values": [{
+          "value": 99.96108774038461,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "24869"
+          }]
+        }]
+      }],
+      "percentDifference": 204.24
+    }]
+  }, {
+    "placeDcid": "geoId/35011",
+    "statVarDcid": "StandardDeviation_DailyMinTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1M",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1990-12",
+        "values": [{
+          "value": 6.767772042410714,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "2355868"
+          }]
+        }]
+      }, {
+        "date": "2011-02",
+        "values": [{
+          "value": 7.987784598214286,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3108004"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2019-09",
+        "values": [{
+          "value": 1.2769941057477678,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3428128"
+          }]
+        }]
+      }, {
+        "date": "2019-10",
+        "values": [{
+          "value": 6.544183872767857,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "3431236"
+          }]
+        }]
+      }],
+      "percentDifference": 412.47
+    }]
+  }, {
+    "placeDcid": "geoId/35011",
+    "statVarDcid": "Skewness_DailyMaxTemperature",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "1981",
+        "values": [{
+          "value": -0.25891597202845984,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "254860"
+          }]
+        }]
+      }, {
+        "date": "1982",
+        "values": [{
+          "value": -0.656397966657366,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "257968"
+          }]
+        }]
+      }],
+      "percentDifference": -153.52
+    }]
+  }, {
+    "placeDcid": "geoId/35011",
+    "statVarDcid": "ConsecutiveDryDays",
+    "measurementMethod": "",
+    "observationPeriod": "P1Y",
+    "scalingFactor": "",
+    "unit": "",
+    "validationCounters": [{
+      "counterKey": "StatsCheck_3_Sigma",
+      "problemPoints": [{
+        "date": "1996",
+        "values": [{
+          "value": 110.80857142857143,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "46624"
+          }]
+        }]
+      }, {
+        "date": "2011",
+        "values": [{
+          "value": 101.03714285714285,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "93244"
+          }]
+        }]
+      }]
+    }, {
+      "counterKey": "StatsCheck_MaxPercentFluctuationGreaterThan100",
+      "problemPoints": [{
+        "date": "2010",
+        "values": [{
+          "value": 32.46,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "90136"
+          }]
+        }]
+      }, {
+        "date": "2011",
+        "values": [{
+          "value": 101.03714285714285,
+          "locations": [{
+            "file": "WeatherVariability_Counties.csv",
+            "lineNumber": "93244"
+          }]
+        }]
+      }],
+      "percentDifference": 211.27
+    }]
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true
+  }
+}

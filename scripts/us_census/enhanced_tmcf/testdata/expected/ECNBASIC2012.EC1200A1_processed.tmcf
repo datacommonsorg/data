@@ -1,0 +1,48 @@
+Node: E:ECNBASIC2012.EC1200A1_processed->E0
+typeOf: schema:Place
+dcid: C:ECNBASIC2012.EC1200A1_processed->GEO_ID
+name: C:ECNBASIC2012.EC1200A1_processed->NAME
+
+Node: E:ECNBASIC2012.EC1200A1_processed->E1
+typeOf: schema:StatVarObservation
+name: Number of establishments
+value: C:ECNBASIC2012.EC1200A1_processed->ESTAB
+variableMeasured: C:ECNBASIC2012.EC1200A1_processed->new_col_0
+observationAbout: E:ECNBASIC2012.EC1200A1_processed->E0
+observationDate: C:ECNBASIC2012.EC1200A1_processed->YEAR
+
+Node: E:ECNBASIC2012.EC1200A1_processed->E2
+typeOf: schema:StatVarObservation
+name: Sales, value of shipments, or revenue ($1,000)
+value: C:ECNBASIC2012.EC1200A1_processed->RCPTOT
+variableMeasured: C:ECNBASIC2012.EC1200A1_processed->new_col_1
+observationAbout: E:ECNBASIC2012.EC1200A1_processed->E0
+observationDate: C:ECNBASIC2012.EC1200A1_processed->YEAR
+stdError: C:ECNBASIC2012.EC1200A1_processed->RCPTOT_S
+
+Node: E:ECNBASIC2012.EC1200A1_processed->E3
+typeOf: schema:StatVarObservation
+name: Annual payroll ($1,000)
+value: C:ECNBASIC2012.EC1200A1_processed->PAYANN
+variableMeasured: C:ECNBASIC2012.EC1200A1_processed->new_col_2
+observationAbout: E:ECNBASIC2012.EC1200A1_processed->E0
+observationDate: C:ECNBASIC2012.EC1200A1_processed->YEAR
+stdError: C:ECNBASIC2012.EC1200A1_processed->PAYANN_S
+
+Node: E:ECNBASIC2012.EC1200A1_processed->E4
+typeOf: schema:StatVarObservation
+name: Number of employees
+value: C:ECNBASIC2012.EC1200A1_processed->EMP
+variableMeasured: C:ECNBASIC2012.EC1200A1_processed->new_col_3
+observationAbout: E:ECNBASIC2012.EC1200A1_processed->E0
+observationDate: C:ECNBASIC2012.EC1200A1_processed->YEAR
+stdError: C:ECNBASIC2012.EC1200A1_processed->EMP_S
+
+Node: E:ECNBASIC2012.EC1200A1_processed->E5
+typeOf: schema:StatVarObservation
+name: First-quarter payroll ($1,000)
+value: C:ECNBASIC2012.EC1200A1_processed->PAYQTR1
+variableMeasured: C:ECNBASIC2012.EC1200A1_processed->new_col_4
+observationAbout: E:ECNBASIC2012.EC1200A1_processed->E0
+observationDate: C:ECNBASIC2012.EC1200A1_processed->YEAR
+stdError: C:ECNBASIC2012.EC1200A1_processed->PAYQTR1_S

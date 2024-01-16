@@ -1,0 +1,9 @@
+dcid,name,address,locatedIn
+EpaParentCompany/NationalFuelGasCo,\"National Fuel Gas Company\","\"6363 Main Street, Williamsville, Ny - 14221\"","dcid:zip/14221, dcid:geoId/36029"
+EpaParentCompany/UsGovernment,\"Us Government\",,
+EpaParentCompany/RandomCoNameReplaced,\"Random Company Name\","\"1 Prospect Street, Providence, Ri - 02912\"","dcid:zip/02912, dcid:geoId/44007"
+EpaParentCompany/BrownAndProvidencePlantations,\"Brown & Providence Plantations\","\"1 Prospect Street, Providence, Ri\"",
+EpaParentCompany/ChevronUsa,\"Chevron Usa Inc.\","\"11111 S. Wilcrest, Houston, Tx - 77099\"","dcid:zip/77099, dcid:geoId/48157"
+EpaParentCompany/ConocophillipsAlaskaInc,"\"Conocophillips Alaska, Inc.\"","\"700 G Street, Anchorage, Ak - 99501\"","dcid:zip/99501, dcid:geoId/02020"
+EpaParentCompany/BpAmericaInc,\"Bp America Inc\","\"501 Westlake Park Boulevard, Houston, Tx - 77079\"","dcid:zip/77079, dcid:geoId/48201"
+EpaParentCompany/ExxonmobilCorp,\"Exxonmobil Corp\","\"3301 C Street, Suite 400, Anchorage, Ak - 99503\"","dcid:zip/99503, dcid:geoId/02020"

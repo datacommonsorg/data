@@ -12,9 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from sys import path
+import os
+import sys
+
 # For import util.alpha2_to_dcid
-path.insert(1, '../../../')
+_CODEDIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, os.path.join(_CODEDIR, '../../../'))
 
 import csv
 import io
@@ -27,7 +30,6 @@ import os
 
 import pandas as pd
 import logging
-import geocode_cities
 import util.alpha2_to_dcid as alpha2_to_dcid
 
 # Automate Template MCF generation since there are many Statitical Variables.

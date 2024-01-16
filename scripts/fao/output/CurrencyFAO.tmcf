@@ -1,0 +1,31 @@
+Node: E:FAOCurrency->E0
+typeOf: dcs:Currency
+dcid: C:FAOCurrency->Currency
+name: C:FAOCurrency->Currency
+
+
+Node: E:FAOCurrency->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ExchangeRate_Currency_Local
+observationAbout: E:FAOCurrency->E0
+observationDate: C:FAOCurrency->YearMonth
+observationPeriod: C:FAOCurrency->ObservationPeriod
+value: C:FAOCurrency->ExchangeRatePerUSD
+
+
+Node: E:FAOCurrency->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:usesCurrency
+observationAbout: C:FAOCurrency->Country
+observationDate: C:FAOCurrency->YearMonth
+observationPeriod: P1Y
+value: C:FAOCurrency->Currency
+
+
+Node: E:FAOCurrency->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:ExchangeRate_Currency_Standardized
+observationAbout: C:FAOCurrency->Country
+observationDate: C:FAOCurrency->YearMonth
+observationPeriod: P1Y
+value: C:FAOCurrency->ExchangeRatePerUSD_Standardized

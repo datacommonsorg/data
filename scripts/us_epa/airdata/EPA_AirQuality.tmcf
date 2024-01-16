@@ -1,0 +1,39 @@
+
+Node: E:EPA_AirQuality->E0
+typeOf: dcs:AirQualitySite
+dcid: C:EPA_AirQuality->Site_Number
+name: C:EPA_AirQuality->Site_Name
+location: C:EPA_AirQuality->Site_Location
+containedInPlace: C:EPA_AirQuality->County
+
+Node: E:EPA_AirQuality->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:EPA_AirQuality->Mean_SV
+measurementMethod: C:EPA_AirQuality->Method
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_AirQuality->E0
+observationPeriod: "P1D"
+value: C:EPA_AirQuality->Mean
+unit: C:EPA_AirQuality->Units
+airQualitySiteMonitor: C:EPA_AirQuality->POC
+
+Node: E:EPA_AirQuality->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: C:EPA_AirQuality->Max_SV
+measurementMethod: C:EPA_AirQuality->Method
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_AirQuality->E0
+observationPeriod: "P1D"
+value: C:EPA_AirQuality->Max
+unit: C:EPA_AirQuality->Units
+airQualitySiteMonitor: C:EPA_AirQuality->POC
+
+Node: E:EPA_AirQuality->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: C:EPA_AirQuality->AQI_SV
+measurementMethod: C:EPA_AirQuality->Method
+observationDate: C:EPA_AirQuality->Date
+observationAbout: E:EPA_AirQuality->E0
+observationPeriod: "P1D"
+value: C:EPA_AirQuality->AQI
+airQualitySiteMonitor: C:EPA_AirQuality->POC
