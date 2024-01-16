@@ -1,17 +1,30 @@
 #!/bin/bash
 
 mkdir -p scratch; cd scratch
-# downloads the chemical file
+
+# download the Primary Data from pharmGKB
+mkdir -p chemicals; cd chemicals
 curl -L -O https://api.pharmgkb.org/v1/download/file/data/chemicals.zip
-# downloads the drug file
+unzip chemicals.zip
+
+cd ../; mkdir -p drugs; cd drugs
 curl -L -O https://api.pharmgkb.org/v1/download/file/data/drugs.zip
-# downloads the gene file
+unzip drugs.zip
+
+cd ../; mkdir -p genes; cd genes
 curl -L -O https://api.pharmgkb.org/v1/download/file/data/genes.zip
-# downloads the relationship file
-curl -L -O https://api.pharmgkb.org/v1/download/file/data/relationships.zip
-# downloads the phenotype file
+unzip genes.zip
+
+cd ../; mkdir -p phenotypes; cd phenotypes
 curl -L -O https://api.pharmgkb.org/v1/download/file/data/phenotypes.zip
-# downloads the variant file
+unzip phenotypes.zip
+
+cd ../; mkdir -p variants; cd variants
 curl -L -O https://api.pharmgkb.org/v1/download/file/data/variants.zip
+unzip variants.zip
 
-
+# download Relationships Data from pharmGKB
+cd ../; mkdir -p relationships; cd relationships
+curl -L -O https://api.pharmgkb.org/v1/download/file/data/relationships.zip
+unzip relationships
+cd ../
