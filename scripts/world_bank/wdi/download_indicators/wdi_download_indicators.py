@@ -9,9 +9,7 @@ from absl import flags
 import numpy as np
 import pandas as pd
 
-_OUT_PATH = flags.DEFINE_string(
-    'out_path', None, 'CNS path to write output.'
-)
+_OUT_PATH = flags.DEFINE_string('out_path', None, 'CNS path to write output.')
 
 indicators = [
     'SP.POP.TOTL',
@@ -68,70 +66,70 @@ indicators = [
 
 
 def DownloadAndParseCsvs() -> None:
-  """Loops through all indicators and downloads the data for all countries/dates.
+    """Loops through all indicators and downloads the data for all countries/dates.
 
   This data is then added to the output which is written to _OUT_PATH
   """
-  dat = []
-  for indicator in indicators:
-    resp = urllib.request.urlopen(
-        f'http://api.worldbank.org/v2/country/all/indicator/{indicator}?source=2&downloadformat=csv'
-    )
-    myzip = zipfile.ZipFile(io.BytesIO(resp.read()))
-    csv_data = pd.DataFrame()
-    start_index = 0
-    found = False
-    for filename in myzip.namelist():
-      if filename.startswith('API_'):
-        with myzip.open(filename) as f:
-          for line in f:
-            if line.decode('utf-8').startswith('"Country'):
-              break
-            start_index += 1
-        with myzip.open(filename) as f:
-          csv_data = pd.read_csv(f, skiprows=start_index)
-          found = True
-    if found:
-      for _, row in csv_data.iterrows():
-        if True in pd.isna(row):
-          continue
-        for year in range(1960, 2022):
-          if pd.isna(row['Country Code']):
-            continue
-          country_str = 'dcid:country/' + row['Country Code']
-          sv_string = 'worldBank/' + row['Indicator Code'].replace('.', '_')
-          dat.append([
-              row['Indicator Code'],
-              sv_string,
-              'WorldBank_WDI_CSV',
-              country_str,
-              year,
-              row[str(year)],
-              '',
-          ])
+    dat = []
+    for indicator in indicators:
+        resp = urllib.request.urlopen(
+            f'http://api.worldbank.org/v2/country/all/indicator/{indicator}?source=2&downloadformat=csv'
+        )
+        myzip = zipfile.ZipFile(io.BytesIO(resp.read()))
+        csv_data = pd.DataFrame()
+        start_index = 0
+        found = False
+        for filename in myzip.namelist():
+            if filename.startswith('API_'):
+                with myzip.open(filename) as f:
+                    for line in f:
+                        if line.decode('utf-8').startswith('"Country'):
+                            break
+                        start_index += 1
+                with myzip.open(filename) as f:
+                    csv_data = pd.read_csv(f, skiprows=start_index)
+                    found = True
+        if found:
+            for _, row in csv_data.iterrows():
+                if True in pd.isna(row):
+                    continue
+                for year in range(1960, 2022):
+                    if pd.isna(row['Country Code']):
+                        continue
+                    country_str = 'dcid:country/' + row['Country Code']
+                    sv_string = 'worldBank/' + row['Indicator Code'].replace(
+                        '.', '_')
+                    dat.append([
+                        row['Indicator Code'],
+                        sv_string,
+                        'WorldBank_WDI_CSV',
+                        country_str,
+                        year,
+                        row[str(year)],
+                        '',
+                    ])
 
-  out_df = pd.DataFrame(
-      np.array(dat),
-      columns=[
-          'indicatorcode',
-          'statvar',
-          'measurementmethod',
-          'observationabout',
-          'observationdate',
-          'observationvalue',
-          'unit',
-      ],
-  )
-  with open(_OUT_PATH.value, 'w+') as f_out:
-    out_df.to_csv(f_out, index=False)
+    out_df = pd.DataFrame(
+        np.array(dat),
+        columns=[
+            'indicatorcode',
+            'statvar',
+            'measurementmethod',
+            'observationabout',
+            'observationdate',
+            'observationvalue',
+            'unit',
+        ],
+    )
+    with open(_OUT_PATH.value, 'w+') as f_out:
+        out_df.to_csv(f_out, index=False)
 
 
 def main(argv: list[str]) -> None:
-  if len(argv) > 1:
-    raise app.UsageError('Too many command-line arguments.')
-  DownloadAndParseCsvs()
+    if len(argv) > 1:
+        raise app.UsageError('Too many command-line arguments.')
+    DownloadAndParseCsvs()
 
 
 if __name__ == '__main__':
-  app.run(main)
-
+    app.run(main)
