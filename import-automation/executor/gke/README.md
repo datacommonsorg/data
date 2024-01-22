@@ -26,11 +26,14 @@ Follow
 
 ## (One Time) Setup GKE
 
-1. Update the PROJECT_ID in "gke/configure_gke.sh", if needed.
+1. Set the PROJECT_ID, OAUTH_CLIENT_ID and OAUTH_CLIENT_SECRET environment variables in "gke/configure_gke.sh", e.g.
+```
+export PROJECT_ID=<GCP_PROJECT>
+export PROJECT_ID=<OAUTH_CLIENT_ID>
+export PROJECT_ID=<OAUTH_CLIENT_SECRET>
+```
 
-2. Update OAUTH_CLIENT_ID and OAUTH_CLIENT_SECRET in "gke/configure_gke.sh".
-
-3. Run `./gke/configure_gke.sh`.
+2. Run `./gke/configure_gke.sh`. The script will error out if the environment variables in (1) are not set.
 
 ## Deployment
 

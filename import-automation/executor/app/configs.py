@@ -34,7 +34,7 @@ class ExecutorConfig:
 
     # ID of the Google Cloud project that hosts the executor. The project
     # needs to enable App Engine and Cloud Scheduler.
-    gcp_project_id: str = 'google.com:datcom-import-automation'
+    gcp_project_id: str = 'datcom-import-automation'
     # ID of the Google Cloud project that stores generated CSVs and MCFs. The
     # project needs to enable Cloud Storage and gives the service account the
     # executor uses sufficient permissions to read and write the bucket below.

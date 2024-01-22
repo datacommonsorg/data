@@ -14,7 +14,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Edit the PROJECT_ID below.
+# Verify that the required environment variables are set.
+if [ -z "$PROJECT_ID" ]
+then
+      echo "\$PROJECT_ID must be set and cannot be empty."
+      exit 1
+fi
+if [ -z "$OAUTH_CLIENT_ID" ]
+then
+      echo "\$OAUTH_CLIENT_ID must be set and cannot be empty."
+      exit 1
+fi
+if [ -z "$OAUTH_CLIENT_SECRET" ]
+then
+      echo "\$OAUTH_CLIENT_SECRET must be set and cannot be empty."
+      exit 1
+fi
+
 PROJECT_ID=datcom-import-automation
 
 gcloud config set project $PROJECT_ID
@@ -51,9 +67,6 @@ kubectl annotate serviceaccount \
   import-automation-ksa \
   iam.gke.io/gcp-service-account=$PROJECT_ID@appspot.gserviceaccount.com
 
-# Set the oauth env vars before running the script
-export OAUTH_CLIENT_ID=
-export OAUTH_CLIENT_SECRET=
 kubectl -n import-automation create secret generic import-automation-iap-secret \
   --from-literal=client_id=$OAUTH_CLIENT_ID \
   --from-literal=client_secret=$OAUTH_CLIENT_SECRET
