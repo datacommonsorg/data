@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PROJECT_ID=datcom-data
+# Edit the PROJECT_ID below.
+PROJECT_ID=datcom-import-automation
 
 gcloud config set project $PROJECT_ID
 
@@ -40,11 +41,9 @@ kubectl create namespace import-automation \
 kubectl create serviceaccount --namespace import-automation import-automation-ksa \
   --dry-run=client -o yaml | kubectl apply -f -
 
-gcloud iam service-accounts add-iam-policy-binding \
-  --project $PROJECT_ID \
-  --role roles/iam.workloadIdentityUser \
-  --member "serviceAccount:$PROJECT_ID.svc.id.goog[import-automation/import-automation-ksa]" \
-  $PROJECT_ID@appspot.gserviceaccount.com
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --role=roles/iam.workloadIdentityUser \
+  --member="serviceAccount:$PROJECT_ID.svc.id.goog[import-automation/import-automation-ksa]"
 
 kubectl annotate serviceaccount \
   --namespace import-automation \
@@ -53,8 +52,8 @@ kubectl annotate serviceaccount \
   iam.gke.io/gcp-service-account=$PROJECT_ID@appspot.gserviceaccount.com
 
 # Set the oauth env vars before running the script
-# export OAUTH_CLIENT_ID=<fill>
-# export OAUTH_CLIENT_SECRET=<fill>
+# export OAUTH_CLIENT_ID=251280076183-ivh5hjgshftv3rgo4mc03t3vbkgdj3at.apps.googleusercontent.com
+# export OAUTH_CLIENT_SECRET=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
 kubectl -n import-automation create secret generic import-automation-iap-secret \
   --from-literal=client_id=$OAUTH_CLIENT_ID \
   --from-literal=client_secret=$OAUTH_CLIENT_SECRET
