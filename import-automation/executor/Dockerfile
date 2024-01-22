@@ -16,7 +16,10 @@
 
 FROM python:3.11.4
 
-RUN apt upgrade
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y autoremove \
+    && rm -rf /var/lib/apt/lists/*
 WORKDIR /workspace
 
 ADD requirements.txt /workspace/requirements.txt
