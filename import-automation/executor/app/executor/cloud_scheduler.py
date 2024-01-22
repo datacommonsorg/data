@@ -26,7 +26,8 @@ from google.cloud import scheduler_v1
 from google.protobuf import json_format
 from google.api_core.exceptions import AlreadyExists, NotFound
 
-GKE_SERVICE_DOMAIN = os.getenv('GKE_SERVICE_DOMAIN', 'importautomation.datacommons.org')
+GKE_SERVICE_DOMAIN = os.getenv('GKE_SERVICE_DOMAIN',
+                               'importautomation.datacommons.org')
 GKE_CALLER_SERVICE_ACCOUNT = os.getenv('CLOUD_SCHEDULER_CALLER_SA')
 GKE_OAUTH_AUDIENCE = os.getenv('CLOUD_SCHEDULER_CALLER_OAUTH_AUDIENCE')
 
