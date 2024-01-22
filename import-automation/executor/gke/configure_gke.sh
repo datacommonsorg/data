@@ -31,8 +31,6 @@ then
       exit 1
 fi
 
-PROJECT_ID=datcom-import-automation
-
 gcloud config set project $PROJECT_ID
 
 # Create GKE cluster
