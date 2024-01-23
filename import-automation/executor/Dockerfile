@@ -17,6 +17,10 @@
 FROM python:3.11.4
 
 RUN apt-get update \
+    # Ensure a fix against a zero-day vulnerability
+    # CVE-2023-4863.
+    # Ref: https://snyk.io/blog/find-and-fix-webp-vulnerability-cve-2023-4863/#upgrade
+    && apt-get satisfy "libwebp-dev (>= 1.3.2)"
     && apt-get -y upgrade \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
