@@ -84,7 +84,7 @@ class CloudSchedulerTest(unittest.TestCase):
                 'seconds': 60 * 30
             },
             'http_target': {
-                'uri': 'https://import.datacommons.dev/update',
+                'uri': 'https://importautomation.datacommons.org/update',
                 'http_method': 'POST',
                 'headers': {
                     'Content-Type': 'application/json',
