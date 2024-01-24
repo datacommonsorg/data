@@ -224,7 +224,7 @@
     ],
     "denominators": {},
     "ignoreColumns": [
-        "id",
+        "Geography",
         "Geographic Area Name",
         "PERCENT IMPUTED",
         "Percent Imputed",
@@ -232,7 +232,17 @@
         "Percent Uninsured",
         "Percent Insured by  Coverage Type",
         "Percent Insured MOE",
-        "Percent Uninsured MOE"
+        "Percent Uninsured MOE",
+        "Annotation of Estimate",
+        "Annotation of Margin of Error",
+        "Annotation of Percent Uninsured",
+        "Annotation of Number Uninsured",
+        "Annotation of Total",
+        "Annotation of Insured",
+        "Annotation of Uninsured",
+        "Annotation of Percent Insured",
+        "Annotation of Number Insured by  Coverage Type",
+        "Annotation of Percent Insured by  Coverage Type"
     ],
     "ignoreTokens": [
         "DISABILITY STATUS",

@@ -27,13 +27,15 @@
             "Males 16 years and over": "[16 - Years]",
             "Females 16 years and over": "[16 - Years]",
             "Males 15 years and over": "[15 - Years]",
-            "Females 15 years and over": "[15 - Years]"
+            "Females 15 years and over": "[15 - Years]",
+            "Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years": "[15 44 Years]"
             },
         "gender": {
             "Males 15 years and over": "Male",
             "Males 16 years and over": "Male",
             "Females 15 years and over": "Female",
-            "Females 16 years and over": "Female"
+            "Females 16 years and over": "Female",
+            "Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years" : "Male"
         },
         "race": {
             "White": "WhiteAlone",
@@ -58,7 +60,8 @@
             "Widowed MOE": "Widowed",
             "Divorced MOE": "Divorced",
             "Separated MOE": "Separated",
-            "Never married MOE": "NeverMarried"
+            "Never married MOE": "NeverMarried",
+            "Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years": "Unmarried"
         },
         "employmentStatus": {
             "In labor force": "BLS_InLaborForce"
@@ -66,6 +69,12 @@
         "nativity":{
             "Native": "USC_Native",
             "Foreign born": "USC_ForeignBorn"
+        },
+        "scalingFactor" :{
+            "Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years" : "100"
+        },
+        "measurementDenominator":{
+            "Estimate!!Total!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years" : "Count_Person_15To44Years_Female_Unmarried"
         }
     },
     "universePVs": [
@@ -79,13 +88,34 @@
             }
         }
     ],
-
+    
    "ignoreColumns": [
         "id",
+        "Geography",
         "Geographic Area Name",
         "PERCENT ALLOCATED",
         "PERCENT IMPUTED",
-        "Population 15 years and over.1"
+        "Population 15 years and over.1",
+        "Annotation of Margin of Error",
+        "Annotation of Estimate",
+        "Annotation of Total",
+        "Annotation of Now married (except separated)",
+        "Annotation of Widowed",
+        "Annotation of Divorced",
+        "Annotation of Separated",
+        "Annotation of Never married",
+        "Estimate!!Total!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Margin of Error!!Total!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Estimate!!Now married (except separated)!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Margin of Error!!Now married (except separated)!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Estimate!!Widowed!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Margin of Error!!Widowed!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Estimate!!Divorced!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Margin of Error!!Divorced!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Estimate!!Separated!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Margin of Error!!Separated!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Estimate!!Never married!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years",
+        "Margin of Error!!Never married!!SUMMARY INDICATOR!!Ratio of Unmarried Men 15 to 44 years per 100 unmarried women 15 to 44 years"
    ],
 
    "preprocess": {

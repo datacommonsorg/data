@@ -22,7 +22,7 @@ import pandas as pd
 from absl import app, flags
 # TODO: logs from the column map step is empty when invoked from here, needs to be checked
 
-from .data_loader import process_subject_tables
+from data_loader_s2409 import process_subject_tables
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

@@ -73,6 +73,7 @@ class ProcessTest(unittest.TestCase):
         f = open(_STAT_VAR_LIST)
         stat_vars = f.read().splitlines()
         f.close()
+        #open temp file
         with tempfile.TemporaryDirectory() as tmp_dir:
             test_tmcf = os.path.join(tmp_dir, 'test_tmcf.tmcf')
             create_tmcf(test_tmcf, features, stat_vars)
@@ -82,6 +83,10 @@ class ProcessTest(unittest.TestCase):
                     expected = f_test.read()
                     self.assertEqual(test_result, expected)
             os.remove(test_tmcf)
+
+
+def main(argv):
+    a = ProcessTest(unittest.TestCase)
 
 
 if __name__ == '__main__':

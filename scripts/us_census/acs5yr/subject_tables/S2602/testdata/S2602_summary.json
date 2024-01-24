@@ -1,0 +1,57 @@
+{
+    "summary": {
+        "column map generator commit SHA": "",
+        "data processing script commit SHA": "",
+        "total StatVarObservations": 8248
+    },
+    "2021": {
+        "filename": "ACSST5Y2021.S2602-Data.csv",
+        "number of columns in dataset": 1943,
+        "number of rows in dataset": 2,
+        "number of statVars generated for columns": 926,
+        "number of observations": 1641,
+        "number of unique StatVars with observations": 829,
+        "number of unique geos": 2,
+        "number of StatVars in mcf_dict": 895
+    },
+    "2020": {
+        "filename": "ACSST5Y2020.S2602-Data.csv",
+        "number of columns in dataset": 1943,
+        "number of rows in dataset": 2,
+        "number of statVars generated for columns": 926,
+        "number of observations": 1639,
+        "number of unique StatVars with observations": 826,
+        "number of unique geos": 2,
+        "number of StatVars in mcf_dict": 895
+    },
+    "2019": {
+        "filename": "ACSST5Y2019.S2602-Data.csv",
+        "number of columns in dataset": 1943,
+        "number of rows in dataset": 2,
+        "number of statVars generated for columns": 926,
+        "number of observations": 1660,
+        "number of unique StatVars with observations": 832,
+        "number of unique geos": 2,
+        "number of StatVars in mcf_dict": 895
+    },
+    "2018": {
+        "filename": "ACSST5Y2018.S2602-Data.csv",
+        "number of columns in dataset": 1943,
+        "number of rows in dataset": 2,
+        "number of statVars generated for columns": 926,
+        "number of observations": 1660,
+        "number of unique StatVars with observations": 832,
+        "number of unique geos": 2,
+        "number of StatVars in mcf_dict": 895
+    },
+    "2017": {
+        "filename": "ACSST5Y2017.S2602-Data.csv",
+        "number of columns in dataset": 1943,
+        "number of rows in dataset": 2,
+        "number of statVars generated for columns": 926,
+        "number of observations": 1648,
+        "number of unique StatVars with observations": 826,
+        "number of unique geos": 2,
+        "number of StatVars in mcf_dict": 895
+    }
+}

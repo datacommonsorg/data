@@ -22,7 +22,7 @@ import pandas as pd
 from absl import app, flags
 # TODO: logs from the column map step is empty when invoked from here, needs to be checked
 
-from .generate_col_map import generate_stat_var_map, process_zip_file
+from generate_col_map_1201 import generate_stat_var_map, process_zip_file
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))

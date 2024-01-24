@@ -92,7 +92,7 @@ def process_zip_file(zip_file_path,
 
     with ZipFile(zip_file_path) as zf:
         for filename in zf.namelist():
-            if 'data_with_overlays' in filename:
+            if 'data_with_overlays' in filename or '-Data' in filename:
                 with io.TextIOWrapper(zf.open(filename, 'r')) as csv_file:
                     csv_reader = csv.reader(csv_file)
                     for index, line in enumerate(csv_reader):

@@ -1585,13 +1585,6 @@ populationType: dcs:Person
 residenceType: dcs:GroupQuarters
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_Person_ResidesInGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Person
-residenceType: dcs:GroupQuarters
-typeOf: dcs:StatisticalVariable
-
 Node: dcid:Count_Person_Male_ResidesInGroupQuarters
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -6909,6 +6902,28 @@ povertyStatus: dcs:PovertyStatusDetermined
 age: [65 - Years]
 typeOf: dcs:StatisticalVariable
 
+Node: dcid:MarginOfError_Age_Person
+measuredProperty: dcs:age
+statType: dcs:marginOfError
+populationType: dcs:Person
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Earnings_Person_Male
+measuredProperty: dcs:earnings
+statType: dcs:marginOfError
+incomeStatus: dcs:WithEarnings
+populationType: dcs:Person
+gender: dcs:Male
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Earnings_Person_Female
+measuredProperty: dcs:earnings
+statType: dcs:marginOfError
+incomeStatus: dcs:WithEarnings
+populationType: dcs:Person
+gender: dcs:Female
+typeOf: dcs:StatisticalVariable
+
 Node: dcid:Count_Person_NoDisability
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -6920,6 +6935,54 @@ Node: dcid:MarginOfError_Count_Person_NoDisability
 measuredProperty: dcs:count
 statType: dcs:marginOfError
 populationType: dcs:Person
+disabilityStatus: dcs:NoDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoDisability_ResidesInGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residenceType: dcs:GroupQuarters
+disabilityStatus: dcs:NoDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoDisability_ResidesInGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residenceType: dcs:GroupQuarters
+disabilityStatus: dcs:NoDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoDisability_ResidesInInstitutionalizedGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residenceType: dcs:InstitutionalizedGroupQuarters
+disabilityStatus: dcs:NoDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoDisability_ResidesInInstitutionalizedGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residenceType: dcs:InstitutionalizedGroupQuarters
+disabilityStatus: dcs:NoDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_NoDisability_ResidesInNoninstitutionalizedGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residenceType: dcs:NoninstitutionalizedGroupQuarters
+disabilityStatus: dcs:NoDisability
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_NoDisability_ResidesInNoninstitutionalizedGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residenceType: dcs:NoninstitutionalizedGroupQuarters
 disabilityStatus: dcs:NoDisability
 typeOf: dcs:StatisticalVariable
 
@@ -6937,22 +7000,6 @@ statType: dcs:marginOfError
 populationType: dcs:Person
 disabilityStatus: dcs:NoDisability
 age: [65 - Years]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Person_NoDisability_ResidesInGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Person
-residenceType: dcs:GroupQuarters
-disabilityStatus: dcs:NoDisability
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Person_NoDisability_ResidesInGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Person
-residenceType: dcs:GroupQuarters
-disabilityStatus: dcs:NoDisability
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_65OrMoreYears_NoDisability_ResidesInGroupQuarters
@@ -6973,22 +7020,6 @@ disabilityStatus: dcs:NoDisability
 age: [65 - Years]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_NoDisability_ResidesInInstitutionalizedGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Person
-residenceType: dcs:InstitutionalizedGroupQuarters
-disabilityStatus: dcs:NoDisability
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Person_NoDisability_ResidesInInstitutionalizedGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Person
-residenceType: dcs:InstitutionalizedGroupQuarters
-disabilityStatus: dcs:NoDisability
-typeOf: dcs:StatisticalVariable
-
 Node: dcid:Count_Person_65OrMoreYears_NoDisability_ResidesInInstitutionalizedGroupQuarters
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -7005,22 +7036,6 @@ populationType: dcs:Person
 residenceType: dcs:InstitutionalizedGroupQuarters
 disabilityStatus: dcs:NoDisability
 age: [65 - Years]
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Person_NoDisability_ResidesInNoninstitutionalizedGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Person
-residenceType: dcs:NoninstitutionalizedGroupQuarters
-disabilityStatus: dcs:NoDisability
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Person_NoDisability_ResidesInNoninstitutionalizedGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Person
-residenceType: dcs:NoninstitutionalizedGroupQuarters
-disabilityStatus: dcs:NoDisability
 typeOf: dcs:StatisticalVariable
 
 Node: dcid:Count_Person_65OrMoreYears_NoDisability_ResidesInNoninstitutionalizedGroupQuarters
@@ -7057,38 +7072,6 @@ dateOfEntry: [2000 - Date]
 nativity: dcid:USC_ForeignBorn
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_DateOfEntry1990To1999
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Person
-dateOfEntry: [1990 1999 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Person_DateOfEntry1990To1999
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Person
-dateOfEntry: [1990 1999 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Person_DateOfEntry1990OrEarlier
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Person
-dateOfEntry: [- 1990 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Person_DateOfEntry1990OrEarlier
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Person
-dateOfEntry: [- 1990 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
 Node: dcid:Count_Person_DateOfEntry2000OrLater_ResidesInGroupQuarters
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -7104,42 +7087,6 @@ statType: dcs:marginOfError
 populationType: dcs:Person
 residenceType: dcs:GroupQuarters
 dateOfEntry: [2000 - Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Person_DateOfEntry1990To1999_ResidesInGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Person
-residenceType: dcs:GroupQuarters
-dateOfEntry: [1990 1999 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Person_DateOfEntry1990To1999_ResidesInGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Person
-residenceType: dcs:GroupQuarters
-dateOfEntry: [1990 1999 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Person_DateOfEntry1990OrEarlier_ResidesInGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Person
-residenceType: dcs:GroupQuarters
-dateOfEntry: [- 1990 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Person_DateOfEntry1990OrEarlier_ResidesInGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Person
-residenceType: dcs:GroupQuarters
-dateOfEntry: [- 1990 Date]
 nativity: dcid:USC_ForeignBorn
 typeOf: dcs:StatisticalVariable
 
@@ -7161,42 +7108,6 @@ dateOfEntry: [2000 - Date]
 nativity: dcid:USC_ForeignBorn
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_Person_DateOfEntry1990To1999_ResidesInInstitutionalizedGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Person
-residenceType: dcs:InstitutionalizedGroupQuarters
-dateOfEntry: [1990 1999 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Person_DateOfEntry1990To1999_ResidesInInstitutionalizedGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Person
-residenceType: dcs:InstitutionalizedGroupQuarters
-dateOfEntry: [1990 1999 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:Count_Person_DateOfEntry1990OrEarlier_ResidesInInstitutionalizedGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:measuredValue
-populationType: dcs:Person
-residenceType: dcs:InstitutionalizedGroupQuarters
-dateOfEntry: [- 1990 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
-Node: dcid:MarginOfError_Count_Person_DateOfEntry1990OrEarlier_ResidesInInstitutionalizedGroupQuarters
-measuredProperty: dcs:count
-statType: dcs:marginOfError
-populationType: dcs:Person
-residenceType: dcs:InstitutionalizedGroupQuarters
-dateOfEntry: [- 1990 Date]
-nativity: dcid:USC_ForeignBorn
-typeOf: dcs:StatisticalVariable
-
 Node: dcid:Count_Person_DateOfEntry2000OrLater_ResidesInNoninstitutionalizedGroupQuarters
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -7215,6 +7126,58 @@ dateOfEntry: [2000 - Date]
 nativity: dcid:USC_ForeignBorn
 typeOf: dcs:StatisticalVariable
 
+Node: dcid:Count_Person_DateOfEntry1990To1999
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+dateOfEntry: [1990 1999 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DateOfEntry1990To1999
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+dateOfEntry: [1990 1999 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DateOfEntry1990To1999_ResidesInGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residenceType: dcs:GroupQuarters
+dateOfEntry: [1990 1999 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DateOfEntry1990To1999_ResidesInGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residenceType: dcs:GroupQuarters
+dateOfEntry: [1990 1999 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DateOfEntry1990To1999_ResidesInInstitutionalizedGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residenceType: dcs:InstitutionalizedGroupQuarters
+dateOfEntry: [1990 1999 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DateOfEntry1990To1999_ResidesInInstitutionalizedGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residenceType: dcs:InstitutionalizedGroupQuarters
+dateOfEntry: [1990 1999 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
 Node: dcid:Count_Person_DateOfEntry1990To1999_ResidesInNoninstitutionalizedGroupQuarters
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -7230,6 +7193,58 @@ statType: dcs:marginOfError
 populationType: dcs:Person
 residenceType: dcs:NoninstitutionalizedGroupQuarters
 dateOfEntry: [1990 1999 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DateOfEntry1990OrEarlier
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+dateOfEntry: [- 1990 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DateOfEntry1990OrEarlier
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+dateOfEntry: [- 1990 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DateOfEntry1990OrEarlier_ResidesInGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residenceType: dcs:GroupQuarters
+dateOfEntry: [- 1990 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DateOfEntry1990OrEarlier_ResidesInGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residenceType: dcs:GroupQuarters
+dateOfEntry: [- 1990 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_DateOfEntry1990OrEarlier_ResidesInInstitutionalizedGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+residenceType: dcs:InstitutionalizedGroupQuarters
+dateOfEntry: [- 1990 Date]
+nativity: dcid:USC_ForeignBorn
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_DateOfEntry1990OrEarlier_ResidesInInstitutionalizedGroupQuarters
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: dcs:Person
+residenceType: dcs:InstitutionalizedGroupQuarters
+dateOfEntry: [- 1990 Date]
 nativity: dcid:USC_ForeignBorn
 typeOf: dcs:StatisticalVariable
 

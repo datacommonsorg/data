@@ -1,0 +1,127 @@
+{
+    "summary": {
+        "column map generator commit SHA": "",
+        "data processing script commit SHA": "",
+        "total StatVarObservations": 624
+    },
+    "2021": {
+        "filename": "ACSST5Y2021.S1602-Data.csv",
+        "number of columns in dataset": 83,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 21,
+        "number of observations": 60,
+        "number of unique StatVars with observations": 20,
+        "number of unique geos": 3,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2020": {
+        "filename": "ACSST5Y2020.S1602-Data.csv",
+        "number of columns in dataset": 83,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 21,
+        "number of observations": 60,
+        "number of unique StatVars with observations": 20,
+        "number of unique geos": 3,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2019": {
+        "filename": "ACSST5Y2019.S1602-Data.csv",
+        "number of columns in dataset": 83,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 21,
+        "number of observations": 60,
+        "number of unique StatVars with observations": 20,
+        "number of unique geos": 3,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2018": {
+        "filename": "ACSST5Y2018.S1602-Data.csv",
+        "number of columns in dataset": 83,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 21,
+        "number of observations": 60,
+        "number of unique StatVars with observations": 20,
+        "number of unique geos": 3,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2017": {
+        "filename": "ACSST5Y2017.S1602-Data.csv",
+        "number of columns in dataset": 83,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 21,
+        "number of observations": 60,
+        "number of unique StatVars with observations": 20,
+        "number of unique geos": 3,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2016": {
+        "filename": "ACSST5Y2016.S1602-Data.csv",
+        "number of columns in dataset": 83,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 21,
+        "number of observations": 60,
+        "number of unique StatVars with observations": 20,
+        "number of unique geos": 3,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2015": {
+        "filename": "ACSST5Y2015.S1602-Data.csv",
+        "number of columns in dataset": 83,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 21,
+        "number of observations": 60,
+        "number of unique StatVars with observations": 20,
+        "number of unique geos": 3,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2014": {
+        "filename": "ACSST5Y2014.S1602-Data.csv",
+        "number of columns in dataset": 35,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 33,
+        "number of observations": 39,
+        "number of unique StatVars with observations": 13,
+        "number of unique geos": 0,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2013": {
+        "filename": "ACSST5Y2013.S1602-Data.csv",
+        "number of columns in dataset": 35,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 33,
+        "number of observations": 39,
+        "number of unique StatVars with observations": 13,
+        "number of unique geos": 0,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2012": {
+        "filename": "ACSST5Y2012.S1602-Data.csv",
+        "number of columns in dataset": 35,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 33,
+        "number of observations": 39,
+        "number of unique StatVars with observations": 13,
+        "number of unique geos": 0,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2011": {
+        "filename": "ACSST5Y2011.S1602-Data.csv",
+        "number of columns in dataset": 35,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 33,
+        "number of observations": 39,
+        "number of unique StatVars with observations": 13,
+        "number of unique geos": 0,
+        "number of StatVars in mcf_dict": 20
+    },
+    "2010": {
+        "filename": "ACSST5Y2010.S1602-Data.csv",
+        "number of columns in dataset": 35,
+        "number of rows in dataset": 3,
+        "number of statVars generated for columns": 33,
+        "number of observations": 48,
+        "number of unique StatVars with observations": 16,
+        "number of unique geos": 0,
+        "number of StatVars in mcf_dict": 20
+    }
+}

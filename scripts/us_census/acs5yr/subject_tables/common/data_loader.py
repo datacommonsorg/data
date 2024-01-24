@@ -287,7 +287,10 @@ class SubjectTableDataLoaderBase:
         }
 
         csv_file = open(self.clean_csv_path, 'a')
-        place_geoIds = df['id'].apply(convert_to_place_dcid)
+        if 'data_with_overlays' in filename:
+            place_geoIds = df['id'].apply(convert_to_place_dcid)
+        else:
+            place_geoIds = df['Geography'].apply(convert_to_place_dcid)
 
         # update the clean csv
         for column in df.columns.tolist():
@@ -400,12 +403,22 @@ class SubjectTableDataLoaderBase:
                     del tmcf_contents[index]
 
         ## write into the output tmcf
+
         tmcf_contents = '\n'.join(tmcf_contents)
         if not self.debug:
             clean_csv.drop(columns=['Column'], inplace=True)
 
         ## update the csv by dropping empty column
         clean_csv.drop(columns=empty_cols, inplace=True)
+        clean_csv['Quantity'] = np.where(
+            (clean_csv['Quantity'].astype(str).str[-1:] == "-") |
+            (clean_csv['Quantity'].astype(str).str[-1:] == "+"),
+            clean_csv['Quantity'].astype(str).str[:-1], clean_csv['Quantity'])
+        clean_csv['Quantity'] = np.where(
+            clean_csv['Quantity'].astype(str).str.contains(","),
+            clean_csv['Quantity'].astype(str).str.replace(",", ""),
+            clean_csv['Quantity'])
+        #clean_csv['Quantity']=clean_csv['Quantity'].astype(float)
         clean_csv.to_csv(self.clean_csv_path, index=False)
         return tmcf_contents
 
@@ -463,7 +476,7 @@ class SubjectTableDataLoaderBase:
         """processes each dataset in a zip file to make the clean csv of StatVarObs"""
         zf = ZipFile(zip_file_path)
         for filename in zf.namelist():
-            if 'data_with_overlays' in filename:
+            if 'data_with_overlays' in filename or '-Data' in filename:
                 df = pd.read_csv(zf.open(filename, 'r'),
                                  header=self.header_row,
                                  low_memory=False)
@@ -480,7 +493,7 @@ class SubjectTableDataLoaderBase:
                     self._process_zip_file(
                         os.path.join(input_dir_path, filename))
                 ## if input_directory has csv files, process them
-                if 'data_with_overlays' in filename:
+                if 'data_with_overlays' in filename or '-Data' in filename:
                     input_path = os.path.join(input_dir_path, filename)
                     df = pd.read_csv(input_path,
                                      header=self.header_row,
