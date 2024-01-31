@@ -325,6 +325,7 @@ def load_usda_api_key():
 
 
 def get_usda_api_key():
+    _FLAGS(sys.argv)
     return _FLAGS.usda_api_key
 
 
