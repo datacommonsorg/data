@@ -77,7 +77,7 @@ flags.DEFINE_string('output_dir', 'output',
                     'Output firectory for generated files.')
 
 
-def process_survey_data(year, svs, out_dir):
+def process_survey_data(year, svs, out_dir, usda_api_key):
     start = datetime.now()
     print('Start', year, '=', start)
 
@@ -87,7 +87,7 @@ def process_survey_data(year, svs, out_dir):
     print('Processing survey data for year', year)
 
     print('Getting county names')
-    county_names = get_param_values('county_name')
+    county_names = get_param_values('county_name', usda_api_key)
     county_names = county_names[:_FLAGS.num_counties]
     print('# counties =', len(county_names))
 
@@ -96,7 +96,7 @@ def process_survey_data(year, svs, out_dir):
     with multiprocessing.Pool(pool_size) as pool:
         pool.starmap(
             fetch_and_write,
-            zip(county_names, repeat(year), repeat(svs), repeat(out_dir)),
+            zip(county_names, repeat(year), repeat(svs), repeat(out_dir), repeat(usda_api_key)),
         )
 
     write_aggregate_csv(year, out_dir)
@@ -155,11 +155,11 @@ def write_consolidated_csv(years, out_dir):
                 csv_writer.writerows(csv.DictReader(part))
 
 
-def fetch_and_write(county_name, year, svs, out_dir):
+def fetch_and_write(county_name, year, svs, out_dir, usda_api_key):
     out_file = (
         f"{get_parts_dir(out_dir, year)}/{county_name.replace('[^a-zA-Z0-9]', '')}.csv"
     )
-    api_data = get_survey_county_data(year, county_name, out_dir)
+    api_data = get_survey_county_data(year, county_name, out_dir, usda_api_key)
     county_csv_rows = to_csv_rows(api_data, svs)
     print(
         'Writing',
@@ -173,7 +173,7 @@ def fetch_and_write(county_name, year, svs, out_dir):
         write_csv(out, county_csv_rows)
 
 
-def get_survey_county_data(year, county, out_dir):
+def get_survey_county_data(year, county, out_dir, usda_api_key):
     print('Getting', year, 'survey data for county', county)
 
     response_file = get_response_file_path(out_dir, year, county)
@@ -183,7 +183,7 @@ def get_survey_county_data(year, county, out_dir):
             response = json.load(f)
     else:
         params = {
-            'key': get_usda_api_key(),
+            'key': usda_api_key,
             'source_desc': 'SURVEY',
             'year': year,
             'county_name': county,
@@ -206,8 +206,8 @@ def get_data(params):
     return requests.get(f'{API_BASE}/api_GET', params=params).json()
 
 
-def get_param_values(param):
-    params = {'key': get_usda_api_key(), 'param': param}
+def get_param_values(param, usda_api_key):
+    params = {'key': usda_api_key, 'param': param}
     response = requests.get(f'{API_BASE}/get_param_values',
                             params=params).json()
     return [] if param not in response else response[param]
@@ -289,12 +289,12 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 
-def get_all_counties():
+def get_all_counties(usda_api_key):
     svs = load_svs()
-    process_survey_data(2023, svs, 'output')
+    process_survey_data(2023, svs, 'output', usda_api_key)
 
 
-def get_multiple_years():
+def get_multiple_years(usda_api_key):
     start = datetime.now()
     print('Start', start)
 
@@ -302,7 +302,7 @@ def get_multiple_years():
     svs = load_svs()
     years = range(_FLAGS.start_year, datetime.now().year + 1)
     for year in years:
-        process_survey_data(year, svs, out_dir)
+        process_survey_data(year, svs, out_dir, usda_api_key)
 
     write_consolidated_csv(years, out_dir)
 
@@ -331,8 +331,9 @@ def get_usda_api_key():
 
 def main(_):
     load_usda_api_key()
-    print('USDA API key', get_usda_api_key())
-    get_multiple_years()
+    usda_api_key = get_usda_api_key()
+    print('USDA API key', usda_api_key)
+    get_multiple_years(usda_api_key)
 
 
 if __name__ == '__main__':
