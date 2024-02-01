@@ -96,7 +96,8 @@ def process_survey_data(year, svs, out_dir, usda_api_key):
     with multiprocessing.Pool(pool_size) as pool:
         pool.starmap(
             fetch_and_write,
-            zip(county_names, repeat(year), repeat(svs), repeat(out_dir), repeat(usda_api_key)),
+            zip(county_names, repeat(year), repeat(svs), repeat(out_dir),
+                repeat(usda_api_key)),
         )
 
     write_aggregate_csv(year, out_dir)
