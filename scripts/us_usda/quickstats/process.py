@@ -28,7 +28,6 @@ from datetime import datetime
 from itertools import repeat
 import json
 import multiprocessing
-from multiprocessing import get_context
 import os
 import sys
 
@@ -94,7 +93,7 @@ def process_survey_data(year, svs, out_dir, usda_api_key):
 
     pool_size = max(2, multiprocessing.cpu_count() - 1)
 
-    with get_context("spawn").Pool(pool_size) as pool:
+    with multiprocessing.Pool(pool_size) as pool:
         pool.starmap(
             fetch_and_write,
             zip(county_names, repeat(year), repeat(svs), repeat(out_dir),
@@ -202,8 +201,8 @@ def get_survey_county_data(year, county, out_dir, usda_api_key):
     print('# api records for', county, '=', len(response['data']))
     return response
 
-# TODO: determine if the rate limiter needs to be re-enabled.
-# @limits(calls=10, period=60)
+
+@limits(calls=10, period=60)
 def get_data(params):
     return requests.get(f'{API_BASE}/api_GET', params=params).json()
 
