@@ -56,10 +56,8 @@ SOLUTE_TMCF_NODES = """Node: E:{dataset_name}->E{index}
 typeOf: dcid:StatVarObservation
 observationDate: C:{dataset_name}->Date Collection
 observationAbout: E:{dataset_name}->E0
-containedIn: E:{dataset_name}->E1
 observationPeriod: "P1Y"
 variableMeasured: dcid:Concentration_{variable}_BodyOfWater_GroundWater
-measuredProperty: dcs:concentration
 value: C:{dataset_name}->{name}
 """
 
@@ -67,10 +65,8 @@ CHEMPROP_TMCF_NODES = """Node: E:{dataset_name}->E{index}
 typeOf: dcid:StatVarObservation
 observationDate: C:{dataset_name}->Date Collection
 observationAbout: E:{dataset_name}->E0
-containedIn: E:{dataset_name}->E1
 observationPeriod: "P1Y"
 variableMeasured: dcid:{variable}_BodyOfWater_GroundWater
-measuredProperty: dcs:{dcid}
 value: C:{dataset_name}->{name}
 """
 
