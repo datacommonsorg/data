@@ -85,23 +85,28 @@ class ImportExecutor:
       notifier: EmailNotifier object for sending notificaiton emails.
       importer: ImportServiceClient object for invoking the Data Commons
         importer.
+      local_repo_dir: (Only applies to Updates) The full path to the GitHub
+        repository on local. If provided, the local_repo_dir is used for Update 
+        related operations instead of cloning a fresh version (latest master 
+        branch) of the repo on GitHub. The path shoud be provided to the root
+        directory of the repo, e.g. `<base_path_on_disk>/data`.
   """
 
-    def __init__(
-        self,
-        uploader: file_uploader.FileUploader,
-        github: github_api.GitHubRepoAPI,
-        config: configs.ExecutorConfig,
-        dashboard: dashboard_api.DashboardAPI = None,
-        notifier: email_notifier.EmailNotifier = None,
-        importer: 'import_service.ImportServiceClient' = None,
-    ):
+    def __init__(self,
+                 uploader: file_uploader.FileUploader,
+                 github: github_api.GitHubRepoAPI,
+                 config: configs.ExecutorConfig,
+                 dashboard: dashboard_api.DashboardAPI = None,
+                 notifier: email_notifier.EmailNotifier = None,
+                 importer: import_service.ImportServiceClient = None,
+                 local_repo_dir: str = ""):
         self.uploader = uploader
         self.github = github
         self.config = config
         self.dashboard = dashboard
         self.notifier = notifier
         self.importer = importer
+        self.local_repo_dir: str = local_repo_dir
 
     def execute_imports_on_commit(
         self,
@@ -195,13 +200,23 @@ class ImportExecutor:
     """
         logging.info('%s: BEGIN', absolute_import_name)
         with tempfile.TemporaryDirectory() as tmpdir:
-            logging.info('%s: downloading repo', absolute_import_name)
-            repo_dir = self.github.download_repo(
-                tmpdir, timeout=self.config.repo_download_timeout)
-            logging.info('%s: downloaded repo %s', absolute_import_name,
-                         repo_dir)
+            repo_dir = ''
+            if self.local_repo_dir:
+                # Do not clone/download from GitHub. Instead, use the
+                # provided local path to the repo's root directory.
+                logging.info('%s: using local repo at: %s',
+                             absolute_import_name, self.local_repo_dir)
+                repo_dir = self.local_repo_dir
+            else:
+                # Clone/download from GitHub.
+                logging.info('%s: downloading repo', absolute_import_name)
+                repo_dir = self.github.download_repo(
+                    tmpdir, timeout=self.config.repo_download_timeout)
+                logging.info('%s: downloaded repo %s', absolute_import_name,
+                             repo_dir)
+
             if self.dashboard:
-                self.dashboard.info(f'Downloaded repo: {repo_dir}',
+                self.dashboard.info(f'Downloaded/Local repo: {repo_dir}',
                                     run_id=run_id)
 
             executed_imports = []

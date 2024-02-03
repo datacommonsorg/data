@@ -51,7 +51,11 @@ Commons knowledge graph using the importer.
 
 Authenticate with GCP first: `gcloud auth application-default login`
 
-You can execute an import job from your local end by invoking the following script:
+You can execute an import job from your local end by invoking the script below. Note that instead of downloading a fresh version of this repo from GitHub, this script uses the locally downloaded/cloned current state of the repo by inferring the path to the `data` root directory. A side effect is that upon completion, the local GitHub repo may have other artifacts, e.g. output CSV/TMCF files produced. You may want to revert those files if they are not intended to be committed.
+
+Once the script runs to completion, the data directory's latest update is printed (along with the location on GCS) which can confirm whether the import actually produced new data. Note: it is a good idea to check the directory path printed to see if the expected import files are all there.
+
+Ensure this script is executed from the directory which contains `schedule_update_import.sh`, i.e. from `/data/import-automation/executor`.
 
 ```
 Run `./schedule_update_import.sh -u <config_project_id> <path_to_import> <import_script_args>`

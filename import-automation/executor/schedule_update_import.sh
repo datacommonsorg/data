@@ -42,10 +42,10 @@ CONFIG_PROJECT_ID=$2
 IMPORT_PATH=$3
 IMPORT_SCRIPT_ARGS=$4
 
-python3 -m venv .env
-. .env/bin/activate
-pip3 install --disable-pip-version-check -r requirements.txt
+# python3 -m venv .env
+# . .env/bin/activate
+# pip3 install --disable-pip-version-check -r requirements.txt
 
 python3 -m schedule_update_import --config_project_id=$CONFIG_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH --import_script_args="$IMPORT_SCRIPT_ARGS"
 
-deactivate
+#deactivate
