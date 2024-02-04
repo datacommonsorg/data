@@ -168,7 +168,6 @@ def update(cfg: configs.ExecutorConfig,
 def main(_):
     mode = _FLAGS.mode
     absolute_import_path = _FLAGS.absolute_import_path
-    import_script_args = _FLAGS.import_script_args
 
     if not _FLAGS.config_project_id:
         raise Exception("Flag: config_project_if must be provided.")
@@ -199,6 +198,8 @@ def main(_):
         f'Updating any config fields from local file: {_CONFIG_OVERRIDE_FILE}.')
     cfg = _override_configs(_CONFIG_OVERRIDE_FILE, cfg)
 
+    print(cfg)
+    exit(1)
     if mode == 'update':
         logging.info("*************************************************")
         logging.info("***** Beginning Update. Can take a while. *******")
