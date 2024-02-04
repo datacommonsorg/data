@@ -29,6 +29,8 @@ from app.service import file_uploader
 from app.service import github_api
 from google.cloud import storage
 
+_CONFIG_OVERRIDE_FILE = 'config_override.json'
+
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('mode', '', 'Options: update or schedule.')
@@ -52,6 +54,17 @@ flags.DEFINE_string(
 _FLAGS(sys.argv)
 
 logging.basicConfig(level=logging.INFO)
+
+
+def _override_configs(filename: str,
+                      config: configs.ExecutorConfig) -> configs.ExecutorConfig:
+    # Read configs from the local file.
+    d = json.load(open(filename))
+
+    # Update config with any fields and values provided in the local file.
+    # In case of any errors, the line below will raise an Exception which will
+    # report the problem which shoud be fixed in the local config json file.
+    return dataclasses.replace(config, **d["configs"])
 
 
 def _get_cloud_config() -> configs.ExecutorConfig:
@@ -197,8 +210,15 @@ def main(_):
     logging.info(f'Import script args: {args_list}')
     logging.info(f'Repo root directory: {repo_dir}')
 
-    # TODO: allow overriding/updating config params from a local config file as well.
+    # Loading configs from GCS and then using _CONFIG_OVERRIDE_FILE to
+    # override any fields provided in the file.
+    logging.info('Reading configs from GCS.')
     cfg = _get_cloud_config()
+
+    logging.info(
+        f'Updating any config fields from local file: {_CONFIG_OVERRIDE_FILE}.')
+    cfg = _override_configs(_CONFIG_OVERRIDE_FILE, cfg)
+
     if mode == 'update':
         logging.info("*************************************************")
         logging.info("***** Beginning Update. Can take a while. *******")
