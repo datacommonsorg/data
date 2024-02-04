@@ -14,11 +14,9 @@
 # limitations under the License.
 
 function help {
-  echo "#Usage: -us <config_project_id> <absolute_import_path> <import_script_args>"
+  echo "#Usage: -us <config_project_id> <absolute_import_path>"
   echo "## <config_project_id> is the GCP project ID where the config file is located." 
-  echo "## Update an import specified by <absolute_import_path>, e.g. scripts/us_usda/quickstats:UsdaAgSurvey"
-  echo "## Provide all args for the import script as one string, i.e. with quotes, e.g. \"--flag1=val1 --flag2=val2\""
-  exit 1
+  echo "## Update an import specified by <absolute_import_path>, e.g. scripts/us_usda/quickstats:UsdaAgSurvey"  exit 1
 }
 
 if [[ $# -le 1 ]]; then
@@ -41,12 +39,11 @@ done
 
 CONFIG_PROJECT_ID=$2
 IMPORT_PATH=$3
-IMPORT_SCRIPT_ARGS=$4
 
 python3 -m venv .env
 . .env/bin/activate
 pip3 install --disable-pip-version-check -r requirements.txt
 
-python3 -m schedule_update_import --config_project_id=$CONFIG_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH --import_script_args="$IMPORT_SCRIPT_ARGS"
+python3 -m schedule_update_import --config_project_id=$CONFIG_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH"
 
 deactivate

@@ -58,19 +58,18 @@ Once the script runs to completion, the data directory's latest update is printe
 Ensure this script is executed from the directory which contains `schedule_update_import.sh`, i.e. from `/data/import-automation/executor`. Configs (`<repo_root>/import-automation/executor/app/configs.py`) are loaded from GCS. To override any configs locally, set them in the file `<repo_root>/import-automation/executor/config_override.json`. note that the config fields must belong to `<repo_root>/import-automation/executor/app/configs.py`, else the update will produce an Exception.
 
 ```
-Run `./schedule_update_import.sh -u <config_project_id> <path_to_import> <import_script_args>`
+Run `./schedule_update_import.sh -u <config_project_id> <path_to_import>`
 ```
 
 Run `./schedule_update_import.sh --help` for usage.
 
 `<config_project_id>` is the GCP project id where the config file is stored, e.g. `datcom-import-automation`.
 `<path_to_import>` is the path to the import (relative to the root directory of the `data` repo), with the name of the import provided with a colon, e.g. `scripts/us_usda/quickstats:UsdaAgSurvey`.
-`import_script_args` is one string (enclosed by quotes) representing all the command line args to be provided to the import script, e.g. `"--start_year=2023 --another_flag=val"`.
 
 Example invocation:
 
 ```
-Run `./schedule_update_import.sh -u datcom-import-automation scripts/us_usda/quickstats:UsdaAgSurvey "--start_year=2023"`
+Run `./schedule_update_import.sh -u datcom-import-automation scripts/us_usda/quickstats:UsdaAgSurvey`
 ```
 
 ## Local Executor [should be deprecated soon]
