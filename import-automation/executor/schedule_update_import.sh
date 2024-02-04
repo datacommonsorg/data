@@ -44,6 +44,6 @@ python3 -m venv .env
 . .env/bin/activate
 pip3 install --disable-pip-version-check -r requirements.txt
 
-python3 -m schedule_update_import --config_project_id=$CONFIG_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH"
+python3 -m schedule_update_import --config_project_id=$CONFIG_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH
 
 deactivate
