@@ -44,11 +44,6 @@ flags.DEFINE_string(
     '<path_to_directory_relative_to_repository_root>:<import_name>.'
     'Example: scripts/us_usda/quickstats:UsdaAgSurvey')
 
-flags.DEFINE_string(
-    'import_script_args', '',
-    'One string of command line args for the import script,'
-    'e.g. "--flag1=value1 --flag2=value2"')
-
 _FLAGS(sys.argv)
 
 logging.basicConfig(level=logging.INFO)
@@ -117,7 +112,6 @@ def _print_fileupload_results(cfg: configs.ExecutorConfig,
 
 def update(cfg: configs.ExecutorConfig,
            absolute_import_path: str,
-           import_script_args: List[str] = [],
            local_repo_dir: str = "") -> import_executor.ExecutionResult:
     """Executes an update on the specified import.
 
@@ -136,9 +130,6 @@ def update(cfg: configs.ExecutorConfig,
                 <path_to_directory_relative_to_repository_root>:<import_name>
             example:
                 scripts/us_usda/quickstats:UsdaAgSurvey
-        import_script_args: a list of strings, each to be used as a command
-            line arg for the import script,
-            e.g. ['--flag1=value1', '--flag2=value2'].
         local_repo_dir: the full path to the GitHub repository on local. The
             path shoud be provided to the root  directory of the repo,
             e.g. `<base_path_on_disk>/data`.
@@ -146,10 +137,6 @@ def update(cfg: configs.ExecutorConfig,
     Returns:
         An import_executor.ExecutionResult object.
     """
-    # Update the configs with user script args, if provided.
-    if import_script_args:
-        cfg.user_script_args = import_script_args
-
     executor = import_executor.ImportExecutor(
         uploader=file_uploader.GCSFileUploader(
             project_id=cfg.gcs_project_id,
@@ -181,12 +168,6 @@ def main(_):
             'Flag: absolute_import_path is invalid. Path should be like:'
             'scripts/us_usda/quickstats:UsdaAgSurvey')
 
-    # Converting string to list
-    args_list = import_script_args.split(' ')
-    if type(args_list) != type([]):
-        raise Exception(
-            'Flag: import_script_args could not be parsed into a list.')
-
     # Get the root repo directory (data). Assumption is that this script is being
     # called from a path within the data repo.
     cwd = os.getcwd()
@@ -194,7 +175,6 @@ def main(_):
     logging.info(f'{mode} called with the following:')
     logging.info(f'Config Project ID: {_FLAGS.config_project_id}')
     logging.info(f'Import: {absolute_import_path}')
-    logging.info(f'Import script args: {args_list}')
     logging.info(f'Repo root directory: {repo_dir}')
 
     # TODO: allow overriding/updating config params from a local config file as well.
@@ -206,7 +186,6 @@ def main(_):
         res = dataclasses.asdict(
             update(cfg,
                    absolute_import_path,
-                   import_script_args=args_list,
                    local_repo_dir=repo_dir))
         logging.info("*************************************************")
         logging.info("*********** Update Complete. ********************")
