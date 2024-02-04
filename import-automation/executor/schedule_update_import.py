@@ -197,6 +197,7 @@ def main(_):
     logging.info(f'Import script args: {args_list}')
     logging.info(f'Repo root directory: {repo_dir}')
 
+    # TODO: allow overriding/updating config params from a local config file as well.
     cfg = _get_cloud_config()
     if mode == 'update':
         logging.info("*************************************************")

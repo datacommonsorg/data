@@ -67,7 +67,7 @@ Run `./schedule_update_import.sh --help` for usage.
 `<path_to_import>` is the path to the import (relative to the root directory of the `data` repo), with the name of the import provided with a colon, e.g. `scripts/us_usda/quickstats:UsdaAgSurvey`.
 `import_script_args` is one string (enclosed by quotes) representing all the command line args to be provided to the import script, e.g. `"--start_year=2023 --another_flag=val"`.
 
-Example invokation:
+Example invocation:
 
 ```
 Run `./schedule_update_import.sh -u datcom-import-automation scripts/us_usda/quickstats:UsdaAgSurvey "--start_year=2023"`
