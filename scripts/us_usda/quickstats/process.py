@@ -24,7 +24,6 @@ in a GCS config file. However, that file is available to DC team members only.
 """
 
 import csv
-import datetime
 from datetime import datetime
 from itertools import repeat
 import json
