@@ -13,13 +13,13 @@
         "statType": {
             "Margin of Error": "marginOfError"
         },
-        "numberOfBedroom": {
-            "no bedroom": "[0 Bedroom]",
-            "1 bedroom": "[1 Bedroom]",
-            "2 bedrooms": "[2 Bedroom]",
-            "3 bedrooms": "[3 Bedroom]",
-            "4 bedrooms": "[4 Bedroom]",
-            "5 or more bedrooms": "[5 - Bedroom]"
+        "numberOfBedrooms": {
+            "no bedroom": "[0 Bedrooms]",
+            "1 bedroom": "[1 Bedrooms]",
+            "2 bedrooms": "[2 Bedrooms]",
+            "3 bedrooms": "[3 Bedrooms]",
+            "4 bedrooms": "[4 Bedrooms]",
+            "5 or more bedrooms": "[5 - Bedrooms]"
         },
         "unit": {
             "Median gross rent --": "USDollar",
