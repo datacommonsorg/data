@@ -47,12 +47,37 @@ Commons knowledge graph using the importer.
 
 ## Running locally
 
+## Updating An Import Locally
+
+Authenticate with GCP first: `gcloud auth application-default login`
+
+You can execute an import job from your local end by invoking the script below. Note that instead of downloading a fresh version of this repo from GitHub, this script uses the locally downloaded/cloned current state of the repo by inferring the path to the `data` root directory. A side effect is that upon completion, the local GitHub repo may have other artifacts, e.g. output CSV/TMCF files produced. You may want to revert those files if they are not intended to be committed.
+
+Once the script runs to completion, the data directory's latest update is printed (along with the location on GCS) which can confirm whether the import actually produced new data. Note: it is a good idea to check the directory path printed to see if the expected import files are all there.
+
+Ensure this script is executed from the directory which contains `schedule_update_import.sh`, i.e. from `/data/import-automation/executor`.
+
+```
+Run `./schedule_update_import.sh -u <config_project_id> <path_to_import>`
+```
+
+Run `./schedule_update_import.sh --help` for usage.
+
+`<config_project_id>` is the GCP project id where the config file is stored, e.g. `datcom-import-automation`.
+`<path_to_import>` is the path to the import (relative to the root directory of the `data` repo), with the name of the import provided with a colon, e.g. `scripts/us_usda/quickstats:UsdaAgSurvey`.
+
+Example invocation:
+
+```
+Run `./schedule_update_import.sh -u datcom-import-automation scripts/us_usda/quickstats:UsdaAgSurvey`
+```
+
+## Local Executor [should be deprecated soon]
+
 ```
 PYTHONPATH=$(pwd) python app/main.py
 
 ``
-
-## Local Executor
 
 Run `. run_local_executor.sh --help` for usage.
 
