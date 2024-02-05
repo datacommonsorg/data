@@ -17,7 +17,7 @@ import sys
 import os
 import logging
 import json
-from typing import List
+from typing import Dict
 
 from absl import app
 from absl import flags
@@ -25,11 +25,14 @@ from app import configs
 from app.executor import import_target
 from app.executor import import_executor
 from app.executor import cloud_scheduler
+from app.executor import validation
 from app.service import file_uploader
 from app.service import github_api
 from google.cloud import storage
 
-_CONFIG_OVERRIDE_FILE = 'config_override.json'
+_CONFIG_OVERRIDE_FILE: str = 'config_override.json'
+_GKE_SERVICE_ACCOUNT_KEY: str = 'gke_service_account'
+_GKE_OAUTH_AUDIENCE_KEY: str = 'gke_oauth_audience'
 
 _FLAGS = flags.FLAGS
 
@@ -39,6 +42,8 @@ flags.DEFINE_string('config_bucket', 'import-automation-configs',
                     'GCS bucket name for the config file.')
 flags.DEFINE_string('config_filename', 'configs.json',
                     'GCS filename for the config file.')
+flags.DEFINE_string('scheduler_config_filename', 'cloud_scheduler_configs.json',
+                    'GCS filename for the Cloud Scheduler config file.')
 
 flags.DEFINE_string(
     'absolute_import_path', '',
@@ -49,6 +54,32 @@ flags.DEFINE_string(
 _FLAGS(sys.argv)
 
 logging.basicConfig(level=logging.INFO)
+
+
+def _get_cron_schedule(repo_dir: str, absolute_import_path: str,
+                       manifest_filename: str):
+
+    path = absolute_import_path
+    if ":" in absolute_import_path:
+        path = absolute_import_path.split(":")[0]
+
+    manifest_fp = os.path.join(repo_dir, path, manifest_filename)
+    if not os.path.isfile(manifest_fp):
+        raise Exception(
+            f'Manifest for import could not be found. Import: {absolute_import_path}. Looking for {manifest_filename} at path: {manifest_fp}'
+        )
+
+    manifest = import_executor.parse_manifest(manifest_fp)
+    validation.is_manifest_valid(manifest, repo_dir, path)
+
+    for spec in manifest['import_specifications']:
+        if spec['import_name'] in absolute_import_path:
+            return spec['cron_schedule']
+
+    # If we are here, the the import name was not found in the manifest.
+    raise Exception(
+        f'No entry found for Import ({absolute_import_path}) in manifest file {manifest_fp}'
+    )
 
 
 def _override_configs(filename: str,
@@ -62,20 +93,19 @@ def _override_configs(filename: str,
     return dataclasses.replace(config, **d["configs"])
 
 
-def _get_cloud_config() -> configs.ExecutorConfig:
+def _get_cloud_config(filename: str) -> Dict:
     logging.info('Getting cloud config.')
     project_id = _FLAGS.config_project_id
     bucket_name = _FLAGS.config_bucket
-    fname = _FLAGS.config_filename
     logging.info(
-        f'\nProject ID: {project_id}\nBucket: {bucket_name}\nConfig Filename: {fname}'
+        f'\nProject ID: {project_id}\nBucket: {bucket_name}\nConfig Filename: {filename}'
     )
 
     bucket = storage.Client(project_id).bucket(bucket_name,
                                                user_project=project_id)
-    blob = bucket.blob(fname)
+    blob = bucket.blob(filename)
     config_dict = json.loads(blob.download_as_string(client=None))
-
+    return config_dict
     return configs.ExecutorConfig(**config_dict['configs'])
 
 
@@ -123,6 +153,30 @@ def _print_fileupload_results(cfg: configs.ExecutorConfig,
     logging.info("===========================================================")
 
 
+def _print_schedule_results(cfg: configs.ExecutorConfig, result: Dict):
+    logging.info("===========================================================")
+    logging.info("============ CLOUD SCHEDULER JOB DIAGNOSTICS ==============")
+    logging.info("===========================================================")
+
+    logging.info("Cloud Scheduler job scheduled with the following:")
+    logging.info(result)
+    logging.info("===========================================================")
+    logging.info("===========================================================")
+    logging.info(
+        f"Check all scheduled jobs at: console.cloud.google.com/cloudscheduler?project={cfg.gcp_project_id}"
+    )
+
+    if "name" in result:
+        logging.info(f"Job scheduled as: {result['name']}.")
+    else:
+        logging.error(
+            'The result dictionary has an unexpected form. Key \"name\" missing. Check job details on GCP console to confirm successful scheduling.'
+        )
+
+    logging.info("===========================================================")
+    logging.info("===========================================================")
+
+
 def update(cfg: configs.ExecutorConfig,
            absolute_import_path: str,
            local_repo_dir: str = "") -> import_executor.ExecutionResult:
@@ -165,6 +219,34 @@ def update(cfg: configs.ExecutorConfig,
     return executor.execute_imports_on_update(absolute_import_path)
 
 
+def schedule(cfg: configs.ExecutorConfig,
+             absolute_import_name: str,
+             repo_dir: str,
+             gke_service_account: str = "",
+             gke_oauth_audience: str = "") -> Dict:
+    # This is the content of what is passed to /update API
+    # inside each cronjob http calls from Cloud Scheduler.
+    json_encoded_job_body = json.dumps({
+        'absolute_import_name': absolute_import_name,
+        'configs': cfg.get_data_refresh_config()
+    }).encode("utf-8")
+
+    # Retrieve the cron schedule.
+    cron_schedule = _get_cron_schedule(repo_dir, absolute_import_name,
+                                       cfg.manifest_filename)
+
+    # Create an HTTP Job Request.
+    req = cloud_scheduler.http_job_request(
+        absolute_import_name,
+        cron_schedule,
+        json_encoded_job_body,
+        gke_caller_service_account=gke_service_account,
+        gke_oauth_audience=gke_oauth_audience)
+
+    return cloud_scheduler.create_or_update_job(cfg.gcp_project_id,
+                                                cfg.scheduler_location, req)
+
+
 def main(_):
     mode = _FLAGS.mode
     absolute_import_path = _FLAGS.absolute_import_path
@@ -192,11 +274,15 @@ def main(_):
     # Loading configs from GCS and then using _CONFIG_OVERRIDE_FILE to
     # override any fields provided in the file.
     logging.info('Reading configs from GCS.')
-    cfg = _get_cloud_config()
+    config_dict = _get_cloud_config(_FLAGS.config_filename)
+    cfg = configs.ExecutorConfig(**config_dict['configs'])
 
     logging.info(
         f'Updating any config fields from local file: {_CONFIG_OVERRIDE_FILE}.')
     cfg = _override_configs(_CONFIG_OVERRIDE_FILE, cfg)
+
+    logging.info('Reading Cloud scheduler configs from GCS.')
+    scheduler_config_dict = _get_cloud_config(_FLAGS.scheduler_config_filename)
 
     if mode == 'update':
         logging.info("*************************************************")
@@ -219,12 +305,29 @@ def main(_):
         logging.info(
             "===========================================================")
 
-    elif mode == 'schedule':
-        # TODO: implement this.
-        pass
+        # Check expected output file/folder versions (to confirm updates).
+        _print_fileupload_results(cfg, absolute_import_path)
 
-    # Check expected output file/folder versions (to confirm updates).
-    _print_fileupload_results(cfg, absolute_import_path)
+    elif mode == 'schedule':
+        # Before proceeding, ensure that the configs read from GCS have the expected fields.
+        assert _GKE_SERVICE_ACCOUNT_KEY in scheduler_config_dict
+        assert _GKE_OAUTH_AUDIENCE_KEY in scheduler_config_dict
+
+        logging.info("*************************************************")
+        logging.info("***** Beginning Schedule Operation **************")
+        logging.info("*************************************************")
+        res = schedule(
+            cfg,
+            absolute_import_path,
+            repo_dir,
+            gke_service_account=scheduler_config_dict[_GKE_SERVICE_ACCOUNT_KEY],
+            gke_oauth_audience=scheduler_config_dict[_GKE_OAUTH_AUDIENCE_KEY])
+        logging.info("*************************************************")
+        logging.info("*********** Schedule Operation Complete. ********")
+        logging.info("*************************************************")
+
+        # Some basic diagnostics.
+        _print_schedule_results(cfg, res)
 
 
 if __name__ == '__main__':
