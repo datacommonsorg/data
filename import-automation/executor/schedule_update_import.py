@@ -198,8 +198,6 @@ def main(_):
         f'Updating any config fields from local file: {_CONFIG_OVERRIDE_FILE}.')
     cfg = _override_configs(_CONFIG_OVERRIDE_FILE, cfg)
 
-    print(cfg)
-    exit(1)
     if mode == 'update':
         logging.info("*************************************************")
         logging.info("***** Beginning Update. Can take a while. *******")
