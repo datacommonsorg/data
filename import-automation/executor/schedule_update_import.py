@@ -184,9 +184,7 @@ def main(_):
         logging.info("***** Beginning Update. Can take a while. *******")
         logging.info("*************************************************")
         res = dataclasses.asdict(
-            update(cfg,
-                   absolute_import_path,
-                   local_repo_dir=repo_dir))
+            update(cfg, absolute_import_path, local_repo_dir=repo_dir))
         logging.info("*************************************************")
         logging.info("*********** Update Complete. ********************")
         logging.info("*************************************************")
