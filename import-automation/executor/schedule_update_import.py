@@ -170,8 +170,11 @@ def _print_schedule_results(cfg: configs.ExecutorConfig, result: Dict):
         try:
             date_format = '%Y-%m-%dT%H:%M:%S%z'
             updated = datetime.strptime(result["user_update_time"], date_format)
-            updated_duration = int((datetime.now(timezone.utc) - updated).seconds)
-            logging.info(f'Last Updated: {updated_duration} seconds ago (UTC: {result["user_update_time"]}).')
+            updated_duration = int(
+                (datetime.now(timezone.utc) - updated).seconds)
+            logging.info(
+                f'Last Updated: {updated_duration} seconds ago (UTC: {result["user_update_time"]}).'
+            )
         except Exception:
             # Just means we couldn't parse the user_update_time which is not terrible.
             pass
