@@ -126,8 +126,6 @@ def create_or_update_job(project_id, location: str, job: Dict) -> Dict:
     job['name'] = f'{parent}/jobs/{job["name"]}'
 
     try:
-        print(parent)
-        print(job)
         job = client.create_job(
             scheduler_v1.CreateJobRequest(parent=parent, job=job))
     except AlreadyExists:

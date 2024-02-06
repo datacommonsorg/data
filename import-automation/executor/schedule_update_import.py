@@ -59,9 +59,8 @@ logging.basicConfig(level=logging.INFO)
 def _get_cron_schedule(repo_dir: str, absolute_import_path: str,
                        manifest_filename: str):
 
-    path = absolute_import_path
-    if ":" in absolute_import_path:
-        path = absolute_import_path.split(":")[0]
+    # Retain the path to the import (ignoring the name of the import).
+    path = absolute_import_path.split(":")[0]
 
     manifest_fp = os.path.join(repo_dir, path, manifest_filename)
     if not os.path.isfile(manifest_fp):
@@ -73,7 +72,7 @@ def _get_cron_schedule(repo_dir: str, absolute_import_path: str,
     validation.is_manifest_valid(manifest, repo_dir, path)
 
     for spec in manifest['import_specifications']:
-        if spec['import_name'] in absolute_import_path:
+        if absolute_import_path.endswith(':' + spec['import_name']):
             return spec['cron_schedule']
 
     # If we are here, the the import name was not found in the manifest.
@@ -106,7 +105,6 @@ def _get_cloud_config(filename: str) -> Dict:
     blob = bucket.blob(filename)
     config_dict = json.loads(blob.download_as_string(client=None))
     return config_dict
-    return configs.ExecutorConfig(**config_dict['configs'])
 
 
 def _get_latest_blob(project_id: str, bucket_name: str, filepath: str):
@@ -168,6 +166,15 @@ def _print_schedule_results(cfg: configs.ExecutorConfig, result: Dict):
 
     if "name" in result:
         logging.info(f"Job scheduled as: {result['name']}.")
+
+        try:
+            date_format = '%Y-%m-%dT%H:%M:%S%z'
+            updated = datetime.strptime(result["user_update_time"], date_format)
+            updated_duration = int((datetime.now(timezone.utc) - updated).seconds)
+            logging.info(f'Last Updated: {updated_duration} seconds ago (UTC: {result["user_update_time"]}).')
+        except Exception:
+            # Just means we couldn't parse the user_update_time which is not terrible.
+            pass
     else:
         logging.error(
             'The result dictionary has an unexpected form. Key \"name\" missing. Check job details on GCP console to confirm successful scheduling.'
