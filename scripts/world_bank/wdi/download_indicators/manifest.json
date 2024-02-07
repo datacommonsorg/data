@@ -1,0 +1,21 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "WorldBankWDI",
+            "curator_emails": [
+                "cbari@google.com"
+            ],
+            "provenance_url": "https://databank.worldbank.org/source/world-development-indicators",
+            "provenance_description": "World Bank dataset containing various statistics for countries.",
+            "scripts": [
+                "wdi_download_indicators.py"
+            ],
+            "import_inputs": [
+                {
+                    "cleaned_csv": "cleaned_wdi.csv"
+                }
+            ],
+            "cron_schedule": "0 0 1 * *"
+        }
+    ]
+}
