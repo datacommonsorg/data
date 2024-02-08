@@ -37,8 +37,10 @@ _GKE_OAUTH_AUDIENCE_KEY: str = 'gke_oauth_audience'
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('mode', '', 'Options: update or schedule.')
-flags.DEFINE_string('gke_project_id', '', 'GCP Project where import executor runs.')
-flags.DEFINE_string('config_project_id', 'datcom-204919', 'GCS Project for the config file.')
+flags.DEFINE_string('gke_project_id', '',
+                    'GCP Project where import executor runs.')
+flags.DEFINE_string('config_project_id', 'datcom-204919',
+                    'GCS Project for the config file.')
 flags.DEFINE_string('config_bucket', 'import-automation-configs',
                     'GCS bucket name for the config file.')
 flags.DEFINE_string('config_filename', 'configs.json',
@@ -101,8 +103,8 @@ def _get_cloud_config(filename: str) -> Dict:
         f'\nProject ID: {config_project_id}\nBucket: {bucket_name}\nConfig Filename: {filename}'
     )
 
-    bucket = storage.Client(config_project_id).bucket(bucket_name,
-                                               user_project=config_project_id)
+    bucket = storage.Client(config_project_id).bucket(
+        bucket_name, user_project=config_project_id)
     blob = bucket.blob(filename)
     config_dict = json.loads(blob.download_as_string(client=None))
     return config_dict
