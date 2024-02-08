@@ -63,13 +63,18 @@ kubectl annotate serviceaccount \
   --namespace import-automation \
   --overwrite \
   import-automation-ksa \
-  iam.gke.io/gcp-service-account=$PROJECT_ID@appspot.gserviceaccount.com
+  iam.gke.io/gcp-service-account=default-service-account@$PROJECT_ID.iam.gserviceaccount.com
 
 kubectl -n import-automation create secret generic import-automation-iap-secret \
   --from-literal=client_id=$OAUTH_CLIENT_ID \
   --from-literal=client_secret=$OAUTH_CLIENT_SECRET
 
-# Also set what identity will cloud scheduler call as by running:
+# Also set what identity will cloud scheduler call as by running the command below.
+# Note also that this service account will need to allow the Cloud Build service account
+# iam.serviceAccounts.actAs permissions on the service account for the Scheduler below.
+# This can be achieved by following the first answer here: 
+# https://stackoverflow.com/questions/61334524/how-do-you-enable-iam-serviceaccounts-actas-permissions-on-a-sevice-account
+# The Cloud Build service account can be found on the Settings tab of the Cloud Build page.
 kubectl -n import-automation create configmap cluster-oauth-configmap \
-  --from-literal=cloud-scheduler-caller-sa=$PROJECT_ID@appspot.gserviceaccount.com \
+  --from-literal=cloud-scheduler-caller-sa=default-service-account@$PROJECT_ID.iam.gserviceaccount.com \
   --from-literal=cloud-scheduler-caller-oauth-audience=$OAUTH_CLIENT_ID
