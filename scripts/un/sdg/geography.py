@@ -169,6 +169,10 @@ def should_include_containment(s, o):
     Returns:
         Whether triple should be included in containment.
     '''
+    # Skip triples where a place is contained within itself.
+    if s.dcid == o.dcid:
+        return False
+
     if (s.type == GEO_REGION or s.type == UN_GEO_REGION) and o.dcid == 'Earth':
         return True
     elif (s.type == GEO_REGION or
