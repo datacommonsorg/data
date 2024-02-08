@@ -45,6 +45,16 @@ MANUAL_OVERRIDE = {
     },
 }
 
+# On Wikidata for some of the districts they
+# have created a new entity. Since our DCID
+# is based on the WikidataId, we cant use the new ones
+# as it will change the mapping and hence this override.
+
+WIKIDATAID_DCID_OVERRIDE_MAPPING = {
+    "Q15399": "Q28169759",
+    "Q107016021": "Q1470987"
+}
+
 
 class LocalGovermentDirectoryDistrictsDataLoader:
 
@@ -80,7 +90,7 @@ class LocalGovermentDirectoryDistrictsDataLoader:
         lgdCensus2011Code = lgddata_row["LGDCensus2011Code"]
 
         # Lets match them based on census code 2011 first
-        if lgdCensus2011Code is not None and lgdCensus2011Code is not "":
+        if lgdCensus2011Code is not None and lgdCensus2011Code != "":
             wikidata_df_row = self.wikidata_df.loc[
                 self.wikidata_df["census2011Code"] == lgdCensus2011Code]
             if wikidata_df_row.empty:
@@ -152,6 +162,10 @@ class LocalGovermentDirectoryDistrictsDataLoader:
             axis=1)
 
     def _get_district_dcid(self, row):
+        # checkif there is override, then use it
+        if row["WikiDataId"] in WIKIDATAID_DCID_OVERRIDE_MAPPING:
+            return "wikidataId/{0}".format(
+                WIKIDATAID_DCID_OVERRIDE_MAPPING[row["WikiDataId"]])
         return "wikidataId/{0}".format(row["WikiDataId"])
 
     def _get_state_dcid(self, row):

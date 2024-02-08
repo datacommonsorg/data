@@ -67,6 +67,7 @@ class TestPreprocess(unittest.TestCase):
         row = clean_df.loc[clean_df["LGDDistrictName"] == "malerkotla"]
         self.assertEqual("malerkotla", row.iloc[0]["closestDistrictLabel"])
         self.assertEqual("Q107016021", row.iloc[0]["WikiDataId"])
+        self.assertEqual("wikidataId/Q1470987", row.iloc[0]["DistrictDCID"])
 
         # `Warangal Urban` renamed `Hanamkonda`
         row = clean_df.loc[clean_df["WikiDataId"] == "Q213077"]
@@ -75,6 +76,10 @@ class TestPreprocess(unittest.TestCase):
         # `Warangal Rural` renamed `Warangal`
         row = clean_df.loc[clean_df["WikiDataId"] == "Q15399"]
         self.assertEqual("warangal", row.iloc[0]["LGDDistrictName"])
+        self.assertEqual("wikidataId/Q28169759", row.iloc[0]["DistrictDCID"])
+
+        row = clean_df.loc[clean_df["WikiDataId"] == "Q8560886"]
+        self.assertEqual("new delhi", row.iloc[0]["LGDDistrictName"])
 
         os.remove(clean_csv)
 
