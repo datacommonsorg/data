@@ -14,8 +14,8 @@
 # limitations under the License.
 
 function help {
-  echo "#Usage: -us <config_project_id> <absolute_import_path>"
-  echo "## <config_project_id> is the GCP project ID where the config file is located." 
+  echo "#Usage: -us <gke_project_id> <absolute_import_path>"
+  echo "## <gke_project_id> is the GCP project ID where the import executor is running in." 
   echo "## Update an import specified by <absolute_import_path>, e.g. scripts/us_usda/quickstats:UsdaAgSurvey"  exit 1
 }
 
@@ -37,13 +37,13 @@ while getopts us OPTION; do
     esac
 done
 
-CONFIG_PROJECT_ID=$2
+GKE_PROJECT_ID=$2
 IMPORT_PATH=$3
 
 python3 -m venv .env
 . .env/bin/activate
 pip3 install --disable-pip-version-check -r requirements.txt
 
-python3 -m schedule_update_import --config_project_id=$CONFIG_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH
+python3 -m schedule_update_import --gke_project_id=$GKE_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH
 
 deactivate
