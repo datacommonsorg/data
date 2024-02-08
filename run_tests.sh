@@ -28,7 +28,7 @@ function setup_python {
   if [[ "$PYTHON_REQUIREMENTS_INSTALLED" = false ]]
   then
     echo "Installing Python requirements"
-    pip3 install -r requirements.txt -q
+    pip3 install -r requirements_all.txt -q
     PYTHON_REQUIREMENTS_INSTALLED=true
   fi
 }
