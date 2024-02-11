@@ -75,7 +75,7 @@ def DownloadAndParseCsvs() -> None:
   """
     dat = []
     for indicator in indicators:
-        print("IND ODWNLIADING....")
+        print(f'DOWNLOADING: {indicator}....')
         resp = urllib.request.urlopen(
             f'http://api.worldbank.org/v2/country/all/indicator/{indicator}?source=2&downloadformat=csv'
         )
