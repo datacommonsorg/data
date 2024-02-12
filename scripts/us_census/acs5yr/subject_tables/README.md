@@ -2,7 +2,7 @@
 
 This directory has the files and code used for importing ACS Subject Tables into DataCommons.
 
-Note: Before running the scripts here ensure the packages specified in `data/requirements.txt` is installed.
+Note: Before running the scripts here ensure the packages specified in `data/requirements_all.txt` is installed.
 
 ### Getting Started
 Before, getting started with an import of an ACS Subject Table, it is important to ensure the following are available:
