@@ -54,9 +54,25 @@ def _base_job_request(absolute_import_name, schedule: str):
     }
 
 
-def http_job_request(absolute_import_name, schedule,
-                     json_encoded_job_body: str) -> Dict:
+def http_job_request(absolute_import_name,
+                     schedule,
+                     json_encoded_job_body: str,
+                     gke_caller_service_account: str = "",
+                     gke_oauth_audience: str = "") -> Dict:
     """Cloud Scheduler request that targets executors launched in GKE."""
+
+    # If the service account and oauth audience are provided as
+    # function args, use them. If not, look for them in the
+    # environment (GKE_CALLER_SERVICE_ACCOUNT and GKE_OAUTH_AUDIENCE
+    # are set to read from environment variables).
+    service_account = gke_caller_service_account
+    oauth_audience = gke_oauth_audience
+
+    if not service_account:
+        service_account = GKE_CALLER_SERVICE_ACCOUNT
+    if not oauth_audience:
+        oauth_audience = GKE_OAUTH_AUDIENCE
+
     job = _base_job_request(absolute_import_name, schedule)
     job['name'] = f'{job["name"]}_GKE'
     job['http_target'] = {
@@ -67,8 +83,8 @@ def http_job_request(absolute_import_name, schedule,
         },
         'body': json_encoded_job_body,
         'oidc_token': {
-            'service_account_email': GKE_CALLER_SERVICE_ACCOUNT,
-            'audience': GKE_OAUTH_AUDIENCE,
+            'service_account_email': service_account,
+            'audience': oauth_audience,
         }
     }
     return job
