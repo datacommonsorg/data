@@ -37,7 +37,10 @@ _GKE_OAUTH_AUDIENCE_KEY: str = 'gke_oauth_audience'
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('mode', '', 'Options: update or schedule.')
-flags.DEFINE_string('config_project_id', '', 'GCS Project for the config file.')
+flags.DEFINE_string('gke_project_id', '',
+                    'GCP Project where import executor runs.')
+flags.DEFINE_string('config_project_id', 'datcom-204919',
+                    'GCS Project for the config file.')
 flags.DEFINE_string('config_bucket', 'import-automation-configs',
                     'GCS bucket name for the config file.')
 flags.DEFINE_string('config_filename', 'configs.json',
@@ -94,14 +97,14 @@ def _override_configs(filename: str,
 
 def _get_cloud_config(filename: str) -> Dict:
     logging.info('Getting cloud config.')
-    project_id = _FLAGS.config_project_id
+    config_project_id = _FLAGS.config_project_id
     bucket_name = _FLAGS.config_bucket
     logging.info(
-        f'\nProject ID: {project_id}\nBucket: {bucket_name}\nConfig Filename: {filename}'
+        f'\nProject ID: {config_project_id}\nBucket: {bucket_name}\nConfig Filename: {filename}'
     )
 
-    bucket = storage.Client(project_id).bucket(bucket_name,
-                                               user_project=project_id)
+    bucket = storage.Client(config_project_id).bucket(
+        bucket_name, user_project=config_project_id)
     blob = bucket.blob(filename)
     config_dict = json.loads(blob.download_as_string(client=None))
     return config_dict
@@ -261,8 +264,8 @@ def main(_):
     mode = _FLAGS.mode
     absolute_import_path = _FLAGS.absolute_import_path
 
-    if not _FLAGS.config_project_id:
-        raise Exception("Flag: config_project_if must be provided.")
+    if not _FLAGS.gke_project_id:
+        raise Exception("Flag: gke_project_id must be provided.")
 
     if not mode or (mode not in ['update', 'schedule']):
         raise Exception('Flag: mode must be set to \'update\' or \'schedule\'')
@@ -278,6 +281,7 @@ def main(_):
     repo_dir = cwd.split("data")[0] + "data"
     logging.info(f'{mode} called with the following:')
     logging.info(f'Config Project ID: {_FLAGS.config_project_id}')
+    logging.info(f'GKE (Import Executor) Project ID: {_FLAGS.gke_project_id}')
     logging.info(f'Import: {absolute_import_path}')
     logging.info(f'Repo root directory: {repo_dir}')
 
@@ -286,6 +290,9 @@ def main(_):
     logging.info('Reading configs from GCS.')
     config_dict = _get_cloud_config(_FLAGS.config_filename)
     cfg = configs.ExecutorConfig(**config_dict['configs'])
+
+    # Update the GCP project id to use with the configs.
+    cfg.gcp_project_id = _FLAGS.gke_project_id
 
     logging.info(
         f'Updating any config fields from local file: {_CONFIG_OVERRIDE_FILE}.')
