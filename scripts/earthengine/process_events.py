@@ -1704,7 +1704,7 @@ class GeoEventsProcessor:
                     # This place is smaller. Use its name if available.
                     new_place_name = self.get_place_property_list(place, 'name')
                     if new_place_name:
-                      new_place_name = new_place_name[0]
+                        new_place_name = new_place_name[0]
                     if new_place_name:
                         max_place_rank = place_rank
                         place_name = new_place_name

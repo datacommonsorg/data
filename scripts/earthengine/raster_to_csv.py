@@ -71,8 +71,7 @@ sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
 sys.path.append(
-    os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util')
-)
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)), 'util'))
 
 import common_flags
 import file_util
@@ -82,15 +81,12 @@ from config_map import ConfigMap
 from counters import Counters, CounterOptions
 
 flags.DEFINE_string('input_geotiff', '', 'GeoTIFF file to process')
-flags.DEFINE_string(
-    'ignore_geotiff', '', 'GeoTIFF with points to be ignored set as data.'
-)
-flags.DEFINE_string(
-    'allow_geotiff', '', 'GeoTIFF with points to be used set as data.'
-)
-flags.DEFINE_string(
-    'ignore_csv', '', 'CSV with points to be ignored set as data.'
-)
+flags.DEFINE_string('ignore_geotiff', '',
+                    'GeoTIFF with points to be ignored set as data.')
+flags.DEFINE_string('allow_geotiff', '',
+                    'GeoTIFF with points to be used set as data.')
+flags.DEFINE_string('ignore_csv', '',
+                    'CSV with points to be ignored set as data.')
 flags.DEFINE_string('allow_csv', '', 'CSV with points to be used set as data.')
 flags.DEFINE_integer(
     'limit_points',
@@ -98,12 +94,10 @@ flags.DEFINE_integer(
     'Number of rows/points to process per input file.',
 )
 flags.DEFINE_string('output_csv', '', 'Output CSV file to generate')
-flags.DEFINE_string(
-    'output_mode', 'w', 'Write(w) or append(a) to existing output file.'
-)
-flags.DEFINE_string(
-    'output_date', None, 'Date column to be added to output rows.'
-)
+flags.DEFINE_string('output_mode', 'w',
+                    'Write(w) or append(a) to existing output file.')
+flags.DEFINE_string('output_date', None,
+                    'Date column to be added to output rows.')
 flags.DEFINE_list('output_columns', [], 'Output columns in the CSV')
 flags.DEFINE_integer(
     'output_precision',
@@ -113,17 +107,15 @@ flags.DEFINE_integer(
 flags.DEFINE_integer('s2_level', 13, 'S2 Level for S2 cell Id.')
 flags.DEFINE_integer('grid_degree', None, 'Grid degree for lat/lng place.')
 flags.DEFINE_string('grid_prefix', 'grid_', 'Grid dcid prefix for place id.')
-flags.DEFINE_string(
-    'output_s2_place', '', 'Output prefix for S2 place csv and tmcf.'
-)
+flags.DEFINE_string('output_s2_place', '',
+                    'Output prefix for S2 place csv and tmcf.')
 flags.DEFINE_list(
     'output_contained_s2_level',
     [10],
     'Levels to be added as contained in place nodes into s2 place output.',
 )
-flags.DEFINE_string(
-    'aggregate', 'max', 'Aggregate function for data values with same key.'
-)
+flags.DEFINE_string('aggregate', 'max',
+                    'Aggregate function for data values with same key.')
 flags.DEFINE_integer('log_every_n', 10000, 'Print logs every N records.')
 flags.DEFINE_float(
     'default_cell_area',
@@ -136,77 +128,76 @@ _FLAGS(sys.argv)  # Allow invocation without app.run()
 
 
 def get_default_config():
-  # Create config from command line flags.
-  return {
-      # Inputs
-      'input_geotiff': _FLAGS.input_geotiff,
-      'ignore_geotiff': _FLAGS.ignore_geotiff,
-      'allow_geotiff': _FLAGS.allow_geotiff,
-      'input_csv': _FLAGS.input_csv,
-      'ignore_csv': _FLAGS.ignore_csv,
-      'allow_csv': _FLAGS.allow_csv,
-      'limit_points': _FLAGS.limit_points,
-      # Output settings
-      'output_csv': _FLAGS.output_csv,
-      'output_mode': _FLAGS.output_mode,
-      'output_columns': _FLAGS.output_columns,
-      'output_date': _FLAGS.output_date,
-      'output_precision': _FLAGS.output_precision,
-      'output_s2_place': _FLAGS.output_s2_place,
-      'output_contained_s2_level': _FLAGS.output_contained_s2_level,
-      # Processing parameters
-      's2_level': _FLAGS.s2_level,
-      'grid_degree': _FLAGS.grid_degree,
-      'grid_prefix': _FLAGS.grid_prefix,
-      # default aggregation for data values mapped to the same s2-cell+date
-      # that can be one of: min, max, mean, sum.
-      # For columns specific aggregation methods, use config:'input_data_filter'.
-      'aggregate': _FLAGS.aggregate,
-      # generate data for all s2 cells from --s2_level upto this level.
-      # Default cell area if constant for the whole data set.
-      'default_cell_area': _FLAGS.default_cell_area,
-      # Default point/cell width/height for ~1sqkm at equator, lower near poles.
-      'default_cell_width': 0.009,
-      'default_cell_height': 0.009,
-      # rename columns <input-name>: <output-name>
-      'rename_columns': {
-          'acq_date': 'date',
-          'band:0': 'water',
-      },
-      # filter settings per column for data
-      # input (pre-aggregation) and output (post-aggregation) of the form:
-      # {
-      #   '<column>' : {
-      #     'min': <NN.NNN>, # Minimum value for <column>
-      #     'max': <NN.NNN>, # Maximum value for <column>
-      #     'aggregate': 'sum', # one of 'min','max','sum','mean'
-      #   },
-      #   ...
-      # }
-      'input_data_filter': {
-          # Add up area for points added to an s2cell.
-          'area': {
-              'aggregate': 'sum',
-          },
-          #'confidence': {
-          #    'regex': r'[nh]',  # pick normal or high
-          # }
-          # 'water': {  # band:0
-          #     'min': 1.0
-          # },
-      },
-      'output_data_filter': {
-          #   'area': {
-          #       'min': 1.0,  # Minimum area in sqkm after aggregation
-          #   },
-      },
-      # Debug settings
-      'debug': _FLAGS.debug,  # Enable debug logs
-      'log_every_n': (
-          _FLAGS.log_every_n
-      ),  # Show counters when counter increments by N
-      'log_every': 'processed_points',  # Counter to check for log_every_n
-  }
+    # Create config from command line flags.
+    return {
+        # Inputs
+        'input_geotiff': _FLAGS.input_geotiff,
+        'ignore_geotiff': _FLAGS.ignore_geotiff,
+        'allow_geotiff': _FLAGS.allow_geotiff,
+        'input_csv': _FLAGS.input_csv,
+        'ignore_csv': _FLAGS.ignore_csv,
+        'allow_csv': _FLAGS.allow_csv,
+        'limit_points': _FLAGS.limit_points,
+        # Output settings
+        'output_csv': _FLAGS.output_csv,
+        'output_mode': _FLAGS.output_mode,
+        'output_columns': _FLAGS.output_columns,
+        'output_date': _FLAGS.output_date,
+        'output_precision': _FLAGS.output_precision,
+        'output_s2_place': _FLAGS.output_s2_place,
+        'output_contained_s2_level': _FLAGS.output_contained_s2_level,
+        # Processing parameters
+        's2_level': _FLAGS.s2_level,
+        'grid_degree': _FLAGS.grid_degree,
+        'grid_prefix': _FLAGS.grid_prefix,
+        # default aggregation for data values mapped to the same s2-cell+date
+        # that can be one of: min, max, mean, sum.
+        # For columns specific aggregation methods, use config:'input_data_filter'.
+        'aggregate': _FLAGS.aggregate,
+        # generate data for all s2 cells from --s2_level upto this level.
+        # Default cell area if constant for the whole data set.
+        'default_cell_area': _FLAGS.default_cell_area,
+        # Default point/cell width/height for ~1sqkm at equator, lower near poles.
+        'default_cell_width': 0.009,
+        'default_cell_height': 0.009,
+        # rename columns <input-name>: <output-name>
+        'rename_columns': {
+            'acq_date': 'date',
+            'band:0': 'water',
+        },
+        # filter settings per column for data
+        # input (pre-aggregation) and output (post-aggregation) of the form:
+        # {
+        #   '<column>' : {
+        #     'min': <NN.NNN>, # Minimum value for <column>
+        #     'max': <NN.NNN>, # Maximum value for <column>
+        #     'aggregate': 'sum', # one of 'min','max','sum','mean'
+        #   },
+        #   ...
+        # }
+        'input_data_filter': {
+            # Add up area for points added to an s2cell.
+            'area': {
+                'aggregate': 'sum',
+            },
+            #'confidence': {
+            #    'regex': r'[nh]',  # pick normal or high
+            # }
+            # 'water': {  # band:0
+            #     'min': 1.0
+            # },
+        },
+        'output_data_filter': {
+            #   'area': {
+            #       'min': 1.0,  # Minimum area in sqkm after aggregation
+            #   },
+        },
+        # Debug settings
+        'debug': _FLAGS.debug,  # Enable debug logs
+        'log_every_n':
+            (_FLAGS.log_every_n),  # Show counters when counter increments by N
+        'log_every': 'processed_points',  # Counter to check for log_every_n
+    }
 
 
 _DEFAULT_COLUMNS = set({'latitude', 'longitude', 's2CellId', 'date'})
@@ -224,7 +215,7 @@ def get_raster_data_point(
     config: ConfigMap = None,
     counter: Counters = None,
 ) -> dict:
-  """Returns the lat/long and data value for each band
+    """Returns the lat/long and data value for each band
 
   in the raster for a given position index (x, y).
   Args:
@@ -244,42 +235,42 @@ def get_raster_data_point(
     dictionary of values for the data point from the raster
     including additional property for s2CellId and area.
   """
-  if not config:
-    config = ConfigMap()
-  data = dict()
-  if lat is None or lng is None:
-    (lng, lat) = rasterio.transform.xy(raster.transform, x, y)
-  if lat > 90 or lat < -90 or lng > 180 or lng < -180:
-    logging.error(f'Invalid lat,lng [{lat},{lng}] for [{x},{y}].')
-    counter.add_counter(f'invalid-lat-lng', 1)
-    return None
-  data['latitude'] = lat
-  data['longitude'] = lng
-  data['area'] = utils.latlng_cell_area(lat, lng, raster.res[1], raster.res[0])
-  s2_level = config.get('s2_level', None)
-  if s2_level:
-    data['s2CellId'] = utils.s2_cell_latlng_dcid(lat, lng, s2_level)
-    data['s2Level'] = s2_level
-  grid_degree = config.get('grid_degree', None)
-  if grid_degree:
-    data['dcid'] = utils.grid_id_from_lat_lng(
-        grid_degree, lat, lng, config.get('grid_prefix', 'grid_1')
-    )
-    data['grid_degree'] = grid_degree
-  if not bands:
-    bands = list(range(raster.count))
-  for band in bands:
-    point_data = arr[band][x][y]
-    if point_data != nodata_value and not np.isnan(point_data):
-      data[f'band:{band}'] = point_data
-  date = config.get('output_date')
-  if date:
-    data['date'] = date
-  return data
+    if not config:
+        config = ConfigMap()
+    data = dict()
+    if lat is None or lng is None:
+        (lng, lat) = rasterio.transform.xy(raster.transform, x, y)
+    if lat > 90 or lat < -90 or lng > 180 or lng < -180:
+        logging.error(f'Invalid lat,lng [{lat},{lng}] for [{x},{y}].')
+        counter.add_counter(f'invalid-lat-lng', 1)
+        return None
+    data['latitude'] = lat
+    data['longitude'] = lng
+    data['area'] = utils.latlng_cell_area(lat, lng, raster.res[1],
+                                          raster.res[0])
+    s2_level = config.get('s2_level', None)
+    if s2_level:
+        data['s2CellId'] = utils.s2_cell_latlng_dcid(lat, lng, s2_level)
+        data['s2Level'] = s2_level
+    grid_degree = config.get('grid_degree', None)
+    if grid_degree:
+        data['dcid'] = utils.grid_id_from_lat_lng(
+            grid_degree, lat, lng, config.get('grid_prefix', 'grid_1'))
+        data['grid_degree'] = grid_degree
+    if not bands:
+        bands = list(range(raster.count))
+    for band in bands:
+        point_data = arr[band][x][y]
+        if point_data != nodata_value and not np.isnan(point_data):
+            data[f'band:{band}'] = point_data
+    date = config.get('output_date')
+    if date:
+        data['date'] = date
+    return data
 
 
 def get_csv_data_point(input_data: dict, config: ConfigMap) -> dict:
-  """Get data for a CSV row.
+    """Get data for a CSV row.
 
   Args:
     input_data: dictionary with column:values for a CSV row. assumed to have
@@ -288,48 +279,46 @@ def get_csv_data_point(input_data: dict, config: ConfigMap) -> dict:
   Returns:
     dictionary with values for the data point including area and s2CellId.
   """
-  _set_numeric_data(input_data, config)
-  lat = input_data.get('latitude', 0.0)
-  lng = input_data.get('longitude', 0.0)
-  if isinstance(lat, str) or isinstance(lng, str):
-    logging.debug(f'Invalid lat/lng in data {input_data}')
-    return {}
-  input_data['latitude'] = lat
-  input_data['longitude'] = lng
-  s2_level = config.get('s2_level', None)
-  s2_cell = None
-  if s2_level:
-    s2_cell = utils.s2_cell_from_latlng(lat, lng, s2_level)
-    input_data['s2CellId'] = utils.s2_cell_to_dcid(s2_cell.id())
-    input_data['s2Level'] = s2_level
-  grid_degree = config.get('grid_degree', None)
-  if grid_degree:
-    input_data['dcid'] = utils.grid_id_from_lat_lng(
-        grid_degree, lat, lng, config.get('grid_prefix', 'grid_1')
-    )
-    input_data['grid_degree'] = grid_degree
-  date = config.get('output_date')
-  if 'area' not in input_data:
-    area = None
-    if s2_cell:
-      area = utils.s2_cell_area(s2_cell)
-    else:
-      default_cell_area = config.get('default_cell_area', 0)
-      default_cell_width = config.get('default_cell_width', 0)
-      default_cell_height = config.get('default_cell_width', 0)
-      if default_cell_area > 0:
-        area = default_cell_area
-      elif default_cell_width > 0 and default_cell_height > 0:
-        area = utils.latlng_cell_area(
-            lat, lng, default_cell_height, default_cell_width
-        )
-    if area:
-      input_data['area'] = area
-  if date and 'date' not in input_data:
-    input_data['date'] = date
-  if config.get('ignore_date', False) and 'date' in input_data:
-    input_data.pop('date')
-  return input_data
+    _set_numeric_data(input_data, config)
+    lat = input_data.get('latitude', 0.0)
+    lng = input_data.get('longitude', 0.0)
+    if isinstance(lat, str) or isinstance(lng, str):
+        logging.debug(f'Invalid lat/lng in data {input_data}')
+        return {}
+    input_data['latitude'] = lat
+    input_data['longitude'] = lng
+    s2_level = config.get('s2_level', None)
+    s2_cell = None
+    if s2_level:
+        s2_cell = utils.s2_cell_from_latlng(lat, lng, s2_level)
+        input_data['s2CellId'] = utils.s2_cell_to_dcid(s2_cell.id())
+        input_data['s2Level'] = s2_level
+    grid_degree = config.get('grid_degree', None)
+    if grid_degree:
+        input_data['dcid'] = utils.grid_id_from_lat_lng(
+            grid_degree, lat, lng, config.get('grid_prefix', 'grid_1'))
+        input_data['grid_degree'] = grid_degree
+    date = config.get('output_date')
+    if 'area' not in input_data:
+        area = None
+        if s2_cell:
+            area = utils.s2_cell_area(s2_cell)
+        else:
+            default_cell_area = config.get('default_cell_area', 0)
+            default_cell_width = config.get('default_cell_width', 0)
+            default_cell_height = config.get('default_cell_width', 0)
+            if default_cell_area > 0:
+                area = default_cell_area
+            elif default_cell_width > 0 and default_cell_height > 0:
+                area = utils.latlng_cell_area(lat, lng, default_cell_height,
+                                              default_cell_width)
+        if area:
+            input_data['area'] = area
+    if date and 'date' not in input_data:
+        input_data['date'] = date
+    if config.get('ignore_date', False) and 'date' in input_data:
+        input_data.pop('date')
+    return input_data
 
 
 def get_raster_data_latlng(
@@ -339,7 +328,7 @@ def get_raster_data_latlng(
     lng: float,
     band: int = 0,
 ) -> float:
-  """Return the data value for the point (lat, lng) in given raster
+    """Return the data value for the point (lat, lng) in given raster
 
   Args:
     raster: raster to look up
@@ -351,20 +340,20 @@ def get_raster_data_latlng(
   Returns:
     the data value from the numpy array for the given point.
   """
-  (x, y) = rasterio.transform.rowcol(raster.transform, lng, lat)
-  if not x or not y:
-    return None
-  (rows, cols) = raster.shape
-  if x < 0 or x >= cols or y < 0 or y >= rows:
-    logging.debug(f'Point {lat}:{lng} ({x}:{y}) outside raster {raster.files}')
-    return None
-  return arr[band][x][y]
+    (x, y) = rasterio.transform.rowcol(raster.transform, lng, lat)
+    if not x or not y:
+        return None
+    (rows, cols) = raster.shape
+    if x < 0 or x >= cols or y < 0 or y >= rows:
+        logging.debug(
+            f'Point {lat}:{lng} ({x}:{y}) outside raster {raster.files}')
+        return None
+    return arr[band][x][y]
 
 
-def is_valid_data_point(
-    data_point: dict, filter_params: dict, counter: Counters
-) -> bool:
-  """Returns True if the data point is allowed for all parameters in config.
+def is_valid_data_point(data_point: dict, filter_params: dict,
+                        counter: Counters) -> bool:
+    """Returns True if the data point is allowed for all parameters in config.
 
   Args:
     data_point: dictionary of values for the point. assumes to have properties
@@ -375,32 +364,32 @@ def is_valid_data_point(
   Returns:
     True if data values satisfy all conditions in the filter params.
   """
-  if filter_params:
-    for col, params in filter_params.items():
-      value = data_point.get(col, None)
-      if 'min' in params:
-        if value is None or value < params['min']:
-          counter.add_counter(f'data-dropped-min-{col}', 1)
-          return False
-      if 'max' in params:
-        if value is None or value > params['max']:
-          counter.add_counter(f'data-dropped-max-{col}', 1)
-          return False
-      if 'eq' in params:
-        if value is None or not math.isclose(value, params['eq']):
-          counter.add_counter(f'data-dropped-eq-{col}', 1)
-          return False
-      if 'regex' in params:
-        re_pat = params['regex']
-        if value is None or not re.search(re_pat, str(value)):
-          counter.add_counter(f'data-dropped-regex-{col}', 1)
-          return False
+    if filter_params:
+        for col, params in filter_params.items():
+            value = data_point.get(col, None)
+            if 'min' in params:
+                if value is None or value < params['min']:
+                    counter.add_counter(f'data-dropped-min-{col}', 1)
+                    return False
+            if 'max' in params:
+                if value is None or value > params['max']:
+                    counter.add_counter(f'data-dropped-max-{col}', 1)
+                    return False
+            if 'eq' in params:
+                if value is None or not math.isclose(value, params['eq']):
+                    counter.add_counter(f'data-dropped-eq-{col}', 1)
+                    return False
+            if 'regex' in params:
+                re_pat = params['regex']
+                if value is None or not re.search(re_pat, str(value)):
+                    counter.add_counter(f'data-dropped-regex-{col}', 1)
+                    return False
 
-  return True
+    return True
 
 
 def rename_data_columns(data_point: dict, rename_columns: dict) -> dict:
-  """Rename data point key (columns) names.
+    """Rename data point key (columns) names.
 
   Args:
     data_point: dictionary of data values
@@ -409,32 +398,31 @@ def rename_data_columns(data_point: dict, rename_columns: dict) -> dict:
   Returns:
     data_point dictionary with the keys renames if any.
   """
-  if rename_columns:
-    for col, new_col in rename_columns.items():
-      if col in data_point:
-        value = data_point.pop(col)
-        data_point[new_col] = value
-  return data_point
+    if rename_columns:
+        for col, new_col in rename_columns.items():
+            if col in data_point:
+                value = data_point.pop(col)
+                data_point[new_col] = value
+    return data_point
 
 
-def get_parent_s2_cellids(
-    lat: float, lng: float, s2cell_id: str, s2_level: int, top_s2_level: int
-) -> list:
-  """Returns list of parent s2 cell ids(int) up to top_s2_level."""
-  s2cell = None
-  if lat is not None and lng is not None:
-    s2cell = utils.s2_cell_from_latlng(lat, lng, s2_level)
-  elif s2cell_id:
-    if isinstance(s2cell_id, str):
-      s2cell = utils.s2_cell_from_dcid(s2cell_id)
-    else:
-      s2cell = s2sphere.CellId(s2cell_id)
-  if not s2cell or top_s2_level is None:
-    return [0]
-  return [
-      s2cell.parent(level).id()
-      for level in range(s2cell.level(), top_s2_level - 1, -1)
-  ]
+def get_parent_s2_cellids(lat: float, lng: float, s2cell_id: str, s2_level: int,
+                          top_s2_level: int) -> list:
+    """Returns list of parent s2 cell ids(int) up to top_s2_level."""
+    s2cell = None
+    if lat is not None and lng is not None:
+        s2cell = utils.s2_cell_from_latlng(lat, lng, s2_level)
+    elif s2cell_id:
+        if isinstance(s2cell_id, str):
+            s2cell = utils.s2_cell_from_dcid(s2cell_id)
+        else:
+            s2cell = s2sphere.CellId(s2cell_id)
+    if not s2cell or top_s2_level is None:
+        return [0]
+    return [
+        s2cell.parent(level).id()
+        for level in range(s2cell.level(), top_s2_level - 1, -1)
+    ]
 
 
 def add_data_point(
@@ -444,7 +432,7 @@ def add_data_point(
     filter_params: dict = {},
     counter: Counters = None,
 ) -> dict:
-  """Add a data point to the data_dict dictionary
+    """Add a data point to the data_dict dictionary
 
   if a point with the same key already exists, it is updated with new values.
   Args:
@@ -461,87 +449,80 @@ def add_data_point(
     such as '#count' in case data is merged,
     and band specific counts, like '#band:0:count' when aggregating as mean.
   """
-  counter.add_counter('processed_points', 1)
-  rename_data_columns(data_point, config.get('rename_columns', None))
-  s2_level = data_point.get(
-      's2Level', config.get('s2Level', config.get('grid_degree', ''))
-  )
-  data_key = _get_data_key(data_point)
-  if data_key not in data_dict:
-    cur_data = dict(data_point)
-  else:
-    # Data key already exists. Aggregate.
-    cur_data = dict(data_dict[data_key])
-    def_aggr = config.get('aggregate', 'sum')
-    props = set(data_point.keys()).difference(_DEFAULT_COLUMNS)
-    props = [p for p in props if not p.startswith('#')]
-    for prop in props:
-      try:
-        cur_val = cur_data.get(prop, 0)
-        new_val = data_point[prop]
-        if cur_val == new_val:
-          continue
-        if isinstance(cur_val, str) and not cur_val and new_val:
-          cur_data[prop] = new_val
-          continue
-        if isinstance(new_val, str) and not new_val:
-          continue
-        aggr = filter_params.get(prop, {}).get('aggregate', def_aggr)
-        if aggr == 'last':
-          cur_data[prop] = new_val
-          continue
-        # Convert values to numeric for aggregation
-        if (
-            isinstance(cur_val, float)
-            or isinstance(cur_val, int)
-            or isinstance(new_val, float)
-            or isinstance(new_val, int)
-        ):
-          cur_val = _get_numeric_value(cur_val)
-          new_val = _get_numeric_value(new_val)
+    counter.add_counter('processed_points', 1)
+    rename_data_columns(data_point, config.get('rename_columns', None))
+    s2_level = data_point.get(
+        's2Level', config.get('s2Level', config.get('grid_degree', '')))
+    data_key = _get_data_key(data_point)
+    if data_key not in data_dict:
+        cur_data = dict(data_point)
+    else:
+        # Data key already exists. Aggregate.
+        cur_data = dict(data_dict[data_key])
+        def_aggr = config.get('aggregate', 'sum')
+        props = set(data_point.keys()).difference(_DEFAULT_COLUMNS)
+        props = [p for p in props if not p.startswith('#')]
+        for prop in props:
+            try:
+                cur_val = cur_data.get(prop, 0)
+                new_val = data_point[prop]
+                if cur_val == new_val:
+                    continue
+                if isinstance(cur_val, str) and not cur_val and new_val:
+                    cur_data[prop] = new_val
+                    continue
+                if isinstance(new_val, str) and not new_val:
+                    continue
+                aggr = filter_params.get(prop, {}).get('aggregate', def_aggr)
+                if aggr == 'last':
+                    cur_data[prop] = new_val
+                    continue
+                # Convert values to numeric for aggregation
+                if (isinstance(cur_val, float) or isinstance(cur_val, int) or
+                        isinstance(new_val, float) or isinstance(new_val, int)):
+                    cur_val = _get_numeric_value(cur_val)
+                    new_val = _get_numeric_value(new_val)
 
-        if aggr == 'sum':
-          cur_data[prop] = cur_val + new_val
-        elif aggr == 'min':
-          cur_data[prop] = min(cur_val, new_val)
-        elif aggr == 'max':
-          cur_data[prop] = max(cur_val, new_val)
-        elif aggr == 'mean':
-          cur_num = cur_data.get(f'#{prop}:count', 0)
-          new_num = data_point.get(f'#{prop}:count', 1)
-          cur_data[prop] = ((cur_val * cur_num) + (new_val * new_num)) / (
-              cur_num + new_num
-          )
-          cur_data[f'#{prop}:count'] = cur_num + new_num
-      except TypeError as e:
-        logging.error(
-            f'Error {e} in aggregating: {agr}: prop: {prop}, for new'
-            f' {data_point} with old: {cur_data}'
-        )
+                if aggr == 'sum':
+                    cur_data[prop] = cur_val + new_val
+                elif aggr == 'min':
+                    cur_data[prop] = min(cur_val, new_val)
+                elif aggr == 'max':
+                    cur_data[prop] = max(cur_val, new_val)
+                elif aggr == 'mean':
+                    cur_num = cur_data.get(f'#{prop}:count', 0)
+                    new_num = data_point.get(f'#{prop}:count', 1)
+                    cur_data[prop] = ((cur_val * cur_num) +
+                                      (new_val * new_num)) / (cur_num + new_num)
+                    cur_data[f'#{prop}:count'] = cur_num + new_num
+            except TypeError as e:
+                logging.error(
+                    f'Error {e} in aggregating: {agr}: prop: {prop}, for new'
+                    f' {data_point} with old: {cur_data}')
 
-    # Update lat/long to centroid.
-    cur_count = cur_data.get('#count', 1)
-    new_count = data_point.get('#count', 1)
-    for loc in ['latitude', 'longitude']:
-      cur_val = cur_data[loc]
-      new_val = data_point[loc]
-      cur_data[loc] = ((cur_val * cur_count) + (new_val * new_count)) / (
-          cur_count + new_count
-      )
-    cur_data['#count'] = cur_count + new_count
-    if len(data_dict) % config.get('log_every_n', 1000) == 0:
-      logging.debug(f'Added data {data_point} into {cur_data}')
-    counter.add_counter(f'processed_points_aggregated_s2level_{s2_level}', 1)
-  if not is_valid_data_point(cur_data, filter_params, counter):
-    counter.add_counter('processed_points_dropped', 1)
-    return None
-  data_dict[data_key] = cur_data
-  counter.add_counter(f'output_points_s2level_{s2_level}', 1)
-  return cur_data
+        # Update lat/long to centroid.
+        cur_count = cur_data.get('#count', 1)
+        new_count = data_point.get('#count', 1)
+        for loc in ['latitude', 'longitude']:
+            cur_val = cur_data[loc]
+            new_val = data_point[loc]
+            cur_data[loc] = ((cur_val * cur_count) +
+                             (new_val * new_count)) / (cur_count + new_count)
+        cur_data['#count'] = cur_count + new_count
+        if len(data_dict) % config.get('log_every_n', 1000) == 0:
+            logging.debug(f'Added data {data_point} into {cur_data}')
+        counter.add_counter(f'processed_points_aggregated_s2level_{s2_level}',
+                            1)
+    if not is_valid_data_point(cur_data, filter_params, counter):
+        counter.add_counter('processed_points_dropped', 1)
+        return None
+    data_dict[data_key] = cur_data
+    counter.add_counter(f'output_points_s2level_{s2_level}', 1)
+    return cur_data
 
 
 def load_raster_geotiff(filename: str) -> rasterio.io.DatasetReader:
-  """Load a raster from a geoTiff file.
+    """Load a raster from a geoTiff file.
 
   Args:
     filename: Name of the geoTiff file.
@@ -549,13 +530,13 @@ def load_raster_geotiff(filename: str) -> rasterio.io.DatasetReader:
   Returns:
     raster data set for the file.
   """
-  logging.info(f'Loading raster GeoTiff File: {filename}')
-  if file_util.file_is_gcs(filename):
-    # RasterIO doesn't support GCS files. Copy over to a local file.
-    filename = file_util.file_copy(filename)
-  src = rasterio.open(filename)
-  _log_raster_info(src)
-  return src
+    logging.info(f'Loading raster GeoTiff File: {filename}')
+    if file_util.file_is_gcs(filename):
+        # RasterIO doesn't support GCS files. Copy over to a local file.
+        filename = file_util.file_copy(filename)
+    src = rasterio.open(filename)
+    _log_raster_info(src)
+    return src
 
 
 def write_data_csv(
@@ -565,7 +546,7 @@ def write_data_csv(
     config: ConfigMap = {},
     counter: Counters = None,
 ):
-  """Output the data points dict into the csv file.
+    """Output the data points dict into the csv file.
 
   Args:
     data_points: dictionary of data points keys by location+date. each entry is
@@ -580,60 +561,56 @@ def write_data_csv(
         data_point dict are emitted.
     counter: dictionary of counter:values.
   """
-  # Write to the output.
-  if not columns:
-    columns = config.get('output_columns', None)
-  if not columns:
-    all_columns = _get_all_columns(
-        data_points, config, config.get('ignore_commented', True)
-    )
-    # Order columns in same order as input.
-    columns = []
-    for col in config.get('input_columns', []):
-      if col in all_columns:
-        columns.append(col)
-    for col in all_columns:
-      if col not in columns:
-        columns.append(col)
-  logging.info(
-      f'Writing {len(data_points)} rows with columns: {columns} into'
-      f' {filename} ...'
-  )
-  # create output directory if needed
-  dirname = os.path.dirname(filename)
-  if dirname:
-    os.makedirs(dirname, exist_ok=True)
-  # Open file in append mode or overwrite mode.
-  output_mode = config.get('output_mode', 'w')
-  if output_mode == 'a':
-    if not os.path.exists(filename):
-      # File doesn't exist yet. Open in write mode and add column headers.
-      output_mode = 'w'
-  with file_util.FileIO(filename, mode=output_mode) as csv_file:
-    writer = csv.DictWriter(
-        csv_file,
-        fieldnames=columns,
-        escapechar='\\',
-        extrasaction='ignore',
-        quotechar='"',
-        quoting=csv.QUOTE_NONNUMERIC,
-    )
-    if output_mode == 'w':
-      writer.writeheader()
-    output_date = config.get('output_date', None)
-    precision_digits = config.get('output_precision', 6)
-    counter.set_counter('total_points', len(data_points))
-    for key, data in data_points.items():
-      # Limit decimals for lat/lng
-      for col, val in data.items():
-        data[col] = utils.str_format_float(val, precision_digits)
-      if output_date:
-        data['date'] = output_date
-      writer.writerow(data)
-      counter.set_counter('points_processed', 1)
-  counter.set_counter(
-      f'output_rows:{os.path.basename(filename)}', len(data_points)
-  )
+    # Write to the output.
+    if not columns:
+        columns = config.get('output_columns', None)
+    if not columns:
+        all_columns = _get_all_columns(data_points, config,
+                                       config.get('ignore_commented', True))
+        # Order columns in same order as input.
+        columns = []
+        for col in config.get('input_columns', []):
+            if col in all_columns:
+                columns.append(col)
+        for col in all_columns:
+            if col not in columns:
+                columns.append(col)
+    logging.info(f'Writing {len(data_points)} rows with columns: {columns} into'
+                 f' {filename} ...')
+    # create output directory if needed
+    dirname = os.path.dirname(filename)
+    if dirname:
+        os.makedirs(dirname, exist_ok=True)
+    # Open file in append mode or overwrite mode.
+    output_mode = config.get('output_mode', 'w')
+    if output_mode == 'a':
+        if not os.path.exists(filename):
+            # File doesn't exist yet. Open in write mode and add column headers.
+            output_mode = 'w'
+    with file_util.FileIO(filename, mode=output_mode) as csv_file:
+        writer = csv.DictWriter(
+            csv_file,
+            fieldnames=columns,
+            escapechar='\\',
+            extrasaction='ignore',
+            quotechar='"',
+            quoting=csv.QUOTE_NONNUMERIC,
+        )
+        if output_mode == 'w':
+            writer.writeheader()
+        output_date = config.get('output_date', None)
+        precision_digits = config.get('output_precision', 6)
+        counter.set_counter('total_points', len(data_points))
+        for key, data in data_points.items():
+            # Limit decimals for lat/lng
+            for col, val in data.items():
+                data[col] = utils.str_format_float(val, precision_digits)
+            if output_date:
+                data['date'] = output_date
+            writer.writerow(data)
+            counter.set_counter('points_processed', 1)
+    counter.set_counter(f'output_rows:{os.path.basename(filename)}',
+                        len(data_points))
 
 
 def write_s2place_csv_tmcf(
@@ -642,7 +619,7 @@ def write_s2place_csv_tmcf(
     config: ConfigMap = {},
     counter: Counters = None,
 ):
-  """Generate CSV+tMCF file for S2 places with hierarchy.
+    """Generate CSV+tMCF file for S2 places with hierarchy.
 
   Args:
     data_ponts: dictionary of data points where each point is a dict with
@@ -652,59 +629,58 @@ def write_s2place_csv_tmcf(
       output_contained_s2_level: topmost s2 level upto which places are added.
     counter: dictionary of named counters
   """
-  s2_places = {}
-  contained_levels = config.get('output_contained_s2_level', [10])
-  # Collect all S2 cells ids for data points and its parents.
-  for data in data_points.values():
-    s2cell_dcid = data.get('s2CellId', None)
-    if not s2cell_dcid:
-      continue
-    s2cell = utils.s2_cell_from_dcid(s2cell_dcid)
-    if not s2cell:
-      continue
-    s2_places[s2cell.id()] = {}
-  logging.info(
-      f'Generating place data for {len(s2_places)} places upto level'
-      f' {contained_levels} into {output_prefix}.csv/tmcf'
-  )
-  # Add containedInPlace and Types for each s2 cell.
-  for cellid in s2_places.keys():
-    s2cell = s2sphere.CellId(cellid)
-    contained_in = []
-    s2level = s2cell.level()
-    for level in contained_levels:
-      if level and level < s2level:
-        contained_in.append(utils.s2_cell_to_dcid(s2cell.parent(level).id()))
-    s2_places[cellid] = {
-        's2CellId': utils.s2_cell_to_dcid(s2cell.id()),
-        'typeOf': f'dcid:S2CellLevel{s2cell.level()}',
-        'containedInPlace': ','.join(contained_in),
-        'name': f'Level {s2level} S2 Cell {s2cell.id():#018x}',
-    }
-  output_prefix = os.path.splitext(output_prefix)[0]
-  output_dir = os.path.dirname(output_prefix)
-  if output_dir:
-    os.makedirs(output_dir, exist_ok=True)
-  # Generate the place csv
-  counter.set_prefix('8:output_places_csv:')
-  write_data_csv(
-      s2_places,
-      f'{output_prefix}.csv',
-      ['s2CellId', 'typeOf', 'containedInPlace', 'name'],
-      config,
-      counter,
-  )
+    s2_places = {}
+    contained_levels = config.get('output_contained_s2_level', [10])
+    # Collect all S2 cells ids for data points and its parents.
+    for data in data_points.values():
+        s2cell_dcid = data.get('s2CellId', None)
+        if not s2cell_dcid:
+            continue
+        s2cell = utils.s2_cell_from_dcid(s2cell_dcid)
+        if not s2cell:
+            continue
+        s2_places[s2cell.id()] = {}
+    logging.info(f'Generating place data for {len(s2_places)} places upto level'
+                 f' {contained_levels} into {output_prefix}.csv/tmcf')
+    # Add containedInPlace and Types for each s2 cell.
+    for cellid in s2_places.keys():
+        s2cell = s2sphere.CellId(cellid)
+        contained_in = []
+        s2level = s2cell.level()
+        for level in contained_levels:
+            if level and level < s2level:
+                contained_in.append(
+                    utils.s2_cell_to_dcid(s2cell.parent(level).id()))
+        s2_places[cellid] = {
+            's2CellId': utils.s2_cell_to_dcid(s2cell.id()),
+            'typeOf': f'dcid:S2CellLevel{s2cell.level()}',
+            'containedInPlace': ','.join(contained_in),
+            'name': f'Level {s2level} S2 Cell {s2cell.id():#018x}',
+        }
+    output_prefix = os.path.splitext(output_prefix)[0]
+    output_dir = os.path.dirname(output_prefix)
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+    # Generate the place csv
+    counter.set_prefix('8:output_places_csv:')
+    write_data_csv(
+        s2_places,
+        f'{output_prefix}.csv',
+        ['s2CellId', 'typeOf', 'containedInPlace', 'name'],
+        config,
+        counter,
+    )
 
-  # Generate the place tmcf
-  logging.info(f'Generating place tmcf {output_prefix}.tmcf')
-  place_tmcf = ['Node: E:Place->E0']
-  place_tmcf.append('dcid: C:Place->s2CellId')
-  place_tmcf.append('typeOf: C:Place->typeOf')
-  place_tmcf.append('containedInPlace: C:Place->containedInPlace')
-  place_tmcf.append('name: C:Place->name')
-  with file_util.FileIO(f'{output_prefix}.tmcf', 'w') as tmcf_file:
-    tmcf_file.write('\n'.join(place_tmcf))
-    tmcf_file.write('\n')
+    # Generate the place tmcf
+    logging.info(f'Generating place tmcf {output_prefix}.tmcf')
+    place_tmcf = ['Node: E:Place->E0']
+    place_tmcf.append('dcid: C:Place->s2CellId')
+    place_tmcf.append('typeOf: C:Place->typeOf')
+    place_tmcf.append('containedInPlace: C:Place->containedInPlace')
+    place_tmcf.append('name: C:Place->name')
+    with file_util.FileIO(f'{output_prefix}.tmcf', 'w') as tmcf_file:
+        tmcf_file.write('\n'.join(place_tmcf))
+        tmcf_file.write('\n')
 
 
 def process_raster(
@@ -713,7 +689,7 @@ def process_raster(
     data_points: dict = None,
     counter: Counters = {},
 ) -> dict:
-  """Read a raster geoTiff and output points with data values.
+    """Read a raster geoTiff and output points with data values.
 
   Args:
     raster_input: raster data set to process loaded from a geoTiff file.
@@ -724,78 +700,76 @@ def process_raster(
   Returns:
     data_points dict with new points from the raster added.
   """
-  logging.info(
-      f'Processing raster {raster_input} with config: {config.get_configs()}'
-  )
-  counter.add_counter('input_geotiff_files', 1)
-  # Load the geoTiff file
-  counter.set_prefix('1:load_raster:')
-  src = load_raster_geotiff(raster_input)
-  # Convert raster into a numpy array.
-  # Note: This creates a large array with the shape of the original raster
-  # extent with non-valid data points set to 0.
-  arr = src.read()
-  # Load any allow/ignore raster masks.
-  ignore_geotiff = config.get('ignore_geotiff', None)
-  allow_geotiff = config.get('allow_geotiff', None)
-  ignore_src, ignore_arr = (None, None)
-  allow_src, allow_arr = (None, None)
-  if ignore_geotiff:
-    ignore_src = load_raster_geotiff(ignore_geotiff)
-    ignore_arr = ignore_src.read()
-  if allow_geotiff:
-    allow_src = load_raster_geotiff(allow_geotiff)
-    allow_arr = allow_src.read()
-  if data_points is None:
-    data_points = dict()
+    logging.info(
+        f'Processing raster {raster_input} with config: {config.get_configs()}')
+    counter.add_counter('input_geotiff_files', 1)
+    # Load the geoTiff file
+    counter.set_prefix('1:load_raster:')
+    src = load_raster_geotiff(raster_input)
+    # Convert raster into a numpy array.
+    # Note: This creates a large array with the shape of the original raster
+    # extent with non-valid data points set to 0.
+    arr = src.read()
+    # Load any allow/ignore raster masks.
+    ignore_geotiff = config.get('ignore_geotiff', None)
+    allow_geotiff = config.get('allow_geotiff', None)
+    ignore_src, ignore_arr = (None, None)
+    allow_src, allow_arr = (None, None)
+    if ignore_geotiff:
+        ignore_src = load_raster_geotiff(ignore_geotiff)
+        ignore_arr = ignore_src.read()
+    if allow_geotiff:
+        allow_src = load_raster_geotiff(allow_geotiff)
+        allow_arr = allow_src.read()
+    if data_points is None:
+        data_points = dict()
 
-  # Extract all valid data points from the raster into a numpy array.
-  # Note: This assumes a sparse raster with few valid data points.
-  counter.set_prefix('2:extract_raster_points:')
-  idx = np.where(arr != 0)
-  num_idx = len(idx[0])
-  points_xy = [list(), list()]
-  if src.count == 1:
-    # Get list of xy points with data for the single band.
-    points_xy[0] = idx[1]
-    points_xy[1] = idx[2]
-  else:
-    # For raster with multiple bands, get list of points with value data
-    # across any band.
-    xy_set = set()
-    for i in range(num_idx):
-      x = idx[1][i]
-      y = idx[2][i]
-      if (x, y) not in xy_set:
-        xy_set.add((x, y))
-        points_xy[0].append(x)
-        points_xy[1].append(y)
-    # Release memory
-    idx = None
-    xy_set = None
-  num_points = len(points_xy[0])
-  counter.add_counter('processed_points', num_points)
-  logging.info(
-      f'Got {num_points} xy points out of {num_idx} values from raster:'
-      f' {raster_input}.'
-  )
-  # Process all points in the raster.
-  process_raster_points(
-      src,
-      arr,
-      ignore_src,
-      ignore_arr,
-      allow_src,
-      allow_arr,
-      points_xy,
-      0,
-      num_points,
-      data_points,
-      config,
-      None,
-      counter,
-  )
-  return data_points
+    # Extract all valid data points from the raster into a numpy array.
+    # Note: This assumes a sparse raster with few valid data points.
+    counter.set_prefix('2:extract_raster_points:')
+    idx = np.where(arr != 0)
+    num_idx = len(idx[0])
+    points_xy = [list(), list()]
+    if src.count == 1:
+        # Get list of xy points with data for the single band.
+        points_xy[0] = idx[1]
+        points_xy[1] = idx[2]
+    else:
+        # For raster with multiple bands, get list of points with value data
+        # across any band.
+        xy_set = set()
+        for i in range(num_idx):
+            x = idx[1][i]
+            y = idx[2][i]
+            if (x, y) not in xy_set:
+                xy_set.add((x, y))
+                points_xy[0].append(x)
+                points_xy[1].append(y)
+        # Release memory
+        idx = None
+        xy_set = None
+    num_points = len(points_xy[0])
+    counter.add_counter('processed_points', num_points)
+    logging.info(
+        f'Got {num_points} xy points out of {num_idx} values from raster:'
+        f' {raster_input}.')
+    # Process all points in the raster.
+    process_raster_points(
+        src,
+        arr,
+        ignore_src,
+        ignore_arr,
+        allow_src,
+        allow_arr,
+        points_xy,
+        0,
+        num_points,
+        data_points,
+        config,
+        None,
+        counter,
+    )
+    return data_points
 
 
 def process_raster_points(
@@ -813,7 +787,7 @@ def process_raster_points(
     output_csv: str = None,
     counter: Counters = None,
 ) -> bool:
-  """Process a set of raster data points.
+    """Process a set of raster data points.
 
   Args:
     src_r: Source raster data set to process
@@ -835,69 +809,70 @@ def process_raster_points(
   Returns
     True if the raster was processed.
   """
-  logging.info(
-      f'Processing points {num_points} of {len(points_xy[0])} from'
-      f' {points_start_index} from {src_r.files} ...'
-  )
-  if counter is None:
-    counter = Counters()
-  counter.set_prefix('0:raster:')
-  counter.set_counter('geotiff_width', src_r.shape[1])
-  counter.set_counter('geotiff_height', src_r.shape[0])
-  counter.set_counter('index_data_points', num_points)
-  data_filter = config.get('input_data_filter', {})
-  counter.set_prefix('3:extract_raster_latlng:')
-  counter.set_counter('total_points', num_points)
-  # Get Lat/Lng coordinates for all given x,y points
-  # in a batch to reduce number of calls into rasterio.
-  latlons = rasterio.transform.xy(src_r.transform, points_xy[0], points_xy[1])
-  counter.add_counter('processed_points', len(latlons[0]))
-  logging.info(f'Got Lat/Lngs for {len(latlons[0])} raster points.')
-  # Go over all data points in range.
-  counter.set_prefix('4:process_raster_data:')
-  num_points = min(num_points, config.get('limit_points', num_points))
-  counter.set_counter('total_points', num_points)
-  for point_index in range(points_start_index, points_start_index + num_points):
-    x = points_xy[0][point_index]
-    y = points_xy[1][point_index]
-    lng = latlons[0][point_index]
-    lat = latlons[1][point_index]
-    data = get_raster_data_point(
-        raster=src_r,
-        arr=src_arr,
-        x=x,
-        y=y,
-        lat=lat,
-        lng=lng,
-        config=config,
-        counter=counter,
-    )
-    if data:
-      # Check if data point is allowed by the ignore/allow masks.
-      if ignore_arr is not None:
-        ignore_point = get_raster_data_latlng(
-            ignore_r, ignore_arr, data['latitude'], data['longitude']
+    logging.info(f'Processing points {num_points} of {len(points_xy[0])} from'
+                 f' {points_start_index} from {src_r.files} ...')
+    if counter is None:
+        counter = Counters()
+    counter.set_prefix('0:raster:')
+    counter.set_counter('geotiff_width', src_r.shape[1])
+    counter.set_counter('geotiff_height', src_r.shape[0])
+    counter.set_counter('index_data_points', num_points)
+    data_filter = config.get('input_data_filter', {})
+    counter.set_prefix('3:extract_raster_latlng:')
+    counter.set_counter('total_points', num_points)
+    # Get Lat/Lng coordinates for all given x,y points
+    # in a batch to reduce number of calls into rasterio.
+    latlons = rasterio.transform.xy(src_r.transform, points_xy[0], points_xy[1])
+    counter.add_counter('processed_points', len(latlons[0]))
+    logging.info(f'Got Lat/Lngs for {len(latlons[0])} raster points.')
+    # Go over all data points in range.
+    counter.set_prefix('4:process_raster_data:')
+    num_points = min(num_points, config.get('limit_points', num_points))
+    counter.set_counter('total_points', num_points)
+    for point_index in range(points_start_index,
+                             points_start_index + num_points):
+        x = points_xy[0][point_index]
+        y = points_xy[1][point_index]
+        lng = latlons[0][point_index]
+        lat = latlons[1][point_index]
+        data = get_raster_data_point(
+            raster=src_r,
+            arr=src_arr,
+            x=x,
+            y=y,
+            lat=lat,
+            lng=lng,
+            config=config,
+            counter=counter,
         )
-        if ignore_point:
-          logging.debug(f'Ignoring {data} due to ignore mask: {ignore_point}')
-          counter.add_counter('ignored_points', 1)
-          continue
-      if allow_arr is not None:
-        allow_point = get_raster_data_latlng(
-            allow_r, allow_arr, data['latitude'], data['longitude']
-        )
-        if not allow_point:
-          logging.debug(f'Ignoring {data} due to allow mask: {allow_point}')
-          counter.add_counter('dropped_points', 1)
-          continue
-      if add_data_point(data_points, data, config, data_filter, counter):
-        counter.add_counter('output_data_points', 1)
-    counter.print_counters_periodically()
-  counter.print_counters()
-  if output_csv:
-    counter.set_prefix('5:output_data_csv:')
-    write_data_csv(data_points, output_csv, [], config, counter)
-  return True
+        if data:
+            # Check if data point is allowed by the ignore/allow masks.
+            if ignore_arr is not None:
+                ignore_point = get_raster_data_latlng(ignore_r, ignore_arr,
+                                                      data['latitude'],
+                                                      data['longitude'])
+                if ignore_point:
+                    logging.debug(
+                        f'Ignoring {data} due to ignore mask: {ignore_point}')
+                    counter.add_counter('ignored_points', 1)
+                    continue
+            if allow_arr is not None:
+                allow_point = get_raster_data_latlng(allow_r, allow_arr,
+                                                     data['latitude'],
+                                                     data['longitude'])
+                if not allow_point:
+                    logging.debug(
+                        f'Ignoring {data} due to allow mask: {allow_point}')
+                    counter.add_counter('dropped_points', 1)
+                    continue
+            if add_data_point(data_points, data, config, data_filter, counter):
+                counter.add_counter('output_data_points', 1)
+        counter.print_counters_periodically()
+    counter.print_counters()
+    if output_csv:
+        counter.set_prefix('5:output_data_csv:')
+        write_data_csv(data_points, output_csv, [], config, counter)
+    return True
 
 
 def process_csv_points(
@@ -909,7 +884,7 @@ def process_csv_points(
     output_csv: str = None,
     counter: Counters = None,
 ) -> bool:
-  """Process data points from CSV.
+    """Process data points from CSV.
 
   Args:
     input_csv: Input csv file to load data points. Assumed to have columns:
@@ -925,67 +900,70 @@ def process_csv_points(
   Returns:
     True if data was processed.
   """
-  if data_points is None:
-    data_points = {}
-  if counter is None:
-    counter = Counters()
-  ignore_points = {}
-  if ignore_csv:
-    filter_config = dict(config)
-    filter_config['ignore_date'] = True
-    ignore_points = process_csv_points(
-        input_csv=ignore_csv, config=filter_config
-    )
-    logging.info(f'Loaded {len(ignore_points)} ignore points from {ignore_csv}')
-  allow_points = {}
-  if allow_csv:
-    filter_config = dict(config)
-    filter_config['ignore_date'] = True
-    allow_points = process_csv_points(input_csv=allow_csv, config=filter_config)
-    logging.info(f'Loaded {len(allow_points)} allow points from {allow_csv}')
-  data_filter = config.get('input_data_filter', {})
-  input_csv_files = file_util.file_get_matching(input_csv)
-  logging.info(f'Processing csv files: {input_csv_files}')
-  counter.set_prefix('1:process_csv:')
-  for filename in input_csv_files:
-    counter.add_counter(
-        'total_points', file_util.file_estimate_num_rows(filename)
-    )
-  for filename in input_csv_files:
-    counter.add_counter('input_csv_files', 1)
-    with file_util.FileIO(filename) as csvfile:
-      logging.info(f'Processing data from file {filename} ...')
-      reader = csv.DictReader(csvfile)
-      # Save the input columns
-      config.set_config('input_columns', reader.fieldnames)
-      # Process required number of input rows.
-      num_rows = 0
-      max_rows = config.get('limit_points', sys.maxsize)
-      for row in reader:
-        num_rows += 1
-        if num_rows > max_rows:
-          break
-        logging.debug(f'Processing CSV row {filename}:{num_rows}:{row}')
-        data = get_csv_data_point(row, config)
-        if not data:
-          counter.add_counter('csv_processed_points_invalid', 1)
-          continue
-        data_key = _get_data_key(data, add_date=False)
-        if data_key in ignore_points:
-          logging.debug(
-              f'Ignoring point {data} in ignore list: {ignore_points[data_key]}'
-          )
-          counter.add_counter('csv_points_ignored', 1)
-        if allow_points and data_key not in allow_points:
-          logging.debug(f'Ignoring point {data} not in allow list')
-          counter.add_counter('csv_points_not_allowed', 1)
-        if add_data_point(data_points, data, config, data_filter, counter):
-          counter.add_counter('csv_points_added', 1)
-        counter.print_counters_periodically()
-      logging.info(f'Processed {num_rows} points from {filename}')
-      counter.set_counter(f'file-points:{os.path.basename(filename)}', num_rows)
-      counter.print_counters()
-  return data_points
+    if data_points is None:
+        data_points = {}
+    if counter is None:
+        counter = Counters()
+    ignore_points = {}
+    if ignore_csv:
+        filter_config = dict(config)
+        filter_config['ignore_date'] = True
+        ignore_points = process_csv_points(input_csv=ignore_csv,
+                                           config=filter_config)
+        logging.info(
+            f'Loaded {len(ignore_points)} ignore points from {ignore_csv}')
+    allow_points = {}
+    if allow_csv:
+        filter_config = dict(config)
+        filter_config['ignore_date'] = True
+        allow_points = process_csv_points(input_csv=allow_csv,
+                                          config=filter_config)
+        logging.info(
+            f'Loaded {len(allow_points)} allow points from {allow_csv}')
+    data_filter = config.get('input_data_filter', {})
+    input_csv_files = file_util.file_get_matching(input_csv)
+    logging.info(f'Processing csv files: {input_csv_files}')
+    counter.set_prefix('1:process_csv:')
+    for filename in input_csv_files:
+        counter.add_counter('total_points',
+                            file_util.file_estimate_num_rows(filename))
+    for filename in input_csv_files:
+        counter.add_counter('input_csv_files', 1)
+        with file_util.FileIO(filename) as csvfile:
+            logging.info(f'Processing data from file {filename} ...')
+            reader = csv.DictReader(csvfile)
+            # Save the input columns
+            config.set_config('input_columns', reader.fieldnames)
+            # Process required number of input rows.
+            num_rows = 0
+            max_rows = config.get('limit_points', sys.maxsize)
+            for row in reader:
+                num_rows += 1
+                if num_rows > max_rows:
+                    break
+                logging.debug(f'Processing CSV row {filename}:{num_rows}:{row}')
+                data = get_csv_data_point(row, config)
+                if not data:
+                    counter.add_counter('csv_processed_points_invalid', 1)
+                    continue
+                data_key = _get_data_key(data, add_date=False)
+                if data_key in ignore_points:
+                    logging.debug(
+                        f'Ignoring point {data} in ignore list: {ignore_points[data_key]}'
+                    )
+                    counter.add_counter('csv_points_ignored', 1)
+                if allow_points and data_key not in allow_points:
+                    logging.debug(f'Ignoring point {data} not in allow list')
+                    counter.add_counter('csv_points_not_allowed', 1)
+                if add_data_point(data_points, data, config, data_filter,
+                                  counter):
+                    counter.add_counter('csv_points_added', 1)
+                counter.print_counters_periodically()
+            logging.info(f'Processed {num_rows} points from {filename}')
+            counter.set_counter(f'file-points:{os.path.basename(filename)}',
+                                num_rows)
+            counter.print_counters()
+    return data_points
 
 
 def filter_data_points(
@@ -994,7 +972,7 @@ def filter_data_points(
     config: ConfigMap = {},
     counter: Counters = {},
 ) -> dict:
-  """Remove data points that don't meet required criteria, like min area.
+    """Remove data points that don't meet required criteria, like min area.
 
   Args:
     data_points: dictionary of data points each with a dict of key:values.
@@ -1007,19 +985,20 @@ def filter_data_points(
   Returns:
     data points dictionary after removing points.
   """
-  if not filter_params:
+    if not filter_params:
+        return data_points
+    logging.info(
+        f'Filtering {len(data_points)} with params: {filter_params} ...')
+    counter.set_prefix('6:filter_data:')
+    counter.set_counter('total_points', len(data_points))
+    for k in list(data_points.keys()):
+        data = data_points[k]
+        if not is_valid_data_point(data, filter_params, counter):
+            counter.add_counter('data-dropped-filter', 1)
+            logging.debug(f'Dropping data {data}')
+            data_points.pop(k)
+        counter.set_counter('points_processed', 1)
     return data_points
-  logging.info(f'Filtering {len(data_points)} with params: {filter_params} ...')
-  counter.set_prefix('6:filter_data:')
-  counter.set_counter('total_points', len(data_points))
-  for k in list(data_points.keys()):
-    data = data_points[k]
-    if not is_valid_data_point(data, filter_params, counter):
-      counter.add_counter('data-dropped-filter', 1)
-      logging.debug(f'Dropping data {data}')
-      data_points.pop(k)
-    counter.set_counter('points_processed', 1)
-  return data_points
 
 
 def process(
@@ -1029,7 +1008,7 @@ def process(
     config: ConfigMap,
     counter: Counters = None,
 ):
-  """Process raster or CSV inputs to generate CSV output.
+    """Process raster or CSV inputs to generate CSV output.
 
   Args:
     input_geotiff: comma separated list of input geotiff file patterns
@@ -1037,108 +1016,103 @@ def process(
     output_csv: output csv file to generate
     config: dictionary of config parameter:values.
   """
-  data_points = {}
-  if counter is None:
-    counter = Counters(
-        options=CounterOptions(
-            processed_counter='processed_points', total_counter='total_points'
+    data_points = {}
+    if counter is None:
+        counter = Counters(options=CounterOptions(
+            processed_counter='processed_points', total_counter='total_points'))
+    counter.set_counter('start_time', time.perf_counter())
+    if input_geotiff:
+        logging.info(
+            f'Processing raster {input_geotiff} with config: {config.get_configs()}'
         )
-    )
-  counter.set_counter('start_time', time.perf_counter())
-  if input_geotiff:
-    logging.info(
-        f'Processing raster {input_geotiff} with config: {config.get_configs()}'
-    )
-    for geotiff_file in file_util.file_get_matching(input_geotiff):
-      process_raster(geotiff_file, config, data_points, counter)
-  if input_csv:
-    logging.info(
-        f'Processing csv {input_csv} with config: {config.get_configs()}'
-    )
-    process_csv_points(
-        input_csv=input_csv,
-        ignore_csv=config.get('ignore_csv', None),
-        allow_csv=config.get('allow_csv', None),
-        data_points=data_points,
-        config=config,
-        counter=counter,
-    )
-    logging.info(f'Loaded {len(data_points)} points from {input_csv}')
-  counter.set_counter('end_time', time.perf_counter())
+        for geotiff_file in file_util.file_get_matching(input_geotiff):
+            process_raster(geotiff_file, config, data_points, counter)
+    if input_csv:
+        logging.info(
+            f'Processing csv {input_csv} with config: {config.get_configs()}')
+        process_csv_points(
+            input_csv=input_csv,
+            ignore_csv=config.get('ignore_csv', None),
+            allow_csv=config.get('allow_csv', None),
+            data_points=data_points,
+            config=config,
+            counter=counter,
+        )
+        logging.info(f'Loaded {len(data_points)} points from {input_csv}')
+    counter.set_counter('end_time', time.perf_counter())
 
-  filter_data_points(
-      data_points, config.get('output_data_filter', None), config, counter
-  )
-  counter.set_prefix('7:output_data_csv:')
-  write_data_csv(data_points, output_csv, [], config, counter)
-  s2_place_file = config.get('output_s2_place', None)
-  if s2_place_file:
-    write_s2place_csv_tmcf(data_points, s2_place_file, config, counter)
-  counter.print_counters()
+    filter_data_points(data_points, config.get('output_data_filter', None),
+                       config, counter)
+    counter.set_prefix('7:output_data_csv:')
+    write_data_csv(data_points, output_csv, [], config, counter)
+    s2_place_file = config.get('output_s2_place', None)
+    if s2_place_file:
+        write_s2place_csv_tmcf(data_points, s2_place_file, config, counter)
+    counter.print_counters()
 
 
 def _get_data_key(data: dict, add_date: bool = True) -> str:
-  """Return a key for the data values in dictionary
+    """Return a key for the data values in dictionary
 
   Uses s2 cell id if it exists, else the lat/lng
   along with the date.
   """
-  key = data.get('s2CellId', data.get('dcid'))
-  if not key:
-    key = str(data.get('latitude', '')) + str(data.get('longitude', ''))
-  if add_date:
-    key += data.get('date', '')
-  return key
+    key = data.get('s2CellId', data.get('dcid'))
+    if not key:
+        key = str(data.get('latitude', '')) + str(data.get('longitude', ''))
+    if add_date:
+        key += data.get('date', '')
+    return key
 
 
-def _get_all_columns(
-    data_points: dict, config: ConfigMap = {}, ignore_commented: bool = True
-) -> list:
-  """Returns a list of all keys across all data points."""
-  cols = set()
-  cols.update(config.get('output_columns', []))
-  for data in data_points.values():
-    cols.update(list(data.keys()))
-  if ignore_commented:
-    cols = {c for c in cols if not c.startswith('#')}
-  return list(sorted(cols))
+def _get_all_columns(data_points: dict,
+                     config: ConfigMap = {},
+                     ignore_commented: bool = True) -> list:
+    """Returns a list of all keys across all data points."""
+    cols = set()
+    cols.update(config.get('output_columns', []))
+    for data in data_points.values():
+        cols.update(list(data.keys()))
+    if ignore_commented:
+        cols = {c for c in cols if not c.startswith('#')}
+    return list(sorted(cols))
 
 
 def _get_numeric_value(value: str) -> float:
-  """Returns a numeric value for the data string."""
-  numeric_value = utils.str_get_numeric_value(value)
-  if numeric_value is None:
-    numeric_value = 0
-  return numeric_value
+    """Returns a numeric value for the data string."""
+    numeric_value = utils.str_get_numeric_value(value)
+    if numeric_value is None:
+        numeric_value = 0
+    return numeric_value
 
 
 def _set_numeric_data(data: dict, config: ConfigMap = {}) -> dict:
-  """Returns dictionary of key:values with values converted from string to number."""
-  for k, v in data.items():
-    numeric_value = utils.str_get_numeric_value(v)
-    if numeric_value:
-      data[k] = numeric_value
-  return data
+    """Returns dictionary of key:values with values converted from string to number."""
+    for k, v in data.items():
+        numeric_value = utils.str_get_numeric_value(v)
+        if numeric_value:
+            data[k] = numeric_value
+    return data
 
 
 def _log_raster_info(raster: rasterio.io.DatasetReader):
-  """Print raster metadata."""
-  logging.info(f'Raster files: {raster.files}')
-  logging.info(f'Raster shape: {raster.shape}')
-  logging.info(f'Raster resolution: {raster.res}')
-  logging.info(f'Raster bounding box: {raster.bounds}')
-  logging.info(f'Raster bands: {raster.count}')
-  logging.info(f'Raster no-data value: {raster.nodatavals}')
-  logging.info(f'Raster CRS: {raster.crs}')
-  logging.info(f'Raster profile: {raster.profile}')
+    """Print raster metadata."""
+    logging.info(f'Raster files: {raster.files}')
+    logging.info(f'Raster shape: {raster.shape}')
+    logging.info(f'Raster resolution: {raster.res}')
+    logging.info(f'Raster bounding box: {raster.bounds}')
+    logging.info(f'Raster bands: {raster.count}')
+    logging.info(f'Raster no-data value: {raster.nodatavals}')
+    logging.info(f'Raster CRS: {raster.crs}')
+    logging.info(f'Raster profile: {raster.profile}')
 
 
 def main(_):
-  config = ConfigMap(filename=_FLAGS.config, config_dict=get_default_config())
-  if config.get('debug', False):
-    logging.set_verbosity(2)
-  process(_FLAGS.input_geotiff, _FLAGS.input_csv, _FLAGS.output_csv, config)
+    config = ConfigMap(filename=_FLAGS.config, config_dict=get_default_config())
+    if config.get('debug', False):
+        logging.set_verbosity(2)
+    process(_FLAGS.input_geotiff, _FLAGS.input_csv, _FLAGS.output_csv, config)
 
 
 if __name__ == '__main__':
-  app.run(main)
+    app.run(main)

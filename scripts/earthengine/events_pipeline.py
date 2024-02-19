@@ -197,7 +197,8 @@ class EventPipeline(StageRunner):
             if stage_name == stage_runner.get_name():
                 logging.info(f'Running stage {stage_name} with {input_files}')
                 return stage_runner.run_stage(input_files)
-        logging.error(f'No stage runner for {stage_name} with input: {input_files}')
+        logging.error(
+            f'No stage runner for {stage_name} with input: {input_files}')
         return []
 
     def run(self, run_stages: list = []) -> list:

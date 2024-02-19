@@ -98,18 +98,26 @@ class ProcessEventsTest(unittest.TestCase):
                 output_path=output_prefix,
                 config=self._config)
             # Verify generated events.
-            self.compare_csv_files(os.path.join(tmp_dir, 'events_test_events.csv'),
-                                   os.path.join(_TESTDIR, test_prefix + 'events.csv'))
-            self.compare_files(os.path.join(tmp_dir, 'events_test_events.tmcf'),
-                                   os.path.join(_TESTDIR, test_prefix + 'events.tmcf'))
-            self.compare_csv_files(os.path.join(tmp_dir, 'event_svobs', 'events_test_svobs.csv'),
-                                   os.path.join(_TESTDIR, test_prefix + 'svobs.csv'))
-            self.compare_files(os.path.join(tmp_dir, 'event_svobs', 'events_test_svobs.tmcf'),
-                                   os.path.join(_TESTDIR, test_prefix + 'svobs.tmcf'))
-            self.compare_csv_files(os.path.join(tmp_dir, 'place_svobs', 'events_test_place_svobs.csv'),
-                                   os.path.join(_TESTDIR, test_prefix + 'place_svobs.csv'))
-            self.compare_files(os.path.join(tmp_dir, 'place_svobs', 'events_test_place_svobs.tmcf'),
-                                   os.path.join(_TESTDIR, test_prefix + 'place_svobs.tmcf'))
+            self.compare_csv_files(
+                os.path.join(tmp_dir, 'events_test_events.csv'),
+                os.path.join(_TESTDIR, test_prefix + 'events.csv'))
+            self.compare_files(
+                os.path.join(tmp_dir, 'events_test_events.tmcf'),
+                os.path.join(_TESTDIR, test_prefix + 'events.tmcf'))
+            self.compare_csv_files(
+                os.path.join(tmp_dir, 'event_svobs', 'events_test_svobs.csv'),
+                os.path.join(_TESTDIR, test_prefix + 'svobs.csv'))
+            self.compare_files(
+                os.path.join(tmp_dir, 'event_svobs', 'events_test_svobs.tmcf'),
+                os.path.join(_TESTDIR, test_prefix + 'svobs.tmcf'))
+            self.compare_csv_files(
+                os.path.join(tmp_dir, 'place_svobs',
+                             'events_test_place_svobs.csv'),
+                os.path.join(_TESTDIR, test_prefix + 'place_svobs.csv'))
+            self.compare_files(
+                os.path.join(tmp_dir, 'place_svobs',
+                             'events_test_place_svobs.tmcf'),
+                os.path.join(_TESTDIR, test_prefix + 'place_svobs.tmcf'))
 
     def test_process_event_data(self):
         '''Verify events can be added by date.'''

@@ -74,11 +74,11 @@ import file_util
 from config_map import ConfigMap
 from events_pipeline import EventPipeline
 
+
 def main(_):
-    config=ConfigMap(
-        filename=_FLAGS.flood_pipeline_config)
+    config = ConfigMap(filename=_FLAGS.flood_pipeline_config)
     if _FLAGS.start_date:
-      config.get('defaults', {})['start_date'] = _FLAGS.start_date
+        config.get('defaults', {})['start_date'] = _FLAGS.start_date
     pipeline = EventPipeline(config=config)
     pipeline.run(run_stages=_FLAGS.flood_pipeline_stages)
 
