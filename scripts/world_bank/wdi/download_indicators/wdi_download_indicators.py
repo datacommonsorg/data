@@ -9,7 +9,10 @@ from absl import flags
 import numpy as np
 import pandas as pd
 
-_OUT_PATH = flags.DEFINE_string('out_path', None, 'CNS path to write output.')
+# The output path should have a default filename.
+_OUT_DEFAULT_NAME = 'cleaned_wdi.csv'
+_OUT_PATH = flags.DEFINE_string('out_path', _OUT_DEFAULT_NAME,
+                                'CNS path to write output.')
 
 indicators = [
     'SP.POP.TOTL',
@@ -72,6 +75,7 @@ def DownloadAndParseCsvs() -> None:
   """
     dat = []
     for indicator in indicators:
+        print(f'DOWNLOADING: {indicator}....')
         resp = urllib.request.urlopen(
             f'http://api.worldbank.org/v2/country/all/indicator/{indicator}?source=2&downloadformat=csv'
         )
@@ -121,6 +125,8 @@ def DownloadAndParseCsvs() -> None:
             'unit',
         ],
     )
+    # Write to the _OUT_PATH which defaults to the output filename
+    # if no path is provided.
     with open(_OUT_PATH.value, 'w+') as f_out:
         out_df.to_csv(f_out, index=False)
 

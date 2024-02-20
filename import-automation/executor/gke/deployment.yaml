@@ -51,10 +51,11 @@ spec:
     port: 8080
     type: HTTP
     requestPath: /healthz
-  iap:
-    enabled: true
-    oauthclientCredentials:
-      secretName: import-automation-iap-secret
+  # TODO: re-enable this once the deployments work e2e.
+  # iap:
+  #   enabled: true
+  #   oauthclientCredentials:
+  #     secretName: import-automation-iap-secret
 ---
 apiVersion: v1
 kind: Service
