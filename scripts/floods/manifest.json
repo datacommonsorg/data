@@ -1,21 +1,13 @@
 {
     "import_specifications": [{
         "import_name":
-<<<<<<< HEAD
             "DynamicWorld_FloodEvents_AutoRefresh",
-=======
-            "DynamicWorld_FloodEvents",
->>>>>>> 386c7b874bdf73aa54c10273e6563a43dad483e4
         "curator_emails": ["ajaits@google.com"],
         "provenance_url":
             "https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1",
         "provenance_description":
             "Flood events inferred from areas marked with high probability of water outside the permanent water bodies.",
-<<<<<<< HEAD
         "scripts": ["generate_floods_events.py"],
-=======
-        "scripts": ["generate_flood_events.py"],
->>>>>>> 386c7b874bdf73aa54c10273e6563a43dad483e4
         "import_inputs": [{
             "template_mcf": "",
             "cleaned_csv": ""
