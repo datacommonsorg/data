@@ -1,3 +1,35 @@
+# Copyright 2024 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+Author: Samantha Piekos
+Date: 02/21/2024
+Name: format_virus_master_species_list.py
+Description: Formats ICTV Virus Metadata Resource into two csv files - 
+one specific to VirusIsolates and the other VirusGenomeSegment for import
+into Data Commons. This includes converting genome composition, genome
+coverage, viral host, and viral source to corresponding enums. Virus,
+VirusIsolate and VirusGenomeSegment dcids were formatted by converting
+the names into pascal case and adding the prefix 'bio/'. The viral taxonomy
+is encoded in enum format and found within Virus nodes. Whether an isolate
+is an exemplar isolate or not was encoded into a boolean as a value for the
+property 'isExemplar'.
+@file_input: 	ICTV Virus Metadata Resource .xslx file
+@file_output:	formatted csv format of VirusIsolate and VirusGenomeSegment
+			 	nodes
+"""
+
+
 # set up environment
 import pandas as pd
 import sys
@@ -6,6 +38,7 @@ import unidecode
 
 # declare universal variables
 DICT_COVERAGE = {
+'coding-complete genome': 'dcs:GenomeCoverageCompleteGenome',\
 'complete genome': 'dcs:GenomeCoverageCompleteGenome',\
 'complete coding genome': 'dcs:GenomeCoverageCompleteCodingGenome',\
 'no entry in genbank': 'dcs:GenomeCoverageNoEntryInGenBank',\
@@ -43,6 +76,7 @@ DICT_HOST = {
 
 DICT_SOURCE = {
 	'invertebrates': 'dcs:VirusSourceInvertebrates',\
+	'freshwater': 'dcs:VirusSourceWater',\
 	'marine': 'dcs:VirusSourceMarine',\
 	'phytobiome': 'dcs:VirusSourcePhytobiome',\
 	'plants': 'dcs:VirusSourcePlants',\
@@ -272,20 +306,23 @@ def handle_genome_segments(df_segment, virus_dcid, virus_name, isolate_dcid, gen
 	if refSeq == refSeq:
 		dict_refSeq = make_refSeq_dict(refSeq)
 	for item in list_genBank:
-		d = {'dcid': '', 'name': '', 'genBankAccession': '', 'genomeSegmentOf': '', 'refSeqAccession': ''}
+		d = {'dcid': [], 'name': [], 'genBankAccession': [], 'genomeSegmentOf': [], 'refSeqAccession': []}
 		if ':' not in item:
 			continue
 		name, gb = item.split(':')
 		name = name.strip()
 		gb = gb.strip()
-		d['dcid'] = virus_dcid + gb
+		d['dcid'].append(virus_dcid + gb)
 		check_for_illegal_charc(virus_dcid + gb)
-		d['name'] = virus_name + ' Segment ' + name
-		d['genBankAccession'] = gb
-		d['genomeSegmentOf'] = isolate_dcid
+		d['name'].append(virus_name + ' Segment ' + name)
+		d['genBankAccession'].append(gb)
+		d['genomeSegmentOf'].append('dcid:' + isolate_dcid)
 		if name in dict_refSeq:
-			d['refSeqAccession'] = dict_refSeq[name]
-		df_segment = df_segment.append(d, ignore_index=True)
+			d['refSeqAccession'].append(dict_refSeq[name])
+		else:
+			d['refSeqAccession'].append('')
+		df_new_row = pd.DataFrame.from_dict(d, orient='columns')
+		df_segment = pd.concat([df_segment, df_new_row], ignore_index=True)
 	return df_segment
 
 
