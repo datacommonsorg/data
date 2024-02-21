@@ -9,8 +9,8 @@
             "Flood events inferred from areas marked with high probability of water outside the permanent water bodies.",
         "scripts": ["generate_flood_events.py"],
         "import_inputs": [{
-            "template_mcf": "COVID19_cases_indian_states.tmcf",
-            "cleaned_csv": "COVID19_cases_indian_states.csv"
+            "template_mcf": "",
+            "cleaned_csv": ""
         }],
         "cron_schedule":
             "0 5 * * *"

@@ -18,7 +18,6 @@ import datetime
 from datetime import date
 from datetime import datetime
 import glob
-import isodate
 import os
 import pickle
 import re
@@ -506,13 +505,17 @@ def date_parse_time_period(time_period: str) -> (int, str):
   where duration is a letter: D: days, M; months, Y: years.
   .
   """
-    duration = isodate.parse_duration(time_period)
-    if duration:
-        if duration.years > 0:
-            return (int(duration.years), 'years')
-        if duration.months > 0:
-            return (int(duration.months), 'months')
-        return (int(duration.days), 'days')
+    # Extract the number and duration letter from the time period.
+    re_pat = r'P?(?P<delta>[+-]?[0-9]+)(?P<unit>[A-Z])'
+    m = re.search(re_pat, time_period.upper())
+    if m:
+        m_dict = m.groupdict()
+        delta = int(m_dict.get('delta', '0'))
+        unit = m_dict.get('unit', 'M')
+        # Convert the duration letter to unit: days/months/years
+        period_dict = {'D': 'days', 'M': 'months', 'Y': 'years'}
+        period = period_dict.get(unit, 'day')
+        return (delta, period)
     return (0, 'days')
 
 
