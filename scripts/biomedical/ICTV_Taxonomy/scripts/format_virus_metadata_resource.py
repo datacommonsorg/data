@@ -75,8 +75,8 @@ DICT_HOST = {
 
 
 DICT_SOURCE = {
+	'freshwater': 'dcs:VirusSourceFreshwater',\
 	'invertebrates': 'dcs:VirusSourceInvertebrates',\
-	'freshwater': 'dcs:VirusSourceWater',\
 	'marine': 'dcs:VirusSourceMarine',\
 	'phytobiome': 'dcs:VirusSourcePhytobiome',\
 	'plants': 'dcs:VirusSourcePlants',\
