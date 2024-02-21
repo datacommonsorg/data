@@ -21,7 +21,7 @@ change made to corresponding enums. Dcids were formatted by converting the
 viral species name to pascalcase and adding the prefix 'bio/'. The viral
 taxonomy is encoded in enum format.
 @file_input: ICTV Master Speices List .xslx file
-@file_output: formatted .mcf files for viral taxonomy enum schema
+@file_output: formatted csv format of Virus nodes
 """
 
 
