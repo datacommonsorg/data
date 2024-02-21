@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,12 +13,14 @@
 # limitations under the License.
 """
 Author: Samantha Piekos
-Date: 03/22/2023
+Date: 02/21/2024
 Name: download
 Description: This file downloads the most recent version of the ICTV Master 
-Species List and Virus Metadata Resource and prepares it for processing
+Species List and Virus Metadata Resource and prepares it for processing.
 """
+
 #!/bin/bash
+
 
 # make input directory
 mkdir -p input; cd input
