@@ -16,8 +16,8 @@ Author: Samantha Piekos
 Date: 02/21/2024
 Name: create_virus_taxonomic_ranking_enums.py
 Description: Creates hierarchical viral taxonomy enum schema from the
-ICTV Master Species List.
-@file_input: ICTV Master Speices List .xslx file
+ICTV Virus Metadata Resource.
+@file_input: ICTV Virus Metadata Resource .xslx file
 @file_output: formatted .mcf files for viral taxonomy enum schema
 """
 
@@ -155,7 +155,7 @@ def write_dict_to_file(w, enum, d, dict_specialization):
 
 
 def generate_enums_mcf(f, w):
-	df = pd.read_excel(f, names=HEADER, header=None, sheet_name=1)
+	df = pd.read_excel(f, names=HEADER, header=None, sheet_name=0)
 	df = df.drop(LIST_DROP, axis=1).drop(0, axis=0)
 	dict_of_dicts, dict_specialization = add_item_to_enums(df)
 	w = open(w, mode='w')
