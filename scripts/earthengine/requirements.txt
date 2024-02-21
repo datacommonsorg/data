@@ -1,0 +1,17 @@
+# Requirements for Python code in this directory.
+dataclasses
+datacommons
+earthengine-api
+geojson
+geopandas
+googleapi
+google-cloud-logging
+lxml
+openpyxl
+rdp
+requests
+retry
+s2sphere
+shapely
+urllib3
+xlrd
