@@ -76,7 +76,9 @@ from latlng_recon_geojson import LatLng2Places
 from config_map import ConfigMap
 from dc_api_wrapper import dc_api_batched_wrapper
 
-# List of place types from biggest to smallest
+# List of place types in increasing order of preference for name.
+# This is used to pick the name of the place from the list of affectedPlaces
+# for an event for the place type with the highest index.
 _PLACE_TYPE_ORDER = [
     'Place',
     'OceanicBasin',
@@ -881,16 +883,9 @@ class GeoEventsProcessor:
             event property values, such as { 'area': 100 } aggregated
             by place and date
         '''
-        # Aggregation settings for event properties across places for a date.
-        property_config_per_date = {
-            'aggregate': 'sum',
-            'area': {
-                'aggregate': 'sum'
-            },
-            'EventId': {
-                'aggregate': 'set'
-            }
-        }
+        # default aggregation settings for event properties across places for a date.
+        property_config_per_date = dict(
+            _DEFAULT_CONFIG['property_config_per_date'])
         property_config_per_date.update(
             self._config.get('property_config_per_date', {}))
 
@@ -1914,7 +1909,22 @@ def _get_output_subdir_path(path: str, sub_dir: str) -> str:
     return os.path.join(sub_dir, basename)
 
 
-_DEFAULT_CONFIG = {}
+_DEFAULT_CONFIG = {
+    # Aggregation settings for properties across events for a date.
+    'property_config_per_date': {
+        'aggregate': 'sum',
+        'area': {
+            'aggregate': 'sum',
+            'unit': 'SquareKilometer',
+        },
+        'EventId': {
+            'aggregate': 'set'
+        },
+        'affectedPlace': {
+            'aggregate': 'list',
+        },
+    }
+}
 
 
 def get_default_config() -> dict:

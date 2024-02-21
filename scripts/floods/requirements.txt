@@ -6,6 +6,7 @@ geojson
 geopandas
 googleapi
 google-cloud-logging
+isodate
 lxml
 openpyxl
 rdp

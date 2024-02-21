@@ -18,6 +18,7 @@ import datetime
 from datetime import date
 from datetime import datetime
 import glob
+import isodate
 import os
 import pickle
 import re
@@ -42,6 +43,11 @@ sys.path.append(
 
 from config_map import ConfigMap, read_py_dict_from_file, write_py_dict_to_file
 from dc_api_wrapper import dc_api_wrapper
+
+# Constants
+_MAX_LATITUDE = 90.0
+_MAX_LONGITUDE = 180.0
+_DC_API_ROOT = 'http://autopush.api.datacommons.org'
 
 # Utilities for dicts.
 
@@ -254,11 +260,13 @@ def grid_id_from_lat_lng(
     # Get lat/lng rounded to the grid degrees
     degree_str = str_from_number(degrees)
     if prefix == 'ipcc_':
+        # Get the dcid prefix with the grid degree,
+        # such as ipcc_50 for 0.5 deg grids.
         degree_str = str_from_number(int(degrees * 100))
     lat_rounded = int(lat / degrees) * degrees + lat_offset
     lng_rounded = int(lng / degrees) * degrees + lng_offset
-    lat_str = str_from_number(lat_rounded, 2)
-    lng_str = str_from_number(lng_rounded, 2)
+    lat_str = str_from_number(number=lat_rounded, precision_digits=2)
+    lng_str = str_from_number(number=lng_rounded, precision_digits=2)
     return f'dcid:{prefix}{degree_str}/{lat_str}_{lng_str}{suffix}'
 
 
@@ -299,7 +307,8 @@ def grid_get_neighbor_ids(grid_id: str) -> list:
             if lat_offset != 0 or lng_offset != 0:
                 neighbour_lat = lat + lat_offset * deg
                 neighbour_lng = lng + lng_offset * deg
-                if abs(neighbour_lat) < 90.0 and abs(neighbour_lng) < 180:
+                if abs(neighbour_lat) < _MAX_LATITUDE and abs(
+                        neighbour_lng) < _MAX_LONGITUDE:
                     neighbours.append(
                         grid_id_from_lat_lng(
                             deg,
@@ -369,7 +378,7 @@ def place_id_to_lat_lng(placeid: str,
                     'prop': prop,
                 },
                 use_cache=True,
-                api_root='http://autopush.api.datacommons.org',
+                api_root=_DC_API_ROOT,
             )
             if not resp or placeid not in resp:
                 return (0, 0)
@@ -485,7 +494,7 @@ def date_today(date_format: str = '%Y-%m-%d') -> str:
 
 
 def date_yesterday(date_format: str = '%Y-%m-%d') -> str:
-    """Returns today's date in the given format."""
+    """Returns yesterday's date in the given format."""
     return date_advance_by_period(date_today(date_format), '-1d', date_format)
 
 
@@ -497,17 +506,13 @@ def date_parse_time_period(time_period: str) -> (int, str):
   where duration is a letter: D: days, M; months, Y: years.
   .
   """
-    # Extract the number and duration letter from the time period.
-    re_pat = r'P?(?P<delta>[+-]?[0-9]+)(?P<unit>[A-Z])'
-    m = re.search(re_pat, time_period.upper())
-    if m:
-        m_dict = m.groupdict()
-        delta = int(m_dict.get('delta', '0'))
-        unit = m_dict.get('unit', 'M')
-        # Convert the duration letter to unit: days/months/years
-        period_dict = {'D': 'days', 'M': 'months', 'Y': 'years'}
-        period = period_dict.get(unit, 'day')
-        return (delta, period)
+    duration = isodate.parse_duration(time_period)
+    if duration:
+        if duration.years > 0:
+            return (int(duration.years), 'years')
+        if duration.months > 0:
+            return (int(duration.months), 'months')
+        return (int(duration.days), 'days')
     return (0, 'days')
 
 

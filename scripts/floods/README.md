@@ -10,9 +10,9 @@ set](https://developers.google.com/earth-engine/datasets/catalog/UMD_hansen_glob
 
 The locations with non-permanent water over a period of a month are considered as flooded regions. The flooded pixels are aggregated into S2 cells of level 10 (roughly 10kmx10km). A flood event is generated combining neighbouring flooded S2 cells over successive months.
 
-The scripts outpput flooded events starting from Jan as well as the area and
-count of floods per S2 cell. These are aggregated to higher levels to generate
-flood counts and area for a country.
+The scripts output flooded events starting from Jan of the current year along
+with the area and count of floods per S2 cell.
+These are aggregated to higher levels to generate flood counts and area for a country.
 
 
 To generate new flooded events, run the script:
