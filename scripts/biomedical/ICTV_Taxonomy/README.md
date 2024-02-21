@@ -116,6 +116,7 @@ Classes, properties, and enumerations that were added in this import to represen
 #### Scripts 
 
 - [download.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/download.sh)
+- [run.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/runsh)
 - [create_virus_taxonomic_ranking_enums.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/create_virus_taxonomic_ranking_enums.py)
 - [format_virus_master_species_list.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/format_virus_master_species_list.py)
 - [format_virus_metadata_resource.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/format_virus_metadata_resource.py)
@@ -135,39 +136,9 @@ sh download.sh
 Generate the enummeration schema MCF, which represents virus taxonomic ranks by running:
 
 ```bash
-python3 scripts/create_virus_taxonomic_ranking_enums.py import_files/ICTV_Master_Species_List_2021_v3.xlsx ICTV_schema_taxonomic_ranking_enum.mcf
-```
-
-Clean and format Master Species List as a CSV that matches the corresponding tMCF by running:
-
-```bash
-python3 scripts/format_virus_master_species_list.py input/ICTV_Master_Species_List.xlsx VirusSpecies.csv
-```
-
-Clean and format Virus Metadata Resource as a CSV that matches the corresponding tMCF by running:
-
-```bash
-python3 scripts/format_virus_metadata_resource.py input/ICTV_Virus_Metadata_Resource.xlsx VirusIsolates.csv VirusGenomeSegments.csv > format_virus_metadata_resource.log
+sh run.sh
 ```
 
 ### Tests
-
-#### Dataset Specific Tests
-
-To test the import to evaluate whether the data is formatted as expected or if changes were made in the formatting in the most recent release run the following commands to evaluate each cleaned csv individually.
-
-VirusSpecies:
-```bash
-```
-
-VirusIsolates:
-```bash
-```
-
-VirusGenomeSegment:
-```bash
-```
-
-#### Data Commons Import Tests
 
 Please run all cleaned CSV + tMCF pairs through our lint test using our Data Commons import tool, which conducts general formatting tests.
