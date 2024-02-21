@@ -1,3 +1,30 @@
+# Copyright 2024 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+Author: Samantha Piekos
+Date: 02/21/2024
+Name: format_virus_master_species_list.py
+Description: Formats ICTV Master Species List into a csv format for import
+into Data Commons. This includes converting genome composition and last
+change made to corresponding enums. Dcids were formatted by converting the
+viral species name to pascalcase and adding the prefix 'bio/'. The viral
+taxonomy is encoded in enum format.
+@file_input: ICTV Master Speices List .xslx file
+@file_output: formatted .mcf files for viral taxonomy enum schema
+"""
+
+
 # load environment
 import pandas as pd
 import sys
@@ -131,7 +158,7 @@ def clean_df(df):
 
 
 def clean_file(f, w):
-	df = pd.read_excel(f, names=HEADER, header=None, sheet_name=2)
+	df = pd.read_excel(f, names=HEADER, header=None, sheet_name=1)
 	df = df.drop('sort', axis=1).drop(0, axis=0)
 	df = clean_df(df)
 	df.to_csv(w, index=False)
