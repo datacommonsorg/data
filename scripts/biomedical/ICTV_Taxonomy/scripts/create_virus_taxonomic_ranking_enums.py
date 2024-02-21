@@ -1,3 +1,26 @@
+# Copyright 2024 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+Author: Samantha Piekos
+Date: 02/21/2024
+Name: create_virus_taxonomic_ranking_enums.py
+Description: Creates hierarchical viral taxonomy enum schema from the
+ICTV Master Species List.
+@file_input: ICTV Master Speices List .xslx file
+@file_output: formatted .mcf files for viral taxonomy enum schema
+"""
+
 # load environment
 import pandas as pd
 import sys
@@ -132,7 +155,7 @@ def write_dict_to_file(w, enum, d, dict_specialization):
 
 
 def generate_enums_mcf(f, w):
-	df = pd.read_excel(f, names=HEADER, header=None, sheet_name=0)
+	df = pd.read_excel(f, names=HEADER, header=None, sheet_name=1)
 	df = df.drop(LIST_DROP, axis=1).drop(0, axis=0)
 	dict_of_dicts, dict_specialization = add_item_to_enums(df)
 	w = open(w, mode='w')
