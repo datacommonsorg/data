@@ -69,6 +69,8 @@ import utils
 
 from counters import Counters
 
+flags.DEFINE_string('ee_gcloud_project', 'datcom-import-automation-prod',
+                    'Gcloud project with Earth Engine API enabled.')
 flags.DEFINE_string('ee_dataset', '',
                     'Load earth engine data set define in config datasets.')
 flags.DEFINE_string('gcs_output', '', 'Prefix for output file names on GCS.')
@@ -169,6 +171,8 @@ _DEFAULT_DATASETS = {
 }
 
 EE_DEFAULT_CONFIG = {
+    # GCloud project
+    'ee_gcloud_project': _FLAGS.ee_gcloud_project,
     # Image loading settings.
     'datasets': _DEFAULT_DATASETS,  # Predefined assets
     'ee_dataset': _FLAGS.ee_dataset,  # Reference to an asset in 'datasets'
@@ -606,7 +610,7 @@ def ee_process(config) -> list:
     '''
     ee_tasks = []
     ee.Authenticate()
-    ee.Initialize()
+    ee.Initialize(project=config.get('ee_gcloud_project'))
     config['ee_image_count'] = config.get('ee_image_count', 1)
     time_period = config.get('time_period', 'P1M')
     cur_date = utils.date_format_by_time_period(utils.date_today(), time_period)
