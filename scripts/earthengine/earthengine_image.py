@@ -605,6 +605,7 @@ def ee_process(config) -> list:
       if config['ee_wait_task'] is True, else a list of tasks launched.
     '''
     ee_tasks = []
+    ee.Authenticate()
     ee.Initialize()
     config['ee_image_count'] = config.get('ee_image_count', 1)
     time_period = config.get('time_period', 'P1M')
