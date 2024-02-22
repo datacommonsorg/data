@@ -1,4 +1,5 @@
 # Requirements for Python code in this directory.
+bigquery
 dataclasses
 datacommons
 earthengine-api
