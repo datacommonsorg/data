@@ -53,9 +53,6 @@ def execute_imports():
     if 'COMMIT_SHA' not in task_info:
         return {'error': 'COMMIT_SHA not found'}
     commit_sha = task_info['COMMIT_SHA']
-    repo_name = task_info.get('REPO_NAME')
-    branch_name = task_info.get('BRANCH_NAME')
-    pr_number = task_info.get('PR_NUMBER')
 
     task_configs = task_info.get('configs', {})
     config = configs.ExecutorConfig(**task_configs)

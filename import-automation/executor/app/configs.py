@@ -73,6 +73,12 @@ class ExecutorConfig:
     # Types of inputs accepted by the Data Commons importer. These are
     # also the accepted fields of an import_inputs value in the manifest.
     import_input_types: List[str] = ('template_mcf', 'cleaned_csv', 'node_mcf')
+    # DEPRECATED
+    # Oauth Client ID used to authenticate with the import progress dashboard.
+    # which is protected by Identity-Aware Proxy. This can be found by going
+    # to the Identity-Aware Proxy of the Google Cloud project that hosts
+    # the dashboard and clicking 'Edit OAuth Client'.
+    dashboard_oauth_client_id: str = ''
     # Oauth Client ID used to authenticate with the proxy.
     importer_oauth_client_id: str = ''
     # Access token of the account used to authenticate with GitHub. This is not
@@ -127,9 +133,10 @@ class ExecutorConfig:
         fields = set([
             'github_repo_name', 'github_repo_owner_username',
             'github_auth_username', 'github_auth_access_token',
-            'importer_oauth_client_id', 'email_account', 'email_token',
-            'gcs_project_id', 'storage_prod_bucket_name', 'user_script_args',
-            'user_script_env', 'user_script_timeout'
+            'dashboard_oauth_client_id', 'importer_oauth_client_id',
+            'email_account', 'email_token', 'gcs_project_id',
+            'storage_prod_bucket_name', 'user_script_args', 'user_script_env',
+            'user_script_timeout'
         ])
         return {
             k: v for k, v in dataclasses.asdict(self).items() if k in fields
