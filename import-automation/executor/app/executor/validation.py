@@ -196,8 +196,10 @@ def _is_import_spec_valid(import_spec, repo_dir, import_dir):
                          f'import specification ({import_spec})')
 
     absolute_script_paths = [
-        os.path.join(repo_dir, import_dir, path)
+        os.path.join(repo_dir, import_dir,
+                     path.split(' ')[0])
         for path in import_spec.get('scripts', [])
+        if path
     ]
     missing_paths = _filter_missing_paths(absolute_script_paths)
     if missing_paths:
