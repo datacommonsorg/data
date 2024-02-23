@@ -27,4 +27,4 @@ RUN pip install -r /workspace/requirements.txt
 
 COPY app/. /workspace/app/
 
-CMD gunicorn --timeout 1800 --workers 5 -b :$PORT app.main:FLASK_APP
+CMD gunicorn --timeout 0 --workers 5 -b :$PORT app.main:FLASK_APP
