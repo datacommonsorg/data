@@ -274,7 +274,6 @@ class ImportExecutor:
         import_name = import_spec['import_name']
         absolute_import_name = import_target.get_absolute_import_name(
             relative_import_dir, import_name)
-        curator_emails = import_spec['curator_emails']
         time_start = time.time()
         try:
             self._import_one_helper(
@@ -291,7 +290,7 @@ class ImportExecutor:
                     subject=
                     f'Import Automation Success - {import_name}',
                     body=msg,
-                    receiver_addresses=curator_emails + [_SUCCESS_EMAIL_ADDR],
+                    receiver_addresses=[_SUCCESS_EMAIL_ADDR],
                 )
 
         except Exception as exc:
@@ -304,7 +303,7 @@ class ImportExecutor:
                     subject=
                     f'Import Automation Failure - {import_name}',
                     body=msg,
-                    receiver_addresses=curator_emails + [_FAILURE_EMAIL_ADDR],
+                    receiver_addresses=[_FAILURE_EMAIL_ADDR],
                 )
             raise exc
 
