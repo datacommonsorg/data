@@ -51,6 +51,7 @@ import time
 # Workaround for collection.Callable needed for ee.Initialize()
 import collections
 import collections.abc
+
 collections.Callable = collections.abc.Callable
 
 from absl import app
