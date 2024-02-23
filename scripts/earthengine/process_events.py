@@ -58,7 +58,7 @@ flags.DEFINE_integer('pprof_port', 8081, 'HTTP port for pprof server.')
 
 _FLAGS = flags.FLAGS
 
-_SCRIPTS_DIR = os.path.dirname(__file__)
+_SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))

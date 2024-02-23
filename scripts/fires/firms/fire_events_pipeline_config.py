@@ -28,10 +28,8 @@
 
             # API key for NASA FIRMS data download
             # Get a MAPS_KEY from https://firms.modaps.eosdis.nasa.gov/api/area/
-            #'nasa_firms_api_key':
-            #    '<REPLACE_WITH_YOUR_KEY>',
             'nasa_firms_api_key':
-                '712d4ebd9b976c57efddedad99e72cd3',
+                '<REPLACE_WITH_YOUR_KEY>',
             'nasa_data_source': "VIIRS_SNPP_NRT",  # upto last 60 days
             #'nasa_data_source':
             #    "VIIRS_SNPP_SP",  # older than 60 days

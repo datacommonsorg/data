@@ -63,7 +63,7 @@ from datetime import timedelta
 from dateutil.relativedelta import relativedelta
 from google.auth import compute_engine
 
-_SCRIPTS_DIR = os.path.dirname(__file__)
+_SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
