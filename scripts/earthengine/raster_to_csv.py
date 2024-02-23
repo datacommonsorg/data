@@ -66,7 +66,7 @@ import numpy as np
 import rasterio
 import s2sphere
 
-_SCRIPTS_DIR = os.path.dirname(__file__)
+_SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))

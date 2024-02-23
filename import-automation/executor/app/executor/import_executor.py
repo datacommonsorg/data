@@ -664,12 +664,12 @@ def _run_with_timeout_async(args: List[str],
         )
 
         # Log output continuously until the command completes.
-        for line in process.stdout:
-            stdout.append(line)
-            logging.info(f'Process stdout: {line}')
         for line in process.stderr:
             stderr.append(line)
             logging.info(f'Process stderr: {line}')
+        for line in process.stdout:
+            stdout.append(line)
+            logging.info(f'Process stdout: {line}')
 
         end_time = time.time()
 
