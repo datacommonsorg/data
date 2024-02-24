@@ -1,0 +1,12 @@
+Node: E:simple_opaque_processed->E0
+typeOf: schema:Place
+dcid: C:simple_opaque_processed->GEO_ID
+name: C:simple_opaque_processed->NAME
+
+Node: E:simple_opaque_processed->E1
+typeOf: schema:StatVarObservation
+name: Number of establishments
+value: C:simple_opaque_processed->ESTAB
+variableMeasured: C:simple_opaque_processed->new_col_0
+observationAbout: E:simple_opaque_processed->E0
+observationDate: C:simple_opaque_processed->YEAR

@@ -16,7 +16,7 @@ Run "python3 parse_abcd_test.py"
 """
 
 import unittest
-import parse_abcd
+from .parse_abcd import get_schema_piece
 
 CONST_INPUT = '''AAC  ABCD_AA001
 AID  anti-ANAPC2-RAB-C75
@@ -87,7 +87,7 @@ class TestParseAbcd(unittest.TestCase):
         pieces = CONST_INPUT.split('\n\n')
         schema_list = []
         for piece in pieces:
-            schema = parse_abcd.get_schema_piece(piece, uniprot_to_dcid)
+            schema = get_schema_piece(piece, uniprot_to_dcid)
             if not schema:
                 continue
             schema_list.append(schema)

@@ -1,0 +1,619 @@
+name,dcid
+"Abha, SA",wikidataId/Q190948
+"Abidjan, CI",wikidataId/Q19830972
+"Abu Dhabi, AE",wikidataId/Q1519
+"Accra, GH",wikidataId/Q3761
+"Adana, TR",wikidataId/Q38545
+"Adapazarı, TR",wikidataId/Q175323
+"Addis Ababa, ET",wikidataId/Q3624
+"Adelaide, AU",wikidataId/Q5112
+"Aguascalientes, MX",wikidataId/Q200805
+"Akita, JP",wikidataId/Q17139
+"Albuquerque, US",geoId/3502000
+"Algiers, DZ",wikidataId/Q3561
+"Almaty, KZ",wikidataId/Q35493
+"Alor Setar, MY",wikidataId/Q474868
+"Amiens, FR",wikidataId/Q41604
+"Amman, JO",wikidataId/Q3805
+"Amsterdam, NL",wikidataId/Q727
+"Andong, KR",wikidataId/Q42116
+"Ankara, TR",wikidataId/Q3640
+"Antakya, TR",wikidataId/Q80561
+"Antwerpen, BE",wikidataId/Q12892
+"Anyang, CN",wikidataId/Q324293
+"Arad, RO",wikidataId/Q173591
+"Arāk, IR",wikidataId/Q212628
+"Ashdod, IL",wikidataId/Q171639
+"Ashgabat, TM",wikidataId/Q23438
+"Ashkelon, IL",wikidataId/Q60956
+"Athens, GR",wikidataId/Q1524
+"Atlanta, US",geoId/1304000
+"Auckland, NZ",wikidataId/Q37100
+"Augsburg, DE",nuts/DE271
+"Austin, US",geoId/4805000
+"Bacău, RO",wikidataId/Q10737004
+"Baghdad, IQ",wikidataId/Q1530
+"Baguio, PH",wikidataId/Q1822
+"Baia Mare, RO",wikidataId/Q185280
+"Baltimore, US",geoId/2404000
+"Balıkesir, TR",wikidataId/Q199723
+"Bamako, ML",wikidataId/Q3703
+"Bandar Abbas, IR",wikidataId/Q154814
+"Bangkok, TH",wikidataId/Q1861
+"Barcelona, ES",wikidataId/Q1492
+"Beijing, CN",wikidataId/Q956
+"Belfast, GB",wikidataId/Q10686
+"Belgrade, RS",wikidataId/Q3711
+"Bengaluru, IN",wikidataId/Q1355
+"Bergen, NO",wikidataId/Q26793
+"Berlin, DE",nuts/DE3
+"Besançon, FR",wikidataId/Q37776
+"Bhopal, IN",wikidataId/Q80989
+"Bilbao, ES",wikidataId/Q8692
+"Biratnagar, NP",wikidataId/Q8247
+"Birmingham, GB",nuts/UKG31
+"Bishkek, KG",wikidataId/Q9361
+"Bloemfontein, ZA",wikidataId/Q37701
+"Bogotá, CO",wikidataId/Q2841
+"Boise, US",geoId/1608830
+"Bologna, IT",wikidataId/Q1891
+"Bordeaux, FR",wikidataId/Q1479
+"Boston, US",geoId/2507000
+"Bratislava, SK",wikidataId/Q1780
+"Braşov, RO",wikidataId/Q82174
+"Breda, NL",wikidataId/Q40844
+"Brescia, IT",wikidataId/Q6221
+"Brisbane, AU",wikidataId/Q34932
+"Bristol, GB",nuts/UKK11
+"Brno, CZ",wikidataId/Q14960
+"Brooklyn, US",geoId/3604710022
+"Brussels, BE",wikidataId/Q239
+"Brăila, RO",wikidataId/Q188478
+"Bucharest, RO",nuts/RO321
+"Budapest, HU",nuts/HU101
+"Buenos Aires, AR",wikidataId/Q1486
+"Buraydah, SA",wikidataId/Q259253
+"Burgas, BG",wikidataId/Q6509
+"Burgos, ES",wikidataId/Q9580
+"Bursa, TR",wikidataId/Q40738
+"Busan, KR",wikidataId/Q16520
+"Butuan, PH",wikidataId/Q1686
+"Bydgoszcz, PL",wikidataId/Q41252
+"Caen, FR",wikidataId/Q41185
+"Calama, CL",wikidataId/Q3685
+"Calgary, CA",wikidataId/Q36312
+"Canberra, AU",wikidataId/Q3114
+"Cape Town, ZA",wikidataId/Q5465
+"Cardiff, GB",wikidataId/Q24342199
+"Castelló de la Plana, ES",wikidataId/Q15092
+"Chandigarh, IN",wikidataId/Q43433
+"Changchun, CN",wikidataId/Q92161
+"Changsha, CN",wikidataId/Q174091
+"Changwon, KR",wikidataId/Q243327
+"Changzhou, CN",wikidataId/Q57970
+"Charleroi, BE",wikidataId/Q81046
+"Charlotte, US",geoId/3712000
+"Chelyabinsk, RU",wikidataId/Q906
+"Chengdu, CN",wikidataId/Q30002
+"Chennai, IN",wikidataId/Q1352
+"Cheongju-si, KR",wikidataId/Q42147
+"Chiang Mai, TH",wikidataId/Q52028
+"Chiba, JP",wikidataId/Q170616
+"Chicago, US",geoId/1714000
+"Chihuahua, MX",wikidataId/Q61302
+"Chillán, CL",wikidataId/Q3774
+"Chon Buri, TH",wikidataId/Q207068
+"Chongqing, CN",wikidataId/Q11725
+"Christchurch, NZ",wikidataId/Q79990
+"Chuncheon, KR",wikidataId/Q42148
+"Clermont-Ferrand, FR",wikidataId/Q42168
+"Cluj-Napoca, RO",wikidataId/Q100188
+"Cochabamba, BO",wikidataId/Q183124
+"Colombo, LK",wikidataId/Q35381
+"Columbus, US",geoId/3918000
+"Columbia, US",geoId/4516000
+"Conakry, GN",wikidataId/Q3733
+"Concepción, CL",wikidataId/Q1880
+"Constanţa, RO",wikidataId/Q79808
+"Copenhagen, DK",wikidataId/Q1748
+"Coventry, GB",wikidataId/Q20986417
+"Craiova, RO",wikidataId/Q168057
+"Cuernavaca, MX",wikidataId/Q204245
+"Córdoba, ES",wikidataId/Q5818
+"Daegu, KR",wikidataId/Q20927
+"Daejeon, KR",wikidataId/Q20921
+"Dallas, US",geoId/4819000
+"Dammam, SA",wikidataId/Q160320
+"Darmstadt, DE",nuts/DE711
+"Darwin, AU",wikidataId/Q11568
+"Debrecen, HU",wikidataId/Q79880
+"Delhi, IN",wikidataId/Q1353
+"Denizli, TR",wikidataId/Q170967
+"Denver, US",geoId/0820000
+"Detroit, US",geoId/2622000
+"Dhaka, BD",wikidataId/Q1354
+"Dijon, FR",wikidataId/Q7003
+"Dnipro, UA",wikidataId/Q48256
+"Dongguan, CN",wikidataId/Q59218
+"Donostia / San Sebastián, ES",geoId/7277500
+"Dordrecht, NL",wikidataId/Q26421
+"Douliu, TW",wikidataId/Q669566
+"Dresden, DE",nuts/DED21
+"Dubai, AE",wikidataId/Q612
+"Dublin, IE",wikidataId/Q1761
+"Dunedin, NZ",wikidataId/Q133073
+"Durban, ZA",wikidataId/Q5468
+"Dushanbe, TJ",wikidataId/Q9365
+"Düsseldorf, DE",nuts/DEA11
+"East London, ZA",wikidataId/Q209537
+"Ecatepec de Morelos, MX",wikidataId/Q15121208
+"Edinburgh, GB",nuts/UKM25
+"Edmonton, CA",wikidataId/Q2096
+"Eindhoven, NL",wikidataId/Q9832
+"El Paso, US",geoId/4824000
+"Erzurum, TR",wikidataId/Q122803
+"Eskişehir, TR",wikidataId/Q168866
+"Florence, IT",nuts/ITE14
+"Fort Worth, US",geoId/4827000
+"Foshan, CN",wikidataId/Q34412
+"Freiburg, DE",nuts/DE131
+"Fresno, US",geoId/0627000
+"Fukuoka, JP",wikidataId/Q26600
+"Funchal, PT",wikidataId/Q25444
+"Fushun, CN",wikidataId/Q75026
+"Fuzhou, CN",wikidataId/Q68481
+"Galaţi, RO",wikidataId/Q170996
+"Gandhinagar, IN",wikidataId/Q11910
+"Gasteiz / Vitoria, ES",wikidataId/Q14318
+"Gdańsk, PL",wikidataId/Q1792
+"Gent, BE",wikidataId/Q1296
+"George Town, MY",wikidataId/Q61092
+"Ghāziābād, IN",wikidataId/Q207098
+"Gifu-shi, JP",wikidataId/Q45798
+"Glasgow, GB",nuts/UKM34
+"Granada, ES",wikidataId/Q8810
+"Graz, AT",wikidataId/Q13298
+"Grenoble, FR",wikidataId/Q1289
+"Groningen, NL",wikidataId/Q749
+"Guadalajara, MX",wikidataId/Q9022
+"Guangzhou, CN",wikidataId/Q16572
+"Guatemala City, GT",wikidataId/Q1555
+"Guiyang, CN",wikidataId/Q192271
+"Gwangju, KR",wikidataId/Q41283
+"Győr, HU",wikidataId/Q134494
+"Göteborg, SE",wikidataId/Q25287
+"Ha'il, SA",wikidataId/Q675568
+"Haarlem, NL",nuts/NL324
+"Haifa, IL",wikidataId/Q41621
+"Haikou, CN",wikidataId/Q189823
+"Haiphong, VN",wikidataId/Q72818
+"Halifax, CA",wikidataId/Q2141
+"Hamburg, DE",nuts/DE6
+"Hamilton, CA",wikidataId/Q133116
+"Hamilton, NZ",wikidataId/Q200028
+"Hangzhou, CN",wikidataId/Q4970
+"Hannover, DE",nuts/DE921
+"Hanoi, VN",wikidataId/Q1858
+"Harbin, CN",wikidataId/Q42956
+"Hartford, US",geoId/0937000
+"Hefei, CN",wikidataId/Q185684
+"Hegang, CN",wikidataId/Q349982
+"Helsinki, FI",wikidataId/Q1757
+"Hiroshima, JP",wikidataId/Q34664
+"Ho Chi Minh City, VN",wikidataId/Q1854
+"Hobart, AU",wikidataId/Q40191
+"Hohhot, CN",wikidataId/Q535534
+"Hong Kong, HK",country/HKG
+"Honolulu, US",geoId/1571550
+"Houston, US",geoId/4835000
+"Hsinchu, TW",wikidataId/Q249994
+"Huelva, ES",wikidataId/Q12246
+"Huế, VN",wikidataId/Q36167
+"Hyderabad, IN",wikidataId/Q1361
+"Hāpur, IN",wikidataId/Q11139912
+"Hạ Long, VN",wikidataId/Q36077
+"Iaşi, RO",wikidataId/Q46852
+"Incheon, KR",wikidataId/Q20934
+"Indianapolis, US",geoId/1836003
+"Innsbruck, AT",nuts/AT332
+"Ipoh, MY",wikidataId/Q271619
+"Irbid, JO",wikidataId/Q194165
+"Isfahan, IR",wikidataId/Q42053
+"Islamabad, PK",wikidataId/Q1362
+"Istanbul, TR",wikidataId/Q406
+"Ivano-Frankivsk, UA",wikidataId/Q156726
+"Jackson, US",geoId/2836000
+"Jacksonville, US",geoId/1235000
+"Jaipur, IN",wikidataId/Q66485
+"Jakarta, ID",wikidataId/Q3630
+"Jeddah, SA",wikidataId/Q374365
+"Jeju City, KR",wikidataId/Q42142
+"Jeonju, KR",wikidataId/Q42140
+"Jerusalem, IL",wikidataId/Q1218
+"Jieyang, CN",wikidataId/Q26323
+"Jinan, CN",wikidataId/Q170247
+"Johannesburg, ZA",wikidataId/Q34647
+"Johor Bahru, MY",wikidataId/Q231318
+"Kabul, AF",wikidataId/Q5838
+"Kagoshima, JP",wikidataId/Q15674
+"Kamianske, UA",wikidataId/Q156719
+"Kampala, UG",wikidataId/Q3894
+"Kanazawa, JP",wikidataId/Q191130
+"Kaohsiung, TW",wikidataId/Q181557
+"Karachi, PK",wikidataId/Q8660
+"Karaj, IR",wikidataId/Q36529
+"Karlsruhe, DE",nuts/DE122
+"Kassel, DE",nuts/DE731
+"Kathmandu, NP",wikidataId/Q3037
+"Katowice, PL",wikidataId/Q588
+"Kaunas, LT",wikidataId/Q4115712
+"Kayseri, TR",wikidataId/Q48338
+"Kecskemét, HU",wikidataId/Q171357
+"Keelung, TW",wikidataId/Q249996
+"Kerman, IR",wikidataId/Q171714
+"Kermanshah, IR",wikidataId/Q180078
+"Khorramabad, IR",wikidataId/Q502212
+"Khorramshahr, IR",wikidataId/Q458396
+"Kielce, PL",wikidataId/Q102317
+"Kitchener, CA",wikidataId/Q200166
+"Klang, MY",wikidataId/Q856003
+"Klerksdorp, ZA",wikidataId/Q1015647
+"Kobe, JP",wikidataId/Q48320
+"Kochi, JP",wikidataId/Q200251
+"Kolkata, IN",wikidataId/Q1348
+"Konya, TR",wikidataId/Q79857
+"Kota Bharu, MY",wikidataId/Q651131
+"Košice, SK",wikidataId/Q25409
+"Kraków, PL",nuts/PL213
+"Krasnoyarsk, RU",wikidataId/Q919
+"Kryvyi Rih, UA",wikidataId/Q157137
+"Kuala Lumpur, MY",wikidataId/Q1865
+"Kuantan, MY",wikidataId/Q817578
+"Kuching, MY",wikidataId/Q220445
+"Kumamoto, JP",wikidataId/Q199889
+"Kunming, CN",wikidataId/Q182852
+"Kyiv, UA",wikidataId/Q1899
+"Kyoto, JP",wikidataId/Q34600
+"Köln, DE",nuts/DEA23
+"Kütahya, TR",wikidataId/Q188894
+"Lahore, PK",wikidataId/Q11739
+"Lampang, TH",wikidataId/Q1012610
+"Lanzhou, CN",wikidataId/Q183584
+"Las Palmas de Gran Canaria, ES",wikidataId/Q11974
+"Las Vegas, US",geoId/3240000
+"Launceston, AU",wikidataId/Q339527
+"Leeds, GB",nuts/UKE42
+"Leicester, GB",nuts/UKF21
+"Lhasa, CN",wikidataId/Q1026100
+"Lille, FR",wikidataId/Q648
+"Lima, PE",wikidataId/Q579240
+"Limassol, CY",wikidataId/Q185632
+"Limoges, FR",wikidataId/Q45656
+"Linz, AT",wikidataId/Q41329
+"Lisbon, PT",wikidataId/Q597
+"Little Rock, US",geoId/0541000
+"Liverpool, GB",nuts/UKD72
+"Livorno, IT",wikidataId/Q6761
+"Liège, BE",wikidataId/Q3992
+"London, CA",wikidataId/Q92561
+"London, GB",nuts/UKI
+"Los Angeles, US",geoId/0644000
+"Los Ángeles, CL",wikidataId/Q16910
+"Lucknow, IN",wikidataId/Q47916
+"Luton, GB",nuts/UKH21
+"Lviv, UA",wikidataId/Q36036
+"Lyon, FR",wikidataId/Q456
+"Maastricht, NL",wikidataId/Q1309
+"Macau, MO",country/MAC
+"Madison, US",geoId/5548000
+"Madrid, ES",wikidataId/Q2807
+"Mainz, DE",nuts/DEB35
+"Malacca, MY",wikidataId/Q61089
+"Malmö, SE",wikidataId/Q2211
+"Manama, BH",wikidataId/Q3882
+"Manchester, GB",nuts/UKD33
+"Manhattan, US",geoId/3606144919
+"Manila, PH",wikidataId/Q1461
+"Marseille, FR",wikidataId/Q23482
+"Mashhad, IR",wikidataId/Q121157
+"Matsuyama, JP",wikidataId/Q200022
+"Mecca, SA",wikidataId/Q5806
+"Medellín, CO",wikidataId/Q48278
+"Melbourne, AU",wikidataId/Q3141
+"Memphis, US",geoId/4748000
+"Metz, FR",wikidataId/Q22690
+"Mexico City, MX",wikidataId/Q1489
+"Miami, US",geoId/1245000
+"Middelburg, ZA",wikidataId/Q1931836
+"Milan, IT",wikidataId/Q490
+"Milwaukee, US",geoId/5553000
+"Miri, MY",wikidataId/Q986803
+"Miskolc, HU",wikidataId/Q102397
+"Mississauga, CA",wikidataId/Q50816
+"Miyazaki, JP",wikidataId/Q204308
+"Modena, IT",wikidataId/Q279
+"Mokpo, KR",wikidataId/Q42094
+"Monterrey, MX",wikidataId/Q81033
+"Montpellier, FR",wikidataId/Q6441
+"Montréal, CA",wikidataId/Q340
+"Morelia, MX",wikidataId/Q200252
+"Moscow, RU",wikidataId/Q649
+"Mumbai, IN",wikidataId/Q1156
+"Munich, DE",nuts/DE212
+"Murcia, ES",wikidataId/Q12225
+"Muzaffarnagar, IN",wikidataId/Q2768828
+"Mysore, IN",wikidataId/Q10086
+"Málaga, ES",wikidataId/Q8851
+"Mérida, MX",wikidataId/Q165204
+"Münster, DE",nuts/DEA33
+"Nagano, JP",wikidataId/Q128849
+"Nagasaki, JP",wikidataId/Q38234
+"Nagoya, JP",wikidataId/Q11751
+"Nagpur, IN",wikidataId/Q1513
+"Naha, JP",wikidataId/Q181966
+"Nakhon Pathom, TH",wikidataId/Q520338
+"Namur, BE",wikidataId/Q134121
+"Nanchang, CN",wikidataId/Q171943
+"Nancy, FR",wikidataId/Q40898
+"Nanjing, CN",wikidataId/Q16666
+"Nanning, CN",wikidataId/Q179608
+"Nantes, FR",wikidataId/Q12191
+"Naples, IT",wikidataId/Q2634
+"Nara-shi, JP",wikidataId/Q169134
+"Nashik, IN",wikidataId/Q200235
+"Nashville, US",geoId/4752006
+"Netanya, IL",wikidataId/Q192225
+"New Delhi, IN",wikidataId/Q987
+"Newcastle, AU",wikidataId/Q57278
+"Newport, GB",wikidataId/Q11294004
+"Nice, FR",wikidataId/Q33959
+"Nicosia, CY",wikidataId/Q59147
+"Niigata, JP",wikidataId/Q179691
+"Nijmegen, NL",wikidataId/Q47887
+"Ningbo, CN",wikidataId/Q42780
+"Nizhniy Novgorod, RU",wikidataId/Q891
+"Niš, RS",wikidataId/Q129259
+"Norwich, GB",wikidataId/Q130191
+"Novi Sad, RS",wikidataId/Q55630
+"Novosibirsk, RU",wikidataId/Q883
+"Nur-Sultan, KZ",wikidataId/Q1520
+"Nîmes, FR",wikidataId/Q42807
+"Oakland, US",geoId/0653000
+"Oaxaca, MX",wikidataId/Q131429
+"Odessa, UA",wikidataId/Q1874
+"Okayama, JP",wikidataId/Q200078
+"Oklahoma City, US",geoId/4055000
+"Olomouc, CZ",wikidataId/Q81137
+"Omaha, US",geoId/3137000
+"Oradea, RO",wikidataId/Q93358
+"Orléans, FR",wikidataId/Q6548
+"Orūmīyeh, IR",wikidataId/Q179665
+"Osaka, JP",wikidataId/Q35765
+"Oslo, NO",wikidataId/Q5245991
+"Osorno, CL",wikidataId/Q51059
+"Ostrava, CZ",wikidataId/Q8385
+"Ottawa, CA",wikidataId/Q1930
+"Oulu, FI",wikidataId/Q47048
+"Oviedo, ES",wikidataId/Q14317
+"Pachuca de Soto, MX",wikidataId/Q160750
+"Palma, ES",wikidataId/Q8826
+"Pamplona, ES",wikidataId/Q10282
+"Paris, FR",nuts/FR101
+"Parma, IT",wikidataId/Q2683
+"Patna, IN",wikidataId/Q80484
+"Perpignan, FR",wikidataId/Q6730
+"Perth, AU",wikidataId/Q3183
+"Peshawar, PK",wikidataId/Q1113311
+"Petaẖ Tiqwa, IL",wikidataId/Q190828
+"Philadelphia, US",geoId/4260000
+"Phoenix, US",geoId/0455000
+"Pilsen, CZ",wikidataId/Q43453
+"Piteşti, RO",wikidataId/Q187938
+"Ploieşti, RO",wikidataId/Q179585
+"Plovdiv, BG",wikidataId/Q459
+"Plymouth, GB",wikidataId/Q21674890
+"Pohang, KR",wikidataId/Q42157
+"Pokhara, NP",wikidataId/Q6640
+"Port Elizabeth, ZA",wikidataId/Q125434
+"Portland, US",geoId/4159000
+"Potsdam, DE",nuts/DE404
+"Poznań, PL",wikidataId/Q268
+"Prague, CZ",nuts/CZ01
+"Prato, IT",wikidataId/Q13377
+"Preston, GB",wikidataId/Q184090
+"Pretoria, ZA",wikidataId/Q133083
+"Pristina, XK",wikidataId/Q25270
+"Providence, US",geoId/4459000
+"Puebla, MX",wikidataId/Q125293
+"Puerto Montt, CL",wikidataId/Q36214
+"Pécs, HU",wikidataId/Q45779
+"Płock, PL",wikidataId/Q104725
+"Qingdao, CN",wikidataId/Q170322
+"Qinhuangdao, CN",wikidataId/Q58560
+"Qiqihar, CN",wikidataId/Q205922
+"Qom, IR",wikidataId/Q170573
+"Queens, US",geoId/3608160323
+"Quilpué, CL",wikidataId/Q56110
+"Quito, EC",wikidataId/Q2900
+"Québec, CA",wikidataId/Q176
+"Raleigh, US",geoId/3755000
+"Rancagua, CL",wikidataId/Q4582
+"Rayong, TH",wikidataId/Q1015123
+"Reading, GB",wikidataId/Q161491
+"Rennes, FR",wikidataId/Q647
+"Reykjavík, IS",wikidataId/Q1764
+"Richards Bay, ZA",wikidataId/Q1471757
+"Richmond, US",geoId/5167000
+"Rijeka, HR",wikidataId/Q1647
+"Riyadh, SA",wikidataId/Q3692
+"Rome, IT",wikidataId/Q220
+"Rotterdam, NL",wikidataId/Q34370
+"Rouen, FR",wikidataId/Q30974
+"Rybnik, PL",wikidataId/Q107094
+"Râmnicu Vâlcea, RO",wikidataId/Q192758
+"Sacramento, US",geoId/0664000
+"Saint Paul, US",geoId/2758000
+"Saint Petersburg, RU",wikidataId/Q656
+"Saint-Denis, RE",wikidataId/Q47045
+"Saint-Étienne, FR",wikidataId/Q42716
+"Saitama, JP",wikidataId/Q134635
+"Salamanca, ES",wikidataId/Q15695
+"Salem, US",geoId/2559105
+"Salt Lake City, US",geoId/4967000
+"Salzburg, AT",wikidataId/Q34713
+"Samsun, TR",wikidataId/Q160450
+"Samut Prakan, TH",wikidataId/Q13139252
+"San Antonio, US",geoId/4865000
+"San Diego, US",geoId/0666000
+"San Francisco, US",geoId/0667000
+"San Jose, US",geoId/0668000
+"San José, CR",wikidataId/Q3070
+"San Juan, PR",geoId/7276770
+"San Luis Potosí, MX",wikidataId/Q204271
+"San Salvador, SV",wikidataId/Q3110
+"Sanandaj, IR",wikidataId/Q272093
+"Santa Cruz de Tenerife, ES",wikidataId/Q14328
+"Santander, ES",wikidataId/Q12233
+"Santiago, CL",wikidataId/Q2887
+"Sapporo, JP",wikidataId/Q37951
+"Sarajevo, BA",wikidataId/Q11194
+"Seattle, US",geoId/5363000
+"Sejong, KR",wikidataId/Q20929
+"Sendai, JP",wikidataId/Q46747
+"Seongnam-si, KR",wikidataId/Q42108
+"Seoul, KR",wikidataId/Q8684
+"Seremban, MY",wikidataId/Q847610
+"Sevilla, ES",wikidataId/Q8717
+"Shanghai, CN",wikidataId/Q8686
+"Shantou, CN",wikidataId/Q59100
+"Sheffield, GB",nuts/UKE32
+"Shenyang, CN",wikidataId/Q11720
+"Shenzhen, CN",wikidataId/Q15174
+"Shijiazhuang, CN",wikidataId/Q58401
+"Shillong, IN",wikidataId/Q207752
+"Shiraz, IR",wikidataId/Q6397066
+"Shiyan, CN",wikidataId/Q71227
+"Shizuoka, JP",wikidataId/Q174691
+"Sibiu, RO",wikidataId/Q83324
+"Singapore, SG",country/SGP
+"Sivas, TR",wikidataId/Q107401
+"Skopje, MK",wikidataId/Q384
+"Sofia, BG",nuts/SOF46
+"Southend-on-Sea, GB",nuts/UKH31
+"Split, HR",wikidataId/Q1663
+"Springfield, US",geoId/2567000
+"Staten Island, US",geoId/3608570915
+"Stavanger, NO",wikidataId/Q25416
+"Stockholm, SE",wikidataId/Q1754
+"Strasbourg, FR",wikidataId/Q6602
+"Stuttgart, DE",nuts/DE111
+"Suncheon, KR",wikidataId/Q42112
+"Surrey, CA",wikidataId/Q390583
+"Suwon, KR",wikidataId/Q20714
+"Suzhou, CN",wikidataId/Q42622
+"Swansea, GB",nuts/UKL18
+"Sydney, AU",wikidataId/Q3130
+"Szczecin, PL",wikidataId/Q393
+"Szeged, HU",wikidataId/Q81581
+"São José dos Campos, BR",wikidataId/Q191642
+"São Paulo, BR",wikidataId/Q174
+"Tabriz, IR",wikidataId/Q80053
+"Taichung, TW",wikidataId/Q245023
+"Tainan, TW",wikidataId/Q140631
+"Taipei, TW",wikidataId/Q1867
+"Taiping, MY",wikidataId/Q1011190
+"Taitung City, TW",wikidataId/Q713381
+"Taiyuan, CN",wikidataId/Q72778
+"Takamatsu, JP",wikidataId/Q200707
+"Talca, CL",wikidataId/Q4469
+"Tallahassee, US",geoId/1270600
+"Tallinn, EE",wikidataId/Q1770
+"Tampere, FI",wikidataId/Q40840
+"Taoyuan City, TW",wikidataId/Q115256
+"Tarnów, PL",wikidataId/Q106281
+"Tashkent, UZ",wikidataId/Q269
+"Tbilisi, GE",wikidataId/Q994
+"Tehran, IR",wikidataId/Q3616
+"Tel Aviv, IL",wikidataId/Q33935
+"Temuco, CL",wikidataId/Q82128
+"Tepic, MX",wikidataId/Q207972
+"Ternopil, UA",wikidataId/Q156743
+"The Bronx, US",geoId/3600508510
+"The Hague, NL",wikidataId/Q36600
+"Thessaloníki, GR",wikidataId/Q17151
+"Thiruvananthapuram, IN",wikidataId/Q167715
+"Thrissur, IN",wikidataId/Q163798
+"Tianjin, CN",wikidataId/Q11736
+"Timişoara, RO",wikidataId/Q83404
+"Tokyo, JP",wikidataId/Q1490
+"Toluca, MX",wikidataId/Q209034
+"Tomsk, RU",wikidataId/Q976
+"Toronto, CA",wikidataId/Q172
+"Toulon, FR",wikidataId/Q44160
+"Toulouse, FR",wikidataId/Q7880
+"Tours, FR",wikidataId/Q288
+"Toyama, JP",wikidataId/Q204266
+"Trabzon, TR",wikidataId/Q45301
+"Trieste, IT",wikidataId/Q546
+"Trondheim, NO",wikidataId/Q25804
+"Tucson, US",geoId/0477000
+"Turin, IT",wikidataId/Q495
+"Turku, FI",wikidataId/Q38511
+"Tuzla, BA",wikidataId/Q174684
+"Ulan Bator, MN",wikidataId/Q23430
+"Ulsan, KR",wikidataId/Q41278
+"Uppsala, SE",wikidataId/Q25286
+"Utrecht, NL",nuts/NL310
+"Utsunomiya, JP",wikidataId/Q200589
+"Valencia, ES",wikidataId/Q8818
+"Valladolid, ES",wikidataId/Q8356
+"Valparaíso, CL",wikidataId/Q33986
+"Vancouver, CA",wikidataId/Q24639
+"Vantaa, FI",wikidataId/Q127623
+"Vereeniging, ZA",wikidataId/Q503056
+"Victoria, CA",wikidataId/Q2132
+"Vienna, AT",nuts/AT13
+"Vientiane, LA",wikidataId/Q390377
+"Visakhapatnam, IN",wikidataId/Q200016
+"Vitória, BR",wikidataId/Q168376
+"Wakayama, JP",wikidataId/Q200747
+"Warsaw, PL",nuts/PL127
+"Washington D.C., US",geoId/1150000
+"Wellington, NZ",wikidataId/Q23661
+"Wiesbaden, DE",nuts/DE714
+"Willemstad, CW",wikidataId/Q132679
+"Winnipeg, CA",wikidataId/Q2135
+"Wollongong, AU",wikidataId/Q187861
+"Worcester, ZA",wikidataId/Q1025649
+"Wrocław, PL",nuts/PL514
+"Wuhan, CN",wikidataId/Q11746
+"Wuxi, CN",wikidataId/Q42651
+"Xiamen, CN",wikidataId/Q68744
+"Xining, CN",wikidataId/Q69060
+"Xinxiang, CN",wikidataId/Q404362
+"Xi’an, CN",wikidataId/Q5826
+"Xuchang, CN",wikidataId/Q404529
+"Yangon, MM",wikidataId/Q37995
+"Yazd, IR",wikidataId/Q182394
+"Yeosu, KR",wikidataId/Q42125
+"Yinchuan, CN",wikidataId/Q211243
+"Yokohama, JP",wikidataId/Q38283
+"Yunfu, CN",wikidataId/Q59233
+"Zabrze, PL",wikidataId/Q103892
+"Zagreb, HR",nuts/HR011
+"Zamboanga, PH",wikidataId/Q1629
+"Zanjān, IR",wikidataId/Q146699
+"Zaporizhia, UA",wikidataId/Q157835
+"Zaragoza, ES",wikidataId/Q10305
+"Zarqa, JO",wikidataId/Q148062
+"Zenica, BA",wikidataId/Q184046
+"Zhengzhou, CN",wikidataId/Q30340
+"Zhuzhou, CN",wikidataId/Q198266
+"Zürich, CH",wikidataId/Q72
+"Ürümqi, CN",wikidataId/Q16959
+"Īlām, IR",wikidataId/Q499470
+"İzmir, TR",wikidataId/Q35997
+"İzmit, TR",wikidataId/Q129649
+"Łódź, PL",wikidataId/Q580
+"Ōita, JP",wikidataId/Q199609
+"Ḩawallī, KW",wikidataId/Q4116175

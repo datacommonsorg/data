@@ -1,0 +1,122 @@
+# Config settings for earthengine_image.py
+{
+    # Asset ID for an image or image collection from Earth Engine Data Catelog.
+    # Atleast one of ee_image or ee_image_collection should be set.
+    # https://developers.google.com/earth-engine/datasets
+    # For example: For
+    # https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1
+    # 'ee_image_collection': 'GOOGLE_DYNAMICWORLD_V1'
+    # or
+    # for an image:
+    # https://developers.google.com/earth-engine/datasets/catalog/UMD_hansen_global_forest_change_2021_v1_9
+    # 'ee_image': 'UMD/hansen/global_forest_change_2021_v1_9'
+    'ee_image_collection': None,
+    'ee_image': None,
+    # A sequence of EarthEngine commands that generates an image.
+    # For example: To get the latest image from Dynamic world band:
+    # 'ee_eval_band':
+    # 'ee.ImageCollection("GOOGLE/DYNAMICWORLD/V1").select("built").first()'
+    'ee_image_eval': None,
+
+    # Default set of images used as masks or directly for output.
+    # Each entry is a dictionary of config parameters needed to generate an
+    # image.
+    'ee_datasets': {
+        # Land mask from Hansen global forest cover 2015
+        'land': {
+            'ee_image': 'UMD/hansen/global_forest_change_2015',
+            'band': 'datamask',
+            'band_eq': 1,
+        },
+
+        # Dynamic World
+        # https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1#bands
+        'dynamic_world': {
+            'ee_image_collection': 'GOOGLE/DYNAMICWORLD/V1',
+            # 'band': 'water',
+            # 'band_min': 0.7, # Probability of a pixel to be water
+        },
+
+        # Sentinel-1 SAR GRD
+        # https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S1_GRD
+        'sar': {
+            # Get image with band VV useful to detect water
+            'ee_image_eval':
+                "ee.ImageCollection('COPERNICUS/S1_GRD').filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV')).filter(ee.Filter.eq('instrumentMode', 'IW')).select('VV')",
+            # 'band': 'VV',
+            # 'band_max': -17,
+        },
+
+        # NASA FIRMS Fires
+        # https://developers.google.com/earth-engine/datasets/catalog/FIRMS
+        'fires': {
+            'ee_image_collection': 'FIRMS',
+            # 'band': 'T21',  # Brightness temperature of a fire pixel in K
+        },
+    },
+
+    # Which band to process in the asset above.
+    'band': '',
+
+    # Reducer to combine images in a collection into a single image.
+    # It can be one of: min,max,mean,sum,count,first,last
+    'ee_reducer': 'mean',
+
+    # Output image for a region within a set of points.
+    # The bounds are semi-colon seperated list of coordinates in the form:
+    #  '<latitude>,<longitude>[;<latitude>,<longitude>...]'.
+    # The image is generated for a bounding box that contains all the points.
+    # Example: For USA, give the bottom-left and top-right points.
+    # 'ee_bounds': '18.91,-171.80;71.36,-66.95'
+    'ee_bounds': None,
+
+    # Filter image collection by a time range.
+    # Provide the start date and end date in 'YYYY-MM-DD' format.
+    # It can also be specified as start_date and a time period such as 'P1M' for
+    # 1 month from start date.
+    # Example: to pick images from the month of 2022-10,
+    # 'start_date': '2022-10-01',
+    # 'end_date': '2022-11-01' or 'time_period': 'P1M'
+    'start_date': None,
+    'end_date': None,
+    'time_period': 'P1M',
+
+    # Generate output for regions where the band values are within a range.
+    # The band is masked for regions with values outside the selected range.
+    # The band is selected by the 'band' parameter above.
+    # band_eq overrides band_min and band_max settings.
+    'band_min': None,  # Minimum value for the band
+    'band_max': None,  # Maximum value for the band.
+    'band_eq': None,  # Band is a specific value.
+    # Output band as a boolean with 1 set for pixels where band is within
+    # the range above.
+    # Setting to False, generates image with original values for the selected
+    # range and masked everywhere else.
+    # The bool image is more compact and quicker to generate than the one with
+    # original band values.
+    'ee_band_bool': True,
+
+    # Mask the output image with another boolean image with pixel set to 1
+    # for pixels to be emitted and 0 for masked pixels.
+    # The mask is a reference to an mage defined in ee_datasets above.
+    # For example, 'land'.
+    'ee_mask': None,
+
+    # Output settings.
+    # Pixel size in meters for the output image.
+    'scale': 1000,
+    # GCS settings to export images
+    # Image is exported to gs://<gcs-bucket>/<gcs-folder>/<gcs-output>*.tif
+    # Note that output could be split into multiple images.
+    'gcs_project': None,
+    'gcs_bucket': None,
+    'gcs_folder': 'earthengine_output',
+    'gcs_output': 'ee_image',
+    # Number of images to be generated.
+    # Each image is for a time period:
+    # [<start_date>, <start_date> + # <time_period>)
+    # [<start_sate> + <time_period>, <start_date> + 2 * <time_period> ),
+    # ...
+    # [<start_sate> + <(N-1)><time_period>, <start_date> + <N> * <time_period> ),
+    'image_count': 1,
+}

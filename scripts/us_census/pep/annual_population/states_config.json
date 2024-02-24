@@ -1,0 +1,51 @@
+{
+    "st0009ts.txt": {
+        "temp_file1": "st0005ts_tmp",
+        "temp_file2": "st0509ts_tmp",
+        "search_string_1": "1900     1901     1902     1903     1904    1905",
+        "search_string_2": "1906     1907     1908     1909",
+        "op_file_name": "st0069ts"
+    },
+    "st1019ts.txt": {
+        "temp_file1": "st1015ts_tmp",
+        "temp_file2": "st1519ts_tmp",
+        "search_string_1": "1910     1911     1912     1913     1914    1915",
+        "search_string_2": "1916     1917     1918     1919",
+        "op_file_name": "st0069ts"
+    },
+    "st2029ts.txt": {
+        "temp_file1": "st2025ts_tmp",
+        "temp_file2": "st2529ts_tmp",
+        "search_string_1": "1920     1921     1922     1923     1924    1925",
+        "search_string_2": "1926     1927     1928     1929",
+        "op_file_name": "st0069ts"
+    },
+    "st3039ts.txt": {
+        "temp_file1": "st3035ts_tmp",
+        "temp_file2": "st3539ts_tmp",
+        "search_string_1": "1930     1931     1932     1933     1934    1935",
+        "search_string_2": "1936     1937     1938     1939",
+        "op_file_name": "st0069ts"
+    },
+    "st4049ts.txt": {
+        "temp_file1": "st4045ts_tmp",
+        "temp_file2": "st4549ts_tmp",
+        "search_string_1": "1940     1941     1942     1943     1944    1945",
+        "search_string_2": "1946     1947     1948     1949",
+        "op_file_name": "st0069ts"
+    },
+    "st5060ts.txt": {
+        "temp_file1": "st5054ts_tmp",
+        "temp_file2": "st5559ts_tmp",
+        "search_string_1": "(census)    1950     1951     1952    1953     1954",
+        "search_string_2": "1955    1956     1957     1958    1959 (census)",
+        "op_file_name": "st0069ts"
+    },
+    "st6070ts.txt": {
+        "temp_file1": "st6064ts_tmp",
+        "temp_file2": "st6569ts_tmp",
+        "search_string_1": "1960     1960     1961     1962     1963     1964",
+        "search_string_2": "1965     1966     1967     1968     1969     1970",
+        "op_file_name": "st0069ts"
+    }
+}

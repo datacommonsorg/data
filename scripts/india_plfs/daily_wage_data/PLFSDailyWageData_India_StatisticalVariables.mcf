@@ -3,7 +3,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:meanValue
 measuredProperty: dcs:wagesDaily
-placeOfResidenceClassfication: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Male
 
 Node: dcid:Mean_WagesDaily_Worker_Rural_Female
@@ -11,7 +11,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:meanValue
 measuredProperty: dcs:wagesDaily
-placeOfResidenceClassfication: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 gender: schema:Female
 
 Node: dcid:Mean_WagesDaily_Worker_Rural
@@ -19,14 +19,14 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:meanValue
 measuredProperty: dcs:wagesDaily
-placeOfResidenceClassfication: dcs:Rural
+placeOfResidenceClassification: dcs:Rural
 
 Node: dcid:Mean_WagesDaily_Worker_Urban_Male
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:meanValue
 measuredProperty: dcs:wagesDaily
-placeOfResidenceClassfication: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Male
 
 Node: dcid:Mean_WagesDaily_Worker_Urban_Female
@@ -34,7 +34,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:meanValue
 measuredProperty: dcs:wagesDaily
-placeOfResidenceClassfication: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 gender: schema:Female
 
 Node: dcid:Mean_WagesDaily_Worker_Urban
@@ -42,7 +42,7 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 statType: dcs:meanValue
 measuredProperty: dcs:wagesDaily
-placeOfResidenceClassfication: dcs:Urban
+placeOfResidenceClassification: dcs:Urban
 
 Node: dcid:Mean_WagesDaily_Worker_Male
 typeOf: dcs:StatisticalVariable

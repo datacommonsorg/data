@@ -1,0 +1,391 @@
+{
+    "populationType": {
+        "total victims": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "adult victims": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "victimAge": "[18 - Years]",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "juvenile victims": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "victimAge": "[- 17 Years]",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "murder": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "MurderAndNonNegligentManslaughter",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "rape": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "ForcibleRape",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "forcible rape": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "ForcibleRape",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "aggravated assault": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "AggravatedAssault",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "simple assault": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "SimpleAssault",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "intimidation": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "Intimidation",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "other crimes against person": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "UCR_OtherCrimesAgainstPerson",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "robbery": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "Robbery",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "burglary": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "Burglary",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "larceny theft": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "LarcenyTheft",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "motor vehicle theft": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "MotorVehicleTheft",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "arson": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "Arson",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "vandalism": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "DestructionOrDamageOrVandalismOfProperty",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "other crimes against property": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "UCR_OtherCrimesAgainstProperty",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "crimes against society": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "CrimeAgainstSociety",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        },
+        "trafficking": {
+            "populationType": "CriminalIncidents",
+            "isHateCrime": "True",
+            "measurementQualifier": "Victim",
+            "crimeType": "HumanTrafficking_CommercialSexActs",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        }
+    },
+    "pvs": {
+        "Total": {},
+        "Single-Bias Incidents": {
+            "biasMotivation": "SingleBias"
+        },
+        "Race/Ethnicity/Ancestry": {
+            "biasMotivation": "RaceOrEthnicity"
+        },
+        "Race": {
+            "biasMotivation": "race"
+        },
+        "Ethnicity": {
+            "biasMotivation": "ethnicity"
+        },
+        "Ethnicity/National Origin": {
+            "biasMotivation": "ethnicity"
+        },
+        "Anti-White": {
+            "biasMotivation": "race",
+            "targetedRace": "White"
+        },
+        "Anti-Black or African American": {
+            "biasMotivation": "race",
+            "targetedRace": "BlackOrAfricanAmericanAlone"
+        },
+        "Anti-Black": {
+            "biasMotivation": "race",
+            "targetedRace": "BlackOrAfricanAmericanAlone"
+        },
+        "Anti-American Indian or Alaska Native": {
+            "biasMotivation": "race",
+            "targetedRace": "AmericanIndianOrAlaskaNativeAlone"
+        },
+        "Anti-American Indian/Alaskan Native": {
+            "biasMotivation": "race",
+            "targetedRace": "AmericanIndianOrAlaskaNativeAlone"
+        },
+        "Anti-Asian": {
+            "biasMotivation": "race",
+            "targetedRace": "AsianAlone"
+        },
+        "Anti-Asian/Pacific Islander": {
+            "biasMotivation": "race",
+            "targetedRace": "AsianOrPacificIslander"
+        },
+        "Anti-Native Hawaiian or Other Pacific Islander": {
+            "biasMotivation": "race",
+            "targetedRace": "NativeHawaiianOrOtherPacificIslanderAlone"
+        },
+        "Anti-Multiple Races, Group": {
+            "biasMotivation": "race",
+            "targetedRace": "TwoOrMoreRaces"
+        },
+        "Anti-Arab": {
+            "biasMotivation": "race",
+            "targetedRace": "Arab"
+        },
+        "Anti-Hispanic or Latino": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "HispanicOrLatino"
+        },
+        "Anti-Not Hispanic or Latino": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "NotHispanicOrLatino"
+        },
+        "Anti-Hispanic": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "HispanicOrLatino"
+        },
+        "Anti-Other Ethnicity/National Origin": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "NotHispanicOrLatino"
+        },
+        "Anti-Other Race/Ethnicity/Ancestry": {
+            "biasMotivation": "ethnicity",
+            "targetedEthnicity": "NotHispanicOrLatino"
+        },
+        "Religion": {
+            "biasMotivation": "religion"
+        },
+        "Anti-Jewish": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Judaism"
+        },
+        "Anti-Catholic": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Catholicism"
+        },
+        "Anti-Protestant": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Protestantism"
+        },
+        "Anti-Islamic (Muslim)": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Islam"
+        },
+        "Anti-Islamic": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Islam"
+        },
+        "Anti-Other Religion": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_OtherReligion"
+        },
+        "Anti-Multiple Religions, Group": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_MultipleReligion"
+        },
+        "Anti-Mormon": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Mormonism"
+        },
+        "Anti-Jehovah's Witness": {
+            "biasMotivation": "religion",
+            "targetedReligion": "JehovahsWitnesses"
+        },
+        "Anti-Eastern Orthodox (Russian, Greek, Other)": {
+            "biasMotivation": "religion",
+            "targetedReligion": "EasternChristianity"
+        },
+        "Anti-Other Christian": {
+            "biasMotivation": "religion",
+            "targetedReligion": "UCR_OtherChristian"
+        },
+        "Anti-Buddhist": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Buddhism"
+        },
+        "Anti-Buddist": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Buddhism"
+        },
+        "Anti-Hindu": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Hinduism"
+        },
+        "Anti-Sikh": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Sikhism"
+        },
+        "Anti-Atheism/Agnosticism/etc.": {
+            "biasMotivation": "religion",
+            "targetedReligion": "AtheismOrAgnosticism"
+        },
+        "Sexual Orientation": {
+            "biasMotivation": "sexualOrientation"
+        },
+        "Anti-Homosexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Homosexual"
+        },
+        "Anti-Gay (Male)": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Gay"
+        },
+        "Anti-Male Homosexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Gay"
+        },
+        "Anti-Female Homosexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Lesbian"
+        },
+        "Anti-Lesbian": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Lesbian"
+        },
+        "Anti-Lesbian, Gay, Bisexual, or Transgender (Mixed Group)": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "LGBT"
+        },
+        "Anti-Heterosexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Heterosexual"
+        },
+        "Anti-Bisexual": {
+            "biasMotivation": "sexualOrientation",
+            "targetedSexualOrientation": "Bisexual"
+        },
+        "Disability": {
+            "biasMotivation": "disabilityStatus"
+        },
+        "Anti-Physical": {
+            "biasMotivation": "disabilityStatus",
+            "targetedDisabilityStatus": "PhysicalDisability"
+        },
+        "Anti-Mental": {
+            "biasMotivation": "disabilityStatus",
+            "targetedDisabilityStatus": "MentalDisability"
+        },
+        "Gender": {
+            "biasMotivation": "gender"
+        },
+        "Anti-Male": {
+            "biasMotivation": "gender",
+            "targetedGender": "Male"
+        },
+        "Anti-Female": {
+            "biasMotivation": "gender",
+            "targetedGender": "Female"
+        },
+        "Gender Identity": {
+            "biasMotivation": "TransgenderOrGenderNonConforming"
+        },
+        "Anti-Transgender": {
+            "biasMotivation": "gender",
+            "targetedGender": "Transgender"
+        },
+        "Anti-Gender Non-Conforming": {
+            "biasMotivation": "gender",
+            "targetedGender": "GenderNonConforming"
+        },
+        "Multiple-Bias Incidents": {
+            "biasMotivation": "MultipleBias"
+        }
+    },
+    "dpv": []
+}

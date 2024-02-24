@@ -27,8 +27,8 @@ import os
 
 import pandas as pd
 import logging
-import geocode_cities
-import common_util as cu
+from .geocode_cities import *
+from .common_util import *
 import util.alpha2_to_dcid as alpha2_to_dcid
 
 USSTATE_MAP = alpha2_to_dcid.USSTATE_MAP
@@ -38,6 +38,8 @@ _YEAR_INDEX = 0
 _STATE_INDEX = 1
 _AREA_INDEX = 2
 _LEGACY_RAPE_INDEX = 8
+
+_TEST_MODE = False
 
 _STATE_CRIME_FIELDS = [
     'Year',
@@ -101,17 +103,22 @@ YEAR_TO_URL = {
 }
 
 
+def in_test():
+    global _TEST_MODE
+    _TEST_MODE = True
+
+
 def calculate_crimes(r):
     # Return the violent, property & total
     # If a field is empty, it is treated as 0
 
     # Category 1: Violent Crimes
-    violent = cu.int_from_field(r['Violent'])
+    violent = int_from_field(r['Violent'])
 
-    murder = cu.int_from_field(r['ViolentMurderAndNonNegligentManslaughter'])
-    rape = cu.int_from_field(r['ViolentRape'])
-    robbery = cu.int_from_field(r['ViolentRobbery'])
-    assault = cu.int_from_field(r['ViolentAggravatedAssault'])
+    murder = int_from_field(r['ViolentMurderAndNonNegligentManslaughter'])
+    rape = int_from_field(r['ViolentRape'])
+    robbery = int_from_field(r['ViolentRobbery'])
+    assault = int_from_field(r['ViolentAggravatedAssault'])
 
     # Add the values back as ints
     r['ViolentMurderAndNonNegligentManslaughter'] = murder
@@ -125,11 +132,11 @@ def calculate_crimes(r):
                                                     violent, violent_computed))
 
     # Category 2: Property Crime
-    property = cu.int_from_field(r['Property'])
+    property = int_from_field(r['Property'])
 
-    burglary = cu.int_from_field(r['PropertyBurglary'])
-    theft = cu.int_from_field(r['PropertyLarcenyTheft'])
-    motor = cu.int_from_field(r['PropertyMotorVehicleTheft'])
+    burglary = int_from_field(r['PropertyBurglary'])
+    theft = int_from_field(r['PropertyLarcenyTheft'])
+    motor = int_from_field(r['PropertyMotorVehicleTheft'])
 
     # Add the property crime values as ints.
     r['PropertyBurglary'] = burglary
@@ -192,7 +199,7 @@ def _clean_crime_file(f_input, f_output):
         # If field[_STATE_INDEX] is present and not empty, use it as the State.
         if field[_STATE_INDEX] and field[_STATE_INDEX] != '""':
             # Remove numeric values from state names (comes from footnotes)
-            state = cu.remove_digits(field[_STATE_INDEX])
+            state = remove_digits(field[_STATE_INDEX])
         field[_STATE_INDEX] = state
 
         # Skip if area is not "State Total".
@@ -203,15 +210,14 @@ def _clean_crime_file(f_input, f_output):
         # Replace commas and quotes in fields e.g. "1,234" -> 1234
         # Remove any other leading or trailing whitespace
         for i in range(_FIELDS_IN_STATE_CRIME_FILE):
-            field[i] = cu.remove_extra_chars(field[i])
+            field[i] = remove_extra_chars(field[i])
 
         output_line = '{}\n'.format(','.join(
             field[:_FIELDS_IN_STATE_CRIME_FILE]))
         f_output.write(output_line)
 
     if count_state_total != 50:
-        assert False, 'Number of states is %s, instead of 50.'.format(
-            count_state_total)
+        assert _TEST_MODE, f'Number of states is {count_state_total}, instead of 50.'
 
     logging.info('lines: %d, comments: %d, incomplete: %d, header_footer:%d',
                  count_line, count_comments, count_incomplete_lines,
@@ -225,7 +231,7 @@ def _update_and_calculate_state_crime(crime_csv, writer):
 
         for crime in crimes:
             try:
-                state = geocode_cities.find_crime_state(crime)
+                state = find_crime_state(crime)
                 geocode = USSTATE_MAP[state]
             except KeyError:
                 assert False, '{} state or its geocode not found'.format(
@@ -269,7 +275,7 @@ def create_tmcf_file(tmcf_file_path):
     with open(tmcf_file_path, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(
-                cu.TEMPLATE_MCF_TEMPLATE.format_map({
+                TEMPLATE_MCF_TEMPLATE.format_map({
                     'index': i,
                     'stat_var': stat_vars[i]
                 }))
@@ -313,7 +319,7 @@ if __name__ == '__main__':
         read_file = pd.read_excel(xls_file, skiprows=[0, 1, 2])
         read_file.insert(_YEAR_INDEX, 'Year', year)
         # Since the legacy rape column value should not be included in the total count, nor in forcible rape value, we drop it.
-        if year in cu.YEARS_WITH_TWO_RAPE_COLUMNS:
+        if year in YEARS_WITH_TWO_RAPE_COLUMNS:
             read_file.drop(read_file.columns[[_LEGACY_RAPE_INDEX]],
                            axis=1,
                            inplace=True)

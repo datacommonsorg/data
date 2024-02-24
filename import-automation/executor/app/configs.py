@@ -11,16 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-Configurations for the executor.
+"""Configurations for the executor.
 
 The app endpoints accept a configs field that allows customization of all the
 configurations. See main.py.
 """
 
+import dataclasses
 import os
 from typing import List
-import dataclasses
 
 from google.cloud import logging
 
@@ -32,9 +31,10 @@ def _production():
 @dataclasses.dataclass
 class ExecutorConfig:
     """Configurations for the executor."""
+
     # ID of the Google Cloud project that hosts the executor. The project
     # needs to enable App Engine and Cloud Scheduler.
-    gcp_project_id: str = 'google.com:datcom-data'
+    gcp_project_id: str = 'datcom-import-automation'
     # ID of the Google Cloud project that stores generated CSVs and MCFs. The
     # project needs to enable Cloud Storage and gives the service account the
     # executor uses sufficient permissions to read and write the bucket below.
@@ -102,9 +102,13 @@ class ExecutorConfig:
     # ID of the location where Cloud Scheduler is hosted.
     scheduler_location: str = 'us-central1'
     # Maximum time a user script can run for in seconds.
-    user_script_timeout: float = 600
+    user_script_timeout: float = 3600
+    # Arguments for the user script
+    user_script_args: List[str] = ()
+    # Environment variables for the user script
+    user_script_env: dict = None
     # Maximum time venv creation can take in seconds.
-    venv_create_timeout: float = 600
+    venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.
     file_download_timeout: float = 600
     # Maximum time downloading the repo can take in seconds.
@@ -119,6 +123,23 @@ class ExecutorConfig:
     # Maximum time a blocking call to the importer to
     # delete an import can take in seconds.
     importer_delete_timeout: float = 10 * 60
+    # Executor type depends on where the executor runs
+    # Suppports one of: "GKE", "GAE"
+    executor_type: str = 'GAE'
+
+    def get_data_refresh_config(self):
+        """Returns the config used for Cloud Scheduler data refresh jobs."""
+        fields = set([
+            'github_repo_name', 'github_repo_owner_username',
+            'github_auth_username', 'github_auth_access_token',
+            'dashboard_oauth_client_id', 'importer_oauth_client_id',
+            'email_account', 'email_token', 'gcs_project_id',
+            'storage_prod_bucket_name', 'user_script_args', 'user_script_env',
+            'user_script_timeout'
+        ])
+        return {
+            k: v for k, v in dataclasses.asdict(self).items() if k in fields
+        }
 
 
 def _setup_logging():

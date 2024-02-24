@@ -1,0 +1,13 @@
+{
+    "populationType": {
+        "incidents": {
+            "Node": "Count_CriminalIncidents_IsHateCrime",
+            "populationType": "HateCrimeIncidents",
+            "statType": "measuredValue",
+            "measuredProperty": "count",
+            "typeOf": "StatisticalVariable"
+        }
+    },
+    "pvs": {},
+    "dpv": []
+}

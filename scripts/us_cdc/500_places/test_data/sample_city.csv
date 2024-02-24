@@ -1,0 +1,10 @@
+Year,StateAbbr,StateDesc,LocationName,DataSource,Category,Measure,Data_Value_Unit,Data_Value_Type,Data_Value,Data_Value_Footnote_Symbol,Data_Value_Footnote,Low_Confidence_Limit,High_Confidence_Limit,TotalPopulation,Geolocation,LocationID,CategoryID,MeasureId,DataValueTypeID,Short_Question_Text
+2018,AK,Alaska,Kiana,BRFSS,Health Outcomes,Stroke among adults aged >=18 years,%,Age-adjusted prevalence,7.0,,,6.3,7.7,347,POINT (-160.4343638 66.97258641),0239300,HLTHOUT,STROKE,AgeAdjPrv,Stroke
+2018,AR,Arkansas,Bella Vista,BRFSS,Health Outcomes,Stroke among adults aged >=18 years,%,Crude prevalence,3.8,,,3.6,4.1,26518,POINT (-94.27078454 36.46667683),0504840,HLTHOUT,STROKE,CrdPrv,Stroke
+2018,AL,Alabama,Brookwood,BRFSS,Prevention,Mammography use among women aged 50-74 years,%,Crude prevalence,77.0,,,73.0,80.3,1828,POINT (-87.32753227 33.23951413),0109808,PREVENT,MAMMOUSE,CrdPrv,Mammography
+2018,AL,Alabama,Butler,BRFSS,Health Outcomes,Stroke among adults aged >=18 years,%,Crude prevalence,5.3,,,4.7,6.0,1894,POINT (-88.21077815 32.09647937),0111032,HLTHOUT,STROKE,CrdPrv,Stroke
+2018,AL,Alabama,Cardiff,BRFSS,Health Outcomes,Arthritis among adults aged >=18 years,%,Crude prevalence,33.3,,,31.5,35.0,55,POINT (-86.93055692 33.64718829),0112040,HLTHOUT,ARTHRITIS,CrdPrv,Arthritis
+2018,AL,Alabama,Clanton,BRFSS,Health Outcomes,All teeth lost among adults aged >=65 years,%,Crude prevalence,21.7,,,16.7,27.0,8667,POINT (-86.62294619 32.84397958),0115136,HLTHOUT,TEETHLOST,CrdPrv,Teeth Loss
+2018,AL,Alabama,Clio,BRFSS,Health Outcomes,Stroke among adults aged >=18 years,%,Crude prevalence,5.2,,,4.8,5.7,1399,POINT (-85.6109105 31.70855394),0115640,HLTHOUT,STROKE,CrdPrv,Stroke
+2018,AL,Alabama,Cordova,BRFSS,Unhealthy Behaviors,Obesity among adults aged >=18 years,%,Crude prevalence,38.7,,,37.4,40.0,2095,POINT (-87.19257556 33.7613345),0117368,UNHBEH,OBESITY,CrdPrv,Obesity
+2018,AL,Alabama,Courtland,BRFSS,Unhealthy Behaviors,Obesity among adults aged >=18 years,%,Crude prevalence,38.0,,,36.6,39.5,609,POINT (-87.341977 34.67298382),0118040,UNHBEH,OBESITY,CrdPrv,Obesity
