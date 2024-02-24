@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,6 +14,8 @@
 """
 Author: Suhana Bedi
 Date: 08/12/2023
+Edited By: Samantha Piekos
+Last Edited: 02/23/24
 Name: format_disease_jensen_lab
 Description: converts a three input .txt files from Diseases at
 Jensen Lab into output .csv files with formatted dcids, 
@@ -37,7 +39,7 @@ def format_doid_icd(df):
     df['count'] = np.where(df['ICD10'] == df['ICD10'],df['ICD10'].str.split(':'),np.nan)
     df['count'] = np.where(df['count'] == df['count'],df['count'].str[1],np.nan)
     df = df[df['count']!='root']
-    df['count'] = df['count'].str.len()
+    df.loc[:, 'count'] = df['count'].str.len()
     df = df[df['count'] !=2]
     df = df[df['count'] !=1]
     return df
@@ -95,14 +97,14 @@ def format_df(df, num):
 	if num ==1:
 		df['associationType'] = 'dcs:AssociationTypeTextMining'
 		df.update('"' +
-				  df[['Name', 'url', 'associationType']].astype(str) + '"')
-		df.replace("\"nan\"", np.nan, inplace=True)
+				  df[['Name', 'url']].astype(str) + '"')
+		#df.replace("\"nan\"", np.nan, inplace=True)
 	elif num==2:
 		df['dcid'] = df['dcid'].str.replace('text_mining', 'manual_curation')
 		df['associationType'] = 'dcs:AssociationTypeManualCuration'
 		df.update('"' +
 				  df[['Name', 'score-db', 'associationType']].astype(str) + '"')
-		df.replace("\"nan\"", np.nan, inplace=True)
+		#df.replace("\"nan\"", np.nan, inplace=True)
 	else:
 		df['dcid'] = df['dcid'].str.replace('text_mining', 'experiment')
 		df['associationType'] = 'dcs:AssociationTypeExperiment'
@@ -110,7 +112,7 @@ def format_df(df, num):
 		df['source-score'] = np.where(df['source-score'] == df['source-score'],df['source-score'].str[1],np.nan)
 		df.update('"' +
 				  df[['Name', 'score-db', 'associationType']].astype(str) + '"')
-		df.replace("\"nan\"", np.nan, inplace=True)
+		#df.replace("\"nan\"", np.nan, inplace=True)
 	return df
 
 def format_genes_textmining(df):
@@ -178,20 +180,20 @@ def wrapper_function(df_textmining, df_manual, df_experiment):
 	df_txt, df_txt_rna = format_genes_textmining(df_textmining)
 	df_txt1, df_txt_rna1 = format_genes_knowledge(df_manual)
 	df_txt2, df_txt_rna2 = format_genes_experiment(df_experiment)
-	df_txt[0:4003718].to_csv('codingGenes-textMining-1.csv', doublequote=False, escapechar='\\')
-	df_txt[4003719:].to_csv('codingGenes-textMining-2.csv', doublequote=False, escapechar='\\')
-	df_txt_rna.to_csv('nonCodingGenes-textMining.csv', doublequote=False, escapechar='\\')
-	df_txt1.to_csv('codingGenes-manual.csv', doublequote=False, escapechar='\\')
-	df_txt_rna1.to_csv('nonCodingGenes-manual.csv', doublequote=False, escapechar='\\')
-	df_txt2.to_csv('experiment.csv', doublequote=False, escapechar='\\')
+	df_txt[0:4003718].to_csv('CSVs/codingGenes-textmining-1.csv', doublequote=False, escapechar='\\')
+	df_txt[4003719:].to_csv('CSVs/codingGenes-textmining-2.csv', doublequote=False, escapechar='\\')
+	df_txt_rna.to_csv('CSVs/nonCodingGenes-textmining.csv', doublequote=False, escapechar='\\')
+	df_txt1.to_csv('CSVs/codingGenes-manual.csv', doublequote=False, escapechar='\\')
+	df_txt_rna1.to_csv('CSVs/nonCodingGenes-manual.csv', doublequote=False, escapechar='\\')
+	df_txt2.to_csv('CSVs/experiment.csv', doublequote=False, escapechar='\\')
 
 def main():
-	df_textmining = pd.read_csv('human_disease_textmining_full.tsv', sep = '\t', header=None)
-	df_manual = pd.read_csv('human_disease_knowledge_full.tsv', sep = '\t', header=None)
-	df_experiment = pd.read_csv('human_disease_experiments_full.tsv', sep = '\t', header=None)
+	df_textmining = pd.read_csv('input/human_disease_textmining_full.tsv', sep = '\t', header=None)
+	df_manual = pd.read_csv('input/human_disease_knowledge_full.tsv', sep = '\t', header=None)
+	df_experiment = pd.read_csv('input/human_disease_experiments_full.tsv', sep = '\t', header=None)
 	wrapper_function(df_textmining, df_manual, df_experiment)
-
 
 
 if __name__ == '__main__':
     main() 
+    
