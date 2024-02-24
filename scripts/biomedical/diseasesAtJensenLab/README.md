@@ -13,7 +13,8 @@
     - [Artifacts](#artifacts)
       - [Scripts](#scripts)
       - [Files](#files)
-  - [Example](#example)
+    - [Import Procdeure](#import-procedure)
+    -[Tests](#tests) 
 
 ## About the Dataset
 
@@ -47,11 +48,12 @@ This dataset is under a Creative Commons CC BY license.
 
 ##### Bash Script
 
-[`run.sh`](run.sh) downloads the experimental, manually curated, and text mining data from DISEASES at Jensen Lab and converts it into csv files formatted for import into the Data Commons knowledge graph.
+[`run.sh`](scripts/run.sh) downloads the experimental, manually curated, and text mining data from DISEASES at Jensen Lab and converts it into csv files formatted for import into the Data Commons knowledge graph. The original files are then removed.
+[`tests.sh`](scripts/tests.sh) runs the java tool test that 
 
 ##### Python Script
 
-[`format_disease_jensen_lab.py`](format_disease_jensen_lab.py) parses the raw .tsv files with DISEASES at Jensen Lab into well formatted csv files with generated dcids.
+[`format_disease_jensen_lab.py`](scripts/format_disease_jensen_lab.py) parses the raw .tsv files with DISEASES at Jensen Lab into well formatted csv files with generated dcids and links to Gene and ICD10Code nodes.
 
 #### Files
 
@@ -67,10 +69,28 @@ This dataset is under a Creative Commons CC BY license.
 
 [`experiment.tmcf`](tmcfs/experiment.tmcf) contains the tmcf mapping to the csv of coding genes curated experimentally.
 
-### Example
+### Import Procedure
 
-The following bash script can be run and it will take care of everything starting from data download to generating clean .csv files.
+Download the most recent versions of DISEASES for experiment, manually curated, and text mining files; clean the files - formatting them into csv files for import; delete the original data files:
 
+```bash
+sh run.sh
 ```
-bash run.sh
+
+Generate the enummeration schema MCF, which represents virus taxonomic ranks by running:
+
+```bash
+sh run.sh
 ```
+
+### Tests
+
+Run Data Commons's java -jar import tool to ensure that all schema used in the import is present in the graph, all referenced nodes are present in the graph, along with other warnings. Please note that empty tokens for some columns are expected as this reflects the original data. The imports create the linked Gene and ICD10Codes alongside the DiseaeGeneAssociation nodes that reference them. This resolves any concern about missing reference warnings concerning these node types by the test. Finally, there are not ICD10Codes associated with every disease, so this column is sometimes blank. Warnings concerning empty dcid references can therefore be ignored.
+
+To run tests:
+
+```bash
+sh tests.sh
+```
+
+This will generate an output file for the results of the tests on each csv + tmcf pair
