@@ -287,8 +287,7 @@ class ImportExecutor:
                 msg = f'Successful Import: {import_name} ({absolute_import_name})\nn'
                 msg += f'Script execution time taken = {time_taken}s'
                 self.notifier.send(
-                    subject=
-                    f'Import Automation Success - {import_name}',
+                    subject=f'Import Automation Success - {import_name}',
                     body=msg,
                     receiver_addresses=[_SUCCESS_EMAIL_ADDR],
                 )
@@ -300,8 +299,7 @@ class ImportExecutor:
                 msg += f'Stack Trace: \n'
                 msg += f'{exc}'
                 self.notifier.send(
-                    subject=
-                    f'Import Automation Failure - {import_name}',
+                    subject=f'Import Automation Failure - {import_name}',
                     body=msg,
                     receiver_addresses=[_FAILURE_EMAIL_ADDR],
                 )
