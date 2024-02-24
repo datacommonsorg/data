@@ -12,14 +12,9 @@ Commons knowledge graph using the importer.
    - Required Arguments
      - `COMMIT_SHA`: Commit sha of the commit that specifies the targets
        in its commit message
-   - Optional Arguments (Used only for logging to the Import Progress Dashboard)
-     - `REPO_NAME`: Name of the repository from which the pull request is sent
-     - `BRANCH_NAME`: Name of the branch from which the pull request is sent
-     - `PR_NUMBER`: Number of the pull request
    - Required Configurations (See [app/configs.py](app/configs.py) for
      descriptions and [Configuring the Executor](#configuring-the-executor) for
      how to pass these configurations)
-     - `dashboard_oauth_client_id`
      - `importer_oauth_client_id`
      - `github_auth_username`
      - `github_auth_access_token`
@@ -30,7 +25,6 @@ Commons knowledge graph using the importer.
    - Required Arguments
      - `absolute_import_name`: Absolute import name of the import to update
    - Required Configurations
-     - `dashboard_oauth_client_id`
      - `github_auth_username`
      - `github_auth_access_token`
      - `email_account`
@@ -41,7 +35,6 @@ Commons knowledge graph using the importer.
      - `COMMIT_SHA`: Commit sha of the commit that specifies the targets
        in its commit message
    - Required Configurations
-     - `dashboard_oauth_client_id`
      - `github_auth_username`
      - `github_auth_access_token`
 
