@@ -73,6 +73,7 @@ class ExecutorConfig:
     # Types of inputs accepted by the Data Commons importer. These are
     # also the accepted fields of an import_inputs value in the manifest.
     import_input_types: List[str] = ('template_mcf', 'cleaned_csv', 'node_mcf')
+    # DEPRECATED
     # Oauth Client ID used to authenticate with the import progress dashboard.
     # which is protected by Identity-Aware Proxy. This can be found by going
     # to the Identity-Aware Proxy of the Google Cloud project that hosts

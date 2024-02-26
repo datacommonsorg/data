@@ -1,0 +1,18 @@
+{
+    "import_specifications": [{
+        "import_name":
+            "NASA_VIIRSActiveFiresEvents",
+        "curator_emails": ["ajaits@google.com"],
+        "provenance_url":
+            "https://www.earthdata.nasa.gov/learn/find-data/near-real-time/firms/vnp14imgtdlnrt",
+        "provenance_description":
+            "Active fire data across the world as detected by VIIRS onboard the Suomi NPP satellite at 375m resolution.",
+        "scripts": ["../../earthengine/events_pipeline.py --pipeline_config=gs://datcom-prod-imports/scripts/fires/firms/fire_events_pipeline_config.py"],
+        "import_inputs": [{
+            "template_mcf": "",
+            "cleaned_csv": ""
+        }],
+        "cron_schedule":
+            "0 5 * * *"
+    }]
+}
