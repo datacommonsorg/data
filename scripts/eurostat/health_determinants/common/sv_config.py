@@ -135,7 +135,7 @@ file_to_sv_mapping = {
 
         "hlth_ehis_pe6e": "'Percent_' + 'AtLeast30MinutesPerDay'" + \
             "+'_WalkingOrCycling_' + 'PhysicalActivity' + '_In_Count_Person_'" + \
-            "+'df['isced11'] + '_' + df['sex']'"
+            "+df['isced11'] + '_' + df['sex']"
 
     },
 
