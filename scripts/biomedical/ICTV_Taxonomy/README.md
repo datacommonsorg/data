@@ -101,29 +101,28 @@ Classes, properties, and enumerations that were added in this import to represen
 * Enumerations Generated Via Script
     * VirusRealmEnum, VirusSubrealmEnum, VirusKingdomEnum, VirusSubkingdomEnum, VirusPhylumEnum, VirusSubphylumEnum, VirusClassEnum, VirusSubclassEnum, VirusOrderEnum, VirusSuborderEnum, VirusFamilyEnum, VirusSubfamilyEnum, VirusGenusEnum, VirusSubgenusEnum
 
-#### Schema MCFs
-
-- [ICTV_schema.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema.mcf)
-- [ICTV_schema_enum.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema_enum.mcf)
-- [ICTV_schema_taxonomic_ranking_enum.mcf](https://github.com/datacommonsorg/schema/blob/main/biomedical_schema/ICTV_schema_taxonomic_ranking_enum.mcf)
-
 #### tMCFs
 
-- [VirusMasterSpeciesList.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusMasterSpeciesList.tmcf)
-- [VirusTaxonomy.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusTaxonomy.tmcf)
-- [VirusGenomeSegmeng.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusGenomeSegment.tmcf)
+- [VirusMasterSpeciesList.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusMasterSpeciesList.tmcf) contains the tmcf mapping to the csv of viruses.
+- [VirusTaxonomy.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusTaxonomy.tmcf) contains the tmcf mapping to the csv of virus isolates.
+- [VirusGenomeSegmeng.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusGenomeSegment.tmcf) contains the tmcf mapping to the csv of viral genome segments.
 
 #### Scripts 
 
-- [download.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/download.sh)
-- [run.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/runsh)
-- [create_virus_taxonomic_ranking_enums.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/create_virus_taxonomic_ranking_enums.py)
-- [format_virus_master_species_list.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/format_virus_master_species_list.py)
-- [format_virus_metadata_resource.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/format_virus_metadata_resource.py)
+##### Bash Scripts
+
+- [download.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/download.sh) downloads the most recent release of the ICTV Master Species List and Virus Metadata Resource.
+- [run.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/run.sh) creates new viral taxonomy enum and converts data into formatted CSV for import of data on viruses, virus isolates, and viral genome fragments into the knowledge graph.
+- [tests.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/tests.sh) runs standard tests on CSV + tMCF pairs to check for proper formatting.
+
+##### Python Scripts
+- [create_virus_taxonomic_ranking_enums.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/create_virus_taxonomic_ranking_enums.py) creates the viral taxonomy enum mcf file from the Virus Metadata Resource file.
+- [format_virus_master_species_list.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/format_virus_master_species_list.py) parses the raw Master Species List xslx file into virus csv file.
+- [format_virus_metadata_resource.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/format_virus_metadata_resource.py) parses the raw Virus Metadata Resource file into virus isolates and viral genome segements csv files.
 
 #### Log Files
 
-- [format_virus_metadata_resource.log](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/logs/format_virus_metadata_resource.log)
+- [format_virus_metadata_resource.log](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/logs/format_virus_metadata_resource.log) log file from script converting the Virus Metadata Resource into formatted CSV file.
 
 ### Import Procedure
 
@@ -141,4 +140,13 @@ sh run.sh
 
 ### Tests
 
-Please run all cleaned CSV + tMCF pairs through our lint test using our Data Commons import tool, which conducts general formatting tests.
+Run Data Commons's java -jar import tool to ensure that all schema used in the import is present in the graph, all referenced nodes are present in the graph, along with other warnings. Please note that empty tokens for some columns are expected as this reflects the original data. The imports create the Virus nodes that are then refrenced within this import. This resolves any concern about missing reference warnings concerning these node types by the test.
+
+To run tests:
+
+```bash
+sh tests.sh
+```
+
+This will generate an output file for the results of the tests on each csv + tmcf pair
+
