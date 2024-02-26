@@ -44,7 +44,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
-    _STATE_QUARTERLY_INDUSTRY_GDP_FILE = 'SQGDP2__ALL_AREAS_2005_2020.csv'
+    _STATE_QUARTERLY_INDUSTRY_GDP_FILE = 'SQGDP2__ALL_AREAS_2005_2023.csv'
 
     def download_data(self, zip_link=None, file=None):
         """Downloads ZIP file, extracts the desired CSV, and puts it into a data
@@ -91,7 +91,6 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         df['GeoId'] = df['GeoFIPS'].apply(self.convert_geoid)
 
         df = df[df['IndustryClassification'] != '...']
-
         df['NAICS'] = df['IndustryClassification'].apply(
             self.convert_industry_class)
         df['value'] = df['value'].apply(self.value_converter)
@@ -99,6 +98,9 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
 
         # Convert from millions of current USD to current USD.
         df['value'] *= 1000000
+        # Creating a DataFrame for the MCF generation.
+        self.clean_df1 = df.copy()
+        df['NAICS'] = df["NAICS"].str.replace('-', '_')
         self.clean_df = df.drop(['GeoFIPS', 'IndustryClassification'], axis=1)
 
     @staticmethod
@@ -120,7 +122,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         Commons codes.
         """
         if isinstance(naics_code, str):
-            naics_code = naics_code.replace('-', '_').replace(',', '&')
+            naics_code = naics_code.replace(',', '_')
         return f"dcs:USStateQuarterlyIndustryGDP_NAICS_{naics_code}"
 
     def save_csv(self, filename='states_industry_gdp.csv'):
@@ -141,14 +143,15 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
                     'activitySource: dcs:GrossDomesticProduction\n'
                     'measuredProperty: dcs:amount\n'
                     'measurementQualifier: dcs:Nominal\n'
+                    'statType: dcs:measuredValue\n'
                     'naics: dcid:NAICS/{naics}\n\n')
 
         with open('states_gdp_industry_statvars.mcf', 'w') as mcf_f:
-            for naics_code in self.clean_df['NAICS'].unique():
-                code_title = naics_code[38:]
-                code = code_title.replace('_', '-')
-                code = code.replace('&', '&NAICS/')
-                mcf_f.write(mcf_temp.format(title=code_title, naics=code))
+            for naics_code in self.clean_df1['NAICS'].unique():
+                code_title = naics_code[38:].replace('-', '_')
+                naics_title = naics_code[38:]
+                mcf_f.write(mcf_temp.format(title=code_title,
+                                            naics=naics_title))
 
 
 def main(_):
