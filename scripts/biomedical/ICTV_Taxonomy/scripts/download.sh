@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 Author: Samantha Piekos
-Date: 02/21/2024
+Date: 02/26/2024
 Name: download
 Description: This file downloads the most recent version of the ICTV Master 
 Species List and Virus Metadata Resource and prepares it for processing.

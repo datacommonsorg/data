@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 Author: Samantha Piekos
-Date: 02/21/2024
+Date: 02/26/2024
 Name: download
 Description: This file runs the python scripts to generate the viral taxonomy
 enum mcf file and the csv files for Viruses, Virus Isolates, and Virus Genome 
@@ -27,6 +27,6 @@ Segments from the ICTV Master Species List and the Virus Metadata Files.
 python3 scripts/create_virus_taxonomic_ranking_enums.py input/ICTV_Virus_Metadata_Resource.xlsx  ICTV_schema_taxonomic_ranking_enum.mcf
 
 # Commands to Run Scripts to Generate Cleaned CSV Files
-python3 scripts/format_virus_master_species_list.py input/ICTV_Virus_Species_List.xlsx VirusSpecies.csv
+python3 scripts/format_virus_master_species_list.py input/ICTV_Virus_Species_List.xlsx CSVs/VirusSpecies.csv
 
-python3 scripts/format_virus_metadata_resource.py input/ICTV_Virus_Metadata_Resource.xlsx VirusIsolates.csv VirusGenomeSegments.csv > format_virus_metadata_resource.log
+python3 scripts/format_virus_metadata_resource.py input/ICTV_Virus_Metadata_Resource.xlsx CSVs/VirusIsolates.csv CSVs/VirusGenomeSegments.csv > format_virus_metadata_resource.log
