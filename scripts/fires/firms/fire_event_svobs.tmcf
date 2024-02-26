@@ -1,0 +1,7 @@
+Node: E:Events->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:Events->dcid
+observationDate: C:Events->observationDate
+variableMeasured: dcs:Area_FireEvent
+value: C:Events->area
+unit: dcs:SquareKilometer

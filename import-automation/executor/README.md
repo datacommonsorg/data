@@ -12,14 +12,9 @@ Commons knowledge graph using the importer.
    - Required Arguments
      - `COMMIT_SHA`: Commit sha of the commit that specifies the targets
        in its commit message
-   - Optional Arguments (Used only for logging to the Import Progress Dashboard)
-     - `REPO_NAME`: Name of the repository from which the pull request is sent
-     - `BRANCH_NAME`: Name of the branch from which the pull request is sent
-     - `PR_NUMBER`: Number of the pull request
    - Required Configurations (See [app/configs.py](app/configs.py) for
      descriptions and [Configuring the Executor](#configuring-the-executor) for
      how to pass these configurations)
-     - `dashboard_oauth_client_id`
      - `importer_oauth_client_id`
      - `github_auth_username`
      - `github_auth_access_token`
@@ -30,7 +25,6 @@ Commons knowledge graph using the importer.
    - Required Arguments
      - `absolute_import_name`: Absolute import name of the import to update
    - Required Configurations
-     - `dashboard_oauth_client_id`
      - `github_auth_username`
      - `github_auth_access_token`
      - `email_account`
@@ -41,7 +35,6 @@ Commons knowledge graph using the importer.
      - `COMMIT_SHA`: Commit sha of the commit that specifies the targets
        in its commit message
    - Required Configurations
-     - `dashboard_oauth_client_id`
      - `github_auth_username`
      - `github_auth_access_token`
 
@@ -81,16 +74,16 @@ Run `./schedule_update_import.sh --help` for usage.
 To schedule an import to run as a cron job on the GCP Cloud Scheduler, do the following:
 
 ```
-Run `./schedule_update_import.sh -s <config_project_id> <path_to_import>`
+Run `./schedule_update_import.sh -s <gke_project_id> <path_to_import>`
 ```
 
-`<config_project_id>` is the GCP project id where the config file is stored, e.g. `datcom-import-automation`.
+`<gke_project_id>` is the GCP project id where the import executer is run from e.g. `datcom-import-automation-prod`.
 `<path_to_import>` is the path to the import (relative to the root directory of the `data` repo), with the name of the import provided with a colon, e.g. `scripts/us_usda/quickstats:UsdaAgSurvey`.
 
 Example invocation:
 
 ```
-Run `./schedule_update_import.sh -s datcom-import-automation scripts/us_usda/quickstats:UsdaAgSurvey`
+Run `./schedule_update_import.sh -s datcom-import-automation-prod scripts/us_usda/quickstats:UsdaAgSurvey`
 ```
 
 The script will log the name of the Cloud Scheduler job and a url for all the jobs on the scheduler. Please verify that all the job metadata was updated as expected.
@@ -106,16 +99,16 @@ Once the script runs to completion, the data directory's latest update is printe
 To excute an Update locally, do the following:
 
 ```
-Run `./schedule_update_import.sh -u <config_project_id> <path_to_import>`
+Run `./schedule_update_import.sh -u <gke_project_id> <path_to_import>`
 ```
 
-`<config_project_id>` is the GCP project id where the config file is stored, e.g. `datcom-import-automation`.
+`<gke_project_id>` is the GCP project id where the import executer is run from e.g. `datcom-import-automation-prod`.
 `<path_to_import>` is the path to the import (relative to the root directory of the `data` repo), with the name of the import provided with a colon, e.g. `scripts/us_usda/quickstats:UsdaAgSurvey`.
 
 Example invocation:
 
 ```
-Run `./schedule_update_import.sh -u datcom-import-automation scripts/us_usda/quickstats:UsdaAgSurvey`
+Run `./schedule_update_import.sh -u datcom-import-automation-prod scripts/us_usda/quickstats:UsdaAgSurvey`
 ```
 
 
