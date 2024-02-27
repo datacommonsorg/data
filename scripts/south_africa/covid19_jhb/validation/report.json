@@ -1,0 +1,508 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "722",
+        "NumPVSuccesses": "8337",
+        "Existence_NumChecks": "7146",
+        "NumNodeSuccesses": "1191",
+        "Existence_NumDcCalls": "1"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "StrSplit_EmptyToken_value": "253",
+        "Sanity_MissingOrEmpty_value": "253"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Empty value found :: value: '', column: 'deaths', property: 'value', node: 'E:COVID19_JHB->E1'",
+    "counterKey": "StrSplit_EmptyToken_value"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "cleaned_data.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Found a missing or empty property value :: property: 'value', node: 'E:COVID19_JHB->E1', type: 'StatVarObservation'",
+    "counterKey": "Sanity_MissingOrEmpty_value"
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true,
+    "observationAbout": false,
+    "allowNanSvobs": false
+  }
+}
