@@ -105,7 +105,7 @@ class RasterToCsvTest(unittest.TestCase):
                     'aggregate_s2_level': 5,
                 })
             output_csv = os.path.join(tmp_dir,
-                                      'sample_flood_output_filtered.csv')
+                                      'sample_floods_output_filtered.csv')
             counter = Counters()
             # Process raster into csv data points.
             r2c.process(input_geotiff=None,
