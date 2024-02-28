@@ -63,5 +63,3 @@ python3 preproccess.py
   - [summary_report.html](validation/summary_report.html)
 
   There are no errors, only warnings for missing values.
-  
-  Link to the [import document](https://docs.google.com/document/d/1Hh0ggR6NGJBYfO4czy_U55IKtdtQOmXiT4jJhGGKJeg/edit?usp=sharing)
