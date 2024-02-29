@@ -196,7 +196,7 @@ def write_un_places(input_geos, output, sdg2type, un2sdg, un2dc_curated):
     '''Writes UN places to output and computes new places.
 
     Args: 
-        input_geos: List of paths to input UN geography file.
+        input_geos: Path to input UN geography file.
         output: Path to output file.
         sdg2type: Map of SDG code -> SDG type.
         un2sdg: Map of UN code -> SDG code.

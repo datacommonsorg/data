@@ -102,7 +102,7 @@ class GeographyTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             output = os.path.join(tmp_dir, 'un_places.mcf')
             un2dc_generated, new_subjects = geography.write_un_places(
-                os.path.join(FOLDER, 'test_geographies.csv'), output, SDG2TYPE,
+                os.path.join(FOLDER, 'test_geography.csv'), output, SDG2TYPE,
                 UN2SDG, UN2DC_CURATED)
             with open(output) as result:
                 with open(os.path.join(FOLDER,
