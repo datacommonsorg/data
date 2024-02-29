@@ -208,8 +208,8 @@ def write_un_places(input_geos, output, sdg2type, un2sdg, un2dc_curated):
     '''
     un2dc_generated = {}
     new_subjects = []
-    with open(output, 'w', encoding='utf-8') as f_out:
-        with open(input_geos, encoding='utf-8-sig') as f_in:
+    with open(input_geos, encoding='utf-8-sig') as f_in:
+        with open(output, 'w', encoding='utf-8') as f_out:   
             reader = csv.DictReader(f_in)
             for row in reader:
                 subject = UN_PREFIX + ':' + row['undata_geo_id']
