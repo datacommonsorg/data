@@ -103,9 +103,9 @@ Classes, properties, and enumerations that were added in this import to represen
 
 #### tMCFs
 
-- [VirusMasterSpeciesList.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusMasterSpeciesList.tmcf) contains the tmcf mapping to the csv of viruses.
-- [VirusTaxonomy.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusTaxonomy.tmcf) contains the tmcf mapping to the csv of virus isolates.
-- [VirusGenomeSegmeng.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusGenomeSegment.tmcf) contains the tmcf mapping to the csv of viral genome segments.
+- [VirusSpecies.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusSpecies.tmcf) contains the tmcf mapping to the csv of viruses.
+- [VirusIsolates.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusIsolates.tmcf) contains the tmcf mapping to the csv of virus isolates.
+- [VirusGenomeSegments.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusGenomeSegments.tmcf) contains the tmcf mapping to the csv of viral genome segments.
 
 #### Scripts 
 
