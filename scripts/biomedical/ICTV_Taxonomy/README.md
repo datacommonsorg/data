@@ -111,9 +111,9 @@ Classes, properties, and enumerations that were added in this import to represen
 
 ##### Bash Scripts
 
-- [download.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/download.sh) downloads the most recent release of the ICTV Master Species List and Virus Metadata Resource.
-- [run.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/run.sh) creates new viral taxonomy enum and converts data into formatted CSV for import of data on viruses, virus isolates, and viral genome fragments into the knowledge graph.
-- [tests.sh](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/tests.sh) runs standard tests on CSV + tMCF pairs to check for proper formatting.
+- [download.sh](scripts/download.sh) downloads the most recent release of the ICTV Master Species List and Virus Metadata Resource.
+- [run.sh](scripts/run.sh) creates new viral taxonomy enum and converts data into formatted CSV for import of data on viruses, virus isolates, and viral genome fragments into the knowledge graph.
+- [tests.sh](scripts/tests.sh) runs standard tests on CSV + tMCF pairs to check for proper formatting.
 
 ##### Python Scripts
 - [create_virus_taxonomic_ranking_enums.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/create_virus_taxonomic_ranking_enums.py) creates the viral taxonomy enum mcf file from the Virus Metadata Resource file.
