@@ -1,0 +1,180 @@
+Node: dcid:Annual_Consumption_Coal_ElectricityGeneration_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:ElectricityGeneration
+
+Node: dcid:Annual_Consumption_Coal_IronSteel_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:IronSteel
+
+Node: dcid:Annual_Consumption_Coal_PaperPulpPrintIndustry_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:PaperPulpPrintIndustry
+
+Node: dcid:Annual_Consumption_Coal_NonFerrousMetalsIndustry_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:NonFerrousMetalsIndustry
+
+Node: dcid:Annual_Consumption_Coal_ConstructionIndustry_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:ConstructionIndustry
+
+Node: dcid:Annual_Consumption_Coal_ChemicalPetrochemicalIndustry_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:ChemicalPetrochemicalIndustry
+
+Node: dcid:Annual_Consumption_Coal_TextileAndLeatherIndustry_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:TextileAndLeatherIndustry
+
+Node: dcid:Annual_Consumption_Coal_UN_UnspecifiedSector_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:UN_UnspecifiedSector
+
+Node: dcid:Annual_Consumption_Coal_CoalMines_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:CoalMines
+
+Node: dcid:Annual_Consumption_Coal_CokeOvens_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:CokeOvens
+
+Node: dcid:Annual_Consumption_Coal_Agriculture_CoalProducts
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:CoalProducts
+consumingSector: dcs:Agriculture
+
+Node: dcid:Annual_Consumption_Coal_ElectricityGeneration_LigniteCoal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:LigniteCoal
+consumingSector: dcs:ElectricityGeneration
+
+Node: dcid:Annual_Consumption_Coal_NonFerrousMetalsIndustry_LigniteCoal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:LigniteCoal
+consumingSector: dcs:NonFerrousMetalsIndustry
+
+Node: dcid:Annual_Consumption_Coal_ConstructionIndustry_LigniteCoal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:LigniteCoal
+consumingSector: dcs:ConstructionIndustry
+
+Node: dcid:Annual_Consumption_Coal_IronSteel_LigniteCoal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:LigniteCoal
+consumingSector: dcs:IronSteel
+
+Node: dcid:Annual_Consumption_Coal_ChemicalPetrochemicalIndustry_LigniteCoal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:LigniteCoal
+consumingSector: dcs:ChemicalPetrochemicalIndustry
+
+Node: dcid:Annual_Consumption_Coal_PaperPulpPrintIndustry_LigniteCoal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:LigniteCoal
+consumingSector: dcs:PaperPulpPrintIndustry
+
+Node: dcid:Annual_Consumption_Coal_TextileAndLeatherIndustry_LigniteCoal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:LigniteCoal
+consumingSector: dcs:TextileAndLeatherIndustry
+
+Node: dcid:Annual_Consumption_Coal_UN_UnspecifiedSector_LigniteCoal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:LigniteCoal
+consumingSector: dcs:UN_UnspecifiedSector
+
+Node: dcid:Annual_Consumption_Coal_Agriculture_LigniteCoal
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Coal
+measuredProperty: dcs:consumption
+measurementQualifier: dcs:Annual
+statType: dcs:measuredValue
+energySource: dcs:LigniteCoal
+consumingSector: dcs:Agriculture
+

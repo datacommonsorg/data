@@ -7,16 +7,12 @@ __pycache__/
 .vscode/
 .idea/
 *.iml
-scripts/india_udise/udise_school_dropout_rate/data/*.json
-scripts/india_udise/common/data/3061_*.json
-scripts/india_udise/common/data/1003_*.json
-scripts/india_udise/common/data/3109_*.json
-scripts/india_udise/common/data/3031_*.json
-scripts/us_epa/superfund/**/output
 **/tmp/
-scripts/**
-!scripts/rff
-!scripts/rff/**
-scripts/rff/raw_data/**
-!scripts/rff/raw_data/us_vectors/**
-!scripts/rff/raw_data/prism/daily/county/** 
+dc_generated/
+# Ignore the data folder under the un_census/enhanced_tmcf/ directory.
+*/*/*/data/*
+lib/
+bin/
+pyvenv.cfg
+# Ignore updates to the local configs json file.
+import-automation/executor/config_override.json

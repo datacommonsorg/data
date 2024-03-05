@@ -4,7 +4,7 @@ google-auth
 google-cloud-logging
 google-cloud-storage
 google-cloud-datastore
-google-cloud-scheduler
+google-cloud-scheduler==2.10.0
 flask
 gunicorn
 pytz

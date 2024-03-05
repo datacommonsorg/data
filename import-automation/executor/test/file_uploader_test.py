@@ -60,8 +60,9 @@ class LocalFileUploaderTest(unittest.TestCase):
     def test_upload_file(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
             uploader = file_uploader.LocalFileUploader(tmp_dir)
-            src = os.path.join(os.getcwd(),
-                               'test/data/COVIDTracking_States.csv')
+            src = os.path.join(
+                os.getcwd(),
+                'import-automation/executor/test/data/COVIDTracking_States.csv')
             uploader.upload_file(src, 'foo/bar/data.csv')
             self.assertTrue(
                 utils.compare_lines(src,

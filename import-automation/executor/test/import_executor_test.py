@@ -57,25 +57,17 @@ class ImportExecutorTest(unittest.TestCase):
                     self.assertEqual('123\n', proc.stdout)
 
     @mock.patch('app.utils.utctime', lambda: '2020-07-28T20:22:18.311294+00:00')
-    @mock.patch('app.service.dashboard_api.DashboardAPI')
-    def test_run_and_handle_exception(self, dashboard):
+    def test_run_and_handle_exception(self):
 
         def raise_exception():
             raise Exception
 
         result = import_executor.run_and_handle_exception(
-            'run', dashboard, raise_exception)
+            'run', raise_exception)
         self.assertEqual('failed', result.status)
         self.assertEqual([], result.imports_executed)
         self.assertIn('Exception', result.message)
         self.assertIn('Traceback', result.message)
-        dashboard.critical.assert_called_once()
-        dashboard.update_run.assert_called_once_with(
-            {
-                'status': 'failed',
-                'time_completed': '2020-07-28T20:22:18.311294+00:00'
-            },
-            run_id='run')
 
     def test_construct_process_message(self):
         process = subprocess.run('printf "out" & >&2 printf "err" & exit 1',

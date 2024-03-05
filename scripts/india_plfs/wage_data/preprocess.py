@@ -24,68 +24,71 @@ import urllib.request
 from os import path
 from india.geo.states import IndiaStatesMapper
 
-DATASETS = [
-    {
-        "period": "2017-07",
-        "data_file": "Table_42_07_09_2017.xlsx",
-        "data_rows": 37
-    },
-    {
-        "period": "2017-10",
-        "data_file": "Table_42_10_12_2017.xlsx",
-        "data_rows": 37
-    },
-    {
-        "period": "2018-01",
-        "data_file": "Table_42_01_03_2018.xlsx",
-        "data_rows": 37
-    },
-    {
-        "period": "2018-04",
-        "data_file": "Table_42_04_06_2018.xlsx",
-        "data_rows": 37
-    },
-    {
-        "period": "2018-07",
-        "data_file": "Table_42_07_09_2018.xlsx",
-        "data_rows": 37
-    },
-    {
-        "period": "2018-10",
-        "data_file": "Table_42_10_12_2018.xlsx",
-        "data_rows": 37
-    },
-    {
-        "period": "2019-01",
-        "data_file": "Table_42_01_03_2019.xlsx",
-        "data_rows": 37
-    },
-    {
-        "period": "2019-04",
-        "data_file": "Table_42_04_06_2019.xlsx",
-        "data_rows": 37
-    },
-    {
-        "period": "2019-07",
-        "data_file": "Table_42_07_09_2019.csv",
-        "data_rows": 38
-    },
-    {
-        "period": "2019-10",
-        "data_file": "Table_42_10_12_2019.csv",
-        "data_rows": 38
-    },
-    {
-        "period": "2020-01",
-        "data_file": "Table_42_01_03_2020.csv",
-        "data_rows": 38
-    },
-    {
-        "period": "2020-04",
-        "data_file": "Table_42_04_07_2020.csv",
-        "data_rows": 38
-    },
-]
+DATASETS = [{
+    "period": "2017-07",
+    "data_file": "Table_42_07_09_2017.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2017-10",
+    "data_file": "Table_42_10_12_2017.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2018-01",
+    "data_file": "Table_42_01_03_2018.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2018-04",
+    "data_file": "Table_42_04_06_2018.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2018-07",
+    "data_file": "Table_42_07_09_2018.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2018-10",
+    "data_file": "Table_42_10_12_2018.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2019-01",
+    "data_file": "Table_42_01_03_2019.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2019-04",
+    "data_file": "Table_42_04_06_2019.xlsx",
+    "data_rows": 37
+}, {
+    "period": "2019-07",
+    "data_file": "Table_42_07_09_2019.csv",
+    "data_rows": 38
+}, {
+    "period": "2019-10",
+    "data_file": "Table_42_10_12_2019.csv",
+    "data_rows": 38
+}, {
+    "period": "2020-01",
+    "data_file": "Table_42_01_03_2020.csv",
+    "data_rows": 38
+}, {
+    "period": "2020-04",
+    "data_file": "Table_42_04_07_2020.csv",
+    "data_rows": 38
+}, {
+    "period": "2020-07",
+    "data_file": "Table_42_07_09_2020.csv",
+    "data_rows": 37
+}, {
+    "period": "2020-10",
+    "data_file": "Table_42_10_12_2020.csv",
+    "data_rows": 37
+}, {
+    "period": "2021-01",
+    "data_file": "Table_42_01_03_2021.csv",
+    "data_rows": 37
+}, {
+    "period": "2021-04",
+    "data_file": "Table_42_04_06_2021.csv",
+    "data_rows": 37
+}]
 
 
 class PLFSWageDataLoader:

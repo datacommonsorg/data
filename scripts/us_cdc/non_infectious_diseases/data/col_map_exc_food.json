@@ -1,0 +1,1276 @@
+{
+    "Primary Mode": {
+        "Person-to-person": {
+            "transmissionMode": "PersonToPersonTransmission"
+        },
+        "Food": {
+            "transmissionMode": "FoodborneTransmission"
+        },
+        "Indeterminate/Other/Unknown": {
+            "transmissionMode": "IndeterminateOrOtherOrUnknownTramissionMode"
+        },
+        "Animal Contact": {
+            "transmissionMode": "AnimalContactTransmission"
+        },
+        "Water": {
+            "transmissionMode": "WaterborneTransmission"
+        },
+        "Environmental contamination other than food/water": {
+            "transmissionMode": "EnvironmentalContaminationTransmissionExceptFoodOrWater"
+        }
+    },
+    "Etiology Status": {
+        "Confirmed": {
+            "medicalStatus": "ConfirmedCase"
+        },
+        "Suspected": {
+            "medicalStatus": "SuspectedCase"
+        }
+    },
+    "Etiology": {
+        "Acanthamoeba unknown": {
+            "etiology": "AcanthamoebaUnknown"
+        },
+        "Adenovirus": {
+            "etiology": "Adenovirus"
+        },
+        "Adenovirus B": {
+            "etiology": "AdenovirusB"
+        },
+        "Adenovirus F": {
+            "etiology": "AdenovirusF"
+        },
+        "Adenovirus other": {
+            "etiology": "AdenovirusOther"
+        },
+        "Adenovirus unknown": {
+            "etiology": "AdenovirusUnknown"
+        },
+        "Aeromonas hydrophilia": {
+            "etiology": "AeromonasHydrophiliaEtiology"
+        },
+        "Aeromonas unknown": {
+            "etiology": "AeromonasUnknown"
+        },
+        "Alkaline Water": {
+            "etiology": "AlkalineWater"
+        },
+        "Amnesic shellfish poison": {
+            "etiology": "AmnesicShellfishPoison"
+        },
+        "Anatoxin-a": {
+            "etiology": "AnatoxinA"
+        },
+        "Anisakis": {
+            "etiology": "Anisakis"
+        },
+        "Arsenic": {
+            "etiology": "Arsenic"
+        },
+        "Astrovirus": {
+            "etiology": "Astrovirus"
+        },
+        "Avian schistosomes": {
+            "etiology": "AvianSchistosomes"
+        },
+        "Bacillus": {
+            "etiology": "BacillusEtiology"
+        },
+        "Bacillus cereus": {
+            "etiology": "BacillusCereusEtiology"
+        },
+        "Bacillus other": {
+            "etiology": "BacillusOther"
+        },
+        "Bacillus stearothermophilus": {
+            "etiology": "BacillusStearothermophilusEtiology"
+        },
+        "Bacillus subtilus": {
+            "etiology": "BacillusSubtilusEtiology"
+        },
+        "Bacillus unknown": {
+            "etiology": "BacillusUnknown"
+        },
+        "Blastocystis hominis": {
+            "etiology": "BlastocystisHominisEtiology"
+        },
+        "Bromate": {
+            "etiology": "Bromate"
+        },
+        "Bromine": {
+            "etiology": "Bromine"
+        },
+        "Brucella": {
+            "etiology": "Brucella"
+        },
+        "Brucella unknown": {
+            "etiology": "BrucellaUnknown"
+        },
+        "Campylobacter": {
+            "etiology": "CampylobacterEtiology"
+        },
+        "Campylobacter coli": {
+            "etiology": "CampylobacterColiEtiology"
+        },
+        "Campylobacter fetus": {
+            "etiology": "CampylobacterFetusEtiology"
+        },
+        "Campylobacter jejuni": {
+            "etiology": "CampylobacterJejuniEtiology"
+        },
+        "Campylobacter lari": {
+            "etiology": "CampylobacterLariEtiology"
+        },
+        "Campylobacter other": {
+            "etiology": "CampylobacterOther"
+        },
+        "Campylobacter unknown": {
+            "etiology": "CampylobacterUnknown"
+        },
+        "Chloramines": {
+            "etiology": "Chloramines"
+        },
+        "Chlordane": {
+            "etiology": "Chlordane"
+        },
+        "Chlorine": {
+            "etiology": "Chlorine"
+        },
+        "Chlorine Gas": {
+            "etiology": "ChlorineGas"
+        },
+        "Chromium": {
+            "etiology": "Chromium"
+        },
+        "Ciguatoxin": {
+            "etiology": "Ciguatoxin"
+        },
+        "Cleaning agents": {
+            "etiology": "CleaningAgents"
+        },
+        "Cleaning Agents": {
+            "etiology": "CleaningAgents"
+        },
+        "Clostridium": {
+            "etiology": "ClostridiumEtiology"
+        },
+        "Clostridium botulinum": {
+            "etiology": "ClostridiumBotulinumEtiology"
+        },
+        "Clostridium difficile": {
+            "etiology": "ClostridiumDifficileEtiology"
+        },
+        "Clostridium other": {
+            "etiology": "ClostridiumOther"
+        },
+        "Clostridium perfringens": {
+            "etiology": "ClostridiumPerfringensEtiology"
+        },
+        "Clostridium unknown": {
+            "etiology": "ClostridiumUnknown"
+        },
+        "Copper": {
+            "etiology": "Copper"
+        },
+        "Cryptosporidium": {
+            "etiology": "CryptosporidiumEtiology"
+        },
+        "Cryptosporidium hominis": {
+            "etiology": "CryptosporidiumHominisEtiology"
+        },
+        "Cryptosporidium other": {
+            "etiology": "CryptosporidiumOther"
+        },
+        "Cryptosporidium parvum": {
+            "etiology": "CryptosporidiumParvumEtiology"
+        },
+        "Cryptosporidium unknown": {
+            "etiology": "CryptosporidiumUnknown"
+        },
+        "Cyanotoxin": {
+            "etiology": "Cyanotoxin"
+        },
+        "Cyanotoxin other": {
+            "etiology": "CyanotoxinOther"
+        },
+        "Cyanotoxin unknown": {
+            "etiology": "CyanotoxinUnknown"
+        },
+        "Cyclospora": {
+            "etiology": "CyclosporaEtiology"
+        },
+        "Cyclospora cayetanensis": {
+            "etiology": "CyclosporaCayetanensisEtiology"
+        },
+        "Disinfection byproducts": {
+            "etiology": "DisinfectionByproducts"
+        },
+        "Endolimax nana": {
+            "etiology": "EndolimaxNanaEtiology"
+        },
+        "Entamoeba coli": {
+            "etiology": "EntamoebaColiEtiology"
+        },
+        "Entamoeba histolytica": {
+            "etiology": "EntamoebaHistolyticaEtiology"
+        },
+        "Entamoeba unknown": {
+            "etiology": "EntamoebaUnknown"
+        },
+        "Enterobacter": {
+            "etiology": "EnterobacterEtiology"
+        },
+        "Enterobacter cloacae": {
+            "etiology": "EnterobacterCloacaeEtiology"
+        },
+        "Enterobacter other": {
+            "etiology": "EnterobacterOther"
+        },
+        "Enterococcus faecalis": {
+            "etiology": "EnterococcusFaecalisEtiology"
+        },
+        "Enterovirus Coxsackievirus A": {
+            "etiology": "EnterovirusCoxsackievirusAEtiology"
+        },
+        "Escherichia": {
+            "etiology": "EscherichiaEtiology"
+        },
+        "Escherichia coli, Enteroaggregative": {
+            "etiology": "EColiEnteroaggregativeEtiology"
+        },
+        "Escherichia coli, Enteroinvasive": {
+            "etiology": "EColiEnteroinvasiveEtiology"
+        },
+        "Escherichia coli, Enteropathogenic": {
+            "etiology": "EColiEnteropathogenicEtiology"
+        },
+        "Escherichia coli, Enterotoxigenic": {
+            "etiology": "EColiEnterotoxigenicEtiology"
+        },
+        "Escherichia coli, Other": {
+            "etiology": "EColiOther"
+        },
+        "Escherichia coli, Shiga toxin-producing": {
+            "etiology": "ShigaToxinEColi"
+        },
+        "ethyl acrylate": {
+            "etiology": "EthylAcrylate"
+        },
+        "Ethyl benzene": {
+            "etiology": "EthylBenzene"
+        },
+        "Ethylene Glycol": {
+            "etiology": "EthyleneGlycol"
+        },
+        "Fluoride": {
+            "etiology": "Fluorine"
+        },
+        "Gasoline": {
+            "etiology": "Gasoline"
+        },
+        "Giardia": {
+            "etiology": "GiardiaEtiology"
+        },
+        "Giardia duodenalis": {
+            "etiology": "GiardiaDuodenalisEtiology"
+        },
+        "Giardia unknown": {
+            "etiology": "GiardiaUnknown"
+        },
+        "Heavy metals": {
+            "etiology": "HeavyMetal"
+        },
+        "Helicobacter canadensis": {
+            "etiology": "HelicobacterCanadensisEtiology"
+        },
+        "Hepatitis A": {
+            "etiology": "HepatitisA"
+        },
+        "Heptachlor": {
+            "etiology": "Heptachlor"
+        },
+        "herbicide": {
+            "etiology": "Herbicide"
+        },
+        "Histamine": {
+            "etiology": "Histamine"
+        },
+        "Hydrochloric Acid": {
+            "etiology": "HydrochloricAcid"
+        },
+        "Kerosene": {
+            "etiology": "EIAKerosene"
+        },
+        "Legionella": {
+            "etiology": "LegionellaEtiology"
+        },
+        "Legionella anisa": {
+            "etiology": "LegionellaAnisaEtiology"
+        },
+        "Legionella bozemanii": {
+            "etiology": "LegionellaBozemaniiEtiology"
+        },
+        "Legionella dumoffii": {
+            "etiology": "LegionellaDumoffiiEtiology"
+        },
+        "Legionella feeleii": {
+            "etiology": "LegionellaFeeleiiEtiology"
+        },
+        "Legionella longbeachae": {
+            "etiology": "LegionellaLongbeachaeEtiology"
+        },
+        "Legionella micdadei": {
+            "etiology": "LegionellaMicdadeiEtiology"
+        },
+        "Legionella other": {
+            "etiology": "LegionellaOther"
+        },
+        "Legionella pneumophila": {
+            "etiology": "LegionellaPneumophilaEtiology"
+        },
+        "Legionella unknown": {
+            "etiology": "LegionellaUnknown"
+        },
+        "Leptospira interrogans": {
+            "etiology": "LeptospiraInterrogansEtiology"
+        },
+        "Leptospira unknown": {
+            "etiology": "LeptospiraUnknown"
+        },
+        "Listeria monocytogenes": {
+            "etiology": "ListeriaMonocytogenesEtiology"
+        },
+        "Listeria unknown": {
+            "etiology": "ListeriaUnknown"
+        },
+        "Microcoleus lyngbyei": {
+            "etiology": "MicrocoleusLyngbyeiEtiology"
+        },
+        "Microcystis": {
+            "etiology": "Microcystis"
+        },
+        "Microcystis unknown": {
+            "etiology": "MicrocystisUnknown"
+        },
+        "Monosodium glutamate (MSG)": {
+            "etiology": "MonosodiumGlutamate"
+        },
+        "Morpholine": {
+            "etiology": "Morpholine"
+        },
+        "Mycobacterium abscessus": {
+            "etiology": "MycobacteriumAbscessusEtiology"
+        },
+        "Mycobacterium avium": {
+            "etiology": "MycobacteriumAviumEtiology"
+        },
+        "Mycobacterium avium complex": {
+            "etiology": "MycobacteriumAviumComplexEtiology"
+        },
+        "Mycobacterium mageritense": {
+            "etiology": "MycobacteriumMageritenseEtiology"
+        },
+        "Mycobacterium other": {
+            "etiology": "MycobacteriumOther"
+        },
+        "Mycotoxins": {
+            "etiology": "Mycotoxins"
+        },
+        "Naegleria fowleri": {
+            "etiology": "NaegleriaFowleriEtiology"
+        },
+        "Neurotoxic shellfish poison": {
+            "etiology": "NeurotoxicShellfishPoison"
+        },
+        "Nitrate": {
+            "etiology": "Nitrate"
+        },
+        "Nitrite": {
+            "etiology": "Nitrite"
+        },
+        "Norovirus": {
+            "etiology": "Norovirus"
+        },
+        "Norovirus Genogroup I": {
+            "etiology": "NorovirusGenogroupI"
+        },
+        "Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupII"
+        },
+        "Norovirus Genogroup IV": {
+            "etiology": "NorovirusGenogroupIV"
+        },
+        "Norovirus Genogroup IX": {
+            "etiology": "NorovirusGenogroupIX"
+        },
+        "Norovirus other": {
+            "etiology": "NorovirusOther"
+        },
+        "Norovirus unknown": {
+            "etiology": "NorovirusUnknown"
+        },
+        "Oil": {
+            "etiology": "FuelOil"
+        },
+        "Other": {
+            "etiology": "NORSOthers"
+        },
+        "Other - Bacterium": {
+            "etiology": "NORSOtherBacterium"
+        },
+        "Other - Chemical/Toxin": {
+            "etiology": "NORSOtherChemicalOrToxin"
+        },
+        "Other - Parasite": {
+            "etiology": "NORSOtherParasite"
+        },
+        "Other - Virus": {
+            "etiology": "NORSOtherVirus"
+        },
+        "Other Minerals": {
+            "etiology": "NORSOtherMinerals"
+        },
+        "Pantoea agglomerans": {
+            "etiology": "PantoeaAgglomeransEtiology"
+        },
+        "Paralytic shellfish poison": {
+            "etiology": "ParalyticShellfishPoison"
+        },
+        "Pesticides": {
+            "etiology": "Pesticides"
+        },
+        "Phenol": {
+            "etiology": "Phenol"
+        },
+        "Plant/Herbal toxins": {
+            "etiology": "ToxinsPlantOrHerbal"
+        },
+        "Plesiomonas shigelloides": {
+            "etiology": "PlesiomonasShigelloidesEtiology"
+        },
+        "Proteus mirabilis": {
+            "etiology": "ProteusMirabilisEtiology"
+        },
+        "Providencia unknown": {
+            "etiology": "ProvidenciaUnknown"
+        },
+        "Pseudomonas": {
+            "etiology": "PseudomonasEtiology"
+        },
+        "Pseudomonas aeruginosa": {
+            "etiology": "PseudomonasAeruginosaEtiology"
+        },
+        "Pseudomonas unknown": {
+            "etiology": "PseudomonasUnknown"
+        },
+        "Puffer fish tetrodotoxin": {
+            "etiology": "PufferFishTetrodotoxin"
+        },
+        "Rotavirus": {
+            "etiology": "Rotavirus"
+        },
+        "Salmonella": {
+            "etiology": "SalmonellaEtiology"
+        },
+        "Salmonella enterica": {
+            "etiology": "SalmonellaEntericaEtiology"
+        },
+        "Salmonella other": {
+            "etiology": "SalmonellaOther"
+        },
+        "Salmonella unknown": {
+            "etiology": "SalmonellaUnknown"
+        },
+        "Sapovirus": {
+            "etiology": "Sapovirus"
+        },
+        "Sapovirus Genogroup I": {
+            "etiology": "SapovirusGenogroupI"
+        },
+        "Sapovirus Genogroup II": {
+            "etiology": "SapovirusGenogroupII"
+        },
+        "Sapovirus Genogroup IV": {
+            "etiology": "SapovirusGenogroupIV"
+        },
+        "Sapovirus Genogroup V": {
+            "etiology": "SapovirusGenogroupV"
+        },
+        "Sapovirus unknown": {
+            "etiology": "SapovirusUnknown"
+        },
+        "Scombroid toxin": {
+            "etiology": "ScombroidToxin"
+        },
+        "Selenium": {
+            "etiology": "Selenium"
+        },
+        "Shigella": {
+            "etiology": "ShigellaEtiology"
+        },
+        "Shigella boydii": {
+            "etiology": "ShigellaBoydiiEtiology"
+        },
+        "Shigella dysenteriae": {
+            "etiology": "ShigellaDysenteriaeEtiology"
+        },
+        "Shigella flexneri": {
+            "etiology": "ShigellaFlexneriEtiology"
+        },
+        "Shigella other": {
+            "etiology": "ShigellaOther"
+        },
+        "Shigella sonnei": {
+            "etiology": "ShigellaSonneiEtiology"
+        },
+        "Shigella unknown": {
+            "etiology": "ShigellaUnknown"
+        },
+        "Soap/Detergent": {
+            "etiology": "SoapOrDetergent"
+        },
+        "Sodium Hydroxide": {
+            "etiology": "SodiumHydroxide"
+        },
+        "Staphylococcus": {
+            "etiology": "StaphylococcusEtiology"
+        },
+        "Staphylococcus aureus": {
+            "etiology": "StaphylococcusAureusEtiology"
+        },
+        "Staphylococcus other": {
+            "etiology": "StaphylococcusOther"
+        },
+        "Staphylococcus unknown": {
+            "etiology": "StaphylococcusUnknown"
+        },
+        "Streptococcus Group A": {
+            "etiology": "StreptococcusGroupA"
+        },
+        "Streptococcus Group B, C or G": {
+            "etiology": "StreptococcusGroupBOrCOrG"
+        },
+        "Streptococcus unknown": {
+            "etiology": "StreptococcusUnknown"
+        },
+        "Toluene": {
+            "etiology": "Toluene"
+        },
+        "Toxaphene": {
+            "etiology": "Toxaphene"
+        },
+        "Toxoplasma": {
+            "etiology": "ToxoplasmaEtiology"
+        },
+        "Toxoplasma gondii": {
+            "etiology": "ToxoplasmaGondiiEtiology"
+        },
+        "Trichinella": {
+            "etiology": "TrichinellaEtiology"
+        },
+        "Trichinella spiralis": {
+            "etiology": "TrichinellaSpiralisEtiology"
+        },
+        "Trichinella unknown": {
+            "etiology": "TrichinellaUnknown"
+        },
+        "Trichloroethylene": {
+            "etiology": "Trichloroethylene"
+        },
+        "Unknown": {
+            "etiology": "NORSUnknown"
+        },
+        "Unknown - Bacterium": {
+            "etiology": "NORSUnknownBacterium"
+        },
+        "Unknown - Chemical/Toxin": {
+            "etiology": "NORSUnknownChemicalOrToxin"
+        },
+        "Unknown - Virus": {
+            "etiology": "NORSUnknownVirus"
+        },
+        "Vibrio": {
+            "etiology": "VibrioEtiology"
+        },
+        "Vibrio cholerae": {
+            "etiology": "Cholera"
+        },
+        "Vibrio other": {
+            "etiology": "VibrioOther"
+        },
+        "Vibrio parahaemolyticus": {
+            "etiology": "VibrioParahaemolyticusEtiology"
+        },
+        "Vibrio unknown": {
+            "etiology": "VibrioUnknown"
+        },
+        "Vibrio vulnificus": {
+            "etiology": "VibrioVulnificusEtiology"
+        },
+        "Xylene": {
+            "etiology": "Xylene"
+        },
+        "Yersinia": {
+            "etiology": "YersiniaEtiology"
+        },
+        "Yersinia enterocolitica": {
+            "etiology": "YersiniaEnterocoliticaEtiology"
+        },
+        "Yersinia other": {
+            "etiology": "YersiniaOther"
+        },
+        "Yersinia unknown": {
+            "etiology": "YersiniaUnknown"
+        }
+    },
+    "Serotype or Genotype": {
+        "unknown": {},
+        "Enteritidis": {},
+        "Braenderup": {},
+        "O157:H7": {},
+        "GII.4 Den Haag": {},
+        "I 4,[5],12:i:-": {},
+        "Typhimurium": {},
+        "GII.4 New Orleans": {},
+        "GII.4 Osaka": {},
+        "GI.4": {},
+        "Brandenburg": {},
+        "Saintpaul": {},
+        "Typhi": {},
+        "Paratyphi B": {},
+        "GII.12": {},
+        "Oranienburg": {},
+        "Heidelberg": {},
+        "Bredeney": {},
+        "Montevideo": {},
+        "Hadar": {},
+        "Infantis": {},
+        "Javiana": {},
+        "Muenchen": {},
+        "Hartford": {},
+        "Cubana": {},
+        "O111": {},
+        "Newport": {},
+        "Miami": {},
+        "GII.2": {},
+        "Schwarzengrund": {},
+        "Typhimurium var Cope": {},
+        "Reading": {},
+        "Pomona": {},
+        "Kiambu": {},
+        "Thompson": {},
+        "Dublin": {},
+        "Ohio": {},
+        "Derby": {},
+        "Paratyphi B var. L(+) tartrate +": {},
+        "GII.7": {},
+        "GII.6": {},
+        "O121": {},
+        "serogroup 1": {},
+        "Berta": {},
+        "GII.4 untypeable": {},
+        "O157": {},
+        "Agona": {},
+        "GII.4 other": {},
+        "GI.3": {},
+        "Anfo": {},
+        "Potsdam": {},
+        "Hvittingfoss": {},
+        "other": {},
+        "GII.1": {},
+        "GI.2": {},
+        "IbA10G2": {},
+        "GII.13": {},
+        "GII.4 Apeldoorn": {},
+        "GII.4 Yerseke": {},
+        "GI.6": {},
+        "O26:H11": {},
+        "Give": {},
+        "O157:NM (H-)": {},
+        "serotype 2 unspecified": {},
+        "Poona": {},
+        "Anatum": {},
+        "O6:H16": {},
+        "Chester": {},
+        "GI.7": {},
+        "Norwich": {},
+        "Group B": {},
+        "Stanley": {},
+        "Uganda": {},
+        "O26": {},
+        "O26:NM": {},
+        "Panama": {},
+        "O121:H19": {},
+        "O84:NM": {},
+        "O103:H2": {},
+        "O145:NM": {},
+        "serogroup 1, MAb (1), Camperdown 1": {},
+        "Sandiego": {},
+        "Litchfield": {},
+        "IaA28R4": {},
+        "IdA15G1": {},
+        "IaA24R4": {},
+        "Johannesburg": {},
+        "Carrau": {},
+        "serogroup 1, MAb (1,2,3), Knoxville 1": {},
+        "O111:NM": {},
+        "Bareilly": {},
+        "subgroup D": {},
+        "Barranquilla": {},
+        "Eastbourne": {},
+        "GII.16": {},
+        "Lagos": {},
+        "Clackamas": {},
+        "Other": {},
+        "GI1": {},
+        "O145": {},
+        "IaA15R3": {},
+        "O45": {},
+        "GII.3": {},
+        "O103": {},
+        "GII.4 Sydney": {},
+        "O118:H16": {},
+        "IIaA15G2R1": {},
+        "IIaA16G3R1": {},
+        "Weltevreden": {},
+        "Baildon": {},
+        "Utah": {},
+        "Bovismorbificans": {},
+        "Blockley": {},
+        "IIaA15G2R2": {},
+        "Mbandaka": {},
+        "GII.17": {},
+        "serogroup 2": {},
+        "Wimborne": {},
+        "Altona": {},
+        "serotype 1b": {},
+        "O45:H2": {},
+        "GI.5": {},
+        "GII.5": {},
+        "IIaA16G2R2": {},
+        "GI.9": {},
+        "Virchow": {},
+        "Oslo": {},
+        "serotype 6": {},
+        "Nchanga": {},
+        "Cerro": {},
+        "Adelaide": {},
+        "Worthington": {},
+        "Lille": {},
+        "GI.1": {},
+        "serotype 3 unspecified": {},
+        "GII.P31 - GII.4 Sydney": {},
+        "Lomalinda": {},
+        "Livingstone": {},
+        "Senftenberg": {},
+        "serogroup 3": {},
+        "Chailey": {},
+        "Mississippi": {},
+        "Muenster": {},
+        "Rubislaw": {},
+        "Subspecies I": {},
+        "Abony": {},
+        "unknown - unknown": {},
+        "Overschie": {},
+        "GII.14": {},
+        "serotype 3a": {},
+        "GI2": {},
+        "IIaA17G2R1": {},
+        "Cotham": {},
+        "Alachua": {},
+        "GII.P7 - GII.6": {},
+        "O126": {},
+        "GI.P3 - GI.3": {},
+        "O146:H21": {},
+        "IfA12G1": {},
+        "Group D1": {},
+        "Urbana": {},
+        "Telelkebir": {},
+        "Kisarawe": {},
+        "IdA17": {},
+        "Minnesota": {},
+        "Singapore": {},
+        "Group C1": {},
+        "serogroup 2-14": {},
+        "Subspecies IIIa": {},
+        "GII.8": {},
+        "Kintambo": {},
+        "Gaminara": {},
+        "Kentucky": {},
+        "Agbeni": {},
+        "Group D2": {},
+        "Havana": {},
+        "Group E1": {},
+        "O1": {},
+        "Newbrunswick": {},
+        "Group A": {},
+        "Group C2": {},
+        "O169:H41": {},
+        "O6": {},
+        "Coeln": {},
+        "serotype 2a": {},
+        "Oritamerin": {},
+        "serotype 9": {},
+        "Choleraesuis": {},
+        "O27": {},
+        "Lika": {},
+        "Kottbus": {},
+        "London": {},
+        "Group L": {},
+        "Amager": {},
+        "Roterberg": {},
+        "serotype 3b": {},
+        "Agama": {},
+        "Manhattan": {},
+        "Grumpensis": {},
+        "Chincol": {},
+        "Tallahassee": {},
+        "Mono": {},
+        "IV 50:z4,z23:-": {},
+        "Meleagridis": {},
+        "Tennessee": {},
+        "Valdosta": {},
+        "O84": {},
+        "Wandsworth": {},
+        "Aberdeen": {},
+        "Rissen": {},
+        "Carmel": {},
+        "Sundsvall": {},
+        "GII.10": {},
+        "serogroup 1 and 6": {},
+        "Bournemouth": {},
+        "Paratyphi A": {},
+        "GI.P11 - GI.6": {},
+        "Assemblage B": {},
+        "serogroup 5": {},
+        "IaA29R4": {},
+        "serogroup 4": {},
+        "IIaA17G2R2": {},
+        "Indiana": {},
+        "3": {},
+        "serogroup 1 and 5": {},
+        "GII.P2 - GII.2": {},
+        "Schleissheim": {},
+        "Isangi": {},
+        "IgA20": {},
+        "GI.P13 - GI.3": {},
+        "GI.P5 - GI.5": {},
+        "Toucra": {},
+        "GII.P16 - GII.2": {},
+        "Birkenhead": {},
+        "Goldcoast": {},
+        "GV1": {},
+        "GII.P16 - GII.4 Sydney": {},
+        "GII.P7 - GII.7": {},
+        "GII.P4 New Orleans - GII.4 Sydney": {},
+        "unknown - ": {},
+        "serogroup 1, MAb (2)": {},
+        "other - ": {},
+        "GII.P17 - GII.17": {},
+        "GII.P7 - GII.14": {},
+        "GI.P7 - GI.7": {},
+        "unknown - GII.4 Sydney": {},
+        "GII.P17 - ": {},
+        "GII.P16 - ": {},
+        "Lohbruegge": {},
+        "GII.P33 - GII.1": {},
+        "unknown - GII.2": {},
+        "41": {},
+        "GII.untypeable": {},
+        "other - GII.4 Sydney": {},
+        "GII.P12 - ": {},
+        "GII.P4 New Orleans - ": {},
+        "GII.P12 - GII.3": {},
+        "GI.P untypeable - GI.3": {},
+        "GII.P31 - ": {},
+        "GII.P16 - GII.1": {},
+        "GI.P1 - GI.1": {},
+        "GI.P7 - other": {},
+        "GII3": {},
+        "GI.P7 - ": {},
+        "GI.P11 - ": {},
+        "GI.P6 - GI.6": {},
+        "GII.P16 - GII.13": {},
+        "GII.P21 - GII.3": {},
+        "O124": {},
+        "GII.P7 - ": {},
+        "O91:H14": {},
+        "GII.P untypeable - ": {},
+        "GII.P12 - GII.13": {},
+        "GI.P4 - GI.4": {},
+        "GII.20": {},
+        "serogroup 6": {},
+        "GII.P15 - GIX.1": {},
+        "GII.P4 New Orleans - GII.4 untypeable": {},
+        "GII.P16 - GII.3": {},
+        "GII.P16 - GII.4 untypeable": {},
+        "GI.P7 - GI.6": {},
+        "GII.P16 - GII.12": {},
+        "unknown - GII.1": {},
+        "GI.P4 - GI.5": {},
+        "unknown - GII.4 untypeable": {},
+        "GII.P22 - GII.17": {},
+        "GI.P4 - ": {},
+        "Durban": {},
+        "unknown - GII.17": {},
+        "I 4,[5],12:b:- var. L(+) tartrate +": {},
+        "Durham": {},
+        "GI.P1 - ": {},
+        "GII.P23 - ": {},
+        "GII.P22 - GII.5": {},
+        "unknown - GI.6": {},
+        "GI.P3 - ": {},
+        "IIaA15G2R3": {},
+        "GI.P2 - GI.2": {},
+        "GI.P13 - ": {},
+        "GII.P8 - GII.8": {},
+        "Okatie": {},
+        "GII.P16 - unknown": {},
+        "Lome": {},
+        "O148:H28": {},
+        "40": {},
+        "other - other": {},
+        "GII.P17 - GII.6": {},
+        "GII.P16 - GII.16": {},
+        "GII.P15 - other": {},
+        "GII.P16 - GII.5": {},
+        "Idikan": {},
+        "GII.P7 - GII.9": {},
+        "GI.P4 - GI.1": {},
+        "GII.P16 - GII.14": {},
+        "unknown - GII.16": {},
+        "Apapa": {},
+        "GI.P untypeable - GI.untypeable": {},
+        "Concord": {},
+        "Fluntern": {},
+        "GII.P untypeable - GII.untypeable": {},
+        "Orientalis": {},
+        "unknown - GII.untypeable": {},
+        "other - GII.3": {},
+        "GII.P untypeable - GII.6": {},
+        "GII.P untypeable - GII.14": {},
+        "GII.P untypeable - GII.3": {},
+        "O22:H8": {},
+        "O111:H8": {},
+        "Offa": {},
+        "GII.P untypeable - GII.7": {},
+        "GII.P untypeable - GII.4 New Orleans": {},
+        "other - unknown": {},
+        "other - GII.5": {},
+        "GII.P1 - ": {},
+        "GII.P16 - GII.10": {},
+        "GII.P untypeable - unknown": {},
+        "GII.P untypeable - GII.4 untypeable": {},
+        "GII.P7 - GII.4 Sydney": {},
+        "serogroup other than 1-6": {},
+        "serogroup 10": {},
+        "serotype 1 unspecified": {},
+        "serotype 1": {},
+        "non-O1": {},
+        "serogroup 7": {},
+        "1": {},
+        "GII.P31 - GII.4 untypeable": {},
+        "unknown - GI.2": {},
+        "Guinea": {},
+        "GII.P21 - GII.13": {},
+        "Duisburg": {},
+        "Ealing": {}
+    },
+    "Water Status": {
+        "Reviewed": {
+            "waterStatus": "CDCReviewed"
+        },
+        "Cleaned": {
+            "waterStatus": "CDCCleaned"
+        }
+    },
+    "Water Exposure": {
+        "Recreational water -- treated": {
+            "waterExposure": "TreatedRecreationalWater"
+        },
+        "Recreational water -- untreated": {
+            "waterExposure": "UntreatedRecreationalWater"
+        },
+        "Other/Environmental water": {
+            "waterExposure": "CDCOtherEnvironmentalWater"
+        },
+        "Undetermined water": {
+            "waterExposure": "CDCUndeterminedWater"
+        },
+        "Drinking water": {
+            "waterExposure": "DrinkingWater"
+        }
+    },
+    "Water Type": {
+        "Pool - Swimming Pool": {},
+        "Spa/Whirlpool/Hot Tub": {},
+        "River/Stream": {},
+        "Lake/Reservoir/Impoundment": {},
+        "Pool - Kiddie/Wading, Private": {},
+        "Unknown": {},
+        "Community": {},
+        "Individual/Private": {},
+        "Fountain - Ornamental": {},
+        "Other": {},
+        "Pool - Waterpark": {},
+        "Cooling Tower": {},
+        "Pool - Wave Pool": {},
+        "Pond": {},
+        "Nontransient Noncommunity": {},
+        "Spring": {},
+        "Puddle/Canal/Swamp": {},
+        "Pool - Swimming Pool (Hot Spring)": {},
+        "Transient Noncommunity": {},
+        "Pool - Kiddie/Wading, Public": {},
+        "Mist/Steam - Device (e.g., steam cleaner)": {},
+        "Fountain(s) - Interactive": {},
+        "Ocean": {},
+        "Temporary Water Slide": {},
+        "Commercially-Bottled": {},
+        "Pool - Water Slide": {},
+        "Well": {},
+        "Canal": {},
+        "Evaporative Condenser/Air Conditioner": {},
+        "Sewage": {},
+        "Fountain - Unknown Intent": {},
+        "Hot Spring": {},
+        "Bulk Water Purchase": {},
+        "Mist/Steam - Mister": {},
+        "Spa/Whirlpool/Hot Tub (Hot Spring)": {},
+        "Hydrant": {},
+        "Puddle": {},
+        "Treated Wastewater": {}
+    }, 
+    "Animal Type": {
+        "Cattle": {},
+        "Sheep or goats": {},
+        "Pet fish": {},
+        "Baby chick or duckling": {},
+        "Cat or kitten": {},
+        "Turtle": {},
+        "Lizard": {},
+        "Other reptile": {},
+        "Bird, not including poultry": {},
+        "Other small mammalian household pet": {},
+        "Pig": {},
+        "Dog or Puppy": {},
+        "Other (specify)": {},
+        "Other poultry": {},
+        "Amphibian": {}
+    },
+    "Setting": {
+        "Hotel/motel": {},
+        "Restaurant - Sit-down dining": {},
+        "Other, specify": {},
+        "Restaurant": {},
+        "Restaurant - \"Fast-food\"(drive up service or pay at counter)": {},
+        "Restaurant - other or unknown type": {},
+        "Long-term care/nursing home/assisted living facility": {},
+        "Private home/residence": {},
+        "Caterer (food prepared off-site from where served)": {},
+        "Grocery store": {},
+        "Other": {},
+        "School/college/university": {},
+        "Banquet Facility (food prepared and served on-site)": {},
+        "Hospital": {},
+        "Child day care": {},
+        "Hotel/Motel/Lodge/Inn": {},
+        "Other healthcare facility": {},
+        "Office/indoor workplace": {},
+        "Camp": {},
+        "Event space": {},
+        "Prison/jail": {},
+        "Fair, festival, other temp or mobile services": {},
+        "Unknown": {},
+        "Beach - Public": {},
+        "Camp/Cabin Setting": {},
+        "Religious facility": {},
+        "School/College/University": {},
+        "Ship/boat": {},
+        "Public Outdoor Area": {},
+        "Park - State Park": {},
+        "Apartment/Condo": {},
+        "Long term care facility": {},
+        "Club (Requires Membership)": {},
+        "Private Residence": {},
+        "Subdivision/Neighborhood": {},
+        "Assisted Living/Rehab": {},
+        "Park - Waterpark": {},
+        "Community/Municipality": {},
+        "Hospital/Health Care": {},
+        "Park - Amusement": {},
+        "Restaurant/Cafeteria": {},
+        "Church/Place of Worship": {},
+        "Military Facility": {},
+        "Factory/Industrial Facility": {},
+        "Prison/Jail (Juvenile/Adult)": {},
+        "Park - Community/Municipal": {},
+        "Park - Unknown": {},
+        "Recreational facility": {},
+        "Outdoor Place of Work": {},
+        "Long Term Care Facility": {},
+        "Indoor workplace/Office": {},
+        "Mobile Home Park": {},
+        "Resort": {},
+        "National Forest": {},
+        "Indoor Workplace/Office": {},
+        "Beach - Private": {},
+        "Beach - Nonspecific": {},
+        "Farm/dairy": {},
+        "Trailer Park": {},
+        "Farm/Agricultural Setting": {},
+        "Festival/fair": {},
+        "Hall/Meeting Facility": {},
+        "Casino": {},
+        "Child Care/Daycare Center": {},
+        "Restaurant - Buffet": {},
+        "Shelter/group home/transitional housing": {},
+        "Park - National Park": {},
+        "Store/Shop": {},
+        "Zoo": {},
+        "Native American Reservation": {},
+        "Bus Station": {},
+        "Nail Salon": {},
+        "Ship/Boat - Cruise": {},
+        "Festival/Fair": {}
+    },
+    "Animal Type Specify": {
+        "Cattle, calf": {},
+        "Goat, kid": {},
+        "Fish": {},
+        "Goat": {},
+        "Chick, baby chick": {},
+        "Cat, kitten": {},
+        "Turtle": {},
+        "Bird": {},
+        "Bearded dragon": {},
+        "Reptile, other": {},
+        "Snake": {},
+        "Mouse": {},
+        "Cattle": {},
+        "Calves": {},
+        "Horse": {},
+        "Dog": {},
+        "Chicken": {},
+        "Pig/hog (domestic)": {},
+        "Ferret": {},
+        "Salamander": {},
+        "Rat": {},
+        "Dog, puppy": {},
+        "Sheep": {},
+        "African dwarf frog": {},
+        "Rodent, other": {},
+        "Sheep, lamb": {},
+        "Guinea pig": {},
+        "Rabbit": {},
+        "Alpaca": {},
+        "Hedgehog": {},
+        "Frogs": {},
+        "Livestock, other": {},
+        "Duck": {},
+        "Red-eared slider turtle": {},
+        "Ponies": {},
+        "Llamas": {},
+        "Turkey": {},
+        "Duck, duckling": {},
+        "Small Turtle (<4in)": {},
+        "Vulture": {},
+        "Baby quail": {},
+        "Chickens": {},
+        "Donkey": {},
+        "Calf": {},
+        "Poultry, other": {},
+        "Raccoon": {},
+        "Small Turtles (<4in)": {},
+        "Small turtles (<4in)": {},
+        "Cat": {},
+        "Goose": {},
+        "Pigs": {},
+        "Horses": {},
+        "Yaks": {},
+        "Rabbits": {},
+        "Goats": {},
+        "Turtle, under 4 inches": {},
+        "Frozen chicks fed to reptile": {},
+        "Black roughneck monitor lizard": {},
+        "goats": {},
+        "donkey": {},
+        "chicken": {},
+        "Less than 4 inches": {},
+        "calves": {},
+        "Shelter dog": {},
+        "baby calf": {},
+        "Baby chicks": {},
+        "goat": {},
+        "Bearded Dragon": {},
+        "Bull": {},
+        "angora goats": {},
+        "sheep": {},
+        "alpacas": {},
+        "cattle, sheep or goats": {},
+        "Hog": {},
+        "ball python": {},
+        "Baby goat": {},
+        "bucket calves": {},
+        "pet at home": {},
+        "cow with scours": {},
+        "Goats, kid and adult": {},
+        "Jackson's chameleon": {},
+        "puppy, strays": {},
+        "Adult and baby goats": {},
+        "cow/cows": {},
+        "Cattle and Goats: Custom Slaughter workers": {},
+        "Pet Store Puppies": {},
+        "ducklings": {},
+        "sheep, lambing shed": {},
+        "duckling": {},
+        "animal shelter": {},
+        "beef calves": {},
+        "puppies": {},
+        "calf": {},
+        "Cattle, Calf": {},
+        "Cow": {},
+        "Dog and Puppy": {},
+        "cow": {},
+        "Holstein and Jersey": {},
+        "ducks": {},
+        "piglets": {},
+        "chickens": {},
+        "geese": {},
+        "Buff Orpingtons": {},
+        "Leopard Gecko": {},
+        "dog": {},
+        "Gecko": {},
+        "Blood Hound": {},
+        "baby cow": {},
+        "Chicks": {},
+        "Two week old calf": {},
+        "Puppies": {},
+        "Cattle, calves": {},
+        "Ducklings": {},
+        "Puppy": {},
+        "pit bull": {},
+        "Corn snake": {},
+        "Bearded dragons": {},
+        "Pig ear pet treats": {},
+        "Dairy": {},
+        "Red-earned slider": {},
+        "Small turltes": {},
+        "turkey": {},
+        "Dairy cattle": {},
+        "Bottle calves": {},
+        "Pet store puppy": {},
+        "puppy": {},
+        "turkeys and chickens and eggs": {},
+        "chicks": {},
+        "Small/Baby": {},
+        "chickens and ducks": {},
+        "ducks, chickens": {},
+        "duck, chicken": {},
+        "Chicks , turkeys, ducklings - adult and babies": {},
+        "Songbirds/Birdfeeders": {},
+        "small turtles": {},
+        "Backyard Poultry (Chickens, Ducks, etc.)": {},
+        "Backyard poultry (Chickens, Ducks, etc.)": {}
+    }
+   }
