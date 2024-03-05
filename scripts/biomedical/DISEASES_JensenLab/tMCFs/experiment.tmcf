@@ -1,0 +1,21 @@
+Node: E:experiment->E1
+typeOf: dcs:ICD10Code
+dcid: C:experiment->ICD10
+name: C:experiment->Disease_Name
+
+Node: E:experiment->E2
+typeOf: dcs:Gene
+dcid: C:experiment->GeneDcid
+name: C:experiment->Gene	
+ensemblID: C:experiment->ensemblID
+
+Node: E:experiment->E3
+typeOf: dcs:DiseaseGeneAssociation
+dcid: C:experiment->dcid	
+diseaseOntologyID: C:experiment->DOID	
+icd10CMCode: E:experiment->E1
+geneID: E:experiment->E2
+associationType: C:experiment->associationType
+associationSource: C:experiment->score-db
+zScore: C:experiment->source-score
+confidence: C:experiment->confidence
