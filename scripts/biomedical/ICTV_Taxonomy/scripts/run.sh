@@ -22,6 +22,8 @@ Segments from the ICTV Master Species List and the Virus Metadata Files.
 
 # !/bin/bash
 
+# make CSV directory to which to output cleaned csv
+mkdir -p CSVs
 
 # Command to Generate Taxonomic Rank Enum Schema
 python3 scripts/create_virus_taxonomic_ranking_enums.py input/ICTV_Virus_Metadata_Resource.xlsx  ICTV_schema_taxonomic_ranking_enum.mcf
