@@ -1,20 +1,19 @@
 # Importing the Diseases at Jensen Lab
 
 ## Table of Contents
-
-- [Diseases at Jensen Lab](#importing-the-diseases-at-jensen-lab)
-  - [Table of Contents](#table-of-contents)
-  - [About the Dataset](#about-the-dataset)
-    - [Download Data](#download-data)
-    - [Overview](#overview)
-    - [Notes and Caveats](#notes-and-caveats)
-    - [License](#license)
-  - [About the import](#about-the-import)
-    - [Artifacts](#artifacts)
-      - [Scripts](#scripts)
-      - [Files](#files)
-    - [Import Procdeure](#import-procedure)
-    -[Tests](#tests) 
+1. [About the Dataset](#about-the-dataset)
+  1. [Download Data](#download-data)
+  2. [Overview](#overview)
+  3. [Notes and Caveats](#notes-and-caveats)
+  4. [dcid Generation](#dcid-generation)
+  5. [License](#license)
+  6. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
+2. [About the import](#about-the-import)
+  1. [Artifacts](#artifacts)
+     1. [Scripts](#scripts)
+     2. [tMCF Files](#tmcf-files)
+  2. [Import Procdeure](#import-procedure)
+  3. [Tests](#tests) 
 
 ## About the Dataset
 
@@ -47,6 +46,8 @@ The disease for each association is indicated either by either a Disease Ontolog
 
 As you can see there is a cascading representation of the associated ICD10 codes of 'ICD10:N', 'ICD10:N0', 'ICD10:N04' and a second tree of 'ICD10:N3', 'ICD10:N39', 'ICD10:399'. 'ICD10:N', 'ICD10:N0', 'ICD10:N3', and 'ICD10:root' all do not correspond to any ICD10 codes and thus these lines were removed along with any other line in which an ICD10 code had one or two digits or was root following 'ICD10:'. Then for this particular association, the lowest unique tree leaves were taken in as associations with the Gene 'HSP86'. In this case that is 'ICD10:N04' and 'ICD10:N399'. The remaining line with 'ICD10:N39' was discarded as being a less specific referal than 'ICD10:N399'. Finally, the ICD10 codes were reformatted as necessary so that they follow the proper convention. There is a '.' following the regex string of [A-Z][0-9][0-9]. So, codes like 'ICD10:N399' were converted into the appropriate format of 'ICD10:N39.9' through insertion of the missing '.'.
 
+### dcid Generation
+
 Dcids for DiseaseGeneAssociation nodes were generated as follow either:
 'bio/DOID_<DOID>_<geneSymbol>_<dataSource>'
 'bio/ICD10_<trailing_ICD10Code>_<geneSymbol>_<dataSource>'
@@ -55,6 +56,14 @@ where the <DOID> and <trailing_ICD10Code> represent the id following the ':', <g
 ### License
 
 This dataset is under a Creative Commons CC BY license.
+
+### Dataset Documentation and Relevant Links
+
+"DISEASES is a weekly updated web resource that integrates evidence on disease-gene associations from automatic text mining, manually curated literature, cancer mutation data, and genome-wide association studies." The full description of the dataset can be found [here](https://diseases.jensenlab.org/About). A description of the contents of the files and the links to download the DISEASE data as csv files can be found [here](https://diseases.jensenlab.org/Downloads).
+
+The dataset is further documented in the following two studies:
+- [DISEASES 2.0: a weekly updated database of disease–gene associations from text mining and data integration](https://academic.oup.com/database/article/doi/10.1093/database/baac019/6554833?login=false)
+- [DISEASES: Text mining and data integration of disease-gene associations](https://www.sciencedirect.com/science/article/pii/S1046202314003831)
 
 ## About the import
 
@@ -72,9 +81,7 @@ This dataset is under a Creative Commons CC BY license.
 
 [`format_disease_jensen_lab.py`](scripts/format_disease_jensen_lab.py) parses the raw .tsv files with DISEASES at Jensen Lab into well formatted csv files with generated dcids and links to Gene and ICD10Code nodes.
 
-#### Files
-
-##### tMCF File
+#### tMCF Files
 
 [`codingGenes-knowledge.tmcf`](tmcfs/codingGenes-knowledge.tmcf) contains the tmcf mapping to the csv of coding genes curated manually.
 
