@@ -103,9 +103,9 @@ Classes, properties, and enumerations that were added in this import to represen
 
 #### tMCFs
 
-- [VirusSpecies.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusSpecies.tmcf) contains the tmcf mapping to the csv of viruses.
-- [VirusIsolates.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusIsolates.tmcf) contains the tmcf mapping to the csv of virus isolates.
-- [VirusGenomeSegments.tmcf](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/tMCFs/VirusGenomeSegments.tmcf) contains the tmcf mapping to the csv of viral genome segments.
+- [VirusSpecies.tmcf](tMCFs/VirusSpecies.tmcf) contains the tmcf mapping to the csv of viruses.
+- [VirusIsolates.tmcf](tMCFs/VirusIsolates.tmcf) contains the tmcf mapping to the csv of virus isolates.
+- [VirusGenomeSegments.tmcf](tMCFs/VirusGenomeSegments.tmcf) contains the tmcf mapping to the csv of viral genome segments.
 
 #### Scripts 
 
@@ -116,13 +116,13 @@ Classes, properties, and enumerations that were added in this import to represen
 - [tests.sh](scripts/tests.sh) runs standard tests on CSV + tMCF pairs to check for proper formatting.
 
 ##### Python Scripts
-- [create_virus_taxonomic_ranking_enums.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/create_virus_taxonomic_ranking_enums.py) creates the viral taxonomy enum mcf file from the Virus Metadata Resource file.
-- [format_virus_master_species_list.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/format_virus_master_species_list.py) parses the raw Master Species List xslx file into virus csv file.
-- [format_virus_metadata_resource.py](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/scripts/format_virus_metadata_resource.py) parses the raw Virus Metadata Resource file into virus isolates and viral genome segements csv files.
+- [create_virus_taxonomic_ranking_enums.py](scripts/create_virus_taxonomic_ranking_enums.py) creates the viral taxonomy enum mcf file from the Virus Metadata Resource file.
+- [format_virus_master_species_list.py](scripts/format_virus_master_species_list.py) parses the raw Master Species List xslx file into virus csv file.
+- [format_virus_metadata_resource.py](scripts/format_virus_metadata_resource.py) parses the raw Virus Metadata Resource file into virus isolates and viral genome segements csv files.
 
 #### Log Files
 
-- [format_virus_metadata_resource.log](https://github.com/datacommonsorg/data/new/master/scripts/biomedical/ICTV_Taxonomy/logs/format_virus_metadata_resource.log) log file from script converting the Virus Metadata Resource into formatted CSV file.
+- [format_virus_metadata_resource.log](logs/format_virus_metadata_resource.log) log file from script converting the Virus Metadata Resource into formatted CSV file.
 
 ### Import Procedure
 
