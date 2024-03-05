@@ -4,9 +4,9 @@
 1. [About the Dataset](#about-the-dataset)
    1. [Download Data](#download-data)
    2. [Overview](#overview)
-   3. Notes and Caveats](#notes-and-caveats)
+   3. [Notes and Caveats](#notes-and-caveats)
    4. [dcid Generation](#dcid-generation)
-   5. [License](#license
+   5. [License](#license)
    6. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
 2. [About the import](#about-the-import)
    1. [Artifacts](#artifacts)
