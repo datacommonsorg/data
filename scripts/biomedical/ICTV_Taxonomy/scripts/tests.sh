@@ -13,7 +13,7 @@
 # limitations under the License.
 """
 Author: Samantha Piekos
-Date: 02/26/2024
+Date: 03/05/2024
 Name: tests
 Description: This file runs the Data Commons Java tool to run standard
 tests on tmcf + CSV pairs for the ICTV data import.
@@ -21,11 +21,17 @@ tests on tmcf + CSV pairs for the ICTV data import.
 
 #!/bin/bash
 
-java -jar /Applications/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/virusMasterSpeciesList.tmcf CSVs/VirusSpecies.csv ICTV*.mcf
+# download data commons java test tool version 0.1-alpha.1k
+mkdir -p tmp; cd tmp
+wget https://github.com/datacommonsorg/import/releases/download/0.1-alpha.1k/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar
+cd ..
+
+# run tests
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/virusMasterSpeciesList.tmcf CSVs/VirusSpecies.csv ICTV*.mcf
 mv dc_generated species
 
-java -jar /Applications/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/virusTaxonomy.tmcf CSVs/VirusIsolates.csv ICTV*.mcf
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/virusTaxonomy.tmcf CSVs/VirusIsolates.csv ICTV*.mcf
 mv dc_generated virus_isolates
 
-java -jar /Applications/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/virusGenomeSegment.tmcf CSVs/VirusGenomeSegments.csv ICTV*.mcf
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/virusGenomeSegment.tmcf CSVs/VirusGenomeSegments.csv ICTV*.mcf
 mv dc_generated genome_segments
