@@ -18,7 +18,7 @@
     1. [Artifacts](#artifacts)
        1. [New Schema](#new-schema)
        2. [Scripts](#scripts)
-       3.[tMCFs](#tmcfs)
+       3. [tMCFs](#tmcfs)
        4. [Log Files](#log-files)
     2. [Import Procedure](#import-procedure)
     3. [Tests](#tests)
