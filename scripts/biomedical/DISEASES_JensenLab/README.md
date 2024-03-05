@@ -12,8 +12,8 @@
    1. [Artifacts](#artifacts)
       1. [Scripts](#scripts)
       2. [tMCF Files](#tmcf-files)
-   3. [Import Procdeure](#import-procedure)
-   4. [Tests](#tests) 
+   2. [Import Procdeure](#import-procedure)
+   3. [Tests](#tests) 
 
 ## About the Dataset
 
