@@ -149,7 +149,7 @@ sh run.sh
 
 ### Tests
 
-Run Data Commons's java -jar import tool to ensure that all schema used in the import is present in the graph, all referenced nodes are present in the graph, along with other warnings. Please note that empty tokens for some columns are expected as this reflects the original data. The imports create the Virus nodes that are then refrenced within this import. This resolves any concern about missing reference warnings concerning these node types by the test.
+Downloads Data Commons's java -jar import tool, storing it in a `tmp` directory. This tool is described in Data Commons documentation of the [import pipeline](https://github.com/datacommonsorg/import/). The relases of the tool can be viewed [here](https://github.com/datacommonsorg/import/releases/). Here we download version `0.1-alpha.1k` and apply it to check our csv + tmcf import. It evaluates if all schema used in the import is present in the graph, all referenced nodes are present in the graph, along with other checks that issue fatal errors, errors, or warnings upon failing checks. Please note that empty tokens for some columns are expected as this reflects the original data. The imports create the Virus nodes that are then refrenced within this import. This resolves any concern about missing reference warnings concerning these node types by the test.
 
 To run tests:
 
