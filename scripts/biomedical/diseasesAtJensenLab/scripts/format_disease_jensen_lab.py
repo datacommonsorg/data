@@ -15,34 +15,84 @@
 Author: Suhana Bedi
 Date: 08/12/2023
 Edited By: Samantha Piekos
-Last Edited: 02/23/24
+Last Edited: 02/29/24
 Name: format_disease_jensen_lab
 Description: converts a three input .txt files from Diseases at
 Jensen Lab into output .csv files with formatted dcids, 
-NonCoding RNA types, and gene synonyms.
+NonCoding RNA types, and gene ensemblIDs.
 @file_input: input .txt files from Diseases at Jensen Lab 
 @file_output: formatted .csv files for Diseases at Jensen Lab
 """
 
+# load environment
 import sys
 import numpy as np
 import pandas as pd
+import time
 
+
+# declare universal variables
 HGNC_DICT = {'HGNC:9982':'RFX1', 'HGNC:9979':'RFPL2'}
 
-def format_doid_icd(df):
-    df['DOID'] = np.where(df['Identifier'].str.contains('DOID'),df['Identifier'],np.nan)
-    df['ICD10'] = np.where(df['Identifier'].str.contains('ICD10'),df['Identifier'],np.nan)
-    ## filter out synonyms
-    df['synonym'] = np.where(df['Id'].str.contains('ENSP00000'),df['Id'],np.nan)
-    ## filter out ICD-10 codes based on true existence - remove codes like C1, C2 and root
-    df['count'] = np.where(df['ICD10'] == df['ICD10'],df['ICD10'].str.split(':'),np.nan)
-    df['count'] = np.where(df['count'] == df['count'],df['count'].str[1],np.nan)
-    df = df[df['count']!='root']
-    df.loc[:, 'count'] = df['count'].str.len()
-    df = df[df['count'] !=2]
-    df = df[df['count'] !=1]
+
+def filter_for_lowest_ICD10_level(df):
+	# initiate values
+	indices_to_drop = []
+	previous_ICD10 = ''
+	previous_gene = ''
+	previous_index = -1
+	# check if ICD10 code is more specific than previous row for the same gene
+	# if it is add the previous ICD10 code index to the list of indices to drop
+	for index, row in df.iterrows():
+		current_ICD10 = row['ICD10']
+		current_gene = row['Gene']
+		if current_gene == previous_gene and current_ICD10.startswith(previous_ICD10):
+			indices_to_drop.append(previous_index)
+		# update reference values
+		previous_ICD10 = current_ICD10
+		previous_gene = current_gene
+		previous_index = index
+	# drop rows with less specific ICD10 codes for a given gene
+	df.drop(indices_to_drop, axis=0, inplace=True)
+	return df
+
+
+def fix_ICD10_formatting(df, col):
+	# if string in specified column is 10 characters or longer
+	# add '.' in the 10th position
+    mask = df[col].str.len() >= 10
+    df.loc[mask, col] = df.loc[mask, col].str[:9] + '.' + df.loc[mask, col].str[9:]
     return df
+
+
+def format_icd10_code_dcids(df):
+	df_doid = df.dropna(subset=['DOID'])  # make a doid specific table
+	## filter out ICD-10 codes based on true existence - remove codes like C1, C2 and root
+	df['count'] = np.where(df['ICD10'] == df['ICD10'],df['ICD10'].str.split(':'),np.nan)
+	df['count'] = np.where(df['count'] == df['count'],df['count'].str[1],np.nan)
+	# remove non-existing ICD-10 codes
+	df = df[df['count']!='root']
+	df.loc[:, 'count'] = df['count'].str.len()
+	df = df[df['count'] > 2]
+	df = filter_for_lowest_ICD10_level(df)
+	# fix ill formatted ICD10 codes
+	df = fix_ICD10_formatting(df, 'Disease')
+	df = fix_ICD10_formatting(df, 'Disease_Name')
+	df = fix_ICD10_formatting(df, 'ICD10')
+	# join back with the doid rows
+	df_final = pd.concat([df, df_doid]).sort_index()
+	return df_final
+
+
+def format_doid_icd(df):
+	df['DOID'] = np.where(df['Disease'].str.contains('DOID'),df['Disease'],np.nan)
+	df['ICD10'] = np.where(df['Disease'].str.contains('ICD10'),df['Disease'],np.nan)
+	## identify ensemblIDs and set as new column
+	df['ensemblID'] = np.where(df['Id'].str.contains('ENSP00000'),df['Id'],np.nan)
+	## format icd10 dcids filtering for the most specific ICD10 code
+	df = format_icd10_code_dcids(df)
+	return df
+
 
 def check_for_illegal_charc(s):
     """Checks for illegal characters in a string and prints an error statement if any are present
@@ -54,13 +104,15 @@ def check_for_illegal_charc(s):
     if any([x in s for x in list_illegal]):
         print('Error! dcid contains illegal characters!', s)
 
+
 def check_for_dcid(row):
     check_for_illegal_charc(str(row['dcid']))
     check_for_illegal_charc(str(row['GeneDcid']))
     check_for_illegal_charc(str(row['ICD10']))
     return row
 
-def format_disease_gene_cols(df):
+
+def format_disease_gene_cols(df, data_type):
     df['Gene'] = df['Gene'].map(HGNC_DICT).fillna(df['Gene'])
     df['Gene'] = df['Gene'].str.replace('@', '')
     df['GeneDcid'] = 'bio/' + df['Gene'].astype(str)
@@ -69,9 +121,10 @@ def format_disease_gene_cols(df):
     df['DOID'] = df['DOID'].replace('dcid:bio/nan', np.nan)
     df['ICD10'] = df['ICD10'].str.replace(':', '/')
     df['DiseaseDcid'] = df['DOID'].fillna('dcid:'+df['ICD10'])
-    df['dcid'] = 'bio/DGA_' + df['Identifier'] + '_' + df['Gene'] + '_text_mining'
+    df['dcid'] = 'bio/' + df['Disease'] + '_' + df['Gene'] + data_type
     df['dcid'] = df['dcid'].str.replace(':', '_')
     return df
+
 
 def format_RNA_type(df_tm):
 	gene_list = ['orf', 'ZNF']
@@ -87,111 +140,95 @@ def format_RNA_type(df_tm):
 	df_tm['RNA_type'] = np.where(df_tm["Gene"].str.contains('pRNA'),'dcs:NonCodingRNATypePromoterAssociatedRNA', df_tm['RNA_type'])
 	return df_tm
 
-def format_genes(df):
+
+def format_dcids(df, data_type):
 	df = format_doid_icd(df)
-	df = format_disease_gene_cols(df)
+	df = format_disease_gene_cols(df, data_type)
 	df = df.apply(lambda x: check_for_dcid(x),axis=1)
 	return df 
 
-def format_df(df, num):
-	if num ==1:
-		df['associationType'] = 'dcs:AssociationTypeTextMining'
-		df.update('"' +
-				  df[['Name', 'url']].astype(str) + '"')
-		#df.replace("\"nan\"", np.nan, inplace=True)
-	elif num==2:
-		df['dcid'] = df['dcid'].str.replace('text_mining', 'manual_curation')
-		df['associationType'] = 'dcs:AssociationTypeManualCuration'
-		df.update('"' +
-				  df[['Name', 'score-db', 'associationType']].astype(str) + '"')
-		#df.replace("\"nan\"", np.nan, inplace=True)
-	else:
-		df['dcid'] = df['dcid'].str.replace('text_mining', 'experiment')
+
+def format_data_type_specific_info(df, data_type):
+	if data_type == 'experiments':
 		df['associationType'] = 'dcs:AssociationTypeExperiment'
 		df['source-score'] = df['source-score'].str.split('=')
 		df['source-score'] = np.where(df['source-score'] == df['source-score'],df['source-score'].str[1],np.nan)
 		df.update('"' +
-				  df[['Name', 'score-db', 'associationType']].astype(str) + '"')
-		#df.replace("\"nan\"", np.nan, inplace=True)
+				  df[['Disease_Name', 'score-db']].astype(str) + '"')
+	if data_type=='knowledge':
+		df['associationType'] = 'dcs:AssociationTypeManualCuration'
+		df.update('"' +
+				  df[['Disease_Name', 'score-db']].astype(str) + '"')
+	if data_type =='textmining':
+		df['associationType'] = 'dcs:AssociationTypeTextMining'
+		df.update('"' +
+				  df[['Disease_Name', 'url']].astype(str) + '"')
 	return df
 
-def format_genes_textmining(df):
-	df.columns = ['Id', 'Gene', 'Identifier', 'Name', 'z-score', 'confidence', 'url']
+
+def clean_data(df, data_type):
 	df_tm = df
-	searchfor = ['ENSP00', 'LINC', 'linc'] ### filter out non coding RNAs
+	searchfor = ['ENSP00', 'LINC', 'linc'] ## filter out non coding RNAs
 	df = df[df['Id'].str.contains("ENSP00")]
 	df = df[~df.Gene.str.contains('|'.join(searchfor))]
 	df_tm = df_tm[~df_tm.isin(df)].dropna() ## df with only non coding RNAs
 	df_tm = df_tm[~df_tm['Gene'].str.contains("chr")]
 	df_tm = df_tm[~df_tm['Gene'].str.contains("ENSP00")]
-	df = format_genes(df)
-	df_tm = format_genes(df_tm)
+	df = format_dcids(df, data_type)
+	df_tm = format_dcids(df_tm, data_type)
 	df_tm = format_RNA_type(df_tm) ## filter out genes from df with non coding RNA
 	df_gene = df_tm.loc[df_tm['RNA_type']=='Gene'] ## filter out genes from df with non coding RNA
 	df_tm = df_tm[~df_tm['RNA_type'].str.contains("Gene")]
 	df_gene.drop(['RNA_type'],axis=1,inplace=True)
 	df = df._append(df_gene).reset_index(drop=True)
-	df = format_df(df, 1)
-	df_tm = format_df(df_tm, 1)
+	df = format_data_type_specific_info(df, data_type)
+	df_tm = format_data_type_specific_info(df_tm, data_type)
 	return df, df_tm
 
-def format_genes_knowledge(df):
-	df.columns = ['Id', 'Gene', 'Identifier', 'Name', 'score-db', 'evidence', 'confidence']
-	df_tm = df
-	searchfor = ['ENSP00', 'LINC', 'linc'] ### filter out non coding RNAs
-	df = df[df['Id'].str.contains("ENSP00")]
-	df = df[~df.Gene.str.contains('|'.join(searchfor))]
-	df_tm = df_tm[~df_tm.isin(df)].dropna() ## df with only non coding RNAs
-	df_tm = df_tm[~df_tm['Gene'].str.contains("chr")]
-	df_tm = df_tm[~df_tm['Gene'].str.contains("ENSP00")]
-	df = format_genes(df)
-	df_tm = format_genes(df_tm)
-	df_tm = format_RNA_type(df_tm) ## filter out genes from df with non coding RNA
-	df_gene = df_tm.loc[df_tm['RNA_type']=='Gene'] ## filter out genes from df with non coding RNA
-	df_tm = df_tm[~df_tm['RNA_type'].str.contains("Gene")]
-	df_gene.drop(['RNA_type'],axis=1,inplace=True)
-	df = df._append(df_gene).reset_index(drop=True)
-	df = format_df(df,2)
-	df_tm = format_df(df_tm,2)
-	return df, df_tm
 
-def format_genes_experiment(df):
-	df.columns = ['Id', 'Gene', 'Identifier', 'Name', 'score-db', 'source-score', 'confidence']
-	df['Identifier'] = df['Identifier'].str.replace('DOID:3394', 'DOID:3393')
-	df_tm = df
-	searchfor = ['ENSP00', 'LINC', 'linc'] ### filter out non coding RNAs
-	df = df[df['Id'].str.contains("ENSP00")]
-	df = df[~df.Gene.str.contains('|'.join(searchfor))]
-	df_tm = df_tm[~df_tm.isin(df)].dropna() ## df with only non coding RNAs
-	df_tm = df_tm[~df_tm['Gene'].str.contains("chr")]
-	df_tm = df_tm[~df_tm['Gene'].str.contains("ENSP00")]
-	df = format_genes(df)
-	df_tm = format_genes(df_tm)
-	df_tm = format_RNA_type(df_tm) ## filter out genes from df with non coding RNA
-	df_gene = df_tm.loc[df_tm['RNA_type']=='Gene'] ## filter out genes from df with non coding RNA
-	df_tm = df_tm[~df_tm['RNA_type'].str.contains("Gene")]
-	df_gene.drop(['RNA_type'],axis=1,inplace=True)
-	df = df._append(df_gene).reset_index(drop=True)
-	df = format_df(df,3)
-	df_tm = format_df(df_tm,3)
-	return df, df_tm
+def generate_column_names(data_type):
+	# return column names corresponding to the data type of the file
+	col_names = []
+	if data_type == 'experiments':
+		col_names= ['Id', 'Gene', 'Disease', 'Disease_Name', 'score-db', 'source-score', 'confidence']
+	if data_type == 'knowledge':
+		col_names =  ['Id', 'Gene', 'Disease', 'Disease_Name', 'score-db', 'evidence', 'confidence']
+	if data_type == 'textmining':
+		col_names = ['Id', 'Gene', 'Disease', 'Disease_Name', 'z-score', 'confidence', 'url']
+	return col_names
 
-def wrapper_function(df_textmining, df_manual, df_experiment):
-	df_txt, df_txt_rna = format_genes_textmining(df_textmining)
-	df_txt1, df_txt_rna1 = format_genes_knowledge(df_manual)
-	df_txt2, df_txt_rna2 = format_genes_experiment(df_experiment)
-	df_txt[0:4003718].to_csv('CSVs/codingGenes-textmining-1.csv', doublequote=False, escapechar='\\')
-	df_txt[4003719:].to_csv('CSVs/codingGenes-textmining-2.csv', doublequote=False, escapechar='\\')
-	df_txt_rna.to_csv('CSVs/nonCodingGenes-textmining.csv', doublequote=False, escapechar='\\')
-	df_txt1.to_csv('CSVs/codingGenes-manual.csv', doublequote=False, escapechar='\\')
-	df_txt_rna1.to_csv('CSVs/nonCodingGenes-manual.csv', doublequote=False, escapechar='\\')
-	df_txt2.to_csv('CSVs/experiment.csv', doublequote=False, escapechar='\\')
+
+def write_df_to_csv(df, data_type, coding=True):
+	# check if df is empty
+	if df.shape[0] == 0:
+		return
+	# write filepath for output file
+	if coding:
+		filepath = 'CSVs/codingGenes-' + data_type + '.csv'
+	else:
+		filepath = 'CSVs/nonCodingGenes-' + data_type + '.csv'
+	# write df to csv file
+	df.to_csv(filepath, doublequote=False, escapechar='\\')
+	return
+
+
+def format_csv(data_type):
+	start_time = time.time()
+	filepath = 'input/human_disease_'+data_type+'_full.tsv'
+	col_names = generate_column_names(data_type)
+	df = pd.read_csv(filepath, sep = '\t', header=None)
+	df.columns = col_names
+	df_coding_genes, df_non_coding_genes = clean_data(df, data_type)
+	write_df_to_csv(df_coding_genes, data_type)
+	write_df_to_csv(df_non_coding_genes, data_type, coding=False)
+	processing_time = "%s seconds" % round((time.time() - start_time), 2)
+	print('Finished processing ' + data_type + ' data in ' + processing_time + '!')
+
 
 def main():
-	df_textmining = pd.read_csv('input/human_disease_textmining_full.tsv', sep = '\t', header=None)
-	df_manual = pd.read_csv('input/human_disease_knowledge_full.tsv', sep = '\t', header=None)
-	df_experiment = pd.read_csv('input/human_disease_experiments_full.tsv', sep = '\t', header=None)
-	wrapper_function(df_textmining, df_manual, df_experiment)
+	format_csv('experiments')
+	format_csv('knowledge')
+	format_csv('textmining')
 
 
 if __name__ == '__main__':
