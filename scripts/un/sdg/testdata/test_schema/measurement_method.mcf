@@ -1,0 +1,10 @@
+
+Node: dcid:SDG_N_A_G
+typeOf: dcs:SDG_MeasurementMethodEnum
+name: "SDG_N_A_G"
+description: "SDG Measurement Method: [Nature = Non-relevant | Obs Status = Normal value | Reporting Type = Global]"
+
+Node: dcid:SDG_E_A_G
+typeOf: dcs:SDG_MeasurementMethodEnum
+name: "SDG_E_A_G"
+description: "SDG Measurement Method: [Nature = Estimated data | Obs Status = Normal value | Reporting Type = Global]"

@@ -28,7 +28,6 @@ Run "python3 generate_csv_and_mcf.py --help" for usage.
 from absl import app
 from absl import flags
 import pandas as pd
-from frozendict import frozendict
 
 FLAGS = flags.FLAGS
 flags.DEFINE_boolean("csv", True, "Whether or not to generate the csv.")
@@ -42,7 +41,7 @@ flags.DEFINE_string("path", "FRB_H15.csv",
 # Maturities for which interest rates are provided by BEA.
 # Treasury bills have maturities of a year or less, notes greater than 1 year up
 # to 10 years, and bonds greater than 10 years.
-MATURITIES = frozendict({
+MATURITIES = {
     "1-month": "Bill",
     "3-month": "Bill",
     "6-month": "Bill",
@@ -54,7 +53,7 @@ MATURITIES = frozendict({
     "10-year": "Note",
     "20-year": "Bond",
     "30-year": "Bond"
-})
+}
 
 # URL of the raw csv
 CSV_URL = "https://www.federalreserve.gov/datadownload/Output.aspx?rel=H15&"\
@@ -68,10 +67,12 @@ def generate_csv():
 
     out_df = pd.DataFrame()
     header_rows = 5
-    name_template = "Market yield on U.S. Treasury securities at {}   constant"\
+    name_template = "Market yield on U.S. Treasury securities at {}  constant"\
                     " maturity, quoted on investment basis"
 
-    in_df = pd.read_csv(CSV_URL, na_values="ND")
+    in_df = pd.read_csv(CSV_URL,
+                        na_values="ND",
+                        storage_options={"User-Agent": "Python-Pandas"})
 
     out_df["date"] = in_df["Series Description"][header_rows:]
     for maturity in MATURITIES:
