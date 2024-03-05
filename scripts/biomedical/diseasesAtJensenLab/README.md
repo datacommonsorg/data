@@ -44,6 +44,7 @@ The disease for each association is indicated either by either a Disease Ontolog
 | ENSP00000004982 | HSPB6 | ICD10:N39 | ICD10:N39 | TIGA | MeanRankScore = 92 | 1.926 |
 | ENSP00000004982 | HSPB6 | ICD10:N399 | ICD10:N399 | TIGA | MeanRankScore = 92 | 1.926 |
 | ENSP00000004982 | HSPB6 | ICD10:root | ICD10:root | TIGA | MeanRankScore = 92  | 1.926 |
+
 As you can see there is a cascading representation of the associated ICD10 codes of 'ICD10:N', 'ICD10:N0', 'ICD10:N04' and a second tree of 'ICD10:N3', 'ICD10:N39', 'ICD10:399'. 'ICD10:N', 'ICD10:N0', 'ICD10:N3', and 'ICD10:root' all do not correspond to any ICD10 codes and thus these lines were removed along with any other line in which an ICD10 code had one or two digits or was root following 'ICD10:'. Then for this particular association, the lowest unique tree leaves were taken in as associations with the Gene 'HSP86'. In this case that is 'ICD10:N04' and 'ICD10:N399'. The remaining line with 'ICD10:N39' was discarded as being a less specific referal than 'ICD10:N399'. Finally, the ICD10 codes were reformatted as necessary so that they follow the proper convention. There is a '.' following the regex string of [A-Z][0-9][0-9]. So, codes like 'ICD10:N399' were converted into the appropriate format of 'ICD10:N39.9' through insertion of the missing '.'.
 
 Dcids for DiseaseGeneAssociation nodes were generated as follow either:
