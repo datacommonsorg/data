@@ -38,112 +38,112 @@ import unidecode
 
 # declare universal variables
 DICT_COVERAGE = {
-'coding-complete genome': 'dcs:GenomeCoverageCompleteGenome',\
-'complete genome': 'dcs:GenomeCoverageCompleteGenome',\
-'complete coding genome': 'dcs:GenomeCoverageCompleteCodingGenome',\
-'no entry in genbank': 'dcs:GenomeCoverageNoEntryInGenBank',\
+'coding-complete genome': 'dcs:GenomeCoverageCompleteGenome',
+'complete genome': 'dcs:GenomeCoverageCompleteGenome',
+'complete coding genome': 'dcs:GenomeCoverageCompleteCodingGenome',
+'no entry in genbank': 'dcs:GenomeCoverageNoEntryInGenBank',
 'partial genome': 'dcs:GenomeCoveragePartialGenome'
 }
 
 
 DICT_GC = {
-'dsDNA': 'dcs:VirusGenomeCompositionDoubleStrandedDNA',\
-'ssDNA': 'dcs:VirusGenomeCompositionSingleStrandedDNA',\
-'ssDNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedDNANegative',\
-'ssDNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedDNAPositive',\
-'ssDNA(+/-)': 'dcs:VirusGenomeCompositionSingleStrandedDNA',\
-'dsDNA-RT': 'dcs:VirusGenomeCompositionDoubleStrandedDNAReverseTranscription',\
-'ssRNA-RT': 'dcs:VirusGenomeCompositionSingleStrandedRNAReverseTranscription',\
-'dsRNA': 'dcs:VirusGenomeCompositionDoubleStrandedRNA',\
-'ssRNA': 'dcs:VirusGenomeCompositionSingleStrandedRNA',\
-'ssRNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedRNANegative',\
-'ssRNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedRNAPositive',\
+'dsDNA': 'dcs:VirusGenomeCompositionDoubleStrandedDNA',
+'ssDNA': 'dcs:VirusGenomeCompositionSingleStrandedDNA',
+'ssDNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedDNANegative',
+'ssDNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedDNAPositive',
+'ssDNA(+/-)': 'dcs:VirusGenomeCompositionSingleStrandedDNA',
+'dsDNA-RT': 'dcs:VirusGenomeCompositionDoubleStrandedDNAReverseTranscription',
+'ssRNA-RT': 'dcs:VirusGenomeCompositionSingleStrandedRNAReverseTranscription',
+'dsRNA': 'dcs:VirusGenomeCompositionDoubleStrandedRNA',
+'ssRNA': 'dcs:VirusGenomeCompositionSingleStrandedRNA',
+'ssRNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedRNANegative',
+'ssRNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedRNAPositive',
 'ssRNA(+/-)': 'dcs:VirusGenomeCompositionSingleStrandedRNA'
 }
 
 
 DICT_HOST = {
-	'algae': 'dcs:VirusHostAlgae',\
-	'archaea': 'dcs:VirusHostArchaea',\
-	'bacteria': 'dcs:VirusHostBacteria',\
-	'fungi': 'dcs:VirusHostFungi',\
-	'invertebrates': 'dcs:VirusHostInvertebrates',\
-	'plants': 'dcs:VirusHostPlants',\
-	'protists': 'dcs:VirusHostProtists',\
+	'algae': 'dcs:VirusHostAlgae',
+	'archaea': 'dcs:VirusHostArchaea',
+	'bacteria': 'dcs:VirusHostBacteria',
+	'fungi': 'dcs:VirusHostFungi',
+	'invertebrates': 'dcs:VirusHostInvertebrates',
+	'plants': 'dcs:VirusHostPlants',
+	'protists': 'dcs:VirusHostProtists',
 	'vertebrates': 'dcs:VirusHostVertebrates'
 }
 
 
 DICT_SOURCE = {
-	'freshwater': 'dcs:VirusSourceFreshwater',\
-	'invertebrates': 'dcs:VirusSourceInvertebrates',\
-	'marine': 'dcs:VirusSourceMarine',\
-	'phytobiome': 'dcs:VirusSourcePhytobiome',\
-	'plants': 'dcs:VirusSourcePlants',\
-	'protists': 'dcs:VirusSourceProtists',\
-	'sewage': 'dcs:VirusSourceSewage',\
+	'freshwater': 'dcs:VirusSourceFreshwater',
+	'invertebrates': 'dcs:VirusSourceInvertebrates',
+	'marine': 'dcs:VirusSourceMarine',
+	'phytobiome': 'dcs:VirusSourcePhytobiome',
+	'plants': 'dcs:VirusSourcePlants',
+	'protists': 'dcs:VirusSourceProtists',
+	'sewage': 'dcs:VirusSourceSewage',
 	'soil': 'dcs:VirusSourceSoil'
 }
 
 
 HEADER = [
-'sort',\
-'isolateSort',\
-'realm',\
-'subrealm',\
-'kingdom',\
-'subkingdom',\
-'phylum',\
-'subphylum',\
-'class',\
-'subclass',\
-'order',\
-'suborder',\
-'family',\
-'subfamily',\
-'genus',\
-'subgenus',\
-'species',\
-'isExemplar',\
-'name',\
-'abbreviation',\
-'isolateDesignation',\
-'genBankAccession',\
-'refSeqAccession',\
-'genomeCoverage',\
-'genomeComposition',\
-'hostSource',\
-'host',\
-'source',\
-'dcid',\
-'isolate_dcid',\
+'sort',
+'isolateSort',
+'realm',
+'subrealm',
+'kingdom',
+'subkingdom',
+'phylum',
+'subphylum',
+'class',
+'subclass',
+'order',
+'suborder',
+'family',
+'subfamily',
+'genus',
+'subgenus',
+'species',
+'isExemplar',
+'name',
+'abbreviation',
+'isolateDesignation',
+'genBankAccession',
+'refSeqAccession',
+'genomeCoverage',
+'genomeComposition',
+'hostSource',
+'host',
+'source',
+'dcid',
+'isolate_dcid',
 'isolate_name'
 ]
 
 
 HEADER_2 = [
-'dcid',\
-'name',\
-'genBankAccession',\
-'genomeSegmentOf',\
+'dcid',
+'name',
+'genBankAccession',
+'genomeSegmentOf',
 'refSeqAccession'
 ]
 
 
 LIST_TAXONOMIC_LEVELS = [
-'realm',\
-'subrealm',\
-'kingdom',\
-'subkingdom',\
-'phylum',\
-'subphylum',\
-'class',\
-'subclass',\
-'order',\
-'suborder',\
-'family',\
-'subfamily',\
-'genus',\
+'realm',
+'subrealm',
+'kingdom',
+'subkingdom',
+'phylum',
+'subphylum',
+'class',
+'subclass',
+'order',
+'suborder',
+'family',
+'subfamily',
+'genus',
 'subgenus'
 ]
 
