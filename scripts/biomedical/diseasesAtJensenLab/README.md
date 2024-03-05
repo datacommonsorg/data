@@ -2,18 +2,18 @@
 
 ## Table of Contents
 1. [About the Dataset](#about-the-dataset)
-  1. [Download Data](#download-data)
-  2. [Overview](#overview)
-  3. [Notes and Caveats](#notes-and-caveats)
-  4. [dcid Generation](#dcid-generation)
-  5. [License](#license)
-  6. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
+   1. [Download Data](#download-data)
+   2. [Overview](#overview)
+   3. Notes and Caveats](#notes-and-caveats)
+   4. [dcid Generation](#dcid-generation)
+   5. [License](#license
+   6. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
 2. [About the import](#about-the-import)
-  1. [Artifacts](#artifacts)
-     1. [Scripts](#scripts)
-     2. [tMCF Files](#tmcf-files)
-  2. [Import Procdeure](#import-procedure)
-  3. [Tests](#tests) 
+   1. [Artifacts](#artifacts)
+      1. [Scripts](#scripts)
+      2. [tMCF Files](#tmcf-files)
+   3. [Import Procdeure](#import-procedure)
+   4. [Tests](#tests) 
 
 ## About the Dataset
 
