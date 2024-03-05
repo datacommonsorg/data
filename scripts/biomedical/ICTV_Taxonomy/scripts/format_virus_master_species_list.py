@@ -32,74 +32,74 @@ import sys
 
 # declare universal variables
 DICT_CHANGE_ENUM = {
-'abolished': 'dcs:VirusLastTaxonomicChangeAbolished',\
-'demoted' : 'dcs:VirusLastTaxonomicChangeDemoted',\
-'merged': 'dcs:VirusLastTaxonomicChangeMerged',\
-'moved': 'dcs:VirusLastTaxonomicChangeMoved',\
-'new': 'dcs:VirusLastTaxonomicChangeNew',\
-'promoted': 'dcs:VirusLastTaxonomicChangePromoted',\
-'removed as type species': 'dcs:VirusLastTaxonomicChangeRemoved',\
-'renamed': 'dcs:VirusLastTaxonomicChangeRenamed',\
+'abolished': 'dcs:VirusLastTaxonomicChangeAbolished',
+'demoted' : 'dcs:VirusLastTaxonomicChangeDemoted',
+'merged': 'dcs:VirusLastTaxonomicChangeMerged',
+'moved': 'dcs:VirusLastTaxonomicChangeMoved',
+'new': 'dcs:VirusLastTaxonomicChangeNew',
+'promoted': 'dcs:VirusLastTaxonomicChangePromoted',
+'removed as type species': 'dcs:VirusLastTaxonomicChangeRemoved',
+'renamed': 'dcs:VirusLastTaxonomicChangeRenamed',
 'split': 'dcs:VirusLastTaxonomicChangeSplit'
 }
 
 
 DICT_GC = {
-'dsDNA': 'dcs:VirusGenomeCompositionDoubleStrandedDNA',\
-'ssDNA': 'dcs:VirusGenomeCompositionSingleStrandedDNA',\
-'ssDNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedDNANegative',\
-'ssDNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedDNAPositive',\
-'ssDNA(+/-)': 'dcs:VirusGenomeCompositionSingleStrandedDNA',\
-'dsDNA-RT': 'dcs:VirusGenomeCompositionDoubleStrandedDNAReverseTranscription',\
-'ssRNA-RT': 'dcs:VirusGenomeCompositionSingleStrandedRNAReverseTranscription',\
-'dsRNA': 'dcs:VirusGenomeCompositionDoubleStrandedRNA',\
-'ssRNA': 'dcs:VirusGenomeCompositionSingleStrandedRNA',\
-'ssRNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedRNANegative',\
-'ssRNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedRNAPositive',\
+'dsDNA': 'dcs:VirusGenomeCompositionDoubleStrandedDNA',
+'ssDNA': 'dcs:VirusGenomeCompositionSingleStrandedDNA',
+'ssDNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedDNANegative',
+'ssDNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedDNAPositive',
+'ssDNA(+/-)': 'dcs:VirusGenomeCompositionSingleStrandedDNA',
+'dsDNA-RT': 'dcs:VirusGenomeCompositionDoubleStrandedDNAReverseTranscription',
+'ssRNA-RT': 'dcs:VirusGenomeCompositionSingleStrandedRNAReverseTranscription',
+'dsRNA': 'dcs:VirusGenomeCompositionDoubleStrandedRNA',
+'ssRNA': 'dcs:VirusGenomeCompositionSingleStrandedRNA',
+'ssRNA(-)': 'dcs:VirusGenomeCompositionSingleStrandedRNANegative',
+'ssRNA(+)': 'dcs:VirusGenomeCompositionSingleStrandedRNAPositive',
 'ssRNA(+/-)': 'dcs:VirusGenomeCompositionSingleStrandedRNA'
 }
 
 
 HEADER = [
-'sort',\
-'realm',\
-'subrealm',\
-'kingdom',\
-'subkingdom',\
-'phylum',\
-'subphylum',\
-'class',\
-'subclass',\
-'order',\
-'suborder',\
-'family',\
-'subfamily',\
-'genus',\
-'subgenus',\
-'species',\
-'genomeComposition',\
-'lastChange',\
-'lastChangeVersion',\
-'proposalForLastChange',\
-'taxonHistoryURL',\
+'sort',
+'realm',
+'subrealm',
+'kingdom',
+'subkingdom',
+'phylum',
+'subphylum',
+'class',
+'subclass',
+'order',
+'suborder',
+'family',
+'subfamily',
+'genus',
+'subgenus',
+'species',
+'genomeComposition',
+'lastChange',
+'lastChangeVersion',
+'proposalForLastChange',
+'taxonHistoryURL',
 'dcid'
 ]
 
 
 LIST_TAXONOMIC_LEVELS = [
-'realm',\
-'subrealm',\
-'kingdom',\
-'subkingdom',\
-'phylum',\
-'subphylum',\
-'class',\
-'subclass',\
-'order',\
-'suborder',\
-'family',\
-'subfamily',\
-'genus',\
+'realm',
+'subrealm',
+'kingdom',
+'subkingdom',
+'phylum',
+'subphylum',
+'class',
+'subclass',
+'order',
+'suborder',
+'family',
+'subfamily',
+'genus',
 'subgenus'
 ]
 
