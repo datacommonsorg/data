@@ -74,7 +74,9 @@ The dataset is further documented in the following two studies:
 ##### Bash Script
 
 [`download.sh`](scripts/download.sh) downloads the experimental, manually curated, and text mining data from DISEASES at Jensen Lab.
+
 [`run.sh`](scripts/run.sh) converts raw data from DISEASES into csv files formatted for import into the Data Commons knowledge graph.
+
 [`tests.sh`](scripts/tests.sh) runs standard tests on CSV + tMCF pairs to check for proper formatting.
 
 ##### Python Script
@@ -83,15 +85,15 @@ The dataset is further documented in the following two studies:
 
 #### tMCF Files
 
-[`codingGenes-knowledge.tmcf`](tmcfs/codingGenes-knowledge.tmcf) contains the tmcf mapping to the csv of coding genes curated manually.
+[`codingGenes-knowledge.tmcf`](tMCFs/codingGenes-knowledge.tmcf) contains the tmcf mapping to the csv of coding genes curated manually.
 
-[`nonCodingGenes-knowledge.tmcf`](tmcfs/nonCodingGenes-knowledge.tmcf) contains the tmcf mapping to the csv of non-coding genes curated manually.
+[`nonCodingGenes-knowledge.tmcf`](tMCFs/nonCodingGenes-knowledge.tmcf) contains the tmcf mapping to the csv of non-coding genes curated manually.
 
-[`codingGenes-textmining.tmcf`](tmcfs/codingGenes-textmining.tmcf) contains the tmcf mapping to the csv of coding genes using textmining.
+[`codingGenes-textmining.tmcf`](tMCFs/codingGenes-textmining.tmcf) contains the tmcf mapping to the csv of coding genes using textmining.
 
-[`nonCodingGenes-textmining.tmcf`](tmcfs/nonCodingGenes-textmining.tmcf) contains the tmcf mapping to the csv of non-coding genes using textmining.
+[`nonCodingGenes-textmining.tmcf`](tMCFs/nonCodingGenes-textmining.tmcf) contains the tmcf mapping to the csv of non-coding genes using textmining.
 
-[`experiment.tmcf`](tmcfs/experiment.tmcf) contains the tmcf mapping to the csv of coding genes curated experimentally.
+[`experiment.tmcf`](tMCFs/experiment.tmcf) contains the tmcf mapping to the csv of coding genes curated experimentally.
 
 ### Import Procedure
 
