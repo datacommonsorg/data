@@ -4,16 +4,24 @@
 ## Table of Contents
 
 1. [About the Dataset](#about-the-dataset)
-    1. [Download URL](#download-urls)
-    2. [Overview](#overview)
-    3. [Notes and Caveats](#notes-and-caveats)
-    4. [dcid Generation](#dcid-generation)
-    5. [License](#license)
-    6. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
-2. [About the Import](#about-the-import)
-    1. [Artifacts](#artifacts)
-    2. [Import Procedure](#import-procedure)
-    4. [Tests](#tests)
+    A. [Download URL](#download-urls)
+    B. [Overview](#overview)
+    C. [Notes and Caveats](#notes-and-caveats)
+    D. [dcid Generation](#dcid-generation)
+       i. [Virus](#virus)
+       ii. [VirusIsolate](#virusisolate)
+       iii. [VirusGenomeSegment](#virusgenomesegment)
+       iv. [Illegal Characters](#illegal-characters)
+    E. [License](#license)
+    F. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
+3. [About the Import](#about-the-import)
+    A. [Artifacts](#artifacts)
+        i. [New Schema](#new-schema)
+       ii. [Scripts](#scripts)
+       iii.[tMCFs)(#tmcfs)
+       iv. [Log Files](#log-files)
+    B. [Import Procedure](#import-procedure)
+    C. [Tests](#tests)
 
 
 ## About the Datasets
@@ -101,12 +109,6 @@ Classes, properties, and enumerations that were added in this import to represen
 * Enumerations Generated Via Script
     * VirusRealmEnum, VirusSubrealmEnum, VirusKingdomEnum, VirusSubkingdomEnum, VirusPhylumEnum, VirusSubphylumEnum, VirusClassEnum, VirusSubclassEnum, VirusOrderEnum, VirusSuborderEnum, VirusFamilyEnum, VirusSubfamilyEnum, VirusGenusEnum, VirusSubgenusEnum
 
-#### tMCFs
-
-- [VirusSpecies.tmcf](tMCFs/VirusSpecies.tmcf) contains the tmcf mapping to the csv of viruses.
-- [VirusIsolates.tmcf](tMCFs/VirusIsolates.tmcf) contains the tmcf mapping to the csv of virus isolates.
-- [VirusGenomeSegments.tmcf](tMCFs/VirusGenomeSegments.tmcf) contains the tmcf mapping to the csv of viral genome segments.
-
 #### Scripts 
 
 ##### Bash Scripts
@@ -116,9 +118,16 @@ Classes, properties, and enumerations that were added in this import to represen
 - [tests.sh](scripts/tests.sh) runs standard tests on CSV + tMCF pairs to check for proper formatting.
 
 ##### Python Scripts
+
 - [create_virus_taxonomic_ranking_enums.py](scripts/create_virus_taxonomic_ranking_enums.py) creates the viral taxonomy enum mcf file from the Virus Metadata Resource file.
 - [format_virus_master_species_list.py](scripts/format_virus_master_species_list.py) parses the raw Master Species List xslx file into virus csv file.
 - [format_virus_metadata_resource.py](scripts/format_virus_metadata_resource.py) parses the raw Virus Metadata Resource file into virus isolates and viral genome segements csv files.
+
+#### tMCFs
+
+- [VirusSpecies.tmcf](tMCFs/VirusSpecies.tmcf) contains the tmcf mapping to the csv of viruses.
+- [VirusIsolates.tmcf](tMCFs/VirusIsolates.tmcf) contains the tmcf mapping to the csv of virus isolates.
+- [VirusGenomeSegments.tmcf](tMCFs/VirusGenomeSegments.tmcf) contains the tmcf mapping to the csv of viral genome segments.
 
 #### Log Files
 
