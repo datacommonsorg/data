@@ -34,7 +34,20 @@ The Diseases database can be downloaded from their official website found [here]
 
 ### Notes and Caveats
 
-All the disease-gene associations have ICD-10 codes for the diseases. Some of the ICD-10 codes are ill-formatted, for ex: `ICD10:J9` or `ICD10:root`. Hence, the disease-gene associations with these values are excluded from the main import and are included in the log file which is present in this repository.
+The disease for each association is indicated either by either a Disease Ontology ID (DOID) or an ICD10 code. For the associations of a gene with an ICD10 code, there is a heirarchical repetitive nature with how the ICD10 code is represented in the original data. For example in the experiment file there is the following association:
+| ENSP00000004982	| HSPB6	| ICD10:N	| ICD10:N | TIGA | 	MeanRankScore = 92 | 1.926 |
+| ENSP00000004982 | HSPB6 | ICD10:N0 | ICD10:N0 | TIGA | 	MeanRankScore = 92 |	1.926 | 
+| ENSP00000004982 | HSPB6 | ICD10:N04 | ICD10:N04 | TIGA |	MeanRankScore = 92	| 1.926 |
+| ENSP00000004982 | HSPB6 |	ICD10:N3 |	ICD10:N3 |	TIGA |	MeanRankScore = 92 |	1.926 |
+| ENSP00000004982 |	HSPB6 |	ICD10:N39 |	ICD10:N39 |	TIGA |	MeanRankScore = 92 |	1.926 |
+| ENSP00000004982	| HSPB6	| ICD10:N399	| ICD10:N399	TIGA |	MeanRankScore = 92 |	1.926 |
+| ENSP00000004982	| HSPB6	| ICD10:root	| ICD10:root	TIGA	| MeanRankScore = 92 |	1.926 |
+As you can see there is a cascading representation of the associated ICD10 codes of 'ICD10:N', 'ICD10:N0', 'ICD10:N04' and a second tree of 'ICD10:N3', 'ICD10:N39', 'ICD10:399'. 'ICD10:N', 'ICD10:N0', 'ICD10:N3', and 'ICD10:root' all do not correspond to any ICD10 codes and thus these lines were removed along with any other line in which an ICD10 code had one or two digits or was root following 'ICD10:'. Then for this particular association, the lowest unique tree leaves were taken in as associations with the Gene 'HSP86'. In this case that is 'ICD10:N04' and 'ICD10:N399'. The remaining line with 'ICD10:N39' was discarded as being a less specific referal than 'ICD10:N399'. Finally, the ICD10 codes were reformatted as necessary so that they follow the proper convention. There is a '.' following the regex string of [A-Z][0-9][0-9]. So, codes like 'ICD10:N399' were converted into the appropriate format of 'ICD10:N39.9' through insertion of the missing '.'.
+
+Dcids for DiseaseGeneAssociation nodes were generated as follow either:
+'bio/DOID_<DOID>_<geneSymbol>_<dataSource>'
+'bio/ICD10_<trailing_ICD10Code>_<geneSymbol>_<dataSource>'
+where the <DOID> and <trailing_ICD10Code> represent the id following the ':', <geneSymbol> represents the Gene's gene symbol and the dataSource is either 'experiments', 'knowledge', or 'textmining'. For example: `bio/DOID_0050177_SEMA3F_experiments` and 'bio/DOID_0050736_SEMA3F_experiments'.
 
 ### License
 
@@ -48,7 +61,8 @@ This dataset is under a Creative Commons CC BY license.
 
 ##### Bash Script
 
-[`run.sh`](scripts/run.sh) downloads the experimental, manually curated, and text mining data from DISEASES at Jensen Lab and converts it into csv files formatted for import into the Data Commons knowledge graph. The original files are then removed.
+[`download.sh`](scripts/download.sh) downloads the experimental, manually curated, and text mining data from DISEASES at Jensen Lab.
+[`run.sh`](scripts/run.sh) converts raw data from DISEASES into csv files formatted for import into the Data Commons knowledge graph.
 [`tests.sh`](scripts/tests.sh) runs the java tool test that 
 
 ##### Python Script
@@ -59,25 +73,25 @@ This dataset is under a Creative Commons CC BY license.
 
 ##### tMCF File
 
-[`codingGenes-manual.tmcf`](tmcfs/codingGenes-manual.tmcf) contains the tmcf mapping to the csv of coding genes curated manually.
+[`codingGenes-knowledge.tmcf`](tmcfs/codingGenes-knowledge.tmcf) contains the tmcf mapping to the csv of coding genes curated manually.
 
-[`nonCodingGenes-manual.tmcf`](tmcfs/nonCodingGenes-manual.tmcf) contains the tmcf mapping to the csv of non-coding genes curated manually.
+[`nonCodingGenes-knowledge.tmcf`](tmcfs/nonCodingGenes-knowledge.tmcf) contains the tmcf mapping to the csv of non-coding genes curated manually.
 
-[`codingGenes-textMining.tmcf`](tmcfs/codingGenes-textMining.tmcf) contains the tmcf mapping to the csv of coding genes using textmining.
+[`codingGenes-textmining.tmcf`](tmcfs/codingGenes-textmining.tmcf) contains the tmcf mapping to the csv of coding genes using textmining.
 
-[`nonCodingGenes-textMining.tmcf`](tmcfs/nonCodingGenes-textMining.tmcf) contains the tmcf mapping to the csv of non-coding genes using textmining.
+[`nonCodingGenes-textmining.tmcf`](tmcfs/nonCodingGenes-textmining.tmcf) contains the tmcf mapping to the csv of non-coding genes using textmining.
 
 [`experiment.tmcf`](tmcfs/experiment.tmcf) contains the tmcf mapping to the csv of coding genes curated experimentally.
 
 ### Import Procedure
 
-Download the most recent versions of DISEASES for experiment, manually curated, and text mining files; clean the files - formatting them into csv files for import; delete the original data files:
+Download the most recent versions of DISEASES for experiment, manually curated, and text mining files:
 
 ```bash
-sh run.sh
+sh download.sh
 ```
 
-Generate the enummeration schema MCF, which represents virus taxonomic ranks by running:
+Generate the cleaned CSVs including splitting into seperate non-coding and coding genes into seperate csv files for each input file:
 
 ```bash
 sh run.sh
