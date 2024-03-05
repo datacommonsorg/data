@@ -35,6 +35,8 @@ The Diseases database can be downloaded from their official website found [here]
 ### Notes and Caveats
 
 The disease for each association is indicated either by either a Disease Ontology ID (DOID) or an ICD10 code. For the associations of a gene with an ICD10 code, there is a heirarchical repetitive nature with how the ICD10 code is represented in the original data. For example in the experiment file there is the following association:
+| Gene Identifier | Gene Name | Disease Identifier | Disease Name | Source Database | Source Score | Confidence Score |
+| --- | --- | --- | --- | --- | ---  | ---  |
 | ENSP00000004982 | HSPB6 | ICD10:N | ICD10:N | TIGA | MeanRankScore = 92 | 1.926 |
 | ENSP00000004982 | HSPB6 | ICD10:N0 | ICD10:N0 | TIGA | MeanRankScore = 92 | 1.926 |
 | ENSP00000004982 | HSPB6 | ICD10:N04 | ICD10:N04 | TIGA | MeanRankScore = 92 | 1.926 |
