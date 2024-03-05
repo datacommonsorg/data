@@ -29,18 +29,16 @@ from typing import Callable, Dict, Iterable, List, Optional, Tuple
 from app import configs
 from app import utils
 from app.executor import import_target
-from app.service import dashboard_api
 from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
 from app.service import import_service
 
-_SYSTEM_RUN_INIT_FAILED_MESSAGE = (
-    'Failed to initialize the system run with the import progress dashboard')
+# Email address for status messages.
+_SUCCESS_EMAIL_ADDR = "datacommons+release@google.com"
+_FAILURE_EMAIL_ADDR = "datacommons-alerts+importautomation@google.com"
 
-_SEE_DASHBOARD_MESSAGE = (
-    'See dashboard for logs: '
-    'https://dashboard-frontend-dot-datcom-data.uc.r.appspot.com/')
+_SEE_LOGS_MESSAGE = "Please find logs in the Logs Explorer of the GCP project associated with Import Automation."
 
 
 @dataclasses.dataclass
@@ -79,9 +77,6 @@ class ImportExecutor:
         some place.
       github: GitHubRepoAPI object for communicating with GitHUB API.
       config: ExecutorConfig object containing configurations for the execution.
-      dashboard: DashboardAPI object for communicating with the import progress
-        dashboard. If not provided, the executor will not communicate with the
-        dashboard.
       notifier: EmailNotifier object for sending notificaiton emails.
       importer: ImportServiceClient object for invoking the Data Commons
         importer.
@@ -96,60 +91,28 @@ class ImportExecutor:
                  uploader: file_uploader.FileUploader,
                  github: github_api.GitHubRepoAPI,
                  config: configs.ExecutorConfig,
-                 dashboard: dashboard_api.DashboardAPI = None,
                  notifier: email_notifier.EmailNotifier = None,
                  importer: import_service.ImportServiceClient = None,
                  local_repo_dir: str = ""):
         self.uploader = uploader
         self.github = github
         self.config = config
-        self.dashboard = dashboard
         self.notifier = notifier
         self.importer = importer
         self.local_repo_dir: str = local_repo_dir
 
-    def execute_imports_on_commit(
-        self,
-        commit_sha: str,
-        repo_name: str = None,
-        branch_name: str = None,
-        pr_number: str = None,
-    ) -> ExecutionResult:
+    def execute_imports_on_commit(self, commit_sha: str) -> ExecutionResult:
         """Executes imports upon a GitHub commit.
-
-    repo_name, branch_name, and pr_number are used only for logging to
-    the import progress dashboard.
 
     Args:
         commit_sha: ID of the commit as a string.
-        repo_name: Name of the repository the commit is for as a string.
-        branch_name: Name of the branch the commit is for as a string.
-        pr_number: If the commit is a part of a pull request, the number of the
-          pull request as an int.
 
     Returns:
         ExecutionResult object describing the results of the imports.
     """
-        run_id = None
-        try:
-            if self.dashboard:
-                run_id = _init_run_helper(
-                    dashboard=self.dashboard,
-                    commit_sha=commit_sha,
-                    repo_name=repo_name,
-                    branch_name=branch_name,
-                    pr_number=pr_number,
-                )['run_id']
-        except Exception:
-            logging.exception(_SYSTEM_RUN_INIT_FAILED_MESSAGE)
-            return _create_system_run_init_failed_result(traceback.format_exc())
-
         return run_and_handle_exception(
-            run_id,
-            self.dashboard,
             self._execute_imports_on_commit_helper,
             commit_sha,
-            run_id,
         )
 
     def execute_imports_on_update(self,
@@ -165,32 +128,17 @@ class ImportExecutor:
     Returns:
         ExecutionResult object describing the results of the imports.
     """
-        run_id = None
-        try:
-            if self.dashboard:
-                run_id = _init_run_helper(self.dashboard)['run_id']
-        except Exception:
-            logging.exception(_SYSTEM_RUN_INIT_FAILED_MESSAGE)
-            return _create_system_run_init_failed_result(traceback.format_exc())
-
         return run_and_handle_exception(
-            run_id,
-            self.dashboard,
             self._execute_imports_on_update_helper,
             absolute_import_name,
-            run_id,
         )
 
     def _execute_imports_on_update_helper(
-            self,
-            absolute_import_name: str,
-            run_id: str = None) -> ExecutionResult:
+            self, absolute_import_name: str) -> ExecutionResult:
         """Helper for execute_imports_on_update.
 
     Args:
         absolute_import_name: See execute_imports_on_update.
-        run_id: ID of the system run as a string. This is only used to
-          communicate with the import progress dashboard.
 
     Returns:
         ExecutionResult object describing the results of the executions.
@@ -215,10 +163,6 @@ class ImportExecutor:
                 logging.info('%s: downloaded repo %s', absolute_import_name,
                              repo_dir)
 
-            if self.dashboard:
-                self.dashboard.info(f'Downloaded/Local repo: {repo_dir}',
-                                    run_id=run_id)
-
             executed_imports = []
 
             # An example import_dir is 'scripts/us_fed/treasury'
@@ -239,9 +183,7 @@ class ImportExecutor:
                             repo_dir=repo_dir,
                             relative_import_dir=import_dir,
                             absolute_import_dir=absolute_import_dir,
-                            import_spec=spec,
-                            run_id=run_id,
-                        )
+                            import_spec=spec)
                     except Exception:
                         raise ExecutionError(
                             ExecutionResult('failed', executed_imports,
@@ -253,15 +195,13 @@ class ImportExecutor:
         logging.info('%s: END', absolute_import_name)
         return ExecutionResult('succeeded', executed_imports, 'No issues')
 
-    def _execute_imports_on_commit_helper(self,
-                                          commit_sha: str,
-                                          run_id: str = None
-                                         ) -> ExecutionResult:
+    def _execute_imports_on_commit_helper(
+        self,
+        commit_sha: str,
+    ) -> ExecutionResult:
         """Helper for execute_imports_on_commit.
 
     Args: See execute_imports_on_commit.
-        run_id: ID of the system run as a string. This is only used to
-        communicate with the import progress dashboard.
 
     Returns:
         ExecutionResult object describing the results of the executions.
@@ -285,9 +225,8 @@ class ImportExecutor:
         with tempfile.TemporaryDirectory() as tmpdir:
             repo_dir = self.github.download_repo(
                 tmpdir, commit_sha, self.config.repo_download_timeout)
-            if self.dashboard:
-                self.dashboard.info(f'Downloaded repo: {repo_dir}',
-                                    run_id=run_id)
+
+            logging.info(f'Downloaded repo: {repo_dir}')
 
             imports_to_execute = import_target.find_imports_to_execute(
                 targets=targets,
@@ -299,14 +238,11 @@ class ImportExecutor:
             executed_imports = []
             for relative_dir, spec in imports_to_execute:
                 try:
-                    self._import_one(
-                        repo_dir=repo_dir,
-                        relative_import_dir=relative_dir,
-                        absolute_import_dir=os.path.join(
-                            repo_dir, relative_dir),
-                        import_spec=spec,
-                        run_id=run_id,
-                    )
+                    self._import_one(repo_dir=repo_dir,
+                                     relative_import_dir=relative_dir,
+                                     absolute_import_dir=os.path.join(
+                                         repo_dir, relative_dir),
+                                     import_spec=spec)
 
                 except Exception:
                     raise ExecutionError(
@@ -316,13 +252,6 @@ class ImportExecutor:
                     relative_dir, spec['import_name'])
                 executed_imports.append(absolute_name)
 
-            if self.dashboard:
-                self.dashboard.update_run(
-                    {
-                        'status': 'succeeded',
-                        'time_completed': utils.utctime()
-                    }, run_id)
-
             return ExecutionResult('succeeded', executed_imports, 'No issues')
 
     def _import_one(
@@ -331,7 +260,6 @@ class ImportExecutor:
         relative_import_dir: str,
         absolute_import_dir: str,
         import_spec: dict,
-        run_id: str = None,
     ) -> None:
         """Executes an import.
 
@@ -342,82 +270,52 @@ class ImportExecutor:
         absolute_import_dir: Absolute path to the directory containing the
           manifest as a string.
         import_spec: Specification of the import as a dict.
-        run_id: ID of the system run that executes the import. This is only used
-          to communicate with the import progress dashboard.
     """
         import_name = import_spec['import_name']
         absolute_import_name = import_target.get_absolute_import_name(
             relative_import_dir, import_name)
-        curator_emails = import_spec['curator_emails']
-        attempt_id = None
-        if self.dashboard:
-            attempt = _init_attempt_helper(
-                dashboard=self.dashboard,
-                run_id=run_id,
-                import_name=import_name,
-                absolute_import_name=absolute_import_name,
-                provenance_url=import_spec['provenance_url'],
-                provenance_description=import_spec['provenance_description'],
-            )
-            attempt_id = attempt['attempt_id']
+        time_start = time.time()
         try:
             self._import_one_helper(
                 repo_dir=repo_dir,
                 relative_import_dir=relative_import_dir,
                 absolute_import_dir=absolute_import_dir,
                 import_spec=import_spec,
-                run_id=run_id,
-                attempt_id=attempt_id,
             )
+            time_taken = '{0:.2f}'.format(time.time() - time_start)
             if self.notifier:
+                msg = f'Successful Import: {import_name} ({absolute_import_name})\nn'
+                msg += f'Script execution time taken = {time_taken}s'
                 self.notifier.send(
-                    subject=
-                    f'Import Automation - {absolute_import_name} - Succeeded',
-                    body=_SEE_DASHBOARD_MESSAGE,
-                    receiver_addresses=curator_emails,
+                    subject=f'Import Automation Success - {import_name}',
+                    body=msg,
+                    receiver_addresses=[_SUCCESS_EMAIL_ADDR],
                 )
 
         except Exception as exc:
-            if self.dashboard:
-                _mark_import_attempt_failed(
-                    attempt_id=attempt_id,
-                    message=traceback.format_exc(),
-                    dashboard=self.dashboard,
-                )
             if self.notifier:
+                msg = f'Failed Import: {import_name} ({absolute_import_name})\n\n'
+                msg += f'{_SEE_LOGS_MESSAGE}\n\n'
+                msg += f'Stack Trace: \n'
+                msg += f'{exc}'
                 self.notifier.send(
-                    subject=
-                    f'Import Automation - {absolute_import_name} - Failed',
-                    body=_SEE_DASHBOARD_MESSAGE,
-                    receiver_addresses=curator_emails,
+                    subject=f'Import Automation Failure - {import_name}',
+                    body=msg,
+                    receiver_addresses=[_FAILURE_EMAIL_ADDR],
                 )
             raise exc
 
-    def _import_one_helper(
-        self,
-        repo_dir: str,
-        relative_import_dir: str,
-        absolute_import_dir: str,
-        import_spec: dict,
-        run_id: str = None,
-        attempt_id: str = None,
-    ) -> None:
+    def _import_one_helper(self, repo_dir: str, relative_import_dir: str,
+                           absolute_import_dir: str, import_spec: dict) -> None:
         """Helper for _import_one.
 
     Args: See _import_one.
-        attempt_id: ID of the import attempt executed by the system run with the
-        run_id, as a string. This is only used to communicate with the import
-        progress dashboard.
     """
         urls = import_spec.get('data_download_url')
         if urls:
             for url in urls:
                 utils.download_file(url, absolute_import_dir,
                                     self.config.file_download_timeout)
-                if self.dashboard:
-                    self.dashboard.info(f'Downloaded: {url}',
-                                        attempt_id=attempt_id,
-                                        run_id=run_id)
 
         with tempfile.TemporaryDirectory() as tmpdir:
             requirements_path = os.path.join(absolute_import_dir,
@@ -430,12 +328,7 @@ class ImportExecutor:
                 timeout=self.config.venv_create_timeout,
             )
 
-            _log_process(
-                process=process,
-                dashboard=self.dashboard,
-                attempt_id=attempt_id,
-                run_id=run_id,
-            )
+            _log_process(process=process)
             process.check_returncode()
 
             script_paths = import_spec.get('scripts')
@@ -448,31 +341,17 @@ class ImportExecutor:
                     cwd=absolute_import_dir,
                     env=self.config.user_script_env,
                 )
-                _log_process(
-                    process=process,
-                    dashboard=self.dashboard,
-                    attempt_id=attempt_id,
-                    run_id=run_id,
-                )
+                _log_process(process=process)
                 process.check_returncode()
 
         inputs = self._upload_import_inputs(
             import_dir=absolute_import_dir,
             output_dir=f'{relative_import_dir}/{import_spec["import_name"]}',
-            import_inputs=import_spec.get('import_inputs', []),
-            attempt_id=attempt_id,
-        )
+            import_inputs=import_spec.get('import_inputs', []))
 
         if self.importer:
             self.importer.delete_previous_output(relative_import_dir,
                                                  import_spec)
-
-            if self.dashboard:
-                self.dashboard.info(
-                    f'Submitting job to delete the previous import',
-                    attempt_id=attempt_id,
-                    run_id=run_id,
-                )
             try:
                 self.importer.delete_import(
                     relative_import_dir,
@@ -484,15 +363,7 @@ class ImportExecutor:
                 # If this is the first time executing this import,
                 # there will be no previous import
                 logging.warning(str(exc))
-            if self.dashboard:
-                self.dashboard.info(f'Deleted previous import',
-                                    attempt_id=attempt_id,
-                                    run_id=run_id)
-                self.dashboard.info(
-                    f'Submitting job to perform the import',
-                    attempt_id=attempt_id,
-                    run_id=run_id,
-                )
+
             self.importer.smart_import(
                 relative_import_dir,
                 inputs,
@@ -500,25 +371,13 @@ class ImportExecutor:
                 block=True,
                 timeout=self.config.importer_import_timeout,
             )
-            if self.dashboard:
-                self.dashboard.info(f'Import succeeded',
-                                    attempt_id=attempt_id,
-                                    run_id=run_id)
-
-        if self.dashboard:
-            self.dashboard.update_attempt(
-                {
-                    'status': 'succeeded',
-                    'time_completed': utils.utctime()
-                }, attempt_id)
 
     def _upload_import_inputs(
         self,
         import_dir: str,
         output_dir: str,
         import_inputs: List[Dict[str, str]],
-        attempt_id: str = None,
-    ) -> 'import_service.ImportInputs':
+    ) -> import_service.ImportInputs:
         """Uploads the generated import data files.
 
     Data files are uploaded to <output_dir>/<version>/, where <version> is a
@@ -532,9 +391,6 @@ class ImportExecutor:
         import_inputs: List of import inputs each as a dict mapping import types
           to relative paths within the repository. This is parsed from the
           'import_inputs' field in the manifest.
-        attempt_id: ID of the import attempt executed by the system run with the
-          run_id, as a string. This is only used to communicate with the import
-          progress dashboard.
 
     Returns:
         ImportInputs object containing the paths to the uploaded inputs.
@@ -549,7 +405,6 @@ class ImportExecutor:
                     self._upload_file_helper(
                         src=os.path.join(import_dir, path),
                         dest=dest,
-                        attempt_id=attempt_id,
                     )
                     setattr(uploaded, input_type, dest)
         self.uploader.upload_string(
@@ -557,24 +412,13 @@ class ImportExecutor:
             os.path.join(output_dir, self.config.storage_version_filename))
         return uploaded
 
-    def _upload_file_helper(self,
-                            src: str,
-                            dest: str,
-                            attempt_id: str = None) -> None:
+    def _upload_file_helper(self, src: str, dest: str) -> None:
         """Uploads a file from src to dest.
 
     Args:
         src: Path to the file to upload, as a string.
         dest: Path to where the file is to be uploaded to, as a string.
-        attempt_id: ID of the import attempt executed by the system run with the
-          run_id, as a string. This is only used to communicate with the import
-          progress dashboard.
     """
-        if self.dashboard:
-            with open(src) as file:
-                self.dashboard.info(
-                    f'Uploaded {src}: {file.readline().strip()}',
-                    attempt_id=attempt_id)
         self.uploader.upload_file(src, dest)
 
 
@@ -596,19 +440,12 @@ def parse_manifest(path: str) -> dict:
 
 
 def run_and_handle_exception(
-    run_id: Optional[str],
-    dashboard: Optional[dashboard_api.DashboardAPI],
     exec_func: Callable,
     *args,
 ) -> ExecutionResult:
     """Runs a method that executes imports and handles its exceptions.
 
-  run_id and dashboard are for logging to the import progress dashboard.
-  They can be None to not perform such logging.
-
   Args:
-      run_id: ID of the system run as a string.
-      dashboard: DashboardAPI for logging to the import progress dashboard.
       exec_func: The method to execute.
       args: List of arguments sent to exec_func.
 
@@ -620,14 +457,10 @@ def run_and_handle_exception(
     except ExecutionError as exc:
         logging.exception('ExecutionError was thrown')
         result = exc.result
-        if dashboard:
-            _mark_system_run_failed(run_id, str(result), dashboard)
         return result
     except Exception:
         logging.exception('An unexpected exception was thrown')
         message = traceback.format_exc()
-        if dashboard:
-            _mark_system_run_failed(run_id, message, dashboard)
         return ExecutionResult('failed', [], message)
 
 
@@ -809,96 +642,6 @@ def _run_user_script(
     return _run_with_timeout_async(script_args, timeout, cwd, env)
 
 
-def _init_run_helper(
-    dashboard: dashboard_api.DashboardAPI,
-    commit_sha: str = None,
-    repo_name: str = None,
-    branch_name: str = None,
-    pr_number: str = None,
-) -> Dict:
-    """Initializes a system run with the import progress dashboard."""
-    run = {}
-    if commit_sha:
-        run['commit_sha'] = commit_sha
-    if repo_name:
-        run['repo_name'] = repo_name
-    if branch_name:
-        run['branch_name'] = branch_name
-    if pr_number:
-        run['pr_number'] = pr_number
-    return dashboard.init_run(run)
-
-
-def _init_attempt_helper(
-    dashboard: dashboard_api.DashboardAPI,
-    run_id: str,
-    import_name: str,
-    absolute_import_name: str,
-    provenance_url: str,
-    provenance_description: str,
-) -> Dict:
-    """Initializes an import attempt with the import progress dashboard."""
-    return dashboard.init_attempt({
-        'run_id': run_id,
-        'import_name': import_name,
-        'absolute_import_name': absolute_import_name,
-        'provenance_url': provenance_url,
-        'provenance_description': provenance_description,
-    })
-
-
-def _mark_system_run_failed(run_id: str, message: str,
-                            dashboard: dashboard_api.DashboardAPI) -> Dict:
-    """Communicates with the import progress dashboard that a system run
-
-  has failed.
-
-  Args:
-      run_id: ID of the system run.
-      message: An additional message to log to the dashboard with level
-        critical.
-      dashboard: DashboardAPI object for the communicaiton.
-
-  Returns:
-      Updated system run returned from the dashboard.
-  """
-    dashboard.critical(message, run_id=run_id)
-    return dashboard.update_run(
-        {
-            'status': 'failed',
-            'time_completed': utils.utctime()
-        }, run_id=run_id)
-
-
-def _mark_import_attempt_failed(attempt_id: str, message: str,
-                                dashboard: dashboard_api.DashboardAPI) -> Dict:
-    """Communicates with the import progress dashboard that an import attempt
-
-  has failed.
-
-  Args:
-      attempt_id: ID of the import attempt.
-      message: An additional message to log to the dashboard with level
-        critical.
-      dashboard: DashboardAPI object for the communicaiton.
-
-  Returns:
-      Updated import attempt returned from the dashboard.
-  """
-    dashboard.critical(message, attempt_id=attempt_id)
-    return dashboard.update_attempt(
-        {
-            'status': 'failed',
-            'time_completed': utils.utctime()
-        }, attempt_id)
-
-
-def _create_system_run_init_failed_result(trace):
-    """Creates an ExecutionResult indicating failures."""
-    return ExecutionResult('failed', [],
-                           f'{_SYSTEM_RUN_INIT_FAILED_MESSAGE}\n{trace}')
-
-
 def _clean_time(
     time: str, chars_to_replace: Tuple[str] = (':', '-', '.', '+')) -> str:
     """Replaces some characters with underscores.
@@ -937,33 +680,15 @@ def _construct_process_message(message: str,
     return message
 
 
-def _log_process(
-    process: subprocess.CompletedProcess,
-    dashboard: dashboard_api.DashboardAPI = None,
-    attempt_id: str = None,
-    run_id: str = None,
-) -> None:
+def _log_process(process: subprocess.CompletedProcess,) -> None:
     """Logs the result of a subprocess.
-
-  dashboard, attempt_id, and run_id are only for logging to the import
-  progress dashboard. They can be None to not perform such logging.
 
   Args:
       process: subprocess.CompletedProcess object whose arguments, return code,
         stdout, and stderr are to be logged.
-      dashboard: DashboardAPI object to communicate with the import progress
-        dashboard.
-      attempt_id: ID of the import attempt as a string.
-      run_id: ID of the system run as a string.
   """
     message = 'Subprocess succeeded'
     if process.returncode:
         message = 'Subprocess failed'
     message = _construct_process_message(message, process)
-    if process.returncode:
-        if dashboard:
-            dashboard.critical(message, attempt_id=attempt_id, run_id=run_id)
-    else:
-        logging.info(message)
-        if dashboard:
-            dashboard.info(message, attempt_id=attempt_id, run_id=run_id)
+    logging.info(message)
