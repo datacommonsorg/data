@@ -1,0 +1,12 @@
+RecordID,RecordName,DescriptorID,DateCreated,DateRevised,Record_dcid,Descriptor_dcid
+C002540,"""miracil A""",D008154,1972-01-01,2003-08-08,bio/C002540,bio/D008154
+C008718,"""osteoclast activating factor""",D008222,1974-01-01,1982-07-28,bio/C008718,bio/D008222
+C008720,"""otoline""",D011108,1974-01-01,1995-07-21,bio/C008720,bio/D011108
+C008725,"""1-oxacephalothin""",D002512,1975-01-01,,bio/C008725,bio/D002512
+C008727,"""oxaluric acid""",D010072,1974-01-01,1990-09-28,bio/C008727,bio/D010072
+C055240,"""Leakadine""",D001388,1988-04-20,2001-02-06,bio/C055240,bio/D001388
+C060863,"""conduritol aziridine""",D001388,1989-10-04,2005-11-03,bio/C060863,bio/D001388
+C060863,,D007294,,,bio/C060863,bio/D007294
+C060863,,D050112,,,bio/C060863,bio/D050112
+C114158,"""quantum dye macrocyclic europium-chelate""",D005063,1998-09-14,2003-08-08,bio/C114158,bio/D005063
+C114158,,D009942,,,bio/C114158,bio/D009942

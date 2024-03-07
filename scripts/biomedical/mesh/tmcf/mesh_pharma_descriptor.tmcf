@@ -1,0 +1,12 @@
+Node: E:mesh_descriptor->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_descriptor->Descriptor_dcid
+medicalSubjectHeadingDescriptorID: C:mesh_descriptor->Descriptor_Record
+name: C:mesh_descriptor->Descriptor_RecordName
+parent: C:mesh_descriptor->DescriptorID
+isPharmacologicalActionSubstance: C:mesh_descriptor->isPharmacologicalActionSubstance
+medicalSubjectHeadingDescriptorID: E:mesh_descriptor->E2
+
+Node: E:mesh_descriptor->E2
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_descriptor->DescriptorID
