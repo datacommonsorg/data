@@ -85,7 +85,7 @@ Any works found on National Library of Medicine (NLM) Web sites may be freely us
 
 [`format_mesh_desc.py`](scripts/format_mesh_desc.py) converts the original xml into eight formatted csv files, which each can be imported alongside it's matching tMCF.
 
-[`format_mesh_pan.py`](scripts/format_mesh_pa.py) converts the original csv file into two formatted csv files, which can be imported alongside it's matching tMCF.
+[`format_mesh_pa.py`](scripts/format_mesh_pa.py) converts the original csv file into two formatted csv files, which can be imported alongside it's matching tMCF.
 
 [`format_mesh_qual.py`](scripts/format_mesh_qual.py) converts the original xml into four formatted csv files, which each can be imported alongside it's matching tMCF.
 
