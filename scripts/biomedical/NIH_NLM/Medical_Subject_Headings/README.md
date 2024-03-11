@@ -18,7 +18,7 @@
 
 ## About the Dataset
 
-“The Medical Subject Headings (MeSH) thesaurus is a controlled and hierarchically-organized vocabulary produced by the National Library of Medicine. It is used for indexing, cataloging, and searching of biomedical and health-related information”. Data Commons includes the Concept, Descriptor, Qualifier, Supplementary Concept Record, and Term elements of MeSH as described [here](https://www.nlm.nih.gov/mesh/xml_data_elements.html). More information about the dataset can be found on the official National Center for Biotechnology (NCBI) [website](https://www.ncbi.nlm.nih.gov/mesh/).
+“The Medical Subject Headings (MeSH) thesaurus is a controlled and hierarchically-organized vocabulary produced by the National Library of Medicine. It is used for indexing, cataloging, and searching of biomedical and health-related information”. Data Commons includes the Concept, Descriptor, Qualifier, Supplementary Concept Record, and Term elements of MeSH as described [here](https://www.nlm.nih.gov/mesh/xml_data_elements.html). More information about the dataset can be found on the official National Center for Biotechnology (NCBI) [website](https://www.ncbi.nlm.nih.gov/mesh/). This dataset is updated on an annual basis on the first of January every year.
 Pubchem is one of the largest reservoirs of chemical compound information. It is mapped to many other medical ontologies, including MeSH. More information about compound IDs and other properties can be found on their official [website](https://pubchemdocs.ncbi.nlm.nih.gov/compounds).
 
 ### Download Data
@@ -27,26 +27,39 @@ All the terminology referenced in the MeSH data can be downloaded in various for
 
 ### Overview
 
-In this import we use the four MeSH xml files to define MeSH Concept, Descriptor, Qualifiers, Supplementary Concept Records, and Terms as individual nodes as well as maintaining mappings to each other. We also maintain links between these  data types to one other as indicated below. Furthermore, 
+MeSH provides the vocabulary thesaurus used for indexing articles for PubMed. In addition, the scripts are used to map ther PubChem compound IDs to the MeSH descriptor and supplementary concept record. In this import we use the four MeSH xml files to define MeSH Concept, Descriptor, Qualifiers, Supplementary Concept Records, and Terms as individual nodes as well as maintaining mappings to each other. We also maintain links between these  data types to one other as indicated below. An overview on the MeSH Record Types can be found (here)[https://www.nlm.nih.gov/mesh/intro_record_types.html].
 
-SCR point to descriptors via parent
-terms point to concepts via parent
-concepts point to qualifiers via hasMeSHQualifier
-concepts point to other concepts via preferredConcept
-descriptors point to descriptors via specializationOf
-descriptors point to qualifiers via hasMeSHQualifier
-concepts point to descriptors via parent
-The MeSH data stores the vocabulary thesaurus used for indexing articles for PubMed. In addition, the scripts are used to map ther PubChem compound IDs to the MeSH descriptor and supplementary record IDs, joining on MeSH supplementary record name/PubChem compoundID.
-
-- For mapping the MeSH descriptor ID with the MeSH supplementary record ID, the [supplementary file](https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/supp2022.xml) is used.
-- For mapping the MeSH descriptor ID with each of the three other IDs: concept ID, term ID, qualifier ID, the [descriptor file](https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/desc2022.xml) is used.
-- For mapping the PubChem compound ID with the MeSH supplementary record and descriptor ID, the [pubchem file](https://ftp.ncbi.nlm.nih.gov/pubchem/Compound/Extras/CID-MeSH) is used.
+| Node Type | Property | Property Value Range\n(Out Link Node Type) |
+| --- | --- | --- |
+| MeSHConcept | preferredConcept | MeSHConcept |
+| MeSHConcept | parent | MeSHDescriptor |
+| MeSHConcept | hasMeSHQualifier | MeSHQualifier |
+| MeSHDescpritor | sameAs | ChemicalCompund |
+| MeSHDescriptor | mechanismOfAction | MeSHDescriptor |
+| MeSHDescriptor | specializationOf | MeSHDescriptor |
+| MeSHDescriptor | hasMeSHQualifier | MeSHQualifier |
+| MeSHSupplementaryConceptRecord | mechanismOfAction | MeSHDescriptor |
+| MeSHSupplementaryConceptRecord | parent | MeSHDescriptor |
+| MeSHTerm | parent | MeSHConcept |
 
 ### Notes and Caveats
 
 The total file size of all original downloaded files for this import is ~1.1 GB. The files from MeSH are in XML format and therefore use the python package `xml.etree.ElementTree` to read these files into pandas dataframes for further processing. Please, note that extracting the information from XML formatted tags and converting it into well-formatted csv involve a lot of computationally heavy steps, which depends on the RAM of the user's system. Please note that special care needs to be given when traversing through the XML tree to ensure that the properties at each level are associated with the appropriate MeSHTerm node type. As part of this process, we ended up making a seperate csv+tmcf pair for each node type from each file with an additional mapping csv+tmcf file pair to bring in mappings between node types as necessary. Finally, we also decided not to include `LexicalTag` or `IsPermutedTermYN` as properties for MeSHTerms from the `qual<year>.xml` file because for all Terms the property value was `NON` or `False` respectively, and thus these properties did not contain any additional information.
 
+The `pa<year>.xml` file provided information on the pharmalogical action or mechanismOfAction of MeSHDescriptor and MeSHSupplementaryConceptRecord nodes. This provides pharmacological information about a subset of applicable MeSH records. Therefore, for MeSHDescriptor and MeSHSupplementaryConceptRecord nodes that were included in the `pa<year>.xml` as having mechanismOfAction that are connected MeShDescriptor nodes, we noted that these nodes were of Drug node type as well.
+
 ### dcid Generation
+The dcids for all MeShRecordType nodes (MeSHConcept, MeSHDescriptor, MeSHQualifier, MeSHSupplementaryConceptRecord, and MeSHTerm) are generated using the mesh unique ids with the bio prefix: `bio/<MeSH_unique_id>`. For MeSH unique ids they are formatted as starting with a letter followed by a string of numbers with the identity of the starting letter indicating the MeSH record type. The mapping of MeSH record type by the first letter of its unique ID is indicated below. In addition to using the MeSH unique ID to generate the dcid, the unique id is recorded as the value of the `identifier` property for all MeSHRecordType nodes.
+
+| Node Type | Starting Letter for MeSH unique ID |
+| --- | --- |
+| MeSHConcept | M |
+| MeSHDescriptor | D |
+| MeSHQualifier | Q | 
+| MeSHSupplementaryConceptRecord | C |
+| MeSHTerm | T |
+
+The dcids for ChemicalCompounds were generated using the PubChem compound ID with the chem prefix: `chem/CID<PubChemCompoundID>` the PubChem Compound ID provided by PubChem is a string of numbers, therefore we added the specifier to the front of this id as part of the dcid to provide context. The PubChem Compound ID is also seperately stored as a string value to property `pubChemCompoundID`.
 
 ### License
 
@@ -123,7 +136,8 @@ sh run.sh
 
 ### Tests
 
-Run Data Commons's java -jar import tool to ensure that all schema used in the import is present in the graph, all referenced nodes are present in the graph, along with other warnings. Please note that empty tokens for some columns are expected as this reflects the original data.
+The first step of `tests.sh` is to downloads Data Commons's java -jar import tool, storing it in a `tmp` directory. This assumes that the user has Java Runtime Environment (JRE) installed. This tool is described in Data Commons documentation of the [import pipeline](https://github.com/datacommonsorg/import/). The relases of the tool can be viewed [here](https://github.com/datacommonsorg/import/releases/). Here we download version `0.1-alpha.1k` and apply it to check our csv + tmcf import. It evaluates if all schema used in the import is present in the graph, all referenced nodes are present in the graph, along with other checks that issue fatal errors, errors, or warnings upon failing checks. Please note that empty tokens for some columns are expected as this reflects the original data. All referenced nodes are created as part of the same csv+tmcf import pair, therefore any Existence Missing Reference warnings can be ignored.
+
 To run tests:
 
 ```bash
