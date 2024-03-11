@@ -44,7 +44,7 @@ MeSH provides the vocabulary thesaurus used for indexing articles for PubMed. In
 
 ### Notes and Caveats
 
-The total file size of all original downloaded files for this import is ~1.1 GB. The files from MeSH are in XML format and therefore use the python package `xml.etree.ElementTree` to read these files into pandas dataframes for further processing. Please, note that extracting the information from XML formatted tags and converting it into well-formatted csv involve a lot of computationally heavy steps, which depends on the RAM of the user's system. Please note that special care needs to be given when traversing through the XML tree to ensure that the properties at each level are associated with the appropriate MeSHTerm node type. As part of this process, we ended up making a seperate csv+tmcf pair for each node type from each file with an additional mapping csv+tmcf file pair to bring in mappings between node types as necessary. The total file size for all fourteen formatted csvs is ~135 MB. Finally, we also decided not to include `LexicalTag` or `IsPermutedTermYN` as properties for MeSHTerms from the `qual<year>.xml` file because for all Terms the property value was `NON` or `False` respectively, and thus these properties did not contain any additional information.
+The total file size of all original downloaded files for this import is ~1.1 GB. The files from MeSH are in XML format and therefore use the python package `xml.etree.ElementTree` to read these files into pandas dataframes for further processing. Please, note that extracting the information from XML formatted tags and converting it into well-formatted csv involve a lot of computationally heavy steps, which depends on the RAM of the user's system. Please note that special care needs to be given when traversing through the XML tree to ensure that the properties at each level are associated with the appropriate MeSHTerm node type. As part of this process, we ended up making a seperate csv+tmcf pair for each node type from each file with an additional mapping csv+tmcf file pair to bring in mappings between node types as necessary. The total file size for all sixteen formatted csvs is ~135 MB. Finally, we also decided not to include `LexicalTag` or `IsPermutedTermYN` as properties for MeSHTerms from the `qual<year>.xml` file because for all Terms the property value was `NON` or `False` respectively, and thus these properties did not contain any additional information.
 
 The `pa<year>.xml` file provided information on the pharmalogical action or mechanismOfAction of MeSHDescriptor and MeSHSupplementaryConceptRecord nodes. This provides pharmacological information about a subset of applicable MeSH records. Therefore, for MeSHDescriptor and MeSHSupplementaryConceptRecord nodes that were included in the `pa<year>.xml` as having mechanismOfAction that are connected MeShDescriptor nodes, we noted that these nodes were of Drug node type as well.
 
@@ -83,7 +83,7 @@ Any works found on National Library of Medicine (NLM) Web sites may be freely us
 
 ##### Python Scripts
 
-[`format_mesh_desc.py`](scripts/format_mesh_desc.py) converts the original xml into six formatted csv files, which each can be imported alongside it's matching tMCF.
+[`format_mesh_desc.py`](scripts/format_mesh_desc.py) converts the original xml into eight formatted csv files, which each can be imported alongside it's matching tMCF.
 
 [`format_mesh_pan.py`](scripts/format_mesh_pa.py) converts the original csv file into two formatted csv files, which can be imported alongside it's matching tMCF.
 
@@ -98,15 +98,19 @@ The tMCF files that map each column in the corresponding CSV file to the appropr
 
 [`mesh_desc_concept.tmcf`](tMCFs/mesh_desc_concept.tmcf) contains the tmcf mapping to the csv of concept nodes generated from the mesh desc file.
 
+[`mesh_desc_concept_mapping.tmcf`](tMCFs/mesh_desc_concept_mapping.tmcf) contains the tmcf mapping to the csv of the links of concept nodes to descriptor nodes generated from the mesh desc file.
+
 [`mesh_desc_descriptor.tmcf`](tMCFs/mesh_desc_descriptor.tmcf) contains the tmcf mapping to the csv of descriptor nodes generated from the mesh desc file.
 
-[`mesh_desc_descriptor_mapping.tmcf`](tMCFs/mesh_desc_descriptor_mapping.tmcf) contains the tmcf mapping to the csv of mapping of descriptor nodes to parent (more general) descriptor nodes from the mesh desc file.
+[`mesh_desc_descriptor_mapping.tmcf`](tMCFs/mesh_desc_descriptor_mapping.tmcf) contains the tmcf mapping to the csv of descriptor nodes liks to parent (more general) descriptor nodes from the mesh desc file.
 
 [`mesh_desc_qualifier.tmcf`](tMCFs/mesh_desc_qualifier.tmcf) contains the tmcf mapping to the csv of qualifier nodes generated from the mesh desc file.
 
-[`mesh_desc_qualifier_mapping.tmcf`](tMCFs/mesh_desc_qualifier_mapping.tmcf) contains the tmcf mapping to the csv of descriptor qualifier mappings generated from the mesh desc file.
+[`mesh_desc_qualifier_mapping.tmcf`](tMCFs/mesh_desc_qualifier_mapping.tmcf) contains the tmcf mapping to the csv of desciptor nodes links to qualifier nodes generated from the mesh desc file.
 
 [`mesh_desc_term.tmcf`](tMCFs/mesh_desc_term.tmcf) contains the tmcf mapping to the csv of term nodes generated from the mesh desc file.
+
+[`mesh_desc_term_mapping.tmcf`](tMCFs/mesh_desc_term_mapping.tmcf) contains the tmcf mapping to the csv of the mappings of term nodes links to concept nodes from the mesh desc file.
 
 [`mesh_pharmacological_action_descriptor.tmcf`](tMCFs/mesh_pharmacological_action.tmcf) contains the tmcf mapping to the csv of pharmacological actions of mesh descriptors to the appropriate mesh descriptor nodes from the mesh pa file.
 
