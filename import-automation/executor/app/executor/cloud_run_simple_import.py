@@ -61,9 +61,10 @@ def get_simple_import_job_id(import_spec: dict, import_script: str) -> str:
     if import_pos < 0 or _DEFAULT_CONFIG_PREFIX not in import_script:
         # Not a simple import
         return ''
+    # Get the import config path under .../simple_imports/
     job_str = [
         import_script[import_script.find(_IMPORT_CONFIG_DIR) + 1:].replace(
-            _DEFAULT_CONFIG_PREFIX, '').replace('.json', '')
+            _DEFAULT_CONFIG_PREFIX, '').removesuffix('.json')
     ]
     if import_name:
         job_str.append(import_name)
@@ -78,12 +79,11 @@ def get_simple_import_gcs_config(
     config_dir: str = _IMPORT_CONFIG_DIR,
     copy_file: bool = True,
 ) -> str:
-    """Returns the import config file on GCS.
+    """Returns path to a copy of the import config file on GCS.
 
   Simple imports are processed as a Cloud Run job that cannot access local
-  files.
-  So import config and output files are saved in the GCS folder:
-    <GCS-Bucket>/simple_imports/<import>/
+  files.  So import config and output files are saved in the GCS folder:
+    <GCS-Bucket>/simple_imports/<import>/<version>/
 
   Args:
     config_file: Import config json
@@ -134,18 +134,22 @@ def cloud_run_simple_import_job(
     job_id: str = '',
     project_id: str = _DEFAULT_PROJECT,
     location: str = _DEFAULT_LOCATION,
-    gcs_dir: str = '',
     image: str = _DEFAULT_SIMPLE_IMAGE,
 ) -> str:
-    """Create and run a Cloud Run job for simple import.
+    """Create and run a Cloud Run job for simple a import.
 
   Args:
     import_name: name of the import.
       Folder for output will have the same name.
     config_file: json file with config for simple import run.
       For an example, see simple_imports/sample/import_config.json
+    env: dictionary of environment variables for the job.
+      Additional variabled for CONFIG_FILE and OUTPUT_DIR are added.
+    version: a dated version string for file path for output folder.
     project_id: Google project id for the cloud run. The compute engine service
       account for the project should have access to the GCS folder for output.
+    location: Region for the cloud run instance.
+    image: container image URL for the simple-importer.
 
   Returns:
     Output directory with the script outputs.
@@ -174,7 +178,8 @@ def cloud_run_simple_import_job(
     if not job_id:
         job_id = get_simple_import_job_id(import_spec, config_file)
 
-    # Create and run the job for the config.
+    # Create the job for the config.
+    # An existing job is updated with new env variables for versioned output
     logging.info(
         f'Creating simple import cloud run {project_id}:{job_id} for'
         f' {config_file} with output: {gcs_output_dir}, env: {env_vars}')
@@ -185,6 +190,7 @@ def cloud_run_simple_import_job(
             f'Failed to create cloud run job {job_id} for {config_file}')
         return None
 
+    # Execute the cloud run job.
     logging.info(f'Running {project_id}:{job_id} for {config_file} with output:'
                  f' {gcs_output_dir}')
     job = cloud_run.execute_cloud_run_job(project_id, location, job_id)
