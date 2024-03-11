@@ -54,7 +54,7 @@ def create_or_update_cloud_run_job(
     parent = f"projects/{project_id}/locations/{location}"
     job_name = f"{parent}/jobs/{job_id}"
 
-    # Preare environment variables for the job.
+    # Prepare environment variables for the job.
     env = []
     for var, value in env_vars.items():
         env.append(run_v2.EnvVar(name=var, value=value))
@@ -71,7 +71,7 @@ def create_or_update_cloud_run_job(
         job = client.get_job(request=run_v2.GetJobRequest(name=job_name))
         logging.info(f"Found existing job {job_name}: {job}")
     except NotFound:
-        job_exists = False
+      logging.info(f'No existing job, creating new job: {job_name}')
 
     if not job:
         # Create a new Cloud Run Job

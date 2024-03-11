@@ -127,7 +127,7 @@ def get_simple_import_gcs_config(
 
 
 def cloud_run_simple_import_job(
-    import_spec: str,
+    import_spec: dict,
     config_file: str,
     env: dict = {},
     version: str = '',
