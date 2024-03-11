@@ -162,5 +162,5 @@ def get_job_id(job_id: str) -> str:
       chars.append(c)
     else:
       chars.append('-')
-  return ''.join(chars)
+  return ''.join(chars).strip('-')
 

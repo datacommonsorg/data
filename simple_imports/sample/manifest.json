@@ -3,9 +3,9 @@
         {
             "import_name": "sample_rsi_import",
             "curator_emails": ["ajaits@google.com"],
-            "provenance_url": "https://github.com/datacommonsorg/import/blob/master/simple/tests/stats/test_data/runner/config/config_driven.json",
+            "provenance_url": "https://github.com/datacommonsorg/import/tree/master/simple/sample",
             "provenance_description": "Sample import to be run on Cloud run",
-            "scripts": ["simple_config.json"],
+            "scripts": ["import_config.json"],
             "import_inputs": [{
                 "template_mcf": "",
                 "cleaned_csv": ""
