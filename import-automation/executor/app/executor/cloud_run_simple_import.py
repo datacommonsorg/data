@@ -139,8 +139,8 @@ def cloud_run_simple_import_job(
     """Create and run a Cloud Run job for simple a import.
 
   Args:
-    import_name: name of the import.
-      Folder for output will have the same name.
+    import_spec: dict with import parameters such as 'import_name'.
+      Folder for output will have the import_name in the path.
     config_file: json file with config for simple import run.
       For an example, see simple_imports/sample/import_config.json
     env: dictionary of environment variables for the job.
@@ -181,13 +181,13 @@ def cloud_run_simple_import_job(
     # Create the job for the config.
     # An existing job is updated with new env variables for versioned output
     logging.info(
-        f'Creating simple import cloud run {project_id}:{job_id} for'
+        f'Setting up simple import cloud run {project_id}:{job_id} for'
         f' {config_file} with output: {gcs_output_dir}, env: {env_vars}')
     job = cloud_run.create_or_update_cloud_run_job(project_id, location, job_id,
                                                    image, env_vars)
     if not job:
         logging.error(
-            f'Failed to create cloud run job {job_id} for {config_file}')
+            f'Failed to setup cloud run job {job_id} for {config_file}')
         return None
 
     # Execute the cloud run job.
@@ -202,6 +202,7 @@ def cloud_run_simple_import_job(
     logging.info(
         f'Completed run {project_id}:{job_id} for {config_file} with output:'
         f' {gcs_output_dir}')
+    # TODO: get processing status from <output>/report.json
     return gcs_output_dir
 
 
