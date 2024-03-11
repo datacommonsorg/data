@@ -43,7 +43,7 @@ _DEFAULT_CONFIG_PREFIX = 'import_config'
 _IMPORT_CONFIG_DIR = '/simple_imports/'
 
 
-def get_simple_import_job_id(import_dir: str, import_name: str) -> str:
+def get_simple_import_job_id(import_dir: str, import_name: str = '') -> str:
     """Returns the job id if the script is a simple import config.
 
   Args:
