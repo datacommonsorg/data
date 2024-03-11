@@ -18,18 +18,24 @@
 
 ## About the Dataset
 
-“The Medical Subject Headings (MeSH) thesaurus is a controlled and hierarchically-organized vocabulary produced by the National Library of Medicine. It is used for indexing, cataloging, and searching of biomedical and health-related information”. Data Commons includes the Concept, Descriptor, Qualifier, Supplementary Record and Term elements of MeSH as described [here](https://www.nlm.nih.gov/mesh/xml_data_elements.html). More information about the dataset can be found on the official National Center for Biotechnology (NCBI) [website](https://www.ncbi.nlm.nih.gov/mesh/).
-Pubchem is one of the largest reservoirs of chemical compound information. It is mapped to many other medical ontologies, including
-MeSH. More information about compound IDs and other properties can be found on their official [website](https://pubchemdocs.ncbi.nlm.nih.gov/compounds).
+“The Medical Subject Headings (MeSH) thesaurus is a controlled and hierarchically-organized vocabulary produced by the National Library of Medicine. It is used for indexing, cataloging, and searching of biomedical and health-related information”. Data Commons includes the Concept, Descriptor, Qualifier, Supplementary Concept Record, and Term elements of MeSH as described [here](https://www.nlm.nih.gov/mesh/xml_data_elements.html). More information about the dataset can be found on the official National Center for Biotechnology (NCBI) [website](https://www.ncbi.nlm.nih.gov/mesh/).
+Pubchem is one of the largest reservoirs of chemical compound information. It is mapped to many other medical ontologies, including MeSH. More information about compound IDs and other properties can be found on their official [website](https://pubchemdocs.ncbi.nlm.nih.gov/compounds).
 
 ### Download Data
 
-All the terminology referenced in the MeSH data can be downloaded in various formats [here](https://www.nlm.nih.gov/databases/download/mesh.html). The current xml files version can also be downloaded by running [`download.sh`](download.sh). For the purpose of mapping all mesh terms with each other, two xml files are used, namely: `desc2022.xml` and `supp2022.xml`.
-The csv version of the file containing PubChem Compound ID and names can also be downloaded by running[`download.sh`](download.sh)
+All the terminology referenced in the MeSH data can be downloaded in various formats [here](https://www.nlm.nih.gov/databases/download/mesh.html). The current xml files version can also be downloaded by running [`download.sh`](download.sh). To represent the entirity of the MeSH ontology in Biomedical Data Commons we download all for xml files from MeSH: `desc<year>.xml`, `pa<year>.xml`, `qual<year>.xml`, and `supp<year>.xml`. We also download from pubchem the mapping file between pubchem compound ids (CIDs) and corresponding MeSH Descriptor or Supplementary Concept Records MeSH unique ids (`CID-MeSH.csv`). All files required for this import can be downloaded by running[`download.sh`](download.sh)
 
 ### Overview
 
-This directory stores the scripts used to convert the xml obtained from the NCBI webpage into five different csv files, each describing the relation between supplementary records, concepts, terms, qualifiers and descriptors, and generating dcids for each.
+In this import we use the four MeSH xml files to define MeSH Concept, Descriptor, Qualifiers, Supplementary Concept Records, and Terms as individual nodes as well as maintaining mappings to each other. We also maintain links between these  data types to one other as indicated below. Furthermore, 
+
+SCR point to descriptors via parent
+terms point to concepts via parent
+concepts point to qualifiers via hasMeSHQualifier
+concepts point to other concepts via preferredConcept
+descriptors point to descriptors via specializationOf
+descriptors point to qualifiers via hasMeSHQualifier
+concepts point to descriptors via parent
 The MeSH data stores the vocabulary thesaurus used for indexing articles for PubMed. In addition, the scripts are used to map ther PubChem compound IDs to the MeSH descriptor and supplementary record IDs, joining on MeSH supplementary record name/PubChem compoundID.
 
 - For mapping the MeSH descriptor ID with the MeSH supplementary record ID, the [supplementary file](https://nlmpubs.nlm.nih.gov/projects/mesh/MESH_FILES/xmlmesh/supp2022.xml) is used.
@@ -38,12 +44,7 @@ The MeSH data stores the vocabulary thesaurus used for indexing articles for Pub
 
 ### Notes and Caveats
 
-The main main file and the mesh supplementary file are both XML formatted. In addition, they're about 300-600 GB worth of storage. This is one the major contributors of extended run time for the scripts. Extracting the information from XML formatted tags and converting it into well-formatted csv involve a lot of computationally heavy steps, which depends on the RAM of the user's system.
-
-To run the script [`format_mesh.py`](format_mesh.py), the user requires the `mesh-descriptor.xml` file, which outputs five different csv files, each relating to descriptor, concept, qualifier and term.
-
-To run the script [`format_mesh_record.py`](format_mesh_record.py), the user requires the `mesh_record.xml` file and the `mesh-pubchem.csv` file which maps the record to descriptor and to the pubchem compound ID, and outputs two csv files one for the supplementary records and one with the mappings between mesh and pubchem. Here, the goal is to map the mesh terms to the pubchem database of compounds. This is accomplished by mapping the mesh record name to the pubchem compound name. In addition, each mesh entity has a descriptor ID which is in turn linked to mesh suplementary record ID, and thus ultimately linked to pubchem compound ID. 
-
+The total file size of all original downloaded files for this import is ~1.1 GB. The files from MeSH are in XML format and therefore use the python package `xml.etree.ElementTree` to read these files into pandas dataframes for further processing. Please, note that extracting the information from XML formatted tags and converting it into well-formatted csv involve a lot of computationally heavy steps, which depends on the RAM of the user's system. Please note that special care needs to be given when traversing through the XML tree to ensure that the properties at each level are associated with the appropriate MeSHTerm node type. As part of this process, we ended up making a seperate csv+tmcf pair for each node type from each file with an additional mapping csv+tmcf file pair to bring in mappings between node types as necessary. Finally, we also decided not to include `LexicalTag` or `IsPermutedTermYN` as properties for MeSHTerms from the `qual<year>.xml` file because for all Terms the property value was `NON` or `False` respectively, and thus these properties did not contain any additional information.
 
 ### dcid Generation
 
