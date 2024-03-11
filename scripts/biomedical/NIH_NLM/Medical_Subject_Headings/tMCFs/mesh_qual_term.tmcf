@@ -1,5 +1,6 @@
 Node: E:mesh_qual_term->E1
 typeOf: dcs:MeSHConcept
+dcid: C:mesh_qual_term->Concept_dcid
 identifier: C:mesh_qual_term->ConceptUI
 
 Node: E:mesh_qual_term->E2
