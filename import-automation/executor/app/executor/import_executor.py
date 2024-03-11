@@ -350,14 +350,14 @@ class ImportExecutor:
 
             script_paths = import_spec.get('scripts')
             for path in script_paths:
-                script_path=os.path.join(absolute_import_dir, path),
+                script_path=os.path.join(absolute_import_dir, path)
                 simple_job = cloud_run_simple_import.get_simple_import_job_id(
                     import_spec, script_path)
                 if simple_job:
                     # Running simple import as cloud run job.
                     cloud_run_simple_import.cloud_run_simple_import_job(
-                        import_name=import_spec.get('import_name'),
-                        config_file=scipt_path,
+                        import_spec=import_spec,
+                        config_file=script_path,
                         env=self.config.user_script_env,
                         version=version,
                     )

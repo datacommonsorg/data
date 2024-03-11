@@ -43,29 +43,37 @@ _DEFAULT_CONFIG_PREFIX = 'import_config'
 _IMPORT_CONFIG_DIR = '/simple_imports/'
 
 
-def get_simple_import_job_id(import_dir: str, import_name: str = '') -> str:
-    """Returns the job id if the script is a simple import config.
+def get_simple_import_job_id(import_spec: dict, import_script: str) -> str:
+    """Returns the job id if the script is a simple import config, else ''.
 
   Args:
-    import_dir: directory for the import output.
-    import_name: name for the import
+    import_spec: Import specification dictionary with import name, script.
+    import_script: Specific import script being processed
 
   Returns:
-    job_is as a string simple-import-<import_name>
+    job_is as a string simple-import-<import_name> for simple-imports
+    or '' for other imports.
   """
     # Create a job is for simple import cloud run as
     # <config_path>-<import_name>
-    if import_dir.startswith('gs://'):
-        import_dir = import_dir[len('gs://'):]
-    job_str = [import_dir[import_dir.find(_IMPORT_CONFIG_DIR) + 1:]]
+    import_name = import_spec.get('import_name')
+    import_pos = import_script.find(_IMPORT_CONFIG_DIR)
+    if import_pos < 0 or _DEFAULT_CONFIG_PREFIX not in import_script:
+        # Not a simple import
+        return ''
+    job_str = [
+        import_script[import_script.find(_IMPORT_CONFIG_DIR) + 1:].replace(
+            _DEFAULT_CONFIG_PREFIX, '').replace('.json', '')
+    ]
     if import_name:
-      job_str.append(import_name)
+        job_str.append(import_name)
     return cloud_run.get_job_id('-'.join(job_str))
 
 
 def get_simple_import_gcs_config(
     config_file: str,
     import_name: str,
+    version: str,
     gcs_bucket: str = _DEFAULT_GCS_BUCKET,
     config_dir: str = _IMPORT_CONFIG_DIR,
     copy_file: bool = True,
@@ -80,37 +88,34 @@ def get_simple_import_gcs_config(
   Args:
     config_file: Import config json
     import_name: name of the import
+    version: dated version string for the import run
     gcs_bucket: GCS bucket for the import config and outputs.
     copy_file: if True copies the config file to GCS.
 
   Returns:
     GCS path to the config file,
-    like gs://<GCS-BUCKET>/simple_imports/<import>/import_config.json
+    like gs://<GCS-BUCKET>/simple_imports/<import>/<version>/import_config.json
   """
-    gcs_config_file = config_file
-    if config_file.startswith('gs://'):
-        # Config already on GCS. Use as is.
-        return gcs_config_file
-
     path = []
     if config_dir.startswith('gs://'):
         # Use the provided gcs folder
         path.append(config_dir)
-        if not config_dir.endswith('.json'):
-            path.append(os.path.basename(config_file))
     else:
-        # Use the gcs path: gs://<bucket>/scripts/simple/<import>/<config>
+        # Use the gcs path: gs://<bucket>/simple_imports/<import>/
         if not gcs_bucket:
             gcs_bucket = _DEFAULT_GCS_BUCKET
         path.append(gcs_bucket)
         path.append(config_dir)
-        config_pos = config_file.find(config_dir)
+        config_file_path = os.path.dirname(config_file)
+        config_pos = config_file_path.find(config_dir)
         if config_pos >= 0:
             config_pos += len(config_dir)
         else:
             config_pos = 0
-        path.extend(config_file[config_pos:].split('/'))
-    path.append(import_name)
+        path.extend(config_file_path[config_pos:].split('/'))
+        path.append(import_name)
+    path.append(version)
+    path.append(os.path.basename(config_file))
     gcs_config_file = '/'.join([d.strip('/') for d in path if d])
     if not gcs_config_file.startswith('gs://'):
         gcs_config_file = 'gs://' + gcs_config_file
@@ -122,7 +127,7 @@ def get_simple_import_gcs_config(
 
 
 def cloud_run_simple_import_job(
-    import_name: str,
+    import_spec: str,
     config_file: str,
     env: dict = {},
     version: str = '',
@@ -145,15 +150,17 @@ def cloud_run_simple_import_job(
   Returns:
     Output directory with the script outputs.
   """
-    # Copy the config file to GCS if needed.
-    # Cloud run can only access GCS for config files, input and output.
-    gcs_config = get_simple_import_gcs_config(config_file, copy_file=True)
-    gcs_dir = os.path.dirname(gcs_config)
-
-    # Create a dated version output folder for each run.
     if not version:
         version = _get_time_version()
-    gcs_output_dir = os.path.join(gcs_dir, import_name, version)
+    import_name = import_spec.get('import_name', '')
+    # Copy the config file to GCS versioned folder.
+    # Cloud run can only access GCS for config files, input and output.
+    gcs_config = get_simple_import_gcs_config(config_file,
+                                              import_name,
+                                              version,
+                                              copy_file=True)
+    gcs_output_dir = os.path.dirname(gcs_config)
+
     # Setup environment variables for simple import run.
     # Settings for each import run have to be passed in through ENV variables.
     env_vars = {
@@ -165,7 +172,7 @@ def cloud_run_simple_import_job(
 
     # Generate job-id from config_file path if not specified.
     if not job_id:
-        job_id = get_simple_import_job_id(gcs_dir, import_name)
+        job_id = get_simple_import_job_id(import_spec, config_file)
 
     # Create and run the job for the config.
     logging.info(
