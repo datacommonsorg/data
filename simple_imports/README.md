@@ -34,10 +34,16 @@ the [import automation](https://github.com/datacommonsorg/data/tree/master/impor
 ## Adding a new import
 
 To add a new data source:
-1. Copy the input files to a GCS bucket that is
-read accessible to the service account `965988403328-compute@developer.gserviceaccount.com`.
+1. Copy the input files to a GCS bucket that is allows objects and metadata read
+   access for the service account `965988403328-compute@developer.gserviceaccount.com`
+   that runs the import automation for Data Commons.
+   Note: Grant access to the bucket containing the input files
+   for the roles `Storage Legacy Bucket Reader` and
+   `Storage Legacy Object Reader` following the steps described
+   [here](https://cloud.google.com/storage/docs/access-control/using-iam-permissions#console).
+
 2. Create a sub-folder for the import under `data/simple_imports/<import_name>`.
-3. Add an import config `import_config.json` with the list of input files to be
-processed.
+3. Add an import config `import_config.json` with the list of input files
+ and / or folders to be processed.
 The input files should be in one of the [supported formats](https://github.com/datacommonsorg/import/tree/master/simple#input-files).
 

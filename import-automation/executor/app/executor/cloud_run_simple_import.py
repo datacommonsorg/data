@@ -156,6 +156,7 @@ def cloud_run_simple_import_job(
   """
     if not version:
         version = _get_time_version()
+    # TODO: support parameters from import_config.json instead of manifest.json
     import_name = import_spec.get('import_name', '')
     # Copy the config file to GCS versioned folder.
     # Cloud run can only access GCS for config files, input and output.

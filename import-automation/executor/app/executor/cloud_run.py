@@ -71,7 +71,7 @@ def create_or_update_cloud_run_job(
         job = client.get_job(request=run_v2.GetJobRequest(name=job_name))
         logging.info(f"Found existing job {job_name}: {job}")
     except NotFound:
-      logging.info(f'No existing job, creating new job: {job_name}')
+        logging.info(f'No existing job, creating new job: {job_name}')
 
     if not job:
         # Create a new Cloud Run Job

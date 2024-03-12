@@ -1,4 +1,11 @@
 {
+  "dummyComments": [
+    "# This is a comment and doesn't impact the import",
+    "# Sample import run as a cloud run jon daily",
+    "# See Simple Stats Importer for details:",
+    "# https://github.com/datacommonsorg/import/tree/master/simple/sample",
+    "# TODO: Add monitoring to detect import failures"
+  ],
   "dataDownloadUrl": ["gs://datcom-prod-imports/scripts/simple/sample/test_data/input/config_driven/config_driven/"],
   "inputFiles": {
     "countries.csv": {
