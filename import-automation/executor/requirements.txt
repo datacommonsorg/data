@@ -2,9 +2,11 @@ requests
 protobuf
 google-auth
 google-cloud-logging
+google-cloud-run
 google-cloud-storage
 google-cloud-datastore
 google-cloud-scheduler==2.10.0
+gspread
 flask
 gunicorn
 pytz
