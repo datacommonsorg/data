@@ -1,0 +1,17 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "sample_rsi_import",
+            "curator_emails": ["ajaits@google.com"],
+            "provenance_url": "https://github.com/datacommonsorg/import/tree/master/simple/sample",
+            "provenance_description": "Sample import to be run on Cloud run",
+            "scripts": ["import_config.json"],
+            "import_inputs": [{
+                "template_mcf": "",
+                "cleaned_csv": ""
+            }],
+        "cron_schedule": "0 20 * * *"
+        }
+    ]
+}
+
