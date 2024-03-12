@@ -256,8 +256,7 @@ def format_descriptor_df(df):
     df = df.explode('TreeNumber') 
     # create descriptor dcid
     df['Descriptor_dcid'] = 'bio/' + df['DescriptorID'].astype(str)
-    # add quotes for Descriptor Name text type column
-    df['DescriptorName'] = '"' + df.DescriptorName + '"'
+    # add quotes from text type columns and replaces "nan" with np.nan
     col_names_quote = ['DescriptorName', 'ScopeNote']
     df = format_text_strings(df, col_names_quote)
     # replace missing names with ID
@@ -285,7 +284,7 @@ def format_qualifier_df(df):
     df = df.explode(explode_cols)
     # remove missing qualifier rows
     df = df[df['QualifierID'].notna()]
-    # add quotes from text type columns and replaces "nan" with qualifier ID
+    # add quotes from text type columns and replaces "nan" with np.nan
     col_names_quote = ['QualifierName']
     df = format_text_strings(df, col_names_quote)
     # replace missing names with ID
