@@ -170,11 +170,8 @@ TITLE_REPLACEMENTS = {
 
 # Distinguishing series suffixes to keep.
 DISTINGUISHING_SUFFIXES = {
-    ' - 13th ICLS',
-    ' - 19th ICLS',
-    ', Joint Committees',
-    ', Lower Chamber or Unicameral',
-    ', Upper Chamber'
+    ' - 13th ICLS', ' - 19th ICLS', ', Joint Committees',
+    ', Lower Chamber or Unicameral', ', Upper Chamber'
 }
 
 
