@@ -1,5 +1,3 @@
-
-
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,6 +24,5 @@ ADD requirements.txt /workspace/requirements.txt
 RUN pip install -r /workspace/requirements.txt
 
 COPY app/. /workspace/app/
-COPY ../../util/. /workspace/app/executor/
 
 CMD gunicorn --timeout 0 --workers 5 -b :$PORT app.main:FLASK_APP
