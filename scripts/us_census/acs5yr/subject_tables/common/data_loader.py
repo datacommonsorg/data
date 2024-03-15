@@ -493,7 +493,7 @@ class SubjectTableDataLoaderBase:
                     self._process_zip_file(
                         os.path.join(input_dir_path, filename))
                 ## if input_directory has csv files, process them
-                if 'data_with_overlays' in filename or '-Data' in filename:
+                if '-Data' in filename or 'data_with_overlays' in filename:
                     input_path = os.path.join(input_dir_path, filename)
                     df = pd.read_csv(input_path,
                                      header=self.header_row,
