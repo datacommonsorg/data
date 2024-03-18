@@ -360,6 +360,7 @@ class ImportExecutor:
                         config_file=script_path,
                         env=self.config.user_script_env,
                         version=version,
+                        image=import_spec.get('image'),
                     )
                 else:
                     # Run import script locally.

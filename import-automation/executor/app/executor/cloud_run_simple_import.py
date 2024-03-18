@@ -27,16 +27,17 @@ import pytz
 # Set path for import modules.
 _SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(_SCRIPT_DIR)
-sys.path.append(os.path.join(_SCRIPT_DIR.split('/data/', 1)[0], 'data', 'util'))
 
 import cloud_run
-import file_util
+import file_io
 
 # Default settings.
-_DEFAULT_PROJECT = 'datcom-import-automation-prod'
-_DEFAULT_SIMPLE_IMAGE = 'gcr.io/datcom-ci/datacommons-simple:stable'
-_DEFAULT_LOCATION = 'us-central1'
-_DEFAULT_GCS_BUCKET = 'datcom-prod-imports'
+_DEFAULT_PROJECT = os.environ.get('GCS_PROJECT',
+                                  'datcom-import-automation-prod')
+_DEFAULT_SIMPLE_IMAGE = os.environ.get(
+    'DOCKER_IMAGE', 'gcr.io/datcom-ci/datacommons-simple:stable')
+_DEFAULT_LOCATION = os.environ.get('CLOUD_REGION', 'us-central1')
+_DEFAULT_GCS_BUCKET = os.environ.get('GCS_BUCKET', 'datcom-prod-imports')
 _DEFAULT_CONFIG_PREFIX = 'import_config'
 
 # Path for simple import config spec under data/scripts/simple
@@ -122,7 +123,7 @@ def get_simple_import_gcs_config(
     if copy_file and config_file != gcs_config_file:
         logging.info(
             f'Copying import config: {config_file} to {gcs_config_file}')
-        file_util.file_copy(config_file, gcs_config_file)
+        file_io.file_copy(config_file, gcs_config_file)
     return gcs_config_file
 
 
@@ -139,12 +140,12 @@ def cloud_run_simple_import_job(
     """Create and run a Cloud Run job for simple a import.
 
   Args:
-    import_spec: dict with import parameters such as 'import_name'.
-      Folder for output will have the import_name in the path.
-    config_file: json file with config for simple import run.
-      For an example, see simple_imports/sample/import_config.json
-    env: dictionary of environment variables for the job.
-      Additional variabled for CONFIG_FILE and OUTPUT_DIR are added.
+    import_spec: dict with import parameters such as 'import_name'. Folder for
+      output will have the import_name in the path.
+    config_file: json file with config for simple import run. For an example,
+      see simple_imports/sample/import_config.json
+    env: dictionary of environment variables for the job. Additional variabled
+      for CONFIG_FILE and OUTPUT_DIR are added.
     version: a dated version string for file path for output folder.
     project_id: Google project id for the cloud run. The compute engine service
       account for the project should have access to the GCS folder for output.
@@ -181,6 +182,8 @@ def cloud_run_simple_import_job(
 
     # Create the job for the config.
     # An existing job is updated with new env variables for versioned output
+    if not image:
+        image = _DEFAULT_SIMPLE_IMAGE
     logging.info(
         f'Setting up simple import cloud run {project_id}:{job_id} for'
         f' {config_file} with output: {gcs_output_dir}, env: {env_vars}')
