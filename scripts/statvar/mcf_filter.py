@@ -44,16 +44,15 @@ flags.DEFINE_string(
     '',
     'Comma separated list of MCF files with nodes to be dropped from output',
 )
-flags.DEFINE_bool(
-    'ignore_existing_nodes', True, 'Drop nodes that are defined in DC API.'
-)
+flags.DEFINE_list('ignore_dcids', [], 'List of dcids to be ignored')
+flags.DEFINE_bool('ignore_existing_nodes', True,
+                  'Drop nodes that are defined in DC API.')
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(
-    os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util')
-)
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
 from counters import Counters
 from dc_api_wrapper import dc_api_get_node_property_values
@@ -67,7 +66,7 @@ def drop_mcf_nodes(
     config: dict = {},
     counters: Counters = None,
 ) -> dict:
-  """Function to filter MCF nodes removing any nodes in ignore_nodes.
+    """Function to filter MCF nodes removing any nodes in ignore_nodes.
 
   Args:
     input_nodes: dictionary of MCF nodes keyed by dcid.
@@ -80,36 +79,40 @@ def drop_mcf_nodes(
     A dictionary of node property:values keyed by dcid from input_nodes that
     are not dropped.
   """
-  if not counters:
-    counters = Counters()
-  output_nodes = OrderedDict()
-  logging.info(
-      f'Filtering {len(input_nodes)} nodes with {len(ignore_nodes)} ignored'
-      ' nodes'
-  )
-  for dcid, pvs in input_nodes.items():
-    # Check if dcid exists in ignore nodes and is equivalent.
-    ignore_pvs = ignore_nodes.get(add_namespace(dcid), None)
-    if ignore_pvs:
-      # Compare if nodes have any difference in PVs.
-      has_diff, diff_str = diff_mcf_node_pvs(
-          node_1=pvs, node_2=ignore_pvs, config=config, counters=counters
-      )
-      if has_diff:
-        logging.warning(f'Diff in ignored Node: {dcid}, diff:\n{diff_str}\n')
-        counters.add_counter(f'error-input-ignore-node-diff', 1)
-      else:
-        logging.debug(f'Ignored Node: {dcid},\n{pvs}\n')
-        counters.add_counter(f'input-nodes-ignored', 1)
-    else:
-      output_nodes[dcid] = pvs
-  return output_nodes
+    if not counters:
+        counters = Counters()
+    output_nodes = OrderedDict()
+    logging.info(
+        f'Filtering {len(input_nodes)} nodes with {len(ignore_nodes)} ignored'
+        ' nodes')
+    for dcid, pvs in input_nodes.items():
+        # Check if dcid exists in ignore nodes and is equivalent.
+        ignore_pvs = ignore_nodes.get(add_namespace(dcid), None)
+        if ignore_pvs:
+            # Compare if nodes have any difference in PVs.
+            has_diff, diff_str, added, deleted, modified = diff_mcf_node_pvs(
+                node_1=pvs, node_2=ignore_pvs, config=config, counters=counters)
+            if has_diff:
+                logging.warning(
+                    f'Diff in ignored Node: {dcid}, diff:\n{diff_str}\n')
+                if config.get('output_nodes_with_additions',
+                              False) and (deleted or modified):
+                    output_nodes[dcid] = pvs
+                    counters.add_counter(f'input-nodes-with-additions', 1)
+                else:
+                    counters.add_counter(f'error-input-ignore-node-diff', 1)
+            else:
+                logging.debug(f'Ignored Node: {dcid},\n{pvs}\n')
+                counters.add_counter(f'input-nodes-ignored', 1)
+        else:
+            output_nodes[dcid] = pvs
+    return output_nodes
 
 
-def drop_existing_mcf_nodes(
-    input_nodes: dict, config: dict = {}, counters: Counters = None
-) -> dict:
-  """Function to drop existing MCF nodes and return new nodes.
+def drop_existing_mcf_nodes(input_nodes: dict,
+                            config: dict = {},
+                            counters: Counters = None) -> dict:
+    """Function to drop existing MCF nodes and return new nodes.
 
   Args:
     input_nodes: dictionary of MCF nodes keyed by dcid to be filtered
@@ -121,13 +124,13 @@ def drop_existing_mcf_nodes(
     A dictionary of node property:values keyed by dcid from input_nodes that
     are not dropped.
   """
-  if not counters:
-    counters = Counters()
-  # Get the property-values from DC API for all nodes
-  dcids = [strip_namespace(dcid) for dcid in list(input_nodes.keys()) if dcid]
-  existing_nodes = dc_api_get_node_property_values(dcids, config)
-  counters.add_counter('existing-nodes-from-api', len(existing_nodes))
-  return drop_mcf_nodes(input_nodes, existing_nodes, config, counters)
+    if not counters:
+        counters = Counters()
+    # Get the property-values from DC API for all nodes
+    dcids = [strip_namespace(dcid) for dcid in list(input_nodes.keys()) if dcid]
+    existing_nodes = dc_api_get_node_property_values(dcids, config)
+    counters.add_counter('existing-nodes-from-api', len(existing_nodes))
+    return drop_mcf_nodes(input_nodes, existing_nodes, config, counters)
 
 
 def filter_mcf_file(
@@ -137,7 +140,7 @@ def filter_mcf_file(
     output_mcf: str,
     counters: Counters = None,
 ) -> dict:
-  """Function to filter MCF nodes in input and write to the output file.
+    """Function to filter MCF nodes in input and write to the output file.
 
   Args:
     input_mcf_files: Comma seeprated list of input MCF files.
@@ -153,37 +156,36 @@ def filter_mcf_file(
     A dictionary of nodes with property:values keyed by dcid from input
     that are not dropped.
   """
-  # Load nodes from MCF files.
-  if not counters:
-    counters = Counters()
-  input_nodes = load_mcf_nodes(input_mcf_files)
-  ignore_nodes = load_mcf_nodes(ignore_mcf_files)
-  counters.add_counter('input-nodes', len(input_nodes))
-  counters.add_counter('ignore-nodes-loaded', len(input_nodes))
+    # Load nodes from MCF files.
+    if not counters:
+        counters = Counters()
+    input_nodes = load_mcf_nodes(input_mcf_files)
+    ignore_nodes = load_mcf_nodes(ignore_mcf_files)
+    counters.add_counter('input-nodes', len(input_nodes))
+    counters.add_counter('ignore-nodes-loaded', len(input_nodes))
 
-  # Remove any ignored nodes from input.
-  output_nodes = drop_mcf_nodes(input_nodes, ignore_nodes, config, counters)
+    # Remove any ignored nodes from input.
+    output_nodes = drop_mcf_nodes(input_nodes, ignore_nodes, config, counters)
 
-  # Remove any predefined nodes.
-  if config.get('ignore_existing_nodes', False):
-    output_nodes = drop_existing_mcf_nodes(output_nodes, config, counters)
+    # Remove any predefined nodes.
+    if config.get('ignore_existing_nodes', False):
+        output_nodes = drop_existing_mcf_nodes(output_nodes, config, counters)
 
-  # Save the filtered nodes into an MCF file.
-  if output_mcf:
-    write_mcf_nodes([output_nodes], output_mcf)
-    logging.info(f'Wrote {len(output_nodes)} nodes to {output_mcf}')
-  counters.add_counter(f'output-nodes', len(output_nodes))
-  counters.print_counters()
-  return output_nodes
+    # Save the filtered nodes into an MCF file.
+    if output_mcf:
+        write_mcf_nodes([output_nodes], output_mcf)
+        logging.info(f'Wrote {len(output_nodes)} nodes to {output_mcf}')
+    counters.add_counter(f'output-nodes', len(output_nodes))
+    counters.print_counters()
+    return output_nodes
 
 
 def main(_):
-  config = get_diff_config()
-  config['ignore_existing_nodes'] = _FLAGS.ignore_existing_nodes
-  filter_mcf_file(
-      _FLAGS.input_mcf, _FLAGS.ignore_mcf, config, _FLAGS.output_mcf
-  )
+    config = get_diff_config()
+    config['ignore_existing_nodes'] = _FLAGS.ignore_existing_nodes
+    filter_mcf_file(_FLAGS.input_mcf, _FLAGS.ignore_mcf, config,
+                    _FLAGS.output_mcf)
 
 
 if __name__ == '__main__':
-  app.run(main)
+    app.run(main)

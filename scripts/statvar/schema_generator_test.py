@@ -21,83 +21,82 @@ import schema_generator
 
 
 class SchemaGeneratorTest(unittest.TestCase):
-  new_nodes = {
-      'dcid:NewStatVar1': {
-          'Node': 'dcid:NewStatVar1',
-          'typeOf': 'dcs:StatisticalVariable',
-          'populationType': 'dcs:NewPopulation1',
-          'measuredProperty': 'dcs:count',
-          'statType': 'dcs:measuredvalue',
-          'name': '"New StatVar Node 1"',
-          'existingProperty': 'dcid:NewValue1',
-          'newProperty1': 'dcid:NewPropValue1',
-      },
-  }
-
-  schema_nodes = {
-      'dcid:existingProperty': {
-          'Node': 'dcis:existingProperty',
-          'typeOf': 'dcs:Property',
-          'domainIncludes': 'dcs:Person',
-          'rangeIncludes': 'dcs:ExistingEnum',
-      },
-      'dcid:ExistingEnum': {
-          'Node': 'dcid:ExistingEnum',
-          'typeOf': 'dcs:Class',
-          'subClassOf': 'dcs:Enumeration',
-      },
-  }
-
-  def setUp(self):
-    # logging.set_verbosity(2)
-    self.maxDiff = None
-
-  def test_generate_schema(self):
-    new_schema = {}
-    new_schema = schema_generator.generate_schema_nodes(
-        self.new_nodes, self.schema_nodes, '', new_schema
-    )
-    logging.info(f'Generated schema: {new_schema}')
-    expected_schema = {
-        'dcid:NewPopulation1': {
-            'Node': 'dcid:NewPopulation1',
-            'typeOf': 'dcid:Thing',
-            'name': '"New Population 1"',
-            'isProvisional': 'dcs:True',
-        },
-        'dcid:NewProperty1Enum': {
-            'Node': 'dcid:NewProperty1Enum',
-            'isProvisional': 'dcs:True',
-            'name': '"NewProperty1Enum"',
-            'subClassOf': 'dcs:Enumeration',
-            'typeOf': 'schema:Class',
-        },
-        'dcid:existingProperty': {
-            # Add new domain for existing property
-            'domainIncludes': 'dcid:NewPopulation1',
-            'Node': 'dcid:existingProperty',
-            'typeOf': 'dcs:Property',
-            'name': '"existingProperty"',
-        },
-        'dcid:NewValue1': {
-            'Node': 'dcid:NewValue1',
-            'typeOf': 'dcid:ExistingEnum',
-            'name': '"New Value 1"',
-            'isProvisional': 'dcs:True',
-        },
-        'dcid:newProperty1': {
-            'domainIncludes': 'dcid:NewPopulation1',
-            'rangeIncludes': 'dcid:NewProperty1Enum',
-            'Node': 'dcid:newProperty1',
-            'typeOf': 'dcs:Property',
-            'name': '"newProperty1"',
-            'isProvisional': 'dcs:True',
-        },
-        'dcid:NewPropValue1': {
-            'Node': 'dcid:NewPropValue1',
-            'typeOf': 'dcid:NewProperty1Enum',
-            'name': '"New Prop Value 1"',
-            'isProvisional': 'dcs:True',
+    new_nodes = {
+        'dcid:NewStatVar1': {
+            'Node': 'dcid:NewStatVar1',
+            'typeOf': 'dcs:StatisticalVariable',
+            'populationType': 'dcs:NewPopulation1',
+            'measuredProperty': 'dcs:count',
+            'statType': 'dcs:measuredvalue',
+            'name': '"New StatVar Node 1"',
+            'existingProperty': 'dcid:NewValue1',
+            'newProperty1': 'dcid:NewPropValue1',
         },
     }
-    self.assertEqual(expected_schema, new_schema)
+
+    schema_nodes = {
+        'dcid:existingProperty': {
+            'Node': 'dcis:existingProperty',
+            'typeOf': 'dcs:Property',
+            'domainIncludes': 'dcs:Person',
+            'rangeIncludes': 'dcs:ExistingEnum',
+        },
+        'dcid:ExistingEnum': {
+            'Node': 'dcid:ExistingEnum',
+            'typeOf': 'dcs:Class',
+            'subClassOf': 'dcs:Enumeration',
+        },
+    }
+
+    def setUp(self):
+        # logging.set_verbosity(2)
+        self.maxDiff = None
+
+    def test_generate_schema(self):
+        new_schema = {}
+        new_schema = schema_generator.generate_schema_nodes(
+            self.new_nodes, self.schema_nodes, '', new_schema)
+        logging.info(f'Generated schema: {new_schema}')
+        expected_schema = {
+            'dcid:NewPopulation1': {
+                'Node': 'dcid:NewPopulation1',
+                'typeOf': 'dcid:Thing',
+                'name': '"New Population 1"',
+                'isProvisional': 'dcs:True',
+            },
+            'dcid:NewProperty1Enum': {
+                'Node': 'dcid:NewProperty1Enum',
+                'isProvisional': 'dcs:True',
+                'name': '"NewProperty1Enum"',
+                'subClassOf': 'dcs:Enumeration',
+                'typeOf': 'schema:Class',
+            },
+            'dcid:existingProperty': {
+                # Add new domain for existing property
+                'domainIncludes': 'dcid:NewPopulation1',
+                'Node': 'dcid:existingProperty',
+                'typeOf': 'dcs:Property',
+                'name': '"existingProperty"',
+            },
+            'dcid:NewValue1': {
+                'Node': 'dcid:NewValue1',
+                'typeOf': 'dcid:ExistingEnum',
+                'name': '"New Value 1"',
+                'isProvisional': 'dcs:True',
+            },
+            'dcid:newProperty1': {
+                'domainIncludes': 'dcid:NewPopulation1',
+                'rangeIncludes': 'dcid:NewProperty1Enum',
+                'Node': 'dcid:newProperty1',
+                'typeOf': 'dcs:Property',
+                'name': '"newProperty1"',
+                'isProvisional': 'dcs:True',
+            },
+            'dcid:NewPropValue1': {
+                'Node': 'dcid:NewPropValue1',
+                'typeOf': 'dcid:NewProperty1Enum',
+                'name': '"New Prop Value 1"',
+                'isProvisional': 'dcs:True',
+            },
+        }
+        self.assertEqual(expected_schema, new_schema)

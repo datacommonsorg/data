@@ -22,22 +22,21 @@ import ngram_matcher
 
 class NgramMatcherTest(unittest.TestCase):
 
-  def setUp(self):
-    # logging.set_verbosity(2)
-    return
+    def setUp(self):
+        # logging.set_verbosity(2)
+        return
 
-  def test_lookup_string(self):
-    matcher = ngram_matcher.NgramMatcher(config={'ngram_size': 4})
-    matcher.add_key_value('Test Key 1', 1)
-    matcher.add_key_value('TESTKey Two', 'two')
-    matches = matcher.lookup('Test')
-    self.assertEqual([('TESTKey Two', 'two'), ('Test Key 1', 1)], matches)
-    self.assertTrue(
-        matcher.lookup('Tester', config={'min_match_fraction': 0.1})
-    )
-    self.assertFalse(matcher.lookup('ABCDEF'))
+    def test_lookup_string(self):
+        matcher = ngram_matcher.NgramMatcher(config={'ngram_size': 4})
+        matcher.add_key_value('Test Key 1', 1)
+        matcher.add_key_value('TESTKey Two', 'two')
+        matches = matcher.lookup('Test')
+        self.assertEqual([('TESTKey Two', 'two'), ('Test Key 1', 1)], matches)
+        self.assertTrue(
+            matcher.lookup('Tester', config={'min_match_fraction': 0.1}))
+        self.assertFalse(matcher.lookup('ABCDEF'))
 
 
 if __name__ == '__main__':
-  app.run()
-  unittest.main()
+    app.run()
+    unittest.main()

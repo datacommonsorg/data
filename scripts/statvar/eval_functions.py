@@ -35,7 +35,7 @@ from dateutil.relativedelta import relativedelta
 
 
 def format_date(date_str: str, format_str: str = '%Y-%m-%d') -> str:
-  """Parse the date string and return formated date string.
+    """Parse the date string and return formated date string.
 
   Args:
     date_str: Input date string to be parsed.
@@ -48,14 +48,14 @@ def format_date(date_str: str, format_str: str = '%Y-%m-%d') -> str:
     NameError in case of any exceptions in parsing.
     This will cause any Eval using it to fail.
   """
-  try:
-    return dateutil.parser.parse(date_str).strftime(format_str)
-  except dateutil.parser._parser.ParserError:
-    raise NameError
+    try:
+        return dateutil.parser.parse(date_str).strftime(format_str)
+    except dateutil.parser._parser.ParserError:
+        raise NameError
 
 
-def str_to_camel_case(input_string: str, strip_re: str = r'[^A-Za-z_]') -> str:
-  """Returns the string in CamelCase without spaces and special characters.
+def str_to_camel_case(input_string: str, strip_re: str = r'[^A-Za-z_0-9]') -> str:
+    """Returns the string in CamelCase without spaces and special characters.
 
   Example: "Abc-def(HG-123)" -> "AbcDefHG".
 
@@ -66,16 +66,16 @@ def str_to_camel_case(input_string: str, strip_re: str = r'[^A-Za-z_]') -> str:
   Returns:
     string with non-alpha characters removed and remaining words capitalized.
   """
-  if not str:
-    return ''
-  if not isinstance(input_string, str):
-    input_string = str(input_string)
-  # replace any non-alpha characters with space
-  clean_str = re.sub(strip_re, ' ', input_string)
-  # split by space and capitalize first letter, preserving any other capitals
-  return ''.join(
-      [w[0].upper() + w[1:] for w in clean_str.split(' ') if len(w) > 0]
-  )
+    if not str:
+        return ''
+    if not isinstance(input_string, str):
+        input_string = str(input_string)
+    # replace any non-alpha characters with space
+    clean_str = re.sub(strip_re, ' ', input_string)
+    clean_str = clean_str.strip()
+    # split by space and capitalize first letter, preserving any other capitals
+    return ''.join(
+        [w[0].upper() + w[1:] for w in clean_str.split(' ') if len(w) > 0])
 
 
 EVAL_GLOBALS = {
@@ -93,10 +93,10 @@ EVAL_GLOBALS = {
 }
 
 
-def evaluate_statement(
-    eval_str: str, variables: dict = {}, functions: dict = EVAL_GLOBALS
-) -> (str, str):
-  """Returns the tuple: (variable, result) after evaluating statement in eval.
+def evaluate_statement(eval_str: str,
+                       variables: dict = {},
+                       functions: dict = EVAL_GLOBALS) -> (str, str):
+    """Returns the tuple: (variable, result) after evaluating statement in eval.
 
    Args:
      eval_str: string with statement to be evaluated of the form:
@@ -110,16 +110,15 @@ def evaluate_statement(
       tuple of the (variable , result) after evaluating the statement.
       in case of exception during eval, None is returned as result
   """
-  variable = ''
-  statement = eval_str
-  if '=' in eval_str:
-    variable, statement = eval_str.split('=', 1)
-  variable = variable.strip()
-  try:
-    result = eval(statement, functions, variables)
-  except (NameError, ValueError, TypeError) as e:
-    logging.debug(
-        f'Failed to evaluate: {variable}={statement}, {e} in {variables}'
-    )
-    result = None
-  return (variable, result)
+    variable = ''
+    statement = eval_str
+    if '=' in eval_str:
+        variable, statement = eval_str.split('=', 1)
+    variable = variable.strip()
+    try:
+        result = eval(statement, functions, variables)
+    except (NameError, ValueError, TypeError) as e:
+        logging.debug(
+            f'Failed to evaluate: {variable}={statement}, {e} in {variables}')
+        result = None
+    return (variable, result)

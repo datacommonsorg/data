@@ -38,6 +38,7 @@ import multiprocessing
 import os
 import re
 import sys
+import tempfile
 import time
 from typing import Union
 
@@ -72,6 +73,7 @@ from mcf_file_util import load_mcf_nodes, write_mcf_nodes, add_namespace, strip_
 from mcf_filter import drop_existing_mcf_nodes
 from mcf_diff import fingerprint_node, fingerprint_mcf_nodes, diff_mcf_node_pvs
 from place_resolver import PlaceResolver
+from schema_resolver import SchemaResolver
 from json_to_csv import file_json_to_csv
 from schema_generator import generate_schema_nodes
 
@@ -106,7 +108,9 @@ def _is_valid_value(value: str) -> bool:
     if not value or value == '""':
       return False
     if '@' in value:
-      return False
+      # Quoted strings can have @<2-letter-lang> suffix.
+      if not re.search('@[a-z]{2}"$', value):
+        return False
     if '{' in value and '}' in value:
       return False
   return True
@@ -426,7 +430,7 @@ class PropertyValueMapper:
        True if any property:values were processed and pvs dict was updated.
     """
     logging.level_debug() and logging.debug(f'Processing data PVs:{key}:{pvs}')
-    data_key = self._config.get('data_key', '@Data')
+    data_key = self._config.get('data_key', 'Data')
     data = pvs.get(data_key, key)
     is_modified = False
 
@@ -809,7 +813,7 @@ class StatVarsMap:
     # Dictionary of statvar dcid->{PVs}
     self._statvars_map = {}
     # Dictionary of existing statvars keyed by fingerprint
-    self._existing_statvar_nodes = self._load_existing_statvars(
+    self._statvar_resolver = SchemaResolver(
         self._config.get('existing_statvar_mcf', None)
     )
 
@@ -875,6 +879,7 @@ class StatVarsMap:
       pv_map: dict,
       duplicate_prop: str = None,
       allow_equal_pvs: bool = True,
+      ignore_props: list = [],
   ) -> bool:
     """Returns true if the key:pvs is added to the pv_map,
 
@@ -892,8 +897,10 @@ class StatVarsMap:
       True if the key:pvs tuple was added to the pv_map.
     """
     if key in pv_map:
-      has_diff, diff_str = diff_mcf_node_pvs(
-          self.get_valid_pvs(pvs), self.get_valid_pvs(pv_map[key])
+      has_diff, diff_str, added, deleted, modified = diff_mcf_node_pvs(
+          self.get_valid_pvs(pvs),
+          self.get_valid_pvs(pv_map[key]),
+          config={'ignore_property': ignore_props},
       )
       if allow_equal_pvs and not has_diff:
         return True
@@ -1010,11 +1017,16 @@ class StatVarsMap:
       return dcid
 
     # Use the statvar_dcid_generator for statvars with defined properties.
+    dcid_ignore_props = self._config.get(
+        'statvar_dcid_ignore_properties',
+        ['description', 'name', 'nameWithLanguage'],
+    )
     if not self._config.get(
         'schemaless', False
     ) or not self._get_schemaless_statvar_props(pvs):
       try:
-        dcid = get_statvar_dcid(pvs)
+        dcid = get_statvar_dcid(pvs, ignore_props=dcid_ignore_props)
+        dcid = re.sub(r'[^A-Za-z_0-9/_\.-]+', '_', dcid)
       except TypeError as e:
         logging.error(f'Failed to generate dcid for statvar:{pvs}, error: {e}')
         dcid = ''
@@ -1023,9 +1035,6 @@ class StatVarsMap:
       dcid_terms = []
       props = list(pvs.keys())
       dcid_ignore_values = self._config.get('statvar_dcid_ignore_values', [])
-      dcid_ignore_props = self._config.get(
-          'statvar_dcid_ignore_properties', ['description', 'name']
-      )
       for p in self._config.get('default_statvar_pvs', {}).keys():
         if p in props and p not in dcid_ignore_props:
           props.remove(p)
@@ -1045,7 +1054,7 @@ class StatVarsMap:
           ) and _is_valid_value(value):
             dcid_terms.append(self._get_dcid_term_for_pv(p, value))
       dcid_terms.extend(dcid_suffixes)
-      dcid = re.sub(r'[^A-Za-z_0-9/_]+', '_', '_'.join(dcid_terms))
+      dcid = re.sub(r'[^A-Za-z_0-9/_-]+', '_', '_'.join(dcid_terms))
       dcid = re.sub(r'_$', '', dcid)
 
     # Check if the dcid is remapped.
@@ -1247,6 +1256,11 @@ class StatVarsMap:
         pvs,
         self._statvars_map,
         self._config.get('duplicate_statvars_key'),
+        allow_equal_pvs=True,
+        ignore_props=self._config.get(
+            'statvar_dcid_ignore_properties',
+            ['description', 'name', 'nameWithLanguage'],
+        ),
     ):
       logging.error(
           f'Cannot add duplicate statvars for {statvar_dcid}: old:'
@@ -1305,7 +1319,8 @@ class StatVarsMap:
     current_value = get_numeric_value(current_pvs.get(aggregate_property, 0))
     new_value = get_numeric_value(new_pvs.get(aggregate_property, 0))
     if current_value is None or new_value is None:
-      log.error(f'Invalid values to aggregate in {current_pvs}, {new_pvs}')
+      logging.error(f'Invalid values to aggregate in {current_pvs}, {new_pvs}')
+      self._counters.add_counter(f'error-aggregate-invalid-values', 1)
       return False
     aggregation_funcs = {
         'sum': lambda a, b: a + b,
@@ -1335,6 +1350,9 @@ class StatVarsMap:
       logging.error(
           f'Unsupported aggregation {aggregation_type} for {current_pvs},'
           f' {new_pvs}'
+      )
+      self._counters.add_counter(
+          f'error-aggregate-unsupported-{aggregation_type}', 1
       )
       return False
     merged_pvs_prop = self._config.get('merged_pvs_property', '#MergedSVObs')
@@ -1540,7 +1558,7 @@ class StatVarsMap:
       logging.error(f'Missing statvar_dcid for SVObs {pvs}')
       return False
     if statvar_dcid not in self._statvars_map:
-      logging.warning(f'Missing {statvar_dcid} in StatVarMap for SVObs {pvs}')
+      logging.debug(f'Missing {statvar_dcid} in StatVarMap for SVObs {pvs}')
     # Check if the statvarobs has any error properties.
     error_props = [f'{p}:{v}' for p, v in pvs.items() if p.startswith('#Err')]
     if error_props:
@@ -1610,14 +1628,14 @@ class StatVarsMap:
               {
                   # Ignore properties that don't affect statvar dcid.
                   'ignore_property': [
-                      'name',
-                      'description',
                       'constraintProperties',
                       'memberOf',
                       'member',
                       'provenance',
                       'relevantVariable',
-                  ]
+                  ],
+                  # Retain SVs with new PVs like name
+                  'output_nodes_with_additions': True,
               },
           ),
           self._counters,
@@ -1866,24 +1884,19 @@ class StatVarsMap:
     Returns:
       updated dictionary of statvar pvs if one exists already.
     """
-    fp = fingerprint_node(
-        pvs,
-        self._config.get('statvar_fingerprint_ignore_props', []),
-        self._config.get('statvar_fingerprint_include_props', []),
-    )
-    existing_node = self._existing_statvar_nodes.get(fp, None)
+    existing_node = self._statvar_resolver.resolve_node(pvs)
     if existing_node:
       logging.level_debug() and logging.debug(
           f'Reusing existing statvar {fp}:{existing_node} for {pvs}'
       )
-      pvs.update(existing_node)
+      for prop, value in existing_node.items():
+        if prop not in pvs:
+          pvs[prop] = value
       self._counters.add_counter(
           f'existing-statvars-from-mcf', 1, pvs.get('dcid')
       )
     else:
-      logging.level_debug() and logging.debug(
-          f'No existing statvar for {fp}:{pvs}'
-      )
+      logging.level_debug() and logging.debug(f'No existing statvar for :{pvs}')
     return pvs
 
 
@@ -2144,7 +2157,7 @@ class StatVarDataProcessor:
       # Get all PVs for the column from the pv-map.
       col_pvs = dict(row_col_pvs.get(col_index, {}))
       # Remove any empty @Data PVs.
-      data_key = self._config.get('data_key', '@Data')
+      data_key = self._config.get('data_key', 'Data')
       if data_key in col_pvs and not col_pvs[data_key]:
         col_pvs.pop(data_key)
       column_value = columns[col_index]
@@ -2284,11 +2297,13 @@ class StatVarDataProcessor:
         # Convert json to csv file.
         logging.info(f'Converting json file {filename} into csv')
         filename = file_json_to_csv(filename)
-      with file_util.FileIO(filename, newline='', encoding=encoding) as csvfile:
+      fileio = file_util.FileIO(filename, newline='', encoding=encoding)
+      with fileio as csvfile:
         self._counters.add_counter('input-files-processed', 1)
-        self._counters.add_counter(
-            f'total-rows-{filename}', file_util.file_estimate_num_rows(filename)
+        num_file_rows = file_util.file_estimate_num_rows(
+            fileio.get_local_filename()
         )
+        self._counters.add_counter(f'num-rows-{filename}', num_file_rows)
         # Guess the input format.
         try:
           dialect = csv.Sniffer().sniff(csvfile.read(5024))
@@ -2296,6 +2311,9 @@ class StatVarDataProcessor:
           dialect = self._config.get('input_data_dialect', 'excel')
         max_rows_per_file = int(self._config.get('input_rows', sys.maxsize))
         max_cols_per_file = int(self._config.get('input_columns', sys.maxsize))
+        self._counters.add_counter(
+            f'total', min(max_rows_per_file, num_file_rows)
+        )
         csvfile.seek(0)
         csv_reader_options = {}
         delimiter = self._config.get('input_delimiter', ',')
@@ -2305,6 +2323,7 @@ class StatVarDataProcessor:
         line_number = 0
         self.init_file_state(filename)
         skip_rows = self._config.get('skip_rows', 0)
+        process_rows = self._config.get('process_rows', [0])
         # Process each row in the input data file.
         for row in reader:
           line_number += 1
@@ -2318,6 +2337,16 @@ class StatVarDataProcessor:
                 f'Stopping at input {filename}:{line_number}:{row}'
             )
             break
+          if (
+              process_rows
+              and process_rows[0] != 0
+              and line_number not in process_rows
+          ):
+            logging.level_debug() and logging.debug(
+                f'Skipping unprocessed row {filename}:{line_number}:{row}'
+            )
+            continue
+
           row = row[:max_cols_per_file]
           self._set_input_context(filename=filename, line_number=line_number)
           self.process_row(row, line_number)
@@ -2354,6 +2383,9 @@ class StatVarDataProcessor:
 
     Assumes row_index and column_index start from 1.
     """
+    # Check if this is a header row. Lookups are made for header cells.
+    if self.is_header_index(row_index, column_index):
+      return True
     # Check if the row is a mapped row.
     lookup_pv_rows = self._config.get('mapped_rows', 0)
     if isinstance(lookup_pv_rows, int):
@@ -2378,14 +2410,85 @@ class StatVarDataProcessor:
     return not lookup_pv_rows and not lookup_pv_columns
 
   def is_header_index(self, row_index: int, column_index: int) -> bool:
-    """Returns True if the row and columns can be a header."""
+    """Returns True if the row and columns is a header."""
     header_rows = self._config.get('header_rows', 0)
     header_columns = self._config.get('header_columns', 0)
     if header_rows > 0 and row_index <= header_rows:
       return True
     if header_columns > 0 and column_index <= header_columns:
       return True
-    return header_rows <= 0 and header_columns <= 0
+    # return header_rows <= 0 and header_columns <= 0
+    return False
+
+  def is_possible_header_index(self, row_index: int, column_index: int) -> bool:
+    """Returns True if the row and columns is a possible header."""
+    if self.is_header_index(row_index, column_index):
+      return True
+    if (
+        self._config.get('header_rows', 0) > 0
+        or self._config.get('header_columns', 0) > 0
+    ):
+      return False
+    # No header setting in config. Any row can be a header
+    return True
+
+  def process_row_header_pvs(
+      self,
+      row: list,
+      row_index: int,
+      row_col_pvs: dict,
+      row_svobs: int,
+      cols_with_pvs: int,
+  ):
+    """Returns True if any header properties are set for the row."""
+    # If row has no SVObs but has PVs, it must be a header.
+    if (
+        not row_svobs
+        and cols_with_pvs
+        and self.is_possible_header_index(row_index, len(row) + 1)
+    ):
+      # Any column with PVs must be a header applicable to entire column.
+      logging.level_debug() and logging.debug(
+          f'Setting column header PVs for row:{row_index}:{row_col_pvs}'
+      )
+      self.add_column_header_pvs(row_index, row_col_pvs, row)
+      self._counters.add_counter(
+          f'input-header-rows', 1, self.get_current_filename()
+      )
+      return True
+
+    # Look for any PVs with '#header' property for any column
+    logging.debug(f'Looking for headers in row:{row_index}:{row_col_pvs}')
+    col_headers = {}
+    header_prop = self._config.get('header_property', '#header')
+    for col_index, col_pvs in row_col_pvs.items():
+      if col_pvs and header_prop in col_pvs:
+        # Get column header properties if any specified or
+        # use all PVs as headers
+        col_header_props = col_pvs.get(header_prop, '').split(',')
+        if not col_header_props:
+          col_header_props = col_pvs.keys()
+        col_header_pvs = {}
+        for prop in col_header_props:
+          # Use any property=value in the header tag or
+          # get the value from the column PVs
+          value = col_pvs.get(prop, '')
+          if '=' in prop:
+            prop, value = prop.split('=', 1)
+          if value:
+            col_header_pvs[prop] = value
+        if col_header_pvs:
+          col_headers[col_index] = col_header_pvs
+    if col_headers:
+      logging.level_debug() and logging.debug(
+          f'Setting column header tagged PVs for row:{row_index}:{col_headers}'
+      )
+      self.add_column_header_pvs(row_index, col_headers, row)
+      self._counters.add_counter(
+          f'input-header-rows', 1, self.get_current_filename()
+      )
+      return True
+    return False
 
   def process_row(self, row: list, row_index: int):
     """Process a row of data with multiple columns.
@@ -2496,7 +2599,7 @@ class StatVarDataProcessor:
       col_pvs_list.append(self.get_column_header_pvs(col_index))
       col_pvs_list.append(self.get_section_header_pvs(col_index))
       col_pvs_list.append(row_col_pvs.get(col_index, {}))
-      col_pvs_list.append({self._config.get('data_key', '@Data'): col_value})
+      col_pvs_list.append({self._config.get('data_key', 'Data'): col_value})
       merged_col_pvs = self.resolve_value_references(
           col_pvs_list, process_pvs=True
       )
@@ -2559,19 +2662,11 @@ class StatVarDataProcessor:
           row_index, col_index + 1
       ) and self.process_stat_var_obs_pvs(merged_col_pvs, row_index, col_index):
         row_svobs += 1
+    self.process_row_header_pvs(
+        row, row_index, row_col_pvs, row_svobs, cols_with_pvs
+    )
     # If row has no SVObs but has PVs, it must be a header.
-    if self.is_header_index(row_index, col_index + 1) or (
-        not row_svobs and cols_with_pvs > 0
-    ):
-      # Any column with PVs must be a header applicable to entire column.
-      logging.level_debug() and logging.debug(
-          f'Setting column header PVs for row:{row_index}:{row_col_pvs}'
-      )
-      self.add_column_header_pvs(row_index, row_col_pvs, row)
-      self._counters.add_counter(
-          f'input-header-rows', 1, self.get_current_filename()
-      )
-    else:
+    if row_svobs:
       logging.level_debug() and logging.debug(
           f'Found {row_svobs} SVObs in row:{row_index}'
       )
@@ -2604,7 +2699,8 @@ class StatVarDataProcessor:
     if pvs and output_columns:
       # value is a mandatory column for SVObs
       if 'value' in output_columns:
-        if not pvs.get(value):
+        value = pvs.get('value')
+        if not _is_valid_value(value):
           # Output columns are SVObs but no value present. Ignore it.
           return False
       for prop in pvs.keys():
@@ -2689,6 +2785,10 @@ class StatVarDataProcessor:
       # Return True so the cell with value is not treated as a header
       return True
 
+    if not self.resolve_svobs_date(pvs) and not has_output_column:
+      logging.error(f'Unable to resolve SVObs date in {pvs}')
+      self._counters.add_counter(f'dropped-svobs-unresolved-date', 1)
+      return False
     logging.level_debug() and logging.debug(
         f'Creating SVObs for {pvs} in {self._file_context}'
     )
@@ -2747,6 +2847,9 @@ class StatVarDataProcessor:
     )
     if not self.resolve_svobs_place(svobs_pvs) and not has_output_column:
       logging.error(f'Unable to resolve SVObs place in {pvs}')
+      self._counters.add_counter(
+          f'dropped-svobs-unresolved-place', 1, statvar_dcid
+      )
       return False
     if not self._statvars_map.add_statvar_obs(svobs_pvs, has_output_column):
       logging.error(
@@ -2810,6 +2913,11 @@ class StatVarDataProcessor:
               selected_props.add(prop)
           if not selected_props:
             selected_props.update(statvar_pvs.keys())
+            if statvar_prop == 'measurementDenominator':
+              # Drop ignore props from numerator
+              selected_props.difference_update(
+                  self._config.get('statvar_dcid_ignore_properties', {})
+              )
           selected_props.update(additional_props)
           selected_props = selected_props.difference(exclude_props)
           # Create a new statvar for the selected PVs
@@ -2886,20 +2994,18 @@ class StatVarDataProcessor:
     if not _is_place_dcid(place_dcid):
       # Place is not resolved yet. Try resolving through Maps API.
       if self._config.get('resolve_places', False):
-        resolved_place = self._place_resolver.resolve_name(
-            {
-                place_dcid: {
-                    'place_name': place_dcid,
-                    'country': pvs.get(
-                        '#country', self._config.get('maps_api_country', None)
-                    ),
-                    'administrative_area': pvs.get(
-                        '#administrative_area',
-                        self._config.get('maps_api_administrative_area', None),
-                    ),
-                }
+        resolved_place = self._place_resolver.resolve_name({
+            place_dcid: {
+                'place_name': place_dcid,
+                'country': pvs.get(
+                    '#country', self._config.get('maps_api_country', None)
+                ),
+                'administrative_area': pvs.get(
+                    '#administrative_area',
+                    self._config.get('maps_api_administrative_area', None),
+                ),
             }
-        )
+        })
         resolved_dcid = resolved_place.get(place_dcid, {}).get('dcid', None)
         logging.level_debug() and logging.debug(
             f'Got place dcid: {resolved_dcid} for place {place} from'
@@ -2917,6 +3023,61 @@ class StatVarDataProcessor:
 
     logging.warning(f'Unable to resolve place {place} in {pvs}')
     self._counters.add_counter(f'error-unresolved-place', 1, place_dcid)
+    return False
+
+  def resolve_svobs_date(self, pvs: dict) -> bool:
+    """Resolve date in SVObs to YYYY-MM-DD format."""
+    date = pvs.get('observationDate', None)
+    if not date:
+      # No date to resolve
+      return True
+    # Convert any non alpha numeric characters to space
+    date_normalized = re.sub(r'[^A-Za-z0-9]+', '-', date).strip('-')
+    date_tokens = date_normalized.split('-')
+    output_date_format = '%Y'
+    num_tokens = len(date_tokens)
+    if num_tokens > 1:
+      output_date_format += '-%m'
+    if num_tokens > 2:
+      output_date_format += '-%d'
+    # Check if date is already formatted as expected
+    try:
+      resolved_date = datetime.datetime.strptime(
+          date_normalized, output_date_format
+      ).strftime(output_date_format)
+      # Date already formatted as expected. Nothing more to do.
+      return True
+    except ValueError as e:
+      # Date is not in expected format. Try formatting it.
+      logging.debug(f'Formatting date {date} into {output_date_format}')
+      resolved_date = ''
+
+    # If input has a date format, parse date string by input format
+    input_date_format = pvs.get(
+        self._config.get('date_format_key', '#DateFormat'),
+        self._config.get('date_format'),
+    )
+    if input_date_format:
+      try:
+        resolved_date = datetime.datetime.strptime(
+            date_normalized, input_date_format
+        ).strftime(output_date_format)
+        logging.debug(
+            f'Formatted date {date} as {input_date_format} into {resolved_date}'
+        )
+      except ValueError as e:
+        logging.debug(
+            f'Unable to parse date {date_normalized} as {input_date_format}'
+        )
+        resolved_date = ''
+    if not resolved_date:
+      # Try formatting date into output format
+      resolved_date = eval_functions.format_date(
+          date_normalized, output_date_format
+      )
+    if resolved_date:
+      pvs['observationDate'] = resolved_date
+      return True
     return False
 
   def write_outputs(self, output_path: str):
@@ -3039,7 +3200,7 @@ def shard_csv_data(
   )
   dfs = []
   for file in files:
-    dfs.append(pd.read_csv(file, dtype=str, na_filter=False))
+    dfs.append(pd.read_csv(file_util.FileIO(file), dtype=str, na_filter=False))
   df = pd.concat(dfs)
   if not column:
     # Pick the first column.
@@ -3048,7 +3209,11 @@ def shard_csv_data(
   # df[column] = df[column].fillna('')
   # Get unique shard prefix values from column.
   shards = list(sorted(set([str(x)[:prefix_len] for x in df[column].unique()])))
-  (file_prefix, file_ext) = os.path.splitext(file)
+  if file_util.file_is_local(file):
+    (file_prefix, file_ext) = os.path.splitext(file)
+  else:
+    fd, file_prefix = tempfile.mkstemp()
+    file_ext = '.csv'
   column_suffix = re.sub(r'[^A-Za-z0-9_-]', '-', column)
   output_path = f'{file_prefix}-{column_suffix}'
   logging.info(
@@ -3125,7 +3290,7 @@ def parallel_process(
     data_processor_class: StatVarDataProcessor,
     input_data: list,
     output_path: str,
-    config: str,
+    config: dict,
     pv_map_files: list,
     counters: dict = None,
     parallelism: int = 0,
@@ -3139,21 +3304,24 @@ def parallel_process(
   # Invoke process() for each input file in parallel.
   input_files = file_util.file_get_matching(input_data)
   num_inputs = len(input_files)
-  with multiprocessing.Pool(parallelism) as pool:
+  with multiprocessing.get_context('spawn').Pool(parallelism) as pool:
     for input_index in range(num_inputs):
       input_file = input_files[input_index]
+      if not output_path:
+        fd, output_path = tempfile.mkstemp()
       output_file_path = f'{output_path}-{input_index:05d}-of-{num_inputs:05d}'
       logging.info(f'Processing {input_file} into {output_file_path}...')
       process_args = {
           'data_processor_class': data_processor_class,
           'input_data': [input_file],
           'output_path': output_file_path,
-          'config_file': config,
+          'config': config,
           'pv_map_files': pv_map_files,
           'counters': counters,
           'parallelism': 0,
       }
       task = pool.apply_async(process, kwds=process_args)
+      task.get()
     pool.close()
     pool.join()
 
@@ -3248,7 +3416,7 @@ def process(
         data_processor_class=data_processor_class,
         input_data=input_files,
         output_path=output_path,
-        config=config,
+        config=config.get_configs(),
         pv_map_files=pv_map_files,
         counters=counters,
         parallelism=parallelism,

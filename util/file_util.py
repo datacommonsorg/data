@@ -225,6 +225,14 @@ class FileIO:
     """Write into the file handle."""
     return self._fd.write(*args, **kwargs)
 
+  def get_local_filename(self):
+    """Returns the local filename."""
+    if self._tmp_filename:
+      return self._tmp_filename
+    else:
+      return self._filename
+
+
 
 # Utilities for files.
 

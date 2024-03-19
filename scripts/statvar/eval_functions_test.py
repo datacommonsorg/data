@@ -30,65 +30,61 @@ _module_dir_ = os.path.dirname(__file__)
 
 class TestEvalFunctions(unittest.TestCase):
 
-  def test_evaluate_statement(self):
-    self.assertEqual(
-        ('num', 3),
-        eval_functions.evaluate_statement('num=1+Number', {'Number': 2}),
-    )
-    self.assertEqual(
-        ('', 4), eval_functions.evaluate_statement('2*Number', {'Number': 2})
-    )
-    # Verify None is returned on error in statement
-    self.assertEqual(
-        ('name', None),
-        eval_functions.evaluate_statement(
-            'name=1+Data', {'Data': '2'}  # string should raise TypeError
-        ),
-    )
-    # Missing variable value for Data raises NameError
-    self.assertEqual(
-        ('name', None), eval_functions.evaluate_statement('name=1+Data')
-    )
+    def test_evaluate_statement(self):
+        self.assertEqual(
+            ('num', 3),
+            eval_functions.evaluate_statement('num=1+Number', {'Number': 2}),
+        )
+        self.assertEqual(
+            ('', 4), eval_functions.evaluate_statement('2*Number',
+                                                       {'Number': 2}))
+        # Verify None is returned on error in statement
+        self.assertEqual(
+            ('name', None),
+            eval_functions.evaluate_statement(
+                'name=1+Data',
+                {'Data': '2'}  # string should raise TypeError
+            ),
+        )
+        # Missing variable value for Data raises NameError
+        self.assertEqual(('name', None),
+                         eval_functions.evaluate_statement('name=1+Data'))
 
-  def test_format_date(self):
-    self.assertEqual('2023-01-31', eval_functions.format_date('Jan 31, 2023'))
-    self.assertEqual(
-        ('month', '2022-01'),
-        eval_functions.evaluate_statement(
-            'month=format_date(Data, "%Y-%m")', {'Data': '2022, Jan 1st'}
-        ),
-    )
-    self.assertEqual(
-        ('', '2022-12-31'),
-        eval_functions.evaluate_statement(
-            'format_date(Data)', {'Data': 'Dec 31st, 2022, 10:00am'}
-        ),
-    )
-    self.assertEqual(
-        ('', None),
-        eval_functions.evaluate_statement('format_date("SunMonTue")'),
-    )
+    def test_format_date(self):
+        self.assertEqual('2023-01-31',
+                         eval_functions.format_date('Jan 31, 2023'))
+        self.assertEqual(
+            ('month', '2022-01'),
+            eval_functions.evaluate_statement(
+                'month=format_date(Data, "%Y-%m")', {'Data': '2022, Jan 1st'}),
+        )
+        self.assertEqual(
+            ('', '2022-12-31'),
+            eval_functions.evaluate_statement(
+                'format_date(Data)', {'Data': 'Dec 31st, 2022, 10:00am'}),
+        )
+        self.assertEqual(
+            ('', None),
+            eval_functions.evaluate_statement('format_date("SunMonTue")'),
+        )
 
-  def test_str_to_camel_case(self):
-    self.assertEqual(
-        'CamelCase', eval_functions.str_to_camel_case(' camel-case 123 ')
-    )
-    self.assertEqual(
-        ('name', 'MyDCID'),
-        eval_functions.evaluate_statement(
-            'name=str_to_camel_case(Data)', {'Data': '1.0 my DCID'}
-        ),
-    )
-    self.assertEqual(
-        ('', 'SnakeCaseString'),
-        eval_functions.evaluate_statement(
-            'str_to_camel_case(Data)', {'Data': 'snake(case.) string'}
-        ),
-    )
-    self.assertEqual(
-        ('', 'String_Value1'),
-        eval_functions.evaluate_statement(
-            'str_to_camel_case(Data, r"[^A-Za-z0-9_]")',
-            {'Data': 'string_ value(1)'},
-        ),
-    )
+    def test_str_to_camel_case(self):
+        self.assertEqual('CamelCase',
+                         eval_functions.str_to_camel_case(' camel-case 123 '))
+        self.assertEqual(
+            ('name', 'MyDCID'),
+            eval_functions.evaluate_statement('name=str_to_camel_case(Data)',
+                                              {'Data': '1.0 my DCID'}),
+        )
+        self.assertEqual(
+            ('', 'SnakeCaseString'),
+            eval_functions.evaluate_statement('str_to_camel_case(Data)',
+                                              {'Data': 'snake(case.) string'}),
+        )
+        self.assertEqual(
+            ('', 'String_Value1'),
+            eval_functions.evaluate_statement(
+                'str_to_camel_case(Data, r"[^A-Za-z0-9_]")',
+                {'Data': 'string_ value(1)'},
+            ),
+        )
