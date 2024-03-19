@@ -37,7 +37,7 @@ import gspread
 
 
 class FileIO:
-  """Class for file IO with support for context manager.
+    """Class for file IO with support for context manager.
 
   It supports local files, Google Cloud Storage (GCS) files and Google
   Spreadsheets.
@@ -88,157 +88,158 @@ class FileIO:
         contents = file.read()
   """
 
-  def __init__(
-      self,
-      filename: str,
-      mode: str = 'r',
-      encoding: str = None,
-      newline: str = None,
-      use_tempfile: bool = True,
-      errors: str = None,
-  ):
-    self._filename = filename
-    self._mode = mode
-    self._encoding = encoding
-    self._newline = newline
-    self._tmp_filename = None
-    self._errors = errors
-    self._fd = None
+    def __init__(
+        self,
+        filename: str,
+        mode: str = 'r',
+        encoding: str = None,
+        newline: str = None,
+        use_tempfile: bool = True,
+        errors: str = None,
+    ):
+        self._filename = filename
+        self._mode = mode
+        self._encoding = encoding
+        self._newline = newline
+        self._tmp_filename = None
+        self._errors = errors
+        self._fd = None
 
-    if not file_is_local(self._filename):
-      # Create a local copy for non-local files.
-      if file_is_gcs(self._filename):
-        if self._mode.startswith('r') and use_tempfile:
-          # Copy over the GCS file locally before read().
-          fd, self._tmp_filename = tempfile.mkstemp()
-          logging.debug(
-              f'Copying file: {self._filename} to {self._tmp_filename}'
-          )
-          with open(self._tmp_filename, mode='wb') as tmpfile:
-            blob = file_get_gcs_blob(self._filename, exists=True)
-            gcsfile = storage.fileio.BlobReader(blob)
-            _copy_file_chunks(gcsfile, tmpfile)
-            gcsfile.close()
-      elif file_is_google_spreadsheet(self._filename):
-        # Copy over spreadsheet to local CSV file.
-        fd, self._tmp_filename = tempfile.mkstemp()
-        file_copy_from_spreadsheet(
-            url=self._filename,
-            worksheet_title=None,
-            dst_filename=self._tmp_filename,
-        )
+        if not file_is_local(self._filename):
+            # Create a local copy for non-local files.
+            if file_is_gcs(self._filename):
+                if self._mode.startswith('r') and use_tempfile:
+                    # Copy over the GCS file locally before read().
+                    fd, self._tmp_filename = tempfile.mkstemp()
+                    logging.debug(
+                        f'Copying file: {self._filename} to {self._tmp_filename}'
+                    )
+                    with open(self._tmp_filename, mode='wb') as tmpfile:
+                        blob = file_get_gcs_blob(self._filename, exists=True)
+                        gcsfile = storage.fileio.BlobReader(blob)
+                        _copy_file_chunks(gcsfile, tmpfile)
+                        gcsfile.close()
+            elif file_is_google_spreadsheet(self._filename):
+                # Copy over spreadsheet to local CSV file.
+                fd, self._tmp_filename = tempfile.mkstemp()
+                file_copy_from_spreadsheet(
+                    url=self._filename,
+                    worksheet_title=None,
+                    dst_filename=self._tmp_filename,
+                )
 
-    # Create a local temporary file for writes.
-    # The temp file is renamed or copied to the original filename after write.
-    if self._mode.startswith('w') and use_tempfile:
-      dirname = None
-      if file_is_local(self._filename):
-        # Create the local directory for output if required.
-        dirname = file_makedirs(self._filename)
-      # Create a tmp file for writing that will be renamed to
-      # the given filename on close.
-      # Use the output directory for local temporary files
-      # to allow move within the same file system.
-      basename = os.path.basename(self._filename)
-      fd, self._tmp_filename = tempfile.mkstemp(
-          prefix=f'.{basename}', dir=dirname
-      )
-      logging.debug(
-          f'Created tmpfile {self._tmp_filename} for write to {self._filename}'
-      )
-    filename = self._tmp_filename
-    if not filename:
-      filename = self._filename
+        # Create a local temporary file for writes.
+        # The temp file is renamed or copied to the original filename after write.
+        if self._mode.startswith('w') and use_tempfile:
+            dirname = None
+            if file_is_local(self._filename):
+                # Create the local directory for output if required.
+                dirname = file_makedirs(self._filename)
+            # Create a tmp file for writing that will be renamed to
+            # the given filename on close.
+            # Use the output directory for local temporary files
+            # to allow move within the same file system.
+            basename = os.path.basename(self._filename)
+            fd, self._tmp_filename = tempfile.mkstemp(prefix=f'.{basename}',
+                                                      dir=dirname)
+            logging.debug(
+                f'Created tmpfile {self._tmp_filename} for write to {self._filename}'
+            )
+        filename = self._tmp_filename
+        if not filename:
+            filename = self._filename
 
-    if file_is_gcs(filename):
-      logging.debug(f'Opening GCSFile:{filename} mode:{self._mode}')
-      if self._mode.startswith('r'):
-        blob = file_get_gcs_blob(filename, exists=True)
-        self._fd = storage.fileio.BlobReader(blob)
-      else:
-        blob = file_get_gcs_blob(filename, exists=False)
-        self._fd = storage.fileio.BlobWriter(blob)
-    else:
-      logging.debug(f'Opening file:{filename} mode:{self._mode}')
-      self._fd = open(
-          filename,
-          mode=self._mode,
-          encoding=self._encoding,
-          newline=self._newline,
-          errors=self._errors,
-      )
+        if file_is_gcs(filename):
+            logging.debug(f'Opening GCSFile:{filename} mode:{self._mode}')
+            if self._mode.startswith('r'):
+                blob = file_get_gcs_blob(filename, exists=True)
+                self._fd = storage.fileio.BlobReader(blob)
+            else:
+                blob = file_get_gcs_blob(filename, exists=False)
+                self._fd = storage.fileio.BlobWriter(blob)
+        else:
+            logging.debug(f'Opening file:{filename} mode:{self._mode}')
+            self._fd = open(
+                filename,
+                mode=self._mode,
+                encoding=self._encoding,
+                newline=self._newline,
+                errors=self._errors,
+            )
 
-  def __del__(self):
-    """Cleanup any temporary files."""
-    self.__exit__(None, None, None)
+    def __del__(self):
+        """Cleanup any temporary files."""
+        self.__exit__(None, None, None)
 
-  def __enter__(self):
-    """Return the file handle for the local file."""
-    return self._fd.__enter__()
+    def __enter__(self):
+        """Return the file handle for the local file."""
+        return self._fd.__enter__()
 
-  def __exit__(self, exc_type, exc_value, exc_tb):
-    """Cleanup after file IO is complete.
+    def __exit__(self, exc_type, exc_value, exc_tb):
+        """Cleanup after file IO is complete.
 
     Close the file handles and copy temporary files and delete them.
     """
 
-    # Close the file handle.
-    if self._fd:
-      logging.debug(f'Closing file:{self._filename}, tmp:{self._tmp_filename}')
-      self._fd.__exit__(exc_type, exc_value, exc_tb)
-      self._fd = None
+        # Close the file handle.
+        if self._fd:
+            logging.debug(
+                f'Closing file:{self._filename}, tmp:{self._tmp_filename}')
+            self._fd.__exit__(exc_type, exc_value, exc_tb)
+            self._fd = None
 
-    # Copy over the temp file written into the original file.
-    if self._tmp_filename and self._mode.startswith('w'):
-      if file_is_gcs(self._filename):
-        # Copy the tmp file to the requested GCS file.
-        logging.debug(f'Copying {self._tmp_filename} to {self._filename}')
-        with open(self._tmp_filename, mode='rb') as tmpfile:
-          blob = file_get_gcs_blob(self._filename, exists=False)
-          gcsfile = storage.fileio.BlobWriter(blob)
-          _copy_file_chunks(tmpfile, gcsfile)
-          gcsfile.close()
-      elif file_is_google_spreadsheet(self._filename):
-        file_copy_to_spreadsheet(self._tmp_filename, self._filename)
-      else:
-        # Rename the tmp file to the original local file.
+        # Copy over the temp file written into the original file.
+        if self._tmp_filename and self._mode.startswith('w'):
+            if file_is_gcs(self._filename):
+                # Copy the tmp file to the requested GCS file.
+                logging.debug(
+                    f'Copying {self._tmp_filename} to {self._filename}')
+                with open(self._tmp_filename, mode='rb') as tmpfile:
+                    blob = file_get_gcs_blob(self._filename, exists=False)
+                    gcsfile = storage.fileio.BlobWriter(blob)
+                    _copy_file_chunks(tmpfile, gcsfile)
+                    gcsfile.close()
+            elif file_is_google_spreadsheet(self._filename):
+                file_copy_to_spreadsheet(self._tmp_filename, self._filename)
+            else:
+                # Rename the tmp file to the original local file.
+                if self._tmp_filename:
+                    logging.debug(
+                        f'Renaming {self._tmp_filename} to {self._filename}')
+                    os.rename(self._tmp_filename, self._filename)
+                self._tmp_filename = None
+
+        # Delete the temporary file
         if self._tmp_filename:
-          logging.debug(f'Renaming {self._tmp_filename} to {self._filename}')
-          os.rename(self._tmp_filename, self._filename)
-        self._tmp_filename = None
+            logging.debug(f'Deleting tempfile: {self._tmp_filename}')
+            os.remove(self._tmp_filename)
+            self._tmp_filename = None
 
-    # Delete the temporary file
-    if self._tmp_filename:
-      logging.debug(f'Deleting tempfile: {self._tmp_filename}')
-      os.remove(self._tmp_filename)
-      self._tmp_filename = None
+    def read(self, *args, **kwargs):
+        """Read from the file handle."""
+        return self._fd.read(*args, **kwargs)
 
-  def read(self, *args, **kwargs):
-    """Read from the file handle."""
-    return self._fd.read(*args, **kwargs)
+    def readline(self, *args, **kwargs):
+        """Read from the file handle."""
+        return self._fd.readline(*args, **kwargs)
 
-  def readline(self, *args, **kwargs):
-    """Read from the file handle."""
-    return self._fd.readline(*args, **kwargs)
+    def write(self, *args, **kwargs):
+        """Write into the file handle."""
+        return self._fd.write(*args, **kwargs)
 
-  def write(self, *args, **kwargs):
-    """Write into the file handle."""
-    return self._fd.write(*args, **kwargs)
-
-  def get_local_filename(self):
-    """Returns the local filename."""
-    if self._tmp_filename:
-      return self._tmp_filename
-    else:
-      return self._filename
-
+    def get_local_filename(self):
+        """Returns the local filename."""
+        if self._tmp_filename:
+            return self._tmp_filename
+        else:
+            return self._filename
 
 
 # Utilities for files.
 
 
 def file_is_local(filename: str) -> bool:
-  """Returns True if the filename is a local file,
+    """Returns True if the filename is a local file,
 
   not a GCS file or Google spreadsheet.
 
@@ -249,22 +250,19 @@ def file_is_local(filename: str) -> bool:
     False if the filename begins with 'gs://' or 'https://'
     else returns True
   """
-  if (
-      filename
-      and not file_is_gcs(filename)
-      and not file_is_google_spreadsheet(filename)
-      and not filename.startswith('http://')
-      and not filename.startswith('https://')
-  ):
-    return True
-  return False
+    if (filename and not file_is_gcs(filename) and
+            not file_is_google_spreadsheet(filename) and
+            not filename.startswith('http://') and
+            not filename.startswith('https://')):
+        return True
+    return False
 
 
 def file_is_gcs(filename: str) -> bool:
-  """Returns true if the file is a GCS file starting with gs://."""
-  if filename:
-    return filename.startswith('gs://')
-  return False
+    """Returns true if the file is a GCS file starting with gs://."""
+    if filename:
+        return filename.startswith('gs://')
+    return False
 
 
 # Global Google Storage Client for GCS file operations.
@@ -272,7 +270,7 @@ _GCS_CLIENT = None
 
 
 def file_get_gcs_bucket(filename: str) -> storage.bucket.Bucket:
-  """Return the GCS bucket for the file path.
+    """Return the GCS bucket for the file path.
 
   Assumes the project is default or set in env variable: GOOGLE_CLOUD_PROJECT.
 
@@ -282,20 +280,20 @@ def file_get_gcs_bucket(filename: str) -> storage.bucket.Bucket:
   Returns:
     GCS bucket for the file.
   """
-  if file_is_gcs(filename):
-    gcs_path_without_scheme = filename[len('gs://') :]
-    bucket_name, filepath = gcs_path_without_scheme.split('/', 1)
-    if bucket_name and filepath:
-      global _GCS_CLIENT
-      if not _GCS_CLIENT:
-        _GCS_CLIENT = storage.Client()
-      bucket = _GCS_CLIENT.get_bucket(bucket_name)
-      return bucket
-  return None
+    if file_is_gcs(filename):
+        gcs_path_without_scheme = filename[len('gs://'):]
+        bucket_name, filepath = gcs_path_without_scheme.split('/', 1)
+        if bucket_name and filepath:
+            global _GCS_CLIENT
+            if not _GCS_CLIENT:
+                _GCS_CLIENT = storage.Client()
+            bucket = _GCS_CLIENT.get_bucket(bucket_name)
+            return bucket
+    return None
 
 
 def file_get_gcs_blob(filename: str, exists: bool = True) -> storage.blob.Blob:
-  """Returns the GCS blob for the GCS file.
+    """Returns the GCS blob for the GCS file.
 
   Args:
     filename: string with GCS filename.
@@ -305,21 +303,21 @@ def file_get_gcs_blob(filename: str, exists: bool = True) -> storage.blob.Blob:
   Returns:
     GCS blob for the file.
   """
-  if file_is_gcs(filename):
-    bucket_name, filepath = filename[len('gs://') :].split('/', 1)
-    bucket = file_get_gcs_bucket(filename)
-    if bucket:
-      if exists:
-        return bucket.get_blob(filepath)
-      else:
-        return bucket.blob(filepath)
-    else:
-      logging.debug(f'Failed to get bucket: {bucket_name}/{filepath}')
-  return None
+    if file_is_gcs(filename):
+        bucket_name, filepath = filename[len('gs://'):].split('/', 1)
+        bucket = file_get_gcs_bucket(filename)
+        if bucket:
+            if exists:
+                return bucket.get_blob(filepath)
+            else:
+                return bucket.blob(filepath)
+        else:
+            logging.debug(f'Failed to get bucket: {bucket_name}/{filepath}')
+    return None
 
 
 def file_get_matching(filepat: Union[str, list]) -> list:
-  """Returns a list of files that match the file pattern.
+    """Returns a list of files that match the file pattern.
 
   Args:
     filepat: string with comma separated list of file patterns to lookup
@@ -327,51 +325,51 @@ def file_get_matching(filepat: Union[str, list]) -> list:
   Returns:
     list of matching filenames.
   """
-  if not filepat:
-    return []
-  # Get a list of input file patterns, splitting comma separated strings.
-  input_files = filepat
-  if isinstance(filepat, str):
-    input_files = [filepat]
-  if isinstance(input_files, list):
-    for files in input_files:
-      if isinstance(files, str):
-        _add_to_list(files, input_files)
-      elif isinstance(files, list):
-        input_files.extend(files)
-  # Get all matching files for each file pattern.
-  files = set()
-  if input_files:
-    for file in input_files:
-      if file_is_local(file):
-        # Expand local file pattern.
-        for f in glob.glob(file):
-          files.add(f)
-      elif file_is_gcs(file):
-        bucket = file_get_gcs_bucket(file)
-        if bucket:
-          # Get a list of all files in the GCS folder
-          # Match the file name against the file pattern
-          # Wildcard in GCS path will match any sequence of directories and files.
-          file_pat = file.split(bucket.name, 1)[1][1:]
-          dirname = os.path.dirname(file_pat)
-          for blob in bucket.list_blobs(prefix=dirname):
-            if fnmatch.fnmatch(blob.name, file_pat):
-              f = f'gs://{bucket.name}/{blob.name}'
-              files.add(f)
-      elif file_is_google_spreadsheet(file):
-        # Check if worksheet is accessible.
-        ws = file_get_gspread_worksheet(file)
-        if ws:
-          files.add(file)
-      elif file:
-        # Add any unsupported file
-        files.add(f)
-  return sorted(files)
+    if not filepat:
+        return []
+    # Get a list of input file patterns, splitting comma separated strings.
+    input_files = filepat
+    if isinstance(filepat, str):
+        input_files = [filepat]
+    if isinstance(input_files, list):
+        for files in input_files:
+            if isinstance(files, str):
+                _add_to_list(files, input_files)
+            elif isinstance(files, list):
+                input_files.extend(files)
+    # Get all matching files for each file pattern.
+    files = set()
+    if input_files:
+        for file in input_files:
+            if file_is_local(file):
+                # Expand local file pattern.
+                for f in glob.glob(file):
+                    files.add(f)
+            elif file_is_gcs(file):
+                bucket = file_get_gcs_bucket(file)
+                if bucket:
+                    # Get a list of all files in the GCS folder
+                    # Match the file name against the file pattern
+                    # Wildcard in GCS path will match any sequence of directories and files.
+                    file_pat = file.split(bucket.name, 1)[1][1:]
+                    dirname = os.path.dirname(file_pat)
+                    for blob in bucket.list_blobs(prefix=dirname):
+                        if fnmatch.fnmatch(blob.name, file_pat):
+                            f = f'gs://{bucket.name}/{blob.name}'
+                            files.add(f)
+            elif file_is_google_spreadsheet(file):
+                # Check if worksheet is accessible.
+                ws = file_get_gspread_worksheet(file)
+                if ws:
+                    files.add(file)
+            elif file:
+                # Add any unsupported file
+                files.add(f)
+    return sorted(files)
 
 
 def file_get_size(filename: Union[str, list]) -> int:
-  """Returns the size of the file in bytes.
+    """Returns the size of the file in bytes.
 
   Args:
     filename: string or a list of local or GCS filenames.
@@ -380,20 +378,20 @@ def file_get_size(filename: Union[str, list]) -> int:
     file size in bytes if the file exists.
     else 0.
   """
-  files = file_get_matching(filename)
-  size = 0
-  for filename in files:
-    if file_is_local(filename):
-      size += os.path.getsize(filename)
-    elif file_is_gcs(filename):
-      blob = file_get_gcs_blob(filename, exists=True)
-      if blob:
-        size += blob.size
-  return size
+    files = file_get_matching(filename)
+    size = 0
+    for filename in files:
+        if file_is_local(filename):
+            size += os.path.getsize(filename)
+        elif file_is_gcs(filename):
+            blob = file_get_gcs_blob(filename, exists=True)
+            if blob:
+                size += blob.size
+    return size
 
 
 def file_estimate_num_rows(filename: Union[str, list]) -> int:
-  """Returns an estimated number of rows based on size of the first few rows.
+    """Returns an estimated number of rows based on size of the first few rows.
 
   Args:
     filename: string name of the file.
@@ -401,24 +399,24 @@ def file_estimate_num_rows(filename: Union[str, list]) -> int:
   Returns:
     An estimated number of rows.
   """
-  files = file_get_matching(filename)
-  filesize = file_get_size(files)
-  if filesize > 0:
-    # Get the average line size in the first 4K bytes.
-    with FileIO(files[0], use_tempfile=False) as fp:
-      lines = fp.read(4000)
-    if isinstance(lines, bytes):
-      # Convert bytes to str
-      lines = lines.decode()
-    line_size = max(len(lines) / (lines.count('\n') + 1), 1)
-    return int(filesize / line_size)
-  return 0
+    files = file_get_matching(filename)
+    filesize = file_get_size(files)
+    if filesize > 0:
+        # Get the average line size in the first 4K bytes.
+        with FileIO(files[0], use_tempfile=False) as fp:
+            lines = fp.read(4000)
+        if isinstance(lines, bytes):
+            # Convert bytes to str
+            lines = lines.decode()
+        line_size = max(len(lines) / (lines.count('\n') + 1), 1)
+        return int(filesize / line_size)
+    return 0
 
 
-def file_get_name(
-    file_path: str, suffix: str = '', file_ext: str = '.csv'
-) -> str:
-  """Returns the filename with suffix and extension.
+def file_get_name(file_path: str,
+                  suffix: str = '',
+                  file_ext: str = '.csv') -> str:
+    """Returns the filename with suffix and extension.
 
   Creates the directory path for the file if it doesn't exist.
 
@@ -430,24 +428,24 @@ def file_get_name(
   Returns:
     file name combined from path, suffix and extension.
   """
-  # Create the file directory if it doesn't exist.
-  if file_is_google_spreadsheet(file_path):
-    return file_path
-  file_makedirs(file_path)
-  file_prefix, ext = os.path.splitext(file_path)
-  if file_prefix.endswith(suffix):
-    # Suffix already present in name, ignore it.
-    suffix = ''
-  # Set the file extension
-  if not file_ext:
-    file_ext = ext
-  if file_ext and file_ext[0] != '.':
-    file_ext = '.' + file_ext
-  return file_prefix + suffix + file_ext
+    # Create the file directory if it doesn't exist.
+    if file_is_google_spreadsheet(file_path):
+        return file_path
+    file_makedirs(file_path)
+    file_prefix, ext = os.path.splitext(file_path)
+    if file_prefix.endswith(suffix):
+        # Suffix already present in name, ignore it.
+        suffix = ''
+    # Set the file extension
+    if not file_ext:
+        file_ext = ext
+    if file_ext and file_ext[0] != '.':
+        file_ext = '.' + file_ext
+    return file_prefix + suffix + file_ext
 
 
 def file_makedirs(filename: str) -> str:
-  """Creates the directory for the filename and returns the directory.
+    """Creates the directory for the filename and returns the directory.
 
   Only supports files on the local file system.
 
@@ -457,16 +455,16 @@ def file_makedirs(filename: str) -> str:
   Returns:
     the directory for the filename, created if not avilable.
   """
-  if filename:
-    dirname = os.path.dirname(filename)
-    if dirname and file_is_local(dirname):
-      os.makedirs(dirname, exist_ok=True)
-      return dirname
-  return ''
+    if filename:
+        dirname = os.path.dirname(filename)
+        if dirname and file_is_local(dirname):
+            os.makedirs(dirname, exist_ok=True)
+            return dirname
+    return ''
 
 
 def file_copy(src_filename: str, dst_filename: str = '') -> str:
-  """Copies over the src_file into the dst_file and returns the filename.
+    """Copies over the src_file into the dst_file and returns the filename.
 
   Supports both local files, GCS files and spreadsheets.
 
@@ -478,29 +476,30 @@ def file_copy(src_filename: str, dst_filename: str = '') -> str:
   Returns:
     the destination file into which source file content was copied into.
   """
-  if not dst_filename:
-    # Create a filename for destination with a '-copy' suffix.
-    basename = os.path.basename(src_filename)
-    dst_filename = file_get_name(basename, suffix='-copy')
+    if not dst_filename:
+        # Create a filename for destination with a '-copy' suffix.
+        basename = os.path.basename(src_filename)
+        dst_filename = file_get_name(basename, suffix='-copy')
 
-  # Copy from or to a spreadsheet.
-  if file_is_google_spreadsheet(dst_filename):
-    return file_copy_to_spreadsheet(src_filename, dst_filename)
-  if file_is_google_spreadsheet(src_filename):
-    return file_copy_from_spreadsheet(
-        url=src_filename, dst_filename=dst_filename
-    )
+    # Copy from or to a spreadsheet.
+    if file_is_google_spreadsheet(dst_filename):
+        return file_copy_to_spreadsheet(src_filename, dst_filename)
+    if file_is_google_spreadsheet(src_filename):
+        return file_copy_from_spreadsheet(url=src_filename,
+                                          dst_filename=dst_filename)
 
-  # Source and target is not a spreadsheet.
-  # Open both files and copy content over.
-  if dst_filename.endswith(os.sep):
-    # Destination is a directory. Create file with source filename.
-    dst_filename = os.path.join(dst_filename, os.path.basename(src_filename))
-  file_makedirs(dst_filename)
-  with FileIO(filename=src_filename, mode='rb', use_tempfile=False) as src:
-    with FileIO(filename=dst_filename, mode='wb', use_tempfile=False) as dst:
-      _copy_file_chunks(src, dst)
-  return dst_filename
+    # Source and target is not a spreadsheet.
+    # Open both files and copy content over.
+    if dst_filename.endswith(os.sep):
+        # Destination is a directory. Create file with source filename.
+        dst_filename = os.path.join(dst_filename,
+                                    os.path.basename(src_filename))
+    file_makedirs(dst_filename)
+    with FileIO(filename=src_filename, mode='rb', use_tempfile=False) as src:
+        with FileIO(filename=dst_filename, mode='wb',
+                    use_tempfile=False) as dst:
+            _copy_file_chunks(src, dst)
+    return dst_filename
 
 
 def file_load_csv_dict(
@@ -510,7 +509,7 @@ def file_load_csv_dict(
     delimiter: str = ',',
     config: dict = {},
 ) -> dict:
-  """Returns a dictionary loaded from a CSV file.
+    """Returns a dictionary loaded from a CSV file.
 
   Each row is added to the dict with value from column 'key_column' as key and
   value from 'value_column. For example, reading a CSV file with the following
@@ -545,62 +544,61 @@ def file_load_csv_dict(
   Returns:
     dictionary of {key:value} loaded from the CSV file.
   """
-  csv_dict = {}
-  input_files = file_get_matching(filename)
-  logging.debug(f'Loading dict from csv files: {input_files}')
-  for filename in input_files:
-    num_rows = 0
-    # Load each CSV file
-    with FileIO(filename) as csvfile:
-      reader = csv.DictReader(csvfile, delimiter=delimiter)
-      if reader.fieldnames:
-        # Get the key and value column names
-        if not key_column:
-          # Use the first column as the key
-          key_column = reader.fieldnames[0]
-        if not value_column and len(reader.fieldnames) == 2:
-          # Use second column as value if there are only two columns.
-          value_column = reader.fieldnames[1]
-      logging.info(
-          f'Loading dict from file: {filename} with key: {key_column}, value:'
-          f' {value_column}'
-      )
-      # Process each row from the csv file
-      for row in reader:
-        # Get the key for the row.
-        key = None
-        if key_column in row:
-          key = row.pop(key_column)
-        # Get the value for the key
-        value = None
-        if value_column:
-          value = row.get(value_column, '')
-        else:
-          value = row
-        if key is None or value is None:
-          logging.debug(f'Ignoring row without key or value: {row}')
-          continue
-        # Add the row to the dict
-        if key in csv_dict:
-          # Key already exists. Merge values.
-          old_value = csv_dict[key]
-          if isinstance(old_value, dict):
-            aggregate_dict(row, old_value, config)
-          else:
-            aggr = config.get(key, config).get('aggregate', 'sum')
-            value = aggregate_value(old_value, value, aggr)
-            csv_dict[key] = value
-        else:
-          csv_dict[key] = value
-        num_rows += 1
-    logging.info(f'Loaded {num_rows} rows from {filename} into dict')
-  return csv_dict
+    csv_dict = {}
+    input_files = file_get_matching(filename)
+    logging.debug(f'Loading dict from csv files: {input_files}')
+    for filename in input_files:
+        num_rows = 0
+        # Load each CSV file
+        with FileIO(filename) as csvfile:
+            reader = csv.DictReader(csvfile, delimiter=delimiter)
+            if reader.fieldnames:
+                # Get the key and value column names
+                if not key_column:
+                    # Use the first column as the key
+                    key_column = reader.fieldnames[0]
+                if not value_column and len(reader.fieldnames) == 2:
+                    # Use second column as value if there are only two columns.
+                    value_column = reader.fieldnames[1]
+            logging.info(
+                f'Loading dict from file: {filename} with key: {key_column}, value:'
+                f' {value_column}')
+            # Process each row from the csv file
+            for row in reader:
+                # Get the key for the row.
+                key = None
+                if key_column in row:
+                    key = row.pop(key_column)
+                # Get the value for the key
+                value = None
+                if value_column:
+                    value = row.get(value_column, '')
+                else:
+                    value = row
+                if key is None or value is None:
+                    logging.debug(f'Ignoring row without key or value: {row}')
+                    continue
+                # Add the row to the dict
+                if key in csv_dict:
+                    # Key already exists. Merge values.
+                    old_value = csv_dict[key]
+                    if isinstance(old_value, dict):
+                        aggregate_dict(row, old_value, config)
+                    else:
+                        aggr = config.get(key, config).get('aggregate', 'sum')
+                        value = aggregate_value(old_value, value, aggr)
+                        csv_dict[key] = value
+                else:
+                    csv_dict[key] = value
+                num_rows += 1
+        logging.info(f'Loaded {num_rows} rows from {filename} into dict')
+    return csv_dict
 
 
-def file_write_csv_dict(
-    py_dict: dict, filename: str, columns: list = None
-) -> list:
-  """Returns the filename after writing py_dict with a csv row per item.
+def file_write_csv_dict(py_dict: dict,
+                        filename: str,
+                        columns: list = None) -> list:
+    """Returns the filename after writing py_dict with a csv row per item.
 
   Each dictionary items is written as a row in the CSV file.
 
@@ -635,66 +633,65 @@ def file_write_csv_dict(
   Returns:
     list of columns written to the output csv
   """
-  if not filename:
-    return None
-  # Get the list of columns
-  value_column_name = ''
-  if not columns:
-    # Add a columns for key.
-    columns = ['key']
-  if len(columns) <= 1:
-    # Get columns across all entries.
-    for key, value in py_dict.items():
-      if isinstance(value, dict):
-        for col in value.keys():
-          if col not in columns:
-            columns.append(col)
-  if len(columns) == 1:
-    # Value is not a dict. Write it as a column name value.
-    value_column_name = 'value'
-    columns.append(value_column_name)
-  # Use the first column for the key.
-  key_column_name = columns[0]
+    if not filename:
+        return None
+    # Get the list of columns
+    value_column_name = ''
+    if not columns:
+        # Add a columns for key.
+        columns = ['key']
+    if len(columns) <= 1:
+        # Get columns across all entries.
+        for key, value in py_dict.items():
+            if isinstance(value, dict):
+                for col in value.keys():
+                    if col not in columns:
+                        columns.append(col)
+    if len(columns) == 1:
+        # Value is not a dict. Write it as a column name value.
+        value_column_name = 'value'
+        columns.append(value_column_name)
+    # Use the first column for the key.
+    key_column_name = columns[0]
 
-  # Get the output filename
-  output_files = file_get_matching(filename)
-  if output_files:
-    # Save into the last file
-    filename = output_files[-1]
+    # Get the output filename
+    output_files = file_get_matching(filename)
+    if output_files:
+        # Save into the last file
+        filename = output_files[-1]
 
-  # Write the dict into the csv file with a row per entry.
-  logging.info(
-      f'Saving dict with {len(py_dict)} items into file: {filename} with'
-      f' columns: {columns}'
-  )
-  with FileIO(filename, mode='w') as csvfile:
-    csv_writer = csv.DictWriter(
-        csvfile,
-        fieldnames=columns,
-        escapechar='\\',
-        extrasaction='ignore',
-        quotechar='"',
-        quoting=csv.QUOTE_NONNUMERIC,
-    )
-    csv_writer.writeheader()
-    num_rows = 0
-    for key, value in py_dict.items():
-      row = dict()
-      if value_column_name:
-        row[value_column_name] = value
-      elif isinstance(value, dict):
-        row = dict(value)
-      if key_column_name and key_column_name not in row:
-        row[key_column_name] = key
-      if row:
-        csv_writer.writerow(row)
-        num_rows += 1
-    logging.info(f'Wrote {num_rows} into file: {filename}')
-  return columns
+    # Write the dict into the csv file with a row per entry.
+    logging.info(
+        f'Saving dict with {len(py_dict)} items into file: {filename} with'
+        f' columns: {columns}')
+    with FileIO(filename, mode='w') as csvfile:
+        csv_writer = csv.DictWriter(
+            csvfile,
+            fieldnames=columns,
+            escapechar='\\',
+            extrasaction='ignore',
+            quotechar='"',
+            quoting=csv.QUOTE_NONNUMERIC,
+        )
+        csv_writer.writeheader()
+        num_rows = 0
+        for key, value in py_dict.items():
+            row = dict()
+            if value_column_name:
+                row[value_column_name] = value
+            elif isinstance(value, dict):
+                row = dict(value)
+            if key_column_name and key_column_name not in row:
+                row[key_column_name] = key
+            if row:
+                csv_writer.writerow(row)
+                num_rows += 1
+        logging.info(f'Wrote {num_rows} into file: {filename}')
+    return columns
 
 
 def file_load_py_dict(dict_filename: str) -> dict:
-  """Returns a py dictionary loaded from the file.
+    """Returns a py dictionary loaded from the file.
 
   The file can be a pickle file (.pkl) or a .py or JSON dict (.json)
 
@@ -704,44 +701,45 @@ def file_load_py_dict(dict_filename: str) -> dict:
   Returns:
     dictionary loaded from the file.
   """
-  input_files = file_get_matching(dict_filename)
-  logging.debug(f'Loading dict from file: {input_files}')
-  py_dict = {}
-  for filename in input_files:
-    if file_is_csv(filename):
-      py_dict.update(file_load_csv_dict(filename))
-    elif filename.endswith('.pkl'):
-      logging.info(f'Loading dict from pickle file: {filename}')
-      with FileIO(filename, 'rb') as file:
-        py_dict.update(pickle.load(file))
-    else:
-      # Assumes the file is a py or json dict.
-      logging.info(f'Loading dict from py from file: {filename}')
-      with FileIO(filename) as file:
-        dict_str = file.read()
-      if dict_str:
-        # Load the map assuming a python dictionary.
-        # Can also be used with JSON with trailing commas and comments.
-        try:
-          file_dict = ast.literal_eval(dict_str)
-        except (NameError, ValueError) as e:
-          logging.debug(f'Got exception in loading {filename} with ast: {e}')
-          # AST didn't parse the file. Try loading as json.
-          file_dict = json.loads(dict_str)
-        if not py_dict:
-          py_dict = file_dict
+    input_files = file_get_matching(dict_filename)
+    logging.debug(f'Loading dict from file: {input_files}')
+    py_dict = {}
+    for filename in input_files:
+        if file_is_csv(filename):
+            py_dict.update(file_load_csv_dict(filename))
+        elif filename.endswith('.pkl'):
+            logging.info(f'Loading dict from pickle file: {filename}')
+            with FileIO(filename, 'rb') as file:
+                py_dict.update(pickle.load(file))
         else:
-          if isinstance(file_dict, list):
-            # Add each list item as value in the dict with index key
-            for item in file_dict:
-              py_dict[len(py_dict)] = item
-          else:
-            py_dict.update(file_dict)
-  return py_dict
+            # Assumes the file is a py or json dict.
+            logging.info(f'Loading dict from py from file: {filename}')
+            with FileIO(filename) as file:
+                dict_str = file.read()
+            if dict_str:
+                # Load the map assuming a python dictionary.
+                # Can also be used with JSON with trailing commas and comments.
+                try:
+                    file_dict = ast.literal_eval(dict_str)
+                except (NameError, ValueError) as e:
+                    logging.debug(
+                        f'Got exception in loading {filename} with ast: {e}')
+                    # AST didn't parse the file. Try loading as json.
+                    file_dict = json.loads(dict_str)
+                if not py_dict:
+                    py_dict = file_dict
+                else:
+                    if isinstance(file_dict, list):
+                        # Add each list item as value in the dict with index key
+                        for item in file_dict:
+                            py_dict[len(py_dict)] = item
+                    else:
+                        py_dict.update(file_dict)
+    return py_dict
 
 
 def file_write_py_dict(py_dict: dict, filename: str) -> str:
-  """Save the py dictionary into a file.
+    """Save the py dictionary into a file.
 
   First writes the dict into a temp file and moves the tmp file to the required
   file. so that any interruption during write will not corrupt the existing
@@ -754,30 +752,29 @@ def file_write_py_dict(py_dict: dict, filename: str) -> str:
   Returns:
     name of the file into which dictionary is written.
   """
-  if not py_dict or not filename:
-    return ''
-  output_files = file_get_matching(filename)
-  if output_files:
-    # Save into the last file
-    filename = output_files[-1]
-  if file_is_csv(filename):
-    file_write_csv_dict(py_dict, filename)
-  elif filename.endswith('.pkl'):
-    logging.info(
-        f'Writing py dict of size {sys.getsizeof(py_dict)} to pickle file:'
-        f' {filename}'
-    )
-    with FileIO(filename, 'wb') as file:
-      pickle.dump(py_dict, file)
-  else:
-    logging.info(
-        f'Writing py dict of size {sys.getsizeof(py_dict)} to file: {filename}'
-    )
-    with FileIO(filename, 'w') as file:
-      file.write(pprint.pformat(py_dict, indent=4))
-  file_size = file_get_size(filename)
-  logging.info(f'Saved py dict into file: {filename} of size: {file_size}')
-  return filename
+    if not py_dict or not filename:
+        return ''
+    output_files = file_get_matching(filename)
+    if output_files:
+        # Save into the last file
+        filename = output_files[-1]
+    if file_is_csv(filename):
+        file_write_csv_dict(py_dict, filename)
+    elif filename.endswith('.pkl'):
+        logging.info(
+            f'Writing py dict of size {sys.getsizeof(py_dict)} to pickle file:'
+            f' {filename}')
+        with FileIO(filename, 'wb') as file:
+            pickle.dump(py_dict, file)
+    else:
+        logging.info(
+            f'Writing py dict of size {sys.getsizeof(py_dict)} to file: {filename}'
+        )
+        with FileIO(filename, 'w') as file:
+            file.write(pprint.pformat(py_dict, indent=4))
+    file_size = file_get_size(filename)
+    logging.info(f'Saved py dict into file: {filename} of size: {file_size}')
+    return filename
 
 
 # Google spreadsheet utilities
@@ -785,25 +782,25 @@ _GSPREAD_CLIENT = None
 
 
 def _file_get_gspread_client():
-  """Returns the GSheet client."""
-  global _GSPREAD_CLIENT
-  if _GSPREAD_CLIENT is None:
-    # Authenticate to the Google Spreadsheet API.
-    # uses the credentials from ~/.config/gspread/credentials.json
-    # If authorized_user.josn is not set, opens a browser for authentication.
-    _GSPREAD_CLIENT = gspread.oauth()
-  return _GSPREAD_CLIENT
+    """Returns the GSheet client."""
+    global _GSPREAD_CLIENT
+    if _GSPREAD_CLIENT is None:
+        # Authenticate to the Google Spreadsheet API.
+        # uses the credentials from ~/.config/gspread/credentials.json
+        # If authorized_user.josn is not set, opens a browser for authentication.
+        _GSPREAD_CLIENT = gspread.oauth()
+    return _GSPREAD_CLIENT
 
 
 def file_is_google_spreadsheet(filename: str) -> bool:
-  """Returns True if the filename is a google spreadsheet url."""
-  if isinstance(filename, str):
-    return filename.startswith('https://docs.google.com/spreadsheets/')
-  return False
+    """Returns True if the filename is a google spreadsheet url."""
+    if isinstance(filename, str):
+        return filename.startswith('https://docs.google.com/spreadsheets/')
+    return False
 
 
 def file_open_google_spreadsheet(url: str) -> gspread.spreadsheet.Spreadsheet:
-  """Returns the google spreasheet handle.
+    """Returns the google spreasheet handle.
 
   Assumes caller has access to the spreadsheet.
 
@@ -813,16 +810,16 @@ def file_open_google_spreadsheet(url: str) -> gspread.spreadsheet.Spreadsheet:
   Returns:
     google spreadsheet object for the given url
   """
-  # Get a handle for the whole spreadsheet
-  gs = _file_get_gspread_client().open_by_url(url)
-  return gs
+    # Get a handle for the whole spreadsheet
+    gs = _file_get_gspread_client().open_by_url(url)
+    return gs
 
 
 def file_get_gspread_worksheet(
     url: str,
     worksheet_title: str = None,
 ) -> gspread.worksheet.Worksheet:
-  """Return the worksheet handle from the google spreadsheet.
+    """Return the worksheet handle from the google spreadsheet.
 
   Args:
     url: the url for the spreadsheet.
@@ -832,35 +829,35 @@ def file_get_gspread_worksheet(
   Returns:
     Worksheet object for the specific sheet.
   """
-  # Get a handle for the whole spreadsheet
-  gs = file_open_google_spreadsheet(url)
-  if not gs:
-    logging.error(f'Unable to open spreadsheet: {url}')
+    # Get a handle for the whole spreadsheet
+    gs = file_open_google_spreadsheet(url)
+    if not gs:
+        logging.error(f'Unable to open spreadsheet: {url}')
+        return None
+
+    # Get the worksheet title
+    if not worksheet_title:
+        # No worksheet specified.
+        # Look for worksheet id suffix #gid=<number> in the URL
+        id_pos = url.find('#gid=')
+        if id_pos > 0:
+            # Get the id from the url suffix.
+            worksheet_title = url[id_pos + len('#gid-'):]
+        else:
+            worksheet_title = '0'
+
+    # Get a handle for the specific worksheet
+    worksheet_title = str(worksheet_title)
+    for w in gs.worksheets():
+        if w.title == worksheet_title or str(w.id) == worksheet_title:
+            return w
     return None
 
-  # Get the worksheet title
-  if not worksheet_title:
-    # No worksheet specified.
-    # Look for worksheet id suffix #gid=<number> in the URL
-    id_pos = url.find('#gid=')
-    if id_pos > 0:
-      # Get the id from the url suffix.
-      worksheet_title = url[id_pos + len('#gid-') :]
-    else:
-      worksheet_title = '0'
 
-  # Get a handle for the specific worksheet
-  worksheet_title = str(worksheet_title)
-  for w in gs.worksheets():
-    if w.title == worksheet_title or str(w.id) == worksheet_title:
-      return w
-  return None
-
-
-def file_copy_from_spreadsheet(
-    url: str, worksheet_title: str = None, dst_filename: str = ''
-) -> list:
-  """Copies the spreadsheet to a local file and returns the filename.
+def file_copy_from_spreadsheet(url: str,
+                               worksheet_title: str = None,
+                               dst_filename: str = '') -> list:
+    """Copies the spreadsheet to a local file and returns the filename.
 
   Args:
     url: spreadsheet url.
@@ -874,61 +871,65 @@ def file_copy_from_spreadsheet(
   Returns:
     List of files with the worksheet content.
   """
-  filenames = []
-  if not file_is_google_spreadsheet(url):
+    filenames = []
+    if not file_is_google_spreadsheet(url):
+        return filenames
+
+    # Get the spreadsheet handle.
+    gs = file_open_google_spreadsheet(url)
+    if not gs:
+        logging.fatal(f'Unable to open the Spreadsheet: {url}')
+
+    # Get all the sheets to be copied.
+    worksheets = []
+    if worksheet_title or '#gid=' in url:
+        ws = file_get_gspread_worksheet(url, worksheet_title=worksheet_title)
+        if ws:
+            worksheets.append(ws)
+    if not worksheets:
+        # No sheet specified. Copy all sheets.
+        worksheets = gs.worksheets()
+
+    # Set the output filename prefix.
+    if not dst_filename:
+        # Remove spaces from the filename
+        dst_filename = gs.title.replace(' ', '_')
+    elif dst_filename.endswith('/'):
+        # Destination is a directory. Use the spreadsheet title as filename.
+        dst_filename = file_get_name(dst_filename,
+                                     suffix=gs.title.replace(' ', '_'),
+                                     file_ext='.csv')
+    file_makedirs(dst_filename)
+
+    # Read each sheet as csv and save it to the file.
+    for ws in worksheets:
+        ws_title = ws.title
+        filename = dst_filename
+        if len(worksheets) > 1:
+            # create a dst filename for the sheet.
+            suffix = '-' + ws_title.replace(' ', '_')
+            filename = file_get_name(dst_filename,
+                                     suffix=suffix,
+                                     file_ext='.csv')
+        with FileIO(filename, mode='w') as file:
+            # Write each row from the worksheet into the csv file
+            logging.debug(
+                f'Copying spreadsheet: {url}:{ws_title} into {filename}')
+            csv_writer = csv.writer(file,
+                                    delimiter=',',
+                                    escapechar='\\',
+                                    quoting=csv.QUOTE_MINIMAL)
+            for row in ws.get_all_values():
+                csv_writer.writerow(row)
+        filenames.append(filename)
+
     return filenames
 
-  # Get the spreadsheet handle.
-  gs = file_open_google_spreadsheet(url)
-  if not gs:
-    logging.fatal(f'Unable to open the Spreadsheet: {url}')
 
-  # Get all the sheets to be copied.
-  worksheets = []
-  if worksheet_title or '#gid=' in url:
-    ws = file_get_gspread_worksheet(url, worksheet_title=worksheet_title)
-    if ws:
-      worksheets.append(ws)
-  if not worksheets:
-    # No sheet specified. Copy all sheets.
-    worksheets = gs.worksheets()
-
-  # Set the output filename prefix.
-  if not dst_filename:
-    # Remove spaces from the filename
-    dst_filename = gs.title.replace(' ', '_')
-  elif dst_filename.endswith('/'):
-    # Destination is a directory. Use the spreadsheet title as filename.
-    dst_filename = file_get_name(
-        dst_filename, suffix=gs.title.replace(' ', '_'), file_ext='.csv'
-    )
-  file_makedirs(dst_filename)
-
-  # Read each sheet as csv and save it to the file.
-  for ws in worksheets:
-    ws_title = ws.title
-    filename = dst_filename
-    if len(worksheets) > 1:
-      # create a dst filename for the sheet.
-      suffix = '-' + ws_title.replace(' ', '_')
-      filename = file_get_name(dst_filename, suffix=suffix, file_ext='.csv')
-    with FileIO(filename, mode='w') as file:
-      # Write each row from the worksheet into the csv file
-      logging.debug(f'Copying spreadsheet: {url}:{ws_title} into {filename}')
-      csv_writer = csv.writer(
-          file, delimiter=',', escapechar='\\', quoting=csv.QUOTE_MINIMAL
-      )
-      for row in ws.get_all_values():
-        csv_writer.writerow(row)
-    filenames.append(filename)
-
-  return filenames
-
-
-def file_copy_to_spreadsheet(
-    filename: str, url: str, worksheet: str = ''
-) -> str:
-  """Copy the CSV file into the spreadsheet.
+def file_copy_to_spreadsheet(filename: str,
+                             url: str,
+                             worksheet: str = '') -> str:
+    """Copy the CSV file into the spreadsheet.
 
   Args:
     filename: name of csv file to be copied into the spreadsheet.
@@ -939,91 +940,90 @@ def file_copy_to_spreadsheet(
   Returns:
     the url for the worksheet into whcih file was copied.
   """
-  # Read the rows from the source file
-  rows = []
-  with FileIO(filename) as file:
-    csv_reader = csv.reader(file, skipinitialspace=True, escapechar='\\')
-    for row in csv_reader:
-      rows.append(row)
+    # Read the rows from the source file
+    rows = []
+    with FileIO(filename) as file:
+        csv_reader = csv.reader(file, skipinitialspace=True, escapechar='\\')
+        for row in csv_reader:
+            rows.append(row)
 
-  logging.debug(f'Writing {len(rows)} rows from {filename} into {url}')
-  # Get the worksheet handle.
-  ws = file_get_gspread_worksheet(url, worksheet)
-  if not ws:
-    logging.error(f'Unable to get worksheet {url}, {worksheet}')
-    return ''
+    logging.debug(f'Writing {len(rows)} rows from {filename} into {url}')
+    # Get the worksheet handle.
+    ws = file_get_gspread_worksheet(url, worksheet)
+    if not ws:
+        logging.error(f'Unable to get worksheet {url}, {worksheet}')
+        return ''
 
-  # Clear the worksheet
-  ws.clear()
-  # Add all the rows.
-  ws.update(rows, value_input_option='RAW')
-  logging.debug(
-      f'Wrote {len(rows)} rows from {filename} into'
-      f' spreadsheet:{url},{ws.title}'
-  )
-  return ws.url
+    # Clear the worksheet
+    ws.clear()
+    # Add all the rows.
+    ws.update(rows, value_input_option='RAW')
+    logging.debug(f'Wrote {len(rows)} rows from {filename} into'
+                  f' spreadsheet:{url},{ws.title}')
+    return ws.url
 
 
 def file_is_csv(filename: str) -> bool:
-  """Returns True is the file has a .csv extension or is a spreadsheet."""
-  if filename.endswith('.csv') or file_is_google_spreadsheet(filename):
-    return True
-  return False
+    """Returns True is the file has a .csv extension or is a spreadsheet."""
+    if filename.endswith('.csv') or file_is_google_spreadsheet(filename):
+        return True
+    return False
 
 
 def _copy_file_chunks(src, dst, chunk_size=1000000):
-  """Copy file content from src to dst in chunks of given size."""
-  buf = src.read(chunk_size)
-  while len(buf):
-    dst.write(buf)
+    """Copy file content from src to dst in chunks of given size."""
     buf = src.read(chunk_size)
+    while len(buf):
+        dst.write(buf)
+        buf = src.read(chunk_size)
 
 
 def _add_to_list(comma_string: str, items_list: list) -> list:
-  """Add items from the comma separated string to the items list."""
-  for item in comma_string.split(','):
-    if item not in items_list:
-      items_list.append(item)
-  return items_list
+    """Add items from the comma separated string to the items list."""
+    for item in comma_string.split(','):
+        if item not in items_list:
+            items_list.append(item)
+    return items_list
 
 
 def main(_):
-  if len(sys.argv) <= 1:
-    logging.error('No arguments given.')
-    logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
-    return
-  if sys.argv[1] != 'cp':
-    logging.error(f'Unsupported command: {sys.argv[1]}')
-    logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
-    return
+    if len(sys.argv) <= 1:
+        logging.error('No arguments given.')
+        logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
+        return
+    if sys.argv[1] != 'cp':
+        logging.error(f'Unsupported command: {sys.argv[1]}')
+        logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
+        return
 
-  # Copy files: <src_file1> <src_file2>... <dst>
-  args = sys.argv[1:]
-  if len(args) < 3:
-    logging.error('Expected one or more source files and a destination file.')
-    logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
-    return
-  target = args[-1]
-  src_files = file_get_matching(args[1:-1])
-  if len(src_files) > 1:
-    if file_is_google_spreadsheet(target):
-      logging.error(
-          f'Cannot copy multiple files {src_files} to a spreadsheet {target}'
-      )
+    # Copy files: <src_file1> <src_file2>... <dst>
+    args = sys.argv[1:]
+    if len(args) < 3:
+        logging.error(
+            'Expected one or more source files and a destination file.')
+        logging.error('Usage: python file_util.py cp <src-file> <dst-file>')
+        return
+    target = args[-1]
+    src_files = file_get_matching(args[1:-1])
+    if len(src_files) > 1:
+        if file_is_google_spreadsheet(target):
+            logging.error(
+                f'Cannot copy multiple files {src_files} to a spreadsheet {target}'
+            )
+        else:
+            # In case of multiple source files,
+            # target is assumed to be a directory.
+            # Copy all files to the target directory.
+            if not target.endswith(os.sep):
+                target = target + os.sep
+            for src_file in src_files:
+                dst = file_copy(src_file, target)
+                logging.info(f'Copied {src_file} to {dst}')
     else:
-      # In case of multiple source files,
-      # target is assumed to be a directory.
-      # Copy all files to the target directory.
-      if not target.endswith(os.sep):
-        target = target + os.sep
-      for src_file in src_files:
-        dst = file_copy(src_file, target)
-        logging.info(f'Copied {src_file} to {dst}')
-  else:
-    src_file = src_files[0]
-    dst = file_copy(src_files[0], target)
-    logging.info(f'Copied {src_files[0]} to {dst}')
+        src_file = src_files[0]
+        dst = file_copy(src_files[0], target)
+        logging.info(f'Copied {src_files[0]} to {dst}')
 
 
 if __name__ == '__main__':
-  app.run(main)
+    app.run(main)
