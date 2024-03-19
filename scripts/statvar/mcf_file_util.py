@@ -465,15 +465,16 @@ def normalize_list(val: str, sort: bool = True) -> str:
     """Normalize a comma separated list sorting items."""
     if ',' in val:
         if '"' in val:
-          # Sort comma separated text values.
-          value_list = [
-              '"{}"'.format(v.strip()) for v in list(
-                  csv.reader(
-                      [val], delimiter=',', quotechar='"', skipinitialspace=True))
-              [0]
-          ]
+            # Sort comma separated text values.
+            value_list = [
+                '"{}"'.format(v.strip()) for v in list(
+                    csv.reader([val],
+                               delimiter=',',
+                               quotechar='"',
+                               skipinitialspace=True))[0]
+            ]
         else:
-          value_list = val.split(',')
+            value_list = val.split(',')
         values = []
         if sort:
             value_list = sorted(value_list)
