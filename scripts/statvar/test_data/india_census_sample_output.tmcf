@@ -1,0 +1,7 @@
+Node: E:india_census_sample_output->E0
+observationAbout: C:india_census_sample_output->observationAbout
+value: C:india_census_sample_output->value
+variableMeasured: C:india_census_sample_output->variableMeasured
+observationDate: 2011
+typeOf: dcs:StatVarObservation
+measurementMethod: dcs:IndiaCensus2011
