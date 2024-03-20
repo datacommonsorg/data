@@ -1,0 +1,20 @@
+Node: E:codingGenes-manual->E1
+typeOf: dcs:ICD10Code
+dcid: C:codingGenes-manual->ICD10
+name: C:codingGenes-manual->Disease_Name
+
+Node: E:codingGenes-manual->E2
+typeOf: dcs:Gene
+dcid: C:codingGenes-manual->GeneDcid
+name: C:codingGenes-manual->Gene
+ensemblID: C:codingGenes-manual->ensemblID
+
+Node: E:codingGenes-manual->E3
+typeOf: dcs:DiseaseGeneAssociation
+dcid: C:codingGenes-manual->dcid	
+diseaseOntologyID: C:codingGenes-manual->DOID	
+icd10CMCode: E:codingGenes-manual->E1
+geneID: E:codingGenes-manual->E2
+associationType: C:codingGenes-manual->associationType
+associationSource: C:codingGenes-manual->score-db
+confidence: C:codingGenes-manual->confidence
