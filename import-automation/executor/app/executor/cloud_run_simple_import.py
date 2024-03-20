@@ -173,8 +173,9 @@ def cloud_run_simple_import_job(
         'CONFIG_FILE': gcs_config,
         'OUTPUT_DIR': gcs_output_dir,
     }
+    # Add any user script env vars such as DC_API_KEY
     if env:
-        env_var.update(env)
+        env_vars.update(env)
 
     # Generate job-id from config_file path if not specified.
     if not job_id:
