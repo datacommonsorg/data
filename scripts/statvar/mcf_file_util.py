@@ -23,7 +23,7 @@ Uses a dictionary to process nodes of the form:
 where
   <dcid> is the node dcid with the namespace prefix: 'dcid:'
   <property> is a property name
-  <value> is a string with a single value or a comma seperated list of values.
+  <value> is a string with a single value or a comma separated list of values.
 
   the property:values for a node are in the same order as in the input file.
 
@@ -100,8 +100,14 @@ def add_namespace(value: str, namespace: str = 'dcid') -> str:
   Quoted strings are assumed to start with '"' and won't get a namespace.
   """
     if value and isinstance(value, str):
-        if value[0].isalpha() and value.find(':') < 0:
-            return f'{namespace}:{value}'
+        if value[0].isalpha() or value[0].isdigit():
+            has_alpha = False
+            for c in value:
+                if c.isalpha() or c == '_' or c == '/':
+                    has_alpha = True
+                    break
+            if has_alpha and value.find(':') < 0:
+                return f'{namespace}:{value}'
     return value
 
 
@@ -473,45 +479,84 @@ def get_numeric_value(value: str,
     return None
 
 
-def normalize_list(val: str, sort: bool = True) -> str:
+def get_quoted_value(value: str) -> str:
+    """Returns a quoted string if there are spaces and special characters.
+
+    Args:
+      value: string value to be quoted if necessary.
+
+    Returns:
+      value with optional double quotes.
+    """
+    if not value or not isinstance(value, str):
+        return value
+
+    value = value.strip('"')
+    value = value.strip()
+    if value.startswith('[') and value.endswith(']'):
+        return normalize_range(value)
+    if ' ' in value or ',' in value:
+        return '"' + value + '"'
+    return value
+
+
+def get_value_list(value: str) -> list:
+    """Returns the value as a list
+
+  Args:
+    value: string with a single value or comma seperated list of values
+  Returns:
+    value as a list.
+  """
+    if isinstance(value, list):
+        return value
+    value_list = []
+    # Read the string as a comma separated line.
+    rows = list(
+        csv.reader([value], delimiter=',', quotechar='"',
+                   skipinitialspace=True))
+    for v in rows[0]:
+        val_normalized = get_quoted_value(v)
+        value_list.append(val_normalized)
+    return value_list
+
+
+def normalize_list(value: str, sort: bool = True) -> str:
     """Normalize a comma separated list of sorting strings.
 
     Args:
-      val: string value to be normalized.
+      value: string value to be normalized.
         Can be a comma separated list or a sequence of characters.
       sort: if True, lists are sorted alphabetically.
 
     Returns:
-      string that s a normalized version of val with duplicates removed.
+      string that is a normalized version of value with duplicates removed.
     """
-    if ',' in val:
-        if '"' in val:
+    if ',' in value:
+        if '"' in value:
             # Sort comma separated text values.
-            value_list = [
-                '"{}"'.format(v.strip()) for v in list(
-                    csv.reader([val],
-                               delimiter=',',
-                               quotechar='"',
-                               skipinitialspace=True))[0]
-            ]
+            value_list = get_value_list(value)
         else:
-            value_list = val.split(',')
+            value_list = value.split(',')
         values = []
         if sort:
             value_list = sorted(value_list)
         for v in value_list:
             if v not in values:
-                values.append(v)
+                normalized_v = normalize_value(v,
+                                               quantity_range_to_dcid=False,
+                                               maybe_list=False)
+                values.append(str(normalized_v))
         return ','.join(values)
     else:
-        return val
+        return value
 
 
-def normalize_range(val: str, quantity_range_to_dcid: bool = False) -> str:
+def normalize_range(value: str, quantity_range_to_dcid: bool = False) -> str:
     """Normalize a quantity range into [<N> <M> Unit].
 
     Args:
-      val: quantity or quantity range as a string.
+      value: quantity or quantity range as a string.
       quantity_range_to_dcid: if True, converts quantity range to a dcid
         [ <start> <end> <unit>] is converted to dcid:Unit<start>To<end>
         if False, the quantity range is returned with unit at the end.
@@ -524,13 +569,13 @@ def normalize_range(val: str, quantity_range_to_dcid: bool = False) -> str:
     quantity_pat = (
         r'\[ *(?P<unit1>[A-Z][A-Za-z0-9_/]*)? *(?P<start>[0-9\.]+|-)?'
         r' *(?P<end>[0-9\.]+|-)? *(?P<unit2>[A-Z][A-Za-z0-9_]*)? *\]')
-    matches = re.search(quantity_pat, val)
+    matches = re.search(quantity_pat, value)
     if not matches:
-        return val
+        return value
 
     match_dict = matches.groupdict()
     if not match_dict:
-        return val
+        return value
 
     logging.debug(f'Matched range: {match_dict}')
 
@@ -568,48 +613,44 @@ def normalize_range(val: str, quantity_range_to_dcid: bool = False) -> str:
     return normalized_range
 
 
-def normalize_value(val, quantity_range_to_dcid: bool = False) -> str:
+def normalize_value(value,
+                    quantity_range_to_dcid: bool = False,
+                    maybe_list: bool = True) -> str:
     """Normalize a property value adding a standard namespace prefix 'dcid:'.
 
     Args:
-      val: string as a value of a property to be normalized.
+      value: string as a value of a property to be normalized.
       quantity_range_to_dcid: if True, convert quantity range to a dcid.
+      maybe_list: if True, values with ',' are converted to a normalized list.
 
     Returns:
       normalized value with namespace 'dcid' for dcid values
       sorted list for comma separated values.
     """
-    if val:
-        if isinstance(val, str):
-            val = val.strip()
-            # TODO: handle a mix of quoted strings and dcids.
-            if val[0] == '"':
-                return normalize_list(val)
-            elif ',' in val:
-                # Sort comma separated dcids.
-                values = sorted([
-                    normalize_value(x, quantity_range_to_dcid)
-                    for x in val.split(',')
-                ])
-                return ','.join(values)
-            elif val[0] == '[':
-                return normalize_range(val, quantity_range_to_dcid)
-            else:
-                # Check if string is a numeric value.
-                number = get_numeric_value(val)
-                if number:
-                    return normalize_value(number)
-                # Normalize string with a standardized namespace prefix.
-                return add_namespace(strip_namespace(val))
-        elif isinstance(val, float):
+    if value:
+        if isinstance(value, str):
+            value = value.strip()
+            if ',' in value and maybe_list:
+                return normalize_list(value)
+            if value[0] == '[':
+                return normalize_range(value, quantity_range_to_dcid)
+            # Check if string is a numeric value.
+            number = get_numeric_value(value)
+            if number:
+                return normalize_value(number)
+            if ' ' in value or ',' in value:
+                return get_quoted_value(value)
+            # Normalize string with a standardized namespace prefix.
+            return add_namespace(strip_namespace(value))
+        elif isinstance(value, float):
             # Return a fixed precision float string.
-            return f'{val}'
-        elif isinstance(val, list):
+            return f'{value}'
+        elif isinstance(value, list):
             # Sort a list of values normalizing the namespace prefix.
             values = sorted(
-                [normalize_value(x, quantity_range_to_dcid) for x in val])
+                [normalize_value(x, quantity_range_to_dcid) for x in value])
             return ','.join(values)
-    return val
+    return value
 
 
 def normalize_pv(prop: str, value: str) -> str:
