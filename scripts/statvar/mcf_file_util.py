@@ -114,7 +114,7 @@ def strip_namespace(value: str) -> str:
   Returns:
     value without the namespace prefix if there was a namespace
 
-  Any sequence of letters followed by a ':' is treated as a namespace.
+  Any sequence of letters before the first ':' is treated as a namespace.
   Quoted strings are assumed to start with '"' and won't be filtered.
   """
     if value and isinstance(value, str):
@@ -193,7 +193,7 @@ def add_pv_to_node(
         node = {}
     if isinstance(value, str):
         value = strip_value(value)
-        if strip_namespace:
+        if strip_namespaces:
             value = strip_namespace(value)
         if value and ',' in value:
             # Split the comma separated value into a list.
@@ -269,8 +269,16 @@ def add_mcf_node(
     append_values: bool = True,
 ) -> dict:
     """Add a node with property values into the nodes dict
-
   If the node exists, the PVs are added to the existing node.
+
+  Args:
+    pvs: dictionary of property: values of the new node to be added.
+    nodes: dictionary of existing nodes with property:value dict for each node.
+    strip_namespaces: if True, strip namespace from the dcid key and values.
+    append_values: if True, append new value for an exsting property, else replace
+      with new value.
+  Returns
+    nodes dictionary to which the new node is added.
   """
     if pvs is None or len(pvs) == 0:
         return None
@@ -290,14 +298,36 @@ def add_mcf_node(
 
 
 def load_mcf_nodes(
-    filenames: str,
+    filenames: Union[str, list],
     nodes: dict = None,
     strip_namespaces: bool = False,
     append_values: bool = True,
 ) -> dict:
     """Return a dict of nodes from the MCF file with the key as the dcid
-
   and a dict of property:value for each node.
+
+  Args:
+    filenames: command seperated string or a list of MCF filenames
+    nodes: dictonary to which new nodes are added.
+      If a node with dcid exists, the new properties are added to the existing node.
+    strip_namespace: if True, strips namespace from the value for node properties
+      as well as the dcid key for the nodes dict.
+    append_values: if True, appends new values for existing properties
+      into a comma seperated list, else replaces existing value.
+
+  Returns:
+    dictionary with dcid as the key and a values as a dict of property:values
+      {
+        '<dcid1>': {
+          '<prop1>': '<value1>',
+          '<prop2>': '<value2>'
+          ...
+        },
+        '<dcid2>': {
+          ...
+        },
+        ...
+      }
   """
     if not filenames:
         return {}
@@ -350,46 +380,25 @@ def load_mcf_nodes(
     return nodes
 
 
-def _pv_list_to_dict(pv_list: list) -> dict:
-    """Convert a list of property:value into a set of PVs."""
-    pvs = set()
-    if pv_list:
-        for pv in pv_list:
-            if isinstance(pv, str):
-                if ':' in pv:
-                    prop, value = pv.split(':', 1)
-                else:
-                    prop, value = pv, ''
-                prop = prop.strip()
-                value = normalize_value(value)
-                if prop not in pvs:
-                    pvs[prop] = set()
-                pvs[prop].add(value)
-    return pvs
-
-
-def _is_pv_in_dict(prop: str, value: str, pvs: dict) -> bool:
-    """Returns true if the property:value or propert is in the pvs dict."""
-    if not prop:
-        return False
-    prop = prop.strip()
-    if value:
-        value = normalize_value(value)
-    if prop in pvs:
-        if value and value in pvs[prop]:
-            return True
-        if '' in pvs[prop]:
-            return True
-    return False
-
-
 def filter_mcf_nodes(
     nodes: dict,
     allow_dcids: list = None,
     allow_nodes_with_pv: list = None,
     ignore_nodes_with_pv: list = None,
 ) -> dict:
-    """Filter dictionary of Nodes to a subset of allowed dcids."""
+    """Filter dictionary of Nodes to a subset of allowed dcids.
+
+    Args:
+      nodes: dictionary of nodes keyed by dcid.
+      allow_dcids: list of dcids to be returned.
+      allow_nodes_with_pv: list of properties
+        nodes with any of the properties in the list are returned.
+      ignore_nodes_with_pv: list of properties to be ignored.
+        nodes with any of the properties in the list are dropped.
+
+    Returns:
+      dictionary with the filtered nodes.
+    """
     # Normalize ignored PVs.
     ignored_pvs = set()
     ignored_pvs = _pv_list_to_dict(ignore_nodes_with_pv)
@@ -422,23 +431,26 @@ def filter_mcf_nodes(
     return filtered_nodes
 
 
-def _get_prop_value_line(prop, value) -> str:
-    """Return a text line for a property and value."""
-    if isinstance(value, list):
-        value = ','.join([add_namespace(x) for x in value])
-    else:
-        value = add_namespace(value)
-    return f'{prop}: {value}'
-
-
 def get_numeric_value(value: str,
                       decimal_char: str = '.',
                       separator_chars: str = ' ,$%') -> Union[int, float, None]:
-    """Returns the float value from string or None."""
+    """Returns the float value from string or None.
+
+    Args:
+      value: string to be converted into a number.
+        It can have comma separted digits with decimal points, for eg: NN,NNN.NNN
+      decimal_char: character used for decimal place seperator, default: '.'
+      seperator_char: seperator characters for 1000s or 100s
+        for example: NNN,NNN,NNN
+
+    Returns:
+      number as a float or int if the value is a number, None otherwise
+    """
     if isinstance(value, int) or isinstance(value, float):
         return value
     if value and isinstance(value, str):
         try:
+            # Strip separator characters from the numeric string
             normalized_value = value
             if (value[0].isdigit() or value[0] == '.' or value[0] == '-' or
                     value[0] == '+'):
@@ -462,7 +474,16 @@ def get_numeric_value(value: str,
 
 
 def normalize_list(val: str, sort: bool = True) -> str:
-    """Normalize a comma separated list sorting items."""
+    """Normalize a comma separated list of sorting strings.
+
+    Args:
+      val: string value to be normalized.
+        Can be a comma separated list or a sequence of characters.
+      sort: if True, lists are sorted alphabetically.
+
+    Returns:
+      string that s a normalized version of val with duplicates removed.
+    """
     if ',' in val:
         if '"' in val:
             # Sort comma separated text values.
@@ -487,8 +508,19 @@ def normalize_list(val: str, sort: bool = True) -> str:
 
 
 def normalize_range(val: str, quantity_range_to_dcid: bool = False) -> str:
-    """Normalize a quantity range into [<N> <M> Unit]."""
-    # Extract start, end and unit for the quantity range
+    """Normalize a quantity range into [<N> <M> Unit].
+
+    Args:
+      val: quantity or quantity range as a string.
+      quantity_range_to_dcid: if True, converts quantity range to a dcid
+        [ <start> <end> <unit>] is converted to dcid:Unit<start>To<end>
+        if False, the quantity range is returned with unit at the end.
+
+    Retruns:
+      string with quantity range of the form '[<start> <end> <unit>]'
+      or dcid:UnitStartToEnd if quantity_range_to_dcid is True.
+    """
+    # Check if value is a quantity range
     quantity_pat = (
         r'\[ *(?P<unit1>[A-Z][A-Za-z0-9_/]*)? *(?P<start>[0-9\.]+|-)?'
         r' *(?P<end>[0-9\.]+|-)? *(?P<unit2>[A-Z][A-Za-z0-9_]*)? *\]')
@@ -502,6 +534,7 @@ def normalize_range(val: str, quantity_range_to_dcid: bool = False) -> str:
 
     logging.debug(f'Matched range: {match_dict}')
 
+    # Value is a quantity range. Get the start, end and unit.
     start = match_dict.get('start', '')
     end = match_dict.get('end', '')
     unit = match_dict.get('unit1', '')
@@ -536,7 +569,16 @@ def normalize_range(val: str, quantity_range_to_dcid: bool = False) -> str:
 
 
 def normalize_value(val, quantity_range_to_dcid: bool = False) -> str:
-    """Normalize a property value adding a standard namespace prefix 'dcid:'."""
+    """Normalize a property value adding a standard namespace prefix 'dcid:'.
+
+    Args:
+      val: string as a value of a property to be normalized.
+      quantity_range_to_dcid: if True, convert quantity range to a dcid.
+
+    Returns:
+      normalized value with namespace 'dcid' for dcid values
+      sorted list for comma separated values.
+    """
     if val:
         if isinstance(val, str):
             val = val.strip()
@@ -571,7 +613,15 @@ def normalize_value(val, quantity_range_to_dcid: bool = False) -> str:
 
 
 def normalize_pv(prop: str, value: str) -> str:
-    """Returns a normalized property:value string."""
+    """Returns a normalized property:value string.
+
+    Args:
+      prop: property name as a string
+      value: property value as a string
+
+    Returns:
+      string of the form '<prop>:<value>' where value is normalized.
+    """
     return ':'.join([prop.strip(), normalize_value(value)])
 
 
@@ -581,8 +631,15 @@ def normalize_mcf_node(
     quantity_range_to_dcid: bool = False,
 ) -> dict:
     """Returns a normalized MCF node with all PVs in alphabetical order,
-
   a common namespace of 'dcid' and comma separated lists also sorted.
+
+  Args:
+    node: a dictionary with property:value
+    ignore_comments: if True, properties that start with '#' are dropped.
+    quantity_range_to_dcid: if True, quantity rane is converted to dcid.
+
+  Returns:
+    dictionary with normalized property:values.
   """
     normal_node = OrderedDict({})
     props = list(node.keys())
@@ -608,7 +665,16 @@ def normalize_mcf_node(
 
 
 def node_dict_to_text(node: dict, default_pvs: dict = _DEFAULT_NODE_PVS) -> str:
-    """Convert a dictionary node of PVs into text."""
+    """Convert a dictionary node of PVs into text.
+
+    Args:
+      node: dictionary of property: values.
+      default_pvs: dictionary with default property:values.
+        These properties are added to the node if not present.
+
+    Returns:
+      node as a text string with a property:value per line
+    """
     props = list(node.keys())
     pvs = []
     # Add any initial comments
@@ -646,7 +712,21 @@ def write_mcf_nodes(
     ignore_comments: bool = True,
     sort: bool = False,
 ):
-    """Write the nodes to an MCF file."""
+    """Write the nodes to an MCF file.
+
+    Args:
+      node_dicts: dictionary of nodes keyed by dcid and
+        each node as a dictionary of property:value.
+      filename: output MCF file to be written
+      mode: if 'a', nodes are appended to existing file.
+        else file is overwritten with the nodes.
+      default_pvs: dictionary of default property:value to be
+        added to all nodes.
+      header: string written as a comment at the begining of the file.
+      ignore_comments: if True, drop comments that being with '#' in the property.
+      sort: if True, nodes in the output file are sorted by dcid.
+        the properties in the node are also sorted.
+    """
     if not node_dicts:
         return
     if isinstance(node_dicts, dict):
@@ -675,6 +755,50 @@ def write_mcf_nodes(
                 if len(pvs) > 0:
                     output_f.write(pvs)
                     output_f.write('\n\n')
+
+
+def _get_prop_value_line(prop, value) -> str:
+    """Return a text line for a property and value."""
+    if isinstance(value, list):
+        value = ','.join([add_namespace(x) for x in value])
+    else:
+        value = add_namespace(value)
+    return f'{prop}: {value}'
+
+
+def _pv_list_to_dict(pv_list: list) -> dict:
+    """Convert a list of property:value into a set of PVs."""
+    pvs = set()
+    if not pv_list:
+        return pvs
+
+    for pv in pv_list:
+        if isinstance(pv, str):
+            if ':' in pv:
+                prop, value = pv.split(':', 1)
+            else:
+                prop, value = pv, ''
+            prop = prop.strip()
+            value = normalize_value(value)
+            if prop not in pvs:
+                pvs[prop] = set()
+            pvs[prop].add(value)
+    return pvs
+
+
+def _is_pv_in_dict(prop: str, value: str, pvs: dict) -> bool:
+    """Returns true if the property:value or propert is in the pvs dict."""
+    if not prop:
+        return False
+    prop = prop.strip()
+    if value:
+        value = normalize_value(value)
+    if prop in pvs:
+        if value and value in pvs[prop]:
+            return True
+        if '' in pvs[prop]:
+            return True
+    return False
 
 
 def main(_):
