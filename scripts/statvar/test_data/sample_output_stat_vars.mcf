@@ -1,0 +1,55 @@
+Node: dcid:Count_Person_25To30Years_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+age: dcid:25To30Years
+race: dcs:WhiteAlone
+
+Node: dcid:Count_Person_25To30Years_WhiteAlone_AsAFractionOf_Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcid:Count_Person
+age: dcid:25To30Years
+race: dcs:WhiteAlone
+
+Node: dcid:Count_Person_25To30Years_Male_AsianOrPacificIslander
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+gender: dcs:Male
+age: dcid:25To30Years
+race: dcs:AsianOrPacificIslander
+
+Node: dcid:Count_Person_25To30Years_Male_AsianOrPacificIslander_AsAFractionOf_Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcid:Count_Person
+gender: dcs:Male
+age: dcid:25To30Years
+race: dcs:AsianOrPacificIslander
+
+Node: dcid:Count_Person_30To35Years_Female_WhiteAlone
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+gender: dcs:Female
+age: dcid:30To35Years
+race: dcs:WhiteAlone
+
+Node: dcid:Count_Person_30To35Years_Female_WhiteAlone_AsAFractionOf_Count_Person
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcid:Count_Person
+gender: dcs:Female
+age: dcid:30To35Years
+race: dcs:WhiteAlone
+
