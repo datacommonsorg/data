@@ -21,11 +21,11 @@ from .process import S2303SubjectTableDataLoader
 #pylint: enable=import-error
 
 _TEST_DIR = os.path.join(_CODEDIR, 'testdata')
-_TEST_DATA_ZIP = os.path.join(_TEST_DIR, 'alabama.zip')
+_TEST_DATA_ZIP = os.path.join(_TEST_DIR, 'S2303.zip')
 _CONFIG_PATH = os.path.join(_CODEDIR, 'S2303_spec.json')
-_EXPECTED_TMCF = os.path.join(_TEST_DIR, 'output.tmcf')
-_EXPECTED_MCF = os.path.join(_TEST_DIR, 'output.mcf')
-_EXPECTED_CSV = os.path.join(_TEST_DIR, 'expected.csv')
+_EXPECTED_TMCF = os.path.join(_TEST_DIR, 'S2303_output.tmcf')
+_EXPECTED_MCF = os.path.join(_TEST_DIR, 'S2303_output.mcf')
+_EXPECTED_CSV = os.path.join(_TEST_DIR, 'S2303_cleaned.csv')
 
 
 def set_column_map(input_path, spec_path, output_dir):
@@ -77,3 +77,11 @@ class ProcessTest(unittest.TestCase):
                 with open(_EXPECTED_CSV) as expected_csv_f:
                     expected_csv_result = expected_csv_f.read()
                     self.assertEqual(csv_result, expected_csv_result)
+
+
+def main(argv):
+    a = ProcessTest(unittest.TestCase)
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -127,7 +127,10 @@ class S2408SubjectTableLoader(SubjectTableDataLoaderBase):
         }
 
         csv_file = open(self.clean_csv_path, 'a')
-        place_geoIds = df['id'].apply(convert_to_place_dcid)
+        if 'data_with_overlays' in filename:
+            place_geoIds = df['id'].apply(convert_to_place_dcid)
+        else:
+            place_geoIds = df['Geography'].apply(convert_to_place_dcid)
 
         # update the clean csv
         for column in df.columns.tolist():
@@ -168,12 +171,11 @@ class S2408SubjectTableLoader(SubjectTableDataLoaderBase):
 
                 # Replace empty places (unresolved geoIds) as null values
                 obs_df['Place'].replace('', np.nan, inplace=True)
-
+                obs_df['Quantity'].replace('-', '', inplace=True)
                 # Drop rows with observations for empty (null) values
                 obs_df.dropna(subset=['Place', 'Quantity'],
                               axis=0,
                               inplace=True)
-
                 # Write the processed observations to the clean_csv
                 if self.year_count == 0:
                     obs_df.to_csv(csv_file, header=True, index=False, mode='w')

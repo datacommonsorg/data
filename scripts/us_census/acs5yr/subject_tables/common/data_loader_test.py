@@ -37,8 +37,9 @@ class DataLoaderBaseTest(unittest.TestCase):
     def test_csv_file_input(self):
         process_subject_tables(
             table_prefix='test_csv_2013',
-            input_path=os.path.join(base_path,
-                                    "./testdata/ACSST5Y2013_S2702.csv"),
+            input_path=os.path.join(
+                base_path,
+                "./testdata/ACSST5Y2013_S2702_data_with_overlays.csv"),
             output_dir=os.path.join(base_path, "./testdata/"),
             column_map_path=os.path.join(
                 base_path, "./testdata/column_map_from_zip_expected.json"),

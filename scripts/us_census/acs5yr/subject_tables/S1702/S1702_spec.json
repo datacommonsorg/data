@@ -113,7 +113,7 @@
     "universePVs": [],
     "ignoreColumns": [
         "Percent Imputed",
-        "id",
+        "Geography",
         "Geographic Area Name",
         "Estimate!!Total!!All families!!Families!!With related children of householder under 18 years",
         "Margin of Error!!Total!!All families!!Families!!With related children of householder under 18 years",
@@ -585,7 +585,12 @@
         "Margin of Error!!Female householder, no husband present!!Percent below poverty level MOE!!Families!!ALL FAMILIES WITH INCOME BELOW THE FOLLOWING POVERTY RATIOS!!500 percent of poverty level",
         "Estimate!!All families!!Percent below poverty level!!Families!!INCOME DEFICIT!!Mean income deficit for families (dollars)",
         "Estimate!!Married-couple families!!Percent below poverty level!!Families!!INCOME DEFICIT!!Mean income deficit for families (dollars)",
-        "Estimate!!Female householder, no husband present!!Percent below poverty level!!Families!!INCOME DEFICIT!!Mean income deficit for families (dollars)"
+        "Estimate!!Female householder, no husband present!!Percent below poverty level!!Families!!INCOME DEFICIT!!Mean income deficit for families (dollars)",
+        "Annotation of Margin of Error",
+        "Annotation of Estimate",
+        "Annotation of Married-couple families",
+        "Annotation of Female householder, no husband present",
+        "Annotation of All families"
     ],
     "denominators": {
         "Estimate!!Total!!All families!!Families": [

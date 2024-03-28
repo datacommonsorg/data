@@ -178,6 +178,7 @@
   ],
   "ignoreColumns": [
     "id",
+    "Geography",
     "Geographic Area Name",
     "Percent Imputed",
     "PERCENT IMPUTED",
@@ -215,12 +216,16 @@
     "Margin of Error!!Moved; from different county, same state MOE!!Population 1 year and over!!AGE!!Median age (years)",
     "Moved; within same county!!Margin of Error!!Median income (dollars)",
     "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Moved; from different  state!!Population 1 year and over!!AGE!!Median age (years)",
     "Margin of Error!!Moved; from different  state MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Moved; from abroad!!Population 1 year and over!!AGE!!Median age (years)",
     "Margin of Error!!Total MOE!!Population 1 year and over!!AGE!!Median age (years)",
     "Margin of Error!!Moved; from different  state MOE!!Population 1 year and over!!AGE!!Median age (years)",
     "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Moved; from different  state MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Moved; from different county, same state MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Moved; from different  state!!Margin of Error!!Median income (dollars)",
@@ -230,18 +235,31 @@
     "Margin of Error!!Moved; from abroad MOE!!Population 1 year and over!!AGE!!Median age (years)",
     "Moved; from abroad!!Margin of Error!!Median income (dollars)",
     "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Moved; from different  state!!Margin of Error!!Median age (years)",
     "Margin of Error!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Total!!Margin of Error!!Median income (dollars)",
     "Margin of Error!!Total!!Population 1 year and over!!AGE!!Median age (years)",
     "Moved; from different county, same state!!Margin of Error!!Median age (years)",
     "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
+    "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Moved; from abroad MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Moved; within same county!!Margin of Error!!Median age (years)",
     "Total!!Margin of Error!!Median age (years)",
     "Margin of Error!!Moved; within same county MOE!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!Median income (dollars)",
     "Margin of Error!!Moved; from different county, same state!!Population 1 year and over!!AGE!!Median age (years)",
-    "Moved; from different county, same state!!Margin of Error!!Median income (dollars)"
+    "Moved; from different county, same state!!Margin of Error!!Median income (dollars)",
+    "Annotation of Margin of Error",
+    "Annotation of Estimate",
+    "Annotation of Total",
+    "Annotation of Moved; within same county",
+    "Annotation of Moved; from different county, same state",
+    "Annotation of Moved; from different  state",
+    "Annotation of Moved; from abroad"
   ],
   "denominators": {
     "Total!!Estimate!!AGE!!18 to 24 years": [
@@ -2355,6 +2373,186 @@
       "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
       "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
       "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$1 to $9,999 or loss"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$10,000 to $14,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$15,000 to $24,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$25,000 to $34,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$35,000 to $49,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$50,000 to $64,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$65,000 to $74,999"
+    ],
+    "Estimate!!Total!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more": [
+      "Estimate!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; within same county!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from different county, same state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from different  state!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Estimate!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more",
+      "Margin of Error!!Moved; from abroad!!INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Population 15 years and over!!$75,000 or more"
     ]
   },
   "ignoreTokens": [
@@ -2375,6 +2573,8 @@
     "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2012 INFLATION-ADJUSTED DOLLARS)",
     "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2014 INFLATION-ADJUSTED DOLLARS)",
     "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)",
+    "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)",
+    "INDIVIDUAL INCOME IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)",
     "Estimate",
     "RACE AND HISPANIC OR LATINO ORIGIN",
     "SEX"

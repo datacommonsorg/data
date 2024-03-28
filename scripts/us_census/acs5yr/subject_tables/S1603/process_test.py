@@ -21,11 +21,11 @@ from .process import S1603SubjectTableDataLoader
 #pylint: enable=import-error
 
 _TEST_DIR = os.path.join(_CODEDIR, 'testdata')
-_TEST_DATA_ZIP = os.path.join(_TEST_DIR, 'alabama.zip')
+_TEST_DATA_ZIP = os.path.join(_TEST_DIR, 'S1603.zip')
 _CONFIG_PATH = os.path.join(_CODEDIR, 'S1603_spec.json')
-_EXPECTED_TMCF = os.path.join(_TEST_DIR, 'output.tmcf')
-_EXPECTED_MCF = os.path.join(_TEST_DIR, 'output.mcf')
-_EXPECTED_CSV = os.path.join(_TEST_DIR, 'expected.csv')
+_EXPECTED_TMCF = os.path.join(_TEST_DIR, 'S1603_output.tmcf')
+_EXPECTED_MCF = os.path.join(_TEST_DIR, 'S1603_output.mcf')
+_EXPECTED_CSV = os.path.join(_TEST_DIR, 'S1603_cleaned.csv')
 _EXPECTED_CMAP = os.path.join(_TEST_DIR, 'column_map.json')
 
 
@@ -85,3 +85,11 @@ class ProcessTest(unittest.TestCase):
                 with open(_EXPECTED_CMAP) as expected_cmap_f:
                     expected_cmap_result = expected_cmap_f.read()
                     self.assertEqual(cmap_result, expected_cmap_result)
+
+
+def main(argv):
+    a = ProcessTest(unittest.TestCase)
+
+
+if __name__ == '__main__':
+    unittest.main()
