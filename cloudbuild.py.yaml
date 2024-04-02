@@ -2,7 +2,7 @@
 steps:
 
 - id: python_install
-  name: python:3.7
+  name: python:3.11
   entrypoint: /bin/sh
   waitFor: ['-']
   args:
@@ -18,7 +18,7 @@ steps:
 # to get both places where we submit code.
 #
 - id: python_test
-  name: python:3.7
+  name: python:3.11
   entrypoint: /bin/sh
   waitFor:
   - python_install
@@ -30,7 +30,7 @@ steps:
       ./run_tests.sh -p scripts/
 
 - id: python_format_check
-  name: python:3.7
+  name: python:3.11
   entrypoint: /bin/sh
   waitFor:
   - python_install
