@@ -4,7 +4,7 @@ dcid: C:mesh_record->Descriptor_dcid
 identifier: C:mesh_record->DescriptorID
 
 Node: E:mesh_record->E2
-typeOf: dcs:MeSHSupplementaryConcept
+typeOf: dcs:MeSHSupplementaryConceptRecord
 dcid: C:mesh_record->Record_dcid
 identifier: C:mesh_record->RecordID
 name: C:mesh_record->RecordName

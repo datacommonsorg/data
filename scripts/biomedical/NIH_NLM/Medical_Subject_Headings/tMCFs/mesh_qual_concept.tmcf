@@ -10,4 +10,4 @@ name: C:mesh_qual_concept->ConceptName
 description: C:mesh_qual_concept->ScopeNote
 identifier: C:mesh_qual_concept->ConceptUI
 isPreferredConcept: C:mesh_qual_concept->IsPreferredConcept
-hasMeSHQualifer: E:mesh_qual_concept->E1
+hasMeSHQualifier: E:mesh_qual_concept->E1
