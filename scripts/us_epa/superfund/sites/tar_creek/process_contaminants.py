@@ -192,10 +192,12 @@ def write_sv_mcf(output_path: str, sv_dict: dict, sv_list: list) -> None:
 
 
 def clean_dataset(row: pd.Series, column_list: list, sv_map: dict) -> None:
-    clean_csv = [pd.DataFrame(columns=[
-        'observationAbout', 'observationDate', 'variableMeasured', 'value',
-        'units'
-    ])]
+    clean_csv = [
+        pd.DataFrame(columns=[
+            'observationAbout', 'observationDate', 'variableMeasured', 'value',
+            'units'
+        ])
+    ]
 
     ignore_list = ['-', ' - ', 'NaN', 'n.a.', np.nan]
     ignore_columns = ['observationAbout', 'observationDate', 'contaminantType']
