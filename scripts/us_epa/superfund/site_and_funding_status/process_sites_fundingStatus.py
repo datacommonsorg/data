@@ -55,40 +55,60 @@ def add_rows_to_status_csv(row):
 
     ## add observation to current status StatVar
     df_list.append(
-        pd.DataFrame({
-            'observationAbout': 'epaSuperfundSiteId/' + row['Site EPA ID'],
-            'observationDate': '2021',
-            'variableMeasured': 'dcid:SuperfundFundingStatus_SuperfundSite',
-            'value': _STATUS_SCHEMA_MAP[row['Status']]
-        }, index=[0]))
+        pd.DataFrame(
+            {
+                'observationAbout': 'epaSuperfundSiteId/' + row['Site EPA ID'],
+                'observationDate': '2021',
+                'variableMeasured': 'dcid:SuperfundFundingStatus_SuperfundSite',
+                'value': _STATUS_SCHEMA_MAP[row['Status']]
+            },
+            index=[0]))
 
     ## add observations for proposed, listing and deletion dates based on notnull()
     if not pd.isnull(row['Proposed Date']):
         df_list.append(
-            pd.DataFrame({
-                'observationAbout': 'epaSuperfundSiteId/' + row['Site EPA ID'],
-                'observationDate': row['Proposed Date'],
-                'variableMeasured': 'dcid:SuperfundFundingStatus_SuperfundSite',
-                'value': 'dcs:ProposedNPLSite'
-            }, index=[0]))
+            pd.DataFrame(
+                {
+                    'observationAbout':
+                        'epaSuperfundSiteId/' + row['Site EPA ID'],
+                    'observationDate':
+                        row['Proposed Date'],
+                    'variableMeasured':
+                        'dcid:SuperfundFundingStatus_SuperfundSite',
+                    'value':
+                        'dcs:ProposedNPLSite'
+                },
+                index=[0]))
 
     if not pd.isnull(row['Listing Date']):
         df_list.append(
-            pd.DataFrame({
-                'observationAbout': 'epaSuperfundSiteId/' + row['Site EPA ID'],
-                'observationDate': row['Listing Date'],
-                'variableMeasured': 'dcid:SuperfundFundingStatus_SuperfundSite',
-                'value': 'dcs:FinalNPLSite'
-            }, index=[0]))
+            pd.DataFrame(
+                {
+                    'observationAbout':
+                        'epaSuperfundSiteId/' + row['Site EPA ID'],
+                    'observationDate':
+                        row['Listing Date'],
+                    'variableMeasured':
+                        'dcid:SuperfundFundingStatus_SuperfundSite',
+                    'value':
+                        'dcs:FinalNPLSite'
+                },
+                index=[0]))
 
     if not pd.isnull(row['Deletion Date']):
         df_list.append(
-            pd.DataFrame({
-                'observationAbout': 'epaSuperfundSiteId/' + row['Site EPA ID'],
-                'observationDate': row['Deletion Date'],
-                'variableMeasured': 'dcid:SuperfundFundingStatus_SuperfundSite',
-                'value': 'dcs:DeletedNPLSite'
-            }, index=[0]))
+            pd.DataFrame(
+                {
+                    'observationAbout':
+                        'epaSuperfundSiteId/' + row['Site EPA ID'],
+                    'observationDate':
+                        row['Deletion Date'],
+                    'variableMeasured':
+                        'dcid:SuperfundFundingStatus_SuperfundSite',
+                    'value':
+                        'dcs:DeletedNPLSite'
+                },
+                index=[0]))
     return pd.concat(df_list)
 
 
