@@ -209,13 +209,15 @@ def clean_dataset(row: pd.Series, column_list: list, sv_map: dict) -> None:
 
                 # add data to clean csv
                 clean_csv.append(
-                    pd.DataFrame({
-                        'observationAbout': row['observationAbout'],
-                        'observationDate': row['observationDate'],
-                        'variableMeasured': 'dcid:' + sv_map[sv_key],
-                        'value': row[column],
-                        'units': _UNIT_MAP[column]
-                    }, index=[0]))
+                    pd.DataFrame(
+                        {
+                            'observationAbout': row['observationAbout'],
+                            'observationDate': row['observationDate'],
+                            'variableMeasured': 'dcid:' + sv_map[sv_key],
+                            'value': row[column],
+                            'units': _UNIT_MAP[column]
+                        },
+                        index=[0]))
 
     ## append to a list of dataframes
     _CLEAN_CSV_FRAMES.append(pd.concat(clean_csv))
