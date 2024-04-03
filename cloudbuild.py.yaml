@@ -41,7 +41,7 @@ steps:
 
 # TODO(rsned): Uncomment once the existing source files are updated to pass lint.
 #- id: python_lint
-#  name: python:3.7
+#  name: python:3.11
 #  entrypoint: python3
 #  args: ["-m", "pylint", "util/", "scripts/", "import_automation"]
 #  # In cloudbuild, everything happens under /workspace path
