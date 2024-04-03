@@ -207,7 +207,7 @@ def clean_dataset(row: pd.Series, column_list: list, sv_map: dict) -> None:
             if row[column] not in ignore_list:
                 sv_key = column + '_' + row['contaminantType']
 
-                ## add data to clean csv
+                # add data to clean csv
                 clean_csv.append(
                     pd.DataFrame({
                         'observationAbout': row['observationAbout'],
@@ -215,7 +215,7 @@ def clean_dataset(row: pd.Series, column_list: list, sv_map: dict) -> None:
                         'variableMeasured': 'dcid:' + sv_map[sv_key],
                         'value': row[column],
                         'units': _UNIT_MAP[column]
-                    }))
+                    }, index=[0]))
 
     ## append to a list of dataframes
     _CLEAN_CSV_FRAMES.append(pd.concat(clean_csv))
