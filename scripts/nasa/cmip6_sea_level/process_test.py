@@ -36,6 +36,7 @@ class ProcessTest(unittest.TestCase):
         input_pattern = os.path.join(
             _TESTDIR, 'input/total_ssp119_medium_confidence_values.nc')
         with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_dir = '/tmp/cmip6'
             process.process_main('place', input_pattern, tmp_dir)
             with open(os.path.join(_TESTDIR, 'expected/place.csv')) as wantf:
                 with open(os.path.join(tmp_dir,
@@ -46,6 +47,7 @@ class ProcessTest(unittest.TestCase):
         self.maxDiff = None
         input_pattern = os.path.join(_TESTDIR, 'input/*.nc')
         with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_dir = '/tmp/cmip6'
             process.process_main('sv', input_pattern, tmp_dir)
             with open(os.path.join(_TESTDIR, 'expected/sv.mcf')) as wantf:
                 with open(os.path.join(tmp_dir,
@@ -56,6 +58,7 @@ class ProcessTest(unittest.TestCase):
         self.maxDiff = None
         input_pattern = os.path.join(_TESTDIR, 'input/*.nc')
         with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_dir = '/tmp/cmip6'
             process.process_main('stat', input_pattern, tmp_dir)
             for fname in [
                     'total_ssp119_medium_confidence_values',
