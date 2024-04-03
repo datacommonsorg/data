@@ -13,7 +13,7 @@
 # limitations under the License.
 '''
 Author: Samantha Piekos
-Date: 03/07/24
+Date: 04/02/24
 Name: format_mesh_qual.py
 Description: converts nested .xml to .csv and further breaks down the csv
 into four csvs containing invormation on qualifiers, concepts, terms or
@@ -228,7 +228,7 @@ def format_concept_df(df):
     df['ConceptName'] = df['ConceptName'].fillna(df['ConceptUI'])  
     # create qualifier and concept dcids
     df['Concept_dcid'] = 'bio/' + df['ConceptUI'].astype(str)
-    df['Qualifier_dcid'] = 'bio/' + df['ConceptUI'].astype(str)
+    df['Qualifier_dcid'] = 'bio/' + df['QualifierUI'].astype(str)
     # drop the duplicate rows
     df = df.drop_duplicates()
     # write df to csv

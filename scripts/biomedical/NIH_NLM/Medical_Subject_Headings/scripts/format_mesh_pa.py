@@ -54,6 +54,7 @@ def extract_data_from_xml(xml_filepath):
         for substance in action.find('PharmacologicalActionSubstanceList'):
             record_ui = substance.find('RecordUI').text
             record_name = substance.find('RecordName/String').text
+            record_name = record_name.strip('^')  # remove bad character
             record_ui_data.append(record_ui)
             record_name_data.append(record_name)
         
