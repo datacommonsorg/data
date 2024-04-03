@@ -88,7 +88,7 @@ measurementMethod: C:UNEnergy->Estimate
 
 
 def _print_debug(debug_level: int, *args):
-  if debug_level <= 1:
+    if debug_level <= 1:
         print("[", datetime.datetime.now(), "] ", *args, file=sys.stderr)
 
 
