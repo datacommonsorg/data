@@ -8,11 +8,12 @@ datacommons==1.4.3
 deepdiff==6.3.0
 earthengine-api
 flask_restful==0.3.9
-frozendict==1.2
+frozendict
 func-timeout==4.3.5
 geojson==2.5.0
 geopandas==0.8.1
 geopy
+google-cloud-run
 google-cloud-bigquery
 google-cloud-storage>=2.7.0
 google-cloud-logging==3.4.0
@@ -22,7 +23,7 @@ lxml==4.9.1
 matplotlib==3.3.0
 netCDF4==1.6.4
 numpy
-openpyxl==3.0.7
+openpyxl>=3.1.0
 pandas
 pylint
 pytest

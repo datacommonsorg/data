@@ -114,8 +114,7 @@ class BelowPovertyLineDataLoader:
                                                    start_index=10)
         df2011_12 = self._process_yearly_dataframe(year="2012-03",
                                                    start_index=20)
-        combined_df = df2004_05.append(df2009_10)
-        self.clean_df = combined_df.append(df2011_12)
+        self.clean_df = pd.concat([df2004_05, df2009_10, df2011_12])
 
         self._make_column_numerical("count_person_rural")
         self._make_column_numerical("percentage_person_rural")
