@@ -327,7 +327,7 @@ class SubjectTableDataLoaderBase:
                 obs_df['Column'] = column
 
                 # Replace empty places (unresolved geoIds) as null values
-                obs_df['Place'].replace('', np.nan, inplace=True)
+                obs_df['Place'] = obs_df['Place'].replace('', np.nan)
 
                 # Drop rows with observations for empty (null) values
                 obs_df.dropna(subset=['Place', 'Quantity'],
