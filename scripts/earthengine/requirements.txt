@@ -2,7 +2,7 @@
 bigquery
 dataclasses
 datacommons
-earthengine-api
+earthengine-api>=0.1.374
 geojson
 geopy
 google-cloud-logging
