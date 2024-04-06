@@ -15,9 +15,9 @@ geopandas==0.8.1
 geopy
 google-cloud-run
 google-cloud-bigquery
-google-cloud-storage>=2.7.0
-google-cloud-logging==3.4.0
-google-cloud-scheduler==2.10.0
+google-cloud-storage
+google-cloud-logging
+google-cloud-scheduler
 gspread
 lxml==4.9.1
 matplotlib==3.3.0
