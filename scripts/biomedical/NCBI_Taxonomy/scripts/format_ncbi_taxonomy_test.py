@@ -25,7 +25,8 @@ from format_ncbi_taxonomy import *
 MODULE_DIR_PATH = str(Path(os.path.dirname(__file__)).parents[0])
 
 
-class TestNCBITaxonomy(unittest.TestCase):    
+class TestNCBITaxonomy(unittest.TestCase):
+
     @classmethod
     def setUpClass(self):
         set_flages()
@@ -61,26 +62,31 @@ class TestNCBITaxonomy(unittest.TestCase):
     def test_check_mcf_entries_division(self):
         expected_mcf_list = []
         current_mcf_list = []
-        division_df =  DivisionCls().create_dataframe()
+        division_df = DivisionCls().create_dataframe()
         with tempfile.TemporaryDirectory() as tmp_dir:
             result_mcf_file = os.path.join(tmp_dir, 'test_mcf.mcf')
             DivisionCls().append_mcf_data(division_df, result_mcf_file)
-            with open(os.path.join(MODULE_DIR_PATH, 'test_data/division_enum_expected.mcf'), 'r') as mcf:
+            with open(
+                    os.path.join(MODULE_DIR_PATH,
+                                 'test_data/division_enum_expected.mcf'),
+                    'r') as mcf:
                 expected_mcf_list.extend(mcf.read().split('\n\n'))
             with open(result_mcf_file, 'r') as mcf:
                 current_mcf_list.extend(mcf.read().split('\n\n'))
 
         self.assertTrue(set(expected_mcf_list).issubset(set(current_mcf_list)))
 
-
     def test_check_mcf_entries_hosts(self):
         expected_mcf_list = []
         current_mcf_list = []
-        host_df =  HostCls().create_dataframe()
+        host_df = HostCls().create_dataframe()
         with tempfile.TemporaryDirectory() as tmp_dir:
             result_mcf_file = os.path.join(tmp_dir, 'test_mcf.mcf')
             HostCls().append_mcf_data(host_df, result_mcf_file)
-            with open(os.path.join(MODULE_DIR_PATH, 'test_data/host_enum_expected.mcf'), 'r') as mcf:
+            with open(
+                    os.path.join(MODULE_DIR_PATH,
+                                 'test_data/host_enum_expected.mcf'),
+                    'r') as mcf:
                 expected_mcf_list.extend(mcf.read().split('\n\n'))
             with open(result_mcf_file, 'r') as mcf:
                 current_mcf_list.extend(mcf.read().split('\n\n'))
@@ -90,11 +96,14 @@ class TestNCBITaxonomy(unittest.TestCase):
     def test_check_mcf_entries_nodes(self):
         expected_mcf_list = []
         current_mcf_list = []
-        nodes_df =  NodesCls().create_dataframe()
+        nodes_df = NodesCls().create_dataframe()
         with tempfile.TemporaryDirectory() as tmp_dir:
             result_mcf_file = os.path.join(tmp_dir, 'test_mcf.mcf')
             NodesCls().append_mcf_data(nodes_df, result_mcf_file)
-            with open(os.path.join(MODULE_DIR_PATH, 'test_data/nodes_enum_expected.mcf'), 'r') as mcf:
+            with open(
+                    os.path.join(MODULE_DIR_PATH,
+                                 'test_data/nodes_enum_expected.mcf'),
+                    'r') as mcf:
                 expected_mcf_list.extend(mcf.read().split('\n\n'))
             with open(result_mcf_file, 'r') as mcf:
                 current_mcf_list.extend(mcf.read().split('\n\n'))
