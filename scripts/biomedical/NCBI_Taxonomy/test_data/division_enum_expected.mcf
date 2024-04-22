@@ -1,0 +1,78 @@
+Node:dcid:BiologicalTaxonomicDivisionEnum
+name: "BiologicalTaxonomicDivisionEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "These are broad biological divisions that are commonly used to divide living organisms"
+
+Node:dcid:BiologicalTaxonomicDivisionBacteria
+name: Bacteria
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: BCT
+description:  
+
+Node:dcid:BiologicalTaxonomicDivisionEnvironmentalSamples
+name: Environmental samples
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: ENV
+description: Anonymous sequences cloned directly from the environment
+
+Node:dcid:BiologicalTaxonomicDivisionInvertebrates
+name: Invertebrates
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: INV
+description:  
+
+Node:dcid:BiologicalTaxonomicDivisionMammals
+name: Mammals
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: MAM
+description:  
+
+Node:dcid:BiologicalTaxonomicDivisionPhages
+name: Phages
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: PHG
+description:  
+
+Node:dcid:BiologicalTaxonomicDivisionPlantsAndFungi
+name: Plants and Fungi
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: PLN
+description:  
+
+Node:dcid:BiologicalTaxonomicDivisionPrimates
+name: Primates
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: PRI
+description:  
+
+Node:dcid:BiologicalTaxonomicDivisionRodents
+name: Rodents
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: ROD
+description:  
+
+Node:dcid:BiologicalTaxonomicDivisionSyntheticAndChimeric
+name: Synthetic and Chimeric
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: SYN
+description:  
+
+Node:dcid:BiologicalTaxonomicDivisionUnassigned
+name: Unassigned
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: UNA
+description: No species nodes should inherit this division assignment
+
+Node:dcid:BiologicalTaxonomicDivisionVertebrates
+name: Vertebrates
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: VRT
+description:  
+
+Node:dcid:BiologicalTaxonomicDivisionViruses
+name: Viruses
+typeOf: dcs:BiologicalTaxonomicDivisionEnum
+acronym: VRL
+description:  
+
