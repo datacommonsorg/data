@@ -89,13 +89,14 @@ class ProcessGeoJsonTest(unittest.TestCase):
       output_mcf_prefix = os.path.join(tmp_dir, 'sample_output')
       geojson_dict = process_geojson.process_geojson_files(
           input_files=input_geojson,
-          input_nodes=sys.maxsize,
+          num_input_nodes=sys.maxsize,
           properties=[],
           key_property='',
           place_name_props=['shapeName'],
           dcid_template='',
           output_csv_file='',
-          place_csv_file=os.path.join(_TESTDIR, 'places.csv'),
+          place_csv_files=os.path.join(_TESTDIR, 'places.csv'),
+          place_csv_key='place_name',
           output_mcf_prefix=output_mcf_prefix,
           output_mcf_props=[
               (
