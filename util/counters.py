@@ -23,7 +23,7 @@ from typing import NamedTuple
 # Options for counters
 class CounterOptions(NamedTuple):
     # Enable debug counters with additional suffixes.
-    debug: bool = False
+    debug: bool = logging.level_debug()
     # Emit counters once every 30 secs.
     show_every_n_sec: int = 30
     # Counter for processing stage

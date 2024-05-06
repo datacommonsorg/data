@@ -300,6 +300,8 @@ def add_mcf_node(
     node = nodes[dcid]
     for prop, value in pvs.items():
         add_pv_to_node(prop, value, node, append_values, strip_namespaces)
+    logging.level_debug() and logging.debug(
+        f'Added node {dcid} with properties: {pvs.keys()}')
     return nodes
 
 
@@ -350,11 +352,17 @@ def load_mcf_nodes(
             num_nodes = 0
             num_props = 0
             with file_util.FileIO(file, 'r', errors='ignore') as input_f:
+                line_no = 0
                 pvs = {}
                 for line in input_f:
+                    line_no += 1
+                    logging.level_debug() and logging.debug(
+                        f'Processing line:{file}:{line_no}:{line[:100]}')
                     # Strip leading trailing whitespaces
                     line = re.sub(r'\s+$', '', re.sub(r'^\s+', '', line))
                     if line and line[0] == '"' and line[-1] == '"':
+                        # Remove quotes around the whole line for sources like
+                        # gsheet
                         line = line[1:-1]
                     if line == '""':
                         # MCFs downloaded from sheets have "" for empty lines.
@@ -534,6 +542,9 @@ def normalize_list(value: str, sort: bool = True) -> str:
     """
     if ',' in value:
         if '"' in value:
+            if value[0] == '"' and value[-1] == '"' and len(value) > 1000:
+                # Retain very long strings, such as geoJsonCoordinates, as is.
+                return value
             # Sort comma separated text values.
             value_list = get_value_list(value)
         else:
@@ -630,6 +641,9 @@ def normalize_value(value,
     if value:
         if isinstance(value, str):
             value = value.strip()
+            if value[0] == '"' and value[-1] == '"' and len(value) > 100:
+                # Retain very long strings, such as geoJsonCoordinates, as is.
+                return value
             if ',' in value and maybe_list:
                 return normalize_list(value)
             if value[0] == '[':
@@ -843,6 +857,7 @@ def _is_pv_in_dict(prop: str, value: str, pvs: dict) -> bool:
 
 
 def main(_):
+    logging.set_verbosity(2)
     if not _FLAGS.input_mcf or not _FLAGS.output_mcf:
         print(f'Please provide input and output MCF files with --input_mcf and'
               f' --output_mcf.')
