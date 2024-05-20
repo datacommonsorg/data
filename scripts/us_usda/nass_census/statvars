@@ -58,7 +58,7 @@ CHICKENS, BROILERS - OPERATIONS WITH SALES^Count_Farm_Broilers
 CHICKENS, BROILERS - SALES, MEASURED IN HEAD^Count_FarmInventory_Broilers
 CORN, GRAIN - OPERATIONS WITH AREA HARVESTED^Count_Farm_CornForGrain
 CORN, GRAIN - ACRES HARVESTED^Area_Farm_CornForGrain^Acre
-CORN, GRAIN - PRODUCTION, MEASURED IN BU^Amout_FarmInventory_CornForGrain^Bushel
+CORN, GRAIN - PRODUCTION, MEASURED IN BU^Amount_FarmInventory_CornForGrain^Bushel
 CORN, SILAGE - OPERATIONS WITH AREA HARVESTED^Count_Farm_CornForSilageOrGreenchop
 CORN, SILAGE - ACRES HARVESTED^Area_Farm_CornForSilageOrGreenchop^Acre
 CORN, SILAGE - PRODUCTION, MEASURED IN TONS^Amount_FarmInventory_CornForSilageOrGreenchop^Ton
