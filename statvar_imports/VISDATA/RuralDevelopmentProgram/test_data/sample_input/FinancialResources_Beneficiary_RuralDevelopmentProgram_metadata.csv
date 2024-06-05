@@ -1,0 +1,14 @@
+parameter,value
+url,
+description,Financial resources made available to beneficiary families of the Rural Development Program
+#place_type,
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,
+#places_resolved_csv,
+output_columns,"observationAbout, observationDate, value, variableMeasured,observationPeriod,measurementQualifier,unit"
+header_rows,1
+#schemaless,1
