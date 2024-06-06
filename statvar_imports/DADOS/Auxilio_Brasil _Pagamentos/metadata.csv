@@ -1,0 +1,19 @@
+parameter,value
+url,https://www.gov.br/pt-br/servicos/receber-o-auxilio-brasil-pab
+description,Brazil Pact againt hunger - DADOS ABERTOS MDS
+#place_type,Country
+#places_within,
+start_date,2021
+end_date,2023
+release_frequency,1Month
+process,
+comments,
+output_columns,"observationAbout, observationDate,observationPeriod, value, variableMeasured, unit,measurementQualifier"
+mapped_rows,1
+mapped_columns,7
+header_rows,1
+#input_rows,20
+drop_statvars_without_svobs,0
+#debug,1
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1XYf7wK9sr8sqoGqZ7VAeatSnRvj_RInlwOubwti7YTk/edit#gid=178016826
+pv_map,https://docs.google.com/spreadsheets/d/1-eXPVPescYKP3MMFonfmKkrhIcY0weJb17jKppWGyBw/edit#gid=1183410663

@@ -1,0 +1,5 @@
+Node: dcid:AuxilioBrasil
+typeOf: dcid:BenefitsStatusEnum
+name: "Auxilio Brasil"
+isProvisional: dcs:True
+

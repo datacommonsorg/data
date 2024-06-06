@@ -1,0 +1,10 @@
+Node: E:test_data->E0
+observationAbout: C:test_data->observationAbout
+observationDate: C:test_data->observationDate
+observationPeriod: C:test_data->observationPeriod
+value: C:test_data->value
+variableMeasured: C:test_data->variableMeasured
+unit: C:test_data->unit
+#Aggregate: sum
+typeOf: dcs:StatVarObservation
+measurementQualifier: Monthly
