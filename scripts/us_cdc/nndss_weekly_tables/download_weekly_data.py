@@ -22,7 +22,7 @@ from absl import flags, app
 from bs4 import BeautifulSoup
 
 _START = 2006
-_END = 2025 #datetime.date.today().year + 1  #to make the last year inclusive
+_END = 2025  #datetime.date.today().year + 1  #to make the last year inclusive
 
 _BASE_URL = "https://wonder.cdc.gov/nndss/"
 _WEEKLY_TABLE_2010 = _BASE_URL + "nndss_weekly_tables_menu.asp?mmwr_year={year}&mmwr_week={week}"
@@ -94,7 +94,7 @@ def scrape_table_links_from_page(page_url: str,
     table_link_list = [
         tag.find("a")["href"] for tag in soup.select("tr:has(a)")
     ]
-    
+
     for table_link in table_link_list:
         # Between years 1996 to 2016, select requestMode=Submit
         if 'Submit' in table_link:
@@ -102,7 +102,7 @@ def scrape_table_links_from_page(page_url: str,
             # extract filename from link patterns like https://wonder.cdc.gov/nndss/nndss_reps.asp?mmwr_year=1996&mmwr_week=01&mmwr_table=2A&request=Submit
             filename = table_url.split('?')[1].split('&request')[0].replace(
                 '=', '_').replace('&', '_')
-            print("Submit" , table_url, filename, output_path, update)
+            print("Submit", table_url, filename, output_path, update)
             extract_table_from_link(table_url, filename, output_path, update)
 
         # From year 2017, the base link structure has changed to: https://wonder.cdc.gov/nndss/static/2017/01/2017-01-table1.html
