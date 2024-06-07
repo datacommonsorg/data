@@ -28,7 +28,7 @@ The script creates folders for the output files. These folders will have the sam
 place resolve by name:
 
 For place resolving, run the bash script "./municipality_name_correction.sh" Make sure to update the file path within the script itself.
-This example demonstrates how to modify a file using a command called sed.
+This example demonstrates how to modify a "<file_path>/<file_name.csv>".
 	
 ```
 sed -i 's/,CRUZEIRO DO SUL,/,AC CRUZEIRO DO SUL,/g;
@@ -41,7 +41,7 @@ python3 stat_var_processor.py --input_data='data/statvar_imports/brazil_dados/Au
 
 
 
-The script generates output in three formats: CSV, TMCF, & MCF files.
+The script generates CSV, TMCF, & MCF files.
 
 ### Licence
 License: Creative Commons Attribution
