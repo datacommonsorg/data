@@ -1,0 +1,16 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/brazil_dados/Auxilio_Brasil_Pagamentos/test_data/sample_input/auxilio_brazil_pagamentos_data.csv --pv_map=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/brazil_dados/Auxilio_Brasil_Pagamentos/auxilio_brazil_pagamentos_pvmap.csv --output_path=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/brazil_dados/Auxilio_Brasil_Pagamentos/test_data/sample_output/auxilio_brazil_pagamentos --config=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/brazil_dados/Auxilio_Brasil_Pagamentos/auxilio_brazil_pagamentos_metadata.csv" on 2024-06-07 13:03:05.805582
+
+Node: dcid:Amount_Person_AuxilioBrasil
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+benefitsStatus: dcid:AuxilioBrasil
+
+Node: dcid:Count_Person_AuxilioBrasil
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+benefitsStatus: dcid:AuxilioBrasil
+
