@@ -29,3 +29,5 @@ tax_id,dcid
 9646,dcid:bio/AiluropodaMelanoleuca
 9483,dcid:bio/CallithrixJacchus
 121225,dcid:bio/PediculusHumanus
+28901,dcid:bio/SalmonellaEnterica
+157673,dcid:bio/MannheimiaSucciniciproducens

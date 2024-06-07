@@ -18,15 +18,15 @@ import os
 import copy
 import filecmp
 import unittest
+from pathlib import Path
 from process import *
 
 MODULE_DIR = str(Path(os.path.dirname(__file__)))
-print(MODULE_DIR)
 _FLAGS = None
 def set_flag():
 	global _FLAGS
 	_FLAGS = flags.FLAGS
-	flags.DEFINE_string('output_dir', 'scripts/test_data/output_file/ncbi_assembly_summary.csv',
+	flags.DEFINE_string('output_dir', 'test_data/output_file/',
                     'Output directory for generated files.')
 	flags.DEFINE_string('input_dir', 'scripts/test_data/input/assembly_summary_genbank.txt',
                     'Input directory where .txt files downloaded.')	
@@ -44,7 +44,8 @@ class TestSummaryReport(unittest.TestCase):
 
     def test_csv_check(self):
         main(_FLAGS)
-        same = filecmp.cmp(_FLAGS.output_dir, MODULE_DIR+'/test_data/output_file/expected_ncbi_assembly_summary.csv')
+        test_output= os.path.join(MODULE_DIR, _FLAGS.output_dir)
+        same = filecmp.cmp(os.path.join(test_output,'ncbi_assembly_summary.csv'), MODULE_DIR+'/test_data/output_file/expected_ncbi_assembly_summary.csv')
         self.assertTrue(same)
 
 
