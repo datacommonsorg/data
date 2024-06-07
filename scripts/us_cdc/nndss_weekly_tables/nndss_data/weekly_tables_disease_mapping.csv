@@ -1,0 +1,277 @@
+original,replacement,diseases,dcid,sameAs
+AIDS  *;Current  quarter,Acquired Immune Deficiency Syndrome;Current quarter,Acquired Immune Deficiency Syndrome,AIDS,
+Anthrax;Current  week,Anthrax;Current week,Anthrax,AnthraxDisease,bio/DOID_7427
+Anthrax;Current week,Anthrax;Current week,Anthrax,AnthraxDisease,bio/DOID_7427
+Babesiosis;Current  week,Babesiosis;Current week,Babesiosis,Babesiosis,bio/DOID_9643
+Babesiosis;Current week,Babesiosis;Current week,Babesiosis,Babesiosis,bio/DOID_9643
+Brucellosis;Current  week,Current week;Brucellosis,Brucellosis,Brucellosis,bio/DOID_11077
+Brucellosis;Current week,Current week;Brucellosis,Brucellosis,Brucellosis,bio/DOID_11077
+Campylobacteriosis;Current  week,Campylobacteriosis;Current week,Campylobacteriosis,Campylobacteriosis,bio/DOID_13622
+Campylobacteriosis;Current week,Campylobacteriosis;Current week,Campylobacteriosis,Campylobacteriosis,bio/DOID_13622
+"Candida auris  , clinical §;Current  week",Candida auris;clinical;Current week,Candida auris,CandidaAuris,
+"Candida auris  , clinical §;Current week",Candida auris;clinical;Current week,Candida auris,CandidaAuris,
+"Candida auris  , clinical;Current week",Candida auris;clinical;Current week,Candida auris,CandidaAuris,
+Carbapenemase-producing carbapenem-resistant  Enterobacteriaceae  §;Current  week,Carbapenemase-producing carbapenem-resistant Enterobacteriaceae;Current week,Carbapenem Resistant Enterobacteriaceae,CarbapenemResistantEnterobacteriaceae,
+Carbapenemase-producing carbapenem-resistant  Enterobacteriaceae  §;Current week,Carbapenemase-producing carbapenem-resistant Enterobacteriaceae;Current week,Carbapenem Resistant Enterobacteriaceae,CarbapenemResistantEnterobacteriaceae,
+Carbapenemase-producing carbapenem-resistant  Enterobacteriaceae;Current week,Carbapenemase-producing carbapenem-resistant Enterobacteriaceae;Current week,Carbapenem Resistant Enterobacteriaceae,CarbapenemResistantEnterobacteriaceae,
+Chancroid;Current  week,Current week;Chancroid,Chancroid,Chancroid,bio/DOID_13778
+Chancroid;Current week,Current week;Chancroid,Chancroid,Chancroid,bio/DOID_13778
+;Varicella (chickenpox);Current  week,Current week;Chickenpox,Chickenpox,Chickenpox,bio/DOID_8659
+Varicella (chickenpox);Current  week,Current week;Chickenpox,Chickenpox,Chickenpox,bio/DOID_8659
+Varicella morbidity;Current  week,Current week;Chickenpox,Chickenpox,Chickenpox,bio/DOID_8659
+"Arboviral diseases, neuroinvasive and non-neuroinvasive;Chikungunya virus disease;Current  week",Current week;Chikungunya virus disease,Chikungunya virus disease,Chikungunya,bio/DOID_0050012
+Arboviral diseases;Chikungunya virus disease;Current week,Current week;Chikungunya virus disease,Chikungunya virus disease,Chikungunya,bio/DOID_0050012
+Chlamydia †;Current week,Chlamydia trachomatis infection;Current week,Chlamydia trachomatis infection,Chlamydia,bio/DOID_11263
+Chlamydia  †;Current  week,Chlamydia trachomatis infection;Current week,Chlamydia trachomatis infection,Chlamydia,bio/DOID_11263
+Chlamydia trachomatis  infection §;Current week,Chlamydia trachomatis infection;Current week,Chlamydia trachomatis infection,Chlamydia,bio/DOID_11263
+Chlamydia trachomatis  infection;Current  week,Chlamydia trachomatis infection;Current week,Chlamydia trachomatis infection,Chlamydia,bio/DOID_11263
+Chlamydia trachomatis  infection;Current week,Chlamydia trachomatis infection;Current week,Chlamydia trachomatis infection,Chlamydia,bio/DOID_11263
+Cholera;Current  week,Current week;cholera,cholera,Cholera,bio/DOID_1498
+Cholera;Current week,Current week;cholera,cholera,Cholera,bio/DOID_1498
+Coccidioidomycosis;Current  week,Coccidioidomycosis;Current week,Coccidioidomycosis,Coccidioidomycosis,bio/DOID_13450
+Coccidioidomycosis;Current week,Coccidioidomycosis;Current week,Coccidioidomycosis,Coccidioidomycosis,bio/DOID_13450
+;Cryptosporidiosis;Current  week,Cryptosporidiosis;Current week,Cryptosporidiosis,Cryptosporidiosis,bio/DOID_1733
+Cryptosporidiosis;Current  week,Cryptosporidiosis;Current week,Cryptosporidiosis,Cryptosporidiosis,bio/DOID_1733
+Cryptosporidiosis;Current week,Cryptosporidiosis;Current week,Cryptosporidiosis,Cryptosporidiosis,bio/DOID_1733
+Cyclosporiasis;Current  week,Current week;Cyclosporiasis,Cyclosporiasis,Cyclosporiasis,bio/DOID_12750
+Cyclosporiasis;Current week,Current week;Cyclosporiasis,Cyclosporiasis,Cyclosporiasis,bio/DOID_12750
+Dengue virus infection;Dengue †;Current  week,dengue fever;Current week,dengue fever,DengueDisease,bio/DOID_12205
+Dengue Virus Infection;Dengue Fever  §;Current  week,dengue fever;Current week,dengue fever,DengueDisease,bio/DOID_12205
+Dengue Virus Infection;Dengue Fever  †;Current  week,dengue fever;Current week,dengue fever,DengueDisease,bio/DOID_12205
+Dengue virus infections §;Dengue;Current  week,dengue fever;Current week,dengue fever,DengueDisease,bio/DOID_12205
+Dengue virus infections;Dengue;Current week,dengue fever;Current week,dengue fever,DengueDisease,bio/DOID_12205
+Dengue virus infections §;Dengue-like illness;Current  week,Dengue-like illness;Current week,Dengue-like illness,DengueLikeIllness,
+Dengue virus infections;Dengue-like illness;Current week,Dengue-like illness;Current week,Dengue-like illness,DengueLikeIllness,
+"Arboviral diseases, neuroinvasive and non-neuroinvasive;Eastern equine encephalitis virus disease;Current  week",Current week;Eastern equine encephalitis virus disease,Eastern equine encephalitis virus disease,EasternEquineEncephalitis,bio/DOID_10841
+Arboviral diseases;Eastern equine encephalitis virus disease;Current week,Current week;Eastern equine encephalitis virus disease,Eastern equine encephalitis virus disease,EasternEquineEncephalitis,bio/DOID_10841
+Ehrlichiosis and Anaplasmosis (continued);Ehrlichia ewingii  infection;Current  week,Current week;Ehrlichia ewingii infection,Ehrlichia ewingii infection,EhrlichiaEwingiiInfection,
+Ehrlichiosis and Anaplasmosis;Ehrlichia ewingii  infection;Current  week,Current week;Ehrlichia ewingii infection,Ehrlichia ewingii infection,EhrlichiaEwingiiInfection,
+Ehrlichiosis and Anaplasmosis;Ehrlichia ewingii  infection;Current week,Current week;Ehrlichia ewingii infection,Ehrlichia ewingii infection,EhrlichiaEwingiiInfection,
+Ehrlichiosis and Anaplasmosis (continued);Undetermined;Current  week,Current week;UndeterminedEhrlichiosis/Anaplasmosis,UndeterminedEhrlichiosis/Anaplasmosis,Ehrlichiosis,bio/DOID_10242
+Ehrlichiosis and Anaplasmosis;Undetermined ehrlichiosis/anaplasmosis;Current week,Current week;UndeterminedEhrlichiosis/Anaplasmosis,UndeterminedEhrlichiosis/Anaplasmosis,Ehrlichiosis,bio/DOID_10242
+Ehrlichiosis and Anaplasmosis;Undetermined;Current  week,Current week;UndeterminedEhrlichiosis/Anaplasmosis,UndeterminedEhrlichiosis/Anaplasmosis,Ehrlichiosis,bio/DOID_10242
+Ehrlichiosis/Anaplasmosis  §;Undetermined;Current  week,Current week;UndeterminedEhrlichiosis/Anaplasmosis,UndeterminedEhrlichiosis/Anaplasmosis,Ehrlichiosis,bio/DOID_10242
+Ehrlichiosis/Anaplasmosis  †;Undetermined;Current  week,Current week;UndeterminedEhrlichiosis/Anaplasmosis,UndeterminedEhrlichiosis/Anaplasmosis,Ehrlichiosis,bio/DOID_10242
+Ehrlichiosis/Anaplasmosis §;Undetermined;Current  week,Current week;UndeterminedEhrlichiosis/Anaplasmosis,UndeterminedEhrlichiosis/Anaplasmosis,Ehrlichiosis,bio/DOID_10242
+Botulism;Foodborne;Current  week,Foodborne Botulism;Current week,Foodborne Botulism,FoodborneBotulism,bio/DOID_0050352
+Botulism;Foodborne;Current week,Foodborne Botulism;Current week,Foodborne Botulism,FoodborneBotulism,bio/DOID_0050352
+Giardiasis;Current  week,Giardiasis;Current week,Giardiasis,Giardiasis,bio/DOID_10718
+Giardiasis;Current week,Giardiasis;Current week,Giardiasis,Giardiasis,bio/DOID_10718
+Gonorrhea;Current  week,Current week;Gonorrhea,Gonorrhea,Gonorrhea,bio/DOID_7551
+Gonorrhea;Current week,Current week;Gonorrhea,Gonorrhea,Gonorrhea,bio/DOID_7551
+"Haemophilus influenzae  , invasive disease (age <5 years);Serotype b;Current  week",Age <5 years;Haemophilus influenzae;invasive disease;Current week;Serotype b,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae, invasive, All ages, all serotypes;Current week",Current week;Haemophilus influenzae;invasive disease;All ages;all serotypes,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae  , invasive disease (all ages, all serotypes);All ages, all serotypes;Current  week",Current week;Haemophilus influenzae;invasive disease;All ages;all serotypes,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae  , invasive disease, (age <5 years) (continued);Non-b serotype;Current  week",Age <5 years;Haemophilus influenzae;invasive disease;Current week;Non-b serotype,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae  , invasive disease, (age <5 years) (continued);Nontypeable;Current  week",Age <5 years;Haemophilus influenzae;invasive disease;Current week;Nontypeable,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae  , invasive disease, (age <5 years) (continued);Unknown serotype;Current  week",Age <5 years;Haemophilus influenzae;invasive disease;Current week;Unknown serotype,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae  §  ,  invasive,  All ages, all serotypes;Current  week",Current week;Haemophilus influenzae;invasive disease;All ages;all serotypes,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae,  invasive  §  All ages, all serotypes;Current  week",Current week;Haemophilus influenzae;invasive disease;All ages;all serotypes,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae,  invasive §  All ages, all serotypes;Current  week",Current week;Haemophilus influenzae;invasive disease;All ages;all serotypes,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae,  invasive disease  (all ages, all serotypes);Current  week",Current week;Haemophilus influenzae;invasive disease;All ages;all serotypes,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae,  invasive disease;Age <5 years;Non-b serotype;Current week",Age <5 years;Haemophilus influenzae;invasive disease;Current week;Non-b serotype,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae,  invasive disease;Age <5 years;Nontypeable;Current week",Age <5 years;Haemophilus influenzae;invasive disease;Current week;Nontypeable,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae,  invasive disease;Age <5 years;Serotype b;Current week",Age <5 years;Haemophilus influenzae;invasive disease;Current week;Serotype b,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae,  invasive disease;Age <5 years;Unknown serotype;Current week",Age <5 years;Haemophilus influenzae;invasive disease;Current week;Unknown serotype,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae,  invasive disease;All ages, all serotypes;Current week",Current week;Haemophilus influenzae;invasive disease;All ages;all serotypes,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae,  invasive,  All ages, all serotypes  †;Current  week",Current week;Haemophilus influenzae;invasive disease;All ages;all serotypes,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae,  invasive,  All ages, all serotypes;Current  week",Current week;Haemophilus influenzae;invasive disease;All ages;all serotypes,Haemophilus influenzae,HaemophilusInfluenzae,
+"Hantavirus infection, non-hantavirus pulmonary syndrome §;Current week",Current week;Non-hantavirus pulmonary syndrome,Non-hantavirus pulmonary syndrome,HaemophilusMeningitis,bio/DOID_0080179
+"Hantavirus infection, non-hantavirus pulmonary syndrome;Current  week",Current week;Non-hantavirus pulmonary syndrome,Non-hantavirus pulmonary syndrome,HaemophilusMeningitis,bio/DOID_0080179
+Hantavirus pulmonary syndrome ¶;Current week,Current week;Hantavirus pulmonary syndrome,Hantavirus pulmonary syndrome,HantavirusPulmonarySyndrome,bio/DOID_14472
+Hantavirus pulmonary syndrome;Current  week,Current week;Hantavirus pulmonary syndrome,Hantavirus pulmonary syndrome,HantavirusPulmonarySyndrome,bio/DOID_14472
+Hantavirus pulmonary syndrome;Current week,Current week;Hantavirus pulmonary syndrome,Hantavirus pulmonary syndrome,HantavirusPulmonarySyndrome,bio/DOID_14472
+Hemolytic uremic syndrome post-diarrheal;Current  week,Hemolytic uremic syndrome;post-diarrheal;Current week,Hemolytic uremic syndrome,HemolyticUremicSyndrome,bio/DOID_12554
+Hemolytic uremic syndrome post-diarrheal;Current week,Hemolytic uremic syndrome;post-diarrheal;Current week,Hemolytic uremic syndrome,HemolyticUremicSyndrome,bio/DOID_12554
+"Hepatitis (viral, acute, by type) †;A;Current  week",Current week;Hepatitis A;Acute,Hepatitis A,HepatitisA,bio/DOID_12547
+"Hepatitis (viral, acute), by type;A;Current week",Current week;Hepatitis A;Acute,Hepatitis A,HepatitisA,bio/DOID_12547
+"Hepatitis (viral, acute), by type;A;Current week",Current week;Hepatitis A;Acute,Hepatitis A,HepatitisA,bio/DOID_12547
+"Hepatitis (viral, acute, by type);A;Current  week",Current week;Hepatitis A;Acute,Hepatitis A,HepatitisA,bio/DOID_12547
+"Hepatitis (viral, acute), by type  †;A;Current  week",Current week;Hepatitis A;Acute,Hepatitis A,HepatitisA,bio/DOID_12547
+"Hepatitis (viral, acute), by type;A;Current  week",Current week;Hepatitis A;Acute,Hepatitis A,HepatitisA,bio/DOID_12547
+"Hepatitis A, acute;Current week",Current week;Hepatitis A;Acute,Hepatitis A,HepatitisA,bio/DOID_12547
+"Hepatitis (viral, acute), by type;B;Current week",Current week;Hepatitis B;Acute,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis (viral, acute, by type) †;B;Current  week",Current week;Hepatitis B;Acute,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis (viral, acute, by type);B;Current  week",Current week;Hepatitis B;Acute,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis (viral, acute), by type  †;B;Current  week",Current week;Hepatitis B;Acute,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis (viral, acute), by type;B;Current  week",Current week;Hepatitis B;Acute,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis B, acute;Current week",Current week;Hepatitis B;Acute,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis B, perinatal infection;Current  week",Current week;Hepatitis B;Acute;Perinatal infection,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis B, perinatal infection;Current week",Current week;Hepatitis B;Acute;Perinatal infection,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis (viral, acute, by type) †;C (confirmed);Current  week",Current week;Hepatitis C;Acute;Confirmed,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis (viral, acute, by type) †;C (probable);Current  week",Current week;Hepatitis C;Acute;Probable,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis (viral, acute), by type § (Continued);C  Confirmed;Current  week",Current week;Hepatitis C;Acute;Confirmed,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis (viral, acute), by type § (Continued);C  Probable;Current  week",Current week;Hepatitis C;Acute;Probable,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis (viral, acute), by type;C;Current  week",Current week;Hepatitis C;Acute;Confirmed,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis C (viral, acute) §;Confirmed;Current  week",Current week;Hepatitis C;Acute;Confirmed,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis C (viral, acute) §;Probable;Current  week",Current week;Hepatitis C;Acute;Probable,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis C, acute §;Confirmed;Current week",Current week;Hepatitis C;Acute;Confirmed,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis C, acute §;Probable;Current week",Current week;Hepatitis C;Acute;Probable,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis C, perinatal infection;Current  week",Current week;Hepatitis C;Acute;Perinatal infection,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis C, perinatal infection;Current week",Current week;Hepatitis C;Acute;Perinatal infection,Hepatitis C,HepatitisC,bio/DOID_1883
+HIV/AIDS  *;Current  quarter,HIV/Acquired Immune Deficiency Syndrome;Current quarter,HIV/Acquired Immune Deficiency Syndrome;Current quarter,HIV_AIDS,
+Ehrlichiosis and Anaplasmosis;Anaplasma phagocytophilum  infection;Current  week,Anaplasma phagocytophilum infection;Current week,Anaplasma phagocytophilum infection,HumanGranulocyticAnaplasmosis,bio/DOID_0050025
+Ehrlichiosis and Anaplasmosis;Anaplasma phagocytophilum  infection;Current week,Anaplasma phagocytophilum infection;Current week,Anaplasma phagocytophilum infection,HumanGranulocyticAnaplasmosis,bio/DOID_0050025
+Ehrlichiosis/Anaplasmosis  §;Anaplasma phagocytophilum;Current  week,Anaplasma phagocytophilum infection;Current week,Anaplasma phagocytophilum infection,HumanGranulocyticAnaplasmosis,bio/DOID_0050025
+Ehrlichiosis/Anaplasmosis  †;Anaplasma phagocytophilum;Current  week,Anaplasma phagocytophilum infection;Current week,Anaplasma phagocytophilum infection,HumanGranulocyticAnaplasmosis,bio/DOID_0050025
+Ehrlichiosis/Anaplasmosis §;Anaplasma phagocytophilum;Current  week,Anaplasma phagocytophilum infection;Current week,Anaplasma phagocytophilum infection,HumanGranulocyticAnaplasmosis,bio/DOID_0050025
+Ehrlichiosis and Anaplasmosis;Ehrlichia chaffeensis  infection;Current  week,Current week;Ehrlichia chaffeensis,Ehrlichia chaffeensis,HumanMonocyticEhrlichiosis,bio/DOID_0050026
+Ehrlichiosis and Anaplasmosis;Ehrlichia chaffeensis  infection;Current week,Current week;Ehrlichia chaffeensis,Ehrlichia chaffeensis,HumanMonocyticEhrlichiosis,bio/DOID_0050026
+Ehrlichiosis/Anaplasmosis  §;Ehrlichia chaffeensis;Current  week,Current week;Ehrlichia chaffeensis,Ehrlichia chaffeensis,HumanMonocyticEhrlichiosis,bio/DOID_0050026
+Ehrlichiosis/Anaplasmosis  †;Ehrlichia chaffeensis;Current  week,Current week;Ehrlichia chaffeensis,Ehrlichia chaffeensis,HumanMonocyticEhrlichiosis,bio/DOID_0050026
+Ehrlichiosis/Anaplasmosis §;Ehrlichia chaffeensis;Current  week,Current week;Ehrlichia chaffeensis,Ehrlichia chaffeensis,HumanMonocyticEhrlichiosis,bio/DOID_0050026
+Botulism;Infant;Current  week,Infant Botulism;Current week,Infant Botulism,InfantBotulism,bio/DOID_0050354
+Botulism;Infant;Current week,Infant Botulism;Current week,Infant Botulism,InfantBotulism,bio/DOID_0050354
+Influenza-associated pediatric mortality §;Current  week,Current week;Influenza;pediatric mortality,Influenza,Influenza,bio/DOID_8469
+Influenza-associated pediatric mortality §;Current week,Current week;Influenza;pediatric mortality,Influenza,Influenza,bio/DOID_8469
+"Arboviral diseases, neuroinvasive and non-neuroinvasive (continued);Jamestown Canyon virus disease;Current  week",Jamestown Canyon virus disease;Current week,Jamestown Canyon virus disease,JamestownCanyonVirusDisease,
+Arboviral diseases;Jamestown Canyon virus disease;Current week,Jamestown Canyon virus disease;Current week,Jamestown Canyon virus disease,JamestownCanyonVirusDisease,
+"Arboviral diseases, neuroinvasive and non-neuroinvasive (continued);La Crosse virus disease;Current  week",La Crosse virus disease;Current week,La Crosse virus disease,LaCrosseVirusDisease,bio/DOID_0050118
+Arboviral diseases;La Crosse virus disease;Current week,La Crosse virus disease;Current week,La Crosse virus disease,LaCrosseVirusDisease,bio/DOID_0050118
+;Legionellosis;Current week,Current week;Legionellosis,Legionellosis,LegionnairesDisease,bio/DOID_10457
+;Legionellosis;Current  week,Current week;Legionellosis,Legionellosis,LegionnairesDisease,bio/DOID_10457
+Legionellosis;Current  week,Current week;Legionellosis,Legionellosis,LegionnairesDisease,bio/DOID_10457
+Legionellosis;Current week,Current week;Legionellosis,Legionellosis,LegionnairesDisease,bio/DOID_10457
+Hansen's disease;Current  week,Current week;Leprosy,Leprosy,Leprosy,bio/DOID_1024
+Hansen's disease;Current week,Current week;Leprosy,Leprosy,Leprosy,bio/DOID_1024
+Leptospirosis;Current  week,Current week;Leptospirosis,Leptospirosis,Leptospirosis,bio/DOID_2297
+Leptospirosis;Current week,Current week;Leptospirosis,Leptospirosis,Leptospirosis,bio/DOID_2297
+Listeriosis §;Confirmed;Current week,Listeriosis;Current week;Confirmed,Listeriosis,Listeriosis,bio/DOID_11573
+Listeriosis §;Current  week,Listeriosis;Current week;Confirmed,Listeriosis,Listeriosis,bio/DOID_11573
+Listeriosis §;Probable;Current week,Listeriosis;Current week;Probable,Listeriosis,Listeriosis,bio/DOID_11573
+Lyme disease;Current week,Lyme disease;Current week,Lyme disease,LymeDisease,
+Lyme disease;Current  week,Lyme disease;Current week,Lyme disease,LymeDisease,
+Lyme Disease;Current  week,Lyme disease;Current week,Lyme disease,LymeDisease,
+Malaria;Current  week,Current week;Malaria,Malaria,Malaria,bio/DOID_12365
+Malaria;Current week,Current week;Malaria,Malaria,Malaria,bio/DOID_12365
+Measles §;Imported;Current  week,Current week;Measles;Imported,Measles,Measles,bio/DOID_8622
+Measles §;Imported;Current week,Current week;Measles;Imported,Measles,Measles,bio/DOID_8622
+Measles §;Indigenous;Current  week,Current week;Measles;Indigenous,Measles,Measles,bio/DOID_8622
+Measles §;Indigenous;Current week,Current week;Measles;Indigenous,Measles,Measles,bio/DOID_8622
+Measles;Current  week,Current week;Measles,Measles,Measles,bio/DOID_8622
+Meningococcal disease (continued);Other serogroups;Current  week,Other serogroups;Meningococcal disease;Current week,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease (continued);Unknown serogroup;Current  week,Meningococcal disease;Current week;Unknown serogroup,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+"Meningococcal disease, all serogroups;Current  week",Meningococcal disease;Current week;all groups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+"Meningococcal disease, invasive  §  All serogroups;Current  week",Meningococcal disease;Current week;all groups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+"Meningococcal diseases, invasive;All serogroups;Current week",Meningococcal disease;Current week;all groups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;All serogroups;Current  week,Meningococcal disease;Current week;all groups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;All serogroups;Current week,Meningococcal disease;Current week;all groups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;Other serogroups;Current week,Other serogroups;Meningococcal disease;Current week,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;Serogroup B;Current  week,Serogroup B;Meningococcal disease;Current week,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;Serogroup B;Current week,Serogroup B;Meningococcal disease;Current week,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;Serogroups ACWY;Current  week,Serogroups ACWY;Meningococcal disease;Current week,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;Serogroups ACWY;Current week,Serogroups ACWY;Meningococcal disease;Current week,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;Unknown serogroup;Current week,Meningococcal disease;Current week;Unknown serogroup,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+"Meningococcal diseases, invasive;Serogroup unknown;Current week",Meningococcal disease;Current week;invasive disease;Unknown serogroup,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease(  Neisseria meningitidis  ) §  All serogroups;Current  week,Meningococcal disease;Current week;all groups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+"Meningococcal diseases, invasive  §  All serogroups;Current  week",Meningococcal disease;Current week;invasive disease;all groups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+"Meningococcal diseases, invasive  †  All groups;Current  week",Meningococcal disease;Current week;invasive disease;all groups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+"Meningococcal diseases, invasive  †  All serogroups;Current  week",Meningococcal disease;Current week;invasive disease;all groups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+"Meningococcal diseases, invasive;All serogroups;Current  week",Meningococcal disease;Current week;invasive disease;all groups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+"Meningococcal diseases, invasive;Serogroup unknown;Current  week",Meningococcal disease;Current week;invasive disease;Unknown serogroup,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Mumps;Current  week,Current week;Mumps,Mumps,Mumps,bio/DOID_10264
+Mumps;Current week,Current week;Mumps,Mumps,Mumps,bio/DOID_10264
+Novel influenza A virus infections §;Current  week,Current week;Novel Influenza A virus infections,Novel Influenza A virus infections,NovelInfluenzaAViralInfection,
+Novel Influenza A virus infections §;Current week,Current week;Novel Influenza A virus infections,Novel Influenza A virus infections,NovelInfluenzaAViralInfection,
+"Poliomyelitis, paralytic;Current  week",Current week;Paralytic poliomyelitis,Paralytic poliomyelitis,ParalyticPoliomyelitis,bio/DOID_0050515
+"Poliomyelitis, paralytic;Current week",Current week;Paralytic poliomyelitis,Paralytic poliomyelitis,ParalyticPoliomyelitis,bio/DOID_0050515
+;Pertussis;Current week,Pertussis;Current week,Pertussis,Pertussis,bio/DOID_1116
+;Pertussis;Current  week,Pertussis;Current week,Pertussis,Pertussis,bio/DOID_1116
+Pertussis §;Current week,Pertussis;Current week,Pertussis,Pertussis,bio/DOID_1116
+Pertussis;Current  week,Pertussis;Current week,Pertussis,Pertussis,bio/DOID_1116
+Pertussis;Current week,Pertussis;Current week,Pertussis,Pertussis,bio/DOID_1116
+Plague;Current  week,Plague;Current week,Plague,Plague,bio/DOID_3482
+Plague;Current week,Plague;Current week,Plague,Plague,bio/DOID_3482
+"Arboviral diseases, neuroinvasive and non-neuroinvasive (continued);Powassan virus disease;Current  week",Powassan virus disease;Current week,Powassan virus disease,PowassanVirusDisease,bio/DOID_0050179
+Arboviral diseases;Powassan virus disease;Current week,Powassan virus disease;Current week,Powassan virus disease,PowassanVirusDisease,bio/DOID_0050179
+"Rabies, animal;Current week",Current week;Rabies,Rabies,Rabiesinhuman,bio/DOID_11260
+"Rabies, animal;Current  week",Current week;Rabies,Rabies,Rabiesinhuman,bio/DOID_11260
+"Rabies, Animal;Current  week",Current week;Rabies,Rabies,Rabiesinhuman,bio/DOID_11260
+"Rubella, congenital syndrome;Current  week",Current week;Rubella;congenital,Rubella,Rubella,bio/DOID_8781
+Rubella;Current  week,Current week;Rubella,Rubella,Rubella,bio/DOID_8781
+Salmonellosis (excluding typhoid fever and paratyphoid fever) †;Current  week,Current week;Salmonellosis,Salmonellosis,SalmonellosisExceptTyphiAndParatyphi,
+Salmonellosis;Current  week,Current week;Salmonellosis,Salmonellosis,SalmonellosisExceptTyphiAndParatyphi,
+Salmonellosis;Current week,Current week;Salmonellosis,Salmonellosis,SalmonellosisExceptTyphiAndParatyphi,
+Dengue Virus Infection;Dengue Fever §;Current  week,Current week;Severe dengue,Severe dengue,SevereDengue,bio/DOID_12206;bio/DOID_0050125
+Dengue Virus Infection;Dengue Hemorrhagic Fever  §;Current  week,Current week;Severe dengue,Severe dengue,SevereDengue,bio/DOID_12206;bio/DOID_0050125
+Dengue Virus Infection;Severe Dengue;Current  week,Current week;Severe dengue,Severe dengue,SevereDengue,bio/DOID_12206;bio/DOID_0050125
+Dengue virus infection;Severe dengue;Current  week,Current week;Severe dengue,Severe dengue,SevereDengue,bio/DOID_12206;bio/DOID_0050125
+Dengue virus infections §;Severe dengue;Current  week,Current week;Severe dengue,Severe dengue,SevereDengue,bio/DOID_12206;bio/DOID_0050125
+Dengue virus infections;Severe dengue;Current week,Current week;Severe dengue,Severe dengue,SevereDengue,bio/DOID_12206;bio/DOID_0050125
+Shiga toxin-producing  E. coli  (STEC)  §;Current  week,Current week;Shiga toxin-producing Escherichia Coli,Shiga toxin-producing Escherichia Coli,ShigaToxinEColi,
+Shiga toxin-producing E. coli (STEC) †;Current week,Current week;Shiga toxin-producing Escherichia Coli,Shiga toxin-producing Escherichia Coli,ShigaToxinEColi,
+Shiga toxin-producing  E. coli  (STEC)  †;Current  week,Current week;Shiga toxin-producing Escherichia Coli,Shiga toxin-producing Escherichia Coli,ShigaToxinEColi,
+Shiga toxin-producing  E. coli  (STEC) §;Current  week,Current week;Shiga toxin-producing Escherichia Coli,Shiga toxin-producing Escherichia Coli,ShigaToxinEColi,
+Shiga toxin-producing  Escherichia coli;Current  week,Current week;Shiga toxin-producing Escherichia Coli,Shiga toxin-producing Escherichia Coli,ShigaToxinEColi,
+;Shigellosis;Current  week,Current week;Shigellosis,Shigellosis,Shigellosis,bio/DOID_12385
+Shigellosis;Current  week,Current week;Shigellosis,Shigellosis,Shigellosis,bio/DOID_12385
+Shigellosis;Current week,Current week;Shigellosis,Shigellosis,Shigellosis,bio/DOID_12385
+Spotted Fever Rickettsiosis §;Confirmed;Current  week,Spotted fever rickettsiosis;Confirmed;Current week,Spotted fever rickettsiosis,SpottedFeverRickettsiosis,
+Spotted Fever Rickettsiosis §;Probable;Current  week,Spotted fever rickettsiosis;Probable;Current week,Spotted fever rickettsiosis,SpottedFeverRickettsiosis,
+Spotted fever rickettsiosis;Confirmed;Current  week,Spotted fever rickettsiosis;Confirmed;Current week,Spotted fever rickettsiosis,SpottedFeverRickettsiosis,
+Spotted fever rickettsiosis;Probable;Current  week,Spotted fever rickettsiosis;Probable;Current week,Spotted fever rickettsiosis,SpottedFeverRickettsiosis,
+Rocky Mountain spotted fever;Current week,Current week;spotted fever rickettsiosis including RMSF;Confirmed,spotted fever rickettsiosis including RMSF,SpottedFeverRickettsiosisIncludingRockyMountainSpottedFever,
+Rocky Mountain spotted fever;Current  week,Current week;spotted fever rickettsiosis including RMSF;Confirmed,spotted fever rickettsiosis including RMSF,SpottedFeverRickettsiosisIncludingRockyMountainSpottedFever,
+Spotted Fever Rickettsiosis (including RMSF)  §;Confirmed;Current  week,Current week;spotted fever rickettsiosis including RMSF;Confirmed,spotted fever rickettsiosis including RMSF,SpottedFeverRickettsiosisIncludingRockyMountainSpottedFever,
+Spotted Fever Rickettsiosis (including RMSF)  §;Probable;Current  week,Current week;spotted fever rickettsiosis including RMSF;Pobable,spotted fever rickettsiosis including RMSF,SpottedFeverRickettsiosisIncludingRockyMountainSpottedFever,
+Spotted Fever Rickettsiosis (including RMSF)  †;Confirmed;Current  week,Current week;spotted fever rickettsiosis including RMSF;Confirmed,spotted fever rickettsiosis including RMSF,SpottedFeverRickettsiosisIncludingRockyMountainSpottedFever,
+Spotted Fever Rickettsiosis (including RMSF)  †;Probable;Current  week,Current week;spotted fever rickettsiosis including RMSF;Pobable,spotted fever rickettsiosis including RMSF,SpottedFeverRickettsiosisIncludingRockyMountainSpottedFever,
+"Arboviral diseases, neuroinvasive and non-neuroinvasive (continued);St. Louis encephalitis virus disease;Current  week",Current week;St. Louis encephalitis virus disease,St. Louis encephalitis virus disease,StLouisEncephalitis,bio/DOID_10845
+Arboviral diseases;St. Louis encephalitis virus disease;Current week,Current week;St. Louis encephalitis virus disease,St. Louis encephalitis virus disease,StLouisEncephalitis,bio/DOID_10845
+Invasive Pneumococcal Disease  §;All Ages;Current  week,Current week;Invasive disease;pneumococcal disease,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive Pneumococcal Disease  †;All Ages;Current  week,Current week;Invasive disease;pneumococcal disease,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive Pneumococcal Disease  §;Age < 5;Current  week,Current week;Invasive disease;pneumococcal disease;age <5 years,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive Pneumococcal Disease  †;Age < 5;Current  week,Current week;Invasive disease;pneumococcal disease;age <5 years,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive Pneumococcal Disease §  Age < 5;Confirmed;Current  week,Current week;Invasive disease;pneumococcal disease;age <5 years;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive Pneumococcal Disease §  Age < 5;Probable;Current  week,Current week;Invasive disease;pneumococcal disease;age <5 years;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive Pneumococcal Disease §  All Ages;Confirmed;Current  week,Current week;Invasive disease;pneumococcal disease;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive Pneumococcal Disease §  All Ages;Probable;Current  week,Current week;Invasive disease;pneumococcal disease;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, age <5 §;Confirmed;Current  week",Current week;Invasive disease;pneumococcal disease;age <5 years;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, age <5 §;Probable;Current  week",Current week;Invasive disease;pneumococcal disease;age <5 years;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, age <5 †;Confirmed;Current  week",Current week;Invasive disease;pneumococcal disease;age <5 years;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, age <5 †;Probable;Current  week",Current week;Invasive disease;pneumococcal disease;age <5 years;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, age <5 years §;Confirmed;Current week",Current week;Invasive disease;pneumococcal disease;age <5 years;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, age <5 years §;Probable;Current week",Current week;Invasive disease;pneumococcal disease;age <5 years;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, all ages §;Confirmed;Current  week",Current week;Invasive disease;pneumococcal disease;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, all ages §;Confirmed;Current week",Current week;Invasive disease;pneumococcal disease;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, all ages §;Probable;Current  week",Current week;Invasive disease;pneumococcal disease;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, all ages §;Probable;Current week",Current week;Invasive disease;pneumococcal disease;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, all ages †;Confirmed;Current  week",Current week;Invasive disease;pneumococcal disease;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Invasive pneumococcal disease, all ages †;Probable;Current  week",Current week;Invasive disease;pneumococcal disease;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Streptococcus pneumoniae  , invasive disease  †  Age <5 years;Current  week",Current week;Invasive disease;pneumococcal disease;age <5 years,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Streptococcus pneumoniae  , invasive disease  †;Age <5 years;Current  week",Current week;Invasive disease;pneumococcal disease;age <5 years,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Streptococcus pneumoniae  , invasive disease  †;All ages;Current  week",Current week;Invasive disease;pneumococcal disease;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+"Streptococcus pneumoniae  , invasive disease, drug resistant  †;Age <5 years;Current  week",Age <5 years;Streptococcus pneumoniae;drug resistant;invasive disease;Current week,Streptococcus pneumonia,StreptococcusPneumonia,bio/DOID_0040084
+"Streptococcus pneumoniae  , invasive disease, drug resistant  †;All ages;Current  week",Streptococcus pneumoniae;drug resistant;invasive disease;Current week,Streptococcus pneumonia,StreptococcusPneumonia,bio/DOID_0040084
+"Streptococcus pneumoniae  , invasive disease, nondrug resistant  †  Age <5 years;Current  week",Age <5 years;Streptococcus pneumoniae;nondrug resistant;invasive disease;Current week,Streptococcus pneumonia,StreptococcusPneumonia,bio/DOID_0040084
+"Streptococcus pneumoniae  ,invasive disease  Drug resistant, all ages;Current  week",Streptococcus pneumoniae;drug resistant;invasive disease;Current week,Streptococcus pneumonia,StreptococcusPneumonia,bio/DOID_0040084
+";Syphilis, primary & secondary;Current  week",Current week;Syphilis primary and secondary,Syphilis primary and secondary,SyphilisPrimaryAndSecondary,
+"Spotted Fever Rickettsiosis §;Syphilis, primary & secondary;Current  week",Current week;Syphilis primary and secondary,Syphilis primary and secondary,SyphilisPrimaryAndSecondary,
+"Syphilis, primary & secondary;Current  week",Current week;Syphilis primary and secondary,Syphilis primary and secondary,SyphilisPrimaryAndSecondary,
+"Syphilis, primary and secondary;Current  week",Current week;Syphilis primary and secondary,Syphilis primary and secondary,SyphilisPrimaryAndSecondary,
+Tetanus;Current  week,Current week;Tetanus,Tetanus,Tetanus,bio/DOID_11338
+"Streptococcal disease, invasive, group A;Current  week",Current week;Invasive disease;Streptococcal disease;serogroup A,Streptococcal disease,StreptococcalToxicShockSyndrome,
+Tuberculosis  †;Current  quarter,Current quarter;Tuberculosis,Tuberculosis,Tuberculosis,bio/DOID_399
+Tuberculosis †;Current  quarter,Current quarter;Tuberculosis,Tuberculosis,Tuberculosis,bio/DOID_399
+Tuberculosis;Current  quarter,Current quarter;Tuberculosis,Tuberculosis,Tuberculosis,bio/DOID_399
+Vibriosis  §;Current  week,Current week;Vibriosis except cholera;Confirmed,Vibriosis except cholera,VibriosisExcludingCholera,
+"Vibriosis (any species of the family  Vibrionaceae  , other than toxigenic  Vibrio cholerae  O1 or O139);Confirmed;Current  week",Current week;Vibriosis except cholera;Confirmed,Vibriosis except cholera,VibriosisExcludingCholera,
+"Vibriosis (any species of the family  Vibrionaceae  , other than toxigenic  Vibrio cholerae  O1 or O139);Probable;Current  week",Current week;Vibriosis except cholera;Probable,Vibriosis except cholera,VibriosisExcludingCholera,
+"Vibriosis (Any species of the family Vibrionaceae, other than toxigenic Vibrio cholerae O1 or O139) §;Confirmed;Current  week",Current week;Vibriosis except cholera;Confirmed,Vibriosis except cholera,VibriosisExcludingCholera,
+"Vibriosis (Any species of the family Vibrionaceae, other than toxigenic Vibrio cholerae O1 or O139) §;Probable;Current  week",Current week;Vibriosis except cholera;Probable,Vibriosis except cholera,VibriosisExcludingCholera,
+"Arboviral diseases, neuroinvasive and non-neuroinvasive (continued);Western equine encephalitis virus disease;Current  week",Current week;Western equine encephalitis virus disease,Western equine encephalitis virus disease,WesternEquineEncephalitis,bio/DOID_10843
+Arboviral diseases;Western equine encephalitis virus disease;Current week,Current week;Western equine encephalitis virus disease,Western equine encephalitis virus disease,WesternEquineEncephalitis,bio/DOID_10843
+"Arboviral diseases, neuroinvasive and non-neuroinvasive (continued);West Nile virus disease;Current  week",West Nile virus disease;Current week,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+Arboviral diseases;West Nile virus disease;Current week,West Nile virus disease;Current week,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+West Nile virus disease  §;Neuroinvasive;Current  week,Current week;West Nile virus disease;Neuroinvasive,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+West Nile virus disease  §;Non-neuroinvasive  ¶;Current  week,Non-neuroinvasive ;Current week;West Nile virus disease,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+West Nile virus disease  †;Neuroinvasive;Current  week,Current week;West Nile virus disease;Neuroinvasive,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+West Nile virus disease  †;Non-neuroinvasive  §;Current  week,Non-neuroinvasive ;Current week;West Nile virus disease,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+West Nile virus disease  †;Non-neuroinvasive;Current  week,Non-neuroinvasive ;Current week;West Nile virus disease,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+West Nile virus disease §;Neuroinvasive;Current  week,Current week;West Nile virus disease;Neuroinvasive,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+West Nile virus disease §;Non-neuroinvasive ¶;Current  week,Non-neuroinvasive ;Current week;West Nile virus disease,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+West Nile virus disease;Neuroinvasive;Current  week,Current week;West Nile virus disease;Neuroinvasive,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+West Nile virus disease;Non-neuroinvasive †;Current  week,Non-neuroinvasive ;Current week;West Nile virus disease,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+Botulism;Other (wound & unspecified);Current  week,Other wound & unspecified Botulism;Current week,Other wound & unspecified Botulism,WoundBotulism,bio/DOID_0050353
+Botulism;Other (wound & unspecified);Current week,Other wound & unspecified Botulism;Current week,Other wound & unspecified Botulism,WoundBotulism,bio/DOID_0050353
+"Zika virus disease, non-congenital;Current  week",Current week;Zika virus disease;non-congenital,Zika virus disease,ZikaVirusDisease,bio/DOID_0060478

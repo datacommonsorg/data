@@ -19,10 +19,10 @@ from statvar_dcid_generator import get_statvar_dcid
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
-    'weekly_nndss_input', './data/nndss_weekly_data',
+    'weekly_nndss_input', './nndss_data/nndss_weekly_data',
     'Path to the directory with weekly data scrapped from NNDSS')
 flags.DEFINE_string(
-    'weekly_nndss_output', './data/output',
+    'weekly_nndss_output', './nndss_data/output',
     'Path to the directory where generated files are to be stored.')
 
 _PREFIX = 'cdc_nndss_weekly_tables'
@@ -156,7 +156,7 @@ _PV_MAP = {
 #TODO: Resolve path based on the script path for tests
 #TODO: Wrap this within the main function
 
-_DISEASE_DCID_DF = pd.read_csv("./data/weekly_tables_disease_mapping.csv")
+_DISEASE_DCID_DF = pd.read_csv("./nndss_data/weekly_tables_disease_mapping.csv")
 
 
 def set_observationPeriod(column_name):
@@ -531,7 +531,7 @@ def main(_) -> None:
         output_path = FLAGS.weekly_nndss_output
 
         _PLACE_DCID_DF = pd.read_csv(
-            "./data/place_name_to_dcid.csv",
+            "./nndss_data/place_name_to_dcid.csv",
             usecols=["Place Name", "Resolved place dcid"])
         print("calling cleaned_dataframe")
         cleaned_dataframe = generate_processed_csv(input_path)
