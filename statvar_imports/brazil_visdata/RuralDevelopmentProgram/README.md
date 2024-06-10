@@ -14,4 +14,4 @@
 
 
 ### How to run:
-`python3 statvar_processory.py --existing_statvar_mcf=stat_vars.mcf --input_data=<input_file>.csv --pv_map=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/brazil_VISDATA/RuralDevelopmentProgram/pv_map/<filename>_pvmap.csv --places_resolved_csv=statvar_imports/brazil_visdata/Brazil_Places_Resolved.csv --config=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/brazil_VISDATA/RuralDevelopmentProgram/common_metdata.csv --output_path=<filepath/filename>`
+`python3 statvar_processory.py --existing_statvar_mcf=stat_vars.mcf --input_data=<input_file>.csv --pv_map=statvar_imports/brazil_VISDATA/RuralDevelopmentProgram/pv_map/<filename>_pvmap.csv --places_resolved_csv=statvar_imports/brazil_visdata/Brazil_Places_Resolved.csv --config=statvar_imports/brazil_VISDATA/RuralDevelopmentProgram/common_metdata.csv --output_path=<filepath/filename>`
