@@ -8,7 +8,6 @@ end_date,
 release_frequency,
 process,
 comments,
-places_resolved_csv,https://docs.google.com/spreadsheets/d/1HH3_Ib4D0YXVSGnMmpFvGr2mCzVXlxOaBkisDSvpqxQ/edit#gid=490235013
 output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
 header_rows,1
 #input_rows,5
