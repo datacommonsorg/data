@@ -1,0 +1,6 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Referência,observationDate,{Data},householdType,FarmingFamily,populationType,Household,benefitProgram,Brazil_FoodAcquisitionProgram,,,,
+Código,observationAbout,{Data},,,,,,,,,,
+Agricultores familiares ? sexo masculino,gender,Male,value,{Number},description,"""Number of Male Family Farmers Supplying the Food Acquisition Program (PAA)""",alternateName,"""Número de Agricultores Familiares Masculinos Abastecedores do Programa de Aquisição de Alimentos (PAA)@pt""",,,,
+Agricultores familiares ? sexo feminino,gender,Female,value,{Number},description,"""Number of Female Family Farmers Supplying the Food Acquisition Program (PAA)""",alternateName,"""Número de Mulheres Agricultoras Familiares Abastecedoras do Programa de Aquisição de Alimentos (PAA)@pt""",,,,
+Agricultores familiares ? sem informação de sexo,gender,GenderUnknownOrNotStated,value,{Number},description,"""Number of Family Farmers(No Gender Information) Supplying the Food Acquisition Program (PAA)""",alternateName,"""Número de Agricultores Familiares (Sem Informação de Gênero) Abastecedores do Programa de Aquisição de Alimentos (PAA)@pt""",,,,

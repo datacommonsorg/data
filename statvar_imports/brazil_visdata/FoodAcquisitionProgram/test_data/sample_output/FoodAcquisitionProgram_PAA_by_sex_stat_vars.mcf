@@ -1,0 +1,35 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/FoodAcquisitionProgram/test_data/sample_input/Agricultores_familiares_fornecedores_do_Programa_de_Aquisicao_de_Alimentos_PAA_por_sexo - data.csv --pv_map=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/FoodAcquisitionProgram/test_data/sample_input/Agricultores_familiares_fornecedores_do_Programa_de_Aquisicao_de_Alimentos_PAA_por_sexo - pvmap.csv --config=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/FoodAcquisitionProgram/test_data/sample_input/Agricultores_familiares_fornecedores_do_Programa_de_Aquisicao_de_Alimentos_PAA_por_sexo - metadata.csv --output_path=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/FoodAcquisitionProgram/test_data/sample_output/FoodAcquisitionProgram_PAA_by_sex" on 2024-06-11 05:35:28.472811
+
+Node: dcid:Count_Household_BrazilFoodAcquisitionProgram_Female_FarmingFamily
+typeOf: dcid:StatisticalVariable
+description: "Number of Female Family Farmers Supplying the Food Acquisition Program (PAA)"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Mulheres Agricultoras Familiares Abastecedoras do Programa de Aquisição de Alimentos (PAA)@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+gender: dcid:Female
+householdType: dcid:FarmingFamily
+
+Node: dcid:Count_Household_BrazilFoodAcquisitionProgram_GenderUnknownOrNotStated_FarmingFamily
+typeOf: dcid:StatisticalVariable
+description: "Number of Family Farmers(No Gender Information) Supplying the Food Acquisition Program (PAA)"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Agricultores Familiares (Sem Informação de Gênero) Abastecedores do Programa de Aquisição de Alimentos (PAA)@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+gender: dcid:GenderUnknownOrNotStated
+householdType: dcid:FarmingFamily
+
+Node: dcid:Count_Household_BrazilFoodAcquisitionProgram_Male_FarmingFamily
+typeOf: dcid:StatisticalVariable
+description: "Number of Male Family Farmers Supplying the Food Acquisition Program (PAA)"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Agricultores Familiares Masculinos Abastecedores do Programa de Aquisição de Alimentos (PAA)@pt"
+benefitProgram: dcid:Brazil_FoodAcquisitionProgram
+gender: dcid:Male
+householdType: dcid:FarmingFamily
+
