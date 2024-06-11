@@ -1,0 +1,15 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/2/MjIwMCMy/labor-force-participation-rate-by-sex.html
+description,"Labor Force Participation Rate by Sex, 2021-2022"
+#place_type,
+#places_within,
+start_date,2018
+end_date,2022
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,2
+drop_statvars_without_svobs,0
+mapped_rows,2
+mapped_columns,1
