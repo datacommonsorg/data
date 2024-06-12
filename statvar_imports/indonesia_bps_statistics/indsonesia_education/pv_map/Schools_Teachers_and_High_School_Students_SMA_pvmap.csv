@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Provinsi,observationAbout,{Data},,,measuredProperty,count,schoolManagement,UnderMinistryOfResearchTechnologyAndHigherEducation,,
+Jumlah Sekolah SMA (Negeri),populationType,School,schoolGradeLevel,HighSchool,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Sekolah SMA (Negeri)@id"""
+Jumlah Sekolah SMA (Swasta),populationType,School,schoolGradeLevel,HighSchool,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah SMA (Swasta)@id"""
+Jumlah Sekolah SMA (Negeri+Swasta),populationType,School,schoolGradeLevel,HighSchool,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah SMA (Negeri+Swasta)@id"""
+Jumlah Guru SMA (Negeri),populationType,Teacher,schoolGradeLevel,HighSchool,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Guru SMA (Negeri)@id"""
+Jumlah Guru SMA (Swasta),populationType,Teacher,schoolGradeLevel,HighSchool,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru SMA (Swasta)@id"""
+Jumlah Guru SMA (Negeri+Swasta),populationType,Teacher,schoolGradeLevel,HighSchool,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru SMA (Negeri+Swasta)@id"""
+Jumlah Murid SMA (Negeri),populationType,Student,schoolGradeLevel,HighSchool,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Murid SMA (Negeri)@id"""
+Jumlah Murid SMA (Swasta),populationType,Student,schoolGradeLevel,HighSchool,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid SMA (Swasta)@id"""
+Jumlah Murid SMA (Negeri+Swasta),populationType,Student,schoolGradeLevel,HighSchool,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid SMA (Negeri+Swasta)@id"""
+observationDate,observationDate,{Data},,,,,,,,

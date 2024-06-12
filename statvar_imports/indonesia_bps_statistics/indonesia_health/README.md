@@ -26,3 +26,7 @@
 
 ### How to run:
 python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_health/test_data/sample_input/<filename>.xlsx --pv_map=statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_health/pvmap/<filename>_pvmap.csv --places_resolved_csv=statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_place_resolved.csv --config=statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_health/metadata/<filename>_metadata.csv  --output_path=output_path=<filepath/filename>
+
+### Licence:
+license : "https://prabumulihkota.beta.bps.go.id/en/term-of-use"
+

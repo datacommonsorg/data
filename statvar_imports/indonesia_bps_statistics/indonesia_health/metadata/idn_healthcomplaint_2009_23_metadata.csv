@@ -1,0 +1,14 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/1/MTYxNyMx/percentage-of-population-having-health-complaint-by-province--urban-rural-classification--and-sex--2009-2023.html
+description,"Percentage of Population Having Health Complaint by Province, Urban-Rural Classification, and Sex, 2009-2023"
+#place_type,
+#places_within,
+start_date,2009
+end_date,2023
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,4
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1K2ZX6JcBnMTljCtfkk6KaZM7iQETJFGWWgQXZ9rTZlc/edit#gid=432174014

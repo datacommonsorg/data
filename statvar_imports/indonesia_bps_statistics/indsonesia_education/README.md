@@ -24,8 +24,7 @@
    `https://www.bps.go.id/en/statistics-table/3/VXlzME1rOWtlbHB4YW1WbU1VWXJNa1JIU0ZjeVp6MDkjMw==/number-of-schools--teachers--and-pupils-in-madrasah-tsanawiyah--mts--under-the-ministry-of-religious-affairs-by-province.html?year=2023`
    
    
-   
-  
+ 
 
 - type of place:  country , AA1. 
 
@@ -38,4 +37,8 @@
 ### How to run:
 
 python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=<input_file>.xlsx --pv_map=statvar_imports/indonesia_bps_statistics/indonesia_census/indsonesia_education/pv_map/<filename>_pvmap.csv --places_resolved_csv=statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_place_resolved.csv --config= statvar_imports/indonesia_bps_statistics/indonesia_census/indsonesia_education/metadata/<filename>_metadata.csv --output_path=<filepath/filename>
+
+### Licence:
+license : "https://prabumulihkota.beta.bps.go.id/en/term-of-use"
+
 

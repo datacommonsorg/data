@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/3/VEU5c1pGVnZkVkVyY1U5S2EwVnJlVlVyTm5aRVFUMDkjMw==/number-of-schools--teachers--and-pupils-in-madrasah-ibtidaiyah--mi--under-the-ministry-of-religious-affairs-by-province.html?year=2022
+description,"Number of Madrasah Ibtidaiyah (MI) Schools, Teachers and Students under the Ministry of Religion by Province"
+#place_type,country/IDN
+#places_within,
+start_date,2018
+end_date,2022
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1YECfoEHNPikNYPoWu90RXvVUq6Kxx6NMmQBc8TAF7PU/edit?resourcekey=0-sBAcrtjQ7KMKAXwqJPkuDA#gid=1641498305
+mapped_rows,1
+mapped_columns,1
+pv_map,https://docs.google.com/spreadsheets/d/1YECfoEHNPikNYPoWu90RXvVUq6Kxx6NMmQBc8TAF7PU/edit?resourcekey=0-sBAcrtjQ7KMKAXwqJPkuDA#gid=1279206296

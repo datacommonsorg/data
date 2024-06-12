@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/2/MTE2OCMy/percentage-of-formal-labor-by-province--percent-.html
+description,"Percentage of Formal Labor by Province (Percent), 2021-2022"
+#place_type,
+#places_within,
+start_date,2015
+end_date,2022
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,2
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1199riUzIGeQ_I7oFx1rqk63mL6ILK-t0qX7IS91ujPo/edit#gid=8068026
+pv_map,https://docs.google.com/spreadsheets/d/1_3hRu_Yp6M8ZMGhjl50VyM-96asnNe2fWNMjs7EoaCQ/edit#gid=1473053294
+mapped_rows,2
+mapped_columns,1

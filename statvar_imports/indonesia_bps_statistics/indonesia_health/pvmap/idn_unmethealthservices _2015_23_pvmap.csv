@@ -1,0 +1,12 @@
+key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4
+Province,observationAbout,{Data},,,,,,,,
+Unmet Need of Health Services by Province (Percent),healthServiceType,WithUnmetNeed,populationType	,HealthEstablishment,measuredProperty	,count,unit,Percent,alternateName,"""Unmet Need of Health@id"""
+2015,value,{Number},observationDate,2015,,,,,,
+2016,value,{Number},observationDate,2016,,,,,,
+2017,value,{Number},observationDate,2017,,,,,,
+2018,value,{Number},observationDate,2018,,,,,,
+2019,value,{Number},observationDate,2019,,,,,,
+2020,value,{Number},observationDate,2020,,,,,,
+2021,value,{Number},observationDate,2021,,,,,,
+2022,value,{Number},observationDate,2022,,,,,,
+2023,value,{Number},observationDate,2023,,,,,,

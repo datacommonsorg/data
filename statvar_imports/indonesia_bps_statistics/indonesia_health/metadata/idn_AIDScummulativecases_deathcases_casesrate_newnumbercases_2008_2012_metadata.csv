@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/1/MTU2OSMx/aids-cummulative-cases--death-cases--cases-rate--and-new-number-cases-by-province-in-indonesia--2008-2012.html
+description,"AIDS Cummulative Cases, Death Cases, Cases Rate, and New Number Cases by Province in Indonesia, 2008-2012"
+#place_type,
+#places_within,
+start_date,2008
+end_date,2012
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,2
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1K2ZX6JcBnMTljCtfkk6KaZM7iQETJFGWWgQXZ9rTZlc/edit#gid=432174014
+mapped_rows,2
+mapped_columns,1
+pv_map,https://docs.google.com/spreadsheets/d/1K2ZX6JcBnMTljCtfkk6KaZM7iQETJFGWWgQXZ9rTZlc/edit#gid=209034571

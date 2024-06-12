@@ -1,0 +1,23 @@
+DiseasedPerson,prop,value,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+P R O V I N S I,observationAbout,{Data},Gender,,Place,,#End,#value,,,,
+,,,,,,,,,,,,
+LAKILAKI,populationType,Person,gender,Male,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender",measuredProperty,count,Gender,LakaLaki
+PEREMPUAN,populationType,Person,gender,Female,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender",measuredProperty,count,Gender,PeremPuan
+Perkotaan,populationType,Person,placeOfResidenceClassification,Urban,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender,-placeOfResidenceClassification",measuredProperty,count,Place,Perkotaan
+Perdesaan,populationType,Person,placeOfResidenceClassification,Rural,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender,-placeOfResidenceClassification",measuredProperty,count,Place,Perdesaan
+Perkotaan+Perdesaan,populationType,Person,medicalCondition,DiseasedPerson,measurementDenominator,"-alternateName,-medicalCondition,-gender",measuredProperty,count,,,,
+2009,observationDate,2009,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2010,observationDate,2010,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2011,observationDate,2011,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2012,observationDate,2012,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2013,observationDate,2013,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2014,observationDate,2014,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2015,observationDate,2015,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2016,observationDate,2016,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2017,observationDate,2017,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2018,observationDate,2018,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2019,observationDate,2019,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2020,observationDate,2020,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2021,observationDate,2021,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2022,observationDate,2022,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,
+2023,observationDate,2023,value,{Number},alternateName,"""Persentase  di {Gender}{Place} yang Melaporkan Masalah Kesehatan@id""",,,,,,

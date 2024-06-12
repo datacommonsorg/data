@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Provinsi,observationAbout,{Data},,,measuredProperty,count,schoolManagement,UnderMinistryOfResearchTechnologyAndHigherEducation,,
+Jumlah Sekolah SD (Negeri),populationType,School,schoolGradeLevel,PrimarySchool,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Sekolah SD (Negeri)@id"""
+Jumlah Sekolah SD (Swasta),populationType,School,schoolGradeLevel,PrimarySchool,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah SD (Swasta)@id"""
+Jumlah Sekolah SD (Negeri+Swasta),populationType,School,schoolGradeLevel,PrimarySchool,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah SD (Negeri+Swasta)@id"""
+Jumlah Guru SD (Negeri),populationType,Teacher,schoolGradeLevel,PrimarySchool,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Guru SD (Negeri)@id"""
+Jumlah Guru SD (Swasta),populationType,Teacher,schoolGradeLevel,PrimarySchool,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru SD (Swasta)@id"""
+Jumlah Guru SD (Negeri+Swasta),populationType,Teacher,schoolGradeLevel,PrimarySchool,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru SD (Negeri+Swasta)@id"""
+Jumlah Murid SD (Negeri),populationType,Student,schoolGradeLevel,PrimarySchool,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Murid SD (Negeri)@id"""
+Jumlah Murid SD (Swasta),populationType,Student,schoolGradeLevel,PrimarySchool,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid SD (Swasta)@id"""
+Jumlah Murid SD (Negeri+Swasta),populationType,Student,schoolGradeLevel,PrimarySchool,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid SD (Negeri+Swasta)@id"""
+observationDate,observationDate,{Data},,,,,,,,

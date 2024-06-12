@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/1/MTYyMCMx/percentage-of-population-with-outpatient-treatment-during-the-previous-month-by-province--2009-2023.html
+description,"Percentage of Population with Outpatient Treatment During The Previous Month by Province, 2009-2023"
+#place_type,
+#places_within,
+start_date,2009
+end_date,2023
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,3
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1JIKKE2RLQICES_N3DaGjIoWXANC7E1Fkamdg_d08quo/edit#gid=254131135
+mapped_rows,3
+mapped_columns,1
+pv_map,https://docs.google.com/spreadsheets/d/1JIKKE2RLQICES_N3DaGjIoWXANC7E1Fkamdg_d08quo/edit#gid=2063475406

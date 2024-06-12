@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Province,observationAbout,{Data},measuredProperty,count,,,,,,
+Percentage of Population Aged 15 Years and Older Who Smoked Tobacco by Province (Percent),measuredProperty,percent,populationType,Person,age,Count_Person_15OrMoreYears,healthBehavior,TobaccoSmoking,alternateName,"""Population Aged 15 Years Smoke Tobacco@id"""
+2015,value,{Number},observationDate,2015,,,,,,
+2016,value,{Number},observationDate,2016,,,,,,
+2017,value,{Number},observationDate,2017,,,,,,
+2018,value,{Number},observationDate,2018,,,,,,
+2019,value,{Number},observationDate,2019,,,,,,
+2020,value,{Number},observationDate,2020,,,,,,
+2021,value,{Number},observationDate,2021,,,,,,
+2022,value,{Number},observationDate,2022,,,,,,
+2023,value,{Number},observationDate,2023,,,,,,
