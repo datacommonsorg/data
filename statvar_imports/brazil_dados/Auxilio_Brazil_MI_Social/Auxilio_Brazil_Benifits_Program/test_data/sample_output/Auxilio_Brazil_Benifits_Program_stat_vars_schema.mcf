@@ -1,0 +1,41 @@
+Node: dcid:EarlyChildhood
+typeOf: dcid:BenefitsStatusEnum
+name: "Early Childhood"
+isProvisional: dcs:True
+
+Node: dcid:age
+typeOf: dcs:Property
+name: "age"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:benefitsStatus
+typeOf: dcs:Property
+name: "benefitsStatus"
+domainIncludes: dcid:Household
+
+Node: dcid:FamilyVariableBenefits
+typeOf: dcid:BenefitsStatusEnum
+name: "Family Variable Benefits"
+isProvisional: dcs:True
+
+Node: dcid:householderAge
+typeOf: dcs:Property
+name: "householderAge"
+domainIncludes: dcid:Household
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:CitizenshipIncomeBenefits
+typeOf: dcid:BenefitsStatusEnum
+name: "Citizenship Income Benefits"
+isProvisional: dcs:True
+
+Node: dcid:ComplementaryBenefits
+typeOf: dcid:BenefitsStatusEnum
+name: "Complementary Benefits"
+isProvisional: dcs:True
+
+Node: dcid:TemporaryCompensatoryBenefits
+typeOf: dcid:BenefitsStatusEnum
+name: "Temporary Compensatory Benefits"
+isProvisional: dcs:True
+

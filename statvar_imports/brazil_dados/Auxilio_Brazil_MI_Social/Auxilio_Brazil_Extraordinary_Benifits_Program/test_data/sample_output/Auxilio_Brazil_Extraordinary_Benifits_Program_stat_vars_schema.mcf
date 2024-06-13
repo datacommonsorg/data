@@ -1,0 +1,20 @@
+Node: dcid:benefitsStatus
+typeOf: dcs:Property
+name: "benefitsStatus"
+domainIncludes: dcid:Household
+
+Node: dcid:AuxilioBrasil
+typeOf: dcid:BenefitsStatusEnum
+name: "Auxilio Brasil"
+isProvisional: dcs:True
+
+Node: dcid:BrazilAid
+typeOf: dcid:BenefitsStatusEnum
+name: "Brazil Aid"
+isProvisional: dcs:True
+
+Node: dcid:ExtraordinaryBenefits
+typeOf: dcid:BenefitsStatusEnum
+name: "Extraordinary Benefits"
+isProvisional: dcs:True
+
