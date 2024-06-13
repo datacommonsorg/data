@@ -11,6 +11,13 @@ TAX_ID_DCID_MAPPING = {}
 MODULE_DIR = str(Path(os.path.dirname(__file__)))
 
 def generate_column(df):
+    """Adding new columns with required terms from existing columns.
+	Args:
+		df: dataframe with existing columns from source.
+	Returns:
+		df: dataframe with new columns with required terms.
+	
+	"""
     df['dcid'] = 'bio/' + df['#assembly_accession']
     df['genome_size_dcid'] = 'BasePairs' + df['genome_size'].astype(str)
     df['genome_size_name'] = 'BasePairs ' + df['genome_size'].astype(str)
@@ -21,6 +28,13 @@ def generate_column(df):
     return df
 
 def refseq_category(df):
+    """Replacing columns values to required property value.
+	Args:
+		df: dataframe with existing columns values from source.
+	Returns:
+		df: dataframe with new columns values.
+	
+	"""
     conversion_to_refseq_category = {
         'representative genome': 'dcs:RefSeqCategoryRepresentativeGenome',
         'reference genome': 'dcs:RefSeqCategoryReferenceGenome',
@@ -29,24 +43,59 @@ def refseq_category(df):
     return df
 
 def tax_id(df):
+    """Replacing taxid column value as required.
+	Args:
+		df: dataframe with existing taxid column values from source.
+	Returns:
+		df: dataframe with required taxid column values.
+	
+	"""
     df['taxid'] = df.apply(lambda row: '' if str(row['taxid']) == str(row['species_taxid']) else TAX_ID_DCID_MAPPING.get(row['taxid'], ''), axis=1)
     return df
 
 def species_tax_id(df):
+    """Replacing species_taxid column value with tax_id_dcid_mapping.txt.
+	Args:
+		df: dataframe with existing species_taxid column values from source.
+	Returns:
+		df: dataframe with updated species_taxid column values.
+	
+	"""
     df['species_taxid'] = df['species_taxid'].map(TAX_ID_DCID_MAPPING).fillna(df['species_taxid'])
     return df
 
 def infraspecific_name(df):
+    """Replacing unwanted char from infraspecific_name and organism_name column value.
+	Args:
+		df: dataframe with unwanted char in infraspecific_name and organism_name column values from source.
+	Returns:
+		df: dataframe with removed unwanted char.
+	
+	"""
     df['infraspecific_name'] = df['infraspecific_name'].str.replace('/', ', ')
     df['organism_name'] = df['organism_name'].str.replace('[', '').str.replace(']', '')
     return df
 
 def format_correction(df):
+    """Replacing unwanted char from infraspecific_name and isolate column value.
+	Args:
+		df: dataframe with unwanted char in infraspecific_name and isolate column values from source.
+	Returns:
+		df: dataframe with removed unwanted char.
+	
+	"""
     df['infraspecific_name'] = '\"' + df['infraspecific_name'] + '\"'
     df['isolate'] = '\"' + df['isolate'] + '\"'
     return df
 
 def assembly_level(df):
+    """Replacing columns values to required property value.
+	Args:
+		df: dataframe with existing columns values from source.
+	Returns:
+		df: dataframe with new columns values.
+	
+	"""
     conversion_to_assembly_level = {
         'Complete Genome': 'dcs:GenomeAssemblyLevelCompleteGenome',
         'Chromosome': 'dcs:GenomeAssemblyLevelChromosome',
@@ -57,6 +106,13 @@ def assembly_level(df):
     return df
 
 def release_type(df):
+    """Replacing columns values to required property value.
+	Args:
+		df: dataframe with existing columns values from source.
+	Returns:
+		df: dataframe with new columns values.
+	
+	"""
     conversion_to_release_type = {
         'Major': 'dcs:GenomeAssemblyReleaseTypeMajor',
         'Minor': 'dcs:GenomeAssemblyReleaseTypeMinor',
@@ -66,10 +122,24 @@ def release_type(df):
     return df
 
 def genome_rep(df):
+    """Replacing columns values to required property value.
+	Args:
+		df: dataframe with existing columns values from source.
+	Returns:
+		df: dataframe with new columns values.
+	
+	"""
     df['genome_rep'] = df['genome_rep'].apply(lambda x: 'True' if 'Full' in str(x) else 'False')
     return df
 
 def formatdate(df):
+    """Modifiying date format to correct format.
+	Args:
+		df: dataframe with incorrect date format.
+	Returns:
+		df: dataframe with correct date format.
+	
+	"""
     df['seq_rel_date'] = pd.to_datetime(df['seq_rel_date'])
     df['seq_rel_date'] = df['seq_rel_date'].dt.strftime('%Y-%m-%d')
     df['annotation_date'] = pd.to_datetime(df['annotation_date'])
@@ -77,10 +147,24 @@ def formatdate(df):
     return df
 
 def paired_asm_comp(df):
+    """Replacing columns values to required property value.
+	Args:
+		df: dataframe with existing columns values from source.
+	Returns:
+		df: dataframe with new columns values.
+	
+	"""
     df['paired_asm_comp'] = df['paired_asm_comp'].apply(lambda x: 'True' if 'identical' in str(x) else 'False')
     return df
 
 def relation_to_type_material(df):
+    """Replacing columns values to required property value.
+	Args:
+		df: dataframe with existing columns values from source.
+	Returns:
+		df: dataframe with new columns values.
+	
+	"""
     conversion_to_type_material = {
         'ICTV additional isolate': 'dcs:GenomeAssemblyDerivedFromIctvAdditionalIsolate',
         'ICTV species exemplar': 'dcs:GenomeAssemblyDerivedFromIctvSpeciesExemplar',
@@ -95,6 +179,13 @@ def relation_to_type_material(df):
     return df
 
 def assembly_type(df):
+    """Replacing columns values to required property value.
+	Args:
+		df: dataframe with existing columns values from source.
+	Returns:
+		df: dataframe with new columns values.
+	
+	"""
     conversion_to_assembly_type = {
         'alternate-pseudohaplotype': 'dcs:GenomeAssemblyTypeAlternatePseudohaplotype',
         'diploid': 'dcs:GenomeAssemblyTypeDiploidAssembly',
@@ -106,6 +197,13 @@ def assembly_type(df):
     return df
 
 def group(df):
+    """Replacing columns values to required property value.
+	Args:
+		df: dataframe with existing columns values from source.
+	Returns:
+		df: dataframe with new columns values.
+	
+	"""
     conversion_to_group = {
         'archaea': 'dcs:BiologicalTaxonomyGroupArchaea',
         'bacteria': 'dcs:BiologicalTaxonomyGroupBacteria',

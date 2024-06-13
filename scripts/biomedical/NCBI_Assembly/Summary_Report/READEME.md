@@ -48,7 +48,6 @@ Need to add notes
 
 #### Scripts
 
-- Working further on the script to make it more faster.
 
 ##### Bash Scripts
 
