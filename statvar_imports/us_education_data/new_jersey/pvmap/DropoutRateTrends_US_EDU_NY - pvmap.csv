@@ -1,0 +1,7 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},,,,,,,,,,,,
+Year,observationDate,{Number},,,,,,,,,,,,
+Dropout_District,populationType,Student,measuredProperty,dropoutRate,value,{Number},unit,Percent,,,,,,
+Dropout_State,populationType,Student,measuredProperty,dropoutRate,value,{Number},unit,Percent,observationAbout,geoId/34,,,,
+SchoolRate,populationType,Student,measuredProperty,dropoutRate,value,{Number},unit,Percent,,,,,,
+StateRate,populationType,Student,measuredProperty,dropoutRate,value,{Number},unit,Percent,observationAbout,geoId/34,,,,

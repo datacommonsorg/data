@@ -1,0 +1,8 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},,,,,,,,,,,,
+Female,populationType,Student,measuredProperty,count,gender,Female,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-gender
+White,populationType,Student,measuredProperty,count,race,White,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-race
+Hispanic,populationType,Student,measuredProperty,count,race,HispanicOrLatino,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-race
+PK_HALF,populationType,Student,measuredProperty,count,kindergartenProgram,HalfDay,schoolGradeLevel,PreKindergarten,schoolEnrollment,EnrolledInSchool,value,{Number},,
+SHARED,populationType,Student,measuredProperty,count,enrollmentType,SharedTime,schoolEnrollment,EnrolledInSchool,value,{Number},,,,
+Year,observationDate,{Number},,,,,,,,,,,,

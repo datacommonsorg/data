@@ -1,0 +1,10 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},,,,,,,,,,,,
+White,populationType,Student,measuredProperty,count,race,White,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-race
+Hispanic,populationType,Student,measuredProperty,count,race,HispanicOrLatino,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-race
+Black or African American,populationType,Student,measuredProperty,count,race,BlackOrAfricanAmericanAlone,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-race
+Asian,populationType,Student,measuredProperty,count,race,Asian,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-race
+Native Hawaiian or Pacific Islander,populationType,Student,measuredProperty,count,race,HawaiianNativeOrPacificIslander,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-race
+American Indian or Alaska Native,populationType,Student,measuredProperty,count,race,AmericanIndianOrAlaskaNativeAlone,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-race
+Two or More Races,populationType,Student,measuredProperty,count,race,TwoOrMoreRaces,schoolEnrollment,EnrolledInSchool,value,{Number},unit,Percent,measurementDenominator,-race
+Year,observationDate,{Number},,,,,,,,,,,,
