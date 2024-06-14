@@ -15,7 +15,26 @@
 
 import csv
 import io
+import os
+import sys
 from google.cloud import storage
+
+from absl import app
+from absl import flags
+from absl import logging
+
+_FLAGS = flags.FLAGS
+
+flags.DEFINE_string(
+    'input', 'gs://datcom-csv/usda/2017_cdqt_data.txt',
+    'Input TXT file from https://www.nass.usda.gov/AgCensus/index.php')
+flags.DEFINE_string('output', 'agriculture.csv', 'Output CSV file')
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.join(_SCRIPT_DIR.split('/scripts')[0], 'util'))
+
+import file_util
 
 CSV_COLUMNS = [
     'variableMeasured',
@@ -71,12 +90,15 @@ def write_csv(reader, out, d):
         writer.writerow(row)
 
 
-if __name__ == '__main__':
+def main(_):
     d = get_statvars('statvars')
-    client = storage.Client()
-    bucket = client.get_bucket('datcom-csv')
-    blob = bucket.get_blob('usda/2017_cdqt_data.txt')
-    s = blob.download_as_string().decode('utf-8')
-    reader = csv.DictReader(io.StringIO(s), delimiter='\t')
-    out = open('agriculture.csv', 'w', newline='')
-    write_csv(reader, out, d)
+    logging.info(
+        f'Processing input: {_FLAGS.input} to generate {_FLAGS.output}')
+    with file_util.FileIO(_FLAGS.input, 'r') as input_f:
+        reader = csv.DictReader(input_f, delimiter='\t')
+        with file_util.FileIO(_FLAGS.output, 'w', newline='') as out_f:
+            write_csv(reader, out_f, d)
+
+
+if __name__ == '__main__':
+    app.run(main)

@@ -15,13 +15,13 @@
 
 import math
 import os
-import s2sphere
-import shapely
 import sys
 import tempfile
 import unittest
 
 from absl import logging
+import s2sphere
+import shapely
 
 # Allows the following module imports to work when running as a script
 _SCRIPTS_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -35,7 +35,6 @@ _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
 
 
 class DictUtilsTest(unittest.TestCase):
-
     dict1 = {
         'int_key1': 10,
         'int_key2': 20,
@@ -46,6 +45,9 @@ class DictUtilsTest(unittest.TestCase):
         'string_key1': 'String Value',
         'string_key2': 'Value1',
     }
+
+    def setUp(self):
+        self.maxDiff = None
 
     def test_dict_filter_values(self):
         filter_config = {
@@ -65,6 +67,9 @@ class DictUtilsTest(unittest.TestCase):
             'string_key2': {
                 'regex': r'^[^ ]*$'
             },
+            'param1': {
+                'ignore': 'drop'
+            },
         }
         filter_dict = dict(self.dict1)
         utils.dict_filter_values(filter_dict, filter_config)
@@ -72,6 +77,17 @@ class DictUtilsTest(unittest.TestCase):
         expected_dict.pop('int_key2')  # dropped as < min(1000)
         expected_dict.pop('string_key1')
         self.assertEqual(expected_dict, filter_dict)
+
+        # Test ignore
+        self.assertFalse(
+            utils.dict_filter_values({'param1': ['value1', 'drop this']},
+                                     filter_config))
+        self.assertTrue(
+            utils.dict_filter_values(
+                {
+                    'param1': 'allowed',
+                    'param2': 'do not drop this'
+                }, filter_config))
 
 
 class S2CellUtilsTest(unittest.TestCase):
@@ -83,29 +99,38 @@ class S2CellUtilsTest(unittest.TestCase):
         self.assertFalse(utils.is_s2_cell_id('0x0000010000000000'))
 
     def test_s2_cell_from_latlng(self):
-        self.assertEqual(s2sphere.CellId(0x11282f0000000000),
-                         utils.s2_cell_from_latlng(10.1, 20.2, 10))
+        self.assertEqual(
+            s2sphere.CellId(0x11282F0000000000),
+            utils.s2_cell_from_latlng(10.1, 20.2, 10),
+        )
 
     def test_s2_cell_to_dcid(self):
         self.assertEqual(
             'dcid:s2CellId/0x0000050000000000',
-            utils.s2_cell_to_dcid(s2sphere.CellId(0x0000050000000000)))
-        self.assertEqual('dcid:s2CellId/0x0000050000000000',
-                         utils.s2_cell_to_dcid(0x0000050000000000))
+            utils.s2_cell_to_dcid(s2sphere.CellId(0x0000050000000000)),
+        )
+        self.assertEqual(
+            'dcid:s2CellId/0x0000050000000000',
+            utils.s2_cell_to_dcid(0x0000050000000000),
+        )
 
     def test_s2_cell_from_dcid(self):
         self.assertEqual(
             s2sphere.CellId(0x0000050000000000),
-            utils.s2_cell_from_dcid('dcid:s2CellId/0x0000050000000000'))
-        self.assertEqual(s2sphere.CellId(0x0000070000000000),
-                         utils.s2_cell_from_dcid('s2CellId/0x0000070000000000'))
+            utils.s2_cell_from_dcid('dcid:s2CellId/0x0000050000000000'),
+        )
+        self.assertEqual(
+            s2sphere.CellId(0x0000070000000000),
+            utils.s2_cell_from_dcid('s2CellId/0x0000070000000000'),
+        )
 
     def test_s2_cell_distance(self):
         self.assertTrue(
-            math.isclose(7.84,
-                         utils.s2_cells_distance(0x0000050000000000,
-                                                 0x0000070000000000),
-                         rel_tol=1e-2))
+            math.isclose(
+                7.84,
+                utils.s2_cells_distance(0x0000050000000000, 0x0000070000000000),
+                rel_tol=1e-2,
+            ))
 
     def test_s2_cell_area(self):
         self.assertTrue(
@@ -113,15 +138,17 @@ class S2CellUtilsTest(unittest.TestCase):
                          utils.s2_cell_area(0x0000050000000000),
                          rel_tol=1e-2))
         self.assertTrue(
-            math.isclose(68.95,
-                         utils.s2_cell_area(utils.s2_cell_from_latlng(0, 0,
-                                                                      10)),
-                         rel_tol=1e-2))
+            math.isclose(
+                68.95,
+                utils.s2_cell_area(utils.s2_cell_from_latlng(0, 0, 10)),
+                rel_tol=1e-2,
+            ))
         self.assertTrue(
-            math.isclose(81.37,
-                         utils.s2_cell_area(
-                             utils.s2_cell_from_latlng(80, 90, 10)),
-                         rel_tol=1e-2))
+            math.isclose(
+                81.37,
+                utils.s2_cell_area(utils.s2_cell_from_latlng(80, 90, 10)),
+                rel_tol=1e-2,
+            ))
 
     def test_s2_cell_get_neighbor_ids(self):
         s2_cell = utils.s2_cell_from_latlng(10, 20, 10)
@@ -134,7 +161,7 @@ class S2CellUtilsTest(unittest.TestCase):
             'dcid:s2CellId/0x11281f0000000000',
             'dcid:s2CellId/0x1128270000000000',
             'dcid:s2CellId/0x1128190000000000',
-            'dcid:s2CellId/0x1128250000000000'
+            'dcid:s2CellId/0x1128250000000000',
         ]
         self.assertEqual(expected_neighbors, neighbors)
         for n in neighbors:
@@ -143,10 +170,13 @@ class S2CellUtilsTest(unittest.TestCase):
 
     def test_latlng_cell_area(self):
         self.assertEqual(12309, int(utils.latlng_cell_area(0, 0, 1, 1)))
-        self.assertEqual(21, int(utils.latlng_cell_area(80, -80, .1, .1)))
+        self.assertEqual(21, int(utils.latlng_cell_area(80, -80, 0.1, 0.1)))
 
 
 class GridCellUtilsTest(unittest.TestCase):
+
+    def setUp(self):
+        self.maxDiff = None
 
     def test_is_grid_id(self):
         self.assertFalse(utils.is_grid_id(''))
@@ -162,16 +192,21 @@ class GridCellUtilsTest(unittest.TestCase):
 
     def test_grid_ids_distance(self):
         self.assertTrue(
-            math.isclose(1541.85,
-                         utils.grid_ids_distance(
-                             utils.grid_id_from_lat_lng(1, 10, 20),
-                             utils.grid_id_from_lat_lng(1, 20, 30)),
-                         rel_tol=1e-2))
+            math.isclose(
+                1541.85,
+                utils.grid_ids_distance(
+                    utils.grid_id_from_lat_lng(1, 10, 20),
+                    utils.grid_id_from_lat_lng(1, 20, 30),
+                ),
+                rel_tol=1e-2,
+            ))
         self.assertTrue(
-            math.isclose(143.84,
-                         utils.grid_ids_distance('ipcc_50/34.25_-85.25_USA',
-                                                 'ipcc_50/35.25_-84.25_USA'),
-                         rel_tol=1e-2))
+            math.isclose(
+                143.84,
+                utils.grid_ids_distance('ipcc_50/34.25_-85.25_USA',
+                                        'ipcc_50/35.25_-84.25_USA'),
+                rel_tol=1e-2,
+            ))
 
     def test_grid_area(self):
         self.assertTrue(
@@ -187,10 +222,14 @@ class GridCellUtilsTest(unittest.TestCase):
         grid_id = 'dcid:ipcc_50/26.25_81.75_IND'
         neighbors = utils.grid_get_neighbor_ids(grid_id)
         expected_neighbors = [
-            'dcid:ipcc_50/25.75_81.25_IND', 'dcid:ipcc_50/25.75_81.75_IND',
-            'dcid:ipcc_50/25.75_82.25_IND', 'dcid:ipcc_50/26.25_81.25_IND',
-            'dcid:ipcc_50/26.25_82.25_IND', 'dcid:ipcc_50/26.75_81.25_IND',
-            'dcid:ipcc_50/26.75_81.75_IND', 'dcid:ipcc_50/26.75_82.25_IND'
+            'dcid:ipcc_50/25.75_81.25_IND',
+            'dcid:ipcc_50/25.75_81.75_IND',
+            'dcid:ipcc_50/25.75_82.25_IND',
+            'dcid:ipcc_50/26.25_81.25_IND',
+            'dcid:ipcc_50/26.25_82.25_IND',
+            'dcid:ipcc_50/26.75_81.25_IND',
+            'dcid:ipcc_50/26.75_81.75_IND',
+            'dcid:ipcc_50/26.75_82.25_IND',
         ]
         self.assertEqual(expected_neighbors, neighbors)
         for n in neighbors:
@@ -199,9 +238,14 @@ class GridCellUtilsTest(unittest.TestCase):
         grid_id = 'dcid:grid_1/10_-65'
         neighbors = utils.grid_get_neighbor_ids(grid_id)
         expected_neighbors = [
-            'dcid:grid_1/9_-66', 'dcid:grid_1/9_-65', 'dcid:grid_1/9_-64',
-            'dcid:grid_1/10_-66', 'dcid:grid_1/10_-64', 'dcid:grid_1/11_-66',
-            'dcid:grid_1/11_-65', 'dcid:grid_1/11_-64'
+            'dcid:grid_1/9_-66',
+            'dcid:grid_1/9_-65',
+            'dcid:grid_1/9_-64',
+            'dcid:grid_1/10_-66',
+            'dcid:grid_1/10_-64',
+            'dcid:grid_1/11_-66',
+            'dcid:grid_1/11_-65',
+            'dcid:grid_1/11_-64',
         ]
         self.assertEqual(expected_neighbors, neighbors)
         for n in neighbors:
@@ -211,32 +255,47 @@ class GridCellUtilsTest(unittest.TestCase):
     def test_grid_to_polygon(self):
         self.assertEqual(
             {
-                'coordinates': (((81.5, 26.0), (81.5, 26.5), (82.0, 26.5),
-                                 (82.0, 26.0), (81.5, 26.0)),),
-                'type': 'Polygon'
+                'coordinates': ((
+                    (81.5, 26.0),
+                    (81.5, 26.5),
+                    (82.0, 26.5),
+                    (82.0, 26.0),
+                    (81.5, 26.0),
+                ),),
+                'type': 'Polygon',
             },
             shapely.geometry.mapping(
-                utils.grid_to_polygon('dcid:ipcc_50/26.25_81.75_IND')))
+                utils.grid_to_polygon('dcid:ipcc_50/26.25_81.75_IND')),
+        )
         # Polygon at edge doesn't go over max lat/lng.
         self.assertEqual(
             {
-                'coordinates': (((179.5, 89.5), (179.5, 90.0), (180.0, 90.0),
-                                 (180.0, 89.5), (179.5, 89.5)),),
-                'type': 'Polygon'
+                'coordinates': ((
+                    (179.5, 89.5),
+                    (179.5, 90.0),
+                    (180.0, 90.0),
+                    (180.0, 89.5),
+                    (179.5, 89.5),
+                ),),
+                'type': 'Polygon',
             },
-            shapely.geometry.mapping(utils.place_to_polygon('grid_1/90_180')))
+            shapely.geometry.mapping(utils.place_to_polygon('grid_1/90_180')),
+        )
 
         self.assertEqual(
             {
-                'coordinates': (((20.04496617551588, 10.074733389893098),
-                                 (20.140259352250975, 10.068731256770613),
-                                 (20.140259352250975, 10.153784179458425),
-                                 (20.04496617551588, 10.159834880513182),
-                                 (20.04496617551588, 10.074733389893098)),),
-                'type': 'Polygon'
+                'coordinates': ((
+                    (20.04496617551588, 10.074733389893098),
+                    (20.140259352250975, 10.068731256770613),
+                    (20.140259352250975, 10.153784179458425),
+                    (20.04496617551588, 10.159834880513182),
+                    (20.04496617551588, 10.074733389893098),
+                ),),
+                'type': 'Polygon',
             },
             shapely.geometry.mapping(
-                utils.place_to_polygon('s2CellId/0x1128250000000000')))
+                utils.place_to_polygon('s2CellId/0x1128250000000000')),
+        )
 
 
 class StrUtilsTest(unittest.TestCase):
@@ -244,17 +303,25 @@ class StrUtilsTest(unittest.TestCase):
     def test_strip_namespace(self):
         self.assertEqual('country/IND',
                          utils.strip_namespace('dcid:country/IND'))
-        self.assertEqual('ipcc_50/26.25_81.75_IND',
-                         utils.strip_namespace('dcs:ipcc_50/26.25_81.75_IND'))
-        self.assertEqual('s2CellId/0x1128250000000000',
-                         utils.strip_namespace('s2CellId/0x1128250000000000'))
+        self.assertEqual(
+            'ipcc_50/26.25_81.75_IND',
+            utils.strip_namespace('dcs:ipcc_50/26.25_81.75_IND'),
+        )
+        self.assertEqual(
+            's2CellId/0x1128250000000000',
+            utils.strip_namespace('s2CellId/0x1128250000000000'),
+        )
 
     def test_add_namespace(self):
         self.assertEqual('dcid:country/IND', utils.add_namespace('country/IND'))
-        self.assertEqual('dcid:ipcc_50/26.25_81.75_IND',
-                         utils.add_namespace('dcs:ipcc_50/26.25_81.75_IND'))
-        self.assertEqual('dcid:s2CellId/0x1128250000000000',
-                         utils.add_namespace('s2CellId/0x1128250000000000'))
+        self.assertEqual(
+            'dcid:ipcc_50/26.25_81.75_IND',
+            utils.add_namespace('dcs:ipcc_50/26.25_81.75_IND'),
+        )
+        self.assertEqual(
+            'dcid:s2CellId/0x1128250000000000',
+            utils.add_namespace('s2CellId/0x1128250000000000'),
+        )
 
     def test_str_get_numeric_vlaue(self):
         self.assertEqual(10.1, utils.str_get_numeric_value('10.1'))
@@ -288,7 +355,8 @@ class DateUtilsTest(unittest.TestCase):
     def test_date_advance_by_time_period(self):
         self.assertEqual(
             utils.date_today(),
-            utils.date_advance_by_period(utils.date_yesterday(), 'P1D'))
+            utils.date_advance_by_period(utils.date_yesterday(), 'P1D'),
+        )
         self.assertEqual('2023-04-10',
                          utils.date_advance_by_period('2023-04-20', 'P-10D'))
         self.assertEqual(

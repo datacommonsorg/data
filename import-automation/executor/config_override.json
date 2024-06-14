@@ -1,0 +1,8 @@
+{
+    "configs":{
+        "executor_type": "GKE",
+        "user_script_args": [],
+        "user_script_env": {},
+        "user_script_timeout": 3600
+   }
+ }
