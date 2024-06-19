@@ -40,7 +40,7 @@ class TestUSANSTEM(unittest.TestCase):
         main(_FLAGS)
         same = filecmp.cmp(
              _FLAGS.output_dir,
-             MODULE_DIR+'/test_data/output_file/expected_usan.csv')
+             MODULE_DIR + '/test_data/output_file/expected_usan.csv')
         self.assertTrue(same)
 
 
