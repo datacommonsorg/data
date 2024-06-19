@@ -178,7 +178,10 @@ def format_usan_specialization(df):
 		stem_type = row['Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)']
 		if str(stem_type) in ["NaN", "nan"]:
 			continue
-		if str(stem) in ["NaN", "nan",]: ## if word stem is absent, it implies specialization is needed
+		if str(stem) in [
+			"NaN",
+			"nan",
+		]: ## if word stem is absent, it implies specialization is needed
 			df.loc[index,'SpecializationOf'] = previous_stem
 			df.loc[index, 'Stem'] = stem_type.strip('-')
 		else:
@@ -202,7 +205,8 @@ def format_dcid(df):
 			df.loc[index, 'Stem'] = str(stem).replace('- -', '_')
 
 	df['dcid'] = 'chem/' +  df['Stem'].replace('\W', '', regex=True)
-	df['SpecializationOf'] = "chem/" + df['SpecializationOf'].dropna().astype(str)     
+	df['SpecializationOf'] = "chem/" + df['SpecializationOf'].dropna().astype(
+		str)     
 	return df
 
 
@@ -226,7 +230,10 @@ def format_examples(df):
 			while str(df.loc[index-i,'Stem']) in ["NaN", "nan"]:
 				i+=1
 			# appending the example to correct example list
-			df.loc[index-i,'Examples'] = df.loc[index-i,'Examples'] + ", " + df.loc[index,'Examples']
+			df.loc[index-i,
+		  		'Examples'] = df.loc[index-i,
+						   			'Examples'] + ", " + df.loc[index,
+																'Examples']
 	return df
 
 def format_sameas(df):
@@ -253,9 +260,9 @@ def set_flags():
 	global _FLAGS
 	_FLAGS = flags.FLAGS
 	flags.DEFINE_string('output_dir', 'scripts/CSVs/usan.csv',
-                    'Output directory for generated files.')
+					 	'Output directory for generated files.')
 	flags.DEFINE_string('input_dir', 'scripts/input/usan.xlsx',
-                    'Input directory where .dmp files downloaded.')
+                    	'Input directory where .dmp files downloaded.')
 	_FLAGS(sys.argv)
 
 def driver_function(df):
@@ -280,16 +287,24 @@ def driver_function(df):
 
 
 def main(_FLAGS):
-	#global _FLAGS
 	file_input = _FLAGS.input_dir
 	file_output = _FLAGS.output_dir
 	df1 = pd.read_excel(file_input)
 	# filtering the required columns
-	df = df1[['Stem','Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)','Definition','Examples']]
+	df = df1[[
+		'Stem','Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)','Definition',
+		'Examples'
+	]]
 	df = driver_function(df)
 	df = format_sameas(df)
-	df_final = df[["Stem","Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)","Definition","Examples","WordStem","SpecializationOf","dcid", "sameAs"]]
-	df_final.to_csv(file_output, doublequote=False, escapechar='\\',index=False)
+	df_final = df[[
+		"Stem","Prefix (xxx-), Infix (-xxx-), or Suffix (-xxx)","Definition",
+		"Examples","WordStem","SpecializationOf","dcid", "sameAs"
+	]]
+	df_final.to_csv(file_output,
+				 	doublequote=False,
+				 	escapechar='\\',
+				 	index=False)
 
 
 if __name__ == '__main__':

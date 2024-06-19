@@ -20,15 +20,18 @@ from format_usan import *
 MODULE_DIR = str(Path(os.path.dirname(__file__)))
 print(MODULE_DIR)
 _FLAGS = None
+
+
 def set_flag():
 	global _FLAGS
 	_FLAGS = flags.FLAGS
 	flags.DEFINE_string('output_dir', 'scripts/test_data/output_file/usan.csv',
-                    'Output directory for generated files.')
+                        'Output directory for generated files.')
 	flags.DEFINE_string('input_dir', 'scripts/test_data/input_file/usan_test_data.xlsx',
-                    'Input directory where .dmp files downloaded.')
+                        'Input directory where .dmp files downloaded.')
      
 	_FLAGS(sys.argv)
+
 
 class TestUSANSTEM(unittest.TestCase):
 
@@ -39,8 +42,8 @@ class TestUSANSTEM(unittest.TestCase):
     def test_csv_check(self):
         main(_FLAGS)
         same = filecmp.cmp(
-             _FLAGS.output_dir,
-             MODULE_DIR + '/test_data/output_file/expected_usan.csv')
+            _FLAGS.output_dir,
+            MODULE_DIR + '/test_data/output_file/expected_usan.csv')
         self.assertTrue(same)
 
 
