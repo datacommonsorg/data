@@ -38,7 +38,9 @@ class TestUSANSTEM(unittest.TestCase):
 
     def test_csv_check(self):
         main(_FLAGS)
-        same = filecmp.cmp(_FLAGS.output_dir, MODULE_DIR+'/test_data/output_file/expected_usan.csv')
+        same = filecmp.cmp(
+             _FLAGS.output_dir,
+             MODULE_DIR+'/test_data/output_file/expected_usan.csv')
         self.assertTrue(same)
 
 
