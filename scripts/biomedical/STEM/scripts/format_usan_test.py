@@ -13,7 +13,6 @@
 # limitations under the License.
 
 import os
-import copy
 import filecmp
 import unittest
 from format_usan import *

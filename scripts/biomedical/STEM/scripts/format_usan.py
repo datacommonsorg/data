@@ -14,7 +14,7 @@
 """
 Author: Suhana Bedi
 Date: 01/10/2023
-Edited By: Sanika Prasad
+Edited By: Sanika Prasad.
 Last Edited: 05/20/24
 Name: format_usan
 Description: converts a .csv file containing USAN (United States Adopted Names) approved stems into a formatted .csv with stems and substems differentiated and dcids created.  

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Author: Sanika Prasad
+# Author: Sanika Prasad.
 # Date: 24-May-2024
 
 #!/bin/bash
