@@ -183,14 +183,22 @@ def relation_to_type_material(df):
 	
 	"""
     conversion_to_type_material = {
-        'ICTV additional isolate': 'dcs:GenomeAssemblyDerivedFromIctvAdditionalIsolate',
-        'ICTV species exemplar': 'dcs:GenomeAssemblyDerivedFromIctvSpeciesExemplar',
-        'assembly designated as clade exemplar': 'dcs:GenomeAssemblyDerivedFromCladeExemplar',
-        'assembly designated as neotype': 'dcs:GenomeAssemblyDerivedFromNeotype',
-        'assembly designated as reftype': 'dcs:GenomeAssemblyDerivedFromReftype',
-        'assembly from pathotype material': 'dcs:GenomeAssemblyDerivedFromPathotypeMaterial',
-        'assembly from synonym type material': 'dcs:GenomeAssemblyDerivedFromSynonymTypeMaterial',
-        'assembly from type material': 'dcs:GenomeAssemblyDerivedFromTypeMaterial',
+        'ICTV additional isolate':
+            'dcs:GenomeAssemblyDerivedFromIctvAdditionalIsolate',
+        'ICTV species exemplar':
+            'dcs:GenomeAssemblyDerivedFromIctvSpeciesExemplar',
+        'assembly designated as clade exemplar':
+            'dcs:GenomeAssemblyDerivedFromCladeExemplar',
+        'assembly designated as neotype':
+            'dcs:GenomeAssemblyDerivedFromNeotype',
+        'assembly designated as reftype':
+            'dcs:GenomeAssemblyDerivedFromReftype',
+        'assembly from pathotype material':
+            'dcs:GenomeAssemblyDerivedFromPathotypeMaterial',
+        'assembly from synonym type material':
+            'dcs:GenomeAssemblyDerivedFromSynonymTypeMaterial',
+        'assembly from type material':
+            'dcs:GenomeAssemblyDerivedFromTypeMaterial',
     }
     df['relation_to_type_material'] = df['relation_to_type_material'].map(
         conversion_to_type_material).fillna(df['relation_to_type_material'])
@@ -206,11 +214,16 @@ def assembly_type(df):
 	
 	"""
     conversion_to_assembly_type = {
-        'alternate-pseudohaplotype': 'dcs:GenomeAssemblyTypeAlternatePseudohaplotype',
-        'diploid': 'dcs:GenomeAssemblyTypeDiploidAssembly',
-        'haploid': 'dcs:GenomeAssemblyTypeHaploidAssembly',
-        'haploid-with-alt-loci': 'dcs:GenomeAssemblyTypeHaploidWithAltLoci',
-        'unresolved-diploid': 'dcs:GenomeAssemblyTypeUnresolvedDiploid',
+        'alternate-pseudohaplotype':
+            'dcs:GenomeAssemblyTypeAlternatePseudohaplotype',
+        'diploid':
+            'dcs:GenomeAssemblyTypeDiploidAssembly',
+        'haploid':
+            'dcs:GenomeAssemblyTypeHaploidAssembly',
+        'haploid-with-alt-loci':
+            'dcs:GenomeAssemblyTypeHaploidWithAltLoci',
+        'unresolved-diploid':
+            'dcs:GenomeAssemblyTypeUnresolvedDiploid',
     }
     df['assembly_type'] = df['assembly_type'].map(
         conversion_to_assembly_type).fillna(df['assembly_type'])
@@ -226,17 +239,28 @@ def group(df):
 	
 	"""
     conversion_to_group = {
-        'archaea': 'dcs:BiologicalTaxonomyGroupArchaea',
-        'bacteria': 'dcs:BiologicalTaxonomyGroupBacteria',
-        'fungi': 'dcs:BiologicalTaxonomyGroupFungi',
-        'invertebrate': 'dcs:BiologicalTaxonomyGroupInvertebrate',
-        'metagenomes': 'dcs:BiologicalTaxonomyGroupMetagenomes',
-        'other': 'dcs:BiologicalTaxonomyGroupOther',
-        'plant': 'dcs:BiologicalTaxonomyGroupPlant',
-        'protozoa': 'dcs:BiologicalTaxonomyGroupProtozoa',
-        'vertebrate_mammalian': 'dcs:BiologicalTaxonomyGroupVertebrateMammalian',
-        'vertebrate_other': 'dcs:BiologicalTaxonomyGroupVertebrateOther',
-        'viral': 'dcs:BiologicalTaxonomyGroupViral',
+        'archaea':
+            'dcs:BiologicalTaxonomyGroupArchaea',
+        'bacteria':
+            'dcs:BiologicalTaxonomyGroupBacteria',
+        'fungi':
+            'dcs:BiologicalTaxonomyGroupFungi',
+        'invertebrate':
+            'dcs:BiologicalTaxonomyGroupInvertebrate',
+        'metagenomes':
+            'dcs:BiologicalTaxonomyGroupMetagenomes',
+        'other':
+            'dcs:BiologicalTaxonomyGroupOther',
+        'plant':
+            'dcs:BiologicalTaxonomyGroupPlant',
+        'protozoa':
+            'dcs:BiologicalTaxonomyGroupProtozoa',
+        'vertebrate_mammalian':
+            'dcs:BiologicalTaxonomyGroupVertebrateMammalian',
+        'vertebrate_other':
+            'dcs:BiologicalTaxonomyGroupVertebrateOther',
+        'viral':
+            'dcs:BiologicalTaxonomyGroupViral',
     }
     df['group'] = df['group'].map(conversion_to_group).fillna(df['group'])
     return df
@@ -245,14 +269,17 @@ def set_flags():
     global _FLAGS
     _FLAGS = flags.FLAGS
     flags.DEFINE_string('output_dir', 'output_file/',
-                    'Output directory for generated files.')
-    flags.DEFINE_string('input_dir', 'scripts/input/assembly_summary_genbank.txt',
-                    'Input directory where .txt files downloaded.')    
-    flags.DEFINE_string('input_dir1', 'scripts/input/assembly_summary_refseq.txt',
-                    'Output directory for generated files.')
+                        'Output directory for generated files.')
+    flags.DEFINE_string('input_dir',
+                        'scripts/input/assembly_summary_genbank.txt',
+                        'Input directory where .txt files downloaded.')    
+    flags.DEFINE_string('input_dir1',
+                        'scripts/input/assembly_summary_refseq.txt',
+                        'Output directory for generated files.')
     flags.DEFINE_string('tax_id_dcid_mapping',
                         'scripts/input/tax_id_dcid_mapping.txt',
                         'Input directory where .txt files downloaded.')
+
 
 def preprocess_data(df):
     df = generate_column(df)
@@ -271,6 +298,7 @@ def preprocess_data(df):
     df = group(df)
     return df
 
+
 def main(_FLAGS):
     global TAX_ID_DCID_MAPPING
     file_input = _FLAGS.input_dir
@@ -278,20 +306,20 @@ def main(_FLAGS):
     tax_id_dcid_mapping = _FLAGS.tax_id_dcid_mapping
     output_dir = _FLAGS.output_dir
     file_output = os.path.join(MODULE_DIR, output_dir)
-    
+
     df = pd.read_csv(file_input, skiprows=1, delimiter='\t')
     df = df.replace('na', '')
     df = df.drop(columns='asm_not_live_date')
-    
+
     df1 = pd.read_csv(file_input1, skiprows=1, delimiter='\t')
     ref_gbrs_paired_asm = df1['gbrs_paired_asm'].tolist()
     # Replace NaN values with a placeholder
     df['gbrs_paired_asm'] = df['gbrs_paired_asm'].fillna('')
 
     # Perform operations after replacing NaN
-    df.loc[~df['gbrs_paired_asm'].str.startswith('GC') & df[
-        '#assembly_accession'].isin(ref_gbrs_paired_asm),
-        'gbrs_paired_asm'] = df['#assembly_accession']
+    df.loc[~df['gbrs_paired_asm'].str.startswith('GC') & 
+           df['#assembly_accession'].isin(ref_gbrs_paired_asm),
+            'gbrs_paired_asm'] = df['#assembly_accession']
 
     
     with open(tax_id_dcid_mapping, 'r') as file:
@@ -303,15 +331,15 @@ def main(_FLAGS):
     file_output = os.path.join(file_output, 'ncbi_assembly_summary.csv')
     df.to_csv(file_output, index=False)
 
-    
+
 
 if __name__ == "__main__":
-   try:
+    try:
         set_flags()  # Parse the flags
         _FLAGS = flags.FLAGS  # Access the parsed flags
         main(_FLAGS)
 
-   except absl.flags._exceptions.UnparsedFlagAccessError:
+    except absl.flags._exceptions.UnparsedFlagAccessError:
         # Retry parsing the flags if the UnparsedFlagAccessError occurs
         flags.FLAGS(sys.argv)
         _FLAGS = flags.FLAGS
