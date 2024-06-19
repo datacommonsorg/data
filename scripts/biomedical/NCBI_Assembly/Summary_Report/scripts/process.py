@@ -10,6 +10,7 @@ TAX_ID_DCID_MAPPING = {}
 
 MODULE_DIR = str(Path(os.path.dirname(__file__)))
 
+
 def generate_column(df):
     """Adding new columns with required terms from existing columns.
 	Args:
@@ -21,8 +22,10 @@ def generate_column(df):
     df['dcid'] = 'bio/' + df['#assembly_accession']
     df['genome_size_dcid'] = 'BasePairs' + df['genome_size'].astype(str)
     df['genome_size_name'] = 'BasePairs ' + df['genome_size'].astype(str)
-    df['genome_size_ungapped_dcid'] = 'BasePairs' + df['genome_size_ungapped'].astype(str)
-    df['genome_size_ungapped_name'] = 'BasePairs ' + df['genome_size_ungapped'].astype(str)
+    df['genome_size_ungapped_dcid'] = 'BasePairs' + df[
+        'genome_size_ungapped'].astype(str)
+    df['genome_size_ungapped_name'] = 'BasePairs ' + df[
+        'genome_size_ungapped'].astype(str)
     df['gc_percent_dcid'] = 'Percent' + df['gc_percent'].astype(str)
     df['gc_percent_name'] = 'Percent ' + df['gc_percent'].astype(str)
     return df
@@ -39,7 +42,8 @@ def refseq_category(df):
         'representative genome': 'dcs:RefSeqCategoryRepresentativeGenome',
         'reference genome': 'dcs:RefSeqCategoryReferenceGenome',
     }
-    df['refseq_category'] = df['refseq_category'].map(conversion_to_refseq_category).fillna(df['refseq_category'])
+    df['refseq_category'] = df['refseq_category'].map(
+        conversion_to_refseq_category).fillna(df['refseq_category'])
     return df
 
 def tax_id(df):
@@ -50,7 +54,9 @@ def tax_id(df):
 		df: dataframe with required taxid column values.
 	
 	"""
-    df['taxid'] = df.apply(lambda row: '' if str(row['taxid']) == str(row['species_taxid']) else TAX_ID_DCID_MAPPING.get(row['taxid'], ''), axis=1)
+    df['taxid'] = df.apply(lambda row: '' if str(row['taxid']) == str(row[
+        'species_taxid']) else TAX_ID_DCID_MAPPING.get(row['taxid'], ''),
+        axis=1)
     return df
 
 def species_tax_id(df):
@@ -61,7 +67,8 @@ def species_tax_id(df):
 		df: dataframe with updated species_taxid column values.
 	
 	"""
-    df['species_taxid'] = df['species_taxid'].map(TAX_ID_DCID_MAPPING).fillna(df['species_taxid'])
+    df['species_taxid'] = df['species_taxid'].map(TAX_ID_DCID_MAPPING).fillna(
+        df['species_taxid'])
     return df
 
 def infraspecific_name(df):
@@ -73,7 +80,8 @@ def infraspecific_name(df):
 	
 	"""
     df['infraspecific_name'] = df['infraspecific_name'].str.replace('/', ', ')
-    df['organism_name'] = df['organism_name'].str.replace('[', '').str.replace(']', '')
+    df['organism_name'] = df['organism_name'].str.replace('[', '').str.replace(
+        ']', '')
     return df
 
 def format_correction(df):
@@ -87,6 +95,7 @@ def format_correction(df):
     df['infraspecific_name'] = '\"' + df['infraspecific_name'] + '\"'
     df['isolate'] = '\"' + df['isolate'] + '\"'
     return df
+
 
 def assembly_level(df):
     """Replacing columns values to required property value.
@@ -102,8 +111,10 @@ def assembly_level(df):
         'Scaffold': 'dcs:GenomeAssemblyLevelScaffold',
         'Contig': 'dcs:GenomeAssemblyLevelContig',
     }
-    df['assembly_level'] = df['assembly_level'].map(conversion_to_assembly_level).fillna(df['assembly_level'])
+    df['assembly_level'] = df['assembly_level'].map(
+        conversion_to_assembly_level).fillna(df['assembly_level'])
     return df
+
 
 def release_type(df):
     """Replacing columns values to required property value.
@@ -118,8 +129,10 @@ def release_type(df):
         'Minor': 'dcs:GenomeAssemblyReleaseTypeMinor',
         'Patch': 'dcs:GenomeAssemblyReleaseTypePatch',
     }
-    df['release_type'] = df['release_type'].map(conversion_to_release_type).fillna(df['release_type'])
+    df['release_type'] = df['release_type'].map(
+        conversion_to_release_type).fillna(df['release_type'])
     return df
+
 
 def genome_rep(df):
     """Replacing columns values to required property value.
@@ -129,8 +142,10 @@ def genome_rep(df):
 		df: dataframe with new columns values.
 	
 	"""
-    df['genome_rep'] = df['genome_rep'].apply(lambda x: 'True' if 'Full' in str(x) else 'False')
+    df['genome_rep'] = df['genome_rep'].apply(lambda x: 'True'
+                                              if 'Full' in str(x) else 'False')
     return df
+
 
 def formatdate(df):
     """Modifiying date format to correct format.
@@ -154,7 +169,9 @@ def paired_asm_comp(df):
 		df: dataframe with new columns values.
 	
 	"""
-    df['paired_asm_comp'] = df['paired_asm_comp'].apply(lambda x: 'True' if 'identical' in str(x) else 'False')
+    df['paired_asm_comp'] = df['paired_asm_comp'].apply(lambda x: 'True'
+                                                        if 'identical' in str(x)
+                                                        else 'False')
     return df
 
 def relation_to_type_material(df):
@@ -175,8 +192,10 @@ def relation_to_type_material(df):
         'assembly from synonym type material': 'dcs:GenomeAssemblyDerivedFromSynonymTypeMaterial',
         'assembly from type material': 'dcs:GenomeAssemblyDerivedFromTypeMaterial',
     }
-    df['relation_to_type_material'] = df['relation_to_type_material'].map(conversion_to_type_material).fillna(df['relation_to_type_material'])
+    df['relation_to_type_material'] = df['relation_to_type_material'].map(
+        conversion_to_type_material).fillna(df['relation_to_type_material'])
     return df
+
 
 def assembly_type(df):
     """Replacing columns values to required property value.
@@ -193,8 +212,10 @@ def assembly_type(df):
         'haploid-with-alt-loci': 'dcs:GenomeAssemblyTypeHaploidWithAltLoci',
         'unresolved-diploid': 'dcs:GenomeAssemblyTypeUnresolvedDiploid',
     }
-    df['assembly_type'] = df['assembly_type'].map(conversion_to_assembly_type).fillna(df['assembly_type'])
+    df['assembly_type'] = df['assembly_type'].map(
+        conversion_to_assembly_type).fillna(df['assembly_type'])
     return df
+
 
 def group(df):
     """Replacing columns values to required property value.
@@ -229,8 +250,9 @@ def set_flags():
                     'Input directory where .txt files downloaded.')    
     flags.DEFINE_string('input_dir1', 'scripts/input/assembly_summary_refseq.txt',
                     'Output directory for generated files.')
-    flags.DEFINE_string('tax_id_dcid_mapping', 'scripts/input/tax_id_dcid_mapping.txt',
-                    'Input directory where .txt files downloaded.')
+    flags.DEFINE_string('tax_id_dcid_mapping',
+                        'scripts/input/tax_id_dcid_mapping.txt',
+                        'Input directory where .txt files downloaded.')
 
 def preprocess_data(df):
     df = generate_column(df)
@@ -267,8 +289,9 @@ def main(_FLAGS):
     df['gbrs_paired_asm'] = df['gbrs_paired_asm'].fillna('')
 
     # Perform operations after replacing NaN
-    df.loc[~df['gbrs_paired_asm'].str.startswith('GC') & df['#assembly_accession'].isin(ref_gbrs_paired_asm),
-           'gbrs_paired_asm'] = df['#assembly_accession']
+    df.loc[~df['gbrs_paired_asm'].str.startswith('GC') & df[
+        '#assembly_accession'].isin(ref_gbrs_paired_asm),
+        'gbrs_paired_asm'] = df['#assembly_accession']
 
     
     with open(tax_id_dcid_mapping, 'r') as file:
