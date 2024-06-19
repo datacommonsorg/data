@@ -30,6 +30,7 @@ def generate_column(df):
     df['gc_percent_name'] = 'Percent ' + df['gc_percent'].astype(str)
     return df
 
+
 def refseq_category(df):
     """Replacing columns values to required property value.
 	Args:
@@ -46,6 +47,7 @@ def refseq_category(df):
         conversion_to_refseq_category).fillna(df['refseq_category'])
     return df
 
+
 def tax_id(df):
     """Replacing taxid column value as required.
 	Args:
@@ -56,8 +58,9 @@ def tax_id(df):
 	"""
     df['taxid'] = df.apply(lambda row: '' if str(row['taxid']) == str(row[
         'species_taxid']) else TAX_ID_DCID_MAPPING.get(row['taxid'], ''),
-        axis=1)
+                            axis=1)
     return df
+
 
 def species_tax_id(df):
     """Replacing species_taxid column value with tax_id_dcid_mapping.txt.
@@ -70,6 +73,7 @@ def species_tax_id(df):
     df['species_taxid'] = df['species_taxid'].map(TAX_ID_DCID_MAPPING).fillna(
         df['species_taxid'])
     return df
+
 
 def infraspecific_name(df):
     """Replacing unwanted char from infraspecific_name and organism_name column value.
@@ -84,6 +88,7 @@ def infraspecific_name(df):
         ']', '')
     return df
 
+
 def format_correction(df):
     """Replacing unwanted char from infraspecific_name and isolate column value.
 	Args:
@@ -95,6 +100,7 @@ def format_correction(df):
     df['infraspecific_name'] = '\"' + df['infraspecific_name'] + '\"'
     df['isolate'] = '\"' + df['isolate'] + '\"'
     return df
+
 
 
 def assembly_level(df):
@@ -161,6 +167,7 @@ def formatdate(df):
     df['annotation_date'] = df['annotation_date'].dt.strftime('%Y-%m-%d')
     return df
 
+
 def paired_asm_comp(df):
     """Replacing columns values to required property value.
 	Args:
@@ -169,10 +176,10 @@ def paired_asm_comp(df):
 		df: dataframe with new columns values.
 	
 	"""
-    df['paired_asm_comp'] = df['paired_asm_comp'].apply(lambda x: 'True'
-                                                        if 'identical' in str(x)
-                                                        else 'False')
+    df['paired_asm_comp'] = df['paired_asm_comp'].apply(
+        lambda x: 'True' if 'identical' in str(x) else 'False')
     return df
+
 
 def relation_to_type_material(df):
     """Replacing columns values to required property value.
@@ -203,6 +210,7 @@ def relation_to_type_material(df):
     df['relation_to_type_material'] = df['relation_to_type_material'].map(
         conversion_to_type_material).fillna(df['relation_to_type_material'])
     return df
+
 
 
 def assembly_type(df):
@@ -272,7 +280,7 @@ def set_flags():
                         'Output directory for generated files.')
     flags.DEFINE_string('input_dir',
                         'scripts/input/assembly_summary_genbank.txt',
-                        'Input directory where .txt files downloaded.')    
+                        'Input directory where .txt files downloaded.')
     flags.DEFINE_string('input_dir1',
                         'scripts/input/assembly_summary_refseq.txt',
                         'Output directory for generated files.')
@@ -317,11 +325,10 @@ def main(_FLAGS):
     df['gbrs_paired_asm'] = df['gbrs_paired_asm'].fillna('')
 
     # Perform operations after replacing NaN
-    df.loc[~df['gbrs_paired_asm'].str.startswith('GC') & 
+    df.loc[~df['gbrs_paired_asm'].str.startswith('GC') &
            df['#assembly_accession'].isin(ref_gbrs_paired_asm),
             'gbrs_paired_asm'] = df['#assembly_accession']
 
-    
     with open(tax_id_dcid_mapping, 'r') as file:
         csv_reader = csv.DictReader(file)
         for row in csv_reader:
@@ -330,7 +337,6 @@ def main(_FLAGS):
     df = preprocess_data(df)
     file_output = os.path.join(file_output, 'ncbi_assembly_summary.csv')
     df.to_csv(file_output, index=False)
-
 
 
 if __name__ == "__main__":
