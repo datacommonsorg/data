@@ -8,7 +8,6 @@
    3. [Notes and Caveats](#notes-and-caveats)
    4. [dcid Generation](#dcid-generation)
    5. [License](#license)
-   6. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
 2. [About the import](#about-the-import)
    1. [Artifacts](#artifacts)
       1. [Scripts](#scripts)
@@ -64,8 +63,6 @@ The dcids for ChemicalCompounds were generated using the PubChem compound ID wit
 ### License
 
 Any works found on National Library of Medicine (NLM) Web sites may be freely used or reproduced without permission in the U.S. More information about the license can be found [here](https://www.nlm.nih.gov/web_policies.html).
-
-### Dataset Documentation and Relevant Links
 
 ## About the import
 
