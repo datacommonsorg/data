@@ -1,14 +1,14 @@
-Node: dcid:age
-typeOf: dcs:Property
-name: "age"
-rangeIncludes: dcid:QuantityRange
-domainIncludes: dcid:BirthEvent,dcid:NonPregnantWoman
-
 Node: dcid:placeOfResidenceClassification
 typeOf: dcs:Property
 name: "placeOfResidenceClassification"
 domainIncludes: dcid:Person,dcid:Households,dcid:PregnantWoman,dcid:Mother,dcid:ExpenditureActivity,dcid:Children,dcid:BirthEvent,dcid:NonPregnantWoman
 rangeIncludes: dcid:HumanSettlementClassificationEnum
+
+Node: dcid:age
+typeOf: dcs:Property
+name: "age"
+rangeIncludes: dcid:QuantityRange
+domainIncludes: dcid:BirthEvent,dcid:NonPregnantWoman
 
 Node: dcid:gender
 typeOf: dcs:Property
@@ -635,18 +635,5 @@ isProvisional: dcs:True
 Node: dcid:OralCavityExamination
 typeOf: dcid:HealthPreventionEnum
 name: "Oral Cavity Examination"
-isProvisional: dcs:True
-
-Node: dcid:p1
-typeOf: dcs:Property
-name: "p1"
-domainIncludes: dcid:Person,dcid:Households,dcid:PregnantWoman,dcid:Mother,dcid:ExpenditureActivity,dcid:Children,dcid:BirthEvent,dcid:NonPregnantWoman
-rangeIncludes: dcid:P1Enum,dcid:Property
-isProvisional: dcs:True
-
-Node: dcid:v1
-typeOf: dcs:Property
-name: "v1"
-rangeIncludes: dcid:V1Enum
 isProvisional: dcs:True
 

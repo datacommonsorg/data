@@ -1,14 +1,14 @@
-Node: dcid:gender
-typeOf: dcs:Property
-name: "gender"
-rangeIncludes: dcid:GenderType
-domainIncludes: dcid:PregnantWoman,dcid:BirthEvent
-
 Node: dcid:age
 typeOf: dcs:Property
 name: "age"
 rangeIncludes: dcid:QuantityRange
 domainIncludes: dcid:BirthEvent,dcid:NonPregnantWoman,dcid:MenstrualWoman
+
+Node: dcid:gender
+typeOf: dcs:Property
+name: "gender"
+rangeIncludes: dcid:GenderType
+domainIncludes: dcid:PregnantWoman,dcid:BirthEvent
 
 Node: dcid:medicalCondition
 typeOf: dcs:Property

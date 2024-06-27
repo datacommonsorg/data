@@ -486,16 +486,16 @@ name: "schoolingDuration"
 domainIncludes: dcid:Person
 rangeIncludes: dcid:QuantityRange
 
-Node: dcid:Mother
-typeOf: dcid:Thing
-name: "Mother"
-isProvisional: dcs:True
-
 Node: dcid:consumptionPeriod
 typeOf: dcs:Property
 name: "consumptionPeriod"
 domainIncludes: dcid:Mother
 rangeIncludes: dcid:QuantityRange
+isProvisional: dcs:True
+
+Node: dcid:Mother
+typeOf: dcid:Thing
+name: "Mother"
 isProvisional: dcs:True
 
 Node: dcid:ConsumedIronFolicAcid
