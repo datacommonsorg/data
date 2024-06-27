@@ -1,0 +1,1416 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/vishnuns/NFHS_PR/data/statvar_imports/ndap/india_nfhs/test_data/sample_input/NFHS-5-data.csv --pv_map=/usr/local/google/home/vishnuns/NFHS_PR/data/statvar_imports/ndap/india_nfhs/test_data/sample_input/NFHS-5-pvmap.csv --config=/usr/local/google/home/vishnuns/NFHS_PR/data/statvar_imports/ndap/india_nfhs/test_data/sample_input/NFHS-5-metadata.csv --output_path=/usr/local/google/home/vishnuns/NFHS_PR/data/statvar_imports/ndap/india_nfhs/test_data/sample_input/nfhs_5_out" on 2024-06-27 06:46:24.573295
+
+Node: dcid:Count_BirthEvent
+typeOf: dcid:StatisticalVariable
+name: "Births attended by skilled health personnel (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_BirthEvent_3OrMoreChildren_AsAFractionOf_Count_BirthEvent
+typeOf: dcid:StatisticalVariable
+name: "Births in the 5 years preceding the survey that are third or higher order (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent
+childBirthOrder: [3 - Children]
+
+Node: dcid:Count_BirthEvent_5OrLessYears
+typeOf: dcid:StatisticalVariable
+name: "Children under age 5 years whose birth was registered with the civil authority (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 5 Years]
+
+Node: dcid:Count_BirthEvent_5OrLessYears_RegisteredWithCivilAuthority_AsAFractionOf_Count_BirthEvent_5OrLessYears
+typeOf: dcid:StatisticalVariable
+name: "Children under age 5 years whose birth was registered with the civil authority (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_5OrLessYears
+age: [- 5 Years]
+birthRegistrationStatus: dcid:RegisteredWithCivilAuthority
+
+Node: dcid:Count_BirthEvent_Cesarean_AsAFractionOf_Count_BirthEvent
+typeOf: dcid:StatisticalVariable
+name: "Births delivered by caesarean section (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent
+childBirthMethod: dcid:Cesarean
+
+Node: dcid:Count_BirthEvent_Cesarean_PrivateHealthFacility_AsAFractionOf_Count_BirthEvent_PrivateHealthFacility
+typeOf: dcid:StatisticalVariable
+name: "Births in private health facility delivered by caesarean section (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_PrivateHealthFacility
+childBirthMethod: dcid:Cesarean
+healthEstablishmentType: dcid:PrivateHealthFacility
+
+Node: dcid:Count_BirthEvent_Cesarean_PublicHealthFacility_AsAFractionOf_Count_BirthEvent_PublicHealthFacility
+typeOf: dcid:StatisticalVariable
+name: "Births in public health facility delivered by caesarean section (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_PublicHealthFacility
+childBirthMethod: dcid:Cesarean
+healthEstablishmentType: dcid:PublicHealthFacility
+
+Node: dcid:Count_BirthEvent_Female_AsAFractionOf_Count_BirthEvent_Male
+typeOf: dcid:StatisticalVariable
+name: "Population and household profile-sex ratio at birth for children born in the last five years (females per 1,000 males)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_Male
+gender: dcid:Female
+
+Node: dcid:Count_BirthEvent_HealthPersonnel_AsAFractionOf_Count_BirthEvent
+typeOf: dcid:StatisticalVariable
+name: "Births attended by skilled health personnel (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent
+birthConductedBy: dcid:HealthPersonnel
+
+Node: dcid:Count_BirthEvent_House
+typeOf: dcid:StatisticalVariable
+name: "Home births that were conducted by skilled health personnel (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+birthCenter: dcid:House
+
+Node: dcid:Count_BirthEvent_House_HealthPersonnel_AsAFractionOf_Count_BirthEvent_House
+typeOf: dcid:StatisticalVariable
+name: "Home births that were conducted by skilled health personnel (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_House
+birthCenter: dcid:House
+birthConductedBy: dcid:HealthPersonnel
+
+Node: dcid:Count_BirthEvent_InstitutionalHealthFacility_AsAFractionOf_Count_BirthEvent
+typeOf: dcid:StatisticalVariable
+name: "Institutional births (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent
+healthEstablishmentType: dcid:InstitutionalHealthFacility
+
+Node: dcid:Count_BirthEvent_Male
+typeOf: dcid:StatisticalVariable
+name: "Population and household profile-sex ratio at birth for children born in the last five years (females per 1,000 males)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+
+Node: dcid:Count_BirthEvent_PrivateHealthFacility
+typeOf: dcid:StatisticalVariable
+name: "Births in private health facility delivered by caesarean section (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+healthEstablishmentType: dcid:PrivateHealthFacility
+
+Node: dcid:Count_BirthEvent_PublicHealthFacility
+typeOf: dcid:StatisticalVariable
+name: "Births in public health facility delivered by caesarean section (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+healthEstablishmentType: dcid:PublicHealthFacility
+
+Node: dcid:Count_BirthEvent_PublicHealthFacility_AsAFractionOf_Count_BirthEvent
+typeOf: dcid:StatisticalVariable
+name: "Institutional births in public facility (%)"
+populationType: dcid:BirthEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent
+healthEstablishmentType: dcid:PublicHealthFacility
+
+Node: dcid:Count_Children
+typeOf: dcid:StatisticalVariable
+name: "Children who received postnatal care from a doctor or nurse or lady health visitor ( lhv ) or auxiliary nurse midwifery ( anm ) or midwife or other health personnel within 2 days of delivery (%)"
+populationType: dcid:Children
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Children_ConditionDiarrhea
+typeOf: dcid:StatisticalVariable
+name: "Children with diarrhoea in the 2 weeks preceding the survey taken to a health facility or health provider (%)"
+populationType: dcid:Children
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Diarrhea
+
+Node: dcid:Count_Children_ConditionFeverOrSymptomsOfAcuteRespiratoryInfection
+typeOf: dcid:StatisticalVariable
+name: "Children with fever or symptoms of acute respiratory infection in the 2 weeks preceding the survey taken to a health facility or health provider (%)"
+populationType: dcid:Children
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Fever__SymptomsOfAcuteRespiratoryInfection
+
+Node: dcid:Count_Children_DoctorOrNurseOrLadyHealthVisitorOrAuxiliaryNurseMidwiferyOrMidwifeOrHealthPersonnel_ReceivedPostnatalCare_AsAFractionOf_Count_Children
+typeOf: dcid:StatisticalVariable
+name: "Children who received postnatal care from a doctor or nurse or lady health visitor ( lhv ) or auxiliary nurse midwifery ( anm ) or midwife or other health personnel within 2 days of delivery (%)"
+populationType: dcid:Children
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Children
+postnatalCareReceivedFrom: dcid:Doctor__Nurse__LadyHealthVisitor__AuxiliaryNurseMidwifery__Midwife__HealthPersonnel
+postnatalCareStatus: dcid:ReceivedPostnatalCare
+
+Node: dcid:Count_Children_HealthFacilityOrHealthProvider_ConditionDiarrhea_AsAFractionOf_Count_Children_ConditionDiarrhea
+typeOf: dcid:StatisticalVariable
+name: "Children with diarrhoea in the 2 weeks preceding the survey taken to a health facility or health provider (%)"
+populationType: dcid:Children
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Children_ConditionDiarrhea
+healthEstablishmentType: dcid:HealthFacility__HealthProvider
+medicalCondition: dcid:Diarrhea
+
+Node: dcid:Count_Children_HealthFacilityOrHealthProvider_ConditionFeverOrSymptomsOfAcuteRespiratoryInfection_AsAFractionOf_Count_Children_ConditionFeverOrSymptomsOfAcuteRespiratoryInfection
+typeOf: dcid:StatisticalVariable
+name: "Children with fever or symptoms of acute respiratory infection in the 2 weeks preceding the survey taken to a health facility or health provider (%)"
+populationType: dcid:Children
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Children_ConditionFeverOrSymptomsOfAcuteRespiratoryInfection
+healthEstablishmentType: dcid:HealthFacility__HealthProvider
+medicalCondition: dcid:Fever__SymptomsOfAcuteRespiratoryInfection
+
+Node: dcid:Count_Children_ReceivedOralRehydrationSalt_ConditionDiarrhea_AsAFractionOf_Count_Children_ConditionDiarrhea
+typeOf: dcid:StatisticalVariable
+name: "Children with diarrhoea in the 2 weeks preceding the survey who received oral rehydration salts (%)"
+populationType: dcid:Children
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Children_ConditionDiarrhea
+healthPrevention: dcid:OralRehydrationSalt
+medicalCondition: dcid:Diarrhea
+
+Node: dcid:Count_Children_ReceivedZinc_ConditionDiarrhea_AsAFractionOf_Count_Children_ConditionDiarrhea
+typeOf: dcid:StatisticalVariable
+name: "Children with diarrhoea in the 2 weeks preceding the survey who received zinc (%)"
+populationType: dcid:Children
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Children_ConditionDiarrhea
+healthPrevention: dcid:ReceivedZinc
+medicalCondition: dcid:Diarrhea
+
+Node: dcid:Count_Households
+typeOf: dcid:StatisticalVariable
+name: "Households using clean fuel for cooking (%)"
+populationType: dcid:Households
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Households_CleanFuelForCooking_AsAFractionOf_Count_Households
+typeOf: dcid:StatisticalVariable
+name: "Households using clean fuel for cooking (%)"
+populationType: dcid:Households
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Households
+cookingMethod: dcid:CleanFuelForCooking
+
+Node: dcid:Count_Households_ImprovedDrinkingWaterSource_AsAFractionOf_Count_Households
+typeOf: dcid:StatisticalVariable
+name: "Population living in households with an improved drinking water source (%)"
+populationType: dcid:Households
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Households
+householdFacilityStatus: dcid:ImprovedDrinkingWaterSource
+
+Node: dcid:Count_Households_ImprovedSanitationFacility_AsAFractionOf_Count_Households
+typeOf: dcid:StatisticalVariable
+name: "Population living in households that use an improved sanitation facility (%)"
+populationType: dcid:Households
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Households
+householdFacilityStatus: dcid:ImprovedSanitationFacility
+
+Node: dcid:Count_Households_IodizedSalt_AsAFractionOf_Count_Households
+typeOf: dcid:StatisticalVariable
+name: "Households using iodized salt (%)"
+populationType: dcid:Households
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Households
+typeOfSaltUsed: dcid:IodizedSalt
+
+Node: dcid:Count_Households_WithElectricity_AsAFractionOf_Count_Households
+typeOf: dcid:StatisticalVariable
+name: "Population living in households with electricity (%)"
+populationType: dcid:Households
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Households
+householdFacilityStatus: dcid:WithElectricity
+
+Node: dcid:Count_Households_WithHealthInsuranceOrWithHealthFinanceScheme_AsAFractionOf_Count_Households
+typeOf: dcid:StatisticalVariable
+name: "Population and household profile-households with any usual member covered under a health insurance or financing scheme (%)"
+populationType: dcid:Households
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Households
+healthInsurance: dcid:WithHealthInsurance__WithHealthFinanceScheme
+
+Node: dcid:Count_Infant_House
+typeOf: dcid:StatisticalVariable
+name: "Children born at home who were taken to a health facility for a check-up within 24 hours of birth (%)"
+populationType: dcid:Infant
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+birthCenter: dcid:House
+
+Node: dcid:Count_Infant_House_HealthFacility_ReceivedBirthCareWithin24Hour_AsAFractionOf_Count_Infant_House
+typeOf: dcid:StatisticalVariable
+name: "Children born at home who were taken to a health facility for a check-up within 24 hours of birth (%)"
+populationType: dcid:Infant
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Infant_House
+birthCenter: dcid:House
+healthEstablishmentType: dcid:HealthFacility
+postBirthCare: dcid:ReceivedBirthCareWithin24Hour
+
+Node: dcid:Count_MenstrualWoman_15To19Years
+typeOf: dcid:StatisticalVariable
+name: "Women age group 15 to 24 years who use hygienic methods of protection during their menstrual period (%)"
+populationType: dcid:MenstrualWoman
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+
+Node: dcid:Count_MenstrualWoman_15To19Years_HygienicMethodsOfProtection_AsAFractionOf_Count_MenstrualWoman_15To19Years
+typeOf: dcid:StatisticalVariable
+name: "Women age group 15 to 24 years who use hygienic methods of protection during their menstrual period (%)"
+populationType: dcid:MenstrualWoman
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_MenstrualWoman_15To19Years
+age: [15 19 Years]
+menstrualHygieneStatus: dcid:HygienicMethodsOfProtection
+
+Node: dcid:Count_Mother
+typeOf: dcid:StatisticalVariable
+name: "Mothers who had an antenatal check-up in the first trimester (%)"
+populationType: dcid:Mother
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Mother_AntenatalCareWithinFirstTrimester_AsAFractionOf_Count_Mother
+typeOf: dcid:StatisticalVariable
+name: "Mothers who had an antenatal check-up in the first trimester (%)"
+populationType: dcid:Mother
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Mother
+antenatalStatus: dcid:AntenatalCareWithinFirstTrimester
+
+Node: dcid:Count_Mother_Atleast4AntenatalCareVisit_AsAFractionOf_Count_Mother
+typeOf: dcid:StatisticalVariable
+name: "Mothers who had at least 4 antenatal care visits (%)"
+populationType: dcid:Mother
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Mother
+antenatalStatus: dcid:Atleast4AntenatalCareVisit
+
+Node: dcid:Count_Mother_DoctorOrNurseOrLadyHealthVisitorOrAuxiliaryNurseMidwiferyOrMidwifeOrHealthPersonnel_ReceivedPostnatalCare_AsAFractionOf_Count_Mother
+typeOf: dcid:StatisticalVariable
+name: "Mothers who received postnatal care from a doctor or nurse or lady health visitor ( lhv ) or auxiliary nurse midwifery ( anm ) or midwife or other health personnel within 2 days of delivery (%)"
+populationType: dcid:Mother
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Mother
+postnatalCareReceivedFrom: dcid:Doctor__Nurse__LadyHealthVisitor__AuxiliaryNurseMidwifery__Midwife__HealthPersonnel
+postnatalCareStatus: dcid:ReceivedPostnatalCare
+
+Node: dcid:Count_Mother_ProtectionAgainstNeonatalTetanus_AsAFractionOf_Count_Mother
+typeOf: dcid:StatisticalVariable
+name: "Mothers whose last birth was protected against neonatal tetanus (%)"
+populationType: dcid:Mother
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Mother
+pregnancyHealthPrevention: dcid:ProtectionAgainstNeonatalTetanus
+
+Node: dcid:Count_NonPregnantWoman_15To49Years
+typeOf: dcid:StatisticalVariable
+name: "Non-pregnant women age group 15 to 49 years who are anaemic (%)"
+populationType: dcid:NonPregnantWoman
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 49 Years]
+
+Node: dcid:Count_NonPregnantWoman_15To49Years_ConditionAnaemia_AsAFractionOf_Count_NonPregnantWoman_15To49Years
+typeOf: dcid:StatisticalVariable
+name: "Non-pregnant women age group 15 to 49 years who are anaemic (%)"
+populationType: dcid:NonPregnantWoman
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_NonPregnantWoman_15To49Years
+age: [15 49 Years]
+medicalCondition: dcid:Anaemia
+
+Node: dcid:Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Moderately or severely elevated blood pressure (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Person_100OrMoreDay_Female
+typeOf: dcid:StatisticalVariable
+name: "Mothers who consumed iron folic acid for 100 days or more when they were pregnant (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+consumptionPeriod: [100 - Day]
+gender: dcid:Female
+
+Node: dcid:Count_Person_100OrMoreDay_Female_ReceivedConsumedIronFolicAcid_ConditionPregnant_AsAFractionOf_Count_Person_100OrMoreDay_Female
+typeOf: dcid:StatisticalVariable
+name: "Mothers who consumed iron folic acid for 100 days or more when they were pregnant (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_100OrMoreDay_Female
+consumptionPeriod: [100 - Day]
+gender: dcid:Female
+healthPrevention: dcid:ConsumedIronFolicAcid
+medicalCondition: dcid:Pregnant
+
+Node: dcid:Count_Person_12To23Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months fully vaccinated based on information from either vaccination card or mothers recall (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [12 23 Month]
+
+Node: dcid:Count_Person_12To23Month_1VaccineDose
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months who have received the first dose of measles containing vaccine ( mcv ) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [12 23 Month]
+vaccineDoseReceived: [1 VaccineDose]
+
+Node: dcid:Count_Person_12To23Month_1VaccineDose_VaccineAdministered_MeaslesVaccine_AsAFractionOf_Count_Person_12To23Month_1VaccineDose
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months who have received the first dose of measles containing vaccine ( mcv ) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To23Month_1VaccineDose
+age: [12 23 Month]
+vaccineDoseReceived: [1 VaccineDose]
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:MeaslesVaccine
+
+Node: dcid:Count_Person_12To23Month_3VaccineDose_VaccineAdministered_PentaOrDPT3_AsAFractionOf_Count_Person_12To23Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months who have received 3 doses of penta or diphtheria tetanus toxoids and pertussis ( dtp ) vaccine (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To23Month
+age: [12 23 Month]
+vaccineDoseReceived: [3 VaccineDose]
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:Penta__DPT3
+
+Node: dcid:Count_Person_12To23Month_3VaccineDose_VaccineAdministered_PentaOrHepatitisB_AsAFractionOf_Count_Person_12To23Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months who have received 3 doses of penta or hepatitis b vaccine (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To23Month
+age: [12 23 Month]
+vaccineDoseReceived: [3 VaccineDose]
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:Penta__HepatitisB
+
+Node: dcid:Count_Person_12To23Month_3VaccineDose_VaccineAdministered_Polio_AsAFractionOf_Count_Person_12To23Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months who have received 3 doses of polio vaccine (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To23Month
+age: [12 23 Month]
+vaccineDoseReceived: [3 VaccineDose]
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:Polio
+
+Node: dcid:Count_Person_12To23Month_3VaccineDose_VaccineAdministered_Rotavirus_AsAFractionOf_Count_Person_12To23Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months who have received 3 doses of rotavirus vaccine (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To23Month
+age: [12 23 Month]
+vaccineDoseReceived: [3 VaccineDose]
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:Rotavirus
+
+Node: dcid:Count_Person_12To23Month_PrivateHealthFacility_VaccineAdministered_AsAFractionOf_Count_Person_12To23Month_VaccineAdministered
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months who received most of their vaccinations in a private health facility (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To23Month_VaccineAdministered
+age: [12 23 Month]
+vaccinationCentre: dcid:PrivateHealthFacility
+vaccineStatus: dcid:VaccineAdministered
+
+Node: dcid:Count_Person_12To23Month_PublicHealthFacility_VaccineAdministered_AsAFractionOf_Count_Person_12To23Month_VaccineAdministered
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months who received most of their vaccinations in a public health facility (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To23Month_VaccineAdministered
+age: [12 23 Month]
+vaccinationCentre: dcid:PublicHealthFacility
+vaccineStatus: dcid:VaccineAdministered
+
+Node: dcid:Count_Person_12To23Month_VaccinationCardOrMotherRecall_VaccineAdministered_AsAFractionOf_Count_Person_12To23Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months fully vaccinated based on information from either vaccination card or mothers recall (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To23Month
+age: [12 23 Month]
+vaccineInformation: dcid:VaccinationCard__MotherRecall
+vaccineStatus: dcid:VaccineAdministered
+
+Node: dcid:Count_Person_12To23Month_VaccinationCard_VaccineAdministered_AsAFractionOf_Count_Person_12To23Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months fully vaccinated based on information from vaccination card only (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To23Month
+age: [12 23 Month]
+vaccineInformation: dcid:VaccinationCard
+vaccineStatus: dcid:VaccineAdministered
+
+Node: dcid:Count_Person_12To23Month_VaccineAdministered
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months who received most of their vaccinations in a private health facility (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [12 23 Month]
+vaccineStatus: dcid:VaccineAdministered
+
+Node: dcid:Count_Person_12To23Month_VaccineAdministered_BCG_AsAFractionOf_Count_Person_12To23Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 12 to 23 months who have received bacillus calmette guerin ( bcg) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To23Month
+age: [12 23 Month]
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:BCG
+
+Node: dcid:Count_Person_15OrLessYears_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Population below age 15 years (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [- 15 Years]
+
+Node: dcid:Count_Person_15OrMoreYears
+typeOf: dcid:StatisticalVariable
+name: "Women age 15 years and above who consume alcohol (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+
+Node: dcid:Count_Person_15OrMoreYears_AlcoholConsumption_AsAFractionOf_Count_Person_15OrMoreYears
+typeOf: dcid:StatisticalVariable
+name: "Women age 15 years and above who consume alcohol (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15OrMoreYears
+age: [15 - Years]
+healthBehavior: dcid:AlcoholConsumption
+
+Node: dcid:Count_Person_15OrMoreYears_Male
+typeOf: dcid:StatisticalVariable
+name: "Men age group 15 years and above who consume alcohol (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 - Years]
+gender: dcid:Male
+
+Node: dcid:Count_Person_15OrMoreYears_Male_AlcoholConsumption_AsAFractionOf_Count_Person_15OrMoreYears_Male
+typeOf: dcid:StatisticalVariable
+name: "Men age group 15 years and above who consume alcohol (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15OrMoreYears_Male
+age: [15 - Years]
+gender: dcid:Male
+healthBehavior: dcid:AlcoholConsumption
+
+Node: dcid:Count_Person_15OrMoreYears_Male_TobaccoUse_AsAFractionOf_Count_Person_15OrMoreYears_Male
+typeOf: dcid:StatisticalVariable
+name: "Men age group 15 years and above who use any kind of tobacco (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15OrMoreYears_Male
+age: [15 - Years]
+gender: dcid:Male
+healthBehavior: dcid:TobaccoUse
+
+Node: dcid:Count_Person_15OrMoreYears_TobaccoUse_AsAFractionOf_Count_Person_15OrMoreYears
+typeOf: dcid:StatisticalVariable
+name: "Women age 15 years and above who use any kind of tobacco (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15OrMoreYears
+age: [15 - Years]
+healthBehavior: dcid:TobaccoUse
+
+Node: dcid:Count_Person_15To19Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Women age group 15 to 19 years who are anaemic (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 19 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionAnaemia_AsAFractionOf_Count_Person_15To19Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Women age group 15 to 19 years who are anaemic (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To19Years_Female
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Anaemia
+
+Node: dcid:Count_Person_15To19Years_Female_ConditionPregnant_AsAFractionOf_Count_Person_15To19Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Women age group 15 to 19 years who were already mothers or pregnant at the time of the survey (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To19Years_Female
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Pregnant
+
+Node: dcid:Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Married women age group 15 to 49 years use any family planning methods (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 49 Years]
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_AnyFamilyPlanning_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Married women age group 15 to 49 years use any family planning methods (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Year_Female_Married
+age: [15 49 Years]
+familyPlanningType: dcid:AnyFamilyPlanning
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_BirthControlPill_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Currently married women age group 15 to 49 years consuming pill (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Year_Female_Married
+age: [15 49 Years]
+birthControlMethod: dcid:BirthControlPill
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_Condom_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Married women using condom in the age group of 15 to 49 years (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Year_Female_Married
+age: [15 49 Years]
+birthControlMethod: dcid:Condom
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Women age group 15 to 49 years who are anaemic (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 49 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_15To49Years_Female_ConditionAnaemia_AsAFractionOf_Count_Person_15To49Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Women age group 15 to 49 years who are anaemic (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Years_Female
+age: [15 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:Anaemia
+
+Node: dcid:Count_Person_15To49Years_Female_Literate_AsAFractionOf_Count_Person_15To49Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Women age group 15 to 49 years who are literate (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Years_Female
+age: [15 49 Years]
+gender: dcid:Female
+literacyStatus: dcid:Literate
+
+Node: dcid:Count_Person_15To49Years_Injectables_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Married women age group 15 to 49 years using injectables as one of the family planning methods (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Year_Female_Married
+age: [15 49 Years]
+birthControlMethod: dcid:Injectables
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_IntrauterineDeviceOrPostpartumIntrauterineContraceptiveDevice_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Married women age group 15 to 49 years using intrauterine device ( iud ) or postpartum intrauterine contraceptive device ( ppiud ) as family planning methods (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Year_Female_Married
+age: [15 49 Years]
+birthControlMethod: dcid:IntrauterineDevice__PostpartumIntrauterineContraceptiveDevice
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_MaleSterlization_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Married women of age 15 to 49 years using male sterlization as one of the family planning methods (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Year_Female_Married
+age: [15 49 Years]
+birthControlMethod: dcid:MaleSterlization
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_ModernFamilyPlanning_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Married women age group 15 to 49 years any modern family planning method (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Year_Female_Married
+age: [15 49 Years]
+familyPlanningType: dcid:ModernFamilyPlanning
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_Sterilization_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Female sterilization married women-15 to 49 years (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Year_Female_Married
+age: [15 49 Years]
+birthControlMethod: dcid:Sterilization
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_WithUnmetNeed_Female_Married_AsAFractionOf_Count_Person_15To49Year_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Married women age group 15 to 49 years unmet need for family planning (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Year_Female_Married
+age: [15 49 Years]
+familyPlanningType: dcid:WithUnmetNeed
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_180OrMoreDay_Female
+typeOf: dcid:StatisticalVariable
+name: "Mothers who consumed iron folic acid for 180 days or more when they were pregnant (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+consumptionPeriod: [180 - Day]
+gender: dcid:Female
+
+Node: dcid:Count_Person_180OrMoreDay_Female_ReceivedConsumedIronFolicAcid_ConditionPregnant_AsAFractionOf_Count_Person_180OrMoreDay_Female
+typeOf: dcid:StatisticalVariable
+name: "Mothers who consumed iron folic acid for 180 days or more when they were pregnant (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_180OrMoreDay_Female
+consumptionPeriod: [180 - Day]
+gender: dcid:Female
+healthPrevention: dcid:ConsumedIronFolicAcid
+medicalCondition: dcid:Pregnant
+
+Node: dcid:Count_Person_20To24Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Women age group 20 to 24 years married before age 18 years (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [20 24 Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_20To24Years_Female_MarriedBefore18Years_AsAFractionOf_Count_Person_20To24Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Women age group 20 to 24 years married before age 18 years (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_20To24Years_Female
+age: [20 24 Years]
+gender: dcid:Female
+maritalStatus: dcid:MarriedBefore18Years
+
+Node: dcid:Count_Person_24To35Month_2VaccineDose_VaccineAdministered_MeaslesVaccine_AsAFractionOf_Count_Person_24To35Month_VaccineAdministered
+typeOf: dcid:StatisticalVariable
+name: "Children age group 24 to 35 months who have received a second dose of measles containing vaccine ( mcv ) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_24To35Month_VaccineAdministered
+age: [24 35 Month]
+vaccineDoseReceived: [2 VaccineDose]
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:MeaslesVaccine
+
+Node: dcid:Count_Person_24To35Month_VaccineAdministered
+typeOf: dcid:StatisticalVariable
+name: "Children age group 24 to 35 months who have received a second dose of measles containing vaccine ( mcv ) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [24 35 Month]
+vaccineStatus: dcid:VaccineAdministered
+
+Node: dcid:Count_Person_3Years_BreastFeedingWithinOneHourOfBirth_BreastMilk_AsAFractionOf_Count_Person_3Years_BreastMilk
+typeOf: dcid:StatisticalVariable
+name: "Children under age 3 years breastfed within one hour of birth (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_3Years_BreastMilk
+age: [3 Years]
+breastFeedingPractice: dcid:BreastFeedingWithinOneHourOfBirth
+foodIntakeType: dcid:BreastMilk
+
+Node: dcid:Count_Person_3Years_BreastMilk
+typeOf: dcid:StatisticalVariable
+name: "Children under age 3 years breastfed within one hour of birth (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 Years]
+foodIntakeType: dcid:BreastMilk
+
+Node: dcid:Count_Person_5OrLessYears
+typeOf: dcid:StatisticalVariable
+name: "Children under 5 years who are overweight ( weight-for-height ) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 5 Years]
+
+Node: dcid:Count_Person_5OrLessYears_ConditionSevereWasting_AsAFractionOf_Count_Person_5OrLessYears
+typeOf: dcid:StatisticalVariable
+name: "Children under 5 years who are severely wasted ( weight-for-height ) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_5OrLessYears
+age: [- 5 Years]
+medicalCondition: dcid:SevereWasting
+
+Node: dcid:Count_Person_5OrLessYears_ConditionStunted_AsAFractionOf_Count_Person_5OrLessYears
+typeOf: dcid:StatisticalVariable
+name: "Children under 5 years who are stunted ( height-for-age ) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_5OrLessYears
+age: [- 5 Years]
+medicalCondition: dcid:Stunted
+
+Node: dcid:Count_Person_5OrLessYears_ConditionWasting_AsAFractionOf_Count_Person_5OrLessYears
+typeOf: dcid:StatisticalVariable
+name: "Children under 5 years who are wasted ( weight-for-height ) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_5OrLessYears
+age: [- 5 Years]
+medicalCondition: dcid:Wasting
+
+Node: dcid:Count_Person_5OrLessYears_Overweight_AsAFractionOf_Count_Person_5OrLessYears
+typeOf: dcid:StatisticalVariable
+name: "Children under 5 years who are overweight ( weight-for-height ) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_5OrLessYears
+age: [- 5 Years]
+healthBehavior: dcid:Overweight
+
+Node: dcid:Count_Person_5OrLessYears_Underweight_AsAFractionOf_Count_Person_5OrLessYears
+typeOf: dcid:StatisticalVariable
+name: "Children under 5 years who are underweight ( weight-for-age ) (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_5OrLessYears
+age: [- 5 Years]
+healthBehavior: dcid:Underweight
+
+Node: dcid:Count_Person_5Years
+typeOf: dcid:StatisticalVariable
+name: "Children age 5 years who attended pre-primary school during the year 2019-20 (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 Years]
+
+Node: dcid:Count_Person_5Years_PrePrimarySchool_AsAFractionOf_Count_Person_5Years
+typeOf: dcid:StatisticalVariable
+name: "Children age 5 years who attended pre-primary school during the year 2019-20 (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_5Years
+age: [5 Years]
+schoolGradeLevel: dcid:PrePrimarySchool
+
+Node: dcid:Count_Person_6OrLessMonth
+typeOf: dcid:StatisticalVariable
+name: "Children under age 6 months exclusively breastfed (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 6 Month]
+
+Node: dcid:Count_Person_6OrLessMonth_BreastMilk_AsAFractionOf_Count_Person_6OrLessMonth
+typeOf: dcid:StatisticalVariable
+name: "Children under age 6 months exclusively breastfed (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_6OrLessMonth
+age: [- 6 Month]
+foodIntakeType: dcid:BreastMilk
+
+Node: dcid:Count_Person_6OrMoreYears_Female
+typeOf: dcid:StatisticalVariable
+name: "Female population age 6 years and above who ever attended school (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 - Years]
+gender: dcid:Female
+
+Node: dcid:Count_Person_6OrMoreYears_Female_EverAttendedSchool_AsAFractionOf_Count_Person_6OrMoreYears_Female
+typeOf: dcid:StatisticalVariable
+name: "Female population age 6 years and above who ever attended school (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_6OrMoreYears_Female
+age: [6 - Years]
+gender: dcid:Female
+levelOfSchool: dcid:EverAttendedSchool
+
+Node: dcid:Count_Person_6To23Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 6 to 23 months receiving an adequate diet (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 23 Month]
+
+Node: dcid:Count_Person_6To23Month_AdequateDiet_AsAFractionOf_Count_Person_6To23Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 6 to 23 months receiving an adequate diet (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_6To23Month
+age: [6 23 Month]
+dietType: dcid:AdequateDiet
+
+Node: dcid:Count_Person_6To23Month_AdequateDiet_BreastMilk_AsAFractionOf_Count_Person_6To23Month_BreastMilk
+typeOf: dcid:StatisticalVariable
+name: "Breastfeeding children age group 6 to 23 months receiving an adequate diet (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_6To23Month_BreastMilk
+age: [6 23 Month]
+dietType: dcid:AdequateDiet
+foodIntakeType: dcid:BreastMilk
+
+Node: dcid:Count_Person_6To23Month_AdequateDiet_OtherThanBreastFeeding_AsAFractionOf_Count_Person_6To23Month_OtherThanBreastFeeding
+typeOf: dcid:StatisticalVariable
+name: "Non-breastfeeding children age group 6 to 23 months receiving an adequate diet (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_6To23Month_OtherThanBreastFeeding
+age: [6 23 Month]
+dietType: dcid:AdequateDiet
+foodIntakeType: dcid:OtherThanBreastFeeding
+
+Node: dcid:Count_Person_6To23Month_BreastMilk
+typeOf: dcid:StatisticalVariable
+name: "Breastfeeding children age group 6 to 23 months receiving an adequate diet (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 23 Month]
+foodIntakeType: dcid:BreastMilk
+
+Node: dcid:Count_Person_6To23Month_OtherThanBreastFeeding
+typeOf: dcid:StatisticalVariable
+name: "Non-breastfeeding children age group 6 to 23 months receiving an adequate diet (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 23 Month]
+foodIntakeType: dcid:OtherThanBreastFeeding
+
+Node: dcid:Count_Person_6To59Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 6 to 59 months who are anaemic (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 59 Month]
+
+Node: dcid:Count_Person_6To59Month_ConditionAnaemia_AsAFractionOf_Count_Person_6To59Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 6 to 59 months who are anaemic (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_6To59Month
+age: [6 59 Month]
+medicalCondition: dcid:Anaemia
+
+Node: dcid:Count_Person_6To8Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 6 to 8 months receiving solid or semisolid food and breastmilk (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 8 Month]
+
+Node: dcid:Count_Person_6To8Month_SolidFoodOrSemisolidFoodOrBreastMilk_AsAFractionOf_Count_Person_6To8Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 6 to 8 months receiving solid or semisolid food and breastmilk (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_6To8Month
+age: [6 8 Month]
+foodIntakeType: dcid:SolidFood__SemisolidFood__BreastMilk
+
+Node: dcid:Count_Person_9To35Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 9 to 35 months who received vitamin a dose in the last 6 months (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [9 35 Month]
+
+Node: dcid:Count_Person_9To35Month_VitaminA_AsAFractionOf_Count_Person_9To35Month
+typeOf: dcid:StatisticalVariable
+name: "Children age group 9 to 35 months who received vitamin a dose in the last 6 months (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_9To35Month
+age: [9 35 Month]
+vitaminType: dcid:VitaminA
+
+Node: dcid:Count_Person_ConditionDiarrhea_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Prevalence of diarrhoea in the 2 weeks preceding the survey (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+medicalCondition: dcid:Diarrhea
+
+Node: dcid:Count_Person_ConditionSymptomsOfAcuteRespiratoryInfection_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Prevalence of symptoms of acute respiratory infection ( ari ) in the 2 weeks preceding the survey (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+medicalCondition: dcid:SymptomsOfAcuteRespiratoryInfection
+
+Node: dcid:Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women who have ever undergone a breast examination for breast cancer (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+
+Node: dcid:Count_Person_Female_10OrMoreYears_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women with 10 or more years of schooling (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+schoolingDuration: [10 - Years]
+
+Node: dcid:Count_Person_Female_AsAFractionOf_Count_Person_Male
+typeOf: dcid:StatisticalVariable
+name: "Population and household profile-sex ratio of the total population (females per 1,000 males)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male
+gender: dcid:Female
+
+Node: dcid:Count_Person_Female_BodyMassIndexBelowNormal_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women with body mass index (bmi) below normal (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthBehavior: dcid:BodyMassIndexBelowNormal
+
+Node: dcid:Count_Person_Female_HealthWorkerTalkedAboutFamilyPlanning_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Health worker ever talked to female non-users about family planning (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthCareAdvice: dcid:HealthWorkerTalkedAboutFamilyPlanning
+
+Node: dcid:Count_Person_Female_HighRiskOfWaistToHipRatio_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women who have high risk waist-to-hip ratio (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthBehavior: dcid:HighRiskOfWaistToHipRatio
+
+Node: dcid:Count_Person_Female_OverweightOrObesity_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women who are overweight or obese (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthBehavior: dcid:Overweight__Obesity
+
+Node: dcid:Count_Person_Female_ReceivedBreastCancerExamination_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women who have ever undergone a breast examination for breast cancer (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthPrevention: dcid:BreastCancerExamination
+
+Node: dcid:Count_Person_Female_ReceivedCervicalCancerScreening_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women-ever undergone a screening test for cervical cancer (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthPrevention: dcid:CervicalCancerScreening
+
+Node: dcid:Count_Person_Female_ReceivedOralCavityExamination_ConditionOralCancer_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women-ever undergone an oral cavity examination for oral cancer (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthPrevention: dcid:OralCavityExamination
+medicalCondition: dcid:OralCancer
+
+Node: dcid:Count_Person_Female_WithElevatedBloodPressure_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women suffering from elevated blood pressure (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthOutcome: dcid:ElevatedBloodPressure
+
+Node: dcid:Count_Person_Female_WithHighBloodSugarLevelOrVeryHighBloodSugarLevel_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women suffering from high or very high blood sugar level (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthOutcome: dcid:HighBloodSugarLevel__VeryHighBloodSugarLevel
+
+Node: dcid:Count_Person_Female_WithHighBloodSugarLevel_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women suffering from high blood sugar level (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthOutcome: dcid:HighBloodSugarLevel
+
+Node: dcid:Count_Person_Female_WithMidlyElevatedBloodPressure_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women-mildly elevated blood pressure (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthOutcome: dcid:MidlyElevatedBloodPressure
+
+Node: dcid:Count_Person_Female_WithModeratelyElevatedBloodPressureOrSeverelyElevatedBloodPressure_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women-moderately or severely elevated blood pressure (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthOutcome: dcid:ModeratelyElevatedBloodPressure__SeverelyElevatedBloodPressure
+
+Node: dcid:Count_Person_Female_WithVeryHighBloodSugarLevel_AsAFractionOf_Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Women suffering from very high blood sugar level (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Female
+gender: dcid:Female
+healthOutcome: dcid:VeryHighBloodSugarLevel
+
+Node: dcid:Count_Person_Male
+typeOf: dcid:StatisticalVariable
+name: "Men suffering from high blood sugar level (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+
+Node: dcid:Count_Person_Male_WithHighBloodSugarLevelOrVeryHighBloodSugarLevel_AsAFractionOf_Count_Person_Male
+typeOf: dcid:StatisticalVariable
+name: "Men suffering from high or very high blood sugar level (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male
+gender: dcid:Male
+healthOutcome: dcid:HighBloodSugarLevel__VeryHighBloodSugarLevel
+
+Node: dcid:Count_Person_Male_WithHighBloodSugarLevel_AsAFractionOf_Count_Person_Male
+typeOf: dcid:StatisticalVariable
+name: "Men suffering from high blood sugar level (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male
+gender: dcid:Male
+healthOutcome: dcid:HighBloodSugarLevel
+
+Node: dcid:Count_Person_Male_WithMidlyElevatedBloodPressure_AsAFractionOf_Count_Person_Male
+typeOf: dcid:StatisticalVariable
+name: "Men-mildly elevated blood pressure (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male
+gender: dcid:Male
+healthOutcome: dcid:MidlyElevatedBloodPressure
+
+Node: dcid:Count_Person_Male_WithVeryHighBloodSugarLevel_AsAFractionOf_Count_Person_Male
+typeOf: dcid:StatisticalVariable
+name: "Men suffering from very high blood sugar level (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male
+gender: dcid:Male
+healthOutcome: dcid:VeryHighBloodSugarLevel
+
+Node: dcid:Count_Person_TakingMedicine_WithElevatedBloodPressure_AsAFractionOf_Count_Person_WithElevatedBloodPressure
+typeOf: dcid:StatisticalVariable
+name: "Elevated blood pressure or taking medicine to control blood pressure (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_WithElevatedBloodPressure
+diseaseControlMeasure: dcid:TakingMedicine
+healthOutcome: dcid:ElevatedBloodPressure
+
+Node: dcid:Count_Person_WithElevatedBloodPressure
+typeOf: dcid:StatisticalVariable
+name: "Elevated blood pressure or taking medicine to control blood pressure (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+healthOutcome: dcid:ElevatedBloodPressure
+
+Node: dcid:Count_Person_WithModeratelyElevatedBloodPressureOrSeverelyElevatedBloodPressure_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Moderately or severely elevated blood pressure (%)"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+healthOutcome: dcid:ModeratelyElevatedBloodPressure__SeverelyElevatedBloodPressure
+
+Node: dcid:Count_PregnantWoman
+typeOf: dcid:StatisticalVariable
+name: "Registered pregnancies for which the mother received a mother and child protection card ( mcp )(%)"
+populationType: dcid:PregnantWoman
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_PregnantWoman_15To49Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Pregnant women age group 15 to 49 years who are anaemic (%)"
+populationType: dcid:PregnantWoman
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 49 Years]
+gender: dcid:Female
+
+Node: dcid:Count_PregnantWoman_15To49Years_Female_ConditionAnaemia_AsAFractionOf_Count_PregnantWoman_15To49Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Pregnant women age group 15 to 49 years who are anaemic (%)"
+populationType: dcid:PregnantWoman
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_PregnantWoman_15To49Years_Female
+age: [15 49 Years]
+gender: dcid:Female
+medicalCondition: dcid:Anaemia
+
+Node: dcid:Count_PregnantWoman_MotherChildProtectionCard_AsAFractionOf_Count_PregnantWoman
+typeOf: dcid:StatisticalVariable
+name: "Registered pregnancies for which the mother received a mother and child protection card ( mcp )(%)"
+populationType: dcid:PregnantWoman
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_PregnantWoman
+pregnancyCare: dcid:MotherChildProtectionCard
+
+Node: dcid:Mean_Amount_ExpenditureActivity_NormalDelivey_ChildBirthExpenditure_PublicHealthFacility
+typeOf: dcid:StatisticalVariable
+name: "Average out of pocket expenditure for each delivery in public health facility"
+populationType: dcid:ExpenditureActivity
+measuredProperty: dcid:amount
+statType: dcid:meanValue
+childBirthMethod: dcid:NormalDelivey
+expenditureType: dcid:ChildBirthExpenditure
+healthEstablishmentType: dcid:PublicHealthFacility
+
+Node: dcid:Triennial_Count_MortalityEvent
+typeOf: dcid:StatisticalVariable
+name: "Deaths in the last 3 years registered with the civil authority (%)"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:Triennial
+statType: dcid:measuredValue
+
+Node: dcid:Triennial_Count_MortalityEvent_RegisteredWithCivilAuthority_AsAFractionOf_Triennial_Count_MortalityEvent
+typeOf: dcid:StatisticalVariable
+name: "Deaths in the last 3 years registered with the civil authority (%)"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+measurementQualifier: dcid:Triennial
+statType: dcid:measuredValue
+measurementDenominator: dcid:Triennial_Count_MortalityEvent
+deathRegistrationStatus: dcid:RegisteredWithCivilAuthority
+
