@@ -48,6 +48,12 @@ import re
 import sys
 import time
 
+# Workaround for collection.Callable needed for ee.Initialize()
+import collections
+import collections.abc
+
+collections.Callable = collections.abc.Callable
+
 from absl import app
 from absl import flags
 from absl import logging
@@ -55,8 +61,9 @@ from datetime import date
 from datetime import datetime
 from datetime import timedelta
 from dateutil.relativedelta import relativedelta
+from google.auth import compute_engine
 
-_SCRIPTS_DIR = os.path.dirname(__file__)
+_SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
@@ -69,6 +76,11 @@ import utils
 
 from counters import Counters
 
+flags.DEFINE_bool(
+    'ee_remote', False,
+    'Set to True to use service account auth when running remotely')
+flags.DEFINE_string('ee_gcloud_project', 'datcom-import-automation-prod',
+                    'Gcloud project with Earth Engine API enabled.')
 flags.DEFINE_string('ee_dataset', '',
                     'Load earth engine data set define in config datasets.')
 flags.DEFINE_string('gcs_output', '', 'Prefix for output file names on GCS.')
@@ -169,6 +181,10 @@ _DEFAULT_DATASETS = {
 }
 
 EE_DEFAULT_CONFIG = {
+    # Auth mode
+    'ee_remote': _FLAGS.ee_remote,
+    # GCloud project
+    'ee_gcloud_project': _FLAGS.ee_gcloud_project,
     # Image loading settings.
     'datasets': _DEFAULT_DATASETS,  # Predefined assets
     'ee_dataset': _FLAGS.ee_dataset,  # Reference to an asset in 'datasets'
@@ -592,7 +608,26 @@ def export_ee_image_to_gcs(ee_image: ee.Image, config: dict = {}) -> str:
     return task
 
 
-def ee_process(config) -> list:
+def ee_init(config: dict):
+    '''Initialize Earth Engine APIs.
+    Args:
+      config: dict with the following parameters
+        ee_remote: bool if True uses EE service account auth.
+        ee_gcloud_project: Project to use with EE API.
+    '''
+    ee.Authenticate()
+    # By default use local credentials
+    credentials = 'persistent'
+    if config.get('ee_remote'):
+        # Use the service account scope
+        scopes = ["https://www.googleapis.com/auth/earthengine"]
+        credentials = compute_engine.Credentials(scopes=scopes)
+
+    ee.Initialize(credentials=credentials,
+                  project=config.get('ee_gcloud_project'))
+
+
+def ee_process(config: dict) -> list:
     '''Generate earth engine images and export to GCS.
     Called should wait for the task to complete.
     Args:
@@ -605,7 +640,7 @@ def ee_process(config) -> list:
       if config['ee_wait_task'] is True, else a list of tasks launched.
     '''
     ee_tasks = []
-    ee.Initialize()
+    ee_init(config)
     config['ee_image_count'] = config.get('ee_image_count', 1)
     time_period = config.get('time_period', 'P1M')
     cur_date = utils.date_format_by_time_period(utils.date_today(), time_period)

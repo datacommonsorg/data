@@ -28,13 +28,13 @@ spec:
   rules:
     - http:
         paths:
-        - path: /*
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: import-automation-executor-service
-              port:
-                number: 8080
+          - path: /*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: import-automation-executor-service
+                port:
+                  number: 8080
 ---
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
@@ -51,10 +51,11 @@ spec:
     port: 8080
     type: HTTP
     requestPath: /healthz
-  iap:
-    enabled: true
-    oauthclientCredentials:
-      secretName: import-automation-iap-secret
+  # TODO: re-enable this once the deployments work e2e.
+  # iap:
+  #   enabled: true
+  #   oauthclientCredentials:
+  #     secretName: import-automation-iap-secret
 ---
 apiVersion: v1
 kind: Service
@@ -82,7 +83,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app:  import-automation-executor-app
+      app: import-automation-executor-app
   template:
     metadata:
       labels:
@@ -128,4 +129,3 @@ spec:
               path: /healthz
               port: 8080
       serviceAccountName: import-automation-ksa
-
