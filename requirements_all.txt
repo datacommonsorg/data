@@ -20,7 +20,7 @@ google-cloud-scheduler==2.10.0
 gspread
 lxml==4.9.1
 matplotlib==3.3.0
-netCDF4==1.6.4
+netCDF4
 numpy
 openpyxl==3.0.7
 pandas
@@ -34,7 +34,7 @@ s2sphere==0.2.5
 shapely==1.8.5
 tabula-py
 urllib3==1.26.8
-xarray==0.19.0
+xarray
 xlrd==1.2.0
 yapf
 zipp
