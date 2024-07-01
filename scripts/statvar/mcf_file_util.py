@@ -100,13 +100,13 @@ def add_namespace(value: str, namespace: str = 'dcid') -> str:
   Quoted strings are assumed to start with '"' and won't get a namespace.
   """
     if isinstance(value, list):
-      value_list = [ add_namespace(v) for v in value]
-      return ','.join(value_list)
+        value_list = [add_namespace(v) for v in value]
+        return ','.join(value_list)
     if value and isinstance(value, str):
         if value[0].isalpha() or value[0].isdigit():
             if ',' in value:
-              value_list = get_value_list(value)
-              return ','.join([add_namespace(v) for v in value_list])
+                value_list = get_value_list(value)
+                return ','.join([add_namespace(v) for v in value_list])
             has_alpha = False
             for c in value:
                 if c.isalpha() or c == '_' or c == '/':
@@ -226,7 +226,8 @@ def add_pv_to_node(
     existing_value = node.get(prop)
     if existing_value and prop != 'Node' and prop != 'dcid':
         # Property already exists. Add value to a list if not present.
-        if value and value != existing_value and value not in existing_value.split(','):
+        if value and value != existing_value and value not in existing_value.split(
+                ','):
             if append_value:
                 # Append value to a list of existing values
                 node[prop] = f'{node[prop]},{value}'
@@ -361,7 +362,7 @@ def load_mcf_nodes(
     for file in filenames:
         files.extend(file_util.file_get_matching(file))
     if nodes is None:
-      nodes = _get_new_node(normalize)
+        nodes = _get_new_node(normalize)
     for file in files:
         if file:
             num_nodes = 0
@@ -771,9 +772,9 @@ def node_dict_to_text(node: dict, default_pvs: dict = _DEFAULT_NODE_PVS) -> str:
         if prop and prop[0] == '#':
             # Add comment as is in the same order.
             if prop.startswith('# comment'):
-              pvs.append(f'{node[prop]}')
+                pvs.append(f'{node[prop]}')
             else:
-              pvs.append(f'{prop}{node[prop]}')
+                pvs.append(f'{prop}{node[prop]}')
             continue
         value = node.get(prop, '')
         if value != '':
@@ -878,11 +879,13 @@ def _is_pv_in_dict(prop: str, value: str, pvs: dict) -> bool:
             return True
     return False
 
+
 def _get_new_node(normalize: bool = True) -> dict:
-  """Returns OrderedDict if normalize is true, else a dict."""
-  if normalize:
-    return OrderedDict()
-  return dict()
+    """Returns OrderedDict if normalize is true, else a dict."""
+    if normalize:
+        return OrderedDict()
+    return dict()
+
 
 def main(_):
     if not _FLAGS.input_mcf or not _FLAGS.output_mcf:
