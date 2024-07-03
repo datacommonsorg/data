@@ -1,0 +1,17 @@
+Node: dcid:incomePovertyThreshold
+typeOf: dcid:Property
+name: "incomePovertyThreshold"
+rangeIncludes: dcid:IncomePovertyThresholdEnum
+isProvisional: dcid:True
+
+Node: dcid:householdSize
+typeOf: dcid:Property
+name: "householdSize"
+domainIncludes: dcid:Household
+
+Node: dcid:householderAge
+typeOf: dcid:Property
+name: "householderAge"
+domainIncludes: dcid:Household
+rangeIncludes: dcid:QuantityRange
+
