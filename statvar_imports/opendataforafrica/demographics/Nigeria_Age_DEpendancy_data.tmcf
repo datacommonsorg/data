@@ -1,0 +1,8 @@
+Node: E:Nigeria_Age_DEpendancy_data->E0
+observationAbout: C:Nigeria_Age_DEpendancy_data->observationAbout
+observationDate: C:Nigeria_Age_DEpendancy_data->observationDate
+value: C:Nigeria_Age_DEpendancy_data->value
+variableMeasured: C:Nigeria_Age_DEpendancy_data->variableMeasured
+unit: C:Nigeria_Age_DEpendancy_data->unit
+scalingFactor: C:Nigeria_Age_DEpendancy_data->scalingFactor
+typeOf: dcs:StatVarObservation
