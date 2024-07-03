@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Provinsi,observationAbout,{Data},,,measuredProperty,count,schoolManagement,UnderMinistryOfResearchTechnologyAndHigherEducation,,
+Jumlah Sekolah SMK (Negeri),populationType,School,levelOfSchool,VocationalSchool,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Sekolah SMK (Negeri)@id"""
+Jumlah Sekolah SMK (Swasta),populationType,School,levelOfSchool,VocationalSchool,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah SMK (Swasta)@id"""
+Jumlah Sekolah SMK (Negeri+Swasta),populationType,School,levelOfSchool,VocationalSchool,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah SMK (Negeri+Swasta)@id"""
+Jumlah Guru SMK (Negeri),populationType,Teacher,levelOfSchool,VocationalSchool,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Guru SMK (Negeri)@id"""
+Jumlah Guru SMK (Swasta),populationType,Teacher,levelOfSchool,VocationalSchool,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru SMK (Swasta)@id"""
+Jumlah Guru SMK (Negeri+Swasta),populationType,Teacher,levelOfSchool,VocationalSchool,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru SMK (Negeri+Swasta)@id"""
+Jumlah Murid SMK (Negeri),populationType,Student,levelOfSchool,VocationalSchool,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Murid SMK (Negeri)@id"""
+Jumlah Murid SMK (Swasta),populationType,Student,levelOfSchool,VocationalSchool,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid SMK (Swasta)@id"""
+Jumlah Murid SMK (Negeri+Swasta),populationType,Student,levelOfSchool,VocationalSchool,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid SMK (Negeri+Swasta)@id"""
+observationDate,observationDate,{Data},,,,,,,,

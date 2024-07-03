@@ -1,0 +1,33 @@
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Person
+
+Node: dcid:gender
+typeOf: dcs:Property
+name: "gender"
+rangeIncludes: dcid:GenderType
+
+Node: dcid:Year15To49
+typeOf: dcid:SDG_AgeEnum
+name: "Year 15 To 49"
+isProvisional: dcs:True
+
+Node: dcid:birthControlMethod
+typeOf: dcs:Property
+name: "birthControlMethod"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:BirthControlMethodEnum
+isProvisional: dcs:True
+
+Node: dcid:BirthControlMethodEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "BirthControlMethodEnum"
+isProvisional: dcs:True
+
+Node: dcid:ContraceptionMethod
+typeOf: dcid:BirthControlMethodEnum
+name: "Contraception Method"
+isProvisional: dcs:True
+
