@@ -1,0 +1,110 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/kuru/DC_July2_2024/data/statvar_imports/NITI/EnergyConsumption/Coal/testdata/sample_input/NITI_EnergyConsumption_Coal_data.csv --pv_map=/usr/local/google/home/kuru/DC_July2_2024/data/statvar_imports/NITI/EnergyConsumption/Coal/testdata/sample_input/NITI_EnergyConsumption_Coal_pvmap.csv --places_resolved_csv=/usr/local/google/home/kuru/DC_July2_2024/data/statvar_imports/NITI/EnergyConsumption/Coal/testdata/sample_input/NITI_EnergyConsumption_Coal_places_resolved.csv --config=/usr/local/google/home/kuru/DC_July2_2024/data/statvar_imports/NITI/EnergyConsumption/Coal/testdata/sample_input/NITI_EnergyConsumption_Coal_metadata.csv --output_path=/usr/local/google/home/kuru/DC_July2_2024/data/statvar_imports/NITI/EnergyConsumption/Coal/testdata/sample_output/NITI_EnergyConsumptionCoal" on 2024-07-02 19:32:58.759459
+
+Node: dcid:Annual_Reserves_Coal_0To300Meter_Coal_Coal_Indicated
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Coal
+measuredProperty: dcid:reserves
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+depth: [0 300 Meter]
+energySource: dcid:Coal
+reserveType: dcid:Indicated
+reserves: dcid:Coal
+
+Node: dcid:Annual_Reserves_Coal_0To300Meter_Coal_Coal_Inferred
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Coal
+measuredProperty: dcid:reserves
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+depth: [0 300 Meter]
+energySource: dcid:Coal
+reserveType: dcid:Inferred
+reserves: dcid:Coal
+
+Node: dcid:Annual_Reserves_Coal_0To300Meter_Coal_Coal_Proved
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Coal
+measuredProperty: dcid:reserves
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+depth: [0 300 Meter]
+energySource: dcid:Coal
+reserveType: dcid:Proved
+reserves: dcid:Coal
+
+Node: dcid:Annual_Reserves_Coal_300To600Meter_Coal_Coal_Indicated
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Coal
+measuredProperty: dcid:reserves
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+depth: [300 600 Meter]
+energySource: dcid:Coal
+reserveType: dcid:Indicated
+reserves: dcid:Coal
+
+Node: dcid:Annual_Reserves_Coal_300To600Meter_Coal_Coal_Inferred
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Coal
+measuredProperty: dcid:reserves
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+depth: [300 600 Meter]
+energySource: dcid:Coal
+reserveType: dcid:Inferred
+reserves: dcid:Coal
+
+Node: dcid:Annual_Reserves_Coal_300To600Meter_Coal_Coal_Proved
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Coal
+measuredProperty: dcid:reserves
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+depth: [300 600 Meter]
+energySource: dcid:Coal
+reserveType: dcid:Proved
+reserves: dcid:Coal
+
+Node: dcid:Annual_Reserves_Coal_600To1200Meter_Coal_Coal_Indicated
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Coal
+measuredProperty: dcid:reserves
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+depth: [600 1200 Meter]
+energySource: dcid:Coal
+reserveType: dcid:Indicated
+reserves: dcid:Coal
+
+Node: dcid:Annual_Reserves_Coal_600To1200Meter_Coal_Coal_Inferred
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Coal
+measuredProperty: dcid:reserves
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+depth: [600 1200 Meter]
+energySource: dcid:Coal
+reserveType: dcid:Inferred
+reserves: dcid:Coal
+
+Node: dcid:Annual_Reserves_Coal_600To1200Meter_Coal_Coal_Proved
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Coal
+measuredProperty: dcid:reserves
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+depth: [600 1200 Meter]
+energySource: dcid:Coal
+reserveType: dcid:Proved
+reserves: dcid:Coal
+
+Node: dcid:Annual_Reserves_Coal_Coal_Indicated
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Coal
+measuredProperty: dcid:reserves
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+reserveType: dcid:Indicated
+reserves: dcid:Coal
+
