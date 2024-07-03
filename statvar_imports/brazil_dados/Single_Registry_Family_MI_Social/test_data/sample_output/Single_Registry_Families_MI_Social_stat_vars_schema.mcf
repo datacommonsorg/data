@@ -1,0 +1,18 @@
+Node: dcid:registeredIn
+typeOf: dcs:Property
+name: "registeredIn"
+domainIncludes: dcid:Household
+rangeIncludes: dcid:RegisteredInEnum
+isProvisional: dcs:True
+
+Node: dcid:RegisteredInEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "RegisteredInEnum"
+isProvisional: dcs:True
+
+Node: dcid:Brazil_SingleRegistry
+typeOf: dcid:RegisteredInEnum
+name: "Brazil_ Single Registry"
+isProvisional: dcs:True
+
