@@ -1,0 +1,41 @@
+Node: dcid:facilityType
+typeOf: dcs:Property
+name: "facilityType"
+domainIncludes: dcid:School
+rangeIncludes: dcid:FacilityTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:FacilityTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "FacilityTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:Cisterns
+typeOf: dcid:FacilityTypeEnum
+name: "Cisterns"
+isProvisional: dcs:True
+
+Node: dcid:brazilCisternDeliveryPartner
+typeOf: dcs:Property
+name: "brazilCisternDeliveryPartner"
+domainIncludes: dcid:School
+rangeIncludes: dcid:BrazilCisternDeliveryPartnerEnum
+isProvisional: dcs:True
+
+Node: dcid:BrazilCisternDeliveryPartnerEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "BrazilCisternDeliveryPartnerEnum"
+isProvisional: dcs:True
+
+Node: dcid:MinistrySocialDevelopmentAndFightAgainstHunger
+typeOf: dcid:BrazilCisternDeliveryPartnerEnum
+name: "Ministry Social Development And Fight Against Hunger"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:School
+

@@ -1,0 +1,14 @@
+parameter,value
+url,
+description,Family water cisterns for production (2nd water) delivered by MDS (Accumulated)
+#place_type,
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,Cisternas familiares de água para produção (2ª água) entregues pelo MDS (Acumulado)
+#places_resolved_csv,
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+#header_rows,1
+schemaless,1

@@ -1,0 +1,12 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/CisternsProgramWaterConsumption/test_data/sample_input/Municipality_School_cisterns_delivered_by_MDS_(Accumulated) - 1000data.csv --pv_map=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/CisternsProgramWaterConsumption/test_data/sample_input/Municipality_School_cisterns_delivered_by_MDS_(Accumulated) - pvmap.csv --config=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/CisternsProgramWaterConsumption/test_data/sample_input/Municipality_School_cisterns_delivered_by_MDS_(Accumulated) - metadata.csv --output_path=/usr/local/google/home/shamimansari/Brazil_VISDATA_Readme_Git/data/statvar_imports/brazil_visdata/CisternsProgramWaterConsumption/test_data/sample_output/Municipality_CisternsProgramWaterConsumption_School_cisterns_delivered_by_MDS" on 2024-06-12 06:39:45.871215
+
+Node: dcid:CumulativeCount_School_MinistrySocialDevelopmentAndFightAgainstHunger_Cisterns
+typeOf: dcid:StatisticalVariable
+name: "School cisterns delivered by Ministry of Social Development and Fight Against Hunger (MDS) (Accumulated)"
+populationType: dcid:School
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Cisternas Escolares entregues pelo O Ministério do Desenvolvimento Social e Combate à Fome (MDS)  (Acumulado)@pt"
+brazilCisternDeliveryPartner: dcid:MinistrySocialDevelopmentAndFightAgainstHunger
+facilityType: dcid:Cisterns
+
