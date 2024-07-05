@@ -1,0 +1,47 @@
+Node: dcid:teachingExperience
+typeOf: dcid:Property
+name: "teachingExperience"
+domainIncludes: dcid:Teacher,Person
+rangeIncludes: dcid:QuantityRange
+isProvisional: dcid:True
+
+Node: dcid:gender
+typeOf: dcid:Property
+name: "gender"
+domainIncludes: dcid:Teacher
+rangeIncludes: dcid:GenderType
+
+Node: dcid:MeasurementQualifierEnum
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+name: "MeasurementQualifierEnum"
+isProvisional: dcid:True
+
+Node: dcid:Qualifications
+typeOf: dcid:MeasurementQualifierEnum
+name: "Qualifications"
+isProvisional: dcid:True
+
+Node: dcid:schoolManagementRegime
+typeOf: dcid:Property
+name: "schoolManagementRegime"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:SchoolManagementRegimeEnum
+isProvisional: dcid:True
+
+Node: dcid:SchoolManagementRegimeEnum
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+name: "SchoolManagementRegimeEnum"
+isProvisional: dcid:True
+
+Node: dcid:ConventionalTeachingCatholic
+typeOf: dcid:SchoolManagementRegimeEnum
+name: "Conventional Teaching Catholic"
+isProvisional: dcid:True
+
+Node: dcid:ConventionalTeachingBrotherhood
+typeOf: dcid:SchoolManagementRegimeEnum
+name: "Conventional Teaching Brotherhood"
+isProvisional: dcid:True
+

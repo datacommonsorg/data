@@ -1,0 +1,98 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_health/test_data/sample_input/Congo_health_test_data.csv --output_path=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_health/test_data/sample_output/Congo_health --pv_map=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_health/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_health/Congo_health_metadata.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-07-05 10:42:45.625622
+
+Node: dcid:Count_MedicalConditionIncident_ConditionCholera
+typeOf: dcid:StatisticalVariable
+name: "Count of Cholera incidents"
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Cholera
+
+Node: dcid:Count_MedicalConditionIncident_ConditionDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Disease
+
+Node: dcid:Count_MedicalConditionIncident_ConditionFelineHerpesVirus
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:FelineHerpesVirus
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMalaria
+typeOf: dcid:StatisticalVariable
+name: "Count of Malaria incidents"
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Malaria
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMeningitis_AsAFractionOf_Count_MedicalConditionIncident_ConditionDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_MedicalConditionIncident_ConditionDisease
+medicalCondition: dcid:Meningitis
+
+Node: dcid:Count_MedicalConditionIncident_ConditionPertussis
+typeOf: dcid:StatisticalVariable
+name: "Count of Pertussis incidents"
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Pertussis
+
+Node: dcid:Count_MortalityEvent_ConditionAlphaFetoProtein
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:AlphaFetoProtein
+
+Node: dcid:Count_MortalityEvent_ConditionBacillaryDysentery
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:BacillaryDysentery
+
+Node: dcid:Count_MortalityEvent_ConditionCholera_AsAFractionOf_Count_MortalityEvent_ConditionDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_MortalityEvent_ConditionDisease
+medicalCondition: dcid:Cholera
+
+Node: dcid:Count_MortalityEvent_ConditionDisease
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Disease
+
+Node: dcid:Count_MortalityEvent_ConditionMalaria
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Malaria
+
+Node: dcid:Count_MortalityEvent_ConditionMeasles
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Measles
+
+Node: dcid:Count_MortalityEvent_ConditionPertussis
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+medicalCondition: dcid:Pertussis
+
