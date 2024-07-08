@@ -1,0 +1,8 @@
+Node: E:US_ITA->E0
+observationAbout: C:US_ITA->observationAbout
+observationDate: C:US_ITA->observationDate
+value: C:US_ITA->value
+variableMeasured: C:US_ITA->variableMeasured
+unit: C:US_ITA->unit
+scalingFactor: C:US_ITA->scalingFactor
+typeOf: dcs:StatVarObservation

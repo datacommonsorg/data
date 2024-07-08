@@ -1,0 +1,11 @@
+Node: dcid:importSource
+typeOf: dcs:Property
+name: "importSource"
+rangeIncludes: dcid:Country
+
+Node: dcid:naics
+typeOf: dcs:Property
+name: "naics"
+domainIncludes: dcid:EconomicActivity
+rangeIncludes: dcid:NAICSEnum
+
