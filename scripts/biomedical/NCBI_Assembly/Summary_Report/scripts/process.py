@@ -1,3 +1,17 @@
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import pandas as pd
 from pathlib import Path
 import csv
@@ -19,7 +33,7 @@ def generate_column(df):
 		df: dataframe with new columns with required terms.
 	
 	"""
-    df['dcid'] = 'bio/' + df['#assembly_accession']
+    df['dcid'] = 'bio/' + df['assembly_accession']
     df['genome_size_dcid'] = 'BasePairs' + df['genome_size'].astype(str)
     df['genome_size_name'] = 'BasePairs ' + df['genome_size'].astype(str)
     df['genome_size_ungapped_dcid'] = 'BasePairs' + df[
@@ -59,6 +73,9 @@ def tax_id(df):
     df['taxid'] = df.apply(lambda row: '' if str(row['taxid']) == str(row[
         'species_taxid']) else TAX_ID_DCID_MAPPING.get(row['taxid'], ''),
                             axis=1)
+    df['taxid'] = df['taxid'].astype(str).str.replace('dcid:', '', regex=False)  # Remove dcid prefix
+    # Set values that don't start with 'bio/' to ''
+    df.loc[~df['taxid'].astype(str).str.startswith('bio/'), 'taxid'] = ''
     return df
 
 
@@ -72,6 +89,9 @@ def species_tax_id(df):
 	"""
     df['species_taxid'] = df['species_taxid'].map(TAX_ID_DCID_MAPPING).fillna(
         df['species_taxid'])
+    df['species_taxid'] = df['species_taxid'].astype(str).str.replace('dcid:', '', regex=False)  # Remove dcid prefix
+    # Set values that don't start with 'bio/' to ''
+    df.loc[~df['species_taxid'].astype(str).str.startswith('bio/'), 'species_taxid'] = ''
     return df
 
 
@@ -276,16 +296,16 @@ def group(df):
 def set_flags():
     global _FLAGS
     _FLAGS = flags.FLAGS
-    flags.DEFINE_string('output_dir', 'output_file/',
+    flags.DEFINE_string('output_dir', 'output',
                         'Output directory for generated files.')
     flags.DEFINE_string('input_dir',
-                        'scripts/input/assembly_summary_genbank.txt',
+                        'input/assembly_summary_genbank.txt',
                         'Input directory where .txt files downloaded.')
     flags.DEFINE_string('input_dir1',
-                        'scripts/input/assembly_summary_refseq.txt',
+                        'input/assembly_summary_refseq.txt',
                         'Output directory for generated files.')
     flags.DEFINE_string('tax_id_dcid_mapping',
-                        'scripts/input/tax_id_dcid_mapping.txt',
+                        'tax_id_dcid_mapping.txt',
                         'Input directory where .txt files downloaded.')
 
 
@@ -312,12 +332,14 @@ def main(_FLAGS):
     file_input = _FLAGS.input_dir
     file_input1 = _FLAGS.input_dir1
     tax_id_dcid_mapping = _FLAGS.tax_id_dcid_mapping
-    output_dir = _FLAGS.output_dir
-    file_output = os.path.join(MODULE_DIR, output_dir)
+    #output_dir = _FLAGS.output_dir
+    file_output = _FLAGS.output_dir
+    #file_output = os.path.join(MODULE_DIR, output_dir)
 
     df = pd.read_csv(file_input, skiprows=1, delimiter='\t')
     df = df.replace('na', '')
     df = df.drop(columns='asm_not_live_date')
+    df = df.rename(columns={'#assembly_accession': 'assembly_accession'})
 
     df1 = pd.read_csv(file_input1, skiprows=1, delimiter='\t')
     ref_gbrs_paired_asm = df1['gbrs_paired_asm'].tolist()
@@ -326,8 +348,8 @@ def main(_FLAGS):
 
     # Perform operations after replacing NaN
     df.loc[~df['gbrs_paired_asm'].str.startswith('GC') &
-           df['#assembly_accession'].isin(ref_gbrs_paired_asm),
-            'gbrs_paired_asm'] = df['#assembly_accession']
+           df['assembly_accession'].isin(ref_gbrs_paired_asm),
+            'gbrs_paired_asm'] = df['assembly_accession']
 
     with open(tax_id_dcid_mapping, 'r') as file:
         csv_reader = csv.DictReader(file)
