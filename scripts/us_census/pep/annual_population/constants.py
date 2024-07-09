@@ -30,7 +30,8 @@ INPUT_DIRS = [
     "1900_1989/state/", "1990_1999/state/", "2000_2009/state/",
     "2010_2020/state/", "2021/state/", "1900_1979/national/",
     "1980_1989/national/", "1990_1999/national/", "2000_2009/national/",
-    "2010_2020/national/", "2021/national/"
+    "2010_2020/national/", "2021/national/", "2020_2022/city/",
+    "2020_2022/county/", "2020_2022/state/", "2020_2022/national/"
 ]
 
 SCALING_FACTOR_STATE_1900_1960 = 1000
