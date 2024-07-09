@@ -14,5 +14,7 @@
 
 ### How to run:
 
- python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='/usr/local/google/home/kuru/DC_13_june/data/statvar_imports/oecd_data/waste_water_treatment/testdata/sample_input/Wastewater_treatment_data.csv'  --pv_map='/usr/local/google/home/kuru/DC_13_june/data/statvar_imports/oecd_data/waste_water_treatment/testdata/sample_input/Wastewater_treatment_pvmap.csv'  --places_resolved_csv='/usr/local/google/home/kuru/DC_13_june/data/statvar_imports/oecd_data/waste_water_treatment/testdata/sample_input/Wastewater_treatment_places_resolved.csv' --config='/usr/local/google/home/kuru/DC_13_june/data/statvar_imports/oecd_data/waste_water_treatment/testdata/sample_input/Wastewater_treatment_metadata.csv'   --output_path="/usr/local/google/home/kuru/DC_13_june/data/statvar_imports/oecd_data/waste_water_treatment/testdata/sample_output/WasteWaterTreatment"
+Prerequisite: The below command must be run from a folder that contains stat_var_processor.py script file.
+
+ python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='/data/statvar_imports/oecd_data/waste_water_treatment/testdata/sample_input/Wastewater_treatment_data.csv'  --pv_map='/data/statvar_imports/oecd_data/waste_water_treatment/testdata/sample_input/Wastewater_treatment_pvmap.csv'  --places_resolved_csv='/data/statvar_imports/oecd_data/waste_water_treatment/testdata/sample_input/Wastewater_treatment_places_resolved.csv' --config='/data/statvar_imports/oecd_data/waste_water_treatment/testdata/sample_input/Wastewater_treatment_metadata.csv'   --output_path="/data/statvar_imports/oecd_data/waste_water_treatment/testdata/sample_output/WasteWaterTreatment"
 
