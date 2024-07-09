@@ -12,6 +12,9 @@
 - place_resolution: Country and Geographical Region places are resolved based on name.
 
 ### How to run:
+
+Prerequisite: The below command must be run from a folder that contains stat_var_processor.py script file.
+
 python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='data/statvar_imports/testdata/sample_input/US_ITA_data.csv' --pv_map='data/statvar_imports/testdata/sample_input/US_ITA_pvmap.csv' --places_resolved_csv='data/statvar_imports/testdata/sample_input/US_ITA_places_resolved.csv' --config='data/statvar_imports/testdata/sample_input/US_ITA_metadata.csv' --output_path="data/statvar_imports/testdata/sample_output/US_ITA"
 
 
