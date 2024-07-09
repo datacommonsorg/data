@@ -12,7 +12,10 @@
 - place_resolution: Country and City places are resolved based on name.
 
 ### How to run:
-python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='/usr/local/google/home/kuru/DC_July09_2024/data/statvar_imports/oecd_data/landcover/testdata/sample_input/oced_landcover_data.csv'  --pv_map='/usr/local/google/home/kuru/DC_July09_2024/data/statvar_imports/oecd_data/landcover/testdata/sample_input/oced_landcover_pvmap.csv' --config='/usr/local/google/home/kuru/DC_July09_2024/data/statvar_imports/oecd_data/landcover/testdata/sample_input/oced_landcover_metadata.csv'   --output_path="/usr/local/google/home/kuru/DC_July09_2024/data/statvar_imports/oecd_data/landcover/testdata/sample_output/oecd_landcover"
+
+Prerequisite: The below command must be run from a folder that contains stat_var_processor.py script file.
+
+python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='/data/statvar_imports/oecd_data/landcover/testdata/sample_input/oced_landcover_data.csv' --pv_map='/data/statvar_imports/oecd_data/landcover/testdata/sample_input/oced_landcover_pvmap.csv' --config='/data/statvar_imports/oecd_data/landcover/testdata/sample_input/oced_landcover_metadata.csv' --output_path="/data/statvar_imports/oecd_data/landcover/testdata/sample_output/oecd_landcover"
 
 
 
