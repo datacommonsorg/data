@@ -27,15 +27,18 @@ from national_1980_1989 import national1980
 from national_2000_2010 import national2000
 from national_2010_2019 import national2010
 from national_2020_2021 import national2020
+from national_2020_2022 import national2022
 from state_1970_1979 import state1970
 from state_1990_2000 import state1990
 from state_2000_2010 import state2000
 from state_2010_2020 import state2010
+from state_2020_2022 import state2020
 from county_1970_1979 import county1970
 from county_1980_1989 import county1980
 from county_1990_2000 import county1990
 from county_2000_2010 import county2000
 from county_2010_2020 import county2010
+from county_2020_2022 import county2020
 
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -216,6 +219,9 @@ class USCensusPEPByASR:
         final_df['Year'] = final_df['Year'].astype(float).astype(int)
         final_df = final_df.sort_values(by=['Year', 'geo_ID'])
         final_df = _measurement_method(final_df)
+        #To remove inconsistent value issue'Count_Person_0Years_Male', observationDate: '2020', value1: 1891716.0, value2: 1876349.0
+        final_df = final_df.drop_duplicates(
+            subset=['geo_ID', 'Year', 'Measurement_Method', 'SVs'], keep='last')
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = list(set(sv_list))
         sv_list.sort()
@@ -238,15 +244,21 @@ def main(_):
     national2000(national_url_file, output_folder)
     national2010(national_url_file, output_folder)
     national2020(national_url_file, output_folder)
+    #Refresh 2020-2022
+    national2022(national_url_file, output_folder)
     state1970(state_url_file, output_folder)
     state1990(state_url_file, output_folder)
     state2000(state_url_file, output_folder)
     state2010(state_url_file, output_folder)
+    #Refresh 2020-2022
+    state2020(state_url_file, output_folder)
     county1970(county_url_file, output_folder)
     county1980(county_url_file, output_folder)
     county1990(output_folder)
     county2000(output_folder)
     county2010(county_url_file, output_folder)
+    #Refresh 2020-2022
+    county2020(county_url_file, output_folder)
 
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
