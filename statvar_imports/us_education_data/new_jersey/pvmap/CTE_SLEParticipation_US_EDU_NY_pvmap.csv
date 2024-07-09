@@ -1,0 +1,11 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
+ObservationAbout,observationAbout,{Data},populationType,Student,measuredProperty,count,courseType,CareerAndTechnicalEducation,,,,,,
+Year,observationDate,{Number},,,,,,,,,,,,
+CTEParticipationDistrict,careerClusterStatus,CTEParticipant,value,{Number},measurementDenominator,-careerClusterStatus,unit,Percent,,,,,,
+CTEParticipationState,careerClusterStatus,CTEParticipant,value,{Number},observationAbout,geoId/34,measurementDenominator,-careerClusterStatus,unit,Percent,,,,
+CTEConcentratorsDistrict,careerClusterStatus,CTEConcentrator,value,{Number},measurementDenominator,-careerClusterStatus,unit,Percent,,,,,,
+CTEConcentratorsState,careerClusterStatus,CTEConcentrator,value,{Number},observationAbout,geoId/34,measurementDenominator,-careerClusterStatus,unit,Percent,,,,
+SLEDistrict,careerClusterStatus,StructuredLearningExperienced,value,{Number},measurementDenominator,-careerClusterStatus,unit,Percent,,,,,,
+SLEState,careerClusterStatus,StructuredLearningExperienced,value,{Number},observationAbout,geoId/34,measurementDenominator,-careerClusterStatus,unit,Percent,,,,
+IVCDistrict,careerClusterStatus,IndustryValuedCredential,value,{Number},measurementDenominator,-careerClusterStatus,unit,Percent,,,,,,
+IVCState,careerClusterStatus,IndustryValuedCredential,value,{Number},observationAbout,geoId/34,measurementDenominator,-careerClusterStatus,unit,Percent,,,,
