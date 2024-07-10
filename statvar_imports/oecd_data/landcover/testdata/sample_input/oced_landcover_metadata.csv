@@ -7,7 +7,6 @@ start_date,1992
 end_date,2018
 release_frequency,
 process,
-places_resolved_csv,https://docs.google.com/spreadsheets/d/1WXDbIgZxNA2ZGmZ2nOZTxn8k_EGNT7OZsdcHQTvJXxk/edit?gid=521236221#gid=521236221
 comments,
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
 header_rows,1
