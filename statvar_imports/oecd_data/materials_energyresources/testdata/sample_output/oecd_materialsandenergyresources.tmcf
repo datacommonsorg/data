@@ -1,8 +1,0 @@
-Node: E:oecd_materialsandenergyresources->E0
-observationAbout: C:oecd_materialsandenergyresources->observationAbout
-observationDate: C:oecd_materialsandenergyresources->observationDate
-value: C:oecd_materialsandenergyresources->value
-variableMeasured: C:oecd_materialsandenergyresources->variableMeasured
-unit: C:oecd_materialsandenergyresources->unit
-scalingFactor: C:oecd_materialsandenergyresources->scalingFactor
-typeOf: dcs:StatVarObservation

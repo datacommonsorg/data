@@ -15,6 +15,8 @@
 
 Prerequisite: The below command must be run from a folder that contains stat_var_processor.py script file.
 
-python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_input/oecd_watertreatment_data.csv' --pv_map='/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_input/oecd_watertreatment_pvmap.csv' --config='/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_input/oecd_watertreatment_metadata.csv'  --output_path='/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_output'
+python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_input/OECD_MaterialsAndEnergyResources_data.csv'  --pv_map='/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_input/OECD_MaterialsAndEnergyResources_pvmap.csv'  --config='/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_input/OECD_MaterialsAndEnergyResources_metadata.csv'  --output_path='/data/statvar_imports/oecd_data/materials_energyresources/testdata/sample_output/OECD_MaterialsAndEnergyResources'
+
+
 
 
