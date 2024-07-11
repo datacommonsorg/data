@@ -1,5 +1,3 @@
-
-
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,16 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-FROM gcr.io/google-appengine/python
 
-RUN virtualenv /env -p python3.7
+FROM python:3.11.4
 
-ENV VIRTUAL_ENV /env
-ENV PATH /env/bin:$PATH
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y autoremove \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /workspace
 
-ADD requirements.txt /app/requirements.txt
-RUN pip install -r /app/requirements.txt
+ADD requirements.txt /workspace/requirements.txt
+RUN pip install -r /workspace/requirements.txt
 
-ADD . /app
+COPY app/. /workspace/app/
 
-CMD gunicorn --timeout 1800 --workers 5 -b :$PORT app.main:FLASK_APP
+CMD gunicorn --timeout 0 --workers 5 -b :$PORT app.main:FLASK_APP

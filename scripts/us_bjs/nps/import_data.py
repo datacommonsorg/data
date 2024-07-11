@@ -6,44 +6,23 @@ from absl import app
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('input_file',
-                    'NPS_1978-2018_Data.tsv',
+                    'NPS_1978-2021_Data.tsv',
                     'file path to tsv file with import data',
                     short_name='i')
 
 AGGREGATE_COLUMNS = [
-    "Count_Person_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_WhiteAlone_MeasuredBasedOnJurisdiction",
-    "Count_Person_BlackOrAfricanAmericanAlone_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_Person_HispanicOrLatino_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_Person_AmericanIndianOrAlaskaNativeAlone_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_Person_AsianAlone_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_NativeHawaiianOrOtherPacificIslanderAlone_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_TwoOrMoreRaces_MeasuredBasedOnJurisdiction",
-    "Count_MortalityEvent_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_MortalityEvent_Incarcerated_JudicialExecution_MeasuredBasedOnJurisdiction",
-    "Count_MortalityEvent_IllnessOrNaturalCause_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_MortalityEvent_AIDS_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_MortalityEvent_Incarcerated_IntentionalSelf-Harm(Suicide)_MeasuredBasedOnJurisdiction",
-    "Count_MortalityEvent_Accidents(UnintentionalInjuries)_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_MortalityEvent_DeathDueToAnotherPerson_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_MortalityEvent_Assault(Homicide)_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_MortalityEvent_Incarcerated_NPSOtherCauseOfDeath_MeasuredBasedOnJurisdiction",
-    "Count_IncarcerationEvent_AdmittedToPrison_Incarcerated_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction",
-    "Count_IncarcerationEvent_Incarcerated_MaxSentenceGreaterThan1Year_ReleasedFromPrison_Sentenced_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_MaxSentenceGreaterThan1Year_Sentenced_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_MaxSentence1YearOrLess_Sentenced_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_Unsentenced_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_InState_PrivatelyOperated_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_OutOfState_PrivatelyOperated_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_Local_LocallyOperated_MeasuredBasedOnJurisdiction",
-    "Count_Person_FederallyOperated_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_OutOfState_StateOperated_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody",
-    "Count_Person_Incarcerated_MaxSentenceGreaterThan1Year_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody",
-    "Count_Person_Incarcerated_MaxSentence1YearOrLess_NotAUSCitizen_Sentenced_StateOperated&FederallyOperated&PrivatelyOperated_MeasuredBasedOnCustody",
-    "Count_Person_Incarcerated_NotAUSCitizen_StateOperated&FederallyOperated&PrivatelyOperated_Unsentenced_MeasuredBasedOnCustody",
-    "Count_Person_Female_Incarcerated_MeasuredBasedOnJurisdiction",
-    "Count_Person_Incarcerated_Male_MeasuredBasedOnJurisdiction"
+    "dc/lnp5g90fwpct8", "dc/03l0q0wyqrk39", "dc/hxsdmw575en24",
+    "dc/wp843855b1r4c", "dc/0tn58fc77r0z6", "dc/zdb0f7sj2419d",
+    "dc/fs27m9j4vpvc7", "dc/yksgwhwsbtv9c", "dc/510pv6eq2vtw7",
+    "dc/rmwl11tzy7vkh", "dc/67ttwfn9dswch", "dc/xewq6n5r3nzch",
+    "dc/3s7lndm5j3wp4", "dc/tn5kxlgy0shl4", "dc/jte92xq8qsgtd",
+    "dc/80wsxnfj3secc", "dc/nz8kmke5yqvn", "dc/jtf63bh66k41g",
+    "dc/3kk4xws30zxlb", "dc/62pg70d2beyh9", "dc/ljrjkp31x9ny2",
+    "dc/g68w8e5hk1w2b", "dc/y01295f7b38n1", "dc/e3jblh1b616b5",
+    "dc/n92hgh8ned7k5", "dc/qgv9d3frn35qc", "dc/r5ebll5x2zxfg",
+    "dc/0mz1rg7mm3y66", "dc/91vy0sf20wlg9", "dc/b3jgznxenlrm2",
+    "dc/ryhy4qxqv6hg6", "dc/x0l8799rm6xg4", "dc/eergc1rzgq61b",
+    "dc/z6w4rxbxb4eg8"
 ]
 FILENAME = 'national_prison_stats'
 
