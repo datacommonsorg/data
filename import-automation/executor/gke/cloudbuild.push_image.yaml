@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 steps:
   - id: push-import-automation-executor
     name: gcr.io/cloud-builders/docker
@@ -19,8 +20,13 @@ steps:
       - -c
       - |
         set -e
-        DOCKER_BUILDKIT=1 docker build -f Dockerfile --tag gcr.io/$_PROJECT_ID/datacommons-import-automation-executor:${_TAG} .
-        docker push gcr.io/$_PROJECT_ID/datacommons-import-automation-executor:${_TAG}
+        DOCKER_BUILDKIT=1
+        docker build -f Dockerfile \
+          --tag gcr.io/datcom-ci/datacommons-import-automation-executor:${_TAG} \
+          --tag gcr.io/datcom-ci/datacommons-import-automation-executor:prod \
+          .
+        docker push gcr.io/datcom-ci/datacommons-import-automation-executor:${_TAG}
+        docker push gcr.io/datcom-ci/datacommons-import-automation-executor:prod
 
 timeout: 600s
 options:

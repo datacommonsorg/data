@@ -5,11 +5,13 @@ measuredProperty: dcs:value
 name: "Food waste"
 populationType: dcs:SDG_AG_FOOD_WST
 statType: dcs:measuredValue
+footnote: "Includes data from the following sources: Food Waste Index Report 2021 / WESR"
 
 Node: dcid:sdg/AG_FOOD_WST.FOOD_WASTE_SECTOR--FWS_HHS
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:value
-name: "Food waste [Food Waste Sector = Households]"
+name: "Food waste [Households]"
 populationType: dcs:SDG_AG_FOOD_WST
 statType: dcs:measuredValue
 sdg_foodWasteSector: dcs:SDG_FoodWasteSectorEnum_FWS_HHS
+footnote: "Includes data from the following sources: Food Waste Index Report 2021 / WESR"

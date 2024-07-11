@@ -1,0 +1,7 @@
+Node: E:VirusGenomeSegments->E1
+typeOf: dcs:VirusGenomeSegment
+dcid: C:VirusGenomeSegments->dcid
+name: C:VirusGenomeSegments->name
+genBankAccession: C:VirusGenomeSegments->genBankAccession
+genomeSegmentOf: C:VirusGenomeSegments->genomeSegmentOf
+refSeqAccession: C:VirusGenomeSegments->refSeqAccession

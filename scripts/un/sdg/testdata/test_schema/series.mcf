@@ -28,7 +28,7 @@ name: "Proportion of population below international poverty line"
 typeOf: dcs:SDG_Series
 
 Node: dcid:SDG_SI_POV_EMP1
-name: "Employed population below international poverty line"
+name: "Employed population below international poverty line, by sex and age"
 typeOf: dcs:SDG_Series
 
 Node: dcid:SDG_SI_POV_NAHC
