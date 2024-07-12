@@ -14,4 +14,7 @@
 
 
 ### How to run:
-`python3 statvar_processory.py --existing_statvar_mcf=stat_vars.mcf --input_data=<input_file>.csv --pv_map=statvar_imports/brazil_VISDATA/RuralDevelopmentProgram/pv_map/<filename>_pvmap.csv --places_resolved_csv=statvar_imports/brazil_visdata/Brazil_Places_Resolved.csv --config=statvar_imports/brazil_VISDATA/RuralDevelopmentProgram/common_metdata.csv --output_path=<filepath/filename>`
+`python3 statvar_processory.py --input_data=<input_file>.csv --pv_map=statvar_imports/brazil_VISDATA/RuralDevelopmentProgram/pv_map/<filename>_pvmap.csv --places_resolved_csv=statvar_imports/brazil_visdata/Brazil_Places_Resolved.csv --config=statvar_imports/brazil_VISDATA/RuralDevelopmentProgram/common_metdata.csv --output_path=<filepath/filename>`
+
+#### Example
+`python3 stat_var_processor.py --input_data=/statvar_imports/brazil_visdata/RuralDevelopmentProgram/test_data/sample_input/FinancialResources_Beneficiary_RuralDevelopmentProgram_data.csv --pv_map=/statvar_imports/brazil_visdata/RuralDevelopmentProgram/pv_map/FinancialResources_Beneficiary_RuralDevelopmentProgram_pvmap.csv --places_resolved_csv=/statvar_imports/brazil_visdata/Brazil_Places_Resolved.csv --config=/statvar_imports/brazil_visdata/RuralDevelopmentProgram/common_metadata.csv --output_path=/statvar_imports/brazil_visdata/RuralDevelopmentProgram/test_data/sample_output/FinancialResources_Beneficiary_RuralDevelopmentProgram`

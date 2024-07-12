@@ -14,4 +14,7 @@
 
 ### How to run:
 
-`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=<input_file>.csv --pv_map=statvar_imports/brazil_VISDATA/FoodBasketDistribution/pv_map/<filename>_pvmap.csv --places_resolved_csv=statvar_imports/brazil_visdata/Brazil_Places_Resolved.csv --config=statvar_imports/brazil_VISDATA/FoodBasketDistribution/common_metadata.csv --output_path=--output_path=<filepath/filename>`
+`python3 stat_var_processor.py --input_data=<input_file>.csv --pv_map=statvar_imports/brazil_VISDATA/FoodBasketDistribution/pv_map/<filename>_pvmap.csv --places_resolved_csv=statvar_imports/brazil_visdata/Brazil_Places_Resolved.csv --config=statvar_imports/brazil_VISDATA/FoodBasketDistribution/common_metadata.csv --output_path=--output_path=<filepath/filename>`
+
+#### Example
+`python3 stat_var_processor.py --input_data=/statvar_imports/brazil_visdata/FoodBasketDistribution/test_data/sample_input/FoodDistributionAct_FoodBasketByPartners_data.csv --pv_map=/statvar_imports/brazil_visdata/FoodBasketDistribution/pv_map/FoodDistributionAct_FoodBasketByPartners_pvmap.csv --places_resolved_csv=/statvar_imports/brazil_visdata/Brazil_Places_Resolved.csv --config=/statvar_imports/brazil_visdata/FoodBasketDistribution/common_metadata.csv --output_path=/statvar_imports/brazil_visdata/FoodBasketDistribution/test_data/sample_output/FoodDistributionAct_FoodBasketByPartners`
