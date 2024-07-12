@@ -1,0 +1,57 @@
+Node: E:drugs->E1
+typeOf: dcs:AnatomicalTherapeuticChemicalCode
+dcid: C:drugs->ATC
+
+Node: E:drugs->E2
+typeOf: dcs:MeSHConcept
+dcid: C:drugs->MeSH
+
+Node: E:drugs->E3
+typeOf: schema:Drug
+dcid: C:drugs->dcid
+name: C:drugs->Name
+atcCode: E:drugs->E1
+bindingDBID: C:drugs->BindingDB
+canadianDrugsProductDatabaseDrugIdNumber: C:drugs->DPD
+chebiID: C:drugs->ChEBI
+chemblID: C:drugs->ChEMBL
+chemicalAbstractServiceID: C:drugs->CAS
+chemSpiderID: C:drugs->ChemSpider
+clinicalAnnotationCount: C:drugs->Clinical Annotation Count
+dailyMedSetId: C:drugs->FDA Drug Label at DailyMed
+dosageGuideline: C:drugs->Dosing Guideline
+dosageGuidelineSource: C:drugs->dosingGuidelineSource
+drugBankID: C:drugs->DrugBank
+drugBrandMixture: C:drugs->brandMixture
+drugGenericName: C:drugs->genericName
+drugHasPrescribingInfo: C:drugs->FDA Label has Prescribing Info
+drugHasRxAnnotation: C:drugs->Has Rx Annotation
+drugLabelHasDosingInformation: C:drugs->Label Has Dosing Info
+drugTradeName: C:drugs->tradeName
+drugType: C:drugs->Type
+fdaTopPharmacogeneticLevel: C:drugs->Top FDA Label Testing Level
+geneticVariantAnnotationCount: C:drugs->Variant Annotation Count
+humanMetabolomeDatabaseID: C:drugs->HMDB
+inChIKey: C:drugs->InChI
+iupharLigandID: C:drugs->IUPHAR Ligand
+keggCompoundID: C:drugs->KEGG Compound
+keggDrugID: C:drugs->KEGG Drug
+medicalSubjectHeadingID: E:drugs->E2
+medicalDictionaryForRegulatoryActivitiesId: C:drugs->MedDRA
+metabolicPathwayCount: C:drugs->Pathway Count
+nationalClinicalTrialNumber: C:drugs->ClinicalTrials.gov
+nationalDrugFileReferenceTerminologyCode: C:drugs->NDF-RT
+pharmacogeneticAssociation: C:drugs->FDA_PGx_Association
+pharmGKBID: C:drugs->pharmGKBID
+pkgbTags: C:drugs->PharmGKB Tags
+pubChemCompoundID: C:drugs->PubChem Compound
+pubChemCompoundID: C:drugs->PubChem Compound Identifiers
+pubChemSubstanceID: C:drugs->PubChem Substance
+rxConceptUniqueId: C:drugs->RxNorm Identifiers
+rxConceptUniqueId: C:drugs->RxNorm
+simplifiedMolecularInputLineEntrySystem: C:drugs->SMILES
+topClinicalAnnotationLevel: C:drugs->Top Clinical Annotation Level
+topCpicLevel: C:drugs->Top CPIC Pairs Level
+topPharmacogeneticLevel: C:drugs->Top Any Drug Label Testing Level
+url: C:drugs->URL
+veryImportantPharmacogeneCount: C:drugs->VIP Count

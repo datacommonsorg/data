@@ -1,0 +1,41 @@
+Node: E:chemicals->E1
+typeOf: dcs:AnatomicalTherapeuticChemicalCode
+dcid: C:chemicals->ATC
+
+Node: E:chemicals->E2
+typeOf: dcs:MeSHConcept
+dcid: C:chemicals->MeSH
+
+Node: E:chemicals->E3
+typeOf: schema:Drug
+dcid: C:chemicals->dcid
+name: C:chemicals->Name
+atcCode: E:chemicals->E1
+bindingDBID: C:chemicals->BindingDB
+chebiID: C:chemicals->ChEBI
+chemblID: C:chemicals->ChEMBL
+chemicalAbstractServiceID: C:chemicals->CAS
+clinicalAnnotationCount: C:chemicals->Clinical Annotation Count
+drugBankID: C:chemicals->DrugBank
+drugBankMetaboliteID: C:chemicals->DrugBank Metabolite
+drugBrandMixture: C:chemicals->brandMixture
+drugGenericName: C:chemicals->genericName
+drugTradeName: C:chemicals->tradeName
+drugType: C:chemicals->Type
+geneticVariantAnnotationCount: C:chemicals->Variant Annotation Count
+humanMetabolomeDatabaseID: C:chemicals->HMDB
+inChIKey: C:chemicals->InChI
+medicalSubjectHeadingID: E:chemicals->E2
+medicalDictionaryForRegulatoryActivitiesId: C:chemicals->MedDRA
+metabolicPathwayCount: C:chemicals->Pathway Count
+nationalClinicalTrialNumber: C:chemicals->ClinicalTrials.gov
+nationalDrugFileReferenceTerminologyCode: C:chemicals->NDF-RT
+pharmGKBID: C:chemicals->pharmGKBID
+pubChemCompoundID: C:chemicals->PubChem Compound
+pubChemCompoundID: C:chemicals->PubChem Compound Identifiers
+pubChemSubstanceID: C:chemicals->PubChem Substance
+rxConceptUniqueId: C:chemicals->RxNorm Identifiers
+simplifiedMolecularInputLineEntrySystem: C:chemicals->SMILES
+topClinicalAnnotationLevel: C:chemicals->Top Clinical Annotation Level
+url: C:chemicals->URL
+veryImportantPharmacogeneCount: C:chemicals->VIP Count

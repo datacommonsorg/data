@@ -1,0 +1,38 @@
+Node: E:genes->E1
+typeOf: dcs:GenomicCoordinates
+dcid: C:genes->genomeCoordDcid38
+name: C:genes->genomeCoordName38
+chrom: C:genes->Chromosome
+chromStart: C:genes->Chromosomal Start - GRCh38
+chromEnd: C:genes->Chromosomal Stop - GRCh38
+inGenomeAssembly: C:genes->GenomeAssembly38
+
+Node: E:genes->E2
+typeOf: dcs:GenomicCoordinates
+dcid: C:genes->genomeCoordDcid37
+name: C:genes->genomeCoordName37
+chrom: C:genes->Chromosome
+chromStart: C:genes->Chromosomal Start - GRCh37
+chromEnd: C:genes->Chromosomal Stop - GRCh37
+inGenomeAssembly: C:genes->GenomeAssembly37
+
+Node: E:genes->E3
+typeOf: dcs:Gene
+dcid: C:genes->dcid
+name: C:genes->Name
+alternateGeneSymbol: C:genes->Alternate Symbols
+comparativeToxicogenomicsDBID: C:genes->Comparative Toxicogenomics Database
+ensemblID: C:genes->ensemblID
+ensemblID: C:genes->Ensembl
+genAtlasID: C:genes->GenAtlas
+geneCardID: C:genes->GeneCard
+geneSymbol: C:genes->Symbol
+hasCpicDosingGuideline: C:genes->Has CPIC Dosing Guideline
+hasGeneticVariantAnnotation: C:genes->Has Variant Annotation
+hgncID: C:genes->hgncID
+hgncID: C:genes->HGNC
+isVeryImportantPharmacogene: C:genes->Is VIP
+ncbiGeneID: C:genes->NCBI Gene
+ncbiGeneID: C:genes->ncbiGeneID
+pharmGKBID: C:genes->pharmGKBID
+synonym: C:genes->synonyms

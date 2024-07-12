@@ -1,0 +1,7 @@
+Node: E:phenotypes->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:phenotypes->MeSHDcid
+nationalDrugFileReferenceTerminologyCode: C:phenotypes->NDFRT
+medicalSubjectHeadingID: C:phenotypes->MeSH
+snomedCT: C:phenotypes->SnoMedCT
+umlsConceptUniqueID: C:phenotypes->UMLS
