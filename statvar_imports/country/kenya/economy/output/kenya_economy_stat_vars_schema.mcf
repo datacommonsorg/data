@@ -1,0 +1,11 @@
+Node: dcid:measurementQualifier=National
+typeOf: dcid:Property
+name: "measurementQualifier=National"
+rangeIncludes: dcid:MeasurementQualifier=NationalEnum
+isProvisional: dcid:True
+
+Node: dcid:GrossCountryProduct
+typeOf: dcid:EconomicActivitySourceEnum
+name: "Gross Country Product"
+isProvisional: dcid:True
+
