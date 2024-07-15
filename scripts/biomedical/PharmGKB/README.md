@@ -21,38 +21,41 @@
 
 ## About the Dataset
 
+The Pharmacogenomics Knowledge Base, PharmGKB, is an interactive tool for researchers investigating how genetic variation affects drug response. [PharmGKB]https://www.pharmgkb.org/) displays genotype, molecular, and clinical knowledge integrated into pathway representations and Very Important Pharmacogene (VIP) summaries with links to additional external resources. Users can search and browse the knowledgebase by genes, variants, drugs, diseases, and pathways. The Primary Data contains summary information on chemicals, drugs, genes, genetic variants, and phenotypes.
+
 ### Download Data
 
-The zip files for drugs, chemicals, genes, and relationships can be found [here](https://www.pharmgkb.org/downloads). The latest version of the data can be directly downloaded from their website.
+Data from PharmGKB can be downloaded [here](https://www.pharmgkb.org/downloads). PharmGKB is updated on a monthly basis. In this import we include the "Variant, Gene and Drug Relationship Data" in the `relationships.zip` file. We also include all of the Primary Data: `genes.zip`, `drugs.zip`, `chemicals.zip`, `variants.zip`, and `phenotypes.zip`.
 
 ### Database Overview
 
 This dataset brings in various PharmGKB annotated biological entities including:
 
-- genes
-- drugs
-- chemicals
-- variant
-- phenotypes
+- Genes
+- Drugs
+- ChemicalCompounds
+- GeneticVariants
+- Diseases (phenotypes)
+- MeSHDescriptors (phenotypes)
 
 <br> </br>
-These entities, in turn, contain links to other databases including but not limited to NCBI, HGNC, Ensembl, HMDB, KEGG, PubChem, UMLS, DrugBank, ChemSpider,and MeSH. In addition, this dataset brings in the interactions between the entities, including:
+These entities, in turn, contain mappings to other databases including but not limited to NCBI, HGNC, Ensembl, HMDB, KEGG, PubChem, UMLS, DrugBank, ChemSpider,and MeSH. In addition, this dataset brings in the interactions between the entities, including:
 
-- Chemical - Chemical Associations
-- Chemical - Gene Associations
-- Chemical - Genetic Variant Associations
-- Gene - Gene Associations
-- Gene - Genetic Variant Associations
-- Genetic Variant - Genetic Variant Associations
-- Disease - Disease Associations
-- Disease - Gene Assocations
-- Disease - Genetic Variant Assocations
+- ChemicalCompoundChemicalCompoundAssociations
+- ChemicalCompoundGeneAssociations
+- ChemicalCompoundGeneticVariantAssociations
+- GeneGeneAssociations
+- GeneGeneticVariantAssociations
+- GeneticVariantGeneticVariantAssociations
+- DiseaseDiseaseAssociations
+- DiseaseGeneAssocations
+- DiseaseGeneticVariantAssocations
 
 In this import we will process the following files:
 
 * Primary Data
-  *`chemicals.tsv`
-  *`drugs.tsv`
+  * `chemicals.tsv`
+  * `drugs.tsv`
   * `genes.tsv`
   * `phenotypes.tsv`
   * `variants.tsv`
@@ -74,7 +77,7 @@ More information about the license can be viewed [here](https://creativecommons.
 
 ###  Dataset Documentation and Releavant Links
 
-[PharmGKB](https://www.pharmgkb.org/) is partnered with CPIC, PharmVar, PharmCat, PGRN, ClinGen and Global Core Biodata Resource. Data from PharmGKB can be downloaded [here](https://www.pharmgkb.org/downloads). In addition to downloading the data directly, PharmGKB has their own [REST API](https://api.pharmgkb.org/swagger/). Additional updates are released on their [blog](https://blog.clinpgx.org/).
+[PharmGKB](https://www.pharmgkb.org/) is partnered with CPIC, PharmVar, PharmCat, PGRN, ClinGen and Global Core Biodata Resource. Data from PharmGKB can be downloaded [here](https://www.pharmgkb.org/downloads). In addition to downloading the data directly, PharmGKB has their own [REST API](https://api.pharmgkb.org/swagger/). Documentation for PharmGKB can be found [here](https://www.pharmgkb.org/whatIsPharmgkb). Additional updates are released on their [blog](https://blog.clinpgx.org/).
 
 To cite PharmGKB please use the following publications:
 M. Whirl-Carrillo<sup>1</sup>, R. Huddart<sup>1</sup>, L. Gong, K. Sangkuhl, C.F. Thorn, R. Whaley and T.E. Klein. ["An evidence-based framework for evaluating pharmacogenomics knowledge for personalized medicine"](https://pubmed.ncbi.nlm.nih.gov/34216021/). *Clinical Pharmacology & Therapeutics* (2021) Sep;110(3):563-572.
