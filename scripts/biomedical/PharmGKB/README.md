@@ -74,6 +74,25 @@ More information about the license can be viewed [here](https://creativecommons.
 
 ###  Dataset Documentation and Releavant Links
 
+[PharmGKB](https://www.pharmgkb.org/) is partnered with CPIC, PharmVar, PharmCat, PGRN, ClinGen and Global Core Biodata Resource. Data from PharmGKB can be downloaded [here](https://www.pharmgkb.org/downloads). In addition to downloading the data directly, PharmGKB has their own [REST API](https://api.pharmgkb.org/swagger/). Additional updates are released on their [blog](https://blog.clinpgx.org/).
+
+To cite PharmGKB please use the following publications:
+M. Whirl-Carrillo^1^, R. Huddart^1^, L. Gong, K. Sangkuhl, C.F. Thorn, R. Whaley and T.E. Klein. ["An evidence-based framework for evaluating pharmacogenomics knowledge for personalized medicine"](https://pubmed.ncbi.nlm.nih.gov/34216021/). *Clinical Pharmacology & Therapeutics* (2021) Sep;110(3):563-572.
+
+^1^co-first authors
+
+PMID: 34216021
+PMCID: PMC8457105
+DOI: 10.1002/cpt.2350
+
+M. Whirl-Carrillo, E.M. McDonagh, J.M. Hebert, L. Gong, K. Sangkuhl, C.F. Thorn, R.B. Altman and T.E. Klein. ["Pharmacogenomics knowledge for personalized medicine"](https://pubmed.ncbi.nlm.nih.gov/22992668/). *Clinical Pharmacology & Therapeutics* (2012) Oct;92(4):414-7.
+
+PMID: 22992668
+PMCID: PMC3660037
+DOI: 10.1038/clpt.2012.96
+
+Additional information regarding citing PharmGKB can be found [here](https://www.pharmgkb.org/page/citingPharmgkb).
+
 
 ## About the Import
 
