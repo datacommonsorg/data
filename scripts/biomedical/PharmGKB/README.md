@@ -66,22 +66,111 @@ In this import we will process the following files:
 
 #### New Schema
 
-* Classes
-    * ChemicalCompoundChemicalCompoundAssociation (Thing > BioChemEntity > BiomedicalEntity > MedicalEntity > Substance > ChemicalSubstance > ChemicalCompound > ChemicalCompoundChemicalCompoundAssociation)
-    * ChemicalCompoundGeneticVariantAssociation (Thing > BioChemEntity > BiomedicalEntity > MedicalEntity > Substance > ChemicalSubstance > ChemicalCompound > ChemicalCompoundGeneticVariantAssociation) (Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GeneticAssociation > ChemicalCompoundGeneticVariantAssociation)
-    * DiseaseDiseaseAssociation (Thing > BioChemEntity > BiomedicalEntity > Disease > DiseaseAssociation > DiseaseDiseaseAssociation)
-    * DiseaseGeneticVariantAssociation (Thing > BioChemEntity > BiomedicalEntity > Disease > DiseaseAssociation > DiseaseGeneticVariantAssociation) (Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GeneticAssociation > DiseaseGeneticVariantAssociation)
-    * GeneGeneAssociation (Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GeneticAssociation > GeneGeneAssociation)
-    * GeneGeneticVariantAssociation (Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GeneticAssociation > GeneGeneticVariantAssociation)
-    * GeneticVariantGeneticVariantAssociation (Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GeneticAssociation > GeneticVariantGeneticVariantAssociation)
-    * GenomicCoordinates (Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GenomicCoordinates)
-* Properties
-    * ChemicalCompound: pkgbTags
-    * Drug: canadianDrugsProductDatabaseDrugIdNumber, dailyMedSetId, dosageGuidelineSource, drugBrandMixture, drugGenericName, drugHasRxAnnotation, drugLabelHasDosingInformation, drugTradeName, nationalClinicalTrialNumber, nationalDrugCode, nationalDrugFileReferenceTerminologyCode, pharmGkbClinicalAnnotationCount, pharmGkbPathwayCount, pharmGkbTopPGxLevel, pharmGkbTopClinicalAnnotationLevel, pharmGkbVariantAnnotationCount, pharmGkbVeryImportantPharmacogeneCount, rxNormId
-    * Gene: isVeryImportantPharmacogene
-    * GeneticAssociation: variantID
-* Enumerations
-    * 
+##### Classes
+* ChemicalCompoundChemicalCompoundAssociation
+    * Thing > BioChemEntity > BiomedicalEntity > MedicalEntity > Substance > ChemicalSubstance > ChemicalCompound > ChemicalCompoundChemicalCompoundAssociation
+* ChemicalCompoundGeneticVariantAssociation
+    * Thing > BioChemEntity > BiomedicalEntity > MedicalEntity > Substance > ChemicalSubstance > ChemicalCompound > ChemicalCompoundGeneticVariantAssociation
+    * Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GeneticAssociation > ChemicalCompoundGeneticVariantAssociation
+* DiseaseDiseaseAssociation
+    * Thing > BioChemEntity > BiomedicalEntity > Disease > DiseaseAssociation > DiseaseDiseaseAssociation
+* DiseaseGeneticVariantAssociation
+    * Thing > BioChemEntity > BiomedicalEntity > Disease > DiseaseAssociation > DiseaseGeneticVariantAssociation
+    * Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GeneticAssociation > DiseaseGeneticVariantAssociation
+* GeneGeneAssociation
+    * Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GeneticAssociation > GeneGeneAssociation
+* GeneGeneticVariantAssociation
+    * Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GeneticAssociation > GeneGeneticVariantAssociation
+* GeneticVariantGeneticVariantAssociation
+    * Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GeneticAssociation > GeneticVariantGeneticVariantAssociation
+* GenomicCoordinates
+    * Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation > GenomicCoordinates
+
+##### Properties
+* ChemicalCompound
+    * clinicalAnnotationCount
+    * drugType
+    * geneticVariantAnnotationCount
+    * medicalDictionaryForRegulatoryActivitiesId
+    * metabolicPathwayCount
+    * rxConceptUniqueId
+    * pkgbTags
+    * topClinicalAnnotationLevel
+    * veryImportantPharmacogeneCount
+* Drug
+    * canadianDrugsProductDatabaseDrugIdNumber
+    * dailyMedSetId
+    * dosageGuideline
+    * dosageGuidelineSource
+    * drugBrandMixture
+    * drugGenericName
+    * drugHasPrescribingInfo
+    * drugHasRxAnnotation
+    * drugLabelHasDosingInformation
+    * drugTradeName
+    * fdaTopPharmacogeneticLevel
+    * nationalClinicalTrialNumber
+    * nationalDrugFileReferenceTerminologyCode
+    * pharmacogeneticAssociation
+    * topCpicLevel
+    * topPharmacogeneticLevel
+* Gene
+    * hasCpicDosingGuideline
+    * hasGenomicCoordinates
+    * hasGeneticVariantAnnotation
+    * isVeryImportantPharmacogene
+* GeneticAssociation
+    * variantID
+* GenomeAnnotation
+    * chrom
+    * chromStart
+    * chromEnd
+  * PharmGkbClinicalLevelEnum
+      * pharmGkbStandardScoringRange
+      * pharmGkbRareVariantScoringRange 
+
+##### Enumerations
+* CPICLevelEnum
+    * CPICLevelA
+    * CPICLevelA_B
+    * CPICLevelB
+    * CPICLevelB_C
+    * CPICLevelC
+    * CPICLevelC_D
+    * CPICLevelD
+* DrugTypeEnum
+    * DrugTypeBiologicalIntermediate
+    * DrugTypeIon
+    * DrugTypeMetabolite
+    * DrugTypeProdrug
+    * DrugTypeSmallMolecule
+    * DrugTypeUnknown 
+* DosageGuidelineSourceEnum
+    * DosageGuidelineSourceAmericanCollegeOfRheumatology
+    * DosageGuidelineSourceAustralasianAntifungalGuidelinesSteeringCommittee
+    * DosageGuidelineSourceCysticFibrosisFoundation
+    * DosageGuidelineSourceClinicalPharmacogenomicsImplementationConsortium
+    * DosageGuidelineSourceCanadianPharmacogenomicsNetworkForDrugSafety
+    * DosageGuidelineSourceDutchPharmacogeneticsWorkingGroup
+    * DosageGuidelineSourceFrenchNationalNetworkOfPharmacogenetics
+    * DosageGuidelineSourceCpicNoRecommendation
+    * DosageGuidelineSourceSeffSeom
+* PGxLevelEnum
+    * PGxLevelTestingRequired
+    * PGxLevelTestingRecommended
+    * PGxLevelActionablePGx
+    * PGxLevelInformativePGx
+* PharmacogeneticAssociationEnum
+    * PharmacogeneticAssociationParmacokineticOnly
+    * PharmacogeneticAssociationPotentialSafetyImpact
+    * PharmacogeneticAssociationTherapeuticManagementRecommended
+* PharmGkbClinicalLevelEnum
+    *  PharmGkbClinicalLevelOneA
+    *  PharmGkbClinicalLevelOneB
+    *  PharmGkbClinicalLevelTwoA
+    *  PharmGkbClinicalLevelTwoB
+    *  PharmGkbClinicalLevelThree
+    *  PharmGkbClinicalLevelFour
 
 #### dcid Generation
 
@@ -97,9 +186,9 @@ Dcids for Genes were generated by using the 'Symbol' column, which contained the
 
 The dcid for GeneticVariants was generated by adding the prefix 'bio/' to the 'Variant Name' file, which stored the rsID for the genetic variant (e.g. bio/rs1000002).
 
-##### MeSHDescriptors and MeSHConcepts (Phenotypes)
+##### Phenotypes: MeSHDescriptors, MeSHConcepts, and MeSHQualifiers
 
-The dcid for phenotypes was generated using the MeSH descriptor (vast majority) and MeSH concept (a few) associated with each phenotype. This information was stored in the 'External Vocabulary' file in a ',' seperated list of <database>:<Identifier>(<name>) (e.g. MeSH:D054868(Jacobsen Distal 11q Deletion Syndrome), SnoMedCT:4325000(11q partial monosomy syndrome), UMLS:C0795841(C0795841), NDFRT:N0000181176(Jacobsen Distal 11q Deletion Syndrome [Disease/Finding])). In cases in which a MeSH identifier was present the dcid was generated by adding the 'bio/' prefix (e.g. bio/D054868). MeSHDescriptors, which are indicated by the identifier starting with a 'D' (e.g. D054868) were then saved to 'phenotypes.csv' and the MeSHConcepts, which are indicated by the identifier starting with a 'C' (e.g. C536109). The vast majority of phenotypes were MeShDescriptors, only a few were associated with a MeSHConcept. Phenotypes that were not associated with either a MeSHDescriptor or MeSHConcept were dropped and not included in the import.
+The dcid for phenotypes was generated using the MeSH descriptor (vast majority), MeSH concept (a few), or MeSH qualifier associated with each phenotype. This information was stored in the 'External Vocabulary' file in a ',' seperated list of <database>:<Identifier>(<name>) (e.g. MeSH:D054868(Jacobsen Distal 11q Deletion Syndrome), SnoMedCT:4325000(11q partial monosomy syndrome), UMLS:C0795841(C0795841), NDFRT:N0000181176(Jacobsen Distal 11q Deletion Syndrome [Disease/Finding])). In cases in which a MeSH identifier was present the dcid was generated by adding the 'bio/' prefix (e.g. bio/D054868). MeSHDescriptors, which are indicated by the identifier starting with a 'D' (e.g. D054868) were then saved to 'phenotypes.csv'. The MeSHConcepts, which are indicated by the identifier starting with a 'C' (e.g. C536109) and were saved to 'phenotypes_mesh_concept.csv'. The MeSHQualifier, which are indicated by the identifier starting with a 'C' (e.g. C536109) and were saved to 'phenotypes_mesh_qualifier.csv'. The vast majority of phenotypes were MeShDescriptors, only a few were associated with a MeSHConcept or MeSHQualifier. Phenotypes that were not associated with a MeSH identifier were dropped and not included in the import.
 
 ##### Associations
 
@@ -187,7 +276,8 @@ Additional information regarding citing PharmGKB can be found [here](https://www
 - ['gene_var.tmcf'](tMCFs/gene_var.tmcf) maps the `gene_var.csv` output file from `format_relationship.py` to entities and properties for import.
 - ['genes.tmcf'](tMCFs/genes.tmcf) maps the `genes.csv` output file from `format_genes.py` to entities and properties for import.
 - ['phenotypes.tmcf'](tMCFs/phenotypes.tmcf) maps the `phenotypes.csv` output file from `format_phenotypes.py` to entities and properties for import - these are the cases were the entity is MeSHDescriptor.
-- ['phenotypes_mesh_concept.tmcf'](tMCFs/phenotypes_mesh_concepts.tmcf) maps the `phenotypes.csv` output file from `format_phenotypes.py` to entities and properties for import - these are the cases in which the entity is MeSHConcept.
+- ['phenotypes_mesh_supplementary_concept_record.tmcf'](tMCFs/phenotypes_mesh_supplementary_concept_record.tmcf) maps the `phenotypes.csv` output file from `format_phenotypes.py` to entities and properties for import - these are the cases in which the entity is MeSHSupplementaryConceptRecords.
+- ['phenotypes_mesh_qualifier.tmcf'](tMCFs/phenotypes_mesh_qualifier.tmcf) maps the `phenotypes.csv` output file from `format_phenotypes.py` to entities and properties for import - these are the cases in which the entity is MeSHQualifier.
 - ['var_var.tmcf'](tMCFs/var_var.tmcf) maps the `var_var.csv` output file from `format_relationship.py` to entities and properties for import.
 - ['variants.tmcf'](tMCFs/variants.tmcf) maps the `variants.csv` output file from `format_variants.py` to entities and properties for import.
 
