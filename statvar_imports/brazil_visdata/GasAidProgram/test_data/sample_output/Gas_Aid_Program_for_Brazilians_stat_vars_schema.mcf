@@ -1,0 +1,21 @@
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Household,dcid:Person
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Household,dcid:Person
+
+Node: dcid:GasAidProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Gas Aid Program"
+isProvisional: dcs:True
+
+Node: dcid:gender
+typeOf: dcs:Property
+name: "gender"
+rangeIncludes: dcid:GenderType
+domainIncludes: dcid:Household
+
