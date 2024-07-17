@@ -1,13 +1,17 @@
 Node: E:chemicals->E1
 typeOf: dcs:AnatomicalTherapeuticChemicalCode
-dcid: C:chemicals->ATC
+dcid: C:chemicals->atcCodes
 
 Node: E:chemicals->E2
 typeOf: dcs:MeSHConcept
-dcid: C:chemicals->MeSH
+dcid: C:chemicals->dcid_MeSHConcept
 
 Node: E:chemicals->E3
-typeOf: schema:Drug
+typeOf: dcs:MeSHDescriptor
+dcid: C:chemicals->dcid_MeSHDescriptor
+
+Node: E:chemicals->E4
+typeOf: dcs:ChemicalCompound
 dcid: C:chemicals->dcid
 name: C:chemicals->Name
 atcCode: E:chemicals->E1
@@ -15,27 +19,27 @@ bindingDBID: C:chemicals->BindingDB
 chebiID: C:chemicals->ChEBI
 chemblID: C:chemicals->ChEMBL
 chemicalAbstractServiceID: C:chemicals->CAS
-clinicalAnnotationCount: C:chemicals->Clinical Annotation Count
+clinicalAnnotationCount: C:chemicals->clinicalAnnotationCount
 drugBankID: C:chemicals->DrugBank
-drugBankMetaboliteID: C:chemicals->DrugBank Metabolite
+drugBankMetaboliteID: C:chemicals->drugBankMetabolite
 drugBrandMixture: C:chemicals->brandMixture
 drugGenericName: C:chemicals->genericName
 drugTradeName: C:chemicals->tradeName
 drugType: C:chemicals->Type
-geneticVariantAnnotationCount: C:chemicals->Variant Annotation Count
+geneticVariantAnnotationCount: C:chemicals->variantAnnotationCount
 humanMetabolomeDatabaseID: C:chemicals->HMDB
 inChIKey: C:chemicals->InChI
 medicalSubjectHeadingID: E:chemicals->E2
+medicalSubjectHeadingID: E:chemicals->E3
 medicalDictionaryForRegulatoryActivitiesId: C:chemicals->MedDRA
-metabolicPathwayCount: C:chemicals->Pathway Count
+metabolicPathwayCount: C:chemicals->pathwayCount
 nationalClinicalTrialNumber: C:chemicals->ClinicalTrials.gov
 nationalDrugFileReferenceTerminologyCode: C:chemicals->NDF-RT
 pharmGKBID: C:chemicals->pharmGKBID
-pubChemCompoundID: C:chemicals->PubChem Compound
-pubChemCompoundID: C:chemicals->PubChem Compound Identifiers
-pubChemSubstanceID: C:chemicals->PubChem Substance
-rxConceptUniqueId: C:chemicals->RxNorm Identifiers
+pubChemCompoundID: C:chemicals->pubChemCID
+pubChemSubstanceID: C:chemicals->pubChemSubstance
+rxConceptUniqueId: C:chemicals->rxNormID
 simplifiedMolecularInputLineEntrySystem: C:chemicals->SMILES
-topClinicalAnnotationLevel: C:chemicals->Top Clinical Annotation Level
+topClinicalAnnotationLevel: C:chemicals->topClinicalAnnotationLevel
 url: C:chemicals->URL
-veryImportantPharmacogeneCount: C:chemicals->VIP Count
+veryImportantPharmacogeneCount: C:chemicals->vipCount
