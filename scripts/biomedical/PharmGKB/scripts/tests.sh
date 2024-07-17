@@ -48,6 +48,12 @@ mv dc_generated pharmGKB_primary_data_reports/genes
 java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/phenotypes.tmcf CSVs/phenotypes.csv *.mcf
 mv dc_generated pharmGKB_primary_data_reports/phenotypes
 
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/phenotypes_mesh_supplementary_concept_record.tmcf CSVs/phenotypes_mesh_supplementary_concept_record.csv *.mcf
+mv dc_generated pharmGKB_primary_data_reports/phenotypes_mesh_supplementary_concept_record
+
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/phenotypes_mesh_qualifier.tmcf CSVs/phenotypes_mesh_qualifier.csv *.mcf
+mv dc_generated pharmGKB_primary_data_reports/phenotypes_mesh_qualifier
+
 java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/variants.tmcf CSVs/variants.csv *.mcf
 mv dc_generated pharmGKB_primary_data_reports/variants
 

@@ -15,7 +15,7 @@
 Author: Suhana Bedi
 Date: 02/15/2022
 EditedBy: Samantha Piekos
-Last Edited: 04/11/24
+Last Edited: 07/17/24
 Name: format_genes
 Description: converts a .tsv from PharmGKB into a clean csv format, 
 where each columns contains linkages or references to only 
@@ -23,10 +23,12 @@ database only for the purpose of clarity and understanding
 @file_input: input .tsv from PharmGKB
 @file_output: formatted .csv with PharmGKB and other database annotations
 """
+# import environment
 import pandas as pd
 import numpy as np
 import re
 import sys
+
 
 # declare universal variables
 TEXT_COLUMNS = [
@@ -37,11 +39,12 @@ TEXT_COLUMNS = [
     "ensemblID",
     "Symbol",
     "synonyms",
-    "Alternate Symbols",
+    "alternateSymbols",
     "Chromosome",
     "Ensembl",
-    "NCBI Gene",
-    "Comparative Toxicogenomics Database",
+    "ncbiGeneID",
+    "ncbiGene",
+    "comparativeToxicogenomicsDatabase",
     "GeneCard",
     "GenAtlas",
     "HGNC",
@@ -52,6 +55,12 @@ TEXT_COLUMNS = [
 ]
 
 
+TEXT_COLUMNS_SUBSET = [
+    "synonyms"
+]
+
+
+# declare functions
 def get_unique_new_cols(df, col):
     """
     Extracts unique keys from a column containing colon-separated key-value pairs.
@@ -302,32 +311,46 @@ def format_dcids(df):
 
 
 def format_cols(df):
-	"""
-	Formats the columns in a dataframe
-	and inserts/deletes specific 
-	characters
-	Args:
-		df = dataframe to change
-	Returns:
-		df = formatted dataframe
-	"""
-	dict_mapping = {
-	'PharmGKB Accession Id':'pharmGKBID',
-	'NCBI Gene ID':'ncbiGeneID',
-	'HGNC ID':'hgncID',
-	'Ensembl Id':'ensemblID',
-	'Alternate Names':'synonyms',
-	'Cross-references':'crossReferences'
-	}
-	df = df.replace('"', '', regex=True)
-	# rename a subset of columns
-	df = df.rename(columns=dict_mapping)
-	 # create unique column for each database id
-	df = create_unique_mapping_columns(df, 'crossReferences')
-	df = df.drop(['crossReferences'], axis=1)
-	# format dcids from gene symbol
-	df = format_dcids(df)
-	return df
+    """
+    Formats the columns in a dataframe
+    and inserts/deletes specific 
+    characters
+    Args:
+        df = dataframe to change
+    Returns:
+        df = formatted dataframe
+    """
+    dict_mapping = {
+    'Alternate Names':'synonyms',
+    'Alternate Symbols': 'alternateSymbols',
+    'Cross-references':'crossReferences',
+    'Ensembl Id':'ensemblID',
+    'Has CPIC Dosing Guideline': 'hasCpicDosingGuideline',
+    'Has Variant Annotation': 'hasVariantAnnotation',
+    'HGNC ID':'hgncID',
+    'Is VIP': 'isVIP',
+    'NCBI Gene ID':'ncbiGeneID',
+    'PharmGKB Accession Id':'pharmGKBID'
+    }
+    
+    # get rid of superfulous quotes
+    df = df.replace('"', '', regex=True)
+
+    # rename a subset of columns
+    df = df.rename(columns=dict_mapping)
+
+    # create unique column for each database id
+    df = create_unique_mapping_columns(df, 'crossReferences')
+    df = df.rename(columns={
+        'Comparative Toxicogenomics Database': 'comparativeToxicogenomicsDatabase',
+        'NCBI Gene': 'ncbiGene'
+        })
+    df = df.drop(['crossReferences'], axis=1)
+
+    # format dcids from gene symbol
+    df = format_dcids(df)
+	
+    return df
 
 
 def strip_decimal_from_coordinates(df, assembly):
@@ -360,27 +383,39 @@ def strip_decimal_from_coordinates(df, assembly):
 
 
 def format_genomic_coordinates(df):
-	"""
-	Formats the columns with genome
-	assemblies
-	Args:
-		df = dataframe to change
-	Returns:
-		df = formatted dataframe
-	"""
-	list_cols = ['37', '38']
-	for i in list_cols:
-		# format GenomicCoordinates properties
-		df['GenomeAssembly' + i] = 'GRCh' + i
-		df['genomeCoordName' + i] = 'GRCh' + i + "_" + df['Symbol'] + '_coordinates'
-		df['genomeCoordDcid' + i] = "bio/" + df['genomeCoordName' + i]
-		# remove trailing .0 from genomic coordinate start stop
-		df = strip_decimal_from_coordinates(df, i)
-		# replace @ within dcids with _Cluster
-		df = replace_at_symbol(df, 'genomeCoordDcid' + i)
-		# double check that dcids don't contain illegal characters
-		eval_dcids_for_illegal_charc(df['genomeCoordDcid' + i])
-	return df
+    """
+    Formats the columns with genome
+    assemblies
+    Args:
+        df = dataframe to change
+    Returns:
+        df = formatted dataframe
+    """
+    list_cols = ['37', '38']
+    for i in list_cols:
+        # format GenomicCoordinates properties
+        df['GenomeAssembly' + i] = 'GRCh' + i
+        df['genomeCoordName' + i] = 'GRCh' + i + "_" + df['Symbol'] + '_coordinates'
+        df['genomeCoordDcid' + i] = "bio/" + df['genomeCoordName' + i]
+
+        # remove trailing .0 from genomic coordinate start stop
+        df = strip_decimal_from_coordinates(df, i)
+
+        # replace @ within dcids with _Cluster
+        df = replace_at_symbol(df, 'genomeCoordDcid' + i)
+
+        # double check that dcids don't contain illegal characters
+        eval_dcids_for_illegal_charc(df['genomeCoordDcid' + i])
+
+    # rename genomic coordinate columns
+    df = df.rename(columns={
+        'Chromosomal Start - GRCh37': 'grCh37Start',
+        'Chromosomal Stop - GRCh37': 'grCh37Stop',
+        'Chromosomal Start - GRCh38': 'grCh38Start',
+        'Chromosomal Stop - GRCh38': 'grCh38Stop'
+        })
+
+    return df
 
 
 def format_boolean_cols(df):
@@ -393,7 +428,7 @@ def format_boolean_cols(df):
 	Returns:
 		df = formatted dataframe
 	"""
-	list_bool_cols = ['Is VIP', 'Has Variant Annotation', 'Has CPIC Dosing Guideline']
+	list_bool_cols = ['isVIP', 'hasVariantAnnotation', 'hasCpicDosingGuideline']
 	for i in list_bool_cols:
 		df[i] = np.where(df[i] == "Yes", "True", "False")
 	return df
@@ -406,37 +441,46 @@ def is_not_none(x):
     return True
 
 
-def format_text_strings(df, col_names):
+def format_text_strings(df, col_names, col_names_subset):
     """
     Converts missing values to numpy nan value and adds outside quotes
-    to strings (excluding np.nan). Applies change to columns specified in col_names.
+    to strings (excluding np.nan) to a subset. Applies change to columns specified in col_names.
     """
 
     for col in col_names:
         df[col] = df[col].str.rstrip()  # Remove trailing whitespace
         df[col] = df[col].replace([''],np.nan)  # replace missing values with np.nan
 
-        # Quote only string values
-        mask = df[col].apply(is_not_none)
-        df.loc[mask, col] = '"' + df.loc[mask, col].astype(str) + '"'
+        if col in col_names_subset:
+            # Quote only string values
+            mask = df[col].apply(is_not_none)
+            df.loc[mask, col] = '"' + df.loc[mask, col].astype(str) + '"'
 
     return df
 
 
+def reorder_columns(df, column_to_move):
+    # move specified column to last column position within the df
+    new_columns = [col for col in df.columns if col != column_to_move] + [column_to_move]
+    df = df[new_columns]
+    return df
+
+
 def wrapper_fun(df):
-	"""
-	Runs the intermediate functions to 
-	format the dataset
-	Args:
-		df = unformatted dataframe
-	Returns:
-		df = formatted dataframe
-	"""
-	df = format_cols(df)
-	df = format_genomic_coordinates(df)
-	df = format_boolean_cols(df).fillna('')
-	df = format_text_strings(df, TEXT_COLUMNS)
-	return df
+    """
+    Runs the intermediate functions to 
+    format the dataset
+    Args:
+        df = unformatted dataframe
+    Returns:
+        df = formatted dataframe
+    """
+    df = format_cols(df)
+    df = format_genomic_coordinates(df)
+    df = format_boolean_cols(df).fillna('')
+    df = format_text_strings(df, TEXT_COLUMNS, TEXT_COLUMNS_SUBSET)
+    df = reorder_columns(df, 'synonyms')
+    return df
 
 
 def main():
@@ -444,7 +488,6 @@ def main():
 	file_output = sys.argv[2]
 	df = pd.read_csv(file_input, sep = '\t').fillna('')
 	df = wrapper_fun(df)
-	print(df.columns)
 	df.to_csv(file_output, doublequote=False, escapechar='\\', index=False)
 
 

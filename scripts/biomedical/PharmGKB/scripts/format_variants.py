@@ -16,7 +16,7 @@ Author: Suhana Bedi
 Date: 02/20/2023
 Name: format_variants
 Edited By: Samantha Piekos
-Edit Date: 07/09/2024 
+Edit Date: 07/17/2024 
 Description: converts a .tsv from PharmGKB into a clean csv format, 
 where each columns contains linkages or references to only 
 database only for the purpose of clarity and understanding
@@ -28,6 +28,41 @@ import numpy as np
 import sys
 
 
+def is_not_none(x):
+    # check if value exists
+    if pd.isna(x):
+        return False
+    return True
+
+
+def format_text_strings(df, col):
+    """
+    Adds outside quotes to a specified text column that's problematic.
+    """
+    mask = df[col].apply(is_not_none)
+    df.loc[mask, col] = '"' + df.loc[mask, col].astype(str) + '"'
+    return df
+
+
+def reorder_columns(df, column_to_move):
+    """
+    Reorders the columns of a DataFrame, moving the specified column to the last position.
+    Add outside quotes to the column being move to the end.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to reorder.
+        column_to_move (str): The name of the column to move.
+
+    Returns:
+        pd.DataFrame: The DataFrame with reordered columns.
+    """
+    # move specified column to last column position within the df
+    new_columns = [col for col in df.columns if col != column_to_move] + [column_to_move]
+    df = df[new_columns]
+    df = format_text_strings(df, column_to_move)
+    return df
+
+
 def format_cols(df):
 	"""
 	Formats the variants dataframe and generates dcid
@@ -36,9 +71,30 @@ def format_cols(df):
 	Returns:
 		df = formatted dataframe
 	"""
-	df = df[['Variant ID', 'Variant Name']]
-	#df['dcid'] = 'bio/' + df['Variant Name']
+	# Explode the dataframe on Gene Symbols so that there is one per row
+	df['geneSymbols'] = df['Gene Symbols'].str.split(',')
+	df = df.explode('geneSymbols')
+	df = df.drop('Gene Symbols', axis=1)
+	
+	# generate dcids
 	df = df.assign(dcid='bio/' + df['Variant Name'].astype(str))
+	df = df.assign(dcid_gene='bio/' + df['geneSymbols'].astype(str))
+	
+	# reorder columns so problamatic string column is at the end
+	df = reorder_columns(df, 'Synonyms')
+
+	# rename columns
+	df = df.rename(columns={
+		'Clinical Annotation count': 'clinicalAnnotationCount',
+		'Gene IDs': 'geneID',
+		'Guideline Annotation count': 'guidelineAnnotationCount',
+		'Label Annotation count': 'labelAnnotationCount',
+		'Level 1/2 Clinical Annotation count': 'clinicalAnnotationCountLevel1_2',
+		'Variant Annotation count': 'variantAnnotationCount',
+		'Variant ID': 'pharmGKBID',
+		'Variant Name': 'rsID'
+		})
+
 	return df 
 
 

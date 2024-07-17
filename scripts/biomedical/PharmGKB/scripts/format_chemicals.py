@@ -16,18 +16,21 @@ Author: Suhana Bedi
 Date: 03/05/2022
 Name: format_drugs
 Edited By: Samantha Piekos
-Last Edited: 07/10/24
+Last Edited: 07/17/24
 Description: converts a .tsv from PharmGKB into a clean csv format, 
 where each columns contains linkages or references to only 
 database only for the purpose of clarity and understanding
 @file_input: input .tsv from PharmGKB
 @file_output: formatted .csv with PharmGKB and other database annotations
 """
+# set up environment
 import sys
 import pandas as pd
 import numpy as np
 import re
 
+
+# declare universal variables
 DRUG_TYPE_DICT = {
     "Drug": "dcs:DrugTypeUnknown",
     "Drug Class": "dcs:DrugTypeUnknown",
@@ -37,6 +40,7 @@ DRUG_TYPE_DICT = {
     "Ion": "dcs:DrugTypeIon",
     "Small Molecule": "dcs:DrugTypeSmallMolecule"
 }
+
 
 CLINICAL_ANNOTATION_LEVEL = {
     "1A": "dcs:PharmGkbClinicalLevelOneA",
@@ -60,6 +64,7 @@ DROP_COLUMNS = [
     'FDA Label has Prescribing Info',
     'Has Rx Annotation',
     'In FDA PGx Association Sections',
+    'PharmGKB Tags'
     ''
 ]
 
@@ -72,29 +77,31 @@ TEXT_COLUMNS = [
     "brandMixture",
     "SMILES",
     "InChI",
-    "RxNorm Identifiers",
-    "PubChem Compound",
-    'DrugBank Metabolite',
+    "rxNormID",
+    "pubChemCID",
+    'drugBankMetabolite',
     'BindingDB',
     "CAS",
     "ChEBI",
     "URL",
     "ClinicalTrials.gov",
-    "PubChem Compound",
     "HMDB",
     "ChEMBL",
     "DrugBank",
-    "PubChem Substance",
+    "pubChemSubstance",
     "NDF-RT",
     "RxNorm",
     "MedDRA",
 ]
+
 
 TEXT_COLUMNS_SUBSET = [
     "SMILES",
     "genericName"
 ]
 
+
+# declare functions
 def get_unique_new_cols(df, col):
     """
     Extracts unique identifiers from a specified column in a DataFrame.
@@ -284,6 +291,34 @@ def create_unique_mapping_columns(df, col):
     return df_final
 
 
+def replace_empty_with_second_column(df, column_to_replace, replacement_column):
+    """Replaces empty string values in one column with values from another column.
+
+    Args:
+        df: The pandas DataFrame.
+        column_to_replace: The name of the column where empty strings will be replaced.
+        replacement_column: The name of the column whose values will be used for replacement.
+
+    Returns:
+        The modified DataFrame with the replacements made and the replacement column dropped.
+    """
+
+    # check to make sure both columns of interest are in the df
+    if column_to_replace not in df.columns or replacement_column not in df.columns:
+        print("Error: One or both columns not found in the DataFrame.")
+        return df
+    
+    # where missing values in one column with values of a second column
+    df[column_to_replace] = df[column_to_replace].replace('',np.nan)
+    df[column_to_replace] = df[column_to_replace].fillna(df[replacement_column])
+    df[column_to_replace] = df[column_to_replace].replace(np.nan, '')
+    
+    # Drop the replacement column
+    df = df.drop(replacement_column, axis=1)
+
+    return df
+
+
 def format_mappings(df):
     """
     This function formats and cleans a DataFrame containing mappings between chemicals and database identifiers.
@@ -296,51 +331,46 @@ def format_mappings(df):
     """
     # Dictionary to rename columns for consistency and clarity
     dict_rename_col = {
-        'ATC Identifiers':'ATC',
+        'ATC Identifiers': 'atcCodes',
         'Brand Mixtures':'brandMixture',
+        'Clinical Annotation Count': 'clinicalAnnotationCount',
         'Cross-references':'crossReferences',
         'External Vocabulary':'externalVocab',
         'Generic Names':'genericName',
+        'Pathway Count': 'pathwayCount',
         'PharmGKB Accession Id':'pharmGKBID',
-        'Trade Names':'tradeName'
+        'PubChem Compound Identifiers': 'pubChemCID',
+        'RxNorm Identifiers': 'rxNormID',
+        'Top Clinical Annotation Level': 'topClinicalAnnotationLevel',
+        'Trade Names':'tradeName',
+        'Variant Annotation Count': 'variantAnnotationCount',
+        'VIP Count': 'vipCount'
         }
+    
     # clean up mappings of chemicals to other database ids
     df = df.replace('"', '', regex=True)
     df = df.rename(columns=dict_rename_col)
+    
     # create unique column for each database id
     df = create_unique_mapping_columns(df, 'crossReferences')
     df = create_unique_mapping_columns(df, 'externalVocab')
+    df = df.rename(columns={
+        'DrugBank Metabolite': 'drugBankMetabolite',
+        'PubChem Substance': 'pubChemSubstance',
+        })
     df = df.drop(DROP_COLUMNS , axis=1)
+    
     # filter for valid links in URL column
     df['URL'] = np.where(df['URL'].str.startswith('http'), df['URL'], np.nan)
+    
     # remove trailing '.0'
-    df['PubChem Compound Identifiers'] = df['PubChem Compound Identifiers'].astype(str).apply(lambda x: x.split('.')[0])
-    df['RxNorm Identifiers'] = df['RxNorm Identifiers'].astype(str).apply(lambda x: x.split('.')[0])
-    return df
+    df['pubChemCID'] = df['pubChemCID'].astype(str).apply(lambda x: x.split('.')[0])
+    df['rxNormID'] = df['rxNormID'].astype(str).apply(lambda x: x.split('.')[0])
+    
+    # combine instances of ATC and PubChem Identifers into one column
+    df = replace_empty_with_second_column(df, 'atcCodes', 'ATC')
+    df = replace_empty_with_second_column(df, 'pubChemCID', 'PubChem Compound')   
 
-
-def format_col_dcids(df, col, prefix):
-    """
-    Formats values in a specified column by adding a prefix and removing illegal characters.
-
-    Args:
-        df (pd.DataFrame): The DataFrame to modify.
-        col (str): The name of the column containing the values to format.
-        prefix (str): The prefix to add to each value.
-
-    Returns:
-        pd.DataFrame: The modified DataFrame with formatted values.
-    """
-    for index, row in df.iterrows():
-        value = row[col]
-        if len(value) == 0:  # skip rows missing value
-            continue
-        list_values = value.split(', ')
-        list_formatted = []
-        for item in list_values:
-            check_for_illegal_charc(item)
-            list_formatted.append(prefix+item)
-        df.loc[index, col] = (', ').join(list_formatted)
     return df
 
 
@@ -353,6 +383,40 @@ def check_for_illegal_charc(s):
     list_illegal = ["'", "*" ">", "<", "@", "]", "[", "|", ":", ";" " "]
     if any([x in s for x in list_illegal]):
         print('Error! dcid contains illegal characters!', s)
+    return
+
+
+def format_col_dcids(df, col, prefix):
+    """
+    Formats values in a specific column by adding a prefix and handling empty values.
+
+    Args:
+        df (pd.DataFrame): The DataFrame to modify.
+        col (str): The name of the column to process.
+        prefix (str): The prefix to add to each value.
+
+    Returns:
+        pd.DataFrame: The modified DataFrame with formatted values.
+    """
+    
+    for index, row in df.iterrows(): # Iterate through rows of the dataframe
+        value = row[col] 
+        
+        if len(value) == 0:  # Skip empty values
+            continue
+
+        list_values = value.split(', ') # Split the comma-separated values into a list
+        list_formatted = [] # Initialize an empty list to store formatted values
+
+        for item in list_values: 
+            check_for_illegal_charc(item) # Validate the item (function assumed to be defined elsewhere)
+            item = item.strip()  # remove whitespace
+            list_formatted.append(prefix + item)  # Add the prefix to the item and store in the list
+
+        # Join the formatted items back into a comma-separated string and update the DataFrame
+        df.loc[index, col] = (', ').join(list_formatted)  
+
+    return df
 
 
 def remove_whitespace(text):
@@ -388,7 +452,7 @@ def convert_to_pascal_case(text):
 def generate_dcid(row):
     # if exists use CID to generate CID
     # else use the name of the compound converted to pascalcase
-    pubchem_id = row['PubChem Compound Identifiers']
+    pubchem_id = row['pubChemCID']
     if pd.isna(pubchem_id) or pubchem_id == "":  # Check for both NaN and empty strings
         dcid = convert_to_pascal_case(row['Name'])
         return dcid
@@ -401,6 +465,49 @@ def explode_column(col, df):
     # so that one entry exists per row
     df[col] = df[col].str.split(',')
     df = df.explode(col)
+    df[col] = df[col].astype(str).str.strip()
+    return df
+
+
+def classify_mesh_string(s):
+    """Classifies strings as belonging to one prefix or another. Prints out strings that don't match either prefix.
+
+    Args:
+        s: The string to classify.
+        original_column: The name of the column to split.
+
+    Returns:
+        strings that match each prefix or ""
+    """
+    if isinstance(s, str): 
+        if s.startswith("bio/D"):
+            return s, ""
+        elif s.startswith("bio/C"):
+            return "", s
+        elif len(s) > 0: 
+            print(f"Found string not matching prefix: '{s}'") 
+
+    return "", ""
+
+
+def split_descriptors_and_concepts(df):
+    """Splits MeSH column in a DataFrame based on prefixes and replaces the original column.
+
+    Args:
+        df: The pandas DataFrame containing the data.
+
+    Returns:
+        The modified DataFrame with new columns and the original column removed.
+    """
+    # Split and create new columns
+    new_columns = pd.DataFrame(df['MeSH'].apply(classify_mesh_string)
+        .tolist(), columns=["dcid_MeSHDescriptor", "dcid_MeSHConcept"])
+
+    # Add new columns to the DataFrame and remove the original
+    df['dcid_MeSHDescriptor'] = new_columns['dcid_MeSHDescriptor']
+    df['dcid_MeSHConcept'] = new_columns['dcid_MeSHConcept']
+    df = df.drop('MeSH', axis=1)
+
     return df
 
 
@@ -408,13 +515,15 @@ def format_dcid(df):
     # format dcid using the CID plus the prefix 'chem/'
     # in absence of this existing use the prefix 'chem/' plus the name in pascal case
     # format dcids: add prefixes, ensure one per row, check for illegal characters
+    # split MeSHDescriptors and MeSHConcepts into two seperate columns
     df['dcid'] = df.apply(generate_dcid, axis=1)
     df['dcid']= df['dcid'].replace(r'[^0-9a-zA-Z.-_\s]', '', regex=True).replace("'", '')
-    df = format_col_dcids(df, 'ATC', 'chem/')
-    df['ATC'] = df['ATC'].apply(remove_whitespace)
-    df = explode_column('ATC', df)
+    df = format_col_dcids(df, 'atcCodes', 'chem/')
+    df['atcCodes'] = df['atcCodes'].apply(remove_whitespace)
+    df = explode_column('atcCodes', df)
     df = format_col_dcids(df, 'MeSH', 'bio/')
     df = explode_column('MeSH', df)
+    df = split_descriptors_and_concepts(df)
     df = format_col_dcids(df, 'dcid', 'chem/')
     return df
 
@@ -424,7 +533,7 @@ def format_enum_cols(df):
     df['Type'] = df['Type'].str.replace('"', '')
     df = df.assign(Type=df.Type.str.split(",")).explode('Type')
     df["Type"] = df["Type"].map(DRUG_TYPE_DICT)
-    df['Top Clinical Annotation Level'] = df['Top Clinical Annotation Level'].astype(str).map(CLINICAL_ANNOTATION_LEVEL)
+    df['topClinicalAnnotationLevel'] = df['topClinicalAnnotationLevel'].astype(str).map(CLINICAL_ANNOTATION_LEVEL)
     return df 
 
 
