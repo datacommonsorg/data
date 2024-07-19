@@ -1,0 +1,9 @@
+Node: E:State_Wise_Area_Coarse->E0
+observationAbout: C:State_Wise_Area_Coarse->observationAbout
+observationDate: C:State_Wise_Area_Coarse->observationDate
+variableMeasured: C:State_Wise_Area_Coarse->variableMeasured
+value: C:State_Wise_Area_Coarse->value
+unit: C:State_Wise_Area_Coarse->unit
+measurementMethod: C:State_Wise_Area_Coarse->measurementMethod
+observationPeriod: C:State_Wise_Area_Coarse->observationPeriod
+typeOf: dcs:StatVarObservation
