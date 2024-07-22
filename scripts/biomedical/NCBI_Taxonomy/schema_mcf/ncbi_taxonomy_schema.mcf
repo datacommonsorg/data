@@ -1,0 +1,81 @@
+Node: dcid:Taxon
+name: "Taxon"
+typeOf: schema:Class
+subClassOf: dcs:BiologicalEntity
+description: "A set of organisms asserted to represent a natural cohesive biological unit."
+
+Node: dcid:biologicalHost
+name: "biologicalHost"
+typeOf: schema:Property
+domainIncludes: dcs:Taxon
+rangeIncludes: dcs:BiologicalHostEnum
+description: "The type of larger biological organism that harbors this group of organisms."
+
+Node: dcid:genBankName
+name: "genBankName"
+typeOf: schema:Property
+domainIncludes: dcs:Taxon
+rangeIncludes: schema:Text
+description: "The name by which GenBank refers to this taxon."
+
+Node: dcid:hasInheritedDivision
+name: "hasInheritedDivision"
+typeOf: schema:Property
+domainIncludes: dcs:Taxon
+rangeIncludes: schema:Boolean
+description: "Division is inherited by the parent Taxon."
+
+Node: dcid:ncbiBlastName
+name: "ncbiBlastName"
+typeOf: schema:Property
+domainIncludes: dcs:BiologicalEntity
+rangeIncludes: schema:Text
+description: "The name by which NCBI Basic Local Alignment Search Tool (Blast) refers to this taxon."
+
+Node: dcid:ncbiTaxId
+name: "ncbiTaxId"
+typeOf: schema:Property
+domainIncludes: dcs:Taxon
+rangeIncludes: schema:Number
+description: "Node id in ncbi GenBank taxonomy database."
+
+Node: dcid:parentTaxon
+name: "parentTaxon"
+typeOf: schema:Property
+domainIncludes: dcs:Taxon
+rangeIncludes: dcs:Taxon
+description:"Closest parent taxon of the taxon in question."
+
+Node: dcid:taxonDivision
+name: "taxonDivision"
+typeOf: schema:Property
+domainIncludes: dcs:Taxon
+rangeIncludes: dcs:BiologicalTaxonomicDivisionEnum
+description:"The broad biological division to which the group of organisms belongs."
+
+Node: dcid:taxonRank
+name: "taxonRank"
+typeOf: schema:Property
+domainIncludes: dcs:Taxon
+rangeIncludes: dcs:BiologicalTaxonomicRankEnum
+description: "The relative level of the group of organisms (a taxon) is in an ancestral or hereditary hierarchy."
+
+Node: dcid:taxonTopLevelCategory
+name: "taxonTopLevelCategory"
+typeOf: schema:Property
+domainIncludes: dcs:Taxon
+rangeIncludes: dcs:TaxonTopLevelCategoryEnum
+description: "The top level category to which a group of organisms (a taxon) belongs. This can be Archaea, Bacteria, Eukaryota, Viruses and Viroids, Other, and Unclassified."
+
+Node: dcid:abbreviaion
+name: "abbreviaion"
+typeOf: schema:Property
+domainIncludes: dcs:Taxon
+rangeIncludes:schema:Text
+
+Node: dcid:acronym
+name: "acronym"
+typeOf: schema:Property
+domainIncludes: dcs:Taxon
+rangeIncludes:schema:Text
+
