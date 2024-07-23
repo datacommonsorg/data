@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,18 +11,42 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+# Author: Sanika Prasad
+# Date: 21-Jul-2024
+# Edited By: Samantha Piekos
+# Last Edited: 22-Jul-2024
+# Name: process
+# Description: cleaning the NCBI Assembly summary reports data.
+# @source data: Download assembly_summary_genbank.txt and assembly_summary_refseq.txt from NCBI Assembly FTP Download page
+# @file_input: assembly_summary_genbank.txt and assembly_summary_refseq.txt
+# @file_output: formatted ncbi_assembly_summary.csv
 
-import pandas as pd
-from pathlib import Path
-import csv
-import sys
+
+# import environment
 from absl import flags
-import absl
-import os
+from pathlib import Path
 
+import absl
+import csv
+import numpy as np
+import pandas as pd
+import os
+import sys
+
+
+# Declare Universal Variables
 TAX_ID_DCID_MAPPING = {}
 
 MODULE_DIR = str(Path(os.path.dirname(__file__)))
+
+TEXT_COLUMNS = [
+'breed',
+'cultivar',
+'ecotype',
+'infraspecific_name',
+'isolate',
+'strain'
+]
 
 
 def generate_column(df):
@@ -95,17 +119,75 @@ def species_tax_id(df):
     return df
 
 
-def infraspecific_name(df):
-    """Replacing unwanted char from infraspecific_name and organism_name column value.
-	Args:
-		df: dataframe with unwanted char in infraspecific_name and organism_name column values from source.
-	Returns:
-		df: dataframe with removed unwanted char.
-	
-	"""
-    df['infraspecific_name'] = df['infraspecific_name'].str.replace('/', ', ')
+def clean_columns(df):
+    """Replacing unwanted char from organism_name, asm_submitter, annotation_name, and annotation_provider columns.
+    Args:
+        df: dataframe with unwanted characters in specific columns.
+    Returns:
+        df: dataframe with removed unwanted characters from desired columns.
+    
+    """
     df['organism_name'] = df['organism_name'].str.replace('[', '').str.replace(
         ']', '')
+    df['asm_submitter'] = df['asm_submitter'].str.replace('\"', '')
+    df['annotation_name'] = df['annotation_name'].str.replace('\"', '')
+    df['annotation_provider'] = df['annotation_provider'].str.replace('\"', '')
+    return df
+
+
+def split_infraspecific_subtype(df, col1, col2, str_start):
+    """Splits a column containing infraspecific identifiers into two columns.
+
+    This function takes a DataFrame and three column names as input. 
+    It identifies infraspecific identifiers in the first column that start with a 
+    specific string, extracts them to the second column, and removes them from the original.
+
+    Args:
+        df (pd.DataFrame): The DataFrame containing the data.
+        col1 (str): The name of the column containing the original infraspecific identifiers.
+        col2 (str): The name of the new column where the extracted substrings will be stored.
+        str_start (str): The starting substring used to identify infraspecific identifiers.
+
+    Returns:
+        pd.DataFrame: The modified DataFrame with the split columns.
+    """
+    # Extract substrings starting with 'start' and create `col2`
+    df[col2] = df[col1].apply(lambda x: x if x.startswith(str_start) else '')
+
+    # Set values in `col1` to empty string where `col2` is not empty
+    df.loc[df[col2] != '', col1] = ''
+
+    # Strip 'start' from `col2` if it exists
+    df[col2] = df[col2].astype(str).str.replace(str_start, '', regex=False)
+
+    return df
+
+
+def infraspecific_name(df):
+    """
+    Processes the 'infraspecific_name' column in a DataFrame to extract and categorize 
+    specific subtypes based on pre-defined keywords.
+
+    Args:
+        df (pd.DataFrame): The DataFrame containing the data, 
+                          expected to have a column named 'infraspecific_name'.
+
+    Returns:
+        pd.DataFrame: The modified DataFrame with new columns for each extracted subtype, 
+                      and the original 'infraspecific_name' column potentially modified.
+    """
+    # Dictionary mapping subtype column names to the starting strings used to identify them.
+    dict_strings = {
+        'breed': 'breed=',
+        'cultivar': 'cultivar=',
+        'ecotype': 'ecotype=',
+        'strain': 'strain='
+    }
+
+    # Iterate over the dictionary to process each subtype
+    for col, str_start in dict_strings.items():
+        df = split_infraspecific_subtype(df, 'infraspecific_name', col, str_start)
+
     return df
 
 
@@ -119,6 +201,30 @@ def format_correction(df):
 	"""
     df['infraspecific_name'] = '\"' + df['infraspecific_name'] + '\"'
     df['isolate'] = '\"' + df['isolate'] + '\"'
+    return df
+
+
+def is_not_none(x):
+    # check if value exists
+    if pd.isna(x):
+        return False
+    return True
+
+
+def format_text_strings(df, col_names):
+    """
+    Converts missing values to numpy nan value and adds outside quotes
+    to strings (excluding np.nan). Applies change to columns specified in col_names.
+    """
+
+    for col in col_names:
+        df[col] = df[col].str.rstrip()  # Remove trailing whitespace
+        df[col] = df[col].replace([''],np.nan)  # replace missing values with np.nan
+
+        # Quote only string values
+        mask = df[col].apply(is_not_none)
+        df.loc[mask, col] = '"' + df.loc[mask, col].astype(str) + '"'
+
     return df
 
 
@@ -314,8 +420,10 @@ def preprocess_data(df):
     df = refseq_category(df)
     df = tax_id(df)
     df = species_tax_id(df)
+    df = clean_columns(df)
     df = infraspecific_name(df)
-    df = format_correction(df)
+    # df = format_correction(df)
+    df = format_text_strings(df, TEXT_COLUMNS)
     df = assembly_level(df)
     df = release_type(df)
     df = genome_rep(df)
@@ -324,6 +432,7 @@ def preprocess_data(df):
     df = relation_to_type_material(df)
     df = assembly_type(df)
     df = group(df)
+    df = df.fillna('')
     return df
 
 
@@ -332,9 +441,7 @@ def main(_FLAGS):
     file_input = _FLAGS.input_dir
     file_input1 = _FLAGS.input_dir1
     tax_id_dcid_mapping = _FLAGS.tax_id_dcid_mapping
-    #output_dir = _FLAGS.output_dir
     file_output = _FLAGS.output_dir
-    #file_output = os.path.join(MODULE_DIR, output_dir)
 
     df = pd.read_csv(file_input, skiprows=1, delimiter='\t')
     df = df.replace('na', '')
@@ -358,7 +465,7 @@ def main(_FLAGS):
 
     df = preprocess_data(df)
     file_output = os.path.join(file_output, 'ncbi_assembly_summary.csv')
-    df.to_csv(file_output, index=False)
+    df.to_csv(file_output, doublequote=False, escapechar='\\', index=False)
 
 
 if __name__ == "__main__":
