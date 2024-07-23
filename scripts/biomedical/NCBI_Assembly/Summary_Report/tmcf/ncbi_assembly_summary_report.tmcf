@@ -12,10 +12,13 @@ dcid: C:ncbi_assembly_summary->dcid
 name: C:ncbi_assembly_summary->asm_name
 biologicalIsolate: C:ncbi_assembly_summary->isolate
 biologicalTaxonomyGroup: C:ncbi_assembly_summary->group
+breed: C:ncbi_assembly_summary->breed
 comment: C:ncbi_assembly_summary->excluded_from_refseq
 contigCount: C:ncbi_assembly_summary->contig_count
+cultivar: C:ncbi_assembly_summary->cultivar
 dateCreated: C:ncbi_assembly_summary->annotation_date
 datePublished: C:ncbi_assembly_summary->seq_rel_date
+ecotype: C:ncbi_assembly_summary->ecotype
 gcContent: E:ncbi_assembly_summary->E4
 genBankAssemblyAccession: C:ncbi_assembly_summary->assembly_accession
 genBankNucleotideAccession: C:ncbi_assembly_summary->wgs_master
@@ -43,6 +46,7 @@ pubMedID:  C:ncbi_assembly_summary->pubmed_id
 refSeqAssemblyAccession :C:ncbi_assembly_summary->gbrs_paired_asm
 refSeqCategory: C:ncbi_assembly_summary->refseq_category
 scientificName: C:ncbi_assembly_summary->organism_name
+strain: C:ncbi_assembly_summary->strain
 submittedBy:  C:ncbi_assembly_summary->asm_submitter
 synonym:  C:ncbi_assembly_summary->annotation_name
 url: C:ncbi_assembly_summary->ftp_path
