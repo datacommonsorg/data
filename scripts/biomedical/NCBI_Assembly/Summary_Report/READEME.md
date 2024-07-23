@@ -45,26 +45,9 @@ In this import we include the metadata for all genome assemblies documented in `
     * breed
     * cultivar
     * ecotype
-    * infraspecificName
     * strain
-* GenomeAnnotation
-    *  geneCount
-    *  geneticScaffoldCount
-    *  gcContent
-    *  nonCodingGeneCount
-    *  proteinCodingGeneCount
-* GenomeAssembly
-    * contigCount
-    * genBankNucleotideAccession
-    * geneticRepliconCount
-    * geneticScaffoldingCount
-    * geneticScaffoldingCount
-    * genomeAnnotatedBy
-    * genomeAssemblyDerivedFrom
-    * genomeSize
-    * genomeSizeUngapped
-* Taxon
-    * ofStrain 
+* GenomeAssemby
+    *  contigCount
 * Thing
     * isLatestVersion  
 
@@ -82,16 +65,6 @@ In this import we include the metadata for all genome assemblies documented in `
     * BiologicalTaxonomyGroupVertebrateMammalian
     * BiologicalTaxonomyGroupVertebrateOther
     * BiologicalTaxonomyGroupViral
-* GenomeAssemblyDerivedFromEnum
-    * GenomeAssemblyDerivedFromEnum
-    * GenomeAssemblyDerivedFromTypeMaterial
-    * GenomeAssemblyDerivedFromSynonymTypeMaterial
-    * GenomeAssemblyDerivedFromPathotypeMaterial
-    * GenomeAssemblyDerivedFromCladeExemplar
-    * GenomeAssemblyDerivedFromNeotype
-    * GenomeAssemblyDerivedFromReftype
-    * GenomeAssemblyDerivedFromIctvSpeciesExemplar
-    * GenomeAssemblyDerivedFromIctvAdditionalIsolate
 
 #### dcid Generation
 
