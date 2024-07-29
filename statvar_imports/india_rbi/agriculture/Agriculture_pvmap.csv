@@ -31,7 +31,7 @@ TABLE 77: STATE-WISE PRODUCTION OF TOTAL VEGETABLES									,populationType,Farm
 TABLE 78: STATE-WISE AREA OF NON-FOODGRAINS - OILSEEDS									,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Oilseeds,,,,,name,"""Area used for oilseeds"""
 TABLE 79: STATE-WISE AREA OF NON-FOODGRAINS - COTTON (LINTT)									,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Cotton,,,,,name,"""Area for cotton cultivation"""
 TABLE 80: STATE-WISE AREA OF NON-FOODGRAINS - SUGARCANE									,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Sugarcane,,,,,name,"""Area for sugarcane cultivation"""
-TABLE 81: STATE-WISE AREA OF NON-FOODGRAINS - RAW JUTE & MESTA									,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Jute__Mesta,,,,,name,"""Area for jute and mesta cutivation"""
+TABLE 81: STATE-WISE AREA OF NON-FOODGRAINS - RAW JUTE & MESTA									,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Jute__Mesta,,,,,name,"""Area for jute and mesta cultivation"""
 (Kg. Per Hectare),unit,KilogramPerHectare,,,,,,,,,,
 TABLE 82: STATE-WISE ESTIMATES OF YIELD - RICE									,populationType,FarmInventory,measuredProperty,yield,farmInventoryType,Rice,,,,,name,"""Yield for rice cultivation"""
 TABLE 83: STATE-WISE ESTIMATES OF YIELD - WHEAT									,populationType,FarmInventory,measuredProperty,yield,farmInventoryType,Wheat,,,,,name,"""Yield for wheat cultivation"""
