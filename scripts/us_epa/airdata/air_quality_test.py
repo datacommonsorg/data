@@ -16,7 +16,7 @@ Unit tests for air_quality.py
 
 Usage: python3 -m unittest discover -v -s ../ -p "air_quality_test.py"
 '''
-import unittest, csv, os, tempfile
+import unittest, csv, os, sys, tempfile
 
 module_dir_ = os.path.dirname(__file__)
 
