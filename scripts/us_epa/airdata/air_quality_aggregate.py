@@ -113,9 +113,13 @@ def write_tmcf(tmcf_file_path):
         f_out.write(TEMPLATE_MCF)
 
 def main(_):
+    start_year = _FLAGS.aggregate_start_year
     end_year = _FLAGS.aggregate_end_year
+    if end_year >= datetime.now().year:
+      end_year = end_year - 1
+    logging.info(f'Processing from {start_year} to {end_year}')
     create_csv('EPA_AQI.csv')
-    for year in range(_FLAGS.aggregate_start_year, int(end_year) + 1):
+    for year in range(start_year, int(end_year) + 1):
         filename1 = f'daily_aqi_by_county_{year}'
         filename2 = f'daily_aqi_by_cbsa_{year}'
         request_and_write_csv('EPA_AQI.csv', filename1)
