@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "EPAAirQualityIndex",
+      "import_name": "EPACriteriaAirPollutants",
       "curator_emails": ["shamimansari@google.com"],
       "provenance_url": "https://www.epa.gov/outdoor-air-quality-data",
       "provenance_description": "Air quality data collected from outdoor monitors on the county, CBSA, and site monitor level.",
