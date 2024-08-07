@@ -198,7 +198,7 @@ def main(_):
     start_year = _FLAGS.start_year
     end_year = _FLAGS.end_year
     if end_year >= datetime.now().year:
-        end_year = end_year - 1
+        end_year = datetime.now().year - 1
     logging.info(f'Processing from {start_year} upto {end_year}')
     create_csv('EPA_AirQuality.csv')
     for pollutant in POLLUTANTS:

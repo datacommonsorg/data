@@ -28,8 +28,9 @@ _FLAGS = flags.FLAGS
 
 flags.DEFINE_integer('aggregate_start_year', os.getenv('start_year', '1980'),
                      'Process data starting from this year.')
-flags.DEFINE_integer('aggregate_end_year', os.getenv('end_year',
-                                           datetime.now().year),
+flags.DEFINE_integer('aggregate_end_year',
+                     os.getenv('end_year',
+                               datetime.now().year),
                      'Process data upto this year.')
 
 POLLUTANTS = {
@@ -112,11 +113,12 @@ def write_tmcf(tmcf_file_path):
     with open(tmcf_file_path, 'w') as f_out:
         f_out.write(TEMPLATE_MCF)
 
+
 def main(_):
     start_year = _FLAGS.aggregate_start_year
     end_year = _FLAGS.aggregate_end_year
     if end_year >= datetime.now().year:
-      end_year = end_year - 1
+        end_year = datetime.now().year - 1
     logging.info(f'Processing from {start_year} to {end_year}')
     create_csv('EPA_AQI.csv')
     for year in range(start_year, int(end_year) + 1):
@@ -126,6 +128,6 @@ def main(_):
         request_and_write_csv('EPA_AQI.csv', filename2)
     write_tmcf('EPA_AQI.tmcf')
 
+
 if __name__ == '__main__':
     app.run(main)
-
