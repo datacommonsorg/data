@@ -25,9 +25,9 @@ from datetime import datetime
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_integer('start_year', os.getenv('START_YEAR', '1980'),
+flags.DEFINE_integer('data_start_year', os.getenv('START_YEAR', '1980'),
                      'Process data starting from this year.')
-flags.DEFINE_integer('end_year', os.getenv('END_YEAR',
+flags.DEFINE_integer('data_end_year', os.getenv('END_YEAR',
                                            datetime.now().year),
                      'Process data upto this year.')
 
@@ -195,8 +195,8 @@ def write_tmcf(tmcf_file_path):
 
 
 def main(_):
-    start_year = _FLAGS.start_year
-    end_year = _FLAGS.end_year
+    start_year = _FLAGS.data_start_year
+    end_year = _FLAGS.data_end_year
     if end_year >= datetime.now().year:
         end_year = datetime.now().year - 1
     logging.info(f'Processing from {start_year} upto {end_year}')
