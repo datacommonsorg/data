@@ -1,4 +1,0 @@
-runtime: python37
-entrypoint: gunicorn -b :$PORT app.main:FLASK_APP
-env_variables:
-  DASHBOARD_PRODUCTION: "True"
