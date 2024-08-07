@@ -28,7 +28,7 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_integer('data_start_year', os.getenv('START_YEAR', '1980'),
                      'Process data starting from this year.')
 flags.DEFINE_integer('data_end_year', os.getenv('END_YEAR',
-                                           datetime.now().year),
+                                                datetime.now().year),
                      'Process data upto this year.')
 
 # AQS parameter codes: https://aqs.epa.gov/aqsweb/documents/codetables/parameters.html
