@@ -19,6 +19,19 @@ Usage: python3 air_quality_aggregate.py <end_year>
 '''
 import csv, os, sys, requests, io, zipfile
 
+from absl import app
+from absl import flags
+from absl import logging
+from datetime import datetime
+
+_FLAGS = flags.FLAGS
+
+flags.DEFINE_integer('aggregate_start_year', os.getenv('start_year', '1980'),
+                     'Process data starting from this year.')
+flags.DEFINE_integer('aggregate_end_year', os.getenv('end_year',
+                                           datetime.now().year),
+                     'Process data upto this year.')
+
 POLLUTANTS = {
     'Ozone': 'Ozone',
     'SO2': 'SulfurDioxide',
@@ -27,8 +40,6 @@ POLLUTANTS = {
     'PM2.5': 'PM2.5',
     'PM10': 'PM10',
 }
-
-START_YEAR = 1980
 
 CSV_COLUMNS = ['Date', 'Place', 'AQI', 'Pollutant', 'Site']
 
@@ -101,13 +112,16 @@ def write_tmcf(tmcf_file_path):
     with open(tmcf_file_path, 'w') as f_out:
         f_out.write(TEMPLATE_MCF)
 
-
-if __name__ == '__main__':
-    end_year = sys.argv[1]
+def main(_):
+    end_year = _FLAGS.aggregate_end_year
     create_csv('EPA_AQI.csv')
-    for year in range(START_YEAR, int(end_year) + 1):
+    for year in range(_FLAGS.aggregate_start_year, int(end_year) + 1):
         filename1 = f'daily_aqi_by_county_{year}'
         filename2 = f'daily_aqi_by_cbsa_{year}'
         request_and_write_csv('EPA_AQI.csv', filename1)
         request_and_write_csv('EPA_AQI.csv', filename2)
     write_tmcf('EPA_AQI.tmcf')
+
+if __name__ == '__main__':
+    app.run(main)
+

@@ -41,8 +41,6 @@ POLLUTANTS = {
     '81102': 'PM10',
 }
 
-START_YEAR = 1980
-
 CSV_COLUMNS = [
     'Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County', 'Units',
     'Method', 'POC', 'Mean', 'Max', 'AQI', 'Mean_SV', 'Max_SV', 'AQI_SV'
@@ -201,7 +199,7 @@ def main(_):
     end_year = _FLAGS.end_year
     if end_year >= datetime.now().year:
         end_year = end_year - 1
-    print(f'Processing from {start_year} upto {end_year}')
+    logging.info(f'Processing from {start_year} upto {end_year}')
     create_csv('EPA_AirQuality.csv')
     for pollutant in POLLUTANTS:
         for year in range(start_year, int(end_year) + 1):
