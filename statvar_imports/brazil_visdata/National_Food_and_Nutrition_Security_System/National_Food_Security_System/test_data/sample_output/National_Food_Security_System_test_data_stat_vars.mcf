@@ -1,0 +1,11 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/National_Food_Security_System/test_data/sample_input/National_Food_Security_System_test_data.csv --output_path=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/National_Food_Security_System/test_data/sample_output/National_Food_Security_System_test_data --pv_map=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/National_Food_Security_System/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/National_Food_Security_System/National_Food_Security_System_metadata.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-06-21 12:26:19.839829
+
+Node: dcid:Count_Municipality_NationalFoodSecuritySystem
+typeOf: dcid:StatisticalVariable
+name: "Municipalities that joined the National Food Security System (SISAN) - Accumulated"
+populationType: dcid:Municipality
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Municípios que aderiram ao Sistema Nacional de Segurança Alimentar (SISAN) - Acumulado@pt"
+benefitProgram: dcid:NationalFoodSecuritySystem
+
