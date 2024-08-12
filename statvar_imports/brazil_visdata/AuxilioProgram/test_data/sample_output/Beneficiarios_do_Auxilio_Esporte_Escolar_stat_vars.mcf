@@ -1,0 +1,23 @@
+# Auto generated using command: ".//process_spreadsheet.py --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/ --input_sheet=https://docs.google.com/spreadsheets/d/1OndqjIN5yoECcgMK0e7i5dfFdlLNcntyOosrWo1HcME/edit?resourcekey=0-Xy11C5eOvNIew1tKMXIgCQ&gid=1270136891#gid=1270136891 --config=https://docs.google.com/spreadsheets/d/1s-bacytdmqCDWC5k8MUH-c6ei1gTX3eFG-AhrZCk8fE/edit?gid=185975661#gid=185975661" on 2024-08-06 09:10:17.398743
+
+Node: dcid:Amount_Student_BrazilAuxilioSchoolSportsAidProgram_FinancialBenefit_GovernmentPayment_Monthly
+typeOf: dcid:StatisticalVariable
+name: "Monthly amount paid to students benefiting from the Auxílio Brasil School Sports Aid Program"
+populationType: dcid:Student
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+benefitProgram: dcid:Brazil_AuxilioSchoolSportsAidProgram
+benefitType: dcid:FinancialBenefit
+governmentPaymentStatus: dcid:GovernmentPayment
+installmentPeriod: dcid:Monthly
+
+Node: dcid:Count_Student_BrazilAuxilioSchoolSportsAidProgram_QualifiedStudent
+typeOf: dcid:StatisticalVariable
+name: "Number of students qualified for the Auxílio Brasil School Sports Aid Program"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de alunos habilitados ao Programa de Auxílio Esporte Escolar Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioSchoolSportsAidProgram
+householdType: dcid:QualifiedStudent
+

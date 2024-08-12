@@ -1,0 +1,16 @@
+parameter,value
+url,https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.php
+description,Families eligible for the Auxílio Brasil Program
+#place_type,
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,Famílias Habilitadas no Programa Auxílio Brasil
+#places_resolved_csv,
+output_columns,"observationAbout,observationDate,value,variableMeasured,scalingFactor,observationPeriod,measurementQualifier,unit"
+#header_rows,1
+schemaless,1
+number_decimal,","
+number_separator,""" """
