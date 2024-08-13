@@ -1,0 +1,10 @@
+Node: E:-Municipality_Programa_Auxilio_Brasil_-_Beneficio_Extraordinario->E0
+observationAbout: C:-Municipality_Programa_Auxilio_Brasil_-_Beneficio_Extraordinario->observationAbout
+observationDate: C:-Municipality_Programa_Auxilio_Brasil_-_Beneficio_Extraordinario->observationDate
+value: C:-Municipality_Programa_Auxilio_Brasil_-_Beneficio_Extraordinario->value
+variableMeasured: C:-Municipality_Programa_Auxilio_Brasil_-_Beneficio_Extraordinario->variableMeasured
+scalingFactor: C:-Municipality_Programa_Auxilio_Brasil_-_Beneficio_Extraordinario->scalingFactor
+observationPeriod: C:-Municipality_Programa_Auxilio_Brasil_-_Beneficio_Extraordinario->observationPeriod
+unit: C:-Municipality_Programa_Auxilio_Brasil_-_Beneficio_Extraordinario->unit
+typeOf: dcs:StatVarObservation
+measurementQualifier: Monthly

@@ -1,0 +1,34 @@
+# Auto generated using command: ".//process_spreadsheet.py --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/ --input_sheet=https://docs.google.com/spreadsheets/d/1aGuu1cSnN14T8t59a_fwjxfyqpq2w_xoQvwb_yH03Co/edit?gid=105095534#gid=105095534 --config=https://docs.google.com/spreadsheets/d/1s-bacytdmqCDWC5k8MUH-c6ei1gTX3eFG-AhrZCk8fE/edit?gid=185975661#gid=185975661" on 2024-08-06 09:53:02.590247
+
+Node: dcid:Count_Person_BrazilRuralProductiveInclusionAidProgram_Canceled_FarmingFamily
+typeOf: dcid:StatisticalVariable
+name: "The total number of farmers who benefited from the Rural Productive Inclusion Aid Program and had their benefits canceled."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Total de agricultores que foram beneficiados pelo Programa de Auxílio à Inclusão Produtiva Rural e tiveram seus benefícios cancelados @pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+benefitsStatus: dcid:Canceled
+householdType: dcid:FarmingFamily
+
+Node: dcid:Count_Person_BrazilRuralProductiveInclusionAidProgram_FarmingFamily
+typeOf: dcid:StatisticalVariable
+name: "The total number of farmers benefiting from the Rural Productive Inclusion Aid Program."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Total de agricultores beneficiados pelo Programa de Auxílio à Inclusão Produtiva Rural @pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+householdType: dcid:FarmingFamily
+
+Node: dcid:Count_Person_BrazilRuralProductiveInclusionAidProgram_Suspended_FarmingFamily
+typeOf: dcid:StatisticalVariable
+name: "The total number of farmers who benefited from the Rural Productive Inclusion Aid Program and had their benefits suspended."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Total de agricultores que foram beneficiados pelo Programa de Auxílio à Inclusão Produtiva Rural e tiveram seus benefícios suspensos  @pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+benefitsStatus: dcid:Suspended
+householdType: dcid:FarmingFamily
+

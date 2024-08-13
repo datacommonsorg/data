@@ -1,0 +1,127 @@
+# Auto generated using command: ".//process_spreadsheet.py --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/ --input_sheet=https://docs.google.com/spreadsheets/d/15K2rZ5owlKhAzzukHEtGxz_2hbXeOYpZZsA4PnSPOZw/edit?gid=899386599#gid=899386599 --config=https://docs.google.com/spreadsheets/d/1s-bacytdmqCDWC5k8MUH-c6ei1gTX3eFG-AhrZCk8fE/edit?gid=185975661#gid=185975661" on 2024-08-06 08:48:08.735031
+
+Node: dcid:Count_Person_6To15Years_AccompaniedByEducation_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries accompanied by education (6 to 15 years old) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 15 Years]
+alternateName: "Número total de beneficiários acompanhados de escolaridade (6 a 15 anos) do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:AccompaniedByEducation
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_6To15Years_AccompaniedByEducation_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Percentage of beneficiaries accompanied by education (6 to 15 years old) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_BrazilAuxilioBrasilProgram
+age: [6 15 Years]
+alternateName: "Percentual de beneficiários acompanhados de escolaridade (6 a 15 anos) do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:AccompaniedByEducation
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_6To15Years_EducationMonitoringWithoutFrequency_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total beneficiaries located in education monitoring but without attendance information (6 to 15 years old) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 15 Years]
+alternateName: "Total de beneficiários localizados em monitoramento educacional mas sem informação de frequência (6 a 15 anos) do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:EducationMonitoringWithoutFrequency
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_6To15Years_Education_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total beneficiaries with education profile (6 to 15 years old) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 15 Years]
+alternateName: "Total de beneficiários com perfil de escolaridade (6 a 15 anos) do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:Education
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_6To15Years_MonitoredBelowFrequentlyThanRequired_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries monitored with a frequency below that required (6 to 15 years) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 15 Years]
+alternateName: "Número total de beneficiários acompanhados com frequência inferior à exigida (6 a 15 anos) no âmbito do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredBelowFrequentlyThanRequired
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_6To15Years_MonitoredMoreFrequentlyThanRequired_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries monitored more frequently than required (6 to 15 years) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 15 Years]
+alternateName: "Número total de beneficiários acompanhados com frequência superior à exigida (6 a 15 anos ) no âmbito do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredMoreFrequentlyThanRequired
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_6To15Years_MonitoredMoreFrequentlyThanRequired_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Percentage of beneficiaries monitored more frequently than required (6 to 15 years) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_BrazilAuxilioBrasilProgram
+age: [6 15 Years]
+alternateName: "Percentual de beneficiários acompanhados com frequência superior à exigida (6 a 15 anos) no âmbito do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredMoreFrequentlyThanRequired
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_6To15Years_MonitoredWithoutSchoolAttendance_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries without information on school attendance (6 to 15 years old) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 15 Years]
+alternateName: "Número total de beneficiários sem informação de frequência escolar (6 a 15 anos) do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredWithoutSchoolAttendance
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_6To15Years_MonitoredWithoutSchoolAttendance_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Percentage of beneficiaries without information on school attendance (6 to 15 years old) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_BrazilAuxilioBrasilProgram
+age: [6 15 Years]
+alternateName: "Percentual de beneficiários sem informação sobre frequência escolar (6 a 15 anos) do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredWithoutSchoolAttendance
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_6To15Years_WithoutEducationMonitoring_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total beneficiaries not located in education monitoring (6 to 15 years old) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [6 15 Years]
+alternateName: "Total de beneficiários não localizados em acompanhamento educacional (6 a 15 anos) do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:WithoutEducationMonitoring
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_6To15Years_WithoutEducationMonitoring_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Percentage of beneficiaries not located in education monitoring (6 to 15 years old) under Auxilio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_BrazilAuxilioBrasilProgram
+age: [6 15 Years]
+alternateName: "Percentual de beneficiários não inseridos na monitoria educacional (6 a 15 anos) do Programa Auxilio Brasil@pt"
+beneficiariesProfile: dcid:WithoutEducationMonitoring
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+

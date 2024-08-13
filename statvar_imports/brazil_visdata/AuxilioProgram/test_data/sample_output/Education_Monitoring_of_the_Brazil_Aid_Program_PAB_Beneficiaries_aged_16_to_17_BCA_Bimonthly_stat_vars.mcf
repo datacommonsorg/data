@@ -1,0 +1,138 @@
+# Auto generated using command: "process_spreadsheet.py --input_sheet=https://docs.google.com/spreadsheets/d/1DFzkx8tu4P5tvNEtt2CqALp5E2nmLHaYLPc2bMggZd0/edit?resourcekey=0-lbedsJNyBsUnRR4ZA4ksiw&gid=1780784968#gid=1780784968 --existing_statvar_mcf=stat_vars.mcf --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/" on 2024-08-12 07:19:10.683229
+
+Node: dcid:Count_Person_16To17Years_AccompaniedByEducation_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged  16 to 17 with an accompanied by an education profile under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 17 Years]
+alternateName: "Número total de beneficiários de 16 a 17 anos com perfil acompanhado de escolaridade do Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:AccompaniedByEducation
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_16To17Years_AccompaniedByEducation_Adolescents_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The percentage of beneficiaries aged  16 to 17 with an accompanied by an education profile under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Adolescents_BrazilAuxilioBrasilProgram
+age: [16 17 Years]
+alternateName: "O percentual de beneficiários de 16 a 17 anos com perfil acompanhado de escolaridade do Programa Auxílio Brasil@pt"
+beneficiariesProfile: dcid:AccompaniedByEducation
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_16To17Years_Education_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged  16 to 17 with an education profile under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 17 Years]
+alternateName: "Número total de beneficiários de 16 a 17 anos com perfil de escolaridade do Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:Education
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_16To17Years_MonitoredBelowFrequentlyThanRequired_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged 16 to 17 is monitored below frequently than required under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 17 Years]
+alternateName: "Número total de beneficiários de 16 a 17 anos é monitorado com frequência inferior à exigida pelo Programa Auxílio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredBelowFrequentlyThanRequired
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_16To17Years_MonitoredInformationWithoutSchoolAttendance_Adolescents_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The percentage of beneficiaries aged 16 to 17 without information on school attendance under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Adolescents_BrazilAuxilioBrasilProgram
+age: [16 17 Years]
+alternateName: "O percentual de beneficiários de 16 a 17 anos sem informação sobre frequência escolar do Programa Auxílio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredInformationWithoutSchoolAttendance
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_16To17Years_MonitoredLocatedInEducationWithoutSchoolAttendanceInfo_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged 16 to 17 is monitored located in education monitoring but without school attendance information under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 17 Years]
+alternateName: "Total de beneficiários de 16 a 17 anos monitorados localizados na monitoria educacional,mas sem informação de frequência escolar do Programa Auxílio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredLocatedInEducationWithoutSchoolAttendanceInfo
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_16To17Years_MonitoredMoreFrequentlyThanRequired_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged  16 to 17 is monitored more frequently than required under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 17 Years]
+alternateName: "Total de beneficiários de 16 a 17 anos é monitorado com maior frequência do que o exigido pelo Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:MonitoredMoreFrequentlyThanRequired
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_16To17Years_MonitoredMoreFrequentlyThanRequired_Adolescents_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The percentage of beneficiaries aged 16 to 17 is monitored more frequently than required under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Adolescents_BrazilAuxilioBrasilProgram
+age: [16 17 Years]
+alternateName: "O percentual de beneficiários de 16 a 17 anos é acompanhado com maior frequência do que o exigido pelo Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:MonitoredMoreFrequentlyThanRequired
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_16To17Years_MonitoredNotLocatedInEducation_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged 16 to 17 not located in education mpnitoring under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 17 Years]
+alternateName: "Número total de beneficiários de 16 a 17 anos não localizados em acompanhamento educacional do Programa Auxílio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredNotLocatedInEducation
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_16To17Years_MonitoredNotLocatedInEducation_Adolescents_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The percentage of beneficiaries aged 16 to 17 not located in education monitoring under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Adolescents_BrazilAuxilioBrasilProgram
+age: [16 17 Years]
+alternateName: "Percentual de beneficiários de 16 a 17 anos não localizados em acompanhamento educacional do Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:MonitoredNotLocatedInEducation
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_16To17Years_MonitoredWithoutSchoolAttendance_Adolescents_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged 16 to 17 is monitored without school attendance under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [16 17 Years]
+alternateName: "Total de beneficiários de 16 a 17 anos é acompanhado sem frequência escolar pelo Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:MonitoredWithoutSchoolAttendance
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+

@@ -1,0 +1,12 @@
+# Auto generated using command: "process_spreadsheet.py --input_sheet=https://docs.google.com/spreadsheets/d/1C-CJg08NkqgRgGttJZC3qCgbtY3xq1zoHjbsb1HcLqA/edit?resourcekey=0-rRmGOc5i-OtPUU6R7QWiTA&gid=596611679#gid=596611679 --existing_statvar_mcf=stat_vars.mcf --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/" on 2024-08-06 14:02:48.002283
+
+Node: dcid:Mean_Amount_HouseHold_BrazilAuxilioBrasilProgram_ExtraordinaryBenefit
+typeOf: dcid:StatisticalVariable
+name: "Average benefit received by families through extraordinary benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:meanValue
+alternateName: "Benefício médio recebido pelas famílias por meio de benefícios extraordinários do programa Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:ExtraordinaryBenefit
+

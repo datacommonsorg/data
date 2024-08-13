@@ -1,0 +1,153 @@
+Node: dcid:monitoringProgram
+typeOf: dcs:Property
+name: "monitoringProgram"
+domainIncludes: dcid:Person,dcid:Child
+rangeIncludes: dcid:MonitoringProgramEnum
+isProvisional: dcs:True
+
+Node: dcid:MonitoringProgramEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MonitoringProgramEnum"
+isProvisional: dcs:True
+
+Node: dcid:HealthMonitoring
+typeOf: dcid:MonitoringProgramEnum
+name: "Health Monitoring"
+isProvisional: dcs:True
+
+Node: dcid:childAge
+typeOf: dcs:Property
+name: "childAge"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:ChildAgeEnum
+isProvisional: dcs:True
+
+Node: dcid:ChildAgeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "ChildAgeEnum"
+isProvisional: dcs:True
+
+Node: dcid:ChildUpto7Years
+typeOf: dcid:ChildAgeEnum
+name: "Child Upto 7Years"
+isProvisional: dcs:True
+
+Node: dcid:womanAge
+typeOf: dcs:Property
+name: "womanAge"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:WomanAgeEnum
+isProvisional: dcs:True
+
+Node: dcid:WomanAgeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "WomanAgeEnum"
+isProvisional: dcs:True
+
+Node: dcid:WomenWithAllAge
+typeOf: dcid:WomanAgeEnum
+name: "Women With All Age"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Person,dcid:Child,dcid:PregnantWoman
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Person,dcid:Child,dcid:PregnantWoman
+
+Node: dcid:Brazil_AuxilioBrasilProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Auxilio Brasil Program"
+isProvisional: dcs:True
+
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_BrazilAuxilioBrasilProgram
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Brazil Auxilio Brasil Program"
+isProvisional: dcs:True
+
+Node: dcid:healthStatus
+typeOf: dcs:Property
+name: "healthStatus"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:HealthStatusEnum
+
+Node: dcid:HealthStatusEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "HealthStatusEnum"
+isProvisional: dcs:True
+
+Node: dcid:NoHealthInfo
+typeOf: dcid:HealthStatusEnum
+name: "No Health Info"
+isProvisional: dcs:True
+
+Node: dcid:age
+typeOf: dcs:Property
+name: "age"
+domainIncludes: dcid:Child
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:ChildAccompanied
+typeOf: dcid:MonitoringProgramEnum
+name: "Child Accompanied"
+isProvisional: dcs:True
+
+Node: dcid:Count_Child_BrazilAuxilioBrasilProgram
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ Brazil Auxilio Brasil Program"
+isProvisional: dcs:True
+
+Node: dcid:vaccineStatus
+typeOf: dcs:Property
+name: "vaccineStatus"
+domainIncludes: dcid:Child
+
+Node: dcid:UpToDateVaccination
+typeOf: dcid:VaccineStatusEnum
+name: "Up To Date Vaccination"
+isProvisional: dcs:True
+
+Node: dcid:NutritionalMonitoring
+typeOf: dcid:MonitoringProgramEnum
+name: "Nutritional Monitoring"
+isProvisional: dcs:True
+
+Node: dcid:gender
+typeOf: dcs:Property
+name: "gender"
+rangeIncludes: dcid:GenderType
+
+Node: dcid:WomenAccompanied
+typeOf: dcid:MonitoringProgramEnum
+name: "Women Accompanied"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_BrazilAuxilioBrasilProgram_Female
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Brazil Auxilio Brasil Program_ Female"
+isProvisional: dcs:True
+
+Node: dcid:mothersHealthPrevention
+typeOf: dcs:Property
+name: "mothersHealthPrevention"
+domainIncludes: dcid:PregnantWoman
+
+Node: dcid:WithoutHealthMonitoring
+typeOf: dcid:MonitoringProgramEnum
+name: "Without Health Monitoring"
+isProvisional: dcs:True
+

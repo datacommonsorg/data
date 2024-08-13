@@ -1,0 +1,127 @@
+# Auto generated using command: "process_spreadsheet.py --input_sheet=https://docs.google.com/spreadsheets/d/1r3MvoewbhU0PtRTrm1CQlErSiReNlC-NImnxKsgXrlc/edit?resourcekey=0-TDRV3OnhGwqdYJC-t94MOA&gid=555243843#gid=555243843 --existing_statvar_mcf=stat_vars.mcf --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/" on 2024-08-12 07:07:46.950999
+
+Node: dcid:Count_Person_4To5Years_AccompaniedByEducation_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged  4 to 5 with an accompanied by an education profile under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 5 Years]
+alternateName: "Número total de beneficiários de 4 a 5 anos com perfil acompanhado de escolaridade do Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:AccompaniedByEducation
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_4To5Years_AccompaniedByEducation_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The percentage of beneficiaries aged  4 to 5 with an accompanied by an education profile under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_BrazilAuxilioBrasilProgram
+age: [4 5 Years]
+alternateName: "O percentual de beneficiários de 4 a 5 anos com perfil acompanhado de escolaridade do Programa Auxílio Brasil@pt"
+beneficiariesProfile: dcid:AccompaniedByEducation
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_4To5Years_Education_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged  4 to 5 with an education profile under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 5 Years]
+alternateName: "Número total de beneficiários de4 a 5 anos com perfil de escolaridade do Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:Education
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_4To5Years_MonitoredBelowFrequentlyThanRequired_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged 4 to 5 is monitored below frequently than required under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 5 Years]
+alternateName: "Número total de beneficiários de 4 a 5 anos é monitorado com frequência inferior à exigida pelo Programa Auxílio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredBelowFrequentlyThanRequired
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_4To5Years_MonitoredInformationWithoutSchoolAttendance_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The percentage of beneficiaries aged 4 to 5 without information on school attendance under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_BrazilAuxilioBrasilProgram
+age: [4 5 Years]
+alternateName: "O percentual de beneficiários de 4 a 5 anos sem informação sobre frequência escolar do Programa Auxílio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredInformationWithoutSchoolAttendance
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_4To5Years_MonitoredLocatedInEducationWithoutSchoolAttendanceInfo_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged 4 to 5 is monitored located in education monitoring but without school attendance information under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 5 Years]
+alternateName: "Total de beneficiários de 4 a 5 anos monitorados localizados na monitoria educacional,mas sem informação de frequência escolar do Programa Auxílio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredLocatedInEducationWithoutSchoolAttendanceInfo
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_4To5Years_MonitoredMoreFrequentlyThanRequired_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged  4 to 5 is monitored more frequently than required under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 5 Years]
+alternateName: "Total de beneficiários de 4 a 5 anos é monitorado com maior frequência do que o exigido pelo Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:MonitoredMoreFrequentlyThanRequired
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_4To5Years_MonitoredMoreFrequentlyThanRequired_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The percentage of beneficiaries aged 4 to 5 is monitored more frequently than required under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_BrazilAuxilioBrasilProgram
+age: [4 5 Years]
+alternateName: "Número total de beneficiários de 6 a 15 anos com perfil acompanhado de escolaridade do Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:MonitoredMoreFrequentlyThanRequired
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_4To5Years_MonitoredNotLocatedInEducation_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged 4 to 5 not located in education mpnitoring under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 5 Years]
+alternateName: "Número total de beneficiários de 4 a 5 anos não localizados em acompanhamento educacional do Programa Auxílio Brasil@pt"
+beneficiariesProfile: dcid:MonitoredNotLocatedInEducation
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_4To5Years_MonitoredNotLocatedInEducation_BrazilAuxilioBrasilProgram_AsAFractionOf_Count_Person_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The percentage of beneficiaries aged 4 to 5 not located in education monitoring under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_BrazilAuxilioBrasilProgram
+age: [4 5 Years]
+alternateName: "Percentual de beneficiários de 4 a 5 anos não localizados em acompanhamento educacional do Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:MonitoredNotLocatedInEducation
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Count_Person_4To5Years_MonitoredWithoutSchoolAttendance_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of beneficiaries aged 4 to 5 is monitored without school attendance under the Auxílio Brasil Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [4 5 Years]
+alternateName: "Total de beneficiários de 4 a 5 anos é acompanhado sem frequência escolar pelo Programa Auxílio Brasil @pt"
+beneficiariesProfile: dcid:MonitoredWithoutSchoolAttendance
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
