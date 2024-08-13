@@ -1,0 +1,21 @@
+# Auto generated using command: ".//process_spreadsheet.py --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/ --input_sheet=https://docs.google.com/spreadsheets/d/1ZQYwl-TM0N13VjZmVZZJTxrskYtkNGaVPXkr1erGrYA/edit?resourcekey=0-5eZAMjL40FkIoZViWpvqAg&gid=1064729476#gid=1064729476 --config=https://docs.google.com/spreadsheets/d/1s-bacytdmqCDWC5k8MUH-c6ei1gTX3eFG-AhrZCk8fE/edit?gid=185975661#gid=185975661" on 2024-08-06 08:51:34.072925
+
+Node: dcid:Count_Student_BrazilAuxilioScientificInitiationAidProgram_Female
+typeOf: dcid:StatisticalVariable
+name: "Number of female students who are beneficiaries of the Scientific Initiation Aid Program"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+benefitProgram: dcid:Brazil_AuxilioScientificInitiationAidProgram
+gender: dcid:Female
+
+Node: dcid:Count_Student_BrazilAuxilioScientificInitiationAidProgram_Male
+typeOf: dcid:StatisticalVariable
+name: "Number of male students who received  support from the Scientific Initiation Aid Program/Auxílio Científico"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de estudantes do sexo masculino que receberam apoio do Programa de Auxílio à Iniciação Científica/Auxílio Científico@pt"
+benefitProgram: dcid:Brazil_AuxilioScientificInitiationAidProgram
+gender: dcid:Male
+

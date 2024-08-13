@@ -1,0 +1,44 @@
+# Auto generated using command: "process_spreadsheet.py --input_sheet=https://docs.google.com/spreadsheets/d/1vPBkLJeXQB9IqKnupwP-mMb1uZCoP0zvQjv5FUCvIhY/edit?gid=17013581#gid=17013581 --existing_statvar_mcf=stat_vars.mcf --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/" on 2024-08-06 13:37:31.812767
+
+Node: dcid:Count_Person_BrazilRuralProductiveInclusionAidProgram
+typeOf: dcid:StatisticalVariable
+name: "The total number of peoples benefiting from the Rural Productive Inclusion Aid Program."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Total de pessoas beneficiadas pelo Programa de Auxílio à Inclusão Produtiva Rural.@pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+
+Node: dcid:Count_Person_BrazilRuralProductiveInclusionAidProgram_Female_FarmingFamily
+typeOf: dcid:StatisticalVariable
+name: "The total number of female farmers who benefited from the Rural Productive Inclusion Aid Program"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "O total de mulheres agricultoras beneficiadas pelo Programa de Auxílio à Inclusão Produtiva Rural@pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+gender: dcid:Female
+householdType: dcid:FarmingFamily
+
+Node: dcid:Count_Person_BrazilRuralProductiveInclusionAidProgram_GenderUnknownOrNotStated_FarmingFamily
+typeOf: dcid:StatisticalVariable
+name: "The total number of farmers benefiting from the Rural Productive Inclusion Aid Program whose gender not stated."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "O número total de agricultores beneficiários do Programa de Apoio à Inclusão Produtiva Rural cujo sexo não foi indicado@pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+gender: dcid:GenderUnknownOrNotStated
+householdType: dcid:FarmingFamily
+
+Node: dcid:Count_Person_BrazilRuralProductiveInclusionAidProgram_Male_FarmingFamily
+typeOf: dcid:StatisticalVariable
+name: "The total number of male farmers benefiting from the Rural Productive Inclusion Aid Program."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Total de agricultores do sexo masculino beneficiados pelo Programa de Auxílio à Inclusão Produtiva Rural@pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+gender: dcid:Male
+householdType: dcid:FarmingFamily
+

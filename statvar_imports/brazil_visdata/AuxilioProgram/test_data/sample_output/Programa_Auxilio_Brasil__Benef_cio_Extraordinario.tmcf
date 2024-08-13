@@ -1,0 +1,10 @@
+Node: E:-Programa_Auxilio_Brasil_-_Benef_cio_Extraordinario->E0
+observationAbout: C:-Programa_Auxilio_Brasil_-_Benef_cio_Extraordinario->observationAbout
+observationDate: C:-Programa_Auxilio_Brasil_-_Benef_cio_Extraordinario->observationDate
+value: C:-Programa_Auxilio_Brasil_-_Benef_cio_Extraordinario->value
+variableMeasured: C:-Programa_Auxilio_Brasil_-_Benef_cio_Extraordinario->variableMeasured
+scalingFactor: C:-Programa_Auxilio_Brasil_-_Benef_cio_Extraordinario->scalingFactor
+observationPeriod: C:-Programa_Auxilio_Brasil_-_Benef_cio_Extraordinario->observationPeriod
+unit: C:-Programa_Auxilio_Brasil_-_Benef_cio_Extraordinario->unit
+typeOf: dcs:StatVarObservation
+measurementQualifier: Monthly

@@ -1,0 +1,23 @@
+# Auto generated using command: ".//process_spreadsheet.py --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/ --input_sheet=https://docs.google.com/spreadsheets/d/1wEmqHFZsBxqNiaE8yAdKHHFrnbTzUzUEHnk6nmQ2HZk/edit?resourcekey=0-2FO46VHwwg147gCPu4HkvA&gid=226717453#gid=226717453 --config=https://docs.google.com/spreadsheets/d/1s-bacytdmqCDWC5k8MUH-c6ei1gTX3eFG-AhrZCk8fE/edit?gid=185975661#gid=185975661" on 2024-08-06 09:18:02.250211
+
+Node: dcid:Amount_HouseHold_BrazilAuxilioSchoolSportsAidProgram_FinancialBenefit_GovernmentPayment_Single
+typeOf: dcid:StatisticalVariable
+name: "Financial resources transferred to beneficiary families through the School Sports Aid Program in single installment"
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Recursos financeiros disponibilizados às famílias beneficiárias do Programa Fomento Rural@pt"
+benefitProgram: dcid:Brazil_AuxilioSchoolSportsAidProgram
+benefitType: dcid:FinancialBenefit
+governmentPaymentStatus: dcid:GovernmentPayment
+installmentPeriod: dcid:Single
+
+Node: dcid:Count_HouseHold_BrazilAuxilioSchoolSportsAidProgram
+typeOf: dcid:StatisticalVariable
+name: "The total number of families benefiting from the Auxilio School Sports Aid Programs"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Recursos financeiros disponibilizados às famílias beneficiárias do Programa Fomento Rural@pt"
+benefitProgram: dcid:Brazil_AuxilioSchoolSportsAidProgram
+

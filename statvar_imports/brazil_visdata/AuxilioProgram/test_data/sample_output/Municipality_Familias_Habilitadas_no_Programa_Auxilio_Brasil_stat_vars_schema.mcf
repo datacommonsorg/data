@@ -1,0 +1,45 @@
+Node: dcid:householdType
+typeOf: dcs:Property
+name: "householdType"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:QualifiedFamily
+typeOf: dcid:HouseholdTypeEnum
+name: "Qualified Family"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:Brazil_AuxilioBrasilProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Auxilio Brasil Program"
+isProvisional: dcs:True
+
+Node: dcid:HouseHold
+typeOf: dcid:Thing
+name: "House Hold"
+isProvisional: dcs:True
+
+Node: dcid:discount
+typeOf: dcs:Property
+name: "discount"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:PostConcessions
+typeOf: dcid:Number
+name: "Post Concessions"
+isProvisional: dcs:True
+
+Node: dcid:Concessions
+typeOf: dcid:Number
+name: "Concessions"
+isProvisional: dcs:True
+

@@ -1,0 +1,33 @@
+# Auto generated using command: "process_spreadsheet.py --input_sheet=https://docs.google.com/spreadsheets/d/13z1fUld2K-7LDrEvloqezgxPYfB4ZC7ECcYYTaLCUgI/edit?gid=1855350995#gid=1855350995 --existing_statvar_mcf=stat_vars.mcf --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/" on 2024-08-06 13:59:31.933459
+
+Node: dcid:Count_HouseHold_BrazilAuxilioBrasilProgram_Concessions
+typeOf: dcid:StatisticalVariable
+name: "Total number of families got conscessions from Auxilio Brasil Program"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Total de famílias que receberam concessões do Programa Auxilio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+discount: dcid:Concessions
+
+Node: dcid:Count_HouseHold_BrazilAuxilioBrasilProgram_PostConcessions_QualifiedFamily
+typeOf: dcid:StatisticalVariable
+name: "Total number of remaining families after conscessions from Auxilio Brasil Program"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número total de famílias remanescentes após concessões do Programa Auxilio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+discount: dcid:PostConcessions
+householdType: dcid:QualifiedFamily
+
+Node: dcid:Count_HouseHold_BrazilAuxilioBrasilProgram_QualifiedFamily
+typeOf: dcid:StatisticalVariable
+name: "Total number of families eligible for the Auxilio Brasil Program"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número total de famílias elegíveis ao Programa Auxilio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+householdType: dcid:QualifiedFamily
+

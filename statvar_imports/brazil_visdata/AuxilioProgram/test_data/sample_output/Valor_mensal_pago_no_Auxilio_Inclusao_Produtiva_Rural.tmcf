@@ -1,0 +1,10 @@
+Node: E:-Valor_mensal_pago_no_Auxilio_Inclusao_Produtiva_Rural->E0
+observationAbout: C:-Valor_mensal_pago_no_Auxilio_Inclusao_Produtiva_Rural->observationAbout
+observationDate: C:-Valor_mensal_pago_no_Auxilio_Inclusao_Produtiva_Rural->observationDate
+value: C:-Valor_mensal_pago_no_Auxilio_Inclusao_Produtiva_Rural->value
+variableMeasured: C:-Valor_mensal_pago_no_Auxilio_Inclusao_Produtiva_Rural->variableMeasured
+scalingFactor: C:-Valor_mensal_pago_no_Auxilio_Inclusao_Produtiva_Rural->scalingFactor
+observationPeriod: C:-Valor_mensal_pago_no_Auxilio_Inclusao_Produtiva_Rural->observationPeriod
+unit: C:-Valor_mensal_pago_no_Auxilio_Inclusao_Produtiva_Rural->unit
+measurementQualifier: Monthly
+typeOf: dcs:StatVarObservation

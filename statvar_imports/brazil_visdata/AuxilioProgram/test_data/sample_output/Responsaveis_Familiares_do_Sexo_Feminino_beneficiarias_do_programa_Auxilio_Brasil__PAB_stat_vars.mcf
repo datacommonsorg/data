@@ -1,0 +1,57 @@
+# Auto generated using command: ".//process_spreadsheet.py --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/ --input_sheet=https://docs.google.com/spreadsheets/d/1SrTBRKs6FgQPJHyWOiOctry9MsDYQoBMvFQGt9DDFc0/edit?resourcekey=0-ElS0QWHfv2XkWigggdQ7Og&gid=651146439#gid=651146439 --config=https://docs.google.com/spreadsheets/d/1s-bacytdmqCDWC5k8MUH-c6ei1gTX3eFG-AhrZCk8fE/edit?gid=185975661#gid=185975661" on 2024-08-06 09:56:49.287672
+
+Node: dcid:Amount_Household_BrazilAuxilioBrasilProgram_Female_Women
+typeOf: dcid:StatisticalVariable
+name: "The total amount paid to female heads of households under the Auxílio Brasil program."
+populationType: dcid:Household
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total pago às mulheres chefes de família no âmbito do programa Auxílio Brasil @pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+gender: dcid:Female
+headOfFamily: dcid:Women
+
+Node: dcid:Count_Household_BrazilAuxilioBrasilProgram_Female_Women
+typeOf: dcid:StatisticalVariable
+name: "The total number of female heads of households benefited from Auxilio Brasil Programs."
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Total de mulheres chefes de família beneficiadas pelos Programas Auxilio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+gender: dcid:Female
+headOfFamily: dcid:Women
+
+Node: dcid:Count_Household_BrazilAuxilioBrasilProgram_Female_Women_AsAFractionOf_Count_Household_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The total percentage of female heads of households benefited from Auxilio Brasil Programs."
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Household_BrazilAuxilioBrasilProgram
+alternateName: "O percentual total de mulheres chefes de família beneficiadas pelos Programas Auxilio Brasil. @pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+gender: dcid:Female
+headOfFamily: dcid:Women
+
+Node: dcid:Count_Person_BrazilAuxilioBrasilProgram_Female
+typeOf: dcid:StatisticalVariable
+name: "The total number of female peoples benefited from Auxilio Brasil Programs."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "O total de mulheres beneficiadas pelos Programas Auxilio Brasil.@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+gender: dcid:Female
+
+Node: dcid:Count_Person_BrazilAuxilioBrasilProgram_Female_AsAFractionOf_Count_Person_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The total percentage of female peoples benefited from Auxilio Brasil Programs."
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_BrazilAuxilioBrasilProgram
+alternateName: "O percentual total de mulheres beneficiadas pelos Programas Auxilio Brasil @pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+gender: dcid:Female
+

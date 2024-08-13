@@ -1,0 +1,62 @@
+Node: dcid:benefitsStatus
+typeOf: dcs:Property
+name: "benefitsStatus"
+domainIncludes: dcid:Household
+
+Node: dcid:NonCompianceWithConditionlities
+typeOf: dcid:BenefitsStatusEnum
+name: "Non Compiance With Conditionlities"
+isProvisional: dcs:True
+
+Node: dcid:householdType
+typeOf: dcs:Property
+name: "householdType"
+domainIncludes: dcid:Household
+
+Node: dcid:BolsaFamily
+typeOf: dcid:HouseholdTypeEnum
+name: "Bolsa Family"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Household,dcid:Person
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Household,dcid:Person
+
+Node: dcid:Brazil_AuxilioBrasilProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Auxilio Brasil Program"
+isProvisional: dcs:True
+
+Node: dcid:Warning
+typeOf: dcid:BenefitsStatusEnum
+name: "Warning"
+isProvisional: dcs:True
+
+Node: dcid:beneficiaryType
+typeOf: dcs:Property
+name: "beneficiaryType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:AgeGroupClassificationEnum
+isProvisional: dcs:True
+
+Node: dcid:Young
+typeOf: dcid:AgeGroupClassificationEnum
+name: "Young"
+isProvisional: dcs:True
+
+Node: dcid:Blocked
+typeOf: dcid:BenefitsStatusEnum
+name: "Blocked"
+isProvisional: dcs:True
+
+Node: dcid:Suspended
+typeOf: dcid:BenefitsStatusEnum
+name: "Suspended"
+isProvisional: dcs:True
+
