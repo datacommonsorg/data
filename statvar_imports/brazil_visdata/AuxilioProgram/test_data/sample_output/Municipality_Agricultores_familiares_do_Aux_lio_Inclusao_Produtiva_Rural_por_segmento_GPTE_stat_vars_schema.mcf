@@ -1,0 +1,26 @@
+Node: dcid:householdType
+typeOf: dcs:Property
+name: "householdType"
+domainIncludes: dcid:HouseHold
+rangeIncludes: dcid:FamilyTypeEnum
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:Brazil_RuralProductiveInclusionAidProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Rural Productive Inclusion Aid Program"
+isProvisional: dcs:True
+
+Node: dcid:HouseHold
+typeOf: dcid:Thing
+name: "House Hold"
+isProvisional: dcs:True
+
