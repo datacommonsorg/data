@@ -1,7 +1,6 @@
 Node: dcid:Municipality
 typeOf: dcid:Thing
 name: "Municipality"
-isProvisional: dcs:True
 
 Node: dcid:alternateName
 typeOf: dcs:Property
@@ -16,5 +15,5 @@ domainIncludes: dcid:Municipality
 Node: dcid:NationalFoodSecuritySystem
 typeOf: dcid:UnemploymentInsuranceProgramEnum
 name: "National Food Security System"
-isProvisional: dcs:True
+
 

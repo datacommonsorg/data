@@ -9,7 +9,7 @@ release_frequency,1Year
 process,
 #pv_map,"https://docs.google.com/spreadsheets/d/1DU_Q4IuEfH_v3wa07MqDQuOlBIy-o6JT4ZW_aHMViz8/edit?pli=1&gid=1157910957#gid=1157910957,Código:https://docs.google.com/spreadsheets/d/1h5dmMxmQx8Vz5S4VkBGixy17q7XtLoDr0749mcsBOPg/edit?resourcekey=0-aIOYn5welLV0hq3a6YVmxQ&gid=1338846625#gid=1338846625"
 comments,
-output_columns,"observationAbout, observationDate, value, variableMeasured,measurementMethod,#input"
+output_columns,"observationAbout, observationDate, value, variableMeasured,observationPeriod,measurementMethod"
 places_resolved_csv,https://docs.google.com/spreadsheets/d/1h5dmMxmQx8Vz5S4VkBGixy17q7XtLoDr0749mcsBOPg/edit?resourcekey=0-aIOYn5welLV0hq3a6YVmxQ&gid=0#gid=0
 multi_value_properties,observationAbout
 mapped_rows,1

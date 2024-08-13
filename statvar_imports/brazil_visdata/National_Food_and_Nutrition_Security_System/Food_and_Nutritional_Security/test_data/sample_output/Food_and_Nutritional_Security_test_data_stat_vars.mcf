@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/Food_and_Nutritional_Security/test_data/sample_input/Food_and_Nutritional_Security_test_data.csv --output_path=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/Food_and_Nutritional_Security/test_data/sample_output/Food_and_Nutritional_Security_test_data --pv_map=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/Food_and_Nutritional_Security/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/Food_and_Nutritional_Security/Food_and_Nutritional_Security_Plan_metadata.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-06-21 12:17:30.655234
-
 Node: dcid:Count_Municipality_FoodandNutritionalSecurity
 typeOf: dcid:StatisticalVariable
 name: "Municipalities that have a Food and Nutritional Security Plan"
