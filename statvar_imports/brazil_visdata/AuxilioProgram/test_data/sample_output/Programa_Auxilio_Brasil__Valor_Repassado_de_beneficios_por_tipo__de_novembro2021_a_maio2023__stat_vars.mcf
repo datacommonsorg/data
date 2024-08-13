@@ -1,0 +1,106 @@
+# Auto generated using command: ".//process_spreadsheet.py --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/ --input_sheet=https://docs.google.com/spreadsheets/d/1sg2zCfV-j5zOiBfzDit9tfZpQpeaAW28_FdAKovCgAc/edit?resourcekey=0-qK0weiyfxDrtx1v4hQRG1g&gid=1662658259#gid=1662658259 --config=https://docs.google.com/spreadsheets/d/1s-bacytdmqCDWC5k8MUH-c6ei1gTX3eFG-AhrZCk8fE/edit?gid=185975661#gid=185975661" on 2024-08-06 09:55:22.759649
+
+Node: dcid:Amount_HouseHold_Adolescents_BrazilAuxilioBrasilProgram_FamilyCompositionBenefit
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred for adolescents family composition benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total transferido para benefícios de composição familiar de adolescentes no âmbito do programa Auxílio Brasil@pt"
+beneficiaryType: dcid:Adolescents
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:FamilyCompositionBenefit
+
+Node: dcid:Amount_HouseHold_BrazilAuxilioBrasilProgram_AdditionalComplementaryBenefit
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred for additional complementary benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total repassado para benefícios complementares adicionais do programa Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:AdditionalComplementaryBenefit
+
+Node: dcid:Amount_HouseHold_BrazilAuxilioBrasilProgram_EarlyChildhoodBenefit
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred for early childhood benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total repassado para benefícios de primeira infância do programa Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:EarlyChildhoodBenefit
+
+Node: dcid:Amount_HouseHold_BrazilAuxilioBrasilProgram_ExtraordinaryBenefit
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred for extraordinary benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total transferido para benefícios extraordinários do programa Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:ExtraordinaryBenefit
+
+Node: dcid:Amount_HouseHold_BrazilAuxilioBrasilProgram_FamilyCompositionBenefit
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred for family composition benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total transferido para benefícios de composição familiar no âmbito do programa Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:FamilyCompositionBenefit
+
+Node: dcid:Amount_HouseHold_BrazilAuxilioBrasilProgram_OvercomingExtremePovertyBenefit
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred for overcoming extreme poverty benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total repassado para benefícios de superação da pobreza extrema no âmbito do programa Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:OvercomingExtremePovertyBenefit
+
+Node: dcid:Amount_HouseHold_BrazilAuxilioBrasilProgram_TransitionalCompensatoryBenefit
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred for transitional compensatory benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total transferido para benefícios compensatórios transitórios no âmbito do programa Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:TransitionalCompensatoryBenefit
+
+Node: dcid:Amount_HouseHold_NursingMothers_BrazilAuxilioBrasilProgram_FamilyCompositionBenefit
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred for nursing mothers,family composition benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total repassado para nutrizes,benefícios de composição familiar do programa Auxílio Brasil@pt"
+benefiecieryType: dcid:NursingMothers
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:FamilyCompositionBenefit
+
+Node: dcid:Amount_HouseHold_PregnantWomen_BrazilAuxilioBrasilProgram_FamilyCompositionBenefit
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred for pregnant women,family composition benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total transferido para gestantes,benefícios de composição familiar do programa Auxílio Brasil@pt"
+benefiecieryType: dcid:PregnantWomen
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:FamilyCompositionBenefit
+
+Node: dcid:Amount_HouseHold_Young_BrazilAuxilioBrasilProgram_FamilyCompositionBenefit
+typeOf: dcid:StatisticalVariable
+name: "Total amount transferred for young family composition benefits under the Auxílio Brasil program."
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Valor total transferido para benefícios de composição familiar jovem no âmbito do programa Auxílio Brasil@pt"
+benefiecieryType: dcid:Young
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitType: dcid:FamilyCompositionBenefit
+

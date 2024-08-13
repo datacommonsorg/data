@@ -1,0 +1,62 @@
+# Auto generated using command: ".//process_spreadsheet.py --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/ --input_sheet=https://docs.google.com/spreadsheets/d/18UjEfvjN2euZjdCJOnaxrD5xm_NXZ4bicDYV9WOp1cM/edit?resourcekey=0-S76eQcyV7PQ5d2mOBsKYZg&gid=1981392266#gid=1981392266 --config=https://docs.google.com/spreadsheets/d/1s-bacytdmqCDWC5k8MUH-c6ei1gTX3eFG-AhrZCk8fE/edit?gid=185975661#gid=185975661" on 2024-08-06 09:00:39.007442
+
+Node: dcid:Count_HouseHold_BrazilRuralProductiveInclusionAidProgram_AgrarianReformFamily
+typeOf: dcid:StatisticalVariable
+name: "Number of families benefited from Rural Productive Inclusion Aid Program (Brazil) - agrarian reform families"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de famílias quilombolas atendidas pelo Programa de Auxílio à Inclusão Produtiva Rural (APRINC)@pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+householdType: dcid:AgrarianReformFamily
+
+Node: dcid:Count_HouseHold_BrazilRuralProductiveInclusionAidProgram_ExtractiveFamily
+typeOf: dcid:StatisticalVariable
+name: "Number,of Extractive Families Participating,in the Rural Productive Inclusion Aid Program"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Famílias Extrativistas,Participantes do,Programa de Auxílio à Inclusão Produtiva Rural@pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+householdType: dcid:ExtractiveFamily
+
+Node: dcid:Count_HouseHold_BrazilRuralProductiveInclusionAidProgram_FishingFamily
+typeOf: dcid:StatisticalVariable
+name: "Number of fishing families participating in the Rural Productive Inclusion Aid Program (APRINC)"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de famílias de pescadores participantes do Programa de Auxílio à Inclusão Produtiva Rural (APRINC)@pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+householdType: dcid:FishingFamily
+
+Node: dcid:Count_HouseHold_BrazilRuralProductiveInclusionAidProgram_IndigenousFamily
+typeOf: dcid:StatisticalVariable
+name: "Number of Indigenous families assisted by the Rural Productive Inclusion Aid Program (Brazil)"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de famílias indígenas atendidas pelo Programa de Auxílio à Inclusão Produtiva Rural (Brasil)@pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+householdType: dcid:IndigenousFamily
+
+Node: dcid:Count_HouseHold_BrazilRuralProductiveInclusionAidProgram_QuilombolaFamily
+typeOf: dcid:StatisticalVariable
+name: "Number of Quilombola families assisted by the Rural Productive Inclusion Aid Program (APRINC)"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de famílias quilombolas atendidas pelo Programa de Auxílio à Inclusão Produtiva Rural (APRINC)@pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+householdType: dcid:QuilombolaFamily
+
+Node: dcid:Count_HouseHold_BrazilRuralProductiveInclusionAidProgram_RiversideFamily
+typeOf: dcid:StatisticalVariable
+name: "Number of Riverside families assisted by the Rural Productive Inclusion Program"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de famílias ribeirinhas atendidas pelo Programa de Inclusão Produtiva Rural@pt"
+benefitProgram: dcid:Brazil_RuralProductiveInclusionAidProgram
+householdType: dcid:RiversideFamily
+
