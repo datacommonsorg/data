@@ -1,0 +1,93 @@
+Node: dcid:benefitType
+typeOf: dcs:Property
+name: "benefitType"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:EarlyChildhoodBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Early Childhood Benefit"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:Brazil_AuxilioBrasilProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Auxilio Brasil Program"
+isProvisional: dcs:True
+
+Node: dcid:HouseHold
+typeOf: dcid:Thing
+name: "House Hold"
+isProvisional: dcs:True
+
+Node: dcid:CompositionBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Composition Benefit"
+isProvisional: dcs:True
+
+Node: dcid:beneficiaryType
+typeOf: dcs:Property
+name: "beneficiaryType"
+domainIncludes: dcid:HouseHold
+rangeIncludes: dcid:BeneficiaryTypeEnum,dcid:AgeGroupClassificationEnum
+isProvisional: dcs:True
+
+Node: dcid:BeneficiaryTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "BeneficiaryTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:Childs
+typeOf: dcid:BeneficiaryTypeEnum
+name: "Childs"
+isProvisional: dcs:True
+
+Node: dcid:FamilyCompositionBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Family Composition Benefit"
+isProvisional: dcs:True
+
+Node: dcid:Young
+typeOf: dcid:BeneficiaryTypeEnum
+name: "Young"
+isProvisional: dcs:True
+
+Node: dcid:PregnantWomen
+typeOf: dcid:BeneficiaryTypeEnum
+name: "Pregnant Women"
+isProvisional: dcs:True
+
+Node: dcid:OvercomingExtremePovertyBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Overcoming Extreme Poverty Benefit"
+isProvisional: dcs:True
+
+Node: dcid:TransitionalCompensatoryBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Transitional Compensatory Benefit"
+isProvisional: dcs:True
+
+Node: dcid:NursingMothers
+typeOf: dcid:BeneficiaryTypeEnum
+name: "Nursing Mothers"
+isProvisional: dcs:True
+
+Node: dcid:ExtraordinaryBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Extraordinary Benefit"
+isProvisional: dcs:True
+
+Node: dcid:AdditionalComplementaryBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Additional Complementary Benefit"
+isProvisional: dcs:True
+

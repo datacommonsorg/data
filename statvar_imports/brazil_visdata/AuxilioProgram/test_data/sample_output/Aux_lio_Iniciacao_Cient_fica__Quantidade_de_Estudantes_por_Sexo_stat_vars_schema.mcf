@@ -1,0 +1,21 @@
+Node: dcid:gender
+typeOf: dcs:Property
+name: "gender"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:GenderType
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Student
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:Student
+
+Node: dcid:Brazil_AuxilioScientificInitiationAidProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Auxilio Scientific Initiation Aid Program"
+isProvisional: dcs:True
+
