@@ -1,0 +1,31 @@
+# Auto generated using command: ".//process_spreadsheet.py --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/ --input_sheet=https://docs.google.com/spreadsheets/d/1pNuaxpNiLRmY9vWU5lcdykIaNz0M8FHRGEqlgEeLhBk/edit?gid=1447164627#gid=1447164627 --config=https://docs.google.com/spreadsheets/d/1s-bacytdmqCDWC5k8MUH-c6ei1gTX3eFG-AhrZCk8fE/edit?gid=185975661#gid=185975661" on 2024-08-06 08:50:40.527747
+
+Node: dcid:Count_Student_BrazilAuxilioSchoolSportsAidProgram
+typeOf: dcid:StatisticalVariable
+name: "Number of Students beneficiaries of the Auxílio Brasil School Sports Aid Program"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de Alunos Beneficiários do Programa Auxílio Esporte Escolar Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioSchoolSportsAidProgram
+
+Node: dcid:Count_Student_BrazilAuxilioSchoolSportsAidProgram_Female
+typeOf: dcid:StatisticalVariable
+name: "Number of female students supported by the Brazil Auxilio School Sports Aid Program"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de alunas apoiadas pelo Programa de Auxílio Esportivo Escolar Brasil Auxilio@pt"
+benefitProgram: dcid:Brazil_AuxilioSchoolSportsAidProgram
+gender: dcid:Female
+
+Node: dcid:Count_Student_BrazilAuxilioSchoolSportsAidProgram_Male
+typeOf: dcid:StatisticalVariable
+name: "Number of male students who are beneficiaries of the Brazil School Sports Aid Program"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Número de alunos do sexo masculino beneficiários do Programa Brasil de Auxílio Esporte Escolar@pt"
+benefitProgram: dcid:Brazil_AuxilioSchoolSportsAidProgram
+gender: dcid:Male
+
