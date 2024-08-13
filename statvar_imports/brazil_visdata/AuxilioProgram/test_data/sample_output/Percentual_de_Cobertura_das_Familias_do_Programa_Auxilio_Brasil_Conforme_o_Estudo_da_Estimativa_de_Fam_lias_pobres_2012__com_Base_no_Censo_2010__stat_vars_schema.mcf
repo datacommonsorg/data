@@ -1,0 +1,58 @@
+Node: dcid:benefitsStatus
+typeOf: dcs:Property
+name: "benefitsStatus"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:Benefited
+typeOf: dcid:BenefitsStatusEnum
+name: "Benefited"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:Brazil_AuxilioBrasilProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Auxilio Brasil Program"
+isProvisional: dcs:True
+
+Node: dcid:HouseHold
+typeOf: dcid:Thing
+name: "House Hold"
+isProvisional: dcs:True
+
+Node: dcid:povertyStatus
+typeOf: dcs:Property
+name: "povertyStatus"
+domainIncludes: dcid:HouseHold
+
+Node: dcid:Poverty
+typeOf: dcid:USC_PovertyStatusEnum
+name: "Poverty"
+isProvisional: dcs:True
+
+Node: dcid:governmentAgency
+typeOf: dcs:Property
+name: "governmentAgency"
+domainIncludes: dcid:HouseHold
+rangeIncludes: dcid:GovernmentAgencyEnum
+isProvisional: dcs:True
+
+Node: dcid:GovernmentAgencyEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "GovernmentAgencyEnum"
+isProvisional: dcs:True
+
+Node: dcid:Brazil_IBGE_2010
+typeOf: dcid:GovernmentAgencyEnum
+name: "Brazil_ IBGE_ 20 10"
+isProvisional: dcs:True
+

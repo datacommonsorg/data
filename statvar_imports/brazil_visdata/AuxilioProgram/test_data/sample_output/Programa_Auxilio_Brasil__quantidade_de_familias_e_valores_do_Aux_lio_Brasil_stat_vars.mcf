@@ -1,0 +1,30 @@
+# Auto generated using command: ".//process_spreadsheet.py --output_path=/usr/local/google/home/shamimansari/outputfile/VISDATA/ --input_sheet=https://docs.google.com/spreadsheets/d/1M9JbAQOQxTcj_qu3_mE-lEtoBuZepQTTfZfNH2JhM4U/edit?resourcekey=0-7pqyRf9lyoWPosIwBSSQAw&gid=1605550470#gid=1605550470 --config=https://docs.google.com/spreadsheets/d/1s-bacytdmqCDWC5k8MUH-c6ei1gTX3eFG-AhrZCk8fE/edit?gid=185975661#gid=185975661" on 2024-08-06 09:54:55.650641
+
+Node: dcid:Amount_HouseHold_BrazilAuxilioBrasilProgram_NotSuspended
+typeOf: dcid:StatisticalVariable
+name: "The financial resources transferred to families who are not in a suspension situation  under the Auxílio Brasil program"
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+alternateName: "Os recursos financeiros repassados ​​às famílias que não estão em situação de suspensão do programa Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+benefitsStatus: dcid:NotSuspended
+
+Node: dcid:Count_HouseHold_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The total number of families benefited from the Auxílio Brasil program"
+populationType: dcid:HouseHold
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Total de famílias beneficiadas pelo programa Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
+Node: dcid:Mean_Amount_HouseHold_BrazilAuxilioBrasilProgram
+typeOf: dcid:StatisticalVariable
+name: "The average amount transffered to families under auxilio brasil program"
+populationType: dcid:HouseHold
+measuredProperty: dcid:amount
+statType: dcid:meanValue
+alternateName: "Valor médio repassado às famílias do programa Auxílio Brasil@pt"
+benefitProgram: dcid:Brazil_AuxilioBrasilProgram
+
