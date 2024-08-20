@@ -1,3 +1,0 @@
-key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,,
-Referência,observationDate,{Data},observationAbout,country/BRA,benefitProgram,Brazil_RuralProductiveInclusionAidProgram,observationPeriod,P1M,measurementQualifier,Monthly,,
-Valor mensal pago no AIPR,measuredProperty,amount,populationType,Person,value,{Number},unit,BRL,name,"""Total amount disbursed to beneficiaries of the Rural Productive Inclusion Aid Program""",alternateName,"""Valor total desembolsado aos beneficiários do Programa de Auxílio à Inclusão Produtiva Rural@pt"""

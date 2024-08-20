@@ -1,4 +1,0 @@
-key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,,,,,,
-Referência,observationDate,{Data},observationAbout,country/BRA,benefitProgram,Brazil_AuxilioSchoolSportsAidProgram,populationType,Student,,,,,,,,
-Atletas/Estudantes elegíveis ao Auxílio Esporte Escolar,value,{Number},householdType,QualifiedStudent,,,,,,,,,name,"""Number of students qualified for the Auxílio Brasil School Sports Aid Program""",alternateName,"""Número de alunos habilitados ao Programa de Auxílio Esporte Escolar Auxílio Brasil@pt"""
-Recursos Transferidos (Mensal),value,{Number},installmentPeriod,Monthly,measuredProperty,amount,governmentPaymentStatus,GovernmentPayment,benefitType,FinancialBenefit,unit,BRL,name,"""Monthly amount paid to students benefiting from the Auxílio Brasil School Sports Aid Program""",,"""Valor mensal pago aos alunos beneficiários do Programa de Auxílio Esporte Escolar Auxílio Brasil@pt"""
