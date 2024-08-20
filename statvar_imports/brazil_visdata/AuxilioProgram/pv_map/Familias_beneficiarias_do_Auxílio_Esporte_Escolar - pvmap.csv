@@ -1,4 +1,0 @@
-key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,,,,,,
-Referência,observationDate,{Data},observationAbout,country/BRA,benefitProgram,Brazil_AuxilioSchoolSportsAidProgram,populationType,HouseHold,observationPeriod,P1M,,,,,,
-Famílias Beneficiárias do Auxílio Esporte Escolar,value,{Number},,,,,,,,,name,"""The total number of families benefiting from the Auxilio School Sports Aid Programs""",alternateName,"""Recursos financeiros disponibilizados às famílias beneficiárias do Programa Fomento Rural@pt""",,
-Recursos transferidos (pagamento parcela única),value,{Number},installmentPeriod,Single,measuredProperty,amount,governmentPaymentStatus,GovernmentPayment,benefitType,FinancialBenefit,unit,BRL,name,"""Financial resources transferred to beneficiary families through the School Sports Aid Program in single installment""",alternateName,"""Recursos financeiros disponibilizados às famílias beneficiárias do Programa Fomento Rural@pt"""

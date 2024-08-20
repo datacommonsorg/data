@@ -1,9 +1,0 @@
-Node: E:-Beneficiarios_do_Auxilio_Esporte_Escolar->E0
-observationAbout: C:-Beneficiarios_do_Auxilio_Esporte_Escolar->observationAbout
-observationDate: C:-Beneficiarios_do_Auxilio_Esporte_Escolar->observationDate
-value: C:-Beneficiarios_do_Auxilio_Esporte_Escolar->value
-variableMeasured: C:-Beneficiarios_do_Auxilio_Esporte_Escolar->variableMeasured
-scalingFactor: C:-Beneficiarios_do_Auxilio_Esporte_Escolar->scalingFactor
-observationPeriod: C:-Beneficiarios_do_Auxilio_Esporte_Escolar->observationPeriod
-unit: C:-Beneficiarios_do_Auxilio_Esporte_Escolar->unit
-typeOf: dcs:StatVarObservation
