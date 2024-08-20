@@ -1,4 +1,0 @@
-key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4
-Referência,observationDate,{Data},observationAbout,country/BRA,benefitProgram,Brazil_AuxilioScientificInitiationAidProgram,populationType,Student,,
-QUANTIDADE DE ESTUDANTES POR SEXO - MASCULINO,value,{Number},gender,Male,name,"""Number of male students who received  support from the Scientific Initiation Aid Program/Auxílio Científico""",alternateName,"""Número de estudantes do sexo masculino que receberam apoio do Programa de Auxílio à Iniciação Científica/Auxílio Científico@pt""",,
-QUANTIDADE DE ESTUDANTES POR SEXO - FEMININO,value,{Number},gender,Female,name,"""Number of female students who are beneficiaries of the Scientific Initiation Aid Program""",,"""Número de estudantes do sexo feminino beneficiárias do Programa de Auxílio à Iniciação Científica@pt""",,
