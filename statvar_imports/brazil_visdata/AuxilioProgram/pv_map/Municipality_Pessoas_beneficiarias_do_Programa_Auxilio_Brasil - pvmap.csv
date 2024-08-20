@@ -1,4 +1,0 @@
-key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,,
-Referência,observationDate,{Data},,,benefitProgram,Brazil_AuxilioBrasilProgram,populationType,Person,,,observationPeriod,P1M
-Código,observationAbout,{Data},,,,,,,,,,
-Pessoas beneficiárias,value,{Number},name,"""Total number of people benefiting from the Auxílio Brasil program""",alternateName,"""Número total de beneficiários do programa Auxílio Brasil@pt""",,,,,,
