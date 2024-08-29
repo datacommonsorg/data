@@ -1,0 +1,12 @@
+Node: E:mesh_pharmacological_action_record->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_pharmacological_action_record->Descriptor_dcid
+identifier: C:mesh_pharmacological_action_record->DescriptorUI
+
+Node: E:mesh_pharmacological_action_record->E2
+typeOf: dcs:MeSHSupplementaryConceptRecord
+typeOf: schema:Drug
+dcid: C:mesh_pharmacological_action_record->dcid
+name: C:mesh_pharmacological_action_record->RecordName
+identifier: C:mesh_pharmacological_action_record->RecordUI
+mechanismOfAction: E:mesh_pharmacological_action_record->E1
