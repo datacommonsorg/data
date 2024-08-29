@@ -1,0 +1,10 @@
+Node: E:India_GeoSadak->E0
+typeOf: dcs:AdministrativeArea2
+lgdCode: C:India_GeoSadak->LgdCode
+
+Node: E:India_GeoSadak->E1
+typeOf: dcs:StatVarObservation
+observationAbout: E:India_GeoSadak->E0
+observationDate: 2022
+variableMeasured: C:India_GeoSadak->StatVar
+value: C:India_GeoSadak->Category_Count

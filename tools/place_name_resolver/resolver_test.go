@@ -7,10 +7,26 @@ import (
 	"testing"
 )
 
-type MockPlaceId2Dcid struct{}
+type MockResolveApi struct{}
 
-func (m *MockPlaceId2Dcid) Read() ([]byte, error) {
-	return ioutil.ReadFile("testdata/placeid2dcid.json")
+func (m *MockResolveApi) Resolve(req *resolveReq) (*resolveResp, error) {
+	mockResp := &resolveResp{
+		Entities: []resolveRespEntity{
+			resolveRespEntity{
+				InId:   "ChIJwe1EZjDG5zsRaYxkjY_tpF0",
+				OutIds: []string{"wikidataId/Q1156"},
+			},
+			resolveRespEntity{
+				InId:   "ChIJkbeSa_BfYzARphNChaFPjNc",
+				OutIds: []string{"country/IND"},
+			},
+			resolveRespEntity{
+				InId:   "ChIJg0f4wxyUmjkRUlulOJtaCxE",
+				OutIds: []string{"wikidataId/Q1473962"},
+			},
+		},
+	}
+	return mockResp, nil
 }
 
 type MockMapsClient struct {
@@ -37,6 +53,13 @@ func getMockGeocodesBasic() *MockMapsClient {
 			},
 			"Mumbai": []maps.GeocodingResult{
 				maps.GeocodingResult{PlaceID: "ChIJwe1EZjDG5zsRaYxkjY_tpF0"},
+			},
+			// Return the same placeId for both Pratapgarhs.
+			"Pratapgarh UP": []maps.GeocodingResult{
+				maps.GeocodingResult{PlaceID: "ChIJg0f4wxyUmjkRUlulOJtaCxE"},
+			},
+			"Pratapgarh Rajasthan": []maps.GeocodingResult{
+				maps.GeocodingResult{PlaceID: "ChIJg0f4wxyUmjkRUlulOJtaCxE"},
 			},
 		},
 	}
@@ -69,7 +92,7 @@ func TestMain(t *testing.T) {
 		{"input_containment.csv", "expected_output_containment.csv", "actual_output_containment.csv", getMockGeocodesContainment()},
 	}
 	for _, t := range table {
-		err := resolvePlacesByName("testdata/"+t.in, "testdata/"+t.got, false, &MockPlaceId2Dcid{}, t.mapCli)
+		err := resolvePlacesByName("testdata/"+t.in, "testdata/"+t.got, false, &MockResolveApi{}, t.mapCli)
 		if err != nil {
 			log.Fatal(err)
 		}

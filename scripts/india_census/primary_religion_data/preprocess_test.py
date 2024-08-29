@@ -15,6 +15,7 @@
 import filecmp
 import os
 import json
+import pandas as pd
 import unittest
 from india_census.common.base import CensusPrimaryAbstractDataLoaderBase
 from india_census.primary_religion_data.preprocess import CensusPrimaryReligiousDataLoader
@@ -39,7 +40,7 @@ class TestCensusCensusPrimaryReligiousDataLoader(unittest.TestCase):
         ]
 
         data_categories = [
-            "Total", "Hindu", "Muslim", "Christian", "Sikh", "Buddhist", "Jain",
+            "Hindu", "Muslim", "Christian", "Sikh", "Buddhist", "Jain",
             "Other religions and persuasions", "Religion not stated"
         ]
 
@@ -105,4 +106,64 @@ class TestCensusCensusPrimaryReligiousDataLoader(unittest.TestCase):
 
         self.assertEqual(expected_mcf_data, result_mcf_data)
         self.assertEqual(expected_tmcf_data, result_tmcf_data)
-        # self.assertEqual(expected_csv_data, result_csv_data)
+        self.assertEqual(expected_csv_data, result_csv_data)
+
+    def test_specific_religion_data_csv(self):
+        data_file_path = os.path.join(os.path.dirname(__file__),
+                                      './test_data/RL-0100.xlsx')
+
+        metadata_file_path = os.path.join(
+            os.path.dirname(__file__),
+            '../common/primary_abstract_data_variables.csv')
+
+        existing_stat_var = [
+            "Count_Household", "Count_Person", "Count_Person_Urban",
+            "Count_Person_Rural", "Count_Person_Male", "Count_Person_Female"
+        ]
+
+        data_categories = [
+            "Hindu", "Muslim", "Christian", "Sikh", "Buddhist", "Jain",
+            "Other religions and persuasions", "Religion not stated"
+        ]
+
+        mcf_file_path = os.path.join(os.path.dirname(__file__),
+                                     './test_data/test_Data2.mcf')
+        tmcf_file_path = os.path.join(os.path.dirname(__file__),
+                                      './test_data/test_Data2.tmcf')
+        csv_file_path = os.path.join(os.path.dirname(__file__),
+                                     './test_data/test_Data2.csv')
+
+        loader = CensusPrimaryReligiousDataLoader(
+            data_file_path=data_file_path,
+            metadata_file_path=metadata_file_path,
+            mcf_file_path=mcf_file_path,
+            tmcf_file_path=tmcf_file_path,
+            csv_file_path=csv_file_path,
+            existing_stat_var=existing_stat_var,
+            census_year=2011,
+            dataset_name="TEST",
+            data_categories=data_categories,
+            data_category_column="Religion")
+        loader.process()
+
+        dtype = {
+            'census_location_id': str,
+            'TRU': str,
+            'columnName': str,
+            "StatisticalVariable": str
+        }
+        clean_df = pd.read_csv(csv_file_path, dtype=dtype)
+
+        if os.path.exists(mcf_file_path):
+            os.remove(mcf_file_path)
+
+        if os.path.exists(tmcf_file_path):
+            os.remove(tmcf_file_path)
+
+        if os.path.exists(csv_file_path):
+            os.remove(csv_file_path)
+
+        row = clean_df.loc[(clean_df["census_location_id"] == "800013") & (
+            clean_df["StatisticalVariable"] ==
+            "dcid:indianCensus/Count_Person_Religion_Christian")]
+        self.assertEqual(2516, row.iloc[0]["Value"])

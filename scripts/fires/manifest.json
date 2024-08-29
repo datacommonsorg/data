@@ -1,0 +1,16 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "FireWFIGS",
+            "curator_emails": ["sachdevapulkit@google.com"],
+            "provenance_url": "https://data-nifc.opendata.arcgis.com/",
+            "provenance_description": "The Wildland Fire Interagency Geospatial Services (WFIGS) Group provides authoritative geospatial data products under the interagency Wildland Fire Data Program. ",
+            "scripts": ["wfigs_data.py"],
+            "import_inputs": [{
+                "template_mcf": "wfigs.tmcf",
+                "cleaned_csv": "final_processed_data.csv"
+            }],
+        "cron_schedule": "0 6 * * *"
+        }
+    ]
+}

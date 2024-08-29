@@ -12,18 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import unittest
 import pandas as pd
-from preprocess_data import preprocess_df
-from import_data import save_csv
+from .preprocess_data import preprocess_df
+from .import_data import save_csv
 
 
 class TestPreprocess(unittest.TestCase):
 
     def test_preprocess(self):
-        input_path = "./test/test_data.tsv"
-        output_path = "./test/test_data_processed"
-        expected_path = "./test/expected_data.csv"
+        module_dir = os.path.dirname(os.path.realpath(__file__))
+        input_path = os.path.join(module_dir, "test/test_data.tsv")
+        output_path = os.path.join(module_dir, "test/test_data_processed")
+        expected_path = os.path.join(module_dir, "test/expected_data.csv")
 
         input_df = pd.read_csv(input_path, delimiter='\t')
         save_csv(preprocess_df(input_df), output_path)

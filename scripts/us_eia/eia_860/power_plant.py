@@ -176,6 +176,7 @@ def _to_boolean(value: object) -> str:
 def _update_frames(raw_df: pd.DataFrame) -> pd.DataFrame:
     """Updates data frame to include columns required for tmcf"""
     raw_df = raw_df.replace(np.nan, '')
+    raw_df['PlantCode'] = raw_df['PlantCode'].apply(utils.plant_code_to_str)
     raw_df['Dcid'] = raw_df['PlantCode'].apply(utils.plant_code_to_dcid)
     raw_df['Name'] = raw_df['PlantName'].apply(utils.escape_value)
     raw_df['Address'] = raw_df.apply(utils.build_address, axis=1)

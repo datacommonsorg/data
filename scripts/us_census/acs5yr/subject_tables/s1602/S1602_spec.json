@@ -1,0 +1,47 @@
+{
+"populationType": {
+    "_DEFAULT": "Household"
+  },
+
+ "measurement": {
+   "Limited English-speaking households": {
+      "abilityToSpeakEnglish": "LimitedEnglishSpeakingHousehold",
+      "measuredProperty": "count",
+      "statType": "measuredValue"
+   },
+
+  "Limited English-speaking households MOE": {
+      "abilityToSpeakEnglish": "LimitedEnglishSpeakingHousehold",
+      "measuredProperty": "count",
+      "statType": "marginOfError"
+   },
+
+    "_DEFAULT": {
+      "measuredProperty": "count",
+      "statType": "measuredValue"
+    }
+  },
+
+"pvs": {
+        "statType": {
+          "Margin of Error": "marginOfError"
+        },
+         "languageSpokenAtHome": {
+           "Spanish": "Spanish",
+           "Other Indo-European languages": "OtherIndoEuropeanLanguages",
+           "Asian and Pacific Island languages":"AsianAndPacificIslandLanguages",
+           "Other languages": "OtherLanguages"
+         }
+  },
+
+ "ignoreColumns": [
+    "id",
+    "Geographic Area Name",
+    "Percent",
+    "Percent MOE",
+    "Percent limited English-speaking households",
+    "Percent limited English-speaking households MOE"
+  ],
+ "denominators": {}
+}
+

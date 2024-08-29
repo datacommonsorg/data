@@ -1,0 +1,45 @@
+spec: {
+  pop_type: "SDG_SI_POV_DAY1"
+  obs_props { mprop: "value" }
+  vertical: "SDG_1.1.1"
+}
+spec: {
+  pop_type: "SDG_SI_POV_EMP1"
+  obs_props { mprop: "value" }
+  vertical: "SDG_1.1.1"
+}
+spec: {
+  pop_type: "SDG_SI_POV_NAHC"
+  obs_props { mprop: "value" }
+  vertical: "SDG_1.2.1"
+}
+spec: {
+  pop_type: "SDG_SD_MDP_MUHC"
+  obs_props { mprop: "value" }
+  vertical: "SDG_1.2.2"
+}
+spec: {
+  pop_type: "SDG_SD_MDP_ANDI"
+  obs_props { mprop: "value" }
+  vertical: "SDG_1.2.2"
+}
+spec: {
+  pop_type: "SDG_SD_MDP_MUHHC"
+  obs_props { mprop: "value" }
+  vertical: "SDG_1.2.2"
+}
+spec: {
+  pop_type: "SDG_SD_MDP_CSMP"
+  obs_props { mprop: "value" }
+  vertical: "SDG_1.2.2"
+}
+spec: {
+  pop_type: "SDG_SD_MDP_ANDIHH"
+  obs_props { mprop: "value" }
+  vertical: "SDG_1.2.2"
+}
+spec: {
+  pop_type: "SDG_SI_COV_MATNL"
+  obs_props { mprop: "value" }
+  vertical: "SDG_1.3.1"
+}
