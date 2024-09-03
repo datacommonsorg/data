@@ -14,17 +14,12 @@
 
 # Author: Pradeep Kumar Krishnaswamy
 # Date: 18-Apr-2024
-# Edited By: Samantha Piekos
-# Last Edited: 03-Jul-2024
+
+
+# !/bin/bash
+
+# make output directory to save enmu mcf & cleaned csv
+mkdir -p output
 
 # Command
-python3 format_ncbi_taxonomy_test.py
-
-# download data commons java test tool version 0.1-alpha.1k
-mkdir -p tmp; cd tmp
-wget https://github.com/datacommonsorg/import/releases/download/0.1-alpha.1k/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar
-cd ..
-
-# run java test tool
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_taxonomy.tmcf output/ncbi_taxonomy.csv output/*.mcf
-mv dc_generated ncbi_taxonomy_report
+python3 scripts/format_ncbi_taxonomy.py

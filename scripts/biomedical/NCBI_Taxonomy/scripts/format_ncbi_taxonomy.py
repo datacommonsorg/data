@@ -14,8 +14,8 @@
 """
 Author: Pradeep Kumar Krishnaswamy
 Date: 18-Apr-2024
-Edited By: Samantha Piekos
-Last Edited: 17-Jul-2024
+Edited By: Pradeep Kumar Krishnaswamy
+Last Edited: 03-Sep-2024
 Name: format_ncbi_taxonomy
 Description: cleaning the NCBI Taxonomy data.
 @source data: Download Taxdump.tar.z from NCBI Taxonomy FTP Download page
@@ -29,7 +29,7 @@ import re
 import string
 import sys
 import os
-from pathlib import Path
+from os.path import dirname, abspath, join
 import pandas as pd
 from absl import app
 from absl import flags
@@ -199,7 +199,7 @@ flags.DEFINE_string('output_dir', 'output',
 flags.DEFINE_string('input_dir', 'input',
                     'Input directory where .dmp files downloaded.')
 
-MODULE_DIR = str(Path(os.path.dirname(__file__)))
+MODULE_DIR = dirname(dirname(abspath(__file__)))
 
 
 class DataFrameGenerator:
@@ -268,18 +268,17 @@ class DataFrameGenerator:
         return df
 
 
-
 class DivisionCls:
     """Class to process division.dmp file
     """
 
-    def create_dataframe(self) -> pd.DataFrame:
+    def create_dataframe(self, file_path: str) -> pd.DataFrame:
         """Creates Division DataFrame
 
         Returns:
             pd.DataFrame: Division DataFrame
         """
-        df = DataFrameGenerator().get_dataframe(SOURCE_FILE_PATH, DIVISION_DMP)
+        df = DataFrameGenerator().get_dataframe(file_path, DIVISION_DMP)
         df = DataFrameGenerator().assign_dataframe_header(df, DIVISION_COL)
         df = DataFrameGenerator().make_pascal_case(df, 'division_name')
         return df
@@ -300,7 +299,8 @@ class DivisionCls:
             mcf_file_path (str): MCF file path
         """
         with open(mcf_file_path, 'w') as file:
-            file.write(FIRST_MCF_ENTRY)  # Assuming FIRST_MCF_ENTRY is defined elsewhere
+            file.write(FIRST_MCF_ENTRY
+                       )  # Assuming FIRST_MCF_ENTRY is defined elsewhere
 
         global DIVISION_DICT
         df.sort_values(by=['division_namePascalCase'], inplace=True)
@@ -311,22 +311,25 @@ class DivisionCls:
                     division_name=row['division_name'].title(),
                     division_acronym=row['division_acronym'],
                 )
-                mcf_line = DivisionCls().add_description_mcf_line(mcf_line, row)
+                mcf_line = DivisionCls().add_description_mcf_line(
+                    mcf_line, row)
                 file.write(mcf_line)
-                DIVISION_DICT[row['division_code']] = 'dcs:BiologicalTaxonomicDivision' + row['division_namePascalCase']
+                DIVISION_DICT[row[
+                    'division_code']] = 'dcs:BiologicalTaxonomicDivision' + row[
+                        'division_namePascalCase']
 
 
 class NamesCls:
     """Class to process names.dmp file
     """
 
-    def create_dataframe(self) -> pd.DataFrame:
+    def create_dataframe(self, file_path: str) -> pd.DataFrame:
         """Creates Names DataFrame
 
         Returns:
             pd.DataFrame: Names DataFrame
         """
-        df = DataFrameGenerator().get_dataframe(SOURCE_FILE_PATH, NAMES_DMP)
+        df = DataFrameGenerator().get_dataframe(file_path, NAMES_DMP)
         df = DataFrameGenerator().assign_dataframe_header(df, NAMES_COL)
         return df
 
@@ -360,8 +363,8 @@ class NamesCls:
                     property_list.append(char_replace(row['name_txt']))
                     try:
                         property_list.append(
-                            char_replace(
-                                row['unique_name'].split('<')[1].split('>')[0]))
+                            char_replace(row['unique_name'].split('<')
+                                         [1].split('>')[0]))
                     except:
                         logging.error(f"Error in split {property_value}")
                 else:
@@ -411,16 +414,17 @@ class HostCls:
     """Class to process host.dmp file
     """
 
-    def create_dataframe(self) -> pd.DataFrame:
+    def create_dataframe(self, file_path: str) -> pd.DataFrame:
         """Creates Host DataFrame
 
         Returns:
             pd.DataFrame: Host DataFrame
         """
         global HOST_DICT
-        df = DataFrameGenerator().get_dataframe(SOURCE_FILE_PATH, HOST_DMP)
+        df = DataFrameGenerator().get_dataframe(file_path, HOST_DMP)
         df = DataFrameGenerator().assign_dataframe_header(df, HOST_COL)
-        df['DC_host_enum'] = df['host'].apply(lambda x: self.__hostdcsformat(x))
+        df['DC_host_enum'] = df['host'].apply(
+            lambda x: self.__hostdcsformat(x))
         return df
 
     def __hostdcsformat(self, host: str) -> str:
@@ -481,13 +485,13 @@ class NodesCls:
     """Class to process nodes.dmp file
     """
 
-    def create_dataframe(self) -> pd.DataFrame:
+    def create_dataframe(self, file_path: str) -> pd.DataFrame:
         """Creates Nodes DataFrame
 
         Returns:
             pd.DataFrame: Nodes DataFrame
         """
-        df = DataFrameGenerator().get_dataframe(SOURCE_FILE_PATH, NODES_DMP)
+        df = DataFrameGenerator().get_dataframe(file_path, NODES_DMP)
         df = DataFrameGenerator().assign_dataframe_header(df, NODES_COL)
         df = df.drop(['embl_code'], axis=1)
         df = df.drop(df.columns[5:], axis=1)
@@ -506,7 +510,8 @@ class NodesCls:
             file.write(NODES_ENUM_MCF)
             for ur in unique_rank:
                 rank_case = string.capwords(ur).replace(" ", "")
-                mcf_line = NODES_MCF.format(rank_case=rank_case, rank=ur.title())
+                mcf_line = NODES_MCF.format(rank_case=rank_case,
+                                            rank=ur.title())
                 file.write(mcf_line)
 
     def update_nodes_enum(self, df: pd.DataFrame) -> None:
@@ -516,13 +521,14 @@ class NodesCls:
             df (pd.DataFrame): Nodes DataFrame
         """
         global FINAL_NCBI_TAXONOMY
-        for index, row in df.iterrows():
+        for _, row in df.iterrows():
             try:
                 current_node = FINAL_NCBI_TAXONOMY[row['tax_id']]
                 current_node['parentDcid'] = TAX_ID_DCID_MAPPING[
                     row["parent_tax_id"]]
                 rank_case = string.capwords(row["rank"]).replace(" ", "")
-                current_node['taxonRank'] = "dcs:BiologicalTaxonomicRank" + rank_case
+                current_node[
+                    'taxonRank'] = "dcs:BiologicalTaxonomicRank" + rank_case
                 current_node['division'] = DIVISION_DICT[row["division_code"]]
                 current_node['hasInheritedDivision'] = True if row[
                     'inherited_division'] == 1 else False
@@ -536,14 +542,13 @@ class CategoriesCls:
     """Class to process nodes.dmp file
     """
 
-    def create_dataframe(self) -> pd.DataFrame:
+    def create_dataframe(self, file_path: str) -> pd.DataFrame:
         """Creates Categories DataFrame
 
         Returns:
             pd.DataFrame: Categories DataFrame
         """
-        df = DataFrameGenerator().get_dataframe(SOURCE_FILE_PATH,
-                                                CATEGORIES_DMP)
+        df = DataFrameGenerator().get_dataframe(file_path, CATEGORIES_DMP)
         df = DataFrameGenerator().assign_dataframe_header(df, CATEGORIES_COL)
         df = df.drop(['speciesTaxID'], axis=1)
         df['taxonTopLevelCategory'] = df['taxonTopLevelCategory'].apply(
@@ -619,7 +624,7 @@ def set_flages() -> None:
     global OUTPUT_FILE_PATH, SOURCE_FILE_PATH
     _FLAGS(sys.argv)
     OUTPUT_FILE_PATH = path_join(MODULE_DIR, _FLAGS.output_dir)
-    if not os.path.exists(os.path.join(MODULE_DIR, _FLAGS.output_dir)):
+    if not os.path.exists(join(MODULE_DIR, _FLAGS.output_dir)):
         os.mkdir(OUTPUT_FILE_PATH)
     SOURCE_FILE_PATH = path_join(MODULE_DIR, _FLAGS.input_dir)
 
@@ -634,34 +639,42 @@ def path_join(path: str, filename: str) -> str:
     Returns:
         str: full filename
     """
-    return os.path.join(path, filename)
+    return join(path, filename)
 
 
 def main(_):
     """Main method
     """
     global OUTPUT_FILE_PATH, SOURCE_FILE_PATH
+    logging.info("Start format NCBI Taxonomy")
     set_flages()
-    division_df = DivisionCls().create_dataframe()
+    logging.info("Processing Division dataframe")
+    division_df = DivisionCls().create_dataframe(SOURCE_FILE_PATH)
     DivisionCls().append_mcf_data(division_df,
                                   path_join(OUTPUT_FILE_PATH, OUTPUT_MCF_FILE))
-    names_df = NamesCls().create_dataframe()
+    names_df = NamesCls().create_dataframe(SOURCE_FILE_PATH)
+    logging.info("Processing Names dataframe")
     NamesCls().clean_names_dataframe(names_df)
     NamesCls().create_tax_id_dcid_mapping_file(
         path_join(OUTPUT_FILE_PATH, OUTPUT_TAXID_DCID_MAPPING_FILE))
-    host_df = HostCls().create_dataframe()
+    logging.info("Processing Host dataframe")
+    host_df = HostCls().create_dataframe(SOURCE_FILE_PATH)
     HostCls().append_mcf_data(host_df,
                               path_join(OUTPUT_FILE_PATH, OUTPUT_MCF_FILE))
     HostCls().update_host_enum(host_df)
-    nodes_df = NodesCls().create_dataframe()
+    logging.info("Processing Nodes dataframe")
+    nodes_df = NodesCls().create_dataframe(SOURCE_FILE_PATH)
     NodesCls().append_mcf_data(nodes_df,
                                path_join(OUTPUT_FILE_PATH, OUTPUT_MCF_FILE))
     NodesCls().update_nodes_enum(nodes_df)
-    categories_df = CategoriesCls().create_dataframe()
+    logging.info("Processing Categories dataframe")
+    categories_df = CategoriesCls().create_dataframe(SOURCE_FILE_PATH)
     CategoriesCls().update_categories_enum(categories_df)
+    logging.info("Processing Final dataframe")
     final_df = FinalDataFrameCls().createFinalDF()
     FinalDataFrameCls().create_final_csv(
         final_df, path_join(OUTPUT_FILE_PATH, OUTPUT_NCBI_TAXONOMY_CSV))
+    logging.info("NCBI Taxonomy processing completed")
 
 
 if __name__ == "__main__":
