@@ -1,0 +1,29 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_02_sept/data/statvar_imports/oecd_property_tax/test_data/sample_input/Tax_on_property_OECD_test_data.csv --pv_map=/usr/local/google/home/swethakumari/DC_02_sept/data/statvar_imports/oecd_property_tax/pv_map.csv --places_resolved_csv=/usr/local/google/home/swethakumari/DC_02_sept/data/statvar_imports/oecd_property_tax/Places_Resolved.csv --config=/usr/local/google/home/swethakumari/DC_02_sept/data/statvar_imports/oecd_property_tax/metadata.csv --output_path=/usr/local/google/home/swethakumari/DC_02_sept/data/statvar_imports/oecd_property_tax/test_data/sample_output/Tax_on_property_OECD" on 2024-09-03 07:19:26.747520
+
+Node: dcid:PropertyTax_EconomicActivity_AsAFractionOf_PropertyTax_EconomicActivity_GrossDomesticProduction
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:propertyTax
+statType: dcid:measuredValue
+measurementDenominator: dcid:PropertyTax_EconomicActivity_GrossDomesticProduction
+
+Node: dcid:PropertyTax_EconomicActivity_AsAFractionOf_TotalTax_EconomicActivity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:propertyTax
+statType: dcid:measuredValue
+measurementDenominator: dcid:TotalTax_EconomicActivity
+
+Node: dcid:PropertyTax_EconomicActivity_GrossDomesticProduction
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:propertyTax
+statType: dcid:measuredValue
+activitySource: dcid:GrossDomesticProduction
+
+Node: dcid:TotalTax_EconomicActivity
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:totalTax
+statType: dcid:measuredValue
+

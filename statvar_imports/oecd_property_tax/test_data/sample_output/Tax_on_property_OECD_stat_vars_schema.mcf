@@ -1,0 +1,6 @@
+Node: dcid:totalTax
+typeOf: dcs:Property
+name: "totalTax"
+rangeIncludes: dcid:TotalTaxEnum
+isProvisional: dcs:True
+
