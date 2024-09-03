@@ -110,7 +110,7 @@ More information about the NCBI Taxonomy database can be found [here](https://ww
 ##### Bash Scripts
 
 - [download.sh](download.sh) downloads the most recent release of the NCBI Taxonomy data.
-- [run.sh](run.sh) creates new taxonomy enum mfc and converts data into formatted CSV for import of data using categories.dmp, division.dmp, host.dmp, names.dmp & nodes.dmp files from download location
+- [run.sh](run.sh) creates new taxonomy enum mcf and converts data into formatted CSV for import of data using categories.dmp, division.dmp, host.dmp, names.dmp & nodes.dmp files from download location
 - [tests.sh](tests.sh) runs standard tests on CSV + tMCF pairs to check for proper formatting.
 
 ##### Python Scripts
