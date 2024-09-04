@@ -19,8 +19,5 @@
 
 ### How to run:
 
-`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=<input_file>.csv --pv_map=statvar_imports/brazil_dados/Auxilio_Brazil_MI_Social/pv_map.csv --places_resolved_csv=statvar_imports/brazil_dados/Auxilio_Brazil_MI_Social/Brazil_MunicipalityCodes_Places_Resolved.csv --config=<filepath/filename>.csv --output_path=<filepath/filename>`
-
-
-   
+`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=<input_file>.csv --pv_map=statvar_imports/brazil_dados/Auxilio_Brazil_MI_Social/pv_map.csv --places_resolved_csv=statvar_imports/brazil_dados/Auxilio_Brazil_MI_Social/Brazil_MunicipalityCodes_Places_Resolved.csv --config=<filepath/filename>.csv --output_path=<filepath/filename>
 
