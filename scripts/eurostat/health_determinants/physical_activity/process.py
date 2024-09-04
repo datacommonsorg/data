@@ -189,7 +189,7 @@ if __name__ == '__main__':
 
     # Defining Output Files
     data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "output")
+                                  "output_files")
 
     csv_name = "eurostat_population_physicalactivity.csv"
     mcf_name = "eurostat_population_physicalactivity.mcf"
