@@ -1,0 +1,101 @@
+country,counterpart_area,series,year,value,series_code
+Guinea,African Dev. Bank         ,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",1989-01-01,3200877.3,DT.AMT.DPPG.CD
+Kenya,African Dev. Bank         ,"PPG, multilateral concessional (AMT, current US$)",2006-01-01,4387737.1,DT.AMT.MLTC.CD
+Jordan,Japan,"Principal repayments on external debt, long-term (AMT, current US$)",1987-01-01,31108161.3,DT.AMT.DLXF.CD
+Ghana,Italy,"PPG, private creditors (AMT, current US$)",1998-01-01,4015000.0,DT.AMT.PRVT.CD
+Upper middle income,Serbia,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2024-01-01,21821793.7,DT.AMT.DPPG.CD
+Kenya,World Bank-IDA                         ,"PPG, multilateral (AMT, current US$)",1983-01-01,925000.0,DT.AMT.MLAT.CD
+Madagascar,India,"PPG, bilateral (AMT, current US$)",2029-01-01,1382428.6,DT.AMT.BLAT.CD
+Sub-Saharan Africa (excluding high income),Finland,"PPG, bilateral (AMT, current US$)",2004-01-01,1151466.7,DT.AMT.BLAT.CD
+East Asia & Pacific (excluding high income),Kuwait,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",1992-01-01,30561999.3,DT.AMT.DPPG.CD
+Brazil,Argentina,"PPG, private creditors (AMT, current US$)",1986-01-01,6286000.0,DT.AMT.PRVT.CD
+Sub-Saharan Africa (excluding high income),Japan,"PPG, bilateral concessional (AMT, current US$)",2003-01-01,13099503.3,DT.AMT.BLTC.CD
+Eswatini,African Dev. Bank         ,"Principal repayments on external debt, long-term (AMT, current US$)",2011-01-01,14259448.8,DT.AMT.DLXF.CD
+Upper middle income,World Bank-IBRD                         ,"PPG, multilateral (AMT, current US$)",2023-01-01,8165804081.1,DT.AMT.MLAT.CD
+Bhutan,World Bank-IDA                         ,"PPG, official creditors (AMT, current US$)",2023-01-01,8948397.6,DT.AMT.OFFT.CD
+Djibouti,Kuwait,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2011-01-01,2623455.0,DT.AMT.DPPG.CD
+Low income,European Economic Community (EEC),"PPG, official creditors (AMT, current US$)",1986-01-01,654460.4,DT.AMT.OFFT.CD
+South Asia,Japan,"PPG, commercial banks (AMT, current US$)",1998-01-01,257335971.1,DT.AMT.PCBK.CD
+St. Vincent and the Grenadines,Canada,"Principal repayments on external debt, long-term (AMT, current US$)",2019-01-01,1340000.0,DT.AMT.DLXF.CD
+Sri Lanka,"Germany, Fed. Rep. of","PPG, bilateral (AMT, current US$)",1983-01-01,3723346.2,DT.AMT.BLAT.CD
+Indonesia,Netherlands,"Principal repayments on external debt, long-term (AMT, current US$)",2013-01-01,195959430.1,DT.AMT.DLXF.CD
+Azerbaijan,"Germany, Fed. Rep. of","PPG, bilateral (AMT, current US$)",2019-01-01,18504125.4,DT.AMT.BLAT.CD
+"Gambia, The",Multiple Lenders,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2002-01-01,2002000.0,DT.AMT.DPPG.CD
+Sub-Saharan Africa (excluding high income),Ireland,"PPG, private creditors (AMT, current US$)",2002-01-01,874000.0,DT.AMT.PRVT.CD
+Cambodia,Japan,"PPG, bilateral concessional (AMT, current US$)",2012-01-01,1554288.3,DT.AMT.BLTC.CD
+Lower middle income,Turkiye,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2023-01-01,175381161.9,DT.AMT.DPPG.CD
+Mozambique,Netherlands,"PPG, bilateral (AMT, current US$)",1992-01-01,14249.3,DT.AMT.BLAT.CD
+Middle East & North Africa (excluding high income),Brazil,"Principal repayments on external debt, long-term (AMT, current US$)",1982-01-01,40624000.0,DT.AMT.DLXF.CD
+Mauritania,Austria,"PPG, bilateral concessional (AMT, current US$)",1997-01-01,1481017.9,DT.AMT.BLTC.CD
+Algeria,Bulgaria,"PPG, bilateral (AMT, current US$)",1986-01-01,685000.0,DT.AMT.BLAT.CD
+Costa Rica,United States,"PPG, bilateral (AMT, current US$)",1993-01-01,18178000.0,DT.AMT.BLAT.CD
+South Asia,United Arab Emirates,"PPG, bilateral (AMT, current US$)",2026-01-01,10716254.0,DT.AMT.BLAT.CD
+Iraq,"Germany, Fed. Rep. of","Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2022-01-01,111352061.9,DT.AMT.DPPG.CD
+Low & middle income,Multiple Lenders,"PPG, commercial banks (AMT, current US$)",2017-01-01,31631556065.0,DT.AMT.PCBK.CD
+Europe & Central Asia (excluding high income),United States,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2006-01-01,810539000.0,DT.AMT.DPPG.CD
+Lower middle income,"Germany, Fed. Rep. of","Principal repayments on external debt, long-term (AMT, current US$)",1970-01-01,172761070.9,DT.AMT.DLXF.CD
+Middle income,Mexico,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",1984-01-01,84512000.0,DT.AMT.DPPG.CD
+Jamaica,United Kingdom,"Principal repayments on external debt, long-term (AMT, current US$)",1987-01-01,9277521.4,DT.AMT.DLXF.CD
+Latin America & Caribbean (excluding high income),Finland,"PPG, other private creditors (AMT, current US$)",1995-01-01,10003000.0,DT.AMT.PROP.CD
+Viet Nam,World Bank-IDA                         ,"PPG, multilateral concessional (AMT, current US$)",1997-01-01,1194000.0,DT.AMT.MLTC.CD
+Sub-Saharan Africa (excluding high income),United States,"PPG, other private creditors (AMT, current US$)",1995-01-01,33593000.0,DT.AMT.PROP.CD
+Myanmar,Netherlands,"PPG, private creditors (AMT, current US$)",1972-01-01,186618.5,DT.AMT.PRVT.CD
+Uzbekistan,Ireland,"Principal repayments on external debt, long-term (AMT, current US$)",2023-01-01,27080666.7,DT.AMT.DLXF.CD
+Algeria,"Germany, Fed. Rep. of","PPG, private creditors (AMT, current US$)",1992-01-01,392313686.5,DT.AMT.PRVT.CD
+Honduras,United States,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",1979-01-01,10396000.0,DT.AMT.DPPG.CD
+Middle income,Bermuda,"PPG, other private creditors (AMT, current US$)",1983-01-01,41452.6,DT.AMT.PROP.CD
+Gabon,Belgium,"PPG, bilateral (AMT, current US$)",2013-01-01,308082.4,DT.AMT.BLAT.CD
+IDA total,France,"Principal repayments on external debt, long-term (AMT, current US$)",2020-01-01,686149539.7,DT.AMT.DLXF.CD
+Low & middle income,Trinidad & Tobago,"PPG, official creditors (AMT, current US$)",2026-01-01,3411375.0,DT.AMT.OFFT.CD
+Tunisia,OPEC Fund for International Dev.,"PPG, multilateral (AMT, current US$)",2007-01-01,824000.0,DT.AMT.MLAT.CD
+Low & middle income,Latin American Agribusiness Dev. Corp. (LAAD),"PPG, multilateral (AMT, current US$)",1983-01-01,857000.0,DT.AMT.MLAT.CD
+IDA only,United Kingdom,"PPG, private creditors (AMT, current US$)",1988-01-01,119651903.1,DT.AMT.PRVT.CD
+Low & middle income,France,"PPG, commercial banks (AMT, current US$)",1987-01-01,517820363.2,DT.AMT.PCBK.CD
+Latin America & Caribbean (excluding high income),France,"Principal repayments on external debt, long-term (AMT, current US$)",1991-01-01,485626803.7,DT.AMT.DLXF.CD
+IDA total,Canada,"PPG, commercial banks (AMT, current US$)",1981-01-01,18268126.9,DT.AMT.PCBK.CD
+Pakistan,World,"PNG, commercial banks and other creditors (AMT, current US$)",1998-01-01,300000000.0,DT.AMT.PNGC.CD
+Latin America & Caribbean (excluding high income),Switzerland,"PPG, official creditors (AMT, current US$)",2015-01-01,24791044.7,DT.AMT.OFFT.CD
+Colombia,Israel,"PPG, commercial banks (AMT, current US$)",2004-01-01,933000.0,DT.AMT.PCBK.CD
+Low income,Arab Fund for Economic & Social Development,"PPG, official creditors (AMT, current US$)",2023-01-01,297985323.4,DT.AMT.OFFT.CD
+Argentina,Spain,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2013-01-01,159493689.0,DT.AMT.DPPG.CD
+Low income,Belgium,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",1977-01-01,4076747.4,DT.AMT.DPPG.CD
+IDA total,International Finance Corporation,"PPG, multilateral (AMT, current US$)",1970-01-01,3333000.0,DT.AMT.MLAT.CD
+North Macedonia,"Germany, Fed. Rep. of","PPG, other private creditors (AMT, current US$)",2011-01-01,283140.6,DT.AMT.PROP.CD
+East Asia & Pacific (excluding high income),China,"PPG, commercial banks (AMT, current US$)",2004-01-01,374000.0,DT.AMT.PCBK.CD
+Low income,Spain,"Principal repayments on external debt, long-term (AMT, current US$)",2022-01-01,4397833.1,DT.AMT.DLXF.CD
+Russian Federation,European Bank for Reconstruction and Dev. (EBRD),"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2011-01-01,56737000.0,DT.AMT.DPPG.CD
+IDA only,United Arab Emirates,"PPG, official creditors (AMT, current US$)",2024-01-01,81537343.8,DT.AMT.OFFT.CD
+Myanmar,Austria,"PPG, private creditors (AMT, current US$)",1983-01-01,4980586.8,DT.AMT.PRVT.CD
+Armenia,World,"Principal repayments on external debt, long-term (AMT, current US$)",2010-01-01,857044767.0,DT.AMT.DLXF.CD
+Low & middle income,European Development Fund (EDF),"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",1983-01-01,3555936.3,DT.AMT.DPPG.CD
+Low & middle income,Qatar,"PPG, commercial banks (AMT, current US$)",1997-01-01,5760011.0,DT.AMT.PCBK.CD
+Middle income,Dev. Bank of the Central African States (BDEAC),"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2026-01-01,33486162.9,DT.AMT.DPPG.CD
+IDA only,Nordic Development Fund,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2013-01-01,14284371.8,DT.AMT.DPPG.CD
+Uganda,Islamic Dev. Bank,"PPG, multilateral concessional (AMT, current US$)",1994-01-01,232206.3,DT.AMT.MLTC.CD
+India,Kuwait,"PPG, official creditors (AMT, current US$)",1999-01-01,18560391.4,DT.AMT.OFFT.CD
+Kenya,China,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2000-01-01,89629.7,DT.AMT.DPPG.CD
+Lower middle income,Turkiye,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2018-01-01,66549964.5,DT.AMT.DPPG.CD
+Turkiye,Council of Europe,"PPG, official creditors (AMT, current US$)",1997-01-01,267089561.4,DT.AMT.OFFT.CD
+"Congo, Rep.","Germany, Fed. Rep. of","PPG, private creditors (AMT, current US$)",1990-01-01,9000.0,DT.AMT.PRVT.CD
+Low & middle income,Italy,"PPG, private creditors (AMT, current US$)",2019-01-01,194465608.9,DT.AMT.PRVT.CD
+Grenada,Caribbean Dev. Bank,"PPG, official creditors (AMT, current US$)",1991-01-01,790000.0,DT.AMT.OFFT.CD
+Costa Rica,Sweden,"PPG, commercial banks (AMT, current US$)",1982-01-01,354384.1,DT.AMT.PCBK.CD
+Cameroon,World Bank-IDA                         ,"PPG, official creditors (AMT, current US$)",2026-01-01,121360789.1,DT.AMT.OFFT.CD
+Least developed countries: UN classification,Serbia,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",1995-01-01,15031601.1,DT.AMT.DPPG.CD
+"Iran, Islamic Rep.",Sweden,"PPG, private creditors (AMT, current US$)",2012-01-01,4797000.0,DT.AMT.PRVT.CD
+Colombia,Nordic Development Fund,"PPG, multilateral (AMT, current US$)",2013-01-01,23240.0,DT.AMT.MLAT.CD
+Latin America & Caribbean (excluding high income),Italy,"PPG, private creditors (AMT, current US$)",1990-01-01,55182239.8,DT.AMT.PRVT.CD
+Sudan,International Fund for Agricultural Dev.,"PPG, official creditors (AMT, current US$)",2007-01-01,661345.6,DT.AMT.OFFT.CD
+Sub-Saharan Africa (excluding high income),Bondholders,"Principal repayments on external debt, private nonguaranteed (PNG) (AMT, current US$)",2025-01-01,721864202.2,DT.AMT.DPNG.CD
+Niger,European Development Fund (EDF),"PPG, multilateral (AMT, current US$)",2003-01-01,89335.4,DT.AMT.MLAT.CD
+IDA total,Arab African International Bank,"Principal repayments on external debt, long-term (AMT, current US$)",2027-01-01,10056828.1,DT.AMT.DLXF.CD
+Brazil,Serbia,"PPG, private creditors (AMT, current US$)",1977-01-01,5650000.0,DT.AMT.PRVT.CD
+Low & middle income,Peru,"PPG, other private creditors (AMT, current US$)",1997-01-01,340000.0,DT.AMT.PROP.CD
+Jamaica,China,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2009-01-01,30303474.9,DT.AMT.DPPG.CD
+Haiti,World,"PPG, bilateral (AMT, current US$)",2004-01-01,3687192.0,DT.AMT.BLAT.CD
+East Asia & Pacific (excluding high income),World,"PPG, multilateral concessional (AMT, current US$)",2014-01-01,1569540317.7,DT.AMT.MLTC.CD
+Morocco,Belgium,"PPG, private creditors (AMT, current US$)",2015-01-01,22191.7,DT.AMT.PRVT.CD
+Algeria,Belgium,"PPG, private creditors (AMT, current US$)",2008-01-01,28690611.0,DT.AMT.PRVT.CD
+"Yemen, Rep.",Kuwait,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",1998-01-01,0.0,DT.AMT.DPPG.CD
+Kenya,Netherlands,"PPG, bilateral (AMT, current US$)",1997-01-01,7563956.6,DT.AMT.BLAT.CD
+"Congo, Rep.",Lebanon,"Principal repayments on external debt, public and publicly guaranteed (PPG) (AMT, current US$)",2015-01-01,4391732.1,DT.AMT.DPPG.CD

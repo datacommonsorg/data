@@ -1,0 +1,16 @@
+Node: dcid:International Monetary Fund
+typeOf: dcid:LendingEntityEnum
+name: "International  Monetary  Fund"
+isProvisional: dcs:True
+
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderInternational_Monetary_Fund
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender International_ Monetary_ Fund"
+isProvisional: dcs:True
+

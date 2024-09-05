@@ -1,0 +1,9 @@
+Node: E:Principle->E0
+observationDate: C:Principle->observationDate
+observationAbout: C:Principle->observationAbout
+value: C:Principle->value
+variableMeasured: C:Principle->variableMeasured
+unit: C:Principle->unit
+measurementMethod: C:Principle->measurementMethod
+observationPeriod: P1Y
+typeOf: dcs:StatVarObservation
