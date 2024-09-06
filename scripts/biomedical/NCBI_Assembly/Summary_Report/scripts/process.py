@@ -21,7 +21,6 @@
 # @file_input: assembly_summary_genbank.txt and assembly_summary_refseq.txt
 # @file_output: formatted ncbi_assembly_summary.csv
 
-
 # import environment
 from absl import flags
 from pathlib import Path
@@ -33,19 +32,13 @@ import pandas as pd
 import os
 import sys
 
-
 # Declare Universal Variables
 TAX_ID_DCID_MAPPING = {}
 
 MODULE_DIR = str(Path(os.path.dirname(__file__)))
 
 TEXT_COLUMNS = [
-'breed',
-'cultivar',
-'ecotype',
-'infraspecific_name',
-'isolate',
-'strain'
+    'breed', 'cultivar', 'ecotype', 'infraspecific_name', 'isolate', 'strain'
 ]
 
 
@@ -96,8 +89,9 @@ def tax_id(df):
 	"""
     df['taxid'] = df.apply(lambda row: '' if str(row['taxid']) == str(row[
         'species_taxid']) else TAX_ID_DCID_MAPPING.get(row['taxid'], ''),
-                            axis=1)
-    df['taxid'] = df['taxid'].astype(str).str.replace('dcid:', '', regex=False)  # Remove dcid prefix
+                           axis=1)
+    df['taxid'] = df['taxid'].astype(str).str.replace(
+        'dcid:', '', regex=False)  # Remove dcid prefix
     # Set values that don't start with 'bio/' to ''
     df.loc[~df['taxid'].astype(str).str.startswith('bio/'), 'taxid'] = ''
     return df
@@ -113,9 +107,11 @@ def species_tax_id(df):
 	"""
     df['species_taxid'] = df['species_taxid'].map(TAX_ID_DCID_MAPPING).fillna(
         df['species_taxid'])
-    df['species_taxid'] = df['species_taxid'].astype(str).str.replace('dcid:', '', regex=False)  # Remove dcid prefix
+    df['species_taxid'] = df['species_taxid'].astype(str).str.replace(
+        'dcid:', '', regex=False)  # Remove dcid prefix
     # Set values that don't start with 'bio/' to ''
-    df.loc[~df['species_taxid'].astype(str).str.startswith('bio/'), 'species_taxid'] = ''
+    df.loc[~df['species_taxid'].astype(str).str.startswith('bio/'),
+           'species_taxid'] = ''
     return df
 
 
@@ -186,7 +182,8 @@ def infraspecific_name(df):
 
     # Iterate over the dictionary to process each subtype
     for col, str_start in dict_strings.items():
-        df = split_infraspecific_subtype(df, 'infraspecific_name', col, str_start)
+        df = split_infraspecific_subtype(df, 'infraspecific_name', col,
+                                         str_start)
 
     return df
 
@@ -219,14 +216,14 @@ def format_text_strings(df, col_names):
 
     for col in col_names:
         df[col] = df[col].str.rstrip()  # Remove trailing whitespace
-        df[col] = df[col].replace([''],np.nan)  # replace missing values with np.nan
+        df[col] = df[col].replace([''],
+                                  np.nan)  # replace missing values with np.nan
 
         # Quote only string values
         mask = df[col].apply(is_not_none)
         df.loc[mask, col] = '"' + df.loc[mask, col].astype(str) + '"'
 
     return df
-
 
 
 def assembly_level(df):
@@ -338,7 +335,6 @@ def relation_to_type_material(df):
     return df
 
 
-
 def assembly_type(df):
     """Replacing columns values to required property value.
 	Args:
@@ -399,19 +395,17 @@ def group(df):
     df['group'] = df['group'].map(conversion_to_group).fillna(df['group'])
     return df
 
+
 def set_flags():
     global _FLAGS
     _FLAGS = flags.FLAGS
     flags.DEFINE_string('output_dir', 'output',
                         'Output directory for generated files.')
-    flags.DEFINE_string('input_dir',
-                        'input/assembly_summary_genbank.txt',
+    flags.DEFINE_string('input_dir', 'input/assembly_summary_genbank.txt',
                         'Input directory where .txt files downloaded.')
-    flags.DEFINE_string('input_dir1',
-                        'input/assembly_summary_refseq.txt',
+    flags.DEFINE_string('input_dir1', 'input/assembly_summary_refseq.txt',
                         'Output directory for generated files.')
-    flags.DEFINE_string('tax_id_dcid_mapping',
-                        'tax_id_dcid_mapping.txt',
+    flags.DEFINE_string('tax_id_dcid_mapping', 'tax_id_dcid_mapping.txt',
                         'Input directory where .txt files downloaded.')
 
 
@@ -456,7 +450,7 @@ def main(_FLAGS):
     # Perform operations after replacing NaN
     df.loc[~df['gbrs_paired_asm'].str.startswith('GC') &
            df['assembly_accession'].isin(ref_gbrs_paired_asm),
-            'gbrs_paired_asm'] = df['assembly_accession']
+           'gbrs_paired_asm'] = df['assembly_accession']
 
     with open(tax_id_dcid_mapping, 'r') as file:
         csv_reader = csv.DictReader(file)

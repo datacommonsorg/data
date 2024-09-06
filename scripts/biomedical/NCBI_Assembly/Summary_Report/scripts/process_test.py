@@ -31,32 +31,40 @@ from os.path import dirname, abspath, join
 
 _FLAGS = None
 
-
 # Compute the directory path where this module is located
 MODULE_DIR_PATH = dirname(dirname(abspath(__file__)))
 
+
 def set_flag():
-	global _FLAGS
-	_FLAGS = flags.FLAGS # Initialize the _FLAGS with the flags object
+    global _FLAGS
+    _FLAGS = flags.FLAGS  # Initialize the _FLAGS with the flags object
     # Define the output directory for generated files
-	flags.DEFINE_string('output_dir', os.path.join(MODULE_DIR_PATH, 'test_data/output_file/'),
+    flags.DEFINE_string('output_dir',
+                        os.path.join(MODULE_DIR_PATH, 'test_data/output_file/'),
                         'Output directory for generated files.')
 
     # Define the input directory for assembly summary GenBank files
-	flags.DEFINE_string('input_dir', os.path.join(MODULE_DIR_PATH,
-                        'test_data/input/assembly_summary_genbank.txt') ,
-                        'Input directory where .txt files downloaded.')
+    flags.DEFINE_string(
+        'input_dir',
+        os.path.join(MODULE_DIR_PATH,
+                     'test_data/input/assembly_summary_genbank.txt'),
+        'Input directory where .txt files downloaded.')
 
     # Define the input directory for assembly summary RefSeq files
-	flags.DEFINE_string('input_dir1', os.path.join(MODULE_DIR_PATH,
-                        'test_data/input/assembly_summary_refseq.txt') ,
-                        'Output directory for generated files.')
+    flags.DEFINE_string(
+        'input_dir1',
+        os.path.join(MODULE_DIR_PATH,
+                     'test_data/input/assembly_summary_refseq.txt'),
+        'Output directory for generated files.')
 
     # Define the input directory for tax ID to DCID mapping files
-	flags.DEFINE_string('tax_id_dcid_mapping', os.path.join(MODULE_DIR_PATH,
-                        'test_data/input/tax_id_dcid_mapping.txt') ,
-                        'Input directory where .txt files downloaded.')
-	_FLAGS(sys.argv)
+    flags.DEFINE_string(
+        'tax_id_dcid_mapping',
+        os.path.join(MODULE_DIR_PATH,
+                     'test_data/input/tax_id_dcid_mapping.txt'),
+        'Input directory where .txt files downloaded.')
+    _FLAGS(sys.argv)
+
 
 class TestSummaryReport(unittest.TestCase):
     """
@@ -75,11 +83,12 @@ class TestSummaryReport(unittest.TestCase):
         main(_FLAGS)
         # Compare the generated CSV file with the expected CSV file
         same = filecmp.cmp(
-            os.path.join(_FLAGS.output_dir,'ncbi_assembly_summary.csv'), MODULE_DIR_PATH +
+            os.path.join(_FLAGS.output_dir,
+                         'ncbi_assembly_summary.csv'), MODULE_DIR_PATH +
             '/test_data/output_file/expected_ncbi_assembly_summary.csv')
         # Assert that the files are identical
         self.assertTrue(same)
 
 
 if __name__ == '__main__':
-    unittest.main() # Run all test cases
+    unittest.main()  # Run all test cases
