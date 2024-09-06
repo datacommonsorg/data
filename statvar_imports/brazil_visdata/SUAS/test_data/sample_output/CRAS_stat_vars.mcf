@@ -1,0 +1,13 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/brazil_visdata/SUAS/test_data/sample_input/Centros_de_Referência_em_Assistência_Social_CRAS_com_cofinanciamento_do_Ministério_da_Cidadania_Acumulado_data.csv --pv_map=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/brazil_visdata/SUAS/CommunityServices_Commonpvmap_pvmap.csv --config=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/brazil_visdata/SUAS/CommunityServices_Commonpvmap_metadata.csv --output_path=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/brazil_visdata/SUAS/test_data/sample_output/CRAS" on 2024-09-06 12:16:01.707958
+
+Node: dcid:CumulativeCount_CivicStructure_MinistryOfCitizenship_Cofinancing_BRASocialAssistanceReferenceCenters
+typeOf: dcid:StatisticalVariable
+name: "Social Assistance Reference Centers (CRAS) with co-financing from the Ministry of Citizenship (Accumulated)"
+populationType: dcid:CivicStructure
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+financePartner: dcid:MinistryOfCitizenship
+financeType: dcid:Cofinancing
+nameWithLanguage: "Centros de Referência em Assistência Social (CRAS) com cofinanciamento do Ministério da Cidadania (Acumulado)@pt"
+placeCategory: dcid:BRA_SocialAssistanceReferenceCenters
+
