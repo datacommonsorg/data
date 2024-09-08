@@ -1,0 +1,554 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/spateriya/brazil_pnadct_pr/data/statvar_imports/brazil_pact_against_hunger/pnadct/test_data/sample_input/tabela5434.xlsx --pv_map=/usr/local/google/home/spateriya/brazil_pnadct_pr/data/statvar_imports/brazil_pact_against_hunger/pnadct/pv_map.csv --places_resolved_csv=/usr/local/google/home/spateriya/brazil_pnadct_pr/data/statvar_imports/brazil_pact_against_hunger/pnadct/Brazil_Places_Resolved.csv --config=/usr/local/google/home/spateriya/brazil_pnadct_pr/data/statvar_imports/brazil_pact_against_hunger/pnadct/metadata.csv --output_path=/usr/local/google/home/spateriya/brazil_pnadct_pr/data/statvar_imports/brazil_pact_against_hunger/pnadct/test_data/sample_output/sample_data --existing_statvar_mcf=stat_vars.mcf" on 2024-09-08 05:07:14.063398
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_AccommodationAndfood_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Accommodation and food"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Alojamento e alimentação @pt"
+economicSector: dcid:AccommodationAndfood
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_AccommodationAndfood_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Accommodation and food"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Alojamento e alimentação @pt"
+economicSector: dcid:AccommodationAndfood
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_AgricultureOrLivestockOrForestryOrFishingAndAquaculture_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Agriculture  livestock  forestry  fishing and aquaculture"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Agricultura  pecuária  produção florestal  pesca e aquicultura @pt"
+economicSector: dcid:Agriculture__Livestock__Forestry__FishingAndAquaculture
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_AgricultureOrLivestockOrForestryOrFishingAndAquaculture_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Agriculture  livestock  forestry  fishing and aquaculture"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Agricultura  pecuária  produção florestal  pesca e aquicultura @pt"
+economicSector: dcid:Agriculture__Livestock__Forestry__FishingAndAquaculture
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_Construction_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Construction"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Construção @pt"
+economicSector: dcid:Construction
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_Construction_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Construction"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Construção @pt"
+economicSector: dcid:Construction
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_DomesticServices_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Domestic services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Serviços domésticos @pt"
+economicSector: dcid:DomesticServices
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_DomesticServices_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Domestic services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Serviços domésticos @pt"
+economicSector: dcid:DomesticServices
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_GeneralIndustry_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week General industry"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Indústria geral @pt"
+economicSector: dcid:GeneralIndustry
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_GeneralIndustry_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week General industry"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Indústria geral @pt"
+economicSector: dcid:GeneralIndustry
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_InformationOrCommunicationAndFinancialOrRealEstateOrProfessionalAndAdministrative_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Information  communication and financial  real estate  professional and administrative activities"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Informação  comunicação e atividades financeiras  imobiliárias  profissionais e administrativas @pt"
+economicSector: dcid:Information__CommunicationAndFinancial__RealEstate__ProfessionalAndAdministrative
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_InformationOrCommunicationAndFinancialOrRealEstateOrProfessionalAndAdministrative_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Information  communication and financial  real estate  professional and administrative activities"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Informação  comunicação e atividades financeiras  imobiliárias  profissionais e administrativas @pt"
+economicSector: dcid:Information__CommunicationAndFinancial__RealEstate__ProfessionalAndAdministrative
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_OtherServices_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Other services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Outros serviços @pt"
+economicSector: dcid:OtherServices
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_OtherServices_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Other services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Outros serviços @pt"
+economicSector: dcid:OtherServices
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_PoorlyDefinedActivities_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Poorly defined activities"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Atividades mal definidas @pt"
+economicSector: dcid:PoorlyDefinedActivities
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_PoorlyDefinedActivities_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Poorly defined activities"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Atividades mal definidas @pt"
+economicSector: dcid:PoorlyDefinedActivities
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_PublicAdministrationOrDefenseOrSocialSecurityOrEducationOrHumanHealthOrSocialServices_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Public administration  defense  social security  education  human health and social services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Administração pública  defesa  seguridade social  educação  saúde humana e serviços sociais @pt"
+economicSector: dcid:PublicAdministration__Defense__SocialSecurity__Education__HumanHealth__SocialServices
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_PublicAdministrationOrDefenseOrSocialSecurityOrEducationOrHumanHealthOrSocialServices_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Public administration  defense  social security  education  human health and social services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Administração pública  defesa  seguridade social  educação  saúde humana e serviços sociais @pt"
+economicSector: dcid:PublicAdministration__Defense__SocialSecurity__Education__HumanHealth__SocialServices
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_TradeOrRepairOfMotorVehiclesAndMotorcycles_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Trade  repair of motor vehicles and motorcycles"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Comércio  reparação de veículos automotores e motocicletas @pt"
+economicSector: dcid:Trade__RepairOfMotorVehiclesAndMotorcycles
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_TradeOrRepairOfMotorVehiclesAndMotorcycles_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Trade  repair of motor vehicles and motorcycles"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Comércio  reparação de veículos automotores e motocicletas @pt"
+economicSector: dcid:Trade__RepairOfMotorVehiclesAndMotorcycles
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_TransformationIndustry_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Transformation industry"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Indústria de transformação @pt"
+economicSector: dcid:TransformationIndustry
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_TransformationIndustry_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Transformation industry"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Indústria de transformação @pt"
+economicSector: dcid:TransformationIndustry
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_TransportOrStorageAndMail_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - People aged 14 or over employed in the reference week Transport  storage and mail"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Transporte  armazenagem e correio @pt"
+economicSector: dcid:Transport__StorageAndMail
+employmentStatus: dcid:Employed
+
+Node: dcid:CoefficientOfVariation_Count_Person_14OrMoreYears_TransportOrStorageAndMail_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Coefficient of variation - Percentage distribution of people aged 14 or over employed in the reference week Transport  storage and mail"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:coefficientOfVariationValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Coeficiente de variação - Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Transporte  armazenagem e correio @pt"
+economicSector: dcid:Transport__StorageAndMail
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_AccommodationAndfood_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Accommodation and food"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Alojamento e alimentação @pt"
+economicSector: dcid:AccommodationAndfood
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_AccommodationAndfood_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Accommodation and food"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Alojamento e alimentação @pt"
+economicSector: dcid:AccommodationAndfood
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_AgricultureOrLivestockOrForestryOrFishingAndAquaculture_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Agriculture  livestock  forestry  fishing and aquaculture"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Agricultura  pecuária  produção florestal  pesca e aquicultura @pt"
+economicSector: dcid:Agriculture__Livestock__Forestry__FishingAndAquaculture
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_AgricultureOrLivestockOrForestryOrFishingAndAquaculture_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Agriculture  livestock  forestry  fishing and aquaculture"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Agricultura  pecuária  produção florestal  pesca e aquicultura @pt"
+economicSector: dcid:Agriculture__Livestock__Forestry__FishingAndAquaculture
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_Construction_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Construction"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Construção @pt"
+economicSector: dcid:Construction
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_Construction_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Construction"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Construção @pt"
+economicSector: dcid:Construction
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_DomesticServices_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Domestic services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Serviços domésticos @pt"
+economicSector: dcid:DomesticServices
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_DomesticServices_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Domestic services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Serviços domésticos @pt"
+economicSector: dcid:DomesticServices
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_GeneralIndustry_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week General industry"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Indústria geral @pt"
+economicSector: dcid:GeneralIndustry
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_InformationOrCommunicationAndFinancialOrRealEstateOrProfessionalAndAdministrative_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Information  communication and financial  real estate  professional and administrative activities"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Informação  comunicação e atividades financeiras  imobiliárias  profissionais e administrativas @pt"
+economicSector: dcid:Information__CommunicationAndFinancial__RealEstate__ProfessionalAndAdministrative
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_InformationOrCommunicationAndFinancialOrRealEstateOrProfessionalAndAdministrative_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Information  communication and financial  real estate  professional and administrative activities"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Informação  comunicação e atividades financeiras  imobiliárias  profissionais e administrativas @pt"
+economicSector: dcid:Information__CommunicationAndFinancial__RealEstate__ProfessionalAndAdministrative
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_OtherServices_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Other services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Outros serviços @pt"
+economicSector: dcid:OtherServices
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_OtherServices_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Other services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Outros serviços @pt"
+economicSector: dcid:OtherServices
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_PoorlyDefinedActivities_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Poorly defined activities"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Atividades mal definidas @pt"
+economicSector: dcid:PoorlyDefinedActivities
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_PoorlyDefinedActivities_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Poorly defined activities"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Atividades mal definidas @pt"
+economicSector: dcid:PoorlyDefinedActivities
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_PublicAdministrationOrDefenseOrSocialSecurityOrEducationOrHumanHealthOrSocialServices_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Public administration  defense  social security  education  human health and social services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Administração pública  defesa  seguridade social  educação  saúde humana e serviços sociais @pt"
+economicSector: dcid:PublicAdministration__Defense__SocialSecurity__Education__HumanHealth__SocialServices
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_PublicAdministrationOrDefenseOrSocialSecurityOrEducationOrHumanHealthOrSocialServices_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Public administration  defense  social security  education  human health and social services"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Administração pública  defesa  seguridade social  educação  saúde humana e serviços sociais @pt"
+economicSector: dcid:PublicAdministration__Defense__SocialSecurity__Education__HumanHealth__SocialServices
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_TradeOrRepairOfMotorVehiclesAndMotorcycles_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Trade  repair of motor vehicles and motorcycles"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Comércio  reparação de veículos automotores e motocicletas @pt"
+economicSector: dcid:Trade__RepairOfMotorVehiclesAndMotorcycles
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_TradeOrRepairOfMotorVehiclesAndMotorcycles_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Trade  repair of motor vehicles and motorcycles"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Comércio  reparação de veículos automotores e motocicletas @pt"
+economicSector: dcid:Trade__RepairOfMotorVehiclesAndMotorcycles
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_TransformationIndustry_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Transformation industry"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Indústria de transformação @pt"
+economicSector: dcid:TransformationIndustry
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_TransformationIndustry_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Transformation industry"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Indústria de transformação @pt"
+economicSector: dcid:TransformationIndustry
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_TransportOrStorageAndMail_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week Transport  storage and mail"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Transporte  armazenagem e correio @pt"
+economicSector: dcid:Transport__StorageAndMail
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_14OrMoreYears_TransportOrStorageAndMail_Employed_AsAFractionOf_Count_Person_Years14Onwards_Employed
+typeOf: dcid:StatisticalVariable
+name: "Percentage distribution of people aged 14 or over employed in the reference week Transport  storage and mail"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Years14Onwards_Employed
+age: [14 - Years]
+alternateName: "Distribuição percentual das pessoas de 14 anos ou mais de idade ocupadas na semana de referência Transporte  armazenagem e correio @pt"
+economicSector: dcid:Transport__StorageAndMail
+employmentStatus: dcid:Employed
+
+Node: dcid:Count_Person_Years14Onwards_GeneralIndustry_Employed
+typeOf: dcid:StatisticalVariable
+name: "Persons aged 14 or over employed in the reference week General industry"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [14 - Years]
+alternateName: "Pessoas de 14 anos ou mais de idade ocupadas na semana de referência Indústria geral @pt"
+economicSector: dcid:GeneralIndustry
+employmentStatus: dcid:Employed
+

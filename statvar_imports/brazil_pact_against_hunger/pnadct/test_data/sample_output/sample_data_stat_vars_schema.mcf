@@ -1,0 +1,66 @@
+Node: dcid:employmentStatus
+typeOf: dcs:Property
+name: "employmentStatus"
+rangeIncludes: dcid:EmploymentEnum
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:Person
+
+Node: dcid:Agriculture__Livestock__Forestry__FishingAndAquaculture
+typeOf: dcid:NACEEnum
+name: "Agriculture__ Livestock__ Forestry__ Fishing And Aquaculture"
+isProvisional: dcs:True
+
+Node: dcid:age
+typeOf: dcs:Property
+name: "age"
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:economicSector
+typeOf: dcs:Property
+name: "economicSector"
+rangeIncludes: dcid:EconomicSectorEnum,dcid:WorkZoneTypeEnum,dcid:ConsumerGoodsCategoryEnum
+
+Node: dcid:TransformationIndustry
+typeOf: dcid:NACEEnum
+name: "Transformation Industry"
+isProvisional: dcs:True
+
+Node: dcid:Trade__RepairOfMotorVehiclesAndMotorcycles
+typeOf: dcid:NACEEnum
+name: "Trade__ Repair Of Motor Vehicles And Motorcycles"
+isProvisional: dcs:True
+
+Node: dcid:Transport__StorageAndMail
+typeOf: dcid:NACEEnum
+name: "Transport__ Storage And Mail"
+isProvisional: dcs:True
+
+Node: dcid:AccommodationAndfood
+typeOf: dcid:NACEEnum
+name: "Accommodation Andfood"
+isProvisional: dcs:True
+
+Node: dcid:Information__CommunicationAndFinancial__RealEstate__ProfessionalAndAdministrative
+typeOf: dcid:NACEEnum
+name: "Information__ Communication And Financial__ Real Estate__ Professional And Administrative"
+isProvisional: dcs:True
+
+Node: dcid:PublicAdministration__Defense__SocialSecurity__Education__HumanHealth__SocialServices
+typeOf: dcid:NACEEnum
+name: "Public Administration__ Defense__ Social Security__ Education__ Human Health__ Social Services"
+isProvisional: dcs:True
+
+Node: dcid:PoorlyDefinedActivities
+typeOf: dcid:NACEEnum
+name: "Poorly Defined Activities"
+isProvisional: dcs:True
+
+Node: dcid:coefficientOfVariationValue
+typeOf: dcs:Property
+name: "coefficientOfVariationValue"
+rangeIncludes: dcid:CoefficientOfVariationValueEnum
+isProvisional: dcs:True
+
