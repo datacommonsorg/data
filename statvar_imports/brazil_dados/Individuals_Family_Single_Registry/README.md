@@ -22,6 +22,3 @@
 
 `python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=<input_file>.csv --pv_map=statvar_imports/brazil_dados/Individuals_Family_Single_Registry/pv_map.csv --places_resolved_csv=statvar_imports/brazil_dados/Individuals_Family_Single_Registry/Brazil_MunicipalityCodes_Places_Resolved.csv --config=<filepath/filename>.csv --output_path=<filepath/filename>`
 
-
-   
-

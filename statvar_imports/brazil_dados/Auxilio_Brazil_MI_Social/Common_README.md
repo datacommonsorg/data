@@ -1,13 +1,13 @@
 ###  Auxilio Brazil Mi Social
 
-- import_name: "Auxilio_Brazil_Benifits_Program" and "Auxilio_Brazil_Extraordinary_Benifits_Program"
+- import_name: "Auxilio_Brazil_Benefits_Program" and "Auxilio_Brazil_Extraordinary_Benefits_Program"
 
 - source: https://www.gov.br/
           https://dados.gov.br/dados/busca?termo=auxilio%2520Brasil
           https://www.gov.br/pt-br/servicos/receber-o-auxilio-brasil-pab
           https://dados.gov.br/dados/conjuntos-dados/familias-por-faixa-de-renda-com-cadastro-atualizado-no-cadastro-unico---mi-social
 
-- how to download data: Manual download from source based on filter - `Auxilio Brazil Benifits Program and Auxilio Brazil Extraordinary Benifits Program`
+- how to download data: Manual download from source based on filter - `Auxilio Brazil Benefits Program and Auxilio Brazil Extraordinary Benefits Program`
 
 - place_resolution: Municipality codes of Brazil. (In place mapping, the municipal codes 293020 & 530010 are not mapped and there is no wikidata id in source)
 
