@@ -1,11 +1,11 @@
-###  Auxilio Brazil Mi Social
+###  Auxilio Brazil
 
 - import_name: "Auxilio_Brazil_Benefits_Program" and "Auxilio_Brazil_Extraordinary_Benefits_Program"
 
 - source: https://www.gov.br/
           https://dados.gov.br/dados/busca?termo=auxilio%2520Brasil
           https://www.gov.br/pt-br/servicos/receber-o-auxilio-brasil-pab
-          https://dados.gov.br/dados/conjuntos-dados/familias-por-faixa-de-renda-com-cadastro-atualizado-no-cadastro-unico---mi-social
+          https://dados.gov.br/dados/conjuntos-dados/familias-por-faixa-de-renda-com-cadastro-atualizado-no-cadastro-unico
 
 - how to download data: Manual download from source based on filter - `Auxilio Brazil Benefits Program and Auxilio Brazil Extraordinary Benefits Program`
 
@@ -18,6 +18,7 @@
 - type of place: AA,AA2, City. 
 
 ### How to run:
+`python3 stat_var_processor.py --existing_statvar_mcf='stat_vars.mcf' --input_data=<input_file>.csv --pv_map=statvar_imports/brazil_dados/Auxilio_Brazil/pv_map.csv --places_resolved_csv=statvar_imports/brazil_dados/Auxilio_Brazil/Brazil_MunicipalityCodes_Places_Resolved.csv --config=<filepath/filename>.csv --output_path=<filepath/filename>.csv
 
-`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=<input_file>.csv --pv_map=statvar_imports/brazil_dados/Auxilio_Brazil_MI_Social/pv_map.csv --places_resolved_csv=statvar_imports/brazil_dados/Auxilio_Brazil_MI_Social/Brazil_MunicipalityCodes_Places_Resolved.csv --config=<filepath/filename>.csv --output_path=<filepath/filename>
-
+#### Example
+`python3 stat_var_processor.py --input_data=statvar_imports/brazil_dados/Auxilio_Brazil/Auxilio_Brazil_Benefits_Program/test_data/sample_input/Auxilio_Brazil_Benefits_Program_test_data.csv --pv_map=statvar_imports/brazil_dados/Auxilio_Brazil/pv_map.csv --places_resolved_csv=statvar_imports/brazil_dados/Auxilio_Brazil/Brazil_MunicipalityCodes_Places_Resolved.csv --config=statvar_imports/brazil_dados/Auxilio_Brazil/Auxilio_Brazil_Benefits_Program/metadata.csv --output_path=statvar_imports/brazil_dados/Auxilio_Brazil/Auxilio_Brazil_Benefits_Program/test_data/sample_output/Auxilio_Brazil_Benefits_Program`

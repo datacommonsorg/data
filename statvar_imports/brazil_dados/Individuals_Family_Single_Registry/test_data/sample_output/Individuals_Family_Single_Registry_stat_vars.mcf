@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Individuals_Family_Single_Registry/test_data/sample_input/Individuals_Family_Single_Registry_test_data.csv --output_path=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Individuals_Family_Single_Registry/test_data/sample_output --pv_map=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Individuals_Family_Single_Registry/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Individuals_Family_Single_Registry/Individuals_Family_Single_Registry_metadata.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-06-13 10:34:06.860634
-
 Node: dcid:Count_Household_AbovePovertyLine_BrazilSingleRegistry
 typeOf: dcid:StatisticalVariable
 name: "total number of families registered in the Single Registry whose income exceeds the poverty line"

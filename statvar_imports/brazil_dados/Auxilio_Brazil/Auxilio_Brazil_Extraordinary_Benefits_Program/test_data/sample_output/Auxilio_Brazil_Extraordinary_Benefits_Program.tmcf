@@ -1,8 +1,8 @@
-Node: E:sample_output->E0
-observationAbout: C:sample_output->observationAbout
-observationDate: C:sample_output->observationDate
-observationPeriod: C:sample_output->observationPeriod
-value: C:sample_output->value
-variableMeasured: C:sample_output->variableMeasured
-unit: C:sample_output->unit
+Node: E:Auxilio_Brazil_Extraordinary_Benefits_Program->E0
+observationAbout: C:Auxilio_Brazil_Extraordinary_Benefits_Program->observationAbout
+observationDate: C:Auxilio_Brazil_Extraordinary_Benefits_Program->observationDate
+observationPeriod: C:Auxilio_Brazil_Extraordinary_Benefits_Program->observationPeriod
+value: C:Auxilio_Brazil_Extraordinary_Benefits_Program->value
+variableMeasured: C:Auxilio_Brazil_Extraordinary_Benefits_Program->variableMeasured
+unit: C:Auxilio_Brazil_Extraordinary_Benefits_Program->unit
 typeOf: dcs:StatVarObservation

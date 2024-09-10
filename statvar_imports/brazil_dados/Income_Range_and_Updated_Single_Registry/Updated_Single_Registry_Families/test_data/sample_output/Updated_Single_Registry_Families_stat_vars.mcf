@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Income_Range_and_Updated_Single_Registry_MI_Social/Updated_Single_Registry_Families/test_data/sample_input/Updated_Single_Registry_Families_test_data.csv --output_path=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Income_Range_and_Updated_Single_Registry_MI_Social/Updated_Single_Registry_Families/test_data/sample_output/Updated_Single_Registry_Families --pv_map=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Income_Range_and_Updated_Single_Registry_MI_Social/Updated_Single_Registry_Families/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Income_Range_and_Updated_Single_Registry_MI_Social/Updated_Single_Registry_Families/Updated_Single_Registry_Families_metadata.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-06-13 10:03:48.762541
-
 Node: dcid:Count_Household_BrazilSingleRegistry_UpdatedRegistration
 typeOf: dcid:StatisticalVariable
 name: "Total number of families with updated registration"

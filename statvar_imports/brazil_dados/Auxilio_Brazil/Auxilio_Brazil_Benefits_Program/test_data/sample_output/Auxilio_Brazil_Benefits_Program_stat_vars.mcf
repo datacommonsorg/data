@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Auxilio_Brazil_MI_Social/Auxilio_Brazil_Benifits_Program/test_data/sample_input/Auxilio_Brazil_Benifits_Program_test_data.csv --output_path=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Auxilio_Brazil_MI_Social/Auxilio_Brazil_Benifits_Program/test_data/sample_output/Auxilio_Brazil_Benifits_Program.csv --pv_map=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Auxilio_Brazil_MI_Social/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Auxilio_Brazil_MI_Social/Auxilio_Brazil_Benifits_Program/Auxilio_Brazil_Benifits_Program_metadata.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-06-13 07:13:40.371489
-
 Node: dcid:Count_Household_CitizenshipIncomeBenefits_HouseholderAge15To29Years
 typeOf: dcid:StatisticalVariable
 name: "Quantity of youth benefits for families in program"
