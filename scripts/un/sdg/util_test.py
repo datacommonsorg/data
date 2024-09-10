@@ -31,7 +31,8 @@ class UtilTest(unittest.TestCase):
         self.assertEqual(
             util.format_description(
                 'Indicator of Food Price Anomalies (IFPA), by Consumer Food Price Index'
-            ), 'Indicator of Food Price Anomalies')
+            ),
+            'Indicator of Food Price Anomalies, by Consumer Food Price Index')
 
     def test_is_float(self):
         self.assertTrue(util.is_float(7.28))
@@ -41,12 +42,46 @@ class UtilTest(unittest.TestCase):
         self.assertFalse(util.is_valid(float('nan')))
         self.assertFalse(util.is_valid(''))
 
+    def test_curate_pvs(self):
+        self.assertEqual(
+            util.curate_pvs(
+                '[Age = 15 years old and over | Education level = Primary education or less]',
+                util.TITLE_MAPPINGS),
+            '[Age = 15 years old and over, Primary education or less]')
+        self.assertEqual(
+            util.curate_pvs('[Deviation Level = Extreme (75-100%)]',
+                            util.TITLE_MAPPINGS),
+            '[Extreme deviation (75-100%)]')
+
     def test_format_variable_description(self):
         self.assertEqual(
             util.format_variable_description(
-                'Food waste (Tonnes) [Food Waste Sector = Households]',
-                'Food waste (Tonnes)'),
-            'Food waste [Food Waste Sector = Households]')
+                'Employed population below international poverty line, by sex and age (%) [Age = 15 to 24 years old]',
+                'Employed population below international poverty line, by sex and age (%)'
+            ),
+            'Employed population below international poverty line [15 to 24 years old]'
+        )
+        self.assertEqual(
+            util.format_variable_description(
+                'Number of chairs of permanent committees, by age sex and focus of the committee, Joint Committees [Age = under 46 years old | Sex = Female | Parliamentary committees = Gender Equality]',
+                'Number of chairs of permanent committees, by age sex and focus of the committee, Joint Committees'
+            ),
+            'Number of chairs of permanent committees, Joint Committees [under 46 years old, Female, Parliamentary committees = Gender Equality]'
+        )
+        self.assertEqual(
+            util.format_variable_description(
+                'Proportion of population achieving at least a fixed level of proficiency in functional skills, by sex, age and type of skill (%) [Age = 16 to 65 years old | Sex = Female | Type of skill = Literacy]',
+                'Proportion of population achieving at least a fixed level of proficiency in functional skills, by sex, age and type of skill (%)'
+            ),
+            'Proportion of population achieving at least a fixed level of proficiency in functional skills [16 to 65 years old, Female, Literacy]'
+        )
+        self.assertEqual(
+            util.format_variable_description(
+                'Adjusted gender parity index for achieving at least a fixed level of proficiency in functional skills, by numeracy/literacy skills (ratio) [Age = 16 to 65 years old | Type of skill = Literacy]',
+                'Adjusted gender parity index for achieving at least a fixed level of proficiency in functional skills, by numeracy/literacy skills (ratio)'
+            ),
+            'Adjusted gender parity index for achieving at least a fixed level of proficiency in functional skills [16 to 65 years old, Literacy]'
+        )
 
     def test_format_variable_code(self):
         self.assertEqual(
