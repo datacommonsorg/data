@@ -1,7 +1,7 @@
-Node: E:Single_Registry_Families_MI_Social->E0
-observationAbout: C:Single_Registry_Families_MI_Social->observationAbout
-observationDate: C:Single_Registry_Families_MI_Social->observationDate
-observationPeriod: C:Single_Registry_Families_MI_Social->observationPeriod
-value: C:Single_Registry_Families_MI_Social->value
-variableMeasured: C:Single_Registry_Families_MI_Social->variableMeasured
+Node: E:Single_Registry_Family->E0
+observationAbout: C:Single_Registry_Family->observationAbout
+observationDate: C:Single_Registry_Family->observationDate
+observationPeriod: C:Single_Registry_Family->observationPeriod
+value: C:Single_Registry_Family->value
+variableMeasured: C:Single_Registry_Family->variableMeasured
 typeOf: dcs:StatVarObservation

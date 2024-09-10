@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Single_Registry_Family_MI_Social/test_data/sample_input/Single_Registry_Families_MI_Social_test_data.csv --output_path=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Single_Registry_Family_MI_Social/test_data/sample_output/Single_Registry_Families_MI_Social --pv_map=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Single_Registry_Family_MI_Social/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_11_june/data/statvar_imports/brazil_dados/Single_Registry_Family_MI_Social/Single_Registry_Families_MI_Social_metadata.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-06-13 08:04:59.582254
-
 Node: dcid:Count_Household_BrazilSingleRegistry
 typeOf: dcid:StatisticalVariable
 name: "Total number of families registered in the single registry"
