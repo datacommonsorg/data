@@ -21,7 +21,3 @@
 #### Example
 `python3 stat_var_processor.py --input_data=statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/Food_and_Nutritional_Security/test_data/sample_input/Food_and_Nutritional_Security_test_data.csv --pv_map=statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/Food_and_Nutritional_Security/pv_map.csv --places_resolved_csv=statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/Brazil_MunicipalityCodes_Places_Resolved.csv --config=statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/Food_and_Nutritional_Security/metadata.csv --output_path=statvar_imports/brazil_visdata/National_Food_and_Nutrition_Security_System/Food_and_Nutritional_Security/test_data/sample_output/Food_and_Nutritional_Security_test_data`
 
-
-
-   
-
