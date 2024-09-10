@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/chharish/IndiaRBI/data/statvar_imports/india_rbi/agriculture/test_data/sample_input/STATE-WISE AREA OF FOODGRAINS - COARSE CEREALS_data.xlsx --pv_map=/usr/local/google/home/chharish/IndiaRBI/data/statvar_imports/india_rbi/agriculture/Agriculture_pvmap.csv --config=/usr/local/google/home/chharish/IndiaRBI/data/statvar_imports/india_rbi/agriculture/Agriculture_config_metadata.csv --output_path=/usr/local/google/home/chharish/IndiaRBI/data/statvar_imports/india_rbi/agriculture/test_data/sample_output/State_Wise_Area_Coarse --places_resolved_csv=/usr/local/google/home/chharish/IndiaRBI/data/statvar_imports/india_rbi/agriculture/India_places_resolved.csv" on 2024-07-19 16:11:48.597109
-
 Node: dcid:Area_FarmInventory_CoarseCereal
 typeOf: dcid:StatisticalVariable
 name: "Area used for food grains"
