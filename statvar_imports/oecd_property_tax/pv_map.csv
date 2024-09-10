@@ -1,6 +1,0 @@
-key,p1,v1,p2,v2,p3,v3
-LOCATION,observationAbout,{Data},unit,Percent,scalingFactor,100
-PC_GDP,measuredProperty,propertyTax,populationType,EconomicActivity,measurementDenominator,",+activitySource=GrossDomesticProduction"
-PC_TOT_TAX,populationType,EconomicActivity,measuredProperty,propertyTax,measurementDenominator,"-measuredProperty,+measuredProperty=totalTax"
-TIME,observationDate,{Number},,,,
-Value,value,{Number},,,,
