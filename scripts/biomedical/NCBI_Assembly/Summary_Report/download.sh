@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,19 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Script to automate the testing for EuroStat BMI (Body Mass Index) process script.
+Author: Samantha Piekos
+Date: 03/29/2024
+Name: download
+Description: This file downloads all files to be cleaned from NCBI Assembly
+summary reports, saving them to a subdirectory named 'input'.
 """
-import os
-import sys
 
-_COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.insert(1, _COMMON_PATH)
-# pylint: disable=wrong-import-position
-from bmi.process import EuroStatBMI
-from common.unitest_common_methods import CommonTestClass
-# pylint: enable=wrong-import-position
+#!/bin/bash
 
+mkdir -p scripts/input; cd scripts/input
 
-class BMITest(CommonTestClass.CommonTestCases):
-    _import_class = EuroStatBMI
-    _test_module_directory = os.path.dirname(__file__)
+# download assembly summary files.
+curl -o assembly_summary_genbank.txt https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt
+curl -o assembly_summary_refseq.txt https://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_refseq.txt
