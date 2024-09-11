@@ -33,7 +33,7 @@ name: "povertyStatus"
 domainIncludes: dcid:Household
 
 Node: dcid:InPovertyAccordingToBolsaFamilyProgram
-typeOf: dcid:USC_PovertyStatusEnum
+typeOf: dcid:PovertyStatusEnum
 name: "In Poverty According To Bolsa Family Program"
 
 Node: dcid:incomeStatus
@@ -53,16 +53,8 @@ Node: dcid:HalfOfMinimumWageOrMore
 typeOf: dcid:IncomeStatusEnum
 name: "Half Of Minimum Wage Or More"
 
-Node: dcid:MeasurementDenominatorEnum
-typeOf: schema:Class
-subClassOf: dcs:Enumeration
-name: "MeasurementDenominatorEnum"
-
-Node: dcid:Count_Household_BrazilSingleRegistry
-typeOf: dcid:MeasurementDenominatorEnum
-name: "Count_ Household_ Brazil Single Registry"
-
-Node: dcid:Count_Household_UptoHalfOfMinimumWage_BrazilSingleRegistry
-typeOf: dcid:MeasurementDenominatorEnum
-name: "Count_ Household_ Upto Half Of Minimum Wage_ Brazil Single Registry"
+Node: dcid:PovertyStatusEnum
+typeOf: dcid:Class
+subClassOf: dcid:Enumeration
+name: "PovertyStatusEnum"
 

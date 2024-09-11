@@ -8,7 +8,7 @@ end_date,2023
 release_frequency,1Month
 process,
 comments,
-output_columns,"observationAbout, observationDate,observationPeriod, value, variableMeasured"
+output_columns,"observationAbout, observationDate,observationPeriod, value,unit,scalingFactor, variableMeasured"
 mapped_rows,1
 mapped_columns,3
 header_rows,1
