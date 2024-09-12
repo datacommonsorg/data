@@ -1,8 +1,0 @@
-Node: dcid:Area_FarmInventory_JuteOrMesta
-typeOf: dcid:StatisticalVariable
-name: "Area for jute and mesta cutivation"
-populationType: dcid:FarmInventory
-measuredProperty: dcid:area
-statType: dcid:measuredValue
-farmInventoryType: dcid:Jute__Mesta
-

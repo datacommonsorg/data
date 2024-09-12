@@ -14,7 +14,7 @@
 
 ### How to run:
 
-`python3 stat_var_processor.py --input_data=<input_file>.xlsx --pv_map=statvar_imports/india_rbi/agriculture/Agriculture_pvmap.csv --places_resolved_csv=statvar_imports/statvar_imports/india_rbi/agriculture/India_places_resolved.csv --config=statvar_imports/india_rbi/agriculture/Agriculture_config_metadata.csv --output_path=--output_path=<filepath/filename>`
+`python3 stat_var_processor.py --input_data=<input_file>.xlsx --pv_map=statvar_imports/india_rbi/agriculture/Agriculture_pvmap.csv --places_resolved_csv=statvar_imports/statvar_imports/india_rbi/agriculture/India_places_resolved.csv --config=statvar_imports/india_rbi/agriculture/Agriculture_config_metadata.csv --output_path=<filepath/filename>`
 
 #### Example
 `python3 stat_var_processor.py --input_data='statvar_imports/india_rbi/agriculture/test_data/sample_input/STATE-WISE AREA OF NON-FOODGRAINS - RAW JUTE & MESTA_data.xlsx'  --pv_map='statvar_imports/india_rbi/agriculture/Agriculture_pvmap.csv'  --config='statvar_imports/india_rbi/agriculture/Agriculture_config_metadata.csv'  --output_path=statvar_imports/india_rbi/agriculture/test_data/sample_output/State_Wise_Area_NonFood_RawJute_Mesta --places_resolved_csv='statvar_imports/india_rbi/agriculture/India_places_resolved.csv'`

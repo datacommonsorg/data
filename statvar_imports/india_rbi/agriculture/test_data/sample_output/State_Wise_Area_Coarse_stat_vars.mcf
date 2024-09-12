@@ -1,8 +1,0 @@
-Node: dcid:Area_FarmInventory_CoarseCereal
-typeOf: dcid:StatisticalVariable
-name: "Area used for food grains"
-populationType: dcid:FarmInventory
-measuredProperty: dcid:area
-statType: dcid:measuredValue
-farmInventoryType: dcid:CoarseCereal
-

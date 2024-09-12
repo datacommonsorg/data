@@ -1,4 +1,5 @@
 place_name,dcid
+Andaman ,wikidataId/Q40888
 Andaman & Nicobar Islands,wikidataId/Q40888
 Andhra Pradesh,wikidataId/Q1159
 Arunachal Pradesh,wikidataId/Q1162
@@ -6,6 +7,7 @@ Assam,wikidataId/Q1164
 Bihar,wikidataId/Q1165
 Chandigarh,wikidataId/Q43433
 Chhattisgarh,wikidataId/Q1168
+Chattisgarh,wikidataId/Q1168
 Dadra & Nagar Haveli,wikidataId/Q46107
 Daman & Diu,wikidataId/Q66710
 NCT of Delhi,wikidataId/Q1352
@@ -25,6 +27,7 @@ Manipur,wikidataId/Q1193
 Meghalaya,wikidataId/Q1195
 Mizoram,wikidataId/Q1502
 Nagaland,wikidataId/Q1599
+Orissa,wikidataId/Q22048
 Odisha,wikidataId/Q22048
 Puducherry,wikidataId/Q66743
 Punjab,wikidataId/Q22424
@@ -35,8 +38,10 @@ Telangana,wikidataId/Q677037
 Tripura,wikidataId/Q1363
 Uttar Pradesh,wikidataId/Q1498
 Uttarakhand,wikidataId/Q1499
+Uttaranchal,wikidataId/Q1499
 West Bengal,wikidataId/Q1356
 ALL INDIA,country/IND
+ALL INDIA (Average),country/IND
 All-India,country/IND
 Ladakh,wikidataId/Q200667
 Kolkata**,wikidataId/Q1348
