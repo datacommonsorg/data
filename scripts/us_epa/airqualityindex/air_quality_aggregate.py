@@ -99,22 +99,24 @@ def write_csv(csv_file_path, reader):
             }
             writer.writerow(new_row)
 
+
 def download_zip_file(url, filename):
-  """Downloads a ZIP file from the given URL and saves it locally.
+    """Downloads a ZIP file from the given URL and saves it locally.
 
   Args:
       url: The URL of the ZIP file to download.
       filename: The local filename to save the downloaded ZIP file.
   """
 
-  response = requests.get(url)
+    response = requests.get(url)
 
-  if response.status_code == 200:  # Check for successful response (200 OK)
-    with open(filename, 'wb') as f:
-      f.write(response.content)
-    logging.info(f'Downloaded ZIP file: {filename}')
-  else:
-    logging.error(f'Error downloading file: {response.status_code}')
+    if response.status_code == 200:  # Check for successful response (200 OK)
+        with open(filename, 'wb') as f:
+            f.write(response.content)
+        logging.info(f'Downloaded ZIP file: {filename}')
+    else:
+        logging.error(f'Error downloading file: {response.status_code}')
+
 
 def request_and_write_csv(csv_file_path, filename):
     response = requests.get(
@@ -124,7 +126,8 @@ def request_and_write_csv(csv_file_path, filename):
             reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
             write_csv(csv_file_path, reader)
     #Calling method to download zip file locally
-    download_zip_file(f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip', filename)
+    download_zip_file(f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip',
+                      filename)
 
 
 def write_tmcf(tmcf_file_path):
