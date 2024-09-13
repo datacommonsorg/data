@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,13 +13,20 @@
 # limitations under the License.
 
 import os
+import logging
+import datetime
 # Import the required function after installing the package
 from bblocks import WorldBankData, DebtIDS
+from time import time
 
+logging.basicConfig(level=logging.INFO)
+start_time = time()
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
+
 if not os.path.exists(DEFAULT_INPUT_PATH):
-    os.mkdir(DEFAULT_INPUT_PATH)
+   logging.info(f"Creating folder -> {DEFAULT_INPUT_PATH}") 
+   os.mkdir(DEFAULT_INPUT_PATH)
 
 # create a list of indicators under each dataset.
 
@@ -31,7 +38,7 @@ interest = [
     "DT.INT.PRVT.CD"
 ]
 
-principle = [
+principal = [
     "DT.AMT.DLXF.CD", "DT.AMT.DPPG.CD", "DT.AMT.DPPG.CD", "DT.AMT.OFFT.CD",
     "DT.AMT.MLAT.CD", "DT.AMT.MIBR.CD", "DT.AMT.MIDA.CD", "DT.AMT.MLTC.CD",
     "DT.AMT.BLAT.CD", "DT.AMT.BLTC.CD", "DT.AMT.PRVT.CD", "DT.AMT.PBND.CD",
@@ -53,18 +60,20 @@ currency = [
     "DT.CUR.SWFR.ZS", "DT.CUR.MULC.ZS", "DT.CUR.FFRC.ZS"
 ]
 
-indicator_list = [interest, currency, principle, disbursed]
-indicator_listname = ["interest", "currency", "principle", "disbursed"]
+indicator_list = [interest, currency, principal, disbursed]
+indicator_listname = ["interest", "currency", "principal", "disbursed"]
+start_year=1970
+end_year=datetime.date.today().year + 5
 
 # Itterating each list to download the respective data.
 for idx, indicator in enumerate(indicator_list):
-    print(indicator)
     # Creating an IDS object
     debt_id = DebtIDS()
     # Load the indicators.
-    debt_id.load_data(indicators=indicator, start_year=1970, end_year=2029)
+    debt_id.load_data(indicators=indicator, start_year=start_year, end_year=end_year)
     # Get the data as a DataFrame
     df = debt_id.get_data()
     # Writing the data to  a local file.s
     df.to_csv(f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv",
               index=False)
+logging .info(f"Script completed in {round((time() - start_time) / 60, 2)} mins")

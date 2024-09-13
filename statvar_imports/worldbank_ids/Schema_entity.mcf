@@ -13,18 +13,18 @@ Node: dcid:Arab_African_International_Bank
 "name: ""Arab African International Bank"""
 typeOf: dcid:Corporation
 
-Node: dcid:Arab_Bank_for_Economic_Dev_in_Africa
-"dcid: ""Arab_Bank_for_Economic_Dev_in_Africa"""
+Node: dcid:Arab_Bank_For_Economic_Dev_In_Africa
+"dcid: ""Arab_Bank_For_Economic_Dev_In_Africa"""
 "name: ""Arab Bank for Economic Dev. in Africa (BADEA)"""
 typeOf: dcid:Corporation
 
-Node: dcid:Arab_Fund_for_Economic_Social_Development
-"dcid: ""Arab_Fund_for_Economic_Social_Development"""
+Node: dcid:Arab_Fund_For_Economic_Social_Development
+"dcid: ""Arab_Fund_For_Economic_Social_Development"""
 "name: ""Arab Fund for Economic & Social Development"""
 typeOf: dcid:Corporation
 
-Node: dcid:Arab_Fund_for_Tech_Assist_to_African_Countries
-"dcid: ""Arab_Fund_for_Tech_Assist_to_African_Countries"""
+Node: dcid:Arab_Fund_For_Tech_Assist_To_African_Countries
+"dcid: ""Arab_Fund_For_Tech_Assist_To_African_Countries"""
 "name: ""Arab Fund for Tech. Assist. to African Countries"""
 typeOf: dcid:Corporation
 
@@ -53,13 +53,13 @@ Node: dcid:Asian_Infrastructure_Investment_Bank
 "name: ""Asian Infrastructure Investment Bank"""
 typeOf: dcid:Corporation
 
-Node: dcid:Bank_for_International_Settlements
-"dcid: ""Bank_for_International_Settlements"""
+Node: dcid:Bank_For_International_Settlements
+"dcid: ""Bank_For_International_Settlements"""
 "name: ""Bank for International Settlements (BIS)"""
 typeOf: dcid:Corporation
 
-Node: dcid:Bolivarian_Alliance_for_the_Americas
-"dcid: ""Bolivarian_Alliance_for_the_Americas"""
+Node: dcid:Bolivarian_Alliance_For_The_Americas
+"dcid: ""Bolivarian_Alliance_For_The_Americas"""
 "name: ""Bolivarian Alliance for the Americas (ALBA)"""
 typeOf: dcid:Corporation
 
@@ -78,33 +78,33 @@ Node: dcid:Caribbean_Dev_Bank
 "name: ""Caribbean Dev. Bank"""
 typeOf: dcid:Corporation
 
-Node: dcid:Central_American_Bank_for_Econ_Integ
-"dcid: ""Central_American_Bank_for_Econ_Integ"""
+Node: dcid:Central_American_Bank_For_Econ_Integ
+"dcid: ""Central_American_Bank_For_Econ_Integ"""
 "name: ""Central American Bank for Econ. Integ. (CABEI)"""
 typeOf: dcid:Corporation
 
-Node: dcid:Central_American_Bank_for_Econ_Integration
-"dcid: ""Central_American_Bank_for_Econ_Integration"""
+Node: dcid:Central_American_Bank_For_Econ_Integration
+"dcid: ""Central_American_Bank_For_Econ_Integration"""
 "name: ""Central American Bank for Econ. Integration (BCIE)"""
 typeOf: dcid:Corporation
 
-Node: dcid:Central_Bank_of_West_African_States
-"dcid: ""Central_Bank_of_West_African_States"""
+Node: dcid:Central_Bank_Of_West_African_States
+"dcid: ""Central_Bank_Of_West_African_States"""
 "name: ""Central Bank of West African States (BCEAO)"""
 typeOf: dcid:Corporation
 
-Node: dcid:Corporacion_Andina_de_Fomento
-"dcid: ""Corporacion_Andina_de_Fomento"""
+Node: dcid:Corporacion_Andina_De_Fomento
+"dcid: ""Corporacion_Andina_De_Fomento"""
 "name: ""Corporacion Andina de Fomento"""
 typeOf: dcid:Corporation
 
-Node: dcid:Council_of_Europe
-"dcid: ""Council_of_Europe"""
+Node: dcid:Council_Of_Europe
+"dcid: ""Council_Of_Europe"""
 "name: ""Council of Europe"""
 typeOf: dcid:Corporation
 
-Node: dcid:Dev_Bank_of_the_Central_African_States
-"dcid: ""Dev_Bank_of_the_Central_African_States"""
+Node: dcid:Dev_Bank_Of_The_Central_African_States
+"dcid: ""Dev_Bank_Of_The_Central_African_States"""
 "name: ""Dev. Bank of the Central African States (BDEAC)"""
 typeOf: dcid:Corporation
 
@@ -118,18 +118,18 @@ Node: dcid:East_African_Community
 "name: ""East African Community"""
 typeOf: dcid:Corporation
 
-Node: dcid:ECO_Trade_and_Dev_Bank
-"dcid: ""ECO_Trade_and_Dev_Bank"""
+Node: dcid:ECO_Trade_And_Dev_Bank
+"dcid: ""ECO_Trade_And_Dev_Bank"""
 "name: ""ECO Trade and Dev. Bank"""
 typeOf: dcid:Corporation
 
-Node: dcid:Econ_Comm_of_the_Great_Lakes_Countries
-"dcid: ""Econ_Comm_of_the_Great_Lakes_Countries"""
+Node: dcid:Econ_Comm_Of_The_Great_Lakes_Countries
+"dcid: ""Econ_Comm_Of_The_Great_Lakes_Countries"""
 "name: ""Econ. Comm. of the Great Lakes Countries (ECGLC)"""
 typeOf: dcid:Corporation
 
-Node: dcid:Economic_Community_of_West_African_States
-"dcid: ""Economic_Community_of_West_African_States"""
+Node: dcid:Economic_Community_Of_West_African_States
+"dcid: ""Economic_Community_Of_West_African_States"""
 "name: ""Economic Community of West African States (ECOWAS)"""
 typeOf: dcid:Corporation
 
@@ -148,13 +148,13 @@ Node: dcid:EUROFIMA
 "name: ""EUROFIMA"""
 typeOf: dcid:Corporation
 
-Node: dcid:European_Bank_for_Reconstruction_and_Dev
-"dcid: ""European_Bank_for_Reconstruction_and_Dev"""
+Node: dcid:European_Bank_For_Reconstruction_And_Dev
+"dcid: ""European_Bank_For_Reconstruction_And_Dev"""
 "name: ""European Bank for Reconstruction and Dev. (EBRD)"""
 typeOf: dcid:Corporation
 
-Node: dcid:European_Coal_and_Steel_Community
-"dcid: ""European_Coal_and_Steel_Community"""
+Node: dcid:European_Coal_And_Steel_Community
+"dcid: ""European_Coal_And_Steel_Community"""
 "name: ""European Coal and Steel Community (ECSC)"""
 typeOf: dcid:Corporation
 
@@ -188,8 +188,8 @@ Node: dcid:European_Union
 "name: ""European Union"""
 typeOf: dcid:Corporation
 
-Node: dcid:Fondo_Latinoamericano_de_Reservas
-"dcid: ""Fondo_Latinoamericano_de_Reservas"""
+Node: dcid:Fondo_Latinoamericano_De_Reservas
+"dcid: ""Fondo_Latinoamericano_De_Reservas"""
 "name: ""Fondo Latinoamericano de Reservas (FLAR)"""
 typeOf: dcid:Corporation
 
@@ -203,8 +203,8 @@ Node: dcid:Inter_American_Dev_Bank
 "name: ""Inter-American Dev. Bank"""
 typeOf: dcid:Corporation
 
-Node: dcid:International_Bank_for_Economic_Cooperation
-"dcid: ""International_Bank_for_Economic_Cooperation"""
+Node: dcid:International_Bank_For_Economic_Cooperation
+"dcid: ""International_Bank_For_Economic_Cooperation"""
 "name: ""International Bank for Economic Cooperation (IBEC)"""
 typeOf: dcid:Corporation
 
@@ -218,8 +218,8 @@ Node: dcid:International_Finance_Corporation
 "name: ""International Finance Corporation"""
 typeOf: dcid:Corporation
 
-Node: dcid:International_Fund_for_Agricultural_Dev
-"dcid: ""International_Fund_for_Agricultural_Dev"""
+Node: dcid:International_Fund_For_Agricultural_Dev
+"dcid: ""International_Fund_For_Agricultural_Dev"""
 "name: ""International Fund for Agricultural Dev."""
 typeOf: dcid:Corporation
 
@@ -233,13 +233,13 @@ Node: dcid:Islamic_Dev_Bank
 "name: ""Islamic Dev. Bank"""
 typeOf: dcid:Corporation
 
-Node: dcid:Islamic_Solidarity_Fund_for_Dev
-"dcid: ""Islamic_Solidarity_Fund_for_Dev"""
+Node: dcid:Islamic_Solidarity_Fund_For_Dev
+"dcid: ""Islamic_Solidarity_Fund_For_Dev"""
 "name: ""Islamic Solidarity Fund for Dev. (ISFD)"""
 typeOf: dcid:Corporation
 
-Node: dcid:Latin_Amer_Conf_of_Saving_Credit_Coop
-"dcid: ""Latin_Amer_Conf_of_Saving_Credit_Coop"""
+Node: dcid:Latin_Amer_Conf_Of_Saving_Credit_Coop
+"dcid: ""Latin_Amer_Conf_Of_Saving_Credit_Coop"""
 "name: ""Latin Amer. Conf. of Saving & Credit Coop. (COLAC)"""
 typeOf: dcid:Corporation
 
@@ -273,13 +273,13 @@ Node: dcid:Nordic_Investment_Bank
 "name: ""Nordic Investment Bank"""
 typeOf: dcid:Corporation
 
-Node: dcid:OPEC_Fund_for_International_Dev
-"dcid: ""OPEC_Fund_for_International_Dev"""
+Node: dcid:OPEC_Fund_For_International_Dev
+"dcid: ""OPEC_Fund_For_International_Dev"""
 "name: ""OPEC Fund for International Dev."""
 typeOf: dcid:Corporation
 
-Node: dcid:Org_of_Arab_Petroleum_Exporting_Countries
-"dcid: ""Org_of_Arab_Petroleum_Exporting_Countries"""
+Node: dcid:Org_Of_Arab_Petroleum_Exporting_Countries
+"dcid: ""Org_Of_Arab_Petroleum_Exporting_Countries"""
 "name: ""Org. of Arab Petroleum Exporting Countries (OAPEC)"""
 typeOf: dcid:Corporation
 
@@ -308,8 +308,8 @@ Node: dcid:UN_General_Assembly
 "name: ""UN-General Assembly (UNGA)"""
 typeOf: dcid:Corporation
 
-Node: dcid:UN_High_Commissioner_for_Refugees
-"dcid: ""UN_High_Commissioner_for_Refugees"""
+Node: dcid:UN_High_Commissioner_For_Refugees
+"dcid: ""UN_High_Commissioner_For_Refugees"""
 "name: ""UN-High Commissioner for Refugees (UNHCR)"""
 typeOf: dcid:Corporation
 
@@ -318,8 +318,8 @@ Node: dcid:UN_Population_Fund
 "name: ""UN-Population Fund (UNFPA)"""
 typeOf: dcid:Corporation
 
-Node: dcid:UN_Regular_Programme_of_Technical_Coop
-"dcid: ""UN_Regular_Programme_of_Technical_Coop"""
+Node: dcid:UN_Regular_Programme_Of_Technical_Coop
+"dcid: ""UN_Regular_Programme_Of_Technical_Coop"""
 "name: ""UN-Regular Programme of Technical Coop. (RPTC)"""
 typeOf: dcid:Corporation
 
