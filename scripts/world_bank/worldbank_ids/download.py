@@ -25,8 +25,8 @@ DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
 
 if not os.path.exists(DEFAULT_INPUT_PATH):
-   logging.info(f"Creating folder -> {DEFAULT_INPUT_PATH}") 
-   os.mkdir(DEFAULT_INPUT_PATH)
+    logging.info(f"Creating folder -> {DEFAULT_INPUT_PATH}")
+    os.mkdir(DEFAULT_INPUT_PATH)
 
 # create a list of indicators under each dataset.
 
@@ -62,18 +62,20 @@ currency = [
 
 indicator_list = [interest, currency, principal, disbursed]
 indicator_listname = ["interest", "currency", "principal", "disbursed"]
-start_year=1970
-end_year=datetime.date.today().year + 5
+start_year = 1970
+end_year = datetime.date.today().year + 5
 
 # Itterating each list to download the respective data.
 for idx, indicator in enumerate(indicator_list):
     # Creating an IDS object
     debt_id = DebtIDS()
     # Load the indicators.
-    debt_id.load_data(indicators=indicator, start_year=start_year, end_year=end_year)
+    debt_id.load_data(indicators=indicator,
+                      start_year=start_year,
+                      end_year=end_year)
     # Get the data as a DataFrame
     df = debt_id.get_data()
     # Writing the data to  a local file.s
     df.to_csv(f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv",
               index=False)
-logging .info(f"Script completed in {round((time() - start_time) / 60, 2)} mins")
+logging.info(f"Script completed in {round((time() - start_time) / 60, 2)} mins")
