@@ -9,8 +9,8 @@ Number of classrooms,measuredProperty,count,populationType,ClassRoom,,,,,,,,
 Population (6 - 12 years),measuredProperty,count,populationType,Student,age,[6 12 Years],,,,,,
 Enrolment,measuredProperty,count,populationType,Student,,,,,,,,
 Pupil Classroom Ratio (PCR),measuredProperty,count,populationType,Student,measurementDenominator,"""+populationType=ClassRoom""",unit,Percent,scalingFactor ,100,,
-Gross Enrolment Ratio (GER),measuredProperty,count,populationType,Student,schoolEnrollment,EnrolledInSchool,,,,,,
-Primary Gross Enrolment (PGE),measuredProperty,count,populationType,Student,schoolEnrollment,EnrolledInSchool,,,,,,
+Gross Enrolment Ratio (GER),measuredProperty,count,populationType,Person,schoolEnrollment,EnrolledInSchool,measurementDenominator,",populationType=Person, +age=[6 13 Years]",unit,Percent,scalingFactor ,100
+Primary Gross Enrolment (PGE),measuredProperty,count,populationType,Person,schoolEnrollment,EnrolledInSchool,measurementDenominator,",populationType=Person, +age=[13 18 Years]",unit,Percent,scalingFactor ,100
 Graduate Teacher,measuredProperty,count,populationType,Teacher,educationalAttainment,GraduateOrProfessionalDegree,,,,,,
 Pupil Teacher Ratio (PTR),measuredProperty,count,populationType,Student,statType,measuredValue,measurementDenominator,"""+populationType=Teacher""",unit,Percent,scalingFactor ,100
 Student Teacher (STR),measuredProperty,count,populationType,Student,statType,measuredValue,measurementDenominator,"""+populationType=Teacher""",unit,Percent,scalingFactor ,100
