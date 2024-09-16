@@ -1,0 +1,8 @@
+Node: E:Never_enrolled_2->E0
+observationAbout: C:Never_enrolled_2->observationAbout
+observationDate: C:Never_enrolled_2->observationDate
+value: C:Never_enrolled_2->value
+variableMeasured: C:Never_enrolled_2->variableMeasured
+unit: C:Never_enrolled_2->unit
+scalingFactor: C:Never_enrolled_2->scalingFactor
+typeOf: dcs:StatVarObservation

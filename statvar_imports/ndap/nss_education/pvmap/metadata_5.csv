@@ -1,0 +1,16 @@
+parameter,value
+url,https://ndap.niti.gov.in/dataset/7530?tab=data
+description,Household Social Consumption - Education - Proportion ( per 1000 ) of never enrolled persons (age 5- 29 years) and their per 1000 distribution by reason for never-enrolling for each State or UT
+#place_type,"Country, State"
+#places_within,country/IND
+start_date,2014
+end_date,2014
+release_frequency,Annual
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+mapped_rows,1
+mapped_columns,5
+header_rows,1
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1AP0YKUnH3AWqDG7VGjukSkGOX2AImRF9DLQmo7wJZIQ/edit?resourcekey=0-VYZLp6Fybf1tybE2uiBIoQ&gid=591799624#gid=591799624
