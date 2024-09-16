@@ -1,0 +1,8 @@
+Node: E:chidbirth_medical->E0
+observationAbout: C:chidbirth_medical->observationAbout
+observationDate: C:chidbirth_medical->observationDate
+value: C:chidbirth_medical->value
+variableMeasured: C:chidbirth_medical->variableMeasured
+unit: C:chidbirth_medical->unit
+scalingFactor: C:chidbirth_medical->scalingFactor
+typeOf: dcs:StatVarObservation

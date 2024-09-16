@@ -1,0 +1,1261 @@
+Country,State,Year,Residence Type,Hospital Type,Expenditure Type,Average Medical Expenditure Per Hospitalisation Case (Ec) (UOM:INR(IndianRupees))
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,6330
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,7265
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,23680
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,7156
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,13025
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,1
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,371
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,426
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1389
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,421
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,765
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,6971
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,10602
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,15884
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,7303
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,5478
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,5
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,215
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,0
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1238
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1886
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,2820
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,1297
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1149
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,0
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,3022
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1945
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,3492
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,3959
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1450
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,2164
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,48
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,327
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,114
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1518
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,411
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,1136
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,2353
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1582
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,2732
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,3411
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1216
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,1932
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,6078
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,5741
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,12640
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,8211
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1033
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,5246
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,77
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,601
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,703
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,1072
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,931
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,245
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,4769
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,4620
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,10035
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,6653
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1011
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,4155
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2095
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1976
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,2300
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,2895
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1654
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,2509
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,153
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,874
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,250
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,2160
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,469
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,775
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,374
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1000
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,484
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,2244
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,604
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,973
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3049
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,4902
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,1220
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,4638
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1833
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,2185
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,227
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1371
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,272
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,3127
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,796
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,1876
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,576
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1808
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,389
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,3314
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,924
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,1915
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,1102
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,2357
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,3066
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,4091
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1534
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,10392
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,142
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,699
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,263
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1647
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,512
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,1817
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,245
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,878
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,566
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,1911
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,622
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,2743
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3093
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2299
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,6260
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,5434
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2274
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,59669
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,1432
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1827
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,1470
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,3647
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,3765
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,4809
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,2238
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,2056
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,3794
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,4514
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,3041
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,31422
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,1654
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1442
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,2582
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,4525
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,937
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,4147
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,237
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,636
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,1000
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,2472
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,641
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,1257
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1050
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1099
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1908
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,3650
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,811
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,2915
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3059
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2002
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,4997
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,6635
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2151
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,14228
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,554
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1248
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,1315
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,4532
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,873
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,3748
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,2088
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1710
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,3569
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,5819
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1656
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,10163
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,3907
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,3680
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,16880
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,15911
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,4248
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,0
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,314
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,2465
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,26
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,4597
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,624
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,0
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1135
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,2743
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,3877
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,7182
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1452
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,0
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3293
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2678
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,14971
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,7213
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1194
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,18531
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,1145
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,5773
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,49
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,14184
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,10232
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,1507
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1470
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,5305
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,2307
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,13129
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,8864
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,4083
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,1359
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1043
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,2606
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,4492
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,4350
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,6294
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,150
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,757
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,244
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1885
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,549
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,384
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,762
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,901
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1439
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,3203
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,2471
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,3373
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,1556
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,1484
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,2618
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,3722
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2315
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,18853
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,116
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,299
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,167
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,1844
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,426
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,857
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1132
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1135
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,1896
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,3169
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1759
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,13555
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,5577
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,4111
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,4964
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,10052
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,8706
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,41744
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,185
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,1060
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,89
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,2635
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,639
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,0
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,2173
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,2184
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1886
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,5369
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,3612
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,15389
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,1779
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2207
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,1874
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,2282
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,879
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,45846
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,390
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1146
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,1238
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,2478
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,1000
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,3915
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1153
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1729
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,1587
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,2370
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,934
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,26957
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,3952
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,2907
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,26617
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,16593
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,7720
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,0
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,0
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,90
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,783
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,2218
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,86
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,0
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1938
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1471
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,13450
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,9267
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,3829
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,0
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,4800
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,3118
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,14466
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,13584
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,3658
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,0
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,63
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,486
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,504
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,5752
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,8198
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,0
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1633
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1358
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,5132
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,8348
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,6693
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,0
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2149
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1414
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,4601
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,3826
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1381
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,3277
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,228
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,474
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,467
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1465
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,297
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,3690
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1699
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1194
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,3632
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,3273
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1127
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,3374
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,1956
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,1421
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,5230
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,3889
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1563
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,9965
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,209
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,643
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,842
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,1608
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,509
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,3640
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1548
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1240
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,4206
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,3357
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1317
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,8488
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,3922
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,3103
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,5777
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,7472
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,2226
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,172
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,625
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,1465
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,1033
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,4330
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,2195
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,0
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,2825
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,2559
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,4199
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,6427
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,2216
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,115
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,6611
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,3505
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,8116
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,7269
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,3225
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,7592
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,506
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1686
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,2774
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,4809
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,3634
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,1365
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,5492
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,3171
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,7137
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,6819
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,3300
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,6451
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,1875
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1894
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,2303
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,4071
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1249
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,20204
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,112
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,1855
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,547
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,5818
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,697
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,5760
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,539
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1864
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,972
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,5395
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,830
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,9259
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,1601
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,3247
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,4639
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,4235
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,386
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,13883
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,329
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,2653
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,1481
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,8633
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,2121
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,13608
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,688
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,2821
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,2373
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,7391
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1631
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,13686
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2391
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,2584
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,4186
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,6290
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1479
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,21743
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,25
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,1344
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,117
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,4147
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,841
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,1
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,169
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1419
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,366
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,4278
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,880
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,1330
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,4023
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2685
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,7017
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,12165
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1829
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,16549
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,19
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1891
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,75
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,4748
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,2029
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,0
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,604
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,2007
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,1089
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,5831
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,2000
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,2417
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,3881
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1283
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,2991
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,4000
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1333
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,801
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,535
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,398
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,449
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,2313
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,497
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,148
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,2556
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,933
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1985
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,3332
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1002
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,542
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,2858
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,1974
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,3024
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,4063
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1197
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,1326
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,446
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,665
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,487
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,3118
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,3647
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,1183
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,2222
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1629
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,2355
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,3814
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1843
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,1288
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2322
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1819
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,4147
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,5427
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1593
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,2342
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,112
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,694
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,429
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,2373
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,577
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,202
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1729
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1517
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,3150
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,4608
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1320
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,1768
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3173
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2240
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,6809
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,8603
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2009
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,3396
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,251
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,780
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,483
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,2096
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,497
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,29
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,2639
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1973
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,5652
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,7414
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1732
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,2780
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,3564
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,3429
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,5177
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,6042
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,3101
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,4097
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,173
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,743
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,108
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,939
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,565
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,506
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,2386
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,2497
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,3417
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,4271
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,2221
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,2851
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,2721
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2570
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,4151
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,5163
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,3474
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,3730
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,155
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,720
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,125
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,1197
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,430
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,115
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1867
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1954
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,2811
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,3843
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,2461
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,2527
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,4448
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,3252
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,12122
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,5528
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,2619
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1657
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1211
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,4515
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,2059
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,975
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3716
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,5677
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,7886
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,4362
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,5324
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,32
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,5
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,19
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,94
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,0
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1194
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1793
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,2499
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,1440
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1678
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,0
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2321
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1705
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,2313
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,5021
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1011
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,12016
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,138
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,554
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,302
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1718
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,441
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,130
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1152
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1089
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1236
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,3253
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,706
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,5654
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,2478
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2529
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,3484
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,6474
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1988
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,14189
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,371
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,535
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,192
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,1745
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,402
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,10737
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1600
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1698
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,2112
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,4504
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1327
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,12751
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2606
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1954
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,4788
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,5926
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1500
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,7313
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,414
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,606
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,592
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,2581
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,543
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,543
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,2185
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1695
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,3982
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,5283
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1316
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,6013
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3762
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,3246
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,6895
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,7478
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1617
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,12691
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,187
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,732
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,305
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,2401
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,405
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,738
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,3046
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,2743
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,5574
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,6461
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1374
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,10296
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,485
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,618
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,585
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,2381
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,488
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,9378
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,187
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,994
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,14
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,3353
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,494
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,26
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,220
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,952
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,78
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,3244
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,494
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,1073
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,578
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,950
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,544
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,1745
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,978
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,16166
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,312
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1711
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,37
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,4221
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,988
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,12
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,369
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1548
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,145
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,3690
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,986
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,3477
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,1318
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1973
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,2207
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,2320
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,601
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,0
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,70
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,176
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,45
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,833
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,178
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,0
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,205
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,371
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,280
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,994
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,224
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,0
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,7627
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,3271
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,5170
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,6473
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,5344
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,287
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,261
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,874
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,3429
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,3001
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,744
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,0
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,4146
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,2139
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,4347
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,4833
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,3170
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,151
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2301
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1682
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,3059
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,9150
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,2313
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,5475
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,56
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,517
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,230
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,4294
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,1088
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,76
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,371
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,680
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,627
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,4974
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1260
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,833
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,2234
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2950
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,4844
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,4947
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2001
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,8463
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,103
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,853
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,146
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,3760
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,545
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,115
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,952
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1688
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,2019
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,4233
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1125
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,3443
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,1608
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1169
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,561
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,5370
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1318
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,4386
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,164
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,311
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,37
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1483
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,216
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,192
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,552
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,541
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,177
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,2527
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,512
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,1319
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3404
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,4670
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,1740
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,11132
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1935
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,535
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,353
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,919
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,119
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,2075
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,435
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,374
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,2188
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,3176
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,1094
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,7522
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1337
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,471
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,3158
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,3020
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,4068
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,8726
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1887
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,8374
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,314
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,939
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,290
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,3429
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,815
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,90
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,846
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1328
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,995
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,4418
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1015
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,1637
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,2661
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2798
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,3506
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,9375
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2093
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,16508
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,319
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1226
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,240
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,3904
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,822
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,774
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1304
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1886
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,1613
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,6203
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1356
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,7387
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,3189
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1554
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,1673
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,3769
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1289
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,0
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,0
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,13
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,0
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,401
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,37
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,0
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,2174
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1064
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1140
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,2697
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,890
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,0
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,6247
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,3785
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,10669
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,8089
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2949
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,4350
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,269
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,48
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,55
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,259
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,48
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,0
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,2531
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1462
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,4071
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,3221
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1145
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,1646
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,3135
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,3553
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,5075
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,8392
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,2015
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,12103
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,579
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,1391
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,821
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,3926
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,830
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,4319
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,2387
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,2921
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,3830
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,7086
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1668
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,9826
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3782
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2796
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,4009
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,5188
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2953
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,17684
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,345
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1209
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,1392
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,3325
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,717
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,8127
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,2743
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,2316
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,3217
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,4624
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,2277
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,14794
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2600
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,2151
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,2487
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,4536
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1054
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,10735
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,61
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,871
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,93
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1741
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,381
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,669
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1223
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1457
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1189
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,3020
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,689
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,5277
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,2385
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2452
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,4991
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,5303
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1884
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,10185
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,197
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1072
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,846
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,3117
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,815
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,1896
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1196
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1702
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,2737
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,4115
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1303
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,5678
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,3291
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,2823
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,3591
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,5696
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1733
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,3692
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,53
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,587
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,155
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1517
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,912
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,0
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,938
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1198
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1094
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,2660
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1136
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,1009
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3844
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2442
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,3859
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,4213
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2195
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,2391
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,135
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,409
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,183
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,1618
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,321
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,0
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1792
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1317
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,1825
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,2777
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1158
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,1068
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2350
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1785
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,4951
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,4901
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1277
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,4290
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,3
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,164
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,1
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,145
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,112
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,34
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1402
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1131
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,2952
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,2980
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,806
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,2571
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3282
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2929
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,6311
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,5865
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2453
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,12421
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,22
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,256
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,26
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,274
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,203
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,0
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,2328
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,2147
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,4472
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,4229
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1794
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,8787
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2290
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,2190
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,3167
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,3994
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,888
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,13824
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,59
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,333
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,30
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1947
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,309
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,310
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1651
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1658
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,2269
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,3408
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,723
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,9955
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,2609
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,3455
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,5518
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,5059
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1597
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,7083
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,4
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,340
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,5
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,1617
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,414
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,764
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,2056
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,2795
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,4348
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,4329
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1346
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,5743
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2606
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,643
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,2977
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,2704.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1712.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,1857.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,0
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,182.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,7
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,150.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,270.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,0
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,1376
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,459.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1469
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,1556
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1173
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,1188.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,928
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,433
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,3629
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,1755.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,270
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,1837.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,0
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,95
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,1
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,570
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,81
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,0
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,754.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,368.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,2922
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,1547.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,235.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,1511.5
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,1194
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,2533
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,788
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,3751
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,744
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,6535
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,200
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,639
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,196
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1840
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,271
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,1836
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,267
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,766
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,236
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,1969
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,303
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,2153
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,2033
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,4471
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,2795
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,5772
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,1485
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,56562
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,40
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,577
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,141
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,2875
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,350
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,194
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,255
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,998
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,428
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,3189
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,473
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,6294
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,2846
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,1793
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,3949
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,6366
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1670
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,6294
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,369
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,952
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,906
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,3200
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,723
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,2784
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,2098
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1539
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,3030
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,5409
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1384
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,5233
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,3940
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,1642
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,4162
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,6828
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2588
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,17772
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,457
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1274
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,864
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,3109
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,11440
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,1144
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,2954
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1538
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,3228
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,5775
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,5094
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,13064
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,1721
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,2019
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,2868
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,4748
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,1877
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,2165
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,105
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,413
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,271
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,1624
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,678
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,25
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,900
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1204
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1550
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,3162
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,1268
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,1078
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,5405
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,6126
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,10802
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,8907
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,6031
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,1412
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,321
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1222
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,1073
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,2340
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,934
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,131
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,3385
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,4177
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,6935
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,6297
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,4005
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,903
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Private,bed charges,1908
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Private,diagnostic tests,2151
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Private,doc/surgeons fee,3322
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Private,medicines,4314
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Private,other,861
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Private,package component,12652
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Public,bed charges,256
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Public,diagnostic tests,1490
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Public,doc/surgeons fee,923
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Public,medicines,2533
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Public,other,593
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Public,package component,1429
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,all,bed charges,633
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,all,diagnostic tests,1641
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,all,doc/surgeons fee,1471
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,all,medicines,2939
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,all,other,654
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,all,package component,3990
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Private,bed charges,2399
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Private,diagnostic tests,2858
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Private,doc/surgeons fee,5944
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Private,medicines,4129
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Private,other,2396
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Private,package component,25684
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Public,bed charges,101
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Public,diagnostic tests,1025
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Public,doc/surgeons fee,1653
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Public,medicines,2527
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Public,other,1348
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Public,package component,1504
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,all,bed charges,1191
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,all,diagnostic tests,1894
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,all,doc/surgeons fee,3688
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,all,medicines,3286
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,all,other,1845
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,all,package component,12971

@@ -1,0 +1,8 @@
+Node: E:person_treated->E0
+observationAbout: C:person_treated->observationAbout
+observationDate: C:person_treated->observationDate
+value: C:person_treated->value
+variableMeasured: C:person_treated->variableMeasured
+unit: C:person_treated->unit
+scalingFactor: C:person_treated->scalingFactor
+typeOf: dcs:StatVarObservation

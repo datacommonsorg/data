@@ -1,0 +1,1471 @@
+Country,State,Year,Residence Type,Gender,Age Group,Distribution Of Hospitalised Cases(Per 1000) For Different Age Groups (UOM:Number),Sample Of Hospitalisation Cases (UOM:Number)
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,380,134
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,105,134
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,172,134
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,139,134
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,204,134
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,149,134
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,55,134
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,139,64
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,139,64
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,271,64
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,171,64
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,280,64
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,264,64
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,16,64
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,512,70
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,86,70
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,118,70
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,121,70
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,162,70
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,86,70
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,76,70
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,249,101
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,103,101
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,295,101
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,175,101
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,178,101
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,119,101
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,59,101
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,199,52
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,74,52
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,408,52
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,180,52
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,138,52
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,112,52
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,26,52
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,307,49
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,137,49
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,161,49
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,169,49
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,225,49
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,127,49
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,99,49
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,156,900
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,170,900
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,254,900
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,212,900
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,208,900
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,136,900
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,72,900
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,118,376
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,216,376
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,247,376
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,222,376
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,196,376
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,146,376
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,49,376
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,186,524
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,134,524
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,260,524
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,204,524
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,217,524
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,128,524
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,89,524
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,162,906
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,144,906
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,177,906
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,246,906
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,271,906
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,142,906
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,129,906
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,168,428
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,208,428
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,184,428
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,226,428
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,214,428
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,116,428
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,98,428
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,157,478
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,95,478
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,172,478
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,260,478
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,316,478
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,163,478
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,153,478
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,242,191
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,178,191
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,234,191
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,102,191
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,244,191
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,68,191
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,176,191
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,231,100
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,189,100
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,307,100
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,74,100
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,198,100
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,82,100
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,116,100
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,252,91
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,167,91
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,164,91
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,128,91
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,289,91
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,54,91
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,235,91
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,182,126
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,337,126
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,306,126
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,127,126
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,48,126
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,41,126
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,7,126
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,114,57
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,338,57
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,351,57
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,167,57
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,30,57
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,27,57
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,3,57
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,241,69
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,336,69
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,267,69
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,92,69
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,64,69
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,53,69
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,11,69
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,202,734
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,198,734
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,239,734
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,191,734
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,171,734
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,116,734
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,55,734
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,152,350
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,243,350
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,308,350
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,200,350
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,97,350
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,60,350
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,37,350
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,245,384
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,159,384
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,179,384
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,183,384
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,235,384
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,165,384
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,70,384
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,89,291
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,115,291
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,224,291
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,345,291
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,227,291
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,79,291
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,149,291
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,65,130
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,122,130
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,297,130
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,308,130
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,208,130
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,102,130
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,107,130
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,118,161
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,106,161
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,139,161
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,388,161
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,249,161
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,52,161
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,198,161
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,183,1201
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,281,1201
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,263,1201
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,138,1201
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,136,1201
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,72,1201
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,64,1201
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,131,615
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,371,615
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,275,615
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,131,615
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,92,615
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,61,615
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,31,615
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,242,586
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,179,586
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,249,586
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,145,586
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,185,586
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,83,586
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,102,586
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,125,601
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,193,601
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,338,601
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,147,601
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,198,601
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,110,601
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,88,601
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,36,305
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,281,305
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,429,305
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,141,305
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,114,305
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,75,305
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,39,305
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,223,296
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,96,296
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,237,296
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,155,296
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,290,296
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,148,296
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,142,296
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,161,50
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,489,50
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,83,50
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,73,50
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,194,50
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,172,50
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,23,50
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,46,20
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,744,20
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,119,20
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,92,20
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,0,20
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,0,20
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,0,20
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,243,30
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,306,30
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,58,30
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,59,30
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,333,30
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,295,30
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,39,30
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,323,78
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,210,78
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,128,78
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,128,78
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,211,78
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,107,78
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,104,78
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,378,41
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,209,41
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,72,41
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,55,41
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,285,41
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,134,41
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,151,41
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,257,37
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,212,37
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,194,37
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,215,37
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,121,37
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,74,37
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,47,37
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,143,359
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,215,359
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,185,359
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,113,359
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,345,359
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,219,359
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,126,359
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,68,165
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,214,165
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,274,165
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,97,165
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,347,165
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,310,165
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,37,165
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,211,194
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,215,194
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,104,194
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,127,194
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,342,194
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,135,194
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,207,194
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,156,334
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,262,334
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,104,334
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,203,334
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,276,334
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,184,334
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,92,334
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,118,160
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,329,160
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,148,160
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,246,160
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,159,160
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,70,160
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,89,160
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,175,174
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,226,174
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,81,174
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,180,174
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,337,174
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,244,174
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,94,174
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,380,32
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,240,32
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,120,32
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,51,32
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,208,32
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,73,32
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,136,32
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,326,15
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,105,15
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,275,15
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,95,15
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,199,15
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,0,15
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,199,15
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,416,17
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,330,17
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,17,17
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,22,17
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,215,17
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,121,17
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,94,17
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,137,607
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,219,607
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,224,607
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,232,607
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,188,607
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,87,607
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,101,607
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,104,271
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,162,271
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,256,271
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,307,271
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,170,271
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,96,271
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,74,271
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,161,336
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,261,336
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,201,336
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,176,336
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,201,336
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,80,336
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,121,336
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,150,73
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,85,73
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,70,73
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,209,73
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,487,73
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,268,73
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,219,73
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,48,31
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,122,31
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,88,31
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,224,31
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,518,31
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,219,31
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,299,31
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,242,42
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,50,42
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,54,42
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,195,42
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,458,42
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,312,42
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,146,42
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,181,61
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,101,61
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,204,61
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,221,61
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,293,61
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,163,61
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,130,61
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,116,25
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,116,25
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,207,25
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,199,25
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,362,25
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,160,25
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,201,25
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,215,36
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,93,36
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,202,36
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,232,36
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,256,36
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,164,36
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,93,36
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,175,1013
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,162,1013
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,174,1013
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,271,1013
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,218,1013
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,135,1013
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,83,1013
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,128,479
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,206,479
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,215,479
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,241,479
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,210,479
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,131,479
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,79,479
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,217,534
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,122,534
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,137,534
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,298,534
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,226,534
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,138,534
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,88,534
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,139,1046
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,183,1046
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,224,1046
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,203,1046
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,252,1046
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,133,1046
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,119,1046
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,116,514
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,200,514
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,232,514
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,198,514
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,253,514
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,141,514
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,112,514
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,160,532
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,167,532
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,216,532
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,207,532
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,251,532
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,124,532
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,127,532
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,172,498
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,152,498
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,204,498
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,243,498
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,231,498
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,122,498
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,109,498
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,77,224
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,216,224
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,275,224
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,234,224
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,199,224
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,117,224
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,82,224
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,253,274
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,96,274
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,142,274
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,250,274
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,258,274
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,126,274
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,131,274
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,211,487
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,143,487
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,167,487
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,319,487
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,160,487
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,76,487
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,84,487
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,123,240
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,199,240
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,266,240
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,185,240
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,228,240
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,124,240
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,104,240
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,272,247
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,104,247
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,99,247
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,412,247
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,113,247
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,42,247
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,71,247
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,86,510
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,185,510
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,186,510
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,275,510
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,269,510
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,139,510
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,130,510
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,73,268
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,177,268
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,215,268
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,313,268
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,221,268
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,139,268
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,82,268
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,101,242
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,196,242
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,150,242
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,226,242
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,328,242
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,138,242
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,190,242
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,123,140
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,206,140
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,293,140
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,218,140
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,160,140
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,83,140
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,77,140
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,90,81
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,261,81
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,394,81
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,131,81
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,124,81
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,54,81
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,70,81
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,170,59
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,127,59
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,152,59
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,340,59
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,211,59
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,124,59
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,88,59
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,59,405
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,194,405
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,307,405
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,259,405
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,181,405
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,110,405
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,71,405
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,35,211
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,229,211
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,268,211
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,358,211
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,109,211
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,68,211
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,41,211
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,85,194
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,156,194
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,350,194
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,152,194
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,257,194
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,154,194
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,103,194
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,123,292
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,136,292
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,220,292
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,211,292
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,310,292
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,146,292
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,164,292
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,80,167
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,155,167
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,297,167
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,221,167
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,247,167
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,81,167
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,166,167
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,178,125
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,110,125
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,120,125
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,198,125
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,393,125
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,232,125
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,161,125
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,185,400
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,233,400
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,241,400
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,171,400
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,169,400
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,140,400
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,30,400
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,111,193
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,221,193
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,365,193
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,216,193
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,87,193
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,52,193
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,35,193
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,254,207
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,245,207
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,125,207
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,130,207
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,246,207
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,222,207
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,24,207
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,127,410
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,205,410
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,258,410
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,210,410
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,201,410
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,108,410
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,92,410
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,65,206
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,154,206
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,347,206
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,204,206
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,230,206
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,139,206
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,91,206
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,205,204
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,271,204
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,144,204
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,217,204
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,163,204
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,69,204
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,94,204
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,177,1075
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,163,1075
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,183,1075
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,251,1075
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,226,1075
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,122,1075
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,104,1075
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,142,502
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,184,502
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,205,502
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,269,502
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,200,502
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,126,502
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,74,502
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,209,573
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,144,573
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,163,573
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,235,573
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,249,573
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,118,573
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,131,573
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,184,1029
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,162,1029
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,214,1029
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,215,1029
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,225,1029
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,120,1029
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,105,1029
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,145,524
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,196,524
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,215,524
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,169,524
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,276,524
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,124,524
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,151,524
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,228,505
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,124,505
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,212,505
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,268,505
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,168,505
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,115,505
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,53,505
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,144,1220
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,121,1220
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,142,1220
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,201,1220
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,392,1220
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,165,1220
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,227,1220
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,109,598
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,148,598
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,109,598
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,217,598
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,417,598
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,162,598
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,254,598
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,176,622
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,96,622
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,173,622
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,187,622
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,369,622
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,168,622
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,201,622
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,120,1172
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,111,1172
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,170,1172
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,262,1172
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,336,1172
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,162,1172
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,174,1172
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,107,649
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,92,649
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,215,649
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,234,649
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,352,649
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,155,649
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,198,649
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,138,523
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,137,523
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,112,523
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,298,523
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,315,523
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,171,523
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,144,523
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,189,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,156,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,136,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,373,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,145,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,145,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,0,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,209,14
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,185,14
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,222,14
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,268,14
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,116,14
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,116,14
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,0,14
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,176,22
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,138,22
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,81,22
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,441,22
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,164,22
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,164,22
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,0,22
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,183,76
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,121,76
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,190,76
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,185,76
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,321,76
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,71,76
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,250,76
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,216,40
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,200,40
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,189,40
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,269,40
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,125,40
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,57,40
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,68,40
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,150,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,40,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,191,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,99,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,519,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,85,36
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,434,36
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,170,1158
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,164,1158
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,224,1158
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,257,1158
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,185,1158
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,111,1158
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,74,1158
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,93,548
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,211,548
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,255,548
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,229,548
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,212,548
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,115,548
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,96,548
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,251,610
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,114,610
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,191,610
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,286,610
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,157,610
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,106,610
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,51,610
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,133,1144
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,186,1144
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,229,1144
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,213,1144
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,239,1144
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,122,1144
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,117,1144
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,102,561
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,228,561
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,286,561
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,183,561
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,201,561
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,104,561
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,97,561
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,166,583
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,141,583
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,169,583
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,245,583
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,279,583
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,141,583
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,138,583
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,217,1885
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,173,1885
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,169,1885
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,204,1885
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,237,1885
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,128,1885
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,108,1885
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,130,840
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,188,840
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,211,840
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,200,840
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,270,840
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,161,840
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,109,840
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,287,1045
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,161,1045
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,135,1045
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,207,1045
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,210,1045
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,102,1045
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,108,1045
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,190,1819
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,146,1819
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,182,1819
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,217,1819
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,265,1819
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,145,1819
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,121,1819
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,157,841
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,147,841
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,181,841
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,249,841
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,266,841
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,169,841
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,97,841
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,223,978
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,146,978
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,182,978
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,185,978
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,265,978
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,120,978
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,145,978
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,391,400
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,113,400
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,197,400
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,194,400
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,105,400
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,61,400
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,44,400
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,279,195
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,107,195
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,287,195
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,216,195
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,110,195
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,58,195
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,51,195
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,503,205
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,118,205
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,106,205
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,172,205
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,100,205
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,63,205
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,37,205
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,313,325
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,131,325
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,175,325
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,173,325
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,209,325
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,98,325
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,111,325
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,235,166
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,155,166
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,221,166
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,238,166
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,152,166
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,63,166
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,89,166
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,389,159
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,107,159
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,129,159
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,110,159
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,265,159
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,132,159
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,133,159
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,333,206
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,268,206
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,216,206
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,73,206
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,110,206
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,42,206
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,68,206
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,153,110
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,284,110
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,354,110
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,96,110
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,113,110
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,19,110
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,94,110
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,493,96
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,253,96
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,93,96
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,53,96
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,108,96
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,63,96
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,45,96
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,183,143
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,159,143
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,87,143
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,292,143
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,279,143
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,190,143
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,90,143
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,164,75
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,134,75
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,105,75
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,143,75
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,454,75
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,336,75
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,118,75
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,203,68
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,184,68
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,67,68
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,447,68
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,98,68
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,37,68
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,61,68
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,204,199
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,337,199
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,179,199
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,163,199
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,117,199
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,89,199
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,29,199
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,189,105
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,382,105
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,174,105
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,132,105
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,122,105
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,83,105
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,39,105
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,221,94
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,283,94
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,185,94
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,200,94
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,111,94
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,95,94
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,16,94
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,241,211
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,162,211
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,199,211
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,214,211
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,184,211
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,92,211
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,92,211
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,192,118
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,183,118
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,165,118
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,226,118
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,234,118
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,111,118
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,123,118
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,316,93
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,129,93
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,252,93
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,195,93
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,108,93
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,64,93
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,44,93
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,350,172
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,229,172
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,64,172
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,201,172
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,156,172
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,94,172
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,61,172
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,315,81
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,260,81
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,87,81
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,204,81
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,134,81
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,134,81
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,0,81
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,383,91
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,202,91
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,42,91
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,198,91
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,175,91
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,58,91
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,117,91
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,205,122
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,246,122
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,212,122
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,242,122
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,95,122
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,85,122
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,10,122
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,188,62
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,225,62
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,204,62
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,304,62
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,79,62
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,64,62
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,15,62
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,225,60
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,270,60
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,220,60
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,173,60
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,113,60
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,109,60
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,4,60
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,155,1043
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,193,1043
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,229,1043
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,209,1043
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,215,1043
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,98,1043
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,117,1043
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,114,502
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,182,502
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,252,502
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,206,502
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,246,502
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,107,502
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,138,502
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,199,541
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,204,541
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,205,541
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,212,541
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,181,541
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,87,541
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,94,541
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,131,492
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,144,492
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,254,492
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,241,492
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,231,492
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,106,492
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,124,492
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,131,210
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,84,210
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,345,210
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,231,210
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,208,210
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,97,210
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,112,210
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,131,282
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,188,282
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,186,282
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,248,282
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,247,282
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,113,282
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,134,282
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,51,46
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,197,46
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,331,46
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,233,46
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,187,46
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,165,46
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,23,46
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,69,17
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,340,17
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,222,17
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,123,17
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,245,17
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,228,17
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,17,17
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,33,29
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,60,29
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,435,29
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,339,29
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,133,29
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,104,29
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,29,29
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,211,134
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,151,134
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,164,134
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,270,134
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,204,134
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,124,134
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,80,134
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,128,60
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,196,60
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,145,60
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,270,60
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,261,60
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,194,60
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,67,60
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,293,74
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,107,74
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,182,74
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,270,74
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,148,74
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,54,74
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,93,74
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,93,512
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,152,512
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,203,512
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,259,512
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,293,512
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,159,512
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,134,512
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,62,244
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,169,244
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,212,244
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,263,244
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,295,244
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,163,244
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,131,244
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,133,268
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,131,268
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,192,268
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,253,268
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,291,268
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,155,268
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,136,268
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,111,488
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,207,488
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,242,488
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,210,488
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,230,488
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,123,488
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,107,488
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,67,225
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,264,225
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,201,225
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,223,225
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,245,225
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,117,225
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,128,225
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,153,263
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,154,263
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,280,263
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,198,263
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,215,263
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,129,263
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,86,263
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,172,1084
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,202,1084
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,176,1084
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,210,1084
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,240,1084
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,114,1084
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,126,1084
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,111,508
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,165,508
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,231,508
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,241,508
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,252,508
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,119,508
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,134,508
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,236,576
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,240,576
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,118,576
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,177,576
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,228,576
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,109,576
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,119,576
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,153,826
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,200,826
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,185,826
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,196,826
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,266,826
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,112,826
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,154,826
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,167,398
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,239,398
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,219,398
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,174,398
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,201,398
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,100,398
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,101,398
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,139,428
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,161,428
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,151,428
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,217,428
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,332,428
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,124,428
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,208,428
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,117,200
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,223,200
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,280,200
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,195,200
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,185,200
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,96,200
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,89,200
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,69,111
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,218,111
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,338,111
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,232,111
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,144,111
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,97,111
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,47,111
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,198,89
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,233,89
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,181,89
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,133,89
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,255,89
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,94,89
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,160,89
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,159,124
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,171,124
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,244,124
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,173,124
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,253,124
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,159,124
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,94,124
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,147,67
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,152,67
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,277,67
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,159,67
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,266,67
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,237,67
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,29,67
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,174,57
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,194,57
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,204,57
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,191,57
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,237,57
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,63,57
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,174,57
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,106,1369
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,126,1369
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,204,1369
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,277,1369
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,288,1369
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,188,1369
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,99,1369
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,85,668
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,147,668
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,216,668
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,249,668
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,302,668
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,240,668
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,62,668
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,127,701
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,103,701
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,191,701
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,306,701
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,272,701
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,135,701
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,138,701
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,132,1449
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,107,1449
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,230,1449
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,260,1449
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,271,1449
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,142,1449
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,129,1449
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,119,732
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,117,732
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,217,732
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,296,732
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,250,732
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,133,732
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,117,732
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,143,717
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,97,717
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,243,717
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,226,717
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,291,717
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,151,717
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,139,717
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,206,468
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,215,468
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,180,468
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,242,468
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,157,468
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,107,468
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,50,468
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,218,212
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,251,212
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,174,212
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,214,212
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,144,212
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,119,212
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,25,212
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,195,256
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,184,256
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,185,256
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,266,256
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,170,256
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,97,256
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,72,256
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,150,444
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,138,444
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,150,444
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,385,444
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,176,444
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,120,444
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,56,444
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,134,205
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,138,205
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,130,205
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,472,205
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,126,205
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,102,205
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,25,205
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,171,239
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,138,239
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,176,239
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,277,239
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,238,239
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,142,239
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,96,239
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,305,89
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,304.5,89
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,125,89
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,157.5,89
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,108.5,89
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,86,89
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,22.5,89
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,257.5,38
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,193,38
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,146,38
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,137.5,38
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,266,38
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,266,38
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,0,38
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,324.5,51
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,355,51
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,116,51
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,169.5,51
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,36,51
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,0,51
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,36,51
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,274,100
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,133,100
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,346.5,100
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,40,100
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,206.5,100
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,175.5,100
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,31,100
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,203.5,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,207,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,426,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,32,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,131.5,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,122.5,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,9.5,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,401,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,96,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,187.5,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,64.5,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,251,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,195,50
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,56,50
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,224,543
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,162,543
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,248,543
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,235,543
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,131,543
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,76,543
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,55,543
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,161,275
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,223,275
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,272,275
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,223,275
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,121,275
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,80,275
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,41,275
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,281,268
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,105,268
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,227,268
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,246,268
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,141,268
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,72,268
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,68,268
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,165,369
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,174,369
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,165,369
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,273,369
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,223,369
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,124,369
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,99,369
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,159,169
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,274,169
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,161,169
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,201,169
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,204,169
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,56,169
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,148,169
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,169,200
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,98,200
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,168,200
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,327,200
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,237,200
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,176,200
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,61,200
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,164,2980
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,288,2980
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,196,2980
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,158,2980
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,194,2980
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,98,2980
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,96,2980
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,89,1469
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,349,1469
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,245,1469
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,160,1469
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,157,1469
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,83,1469
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,74,1469
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,252,1511
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,216,1511
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,139,1511
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,155,1511
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,238,1511
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,116,1511
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,122,1511
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,185,1996
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,192,1996
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,235,1996
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,203,1996
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,184,1996
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,108,1996
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,75,1996
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,161,1024
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,202,1024
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,283,1024
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,206,1024
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,148,1024
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,98,1024
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,50,1024
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,216,972
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,180,972
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,177,972
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,200,972
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,227,972
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,121,972
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,106,972
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,91,165
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,211,165
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,228,165
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,293,165
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,177,165
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,55,165
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,122,165
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,62,87
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,215,87
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,358,87
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,278,87
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,87,87
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,53,87
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,34,87
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,113,78
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,208,78
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,129,78
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,304,78
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,245,78
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,56,78
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,188,78
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,81,188
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,220,188
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,188,188
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,150,188
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,362,188
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,142,188
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,220,188
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,66,108
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,313,108
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,217,108
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,113,108
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,291,108
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,87,108
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,203,108
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,102,80
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,87,80
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,145,80
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,203,80
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,463,80
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,220,80
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,243,80
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,All,0 - 14,177,1689
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,All,15-29,202,1689
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,All,30-44,196,1689
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,All,45-59,272,1689
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,All,60+,152,1689
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,All,60-69,96,1689
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,All,70+,56,1689
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Female,0 - 14,177,813
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Female,15-29,242,813
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Female,30-44,214,813
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Female,45-59,259,813
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60+,108,813
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Female,60-69,71,813
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Female,70+,37,813
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Male,0 - 14,178,876
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Male,15-29,162,876
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Male,30-44,178,876
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Male,45-59,286,876
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60+,196,876
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Male,60-69,120,876
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,Male,70+,76,876
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,All,0 - 14,126,1699
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,All,15-29,138,1699
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,All,30-44,188,1699
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,All,45-59,224,1699
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,All,60+,325,1699
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,All,60-69,153,1699
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,All,70+,171,1699
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Female,0 - 14,145,848
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Female,15-29,163,848
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Female,30-44,194,848
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Female,45-59,227,848
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60+,271,848
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Female,60-69,108,848
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Female,70+,163,848
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Male,0 - 14,108,851
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Male,15-29,116,851
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Male,30-44,182,851
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Male,45-59,221,851
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60+,372,851
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Male,60-69,194,851
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,Male,70+,179,851

@@ -1,0 +1,8 @@
+Node: E:avg_medical_nonmedical_exp->E0
+observationAbout: C:avg_medical_nonmedical_exp->observationAbout
+observationDate: C:avg_medical_nonmedical_exp->observationDate
+value: C:avg_medical_nonmedical_exp->value
+variableMeasured: C:avg_medical_nonmedical_exp->variableMeasured
+unit: C:avg_medical_nonmedical_exp->unit
+scalingFactor: C:avg_medical_nonmedical_exp->scalingFactor
+typeOf: dcs:StatVarObservation

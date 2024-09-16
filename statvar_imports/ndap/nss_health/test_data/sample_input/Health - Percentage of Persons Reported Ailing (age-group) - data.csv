@@ -1,0 +1,631 @@
+Country,State,Year,Gender,Age Group,Persons In The Population Reported Ailing (%) (UOM:%(Percentage))
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Female,5-14,1.7
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Person,45-59,25.1
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Female,30-44,14.7
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Female,45-59,0.1
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Female,60+,19.8
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,45-59,3.9
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,15-29,5.9
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Person,30-44,4.5
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Male,15-29,1.9
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Female,45-59,5.2
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Male,30-44,3.5
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Male,5-14,3.2
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Female,5-14,10.2
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Male,30-44,1.3
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Male,45-59,10.7
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Person,0-4,10.8
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Female,5-14,6.5
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Female,15-29,2
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Male,60+,5.3
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Male,60+,23.4
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Male,15-29,2.2
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Person,60+,20.3
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Male,5-14,2.9
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Female,15-29,5.2
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Female,60+,18.7
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Male,60+,10.7
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Female,30-44,10.55
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Person,45-59,8.8
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Female,5-14,3
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,5-14,3.7
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Female,5-14,7.5
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,0-4,3.6
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Person,45-59,7.5
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Person,15-29,1.9
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Person,0-4,12.2
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,0-4,9
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Person,60+,21.6
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Person,5-14,6.6
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Person,0-4,2
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,0-4,13.5
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Male,15-29,0.2
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Female,30-44,6.5
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,0-4,3.4
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Female,60+,0.3
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,0-4,11.4
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Male,60+,12.8
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Female,30-44,3.2
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Female,30-44,1.4
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Female,60+,26.7
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2.4
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2.8
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Male,45-59,2.9
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Male,30-44,1.8
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Male,30-44,4.9
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,15-29,2.4
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Female,30-44,1.8
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Female,45-59,12.3
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Female,45-59,7.7
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,5-14,6.6
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Person,30-44,6.9
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Female,0-4,4.4
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,15-29,1.6
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Person,45-59,1.15
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Female,30-44,0.3
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Male,0-4,11.35
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,60+,5.1
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Male,60+,33.7
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Male,0-4,6.7
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Female,0-4,11.6
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Male,5-14,0.2
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Person,15-29,5.3
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Female,5-14,4.3
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Person,45-59,9.1
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Person,60+,1.2
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Female,5-14,3
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Male,5-14,0.6
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Person,60+,26.5
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Male,15-29,0.5
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,30-44,2.5
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Person,0-4,3.5
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Male,30-44,4.1
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,45-59,5.7
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Male,45-59,9.2
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Person,45-59,8.3
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Person,45-59,10.2
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Female,15-29,1.7
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2.9
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Person,0-4,4.2
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Female,45-59,3.4
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Male,15-29,0.1
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Female,45-59,9.6
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Person,45-59,34.2
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Person,45-59,1.6
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Male,45-59,8.7
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Male,45-59,31.1
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Male,0-4,0.6
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,60+,7.1
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Female,60+,17.5
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Person,30-44,4.6
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Female,15-29,3.6
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Male,15-29,0.4
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,5-14,2.9
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Male,30-44,1.6
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Person,30-44,2.2
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Male,30-44,4.8
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Female,0-4,6.2
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Person,15-29,3.1
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Female,45-59,1
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Male,0-4,12.3
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Person,30-44,11.1
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Female,45-59,8.9
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Person,15-29,3.7
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Person,5-14,7
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,5-14,7.6
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Person,15-29,7.4
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,45-59,13.6
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Male,45-59,6
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,60+,20.5
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Female,5-14,7.6
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Female,45-59,8.2
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Female,0-4,7.7
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Person,0-4,0
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2.4
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Person,45-59,0.1
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,5-14,4.7
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Female,0-4,8.7
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Female,30-44,6.1
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Person,0-4,8.2
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Person,60+,8.7
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Male,60+,28.2
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Female,60+,15.5
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Male,15-29,1.3
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Person,60+,35.7
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Female,0-4,3.2
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Female,15-29,2
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Person,0-4,9.6
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Person,5-14,4.9
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Person,15-29,1.6
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Male,60+,1.9
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2.7
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Female,5-14,3.8
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,60+,54.2
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Female,5-14,2.9
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,0-4,3.3
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Male,30-44,2.9
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Person,15-29,0.1
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Female,15-29,1
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Male,60+,25.8
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Male,5-14,1
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Female,60+,9.9
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Male,5-14,3.3
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,30-44,7.5
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Female,30-44,1.1
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Person,30-44,6.1
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Female,0-4,3.4
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Person,5-14,4.9
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Female,5-14,0.4
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Male,0-4,13.7
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Person,5-14,13.1
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Female,30-44,4.6
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Person,5-14,2.2
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Male,30-44,2.1
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Male,5-14,2.9
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Person,60+,17.4
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Person,0-4,8.7
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Male,15-29,2.8
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Person,30-44,5.2
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Male,5-14,3.1
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,0-4,11.2
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Male,0-4,3.5
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Person,60+,16.9
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Female,0-4,5.3
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Person,60+,20.3
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Male,15-29,3.8
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Female,45-59,4.1
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Person,60+,10.9
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Person,0-4,17.5
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,30-44,4.7
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Male,5-14,3.9
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Female,0-4,0.1
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Male,0-4,12.2
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Female,5-14,1.8
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Person,45-59,2.6
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Female,15-29,6.2
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,15-29,2.8
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Male,15-29,1.8
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Female,45-59,12
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Male,45-59,15.9
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Person,60+,31.4
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,5-14,6.1
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,30-44,11.6
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Female,45-59,30.4
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Male,30-44,0.7
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Male,60+,23.05
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,30-44,10.7
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Person,0-4,6.9
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Person,0-4,8.7
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Female,15-29,2.8
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Female,5-14,4.5
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Female,15-29,1.4
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Person,5-14,4
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Male,60+,18
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,0-4,11.8
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,30-44,9
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Person,30-44,2
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Female,15-29,1.1
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Female,0-4,0
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,60+,2.8
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Male,45-59,20.4
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Male,30-44,8.8
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Female,60+,24.2
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Male,60+,13.3
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,5-14,5.5
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Female,5-14,5.7
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Male,30-44,2.7
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Person,15-29,6.2
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Female,45-59,15.9
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Person,15-29,0.6
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Female,60+,24.4
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Male,0-4,0
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Female,0-4,15.8
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Female,60+,7.6
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,0-4,3.7
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,45-59,9.9
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Male,30-44,0.8
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Female,0-4,2.1
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Female,5-14,0
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Female,30-44,2.9
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Person,60+,7.4
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Person,30-44,3.4
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Person,0-4,5.7
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Person,60+,27.8
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Person,30-44,5.3
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Male,5-14,3.2
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Female,0-4,4.2
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Female,45-59,3.2
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Female,0-4,12.7
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2.9
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,45-59,10.5
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Person,45-59,5.1
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Male,30-44,1.1
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Person,45-59,5.1
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Person,0-4,5.1
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Person,0-4,4
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Male,30-44,2
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Male,60+,38.7
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,60+,15.6
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Male,0-4,3.9
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Person,5-14,6.9
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Male,45-59,5
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Person,60+,54.6
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Female,5-14,4.2
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Person,45-59,21.4
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Female,0-4,0.6
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Male,15-29,3.8
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Person,30-44,4.8
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Male,0-4,3.7
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Female,30-44,9.1
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,0-4,10.7
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Person,5-14,1.7
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,15-29,2.8
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Person,30-44,5.5
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Person,30-44,1.4
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Person,0-4,13.8
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Female,60+,20.5
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Female,60+,11
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Person,5-14,2.1
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Person,30-44,0.7
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Person,5-14,1.9
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Person,0-4,1.3
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Male,0-4,18
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Person,30-44,0
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Female,30-44,5.8
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Person,15-29,4.8
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Person,0-4,7.6
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Female,45-59,4.8
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Female,0-4,8.5
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Person,5-14,3.1
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Female,60+,67.2
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Male,15-29,1.3
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Male,15-29,1.4
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Male,30-44,3.6
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Male,45-59,6.1
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Female,30-44,3.7
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Male,60+,23.8
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Male,0-4,0
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Person,15-29,1.15
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Person,30-44,2.8
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Male,0-4,12.7
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Female,5-14,0.9
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Person,15-29,1.2
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Female,30-44,5.4
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,15-29,3.3
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Male,30-44,1.4
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Female,0-4,7.7
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,45-59,25.2
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Male,5-14,0.4
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Female,60+,41.3
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Female,30-44,0
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Person,5-14,1.5
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Person,0-4,7.3
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Female,15-29,1
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Female,5-14,7.2
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,0-4,4
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Person,5-14,7.8
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Male,60+,15.2
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Male,45-59,1.7
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Male,30-44,0.8
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,5-14,3.6
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Female,0-4,10.8
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Female,5-14,1.9
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Person,60+,5.9
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Person,5-14,1.3
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Male,0-4,8.6
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,0-4,3.5
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Female,60+,22.9
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Female,15-29,2.9
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Person,60+,32.9
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Female,15-29,0.1
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Person,45-59,9.4
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Female,45-59,2.4
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Male,60+,61.7
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Male,0-4,10.9
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Male,60+,3.9
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Male,45-59,0.8
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Male,15-29,3.3
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Person,0-4,0.6
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2.3
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Female,30-44,0.7
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Male,5-14,8.2
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Female,15-29,0.3
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Male,5-14,2.7
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Male,45-59,5.3
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Person,45-59,3.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Person,0-4,14.2
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Female,45-59,24.5
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Male,0-4,7
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,60+,27.5
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Male,0-4,13.8
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Male,0-4,15.9
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Female,45-59,11.2
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Person,30-44,0.7
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Female,15-29,2.7
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Female,5-14,2.8
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Male,0-4,6.2
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Male,60+,45.3
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Female,30-44,0.3
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Person,5-14,4.1
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Female,15-29,2.9
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Person,30-44,4.4
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Male,60+,10.9
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Female,15-29,0.4
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Male,60+,36.1
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Person,45-59,5.7
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Male,30-44,6.4
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Person,0-4,5.6
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Female,15-29,2.9
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,5-14,2.2
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Person,60+,16.7
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Male,5-14,4.1
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Person,30-44,1.1
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Person,60+,26.9
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Male,30-44,5.25
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Person,45-59,1.4
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Male,60+,15.1
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Male,5-14,3.3
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Female,15-29,8.1
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Female,60+,40.4
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,0-4,6.1
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Male,5-14,2.2
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Person,15-29,1.4
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Male,0-4,11.3
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Male,30-44,1.4
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Person,5-14,3.75
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Male,45-59,4.5
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Person,45-59,6
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Female,45-59,27.9
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,45-59,10.9
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Female,0-4,3.9
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Male,60+,7.5
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Person,15-29,1.3
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Female,60+,63.2
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Person,30-44,4
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,45-59,1.7
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Person,0-4,10.5
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Male,15-29,2.6
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Person,60+,16.5
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Female,45-59,5.8
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Male,5-14,1.8
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Person,45-59,14.6
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,30-44,10.4
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,60+,26.3
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Person,30-44,4.8
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Male,30-44,4
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Male,5-14,4.8
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Person,15-29,0.8
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,30-44,3.1
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Person,45-59,6.8
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Male,60+,26.3
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Person,15-29,0.5
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,45-59,27.7
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Person,60+,47.9
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Male,5-14,4.3
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,60+,15.5
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Person,5-14,5.1
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,60+,55.7
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Female,60+,50.8
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Male,15-29,1.2
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Female,45-59,11.8
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Female,30-44,1
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Male,15-29,4.4
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Male,45-59,5.5
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,60+,21.4
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Person,30-44,1.2
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Person,15-29,1.7
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,15-29,4.5
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Person,5-14,1.5
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Male,15-29,3.9
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Person,60+,24
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Female,15-29,4
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Person,15-29,0.9
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Female,30-44,3
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,15-29,2.3
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Female,45-59,11.5
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Person,30-44,7.75
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Female,60+,27.8
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Female,60+,31
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,45-59,11.9
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Male,0-4,1.3
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Male,5-14,5.5
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Female,0-4,8.4
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Male,15-29,0.1
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Female,30-44,7
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Male,15-29,1.5
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Female,45-59,21.7
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Male,15-29,1.4
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Female,60+,5
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,0-4,11.7
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Female,60+,6.7
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,5-14,5.9
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Male,30-44,5.6
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,30-44,8.9
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Male,45-59,4.9
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2.8
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Person,60+,25
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Person,5-14,8
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,5-14,3.5
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Female,60+,17.8
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Male,45-59,1.9
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,30-44,6.9
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Person,15-29,0.4
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,5-14,5.7
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Female,30-44,4.7
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Male,0-4,14.5
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Person,45-59,22
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,60+,57.1
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Person,15-29,4.2
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Female,0-4,19.2
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Male,30-44,0.3
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,45-59,7.6
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Female,45-59,3
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,60+,15.6
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Person,60+,33.7
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Female,5-14,1
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Female,5-14,2.2
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,45-59,5.3
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Person,60+,30
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Person,60+,9.6
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Male,45-59,6.2
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Male,45-59,1.25
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Person,60+,7.5
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2.1
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Female,0-4,1.2
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Person,60+,62.5
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Male,60+,26.1
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Male,0-4,12.2
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Male,45-59,0.1
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,30-44,2.3
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Person,0-4,4.1
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Person,5-14,2.3
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Male,15-29,0
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Female,30-44,5.8
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Female,45-59,37
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Person,30-44,2.2
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Male,15-29,1.3
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Female,0-4,2.9
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Male,0-4,9.4
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Female,15-29,4.5
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Female,30-44,18.2
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Person,15-29,1.5
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Female,60+,34.5
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Person,5-14,0.1
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Female,0-4,5.4
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Person,45-59,11.4
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Female,30-44,1.2
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Female,0-4,4.5
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Female,15-29,1.4
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Person,45-59,12.4
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Person,5-14,3.8
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Female,60+,5.6
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,30-44,2.3
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Female,30-44,3.7
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Female,15-29,1.1
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Male,5-14,6.8
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Person,0-4,0.1
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Male,30-44,1
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Female,30-44,3.7
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Female,45-59,16.5
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Female,0-4,4.5
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Male,0-4,8.8
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Male,30-44,7.5
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Male,15-29,3.1
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Person,5-14,3.5
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Female,45-59,4.3
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Person,30-44,1.3
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Male,15-29,0.6
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Male,30-44,12.7
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Female,0-4,16.6
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Person,30-44,3.8
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Male,45-59,9.2
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Female,15-29,3
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Male,5-14,8.4
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Person,0-4,11.7
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Female,60+,28.3
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Male,5-14,1.8
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,30-44,6.1
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Male,45-59,6.8
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Male,5-14,0.1
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Female,15-29,2.4
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Female,30-44,4.1
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Male,0-4,12.6
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Person,60+,4.6
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Male,45-59,2.1
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Person,45-59,3.4
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,15-29,2
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Female,5-14,0
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Female,0-4,7.9
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,5-14,6.2
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Female,15-29,1.5
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Person,45-59,4.2
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Male,5-14,1.5
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Female,45-59,7.3
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Female,30-44,6.7
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Female,5-14,5.7
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Female,5-14,12.9
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Female,5-14,3.55
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Female,60+,2
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Person,15-29,2.5
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Male,30-44,1.2
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Female,5-14,7.3
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Female,5-14,0.1
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Male,60+,38.6
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Male,5-14,3.5
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,15-29,2.8
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Male,60+,25.8
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Person,5-14,2.6
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Person,5-14,2.1
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Person,45-59,10.8
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Person,0-4,10.5
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Female,15-29,0.2
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,45-59,7.6
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Female,15-29,1.7
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Male,60+,30.2
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Male,45-59,3.6
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Female,0-4,7.2
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Female,5-14,4.1
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Male,30-44,0
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Person,30-44,0.5
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Person,5-14,0.7
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Male,45-59,9.1
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Female,0-4,2.3
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Male,15-29,6.7
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Male,45-59,9.1
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Person,45-59,3
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Male,45-59,18.5
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Male,0-4,4.7
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,30-44,3.9
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Male,15-29,1.7
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Person,60+,10.65
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Female,30-44,8.2
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Male,0-4,0.7
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Female,60+,14.6
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Person,30-44,1.3
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Male,60+,4.3
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Male,45-59,4.8
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Person,30-44,6.7
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,60+,28.5
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Person,60+,13.8
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Female,60+,26.6
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,15-29,3.4
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Male,15-29,3.5
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Male,0-4,6.2
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Male,60+,16.3
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Male,45-59,5.6
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Female,15-29,4.9
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Male,60+,4.4
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Female,15-29,4.7
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Female,5-14,1.6
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Female,45-59,19.2
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Person,15-29,3.2
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,45-59,30.3
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,5-14,4.9
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Male,5-14,13.3
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Male,30-44,5.2
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Male,5-14,7.2
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Person,5-14,4.5
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,0-4,10
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Person,0-4,10
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Person,45-59,8.4
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Person,45-59,18.5
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,5-14,3.6
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Person,0-4,7
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Male,60+,23.7
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Female,45-59,1.1
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Person,30-44,15.6
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Female,60+,22.4
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Male,5-14,7.3
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Person,5-14,2.7
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Person,5-14,2.3
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Person,45-59,3.8
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Female,60+,12.6
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Male,45-59,15.3
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Male,0-4,3.1
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Male,15-29,6.1
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Person,0-4,12
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Male,5-14,4.2
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Male,30-44,2.2
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Male,15-29,5.7

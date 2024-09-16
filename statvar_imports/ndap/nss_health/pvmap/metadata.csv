@@ -1,0 +1,16 @@
+parameter,value
+url,https://ndap.niti.gov.in/dataset/7295?tab=data
+description,2018 average medical expenditure and non medical expenditure
+#place_type,"Country, State"
+#places_within,country/IND
+start_date,2017
+end_date,2018
+release_frequency,annual
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+mapped_rows,1
+mapped_columns,5
+header_rows,1
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1mtYJxTJKmL8YpokwdjKC_aL4U4p6dufcHl98y-CtQY4/edit?resourcekey=0-wwLEmK1IvtJ1a5yQd6N-dg&gid=291315531#gid=291315531
