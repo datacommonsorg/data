@@ -1,0 +1,4 @@
+key,prop,val,p1,v1,,,,,,,,,,
+Código,observationAbout,{Data},,,,,,,,,,,,
+Referência,observationDate,{Data},,,,,,,,,,,,
+Quantidade de pessoas com deficiência inscritas no Cadastro Único,measuredProperty,count,populationType,Person,disabilityStatus,WithDisability,registeredIn,Brazil_SingleRegistry,value,{Number},alternateName,Quantidade de pessoas com deficiência inscritas no Cadastro Único@pt,name,Number of people with disabilities registered in the Single Registry
