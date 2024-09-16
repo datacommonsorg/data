@@ -1,0 +1,94 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "WorldBankDatasets",
+      "curator_emails": ["swethakumari@google.com"],
+      "provenance_url": "https://data.worldbank.org",
+      "provenance_description": "World Bank databases are essential tools for supporting critical management decisions and providing key statistical information for Bank operational activities.",
+      "scripts": ["datasets.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "wb.tmcf",
+          "cleaned_csv": "ASPIRE_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "EdStats_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "FINDEX_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "GFDD_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "GPFI_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "HCI_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "IDA_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "Jobs_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "MDG_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "PovStats_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "SDG_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "SE4ALL_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "Subnational-Population_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "Subnational-Poverty_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "WGI_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "BBSC_CSV_obs.csv"
+        },
+         {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "DB_CSV_obs.csv"
+        },
+         {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "Economic_Fitness_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "HEFPI_CSV_obs.csv"
+        },
+        {
+           "template_mcf": "wb.tmcf",
+          "cleaned_csv": "WWBI_CSV_obs.csv"
+        }
+      ],
+      "cron_schedule": "5 3 15 * *"
+    }
+  ]
+}

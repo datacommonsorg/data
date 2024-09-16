@@ -1,0 +1,121 @@
+Node: dcid:WorldBank_ASPIRE_CSV
+name: "WorldBank ASPIRE CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The World Bank's ASPIRE (Atlas of Social Protection Indicators of Resilience and Equity) is the World Bank's premier compilation of Social Protection and Labor (SPL) indicators gathered from officially-recognized international household surveys in order to analyze the distributional and poverty impact of Social Protection and Labor programs"
+descriptionUrl: "https://www.worldbank.org/en/data/datatopics/aspire/about#:~:text=ASPIRE%20is%20the%20World%20Bank's,Social%20Protection%20and%20Labor%20programs."
+
+Node: dcid:WorldBank_EdStats_CSV
+name: "WorldBank EdStats CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "Measurement method for the World Bank EdStats Portal (Education Statistics Portal) is a platform to allow for easy access to data for key indicators in education covering topics such as access, completion, learning outcomes, expenditures, policy, and equity."
+descriptionUrl: "https://datatopics.worldbank.org/education/"
+
+Node: dcid:WorldBank_FINDEX_CSV
+name: "WorldBank FINDEX CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The Global Findex Database has been the definitive source of data on global access to financial services from payments to savings and borrowing."
+descriptionUrl: "https://www.worldbank.org/en/publication/globalfindex"
+
+Node: dcid:WorldBank_GFDD_CSV
+name: "WorldBank GFDD CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The Global Financial Development Database(GFDD) is an extensive dataset of financial system characteristics for 214 economies."
+descriptionUrl: "https://www.worldbank.org/en/publication/gfdr/data/global-financial-development-database"
+
+Node: dcid:WorldBank_GPFI_CSV
+name: "WorldBank GPFI CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The Global Partnership for Financial Inclusion (GPFI) developed the indicators, which were endorsed by G20 leaders in 2012. An expanded set of indicators, including financial literacy, use and quality of financial services, was endorsed by the GPFI in 2013. New indicators measuring the use of digital payments and access to digital infrastructure were endorsed in 2016."
+descriptionUrl: "https://datatopics.worldbank.org/g20fidata/"
+
+Node: dcid:WorldBank_HCI_CSV
+name: "WorldBank HCI CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The Human Capital Index (HCI) database provides data at the country level for each of the components of the Human Capital Index as well as for the overall index, disaggregated by gender. The index measures the amount of human capital that a child born today can expect to attain by age 18, given the risks of poor health and poor education that prevail in the country where she lives. It is designed to highlight how improvements in current health and education outcomes shape the productivity of the next generation of workers, assuming that children born today experience over the next 18 years the educational opportunities and health risks that children in this age range currently face."
+descriptionUrl: "https://datacatalog.worldbank.org/search/dataset/0038030/Human-Capital-Index"
+
+Node: dcid:WorldBank_IDA_CSV
+name: "WorldBank IDA CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The World Bank’s International Development Association (IDA) is one of the largest and most effective platforms for fighting extreme poverty in the world’s lowest income countries."
+descriptionUrl: "https://www.worldbank.org/en/news/factsheet/2021/04/15/what-is-ida"
+
+Node: dcid:WorldBank_Jobs_CSV
+name: "WorldBank Jobs CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "WorldBank offer a wide variety of job opportunities around the world, serving 189 member countries with 140 offices."
+descriptionUrl: "https://www.worldbank.org/en/about/careers"
+
+Node: dcid:WorldBank_MDG_CSV
+name: "WorldBank MDG CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The relevant indicators drawn from the World Development Indicators, reorganized according to the goals and targets of the Millennium Development Goals (MDGs)."
+descriptionUrl: "https://datacatalog.worldbank.org/search/dataset/0039671/Millennium-Development-Goals"
+
+Node: dcid:WorldBank_PovStats_CSV
+name: "WorldBank PovStats CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The World Bank Group is committed to fighting poverty in all its dimensions. It uses the latest data, evidence and analysis to help countries develop policies to improve people's lives, with a focus on the poorest and most vulnerable."
+descriptionUrl: "https://www.worldbank.org/en/topic/poverty"
+
+Node: dcid:WorldBank_SDG_CSV
+name: "WorldBank SDG CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The Atlas of Sustainable Development Goals 2023 presents interactive storytelling and data visualizations about the 17 Sustainable Development Goals. It highlights trends for selected targets within each goal and introduces concepts about how some SDGs are measured."
+descriptionUrl: "https://datatopics.worldbank.org/sdgatlas?lang=en"
+
+Node: dcid:WorldBank_SE4ALL_CSV
+name: "WorldBank SE4ALL CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The “Sustainable Energy for all (SE4ALL)” initiative, launched in 2010 by the UN Secretary General, established three global objectives to be accomplished by 2030: to ensure universal access to modern energy services, to double the global rate of improvement in global energy efficiency, and to double the share of renewable energy in the global energy mix. SE4ALL database supports this initiative and provides country level historical data for access to electricity and non-solid fuel; share of renewable energy in total final energy consumption by technology; and energy intensity rate of improvement."
+descriptionUrl: "https://datacatalog.worldbank.org/search/dataset/0041706/Sustainable-Energy-for-All"
+
+Node: dcid:WorldBank_Subnational-Population_CSV
+name: "WorldBank Subnational-Population CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "Subnational Population Database presents estimated population at the first administrative level below the national level. Many of the data come from the country’s national statistical offices. Other data come from the NASA Socioeconomic Data and Applications Center (SEDAC) managed by the Center for International Earth Science Information Network (CIESIN), Earth Institute, Columbia University. It is the World Bank Group’s first subnational population database at a global level and there are data limitations. Series metadata includes methodology and the assumptions made."
+descriptionUrl: "https://datacatalog.worldbank.org/search/dataset/0040218/Subnational-Population-Database"
+
+
+Node: dcid:WorldBank_Subnational-Poverty_CSV
+name: "WorldBank Subnational-Poverty CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "This data entry includes subnational poverty direct estimates from household surveys over time for more than 141 economies at the administrative unit level 1."
+descriptionUrl: "https://datacatalog.worldbank.org/search?q=subnational%20poverty"
+
+Node: dcid:WorldBank_WGI_CSV
+name: "WorldBank WGI CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The Worldwide Governance Indicators (WGI) are designed to help researchers and analysts assess broad patterns in perceptions of governance across countries and over time."
+descriptionUrl: "https://www.worldbank.org/en/publication/worldwide-governance-indicators"
+
+Node: dcid:WorldBank_BBSC_CSV
+name: "WorldBank BBSC CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "BBSC stands for Bulletin Board on Statistical Capacity(BBSC) at the World Bank. The Bulletin Board on Statistical Capacity is an annual publication that is available at bbsc.worldbank.org."
+descriptionUrl: "https://www.worldbank.org/en/programs/statistical-performance-indicators"
+
+Node: dcid:WorldBank_DB_CSV
+name: "WorldBank DB CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "DataBank(DB) is an analysis and visualisation tool that contains collections of time series data on a variety of topics. You can create your own queries; generate tables, charts, and maps; and easily save, embed, and share them."
+descriptionUrl: "https://databank.worldbank.org/#:~:text=DataBank%20is%20an%20analysis%20and,us%20know%20what%20you%20think!"
+
+Node: dcid:WorldBank_Economic_Fitness_CSV
+name: "WorldBank Economic Fitness CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "Economic Fitness (EF) is both a measure of a country’s diversification and ability to produce complex goods on a globally competitive basis."
+descriptionUrl: "https://datacatalog.worldbank.org/search/dataset/0041694"
+
+Node: dcid:WorldBank_HEFPI_CSV
+name: "WorldBank HEFPI CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "Health Equity and Financial Protection Indicators (HEFPI) - The HEFPI database draws on data from over 1,600 household surveys, including the Demographic and Health Survey and the Multiple Indicator Cluster Survey."
+descriptionUrl: "https://databank.worldbank.org/source/health-equity-and-financial-protection-indicators-(hefpi)/preview/on"
+
+Node: dcid:WorldBank_WWBI_CSV
+name: "WorldBank WWBI CSV"
+typeOf: dcs:MeasurementMethodEnum
+description: "The Worldwide Bureaucracy Indicators (WWBI) are a unique cross-national dataset on public sector employment and wages developed by the World Bank's `Bureaucracy Lab'. They aim to help researchers, development practitioners, and policymakers gain a better understanding of the personnel dimensions of state capability, the footprint of the public sector within the overall labor market, and the fiscal implications of the public sector wage bill."
+descriptionUrl: "https://www.worldbank.org/en/data/interactive/2019/05/21/worldwide-bureaucracy-indicators-dashboard#:~:text=The%20Worldwide%20Bureaucracy%20Indicators%20(WWBI,World%20Bank's%20%60Bureaucracy%20Lab'."
+
