@@ -91,7 +91,7 @@ class Mode:
 
 
 flags.DEFINE_string(
-    'mode',None,
+    'mode', None,
     f"Specify one of the following modes: {Mode.FETCH_DATASETS}, {Mode.DOWNLOAD_DATASETS}, {Mode.WRITE_WB_CODES}, {Mode.LOAD_STAT_VARS}, {Mode.WRITE_OBSERVATIONS}"
 )
 
@@ -606,7 +606,6 @@ def main(_):
                 write_all_observations(FLAGS.stat_vars_file)
             case _:
                 logging.error('No mode specified.')
-            
 
 
 if __name__ == '__main__':
