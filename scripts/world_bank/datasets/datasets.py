@@ -348,7 +348,7 @@ def load_stat_vars(stat_var_file):
             else:
                 logging.error('SKIPPED stat var row: %s', csv_row)
 
-        #logging.info(svs)
+        logging.info(svs)
         return svs
 
 
