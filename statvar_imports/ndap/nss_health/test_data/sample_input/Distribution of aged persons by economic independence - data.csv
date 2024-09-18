@@ -1,0 +1,421 @@
+Country,State,Year,Residence Type,Economic Independence Of Aged Persons,Gender,Distribution Of Aged Persons ( Per 1000 ) By State Of Economic Independence And Gender (UOM:Number),Sample Of Aged Persons (UOM:Number)
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,298,288
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,154,259
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,18,23
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,960,6
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,0,9
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,172,46
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,127,17
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,490,400
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,554,226
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,100,194
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,69,49
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,233,350
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,402,46
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,13,122
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,274,101
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,350,288
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,400,22
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,143,67
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,346,36
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,0,9
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,106,961
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,114,103
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,172,319
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,543,341
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,818,29
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,688,28
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,566,103
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,360,10
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,235,341
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,394,51
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,322,42
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,426,1063
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,737,240
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,310,8
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,496,105
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,202,430
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,698,392
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,665,430
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,218,49
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,106,176
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,430,248
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,255,57
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,533,42
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,587,183
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,749,961
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,317,157
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,240,56
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,663,9
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,30,61
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,55,145
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,253,171
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,457,37
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,464,57
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,856,145
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,80,580
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,708,280
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,45,60
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,446,440
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,713,242
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,151,125
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,88,20
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,130,79
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,419,75
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,672,56
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,358,404
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,96,201
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,63,242
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,478,197
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,105,360
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,730,35
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,344,70
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,459,25
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,44,234
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,68,636
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,531,44
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,588,155
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,22,201
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,191,12
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,78,167
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,615,61
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,76,97
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,213,104
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,133,430
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,340,80
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,425,365
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,666,580
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,74,22
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,720,360
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,618,12
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,434,99
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,175,360
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,134,197
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,833,143
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,389,106
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,770,557
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,768,176
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,787,289
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,208,97
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,310,11
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,361,431
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,282,261
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,78,36
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,349,363
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,219,363
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,93,80
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,701,325
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,333,101
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,853,636
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,595,46
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,813,344
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,165,557
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,322,11
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,146,600
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,281,57
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,313,396
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,249,440
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,191,12
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,439,37
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,107,43
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,667,10
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,482,61
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,317,13
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,840,19
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,329,42
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,493,396
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,693,319
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,123,293
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,271,101
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,873,15
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,926,22
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,135,319
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,881,201
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,338,431
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,614,115
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,379,11
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,815,414
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,351,20
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,199,600
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,222,341
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,13,29
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,534,22
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,86,50
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,461,587
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,469,218
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,397,106
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,655,600
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,272,207
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,259,79
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,118,240
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,225,715
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,183,61
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,519,293
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,126,176
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,697,60
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,246,471
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,780,27
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,459,478
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,344,84
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,234,28
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,246,70
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,18,46
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,64,143
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,783,194
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,320,455
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,67,22
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,131,122
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,215,99
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,717,103
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,43,344
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,301,431
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,208,392
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,24,37
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,934,18
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,259,10
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,468,177
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,66,18
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,133,595
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,139,207
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,560,20
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,152,280
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,129,29
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,552,97
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,982,23
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,89,145
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,403,51
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,53,29
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,202,61
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,145,961
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,1000,9
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,314,455
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,426,218
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,148,104
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,79,183
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,423,61
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,324,478
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,203,155
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,337,670
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,277,44
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,145,25
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,352,288
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,460,37
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,171,1063
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,310,259
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,247,595
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,244,467
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,348,42
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,529,223
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,317,436
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,226,105
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,351,99
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,217,478
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,60,127
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,855,67
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,261,169
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,192,400
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,51,19
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,146,325
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,0,6
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,146,347
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,277,105
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,414,248
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,537,350
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,388,197
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,104,218
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,83,37
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,487,61
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,196,365
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,328,143
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,118,367
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,38,117
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,279,431
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,145,143
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,735,17
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,21,48
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,255,580
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,209,155
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,141,715
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,635,715
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,1000,6
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,185,136
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,565,125
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,306,223
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,77,149
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,745,50
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,366,455
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,424,169
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,78,28
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,0,6
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,194,396
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,121,27
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,17,9
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,221,226
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,102,414
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,158,367
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,258,60
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,713,49
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,320,9
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,333,182
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,99,27
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,245,75
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,301,61
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,276,61
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,856,122
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,645,467
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,153,289
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,110,347
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,508,43
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,227,22
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,589,207
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,304,177
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,145,240
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,203,51
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,157,248
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,140,280
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,468,171
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,157,157
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,96.5,15
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,503,182
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,145,115
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,60,289
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,450,60
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,241,115
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,302,8
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,295,167
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,576,471
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,167,136
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,309,13
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,22,143
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,556,167
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,335,75
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,576,36
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,163,182
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,94,157
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,117,194
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,228,177
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,21,35
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,799,234
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,457,84
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,114,60
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,0,22
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,19,12
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,385,43
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,82,414
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,379,365
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,661,127
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,833.5,21
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,247,115
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,138,17
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,526,157
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,214,106
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,396,25
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,211,261
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,608,143
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,44,117
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,68,10
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,149,167
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,169,50
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,284,125
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,415,14
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,620,157
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,279,127
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,192,44
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,568,80
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,157,234
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,423,670
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,219,404
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,145,344
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,0,6
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,269,29
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,79,636
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,286,157
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,119,167
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,273,103
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,311,11
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,534,11
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,6,42
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,426,46
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,169,103
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,640,22
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,301,48
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,248,115
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,611,79
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,159,97
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,225,242
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,78,35
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,536,259
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,166.5,21
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,317,400
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,155,97
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,0,23
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,604,97
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,94,392
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,354,299
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,396,101
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,124,436
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,559,436
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,769,97
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,641,101
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,441,299
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,89,56
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,679,48
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,65,557
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,0,21
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,110,467
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,165,223
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,315,169
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,403,1063
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,648,136
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,106,587
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,423,404
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,241,670
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,240,97
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,936,12
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,388,8
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,85,101
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,519,14
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,67,14
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,161,103
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,743,347
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,199,84
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,153,325
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,507,261
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,638,104
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,225,149
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,334,183
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,female,664,431
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,918,117
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,381,10
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,236,97
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,57,431
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,45,12
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,133,22
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,278,171
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,620,595
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,461,42
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,419,60
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,265,10
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,505,115
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,30.5,15
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,433,587
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,male,143.5,11
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,male,718,29
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,698,149
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,803,167
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,305,440
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,178,471
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,2,67
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,female,225,226
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,male,230,350
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,358,293
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,partially dependent on others,female,387,46
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,female,40,6
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,432,363
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,351,37
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,not dependent on other,male,311,70
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,205,299
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,partially dependent on others,male,109,19
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,fully dependent on others,female,725,367
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,fully dependent on others,male,375,13
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,not dependent on other,female,0,18

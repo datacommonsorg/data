@@ -1,0 +1,491 @@
+Country,State,Year,Residence Type,Age Group,Average Duration Of Stay Per Case For Childbirth By Age Of Mother (UOM:INR(IndianRupees)),Distribution Of Cases Of Hospitalisation(Per 1000) For Childbirth By Age Of The Mother (UOM:Number),Sample Number Of Cases Of Childbirth (UOM:Number)
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.2,1,449
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,2.6,109,40
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,>45,5,0,26
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,4.3,163,121
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.6,161,168
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3,17,197
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.5,0,99
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3,28,75
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.7,10,550
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.7,457,34
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.5,407,303
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3,4,307
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,5.1,148,71
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.5,6,99
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3,114,9
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,5.7,103,496
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.9,63,42
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.7,19,95
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,<20,2.15,68,24
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.2,90,449
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.5,208,99
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,5.1,421,71
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,<20,4.8,14,135
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.7,381,550
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,2.15,412,24
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3,4,75
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,5.1,4,71
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,>45,5.9,0,23
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,<20,4.3,133,121
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,4.6,63,18
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,5.1,392,285
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.8,289,153
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,5.7,134,179
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.6,145,168
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,4.6,11,149
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,5.9,379,475
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.6,352,160
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,>45,7.1,0,48
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,>45,5.7,0,496
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,4.7,42,632
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.2,297,449
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,>45,5.7,0,179
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.5,0,175
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.9,442,533
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,5.7,42,496
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.5,4,303
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.1,0,27
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,2.15,106,24
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,5,0,16
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,6,164,309
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,5.9,283,23
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3,309,417
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,4.3,2,169
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,4.4,274,673
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,2.1,401,333
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.1,62,144
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,4.3,271,121
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,4.4,496,153
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3,0,9
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.8,246,63
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.9,304,533
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,6.2,306,301
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,7.3,301,21
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,<20,4.6,90,149
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.5,0,26
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.9,4,218
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.9,399,42
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,5,2,351
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,<20,5,34,351
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,8.6,314,16
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,<20,5.7,16,179
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,4.8,491,135
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.5,25,303
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,5.7,0,496
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,4.7,221,632
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,4.6,113,18
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.7,109,128
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,5,92,16
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,5,3,540
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,5.9,105,23
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,12.6,544,16
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,>45,5,0,16
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,4.3,125,70
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.3,142,408
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,2.1,386,333
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.9,424,218
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,4.4,30,673
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,6.2,23,301
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,4,169,361
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.8,0,153
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,>45,4.4,3,673
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,<20,6.2,66,301
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3,465,307
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.3,16,408
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,4.7,367,632
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3,69,417
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.9,500,110
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,>45,4.1,0,16
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.6,17,168
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,<20,2.4,0,13
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.5,95,99
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,<20,4,33,162
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,4,423,361
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,4.3,43,70
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,5.5,49,298
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,>45,4.7,0,632
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,4.8,54,135
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3,0,9
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,2,0,39
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,5,277,540
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,6,0,184
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.1,0,27
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.6,296,168
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,4.6,129,18
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,<20,4.4,0,153
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.6,8,168
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,4,42,361
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.9,34,110
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.9,8,110
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.5,123,303
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,7.3,26,21
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.7,36,550
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.5,469,26
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,2.4,385,220
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3,14,307
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.5,10,376
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,2.8,294,67
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.9,0,42
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,7.1,270,48
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.1,274,117
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3,19,307
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.9,190,218
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.9,16,533
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.1,0,27
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.2,557,449
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,5,348,351
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.6,4,168
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3,80,9
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,2.8,520,67
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,7.1,0,48
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.5,121,175
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,>45,2.8,1,144
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,4.1,579,16
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.7,192,95
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,>45,4.6,0,108
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,>45,8.6,0,16
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.7,116,34
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,4.5,0,377
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.7,15,128
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,4.7,327,632
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,5.9,126,475
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,5.1,350,285
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,4,29,162
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,<20,5,88,540
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,12.6,0,16
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3,138,307
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,5,50,26
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,5.5,206,298
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.5,72,26
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,2.5,160,930
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,2.4,551,13
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,4.6,26,108
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3,69,417
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.6,198,160
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,>45,2.4,0,220
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,5.9,51,475
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.5,6,303
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.1,0,144
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3,0,75
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,2.1,7,333
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.7,0,34
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,4.6,0,149
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,2,85,39
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,8.6,22,16
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.6,0,160
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.2,5,449
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.1,11,117
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,4.3,203,169
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,5.9,400,475
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,5.5,587,298
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,4.6,327,149
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,<20,5.9,44,475
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,<20,7.3,0,21
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3,3,307
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.1,378,117
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3,357,307
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.5,61,376
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,2.5,35,930
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,>45,6.2,0,301
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.5,150,376
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.7,106,95
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.5,0,26
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,<20,5,13,26
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,4.3,505,70
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,2.8,0,144
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.9,81,218
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3,437,417
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,4.6,189,149
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,2.4,296,220
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.9,59,533
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3,383,75
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.5,1,376
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.5,0,32
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,2.1,60,333
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,4.4,187,153
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,8.6,519,16
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.1,0,27
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,>45,4.8,0,135
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,5.5,0,298
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,6,410,309
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,<20,2.6,0,40
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,4.3,56,169
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,>45,4,3,361
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,7.1,0,48
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3,296,75
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,<20,4.1,0,16
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,5.9,335,23
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,5.7,10,179
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.5,36,303
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,2.8,10,67
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,5.7,4,179
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,2.8,6,144
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,5.5,37,298
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.3,319,408
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.6,347,160
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3,470,197
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,5,155,351
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,<20,5.9,0,23
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,5,624,26
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,<20,2.4,92,220
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.5,178,32
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,>45,4.3,0,169
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.7,0,95
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,>45,4.5,0,377
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,8.6,146,16
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,6,43,309
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,4.4,22,153
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3,29,197
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.5,450,175
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,<20,7.1,64,48
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,7.3,0,21
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3,0,9
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,4.6,0,108
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,2,594,39
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,>45,5.5,2,298
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,<20,5.1,151,285
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.7,46,128
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,5,54,26
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,6,441,184
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,5.7,433,179
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,7.3,327,21
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,<20,5.5,119,298
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,>45,5.1,0,71
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,5,429,540
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3,692,9
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.5,0,175
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,5,195,16
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.1,101,144
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.1,12,144
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.7,7,550
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,>45,2,6,39
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.7,327,550
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,2.8,126,144
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,4.3,302,169
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,2.15,0,24
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,4.6,353,108
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,>45,5,0,540
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,2.4,0,13
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3,153,197
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,4.1,226,563
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,<20,5.1,11,71
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,5,43,540
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.7,91,128
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3,3,417
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.7,42,34
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.5,33,26
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.1,117,144
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,5.9,0,475
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,6.2,1,301
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,4,6,361
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,2.8,430,144
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.8,118,63
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,2.6,137,40
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.9,9,218
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,4.3,21,70
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,4.4,533,673
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,5,343,16
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,12.6,11,16
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,<20,2.1,20,333
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,5,239,26
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.7,81,550
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.2,19,449
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.9,167,42
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,4.1,465,563
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.6,71,160
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3,32,197
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,>45,2.15,0,24
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.6,18,160
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,2.5,51,930
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,4.4,108,673
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.6,15,160
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,<20,2.8,18,67
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,>45,4.4,0,153
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,4.1,21,563
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,4.5,497,377
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,<20,2.8,49,144
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,7.1,477,48
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.1,12,117
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,4.1,117,563
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,4.4,183,153
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.9,0,110
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,>45,12.6,0,16
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,3.8,0,63
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,8.6,0,16
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.5,0,32
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,2,53,39
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,<20,4.4,47,673
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.7,41,95
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,>45,4.3,0,70
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,>45,6,0,184
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.7,73,34
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,6,4,309
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.5,26,376
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,4,395,162
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3,286,197
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.7,158,550
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,12.6,207,16
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,4,127,162
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,4,344,361
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.1,187,117
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,2.8,111,67
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.3,63,408
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,2.8,47,67
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,2,262,39
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,<20,12.6,0,16
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3,114,9
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.8,16,153
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.5,111,32
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,5,160,540
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,<20,3.5,129,26
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,4.4,4,673
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.5,32,175
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,5.1,236,71
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,4.8,284,135
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,2.6,406,40
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,2.4,449,13
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.5,399,303
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,5.9,24,23
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,>45,4.1,0,563
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,4.6,128,18
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,5.7,420,496
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,>45,4.6,0,149
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,4,229,162
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Rural,<20,8.6,0,16
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,<20,4.3,39,169
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.5,367,376
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,2.8,389,144
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,4.6,382,149
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,6,348,309
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,2.6,342,40
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.9,10,533
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,4.1,45,16
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.8,65,153
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.8,382,153
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,5,424,351
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,<20,5,154,16
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,<20,2.5,41,930
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,6.2,456,301
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,4.3,98,121
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,3.9,51,42
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.5,297,26
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,5.7,382,496
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,<20,6,32,309
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.5,1,175
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,7.1,190,48
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,4.7,2,632
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,5.1,0,285
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.5,324,32
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.9,316,110
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,4.6,189,108
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.5,152,99
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3,115,75
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.1,219,27
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,2.6,6,40
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.8,284,63
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.1,421,144
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.7,390,128
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.9,0,42
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,4.6,416,108
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.1,239.5,27
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.8,0,153
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,>45,4,0,162
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.9,320,42
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,4.8,0,135
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,5.9,252,23
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,4.3,306,70
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.5,0,32
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3,174,75
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,4.5,118,377
+India,Haryana,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.1,287,144
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.8,0,63
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3,108,417
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,2.4,16,220
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Rural,>45,2.6,0,40
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,4.6,525,18
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3,4,417
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,>45,5.1,0,285
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,4.5,280,377
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,6.2,149,301
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.6,370,168
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,<20,6,75,184
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,4.5,23,377
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,2.15,0,24
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Rural,<20,4.5,82,377
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.5,385,376
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.9,23,110
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,4.1,0,16
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,>45,2.5,2,930
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,>45,4.3,0,121
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.8,248,153
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.7,312,34
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.8,331,63
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.7,381,95
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Urban,>45,5.9,0,475
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.7,0,34
+India,Mizoram,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.7,261,95
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,>45,2.1,1,333
+India,Assam,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,4.8,158,135
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,5.7,404,179
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,3.5,387,32
+India,Sikkim,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.8,22,63
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,4.3,336,121
+India,Nagaland,"Agriculture Year (Jul - Jun), 2014",Urban,<20,2,0,39
+India,Gujarat,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,2.1,124,333
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,5,20,26
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.9,2,218
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,6,37,184
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2014",Rural,<20,5.7,54,496
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,6,315,184
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,3.1,128,117
+India,Manipur,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,4,187,162
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.1,541.5,27
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,>45,3.9,0,533
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.3,0,408
+India,Puducherry,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,12.6,238,16
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,2.5,388,930
+India,Telangana,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,6,132,184
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,<20,4.6,42,18
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,2.4,173,220
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,5.1,12,285
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,2.4,0,13
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,2.15,414,24
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,5.1,180,71
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2014",Urban,<20,4.7,40,632
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.3,431,408
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,>45,7.3,0,21
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,2.4,38,220
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.7,328,128
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,<20,4.1,170,563
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,>45,4.6,0,18
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,>45,5,0,351
+India,Tripura,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,4.3,0,121
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,3.9,290,218
+India,Bihar,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3,12,197
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Rural,>45,2.8,0,67
+India,West Bengal,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,4.1,1,563
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,2.5,323,930
+India,Punjab,"Agriculture Year (Jul - Jun), 2014",Rural,25-29,3.5,396,175
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,<20,4,12,361
+India,Kerala,"Agriculture Year (Jul - Jun), 2014",Urban,>45,6,0,309
+India,Goa,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,7.3,346,21
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Urban,40-44,3.7,21,128
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2014",Rural,>45,3.1,9,117
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,>45,2.4,0,13
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,5.1,95,285
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2014",Urban,30-34,3.9,168,533
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Urban,<20,4.6,15,108
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2014",Urban,25-29,5,216,16
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2014",Rural,35-39,4.4,112,153
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,3.5,479,99
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,30-34,3.9,119,110
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Urban,20-40,4.3,399,169
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.2,30,449
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2014",Urban,<20,4.3,0,70
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,4.1,0,16
+India,Delhi,"Agriculture Year (Jul - Jun), 2014",Rural,40-44,2.4,0,13
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2014",Rural,20-40,4.1,376,16
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.5,61,99
+India,Odisha,"Agriculture Year (Jul - Jun), 2014",Rural,<20,3.3,29,408
+India,Karnataka,"Agriculture Year (Jul - Jun), 2014",Urban,35-39,5,37,351

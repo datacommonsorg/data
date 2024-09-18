@@ -1,0 +1,8 @@
+Node: E:outof_pocket->E0
+observationAbout: C:outof_pocket->observationAbout
+observationDate: C:outof_pocket->observationDate
+value: C:outof_pocket->value
+variableMeasured: C:outof_pocket->variableMeasured
+unit: C:outof_pocket->unit
+scalingFactor: C:outof_pocket->scalingFactor
+typeOf: dcs:StatVarObservation

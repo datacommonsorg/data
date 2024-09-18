@@ -1,0 +1,8 @@
+Node: E:mother_age->E0
+observationAbout: C:mother_age->observationAbout
+observationDate: C:mother_age->observationDate
+value: C:mother_age->value
+variableMeasured: C:mother_age->variableMeasured
+unit: C:mother_age->unit
+scalingFactor: C:mother_age->scalingFactor
+typeOf: dcs:StatVarObservation

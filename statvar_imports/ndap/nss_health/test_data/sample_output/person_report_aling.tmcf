@@ -1,0 +1,8 @@
+Node: E:person_report_aling->E0
+observationAbout: C:person_report_aling->observationAbout
+observationDate: C:person_report_aling->observationDate
+value: C:person_report_aling->value
+variableMeasured: C:person_report_aling->variableMeasured
+unit: C:person_report_aling->unit
+scalingFactor: C:person_report_aling->scalingFactor
+typeOf: dcs:StatVarObservation

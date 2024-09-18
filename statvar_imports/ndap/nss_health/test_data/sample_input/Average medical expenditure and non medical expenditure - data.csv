@@ -1,0 +1,316 @@
+Country,State,Year,Residence Type,Gender,Average Medical Expenditure On Account Of Hospitalisation Per Hospitalisation Case (UOM:INR(IndianRupees)),Average Medical Expenditure For Treatment Per Hospitalisation Case During Stay At Hospital (UOM:INR(IndianRupees)),Average Of Other Expenses On Account Of Hospitalisation (UOM:INR(IndianRupees)),Average Medical And Non-Medical Expenditure On Account Of Hospitalisation (UOM:INR(IndianRupees)),Sample Of Average Medical And Non-Medical Expenditure On Account Of Hospitalisation (UOM:Number)
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Total,person,11053,7978,3075,208,638
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Total,female,35398,24928,10470,176,408
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Rural,person,28902,26123,2778,3663,966
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Rural,person,8769,6020,2748,141,430
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,person,35539,33339,2201,12419,2801
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Urban,person,15739,13400,2340,328,380
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Urban,female,25509,23850,1659,4922,708
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Urban,female,26134,24071,2062,79,201
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Urban,male,39630,37160,2469,2643,802
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Rural,female,11240,9726,1514,10246,1651
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Total,male,16764.5,15597,1167.5,52.5,159
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Rural,person,24443,19887,4556,4439,1059
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Total,person,21814,19804,2009,345,318
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Total,male,60902,58538,2364,182,215
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Total,male,8528,6898,1630,1914,1236
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Total,female,16518,14169,2349,16596,2982
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Urban,female,14773,12763,2010,207,250
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,male,22272,19508,2764,10222,1581
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Total,male,19637,14792,4845,30,149
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Rural,female,6134,4838,1296,1586,856
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Urban,female,29798,27537,2262,3627,934
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Urban,male,30294,28257,2037,11592,2035
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Total,male,28351,26585,1766,5137,750
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Total,person,27051,24521,2530,4926,1590
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,male,34658,32456,2203,12419,2801
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Rural,male,8222,5521,2701,141,430
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Urban,male,29528,27823,1705,4922,708
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Total,person,26806,25094,1712,5137,750
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,male,27792,25776,2016,6327,1067
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Rural,male,9347,7264,2084,1753,1034
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Total,female,15301,13645,1657,15780,2713
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Urban,female,32267,30597,1670,14558,3072
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Rural,person,14630,12768,1862,9915,1405
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Urban,person,32814,30082,2732,3627,934
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Urban,female,20413,17900,2512,615,733
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,male,23358,21112,2247,18709,2714
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Total,male,35659,33609,2050,7832,2116
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Rural,female,10528,9128,1401,138,68
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Rural,person,4552,2790,1762,406,364
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,male,6470,4662,1808,426,841
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Rural,male,15257,11353,3904,10,50
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Rural,female,9627,8085,1542,24494,2628
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Total,female,12607,10300,2308,12883,2617
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Rural,female,32511,30249,2262,4863,1072
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,female,15572,12959,2613,2718,1126
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Rural,person,11807,9826,1981,2374,1095
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Urban,female,27449,25864,1585,2969,1044
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Total,female,15765,12060,3705,572,1310
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Rural,male,6893,5488,1405,1586,856
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Urban,person,10318,7703,2616,30,96
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Rural,person,9234,7765,1469,165,100
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Urban,male,23415,21853,1562,6186,1365
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Rural,male,12555,3416,9139,108,201
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Rural,person,21427,19383,2043,17964,2434
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Urban,female,24313,22339,1974,2643,802
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Rural,person,16513,14924,1589,6671,1069
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Urban,person,27579,25896,1683,4922,708
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Total,female,11935,10547,1388.5,52.5,159
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,male,6381,4564,1817,359,559
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Urban,female,54212,39156,15056,68,207
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Rural,female,10886,9627,1259,6671,1069
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Urban,female,23994,22327,1668,11592,2035
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Rural,male,11696,8273,3423,130,372
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Rural,male,33850,30263,3587,3663,966
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Urban,male,44373,42428,1946,14558,3072
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Rural,person,10376,7180,3196,122,350
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Urban,person,21715,18748,2967,1929,731
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Total,person,19215,17141,2074,36087,4663
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,female,27384,25227,2157,42996,6484
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,female,11424,9898,1526,14891,3047
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Rural,male,28582,25933,2649,2,36
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Total,male,23085,20227,2858,16596,2982
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Total,person,19859,17900,1959,15780,2713
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Urban,male,42929,33306,9623,68,207
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Urban,male,26032,23579,2453,4251,1157
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Rural,female,8874,6471,2403,130,372
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Total,person,32907,30869,2038,7832,2116
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Total,person,20024,18530,1494,12857,2434
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Total,person,57613,54870,2743,182,215
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Rural,female,11147,9607,1540,9915,1405
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Urban,female,19254,16801,2453,450,166
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Total,female,23603,21677,1926,4926,1590
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,person,6645,4754,1892,426,841
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Urban,female,21415,18899,2516,10744,1919
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Total,person,20275,17570,2704,22482,4047
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Total,female,13130,11355,1774,345,318
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Rural,person,19047,16268,2779,12345,1825
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Total,person,14938,12109,2829,250,840
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,male,26111,23192,2920,248,288
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,male,23754,21484,2270,4668,1466
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Urban,female,27910,24622,3288,1676,643
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,female,6270,4435,1835,359,559
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Rural,male,20625,17885,2740,24494,2628
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Rural,male,21920,19594,2326,18767,2169
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,female,9698,6959,2739,67,282
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,male,32024,27875,4149,2718,1126
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Rural,male,12633,10637,1996,2374,1095
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,person,19067,16717,2350,12382,1647
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,male,6979,5226,1752,67,282
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Urban,male,35451,32308,3143,3627,934
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Total,person,10906,8789,2118,2369,1767
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Urban,person,40100,37038,3062,492,362
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Rural,female,11832,9564,2268,10954,1886
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Urban,male,17120,12746,4374,67,208
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Urban,person,20179,17371,2808,120,468
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Urban,male,29960,26911,3049,10744,1919
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Rural,person,6512,5161,1350,1586,856
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,male,29412,26917,2495,42996,6484
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,person,23678,20308,3369,2718,1126
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Total,male,22330,18520,3809,572,1310
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Rural,male,36280,34085,2195,4863,1072
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Rural,person,9181,6797,2384,216,42
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Total,male,11105,8757,2348,2369,1767
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Total,female,17454,16213,1242,12857,2434
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Urban,person,17921,12984,4937,21,99
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Rural,female,4387,2608,1779,406,364
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Total,male,17666,14559,3107,12883,2617
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,female,15493,12960,2534,2966,1414
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,person,24309,22479,1830,6327,1067
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Total,female,54183,51045,3138,182,215
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Urban,person,22995,20824,2171,4251,1157
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Rural,female,16704,14371,2334,2579,825
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Rural,male,21919,18497,3422,367,703
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Rural,female,16696,14544,2152,18767,2169
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,person,16554,14325,2229,10222,1581
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,person,8337,6092,2245,67,282
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Urban,person,18446,15678,2768,615,733
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Total,female,14530,12945,1585,36087,4663
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Urban,male,46453,43765,2688,207,250
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Urban,person,38422,36612,1810,14558,3072
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Total,person,16302,14333,1969,615,266
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Rural,male,9458,6710,2748,216,42
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Urban,person,26066,23260,2806,10744,1919
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Rural,female,19227,12699,6528,108,201
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Rural,female,10990,9387,1603,165,100
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Rural,person,13265,11595,1671,10246,1651
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Total,person,23456,20741,2715,4254,1468
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,male,31547,27498,4050,2966,1414
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Rural,female,7099,4574,2526,10,50
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Rural,female,8426,7033,1393,216,42
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Urban,male,23519,21214,2305,79,201
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Total,male,30073,27686,2388,7505,1732
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Rural,person,11151,7940,3210,10,50
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Rural,person,21332,19177,2156,4861,930
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Rural,person,19292,17054,2239,18767,2169
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Total,male,20932,17964,2969,2970,1600
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,person,6329,4504,1826,359,559
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Rural,male,21200,19276,1924,20,85
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Total,person,7871,6041,1830,486,565
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Urban,female,20699,18820,1879,12796,1749
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Rural,female,10495,7155,3340,122,350
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Urban,female,14716,13080,1636,1295,847
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Urban,female,20537,16228,4309,205,607
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Total,person,26331,23422,2910,1389,795
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Rural,female,9337,6540,2797,141,430
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Total,female,12121,9707,2414,250,840
+India,Delhi,"Agriculture Year (Jul - Jun), 2017",Total,female,25105,23452,1653,5137,750
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Urban,male,20105,18409,1695,1263,624
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Total,male,23555,21028,2527,36087,4663
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,person,19180,17365,1816,4668,1466
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Total,male,24174,21884,2290,31563,3918
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,person,28419,26089,2330,42996,6484
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Urban,female,14997,10367,4630,21,99
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Total,person,14977,12295,2682,12883,2617
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Urban,female,11923,8844,3079,30,96
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Rural,person,10110,7260,2849,130,372
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Total,female,26342,23195,3147,8066,1993
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Total,male,11158,7905,3253,208,638
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Rural,person,19734,17288,2446,2579,825
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,female,36463,34265,2199,12419,2801
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Urban,person,27084,25235,1849,11592,2035
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Rural,female,13578,11234,2345,11738,2128
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Rural,male,16041,12992,3050,10954,1886
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Total,person,29034,27096,1939,32523,5506
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Total,male,23389,21196,2193,15780,2713
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Urban,person,49362,36642,12721,68,207
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,female,14386,13047,1339,4668,1466
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,person,25527,23144,2383,30577,3683
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Total,person,19124,15366,3758,572,1310
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Total,female,19629,17683,1946,7505,1732
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Rural,male,4750,3008,1742,406,364
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Urban,male,22987,18557,4430,205,607
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Total,male,29791,25555,4236,8066,1993
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Total,person,15066.5,13859.5,1207.5,52.5,159
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Urban,person,32578,30337,2241,2643,802
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Urban,male,18039,16932,1106.5,32.5,74
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Total,female,7672,6259,1413,1914,1236
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Urban,male,16009,12924,3085,615,733
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Urban,person,31053,29338,1716,2969,1044
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Rural,female,23677,21752,1924,3663,966
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Rural,female,15294,12769,2525,12345,1825
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Urban,person,45104,38935,6169,595,505
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Total,female,15867,13205,2663,2970,1600
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Rural,female,9066,7102,1963,2,36
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,female,10008,8392,1615,10222,1581
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Urban,person,28698,26575,2123,5865,1308
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Total,female,17303,15050,2252,615,266
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,female,17971,15879,2092,18709,2714
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Total,person,8094,6574,1520,1914,1236
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Total,female,10767,7477,3290,152,446
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,female,16784,14451,2333,12382,1647
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Rural,male,15515,13670,1845,10246,1651
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Urban,male,52045,45432,6613,595,505
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Total,person,28206,24471,3736,8066,1993
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,female,23667,21526,2140,30577,3683
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Urban,male,51551,47868,3683,492,362
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Urban,male,8064,6100,1965,30,96
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,female,14666,12961,1705,248,288
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Rural,person,14974,12362,2611,11738,2128
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Rural,male,16234,13382,2852,11738,2128
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Rural,male,24917,22574,2344,4861,930
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Rural,person,15095.5,13476.5,1619,20,85
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Rural,male,10104,7124,2980,122,350
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Urban,female,24199,22975,1224,6186,1365
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Total,female,17243,14819,2425,22482,4047
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,person,23376,20098,3278,2966,1414
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Rural,female,13396,9991,3405,367,703
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Total,female,30769,28740,2029,7832,2116
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Rural,male,17165,15069,2096,9915,1405
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Urban,female,12480,11123,1357.5,32.5,74
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Urban,person,24194,22123,2071,12796,1749
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Rural,female,23435,19544,3891,4439,1059
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Total,male,18291,14967,3324,250,840
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Total,person,18482,15661,2821,2970,1600
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Total,person,15767,11380,4388,30,149
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Total,person,28542,18686,9856,176,408
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Total,female,18247,16201,2046,31563,3918
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Total,person,13989,12298,1691,11541,2498
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Urban,male,26494,23077,3417,1929,731
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Total,male,9695,6919,2777,152,446
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Total,female,10941,8056,2885,208,638
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Urban,person,16264.5,15150.5,1113.5,32.5,74
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Urban,male,22104,16729,5375,21,99
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Urban,female,23253,21105,2148,492,362
+India,Lakshadweep,"Agriculture Year (Jul - Jun), 2017",Total,female,12745,8715,4030,30,149
+India,Telangana,"Agriculture Year (Jul - Jun), 2017",Rural,male,25278,20171,5107,4439,1059
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Urban,male,24862,21637,3225,120,468
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Rural,male,26445,23049,3395,897,433
+India,Sikkim,"Agriculture Year (Jul - Jun), 2017",Total,person,10365,7282,3083,152,446
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Urban,female,36881,31238,5643,595,505
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,male,22723,20109,2614,14891,3047
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Rural,male,21703,19808,1894,6671,1069
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Urban,female,17191,14649,2542,1929,731
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Urban,female,21704,19867,1836,5865,1308
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Urban,female,23395,21465,1930,1263,624
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Urban,person,58033,55286,2746,180,179
+India,Odisha,"Agriculture Year (Jul - Jun), 2017",Rural,person,13790,11159,2632,10954,1886
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Total,female,20928,18235,2693,4254,1468
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Total,male,37286,33766,3520,1389,795
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Rural,male,25627,23247,2380,17964,2434
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Rural,person,34040,31805,2235,4863,1072
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Total,male,34005,31819,2186,32523,5506
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Total,female,7818,5995,1823,486,565
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Urban,person,18895,16742,2153,450,166
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Total,male,16597,14727,1870,11541,2498
+India,Punjab,"Agriculture Year (Jul - Jun), 2017",Urban,male,34816,32964,1852,2969,1044
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Urban,person,23810,22418,1392,6186,1365
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Rural,female,17059,15128,1931,4861,930
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Total,person,21280,19109,2171,31563,3918
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Urban,male,61409,59049,2360,180,179
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Rural,person,17583,14170,3413,367,703
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Urban,male,30520,27554,2966,1676,643
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Total,male,26356,23616,2741,4254,1468
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Total,male,22257,12964,9293,176,408
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Total,male,15130,13493,1637,615,266
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Urban,person,24889,22711,2178,79,201
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Urban,female,19808,17933,1875,4251,1157
+India,The Dadra And Nagar Haveli And Daman And Diu,"Agriculture Year (Jul - Jun), 2017",Rural,female,11164,9745,1418.5,20,85
+India,Kerala,"Agriculture Year (Jul - Jun), 2017",Urban,male,27253,25013,2240,12796,1749
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Rural,person,6815,5354,1462,138,68
+India,Arunachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,female,6842,4856,1986,426,841
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,male,21079,18715,2365,12382,1647
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Total,female,15860,13534,2327,1389,795
+India,West Bengal,"Agriculture Year (Jul - Jun), 2017",Rural,person,15491,13310,2180,24494,2628
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Total,male,28967,26764,2203,345,318
+India,Himachal Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,person,20069,17791,2278,248,288
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Urban,person,31828,29453,2375,207,250
+India,Uttar Pradesh,"Agriculture Year (Jul - Jun), 2017",Rural,male,27295,24682,2613,30577,3683
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Rural,male,23424,20841,2582,2579,825
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Urban,person,19711,17861,1849,1295,847
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Urban,female,20311,18694,1617,6327,1067
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Urban,female,14713,12763,1950,328,380
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Rural,male,7649,6302,1347,165,100
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Urban,female,14471,11392,3078,67,208
+India,Karnataka,"Agriculture Year (Jul - Jun), 2017",Urban,male,34708,32338,2370,5865,1308
+India,Tripura,"Agriculture Year (Jul - Jun), 2017",Urban,male,16899,14119,2780,328,380
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Rural,female,12978,10582,2396,897,433
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Total,female,11614,10087,1527,11541,2498
+India,Puducherry,"Agriculture Year (Jul - Jun), 2017",Rural,male,3937,2428,1509,138,68
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Total,male,30430,27313,3117,4926,1590
+India,Andaman And Nicobar Islands,"Agriculture Year (Jul - Jun), 2017",Rural,person,15358,7316,8042,108,201
+India,Manipur,"Agriculture Year (Jul - Jun), 2017",Urban,person,21880,17505,4376,205,607
+India,Jharkhand,"Agriculture Year (Jul - Jun), 2017",Urban,person,29185,26055,3131,1676,643
+India,Chhattisgarh,"Agriculture Year (Jul - Jun), 2017",Urban,person,21683,19873,1809,1263,624
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Total,person,20058,17435,2623,16596,2982
+India,Rajasthan,"Agriculture Year (Jul - Jun), 2017",Rural,male,22138,19150,2988,12345,1825
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Total,female,23876,22194,1682,32523,5506
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Urban,female,54538,51391,3147,180,179
+India,Tamil Nadu,"Agriculture Year (Jul - Jun), 2017",Total,male,22915,19967,2948,22482,4047
+India,Nagaland,"Agriculture Year (Jul - Jun), 2017",Urban,person,15874,12110,3764,67,208
+India,Bihar,"Agriculture Year (Jul - Jun), 2017",Urban,male,24740,22676,2064,1295,847
+India,Meghalaya,"Agriculture Year (Jul - Jun), 2017",Total,male,7933,6095,1838,486,565
+India,Assam,"Agriculture Year (Jul - Jun), 2017",Rural,female,10948,8983,1965,2374,1095
+India,Madhya Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,person,17377,15278,2099,14891,3047
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Rural,female,7415,5677,1738,1753,1034
+India,Goa,"Agriculture Year (Jul - Jun), 2017",Urban,male,18432,16667,1765,450,166
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Total,female,10751,8814,1937,2369,1767
+India,Haryana,"Agriculture Year (Jul - Jun), 2017",Total,person,25293,23107,2186,7505,1732
+India,Maharashtra,"Agriculture Year (Jul - Jun), 2017",Rural,female,17056,15363,1693,17964,2434
+India,Jammu And Kashmir,"Agriculture Year (Jul - Jun), 2017",Rural,person,8260,6371,1889,1753,1034
+India,Chandigarh,"Agriculture Year (Jul - Jun), 2017",Rural,person,22202,19777,2425,2,36
+India,Uttarakhand,"Agriculture Year (Jul - Jun), 2017",Rural,person,18770,15945,2826,897,433
+India,Mizoram,"Agriculture Year (Jul - Jun), 2017",Urban,female,15908,13481,2427,120,468
+India,Andhra Pradesh,"Agriculture Year (Jul - Jun), 2017",Total,person,20840,18665,2174,18709,2714
+India,Gujarat,"Agriculture Year (Jul - Jun), 2017",Total,male,22506,20768,1738,12857,2434

@@ -1,0 +1,8 @@
+Node: E:economical_independance->E0
+observationAbout: C:economical_independance->observationAbout
+observationDate: C:economical_independance->observationDate
+value: C:economical_independance->value
+variableMeasured: C:economical_independance->variableMeasured
+unit: C:economical_independance->unit
+scalingFactor: C:economical_independance->scalingFactor
+typeOf: dcs:StatVarObservation

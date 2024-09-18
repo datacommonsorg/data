@@ -1,0 +1,8 @@
+Node: E:board_alligment_catogery->E0
+observationAbout: C:board_alligment_catogery->observationAbout
+observationDate: C:board_alligment_catogery->observationDate
+value: C:board_alligment_catogery->value
+variableMeasured: C:board_alligment_catogery->variableMeasured
+unit: C:board_alligment_catogery->unit
+scalingFactor: C:board_alligment_catogery->scalingFactor
+typeOf: dcs:StatVarObservation

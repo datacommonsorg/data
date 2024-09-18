@@ -1,0 +1,8 @@
+Node: E:over_board_age->E0
+observationAbout: C:over_board_age->observationAbout
+observationDate: C:over_board_age->observationDate
+value: C:over_board_age->value
+variableMeasured: C:over_board_age->variableMeasured
+unit: C:over_board_age->unit
+scalingFactor: C:over_board_age->scalingFactor
+typeOf: dcs:StatVarObservation

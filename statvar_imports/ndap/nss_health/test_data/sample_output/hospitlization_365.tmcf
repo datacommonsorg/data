@@ -1,0 +1,8 @@
+Node: E:hospitlization_365->E0
+observationAbout: C:hospitlization_365->observationAbout
+observationDate: C:hospitlization_365->observationDate
+value: C:hospitlization_365->value
+variableMeasured: C:hospitlization_365->variableMeasured
+unit: C:hospitlization_365->unit
+scalingFactor: C:hospitlization_365->scalingFactor
+typeOf: dcs:StatVarObservation
