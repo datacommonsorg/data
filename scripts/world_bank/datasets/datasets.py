@@ -47,7 +47,7 @@ load_stat_vars: Loads stat vars from a mapping file specified via the `stat_vars
 
 Use this for debugging to ensure that the mappings load correctly and fix any errors logged by this operation.
 
-Run: python3 datasets.py --mode=load_stat_vars --stat_vars_file=/path/to/sv_mappings.csv
+Run: python3 datasets.py --mode=load_stat_vars --stat_vars_file=/path/to/statvars.csv
 
 See `sample-svs.csv` for a sample mappings file.
 
@@ -59,7 +59,7 @@ The stat vars file to be used for mappings should be specified using the `stat_v
 
 It only operates on files that are named '*_CSV.zip'.
 
-Run: python3 datasets.py --mode=write_observations --stat_vars_file=/path/to/sv_mappings.csv
+Run: python3 datasets.py --mode=write_observations --stat_vars_file=/path/to/statvars.csv
 """
 
 import requests
