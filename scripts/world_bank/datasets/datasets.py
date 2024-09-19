@@ -165,7 +165,7 @@ def download(url):
         # response = requests.get(url)
         # Using urllib3 for downloading content to avoid SSL issue.
         # See: https://github.com/urllib3/urllib3/issues/2653#issuecomment-1165418616
-        with urllib3.PoolManager(ssl_context=ctx) as http:
+        with urllib3.PoolManager(ssl_context=ctx,timeout=90) as http:
             try:
                 response = http.request("GET", url)
                 with open(file_path, 'wb') as f:
