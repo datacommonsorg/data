@@ -17,4 +17,4 @@
 `python3 stat_var_processor.py --input_data=<input_file>.csv --pv_map=statvar_imports/USA/NHTSA_FARS_CrashData/pv_map/<filename>_pvmap.csv --config=statvar_imports/USA/NHTSA_FARS_CrashData/test_data/common_metadata.csv --output_path=--output_path=<filepath/filename>`
 
 #### Example
-`python3 stat_var_processor.py --input_data=statvar_imports/USA/NHTSA_FARS_CrashData/test_data/sample_input/accident_1975Onwards_data.csv --pv_map=statvar_imports/USA/NHTSA_FARS_CrashData/pv_map/accident_1975Onwards_pvmap.csv --config=statvar_imports/USA/NHTSA_FARS_CrashData/test_data/common_metadata.csv --output_path=--output_path=/Users/sanikap/brazil_visadata/data/statvar_imports/USA/NHTSA_FARS_CrashData/test_data/sample_output/accident_1975Onwards`
+`python3 stat_var_processor.py --input_data=statvar_imports/USA/NHTSA_FARS_CrashData/test_data/sample_input/accident_1975Onwards_data.csv --pv_map=statvar_imports/USA/NHTSA_FARS_CrashData/pv_map/accident_1975Onwards_pvmap.csv --config=statvar_imports/USA/NHTSA_FARS_CrashData/test_data/common_metadata.csv --output_path=--output_path=statvar_imports/USA/NHTSA_FARS_CrashData/test_data/sample_output/accident_1975Onwards`
