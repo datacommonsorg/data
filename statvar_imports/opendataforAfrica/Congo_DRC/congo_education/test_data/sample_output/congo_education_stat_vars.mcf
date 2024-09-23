@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_education/test_data/sample_input/Congo_education_test_data.csv --output_path=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_education/test_data/sample_output/congo_education --pv_map=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_education/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_education/Congo_education_metadata.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-07-05 10:38:14.451770
-
 Node: dcid:Count_Person_Female_ConventionalTeachingCatholic_TechnicalGraduateDegree
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person

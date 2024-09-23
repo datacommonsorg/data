@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_health/test_data/sample_input/Congo_health_test_data.csv --output_path=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_health/test_data/sample_output/Congo_health --pv_map=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_health/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_health/Congo_health_metadata.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-07-05 10:42:45.625622
-
 Node: dcid:Count_MedicalConditionIncident_ConditionCholera
 typeOf: dcid:StatisticalVariable
 name: "Count of Cholera incidents"

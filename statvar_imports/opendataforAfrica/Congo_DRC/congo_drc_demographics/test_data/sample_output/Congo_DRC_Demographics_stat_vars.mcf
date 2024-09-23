@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_drc_demographics/test_data/sample_input/Congo_DRC_Demographics_test_data.csv --output_path=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_drc_demographics/test_data/sample_output/Congo_DRC_Demographics --pv_map=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_drc_demographics/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_13_june/data/statvar_imports/opendataforAfrica/Congo_DRC/congo_drc_demographics/Congo_DRC_Demographics_metadata.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-07-05 10:28:08.131526
-
 Node: dcid:Count_Person
 typeOf: dcid:StatisticalVariable
 name: "Total Projected population for all age group"
