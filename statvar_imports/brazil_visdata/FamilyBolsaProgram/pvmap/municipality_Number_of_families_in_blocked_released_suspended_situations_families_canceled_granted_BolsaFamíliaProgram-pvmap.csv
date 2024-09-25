@@ -1,0 +1,12 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Referência,observationDate,{Data},observationAbout,country/BRA,populationType,EconomicActivity,benefitProgram,Brazil_BolsaFamilyProgram,observationPeriod,P1M,,,,
+Famílias na situação bloqueada (até Outubro/2021),benefitsStatus,Lockdown,value,{Number},name,"""Families in lockdown situation""",alternateName,"""Famílias na situação bloqueada@pt""",,,,,,
+Famílias na situação bloqueada (a partir de Março/2023),benefitsStatus,Lockdown,value,{Number},name,"""Families in lockdown situation""",alternateName,"""Famílias na situação bloqueada@pt""",,,,,,
+Famílias canceladas (até Outubro/2021),benefitsStatus,Cancelled,value,{Number},name,"""Families no longer receiving benefits""",alternateName,"""Famílias canceladas@pt""",,,,,,
+Famílias canceladas (a partir de Março/2023),benefitsStatus,Cancelled,value,{Number},name,"""Families no longer receiving benefits""",alternateName,"""Famílias canceladas@pt""",,,,,,
+Famílias concedidas (até Outubro/2021),benefitsStatus,Granted,value,{Number},name,"""Benefits granted to families""",alternateName,"""Famílias concedidas@pt""",,,,,,
+Famílias concedidas (a partir de Março/2023),benefitsStatus,Granted,value,{Number},name,"""Benefits granted to families""",alternateName,"""Famílias concedidas@pt""",,,,,,
+Famílias na situação liberada (até Outubro/2021),benefitsStatus,Released,value,{Number},name,"""Families approved for the program""",alternateName,"""Famílias na situação liberada@pt""",,,,,,
+Famílias na situação liberada (a partir de Março/2023),benefitsStatus,Released,value,{Number},name,"""Families approved for the program""",alternateName,"""Famílias na situação liberada@pt""",,,,,,
+Famílias na situação de suspensão (até Outubro/2021),benefitsStatus,Suspended,value,{Number},name,"""Families removed from the program""",alternateName,"""Famílias na situação de suspensão@pt""",,,,,,
+Famílias na situação de suspensão (a partir de Março/2023),benefitsStatus,Suspended,value,{Number},name,"""Families removed from the program""",alternateName,"""Famílias na situação de suspensão@pt""",,,,,,

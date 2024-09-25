@@ -1,0 +1,8 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Referência,observationDate,{Data},observationAbout,country/BRA,benefitProgram,Brazil_BolsaFamilyProgram,observationPeriod,P1M,,,,,,
+Total de famílias Habilitadas ao PBF (até Out/2021),populationType,Household,householdType,QualifiedFamily,value,{Number},,,name,"""Total families eligible for the Bolsa Família Program""",alternateName,"""Total de famílias Habilitadas ao PBF@pt""",,
+Total de famílias Habilitadas ao PBF (a partir de Mar/2023),populationType,Household,householdType,QualifiedFamily,value,{Number},,,name,"""Total families eligible for the Bolsa Família Program""",alternateName,"""Total de famílias Habilitadas ao PBF@pt""",,
+Novas Concessões do PBF (até Out/2021),populationType,Household,discount,ConcessionTillOct2021,value,{Number},,,name,"""New Bolsa Família Program Concessions""",alternateName,"""Novas Concessões do PBF@pt""",,
+Novas Concessões do PBF (a partir de Mar/2023),populationType,Household,discount,ConcessionTillMar2023,value,{Number},,,name,"""New Bolsa Família Program Concessions""",alternateName,"""Novas Concessões do PBF@pt""",,
+Saldo de famílias habilitadas após a concessão (até Out/2021),populationType,Household,discount,ConcessionTillOct2021,value,{Number},householdType,QualifiedFamily,name,"""Balance of qualified families after the concession""",alternateName,"""Saldo de famílias habilitadas após a concessão@pt""",,
+Saldo de famílias habilitadas após a concessão (a partir de Mar/2023),populationType,Household,discount,ConcessionTillMar2023,value,{Number},householdType,QualifiedFamily,name,"""Balance of qualified families after the concession""",alternateName,"""Saldo de famílias habilitadas após a concessão@pt""",,
