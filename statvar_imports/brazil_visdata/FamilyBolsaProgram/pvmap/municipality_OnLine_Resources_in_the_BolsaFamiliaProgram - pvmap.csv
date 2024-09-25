@@ -1,0 +1,7 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Referência,observationDate,{Data},benefitProgram,Brazil_BolsaFamilyProgram,observationPeriod,P2M,,,,,,,,
+Código,observationAbout,{Data},,,,,,,,,,,,
+Total de recursos cadastrados e avaliados,value,{Number},populationType,Resource,benefitsStatus,RegisteredAndEvaluated,name,"""Total resources registered and evaluated""",alternateName,"""Total de recursos cadastrados e avaliados@pt""",,,,
+Total de famílias com recursos avaliados e deferidos,value,{Number},populationType,Household,benefitsStatus,GrantedAndEvaluated,name,"""Total families with evaluated and granted resources""",alternateName,"""Total de famílias com recursos avaliados e deferidos@pt""",,,,
+Total de famílias com recursos avaliados e indeferidos,value,{Number},populationType,Household,benefitsStatus,RejectedAndEvaluated,name,"""Total families with resources evaluated and rejecteda""",alternateName,"""Total de famílias com recursos avaliados e indeferidos@pt""",,,,
+Total de famílias com recursos não avaliados,value,{Number},populationType,Household,benefitsStatus,NotEvaluated,name,"""Total families with unevaluated resources""",alternateName,"""Total de famílias com recursos não avaliados@pt""",,,,
