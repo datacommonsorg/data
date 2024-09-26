@@ -24,6 +24,12 @@ from absl import flags
 from absl import logging
 from datetime import datetime
 
+_SCRIPTS_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(_SCRIPTS_DIR)
+sys.path.append(os.path.dirname(_SCRIPTS_DIR))
+from util import download_util
+
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_integer('aggregate_start_year', os.getenv('START_YEAR', '1980'),
@@ -101,12 +107,28 @@ def write_csv(csv_file_path, reader):
 
 
 def request_and_write_csv(csv_file_path, filename):
-    response = requests.get(
-        f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
-    with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
-        with zf.open(f'{filename}.csv', 'r') as infile:
-            reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-            write_csv(csv_file_path, reader)
+    try:
+        # Fetch the ZIP archive
+        response = requests.get(
+            f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
+        response.raise_for_status(
+        )  # Raise an exception for non-2xx status codes
+        # Extract the CSV file
+        with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
+            try:
+                with zf.open(f'{filename}.csv', 'r') as infile:
+                    reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
+                    write_csv(csv_file_path, reader)
+            except FileNotFoundError:
+                raise FileNotFoundError(
+                    f"CSV file '{filename}.csv' not found in the ZIP archive")
+    except (requests.exceptions.RequestException, zipfile.BadZipFile,
+            csv.Error) as e:
+        raise e  # Re-raise the original exception for clearer error handling
+    #Calling method to download zip file locally
+    download_util.download_file_from_url(
+        url=f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip',
+        output_file=f'./{filename}.zip')
 
 
 def write_tmcf(tmcf_file_path):
