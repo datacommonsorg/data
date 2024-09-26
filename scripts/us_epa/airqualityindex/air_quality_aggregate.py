@@ -128,7 +128,7 @@ def request_and_write_csv(csv_file_path, filename):
     #Calling method to download zip file locally
     download_util.download_file_from_url(
         url=f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip',
-        output_file=f'./{filename}.zip')
+        output_file=f'./input_files/{filename}.zip')
 
 
 def write_tmcf(tmcf_file_path):
