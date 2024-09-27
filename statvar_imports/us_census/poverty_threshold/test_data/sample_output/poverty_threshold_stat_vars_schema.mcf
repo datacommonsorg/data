@@ -1,0 +1,13 @@
+Node: dcid:incomePovertyThreshold
+typeOf: dcid:Property
+name: "incomePovertyThreshold"
+rangeIncludes: dcid:Quantity
+domainIncludes: dcid:Household 
+
+Node: dcid:USC_CPS_ASEC_Survey
+name: "USC CPS ASEC Survey"
+typeOf: dcs:MeasurementMethodEnum
+
+Node: dcid:USC_CPS_ASECSurveyWeightedAverage
+name: "USC CPS ASEC Survey Weighted Average"
+typeOf: dcs:MeasurementMethodEnum
