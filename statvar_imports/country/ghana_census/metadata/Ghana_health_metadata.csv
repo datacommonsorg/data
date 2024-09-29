@@ -1,0 +1,16 @@
+parameter,value
+url,https://ghana.opendataforafrica.org/
+description,Regional Statistics of Ghana for health
+#place_type,Country
+#places_within,country/GHA
+start_date,1988
+end_date,2009
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1muiX9KiWua6_vo0to3Fh4uJ_Bwylsd9JiytwN5Dt_Ng/edit?resourcekey=0-et9O-_sczoifBZ6Mm91sUw#gid=0
+#existing_statvar_mcf,""""""
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/1HLe1a1BOu9_EX0KVnZNSbadk6_RfnFyLnu72wSGeX1s/edit?resourcekey=0-a3yOEiIX6_ftb-nK4VaCXg&gid=980350059#gid=980350059

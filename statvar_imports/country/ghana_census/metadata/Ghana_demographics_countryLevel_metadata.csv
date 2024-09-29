@@ -1,0 +1,16 @@
+parameter,value
+url,https://ghana.opendataforafrica.org/
+description,Demographics for Ghana
+#place_type,Country
+#places_within,country/GHA
+start_date,2000
+end_date,2010
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/1T2Uu-CiNbvlAepP7AaJCk-4Ichd7cNp_DDIBXrIT2Pw/edit?resourcekey=0-08C_cTwCr4JFxhXj58A8JQ#gid=0
+drop_statvars_without_svobs,0
+mapped_rows,1
+mapped_columns,19

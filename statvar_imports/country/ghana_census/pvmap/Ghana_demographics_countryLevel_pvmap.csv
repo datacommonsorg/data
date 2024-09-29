@@ -1,0 +1,478 @@
+startDate,#Eval,"StartYear=format_date(""{Data}"", ""%Y"")",observationDate,{StartYear},,,,,,,,,,
+values.0,value,{Number},#Eval,"observationDate=(datetime.strptime(""{StartYear}"", ""%Y"").date()+relativedelta(years=0)).strftime(""%Y"")",,,,,,,,,,
+values.10,value,{Number},#Eval,"observationDate=(datetime.strptime(""{StartYear}"", ""%Y"").date()+relativedelta(years=10)).strftime(""%Y"")",,,,,,,,,,
+,,,,,,,,,,,,,,
+place,observationAbout,{Data},,,,,,,,,,,,
+Land Area ( Sq Km.),#ignore,ignore value,,,,,,,,,,,,
+Population,measuredProperty,count,populationType,Person,statType,measuredValue,,,,,,,name,"""Population {Name1}"""
+Household population,measuredProperty,count,populationType,Person,statType,measuredValue,residenceType,Household,,,,,name,"""Household population {Name1}"""
+"Population, Non-Households",measuredProperty,count,populationType,Person,statType,measuredValue,residenceType,NonHousehold,,,,,name,"""Population Non-Households"""
+Number of Households,measuredProperty,count,populationType,Household,statType,measuredValue,,,,,,,name,"""Number of Households"""
+Average Household size,#ignore,ignore value,,,,,,,,,,,name,"""Average Household size"""
+Population density (persons per sq. Km),measuredProperty,count,measurementDenominator,area,populationType,Person,statType,measuredValue,unit,PersonPerSquareKilometer,,,name,"""Population density (persons per sq. Km)"""
+Regional Share of Population (%),#ignore,ignore value,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+Male,gender,Male,,,,,,,,,,,Name1,"""Male"""
+Female,gender,Female,,,,,,,,,,,Name1,"""Female"""
+Urban (Locality of enumeration),measuredProperty,count,placeOfResidenceClassification,Urban,populationType,Person,statType,measuredValue,,,,,name,"""Urban (Locality of enumeration)"""
+Rural (Locality of enumeration),measuredProperty,count,placeOfResidenceClassification,Rural,populationType,Person,statType,measuredValue,,,,,name,"""Rural (Locality of enumeration)"""
+Proportion urban,measuredProperty,count,placeOfResidenceClassification,Urban,populationType,Person,measurementDenominator,Count_Person,unit,Percent,scalingFactor,100,name,"""Proportion urban"""
+Sex Ratio,gender,Male,measuredProperty,count,populationType,Person,measurementDenominator,Count_Person_Female,unit,Percent,scalingFactor,100,name,"""Sex Ratio"""
+Percentage increase over 2000,#ignore,ignore value,,,,,,,,,,,,
+Intercensal Growth Rate (%),measuredProperty,count,populationType,Person,statType,growthRate,,,,,,,name,"""Intercensal Growth Rate (%)"""
+Population by Age Group,#ignore,ignore value,,,,,,,,,,,,
+Less than 1,age,YearsUpto1,measuredProperty,count,populationType,Person,,,,,,,name,"""Less than 1  year {Name1}"""
+1 - 4,age,[1 4 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 1 - 4 year {Name1}"""
+5 - 9,age,[5 9 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 5 - 9 year {Name1}"""
+10 - 14,age,[10 14 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 10 - 14 year {Name1}"""
+15 - 19,age,[15 19 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 15 - 19 year {Name1}"""
+20 - 24,age,[20 24 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 20 - 24 year {Name1}"""
+25 - 29,age,[25 29 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 25 - 29 year {Name1}"""
+30 - 34,age,[30 34 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 30 - 34 year {Name1}"""
+35 - 39,age,[35 39 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 35 - 39 year {Name1}"""
+40 - 44,age,[40 44 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 40 - 44 year {Name1}"""
+45 - 49,age,[45 49 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 45 - 49 year {Name1}"""
+50 - 54,age,[50 54 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 50 - 54 year {Name1}"""
+55 - 59,age,[55 59 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 55 - 59 year {Name1}"""
+60 - 64,age,[60 64 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 60 - 64 year {Name1}"""
+65 - 69,age,[65 69 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 65 - 69 year {Name1}"""
+70 - 74,age,[70 74 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 70 - 74 year {Name1}"""
+75 - 79,age,[75 79 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 75 - 79 year {Name1}"""
+80 - 84,age,[80 84 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 80 - 84 year {Name1}"""
+85 - 89,age,[85 89 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 85 - 89 year {Name1}"""
+90 - 94,age,[90 94 Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 90 - 94 year {Name1}"""
+95 +,age,[95 - Years],measuredProperty,count,populationType,Person,,,,,,,name,"""age 95 + year {Name1}"""
+Median age,measuredProperty,age,populationType,Person,statType,medianValue,unit,Year,,,,,name,"""Median age {Name1}"""
+Mean age,measuredProperty,age,populationType,Person,statType,meanValue,unit,Year,,,,,name,"""Mean age {Name1}"""
+Dependent Population (less than15 & 65+),populationType,Person,measuredProperty,count,age,YearsUpto14__Years65Onwards,,,,,,,name,"""Dependent Population (less than15 & 65+) {Name1}"""
+Population (15+),age,[15 - Years],measuredProperty,count,populationType,Person,,,,,,,name,"""Population (15+) {Name1}"""
+Population (18+),age,[18 - Years],measuredProperty,count,populationType,Person,,,,,,,name,"""Population (18+) {Name1}"""
+Urban population by Age Group,measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,,,,,name,"""Urban population by Age Group"""
+Less than 1  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[- 1 Years],,,name,"""Less than 1 year (Urban population)"""
+1 - 4  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[1 4 Years],,,name,"""age 1 - 4 year  (Urban population)"""
+5 - 9  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[5 9 Years],,,name,"""age 5 - 9 year (Urban population)"""
+10 - 14  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[10 14 Years],,,name,"""age 10 - 14 year (Urban population)"""
+15 - 19  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[15 19 Years],,,name,"""age 15 - 19 year (Urban population)"""
+20 - 24  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[20 24 Years],,,name,"""age 20 - 24 year (Urban population)"""
+25 - 29  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[25 29 Years],,,name,"""age 25 - 29 year (Urban population)"""
+30 - 34  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[30 34 Years],,,name,"""age 30 - 34 year (Urban population)"""
+35 - 39  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[35 39 Years],,,name,"""age 35 - 39 year (Urban population)"""
+40 - 44  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[40 44 Years],,,name,"""age 40 - 44 year (Urban population)"""
+45 - 49  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[45 49 Years],,,name,"""age 45 - 49 year (Urban population)"""
+50 - 54  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[50 54 Years],,,name,"""age 50 - 54 year (Urban population)"""
+55 - 59  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[55 59 Years],,,name,"""age 55 - 59 year (Urban population)"""
+60 - 64  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[60 64 Years],,,name,"""age 60 - 64 year (Urban population)"""
+65 - 69  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[65 69 Years],,,name,"""age 65 - 69 year (Urban population)"""
+70 - 74  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[70 74 Years],,,name,"""age 70 - 74 year (Urban population)"""
+75 - 79  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[75 79 Years],,,name,"""age 75 - 79 year (Urban population)"""
+80 - 84  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[80 84 Years],,,name,"""age 80 - 84 year (Urban population)"""
+85 - 89  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[85 89 Years],,,name,"""age 85 - 89 year (Urban population)"""
+90 - 94  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[90 94 Years],,,name,"""age 90 - 94 year (Urban population)"""
+95 +  (Urban population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Urban,age,[95 - Years],,,name,"""age 95 +  year (Urban population)"""
+Median age  (Urban population),measuredProperty,age,populationType,Person,statType,medianValue,placeOfResidenceClassification,Urban,unit,Year,,,name,"""Median age  (Urban population)"""
+Mean age  (Urban population),measuredProperty,age,populationType,Person,statType,meanValue,placeOfResidenceClassification,Urban,unit,Year,,,name,"""Mean age  (Urban population)"""
+"Dependent Population (less than15 and 65+), Urban population",populationType,Person,measuredProperty,count,placeOfResidenceClassification,Urban,age,YearsUpto14__Years65Onwards,,,,,name,"""Dependent Population (less than15 and 65+) Urban population"""
+"Population (15+), Urban population",age,[15 - Years],measuredProperty,count,populationType,Person,placeOfResidenceClassification,Urban,statType,measuredValue,,,name,"""Population (15+) Urban population"""
+"Population (18+), Urban population",age,[18 - Years],measuredProperty,count,populationType,Person,placeOfResidenceClassification,Urban,statType,measuredValue,,,name,"""Population (18+) Urban population"""
+Rural population by Age Group,measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,,,,,name,"""Rural population by Age Group"""
+Less than 1  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[- 1 Years],,,name,"""age Less than 1year (Rural population)"""
+1 - 4  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[1 4 Years],,,name,"""age 1 - 4 year(Rural population)"""
+5 - 9  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[5 9 Years],,,name,"""age 5 - 9 year(Rural population)"""
+10 - 14  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[10 14 Years],,,name,"""age 10 - 14 year (Rural population)"""
+15 - 19  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[15 19 Years],,,name,"""age 15 - 19 year (Rural population)"""
+20 - 24  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[20 24 Years],,,name,"""age 20 - 24 year (Rural population)"""
+25 - 29  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[25 29 Years],,,name,"""age 25 - 29 year (Rural population)"""
+30 - 34  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[30 34 Years],,,name,"""age 30 - 34 year (Rural population)"""
+35 - 39  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[35 39 Years],,,name,"""age 35 - 39 year (Rural population)"""
+40 - 44  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[40 44 Years],,,name,"""age 40 - 44 year (Rural population)"""
+45 - 49  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[45 49 Years],,,name,"""age 45 - 49 year (Rural population)"""
+50 - 54  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[50 54 Years],,,name,"""age 50 - 54 year (Rural population)"""
+55 - 59  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[55 59 Years],,,name,"""age 55 - 59 year (Rural population)"""
+60 - 64  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[60 64 Years],,,name,"""age 60 - 64 year (Rural population)"""
+65 - 69  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[65 69 Years],,,name,"""age 65 - 69 year (Rural population)"""
+70 - 74  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[70 74 Years],,,name,"""age 70 - 74 year (Rural population)"""
+75 - 79  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[75 79 Years],,,name,"""age 75 - 79 year (Rural population)"""
+80 - 84  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[80 84 Years],,,name,"""age 80 - 84 year (Rural population)"""
+85 - 89  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[85 89 Years],,,name,"""age 85 - 89 year (Rural population)"""
+90 - 94  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[90 94 Years],,,name,"""age 90 - 94 year (Rural population)"""
+95 +  (Rural population),measuredProperty,count,populationType,Person,statType,measuredValue,placeOfResidenceClassification,Rural,age,[95 - Years],,,name,"""age 95 + year (Rural population)"""
+Median age  (Rural population),measuredProperty,age,populationType,Person,statType,medianValue,placeOfResidenceClassification,Rural,unit,Year,,,name,"""Median age  (Rural population)"""
+Mean age  (Rural population),measuredProperty,age,populationType,Person,statType,meanValue,placeOfResidenceClassification,Rural,unit,Year,,,name,"""Mean age  (Rural population)"""
+"Dependent Population (less than15 and 65+), Rural population",populationType,Person,measuredProperty,count,placeOfResidenceClassification,Rural,age,YearsUpto14__Years65Onwards,,,,,name,"""Dependent Population (less than15 and 65+) Rural population"""
+"Population (15+), Rural population",age,[15 - Years],measuredProperty,count,populationType,Person,placeOfResidenceClassification,Rural,,,,,name,"""Population (15+) Rural population"""
+"Population (18+), Rural population",age,[18 - Years],measuredProperty,count,populationType,Person,placeOfResidenceClassification,Rural,,,,,name,"""Population (18+) Rural population"""
+Head,populationType,Person,measuredProperty,count,familyMemberType,FamilyHead,statType,measuredValue,,,,,name,"""Head {Name1}"""
+Spouse,populationType,Person,measuredProperty,count,familyMemberType,Spouse,statType,measuredValue,,,,,name,"""Spouse {Name1}"""
+Child (Son/Daughter),populationType,Person,measuredProperty,count,familyMemberType,Child,statType,measuredValue,,,,,name,"""Child (Son/Daughter) {Name1}"""
+Parent/Parent-in-law,populationType,Person,measuredProperty,count,familyMemberType,ParentOrParentInlaw,statType,measuredValue,,,,,name,"""Parent/Parent-in-law {Name1}"""
+Son/Daughter-in-law,populationType,Person,measuredProperty,count,familyMemberType,SonOrDaughterInLaw,statType,measuredValue,,,,,name,"""Son/Daughter-in-law {Name1}"""
+Grandchild,populationType,Person,measuredProperty,count,familyMemberType,Grandchild,statType,measuredValue,,,,,name,"""Grandchild {Name1}"""
+Brother /sister,populationType,Person,measuredProperty,count,familyMemberType,BrotherOrSister,statType,measuredValue,,,,,name,"""Brother /sister {Name1}"""
+Stepchild,populationType,Person,measuredProperty,count,familyMemberType,Stepchild,statType,measuredValue,,,,,name,"""Stepchild {Name1}"""
+Foster Child,populationType,Person,measuredProperty,count,familyMemberType,FosterChild,statType,measuredValue,,,,,name,"""Foster Child {Name1}"""
+Other Relative,populationType,Person,measuredProperty,count,familyMemberType,OtherRelative,statType,measuredValue,,,,,name,"""Other Relative {Name1}"""
+Non-Relative,populationType,Person,measuredProperty,count,familyMemberType,Non-Relative,statType,measuredValue,,,,,name,"""Non-Relative {Name1}"""
+Population by Nationality,#ignore,ignore value,,,,,,,,,,,,
+Ghanaian by birth,nationality,country/GHA,measuredProperty,count,populationType,Person,statType,measuredValue,,,,,name,"""Ghanaian by birth {Name1}"""
+Dual Nationality (Ghanaian & other),#ignore,ignore value,,,,,,,,,,,,
+Ghanaian by naturalization,#ignore,ignore value,,,,,,,,,,,,
+Nigerian,nationality,country/NGA,measuredProperty,count,populationType,Person,statType,measuredValue,,,,,name,"""Nigerian {Name1}"""
+Liberian,nationality,country/LBR,measuredProperty,count,populationType,Person,statType,measuredValue,,,,,name,"""Liberian {Name1}"""
+Sierra Leonian,nationality,country/SLE,measuredProperty,count,populationType,Person,statType,measuredValue,,,,,name,"""Sierra Leonian {Name1}"""
+Gambian,nationality,country/GMB,measuredProperty,count,populationType,Person,statType,measuredValue,,,,,name,"""Gambian {Name1}"""
+Togolese,nationality,country/TGO,measuredProperty,count,populationType,Person,statType,measuredValue,,,,,name,"""Togolese {Name1}"""
+Burkinabe,nationality,country/BFA,measuredProperty,count,populationType,Person,statType,measuredValue,,,,,name,"""Burkinabe {Name1}"""
+Ivorian,nationality,country/CIV,measuredProperty,count,populationType,Person,statType,measuredValue,,,,,name,"""Ivorian {Name1}"""
+Other ECOWAS National,#ignore,ignore value,,,,,,,,,,,,
+"African, other than ECOWAS",#ignore,ignore value,,,,,,,,,,,,
+European,#ignore,ignore value,,,,,,,,,,,,
+"American (North, South/Caribbean)",#ignore,ignore value,,,,,,,,,,,,
+Asian,race,Asian,measuredProperty,count,populationType,Person,statType,measuredValue,,,,,name,"""Asian {Name1}"""
+Oceanian,#ignore,ignore value,,,,,,,,,,,,
+Population 12 years and older,age,[12 - Years],measuredProperty,count,populationType,Person,statType,measuredValue,,,,,name,"""Population 12 years and older {Name1}"""
+"Never married, Population 12 years and older",age,[12 - Years],measuredProperty,count,populationType,Person,statType,measuredValue,maritalStatus,NeverMarried,,,name,"""Never married Population 12 years and older {Name1}"""
+"Informal/Consensual union, Population 12 years and older",age,[12 - Years],measuredProperty,count,populationType,Person,statType,measuredValue,maritalStatus,Ghana_InformalOrConsensualUnion,,,name,"""Informal/Consensual union Population 12 years and older {Name1}"""
+"Married, Population 12 years and older",age,[12 - Years],measuredProperty,count,populationType,Person,statType,measuredValue,maritalStatus,Married,,,name,"""Married Population 12 years and older {Name1}"""
+"Separated, Population 12 years and older",age,[12 - Years],measuredProperty,count,populationType,Person,statType,measuredValue,maritalStatus,Separated,,,name,"""Separated Population 12 years and older {Name1}"""
+"Divorced, Population 12 years and older",age,[12 - Years],measuredProperty,count,populationType,Person,statType,measuredValue,maritalStatus,Divorced,,,name,"""Divorced Population 12 years and older {Name1}"""
+"Widowed, Population 12 years and older",age,[12 - Years],measuredProperty,count,populationType,Person,statType,measuredValue,maritalStatus,Widowed,,,name,"""Widowed Population 12 years and older {Name1}"""
+"Ghanaians by birth,  major ethnic group",#ignore,ignore value,,,,,,,,,,,,
+Akan,#ignore,ignore value,,,,,,,,,,,,
+Ga-Dangme,#ignore,ignore value,,,,,,,,,,,,
+Ewe,#ignore,ignore value,,,,,,,,,,,,
+Guan,#ignore,ignore value,,,,,,,,,,,,
+Gurma,#ignore,ignore value,,,,,,,,,,,,
+Mole-Dagbani,#ignore,ignore value,,,,,,,,,,,,
+Grusi,#ignore,ignore value,,,,,,,,,,,,
+Mande,#ignore,ignore value,,,,,,,,,,,,
+Others,#ignore,ignore value,,,,,,,,,,,,
+Number of emigrants,#ignore,ignore value,,,,,,,,,,,,
+"Nigeria, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Liberia, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Sierra Leone, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Gambia, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Togo, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Burkina Faso, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Cote d'Ivoire, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Other ECOWAS states, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Africa, other than ECOWAS, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Europe, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Americas (North,  South/Carribbean), Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Asia, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+"Oceania, Destination of emigrants",#ignore,ignore value,,,,,,,,,,,,
+Employed (Activity abroad),#ignore,ignore value,,,,,,,,,,,,
+Unemployed (Activity abroad),#ignore,ignore value,,,,,,,,,,,,
+Student (Activity abroad),#ignore,ignore value,,,,,,,,,,,,
+"Other, (Activity abroad)",#ignore,ignore value,,,,,,,,,,,,
+Literacy,#ignore,ignore value,,,,,,,,,,,,
+Literate,measuredProperty,count,populationType,Person,statType,measuredValue,literacyStatus,Literate,,,,,name,"""Literate {Name1}"""
+Not literate,measuredProperty,count,populationType,Person,statType,measuredValue,literacyStatus,Illiterate,,,,,name,"""Not literate {Name1}"""
+English only,measuredProperty,count,populationType,Person,statType,measuredValue,literacyStatus,Literate,literateLanguage,OnlyEnglish,,,name,"""English only {Name1}"""
+Ghanaian language only,measuredProperty,count,populationType,Person,statType,measuredValue,literacyStatus,Literate,literateLanguage,OnlyGhanaian,,,name,"""Ghanaian language only {Name1}"""
+English & Ghanaian language,measuredProperty,count,populationType,Person,statType,measuredValue,literacyStatus,Literate,literateLanguage,EnglishAndGhanaian,,,name,"""English & Ghanaian language {Name1}"""
+English and French,measuredProperty,count,populationType,Person,statType,measuredValue,literacyStatus,Literate,literateLanguage,EnglishAndFrench,,,name,"""English and French {Name1}"""
+"English, French & Ghanaian language",measuredProperty,count,count,Person,statType,measuredValue,literacyStatus,Literate,literateLanguage,EnglishFrenchAndGhanaian,,,name,"""English French & Ghanaian language {Name1}"""
+Other Literate,measuredProperty,count,populationType,Person,statType,measuredValue,literacyStatus,Literate,literateLanguage,GhanaOtherLiterate,,,name,"""Other Literate {Name1}"""
+"Population, 3 years and older by school attendance",#ignore,ignore value,,,,,,,,,,,,
+Attended in the Past,#ignore,ignore value,,,,,,,,,,,,
+Currently Attending,#ignore,ignore value,,,,,,,,,,,,
+Urban Population 3 years and older,#ignore,ignore value,,,,,,,,,,,,
+"Never attended School, Urban",#ignore,ignore value,,,,,,,,,,,,
+"Attended in the Past, Urban",#ignore,ignore value,,,,,,,,,,,,
+"Currently Attending, Urban",#ignore,ignore value,,,,,,,,,,,,
+Rural Population 3 years and older,#ignore,ignore value,,,,,,,,,,,,
+"Never attended School, Rural",#ignore,ignore value,,,,,,,,,,,,
+"Attended in the Past, Rural",#ignore,ignore value,,,,,,,,,,,,
+"Currently Attending, Rural",#ignore,ignore value,,,,,,,,,,,,
+"Population, 3 years and older by level of education",#ignore,ignore value,,,,,,,,,,,,
+Never attended School,#ignore,ignore value,,,,,,,,,,,,
+Nursery,measuredProperty,count,populationType,Student,statType,measuredValue,enrollmentLevel,Nursery,age,[3 - Years],,,name,"""Nursery {Name1}"""
+Kindergarten,measuredProperty,count,populationType,Student,statType,measuredValue,enrollmentLevel,Kindergarten,age,[3 - Years],,,name,"""Kindergarten {Name1}"""
+Primary,measuredProperty,count,populationType,Student,statType,measuredValue,enrollmentLevel,PrimaryEducation,age,[3 - Years],,,name,"""Primary {Name1}"""
+JSS/JHS,measuredProperty,count,populationType,Student,statType,measuredValue,schoolGradeLevel,JuniorSecondarySchool,age,[3 - Years],,,name,"""JSS/JHS {Name1}"""
+Middle,measuredProperty,count,populationType,Student,statType,measuredValue,levelOfSchool,MiddleSchool,age,[3 - Years],,,name,"""Middle {Name1}"""
+SSS/SHS,measuredProperty,count,populationType,Student,statType,measuredValue,schoolGradeLevel,SeniorSecondarySchool,age,[3 - Years],,,name,"""SSS/SHS {Name1}"""
+Secondary,measuredProperty,count,populationType,Student,statType,measuredValue,enrollmentLevel,SecondaryEducation,age,[3 - Years],,,name,"""Secondary {Name1}"""
+Voc/Technical/Commercial,#ignore,ignore value,,,,,,,,,,,,
+"Post Middle/Post Secondary Certificate (teacher training, agric, nursing, etc)",#ignore,ignore value,,,,,,,,,,,,
+"Post Secondary Diploma (University diploma, HND, Teacher training diploma, nursing diploma, etc)",#ignore,ignore value,,,,,,,,,,,,
+Bachelor degree,measuredProperty,count,populationType,Person,statType,measuredValue,educationalAttainment,BachelorsDegree,,,,,name,"""Bachelor degree {Name1}"""
+"Post Middle/Post-Secondary Certificate (teacher training, agric, nursing, etc)",#ignore,ignore value,,,,,,,,,,,,
+"Post-Secondary Diploma (University diploma, HND, Teacher training diploma, nursing diploma, etc)",#ignore,ignore value,,,,,,,,,,,,
+"Population, 3 years and older currently in school",#ignore,ignore value,,,,,,,,,,,,
+"Nursery, currently in school",#ignore,ignore value,,,,,,,,,,,,
+"Kindergarten, currently in school",#ignore,ignore value,,,,,,,,,,,,
+"Primary, currently in school",#ignore,ignore value,,,,,,,,,,,,
+"JSS/JHS, currently in school",#ignore,ignore value,,,,,,,,,,,,
+"SSS/SHS, currently in school",#ignore,ignore value,,,,,,,,,,,,
+"Voc/Technical/Commercial, currently in school",#ignore,ignore value,,,,,,,,,,,,
+"Post Middle/Post-Secondary Certificate (teacher training, agric, nursing, etc), currently in school",#ignore,ignore value,,,,,,,,,,,,
+"Post-Secondary Diploma (University diploma, HND, Teacher training diploma, nursing diploma, etc), currently in school",#ignore,ignore value,,,,,,,,,,,,
+"Bachelor degree, currently in school",#ignore,ignore value,,,,,,,,,,,,
+"Postgraduate (Cert., Diploma, Masters, PHD, etc)",#ignore,ignore value,,,,,,,,,,,,
+"Postgraduate (Cert., Diploma, Masters, PHD, etc), currently in school",#ignore,ignore value,,,,,,,,,,,,
+"Population, 3 years and older who attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+"Primary, attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+"JSS/JHS, attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+"Middle, attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+"SSS/SHS, attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+"Secondary, attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+"Voc/Technical/Commercial, attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+"Post Middle/Post-Secondary Certificate (teacher training, agric, nursing, etc), attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+"Post-Secondary Diploma (University diploma, HND, Teacher training diploma, nursing diploma, etc), attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+"Bachelor degree, attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+"Postgraduate (Cert., Diploma, Masters, PHD, etc)., attended school in the past",#ignore,ignore value,,,,,,,,,,,,
+Population 15 years and older,#ignore,ignore value,,,,,,,,,,,,
+Economically active,populationType,Person,measuredProperty,count,statType,measuredValue,incomeStatus,WithEarnings,age,[15 - Years],,,name,"""Economically active"""
+Employed,measuredProperty,count,populationType,Person,statType,measuredValue,employmentStatus,Employed,age,[15 - Years],,,name,"""Employed"""
+Worked,#ignore,ignore value,,,,,,,,,,,,
+Did not work but had job to go back to,#ignore,ignore value,,,,,,,,,,,,
+Did voluntary work without pay,#ignore,ignore value,,,,,,,,,,,,
+Unemployed,measuredProperty,count,populationType,Person,statType,measuredValue,employmentStatus,Unemployed,age,[15 - Years],,,name,"""Unemployed"""
+"Worked before, seeking work and available",#ignore,ignore value,,,,,,,,,,,,
+Seeking work for the first time and available,#ignore,ignore value,,,,,,,,,,,,
+Not Economically active,#ignore,ignore value,,,,,,,,,,,,
+Did home duties (household chores) full time/homemaker,#ignore,ignore value,,,,,,,,,,,,
+In full time education/student,#ignore,ignore value,,,,,,,,,,,,
+Pensioner/Retired,#ignore,ignore value,,,,,,,,,,,,
+Disabled/Too sick to work,#ignore,ignore value,,,,,,,,,,,,
+Too old/Too young,#ignore,ignore value,,,,,,,,,,,,
+"Other, Population 15 years and older",#ignore,ignore value,,,,,,,,,,,,
+In full time education,#ignore,ignore value,,,,,,,,,,,,
+"Economically active population, 15 years and older by occupation",#ignore,ignore value,,,,,,,,,,,,
+Managers,#ignore,ignore value,,,,,,,,,,,,
+Professionals,#ignore,ignore value,,,,,,,,,,,,
+Technicians and associate professionals,#ignore,ignore value,,,,,,,,,,,,
+Clerical support workers,#ignore,ignore value,,,,,,,,,,,,
+Service and sales workers,#ignore,ignore value,,,,,,,,,,,,
+"Skilled agricultural, forestry and fishery workers",#ignore,ignore value,,,,,,,,,,,,
+Craft and related trades workers,#ignore,ignore value,,,,,,,,,,,,
+"Plant and machine operators, and assemblers",#ignore,ignore value,,,,,,,,,,,,
+Elementary occupations,#ignore,ignore value,,,,,,,,,,,,
+Other occupations,#ignore,ignore value,,,,,,,,,,,,
+"Economically active population, 15 years and older by industry",#ignore,ignore value,,,,,,,,,,,,
+"Agriculture, Forestry and fishing",#ignore,ignore value,,,,,,,,,,,,
+Mining and quarrying,#ignore,ignore value,,,,,,,,,,,,
+Manufacturing,#ignore,ignore value,,,,,,,,,,,,
+"Electricity, gas, steam and air conditioning supply",#ignore,ignore value,,,,,,,,,,,,
+"Water supply; sewerage, waste management and remediation activities",#ignore,ignore value,,,,,,,,,,,,
+Construction,#ignore,ignore value,,,,,,,,,,,,
+Wholesale and retail; repair of motor vehicles and motorcycles,#ignore,ignore value,,,,,,,,,,,,
+Transportation and storage,#ignore,ignore value,,,,,,,,,,,,
+Accommodation and food service activities,#ignore,ignore value,,,,,,,,,,,,
+Information and communication,#ignore,ignore value,,,,,,,,,,,,
+Financial and insurance activities,#ignore,ignore value,,,,,,,,,,,,
+Real estate activities,#ignore,ignore value,,,,,,,,,,,,
+"Professional, scientific and technical activities",#ignore,ignore value,,,,,,,,,,,,
+Administrative and support service activities,#ignore,ignore value,,,,,,,,,,,,
+Public administration and defence; compulsory social security,#ignore,ignore value,,,,,,,,,,,,
+Education,#ignore,ignore value,,,,,,,,,,,,
+Human health and social work activities,#ignore,ignore value,,,,,,,,,,,,
+"Art, entertainment and recreation",#ignore,ignore value,,,,,,,,,,,,
+Other service activities,#ignore,ignore value,,,,,,,,,,,,
+Activities of households as employers,#ignore,ignore value,,,,,,,,,,,,
+Activities of extraterritorial organizations and bodies,#ignore,ignore value,,,,,,,,,,,,
+"Economically active population, 15 years and older by Employment status",#ignore,ignore value,,,,,,,,,,,,
+Employee,measuredProperty,count,populationType,Person,statType,measuredValue,workerStatus,Employees,incomeStatus,WithEarnings,,,name,"""Employee"""
+Self-employed without employees,#ignore,ignore value,,,,,,,,,,,,
+Self-employed with employees,#ignore,ignore value,,,,,,,,,,,,
+Casual worker,measuredProperty,count,populationType,Person,statType,measuredValue,workerStatus,CasualWorker,incomeStatus,WithEarnings,,,name,"""Casual worker"""
+Contributing family worker,#ignore,ignore value,,,,,,,,,,,,
+Apprentice,#ignore,ignore value,,,,,,,,,,,,
+Domestic employee (househelp),#ignore,ignore value,,,,,,,,,,,,
+"Other, Economically active population 15 years and older",#ignore,ignore value,,,,,,,,,,,,
+"All Ages, Maternal births and death for women 12 to 54 years",#ignore,ignore value,,,,,,,,,,,,
+"12 - 14, Maternal births and death for women 12 to 54 years",#ignore,ignore value,,,,,,,,,,,,
+"15 - 19, Maternal births and death for women 12 to 54 years",#ignore,ignore value,,,,,,,,,,,,
+"20 - 24, Maternal births and death for women 12 to 54 years",#ignore,ignore value,,,,,,,,,,,,
+"25 - 29, Maternal births and death for women 12 to 54 years",#ignore,ignore value,,,,,,,,,,,,
+"30 - 34, Maternal births and death for women 12 to 54 years",#ignore,ignore value,,,,,,,,,,,,
+"35 - 39, Maternal births and death for women 12 to 54 years",#ignore,ignore value,,,,,,,,,,,,
+"40 - 44, Maternal births and death for women 12 to 54 years",#ignore,ignore value,,,,,,,,,,,,
+"45 - 49, Maternal births and death for women 12 to 54 years",#ignore,ignore value,,,,,,,,,,,,
+"50 - 54, Maternal births and death for women 12 to 54 years",#ignore,ignore value,,,,,,,,,,,,
+Number of live births in the last 12 months,measuredProperty,count,populationType,BirthEvent,medicalStatus,LiveBirth,observationPeriod,P1Y,,,,,name,"""Number of live births in the last 12 months"""
+Number of women deaths in the last 12 months,measuredProperty,count,populationType,MortalityEvent,gender,Female,observationPeriod,P1Y,,,,,name,"""Number of women deaths in the last 12 months"""
+Number of deaths due to maternal causes,measuredProperty,count,populationType,MortalityEvent,causeOfDeath,MaternalConditions,,,,,,,name,"""Number of deaths due to maternal causes"""
+Maternal Mortality Ratio,populationType,MaternalMortalityEvent,measurementDenominator,dcid:Count_BirthEvent_LiveBirth,scalingFactor,1000,,,,,,,name,"""Maternal Mortality Ratio"""
+Number of households engaged in agricultural activities,#ignore,ignore value,,,,,,,,,,,,
+Crop farming,#ignore,ignore value,,,,,,,,,,,,
+Tree growing,#ignore,ignore value,,,,,,,,,,,,
+Livestock rearing,#ignore,ignore value,,,,,,,,,,,,
+Fish farming,#ignore,ignore value,,,,,,,,,,,,
+Number of farms by type of cropping,#ignore,ignore value,,,,,,,,,,,,
+Mixed cropping,#ignore,ignore value,,,,,,,,,,,,
+Inter cropping,#ignore,ignore value,,,,,,,,,,,,
+Mono Cropping,#ignore,ignore value,,,,,,,,,,,,
+Number of Houses,#ignore,ignore value,,,,,,,,,,,,
+Percentage distribution of houses,#ignore,ignore value,,,,,,,,,,,,
+Rural share of housing stock,#ignore,ignore value,,,,,,,,,,,,
+Percentage increase in housing stock over 2000,#ignore,ignore value,,,,,,,,,,,,
+Households per house,#ignore,ignore value,,,,,,,,,,,,
+Population per house,#ignore,ignore value,,,,,,,,,,,,
+Type of dwelling,#ignore,ignore value,,,,,,,,,,,,
+Separate house,#ignore,ignore value,,,,,,,,,,,,
+Semi-detached house,#ignore,ignore value,,,,,,,,,,,,
+Flat/Apartment,#ignore,ignore value,,,,,,,,,,,,
+Compound house (rooms),#ignore,ignore value,,,,,,,,,,,,
+Huts/Buildings (same compound),#ignore,ignore value,,,,,,,,,,,,
+Huts/Buildings (different compounds),#ignore,ignore value,,,,,,,,,,,,
+Tent,#ignore,ignore value,,,,,,,,,,,,
+"Improvised home (kiosk, container)",#ignore,ignore value,,,,,,,,,,,,
+Living quarters attached to office/shop,#ignore,ignore value,,,,,,,,,,,,
+Uncompleted building,#ignore,ignore value,,,,,,,,,,,,
+"Other, Type of dwelling",#ignore,ignore value,,,,,,,,,,,,
+"Mud bricks/earth, Outer wall",#ignore,ignore value,,,,,,,,,,,,
+"Wood, Outer wall",#ignore,ignore value,,,,,,,,,,,,
+"Metal sheet / slate/asbestos, Outer wall",#ignore,ignore value,,,,,,,,,,,,
+"Stone, Outer wall",#ignore,ignore value,,,,,,,,,,,,
+"Burnt bricks, Outer wall",#ignore,ignore value,,,,,,,,,,,,
+"Cement blocks/concrete, Outer wall",#ignore,ignore value,,,,,,,,,,,,
+"Landcrete, Outer wall",#ignore,ignore value,,,,,,,,,,,,
+"Bamboo, Outer wall",#ignore,ignore value,,,,,,,,,,,,
+"Palm leaves/thatch (grass) /Rafia, Outer wall",#ignore,ignore value,,,,,,,,,,,,
+"Other, Outer wall",#ignore,ignore value,,,,,,,,,,,,
+"Mud/mud bricks/earth, Roof",#ignore,ignore value,,,,,,,,,,,,
+"Wood, Roof",#ignore,ignore value,,,,,,,,,,,,
+"Metal sheet, Roof",#ignore,ignore value,,,,,,,,,,,,
+"Slate/asbestos, Roof",#ignore,ignore value,,,,,,,,,,,,
+"Cement/concrete, Roof",#ignore,ignore value,,,,,,,,,,,,
+"Roofing Tiles, Roof",#ignore,ignore value,,,,,,,,,,,,
+"Bamboo, Roof",#ignore,ignore value,,,,,,,,,,,,
+"Thatch/palm leaves or raffia, Roof",#ignore,ignore value,,,,,,,,,,,,
+"Other, Roof",#ignore,ignore value,,,,,,,,,,,,
+Number of occupied dwelling units,#ignore,ignore value,,,,,,,,,,,,
+Number of vacant dwelling units,#ignore,ignore value,,,,,,,,,,,,
+"Earth/mud, Floor",#ignore,ignore value,,,,,,,,,,,,
+"Cement/concrete, Floor",#ignore,ignore value,,,,,,,,,,,,
+"Stone, Floor",#ignore,ignore value,,,,,,,,,,,,
+"Burnt bricks, Floor",#ignore,ignore value,,,,,,,,,,,,
+"Wood, Floor",#ignore,ignore value,,,,,,,,,,,,
+"Vinyl tiles, Floor",#ignore,ignore value,,,,,,,,,,,,
+"Ceramic/Porcelain granite Marble tiles, Floor",#ignore,ignore value,,,,,,,,,,,,
+"Terrazzo/Terrazzo tiles, Floor",#ignore,ignore value,,,,,,,,,,,,
+"Other, Floor",#ignore,ignore value,,,,,,,,,,,,
+"Owner occupied, Tenure/Holding Arrangement",#ignore,ignore value,,,,,,,,,,,,
+"Renting, Tenure/Holding Arrangement",#ignore,ignore value,,,,,,,,,,,,
+"Rent- free, Tenure/Holding Arrangement",#ignore,ignore value,,,,,,,,,,,,
+"Perching, Tenure/Holding Arrangement",#ignore,ignore value,,,,,,,,,,,,
+"Squatting, Tenure/Holding Arrangement",#ignore,ignore value,,,,,,,,,,,,
+"Other, Tenure/Holding Arrangement",#ignore,ignore value,,,,,,,,,,,,
+Owned by household member,#ignore,ignore value,,,,,,,,,,,,
+"Being purchased (e.g. mortgage), Owned by household member",#ignore,ignore value,,,,,,,,,,,,
+"Relative not household member, Owned by household member",#ignore,ignore value,,,,,,,,,,,,
+"Other private individual, Owned by household member",#ignore,ignore value,,,,,,,,,,,,
+"Private employer, Owned by household member",#ignore,ignore value,,,,,,,,,,,,
+"Other private agency, Owned by household member",#ignore,ignore value,,,,,,,,,,,,
+"Public/Government ownership, Owned by household member",#ignore,ignore value,,,,,,,,,,,,
+"Other, Owned by household member",#ignore,ignore value,,,,,,,,,,,,
+"One room, Rooms occupied by households",#ignore,ignore value,,,,,,,,,,,,
+"Two rooms, Rooms occupied by households",#ignore,ignore value,,,,,,,,,,,,
+"Three rooms, Rooms occupied by households",#ignore,ignore value,,,,,,,,,,,,
+"Four rooms, Rooms occupied by households",#ignore,ignore value,,,,,,,,,,,,
+"Five rooms, Rooms occupied by households",#ignore,ignore value,,,,,,,,,,,,
+"Six rooms, Rooms occupied by households",#ignore,ignore value,,,,,,,,,,,,
+"Seven rooms, Rooms occupied by households",#ignore,ignore value,,,,,,,,,,,,
+"Eight rooms, Rooms occupied by households",#ignore,ignore value,,,,,,,,,,,,
+"Nine+ rooms, Rooms occupied by households",#ignore,ignore value,,,,,,,,,,,,
+"One room, Sleeping rooms",#ignore,ignore value,,,,,,,,,,,,
+"Two rooms, Sleeping rooms",#ignore,ignore value,,,,,,,,,,,,
+"Three rooms, Sleeping rooms",#ignore,ignore value,,,,,,,,,,,,
+"Four rooms, Sleeping rooms",#ignore,ignore value,,,,,,,,,,,,
+"Five rooms, Sleeping rooms",#ignore,ignore value,,,,,,,,,,,,
+"Six rooms, Sleeping rooms",#ignore,ignore value,,,,,,,,,,,,
+"Seven rooms, Sleeping rooms",#ignore,ignore value,,,,,,,,,,,,
+"Eight rooms, Sleeping rooms",#ignore,ignore value,,,,,,,,,,,,
+"Nine+ rooms, Sleeping rooms",#ignore,ignore value,,,,,,,,,,,,
+"Electricity (mains), Source of lighting",#ignore,ignore value,,,,,,,,,,,,
+"Electricity ( private generator), Source of lighting",#ignore,ignore value,,,,,,,,,,,,
+"Kerosene lamp, Source of lighting",#ignore,ignore value,,,,,,,,,,,,
+"Gas lamp, Source of lighting",#ignore,ignore value,,,,,,,,,,,,
+"Solar energy, Source of lighting",#ignore,ignore value,,,,,,,,,,,,
+"Candle, Source of lighting",#ignore,ignore value,,,,,,,,,,,,
+"Flashlight/Torch, Source of lighting",#ignore,ignore value,,,,,,,,,,,,
+"Firewood, Source of lighting",#ignore,ignore value,,,,,,,,,,,,
+"Crop residue, Source of lighting",#ignore,ignore value,,,,,,,,,,,,
+"Other sources, Source of lighting",#ignore,ignore value,,,,,,,,,,,,
+"None, no cooking, Cooking fuel",#ignore,ignore value,,,,,,,,,,,,
+"Wood, Cooking fuel",#ignore,ignore value,,,,,,,,,,,,
+"Gas, Cooking fuel",#ignore,ignore value,,,,,,,,,,,,
+"Electricity, Cooking fuel",#ignore,ignore value,,,,,,,,,,,,
+"Kerosene, Cooking fuel",#ignore,ignore value,,,,,,,,,,,,
+"Charcoal, Cooking fuel",#ignore,ignore value,,,,,,,,,,,,
+"Crop residue, Cooking fuel",#ignore,ignore value,,,,,,,,,,,,
+"Saw dust, Cooking fuel",#ignore,ignore value,,,,,,,,,,,,
+"Animal waste, Cooking fuel",#ignore,ignore value,,,,,,,,,,,,
+"Other fuel, Cooking fuel",#ignore,ignore value,,,,,,,,,,,,
+No cooking space,#ignore,ignore value,,,,,,,,,,,,
+Separate room for exclusive use of household,#ignore,ignore value,,,,,,,,,,,,
+Separate room shared with other households,#ignore,ignore value,,,,,,,,,,,,
+Enclosure without roof,#ignore,ignore value,,,,,,,,,,,,
+Structure with roof but without walls,#ignore,ignore value,,,,,,,,,,,,
+Bedroom/Hall /Living room,#ignore,ignore value,,,,,,,,,,,,
+Veranda,#ignore,ignore value,,,,,,,,,,,,
+Open space in compound,#ignore,ignore value,,,,,,,,,,,,
+"Other, Cooking space",#ignore,ignore value,,,,,,,,,,,,
+Own bathroom for exclusive use,#ignore,ignore value,,,,,,,,,,,,
+Shared separate bathroom in the same house,#ignore,ignore value,,,,,,,,,,,,
+Private open cubicle,#ignore,ignore value,,,,,,,,,,,,
+Shared open cubicle,#ignore,ignore value,,,,,,,,,,,,
+Public bath house,#ignore,ignore value,,,,,,,,,,,,
+Bathroom in another house,#ignore,ignore value,,,,,,,,,,,,
+Open space around house,#ignore,ignore value,,,,,,,,,,,,
+"In a river, pond, lake or dam",#ignore,ignore value,,,,,,,,,,,,
+"Other, Bathing Facilities",#ignore,ignore value,,,,,,,,,,,,
+No facility,#ignore,ignore value,,,,,,,,,,,,
+WC,#ignore,ignore value,,,,,,,,,,,,
+"Exclusive use, No facility",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households in the same house, No facility",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households from another house, No facility",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households and located in another house, No facility",#ignore,ignore value,,,,,,,,,,,,
+Pit latrine,#ignore,ignore value,,,,,,,,,,,,
+"Exclusive use, Pit latrine",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households in the same house, Pit latrine",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households from another house, Pit latrine",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households and located in another house, Pit latrine",#ignore,ignore value,,,,,,,,,,,,
+KVIP,#ignore,ignore value,,,,,,,,,,,,
+"Exclusive use, KVIP",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households in the same house, KVIP",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households from another house, KVIP",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households and located in another house, KVIP",#ignore,ignore value,,,,,,,,,,,,
+Bucket/Pan,#ignore,ignore value,,,,,,,,,,,,
+"Exclusive use, Bucket/Pan",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households in the same house, Bucket/Pan",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households from another house, Bucket/Pan",#ignore,ignore value,,,,,,,,,,,,
+"Shared with other households and located in another house, Bucket/Pan",#ignore,ignore value,,,,,,,,,,,,
+Public toilet,#ignore,ignore value,,,,,,,,,,,,
+"Other, Public toilet",#ignore,ignore value,,,,,,,,,,,,
+"Collected, Solid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Burned by household, Solid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Public dump (Container), Solid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Public dump (Open Space), Solid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Dumped indiscriminately, Solid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Buried by household, Solid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Other, Solid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Through the sewerage system, Liquid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Through plumbing system into a gutter, Liquid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Through drainage  into a pit (soak away), Liquid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Thrown onto the street/outside, Liquid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Thrown into gutter, Liquid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Thrown onto compound, Liquid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+"Other, Liquid waste disposal",#ignore,ignore value,,,,,,,,,,,,
+Households with fixed telephone lines,consumerGoodsCategory,LandlineTelephoneServices,measuredProperty,count,populationType,Household,statType,measuredValue,age,[12 - Years],,,name,"""Households with fixed telephone lines"""
+Households having desktop/laptop,electronicGadgetUsed,Desktop/Laptop,measuredProperty,count,populationType,Household,statType,measuredValue,age,[12 - Years],,,name,"""Households having desktop/laptop"""
+Persons 12 years and older,age,[12 - Years],measuredProperty,count,populationType,Household,statType,measuredValue,,,,,name,"""Persons 12 years and older {Name1}"""
+Persons having mobile phones,electronicGadgetUsed,MobileUser,measuredProperty,count,populationType,Household,statType,measuredValue,age,[12 - Years],,,name,"""Persons having mobile phones {Name1}"""
+Persons using internet facility,isInternetUser,True,measuredProperty,count,populationType,Household,statType,measuredValue,age,[12 - Years],,,name,"""Persons using internet facility {Name1}"""
+"Number of households, Urban",populationType,Household,measuredProperty,count,statType,measuredValue,placeOfResidenceClassification,Urban,,,,,name,"""Number of households Urban {Name1}"""
+"Households with fixed telephone lines, Urban",consumerGoodsCategory,LandlineTelephoneServices,measuredProperty,count,populationType,Household,statType,measuredValue,placeOfResidenceClassification,Urban,age,[12 - Years],name,"""Households with fixed telephone lines Urban {Name1}"""
+"Households having desktop/laptop, Urban",electronicGadgetUsed,Desktop/Laptop,measuredProperty,count,populationType,Household,statType,measuredValue,placeOfResidenceClassification,Urban,age,[12 - Years],name,"""Households having desktop/laptop Urban {Name1}"""
+"Persons 12 years and older, Urban",age,[12 - Years],measuredProperty,count,populationType,Household,placeOfResidenceClassification,Urban,,,,,name,"""Persons 12 years and older Urban {Name1}"""
+"Persons having mobile phones, Urban",electronicGadgetUsed,MobileUser,measuredProperty,count,populationType,Household,statType,measuredValue,placeOfResidenceClassification,Urban,age,[12 - Years],name,"""Persons having mobile phones Urban {Name1}"""
+"Persons using internet facility, Urban",isInternetUser,True,measuredProperty,count,populationType,Household,statType,measuredValue,placeOfResidenceClassification,Urban,age,[12 - Years],name,"""Persons using internet facility Urban {Name1}"""
+"Number of households, Rural",populationType,Household,measuredProperty,count,statType,measuredValue,placeOfResidenceClassification,Rural,,,,,name,"""Number of households Rural {Name1}"""
+"Households with fixed telephone lines, Rural",consumerGoodsCategory,LandlineTelephoneServices,measuredProperty,count,populationType,Household,statType,measuredValue,placeOfResidenceClassification,Rural,age,[12 - Years],name,"""Households with fixed telephone lines Rural {Name1}"""
+"Households having desktop/laptop, Rural",electronicGadgetUsed,Desktop/Laptop,measuredProperty,count,populationType,Household,statType,measuredValue,placeOfResidenceClassification,Rural,age,[12 - Years],name,"""Households having desktop/laptop Rural {Name1}"""
+"Persons 12 years and older, Rural",age,[12 - Years],measuredProperty,count,populationType,Household,placeOfResidenceClassification,Rural,,,,,name,"""Persons 12 years and older Rural {Name1}"""
+"Persons having mobile phones, Rural",electronicGadgetUsed,MobileUser,measuredProperty,count,populationType,Household,statType,measuredValue,placeOfResidenceClassification,Rural,age,[12 - Years],name,"""Persons having mobile phones Rural {Name1}"""
+"Persons using internet facility, Rural",isInternetUser,True,measuredProperty,count,populationType,Household,statType,measuredValue,placeOfResidenceClassification,Rural,age,[12 - Years],name,"""Persons using internet facility Rural {Name1}"""
