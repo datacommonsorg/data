@@ -6,9 +6,9 @@
 
 - type of place: Country.
 
-- statvars: Demographics, Household, Health, Economy, Environment
+- statvars: Demographics, Household, Health, Economy, Environment.
 
-- years: 1988 to 2010
+- years: 1988 to 2010.
 
 - place_resolution: State places are resolved based on name.
 
