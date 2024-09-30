@@ -41,9 +41,9 @@ IN_DATA_PATH = 'tmp_raw_data'
 OUT_DATA_PATH = 'tmp_bq_import'
 DATASETS = [
     'AEO.2014', 'AEO.2015', 'AEO.2016', 'AEO.2017', 'AEO.2018', 'AEO.2019',
-    'AEO.2020', 'AEO.2021', 'COAL', 'EBA', 'ELEC', 'EMISS', 'IEO.2017',
-    'IEO.2019', 'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS', 'SEDS',
-    'STEO', 'TOTAL'
+    'AEO.2020', 'AEO.2021', 'AEO.2022', 'AEO.2023', 'AEO.IEO2', 'COAL', 'EBA',
+    'ELEC', 'EMISS', 'IEO', 'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS',
+    'SEDS', 'STEO', 'TOTAL'
 ]
 
 
