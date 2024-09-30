@@ -1,0 +1,8 @@
+Node: E:Average_exp->E0
+observationAbout: C:Average_exp->observationAbout
+observationDate: C:Average_exp->observationDate
+value: C:Average_exp->value
+variableMeasured: C:Average_exp->variableMeasured
+unit: C:Average_exp->unit
+scalingFactor: C:Average_exp->scalingFactor
+typeOf: dcs:StatVarObservation

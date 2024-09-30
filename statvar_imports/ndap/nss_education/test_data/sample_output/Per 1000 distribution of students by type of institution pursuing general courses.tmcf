@@ -1,0 +1,8 @@
+Node: E:General_course->E0
+observationAbout: C:General_course->observationAbout
+observationDate: C:General_course->observationDate
+value: C:General_course->value
+variableMeasured: C:General_course->variableMeasured
+unit: C:General_course->unit
+scalingFactor: C:General_course->scalingFactor
+typeOf: dcs:StatVarObservation
