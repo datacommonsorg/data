@@ -4,7 +4,7 @@
 
 - how to download data: Manual download from source 
 
-- type of place: Country and AdministrativeArea1.
+- type of place: Country.
 
 - statvars: Demographics, Household, Health, Economy, Environment
 
