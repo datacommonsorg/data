@@ -24,12 +24,6 @@ from absl import flags
 from absl import logging
 from datetime import datetime
 
-_SCRIPTS_DIR = os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.append(_SCRIPTS_DIR)
-sys.path.append(os.path.dirname(_SCRIPTS_DIR))
-from util import download_util
-
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_integer('aggregate_start_year', os.getenv('START_YEAR', '1980'),
@@ -111,6 +105,14 @@ def request_and_write_csv(csv_file_path, filename):
         # Fetch the ZIP archive
         response = requests.get(
             f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
+        # Create the output folder if it doesn't exist
+        output_folder = "./input_files"
+        if not os.path.exists(output_folder):
+            os.makedirs(output_folder)
+        #download zip file locally
+        with open(f'./input_files/{filename}.zip', 'wb') as output_file:
+            output_file.write(response.content)
+
         response.raise_for_status(
         )  # Raise an exception for non-2xx status codes
         # Extract the CSV file
@@ -125,10 +127,6 @@ def request_and_write_csv(csv_file_path, filename):
     except (requests.exceptions.RequestException, zipfile.BadZipFile,
             csv.Error) as e:
         raise e  # Re-raise the original exception for clearer error handling
-    #Calling method to download zip file locally
-    download_util.download_file_from_url(
-        url=f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip',
-        output_file=f'./input_files/{filename}.zip')
 
 
 def write_tmcf(tmcf_file_path):
