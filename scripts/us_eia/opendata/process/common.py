@@ -21,7 +21,10 @@ from collections import defaultdict
 from sys import path
 
 # For import util.alpha2_to_dcid
-path.insert(1, '../../../../')
+# path.insert(1, '../../../../')
+path.insert(1, '/usr/local/google/home/chandaluri/data/')
+path.insert(2,
+            '/usr/local/google/home/chandaluri/data/scripts/us_eia/opendata/')
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.name_to_alpha2 as name_to_alpha2
 
