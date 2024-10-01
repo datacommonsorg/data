@@ -168,6 +168,12 @@ TITLE_REPLACEMENTS = {
     '48 to 59 months': '4 to 5 years old'
 }
 
+# Distinguishing series suffixes to keep.
+DISTINGUISHING_SUFFIXES = {
+    ' - 13th ICLS', ' - 19th ICLS', ', Joint Committees',
+    ', Lower Chamber or Unicameral', ', Upper Chamber'
+}
+
 
 def format_description(s):
     '''Formats input with curated style.
@@ -286,6 +292,16 @@ def format_variable_description(variable, series):
       Formatted description.
     '''
     head = format_description(series)
+
+    # Remove dimension qualifiers only from variable names.
+    suffix = ''
+    for s in DISTINGUISHING_SUFFIXES:
+        if s in head:
+            suffix = s
+            break
+    head = re.sub(', by.*', '', head)
+    head += suffix
+
     pvs = series.join(variable.split(series)[1:]).strip()
     if not pvs:
         return head
