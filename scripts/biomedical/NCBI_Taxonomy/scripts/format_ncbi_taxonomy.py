@@ -300,7 +300,7 @@ class DivisionCls:
         """
         with open(mcf_file_path, 'w') as file:
             file.write(FIRST_MCF_ENTRY
-                       )  # Assuming FIRST_MCF_ENTRY is defined elsewhere
+                      )  # Assuming FIRST_MCF_ENTRY is defined elsewhere
 
         global DIVISION_DICT
         df.sort_values(by=['division_namePascalCase'], inplace=True)
@@ -311,8 +311,7 @@ class DivisionCls:
                     division_name=row['division_name'].title(),
                     division_acronym=row['division_acronym'],
                 )
-                mcf_line = DivisionCls().add_description_mcf_line(
-                    mcf_line, row)
+                mcf_line = DivisionCls().add_description_mcf_line(mcf_line, row)
                 file.write(mcf_line)
                 DIVISION_DICT[row[
                     'division_code']] = 'dcs:BiologicalTaxonomicDivision' + row[
@@ -363,8 +362,8 @@ class NamesCls:
                     property_list.append(char_replace(row['name_txt']))
                     try:
                         property_list.append(
-                            char_replace(row['unique_name'].split('<')
-                                         [1].split('>')[0]))
+                            char_replace(
+                                row['unique_name'].split('<')[1].split('>')[0]))
                     except:
                         logging.error(f"Error in split {property_value}")
                 else:
@@ -423,8 +422,7 @@ class HostCls:
         global HOST_DICT
         df = DataFrameGenerator().get_dataframe(file_path, HOST_DMP)
         df = DataFrameGenerator().assign_dataframe_header(df, HOST_COL)
-        df['DC_host_enum'] = df['host'].apply(
-            lambda x: self.__hostdcsformat(x))
+        df['DC_host_enum'] = df['host'].apply(lambda x: self.__hostdcsformat(x))
         return df
 
     def __hostdcsformat(self, host: str) -> str:

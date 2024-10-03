@@ -22,7 +22,7 @@ import copy
 import tempfile
 import unittest
 from deepdiff.diff import DeepDiff
-from format_ncbi_taxonomy import *
+from .format_ncbi_taxonomy import *
 
 MODULE_DIR_PATH = dirname(dirname(abspath(__file__)))
 SOURCE_FILE_PATH = dirname(dirname(abspath(__file__))) + '/test_data/input'
@@ -130,8 +130,8 @@ class TestNCBITaxonomy(unittest.TestCase):
             with open(
                     os.path.join(
                         MODULE_DIR_PATH,
-                        'test_data/expected_mcf_files/nodes_enum_expected.mcf'
-                    ), 'r') as mcf:
+                        'test_data/expected_mcf_files/nodes_enum_expected.mcf'),
+                    'r') as mcf:
                 expected_mcf_list.extend(mcf.read().split('\n\n'))
 
         assert DeepDiff(expected_mcf_list, current_mcf_list) == {}
