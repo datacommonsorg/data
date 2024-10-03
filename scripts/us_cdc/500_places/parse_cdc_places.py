@@ -84,7 +84,12 @@ MEASURE_TO_STATVAR_MAP = {
     "CHD":
         "Percent_Person_WithCoronaryHeartDisease",
     "CERVICAL":
-        "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening"
+        "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening",
+    "GHLTH":
+        "Percent_Person_18OrMoreYears_WithPoorGeneralHealth",
+    "DEPRESSION":
+        "Percent_Person_18OrMoreYears_WithDepression",
+
 }
 
 # Mapping of data value type abbreviations to StatVar dcids
@@ -187,8 +192,8 @@ def clean_county_data(data):
         "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
         "StateDesc", "Data_Value_Unit", "Data_Value_Footnote_Symbol",
         "Data_Value_Footnote", "geolocation", "LocationName", "CategoryID",
-        "Short_Question_Text", "Latitude", "Longitude"
-    ])
+        "Short_Question_Text", "Latitude", "Longitude", "Geolocation"
+    ], errors='ignore')
     return data
 
 
@@ -250,6 +255,7 @@ def generate_statvar_names(data):
             "MeasureId"].map(MEASURE_TO_STATVAR_MAP)
     data["Population_StatVar"] = "dcs:SampleSize_" + data["MeasureId"].map(
         MEASURE_TO_STATVAR_MAP)
+    data["OrigMeasureId"] = data["MeasureId"]
     data["MeasureId"] = "dcs:" + data["MeasureId"].map(MEASURE_TO_STATVAR_MAP)
     data["DataValueTypeID"] = "dcs:" + data["DataValueTypeID"].map(
         DATA_VALUE_TYPE_MAP)
@@ -264,7 +270,7 @@ def clean_cdc_places_data(input_file, output_file, sep):
     Returns:
         a cleaned csv file
     """
-    print("Cleaning file...")
+    print(f"Cleaning file {input_file}...")
     data = pd.read_csv(input_file, sep=sep)
     data = generate_statvar_names(data)
     if "tract" in input_file:
@@ -276,9 +282,9 @@ def clean_cdc_places_data(input_file, output_file, sep):
     elif "zip" in input_file:
         data = clean_zip_code_data(data)
     data = data.replace(np.nan, '', regex=True)
-    print("Writing to output file...")
+    print(f"Writing to output file {output_file}...")
     data.to_csv(output_file, index=False)
-    print("Finished cleaning file!")
+    print(f"Finished cleaning file {input_file}!")
 
 
 def main():
