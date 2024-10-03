@@ -27,16 +27,19 @@ from national.national_1980_1990 import process_national_1980_1990
 from national.national_1990_2000 import process_national_1990_2000
 from national.national_2000_2010 import process_national_2000_2010
 from national.national_2010_2020 import process_national_2010_2020
+from national.national_2020_2022 import process_national_2020_2022
 from state.state_1970_1979 import process_state_1970_1979
 from state.state_1980_1990 import process_state_1980_1990
 from state.state_1990_2000 import process_state_1990_2000
 from state.state_2000_2010 import process_state_2000_2010
 from state.state_2010_2020 import process_state_2010_2020
+from state.state_2020_2022 import process_state_2020_2022
 from county.county_1970_1979 import process_county_1970_1979
 from county.county_1980_1989 import process_county_1980_1989
 from county.county_1990_2000 import process_county_1990_2000
 from county.county_2000_2009 import process_county_2000_2009
 from county.county_2010_2020 import process_county_2010_2020
+from county.county_2020_2022 import process_county_2020_2022
 from postprocess import create_single_csv, generate_mcf, generate_tmcf
 from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE
 
@@ -100,6 +103,9 @@ def process(config_files: list, test=False):
             process_national_2000_2010(files)
         elif "national_2010_2020.json" in config_file:
             process_national_2010_2020(files)
+        #Added for data refresh from 2020-2022
+        elif "national_2020_2022.json" in config_file:
+            process_national_2020_2022(files)
         elif "state_1970_1979.json" in config_file:
             process_state_1970_1979(files)
         elif "state_1980_1990.json" in config_file:
@@ -110,6 +116,9 @@ def process(config_files: list, test=False):
             process_state_2000_2010(files)
         elif "state_2010_2020.json" in config_file:
             process_state_2010_2020(files)
+        #Added for 2020-2022 part of data refresh
+        elif "state_2020_2022.json" in config_file:
+            process_state_2020_2022(files)
         elif "county_1970_1979.json" in config_file:
             process_county_1970_1979(files)
         elif "county_1980_1989.json" in config_file:
@@ -120,6 +129,9 @@ def process(config_files: list, test=False):
             process_county_2000_2009(files)
         elif "county_2010_2020.json" in config_file:
             process_county_2010_2020(files)
+        #added for 2020-2022 data refresh
+        elif "county_2020_2022.json" in config_file:
+            process_county_2020_2022(files)
 
     # list of national output files before year 2000
     national_before_2000 = [
@@ -137,12 +149,14 @@ def process(config_files: list, test=False):
     # list of state and county output files before after 2000
     state_county_after_2000 = [
         "state_result_2000_2010.csv", "state_result_2010_2020.csv",
-        "county_result_2000_2009.csv", "county_result_2010_2020.csv"
+        "county_result_2000_2009.csv", "county_result_2010_2020.csv",
+        "state_result_2020_2022.csv", "county_result_2020_2022.csv"
     ]
 
     # list of national output files after year 2000
     national_after_2000 = [
-        "nationals_result_2000_2010.csv", "nationals_result_2010_2020.csv"
+        "nationals_result_2000_2010.csv", "nationals_result_2010_2020.csv",
+        "nationals_result_2020_2022.csv"
     ]
 
     output_files_names = {
