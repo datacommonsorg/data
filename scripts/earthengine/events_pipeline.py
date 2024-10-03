@@ -47,7 +47,7 @@ syntax, '{<config>}'. The values are resolved when that setting is used.
       'gcs_bucket': 'my-bucket',
       'gcs_folder': 'my-import-name',
     },
-    # Stage sepcific settings
+    # Stage specific settings
     'stages': [
       {
         'stage': 'download',
@@ -101,7 +101,7 @@ flags.DEFINE_list('run_stages', [],
 
 _FLAGS = flags.FLAGS
 
-_SCRIPTS_DIR = os.path.dirname(__file__)
+_SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
@@ -195,7 +195,10 @@ class EventPipeline(StageRunner):
         '''Run a single stage and return the output files generated.'''
         for stage_runner in self.stage_runners:
             if stage_name == stage_runner.get_name():
+                logging.info(f'Running stage {stage_name} with {input_files}')
                 return stage_runner.run_stage(input_files)
+        logging.error(
+            f'No stage runner for {stage_name} with input: {input_files}')
         return []
 
     def run(self, run_stages: list = []) -> list:
