@@ -15,12 +15,19 @@
 Author: Pradeep Kumar Krishnaswamy
 Date: 20-Sep-2024
 """
-
+import os
+import sys
 import unittest
-from .format_ncbi_gene import *
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+
+#import format_ncbi_gene as gene
+
+from .format_ncbi_gene import GeneInfo, Gene2Accession, Gene2Go, GeneNeighbors, GeneMim2gene, GeneRifs_Basic, Gene2Ensembl
 
 
-class NCBIGeneTest(unittest.TestCase):
+class NcbiGeneTest(unittest.TestCase):
 
     def test_check_gene_info_parser(self):
         """ Unit test to parse gene_info row
@@ -30,36 +37,51 @@ class NCBIGeneTest(unittest.TestCase):
         unique_dbXrefs_list = []
         unique_dbXrefs = set()
         input_row = [
-            '2010893', '33370007', 'rbcL', 'CGW41_pgp092', 'Lo_mil1Pt0025',
-            '-', '-', '-',
+            '2010893', '33370007', 'rbcL', 'CGW41_pgp092', 'Lo_mil1Pt0025', '-',
+            '-', '-',
             'ribulose-1,5-bisphosphate carboxylase/oxygenase large subunit',
             'protein-coding', '-', '-', '-', '-', '20230531', '-'
         ]
         expected_result = {
-            'taxID': 'dcid:bio/LobeliaMildbraedii',
-            'GeneID': '33370007',
-            'dcid': 'bio/33370007',
-            'Symbol': '"rbcL"',
-            'synonym': 'Lo_mil1Pt0025',
-            'chromosome': '',
-            'map_location': '',
+            'taxID':
+                'dcid:bio/LobeliaMildbraedii',
+            'GeneID':
+                '33370007',
+            'dcid':
+                'bio/33370007',
+            'Symbol':
+                '"rbcL"',
+            'synonym':
+                'Lo_mil1Pt0025',
+            'chromosome':
+                '',
+            'map_location':
+                '',
             'description':
-            '"ribulose-15-bisphosphate carboxylaseoxygenase large subunit"',
-            'type_of_gene': '',
-            'Full_name_from_nomenclature_authority': '',
-            'Nomenclature_status': '',
-            'Other_designations': '',
-            'Modification_date': '2023-05-31',
-            'regulatory': '',
-            'misc_feature': '',
-            'misc_recomb': ''
+                '"ribulose-15-bisphosphate carboxylaseoxygenase large subunit"',
+            'type_of_gene':
+                '',
+            'Full_name_from_nomenclature_authority':
+                '',
+            'Nomenclature_status':
+                '',
+            'Other_designations':
+                '',
+            'Modification_date':
+                '2023-05-31',
+            'regulatory':
+                '',
+            'misc_feature':
+                '',
+            'misc_recomb':
+                ''
         }
 
-        row = GeneInfo().parse_gene_info_row('dcid:bio/LobeliaMildbraedii',
-                                             gene_id_dcid_mapping,
-                                             feature_type_entries,
-                                             unique_dbXrefs_list,
-                                             unique_dbXrefs, input_row)
+        row = gene.GeneInfo().parse_gene_info_row('dcid:bio/LobeliaMildbraedii',
+                                                  gene_id_dcid_mapping,
+                                                  feature_type_entries,
+                                                  unique_dbXrefs_list,
+                                                  unique_dbXrefs, input_row)
         self.assertDictEqual(row, expected_result)
 
     def test_check_gene_neighbors_parser(self):
@@ -83,8 +105,8 @@ class NCBIGeneTest(unittest.TestCase):
             'chromosome': 'chr9.part0',
             'assembly': '"Reference PAN1.0 Primary Assembly"'
         }
-        row = GeneNeighbors().parse_gene_neighbors_row('bio/122811710',
-                                                       input_row)
+        row = gene.GeneNeighbors().parse_gene_neighbors_row(
+            'bio/122811710', input_row)
         self.assertDictEqual(row, expected_result)
 
     def test_check_gene_mim2gene_parser(self):
@@ -102,8 +124,8 @@ class NCBIGeneTest(unittest.TestCase):
             'dcid': 'bio/ncbi_100652748_omim_620758',
             'MedGenCUI_dcid': ''
         }
-        row = GeneMim2gene().parse_gene_mim2gene_row('bio/ncbi_100652748',
-                                                     input_row)
+        row = gene.GeneMim2gene().parse_gene_mim2gene_row(
+            'bio/ncbi_100652748', input_row)
         self.assertDictEqual(row, expected_result)
 
     def test_check_gene_gene2go_parser(self):
@@ -111,21 +133,28 @@ class NCBIGeneTest(unittest.TestCase):
         """
         input_row = [
             '75485', '128904962', 'GO:0048025', 'IEA', 'involved_in',
-            'negative regulation of mRNA splicing, via spliceosome',
-            '30032202', 'Process'
+            'negative regulation of mRNA splicing, via spliceosome', '30032202',
+            'Process'
         ]
         expected_result = {
-            'GeneID': 'dcid:bio/128904962',
-            'dcid': 'bio/GO_0048025',
-            'GO_ID': 'GO:0048025',
-            'Evidence': 'dcs:GOTermEvidenceCodeElectronicAnnotation',
-            'Qualifier': 'dcs:GOTermQualifierInvolvedIn',
+            'GeneID':
+                'dcid:bio/128904962',
+            'dcid':
+                'bio/GO_0048025',
+            'GO_ID':
+                'GO:0048025',
+            'Evidence':
+                'dcs:GOTermEvidenceCodeElectronicAnnotation',
+            'Qualifier':
+                'dcs:GOTermQualifierInvolvedIn',
             'GO_term':
-            '"negative regulation of mRNA splicing, via spliceosome"',
-            'PubMed': '"30032202"',
-            'Category': 'dcs:GeneOntologyCategoryBiologicalProcess'
+                '"negative regulation of mRNA splicing, via spliceosome"',
+            'PubMed':
+                '"30032202"',
+            'Category':
+                'dcs:GeneOntologyCategoryBiologicalProcess'
         }
-        row = Gene2Go().parse_gene_gene2go_row('bio/128904962', input_row)
+        row = gene.Gene2Go().parse_gene_gene2go_row('bio/128904962', input_row)
         self.assertDictEqual(row, expected_result)
 
     def test_check_gene_gene2ensembl_parser(self):
@@ -145,7 +174,7 @@ class NCBIGeneTest(unittest.TestCase):
             'Ensembl_protein_identifier': ''
         }
 
-        row = Gene2Ensembl().parse_gene_gene2ensembl_row(
+        row = gene.Gene2Ensembl().parse_gene_gene2ensembl_row(
             'bio/ncbi_113218477', input_row)
         self.assertDictEqual(row, expected_result)
 
@@ -158,21 +187,21 @@ class NCBIGeneTest(unittest.TestCase):
         ]
         expected_result = {
             'GeneID':
-            'dcid:bio/ncbi_3188',
+                'dcid:bio/ncbi_3188',
             'dcid':
-            'bio/ncbi_3188_16171461',
+                'bio/ncbi_3188_16171461',
             'name':
-            '"ncbi 3188 PubMed 16171461 Reference Into Function"',
+                '"ncbi 3188 PubMed 16171461 Reference Into Function"',
             'dateModified':
-            '2010-01-21',
+                '2010-01-21',
             'pubMedId':
-            '16171461',
+                '16171461',
             'GeneRifText':
-            '"the relative levels of hnRNP F and H2 in cells, as well as the target sequences in the downstream GRS on pre-mRNA, influence gene expression"'
+                '"the relative levels of hnRNP F and H2 in cells, as well as the target sequences in the downstream GRS on pre-mRNA, influence gene expression"'
         }
 
-        row = GeneRifs_Basic().parse_gene_generifs_row('bio/ncbi_3188',
-                                                       input_row)
+        row = gene.GeneRifs_Basic().parse_gene_generifs_row(
+            'bio/ncbi_3188', input_row)
         self.assertDictEqual(row, expected_result)
 
     def test_check_gene_gene2accession_parser(self):
@@ -203,7 +232,7 @@ class NCBIGeneTest(unittest.TestCase):
             'mature_peptide_gi': ''
         }
 
-        row = Gene2Accession().parse_gene_gene2accession_row(
+        row = gene.Gene2Accession().parse_gene_gene2accession_row(
             'bio/ncbi_113218477', input_row)
         self.assertDictEqual(row, expected_result)
 

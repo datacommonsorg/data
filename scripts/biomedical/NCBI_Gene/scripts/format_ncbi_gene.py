@@ -321,37 +321,54 @@ GENE_EVIDENCE_DICT = {
 }
 
 GENE_QUALIFIER_DICT = {
-    'NOT acts_upstream_of': 'dcs:GOTermQualifierNotActsUpstreamOf',
+    'NOT acts_upstream_of':
+        'dcs:GOTermQualifierNotActsUpstreamOf',
     'NOT acts_upstream_of_or_within':
-    'dcs:GOTermQualifierNotActsUpstreamOfOrWithin',
+        'dcs:GOTermQualifierNotActsUpstreamOfOrWithin',
     'NOT acts_upstream_of_or_within_negative_effect':
-    'dcs:GOTermQualifierNotActsUpstreamOfOrWithinNegativeEffect',
+        'dcs:GOTermQualifierNotActsUpstreamOfOrWithinNegativeEffect',
     'NOT acts_upstream_of_or_within_positive_effect':
-    'dcs:GOTermQualifierNotActsUpstreamOfOrWithinPositiveEffect',
-    'NOT colocalizes_with': 'dcs:GOTermQualifierNotColocalizesWith',
-    'NOT contributes_to': 'dcs:GOTermQualifierNotContributesTo',
-    'NOT enables': 'dcs:GOTermQualifierNotEnables',
-    'NOT involved_in': 'dcs:GOTermQualifierNotInvolvedIn',
-    'NOT is_active_in': 'dcs:GOTermQualifierNotIsActiveIn',
-    'NOT located_in': 'dcs:GOTermQualifierNotLocatedIn',
-    'NOT part_of': 'dcs:GOTermQualifierNotPartOf',
-    'acts_upstream_of': 'dcs:GOTermQualifierActsUpstreamOf',
+        'dcs:GOTermQualifierNotActsUpstreamOfOrWithinPositiveEffect',
+    'NOT colocalizes_with':
+        'dcs:GOTermQualifierNotColocalizesWith',
+    'NOT contributes_to':
+        'dcs:GOTermQualifierNotContributesTo',
+    'NOT enables':
+        'dcs:GOTermQualifierNotEnables',
+    'NOT involved_in':
+        'dcs:GOTermQualifierNotInvolvedIn',
+    'NOT is_active_in':
+        'dcs:GOTermQualifierNotIsActiveIn',
+    'NOT located_in':
+        'dcs:GOTermQualifierNotLocatedIn',
+    'NOT part_of':
+        'dcs:GOTermQualifierNotPartOf',
+    'acts_upstream_of':
+        'dcs:GOTermQualifierActsUpstreamOf',
     'acts_upstream_of_negative_effect':
-    'dcs:GOTermQualifierActsUpstreamOfNegativeEffect',
-    'acts_upstream_of_or_within': 'dcs:GOTermQualifierActsUpstreamOfOrWithin',
+        'dcs:GOTermQualifierActsUpstreamOfNegativeEffect',
+    'acts_upstream_of_or_within':
+        'dcs:GOTermQualifierActsUpstreamOfOrWithin',
     'acts_upstream_of_or_within_negative_effect':
-    'dcs:GOTermQualifierActsUpstreamOfOrWithinNegativeEffect',
+        'dcs:GOTermQualifierActsUpstreamOfOrWithinNegativeEffect',
     'acts_upstream_of_or_within_positive_effect':
-    'dcs:GOTermQualifierActsUpstreamOfOrWithinPositiveEffect',
+        'dcs:GOTermQualifierActsUpstreamOfOrWithinPositiveEffect',
     'acts_upstream_of_positive_effect':
-    'dcs:GOTermQualifierActsUpstreamOfPositiveEffect',
-    'colocalizes_with': 'dcs:GOTermQualifierColocalizesWith',
-    'contributes_to': 'dcs:GOTermQualifierContributesTo',
-    'enables': 'dcs:GOTermQualifierEnables',
-    'involved_in': 'dcs:GOTermQualifierInvolvedIn',
-    'is_active_in': 'dcs:GOTermQualifierIsActiveIn',
-    'located_in': 'dcs:GOTermQualifierLocatedIn',
-    'part_of': 'dcs:GOTermQualifierPartOf'
+        'dcs:GOTermQualifierActsUpstreamOfPositiveEffect',
+    'colocalizes_with':
+        'dcs:GOTermQualifierColocalizesWith',
+    'contributes_to':
+        'dcs:GOTermQualifierContributesTo',
+    'enables':
+        'dcs:GOTermQualifierEnables',
+    'involved_in':
+        'dcs:GOTermQualifierInvolvedIn',
+    'is_active_in':
+        'dcs:GOTermQualifierIsActiveIn',
+    'located_in':
+        'dcs:GOTermQualifierLocatedIn',
+    'part_of':
+        'dcs:GOTermQualifierPartOf'
 }
 
 GENE_CATEGORY_DICT = {
@@ -522,8 +539,7 @@ class GeneInfo:
         feature_type_entries = set()
         unique_dbXrefs_list = []
         unique_dbXrefs = set()
-        input_file = path_join(SOURCE_FILE_PATH + '/gene_info',
-                               file_to_process)
+        input_file = path_join(SOURCE_FILE_PATH + '/gene_info', file_to_process)
         with open(
                 path_join(OUTPUT_FILE_PATH + '/gene_info',
                           file_to_process.replace('txt', 'csv')),
@@ -696,9 +712,7 @@ class GeneInfo:
             for feature_type in FEATURE_TYPE_ENTRIES:
                 ftype = json.loads(feature_type)
                 mfc_entry = NCBI_GENE_SCHEMA_EMUN_MCF.format(
-                    type=ftype['type'],
-                    item=ftype['entry'],
-                    name=ftype['name'])
+                    type=ftype['type'], item=ftype['entry'], name=ftype['name'])
                 file.write(mfc_entry)
 
     def _get_feature_type_list(self, value):
@@ -787,7 +801,7 @@ class GenePubmed:
                         else:
                             Gene_PubMedID[input_row[1]] = {
                                 'dcid':
-                                f"dcid:{GENE_ID_DCID_MAPPING[input_row[1]]}",
+                                    f"dcid:{GENE_ID_DCID_MAPPING[input_row[1]]}",
                                 'PubMedID': [input_row[2]]
                             }
                             #Gene_PubMedID[input_row[1]].append()
@@ -937,7 +951,7 @@ class GeneOrthology:
                             if input_row[4] in GENE_ID_DCID_MAPPING:
                                 Gene_orthologs[input_row[1]] = {
                                     'dcid':
-                                    f"dcid:{GENE_ID_DCID_MAPPING[input_row[1]]}",
+                                        f"dcid:{GENE_ID_DCID_MAPPING[input_row[1]]}",
                                     'ortholog': [
                                         f"dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}"
                                     ]
@@ -1019,7 +1033,7 @@ class GeneGroup:
                             try:
                                 Gene_group[input_row[1]] = {
                                     'GeneID':
-                                    f'dcid:{GENE_ID_DCID_MAPPING[input_row[1]]}',
+                                        f'dcid:{GENE_ID_DCID_MAPPING[input_row[1]]}',
                                     column_name: [
                                         f'dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}'
                                     ]
@@ -1119,7 +1133,8 @@ class GeneMim2gene:
         if len(input_row[3]) > 1:
             Source_lst = [
                 f'{GENE_OMIM_SOURCE_DICT.get(x.strip(), x.strip())}'
-                for x in input_row[3].strip().split(';') if len(x) > 1
+                for x in input_row[3].strip().split(';')
+                if len(x) > 1
             ]
             row['Source'] = ",".join(Source_lst)
 
@@ -1562,7 +1577,7 @@ def main(_):
     ]
     for neighbors_file in gene_Neighbors_shard_files:
         neighbors_proc = Process(target=GeneNeighbors().process_csv_file,
-                                 args=(neighbors_file, ))
+                                 args=(neighbors_file,))
         procs_Neighbors.append(neighbors_proc)
         neighbors_proc.start()
 
@@ -1575,7 +1590,7 @@ def main(_):
         f for f in listdir(join(SOURCE_FILE_PATH, 'gene2go'))
     ]
     for go_file in gene_Go_shard_files:
-        go_proc = Process(target=Gene2Go().process_csv_file, args=(go_file, ))
+        go_proc = Process(target=Gene2Go().process_csv_file, args=(go_file,))
         procs_Go.append(go_proc)
         go_proc.start()
 
@@ -1589,7 +1604,7 @@ def main(_):
     ]
     for accession_file in gene_Accession_shard_files:
         accession_proc = Process(target=Gene2Accession().process_csv_file,
-                                 args=(accession_file, ))
+                                 args=(accession_file,))
         procs_Accession.append(accession_proc)
         accession_proc.start()
 
