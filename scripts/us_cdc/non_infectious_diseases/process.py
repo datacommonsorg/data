@@ -99,7 +99,6 @@ def generate_aggregates(df: pd.DataFrame,
                                                   'Hospitalizations': sum,
                                                   'Deaths': sum
                                               })
-
     # aggreagte stats for US states and territories
     aggregate_df = df[~(df['observationAbout'].str.contains('country'))]
     aggregate_df = aggregate_df.groupby(groupby_cols, as_index=False).agg({
@@ -107,7 +106,6 @@ def generate_aggregates(df: pd.DataFrame,
         'Hospitalizations': sum,
         'Deaths': sum
     })
-
     # aggregate for US at country level
     country_group_by = [
         cols for cols in groupby_cols if cols != 'observationAbout'
@@ -119,10 +117,12 @@ def generate_aggregates(df: pd.DataFrame,
                                                'Deaths': sum
                                            })
     us_aggreagte_df['observationAbout'] = 'country/USA'
-    us_aggreagte_df = us_aggreagte_df[[
-        'observationDate', 'observationAbout', 'Primary Mode', 'Illnesses',
-        'Hospitalizations', 'Deaths'
-    ]]
+
+    #observationDate Primary Mode     Etiology Etiology Status  Illnesses  Hospitalizations  Deaths observationAbout
+    # us_aggreagte_df = us_aggreagte_df[[
+    #     'observationDate', 'observationAbout', 'Primary Mode', 'Illnesses',
+    #     'Hospitalizations', 'Deaths'
+    # ]]
 
     # merge all aggregations
     aggregate_df = pd.concat([aggregate_df, us_aggreagte_df, country_stat_df],
@@ -217,6 +217,7 @@ def fix_place_names(clean_df):
 def process_non_infectious_data(input_path: str, sheet_name: str,
                                 schema_map_path: str, output_path: str) -> None:
     f = open(schema_map_path, 'r')
+
     PV_MAP = json.load(f)
     f.close()
 
