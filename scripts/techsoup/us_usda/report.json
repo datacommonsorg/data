@@ -1,0 +1,750 @@
+{
+  "levelSummary": {
+    "LEVEL_INFO": {
+      "counters": {
+        "NumRowSuccesses": "57945",
+        "NumPVSuccesses": "1158900",
+        "Existence_NumChecks": "1332735",
+        "NumNodeSuccesses": "115890",
+        "Existence_NumDcCalls": "53"
+      }
+    },
+    "LEVEL_WARNING": {
+      "counters": {
+        "Existence_MissingReference_mealSite": "57945",
+        "API_EmptyDcCallResponse": "1",
+        "Existence_MissingReference_Property": "521505",
+        "Existence_MissingReference_typeOf": "115890"
+      }
+    }
+  },
+  "entries": [{
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'UsdaSummerMealSite', property: 'typeOf', node: 'E:Data->E1'",
+    "counterKey": "Existence_MissingReference_typeOf"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "2"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "3"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "4"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "5"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "6"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "7"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "8"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "9"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "10"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "11"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "12"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "13"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "14"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "15"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "16"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "17"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "18"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "19"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "20"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "21"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "22"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "23"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "24"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "25"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "26"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "27"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "28"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "29"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "30"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "31"
+    },
+    "userMessage": "Failed reference existence check :: property-ref: 'afternoonSnackHours', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_Property"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "263"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.238029716_34.892899824', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "264"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.238029716_34.892899824', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "266"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.238029716_34.892899824', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "94"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.285090699_34.1081085980001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "95"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.294335954_34.1075729190001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "46"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.325809949_33.0492500280001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "47"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.325809949_33.0492500280001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "86"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.356863616_34.4875555520001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "87"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.373147876_34.4974518770001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "88"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.373147876_34.4974518770001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "265"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.425336684_35.192566496', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "72"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.528322513_31.3736479880001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "92"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.554765611_36.937508365', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "134"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.554765611_36.937508365', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "269"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.557169844_36.1468467890001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "40"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.560319925_31.335190056', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "93"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.60514257_36.292118902', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "422"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.632073078_32.8135603050001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "328"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.65216796_36.7640518630001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "329"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.65216796_36.7640518630001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "330"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.65216796_36.7640518630001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "331"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.65216796_36.7640518630001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "332"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.65216796_36.7640518630001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "333"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.65216796_36.7640518630001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "334"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.65216796_36.7640518630001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "335"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.65216796_36.7640518630001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "336"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.65216796_36.7640518630001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "102"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.6730841_31.599502182', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "229"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.680122635_31.6854510140001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }, {
+    "level": "LEVEL_WARNING",
+    "location": {
+      "file": "Summer_Meal_Sites_2022_v0.csv",
+      "lineNumber": "230"
+    },
+    "userMessage": "Failed reference existence check :: value-ref: 'mealsite-109.680122635_31.6854510140001', property: 'mealSite', node: 'E:Data->E2'",
+    "counterKey": "Existence_MissingReference_mealSite"
+  }],
+  "commandArgs": {
+    "existenceChecks": true,
+    "resolution": "RESOLUTION_MODE_LOCAL",
+    "numThreads": 1,
+    "statChecks": true,
+    "observationAbout": false,
+    "allowNanSvobs": false
+  }
+}
