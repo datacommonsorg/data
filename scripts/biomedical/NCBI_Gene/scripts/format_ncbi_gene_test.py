@@ -16,25 +16,11 @@ Author: Pradeep Kumar Krishnaswamy
 Date: 20-Sep-2024
 """
 
-import os
-import sys
 import unittest
-from pathlib import Path
-from absl import flags
-
-_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(_SCRIPT_DIR)
-
-from format_ncbi_gene import *
-
-MODULE_DIR_PATH = str(Path(os.path.dirname(__file__)).parents[0])
-_FLAGS = flags.FLAGS
-_FLAGS(sys.argv)
-print('MODULE_DIR_PATH', MODULE_DIR_PATH)
-print('_SCRIPT_DIR', _SCRIPT_DIR)
+from .format_ncbi_gene import *
 
 
-class TestNCBIGene(unittest.TestCase):
+class NCBIGeneTest(unittest.TestCase):
 
     def test_check_gene_info_parser(self):
         """ Unit test to parse gene_info row
