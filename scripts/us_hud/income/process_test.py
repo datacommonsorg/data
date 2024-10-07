@@ -36,7 +36,7 @@ class ProcessTest(unittest.TestCase):
     def test_get_url(self):
         self.assertEqual(
             process.get_url(2022),
-            'https://www.huduser.gov/portal/datasets/il/il22/Section8-FY22.xlsx'
+            'https://www.huduser.gov/portal/datasets/il/il23/Section8-FY23.xlsx'
         )
         self.assertEqual(process.get_url(1997), '')
 
