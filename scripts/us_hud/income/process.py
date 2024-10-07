@@ -88,9 +88,8 @@ def process(year, matches, output_dir):
         if year < 2023:
             df = pd.read_excel(url, 0)
         else:
-            df = pd.read_excel(
-                "/usr/local/google/home/chharish/Downloads/Section8-FY23.xlsx",
-                "Section8-FY23")
+            df = pd.read_excel("scripts/us_hud/income/Section8-FY23.xlsx",
+                               "Section8-FY23")
     except Exception as e:
         print(f'No file found for {url}-{e}.')
         return
