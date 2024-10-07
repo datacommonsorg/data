@@ -70,6 +70,7 @@ GENE_ID_DCID_MAPPING = {}
 
 GENE_INFO_DICT = {
     'taxID': '',
+    'taxID_dcid': '',
     'GeneID': '',
     'dcid': '',
     'Symbol': '',
@@ -556,9 +557,6 @@ class GeneInfo:
             counters.add_counter('total',
                                  file_util.file_estimate_num_rows(input_file))
             with open(input_file, 'r') as source_file:
-                log_cnt = 0
-
-                # reader = csv.reader(source_file)
                 for line in source_file:
                     line = line.replace('\\\\', ' ').replace('\\', ' ')
                     # skip row
@@ -576,12 +574,6 @@ class GeneInfo:
                                 unique_dbXrefs_list, unique_dbXrefs, input_row)
                             if row:
                                 writer_gene.writerow(row)
-                                if ',' in line:
-                                    if log_cnt < 5:
-                                        logging.info(
-                                            f'Row {input_row} \n {row} \n {TAX_ID_DCID_MAPPING[input_row[0]]} '
-                                        )
-                                        log_cnt += 1
                     counters.add_counter('processed', 1)
 
         logging.info(
@@ -611,7 +603,8 @@ class GeneInfo:
             _type_: _description_
         """
         row = deepcopy(GENE_INFO_DICT)
-        row['taxID'] = taxID
+        row['taxID'] = input_row[0]
+        row['taxID_dcid'] = taxID
         row['GeneID'] = input_row[1]
         dcid = f"bio/{input_row[1]}" if input_row[
             0] != '9606' else f"bio/ncbi_{input_row[1]}"
@@ -859,7 +852,6 @@ class GeneNeighbors:
                                  file_util.file_estimate_num_rows(input_file))
 
             with open(input_file, 'r') as source_file:
-                log_cnt = 0
                 for line in source_file:
                     # skip row
                     if line[0] == '#':
@@ -873,12 +865,6 @@ class GeneNeighbors:
 
                             if row:
                                 writer_gene.writerow(row)
-                                if ',' in line:
-                                    if log_cnt < 5:
-                                        logging.info(
-                                            f'Row {input_row} \n {row} \n {GENE_ID_DCID_MAPPING[input_row[1]]} '
-                                        )
-                                        log_cnt += 1
                             else:
                                 logging.info(
                                     f"Missing values to form dcid {input_row[2]} {input_row[4]} {input_row[5]} in file` {input_file}"
@@ -1093,7 +1079,6 @@ class GeneMim2gene:
                                  file_util.file_estimate_num_rows(input_file))
 
             with open(input_file, 'r') as source_file:
-                log_cnt = 0
                 for line in source_file:
                     # skip row
                     if line[0] == '#':
@@ -1106,12 +1091,6 @@ class GeneMim2gene:
                                 GENE_ID_DCID_MAPPING[input_row[1]], input_row)
                             if row:
                                 writer_gene.writerow(row)
-                                if ',' in line:
-                                    if log_cnt < 5:
-                                        logging.info(
-                                            f'Row {input_row} \n {row} \n {GENE_ID_DCID_MAPPING[input_row[1]]} '
-                                        )
-                                        log_cnt += 1
                     counters.add_counter('processed', 1)
 
     def parse_gene_mim2gene_row(self, dcid, input_row):
@@ -1183,8 +1162,6 @@ class Gene2Go:
                                  file_util.file_estimate_num_rows(input_file))
 
             with open(input_file, 'r') as source_file:
-                log_cnt = 0
-
                 for line in source_file:
                     # skip row
                     if line[0] == '#':
@@ -1197,12 +1174,6 @@ class Gene2Go:
                                 GENE_ID_DCID_MAPPING[input_row[1]], input_row)
                             if row:
                                 writer_gene.writerow(row)
-                                if ',' in line:
-                                    if log_cnt < 5:
-                                        logging.info(
-                                            f'Row {input_row} \n {row} \n {GENE_ID_DCID_MAPPING[input_row[1]]} '
-                                        )
-                                        log_cnt += 1
                     counters.add_counter('processed', 1)
 
     def parse_gene_gene2go_row(self, dcid, input_row):
@@ -1271,8 +1242,6 @@ class Gene2Accession:
                                  file_util.file_estimate_num_rows(input_file))
 
             with open(input_file, 'r') as source_file:
-                log_cnt = 0
-
                 for line in source_file:
                     # skip row
                     if line[0] == '#':
@@ -1292,12 +1261,6 @@ class Gene2Accession:
 
                             if row:
                                 writer_gene.writerow(row)
-                                if ',' in line:
-                                    if log_cnt < 5:
-                                        logging.info(
-                                            f'Row {input_row} \n {row} \n {GENE_ID_DCID_MAPPING[input_row[1]]} '
-                                        )
-                                        log_cnt += 1
 
                             if len(input_row[3]) > 1:
                                 row_rna = deepcopy(GENE_ACCESSION_RNA_DICT)
@@ -1408,12 +1371,6 @@ class Gene2Ensembl:
                                 GENE_ID_DCID_MAPPING[input_row[1]], input_row)
                             if row:
                                 writer_gene.writerow(row)
-                                if ',' in line:
-                                    if log_cnt < 5:
-                                        logging.info(
-                                            f'Row {input_row} \n {row} \n {GENE_ID_DCID_MAPPING[input_row[1]]} '
-                                        )
-                                        log_cnt += 1
                     counters.add_counter('processed', 1)
 
     def parse_gene_gene2ensembl_row(self, dcid, input_row):
@@ -1470,8 +1427,6 @@ class GeneRifs_Basic:
                                  file_util.file_estimate_num_rows(input_file))
 
             with open(input_file, 'r') as source_file:
-                log_cnt = 0
-
                 for line in source_file:
                     # skip row
                     if line[0] == '#':
@@ -1485,12 +1440,6 @@ class GeneRifs_Basic:
                                 GENE_ID_DCID_MAPPING[input_row[1]], input_row)
                             if row:
                                 writer_gene.writerow(row)
-                                if ',' in line:
-                                    if log_cnt < 5:
-                                        logging.info(
-                                            f'Row {input_row} \n {row} \n {GENE_ID_DCID_MAPPING[input_row[1]]} '
-                                        )
-                                        log_cnt += 1
                     counters.add_counter('processed', 1)
 
     def parse_gene_generifs_row(self, dcid, input_row):

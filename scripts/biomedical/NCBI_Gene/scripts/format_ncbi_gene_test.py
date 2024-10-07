@@ -44,6 +44,8 @@ class NcbiGeneTest(unittest.TestCase):
         ]
         expected_result = {
             'taxID':
+                '2010893',
+            'taxID_dcid':
                 'dcid:bio/LobeliaMildbraedii',
             'GeneID':
                 '33370007',

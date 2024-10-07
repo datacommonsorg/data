@@ -1,7 +1,13 @@
 Node: E:ncbi_gene_gene->E1
+typeOf: dcs:Taxon
+dcid: C:ncbi_gene_gene->taxID_dcid
+ncbiTaxId: C:ncbi_gene_gene->taxID
+
+
+Node: E:ncbi_gene_gene->E2
 typeOf: dcs:Gene
 dcid: C:ncbi_gene_gene->dcid
-ofSpecies: C:ncbi_gene_gene->taxID
+ofSpecies: E:ncbi_gene_gene->E1
 geneID: C:ncbi_gene_gene->GeneID
 name: C:ncbi_gene_gene->Symbol
 synonym: C:ncbi_gene_gene->synonym
