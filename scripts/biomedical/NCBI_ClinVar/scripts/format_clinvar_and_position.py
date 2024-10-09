@@ -37,8 +37,9 @@ MODULE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'output')
 
 # Declare Universal Variables
 _BASE_32_MAP = [
-    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
-    'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z', 'e'
+    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'b', 'c', 'd', 'f', 'g',
+    'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y',
+    'z', 'e'
 ]
 
 _NUM_BITS_32 = 5
@@ -55,36 +56,60 @@ OBSERVATION_DATE = ''
 
 # declare fields accounted for in this import
 RECORDED_INFO = [
-    'RS', 'ALLELEID', 'CLNDISDBINCL', 'CLNDNINCL', 'CLNHGVS', 'CLNREVSTAT', 'CLNSIGINCL', 'CLNVC',
-    'CLNVCSO', 'GENEINFO', 'MC', 'ORIGIN', 'AF_ESP', 'AF_EXAC', 'AF_TGP', 'CLNVI', 'CLNSIGCONF',
-    'DBVARID', 'CLNDN', 'CLNSIG', 'CLNDISDB', 'ONC', 'ONCDN', 'ONCDISDB', 'ONCREVSTAT', 'SCI',
-    'SCIDN', 'SCIDISDB', 'SCIREVSTAT'
+    'RS', 'ALLELEID', 'CLNDISDBINCL', 'CLNDNINCL', 'CLNHGVS', 'CLNREVSTAT',
+    'CLNSIGINCL', 'CLNVC', 'CLNVCSO', 'GENEINFO', 'MC', 'ORIGIN', 'AF_ESP',
+    'AF_EXAC', 'AF_TGP', 'CLNVI', 'CLNSIGCONF', 'DBVARID', 'CLNDN', 'CLNSIG',
+    'CLNDISDB', 'ONC', 'ONCDN', 'ONCDISDB', 'ONCREVSTAT', 'SCI', 'SCIDN',
+    'SCIDISDB', 'SCIREVSTAT'
 ]
 
 DICT_REVIEW_STATUS = {
-    'criteria_provided': 'dcs:ClinVarReviewStatusCriteriaProvided',
-    '_single_submitter': 'dcs:ClinVarReviewStatusSingleSubmitter',
-    'single': 'dcs:ClinVarReviewStatusSingleSubmitter',
-    'single_submitter': 'dcs:ClinVarReviewStatusSingleSubmitter',
-    'no_assertion_criteria_provided': 'dcs:ClinVarReviewStatusNoCriteria',
-    'no_assertion': 'dcs:ClinVarReviewStatusNoCriteria',
-    'no_criteria': 'dcs:ClinVarReviewStatusNoCriteria',
-    'no_assertion_provided': 'dcs:ClinVarReviewStatusNoCriteria',
-    'mult': 'dcs:ClinVarReviewStatusMultipleSubmitter',
-    'multiple_submitters': 'dcs:ClinVarReviewStatusMultipleSubmitter',
-    '_multiple_submitters': 'dcs:ClinVarReviewStatusMultipleSubmitter',
-    'reviewed_by_expert_panel': 'dcs:ClinVarReviewStatusReviewed',
-    'conflicting_interpretations': 'dcs:ClinVarReviewStatusConflictingInterpretations',
-    '_conflicting_interpretations': 'dcs:ClinVarReviewStatusConflictingInterpretations',
-    '_conflicting_classifications': 'dcs:ClinVarReviewStatusConflictingInterpretations',
-    'non_interpretation_for_the_single_variant': 'dcs:ClinVarReviewStatusNoInterpretation',
-    'no_interpretation_for_the_single_variant': 'dcs:ClinVarReviewStatusNoInterpretation',
-    'no_classification_provided': 'dcs:ClinVarReviewStatusNoInterpretation',
-    'no_classifications_from_unflagged_records': 'dcs:ClinVarReviewStatusNoInterpretation',
-    'no_classification_for_the_single_variant': 'dcs:ClinVarReviewStatusNoInterpretation',
-    'practice_guideline': 'dcs:ClinVarReviewStatusPracticeGuideline',
-    'no_conflicts': 'dcs:ClinVarReviewStatusNoConflicts',
-    '_no_conflicts': 'dcs:ClinVarReviewStatusNoConflicts'
+    'criteria_provided':
+        'dcs:ClinVarReviewStatusCriteriaProvided',
+    '_single_submitter':
+        'dcs:ClinVarReviewStatusSingleSubmitter',
+    'single':
+        'dcs:ClinVarReviewStatusSingleSubmitter',
+    'single_submitter':
+        'dcs:ClinVarReviewStatusSingleSubmitter',
+    'no_assertion_criteria_provided':
+        'dcs:ClinVarReviewStatusNoCriteria',
+    'no_assertion':
+        'dcs:ClinVarReviewStatusNoCriteria',
+    'no_criteria':
+        'dcs:ClinVarReviewStatusNoCriteria',
+    'no_assertion_provided':
+        'dcs:ClinVarReviewStatusNoCriteria',
+    'mult':
+        'dcs:ClinVarReviewStatusMultipleSubmitter',
+    'multiple_submitters':
+        'dcs:ClinVarReviewStatusMultipleSubmitter',
+    '_multiple_submitters':
+        'dcs:ClinVarReviewStatusMultipleSubmitter',
+    'reviewed_by_expert_panel':
+        'dcs:ClinVarReviewStatusReviewed',
+    'conflicting_interpretations':
+        'dcs:ClinVarReviewStatusConflictingInterpretations',
+    '_conflicting_interpretations':
+        'dcs:ClinVarReviewStatusConflictingInterpretations',
+    '_conflicting_classifications':
+        'dcs:ClinVarReviewStatusConflictingInterpretations',
+    'non_interpretation_for_the_single_variant':
+        'dcs:ClinVarReviewStatusNoInterpretation',
+    'no_interpretation_for_the_single_variant':
+        'dcs:ClinVarReviewStatusNoInterpretation',
+    'no_classification_provided':
+        'dcs:ClinVarReviewStatusNoInterpretation',
+    'no_classifications_from_unflagged_records':
+        'dcs:ClinVarReviewStatusNoInterpretation',
+    'no_classification_for_the_single_variant':
+        'dcs:ClinVarReviewStatusNoInterpretation',
+    'practice_guideline':
+        'dcs:ClinVarReviewStatusPracticeGuideline',
+    'no_conflicts':
+        'dcs:ClinVarReviewStatusNoConflicts',
+    '_no_conflicts':
+        'dcs:ClinVarReviewStatusNoConflicts'
 }
 
 DICT_CLIN_SIG_CATEGORY = {
@@ -213,20 +238,29 @@ class WriteToCsv:
 
         for ft in files:
             if ft == 'clinvar_obs':
-                curr_row = {v: CURRENT_ROW[v] for v in CLINVAR_OBS_OUTPUT_DICT.keys()}
+                curr_row = {
+                    v: CURRENT_ROW[v] for v in CLINVAR_OBS_OUTPUT_DICT.keys()
+                }
 
                 CLINVAR_OBS_FILE_WRITER.writerow(curr_row)
 
             elif ft == 'clinvar_conflicting':
-                curr_row = {v: CURRENT_ROW[v] for v in CLINVAR_CONFLICTING_OUTPUT_DICT.keys()}
+                curr_row = {
+                    v: CURRENT_ROW[v]
+                    for v in CLINVAR_CONFLICTING_OUTPUT_DICT.keys()
+                }
                 CLINVAR_CONFLICTING_FILE_WRITER.writerow(curr_row)
 
             elif ft == 'clinvar':
-                curr_row = {v: CURRENT_ROW[v] for v in CLINVAR_OUTPUT_DICT.keys()}
+                curr_row = {
+                    v: CURRENT_ROW[v] for v in CLINVAR_OUTPUT_DICT.keys()
+                }
                 CLINVAR_FILE_WRITER.writerow(curr_row)
 
             elif ft == 'clinvar_pos_only':
-                curr_row = {v: CURRENT_ROW[v] for v in CLINVAR_POS_OUTPUT_DICT.keys()}
+                curr_row = {
+                    v: CURRENT_ROW[v] for v in CLINVAR_POS_OUTPUT_DICT.keys()
+                }
                 CLINVAR_POS_FILE_WRITER.writerow(curr_row)
 
     def close(self) -> None:
@@ -407,7 +441,8 @@ def write_clin_sig_category(dictionary, key, prop, file):
                 category = value.split('_-_')[0]
                 enum = DICT_CLIN_SIG_CATEGORY[category]
         except:
-            logging.error(f"{category} not available in Clinical Significance Tier")
+            logging.error(
+                f"{category} not available in Clinical Significance Tier")
             return
     if enum:
         writeEntry(prop, enum, file, False)
@@ -451,34 +486,43 @@ def writeClinSig(dictionary, key, file):
         writeEntry('clinicalSignificance', 'dcs:ClinSigBenign', file, False)
         return ()
     if value == 'Conflicting_interpretations_of_pathogenicity' or 'Conflicting_interpretations_of_pathogenicity,_risk_factor':
-        writeEntry('clinicalSignificance', 'dcs:ClinSigConflictingPathogenicity', file, False)
+        writeEntry('clinicalSignificance',
+                   'dcs:ClinSigConflictingPathogenicity', file, False)
         return ()
     if value == 'Association':
-        writeEntry('clinicalSignificance', 'dcs:ClinSigAssociation', file, False)
+        writeEntry('clinicalSignificance', 'dcs:ClinSigAssociation', file,
+                   False)
         return ()
     if value == 'Likely_pathogenic':
-        writeEntry('clinicalSignificance', 'dcs:ClinSigLikelyPathogenic', file, False)
+        writeEntry('clinicalSignificance', 'dcs:ClinSigLikelyPathogenic', file,
+                   False)
         return ()
     if value == 'Protective' or value == 'protective':
         writeEntry('clinicalSignificance', 'dcs:ClinSigProtective', file, False)
         return ()
     if value == 'Likely_benign':
-        writeEntry('clinicalSignificance', 'dcs:ClinSigLikelyBenign', file, False)
+        writeEntry('clinicalSignificance', 'dcs:ClinSigLikelyBenign', file,
+                   False)
         return ()
     if value == 'Not_provided' or value == 'not_provided':
-        writeEntry('clinicalSignificance', 'dcs:ClinSigNotProvided', file, False)
+        writeEntry('clinicalSignificance', 'dcs:ClinSigNotProvided', file,
+                   False)
         return ()
     if value == 'Association_not_found':
-        writeEntry('clinicalSignificance', 'dcs:ClinSigAssociationNotFound', file, False)
+        writeEntry('clinicalSignificance', 'dcs:ClinSigAssociationNotFound',
+                   file, False)
         return ()
     if value == 'Drug_response':
-        writeEntry('clinicalSignificance', 'dcs:ClinSigDrugResponse', file, False)
+        writeEntry('clinicalSignificance', 'dcs:ClinSigDrugResponse', file,
+                   False)
         return ()
     if value == 'Pathogenic/Likely_pathogenic':
-        writeEntry('clinicalSignificance', 'dcs:ClinSigPathogenicLikelyPathogenic', file, False)
+        writeEntry('clinicalSignificance',
+                   'dcs:ClinSigPathogenicLikelyPathogenic', file, False)
         return ()
     if value == 'Benign/Likely_benign' or value == 'Benign/Likely_benign,_other':
-        writeEntry('clinicalSignificance', 'dcs:ClinSigBenignLikelyBenign', file, False)
+        writeEntry('clinicalSignificance', 'dcs:ClinSigBenignLikelyBenign',
+                   file, False)
         return ()
     logging.info(f'Clinical Significance Error: {value}')
     return
@@ -593,14 +637,16 @@ def writeSeqOntologyFunctionalType(dictionary, key, file):
             seqOntology = 'dcid:bio/' + seqOntology.replace(':', '_')
             # writeEntry('sequenceOntologyID', seqOntology, file, False)
             sequenceOntologyID_mcs.append(seqOntology)
-            geneticVariantFunctionalCategories.add(convertToFunctionalCategoryEnum(funcType))
+            geneticVariantFunctionalCategories.add(
+                convertToFunctionalCategoryEnum(funcType))
         except:
             logging.error(f"Error in writeSeqOntologyFunctionalType {entry}")
 
     # file.write('sequenceOntologyID_mc', f'"{seqOntology}"')
     file.write('sequenceOntologyID_mc', seqOntology)
 
-    file.write('geneticVariantFunctionalCategory', ",".join(geneticVariantFunctionalCategories))
+    file.write('geneticVariantFunctionalCategory',
+               ",".join(geneticVariantFunctionalCategories))
     return
 
 
@@ -613,43 +659,54 @@ def writeOrigin(dictionary, key, file):
         writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginOther', file, False)
         return ()
     if value == 0:
-        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginUnspecified', file, False)
+        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginUnspecified', file,
+                   False)
         return ()
     if value >= 1024:
         writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginOther', file, False)
         value -= 1024
     if value >= 512:
-        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginTestedInconclusive', file, False)
+        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginTestedInconclusive',
+                   file, False)
         value -= 512
     if value >= 256:
-        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginNotTested', file, False)
+        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginNotTested', file,
+                   False)
         value -= 256
     if value >= 128:
-        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginUniParental', file, False)
+        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginUniParental', file,
+                   False)
         value -= 128
     if value >= 64:
-        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginBiParental', file, False)
+        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginBiParental', file,
+                   False)
         value -= 64
     if value >= 32:
         writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginDeNovo', file, False)
         value -= 32
     if value >= 16:
-        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginMaternal', file, False)
+        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginMaternal', file,
+                   False)
         value -= 16
     if value >= 8:
-        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginPaternal', file, False)
+        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginPaternal', file,
+                   False)
         value -= 8
     if value >= 4:
-        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginInherited', file, False)
+        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginInherited', file,
+                   False)
         value -= 4
     if value >= 2:
-        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginSomatic', file, False)
+        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginSomatic', file,
+                   False)
         value -= 2
     if value >= 1:
-        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginGermline', file, False)
+        writeEntry('alleleOrigin', 'dcs:VariantAlleleOriginGermline', file,
+                   False)
         value -= 1
     if value > 0:
-        logging.error(f'Allele Origin Error: - value {value} - original {original}')
+        logging.error(
+            f'Allele Origin Error: - value {value} - original {original}')
     return
 
 
@@ -689,14 +746,17 @@ def writeSubPopNode(dcid, allele, w, prop_type, files, rsID):
 def writeAlleleFreq(dictionary, alleles, w, dcid, rsID):
     # Columns to add
     # dcid_freq, name_freq, alleleFrequency, measuredPopulation, rsID
-    freq_entries = [key for key in dictionary if key in ['AF_ESP', 'AF_EXAC', 'AF_TGP']]
+    freq_entries = [
+        key for key in dictionary if key in ['AF_ESP', 'AF_EXAC', 'AF_TGP']
+    ]
     if freq_entries:
         ref, alt = alleles
         for key1 in freq_entries:
             freq = dictionary[key1]
             w.write('dcid_freq', f"{dcid}_{key1}")
             w.write('name_freq', f"{rsID} {key1}")
-            w.write('alleleFrequency', f"{ref}: {str(1 - float(freq))}, {alt}: {freq}")
+            w.write('alleleFrequency',
+                    f"{ref}: {str(1 - float(freq))}, {alt}: {freq}")
             w.write('measuredPopulation', MEASURED_POPULATION_DICT[key1])
             w.write_to_file(['clinvar_obs'])
 
@@ -707,7 +767,8 @@ def write_id_to_file(db, identifier, w):
     # do not include id before ':'
     dict_value_only = {
         'ClinGen': 'canonicalAlleleID',
-        'COSMIC': 'catalogueOfSomaticMutationsInCancerID',  # need to add prefix COSM to vale
+        'COSMIC':
+            'catalogueOfSomaticMutationsInCancerID',  # need to add prefix COSM to vale
         'Genetic_Testing_Registry_(GTR)': 'geneticTestingRegistryID',
         'MSeqDR': 'mitochondrialDiseaseSequenceDataResourceID',
         'PharmGKB_Clinical_Annotation': 'pharmgkbClinicalAnnotationID'
@@ -724,8 +785,9 @@ def write_id_to_file(db, identifier, w):
     # map to property leidenOpenVariationDatabaseID
     # do not include id before ':'
     list_lovd = [
-        'LOVD', 'Leiden_Muscular_Dystrophy', 'Tuberous_sclerosis_database', 'BRCA1-HCI',
-        'Breast_Cancer_Information_Core_(BIC)', 'COL7A1_database', 'GUCY2C_database'
+        'LOVD', 'Leiden_Muscular_Dystrophy', 'Tuberous_sclerosis_database',
+        'BRCA1-HCI', 'Breast_Cancer_Information_Core_(BIC)', 'COL7A1_database',
+        'GUCY2C_database'
     ]
     key = db
     if key in list_ignore:
@@ -740,7 +802,9 @@ def write_id_to_file(db, identifier, w):
         if key == 'COSMIC':
             identifier = 'COSM' + identifier
     else:
-        logging.error('Clinical Identifier Error! Missing mapping of database to property:', db)
+        logging.error(
+            'Clinical Identifier Error! Missing mapping of database to property:',
+            db)
     writeEntry(key, identifier, w, True)
     return
 
@@ -798,7 +862,8 @@ def handle_missing_count(item, ref, alt, dcid, sigPopDCID, w):
         else:
             name = item
             count = '1'
-        obsDCID = dcid + '_' + generate_short_id(ref + '/' + alt) + '_SigObs_' + name + '_ClinVar'
+        obsDCID = dcid + '_' + generate_short_id(
+            ref + '/' + alt) + '_SigObs_' + name + '_ClinVar'
         writeSigObsNode(obsDCID, sigPopDCID, name, count, w)
     except:
         logging.error(f"Error in handle_missing_count {item}")
@@ -813,8 +878,8 @@ def parse_clinical_obs(item, ref, alt, dcid, sigPopDCID, w):
                 try:
                     name, count = i.split('(')
                     count = count.strip(')')
-                    obsDCID = dcid + '_' + generate_short_id(ref + '/' +
-                                                             alt) + '_SigObs_' + name + '_ClinVar'
+                    obsDCID = dcid + '_' + generate_short_id(
+                        ref + '/' + alt) + '_SigObs_' + name + '_ClinVar'
                     writeSigObsNode(obsDCID, sigPopDCID, name, count, w)
                 except:
                     logging.error(f"Error in parse_clinical_obs {i}")
@@ -879,7 +944,8 @@ def writeNode(line, count, ASSEMBLY_HG38, start_time, w):
         # clinvar_obs
         writeAlleleFreq(dict_info, [line[3], line[4]], w, dcid, rsID)
         # clinvar_conflicting
-        writeClincalConflicting(dcid, line[3], line[4], dict_info, 'CLNSIGCONF', w, rsID)
+        writeClincalConflicting(dcid, line[3], line[4], dict_info, 'CLNSIGCONF',
+                                w, rsID)
 
         w.write_to_file(['clinvar'])
         w.close()
@@ -942,11 +1008,13 @@ def parse_clinvar_row(line, w, curr_row=None):
     write_disease_name(dict_info, 'SCIDN', w)
     writeEntry2('hgvsNomenclature', dict_info, 'CLNHGVS', w, True)
 
-    write_review_status(dict_info, 'CLNREVSTAT', 'clinVarGermlineReviewStatus', w)
+    write_review_status(dict_info, 'CLNREVSTAT', 'clinVarGermlineReviewStatus',
+                        w)
     writeClinSig(dict_info, 'CLNSIG', w)
     writeClinSig(dict_info, 'CLNSIGINCL', w)
 
-    writeEntry('geneticVariantClass', convertToClassEnum(dict_info, 'CLNVC'), w, False)
+    writeEntry('geneticVariantClass', convertToClassEnum(dict_info, 'CLNVC'), w,
+               False)
     write_variant_database_ids(dict_info, 'CLNVI', w)
     write_sequence_ontology('sequenceOntologyID', dict_info, 'CLNVCSO', w)
     writeGeneInfo(dict_info, 'GENEINFO', w, ASSEMBLY_HG38)
@@ -956,13 +1024,17 @@ def parse_clinvar_row(line, w, curr_row=None):
 
     writeEntry2('dbVarID', dict_info, 'DBVARID', w, True)
 
-    write_clin_sig_category(dict_info, 'ONC', 'clinicalSignificanceCategory_onc', w)
+    write_clin_sig_category(dict_info, 'ONC',
+                            'clinicalSignificanceCategory_onc', w)
 
-    write_review_status(dict_info, 'ONCREVSTAT', 'clinVarOncogenicityReviewStatus', w)
+    write_review_status(dict_info, 'ONCREVSTAT',
+                        'clinVarOncogenicityReviewStatus', w)
 
-    write_clin_sig_category(dict_info, 'SCI', 'clinicalSignificanceCategory_sic', w)
+    write_clin_sig_category(dict_info, 'SCI',
+                            'clinicalSignificanceCategory_sic', w)
 
-    write_review_status(dict_info, 'SCIREVSTAT', 'clinVarSomaticReviewStatus', w)
+    write_review_status(dict_info, 'SCIREVSTAT', 'clinVarSomaticReviewStatus',
+                        w)
     #print("line", '\n', line, '\n', "CURRENT_ROW", CURRENT_ROW)
 
     return w, dict_info, dcid, rsID, CURRENT_ROW
@@ -1015,10 +1087,12 @@ def parse_clinvar_pos_row(line, w, curr_row=None):
 def process_clinvar_files():
     global CURRENT_ROW, OUTPUT_CLINVAR_FILE_NAME, OUTPUT_CLINVAR_CONFLICTING_FILE_NAME, OUTPUT_CLINVAR_OBS_FILE_NAME
     global CLINVAR_FILE_WRITER, CLINVAR_CONFLICTING_FILE_WRITER, CLINVAR_OBS_FILE_WRITER
-    OUTPUT_CLINVAR_FILE_NAME = os.path.join(MODULE_DIR, OUTPUT_CLINVAR_FILE_NAME)
-    OUTPUT_CLINVAR_CONFLICTING_FILE_NAME = os.path.join(MODULE_DIR,
-                                                        OUTPUT_CLINVAR_CONFLICTING_FILE_NAME)
-    OUTPUT_CLINVAR_OBS_FILE_NAME = os.path.join(MODULE_DIR, OUTPUT_CLINVAR_OBS_FILE_NAME)
+    OUTPUT_CLINVAR_FILE_NAME = os.path.join(MODULE_DIR,
+                                            OUTPUT_CLINVAR_FILE_NAME)
+    OUTPUT_CLINVAR_CONFLICTING_FILE_NAME = os.path.join(
+        MODULE_DIR, OUTPUT_CLINVAR_CONFLICTING_FILE_NAME)
+    OUTPUT_CLINVAR_OBS_FILE_NAME = os.path.join(MODULE_DIR,
+                                                OUTPUT_CLINVAR_OBS_FILE_NAME)
     # set start time
     start_time = time.time()
     # open all output files and save in global scope
@@ -1032,10 +1106,11 @@ def process_clinvar_files():
         CLINVAR_FILE_WRITER.writeheader()
 
         conflicting_file = open(OUTPUT_CLINVAR_CONFLICTING_FILE_NAME, 'w')
-        CLINVAR_CONFLICTING_FILE_WRITER = csv.DictWriter(conflicting_file,
-                                                         CLINVAR_CONFLICTING_OUTPUT_DICT,
-                                                         quotechar='"',
-                                                         quoting=csv.QUOTE_MINIMAL)
+        CLINVAR_CONFLICTING_FILE_WRITER = csv.DictWriter(
+            conflicting_file,
+            CLINVAR_CONFLICTING_OUTPUT_DICT,
+            quotechar='"',
+            quoting=csv.QUOTE_MINIMAL)
         CLINVAR_CONFLICTING_FILE_WRITER.writeheader()
 
         obs_file = open(OUTPUT_CLINVAR_OBS_FILE_NAME, 'w')
@@ -1066,7 +1141,8 @@ def process_clinvar_files():
                 for line in r:
                     line = line.strip('\r\n').split('\t')
                     CURRENT_ROW = copy.deepcopy(CLINVAR_OUTPUT_DICT)
-                    CURRENT_ROW.update(copy.deepcopy(CLINVAR_CONFLICTING_OUTPUT_DICT))
+                    CURRENT_ROW.update(
+                        copy.deepcopy(CLINVAR_CONFLICTING_OUTPUT_DICT))
                     CURRENT_ROW.update(copy.deepcopy(CLINVAR_OBS_OUTPUT_DICT))
                     w = WriteToCsv()
                     count = writeNode(line, count, ASSEMBLY_HG38, start_time, w)
@@ -1088,7 +1164,8 @@ def process_clinvar_pos_files():
     start_time = time.time()
 
     try:
-        OUTPUT_CLINVAR_POS_FILE_NAME = os.path.join(MODULE_DIR, OUTPUT_CLINVAR_POS_FILE_NAME)
+        OUTPUT_CLINVAR_POS_FILE_NAME = os.path.join(
+            MODULE_DIR, OUTPUT_CLINVAR_POS_FILE_NAME)
         pos_file = open(OUTPUT_CLINVAR_POS_FILE_NAME, 'w')
         CLINVAR_POS_FILE_WRITER = csv.DictWriter(pos_file,
                                                  CLINVAR_POS_OUTPUT_DICT,
@@ -1108,7 +1185,8 @@ def process_clinvar_pos_files():
                 for line in r:
                     line = line.strip('\r\n').split('\t')
                     CURRENT_ROW = copy.deepcopy(CLINVAR_POS_OUTPUT_DICT)
-                    count = writeNode_POS(line, count, ASSEMBLY_HG19, start_time)
+                    count = writeNode_POS(line, count, ASSEMBLY_HG19,
+                                          start_time)
     except Exception as e:
         logging.error(f"Error processing files {e}")
 

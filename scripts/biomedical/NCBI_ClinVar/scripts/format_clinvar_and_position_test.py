@@ -20,7 +20,7 @@ import os
 import unittest
 from pathlib import Path
 from absl import flags
-from format_clinvar_and_position import *
+from .format_clinvar_and_position import *
 
 CURRENT_ROW = None
 
@@ -37,63 +37,120 @@ class TestNCBIClinVar(unittest.TestCase):
             'ALLELEID=1214433;CLNDISDB=MedGen:C3661900;CLNDN=not_provided;CLNHGVS=NC_000024.10:g.641069_641070insAA;CLNREVSTAT=criteria_provided,_single_submitter;CLNSIG=Likely_pathogenic;CLNVC=Insertion;CLNVCSO=SO:0000667;GENEINFO=SHOX:6473;MC=SO:0001589|frameshift_variant;ORIGIN=1;RS=2124183611'
         ]
         expected_result = {
-            'dcid': 'dcid:bio/rs2124183611',
-            'name': '2124183611',
-            'dcid_pos': 'bio/hg38_chrY_641068',
-            'name_pos': 'hg38 chrY 641068',
-            'chrom': 'chrY',
-            'position': '641068',
-            'alleleOrigin': 'dcs:VariantAlleleOriginGermline',
-            'associatedDiseaseName': '',
-            'associatedDrugResponseEfficacy': '',
-            'canonicalAlleleID': '',
-            'catalogueOfSomaticMutationsInCancerID': '',
-            'clinicalSignificanceCategory_onc': '',
-            'clinicalSignificanceCategory_sic': '',
-            'clinicalSignificance': 'dcs:ClinSigConflictingPathogenicity',
-            'clinVarAlleleID': '1214433',
-            'clinVarGermlineReviewStatus': 'dcs:ClinVarReviewStatusSingleSubmitter',
-            'clinVarOncogenicityReviewStatus': '',
-            'clinVarSomaticReviewStatus': '',
-            'dbVarID': '',
-            'experimentalFactorOntologyID': '',
-            'geneID': 'dcid:bio/SHOX',
-            'geneSymbol': 'SHOX',
-            'geneticTestingRegistryID': '',
-            'geneticVariantClass': 'dcs:GeneticVariantClassInsertion',
-            'geneticVariantFunctionalCategory': 'dcs:GeneticVariantFunctionalCategorySplice5',
-            'hbVarID': '',
-            'hg19GenomicPosition': '641068',
-            'hgvsNomenclature': 'NC_000024.10:g.641069_641070insAA',
-            'humanPhenotypeOntologyID': '',
-            'inChromosome': '',
-            'leidenOpenVariationDatabaseID': '',
-            'medicalSubjectHeadingID': '',
-            'mitochondrialDiseaseSequenceDataResourceID': '',
-            'mondoID': '',
-            'ncbiGeneID': '6473',
-            'ncbiGeneID_info': '',
-            'observedAllele': '',
-            'omimID': '',
-            'omimID_gv': '',
-            'orphaNumber': '',
-            'pharmgkbClinicalAnnotationID': '',
-            'referenceAllele': 'T',
-            'rsID': '2124183611',
-            'sequenceOntologyID': 'dcid:bio/SO_0000667',
-            'sequenceOntologyID_mc': 'dcid:bio/SO_0001589',
-            'snomedCT': '',
-            'umlsConceptUniqueID': 'C3661900',
-            'uniProtID': '',
-            'uniProtKBSwissProtID': '',
-            'dcid_conflicting': '',
-            'name_conflicting': '',
-            'alternativeAllele': 'TAA',
-            'count': '',
-            'dcid_freq': '',
-            'name_freq': '',
-            'alleleFrequency': '',
-            'measuredPopulation': ''
+            'dcid':
+                'dcid:bio/rs2124183611',
+            'name':
+                '2124183611',
+            'dcid_pos':
+                'bio/hg38_chrY_641068',
+            'name_pos':
+                'hg38 chrY 641068',
+            'chrom':
+                'chrY',
+            'position':
+                '641068',
+            'alleleOrigin':
+                'dcs:VariantAlleleOriginGermline',
+            'associatedDiseaseName':
+                '',
+            'associatedDrugResponseEfficacy':
+                '',
+            'canonicalAlleleID':
+                '',
+            'catalogueOfSomaticMutationsInCancerID':
+                '',
+            'clinicalSignificanceCategory_onc':
+                '',
+            'clinicalSignificanceCategory_sic':
+                '',
+            'clinicalSignificance':
+                'dcs:ClinSigConflictingPathogenicity',
+            'clinVarAlleleID':
+                '1214433',
+            'clinVarGermlineReviewStatus':
+                'dcs:ClinVarReviewStatusSingleSubmitter',
+            'clinVarOncogenicityReviewStatus':
+                '',
+            'clinVarSomaticReviewStatus':
+                '',
+            'dbVarID':
+                '',
+            'experimentalFactorOntologyID':
+                '',
+            'geneID':
+                'dcid:bio/SHOX',
+            'geneSymbol':
+                'SHOX',
+            'geneticTestingRegistryID':
+                '',
+            'geneticVariantClass':
+                'dcs:GeneticVariantClassInsertion',
+            'geneticVariantFunctionalCategory':
+                'dcs:GeneticVariantFunctionalCategorySplice5',
+            'hbVarID':
+                '',
+            'hg19GenomicPosition':
+                '641068',
+            'hgvsNomenclature':
+                'NC_000024.10:g.641069_641070insAA',
+            'humanPhenotypeOntologyID':
+                '',
+            'inChromosome':
+                '',
+            'leidenOpenVariationDatabaseID':
+                '',
+            'medicalSubjectHeadingID':
+                '',
+            'mitochondrialDiseaseSequenceDataResourceID':
+                '',
+            'mondoID':
+                '',
+            'ncbiGeneID':
+                '6473',
+            'ncbiGeneID_info':
+                '',
+            'observedAllele':
+                '',
+            'omimID':
+                '',
+            'omimID_gv':
+                '',
+            'orphaNumber':
+                '',
+            'pharmgkbClinicalAnnotationID':
+                '',
+            'referenceAllele':
+                'T',
+            'rsID':
+                '2124183611',
+            'sequenceOntologyID':
+                'dcid:bio/SO_0000667',
+            'sequenceOntologyID_mc':
+                'dcid:bio/SO_0001589',
+            'snomedCT':
+                '',
+            'umlsConceptUniqueID':
+                'C3661900',
+            'uniProtID':
+                '',
+            'uniProtKBSwissProtID':
+                '',
+            'dcid_conflicting':
+                '',
+            'name_conflicting':
+                '',
+            'alternativeAllele':
+                'TAA',
+            'count':
+                '',
+            'dcid_freq':
+                '',
+            'name_freq':
+                '',
+            'alleleFrequency':
+                '',
+            'measuredPopulation':
+                ''
         }
         CURRENT_ROW = copy.deepcopy(CLINVAR_OUTPUT_DICT)
         CURRENT_ROW.update(copy.deepcopy(CLINVAR_CONFLICTING_OUTPUT_DICT))
