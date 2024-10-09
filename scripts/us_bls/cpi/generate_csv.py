@@ -37,7 +37,7 @@ CSV_URLS = frozendict.frozendict({
 # Dict from series names to series IDs
 SERIES_IDS = frozendict.frozendict({
     "cpi_u_1913_2024": "CUSR0000SA0",
-    "cpi_w_1913_2024": "CWSR0000SA0", 
+    "cpi_w_1913_2024": "CWSR0000SA0",
     "c_cpi_u_1999_2024": "SUUR0000SA0E"
 })
 
