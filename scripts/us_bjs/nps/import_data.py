@@ -6,7 +6,7 @@ from absl import app
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('input_file',
-                    'NPS_1978-2021_Data.tsv',
+                    'NPS_1978-2022_Data.tsv',
                     'file path to tsv file with import data',
                     short_name='i')
 
