@@ -30,7 +30,7 @@ import pandas as pd
 import requests
 from map_config import _dcid_map
 from mcf_config import _mcf_map
-from pyutil import filereplace
+#from pyutil import filereplace
 import fileinput
 import mcf_config
 
@@ -90,7 +90,7 @@ def generate_cleaned_dataframe():
     
     header = {'User-Agent': 'datcom-india-extended@google.com'}
 
-    series_desc = pd.read_csv("https://download.bls.gov/pub/time.series/jt/jt.series", storage_options=header,converters={'industry_code': str}, sep="\\t")
+    series_desc = pd.read_csv("https://download.bls.gov/pub/time.series/jt/jt.series", storage_options=header,converters={'industry_code': str}, sep="\\t" )
     series_desc.columns=exp_series_columns
     series_desc["series_id"]=series_desc["series_id"].apply(lambda x: x.strip())
     
