@@ -26,6 +26,7 @@ from app.executor import import_target
 from app.executor import import_executor
 from app.executor import cloud_scheduler
 from app.executor import validation
+from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
 from google.cloud import storage
@@ -228,6 +229,11 @@ def update(cfg: configs.ExecutorConfig,
             auth_access_token=cfg.github_auth_access_token),
         config=cfg,
         local_repo_dir=local_repo_dir)
+
+    # Also set the email motifier if possible.
+    if cfg.email_account and cfg.email_token:
+        executor.notifier = email_notifier.EmailNotifier(
+            cfg.email_account, cfg.email_token)
 
     return executor.execute_imports_on_update(absolute_import_path)
 

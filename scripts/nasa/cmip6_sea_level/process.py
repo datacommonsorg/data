@@ -213,6 +213,7 @@ def to_sv(quantile, sv_info):
     Returns:
        Namespace-prefixed StatVar DCID.
     """
+    quantile = round(quantile, 1)
     if quantile == 0.0:
         prefix = 'Min'
     elif quantile == 0.1:

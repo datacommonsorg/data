@@ -35,7 +35,7 @@ import sys
 from absl import app
 from absl import flags
 from google.cloud import storage
-from ratelimit import limits
+from ratelimit import limits, sleep_and_retry
 import requests
 
 API_BASE = 'https://quickstats.nass.usda.gov/api'
@@ -203,8 +203,8 @@ def get_survey_county_data(year, county, out_dir, usda_api_key):
     return response
 
 
-# TODO: determine if the rate limiter needs to be re-enabled.
-# @limits(calls=10, period=60)
+@sleep_and_retry
+@limits(calls=10, period=60)
 def get_data(params):
     return requests.get(f'{API_BASE}/api_GET', params=params).json()
 
