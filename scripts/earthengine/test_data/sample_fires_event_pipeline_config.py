@@ -13,6 +13,7 @@
             'stage': 'download',
             'url': 'http://sample_test.com/data/{year}',
             'output_file': '{tmp_dir}/{stage}/{year}/fire_input_data.csv',
+            'skip_existing_output': 0,
         },
         # convert lat/longs to s2 cells.
         {
