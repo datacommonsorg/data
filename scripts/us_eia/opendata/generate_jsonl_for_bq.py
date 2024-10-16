@@ -40,9 +40,8 @@ import sys
 IN_DATA_PATH = 'tmp_raw_data'
 OUT_DATA_PATH = 'tmp_bq_import'
 DATASETS = [
-    'AEO.2014', 'AEO.2015', 'AEO.2016', 'AEO.2017', 'AEO.2018', 'AEO.2019',
-    'AEO.2020', 'AEO.2021', 'COAL', 'EBA', 'ELEC', 'EMISS', 'IEO.2017',
-    'IEO.2019', 'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS', 'SEDS',
+    'AEO.2020', 'AEO.2021', 'AEO.2022', 'AEO.2023', 'AEO.IEO2', 'COAL', 'EBA', 'ELEC', 'EMISS', 'IEO',
+    'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS', 'SEDS',
     'STEO', 'TOTAL'
 ]
 
@@ -77,17 +76,18 @@ def process_dataset(dataset, in_file_path, out_file_path):
         with open(out_file_path + '.series.jsonl', 'w+') as series_fp:
             with open(out_file_path + '.categories.jsonl', 'w+') as category_fp:
                 for line in data_fp:
-                    data = json.loads(line)
-                    series_id = data.get('series_id', None)
-                    if series_id:
-                        jsonl = extract_series_to_jsonl(line, dataset)
-                        series_fp.write(json.dumps(jsonl))
-                        series_fp.write('\n')
-                    category_id = data.get('category_id', None)
-                    if category_id:
-                        jsonl = extract_category_to_jsonl(line, dataset)
-                        category_fp.write(json.dumps(jsonl))
-                        category_fp.write('\n')
+                    if line.startswith('{'):
+                        data = json.loads(line)
+                        series_id = data.get('series_id', None)
+                        if series_id:
+                            jsonl = extract_series_to_jsonl(line, dataset)
+                            series_fp.write(json.dumps(jsonl))
+                            series_fp.write('\n')
+                        category_id = data.get('category_id', None)
+                        if category_id:
+                            jsonl = extract_category_to_jsonl(line, dataset)
+                            category_fp.write(json.dumps(jsonl))
+                            category_fp.write('\n')
 
 
 def process_single(subdir, file):
@@ -103,7 +103,8 @@ def process_all():
         for file in sorted(files):
             if not file.endswith('.txt'):
                 continue
-            print(f'Processing {subdir}/{file}')
+            print(f'Processing1 {subdir}/{file}')
+            
             process_single(subdir, file)
 
 
