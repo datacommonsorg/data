@@ -41,3 +41,4 @@ yapf
 zipp
 beautifulsoup4
 ratelimit
+lxml
