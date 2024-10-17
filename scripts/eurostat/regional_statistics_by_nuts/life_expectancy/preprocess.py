@@ -50,9 +50,8 @@ def obtain_value(entry):
 def preprocess(filepath):
     """Preprocess the tsv file for importing into DataCommons."""
     data = pd.read_csv(filepath, sep='\t')
-
     # Concatenate data of different years from multiple columns into one column.
-    identifier = 'unit,sex,age,geo\\time'
+    identifier = 'unit,sex,age,geo\\TIME_PERIOD'
     assert identifier in data.columns
     years = list(data.columns.values)
     years.remove(identifier)
@@ -89,8 +88,8 @@ def preprocess(filepath):
     data_nuts = data[~(data['geo'].str.len() <= 2)]
     data_country = nuts_to_iso(
         data_country)  # convert nuts code to ISO 3166-1 alpha-3
-    data.loc[data_country.index, 'geo'] = 'dcid:country/' + data_country['geo']
-    data.loc[data_nuts.index, 'geo'] = 'dcid:nuts/' + data_nuts['geo']
+    data.loc[data_country.index, 'geo'] = 'country/' + data_country['geo']
+    data.loc[data_nuts.index, 'geo'] = 'nuts/' + data_nuts['geo']
 
     # Separate data of different StatVars from one column into multiple columns
     # For example:
