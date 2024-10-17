@@ -36,9 +36,8 @@ def extract_place_statvar(series_id, counters):
     # ELEC.{MEASURE}.{FUEL_TYPE}-{PLACE}-{PRODUCER_SECTOR}.{PERIOD}
     #m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
     #            series_id)
-    m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([QM])$",
-               series_id)
-    
+    m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([QM])$", series_id)
+
     if m:
         measure = m.group(1)
         fuel_type = m.group(2)
@@ -332,7 +331,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         if cs != 'ALL':
             sv_id_parts.append(cs)
             sv_pvs.append(f'consumingSector: dcs:{cs}')
-    
+
     if measure not in _UNIT_MAP:
         counters['error_missing_unit'] += 1
         return None

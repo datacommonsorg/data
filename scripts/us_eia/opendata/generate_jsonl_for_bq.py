@@ -40,9 +40,9 @@ import sys
 IN_DATA_PATH = 'tmp_raw_data'
 OUT_DATA_PATH = 'tmp_bq_import'
 DATASETS = [
-    'AEO.2020', 'AEO.2021', 'AEO.2022', 'AEO.2023', 'AEO.IEO2', 'COAL', 'EBA', 'ELEC', 'EMISS', 'IEO',
-    'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS', 'SEDS',
-    'STEO', 'TOTAL'
+    'AEO.2020', 'AEO.2021', 'AEO.2022', 'AEO.2023', 'AEO.IEO2', 'COAL', 'EBA',
+    'ELEC', 'EMISS', 'IEO', 'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS',
+    'SEDS', 'STEO', 'TOTAL'
 ]
 
 
@@ -104,7 +104,7 @@ def process_all():
             if not file.endswith('.txt'):
                 continue
             print(f'Processing1 {subdir}/{file}')
-            
+
             process_single(subdir, file)
 
 

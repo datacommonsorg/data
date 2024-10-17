@@ -49,66 +49,120 @@ MMETHOD_MAPPING_DICT = {
     'Real(1982-1984)DollarsPerMillionBtu': 'BasePeriod1982_1984',
     'Real(1982-1984)DollarsPerThousandCubicFeet': 'BasePeriod1982_1984',
     'ThousandBtuPerChained(2017)Dollar': 'BasePeriod2017',
-    'BillionChained(2017)Dollars' : 'BasePeriod2017',
+    'BillionChained(2017)Dollars': 'BasePeriod2017',
     'MetricTonsCarbonDioxidePerMillionChained(2017)Dollars': 'BasePeriod2017'
 }
 
 UNIT_MAPPING_DICT = {
     # input source unit : DC unit
-    'Days': 'Day',
-    'ThousandsOfRegisteredVehicles': '',
-    'RegisteredVehicle': '',
-    'NumberOfDays': 'Day',
-    'Dollars': 'USDollar',
-    'MillionBarrels': 'MillionsBarrels',
-    'ThousandBarrels': 'Barrel',
-    'ThousandDollars': 'USDollar',
-    '1000MetricTons': 'ThousandMetricTons',
-    'BillionKilowatthours': 'BillionKilowattHours',
-    'Terajoules': 'Terajoule',
-    'DollarsPerMillionBtu': 'USDollarPerMillionBtu',
-    'DollarsPerThousandCubicFeet': 'USDollarPerThousandCubicFeet',
-    'CentsPerKilowatthour': 'CentsPerKilowattHour',
-    'MillionKilowatthours': 'MillionKilowattHours',
-    'DollarsPerGallon': 'USDollarPerGallon',
-    'Kilowatthours': 'KilowattHour',
-    'Barrels': 'Barrel',
-    'MillionDollars': 'USDollar',
-    'BillionDollars': 'USDollar',
-    'DollarsPerPoundUraniumOxide': 'USDollarPerPoundUraniumOxide',
-    'ThousandKilowatts': 'Kilowatt',
-    'DollarsPerBarrel': 'USDollarPerBarrel',
-    'NumberOfCustomers': '',
-    'NumberOfElements': '',
-    'Thousand': "",
-    'ThousandGallons': 'USGallon',
-    'MillionPounds': 'GBP',
-    'DollarsPerFoot': 'USDollarPerFoot',
-    'ThousandDollarsPerWell': 'ThousandUSDollarsPerWell',
-    'ThousandFeet': 'Foot',
-    'FeetPerWell': 'Foot',
-    'Cost': 'USDollar',
-    'Index1982-1984=100': '',
-    '2017=1.00000': '',
-    'NumberOfRigs': '',
-    'Number': '',
-    'Real(1982-1984)DollarsPerGallon': 'USDollarPerGallon',
-    'Real(1982-1984)DollarsPerMillionBtu': 'USDollarPerMillionBtu',
-    'DollarsPerMillionBtu': 'USDollarPerMillionBtu',
-    'Real(1982-1984)CentsPerKilowatthour': 'USCentPerKilowattHour',
-    'Real(1982-1984)DollarsPerThousandCubicFeet': 'USDollarPerThousandCubicFeet',
-    'MetricTonsCarbonDioxidePerMillionChained(2017)Dollars': 'MetricTonsCarbonDioxidePerMillionChainedUSDollars',
-    'ThousandBtuPerChained(2017)Dollar':'BtuPerChainedUSDollar',
-    'BillionChained(2017)Dollars': 'ChainedUSDollar',
-    'CentsPerKilowatthour,IncludingTaxes': 'CentsPerKilowattHour',
-    'TrillionBtu': 'Btu',
-    'MillionGallons': 'USGallon',
-    'MillionPeople': '',
-    'MillionNominalDollars': 'NominalUSDollar',
-    'NominalDollars': 'NominalUSDollar',
-    'DollarsPerGallonIncludingTaxes': 'USDollarPerGallon',
-    'DollarsPerGallonExcludingTaxes': 'USDollarPerGallon',
-    'DollarsPerMillionBtu,IncludingTaxes': 'USDollarPerMillionBtu'
+    'Days':
+        'Day',
+    'ThousandsOfRegisteredVehicles':
+        '',
+    'RegisteredVehicle':
+        '',
+    'NumberOfDays':
+        'Day',
+    'Dollars':
+        'USDollar',
+    'MillionBarrels':
+        'MillionsBarrels',
+    'ThousandBarrels':
+        'Barrel',
+    'ThousandDollars':
+        'USDollar',
+    '1000MetricTons':
+        'ThousandMetricTons',
+    'BillionKilowatthours':
+        'BillionKilowattHours',
+    'Terajoules':
+        'Terajoule',
+    'DollarsPerMillionBtu':
+        'USDollarPerMillionBtu',
+    'DollarsPerThousandCubicFeet':
+        'USDollarPerThousandCubicFeet',
+    'CentsPerKilowatthour':
+        'CentsPerKilowattHour',
+    'MillionKilowatthours':
+        'MillionKilowattHours',
+    'DollarsPerGallon':
+        'USDollarPerGallon',
+    'Kilowatthours':
+        'KilowattHour',
+    'Barrels':
+        'Barrel',
+    'MillionDollars':
+        'USDollar',
+    'BillionDollars':
+        'USDollar',
+    'DollarsPerPoundUraniumOxide':
+        'USDollarPerPoundUraniumOxide',
+    'ThousandKilowatts':
+        'Kilowatt',
+    'DollarsPerBarrel':
+        'USDollarPerBarrel',
+    'NumberOfCustomers':
+        '',
+    'NumberOfElements':
+        '',
+    'Thousand':
+        "",
+    'ThousandGallons':
+        'USGallon',
+    'MillionPounds':
+        'GBP',
+    'DollarsPerFoot':
+        'USDollarPerFoot',
+    'ThousandDollarsPerWell':
+        'ThousandUSDollarsPerWell',
+    'ThousandFeet':
+        'Foot',
+    'FeetPerWell':
+        'Foot',
+    'Cost':
+        'USDollar',
+    'Index1982-1984=100':
+        '',
+    '2017=1.00000':
+        '',
+    'NumberOfRigs':
+        '',
+    'Number':
+        '',
+    'Real(1982-1984)DollarsPerGallon':
+        'USDollarPerGallon',
+    'Real(1982-1984)DollarsPerMillionBtu':
+        'USDollarPerMillionBtu',
+    'DollarsPerMillionBtu':
+        'USDollarPerMillionBtu',
+    'Real(1982-1984)CentsPerKilowatthour':
+        'USCentPerKilowattHour',
+    'Real(1982-1984)DollarsPerThousandCubicFeet':
+        'USDollarPerThousandCubicFeet',
+    'MetricTonsCarbonDioxidePerMillionChained(2017)Dollars':
+        'MetricTonsCarbonDioxidePerMillionChainedUSDollars',
+    'ThousandBtuPerChained(2017)Dollar':
+        'BtuPerChainedUSDollar',
+    'BillionChained(2017)Dollars':
+        'ChainedUSDollar',
+    'CentsPerKilowatthour,IncludingTaxes':
+        'CentsPerKilowattHour',
+    'TrillionBtu':
+        'Btu',
+    'MillionGallons':
+        'USGallon',
+    'MillionPeople':
+        '',
+    'MillionNominalDollars':
+        'NominalUSDollar',
+    'NominalDollars':
+        'NominalUSDollar',
+    'DollarsPerGallonIncludingTaxes':
+        'USDollarPerGallon',
+    'DollarsPerGallonExcludingTaxes':
+        'USDollarPerGallon',
+    'DollarsPerMillionBtu,IncludingTaxes':
+        'USDollarPerMillionBtu'
 }
 
 UNIT_CONVERT_DICT = {
@@ -116,9 +170,9 @@ UNIT_CONVERT_DICT = {
     'ThousandBtuPerChained(2017)Dollar': 1000,
     'Thousand': 1000,
     'ThousandFeet': 1000,
-    'ThousandDollars': 1000, 
+    'ThousandDollars': 1000,
     'ThousandGallons': 1000,
-    'ThousandBarrels': 1000, 
+    'ThousandBarrels': 1000,
     'ThousandsOfRegisteredVehicles': 1000,
     'MillionDollars': 1000000,
     'MillionPeople': 1000000,
@@ -130,7 +184,10 @@ UNIT_CONVERT_DICT = {
     'BillionChained(2017)Dollars': 10000000000,
     'TrillionBtu': 1000000000000
 }
-_COLUMNS = ['place', 'stat_var', 'date', 'value', 'unit', 'scaling_factor', 'eia_series_id', 'measurementMethod']
+_COLUMNS = [
+    'place', 'stat_var', 'date', 'value', 'unit', 'scaling_factor',
+    'eia_series_id', 'measurementMethod'
+]
 
 _TMCF_STRING = """
 Node: E:EIATable->E0
@@ -208,6 +265,7 @@ def _check_unit_with_mapping(in_str):
         in_str = UNIT_MAPPING_DICT[in_str]
     return in_str
 
+
 def _check_mMethod_with_mapping(in_str):
     if in_str in MMETHOD_MAPPING_DICT:
         in_str = MMETHOD_MAPPING_DICT[in_str]
@@ -281,8 +339,12 @@ def _generate_default_statvar(raw_sv, sv_map):
 
 
 # Name patterns for US and US states.
-_NAME_PATTERNS = {v: [k.lower()] for k, v in name_to_alpha2.USSTATE_MAP_SPACE.items()}
-_NAME_PATTERNS['US'] = ['united states of america', 'united states', 'u.s.a.', 'u.s.']
+_NAME_PATTERNS = {
+    v: [k.lower()] for k, v in name_to_alpha2.USSTATE_MAP_SPACE.items()
+}
+_NAME_PATTERNS['US'] = [
+    'united states of america', 'united states', 'u.s.a.', 'u.s.'
+]
 _NAME_PATTERNS['USA'] = _NAME_PATTERNS['US']
 
 
@@ -332,7 +394,8 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
     return cleanup_name(name)
 
 
-def _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map, sv_schemaful2raw, svg_info):
+def _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map,
+                       sv_schemaful2raw, svg_info):
     nodes = []
     for sv, mcf in sv_map.items():
         raw_sv = sv_schemaful2raw[sv] if sv in sv_schemaful2raw else sv
@@ -353,8 +416,8 @@ def _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map, sv_schem
     return nodes
 
 
-def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf, out_tmcf,
-            extract_place_statvar_fn, generate_statvar_schema_fn):
+def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
+            out_tmcf, extract_place_statvar_fn, generate_statvar_schema_fn):
     """Process an EIA dataset and produce outputs using lambda functions.
 
     Args:
@@ -412,7 +475,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf, ou
             # Preliminary checks
             series_id = data.get('series_id', None)
             if not series_id:
-                category.process_category(dataset, data, extract_place_statvar_fn, svg_info,
+                category.process_category(dataset, data,
+                                          extract_place_statvar_fn, svg_info,
                                           sv_membership_map, counters)
                 counters['info_categories_processed'] += 1
                 continue
@@ -424,7 +488,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf, ou
                 continue
 
             # Extract raw place and stat-var from series_id.
-            (raw_place, raw_sv, is_us_place) = extract_place_statvar_fn(series_id, counters)
+            (raw_place, raw_sv,
+             is_us_place) = extract_place_statvar_fn(series_id, counters)
             if not raw_place or not raw_sv:
                 counters['error_extract_place_sv'] += 1
                 continue
@@ -440,7 +505,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf, ou
             m_method = _check_mMethod_with_mapping(raw_unit)
 
             if raw_sv not in sv_name_map:
-                name = _maybe_parse_name(data.get('name', ''), raw_place, is_us_place, counters)
+                name = _maybe_parse_name(data.get('name', ''), raw_place,
+                                         is_us_place, counters)
                 if name:
                     sv_name_map[raw_sv] = name
 
@@ -491,7 +557,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf, ou
 
             schema_sv = None
             if generate_statvar_schema_fn:
-                schema_sv = generate_statvar_schema_fn(raw_sv, rows, sv_map, counters)
+                schema_sv = generate_statvar_schema_fn(raw_sv, rows, sv_map,
+                                                       counters)
             if schema_sv:
                 sv_schemaful2raw[schema_sv] = raw_sv
                 counters['info_schemaful_series'] += 1
@@ -505,8 +572,9 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf, ou
     category.trim_area_categories(svg_info, counters)
 
     with open(out_sv_mcf, 'w') as out_fp:
-        nodes = _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map,
-                                   sv_schemaful2raw, svg_info)
+        nodes = _generate_sv_nodes(dataset, sv_map, sv_name_map,
+                                   sv_membership_map, sv_schemaful2raw,
+                                   svg_info)
 
         out_fp.write('\n\n'.join(nodes))
         out_fp.write('\n')
