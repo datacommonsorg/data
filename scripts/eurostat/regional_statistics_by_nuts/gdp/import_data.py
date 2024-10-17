@@ -18,13 +18,17 @@ Downloads and cleans GDP data from the Eurostat database.
 
     python3 import_data.py
 """
+import sys
+from six.moves import urllib
+import numpy as np
+
 import json
 import pandas as pd
 from preprocess_data import preprocess_df
 import sys
 
 # Imports country mapping alpha2 country codes to country DCIDs.
-sys.path.insert(1, '../../../util')
+sys.path.insert(1, '../../../../util')
 from alpha2_to_dcid import COUNTRY_MAP
 from nuts_codes_names import NUTS1_CODES_NAMES
 
@@ -40,24 +44,30 @@ class EurostatGDPImporter:
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
-    DATA_LINK = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/nama_10r_3gdp.tsv.gz"
+    DATA_LINK = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10r_3gdp/?format=TSV&compressed=true"
     UNIT_CODES = {
         "MIO_EUR": "Million euro",
         "EUR_HAB": "Euro per inhabitant",
         # "EUR_HAB_EU":	     "Euro per inhabitant in percentage of the EU average",
         # "EUR_HAB_EU27_2020": "Euro per inhabitant in percentage of the EU27 (from 2020) average",
         "MIO_NAC": "Million units of national currency",
-        "MIO_PPS": "Million purchasing power standards (PPS)",
-        # "MIO_PPS_EU27_2020": "Million purchasing power standards (PPS, EU27 from 2020)",
-        "PPS_HAB": "Purchasing power standard (PPS) per inhabitant",
+        # "MIO_PPS": "Million purchasing power standards (PPS)",
+        "MIO_PPS_EU27_2020": "Million purchasing power standards (PPS, EU27 from 2020)",
+        # "PPS_HAB": "Purchasing power standard (PPS) per inhabitant",
         # "PPS_EU27_2020_HAB": "Purchasing power standard (PPS, EU27 from 2020), per inhabitant",
         # "PPS_HAB_EU":	     "Purchasing power standard (PPS) per inhabitant in percentage of the \
         #                       EU average",
-        # "PPS_HAB_EU27_2020": "Purchasing power standard (PPS, EU27 from 2020), per inhabitant in \
-        #                       percentage of the EU27 (from 2020) average"
+        "PPS_HAB_EU27_2020": "Purchasing power standard (PPS, EU27 from 2020), per inhabitant in percentage of the EU27 (from 2020) average"
+
+        #         EUR_HAB
+        # EUR_HAB_EU27_2020
+        # MIO_EUR
+        # MIO_NAC
+        # MIO_PPS_EU27_2020
+        # PPS_EU27_2020_HAB
+        # PPS_HAB_EU27_2020
     }
     DESIRED_COLUMNS = ['geo', 'time'] + list(UNIT_CODES.keys())
-
     # TODO (fpernice): Add a human-readable description of the codes to statVarObs
     REGION_CODES = dict(json.loads(open('region_codes.json').read()))
 
@@ -72,7 +82,12 @@ class EurostatGDPImporter:
         """Downloads raw data from Eurostat website and stores it in instance
         data frame.
         """
-        self.raw_df = pd.read_table(self.DATA_LINK)
+        # self.raw_df = pd.read_table(self.DATA_LINK)
+        urllib.request.urlretrieve(self.DATA_LINK, "nama_10r_3gdp.tsv.gz")
+        self.raw_df = pd.read_table("nama_10r_3gdp.tsv.gz")
+        self.raw_df = self.raw_df.rename(columns=({'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'}))
+        self.raw_df['unit,geo\\time'] =  self.raw_df['unit,geo\\time'].str.slice(2)
+        # return raw_df
 
     def preprocess_data(self):
         """Preprocesses instance raw_df and puts it into long format."""
@@ -88,6 +103,7 @@ class EurostatGDPImporter:
             raise ValueError("Uninitialized value of processed data frame. "
                              "Please check you are calling preprocess_data "
                              "before clean_data.")
+
         self.clean_df = self.preprocessed_df[self.DESIRED_COLUMNS]
 
         # GDP measurements for all of Europe are currently removed for lack
@@ -115,6 +131,7 @@ class EurostatGDPImporter:
               f"{len(invalid_geos)} total instances.")
         print(f"Below is a sample of {num_to_print} ignored geos: \n")
         print(self.clean_df[invalid_geos].sample(num_to_print))
+        self.clean_df[invalid_geos].to_csv('ignore_geos.csv')
 
         self.clean_df = self.clean_df[~invalid_geos]
 
@@ -174,13 +191,16 @@ class EurostatGDPImporter:
                     assert col in ['geo', 'time']
                     continue
                 col_num += 1
+                # Amount_EconomicActivity_GrossDomesticProduction_Nominal_AsAFractionOf_Count_Person
+                # Amount_EconomicActivity_GrossDomesticProduction_Nominal
                 if "HAB" in col:
                     var = ("dcid:Amount_EconomicActivity_"
-                           "GrossDomesticProduction_AsAFractionOfCount_"
-                           "Person_Nominal")
+                           "GrossDomesticProduction_Nominal_AsAFractionOf_Count_"
+                           "Person")
                 else:
                     var = ("dcid:Amount_EconomicActivity_"
                            "GrossDomesticProduction_Nominal")
+
                 tmcf_f.write(
                     temp.format(i=col_num, var_ref=var, val_col=col, unit=unit))
 
