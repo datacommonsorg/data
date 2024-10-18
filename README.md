@@ -167,7 +167,7 @@ you import modules and run tests, as below.
 
 Consider automating coding to satisfy some of these requirements.
 
-*   [Integrate pylint](http://pylint.pycqa.org/en/latest/user_guide/ide-integration.html)
+*   [Integrate pylint](https://pylint.readthedocs.io/en/stable/user_guide/installation/ide_integration/index.html#ide-integration)
     with your editor.
 *   Integrate yapf with
     [Visual Studio](https://code.visualstudio.com/docs/python/editing#_formatting),
