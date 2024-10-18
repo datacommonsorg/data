@@ -36,8 +36,8 @@ from app.service import github_api
 from app.service import import_service
 
 # Email address for status messages.
-_SUCCESS_EMAIL_ADDR = 'datacommons-debug+imports@google.com'
-_FAILURE_EMAIL_ADDR = 'datacommons-alerts+imports@google.com'
+_DEBUG_EMAIL_ADDR = 'datacommons-debug+imports@google.com'
+_ALERT_EMAIL_ADDR = 'datacommons-alerts+imports@google.com'
 
 _SEE_LOGS_MESSAGE = (
     'Please find logs in the Logs Explorer of the GCP project associated with'
@@ -300,7 +300,7 @@ class ImportExecutor:
                 self.notifier.send(
                     subject=f'Import Automation Success - {import_name}',
                     body=msg,
-                    receiver_addresses=[_SUCCESS_EMAIL_ADDR],
+                    receiver_addresses=[_DEBUG_EMAIL_ADDR],
                 )
 
         except Exception as exc:
@@ -312,7 +312,7 @@ class ImportExecutor:
                 self.notifier.send(
                     subject=f'Import Automation Failure - {import_name}',
                     body=msg,
-                    receiver_addresses=[_FAILURE_EMAIL_ADDR],
+                    receiver_addresses=[_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR],
                 )
             raise exc
 
