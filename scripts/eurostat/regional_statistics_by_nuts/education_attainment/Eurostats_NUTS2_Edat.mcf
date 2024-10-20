@@ -1,9 +1,336 @@
+# Population aged 20-24 by educational attainment level (0-2)
+Node: dcid:Count_Person_20To24Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_20To24Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years
+
+# Population aged 20-24 by educational attainment level (3-8)
+Node: dcid:Count_Person_20To24Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_20To24Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:UpperSecondaryEducationOrHigher
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years
+
+# Population aged 20-24 by educational attainment level (3-4)
+Node: dcid:Count_Person_20To24Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_20To24Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years
+
+# Population aged 20-24 by educational attainment level (5-8)
+Node: dcid:Count_Person_20To24Years_TertiaryEducation_AsAFractionOfCount_Person_20To24Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:TertiaryEducation
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years
+
+
+
+# Population aged 20-24 by educational attainment level (0-2), Female
+Node: dcid:Count_Person_20To24Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_20To24Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years_Female
+
+# Population aged 20-24 by educational attainment level (3-8), Female
+Node: dcid:Count_Person_20To24Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_20To24Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:UpperSecondaryEducationOrHigher
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years_Female
+
+# Population aged 20-24 by educational attainment level (3-4), Female
+Node: dcid:Count_Person_20To24Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_20To24Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years_Female
+
+# Population aged 20-24 by educational attainment level (5-8), Female
+Node: dcid:Count_Person_20To24Years_TertiaryEducation_Female_AsAFractionOfCount_Person_20To24Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:TertiaryEducation
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years_Female
+
+# Population aged 20-24 by educational attainment level (0-2), Male
+Node: dcid:Count_Person_20To24Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_20To24Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years_Male
+
+# Population aged 20-24 by educational attainment level (3-8), Male
+Node: dcid:Count_Person_20To24Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_20To24Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:UpperSecondaryEducationOrHigher
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years_Male
+
+# Population aged 20-24 by educational attainment level (3-4), Male
+Node: dcid:Count_Person_20To24Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_20To24Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years_Male
+
+# Population aged 20-24 by educational attainment level (5-8), Male
+Node: dcid:Count_Person_20To24Years_TertiaryEducation_Male_AsAFractionOfCount_Person_20To24Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 20 24]
+educationalAttainment: dcs:TertiaryEducation
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_20To24Years_Male
+
+# Population aged 30-34 by educational attainment level (0-2)
+Node: dcid:Count_Person_30To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_30To34Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years
+
+# Population aged 30-34 by educational attainment level (3-8)
+Node: dcid:Count_Person_30To34Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_30To34Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:UpperSecondaryEducationOrHigher
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years
+
+# Population aged 30-34 by educational attainment level (3-4)
+Node: dcid:Count_Person_30To34Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_30To34Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years
+
+# Population aged 30-34 by educational attainment level (5-8)
+Node: dcid:Count_Person_30To34Years_TertiaryEducation_AsAFractionOfCount_Person_30To34Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:TertiaryEducation
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years
+
+
+
+# Population aged 30-34 by educational attainment level (0-2), Female
+Node: dcid:Count_Person_30To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_30To34Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years_Female
+
+# Population aged 30-34 by educational attainment level (3-8), Female
+Node: dcid:Count_Person_30To34Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_30To34Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:UpperSecondaryEducationOrHigher
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years_Female
+
+# Population aged 30-34 by educational attainment level (3-4), Female
+Node: dcid:Count_Person_30To34Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_30To34Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years_Female
+
+# Population aged 30-34 by educational attainment level (5-8), Female
+Node: dcid:Count_Person_30To34Years_TertiaryEducation_Female_AsAFractionOfCount_Person_30To34Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:TertiaryEducation
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years_Female
+
+# Population aged 30-34 by educational attainment level (0-2), Male
+Node: dcid:Count_Person_30To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_30To34Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years_Male
+
+# Population aged 30-34 by educational attainment level (3-8), Male
+Node: dcid:Count_Person_30To34Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_30To34Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:UpperSecondaryEducationOrHigher
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years_Male
+
+# Population aged 30-34 by educational attainment level (3-4), Male
+Node: dcid:Count_Person_30To34Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_30To34Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years_Male
+
+# Population aged 30-34 by educational attainment level (5-8), Male
+Node: dcid:Count_Person_30To34Years_TertiaryEducation_Male_AsAFractionOfCount_Person_30To34Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 30 34]
+educationalAttainment: dcs:TertiaryEducation
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_30To34Years_Male
+
+# Population aged 25-34 by educational attainment level (0-2)
+Node: dcid:Count_Person_25To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To34Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 25 34]
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_25To34Years
+
+# Population aged 25-34 by educational attainment level (3-8)
+Node: dcid:Count_Person_25To34Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To34Years
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 25 34]
+educationalAttainment: dcs:UpperSecondaryEducationOrHigher
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_25To34Years
+
+
+# Population aged 25-34 by educational attainment level (0-2), Female
+Node: dcid:Count_Person_25To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_25To34Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 25 34]
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_25To34Years_Female
+
+# Population aged 25-34 by educational attainment level (3-8), Female
+Node: dcid:Count_Person_25To34Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To34Years_Female
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 25 34]
+educationalAttainment: dcs:UpperSecondaryEducationOrHigher
+gender: schema:Female
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_25To34Years_Female
+
+
+# Population aged 25-34 by educational attainment level (0-2), Male
+Node: dcid:Count_Person_25To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_25To34Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 25 34]
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_25To34Years_Male
+
+# Population aged 25-34 by educational attainment level (3-8), Male
+Node: dcid:Count_Person_25To34Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To34Years_Male
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+age: [Years 25 34]
+educationalAttainment: dcs:UpperSecondaryEducationOrHigher
+gender: schema:Male
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+measurementDenominator: dcs:Count_Person_25To34Years_Male
+
+
 # Population aged 25-64 by educational attainment level (0-2)
 Node: dcid:Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 25 64]
-educationalAttainment: dcs:LessThanPrimaryEducation&PrimaryEducation&LowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person_25To64Years
@@ -23,7 +350,7 @@ Node: dcid:Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTer
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 25 64]
-educationalAttainment: dcs:UpperSecondaryEducation&PostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 measuredProperty: dcs:count
 statType: dcs:measuredValue
 measurementDenominator: dcs:Count_Person_25To64Years
@@ -45,7 +372,7 @@ Node: dcid:Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOr
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 25 64]
-educationalAttainment: dcs:LessThanPrimaryEducation&PrimaryEducation&LowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 gender: schema:Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -67,7 +394,7 @@ Node: dcid:Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTer
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 25 64]
-educationalAttainment: dcs:UpperSecondaryEducation&PostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 gender: schema:Female
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -89,7 +416,7 @@ Node: dcid:Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOr
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 25 64]
-educationalAttainment: dcs:LessThanPrimaryEducation&PrimaryEducation&LowerSecondaryEducation
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 gender: schema:Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
@@ -111,7 +438,7 @@ Node: dcid:Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTer
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
 age: [Years 25 64]
-educationalAttainment: dcs:UpperSecondaryEducation&PostSecondaryNonTertiaryEducation
+educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
 gender: schema:Male
 measuredProperty: dcs:count
 statType: dcs:measuredValue
