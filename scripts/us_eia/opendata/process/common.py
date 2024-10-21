@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Process EIA datasets to produce TMCF and CSV."""
-
+import os
+import sys
 import csv
 import json
 import logging
@@ -21,7 +22,12 @@ from collections import defaultdict
 from sys import path
 
 # For import util.alpha2_to_dcid
-path.insert(1, '../../../../')
+# Setup path for import from data/util
+# or set export PYTHONPATH="./:<repo>/data/util" in bash
+#path.insert(1, '/usr/local/google/home/chandaluri/data/')
+#path.insert(2, '/usr/local/google/home/chandaluri/data/scripts/us_eia/opendata/')
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2_to_dcid
 import util.name_to_alpha2 as name_to_alpha2
 
@@ -34,9 +40,153 @@ PERIOD_MAP = {
     'Q': 'Quarterly',
 }
 
+MMETHOD_MAPPING_DICT = {
+    # input source unit wise mapping to measurmentMethod
+    'Index1982-1984=100': 'BasePeriod1982_1984',
+    '2017=1.00000': 'BaseYear2017',
+    'Real(1982-1984)CentsPerKilowatthour': 'BasePeriod1982_1984',
+    'Real(1982-1984)DollarsPerGallon': 'BasePeriod1982_1984',
+    'Real(1982-1984)DollarsPerMillionBtu': 'BasePeriod1982_1984',
+    'Real(1982-1984)DollarsPerThousandCubicFeet': 'BasePeriod1982_1984',
+    'ThousandBtuPerChained(2017)Dollar': 'BasePeriod2017',
+    'BillionChained(2017)Dollars': 'BasePeriod2017',
+    'MetricTonsCarbonDioxidePerMillionChained(2017)Dollars': 'BasePeriod2017'
+}
+
+UNIT_MAPPING_DICT = {
+    # input source unit : DC unit
+    'Days':
+        'Day',
+    'ThousandsOfRegisteredVehicles':
+        '',
+    'RegisteredVehicle':
+        '',
+    'NumberOfDays':
+        'Day',
+    'Dollars':
+        'USDollar',
+    'MillionBarrels':
+        'MillionsBarrels',
+    'ThousandBarrels':
+        'Barrel',
+    'ThousandDollars':
+        'USDollar',
+    '1000MetricTons':
+        'ThousandMetricTons',
+    'BillionKilowatthours':
+        'BillionKilowattHours',
+    'Terajoules':
+        'Terajoule',
+    'DollarsPerMillionBtu':
+        'USDollarPerMillionBtu',
+    'DollarsPerThousandCubicFeet':
+        'USDollarPerThousandCubicFeet',
+    'CentsPerKilowatthour':
+        'CentsPerKilowattHour',
+    'MillionKilowatthours':
+        'MillionKilowattHours',
+    'DollarsPerGallon':
+        'USDollarPerGallon',
+    'Kilowatthours':
+        'KilowattHour',
+    'Barrels':
+        'Barrel',
+    'MillionDollars':
+        'USDollar',
+    'BillionDollars':
+        'USDollar',
+    'DollarsPerPoundUraniumOxide':
+        'USDollarPerPoundUraniumOxide',
+    'ThousandKilowatts':
+        'Kilowatt',
+    'DollarsPerBarrel':
+        'USDollarPerBarrel',
+    'NumberOfCustomers':
+        '',
+    'NumberOfElements':
+        '',
+    'Thousand':
+        "",
+    'ThousandGallons':
+        'USGallon',
+    'MillionPounds':
+        'GBP',
+    'DollarsPerFoot':
+        'USDollarPerFoot',
+    'ThousandDollarsPerWell':
+        'ThousandUSDollarsPerWell',
+    'ThousandFeet':
+        'Foot',
+    'FeetPerWell':
+        'Foot',
+    'Cost':
+        'USDollar',
+    'Index1982-1984=100':
+        '',
+    '2017=1.00000':
+        '',
+    'NumberOfRigs':
+        '',
+    'Number':
+        '',
+    'Real(1982-1984)DollarsPerGallon':
+        'USDollarPerGallon',
+    'Real(1982-1984)DollarsPerMillionBtu':
+        'USDollarPerMillionBtu',
+    'DollarsPerMillionBtu':
+        'USDollarPerMillionBtu',
+    'Real(1982-1984)CentsPerKilowatthour':
+        'USCentPerKilowattHour',
+    'Real(1982-1984)DollarsPerThousandCubicFeet':
+        'USDollarPerThousandCubicFeet',
+    'MetricTonsCarbonDioxidePerMillionChained(2017)Dollars':
+        'MetricTonsCarbonDioxidePerMillionChainedUSDollars',
+    'ThousandBtuPerChained(2017)Dollar':
+        'BtuPerChainedUSDollar',
+    'BillionChained(2017)Dollars':
+        'ChainedUSDollar',
+    'CentsPerKilowatthour,IncludingTaxes':
+        'CentsPerKilowattHour',
+    'TrillionBtu':
+        'Btu',
+    'MillionGallons':
+        'USGallon',
+    'MillionPeople':
+        '',
+    'MillionNominalDollars':
+        'NominalUSDollar',
+    'NominalDollars':
+        'NominalUSDollar',
+    'DollarsPerGallonIncludingTaxes':
+        'USDollarPerGallon',
+    'DollarsPerGallonExcludingTaxes':
+        'USDollarPerGallon',
+    'DollarsPerMillionBtu,IncludingTaxes':
+        'USDollarPerMillionBtu'
+}
+
+UNIT_CONVERT_DICT = {
+    'ThousandCubicFeet': 1000,
+    'ThousandBtuPerChained(2017)Dollar': 1000,
+    'Thousand': 1000,
+    'ThousandFeet': 1000,
+    'ThousandDollars': 1000,
+    'ThousandGallons': 1000,
+    'ThousandBarrels': 1000,
+    'ThousandsOfRegisteredVehicles': 1000,
+    'MillionDollars': 1000000,
+    'MillionPeople': 1000000,
+    'MillionNominalDollars': 1000000,
+    'MillionGallons': 1000000,
+    'ThousandKilowatts': 1000,
+    'MillionPounds': 1000000,
+    'BillionDollars': 10000000000,
+    'BillionChained(2017)Dollars': 10000000000,
+    'TrillionBtu': 1000000000000
+}
 _COLUMNS = [
     'place', 'stat_var', 'date', 'value', 'unit', 'scaling_factor',
-    'eia_series_id'
+    'eia_series_id', 'measurementMethod'
 ]
 
 _TMCF_STRING = """
@@ -49,6 +199,7 @@ value: C:EIATable->value
 unit: C:EIATable->unit
 scalingFactor: C:EIATable->scaling_factor
 eiaSeriesId: C:EIATable->eia_series_id
+measurementMethod: C:EIATable->measurementMethod
 """
 
 _DATE_RE = re.compile('[0-9WMQ]')
@@ -65,6 +216,7 @@ _ALPHA3_COUNTRY_SET = frozenset(
 
 
 def _parse_date(d):
+    #print("_parse_date", d)
     """Given a date from EIA JSON convert to DC compatible date."""
 
     if not _DATE_RE.match(d):
@@ -82,11 +234,13 @@ def _parse_date(d):
         m_or_q = d[4:]
 
         if m_or_q.startswith('Q'):
+            #print("withQ",yr + '-' + _QUARTER_MAP[m_or_q])
             # Quarterly
             if m_or_q in _QUARTER_MAP:
                 return yr + '-' + _QUARTER_MAP[m_or_q]
         else:
             # Monthly
+            #print("withOutQ",yr + '-' + m_or_q)
             return yr + '-' + m_or_q
 
     if len(d) == 8:
@@ -104,6 +258,26 @@ def _parse_date(d):
 
 def _sv_dcid(raw_sv):
     return 'eia/' + raw_sv
+
+
+def _check_unit_with_mapping(in_str):
+    if in_str in UNIT_MAPPING_DICT:
+        in_str = UNIT_MAPPING_DICT[in_str]
+    return in_str
+
+
+def _check_mMethod_with_mapping(in_str):
+    if in_str in MMETHOD_MAPPING_DICT:
+        in_str = MMETHOD_MAPPING_DICT[in_str]
+    else:
+        in_str = ""
+    return in_str
+
+
+def _unitConvert(unit, value):
+    if unit in UNIT_CONVERT_DICT:
+        value = float(value) * UNIT_CONVERT_DICT[unit]
+    return value
 
 
 def _enumify(in_str):
@@ -294,7 +468,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
             counters['info_lines_processed'] += 1
             if counters['info_lines_processed'] % 100000 == 99999:
                 _print_counters(counters)
-
+            if not line.startswith('{'):
+                continue
             data = json.loads(line)
 
             # Preliminary checks
@@ -307,6 +482,7 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                 continue
 
             time_series = data.get('data', None)
+            #print(time_series)
             if not time_series:
                 counters['error_missing_time_series'] += 1
                 continue
@@ -325,6 +501,8 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                 continue
 
             raw_unit = _enumify(data.get('units', ''))
+            dc_unit = _check_unit_with_mapping(raw_unit)
+            m_method = _check_mMethod_with_mapping(raw_unit)
 
             if raw_sv not in sv_name_map:
                 name = _maybe_parse_name(data.get('name', ''), raw_place,
@@ -334,7 +512,9 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
 
             # Add to rows.
             rows = []
+            #print(time_series)
             for k, v in time_series:
+                #print(k,v)
 
                 try:
                     # The following non-numeric values exist:
@@ -365,9 +545,10 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                     'place': f"dcid:{dc_place}",
                     'stat_var': f"dcid:{_sv_dcid(raw_sv)}",
                     'date': dt,
-                    'value': v,
+                    'value': _unitConvert(raw_unit, v),
                     'eia_series_id': series_id,
-                    'unit': raw_unit,
+                    'unit': dc_unit,
+                    'measurementMethod': m_method
                 })
 
             if not rows:

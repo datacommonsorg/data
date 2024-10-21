@@ -22,9 +22,9 @@ This dataset is available for public use, license is available at https://www.ei
 
 ### Import procedure
 
-- Download data 
+- Download data and will process the data
     ```bash
-    python3 download_bulk.py
+    python3 process.py --dataset=TOTAL
     ```
 
 - Run the [processor](process/README.md)

@@ -84,6 +84,7 @@ def extract_place_statvar(series_id, counters):
         measure = m.group(1)
         if measure.startswith("SHIP"):
             # TODO: model destination / source port as well
+            print(series_id)
             return (None, None, None)
         if measure == "PROD_DIST_STOCKS":
             assert m.group(2) == "TOT"
