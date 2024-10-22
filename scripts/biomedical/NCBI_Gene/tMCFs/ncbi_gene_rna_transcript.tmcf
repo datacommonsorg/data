@@ -2,7 +2,7 @@ Node: E:ncbi_gene_rna_transcript->E1
 typeOf: dcs:Gene
 dcid: C:ncbi_gene_rna_transcript->GeneID
 ncbiSequenceGiNumber: C:ncbi_gene_rna_transcript.version->genomic_nucleotide_gi
-refSeqGenomicAccessionVersion: C:ncbi_gene_rna_transcript.version->genomic_nucleotide_accession.version
+refSeqGenomicAccession: C:ncbi_gene_rna_transcript.version->genomic_nucleotide_accession.version
 
 Node: E:ncbi_gene_rna_transcript->E2
 typeOf: dcs:GenomicCoordinates
