@@ -11,4 +11,4 @@ geneGeneOntologyTermRelationshipQualifier: C:ncbi_gene_go_terms->Qualifier
 geneOntologyCategory: C:ncbi_gene_go_terms->Category
 geneOntologyEvidenceCode: C:ncbi_gene_go_terms->Evidence
 geneOntologyId: C:ncbi_gene_go_terms->GO_ID
-pubMedId: C:ncbi_gene_go_terms->PubMed
+pubMedID: C:ncbi_gene_go_terms->PubMed
