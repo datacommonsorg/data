@@ -20,6 +20,8 @@ internationalImMunoGeneTicsGeneId: C:ncbi_gene_gene->IMGT/GENEDB
 interProAccession: C:ncbi_gene_gene->InterPro
 miRBaseId: C:ncbi_gene_gene->miRBase
 mouseGenomeInformaticsId: C:ncbi_gene_gene->MGI
+nasioniaBaseId: C:ncbi_gene_gene->NASIONIABASE
+pomBaseId: C:ncbi_gene_gene->PomBase
 oldLocusTag: C:ncbi_gene_gene->EnsemblRapid
 onlineMendelianInheritanceInManID: C:ncbi_gene_gene->MIM
 phytozomeGeneId: C:ncbi_gene_gene->Phytozome
@@ -41,4 +43,6 @@ vEuPathDBId: C:ncbi_gene_gene->TriTrypDB
 vEuPathDBId: C:ncbi_gene_gene->VectorBase
 vEuPathDBId: C:ncbi_gene_gene->VEuPathDB
 xenbaseId: C:ncbi_gene_gene->Xenbase
+vertebrateGeneNomenclatureCommitteeId: C:ncbi_gene_gene->VGNC
+wormBaseId: C:ncbi_gene_gene->WormBase
 zfinId: C:ncbi_gene_gene->ZFIN
