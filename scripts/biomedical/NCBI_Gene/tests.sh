@@ -17,6 +17,8 @@
 # Author: Pradeep Kumar Krishnaswamy
 # Date: 23/08/2024
 # Name: tests
+# Edited By: Samantha Piekos
+# Date 06/09/2024
 # Description: This file runs the Data Commons Java tool to run standard
 # tests on tmcf + CSV pairs for the NCBI Gene data import.
 # """
@@ -30,24 +32,35 @@ wget https://github.com/datacommonsorg/import/releases/download/0.1-alpha.1k/dat
 cd ..
 mkdir -p lint
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_gene.tmcf  output/gene_info/gene_info*.csv  output/ncbi_gene_schema_enum.mcf -n 20 -o lint/ncbi_gene_gene
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_gene.tmcf output/gene_info/gene_info_shard_*.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_gene
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_gene_db.tmcf  output/ncbi_gene_gene_db.csv -n 20 -o lint/ncbi_gene_gene_db
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_gene_db.tmcf output/ncbi_gene_gene_db.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_gene_db
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_pubmed.tmcf  output/ncbi_gene_gene_pubmed.csv -n 20 -o lint/ncbi_gene_gene_pubmed
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_pubmed.tmcf output/ncbi_gene_gene_pubmed.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_gene_pubmed
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_ortholog.tmcf  output/ncbi_gene_gene_ortholog.csv -n 20 -o lint/ncbi_gene_gene_ortholog
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_ortholog.tmcf output/ncbi_gene_gene_ortholog.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_gene_ortholog
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_phenotype_associations.tmcf  output/ncbi_gene_gene_phenotype_association.csv -n 20 -o lint/ncbi_gene_gene_phenotype_association
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_phenotype_associations.tmcf output/ncbi_gene_gene_phenotype_association.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_gene_phenotype_association
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_gene_group.tmcf  output/ncbi_gene_gene_group.csv -n 20 -o lint/ncbi_gene_gene_group
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_gene_group.tmcf output/ncbi_gene_gene_group.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_gene_group
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_ensembl.tmcf  output/ncbi_gene_ensembl.csv -n 20 -o lint/ncbi_gene_ensembl
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_ensembl.tmcf output/ncbi_gene_ensembl.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_ensembl
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_gene_rif.tmcf  output/ncbi_gene_gene_rif.csv -n 20 -o lint/ncbi_gene_gene_rif
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_gene_rif.tmcf output/ncbi_gene_gene_rif.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_gene_rif
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_genomic_coordinates.tmcf  output/gene_neighbors/gene_neighbors*.csv -n 20 -o lint/ncbi_gene_genomic_coordinates
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_genomic_coordinates.tmcf output/gene_neighbors/gene_neighbors_shard_*.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_genomic_coordinates
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_go_terms.tmcf  output/gene2go/gene2go*.csv -n 20 -o lint/ncbi_gene_go_terms
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_go_terms.tmcf output/gene2go/gene2go_shard_*.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_go_terms
 
-java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar genmcf tMCFs/ncbi_gene_rna_transcript.tmcf  output/gene2accession/gene2accession*.csv -n 20 -o lint/ncbi_gene_rna_transcript
+java -jar tmp/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar lint tMCFs/ncbi_gene_rna_transcript.tmcf output/gene2accession/gene2accession_shard_*.csv *.mcf output/ncbi_gene_schema_enum.mcf
+mv dc_generated lint/ncbi_gene_rna_transcript
