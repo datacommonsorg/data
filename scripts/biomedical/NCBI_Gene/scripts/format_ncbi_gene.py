@@ -16,7 +16,7 @@ Author: Pradeep Kumar Krishnaswamy
 Date: 22-Aug-2024
 Name: format_ncbi_gene
 Edited By: Samantha Piekos
-Date: 21-Oct-2024
+Date: 22-Oct-2024
 Description: cleaning the NCBI Gene data.
 @source data: Download Gene data from FTP location. Refer to download.sh for details
 """
@@ -517,8 +517,8 @@ class GeneInfo:
                                   end='\r')
                             row['taxID'] = input_row[0]
                             row['GeneID'] = input_row[1]
-                            dcid = f"bio/{input_row[1]}" if input_row[
-                                0] != '9606' else f"bio/ncbi_{input_row[1]}"
+                            dcid = f"bio/ncbi_{input_row[1]}" if input_row[
+                                0] != '9606' else f"bio/{input_row[2]}"
                             dcid = dcid.replace("@", "_Cluster")
                             row['dcid'] = dcid
                             gene_id_dcid_mapping[input_row[1]] = dcid
@@ -527,7 +527,7 @@ class GeneInfo:
                                 [f'"{x}"' for x in input_row[4].split('|')])
                             if len(input_row[5]) > 1:
                                 dbs_lst = [x for x in input_row[5].split('|')]
-                                db_obj = {'GeneID': f"dcid:{dcid}"}
+                                db_obj = {'GeneID': f"{dcid}"}
                                 for dbs in dbs_lst:
                                     db = dbs.split(':')
                                     unique_dbXrefs.add(db[0])
@@ -696,7 +696,7 @@ class GenePubmed:
                         else:
                             Gene_PubMedID[input_row[1]] = {
                                 'dcid':
-                                f"dcid:{GENE_ID_DCID_MAPPING[input_row[1]]}",
+                                f"{GENE_ID_DCID_MAPPING[input_row[1]]}",
                                 'PubMedID': [input_row[2]]
                             }
                             #Gene_PubMedID[input_row[1]].append()
@@ -759,7 +759,7 @@ class GeneNeighbors:
                             print(f"{file_to_process} {input_row[1]}",
                                   end='\r')
                             row = deepcopy(GENE_NEIGHBORS_DICT)
-                            row['GeneID'] = f"dcid:{GENE_ID_DCID_MAPPING[input_row[1]]}"
+                            row['GeneID'] = f"{GENE_ID_DCID_MAPPING[input_row[1]]}"
                             row['genomic_accession.version'] = input_row[2]
                             row['genomic_gi'] = input_row[3]
                             row['start_position'] = input_row[4]
@@ -800,15 +800,15 @@ class GeneOrthology:
                         if input_row[1] in Gene_orthologs:
                             if input_row[4] in GENE_ID_DCID_MAPPING:
                                 Gene_orthologs[input_row[1]]['ortholog'].append(
-                                    f'"dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}"'
+                                    f'{GENE_ID_DCID_MAPPING[input_row[4]]}'
                                 )
                         else:
                             if input_row[4] in GENE_ID_DCID_MAPPING:
                                 Gene_orthologs[input_row[1]] = {
                                     'dcid':
-                                    f"dcid:{GENE_ID_DCID_MAPPING[input_row[1]]}",
+                                    f'{GENE_ID_DCID_MAPPING[input_row[1]]}',
                                     'ortholog': [
-                                        f'"dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}"'
+                                        f'{GENE_ID_DCID_MAPPING[input_row[4]]}'
                                     ]
                                 }
 
@@ -861,7 +861,7 @@ class GeneGroup:
                             if column_name in Gene_group[input_row[1]]:
                                 try:
                                     Gene_group[input_row[1]][column_name].append(
-                                        f'"dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}"'
+                                        f'dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}'
                                     )
                                 except:
                                     logging.info(
@@ -870,7 +870,7 @@ class GeneGroup:
                                 try:
                                     Gene_group[input_row[1]][column_name] = []
                                     Gene_group[input_row[1]][column_name].append(
-                                        f'"dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}"'
+                                        f'dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}'
                                     )
                                 except:
                                     logging.info(
@@ -880,9 +880,9 @@ class GeneGroup:
                             try:
                                 Gene_group[input_row[1]] = {
                                     'GeneID':
-                                    f"dcid:{GENE_ID_DCID_MAPPING[input_row[1]]}",
+                                    f"{GENE_ID_DCID_MAPPING[input_row[1]]}",
                                     column_name: [
-                                        f'"dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}"'
+                                        f'dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}'
                                     ]
                                 }
                             except:
@@ -953,7 +953,7 @@ class GeneMim2gene:
                             row['omim_dcid'] = f"bio/omim_{input_row[0]}"
                             row['type'] = GENE_MIM_TYPE_DIC[input_row[2]]
                             row['Source'] = ','.join([
-                                f'"{GENE_OMIM_SOURCE_DICT.get(x.strip(), x.strip())}"'
+                                f'{GENE_OMIM_SOURCE_DICT.get(x.strip(), x.strip())}'
                                 for x in input_row[3].strip().split(';')
                             ])
                             if row['MedGenCUI'].startswith('C'):
@@ -963,7 +963,7 @@ class GeneMim2gene:
                             for c in input_row[5].split(':'):
                                 if c.strip() in GENE_COMMENT_DICT:
                                     cmt.append(
-                                        f'"{GENE_COMMENT_DICT[c.strip()]}"')
+                                        f'{GENE_COMMENT_DICT[c.strip()]}')
                             if len(cmt) > 0:
                                 row['Comment'] = ','.join(cmt)
                             row['dcid'] = f"{dcid}_omim_{input_row[0]}"
@@ -1011,7 +1011,7 @@ class Gene2Go:
                                   end='\r')
                             row = deepcopy(GENE_GO_DICT)
                             dcid = GENE_ID_DCID_MAPPING[input_row[1]]
-                            row['GeneID'] = f"dcid:{dcid}"
+                            row['GeneID'] = f"{dcid}"
                             row['GO_ID'] = input_row[2]
                             row['dcid'] = f"bio/{input_row[2].replace(':','_')}"
                             row['Evidence'] = GENE_EVIDENCE_DICT[input_row[3]]
@@ -1081,7 +1081,7 @@ class Gene2Accession:
                             row = deepcopy(GENE_ACCESSION_DICT)
 
                             dcid = GENE_ID_DCID_MAPPING[input_row[1]]
-                            row['GeneID'] = f"dcid:{dcid}"
+                            row['GeneID'] = f"{dcid}"
                             row['dcid_rna_coordinates'] = f"bio/{input_row[3]}_{input_row[9]}_{input_row[10]}"
                             row['name_rna_coordinates'] = f"{input_row[3]} {input_row[9]} {input_row[10]}"
                             row['dcid_rna_transcript'] = f"bio/{input_row[3]}"
@@ -1166,7 +1166,7 @@ class Gene2Ensembl:
                             print(f"gene2ensembl {input_row[1]}", end='\r')
                             row = deepcopy(GENE_ENSEMBL_DICT)
                             dcid = GENE_ID_DCID_MAPPING[input_row[1]]
-                            row['GeneID'] = f"dcid:{dcid}"
+                            row['GeneID'] = f"{dcid}"
                             row['Ensembl_gene_identifier'] = input_row[2]
                             if len(input_row[3]) > 0:
                                 row['RNA_nucleotide_accession.version'] = input_row[
