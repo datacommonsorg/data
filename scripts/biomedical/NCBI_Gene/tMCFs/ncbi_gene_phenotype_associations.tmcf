@@ -16,6 +16,8 @@ dcid: C:ncbi_gene_phenotype_associations->GeneID
 Node: E:ncbi_gene_phenotype_associations->E4
 typeOf: dcs:GeneMendelianInheritanceInManIdentifierAssociation
 dcid: C:ncbi_gene_phenotype_associations->dcid
+geneID: E:ncbi_gene_phenotype_associations->E3
 geneOmimRelationshipComment: C:ncbi_gene_phenotype_associations->Comment
 geneOmimRelationshipSource: C:ncbi_gene_phenotype_associations->Source
 geneOmimRelationshipType: C:ncbi_gene_phenotype_associations->type
+onlineMendelianInheritanceInManID: E:ncbi_gene_phenotype_associations->E2
