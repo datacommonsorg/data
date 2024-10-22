@@ -1225,7 +1225,9 @@ class GeneRifs_Basic:
                                 row['dcid'] = f"{dcid}_{pub_med_id}"
                                 row['name'] = f'"{dcid.replace("bio/", "").replace("_", " ")} PubMed {pub_med_id} Reference Into Function"'
                                 row['dateModified'] = DATETIME_MODIFY(input_row[3])
-                                row['GeneRifText'] = f'"{input_row[4].replace("[", "(").replace("]", ")")}"'
+                                # Escape quotes in GeneRifText
+                                rif_text = input_row[4].replace('"', '""')
+                                row['GeneRifText'] = f'"{rif_text}"'
                                 row['pubMedId'] = pub_med_id  # Use the individual pub_med_id here
                                 writer_gene.writerow(row)
 
