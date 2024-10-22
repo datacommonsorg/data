@@ -14,15 +14,14 @@ dictyBaseGeneId: C:ncbi_gene_gene->dictyBase
 ecoCycAccessionId: C:ncbi_gene_gene->ECOCYC
 echinoBaseGeneId: C:ncbi_gene_gene->EchinoBase
 ensemblID: C:ncbi_gene_gene->Ensembl
+ensemblRapidReleaseId: C:ncbi_gene_gene->EnsemblRapid
 flyBaseId: C:ncbi_gene_gene->FLYBASE
 hgncID: C:ncbi_gene_gene->HGNC
 internationalImMunoGeneTicsGeneId: C:ncbi_gene_gene->IMGT/GENEDB
 interProAccession: C:ncbi_gene_gene->InterPro
 miRBaseId: C:ncbi_gene_gene->miRBase
 mouseGenomeInformaticsId: C:ncbi_gene_gene->MGI
-nasioniaBaseId: C:ncbi_gene_gene->NASIONIABASE
 pomBaseId: C:ncbi_gene_gene->PomBase
-oldLocusTag: C:ncbi_gene_gene->EnsemblRapid
 onlineMendelianInheritanceInManID: C:ncbi_gene_gene->MIM
 phytozomeGeneId: C:ncbi_gene_gene->Phytozome
 pfamAccession: C:ncbi_gene_gene->PFAM
