@@ -357,7 +357,8 @@ GENE_OMIM_SOURCE_DICT = {
     'GeneReviews': 'dcs:GeneOmimRelationshipSourceGeneReviews',
     'GeneTests': 'dcs:GeneOmimRelationshipSourceGeneTests',
     'NCBI curation': 'dcs:GeneOmimRelationshipSourceNcbiCuration',
-    'OMIM': 'dcs:GeneOmimRelationshipSourceOmim'
+    'OMIM': 'dcs:GeneOmimRelationshipSourceOmim',
+    '_': ''
 }
 
 GENE_COMMENT_DICT = {
@@ -947,7 +948,7 @@ class GeneMim2gene:
                             print(f"mim2gene_medgen {input_row[1]}", end='\r')
                             row = deepcopy(GENE_MIM2GENE_DICT)
                             dcid = GENE_ID_DCID_MAPPING[input_row[1]]
-                            row['GeneID'] = f"dcid:{dcid}"
+                            row['GeneID'] = f"{dcid}"
                             row['MIM_number'] = input_row[0]
                             row['omim_dcid'] = f"bio/omim_{input_row[0]}"
                             row['type'] = GENE_MIM_TYPE_DIC[input_row[2]]
@@ -955,8 +956,9 @@ class GeneMim2gene:
                                 f'"{GENE_OMIM_SOURCE_DICT.get(x.strip(), x.strip())}"'
                                 for x in input_row[3].strip().split(';')
                             ])
-                            row['MedGenCUI'] = input_row[4]
-                            row['MedGenCUI_dcid'] = f"bio/{input_row[4]}"
+                            if row['MedGenCUI'].startswith('C'):
+                                row['MedGenCUI'] = input_row[4]
+                                row['MedGenCUI_dcid'] = f"bio/{input_row[4]}"
                             cmt = []
                             for c in input_row[5].split(':'):
                                 if c.strip() in GENE_COMMENT_DICT:
@@ -1220,7 +1222,7 @@ class GeneRifs_Basic:
                             for pub_med_id in pub_med_ids:
                                 row = deepcopy(GENE_RIFS_BASIC_DICT)
                                 dcid = GENE_ID_DCID_MAPPING[input_row[1]]
-                                row['GeneID'] = f"dcid:{dcid}"
+                                row['GeneID'] = f"{dcid}"
                                 # Use the individual pub_med_id here
                                 row['dcid'] = f"{dcid}_{pub_med_id}"
                                 row['name'] = f'"{dcid.replace("bio/", "").replace("_", " ")} PubMed {pub_med_id} Reference Into Function"'
