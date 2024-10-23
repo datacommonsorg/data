@@ -61,6 +61,7 @@ GENE_ID_DCID_MAPPING = {}
 
 GENE_INFO_DICT = {
     'taxID': '',
+    'dcid_taxon': '',
     'GeneID': '',
     'dcid': '',
     'Symbol': '',
@@ -180,8 +181,11 @@ GENE_GO_DICT = {
 
 GENE_ACCESSION_DICT = {
     'GeneID': '',
-    'dcid_rna_coordinates': '',
-    'name_rna_coordinates': '',
+    'dcid_dna_coordinates': '',
+    'name_dna_coordinates': '',
+    'dcid_genomic_nucleotide': '',
+    'dcid_protein': '',
+    'dcid_peptide': '',
     'dcid_rna_transcript': '',
     'status': '',
     'RNA_nucleotide_accession.version': '',
@@ -207,7 +211,7 @@ GENE_ACCESSION_RNA_DICT = {
     'protein_gi': '',
     'genomic_nucleotide_accession.version': '',
     'genomic_nucleotide_gi': ''
-}
+    }
 
 GENE_ENSEMBL_DICT = {
     'GeneID': '',
@@ -516,6 +520,7 @@ class GeneInfo:
                             print(f"{file_to_process} {input_row[1]}",
                                   end='\r')
                             row['taxID'] = input_row[0]
+                            row['dcid_taxon'] = TAX_ID_DCID_MAPPING[input_row[0]]
                             row['GeneID'] = input_row[1]
                             dcid = f"bio/ncbi_{input_row[1]}" if input_row[
                                 0] != '9606' else f"bio/{input_row[2]}"
@@ -766,7 +771,9 @@ class GeneNeighbors:
                             row['end_position'] = input_row[5]
                             row['orientation'] = GENE_ORIENTATION_DICT[
                                 input_row[6]]
-                            row['assembly'] = f'"{input_row[13]}"'
+                            # only update if assembly is present and not a placeholder '-'
+                            if len(input_row[13])>1:
+                                row['assembly'] = f'"{input_row[13]}"'
                             # 'bio/<genomic accession.version>_<start position>_<end position>
                             row['dcid'] = f"bio/{input_row[2]}_{input_row[4]}_{input_row[5]}"
                             row['name'] = f'"{input_row[2]} {input_row[4]} {input_row[5]}"'
@@ -800,7 +807,7 @@ class GeneOrthology:
                         if input_row[1] in Gene_orthologs:
                             if input_row[4] in GENE_ID_DCID_MAPPING:
                                 Gene_orthologs[input_row[1]]['ortholog'].append(
-                                    f'{GENE_ID_DCID_MAPPING[input_row[4]]}'
+                                    f'dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}'
                                 )
                         else:
                             if input_row[4] in GENE_ID_DCID_MAPPING:
@@ -808,7 +815,7 @@ class GeneOrthology:
                                     'dcid':
                                     f'{GENE_ID_DCID_MAPPING[input_row[1]]}',
                                     'ortholog': [
-                                        f'{GENE_ID_DCID_MAPPING[input_row[4]]}'
+                                        f'dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}'
                                     ]
                                 }
 
@@ -1082,9 +1089,18 @@ class Gene2Accession:
 
                             dcid = GENE_ID_DCID_MAPPING[input_row[1]]
                             row['GeneID'] = f"{dcid}"
-                            row['dcid_rna_coordinates'] = f"bio/{input_row[3]}_{input_row[9]}_{input_row[10]}"
-                            row['name_rna_coordinates'] = f"{input_row[3]} {input_row[9]} {input_row[10]}"
-                            row['dcid_rna_transcript'] = f"bio/{input_row[3]}"
+                            # only write dcids if value is present
+                            if len(input_row[7]) > 1:
+                                row['dcid_genomic_nucleotide'] = f"bio/{input_row[7]}"
+                                if input_row[9].isnumeric() and input_row[10].isnumeric:
+                                    row['dcid_dna_coordinates'] = f"bio/{input_row[7]}_{input_row[9]}_{input_row[10]}"
+                                    row['name_dna_coordinates'] = f"{input_row[7]} {input_row[9]} {input_row[10]}"
+                            if len(input_row[3]) > 1:
+                                row['dcid_rna_transcript'] = f"bio/{input_row[3]}"
+                            if len(input_row[5]) > 1:
+                                row['dcid_protein'] = f"bio/{input_row[5]}"
+                            if len(input_row[13]) > 1:
+                                row['dcid_peptide'] = f"bio/{input_row[13]}"
                             row['status'] = REF_SEQ_STATUS_ENUM_DICT[
                                 input_row[2]]
                             row['RNA_nucleotide_accession.version'] = input_row[
@@ -1224,11 +1240,14 @@ class GeneRifs_Basic:
                                 dcid = GENE_ID_DCID_MAPPING[input_row[1]]
                                 row['GeneID'] = f"{dcid}"
                                 # Use the individual pub_med_id here
-                                row['dcid'] = f"{dcid}_{pub_med_id}"
+                                row['dcid'] = f"{dcid}_PubMed_{pub_med_id}"
                                 row['name'] = f'"{dcid.replace("bio/", "").replace("_", " ")} PubMed {pub_med_id} Reference Into Function"'
                                 row['dateModified'] = DATETIME_MODIFY(input_row[3])
                                 # Escape quotes in GeneRifText
-                                rif_text = input_row[4].replace('"', '""')
+                                rif_text = input_row[4].replace('"', '\\"')
+                                # Strip trailing backslash if present
+                                if rif_text.endswith('\\'):
+                                    rif_text = rif_text[:-1]
                                 row['GeneRifText'] = f'"{rif_text}"'
                                 row['pubMedId'] = pub_med_id  # Use the individual pub_med_id here
                                 writer_gene.writerow(row)
