@@ -9,7 +9,7 @@ Each dataset available as a Zip-file of JSONL content. See [here](https://www.ei
 To download the latest versions of ALL datasets available, run the following command. Files will be downloaded and extracted to a tmp_raw_data folder.
 
 ```bash
-python3 download_bulk.py
+python3 process.py
 ```
 
 ### Data Exploration

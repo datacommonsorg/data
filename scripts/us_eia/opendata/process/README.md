@@ -58,7 +58,7 @@ takes a raw stat-var and generates a fully defined stat-var for it.
 
 Download and unzip the data files based on the
 [manifest](https://api.eia.gov/bulk/manifest.txt) by running the
-[`python3 process.py --dataset=TOTAL`](https://github.com/datacommonsorg/data/blob/master/scripts/us_eia/opendata/download_bulk.py)
+[`python3 process.py --dataset=TOTAL`](https://github.com/datacommonsorg/data/blob/master/scripts/us_eia/opendata/process.py)
 script.
 
 To generate CSV, TMCF and stat-var MCF for a supported dataset:

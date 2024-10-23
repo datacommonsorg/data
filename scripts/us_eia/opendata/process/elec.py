@@ -36,7 +36,8 @@ def extract_place_statvar(series_id, counters):
     # ELEC.{MEASURE}.{FUEL_TYPE}-{PLACE}-{PRODUCER_SECTOR}.{PERIOD}
     #m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
     #            series_id)
-    m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([QM])$", series_id)
+    m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
+                 series_id)
 
     if m:
         measure = m.group(1)
@@ -265,7 +266,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
     """
 
     # ELEC.{MEASURE}.{FUEL_TYPE}-{PRODUCER_SECTOR}.{PERIOD}
-    m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([QM])$", raw_sv)
+    m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([AQM])$", raw_sv)
     if m:
         measure = m.group(1)
         fuel_type = m.group(2)
@@ -274,7 +275,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         consuming_sector = ''
     else:
         # ELEC.{MEASURE}.{CONSUMER_SECTOR}.{PERIOD}
-        m = re.match(r"^ELEC\.([^.]+)\.([^.]+)\.([QM])$", raw_sv)
+        m = re.match(r"^ELEC\.([^.]+)\.([^.]+)\.([AQM])$", raw_sv)
         if not m:
             counters['error_unparsable_raw_statvar'] += 1
             return None
