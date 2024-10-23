@@ -21,6 +21,7 @@ internationalImMunoGeneTicsGeneId: C:ncbi_gene_gene->IMGT/GENEDB
 interProAccession: C:ncbi_gene_gene->InterPro
 miRBaseId: C:ncbi_gene_gene->miRBase
 mouseGenomeInformaticsId: C:ncbi_gene_gene->MGI
+nasoniaBaseId: C:ncbi_gene_gene->NASONIABASE
 pomBaseId: C:ncbi_gene_gene->PomBase
 onlineMendelianInheritanceInManID: C:ncbi_gene_gene->MIM
 phytozomeGeneId: C:ncbi_gene_gene->Phytozome
