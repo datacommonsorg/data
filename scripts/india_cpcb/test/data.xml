@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<AqIndex>
+  <Country id="India">
+    <State id="Delhi">
+      <City id="Delhi">
+        <Station id="IGI Airport (T3), Delhi - IMD" lastupdate="16-10-2024 14:00:00" latitude="28.5627763" longitude="77.1180053">
+          <Pollutant_Index id="PM2.5" Min="77" Max="337" Avg="235" Hourly_sub_index="334"/>
+          <Pollutant_Index id="PM10" Min="115" Max="293" Avg="200" Hourly_sub_index="236"/>
+          <Pollutant_Index id="NO2" Min="32" Max="97" Avg="70" Hourly_sub_index="36"/>
+          <Pollutant_Index id="CO" Min="54" Max="111" Avg="86" Hourly_sub_index="57"/>
+          <Pollutant_Index id="OZONE" Min="2" Max="81" Avg="31" Hourly_sub_index="81"/>
+          <Air_Quality_Index Value="235" Predominant_Parameter="PM2.5"/>
+        </Station>
+        <Station id="Jawaharlal Nehru Stadium, Delhi - DPCC" lastupdate="16-10-2024 14:00:00" latitude="28.580280" longitude="77.233829">
+          <Pollutant_Index id="PM2.5" Min="55" Max="260" Avg="158" Hourly_sub_index="80"/>
+          <Pollutant_Index id="PM10" Min="113" Max="262" Avg="185" Hourly_sub_index="135"/>
+          <Pollutant_Index id="NO2" Min="31" Max="152" Avg="102" Hourly_sub_index="53"/>
+          <Pollutant_Index id="NH3" Min="5" Max="8" Avg="7" Hourly_sub_index="7"/>
+          <Pollutant_Index id="SO2" Min="8" Max="64" Avg="26" Hourly_sub_index="22"/>
+          <Pollutant_Index id="CO" Min="3" Max="124" Avg="23" Hourly_sub_index="NA"/>
+          <Pollutant_Index id="OZONE" Min="11" Max="96" Avg="38" Hourly_sub_index="NA"/>
+          <Air_Quality_Index Value="185" Predominant_Parameter="PM10"/>
+        </Station>
+      </City>
+    </State>
+    <State id="Karnataka">
+      <City id="Bengaluru">
+        <Station id="BTM Layout, Bengaluru - CPCB" lastupdate="16-10-2024 14:00:00" latitude="12.9135218" longitude="77.5950804">
+          <Pollutant_Index id="PM2.5" Min="25" Max="34" Avg="28" Hourly_sub_index="25"/>
+          <Pollutant_Index id="PM10" Min="19" Max="41" Avg="25" Hourly_sub_index="24"/>
+          <Pollutant_Index id="NO2" Min="42" Max="73" Avg="61" Hourly_sub_index="48"/>
+          <Pollutant_Index id="NH3" Min="8" Max="9" Avg="9" Hourly_sub_index="8"/>
+          <Pollutant_Index id="SO2" Min="9" Max="19" Avg="12" Hourly_sub_index="19"/>
+          <Pollutant_Index id="CO" Min="28" Max="36" Avg="30" Hourly_sub_index="32"/>
+          <Pollutant_Index id="OZONE" Min="11" Max="20" Avg="14" Hourly_sub_index="19"/>
+          <Air_Quality_Index Value="61" Predominant_Parameter="NO2"/>
+        </Station>
+      </City>
+      <City id="Mysuru">
+        <Station id="Hebbal 1st Stage, Mysuru - KSPCB" lastupdate="16-10-2024 14:00:00" latitude="12.21041" longitude="76.37376">
+          <Pollutant_Index id="PM2.5" Min="16" Max="43" Avg="30" Hourly_sub_index="43"/>
+          <Pollutant_Index id="PM10" Min="32" Max="59" Avg="44" Hourly_sub_index="59"/>
+          <Pollutant_Index id="NO2" Min="13" Max="43" Avg="25" Hourly_sub_index="43"/>
+          <Pollutant_Index id="NH3" Min="3" Max="9" Avg="5" Hourly_sub_index="9"/>
+          <Pollutant_Index id="SO2" Min="1" Max="3" Avg="2" Hourly_sub_index="3"/>
+          <Pollutant_Index id="CO" Min="5" Max="61" Avg="29" Hourly_sub_index="20"/>
+          <Pollutant_Index id="OZONE" Min="4" Max="45" Avg="25" Hourly_sub_index="42"/>
+          <Air_Quality_Index Value="44" Predominant_Parameter="PM10"/>
+        </Station>
+      </City>
+    </State>
+  </Country>
+</AqIndex>
+
