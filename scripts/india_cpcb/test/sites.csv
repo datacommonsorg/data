@@ -1,0 +1,5 @@
+SiteName,City,State,Country,DistrictDCID,LGDDistrictCode,SiteId,Coordinates
+"IGI Airport (T3), Delhi - IMD",Delhi,Delhi,India,wikidataId/Q2379189,84,cpcbAq/84_IGIAirportT3_Delhi,[LatLong 28.5627763 77.1180053]
+"BTM Layout, Bengaluru - CPCB",Bengaluru,Karnataka,India,wikidataId/Q806463,525,cpcbAq/525_BTMLayout_Bengaluru,[LatLong 12.9135218 77.5950804]
+"Jawaharlal Nehru Stadium, Delhi - DPCC",Delhi,Delhi,India,wikidataId/Q2061938,83,cpcbAq/83_JawaharlalNehruStadium_Delhi,[LatLong 28.58028 77.233829]
+"Hebbal 1st Stage, Mysuru - KSPCB",Mysuru,Karnataka,India,wikidataId/Q591781,545,cpcbAq/545_Hebbal1stStage_Mysuru,[LatLong 12.21041 76.37376]
