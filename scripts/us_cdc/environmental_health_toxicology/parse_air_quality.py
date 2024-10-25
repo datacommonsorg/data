@@ -58,9 +58,7 @@ MONTH_MAP = {
 
 def main():
     """Main function to generate the cleaned csv file."""
-    print(sys.argv[1])
     file_path = sys.argv[1]
-    print("filepath--------", file_path)
     output_file = sys.argv[2]
     clean_air_quality_data(file_path, output_file)
 
@@ -76,8 +74,7 @@ def clean_air_quality_data(file_path, output_file):
     print("Cleaning file...")
     data = pd.read_csv(file_path)
     data["date"] = pd.to_datetime(data["date"], yearfirst=True)
-    data["statefips"] = data["statefips"].astype(str).str.zfill(2)
-
+    
     if "PM2.5" in file_path:
         census_tract = "DS_PM"
     elif "Ozone" in file_path:
@@ -95,9 +92,11 @@ def clean_air_quality_data(file_path, output_file):
         data["dcid"] = "geoId/" + data["ctfips"].astype(str)
         data['StatisticalVariable'] = data['StatisticalVariable'].map(STATVARS)
     elif "County" in file_path and "PM" in file_path:
+        data["statefips"] = data["statefips"].astype(str).str.zfill(2)
         data["countyfips"] = data["countyfips"].astype(str).str.zfill(3)
         data["dcid"] = "geoId/" + data["statefips"] + data["countyfips"]
     elif "County" in file_path and "Ozone" in file_path:
+        data["statefips"] = data["statefips"].astype(str).str.zfill(2)
         data["countyfips"] = data["countyfips"].astype(str).str.zfill(3)
         data["dcid"] = "geoId/" + data["statefips"] + data["countyfips"]
     data.to_csv(output_file, float_format='%.6f', index=False)
