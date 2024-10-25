@@ -74,7 +74,7 @@ def clean_air_quality_data(file_path, output_file):
     print("Cleaning file...")
     data = pd.read_csv(file_path)
     data["date"] = pd.to_datetime(data["date"], yearfirst=True)
-    
+
     if "PM2.5" in file_path:
         census_tract = "DS_PM"
     elif "Ozone" in file_path:
