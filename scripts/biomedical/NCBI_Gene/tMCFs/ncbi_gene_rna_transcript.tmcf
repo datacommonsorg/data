@@ -35,7 +35,7 @@ name: C:ncbi_gene_rna_transcript->protein_accession.version
 transcribedFromGene: E:ncbi_gene_rna_transcript->E1
 ncbiProteinGiNumber: C:ncbi_gene_rna_transcript->protein_gi
 refSeqProteinAccession: C:ncbi_gene_rna_transcript->protein_accession.version
-translatedFrom: E:ncbi_gene_rna_transcript->E4
+translatedFromRna: E:ncbi_gene_rna_transcript->E4
 
 Node: E:ncbi_gene_rna_transcript->E6
 typeOf: dcs:MaturePeptide
