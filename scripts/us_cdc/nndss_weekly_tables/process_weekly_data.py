@@ -19,10 +19,10 @@ from statvar_dcid_generator import get_statvar_dcid
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
-    'weekly_nndss_input', './nndss_data/nndss_weekly_data',
+    'weekly_nndss_input', './data/nndss_weekly_data',
     'Path to the directory with weekly data scrapped from NNDSS')
 flags.DEFINE_string(
-    'weekly_nndss_output', './nndss_data/output',
+    'weekly_nndss_output', './data/output',
     'Path to the directory where generated files are to be stored.')
 
 _PREFIX = 'cdc_nndss_weekly_tables'
@@ -47,7 +47,8 @@ _FORMAT_UNREPORTED_CASES = {
     'NP': '',
     'NC': '',
     'P': '',
-    '\*\*': ''
+    '\*\*': '',
+    ',': ''
 }
 
 #NOTE: A map for different
@@ -156,7 +157,7 @@ _PV_MAP = {
 #TODO: Resolve path based on the script path for tests
 #TODO: Wrap this within the main function
 
-_DISEASE_DCID_DF = pd.read_csv("./nndss_data/weekly_tables_disease_mapping.csv")
+_DISEASE_DCID_DF = pd.read_csv("./data/weekly_tables_disease_mapping.csv")
 
 
 def set_observationPeriod(column_name):
@@ -250,7 +251,8 @@ def concat_rows_with_column_headers(rows_with_col_names, df_column_list):
 def process_nndss_current_weekly(input_filepath: str):
     ## from the csv files get the year, and week count
     filename = input_filepath.split('/')[-1]
-    print("File name ", filename, end='\r')
+    # print("File name ", filename, end='\r')
+    print("File name ", filename)
     year = int(filename[10:14])
     week = int(filename[25:27])
 
@@ -308,7 +310,7 @@ def process_nndss_current_weekly(input_filepath: str):
             # convert the place names to geoIds
 
             df['observationAbout'] = df['Reporting Area'].apply(
-                resolve_reporting_places_to_dcids, args=(_PLACE_DCID_DF,))
+                resolve_reporting_places_to_dcids, args=(_PLACE_DCID_DF, ))
 
             # fix the value column based on the data notes mentioned in NNDSS
             df['value'] = df['value'].replace(
@@ -381,8 +383,8 @@ def generate_statvar_map_for_columns(column_list, place_list):
         svdict['measuredProperty'] = 'dcs:count'
 
         # map to disease
-        mapped_disease = _DISEASE_DCID_DF.loc[_DISEASE_DCID_DF['replacement'] ==
-                                              column, :]
+        mapped_disease = _DISEASE_DCID_DF.loc[
+            _DISEASE_DCID_DF['replacement'] == column, :]
         mapped_disease = mapped_disease.drop_duplicates(keep='first')
 
         # column names have multiple pvs which are joined with ';'
@@ -446,8 +448,8 @@ def generate_statvar_map_for_columns(column_list, place_list):
                     dcid = dcid.replace('_AllSerogroups', '')
                     dcid = dcid.replace('_AllSerotypes', '')
 
-                    svdict_tmp['name'] = make_name_str(column_components, match,
-                                                       dcid)
+                    svdict_tmp['name'] = make_name_str(column_components,
+                                                       match, dcid)
                     # add to column_map
                     key = 'Node: dcid:' + dcid
                     if key not in sv_map.keys():
@@ -471,8 +473,8 @@ def generate_statvar_map_for_columns(column_list, place_list):
                     dcid = dcid.replace('_AllSerogroups', '')
                     dcid = dcid.replace('_AllSerotypes', '')
 
-                    svdict_tmp['name'] = make_name_str(column_components, match,
-                                                       dcid)
+                    svdict_tmp['name'] = make_name_str(column_components,
+                                                       match, dcid)
                     # add to column_map
                     key = 'Node: dcid:' + dcid
                     if key not in sv_map.keys():
@@ -511,10 +513,11 @@ def generate_processed_csv(input_path):
     # set measurement method
     cleaned_dataframe[
         'measurementMethod'] = 'dcs:CDC_NNDSS_Diseases_WeeklyTables'
-
+    
     cleaned_dataframe['value'] = cleaned_dataframe.apply(
         lambda x: float(x['value']) if len(x['value']) > 0 else np.nan, axis=1)
-    cleaned_dataframe.dropna(subset=['value', 'observationAbout'], inplace=True)
+    cleaned_dataframe.dropna(subset=['value', 'observationAbout'],
+                             inplace=True)
     cleaned_dataframe['value'] = cleaned_dataframe['value'].astype(float)
     #print(cleaned_dataframe)
     cleaned_dataframe.to_csv("processed_raw_weekly_data.csv", index=False)
@@ -530,7 +533,7 @@ def main(_) -> None:
         output_path = FLAGS.weekly_nndss_output
 
         _PLACE_DCID_DF = pd.read_csv(
-            "./nndss_data/place_name_to_dcid.csv",
+            "./data/place_name_to_dcid.csv",
             usecols=["Place Name", "Resolved place dcid"])
         print("calling cleaned_dataframe")
         cleaned_dataframe = generate_processed_csv(input_path)
