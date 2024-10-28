@@ -310,7 +310,7 @@ def process_nndss_current_weekly(input_filepath: str):
             # convert the place names to geoIds
 
             df['observationAbout'] = df['Reporting Area'].apply(
-                resolve_reporting_places_to_dcids, args=(_PLACE_DCID_DF, ))
+                resolve_reporting_places_to_dcids, args=(_PLACE_DCID_DF,))
 
             # fix the value column based on the data notes mentioned in NNDSS
             df['value'] = df['value'].replace(
@@ -383,8 +383,8 @@ def generate_statvar_map_for_columns(column_list, place_list):
         svdict['measuredProperty'] = 'dcs:count'
 
         # map to disease
-        mapped_disease = _DISEASE_DCID_DF.loc[
-            _DISEASE_DCID_DF['replacement'] == column, :]
+        mapped_disease = _DISEASE_DCID_DF.loc[_DISEASE_DCID_DF['replacement'] ==
+                                              column, :]
         mapped_disease = mapped_disease.drop_duplicates(keep='first')
 
         # column names have multiple pvs which are joined with ';'
@@ -448,8 +448,8 @@ def generate_statvar_map_for_columns(column_list, place_list):
                     dcid = dcid.replace('_AllSerogroups', '')
                     dcid = dcid.replace('_AllSerotypes', '')
 
-                    svdict_tmp['name'] = make_name_str(column_components,
-                                                       match, dcid)
+                    svdict_tmp['name'] = make_name_str(column_components, match,
+                                                       dcid)
                     # add to column_map
                     key = 'Node: dcid:' + dcid
                     if key not in sv_map.keys():
@@ -473,8 +473,8 @@ def generate_statvar_map_for_columns(column_list, place_list):
                     dcid = dcid.replace('_AllSerogroups', '')
                     dcid = dcid.replace('_AllSerotypes', '')
 
-                    svdict_tmp['name'] = make_name_str(column_components,
-                                                       match, dcid)
+                    svdict_tmp['name'] = make_name_str(column_components, match,
+                                                       dcid)
                     # add to column_map
                     key = 'Node: dcid:' + dcid
                     if key not in sv_map.keys():
@@ -513,11 +513,10 @@ def generate_processed_csv(input_path):
     # set measurement method
     cleaned_dataframe[
         'measurementMethod'] = 'dcs:CDC_NNDSS_Diseases_WeeklyTables'
-    
+
     cleaned_dataframe['value'] = cleaned_dataframe.apply(
         lambda x: float(x['value']) if len(x['value']) > 0 else np.nan, axis=1)
-    cleaned_dataframe.dropna(subset=['value', 'observationAbout'],
-                             inplace=True)
+    cleaned_dataframe.dropna(subset=['value', 'observationAbout'], inplace=True)
     cleaned_dataframe['value'] = cleaned_dataframe['value'].astype(float)
     #print(cleaned_dataframe)
     cleaned_dataframe.to_csv("processed_raw_weekly_data.csv", index=False)
