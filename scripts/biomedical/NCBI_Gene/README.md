@@ -53,29 +53,29 @@ NCBI Gene data can be downloaded from the National Center for Biotechnology Info
 ##### Classes
 
 * Gene
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> Gene
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> Gene
 * GeneMendelianInheritanceInManIdentifierAssociation
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation -> GeneMendelianInheritanceInManIdentifierAssociation
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation -> GeneMendelianInheritanceInManIdentifierAssociation
 * GeneOntologyTerm
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneOntologyTerm
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneOntologyTerm
 * GeneReferenceIntoFunction
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneReferenceIntoFunction
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneReferenceIntoFunction
 * GenomicCoordinates
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GenomicCoordinates
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GenomicCoordinates
 * GenomicRegion
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GenomicRegion
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GenomicRegion
 * MaturePeptide
-    * Thing -> BioChemEntity -> BiomedicalEntity -> MedicalEntity -> Substance -> ChemicalSubstance -> ChemicalCompound -> Protein -> MaturePeptide
+    * Thing -> BiomedicalEntity -> MedicalEntity -> Substance -> ChemicalSubstance -> ChemicalCompound -> Protein -> MaturePeptide
 * MendelianInheritanceInManEntity
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation ->  MendelianInheritanceInManEntity
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation ->  MendelianInheritanceInManEntity
 * Protein
-    * Thing -> BioChemEntity -> BiomedicalEntity -> MedicalEntity -> Substance -> ChemicalSubstance -> ChemicalCompound -> Protein
+    * Thing -> BiomedicalEntity -> MedicalEntity -> Substance -> ChemicalSubstance -> ChemicalCompound -> Protein
 * RnaTranscript
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> RnaTranscript
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> RnaTranscript
 * Taxon
-  * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> Taxon
+  * Thing -> BiomedicalEntity -> BiologicalEntity -> Taxon
 * UmlsConceptUniqueIdentifier
-    * Thing -> BioChemEntity -> BiomedicalEntity -> UmlsConceptUniqueIdentifier
+    * Thing -> BiomedicalEntity -> UmlsConceptUniqueIdentifier
   
 ##### Properties
 
