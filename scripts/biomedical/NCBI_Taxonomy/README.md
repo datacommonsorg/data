@@ -33,7 +33,7 @@ NCBI Taxonomy data can be downloaded from the National Center for Biotechnology 
 
 "NCBI Taxonomy distinguishes between formal and informal names. Formal names are declared based on rules laid down in four relevant codes of nomenclature (although other codes do exist). These are the International Code of Nomenclature for algae, fungi, and plants (ICNafp), the International Code of Nomenclature of Prokaryotes (ICNP) and the International Code of Zoological Nomenclature (ICZN). The viruses are governed by the International Code of Virus Classification and Nomenclature (ICVCN, also referred to as the ICTV Code). Informal names follow internal rules that are dictated by practical considerations outside of the Codes. For example, names lacking species epithets are commonly applied to GenBank records."
 
-In this import we include information from the following files downloaded from the ftp backend:
+In this import we include information from the `ncbi_taxcat` and the following files downloaded from the ftp backend from `ncbi_taxdump`:
 * divisions.dmp
 * names.dmp
 * host.dmp
@@ -45,7 +45,7 @@ In this import we include information from the following files downloaded from t
 ##### Classes
 
 * Taxon 
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> Taxon
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> Taxon
   
 ##### Properties
 
@@ -93,9 +93,9 @@ The edges, or links, in this import are between Taxon nodes that are related in 
 
 * Data Consistency and Quality: 
     
-    Rank Changes: Taxonomic classifications are subject to change, necessitating regular data refreshes.
+    Rank Changes: Taxonomic classifications are subject to change, necessitating regular data refreshes. The NCBI Taxonomy database is on a daily refresh.
     
-    Parent-Child Relationships: Verify the accuracy of parent-child relationships between Taxon.
+    Data Included in Biomedical Data Commons: Please note that in this import the files included from NCBI Taxonomy include `ncbi_taxcat` and a subset of files from `ncbi_taxdump`: `divisions.dmp`, `names.dmp`, `host.dmp`, nodes.dmp`, and `categories.dmp`
 
 ### License
 
@@ -124,7 +124,7 @@ More information about the NCBI Taxonomy database can be found [here](https://ww
 
 #### tMCFs
 
-- [ncbi_taxonomy_schema.mcf](tMCFs/ncbi_taxonomy.tmcf) contains the tmcf mapping to the csv of taxonomy.
+- [ncbi_taxonomy.tmcf](tMCFs/ncbi_taxonomy.tmcf) contains the tmcf mapping to the csv of taxonomy.
 
 ### Import Procedure
 
