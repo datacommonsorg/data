@@ -1,0 +1,8 @@
+Node: E:Age_specific_2->E0
+observationAbout: C:Age_specific_2->observationAbout
+observationDate: C:Age_specific_2->observationDate
+value: C:Age_specific_2->value
+variableMeasured: C:Age_specific_2->variableMeasured
+unit: C:Age_specific_2->unit
+scalingFactor: C:Age_specific_2->scalingFactor
+typeOf: dcs:StatVarObservation

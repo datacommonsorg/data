@@ -1,0 +1,8 @@
+Node: E:Edu_completed->E0
+observationAbout: C:Edu_completed->observationAbout
+observationDate: C:Edu_completed->observationDate
+value: C:Edu_completed->value
+variableMeasured: C:Edu_completed->variableMeasured
+unit: C:Edu_completed->unit
+scalingFactor: C:Edu_completed->scalingFactor
+typeOf: dcs:StatVarObservation
