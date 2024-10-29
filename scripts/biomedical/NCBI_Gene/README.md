@@ -42,12 +42,11 @@ NCBI Gene data can be downloaded from the National Center for Biotechnology Info
 ### Database Overview
 
 [NCBI Gene](https://www.ncbi.nlm.nih.gov/gene) is a comprehensive resource containing information about genes from a wide range of species. It serves as a central hub for gene-specific data, integrating information from various sources and providing links to other relevant resources. It includes:
-
-    * gene identification (e.g. official gene symbols, aliases, and cross-references to other databases)
-    * sequence information (e.g. genomic location and reference sequences (RefSeqs) for genomic DNA, transcripts, proteins, and mature peptides)
-    * functional information (gene function descriptions, associated pathways, related biological processes, orthologs, and related genes)
-    * phenotypic associations, (i.e. links to phenotypes and diseases associated with the gene)
-    * links to relevant scientific papers (i.e. PubMed IDs)
+* gene identification (e.g. official gene symbols, aliases, and cross-references to other databases)
+* sequence information (e.g. genomic location and reference sequences (RefSeqs) for genomic DNA, transcripts, proteins, and mature peptides)
+* functional information (gene function descriptions, associated pathways, related biological processes, orthologs, and related genes)
+* phenotypic associations, (i.e. links to phenotypes and diseases associated with the gene)
+* links to relevant scientific papers (i.e. PubMed IDs)
 
 ### Schema Overview
 
