@@ -22,6 +22,8 @@
 
 ## About the Dataset
 
+"[NCBI Gene](https://www.ncbi.nlm.nih.gov/gene) supplies gene-specific connections in the nexus of map, sequence, expression, structure, function, citation, and homology data. Unique identifiers are assigned to genes with defining sequences, genes with known map positions, and genes inferred from phenotypic information. These gene identifiers are used throughout NCBI's databases and tracked through updates of annotation. Gene includes genomes represented by [NCBI Reference Sequences](https://www.ncbi.nlm.nih.gov/refseq/) (or RefSeqs) and is integrated for indexing and query and retrieval from NCBI's Entrez and [E-Utilities](https://www.ncbi.nlm.nih.gov/books/NBK25501/) systems. Gene comprises sequences from thousands of distinct taxonomic identifiers, ranging from viruses to bacteria to eukaryotes. It represents chromosomes, organelles, plasmids, viruses, transcripts, and millions of proteins."
+
 ### Download URL
 
 NCBI Gene data can be downloaded from the National Center for Biotechnology Information (NCBI) using their FTP Site
@@ -39,7 +41,12 @@ NCBI Gene data can be downloaded from the National Center for Biotechnology Info
 
 ### Database Overview
 
-"[NCBI Gene](https://www.ncbi.nlm.nih.gov/gene) supplies gene-specific connections in the nexus of map, sequence, expression, structure, function, citation, and homology data. Unique identifiers are assigned to genes with defining sequences, genes with known map positions, and genes inferred from phenotypic information. These gene identifiers are used throughout NCBI's databases and tracked through updates of annotation. Gene includes genomes represented by [NCBI Reference Sequences](https://www.ncbi.nlm.nih.gov/refseq/) (or RefSeqs) and is integrated for indexing and query and retrieval from NCBI's Entrez and [E-Utilities](https://www.ncbi.nlm.nih.gov/books/NBK25501/) systems. Gene comprises sequences from thousands of distinct taxonomic identifiers, ranging from viruses to bacteria to eukaryotes. It represents chromosomes, organelles, plasmids, viruses, transcripts, and millions of proteins."
+[NCBI Gene](https://www.ncbi.nlm.nih.gov/gene) is a comprehensive resource containing information about genes from a wide range of species. It serves as a central hub for gene-specific data, integrating information from various sources and providing links to other relevant resources. It includes:
+    * gene identification (e.g. official gene symbols, aliases, and cross-references to other databases)
+    * sequence information (e.g. genomic location and reference sequences (RefSeqs) for genomic DNA, transcripts, proteins, and mature peptides)
+    * functional information (gene function descriptions, associated pathways, related biological processes, orthologs, and related genes)
+    * phenotypic associations, (i.e. links to phenotypes and diseases associated with the gene)
+    * links to relevant scientific papers (i.e. PubMed IDs)
 
 ### Schema Overview
 
