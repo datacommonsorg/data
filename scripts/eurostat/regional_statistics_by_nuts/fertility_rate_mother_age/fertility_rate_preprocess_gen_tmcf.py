@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import sys
+
 sys.path.insert(1, '../../../../util')
 from six.moves import urllib
 from alpha2_to_dcid import COUNTRY_MAP
@@ -20,8 +21,6 @@ import numpy as np
 import pandas as pd
 import io
 import csv
-
-
 
 _OUTPUT_COLUMNS = [
     'Date',
@@ -38,9 +37,13 @@ def download_data(download_link):
     """
     urllib.request.urlretrieve(download_link, "demo_r_find3.tsv.gz")
     raw_df = pd.read_table("demo_r_find3.tsv.gz")
-    raw_df = raw_df.rename(columns=({'freq,indic_de,unit,geo\TIME_PERIOD': 'indic_de,unit,geo\\time'}))
-    raw_df['indic_de,unit,geo\\time'] =  raw_df['indic_de,unit,geo\\time'].str.slice(2)
+    raw_df = raw_df.rename(columns=({
+        'freq,indic_de,unit,geo\TIME_PERIOD': 'indic_de,unit,geo\\time'
+    }))
+    raw_df['indic_de,unit,geo\\time'] = raw_df[
+        'indic_de,unit,geo\\time'].str.slice(2)
     return raw_df
+
 
 def translate_wide_to_long(data_url):
     # df = pd.read_csv(data_url, delimiter='\t')
@@ -50,7 +53,6 @@ def translate_wide_to_long(data_url):
 
     header = list(df.columns.values)
     years = header[1:]
-
 
     # Pandas.melt() unpivots a DataFrame from wide format to long format.
     df = pd.melt(df,
@@ -69,13 +71,15 @@ def translate_wide_to_long(data_url):
             'indic_de': new[0]
         }))
     df["indicator_unit"] = df["indic_de"] + "_" + df["unit"]
-    df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES) else COUNTRY_MAP.get(geo, f'{geo}'))
+    df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
+        geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
+                                else COUNTRY_MAP.get(geo, f'{geo}'))
 
     df.drop(columns=[header[0]], inplace=True)
 
     # Remove empty rows, clean values to have all digits.
     df = df[df.value.str.contains('[0-9]')]
-    possible_flags = [' ', ':' , 'b' ,'p', 'e']
+    possible_flags = [' ', ':', 'b', 'p', 'e']
     for flag in possible_flags:
         df['value'] = df['value'].str.replace(flag, '')
 

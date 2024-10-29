@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import sys
+
 sys.path.insert(1, '../../../../util')
 from six.moves import urllib
 from alpha2_to_dcid import COUNTRY_MAP
@@ -21,8 +22,6 @@ import pandas as pd
 import io
 import csv
 
-
-
 _OUTPUT_COLUMNS = [
     'Date',
     'GeoId',
@@ -31,17 +30,22 @@ _OUTPUT_COLUMNS = [
     'Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years',
 ]
 
+
 def download_data(download_link):
     """Downloads raw data from Eurostat website and stores it in instance
     data frame.
     """
-    
+
     urllib.request.urlretrieve(download_link, "trng_lfse_04.tsv.gz")
     raw_df = pd.read_table("trng_lfse_04.tsv.gz")
 
-    raw_df = raw_df.rename(columns=({'freq,unit,sex,age,geo\TIME_PERIOD': 'unit,sex,age,geo\\time'}))
-    raw_df['unit,sex,age,geo\\time'] =  raw_df['unit,sex,age,geo\\time'].str.slice(2)
+    raw_df = raw_df.rename(columns=({
+        'freq,unit,sex,age,geo\TIME_PERIOD': 'unit,sex,age,geo\\time'
+    }))
+    raw_df['unit,sex,age,geo\\time'] = raw_df[
+        'unit,sex,age,geo\\time'].str.slice(2)
     return raw_df
+
 
 def translate_wide_to_long(data_url):
     # df = pd.read_csv(data_url, delimiter='\t')
@@ -68,11 +72,13 @@ def translate_wide_to_long(data_url):
             'sex': new[1],
             'unit': new[0]
         }))
-    
+
     df.drop(columns=[header[0]], inplace=True)
     print(df.head())
 
-    df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES) else COUNTRY_MAP.get(geo, f'{geo}'))
+    df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
+        geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
+                                else COUNTRY_MAP.get(geo, f'{geo}'))
     df = df[df.value.str.contains('[0-9]')]
     possible_flags = [' ', ':', 'b', 'e', 'u']
     for flag in possible_flags:

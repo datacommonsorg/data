@@ -6,7 +6,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_20To24Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E1
@@ -16,7 +15,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_30To34Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E2
@@ -26,7 +24,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To34Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E3
@@ -36,7 +33,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_AsAFractionOfCount_Person_25To64Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E4
@@ -46,7 +42,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_20To24Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E5
@@ -56,7 +51,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_30To34Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E6
@@ -66,7 +60,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To34Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E7
@@ -76,7 +69,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_UpperSecondaryEducationOrHigher_AsAFractionOfCount_Person_25To64Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E8
@@ -86,7 +78,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_20To24Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E9
@@ -96,7 +87,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_30To34Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E10
@@ -106,7 +96,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOf_Count_Person_25To34Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E11
@@ -116,7 +105,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_AsAFractionOfCount_Person_25To64Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E12
@@ -126,7 +114,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_EducationalAttainmentTertiaryEducation_AsAFractionOf_Count_Person_20To24Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E13
@@ -136,7 +123,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_EducationalAttainmentTertiaryEducation_AsAFractionOf_Count_Person_30To34Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E14
@@ -146,7 +132,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_TertiaryEducation_AsAFractionOf_Count_Person_25To34Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E15
@@ -156,7 +141,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_TertiaryEducation_AsAFractionOfCount_Person_25To64Years
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E16
@@ -166,7 +150,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_20To24Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E17
@@ -176,7 +159,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_30To34Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E18
@@ -186,7 +168,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_25To34Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E19
@@ -196,7 +177,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E20
@@ -206,7 +186,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_20To24Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E21
@@ -216,7 +195,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_30To34Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E22
@@ -226,7 +204,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To34Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E23
@@ -236,7 +213,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Female_AsAFractionOfCount_Person_25To64Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E24
@@ -246,7 +222,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_20To24Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E25
@@ -256,7 +231,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_30To34Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E26
@@ -266,7 +240,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOf_Count_Person_25To34Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E27
@@ -276,7 +249,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E28
@@ -286,7 +258,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_EducationalAttainmentTertiaryEducation_Female_AsAFractionOf_Count_Person_20To24Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E29
@@ -296,7 +267,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_EducationalAttainmentTertiaryEducation_Female_AsAFractionOf_Count_Person_30To34Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E30
@@ -306,7 +276,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_TertiaryEducation_Female_AsAFractionOf_Count_Person_25To34Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E31
@@ -316,7 +285,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_TertiaryEducation_Female_AsAFractionOfCount_Person_25To64Years_Female
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E32
@@ -326,7 +294,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_20To24Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E33
@@ -336,7 +303,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_30To34Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E34
@@ -346,7 +312,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_25To34Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E35
@@ -356,7 +321,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E36
@@ -366,7 +330,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_20To24Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E37
@@ -376,7 +339,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_30To34Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E38
@@ -386,7 +348,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To34Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E39
@@ -396,7 +357,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_UpperSecondaryEducationOrHigher_Male_AsAFractionOfCount_Person_25To64Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E40
@@ -406,7 +366,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_20To24Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E41
@@ -416,7 +375,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_30To34Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E42
@@ -426,7 +384,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOf_Count_Person_25To34Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E43
@@ -436,7 +393,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E44
@@ -446,7 +402,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_20To24Years_TertiaryEducation_Male_AsAFractionOfCount_Person_20To24Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E45
@@ -456,7 +411,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_30To34Years_TertiaryEducation_Male_AsAFractionOfCount_Person_30To34Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E46
@@ -466,7 +420,6 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To34Years_TertiaryEducation_Male_AsAFractionOf_Count_Person_25To34Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   
   Node: E:EurostatsNUTS2_Education_Attainment->E47
@@ -476,6 +429,5 @@
   observationDate: C:EurostatsNUTS2_Education_Attainment->Date
   value: C:EurostatsNUTS2_Education_Attainment->Count_Person_25To64Years_TertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male
   scalingFactor: 100
-  unit:Percent
   measurementMethod: dcs:EurostatRegionalStatistics
   

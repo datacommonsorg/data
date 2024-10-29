@@ -6,7 +6,6 @@
     observationDate: C:EurostatsNUTS2_Enrollment->Date
     value: C:EurostatsNUTS2_Enrollment->Count_Person_25To64Years_EnrolledInEducationOrTraining_Female_AsAFractionOfCount_Person_25To64Years_Female
     scalingFactor: 100
-    unit:Percent
     measurementMethod: dcs:EurostatRegionalStatistics
     
     Node: E:EurostatsNUTS2_Enrollment->E1
@@ -16,7 +15,6 @@
     observationDate: C:EurostatsNUTS2_Enrollment->Date
     value: C:EurostatsNUTS2_Enrollment->Count_Person_25To64Years_EnrolledInEducationOrTraining_Male_AsAFractionOfCount_Person_25To64Years_Male
     scalingFactor: 100
-    unit:Percent
     measurementMethod: dcs:EurostatRegionalStatistics
     
     Node: E:EurostatsNUTS2_Enrollment->E2
@@ -26,6 +24,5 @@
     observationDate: C:EurostatsNUTS2_Enrollment->Date
     value: C:EurostatsNUTS2_Enrollment->Count_Person_25To64Years_EnrolledInEducationOrTraining_AsAFractionOfCount_Person_25To64Years
     scalingFactor: 100
-    unit:Percent
     measurementMethod: dcs:EurostatRegionalStatistics
     

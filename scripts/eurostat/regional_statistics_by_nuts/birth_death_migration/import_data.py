@@ -15,9 +15,11 @@
 import pandas as pd
 from six.moves import urllib
 import sys
+
 sys.path.insert(1, '../../../../util')
 from alpha2_to_dcid import COUNTRY_MAP
 from nuts_codes_names import NUTS1_CODES_NAMES
+
 
 def download_data(download_link):
     """Downloads raw data from Eurostat website and stores it in instance
@@ -25,8 +27,10 @@ def download_data(download_link):
     """
     urllib.request.urlretrieve(download_link, "demo_r_gind3.tsv.gz")
     raw_df = pd.read_table("demo_r_gind3.tsv.gz")
-    raw_df = raw_df.rename(columns=({'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'}))
-    raw_df['indic_de,geo\\time'] =  raw_df['indic_de,geo\\time'].str.slice(2)
+    raw_df = raw_df.rename(columns=({
+        'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'
+    }))
+    raw_df['indic_de,geo\\time'] = raw_df['indic_de,geo\\time'].str.slice(2)
     return raw_df
 
 
@@ -80,7 +84,8 @@ def preprocess_data(raw_df):
     # '\time' labels the other columns so it is confusing.
 
     # Append extra space for all cells in value column that do not come with a note, so that we can split them without error.
-    preprocessed_df.value = preprocessed_df.value.str.replace("([0-9:])$", lambda m: m.group(0) + ' ',regex=True)
+    preprocessed_df.value = preprocessed_df.value.str.replace(
+        "([0-9:])$", lambda m: m.group(0) + ' ', regex=True)
 
     first_column_list = preprocessed_df.columns[0].rsplit(sep=",", maxsplit=1)
 
@@ -94,12 +99,15 @@ def preprocess_data(raw_df):
     assert geo == "geo", "Column header should end with 'geo'."
 
     if statistical_variable:
-        split_df = preprocessed_df[preprocessed_df.columns[0]].str.rsplit(",", n=1, expand=True)
+        split_df = preprocessed_df[preprocessed_df.columns[0]].str.rsplit(
+            ",", n=1, expand=True)
         preprocessed_df['statistical_variable'] = split_df[0]
         preprocessed_df['geo'] = split_df[1]
         preprocessed_df.drop(columns=[preprocessed_df.columns[0]], inplace=True)
 
-        preprocessed_df = (preprocessed_df.set_index(["geo", "time"]).pivot(columns="statistical_variable")['value'].reset_index().rename_axis(None, axis=1))
+        preprocessed_df = (preprocessed_df.set_index(["geo", "time"]).pivot(
+            columns="statistical_variable")['value'].reset_index().rename_axis(
+                None, axis=1))
     # Fill missing 'geo' values with a colon.
     preprocessed_df.fillna(': ', inplace=True)
 
@@ -129,15 +137,10 @@ def clean_data(preprocessed_df, output_path):
 
     # replace colon with NaN.
     clean_df = clean_df.replace(':', '')
-    # for ind, geo in enumerate(clean_df['geo']):
-    #     # Convert geo IDS to geo codes, e.g., "country/SHN" or "nuts/AT342".
-    #     if any(char.isdigit() for char in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES):
-    #         clean_df['geo'][ind] =  'nuts/' + geo
-    #     else:
-    #         clean_df['geo'][ind] =  COUNTRY_MAP.get(geo, '~' + geo + '~')
-    clean_df['geo'] = clean_df['geo'].apply(lambda geo: f'nuts/{geo}' if any(geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES) else COUNTRY_MAP.get(geo, f'{geo}'))
+    clean_df['geo'] = clean_df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
+        geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
+                                            else COUNTRY_MAP.get(geo, f'{geo}'))
 
-   
     # trim the space in the time column i.e. '2020 ' -> '2020'
     clean_df['time'] = clean_df['time'].astype('int32')
     original_names = [

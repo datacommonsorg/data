@@ -46,18 +46,23 @@ class EurostatGDPImporter:
     """
     DATA_LINK = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10r_3gdp/?format=TSV&compressed=true"
     UNIT_CODES = {
-        "MIO_EUR": "Million euro",
-        "EUR_HAB": "Euro per inhabitant",
+        "MIO_EUR":
+            "Million euro",
+        "EUR_HAB":
+            "Euro per inhabitant",
         # "EUR_HAB_EU":	     "Euro per inhabitant in percentage of the EU average",
         # "EUR_HAB_EU27_2020": "Euro per inhabitant in percentage of the EU27 (from 2020) average",
-        "MIO_NAC": "Million units of national currency",
+        "MIO_NAC":
+            "Million units of national currency",
         # "MIO_PPS": "Million purchasing power standards (PPS)",
-        "MIO_PPS_EU27_2020": "Million purchasing power standards (PPS, EU27 from 2020)",
+        "MIO_PPS_EU27_2020":
+            "Million purchasing power standards (PPS, EU27 from 2020)",
         # "PPS_HAB": "Purchasing power standard (PPS) per inhabitant",
         # "PPS_EU27_2020_HAB": "Purchasing power standard (PPS, EU27 from 2020), per inhabitant",
         # "PPS_HAB_EU":	     "Purchasing power standard (PPS) per inhabitant in percentage of the \
         #                       EU average",
-        "PPS_HAB_EU27_2020": "Purchasing power standard (PPS, EU27 from 2020), per inhabitant in percentage of the EU27 (from 2020) average"
+        "PPS_HAB_EU27_2020":
+            "Purchasing power standard (PPS, EU27 from 2020), per inhabitant in percentage of the EU27 (from 2020) average"
 
         #         EUR_HAB
         # EUR_HAB_EU27_2020
@@ -82,12 +87,13 @@ class EurostatGDPImporter:
         """Downloads raw data from Eurostat website and stores it in instance
         data frame.
         """
-        # self.raw_df = pd.read_table(self.DATA_LINK)
         urllib.request.urlretrieve(self.DATA_LINK, "nama_10r_3gdp.tsv.gz")
         self.raw_df = pd.read_table("nama_10r_3gdp.tsv.gz")
-        self.raw_df = self.raw_df.rename(columns=({'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'}))
-        self.raw_df['unit,geo\\time'] =  self.raw_df['unit,geo\\time'].str.slice(2)
-        # return raw_df
+        self.raw_df = self.raw_df.rename(columns=({
+            'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
+        }))
+        self.raw_df['unit,geo\\time'] = self.raw_df['unit,geo\\time'].str.slice(
+            2)
 
     def preprocess_data(self):
         """Preprocesses instance raw_df and puts it into long format."""
@@ -191,12 +197,12 @@ class EurostatGDPImporter:
                     assert col in ['geo', 'time']
                     continue
                 col_num += 1
-                # Amount_EconomicActivity_GrossDomesticProduction_Nominal_AsAFractionOf_Count_Person
-                # Amount_EconomicActivity_GrossDomesticProduction_Nominal
+
                 if "HAB" in col:
-                    var = ("dcid:Amount_EconomicActivity_"
-                           "GrossDomesticProduction_Nominal_AsAFractionOf_Count_"
-                           "Person")
+                    var = (
+                        "dcid:Amount_EconomicActivity_"
+                        "GrossDomesticProduction_Nominal_AsAFractionOf_Count_"
+                        "Person")
                 else:
                     var = ("dcid:Amount_EconomicActivity_"
                            "GrossDomesticProduction_Nominal")

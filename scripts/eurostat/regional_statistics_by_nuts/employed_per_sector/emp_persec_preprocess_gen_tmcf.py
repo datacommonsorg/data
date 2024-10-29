@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import sys
+
 sys.path.insert(1, '../../../../util')
 from six.moves import urllib
 from alpha2_to_dcid import COUNTRY_MAP
@@ -20,8 +21,6 @@ import numpy as np
 import pandas as pd
 import io
 import csv
-
-
 
 _OUTPUT_COLUMNS = [
     'Date',
@@ -40,8 +39,9 @@ _OUTPUT_COLUMNS = [
     'Count_Person_Employed_NACE/O-Q',
     'Count_Person_Employed_NACE/O-U',
     'Count_Person_Employed_NACE/R-U',
-    'dc/nm9hcklgg5zb3',
+    'dc/nm9hcklgg5zb3',  #Population: Employed
 ]
+
 
 def download_data(download_link):
     """Downloads raw data from Eurostat website and stores it in instance
@@ -49,28 +49,31 @@ def download_data(download_link):
     """
     urllib.request.urlretrieve(download_link, "nama_10r_3empers.tsv.gz")
     raw_df = pd.read_table("nama_10r_3empers.tsv.gz")
-    raw_df = raw_df.rename(columns=({'freq,unit,wstatus,nace_r2,geo\TIME_PERIOD': 'unit,wstatus,nace_r2,geo\\time'}))
-    raw_df['unit,wstatus,nace_r2,geo\\time'] =  raw_df['unit,wstatus,nace_r2,geo\\time'].str.slice(2)
+    raw_df = raw_df.rename(columns=({
+        'freq,unit,wstatus,nace_r2,geo\TIME_PERIOD':
+            'unit,wstatus,nace_r2,geo\\time'
+    }))
+    raw_df['unit,wstatus,nace_r2,geo\\time'] = raw_df[
+        'unit,wstatus,nace_r2,geo\\time'].str.slice(2)
     return raw_df
 
+
 def translate_wide_to_long(data_url):
-    # df = pd.read_csv(data_url, delimiter='\t')
     raw_df = download_data(_DATA_URL)
     df = raw_df
     assert df.head
 
     header = list(df.columns.values)
     years = header[1:]
- 
+
     # Pandas.melt() unpivots a DataFrame from wide format to long format.
-    
+
     df = pd.melt(df,
                  id_vars=header[0],
                  value_vars=years,
                  var_name='time',
                  value_name='value')
 
-    
     # Separate geo and unit columns.
     new = df[header[0]].str.split(",", n=-1, expand=True)
     df = df.join(
@@ -83,8 +86,9 @@ def translate_wide_to_long(data_url):
     df.drop(columns=[header[0]], inplace=True)
 
     df["wstatus-nace"] = df["wstatus"] + "_" + df["nace_r2"]
-    df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES) else COUNTRY_MAP.get(geo, f'{geo}'))
-    
+    df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
+        geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
+                                else COUNTRY_MAP.get(geo, f'{geo}'))
 
     # Remove empty rows, clean values to have all digits.
     df = df[df.value.str.contains('[0-9]')]
@@ -162,6 +166,3 @@ if __name__ == "__main__":
     _TMCF = "./Eurostats_NUTS3_Empers.tmcf"
     preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
     get_template_mcf()
-
-
-

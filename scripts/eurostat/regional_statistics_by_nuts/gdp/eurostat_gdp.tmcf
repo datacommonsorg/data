@@ -33,7 +33,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction_Nominal
 observationAbout: C:eurostat_gdp->geo
 observationDate: C:eurostat_gdp->time
-measurementMethod: dcs:EuroBaseYear2020
+measurementMethod: dcs:EurostatRegionalStatistics
 observationPeriod: "P1Y"
 value: C:eurostat_gdp->NUM_PPS_EU27_2020
 unit: dcs:PurchasingPowerStandard
@@ -43,7 +43,7 @@ typeOf: dcs:StatVarObservation
 variableMeasured: dcid:Amount_EconomicActivity_GrossDomesticProduction_Nominal_AsAFractionOf_Count_Person
 observationAbout: C:eurostat_gdp->geo
 observationDate: C:eurostat_gdp->time
-measurementMethod: dcs:EuroBaseYear2020
+measurementMethod: dcs:EurostatRegionalStatistics
 observationPeriod: "P1Y"
 value: C:eurostat_gdp->PPS_HAB_EU27_2020
 unit: dcs:PurchasingPowerStandard

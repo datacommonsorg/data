@@ -72,7 +72,7 @@ def first_stage_processing(df, separation_symbol):
         # insert a dummy variable for two dimensional dataset. Note most of the time this should not happen
         if combined_variable_name == 'dummy_var_column' and current_combined_variable_value == '':
             current_combined_variable_value = 'dummy_var'
-        
+
         for j in range(len(time_columns)):
             raw_value = str(row_values[j + 1]).strip()
             value_with_note = raw_value.split(
