@@ -68,23 +68,23 @@ In this import we will process the following files:
 
 ##### Classes
 * ChemicalCompoundChemicalCompoundAssociation
-    * Thing -> BioChemEntity -> BiomedicalEntity -> MedicalEntity -> Substance -> ChemicalSubstance -> ChemicalCompound -> ChemicalCompoundChemicalCompoundAssociation
+    * Thing -> BiomedicalEntity -> MedicalEntity -> Substance -> ChemicalSubstance -> ChemicalCompound -> ChemicalCompoundChemicalCompoundAssociation
 * ChemicalCompoundGeneticVariantAssociation
-    * Thing -> BioChemEntity -> BiomedicalEntity -> MedicalEntity -> Substance -> ChemicalSubstance -> ChemicalCompound -> ChemicalCompoundGeneticVariantAssociation
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation -> ChemicalCompoundGeneticVariantAssociation
+    * Thing -> BiomedicalEntity -> MedicalEntity -> Substance -> ChemicalSubstance -> ChemicalCompound -> ChemicalCompoundGeneticVariantAssociation
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation -> ChemicalCompoundGeneticVariantAssociation
 * DiseaseDiseaseAssociation
-    * Thing -> BioChemEntity -> BiomedicalEntity -> Disease -> DiseaseAssociation -> DiseaseDiseaseAssociation
+    * Thing -> BiomedicalEntity -> Disease -> DiseaseAssociation -> DiseaseDiseaseAssociation
 * DiseaseGeneticVariantAssociation
-    * Thing -> BioChemEntity -> BiomedicalEntity -> Disease -> DiseaseAssociation -> DiseaseGeneticVariantAssociation
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation > DiseaseGeneticVariantAssociation
+    * Thing -> BiomedicalEntity -> Disease -> DiseaseAssociation -> DiseaseGeneticVariantAssociation
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation > DiseaseGeneticVariantAssociation
 * GeneGeneAssociation
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation -> GeneGeneAssociation
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation -> GeneGeneAssociation
 * GeneGeneticVariantAssociation
-    * Thing > BioChemEntity > BiomedicalEntity > BiologicalEntity > GenomeAnnotation -> GeneticAssociation -> GeneGeneticVariantAssociation
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation -> GeneGeneticVariantAssociation
 * GeneticVariantGeneticVariantAssociation
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation -> GeneticVariantGeneticVariantAssociation
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GeneticAssociation -> GeneticVariantGeneticVariantAssociation
 * GenomicCoordinates
-    * Thing -> BioChemEntity -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GenomicCoordinates
+    * Thing -> BiomedicalEntity -> BiologicalEntity -> GenomeAnnotation -> GenomicCoordinates
 
 ##### Properties
 * BiomedicalEntity
