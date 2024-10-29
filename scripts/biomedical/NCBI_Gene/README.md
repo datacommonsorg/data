@@ -138,11 +138,8 @@ NCBI Gene data can be downloaded from the National Center for Biotechnology Info
     * translatedFromRna
  
 * MendelianInheritanceInManEntity
-    * conceptUniqueIdentifier
+    * umlsConceptUniqueID
     * onlineMendelianInheritanceInManID
-
-* MedGenConceptUniqueIdentifier
-    * conceptUniqueIdentifier
 
 * Protein
     * ncbiProteinGiNumber
@@ -158,7 +155,10 @@ NCBI Gene data can be downloaded from the National Center for Biotechnology Info
     * transcribedFromGene
 
 * Taxon
-    * ncbiTaxId 
+    * ncbiTaxId
+ 
+* UmlsConceptUniqueIdentifier
+    * umlsConceptUniqueID
   
 ##### Enumerations
 
@@ -218,7 +218,7 @@ Links were established between the entity classes included in this import. In th
 | GeneReferenceIntoFunction | Gene | geneID |
 | GenomicRegion | Gene | encodeGene |
 | GenomicRegion | GenomicCoordinates | hasGenomicCoordinates |
-| MendelianInheritanceInManEntity | UmlsConceptUniqueIdentifier | unifiedMedicalLanguageSystemConceptUniqueIdentifier |
+| MendelianInheritanceInManEntity | UmlsConceptUniqueIdentifier | umlsConceptUniqueID |
 | MaturePeptide | Gene | transcribedFromGene |
 | MaturePeptide | Protein | maturedFromProtein |
 | MaturePeptide | RnaTranscript | translatedFrom |
