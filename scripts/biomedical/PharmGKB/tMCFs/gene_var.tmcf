@@ -1,14 +1,14 @@
 Node: E:gene_var->E1
 typeOf: dcs:GeneticVariant
-dcid: C:gene_var->Entity2_dcid
-name: C:gene_var->Entity2_name
-pharmGKBID: C:gene_var->Entity2_id
-
-Node: E:gene_var->E2
-typeOf: dcs:Gene
 dcid: C:gene_var->Entity1_dcid
 name: C:gene_var->Entity1_name
 pharmGKBID: C:gene_var->Entity1_id
+
+Node: E:gene_var->E2
+typeOf: dcs:Gene
+dcid: C:gene_var->Entity2_dcid
+name: C:gene_var->Entity2_name
+pharmGKBID: C:gene_var->Entity2_id
 
 Node: E:gene_var->E3
 typeOf: dcs:GeneGeneticVariantAssociation
