@@ -49,14 +49,18 @@ In this import we include information from the following files downloaded from t
   
 ##### Properties
 
-* BiologicalEntity
-    * ncbiBlastName
 * Taxon
+    * abbreviaion 
     * biologicalHost
+    * citation
     * commonName
     * genBankName
     * hasInheritedDivsion
+    * ncbiBlastName
     * ncbiTaxId
+    * scientificName
+    * specializationOf
+    * synonym
     * taxonDivision
     * taxonRank
     * taxonTopLevelCategory
