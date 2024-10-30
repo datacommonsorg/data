@@ -21,7 +21,7 @@ While preprocessing files column names are changed to SV names as used in
 DC import
 """
 
-DOWNLOAD_DIR = '/download_files/'
+DOWNLOAD_DIR = '/input_files/'
 PROCESS_AS_IS_DIR = '/process_files/as_is/'
 PROCESS_AGG_DIR = '/process_files/agg/'
 OUTPUT_DIR = '/output_files/'
@@ -238,25 +238,39 @@ WORKING_DIRECTORIES = [
     '/process_files/agg/1990_2000/county/',
     '/process_files/agg/2000_2010/county/',
     '/process_files/agg/2010_2020/county/',
+    '/process_files/agg/2020_2023/county/',
     '/process_files/as_is/1990_2000/county/',
     '/process_files/as_is/2000_2010/county/',
     '/process_files/as_is/2010_2020/county/',
+    '/process_files/as_is/2020_2023/county/',
     '/process_files/as_is/1980_1990/state/',
     '/process_files/as_is/1990_2000/state/',
     '/process_files/as_is/2000_2010/state/',
     '/process_files/as_is/2010_2020/state/',
+    '/process_files/as_is/2020_2023/state/',
     '/process_files/agg/1980_1990/state/',
     '/process_files/agg/1990_2000/state/',
     '/process_files/agg/2000_2010/state/',
     '/process_files/agg/2010_2020/state/',
+    '/process_files/agg/2020_2023/state/',
     '/process_files/as_is/1980_1990/national/',
     '/process_files/as_is/1990_2000/national/',
     '/process_files/as_is/2000_2010/national/',
     '/process_files/as_is/2010_2020/national/',
+    '/process_files/as_is/2020_2023/national/',
     '/process_files/agg/1980_1990/national/',
     '/process_files/agg/1990_2000/national/',
     '/process_files/agg/2000_2010/national/',
-    '/process_files/agg/2010_2020/national/', '/output_files/'
+    '/process_files/agg/2020_2023/national/',
+    '/process_files/agg/2010_2020/national/',
+    '/output_files/',
+    '/input_files/',
+    '/input_files/1990_2000/county/',
+    '/input_files/2000_2010/county/',
+    '/input_files/2010_2020/county/',
+    '/input_files/2020_2023/county/',
+    '/input_files/1980_1990/state/',
+    '/input_files/1990_2000/state/'
 ]
 
 MCF_SRH = '''Node: dcid:{node_name}
