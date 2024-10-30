@@ -1,0 +1,262 @@
+[
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/1990-2000/counties/asrh/co-99-10.txt",
+        "file_path": "1990_2000/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/cc-est2023-alldata.csv",
+        "file_path": "2020_2023/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-01.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-02.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-04.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-05.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-06.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-08.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-09.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-10.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-11.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-12.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-13.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-15.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-16.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-17.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-18.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-19.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-20.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-21.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-22.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-23.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-24.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-25.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-26.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-27.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-28.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-29.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-30.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-31.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-32.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-33.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-34.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-35.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-36.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-37.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-38.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-39.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-40.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-41.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-42.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-44.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-45.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-46.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-47.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-48.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-49.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-50.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-51.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-53.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-54.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-55.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-56.csv",
+        "file_path": "2000_2010/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2010-2020/counties/asrh/CC-EST2020-ALLDATA.csv",
+        "file_path": "2010_2020/county/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/1980-1990/state/asrh/st_int_asrh.txt",
+        "file_path": "1980_1990/state/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh90.txt",
+        "file_path": "1990_2000/state/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh91.txt",
+        "file_path": "1990_2000/state/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh92.txt",
+        "file_path": "1990_2000/state/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh93.txt",
+        "file_path": "1990_2000/state/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh94.txt",
+        "file_path": "1990_2000/state/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh95.txt",
+        "file_path": "1990_2000/state/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh96.txt",
+        "file_path": "1990_2000/state/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh97.txt",
+        "file_path": "1990_2000/state/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh98.txt",
+        "file_path": "1990_2000/state/"
+    },
+    {
+        "download_path": "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh99.txt",
+        "file_path": "1990_2000/state/"
+    }
+]
