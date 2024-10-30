@@ -272,9 +272,4 @@ _PV_MAP = {
     'post-diarrheal': {
         'medicalCondition': 'dcs:PostDiarrheal'
     }
-    
 }
-
-
-
-

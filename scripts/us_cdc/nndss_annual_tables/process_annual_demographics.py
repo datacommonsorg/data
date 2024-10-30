@@ -201,10 +201,10 @@ def clean_single_dataframe(df, year, table):
     diseases_map = diseases_map.drop_duplicates(keep='first')
     diseases_map = diseases_map[diseases_map['Replacement'] != 'NAN']
     diseases_map = diseases_map.dropna(subset=['name', 'dcid'])
-    print("table------",table)
-    print("year------",year)
-    if int(table) == 4 and int(year)==2021:
-        print("dcid--------------",diseases_map['dcid'])
+    print("table------", table)
+    print("year------", year)
+    if int(table) == 4 and int(year) == 2021:
+        print("dcid--------------", diseases_map['dcid'])
     diseases_map['variable'] = diseases_map['Replacement'] + ';' + diseases_map[
         'variable']
     diseases_map = diseases_map.drop(
@@ -268,7 +268,7 @@ def process_table_5(file_list):
 
         df = pd.read_csv(input_filepath, header=[0, 1])
         df, sv_df = clean_single_dataframe(df, year, '5')
-        
+
         # add processed dataframe to the clean_csv
         clean_dataframe = pd.concat([clean_dataframe, df], ignore_index=True)
         full_sv_df = pd.concat([full_sv_df, sv_df], ignore_index=True)
@@ -288,7 +288,7 @@ def process_table_6(file_list):
 
         df = pd.read_csv(input_filepath, header=[0, 1])
         df, sv_df = clean_single_dataframe(df, year, '6')
-        
+
         # add processed dataframe to the clean_csv
         clean_dataframe = pd.concat([clean_dataframe, df], ignore_index=True)
         full_sv_df = pd.concat([full_sv_df, sv_df], ignore_index=True)
@@ -311,7 +311,7 @@ def process_table_7(file_list):
         # add processed dataframe to the clean_csv
         clean_dataframe = pd.concat([clean_dataframe, df], ignore_index=True)
         # if()
-        clean_dataframe.to_csv("./rough_csv/clean df.csv",index=False)
+        clean_dataframe.to_csv("./rough_csv/clean df.csv", index=False)
         full_sv_df = pd.concat([full_sv_df, sv_df], ignore_index=True)
     return clean_dataframe, full_sv_df
 
@@ -352,7 +352,7 @@ def main(_) -> None:
     sv5, tab5 = process_table_5(file_list)
     sv6, tab6 = process_table_6(file_list)
     sv7, tab7 = process_table_7(file_list)
-    
+
     # make a single dataframe of cleaned data and statvar pvs
     cleaned_dataframe = pd.concat([tab4, tab5, tab6, tab7], ignore_index=True)
     full_sv_df = pd.concat([sv4, sv5, sv6, sv7], ignore_index=True)
