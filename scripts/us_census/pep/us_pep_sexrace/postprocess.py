@@ -117,6 +117,8 @@ def process_state_county_after_2000(df: pd.DataFrame):
     df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
 
     df = df.replace('nan', '')
+    #Year,geo_ID
+    df = df.drop_duplicates(subset=['Year', 'geo_ID'], keep='last')
     # writing output to final csv
     df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL,
                            "state_county_after_2000.csv"),
@@ -171,7 +173,6 @@ def create_single_csv(output_files_names: list):
     df5 = pd.DataFrame()
     df7 = pd.DataFrame()
     column_names = {}
-
     # list of output files for national before the year 2000
     national_before_2000 = output_files_names[
         Outputfiles.NationalBefore2000.value]

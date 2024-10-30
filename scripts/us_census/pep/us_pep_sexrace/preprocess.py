@@ -22,21 +22,33 @@ import os
 import json
 from absl import app
 from absl import flags
+import requests
+import shutil
+import time
+from datetime import datetime as dt
+from absl import logging
+
 from national.national_1900_1970 import process_national_1900_1970
 from national.national_1980_1990 import process_national_1980_1990
 from national.national_1990_2000 import process_national_1990_2000
 from national.national_2000_2010 import process_national_2000_2010
 from national.national_2010_2020 import process_national_2010_2020
+from national.national_2020_2022 import process_national_2020_2022
+from national.national_2020_2023 import process_national_2020_2023
 from state.state_1970_1979 import process_state_1970_1979
 from state.state_1980_1990 import process_state_1980_1990
 from state.state_1990_2000 import process_state_1990_2000
 from state.state_2000_2010 import process_state_2000_2010
 from state.state_2010_2020 import process_state_2010_2020
+from state.state_2020_2022 import process_state_2020_2022
+from state.state_2020_2023 import process_state_2020_2023
 from county.county_1970_1979 import process_county_1970_1979
 from county.county_1980_1989 import process_county_1980_1989
 from county.county_1990_2000 import process_county_1990_2000
 from county.county_2000_2009 import process_county_2000_2009
 from county.county_2010_2020 import process_county_2010_2020
+from county.county_2020_2022 import process_county_2020_2022
+from county.county_2020_2023 import process_county_2020_2023
 from postprocess import create_single_csv, generate_mcf, generate_tmcf
 from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE
 
@@ -45,6 +57,8 @@ default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "config_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 _MODULE_DIR = os.path.dirname(__file__)
+_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+_FILES_TO_DOWNLOAD = None
 
 
 def _get_urls(json_file_path, key, test):
@@ -70,6 +84,26 @@ def _get_urls(json_file_path, key, test):
             urls = [os.path.join(_MODULE_DIR, url) for url in urls]
 
     return urls
+
+
+def add_future_year_urls():
+    global _FILES_TO_DOWNLOAD
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
+        _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    urls_to_scan = [
+        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
+    ]
+    if dt.now().year < 2023:
+        YEAR = dt.now().year
+        for url in urls_to_scan:
+            url_to_check = url.format(YEAR=YEAR)
+            try:
+                check_url = requests.head(url_to_check)
+                if check_url.status_code == 200:
+                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+
+            except:
+                logging.error(f"URL is not accessable {url_to_check}")
 
 
 def process(config_files: list, test=False):
@@ -121,6 +155,15 @@ def process(config_files: list, test=False):
         elif "county_2010_2020.json" in config_file:
             process_county_2010_2020(files)
 
+    global _FILES_TO_DOWNLOAD
+    for file in _FILES_TO_DOWNLOAD:
+        file_name_to_save = None
+        url = file['download_path']
+        #Calling 2023 onwards methods
+        process_national_2020_2023(url)
+        process_county_2020_2023(url)
+        process_state_2020_2023(url)
+
     # list of national output files before year 2000
     national_before_2000 = [
         "nationals_result_1900_1959.csv", "nationals_result_1960_1979.csv",
@@ -136,13 +179,21 @@ def process(config_files: list, test=False):
 
     # list of state and county output files before after 2000
     state_county_after_2000 = [
-        "state_result_2000_2010.csv", "state_result_2010_2020.csv",
-        "county_result_2000_2009.csv", "county_result_2010_2020.csv"
+        "state_result_2000_2010.csv",
+        "state_result_2010_2020.csv",
+        "county_result_2000_2009.csv",
+        "county_result_2010_2020.csv",
+        "state_result_2020_2022.csv",
+        "state_result_2020_2023.csv",
+        "county_result_2020_2022.csv",
+        "county_result_2020_2023.csv",
+        "county_result_2020_2023.csv",
     ]
 
     # list of national output files after year 2000
     national_after_2000 = [
-        "nationals_result_2000_2010.csv", "nationals_result_2010_2020.csv"
+        "nationals_result_2000_2010.csv", "nationals_result_2010_2020.csv",
+        "nationals_result_2020_2022.csv", "nationals_result_2020_2023.csv"
     ]
 
     output_files_names = {
@@ -163,7 +214,7 @@ def main(_):
     Creating and processing input files
     """
     input_path = FLAGS.input_path
-
+    add_future_year_urls()
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
 
