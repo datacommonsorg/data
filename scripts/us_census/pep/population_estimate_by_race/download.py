@@ -105,7 +105,7 @@ def _save_data(_url: str, download_local_path: str) -> None:
                 df = pd.read_csv(_url, on_bad_lines='skip', names=cols)
             df.to_excel(download_local_path + os.sep + file_name,\
                 index=False,engine='xlsxwriter')
-        elif "co-est00int-alldata" in _url or "CC-EST2020-ALLDATA" in _url:
+        elif "co-est00int-alldata" in _url or "CC-EST2020-ALLDATA" in _url or "cc-est2022-all":
             df = pd.read_csv(_url,
                              on_bad_lines='skip',
                              encoding='ISO-8859-1',
@@ -144,8 +144,16 @@ def _download(download_path: str, file_urls: list) -> None:
     """
     if not os.path.exists(download_path):
         os.mkdir(download_path)
+    all_files = os.listdir(download_path)
     for _url in file_urls:
-        _save_data(_url, download_path)
+        file_name = _url.split("/")[-1]
+        if not file_name in all_files:
+            try:
+                _save_data(_url, download_path)
+            except:
+                print(f"Unable to download {_url}")
+        else:
+            print(f"File already downloaded {file_name}")
 
 
 def main(_):

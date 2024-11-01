@@ -15,15 +15,25 @@
     from the datasets in provided local path.
     Typical usage:
     1. python3 preprocess.py
-    2. python3 preprocess.py -i input_data
+    2. python3 preprocess.py -i input_files
 """
+
 import os
 import re
 import sys
+import requests
+import time
+import json
+from datetime import datetime as dt
+from absl import logging
 # To import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
 sys.path.insert(1, _COMMON_PATH)
+import warnings
+
+warnings.filterwarnings('ignore')
+#warnings.simplefilter(action='ignore', category=FutureWarning)
 
 import pandas as pd
 from absl import app
@@ -31,16 +41,24 @@ from absl import flags
 from util.alpha2_to_dcid import USSTATE_MAP
 from states_to_shortform import get_states
 
+#pd.options.mode.copy_on_write = True
+
 _FLAGS = flags.FLAGS
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+
 default_input_path = os.path.dirname(
-    os.path.abspath(__file__)) + os.sep + "input_data"
+    os.path.abspath(__file__)) + os.sep + "input_files"
+print(default_input_path)
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+_FILES_TO_DOWNLOAD = None
 
 
 # Generating geoID by taking Geographical area as input
 def _add_geo_id(df: pd.DataFrame) -> pd.DataFrame:
     short_forms = get_states()
-    df['Short_Form'] = df['Geographic Area'].str.replace(" ", "").\
+    df['Short_Form'] = df['Geographic Area'].str.title()
+    df['Short_Form'] = df['Short_Form'].str.replace(" ", "").replace(",", "").\
         apply(lambda row: short_forms.get(row, row))
     USSTATE_MAP.update({'US': 'country/USA'})
     df['geo_ID'] = df['Short_Form'].apply(
@@ -435,6 +453,94 @@ def _clean_county_2010_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def _clean_county_2022_csv_file(df: pd.DataFrame) -> pd.DataFrame:
+    '''
+    This Python Script Loads csv datasets
+    from 2010-2020 on a County Level,
+    cleans it and create a cleaned csv
+
+    Arguments:
+        df (DataFrame) : DataFrame of csv dataset
+
+    Returns:
+        df (DataFrame) : Transformed DataFrame for csv dataset.
+    '''
+    # filter by agegrp = 0
+    df = df.query("YEAR not in [1]")
+    df = df.query("AGEGRP == 0")
+    # filter years 3 - 14
+    df['YEAR'] = df['YEAR'].astype(str)
+    conversion_of_year_to_value = {
+        '2': '2020',
+        '3': '2021',
+        '4': '2022',
+        '5': '2023'
+    }
+    df = df.replace({'YEAR': conversion_of_year_to_value})
+    df.insert(6, 'geo_ID', 'geoId/', True)
+    df['geo_ID'] = 'geoId/' +(df['STATE'].map(str)).str.zfill(2) + \
+        (df['COUNTY'].map(str)).str.zfill(3)
+    df['AGEGRP'] = df['AGEGRP'].astype(str)
+    # Replacing the numbers with more understandable metadata headings
+    conversion_of_agebracket_to_value = {
+        '1': '0To4Years',
+        '2': '5To9Years',
+        '3': '10To14Years',
+        '4': '15To19Years',
+        '5': '20To24Years',
+        '6': '25To29Years',
+        '7': '30To34Years',
+        '8': '35To39Years',
+        '9': '40To44Years',
+        '10': '45To49Years',
+        '11': '50To54Years',
+        '12': '55To59Years',
+        '13': '60To64Years',
+        '14': '65To69Years',
+        '15': '70To74Years',
+        '16': '75To79Years',
+        '17': '80To84Years',
+        '18': '85OrMoreYears'
+    }
+    df = df.replace({"AGEGRP": conversion_of_agebracket_to_value})
+    # drop unwanted columns
+    df.drop(columns=['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME'], \
+        inplace=True)
+    df = df.loc[:, :'NAC_FEMALE']
+    df['Year'] = df['YEAR']
+    df.drop(columns=['YEAR'], inplace=True)
+    df['WhiteAlone'] = df['WA_MALE'].astype(int) + df['WA_FEMALE'].astype(int)
+    df['BlackOrAfricanAmericanAlone'] = df['BA_MALE'].astype(int)\
+        +df['BA_FEMALE'].astype(int)
+    df['AmericanIndianAndAlaskaNativeAlone'] = df['IA_MALE'].astype(int)\
+        +df['IA_FEMALE'].astype(int)
+    df['AsianAlone'] = df['AA_MALE'].astype(int) + df['AA_FEMALE'].astype(int)
+    df['NativeHawaiianAndOtherPacificIslanderAlone'] = df['NA_MALE']\
+        .astype(int)+df['NA_FEMALE'].astype(int)
+    df['TwoOrMoreRaces'] = df['TOM_MALE'].astype(int)+\
+        df['TOM_FEMALE'].astype(int)
+    df['WhiteAloneOrInCombinationWithOneOrMoreOtherRaces'] = df['WAC_MALE']\
+        .astype(int)+ df['WAC_FEMALE'].astype(int)
+    df['BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces']\
+         = df['BAC_MALE'].astype(int)+df['BAC_FEMALE'].astype(int)
+    df['AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMore'+\
+        'OtherRaces']= df['IAC_MALE'].astype(int)+df['IAC_FEMALE'].astype(int)
+    df['AsianAloneOrInCombinationWithOneOrMoreOtherRaces'] = df[
+        'AAC_MALE'].astype(int) + df['AAC_FEMALE'].astype(int)
+    df['NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOr'+\
+        'MoreOtherRaces']= df['NAC_MALE']\
+            .astype(int)+df['NAC_FEMALE'].astype(int)
+    df.drop(columns=[
+        'AGEGRP', 'TOT_POP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE', 'WA_FEMALE',
+        'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE', 'AA_FEMALE',
+        'NA_MALE', 'NA_FEMALE', 'TOM_MALE', 'TOM_FEMALE', 'WAC_MALE',
+        'WAC_FEMALE', 'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE',
+        'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE'
+    ],
+            inplace=True)
+    return df
+
+
 def _clean_csv2_file(df: pd.DataFrame) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a csv file format.
@@ -702,6 +808,10 @@ class CensusUSAPopulationByRace:
                 df = _clean_xls_file(df, file)
         elif ".csv" in file:
             if "srh" in file:
+                # csv_data = []
+                # with open(file, 'r') as csv_file:
+                #     for line in csv_file:
+                #         digit_cnt = 0
                 df = pd.read_csv(file)
                 df["Year"] = "19" + file[-6:-4]
                 df = _clean_csv2_file(df)
@@ -724,8 +834,28 @@ class CensusUSAPopulationByRace:
                     df['geo_ID'].map(str)).str[:len('geoId/NN')]
                 df_state = df_state.groupby(['Year', 'geo_ID']).sum().\
                     reset_index()
-                df = df.append(df_state, ignore_index=True)
-                df = df.append(df_national, ignore_index=True)
+                df = pd.concat([df, df_state], ignore_index=True)
+                df = pd.concat([df, df_national], ignore_index=True)
+                float_col = df.select_dtypes(include=['float64'])
+                for col in float_col.columns.values:
+                    df[col] = df[col].astype('int64')
+
+            elif "cc-est2023" in file:
+                df = pd.read_csv(file, encoding='ISO-8859-1', low_memory=False)
+                df = _clean_county_2022_csv_file(df)
+                # aggregating County data to obtain National data for 2020-2022
+                df_national = df.copy()
+                df_national['geo_ID'] = "country/USA"
+                df_national = df_national.groupby(['Year','geo_ID']).sum().\
+                    reset_index()
+                # aggregating County data to obtain State data for 2020-2022
+                df_state = df.copy()
+                df_state['geo_ID'] = (
+                    df['geo_ID'].map(str)).str[:len('geoId/NN')]
+                df_state = df_state.groupby(['Year', 'geo_ID']).sum().\
+                    reset_index()
+                df = pd.concat([df, df_state], ignore_index=True)
+                df = pd.concat([df, df_national], ignore_index=True)
                 float_col = df.select_dtypes(include=['float64'])
                 for col in float_col.columns.values:
                     df[col] = df[col].astype('int64')
@@ -786,10 +916,10 @@ class CensusUSAPopulationByRace:
                 "InCombinationWithOneOrMoreOtherRaces",\
                 "Count_Person_AsianOrPacificIslander",\
                 "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"])
-            self.df = self.df.append(df, ignore_index=True)
+            self.df = pd.concat([self.df, df], ignore_index=True)
 
         else:
-            self.df = self.df.append(df, ignore_index=True)
+            self.df = pd.concat([self.df, df], ignore_index=True)
         self.df['Year'] = pd.to_numeric(self.df['Year'])
         self.df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
         self.df = self.df[["Year","geo_ID",
@@ -815,14 +945,25 @@ class CensusUSAPopulationByRace:
         df_national_state_2000 = self.df[(self.df["Year"] >= 2000) &
                                          ((self.df["geo_ID"].str.len() <= 9) |
                                           (self.df["geo_ID"] == "country/USA"))]
+        #print("before delete", df_before_2000.shape)
+        df_before_2000 = df_before_2000.drop_duplicates(
+            subset=['geo_ID', 'Year'], keep='last')
+        #print("After delete", df_before_2000.shape)
         df_before_2000.to_csv(os.path.join(
             self.cleaned_csv_file_path,
             "USA_Population_Count_by_Race_before_2000.csv"),
                               index=False)
+        #print("")
+        #Added by Shamim to resolve 2020 inconsistent data remove
+        df_county_after_2000 = df_county_after_2000.drop_duplicates(
+            subset=['geo_ID', 'Year'], keep='last')
         df_county_after_2000.to_csv(os.path.join(
             self.cleaned_csv_file_path,
             "USA_Population_Count_by_Race_county_after_2000.csv"),
                                     index=False)
+        #Added by Shamim to resolve 2020 inconsistent data remove
+        df_national_state_2000 = df_national_state_2000.drop_duplicates(
+            subset=['geo_ID', 'Year'], keep='last')
         df_national_state_2000.to_csv(os.path.join(
             self.cleaned_csv_file_path,
             "USA_Population_Count_by_Race_National_state_2000.csv"),
@@ -835,12 +976,23 @@ class CensusUSAPopulationByRace:
         cleaned CSV file, MCF file and TMCF file.
         """
         for file in self.input_files:
+            print(file)
+            if 'USCountywv90.txt' in file:
+                pass
             df = self._load_data(file)
             self._transform_data(df)
+
         name = "USA_Population_Count_by_Race_before_2000"
         generator_df=pd.read_csv\
             (os.path.join(self.cleaned_csv_file_path,
                 "USA_Population_Count_by_Race_before_2000.csv"))
+        #print("Before delete ", generator_df.shape)
+        generator_df = generator_df[generator_df['geo_ID'].str.len() > 1]
+        #print("After delete ", generator_df.shape)
+        generator_df.to_csv(os.path.join(
+            self.cleaned_csv_file_path,
+            "USA_Population_Count_by_Race_before_2000.csv"),
+                            index=False)
         self._generate_mcf(generator_df.columns, name)
         self._generate_tmcf(generator_df.columns, name)
 
@@ -855,6 +1007,7 @@ class CensusUSAPopulationByRace:
         generator_df=pd.read_csv\
             (os.path.join(self.cleaned_csv_file_path,
             "USA_Population_Count_by_Race_National_state_2000.csv"))
+
         self._generate_mcf(generator_df.columns, name)
         self._generate_tmcf(generator_df.columns, name)
 
@@ -951,18 +1104,163 @@ class CensusUSAPopulationByRace:
 # The outputs are loaded into
 
 
+def _resolve_pe_11(file_name: str, _url: str) -> pd.DataFrame:
+    """
+    This method cleans the dataframe loaded from a csv file format.
+
+    Arguments:
+        file_path (str) : File path of csv dataset
+
+    Returns:
+        df (DataFrame) : Transformed DataFrame for csv dataset.
+    """
+    year = file_name[-8:-4]
+    if int(year) < 1960:
+        cols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        df = pd.read_csv(_url, names=cols)
+        df = df[df["0"].str.contains("All ages", na=False)]
+        df['Year'] = year
+        df['Geographic Area'] = "United States"
+    else:
+        cols = [
+            "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
+        ]
+        df = pd.read_csv(_url, names=cols, skiprows=2)
+        df = df[df["0"].str.contains("All ages", na=False)]
+        df['Year'] = year
+        df['Geographic Area'] = "United States"
+    return df
+
+
+def add_future_year_urls():
+    global _FILES_TO_DOWNLOAD
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
+        _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    urls_to_scan = [
+        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
+    ]
+    if dt.now().year < 2023:
+        YEAR = dt.now().year
+        for url in urls_to_scan:
+            url_to_check = url.format(YEAR=YEAR)
+            try:
+                check_url = requests.head(url_to_check)
+                if check_url.status_code == 200:
+                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+
+            except:
+                logging.error(f"URL is not accessable {url_to_check}")
+
+
+def download_files():
+    global _FILES_TO_DOWNLOAD
+    session = requests.session()
+    max_retry = 5
+    for file_to_dowload in _FILES_TO_DOWNLOAD:
+        file_name = None
+        download_local_path = _INPUT_FILE_PATH
+        _url = file_to_dowload['download_path']
+        if 'file_name' in file_to_dowload and len(
+                file_to_dowload['file_name'] > 5):
+            file_name = file_to_dowload['file_name']
+        else:
+            file_name = _url.split('/')[-1]
+        retry_number = 0
+
+        is_file_downloaded = False
+        while is_file_downloaded == False:
+            try:
+                if ".csv" in _url:
+                    if "st-est" in _url or 'SC-EST' in _url:
+                        file_name = file_name.replace(".csv", ".xlsx")
+                        df = pd.read_csv(_url, on_bad_lines='skip', header=0)
+                        df.to_excel(download_local_path + os.sep + file_name\
+                            ,index=False,engine='xlsxwriter')
+                    elif "pe-11" in _url:
+                        df = _resolve_pe_11(file_name, _url)
+                        df.to_csv(download_local_path + os.sep + file_name,
+                                  index=False)
+                    elif "pe-19" in _url:
+                        file_name = file_name.replace(".csv", ".xlsx")
+                        df = pd.read_csv(_url,
+                                         skiprows=5,
+                                         on_bad_lines='skip',
+                                         header=0)
+                        df.to_excel(download_local_path + os.sep + file_name\
+                            ,index=False,engine='xlsxwriter')
+                    elif "co-asr-7079" in _url or "pe-02" in _url:
+                        file_name = file_name.replace(".csv", ".xlsx")
+                        cols=['Year','FIPS','Race/Sex',1,2,3,4,5,6,7,8,9,10,11,12,\
+                            13,14,15,16,17,18]
+                        if "pe-02" in _url:
+                            df = pd.read_csv(_url, skiprows=7, on_bad_lines='skip', \
+                                names=cols)
+                        else:
+                            df = pd.read_csv(_url,
+                                             on_bad_lines='skip',
+                                             names=cols)
+                        df.to_excel(download_local_path + os.sep + file_name,\
+                            index=False,engine='xlsxwriter')
+                    elif "co-est00int-alldata" in _url or "CC-EST2020-ALLDATA" in _url or "cc-est2022-all":
+                        df = pd.read_csv(_url,
+                                         on_bad_lines='skip',
+                                         encoding='ISO-8859-1',
+                                         low_memory=False)
+                        df.to_csv(download_local_path + os.sep + file_name,
+                                  index=False)
+
+                elif ".txt" in _url and "srh" in _url:
+                    if "crh" in _url:
+                        file_name = file_name.replace("crh", "USCounty")
+                        df = pd.read_table(_url,
+                                           index_col=False,
+                                           engine='python')
+                        df.to_csv(download_local_path + os.sep + file_name,
+                                  index=False)
+                    else:
+                        cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                        df = pd.read_table(_url,index_col=False,delim_whitespace=True\
+                            ,engine='python',skiprows=14,names=cols)
+                        file_name = file_name.replace(".txt", ".csv")
+                        df.to_csv(download_local_path + os.sep + file_name,
+                                  index=False)
+
+                elif "xlsx" in _url:
+                    df = pd.read_excel(_url, skiprows=2, header=0)
+                    df.to_excel(download_local_path + os.sep + file_name\
+                        ,index=False,header=False,engine='xlsxwriter')
+                logging.info(f"Downloaded file : {_url}")
+                is_file_downloaded = True
+
+            except Exception as e:
+                logging.error(f"Retry file download {_url} - {e}")
+                time.sleep(5)
+                retry_number += 1
+                if retry_number > max_retry:
+                    logging.error(f"Error downloading {_url}")
+                    logging.error("Exit from script")
+                    sys.exit(0)
+    return True
+
+
 def main(_):
-    input_path = _FLAGS.input_path
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
-    # Defining Output file names
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "output")
-    mcf_path = data_file_path
-    tmcf_path = data_file_path
-    loader = CensusUSAPopulationByRace(ip_files, data_file_path, mcf_path,
-                                       tmcf_path)
-    loader.process()
+    add_future_year_urls()
+    download_status = download_files()
+    if download_status:
+        #if True:
+        # add the process steps as your script
+        input_path = _FLAGS.input_path
+        ip_files = os.listdir(input_path)
+        ip_files = [input_path + os.sep + file for file in ip_files]
+        # Defining Output file names
+        data_file_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "output")
+        mcf_path = data_file_path
+        tmcf_path = data_file_path
+        loader = CensusUSAPopulationByRace(ip_files, data_file_path, mcf_path,
+                                           tmcf_path)
+        loader.process()
+        logging.info("completed")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,33 @@
+"(CO-99-11)  Population Estimates for Counties by Race and Hispanic Origin:  July 1, 1999"
+"Source:  Population Estimates Program, Population Division, U.S. Census Bureau, Washington, DC  20233"
+"Contact:  Demographic Call Center Staff, 1-866-758-1060 "
+          pop@census.gov (please include a phone number with email correspondence)
+"Internet Release Date:  August 30, 2000"
+                                             Total    Total    White    White    Total    Total    Total    Total
+  FIPS                                                White Hispanic     non-    Black American  Asian & Hispanic
+ State                                                               Hispanic            Indian  Pacific         
+   and                                                                                 & Alaska Islander         
+County Area Name                                                                         Native                  
+  Code                                                                                                           
+ 50000     VERMONT                          593740   584176     4726   579450     3184     1459     4921     5128
+ 50001 Addison County                        35440    34878      284    34594      212       72      278      308
+ 50003 Bennington County                     35965    35555      269    35286      154       24      232      274
+ 50005 Caledonia County                      28821    28546      113    28433       70       85      120      120
+ 50007 Chittenden County                    143947   139969     1537   138432     1400      282     2296     1679
+ 50009 Essex County                           6644     6585       36     6549       29       13       17       36
+ 50011 Franklin County                       44431    43551      191    43360      162      505      213      309
+ 50013 Grand Isle County                      6370     6293       36     6257       39       23       15       37
+ 50015 Lamoille County                       21935    21731      124    21607       51       50      103      147
+ 50017 Orange County                         27871    27612      136    27476       81       61      117      145
+ 50019 Orleans County                        25496    25269      126    25143       78       70       79      128
+ 50021 Rutland County                        62407    61824      331    61493      220       53      310      350
+ 50023 Washington County                     56289    55669      856    54813      216       75      329      873
+ 50025 Windham County                        42670    41937      369    41568      264       63      406      389
+ 50027 Windsor County                        55454    54757      318    54439      208       83      406      333
+Note:  Hispanics can be of any race.
+An explanation of the race and Hispanic origin categories used in this table can be found at
+www.census.gov/population/estimates/rho.txt
+The estimates presented here were produced by a method which is still in a developmental stage.  They
+may not be accurate for populations which are very small or have unusual race distributions and they may not
+reflect recent changes in the distribution of the population with respect to race and Hispanic origin.  These
+figures should be used with caution.

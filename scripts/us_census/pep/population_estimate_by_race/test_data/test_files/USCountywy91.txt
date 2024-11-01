@@ -1,0 +1,42 @@
+"(CO-99-11)  Population Estimates for Counties by Race and Hispanic Origin:  July 1, 1991"
+"Source:  Population Estimates Program, Population Division, U.S. Census Bureau, Washington, DC  20233"
+"Contact:  Demographic Call Center Staff, 1-866-758-1060 "
+          pop@census.gov (please include a phone number with email correspondence)
+"Internet Release Date:  August 30, 2000"
+                                             Total    Total    White    White    Total    Total    Total    Total
+  FIPS                                                White Hispanic     non-    Black American  Asian & Hispanic
+ State                                                               Hispanic            Indian  Pacific         
+   and                                                                                 & Alaska Islander         
+County Area Name                                                                         Native                  
+  Code                                                                                                           
+ 56000     WYOMING                          457739   440866    24865   416001     3760    10036     3077    26490
+ 56001 Albany County                         30816    29639     1904    27735      260      237      680     1987
+ 56003 Big Horn County                       10553    10466      554     9912        2       62       23      562
+ 56005 Campbell County                       29825    29302      842    28460       48      369      106      930
+ 56007 Carbon County                         16370    16017     2229    13788      110      140      103     2303
+ 56009 Converse County                       11130    10976      561    10415       15      103       36      573
+ 56011 Crook County                           5305     5274       23     5251        0       28        3       23
+ 56013 Fremont County                        34096    27450      923    26527       56     6486      104     1364
+ 56015 Goshen County                         12395    12256     1083    11173       24       99       16     1101
+ 56017 Hot Springs County                     4682     4555       51     4504       13      111        3       67
+ 56019 Johnson County                         6197     6123       69     6054        1       65        8       79
+ 56021 Laramie County                        73706    69932     7134    62798     2261      607      906     7573
+ 56023 Lincoln County                        12932    12802      247    12555        8       73       49      261
+ 56025 Natrona County                        61878    60612     2157    58455      492      458      316     2325
+ 56027 Niobrara County                        2421     2393       31     2362        9       17        2       34
+ 56029 Park County                           23268    23005      819    22186       21      135      107      837
+ 56031 Platte County                          8133     8098      394     7704        4       23        8      398
+ 56033 Sheridan County                       23575    23219      426    22793       41      216       99      455
+ 56035 Sublette County                        4958     4867       61     4806        5       72       14       61
+ 56037 Sweetwater County                     39773    38853     3562    35291      301      332      287     3631
+ 56039 Teton County                          11784    11552      167    11385       44      120       68      226
+ 56041 Uinta County                          19160    18913      791    18122       29      135       83      826
+ 56043 Washakie County                        8304     8178      755     7423       13       67       46      791
+ 56045 Weston County                          6478     6384       82     6302        3       81       10       83
+Note:  Hispanics can be of any race.
+An explanation of the race and Hispanic origin categories used in this table can be found at
+www.census.gov/population/estimates/rho.txt
+The estimates presented here were produced by a method which is still in a developmental stage.  They
+may not be accurate for populations which are very small or have unusual race distributions and they may not
+reflect recent changes in the distribution of the population with respect to race and Hispanic origin.  These
+figures should be used with caution.

@@ -1,0 +1,24 @@
+"(CO-99-11)  Population Estimates for Counties by Race and Hispanic Origin:  July 1, 1991"
+"Source:  Population Estimates Program, Population Division, U.S. Census Bureau, Washington, DC  20233"
+"Contact:  Demographic Call Center Staff, 1-866-758-1060 "
+          pop@census.gov (please include a phone number with email correspondence)
+"Internet Release Date:  August 30, 2000"
+                                             Total    Total    White    White    Total    Total    Total    Total
+  FIPS                                                White Hispanic     non-    Black American  Asian & Hispanic
+ State                                                               Hispanic            Indian  Pacific         
+   and                                                                                 & Alaska Islander         
+County Area Name                                                                         Native                  
+  Code                                                                                                           
+ 44000     RHODE ISLAND                    1003990   935825    38024   897801    44160     4323    19682    48222
+ 44001 Bristol County                        49038    48469      703    47766      192       53      324      733
+ 44003 Kent County                          161716   158941     1746   157195     1087      307     1381     1882
+ 44005 Newport County                        88031    83016     1575    81441     3506      366     1143     1837
+ 44007 Providence County                    593750   537658    32983   504675    38277     2523    15292    42619
+ 44009 Washington County                    111455   107741     1017   106724     1098     1074     1542     1151
+Note:  Hispanics can be of any race.
+An explanation of the race and Hispanic origin categories used in this table can be found at
+www.census.gov/population/estimates/rho.txt
+The estimates presented here were produced by a method which is still in a developmental stage.  They
+may not be accurate for populations which are very small or have unusual race distributions and they may not
+reflect recent changes in the distribution of the population with respect to race and Hispanic origin.  These
+figures should be used with caution.
