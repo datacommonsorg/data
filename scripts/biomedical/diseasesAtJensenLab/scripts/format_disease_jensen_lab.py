@@ -15,7 +15,7 @@
 Author: Suhana Bedi
 Date: 08/12/2023
 Edited By: Samantha Piekos
-Last Edited: 02/29/24
+Last Edited: 10/31/24
 Name: format_disease_jensen_lab
 Description: converts a three input .txt files from Diseases at
 Jensen Lab into output .csv files with formatted dcids, 
@@ -107,22 +107,33 @@ def check_for_illegal_charc(s):
 
 def check_for_dcid(row):
     check_for_illegal_charc(str(row['dcid']))
-    check_for_illegal_charc(str(row['GeneDcid']))
-    check_for_illegal_charc(str(row['ICD10']))
+    check_for_illegal_charc(str(row['DOID_dcid']))
+    check_for_illegal_charc(str(row['ICD10_dcid']))
+    check_for_illegal_charc(str(row['Gene_dcid']))
     return row
 
 
 def format_disease_gene_cols(df, data_type):
+	# handle exceptions in Gene names
     df['Gene'] = df['Gene'].map(HGNC_DICT).fillna(df['Gene'])
-    df['Gene'] = df['Gene'].str.replace('@', '')
-    df['GeneDcid'] = 'bio/' + df['Gene'].astype(str)
-    df['GeneDcid'] = df['GeneDcid'].str.replace('-', '_')
-    df['DOID'] = 'dcid:bio/' + df['DOID'].str.replace(':', '_')
-    df['DOID'] = df['DOID'].replace('dcid:bio/nan', np.nan)
-    df['ICD10'] = df['ICD10'].str.replace(':', '/')
-    df['DiseaseDcid'] = df['DOID'].fillna('dcid:'+df['ICD10'])
-    df['dcid'] = 'bio/' + df['Disease'] + '_' + df['Gene'] + data_type
-    df['dcid'] = df['dcid'].str.replace(':', '_')
+    df['Gene'] = df['Gene'].str.replace('@', '_Cluster')
+    # generate gene dcid
+    df['Gene_dcid'] = 'bio/' + df['Gene'].astype(str)
+    # generate mappings to existing Disease or ICD10 nodes
+    df['DOID_dcid'] = 'bio/' + df['DOID'].str.replace(':', '_')
+    df['DOID_dcid'] = df['DOID_dcid'].replace('bio/nan', np.nan)
+    df['ICD10_dcid'] = df['ICD10'].str.replace(':', '/')
+    # use Disease nodes as default diseaseID mapping
+    # use ICD10 nodes as diseaseID mapping in cases where Disease mapping does not exist
+    df['Disease_dcid'] = df['DOID_dcid']
+    df['Disease_dcid'] = df['Disease_dcid'].fillna(df['ICD10_dcid'])
+    df['Disease_dcid'] = 'dcid:' + df['Disease_dcid']
+    # generate dcid for DiseaseGeneAssociation nodes
+    df['dcid'] = 'bio/' + df['Disease'].astype(str).str.replace(':', '_', regex=False) + '_' + df['Gene'].astype(str) + '_association'
+    # format name for DiseaseGeneAssociation nodes
+    df['name'] = df['Disease_Name'].astype(str) + ' and ' + df['Gene'].astype(str) + ' association'
+    # drop columns not used in import
+    df = df.drop(['Disease'], axis=1)
     return df
 
 
@@ -150,17 +161,17 @@ def format_dcids(df, data_type):
 
 def format_data_type_specific_info(df, data_type):
 	if data_type == 'experiments':
-		df['associationType'] = 'dcs:AssociationTypeExperiment'
+		df['associationType'] = 'dcs:AssociationSourceExperiment'
 		df['source-score'] = df['source-score'].str.split('=')
 		df['source-score'] = np.where(df['source-score'] == df['source-score'],df['source-score'].str[1],np.nan)
 		df.update('"' +
 				  df[['Disease_Name', 'score-db']].astype(str) + '"')
 	if data_type=='knowledge':
-		df['associationType'] = 'dcs:AssociationTypeManualCuration'
+		df['associationType'] = 'dcs:AssociationSourceKnowledge'
 		df.update('"' +
 				  df[['Disease_Name', 'score-db']].astype(str) + '"')
 	if data_type =='textmining':
-		df['associationType'] = 'dcs:AssociationTypeTextMining'
+		df['associationType'] = 'dcs:AssociationSourceTextMining'
 		df.update('"' +
 				  df[['Disease_Name', 'url']].astype(str) + '"')
 	return df
@@ -180,7 +191,10 @@ def clean_data(df, data_type):
 	df_gene = df_tm.loc[df_tm['RNA_type']=='Gene'] ## filter out genes from df with non coding RNA
 	df_tm = df_tm[~df_tm['RNA_type'].str.contains("Gene")]
 	df_gene.drop(['RNA_type'],axis=1,inplace=True)
-	df = df._append(df_gene).reset_index(drop=True)
+	df = df.dropna(axis=1, how='all')  # Drop columns with all NA values from df
+	df_gene = df_gene.dropna(axis=1, how='all')  # Drop columns with all NA values from df_gene
+	df = pd.concat([df, df_gene], ignore_index=True)
+	df = pd.concat([df, df_gene], ignore_index=True)
 	df = format_data_type_specific_info(df, data_type)
 	df_tm = format_data_type_specific_info(df_tm, data_type)
 	return df, df_tm
