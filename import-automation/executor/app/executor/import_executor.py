@@ -28,6 +28,7 @@ from typing import Callable, Dict, Iterable, List, Optional, Tuple
 
 from app import configs
 from app import utils
+from app.executor import cloud_run_simple_import
 from app.executor import import_target
 from app.service import email_notifier
 from app.service import file_uploader
@@ -35,10 +36,12 @@ from app.service import github_api
 from app.service import import_service
 
 # Email address for status messages.
-_SUCCESS_EMAIL_ADDR = "datacommons+release@google.com"
-_FAILURE_EMAIL_ADDR = "datacommons-alerts+importautomation@google.com"
+_DEBUG_EMAIL_ADDR = 'datacommons-debug+imports@google.com'
+_ALERT_EMAIL_ADDR = 'datacommons-alerts+imports@google.com'
 
-_SEE_LOGS_MESSAGE = "Please find logs in the Logs Explorer of the GCP project associated with Import Automation."
+_SEE_LOGS_MESSAGE = (
+    'Please find logs in the Logs Explorer of the GCP project associated with'
+    ' Import Automation.')
 
 
 @dataclasses.dataclass
@@ -81,19 +84,21 @@ class ImportExecutor:
       importer: ImportServiceClient object for invoking the Data Commons
         importer.
       local_repo_dir: (Only applies to Updates) The full path to the GitHub
-        repository on local. If provided, the local_repo_dir is used for Update 
-        related operations instead of cloning a fresh version (latest master 
+        repository on local. If provided, the local_repo_dir is used for Update
+        related operations instead of cloning a fresh version (latest master
         branch) of the repo on GitHub. The path shoud be provided to the root
         directory of the repo, e.g. `<base_path_on_disk>/data`.
   """
 
-    def __init__(self,
-                 uploader: file_uploader.FileUploader,
-                 github: github_api.GitHubRepoAPI,
-                 config: configs.ExecutorConfig,
-                 notifier: email_notifier.EmailNotifier = None,
-                 importer: import_service.ImportServiceClient = None,
-                 local_repo_dir: str = ""):
+    def __init__(
+        self,
+        uploader: file_uploader.FileUploader,
+        github: github_api.GitHubRepoAPI,
+        config: configs.ExecutorConfig,
+        notifier: email_notifier.EmailNotifier = None,
+        importer: import_service.ImportServiceClient = None,
+        local_repo_dir: str = '',
+    ):
         self.uploader = uploader
         self.github = github
         self.config = config
@@ -152,8 +157,11 @@ class ImportExecutor:
             if self.local_repo_dir:
                 # Do not clone/download from GitHub. Instead, use the
                 # provided local path to the repo's root directory.
-                logging.info('%s: using local repo at: %s',
-                             absolute_import_name, self.local_repo_dir)
+                logging.info(
+                    '%s: using local repo at: %s',
+                    absolute_import_name,
+                    self.local_repo_dir,
+                )
                 repo_dir = self.local_repo_dir
             else:
                 # Clone/download from GitHub.
@@ -183,7 +191,8 @@ class ImportExecutor:
                             repo_dir=repo_dir,
                             relative_import_dir=import_dir,
                             absolute_import_dir=absolute_import_dir,
-                            import_spec=spec)
+                            import_spec=spec,
+                        )
                     except Exception:
                         raise ExecutionError(
                             ExecutionResult('failed', executed_imports,
@@ -238,11 +247,13 @@ class ImportExecutor:
             executed_imports = []
             for relative_dir, spec in imports_to_execute:
                 try:
-                    self._import_one(repo_dir=repo_dir,
-                                     relative_import_dir=relative_dir,
-                                     absolute_import_dir=os.path.join(
-                                         repo_dir, relative_dir),
-                                     import_spec=spec)
+                    self._import_one(
+                        repo_dir=repo_dir,
+                        relative_import_dir=relative_dir,
+                        absolute_import_dir=os.path.join(
+                            repo_dir, relative_dir),
+                        import_spec=spec,
+                    )
 
                 except Exception:
                     raise ExecutionError(
@@ -289,7 +300,7 @@ class ImportExecutor:
                 self.notifier.send(
                     subject=f'Import Automation Success - {import_name}',
                     body=msg,
-                    receiver_addresses=[_SUCCESS_EMAIL_ADDR],
+                    receiver_addresses=[_DEBUG_EMAIL_ADDR],
                 )
 
         except Exception as exc:
@@ -301,12 +312,17 @@ class ImportExecutor:
                 self.notifier.send(
                     subject=f'Import Automation Failure - {import_name}',
                     body=msg,
-                    receiver_addresses=[_FAILURE_EMAIL_ADDR],
+                    receiver_addresses=[_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR],
                 )
             raise exc
 
-    def _import_one_helper(self, repo_dir: str, relative_import_dir: str,
-                           absolute_import_dir: str, import_spec: dict) -> None:
+    def _import_one_helper(
+        self,
+        repo_dir: str,
+        relative_import_dir: str,
+        absolute_import_dir: str,
+        import_spec: dict,
+    ) -> None:
         """Helper for _import_one.
 
     Args: See _import_one.
@@ -317,6 +333,7 @@ class ImportExecutor:
                 utils.download_file(url, absolute_import_dir,
                                     self.config.file_download_timeout)
 
+        version = _clean_time(utils.pacific_time())
         with tempfile.TemporaryDirectory() as tmpdir:
             requirements_path = os.path.join(absolute_import_dir,
                                              self.config.requirements_filename)
@@ -333,21 +350,37 @@ class ImportExecutor:
 
             script_paths = import_spec.get('scripts')
             for path in script_paths:
-                process = _run_user_script(
-                    interpreter_path=interpreter_path,
-                    script_path=os.path.join(absolute_import_dir, path),
-                    timeout=self.config.user_script_timeout,
-                    args=self.config.user_script_args,
-                    cwd=absolute_import_dir,
-                    env=self.config.user_script_env,
-                )
-                _log_process(process=process)
-                process.check_returncode()
+                script_path = os.path.join(absolute_import_dir, path)
+                simple_job = cloud_run_simple_import.get_simple_import_job_id(
+                    import_spec, script_path)
+                if simple_job:
+                    # Running simple import as cloud run job.
+                    cloud_run_simple_import.cloud_run_simple_import_job(
+                        import_spec=import_spec,
+                        config_file=script_path,
+                        env=self.config.user_script_env,
+                        version=version,
+                        image=import_spec.get('image'),
+                    )
+                else:
+                    # Run import script locally.
+                    process = _run_user_script(
+                        interpreter_path=interpreter_path,
+                        script_path=script_path,
+                        timeout=self.config.user_script_timeout,
+                        args=self.config.user_script_args,
+                        cwd=absolute_import_dir,
+                        env=self.config.user_script_env,
+                    )
+                    _log_process(process=process)
+                    process.check_returncode()
 
         inputs = self._upload_import_inputs(
             import_dir=absolute_import_dir,
             output_dir=f'{relative_import_dir}/{import_spec["import_name"]}',
-            import_inputs=import_spec.get('import_inputs', []))
+            version=version,
+            import_inputs=import_spec.get('import_inputs', []),
+        )
 
         if self.importer:
             self.importer.delete_previous_output(relative_import_dir,
@@ -376,6 +409,7 @@ class ImportExecutor:
         self,
         import_dir: str,
         output_dir: str,
+        version: str,
         import_inputs: List[Dict[str, str]],
     ) -> import_service.ImportInputs:
         """Uploads the generated import data files.
@@ -396,7 +430,6 @@ class ImportExecutor:
         ImportInputs object containing the paths to the uploaded inputs.
     """
         uploaded = import_service.ImportInputs()
-        version = _clean_time(utils.pacific_time())
         for import_input in import_inputs:
             for input_type in self.config.import_input_types:
                 path = import_input.get(input_type)
@@ -483,8 +516,8 @@ def _run_with_timeout_async(args: List[str],
   """
     try:
         logging.info(
-            f'Launching async command: {args} with timeout {timeout} in {cwd}, env: {env}'
-        )
+            f'Launching async command: {args} with timeout {timeout} in {cwd}, env:'
+            f' {env}')
         start_time = time.time()
         stdout = []
         stderr = []
