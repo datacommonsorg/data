@@ -7,7 +7,7 @@ Node: E:mesh_qual_concept->E2
 typeOf: dcs:MeSHConcept
 dcid: C:mesh_qual_concept->Concept_dcid
 name: C:mesh_qual_concept->ConceptName
-description: C:mesh_qual_concept->ScopeNote
+hasMeSHQualifier: E:mesh_qual_concept->E1
 identifier: C:mesh_qual_concept->ConceptUI
 isPreferredConcept: C:mesh_qual_concept->IsPreferredConcept
-hasMeSHQualifier: E:mesh_qual_concept->E1
+scopeNote: C:mesh_qual_concept->ScopeNote
