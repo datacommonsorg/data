@@ -4,9 +4,9 @@
 1. [About the Dataset](#about-the-dataset)
    1. [Download Data](#download-data)
    2. [Overview](#overview)
-   3. Notes and Caveats](#notes-and-caveats)
+   3. [Notes and Caveats](#notes-and-caveats)
    4. [dcid Generation](#dcid-generation)
-   5. [License](#license
+   5. [License](#license)
    6. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
 2. [About the import](#about-the-import)
    1. [Artifacts](#artifacts)
@@ -46,12 +46,14 @@ The disease for each association is indicated either by either a Disease Ontolog
 
 As you can see there is a cascading representation of the associated ICD10 codes of 'ICD10:N', 'ICD10:N0', 'ICD10:N04' and a second tree of 'ICD10:N3', 'ICD10:N39', 'ICD10:399'. 'ICD10:N', 'ICD10:N0', 'ICD10:N3', and 'ICD10:root' all do not correspond to any ICD10 codes and thus these lines were removed along with any other line in which an ICD10 code had one or two digits or was root following 'ICD10:'. Then for this particular association, the lowest unique tree leaves were taken in as associations with the Gene 'HSP86'. In this case that is 'ICD10:N04' and 'ICD10:N399'. The remaining line with 'ICD10:N39' was discarded as being a less specific referal than 'ICD10:N399'. Finally, the ICD10 codes were reformatted as necessary so that they follow the proper convention. There is a '.' following the regex string of [A-Z][0-9][0-9]. So, codes like 'ICD10:N399' were converted into the appropriate format of 'ICD10:N39.9' through insertion of the missing '.'.
 
+The DISEASES datasource is composed of three datasets that were generated using three distinct methods: experiment (experimental data), knowledge (manual curation), and textmining. The specific dataset from which the data is from (i.e. 'experiments', 'knowledge', or 'textmining') is indicated by the providence associated with each property value in the corresponding Disease, DiseaseGeneAssociation, Gene, or ICD10Code node. Also note that for each DiseaseGeneAssociation the link is between a Gene and a Disease represented by either a DOID or ICD10Code. Regardless of which the link is stored in the "diseaseID" property, which points to the corresponding Disease (in cases of DOID) or ICD10Code (in cases of ICD10 code) nodes.
+
 ### dcid Generation
 
 Dcids for DiseaseGeneAssociation nodes were generated as follow either:
-'bio/DOID_<DOID>_<geneSymbol>_<dataSource>'
-'bio/ICD10_<trailing_ICD10Code>_<geneSymbol>_<dataSource>'
-where the <DOID> and <trailing_ICD10Code> represent the id following the ':', <geneSymbol> represents the Gene's gene symbol and the dataSource is either 'experiments', 'knowledge', or 'textmining'. For example: `bio/DOID_0050177_SEMA3F_experiments` and `bio/DOID_0050736_SEMA3F_experiments`.
+'bio/DOID_<trailing_DOID>_<geneSymbol>
+'bio/ICD10_<trailing_ICD10Code>_<geneSymbol>
+where the <DOID> and <trailing_ICD10Code> represent the id following the ':', <geneSymbol> represents the Gene's gene symbol. For example: `bio/DOID_0050177_SEMA3F` and `bio/DOID_0050736_SEMA3F`.
 
 ### License
 
