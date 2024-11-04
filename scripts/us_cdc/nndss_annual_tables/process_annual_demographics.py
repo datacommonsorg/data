@@ -201,10 +201,6 @@ def clean_single_dataframe(df, year, table):
     diseases_map = diseases_map.drop_duplicates(keep='first')
     diseases_map = diseases_map[diseases_map['Replacement'] != 'NAN']
     diseases_map = diseases_map.dropna(subset=['name', 'dcid'])
-    print("table------", table)
-    print("year------", year)
-    if int(table) == 4 and int(year) == 2021:
-        print("dcid--------------", diseases_map['dcid'])
     diseases_map['variable'] = diseases_map['Replacement'] + ';' + diseases_map[
         'variable']
     diseases_map = diseases_map.drop(
