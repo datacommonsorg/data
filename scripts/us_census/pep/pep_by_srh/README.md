@@ -37,17 +37,15 @@ Origin
 
 ## Scripts
 ```
-download.sh
-```
-Above scipt creates necessary folders required for processing files and download's US 
-Census PEP files to folder download_files.
-
-
-```
 process.py
 ```
-Reads downloaded files from download_files folder, prepares consolidated 
+Above scipt creates necessary folders required for processing files and download's US 
+Census PEP files to folder input_files. And reads downloaded files from input_files folder, prepares consolidated 
 (National, State, County) output files for as-is (population_estimate_by_srh.csv) and aggregated (population_estimate_by_srh_agg.csv) in output_files folder
+
+### Import Procedure
+The below command will run process.py and generate output csv, mcf and tmcf. 
+`python3 script/us_census/pep/pep_by_srh/process.py`
 
 
 ```
@@ -55,3 +53,9 @@ generate_mcf.py
 generate_tmcf.py
 ```
 Generates mcf and tmcf files for both 'as-is' data processing and 'aggregated' data processing
+
+### Additional Notes
+
+We have modified the script for Automation setup, now it's not required to add the future URL's in input_url.jason file. Code will take care of future URL formation automatically.
+
+
