@@ -13,13 +13,26 @@
 # limitations under the License.
 
 import pandas as pd
+from six.moves import urllib
+import sys
+
+sys.path.insert(1, '../../../../util')
+from alpha2_to_dcid import COUNTRY_MAP
+from nuts_codes_names import NUTS1_CODES_NAMES
 
 
 def download_data(download_link):
     """Downloads raw data from Eurostat website and stores it in instance
     data frame.
     """
-    raw_df = pd.read_table(download_link)
+    urllib.request.urlretrieve(download_link, "demo_r_gind3.tsv.gz")
+    raw_df = pd.read_table("demo_r_gind3.tsv.gz")
+    # raw_df = pd.read_table("sample_data.tsv")
+
+    raw_df = raw_df.rename(columns=({
+        'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'
+    }))
+    raw_df['indic_de,geo\\time'] = raw_df['indic_de,geo\\time'].str.slice(2)
     return raw_df
 
 
@@ -74,7 +87,7 @@ def preprocess_data(raw_df):
 
     # Append extra space for all cells in value column that do not come with a note, so that we can split them without error.
     preprocessed_df.value = preprocessed_df.value.str.replace(
-        "([0-9:])$", lambda m: m.group(0) + ' ')
+        "([0-9:])$", lambda m: m.group(0) + ' ', regex=True)
 
     first_column_list = preprocessed_df.columns[0].rsplit(sep=",", maxsplit=1)
 
@@ -126,8 +139,10 @@ def clean_data(preprocessed_df, output_path):
 
     # replace colon with NaN.
     clean_df = clean_df.replace(':', '')
+    clean_df['geo'] = clean_df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
+        geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
+                                            else COUNTRY_MAP.get(geo, f'{geo}'))
 
-    clean_df['geo'] = 'dcid:nuts/' + clean_df['geo']
     # trim the space in the time column i.e. '2020 ' -> '2020'
     clean_df['time'] = clean_df['time'].astype('int32')
     original_names = [
@@ -136,8 +151,8 @@ def clean_data(preprocessed_df, output_path):
     ]
     new_names = [
         'geo', 'time', 'Count_Death',
-        'Count_BirthEvent_AsAFractionOf_Count_Person',
-        'Count_Death_AsAFractionOf_Count_Person', 'IncrementalCount_Person',
+        'Count_BirthEvent_AsAFractionOfCount_Person',
+        'Count_Death_AsAFractionOfCount_Person', 'IncrementalCount_Person',
         'GrowthRate_Count_Person', 'Count_Person', 'Count_BirthEvent'
     ]
     clean_df = clean_df[original_names]
@@ -151,7 +166,7 @@ def clean_data(preprocessed_df, output_path):
 
 
 if __name__ == '__main__':
-    download_link = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_gind3.tsv.gz"
+    download_link = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_gind3/?format=TSV&compressed=true"
     output_path = 'EurostatNUTS3_BirthDeathMigration.csv'
     raw_df = download_data(download_link)
     preprocessed_df = preprocess_data(raw_df)

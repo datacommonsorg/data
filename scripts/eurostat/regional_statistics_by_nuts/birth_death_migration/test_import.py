@@ -14,87 +14,61 @@
 
 import unittest
 import os
-from import_data import preprocess_data, clean_data
+from import_data import preprocess_data, clean_data, download_data
 import pandas as pd
+import tempfile
+import sys
+
+MODULE_DIR = os.path.dirname(__file__)
+sys.path.insert(0, MODULE_DIR)
+
+TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "sample_input")
+
+EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "sample_output")
 
 
-class TestPreprocess(unittest.TestCase):
-    maxDiff = None
+class TestProcess(unittest.TestCase):
+    """
+    TestPreprocess is inherting unittest class
+    properties which further requried for unit testing.
+    The test will be conducted for EuroStat BMI Sample Datasets,
+    It will be generating CSV, MCF and TMCF files based on the sample input.
+    Comparing the data with the expected files.
+    """
 
-    def _test_preprocess_output(self, dir_path: str):
-        """Generates a melted csv file, given an input data file.
-        Compares the expected.csv to the output.csv file
-        to make sure the function is performing as designed.
-        Args:
-            dir_path (str): the path of the directory containing:
-            data.tsv and expected.csv.
-        Returns:
-            str: expected output == actual output.
-        """
+    def __init__(self, methodName: str = ...) -> None:
+        super().__init__(methodName)
 
-        input_path = os.path.join(dir_path, "data.tsv")
-        output_path = os.path.join(dir_path, "output.csv")
-        expected_path = os.path.join(dir_path, "expected.csv")
-
-        if not os.path.exists(input_path):
-            self.fail(input_path + " doesn't exist!")
-        if not os.path.exists(expected_path):
-            self.fail(expected_path + " doesn't exist!")
-
-        # Generate the output csv file.
+        CLEANED_CSV_FILE_PATH = os.path.join(EXPECTED_FILES_DIR,
+                                             "test_output.csv")
+        input_path = os.path.join(TEST_DATASET_DIR, 'sample_data.tsv')
         input_df = pd.read_csv(input_path, sep='\s*\t\s*', engine='python')
-        preprocess_data(input_df).to_csv(output_path, index=False)
-        # Get the content from the csv file.
-        with open(output_path, 'r+') as actual_f:
-            actual: str = actual_f.read()
+        input_df = input_df.rename(
+            columns={'freq,indic_de,geo\\time': 'indic_de,geo\\time'})
+        input_df['indic_de,geo\\time'] = input_df[
+            'indic_de,geo\\time'].str.slice(2)
+        preprocess_df = preprocess_data(input_df)
+        clean_data(preprocess_df, CLEANED_CSV_FILE_PATH)
 
-        # Get the content of the expected output.
-        with open(expected_path, 'r+') as expected_f:
-            expected: str = expected_f.read()
+        with open(CLEANED_CSV_FILE_PATH, encoding="utf-8-sig") as csv_file:
+            self.actual_csv_data = csv_file.read()
 
-        self.assertEqual(actual, expected)
-
-    def _test_csv_output(self, dir_path: str):
-        """Generates a csv file, given an input data file.
-        Compares the expected.csv to the output.csv file
-        to make sure the function is performing as designed.
-        Args:
-            dir_path (str): the path of the directory containing:
-            data.tsv and expected.csv.
-        Returns:
-            str: expected output == actual output.
+    def test_create_csv(self):
         """
+        This method is required to test between output generated
+        preprocess script and excepted output files like CSV
+        """
+        expected_csv_file_path = os.path.join(
+            EXPECTED_FILES_DIR, "EurostatNUTS3_BirthDeathMigration.csv")
 
-        input_path = os.path.join(dir_path, "data.tsv")
-        output_path = os.path.join(dir_path, "output.csv")
-        expected_path = os.path.join(dir_path, "expected.csv")
+        expected_csv_data = ""
+        with open(expected_csv_file_path,
+                  encoding="utf-8") as expected_csv_file:
+            expected_csv_data = expected_csv_file.read()
 
-        if not os.path.exists(input_path):
-            self.fail(input_path + " doesn't exist!")
-        if not os.path.exists(expected_path):
-            self.fail(expected_path + " doesn't exist!")
-
-        # Generate the output csv file.
-        input_df = pd.read_csv(input_path, sep='\s*\t\s*', engine='python')
-        clean_data(preprocess_data(input_df), output_path)
-        # Get the content from the csv file.
-        with open(output_path, 'r+') as actual_f:
-            actual: str = actual_f.read()
-
-        # Get the content of the expected output.
-        with open(expected_path, 'r+') as expected_f:
-            expected: str = expected_f.read()
-
-        self.assertEqual(actual, expected)
-
-    def test1(self):
-        """Simple unit test on melting csv content"""
-        self._test_preprocess_output('./test/test1')
-
-    def test2(self):
-        """Simple integration test on output csv content"""
-        self._test_csv_output('./test/test2')
+        self.assertEqual(expected_csv_data.strip(),
+                         self.actual_csv_data.strip())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
