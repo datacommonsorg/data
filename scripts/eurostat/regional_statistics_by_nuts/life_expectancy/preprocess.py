@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import pandas as pd
+from six.moves import urllib
 import re
 
 PATH = 'demo_r_mlifexp.tsv'
@@ -47,12 +48,26 @@ def obtain_value(entry):
     return float(entry)
 
 
-def preprocess(filepath):
+def download_data(download_link):
+    """Downloads raw data from Eurostat website and stores it in instance
+    data frame.
+    """
+    urllib.request.urlretrieve(download_link, "demo_r_mlifexp.tsv.gz")
+    raw_df = pd.read_table("demo_r_mlifexp.tsv.gz")
+    raw_df = raw_df.rename(columns=({
+        'freq,unit,sex,age,geo\TIME_PERIOD': 'unit,sex,age,geo\\time'
+    }))
+    raw_df['unit,sex,age,geo\\time'] = raw_df[
+        'unit,sex,age,geo\\time'].str.slice(2)
+    return raw_df
+
+
+def preprocess(data):
     """Preprocess the tsv file for importing into DataCommons."""
-    data = pd.read_csv(filepath, sep='\t')
     # Concatenate data of different years from multiple columns into one column.
-    identifier = 'unit,sex,age,geo\\TIME_PERIOD'
-    assert identifier in data.columns
+    identifier = 'unit,sex,age,geo\\time'
+    assert raw_df.columns.values[0].endswith(
+        '\\time'), "Expected the first column header to end with '\\time'."
     years = list(data.columns.values)
     years.remove(identifier)
     data = pd.melt(data,
@@ -111,9 +126,12 @@ def preprocess(filepath):
     data = pd.concat(subsets, axis=1, join='outer')
 
     # Save the processed data into CSV file.
-    data.to_csv(filepath[:-4] + '_cleaned.csv', index=False)
+    data.to_csv(PATH[:-4] + '_cleaned.csv', index=False)
     return
 
 
 if __name__ == '__main__':
-    preprocess(PATH)
+    download_link = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_mlifexp/?format=TSV&compressed=true"
+    output_path = 'EurostatNUTS3_Life_Expectancy.csv'
+    raw_df = download_data(download_link)
+    preprocessed_df = preprocess(raw_df)

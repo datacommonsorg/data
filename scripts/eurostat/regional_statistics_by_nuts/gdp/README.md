@@ -67,3 +67,14 @@ To import Eurostat GDP data, run the following command:
 ```
 python3 import_data.py
 ```
+
+### Testing Procedure
+
+How to run: Generate sample input and output CSV files.
+
+To test import procedure, run the following command:
+
+```
+python3 gdp_test.py
+
+```

@@ -76,6 +76,18 @@ To generate `PopulationDensity_Eurostat_NUTS3.tmcf` and `PopulationDensity_Euros
 
 ```bash
 python3 PopulationDensity_preprocess_gen_tmcf.py
+
+```
+
+### Testing Procedure
+
+How to run: Generate sample input and output CSV files.
+
+To test import procedure, run the following command:
+
+```
+python3 PopulationDensity_preprocess_gen_tmcf_test.py
+
 ```
 
 ### Post-Processing Validation

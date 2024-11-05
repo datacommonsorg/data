@@ -27,8 +27,6 @@ def download_data(download_link):
     """
     urllib.request.urlretrieve(download_link, "demo_r_gind3.tsv.gz")
     raw_df = pd.read_table("demo_r_gind3.tsv.gz")
-    # raw_df = pd.read_table("sample_data.tsv")
-
     raw_df = raw_df.rename(columns=({
         'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'
     }))

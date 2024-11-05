@@ -69,7 +69,7 @@ def translate_wide_to_long(data_url, is_download_required=False, df_input=None):
                                 else COUNTRY_MAP.get(geo, f'{geo}'))
 
     # Remove empty rows, clean values to have all digits.
-    df = df[df.value.str.contains('[0-9]')]
+    df = df[df['value'].notna() & df['value'].str.contains('[0-9]')].copy()
     possible_flags = [' ', ':', 'b', 'e', 'bep', 'be', 'ep', 'p']
     for flag in possible_flags:
         df['value'] = df['value'].str.replace(flag, '')
