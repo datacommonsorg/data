@@ -21,6 +21,14 @@ import numpy as np
 import pandas as pd
 import io
 import csv
+import os
+from absl import app
+from absl import logging
+from absl import flags
+
+_FLAGS = flags.FLAGS
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+flags.DEFINE_string('mode', '', 'Options: download or process')
 
 _OUTPUT_COLUMNS = [
     'Date',
@@ -29,71 +37,85 @@ _OUTPUT_COLUMNS = [
 ]
 
 
-def download_data(download_link):
+def download_data(download_link, download_path):
     """Downloads raw data from Eurostat website and stores it in instance
     data frame.
     """
-    urllib.request.urlretrieve(download_link, "demo_r_d3dens.tsv.gz")
-    raw_df = pd.read_table("demo_r_d3dens.tsv.gz")
-    raw_df = raw_df.rename(columns=({
-        'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
-    }))
-    raw_df['unit,geo\\time'] = raw_df['unit,geo\\time'].str.slice(2)
-    return raw_df
+    logging.info("file download starts")
+    try:
+        urllib.request.urlretrieve(download_link, "demo_r_d3dens.tsv.gz")
+        raw_df = pd.read_table("demo_r_d3dens.tsv.gz")
+        raw_df.to_csv(download_path, index=False, sep='\t')
+        logging.info("file download completed")
+        return True
+    except Exception as e:
+        logging.error(f'download error {e}')
+        return False
 
 
-def translate_wide_to_long(data_url, is_download_required=False, df_input=None):
-    if is_download_required:
-        df = download_data(data_url)
-    else:
-        df = df_input
-    assert df.head
+def translate_wide_to_long(file_path):
+    try:
+        logging.info('transforming data: wide to long.. ')
+        df = pd.read_csv(file_path, delimiter='\t')
+        df = df.rename(columns=({
+            'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
+        }))
+        df['unit,geo\\time'] = df['unit,geo\\time'].str.slice(2)
+        header = list(df.columns.values)
+        years = header[1:]
 
-    header = list(df.columns.values)
-    years = header[1:]
+        # Pandas.melt() unpivots a DataFrame from wide format to long format.
+        df = pd.melt(df,
+                     id_vars=header[0],
+                     value_vars=years,
+                     var_name='time',
+                     value_name='value')
 
-    # Pandas.melt() unpivots a DataFrame from wide format to long format.
-    df = pd.melt(df,
-                 id_vars=header[0],
-                 value_vars=years,
-                 var_name='time',
-                 value_name='value')
+        # Separate geo and unit columns.
+        new = df[header[0]].str.split(",", n=1, expand=True)
+        df['geo'] = new[1]
+        df['unit'] = new[0]
+        df.drop(columns=[header[0]], inplace=True)
+        df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}'
+                                    if any(geo.isdigit() for geo in geo) or
+                                    ('nuts/' + geo in NUTS1_CODES_NAMES
+                                    ) else COUNTRY_MAP.get(geo, f'{geo}'))
 
-    # Separate geo and unit columns.
-    new = df[header[0]].str.split(",", n=1, expand=True)
-    df['geo'] = new[1]
-    df['unit'] = new[0]
-    df.drop(columns=[header[0]], inplace=True)
-    df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
-        geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
-                                else COUNTRY_MAP.get(geo, f'{geo}'))
+        # Remove empty rows, clean values to have all digits.
+        df = df[df['value'].notna() & df['value'].str.contains('[0-9]')].copy()
+        possible_flags = [' ', ':', 'b', 'e', 'bep', 'be', 'ep', 'p']
+        for flag in possible_flags:
+            df['value'] = df['value'].str.replace(flag, '')
 
-    # Remove empty rows, clean values to have all digits.
-    df = df[df['value'].notna() & df['value'].str.contains('[0-9]')].copy()
-    possible_flags = [' ', ':', 'b', 'e', 'bep', 'be', 'ep', 'p']
-    for flag in possible_flags:
-        df['value'] = df['value'].str.replace(flag, '')
-
-    df['value'] = pd.to_numeric(df['value'])
-    return (df)
+        df['value'] = pd.to_numeric(df['value'])
+        logging.info('transforming data: wide to long.. completed ')
+        return df
+    except Exception as e:
+        logging.error(f'transforming error {e}')
 
 
 def preprocess(df, cleaned_csv):
-    with open(cleaned_csv, 'w', newline='') as f_out:
-        writer = csv.DictWriter(f_out,
-                                fieldnames=_OUTPUT_COLUMNS,
-                                lineterminator='\n')
-        writer.writeheader()
-        for _, row in df.iterrows():
-            writer.writerow({
-                # 'Date': '%s-%s-%s' % (row_dict['TIME'][:4], '01', '01'),
-                'Date': '%s' % (row['time'][:4]),
-                'GeoId': '%s' % row['geo'],
-                'Count_Person_PerArea': float(row['value']),
-            })
+    try:
+        logging.info('file processing started ')
+        with open(cleaned_csv, 'w', newline='') as f_out:
+            writer = csv.DictWriter(f_out,
+                                    fieldnames=_OUTPUT_COLUMNS,
+                                    lineterminator='\n')
+            writer.writeheader()
+            for _, row in df.iterrows():
+                writer.writerow({
+                    # 'Date': '%s-%s-%s' % (row_dict['TIME'][:4], '01', '01'),
+                    'Date': '%s' % (row['time'][:4]),
+                    'GeoId': '%s' % row['geo'],
+                    'Count_Person_PerArea': float(row['value']),
+                })
+        logging.info('file processing completed')
+        return df
+    except Exception as e:
+        logging.error(f'processing error {e}')
 
 
-def get_template_mcf(output_columns):
+def get_template_mcf(output_columns, _TMCF):
     # Automate Template MCF generation since there are many Statistical Variables.
     TEMPLATE_MCF_TEMPLATE = """
   Node: E:EurostatNUTS3_DensityTracking->E{index}
@@ -115,10 +137,29 @@ def get_template_mcf(output_columns):
                 }))
 
 
-if __name__ == "__main__":
+def main(_):
+    mode = _FLAGS.mode
     _DATA_URL = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_d3dens/?format=TSV&compressed=true"
     _CLEANED_CSV = "./PopulationDensity_Eurostat_NUTS3.csv"
     _TMCF = "./PopulationDensity_Eurostat_NUTS3.tmcf"
-    preprocess(translate_wide_to_long(_DATA_URL, is_download_required=True),
-               _CLEANED_CSV)
-    get_template_mcf(_OUTPUT_COLUMNS)
+
+    input_path = os.path.join(_MODULE_DIR, 'input_files')
+    if not os.path.exists(input_path):
+        os.makedirs(input_path)
+    input_file = os.path.join(input_path, 'input_file.tsv')
+    if mode == "":
+        download_result = download_data(_DATA_URL, input_file)
+        if download_result:
+            translate_df = translate_wide_to_long(input_file)
+            preprocess(translate_df, _CLEANED_CSV)
+            get_template_mcf(_OUTPUT_COLUMNS, _TMCF)
+    elif mode == "download":
+        download_result = download_data(_DATA_URL, input_file)
+    elif mode == "process":
+        translate_df = translate_wide_to_long(input_file)
+        preprocess(translate_df, _CLEANED_CSV)
+        get_template_mcf(_OUTPUT_COLUMNS, _TMCF)
+
+
+if __name__ == "__main__":
+    app.run(main)

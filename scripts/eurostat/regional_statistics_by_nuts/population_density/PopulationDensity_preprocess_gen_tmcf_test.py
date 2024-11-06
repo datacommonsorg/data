@@ -39,17 +39,11 @@ class TestProcess(unittest.TestCase):
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
         input_path = os.path.join(TEST_DATASET_DIR, 'sample_data.tsv')
-        input_df = pd.read_csv(input_path, sep='\s*\t\s*', engine='python')
-        input_df = input_df.rename(
-            columns={'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'})
-        input_df['unit,geo\\time'] = input_df['unit,geo\\time'].str.slice(2)
+
         self.CLEANED_CSV_FILE_PATH = os.path.join(EXPECTED_FILES_DIR,
                                                   "test_output.csv")
-        preprocess(
-            translate_wide_to_long('',
-                                   is_download_required=False,
-                                   df_input=input_df),
-            self.CLEANED_CSV_FILE_PATH)
+        preprocess(translate_wide_to_long(input_path),
+                   self.CLEANED_CSV_FILE_PATH)
 
         with open(self.CLEANED_CSV_FILE_PATH, encoding="utf-8-sig") as csv_file:
             self.actual_csv_data = csv_file.read()
