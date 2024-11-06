@@ -40,9 +40,19 @@ The below script will download the data, generate csv and mcf files.
 
 `/usr/bin/python3 scripts/us_census/pep/annual_population_estimate/preprocess.py`
 
-Execute the 'preprocess.py' script using the following command:
+Execute the 'preprocess.py' script by using the following commands:
 
-`python3 preprocess.py`
+  - if you want to perform "download and process", run the below command:
+
+        `python3 preprocess.py --mode=""`
+
+  - if you want to perform "only process", run the below command:
+
+        `python3 preprocess.py --mode="process"`
+        
+  - if you want to perform "only download", run the below command:
+
+        `python3 preprocess.py --mode="download"`
 
 ### New Implentation:
 - [Updated the script on October 29, 2024]
