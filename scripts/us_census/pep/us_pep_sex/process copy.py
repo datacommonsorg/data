@@ -21,22 +21,8 @@ import sys
 import pandas as pd
 import numpy as np
 from absl import app, flags
-import requests
-import shutil
-import time
-import json
-from datetime import datetime as dt
-from absl import logging 
-from absl import flags
-
-_FLAGS = flags.FLAGS
-
-flags.DEFINE_string('mode', '', 'Options: download or process')
-
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
-_FILES_TO_DOWNLOAD = None
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 # pylint: disable=wrong-import-position
@@ -48,7 +34,8 @@ _USSTATE_SHORT_FORM = statetoshortform.USSTATE_MAP
 # pylint: enable=wrong-import-position
 
 _FLAGS = flags.FLAGS
-default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
+default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -57,20 +44,22 @@ _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                  "statType: dcs:measuredValue\n"
                  "measuredProperty: dcs:count\n")
 
-_TMCF_TEMPLATE = ("Node: E:population_estimate_sex->E0\n"
-                  "typeOf: dcs:StatVarObservation\n"
-                  "variableMeasured: C:population_estimate_sex->SV\n"
-                  "measurementMethod: C:population_estimate_sex->Measurement_Method\n"
-                  "observationAbout: C:population_estimate_sex->geo_ID\n"
-                  "observationDate: C:population_estimate_sex->Year\n"
-                  "observationPeriod: \"P1Y\"\n"
-                  "value: C:population_estimate_sex->Observation\n")
+_TMCF_TEMPLATE = (
+    "Node: E:population_estimate_sex->E0\n"
+    "typeOf: dcs:StatVarObservation\n"
+    "variableMeasured: C:population_estimate_sex->SV\n"
+    "measurementMethod: C:population_estimate_sex->Measurement_Method\n"
+    "observationAbout: C:population_estimate_sex->geo_ID\n"
+    "observationDate: C:population_estimate_sex->Year\n"
+    "observationPeriod: \"P1Y\"\n"
+    "value: C:population_estimate_sex->Observation\n")
 
 _COLUMNS_TO_SUM = [
-    'Under 5 years', '5 to 9 years', '10 to 14 years', '15 to 19 years', '20 to 24 years',
-    '25 to 29 years', '30 to 34 years', '35 to 39 years', '40 to 44 years', '45 to 49 years',
-    '50 to 54 years', '55 to 59 years', '60 to 64 years', '65 to 69 years', '70 to 74 years',
-    '75 to 79 years', '80 to 84 years', '85 years and over'
+    'Under 5 years', '5 to 9 years', '10 to 14 years', '15 to 19 years',
+    '20 to 24 years', '25 to 29 years', '30 to 34 years', '35 to 39 years',
+    '40 to 44 years', '45 to 49 years', '50 to 54 years', '55 to 59 years',
+    '60 to 64 years', '65 to 69 years', '70 to 74 years', '75 to 79 years',
+    '80 to 84 years', '85 years and over'
 ]
 
 
@@ -80,12 +69,15 @@ def _states_full_to_short_form(data_df: pd.DataFrame,
                                replace_key: str = " ") -> pd.DataFrame:
     short_forms = _USSTATE_SHORT_FORM
     data_df[new_col] = data_df[data_col].str.replace(
-        replace_key, "", regex=False).apply(lambda row: short_forms.get(row, row))
+        replace_key, "",
+        regex=False).apply(lambda row: short_forms.get(row, row))
     return data_df
 
 
-def _add_geo_id(data_df: pd.DataFrame, data_col: str, new_col: str) -> pd.DataFrame:
-    data_df[new_col] = data_df[data_col].apply(lambda rec: USSTATE_MAP.get(rec, rec))
+def _add_geo_id(data_df: pd.DataFrame, data_col: str,
+                new_col: str) -> pd.DataFrame:
+    data_df[new_col] = data_df[data_col].apply(
+        lambda rec: USSTATE_MAP.get(rec, rec))
     return data_df
 
 
@@ -120,12 +112,13 @@ def _national_1900_1979(file_path: str) -> pd.DataFrame:
                              skipfooter=102,
                              header=None)
         df.columns = [
-            'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female', 'White Total', 'White Male',
-            'White Female', 'NonWhite Total', 'NonWhite Male', 'NonWhite Female'
+            'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female',
+            'White Total', 'White Male', 'White Female', 'NonWhite Total',
+            'NonWhite Male', 'NonWhite Female'
         ]
         df = df.drop(columns=[
-            'Age', 'Total', 'White Total', 'White Male', 'White Female', 'NonWhite Total',
-            'NonWhite Male', 'NonWhite Female'
+            'Age', 'Total', 'White Total', 'White Male', 'White Female',
+            'NonWhite Total', 'NonWhite Male', 'NonWhite Female'
         ])
         df['Year'] = year
         df.insert(0, 'geo_ID', 'country/USA', True)
@@ -138,14 +131,16 @@ def _national_1900_1979(file_path: str) -> pd.DataFrame:
                          skipfooter=102,
                          header=None)
         df.columns = [
-            'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female', 'White Total', 'White Male',
-            'White Female', 'Black Total', 'Black Male', 'Black Female', 'OtherRace Total',
-            'OtherRace Male', 'OtherRace Female'
+            'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female',
+            'White Total', 'White Male', 'White Female', 'Black Total',
+            'Black Male', 'Black Female', 'OtherRace Total', 'OtherRace Male',
+            'OtherRace Female'
         ]
         # dropping unwanted columns
         df = df.drop(columns=[
-            'Age', 'Total', 'White Total', 'White Male', 'White Female', 'Black Total',
-            'Black Male', 'Black Female', 'OtherRace Total', 'OtherRace Male', 'OtherRace Female'
+            'Age', 'Total', 'White Total', 'White Male', 'White Female',
+            'Black Total', 'Black Male', 'Black Female', 'OtherRace Total',
+            'OtherRace Male', 'OtherRace Female'
         ])
         # adding geoid, year and measurement method
         df['Year'] = year
@@ -165,13 +160,15 @@ def _national_1990_2000(file_path: str) -> pd.DataFrame:
         df (pd.DataFrame) : cleaned dataframe.
     """
     df = pd.read_csv(file_path, thousands=',', skiprows=1, header=None)
-    df.columns = ['Year', 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female']
+    df.columns = [
+        'Year', 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female'
+    ]
     # total age is required as we are bring age in a seperate import
-    df = df[(df["Age"] == "All Age") & (df["Year"].str.startswith("July"))].reset_index(drop=True)
+    df = df[(df["Age"] == "All Age") &
+            (df["Year"].str.startswith("July"))].reset_index(drop=True)
     df["Year"] = df["Year"].str.replace("July 1, ", "")
     # dropping unwanted columns
-    #print("----->", df.columns)
-    df = df.drop(columns=['Age'])
+    df = df.drop(columns=['Total', 'Age'])
     df.insert(0, 'geo_ID', 'country/USA', True)
     float_col = df.select_dtypes(include=['float64'])
     for col in float_col.columns.values:
@@ -192,13 +189,17 @@ def _national_2000_2010(file_path: str) -> pd.DataFrame:
     """
     df = pd.read_csv(file_path, thousands=',', skiprows=4, header=None)
     df.columns = [
-        'SEX', 'April2000', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008',
-        '2009', 'April2010', '2010'
+        'SEX', 'April2000', '2000', '2001', '2002', '2003', '2004', '2005',
+        '2006', '2007', '2008', '2009', 'April2010', '2010'
     ]
     df = df.query('SEX=="MALE" or SEX=="FEMALE"')
     # dropping unwanted columns
     df = df.drop(columns=['April2000', 'April2010', '2010'])
-    df = df.replace({'SEX': {'MALE': 'Count_Person_Male', 'FEMALE': 'Count_Person_Female'}})
+    df = df.replace(
+        {'SEX': {
+            'MALE': 'Count_Person_Male',
+            'FEMALE': 'Count_Person_Female'
+        }})
     # replacing rows with columns
     # making the first row as column name
     # to get all dataframe in one formate
@@ -319,37 +320,6 @@ def _national_2022(file_path: str) -> pd.DataFrame:
     return df
 
 
-def _national_2023(file_path: str) -> pd.DataFrame:
-    """
-    Process and cleans the file for national 2023.
-
-    Args:
-        file_path (str) : input file path.
-
-    Returns:
-        df (pd.DataFrame) : cleaned dataframe.
-    """
-    df = pd.read_csv(file_path)
-    # total is not required in gender
-    df = df.query("SEX !=0")
-    # to get total age present at age = 999
-    df = df.query("AGE == 999")
-    df = df.replace({'SEX': {1: 'Count_Person_Male', 2: 'Count_Person_Female'}})
-    df.rename(columns={'POPESTIMATE2023': '2023', 'SEX': 'Year'}, inplace=True)
-    df.rename(columns={'POPESTIMATE2022': '2022', 'SEX': 'Year'}, inplace=True)
-    df.rename(columns={'POPESTIMATE2021': '2021', 'SEX': 'Year'}, inplace=True)
-    df = df.drop(columns=['AGE', 'ESTIMATESBASE2020', 'POPESTIMATE2020'])
-    # replacing rows with columns
-    # making the first row as column name
-    # to get all dataframe in one formate
-    df = df.transpose().reset_index()
-    df.columns = df.iloc[0]
-    df = df[1:]
-    df.insert(0, 'geo_ID', 'country/USA', True)
-    df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
-    return df
-
-
 def _state_1970_1980(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for state 1970 to 1980.
@@ -373,7 +343,10 @@ def _state_1970_1980(file_path: str) -> pd.DataFrame:
             'Other races female': 'Count_Person_Female'
         }
     })
-    df = df.rename(columns={'Year of Estimate': 'Year', 'FIPS State Code': 'geo_ID'})
+    df = df.rename(columns={
+        'Year of Estimate': 'Year',
+        'FIPS State Code': 'geo_ID'
+    })
     df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(2)
     df['geo_ID'] = df['geo_ID'] + '-' + df['Year'].astype(str)
     df = df.drop(columns=['Year', 'State Name'])
@@ -401,15 +374,20 @@ def _state_1980_1990(file_path: str) -> pd.DataFrame:
     # extracting year from file path
     year = file_path[-6:-4]
     year = 1900 + int(year)
-    if year == 1983:
-        pass
     column_names = [
-        'geo_ID', 'CountyCode', 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female'
+        'geo_ID', 'CountyCode', 'Age', 'Total', 'Count_Person_Male',
+        'Count_Person_Female'
     ]
     if year == 1987:
-        df = pd.read_table(file_path, skiprows=29, delim_whitespace=True, names=column_names)
+        df = pd.read_table(file_path,
+                           skiprows=29,
+                           delim_whitespace=True,
+                           names=column_names)
     else:
-        df = pd.read_table(file_path, skiprows=28, delim_whitespace=True, names=column_names)
+        df = pd.read_table(file_path,
+                           skiprows=28,
+                           delim_whitespace=True,
+                           names=column_names)
     df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(2)
     df['Year'] = year
     df = df.drop(columns=['CountyCode', 'Age', 'Total'])
@@ -436,13 +414,18 @@ def _state_2000_2010(file_path: str) -> pd.DataFrame:
     # extract geoid from the file path
     geoid = file_path[-6:-4]
     column_name = [
-        'AgeSex', 'April2000', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007',
-        '2008', '2009', 'April2010', '2010'
+        'AgeSex', 'April2000', '2000', '2001', '2002', '2003', '2004', '2005',
+        '2006', '2007', '2008', '2009', 'April2010', '2010'
     ]
     df = pd.read_csv(file_path, skiprows=4, thousands=',')
     df.columns = column_name
     df = df.query('AgeSex == "MALE" or AgeSex == "FEMALE"')
-    df = df.replace({'AgeSex': {"MALE": 'Count_Person_Male', "FEMALE": 'Count_Person_Female'}})
+    df = df.replace({
+        'AgeSex': {
+            "MALE": 'Count_Person_Male',
+            "FEMALE": 'Count_Person_Female'
+        }
+    })
     df = df.drop(columns=['April2000', 'April2010', '2010'])
     # replacing rows with columns
     # making the first row as column name
@@ -491,31 +474,38 @@ def _state_2010_2020(file_path: str) -> pd.DataFrame:
             14: '2020'
         }
     })
-    df = df.rename(columns={
-        'POPEST_MALE': 'Count_Person_Male',
-        'POPEST_FEM': 'Count_Person_Female',
-        'YEAR': 'Year'
-    })
+    df = df.rename(
+        columns={
+            'POPEST_MALE': 'Count_Person_Male',
+            'POPEST_FEM': 'Count_Person_Female',
+            'YEAR': 'Year'
+        })
     df = df.drop(columns=[
-        'SUMLEV', 'STATE', 'STNAME', 'POPESTIMATE', 'UNDER5_TOT', 'UNDER5_MALE', 'UNDER5_FEM',
-        'AGE513_TOT', 'AGE513_MALE', 'AGE513_FEM', 'AGE1417_TOT', 'AGE1417_MALE', 'AGE1417_FEM',
-        'AGE1824_TOT', 'AGE1824_MALE', 'AGE1824_FEM', 'AGE16PLUS_TOT', 'AGE16PLUS_MALE',
-        'AGE16PLUS_FEM', 'AGE18PLUS_TOT', 'AGE18PLUS_MALE', 'AGE18PLUS_FEM', 'AGE1544_TOT',
-        'AGE1544_MALE', 'AGE1544_FEM', 'AGE2544_TOT', 'AGE2544_MALE', 'AGE2544_FEM', 'AGE4564_TOT',
-        'AGE4564_MALE', 'AGE4564_FEM', 'AGE65PLUS_TOT', 'AGE65PLUS_MALE', 'AGE65PLUS_FEM',
-        'AGE04_TOT', 'AGE04_MALE', 'AGE04_FEM', 'AGE59_TOT', 'AGE59_MALE', 'AGE59_FEM',
-        'AGE1014_TOT', 'AGE1014_MALE', 'AGE1014_FEM', 'AGE1519_TOT', 'AGE1519_MALE', 'AGE1519_FEM',
-        'AGE2024_TOT', 'AGE2024_MALE', 'AGE2024_FEM', 'AGE2529_TOT', 'AGE2529_MALE', 'AGE2529_FEM',
-        'AGE3034_TOT', 'AGE3034_MALE', 'AGE3034_FEM', 'AGE3539_TOT', 'AGE3539_MALE', 'AGE3539_FEM',
-        'AGE4044_TOT', 'AGE4044_MALE', 'AGE4044_FEM', 'AGE4549_TOT', 'AGE4549_MALE', 'AGE4549_FEM',
-        'AGE5054_TOT', 'AGE5054_MALE', 'AGE5054_FEM', 'AGE5559_TOT', 'AGE5559_MALE', 'AGE5559_FEM',
-        'AGE6064_TOT', 'AGE6064_MALE', 'AGE6064_FEM', 'AGE6569_TOT', 'AGE6569_MALE', 'AGE6569_FEM',
-        'AGE7074_TOT', 'AGE7074_MALE', 'AGE7074_FEM', 'AGE7579_TOT', 'AGE7579_MALE', 'AGE7579_FEM',
-        'AGE8084_TOT', 'AGE8084_MALE', 'AGE8084_FEM', 'AGE85PLUS_TOT', 'AGE85PLUS_MALE',
-        'AGE85PLUS_FEM', 'MEDIAN_AGE_TOT', 'MEDIAN_AGE_MALE', 'MEDIAN_AGE_FEM'
+        'SUMLEV', 'STATE', 'STNAME', 'POPESTIMATE', 'UNDER5_TOT', 'UNDER5_MALE',
+        'UNDER5_FEM', 'AGE513_TOT', 'AGE513_MALE', 'AGE513_FEM', 'AGE1417_TOT',
+        'AGE1417_MALE', 'AGE1417_FEM', 'AGE1824_TOT', 'AGE1824_MALE',
+        'AGE1824_FEM', 'AGE16PLUS_TOT', 'AGE16PLUS_MALE', 'AGE16PLUS_FEM',
+        'AGE18PLUS_TOT', 'AGE18PLUS_MALE', 'AGE18PLUS_FEM', 'AGE1544_TOT',
+        'AGE1544_MALE', 'AGE1544_FEM', 'AGE2544_TOT', 'AGE2544_MALE',
+        'AGE2544_FEM', 'AGE4564_TOT', 'AGE4564_MALE', 'AGE4564_FEM',
+        'AGE65PLUS_TOT', 'AGE65PLUS_MALE', 'AGE65PLUS_FEM', 'AGE04_TOT',
+        'AGE04_MALE', 'AGE04_FEM', 'AGE59_TOT', 'AGE59_MALE', 'AGE59_FEM',
+        'AGE1014_TOT', 'AGE1014_MALE', 'AGE1014_FEM', 'AGE1519_TOT',
+        'AGE1519_MALE', 'AGE1519_FEM', 'AGE2024_TOT', 'AGE2024_MALE',
+        'AGE2024_FEM', 'AGE2529_TOT', 'AGE2529_MALE', 'AGE2529_FEM',
+        'AGE3034_TOT', 'AGE3034_MALE', 'AGE3034_FEM', 'AGE3539_TOT',
+        'AGE3539_MALE', 'AGE3539_FEM', 'AGE4044_TOT', 'AGE4044_MALE',
+        'AGE4044_FEM', 'AGE4549_TOT', 'AGE4549_MALE', 'AGE4549_FEM',
+        'AGE5054_TOT', 'AGE5054_MALE', 'AGE5054_FEM', 'AGE5559_TOT',
+        'AGE5559_MALE', 'AGE5559_FEM', 'AGE6064_TOT', 'AGE6064_MALE',
+        'AGE6064_FEM', 'AGE6569_TOT', 'AGE6569_MALE', 'AGE6569_FEM',
+        'AGE7074_TOT', 'AGE7074_MALE', 'AGE7074_FEM', 'AGE7579_TOT',
+        'AGE7579_MALE', 'AGE7579_FEM', 'AGE8084_TOT', 'AGE8084_MALE',
+        'AGE8084_FEM', 'AGE85PLUS_TOT', 'AGE85PLUS_MALE', 'AGE85PLUS_FEM',
+        'MEDIAN_AGE_TOT', 'MEDIAN_AGE_MALE', 'MEDIAN_AGE_FEM'
     ])
-    df = df[(df['Year'] != 'April2010Census') & (df['Year'] != 'April2010Estimate') &
-            (df['Year'] != 'April2020')]
+    df = df[(df['Year'] != 'April2010Census') &
+            (df['Year'] != 'April2010Estimate') & (df['Year'] != 'April2020')]
     df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
     return df
 
@@ -531,8 +521,9 @@ def _state_2021(file_path: str) -> pd.DataFrame:
         df (pd.DataFrame) : cleaned dataframe.
     """
     column_name = [
-        'Age', 'April2020Total', 'April2020Male', 'April2020Female', 'July2020Total',
-        'July2020Male', 'July2020Female', '2021Total', 'Count_Person_Male', 'Count_Person_Female'
+        'Age', 'April2020Total', 'April2020Male', 'April2020Female',
+        'July2020Total', 'July2020Male', 'July2020Female', '2021Total',
+        'Count_Person_Male', 'Count_Person_Female'
     ]
     df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
     df.columns = column_name
@@ -543,8 +534,8 @@ def _state_2021(file_path: str) -> pd.DataFrame:
     df = df.query('Age == "Total"')
     df.insert(1, 'geo_ID', 'geoId/' + geoid)
     df = df.drop(columns=[
-        'Age', 'April2020Total', 'April2020Male', 'April2020Female', 'July2020Total',
-        'July2020Male', 'July2020Female', '2021Total'
+        'Age', 'April2020Total', 'April2020Male', 'April2020Female',
+        'July2020Total', 'July2020Male', 'July2020Female', '2021Total'
     ])
     df['Year'] = '2021'
     df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
@@ -562,9 +553,10 @@ def _state_2022(file_path: str) -> pd.DataFrame:
         df (pd.DataFrame) : cleaned dataframe.
     """
     column_name = [
-        'Age', 'April2020Total', 'April2020Male', 'April2020Female', 'July2020Total',
-        'July2020Male', 'July2020Female', 'July2021Total', 'July2021Male', 'July2021Female',
-        '2022Total', 'Count_Person_Male', 'Count_Person_Female'
+        'Age', 'April2020Total', 'April2020Male', 'April2020Female',
+        'July2020Total', 'July2020Male', 'July2020Female', 'July2021Total',
+        'July2021Male', 'July2021Female', '2022Total', 'Count_Person_Male',
+        'Count_Person_Female'
     ]
     df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
     df.columns = column_name
@@ -575,95 +567,13 @@ def _state_2022(file_path: str) -> pd.DataFrame:
     df = df.query('Age == "Total"')
     df.insert(1, 'geo_ID', 'geoId/' + geoid)
     df = df.drop(columns=[
-        'Age', 'April2020Total', 'April2020Male', 'April2020Female', 'July2020Total',
-        'July2020Male', 'July2020Female', 'July2021Total', 'July2021Male', 'July2021Female',
-        '2022Total'
+        'Age', 'April2020Total', 'April2020Male', 'April2020Female',
+        'July2020Total', 'July2020Male', 'July2020Female', 'July2021Total',
+        'July2021Male', 'July2021Female', '2022Total'
     ])
     df['Year'] = '2022'
     df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
     return df
-
-
-def _state_2023(file_path: str) -> pd.DataFrame:
-    """
-    Process and cleans the file for state 2023.
-
-    Args:
-        file_path (str) : input file path.
-
-    Returns:
-        df (pd.DataFrame) : cleaned dataframe.
-    """
-    column_name = [
-        'Age',
-        'April2020Total',
-        'April2020Male',
-        'April2020Female',
-        'July2020Total',
-        'July2020Male',
-        'July2020Female',
-        'July2021Total',
-        'July2021Male',
-        'July2021Female',
-        'July2022Total',
-        'July2022Male',
-        'July2022Female',
-        'July2023Male',
-        'July2023Female',
-        '2023Total',
-    ]
-    # 'Count_Person_Male', 'Count_Person_Female'
-    df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
-    df.columns = column_name
-    # extract geoid from file path
-    geoid = file_path[-7:-5]
-    if geoid == "0.":
-        geoid = "01"
-    df = df.query('Age == "Total"')
-    df.insert(1, 'geo_ID', 'geoId/' + geoid)
-    df_2020 = df[['Age', 'geo_ID', 'July2020Male', 'July2020Female']].copy()
-    df_2020 = df_2020.rename(columns={
-        'July2020Male': 'Count_Person_Male',
-        'July2020Female': 'Count_Person_Female'
-    })
-    # df_2020['Year'] = '2020'
-    # df_2020['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
-    # print("df_2020", df_2020)
-
-    df_2021 = df[['Age', 'geo_ID', 'July2021Male', 'July2021Female']].copy()
-    df_2021 = df_2021.rename(columns={
-        'July2021Male': 'Count_Person_Male',
-        'July2021Female': 'Count_Person_Female'
-    })
-    df_2021['Year'] = '2021'
-    df_2021['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
-
-    df_2022 = df[['Age', 'geo_ID', 'July2022Male', 'July2022Female']].copy()
-    df_2022 = df_2022.rename(columns={
-        'July2022Male': 'Count_Person_Male',
-        'July2022Female': 'Count_Person_Female'
-    })
-    df_2022['Year'] = '2022'
-    df_2022['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
-
-    df_2023 = df[['Age', 'geo_ID', 'July2023Male', 'July2023Female']].copy()
-    df_2023 = df_2023.rename(columns={
-        'July2023Male': 'Count_Person_Male',
-        'July2023Female': 'Count_Person_Female'
-    })
-    df_2023['Year'] = '2023'
-    df_2023['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
-
-    # df = df.drop(columns=[
-    #     'Age', 'April2020Total', 'April2020Male', 'April2020Female', 'July2020Total',
-    #     'July2020Male', 'July2020Female', 'July2021Total', 'July2021Male', 'July2021Female',
-    #     'July2022Total', 'July2022Male', 'July2022Female', '2023Total'
-    # ])
-    # df['Year'] = '2023'
-    # df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
-
-    final_df = pd.concat([df_2021, df_2022, df_2023], ignore_index=True)
-    return final_df
 
 
 def _county_1970_1980(file_path: str) -> pd.DataFrame:
@@ -694,7 +604,10 @@ def _county_1970_1980(file_path: str) -> pd.DataFrame:
             'Other races female': 'Count_Person_Female'
         }
     })
-    df = df.rename(columns={'Year of Estimate': 'Year', 'FIPS State and County Codes': 'geo_ID'})
+    df = df.rename(columns={
+        'Year of Estimate': 'Year',
+        'FIPS State and County Codes': 'geo_ID'
+    })
     df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(5)
     df['geo_ID'] = df['geo_ID'] + '-' + df['Year'].astype(str)
     df = df.drop(columns=['Year'])
@@ -732,7 +645,10 @@ def _county_1980_1990(file_path: str) -> pd.DataFrame:
             'Other races female': 'Count_Person_Female'
         }
     })
-    df = df.rename(columns={'Year of Estimate': 'Year', 'FIPS State and County Codes': 'geo_ID'})
+    df = df.rename(columns={
+        'Year of Estimate': 'Year',
+        'FIPS State and County Codes': 'geo_ID'
+    })
     df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(5)
     df['geo_ID'] = df['geo_ID'] + '-' + df['Year'].astype(str)
     df = df.drop(columns=['Year'])
@@ -788,8 +704,9 @@ def _county_1990_2000(file_path: str) -> pd.DataFrame:
     df_state['geo_ID'] = (df['geo_ID'].map(str)).str[:len('geoId/NN')]
     df_state = df_state.groupby(['Year', 'geo_ID']).sum().reset_index()
     df = pd.concat([df_state, df], ignore_index=True)
-    df['Measurement_Method'] = np.where(df['geo_ID'].str.len() > 10, 'CensusPEPSurvey',
-                                        'dcAggregate/CensusPEPSurvey_PartialAggregate')
+    df['Measurement_Method'] = np.where(
+        df['geo_ID'].str.len() > 10, 'CensusPEPSurvey',
+        'dcAggregate/CensusPEPSurvey_PartialAggregate')
     return df
 
 
@@ -810,8 +727,8 @@ def _county_2000_2010(file_path: str) -> pd.DataFrame:
     df = df.query('SEX != 0')
     df = df.replace({'SEX': {1: 'Count_Person_Male', 2: 'Count_Person_Female'}})
     df = df.drop(columns=[
-        'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP', 'ESTIMATESBASE2000',
-        'CENSUS2010POP', 'POPESTIMATE2010'
+        'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP',
+        'ESTIMATESBASE2000', 'CENSUS2010POP', 'POPESTIMATE2010'
     ])
     df.rename(columns={
         'POPESTIMATE2000': '2000',
@@ -869,32 +786,38 @@ def _county_2010_2020(file_path: str) -> pd.DataFrame:
             14: '2020'
         }
     })
-    df = df.rename(columns={
-        'POPEST_MALE': 'Count_Person_Male',
-        'POPEST_FEM': 'Count_Person_Female',
-        'YEAR': 'Year'
-    })
+    df = df.rename(
+        columns={
+            'POPEST_MALE': 'Count_Person_Male',
+            'POPEST_FEM': 'Count_Person_Female',
+            'YEAR': 'Year'
+        })
     df = df.drop(columns=[
-        'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'POPESTIMATE', 'UNDER5_TOT',
-        'UNDER5_MALE', 'UNDER5_FEM', 'AGE513_TOT', 'AGE513_MALE', 'AGE513_FEM', 'AGE1417_TOT',
-        'AGE1417_MALE', 'AGE1417_FEM', 'AGE1824_TOT', 'AGE1824_MALE', 'AGE1824_FEM',
-        'AGE16PLUS_TOT', 'AGE16PLUS_MALE', 'AGE16PLUS_FEM', 'AGE18PLUS_TOT', 'AGE18PLUS_MALE',
-        'AGE18PLUS_FEM', 'AGE1544_TOT', 'AGE1544_MALE', 'AGE1544_FEM', 'AGE2544_TOT',
-        'AGE2544_MALE', 'AGE2544_FEM', 'AGE4564_TOT', 'AGE4564_MALE', 'AGE4564_FEM',
-        'AGE65PLUS_TOT', 'AGE65PLUS_MALE', 'AGE65PLUS_FEM', 'AGE04_TOT', 'AGE04_MALE', 'AGE04_FEM',
-        'AGE59_TOT', 'AGE59_MALE', 'AGE59_FEM', 'AGE1014_TOT', 'AGE1014_MALE', 'AGE1014_FEM',
-        'AGE1519_TOT', 'AGE1519_MALE', 'AGE1519_FEM', 'AGE2024_TOT', 'AGE2024_MALE', 'AGE2024_FEM',
-        'AGE2529_TOT', 'AGE2529_MALE', 'AGE2529_FEM', 'AGE3034_TOT', 'AGE3034_MALE', 'AGE3034_FEM',
-        'AGE3539_TOT', 'AGE3539_MALE', 'AGE3539_FEM', 'AGE4044_TOT', 'AGE4044_MALE', 'AGE4044_FEM',
-        'AGE4549_TOT', 'AGE4549_MALE', 'AGE4549_FEM', 'AGE5054_TOT', 'AGE5054_MALE', 'AGE5054_FEM',
-        'AGE5559_TOT', 'AGE5559_MALE', 'AGE5559_FEM', 'AGE6064_TOT', 'AGE6064_MALE', 'AGE6064_FEM',
-        'AGE6569_TOT', 'AGE6569_MALE', 'AGE6569_FEM', 'AGE7074_TOT', 'AGE7074_MALE', 'AGE7074_FEM',
-        'AGE7579_TOT', 'AGE7579_MALE', 'AGE7579_FEM', 'AGE8084_TOT', 'AGE8084_MALE', 'AGE8084_FEM',
-        'AGE85PLUS_TOT', 'AGE85PLUS_MALE', 'AGE85PLUS_FEM', 'MEDIAN_AGE_TOT', 'MEDIAN_AGE_MALE',
-        'MEDIAN_AGE_FEM'
+        'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'POPESTIMATE',
+        'UNDER5_TOT', 'UNDER5_MALE', 'UNDER5_FEM', 'AGE513_TOT', 'AGE513_MALE',
+        'AGE513_FEM', 'AGE1417_TOT', 'AGE1417_MALE', 'AGE1417_FEM',
+        'AGE1824_TOT', 'AGE1824_MALE', 'AGE1824_FEM', 'AGE16PLUS_TOT',
+        'AGE16PLUS_MALE', 'AGE16PLUS_FEM', 'AGE18PLUS_TOT', 'AGE18PLUS_MALE',
+        'AGE18PLUS_FEM', 'AGE1544_TOT', 'AGE1544_MALE', 'AGE1544_FEM',
+        'AGE2544_TOT', 'AGE2544_MALE', 'AGE2544_FEM', 'AGE4564_TOT',
+        'AGE4564_MALE', 'AGE4564_FEM', 'AGE65PLUS_TOT', 'AGE65PLUS_MALE',
+        'AGE65PLUS_FEM', 'AGE04_TOT', 'AGE04_MALE', 'AGE04_FEM', 'AGE59_TOT',
+        'AGE59_MALE', 'AGE59_FEM', 'AGE1014_TOT', 'AGE1014_MALE', 'AGE1014_FEM',
+        'AGE1519_TOT', 'AGE1519_MALE', 'AGE1519_FEM', 'AGE2024_TOT',
+        'AGE2024_MALE', 'AGE2024_FEM', 'AGE2529_TOT', 'AGE2529_MALE',
+        'AGE2529_FEM', 'AGE3034_TOT', 'AGE3034_MALE', 'AGE3034_FEM',
+        'AGE3539_TOT', 'AGE3539_MALE', 'AGE3539_FEM', 'AGE4044_TOT',
+        'AGE4044_MALE', 'AGE4044_FEM', 'AGE4549_TOT', 'AGE4549_MALE',
+        'AGE4549_FEM', 'AGE5054_TOT', 'AGE5054_MALE', 'AGE5054_FEM',
+        'AGE5559_TOT', 'AGE5559_MALE', 'AGE5559_FEM', 'AGE6064_TOT',
+        'AGE6064_MALE', 'AGE6064_FEM', 'AGE6569_TOT', 'AGE6569_MALE',
+        'AGE6569_FEM', 'AGE7074_TOT', 'AGE7074_MALE', 'AGE7074_FEM',
+        'AGE7579_TOT', 'AGE7579_MALE', 'AGE7579_FEM', 'AGE8084_TOT',
+        'AGE8084_MALE', 'AGE8084_FEM', 'AGE85PLUS_TOT', 'AGE85PLUS_MALE',
+        'AGE85PLUS_FEM', 'MEDIAN_AGE_TOT', 'MEDIAN_AGE_MALE', 'MEDIAN_AGE_FEM'
     ])
-    df = df[(df['Year'] != 'April2010Census') & (df['Year'] != 'April2010Estimate') &
-            (df['Year'] != 'April2020')]
+    df = df[(df['Year'] != 'April2010Census') &
+            (df['Year'] != 'April2010Estimate') & (df['Year'] != 'April2020')]
     df['Measurement_Method'] = 'CensusPEPSurvey'
     return df
 
@@ -912,123 +835,41 @@ def _county_2021(file_path: str) -> pd.DataFrame:
     df = pd.read_csv(file_path, encoding='ISO-8859-1', low_memory=False)
     df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)+\
         (df['COUNTY'].map(str)).str.zfill(3)
-    df = df.replace({'YEAR': {1: 'April2020Estimate', 2: 'July2020', 3: '2021'}})
-    df = df.rename(columns={
-        'POPEST_MALE': 'Count_Person_Male',
-        'POPEST_FEM': 'Count_Person_Female',
-        'YEAR': 'Year'
-    })
-    df = df.drop(columns=[
-        'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'POPESTIMATE', 'UNDER5_TOT',
-        'UNDER5_MALE', 'UNDER5_FEM', 'AGE513_TOT', 'AGE513_MALE', 'AGE513_FEM', 'AGE1417_TOT',
-        'AGE1417_MALE', 'AGE1417_FEM', 'AGE1824_TOT', 'AGE1824_MALE', 'AGE1824_FEM',
-        'AGE16PLUS_TOT', 'AGE16PLUS_MALE', 'AGE16PLUS_FEM', 'AGE18PLUS_TOT', 'AGE18PLUS_MALE',
-        'AGE18PLUS_FEM', 'AGE1544_TOT', 'AGE1544_MALE', 'AGE1544_FEM', 'AGE2544_TOT',
-        'AGE2544_MALE', 'AGE2544_FEM', 'AGE4564_TOT', 'AGE4564_MALE', 'AGE4564_FEM',
-        'AGE65PLUS_TOT', 'AGE65PLUS_MALE', 'AGE65PLUS_FEM', 'AGE04_TOT', 'AGE04_MALE', 'AGE04_FEM',
-        'AGE59_TOT', 'AGE59_MALE', 'AGE59_FEM', 'AGE1014_TOT', 'AGE1014_MALE', 'AGE1014_FEM',
-        'AGE1519_TOT', 'AGE1519_MALE', 'AGE1519_FEM', 'AGE2024_TOT', 'AGE2024_MALE', 'AGE2024_FEM',
-        'AGE2529_TOT', 'AGE2529_MALE', 'AGE2529_FEM', 'AGE3034_TOT', 'AGE3034_MALE', 'AGE3034_FEM',
-        'AGE3539_TOT', 'AGE3539_MALE', 'AGE3539_FEM', 'AGE4044_TOT', 'AGE4044_MALE', 'AGE4044_FEM',
-        'AGE4549_TOT', 'AGE4549_MALE', 'AGE4549_FEM', 'AGE5054_TOT', 'AGE5054_MALE', 'AGE5054_FEM',
-        'AGE5559_TOT', 'AGE5559_MALE', 'AGE5559_FEM', 'AGE6064_TOT', 'AGE6064_MALE', 'AGE6064_FEM',
-        'AGE6569_TOT', 'AGE6569_MALE', 'AGE6569_FEM', 'AGE7074_TOT', 'AGE7074_MALE', 'AGE7074_FEM',
-        'AGE7579_TOT', 'AGE7579_MALE', 'AGE7579_FEM', 'AGE8084_TOT', 'AGE8084_MALE', 'AGE8084_FEM',
-        'AGE85PLUS_TOT', 'AGE85PLUS_MALE', 'AGE85PLUS_FEM', 'MEDIAN_AGE_TOT', 'MEDIAN_AGE_MALE',
-        'MEDIAN_AGE_FEM'
-    ])
-    df = df[(df['Year'] != 'April2020Estimate') & (df['Year'] != 'July2020')]
-    df['Measurement_Method'] = 'CensusPEPSurvey'
-    return df
-
-
-def _county_2022(file_path: str) -> pd.DataFrame:
-    """
-    Process and cleans the file for county 2022.
-
-    Args:
-        file_path (str) : input file path.
-
-    Returns:
-        df (pd.DataFrame) : cleaned dataframe.
-    """
-    df = pd.read_csv(file_path, encoding='ISO-8859-1', low_memory=False)
-    df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)+\
-        (df['COUNTY'].map(str)).str.zfill(3)
-    df = df.replace({'YEAR': {1: 'April2020Estimate', 2: 'July2020', 3: '2021', 4: '2022'}})
-    df = df.rename(columns={
-        'POPEST_MALE': 'Count_Person_Male',
-        'POPEST_FEM': 'Count_Person_Female',
-        'YEAR': 'Year'
-    })
-    df = df.drop(columns=[
-        'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'POPESTIMATE', 'UNDER5_TOT',
-        'UNDER5_MALE', 'UNDER5_FEM', 'AGE513_TOT', 'AGE513_MALE', 'AGE513_FEM', 'AGE1417_TOT',
-        'AGE1417_MALE', 'AGE1417_FEM', 'AGE1824_TOT', 'AGE1824_MALE', 'AGE1824_FEM',
-        'AGE16PLUS_TOT', 'AGE16PLUS_MALE', 'AGE16PLUS_FEM', 'AGE18PLUS_TOT', 'AGE18PLUS_MALE',
-        'AGE18PLUS_FEM', 'AGE1544_TOT', 'AGE1544_MALE', 'AGE1544_FEM', 'AGE2544_TOT',
-        'AGE2544_MALE', 'AGE2544_FEM', 'AGE4564_TOT', 'AGE4564_MALE', 'AGE4564_FEM',
-        'AGE65PLUS_TOT', 'AGE65PLUS_MALE', 'AGE65PLUS_FEM', 'AGE04_TOT', 'AGE04_MALE', 'AGE04_FEM',
-        'AGE59_TOT', 'AGE59_MALE', 'AGE59_FEM', 'AGE1014_TOT', 'AGE1014_MALE', 'AGE1014_FEM',
-        'AGE1519_TOT', 'AGE1519_MALE', 'AGE1519_FEM', 'AGE2024_TOT', 'AGE2024_MALE', 'AGE2024_FEM',
-        'AGE2529_TOT', 'AGE2529_MALE', 'AGE2529_FEM', 'AGE3034_TOT', 'AGE3034_MALE', 'AGE3034_FEM',
-        'AGE3539_TOT', 'AGE3539_MALE', 'AGE3539_FEM', 'AGE4044_TOT', 'AGE4044_MALE', 'AGE4044_FEM',
-        'AGE4549_TOT', 'AGE4549_MALE', 'AGE4549_FEM', 'AGE5054_TOT', 'AGE5054_MALE', 'AGE5054_FEM',
-        'AGE5559_TOT', 'AGE5559_MALE', 'AGE5559_FEM', 'AGE6064_TOT', 'AGE6064_MALE', 'AGE6064_FEM',
-        'AGE6569_TOT', 'AGE6569_MALE', 'AGE6569_FEM', 'AGE7074_TOT', 'AGE7074_MALE', 'AGE7074_FEM',
-        'AGE7579_TOT', 'AGE7579_MALE', 'AGE7579_FEM', 'AGE8084_TOT', 'AGE8084_MALE', 'AGE8084_FEM',
-        'AGE85PLUS_TOT', 'AGE85PLUS_MALE', 'AGE85PLUS_FEM', 'MEDIAN_AGE_TOT', 'MEDIAN_AGE_MALE',
-        'MEDIAN_AGE_FEM'
-    ])
-    df = df[(df['Year'] != 'April2020Estimate') & (df['Year'] != 'July2020')]
-    df['Measurement_Method'] = 'CensusPEPSurvey'
-    return df
-
-
-def _county_2023(file_path: str) -> pd.DataFrame:
-    """
-    Process and cleans the file for county 2023.
-
-    Args:
-        file_path (str) : input file path.
-
-    Returns:
-        df (pd.DataFrame) : cleaned dataframe.
-    """
-    df = pd.read_csv(file_path, encoding='ISO-8859-1', low_memory=False)
-    df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)+\
-        (df['COUNTY'].map(str)).str.zfill(3)
     df = df.replace(
         {'YEAR': {
             1: 'April2020Estimate',
             2: 'July2020',
-            3: '2021',
-            4: '2022',
-            5: '2023'
+            3: '2021'
         }})
-    df = df.rename(columns={
-        'POPEST_MALE': 'Count_Person_Male',
-        'POPEST_FEM': 'Count_Person_Female',
-        'YEAR': 'Year'
-    })
+    df = df.rename(
+        columns={
+            'POPEST_MALE': 'Count_Person_Male',
+            'POPEST_FEM': 'Count_Person_Female',
+            'YEAR': 'Year'
+        })
     df = df.drop(columns=[
-        'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'POPESTIMATE', 'UNDER5_TOT',
-        'UNDER5_MALE', 'UNDER5_FEM', 'AGE513_TOT', 'AGE513_MALE', 'AGE513_FEM', 'AGE1417_TOT',
-        'AGE1417_MALE', 'AGE1417_FEM', 'AGE1824_TOT', 'AGE1824_MALE', 'AGE1824_FEM',
-        'AGE16PLUS_TOT', 'AGE16PLUS_MALE', 'AGE16PLUS_FEM', 'AGE18PLUS_TOT', 'AGE18PLUS_MALE',
-        'AGE18PLUS_FEM', 'AGE1544_TOT', 'AGE1544_MALE', 'AGE1544_FEM', 'AGE2544_TOT',
-        'AGE2544_MALE', 'AGE2544_FEM', 'AGE4564_TOT', 'AGE4564_MALE', 'AGE4564_FEM',
-        'AGE65PLUS_TOT', 'AGE65PLUS_MALE', 'AGE65PLUS_FEM', 'AGE04_TOT', 'AGE04_MALE', 'AGE04_FEM',
-        'AGE59_TOT', 'AGE59_MALE', 'AGE59_FEM', 'AGE1014_TOT', 'AGE1014_MALE', 'AGE1014_FEM',
-        'AGE1519_TOT', 'AGE1519_MALE', 'AGE1519_FEM', 'AGE2024_TOT', 'AGE2024_MALE', 'AGE2024_FEM',
-        'AGE2529_TOT', 'AGE2529_MALE', 'AGE2529_FEM', 'AGE3034_TOT', 'AGE3034_MALE', 'AGE3034_FEM',
-        'AGE3539_TOT', 'AGE3539_MALE', 'AGE3539_FEM', 'AGE4044_TOT', 'AGE4044_MALE', 'AGE4044_FEM',
-        'AGE4549_TOT', 'AGE4549_MALE', 'AGE4549_FEM', 'AGE5054_TOT', 'AGE5054_MALE', 'AGE5054_FEM',
-        'AGE5559_TOT', 'AGE5559_MALE', 'AGE5559_FEM', 'AGE6064_TOT', 'AGE6064_MALE', 'AGE6064_FEM',
-        'AGE6569_TOT', 'AGE6569_MALE', 'AGE6569_FEM', 'AGE7074_TOT', 'AGE7074_MALE', 'AGE7074_FEM',
-        'AGE7579_TOT', 'AGE7579_MALE', 'AGE7579_FEM', 'AGE8084_TOT', 'AGE8084_MALE', 'AGE8084_FEM',
-        'AGE85PLUS_TOT', 'AGE85PLUS_MALE', 'AGE85PLUS_FEM', 'MEDIAN_AGE_TOT', 'MEDIAN_AGE_MALE',
-        'MEDIAN_AGE_FEM'
+        'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'POPESTIMATE',
+        'UNDER5_TOT', 'UNDER5_MALE', 'UNDER5_FEM', 'AGE513_TOT', 'AGE513_MALE',
+        'AGE513_FEM', 'AGE1417_TOT', 'AGE1417_MALE', 'AGE1417_FEM',
+        'AGE1824_TOT', 'AGE1824_MALE', 'AGE1824_FEM', 'AGE16PLUS_TOT',
+        'AGE16PLUS_MALE', 'AGE16PLUS_FEM', 'AGE18PLUS_TOT', 'AGE18PLUS_MALE',
+        'AGE18PLUS_FEM', 'AGE1544_TOT', 'AGE1544_MALE', 'AGE1544_FEM',
+        'AGE2544_TOT', 'AGE2544_MALE', 'AGE2544_FEM', 'AGE4564_TOT',
+        'AGE4564_MALE', 'AGE4564_FEM', 'AGE65PLUS_TOT', 'AGE65PLUS_MALE',
+        'AGE65PLUS_FEM', 'AGE04_TOT', 'AGE04_MALE', 'AGE04_FEM', 'AGE59_TOT',
+        'AGE59_MALE', 'AGE59_FEM', 'AGE1014_TOT', 'AGE1014_MALE', 'AGE1014_FEM',
+        'AGE1519_TOT', 'AGE1519_MALE', 'AGE1519_FEM', 'AGE2024_TOT',
+        'AGE2024_MALE', 'AGE2024_FEM', 'AGE2529_TOT', 'AGE2529_MALE',
+        'AGE2529_FEM', 'AGE3034_TOT', 'AGE3034_MALE', 'AGE3034_FEM',
+        'AGE3539_TOT', 'AGE3539_MALE', 'AGE3539_FEM', 'AGE4044_TOT',
+        'AGE4044_MALE', 'AGE4044_FEM', 'AGE4549_TOT', 'AGE4549_MALE',
+        'AGE4549_FEM', 'AGE5054_TOT', 'AGE5054_MALE', 'AGE5054_FEM',
+        'AGE5559_TOT', 'AGE5559_MALE', 'AGE5559_FEM', 'AGE6064_TOT',
+        'AGE6064_MALE', 'AGE6064_FEM', 'AGE6569_TOT', 'AGE6569_MALE',
+        'AGE6569_FEM', 'AGE7074_TOT', 'AGE7074_MALE', 'AGE7074_FEM',
+        'AGE7579_TOT', 'AGE7579_MALE', 'AGE7579_FEM', 'AGE8084_TOT',
+        'AGE8084_MALE', 'AGE8084_FEM', 'AGE85PLUS_TOT', 'AGE85PLUS_MALE',
+        'AGE85PLUS_FEM', 'MEDIAN_AGE_TOT', 'MEDIAN_AGE_MALE', 'MEDIAN_AGE_FEM'
     ])
     df = df[(df['Year'] != 'April2020Estimate') & (df['Year'] != 'July2020')]
     df['Measurement_Method'] = 'CensusPEPSurvey'
@@ -1041,9 +882,9 @@ class PopulationEstimateBySex:
     MCF and TMCF Files.
     """
 
-    def __init__(self, csv_file_path: str, mcf_file_path: str,
-                 tmcf_file_path: str) -> None:
-        #self._input_files = input_files
+    def __init__(self, input_files: list, csv_file_path: str,
+                 mcf_file_path: str, tmcf_file_path: str) -> None:
+        self._input_files = input_files
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
@@ -1102,22 +943,14 @@ class PopulationEstimateBySex:
         Returns:
             None
         """
-        ip_files = os.listdir(_FLAGS.input_path)
-        ip_files = [_FLAGS.input_path + os.sep + file for file in ip_files]
-        
         # Creating Output Directory
         output_path = os.path.dirname(self._cleaned_csv_file_path)
         if not os.path.exists(output_path):
             os.mkdir(output_path)
         sv_list = []
         final_df = pd.DataFrame()
-        processed_count = 0
-        total_files_to_process = len(ip_files)
-        logging.info(f"No of files to be processed {len(ip_files)}")
-        for file_path in ip_files:
-            print("path", file_path)
-            if 'pe-02-1983.csv' in file_path or 'pe-02-1982.csv' in file_path:
-                pass
+        for file_path in self._input_files:
+            print("file...path", file_path)
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .tsv extension
@@ -1131,23 +964,23 @@ class PopulationEstimateBySex:
                 "us-est00int-": _national_2000_2010,
                 "nc-est2020-agesex-": _national_2010_2020,
                 "nc-est2020-agesex-r": _national_2010_2020,
-                "nc-est2023-agesex-": _national_2023,
-                "nc-est2023-agesex-r": _national_2023,
-                "nc-est2023-agesex-": _national_2023,
+                "nc-est2021-agesex-": _national_2021,
+                "nc-est2021-agesex-r": _national_2021,
+                "nc-est2022-agesex-": _national_2022,
                 "pe": _state_1970_1980,
                 "stiag": _state_1980_1990,
                 "st-est00int-02-": _state_2000_2010,
                 "st-est00int-02": _state_2000_2010,
                 "SC-EST2020-AGESEX": _state_2010_2020,
                 "SC-EST2020-AGESEX-": _state_2010_2020,
-                "sc-est2023-syasex-2": _state_2023,
-                "sc-est2023-syasex-3": _state_2023,
-                "sc-est2023-syasex-4": _state_2023,
-                "sc-est2023-syasex-5": _state_2023,
-                "sc-est2023-syasex-0": _state_2023,
-                "sc-est2023-syasex-1": _state_2023,
-                "sc-est2023-syasex-": _state_2023,
-                "sc-est2023-agesex-": _state_2023,
+                "sc-est2021-syasex-2": _state_2021,
+                "sc-est2021-syasex-3": _state_2021,
+                "sc-est2021-syasex-4": _state_2021,
+                "sc-est2021-syasex-5": _state_2021,
+                "sc-est2021-syasex-0": _state_2021,
+                "sc-est2021-syasex-1": _state_2021,
+                "sc-est2021-syasex-": _state_2021,
+                "sc-est2022-agesex-": _state_2022,
                 "co-asr-1": _county_1970_1980,
                 "pe-02-1": _county_1980_1990,
                 "stch-icen1": _county_1990_2000,
@@ -1155,158 +988,48 @@ class PopulationEstimateBySex:
                 "co-est00int-agesex-5": _county_2000_2010,
                 "CC-EST2020-AGESEX-": _county_2010_2020,
                 "CC-EST2020-AGESEX-A": _county_2010_2020,
-                "cc-est2023-agesex-": _county_2023,
-                "cc-est2023-agesex-a": _county_2023,
-                "nc-est2023-agesex-": _national_2023,
-                "nc-est2023-agesex-r": _national_2023,
-                "sc-est2023-syasex-2": _state_2023,
-                "sc-est2023-syasex-3": _state_2023,
-                "sc-est2023-syasex-4": _state_2023,
-                "sc-est2023-syasex-5": _state_2023,
-                "sc-est2023-syasex-0": _state_2023,
-                "sc-est2023-syasex-1": _state_2023,
-                "sc-est2023-syasex-": _state_2023,
-                "sc-est2023-agesex-": _state_2023,
-                "cc-est2023-agesex-": _county_2023,
-                "cc-est2023-agesex-a": _county_2023
+                "cc-est2021-agesex-": _county_2021,
+                "cc-est2021-agesex-a": _county_2021
             }
             df = file_to_function_mapping[file_name](file_path)
-            if not df.empty:
-                processed_count += 1
-                final_df = pd.concat([final_df, df])
-                final_df = final_df.sort_values(by=['Year', 'geo_ID'])
-            else:
-                logging.error(f"Failed to process {file_path}")
+            final_df = pd.concat([final_df, df])
+            final_df = final_df.sort_values(by=['Year', 'geo_ID'])
 
-        logging.info(f"No of files processed {processed_count}")
-        if processed_count == total_files_to_process & total_files_to_process > 0:
-            final_df = _states_full_to_short_form(final_df, 'geo_ID', "geo_ID")
-            final_df = _add_geo_id(final_df, "geo_ID", "geo_ID")
-            final_df = pd.melt(final_df,
-                            id_vars=["Year", "geo_ID", "Measurement_Method"],
-                            value_vars=['Count_Person_Male', 'Count_Person_Female'],
-                            var_name="SV",
-                            value_name="Observation")
+        final_df = _states_full_to_short_form(final_df, 'geo_ID', "geo_ID")
+        final_df = _add_geo_id(final_df, "geo_ID", "geo_ID")
+        final_df = pd.melt(
+            final_df,
+            id_vars=["Year", "geo_ID", "Measurement_Method"],
+            value_vars=['Count_Person_Male', 'Count_Person_Female'],
+            var_name="SV",
+            value_name="Observation")
 
-            final_df.to_csv(self._cleaned_csv_file_path, index=False)
-            sv_list = ['Count_Person_Female', 'Count_Person_Male']
-            self._generate_mcf(sv_list)
-            self._generate_tmcf()
-        else:
-            logging.error(
-            "Aborting output files as no of files to process not matching processed files")
-            
-def add_future_year_urls():
-    global _FILES_TO_DOWNLOAD
-    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
-        _FILES_TO_DOWNLOAD = json.load(inpit_file)
-    urls_to_scan = [
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/national/asrh/nc-est{YEAR}-agesex-res.csv",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sc-est{YEAR}-syasex-01.xlsx",
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-agesex-all.csv",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/detail/sc-est{YEAR}-agesex-01.xlsx"
- 
-    ]
-    if dt.now().year < 2023:
-        YEAR = dt.now().year
-        for url in urls_to_scan:
-            url_to_check = url.format(YEAR=YEAR)
-            try:
-                check_url = requests.head(url_to_check)
-                if check_url.status_code == 200:
-                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
-
-            except:
-                logging.error(f"URL is not accessable {url_to_check}")
-
-
-
-def download_files():
-    global _FILES_TO_DOWNLOAD
-    session = requests.session()
-    max_retry = 5
-    for file_to_dowload in _FILES_TO_DOWNLOAD:
-        file_name_to_save = None
-        url = file_to_dowload['download_path']
-        if 'file_name' in file_to_dowload and len(file_to_dowload['file_name'] > 5):
-            file_name_to_save = file_to_dowload['file_name']
-        else:
-            file_name_to_save = url.split('/')[-1]
-        retry_number = 0
-
-        is_file_downloaded = False
-        while is_file_downloaded == False:
-            try:
-                with session.get(url, stream=True) as response:
-                    response.raise_for_status()
-                    if response.status_code == 200:
-                        with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save), 'wb') as f:
-                            f.write(response.content)
-                            file_to_dowload['is_downloaded'] = True
-                            logging.info(f"Downloaded file : {url}")
-                            is_file_downloaded = True
-                    else:
-                        logging.info(f"Retry file download {{url}}")
-                        time.sleep(5)
-                        retry_number += 1
-                        if retry_number > max_retry:
-                            logging.error(f"Error downloading {url}")
-                            logging.error("Exit from script")
-                            sys.exit(0)
-
-            except Exception as e:
-                logging.error(f"Retry file download {url}")
-                time.sleep(5)
-                retry_number += 1
-                if retry_number > max_retry:
-                    logging.error(f"Error downloading {url}")
-                    logging.error("Exit from script")
-                    sys.exit(0)
-    return True
+        final_df.to_csv(self._cleaned_csv_file_path, index=False)
+        sv_list = ['Count_Person_Female', 'Count_Person_Male']
+        self._generate_mcf(sv_list)
+        self._generate_tmcf()
 
 
 def main(_):
-    mode = _FLAGS.mode
+    input_path = _FLAGS.input_path
+    try:
+        ip_files = os.listdir(input_path)
+    except Exception:
+        print("Run the download.py script first.")
+        sys.exit(1)
+    ip_files = [input_path + os.sep + file for file in ip_files]
+    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "output")
     # Defining Output Files
     csv_name = "population_estimate_sex.csv"
     mcf_name = "population_estimate_sex.mcf"
     tmcf_name = "population_estimate_sex.tmcf"
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
-    if not(os.path.exists(data_file_path)):
-        os.mkdir(data_file_path)
-    if not(os.path.exists(_INPUT_FILE_PATH)):
-        os.mkdir(_INPUT_FILE_PATH)
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name
     tmcf_path = data_file_path + os.sep + tmcf_name
-
-    if mode == "":
-        # download & process
-        add_future_year_urls()
-        download_status = download_files()
-        if download_status:
-            loader = PopulationEstimateBySex(cleaned_csv_path, mcf_path, tmcf_path)
-            loader.process()
-    elif mode == "download":
-        add_future_year_urls()
-        download_status = download_files()
-    elif mode == "process":
-            loader = PopulationEstimateBySex(cleaned_csv_path, mcf_path, tmcf_path)
-            loader.process()
-
-    # add_future_year_urls()
-    # download_status = download_files()
-    # if download_status:
-	# # add the process steps as your script
-    #     input_path = _FLAGS.input_path
-    # try:
-    #     ip_files = os.listdir(input_path)
-    # except Exception:
-    #     print("Run the download.py script first.")
-    #     sys.exit(1)
-
-    # loader = PopulationEstimateBySex(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
-    # loader.process()
+    loader = PopulationEstimateBySex(ip_files, cleaned_csv_path, mcf_path,
+                                     tmcf_path)
+    loader.process()
 
 
 if __name__ == "__main__":
