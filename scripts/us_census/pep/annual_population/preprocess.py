@@ -1047,7 +1047,7 @@ def download_files():
                     response.raise_for_status()
                     if response.status_code == 200:
                         with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save), 'wb') as f:
-                            shutil.copyfileobj(response.raw, f)
+                            f.write(response.content)
                             file_to_dowload['is_downloaded'] = True
                             logging.info(f"Downloaded file : {url}")
                             is_file_downloaded = True
@@ -1089,7 +1089,7 @@ def main(_):
         download_status = download_files()
     elif mode == "process":
         process(cleaned_csv_path, mcf_path, tmcf_path)
-
+    logging.info("Files are processed Successfully.............!")
 
 if __name__ == "__main__":
     app.run(main)
