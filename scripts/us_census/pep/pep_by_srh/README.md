@@ -5,9 +5,9 @@
 This import covers US Census Population estimate by SRH (Sex, Race and Hispanic / Origin).
 Data is covered for 
 
-    1990 - 2023     County
-    1980 - 2023     State
-    1980 - 2023     National
+    1990 - 2029     County
+    1980 - 2029     State
+    1980 - 2029     National
 
 Properties Covered - 
 
@@ -43,19 +43,37 @@ Above scipt creates necessary folders required for processing files and download
 Census PEP files to folder input_files. And reads downloaded files from input_files folder, prepares consolidated 
 (National, State, County) output files for as-is (population_estimate_by_srh.csv) and aggregated (population_estimate_by_srh_agg.csv) in output_files folder
 
+### Additional Notes
+
+We have modified the script for Automation setup, now it's not required to add the future URL's in input_url.jason file. Code will take care of future URL formation automatically.
+
 ### Import Procedure
+
 The below command will run process.py and generate output csv, mcf and tmcf. 
 `python3 script/us_census/pep/pep_by_srh/process.py`
 
+Execute the 'process.py' script by using the following commands:
 
+  - if you want to perform "download and process", run the below command:
+
+        `python3 process.py --mode=""`
+
+  - if you want to perform "only process", run the below command:
+
+        `python3 process.py --mode="process"`
+        
+  - if you want to perform "only download", run the below command:
+
+        `python3 process.py --mode="download"`
+    
 ```
 generate_mcf.py
 generate_tmcf.py
 ```
 Generates mcf and tmcf files for both 'as-is' data processing and 'aggregated' data processing
 
-### Additional Notes
-
-We have modified the script for Automation setup, now it's not required to add the future URL's in input_url.jason file. Code will take care of future URL formation automatically.
-
-
+### New Implentation:
+- [Updated the script on October 30, 2024]
+- Downloading input files is now integrated into process.py, eliminating the need to run the separate download.sh script. 
+- All source file URLs, including future URLs adhering to the same structure, are centrally managed in the input_url.json file.
+- All input files required for processing should be stored within the designated "input_files" folder.
