@@ -44,6 +44,7 @@ from states_to_shortform import get_states
 #pd.options.mode.copy_on_write = True
 
 _FLAGS = flags.FLAGS
+flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 
@@ -768,9 +769,8 @@ class CensusUSAPopulationByRace:
     Files using pre-defined templates.
     """
 
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
-        self.input_files = input_files
+    def __init__(self, csv_file_path: str, mcf_file_path: str,
+                 tmcf_file_path: str) -> None:
         self.cleaned_csv_file_path = csv_file_path
         self.mcf_file_path = mcf_file_path
         self.tmcf_file_path = tmcf_file_path
@@ -890,84 +890,91 @@ class CensusUSAPopulationByRace:
         Returns:
             df (DataFrame) : DataFrame.
         """
-        # Finding the Dir Path
-        file_dir = self.cleaned_csv_file_path
-        if not os.path.exists(file_dir):
-            os.mkdir(file_dir)
-        df = _transform_df(df)
-        if 'geo_ID' not in df.columns:
-            df = _add_geo_id(df)
-        if self.df is None:
-            self.df = pd.DataFrame(columns=["Year","geo_ID",\
-                "Count_Person_USAllRaces","Count_Person_WhiteAlone",\
+        try:
+            # Finding the Dir Path
+            file_dir = self.cleaned_csv_file_path
+            if not os.path.exists(file_dir):
+                os.mkdir(file_dir)
+            df = _transform_df(df)
+            if 'geo_ID' not in df.columns:
+                df = _add_geo_id(df)
+            if self.df is None:
+                self.df = pd.DataFrame(columns=["Year","geo_ID",\
+                    "Count_Person_USAllRaces","Count_Person_WhiteAlone",\
+                    "Count_Person_BlackOrAfricanAmericanAlone",\
+                    "Count_Person_AmericanIndianAndAlaskaNativeAlone",\
+                    "Count_Person_AsianAlone"\
+                    ,"Count_Person_NativeHawaiianAndOtherPacificIslanderAlone",
+                    "Count_Person_WhiteAloneOrInCombination"+\
+                        "WithOneOrMoreOtherRaces",\
+                    "Count_Person_BlackOrAfricanAmericanAlone"+\
+                        "OrInCombinationWithOneOrMoreOtherRaces",\
+                    "Count_Person_AmericanIndianAndAlaskaNativeAlone"+\
+                        "OrInCombinationWithOneOrMoreOtherRaces",\
+                    "Count_Person_AsianAloneOr"+\
+                        "InCombinationWithOneOrMoreOtherRaces",\
+                    "Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOr"+\
+                    "InCombinationWithOneOrMoreOtherRaces",\
+                    "Count_Person_AsianOrPacificIslander",\
+                    "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"])
+                self.df = pd.concat([self.df, df], ignore_index=True)
+
+            else:
+                self.df = pd.concat([self.df, df], ignore_index=True)
+            self.df['Year'] = pd.to_numeric(self.df['Year'])
+            self.df.sort_values(by=['Year', 'geo_ID'],
+                                ascending=True,
+                                inplace=True)
+            self.df = self.df[["Year","geo_ID",
+                "Count_Person_WhiteAlone",\
                 "Count_Person_BlackOrAfricanAmericanAlone",\
                 "Count_Person_AmericanIndianAndAlaskaNativeAlone",\
-                "Count_Person_AsianAlone"\
-                ,"Count_Person_NativeHawaiianAndOtherPacificIslanderAlone",
-                "Count_Person_WhiteAloneOrInCombination"+\
-                    "WithOneOrMoreOtherRaces",\
+                "Count_Person_AsianAlone",\
+                "Count_Person_NativeHawaiianAndOtherPacificIslanderAlone",\
+                "Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces",\
                 "Count_Person_BlackOrAfricanAmericanAlone"+\
                     "OrInCombinationWithOneOrMoreOtherRaces",\
-                "Count_Person_AmericanIndianAndAlaskaNativeAlone"+\
-                    "OrInCombinationWithOneOrMoreOtherRaces",\
-                "Count_Person_AsianAloneOr"+\
-                    "InCombinationWithOneOrMoreOtherRaces",\
+                "Count_Person_AmericanIndianAndAlaskaNativeAloneOr"+\
+                "InCombinationWithOneOrMoreOtherRaces",\
+                "Count_Person_AsianAloneOrInCombinationWithOneOrMoreOtherRaces",\
                 "Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOr"+\
                 "InCombinationWithOneOrMoreOtherRaces",\
                 "Count_Person_AsianOrPacificIslander",\
-                "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"])
-            self.df = pd.concat([self.df, df], ignore_index=True)
-
-        else:
-            self.df = pd.concat([self.df, df], ignore_index=True)
-        self.df['Year'] = pd.to_numeric(self.df['Year'])
-        self.df.sort_values(by=['Year', 'geo_ID'], ascending=True, inplace=True)
-        self.df = self.df[["Year","geo_ID",
-            "Count_Person_WhiteAlone",\
-            "Count_Person_BlackOrAfricanAmericanAlone",\
-            "Count_Person_AmericanIndianAndAlaskaNativeAlone",\
-            "Count_Person_AsianAlone",\
-            "Count_Person_NativeHawaiianAndOtherPacificIslanderAlone",\
-            "Count_Person_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces",\
-            "Count_Person_BlackOrAfricanAmericanAlone"+\
-                "OrInCombinationWithOneOrMoreOtherRaces",\
-            "Count_Person_AmericanIndianAndAlaskaNativeAloneOr"+\
-            "InCombinationWithOneOrMoreOtherRaces",\
-            "Count_Person_AsianAloneOrInCombinationWithOneOrMoreOtherRaces",\
-            "Count_Person_NativeHawaiianAndOtherPacificIslanderAloneOr"+\
-            "InCombinationWithOneOrMoreOtherRaces",\
-            "Count_Person_AsianOrPacificIslander",\
-            "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"]]
-        df_before_2000 = self.df[self.df["Year"] < 2000]
-        df_county_after_2000 = self.df[(self.df["Year"] >= 2000) &
-                                       (self.df["geo_ID"] != "country/USA") &
-                                       (self.df["geo_ID"].str.len() > 9)]
-        df_national_state_2000 = self.df[(self.df["Year"] >= 2000) &
-                                         ((self.df["geo_ID"].str.len() <= 9) |
-                                          (self.df["geo_ID"] == "country/USA"))]
-        #print("before delete", df_before_2000.shape)
-        df_before_2000 = df_before_2000.drop_duplicates(
-            subset=['geo_ID', 'Year'], keep='last')
-        #print("After delete", df_before_2000.shape)
-        df_before_2000.to_csv(os.path.join(
-            self.cleaned_csv_file_path,
-            "USA_Population_Count_by_Race_before_2000.csv"),
-                              index=False)
-        #print("")
-        #Added by Shamim to resolve 2020 inconsistent data remove
-        df_county_after_2000 = df_county_after_2000.drop_duplicates(
-            subset=['geo_ID', 'Year'], keep='last')
-        df_county_after_2000.to_csv(os.path.join(
-            self.cleaned_csv_file_path,
-            "USA_Population_Count_by_Race_county_after_2000.csv"),
-                                    index=False)
-        #Added by Shamim to resolve 2020 inconsistent data remove
-        df_national_state_2000 = df_national_state_2000.drop_duplicates(
-            subset=['geo_ID', 'Year'], keep='last')
-        df_national_state_2000.to_csv(os.path.join(
-            self.cleaned_csv_file_path,
-            "USA_Population_Count_by_Race_National_state_2000.csv"),
-                                      index=False)
+                "Count_Person_TwoOrMoreRaces","Count_Person_NonWhite"]]
+            df_before_2000 = self.df[self.df["Year"] < 2000]
+            df_county_after_2000 = self.df[(self.df["Year"] >= 2000) &
+                                           (self.df["geo_ID"] != "country/USA")
+                                           & (self.df["geo_ID"].str.len() > 9)]
+            df_national_state_2000 = self.df[(self.df["Year"] >= 2000) & (
+                (self.df["geo_ID"].str.len() <= 9) |
+                (self.df["geo_ID"] == "country/USA"))]
+            #print("before delete", df_before_2000.shape)
+            df_before_2000 = df_before_2000.drop_duplicates(
+                subset=['geo_ID', 'Year'], keep='last')
+            #print("After delete", df_before_2000.shape)
+            df_before_2000.to_csv(os.path.join(
+                self.cleaned_csv_file_path,
+                "USA_Population_Count_by_Race_before_2000.csv"),
+                                  index=False)
+            #print("")
+            #Added by Shamim to resolve 2020 inconsistent data remove
+            df_county_after_2000 = df_county_after_2000.drop_duplicates(
+                subset=['geo_ID', 'Year'], keep='last')
+            df_county_after_2000.to_csv(os.path.join(
+                self.cleaned_csv_file_path,
+                "USA_Population_Count_by_Race_county_after_2000.csv"),
+                                        index=False)
+            #Added by Shamim to resolve 2020 inconsistent data remove
+            df_national_state_2000 = df_national_state_2000.drop_duplicates(
+                subset=['geo_ID', 'Year'], keep='last')
+            df_national_state_2000.to_csv(os.path.join(
+                self.cleaned_csv_file_path,
+                "USA_Population_Count_by_Race_National_state_2000.csv"),
+                                          index=False)
+        except Exception as e:
+            logging.error("error processing file")
+            return False
+        return True
 
     def process(self):
         """
@@ -975,41 +982,55 @@ class CensusUSAPopulationByRace:
         calls defined methods to clean, generate final
         cleaned CSV file, MCF file and TMCF file.
         """
+        input_path = _FLAGS.input_path
+        ip_files = os.listdir(input_path)
+        self.input_files = [input_path + os.sep + file for file in ip_files]
+        processed_count = 0
+        total_files_to_process = len(self.input_files)
+        logging.info(f"No of files to be processed {len(self.input_files)}")
         for file in self.input_files:
             print(file)
             if 'USCountywv90.txt' in file:
                 pass
             df = self._load_data(file)
-            self._transform_data(df)
+            result = self._transform_data(df)
+            if result:
+                processed_count += 1
+        logging.info(f"No of files processed {processed_count}")
+        if processed_count == total_files_to_process & total_files_to_process > 0:
 
-        name = "USA_Population_Count_by_Race_before_2000"
-        generator_df=pd.read_csv\
-            (os.path.join(self.cleaned_csv_file_path,
-                "USA_Population_Count_by_Race_before_2000.csv"))
-        #print("Before delete ", generator_df.shape)
-        generator_df = generator_df[generator_df['geo_ID'].str.len() > 1]
-        #print("After delete ", generator_df.shape)
-        generator_df.to_csv(os.path.join(
-            self.cleaned_csv_file_path,
-            "USA_Population_Count_by_Race_before_2000.csv"),
-                            index=False)
-        self._generate_mcf(generator_df.columns, name)
-        self._generate_tmcf(generator_df.columns, name)
+            name = "USA_Population_Count_by_Race_before_2000"
+            generator_df=pd.read_csv\
+                (os.path.join(self.cleaned_csv_file_path,
+                    "USA_Population_Count_by_Race_before_2000.csv"))
+            #print("Before delete ", generator_df.shape)
+            generator_df = generator_df[generator_df['geo_ID'].str.len() > 1]
+            #print("After delete ", generator_df.shape)
+            generator_df.to_csv(os.path.join(
+                self.cleaned_csv_file_path,
+                "USA_Population_Count_by_Race_before_2000.csv"),
+                                index=False)
+            self._generate_mcf(generator_df.columns, name)
+            self._generate_tmcf(generator_df.columns, name)
 
-        name = "USA_Population_Count_by_Race_county_after_2000"
-        generator_df=pd.read_csv\
-            (os.path.join(self.cleaned_csv_file_path,
-            "USA_Population_Count_by_Race_county_after_2000.csv"))
-        self._generate_mcf(generator_df.columns, name)
-        self._generate_tmcf(generator_df.columns, name)
+            name = "USA_Population_Count_by_Race_county_after_2000"
+            generator_df=pd.read_csv\
+                (os.path.join(self.cleaned_csv_file_path,
+                "USA_Population_Count_by_Race_county_after_2000.csv"))
+            self._generate_mcf(generator_df.columns, name)
+            self._generate_tmcf(generator_df.columns, name)
 
-        name = "USA_Population_Count_by_Race_National_state_2000"
-        generator_df=pd.read_csv\
-            (os.path.join(self.cleaned_csv_file_path,
-            "USA_Population_Count_by_Race_National_state_2000.csv"))
+            name = "USA_Population_Count_by_Race_National_state_2000"
+            generator_df=pd.read_csv\
+                (os.path.join(self.cleaned_csv_file_path,
+                "USA_Population_Count_by_Race_National_state_2000.csv"))
 
-        self._generate_mcf(generator_df.columns, name)
-        self._generate_tmcf(generator_df.columns, name)
+            self._generate_mcf(generator_df.columns, name)
+            self._generate_tmcf(generator_df.columns, name)
+        else:
+            logging.error(
+                "Aborting output files as no of files to process not matching processed files"
+            )
 
     # Generating MCF files
     def _generate_mcf(self, df_cols: list, name: str) -> None:
@@ -1244,22 +1265,30 @@ def download_files():
 
 
 def main(_):
-    add_future_year_urls()
-    download_status = download_files()
-    if download_status:
-        #if True:
-        # add the process steps as your script
-        input_path = _FLAGS.input_path
-        ip_files = os.listdir(input_path)
-        ip_files = [input_path + os.sep + file for file in ip_files]
-        # Defining Output file names
-        data_file_path = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "output")
-        mcf_path = data_file_path
-        tmcf_path = data_file_path
-        loader = CensusUSAPopulationByRace(ip_files, data_file_path, mcf_path,
-                                           tmcf_path)
+    mode = _FLAGS.mode
+    # Defining Output file names
+    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "output")
+    cleaned_csv_path = data_file_path
+    mcf_path = data_file_path
+    tmcf_path = data_file_path
+
+    if mode == "":
+        # download & process
+        add_future_year_urls()
+        download_status = download_files()
+        if download_status:
+            loader = CensusUSAPopulationByRace(data_file_path, mcf_path,
+                                               tmcf_path)
+            loader.process()
+
+    elif mode == "download":
+        add_future_year_urls()
+        download_status = download_files()
+    elif mode == "process":
+        loader = CensusUSAPopulationByRace(data_file_path, mcf_path, tmcf_path)
         loader.process()
+
         logging.info("completed")
 
 

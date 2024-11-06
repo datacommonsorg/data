@@ -50,9 +50,17 @@ Run the test cases
 
 ```/bin/python3 scripts/us_census/pep/population_estimate_by_race/preprocess_test.py```
 
-### Import Procedure
+[Updated the script on November 06, 2024]
+Downloading input files is now integrated into preprocess.py, eliminating the need to run the separate download.sh script. 
+All source file URLs, including future URLs adhering to the same structure, are centrally managed in the input_url.json file.
+All input files required for processing should be stored within the designated "input_files" folder.
 
-The below scripts will download the data and process and script will generate csv and mcf files.
-preprocess.py
+
+### Downloading and Processing Data
+
+To download inputput files and process run the below commond.
+"python3 preprocess.py"
+
+Running this command generates the csv, mcf, tmcf files
 
 
