@@ -5,9 +5,9 @@
 This import covers US Census Population estimate by SRH (Sex, Race and Hispanic / Origin).
 Data is covered for 
 
-    1990 - 2029     County
-    1980 - 2029     State
-    1980 - 2029     National
+    1990 - latest_data     County
+    1980 - latest_data     State
+    1980 - latest_data     National
 
 Properties Covered - 
 
