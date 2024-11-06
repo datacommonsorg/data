@@ -58,9 +58,23 @@ All input files required for processing should be stored within the designated "
 
 ### Downloading and Processing Data
 
-To download inputput files and process run the below commond.
-"python3 preprocess.py"
+To perform "download and process", run the below command:
+`python3 preprocess.py --mode=""`
 
-Running this command generates the csv, mcf, tmcf files
+Running this command generates input_fles and csv, mcf, tmcf files
+
+
+   If you want to perform "only process", run the below command:
+
+        `python3 preprocess.py --mode="process"`
+        
+   If you want to perform "only download", run the below command:
+
+        `python3 preprocess.py --mode="download"`
+
+
+
+
+
 
 
