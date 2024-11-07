@@ -36,7 +36,7 @@ Run the test cases
 
 Execute the 'preprocess_test.py' script by using the following commands:
     
-     `python3 preprocess_test.py --mode=process`
+     `python3 preprocess_test.py`
 
 ### Import Procedure
 

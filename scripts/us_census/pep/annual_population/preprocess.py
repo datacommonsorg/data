@@ -1144,17 +1144,13 @@ def main(_):
     mcf_path = os.path.join(data_file_path, "usa_annual_population.mcf")
     tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
 
-    if mode == "":
-        # download & process
+    download_status = True 
+    if mode == "" or mode == "download":
         add_future_year_urls()
         download_status = download_files()
-        if download_status:
-            process(_INPUT_FILE_PATH, cleaned_csv_path, mcf_path, tmcf_path)
-    elif mode == "download":
-        add_future_year_urls()
-        download_status = download_files()
-    elif mode == "process":
+    if download_status and (mode == "" or mode == "process"):
         process(_INPUT_FILE_PATH, cleaned_csv_path, mcf_path, tmcf_path)
+
     logging.info("Files are processed Successfully.............!")
 
 
