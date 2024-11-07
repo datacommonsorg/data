@@ -37,10 +37,6 @@ class TestPreprocess(unittest.TestCase):
     tmcf_file_path = OP_DATA_FOLDER
 
     ip_files = os.path.join(TEST_DATA_FOLDER, "test_files")
-    # ip_data_path = [
-    #     os.path.join(os.path.join(TEST_DATA_FOLDER, "test_files"), file_name)
-    #     for file_name in ip_files
-    # ]
 
     base = CensusUSAPopulationByRace(ip_files, cleaned_csv_file_path,
                                      mcf_file_path, tmcf_file_path)
