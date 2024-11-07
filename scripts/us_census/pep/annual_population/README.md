@@ -1,7 +1,7 @@
 # US Census PEP: National Population Count
 
 ## About the Dataset
-This dataset has Annual Population Estimates from the year 1900 to 2021 for different geographic level such as National, State, County, and Cities.
+This dataset has Annual Population Estimates from the year 1900 to latest for different geographic level such as National, State, County, and Cities.
 
 The population is categorized by [Count_Person](https://datacommons.org/browser/Count_Person) StatVar in Datacommons.org
 
