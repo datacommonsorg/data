@@ -769,8 +769,9 @@ class CensusUSAPopulationByRace:
     Files using pre-defined templates.
     """
 
-    def __init__(self, csv_file_path: str, mcf_file_path: str,
+    def __init__(self, input_path: str, csv_file_path: str, mcf_file_path: str,
                  tmcf_file_path: str) -> None:
+        self.input_path = input_path
         self.cleaned_csv_file_path = csv_file_path
         self.mcf_file_path = mcf_file_path
         self.tmcf_file_path = tmcf_file_path
@@ -982,9 +983,11 @@ class CensusUSAPopulationByRace:
         calls defined methods to clean, generate final
         cleaned CSV file, MCF file and TMCF file.
         """
-        input_path = _FLAGS.input_path
-        ip_files = os.listdir(input_path)
-        self.input_files = [input_path + os.sep + file for file in ip_files]
+        #input_path = _FLAGS.input_path
+        ip_files = os.listdir(self.input_path)
+        self.input_files = [
+            self.input_path + os.sep + file for file in ip_files
+        ]
         processed_count = 0
         total_files_to_process = len(self.input_files)
         logging.info(f"No of files to be processed {len(self.input_files)}")
@@ -1272,21 +1275,23 @@ def main(_):
     cleaned_csv_path = data_file_path
     mcf_path = data_file_path
     tmcf_path = data_file_path
+    input_path = _FLAGS.input_path
 
     if mode == "":
         # download & process
         add_future_year_urls()
         download_status = download_files()
         if download_status:
-            loader = CensusUSAPopulationByRace(data_file_path, mcf_path,
-                                               tmcf_path)
+            loader = CensusUSAPopulationByRace(input_path, data_file_path,
+                                               mcf_path, tmcf_path)
             loader.process()
 
     elif mode == "download":
         add_future_year_urls()
         download_status = download_files()
     elif mode == "process":
-        loader = CensusUSAPopulationByRace(data_file_path, mcf_path, tmcf_path)
+        loader = CensusUSAPopulationByRace(input_path, data_file_path, mcf_path,
+                                           tmcf_path)
         loader.process()
 
         logging.info("completed")
