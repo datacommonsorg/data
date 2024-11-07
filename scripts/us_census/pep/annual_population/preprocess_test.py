@@ -29,6 +29,7 @@ from constants import TEST_DATA_DIR
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 
+
 class TestPreprocess(unittest.TestCase):
     """
     This module is used to test USCensus PEP_Annual_Population data processing.
@@ -38,17 +39,19 @@ class TestPreprocess(unittest.TestCase):
 
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
-        
+
         files_dir = os.path.join(_MODULE_DIR, TEST_DATA_DIR, "datasets")
-        
-        data_file_path = os.path.join(_MODULE_DIR, TEST_DATA_DIR, "output_files")
-        
-        cleaned_csv_path = os.path.join(data_file_path, "usa_annual_population.csv")
+
+        data_file_path = os.path.join(_MODULE_DIR, TEST_DATA_DIR,
+                                      "output_files")
+
+        cleaned_csv_path = os.path.join(data_file_path,
+                                        "usa_annual_population.csv")
         mcf_path = os.path.join(data_file_path, "usa_annual_population.mcf")
         tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
-        
+
         process(files_dir, cleaned_csv_path, mcf_path, tmcf_path)
-        
+
         with open(mcf_path, encoding="UTF-8") as mcf_file:
             self._actual_mcf_data = mcf_file.read()
 
@@ -100,6 +103,7 @@ class TestPreprocess(unittest.TestCase):
         print(str(self._actual_csv_data))
         self.assertEqual(expected_csv_data.strip(),
                          self._actual_csv_data.strip())
+
 
 if __name__ == '__main__':
     unittest.main()

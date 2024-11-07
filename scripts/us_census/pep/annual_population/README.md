@@ -34,6 +34,10 @@ Run the test cases
 
 `/bin/python3 -m unittest scripts/us_census/pep/annual_population_estimate/preprocess_test.py`
 
+Execute the 'preprocess_test.py' script by using the following commands:
+    
+     `python3 preprocess_test.py --mode=process`
+
 ### Import Procedure
 
 The below script will download the data, generate csv and mcf files.
@@ -54,7 +58,7 @@ Execute the 'preprocess.py' script by using the following commands:
 
         `python3 preprocess.py --mode="download"`
 
-### New Implentation:
+### New Implementation:
 - [Updated the script on October 29, 2024]
 - Downloading input files is now integrated into preprocess.py, eliminating the need to run the separate download.sh script. 
 - All source file URLs, including future URLs adhering to the same structure, are centrally managed in the input_url.json file.
