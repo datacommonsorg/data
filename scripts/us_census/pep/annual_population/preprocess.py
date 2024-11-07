@@ -1131,8 +1131,10 @@ def download_files():
                 retry_number += 1
                 if retry_number > max_retry:
                     logging.error(f"Error downloading {url}")
-                    logging.error("Exit from script")
-                    sys.exit(0)
+                    logging.fatal(
+                        "A critical error has occurred. Terminating the program."
+                    )
+                    sys.exit(1)
     return True
 
 
@@ -1144,7 +1146,7 @@ def main(_):
     mcf_path = os.path.join(data_file_path, "usa_annual_population.mcf")
     tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
 
-    download_status = True 
+    download_status = True
     if mode == "" or mode == "download":
         add_future_year_urls()
         download_status = download_files()
