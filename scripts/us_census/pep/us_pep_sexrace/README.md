@@ -97,3 +97,17 @@ We have modified the script for Automation setup, now it's not required to add b
 - This script aggregates data from  state level to national level from year 2010 to 2020 as the    intercensal files were not availabel for this year range at state level. -->
 
 All these scripts are processed by running preprocess.py script.
+
+Execute the 'preprocess.py' script by using the following commands:
+
+  - if you want to perform "download and process" at a time, then run the below command:
+
+       python3 preprocess.py
+
+  - if you want to perform "only process", run the below command:
+
+       python3 preprocess.py --mode=process
+ 
+  - if you want to perform "only download", run the below command:
+
+       python3 preprocess.py --mode=download

@@ -13,51 +13,72 @@
 # limitations under the License.
 """
 This script generate output CSV
-for county 2020-2023 and the file
+for State 2020-2023 and the file
 is processed as is.
 """
 
 import pandas as pd
 import os
+import logging
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def process_county_2020_2023(url: str) -> pd.DataFrame:
+def process_state_2020_2029(url: str) -> pd.DataFrame:
     """
     Function Loads input csv datasets
-    from 2010-2020 on a County Level,
+    from 2010-2020 on a State Level,
     cleans it and return cleaned dataframe.
 
     Args:
         url (str) : url of the dataset
 
     Returns:
-        df.columns (pd.DataFrame) : Column names of cleaned dataframe
+        df.columns (pd.DataFrame) : Coulumn names of cleaned dataframe
     """
-    # reading the csv input file
+    _MODULE_DIR = os.path.dirname(__file__)
+    parent_dir = os.path.dirname(_MODULE_DIR)
+    _INPUT_FILE_PATH = os.path.join(parent_dir, 'output_files/intermediate')
+    # List and sort the files in the input directory
+    files_list = os.listdir(_INPUT_FILE_PATH)
+    files_list.sort()
+    # Expected number of files
+    expected_files_count = len(files_list)
+
+    # Check if the number of files in the directory matches the expected count
+    if not files_list:
+        logging.error("No input files found in the directory: %s",
+                      _INPUT_FILE_PATH)
+        return
+
+    if len(files_list) != expected_files_count:
+        logging.error(
+            "Mismatch in the number of input files. Expected %d files, but found %d.",
+            expected_files_count, len(files_list))
+
+    # reading input file to dataframe
     df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
 
     # years having 1 and 2 value are not requried as estimate is for April Month
     # agegrp is only required as it gives total of all ages
-    df = df.query("AGEGRP == 0 & YEAR not in [1]")
+    df = df.query("YEAR not in [1]")
+    df = df.query("AGEGRP == 0")
 
-    # year value starting from 3-13 so need to convet it to 2010-2020
+    # year starting from 2 so need to convert it to 2020s
+    # df['YEAR'] = df['YEAR'] + 2010 - 3
     df.loc[:, 'YEAR'] = df.loc[:, 'YEAR'] + 2020 - 2
 
     # add fips code for location
-    df.insert(6, 'geo_ID', 'geoId/', True)
-
-    # extracting geoid from state and county column
-    df.loc[:, 'geo_ID'] = 'geoId/' + (df.loc[:, 'STATE'].map(str)).str.zfill(2)\
-        + (df.loc[:, 'COUNTY'].map(str)).str.zfill(3)
+    df.loc[:,
+           'geo_ID'] = 'geoId/' + (df.loc[:, 'STATE'].map(str)).str.zfill(2) + (
+               df.loc[:, 'COUNTY'].map(str)).str.zfill(3)
 
     # drop unwanted columns
-    df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME',\
-        'AGEGRP'], axis=1, inplace=True)
+    df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+            axis=1,
+            inplace=True)
 
-    # all these column contain hispanic and non-hispanic
-    # which are not required as not considering origin
+    # dropping unwanted columns
     df = df.drop(columns=[
         'TOT_POP', 'NH_MALE', 'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE',
         'NHBA_MALE', 'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE', 'NHAA_MALE',
@@ -71,6 +92,23 @@ def process_county_2020_2023(url: str) -> pd.DataFrame:
         'HIAC_MALE', 'HIAC_FEMALE', 'HAAC_MALE', 'HAAC_FEMALE', 'HNAC_MALE',
         'HNAC_FEMALE'
     ])
+
+    # to remove numeric thousand seperator
+    for sv in [
+            'YEAR', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE', 'WA_FEMALE', 'BA_MALE',
+            'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE', 'AA_FEMALE',
+            'NA_MALE', 'NA_FEMALE', 'TOM_MALE', 'TOM_FEMALE', 'WAC_MALE',
+            'WAC_FEMALE', 'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE',
+            'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE'
+    ]:
+        df[sv] = df[sv].astype(int)
+
+    # extracting geoid
+    df['geo_ID'] = (df['geo_ID'].map(str)).str[:8]
+
+    # it groups the df as per columns provided
+    # performs the provided functions on the data
+    df = df.groupby(['YEAR', 'geo_ID']).sum().reset_index()
 
     # providing proper column names
     df.columns=['Year','geo_ID','Count_Person_Male',
@@ -102,6 +140,6 @@ def process_county_2020_2023(url: str) -> pd.DataFrame:
             'OrInCombinationWithOneOrMoreOtherRaces']
 
     df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
-              'county_result_2020_2023.csv',
+              'state_result_2020_2029.csv',
               index=False)
     return df.columns
