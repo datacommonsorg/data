@@ -22,9 +22,10 @@ import os
 from constants import OUTPUT_DIR, MCF_SRH, MCF_SH, MCF_RH
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+os.system("mkdir -p " + _CODEDIR + OUTPUT_DIR)
+output_path = '/output_files/'
 
-
-def generate_mcf():
+def generate_mcf(output_path):
     """
     This function generates MCF file in OUTPUT directory.
     There are two mcf files generated
@@ -32,7 +33,7 @@ def generate_mcf():
     2. population_estimate_by_srh_agg.mcf - for importing aggregated data
     OUTPUT directory is used as common between process.py and process_test.py
     """
-    os.system("mkdir -p " + _CODEDIR + OUTPUT_DIR)
+    
     genderType = ['Male', 'Female']
     hispanic = ['HispanicOrLatino', 'NotHispanicOrLatino']
     race = [
@@ -70,7 +71,7 @@ WithOneOrMoreOtherRaces'
                                   gender=gt,
                                   race=h)
 
-    with open(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh.mcf',
+    with open(_CODEDIR + output_path + 'population_estimate_by_srh.mcf',
               'w',
               encoding='utf-8') as mcf_file:
         mcf_file.write(mcf)
@@ -89,11 +90,11 @@ WithOneOrMoreOtherRaces'
                 mcf += MCF_RH.format(node_name='Count_Person_' + h + '_' + r,
                                      race=h + '__' + r)
 
-    with open(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh_agg.mcf',
+    with open(_CODEDIR + output_path + 'population_estimate_by_srh_agg.mcf',
               'w',
               encoding='utf-8') as mcf_file:
         mcf_file.write(mcf)
 
 
 if __name__ == '__main__':
-    generate_mcf()
+    generate_mcf(output_path)

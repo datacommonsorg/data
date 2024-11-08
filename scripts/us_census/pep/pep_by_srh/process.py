@@ -80,12 +80,13 @@ flags.DEFINE_string('mode', '', 'Options: download or process')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+output_path = '/output_files/'
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
     "data_directory", DOWNLOAD_DIR,
-    "Folder consisting of all input files required for processing. Run download.sh before running this python module"
+    "Folder consisting of all input files required for processing"
 )
 
 # SR Columns with single race or combination with one or more race
@@ -268,7 +269,7 @@ def _process_geo_level_aggregation():
 
             # Check if the expected input file exists
             if not os.path.exists(input_file_path + input_file_name):
-                logging.error("Input file %s not found in path %s.", input_file_name, input_file_path)
+                logging.error(f"Input file {input_file_name} not found in path {input_file_path}")
                 continue  # Skip to the next iteration
 
             # Check the number of input files and match with the expected count
@@ -282,11 +283,11 @@ def _process_geo_level_aggregation():
                     processed_files_count += 1  # This can be changed based on actual processing logic
 
                 if processed_files_count != expected_files_count:
-                    logging.error("Mismatch in file count: Expected %d files, but processed %d.", expected_files_count, processed_files_count)
+                    logging.error(f"Mismatch in file count: Expected {expected_files_count} files, but processed {processed_files_count}.")
                     raise ValueError(f"File count mismatch for {geo_agg_file} ({measurement_method})")
 
             except Exception as e:
-                logging.error("Error while processing files for %s: %s", geo_agg_file, str(e))
+                logging.error(f"Error while processing files for {geo_agg_file}: {e}")
                 continue  # Skip to the next file processing
 
             # Proceed with geo-level aggregation if no errors
@@ -294,9 +295,9 @@ def _process_geo_level_aggregation():
                 _process_geo_aggregation(input_file_path, input_file_name,
                                          output_file_path, output_file_name,
                                          geo_type)
-                logging.info("Successfully processed geo-level aggregation for %s (%s).", geo_agg_file, measurement_method)
+                logging.info(f"Successfully processed geo-level aggregation for {geo_agg_file} ({measurement_method}).")
             except Exception as e:
-                logging.error("Error occurred during geo-level aggregation for %s (%s): %s", geo_agg_file, measurement_method, str(e))
+                logging.error(f"Error occurred during geo-level aggregation for {geo_agg_file} ({measurement_method}): {e}")
                 continue  # Skip this iteration and continue with the next one
 
 
@@ -322,7 +323,7 @@ def _process_state_files_1980_1990(download_dir):
 
     # Check if files exist in the input directory
     if not files_list:
-        logging.error("No input files found in the directory: %s", input_file_path)
+        logging.error(f"No input files found in the directory: {input_file_path}")
         return
 
     column_names = ["LOCATION", "YEAR_TEMP", "RACE_ORIGIN", "SEX"]
@@ -400,13 +401,12 @@ def _process_state_files_1980_1990(download_dir):
             files_processed += 1
 
         except Exception as e:
-            logging.error("Error processing file %s: %s", file, str(e))
+            logging.error(f"Error processing file {file}: {e}")
             continue
 
     # Check if the number of processed files matches the expected count
     if files_processed != len(files_list):
-        logging.error("File processing mismatch: Expected %d files, but processed %d. Output file generation aborted.",
-                      len(files_list), files_processed)
+        logging.error(f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted.")
         return
 
     # Section 2 - Writing Agg data
@@ -430,7 +430,7 @@ def _process_state_files_1980_1990(download_dir):
         logging.info("Agg data successfully written to: %s", output_file_path + output_file_name)
 
     except Exception as e:
-        logging.error("Error while writing aggregated data: %s", str(e))
+        logging.error(f"Error while writing aggregated data: {e}")
         return
 
 
@@ -461,13 +461,12 @@ def _process_state_files_1990_2000(download_dir):
 
     # Check if there are any files in the input directory
     if not files_list:
-        logging.error("No input files found in the directory: %s", input_file_path)
+        logging.error(f"No input files found in the directory: {input_file_path}")
         return
 
     # Check if the number of files matches the expected count
     if len(files_list) != expected_files_count:
-        logging.error("Mismatch in the number of input files. Expected %d files, but found %d.",
-                      expected_files_count, len(files_list))
+        logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
         return
 
     column_names = [
@@ -508,13 +507,12 @@ def _process_state_files_1990_2000(download_dir):
             files_processed += 1
 
         except Exception as e:
-            logging.error("Error processing file %s: %s", file, str(e))
+            logging.error(f"Error processing file {file}: {e}")
             continue
 
     # Check if the number of processed files matches the expected count
     if files_processed != expected_files_count:
-        logging.error("File processing mismatch: Expected %d files, but processed %d. Output file generation aborted.",
-                      expected_files_count, files_processed)
+        logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
         return
 
     # After processing all files, load the concatenated data
@@ -530,7 +528,7 @@ def _process_state_files_1990_2000(download_dir):
             os.remove(output_file_path + output_temp_file_name)
 
     except Exception as e:
-        logging.error("Error while processing or saving the concatenated data: %s", str(e))
+        logging.error(f"Error while processing or saving the concatenated data: {e}")
         return
 
     output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1990_2000/state/'
@@ -557,7 +555,7 @@ def _process_state_files_1990_2000(download_dir):
         logging.info("Aggregated data successfully written to: %s", output_file_path + output_file_name)
 
     except Exception as e:
-        logging.error("Error while writing aggregated data: %s", str(e))
+        logging.error(f"Error while writing aggregated data: {e}")
         return
 
 
@@ -596,12 +594,11 @@ def _process_county_files_1990_2000(download_dir):
 
     # Check if the number of files in the directory matches the expected count
     if not files_list:
-        logging.error("No input files found in the directory: %s", input_file_path)
+        logging.error(f"No input files found in the directory: {input_file_path}")
         return
 
     if len(files_list) != expected_files_count:
-        logging.error("Mismatch in the number of input files. Expected %d files, but found %d.",
-                      expected_files_count, len(files_list))
+        logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
         return
 
     column_names = [
@@ -647,13 +644,12 @@ def _process_county_files_1990_2000(download_dir):
             files_processed += 1  # Increment the counter for successfully processed files
 
         except Exception as e:
-            logging.error("Error processing file %s: %s", file, str(e))
+            logging.error(f"Error processing file {file}: {e}")
             continue  # Proceed to the next file
 
     # Check if the number of processed files matches the expected count
     if files_processed != expected_files_count:
-        logging.error("File processing mismatch: Expected %d files, but processed %d. Output file generation aborted.",
-                      expected_files_count, files_processed)
+        logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
         return
 
     # Section 2 - Writing Aggregated data
@@ -673,7 +669,7 @@ def _process_county_files_1990_2000(download_dir):
         logging.info("Aggregated data successfully written to: %s", output_file_path + output_file_name)
 
     except Exception as e:
-        logging.error("Error while writing aggregated data: %s", str(e))
+        logging.error(f"Error while writing aggregated data: {e}")
         return
 
 
@@ -700,12 +696,11 @@ def _process_county_files_2000_2010(download_dir):
 
     # Check if the number of files in the directory matches the expected count
     if not files_list:
-        logging.error("No input files found in the directory: %s", input_file_path)
+        logging.error(f"No input files found in the directory: {input_file_path}")
         return
 
     if len(files_list) != expected_files_count:
-        logging.error("Mismatch in the number of input files. Expected %d files, but found %d.",
-                      expected_files_count, len(files_list))
+        logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
         return
 
     files_processed = 0  # Track the number of successfully processed files
@@ -734,13 +729,12 @@ def _process_county_files_2000_2010(download_dir):
             files_processed += 1  # Increment the counter for successfully processed files
 
         except Exception as e:
-            logging.error("Error processing file %s: %s", file, str(e))
+            logging.error(f"Error processing file {file}: {e}")
             continue  # Continue processing the next file
 
     # Check if the number of processed files matches the expected count
     if files_processed != expected_files_count:
-        logging.error("File processing mismatch: Expected %d files, but processed %d. Output file generation aborted.",
-                      expected_files_count, files_processed)
+        logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
         return
 
     # Section 2 - Writing Aggregated data
@@ -769,7 +763,7 @@ def _process_county_files_2000_2010(download_dir):
         logging.info("Aggregated data successfully written to: %s", output_file_path + output_file_name)
 
     except Exception as e:
-        logging.error("Error while processing or writing aggregated data: %s", str(e))
+        logging.error(f"Error while processing or writing aggregated data: {e}")
         return
 
 
@@ -796,8 +790,7 @@ def _process_county_files_2010_2020(download_dir):
 
     # Check if the number of files in the directory matches the expected count
     if len(files_list) != expected_files_count:
-        logging.error("Mismatch in the number of input files. Expected %d files, but found %d.",
-                      expected_files_count, len(files_list))
+        logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
         return
 
     files_processed = 0  # Track the number of successfully processed files
@@ -834,13 +827,12 @@ def _process_county_files_2010_2020(download_dir):
             files_processed += 1  # Increment the counter for successfully processed files
 
         except Exception as e:
-            logging.error("Error processing file %s: %s", file, str(e))
+            logging.error(f"Error processing file {file}: {e}")
             continue  # Continue processing the next file
 
     # Check if the number of processed files matches the expected count
     if files_processed != expected_files_count:
-        logging.error("File processing mismatch: Expected %d files, but processed %d. Output file generation aborted.",
-                      expected_files_count, files_processed)
+        logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
         return
 
     # Section 2 - Writing Aggregated Data
@@ -873,7 +865,7 @@ def _process_county_files_2010_2020(download_dir):
         logging.info("Aggregated data successfully written to: %s", output_file_path + output_file_name)
 
     except Exception as e:
-        logging.error("Error while processing or writing aggregated data: %s", str(e))
+        logging.error(f"Error while processing or writing aggregated data: {e}")
         return
 
 
@@ -900,8 +892,7 @@ def _process_county_files_2020_2029(download_dir):
 
     # Check if the number of files in the directory matches the expected count
     if len(files_list) != expected_files_count:
-        logging.error("Mismatch in the number of input files. Expected %d files, but found %d.",
-                      expected_files_count, len(files_list))
+        logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
         return
 
     files_processed = 0  # Track the number of successfully processed files
@@ -938,13 +929,12 @@ def _process_county_files_2020_2029(download_dir):
             files_processed += 1  # Increment the counter for successfully processed files
 
         except Exception as e:
-            logging.error("Error processing file %s: %s", file, str(e))
+            logging.error(f"Error processing file {file}: {e}")
             continue  # Continue processing the next file
 
     # Check if the number of processed files matches the expected count
     if files_processed != expected_files_count:
-        logging.error("File processing mismatch: Expected %d files, but processed %d. Output file generation aborted.",
-                      expected_files_count, files_processed)
+        logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
         return
 
     # Section 2 - Writing Aggregated Data
@@ -977,7 +967,7 @@ def _process_county_files_2020_2029(download_dir):
         logging.info("Aggregated data successfully written to: %s", output_file_path + output_file_name)
 
     except Exception as e:
-        logging.error("Error while processing or writing aggregated data: %s", str(e))
+        logging.error(f"Error while processing or writing aggregated data: {e}")
         return
 
 
@@ -1259,7 +1249,7 @@ def _consolidate_county_files():
 
 
 
-def _consolidate_all_geo_files():
+def _consolidate_all_geo_files(output_path):
     """
     Consolidate National, State and County files into single file
     This function generates final csv file for both as-is and agg
@@ -1276,7 +1266,7 @@ def _consolidate_all_geo_files():
     #added by Shamim to keep last values
     as_is_df = as_is_df.drop_duplicates(
         subset=['YEAR', 'LOCATION', 'SV', 'MEASUREMENT_METHOD'], keep='last')
-    as_is_df.to_csv(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh.csv',
+    as_is_df.to_csv(_CODEDIR + output_path + 'population_estimate_by_srh.csv',
                     header=True,
                     index=False)
 
@@ -1290,13 +1280,13 @@ def _consolidate_all_geo_files():
         agg_df = agg_df.drop_duplicates(
             subset=['YEAR', 'LOCATION', 'MEASUREMENT_METHOD', 'SV'],
             keep='last')
-        agg_df.to_csv(_CODEDIR + OUTPUT_DIR +
+        agg_df.to_csv(_CODEDIR + output_path +
                       'population_estimate_by_srh_agg.csv',
                       header=True,
                       index=False)
 
 
-def _consolidate_files():
+def _consolidate_files(output_path):
     """
     Consolidate National, State and County files into single file.
     Two seperate files - consolidates-as-is and consolidated-agg files are 
@@ -1305,7 +1295,7 @@ def _consolidate_files():
     _consolidate_county_files()
     _consolidate_state_files()
     _consolidate_national_files()
-    _consolidate_all_geo_files()
+    _consolidate_all_geo_files(output_path)
 
 def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
@@ -1338,53 +1328,6 @@ def add_future_year_urls():
                 logging.error(f"URL is not accessable {url_to_check}")
 
 
-
-def download_files():
-    global _FILES_TO_DOWNLOAD
-    session = requests.session()
-    max_retry = 5
-    for file_to_dowload in _FILES_TO_DOWNLOAD:
-        file_name_to_save = None
-        url = file_to_dowload['download_path']
-        if 'file_name' in file_to_dowload and len(file_to_dowload['file_name'] > 5):
-            file_name_to_save = file_to_dowload['file_name']
-        else:
-            file_name_to_save = url.split('/')[-1]
-        if 'file_path' in file_to_dowload:
-            file_name_to_save = file_to_dowload['file_path'] + file_name_to_save
-        retry_number = 0
-
-        is_file_downloaded = False
-        while is_file_downloaded == False:
-            try:
-                with session.get(url, stream=True) as response:
-                    response.raise_for_status()
-                    if response.status_code == 200:
-                        with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save), 'wb') as f:
-                            f.write(response.content)
-                            file_to_dowload['is_downloaded'] = True
-                            logging.info(f"Downloaded file : {url}")
-                            is_file_downloaded = True
-                    else:
-                        logging.info(f"Retry file download {{url}}")
-                        time.sleep(5)
-                        retry_number += 1
-                        if retry_number > max_retry:
-                            logging.error(f"Error downloading {url}")
-                            logging.error("Exit from script")
-                            sys.exit(0)
-
-            except Exception as e:
-                logging.error(f"Retry file download {url}")
-                time.sleep(5)
-                retry_number += 1
-                if retry_number > max_retry:
-                    logging.error(f"Error downloading {url}")
-                    logging.error("Exit from script")
-                    sys.exit(0)
-    return True
-
-
 def _process_files(download_dir):
     """
     Process county, state and national files.
@@ -1409,7 +1352,7 @@ def _create_output_n_process_folders():
         os.system("mkdir -p " + _CODEDIR + d)
 
 
-def process(data_directory):
+def process(data_directory, output_path):
     """
     Produce As Is and Agg output files for National, State and County
     Produce MCF and tMCF files for both As-Is and Agg output files
@@ -1425,16 +1368,77 @@ def process(data_directory):
             input_files.append(file_path)
     # Now `input_files` contains paths to all the files in `_INPUT_FILE_PATH` and its subdirectories
 
-    processed_count = 0
     total_files_to_process = len(input_files)
-    logging.info(f"No of files to be processed {len(input_files)}")
+    logging.info(f"No of files to be processed {total_files_to_process}")
 
     _create_output_n_process_folders()
     _process_files(data_directory)
-    _consolidate_files()
-    generate_mcf()
-    generate_tmcf()
+    _consolidate_files(output_path)
+    generate_mcf(output_path)
+    generate_tmcf(output_path)
 
+
+def download_files():
+  """Downloads files from the provided URLs.
+
+  This function iterates through a list of files to download (`_FILES_TO_DOWNLOAD`)
+  and attempts to download each file with retries in case of errors.
+
+  Returns:
+      bool: True if all files were downloaded successfully, False otherwise.
+  """
+
+  global _FILES_TO_DOWNLOAD
+  session = requests.session()
+  max_retry = 5
+
+  for file_to_download in _FILES_TO_DOWNLOAD:
+    file_name_to_save = None
+    url = file_to_download['download_path']
+
+    # Determine the filename to save the downloaded file
+    if 'file_name' in file_to_download and len(file_to_download['file_name']) > 5:
+      file_name_to_save = file_to_download['file_name']
+    else:
+      file_name_to_save = url.split('/')[-1]
+
+    # Include file path if specified
+    if 'file_path' in file_to_download:
+      file_name_to_save = os.path.join(file_to_download['file_path'], file_name_to_save)
+
+    retry_number = 0
+    is_file_downloaded = False
+
+    while not is_file_downloaded:
+      try:
+        # Download the file with retries
+        with session.get(url, stream=True) as response:
+          response.raise_for_status()
+
+          if response.status_code == 200:
+            # Create the download directory if it doesn't exist
+            os.makedirs(os.path.dirname(os.path.join(_INPUT_FILE_PATH, file_name_to_save)), exist_ok=True)
+            with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save), 'wb') as f:
+              f.write(response.content)
+            file_to_download['is_downloaded'] = True
+            logging.info(f"Downloaded file: {url}")
+            is_file_downloaded = True
+          else:
+            logging.info(f"Retry file download: {url}")
+            time.sleep(5)
+            retry_number += 1
+
+      except Exception as e:
+        logging.fatal(f"Error downloading {url}: {e}")
+        time.sleep(5)
+        retry_number += 1
+
+      if retry_number > max_retry:
+        logging.fatal(f"Error downloading {url} after {max_retry} retries")
+        # Consider returning False here to indicate overall download failure
+        # return False  # Uncomment if desired
+
+  return True  # All files downloaded successfully (or at least attempted)
 
 def main(_):
     """
@@ -1442,18 +1446,13 @@ def main(_):
     Produce MCF and tMCF files for both As-Is and Agg output files
     """
     mode = _FLAGS.mode
-    if mode == "":
+    download_status = True
+    if mode == "" or mode == "download":
         _create_output_n_process_folders()
         add_future_year_urls()
         download_status = download_files()
-        if download_status:
-            process(_FLAGS.data_directory)
-    elif mode == "download":
-        add_future_year_urls()
-        download_status = download_files()
-    elif mode == "process":
-        process(_FLAGS.data_directory)
-
+    if download_status and (mode == "" or mode == "process"):
+        process(_FLAGS.data_directory, output_path)
 
 if __name__ == '__main__':
     app.run(main)

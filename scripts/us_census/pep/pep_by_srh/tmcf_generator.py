@@ -24,9 +24,9 @@ from constants import POPULATION_ESTIMATE_BY_SRH, POPULATION_ESTIMATE_BY_SRH_AGG
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 os.system("mkdir -p " + _CODEDIR + OUTPUT_DIR)
+output_path = '/output_files/'
 
-
-def generate_tmcf():
+def generate_tmcf(output_path):
     """
     This function generates MCF file in OUTPUT directory.
     There are two mcf files generated
@@ -35,16 +35,16 @@ def generate_tmcf():
     OUTPUT directory is used as common between process.py and process_test.py
     """
 
-    with open(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh.tmcf',
+    with open(_CODEDIR + output_path + 'population_estimate_by_srh.tmcf',
               'w',
               encoding='utf-8') as file:
         file.writelines(POPULATION_ESTIMATE_BY_SRH)
 
-    with open(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh_agg.tmcf',
+    with open(_CODEDIR + output_path + 'population_estimate_by_srh_agg.tmcf',
               'w',
               encoding='utf-8') as file:
         file.writelines(POPULATION_ESTIMATE_BY_SRH_AGG)
 
 
 if __name__ == '__main__':
-    generate_tmcf()
+    generate_tmcf(output_path)
