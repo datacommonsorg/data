@@ -1359,6 +1359,7 @@ def process(data_directory, output_path):
 
     Args:
       download_dir: download directory - input files are saved here.
+      output_path: output directory - output files from test data input are saved here.
     """
     input_files = []
     # Walk through the directory and its subdirectories
