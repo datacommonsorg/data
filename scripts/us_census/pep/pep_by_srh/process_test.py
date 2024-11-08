@@ -16,7 +16,6 @@ Script to automate the testing for USA Census Population Estimate's (by SRH)
 process, generate_mcf and generate_tmcf scripts.
 """
 
-import difflib
 import os
 import unittest
 from mcf_generator import generate_mcf
