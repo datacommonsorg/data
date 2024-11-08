@@ -32,7 +32,6 @@ def generate_tmcf(output_path):
     There are two mcf files generated
     1. population_estimate_by_srh.mcf - for importing as-is data from US Census
     2. population_estimate_by_srh_agg.mcf - for importing aggregated data
-    OUTPUT directory is used as common between process.py and process_test.py
     """
 
     with open(_CODEDIR + output_path + 'population_estimate_by_srh.tmcf',
