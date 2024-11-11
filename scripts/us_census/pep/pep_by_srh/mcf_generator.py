@@ -23,7 +23,6 @@ from constants import OUTPUT_DIR, MCF_SRH, MCF_SH, MCF_RH
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 os.system("mkdir -p " + _CODEDIR + OUTPUT_DIR)
-output_path = '/output_files/'
 
 def generate_mcf(output_path):
     """
@@ -96,4 +95,4 @@ WithOneOrMoreOtherRaces'
 
 
 if __name__ == '__main__':
-    generate_mcf(output_path)
+    generate_mcf()

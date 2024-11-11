@@ -46,7 +46,7 @@ class ProcessTest(unittest.TestCase):
                   encoding='utf-8') as expected_mcf_file:
             expected_mcf = expected_mcf_file.read()
 
-        with open(_CODEDIR + '/testdata/expected_results/population_estimate_by_srh.mcf',
+        with open(_CODEDIR + '/testdata/actual_results/population_estimate_by_srh.mcf',
                   'r',
                   encoding='utf-8') as actual_mcf_file:
             actual_mcf = actual_mcf_file.read()
@@ -58,7 +58,7 @@ class ProcessTest(unittest.TestCase):
                 encoding='utf-8') as expected_agg_mcf_file:
             expected_agg_mcf = expected_agg_mcf_file.read()
 
-        with open(_CODEDIR + '/testdata/expected_results/population_estimate_by_srh_agg.mcf',
+        with open(_CODEDIR + '/testdata/actual_results/population_estimate_by_srh_agg.mcf',
                   'r',
                   encoding='utf-8') as actual_agg_mcf_file:
             actual_agg_mcf = actual_agg_mcf_file.read()

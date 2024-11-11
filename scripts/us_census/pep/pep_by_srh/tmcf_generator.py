@@ -24,7 +24,6 @@ from constants import POPULATION_ESTIMATE_BY_SRH, POPULATION_ESTIMATE_BY_SRH_AGG
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 os.system("mkdir -p " + _CODEDIR + OUTPUT_DIR)
-output_path = '/output_files/'
 
 def generate_tmcf(output_path):
     """
@@ -46,4 +45,4 @@ def generate_tmcf(output_path):
 
 
 if __name__ == '__main__':
-    generate_tmcf(output_path)
+    generate_tmcf()
