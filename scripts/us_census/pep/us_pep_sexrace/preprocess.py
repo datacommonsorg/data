@@ -99,14 +99,18 @@ def add_future_year_urls():
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
     ]
-    if dt.now().year < 2023:
-        YEAR = dt.now().year
+    if dt.now().year > 2023:
+        YEAR = dt.now().year-1
         for url in urls_to_scan:
             url_to_check = url.format(YEAR=YEAR)
             try:
                 check_url = requests.head(url_to_check)
                 if check_url.status_code == 200:
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+
+                else:
+                    logging.fatal(f"URL is not accessable {url_to_check}")
+                
 
             except:
                 logging.error(f"URL is not accessable {url_to_check}")
@@ -245,12 +249,12 @@ def main(_):
     Creating and processing input files
     """
     input_path = FLAGS.input_path
-    add_future_year_urls()
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
 
     if mode == "" or mode == "download":
         # download & process
+        add_future_year_urls()
         downloadFiles(ip_files)
 
     if mode == "" or mode == "process":
