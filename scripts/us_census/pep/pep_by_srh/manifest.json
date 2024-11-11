@@ -9,7 +9,10 @@
       "import_inputs": [
         {
           "template_mcf": "population_estimate_by_srh.tmcf",
-          "cleaned_csv": "population_estimate_by_srh.csv",
+          "cleaned_csv": "population_estimate_by_srh.csv"
+        },
+        {
+          "template_mcf": "population_estimate_by_srh_agg.tmcf",
           "cleaned_csv": "population_estimate_by_srh_agg.csv"
         }
       ],
