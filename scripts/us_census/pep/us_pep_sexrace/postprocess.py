@@ -92,9 +92,10 @@ def process_state_county_before_2000(df: pd.DataFrame):
     float_col = df.select_dtypes(include=['float64'])
     for col in float_col.columns.values:
         df[col] = df[col].astype('int64')
-           
+
     df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL,
-                           "state_county_before_2000.csv"), index=False)
+                           "state_county_before_2000.csv"),
+              index=False)
 
     # collecting all the column headers
     columns_of_state_county_before_2000 = df.columns.to_list()
@@ -141,10 +142,9 @@ def process_national_after_2000(df: pd.DataFrame):
     # dropping unwanted column
     df = df.drop(columns=['Unnamed: 0','Count_Person_Male',\
         'Count_Person_Female'])
-    
+
     #Added to resolve 2020 inconsistent data remove
-    df = df.drop_duplicates(
-                subset=['geo_ID', 'Year'], keep='last')
+    df = df.drop_duplicates(subset=['geo_ID', 'Year'], keep='last')
     # writing output to final csv
     df.to_csv(os.path.join(_CODEDIR, _OUTPUTFINAL, "national_after_2000.csv"),
               index=False)

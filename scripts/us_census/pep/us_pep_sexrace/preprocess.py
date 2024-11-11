@@ -168,7 +168,6 @@ def downloadFiles(config_files: list, test=False):
         logging.fatal("There is an error while downloading the files", e)
 
 
-
 def process(config_files: list, test=False):
     """
     This method calls the required methods
@@ -233,7 +232,7 @@ def process(config_files: list, test=False):
         Outputfiles.StateCountyAfter2000.value: state_county_after_2000,
         Outputfiles.NationalAfter2000.value: national_after_2000
     }
-  
+
     column_names = create_single_csv(output_files_names)
     for flag, columns in column_names.items():
         generate_mcf(columns, flag)
@@ -253,9 +252,10 @@ def main(_):
     if mode == "" or mode == "download":
         # download & process
         downloadFiles(ip_files)
-        
+
     if mode == "" or mode == "process":
         process(ip_files)
-    
+
+
 if __name__ == "__main__":
     app.run(main)
