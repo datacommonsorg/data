@@ -1,5 +1,3 @@
-
-
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,7 +14,10 @@
 
 FROM python:3.11.4
 
-RUN apt upgrade
+RUN apt-get update \
+    && apt-get -y upgrade \
+    && apt-get -y autoremove \
+    && rm -rf /var/lib/apt/lists/*
 WORKDIR /workspace
 
 ADD requirements.txt /workspace/requirements.txt
@@ -24,4 +25,4 @@ RUN pip install -r /workspace/requirements.txt
 
 COPY app/. /workspace/app/
 
-CMD gunicorn --timeout 1800 --workers 5 -b :$PORT app.main:FLASK_APP
+CMD gunicorn --timeout 0 --workers 5 -b :$PORT app.main:FLASK_APP

@@ -24,7 +24,6 @@ steps:
         "PR_NUMBER": "$_PR_NUMBER",
         "configs": {
             "gcp_project_id": "$_GCP_PROJECT_ID",
-            "dashboard_oauth_client_id": "$_DASHBOARD_OAUTH_CLIENT_ID",
             "importer_oauth_client_id": "$_IMPORTER_OAUTH_CLIENT_ID",
             "github_auth_username": "$_GITHUB_AUTH_USERNAME",
             "github_auth_access_token": "$_GITHUB_AUTH_ACCESS_TOKEN",

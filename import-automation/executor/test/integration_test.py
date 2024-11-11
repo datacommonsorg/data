@@ -24,10 +24,13 @@ from test import utils
 NUM_LINES_TO_CHECK = 50
 
 CONFIGS = {
-    'github_repo_owner_username': os.environ['GITHUB_AUTH_USERNAME'],
+    # The GitHub params belong to the public Data Commons gmail account.
+    # Auth tokens, user name and other details can be found in the inbox
+    # and in the inbox of teammates.
+    'github_repo_owner_username': os.environ['_GITHUB_REPO_OWNER_USERNAME'],
     'github_repo_name': 'data-demo',
-    'github_auth_username': 'intrepiditee',
-    'github_auth_access_token': os.environ['GITHUB_AUTH_ACCESS_TOKEN']
+    'github_auth_username': os.environ['_GITHUB_AUTH_USERNAME'],
+    'github_auth_access_token': os.environ['_GITHUB_AUTH_ACCESS_TOKEN']
 }
 
 
@@ -55,13 +58,11 @@ class GCSFileUploaderMock:
 # TODO: change CONFIGs to main repo and fix integration test.
 @SkipTest
 @mock.patch('app.service.email_notifier.EmailNotifier', mock.MagicMock())
-@mock.patch('app.service.dashboard_api.DashboardAPI', mock.MagicMock())
 @mock.patch('app.service.file_uploader.GCSFileUploader', GCSFileUploaderMock)
 @mock.patch('app.utils.pacific_time',
             lambda: '2020-07-15T12:07:17.365264-07:00')
 class StandaloneUpdateTest(unittest.TestCase):
-    """Tests for updating imports in standalone mode (without interaction
-    with the dashboard).
+    """Tests for updating imports in standalone mode.
 
     To add a test case:
     1) Add a manifest.json to the import directory in the master branch of
@@ -122,7 +123,6 @@ class StandaloneUpdateTest(unittest.TestCase):
 @SkipTest
 @mock.patch('app.service.import_service.ImportServiceClient', mock.MagicMock())
 @mock.patch('app.service.email_notifier.EmailNotifier', mock.MagicMock())
-@mock.patch('app.service.dashboard_api.DashboardAPI', mock.MagicMock)
 @mock.patch('app.utils.pacific_time',
             lambda: '2020-07-15T12:07:17.365264-07:00')
 @mock.patch('app.service.file_uploader.GCSFileUploader', GCSFileUploaderMock)
@@ -168,7 +168,6 @@ class CommitTest(unittest.TestCase):
 @SkipTest
 @mock.patch('app.utils.utctime', lambda: '2020-07-24T16:27:22.609304+00:00')
 @mock.patch('app.service.email_notifier.EmailNotifier', mock.MagicMock())
-@mock.patch('app.service.dashboard_api.DashboardAPI', mock.MagicMock())
 @mock.patch('google.cloud.scheduler.CloudSchedulerClient',
             utils.SchedulerClientMock)
 @mock.patch('google.protobuf.json_format.MessageToDict',

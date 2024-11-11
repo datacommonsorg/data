@@ -5,7 +5,7 @@
         "total StatVarObservations": 615
     },
     "2013": {
-        "filename": "/usr/local/google/home/ajaits/work/dc/src/us_geo/data/scripts/us_census/acs5yr/subject_tables/common/./testdata/ACSST5Y2013_S2702.csv",
+        "filename": "/usr/local/google/dc/git/data_py_311/data/scripts/us_census/acs5yr/subject_tables/common/./testdata/ACSST5Y2013_S2702.csv",
         "number of columns in dataset": 424,
         "number of rows in dataset": 3,
         "number of statVars generated for columns": 205,
