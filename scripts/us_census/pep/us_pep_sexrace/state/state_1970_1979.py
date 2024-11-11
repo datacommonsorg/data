@@ -65,7 +65,7 @@ def process_state_1970_1979(url: str) -> pd.DataFrame:
 
     # providing geoId to the dataframe and making the geoId of 2 digit as state
     df['Year'] = df['Year'].astype(str) + '-' + df['geo_ID'].astype(str)
-    df.drop(columns=['geo_ID'], inplace=True)
+    df.drop(columns=['geo_ID','LOCATION'], inplace=True)
 
     # it groups the df as per columns provided
     # performs the provided functions on the data

@@ -28,6 +28,7 @@ import time
 from datetime import datetime as dt
 from absl import logging
 from absl import flags
+import pandas as pd
 
 _FLAGS = flags.FLAGS
 
@@ -113,9 +114,12 @@ def add_future_year_urls():
 
 def downloadFiles(config_files: list, test=False):
     #This method is use to download the file from URL
-
+    '''
+    arguments
+        config_files: List of config file
+        test=False
+    '''
     flag = None
-
     os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTFINAL))
     os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE))
     try:
@@ -161,8 +165,8 @@ def downloadFiles(config_files: list, test=False):
             process_county_2020_2029(url)
             process_state_2020_2029(url)
     except Exception as e:
-        logging.error("There is an error while downloading the files", e)
-    return True
+        logging.fatal("There is an error while downloading the files", e)
+
 
 
 def process(config_files: list, test=False):
@@ -172,6 +176,7 @@ def process(config_files: list, test=False):
 
     Args:
         config_files (List) : list of json files containing dataset url.
+        test=False
 
     Returns:
         None.
@@ -228,8 +233,8 @@ def process(config_files: list, test=False):
         Outputfiles.StateCountyAfter2000.value: state_county_after_2000,
         Outputfiles.NationalAfter2000.value: national_after_2000
     }
+  
     column_names = create_single_csv(output_files_names)
-
     for flag, columns in column_names.items():
         generate_mcf(columns, flag)
         generate_tmcf(columns, flag)
@@ -245,16 +250,12 @@ def main(_):
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
 
-    if mode == "":
+    if mode == "" or mode == "download":
         # download & process
-        download_status = downloadFiles(ip_files)
-        if download_status:
-            process(ip_files)
-    elif mode == "download":
-        download_status = downloadFiles(ip_files)
-    elif mode == "process":
+        downloadFiles(ip_files)
+        
+    if mode == "" or mode == "process":
         process(ip_files)
-
-
+    
 if __name__ == "__main__":
     app.run(main)
