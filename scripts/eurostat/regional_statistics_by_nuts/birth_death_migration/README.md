@@ -56,7 +56,7 @@ See parent README.
 #### Scripts
 
 - [import_data.py](import_data.py): import script.
-- [test_import.py](test_import.py): import testing script.
+- [import_data_test.py](import_data_test.py): import testing script.
 
 ### Import Procedure
 

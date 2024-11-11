@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,14 @@ flags.DEFINE_string('mode', '', 'Options: download or process')
 
 def download_data(download_link, download_path):
     """Downloads raw data from Eurostat website and stores it in instance
-    data frame.
+       data frame.
+    
+        Args:
+        download_link(str): A string representing the URL of the data source.
+        download_path(str): A string specifying the local file path where the downloaded data will be saved.
+        
+        Returns:None
+        
     """
     logging.info("file downloading")
     try:
@@ -39,10 +46,8 @@ def download_data(download_link, download_path):
         raw_df = pd.read_table("demo_r_gind3.tsv.gz")
         raw_df.to_csv(download_path, index=False, sep='\t')
         logging.info("file download completed")
-        return True
     except Exception as e:
-        logging.error(f'download error {e}')
-        return False
+        logging.fatal(f'download error {e}')
 
 
 def preprocess_data(file_path):
@@ -78,7 +83,13 @@ def preprocess_data(file_path):
     It contains 2 + 2X columns where X is the number of statistical variables the first two columns are
     'geo' and 'time', followed by X columns of statistical variables values, followed by X columns of
     statistical variable notes.
-
+    
+    Args:
+        file_path:  Path to the input data file..
+        
+    Returns:
+        preprocessed_df: The preprocessed DataFrame, which is a long-format version of the original raw_df.
+    
     """
     try:
         logging.info('file processing started ')
@@ -151,11 +162,21 @@ def preprocess_data(file_path):
         logging.info('file processing completed')
         return preprocessed_df
     except Exception as e:
-        logging.error(f'processing error {e}')
+        logging.fatal(f'processing error {e}')
 
 
 def clean_data(preprocessed_df, output_path):
-    """Drops unnecessary columns that are not needed for data import and reformat column names."""
+    """Drops unnecessary columns that are not needed for data import and reformat column names.
+
+       Args:
+            preprocessed_df: The preprocessed DataFrame to be further cleaned.
+            output_path: The path to save the cleaned DataFrame.
+
+       Returns:
+            None (the cleaned DataFrame is saved to the output path)
+            
+    """
+
     # number of columns should be 2 + 2X, we want the first 2 + X
     try:
         logging.info('file cleaning started ')
@@ -192,7 +213,7 @@ def clean_data(preprocessed_df, output_path):
         clean_df.to_csv(output_path, index=False)
         logging.info('file cleaning completed ')
     except Exception as e:
-        logging.error(f'cleaning error {e}')
+        logging.fatal(f'cleaning error {e}')
 
 
 def main(_):
@@ -204,14 +225,9 @@ def main(_):
         os.makedirs(input_path)
     input_file = os.path.join(input_path, 'input_file.tsv')
 
-    if mode == "":
-        download_result = download_data(download_link, input_file)
-        if download_result:
-            preprocessed_df = preprocess_data(input_file)
-            clean_data(preprocessed_df, output_path)
-    elif mode == "download":
-        download_result = download_data(download_link, input_file)
-    elif mode == "process":
+    if mode == "" or mode == "download":
+        download_data(download_link, input_file)
+    if mode == "" or mode == "process":
         preprocessed_df = preprocess_data(input_file)
         clean_data(preprocessed_df, output_path)
 

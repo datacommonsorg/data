@@ -18,10 +18,10 @@ Downloads and cleans GDP data from the Eurostat database.
 
     python3 import_data.py
 """
+
 import sys
 from six.moves import urllib
 import numpy as np
-
 import json
 import pandas as pd
 from preprocess_data import preprocess_df
@@ -85,6 +85,13 @@ class EurostatGDPImporter:
     def download_data(self, input_source, download_path):
         """Downloads raw data from Eurostat website and stores it in instance
         data frame.
+        
+            Args:
+            download_link(str): A string representing the URL of the data source.
+            download_path(str): A string specifying the local file path where the downloaded data will be saved.
+            
+            Returns:None
+            
         """
         logging.info("file downloading")
         try:
@@ -92,13 +99,16 @@ class EurostatGDPImporter:
             self.raw_df = pd.read_table("nama_10r_3gdp.tsv.gz")
             self.raw_df.to_csv(download_path, index=False, sep='\t')
             logging.info("file download completed")
-            return True
         except Exception as e:
-            logging.error(f'download error {e}')
-            return False
+            logging.fatal(f'download error {e}')
 
     def preprocess_data(self, input_file):
-        """Preprocesses instance raw_df and puts it into long format."""
+        """Preprocesses instance raw_df and puts it into long format.
+        Args:
+            input_file: Path to the input file.
+        Returns:
+            A preprocessed DataFrame.
+        """
         try:
             logging.info('file processing started ')
             self.raw_df = pd.read_table(input_file)
@@ -111,10 +121,12 @@ class EurostatGDPImporter:
             logging.info("file processing completed")
             return self.preprocessed_df
         except Exception as e:
-            logging.error(f'processing error {e}')
+            logging.fatal(f'processing error {e}')
 
     def clean_data(self):
-        """Drops unnecessary columns that are not needed for data import."""
+        """Drops unnecessary columns that are not needed for data import.
+        Returns:
+            A cleaned DataFrame."""
         if self.preprocessed_df is None:
             raise ValueError("Uninitialized value of processed data frame. "
                              "Please check you are calling preprocess_data "
@@ -124,7 +136,7 @@ class EurostatGDPImporter:
             self.clean_df = self.preprocessed_df[self.DESIRED_COLUMNS]
             logging.info("cleaning completed")
         except Exception as e:
-            logging.error(f' error while cleaning {e}')
+            logging.fatal(f' error while cleaning {e}')
 
         # GDP measurements for all of Europe are currently removed for lack
         # of a way to represent them in the DataCommons Graph.
@@ -191,7 +203,7 @@ class EurostatGDPImporter:
             self.clean_df.to_csv(filename)
             logging.info("completed")
         except Exception as e:
-            logging.error(f' error while saving {e}')
+            logging.fatal(f' error while saving {e}')
 
     def generate_tmcf(self):
         temp = ('Node: E:eurostat_gdp->E{i}\n'
@@ -239,16 +251,10 @@ def main(_):
         os.makedirs(input_path)
     input_file = os.path.join(input_path, 'input_file.tsv')
     imp = EurostatGDPImporter()
-    if mode == "":
-        download_result = imp.download_data(input_source, input_file)
-        if download_result:
-            imp.preprocess_data(input_file)
-            imp.clean_data()
-            imp.save_csv()
-            imp.generate_tmcf()
-    elif mode == "download":
-        download_result = imp.download_data(input_source, input_file)
-    elif mode == "process":
+
+    if mode == "" or mode == "download":
+        imp.download_data(input_source, input_file)
+    if mode == "" or mode == "process":
         imp.preprocess_data(input_file)
         imp.clean_data()
         imp.save_csv()

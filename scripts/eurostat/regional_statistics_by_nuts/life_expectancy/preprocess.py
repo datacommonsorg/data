@@ -59,7 +59,14 @@ def obtain_value(entry):
 
 def download_data(download_link, download_path):
     """Downloads raw data from Eurostat website and stores it in instance
-    data frame.
+       data frame.
+    
+        Args:
+        download_link(str): A string representing the URL of the data source.
+        download_path(str): A string specifying the local file path where the downloaded data will be saved.
+        
+        Returns:None
+        
     """
     logging.info("file downloading")
     try:
@@ -67,15 +74,16 @@ def download_data(download_link, download_path):
         raw_df = pd.read_table("demo_r_mlifexp.tsv.gz")
         raw_df.to_csv(download_path, index=False, sep='\t')
         logging.info("file download completed")
-        return True
     except Exception as e:
-        logging.error(f'download error {e}')
-        return False
+        logging.fatal(f'download error {e}')
 
 
 def preprocess(file_path):
-    """Preprocess the tsv file for importing into DataCommons."""
-    # Concatenate data of different years from multiple columns into one column.
+    """Preprocess the tsv file for importing into DataCommons.
+      Args:
+         input_file: Path to the input TSV file.
+     Returns:
+         None"""
     try:
         logging.info('file processing started ')
         data = pd.read_csv(file_path, delimiter='\t')
@@ -149,7 +157,7 @@ def preprocess(file_path):
         logging.info('file processing completed')
         return
     except Exception as e:
-        logging.error(f'processing error {e}')
+        logging.fatal(f'processing error {e}')
 
 
 def main(_):
@@ -160,14 +168,10 @@ def main(_):
     if not os.path.exists(input_path):
         os.makedirs(input_path)
     input_file = os.path.join(input_path, 'input_file.tsv')
-    if mode == "":
-        download_result = download_data(_DATA_URL, input_file)
-        if download_result:
-            preprocess(input_file)
 
-    elif mode == "download":
-        download_result = download_data(_DATA_URL, input_file)
-    elif mode == "process":
+    if mode == "" or mode == "download":
+        download_data(_DATA_URL, input_file)
+    if mode == "" or mode == "process":
         preprocess(input_file)
 
 

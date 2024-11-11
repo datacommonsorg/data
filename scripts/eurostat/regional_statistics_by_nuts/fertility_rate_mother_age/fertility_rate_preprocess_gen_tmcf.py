@@ -41,7 +41,14 @@ _OUTPUT_COLUMNS = [
 
 def download_data(download_link, download_path):
     """Downloads raw data from Eurostat website and stores it in instance
-    data frame.
+       data frame.
+    
+        Args:
+        download_link(str): A string representing the URL of the data source.
+        download_path(str): A string specifying the local file path where the downloaded data will be saved.
+        
+        Returns:None
+        
     """
     logging.info("file downloading")
     try:
@@ -49,13 +56,18 @@ def download_data(download_link, download_path):
         raw_df = pd.read_table("demo_r_find3.tsv.gz")
         raw_df.to_csv(download_path, index=False, sep='\t')
         logging.info("file download completed")
-        return True
     except Exception as e:
-        logging.error(f'download error {e}')
-        return False
+        logging.fatal(f'download error {e}')
 
 
 def translate_wide_to_long(file_path):
+    """ Reshaping DataFrames from Wide to Long Format
+    Args: 
+        This argument specifies the path to the input file
+    Returns:
+        df: long-format version of the original raw_df.
+    
+    """
     try:
         logging.info('transforming data: wide to long.. ')
         df = pd.read_csv(file_path, delimiter='\t')
@@ -107,10 +119,18 @@ def translate_wide_to_long(file_path):
         logging.info('transforming data: wide to long.. completed ')
         return df
     except Exception as e:
-        logging.error(f'transforming error {e}')
+        logging.fatal(f'transforming error {e}')
 
 
 def preprocess(df, cleaned_csv):
+    """ Preprocesses a DataFrame and saves the cleaned data to a CSV file.
+    Args:
+        df: The raw, unprocessed DataFrame.
+        cleaned_csv: The path to the CSV file where the cleaned data will be saved.
+
+    Returns:
+        None
+    """
     try:
         logging.info('file processing started ')
         df = df.replace(np.NaN, '', regex=True)
@@ -130,20 +150,26 @@ def preprocess(df, cleaned_csv):
         logging.info('file processing completed')
 
     except Exception as e:
-        logging.error(f'processing error {e}')
+        logging.fatal(f'processing error {e}')
 
 
 def get_template_mcf(output_columns, _TMCF):
-    # Automate Template MCF generation since there are many Statistical Variables.
+    """Automate Template MCF generation since there are many Statistical Variables.
+      Args:
+            output_columns: A list of strings representing all the output columns from the data.
+            _TMCF: The path to a template MCF file used as the base structure.
+        Returns:
+            None
+    """
     TEMPLATE_MCF_TEMPLATE = """
-Node: E:Eurostats_NUTS3_FRate_Age->E{index}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{stat_var}
-observationAbout: C:Eurostats_NUTS3_FRate_Age->GeoId
-observationDate: C:Eurostats_NUTS3_FRate_Age->Date
-value: C:Eurostats_NUTS3_FRate_Age->{stat_var}
-measurementMethod: dcs:EurostatRegionalStatistics
-"""
+        Node: E:Eurostats_NUTS3_FRate_Age->E{index}
+        typeOf: dcs:StatVarObservation
+        variableMeasured: dcs:{stat_var}
+        observationAbout: C:Eurostats_NUTS3_FRate_Age->GeoId
+        observationDate: C:Eurostats_NUTS3_FRate_Age->Date
+        value: C:Eurostats_NUTS3_FRate_Age->{stat_var}
+        measurementMethod: dcs:EurostatRegionalStatistics
+        """
     try:
         logging.info('Template MCF processing ')
         stat_vars = output_columns[2:]
@@ -156,7 +182,7 @@ measurementMethod: dcs:EurostatRegionalStatistics
                     }))
         logging.info('Template MCF processing completed')
     except Exception as e:
-        logging.error(f'processing error {e}')
+        logging.fatal(f'processing error {e}')
 
 
 def main(_):
@@ -168,15 +194,10 @@ def main(_):
     if not os.path.exists(input_path):
         os.makedirs(input_path)
     input_file = os.path.join(input_path, 'input_file.tsv')
-    if mode == "":
-        download_result = download_data(_DATA_URL, input_file)
-        if download_result:
-            translate_df = translate_wide_to_long(input_file)
-            preprocess(translate_df, _CLEANED_CSV)
-            get_template_mcf(_OUTPUT_COLUMNS, _TMCF)
-    elif mode == "download":
-        download_result = download_data(_DATA_URL, input_file)
-    elif mode == "process":
+
+    if mode == "" or mode == "download":
+        download_data(_DATA_URL, input_file)
+    if mode == "" or mode == "process":
         translate_df = translate_wide_to_long(input_file)
         preprocess(translate_df, _CLEANED_CSV)
         get_template_mcf(_OUTPUT_COLUMNS, _TMCF)
