@@ -8,8 +8,8 @@
       "scripts": ["preprocess.py"],
       "import_inputs": [
         {
-          "template_mcf": "output/National_State/USA_Population_Count_by_Race_National_state_2000.tmcf",
-          "cleaned_csv": "output/National_State/USA_Population_Count_by_Race_National_state_2000.csv"
+          "template_mcf": "output/USA_Population_Count_by_Race_National_state_2000.tmcf",
+          "cleaned_csv": "output/USA_Population_Count_by_Race_National_state_2000.csv"
         },
         {
           "template_mcf": "output/Race_before/USA_Population_Count_by_Race_before_2000.tmcf",
