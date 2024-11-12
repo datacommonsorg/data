@@ -36,29 +36,12 @@ def process_national_2020_2029(url: str) -> pd.DataFrame:
     Returns:
         df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
-    _MODULE_DIR = os.path.dirname(__file__)
-    parent_dir = os.path.dirname(_MODULE_DIR)
-    _INPUT_FILE_PATH = os.path.join(parent_dir, 'output_files/intermediate')
-    # List and sort the files in the input directory
-    files_list = os.listdir(_INPUT_FILE_PATH)
-    files_list.sort()
-    # Expected number of files
-    expected_files_count = len(files_list)
-
-    # Check if the number of files in the directory matches the expected count
-    if not files_list:
-        logging.error("No input files found in the directory: %s",
-                      _INPUT_FILE_PATH)
-        return
-
-    if len(files_list) != expected_files_count:
-        logging.error(
-            "Mismatch in the number of input files. Expected %d files, but found %d.",
-            expected_files_count, len(files_list))
 
     # reading input file to dataframe
     df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
-
+    df.to_csv(_CODEDIR + "/../input_files/" +
+              'nationals_result_2020_2029.csv',
+              index=False)
     # years having 1 and 2 value are not requried as estimate is for April Month
     # agegrp is only required as it gives total of all ages
     df = df.query("YEAR not in [1]")

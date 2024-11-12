@@ -44,7 +44,8 @@ def process_state_1990_2000(urls: str) -> pd.DataFrame:
                            delim_whitespace=True,
                            index_col=False,
                            engine='python')
-
+        df.to_csv(_CODEDIR + "/../input_files/" +
+                    "state_result_1990_2000.csv")
         # NHWM = Non-Hispnic White Male, NHFM = Non-Hispnic White Female,
         # NHBM = Non-Hispnic Black Male, NHFM = Non-Hispnic Black Female,
         # NHAIANM = Non-Hispanic American Indian and Alaska Native Male,

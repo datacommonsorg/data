@@ -39,7 +39,8 @@ def process_national_2000_2010(url: str) -> pd.DataFrame:
     # skipping unwanted rows from top and bottom
     # removing commas from the row values
     df = pd.read_csv(url, skiprows=3, skipfooter=8, header=0, thousands=',')
-
+    df.to_csv(_CODEDIR + "/../input_files/" +
+              "nationals_result_2000_2010.csv")
     df.rename(columns={
         'Unnamed: 0': 'SRH',
         'Unnamed: 13': '2010'

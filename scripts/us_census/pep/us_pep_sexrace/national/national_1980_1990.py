@@ -51,7 +51,10 @@ def process_national_1980_1990(url: str) -> pd.DataFrame:
                        delim_whitespace=True,
                        engine='python',
                        names=_cols)
-
+    #Saving input file to local
+    df.to_csv(_CODEDIR + "/../input_files/" +
+              "nationals_result_1980_1990.csv")
+    
     df['Total'] = df[COLUMNS_TO_SUM].sum(axis=1)
 
     # extracting year and geoid from Info column

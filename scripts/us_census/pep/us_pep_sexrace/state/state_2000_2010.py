@@ -37,7 +37,8 @@ def process_state_2000_2010(url: str) -> pd.DataFrame:
     """
     # reading the csv input file
     df = pd.read_csv(url, header=0)
-
+    df.to_csv(_CODEDIR + "/../input_files/" +
+              "state_result_2000_2010.csv")
     # dropping unwanted columns
     df.drop(columns=[
         "REGION", "DIVISION", "ESTIMATESBASE2000", "CENSUS2010POP",

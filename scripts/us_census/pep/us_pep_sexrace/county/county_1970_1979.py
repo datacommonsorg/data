@@ -37,6 +37,8 @@ def process_county_1970_1979(url: str) -> pd.DataFrame:
     """
     # reading the csv input file
     df = pd.read_csv(url, header=None)
+    df.to_csv(_CODEDIR + "/../input_files/" +
+              "county_result_1970_1979.csv")
 
     # listing the columns to be dropped as age gaps are not required
     COLUMNS_TO_SUM = [

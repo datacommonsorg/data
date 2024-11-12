@@ -37,7 +37,9 @@ def process_national_2020_2022(url: str) -> pd.DataFrame:
     """
     # reading input file to dataframe
     df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
-
+    df.to_csv(_CODEDIR + "/../input_files/" +
+              'nationals_result_2020_2022.csv',
+              index=False)
     # years having 1 and 2 value are not requried as estimate is for April Month
     # agegrp is only required as it gives total of all ages
     df = df.query("YEAR not in [1]")
