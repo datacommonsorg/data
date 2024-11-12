@@ -12,12 +12,12 @@
           "cleaned_csv": "output/USA_Population_Count_by_Race_National_state_2000.csv"
         },
         {
-          "template_mcf": "output/Race_before/USA_Population_Count_by_Race_before_2000.tmcf",
-          "cleaned_csv": "output/Race_before/USA_Population_Count_by_Race_before_2000.csv"
+          "template_mcf": "output/USA_Population_Count_by_Race_before_2000.tmcf",
+          "cleaned_csv": "output/USA_Population_Count_by_Race_before_2000.csv"
         },
         {
-          "template_mcf": "output/Race_county/USA_Population_Count_by_Race_county_after_2000.tmcf",
-          "cleaned_csv": "output/Race_county/USA_Population_Count_by_Race_county_after_2000.csv"
+          "template_mcf": "output/USA_Population_Count_by_Race_county_after_2000.tmcf",
+          "cleaned_csv": "output/USA_Population_Count_by_Race_county_after_2000.csv"
         }
       ],
       "cron_schedule": "0 0 1 3 *"

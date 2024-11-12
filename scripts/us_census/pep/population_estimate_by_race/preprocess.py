@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -1348,11 +1348,15 @@ def download_files():
 def main(_):
     mode = _FLAGS.mode
     # Defining Output file names
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "output")
-    cleaned_csv_path = data_file_path
-    mcf_path = data_file_path
-    tmcf_path = data_file_path
+    output_path = os.path.join(_MODULE_DIR, "output")
+    input_path = os.path.join(_MODULE_DIR, "input_files")
+    if not os.path.exists(input_path):
+        os.mkdir(input_path)
+    if not os.path.exists(output_path):
+        os.mkdir(output_path)
+    cleaned_csv_path = output_path
+    mcf_path = output_path
+    tmcf_path = output_path
     input_path = _FLAGS.input_path
 
     if mode == "" or mode == "download":
@@ -1360,7 +1364,7 @@ def main(_):
         add_future_year_urls()
         download_files()
     if mode == "" or mode == "process":
-        loader = CensusUSAPopulationByRace(input_path, data_file_path, mcf_path,
+        loader = CensusUSAPopulationByRace(input_path, output_path, mcf_path,
                                            tmcf_path)
         loader.process()
 
