@@ -1315,17 +1315,19 @@ def add_future_year_urls():
         "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh99.txt"
         
     ]
-    if dt.now().year > 2024:
-        YEAR = dt.now().year
-        for url in urls_to_scan:
-            url_to_check = url.format(YEAR=YEAR)
-            try:
-                check_url = requests.head(url_to_check)
-                if check_url.status_code == 200:
-                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+    # This method will generate URLs for the years 2024 to 2029
+    for future_year in range(2024, 2030):
+        if dt.now().year > future_year:
+            YEAR = future_year
+            for url in urls_to_scan:
+                url_to_check = url.format(YEAR=YEAR)
+                try:
+                    check_url = requests.head(url_to_check)
+                    if check_url.status_code == 200:
+                        _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
 
-            except:
-                logging.error(f"URL is not accessable {url_to_check}")
+                except:
+                    logging.error(f"URL is not accessable {url_to_check}")
 
 
 def _process_files(download_dir):
@@ -1436,8 +1438,8 @@ def download_files():
 
       if retry_number > max_retry:
         logging.fatal(f"Error downloading {url} after {max_retry} retries")
-        # Consider returning False here to indicate overall download failure
-        # return False  # Uncomment if desired
+        # Exit the function if download fails after retries
+        return False
 
   return True  # All files downloaded successfully (or at least attempted)
 
