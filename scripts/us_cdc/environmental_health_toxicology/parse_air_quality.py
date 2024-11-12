@@ -62,6 +62,9 @@ def main():
     output_file = sys.argv[2]
     clean_air_quality_data(file_path, output_file)
 
+# this method is applicable only for "census tract PM25"
+def add_prefix_zero(value, length):
+    return value.zfill(length)
 
 def clean_air_quality_data(file_path, output_file):
     """
@@ -89,6 +92,8 @@ def clean_air_quality_data(file_path, output_file):
                        var_name='StatisticalVariable',
                        value_name='Value')
         data.rename(columns={census_tract + '_stdd': 'Error'}, inplace=True)
+        max_length = data['ctfips'].astype(str).str.len().max()
+        data['ctfips'] = data['ctfips'].astype(str).apply(lambda x: add_prefix_zero(x, max_length))
         data["dcid"] = "geoId/" + data["ctfips"].astype(str)
         data['StatisticalVariable'] = data['StatisticalVariable'].map(STATVARS)
     elif "County" in file_path and "PM" in file_path:
