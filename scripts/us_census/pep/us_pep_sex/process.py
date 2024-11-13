@@ -161,7 +161,7 @@ def _national_1900_1979(file_path: str) -> pd.DataFrame:
             df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _national_1990_2000(file_path: str) -> pd.DataFrame:
@@ -193,7 +193,7 @@ def _national_1990_2000(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _national_2000_2010(file_path: str) -> pd.DataFrame:
@@ -237,7 +237,7 @@ def _national_2000_2010(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _national_2010_2020(file_path: str) -> pd.DataFrame:
@@ -288,7 +288,7 @@ def _national_2010_2020(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _national_2021(file_path: str) -> pd.DataFrame:
@@ -328,7 +328,7 @@ def _national_2021(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _national_2022(file_path: str) -> pd.DataFrame:
@@ -373,7 +373,7 @@ def _national_2022(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _national_2023(file_path: str) -> pd.DataFrame:
@@ -423,7 +423,7 @@ def _national_2023(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _state_1970_1980(file_path: str) -> pd.DataFrame:
@@ -466,7 +466,7 @@ def _state_1970_1980(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _state_1980_1990(file_path: str) -> pd.DataFrame:
@@ -513,7 +513,7 @@ def _state_1980_1990(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _state_2000_2010(file_path: str) -> pd.DataFrame:
@@ -559,7 +559,7 @@ def _state_2000_2010(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _state_2010_2020(file_path: str) -> pd.DataFrame:
@@ -630,7 +630,7 @@ def _state_2010_2020(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _state_2021(file_path: str) -> pd.DataFrame:
@@ -665,7 +665,7 @@ def _state_2021(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _state_2022(file_path: str) -> pd.DataFrame:
@@ -702,7 +702,7 @@ def _state_2022(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _state_2023(file_path: str) -> pd.DataFrame:
@@ -794,7 +794,7 @@ def _state_2023(file_path: str) -> pd.DataFrame:
         final_df = pd.concat([df_2021, df_2022, df_2023], ignore_index=True)
         return final_df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _county_1970_1980(file_path: str) -> pd.DataFrame:
@@ -842,7 +842,7 @@ def _county_1970_1980(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'CensusPEPSurvey'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _county_1980_1990(file_path: str) -> pd.DataFrame:
@@ -886,7 +886,7 @@ def _county_1980_1990(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'CensusPEPSurvey'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _county_1990_2000(file_path: str) -> pd.DataFrame:
@@ -937,7 +937,7 @@ def _county_1990_2000(file_path: str) -> pd.DataFrame:
             'dcAggregate/CensusPEPSurvey_PartialAggregate')
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _county_2000_2010(file_path: str) -> pd.DataFrame:
@@ -990,7 +990,7 @@ def _county_2000_2010(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'CensusPEPSurvey'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _county_2010_2020(file_path: str) -> pd.DataFrame:
@@ -1062,7 +1062,7 @@ def _county_2010_2020(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'CensusPEPSurvey'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _county_2021(file_path: str) -> pd.DataFrame:
@@ -1121,7 +1121,7 @@ def _county_2021(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'CensusPEPSurvey'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _county_2022(file_path: str) -> pd.DataFrame:
@@ -1182,7 +1182,7 @@ def _county_2022(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'CensusPEPSurvey'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 def _county_2023(file_path: str) -> pd.DataFrame:
@@ -1244,7 +1244,7 @@ def _county_2023(file_path: str) -> pd.DataFrame:
         df['Measurement_Method'] = 'CensusPEPSurvey'
         return df
     except Exception as e:
-        logging.exception(f"Error processing the file {file_path}: {e}")
+        logging.fatal(f"Error processing the file {file_path}: {e}")
 
 
 class PopulationEstimateBySex:
