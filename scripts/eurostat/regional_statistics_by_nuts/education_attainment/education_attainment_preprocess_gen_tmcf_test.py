@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import unittest
-import os   
+import os
 from education_attainment_preprocess_gen_tmcf import *
 import pandas as pd
 import tempfile
