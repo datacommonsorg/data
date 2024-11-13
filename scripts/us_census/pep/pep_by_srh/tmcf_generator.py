@@ -26,21 +26,20 @@ _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 os.system("mkdir -p " + _CODEDIR + OUTPUT_DIR)
 
 
-def generate_tmcf():
+def generate_tmcf(output_path):
     """
     This function generates MCF file in OUTPUT directory.
     There are two mcf files generated
     1. population_estimate_by_srh.mcf - for importing as-is data from US Census
     2. population_estimate_by_srh_agg.mcf - for importing aggregated data
-    OUTPUT directory is used as common between process.py and process_test.py
     """
 
-    with open(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh.tmcf',
+    with open(_CODEDIR + output_path + 'population_estimate_by_srh.tmcf',
               'w',
               encoding='utf-8') as file:
         file.writelines(POPULATION_ESTIMATE_BY_SRH)
 
-    with open(_CODEDIR + OUTPUT_DIR + 'population_estimate_by_srh_agg.tmcf',
+    with open(_CODEDIR + output_path + 'population_estimate_by_srh_agg.tmcf',
               'w',
               encoding='utf-8') as file:
         file.writelines(POPULATION_ESTIMATE_BY_SRH_AGG)
