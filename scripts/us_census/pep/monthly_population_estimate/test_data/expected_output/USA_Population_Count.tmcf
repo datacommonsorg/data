@@ -42,3 +42,12 @@ observationAbout: C:USA_Population_Count->Location
 observationDate: C:USA_Population_Count->Date
 observationPeriod: "P1M"
 value: C:USA_Population_Count->Count_Person_Civilian_NonInstitutionalized
+
+Node: E:USA_Population_Count->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Person_ResidesInHousehold
+measurementMethod: dcs:CensusPEPSurvey
+observationAbout: C:USA_Population_Count->Location
+observationDate: C:USA_Population_Count->Date
+observationPeriod: "P1M"
+value: C:USA_Population_Count->Count_Person_ResidesInHousehold

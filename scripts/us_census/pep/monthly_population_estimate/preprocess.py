@@ -15,7 +15,8 @@
     from the datasets in the provided local path.
     Typical usage:
     1. python3 preprocess.py
-    2. python3 preprocess.py -i input_data
+    2. python3 preprocess.py -mode='download'
+    3. python3 preprocess.py -mode='process'
 """
 from dataclasses import replace
 import os
@@ -37,6 +38,7 @@ from absl import logging
 pd.set_option("display.max_columns", None)
 
 FLAGS = flags.FLAGS
+flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -187,9 +189,9 @@ class CensusUSACountryPopulation:
     Files using pre-defined templates.
     """
 
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
-        self._input_files = input_files
+    def __init__(self, input_path: str, csv_file_path: str, mcf_file_path: str,
+                 tmcf_file_path: str) -> None:
+        self.input_path = input_path  #added
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
@@ -280,31 +282,36 @@ class CensusUSACountryPopulation:
         CSV file format.
 
         Arguments:
-            file (str) : Dataset File Path
+        df (DataFrame): Input DataFrame containing the raw data to be transformed.
 
         Returns:
-            df (DataFrame) : DataFrame.
+        bool: Returns True if the transformation and file saving are successful, 
+              False if an error occurs during processing.
         """
+        try:
+            df = self._transform_df(df)
 
-        df = self._transform_df(df)
+            if self._df is None:
+                self._df = df
+            else:
+                self._df = pd.concat([self._df, df], ignore_index=True)
 
-        if self._df is None:
-            self._df = df
-        else:
-            self._df = pd.concat([self._df, df], ignore_index=True)
-
-        self._df.sort_values(by=['Date', 'date_range'],
-                             ascending=False,
-                             inplace=True)
-        self._df.drop_duplicates("Date", keep="first", inplace=True)
-        self._df.drop(['date_range'], axis=1, inplace=True)
-        float_col = self._df.select_dtypes(include=['float64'])
-        for col in float_col.columns.values:
-            try:
-                self._df[col] = self._df[col].astype('int64')
-            except:
-                pass
-        self._df.to_csv(self._cleaned_csv_file_path, index=False)
+            self._df.sort_values(by=['Date', 'date_range'],
+                                 ascending=False,
+                                 inplace=True)
+            self._df.drop_duplicates("Date", keep="first", inplace=True)
+            self._df.drop(['date_range'], axis=1, inplace=True)
+            float_col = self._df.select_dtypes(include=['float64'])
+            for col in float_col.columns.values:
+                try:
+                    self._df[col] = self._df[col].astype('int64')
+                except:
+                    pass
+            self._df.to_csv(self._cleaned_csv_file_path, index=False)
+        except Exception as e:
+            logging.error(f'Error when processing file: {file}: {e}')
+            return False
+        return True
 
     def _generate_mcf(self, df_cols: list) -> None:
         """
@@ -394,12 +401,29 @@ class CensusUSACountryPopulation:
         calls defined methods to clean, generate final
         cleaned CSV file, MCF file and TMCF file.
         """
-        for file in self._input_files:
-            print(file)
+        #input_path = FLAGS.input_path
+        ip_files = os.listdir(self.input_path)
+        self.input_files = [
+            self.input_path + os.sep + file for file in ip_files
+        ]
+        processed_count = 0
+        total_files_to_process = len(self.input_files)
+        logging.info(f"No of files to be processed {len(self.input_files)}")
+        for file in self.input_files:
             df = self._load_data(file)
-            self._transform_data(df)
-        self._generate_mcf(self._df.columns)
-        self._generate_tmcf(self._df.columns)
+            result = self._transform_data(df)
+            if result:
+                processed_count += 1
+            else:
+                logging.error(f'Failed to process {file}')
+        logging.info(f"No of files processed {processed_count}")
+        if processed_count == total_files_to_process & total_files_to_process > 0:
+            self._generate_mcf(self._df.columns)
+            self._generate_tmcf(self._df.columns)
+        else:
+            logging.fatal(
+                "Aborting output files as no of files to process not matching processed files"
+            )
 
 
 def add_future_year_urls():
@@ -409,11 +433,20 @@ def add_future_year_urls():
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/national/totals/NA-EST{YEAR}-POP.xlsx"
     ]
-    if dt.now().year < 2023:
-        YEAR = dt.now().year
-        for url in urls_to_scan:
-            url_to_check = url.format(YEAR=YEAR)
-            _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+    # This method will generate URLs for the years 2024 to 2029
+    for future_year in range(2024, 2030):
+        if dt.now().year > future_year:
+            YEAR = future_year
+            for url in urls_to_scan:
+                url_to_check = url.format(YEAR=YEAR)
+                try:
+                    check_url = requests.head(url_to_check)
+                    if check_url.status_code == 200:
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": url_to_check})
+
+                except:
+                    logging.error(f"URL is not accessable {url_to_check}")
 
 
 def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
@@ -462,14 +495,12 @@ def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
     This method cleans the dataframe loaded from a txt file format.
     Also, Performs transformations on the data.
 
-    Args:
-        df (DataFrame) : DataFrame of txt dataset
-        scaling_factor_txt_file (int) : Scaling factor for text file
-
+    Arguments:
+        df (DataFrame): DataFrame representing the loaded TXT dataset.
+    
     Returns:
-        df (DataFrame) : Transformed DataFrame for txt dataset.
+        DataFrame: Transformed DataFrame after cleaning operations.
     """
-    # Month and Year are concatenated into a single column if they are not None
     df['Year and Month'] = df[['Year and Month', 'Date']]\
                                     .apply(_concat_cols, axis=1)
     df.drop(columns=['Date'], inplace=True)
@@ -501,12 +532,11 @@ def _mulitply_scaling_factor(col: pd.Series) -> pd.Series:
     """
     This method multiply dataframe column with scaling factor.
 
-    Args:
-        col (Series): DataFrame Column of dtype int
-        **kwargs (dict): Dict with key 'scaling_factor' and value type int
+    Arguments:
+        col (Series): A DataFrame column of dtype int, containing the values to be scaled.
 
     Returns:
-        res (Series): DataFrame column values mulitplied by scaling_factor.
+        Series: A DataFrame column with values multiplied by the scaling factor.
     """
     res = col
     if col not in [None, np.NAN]:
@@ -521,14 +551,11 @@ def _concat_cols(col: pd.Series) -> pd.Series:
     with space in-between.
 
     Args:
-        col[0] (Series) : DataFrame Column of dtype str
-        col[1] (Series) : DataFrame Column of dtype str
+        col (Series): A pandas Series containing two values from the DataFrame.
 
     Returns:
         res (Series) : Concatenated DataFrame Columns
     """
-    # Looking at the data whenever col[0] has year, col[1] is None
-    # Thus concatinating Date with Month which is needed here
     res = col[0]
     if col[1] is None:
         return res
@@ -604,33 +631,30 @@ def download_files():
                 if retry_number > max_retry:
                     logging.error(f"Error downloading {url}")
                     logging.error("Exit from script")
-                    sys.exit(0)
+                    sys.exit(1)
     return True
 
 
 def main(_):
-    add_future_year_urls()
-    download_status = download_files()
-    if download_status:
-        # add the process steps as your script
-        input_path = FLAGS.input_path
-
-        ip_files = os.listdir(input_path)
-        ip_files = [input_path + os.sep + file for file in ip_files]
-
-        # Defining Output file names
-        data_file_path = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "output")
-        cleaned_csv_path = os.path.join(data_file_path,
-                                        "USA_Population_Count.csv")
-        mcf_path = os.path.join(data_file_path, "USA_Population_Count.mcf")
-        tmcf_path = os.path.join(data_file_path, "USA_Population_Count.tmcf")
-
-        loader = CensusUSACountryPopulation(ip_files, cleaned_csv_path,
+    mode = FLAGS.mode
+    # Defining Output file names
+    output_path = os.path.join(_MODULE_DIR, "output")
+    input_path = os.path.join(_MODULE_DIR, "input_files")
+    if not os.path.exists(input_path):
+        os.mkdir(input_path)
+    if not os.path.exists(output_path):
+        os.mkdir(output_path)
+    cleaned_csv_path = os.path.join(output_path, "USA_Population_Count.csv")
+    mcf_path = os.path.join(output_path, "USA_Population_Count.mcf")
+    tmcf_path = os.path.join(output_path, "USA_Population_Count.tmcf")
+    download_status = True
+    if mode == "" or mode == "download":
+        add_future_year_urls()
+        download_status = download_files()
+    if download_status and (mode == "" or mode == "process"):
+        loader = CensusUSACountryPopulation(FLAGS.input_path, cleaned_csv_path,
                                             mcf_path, tmcf_path)
-
         loader.process()
-        logging.info("Completed.")
 
 
 if __name__ == "__main__":
