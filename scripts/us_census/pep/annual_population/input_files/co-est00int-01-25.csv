@@ -1,0 +1,29 @@
+table with row headers in column A and column headers in rows 3 through 4 (leading dots indicate sub-parts),,,,,,,,,,,,,
+"Table 1. Intercensal Estimates of the Resident Population for Counties of Massachusetts: April 1, 2000 to July 1, 2010",,,,,,,,,,,,,
+Geographic Area,"April 1, 20001",Intercensal Estimates (as of July 1),,,,,,,,,,"April 1, 20102","July 1, 20103"
+,,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,,
+Massachusetts,"6,349,364","6,361,104","6,397,634","6,417,206","6,422,565","6,412,281","6,403,290","6,410,084","6,431,559","6,468,967","6,517,613","6,547,629","6,557,254"
+.Barnstable County,"222,239","223,031","224,087","225,421","226,011","224,264","221,995","220,037","218,380","217,066","215,994","215,888","215,937"
+.Berkshire County,"134,922","134,769","133,928","133,529","133,423","133,076","132,563","131,977","131,883","131,372","131,264","131,219","131,144"
+.Bristol County,"534,702","535,817","538,282","542,721","546,281","545,988","545,437","544,487","545,288","546,456","547,324","548,285","548,612"
+.Dukes County,"15,001","15,090","15,261","15,482","15,630","15,704","15,743","15,768","15,919","16,132","16,373","16,535","16,581"
+.Essex County,"723,496","725,025","730,206","732,232","731,544","729,783","728,877","729,455","730,664","734,361","739,086","743,159","744,644"
+.Franklin County,"71,540","71,471","71,557","71,761","71,837","71,875","71,879","71,708","71,577","71,571","71,392","71,372","71,369"
+.Hampden County,"456,280","456,533","456,557","458,780","460,673","460,841","461,147","461,408","461,434","462,053","462,777","463,490","463,678"
+.Hampshire County,"152,237","152,364","152,518","153,461","154,621","155,019","155,383","156,168","156,842","157,615","157,910","158,080","158,094"
+.Middlesex County,"1,465,244","1,467,248","1,473,021","1,468,488","1,464,083","1,459,232","1,454,868","1,456,528","1,463,106","1,477,049","1,494,764","1,503,085","1,506,008"
+.Nantucket County,"9,522","9,503","9,415","9,556","9,629","9,732","9,703","9,811","9,985","10,170","10,225","10,172","10,155"
+.Norfolk County,"650,265","650,865","653,137","653,860","653,032","652,630","651,538","653,421","656,582","661,703","666,301","670,850","672,376"
+.Plymouth County,"472,858","474,131","478,222","482,092","484,245","485,010","486,292","486,779","488,251","490,371","492,738","494,919","495,780"
+.Suffolk County,"691,047","692,745","700,232","701,333","697,080","691,272","686,600","687,192","693,368","702,201","716,214","722,023","723,323"
+.Worcester County,"750,011","752,512","761,211","768,490","774,476","777,855","781,265","785,345","788,280","790,847","795,251","798,552","799,553"
+"1 The April 1, 2000 Population Estimates base reflects changes to the Census 2000 population from the Count Question Resolution program, 
+legal boundary updates, and other geographic program revisions.",,,,,,,,,,,,,
+"2 The data source for April 1, 2010 is the 2010 Census count.",,,,,,,,,,,,,
+"3 The values for July 1, 2010 were produced by applying estimates of change in the population between April 1 and July 1 of 2010 to the 2010 Census counts.  Further details on this methodology
+are available at http://www.census.gov/popest/methodology/intercensal_nat_meth.pdf.",,,,,,,,,,,,,
+"Note: All geographic boundaries for the 2000-2010 intercensal estimates are defined as of January 1, 2010.",,,,,,,,,,,,,
+Suggested Citation:,,,,,,,,,,,,,
+"Table 1. Intercensal Estimates of the Resident Population for Counties of Massachusetts: April 1, 2000 to July 1, 2010 (CO-EST00INT-01-25)",,,,,,,,,,,,,
+"Source: U.S. Census Bureau, Population Division",,,,,,,,,,,,,
+Release Date: September 2011,,,,,,,,,,,,,

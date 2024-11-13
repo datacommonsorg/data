@@ -1,7 +1,7 @@
 # US Census PEP: National Population Count
 
 ## About the Dataset
-This dataset has Annual Population Estimates from the year 1900 to 2021 for different geographic level such as National, State, County, and Cities.
+This dataset has Annual Population Estimates from the year 1900 to latest for different geographic level such as National, State, County, and Cities.
 
 The population is categorized by [Count_Person](https://datacommons.org/browser/Count_Person) StatVar in Datacommons.org
 
@@ -34,14 +34,34 @@ Run the test cases
 
 `/bin/python3 -m unittest scripts/us_census/pep/annual_population_estimate/preprocess_test.py`
 
+Execute the 'preprocess_test.py' script by using the following commands:
+    
+     `python3 preprocess_test.py`
+
 ### Import Procedure
 
-The below script will download the data
-
-`/usr/bin/sh scripts/us_census/pep/annual_population_estimate/download.sh`
-
-The below script will generate csv and mcf files.
+The below script will download the data, generate csv and mcf files.
 
 `/usr/bin/python3 scripts/us_census/pep/annual_population_estimate/preprocess.py`
+
+Execute the 'preprocess.py' script by using the following commands:
+
+  - if you want to perform "download and process", run the below command:
+
+        `python3 preprocess.py`
+
+  - if you want to perform "only process", run the below command:
+
+        `python3 preprocess.py --mode=process`
+        
+  - if you want to perform "only download", run the below command:
+
+        `python3 preprocess.py --mode=download`
+
+### New Implementation:
+- [Updated the script on October 29, 2024]
+- Downloading input files is now integrated into preprocess.py, eliminating the need to run the separate download.sh script. 
+- All source file URLs, including future URLs adhering to the same structure, are centrally managed in the input_url.json file.
+- All input files required for processing should be stored within the designated "input_files" folder.
 
 

@@ -1,0 +1,20 @@
+table with row headers in column A and column headers in rows 3 through 4 (leading dots indicate sub-parts),,,,,,,,,,,,,
+"Table 1. Intercensal Estimates of the Resident Population for Counties of Hawaii: April 1, 2000 to July 1, 2010",,,,,,,,,,,,,
+Geographic Area,"April 1, 20001",Intercensal Estimates (as of July 1),,,,,,,,,,"April 1, 20102","July 1, 20103"
+,,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,,
+Hawaii,"1,211,497","1,213,519","1,225,948","1,239,613","1,251,154","1,273,569","1,292,729","1,309,731","1,315,675","1,332,213","1,346,717","1,360,301","1,363,621"
+.Hawaii County,"148,641","149,244","151,690","154,576","158,442","162,852","168,237","173,536","177,733","181,506","183,629","185,079","185,406"
+.Honolulu County,"876,159","876,629","882,755","890,473","894,311","907,997","918,181","926,954","925,335","933,680","943,177","953,207","955,775"
+.Kalawao County,147,145,138,133,127,117,114,109,105,99,93,90,90
+.Kauai County,"58,460","58,568","59,075","59,981","60,805","62,095","62,863","63,465","64,490","65,603","66,518","67,091","67,226"
+.Maui County,"128,090","128,933","132,290","134,450","137,469","140,508","143,334","145,667","148,012","151,325","153,300","154,834","155,124"
+"1 The April 1, 2000 Population Estimates base reflects changes to the Census 2000 population from the Count Question Resolution program, 
+legal boundary updates, and other geographic program revisions.",,,,,,,,,,,,,
+"2 The data source for April 1, 2010 is the 2010 Census count.",,,,,,,,,,,,,
+"3 The values for July 1, 2010 were produced by applying estimates of change in the population between April 1 and July 1 of 2010 to the 2010 Census counts.  Further details on this methodology
+are available at http://www.census.gov/popest/methodology/intercensal_nat_meth.pdf.",,,,,,,,,,,,,
+"Note: All geographic boundaries for the 2000-2010 intercensal estimates are defined as of January 1, 2010.",,,,,,,,,,,,,
+Suggested Citation:,,,,,,,,,,,,,
+"Table 1. Intercensal Estimates of the Resident Population for Counties of Hawaii: April 1, 2000 to July 1, 2010 (CO-EST00INT-01-15)",,,,,,,,,,,,,
+"Source: U.S. Census Bureau, Population Division",,,,,,,,,,,,,
+Release Date: September 2011,,,,,,,,,,,,,
