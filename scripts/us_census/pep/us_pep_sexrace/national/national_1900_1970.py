@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
     final_df = pd.DataFrame()
     final_df2 = pd.DataFrame()
     for file in ip_files:
-        
+
         filename = file
         if ".csv" in filename:
             # Extract year from the url
@@ -52,8 +52,8 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                 df = pd.read_csv(file)
                 #Saving file to local
                 df.to_csv(_CODEDIR + "/../input_files/" +
-                    "nationals_result_1900_1959.csv",
-                    index=False)
+                          "nationals_result_1900_1959.csv",
+                          index=False)
 
                 # providing proper column names
                 df.columns = [
@@ -84,8 +84,8 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
                 # and converting it to a dataframe
                 df2 = pd.read_csv(file)
                 df2.to_csv(_CODEDIR + "/../input_files/" +
-                    "nationals_result_1960_1979.csv",
-                    index=False)
+                           "nationals_result_1960_1979.csv",
+                           index=False)
                 # providing proper column names
                 df2.columns = [
                     "Age", "All race total", "Count_Person_Male",

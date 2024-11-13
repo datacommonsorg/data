@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ from county.county_2010_2020 import process_county_2010_2020
 from county.county_2020_2022 import process_county_2020_2022
 from county.county_2020_2029 import process_county_2020_2029
 from postprocess import create_single_csv, generate_mcf, generate_tmcf
-from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE,__INPUTFILES
+from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE, __INPUTFILES
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
@@ -108,7 +108,8 @@ def add_future_year_urls():
                 try:
                     check_url = requests.head(url_to_check)
                     if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": url_to_check})
 
                 except:
                     logging.error(f"URL is not accessable {url_to_check}")
@@ -177,7 +178,7 @@ def downloadFiles(config_files: list, test=False):
             process_county_2020_2029(url)
             process_state_2020_2029(url)
     except Exception as e:
-        logging.fatal("There is an error while downloading the files", e)
+        logging.fatal(f"There is an error while downloading the files {e}")
 
 
 def process(config_files: list, test=False):
@@ -219,22 +220,16 @@ def process(config_files: list, test=False):
 
     # list of state and county output files before after 2000
     state_county_after_2000 = [
-        "state_result_2000_2010.csv",
-        "state_result_2010_2020.csv",
-        "county_result_2000_2009.csv",
-        "county_result_2010_2020.csv",
-        "state_result_2020_2022.csv",
-        "state_result_2020_2029.csv",
-        "county_result_2020_2022.csv",
-        "county_result_2020_2029.csv"
+        "state_result_2000_2010.csv", "state_result_2010_2020.csv",
+        "county_result_2000_2009.csv", "county_result_2010_2020.csv",
+        "state_result_2020_2022.csv", "state_result_2020_2029.csv",
+        "county_result_2020_2022.csv", "county_result_2020_2029.csv"
     ]
 
     # list of national output files after year 2000
     national_after_2000 = [
-        "nationals_result_2000_2010.csv",
-        "nationals_result_2010_2020.csv",
-        "nationals_result_2020_2022.csv",
-        "nationals_result_2020_2029.csv"
+        "nationals_result_2000_2010.csv", "nationals_result_2010_2020.csv",
+        "nationals_result_2020_2022.csv", "nationals_result_2020_2029.csv"
     ]
 
     output_files_names = {
@@ -250,6 +245,7 @@ def process(config_files: list, test=False):
             generate_tmcf(columns, flag)
     except Exception as e:
         logging.fatal(f"Error while generating csv,mcf and tmcf files{e}")
+
 
 def main(_):
     mode = _FLAGS.mode

@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,11 +39,10 @@ def process_county_2020_2029(url: str) -> pd.DataFrame:
     _MODULE_DIR = os.path.dirname(__file__)
     parent_dir = os.path.dirname(_MODULE_DIR)
     _INPUT_FILE_PATH = os.path.join(parent_dir, 'output_files/intermediate')
-    
+
     # reading the csv input file
     df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
-    df.to_csv(_CODEDIR + "/../input_files/" +
-              'county_result_2020_2029.csv',
+    df.to_csv(_CODEDIR + "/../input_files/" + 'county_result_2020_2029.csv',
               index=False)
 
     # years having 1 and 2 value are not requried as estimate is for April Month

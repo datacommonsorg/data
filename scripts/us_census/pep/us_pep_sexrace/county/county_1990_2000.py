@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -64,7 +64,7 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
                                names=_cols,
                                encoding='ISO-8859-1')
             df.to_csv(_CODEDIR + "/../input_files/" +
-                    'county_result_1990_2000.csv')
+                      'county_result_1990_2000.csv')
             # dropping the rows which are having broken values
             num_df = (df.drop(_cols,
                               axis=1).join(df[_cols].apply(pd.to_numeric,
@@ -123,7 +123,8 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
     # creating proper geoId
     # import pdb;
     # pdb.set_trace()
-    final_df['geo_ID'] = 'geoId/' + final_df['geo_ID'].astype(str).str.replace('.0', '')
+    final_df['geo_ID'] = 'geoId/' + final_df['geo_ID'].astype(str).str.replace(
+        '.0', '')
     # aggregating required columns to get Count_Person_Male
     final_df["Count_Person_Male"] = final_df.loc[:, [
         'Count_Person_Male_WhiteAlone',

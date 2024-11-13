@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,8 +37,7 @@ def process_state_1970_1979(url: str) -> pd.DataFrame:
     """
     # reading the csv input file
     df = pd.read_csv(url, skiprows=5, header=0, thousands=',')
-    df.to_csv(_CODEDIR + "/../input_files/" +
-              "state_result_1970_1979.csv")
+    df.to_csv(_CODEDIR + "/../input_files/" + "state_result_1970_1979.csv")
     df.rename(columns={
         'Year of Estimate': 'Year',
         'FIPS State Code': 'geo_ID',
