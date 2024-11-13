@@ -211,7 +211,7 @@ class EurostatGDPImporter:
                 'variableMeasured: {var_ref}\n'
                 'observationAbout: C:eurostat_gdp->geo\n'
                 'observationDate: C:eurostat_gdp->time\n'
-                'measurementMethod: dcs:EurostatRegionalStatistics\n'
+                'measurementMethod: {mm}\n'
                 'observationPeriod: "P1Y"\n'
                 'value: C:eurostat_gdp->{val_col}\n'
                 'unit: {unit}\n\n')
@@ -237,9 +237,17 @@ class EurostatGDPImporter:
                 else:
                     var = ("dcid:Amount_EconomicActivity_"
                            "GrossDomesticProduction_Nominal")
+                if "EU27_2020" in col:
+                    mea_method = "dcs:EuroBaseYear2020"
+                else:
+                    mea_method = "dcs:EurostatRegionalStatistics"
 
                 tmcf_f.write(
-                    temp.format(i=col_num, var_ref=var, val_col=col, unit=unit))
+                    temp.format(i=col_num,
+                                var_ref=var,
+                                val_col=col,
+                                unit=unit,
+                                mm=mea_method))
 
 
 def main(_):

@@ -170,16 +170,34 @@ def get_template_mcf(output_columns, _TMCF):
         value: C:Eurostats_NUTS3_FRate_Age->{stat_var}
         measurementMethod: dcs:EurostatRegionalStatistics
         """
+
+    TEMPLATE_MCF_TEMPLATE1 = """
+        Node: E:Eurostats_NUTS3_FRate_Age->E{index}
+        typeOf: dcs:StatVarObservation
+        variableMeasured: dcs:{stat_var}
+        observationAbout: C:Eurostats_NUTS3_FRate_Age->GeoId
+        observationDate: C:Eurostats_NUTS3_FRate_Age->Date
+        value: C:Eurostats_NUTS3_FRate_Age->{stat_var}
+        measurementMethod: dcs:EurostatRegionalStatistics
+        unit:Year
+        """
     try:
         logging.info('Template MCF processing ')
         stat_vars = output_columns[2:]
         with open(_TMCF, 'w', newline='') as f_out:
             for i in range(len(stat_vars)):
-                f_out.write(
-                    TEMPLATE_MCF_TEMPLATE.format_map({
-                        'index': i,
-                        'stat_var': _OUTPUT_COLUMNS[2:][i]
-                    }))
+                if _OUTPUT_COLUMNS[2:][i] == "FertilityRate_Person_Female":
+                    f_out.write(
+                        TEMPLATE_MCF_TEMPLATE.format_map({
+                            'index': i,
+                            'stat_var': _OUTPUT_COLUMNS[2:][i]
+                        }))
+                else:
+                    f_out.write(
+                        TEMPLATE_MCF_TEMPLATE1.format_map({
+                            'index': i,
+                            'stat_var': _OUTPUT_COLUMNS[2:][i]
+                        }))
         logging.info('Template MCF processing completed')
     except Exception as e:
         logging.fatal(f'processing error {e}')

@@ -300,6 +300,7 @@ def get_template_mcf(output_columns, _TMCF):
         observationDate: C:EurostatsNUTS2_Education_Attainment->Date
         value: C:EurostatsNUTS2_Education_Attainment->{stat_var}
         scalingFactor: 100
+        unit:Percent
         measurementMethod: dcs:EurostatRegionalStatistics
         """
     try:

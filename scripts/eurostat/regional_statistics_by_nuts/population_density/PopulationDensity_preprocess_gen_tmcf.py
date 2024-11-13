@@ -151,6 +151,7 @@ def get_template_mcf(output_columns, _TMCF):
         observationDate: C:EurostatNUTS3_DensityTracking->Date
         value: C:EurostatNUTS3_DensityTracking->{stat_var}
         measurementMethod: "EurostatRegionalStatistics"
+        unit: PersonPerSquareKilometer
         """
     try:
         logging.info('Template MCF processing ')
