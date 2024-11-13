@@ -32,21 +32,21 @@ def download_files() -> None:
     Returns:
         None
     """
-    with open("input_urls.txt",
-              "r") as url_files:
+    with open("input_urls.txt", "r") as url_files:
         input_urls = url_files.readlines()
     if not os.path.exists(_DOWNLOAD_PATH):
         os.mkdir(_DOWNLOAD_PATH)
     os.chdir(_DOWNLOAD_PATH)
 
     for file in input_urls:
-        f=file.split("/")
-        file_name = f[-1].replace("\n","")
-        print(file,file_name)
+        f = file.split("/")
+        file_name = f[-1].replace("\n", "")
+        print(file, file_name)
         try:
             urllib.request.urlretrieve(file, file_name)
         except Exception as e:
             print(e)
+
 
 if __name__ == '__main__':
     download_files()
