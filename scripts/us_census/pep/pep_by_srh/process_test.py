@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ class ProcessTest(unittest.TestCase):
     MCF, tMCF and DC import CSV files for US Census Estimates by SRH data.
     """
 
-    def testMcf(self):
+    def test_Mcf(self):
         """
         This method runs generate_mcf method, which generates MCF files for
         as-is and aggregate import and compares expected mcf files with actual
@@ -69,7 +69,7 @@ class ProcessTest(unittest.TestCase):
         self.assertEqual(expected_mcf, actual_mcf)
         self.assertEqual(expected_agg_mcf, actual_agg_mcf)
 
-    def testTmcf(self):
+    def test_Tmcf(self):
         """
         This method runs generate_tmcf method, which generates tMCF files for
         as-is and aggregate import and compares expected tmcf files with actual
@@ -101,7 +101,7 @@ class ProcessTest(unittest.TestCase):
         self.assertEqual(expected_tmcf, actual_tmcf)
         self.assertEqual(expected_agg_tmcf, actual_agg_tmcf)
 
-    def testCsv(self):
+    def test_Csv(self):
         """
         This method runs process script, which generates csv files for
         as-is and aggregate imports to dc. It compares expected files with 

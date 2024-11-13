@@ -204,17 +204,18 @@ def _process_geo_level_aggregation():
                     (data matches with State Level files available)                
 
     National
-    1980 - 1990     Aggregted from State to National Level
-    1990 - 2000     Aggregted from State to National Level
-    2000 - 2010     Aggregted from State to National Level
-    2010 - 2020     Aggregted from State to National Level
-    2020 - 2029     Aggregted from State to National Level
+    1980 - 1990     Aggregated from State to National Level
+    1990 - 2000     Aggregated from State to National Level
+    2000 - 2010     Aggregated from State to National Level
+    2010 - 2020     Aggregated from State to National Level
+    2020 - 2029     Aggregated from State to National Level
     """
+
     # Below dictionary holds list of years and geo details for which
     # data needs to be aggregated.
-    # Dictionay key provides Geo and Year information for which data is
+    # Dictionary key provides Geo and Year information for which data is
     # aggregated. Dictionary value is a list which provides details of input
-    # folder name, input file name, output folder namem output file name and
+    # folder name, input file name, output folder name, output file name and
     # geo level aggregation we are carrying.
 
     file_process_details = {
@@ -252,59 +253,47 @@ def _process_geo_level_aggregation():
         ]
     }
 
-    # Iterate over each entry in the dictionary for processing
-    for geo_agg_file, details in file_process_details.items():
-        for measurement_method in ['as-is', 'aggregate']:
-            # Determine input and output paths based on measurement method
-            if measurement_method == 'as-is':
-                input_file_path = _CODEDIR + PROCESS_AS_IS_DIR + details[0]
-                output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + details[2]
-            else:
-                input_file_path = _CODEDIR + PROCESS_AGG_DIR + details[0]
-                output_file_path = _CODEDIR + PROCESS_AGG_DIR + details[2]
+    try:
+        # Loop through the files for aggregation based on geographical level
+        for geo_agg_file, details in file_process_details.items():
+            for measurement_method in ['as-is', 'aggregate']:
+                if measurement_method == 'as-is':
+                    input_file_path = _CODEDIR + PROCESS_AS_IS_DIR + details[0]
+                    output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + details[2]
+                else:
+                    input_file_path = _CODEDIR + PROCESS_AGG_DIR + details[0]
+                    output_file_path = _CODEDIR + PROCESS_AGG_DIR + details[2]
 
-            input_file_name = details[1]
-            output_file_name = details[3]
-            geo_type = details[4]
+                input_file_name = details[1]
+                output_file_name = details[3]
+                geo_level = details[4]
 
-            # Check if the expected input file exists
-            if not os.path.exists(input_file_path + input_file_name):
-                logging.error(f"Input file {input_file_name} not found in path {input_file_path}")
-                continue  # Skip to the next iteration
+                # Check if the input file exists before attempting to process it
+                if not os.path.exists(input_file_path + input_file_name):
+                    logging.error(f"Input file does not exist: {input_file_path + input_file_name}")
+                    continue  # Skip to the next aggregation if input file doesn't exist
 
-            # Check the number of input files and match with the expected count
-            try:
-                files_list = os.listdir(input_file_path)
-                expected_files_count = len(files_list)
-                processed_files_count = 0
+                # Check if the output directory exists; if not, create it
+                if not os.path.exists(output_file_path):
+                    os.makedirs(output_file_path)
+                    logging.info(f"Created output directory: {output_file_path}")
 
-                # Assuming each file processing increases the count
-                for file in files_list:
-                    processed_files_count += 1  # This can be changed based on actual processing logic
-
-                if processed_files_count != expected_files_count:
-                    logging.error(f"Mismatch in file count: Expected {expected_files_count} files, but processed {processed_files_count}.")
-                    raise ValueError(f"File count mismatch for {geo_agg_file} ({measurement_method})")
-
-            except Exception as e:
-                logging.error(f"Error while processing files for {geo_agg_file}: {e}")
-                continue  # Skip to the next file processing
-
-            # Proceed with geo-level aggregation if no errors
-            try:
+                # Process the geographical aggregation
                 _process_geo_aggregation(input_file_path, input_file_name,
-                                         output_file_path, output_file_name,
-                                         geo_type)
-                logging.info(f"Successfully processed geo-level aggregation for {geo_agg_file} ({measurement_method}).")
-            except Exception as e:
-                logging.error(f"Error occurred during geo-level aggregation for {geo_agg_file} ({measurement_method}): {e}")
-                continue  # Skip this iteration and continue with the next one
+                                         output_file_path, output_file_name, geo_level)
+                logging.info(f"Geo-level aggregation successful for {geo_agg_file} ({measurement_method})")
+
+    except Exception as e:
+        # If any exception occurs, log it and stop the function
+        logging.fatal(f"Fatal error during geo-level aggregation: {e}")
+        return
 
 
 def _process_state_files_1980_1990(download_dir):
     """
     Process state files from year 1980 - 1990
-    Source files (for 1980 - 1990) consist of age information in bracket 
+
+    Source files (for 1980 - 1990) consist of age information in brackets 
     of 5 years. These age brackets are aggregated during processing 
     along with SRH properties.
 
@@ -318,101 +307,112 @@ def _process_state_files_1980_1990(download_dir):
     output_file_name = 'state_1980_1990.csv'
     output_temp_file_name = 'state_1980_1990_temp.csv'
 
-    files_list = os.listdir(input_file_path)
-    files_list.sort()
-
-    # Check if files exist in the input directory
-    if not files_list:
-        logging.error(f"No input files found in the directory: {input_file_path}")
-        return
-
     column_names = ["LOCATION", "YEAR_TEMP", "RACE_ORIGIN", "SEX"]
     age_columns = [f'A{x:02d}' for x in range(1, 19)]
     column_names.extend(age_columns)
 
     # Metadata reference file for column specification
     # https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/1980-1990/st_int_asrh_doc.txt
-    column_specification = [(0, 2), (2, 3), (3, 4), (4, 5), (5, 12), (12, 19),
-                            (19, 26), (26, 33), (33, 40), (40, 47), (47, 54),
-                            (54, 61), (61, 68), (68, 75), (75, 82), (82, 89),
-                            (89, 96), (96, 103), (103, 110), (110, 117),
-                            (117, 124), (124, 131)]
+    column_specification = [
+        (0, 2), (2, 3), (3, 4), (4, 5), (5, 12), (12, 19),
+        (19, 26), (26, 33), (33, 40), (40, 47), (47, 54),
+        (54, 61), (61, 68), (68, 75), (75, 82), (82, 89),
+        (89, 96), (96, 103), (103, 110), (110, 117),
+        (117, 124), (124, 131)
+    ]
 
-    # Track the number of files processed successfully
-    files_processed = 0
-
-    for file in files_list:
-        try:
-            df = pd.read_fwf(input_file_path + file,
-                              names=column_names,
-                              colspecs=column_specification)
-
-            df["ALL_AGE"] = 0
-            for age in age_columns:
-                df["ALL_AGE"] += df[age]
-
-            df.drop(age_columns, axis=1, inplace=True)
-
-            df = df.pivot(index=['LOCATION', 'YEAR_TEMP'],
-                          columns=['RACE_ORIGIN', 'SEX'],
-                          values='ALL_AGE').reset_index()
-
-            df.to_csv(output_file_path + output_temp_file_name,
-                      header=True,
-                      index=False)
-
-            df = pd.read_csv(output_file_path + output_temp_file_name)
-            # On pivoting one new row is introduced with NaN - hence dropping
-            df = df.dropna()
-            # Some of the columns are read as Float, hence converting them to Int
-
-            float_col = df.select_dtypes(include=['float64'])
-            for col in float_col.columns.values:
-                df[col] = df[col].astype('int64')
-
-            df.insert(0, 'YEAR', 1980 + df['YEAR_TEMP'], True)
-            df['LOCATION'] = 'geoId/' + (df['LOCATION'].map(str)).str.zfill(2)
-            df.drop(["YEAR_TEMP"], axis=1, inplace=True)
-
-            _NOT_HISPANIC_RACES = ['NH-W', 'NH-B', 'NH-AI', 'NH-API']
-            _HISPANIC_RACES = ['H-W', 'H-B', 'H-AI', 'H-API']
-
-            column_header = ['YEAR', 'LOCATION']
-            for p in _NOT_HISPANIC_RACES:
-                column_header.append(p + '-M')
-                column_header.append(p + '-F')
-            for p in _HISPANIC_RACES:
-                column_header.append(p + '-M')
-                column_header.append(p + '-F')
-
-            df.columns = column_header
-
-            if file == files_list[0]:
-                df.to_csv(output_file_path + output_file_name, index=False)
-            else:
-                df.to_csv(output_file_path + output_file_name,
-                          index=False,
-                          mode='a')
-
-            if os.path.exists(output_file_path + output_temp_file_name):
-                os.remove(output_file_path + output_temp_file_name)
-
-            # Increment the files_processed counter
-            files_processed += 1
-
-        except Exception as e:
-            logging.error(f"Error processing file {file}: {e}")
-            continue
-
-    # Check if the number of processed files matches the expected count
-    if files_processed != len(files_list):
-        logging.error(f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted.")
-        return
-
-    # Section 2 - Writing Agg data
-    output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1980_1990/state/'
+    _NOT_HISPANIC_RACES = ['NH-W', 'NH-B', 'NH-AI', 'NH-API']
+    _HISPANIC_RACES = ['H-W', 'H-B', 'H-AI', 'H-API']
 
     try:
+        # List and sort files in the input directory
+        files_list = os.listdir(input_file_path)
+        files_list.sort()
+
+        # Check if files exist in the input directory
+        if not files_list:
+            logging.fatal(f"No input files found in the directory: {input_file_path}")
+            return
+
+        # Track the number of files processed successfully
+        files_processed = 0
+
+        for file in files_list:
+            try:
+                # Read the fixed width files
+                df = pd.read_fwf(input_file_path + file,
+                                  names=column_names,
+                                  colspecs=column_specification)
+
+                # Aggregate age columns into 'ALL_AGE'
+                df["ALL_AGE"] = 0
+                for age in age_columns:
+                    df["ALL_AGE"] += df[age]
+
+                # Drop individual age columns
+                df.drop(age_columns, axis=1, inplace=True)
+
+                # Pivot the data by LOCATION and YEAR_TEMP, with multi-level columns
+                df = df.pivot(index=['LOCATION', 'YEAR_TEMP'],
+                              columns=['RACE_ORIGIN', 'SEX'],
+                              values='ALL_AGE').reset_index()
+
+                # Write the intermediate file
+                df.to_csv(output_file_path + output_temp_file_name,
+                          header=True,
+                          index=False)
+
+                # Load the temp file back, remove any NaNs and convert to int
+                df = pd.read_csv(output_file_path + output_temp_file_name)
+                df = df.dropna()
+
+                # Convert float columns to int
+                float_col = df.select_dtypes(include=['float64'])
+                for col in float_col.columns.values:
+                    df[col] = df[col].astype('int64')
+
+                # Insert the correct 'YEAR' column and format LOCATION
+                df.insert(0, 'YEAR', 1980 + df['YEAR_TEMP'], True)
+                df['LOCATION'] = 'geoId/' + (df['LOCATION'].map(str)).str.zfill(2)
+                df.drop(["YEAR_TEMP"], axis=1, inplace=True)
+
+                # Define column headers
+                column_header = ['YEAR', 'LOCATION']
+                for p in _NOT_HISPANIC_RACES:
+                    column_header.append(p + '-M')
+                    column_header.append(p + '-F')
+                for p in _HISPANIC_RACES:
+                    column_header.append(p + '-M')
+                    column_header.append(p + '-F')
+                df.columns = column_header
+
+                # Write to the final output file, appending if necessary
+                if file == files_list[0]:
+                    df.to_csv(output_file_path + output_file_name, index=False)
+                else:
+                    df.to_csv(output_file_path + output_file_name,
+                              index=False,
+                              mode='a')
+
+                # Remove the temporary file
+                if os.path.exists(output_file_path + output_temp_file_name):
+                    os.remove(output_file_path + output_temp_file_name)
+
+                files_processed += 1
+
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+                continue  # Continue processing the next file
+
+        # After processing all files, ensure all files were processed
+        if files_processed != len(files_list):
+            logging.fatal(f"File processing mismatch: Expected {len(files_list)} files, but processed {files_processed}. Output file generation aborted.")
+            return
+
+        # Section 2 - Writing Aggregated data
+        output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1980_1990/state/'
+
+        # Aggregating data by race groups
         df1 = pd.DataFrame()
         df1['YEAR'] = df['YEAR'].copy()
         df1['LOCATION'] = df['LOCATION'].copy()
@@ -426,11 +426,12 @@ def _process_state_files_1980_1990(download_dir):
             df1['H'] += (df[p + '-M'] + df[p + '-F']).copy()
             df1[p] = (df[p + '-M'] + df[p + '-F']).copy()
 
+        # Write the aggregated data
         df1.to_csv(output_file_path + output_file_name, header=True, index=False)
-        logging.info("Agg data successfully written to: %s", output_file_path + output_file_name)
+        logging.info("Aggregated data saved successfully to: %s", output_file_path + output_file_name)
 
     except Exception as e:
-        logging.error(f"Error while writing aggregated data: {e}")
+        logging.fatal(f"Error during processing of 1980-1990 state files: {e}")
         return
 
 
@@ -438,103 +439,76 @@ def _process_state_files_1990_2000(download_dir):
     """
     Process state files from 1990 - 2000
     
-    There are 10 files in total for each year i.e., from 1990 - 1999.
+    There are 10 files in total for each year (1990 - 1999).
     Each yearly file consists of Population Census for all states.
 
     All files are available in the same format.
 
     Args:
-        download_dir: download directory - input files are saved here.
+      download_dir: download directory - input files are saved here.
     """
-    # Section 1 - Writing As Is data
-    input_file_path = _CODEDIR + download_dir + '1990_2000/state/'
-    output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '1990_2000/state/'
-    output_file_name = 'state_1990_2000.csv'
-    output_temp_file_name = 'state_1990_2000_temp.csv'
-
-    # List and sort files in the input directory
-    files_list = os.listdir(input_file_path)
-    files_list.sort()
-
-    # Expected number of files
-    expected_files_count = len(files_list)
-
-    # Check if there are any files in the input directory
-    if not files_list:
-        logging.error(f"No input files found in the directory: {input_file_path}")
-        return
-
-    # Check if the number of files matches the expected count
-    if len(files_list) != expected_files_count:
-        logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
-        return
-
-    column_names = [
-        "YEAR", "LOCATION", "AGE", "NH-W-M", "NH-W-F", "NH-B-M", "NH-B-F",
-        "NH-AIAN-M", "NH-AIAN-F", "NH-API-M", "NH-API-F", "H-W-M", "H-W-F",
-        "H-B-M", "H-B-F", "H-AIAN-M", "H-AIAN-F", "H-API-M", "H-API-F"
-    ]
-
-    # Column specification - Link to metadata file:
-    # https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/1990-2000/sasrh_rl.txt
-    column_specification = [(0, 4), (5, 7), (8, 11), (12, 19), (19, 26),
-                            (27, 34), (34, 41), (42, 49), (49, 56), (57, 64),
-                            (64, 71), (72, 79), (79, 86), (87, 94), (94, 101),
-                            (102, 109), (109, 116), (117, 124), (124, 131)]
-
-    files_processed = 0  # Track the number of successfully processed files
-
-    # Read all files (10) and write to a single temp file before further processing
-    for file in files_list:
-        try:
-            temp_file_df = pd.read_fwf(input_file_path + file,
-                                        encoding='latin-1',
-                                        names=column_names,
-                                        colspecs=column_specification,
-                                        skiprows=16)
-            # Append to the temp file if not the first file
-            if file == files_list[0]:
-                temp_file_df.to_csv(output_file_path + output_temp_file_name,
-                                    header=True,
-                                    index=False)
-            else:
-                temp_file_df.to_csv(output_file_path + output_temp_file_name,
-                                    header=False,
-                                    index=False,
-                                    mode='a')
-
-            # Increment processed file counter
-            files_processed += 1
-
-        except Exception as e:
-            logging.error(f"Error processing file {file}: {e}")
-            continue
-
-    # Check if the number of processed files matches the expected count
-    if files_processed != expected_files_count:
-        logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
-        return
-
-    # After processing all files, load the concatenated data
+    
     try:
+        # Section 1 - Writing As Is Data
+        input_file_path = _CODEDIR + download_dir + '1990_2000/state/'
+        output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '1990_2000/state/'
+        output_file_name = 'state_1990_2000.csv'
+        output_temp_file_name = 'state_1990_2000_temp.csv'
+
+        column_names = [
+            "YEAR", "LOCATION", "AGE", "NH-W-M", "NH-W-F", "NH-B-M", "NH-B-F",
+            "NH-AIAN-M", "NH-AIAN-F", "NH-API-M", "NH-API-F", "H-W-M", "H-W-F",
+            "H-B-M", "H-B-F", "H-AIAN-M", "H-AIAN-F", "H-API-M", "H-API-F"
+        ]
+
+        # Column specification - Link to metadata file:
+        # https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/1990-2000/sasrh_rl.txt
+        column_specification = [(0, 4), (5, 7), (8, 11), (12, 19), (19, 26),
+                                (27, 34), (34, 41), (42, 49), (49, 56), (57, 64),
+                                (64, 71), (72, 79), (79, 86), (87, 94), (94, 101),
+                                (102, 109), (109, 116), (117, 124), (124, 131)]
+
+        # Read all files and concatenate them into a temporary file before further processing
+        files_list = os.listdir(input_file_path)
+        files_list.sort()
+
+        if not files_list:
+            logging.fatal(f"No input files found in directory: {input_file_path}")
+            return
+
+        for file in files_list:
+            try:
+                temp_file_df = pd.read_fwf(input_file_path + file,
+                                            encoding='latin-1',
+                                            names=column_names,
+                                            colspecs=column_specification,
+                                            skiprows=16)
+
+                if file == files_list[0]:
+                    temp_file_df.to_csv(output_file_path + output_temp_file_name,
+                                        header=True, index=False)
+                else:
+                    temp_file_df.to_csv(output_file_path + output_temp_file_name,
+                                        header=False, index=False, mode='a')
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+                continue  # Proceed with the next file if this one fails
+
+        # After processing all files, aggregate the data
         df = pd.read_csv(output_file_path + output_temp_file_name)
         df.drop(["AGE"], axis=1, inplace=True)
         df = df.groupby(['YEAR', 'LOCATION']).agg('sum').reset_index()
-        df['LOCATION'] = 'geoId/' + (df['LOCATION'].map(str)).str.zfill(2)
+        df['LOCATION'] = 'geoId/' + df['LOCATION'].map(str).str.zfill(2)
         df.to_csv(output_file_path + output_file_name, index=False)
 
-        # Deleting temp (concatenated) file
+        # Delete the temporary concatenated file
         if os.path.exists(output_file_path + output_temp_file_name):
             os.remove(output_file_path + output_temp_file_name)
 
-    except Exception as e:
-        logging.error(f"Error while processing or saving the concatenated data: {e}")
-        return
+        # Section 2 - Writing Aggregated Data
+        output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1990_2000/state/'
 
-    output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1990_2000/state/'
-
-    # Section 2 - Writing Aggregated data
-    try:
+        # Prepare aggregated data
         df1 = pd.DataFrame()
         df1['YEAR'] = df['YEAR'].copy()
         df1['LOCATION'] = df['LOCATION'].copy()
@@ -543,19 +517,23 @@ def _process_state_files_1990_2000(download_dir):
         _HISPANIC_RACES = ['H-W', 'H-B', 'H-AIAN', 'H-API']
 
         df1['NH'] = df1['H'] = 0
+
+        # Aggregate Non-Hispanic races
         for p in _NOT_HISPANIC_RACES:
             df1['NH'] += (df[p + '-M'] + df[p + '-F']).copy()
             df1[p] = (df[p + '-M'] + df[p + '-F']).copy()
 
+        # Aggregate Hispanic races
         for p in _HISPANIC_RACES:
             df1['H'] += (df[p + '-M'] + df[p + '-F']).copy()
             df1[p] = (df[p + '-M'] + df[p + '-F']).copy()
 
+        # Write aggregated data to output CSV
         df1.to_csv(output_file_path + output_file_name, header=True, index=False)
-        logging.info("Aggregated data successfully written to: %s", output_file_path + output_file_name)
+        logging.info(f"Aggregated data saved successfully to: {output_file_path + output_file_name}")
 
     except Exception as e:
-        logging.error(f"Error while writing aggregated data: {e}")
+        logging.fatal(f"Fatal error during the processing of 1990-2000 state files: {e}")
         return
 
 
@@ -574,102 +552,85 @@ def _process_state_files(download_dir):
 def _process_county_files_1990_2000(download_dir):
     """
     Process County files 1990-2000.
-    This method generates CSV files for as-is data (e.g., for SV such as H-W)
-    and aggregated data (e.g., NH = NH-W + NH-B + NH-AIAN + NH-API)
+    This method generates CSV files for as-is data (e.g., for SV such as 
+    H-W) and aggregated data (e.g., NH = NH-W + NH-B + NH-AIAN + NH-API).
 
     Args:
-        download_dir: download directory - input files are saved here.
+      download_dir: download directory - input files are saved here.
     """
-    # Section 1 - Writing As Is data
-    input_file_path = _CODEDIR + download_dir + '1990_2000/county/'
-    output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '1990_2000/county/'
-    output_file_name = 'county_1990_2000.csv'
-
-    # List and sort the files in the input directory
-    files_list = os.listdir(input_file_path)
-    files_list.sort()
-
-    # Expected number of files
-    expected_files_count = len(files_list)
-
-    # Check if the number of files in the directory matches the expected count
-    if not files_list:
-        logging.error(f"No input files found in the directory: {input_file_path}")
-        return
-
-    if len(files_list) != expected_files_count:
-        logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
-        return
-
-    column_names = [
-        "YEAR",
-        "LOCATION",
-        "NH-W",
-        "NH-B",
-        "NH-AIAN",
-        "NH-API",
-        "H-W",
-        "H-B",
-        "H-AIAN",
-        "H-API",
-    ]
-
-    # Column specification reference file
-    # https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/1990-2000/co-99-10-rl.txt
-    column_specification = [(0, 4), (5, 10), (10, 19), (19, 28), (28, 37),
-                            (37, 46), (46, 55), (55, 64), (64, 73), (73, 82)]
-
-    files_processed = 0  # Track the number of successfully processed files
-
-    # Read each file and append to the output CSV
-    for file in files_list:
-        try:
-            df = pd.read_fwf(input_file_path + file,
-                             encoding='latin-1',
-                             names=column_names,
-                             colspecs=column_specification,
-                             header=None,
-                             skiprows=18)
-
-            df['LOCATION'] = 'geoId/' + (df['LOCATION'].map(str)).str.zfill(5)
-
-            # Append to the output file or create the first one
-            if file == files_list[0]:
-                df.to_csv(output_file_path + output_file_name, index=False)
-            else:
-                df.to_csv(output_file_path + output_file_name,
-                          index=False,
-                          mode='a')
-
-            files_processed += 1  # Increment the counter for successfully processed files
-
-        except Exception as e:
-            logging.error(f"Error processing file {file}: {e}")
-            continue  # Proceed to the next file
-
-    # Check if the number of processed files matches the expected count
-    if files_processed != expected_files_count:
-        logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
-        return
-
-    # Section 2 - Writing Aggregated data
-    output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1990_2000/county/'
-
+    
     try:
+        # Section 1 - Writing As Is Data
+        input_file_path = _CODEDIR + download_dir + '1990_2000/county/'
+        output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '1990_2000/county/'
+        output_file_name = 'county_1990_2000.csv'
+
+        if not os.path.exists(input_file_path):
+            logging.fatal(f"Input directory does not exist: {input_file_path}")
+            return
+        
+        if not os.path.exists(output_file_path):
+            logging.fatal(f"Output directory does not exist: {output_file_path}")
+            return
+
+        files_list = os.listdir(input_file_path)
+        if not files_list:
+            logging.fatal(f"No files found in the directory: {input_file_path}")
+            return
+        
+        files_list.sort()
+
+        column_names = [
+            "YEAR", "LOCATION", "NH-W", "NH-B", "NH-AIAN", "NH-API", 
+            "H-W", "H-B", "H-AIAN", "H-API"
+        ]
+
+        # Column specification reference file:
+        # https://www2.census.gov/programs-surveys/popest/technical-documentation/file-layouts/1990-2000/co-99-10-rl.txt
+        column_specification = [
+            (0, 4), (5, 10), (10, 19), (19, 28), (28, 37),
+            (37, 46), (46, 55), (55, 64), (64, 73), (73, 82)
+        ]
+
+        for file in files_list:
+            try:
+                df = pd.read_fwf(input_file_path + file,
+                                 encoding='latin-1',
+                                 names=column_names,
+                                 colspecs=column_specification,
+                                 header=None,
+                                 skiprows=18)
+
+                # Add geoId to LOCATION column
+                df['LOCATION'] = 'geoId/' + (df['LOCATION'].map(str)).str.zfill(5)
+
+                # Write to CSV (append if not the first file)
+                if file == files_list[0]:
+                    df.to_csv(output_file_path + output_file_name, index=False)
+                else:
+                    df.to_csv(output_file_path + output_file_name, 
+                              index=False, mode='a', header=False)
+                
+                logging.info(f"Processed and saved file: {file}")
+
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+                continue  # Continue with the next file if this one fails
+
+        # Section 2 - Writing Aggregated Data
+        output_file_path = _CODEDIR + PROCESS_AGG_DIR + '1990_2000/county/'
+
         df1 = pd.DataFrame()
         df1['YEAR'] = df['YEAR'].copy()
         df1['LOCATION'] = df['LOCATION'].copy()
-
-        # Aggregate NH and H categories
         df1['NH'] = (df['NH-W'] + df['NH-B'] + df['NH-AIAN'] + df['NH-API']).copy()
         df1['H'] = (df['H-W'] + df['H-B'] + df['H-AIAN'] + df['H-API']).copy()
 
-        # Save the aggregated data to CSV
         df1.to_csv(output_file_path + output_file_name, header=True, index=False)
-        logging.info("Aggregated data successfully written to: %s", output_file_path + output_file_name)
+        logging.info(f"Aggregated data saved successfully to: {output_file_path + output_file_name}")
 
     except Exception as e:
-        logging.error(f"Error while writing aggregated data: {e}")
+        logging.fatal(f"Fatal error during the processing of county files 1990-2000: {e}")
         return
 
 
@@ -682,32 +643,32 @@ def _process_county_files_2000_2010(download_dir):
     Args:
         download_dir: download directory - input files are saved here.
     """
-    # Section 1 - Writing As Is data
-    input_file_path = _CODEDIR + download_dir + '2000_2010/county/'
-    output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '2000_2010/county/'
-    output_file_name = 'county_2000_2010.csv'
+    try:
+        # Section 1 - Writing As Is data
+        input_file_path = _CODEDIR + download_dir + '2000_2010/county/'
+        output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '2000_2010/county/'
+        output_file_name = 'county_2000_2010.csv'
 
-    # List and sort the files in the input directory
-    files_list = os.listdir(input_file_path)
-    files_list.sort()
+        # List and sort the files in the input directory
+        files_list = os.listdir(input_file_path)
+        files_list.sort()
 
-    # Expected number of files
-    expected_files_count = len(files_list)
+        # Expected number of files
+        expected_files_count = len(files_list)
 
-    # Check if the number of files in the directory matches the expected count
-    if not files_list:
-        logging.error(f"No input files found in the directory: {input_file_path}")
-        return
+        # Check if the number of files in the directory matches the expected count
+        if not files_list:
+            logging.error(f"No input files found in the directory: {input_file_path}")
+            return
 
-    if len(files_list) != expected_files_count:
-        logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
-        return
+        if len(files_list) != expected_files_count:
+            logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
+            return
 
-    files_processed = 0  # Track the number of successfully processed files
+        files_processed = 0  # Track the number of successfully processed files
 
-    # Read and process each file
-    for file in files_list:
-        try:
+        # Read and process each file
+        for file in files_list:
             df = pd.read_csv(input_file_path + file, encoding='ISO-8859-1')
 
             # Apply filtering and transformation
@@ -728,18 +689,12 @@ def _process_county_files_2000_2010(download_dir):
 
             files_processed += 1  # Increment the counter for successfully processed files
 
-        except Exception as e:
-            logging.error(f"Error processing file {file}: {e}")
-            continue  # Continue processing the next file
+        # Check if the number of processed files matches the expected count
+        if files_processed != expected_files_count:
+            logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
+            return
 
-    # Check if the number of processed files matches the expected count
-    if files_processed != expected_files_count:
-        logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
-        return
-
-    # Section 2 - Writing Aggregated data
-    
-    try:
+        # Section 2 - Writing Aggregated data
         df = pd.read_csv(output_file_path + output_file_name)
         output_file_path = _CODEDIR + PROCESS_AGG_DIR + '2000_2010/county/'
 
@@ -760,10 +715,10 @@ def _process_county_files_2000_2010(download_dir):
 
         # Save the aggregated data to CSV
         df1.to_csv(output_file_path + output_file_name, header=True, index=False)
-        logging.info("Aggregated data successfully written to: %s", output_file_path + output_file_name)
+        logging.info("Aggregated data saved successfully to: %s", output_file_path + output_file_name)
 
     except Exception as e:
-        logging.error(f"Error while processing or writing aggregated data: {e}")
+        logging.fatal(f"Fatal error during the processing of county files 2010-2020: {e}")
         return
 
 
@@ -775,68 +730,64 @@ def _process_county_files_2010_2020(download_dir):
     e.g., NH = NH_MALE + NH_FEMALE.
 
     Args:
-        download_dir: download directory - input files are saved here.
+      download_dir: download directory - input files are saved here.
     """
-    input_file_path = _CODEDIR + download_dir + '2010_2020/county/'
-    output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '2010_2020/county/'
-    output_file_name = 'county_2010_2020.csv'
-
-    # List and sort the files in the input directory
-    files_list = os.listdir(input_file_path)
-    files_list.sort()
-
-    # Expected number of files
-    expected_files_count = len(files_list)
-
-    # Check if the number of files in the directory matches the expected count
-    if len(files_list) != expected_files_count:
-        logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
-        return
-
-    files_processed = 0  # Track the number of successfully processed files
-
-    # Read and process each file
-    for file in files_list:
-        try:
-            df = pd.read_csv(input_file_path + file, encoding='ISO-8859-1', low_memory=False)
-            
-            # filter by agegrp = 0 (0 = sum of all age group added)
-            # filter years 3 - 13 (1, 2 - is base estimate and not for month July)
-            df = df.query("AGEGRP == 0 & YEAR not in [1, 2]").copy()
-
-            # convert year code to year
-            # Year code starting from 3 for Year 2010
-            df['YEAR'] = df['YEAR'] + 2010 - 3
-
-            # Add location information
-            df.insert(6, 'LOCATION', 'geoId/', True)
-            df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + (
-                df['COUNTY'].map(str)).str.zfill(3)
-
-            # Drop unnecessary columns
-            df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
-                    axis=1,
-                    inplace=True)
-
-            # Write the data to CSV (appending if not the first file)
-            if file == files_list[0]:
-                df.to_csv(output_file_path + output_file_name, index=False)
-            else:
-                df.to_csv(output_file_path + output_file_name, index=False, mode='a')
-
-            files_processed += 1  # Increment the counter for successfully processed files
-
-        except Exception as e:
-            logging.error(f"Error processing file {file}: {e}")
-            continue  # Continue processing the next file
-
-    # Check if the number of processed files matches the expected count
-    if files_processed != expected_files_count:
-        logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
-        return
-
-    # Section 2 - Writing Aggregated Data
+    
     try:
+        # Section 1 - Writing As Is Data
+        input_file_path = _CODEDIR + download_dir + '2010_2020/county/'
+        output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '2010_2020/county/'
+        output_file_name = 'county_2010_2020.csv'
+
+        if not os.path.exists(input_file_path):
+            logging.fatal(f"Input directory does not exist: {input_file_path}")
+            return
+
+        if not os.path.exists(output_file_path):
+            logging.fatal(f"Output directory does not exist: {output_file_path}")
+            return
+
+        files_list = os.listdir(input_file_path)
+        if not files_list:
+            logging.fatal(f"No files found in the directory: {input_file_path}")
+            return
+        
+        files_list.sort()
+
+        for file in files_list:
+            try:
+                df = pd.read_csv(input_file_path + file, encoding='ISO-8859-1', low_memory=False)
+                
+                # filter by agegrp = 0 (0 = sum of all age group added)
+                # filter years 3 - 13 (1, 2 - is base estimate and not for month July)
+                df = df.query("AGEGRP == 0 & YEAR not in [1, 2]").copy()
+
+                # convert year code to year
+                # Year code starting from 3 for Year 2010
+                df['YEAR'] = df['YEAR'] + 2010 - 3
+
+                # add fips code for location
+                df.insert(6, 'LOCATION', 'geoId/', True)
+                df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + (
+                    df['COUNTY'].map(str)).str.zfill(3)
+
+                # drop not reuqire columns
+                df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+                        axis=1, inplace=True)
+
+                if file == files_list[0]:
+                    df.to_csv(output_file_path + output_file_name, index=False)
+                else:
+                    df.to_csv(output_file_path + output_file_name,
+                              index=False, mode='a')
+
+                logging.info(f"Processed and saved file: {file}")
+
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+                continue  # Continue with the next file if this one fails
+
+        # Section 2 - Writing Aggregated Data
         df = pd.read_csv(output_file_path + output_file_name)
         output_file_path = _CODEDIR + PROCESS_AGG_DIR + '2010_2020/county/'
 
@@ -853,21 +804,19 @@ def _process_county_files_2010_2020(download_dir):
             'HAAC', 'HNAC'
         ]
 
-        # Aggregate non-Hispanic races and Hispanic races
+        # df1['NH'] = df1['H'] = 0
         for p in _NOT_HISPANIC_RACES:
             df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
         for p in _HISPANIC_RACES:
             df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
-        # Save the aggregated data to CSV
         df1.to_csv(output_file_path + output_file_name, header=True, index=False)
-        logging.info("Aggregated data successfully written to: %s", output_file_path + output_file_name)
+        logging.info(f"Aggregated data saved successfully to: {output_file_path + output_file_name}")
 
     except Exception as e:
-        logging.error(f"Error while processing or writing aggregated data: {e}")
+        logging.fatal(f"Fatal error during the processing of county files 2010-2020: {e}")
         return
-
 
 def _process_county_files_2020_2029(download_dir):
     """
@@ -877,68 +826,64 @@ def _process_county_files_2020_2029(download_dir):
     e.g., NH = NH_MALE + NH_FEMALE.
 
     Args:
-        download_dir: download directory - input files are saved here.
+      download_dir: download directory - input files are saved here.
     """
-    input_file_path = _CODEDIR + download_dir + '2020_2029/county/'
-    output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '2020_2029/county/'
-    output_file_name = 'county_2020_2029.csv'
-
-    # List and sort the files in the input directory
-    files_list = os.listdir(input_file_path)
-    files_list.sort()
-
-    # Expected number of files
-    expected_files_count = len(files_list)
-
-    # Check if the number of files in the directory matches the expected count
-    if len(files_list) != expected_files_count:
-        logging.error(f"Mismatch in the number of input files. Expected {expected_files_count} files, but found {len(files_list)}.")
-        return
-
-    files_processed = 0  # Track the number of successfully processed files
-
-    # Read and process each file
-    for file in files_list:
-        try:
-            df = pd.read_csv(input_file_path + file, encoding='ISO-8859-1', low_memory=False)
-
-            # filter by agegrp = 0 (0 = sum of all age group added)
-            # filter years 3 - 13 (1, 2 - is base estimate and not for month July)
-            df = df.query("AGEGRP == 0 & YEAR not in [1]").copy()
-
-            # convert year code to year
-            # Year code starting from 3 for Year 2010
-            df['YEAR'] = df['YEAR'] + 2020 - 2
-
-            # Add location information
-            df.insert(6, 'LOCATION', 'geoId/', True)
-            df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + (
-                df['COUNTY'].map(str)).str.zfill(3)
-
-            # Drop unnecessary columns
-            df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
-                    axis=1,
-                    inplace=True)
-
-            # Write the data to CSV (appending if not the first file)
-            if file == files_list[0]:
-                df.to_csv(output_file_path + output_file_name, index=False)
-            else:
-                df.to_csv(output_file_path + output_file_name, index=False, mode='a')
-
-            files_processed += 1  # Increment the counter for successfully processed files
-
-        except Exception as e:
-            logging.error(f"Error processing file {file}: {e}")
-            continue  # Continue processing the next file
-
-    # Check if the number of processed files matches the expected count
-    if files_processed != expected_files_count:
-        logging.error(f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted.")
-        return
-
-    # Section 2 - Writing Aggregated Data
+    
     try:
+        # Section 1 - Writing As Is Data
+        input_file_path = _CODEDIR + download_dir + '2020_2029/county/'
+        output_file_path = _CODEDIR + PROCESS_AS_IS_DIR + '2020_2029/county/'
+        output_file_name = 'county_2020_2029.csv'
+
+        if not os.path.exists(input_file_path):
+            logging.fatal(f"Input directory does not exist: {input_file_path}")
+            return
+
+        if not os.path.exists(output_file_path):
+            logging.fatal(f"Output directory does not exist: {output_file_path}")
+            return
+
+        files_list = os.listdir(input_file_path)
+        if not files_list:
+            logging.fatal(f"No files found in the directory: {input_file_path}")
+            return
+        
+        files_list.sort()
+
+        for file in files_list:
+            try:
+                df = pd.read_csv(input_file_path + file, encoding='ISO-8859-1', low_memory=False)
+                
+                # filter by agegrp = 0 (0 = sum of all age group added)
+                # filter years 3 - 13 (1, 2 - is base estimate and not for month July)
+                df = df.query("AGEGRP == 0 & YEAR not in [1]").copy()
+
+                # convert year code to year
+                # Year code starting from 3 for Year 2010
+                df['YEAR'] = df['YEAR'] + 2020 - 2
+
+                # add fips code for location
+                df.insert(6, 'LOCATION', 'geoId/', True)
+                df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + (
+                    df['COUNTY'].map(str)).str.zfill(3)
+
+                # Drop unnecessary columns
+                df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+                        axis=1, inplace=True)
+
+                if file == files_list[0]:
+                    df.to_csv(output_file_path + output_file_name, index=False)
+                else:
+                    df.to_csv(output_file_path + output_file_name,
+                              index=False, mode='a')
+
+                logging.info(f"Processed and saved file: {file}")
+
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+                continue  # Continue with the next file if this one fails
+
+        # Section 2 - Writing Aggregated Data
         df = pd.read_csv(output_file_path + output_file_name)
         output_file_path = _CODEDIR + PROCESS_AGG_DIR + '2020_2029/county/'
 
@@ -955,19 +900,18 @@ def _process_county_files_2020_2029(download_dir):
             'HAAC', 'HNAC'
         ]
 
-        # Aggregate non-Hispanic races and Hispanic races
+        # df1['NH'] = df1['H'] = 0
         for p in _NOT_HISPANIC_RACES:
             df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
         for p in _HISPANIC_RACES:
             df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
-        # Save the aggregated data to CSV
         df1.to_csv(output_file_path + output_file_name, header=True, index=False)
-        logging.info("Aggregated data successfully written to: %s", output_file_path + output_file_name)
+        logging.info(f"Aggregated data saved successfully to: {output_file_path + output_file_name}")
 
     except Exception as e:
-        logging.error(f"Error while processing or writing aggregated data: {e}")
+        logging.fatal(f"Fatal error during the processing of county files 2020-2029: {e}")
         return
 
 
@@ -1380,7 +1324,7 @@ def process(data_directory, output_path):
     generate_mcf(output_path)
     generate_tmcf(output_path)
 
-
+    
 def download_files():
   """Downloads files from the provided URLs.
 

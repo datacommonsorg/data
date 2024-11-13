@@ -9,6 +9,10 @@ Data is covered for
     1980 - latest_data     State
     1980 - latest_data     National
 
+"latest_data" refers to the most recent population estimates for counties, states, and the nation based on the US Census Bureau's ACS Redistricting Data Summary Files.
+The provided URL points you to the source for downloading relevant data files "https://www2.census.gov/programs-surveys/popest/datasets/".
+
+
 Properties Covered - 
 
 GenderType
@@ -56,15 +60,15 @@ Execute the 'process.py' script by using the following commands:
 
   - if you want to perform "download and process", run the below command:
 
-        `python3 process.py --mode=""`
+        `python3 process.py`
 
   - if you want to perform "only process", run the below command:
 
-        `python3 process.py --mode="process"`
+        `python3 process.py --mode=process`
         
   - if you want to perform "only download", run the below command:
 
-        `python3 process.py --mode="download"`
+        `python3 process.py --mode=download`
     
 ```
 generate_mcf.py
