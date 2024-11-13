@@ -36,6 +36,15 @@ from absl import app
 from absl import logging
 from absl import flags
 from time import time
+# Setup path for import from data/util
+# or set `export PYTHONPATH="./:<repo>/data/util"` in bash
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+_DATA_DIR = _SCRIPT_DIR.split('/data/')[0]
+sys.path.append(os.path.join(_DATA_DIR, 'data/util'))
+
+import file_util
+from counters import Counters
 
 _FLAGS = flags.FLAGS
 
@@ -59,6 +68,7 @@ TAX_ID_DCID_MAPPING_PATH = None
 TAX_ID_DCID_MAPPING = {}
 GENE_ID_DCID_MAPPING = {}
 
+# Output column mapping for each type of files
 GENE_INFO_DICT = {
     'taxID': '',
     'dcid_taxon': '',
@@ -211,7 +221,7 @@ GENE_ACCESSION_RNA_DICT = {
     'protein_gi': '',
     'genomic_nucleotide_accession.version': '',
     'genomic_nucleotide_gi': ''
-    }
+}
 
 GENE_ENSEMBL_DICT = {
     'GeneID': '',
@@ -317,37 +327,54 @@ GENE_EVIDENCE_DICT = {
 }
 
 GENE_QUALIFIER_DICT = {
-    'NOT acts_upstream_of': 'dcs:GOTermQualifierNotActsUpstreamOf',
+    'NOT acts_upstream_of':
+        'dcs:GOTermQualifierNotActsUpstreamOf',
     'NOT acts_upstream_of_or_within':
-    'dcs:GOTermQualifierNotActsUpstreamOfOrWithin',
+        'dcs:GOTermQualifierNotActsUpstreamOfOrWithin',
     'NOT acts_upstream_of_or_within_negative_effect':
-    'dcs:GOTermQualifierNotActsUpstreamOfOrWithinNegativeEffect',
+        'dcs:GOTermQualifierNotActsUpstreamOfOrWithinNegativeEffect',
     'NOT acts_upstream_of_or_within_positive_effect':
-    'dcs:GOTermQualifierNotActsUpstreamOfOrWithinPositiveEffect',
-    'NOT colocalizes_with': 'dcs:GOTermQualifierNotColocalizesWith',
-    'NOT contributes_to': 'dcs:GOTermQualifierNotContributesTo',
-    'NOT enables': 'dcs:GOTermQualifierNotEnables',
-    'NOT involved_in': 'dcs:GOTermQualifierNotInvolvedIn',
-    'NOT is_active_in': 'dcs:GOTermQualifierNotIsActiveIn',
-    'NOT located_in': 'dcs:GOTermQualifierNotLocatedIn',
-    'NOT part_of': 'dcs:GOTermQualifierNotPartOf',
-    'acts_upstream_of': 'dcs:GOTermQualifierActsUpstreamOf',
+        'dcs:GOTermQualifierNotActsUpstreamOfOrWithinPositiveEffect',
+    'NOT colocalizes_with':
+        'dcs:GOTermQualifierNotColocalizesWith',
+    'NOT contributes_to':
+        'dcs:GOTermQualifierNotContributesTo',
+    'NOT enables':
+        'dcs:GOTermQualifierNotEnables',
+    'NOT involved_in':
+        'dcs:GOTermQualifierNotInvolvedIn',
+    'NOT is_active_in':
+        'dcs:GOTermQualifierNotIsActiveIn',
+    'NOT located_in':
+        'dcs:GOTermQualifierNotLocatedIn',
+    'NOT part_of':
+        'dcs:GOTermQualifierNotPartOf',
+    'acts_upstream_of':
+        'dcs:GOTermQualifierActsUpstreamOf',
     'acts_upstream_of_negative_effect':
-    'dcs:GOTermQualifierActsUpstreamOfNegativeEffect',
-    'acts_upstream_of_or_within': 'dcs:GOTermQualifierActsUpstreamOfOrWithin',
+        'dcs:GOTermQualifierActsUpstreamOfNegativeEffect',
+    'acts_upstream_of_or_within':
+        'dcs:GOTermQualifierActsUpstreamOfOrWithin',
     'acts_upstream_of_or_within_negative_effect':
-    'dcs:GOTermQualifierActsUpstreamOfOrWithinNegativeEffect',
+        'dcs:GOTermQualifierActsUpstreamOfOrWithinNegativeEffect',
     'acts_upstream_of_or_within_positive_effect':
-    'dcs:GOTermQualifierActsUpstreamOfOrWithinPositiveEffect',
+        'dcs:GOTermQualifierActsUpstreamOfOrWithinPositiveEffect',
     'acts_upstream_of_positive_effect':
-    'dcs:GOTermQualifierActsUpstreamOfPositiveEffect',
-    'colocalizes_with': 'dcs:GOTermQualifierColocalizesWith',
-    'contributes_to': 'dcs:GOTermQualifierContributesTo',
-    'enables': 'dcs:GOTermQualifierEnables',
-    'involved_in': 'dcs:GOTermQualifierInvolvedIn',
-    'is_active_in': 'dcs:GOTermQualifierIsActiveIn',
-    'located_in': 'dcs:GOTermQualifierLocatedIn',
-    'part_of': 'dcs:GOTermQualifierPartOf'
+        'dcs:GOTermQualifierActsUpstreamOfPositiveEffect',
+    'colocalizes_with':
+        'dcs:GOTermQualifierColocalizesWith',
+    'contributes_to':
+        'dcs:GOTermQualifierContributesTo',
+    'enables':
+        'dcs:GOTermQualifierEnables',
+    'involved_in':
+        'dcs:GOTermQualifierInvolvedIn',
+    'is_active_in':
+        'dcs:GOTermQualifierIsActiveIn',
+    'located_in':
+        'dcs:GOTermQualifierLocatedIn',
+    'part_of':
+        'dcs:GOTermQualifierPartOf'
 }
 
 GENE_CATEGORY_DICT = {
@@ -405,12 +432,19 @@ MODULE_DIR = dirname(dirname(abspath(__file__)))
 
 DATE_MODIFY = lambda x: str(x)[:4] + "-" + str(x)[4:6] + "-" + str(x)[-2:]
 DATETIME_MODIFY = lambda x: str(x)[:4] + "-" + str(x)[5:7] + "-" + str(x)[8:10]
-RE_PATTERN = r"[^a-zA-Z0-9_\- ]"
+RE_PATTERN = r"[^a-zA-Z0-9._\- ]"
 
 
 def timer_func(func):
-    # This function shows the execution time of
-    # the function object passed
+    """ This function shows the execution time of the function object passed
+
+    Args:
+        func (_type_): function object
+
+    Returns:
+        _type_: _description_
+    """
+
     def wrap_func(*args, **kwargs):
         #logging.info(f'Started {func.__qualname__!r}')
         t1 = time()
@@ -427,6 +461,8 @@ def timer_func(func):
 
 @timer_func
 def load_tax_id_dcid_mapping() -> None:
+    """ Load tax_id dcid mapping file to process gene info file
+    """
     global TAX_ID_DCID_MAPPING, TAX_ID_DCID_MAPPING_PATH
     with open(TAX_ID_DCID_MAPPING_PATH, 'r') as csv_file:
         reader = csv.reader(csv_file)
@@ -435,7 +471,16 @@ def load_tax_id_dcid_mapping() -> None:
     logging.info(f"No of TAX_ID loaded {len(TAX_ID_DCID_MAPPING)}")
 
 
-def get_pascal_case(s: str, sep=None):
+def get_pascal_case(s: str, sep=None) -> str:
+    """ pascal case converter 
+
+    Args:
+        s (str): string to convert to pascal case 
+        sep (_type_, optional): pass the separator if any . Defaults to None.
+
+    Returns:
+        str: pascal case of the input string
+    """
     if sep and sep in s:
         return "".join(map(lambda x: x[:1].upper() + x[1:], s.split(sep)))
     else:
@@ -443,17 +488,34 @@ def get_pascal_case(s: str, sep=None):
 
 
 def set_flags(_FLAGS) -> None:
+    """ Set flags for input, output &  tax_id_dcid_mapping file
+    Args:
+        _FLAGS (_type_): flags defined using absl module
+    """
+
     global MODULE_DIR
+    global OUTPUT_FILE_PATH, SOURCE_FILE_PATH, TAX_ID_DCID_MAPPING_PATH, GENE_ID_DCID_MAPPING
+    global FEATURE_TYPE_ENTRIES, UNIQUE_DBXREFS_LIST, UNIQUE_DBXREFS
 
     if _FLAGS.root != ".":
         MODULE_DIR = _FLAGS.root
 
-    _OUTPUT_FILE_PATH = path_join(MODULE_DIR, _FLAGS.output_dir)
+    if _FLAGS.output_dir != "output":
+        _OUTPUT_FILE_PATH = _FLAGS.output_dir
+    else:
+        _OUTPUT_FILE_PATH = path_join(MODULE_DIR, _FLAGS.output_dir)
     if not os.path.exists(os.path.join(MODULE_DIR, _FLAGS.output_dir)):
         os.mkdir(_OUTPUT_FILE_PATH)
-    _SOURCE_FILE_PATH = path_join(MODULE_DIR, _FLAGS.input_dir)
-    _TAX_ID_DCID_MAPPING_PATH = path_join(MODULE_DIR, _FLAGS.mapping_file_path)
-    return _OUTPUT_FILE_PATH, _SOURCE_FILE_PATH, _TAX_ID_DCID_MAPPING_PATH
+    if _FLAGS.input_dir != 'input':
+        _SOURCE_FILE_PATH = _FLAGS.input_dir
+    else:
+        _SOURCE_FILE_PATH = path_join(MODULE_DIR, _FLAGS.input_dir)
+    if _FLAGS.mapping_file_path != "tax_id_dcid_mapping.txt":
+        _TAX_ID_DCID_MAPPING_PATH = _FLAGS.mapping_file_path
+    else:
+        _TAX_ID_DCID_MAPPING_PATH = path_join(MODULE_DIR,
+                                              _FLAGS.mapping_file_path)
+    OUTPUT_FILE_PATH, SOURCE_FILE_PATH, TAX_ID_DCID_MAPPING_PATH = _OUTPUT_FILE_PATH, _SOURCE_FILE_PATH, _TAX_ID_DCID_MAPPING_PATH
 
 
 def path_join(path: str, filename: str) -> str:
@@ -476,7 +538,7 @@ class GeneInfo:
 
     @timer_func
     def process_gene_info(self, file_to_process: str, return_dict) -> None:
-        """Creates and clean GeneInfo DataFrame
+        """Creates and clean GeneInfo records
         """
         logging.info(f"Processing GeneInfo file {file_to_process}")
         global TAX_ID_DCID_MAPPING  # GENE_ID_DCID_MAPPING  #,
@@ -484,7 +546,7 @@ class GeneInfo:
         feature_type_entries = set()
         unique_dbXrefs_list = []
         unique_dbXrefs = set()
-
+        input_file = path_join(SOURCE_FILE_PATH + '/gene_info', file_to_process)
         with open(
                 path_join(OUTPUT_FILE_PATH + '/gene_info',
                           file_to_process.replace('txt', 'csv')),
@@ -497,16 +559,12 @@ class GeneInfo:
                                          escapechar='\\',
                                          lineterminator='\n')
             writer_gene.writeheader()
-
-            with open(
-                    path_join(SOURCE_FILE_PATH + '/gene_info',
-                              file_to_process), 'r') as source_file:
-
-                # reader = csv.reader(source_file)
+            counters = Counters()
+            counters.add_counter('total',
+                                 file_util.file_estimate_num_rows(input_file))
+            with open(input_file, 'r') as source_file:
                 for line in source_file:
-                    line = line.replace('\\\\',
-                                        ' ').replace('-',
-                                                     '').replace('\\', ' ')
+                    line = line.replace('\\\\', ' ').replace('\\', ' ')
                     # skip row
                     if line[0] == '#':
                         continue
@@ -516,61 +574,13 @@ class GeneInfo:
                         ]
                         if input_row[0] in TAX_ID_DCID_MAPPING:
                             # continue only tax_id matches with
-                            row = deepcopy(GENE_INFO_DICT)
-                            print(f"{file_to_process} {input_row[1]}",
-                                  end='\r')
-                            row['taxID'] = input_row[0]
-                            row['dcid_taxon'] = TAX_ID_DCID_MAPPING[input_row[0]]
-                            row['GeneID'] = input_row[1]
-                            dcid = f"bio/ncbi_{input_row[1]}" if input_row[
-                                0] != '9606' else f"bio/{input_row[2]}"
-                            dcid = dcid.replace("@", "_Cluster")
-                            row['dcid'] = dcid
-                            gene_id_dcid_mapping[input_row[1]] = dcid
-                            row['Symbol'] = f'"{input_row[2]}"'
-                            row['synonym'] = ','.join(
-                                [f'"{x}"' for x in input_row[4].split('|')])
-                            if len(input_row[5]) > 1:
-                                dbs_lst = [x for x in input_row[5].split('|')]
-                                db_obj = {'GeneID': f"{dcid}"}
-                                for dbs in dbs_lst:
-                                    db = dbs.split(':')
-                                    unique_dbXrefs.add(db[0])
-                                    db_obj[db[0]] = db[1]
-                                unique_dbXrefs_list.append(db_obj)
-
-                            if len(input_row[6]) > 1:
-                                row['chromosome'] = ",".join([
-                                    f'"chr{x}"'
-                                    for x in input_row[6].split('|')
-                                ])
-                            row['map_location'] = ','.join(
-                                [f'"{x}"' for x in input_row[7].split('|')])
-                            row['description'] = f'"{re.sub(RE_PATTERN, "", input_row[8])}"'
-                            try:
-                                if len(input_row[11]) > 1:
-                                    row['type_of_gene'] = TYPE_OF_GENE[
-                                        input_row[9]]
-                            except:
-                                row['type_of_gene'] = 'dcs:TypeOfGeneUnknown'
-                            row['Full_name_from_nomenclature_authority'] = f'"{re.sub(RE_PATTERN, "", input_row[11])}"'
-                            try:
-                                if len(input_row[12]) > 1:
-                                    row['Nomenclature_status'] = NOMENCLATURE_STATUS[
-                                        input_row[12]]
-                            except:
-                                logging.info(f"No match for {input_row[12]}")
-                            row['Other_designations'] = ','.join(
-                                [f'"{x}"' for x in input_row[13].split('|')])
-                            row['Modification_date'] = DATE_MODIFY(
-                                input_row[14])
-                            if len(input_row[15]) > 1:
-                                row['regulatory'], row['misc_feature'], row[
-                                    'misc_recomb'], feature_entries = self._get_feature_type_list(
-                                        input_row[15])
-                                feature_type_entries.update(feature_entries)
-
-                            writer_gene.writerow(row)
+                            row = self.parse_gene_info_row(
+                                TAX_ID_DCID_MAPPING[input_row[0]],
+                                gene_id_dcid_mapping, feature_type_entries,
+                                unique_dbXrefs_list, unique_dbXrefs, input_row)
+                            if row:
+                                writer_gene.writerow(row)
+                    counters.add_counter('processed', 1)
 
         logging.info(
             f"{file_to_process} - gene_id {len(gene_id_dcid_mapping)}  feature_type {len(feature_type_entries)} unique_dbXrefs_list {len(unique_dbXrefs_list)} unique_dbXrefs {len(unique_dbXrefs)} "
@@ -582,8 +592,97 @@ class GeneInfo:
             'unique_dbXrefs': unique_dbXrefs
         }
 
+    def parse_gene_info_row(self, taxID, gene_id_dcid_mapping,
+                            feature_type_entries, unique_dbXrefs_list,
+                            unique_dbXrefs, input_row):
+        """ parser for gene info input row dict
+
+        Args:
+            taxID (_type_): dcid of taxID 
+            gene_id_dcid_mapping (_type_): gene_id_dcid_mapping parameter
+            feature_type_entries (_type_): feature_type_entries parameter
+            unique_dbXrefs_list (_type_): unique_dbXrefs_list parameter
+            unique_dbXrefs (_type_): unique_dbXrefs parameter
+            input_row (_type_): gene_info input_row dict
+
+        Returns:
+            _type_: _description_
+        """
+        row = deepcopy(GENE_INFO_DICT)
+        row['taxID'] = input_row[0]
+        row['dcid_taxon'] = taxID
+        row['GeneID'] = input_row[1]
+        dcid = f"bio/{input_row[1]}" if input_row[
+            0] != '9606' else f"bio/ncbi_{input_row[2]}"
+        dcid = dcid.replace("@", "_Cluster")
+        row['dcid'] = dcid
+        gene_id_dcid_mapping[input_row[1]] = dcid
+
+        if len(input_row[2]) > 0:
+            row['Symbol'] = f'"{input_row[2]}"'
+        synonym_list = [x for x in input_row[4].split('|') if len(x) > 1]
+        if len(synonym_list) > 0:
+            if len(synonym_list) == 1:
+                row['synonym'] = synonym_list[0]
+            else:
+                row['synonym'] = ",".join(synonym_list)
+
+        if len(input_row[5]) > 1:
+            dbs_lst = [x for x in input_row[5].split('|')]
+            db_obj = {'GeneID': f"{dcid}"}
+            for dbs in dbs_lst:
+                db = dbs.split(':')
+                unique_dbXrefs.add(db[0])
+                db_obj[db[0]] = db[1]
+            unique_dbXrefs_list.append(db_obj)
+
+        if len(input_row[6]) > 1:
+            row['chromosome'] = ",".join(
+                [f'"chr{x}"' for x in input_row[6].split('|') if len(x) > 0])
+        if len(input_row[7]) > 1:
+            map_loc = [f'"{x}"' for x in input_row[7].split('|') if len(x) > 0]
+            if len(map_loc) > 0:
+                if len(map_loc) == 0:
+                    row['map_location'] = map_loc[0]
+                else:
+                    row['map_location'] = ",".join(map_loc)
+        if len(input_row[8]) > 1:
+            row['description'] = f'"{re.sub(RE_PATTERN, "", input_row[8])}"'
+        try:
+            if len(input_row[11]) > 1:
+                row['type_of_gene'] = TYPE_OF_GENE[input_row[9]]
+        except:
+            row['type_of_gene'] = 'dcs:TypeOfGeneUnknown'
+
+        if len(input_row[11]) > 1:
+            row['Full_name_from_nomenclature_authority'] = f'"{re.sub(RE_PATTERN, "", input_row[11])}"'
+        try:
+            if len(input_row[12]) > 1:
+                row['Nomenclature_status'] = NOMENCLATURE_STATUS[input_row[12]]
+        except:
+            logging.info(f"No match for {input_row[12]}")
+        if len(input_row[13]) > 1:
+            ot_des = [f'"{x}"' for x in input_row[13].split('|') if len(x) > 0]
+            if len(ot_des) > 0:
+                if len(ot_des) == 1:
+                    row['Other_designations'] = ot_des[0]
+                else:
+                    row['Other_designations'] = ",".join(ot_des)
+        row['Modification_date'] = DATE_MODIFY(input_row[14])
+        if len(input_row[15]) > 1:
+            row['regulatory'], row['misc_feature'], row[
+                'misc_recomb'], feature_entries = self._get_feature_type_list(
+                    input_row[15])
+            feature_type_entries.update(feature_entries)
+        return row
+
     @timer_func
     def save_gene_info_files(self, mcf_file_path: str):
+        """ Save all multi-processed file onto one for future use.
+
+        Args:
+            mcf_file_path (str): mcf_file_path to save schema enum MCF 
+        """
         global FEATURE_TYPE_ENTRIES, UNIQUE_DBXREFS_LIST, UNIQUE_DBXREFS
         db_values = ['GeneID']
         db_values.extend(list(UNIQUE_DBXREFS))
@@ -612,9 +711,7 @@ class GeneInfo:
             for feature_type in FEATURE_TYPE_ENTRIES:
                 ftype = json.loads(feature_type)
                 mfc_entry = NCBI_GENE_SCHEMA_EMUN_MCF.format(
-                    type=ftype['type'],
-                    item=ftype['entry'],
-                    name=ftype['name'])
+                    type=ftype['type'], item=ftype['entry'], name=ftype['name'])
                 file.write(mfc_entry)
 
     def _get_feature_type_list(self, value):
@@ -654,8 +751,8 @@ class GeneInfo:
                             },
                             sort_keys=True))
                 elif second_split_val[0] == 'misc_feature':
-                    req_str.append('dcs:MiscellaneousGeneFeature' +
-                                   str_pascal_case)
+                    misc_str.append('dcs:MiscellaneousGeneFeature' +
+                                    str_pascal_case)
                     feature_type_entries.add(
                         json.dumps(
                             {
@@ -678,14 +775,17 @@ class GenePubmed:
 
     @timer_func
     def process_csv_file(self) -> None:
-        """Creates and clean Gene2pubmed DataFrame
+        """Creates and clean Gene2pubmed records
         """
         logging.info("Processing GenePubmed")
         global GENE_ID_DCID_MAPPING
         Gene_PubMedID = {}
+        input_file = path_join(SOURCE_FILE_PATH, "gene2pubmed.txt")
+        counters = Counters()
+        counters.add_counter('total',
+                             file_util.file_estimate_num_rows(input_file))
 
-        with open(path_join(SOURCE_FILE_PATH, "gene2pubmed.txt"),
-                  'r') as source_file:
+        with open(input_file, 'r') as source_file:
 
             for line in source_file:
                 # skip row
@@ -694,17 +794,16 @@ class GenePubmed:
                 else:
                     input_row = line.replace('\n', '').split('\t')
                     if input_row[1] in GENE_ID_DCID_MAPPING:
-                        print(f"gene2pubmed {input_row[1]}", end='\r')
                         if input_row[1] in Gene_PubMedID:
                             Gene_PubMedID[input_row[1]]['PubMedID'].append(
                                 input_row[2])
                         else:
                             Gene_PubMedID[input_row[1]] = {
-                                'dcid':
-                                f"{GENE_ID_DCID_MAPPING[input_row[1]]}",
+                                'dcid': f"{GENE_ID_DCID_MAPPING[input_row[1]]}",
                                 'PubMedID': [input_row[2]]
                             }
                             #Gene_PubMedID[input_row[1]].append()
+                counters.add_counter('processed', 1)
 
         with open(path_join(OUTPUT_FILE_PATH, 'ncbi_gene_gene_pubmed.csv'),
                   'w') as output_gene:
@@ -717,12 +816,15 @@ class GenePubmed:
                                          lineterminator='\n')
             writer_gene.writeheader()
             for l in Gene_PubMedID:
-                writer_gene.writerow({
-                    'GeneID':
-                    Gene_PubMedID[l]['dcid'],
-                    'PubMed_ID':
-                    f'"{",".join(Gene_PubMedID[l]["PubMedID"])}"'
-                })
+                pub_med_obj = {}
+                pub_med_obj['GeneID'] = f"{Gene_PubMedID[l]['dcid']}"
+                pub_ids = Gene_PubMedID[l]["PubMedID"]
+                if len(pub_ids) > 0:
+                    if len(pub_ids) == 1:
+                        pub_med_obj['PubMed_ID'] = pub_ids[0]
+                    else:
+                        pub_med_obj['PubMed_ID'] = ",".join(pub_ids)
+                    writer_gene.writerow(pub_med_obj)
 
 
 class GeneNeighbors:
@@ -732,7 +834,7 @@ class GeneNeighbors:
 
     @timer_func
     def process_csv_file(self, file_to_process: str) -> None:
-        """Creates and clean gene_neighbors DataFrame
+        """Creates and clean gene_neighbors records
         """
         logging.info(f"Processing GeneNeighbors {file_to_process}")
         global GENE_ID_DCID_MAPPING, GENE_ORIENTATION_DICT
@@ -748,11 +850,13 @@ class GeneNeighbors:
                                          escapechar='\\',
                                          lineterminator='\n')
             writer_gene.writeheader()
+            input_file = path_join(SOURCE_FILE_PATH + '/gene_neighbors',
+                                   file_to_process)
+            counters = Counters()
+            counters.add_counter('total',
+                                 file_util.file_estimate_num_rows(input_file))
 
-            with open(
-                    path_join(SOURCE_FILE_PATH + '/gene_neighbors',
-                              file_to_process), 'r') as source_file:
-
+            with open(input_file, 'r') as source_file:
                 for line in source_file:
                     # skip row
                     if line[0] == '#':
@@ -761,23 +865,46 @@ class GeneNeighbors:
                         input_row = line.replace('\n', '').split('\t')
                         if input_row[1] in GENE_ID_DCID_MAPPING:
                             # continue only GeneID matches with input row
-                            print(f"{file_to_process} {input_row[1]}",
-                                  end='\r')
-                            row = deepcopy(GENE_NEIGHBORS_DICT)
-                            row['GeneID'] = f"{GENE_ID_DCID_MAPPING[input_row[1]]}"
-                            row['genomic_accession.version'] = input_row[2]
-                            row['genomic_gi'] = input_row[3]
-                            row['start_position'] = input_row[4]
-                            row['end_position'] = input_row[5]
-                            row['orientation'] = GENE_ORIENTATION_DICT[
-                                input_row[6]]
-                            # only update if assembly is present and not a placeholder '-'
-                            if len(input_row[13])>1:
-                                row['assembly'] = f'"{input_row[13]}"'
-                            # 'bio/<genomic accession.version>_<start position>_<end position>
-                            row['dcid'] = f"bio/{input_row[2]}_{input_row[4]}_{input_row[5]}"
-                            row['name'] = f'"{input_row[2]} {input_row[4]} {input_row[5]}"'
-                            writer_gene.writerow(row)
+                            row = self.parse_gene_neighbors_row(
+                                GENE_ID_DCID_MAPPING[input_row[1]], input_row)
+
+                            if row:
+                                writer_gene.writerow(row)
+                            else:
+                                logging.info(
+                                    f"Missing values to form dcid {input_row[2]} {input_row[4]} {input_row[5]} in file` {input_file}"
+                                )
+                    counters.add_counter('processed', 1)
+
+    def parse_gene_neighbors_row(self, geneID, input_row):
+        """ parser for gene neighbors input row dict
+
+        Args:
+            geneID (_type_): dcid of geneID
+            input_row (_type_): gene neighbors input row dict
+
+        Returns:
+            _type_: output row dict
+        """
+        row = deepcopy(GENE_NEIGHBORS_DICT)
+        row['GeneID'] = f"{geneID}"
+        row['genomic_accession.version'] = input_row[2]
+        row['genomic_gi'] = input_row[3]
+        row['start_position'] = input_row[4]
+        row['end_position'] = input_row[5]
+        row['orientation'] = GENE_ORIENTATION_DICT[input_row[6]]
+        if len(input_row[7]) > 1:
+            row['chromosome'] = f'chr{input_row[7]}'
+        if len(input_row[13]) > 1:
+            row['assembly'] = f'"{input_row[13]}"'
+        # 'bio/<genomic accession.version>_<start position>_<end position>
+        if len(input_row[2]) > 1:
+            dcid_lst = [input_row[2], input_row[4], input_row[5]]
+            row['dcid'] = f"bio/{'_'.join(dcid_lst)}"
+            row['name'] = f'"{" ".join(dcid_lst)}"'
+            return row
+        else:
+            return None
 
 
 class GeneOrthology:
@@ -787,14 +914,17 @@ class GeneOrthology:
 
     @timer_func
     def process_csv_file(self) -> None:
-        """Creates and clean gene_orthology DataFrame
+        """Creates and clean gene_orthology records
         """
         logging.info("Processing GeneOrthology")
         global GENE_ID_DCID_MAPPING
         Gene_orthologs = {}
+        input_file = path_join(SOURCE_FILE_PATH, "gene_orthologs.txt")
+        counters = Counters()
+        counters.add_counter('total',
+                             file_util.file_estimate_num_rows(input_file))
 
-        with open(path_join(SOURCE_FILE_PATH, "gene_orthologs.txt"),
-                  'r') as source_file:
+        with open(input_file, 'r') as source_file:
 
             for line in source_file:
                 # skip row
@@ -803,21 +933,21 @@ class GeneOrthology:
                 else:
                     input_row = line.replace('\n', '').split('\t')
                     if input_row[1] in GENE_ID_DCID_MAPPING:
-                        print(f"gene_orthologs {input_row[1]}", end='\r')
                         if input_row[1] in Gene_orthologs:
                             if input_row[4] in GENE_ID_DCID_MAPPING:
                                 Gene_orthologs[input_row[1]]['ortholog'].append(
-                                    f'dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}'
+                                    f"dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}"
                                 )
                         else:
                             if input_row[4] in GENE_ID_DCID_MAPPING:
                                 Gene_orthologs[input_row[1]] = {
                                     'dcid':
-                                    f'{GENE_ID_DCID_MAPPING[input_row[1]]}',
+                                        f"{GENE_ID_DCID_MAPPING[input_row[1]]}",
                                     'ortholog': [
-                                        f'dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}'
+                                        f"dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}"
                                     ]
                                 }
+                counters.add_counter('processed', 1)
 
         with open(path_join(OUTPUT_FILE_PATH, 'ncbi_gene_gene_ortholog.csv'),
                   'w') as output_gene:
@@ -830,12 +960,17 @@ class GeneOrthology:
                                          lineterminator='\n')
             writer_gene.writeheader()
             for l in Gene_orthologs:
-                writer_gene.writerow({
-                    'GeneID':
-                    Gene_orthologs[l]['dcid'],
-                    'ortholog':
-                    ','.join(Gene_orthologs[l]['ortholog'])
-                })
+                if len(Gene_orthologs[l]['ortholog']) > 0:
+                    gene_orth = {}
+                    gene_orth['GeneID'] = Gene_orthologs[l]['dcid']
+                    if len(Gene_orthologs[l]['ortholog']) > 0:
+                        if len(Gene_orthologs[l]['ortholog']) == 1:
+                            gene_orth['ortholog'] = Gene_orthologs[l][
+                                'ortholog'][0]
+                        else:
+                            gene_orth['ortholog'] = ",".join(
+                                [x for x in Gene_orthologs[l]['ortholog']])
+                        writer_gene.writerow(gene_orth)
 
 
 class GeneGroup:
@@ -846,14 +981,17 @@ class GeneGroup:
     @timer_func
     def process_csv_file(self) -> None:
         # gene_group.txt, ncbi_gene_gene_group.csv
-        """Creates and clean gene_group DataFrame
+        """Creates and clean gene_group records
         """
         logging.info("Processing GeneGroup")
         global GENE_ID_DCID_MAPPING
         Gene_group = {}
+        input_file = path_join(SOURCE_FILE_PATH, "gene_group.txt")
+        counters = Counters()
+        counters.add_counter('total',
+                             file_util.file_estimate_num_rows(input_file))
 
-        with open(path_join(SOURCE_FILE_PATH, "gene_group.txt"),
-                  'r') as source_file:
+        with open(input_file, 'r') as source_file:
 
             for line in source_file:
                 # skip row
@@ -863,7 +1001,6 @@ class GeneGroup:
                     input_row = line.replace('\n', '').split('\t')
                     column_name = get_pascal_case(input_row[2], sep=' ')
                     if input_row[1] in GENE_ID_DCID_MAPPING:
-                        print(f"gene_group {input_row[1]}", end='\r')
                         if input_row[1] in Gene_group:
                             if column_name in Gene_group[input_row[1]]:
                                 try:
@@ -887,7 +1024,7 @@ class GeneGroup:
                             try:
                                 Gene_group[input_row[1]] = {
                                     'GeneID':
-                                    f"{GENE_ID_DCID_MAPPING[input_row[1]]}",
+                                        f"{GENE_ID_DCID_MAPPING[input_row[1]]}",
                                     column_name: [
                                         f'dcid:{GENE_ID_DCID_MAPPING[input_row[4]]}'
                                     ]
@@ -895,6 +1032,7 @@ class GeneGroup:
                             except:
                                 logging.info(
                                     f"GeneID not available {input_row[4]}")
+                counters.add_counter('processed', 1)
 
         with open(path_join(OUTPUT_FILE_PATH, 'ncbi_gene_gene_group.csv'),
                   'w') as output_gene:
@@ -912,7 +1050,8 @@ class GeneGroup:
                     if g == 'GeneID':
                         grp_obj[g] = Gene_group[l][g]
                     else:
-                        grp_obj[g] = ",".join(Gene_group[l][g])
+                        if len(Gene_group[l][g]) > 0:
+                            grp_obj[g] = ",".join(Gene_group[l][g])
                 writer_gene.writerow(grp_obj)
 
 
@@ -923,8 +1062,7 @@ class GeneMim2gene:
 
     @timer_func
     def process_csv_file(self) -> None:
-        # mim2gene_medgen.txt, ncbi_gene_gene_phenotype_association.csv
-        """Creates and clean mim2gene DataFrame
+        """Creates and clean mim2gene records
         """
         logging.info("Processing GeneMim2gene")
         global GENE_ID_DCID_MAPPING, GENE_COMMENT_DICT
@@ -940,10 +1078,12 @@ class GeneMim2gene:
                                          escapechar='\\',
                                          lineterminator='\n')
             writer_gene.writeheader()
+            input_file = path_join(SOURCE_FILE_PATH, "mim2gene_medgen.txt")
+            counters = Counters()
+            counters.add_counter('total',
+                                 file_util.file_estimate_num_rows(input_file))
 
-            with open(path_join(SOURCE_FILE_PATH, "mim2gene_medgen.txt"),
-                      'r') as source_file:
-
+            with open(input_file, 'r') as source_file:
                 for line in source_file:
                     # skip row
                     if line[0] == '#':
@@ -952,29 +1092,48 @@ class GeneMim2gene:
                         input_row = line.replace('\n', '').split('\t')
                         if input_row[1] in GENE_ID_DCID_MAPPING:
                             # continue only GeneID matches with input row
-                            print(f"mim2gene_medgen {input_row[1]}", end='\r')
-                            row = deepcopy(GENE_MIM2GENE_DICT)
-                            dcid = GENE_ID_DCID_MAPPING[input_row[1]]
-                            row['GeneID'] = f"{dcid}"
-                            row['MIM_number'] = input_row[0]
-                            row['omim_dcid'] = f"bio/omim_{input_row[0]}"
-                            row['type'] = GENE_MIM_TYPE_DIC[input_row[2]]
-                            row['Source'] = ','.join([
-                                f'{GENE_OMIM_SOURCE_DICT.get(x.strip(), x.strip())}'
-                                for x in input_row[3].strip().split(';')
-                            ])
-                            if row['MedGenCUI'].startswith('C'):
-                                row['MedGenCUI'] = input_row[4]
-                                row['MedGenCUI_dcid'] = f"bio/{input_row[4]}"
-                            cmt = []
-                            for c in input_row[5].split(':'):
-                                if c.strip() in GENE_COMMENT_DICT:
-                                    cmt.append(
-                                        f'{GENE_COMMENT_DICT[c.strip()]}')
-                            if len(cmt) > 0:
-                                row['Comment'] = ','.join(cmt)
-                            row['dcid'] = f"{dcid}_omim_{input_row[0]}"
-                            writer_gene.writerow(row)
+                            row = self.parse_gene_mim2gene_row(
+                                GENE_ID_DCID_MAPPING[input_row[1]], input_row)
+                            if row:
+                                writer_gene.writerow(row)
+                    counters.add_counter('processed', 1)
+
+    def parse_gene_mim2gene_row(self, dcid, input_row):
+        """ parser for gene mim2gene input row dict
+
+        Args:
+            dcid (_type_): dcid of GeneID
+            input_row (_type_): gene mim2gene input row
+
+        Returns:
+            _type_: output row dict
+        """
+        row = deepcopy(GENE_MIM2GENE_DICT)
+        row['GeneID'] = f"{dcid}"
+        row['MIM_number'] = input_row[0]
+        row['omim_dcid'] = f"bio/omim_{input_row[0]}"
+        row['type'] = GENE_MIM_TYPE_DIC[input_row[2]]
+
+        if len(input_row[3]) > 1:
+            Source_lst = [
+                f'{GENE_OMIM_SOURCE_DICT.get(x.strip(), x.strip())}'
+                for x in input_row[3].strip().split(';')
+                if len(x) > 1
+            ]
+            row['Source'] = ",".join(Source_lst)
+
+        if len(input_row[4]) > 1:
+            row['MedGenCUI'] = input_row[4]
+            row['MedGenCUI_dcid'] = f"bio/{input_row[4]}"
+        cmt = []
+        for c in input_row[5].split(':'):
+            if c.strip() in GENE_COMMENT_DICT:
+                cmt.append(f'{GENE_COMMENT_DICT[c.strip()]}')
+        if cmt:
+            row['Comment'] = ",".join(cmt)
+
+        row['dcid'] = f"{dcid}_omim_{input_row[0]}"
+        return row
 
 
 class Gene2Go:
@@ -984,7 +1143,7 @@ class Gene2Go:
 
     @timer_func
     def process_csv_file(self, file_to_process: str) -> None:
-        """Creates and clean gene2go DataFrame
+        """Creates and clean gene2go records
         """
         # gene2go.txt, ncbi_gene_go_terms.csv ,
         logging.info(f"Processing Gene2Go {file_to_process}")
@@ -1001,11 +1160,13 @@ class Gene2Go:
                                          escapechar='\\',
                                          lineterminator='\n')
             writer_gene.writeheader()
+            input_file = path_join(SOURCE_FILE_PATH + '/gene2go',
+                                   file_to_process)
+            counters = Counters()
+            counters.add_counter('total',
+                                 file_util.file_estimate_num_rows(input_file))
 
-            with open(
-                    path_join(SOURCE_FILE_PATH + '/gene2go', file_to_process),
-                    'r') as source_file:
-
+            with open(input_file, 'r') as source_file:
                 for line in source_file:
                     # skip row
                     if line[0] == '#':
@@ -1014,21 +1175,34 @@ class Gene2Go:
                         input_row = line.replace('\n', '').split('\t')
                         if input_row[1] in GENE_ID_DCID_MAPPING:
                             # continue only GeneID matches with input row
-                            print(f"{file_to_process} {input_row[1]}",
-                                  end='\r')
-                            row = deepcopy(GENE_GO_DICT)
-                            dcid = GENE_ID_DCID_MAPPING[input_row[1]]
-                            row['GeneID'] = f"{dcid}"
-                            row['GO_ID'] = input_row[2]
-                            row['dcid'] = f"bio/{input_row[2].replace(':','_')}"
-                            row['Evidence'] = GENE_EVIDENCE_DICT[input_row[3]]
-                            row['Qualifier'] = GENE_QUALIFIER_DICT[
-                                input_row[4]]
-                            row['GO_term'] = f'"{input_row[5]}"'
-                            row['PubMed'] = ','.join(
-                                [f'"{x}"' for x in input_row[6].split('|')])
-                            row['Category'] = GENE_CATEGORY_DICT[input_row[7]]
-                            writer_gene.writerow(row)
+                            row = self.parse_gene_gene2go_row(
+                                GENE_ID_DCID_MAPPING[input_row[1]], input_row)
+                            if row:
+                                writer_gene.writerow(row)
+                    counters.add_counter('processed', 1)
+
+    def parse_gene_gene2go_row(self, dcid, input_row):
+        """ parser for gene2go input row dict
+
+        Args:
+            dcid (_type_): dcid of GeneID
+            input_row (_type_): gene2go input row
+
+        Returns:
+            _type_: output row dict
+        """
+        row = deepcopy(GENE_GO_DICT)
+        row['GeneID'] = f"{dcid}"
+        row['GO_ID'] = input_row[2]
+        row['dcid'] = f"bio/{input_row[2].replace(':','_')}"
+        row['Evidence'] = GENE_EVIDENCE_DICT[input_row[3]]
+        row['Qualifier'] = GENE_QUALIFIER_DICT[input_row[4]]
+        if len(input_row[5]) > 0:
+            row['GO_term'] = f'"{input_row[5]}"'
+        row['PubMed'] = ','.join(
+            [f'"{x}"' for x in input_row[6].split('|') if len(x) > 0])
+        row['Category'] = GENE_CATEGORY_DICT[input_row[7]]
+        return row
 
 
 class Gene2Accession:
@@ -1038,7 +1212,7 @@ class Gene2Accession:
 
     @timer_func
     def process_csv_file(self, file_to_process: str) -> None:
-        """Creates and clean gene2accession DataFrame
+        """Creates and clean gene2accession records
         """
         # gene2accession.txt ncbi_gene_rna_transcript.csv
 
@@ -1066,11 +1240,13 @@ class Gene2Accession:
                                              escapechar='\\',
                                              lineterminator='\n')
             writer_gene_rna.writeheader()
+            input_file = path_join(SOURCE_FILE_PATH + '/gene2accession',
+                                   file_to_process)
+            counters = Counters()
+            counters.add_counter('total',
+                                 file_util.file_estimate_num_rows(input_file))
 
-            with open(
-                    path_join(SOURCE_FILE_PATH + '/gene2accession',
-                              file_to_process), 'r') as source_file:
-
+            with open(input_file, 'r') as source_file:
                 for line in source_file:
                     # skip row
                     if line[0] == '#':
@@ -1081,51 +1257,19 @@ class Gene2Accession:
                             x.replace('-', '')
                             for x in line.replace('\n', '').split('\t')
                         ]
-                        if input_row[1] in GENE_ID_DCID_MAPPING:
+                        if input_row[1] in GENE_ID_DCID_MAPPING and len(
+                                input_row[3]) > 1:
                             # continue only GeneID matches with input row
-                            print(f"{file_to_process} {input_row[1]}",
-                                  end='\r')
-                            row = deepcopy(GENE_ACCESSION_DICT)
-
                             dcid = GENE_ID_DCID_MAPPING[input_row[1]]
-                            row['GeneID'] = f"{dcid}"
-                            # only write dcids if value is present
-                            if len(input_row[7]) > 1:
-                                row['dcid_genomic_nucleotide'] = f"bio/{input_row[7]}"
-                                if input_row[9].isnumeric() and input_row[10].isnumeric:
-                                    row['dcid_dna_coordinates'] = f"bio/{input_row[7]}_{input_row[9]}_{input_row[10]}"
-                                    row['name_dna_coordinates'] = f"{input_row[7]} {input_row[9]} {input_row[10]}"
-                            if len(input_row[3]) > 1:
-                                row['dcid_rna_transcript'] = f"bio/{input_row[3]}"
-                            if len(input_row[5]) > 1:
-                                row['dcid_protein'] = f"bio/{input_row[5]}"
-                            if len(input_row[13]) > 1:
-                                row['dcid_peptide'] = f"bio/{input_row[13]}"
-                            row['status'] = REF_SEQ_STATUS_ENUM_DICT[
-                                input_row[2]]
-                            row['RNA_nucleotide_accession.version'] = input_row[
-                                3]
-                            row['RNA_nucleotide_gi'] = input_row[4]
-                            row['protein_accession.version'] = input_row[5]
-                            row['protein_gi'] = input_row[6]
-                            row['genomic_nucleotide_accession.version'] = input_row[
-                                7]
-                            row['genomic_nucleotide_gi'] = input_row[8]
-                            row['start_position_on_the_genomic_accession'] = input_row[
-                                9]
-                            row['end_position_on_the_genomic_accession'] = input_row[
-                                10]
-                            row['orientation'] = GENE_ORIENTATION_DICT[
-                                input_row[11]]
-                            row['assembly'] = input_row[12]
-                            row['mature_peptide_accession.version'] = input_row[
-                                13]
-                            row['mature_peptide_gi'] = input_row[13]
+                            row = self.parse_gene_gene2accession_row(
+                                dcid, input_row)
 
-                            writer_gene.writerow(row)
+                            if row:
+                                writer_gene.writerow(row)
 
                             if len(input_row[3]) > 1:
                                 row_rna = deepcopy(GENE_ACCESSION_RNA_DICT)
+                                row_rna['GeneID'] = f"{dcid}"
                                 row_rna[
                                     'RNA_nucleotide_accession.version'] = input_row[
                                         3]
@@ -1140,6 +1284,59 @@ class Gene2Accession:
                                         7]
                                 row_rna['genomic_nucleotide_gi'] = input_row[8]
                                 writer_gene_rna.writerow(row_rna)
+                    counters.add_counter('processed', 1)
+
+    def parse_gene_gene2accession_row(self, dcid, input_row):
+        """ parser for gene gene2accession input row dict
+
+        Args:
+            dcid (_type_): dcid of GeneID
+            input_row (_type_): gene2accession input row
+
+        Returns:
+            _type_: output row dict
+        """
+        row = deepcopy(GENE_ACCESSION_DICT)
+        rna_dcid_list = [input_row[3]]
+        start_position = None
+        end_position = None
+        if len(input_row[9]) > 1:
+            start_position = input_row[9]
+            rna_dcid_list.append(input_row[9])
+
+        if len(input_row[10]) > 1:
+            end_position = input_row[10]
+            rna_dcid_list.append(input_row[10])
+
+        row['GeneID'] = f"{dcid}"
+
+        row['dcid_dna_coordinates'] = f"bio/{'_'.join(rna_dcid_list)}"
+        row['name_dna_coordinates'] = f'"{" ".join(rna_dcid_list)}"'
+        if len(input_row[7]) > 1:
+            row['dcid_genomic_nucleotide'] = f"bio/{input_row[7]}"
+        if len(input_row[3]) > 1:
+            row['dcid_rna_transcript'] = f"bio/{input_row[3]}"
+        if len(input_row[5]) > 1:
+            row['dcid_protein'] = f"bio/{input_row[5]}"
+        if len(input_row[13]) > 1:
+            row['dcid_peptide'] = f"bio/{input_row[13]}"
+
+        row['status'] = REF_SEQ_STATUS_ENUM_DICT[input_row[2]]
+        row['RNA_nucleotide_accession.version'] = input_row[3]
+        row['RNA_nucleotide_gi'] = input_row[4]
+        row['protein_accession.version'] = input_row[5]
+        row['protein_gi'] = input_row[6]
+        row['genomic_nucleotide_accession.version'] = input_row[7]
+        row['genomic_nucleotide_gi'] = input_row[8]
+        if start_position:
+            row['start_position_on_the_genomic_accession'] = start_position
+        if end_position:
+            row['end_position_on_the_genomic_accession'] = end_position
+        row['orientation'] = GENE_ORIENTATION_DICT[input_row[11]]
+        row['assembly'] = input_row[12]
+        row['mature_peptide_accession.version'] = input_row[13]
+        row['mature_peptide_gi'] = input_row[13]
+        return row
 
 
 class Gene2Ensembl:
@@ -1149,7 +1346,7 @@ class Gene2Ensembl:
 
     @timer_func
     def process_csv_file(self) -> None:
-        """Creates and clean gene2go DataFrame
+        """Creates and clean gene2go records
         """
         # gene2ensembl.txt, ncbi_gene_ensembl.csv
 
@@ -1166,9 +1363,13 @@ class Gene2Ensembl:
                                          escapechar='\\',
                                          lineterminator='\n')
             writer_gene.writeheader()
+            input_file = path_join(SOURCE_FILE_PATH, "gene2ensembl.txt")
+            counters = Counters()
+            counters.add_counter('total',
+                                 file_util.file_estimate_num_rows(input_file))
 
-            with open(path_join(SOURCE_FILE_PATH, "gene2ensembl.txt"),
-                      'r') as source_file:
+            with open(input_file, 'r') as source_file:
+                log_cnt = 0
 
                 for line in source_file:
                     # skip row
@@ -1179,21 +1380,36 @@ class Gene2Ensembl:
                         if input_row[1] in GENE_ID_DCID_MAPPING and len(
                                 input_row[3]) > 1:
                             # continue only GeneID matches with input row
-                            print(f"gene2ensembl {input_row[1]}", end='\r')
-                            row = deepcopy(GENE_ENSEMBL_DICT)
-                            dcid = GENE_ID_DCID_MAPPING[input_row[1]]
-                            row['GeneID'] = f"{dcid}"
-                            row['Ensembl_gene_identifier'] = input_row[2]
-                            if len(input_row[3]) > 0:
-                                row['RNA_nucleotide_accession.version'] = input_row[
-                                    3]
-                                row['dcid_rna_transcript'] = f"bio/{input_row[3]}"
+                            row = self.parse_gene_gene2ensembl_row(
+                                GENE_ID_DCID_MAPPING[input_row[1]], input_row)
+                            if row:
+                                writer_gene.writerow(row)
+                    counters.add_counter('processed', 1)
 
-                            row['Ensembl_rna_identifier'] = input_row[4]
-                            if input_row[5] != "-":
-                                row['protein_accession.version'] = input_row[5]
-                            row['Ensembl_protein_identifier'] = input_row[6]
-                            writer_gene.writerow(row)
+    def parse_gene_gene2ensembl_row(self, dcid, input_row):
+        """ parser for gene gene2ensembl input row dict
+
+        Args:
+            dcid (_type_): dcid of GeneID
+            input_row (_type_): gene2ensembl input row
+
+        Returns:
+            _type_: output row dict
+        """
+        row = deepcopy(GENE_ENSEMBL_DICT)
+        row['GeneID'] = f"{dcid}"
+        row['Ensembl_gene_identifier'] = input_row[2]
+        if len(input_row[3]) > 0:
+            row['RNA_nucleotide_accession.version'] = input_row[3]
+            row['dcid_rna_transcript'] = f"bio/{input_row[3]}"
+        if len(input_row[4]) > 1:
+            row['Ensembl_rna_identifier'] = input_row[4]
+        if len(input_row[5]) > 1:
+            row['protein_accession.version'] = input_row[5]
+        if len(input_row[6]) > 1:
+            row['Ensembl_protein_identifier'] = input_row[6]
+
+        return row
 
 
 class GeneRifs_Basic:
@@ -1203,7 +1419,7 @@ class GeneRifs_Basic:
 
     @timer_func
     def process_csv_file(self) -> None:
-        """Creates and clean generifs_basic DataFrame
+        """Creates and clean generifs_basic records
         """
         # generifs_basic.txt, ncbi_gene_gene_rif.csv
         logging.info("Processing GeneRifs_Basic")
@@ -1218,10 +1434,12 @@ class GeneRifs_Basic:
                                          escapechar='\\',
                                          lineterminator='\n')
             writer_gene.writeheader()
+            input_file = path_join(SOURCE_FILE_PATH, "generifs_basic.txt")
+            counters = Counters()
+            counters.add_counter('total',
+                                 file_util.file_estimate_num_rows(input_file))
 
-            with open(path_join(SOURCE_FILE_PATH, "generifs_basic.txt"),
-                      'r') as source_file:
-
+            with open(input_file, 'r') as source_file:
                 for line in source_file:
                     # skip row
                     if line[0] == '#':
@@ -1231,37 +1449,42 @@ class GeneRifs_Basic:
                         input_row = line.replace('\n', '').split('\t')
                         if input_row[1] in GENE_ID_DCID_MAPPING:
                             # continue only GeneID matches with input row
-                            print(f"generifs_basic {input_row[1]}", end='\r')
-
-                            # Explode the comma-separated list in index position 2
-                            pub_med_ids = input_row[2].split(',')
-                            for pub_med_id in pub_med_ids:
-                                row = deepcopy(GENE_RIFS_BASIC_DICT)
-                                dcid = GENE_ID_DCID_MAPPING[input_row[1]]
-                                row['GeneID'] = f"{dcid}"
-                                # Use the individual pub_med_id here
-                                row['dcid'] = f"{dcid}_PubMed_{pub_med_id}"
-                                row['name'] = f'"{dcid.replace("bio/", "").replace("_", " ")} PubMed {pub_med_id} Reference Into Function"'
-                                row['dateModified'] = DATETIME_MODIFY(input_row[3])
-                                # Escape quotes in GeneRifText
-                                rif_text = input_row[4].replace('"', '\\"')
-                                # Strip trailing backslash if present
-                                if rif_text.endswith('\\'):
-                                    rif_text = rif_text[:-1]
-                                row['GeneRifText'] = f'"{rif_text}"'
-                                row['pubMedId'] = pub_med_id  # Use the individual pub_med_id here
+                            row = self.parse_gene_generifs_row(
+                                GENE_ID_DCID_MAPPING[input_row[1]], input_row)
+                            if row:
                                 writer_gene.writerow(row)
+                    counters.add_counter('processed', 1)
+
+    def parse_gene_generifs_row(self, dcid, input_row):
+        """ parser for gene generifs_basic input row dict
+
+        Args:
+            dcid (_type_): dcid of GeneID
+            input_row (_type_): generifs_basic input row
+
+        Returns:
+            _type_: output row dict
+        """
+        row = deepcopy(GENE_RIFS_BASIC_DICT)
+        row['GeneID'] = f"{dcid}"
+        row['dcid'] = f"{dcid}_{input_row[2]}"
+        row['name'] = f'"{dcid.replace("bio/", "").replace("_", " ")} PubMed {input_row[2]} Reference Into Function"'
+
+        row['dateModified'] = DATETIME_MODIFY(input_row[3])
+        if len(input_row[4]) > 0:
+            ritText = input_row[4].replace('[', '(').replace(']', ')')
+            row['GeneRifText'] = f'"{ritText}"'
+        row['pubMedId'] = input_row[2]
+        return row
 
 
 def main(_):
-    """Main method
+    """ Main method
     """
     start_time = time()
     logging.info("Start format gene first script")
     global OUTPUT_FILE_PATH, SOURCE_FILE_PATH, TAX_ID_DCID_MAPPING_PATH, GENE_ID_DCID_MAPPING
     global FEATURE_TYPE_ENTRIES, UNIQUE_DBXREFS_LIST, UNIQUE_DBXREFS
-    OUTPUT_FILE_PATH, SOURCE_FILE_PATH, TAX_ID_DCID_MAPPING_PATH = set_flags(
-        _FLAGS)
     load_tax_id_dcid_mapping()
     manager = Manager()
     return_dict = manager.dict()
@@ -1316,7 +1539,7 @@ def main(_):
     ]
     for neighbors_file in gene_Neighbors_shard_files:
         neighbors_proc = Process(target=GeneNeighbors().process_csv_file,
-                                 args=(neighbors_file, ))
+                                 args=(neighbors_file,))
         procs_Neighbors.append(neighbors_proc)
         neighbors_proc.start()
 
@@ -1329,7 +1552,7 @@ def main(_):
         f for f in listdir(join(SOURCE_FILE_PATH, 'gene2go'))
     ]
     for go_file in gene_Go_shard_files:
-        go_proc = Process(target=Gene2Go().process_csv_file, args=(go_file, ))
+        go_proc = Process(target=Gene2Go().process_csv_file, args=(go_file,))
         procs_Go.append(go_proc)
         go_proc.start()
 
@@ -1343,7 +1566,7 @@ def main(_):
     ]
     for accession_file in gene_Accession_shard_files:
         accession_proc = Process(target=Gene2Accession().process_csv_file,
-                                 args=(accession_file, ))
+                                 args=(accession_file,))
         procs_Accession.append(accession_proc)
         accession_proc.start()
 
@@ -1351,19 +1574,9 @@ def main(_):
         p.join()
 
     logging.info("All gene2accession files processed")
-
-    # GenePubmed().process_csv_file()
-    # GeneNeighbors().process_csv_file()
-    # GeneOrthology().process_csv_file()
-    # GeneGroup().process_csv_file()
-    # GeneMim2gene().process_csv_file()
-    # Gene2Go().process_csv_file()
-    # Gene2Accession().process_csv_file()
-    # Gene2Ensembl().process_csv_file()
-    # GeneRifs_Basic().process_csv_file()
-
     logging.info(f"Script completed in {((time() - start_time)/60):.2f} mins")
 
 
 if __name__ == "__main__":
+    set_flags(_FLAGS)
     app.run(main)

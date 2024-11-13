@@ -45,7 +45,7 @@ class NcbiGeneTest(unittest.TestCase):
         expected_result = {
             'taxID':
                 '2010893',
-            'taxID_dcid':
+            'dcid_taxon':
                 'dcid:bio/LobeliaMildbraedii',
             'GeneID':
                 '33370007',
@@ -79,11 +79,11 @@ class NcbiGeneTest(unittest.TestCase):
                 ''
         }
 
-        row = gene.GeneInfo().parse_gene_info_row('dcid:bio/LobeliaMildbraedii',
-                                                  gene_id_dcid_mapping,
-                                                  feature_type_entries,
-                                                  unique_dbXrefs_list,
-                                                  unique_dbXrefs, input_row)
+        row = GeneInfo().parse_gene_info_row('dcid:bio/LobeliaMildbraedii',
+                                             gene_id_dcid_mapping,
+                                             feature_type_entries,
+                                             unique_dbXrefs_list,
+                                             unique_dbXrefs, input_row)
         self.assertDictEqual(row, expected_result)
 
     def test_check_gene_neighbors_parser(self):
@@ -96,7 +96,7 @@ class NcbiGeneTest(unittest.TestCase):
             'Reference PAN1.0 Primary Assembly'
         ]
         expected_result = {
-            'GeneID': 'dcid:bio/122811710',
+            'GeneID': 'bio/122811710',
             'dcid': 'bio/NC_056743.1_978179254_978360469',
             'name': '"NC_056743.1 978179254 978360469"',
             'genomic_accession.version': 'NC_056743.1',
@@ -107,8 +107,8 @@ class NcbiGeneTest(unittest.TestCase):
             'chromosome': 'chr9.part0',
             'assembly': '"Reference PAN1.0 Primary Assembly"'
         }
-        row = gene.GeneNeighbors().parse_gene_neighbors_row(
-            'bio/122811710', input_row)
+        row = GeneNeighbors().parse_gene_neighbors_row('bio/122811710',
+                                                       input_row)
         self.assertDictEqual(row, expected_result)
 
     def test_check_gene_mim2gene_parser(self):
@@ -116,7 +116,7 @@ class NcbiGeneTest(unittest.TestCase):
         """
         input_row = ['620758', '100652748', 'gene', '-', '-', '-']
         expected_result = {
-            'GeneID': 'dcid:bio/ncbi_100652748',
+            'GeneID': 'bio/ncbi_100652748',
             'MIM_number': '620758',
             'omim_dcid': 'bio/omim_620758',
             'type': 'dcs:GeneOmimRelationshipTypeGene',
@@ -126,8 +126,8 @@ class NcbiGeneTest(unittest.TestCase):
             'dcid': 'bio/ncbi_100652748_omim_620758',
             'MedGenCUI_dcid': ''
         }
-        row = gene.GeneMim2gene().parse_gene_mim2gene_row(
-            'bio/ncbi_100652748', input_row)
+        row = GeneMim2gene().parse_gene_mim2gene_row('bio/ncbi_100652748',
+                                                     input_row)
         self.assertDictEqual(row, expected_result)
 
     def test_check_gene_gene2go_parser(self):
@@ -140,7 +140,7 @@ class NcbiGeneTest(unittest.TestCase):
         ]
         expected_result = {
             'GeneID':
-                'dcid:bio/128904962',
+                'bio/128904962',
             'dcid':
                 'bio/GO_0048025',
             'GO_ID':
@@ -156,7 +156,7 @@ class NcbiGeneTest(unittest.TestCase):
             'Category':
                 'dcs:GeneOntologyCategoryBiologicalProcess'
         }
-        row = gene.Gene2Go().parse_gene_gene2go_row('bio/128904962', input_row)
+        row = Gene2Go().parse_gene_gene2go_row('bio/128904962', input_row)
         self.assertDictEqual(row, expected_result)
 
     def test_check_gene_gene2ensembl_parser(self):
@@ -167,7 +167,7 @@ class NcbiGeneTest(unittest.TestCase):
             'ENST00000651208.1', '-', '-'
         ]
         expected_result = {
-            'GeneID': 'dcid:bio/ncbi_113218477',
+            'GeneID': 'bio/ncbi_113218477',
             'Ensembl_gene_identifier': 'ENSG00000178440',
             'RNA_nucleotide_accession.version': 'NR_158657.1',
             'dcid_rna_transcript': 'bio/NR_158657.1',
@@ -176,7 +176,7 @@ class NcbiGeneTest(unittest.TestCase):
             'Ensembl_protein_identifier': ''
         }
 
-        row = gene.Gene2Ensembl().parse_gene_gene2ensembl_row(
+        row = Gene2Ensembl().parse_gene_gene2ensembl_row(
             'bio/ncbi_113218477', input_row)
         self.assertDictEqual(row, expected_result)
 
@@ -189,7 +189,7 @@ class NcbiGeneTest(unittest.TestCase):
         ]
         expected_result = {
             'GeneID':
-                'dcid:bio/ncbi_3188',
+                'bio/ncbi_3188',
             'dcid':
                 'bio/ncbi_3188_16171461',
             'name':
@@ -202,8 +202,8 @@ class NcbiGeneTest(unittest.TestCase):
                 '"the relative levels of hnRNP F and H2 in cells, as well as the target sequences in the downstream GRS on pre-mRNA, influence gene expression"'
         }
 
-        row = gene.GeneRifs_Basic().parse_gene_generifs_row(
-            'bio/ncbi_3188', input_row)
+        row = GeneRifs_Basic().parse_gene_generifs_row('bio/ncbi_3188',
+                                                       input_row)
         self.assertDictEqual(row, expected_result)
 
     def test_check_gene_gene2accession_parser(self):
@@ -215,9 +215,12 @@ class NcbiGeneTest(unittest.TestCase):
             'Alternate T2TCHM13v2.0', '', '', 'TIMM23BAGAP6'
         ]
         expected_result = {
-            'GeneID': 'dcid:bio/ncbi_113218477',
-            'dcid_rna_coordinates': 'bio/NR_158661.1_50791694_50860158',
-            'name_rna_coordinates': '"NR_158661.1 50791694 50860158"',
+            'GeneID': 'bio/ncbi_113218477',
+            'dcid_dna_coordinates': 'bio/NR_158661.1_50791694_50860158',
+            'name_dna_coordinates': '"NR_158661.1 50791694 50860158"',
+            'dcid_genomic_nucleotide': 'bio/NC_060934.1',
+            'dcid_protein': '',
+            'dcid_peptide': '',
             'dcid_rna_transcript': 'bio/NR_158661.1',
             'status': 'dcs:RefSeqStatusValidated',
             'RNA_nucleotide_accession.version': 'NR_158661.1',
@@ -234,7 +237,7 @@ class NcbiGeneTest(unittest.TestCase):
             'mature_peptide_gi': ''
         }
 
-        row = gene.Gene2Accession().parse_gene_gene2accession_row(
+        row = Gene2Accession().parse_gene_gene2accession_row(
             'bio/ncbi_113218477', input_row)
         self.assertDictEqual(row, expected_result)
 
