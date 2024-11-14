@@ -48,15 +48,15 @@ Execute the 'preprocess.py' script by using the following commands:
 
   - if you want to perform "download and process", run the below command:
 
-        `python3 preprocess.py --mode=""`
+        `python3 preprocess.py`
 
   - if you want to perform "only process", run the below command:
 
-        `python3 preprocess.py --mode="process"`
+        `python3 preprocess.py --mode=process`
         
   - if you want to perform "only download", run the below command:
 
-        `python3 preprocess.py --mode="download"`
+        `python3 preprocess.py --mode=download`
 
 ### New Implementation:
 - [Updated the script on October 29, 2024]
