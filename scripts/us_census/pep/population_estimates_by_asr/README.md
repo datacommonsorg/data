@@ -72,16 +72,16 @@ The below script will download the data, generate csv and mcf files.
 Execute the 'process.py' script by using the following commands:
 
   - if you want to perform "download and process", run the below command:
-
-        `python3 process.py --mode=""`
+      
+        `python3 process.py --mode=`
 
   - if you want to perform "only process", run the below command:
 
-        `python3 process.py --mode="process"`
+        `python3 process.py --mode=process`
         
   - if you want to perform "only download", run the below command:
 
-        `python3 process.py --mode="download"`
+        `python3 process.py --mode=download`
 
 ### New Implentation:
 - [Updated the script on October 29, 2024]
