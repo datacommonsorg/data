@@ -33,6 +33,9 @@ class ProcessTest(unittest.TestCase):
     MCF, tMCF and DC import CSV files for US Census Estimates by SRH data.
     """
 
+    if not os.path.exists("./testdata/actual_results/"):
+        os.makedirs("./testdata/actual_results/")
+
     def test_Mcf(self):
         """
         This method runs generate_mcf method, which generates MCF files for
