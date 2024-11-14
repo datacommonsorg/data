@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import sys
 module_dir_ = os.path.dirname(__file__)
 sys.path.insert(0, module_dir_)
 from preprocess import process
+from preprocess import add_future_year_urls
 
 expected_data_folder = os.path.join(module_dir_,
                                     "test_data/expected_output_files")
@@ -40,7 +41,7 @@ class TestPreprocess(unittest.TestCase):
     config_files = []
     for file in ip_files:
         config_files.append(ip_config_files + os.sep + file)
-
+    add_future_year_urls()
     process(config_files, test=True)
 
     def test_mcf_tmcf_files(self):
