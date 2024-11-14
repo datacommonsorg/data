@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,13 @@ import os
 import pandas as pd
 import numpy as np
 
+import requests
+import shutil
+import time
+import json
+from datetime import datetime as dt
+from absl import logging
+
 from absl import app
 from absl import flags
 from national_1900_1959 import national1900
@@ -27,20 +34,50 @@ from national_1980_1989 import national1980
 from national_2000_2010 import national2000
 from national_2010_2019 import national2010
 from national_2020_2021 import national2020
+from national_2020_2023 import national2023
 from state_1970_1979 import state1970
 from state_1990_2000 import state1990
 from state_2000_2010 import state2000
 from state_2010_2020 import state2010
+from state_2020_2023 import state2020
 from county_1970_1979 import county1970
 from county_1980_1989 import county1980
 from county_1990_2000 import county1990
 from county_2000_2010 import county2000
 from county_2010_2020 import county2010
+from county_2020_2023 import county2020
 
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_data")
+flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH, "Import Data File's List")
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+_FILES_TO_DOWNLOAD = None
+
+
+def add_future_year_urls():
+    global _FILES_TO_DOWNLOAD
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
+        _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    urls_to_scan = [
+        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv",
+        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/national/asrh/nc-est{YEAR}-agesex-res.csv",
+        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/asrh/sc-est{YEAR}-alldata6.csv"
+    ]
+    if dt.now().year > 2023:
+        YEAR = dt.now().year
+        for url in urls_to_scan:
+            url_to_check = url.format(YEAR=YEAR)
+            try:
+                check_url = requests.head(url_to_check)
+                if check_url.status_code == 200:
+                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+
+            except:
+                logging.fatal(f"URL is not accessable {url_to_check}")
+
 
 MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
                 "typeOf: dcs:StatisticalVariable\n"
@@ -203,51 +240,107 @@ class USCensusPEPByASR:
         output_path = os.path.dirname(self._cleaned_csv_file_path)
         if not os.path.exists(output_path):
             os.mkdir(output_path)
+        processed_count = 0
+        total_files_to_process = len(self._input_files)
+        if total_files_to_process is None:
+            logging.fatal(
+                f"No input files found in the directory: {self._input_files}")
+        logging.info(f"Number of files to be processed {len(self._input_files)}")
         sv_list = []
         # data_df is used to read every single file which has been generated.
         # final_df concatenates all these files.
+        expected_columns = ['geo_ID','Year','observation','Measurement_Method','SVs']
         for file_path in self._input_files:
+            logging.info(f"Processing --- {file_path}")
             data_df = pd.read_csv(file_path)
-            final_df = pd.concat([final_df, data_df])
-            sv_list += data_df["SVs"].to_list()
-        # Drop the unwanted columns and NA.
-        final_df.drop(columns=['Unnamed: 0'], inplace=True)
-        final_df = final_df.dropna()
-        final_df['Year'] = final_df['Year'].astype(float).astype(int)
-        final_df = final_df.sort_values(by=['Year', 'geo_ID'])
-        final_df = _measurement_method(final_df)
-        final_df.to_csv(self._cleaned_csv_file_path, index=False)
-        sv_list = list(set(sv_list))
-        sv_list.sort()
-        self._generate_mcf(sv_list)
-        self._generate_tmcf()
+            for column in expected_columns:
+                if column not in data_df.columns:
+                    logging.fatal(f"Error: {file_path} is missing column {column}")
+            if not data_df.empty:
+                processed_count += 1
+                final_df = pd.concat([final_df, data_df])
+                # final_df.to_csv("final_csv.csv")
+                sv_list += data_df["SVs"].to_list()
+            else:
+                logging.fatal(f"Failed to process {file_path}")
+
+        logging.info(f"Number of files processed {processed_count}")
+        # After processing all files, ensure all files were processed
+        if processed_count == total_files_to_process & total_files_to_process > 0:
+            # Drop the unwanted columns and NA.
+            logging.info(f"Dropping unwanted columns and NA")
+            final_df.drop(columns=['Unnamed: 0'], inplace=True)
+            final_df = final_df.dropna()
+            final_df['Year'] = final_df['Year'].astype(float).astype(int)
+            final_df = final_df.sort_values(by=['Year', 'geo_ID'])
+            final_df = _measurement_method(final_df)
+            #To remove inconsistent value issue'Count_Person_0Years_Male', observationDate: '2020', value1: 1891716.0, value2: 1876349.0
+            final_df = final_df.drop_duplicates(
+                subset=['geo_ID', 'Year', 'Measurement_Method', 'SVs'],
+                keep='last')
+            final_df.to_csv(self._cleaned_csv_file_path, index=False)
+            sv_list = list(set(sv_list))
+            sv_list.sort()
+            logging.info(f"----Generating MCF and TMCF----")
+            self._generate_mcf(sv_list)
+            self._generate_tmcf()
+        else:
+            logging.fatal(
+                "File processing mismatch: Expected {total_files_to_process} files, but processed {files_processed}. Output file generation aborted"
+            )
 
 
-def main(_):
-    input_path = FLAGS.input_path
-    if not os.path.exists(input_path):
-        os.mkdir(input_path)
-    # Running the fuctions in individual files by Year and Area.
+def download_files():
+    """
+    This method calls the download functions for state, county and country for each year
+    Returns:
+    True if there was no errors
+    """
     national_url_file = "national.json"
     state_url_file = "state.json"
     county_url_file = "county.json"
     output_folder = "input_data"
-    national1900(output_folder)
-    national1960(output_folder)
-    national1980(national_url_file, output_folder)
-    national2000(national_url_file, output_folder)
-    national2010(national_url_file, output_folder)
-    national2020(national_url_file, output_folder)
-    state1970(state_url_file, output_folder)
-    state1990(state_url_file, output_folder)
-    state2000(state_url_file, output_folder)
-    state2010(state_url_file, output_folder)
-    county1970(county_url_file, output_folder)
-    county1980(county_url_file, output_folder)
-    county1990(output_folder)
-    county2000(output_folder)
-    county2010(county_url_file, output_folder)
+    try:
+        add_future_year_urls()
+        national1900(output_folder)
+        national1960(output_folder)
+        national1980(national_url_file, output_folder)
+        national2000(national_url_file, output_folder)
+        national2010(national_url_file, output_folder)
+        national2020(national_url_file, output_folder)
 
+        state1970(state_url_file, output_folder)
+        state1990(state_url_file, output_folder)
+        state2000(state_url_file, output_folder)
+        state2010(state_url_file, output_folder)
+
+        county1970(county_url_file, output_folder)
+        county1980(county_url_file, output_folder)
+        county1990(output_folder)
+        county2000(output_folder)
+        county2010(county_url_file, output_folder)
+
+
+        global _FILES_TO_DOWNLOAD
+        for file in _FILES_TO_DOWNLOAD:
+            #file_name_to_save = None
+            url = file['download_path']
+            if 'national' in url:
+                national2023(url, output_folder)
+            if 'state' in url:
+                state2020(url, output_folder)
+            if 'counties' in url:
+                county2020(url, output_folder)
+    except Exception as e:
+        logging.fatal(f"Error while downloading : {e}")
+    return True
+
+
+def main(_):
+    mode = FLAGS.mode
+    input_path = FLAGS.input_path
+    if not os.path.exists(input_path):
+        os.mkdir(input_path)
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
     data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -256,8 +349,16 @@ def main(_):
     cleaned_csv_path = os.path.join(data_file_path, "usa_population_asr.csv")
     mcf_path = os.path.join(data_file_path, "usa_population_asr.mcf")
     tmcf_path = os.path.join(data_file_path, "usa_population_asr.tmcf")
-    loader = USCensusPEPByASR(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
-    loader.process()
+    # Running the fuctions in individual files by Year and Area
+    download_status = True
+    if mode == "" or mode == "download":
+        # download & process
+        add_future_year_urls()
+        download_status = download_files()
+    if download_status and (mode == "" or mode == "process"):
+        loader = USCensusPEPByASR(ip_files, cleaned_csv_path, mcf_path,
+                                  tmcf_path)
+        loader.process()
 
 
 if __name__ == "__main__":

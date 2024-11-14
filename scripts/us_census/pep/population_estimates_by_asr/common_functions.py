@@ -93,7 +93,8 @@ def gender_based_grouping(df: pd.DataFrame):
     df['SVs'] = df['SVs'].str.replace\
         ('_NativeHawaiianAndOtherPacificIslanderAlone', '')
     df['SVs'] = df['SVs'].str.replace('_TwoOrMoreRaces', '')
-    df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    print("df aggregation-----",df)
+    df = df.groupby(['Year', 'geo_ID', 'SVs','Measurement_Method']).sum().reset_index()
     return df
 
 
@@ -103,5 +104,8 @@ def race_based_grouping(df: pd.DataFrame):
     """
     df['SVs'] = df['SVs'].str.replace('_Male', '')
     df['SVs'] = df['SVs'].str.replace('_Female', '')
-    df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    print("df in cmnfunc-1--------",df)
+    # df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    df = df.groupby(['Year', 'geo_ID', 'SVs','Measurement_Method']).sum().reset_index()
+    print("df in cmnfunc-2--------",df)
     return df

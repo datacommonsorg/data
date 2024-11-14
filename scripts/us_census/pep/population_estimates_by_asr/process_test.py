@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,6 +51,7 @@ class TestPreprocess(unittest.TestCase):
     state_url_file = "test_data/test_input_data/state_test.json"
     county_url_file = "test_data/test_input_data/county_test.json"
     output_folder = "test_temp_files"
+    print("creating test files....")
     national2020(national_url_file, output_folder)
     national2010(national_url_file, output_folder)
     national2000(national_url_file, output_folder)
@@ -74,7 +75,7 @@ class TestPreprocess(unittest.TestCase):
     base = USCensusPEPByASR(ip_data, cleaned_csv_file_path, mcf_file_path,
                             tmcf_file_path)
     base.process()
-    shutil.rmtree(input_path, ignore_errors=True)
+    # shutil.rmtree(input_path, ignore_errors=True)
 
     def test_mcf_tmcf_files(self):
         """
@@ -100,11 +101,6 @@ class TestPreprocess(unittest.TestCase):
 
         with open(self.tmcf_file_path, encoding="UTF-8") as tmcf_file:
             tmcf_data = tmcf_file.read()
-        if path.exists(self.mcf_file_path):
-            os.remove(self.mcf_file_path)
-        if path.exists(self.tmcf_file_path):
-            os.remove(self.tmcf_file_path)
-
         self.assertEqual(expected_mcf_data.strip(), mcf_data.strip())
         self.assertEqual(expected_tmcf_data.strip(), tmcf_data.strip())
 
@@ -123,7 +119,9 @@ class TestPreprocess(unittest.TestCase):
 
         with open(self.cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
             csv_data = csv_file.read()
-        if path.exists(self.cleaned_csv_file_path):
-            os.remove(self.cleaned_csv_file_path)
 
         self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+
+
+if __name__ == '__main__':
+    unittest.main()
