@@ -13,8 +13,8 @@
 # limitations under the License.
 """
 This script generate output CSV
-for State 2010-2020 and the file
-is processed as is.
+for national 2010-2020 and it is aggregated
+from state 2010-2020 file.
 """
 
 import pandas as pd
@@ -23,30 +23,29 @@ import os
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def process_state_2010_2020(url: str) -> pd.DataFrame:
+def process_national_2020_2022(url: str) -> pd.DataFrame:
     """
     Function Loads input csv datasets
-    from 2010-2020 on a State Level,
+    from 2010-2020 on a National Level,
     cleans it and return cleaned dataframe.
 
     Args:
         url (str) : url of the dataset
 
     Returns:
-        df.columns (pd.DataFrame) : Coulumn names of cleaned dataframe
+        df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
     # reading input file to dataframe
     df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
-    df.to_csv(_CODEDIR + "/../input_files/" + 'state_result_2010_2020.csv',
+    df.to_csv(_CODEDIR + "/../input_files/" + 'nationals_result_2020_2022.csv',
               index=False)
     # years having 1 and 2 value are not requried as estimate is for April Month
     # agegrp is only required as it gives total of all ages
-    df = df.query("YEAR not in [1, 2]")
+    df = df.query("YEAR not in [1]")
     df = df.query("AGEGRP == 0")
 
-    # year starting from 3 so need to convert it to 2010s
-    # df['YEAR'] = df['YEAR'] + 2010 - 3
-    df.loc[:, 'YEAR'] = df.loc[:, 'YEAR'] + 2010 - 3
+    # year indices starting from 3 so need to convert it to 2010s
+    df.loc[:, 'YEAR'] = df.loc[:, 'YEAR'] + 2020 - 2
 
     # add fips code for location
     df.loc[:,
@@ -119,7 +118,14 @@ def process_state_2010_2020(url: str) -> pd.DataFrame:
         'Count_Person_Female_NativeHawaiianAndOtherPacificIslanderAlone'+\
             'OrInCombinationWithOneOrMoreOtherRaces']
 
+    df.drop(columns=['geo_ID'], inplace=True)
+
+    df = df.groupby(['Year']).sum().reset_index()
+
+    # inserting geoid in columns
+    df.insert(0, 'geo_ID', 'country/USA', True)
+
     df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
-              'state_result_2010_2020.csv',
+              'nationals_result_2020_2022.csv',
               index=False)
     return df.columns

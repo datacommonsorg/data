@@ -23,7 +23,7 @@ import os
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def process_state_2010_2020(url: str) -> pd.DataFrame:
+def process_state_2020_2022(url: str) -> pd.DataFrame:
     """
     Function Loads input csv datasets
     from 2010-2020 on a State Level,
@@ -37,16 +37,16 @@ def process_state_2010_2020(url: str) -> pd.DataFrame:
     """
     # reading input file to dataframe
     df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
-    df.to_csv(_CODEDIR + "/../input_files/" + 'state_result_2010_2020.csv',
+    df.to_csv(_CODEDIR + "/../input_files/" + 'state_result_2020_2022.csv',
               index=False)
     # years having 1 and 2 value are not requried as estimate is for April Month
     # agegrp is only required as it gives total of all ages
-    df = df.query("YEAR not in [1, 2]")
+    df = df.query("YEAR not in [1]")
     df = df.query("AGEGRP == 0")
 
-    # year starting from 3 so need to convert it to 2010s
+    # year starting from 2 so need to convert it to 2020s
     # df['YEAR'] = df['YEAR'] + 2010 - 3
-    df.loc[:, 'YEAR'] = df.loc[:, 'YEAR'] + 2010 - 3
+    df.loc[:, 'YEAR'] = df.loc[:, 'YEAR'] + 2020 - 2
 
     # add fips code for location
     df.loc[:,
@@ -120,6 +120,6 @@ def process_state_2010_2020(url: str) -> pd.DataFrame:
             'OrInCombinationWithOneOrMoreOtherRaces']
 
     df.to_csv(_CODEDIR + "/../output_files/intermediate/" +
-              'state_result_2010_2020.csv',
+              'state_result_2020_2022.csv',
               index=False)
     return df.columns
