@@ -10,7 +10,7 @@
                 "template_mcf": "demo_r_mlifexp.tmcf",
                 "cleaned_csv": "demo_r_mlifexp_cleaned.csv"
             }],
-        "cron_schedule": "00 01 * * 2"
+        "cron_schedule": "00 05 * * 2"
         }
     ]
 }

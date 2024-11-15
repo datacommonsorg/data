@@ -10,7 +10,7 @@
                 "template_mcf": "eurostat_gdp.tmcf",
                 "cleaned_csv": "eurostat_gdp.csv"
             }],
-        "cron_schedule": "30 12 * * 2"
+        "cron_schedule": "30 04 * * 2"
         }
     ]
 }

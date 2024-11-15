@@ -10,7 +10,7 @@
                 "template_mcf": "Eurostats_NUTS3_FRate_Age.tmcf",
                 "cleaned_csv": "Eurostats_NUTS3_FRate_Age.csv"
             }],
-        "cron_schedule": "00 12 * * 2"
+        "cron_schedule": "00 04 * * 2"
         }
     ]
 }

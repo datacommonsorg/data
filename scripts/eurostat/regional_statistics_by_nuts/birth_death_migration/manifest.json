@@ -10,8 +10,9 @@
                 "template_mcf": "EurostatNUTS3_BirthDeathMigration.tmcf",
                 "cleaned_csv": "EurostatNUTS3_BirthDeathMigration.csv"
             }],
-        "cron_schedule": "0 10 * * 2"
+        "cron_schedule": "00 02 * * 2"
         }
     ]
 }
+
 
