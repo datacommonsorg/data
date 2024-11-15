@@ -37,7 +37,6 @@ sys.path.insert(1, _COMMON_PATH)
 import warnings
 
 warnings.filterwarnings('ignore')
-#warnings.simplefilter(action='ignore', category=FutureWarning)
 
 import pandas as pd
 from absl import app
@@ -874,10 +873,6 @@ class CensusUSAPopulationByRace:
                 df = _clean_xls_file(df, file)
         elif ".csv" in file:
             if "srh" in file:
-                # csv_data = []
-                # with open(file, 'r') as csv_file:
-                #     for line in csv_file:
-                #         digit_cnt = 0
                 df = pd.read_csv(file)
                 df["Year"] = "19" + file[-6:-4]
                 df = _clean_csv2_file(df, file)
@@ -900,8 +895,7 @@ class CensusUSAPopulationByRace:
                     df['geo_ID'].map(str)).str[:len('geoId/NN')]
                 df_state = df_state.groupby(['Year', 'geo_ID']).sum().\
                     reset_index()
-                df = pd.concat([df, df_state], ignore_index=True)
-                df = pd.concat([df, df_national], ignore_index=True)
+                df = pd.concat([df, df_state, df_national], ignore_index=True)
                 float_col = df.select_dtypes(include=['float64'])
                 for col in float_col.columns.values:
                     df[col] = df[col].astype('int64')
@@ -1193,13 +1187,13 @@ class CensusUSAPopulationByRace:
 # The outputs are loaded into
 
 
-def _resolve_pe_11(file_name: str, _url: str) -> pd.DataFrame:
+def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
     """
     This method cleans the dataframe loaded from a csv file format.
 
     Arguments:
         file_name (str) : File name of csv dataset
-        _url: str : Refers to file URL
+        url: str : Refers to file URL
 
 
     Returns:
@@ -1208,7 +1202,7 @@ def _resolve_pe_11(file_name: str, _url: str) -> pd.DataFrame:
     year = file_name[-8:-4]
     if int(year) < 1960:
         cols = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        df = pd.read_csv(_url, names=cols)
+        df = pd.read_csv(url, names=cols)
         df = df[df["0"].str.contains("All ages", na=False)]
         df['Year'] = year
         df['Geographic Area'] = "United States"
@@ -1216,14 +1210,14 @@ def _resolve_pe_11(file_name: str, _url: str) -> pd.DataFrame:
         cols = [
             "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"
         ]
-        df = pd.read_csv(_url, names=cols, skiprows=2)
+        df = pd.read_csv(url, names=cols, skiprows=2)
         df = df[df["0"].str.contains("All ages", na=False)]
         df['Year'] = year
         df['Geographic Area'] = "United States"
     return df
 
 
-def add_future_year_urls():
+def add_future_yearurls():
     """
     This method scans the download URLs for future years.
 
@@ -1241,8 +1235,8 @@ def add_future_year_urls():
             for url in urls_to_scan:
                 url_to_check = url.format(YEAR=YEAR)
                 try:
-                    check_url = requests.head(url_to_check)
-                    if check_url.status_code == 200:
+                    checkurl = requests.head(url_to_check)
+                    if checkurl.status_code == 200:
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
 
@@ -1262,85 +1256,87 @@ def download_files():
     for file_to_dowload in _FILES_TO_DOWNLOAD:
         file_name = None
         download_local_path = _INPUT_FILE_PATH
-        _url = file_to_dowload['download_path']
+        url = file_to_dowload['download_path']
         if 'file_name' in file_to_dowload and len(
                 file_to_dowload['file_name'] > 5):
             file_name = file_to_dowload['file_name']
         else:
-            file_name = _url.split('/')[-1]
+            file_name = url.split('/')[-1]
         retry_number = 0
 
         is_file_downloaded = False
         while is_file_downloaded == False:
             try:
-                if ".csv" in _url:
-                    if "st-est" in _url or 'SC-EST' in _url:
+                if ".csv" in url:
+                    if "st-est" in url or 'SC-EST' in url:
                         file_name = file_name.replace(".csv", ".xlsx")
-                        df = pd.read_csv(_url, on_bad_lines='skip', header=0)
+                        df = pd.read_csv(url, on_bad_lines='skip', header=0)
                         df.to_excel(download_local_path + os.sep + file_name\
                             ,index=False,engine='xlsxwriter')
-                    elif "pe-11" in _url:
-                        df = _resolve_pe_11(file_name, _url)
+                    elif "pe-11" in url:
+                        df = _resolve_pe_11(file_name, url)
                         df.to_csv(download_local_path + os.sep + file_name,
                                   index=False)
-                    elif "pe-19" in _url:
+                    elif "pe-19" in url:
                         file_name = file_name.replace(".csv", ".xlsx")
-                        df = pd.read_csv(_url,
+                        df = pd.read_csv(url,
                                          skiprows=5,
                                          on_bad_lines='skip',
                                          header=0)
                         df.to_excel(download_local_path + os.sep + file_name\
                             ,index=False,engine='xlsxwriter')
-                    elif "co-asr-7079" in _url or "pe-02" in _url:
+                    elif "co-asr-7079" in url or "pe-02" in url:
                         file_name = file_name.replace(".csv", ".xlsx")
                         cols=['Year','FIPS','Race/Sex',1,2,3,4,5,6,7,8,9,10,11,12,\
                             13,14,15,16,17,18]
-                        if "pe-02" in _url:
-                            df = pd.read_csv(_url, skiprows=7, on_bad_lines='skip', \
+                        if "pe-02" in url:
+                            df = pd.read_csv(url, skiprows=7, on_bad_lines='skip', \
                                 names=cols)
                         else:
-                            df = pd.read_csv(_url,
+                            df = pd.read_csv(url,
                                              on_bad_lines='skip',
                                              names=cols)
                         df.to_excel(download_local_path + os.sep + file_name,\
                             index=False,engine='xlsxwriter')
-                    elif "co-est00int-alldata" in _url or "CC-EST2020-ALLDATA" in _url or "cc-est2022-all":
-                        df = pd.read_csv(_url,
+                    elif "co-est00int-alldata" in url or "CC-EST2020-ALLDATA" in url or "cc-est2022-all" in url:
+                        df = pd.read_csv(url,
                                          on_bad_lines='skip',
                                          encoding='ISO-8859-1',
                                          low_memory=False)
                         df.to_csv(download_local_path + os.sep + file_name,
                                   index=False)
 
-                elif ".txt" in _url and "srh" in _url:
-                    if "crh" in _url:
+                elif ".txt" in url and "srh" in url:
+                    if "crh" in url:
                         file_name = file_name.replace("crh", "USCounty")
-                        df = pd.read_table(_url,
+                        df = pd.read_table(url,
                                            index_col=False,
                                            engine='python')
                         df.to_csv(download_local_path + os.sep + file_name,
                                   index=False)
                     else:
                         cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                        df = pd.read_table(_url,index_col=False,delim_whitespace=True\
+                        df = pd.read_table(url,index_col=False,delim_whitespace=True\
                             ,engine='python',skiprows=14,names=cols)
                         file_name = file_name.replace(".txt", ".csv")
                         df.to_csv(download_local_path + os.sep + file_name,
                                   index=False)
 
-                elif "xlsx" in _url:
-                    df = pd.read_excel(_url, skiprows=2, header=0)
+                elif "xlsx" in url:
+                    df = pd.read_excel(url, skiprows=2, header=0)
                     df.to_excel(download_local_path + os.sep + file_name\
                         ,index=False,header=False,engine='xlsxwriter')
-                logging.info(f"Downloaded file : {_url}")
+                else:
+                    logging.error(f'Unknown file - {url}')
+                logging.info(f"Downloaded file : {url}")
                 is_file_downloaded = True
 
             except Exception as e:
-                logging.error(f"Retry file download {_url} - {e}")
+                logging.error(f"Retry file download {url} - {e}")
                 time.sleep(5)
                 retry_number += 1
                 if retry_number > max_retry:
-                    logging.fatal(f"Error downloading URL- {_url} -{e}")
+                    logging.fatal(f"Error downloading URL- {url} -{e}")
 
     return True
 
@@ -1361,7 +1357,7 @@ def main(_):
 
     if mode == "" or mode == "download":
         # download & process
-        add_future_year_urls()
+        add_future_yearurls()
         download_files()
     if mode == "" or mode == "process":
         loader = CensusUSAPopulationByRace(input_path, output_path, mcf_path,
