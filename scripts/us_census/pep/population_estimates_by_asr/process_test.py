@@ -51,7 +51,6 @@ class TestPreprocess(unittest.TestCase):
     state_url_file = "test_data/test_input_data/state_test.json"
     county_url_file = "test_data/test_input_data/county_test.json"
     output_folder = "test_temp_files"
-    print("creating test files....")
     national2020(national_url_file, output_folder)
     national2010(national_url_file, output_folder)
     national2000(national_url_file, output_folder)
@@ -75,7 +74,6 @@ class TestPreprocess(unittest.TestCase):
     base = USCensusPEPByASR(ip_data, cleaned_csv_file_path, mcf_file_path,
                             tmcf_file_path)
     base.process()
-    # shutil.rmtree(input_path, ignore_errors=True)
 
     def test_mcf_tmcf_files(self):
         """
