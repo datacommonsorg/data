@@ -184,7 +184,6 @@ def _national_1990_2000(file_path: str) -> pd.DataFrame:
                 (df["Year"].str.startswith("July"))].reset_index(drop=True)
         df["Year"] = df["Year"].str.replace("July 1, ", "")
         # dropping unwanted columns
-        #print("----->", df.columns)
         df = df.drop(columns=['Age'])
         df.insert(0, 'geo_ID', 'country/USA', True)
         float_col = df.select_dtypes(include=['float64'])
@@ -749,9 +748,6 @@ def _state_2023(file_path: str) -> pd.DataFrame:
                 'July2020Male': 'Count_Person_Male',
                 'July2020Female': 'Count_Person_Female'
             })
-        # df_2020['Year'] = '2020'
-        # df_2020['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
-        # print("df_2020", df_2020)
 
         df_2021 = df[['Age', 'geo_ID', 'July2021Male', 'July2021Female']].copy()
         df_2021 = df_2021.rename(
@@ -783,13 +779,6 @@ def _state_2023(file_path: str) -> pd.DataFrame:
         df_2023[
             'Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
 
-        # df = df.drop(columns=[
-        #     'Age', 'April2020Total', 'April2020Male', 'April2020Female', 'July2020Total',
-        #     'July2020Male', 'July2020Female', 'July2021Total', 'July2021Male', 'July2021Female',
-        #     'July2022Total', 'July2022Male', 'July2022Female', '2023Total'
-        # ])
-        # df['Year'] = '2023'
-        # df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
 
         final_df = pd.concat([df_2021, df_2022, df_2023], ignore_index=True)
         return final_df

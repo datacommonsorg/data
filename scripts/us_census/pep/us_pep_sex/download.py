@@ -15,6 +15,7 @@
 This Python Script downloads the US PEP files, into the input_files folder to be 
 made available for further processing.
 """
+import logging
 import os
 import urllib.request
 
@@ -41,11 +42,11 @@ def download_files() -> None:
     for file in input_urls:
         f = file.split("/")
         file_name = f[-1].replace("\n", "")
-        print(file, file_name)
+        logging.info(file, file_name)
         try:
             urllib.request.urlretrieve(file, file_name)
         except Exception as e:
-            print(e)
+            logging.fatal(f"Error downloading the file:{file_name}:{e}")
 
 
 if __name__ == '__main__':
