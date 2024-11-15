@@ -245,17 +245,21 @@ class USCensusPEPByASR:
         if total_files_to_process is None:
             logging.fatal(
                 f"No input files found in the directory: {self._input_files}")
-        logging.info(f"Number of files to be processed {len(self._input_files)}")
+        logging.info(
+            f"Number of files to be processed {len(self._input_files)}")
         sv_list = []
         # data_df is used to read every single file which has been generated.
         # final_df concatenates all these files.
-        expected_columns = ['geo_ID','Year','observation','Measurement_Method','SVs']
+        expected_columns = [
+            'geo_ID', 'Year', 'observation', 'Measurement_Method', 'SVs'
+        ]
         for file_path in self._input_files:
             logging.info(f"Processing --- {file_path}")
             data_df = pd.read_csv(file_path)
             for column in expected_columns:
                 if column not in data_df.columns:
-                    logging.fatal(f"Error: {file_path} is missing column {column}")
+                    logging.fatal(
+                        f"Error: {file_path} is missing column {column}")
             if not data_df.empty:
                 processed_count += 1
                 final_df = pd.concat([final_df, data_df])
@@ -319,7 +323,6 @@ def download_files():
         county1990(output_folder)
         county2000(output_folder)
         county2010(county_url_file, output_folder)
-
 
         global _FILES_TO_DOWNLOAD
         for file in _FILES_TO_DOWNLOAD:

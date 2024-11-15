@@ -42,6 +42,7 @@ def national1960(output_folder: str):
             skipfooter=15)
         df['Age'] = df['Age'].astype(str)
         df['Age'] = df['Age'].str.replace("85\\+", "85OrMore")
+        df['Age'] = df['Age'].str.replace("85+", "85OrMore")
         df['Age'] = df['Age'] + 'Years'
         # Dropping unwanted columns Total (0) and Other Races (9-11)
         df.drop(columns=['0', '9', '10', '11'], inplace=True)
@@ -72,6 +73,8 @@ def national1960(output_folder: str):
         # Removing numeric thousand separator from the values.
         df['observation'] = df['observation'].str.replace(",", "")
         # Writting the data to final dataframe
+        # print("df1----------",df)
+        # print("final_df----------",final_df)
         final_df = pd.concat([final_df, df])
     # Writing the dataframe to output csv.
     final_df.to_csv(

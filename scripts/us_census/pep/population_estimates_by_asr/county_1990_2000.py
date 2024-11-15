@@ -85,21 +85,33 @@ def county1990(output_folder: str):
 
     # Creating geoId.
     final_df['geo_ID'] = 'geoId/' + final_df['geo_ID'].astype("str")
+    #print("final df 1- cnty--------", final_df)
     final_df = final_df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    #print("final df 2 cnty---------", final_df)
     # Adding measurement method.
     final_df['Measurement_Method'] = np.where(final_df['SVs'].str.contains\
         ('White'), 'dcAggregate/CensusPEPSurvey', 'CensusPEPSurvey')
+    #print("final df 3 cnty---------", final_df)
     # Making copies and using group by to get Aggregated Values.
     df_as = pd.concat([final_df, df_as])
     df_ar = pd.concat([df_ar, final_df])
+    #print("df as cnty before- grp by--------", df_as)
+    #print("df ar cnty bfr grp by---------", df_ar)
     # DF sent to an external function for aggregation based on gender.
+    # df_as.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     df_as = gender_based_grouping(df_as)
-    df_as.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
+    #print("df as 1 cnty---------", df_as)
+    # df_as.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True) #org
+    #print("df as 2 cnty---------", df_as)
     # DF sent to an external function for aggregation based on race.
+    # df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     df_ar = race_based_grouping(df_ar)
-    df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
+    #print("df ar cnty 1---------", df_ar)
+    # df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True) #org
+    #print("df ar cnty 2--------", df_ar)
     final_df = pd.concat([final_df, df_ar, df_as])
 
+    #print("final df ffff cnty---------", final_df)
     # Writing to output csv.
     final_df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,

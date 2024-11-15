@@ -101,7 +101,7 @@ def gender_based_grouping(df: pd.DataFrame):
 def race_based_grouping(df: pd.DataFrame):
     """
     Aggregates the columns based on race by removing gender from SV
-    """ 
+    """
     df['SVs'] = df['SVs'].str.replace('_Male', '')
     df['SVs'] = df['SVs'].str.replace('_Female', '')
     # df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()

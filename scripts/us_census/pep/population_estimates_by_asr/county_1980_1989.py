@@ -61,14 +61,14 @@ def county1980(url_file: str, output_folder: str):
     df.drop(columns=['Race', 'sv'], inplace=True)
     # Generating Aggregated Data by using Group by on rows.
     df_as = pd.concat([df_as, df])
-    df_ar = pd.concat([df_ar, df])
-    df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
+    df_as.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     # DF sent to an external function for aggregation based on gender.
     df_as = gender_based_grouping(df_as)
-    df_as.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
+    df_ar = pd.concat([df_ar, df])
+    # df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
+    df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     # DF sent to an external function for aggregation based on race.
     df_ar = race_based_grouping(df_ar)
-    df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     df = pd.concat([df_as, df_ar, df])
     df['geo_ID'] = 'geoId/' + df['geo_ID'].astype(str)
     final_df = df[~df.SVs.str.contains('OtherRaces')]

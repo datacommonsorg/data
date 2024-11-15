@@ -19,19 +19,21 @@ import pandas as pd
 from common_functions import input_url
 
 
-def national2020(url_file: str, output_folder: str):
+def national2023(url_file: str, output_folder: str):
     '''
     This Python Script Loads csv datasets from 2010-2019 on a National Level,
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
-    _url = input_url(url_file, "2020-21")
-    df = pd.read_csv(_url, header=0)
+    # _url = input_url(url_file, "2020-23")
+    df = pd.read_csv(url_file, header=0)
     df.drop(df[(df['SEX'] == 0) | (df['AGE'] == 999)].index, inplace=True)
     df = df.replace({'SEX': {2: 'Female', 1: 'Male'}})
     df.rename(columns={
         'POPESTIMATE2020': '2020',
-        'POPESTIMATE2021': '2021'
+        'POPESTIMATE2021': '2021',
+        'POPESTIMATE2022': '2022',
+        'POPESTIMATE2023': '2023'
     },
               inplace=True)
     df['SVs'] = "Count_Person_" + df['AGE'].astype(str) + "Years_" + df['SEX']
@@ -42,4 +44,4 @@ def national2020(url_file: str, output_folder: str):
 
     df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
-                     'national_2020_2021.csv'))
+                     'national_2020_2023.csv'))
