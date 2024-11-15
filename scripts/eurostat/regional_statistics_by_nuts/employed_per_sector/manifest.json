@@ -10,7 +10,7 @@
                 "template_mcf": "Eurostats_NUTS3_Empers.tmcf",
                 "cleaned_csv": "Eurostats_NUTS3_Empers.csv"
             }],
-        "cron_schedule": "0 10 * * 2"
+        "cron_schedule": "30 11 * * 2"
         }
     ]
 }
