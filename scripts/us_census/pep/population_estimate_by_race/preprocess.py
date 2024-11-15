@@ -1009,22 +1009,14 @@ class CensusUSAPopulationByRace:
             df_national_state_2000 = self.df[(self.df["Year"] >= 2000) & (
                 (self.df["geo_ID"].str.len() <= 9) |
                 (self.df["geo_ID"] == "country/USA"))]
-            df_before_2000 = df_before_2000.drop_duplicates(
-                subset=['geo_ID', 'Year'], keep='last')
             df_before_2000.to_csv(os.path.join(
                 self.cleaned_csv_file_path,
                 "USA_Population_Count_by_Race_before_2000.csv"),
                                   index=False)
-            #Added to resolve 2020 inconsistent data remove
-            df_county_after_2000 = df_county_after_2000.drop_duplicates(
-                subset=['geo_ID', 'Year'], keep='last')
             df_county_after_2000.to_csv(os.path.join(
                 self.cleaned_csv_file_path,
                 "USA_Population_Count_by_Race_county_after_2000.csv"),
                                         index=False)
-            #Added to resolve 2020 inconsistent data remove
-            df_national_state_2000 = df_national_state_2000.drop_duplicates(
-                subset=['geo_ID', 'Year'], keep='last')
             df_national_state_2000.to_csv(os.path.join(
                 self.cleaned_csv_file_path,
                 "USA_Population_Count_by_Race_National_state_2000.csv"),
