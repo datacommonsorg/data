@@ -1304,6 +1304,8 @@ def download_files():
                                          low_memory=False)
                         df.to_csv(download_local_path + os.sep + file_name,
                                   index=False)
+                    else:
+                        logging.fatal(f'Unknown csv file: {url}')
 
                 elif ".txt" in url and "srh" in url:
                     if "crh" in url:
