@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -309,7 +309,7 @@ class CensusUSACountryPopulation:
                     pass
             self._df.to_csv(self._cleaned_csv_file_path, index=False)
         except Exception as e:
-            logging.error(f'Error when processing file: {file}: {e}')
+            logging.fatal(f'Error when processing file:-{e}')
             return False
         return True
 
@@ -415,7 +415,7 @@ class CensusUSACountryPopulation:
             if result:
                 processed_count += 1
             else:
-                logging.error(f'Failed to process {file}')
+                logging.fatal(f'Failed to process {file}')
         logging.info(f"No of files processed {processed_count}")
         if processed_count == total_files_to_process & total_files_to_process > 0:
             self._generate_mcf(self._df.columns)
@@ -427,6 +427,9 @@ class CensusUSACountryPopulation:
 
 
 def add_future_year_urls():
+    """
+    This method scans the download URLs for future years.
+    """
     global _FILES_TO_DOWNLOAD
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
@@ -564,6 +567,9 @@ def _concat_cols(col: pd.Series) -> pd.Series:
 
 
 def download_files():
+    """
+    This method allows to download the input files.
+    """
     global _FILES_TO_DOWNLOAD
     session = requests.session()
     max_retry = 5
@@ -629,7 +635,7 @@ def download_files():
                 time.sleep(5)
                 retry_number += 1
                 if retry_number > max_retry:
-                    logging.error(f"Error downloading {url}")
+                    logging.fatal(f"Error downloading {url}")
                     logging.error("Exit from script")
                     sys.exit(1)
     return True
