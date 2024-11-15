@@ -914,8 +914,7 @@ class CensusUSAPopulationByRace:
                     df['geo_ID'].map(str)).str[:len('geoId/NN')]
                 df_state = df_state.groupby(['Year', 'geo_ID']).sum().\
                     reset_index()
-                df = pd.concat([df, df_state], ignore_index=True)
-                df = pd.concat([df, df_national], ignore_index=True)
+                df = pd.concat([df, df_state, df_national], ignore_index=True)
                 float_col = df.select_dtypes(include=['float64'])
                 for col in float_col.columns.values:
                     df[col] = df[col].astype('int64')
