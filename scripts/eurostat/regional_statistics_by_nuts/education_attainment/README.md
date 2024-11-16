@@ -89,6 +89,7 @@ The original dataset is broken up into 3 columns:
 
 [education_attainment_preprocess_gen_tmcf.py](./education_attainment_preprocess_gen_tmcf.py)
 
+
 ### Generating Artifacts
 
 `Eurostats_NUTS2_Edat.mcf` and `Eurostats_NUTS2_Edat_Enum.mcf` were handwritten.
@@ -97,6 +98,17 @@ To generate `Eurostats_NUTS2_Edat.tmcf` and `Eurostats_NUTS2_Edat.csv`, run:
 
 ```bash
 python3 education_attainment_preprocess_gen_tmcf.py
+```
+### Testing Procedure
+
+How to run: Generate sample input and output CSV files.
+
+
+To test import procedure, run the following command:
+
+```
+python3 education_attainment_preprocess_gen_tmcf_test.py
+
 ```
 
 ### Validating Artifacts

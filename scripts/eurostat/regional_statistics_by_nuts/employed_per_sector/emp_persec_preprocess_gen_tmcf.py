@@ -11,14 +11,16 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
 
+sys.path.insert(1, '../../../../util')
+from six.moves import urllib
+from alpha2_to_dcid import COUNTRY_MAP
+from nuts_codes_names import NUTS1_CODES_NAMES
+import numpy as np
 import pandas as pd
 import io
 import csv
-
-_DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/nama_10r_3empers.tsv.gz"
-_CLEANED_CSV = "./Eurostats_NUTS3_Empers.csv"
-_TMCF = "./Eurostats_NUTS3_Empers.tmcf"
 
 _OUTPUT_COLUMNS = [
     'Date',
@@ -37,18 +39,39 @@ _OUTPUT_COLUMNS = [
     'Count_Person_Employed_NACE/O-Q',
     'Count_Person_Employed_NACE/O-U',
     'Count_Person_Employed_NACE/R-U',
-    'Count_Person_Employed',
+    'dc/nm9hcklgg5zb3',  #Population: Employed
 ]
 
 
-def translate_wide_to_long(data_url):
-    df = pd.read_csv(data_url, delimiter='\t')
+def download_data(download_link):
+    """Downloads raw data from Eurostat website and stores it in instance
+    data frame.
+    """
+    urllib.request.urlretrieve(download_link, "nama_10r_3empers.tsv.gz")
+    raw_df = pd.read_table("nama_10r_3empers.tsv.gz")
+    raw_df = raw_df.rename(columns=({
+        'freq,unit,wstatus,nace_r2,geo\TIME_PERIOD':
+            'unit,wstatus,nace_r2,geo\\time'
+    }))
+    raw_df['unit,wstatus,nace_r2,geo\\time'] = raw_df[
+        'unit,wstatus,nace_r2,geo\\time'].str.slice(2)
+    return raw_df
+
+
+def translate_wide_to_long(data_url, is_download_required=False, df_input=None):
+    # df = pd.read_csv(data_url, delimiter='\t')
+    if is_download_required:
+        df = download_data(data_url)
+    else:
+        df = df_input
+    # df = raw_df
     assert df.head
 
     header = list(df.columns.values)
     years = header[1:]
 
     # Pandas.melt() unpivots a DataFrame from wide format to long format.
+
     df = pd.melt(df,
                  id_vars=header[0],
                  value_vars=years,
@@ -67,6 +90,9 @@ def translate_wide_to_long(data_url):
     df.drop(columns=[header[0]], inplace=True)
 
     df["wstatus-nace"] = df["wstatus"] + "_" + df["nace_r2"]
+    df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
+        geo.isdigit() for geo in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
+                                else COUNTRY_MAP.get(geo, f'{geo}'))
 
     # Remove empty rows, clean values to have all digits.
     df = df[df.value.str.contains('[0-9]')]
@@ -85,6 +111,8 @@ def translate_wide_to_long(data_url):
 
 
 def preprocess(df, cleaned_csv):
+    df = df.replace(np.NaN, '', regex=True)
+
     with open(cleaned_csv, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
                                 fieldnames=_OUTPUT_COLUMNS,
@@ -93,7 +121,7 @@ def preprocess(df, cleaned_csv):
         for _, row in df.iterrows():
             writer.writerow({
                 'Date': '%s' % (row['time'][:4]),
-                'GeoId': 'dcid:nuts/%s' % (row['geo']),
+                'GeoId': '%s' % (row['geo']),
                 'Count_Person_Employed_NACE/A': (row['EMP_A']),
                 'Count_Person_Employed_NACE/B-E': (row['EMP_B-E']),
                 'Count_Person_Employed_NACE/C': (row['EMP_C']),
@@ -108,11 +136,11 @@ def preprocess(df, cleaned_csv):
                 'Count_Person_Employed_NACE/O-Q': (row['EMP_O-Q']),
                 'Count_Person_Employed_NACE/O-U': (row['EMP_O-U']),
                 'Count_Person_Employed_NACE/R-U': (row['EMP_R-U']),
-                'Count_Person_Employed': (row['EMP_TOTAL']),
+                'dc/nm9hcklgg5zb3': (row['EMP_TOTAL']),
             })
 
 
-def get_template_mcf():
+def get_template_mcf(output_columns):
     # Automate Template MCF generation since there are many Statistical Variables.
     TEMPLATE_MCF_TEMPLATE = """
   Node: E:EurostatsNUTS3_Employed_per_Sector->E{index}
@@ -125,7 +153,7 @@ def get_template_mcf():
   measurementMethod: dcs:EurostatRegionalStatistics
   """
 
-    stat_vars = _OUTPUT_COLUMNS[2:]
+    stat_vars = output_columns[2:]
     with open(_TMCF, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(
@@ -136,5 +164,10 @@ def get_template_mcf():
 
 
 if __name__ == "__main__":
-    preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
-    get_template_mcf()
+
+    _DATA_URL = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10r_3empers/?format=TSV&compressed=true"
+    _CLEANED_CSV = "./Eurostats_NUTS3_Empers.csv"
+    _TMCF = "./Eurostats_NUTS3_Empers.tmcf"
+    preprocess(translate_wide_to_long(_DATA_URL, is_download_required=True),
+               _CLEANED_CSV)
+    get_template_mcf(_OUTPUT_COLUMNS)

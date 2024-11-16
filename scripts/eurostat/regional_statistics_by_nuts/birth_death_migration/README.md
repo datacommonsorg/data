@@ -67,8 +67,12 @@ python3 import_data.py
 
 ### Testing Procedure
 
+How to run: Generate sample input and output CSV files.
+
+
 To test import procedure, run the following command:
 
 ```
-python3 test_import.py
+python3 EurostatNUTS3_BirthDeathMigration_test.py
+
 ```

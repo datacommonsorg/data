@@ -5,6 +5,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_10Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_10Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_10Years
+unit: "Year"
 
 Node: E:lifexp->E2
 typeOf: dcs:StatVarObservation
@@ -13,6 +14,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_10Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_10Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_10Years_Female
+unit: "Year"
 
 Node: E:lifexp->E3
 typeOf: dcs:StatVarObservation
@@ -21,6 +23,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_10Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_10Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_10Years_Male
+unit: "Year"
 
 Node: E:lifexp->E4
 typeOf: dcs:StatVarObservation
@@ -29,6 +32,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_11Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_11Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_11Years
+unit: "Year"
 
 Node: E:lifexp->E5
 typeOf: dcs:StatVarObservation
@@ -37,6 +41,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_11Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_11Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_11Years_Female
+unit: "Year"
 
 Node: E:lifexp->E6
 typeOf: dcs:StatVarObservation
@@ -45,6 +50,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_11Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_11Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_11Years_Male
+unit: "Year"
 
 Node: E:lifexp->E7
 typeOf: dcs:StatVarObservation
@@ -53,6 +59,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_12Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_12Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_12Years
+unit: "Year"
 
 Node: E:lifexp->E8
 typeOf: dcs:StatVarObservation
@@ -61,6 +68,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_12Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_12Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_12Years_Female
+unit: "Year"
 
 Node: E:lifexp->E9
 typeOf: dcs:StatVarObservation
@@ -69,6 +77,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_12Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_12Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_12Years_Male
+unit: "Year"
 
 Node: E:lifexp->E10
 typeOf: dcs:StatVarObservation
@@ -77,6 +86,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_13Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_13Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_13Years
+unit: "Year"
 
 Node: E:lifexp->E11
 typeOf: dcs:StatVarObservation
@@ -85,6 +95,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_13Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_13Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_13Years_Female
+unit: "Year"
 
 Node: E:lifexp->E12
 typeOf: dcs:StatVarObservation
@@ -93,6 +104,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_13Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_13Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_13Years_Male
+unit: "Year"
 
 Node: E:lifexp->E13
 typeOf: dcs:StatVarObservation
@@ -101,6 +113,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_14Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_14Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_14Years
+unit: "Year"
 
 Node: E:lifexp->E14
 typeOf: dcs:StatVarObservation
@@ -109,6 +122,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_14Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_14Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_14Years_Female
+unit: "Year"
 
 Node: E:lifexp->E15
 typeOf: dcs:StatVarObservation
@@ -117,6 +131,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_14Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_14Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_14Years_Male
+unit: "Year"
 
 Node: E:lifexp->E16
 typeOf: dcs:StatVarObservation
@@ -125,6 +140,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_15Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_15Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_15Years
+unit: "Year"
 
 Node: E:lifexp->E17
 typeOf: dcs:StatVarObservation
@@ -133,6 +149,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_15Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_15Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_15Years_Female
+unit: "Year"
 
 Node: E:lifexp->E18
 typeOf: dcs:StatVarObservation
@@ -141,6 +158,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_15Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_15Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_15Years_Male
+unit: "Year"
 
 Node: E:lifexp->E19
 typeOf: dcs:StatVarObservation
@@ -149,6 +167,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_16Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_16Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_16Years
+unit: "Year"
 
 Node: E:lifexp->E20
 typeOf: dcs:StatVarObservation
@@ -157,6 +176,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_16Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_16Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_16Years_Female
+unit: "Year"
 
 Node: E:lifexp->E21
 typeOf: dcs:StatVarObservation
@@ -165,6 +185,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_16Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_16Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_16Years_Male
+unit: "Year"
 
 Node: E:lifexp->E22
 typeOf: dcs:StatVarObservation
@@ -173,6 +194,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_17Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_17Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_17Years
+unit: "Year"
 
 Node: E:lifexp->E23
 typeOf: dcs:StatVarObservation
@@ -181,6 +203,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_17Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_17Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_17Years_Female
+unit: "Year"
 
 Node: E:lifexp->E24
 typeOf: dcs:StatVarObservation
@@ -189,6 +212,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_17Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_17Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_17Years_Male
+unit: "Year"
 
 Node: E:lifexp->E25
 typeOf: dcs:StatVarObservation
@@ -197,6 +221,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_18Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_18Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_18Years
+unit: "Year"
 
 Node: E:lifexp->E26
 typeOf: dcs:StatVarObservation
@@ -205,6 +230,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_18Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_18Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_18Years_Female
+unit: "Year"
 
 Node: E:lifexp->E27
 typeOf: dcs:StatVarObservation
@@ -213,6 +239,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_18Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_18Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_18Years_Male
+unit: "Year"
 
 Node: E:lifexp->E28
 typeOf: dcs:StatVarObservation
@@ -221,6 +248,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_19Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_19Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_19Years
+unit: "Year"
 
 Node: E:lifexp->E29
 typeOf: dcs:StatVarObservation
@@ -229,6 +257,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_19Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_19Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_19Years_Female
+unit: "Year"
 
 Node: E:lifexp->E30
 typeOf: dcs:StatVarObservation
@@ -237,6 +266,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_19Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_19Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_19Years_Male
+unit: "Year"
 
 Node: E:lifexp->E31
 typeOf: dcs:StatVarObservation
@@ -245,6 +275,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_1Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_1Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_1Years
+unit: "Year"
 
 Node: E:lifexp->E32
 typeOf: dcs:StatVarObservation
@@ -253,6 +284,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_1Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_1Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_1Years_Female
+unit: "Year"
 
 Node: E:lifexp->E33
 typeOf: dcs:StatVarObservation
@@ -261,6 +293,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_1Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_1Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_1Years_Male
+unit: "Year"
 
 Node: E:lifexp->E34
 typeOf: dcs:StatVarObservation
@@ -269,6 +302,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_20Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_20Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_20Years
+unit: "Year"
 
 Node: E:lifexp->E35
 typeOf: dcs:StatVarObservation
@@ -277,6 +311,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_20Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_20Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_20Years_Female
+unit: "Year"
 
 Node: E:lifexp->E36
 typeOf: dcs:StatVarObservation
@@ -285,6 +320,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_20Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_20Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_20Years_Male
+unit: "Year"
 
 Node: E:lifexp->E37
 typeOf: dcs:StatVarObservation
@@ -293,6 +329,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_21Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_21Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_21Years
+unit: "Year"
 
 Node: E:lifexp->E38
 typeOf: dcs:StatVarObservation
@@ -301,6 +338,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_21Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_21Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_21Years_Female
+unit: "Year"
 
 Node: E:lifexp->E39
 typeOf: dcs:StatVarObservation
@@ -309,6 +347,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_21Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_21Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_21Years_Male
+unit: "Year"
 
 Node: E:lifexp->E40
 typeOf: dcs:StatVarObservation
@@ -317,6 +356,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_22Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_22Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_22Years
+unit: "Year"
 
 Node: E:lifexp->E41
 typeOf: dcs:StatVarObservation
@@ -325,6 +365,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_22Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_22Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_22Years_Female
+unit: "Year"
 
 Node: E:lifexp->E42
 typeOf: dcs:StatVarObservation
@@ -333,6 +374,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_22Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_22Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_22Years_Male
+unit: "Year"
 
 Node: E:lifexp->E43
 typeOf: dcs:StatVarObservation
@@ -341,6 +383,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_23Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_23Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_23Years
+unit: "Year"
 
 Node: E:lifexp->E44
 typeOf: dcs:StatVarObservation
@@ -349,6 +392,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_23Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_23Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_23Years_Female
+unit: "Year"
 
 Node: E:lifexp->E45
 typeOf: dcs:StatVarObservation
@@ -357,6 +401,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_23Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_23Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_23Years_Male
+unit: "Year"
 
 Node: E:lifexp->E46
 typeOf: dcs:StatVarObservation
@@ -365,6 +410,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_24Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_24Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_24Years
+unit: "Year"
 
 Node: E:lifexp->E47
 typeOf: dcs:StatVarObservation
@@ -373,6 +419,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_24Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_24Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_24Years_Female
+unit: "Year"
 
 Node: E:lifexp->E48
 typeOf: dcs:StatVarObservation
@@ -381,6 +428,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_24Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_24Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_24Years_Male
+unit: "Year"
 
 Node: E:lifexp->E49
 typeOf: dcs:StatVarObservation
@@ -389,6 +437,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_25Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_25Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_25Years
+unit: "Year"
 
 Node: E:lifexp->E50
 typeOf: dcs:StatVarObservation
@@ -397,6 +446,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_25Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_25Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_25Years_Female
+unit: "Year"
 
 Node: E:lifexp->E51
 typeOf: dcs:StatVarObservation
@@ -405,6 +455,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_25Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_25Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_25Years_Male
+unit: "Year"
 
 Node: E:lifexp->E52
 typeOf: dcs:StatVarObservation
@@ -413,6 +464,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_26Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_26Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_26Years
+unit: "Year"
 
 Node: E:lifexp->E53
 typeOf: dcs:StatVarObservation
@@ -421,6 +473,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_26Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_26Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_26Years_Female
+unit: "Year"
 
 Node: E:lifexp->E54
 typeOf: dcs:StatVarObservation
@@ -429,6 +482,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_26Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_26Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_26Years_Male
+unit: "Year"
 
 Node: E:lifexp->E55
 typeOf: dcs:StatVarObservation
@@ -437,6 +491,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_27Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_27Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_27Years
+unit: "Year"
 
 Node: E:lifexp->E56
 typeOf: dcs:StatVarObservation
@@ -445,6 +500,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_27Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_27Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_27Years_Female
+unit: "Year"
 
 Node: E:lifexp->E57
 typeOf: dcs:StatVarObservation
@@ -453,6 +509,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_27Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_27Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_27Years_Male
+unit: "Year"
 
 Node: E:lifexp->E58
 typeOf: dcs:StatVarObservation
@@ -461,6 +518,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_28Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_28Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_28Years
+unit: "Year"
 
 Node: E:lifexp->E59
 typeOf: dcs:StatVarObservation
@@ -469,6 +527,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_28Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_28Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_28Years_Female
+unit: "Year"
 
 Node: E:lifexp->E60
 typeOf: dcs:StatVarObservation
@@ -477,6 +536,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_28Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_28Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_28Years_Male
+unit: "Year"
 
 Node: E:lifexp->E61
 typeOf: dcs:StatVarObservation
@@ -485,6 +545,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_29Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_29Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_29Years
+unit: "Year"
 
 Node: E:lifexp->E62
 typeOf: dcs:StatVarObservation
@@ -493,6 +554,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_29Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_29Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_29Years_Female
+unit: "Year"
 
 Node: E:lifexp->E63
 typeOf: dcs:StatVarObservation
@@ -501,6 +563,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_29Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_29Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_29Years_Male
+unit: "Year"
 
 Node: E:lifexp->E64
 typeOf: dcs:StatVarObservation
@@ -509,6 +572,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_2Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_2Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_2Years
+unit: "Year"
 
 Node: E:lifexp->E65
 typeOf: dcs:StatVarObservation
@@ -517,6 +581,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_2Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_2Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_2Years_Female
+unit: "Year"
 
 Node: E:lifexp->E66
 typeOf: dcs:StatVarObservation
@@ -525,6 +590,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_2Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_2Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_2Years_Male
+unit: "Year"
 
 Node: E:lifexp->E67
 typeOf: dcs:StatVarObservation
@@ -533,6 +599,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_30Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_30Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_30Years
+unit: "Year"
 
 Node: E:lifexp->E68
 typeOf: dcs:StatVarObservation
@@ -541,6 +608,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_30Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_30Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_30Years_Female
+unit: "Year"
 
 Node: E:lifexp->E69
 typeOf: dcs:StatVarObservation
@@ -549,6 +617,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_30Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_30Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_30Years_Male
+unit: "Year"
 
 Node: E:lifexp->E70
 typeOf: dcs:StatVarObservation
@@ -557,6 +626,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_31Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_31Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_31Years
+unit: "Year"
 
 Node: E:lifexp->E71
 typeOf: dcs:StatVarObservation
@@ -565,6 +635,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_31Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_31Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_31Years_Female
+unit: "Year"
 
 Node: E:lifexp->E72
 typeOf: dcs:StatVarObservation
@@ -573,6 +644,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_31Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_31Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_31Years_Male
+unit: "Year"
 
 Node: E:lifexp->E73
 typeOf: dcs:StatVarObservation
@@ -581,6 +653,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_32Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_32Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_32Years
+unit: "Year"
 
 Node: E:lifexp->E74
 typeOf: dcs:StatVarObservation
@@ -589,6 +662,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_32Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_32Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_32Years_Female
+unit: "Year"
 
 Node: E:lifexp->E75
 typeOf: dcs:StatVarObservation
@@ -597,6 +671,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_32Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_32Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_32Years_Male
+unit: "Year"
 
 Node: E:lifexp->E76
 typeOf: dcs:StatVarObservation
@@ -605,6 +680,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_33Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_33Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_33Years
+unit: "Year"
 
 Node: E:lifexp->E77
 typeOf: dcs:StatVarObservation
@@ -613,6 +689,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_33Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_33Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_33Years_Female
+unit: "Year"
 
 Node: E:lifexp->E78
 typeOf: dcs:StatVarObservation
@@ -621,6 +698,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_33Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_33Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_33Years_Male
+unit: "Year"
 
 Node: E:lifexp->E79
 typeOf: dcs:StatVarObservation
@@ -629,6 +707,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_34Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_34Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_34Years
+unit: "Year"
 
 Node: E:lifexp->E80
 typeOf: dcs:StatVarObservation
@@ -637,6 +716,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_34Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_34Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_34Years_Female
+unit: "Year"
 
 Node: E:lifexp->E81
 typeOf: dcs:StatVarObservation
@@ -645,6 +725,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_34Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_34Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_34Years_Male
+unit: "Year"
 
 Node: E:lifexp->E82
 typeOf: dcs:StatVarObservation
@@ -653,6 +734,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_35Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_35Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_35Years
+unit: "Year"
 
 Node: E:lifexp->E83
 typeOf: dcs:StatVarObservation
@@ -661,6 +743,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_35Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_35Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_35Years_Female
+unit: "Year"
 
 Node: E:lifexp->E84
 typeOf: dcs:StatVarObservation
@@ -669,6 +752,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_35Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_35Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_35Years_Male
+unit: "Year"
 
 Node: E:lifexp->E85
 typeOf: dcs:StatVarObservation
@@ -677,6 +761,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_36Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_36Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_36Years
+unit: "Year"
 
 Node: E:lifexp->E86
 typeOf: dcs:StatVarObservation
@@ -685,6 +770,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_36Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_36Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_36Years_Female
+unit: "Year"
 
 Node: E:lifexp->E87
 typeOf: dcs:StatVarObservation
@@ -693,6 +779,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_36Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_36Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_36Years_Male
+unit: "Year"
 
 Node: E:lifexp->E88
 typeOf: dcs:StatVarObservation
@@ -701,6 +788,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_37Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_37Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_37Years
+unit: "Year"
 
 Node: E:lifexp->E89
 typeOf: dcs:StatVarObservation
@@ -709,6 +797,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_37Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_37Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_37Years_Female
+unit: "Year"
 
 Node: E:lifexp->E90
 typeOf: dcs:StatVarObservation
@@ -717,6 +806,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_37Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_37Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_37Years_Male
+unit: "Year"
 
 Node: E:lifexp->E91
 typeOf: dcs:StatVarObservation
@@ -725,6 +815,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_38Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_38Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_38Years
+unit: "Year"
 
 Node: E:lifexp->E92
 typeOf: dcs:StatVarObservation
@@ -733,6 +824,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_38Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_38Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_38Years_Female
+unit: "Year"
 
 Node: E:lifexp->E93
 typeOf: dcs:StatVarObservation
@@ -741,6 +833,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_38Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_38Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_38Years_Male
+unit: "Year"
 
 Node: E:lifexp->E94
 typeOf: dcs:StatVarObservation
@@ -749,6 +842,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_39Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_39Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_39Years
+unit: "Year"
 
 Node: E:lifexp->E95
 typeOf: dcs:StatVarObservation
@@ -757,6 +851,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_39Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_39Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_39Years_Female
+unit: "Year"
 
 Node: E:lifexp->E96
 typeOf: dcs:StatVarObservation
@@ -765,6 +860,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_39Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_39Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_39Years_Male
+unit: "Year"
 
 Node: E:lifexp->E97
 typeOf: dcs:StatVarObservation
@@ -773,6 +869,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_3Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_3Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_3Years
+unit: "Year"
 
 Node: E:lifexp->E98
 typeOf: dcs:StatVarObservation
@@ -781,6 +878,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_3Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_3Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_3Years_Female
+unit: "Year"
 
 Node: E:lifexp->E99
 typeOf: dcs:StatVarObservation
@@ -789,6 +887,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_3Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_3Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_3Years_Male
+unit: "Year"
 
 Node: E:lifexp->E100
 typeOf: dcs:StatVarObservation
@@ -797,6 +896,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_40Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_40Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_40Years
+unit: "Year"
 
 Node: E:lifexp->E101
 typeOf: dcs:StatVarObservation
@@ -805,6 +905,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_40Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_40Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_40Years_Female
+unit: "Year"
 
 Node: E:lifexp->E102
 typeOf: dcs:StatVarObservation
@@ -813,6 +914,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_40Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_40Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_40Years_Male
+unit: "Year"
 
 Node: E:lifexp->E103
 typeOf: dcs:StatVarObservation
@@ -821,6 +923,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_41Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_41Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_41Years
+unit: "Year"
 
 Node: E:lifexp->E104
 typeOf: dcs:StatVarObservation
@@ -829,6 +932,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_41Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_41Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_41Years_Female
+unit: "Year"
 
 Node: E:lifexp->E105
 typeOf: dcs:StatVarObservation
@@ -837,6 +941,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_41Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_41Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_41Years_Male
+unit: "Year"
 
 Node: E:lifexp->E106
 typeOf: dcs:StatVarObservation
@@ -845,6 +950,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_42Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_42Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_42Years
+unit: "Year"
 
 Node: E:lifexp->E107
 typeOf: dcs:StatVarObservation
@@ -853,6 +959,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_42Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_42Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_42Years_Female
+unit: "Year"
 
 Node: E:lifexp->E108
 typeOf: dcs:StatVarObservation
@@ -861,6 +968,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_42Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_42Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_42Years_Male
+unit: "Year"
 
 Node: E:lifexp->E109
 typeOf: dcs:StatVarObservation
@@ -869,6 +977,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_43Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_43Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_43Years
+unit: "Year"
 
 Node: E:lifexp->E110
 typeOf: dcs:StatVarObservation
@@ -877,6 +986,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_43Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_43Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_43Years_Female
+unit: "Year"
 
 Node: E:lifexp->E111
 typeOf: dcs:StatVarObservation
@@ -885,6 +995,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_43Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_43Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_43Years_Male
+unit: "Year"
 
 Node: E:lifexp->E112
 typeOf: dcs:StatVarObservation
@@ -893,6 +1004,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_44Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_44Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_44Years
+unit: "Year"
 
 Node: E:lifexp->E113
 typeOf: dcs:StatVarObservation
@@ -901,6 +1013,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_44Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_44Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_44Years_Female
+unit: "Year"
 
 Node: E:lifexp->E114
 typeOf: dcs:StatVarObservation
@@ -909,6 +1022,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_44Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_44Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_44Years_Male
+unit: "Year"
 
 Node: E:lifexp->E115
 typeOf: dcs:StatVarObservation
@@ -917,6 +1031,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_45Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_45Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_45Years
+unit: "Year"
 
 Node: E:lifexp->E116
 typeOf: dcs:StatVarObservation
@@ -925,6 +1040,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_45Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_45Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_45Years_Female
+unit: "Year"
 
 Node: E:lifexp->E117
 typeOf: dcs:StatVarObservation
@@ -933,6 +1049,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_45Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_45Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_45Years_Male
+unit: "Year"
 
 Node: E:lifexp->E118
 typeOf: dcs:StatVarObservation
@@ -941,6 +1058,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_46Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_46Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_46Years
+unit: "Year"
 
 Node: E:lifexp->E119
 typeOf: dcs:StatVarObservation
@@ -949,6 +1067,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_46Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_46Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_46Years_Female
+unit: "Year"
 
 Node: E:lifexp->E120
 typeOf: dcs:StatVarObservation
@@ -957,6 +1076,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_46Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_46Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_46Years_Male
+unit: "Year"
 
 Node: E:lifexp->E121
 typeOf: dcs:StatVarObservation
@@ -965,6 +1085,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_47Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_47Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_47Years
+unit: "Year"
 
 Node: E:lifexp->E122
 typeOf: dcs:StatVarObservation
@@ -973,6 +1094,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_47Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_47Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_47Years_Female
+unit: "Year"
 
 Node: E:lifexp->E123
 typeOf: dcs:StatVarObservation
@@ -981,6 +1103,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_47Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_47Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_47Years_Male
+unit: "Year"
 
 Node: E:lifexp->E124
 typeOf: dcs:StatVarObservation
@@ -989,6 +1112,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_48Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_48Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_48Years
+unit: "Year"
 
 Node: E:lifexp->E125
 typeOf: dcs:StatVarObservation
@@ -997,6 +1121,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_48Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_48Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_48Years_Female
+unit: "Year"
 
 Node: E:lifexp->E126
 typeOf: dcs:StatVarObservation
@@ -1005,6 +1130,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_48Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_48Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_48Years_Male
+unit: "Year"
 
 Node: E:lifexp->E127
 typeOf: dcs:StatVarObservation
@@ -1013,6 +1139,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_49Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_49Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_49Years
+unit: "Year"
 
 Node: E:lifexp->E128
 typeOf: dcs:StatVarObservation
@@ -1021,6 +1148,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_49Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_49Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_49Years_Female
+unit: "Year"
 
 Node: E:lifexp->E129
 typeOf: dcs:StatVarObservation
@@ -1029,6 +1157,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_49Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_49Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_49Years_Male
+unit: "Year"
 
 Node: E:lifexp->E130
 typeOf: dcs:StatVarObservation
@@ -1037,6 +1166,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_4Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_4Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_4Years
+unit: "Year"
 
 Node: E:lifexp->E131
 typeOf: dcs:StatVarObservation
@@ -1045,6 +1175,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_4Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_4Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_4Years_Female
+unit: "Year"
 
 Node: E:lifexp->E132
 typeOf: dcs:StatVarObservation
@@ -1053,6 +1184,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_4Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_4Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_4Years_Male
+unit: "Year"
 
 Node: E:lifexp->E133
 typeOf: dcs:StatVarObservation
@@ -1061,6 +1193,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_50Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_50Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_50Years
+unit: "Year"
 
 Node: E:lifexp->E134
 typeOf: dcs:StatVarObservation
@@ -1069,6 +1202,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_50Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_50Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_50Years_Female
+unit: "Year"
 
 Node: E:lifexp->E135
 typeOf: dcs:StatVarObservation
@@ -1077,6 +1211,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_50Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_50Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_50Years_Male
+unit: "Year"
 
 Node: E:lifexp->E136
 typeOf: dcs:StatVarObservation
@@ -1085,6 +1220,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_51Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_51Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_51Years
+unit: "Year"
 
 Node: E:lifexp->E137
 typeOf: dcs:StatVarObservation
@@ -1093,6 +1229,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_51Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_51Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_51Years_Female
+unit: "Year"
 
 Node: E:lifexp->E138
 typeOf: dcs:StatVarObservation
@@ -1101,6 +1238,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_51Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_51Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_51Years_Male
+unit: "Year"
 
 Node: E:lifexp->E139
 typeOf: dcs:StatVarObservation
@@ -1109,6 +1247,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_52Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_52Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_52Years
+unit: "Year"
 
 Node: E:lifexp->E140
 typeOf: dcs:StatVarObservation
@@ -1117,6 +1256,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_52Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_52Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_52Years_Female
+unit: "Year"
 
 Node: E:lifexp->E141
 typeOf: dcs:StatVarObservation
@@ -1125,6 +1265,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_52Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_52Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_52Years_Male
+unit: "Year"
 
 Node: E:lifexp->E142
 typeOf: dcs:StatVarObservation
@@ -1133,6 +1274,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_53Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_53Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_53Years
+unit: "Year"
 
 Node: E:lifexp->E143
 typeOf: dcs:StatVarObservation
@@ -1141,6 +1283,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_53Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_53Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_53Years_Female
+unit: "Year"
 
 Node: E:lifexp->E144
 typeOf: dcs:StatVarObservation
@@ -1149,6 +1292,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_53Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_53Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_53Years_Male
+unit: "Year"
 
 Node: E:lifexp->E145
 typeOf: dcs:StatVarObservation
@@ -1157,6 +1301,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_54Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_54Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_54Years
+unit: "Year"
 
 Node: E:lifexp->E146
 typeOf: dcs:StatVarObservation
@@ -1165,6 +1310,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_54Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_54Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_54Years_Female
+unit: "Year"
 
 Node: E:lifexp->E147
 typeOf: dcs:StatVarObservation
@@ -1173,6 +1319,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_54Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_54Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_54Years_Male
+unit: "Year"
 
 Node: E:lifexp->E148
 typeOf: dcs:StatVarObservation
@@ -1181,6 +1328,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_55Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_55Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_55Years
+unit: "Year"
 
 Node: E:lifexp->E149
 typeOf: dcs:StatVarObservation
@@ -1189,6 +1337,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_55Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_55Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_55Years_Female
+unit: "Year"
 
 Node: E:lifexp->E150
 typeOf: dcs:StatVarObservation
@@ -1197,6 +1346,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_55Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_55Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_55Years_Male
+unit: "Year"
 
 Node: E:lifexp->E151
 typeOf: dcs:StatVarObservation
@@ -1205,6 +1355,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_56Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_56Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_56Years
+unit: "Year"
 
 Node: E:lifexp->E152
 typeOf: dcs:StatVarObservation
@@ -1213,6 +1364,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_56Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_56Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_56Years_Female
+unit: "Year"
 
 Node: E:lifexp->E153
 typeOf: dcs:StatVarObservation
@@ -1221,6 +1373,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_56Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_56Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_56Years_Male
+unit: "Year"
 
 Node: E:lifexp->E154
 typeOf: dcs:StatVarObservation
@@ -1229,6 +1382,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_57Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_57Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_57Years
+unit: "Year"
 
 Node: E:lifexp->E155
 typeOf: dcs:StatVarObservation
@@ -1237,6 +1391,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_57Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_57Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_57Years_Female
+unit: "Year"
 
 Node: E:lifexp->E156
 typeOf: dcs:StatVarObservation
@@ -1245,6 +1400,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_57Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_57Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_57Years_Male
+unit: "Year"
 
 Node: E:lifexp->E157
 typeOf: dcs:StatVarObservation
@@ -1253,6 +1409,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_58Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_58Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_58Years
+unit: "Year"
 
 Node: E:lifexp->E158
 typeOf: dcs:StatVarObservation
@@ -1261,6 +1418,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_58Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_58Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_58Years_Female
+unit: "Year"
 
 Node: E:lifexp->E159
 typeOf: dcs:StatVarObservation
@@ -1269,6 +1427,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_58Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_58Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_58Years_Male
+unit: "Year"
 
 Node: E:lifexp->E160
 typeOf: dcs:StatVarObservation
@@ -1277,6 +1436,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_59Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_59Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_59Years
+unit: "Year"
 
 Node: E:lifexp->E161
 typeOf: dcs:StatVarObservation
@@ -1285,6 +1445,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_59Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_59Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_59Years_Female
+unit: "Year"
 
 Node: E:lifexp->E162
 typeOf: dcs:StatVarObservation
@@ -1293,6 +1454,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_59Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_59Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_59Years_Male
+unit: "Year"
 
 Node: E:lifexp->E163
 typeOf: dcs:StatVarObservation
@@ -1301,6 +1463,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_5Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_5Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_5Years
+unit: "Year"
 
 Node: E:lifexp->E164
 typeOf: dcs:StatVarObservation
@@ -1309,6 +1472,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_5Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_5Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_5Years_Female
+unit: "Year"
 
 Node: E:lifexp->E165
 typeOf: dcs:StatVarObservation
@@ -1317,6 +1481,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_5Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_5Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_5Years_Male
+unit: "Year"
 
 Node: E:lifexp->E166
 typeOf: dcs:StatVarObservation
@@ -1325,6 +1490,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_60Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_60Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_60Years
+unit: "Year"
 
 Node: E:lifexp->E167
 typeOf: dcs:StatVarObservation
@@ -1333,6 +1499,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_60Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_60Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_60Years_Female
+unit: "Year"
 
 Node: E:lifexp->E168
 typeOf: dcs:StatVarObservation
@@ -1341,6 +1508,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_60Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_60Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_60Years_Male
+unit: "Year"
 
 Node: E:lifexp->E169
 typeOf: dcs:StatVarObservation
@@ -1349,6 +1517,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_61Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_61Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_61Years
+unit: "Year"
 
 Node: E:lifexp->E170
 typeOf: dcs:StatVarObservation
@@ -1357,6 +1526,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_61Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_61Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_61Years_Female
+unit: "Year"
 
 Node: E:lifexp->E171
 typeOf: dcs:StatVarObservation
@@ -1365,6 +1535,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_61Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_61Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_61Years_Male
+unit: "Year"
 
 Node: E:lifexp->E172
 typeOf: dcs:StatVarObservation
@@ -1373,6 +1544,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_62Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_62Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_62Years
+unit: "Year"
 
 Node: E:lifexp->E173
 typeOf: dcs:StatVarObservation
@@ -1381,6 +1553,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_62Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_62Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_62Years_Female
+unit: "Year"
 
 Node: E:lifexp->E174
 typeOf: dcs:StatVarObservation
@@ -1389,6 +1562,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_62Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_62Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_62Years_Male
+unit: "Year"
 
 Node: E:lifexp->E175
 typeOf: dcs:StatVarObservation
@@ -1397,6 +1571,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_63Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_63Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_63Years
+unit: "Year"
 
 Node: E:lifexp->E176
 typeOf: dcs:StatVarObservation
@@ -1405,6 +1580,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_63Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_63Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_63Years_Female
+unit: "Year"
 
 Node: E:lifexp->E177
 typeOf: dcs:StatVarObservation
@@ -1413,6 +1589,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_63Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_63Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_63Years_Male
+unit: "Year"
 
 Node: E:lifexp->E178
 typeOf: dcs:StatVarObservation
@@ -1421,6 +1598,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_64Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_64Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_64Years
+unit: "Year"
 
 Node: E:lifexp->E179
 typeOf: dcs:StatVarObservation
@@ -1429,6 +1607,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_64Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_64Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_64Years_Female
+unit: "Year"
 
 Node: E:lifexp->E180
 typeOf: dcs:StatVarObservation
@@ -1437,6 +1616,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_64Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_64Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_64Years_Male
+unit: "Year"
 
 Node: E:lifexp->E181
 typeOf: dcs:StatVarObservation
@@ -1445,6 +1625,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_65Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_65Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_65Years
+unit: "Year"
 
 Node: E:lifexp->E182
 typeOf: dcs:StatVarObservation
@@ -1453,6 +1634,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_65Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_65Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_65Years_Female
+unit: "Year"
 
 Node: E:lifexp->E183
 typeOf: dcs:StatVarObservation
@@ -1461,6 +1643,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_65Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_65Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_65Years_Male
+unit: "Year"
 
 Node: E:lifexp->E184
 typeOf: dcs:StatVarObservation
@@ -1469,6 +1652,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_66Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_66Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_66Years
+unit: "Year"
 
 Node: E:lifexp->E185
 typeOf: dcs:StatVarObservation
@@ -1477,6 +1661,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_66Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_66Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_66Years_Female
+unit: "Year"
 
 Node: E:lifexp->E186
 typeOf: dcs:StatVarObservation
@@ -1485,6 +1670,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_66Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_66Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_66Years_Male
+unit: "Year"
 
 Node: E:lifexp->E187
 typeOf: dcs:StatVarObservation
@@ -1493,6 +1679,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_67Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_67Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_67Years
+unit: "Year"
 
 Node: E:lifexp->E188
 typeOf: dcs:StatVarObservation
@@ -1501,6 +1688,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_67Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_67Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_67Years_Female
+unit: "Year"
 
 Node: E:lifexp->E189
 typeOf: dcs:StatVarObservation
@@ -1509,6 +1697,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_67Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_67Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_67Years_Male
+unit: "Year"
 
 Node: E:lifexp->E190
 typeOf: dcs:StatVarObservation
@@ -1517,6 +1706,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_68Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_68Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_68Years
+unit: "Year"
 
 Node: E:lifexp->E191
 typeOf: dcs:StatVarObservation
@@ -1525,6 +1715,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_68Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_68Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_68Years_Female
+unit: "Year"
 
 Node: E:lifexp->E192
 typeOf: dcs:StatVarObservation
@@ -1533,6 +1724,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_68Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_68Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_68Years_Male
+unit: "Year"
 
 Node: E:lifexp->E193
 typeOf: dcs:StatVarObservation
@@ -1541,6 +1733,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_69Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_69Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_69Years
+unit: "Year"
 
 Node: E:lifexp->E194
 typeOf: dcs:StatVarObservation
@@ -1549,6 +1742,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_69Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_69Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_69Years_Female
+unit: "Year"
 
 Node: E:lifexp->E195
 typeOf: dcs:StatVarObservation
@@ -1557,6 +1751,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_69Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_69Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_69Years_Male
+unit: "Year"
 
 Node: E:lifexp->E196
 typeOf: dcs:StatVarObservation
@@ -1565,6 +1760,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_6Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_6Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_6Years
+unit: "Year"
 
 Node: E:lifexp->E197
 typeOf: dcs:StatVarObservation
@@ -1573,6 +1769,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_6Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_6Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_6Years_Female
+unit: "Year"
 
 Node: E:lifexp->E198
 typeOf: dcs:StatVarObservation
@@ -1581,6 +1778,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_6Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_6Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_6Years_Male
+unit: "Year"
 
 Node: E:lifexp->E199
 typeOf: dcs:StatVarObservation
@@ -1589,6 +1787,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_70Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_70Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_70Years
+unit: "Year"
 
 Node: E:lifexp->E200
 typeOf: dcs:StatVarObservation
@@ -1597,6 +1796,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_70Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_70Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_70Years_Female
+unit: "Year"
 
 Node: E:lifexp->E201
 typeOf: dcs:StatVarObservation
@@ -1605,6 +1805,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_70Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_70Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_70Years_Male
+unit: "Year"
 
 Node: E:lifexp->E202
 typeOf: dcs:StatVarObservation
@@ -1613,6 +1814,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_71Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_71Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_71Years
+unit: "Year"
 
 Node: E:lifexp->E203
 typeOf: dcs:StatVarObservation
@@ -1621,6 +1823,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_71Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_71Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_71Years_Female
+unit: "Year"
 
 Node: E:lifexp->E204
 typeOf: dcs:StatVarObservation
@@ -1629,6 +1832,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_71Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_71Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_71Years_Male
+unit: "Year"
 
 Node: E:lifexp->E205
 typeOf: dcs:StatVarObservation
@@ -1637,6 +1841,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_72Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_72Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_72Years
+unit: "Year"
 
 Node: E:lifexp->E206
 typeOf: dcs:StatVarObservation
@@ -1645,6 +1850,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_72Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_72Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_72Years_Female
+unit: "Year"
 
 Node: E:lifexp->E207
 typeOf: dcs:StatVarObservation
@@ -1653,6 +1859,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_72Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_72Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_72Years_Male
+unit: "Year"
 
 Node: E:lifexp->E208
 typeOf: dcs:StatVarObservation
@@ -1661,6 +1868,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_73Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_73Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_73Years
+unit: "Year"
 
 Node: E:lifexp->E209
 typeOf: dcs:StatVarObservation
@@ -1669,6 +1877,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_73Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_73Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_73Years_Female
+unit: "Year"
 
 Node: E:lifexp->E210
 typeOf: dcs:StatVarObservation
@@ -1677,6 +1886,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_73Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_73Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_73Years_Male
+unit: "Year"
 
 Node: E:lifexp->E211
 typeOf: dcs:StatVarObservation
@@ -1685,6 +1895,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_74Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_74Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_74Years
+unit: "Year"
 
 Node: E:lifexp->E212
 typeOf: dcs:StatVarObservation
@@ -1693,6 +1904,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_74Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_74Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_74Years_Female
+unit: "Year"
 
 Node: E:lifexp->E213
 typeOf: dcs:StatVarObservation
@@ -1701,6 +1913,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_74Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_74Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_74Years_Male
+unit: "Year"
 
 Node: E:lifexp->E214
 typeOf: dcs:StatVarObservation
@@ -1709,6 +1922,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_75Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_75Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_75Years
+unit: "Year"
 
 Node: E:lifexp->E215
 typeOf: dcs:StatVarObservation
@@ -1717,6 +1931,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_75Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_75Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_75Years_Female
+unit: "Year"
 
 Node: E:lifexp->E216
 typeOf: dcs:StatVarObservation
@@ -1725,6 +1940,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_75Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_75Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_75Years_Male
+unit: "Year"
 
 Node: E:lifexp->E217
 typeOf: dcs:StatVarObservation
@@ -1733,6 +1949,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_76Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_76Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_76Years
+unit: "Year"
 
 Node: E:lifexp->E218
 typeOf: dcs:StatVarObservation
@@ -1741,6 +1958,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_76Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_76Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_76Years_Female
+unit: "Year"
 
 Node: E:lifexp->E219
 typeOf: dcs:StatVarObservation
@@ -1749,6 +1967,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_76Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_76Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_76Years_Male
+unit: "Year"
 
 Node: E:lifexp->E220
 typeOf: dcs:StatVarObservation
@@ -1757,6 +1976,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_77Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_77Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_77Years
+unit: "Year"
 
 Node: E:lifexp->E221
 typeOf: dcs:StatVarObservation
@@ -1765,6 +1985,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_77Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_77Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_77Years_Female
+unit: "Year"
 
 Node: E:lifexp->E222
 typeOf: dcs:StatVarObservation
@@ -1773,6 +1994,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_77Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_77Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_77Years_Male
+unit: "Year"
 
 Node: E:lifexp->E223
 typeOf: dcs:StatVarObservation
@@ -1781,6 +2003,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_78Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_78Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_78Years
+unit: "Year"
 
 Node: E:lifexp->E224
 typeOf: dcs:StatVarObservation
@@ -1789,6 +2012,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_78Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_78Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_78Years_Female
+unit: "Year"
 
 Node: E:lifexp->E225
 typeOf: dcs:StatVarObservation
@@ -1797,6 +2021,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_78Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_78Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_78Years_Male
+unit: "Year"
 
 Node: E:lifexp->E226
 typeOf: dcs:StatVarObservation
@@ -1805,6 +2030,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_79Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_79Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_79Years
+unit: "Year"
 
 Node: E:lifexp->E227
 typeOf: dcs:StatVarObservation
@@ -1813,6 +2039,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_79Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_79Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_79Years_Female
+unit: "Year"
 
 Node: E:lifexp->E228
 typeOf: dcs:StatVarObservation
@@ -1821,6 +2048,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_79Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_79Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_79Years_Male
+unit: "Year"
 
 Node: E:lifexp->E229
 typeOf: dcs:StatVarObservation
@@ -1829,6 +2057,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_7Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_7Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_7Years
+unit: "Year"
 
 Node: E:lifexp->E230
 typeOf: dcs:StatVarObservation
@@ -1837,6 +2066,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_7Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_7Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_7Years_Female
+unit: "Year"
 
 Node: E:lifexp->E231
 typeOf: dcs:StatVarObservation
@@ -1845,6 +2075,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_7Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_7Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_7Years_Male
+unit: "Year"
 
 Node: E:lifexp->E232
 typeOf: dcs:StatVarObservation
@@ -1853,6 +2084,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_80Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_80Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_80Years
+unit: "Year"
 
 Node: E:lifexp->E233
 typeOf: dcs:StatVarObservation
@@ -1861,6 +2093,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_80Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_80Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_80Years_Female
+unit: "Year"
 
 Node: E:lifexp->E234
 typeOf: dcs:StatVarObservation
@@ -1869,6 +2102,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_80Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_80Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_80Years_Male
+unit: "Year"
 
 Node: E:lifexp->E235
 typeOf: dcs:StatVarObservation
@@ -1877,6 +2111,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_81Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_81Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_81Years
+unit: "Year"
 
 Node: E:lifexp->E236
 typeOf: dcs:StatVarObservation
@@ -1885,6 +2120,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_81Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_81Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_81Years_Female
+unit: "Year"
 
 Node: E:lifexp->E237
 typeOf: dcs:StatVarObservation
@@ -1893,6 +2129,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_81Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_81Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_81Years_Male
+unit: "Year"
 
 Node: E:lifexp->E238
 typeOf: dcs:StatVarObservation
@@ -1901,6 +2138,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_82Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_82Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_82Years
+unit: "Year"
 
 Node: E:lifexp->E239
 typeOf: dcs:StatVarObservation
@@ -1909,6 +2147,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_82Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_82Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_82Years_Female
+unit: "Year"
 
 Node: E:lifexp->E240
 typeOf: dcs:StatVarObservation
@@ -1917,6 +2156,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_82Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_82Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_82Years_Male
+unit: "Year"
 
 Node: E:lifexp->E241
 typeOf: dcs:StatVarObservation
@@ -1925,6 +2165,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_83Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_83Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_83Years
+unit: "Year"
 
 Node: E:lifexp->E242
 typeOf: dcs:StatVarObservation
@@ -1933,6 +2174,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_83Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_83Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_83Years_Female
+unit: "Year"
 
 Node: E:lifexp->E243
 typeOf: dcs:StatVarObservation
@@ -1941,6 +2183,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_83Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_83Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_83Years_Male
+unit: "Year"
 
 Node: E:lifexp->E244
 typeOf: dcs:StatVarObservation
@@ -1949,6 +2192,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_84Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_84Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_84Years
+unit: "Year"
 
 Node: E:lifexp->E245
 typeOf: dcs:StatVarObservation
@@ -1957,6 +2201,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_84Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_84Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_84Years_Female
+unit: "Year"
 
 Node: E:lifexp->E246
 typeOf: dcs:StatVarObservation
@@ -1965,6 +2210,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_84Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_84Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_84Years_Male
+unit: "Year"
 
 Node: E:lifexp->E247
 typeOf: dcs:StatVarObservation
@@ -1973,6 +2219,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_85OrMoreYears_geo
 observationDate: C:lifexp->LifeExpectancy_Person_85OrMoreYears_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_85OrMoreYears
+unit: "Year"
 
 Node: E:lifexp->E248
 typeOf: dcs:StatVarObservation
@@ -1981,6 +2228,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Female
+unit: "Year"
 
 Node: E:lifexp->E249
 typeOf: dcs:StatVarObservation
@@ -1989,6 +2237,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_85OrMoreYears_Male
+unit: "Year"
 
 Node: E:lifexp->E250
 typeOf: dcs:StatVarObservation
@@ -1997,6 +2246,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_8Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_8Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_8Years
+unit: "Year"
 
 Node: E:lifexp->E251
 typeOf: dcs:StatVarObservation
@@ -2005,6 +2255,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_8Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_8Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_8Years_Female
+unit: "Year"
 
 Node: E:lifexp->E252
 typeOf: dcs:StatVarObservation
@@ -2013,6 +2264,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_8Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_8Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_8Years_Male
+unit: "Year"
 
 Node: E:lifexp->E253
 typeOf: dcs:StatVarObservation
@@ -2021,6 +2273,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_9Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_9Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_9Years
+unit: "Year"
 
 Node: E:lifexp->E254
 typeOf: dcs:StatVarObservation
@@ -2029,6 +2282,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_9Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_9Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_9Years_Female
+unit: "Year"
 
 Node: E:lifexp->E255
 typeOf: dcs:StatVarObservation
@@ -2037,6 +2291,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_9Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_9Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_9Years_Male
+unit: "Year"
 
 Node: E:lifexp->E256
 typeOf: dcs:StatVarObservation
@@ -2045,6 +2300,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_Upto1Years_geo
 observationDate: C:lifexp->LifeExpectancy_Person_Upto1Years_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_Upto1Years
+unit: "Year"
 
 Node: E:lifexp->E257
 typeOf: dcs:StatVarObservation
@@ -2053,6 +2309,7 @@ observationAbout: C:lifexp->LifeExpectancy_Person_Upto1Years_Female_geo
 observationDate: C:lifexp->LifeExpectancy_Person_Upto1Years_Female_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_Upto1Years_Female
+unit: "Year"
 
 Node: E:lifexp->E258
 typeOf: dcs:StatVarObservation
@@ -2061,4 +2318,5 @@ observationAbout: C:lifexp->LifeExpectancy_Person_Upto1Years_Male_geo
 observationDate: C:lifexp->LifeExpectancy_Person_Upto1Years_Male_year
 measurementMethod: dcs:EurostatRegionalStatistics
 value: C:lifexp->LifeExpectancy_Person_Upto1Years_Male
+unit: "Year"
 

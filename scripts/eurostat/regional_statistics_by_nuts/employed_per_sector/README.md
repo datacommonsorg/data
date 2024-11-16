@@ -94,6 +94,18 @@ To generate `Eurostats_NUTS3_Empers.tmcf` and `Eurostats_NUTS3_Empers.csv`, run:
 python3 emp_persec_preprocess_gen_tmcf.py
 ```
 
+### Testing Procedure
+
+How to run: Generate sample input and output CSV files.
+
+
+To test import procedure, run the following command:
+
+```
+python3 emp_persec_preprocess_gen_tmcf_test.py
+
+```
+
 ### Post-Processing Validation
 
 - Wrote and ran

@@ -90,6 +90,18 @@ To generate `Eurostats_NUTS2_Enrollment.tmcf` and `Eurostats_NUTS2_Enrollment.cs
 python3 education_enrollment_preprocess_gen_tmcf.py
 ```
 
+### Testing Procedure
+
+How to run: Generate sample input and output CSV files.
+
+
+To test import procedure, run the following command:
+
+```
+python3 education_enrollment_preprocess_gen_tmcf_test.py
+
+```
+
 #### Post-Processing Validation
 
 Run
