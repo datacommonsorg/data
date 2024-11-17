@@ -89,10 +89,9 @@ def translate_wide_to_long(file_path):
         df['geo'] = new[1]
         df['unit'] = new[0]
         df.drop(columns=[header[0]], inplace=True)
-        df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}'
-                                    if any(g.isdigit() for g in geo) or
-                                    ('nuts/' + geo in NUTS1_CODES_NAMES
-                                    ) else COUNTRY_MAP.get(geo, f'{geo}'))
+        df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
+            g.isdigit() for g in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
+                                    else COUNTRY_MAP.get(geo, f'{geo}'))
 
         # Remove empty rows, clean values to have all digits.
         df = df[df['value'].notna() & df['value'].str.contains('[0-9]')].copy()

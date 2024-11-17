@@ -96,10 +96,9 @@ def translate_wide_to_long(file_path):
 
         df.drop(columns=[header[0]], inplace=True)
 
-        df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}'
-                                    if any(g.isdigit() for g in geo) or
-                                    ('nuts/' + geo in NUTS1_CODES_NAMES
-                                    ) else COUNTRY_MAP.get(geo, f'{geo}'))
+        df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
+            g.isdigit() for g in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
+                                    else COUNTRY_MAP.get(geo, f'{geo}'))
         df = df[df.value.str.contains('[0-9]')]
         possible_flags = [' ', ':', 'b', 'e', 'u']
         for flag in possible_flags:

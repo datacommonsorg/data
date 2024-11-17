@@ -97,10 +97,9 @@ def translate_wide_to_long(file_path):
                 'indic_de': new[0]
             }))
         df["indicator_unit"] = df["indic_de"] + "_" + df["unit"]
-        df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}'
-                                    if any(g.isdigit() for g in geo) or
-                                    ('nuts/' + geo in NUTS1_CODES_NAMES
-                                    ) else COUNTRY_MAP.get(geo, f'{geo}'))
+        df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
+            g.isdigit() for g in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
+                                    else COUNTRY_MAP.get(geo, f'{geo}'))
 
         df.drop(columns=[header[0]], inplace=True)
 
