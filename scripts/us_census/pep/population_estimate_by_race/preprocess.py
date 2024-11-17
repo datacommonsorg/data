@@ -417,10 +417,11 @@ def _clean_county_2010_csv_file(df: pd.DataFrame,
             '9': '2016',
             '10': '2017',
             '11': '2018',
-            '12': '2019',
-            '13': '2020'
+            '12': '2019'
+            #'13': '2020' - commented this line because 2020 data is avaliable in 2023 file
         }
         df = df.replace({'YEAR': conversion_of_year_to_value})
+        df = df[df['YEAR'] != '13']
         df.insert(6, 'geo_ID', 'geoId/', True)
         df['geo_ID'] = 'geoId/' +(df['STATE'].map(str)).str.zfill(2) + \
             (df['COUNTY'].map(str)).str.zfill(3)
@@ -900,7 +901,8 @@ class CensusUSAPopulationByRace:
                 for col in float_col.columns.values:
                     df[col] = df[col].astype('int64')
 
-            elif "cc-est2023" in file:
+            #This change as be done to make sure to process all future files
+            elif "cc-est202" in file:
                 df = pd.read_csv(file, encoding='ISO-8859-1', low_memory=False)
                 df = _clean_county_2022_csv_file(df, file)
                 # aggregating County data to obtain National data for 2020-2022
@@ -1041,7 +1043,6 @@ class CensusUSAPopulationByRace:
         total_files_to_process = len(self.input_files)
         logging.info(f"No of files to be processed {len(self.input_files)}")
         for file in self.input_files:
-            logging.info(f"processing file - {file}")
             if 'USCountywv90.txt' in file:
                 pass
             df = self._load_data(file)
@@ -1289,7 +1290,7 @@ def download_files():
                                              names=cols)
                         df.to_excel(download_local_path + os.sep + file_name,\
                             index=False,engine='xlsxwriter')
-                    elif "co-est00int-alldata" in url or "CC-EST2020-ALLDATA" in url or "cc-est2022-all" in url:
+                    elif "co-est00int-alldata" in url or "CC-EST2020-ALLDATA" in url or "cc-est2022-all" in url or "cc-est20" in url:
                         df = pd.read_csv(url,
                                          on_bad_lines='skip',
                                          encoding='ISO-8859-1',
@@ -1320,7 +1321,8 @@ def download_files():
                     df.to_excel(download_local_path + os.sep + file_name\
                         ,index=False,header=False,engine='xlsxwriter')
                 else:
-                    logging.error(f'Unknown file - {url}')
+                    logging.fatal(f'Unknown file - {url}')
+
                 logging.info(f"Downloaded file : {url}")
                 is_file_downloaded = True
 
