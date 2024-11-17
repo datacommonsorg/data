@@ -90,8 +90,8 @@ This script offers three modes of operation: download, process, or both download
 
 ```bash
 1. Download and Process (python3 education_enrollment_preprocess_gen_tmcf.py or no mode flag):
-2. Download Only (python3 education_enrollment_preprocess_gen_tmcf.py ---mode=download):
-3. Process Only (python3 education_enrollment_preprocess_gen_tmcf.py ---mode=process):
+2. Download Only (python3 education_enrollment_preprocess_gen_tmcf.py --mode=download):
+3. Process Only (python3 education_enrollment_preprocess_gen_tmcf.py --mode=process):
 ```
 
 ### Testing Procedure

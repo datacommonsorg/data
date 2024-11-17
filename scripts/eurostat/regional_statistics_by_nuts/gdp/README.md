@@ -69,8 +69,8 @@ This script offers three modes of operation: download, process, or both download
 
 ```bash
 1. Download and Process (python3 import_data.py or no mode flag):
-2. Download Only (python3 import_data.py ---mode=download):
-3. Process Only (python3 import_data.py ---mode=process):
+2. Download Only (python3 import_data.py --mode=download):
+3. Process Only (python3 import_data.py --mode=process):
 ```
 
 ### Testing Procedure

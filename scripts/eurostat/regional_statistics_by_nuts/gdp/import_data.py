@@ -82,7 +82,7 @@ class EurostatGDPImporter:
         self.preprocessed_df = None
         self.clean_df = None
 
-    def download_data(self, input_source, download_path):
+    def download_data(self, download_link, download_path):
         """Downloads raw data from Eurostat website and stores it in instance
         data frame.
         
@@ -93,14 +93,14 @@ class EurostatGDPImporter:
             Returns:None
             
         """
-        logging.info("file downloading")
         try:
-            urllib.request.urlretrieve(input_source, "nama_10r_3gdp.tsv.gz")
+            logging.info(f'Downloading: {download_link}')
+            urllib.request.urlretrieve(download_link, "nama_10r_3gdp.tsv.gz")
             self.raw_df = pd.read_table("nama_10r_3gdp.tsv.gz")
             self.raw_df.to_csv(download_path, index=False, sep='\t')
-            logging.info("file download completed")
+            logging.info(f'Downloaded {download_path} from {download_link}')
         except Exception as e:
-            logging.fatal(f'download error {e}')
+            logging.fatal(f'Download error for: {download_link}: {e}')
 
     def preprocess_data(self, input_file):
         """Preprocesses instance raw_df and puts it into long format.
@@ -110,7 +110,7 @@ class EurostatGDPImporter:
             A preprocessed DataFrame.
         """
         try:
-            logging.info('file processing started ')
+            logging.info(f'Processing file: {input_file}')
             self.raw_df = pd.read_table(input_file)
             self.raw_df = self.raw_df.rename(columns=({
                 'freq,unit,geo\TIME_PERIOD': 'unit,geo\\time'
@@ -118,10 +118,10 @@ class EurostatGDPImporter:
             self.raw_df['unit,geo\\time'] = self.raw_df[
                 'unit,geo\\time'].str.slice(2)
             self.preprocessed_df = preprocess_df(self.raw_df)
-            logging.info("file processing completed")
+            logging.info("File processing completed")
             return self.preprocessed_df
         except Exception as e:
-            logging.fatal(f'processing error {e}')
+            logging.fatal(f'Processing error {e}')
 
     def clean_data(self):
         """Drops unnecessary columns that are not needed for data import.
@@ -132,11 +132,11 @@ class EurostatGDPImporter:
                              "Please check you are calling preprocess_data "
                              "before clean_data.")
         try:
-            logging.info('file cleaning starts ')
+            logging.info('File cleaning starts ')
             self.clean_df = self.preprocessed_df[self.DESIRED_COLUMNS]
-            logging.info("cleaning completed")
+            logging.info("Cleaning completed")
         except Exception as e:
-            logging.fatal(f' error while cleaning {e}')
+            logging.fatal(f' Error while cleaning {e}')
 
         # GDP measurements for all of Europe are currently removed for lack
         # of a way to represent them in the DataCommons Graph.
@@ -199,11 +199,11 @@ class EurostatGDPImporter:
                              "check you are calling clean_data before "
                              "save_csv.")
         try:
-            logging.info('generating csv file. ')
+            logging.info('Generating csv file. ')
             self.clean_df.to_csv(filename)
-            logging.info("completed")
+            logging.info("Completed")
         except Exception as e:
-            logging.fatal(f' error while saving {e}')
+            logging.fatal(f' Error while saving {e}')
 
     def generate_tmcf(self):
         temp = ('Node: E:eurostat_gdp->E{i}\n'

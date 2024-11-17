@@ -52,8 +52,8 @@ This script offers three modes of operation: download, process, or both download
 
 ```bash
 1. Download and Process (python3 preprocess.py or no mode flag):
-2. Download Only (python3 preprocess.py ---mode=download):
-3. Process Only (python3 preprocess.py ---mode=process):
+2. Download Only (python3 preprocess.py --mode=download):
+3. Process Only (python3 preprocess.py --mode=process):
 ```
 
 To generate `demo_r_mlifexp.tmcf` and `demo_r_mlifexp_statvar.mcf`, run:

@@ -66,9 +66,9 @@ To import data, run the following command:
 ```
 1. Download and Process (python3 import_data.py or no mode flag):
 
-2. Download Only (python3 import_data.py ---mode=download):
+2. Download Only (python3 import_data.py --mode=download):
 
-3. Process Only (python3 import_data.py ---mode=process):
+3. Process Only (python3 import_data.py --mode=process):
 
 ```
 

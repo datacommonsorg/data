@@ -40,14 +40,14 @@ def download_data(download_link, download_path):
         Returns:None
         
     """
-    logging.info("file downloading")
     try:
+        logging.info(f'Downloading: {download_link}')
         urllib.request.urlretrieve(download_link, "demo_r_gind3.tsv.gz")
         raw_df = pd.read_table("demo_r_gind3.tsv.gz")
         raw_df.to_csv(download_path, index=False, sep='\t')
-        logging.info("file download completed")
+        logging.info(f'Downloaded {download_path} from {download_link}')
     except Exception as e:
-        logging.fatal(f'download error {e}')
+        logging.fatal(f'Download error for: {download_link}: {e}')
 
 
 def preprocess_data(file_path):
@@ -92,7 +92,7 @@ def preprocess_data(file_path):
     
     """
     try:
-        logging.info('file processing started ')
+        logging.info(f'Processing file: {file_path}')
         raw_df = pd.read_csv(file_path, sep="\t")
         raw_df = raw_df.rename(columns=({
             'freq,indic_de,geo\TIME_PERIOD': 'indic_de,geo\\time'
@@ -159,10 +159,10 @@ def preprocess_data(file_path):
                 '{0}|notes'.format(column_name)] = (zip(
                     *preprocessed_df[column_name].apply(lambda x: x.split(' ')))
                                                    )
-        logging.info('file processing completed')
+        logging.info('File processing completed')
         return preprocessed_df
     except Exception as e:
-        logging.fatal(f'processing error {e}')
+        logging.fatal(f'Processing error for {e}')
 
 
 def clean_data(preprocessed_df, output_path):
@@ -179,7 +179,7 @@ def clean_data(preprocessed_df, output_path):
 
     # number of columns should be 2 + 2X, we want the first 2 + X
     try:
-        logging.info('file cleaning started ')
+        logging.info('Cleaning process start. ')
         num_clean_columns = len(preprocessed_df.columns) // 2 + 1
         # drop unused columns
         clean_df = preprocessed_df.iloc[:, :num_clean_columns]
@@ -187,7 +187,7 @@ def clean_data(preprocessed_df, output_path):
         # replace colon with NaN.
         clean_df = clean_df.replace(':', '')
         clean_df['geo'] = clean_df['geo'].apply(
-            lambda geo: f'nuts/{geo}' if any(geo.isdigit() for geo in geo) or
+            lambda geo: f'nuts/{geo}' if any(g.isdigit() for g in geo) or
             ('nuts/' + geo in NUTS1_CODES_NAMES) else COUNTRY_MAP.get(
                 geo, f'{geo}'))
 
@@ -211,9 +211,9 @@ def clean_data(preprocessed_df, output_path):
                   'GROWRT']] /= 1000  # apply scaling factor of 1000
         clean_df.columns = new_names
         clean_df.to_csv(output_path, index=False)
-        logging.info('file cleaning completed ')
+        logging.info('Cleaning process completed ')
     except Exception as e:
-        logging.fatal(f'cleaning error {e}')
+        logging.fatal(f'Cleaning error {e}')
 
 
 def main(_):

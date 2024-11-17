@@ -68,14 +68,14 @@ def download_data(download_link, download_path):
         Returns:None
         
     """
-    logging.info("file downloading")
     try:
+        logging.info(f'Processing file: {download_path}')
         urllib.request.urlretrieve(download_link, "demo_r_mlifexp.tsv.gz")
         raw_df = pd.read_table("demo_r_mlifexp.tsv.gz")
         raw_df.to_csv(download_path, index=False, sep='\t')
-        logging.info("file download completed")
+        logging.info(f'Downloaded {download_path} from {download_link}')
     except Exception as e:
-        logging.fatal(f'download error {e}')
+        logging.fatal(f'Download error for: {download_link}: {e}')
 
 
 def preprocess(file_path):
@@ -85,7 +85,7 @@ def preprocess(file_path):
      Returns:
          None"""
     try:
-        logging.info('file processing started ')
+        logging.info('File processing start')
         data = pd.read_csv(file_path, delimiter='\t')
         data = data.rename(columns=({
             'freq,unit,sex,age,geo\TIME_PERIOD': 'unit,sex,age,geo\\time'
@@ -154,10 +154,10 @@ def preprocess(file_path):
 
         # Save the processed data into CSV file.
         data.to_csv(PATH[:-4] + '_cleaned.csv', index=False)
-        logging.info('file processing completed')
+        logging.info('File processing completed')
         return
     except Exception as e:
-        logging.fatal(f'processing error {e}')
+        logging.fatal(f'Processing error {e}')
 
 
 def main(_):

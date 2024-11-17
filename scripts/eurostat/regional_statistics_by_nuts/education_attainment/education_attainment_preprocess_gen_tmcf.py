@@ -96,14 +96,14 @@ def download_data(download_link, download_path):
         Returns:None
         
     """
-    logging.info("file downloading")
     try:
+        logging.info(f'Downloading: {download_link}')
         urllib.request.urlretrieve(download_link, "edat_lfse_04.tsv.gz")
         raw_df = pd.read_table("edat_lfse_04.tsv.gz")
         raw_df.to_csv(download_path, index=False, sep='\t')
-        logging.info("file download completed")
+        logging.info(f'Downloaded {download_path} from {download_link}')
     except Exception as e:
-        logging.fatal(f'download error {e}')
+        logging.fatal(f'Download error for: {download_link}: {e}')
 
 
 def translate_wide_to_long(file_path):
@@ -115,7 +115,7 @@ def translate_wide_to_long(file_path):
     
     """
     try:
-        logging.info('transforming data: wide to long. ')
+        logging.info('Transforming data: wide to long. ')
         df = pd.read_csv(file_path, delimiter='\t')
         df = df.rename(columns=({
             'freq,sex,isced11,age,unit,geo\TIME_PERIOD':
@@ -150,7 +150,7 @@ def translate_wide_to_long(file_path):
         # Assuming NUTS1_CODES_NAMES and COUNTRY_MAP are already defined
 
         df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}'
-                                    if any(char.isdigit() for char in geo) or
+                                    if any(g.isdigit() for g in geo) or
                                     ('nuts/' + geo in NUTS1_CODES_NAMES
                                     ) else COUNTRY_MAP.get(geo, f'{geo}'))
 
@@ -166,10 +166,10 @@ def translate_wide_to_long(file_path):
                             columns=['sex-level'],
                             aggfunc='first').reset_index().rename_axis(None,
                                                                        axis=1)
-        logging.info('transforming data: wide to long.. completed ')
+        logging.info('Transforming data: wide to long.. completed ')
         return df
     except Exception as e:
-        logging.fatal(f'transforming error {e}')
+        logging.fatal(f'Transforming error for {e}')
 
 
 def preprocess(df, cleaned_csv):
@@ -182,7 +182,7 @@ def preprocess(df, cleaned_csv):
         None
     """
     try:
-        logging.info('file processing started ')
+        logging.info(f'Processing file: {cleaned_csv}')
         df = df.replace(np.NaN, '', regex=True)
         with open(cleaned_csv, 'w', newline='') as f_out:
             writer = csv.DictWriter(f_out,
@@ -292,10 +292,10 @@ def preprocess(df, cleaned_csv):
                     'Count_Person_25To64Years_TertiaryEducation_Male_AsAFractionOfCount_Person_25To64Years_Male':
                         (row['M_ED5-8_Y25-64']),
                 })
-        logging.info('file processing completed')
+        logging.info('File processing completed')
 
     except Exception as e:
-        logging.fatal(f'processing error {e}')
+        logging.fatal(f'Processing error {e}')
 
 
 def get_template_mcf(output_columns, _TMCF):
@@ -330,7 +330,7 @@ def get_template_mcf(output_columns, _TMCF):
 
         logging.info('Template MCF processing completed')
     except Exception as e:
-        logging.fatal(f'processing error {e}')
+        logging.fatal(f'Processing error {e}')
 
 
 def main(_):
