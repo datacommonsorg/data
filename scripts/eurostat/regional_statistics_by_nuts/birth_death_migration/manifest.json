@@ -1,0 +1,19 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "EurostatData_Demographic_Balance_Crude_Rates",
+            "curator_emails": ["spateriya@google.com"],
+            "provenance_url":"https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_gind3/?format=TSV&compressed=true",
+            "provenance_description": "Regional Statistics by NUTS Classification.",
+            "scripts": ["import_data.py"],
+            "import_inputs": [{
+                "template_mcf": "EurostatNUTS3_BirthDeathMigration.tmcf",
+                "cleaned_csv": "EurostatNUTS3_BirthDeathMigration.csv"
+            }],
+        "cron_schedule": "00 02 * * 2"
+        }
+    ]
+}
+
+
+
