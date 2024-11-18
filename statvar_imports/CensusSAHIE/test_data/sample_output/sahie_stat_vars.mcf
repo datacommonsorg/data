@@ -1,0 +1,1671 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/SAHIE_20241115/output/test_data/sample_input/sahie.csv --output_path=/usr/local/google/home/swethakumari/SAHIE_20241115/output/test_data/sample_output/sahie --pv_map=/usr/local/google/home/swethakumari/SAHIE_20241115/pvmap.csv --config=/usr/local/google/home/swethakumari/SAHIE_20241115/metadata.csv" on 2024-11-18 09:51:18.794303
+
+Node: dcid:Count_Person_18OrLessYears
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 18 Years]
+
+Node: dcid:Count_Person_18To64Years_1.38To4RatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+
+Node: dcid:Count_Person_18To64Years_1.38To4RatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_18To64Years_1.38To4RatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_18To64Years_2.5OrLessRatioToPovertyLine_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+gender: dcid:Female
+
+Node: dcid:Count_Person_18To64Years_2.5OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_18To64Years_2.5OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_18To64Years_2OrLessRatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+
+Node: dcid:Count_Person_18To64Years_2OrLessRatioToPovertyLine_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+gender: dcid:Male
+
+Node: dcid:Count_Person_18To64Years_2OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_18To64Years_2OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_18To64Years_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_18To64Years_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+
+Node: dcid:Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+
+Node: dcid:Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_21To64Years_1.38To4RatioToPovertyLine_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+gender: dcid:Female
+
+Node: dcid:Count_Person_21To64Years_1.38To4RatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_21To64Years_1.38To4RatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_21To64Years_2.5OrLessRatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+
+Node: dcid:Count_Person_21To64Years_2.5OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_21To64Years_2.5OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_21To64Years_4OrLessRatioToPovertyLine_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+gender: dcid:Female
+
+Node: dcid:Count_Person_21To64Years_4OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_21To64Years_4OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_40To64Years_2OrLessRatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+
+Node: dcid:Count_Person_40To64Years_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_40To64Years_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [40 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+
+Node: dcid:Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+
+Node: dcid:Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_50To64Years_1.38To4RatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+
+Node: dcid:Count_Person_50To64Years_1.38To4RatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_50To64Years_1.38To4RatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_64OrLessYears_1.38OrLessRatioToPovertyLine_NoHealthInsurance_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+race: dcid:WhiteAlone
+
+Node: dcid:Count_Person_64OrLessYears_1.38OrLessRatioToPovertyLine_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+race: dcid:WhiteAlone
+
+Node: dcid:Count_Person_64OrLessYears_1.38OrLessRatioToPovertyLine_WithHealthInsurance_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+race: dcid:WhiteAlone
+
+Node: dcid:Count_Person_64OrLessYears_2OrLessRatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+
+Node: dcid:Count_Person_64OrLessYears_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_64OrLessYears_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Count_Person_64OrLessYears_4OrLessRatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+
+Node: dcid:Count_Person_64OrLessYears_4OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Count_Person_64OrLessYears_4OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_1.38To4RatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_1.38To4RatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_1.38To4RatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_2.5OrLessRatioToPovertyLine_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+gender: dcid:Female
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_2.5OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_2.5OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_2OrLessRatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_2OrLessRatioToPovertyLine_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+gender: dcid:Male
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_2OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_2OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+gender: dcid:Female
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_18To64Years_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [18 64 Years]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_1.38OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_1.38To4RatioToPovertyLine_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+gender: dcid:Female
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_1.38To4RatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_1.38To4RatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_2.5OrLessRatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_2.5OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_2.5OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_4OrLessRatioToPovertyLine_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+gender: dcid:Female
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_4OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_4OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+gender: dcid:Male
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_21To64Years_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [21 64 Years]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_2OrLessRatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [40 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [40 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [40 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [40 64 Years]
+gender: dcid:Male
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [40 64 Years]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_40To64Years_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [40 64 Years]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+
+Node: dcid:MarginOfError_Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+
+Node: dcid:MarginOfError_Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_50To64Years_1.38OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_50To64Years_1.38To4RatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+
+Node: dcid:MarginOfError_Count_Person_50To64Years_1.38To4RatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_50To64Years_1.38To4RatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_64OrLessYears_1.38OrLessRatioToPovertyLine_NoHealthInsurance_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+race: dcid:WhiteAlone
+
+Node: dcid:MarginOfError_Count_Person_64OrLessYears_1.38OrLessRatioToPovertyLine_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+race: dcid:WhiteAlone
+
+Node: dcid:MarginOfError_Count_Person_64OrLessYears_1.38OrLessRatioToPovertyLine_WithHealthInsurance_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+race: dcid:WhiteAlone
+
+Node: dcid:MarginOfError_Count_Person_64OrLessYears_2OrLessRatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+
+Node: dcid:MarginOfError_Count_Person_64OrLessYears_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_64OrLessYears_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_64OrLessYears_4OrLessRatioToPovertyLine
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+
+Node: dcid:MarginOfError_Count_Person_64OrLessYears_4OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Count_Person_64OrLessYears_4OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18OrLessYears_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [- 18 Years]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18OrLessYears_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [- 18 Years]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18To64Years_1.38To4RatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18To64Years_1.38To4RatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18To64Years_2.5OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18To64Years_2.5OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18To64Years_2OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18To64Years_2OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18To64Years_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18To64Years_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18To64Years_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [18 64 Years]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_18To64Years_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [18 64 Years]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_1.38OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_1.38OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_1.38OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_1.38OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_1.38To4RatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_1.38To4RatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_2.5OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_2.5OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_4OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_4OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_21To64Years_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [21 64 Years]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_40To64Years_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [40 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_40To64Years_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [40 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_40To64Years_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [40 64 Years]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_40To64Years_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [40 64 Years]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_50To64Years_1.38OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_50To64Years_1.38OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_50To64Years_1.38OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_50To64Years_1.38OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_50To64Years_1.38To4RatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_50To64Years_1.38To4RatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [50 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_64OrLessYears_1.38OrLessRatioToPovertyLine_NoHealthInsurance_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+race: dcid:WhiteAlone
+
+Node: dcid:MarginOfError_Percent_Person_64OrLessYears_1.38OrLessRatioToPovertyLine_WithHealthInsurance_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+race: dcid:WhiteAlone
+
+Node: dcid:MarginOfError_Percent_Person_64OrLessYears_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_64OrLessYears_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_64OrLessYears_4OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:MarginOfError_Percent_Person_64OrLessYears_4OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:marginOfError
+age: [- 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_18OrLessYears_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [- 18 Years]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_18OrLessYears_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [- 18 Years]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_18To64Years_1.38To4RatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_18To64Years_1.38To4RatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_18To64Years_2.5OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_18To64Years_2.5OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_18To64Years_2OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_18To64Years_2OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_18To64Years_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_18To64Years_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [18 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_21To64Years_1.38OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_21To64Years_1.38OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_21To64Years_1.38OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_21To64Years_1.38OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_21To64Years_1.38To4RatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_21To64Years_1.38To4RatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_21To64Years_2.5OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_21To64Years_2.5OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 2.5 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_21To64Years_4OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_21To64Years_4OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [21 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_40To64Years_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [40 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_40To64Years_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [40 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_50To64Years_1.38OrLessRatioToPovertyLine_Female_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_50To64Years_1.38OrLessRatioToPovertyLine_Female_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Female
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_50To64Years_1.38OrLessRatioToPovertyLine_Male_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_50To64Years_1.38OrLessRatioToPovertyLine_Male_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+gender: dcid:Male
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_50To64Years_1.38To4RatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_50To64Years_1.38To4RatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [50 64 Years]
+familyIncome: [1.38 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_64OrLessYears_1.38OrLessRatioToPovertyLine_NoHealthInsurance_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+race: dcid:WhiteAlone
+
+Node: dcid:Percent_Person_64OrLessYears_1.38OrLessRatioToPovertyLine_WithHealthInsurance_WhiteAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 1.38 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+race: dcid:WhiteAlone
+
+Node: dcid:Percent_Person_64OrLessYears_2OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_64OrLessYears_2OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 2 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+
+Node: dcid:Percent_Person_64OrLessYears_4OrLessRatioToPovertyLine_NoHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+healthInsurance: dcid:NoHealthInsurance
+
+Node: dcid:Percent_Person_64OrLessYears_4OrLessRatioToPovertyLine_WithHealthInsurance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+age: [- 64 Years]
+familyIncome: [- 4 RatioToPovertyLine]
+healthInsurance: dcid:WithHealthInsurance
+

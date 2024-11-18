@@ -1,0 +1,5 @@
+Node: dcid:healthInsurance
+typeOf: dcs:Property
+name: "healthInsurance"
+rangeIncludes: dcid:HealthPreventionEnum,dcid:USC_HealthInsuranceEnum
+
