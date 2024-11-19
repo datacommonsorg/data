@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -62,7 +62,6 @@ from datetime import datetime as dt
 from absl import logging
 
 import logging
-# Set up logging
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -120,7 +119,6 @@ def _calculate_agg_measure_method(year, sv):
       Measurement Method
     """
     for r in RACE:
-        # if r in sv:
         if sv.endswith(r) or sv in [
                 'dcid:Count_Person_WhiteAloneNotHispanicOrLatino',
                 'dcid:Count_Person_Male_WhiteAloneNotHispanicOrLatino',
@@ -151,7 +149,6 @@ def _calculate_asis_measure_method(year, sv):
       Measurement Method
     """
     for r in RACE:
-        # if r in sv:
         if sv.endswith(r) or sv in [
                 'dcid:Count_Person_WhiteAloneNotHispanicOrLatino',
                 'dcid:Count_Person_Male_WhiteAloneNotHispanicOrLatino',
@@ -389,7 +386,12 @@ def _process_state_files_1980_1990(download_dir):
                 for p in _HISPANIC_RACES:
                     column_header.append(p + '-M')
                     column_header.append(p + '-F')
-                df.columns = column_header
+
+                # Map the old column names to the new column names
+                column_mapping = {old: new for old, new in zip(df.columns, column_header)}
+
+                # Use df.rename() to rename columns
+                df.rename(columns=column_mapping, inplace=True)
 
                 # Write to the final output file, appending if necessary
                 if file == files_list[0]:
@@ -750,7 +752,6 @@ def _process_county_files_2000_2010(download_dir):
         _HISPANIC_RACES = ['H', 'HWA', 'HBA', 'HIA', 'HAA', 'HNA', 'HTOM']
 
         # Process the non-Hispanic and Hispanic races
-        # df1['NH'] = df1['H'] = 0
         for p in _NOT_HISPANIC_RACES:
             df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
@@ -810,8 +811,9 @@ def _process_county_files_2010_2020(download_dir):
                                  low_memory=False)
 
                 # filter by agegrp = 0 (0 = sum of all age group added)
-                # filter years 3 - 13 (1, 2 - is base estimate and not for month July)
-                df = df.query("AGEGRP == 0 & YEAR not in [1, 2]").copy()
+                # filter years 3 - 12 (1, 2 - is base estimate and not for month July)
+                # Year 13 is removed as we getting the same for other files which is processed in _process_county_files_2020_2029
+                df = df.query("AGEGRP == 0 & YEAR not in [1, 2,13]").copy()
 
                 # convert year code to year
                 # Year code starting from 3 for Year 2010
@@ -859,7 +861,6 @@ def _process_county_files_2010_2020(download_dir):
             'HIAC', 'HAAC', 'HNAC'
         ]
 
-        # df1['NH'] = df1['H'] = 0
         for p in _NOT_HISPANIC_RACES:
             df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
@@ -931,12 +932,9 @@ def _process_county_files_2020_2029(download_dir):
                 df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(
                     2) + (df['COUNTY'].map(str)).str.zfill(3)
 
-                # Drop unnecessary columns
-                df.drop([
-                    'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'
-                ],
-                        axis=1,
-                        inplace=True)
+                # Remove unnecessary columns
+                columns_to_remove = {'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'}
+                df = df[df.columns.difference(columns_to_remove)]
 
                 if file == files_list[0]:
                     df.to_csv(output_file_path + output_file_name, index=False)
@@ -968,7 +966,6 @@ def _process_county_files_2020_2029(download_dir):
             'HIAC', 'HAAC', 'HNAC'
         ]
 
-        # df1['NH'] = df1['H'] = 0
         for p in _NOT_HISPANIC_RACES:
             df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
@@ -1208,7 +1205,7 @@ def _consolidate_county_files():
     Only SV relevant for SRH processing are retained and all other stats are 
     dropped.
 
-    This funtion consolidates both as-is and agg data into two seperate files.
+    This function consolidates both as-is and agg data into two separate files.
     """
 
     county_file = [
@@ -1234,19 +1231,13 @@ def _consolidate_county_files():
             lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
 
         if file == county_file[0]:
-            #added by Shamim to keep last values
-            df = df.drop_duplicates(
-                subset=['YEAR', 'LOCATION', 'SV', 'MEASUREMENT_METHOD'],
-                keep='last')
+            
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'county_consolidated_temp.csv',
                       header=True,
                       index=False)
         else:
-            #added by Shamim to keep last values
-            df = df.drop_duplicates(
-                subset=['YEAR', 'LOCATION', 'SV', 'MEASUREMENT_METHOD'],
-                keep='last')
+            
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'county_consolidated_temp.csv',
                       header=False,
@@ -1256,9 +1247,7 @@ def _consolidate_county_files():
     df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                      'county_consolidated_temp.csv')
     df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
-    #added by Shamim to keep last values
-    df = df.drop_duplicates(
-        subset=['YEAR', 'LOCATION', 'SV', 'MEASUREMENT_METHOD'], keep='last')
+   
     df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
               'county_consolidated_as_is_final.csv',
               header=True,
@@ -1326,9 +1315,8 @@ def _consolidate_all_geo_files(output_path):
             for geo in ['national', 'state', 'county']
     ]:
         as_is_df = pd.concat([as_is_df, pd.read_csv(file)])
-    #added by Shamim to keep last values
-    as_is_df = as_is_df.drop_duplicates(
-        subset=['YEAR', 'LOCATION', 'SV', 'MEASUREMENT_METHOD'], keep='last')
+    
+    # Saving the cleaned 'as_is_df' DataFrame to a CSV file.
     as_is_df.to_csv(_CODEDIR + output_path + 'population_estimate_by_srh.csv',
                     header=True,
                     index=False)
@@ -1339,14 +1327,12 @@ def _consolidate_all_geo_files(output_path):
             for geo in ['national', 'state', 'county']
     ]:
         agg_df = pd.concat([agg_df, pd.read_csv(file)])
-        #Added by shamim
-        agg_df = agg_df.drop_duplicates(
-            subset=['YEAR', 'LOCATION', 'MEASUREMENT_METHOD', 'SV'],
-            keep='last')
+        
+        # Saving the cleaned 'agg_df' DataFrame to a CSV file.
         agg_df.to_csv(_CODEDIR + output_path +
-                      'population_estimate_by_srh_agg.csv',
-                      header=True,
-                      index=False)
+                    'population_estimate_by_srh_agg.csv',
+                    header=True,
+                    index=False)
 
 
 def _consolidate_files(output_path):
@@ -1362,36 +1348,29 @@ def _consolidate_files(output_path):
 
 
 def add_future_year_urls():
-    global _FILES_TO_DOWNLOAD
-    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as input_file:
-        _FILES_TO_DOWNLOAD = json.load(input_file)
-    urls_to_scan = [
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh90.txt",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh91.txt",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh92.txt",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh93.txt",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh94.txt",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh95.txt",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh96.txt",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh97.txt",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh98.txt",
-        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/asrh/sasrh99.txt"
-    ]
-    # This method will generate URLs for the years 2024 to 2029
-    for future_year in range(2024, 2030):
-        if dt.now().year > future_year:
-            YEAR = future_year
-            for url in urls_to_scan:
-                url_to_check = url.format(YEAR=YEAR)
-                try:
-                    check_url = requests.head(url_to_check)
-                    if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
+  global _FILES_TO_DOWNLOAD
+  with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as input_file:
+    _FILES_TO_DOWNLOAD = json.load(input_file)
 
-                except:
-                    logging.error(f"URL is not accessable {url_to_check}")
+  urls_to_scan = [
+      "https://www2.census.gov/programs-surveys/popest/datasets/{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
+  ]
+
+  # This method will generate URLs for the years 2024 to 2029
+  for future_year in range(2023, 2030):
+    if dt.now().year > future_year:
+      YEAR = future_year
+      download_path = f"20{YEAR}_{YEAR+1}/county/cc-est{YEAR}-alldata.csv"  # Use f-string for dynamic path
+
+      for url in urls_to_scan:
+        url_to_check = url.format(YEAR=YEAR)
+        try:
+          check_url = requests.head(url_to_check)
+          if check_url.status_code == 200:
+            _FILES_TO_DOWNLOAD.append({"download_path": download_path})
+
+        except:
+          logging.error(f"URL is not accessible: {url_to_check}")
 
 
 def _process_files(download_dir):
@@ -1532,3 +1511,4 @@ def main(_):
 
 if __name__ == '__main__':
     app.run(main)
+    

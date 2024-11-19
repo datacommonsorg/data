@@ -8,12 +8,12 @@
       "scripts": ["process.py"],
       "import_inputs": [
         {
-          "template_mcf": "population_estimate_by_srh.tmcf",
-          "cleaned_csv": "population_estimate_by_srh.csv"
+          "template_mcf": "output_files/population_estimate_by_srh.tmcf",
+          "cleaned_csv": "output_files/population_estimate_by_srh.csv"
         },
         {
-          "template_mcf": "population_estimate_by_srh_agg.tmcf",
-          "cleaned_csv": "population_estimate_by_srh_agg.csv"
+          "template_mcf": "output_files/population_estimate_by_srh_agg.tmcf",
+          "cleaned_csv": "output_files/population_estimate_by_srh_agg.csv"
         }
       ],
       "cron_schedule": "0 06 * * 1"

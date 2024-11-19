@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -262,10 +262,15 @@ WORKING_DIRECTORIES = [
     '/process_files/agg/1990_2000/national/',
     '/process_files/agg/2000_2010/national/',
     '/process_files/agg/2020_2029/national/',
-    '/process_files/agg/2010_2020/national/', '/output_files/', '/input_files/',
-    '/input_files/1990_2000/county/', '/input_files/2000_2010/county/',
-    '/input_files/2010_2020/county/', '/input_files/2020_2029/county/',
-    '/input_files/1980_1990/state/', '/input_files/1990_2000/state/'
+    '/process_files/agg/2010_2020/national/',
+    '/output_files/',
+    '/input_files/',
+    '/input_files/1990_2000/county/',
+    '/input_files/2000_2010/county/',
+    '/input_files/2010_2020/county/',
+    '/input_files/2020_2029/county/',
+    '/input_files/1980_1990/state/',
+    '/input_files/1990_2000/state/'
 ]
 
 MCF_SRH = '''Node: dcid:{node_name}
