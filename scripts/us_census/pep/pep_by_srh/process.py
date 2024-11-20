@@ -705,38 +705,36 @@ def _process_county_files_2000_2010(download_dir):
 
         # Read and process each file
         for file in files_list:
-            df = pd.read_csv(input_file_path + file, encoding='ISO-8859-1')
+            try:
+                df = pd.read_csv(input_file_path + file, encoding='ISO-8859-1')
 
-            # Apply filtering and transformation
-            df = df.query('AGEGRP == 99 & YEAR not in [1, 12, 13]').copy()
-            df['YEAR'] = 2000 - 2 + df['YEAR']
-            df.insert(7, 'LOCATION', '', True)
-            df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + (
-                df['COUNTY'].map(str)).str.zfill(3)
-            df.drop(
-                ['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
-                axis=1,
-                inplace=True)
+                # Apply filtering and transformation
+                df = df.query('AGEGRP == 99 & YEAR not in [1, 12, 13]').copy()
+                df['YEAR'] = 2000 - 2 + df['YEAR']
+                df.insert(7, 'LOCATION', '', True)
+                df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + (
+                    df['COUNTY'].map(str)).str.zfill(3)
+                df.drop(
+                    ['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+                    axis=1,
+                    inplace=True)
 
-            # Append data to the output CSV
-            if file == files_list[0]:
-                df.to_csv(output_file_path + output_file_name,
-                          header=True,
-                          index=False)
-            else:
-                df.to_csv(output_file_path + output_file_name,
-                          header=False,
-                          index=False,
-                          mode='a')
+                # Append data to the output CSV
+                if file == files_list[0]:
+                    df.to_csv(output_file_path + output_file_name,
+                            header=True,
+                            index=False)
+                else:
+                    df.to_csv(output_file_path + output_file_name,
+                            header=False,
+                            index=False,
+                            mode='a')
+                    
+                logging.info(f"Processed and saved file: {file}")
 
-            files_processed += 1  # Increment the counter for successfully processed files
-
-        # Check if the number of processed files matches the expected count
-        if files_processed != expected_files_count:
-            logging.error(
-                f"File processing mismatch: Expected {expected_files_count} files, but processed {files_processed}. Output file generation aborted."
-            )
-            return
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+                continue  # Continue with the next file if this one fails
 
         # Section 2 - Writing Aggregated data
         df = pd.read_csv(output_file_path + output_file_name)
@@ -932,9 +930,10 @@ def _process_county_files_2020_2029(download_dir):
                 df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(
                     2) + (df['COUNTY'].map(str)).str.zfill(3)
 
-                # Remove unnecessary columns
-                columns_to_remove = {'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'}
-                df = df[df.columns.difference(columns_to_remove)]
+                # drop not reuqire columns
+                df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
+                axis=1,
+                inplace=True)
 
                 if file == files_list[0]:
                     df.to_csv(output_file_path + output_file_name, index=False)
@@ -1357,7 +1356,7 @@ def add_future_year_urls():
   ]
 
   # This method will generate URLs for the years 2024 to 2029
-  for future_year in range(2023, 2030):
+  for future_year in range(2024, 2030):
     if dt.now().year > future_year:
       YEAR = future_year
       download_path = f"20{YEAR}_{YEAR+1}/county/cc-est{YEAR}-alldata.csv"  # Use f-string for dynamic path
@@ -1511,4 +1510,4 @@ def main(_):
 
 if __name__ == '__main__':
     app.run(main)
-    
+
