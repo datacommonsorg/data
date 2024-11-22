@@ -64,3 +64,4 @@ If you want to perform "only process", run the below command:
         
 If you want to perform "only download", run the below command:
     python3 preprocess.py --mode=download
+    
