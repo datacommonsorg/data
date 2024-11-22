@@ -19,7 +19,8 @@ Data is available at the NUTS3 level and above.
 
 ### Download URL
 
-ZIP file is available for download from [here](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_gind3.tsv.gz).
+ZIP file is available for download from [here](https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_gind3/?format=TSV&compressed=true).
+
 
 ### License
 
@@ -55,20 +56,29 @@ See parent README.
 #### Scripts
 
 - [import_data.py](import_data.py): import script.
-- [test_import.py](test_import.py): import testing script.
+- [import_data_test.py](import_data_test.py): import testing script.
 
 ### Import Procedure
 
+This script offers three modes of operation: download, process, or both download and process.
 To import data, run the following command:
 
 ```
-python3 import_data.py
+1. Download and Process (python3 import_data.py or no mode flag):
+
+2. Download Only (python3 import_data.py --mode=download):
+
+3. Process Only (python3 import_data.py --mode=process):
+
 ```
 
 ### Testing Procedure
 
+How to Create Sample Data: Extract a subset of rows from your source input file to generate sample input and output CSV files.
+
 To test import procedure, run the following command:
 
 ```
-python3 test_import.py
+python3 import_data_test.py
+
 ```
