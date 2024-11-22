@@ -1059,6 +1059,7 @@ class CensusUSAPopulationByRace:
                 (os.path.join(self.cleaned_csv_file_path,
                     "USA_Population_Count_by_Race_before_2000.csv"))
             generator_df = generator_df[generator_df['geo_ID'].str.len() > 1]
+            #Duplicate geo_ID instances were detected within the 1970-1979 data subset. To ensure data integrity, the older entries were eliminated, leaving only the most recent updates.
             generator_df = generator_df.drop_duplicates(
                 subset=['geo_ID', 'Year'], keep='last')
             generator_df.to_csv(os.path.join(
