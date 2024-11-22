@@ -16,10 +16,8 @@ The dataset contains the following indicators:
 - Enrolment in secondary education, both sexes (number)
 - Enrolment in secondary education, female (number)
 - Enrolment in secondary education, male (number)
-- Enrolment in upper secondary education, both sexes (number)
-- Enrolment in upper secondary education, female (number)
-- Enrolment in upper secondary education, male (number)
+
 
 ## Artifacts
-[test_enrolment.csv](test_enrolment.csv): the cleaned CSV file
-[test_enrolment.tmcf](test_enrolment.tmcf): the mapping file(Template MCF)
+[Enrolment-KNBS.csv](test_enrolment.csv): the cleaned CSV file
+[Enrolment-KNBS.tmcf](test_enrolment.tmcf): the mapping file(Template MCF)
