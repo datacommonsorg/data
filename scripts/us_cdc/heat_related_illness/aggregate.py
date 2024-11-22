@@ -34,6 +34,8 @@ def main(argv):
                        inplace=True)
     country_df = df.groupby(by=['Year', 'StatVar'],
                             as_index=False).agg({'Quantity': 'sum'})
+    country_df['Geo'] = "country/USA"
+    country_df['measurementMethod'] = "dcs:DataCommonsAggregate"
     country_df.to_csv(_FLAGS.output_path, index=False)
 
 
