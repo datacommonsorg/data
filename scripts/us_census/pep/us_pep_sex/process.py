@@ -290,6 +290,36 @@ def _national_2021(file_path: str) -> pd.DataFrame:
     return df
 
 
+def _national_2022(file_path: str) -> pd.DataFrame:
+    """
+    Process and cleans the file for national 2022.
+
+    Args:
+        file_path (str) : input file path.
+
+    Returns:
+        df (pd.DataFrame) : cleaned dataframe.
+    """
+    df = pd.read_csv(file_path)
+    # total is not required in gender
+    df = df.query("SEX !=0")
+    # to get total age present at age = 999
+    df = df.query("AGE == 999")
+    df = df.replace({'SEX': {1: 'Count_Person_Male', 2: 'Count_Person_Female'}})
+    df.rename(columns={'POPESTIMATE2022': '2022', 'SEX': 'Year'}, inplace=True)
+    df.rename(columns={'POPESTIMATE2021': '2021', 'SEX': 'Year'}, inplace=True)
+    df = df.drop(columns=['AGE', 'ESTIMATESBASE2020', 'POPESTIMATE2020'])
+    # replacing rows with columns
+    # making the first row as column name
+    # to get all dataframe in one formate
+    df = df.transpose().reset_index()
+    df.columns = df.iloc[0]
+    df = df[1:]
+    df.insert(0, 'geo_ID', 'country/USA', True)
+    df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
+    return df
+
+
 def _state_1970_1980(file_path: str) -> pd.DataFrame:
     """
     Process and cleans the file for state 1970 to 1980.
@@ -508,6 +538,40 @@ def _state_2021(file_path: str) -> pd.DataFrame:
         'July2020Total', 'July2020Male', 'July2020Female', '2021Total'
     ])
     df['Year'] = '2021'
+    df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
+    return df
+
+
+def _state_2022(file_path: str) -> pd.DataFrame:
+    """
+    Process and cleans the file for state 2022.
+
+    Args:
+        file_path (str) : input file path.
+
+    Returns:
+        df (pd.DataFrame) : cleaned dataframe.
+    """
+    column_name = [
+        'Age', 'April2020Total', 'April2020Male', 'April2020Female',
+        'July2020Total', 'July2020Male', 'July2020Female', 'July2021Total',
+        'July2021Male', 'July2021Female', '2022Total', 'Count_Person_Male',
+        'Count_Person_Female'
+    ]
+    df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
+    df.columns = column_name
+    # extract geoid from file path
+    geoid = file_path[-7:-5]
+    if geoid == "0.":
+        geoid = "01"
+    df = df.query('Age == "Total"')
+    df.insert(1, 'geo_ID', 'geoId/' + geoid)
+    df = df.drop(columns=[
+        'Age', 'April2020Total', 'April2020Male', 'April2020Female',
+        'July2020Total', 'July2020Male', 'July2020Female', 'July2021Total',
+        'July2021Male', 'July2021Female', '2022Total'
+    ])
+    df['Year'] = '2022'
     df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
     return df
 
@@ -889,25 +953,42 @@ class PopulationEstimateBySex:
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .tsv extension
+
             file_name = file_path.split("/")[-1][:-7]
             file_to_function_mapping = {
                 "pe-11-1": _national_1900_1979,
                 "us-est90int": _national_1990_2000,
+                "us-est90int-": _national_1990_2000,
                 "us-est00int": _national_2000_2010,
+                "us-est00int-": _national_2000_2010,
                 "nc-est2020-agesex-": _national_2010_2020,
+                "nc-est2020-agesex-r": _national_2010_2020,
                 "nc-est2021-agesex-": _national_2021,
+                "nc-est2021-agesex-r": _national_2021,
+                "nc-est2022-agesex-": _national_2022,
                 "pe": _state_1970_1980,
                 "stiag": _state_1980_1990,
+                "st-est00int-02-": _state_2000_2010,
                 "st-est00int-02": _state_2000_2010,
                 "SC-EST2020-AGESEX": _state_2010_2020,
-                "sc-est2021-syasex-01%2": _state_2021,
+                "SC-EST2020-AGESEX-": _state_2010_2020,
+                "sc-est2021-syasex-2": _state_2021,
+                "sc-est2021-syasex-3": _state_2021,
+                "sc-est2021-syasex-4": _state_2021,
+                "sc-est2021-syasex-5": _state_2021,
+                "sc-est2021-syasex-0": _state_2021,
+                "sc-est2021-syasex-1": _state_2021,
                 "sc-est2021-syasex-": _state_2021,
+                "sc-est2022-agesex-": _state_2022,
                 "co-asr-1": _county_1970_1980,
                 "pe-02-1": _county_1980_1990,
                 "stch-icen1": _county_1990_2000,
                 "co-est00int-agesex-": _county_2000_2010,
+                "co-est00int-agesex-5": _county_2000_2010,
                 "CC-EST2020-AGESEX-": _county_2010_2020,
-                "cc-est2021-agesex-": _county_2021
+                "CC-EST2020-AGESEX-A": _county_2010_2020,
+                "cc-est2021-agesex-": _county_2021,
+                "cc-est2021-agesex-a": _county_2021
             }
             df = file_to_function_mapping[file_name](file_path)
             final_df = pd.concat([final_df, df])
@@ -921,6 +1002,7 @@ class PopulationEstimateBySex:
             value_vars=['Count_Person_Male', 'Count_Person_Female'],
             var_name="SV",
             value_name="Observation")
+
         final_df.to_csv(self._cleaned_csv_file_path, index=False)
         sv_list = ['Count_Person_Female', 'Count_Person_Male']
         self._generate_mcf(sv_list)
