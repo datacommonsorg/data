@@ -49,4 +49,3 @@ class TestPreprocess(unittest.TestCase):
             os.remove(_OP_DATA_FOLDER)
 
         self.assertEqual(True, actual_df.equals(expected_df))
-
