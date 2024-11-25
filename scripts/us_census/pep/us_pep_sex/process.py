@@ -124,14 +124,15 @@ def _national_1900_1979(file_path: str) -> pd.DataFrame:
                                  skiprows=7,
                                  skipfooter=102,
                                  header=None)
-            
+
             df.columns = [
                 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female',
                 'White Total', 'White Male', 'White Female', 'NonWhite Total',
                 'NonWhite Male', 'NonWhite Female'
             ]
-            df = df.drop(columns=df.columns.difference(['Count_Person_Male', 'Count_Person_Female']))
-            
+            df = df.drop(columns=df.columns.difference(
+                ['Count_Person_Male', 'Count_Person_Female']))
+
         else:
             df = pd.read_csv(file_path,
                              thousands=',',
@@ -145,17 +146,16 @@ def _national_1900_1979(file_path: str) -> pd.DataFrame:
                 'Black Male', 'Black Female', 'OtherRace Total',
                 'OtherRace Male', 'OtherRace Female'
             ]
-            
+
             # dropping unwanted columns
-            df = df.drop(columns=df.columns.difference(['Count_Person_Male', 'Count_Person_Female']))
-            
+            df = df.drop(columns=df.columns.difference(
+                ['Count_Person_Male', 'Count_Person_Female']))
+
         # adding geoid, year and measurement method
         df['Year'] = year
         df.insert(0, 'geo_ID', 'country/USA', True)
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
-    except Exception as e:
-        logging.fatal(f"Error processing the file {file_path}: {e}")
     except Exception as e:
         logging.fatal(f"Error processing the file {file_path}: {e}")
 
@@ -180,8 +180,9 @@ def _national_1990_2000(file_path: str) -> pd.DataFrame:
                 (df["Year"].str.startswith("July"))].reset_index(drop=True)
         df["Year"] = df["Year"].str.replace("July 1, ", "")
         # dropping unwanted columns
-        df = df.drop(columns=df.columns.difference(['Year', 'Total', 'Count_Person_Male', 'Count_Person_Female']))
-        
+        df = df.drop(columns=df.columns.difference(
+            ['Year', 'Total', 'Count_Person_Male', 'Count_Person_Female']))
+
         df.insert(0, 'geo_ID', 'country/USA', True)
         float_col = df.select_dtypes(include=['float64'])
         for col in float_col.columns.values:
@@ -210,10 +211,11 @@ def _national_2000_2010(file_path: str) -> pd.DataFrame:
         ]
         df = df.query('SEX=="MALE" or SEX=="FEMALE"')
         # dropping unwanted columns
-        df = df.drop(columns=df.columns.difference(['SEX', '2000', '2001', '2002', '2003', 
-                                                    '2004', '2005', '2006', '2007','2008', '2009']))
-        
-        
+        df = df.drop(columns=df.columns.difference([
+            'SEX', '2000', '2001', '2002', '2003', '2004', '2005', '2006',
+            '2007', '2008', '2009'
+        ]))
+
         df = df.replace({
             'SEX': {
                 'MALE': 'Count_Person_Male',
@@ -256,11 +258,13 @@ def _national_2010_2020(file_path: str) -> pd.DataFrame:
         # total is not required in gender
         df = df.query("SEX != 0")
         # dropping unwanted column
-        df = df.drop(columns=df.columns.difference(['SEX', 'POPESTIMATE2010', 'POPESTIMATE2011', 'POPESTIMATE2012',
-       'POPESTIMATE2013', 'POPESTIMATE2014', 'POPESTIMATE2015',
-       'POPESTIMATE2016', 'POPESTIMATE2017', 'POPESTIMATE2018',
-       'POPESTIMATE2019', 'POPESTIMATE2020']))
-        
+        df = df.drop(columns=df.columns.difference([
+            'SEX', 'POPESTIMATE2010', 'POPESTIMATE2011', 'POPESTIMATE2012',
+            'POPESTIMATE2013', 'POPESTIMATE2014', 'POPESTIMATE2015',
+            'POPESTIMATE2016', 'POPESTIMATE2017', 'POPESTIMATE2018',
+            'POPESTIMATE2019', 'POPESTIMATE2020'
+        ]))
+
         df = df.replace(
             {'SEX': {
                 1: 'Count_Person_Male',
@@ -315,14 +319,13 @@ def _national_latest(file_path: str) -> pd.DataFrame:
                 1: 'Count_Person_Male',
                 2: 'Count_Person_Female'
             }})
-        column_list=[]
+        column_list = []
         for year in range(2021, 2030):
             column_name = f'POPESTIMATE{year}'
             if column_name in df.columns:
                 df.rename(columns={column_name: str(year)}, inplace=True)
                 column_list.append(str(year))
-    
-            
+
         # Ensure columns are renamed correctly before dropping unnecessary ones
         if 'SEX' in df.columns:
             df.rename(columns={'SEX': 'Year'}, inplace=True)
@@ -372,8 +375,9 @@ def _state_1970_1980(file_path: str) -> pd.DataFrame:
         })
         df['geo_ID'] = 'geoId/' + (df['geo_ID'].map(str)).str.zfill(2)
         df['geo_ID'] = df['geo_ID'] + '-' + df['Year'].astype(str)
-        df = df.drop(columns=df.columns.difference(['geo_ID', 'Race/Sex Indicator', 'Total']))
-        
+        df = df.drop(columns=df.columns.difference(
+            ['geo_ID', 'Race/Sex Indicator', 'Total']))
+
         # replacing rows with columns
         # to get all dataframe in one formate
         df = df.groupby(['geo_ID','Race/Sex Indicator']).sum().transpose()\
@@ -459,9 +463,11 @@ def _state_2000_2010(file_path: str) -> pd.DataFrame:
                 "FEMALE": 'Count_Person_Female'
             }
         })
-        df = df.drop(columns=df.columns.difference(['AgeSex', '2000', '2001', '2002', '2003', '2004', '2005', '2006',
-                                                    '2007', '2008', '2009']))
-        
+        df = df.drop(columns=df.columns.difference([
+            'AgeSex', '2000', '2001', '2002', '2003', '2004', '2005', '2006',
+            '2007', '2008', '2009'
+        ]))
+
         # replacing rows with columns
         # making the first row as column name
         # to get all dataframe in one formate
@@ -518,8 +524,9 @@ def _state_2010_2020(file_path: str) -> pd.DataFrame:
                 'POPEST_FEM': 'Count_Person_Female',
                 'YEAR': 'Year'
             })
-        df = df.drop(columns=df.columns.difference(['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
-        
+        df = df.drop(columns=df.columns.difference(
+            ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
+
         df = df[(df['Year'] != 'April2010Census') &
                 (df['Year'] != 'April2010Estimate') &
                 (df['Year'] != 'April2020')]
@@ -553,7 +560,7 @@ def _state_latest(file_path: str) -> pd.DataFrame:
     # Adding year-specific columns dynamically till current year
     current_year = dt.now().year
     for year in range(2021, current_year):
-        if current_year<2030:
+        if current_year < 2030:
             base_columns.append(f'July{year}Total')
             base_columns.append(f'July{year}Male')
             base_columns.append(f'July{year}Female')
@@ -563,7 +570,7 @@ def _state_latest(file_path: str) -> pd.DataFrame:
 
     # Assign dynamic column names
     df.columns = base_columns
-    
+
     # extract geoid from file path
     geoid = file_path[-7:-5]
     if geoid == "0.":
@@ -576,22 +583,22 @@ def _state_latest(file_path: str) -> pd.DataFrame:
         # Generate column names dynamically
         male_col = f'July{year}Male'
         female_col = f'July{year}Female'
-        
+
         if male_col in df.columns and female_col in df.columns:  # Ensure columns exist
             yearly_df = df[['Age', 'geo_ID', male_col, female_col]].copy()
-            yearly_df = yearly_df.rename(
-                columns={
-                    male_col: 'Count_Person_Male',
-                    female_col: 'Count_Person_Female'
-                }
-            )
+            yearly_df = yearly_df.rename(columns={
+                male_col: 'Count_Person_Male',
+                female_col: 'Count_Person_Female'
+            })
             yearly_df['Year'] = str(year)
-            yearly_df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
+            yearly_df[
+                'Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
             processed_dfs.append(yearly_df)
 
     # Concatenate all the processed DataFrames
     final_df = pd.concat(processed_dfs, ignore_index=True)
     return final_df
+
 
 def _county_1970_1980(file_path: str) -> pd.DataFrame:
     """
@@ -757,11 +764,13 @@ def _county_2000_2010(file_path: str) -> pd.DataFrame:
                 1: 'Count_Person_Male',
                 2: 'Count_Person_Female'
             }})
-        df = df.drop(columns=df.columns.difference(['SEX', 'POPESTIMATE2000', 'POPESTIMATE2001', 'POPESTIMATE2002',
-       'POPESTIMATE2003', 'POPESTIMATE2004', 'POPESTIMATE2005',
-       'POPESTIMATE2006', 'POPESTIMATE2007', 'POPESTIMATE2008',
-       'POPESTIMATE2009', 'geo_ID']))
-    
+        df = df.drop(columns=df.columns.difference([
+            'SEX', 'POPESTIMATE2000', 'POPESTIMATE2001', 'POPESTIMATE2002',
+            'POPESTIMATE2003', 'POPESTIMATE2004', 'POPESTIMATE2005',
+            'POPESTIMATE2006', 'POPESTIMATE2007', 'POPESTIMATE2008',
+            'POPESTIMATE2009', 'geo_ID'
+        ]))
+
         df.rename(columns={
             'POPESTIMATE2000': '2000',
             'POPESTIMATE2001': '2001',
@@ -828,8 +837,9 @@ def _county_2010_2020(file_path: str) -> pd.DataFrame:
                 'POPEST_FEM': 'Count_Person_Female',
                 'YEAR': 'Year'
             })
-        df = df.drop(columns=df.columns.difference(['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
-        
+        df = df.drop(columns=df.columns.difference(
+            ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
+
         df = df[(df['Year'] != 'April2010Census') &
                 (df['Year'] != 'April2010Estimate') &
                 (df['Year'] != 'April2020')]
@@ -866,22 +876,22 @@ def _county_latest(file_path: str) -> pd.DataFrame:
                 9: '2027',
                 10: '2028',
                 11: '2029'
-
             }
-        })            
-        
+        })
+
         df = df.rename(
             columns={
                 'POPEST_MALE': 'Count_Person_Male',
                 'POPEST_FEM': 'Count_Person_Female',
                 'YEAR': 'Year'
             })
-        df = df.drop(columns=df.columns.difference(['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
+        df = df.drop(columns=df.columns.difference(
+            ['Year', 'Count_Person_Male', 'Count_Person_Female', 'geo_ID']))
 
         df = df[(df['Year'] != 'April2020Estimate') &
                 (df['Year'] != 'July2020')]
         df['Measurement_Method'] = 'CensusPEPSurvey'
-        
+
         return df
     except Exception as e:
         logging.fatal(f"Error processing the file {file_path}: {e}")
@@ -975,53 +985,64 @@ class PopulationEstimateBySex:
             # Read till -4 inorder to remove the .tsv extension
 
             file_name = file_path.split("/")[-1][:-7]
-           
+
             # Define the base mappings for fixed years (e.g., 2023)
             file_to_function_mapping = {
-                    "pe-11-1": _national_1900_1979,
-                    "us-est90int": _national_1990_2000,
-                    "us-est90int-": _national_1990_2000,
-                    "us-est00int": _national_2000_2010,
-                    "us-est00int-": _national_2000_2010,
-                    "nc-est2020-agesex-": _national_2010_2020,
-                    "nc-est2020-agesex-r": _national_2010_2020,
-                    "pe": _state_1970_1980,
-                    "stiag": _state_1980_1990,
-                    "st-est00int-02-": _state_2000_2010,
-                    "st-est00int-02": _state_2000_2010,
-                    "SC-EST2020-AGESEX": _state_2010_2020,
-                    "SC-EST2020-AGESEX-": _state_2010_2020,
-                    "co-asr-1": _county_1970_1980,
-                    "pe-02-1": _county_1980_1990,
-                    "stch-icen1": _county_1990_2000,
-                    "co-est00int-agesex-": _county_2000_2010,
-                    "co-est00int-agesex-5": _county_2000_2010,
-                    "CC-EST2020-AGESEX-": _county_2010_2020,
-                    "CC-EST2020-AGESEX-A": _county_2010_2020
+                "pe-11-1": _national_1900_1979,
+                "us-est90int": _national_1990_2000,
+                "us-est90int-": _national_1990_2000,
+                "us-est00int": _national_2000_2010,
+                "us-est00int-": _national_2000_2010,
+                "nc-est2020-agesex-": _national_2010_2020,
+                "nc-est2020-agesex-r": _national_2010_2020,
+                "pe": _state_1970_1980,
+                "stiag": _state_1980_1990,
+                "st-est00int-02-": _state_2000_2010,
+                "st-est00int-02": _state_2000_2010,
+                "SC-EST2020-AGESEX": _state_2010_2020,
+                "SC-EST2020-AGESEX-": _state_2010_2020,
+                "co-asr-1": _county_1970_1980,
+                "pe-02-1": _county_1980_1990,
+                "stch-icen1": _county_1990_2000,
+                "co-est00int-agesex-": _county_2000_2010,
+                "co-est00int-agesex-5": _county_2000_2010,
+                "CC-EST2020-AGESEX-": _county_2010_2020,
+                "CC-EST2020-AGESEX-A": _county_2010_2020
             }
 
             # Iterate from 2023 to 2029 and add mappings for years dynamically
             for file_year in range(2023, 2030):
                 # For the 'national', 'state', and 'county' entries, use the same method for years 2023 to 2029
                 if file_year < dt.now().year:
-                    file_to_function_mapping[f"nc-est{file_year}-agesex-"] = _national_latest
-                    file_to_function_mapping[f"nc-est{file_year}-agesex-r"] = _national_latest
+                    file_to_function_mapping[
+                        f"nc-est{file_year}-agesex-"] = _national_latest
+                    file_to_function_mapping[
+                        f"nc-est{file_year}-agesex-r"] = _national_latest
 
-                    file_to_function_mapping[f"sc-est{file_year}-syasex-2"] =  _state_latest
-                    file_to_function_mapping[f"sc-est{file_year}-syasex-3"] =  _state_latest
-                    file_to_function_mapping[f"sc-est{file_year}-syasex-4"] =  _state_latest
-                    file_to_function_mapping[f"sc-est{file_year}-syasex-5"] =  _state_latest
-                    file_to_function_mapping[f"sc-est{file_year}-syasex-0"] =  _state_latest
-                    file_to_function_mapping[f"sc-est{file_year}-syasex-1"] =  _state_latest
-                    file_to_function_mapping[f"sc-est{file_year}-syasex-"] =  _state_latest
-                    file_to_function_mapping[f"sc-est{file_year}-agesex-"] =  _state_latest
+                    file_to_function_mapping[
+                        f"sc-est{file_year}-syasex-2"] = _state_latest
+                    file_to_function_mapping[
+                        f"sc-est{file_year}-syasex-3"] = _state_latest
+                    file_to_function_mapping[
+                        f"sc-est{file_year}-syasex-4"] = _state_latest
+                    file_to_function_mapping[
+                        f"sc-est{file_year}-syasex-5"] = _state_latest
+                    file_to_function_mapping[
+                        f"sc-est{file_year}-syasex-0"] = _state_latest
+                    file_to_function_mapping[
+                        f"sc-est{file_year}-syasex-1"] = _state_latest
+                    file_to_function_mapping[
+                        f"sc-est{file_year}-syasex-"] = _state_latest
+                    file_to_function_mapping[
+                        f"sc-est{file_year}-agesex-"] = _state_latest
 
-                    file_to_function_mapping[f"cc-est{file_year}-agesex-"] =  _county_latest
-                    file_to_function_mapping[f"cc-est{file_year}-agesex-a"] =  _county_latest
-            
-            
+                    file_to_function_mapping[
+                        f"cc-est{file_year}-agesex-"] = _county_latest
+                    file_to_function_mapping[
+                        f"cc-est{file_year}-agesex-a"] = _county_latest
+
             df = file_to_function_mapping[file_name](file_path)
-            
+
             if not df.empty:
                 processed_count += 1
                 final_df = pd.concat([final_df, df])
@@ -1073,7 +1094,6 @@ def add_future_year_urls():
         "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/detail/sc-est{YEAR}-agesex-{i}.xlsx"  # Contains {i}
     ]
 
-
     # A set to track downloaded URLs for unique {YEAR} and URLs without {i}
     downloaded_year_urls = set()
 
@@ -1081,7 +1101,7 @@ def add_future_year_urls():
     for future_year in range(2023, 2030):
         if dt.now().year > future_year:
             YEAR = future_year
-        # Loop through URLs
+            # Loop through URLs
             for url in urls_to_scan:
                 if "{i}" in url:  # This URL contains the {i} variable, so we loop through i from 01 to 56
                     for i in range(1, 57):  # Loop i from 01 to 56
@@ -1089,12 +1109,16 @@ def add_future_year_urls():
                         url_to_check = url.format(YEAR=YEAR, i=formatted_i)
 
                         try:
-                            check_url = requests.head(url_to_check, allow_redirects=True)
+                            check_url = requests.head(url_to_check,
+                                                      allow_redirects=True)
                             if check_url.status_code == 200:
-                                _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
-                            
+                                _FILES_TO_DOWNLOAD.append(
+                                    {"download_path": url_to_check})
+
                         except requests.exceptions.RequestException as e:
-                            logging.fatal(f"URL is not accessible {url_to_check} due to {e}")
+                            logging.fatal(
+                                f"URL is not accessible {url_to_check} due to {e}"
+                            )
 
                 else:  # This URL does not contain {i}, so we only need to process it once per year
                     url_to_check = url.format(YEAR=YEAR)
@@ -1104,16 +1128,22 @@ def add_future_year_urls():
                         continue  # Skip this URL if it's already processed
 
                     try:
-                        check_url = requests.head(url_to_check, allow_redirects=True)
+                        check_url = requests.head(url_to_check,
+                                                  allow_redirects=True)
                         if check_url.status_code == 200:
-                            _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
-                            downloaded_year_urls.add(url_to_check)  # Mark this URL as processed
-                            
+                            _FILES_TO_DOWNLOAD.append(
+                                {"download_path": url_to_check})
+                            downloaded_year_urls.add(
+                                url_to_check)  # Mark this URL as processed
+
                         else:
-                            logging.fatal(f"URL returned status code {check_url.status_code}: {url_to_check}")
+                            logging.fatal(
+                                f"URL returned status code {check_url.status_code}: {url_to_check}"
+                            )
 
                     except requests.exceptions.RequestException as e:
-                        logging.fatal(f"URL is not accessible {url_to_check} due to {e}")
+                        logging.fatal(
+                            f"URL is not accessible {url_to_check} due to {e}")
 
 
 def download_files():
