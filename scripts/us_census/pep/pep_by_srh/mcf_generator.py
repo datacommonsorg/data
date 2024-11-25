@@ -40,13 +40,14 @@ def generate_mcf(output_path):
             'WhiteAlone', 'BlackOrAfricanAmericanAlone',
             'AmericanIndianOrAlaskaNativeAlone', 'AsianOrPacificIslander',
             'AsianAlone', 'NativeHawaiianOrOtherPacificIslanderAlone',
-            'TwoOrMoreRaces', 'WhiteAloneOrInCombinationWithOneOrMoreOtherRaces',
+            'TwoOrMoreRaces',
+            'WhiteAloneOrInCombinationWithOneOrMoreOtherRaces',
             'BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces',
             'AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces',
             'AsianAloneOrInCombinationWithOneOrMoreOtherRaces',
             'NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces'
         ]
-        
+
         # Build MCF content for as-is data
         mcf = ""
 
@@ -57,7 +58,8 @@ def generate_mcf(output_path):
                             'Count_Person_Male_NotHispanicOrLatino_WhiteAlone',
                             'Count_Person_Female_NotHispanicOrLatino_WhiteAlone'
                     ]:
-                        mcf += MCF_SRH.format(node_name='Count_Person_' + gt + '_' + h + '_' + r,
+                        mcf += MCF_SRH.format(node_name='Count_Person_' + gt +
+                                              '_' + h + '_' + r,
                                               gender=gt,
                                               race=h + '__' + r)
 
@@ -68,7 +70,9 @@ def generate_mcf(output_path):
                                       race=h)
 
         # Write the As-Is MCF file
-        with open(_CODEDIR + output_path + 'population_estimate_by_srh.mcf', 'w', encoding='utf-8') as mcf_file:
+        with open(_CODEDIR + output_path + 'population_estimate_by_srh.mcf',
+                  'w',
+                  encoding='utf-8') as mcf_file:
             mcf_file.write(mcf)
 
         # Build MCF content for aggregated data
@@ -78,11 +82,14 @@ def generate_mcf(output_path):
         for h in hispanic:
             for r in race:
                 if 'Count_Person_' + h + '_' + r != 'Count_Person_NotHispanicOrLatino_WhiteAlone':
-                    mcf += MCF_RH.format(node_name='Count_Person_' + h + '_' + r,
+                    mcf += MCF_RH.format(node_name='Count_Person_' + h + '_' +
+                                         r,
                                          race=h + '__' + r)
 
         # Write the Aggregated MCF file
-        with open(_CODEDIR + output_path + 'population_estimate_by_srh_agg.mcf', 'w', encoding='utf-8') as mcf_file:
+        with open(_CODEDIR + output_path + 'population_estimate_by_srh_agg.mcf',
+                  'w',
+                  encoding='utf-8') as mcf_file:
             mcf_file.write(mcf)
 
     except Exception as e:

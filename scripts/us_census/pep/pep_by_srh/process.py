@@ -61,10 +61,6 @@ import time
 from datetime import datetime as dt
 from absl import logging
 
-import logging
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
-
 from absl import app
 from absl import flags
 
@@ -388,7 +384,9 @@ def _process_state_files_1980_1990(download_dir):
                     column_header.append(p + '-F')
 
                 # Map the old column names to the new column names
-                column_mapping = {old: new for old, new in zip(df.columns, column_header)}
+                column_mapping = {
+                    old: new for old, new in zip(df.columns, column_header)
+                }
 
                 # Use df.rename() to rename columns
                 df.rename(columns=column_mapping, inplace=True)
@@ -712,24 +710,25 @@ def _process_county_files_2000_2010(download_dir):
                 df = df.query('AGEGRP == 99 & YEAR not in [1, 12, 13]').copy()
                 df['YEAR'] = 2000 - 2 + df['YEAR']
                 df.insert(7, 'LOCATION', '', True)
-                df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2) + (
-                    df['COUNTY'].map(str)).str.zfill(3)
-                df.drop(
-                    ['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
-                    axis=1,
-                    inplace=True)
+                df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(
+                    2) + (df['COUNTY'].map(str)).str.zfill(3)
+                df.drop([
+                    'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'
+                ],
+                        axis=1,
+                        inplace=True)
 
                 # Append data to the output CSV
                 if file == files_list[0]:
                     df.to_csv(output_file_path + output_file_name,
-                            header=True,
-                            index=False)
+                              header=True,
+                              index=False)
                 else:
                     df.to_csv(output_file_path + output_file_name,
-                            header=False,
-                            index=False,
-                            mode='a')
-                    
+                              header=False,
+                              index=False,
+                              mode='a')
+
                 logging.info(f"Processed and saved file: {file}")
 
             except Exception as e:
@@ -931,9 +930,11 @@ def _process_county_files_2020_2029(download_dir):
                     2) + (df['COUNTY'].map(str)).str.zfill(3)
 
                 # drop not reuqire columns
-                df.drop(['SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'],
-                axis=1,
-                inplace=True)
+                df.drop([
+                    'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'
+                ],
+                        axis=1,
+                        inplace=True)
 
                 if file == files_list[0]:
                     df.to_csv(output_file_path + output_file_name, index=False)
@@ -1230,13 +1231,13 @@ def _consolidate_county_files():
             lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
 
         if file == county_file[0]:
-            
+
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'county_consolidated_temp.csv',
                       header=True,
                       index=False)
         else:
-            
+
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                       'county_consolidated_temp.csv',
                       header=False,
@@ -1246,7 +1247,7 @@ def _consolidate_county_files():
     df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
                      'county_consolidated_temp.csv')
     df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
-   
+
     df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
               'county_consolidated_as_is_final.csv',
               header=True,
@@ -1314,7 +1315,7 @@ def _consolidate_all_geo_files(output_path):
             for geo in ['national', 'state', 'county']
     ]:
         as_is_df = pd.concat([as_is_df, pd.read_csv(file)])
-    
+
     # Saving the cleaned 'as_is_df' DataFrame to a CSV file.
     as_is_df.to_csv(_CODEDIR + output_path + 'population_estimate_by_srh.csv',
                     header=True,
@@ -1326,12 +1327,12 @@ def _consolidate_all_geo_files(output_path):
             for geo in ['national', 'state', 'county']
     ]:
         agg_df = pd.concat([agg_df, pd.read_csv(file)])
-        
+
         # Saving the cleaned 'agg_df' DataFrame to a CSV file.
         agg_df.to_csv(_CODEDIR + output_path +
-                    'population_estimate_by_srh_agg.csv',
-                    header=True,
-                    index=False)
+                      'population_estimate_by_srh_agg.csv',
+                      header=True,
+                      index=False)
 
 
 def _consolidate_files(output_path):
@@ -1347,29 +1348,30 @@ def _consolidate_files(output_path):
 
 
 def add_future_year_urls():
-  global _FILES_TO_DOWNLOAD
-  with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as input_file:
-    _FILES_TO_DOWNLOAD = json.load(input_file)
+    global _FILES_TO_DOWNLOAD
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as input_file:
+        _FILES_TO_DOWNLOAD = json.load(input_file)
 
-  urls_to_scan = [
-      "https://www2.census.gov/programs-surveys/popest/datasets/{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
-  ]
+    urls_to_scan = [
+        "https://www2.census.gov/programs-surveys/popest/datasets/{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
+    ]
 
-  # This method will generate URLs for the years 2024 to 2029
-  for future_year in range(2024, 2030):
-    if dt.now().year > future_year:
-      YEAR = future_year
-      download_path = f"20{YEAR}_{YEAR+1}/county/cc-est{YEAR}-alldata.csv"  # Use f-string for dynamic path
+    # This method will generate URLs for the years 2024 to 2029
+    for future_year in range(2024, 2030):
+        if dt.now().year > future_year:
+            YEAR = future_year
+            download_path = f"20{YEAR}_{YEAR+1}/county/cc-est{YEAR}-alldata.csv"  # Use f-string for dynamic path
 
-      for url in urls_to_scan:
-        url_to_check = url.format(YEAR=YEAR)
-        try:
-          check_url = requests.head(url_to_check)
-          if check_url.status_code == 200:
-            _FILES_TO_DOWNLOAD.append({"download_path": download_path})
+            for url in urls_to_scan:
+                url_to_check = url.format(YEAR=YEAR)
+                try:
+                    check_url = requests.head(url_to_check)
+                    if check_url.status_code == 200:
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": download_path})
 
-        except:
-          logging.error(f"URL is not accessible: {url_to_check}")
+                except:
+                    logging.error(f"URL is not accessible: {url_to_check}")
 
 
 def _process_files(download_dir):
@@ -1510,4 +1512,3 @@ def main(_):
 
 if __name__ == '__main__':
     app.run(main)
-

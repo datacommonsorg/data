@@ -36,11 +36,16 @@ def generate_tmcf(output_path):
     """
     try:
         # Writing the As-Is TMCF file
-        with open(_CODEDIR + output_path + 'population_estimate_by_srh.tmcf', 'w', encoding='utf-8') as file:
+        with open(_CODEDIR + output_path + 'population_estimate_by_srh.tmcf',
+                  'w',
+                  encoding='utf-8') as file:
             file.writelines(POPULATION_ESTIMATE_BY_SRH)
 
         # Writing the Aggregated TMCF file
-        with open(_CODEDIR + output_path + 'population_estimate_by_srh_agg.tmcf', 'w', encoding='utf-8') as file:
+        with open(_CODEDIR + output_path +
+                  'population_estimate_by_srh_agg.tmcf',
+                  'w',
+                  encoding='utf-8') as file:
             file.writelines(POPULATION_ESTIMATE_BY_SRH_AGG)
 
     except Exception as e:
