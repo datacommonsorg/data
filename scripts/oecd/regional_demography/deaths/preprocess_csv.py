@@ -25,7 +25,6 @@ _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 flags.DEFINE_string('mode', '', 'Options: download or process')
 
-
 logging.basicConfig(level=logging.INFO)
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -149,7 +148,7 @@ def process_data(df, output_file_path):
     for col in columns_to_drop:
         if col in df_cleaned.columns:
             df_cleaned.drop(col, axis=1, inplace=True)
-    logging.info("Writing output to %s",output_file_path)
+    logging.info("Writing output to %s", output_file_path)
     df_cleaned.to_csv(output_file_path, index=False, quoting=csv.QUOTE_NONE)
 
     return df_cleaned
@@ -184,13 +183,17 @@ def main(_):
     filename = os.path.join(_MODULE_DIR, "REGION_DEMOGR_death_5Y.csv")
 
     if mode == "" or mode == "download":
-        download_data_to_file_and_df(url, filename, is_download_required=True,csv_filepath=None)
+        download_data_to_file_and_df(url,
+                                     filename,
+                                     is_download_required=True,
+                                     csv_filepath=None)
     if mode == "" or mode == "process":
         df = pd.read_csv(filename)
         output_file_path = os.path.join(_MODULE_DIR, "OECD_deaths_cleaned.csv")
         df_cleaned = process_data(df, output_file_path)
         filepath = os.path.join(_MODULE_DIR, "OECD_deaths.tmcf")
         generate_tmcf(df_cleaned, filepath)
-    
+
+
 if __name__ == "__main__":
     app.run(main)

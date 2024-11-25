@@ -76,7 +76,7 @@ def process_data(df, output_file_path):
 
     df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
     df_cleaned.drop(columns=["REG_ID"], inplace=True)
-    logging.info("Writing output to %s",output_file_path)
+    logging.info("Writing output to %s", output_file_path)
     df_cleaned.to_csv(output_file_path, index=False, quoting=csv.QUOTE_NONE)
     return df_cleaned
 
@@ -121,20 +121,25 @@ def generate_tmcf(df_cleaned, filepath):
                         'stat_var': stat_vars[i]
                     }))
 
+
 def main(_):
     mode = _FLAGS.mode
     url = "https://sdmx.oecd.org/public/rest/data/OECD.CFE.EDS,DSD_REG_DEMO@DF_LIFE_EXP,2.0/all?dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
     filename = os.path.join(_MODULE_DIR, "REGION_DEMOGR_life_expectancy.csv")
 
     if mode == "" or mode == "download":
-        download_data_to_file_and_df(url, filename,  is_download_required=True,csv_filepath=None)
+        download_data_to_file_and_df(url,
+                                     filename,
+                                     is_download_required=True,
+                                     csv_filepath=None)
     if mode == "" or mode == "process":
         df = pd.read_csv(filename)
         output_file_path = os.path.join(_MODULE_DIR,
-                                    "OECD_life_expectancy_cleaned.csv")
+                                        "OECD_life_expectancy_cleaned.csv")
         df_cleaned = process_data(df, output_file_path)
         filepath = os.path.join(_MODULE_DIR, "OECD_life_expectancy.tmcf")
         generate_tmcf(df_cleaned, filepath)
+
 
 if __name__ == "__main__":
     app.run(main)

@@ -138,7 +138,7 @@ def process_data(df, output_file_path):
         if col not in csv_columns:
             drop_cols.append(col)
     df_cleaned.drop(columns=drop_cols, axis=0, inplace=True)
-    logging.info("Writing output to %s",output_file_path)
+    logging.info("Writing output to %s", output_file_path)
     df_cleaned.to_csv(output_file_path, index=False, quoting=csv.QUOTE_NONE)
     return df_cleaned
 
@@ -172,7 +172,10 @@ def main(_):
     filename = os.path.join(_MODULE_DIR, "REGION_DEMOGR_population.csv")
 
     if mode == "" or mode == "download":
-        download_data_to_file_and_df(url, filename, is_download_required=True,csv_filepath=None)
+        download_data_to_file_and_df(url,
+                                     filename,
+                                     is_download_required=True,
+                                     csv_filepath=None)
     if mode == "" or mode == "process":
         df = pd.read_csv(filename)
         csv_filepath = os.path.join(_MODULE_DIR, "OECD_population_cleaned.csv")
@@ -180,5 +183,6 @@ def main(_):
         tmcf_filepath = os.path.join(_MODULE_DIR, "OECD_population.tmcf")
         generate_tmcf(df_cleaned, tmcf_filepath)
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     app.run(main)

@@ -72,7 +72,7 @@ def process_data(df, output_file_path):
     }
 
     df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-    logging.info("Writing output to %s",output_file_path)
+    logging.info("Writing output to %s", output_file_path)
     df_cleaned.to_csv(output_file_path, index=False, quoting=csv.QUOTE_NONE)
 
 
@@ -82,11 +82,16 @@ def main(_):
     filename = os.path.join(_MODULE_DIR, "REGION_DEMOGR_pop_density.csv")
 
     if mode == "" or mode == "download":
-        download_data_to_file_and_df(url, filename, is_download_required=True,csv_filepath=None)
+        download_data_to_file_and_df(url,
+                                     filename,
+                                     is_download_required=True,
+                                     csv_filepath=None)
     if mode == "" or mode == "process":
         df = pd.read_csv(filename)
-        output_file_path = os.path.join(_MODULE_DIR, "OECD_pop_density_cleaned.csv")
+        output_file_path = os.path.join(_MODULE_DIR,
+                                        "OECD_pop_density_cleaned.csv")
         process_data(df, output_file_path)
+
 
 if __name__ == "__main__":
     app.run(main)
