@@ -34,18 +34,18 @@ from national_1980_1989 import national1980
 from national_2000_2010 import national2000
 from national_2010_2019 import national2010
 from national_2020_2021 import national2020
-from national_2020_2023 import national2023
+from national_2020_2023 import national2029
 from state_1970_1979 import state1970
 from state_1990_2000 import state1990
 from state_2000_2010 import state2000
 from state_2010_2020 import state2010
-from state_2020_2023 import state2020
+from state_2020_2023 import state2029
 from county_1970_1979 import county1970
 from county_1980_1989 import county1980
 from county_1990_2000 import county1990
 from county_2000_2010 import county2000
 from county_2010_2020 import county2010
-from county_2020_2023 import county2020
+from county_2020_2023 import county2029
 
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -57,6 +57,7 @@ _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _FILES_TO_DOWNLOAD = None
 
 
+# This method will generate URLs for the years 2024 to 2029
 def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
@@ -278,10 +279,6 @@ class USCensusPEPByASR:
             final_df['Year'] = final_df['Year'].astype(float).astype(int)
             final_df = final_df.sort_values(by=['Year', 'geo_ID'])
             final_df = _measurement_method(final_df)
-            #To remove inconsistent value issue'Count_Person_0Years_Male', observationDate: '2020', value1: 1891716.0, value2: 1876349.0
-            final_df = final_df.drop_duplicates(
-                subset=['geo_ID', 'Year', 'Measurement_Method', 'SVs'],
-                keep='last')
             final_df.to_csv(self._cleaned_csv_file_path, index=False)
             sv_list = list(set(sv_list))
             sv_list.sort()
@@ -289,9 +286,7 @@ class USCensusPEPByASR:
             self._generate_mcf(sv_list)
             self._generate_tmcf()
         else:
-            logging.fatal(
-                "File processing mismatch: Expected {total_files_to_process} files, but processed {files_processed}. Output file generation aborted"
-            )
+            logging.fatal(f"File processing mismatch: Expected {total_files_to_process} files, but processed {processed_count}. Output file generation aborted")
 
 
 def download_files():
@@ -304,6 +299,7 @@ def download_files():
     state_url_file = "state.json"
     county_url_file = "county.json"
     output_folder = "input_data"
+    logging.info("Download starts")
     try:
         add_future_year_urls()
         national1900(output_folder)
@@ -311,7 +307,7 @@ def download_files():
         national1980(national_url_file, output_folder)
         national2000(national_url_file, output_folder)
         national2010(national_url_file, output_folder)
-        national2020(national_url_file, output_folder)
+        # national2020(national_url_file, output_folder)
 
         state1970(state_url_file, output_folder)
         state1990(state_url_file, output_folder)
@@ -329,14 +325,13 @@ def download_files():
             #file_name_to_save = None
             url = file['download_path']
             if 'national' in url:
-                national2023(url, output_folder)
+                national2029(url, output_folder)
             if 'state' in url:
-                state2020(url, output_folder)
+                state2029(url, output_folder)
             if 'counties' in url:
-                county2020(url, output_folder)
+                county2029(url, output_folder)
     except Exception as e:
         logging.fatal(f"Error while downloading : {e}")
-    return True
 
 
 def main(_):
@@ -357,12 +352,12 @@ def main(_):
     if mode == "" or mode == "download":
         # download & process
         add_future_year_urls()
-        download_status = download_files()
-    if download_status and (mode == "" or mode == "process"):
+        download_files()
+    if mode == "" or mode == "process":
         loader = USCensusPEPByASR(ip_files, cleaned_csv_path, mcf_path,
                                   tmcf_path)
         loader.process()
-
+    logging.info("Task completed!")
 
 if __name__ == "__main__":
     app.run(main)

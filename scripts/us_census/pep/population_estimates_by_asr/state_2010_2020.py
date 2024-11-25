@@ -53,7 +53,7 @@ def state2010(url_file: str, output_folder: str):
     df['AGE'] = df['AGE'].str.replace("85Years", "85OrMoreYears")
     # Drop unwanted columns.
     df.drop(columns=['SUMLEV','REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
-       'ESTIMATESBASE2010','CENSUS2010POP','POPESTIMATE042020'], inplace=True)
+       'ESTIMATESBASE2010','CENSUS2010POP','POPESTIMATE042020','POPESTIMATE2020'], inplace=True)
     df = df.melt(id_vars=['geo_ID','AGE','SEX','RACE'], var_name='Year' , \
        value_name='observation')
     # Making the years more understandable.
@@ -68,8 +68,7 @@ def state2010(url_file: str, output_folder: str):
             'POPESTIMATE2016': '2016',
             'POPESTIMATE2017': '2017',
             'POPESTIMATE2018': '2018',
-            'POPESTIMATE2019': '2019',
-            'POPESTIMATE2020': '2020'
+            'POPESTIMATE2019': '2019'
         }
     })
     df['SVs'] = 'Count_Person_' + df['AGE'] + '_' + df['SEX'] + '_' + df['RACE']

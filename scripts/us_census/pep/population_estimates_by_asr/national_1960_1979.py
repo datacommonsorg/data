@@ -73,8 +73,6 @@ def national1960(output_folder: str):
         # Removing numeric thousand separator from the values.
         df['observation'] = df['observation'].str.replace(",", "")
         # Writting the data to final dataframe
-        # print("df1----------",df)
-        # print("final_df----------",final_df)
         final_df = pd.concat([final_df, df])
     # Writing the dataframe to output csv.
     final_df.to_csv(

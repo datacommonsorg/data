@@ -65,7 +65,6 @@ def county1980(url_file: str, output_folder: str):
     # DF sent to an external function for aggregation based on gender.
     df_as = gender_based_grouping(df_as)
     df_ar = pd.concat([df_ar, df])
-    # df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
     df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     # DF sent to an external function for aggregation based on race.
     df_ar = race_based_grouping(df_ar)
@@ -77,10 +76,13 @@ def county1980(url_file: str, output_folder: str):
                      'county_1980_1989.csv'))
     # Aggregating the County Data on geo_ID to make State Data.
     final_df['geo_ID'] = final_df['geo_ID'].str[:-3]
-    final_df = final_df.groupby(['Year','geo_ID','SVs']).sum()\
+    final_df.to_csv("county1980_1.csv", index=False)
+
+    final_df = final_df.groupby(['Year','geo_ID','SVs', 'Measurement_Method']).sum()\
     .stack(0).reset_index()
     final_df['observation'] = final_df[0]
-    final_df.drop(columns=['level_3', 0], inplace=True)
+    final_df.to_csv("county1980_2.csv", index=False)
+    final_df.drop(columns=['level_4', 0], inplace=True)
     final_df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey'
     final_df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,

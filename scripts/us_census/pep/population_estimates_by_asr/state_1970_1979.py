@@ -86,18 +86,10 @@ def state1970(url_file: str, output_folder: str):
     df.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     final_df = pd.concat([final_df, df])
     df_ar = pd.concat([df_ar, df])
-    # final_df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
-    print("state 1970-79   final df----------", final_df)
-    print("state 1970-79   before grp by df----------", df)
     # DF sent to an external function for aggregation based on gender.
     df = gender_based_grouping(df)
-    print("state 1970-79  df after grp by----------", df)
     # DF sent to an external function for aggregation based on race.
     df_ar = race_based_grouping(df_ar)
-    # df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-    print("FINAL finaldf-----", final_df)
-    print("FINAL df ar----------", df_ar)
-    print("FINAL df", df)
     final_df = pd.concat([final_df, df_ar, df])
     final_df = final_df[~final_df.SVs.str.contains('OtherRaces')]
 
