@@ -124,6 +124,12 @@ def _national_1900_1979(file_path: str) -> pd.DataFrame:
                                  skiprows=7,
                                  skipfooter=102,
                                  header=None)
+            """
+            The columns order has been fixed. Two headers combines to form the column name.
+            Even if we want to use rename method we still have to assume rolws and col position
+            Incase of change in order of the columns in the future has been handled by try catch block.
+            The logic applies to the other methods below
+            """
 
             df.columns = [
                 'Age', 'Total', 'Count_Person_Male', 'Count_Person_Female',
