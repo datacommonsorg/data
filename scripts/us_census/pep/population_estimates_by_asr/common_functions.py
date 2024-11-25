@@ -96,7 +96,6 @@ def gender_based_grouping(df: pd.DataFrame):
     df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey'    
     df = df.groupby(['Year', 'geo_ID', 'SVs',
                      'Measurement_Method']).sum().reset_index()
-    df.to_csv("df_after_gpby.csv",index=False)
 
     return df
 

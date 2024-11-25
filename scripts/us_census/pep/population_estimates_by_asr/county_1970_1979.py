@@ -59,16 +59,11 @@ def county1970(url_file: str, output_folder: str):
     # Making copies of the current DF to be aggregated upon.
     final_df = pd.concat([final_df, df])
     final_df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
-    final_df = gender_based_grouping(final_df)
-
-    df_ar = pd.concat([df_ar, df])
-    df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
-
     # DF sent to an external function for aggregation based on gender.
-
+    final_df = gender_based_grouping(final_df)
+    df_ar = pd.concat([df_ar, df])
     # DF sent to an external function for aggregation based on race.
     df_ar = race_based_grouping(df_ar)
-    # df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
     final_df = pd.concat([final_df, df_ar, df])
     final_df = final_df[~final_df.SVs.str.contains('OtherRaces')]
     final_df.to_csv(
