@@ -1,24 +1,26 @@
-
 Node: E:EurostatNUTS3_BirthDeathMigration->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Death
 observationAbout: C:EurostatNUTS3_BirthDeathMigration->geo
 observationDate: C:EurostatNUTS3_BirthDeathMigration->time
 value: C:EurostatNUTS3_BirthDeathMigration->Count_Death
+measurementMethod: dcs:EurostatRegionalStatistics
 
 Node: E:EurostatNUTS3_BirthDeathMigration->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_BirthEvent_AsAFractionOf_Count_Person
+variableMeasured: dcs:Count_BirthEvent_AsAFractionOfCount_Person
 observationAbout: C:EurostatNUTS3_BirthDeathMigration->geo
 observationDate: C:EurostatNUTS3_BirthDeathMigration->time
-value: C:EurostatNUTS3_BirthDeathMigration->Count_BirthEvent_AsAFractionOf_Count_Person
+value: C:EurostatNUTS3_BirthDeathMigration->Count_BirthEvent_AsAFractionOfCount_Person
+measurementMethod: dcs:EurostatRegionalStatistics
 
 Node: E:EurostatNUTS3_BirthDeathMigration->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Death_AsAFractionOf_Count_Person
+variableMeasured: dcs:Count_Death_AsAFractionOfCount_Person
 observationAbout: C:EurostatNUTS3_BirthDeathMigration->geo
 observationDate: C:EurostatNUTS3_BirthDeathMigration->time
-value: C:EurostatNUTS3_BirthDeathMigration->Count_Death_AsAFractionOf_Count_Person
+value: C:EurostatNUTS3_BirthDeathMigration->Count_Death_AsAFractionOfCount_Person
+measurementMethod: dcs:EurostatRegionalStatistics
 
 Node: E:EurostatNUTS3_BirthDeathMigration->E3
 typeOf: dcs:StatVarObservation
@@ -26,6 +28,7 @@ variableMeasured: dcs:IncrementalCount_Person
 observationAbout: C:EurostatNUTS3_BirthDeathMigration->geo
 observationDate: C:EurostatNUTS3_BirthDeathMigration->time
 value: C:EurostatNUTS3_BirthDeathMigration->IncrementalCount_Person
+measurementMethod: dcs:EurostatRegionalStatistics
 
 Node: E:EurostatNUTS3_BirthDeathMigration->E4
 typeOf: dcs:StatVarObservation
@@ -33,6 +36,7 @@ variableMeasured: dcs:GrowthRate_Count_Person
 observationAbout: C:EurostatNUTS3_BirthDeathMigration->geo
 observationDate: C:EurostatNUTS3_BirthDeathMigration->time
 value: C:EurostatNUTS3_BirthDeathMigration->GrowthRate_Count_Person
+measurementMethod: dcs:EurostatRegionalStatistics
 
 Node: E:EurostatNUTS3_BirthDeathMigration->E5
 typeOf: dcs:StatVarObservation
@@ -40,6 +44,7 @@ variableMeasured: dcs:Count_Person
 observationAbout: C:EurostatNUTS3_BirthDeathMigration->geo
 observationDate: C:EurostatNUTS3_BirthDeathMigration->time
 value: C:EurostatNUTS3_BirthDeathMigration->Count_Person
+measurementMethod: dcs:EurostatRegionalStatistics
 
 Node: E:EurostatNUTS3_BirthDeathMigration->E6
 typeOf: dcs:StatVarObservation
@@ -47,3 +52,5 @@ variableMeasured: dcs:Count_BirthEvent
 observationAbout: C:EurostatNUTS3_BirthDeathMigration->geo
 observationDate: C:EurostatNUTS3_BirthDeathMigration->time
 value: C:EurostatNUTS3_BirthDeathMigration->Count_BirthEvent
+measurementMethod: dcs:EurostatRegionalStatistics
+
