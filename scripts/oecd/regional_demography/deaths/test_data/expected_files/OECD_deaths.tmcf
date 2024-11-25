@@ -1,0 +1,91 @@
+
+    Node: E:OECD_deaths_cleaned->E1
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:Count_Death_15To19Years_Male
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->Count_Death_15To19Years_Male
+    
+    Node: E:OECD_deaths_cleaned->E2
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:Count_Death_30To34Years
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->Count_Death_30To34Years
+    
+    Node: E:OECD_deaths_cleaned->E3
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:Count_Death_40To44Years_Male
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->Count_Death_40To44Years_Male
+    
+    Node: E:OECD_deaths_cleaned->E4
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:Count_Death_45To49Years_Female
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->Count_Death_45To49Years_Female
+    
+    Node: E:OECD_deaths_cleaned->E5
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:Count_Death_45To49Years
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->Count_Death_45To49Years
+    
+    Node: E:OECD_deaths_cleaned->E6
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:Count_Death_60To64Years_Female
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->Count_Death_60To64Years_Female
+    
+    Node: E:OECD_deaths_cleaned->E7
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:Count_Death_65To69Years_Male
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->Count_Death_65To69Years_Male
+    
+    Node: E:OECD_deaths_cleaned->E8
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:Count_Death_80OrMoreYears_Male
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->Count_Death_80OrMoreYears_Male
+    
+    Node: E:OECD_deaths_cleaned->E9
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:Count_Death_80OrMoreYears
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->Count_Death_80OrMoreYears
+    
+    Node: E:OECD_deaths_cleaned->E10
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:Count_Death_Upto4Years_Male
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->Count_Death_Upto4Years_Male
+    

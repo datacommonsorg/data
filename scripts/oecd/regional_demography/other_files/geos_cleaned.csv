@@ -1,0 +1,2621 @@
+containedInCountry,Node,oecd_territorial_level,name,containedInPlace,rural_or_urban,access_to_city
+AUS,AUS,1,Australia,AUS,1,1
+AUS,AU1,2,New South Wales AdministrativeArea1,AUS,2,2
+AUS,AU101,3,Capital Region,AU1,..,NMR-R
+AUS,AU103,3,Central West,AU1,..,NMR-R
+AUS,AU104,3,Coffs Harbour - Grafton,AU1,..,NMR-R
+AUS,AU105,3,Far West and Orana,AU1,..,NMR-R
+AUS,AU106,3,Hunter Valley Exc Newcastle,AU1,..,NMR-M
+AUS,AU107,3,Illawarra,AU1,..,MR-M
+AUS,AU108,3,Mid North Coast,AU1,..,NMR-R
+AUS,AU109,3,Murray,AU1,..,NMR-R
+AUS,AU110,3,New England and North West,AU1,..,NMR-R
+AUS,AU111,3,Newcastle and Lake Macquarie,AU1,..,MR-M
+AUS,AU112,3,Richmond - Tweed,AU1,..,NMR-R
+AUS,AU113,3,Riverina,AU1,..,NMR-R
+AUS,AU114,3,Southern Highlands and Shoalhaven,AU1,..,NMR-R
+AUS,AU1GS,3,Sydney,AU1,..,MR-L
+AUS,AU2,2,Victoria AdministrativeArea1,AUS,2,2
+AUS,AU201,3,Ballarat,AU2,..,NMR-S
+AUS,AU202,3,Bendigo,AU2,..,NMR-S
+AUS,AU203,3,Geelong,AU2,..,MR-M
+AUS,AU204,3,Hume,AU2,..,NMR-R
+AUS,AU205,3,Latrobe - Gippsland,AU2,..,NMR-R
+AUS,AU215,3,North West,AU2,..,NMR-R
+AUS,AU216,3,Shepparton,AU2,..,NMR-R
+AUS,AU217,3,Warrnambool and South West,AU2,..,NMR-R
+AUS,AU2GM,3,Melbourne,AU2,..,MR-L
+AUS,AU3,2,Queensland AdministrativeArea1,AUS,2,2
+AUS,AU306,3,Cairns,AU3,..,NMR-S
+AUS,AU307,3,Darling Downs - Maranoa,AU3,..,NMR-R
+AUS,AU308,3,Fitzroy,AU3,..,NMR-R
+AUS,AU309,3,Gold Coast,AU3,..,MR-M
+AUS,AU312,3,Mackay,AU3,..,NMR-R
+AUS,AU315,3,Queensland - Outback,AU3,..,NMR-R
+AUS,AU316,3,Sunshine Coast,AU3,..,NMR-S
+AUS,AU317,3,Toowoomba,AU3,..,NMR-S
+AUS,AU318,3,Townsville,AU3,..,NMR-S
+AUS,AU319,3,Wide Bay,AU3,..,NMR-R
+AUS,AU3GB,3,Brisbane,AU3,..,MR-L
+AUS,AU4,2,South Australia AdministrativeArea1,AUS,2,2
+AUS,AU405,3,Barossa - Yorke - Mid North,AU4,..,NMR-R
+AUS,AU406,3,South Australia - Outback,AU4,..,NMR-R
+AUS,AU407,3,South Australia - South East,AU4,..,NMR-R
+AUS,AU4GA,3,Adelaide,AU4,..,MR-M
+AUS,AU5,2,Western Australia AdministrativeArea1,AUS,2,2
+AUS,AU501,3,Bunbury,AU5,..,NMR-R
+AUS,AU508,3,Western Australia - Outback,AU5,..,NMR-R
+AUS,AU509,3,Western Australia - Wheat Belt,AU5,..,NMR-R
+AUS,AU5GP,3,Perth,AU5,..,MR-L
+AUS,AU6,2,Tasmania AdministrativeArea1,AUS,2,2
+AUS,AU601,3,Hobart,AU6,..,NMR-S
+AUS,AU602,3,Launceston and North East,AU6,..,NMR-R
+AUS,AU603,3,South East,AU6,..,NMR-R
+AUS,AU604,3,West and North West,AU6,..,NMR-R
+AUS,AU7,2,Northern Territory AdministrativeArea1,AUS,2,2
+AUS,AU701,3,Darwin,AU7,..,NMR-S
+AUS,AU702,3,Northern Territory - Outback,AU7,..,NMR-R
+AUS,AU8,2,Australian Capital Territory AdministrativeArea1,AUS,2,2
+AUS,AU801,3,Australian Capital Territory,AU8,..,MR-M
+AUT,AUT,1,Austria,AUT,1,1
+AUT,AT11,2,Burgenland (AT) AdministrativeArea1,AUT,2,2
+AUT,AT111,3,Mittelburgenland,AT11,3_PRC,NMR-S
+AUT,AT112,3,Nordburgenland,AT11,3_PRC,MR-L
+AUT,AT113,3,Südburgenland,AT11,3_PRC,NMR-S
+AUT,AT12,2,Lower Austria AdministrativeArea1,AUT,2,2
+AUT,AT121,3,Mostviertel-Eisenwurzen,AT12,3_PRC,NMR-M
+AUT,AT122,3,Niederösterreich-Süd,AT12,3_INC,NMR-M
+AUT,AT123,3,Sankt Pölten,AT12,3_PRC,NMR-R
+AUT,AT124,3,Waldviertel,AT12,3_PRR,NMR-R
+AUT,AT125,3,Weinviertel,AT12,3_PRC,MR-L
+AUT,AT126,3,Wiener Umland/Nordteil,AT12,3_PU,MR-L
+AUT,AT127,3,Wiener Umland/Südteil,AT12,3_INC,MR-L
+AUT,AT13,2,Vienna AdministrativeArea1,AUT,2,2
+AUT,AT130,3,Vienna,AT13,3_PU,MR-L
+AUT,AT21,2,Carinthia AdministrativeArea1,AUT,2,2
+AUT,AT211,3,Klagenfurt-Villach,AT21,3_INC,NMR-S
+AUT,AT212,3,Oberkärnten,AT21,3_PRR,NMR-S
+AUT,AT213,3,Unterkärnten,AT21,3_PRC,NMR-S
+AUT,AT22,2,Styria AdministrativeArea1,AUT,2,2
+AUT,AT221,3,Graz,AT22,3_INC,MR-M
+AUT,AT222,3,Liezen,AT22,3_PRR,NMR-R
+AUT,AT223,3,Östliche Obersteiermark,AT22,3_INC,NMR-R
+AUT,AT224,3,Oststeiermark,AT22,3_PRC,NMR-M
+AUT,AT225,3,West- und Südsteiermark,AT22,3_PRC,MR-M
+AUT,AT226,3,Westliche Obersteiermark,AT22,3_PRR,NMR-R
+AUT,AT31,2,Upper Austria AdministrativeArea1,AUT,2,2
+AUT,AT311,3,Innviertel,AT31,3_PRC,NMR-M
+AUT,AT312,3,Linz-Wels,AT31,3_INC,MR-M
+AUT,AT313,3,Mühlviertel,AT31,3_PRC,MR-M
+AUT,AT314,3,Steyr-Kirchdorf,AT31,3_PRC,NMR-M
+AUT,AT315,3,Traunviertel,AT31,3_PRC,NMR-M
+AUT,AT32,2,Salzburg AdministrativeArea1,AUT,2,2
+AUT,AT321,3,Lungau,AT32,3_PRR,NMR-R
+AUT,AT322,3,Pinzgau-Pongau,AT32,3_PRR,NMR-R
+AUT,AT323,3,Salzburg und Umgebung,AT32,3_INC,MR-M
+AUT,AT33,2,Tyrol AdministrativeArea1,AUT,2,2
+AUT,AT331,3,Außerfern,AT33,3_PRC,NMR-S
+AUT,AT332,3,Innsbruck,AT33,3_PU,MR-M
+AUT,AT333,3,Osttirol,AT33,3_PRR,NMR-R
+AUT,AT334,3,Tyrolean Oberland,AT33,3_PRC,NMR-M
+AUT,AT335,3,Tyrolean Unterland,AT33,3_PRC,NMR-M
+AUT,AT34,2,Vorarlberg AdministrativeArea1,AUT,2,2
+AUT,AT341,3,Bludenz-Bregenzer Wald,AT34,3_PRC,NMR-R
+AUT,AT342,3,Rheintal-Bodenseegebiet,AT34,3_PU,NMR-S
+BEL,BEL,1,Belgium,BEL,1,1
+BEL,BE1,2,Brussels Capital Region AdministrativeArea1,BEL,2,2
+BEL,BE100,3,Arr. de Bruxelles-Capitale / Arr. Van Brussel-Hoofdstad,BE1,3_PU,MR-L
+BEL,BE2,2,Flemish Region AdministrativeArea1,BEL,2,2
+BEL,BE211,3,Arr. Antwerpen,BE2,3_PU,MR-M
+BEL,BE212,3,Arr. Mechelen,BE2,3_PU,NMR-M
+BEL,BE213,3,Arr. Turnhout,BE2,3_INC,NMR-M
+BEL,BE221,3,Arr. Hasselt,BE2,3_PU,NMR-M
+BEL,BE222,3,Arr. Maaseik,BE2,3_INC,NMR-M
+BEL,BE223,3,Arr. Tongeren,BE2,3_INC,NMR-M
+BEL,BE231,3,Arr. Aalst,BE2,3_PU,MR-L
+BEL,BE232,3,Arr. Dendermonde,BE2,3_PU,NMR-M
+BEL,BE233,3,Arr. Eeklo,BE2,3_INC,MR-M
+BEL,BE234,3,Arr. Gent,BE2,3_INC,MR-M
+BEL,BE235,3,Arr. Oudenaarde,BE2,3_INC,NMR-M
+BEL,BE236,3,Arr. Sint-Niklaas,BE2,3_PU,NMR-M
+BEL,BE241,3,Arr. Halle-Vilvoorde,BE2,3_PU,MR-L
+BEL,BE242,3,Arr. Leuven,BE2,3_INC,NMR-M
+BEL,BE251,3,Arr. Brugge,BE2,3_INC,NMR-M
+BEL,BE252,3,Arr. Diksmuide,BE2,3_INC,NMR-M
+BEL,BE253,3,Arr. Ieper,BE2,3_INC,NMR-M
+BEL,BE254,3,Arr. Kortrijk,BE2,3_PU,NMR-M
+BEL,BE255,3,Arr. Oostende,BE2,3_INC,NMR-M
+BEL,BE256,3,Arr. Roeselare,BE2,3_INC,NMR-M
+BEL,BE257,3,Arr. Tielt,BE2,3_INC,NMR-M
+BEL,BE258,3,Arr. Veurne,BE2,3_INC,NMR-M
+BEL,BE3,2,Wallonia AdministrativeArea1,BEL,2,2
+BEL,BE310,3,Arr. Nivelles,BE3,3_INC,MR-L
+BEL,BE321,3,Arr. Ath,BE3,3_PRC,NMR-M
+BEL,BE322,3,Arr. Charleroi,BE3,3_PU,MR-M
+BEL,BE323,3,Arr. Mons,BE3,3_PU,NMR-M
+BEL,BE324,3,Arr. Mouscron,BE3,3_PU,NMR-M
+BEL,BE325,3,Arr. Soignies,BE3,3_INC,NMR-M
+BEL,BE326,3,Arr. Thuin,BE3,3_INC,NMR-M
+BEL,BE327,3,Arr. Tournai,BE3,3_PRC,NMR-M
+BEL,BE331,3,Arr. Huy,BE3,3_PRC,NMR-S
+BEL,BE332,3,Arr. Liège,BE3,3_PU,MR-M
+BEL,BE334,3,Arr. Waremme,BE3,3_PRC,MR-M
+BEL,BE335,3,Arr. Verviers - Communes Francophones,BE3,3_INC,NMR-M
+BEL,BE336,3,Bezirk Verviers - Deutschsprachige Gemeinschaft,BE3,3_PRC,NMR-M
+BEL,BE341,3,Arr. Arlon,BE3,3_PRC,NMR-S
+BEL,BE342,3,Arr. Bastogne,BE3,3_PRR,NMR-R
+BEL,BE343,3,Arr. Marche-en-Famenne,BE3,3_PRC,NMR-M
+BEL,BE344,3,Arr. Neufchâteau,BE3,3_PRC,NMR-S
+BEL,BE345,3,Arr. Virton,BE3,3_PRC,NMR-S
+BEL,BE351,3,Arr. Dinant,BE3,3_PRC,NMR-M
+BEL,BE352,3,Arr. Namur,BE3,3_INC,NMR-M
+BEL,BE353,3,Arr. Philippeville,BE3,3_PRC,NMR-M
+CAN,CAN,1,Canada,CAN,1,1
+CAN,CA10,2,Newfoundland and Labrador AdministrativeArea1,CAN,2,2
+CAN,CA11,2,Prince Edward Island AdministrativeArea1,CAN,2,2
+CAN,CA1101,3,"Kings, PE",CA11,3_PRR,NMR-R
+CAN,CA1102,3,"Queens, PE",CA11,3_PRR,NMR-R
+CAN,CA1103,3,"Prince, PE",CA11,3_PRR,NMR-R
+CAN,CA12,2,Nova Scotia AdministrativeArea1,CAN,2,2
+CAN,CA1201,3,"Shelburne, NS",CA12,3_PRR,NMR-R
+CAN,CA1202,3,"Yarmouth, NS",CA12,3_PRR,NMR-R
+CAN,CA1203,3,"Digby, NS",CA12,3_PRR,NMR-R
+CAN,CA1204,3,"Queens, NS",CA12,3_PRR,NMR-R
+CAN,CA1205,3,"Annapolis, NS",CA12,3_PRR,NMR-R
+CAN,CA1206,3,"Lunenburg, NS",CA12,3_PRR,NMR-R
+CAN,CA1207,3,"Kings, NS",CA12,3_PRR,NMR-R
+CAN,CA1208,3,"Hants, NS",CA12,3_PRR,MR-M
+CAN,CA1209,3,"Halifax, NS",CA12,3_IN,MR-M
+CAN,CA1210,3,"Colchester, NS",CA12,3_PRR,NMR-R
+CAN,CA1211,3,"Cumberland, NS",CA12,3_PRR,NMR-R
+CAN,CA1212,3,"Pictou, NS",CA12,3_PRR,NMR-R
+CAN,CA1213,3,"Guysborough, NS",CA12,3_PRR,NMR-R
+CAN,CA1214,3,"Antigonish, NS",CA12,3_PRR,NMR-R
+CAN,CA1215,3,"Inverness, NS",CA12,3_PRR,NMR-R
+CAN,CA1216,3,"Richmond, NS",CA12,3_PRR,NMR-R
+CAN,CA1217,3,"Cape Breton, NS",CA12,3_PRC,NMR-R
+CAN,CA1218,3,"Victoria, NS",CA12,3_PRR,NMR-R
+CAN,CA13,2,New Brunswick AdministrativeArea1,CAN,2,2
+CAN,CA1301,3,"Saint John, NB",CA13,3_PU,NMR-R
+CAN,CA1302,3,"Charlotte, NB",CA13,3_PRR,NMR-R
+CAN,CA1303,3,"Sunbury, NB",CA13,3_PRC,NMR-R
+CAN,CA1304,3,"Queens, NB",CA13,3_PRR,NMR-R
+CAN,CA1305,3,"Kings, NB",CA13,3_PRC,NMR-R
+CAN,CA1306,3,"Albert, NB",CA13,3_PRC,NMR-R
+CAN,CA1307,3,"Westmorland, NB",CA13,3_PRC,NMR-R
+CAN,CA1308,3,"Kent, NB",CA13,3_PRC,NMR-R
+CAN,CA1309,3,"Northumberland, NB",CA13,3_PRR,NMR-R
+CAN,CA1310,3,"York, NB",CA13,3_IN,NMR-R
+CAN,CA1311,3,"Carleton, NB",CA13,3_PRR,NMR-R
+CAN,CA1312,3,"Victoria, NB",CA13,3_PRR,NMR-R
+CAN,CA1313,3,"Madawaska County, NB",CA13,3_PRR,NMR-R
+CAN,CA1314,3,"Restigouche County, NB",CA13,3_PRR,NMR-R
+CAN,CA1315,3,"Gloucester County, NB",CA13,3_PRR,NMR-R
+CAN,CA24,2,Quebec AdministrativeArea1,CAN,2,2
+CAN,CA2401,3,"Les Îles-de-la-Madeleine, QC",CA24,3_PRR,NMR-R
+CAN,CA2402,3,"Le Rocher-Percé, QC",CA24,3_PRR,NMR-R
+CAN,CA2403,3,"La Côte-de-Gaspé, QC",CA24,3_PRR,NMR-R
+CAN,CA2404,3,"La Haute-Gaspésie, QC",CA24,3_PRR,NMR-R
+CAN,CA2405,3,"Bonaventure, QC",CA24,3_PRR,NMR-R
+CAN,CA2406,3,"Avignon, QC",CA24,3_PRR,NMR-R
+CAN,CA2407,3,"La Matapédia, QC",CA24,3_PRR,NMR-R
+CAN,CA2408,3,"Matane, QC",CA24,3_PRR,NMR-R
+CAN,CA2409,3,"La Mitis, QC",CA24,3_PRR,NMR-R
+CAN,CA2410,3,"Rimouski-Neigette, QC",CA24,3_IN,NMR-R
+CAN,CA2411,3,"Les Basques, QC",CA24,3_PRR,NMR-R
+CAN,CA2412,3,"Rivière-du-Loup, QC",CA24,3_IN,NMR-R
+CAN,CA2413,3,"Témiscouata, QC",CA24,3_PRR,NMR-R
+CAN,CA2414,3,"Kamouraska, QC",CA24,3_PRR,NMR-R
+CAN,CA2415,3,"Charlevoix-Est, QC",CA24,3_PRR,NMR-R
+CAN,CA2416,3,"Charlevoix, QC",CA24,3_PRR,NMR-R
+CAN,CA2417,3,"L'Islet, QC",CA24,3_PRR,NMR-R
+CAN,CA2418,3,"Montmagny, QC",CA24,3_PRC,NMR-M
+CAN,CA2419,3,"Bellechasse, QC",CA24,3_PRC,NMR-M
+CAN,CA2420,3,"L'Île-d'Orléans, QC",CA24,3_PRC,MR-M
+CAN,CA2421,3,"La Côte-de-Beaupré, QC",CA24,3_PRC,MR-M
+CAN,CA2422,3,"La Jacques-Cartier, QC",CA24,3_PRC,MR-M
+CAN,CA2423,3,"Communauté-Urbaine-de-Québec, QC",CA24,3_PU,MR-M
+CAN,CA2425,3,"Lévis, QC",CA24,3_PU,MR-M
+CAN,CA2426,3,"La Nouvelle-Beauce, QC",CA24,3_PRC,NMR-M
+CAN,CA2427,3,"Robert-Cliche, QC",CA24,3_PRC,NMR-R
+CAN,CA2428,3,"Les Etchemins, QC",CA24,3_PRR,NMR-R
+CAN,CA2429,3,"Beauce-Sartigan, QC",CA24,3_IN,NMR-R
+CAN,CA2430,3,"Le Granit, QC",CA24,3_PRR,NMR-R
+CAN,CA2431,3,"L'Amiante, QC",CA24,3_PRR,NMR-R
+CAN,CA2432,3,"L'Érable, QC",CA24,3_PRR,NMR-M
+CAN,CA2433,3,"Lotbinière, QC",CA24,3_PRC,MR-M
+CAN,CA2434,3,"Portneuf, QC",CA24,3_PRC,MR-M
+CAN,CA2435,3,"Mékinac, QC",CA24,3_PRC,NMR-S
+CAN,CA2436,3,"Shawinigan, QC",CA24,3_IN,NMR-S
+CAN,CA2437,3,"Francheville, QC",CA24,3_PU,NMR-S
+CAN,CA2438,3,"Bécancour, QC",CA24,3_PRC,NMR-S
+CAN,CA2439,3,"Arthabaska, QC",CA24,3_IN,NMR-R
+CAN,CA2440,3,"Asbestos, QC",CA24,3_PRR,NMR-M
+CAN,CA2441,3,"Le Haut-Saint-François, QC",CA24,3_PRC,MR-M
+CAN,CA2442,3,"Le Val-Saint-François, QC",CA24,3_PRC,MR-M
+CAN,CA2443,3,"Sherbrooke, QC",CA24,3_PU,MR-M
+CAN,CA2444,3,"Coaticook, QC",CA24,3_PRC,NMR-M
+CAN,CA2445,3,"Memphrémagog, QC",CA24,3_IN,MR-M
+CAN,CA2446,3,"Brome-Missisquoi, QC",CA24,3_PRC,NMR-R
+CAN,CA2447,3,"La Haute-Yamaska, QC",CA24,3_IN,NMR-M
+CAN,CA2448,3,"Acton, QC",CA24,3_PRC,NMR-M
+CAN,CA2449,3,"Drummond, QC",CA24,3_IN,NMR-M
+CAN,CA2450,3,"Nicolet-Yamaska, QC",CA24,3_PRC,NMR-S
+CAN,CA2451,3,"Maskinongé, QC",CA24,3_PRC,NMR-S
+CAN,CA2452,3,"D'Autray, QC",CA24,3_PRR,NMR-R
+CAN,CA2453,3,"Le Bas-Richelieu, QC",CA24,3_IN,NMR-R
+CAN,CA2454,3,"Les Maskoutains, QC",CA24,3_IN,NMR-M
+CAN,CA2455,3,"Rouville, QC",CA24,3_PRC,MR-L
+CAN,CA2456,3,"Le Haut-Richelieu, QC",CA24,3_IN,MR-L
+CAN,CA2457,3,"La Vallée-du-Richelieu, QC",CA24,3_PU,MR-L
+CAN,CA2458,3,"Longueuil, QC",CA24,3_PU,MR-L
+CAN,CA2459,3,"Lajemmerais, QC",CA24,3_PU,MR-L
+CAN,CA2460,3,"L'Assomption, QC",CA24,3_PU,MR-L
+CAN,CA2461,3,"Joliette, QC",CA24,3_IN,NMR-R
+CAN,CA2462,3,"Matawinie, QC",CA24,3_PRR,MR-L
+CAN,CA2463,3,"Montcalm, QC",CA24,3_PRR,MR-L
+CAN,CA2464,3,"Les Moulins, QC",CA24,3_PU,MR-L
+CAN,CA2465,3,"Laval, QC",CA24,3_PU,MR-L
+CAN,CA2466,3,"Communauté-Urbaine-de-Montréal, QC",CA24,3_PU,MR-L
+CAN,CA2467,3,"Roussillon, QC",CA24,3_PU,MR-L
+CAN,CA2468,3,"Les Jardins-de-Napierville, QC",CA24,3_PRC,MR-L
+CAN,CA2469,3,"Le Haut-Saint-Laurent, QC",CA24,3_PRR,NMR-R
+CAN,CA2470,3,"Beauharnois-Salaberry, QC",CA24,3_IN,NMR-R
+CAN,CA2471,3,"Vaudreuil-Soulanges, QC",CA24,3_IN,MR-L
+CAN,CA2472,3,"Deux-Montagnes, QC",CA24,3_PU,MR-L
+CAN,CA2473,3,"Thérèse-De Blainville, QC",CA24,3_PU,MR-L
+CAN,CA2474,3,"Mirabel, QC",CA24,3_PRC,MR-L
+CAN,CA2475,3,"La Rivière-du-Nord, QC",CA24,3_IN,MR-L
+CAN,CA2476,3,"Argenteuil, QC",CA24,3_PRR,MR-L
+CAN,CA2477,3,"Les Pays-d'en-Haut, QC",CA24,3_PRR,MR-L
+CAN,CA2478,3,"Les Laurentides, QC",CA24,3_PRR,NMR-R
+CAN,CA2479,3,"Antoine-Labelle, QC",CA24,3_PRR,NMR-R
+CAN,CA2480,3,"Papineau, QC",CA24,3_PRR,NMR-R
+CAN,CA2481,3,"Gatineau, QC",CA24,3_PU,MR-M
+CAN,CA2482,3,"Les Collines-de-l'Outaouais, QC",CA24,3_PRC,MR-M
+CAN,CA2483,3,"La Vallée-de-la-Gatineau, QC",CA24,3_PRR,NMR-R
+CAN,CA2484,3,"Pontiac, QC",CA24,3_PRR,NMR-R
+CAN,CA2485,3,"Témiscamingue, QC",CA24,3_PRR,NMR-R
+CAN,CA2486,3,"Rouyn-Noranda, QC",CA24,3_PRR,NMR-R
+CAN,CA2487,3,"Abitibi-Ouest, QC",CA24,3_PRR,NMR-R
+CAN,CA2488,3,"Abitibi, QC",CA24,3_PRR,NMR-R
+CAN,CA2489,3,"Vallée-de-l'Or, QC",CA24,3_PRR,NMR-R
+CAN,CA2490,3,"La Tuque, QC",CA24,3_PRR,NMR-R
+CAN,CA2491,3,"Le Domaine-du-Roy, QC",CA24,3_PRR,NMR-R
+CAN,CA2492,3,"Maria-Chapdelaine, QC",CA24,3_PRR,NMR-R
+CAN,CA2493,3,"Lac-Saint-Jean-Est, QC",CA24,3_IN,NMR-R
+CAN,CA2494,3,"Le Saguenay-et-son-Fjord, QC",CA24,3_IN,NMR-R
+CAN,CA2495,3,"La Haute-Côte-Nord, QC",CA24,3_PRR,NMR-R
+CAN,CA2496,3,"Manicouagan, QC",CA24,3_PRR,NMR-R
+CAN,CA2497,3,"Sept-Rivières-Caniapiscau, QC",CA24,3_PRR,NMR-R
+CAN,CA2498,3,"Minganie-Basse-Côte-Nord, QC",CA24,3_PRR,NMR-R
+CAN,CA2499,3,"Nord-du-Québec, QC",CA24,3_PRR,NMR-R
+CAN,CA35,2,Ontario AdministrativeArea1,CAN,2,2
+CAN,CA3501,3,"Stormont, Dundas and Glengarry, ON",CA35,3_PRR,NMR-R
+CAN,CA3502,3,"Prescott and Russell, ON",CA35,3_PRC,MR-M
+CAN,CA3506,3,"Ottawa-Carleton, ON",CA35,3_PU,MR-M
+CAN,CA3507,3,"Leeds and Grenville, ON",CA35,3_PRC,NMR-R
+CAN,CA3509,3,"Lanark, ON",CA35,3_PRC,MR-M
+CAN,CA3510,3,"Frontenac, ON",CA35,3_IN,NMR-R
+CAN,CA3511,3,"Lennox and Addington, ON",CA35,3_PRC,NMR-R
+CAN,CA3512,3,"Hastings, ON",CA35,3_PRC,NMR-R
+CAN,CA3513,3,"Prince Edward, ON",CA35,3_PRC,NMR-R
+CAN,CA3514,3,"Northumberland, ON",CA35,3_PRC,NMR-S
+CAN,CA3515,3,"Peterborough, ON",CA35,3_IN,NMR-S
+CAN,CA3516,3,"Kawartha Lakes, ON",CA35,3_PRC,MR-L
+CAN,CA3518,3,"Durham, ON",CA35,3_IN,MR-L
+CAN,CA3519,3,"York, ON",CA35,3_PU,MR-L
+CAN,CA3520,3,"Toronto metropolitan municipality, ON",CA35,3_PU,MR-L
+CAN,CA3521,3,"Peel, ON",CA35,3_PU,MR-L
+CAN,CA3522,3,"Dufferin, ON",CA35,3_PRC,MR-L
+CAN,CA3523,3,"Wellington, ON",CA35,3_IN,NMR-M
+CAN,CA3524,3,"Halton, ON",CA35,3_PU,MR-L
+CAN,CA3525,3,"Hamilton, ON",CA35,3_PU,MR-M
+CAN,CA3526,3,"Niagara, ON",CA35,3_IN,NMR-M
+CAN,CA3528,3,"Haldimand-Norfolk, ON",CA35,3_PRC,NMR-M
+CAN,CA3529,3,"Brant, ON",CA35,3_IN,NMR-M
+CAN,CA3530,3,"Waterloo, ON",CA35,3_PU,MR-M
+CAN,CA3531,3,"Perth, ON",CA35,3_PRC,NMR-M
+CAN,CA3532,3,"Oxford, ON",CA35,3_PRC,NMR-M
+CAN,CA3534,3,"Elgin, ON",CA35,3_IN,MR-M
+CAN,CA3536,3,"Chatham-Kent, ON",CA35,3_IN,NMR-M
+CAN,CA3537,3,"Essex, ON",CA35,3_IN,MR-M
+CAN,CA3538,3,"Lambton, ON",CA35,3_IN,NMR-R
+CAN,CA3539,3,"Middlesex, ON",CA35,3_PU,MR-M
+CAN,CA3540,3,"Huron, ON",CA35,3_PRR,NMR-R
+CAN,CA3541,3,"Bruce, ON",CA35,3_PRR,NMR-R
+CAN,CA3542,3,"Grey, ON",CA35,3_PRR,NMR-R
+CAN,CA3543,3,"Simcoe, ON",CA35,3_PRC,MR-L
+CAN,CA3544,3,"Muskoka, ON",CA35,3_PRR,NMR-R
+CAN,CA3546,3,"Haliburton, ON",CA35,3_PRR,NMR-R
+CAN,CA3547,3,"Renfrew, ON",CA35,3_PRR,NMR-R
+CAN,CA3548,3,"Nipissing, ON",CA35,3_PRC,NMR-R
+CAN,CA3549,3,"Parry Sound, ON",CA35,3_PRR,NMR-R
+CAN,CA3551,3,"Manitoulin, ON",CA35,3_PRR,NMR-R
+CAN,CA3552,3,"Sudbury (District), ON",CA35,3_PRR,NMR-R
+CAN,CA3553,3,"Greater Sudbury / Grand Sudbury, ON",CA35,3_IN,NMR-R
+CAN,CA3554,3,"Timiskaming, ON",CA35,3_PRR,NMR-R
+CAN,CA3556,3,"Cochrane, ON",CA35,3_PRR,NMR-R
+CAN,CA3557,3,"Algoma, ON",CA35,3_IN,NMR-R
+CAN,CA3558,3,"Thunder Bay, ON",CA35,3_IN,NMR-R
+CAN,CA3559,3,"Rainy River, ON",CA35,3_PRR,NMR-R
+CAN,CA3560,3,"Kenora, ON",CA35,3_PRR,NMR-R
+CAN,CA46,2,Manitoba AdministrativeArea1,CAN,2,2
+CAN,CA47,2,Saskatchewan AdministrativeArea1,CAN,2,2
+CAN,CA48,2,Alberta AdministrativeArea1,CAN,2,2
+CAN,CA59,2,British Columbia AdministrativeArea1,CAN,2,2
+CAN,CA5901,3,"East Kootenay, BC",CA59,3_PRR,NMR-R
+CAN,CA5903,3,"Central Kootenay, BC",CA59,3_PRR,NMR-R
+CAN,CA5905,3,"Kootenay Boundary, BC",CA59,3_PRR,NMR-R
+CAN,CA5907,3,"Okanagan-Similkameen, BC",CA59,3_PRR,NMR-R
+CAN,CA5909,3,"Fraser Valley, BC",CA59,3_PRC,NMR-M
+CAN,CA5915,3,"Greater Vancouver, BC",CA59,3_PU,MR-L
+CAN,CA5917,3,"Capital, BC",CA59,3_PU,MR-M
+CAN,CA5919,3,"Cowichan Valley, BC",CA59,3_PRC,NMR-M
+CAN,CA5921,3,"Nanaimo, BC",CA59,3_PU,NMR-R
+CAN,CA5923,3,"Alberni-Clayoquot, BC",CA59,3_PRR,NMR-R
+CAN,CA5924,3,"Strathcona, BC",CA59,3_PRR,NMR-R
+CAN,CA5925,3,Comox Valley BC,CA59,3_PRR,NMR-R
+CAN,CA5927,3,"Powell River, BC",CA59,3_PRR,NMR-R
+CAN,CA5929,3,"Sunshine Coast, BC",CA59,3_PRR,NMR-R
+CAN,CA5931,3,"Squamish-Lillooet, BC",CA59,3_PRR,NMR-R
+CAN,CA5933,3,"Thompson-Nicola, BC",CA59,3_PRC,NMR-R
+CAN,CA5935,3,"Central Okanagan, BC",CA59,3_PRC,NMR-R
+CAN,CA5937,3,"North Okanagan, BC",CA59,3_PRC,NMR-R
+CAN,CA5939,3,"Columbia-Shuswap, BC",CA59,3_PRR,NMR-R
+CAN,CA5941,3,"Cariboo, BC",CA59,3_PRR,NMR-R
+CAN,CA5943,3,"Mount Waddington, BC",CA59,3_PRR,NMR-R
+CAN,CA5945,3,"Central Coast, BC",CA59,3_PRR,NMR-R
+CAN,CA5947,3,"Skeena-Queen Charlotte, BC",CA59,3_PRR,NMR-R
+CAN,CA5949,3,"Kitimat-Stikine, BC",CA59,3_PRR,NMR-R
+CAN,CA5951,3,"Bulkley-Nechako, BC",CA59,3_PRR,NMR-R
+CAN,CA5953,3,"Fraser-Fort George, BC",CA59,3_PRC,NMR-R
+CAN,CA5955,3,"Peace River, BC",CA59,3_PRR,NMR-R
+CAN,CA5957,3,"Stikine, BC",CA59,3_PRR,NMR-R
+CAN,CA5959,3,"Northern Rockies, BC",CA59,3_PRR,NMR-R
+CAN,CA60,2,Yukon AdministrativeArea1,CAN,2,2
+CAN,CA6001,3,"Yukon, YT",CA60,3_PRR,NMR-R
+CAN,CA61,2,Northwest Territories AdministrativeArea1,CAN,2,2
+CAN,CA6107,3,"Inuvik, NT",CA61,3_PRR,NMR-R
+CAN,CA62,2,Nunavut AdministrativeArea1,CAN,2,2
+CAN,CA6204,3,"Baffin, NU",CA62,3_PRR,NMR-R
+CAN,CA6205,3,"Keewatin, NU",CA62,3_PRR,NMR-R
+CAN,CA6208,3,"Kitikmeot, NU",CA62,3_PRR,NMR-R
+CHL,CHL,1,Chile,CHL,1,1
+CHL,CL01,2,Tarapacá AdministrativeArea1,CHL,2,2
+CHL,CL011,3,Iquique,CL01,..,NMR-S
+CHL,CL012,3,Tamarugal,CL01,..,NMR-R
+CHL,CL02,2,Antofagasta AdministrativeArea1,CHL,2,2
+CHL,CL021,3,Antofagasta,CL02,..,MR-M
+CHL,CL022,3,El Loa,CL02,..,NMR-S
+CHL,CL023,3,Tocopilla,CL02,..,NMR-R
+CHL,CL03,2,Atacama AdministrativeArea1,CHL,2,2
+CHL,CL031,3,Copiapó,CL03,..,NMR-S
+CHL,CL032,3,Chañaral,CL03,..,NMR-R
+CHL,CL033,3,Huasco,CL03,..,NMR-R
+CHL,CL04,2,Coquimbo AdministrativeArea1,CHL,2,2
+CHL,CL041,3,Elqui,CL04,..,MR-M
+CHL,CL042,3,Choapa,CL04,..,NMR-R
+CHL,CL043,3,Limarí,CL04,..,NMR-S
+CHL,CL05,2,Valparaíso AdministrativeArea1,CHL,2,2
+CHL,CL051,3,Valparaíso,CL05,..,MR-M
+CHL,CL052,3,Isla de Pascua,CL05,..,NMR-R
+CHL,CL053,3,Los Andes,CL05,..,NMR-R
+CHL,CL054,3,Petorca,CL05,..,NMR-R
+CHL,CL055,3,Quillota,CL05,..,NMR-S
+CHL,CL056,3,San Antonio,CL05,..,NMR-S
+CHL,CL057,3,San Felipe de Aconcagua,CL05,..,NMR-S
+CHL,CL058,3,Marga Marga,CL05,..,MR-M
+CHL,CL06,2,O'Higgins AdministrativeArea1,CHL,2,2
+CHL,CL061,3,Cachapoal,CL06,..,MR-M
+CHL,CL062,3,Cardenal Caro,CL06,..,NMR-R
+CHL,CL063,3,Colchagua,CL06,..,NMR-S
+CHL,CL07,2,Maule AdministrativeArea1,CHL,2,2
+CHL,CL071,3,Talca,CL07,..,MR-M
+CHL,CL072,3,Cauquenes,CL07,..,NMR-R
+CHL,CL073,3,Curicó,CL07,..,NMR-S
+CHL,CL074,3,Linares,CL07,..,NMR-M
+CHL,CL08,2,Biobío AdministrativeArea1,CHL,2,2
+CHL,CL081,3,Concepción,CL08,..,MR-M
+CHL,CL082,3,Arauco,CL08,..,NMR-R
+CHL,CL09,2,Araucanía AdministrativeArea1,CHL,2,2
+CHL,CL091,3,Cautín,CL09,..,MR-M
+CHL,CL092,3,Malleco,CL09,..,NMR-R
+CHL,CL10,2,Los Lagos AdministrativeArea1,CHL,2,2
+CHL,CL101,3,Llanquihue,CL10,..,MR-M
+CHL,CL102,3,Chiloé,CL10,..,NMR-R
+CHL,CL103,3,Osorno,CL10,..,NMR-S
+CHL,CL104,3,Palena,CL10,..,NMR-R
+CHL,CL11,2,Aysén AdministrativeArea1,CHL,2,2
+CHL,CL111,3,Coyhaique,CL11,..,NMR-R
+CHL,CL112,3,Aysén,CL11,..,NMR-R
+CHL,CL113,3,Capitán Prat,CL11,..,NMR-R
+CHL,CL114,3,General Carrera,CL11,..,NMR-R
+CHL,CL12,2,Magallanes y Antártica AdministrativeArea1,CHL,2,2
+CHL,CL121,3,Magallanes,CL12,..,NMR-S
+CHL,CL122,3,Antártica Chilena,CL12,..,NMR-R
+CHL,CL123,3,Tierra del Fuego,CL12,..,NMR-R
+CHL,CL124,3,Última Esperanza,CL12,..,NMR-R
+CHL,CL13,2,Santiago Metropolitan AdministrativeArea1,CHL,2,2
+CHL,CL131,3,Santiago,CL13,..,MR-L
+CHL,CL132,3,Cordillera,CL13,..,MR-L
+CHL,CL133,3,Chacabuco,CL13,..,MR-L
+CHL,CL134,3,Maipo,CL13,..,MR-L
+CHL,CL135,3,Melipilla,CL13,..,NMR-M
+CHL,CL136,3,Talagante,CL13,..,MR-L
+CHL,CL14,2,Los Ríos AdministrativeArea1,CHL,2,2
+CHL,CL141,3,Valdivia,CL14,..,NMR-S
+CHL,CL142,3,Ranco,CL14,..,NMR-S
+CHL,CL15,2,Arica y Parinacota AdministrativeArea1,CHL,2,2
+CHL,CL151,3,Arica,CL15,..,NMR-S
+CHL,CL152,3,Parinacota,CL15,..,NMR-R
+CHL,CL16,2,Ñuble AdministrativeArea1,CHL,2,2
+CHL,CL161,3,Diguillín,CL16,,NMR-S
+CHL,CL162,3,Itata,CL16,,NMR-S
+CHL,CL163,3,Punilla,CL16,,NMR-S
+CZE,CZE,1,Czech Republic,CZE,1,1
+CZE,CZ01,2,Prague AdministrativeArea1,CZE,2,2
+CZE,CZ010,3,Prague,CZ01,3_PU,MR-L
+CZE,CZ02,2,Central Bohemian Region AdministrativeArea1,CZE,2,2
+CZE,CZ020,3,Central Bohemia,CZ02,3_PU,MR-L
+CZE,CZ03,2,Southwest AdministrativeArea1,CZE,2,2
+CZE,CZ031,3,South Bohemia,CZ03,3_PRC,NMR-S
+CZE,CZ032,3,Plzen,CZ03,3_PRC,MR-M
+CZE,CZ04,2,Northwest AdministrativeArea1,CZE,2,2
+CZE,CZ041,3,Karlovy Vary,CZ04,3_INC,NMR-S
+CZE,CZ042,3,Ústí nad Labem,CZ04,3_INC,NMR-S
+CZE,CZ05,2,Northeast AdministrativeArea1,CZE,2,2
+CZE,CZ051,3,Liberec,CZ05,3_INC,MR-M
+CZE,CZ052,3,Hradec Králové,CZ05,3_INC,NMR-S
+CZE,CZ053,3,Pardubice,CZ05,3_PRC,NMR-S
+CZE,CZ06,2,Southeast AdministrativeArea1,CZE,2,2
+CZE,CZ063,3,Vysocina,CZ06,3_PRC,NMR-S
+CZE,CZ064,3,South Moravia,CZ06,3_INC,MR-M
+CZE,CZ07,2,Central Moravia AdministrativeArea1,CZE,2,2
+CZE,CZ071,3,Olomouc,CZ07,3_INC,NMR-S
+CZE,CZ072,3,Zlín,CZ07,3_INC,NMR-S
+CZE,CZ08,2,Moravia-Silesia AdministrativeArea1,CZE,2,2
+CZE,CZ080,3,Moravia-Silesia,CZ08,3_INC,MR-M
+DNK,DNK,1,Denmark,DNK,1,1
+DNK,DK01,2,Capital (DK) AdministrativeArea1,DNK,2,2
+DNK,DK011,3,City of Copenhagen,DK01,3_PU,MR-L
+DNK,DK012,3,Copenhagen suburbs,DK01,3_PU,MR-L
+DNK,DK013,3,North Zealand,DK01,3_INC,MR-L
+DNK,DK014,3,Bornholm,DK01,3_PRR,NMR-R
+DNK,DK02,2,Zealand AdministrativeArea1,DNK,2,2
+DNK,DK021,3,East Zealand,DK02,3_INC,MR-L
+DNK,DK022,3,West and South Zealand,DK02,3_PRR,NMR-M
+DNK,DK03,2,Southern Denmark AdministrativeArea1,DNK,2,2
+DNK,DK031,3,Fyn,DK03,3_INC,MR-M
+DNK,DK032,3,South Jutland,DK03,3_INC,NMR-M
+DNK,DK04,2,Central Jutland AdministrativeArea1,DNK,2,2
+DNK,DK041,3,West Jutland,DK04,3_PRR,NMR-M
+DNK,DK042,3,East Jutland,DK04,3_INC,MR-M
+DNK,DK05,2,Northern Jutland AdministrativeArea1,DNK,2,2
+DNK,DK050,3,North Jutland,DK05,3_PRC,MR-M
+EST,EST,1,Estonia,EST,1,1
+EST,EE00,2,Estonia AdministrativeArea1,EST,2,2
+EST,EE001,3,North Estonia,EE00,3_PU,MR-M
+EST,EE004,3,West Estonia,EE00,3_PRR,NMR-R
+EST,EE006,3,Central Estonia,EE00,3_PRR,NMR-R
+EST,EE007,3,Northeast Estonia,EE00,3_INC,NMR-S
+EST,EE008,3,Southern Estonia,EE00,3_PRC,NMR-S
+FIN,FIN,1,Finland,FIN,1,1
+FIN,FI19,2,Western Finland AdministrativeArea1,FIN,2,2
+FIN,FI193,3,Central Finland,FI19,3_PRC,NMR-S
+FIN,FI194,3,Southern Ostrobothnia,FI19,3_PRR,NMR-R
+FIN,FI195,3,Ostrobothnia,FI19,3_PRR,NMR-R
+FIN,FI196,3,Satakunta,FI19,3_PRR,NMR-R
+FIN,FI197,3,Pirkanmaa,FI19,3_INC,MR-M
+FIN,FI1B,2,Helsinki-Uusimaa AdministrativeArea1,FIN,2,2
+FIN,FI1B1,3,Helsinki-Uusimaa,FI1B,3_PU,MR-M
+FIN,FI1C,2,Southern Finland AdministrativeArea1,FIN,2,2
+FIN,FI1C1,3,Finland Proper,FI1C,3_INC,MR-M
+FIN,FI1C2,3,Tavastia Proper,FI1C,3_INC,NMR-M
+FIN,FI1C3,3,Päijät-Häme,FI1C,3_INC,NMR-S
+FIN,FI1C4,3,Kymenlaakso,FI1C,3_INR,NMR-R
+FIN,FI1C5,3,South Karelia,FI1C,3_INR,NMR-R
+FIN,FI1D,2,Eastern and Northern Finland AdministrativeArea1,FIN,2,2
+FIN,FI1D1,3,Southern Savonia,FI1D,3_PRR,NMR-R
+FIN,FI1D2,3,Northern Savonia,FI1D,3_PRC,NMR-S
+FIN,FI1D3,3,North Karelia,FI1D,3_PRR,NMR-R
+FIN,FI1D8,3,Kainuu,FI1D,3_PRR,NMR-R
+FIN,FI1D5,3,Central Ostrobothnia,FI1D,3_PRR,NMR-R
+FIN,FI1D9,3,North Ostrobothnia,FI1D,3_PRC,NMR-S
+FIN,FI1D7,3,Lapland,FI1D,3_PRR,NMR-R
+FIN,FI20,2,Åland AdministrativeArea1,FIN,2,2
+FIN,FI200,3,Åland,FI20,3_PRR,NMR-R
+FRA,FRA,1,France,FRA,1,1
+FRA,FR1,2,Île-de-France AdministrativeArea1,FRA,2,2
+FRA,FR101,3,Paris,FR10,3_PU,MR-L
+FRA,FR102,3,Seine-et-Marne,FR10,3_INC,MR-L
+FRA,FR103,3,Yvelines,FR10,3_PU,MR-L
+FRA,FR104,3,Essonne,FR10,3_PU,MR-L
+FRA,FR105,3,Hauts-de-Seine,FR10,3_PU,MR-L
+FRA,FR106,3,Seine-Saint-Denis,FR10,3_PU,MR-L
+FRA,FR107,3,Val-de-Marne,FR10,3_PU,MR-L
+FRA,FR108,3,Val-d'Oise,FR10,3_PU,MR-L
+FRA,FRB,2,Centre - Val de Loire AdministrativeArea1,FRA,2,2
+FRA,FRB01,3,Cher,FRB0,3_PRC,NMR-S
+FRA,FRB02,3,Eure-et-Loir,FRB0,3_PRC,NMR-S
+FRA,FRB03,3,Indre,FRB0,3_PRC,NMR-S
+FRA,FRB04,3,Indre-et-Loire,FRB0,3_INC,MR-M
+FRA,FRB05,3,Loir-et-Cher,FRB0,3_PRC,NMR-M
+FRA,FRB06,3,Loiret,FRB0,3_INC,MR-M
+FRA,FRC,2,Bourgogne-Franche-Comté AdministrativeArea1,FRA,2,2
+FRA,FRC11,3,Côte-d'Or,FRC1,3_INC,MR-M
+FRA,FRC12,3,Nièvre,FRC1,3_PRR,NMR-R
+FRA,FRC13,3,Saône-et-Loire,FRC1,3_PRC,NMR-S
+FRA,FRC14,3,Yonne,FRC1,3_PRR,NMR-S
+FRA,FRC21,3,Doubs,FRC2,3_INC,MR-M
+FRA,FRC22,3,Jura,FRC2,3_PRR,NMR-M
+FRA,FRC23,3,Haute-Saône,FRC2,3_PRC,NMR-M
+FRA,FRC24,3,Territoire de Belfort,FRC2,3_INC,NMR-M
+FRA,FRD,2,Normandy AdministrativeArea1,FRA,2,2
+FRA,FRD21,3,Eure,FRD2,3_PRC,NMR-M
+FRA,FRD22,3,Seine-Maritime,FRD2,3_INC,MR-M
+FRA,FRD11,3,Calvados,FRD1,3_INC,MR-M
+FRA,FRD12,3,Manche,FRD1,3_PRC,NMR-S
+FRA,FRD13,3,Orne,FRD1,3_PRR,NMR-M
+FRA,FRE,2,Hauts-de-France AdministrativeArea1,FRA,2,2
+FRA,FRE21,3,Aisne,FRE2,3_PRC,NMR-M
+FRA,FRE22,3,Oise,FRE2,3_INC,NMR-S
+FRA,FRE23,3,Somme,FRE2,3_PRC,MR-M
+FRA,FRE11,3,Nord (FR),FRE1,3_PU,MR-M
+FRA,FRE12,3,Pas-de-Calais,FRE1,3_INC,NMR-M
+FRA,FRF,2,Grand Est AdministrativeArea1,FRA,2,2
+FRA,FRF21,3,Ardennes,FRF2,3_PRC,NMR-S
+FRA,FRF22,3,Aube,FRF2,3_INC,NMR-S
+FRA,FRF23,3,Marne,FRF2,3_INC,MR-M
+FRA,FRF24,3,Haute-Marne,FRF2,3_PRR,NMR-R
+FRA,FRF31,3,Meurthe-et-Moselle,FRF3,3_INC,MR-M
+FRA,FRF32,3,Meuse,FRF3,3_PRR,NMR-R
+FRA,FRF33,3,Moselle,FRF3,3_INC,NMR-M
+FRA,FRF34,3,Vosges,FRF3,3_PRR,NMR-R
+FRA,FRF11,3,Bas-Rhin,FRF1,3_INC,MR-M
+FRA,FRF12,3,Haut-Rhin,FRF1,3_INC,MR-M
+FRA,FRG,2,Pays de la Loire AdministrativeArea1,FRA,2,2
+FRA,FRG01,3,Loire-Atlantique,FRG0,3_PU,MR-M
+FRA,FRG02,3,Maine-et-Loire,FRG0,3_PRC,MR-M
+FRA,FRG03,3,Mayenne,FRG0,3_PRR,NMR-M
+FRA,FRG04,3,Sarthe,FRG0,3_PRC,MR-M
+FRA,FRG05,3,Vendée,FRG0,3_PRR,NMR-R
+FRA,FRH,2,Brittany AdministrativeArea1,FRA,2,2
+FRA,FRH01,3,Côtes-d'Armor,FRH0,3_PRC,NMR-S
+FRA,FRH02,3,Finistère,FRH0,3_PRC,MR-M
+FRA,FRH03,3,Ille-et-Vilaine,FRH0,3_PRC,MR-M
+FRA,FRH04,3,Morbihan,FRH0,3_PRC,NMR-S
+FRA,FRI,2,Nouvelle-Aquitaine AdministrativeArea1,FRA,2,2
+FRA,FRI31,3,Charente,FRI3,3_PRC,NMR-S
+FRA,FRI32,3,Charente-Maritime,FRI3,3_PRC,NMR-S
+FRA,FRI33,3,Deux-Sèvres,FRI3,3_PRC,NMR-M
+FRA,FRI34,3,Vienne,FRI3,3_PRC,MR-M
+FRA,FRI11,3,Dordogne,FRI1,3_PRR,NMR-R
+FRA,FRI12,3,Gironde,FRI1,3_PU,MR-M
+FRA,FRI13,3,Landes,FRI1,3_PRC,NMR-S
+FRA,FRI14,3,Lot-et-Garonne,FRI1,3_PRR,NMR-R
+FRA,FRI15,3,Pyrénées-Atlantiques,FRI1,3_INC,MR-M
+FRA,FRI21,3,Corrèze,FRI2,3_PRC,NMR-S
+FRA,FRI22,3,Creuse,FRI2,3_PRR,NMR-R
+FRA,FRI23,3,Haute-Vienne,FRI2,3_PRC,MR-M
+FRA,FRJ,2,Occitanie AdministrativeArea1,FRA,2,2
+FRA,FRJ21,3,Ariège,FRJ2,3_PRR,NMR-R
+FRA,FRJ22,3,Aveyron,FRJ2,3_PRR,NMR-R
+FRA,FRJ23,3,Haute-Garonne,FRJ2,3_PU,MR-M
+FRA,FRJ24,3,Gers,FRJ2,3_PRR,NMR-R
+FRA,FRJ25,3,Lot,FRJ2,3_PRR,NMR-R
+FRA,FRJ26,3,Hautes-Pyrénées,FRJ2,3_PRC,NMR-M
+FRA,FRJ27,3,Tarn,FRJ2,3_PRC,NMR-S
+FRA,FRJ28,3,Tarn-et-Garonne,FRJ2,3_PRC,NMR-M
+FRA,FRJ11,3,Aude,FRJ1,3_PRC,NMR-M
+FRA,FRJ12,3,Gard,FRJ1,3_INC,MR-M
+FRA,FRJ13,3,Hérault,FRJ1,3_INC,MR-M
+FRA,FRJ14,3,Lozère,FRJ1,3_PRR,NMR-R
+FRA,FRJ15,3,Pyrénées-Orientales,FRJ1,3_INC,MR-M
+FRA,FRK,2,Auvergne-Rhône-Alpes AdministrativeArea1,FRA,2,2
+FRA,FRK21,3,Ain,FRK2,3_PRC,NMR-M
+FRA,FRK22,3,Ardèche,FRK2,3_PRC,NMR-R
+FRA,FRK23,3,Drôme,FRK2,3_PRC,NMR-S
+FRA,FRK24,3,Isère,FRK2,3_INC,MR-M
+FRA,FRK25,3,Loire,FRK2,3_INC,MR-M
+FRA,FRK26,3,Rhône,FRK2,3_PU,MR-L
+FRA,FRK27,3,Savoie,FRK2,3_INC,NMR-M
+FRA,FRK28,3,Haute-Savoie,FRK2,3_INC,MR-M
+FRA,FRK11,3,Allier,FRK1,3_PRR,NMR-R
+FRA,FRK12,3,Cantal,FRK1,3_PRR,NMR-R
+FRA,FRK13,3,Haute-Loire,FRK1,3_PRR,NMR-M
+FRA,FRK14,3,Puy-de-Dôme,FRK1,3_INC,MR-M
+FRA,FRL,2,Provence-Alpes-Côte d’Azur AdministrativeArea1,FRA,2,2
+FRA,FRL01,3,Alpes-de-Haute-Provence,FRL0,3_PRR,NMR-R
+FRA,FRL02,3,Hautes-Alpes,FRL0,3_PRR,NMR-R
+FRA,FRL03,3,Alpes-Maritimes,FRL0,3_PU,MR-M
+FRA,FRL04,3,Bouches-du-Rhône,FRL0,3_PU,MR-L
+FRA,FRL05,3,Var,FRL0,3_INC,MR-M
+FRA,FRL06,3,Vaucluse,FRL0,3_INC,NMR-S
+FRA,FRM,2,Corsica AdministrativeArea1,FRA,2,2
+FRA,FRM01,3,Corse-du-Sud,FRM0,3_PRC,NMR-S
+FRA,FRM02,3,Haute-Corse,FRM0,3_PRR,NMR-R
+FRA,FRY1,2,Guadeloupe AdministrativeArea1,FRY,2,2
+FRA,FRY10,3,Guadeloupe,FRY1,3_INR,NMR-R
+FRA,FRY2,2,Martinique AdministrativeArea1,FRY,2,2
+FRA,FRY20,3,Martinique,FRY2,3_INC,MR-M
+FRA,FRY3,2,French Guiana AdministrativeArea1,FRY,2,2
+FRA,FRY30,3,French Guiana,FRY3,3_INR,NMR-R
+FRA,FRY4,2,La Réunion AdministrativeArea1,FRY,2,2
+FRA,FRY40,3,La Réunion,FRY4,3_PU,NMR-M
+FRA,FRY5,2,Mayotte AdministrativeArea1,FRY,2,2
+FRA,FRY50,3,Mayotte,FRY5,3_INR,NMR-R
+DEU,DEU,1,Germany,DEU,1,1
+DEU,DE1,2,Baden-Württemberg  AdministrativeArea1,DEU,2,2
+DEU,DE125,3,Heidelberg Stadtkreis,DE1E,3_PU,MR-M
+DEU,DE126,3,Mannheim Stadtkreis,DE1E,3_PU,MR-M
+DEU,DE127,3,Neckar-Odenwald-Kreis,DE1E,3_PRC,NMR-M
+DEU,DE128,3,Rhein-Neckar-Kreis,DE1E,3_PU,MR-M
+DEU,DE117,3,Heilbronn Stadtkreis,DE1B,3_INC,MR-M
+DEU,DE118,3,Heilbronn Landkreis,DE1B,3_INC,MR-M
+DEU,DE119,3,Hohenlohekreis,DE1B,3_PRC,NMR-M
+DEU,DE11A,3,Schwäbisch Hall,DE1B,3_PRC,NMR-R
+DEU,DE11B,3,Main-Tauber-Kreis,DE1B,3_PRC,NMR-M
+DEU,DE121,3,Baden-Baden Stadtkreis,DE1D,3_PU,NMR-M
+DEU,DE122,3,Karlsruhe Stadtkreis,DE1D,3_PU,MR-M
+DEU,DE123,3,Karlsruhe Landkreis,DE1D,3_PU,MR-M
+DEU,DE124,3,Rastatt,DE1D,3_PU,NMR-M
+DEU,DE129,3,Pforzheim Stadtkreis,DE1F,3_INC,MR-M
+DEU,DE12A,3,Calw,DE1F,3_PRC,NMR-M
+DEU,DE12B,3,Enzkreis,DE1F,3_INC,MR-M
+DEU,DE12C,3,Freudenstadt,DE1F,3_PRC,NMR-R
+DEU,DE111,3,Stuttgart Stadtkreis,DE1A,3_PU,MR-L
+DEU,DE112,3,Böblingen,DE1A,3_PU,MR-L
+DEU,DE113,3,Esslingen,DE1A,3_PU,MR-L
+DEU,DE114,3,Göppingen,DE1A,3_PU,MR-L
+DEU,DE115,3,Ludwigsburg,DE1A,3_PU,MR-L
+DEU,DE116,3,Rems-Murr-Kreis,DE1A,3_PU,MR-L
+DEU,DE11C,3,Heidenheim,DE1C,3_INC,NMR-M
+DEU,DE11D,3,Ostalbkreis,DE1C,3_INC,NMR-M
+DEU,DE144,3,Ulm Stadtkreis,DE1K,3_INC,MR-M
+DEU,DE145,3,Alb-Donau-Kreis,DE1K,3_INC,MR-M
+DEU,DE146,3,Biberach,DE1K,3_PRC,NMR-M
+DEU,DE141,3,Reutlingen,DE1J,3_INC,MR-M
+DEU,DE142,3,Tübingen Landkreis,DE1J,3_INC,NMR-M
+DEU,DE143,3,Zollernalbkreis,DE1J,3_INC,NMR-M
+DEU,DE135,3,Rottweil,DE1H,3_PRC,NMR-S
+DEU,DE136,3,Schwarzwald-Baar-Kreis,DE1H,3_INC,NMR-S
+DEU,DE137,3,Tuttlingen,DE1H,3_INC,NMR-S
+DEU,DE131,3,Freiburg im Breisgau Stadtkreis,DE1G,3_INC,MR-M
+DEU,DE132,3,Breisgau-Hochschwarzwald,DE1G,3_INC,MR-M
+DEU,DE133,3,Emmendingen,DE1G,3_INC,MR-M
+DEU,DE134,3,Ortenaukreis,DE1G,3_INC,MR-M
+DEU,DE138,3,Konstanz,DE1I,3_INC,MR-M
+DEU,DE139,3,Lörrach,DE1I,3_INC,MR-M
+DEU,DE13A,3,Waldshut,DE1I,3_INC,NMR-M
+DEU,DE147,3,Bodenseekreis,DE1L,3_INC,NMR-S
+DEU,DE148,3,Ravensburg,DE1L,3_INC,NMR-S
+DEU,DE149,3,Sigmaringen,DE1L,3_PRC,NMR-S
+DEU,DE2,2,Bavaria AdministrativeArea1,DEU,2,2
+DEU,DE261,3,Aschaffenburg Kreisfreie Stadt,DE2M,3_PU,MR-M
+DEU,DE264,3,Aschaffenburg Landkreis,DE2M,3_PU,MR-M
+DEU,DE269,3,Miltenberg,DE2M,3_INC,MR-M
+DEU,DE263,3,Würzburg Kreisfreie Stadt,DE2O,3_INC,MR-M
+DEU,DE268,3,Kitzingen,DE2O,3_PRC,MR-M
+DEU,DE26A,3,Main-Spessart,DE2O,3_PRC,MR-M
+DEU,DE26C,3,Würzburg Landkreis,DE2O,3_INC,MR-M
+DEU,DE262,3,Schweinfurt Kreisfreie Stadt,DE2N,3_INC,MR-M
+DEU,DE265,3,Bad Kissingen,DE2N,3_PRC,MR-M
+DEU,DE266,3,Rhön-Grabfeld,DE2N,3_PRC,NMR-M
+DEU,DE267,3,Haßberge,DE2N,3_PRC,NMR-M
+DEU,DE26B,3,Schweinfurt Landkreis,DE2N,3_INC,MR-M
+DEU,DE241,3,Bamberg Kreisfreie Stadt,DE2I,3_INC,NMR-M
+DEU,DE243,3,Coburg Kreisfreie Stadt,DE2I,3_INC,NMR-R
+DEU,DE245,3,Bamberg Landkreis,DE2I,3_INC,NMR-M
+DEU,DE247,3,Coburg Landkreis,DE2I,3_INC,NMR-S
+DEU,DE248,3,Forchheim,DE2I,3_INC,NMR-M
+DEU,DE24A,3,Kronach,DE2I,3_PRC,NMR-M
+DEU,DE24C,3,Lichtenfels,DE2I,3_PRC,NMR-M
+DEU,DE242,3,Bayreuth Kreisfreie Stadt,DE2J,3_INC,MR-M
+DEU,DE244,3,Hof Kreisfreie Stadt,DE2J,3_INC,NMR-M
+DEU,DE246,3,Bayreuth Landkreis,DE2J,3_INC,MR-M
+DEU,DE249,3,Hof Landkreis,DE2J,3_INC,NMR-M
+DEU,DE24B,3,Kulmbach,DE2J,3_PRC,MR-M
+DEU,DE24D,3,Wunsiedel i. Fichtelgebirge,DE2J,3_PRC,NMR-M
+DEU,DE231,3,Amberg Kreisfreie Stadt,DE2H,3_INC,NMR-R
+DEU,DE233,3,Weiden i. d. Opf Kreisfreie Stadt,DE2H,3_PRR,NMR-R
+DEU,DE234,3,Amberg-Sulzbach,DE2H,3_INC,NMR-M
+DEU,DE237,3,Neustadt a. d. Waldnaab,DE2H,3_PRR,NMR-R
+DEU,DE239,3,Schwandorf,DE2H,3_PRC,NMR-M
+DEU,DE23A,3,Tirschenreuth,DE2H,3_PRC,NMR-R
+DEU,DE252,3,Erlangen Kreisfreie Stadt,DE2L,3_PU,MR-M
+DEU,DE253,3,Fürth Kreisfreie Stadt,DE2L,3_PU,MR-M
+DEU,DE254,3,Nürnberg Kreisfreie Stadt,DE2L,3_PU,MR-M
+DEU,DE255,3,Schwabach Kreisfreie Stadt,DE2L,3_PU,MR-M
+DEU,DE257,3,Erlangen-Höchstadt,DE2L,3_PU,MR-M
+DEU,DE258,3,Fürth Landkreis,DE2L,3_PU,MR-M
+DEU,DE259,3,Nürnberger Land,DE2L,3_INC,MR-M
+DEU,DE25B,3,Roth,DE2L,3_INC,MR-M
+DEU,DE251,3,Ansbach Kreisfreie Stadt,DE2K,3_PRC,NMR-R
+DEU,DE256,3,Ansbach Landkreis,DE2K,3_PRC,NMR-R
+DEU,DE25A,3,Neustadt a. d. Aisch-Bad Windsheim,DE2K,3_PRC,NMR-M
+DEU,DE25C,3,Weißenburg-Gunzenhausen,DE2K,3_PRC,NMR-R
+DEU,DE271,3,Augsburg Kreisfreie Stadt,DE2P,3_PU,MR-M
+DEU,DE275,3,Aichach-Friedberg,DE2P,3_INC,MR-M
+DEU,DE276,3,Augsburg Landkreis,DE2P,3_PU,MR-M
+DEU,DE277,3,Dillingen a.d. Donau,DE2P,3_PRC,NMR-M
+DEU,DE27D,3,Donau-Ries,DE2P,3_PRC,NMR-M
+DEU,DE211,3,Ingolstadt Kreisfreie Stadt,DE2A,3_INC,MR-M
+DEU,DE219,3,Eichstätt,DE2A,3_INC,MR-M
+DEU,DE21I,3,Neuburg-Schrobenhausen,DE2A,3_PRC,MR-M
+DEU,DE21J,3,Pfaffenhofen a. d. Ilm,DE2A,3_INC,MR-M
+DEU,DE226,3,Kelheim,DE2G,3_PRC,MR-M
+DEU,DE232,3,Regensburg Kreisfreie Stadt,DE2G,3_INC,MR-M
+DEU,DE235,3,Cham,DE2G,3_PRR,NMR-R
+DEU,DE236,3,Neumarkt i. d. OPf.,DE2G,3_PRC,NMR-M
+DEU,DE238,3,Regensburg Landkreis,DE2G,3_INC,MR-M
+DEU,DE222,3,Passau Kreisfreie Stadt,DE2F,3_PRC,NMR-S
+DEU,DE223,3,Straubing Kreisfreie Stadt,DE2F,3_PRC,NMR-M
+DEU,DE224,3,Deggendorf,DE2F,3_PRC,NMR-S
+DEU,DE225,3,Freyung-Grafenau,DE2F,3_PRC,NMR-S
+DEU,DE228,3,Passau Landkreis,DE2F,3_PRC,NMR-S
+DEU,DE229,3,Regen,DE2F,3_PRR,NMR-R
+DEU,DE22B,3,Straubing-Bogen,DE2F,3_PRC,NMR-M
+DEU,DE221,3,Landshut Kreisfreie Stadt,DE2E,3_PRC,NMR-S
+DEU,DE227,3,Landshut Landkreis,DE2E,3_PRC,NMR-M
+DEU,DE22A,3,Rottal-Inn,DE2E,3_PRC,NMR-S
+DEU,DE22C,3,Dingolfing-Landau,DE2E,3_PRC,NMR-S
+DEU,DE212,3,München Kreisfreie Stadt,DE2B,3_PU,MR-L
+DEU,DE217,3,Dachau,DE2B,3_INC,MR-L
+DEU,DE218,3,Ebersberg,DE2B,3_INC,MR-L
+DEU,DE21A,3,Erding,DE2B,3_PRC,MR-L
+DEU,DE21B,3,Freising,DE2B,3_INC,MR-L
+DEU,DE21C,3,Fürstenfeldbruck,DE2B,3_INC,MR-L
+DEU,DE21E,3,Landsberg am Lech,DE2B,3_PRC,MR-L
+DEU,DE21H,3,München Landkreis,DE2B,3_PU,MR-L
+DEU,DE21L,3,Starnberg,DE2B,3_INC,MR-L
+DEU,DE274,3,Memmingen Kreisfreie Stadt,DE2R,3_PRC,NMR-M
+DEU,DE278,3,Günzburg,DE2R,3_PRC,NMR-M
+DEU,DE279,3,Neu-Ulm,DE2R,3_INC,MR-M
+DEU,DE27C,3,Unterallgäu,DE2R,3_PRC,NMR-M
+DEU,DE272,3,Kaufbeuren Kreisfreie Stadt,DE2Q,3_INC,NMR-R
+DEU,DE273,3,Kempten (Allgäu) Kreisfreie Stadt,DE2Q,3_INC,NMR-S
+DEU,DE27A,3,Lindau (Bodensee),DE2Q,3_INC,NMR-S
+DEU,DE27B,3,Ostallgäu,DE2Q,3_INC,NMR-S
+DEU,DE27E,3,Oberallgäu,DE2Q,3_INC,NMR-S
+DEU,DE216,3,Bad Tölz-Wolfratshausen,DE2D,3_INC,NMR-M
+DEU,DE21D,3,Garmisch-Partenkirchen,DE2D,3_INC,NMR-R
+DEU,DE21F,3,Miesbach,DE2D,3_INC,NMR-M
+DEU,DE21N,3,Weilheim-Schongau,DE2D,3_INC,NMR-R
+DEU,DE213,3,Rosenheim Kreisfreie Stadt,DE2C,3_INC,MR-M
+DEU,DE214,3,Altötting,DE2C,3_INR,NMR-R
+DEU,DE215,3,Berchtesgadener Land,DE2C,3_INC,NMR-M
+DEU,DE21G,3,Mühldorf a. Inn,DE2C,3_PRC,NMR-M
+DEU,DE21K,3,Rosenheim Landkreis,DE2C,3_INC,MR-M
+DEU,DE21M,3,Traunstein,DE2C,3_PRC,NMR-M
+DEU,DE3,2,Berlin AdministrativeArea1,DEU,2,2
+DEU,DE300,3,Berlin,DE3A,3_PU,MR-L
+DEU,DE4,2,Brandenburg AdministrativeArea1,DEU,2,2
+DEU,DE40A,3,Oberhavel,DE4E,3_INC,MR-L
+DEU,DE40D,3,Ostprignitz-Ruppin,DE4E,3_PRR,NMR-R
+DEU,DE40F,3,Prignitz,DE4E,3_PRR,NMR-R
+DEU,DE405,3,Barnim,DE4D,3_INC,MR-L
+DEU,DE40I,3,Uckermark,DE4D,3_PRC,NMR-R
+DEU,DE403,3,Frankfurt (Oder) Kreisfreie Stadt,DE4C,3_INC,NMR-S
+DEU,DE409,3,Märkisch-Oderland,DE4C,3_INC,MR-L
+DEU,DE40C,3,Oder-Spree,DE4C,3_INC,MR-L
+DEU,DE402,3,Cottbus Kreisfreie Stadt,DE4B,3_INC,NMR-S
+DEU,DE406,3,Dahme-Spreewald,DE4B,3_INC,MR-L
+DEU,DE407,3,Elbe-Elster,DE4B,3_PRR,NMR-R
+DEU,DE40B,3,Oberspreewald-Lausitz,DE4B,3_INC,NMR-M
+DEU,DE40G,3,Spree-Neiße,DE4B,3_INC,NMR-S
+DEU,DE401,3,Brandenburg an der Havel Kreisfreie Stadt,DE4A,3_INC,NMR-S
+DEU,DE404,3,Potsdam Kreisfreie Stadt,DE4A,3_INC,MR-L
+DEU,DE408,3,Havelland,DE4A,3_INC,MR-L
+DEU,DE40E,3,Potsdam-Mittelmark,DE4A,3_INC,MR-L
+DEU,DE40H,3,Teltow-Fläming,DE4A,3_INC,MR-L
+DEU,DE5,2,Bremen  AdministrativeArea1,DEU,2,2
+DEU,DE501,3,Bremen Kreisfreie Stadt,DE5A,3_PU,MR-M
+DEU,DE502,3,Bremerhaven Kreisfreie Stadt,DE5B,3_INC,MR-M
+DEU,DE932,3,Cuxhaven,DE5B,3_INC,MR-M
+DEU,DE94G,3,Wesermarsch,DE5B,3_INC,NMR-M
+DEU,DE6,2,Hamburg AdministrativeArea1,DEU,2,2
+DEU,DE600,3,Hamburg,DE6A,3_PU,MR-L
+DEU,DE7,2,Hesse AdministrativeArea1,DEU,2,2
+DEU,DE731,3,Kassel Kreisfreie Stadt,DE7D,3_INC,MR-M
+DEU,DE734,3,Kassel Landkreis,DE7D,3_INC,MR-M
+DEU,DE735,3,Schwalm-Eder-Kreis,DE7D,3_PRC,NMR-M
+DEU,DE736,3,Waldeck-Frankenberg,DE7D,3_PRC,NMR-M
+DEU,DE737,3,Werra-Meißner-Kreis,DE7D,3_PRC,NMR-M
+DEU,DE721,3,Gießen Landkreis,DE7C,3_INC,MR-M
+DEU,DE722,3,Lahn-Dill-Kreis,DE7C,3_INC,MR-M
+DEU,DE723,3,Limburg-Weilburg,DE7C,3_INC,NMR-M
+DEU,DE724,3,Marburg-Biedenkopf,DE7C,3_INC,NMR-M
+DEU,DE725,3,Vogelsbergkreis,DE7C,3_PRC,NMR-M
+DEU,DE732,3,Fulda,DE7E,3_INC,NMR-M
+DEU,DE733,3,Hersfeld-Rotenburg,DE7E,3_PRC,NMR-S
+DEU,DE712,3,Frankfurt am Main Kreisfreie Stadt,DE7B,3_PU,MR-L
+DEU,DE713,3,Offenbach am Main Kreisfreie Stadt,DE7B,3_PU,MR-L
+DEU,DE714,3,Wiesbaden Kreisfreie Stadt,DE7B,3_PU,MR-M
+DEU,DE718,3,Hochtaunuskreis,DE7B,3_PU,MR-L
+DEU,DE719,3,Main-Kinzig-Kreis,DE7B,3_INC,MR-L
+DEU,DE71A,3,Main-Taunus-Kreis,DE7B,3_PU,MR-L
+DEU,DE71C,3,Offenbach Landkreis,DE7B,3_PU,MR-L
+DEU,DE71D,3,Rheingau-Taunus-Kreis,DE7B,3_INC,MR-M
+DEU,DE71E,3,Wetteraukreis,DE7B,3_INC,MR-L
+DEU,DE711,3,Darmstadt Kreisfreie Stadt,DE7A,3_PU,MR-M
+DEU,DE715,3,Bergstraße,DE7A,3_PU,MR-M
+DEU,DE716,3,Darmstadt-Dieburg,DE7A,3_PU,MR-M
+DEU,DE717,3,Groß-Gerau,DE7A,3_PU,MR-L
+DEU,DE71B,3,Odenwaldkreis,DE7A,3_PRC,NMR-M
+DEU,DE8,2,Mecklenburg-Vorpommern AdministrativeArea1,DEU,2,2
+DEU,DE804,3,"Schwerin, Kreisfreie Stadt",DE8B,3_PRC,MR-M
+DEU,DE80M,3,Nordwestmecklenburg,DE8B,3_PRC,NMR-M
+DEU,DE80O,3,Ludwigslust-Parchim,DE8B,3_PRC,MR-M
+DEU,DE803,3,"Rostock, Kreisfreie Stadt",DE8A,3_INC,MR-M
+DEU,DE80K,3,Landkreis Rostock,DE8A,3_INC,MR-M
+DEU,DE80L,3,Vorpommern-Rügen,DE8C,3_PRC,NMR-S
+DEU,DE80N,3,Vorpommern-Greifswald,DE8C,3_PRC,NMR-S
+DEU,DE80J,3,Mecklenburgische Seenplatte,DE8D,3_PRC,MR-M
+DEU,DE9,2,Lower Saxony  AdministrativeArea1,DEU,2,2
+DEU,DE942,3,Emden Kreisfreie Stadt,DE9J,3_INR,NMR-R
+DEU,DE945,3,Wilhelmshaven Kreisfreie Stadt,DE9J,3_INC,NMR-M
+DEU,DE947,3,Aurich,DE9J,3_INR,NMR-S
+DEU,DE94A,3,Friesland (DE),DE9J,3_INC,NMR-M
+DEU,DE94C,3,Leer,DE9J,3_INC,NMR-M
+DEU,DE94H,3,Wittmund,DE9J,3_PRC,NMR-M
+DEU,DE933,3,Harburg,DE9H,3_INC,MR-L
+DEU,DE937,3,Rotenburg (Wümme),DE9H,3_PRC,MR-M
+DEU,DE939,3,Stade,DE9H,3_INC,MR-L
+DEU,DE922,3,Diepholz,DE9C,3_INC,MR-M
+DEU,DE936,3,Osterholz,DE9C,3_INC,MR-M
+DEU,DE93B,3,Verden,DE9C,3_INC,MR-M
+DEU,DE941,3,Delmenhorst Kreisfreie Stadt,DE9C,3_PU,MR-M
+DEU,DE943,3,Oldenburg (Oldenburg) Kreisfreie Stadt,DE9K,3_INC,MR-M
+DEU,DE946,3,Ammerland,DE9K,3_INC,MR-M
+DEU,DE948,3,Cloppenburg,DE9K,3_PRC,NMR-M
+DEU,DE94D,3,Oldenburg Landkreis,DE9K,3_INC,MR-M
+DEU,DE949,3,Emsland,DE9M,3_PRR,NMR-M
+DEU,DE94B,3,Grafschaft Bentheim,DE9M,3_INC,NMR-M
+DEU,DE944,3,Osnabrück Kreisfreie Stadt,DE9L,3_INC,MR-M
+DEU,DE94E,3,Osnabrück Landkreis,DE9L,3_INC,MR-M
+DEU,DE94F,3,Vechta,DE9L,3_INC,NMR-M
+DEU,DE927,3,Nienburg (Weser),DE9E,3_PRC,NMR-M
+DEU,DE928,3,Schaumburg,DE9E,3_INC,MR-M
+DEU,DE929,3,Region Hannover,DE9E,3_PU,MR-M
+DEU,DE931,3,Celle,DE9F,3_INC,NMR-M
+DEU,DE938,3,Heidekreis,DE9F,3_INC,NMR-M
+DEU,DE934,3,Lüchow-Dannenberg,DE9I,3_PRR,NMR-R
+DEU,DE935,3,Lüneburg Landkreis,DE9I,3_INC,NMR-S
+DEU,DE93A,3,Uelzen,DE9I,3_PRC,NMR-S
+DEU,DE911,3,Braunschweig Kreisfreie Stadt,DE9A,3_INC,MR-M
+DEU,DE912,3,Salzgitter Kreisfreie Stadt,DE9A,3_INC,MR-M
+DEU,DE913,3,Wolfsburg Kreisfreie Stadt,DE9A,3_INC,MR-M
+DEU,DE914,3,Gifhorn,DE9A,3_INC,MR-M
+DEU,DE916,3,Goslar,DE9A,3_INC,NMR-M
+DEU,DE917,3,Helmstedt,DE9A,3_PRC,MR-M
+DEU,DE91A,3,Peine,DE9A,3_INC,MR-M
+DEU,DE91B,3,Wolfenbüttel,DE9A,3_INC,MR-M
+DEU,DE923,3,Hameln-Pyrmont,DE9D,3_INC,NMR-M
+DEU,DE925,3,Hildesheim,DE9D,3_INC,MR-M
+DEU,DE91C,3,Göttingen,DE9,3_INC,MR-M
+DEU,DE915,OLD_3_2013,Göttingen,DE9B,OLD_3_2013,OLD_3_2013
+DEU,DE919,OLD_3_2013,Osterode am Harz,DE9B,OLD_3_2013,OLD_3_2013
+DEU,DE918,3,Northeim,DE9B,3_PRC,MR-M
+DEU,DE926,3,Holzminden,DE9B,3_PRR,NMR-M
+DEU,DEA,2,North Rhine-Westphalia AdministrativeArea1,DEU,2,2
+DEU,DEA33,3,Münster Kreisfreie Stadt,DEAG,3_PU,MR-M
+DEU,DEA34,3,Borken,DEAG,3_INC,NMR-S
+DEU,DEA35,3,Coesfeld,DEAG,3_PU,MR-M
+DEU,DEA37,3,Steinfurt,DEAG,3_INC,NMR-M
+DEU,DEA38,3,Warendorf,DEAG,3_INC,NMR-M
+DEU,DEA41,3,Bielefeld Kreisfreie Stadt,DEAH,3_PU,MR-M
+DEU,DEA42,3,Gütersloh,DEAH,3_PU,NMR-M
+DEU,DEA43,3,Herford,DEAH,3_PU,NMR-M
+DEU,DEA45,3,Lippe,DEAH,3_INC,NMR-M
+DEU,DEA46,3,Minden-Lübbecke,DEAH,3_INC,NMR-M
+DEU,DEA44,3,Höxter,DEAI,3_PRC,NMR-M
+DEU,DEA47,3,Paderborn,DEAI,3_INC,MR-M
+DEU,DEA57,3,Hochsauerlandkreis,DEAL,3_INC,NMR-M
+DEU,DEA5B,3,Soest,DEAL,3_INC,NMR-M
+DEU,DEA52,3,Dortmund Kreisfreie Stadt,DEAK,3_PU,MR-L
+DEU,DEA54,3,Hamm Kreisfreie Stadt,DEAK,3_PU,MR-L
+DEU,DEA5C,3,Unna,DEAK,3_PU,MR-L
+DEU,DEA31,3,Bottrop Kreisfreie Stadt,DEAF,3_PU,MR-L
+DEU,DEA32,3,Gelsenkirchen Kreisfreie Stadt,DEAF,3_PU,MR-L
+DEU,DEA36,3,Recklinghausen,DEAF,3_PU,MR-L
+DEU,DEA12,3,Duisburg Kreisfreie Stadt,DEAB,3_PU,MR-L
+DEU,DEA13,3,Essen Kreisfreie Stadt,DEAB,3_PU,MR-L
+DEU,DEA16,3,"Mülheim an der Ruhr,Kreisfreie Stadt",DEAB,3_PU,MR-L
+DEU,DEA17,3,Oberhausen Kreisfreie Stadt,DEAB,3_PU,MR-L
+DEU,DEA1B,3,Kleve,DEAB,3_INC,NMR-M
+DEU,DEA1F,3,Wesel,DEAB,3_PU,MR-L
+DEU,DEA11,3,Düsseldorf Kreisfreie Stadt,DEAA,3_PU,MR-L
+DEU,DEA14,3,Krefeld Kreisfreie Stadt,DEAA,3_PU,NMR-M
+DEU,DEA15,3,Mönchengladbach Kreisfreie Stadt,DEAA,3_PU,MR-M
+DEU,DEA18,3,Remscheid Kreisfreie Stadt,DEAA,3_PU,NMR-M
+DEU,DEA19,3,Solingen Kreisfreie Stadt,DEAA,3_PU,NMR-M
+DEU,DEA1A,3,Wuppertal Kreisfreie Stadt,DEAA,3_PU,MR-M
+DEU,DEA1C,3,Mettmann,DEAA,3_PU,MR-L
+DEU,DEA1D,3,Rhein-Kreis Neuss,DEAA,3_PU,MR-L
+DEU,DEA1E,3,Viersen,DEAA,3_PU,NMR-M
+DEU,DEA51,3,Bochum Kreisfreie Stadt,DEAJ,3_PU,MR-L
+DEU,DEA53,3,Hagen Kreisfreie Stadt,DEAJ,3_PU,MR-L
+DEU,DEA55,3,Herne Kreisfreie Stadt,DEAJ,3_PU,MR-L
+DEU,DEA56,3,Ennepe-Ruhr-Kreis,DEAJ,3_PU,MR-L
+DEU,DEA58,3,Märkischer Kreis,DEAJ,3_PU,MR-M
+DEU,DEA23,3,Köln Kreisfreie Stadt,DEAD,3_PU,MR-L
+DEU,DEA24,3,Leverkusen Kreisfreie Stadt,DEAD,3_PU,MR-L
+DEU,DEA27,3,Rhein-Erft-Kreis,DEAD,3_PU,MR-L
+DEU,DEA2A,3,Oberbergischer Kreis,DEAD,3_INC,NMR-M
+DEU,DEA2B,3,Rheinisch-Bergischer Kreis,DEAD,3_PU,MR-L
+DEU,DEA26,3,Düren,DEAE,3_INC,NMR-S
+DEU,DEA28,3,Euskirchen,DEAE,3_INC,NMR-M
+DEU,DEA29,3,Heinsberg,DEAE,3_INC,NMR-M
+DEU,DEA2D,3,Städteregion Aachen,DEAE,3_PU,MR-M
+DEU,DEA22,3,Bonn Kreisfreie Stadt,DEAC,3_PU,MR-M
+DEU,DEA2C,3,Rhein-Sieg-Kreis,DEAC,3_PU,MR-M
+DEU,DEA59,3,Olpe,DEAM,3_INC,NMR-M
+DEU,DEA5A,3,Siegen-Wittgenstein,DEAM,3_INC,MR-M
+DEU,DEB,2,Rhineland-Palatinate AdministrativeArea1,DEU,2,2
+DEU,DEB11,3,Koblenz Kreisfreie Stadt,DEBA,3_INC,MR-M
+DEU,DEB12,3,Ahrweiler,DEBA,3_INC,NMR-M
+DEU,DEB13,3,Altenkirchen (Westerwald),DEBA,3_PRC,MR-M
+DEU,DEB1C,3,Cochem-Zell,DEBA,3_PRC,NMR-R
+DEU,DEB17,3,Mayen-Koblenz,DEBA,3_INC,MR-M
+DEU,DEB18,3,Neuwied,DEBA,3_INC,NMR-M
+DEU,DEB1D,3,Rhein-Hunsrück-Kreis,DEBA,3_PRC,NMR-M
+DEU,DEB1A,3,Rhein-Lahn-Kreis,DEBA,3_INC,NMR-M
+DEU,DEB1B,3,Westerwaldkreis,DEBA,3_PRC,NMR-M
+DEU,DEB21,3,Trier Kreisfreie Stadt,DEBC,3_INC,NMR-S
+DEU,DEB22,3,Bernkastel-Wittlich,DEBC,3_PRC,NMR-M
+DEU,DEB23,3,Eifelkreis Bitburg-Prüm,DEBC,3_PRC,NMR-M
+DEU,DEB24,3,Vulkaneifel,DEBC,3_PRR,NMR-R
+DEU,DEB25,3,Trier-Saarburg,DEBC,3_INC,NMR-S
+DEU,DEB14,3,Bad Kreuznach,DEBB,3_INC,NMR-M
+DEU,DEB15,3,Birkenfeld,DEBB,3_PRC,NMR-M
+DEU,DEB35,3,Mainz Kreisfreie Stadt,DEBB,3_PU,MR-M
+DEU,DEB39,3,Worms Kreisfreie Stadt,DEBB,3_PU,NMR-M
+DEU,DEB3B,3,Alzey-Worms,DEBB,3_PRC,NMR-M
+DEU,DEB3J,3,Mainz-Bingen,DEBB,3_INC,MR-M
+DEU,DEB32,3,Kaiserslautern Kreisfreie Stadt,DEBE,3_INC,MR-M
+DEU,DEB37,3,Pirmasens Kreisfreie Stadt,DEBE,3_PRC,NMR-M
+DEU,DEB3A,3,Zweibrücken Kreisfreie Stadt,DEBE,3_INC,NMR-M
+DEU,DEB3D,3,Donnersbergkreis,DEBE,3_PRC,NMR-M
+DEU,DEB3F,3,Kaiserslautern Landkreis,DEBE,3_INC,MR-M
+DEU,DEB3G,3,Kusel,DEBE,3_PRC,MR-M
+DEU,DEB3K,3,Südwestpfalz,DEBE,3_PRC,NMR-M
+DEU,DEB31,3,Frankenthal (Pfalz) Kreisfreie Stadt,DEBD,3_PU,MR-M
+DEU,DEB33,3,Landau in der Pfalz Kreisfreie Stadt,DEBD,3_PU,NMR-M
+DEU,DEB34,3,Ludwigshafen am Rhein Kreisfreie Stadt,DEBD,3_PU,MR-M
+DEU,DEB36,3,Neustadt an der Weinstraße Kreisfreie Stadt,DEBD,3_INC,MR-M
+DEU,DEB38,3,Speyer Kreisfreie Stadt,DEBD,3_PU,MR-M
+DEU,DEB3C,3,Bad Dürkheim,DEBD,3_INC,MR-M
+DEU,DEB3E,3,Germersheim,DEBD,3_PU,NMR-M
+DEU,DEB3H,3,Südliche Weinstraße,DEBD,3_INC,NMR-M
+DEU,DEB3I,3,Rhein-Pfalz-Kreis,DEBD,3_PU,MR-M
+DEU,DEC,2,Saarland AdministrativeArea1,DEU,2,2
+DEU,DEC01,3,Regionalverband Saarbrücken,DECA,3_PU,MR-M
+DEU,DEC02,3,Merzig-Wadern,DECA,3_INC,NMR-M
+DEU,DEC03,3,Neunkirchen,DECA,3_PU,MR-M
+DEU,DEC04,3,Saarlouis,DECA,3_PU,MR-M
+DEU,DEC05,3,Saarpfalz-Kreis,DECA,3_INC,MR-M
+DEU,DEC06,3,St. Wendel,DECA,3_INC,NMR-M
+DEU,DED,2,Saxony AdministrativeArea1,DEU,2,2
+DEU,DED51,3,Leipzig Kreisfreie Stadt,DEDD,3_PU,MR-M
+DEU,DED53,3,Nordsachsen,DEDD,3_PRC,MR-M
+DEU,DED52,3,Leipzig,DEDD,3_PU,MR-M
+DEU,DED21,3,Dresden Kreisfreie Stadt,DEDA,3_PU,MR-M
+DEU,DED2E,3,Meißen,DEDA,3_INC,MR-M
+DEU,DED2F,3,Sächsische Schweiz-Osterzgebirge,DEDA,3_PU,MR-M
+DEU,DED2D,3,Görlitz,DEDB,3_INC,MR-M
+DEU,DED2C,3,Bautzen,DEDB,3_PRC,MR-M
+DEU,DED41,3,Chemnitz Kreisfreie Stadt,DEDC,3_INC,NMR-M
+DEU,DED44,3,Vogtlandkreis,DEDC,3_INC,NMR-M
+DEU,DED45,3,Zwickau,DEDC,3_INC,MR-M
+DEU,DED42,3,Erzgebirgskreis,DEDC,3_INC,NMR-M
+DEU,DED43,3,Mittelsachsen,DEDC,3_INC,NMR-M
+DEU,DEE,2,Saxony-Anhalt AdministrativeArea1,DEU,2,2
+DEU,DEE04,3,Altmarkkreis Salzwedel,DEED,3_PRR,NMR-R
+DEU,DEE0D,3,Stendal,DEED,3_PRR,NMR-R
+DEU,DEE03,3,Magdeburg Kreisfreie Stadt,DEEC,3_INC,MR-M
+DEU,DEE06,3,Jerichower Land,DEEC,3_PRC,MR-M
+DEU,DEE07,3,Börde,DEEC,3_INC,MR-M
+DEU,DEE09,3,Harz,DEEC,3_INC,NMR-M
+DEU,DEE0C,3,Salzlandkreis,DEEC,3_INC,NMR-M
+DEU,DEE01,3,Dessau-Roßlau Kreisfreie Stadt,DEEA,3_INC,NMR-S
+DEU,DEE05,3,Anhalt-Bitterfeld,DEEA,3_INC,NMR-M
+DEU,DEE0E,3,Wittenberg,DEEA,3_PRC,NMR-S
+DEU,DEE02,3,Halle (Saale) Kreisfreie Stadt,DEEB,3_INC,MR-M
+DEU,DEE08,3,Burgenland (DE),DEEB,3_PRC,NMR-M
+DEU,DEE0A,3,Mansfeld-Südharz,DEEB,3_PRC,NMR-M
+DEU,DEE0B,3,Saalekreis,DEEB,3_INC,MR-M
+DEU,DEF,2,Schleswig-Holstein AdministrativeArea1,DEU,2,2
+DEU,DEF01,3,Flensburg Kreisfreie Stadt,DEFA,3_INC,MR-M
+DEU,DEF07,3,Nordfriesland,DEFA,3_PRC,NMR-M
+DEU,DEF0C,3,Schleswig-Flensburg,DEFA,3_INC,MR-M
+DEU,DEF05,3,Dithmarschen,DEFD,3_PRR,NMR-R
+DEU,DEF0E,3,Steinburg,DEFD,3_INC,NMR-M
+DEU,DEF02,3,Kiel Kreisfreie Stadt,DEFB,3_PU,MR-M
+DEU,DEF04,3,Neumünster Kreisfreie Stadt,DEFB,3_INC,NMR-M
+DEU,DEF0A,3,Plön,DEFB,3_PU,MR-M
+DEU,DEF0B,3,Rendsburg-Eckernförde,DEFB,3_INC,MR-M
+DEU,DEF03,3,Lübeck Kreisfreie Stadt,DEFC,3_INC,MR-M
+DEU,DEF08,3,Ostholstein,DEFC,3_INC,MR-M
+DEU,DEF06,3,Herzogtum Lauenburg,DEFE,3_INC,MR-L
+DEU,DEF09,3,Pinneberg,DEFE,3_PU,MR-L
+DEU,DEF0D,3,Segeberg,DEFE,3_INC,MR-L
+DEU,DEF0F,3,Stormarn,DEFE,3_INC,MR-L
+DEU,DEG,2,Thuringia AdministrativeArea1,DEU,2,2
+DEU,DEG06,3,Eichsfeld,DEGD,3_PRC,NMR-M
+DEU,DEG07,3,Nordhausen,DEGD,3_INR,NMR-R
+DEU,DEG09,3,Unstrut-Hainich-Kreis,DEGD,3_PRR,NMR-R
+DEU,DEG0A,3,Kyffhäuserkreis,DEGD,3_PRC,NMR-M
+DEU,DEG01,3,Erfurt Kreisfreie Stadt,DEGA,3_INC,MR-M
+DEU,DEG05,3,Weimar Kreisfreie Stadt,DEGA,3_INC,NMR-M
+DEU,DEG0C,3,Gotha,DEGA,3_PRC,MR-M
+DEU,DEG0D,3,Sömmerda,DEGA,3_INC,MR-M
+DEU,DEG0F,3,Ilm-Kreis,DEGA,3_PRC,MR-M
+DEU,DEG0G,3,Weimarer Land,DEGA,3_INC,NMR-M
+DEU,DEG04,3,Suhl Kreisfreie Stadt,DEGC,3_INC,NMR-M
+DEU,DEG0B,3,Schmalkalden-Meiningen,DEGC,3_INR,NMR-M
+DEU,DEG0E,3,Hildburghausen,DEGC,3_PRR,NMR-M
+DEU,DEG0H,3,Sonneberg,DEGC,3_PRR,NMR-R
+DEU,DEG0N,3,Eisenach Kreisfreie Stadt,DEGC,3_PRC,NMR-M
+DEU,DEG0P,3,Wartburgkreis,DEGC,3_PRR,NMR-M
+DEU,DEG02,3,Gera Kreisfreie Stadt,DEGB,3_INC,NMR-M
+DEU,DEG03,3,Jena Kreisfreie Stadt,DEGB,3_INC,NMR-M
+DEU,DEG0I,3,Saalfeld-Rudolstadt,DEGB,3_INC,NMR-M
+DEU,DEG0J,3,Saale-Holzland-Kreis,DEGB,3_INC,NMR-M
+DEU,DEG0K,3,Saale-Orla-Kreis,DEGB,3_PRC,NMR-S
+DEU,DEG0L,3,Greiz,DEGB,3_INC,NMR-M
+DEU,DEG0M,3,Altenburger Land,DEGB,3_INC,NMR-M
+GRC,GRC,1,Greece,GRC,1,1
+GRC,EL30,2,Attica AdministrativeArea1,GRC,2,2
+GRC,EL301,3,Northern Athens,EL30,3_PU,MR-L
+GRC,EL302,3,Western Athens,EL30,3_PU,MR-L
+GRC,EL303,3,Central Athens,EL30,3_PU,MR-L
+GRC,EL304,3,Southern Athens,EL30,3_PU,MR-L
+GRC,EL305,3,Eastern Attica,EL30,3_PU,MR-L
+GRC,EL306,3,Western Attica,EL30,3_PU,MR-L
+GRC,EL307,3,"Piraeus, Islands",EL30,3_PU,MR-L
+GRC,EL41,2,North Aegean AdministrativeArea1,GRC,2,2
+GRC,EL411,3,"Lesbos, Lemnos",EL41,3_PRR,NMR-R
+GRC,EL412,3,"Ikaria, Samos",EL41,3_PRR,NMR-R
+GRC,EL413,3,Chios,EL41,3_INR,NMR-R
+GRC,EL42,2,South Aegean AdministrativeArea1,GRC,2,2
+GRC,EL421,3,"Kalymnos, Karpathos, Kos, Rhodes",EL42,3_INR,NMR-R
+GRC,EL422,3,"Andros, Thira, Kea, Milos, Mykonos, Naxos, Paros, Syros, Tinos",EL42,3_PRR,NMR-R
+GRC,EL43,2,Crete AdministrativeArea1,GRC,2,2
+GRC,EL431,3,Heraklion,EL43,3_INC,NMR-S
+GRC,EL432,3,Lasithi,EL43,3_PRR,NMR-R
+GRC,EL433,3,Rethymno,EL43,3_PRR,NMR-R
+GRC,EL434,3,Chania,EL43,3_INR,NMR-S
+GRC,EL51,2,"Eastern Macedonia, Thrace AdministrativeArea1",GRC,2,2
+GRC,EL511,3,Evros,EL51,3_INR,NMR-R
+GRC,EL512,3,Xanthi,EL51,3_INC,NMR-S
+GRC,EL513,3,Rodope,EL51,3_PRR,NMR-S
+GRC,EL514,3,Drama,EL51,3_INC,NMR-R
+GRC,EL515,3,"Thassos, Kavala",EL51,3_PRC,NMR-S
+GRC,EL52,2,Central Macedonia AdministrativeArea1,GRC,2,2
+GRC,EL521,3,Imathia,EL52,3_INC,NMR-R
+GRC,EL522,3,Thessalonica,EL52,3_PU,MR-M
+GRC,EL523,3,Kilkis,EL52,3_PRC,NMR-R
+GRC,EL524,3,Pella,EL52,3_PRR,NMR-R
+GRC,EL525,3,Pieria,EL52,3_INC,NMR-S
+GRC,EL526,3,Serres,EL52,3_PRR,NMR-S
+GRC,EL527,3,Chalcidice,EL52,3_PRR,NMR-R
+GRC,EL53,2,Western Macedonia AdministrativeArea1,GRC,2,2
+GRC,EL531,3,"Grevena, Kozani",EL53,3_PRR,NMR-R
+GRC,EL532,3,Kastoria,EL53,3_INR,NMR-R
+GRC,EL533,3,Florina,EL53,3_PRR,NMR-R
+GRC,EL54,2,Epirus AdministrativeArea1,GRC,2,2
+GRC,EL541,3,"Arta, Preveza",EL54,3_PRR,NMR-R
+GRC,EL542,3,Thesprotia,EL54,3_PRR,NMR-R
+GRC,EL543,3,Ioannina,EL54,3_PRC,NMR-S
+GRC,EL61,2,Thessaly AdministrativeArea1,GRC,2,2
+GRC,EL611,3,"Karditsa, Trikala",EL61,3_PRR,NMR-S
+GRC,EL612,3,Larissa,EL61,3_INC,NMR-S
+GRC,EL613,3,Magnesia,EL61,3_INC,NMR-S
+GRC,EL62,2,Ionian Islands AdministrativeArea1,GRC,2,2
+GRC,EL621,3,Zakynthos,EL62,3_PRR,NMR-R
+GRC,EL622,3,Corfu,EL62,3_INR,NMR-R
+GRC,EL623,3,"Ithaca, Cephalonia",EL62,3_PRR,NMR-R
+GRC,EL624,3,Lefkada,EL62,3_PRR,NMR-R
+GRC,EL63,2,Western Greece AdministrativeArea1,GRC,2,2
+GRC,EL631,3,Aetolia-Acarnania,EL63,3_PRR,NMR-R
+GRC,EL632,3,Achaea,EL63,3_INC,NMR-S
+GRC,EL633,3,Elis,EL63,3_PRR,NMR-R
+GRC,EL64,2,Central Greece AdministrativeArea1,GRC,2,2
+GRC,EL641,3,Boeotia,EL64,3_PRR,NMR-R
+GRC,EL642,3,Euboea,EL64,3_PRR,NMR-R
+GRC,EL643,3,Evrytania,EL64,3_PRR,NMR-R
+GRC,EL644,3,Phthiotis,EL64,3_PRR,NMR-R
+GRC,EL645,3,Phocis,EL64,3_PRR,NMR-R
+GRC,EL65,2,Peloponnese AdministrativeArea1,GRC,2,2
+GRC,EL651,3,"Argolida, Arcadia",EL65,3_PRR,NMR-R
+GRC,EL652,3,Corinthia,EL65,3_INR,NMR-R
+GRC,EL653,3,"Laconia, Messinia",EL65,3_PRR,NMR-S
+HUN,HUN,1,Hungary,HUN,1,1
+HUN,HU11,2,Budapest AdministrativeArea1,HUN,2,2
+HUN,HU110,3,Budapest,HU11,3_PU,MR-L
+HUN,HU12,2,Pest AdministrativeArea1,HUN,2,2
+HUN,HU120,3,Pest,HU12,3_INC,MR-L
+HUN,HU21,2,Central Transdanubia AdministrativeArea1,HUN,2,2
+HUN,HU211,3,Fejér,HU21,3_INC,MR-M
+HUN,HU212,3,Komárom-Esztergom,HU21,3_INC,NMR-S
+HUN,HU213,3,Veszprém,HU21,3_INC,NMR-M
+HUN,HU22,2,Western Transdanubia AdministrativeArea1,HUN,2,2
+HUN,HU221,3,Gyor-Moson-Sopron,HU22,3_INC,NMR-S
+HUN,HU222,3,Vas,HU22,3_INC,NMR-S
+HUN,HU223,3,Zala,HU22,3_PRR,NMR-S
+HUN,HU23,2,Southern Transdanubia AdministrativeArea1,HUN,2,2
+HUN,HU231,3,Baranya,HU23,3_INC,MR-M
+HUN,HU232,3,Somogy,HU23,3_PRR,NMR-S
+HUN,HU233,3,Tolna,HU23,3_PRR,NMR-M
+HUN,HU31,2,Northern Hungary AdministrativeArea1,HUN,2,2
+HUN,HU311,3,Borsod-Abaúj-Zemplén,HU31,3_INC,MR-M
+HUN,HU312,3,Heves,HU31,3_PRR,NMR-S
+HUN,HU313,3,Nógrád,HU31,3_PRR,NMR-R
+HUN,HU32,2,Northern Great Plain AdministrativeArea1,HUN,2,2
+HUN,HU321,3,Hajdú-Bihar,HU32,3_INC,MR-M
+HUN,HU322,3,Jász-Nagykun-Szolnok,HU32,3_INR,NMR-S
+HUN,HU323,3,Szabolcs-Szatmár-Bereg,HU32,3_PRC,NMR-S
+HUN,HU33,2,Southern Great Plain AdministrativeArea1,HUN,2,2
+HUN,HU331,3,Bács-Kiskun,HU33,3_INC,NMR-M
+HUN,HU332,3,Békés,HU33,3_INR,NMR-S
+HUN,HU333,3,Csongrád,HU33,3_INC,NMR-S
+ISL,ISL,1,Iceland,ISL,1,1
+ISL,IS01,2,Capital Region AdministrativeArea1,ISL,2,2
+ISL,IS011,3,Capital Region,IS01,3_IN,NMR-S
+ISL,IS02,2,Other Regions AdministrativeArea1,ISL,2,2
+ISL,IS021,3,Southern Peninsula,IS02,3_PRC,NMR-S
+ISL,IS022,3,Western Region (IS),IS02,3_PRR,NMR-S
+ISL,IS023,3,Westfjords,IS02,3_PRR,NMR-R
+ISL,IS024,3,Northwestern Region (IS),IS02,3_PRR,NMR-R
+ISL,IS025,3,Southern Region (IS),IS02,3_PRR,NMR-S
+ISL,IS026,3,Northeastern Region (IS),IS02,3_PRR,NMR-R
+ISL,IS027,3,Austurland,IS02,3_PRR,NMR-R
+IRL,IRL,1,Ireland,IRL,1,1
+IRL,IE04,2,Southern and Eastern AdministrativeArea1,IRL,2,2
+IRL,IE041,3,Border,IE04,3_PRR,NMR-R
+IRL,IE042,3,West,IE04,3_PRR,NMR-S
+IRL,IE05,2,Southern and Eastern AdministrativeArea1,IRL,2,2
+IRL,IE051,3,Mid-West,IE05,3_PRC,NMR-S
+IRL,IE052,3,South-East (IE),IE05,3_PRC,NMR-S
+IRL,IE053,3,South-West (IE),IE05,3_PRC,MR-M
+IRL,IE06,2,Southern and Eastern AdministrativeArea1,IRL,2,2
+IRL,IE061,3,Dublin,IE06,3_PU,MR-L
+IRL,IE062,3,Mid-East,IE06,3_INC,MR-L
+IRL,IE063,3,Midlands,IE06,3_PRR,NMR-R
+IRL,IE01,OLD_2_2013,"Border, Midland and Western",IRL,OLD_2_2013,OLD_2_2013
+IRL,IE02,OLD_2_2013,Southern and Eastern,IRL,OLD_2_2013,OLD_2_2013
+ISR,ISR,1,Israel,ISR,1,1
+ISR,IL01,2,Jerusalem District AdministrativeArea1,ISR,2,2
+ISR,IL010,3,Jerusalem District,IL01,3_PU,..
+ISR,IL02,2,Northern District AdministrativeArea1,ISR,2,2
+ISR,IL020,3,Northern District,IL02,3_IN,..
+ISR,IL03,2,Haifa District AdministrativeArea1,ISR,2,2
+ISR,IL030,3,Haifa District,IL03,3_PU,..
+ISR,IL04,2,Central District AdministrativeArea1,ISR,2,2
+ISR,IL040,3,Central District,IL04,3_PU,..
+ISR,IL05,2,Tel Aviv District AdministrativeArea1,ISR,2,2
+ISR,IL050,3,Tel Aviv District,IL05,3_PU,..
+ISR,IL06,2,Southern District AdministrativeArea1,ISR,2,2
+ISR,IL060,3,Southern District,IL06,3_IN,..
+ITA,ITA,1,Italy,ITA,1,1
+ITA,ITC1,2,Piedmont AdministrativeArea1,ITA,2,2
+ITA,ITC11,3,Turin,ITC1,3_PU,MR-L
+ITA,ITC12,3,Vercelli,ITC1,3_INC,NMR-M
+ITA,ITC13,3,Biella,ITC1,3_INC,NMR-S
+ITA,ITC14,3,Verbano-Cusio-Ossola,ITC1,3_INR,NMR-S
+ITA,ITC15,3,Novara,ITC1,3_INC,NMR-M
+ITA,ITC16,3,Cuneo,ITC1,3_PRC,NMR-R
+ITA,ITC17,3,Asti,ITC1,3_PRC,NMR-M
+ITA,ITC18,3,Alessandria,ITC1,3_PRC,NMR-S
+ITA,ITC2,2,Aosta Valley AdministrativeArea1,ITA,2,2
+ITA,ITC20,3,Aosta Valley,ITC2,3_INR,NMR-R
+ITA,ITC3,2,Liguria AdministrativeArea1,ITA,2,2
+ITA,ITC31,3,Imperia,ITC3,3_PU,NMR-R
+ITA,ITC32,3,Savona,ITC3,3_INC,NMR-S
+ITA,ITC33,3,Genoa,ITC3,3_PU,MR-M
+ITA,ITC34,3,La Spezia,ITC3,3_PU,NMR-S
+ITA,ITC4,2,Lombardy AdministrativeArea1,ITA,2,2
+ITA,ITC41,3,Varese,ITC4,3_PU,NMR-M
+ITA,ITC42,3,Como,ITC4,3_PU,NMR-M
+ITA,ITC43,3,Lecco,ITC4,3_PU,NMR-M
+ITA,ITC44,3,Sondrio,ITC4,3_INR,NMR-R
+ITA,ITC46,3,Bergamo,ITC4,3_PU,MR-M
+ITA,ITC47,3,Brescia,ITC4,3_INC,MR-M
+ITA,ITC48,3,Pavia,ITC4,3_INC,NMR-S
+ITA,ITC49,3,Lodi,ITC4,3_INC,MR-L
+ITA,ITC4A,3,Cremona,ITC4,3_INC,NMR-M
+ITA,ITC4B,3,Mantua,ITC4,3_PRC,NMR-M
+ITA,ITC4C,3,Milan,ITC4,3_PU,MR-L
+ITA,ITC4D,3,Monza e della Brianza,ITC4,3_PU,MR-L
+ITA,ITF1,2,Abruzzo AdministrativeArea1,ITA,2,2
+ITA,ITF11,3,L'Aquila,ITF1,3_PRR,NMR-S
+ITA,ITF12,3,Teramo,ITF1,3_INC,NMR-S
+ITA,ITF13,3,Pescara,ITF1,3_INC,NMR-S
+ITA,ITF14,3,Chieti,ITF1,3_INC,NMR-S
+ITA,ITF2,2,Molise AdministrativeArea1,ITA,2,2
+ITA,ITF21,3,Isernia,ITF2,3_PRC,NMR-S
+ITA,ITF22,3,Campobasso,ITF2,3_PRC,NMR-S
+ITA,ITF3,2,Campania AdministrativeArea1,ITA,2,2
+ITA,ITF31,3,Caserta,ITF3,3_PU,NMR-M
+ITA,ITF32,3,Benevento,ITF3,3_PRC,NMR-S
+ITA,ITF33,3,Naples,ITF3,3_PU,MR-L
+ITA,ITF34,3,Avellino,ITF3,3_INC,NMR-M
+ITA,ITF35,3,Salerno,ITF3,3_INC,NMR-M
+ITA,ITF4,2,Apulia AdministrativeArea1,ITA,2,2
+ITA,ITF43,3,Taranto,ITF4,3_PU,MR-M
+ITA,ITF44,3,Brindisi,ITF4,3_PU,NMR-M
+ITA,ITF45,3,Lecce,ITF4,3_PU,NMR-S
+ITA,ITF46,3,Foggia,ITF4,3_PRC,NMR-S
+ITA,ITF47,3,Bari,ITF4,3_PU,MR-M
+ITA,ITF48,3,Barletta-Andria-Trani,ITF4,3_PU,NMR-M
+ITA,ITF5,2,Basilicata  AdministrativeArea1,ITA,2,2
+ITA,ITF51,3,Potenza,ITF5,3_PRC,NMR-S
+ITA,ITF52,3,Matera,ITF5,3_INC,NMR-M
+ITA,ITF6,2,Calabria AdministrativeArea1,ITA,2,2
+ITA,ITF61,3,Cosenza,ITF6,3_INC,NMR-S
+ITA,ITF62,3,Crotone,ITF6,3_INR,NMR-R
+ITA,ITF63,3,Catanzaro,ITF6,3_INC,NMR-S
+ITA,ITF64,3,Vibo Valentia,ITF6,3_PRR,NMR-R
+ITA,ITF65,3,Reggio di Calabria,ITF6,3_INC,NMR-S
+ITA,ITG1,2,Sicily AdministrativeArea1,ITA,2,2
+ITA,ITG11,3,Trapani,ITG1,3_INR,NMR-S
+ITA,ITG12,3,Palermo,ITG1,3_PU,MR-M
+ITA,ITG13,3,Messina,ITG1,3_INC,MR-M
+ITA,ITG14,3,Agrigento,ITG1,3_PU,NMR-R
+ITA,ITG15,3,Caltanissetta,ITG1,3_PU,NMR-S
+ITA,ITG16,3,Enna,ITG1,3_INR,NMR-M
+ITA,ITG17,3,Catania,ITG1,3_PU,MR-M
+ITA,ITG18,3,Ragusa,ITG1,3_INR,NMR-S
+ITA,ITG19,3,Siracusa,ITG1,3_PU,NMR-M
+ITA,ITG2,2,Sardinia AdministrativeArea1,ITA,2,2
+ITA,ITG25,3,Sassari,ITG2,3_INC,NMR-S
+ITA,ITG26,3,Nuoro,ITG2,3_PRR,NMR-R
+ITA,ITG27,3,Cagliari,ITG2,3_INC,MR-M
+ITA,ITG28,3,Oristano,ITG2,3_PRR,NMR-R
+ITA,ITG29,3,Olbia-Tempio,ITG2,3_INR,NMR-R
+ITA,ITG2A,3,Ogliastra,ITG2,3_PRR,NMR-R
+ITA,ITG2B,3,Medio Campidano,ITG2,3_INC,NMR-R
+ITA,ITG2C,3,Carbonia-Iglesias,ITG2,3_INR,NMR-R
+ITA,ITH1,2,Province of Bolzano-Bozen AdministrativeArea1,ITA,2,2
+ITA,ITH10,3,Bolzano-Bozen,ITH1,3_PRC,NMR-S
+ITA,ITH2,2,Province of Trento AdministrativeArea1,ITA,2,2
+ITA,ITH20,3,Trento,ITH2,3_INC,NMR-S
+ITA,ITH3,2,Veneto AdministrativeArea1,ITA,2,2
+ITA,ITH31,3,Verona,ITH3,3_INC,MR-M
+ITA,ITH32,3,Vicenza,ITH3,3_INC,NMR-M
+ITA,ITH33,3,Belluno,ITH3,3_PRR,NMR-R
+ITA,ITH34,3,Treviso,ITH3,3_INC,NMR-M
+ITA,ITH35,3,Venice,ITH3,3_PU,MR-M
+ITA,ITH36,3,Padua,ITH3,3_INC,MR-M
+ITA,ITH37,3,Rovigo,ITH3,3_PRC,NMR-M
+ITA,ITH4,2,Friuli-Venezia Giulia AdministrativeArea1,ITA,2,2
+ITA,ITH41,3,Pordenone,ITH4,3_INC,NMR-M
+ITA,ITH42,3,Udine,ITH4,3_INC,NMR-S
+ITA,ITH43,3,Gorizia,ITH4,3_PU,NMR-S
+ITA,ITH44,3,Trieste,ITH4,3_PU,NMR-S
+ITA,ITH5,2,Emilia-Romagna AdministrativeArea1,ITA,2,2
+ITA,ITH51,3,Piacenza,ITH5,3_INC,NMR-M
+ITA,ITH52,3,Parma,ITH5,3_INC,MR-M
+ITA,ITH53,3,Reggio Nell'Emilia,ITH5,3_INC,MR-M
+ITA,ITH54,3,Modena,ITH5,3_INC,NMR-S
+ITA,ITH55,3,Bologna,ITH5,3_INC,MR-M
+ITA,ITH56,3,Ferrara,ITH5,3_INC,NMR-M
+ITA,ITH57,3,Ravenna,ITH5,3_INC,NMR-M
+ITA,ITH58,3,Forlì-Cesena,ITH5,3_INC,NMR-M
+ITA,ITH59,3,Rimini,ITH5,3_PU,NMR-S
+ITA,ITI1,2,Tuscany AdministrativeArea1,ITA,2,2
+ITA,ITI11,3,Massa-Carrara,ITI1,3_INC,NMR-S
+ITA,ITI12,3,Lucca,ITI1,3_INC,NMR-M
+ITA,ITI13,3,Pistoia,ITI1,3_PU,NMR-M
+ITA,ITI14,3,Florence,ITI1,3_PU,MR-M
+ITA,ITI15,3,Prato,ITI1,3_PU,MR-M
+ITA,ITI16,3,Livorno,ITI1,3_INC,NMR-S
+ITA,ITI17,3,Pisa,ITI1,3_INC,NMR-M
+ITA,ITI18,3,Arezzo,ITI1,3_INR,NMR-M
+ITA,ITI19,3,Siena,ITI1,3_PRR,NMR-S
+ITA,ITI1A,3,Grosseto,ITI1,3_INR,NMR-S
+ITA,ITI2,2,Umbria AdministrativeArea1,ITA,2,2
+ITA,ITI21,3,Perugia,ITI2,3_INC,NMR-M
+ITA,ITI22,3,Terni,ITI2,3_INC,NMR-S
+ITA,ITI3,2,Marche AdministrativeArea1,ITA,2,2
+ITA,ITI31,3,Pesaro e Urbino,ITI3,3_INC,NMR-M
+ITA,ITI32,3,Ancona,ITI3,3_INC,NMR-S
+ITA,ITI33,3,Macerata,ITI3,3_INR,NMR-S
+ITA,ITI34,3,Ascoli Piceno,ITI3,3_INR,NMR-R
+ITA,ITI35,3,Fermo,ITI3,3_INC,NMR-S
+ITA,ITI4,2,Lazio AdministrativeArea1,ITA,2,2
+ITA,ITI41,3,Viterbo,ITI4,3_PRC,NMR-S
+ITA,ITI42,3,Rieti,ITI4,3_PRC,NMR-S
+ITA,ITI43,3,Rome,ITI4,3_PU,MR-L
+ITA,ITI44,3,Latina,ITI4,3_INC,NMR-S
+ITA,ITI45,3,Frosinone,ITI4,3_INR,NMR-S
+JPN,JPN,1,Japan,JPN,1,1
+JPN,JPA,2,Hokkaido AdministrativeArea1,JPN,2,2
+JPN,JPA01,3,Hokkaido,JPA,3_INR,MR-M
+JPN,JPB,2,Tohoku AdministrativeArea1,JPN,2,2
+JPN,JPB02,3,Aomori,JPB,3_PRC,NMR-M
+JPN,JPB03,3,Iwate,JPB,3_PRC,NMR-M
+JPN,JPB04,3,Miyagi,JPB,3_PU,MR-M
+JPN,JPB05,3,Akita,JPB,3_PRR,NMR-M
+JPN,JPB06,3,Yamagata,JPB,3_PRR,NMR-M
+JPN,JPB07,3,Fukushima,JPB,3_PRR,MR-M
+JPN,JPC,2,"Northern-Kanto, Koshin AdministrativeArea1",JPN,2,2
+JPN,JPC08,3,Ibaraki,JPC,3_INR,MR-M
+JPN,JPC09,3,Tochigi,JPC,3_INR,NMR-M
+JPN,JPC10,3,Gumma,JPC,3_INR,MR-M
+JPN,JPC19,3,Yamanashi,JPC,3_PRC,MR-M
+JPN,JPC20,3,Nagano,JPC,3_PRC,NMR-M
+JPN,JPD,2,Southern-Kanto AdministrativeArea1,JPN,2,2
+JPN,JPD11,3,Saitama,JPD,3_PU,MR-L
+JPN,JPD12,3,Chiba,JPD,3_PU,MR-L
+JPN,JPD13,3,Tokyo,JPD,3_PU,MR-L
+JPN,JPD14,3,Kanagawa,JPD,3_PU,MR-L
+JPN,JPE,2,Hokuriku AdministrativeArea1,JPN,2,2
+JPN,JPE15,3,Niigata,JPE,3_INR,NMR-M
+JPN,JPE16,3,Toyama,JPE,3_INR,MR-M
+JPN,JPE17,3,Ishikawa,JPE,3_INR,MR-M
+JPN,JPE18,3,Fukui,JPE,3_PRR,MR-M
+JPN,JPF,2,Toukai AdministrativeArea1,JPN,2,2
+JPN,JPF21,3,Gifu,JPF,3_INR,MR-L
+JPN,JPF22,3,Shizuoka,JPF,3_INR,MR-M
+JPN,JPF23,3,Aichi,JPF,3_PU,MR-L
+JPN,JPF24,3,Mie,JPF,3_INR,MR-M
+JPN,JPG,2,Kansai region AdministrativeArea1,JPN,2,2
+JPN,JPG25,3,Shiga,JPG,3_INR,MR-M
+JPN,JPG26,3,Kyoto,JPG,3_PU,MR-L
+JPN,JPG27,3,Osaka,JPG,3_PU,MR-L
+JPN,JPG28,3,Hyogo,JPG,3_PU,MR-L
+JPN,JPG29,3,Nara,JPG,3_PU,MR-L
+JPN,JPG30,3,Wakayama,JPG,3_INR,MR-M
+JPN,JPH,2,Chugoku AdministrativeArea1,JPN,2,2
+JPN,JPH31,3,Tottori,JPH,3_INR,NMR-S
+JPN,JPH32,3,Shimane,JPH,3_PRR,NMR-R
+JPN,JPH33,3,Okayama,JPH,3_INR,MR-M
+JPN,JPH34,3,Hiroshima,JPH,3_PU,MR-M
+JPN,JPH35,3,Yamaguchi,JPH,3_PRR,NMR-M
+JPN,JPI,2,Shikoku AdministrativeArea1,JPN,2,2
+JPN,JPI36,3,Tokushima,JPI,3_INC,MR-M
+JPN,JPI37,3,Kagawa,JPI,3_INR,MR-M
+JPN,JPI38,3,Ehime,JPI,3_INR,NMR-M
+JPN,JPI39,3,Kochi,JPI,3_PRC,MR-M
+JPN,JPJ,2,"Kyushu, Okinawa AdministrativeArea1",JPN,2,2
+JPN,JPJ40,3,Fukuoka,JPJ,3_PU,MR-L
+JPN,JPJ41,3,Saga,JPJ,3_PRR,NMR-M
+JPN,JPJ42,3,Nagasaki,JPJ,3_INR,NMR-M
+JPN,JPJ43,3,Kumamoto,JPJ,3_INC,MR-M
+JPN,JPJ44,3,Oita,JPJ,3_INC,MR-M
+JPN,JPJ45,3,Miyazaki,JPJ,3_PRR,NMR-M
+JPN,JPJ46,3,Kagoshima,JPJ,3_INR,NMR-M
+JPN,JPJ47,3,Okinawa,JPJ,3_INR,MR-M
+KOR,KOR,1,Korea,KOR,1,1
+KOR,KR01,2,Capital Region (KR) AdministrativeArea1,KOR,2,2
+KOR,KR011,3,Seoul,KR01,3_PU,MR-L
+KOR,KR012,3,Incheon,KR01,3_PU,MR-L
+KOR,KR013,3,Gyeonggi-do,KR01,3_PU,MR-L
+KOR,KR02,2,Gyeongnam Region AdministrativeArea1,KOR,2,2
+KOR,KR021,3,Busan,KR02,3_PU,MR-L
+KOR,KR022,3,Ulsan,KR02,3_PU,MR-M
+KOR,KR023,3,Gyeongsangnam-do,KR02,3_IN,MR-M
+KOR,KR03,2,Gyeongbuk Region AdministrativeArea1,KOR,2,2
+KOR,KR031,3,Daegu,KR03,3_PU,MR-L
+KOR,KR032,3,Gyeongsangbuk-do,KR03,3_PRC,MR-M
+KOR,KR04,2,Jeolla Region AdministrativeArea1,KOR,2,2
+KOR,KR041,3,Gwangju,KR04,3_PU,MR-L
+KOR,KR042,3,Jeollabuk-do,KR04,3_INC,MR-M
+KOR,KR043,3,Jeollanam-do,KR04,3_PRC,NMR-S
+KOR,KR05,2,Chungcheong Region AdministrativeArea1,KOR,2,2
+KOR,KR051,3,Daejeon,KR05,3_PU,MR-L
+KOR,KR052,3,Chungcheongbuk-do,KR05,3_INC,MR-M
+KOR,KR053,3,Chungcheongnam-do,KR05,3_PRC,NMR-M
+KOR,KR054,3,Sejong,KR05,3_PU,NMR-M
+KOR,KR06,2,Gangwon Region AdministrativeArea1,KOR,2,2
+KOR,KR061,3,Gangwon-do,KR06,3_PRC,NMR-M
+KOR,KR07,2,Jeju AdministrativeArea1,KOR,2,2
+KOR,KR071,3,Jeju-do,KR07,3_PRC,MR-M
+LVA,LVA,1,Latvia,LVA,1,1
+LVA,LV00,2,Latvia AdministrativeArea1,LVA,2,2
+LTU,LTU,1,Lithuania,LTU,1,1
+LTU,LT01,2,Vilnius Region AdministrativeArea1,LTU,2,2
+LTU,LT011,3,Vilnius county,LT01,3_PU,MR-M
+LTU,LT02,2,Central and Western Lithuania AdministrativeArea1,LTU,2,2
+LTU,LT021,3,Alytus county,LT02,3_INC,NMR-S
+LTU,LT022,3,Kaunas county,LT02,3_INC,MR-M
+LTU,LT023,3,Klaipeda county,LT02,3_INC,NMR-S
+LTU,LT024,3,Marijampole county,LT02,3_PRR,NMR-R
+LTU,LT025,3,Panevežys county,LT02,3_INC,NMR-S
+LTU,LT026,3,Šiauliai county,LT02,3_INC,NMR-S
+LTU,LT027,3,Taurage county,LT02,3_PRR,NMR-R
+LTU,LT028,3,Telšiai county,LT02,3_INR,NMR-R
+LTU,LT029,3,Utena county,LT02,3_INR,NMR-R
+LTU,LT00,OLD_2_2013,Lithuania,LTU,OLD_2_2013,OLD_2_2013
+LUX,LUX,1,Luxembourg,LUX,1,1
+LUX,LU00,2,Luxembourg AdministrativeArea1,LUX,2,2
+LUX,LU000,3,Luxembourg,LU00,3_INC,MR-M
+MEX,MEX,1,Mexico,MEX,1,1
+MEX,ME01,2,Aguascalientes AdministrativeArea1,MEX,2,2
+MEX,ME02,2,Baja California Norte AdministrativeArea1,MEX,2,2
+MEX,ME03,2,Baja California Sur AdministrativeArea1,MEX,2,2
+MEX,ME04,2,Campeche AdministrativeArea1,MEX,2,2
+MEX,ME05,2,Coahuila AdministrativeArea1,MEX,2,2
+MEX,ME06,2,Colima AdministrativeArea1,MEX,2,2
+MEX,ME07,2,Chiapas AdministrativeArea1,MEX,2,2
+MEX,ME08,2,Chihuahua AdministrativeArea1,MEX,2,2
+MEX,ME09,2,Federal District (MX) AdministrativeArea1,MEX,2,2
+MEX,ME10,2,Durango AdministrativeArea1,MEX,2,2
+MEX,ME11,2,Guanajuato AdministrativeArea1,MEX,2,2
+MEX,ME12,2,Guerrero AdministrativeArea1,MEX,2,2
+MEX,ME13,2,Hidalgo AdministrativeArea1,MEX,2,2
+MEX,ME14,2,Jalisco AdministrativeArea1,MEX,2,2
+MEX,ME15,2,Mexico AdministrativeArea1,MEX,2,2
+MEX,ME16,2,Michoacan AdministrativeArea1,MEX,2,2
+MEX,ME17,2,Morelos AdministrativeArea1,MEX,2,2
+MEX,ME18,2,Nayarit AdministrativeArea1,MEX,2,2
+MEX,ME19,2,Nuevo Leon AdministrativeArea1,MEX,2,2
+MEX,ME20,2,Oaxaca AdministrativeArea1,MEX,2,2
+MEX,ME21,2,Puebla AdministrativeArea1,MEX,2,2
+MEX,ME22,2,Queretaro AdministrativeArea1,MEX,2,2
+MEX,ME23,2,Quintana Roo AdministrativeArea1,MEX,2,2
+MEX,ME24,2,San Luis Potosi AdministrativeArea1,MEX,2,2
+MEX,ME25,2,Sinaloa AdministrativeArea1,MEX,2,2
+MEX,ME26,2,Sonora AdministrativeArea1,MEX,2,2
+MEX,ME27,2,Tabasco AdministrativeArea1,MEX,2,2
+MEX,ME28,2,Tamaulipas AdministrativeArea1,MEX,2,2
+MEX,ME29,2,Tlaxcala AdministrativeArea1,MEX,2,2
+MEX,ME30,2,Veracruz AdministrativeArea1,MEX,2,2
+MEX,ME31,2,Yucatan AdministrativeArea1,MEX,2,2
+MEX,ME32,2,Zacatecas AdministrativeArea1,MEX,2,2
+NLD,NLD,1,Netherlands,NLD,1,1
+NLD,NL11,2,Groningen AdministrativeArea1,NLD,2,2
+NLD,NL12,2,Friesland AdministrativeArea1,NLD,2,2
+NLD,NL13,2,Drenthe AdministrativeArea1,NLD,2,2
+NLD,NL21,2,Overijssel AdministrativeArea1,NLD,2,2
+NLD,NL22,2,Gelderland AdministrativeArea1,NLD,2,2
+NLD,NL23,2,Flevoland AdministrativeArea1,NLD,2,2
+NLD,NL31,2,Utrecht AdministrativeArea1,NLD,2,2
+NLD,NL32,2,North Holland AdministrativeArea1,NLD,2,2
+NLD,NL33,2,South Holland AdministrativeArea1,NLD,2,2
+NLD,NL34,2,Zeeland AdministrativeArea1,NLD,2,2
+NLD,NL41,2,North Brabant AdministrativeArea1,NLD,2,2
+NLD,NL42,2,Limburg AdministrativeArea1,NLD,2,2
+NZL,NZL,1,New Zealand,NZL,1,1
+NZL,NZ11,2,Northland Region AdministrativeArea1,NZL,2,2
+NZL,NZ011,3,Northland Region,NZ11,3_PR,..
+NZL,NZ12,2,Auckland Region AdministrativeArea1,NZL,2,2
+NZL,NZ012,3,Auckland Region,NZ12,3_PU,..
+NZL,NZ13,2,Waikato Region AdministrativeArea1,NZL,2,2
+NZL,NZ013,3,Waikato Region,NZ13,3_IN,..
+NZL,NZ14,2,Bay of Plenty Region AdministrativeArea1,NZL,2,2
+NZL,NZ014,3,Bay of Plenty Region,NZ14,3_IN,..
+NZL,NZ15,2,Gisborne Region AdministrativeArea1,NZL,2,2
+NZL,NZ015,3,Gisborne Region,NZ15,3_IN,..
+NZL,NZ16,2,Hawke's Bay Region AdministrativeArea1,NZL,2,2
+NZL,NZ016,3,Hawke's Bay Region,NZ16,3_IN,..
+NZL,NZ17,2,Taranaki Region AdministrativeArea1,NZL,2,2
+NZL,NZ017,3,Taranaki Region,NZ17,3_IN,..
+NZL,NZ18,2,Manawatu-Wanganui Region AdministrativeArea1,NZL,2,2
+NZL,NZ018,3,Manawatu-Wanganui Region,NZ18,3_IN,..
+NZL,NZ19,2,Wellington Region AdministrativeArea1,NZL,2,2
+NZL,NZ019,3,Wellington Region,NZ19,3_PU,..
+NZL,NZ21,2,Tasman-Nelson-Marlborough AdministrativeArea1,NZL,2,2
+NZL,NZ021,3,Tasman-Nelson-Marlborough,NZ21,3_IN,..
+NZL,NZ22,2,West Coast Region AdministrativeArea1,NZL,2,2
+NZL,NZ022,3,West Coast Region,NZ22,3_PR,..
+NZL,NZ23,2,Canterbury Region AdministrativeArea1,NZL,2,2
+NZL,NZ023,3,Canterbury Region,NZ23,3_IN,..
+NZL,NZ24,2,Otago Region AdministrativeArea1,NZL,2,2
+NZL,NZ024,3,Otago Region,NZ24,3_PR,..
+NZL,NZ25,2,Southland Region AdministrativeArea1,NZL,2,2
+NZL,NZ025,3,Southland Region,NZ25,3_IN,..
+NOR,NOR,1,Norway,NOR,1,1
+NOR,NO01,2,Oslo and Akershus AdministrativeArea1,NOR,2,2
+NOR,NO011,3,Oslo,NO01,3_PU,MR-M
+NOR,NO012,3,Akershus,NO01,3_PU,MR-M
+NOR,NO02,2,Hedmark and Oppland AdministrativeArea1,NOR,2,2
+NOR,NO021,3,Hedmark,NO02,3_PRR,NMR-R
+NOR,NO022,3,Oppland,NO02,3_PRR,NMR-R
+NOR,NO03,2,South-Eastern Norway AdministrativeArea1,NOR,2,2
+NOR,NO031,3,Østfold,NO03,3_INR,NMR-M
+NOR,NO032,3,Buskerud,NO03,3_INC,NMR-M
+NOR,NO033,3,Vestfold,NO03,3_INR,NMR-R
+NOR,NO034,3,Telemark,NO03,3_INR,NMR-R
+NOR,NO04,2,Agder and Rogaland AdministrativeArea1,NOR,2,2
+NOR,NO041,3,Aust-Agder,NO04,3_PRC,NMR-R
+NOR,NO042,3,Vest-Agder,NO04,3_INC,NMR-S
+NOR,NO043,3,Rogaland,NO04,3_INC,MR-M
+NOR,NO05,2,Western Norway AdministrativeArea1,NOR,2,2
+NOR,NO051,3,Hordaland,NO05,3_INC,MR-M
+NOR,NO052,3,Sogn og Fjordane,NO05,3_PRR,NMR-R
+NOR,NO053,3,Møre og Romsdal,NO05,3_PRR,NMR-R
+NOR,NO06,2,Trøndelag AdministrativeArea1,NOR,2,2
+NOR,NO060,3,Trøndelag,NO06,3_IN,MR-M
+NOR,NO07,2,Northern Norway AdministrativeArea1,NOR,2,2
+NOR,NO071,3,Nordland,NO07,3_PRR,NMR-R
+NOR,NO072,3,Troms,NO07,3_PRR,NMR-S
+NOR,NO073,3,Finnmark,NO07,3_PRR,NMR-R
+POL,POL,1,Poland,POL,1,1
+POL,PL21,2,Lesser Poland  AdministrativeArea1,POL,2,2
+POL,PL213,3,City of Krakow,PL21,3_PU,MR-M
+POL,PL214,3,Krakowski,PL21,3_INC,MR-M
+POL,PL217,3,Tarnowski,PL21,3_PRC,MR-M
+POL,PL218,3,Nowosadecki,PL21,3_PRC,MR-M
+POL,PL219,3,Nowotarski,PL21,3_PRR,NMR-R
+POL,PL21A,3,Oswiecimski,PL21,3_INC,NMR-M
+POL,PL22,2,Silesia AdministrativeArea1,POL,2,2
+POL,PL224,3,Czestochowski,PL22,3_INC,MR-M
+POL,PL225,3,Bielski,PL22,3_INC,MR-M
+POL,PL227,3,Rybnicki,PL22,3_PU,NMR-M
+POL,PL228,3,Bytomski,PL22,3_PU,MR-L
+POL,PL229,3,Gliwicki,PL22,3_PU,MR-L
+POL,PL22A,3,Katowicki,PL22,3_PU,MR-L
+POL,PL22B,3,Sosnowiecki,PL22,3_PU,MR-L
+POL,PL22C,3,Tyski,PL22,3_PU,MR-L
+POL,PL41,2,Greater Poland AdministrativeArea1,POL,2,2
+POL,PL411,3,Pilski,PL41,3_PRC,NMR-S
+POL,PL414,3,Koninski,PL41,3_PRC,NMR-S
+POL,PL415,3,City of Poznan,PL41,3_PU,MR-M
+POL,PL416,3,Kaliski,PL41,3_PRC,NMR-S
+POL,PL417,3,Leszczynski,PL41,3_PRC,NMR-S
+POL,PL418,3,Poznanski,PL41,3_INC,MR-M
+POL,PL42,2,West Pomerania AdministrativeArea1,POL,2,2
+POL,PL424,3,City of Szczecin,PL42,3_INC,MR-M
+POL,PL426,3,Koszalinski,PL42,3_INC,NMR-S
+POL,PL427,3,Szczecinecko-pyrzycki,PL42,3_PRC,NMR-S
+POL,PL428,3,Szczecinski,PL42,3_INC,NMR-M
+POL,PL43,2,Lubusz AdministrativeArea1,POL,2,2
+POL,PL431,3,Gorzowski,PL43,3_INC,NMR-S
+POL,PL432,3,Zielonogórski,PL43,3_INC,NMR-S
+POL,PL51,2,Lower Silesia  AdministrativeArea1,POL,2,2
+POL,PL514,3,City of Wroclaw,PL51,3_PU,MR-M
+POL,PL515,3,Jeleniogórski,PL51,3_INC,NMR-S
+POL,PL516,3,Legnicko-Glogowski,PL51,3_PU,NMR-S
+POL,PL517,3,Walbrzyski,PL51,3_INC,NMR-S
+POL,PL518,3,Wroclawski,PL51,3_INC,NMR-M
+POL,PL52,2,Opole region AdministrativeArea1,POL,2,2
+POL,PL523,3,Nyski,PL52,3_PRR,NMR-M
+POL,PL524,3,Opolski,PL52,3_INC,MR-M
+POL,PL61,2,Kuyavian-Pomerania AdministrativeArea1,POL,2,2
+POL,PL613,3,Bydgosko-Torunski,PL61,3_PU,MR-M
+POL,PL616,3,Grudziadzki,PL61,3_PRC,NMR-S
+POL,PL617,3,Inowroclawski,PL61,3_PRC,NMR-S
+POL,PL618,3,Swiecki,PL61,3_PRC,NMR-M
+POL,PL619,3,Wloclawski,PL61,3_PRC,NMR-S
+POL,PL62,2,Warmian-Masuria AdministrativeArea1,POL,2,2
+POL,PL621,3,Elblaski,PL62,3_INC,NMR-S
+POL,PL622,3,Olsztynski,PL62,3_INC,MR-M
+POL,PL623,3,Elcki,PL62,3_INC,NMR-S
+POL,PL63,2,Pomerania AdministrativeArea1,POL,2,2
+POL,PL633,3,Trojmiejski,PL63,3_PU,MR-M
+POL,PL634,3,Gdanski,PL63,3_INC,MR-M
+POL,PL636,3,Slupski,PL63,3_INC,NMR-S
+POL,PL637,3,Chojnicki,PL63,3_PRR,NMR-R
+POL,PL638,3,Starogardzki,PL63,3_INC,NMR-S
+POL,PL71,2,Lodzkie AdministrativeArea1,POL,2,2
+POL,PL711,3,City of Lódz,PL71,3_PU,MR-M
+POL,PL712,3,Lódzki,PL71,3_PU,MR-M
+POL,PL713,3,Piotrkowski,PL71,3_PRC,NMR-M
+POL,PL714,3,Sieradzki,PL71,3_PRC,NMR-S
+POL,PL715,3,Skierniewicki,PL71,3_PRC,NMR-M
+POL,PL72,2,Swietokrzyskie AdministrativeArea1,POL,2,2
+POL,PL721,3,Kielecki,PL72,3_INC,MR-M
+POL,PL722,3,Sandomiersko-Jedrzejowski,PL72,3_PRC,NMR-R
+POL,PL81,2,Lublin Province  AdministrativeArea1,POL,2,2
+POL,PL811,3,Bialski,PL81,3_PRR,NMR-R
+POL,PL812,3,Chelmsko-Zamojski,PL81,3_PRC,NMR-S
+POL,PL814,3,Lubelski,PL81,3_INC,MR-M
+POL,PL815,3,Pulawski,PL81,3_PRC,NMR-R
+POL,PL82,2,Podkarpacia AdministrativeArea1,POL,2,2
+POL,PL821,3,Krosnienski,PL82,3_PRR,NMR-R
+POL,PL822,3,Przemyski,PL82,3_PRC,NMR-M
+POL,PL823,3,Rzeszowski,PL82,3_PRC,MR-M
+POL,PL824,3,Tarnobrzeski,PL82,3_PRC,NMR-S
+POL,PL84,2,Podlaskie AdministrativeArea1,POL,2,2
+POL,PL841,3,Bialostocki,PL84,3_INC,MR-M
+POL,PL842,3,Lomzynski,PL84,3_PRC,NMR-S
+POL,PL843,3,Suwalski,PL84,3_PRC,NMR-S
+POL,PL91,2,Warsaw AdministrativeArea1,POL,2,2
+POL,PL911,3,City of Warsaw,PL91,3_PU,MR-L
+POL,PL912,3,Warsaw-East,PL91,3_INC,MR-L
+POL,PL913,3,Warsaw-West,PL91,3_INC,MR-L
+POL,PL92,2,Mazowiecki region AdministrativeArea1,POL,2,2
+POL,PL921,3,Radomski,PL92,3_INC,MR-M
+POL,PL922,3,Ciechanowski,PL92,3_PRR,NMR-R
+POL,PL923,3,Plocki,PL92,3_PRC,NMR-S
+POL,PL924,3,Ostrolecki,PL92,3_PRR,NMR-R
+POL,PL925,3,Siedlecki,PL92,3_PRC,NMR-S
+POL,PL926,3,Żyrardowski,PL92,3_INC,NMR-R
+POL,PL12,OLD_2_2013,Mazovia,POL,OLD_2_2013,OLD_2_2013
+PRT,PRT,1,Portugal,PRT,1,1
+PRT,PT11,2,North (PT) AdministrativeArea1,PRT,2,2
+PRT,PT111,3,Alto Minho,PT11,3_PRC,NMR-M
+PRT,PT112,3,Cávado,PT11,3_INC,NMR-S
+PRT,PT119,3,Ave,PT11,3_INC,NMR-M
+PRT,PT11A,3,Metropolitan area of Porto,PT11,3_PU,MR-M
+PRT,PT11B,3,Alto Tâmega,PT11,3_PRR,NMR-R
+PRT,PT11C,3,Tâmega e Sousa,PT11,3_INC,NMR-M
+PRT,PT11D,3,Douro,PT11,3_PRR,NMR-R
+PRT,PT11E,3,Terras de Trás-os-Montes,PT11,3_PRR,NMR-R
+PRT,PT15,2,Algarve AdministrativeArea1,PRT,2,2
+PRT,PT150,3,Algarve,PT15,3_INC,NMR-S
+PRT,PT16,2,Central Portugal AdministrativeArea1,PRT,2,2
+PRT,PT16B,3,Oeste,PT16,3_PRC,NMR-M
+PRT,PT16D,3,Região de Aveiro,PT16,3_INC,NMR-M
+PRT,PT16E,3,Região de Coimbra,PT16,3_PRC,MR-M
+PRT,PT16F,3,Região de Leiria,PT16,3_PRR,NMR-M
+PRT,PT16G,3,Viseu Dão Lafões,PT16,3_PRC,NMR-S
+PRT,PT16H,3,Beira Baixa,PT16,3_PRR,NMR-R
+PRT,PT16I,3,Médio Tejo,PT16,3_PRR,NMR-R
+PRT,PT16J,3,Beiras e Serra da Estrela,PT16,3_PRR,NMR-R
+PRT,PT17,2,Metropolitan area of Lisbon AdministrativeArea1,PRT,2,2
+PRT,PT170,3,Metropolitan area of Lisbon,PT17,3_PU,MR-L
+PRT,PT18,2,Alentejo AdministrativeArea1,PRT,2,2
+PRT,PT181,3,Alentejo Litoral,PT18,3_PRR,NMR-R
+PRT,PT184,3,Baixo Alentejo,PT18,3_PRR,NMR-R
+PRT,PT185,3,Lezíria do Tejo,PT18,3_PRC,NMR-R
+PRT,PT186,3,Alto Alentejo,PT18,3_PRR,NMR-S
+PRT,PT187,3,Alentejo Central,PT18,3_PRR,NMR-R
+PRT,PT20,2,Autonomous Region of the Azores AdministrativeArea1,PRT,2,2
+PRT,PT200,3,Autonomous Region of the Azores,PT20,3_INC,NMR-S
+PRT,PT30,2,Autonomous Region of Madeira AdministrativeArea1,PRT,2,2
+PRT,PT300,3,Autonomous Region of Madeira,PT30,3_PU,NMR-S
+SVK,SVK,1,Slovak Republic,SVK,1,1
+SVK,SK01,2,Bratislava Region AdministrativeArea1,SVK,2,2
+SVK,SK010,3,Bratislava Region,SK01,3_PU,MR-M
+SVK,SK02,2,West Slovakia AdministrativeArea1,SVK,2,2
+SVK,SK021,3,Trnava Region,SK02,3_PRC,NMR-M
+SVK,SK022,3,Trencín Region,SK02,3_INC,NMR-S
+SVK,SK023,3,Nitra Region,SK02,3_INC,NMR-S
+SVK,SK03,2,Central Slovakia AdministrativeArea1,SVK,2,2
+SVK,SK031,3,Žilina Region,SK03,3_INC,NMR-S
+SVK,SK032,3,Banská Bystrica Region,SK03,3_PRC,NMR-S
+SVK,SK04,2,East Slovakia AdministrativeArea1,SVK,2,2
+SVK,SK041,3,Prešov Region,SK04,3_PRC,NMR-S
+SVK,SK042,3,Košice Region,SK04,3_INC,MR-M
+SVN,SVN,1,Slovenia,SVN,1,1
+SVN,SI03,2,Eastern Slovenia AdministrativeArea1,SVN,2,2
+SVN,SI04,2,Western Slovenia AdministrativeArea1,SVN,2,2
+ESP,ESP,1,Spain,ESP,1,1
+ESP,ES11,2,Galicia AdministrativeArea1,ESP,2,2
+ESP,ES111,3,La Corunna,ES11,3_INC,MR-M
+ESP,ES112,3,Lugo,ES11,3_PRC,NMR-S
+ESP,ES113,3,Orense,ES11,3_PRC,NMR-S
+ESP,ES114,3,Pontevedra,ES11,3_INC,MR-M
+ESP,ES12,2,Asturias AdministrativeArea1,ESP,2,2
+ESP,ES120,3,Asturias,ES12,3_INC,MR-M
+ESP,ES13,2,Cantabria AdministrativeArea1,ESP,2,2
+ESP,ES130,3,Cantabria,ES13,3_INC,MR-M
+ESP,ES21,2,Basque Country AdministrativeArea1,ESP,2,2
+ESP,ES211,3,Araba/Álava,ES21,3_PU,MR-M
+ESP,ES212,3,Gipuzkoa,ES21,3_PU,NMR-M
+ESP,ES213,3,Biscay,ES21,3_PU,MR-M
+ESP,ES22,2,Navarra AdministrativeArea1,ESP,2,2
+ESP,ES220,3,Navarre,ES22,3_INC,MR-M
+ESP,ES23,2,La Rioja AdministrativeArea1,ESP,2,2
+ESP,ES230,3,La Rioja (ES),ES23,3_INC,NMR-S
+ESP,ES24,2,Aragon AdministrativeArea1,ESP,2,2
+ESP,ES241,3,Huesca,ES24,3_INR,NMR-R
+ESP,ES242,3,Teruel,ES24,3_PRR,NMR-R
+ESP,ES243,3,Saragossa,ES24,3_PU,MR-M
+ESP,ES30,2,Madrid AdministrativeArea1,ESP,2,2
+ESP,ES300,3,Madrid,ES30,3_PU,MR-L
+ESP,ES41,2,Castile and León AdministrativeArea1,ESP,2,2
+ESP,ES411,3,Ávila,ES41,3_PRR,NMR-S
+ESP,ES412,3,Burgos,ES41,3_INC,NMR-S
+ESP,ES413,3,León,ES41,3_INC,NMR-S
+ESP,ES414,3,Palencia,ES41,3_INC,NMR-M
+ESP,ES415,3,Salamanca,ES41,3_INC,NMR-S
+ESP,ES416,3,Segovia,ES41,3_PRC,NMR-S
+ESP,ES417,3,Soria,ES41,3_PRR,NMR-R
+ESP,ES418,3,Valladolid,ES41,3_INC,MR-M
+ESP,ES419,3,Zamora,ES41,3_PRC,NMR-S
+ESP,ES42,2,Castile-La Mancha AdministrativeArea1,ESP,2,2
+ESP,ES421,3,Albacete,ES42,3_INC,NMR-S
+ESP,ES422,3,Ciudad Real,ES42,3_INR,NMR-S
+ESP,ES423,3,Cuenca,ES42,3_PRR,NMR-S
+ESP,ES424,3,Guadalajara,ES42,3_INC,NMR-M
+ESP,ES425,3,Toledo,ES42,3_INC,NMR-M
+ESP,ES43,2,Extremadura AdministrativeArea1,ESP,2,2
+ESP,ES431,3,Badajoz,ES43,3_INR,NMR-S
+ESP,ES432,3,Cáceres,ES43,3_INR,NMR-S
+ESP,ES51,2,Catalonia AdministrativeArea1,ESP,2,2
+ESP,ES511,3,Barcelona,ES51,3_PU,MR-L
+ESP,ES512,3,Gerona,ES51,3_INC,NMR-S
+ESP,ES513,3,Lérida,ES51,3_INC,NMR-S
+ESP,ES514,3,Tarragona,ES51,3_INC,NMR-S
+ESP,ES52,2,Valencia AdministrativeArea1,ESP,2,2
+ESP,ES521,3,Alicante,ES52,3_PU,MR-M
+ESP,ES522,3,Castellón,ES52,3_INC,NMR-S
+ESP,ES523,3,Valencia,ES52,3_PU,MR-L
+ESP,ES53,2,Balearic Islands AdministrativeArea1,ESP,2,2
+ESP,ES531,3,Eivissa y Formentera,ES53,3_INR,NMR-S
+ESP,ES532,3,Mallorca,ES53,3_PU,MR-M
+ESP,ES533,3,Menorca,ES53,3_INR,NMR-R
+ESP,ES61,2,Andalusia AdministrativeArea1,ESP,2,2
+ESP,ES611,3,Almería,ES61,3_INC,NMR-S
+ESP,ES612,3,Cádiz,ES61,3_PU,NMR-M
+ESP,ES613,3,Cordoba (ES),ES61,3_PU,NMR-M
+ESP,ES614,3,Granada,ES61,3_INC,MR-M
+ESP,ES615,3,Huelva,ES61,3_INC,NMR-S
+ESP,ES616,3,Jaén,ES61,3_INC,NMR-S
+ESP,ES617,3,Málaga,ES61,3_PU,MR-M
+ESP,ES618,3,Seville,ES61,3_PU,MR-L
+ESP,ES62,2,Murcia AdministrativeArea1,ESP,2,2
+ESP,ES620,3,Murcia,ES62,3_PU,MR-M
+ESP,ES63,2,Ceuta  AdministrativeArea1,ESP,2,2
+ESP,ES630,3,Ceuta (ES),ES63,3_PU,NMR-S
+ESP,ES64,2,Melilla AdministrativeArea1,ESP,2,2
+ESP,ES640,3,Melilla (ES),ES64,3_INC,NMR-S
+ESP,ES70,2,Canary Islands AdministrativeArea1,ESP,2,2
+ESP,ES703,3,El Hierro,ES70,3_PRR,NMR-R
+ESP,ES704,3,Fuerteventura,ES70,3_INR,NMR-R
+ESP,ES705,3,Gran Canaria,ES70,3_PU,MR-M
+ESP,ES706,3,La Gomera,ES70,3_PRR,NMR-R
+ESP,ES707,3,La Palma,ES70,3_INR,NMR-R
+ESP,ES708,3,Lanzarote,ES70,3_INC,NMR-S
+ESP,ES709,3,Tenerife,ES70,3_PU,MR-M
+SWE,SWE,1,Sweden,SWE,1,1
+SWE,SE11,2,Stockholm AdministrativeArea1,SWE,2,2
+SWE,SE110,3,Stockholm County,SE11,3_PU,MR-L
+SWE,SE12,2,East Middle Sweden AdministrativeArea1,SWE,2,2
+SWE,SE121,3,Uppsala County,SE12,3_PU,MR-M
+SWE,SE122,3,Södermanland County,SE12,3_INC,NMR-M
+SWE,SE123,3,Östergötland County,SE12,3_PU,NMR-S
+SWE,SE124,3,Örebro County,SE12,3_INC,NMR-S
+SWE,SE125,3,Västmanland County,SE12,3_PU,NMR-S
+SWE,SE21,2,Småland with Islands AdministrativeArea1,SWE,2,2
+SWE,SE211,3,Jönköping County,SE21,3_INC,NMR-S
+SWE,SE212,3,Kronoberg County,SE21,3_PRR,NMR-R
+SWE,SE213,3,Kalmar County,SE21,3_PRR,NMR-R
+SWE,SE214,3,Gotland County,SE21,3_PRR,NMR-R
+SWE,SE22,2,South Sweden AdministrativeArea1,SWE,2,2
+SWE,SE221,3,Blekinge County,SE22,3_INR,NMR-R
+SWE,SE224,3,Skåne County,SE22,3_INC,MR-M
+SWE,SE23,2,West Sweden AdministrativeArea1,SWE,2,2
+SWE,SE231,3,Halland County,SE23,3_INC,NMR-R
+SWE,SE232,3,Västra Götaland County,SE23,3_PU,MR-M
+SWE,SE31,2,North Middle Sweden AdministrativeArea1,SWE,2,2
+SWE,SE311,3,Värmlands County,SE31,3_INR,NMR-R
+SWE,SE312,3,Dalarna County,SE31,3_PRR,NMR-R
+SWE,SE313,3,Gävleborg County,SE31,3_INR,NMR-R
+SWE,SE32,2,Central Norrland AdministrativeArea1,SWE,2,2
+SWE,SE321,3,Västernorrland County,SE32,3_INR,NMR-R
+SWE,SE322,3,Jämtland County,SE32,3_PRR,NMR-R
+SWE,SE33,2,Upper Norrland AdministrativeArea1,SWE,2,2
+SWE,SE331,3,Västerbottens County,SE33,3_INC,NMR-S
+SWE,SE332,3,Norrbottens County,SE33,3_INR,NMR-R
+CHE,CHE,1,Switzerland,CHE,1,1
+CHE,CH01,2,Lake Geneva Region AdministrativeArea1,CHE,2,2
+CHE,CH011,3,Vaud,CH01,3_PU,MR-M
+CHE,CH012,3,Valais,CH01,3_INR,NMR-R
+CHE,CH013,3,Genève,CH01,3_PU,MR-M
+CHE,CH02,2,Espace Mittelland AdministrativeArea1,CHE,2,2
+CHE,CH021,3,Bern,CH02,3_INC,MR-M
+CHE,CH022,3,Fribourg (CH),CH02,3_INC,NMR-M
+CHE,CH023,3,Solothurn,CH02,3_PU,NMR-M
+CHE,CH024,3,Neuchâtel,CH02,3_INC,NMR-M
+CHE,CH025,3,Jura (CH),CH02,3_PRC,NMR-S
+CHE,CH03,2,Northwestern Switzerland  AdministrativeArea1,CHE,2,2
+CHE,CH031,3,Basel-Stadt,CH03,3_PU,MR-M
+CHE,CH032,3,Basel-Landschaft,CH03,3_PU,MR-M
+CHE,CH033,3,Aargau,CH03,3_PU,NMR-M
+CHE,CH04,2,Zurich AdministrativeArea1,CHE,2,2
+CHE,CH040,3,Zürich,CH04,3_PU,MR-M
+CHE,CH05,2,Eastern Switzerland AdministrativeArea1,CHE,2,2
+CHE,CH051,3,Glarus,CH05,3_INC,NMR-R
+CHE,CH052,3,Schaffhausen,CH05,3_PU,NMR-M
+CHE,CH053,3,Appenzell Ausserrhoden,CH05,3_INC,NMR-S
+CHE,CH054,3,Appenzell Innerrhoden,CH05,3_INC,NMR-S
+CHE,CH055,3,St. Gallen,CH05,3_PU,NMR-S
+CHE,CH056,3,Graubünden,CH05,3_PRR,NMR-R
+CHE,CH057,3,Thurgau,CH05,3_INC,NMR-M
+CHE,CH06,2,Central Switzerland AdministrativeArea1,CHE,2,2
+CHE,CH061,3,Lucerne,CH06,3_INC,NMR-S
+CHE,CH062,3,Uri,CH06,3_INC,NMR-S
+CHE,CH063,3,Schwyz,CH06,3_INC,NMR-M
+CHE,CH064,3,Obwalden,CH06,3_INC,NMR-S
+CHE,CH065,3,Nidwalden,CH06,3_INC,NMR-S
+CHE,CH066,3,Zug,CH06,3_INC,NMR-M
+CHE,CH07,2,Ticino AdministrativeArea1,CHE,2,2
+CHE,CH070,3,Ticino,CH07,3_PU,NMR-S
+TUR,TUR,1,Turkey,TUR,1,1
+TUR,TR10,2,Istanbul AdministrativeArea1,TUR,2,2
+TUR,TR100,3,Istanbul,TR10,3_PU,..
+TUR,TR21,2,Thrace AdministrativeArea1,TUR,2,2
+TUR,TR211,3,Tekirdag,TR21,3_PRC,..
+TUR,TR212,3,Edirne,TR21,3_PRC,..
+TUR,TR213,3,Kirklareli,TR21,3_PRC,..
+TUR,TR22,2,Southern Marmara - West AdministrativeArea1,TUR,2,2
+TUR,TR221,3,Balikesir,TR22,3_IN,..
+TUR,TR222,3,Çanakkale,TR22,3_PRR,..
+TUR,TR31,2,Izmir AdministrativeArea1,TUR,2,2
+TUR,TR310,3,Izmir,TR31,3_PU,..
+TUR,TR32,2,Southern Aegean AdministrativeArea1,TUR,2,2
+TUR,TR321,3,Aydin,TR32,3_IN,..
+TUR,TR322,3,Denizli,TR32,3_IN,..
+TUR,TR323,3,Mugla,TR32,3_PRR,..
+TUR,TR33,2,Northern Aegean AdministrativeArea1,TUR,2,2
+TUR,TR331,3,Manisa,TR33,3_IN,..
+TUR,TR332,3,Afyon,TR33,3_PRC,..
+TUR,TR333,3,Kütahya,TR33,3_PRC,..
+TUR,TR334,3,Usak,TR33,3_PRC,..
+TUR,TR41,2,Eastern Marmara - South  AdministrativeArea1,TUR,2,2
+TUR,TR411,3,Bursa,TR41,3_IN,..
+TUR,TR412,3,Eskisehir,TR41,3_IN,..
+TUR,TR413,3,Bilecik,TR41,3_PRR,..
+TUR,TR42,2,Eastern Marmara - North AdministrativeArea1,TUR,2,2
+TUR,TR421,3,Kocaeli,TR42,3_PU,..
+TUR,TR422,3,Sakarya,TR42,3_IN,..
+TUR,TR423,3,Düzce,TR42,3_IN,..
+TUR,TR424,3,Bolu,TR42,3_PRC,..
+TUR,TR425,3,Yalova,TR42,3_IN,..
+TUR,TR51,2,Ankara AdministrativeArea1,TUR,2,2
+TUR,TR510,3,Ankara,TR51,3_PU,..
+TUR,TR52,2,Central Anatolia - West and South AdministrativeArea1,TUR,2,2
+TUR,TR521,3,Konya,TR52,3_PRC,..
+TUR,TR522,3,Karaman,TR52,3_PRC,..
+TUR,TR61,2,Mediterranean region - West AdministrativeArea1,TUR,2,2
+TUR,TR611,3,Antalya,TR61,3_IN,..
+TUR,TR612,3,Isparta,TR61,3_PRC,..
+TUR,TR613,3,Burdur,TR61,3_PRR,..
+TUR,TR62,2,Mediterranean region - Middle AdministrativeArea1,TUR,2,2
+TUR,TR621,3,Adana,TR62,3_IN,..
+TUR,TR622,3,Mersin,TR62,3_IN,..
+TUR,TR63,2,Mediterranean region - East  AdministrativeArea1,TUR,2,2
+TUR,TR631,3,Hatay,TR63,3_IN,..
+TUR,TR632,3,Kahramanmaras,TR63,3_PRC,..
+TUR,TR633,3,Osmaniye,TR63,3_IN,..
+TUR,TR71,2,Central Anatolia - Middle AdministrativeArea1,TUR,2,2
+TUR,TR711,3,Kirikkale,TR71,3_IN,..
+TUR,TR712,3,Aksaray,TR71,3_PRC,..
+TUR,TR713,3,Nigde,TR71,3_PRC,..
+TUR,TR714,3,Nevsehir,TR71,3_PRC,..
+TUR,TR715,3,Kirsehir,TR71,3_PRC,..
+TUR,TR72,2,Central Anatolia - East AdministrativeArea1,TUR,2,2
+TUR,TR721,3,Kayseri,TR72,3_IN,..
+TUR,TR722,3,Sivas,TR72,3_PRR,..
+TUR,TR723,3,Yozgat,TR72,3_PRC,..
+TUR,TR81,2,Western Black Sea - West AdministrativeArea1,TUR,2,2
+TUR,TR811,3,Zonguldak,TR81,3_PU,..
+TUR,TR812,3,Karabük,TR81,3_IN,..
+TUR,TR813,3,Bartin,TR81,3_PRR,..
+TUR,TR82,2,Western Black Sea - Middle and East AdministrativeArea1,TUR,2,2
+TUR,TR821,3,Kastamonu,TR82,3_PRC,..
+TUR,TR822,3,Çankiri,TR82,3_PRC,..
+TUR,TR823,3,Sinop,TR82,3_PRR,..
+TUR,TR83,2,Middle Black Sea AdministrativeArea1,TUR,2,2
+TUR,TR831,3,Samsun,TR83,3_IN,..
+TUR,TR832,3,Tokat,TR83,3_PRC,..
+TUR,TR833,3,Çorum,TR83,3_PRC,..
+TUR,TR834,3,Amasya,TR83,3_PRC,..
+TUR,TR90,2,Eastern Black Sea AdministrativeArea1,TUR,2,2
+TUR,TR901,3,Trabzon,TR90,3_IN,..
+TUR,TR902,3,Ordu,TR90,3_IN,..
+TUR,TR903,3,Giresun,TR90,3_PRR,..
+TUR,TR904,3,Rize,TR90,3_IN,..
+TUR,TR905,3,Artvin,TR90,3_PRR,..
+TUR,TR906,3,Gümüshane,TR90,3_PRR,..
+TUR,TRA1,2,Northeastern Anatolia - West AdministrativeArea1,TUR,2,2
+TUR,TRA11,3,Erzurum,TRA1,3_PRC,..
+TUR,TRA12,3,Erzincan,TRA1,3_PRC,..
+TUR,TRA13,3,Bayburt,TRA1,3_PRR,..
+TUR,TRA2,2,Northeastern Anatolia - East AdministrativeArea1,TUR,2,2
+TUR,TRA21,3,Agri,TRA2,3_PRC,..
+TUR,TRA22,3,Kars,TRA2,3_PRC,..
+TUR,TRA23,3,Igdir,TRA2,3_PRC,..
+TUR,TRA24,3,Ardahan,TRA2,3_PRR,..
+TUR,TRB1,2,Eastern Anatolia - West AdministrativeArea1,TUR,2,2
+TUR,TRB11,3,Malatya,TRB1,3_IN,..
+TUR,TRB12,3,Elazig,TRB1,3_IN,..
+TUR,TRB13,3,Bingöl,TRB1,3_PRC,..
+TUR,TRB14,3,Tunceli,TRB1,3_PRC,..
+TUR,TRB2,2,Eastern Anatolia - East AdministrativeArea1,TUR,2,2
+TUR,TRB21,3,Van,TRB2,3_PRC,..
+TUR,TRB22,3,Mus,TRB2,3_PRC,..
+TUR,TRB23,3,Bitlis,TRB2,3_PRC,..
+TUR,TRB24,3,Hakkari,TRB2,3_PRC,..
+TUR,TRC1,2,Southeastern Anatolia - West  AdministrativeArea1,TUR,2,2
+TUR,TRC11,3,Gaziantep,TRC1,3_IN,..
+TUR,TRC12,3,Adiyaman,TRC1,3_PRC,..
+TUR,TRC13,3,Kilis,TRC1,3_IN,..
+TUR,TRC2,2,Southeastern Anatolia - Middle AdministrativeArea1,TUR,2,2
+TUR,TRC21,3,Sanliurfa,TRC2,3_PRC,..
+TUR,TRC22,3,Diyarbakir,TRC2,3_IN,..
+TUR,TRC3,2,Southeastern Anatolia - East AdministrativeArea1,TUR,2,2
+TUR,TRC31,3,Mardin,TRC3,3_PRC,..
+TUR,TRC32,3,Batman,TRC3,3_IN,..
+TUR,TRC33,3,Sirnak,TRC3,3_PRC,..
+TUR,TRC34,3,Siirt,TRC3,3_PRC,..
+GBR,GBR,1,United Kingdom,GBR,1,1
+GBR,UKC,2,North East England AdministrativeArea1,GBR,2,2
+GBR,UKC11,3,Hartlepool and Stockton-on-Tees,UKC,3_PU,MR-M
+GBR,UKC12,3,South Teesside,UKC,3_PU,MR-M
+GBR,UKC13,3,Darlington,UKC,3_PU,NMR-M
+GBR,UKC14,3,Durham CC,UKC,3_PU,NMR-M
+GBR,UKC21,3,Northumberland,UKC,3_INC,MR-M
+GBR,UKC22,3,Tyneside,UKC,3_PU,MR-M
+GBR,UKC23,3,Sunderland,UKC,3_PU,MR-M
+GBR,UKD,2,North West England AdministrativeArea1,GBR,2,2
+GBR,UKD11,3,West Cumbria,UKD,3_INR,NMR-R
+GBR,UKD12,3,East Cumbria,UKD,3_INC,NMR-S
+GBR,UKD33,3,Manchester,UKD,3_PU,MR-L
+GBR,UKD34,3,Greater Manchester South West,UKD,3_PU,MR-L
+GBR,UKD35,3,Greater Manchester South East,UKD,3_PU,MR-L
+GBR,UKD36,3,Greater Manchester North West,UKD,3_PU,MR-L
+GBR,UKD37,3,Greater Manchester North East,UKD,3_PU,MR-L
+GBR,UKD41,3,Blackburn with Darwen,UKD,3_PU,MR-M
+GBR,UKD42,3,Blackpool,UKD,3_PU,MR-M
+GBR,UKD44,3,Lancaster & Wyre,UKD,3_PU,NMR-M
+GBR,UKD45,3,Mid Lancashire,UKD,3_PU,MR-M
+GBR,UKD46,3,East Lancashire,UKD,3_PU,NMR-S
+GBR,UKD47,3,Chorley & West Lancashire,UKD,3_PU,NMR-S
+GBR,UKD61,3,Warrington,UKD,3_PU,NMR-M
+GBR,UKD62,3,Cheshire East,UKD,3_PU,NMR-S
+GBR,UKD63,3,Cheshire West and Chester,UKD,3_PU,MR-M
+GBR,UKD71,3,East Merseyside,UKD,3_PU,MR-M
+GBR,UKD72,3,Liverpool,UKD,3_PU,MR-M
+GBR,UKD73,3,Sefton,UKD,3_PU,MR-M
+GBR,UKD74,3,Wirral,UKD,3_PU,MR-M
+GBR,UKE,2,Yorkshire and The Humber AdministrativeArea1,GBR,2,2
+GBR,UKE11,3,"Kingston Upon Hull, City of",UKE,3_PU,MR-M
+GBR,UKE12,3,East Riding of Yorkshire,UKE,3_PU,MR-M
+GBR,UKE13,3,North and North East Lincolnshire,UKE,3_INC,NMR-M
+GBR,UKE21,3,York,UKE,3_INC,NMR-M
+GBR,UKE22,3,North Yorkshire CC,UKE,3_INC,NMR-S
+GBR,UKE31,3,"Barnsley, Doncaster and Rotherham",UKE,3_PU,MR-M
+GBR,UKE32,3,Sheffield,UKE,3_PU,MR-M
+GBR,UKE41,3,Bradford,UKE,3_PU,MR-L
+GBR,UKE42,3,Leeds,UKE,3_PU,MR-L
+GBR,UKE44,3,Calderdale and Kirklees,UKE,3_PU,MR-L
+GBR,UKE45,3,Wakefield,UKE,3_PU,MR-L
+GBR,UKF,2,East Midlands AdministrativeArea1,GBR,2,2
+GBR,UKF11,3,Derby,UKF,3_PU,MR-M
+GBR,UKF12,3,East Derbyshire,UKF,3_PU,NMR-M
+GBR,UKF13,3,South and West Derbyshire,UKF,3_PU,MR-M
+GBR,UKF14,3,Nottingham,UKF,3_PU,MR-M
+GBR,UKF15,3,North Nottinghamshire,UKF,3_PU,NMR-M
+GBR,UKF16,3,South Nottinghamshire,UKF,3_PU,MR-M
+GBR,UKF21,3,Leicester,UKF,3_PU,MR-M
+GBR,UKF22,3,Leicestershire CC and Rutland,UKF,3_PU,MR-M
+GBR,UKF24,3,West Northamptonshire,UKF,3_INC,NMR-M
+GBR,UKF25,3,North Northamptonshire,UKF,3_PU,NMR-M
+GBR,UKF30,3,Lincolnshire,UKF,3_INC,NMR-M
+GBR,UKG,2,West Midlands AdministrativeArea1,GBR,2,2
+GBR,UKG11,3,"Herefordshire, County of",UKG,3_PRC,NMR-S
+GBR,UKG12,3,Worcestershire,UKG,3_INC,NMR-M
+GBR,UKG13,3,Warwickshire,UKG,3_PU,MR-M
+GBR,UKG21,3,Telford and Wrekin,UKG,3_INC,NMR-M
+GBR,UKG22,3,Shropshire CC,UKG,3_INC,NMR-M
+GBR,UKG23,3,Stoke-on-Trent,UKG,3_PU,MR-M
+GBR,UKG24,3,Staffordshire CC,UKG,3_PU,MR-M
+GBR,UKG31,3,Birmingham,UKG,3_PU,MR-L
+GBR,UKG32,3,Solihull,UKG,3_PU,MR-L
+GBR,UKG33,3,Coventry,UKG,3_PU,MR-M
+GBR,UKG36,3,Dudley,UKG,3_PU,MR-L
+GBR,UKG37,3,Sandwell,UKG,3_PU,MR-L
+GBR,UKG38,3,Walsall,UKG,3_PU,MR-L
+GBR,UKG39,3,Wolverhampton,UKG,3_PU,MR-L
+GBR,UKH,2,East of England AdministrativeArea1,GBR,2,2
+GBR,UKH11,3,Peterborough,UKH,3_PU,NMR-S
+GBR,UKH12,3,Cambridgeshire CC,UKH,3_INC,NMR-M
+GBR,UKH14,3,Suffolk,UKH,3_INC,MR-M
+GBR,UKH15,3,Norwich & East Norfolk,UKH,3_PU,MR-M
+GBR,UKH16,3,North & West Norfolk,UKH,3_PRC,NMR-M
+GBR,UKH17,3,Breckland & South Norfolk,UKH,3_PRC,NMR-M
+GBR,UKH21,3,Luton,UKH,3_PU,NMR-M
+GBR,UKH23,3,Hertfordshire,UKH,3_PU,MR-L
+GBR,UKH24,3,Bedford,UKH,3_PU,NMR-M
+GBR,UKH25,3,Central Bedfordshire,UKH,3_PU,NMR-M
+GBR,UKH31,3,Southend-on-Sea,UKH,3_PU,MR-L
+GBR,UKH32,3,Thurrock,UKH,3_PU,MR-L
+GBR,UKH34,3,Essex Haven Gateway,UKH,3_INC,NMR-M
+GBR,UKH35,3,West Essex,UKH,3_INC,MR-L
+GBR,UKH36,3,Heart of Essex,UKH,3_PU,MR-L
+GBR,UKH37,3,Essex Thames Gateway,UKH,3_PU,MR-L
+GBR,UKI,2,Greater London AdministrativeArea1,GBR,2,2
+GBR,UKI31,3,Camden & City of London,UKI,3_PU,MR-L
+GBR,UKI32,3,Westminster,UKI,3_PU,MR-L
+GBR,UKI33,3,Kensington and Chelsea & Hammersmith and Fulham,UKI,3_PU,MR-L
+GBR,UKI34,3,Wandsworth,UKI,3_PU,MR-L
+GBR,UKI41,3,Hackney & Newham,UKI,3_PU,MR-L
+GBR,UKI42,3,Tower Hamlets,UKI,3_PU,MR-L
+GBR,UKI43,3,Haringey & Islington,UKI,3_PU,MR-L
+GBR,UKI44,3,Lewisham & Southwark,UKI,3_PU,MR-L
+GBR,UKI45,3,Lambeth,UKI,3_PU,MR-L
+GBR,UKI51,3,Bexley & Greenwich,UKI,3_PU,MR-L
+GBR,UKI52,3,Barking and Dagenham & Havering,UKI,3_PU,MR-L
+GBR,UKI53,3,Redbridge & Waltham Forest,UKI,3_PU,MR-L
+GBR,UKI54,3,Enfield,UKI,3_PU,MR-L
+GBR,UKI61,3,Bromley,UKI,3_PU,MR-L
+GBR,UKI62,3,Croydon,UKI,3_PU,MR-L
+GBR,UKI63,3,"Merton, Kingston upon Thames & Sutton",UKI,3_PU,MR-L
+GBR,UKI7,EU2,Outer London - West and North West,GBR,EU2,EU2
+GBR,UKI71,3,Barnet,UKI,3_PU,MR-L
+GBR,UKI72,3,Brent,UKI,3_PU,MR-L
+GBR,UKI73,3,Ealing,UKI,3_PU,MR-L
+GBR,UKI74,3,Harrow & Hillingdon,UKI,3_PU,MR-L
+GBR,UKI75,3,Hounslow & Richmond upon Thames,UKI,3_PU,MR-L
+GBR,UKJ,2,South East England AdministrativeArea1,GBR,2,2
+GBR,UKJ11,3,Berkshire,UKJ,3_PU,MR-M
+GBR,UKJ12,3,Milton Keynes,UKJ,3_PU,MR-M
+GBR,UKJ13,3,Buckinghamshire CC,UKJ,3_INC,NMR-M
+GBR,UKJ14,3,Oxfordshire,UKJ,3_INC,NMR-S
+GBR,UKJ21,3,Brighton and Hove,UKJ,3_PU,MR-M
+GBR,UKJ22,3,East Sussex CC,UKJ,3_INC,NMR-M
+GBR,UKJ25,3,West Surrey,UKJ,3_PU,MR-M
+GBR,UKJ26,3,East Surrey,UKJ,3_PU,MR-L
+GBR,UKJ27,3,West Sussex (South West),UKJ,3_PU,NMR-M
+GBR,UKJ28,3,West Sussex (North East),UKJ,3_PU,NMR-M
+GBR,UKJ31,3,Portsmouth,UKJ,3_PU,MR-M
+GBR,UKJ32,3,Southampton,UKJ,3_PU,MR-M
+GBR,UKJ34,3,Isle of Wight,UKJ,3_PU,NMR-R
+GBR,UKJ35,3,South Hampshire,UKJ,3_PU,MR-M
+GBR,UKJ36,3,Central Hampshire,UKJ,3_PU,NMR-M
+GBR,UKJ37,3,North Hampshire,UKJ,3_PU,NMR-M
+GBR,UKJ41,3,Medway,UKJ,3_PU,MR-L
+GBR,UKJ43,3,Kent Thames Gateway,UKJ,3_PU,MR-M
+GBR,UKJ44,3,East Kent,UKJ,3_PU,NMR-S
+GBR,UKJ45,3,Mid Kent,UKJ,3_INC,NMR-S
+GBR,UKJ46,3,West Kent,UKJ,3_INC,MR-L
+GBR,UKK,2,South West England AdministrativeArea1,GBR,2,2
+GBR,UKK11,3,"Bristol, City of",UKK,3_PU,MR-M
+GBR,UKK12,3,"Bath and North East Somerset, North Somerset and South Gloucestershire",UKK,3_PU,MR-M
+GBR,UKK13,3,Gloucestershire,UKK,3_INC,NMR-M
+GBR,UKK14,3,Swindon,UKK,3_INC,NMR-M
+GBR,UKK15,3,Wiltshire CC,UKK,3_INC,NMR-M
+GBR,UKK21,3,Bournemouth and Poole,UKK,3_PU,MR-M
+GBR,UKK22,3,Dorset CC,UKK,3_PU,NMR-M
+GBR,UKK23,3,Somerset,UKK,3_INC,NMR-M
+GBR,UKK30,3,Cornwall and Isles of Scilly,UKK,3_INR,NMR-R
+GBR,UKK41,3,Plymouth,UKK,3_PU,NMR-M
+GBR,UKK42,3,Torbay,UKK,3_PU,NMR-M
+GBR,UKK43,3,Devon CC,UKK,3_INC,MR-M
+GBR,UKL,2,Wales AdministrativeArea1,GBR,2,2
+GBR,UKL11,3,Isle of Anglesey,UKL,3_PRR,NMR-R
+GBR,UKL12,3,Gwynedd,UKL,3_PRR,NMR-R
+GBR,UKL13,3,Conwy and Denbighshire,UKL,3_INC,NMR-M
+GBR,UKL14,3,South West Wales,UKL,3_PRR,NMR-R
+GBR,UKL15,3,Central Valleys,UKL,3_PU,MR-M
+GBR,UKL16,3,Gwent Valleys,UKL,3_PU,MR-M
+GBR,UKL17,3,Bridgend and Neath Port Talbot,UKL,3_PU,MR-M
+GBR,UKL18,3,Swansea,UKL,3_PU,MR-M
+GBR,UKL21,3,Monmouthshire and Newport,UKL,3_PU,NMR-M
+GBR,UKL22,3,Cardiff and Vale of Glamorgan,UKL,3_PU,MR-M
+GBR,UKL23,3,Flintshire and Wrexham,UKL,3_PU,MR-M
+GBR,UKL24,3,Powys,UKL,3_PRR,NMR-R
+GBR,UKM,2,Scotland AdministrativeArea1,GBR,2,2
+GBR,UKM50,3,Aberdeen City and Aberdeenshire,UKM,3_INC,MR-M
+GBR,UKM61,3,Caithness & Sutherland and Ross & Cromarty,UKM,3_PRR,NMR-R
+GBR,UKM62,3,"Inverness & Nairn and Moray, Badenoch & Strathspey",UKM,3_INR,NMR-R
+GBR,UKM63,3,"Lochaber, Skye & Lochalsh, Arran & Cumbrae and Argyll & Bute",UKM,3_PRR,NMR-R
+GBR,UKM64,3,Eilean Siar (Western Isles),UKM,3_PRR,NMR-R
+GBR,UKM65,3,Orkney Islands,UKM,3_PRR,NMR-R
+GBR,UKM66,3,Shetland Islands,UKM,3_PRR,NMR-R
+GBR,UKM71,3,Angus and Dundee City,UKM,3_PU,NMR-M
+GBR,UKM72,3,Clackmannanshire and Fife,UKM,3_PU,NMR-M
+GBR,UKM73,3,East Lothian and Midlothian,UKM,3_PU,MR-M
+GBR,UKM75,3,"Edinburgh, City of",UKM,3_PU,MR-M
+GBR,UKM76,3,Falkirk,UKM,3_PU,NMR-M
+GBR,UKM77,3,Perth & Kinross and Stirling,UKM,3_INC,NMR-M
+GBR,UKM78,3,West Lothian,UKM,3_PU,MR-M
+GBR,UKM81,3,"East Dunbartonshire, West Dunbartonshire and Helensburgh & Lomond",UKM,3_PU,MR-L
+GBR,UKM82,3,Glasgow City,UKM,3_PU,MR-L
+GBR,UKM83,3,"Inverclyde, East Renfrewshire and Renfrewshire",UKM,3_PU,MR-L
+GBR,UKM84,3,North Lanarkshire,UKM,3_PU,MR-L
+GBR,UKM91,3,Scottish Borders,UKM,3_PRR,NMR-R
+GBR,UKM92,3,Dumfries & Galloway,UKM,3_PRC,NMR-R
+GBR,UKM93,3,East Ayrshire and North Ayrshire mainland,UKM,3_INC,NMR-R
+GBR,UKM94,3,South Ayrshire,UKM,3_INC,NMR-M
+GBR,UKM95,3,South Lanarkshire,UKM,3_PU,MR-L
+GBR,UKN,2,Northern Ireland AdministrativeArea1,GBR,2,2
+GBR,UKN06,3,Belfast,UKN,3_PU,MR-M
+GBR,UKN07,3,"Armagh City, Banbridge and Craigavon",UKN,3_PRC,NMR-R
+GBR,UKN08,3,"Newry, Mourne and Down",UKN,3_PRC,NMR-R
+GBR,UKN09,3,Ards and C193North Down ,UKN,3_INC,MR-M
+GBR,UKN10,3,Derry City and Strabane,UKN,3_INC,NMR-S
+GBR,UKN11,3,Mid Ulster,UKN,3_PRC,NMR-M
+GBR,UKN12,3,Causeway Coast and Glens,UKN,3_INC,NMR-R
+GBR,UKN13,3,Antrim and Newtownabbey,UKN,3_INC,MR-M
+GBR,UKN14,3,Lisburn and Castlereagh,UKN,3_PU,MR-M
+GBR,UKN15,3,Mid and East Antrim,UKN,3_INC,NMR-R
+GBR,UKN16,3,Fermanagh and Omagh,UKN,3_PRC,NMR-M
+GBR,UKN02,OLD_2_2013,Outer Belfast,UKN,OLD3_PU,OLD_2_2013
+GBR,UKN03,OLD_2_2013,East of Northern Ireland,UKN,OLD3_INC,OLD_2_2013
+GBR,UKN04,OLD_2_2013,North of Northern Ireland,UKN,OLD3_INC,OLD_2_2013
+GBR,UKN05,OLD_2_2013,West and South of Northern Ireland,UKN,OLD3_PRC,OLD_2_2013
+USA,USA,1,United States,USA,1,1
+USA,US01,2,Alabama AdministrativeArea1,USA,2,2
+USA,US02,2,Alaska AdministrativeArea1,USA,2,2
+USA,US04,2,Arizona AdministrativeArea1,USA,2,2
+USA,US05,2,Arkansas AdministrativeArea1,USA,2,2
+USA,US06,2,California AdministrativeArea1,USA,2,2
+USA,US08,2,Colorado AdministrativeArea1,USA,2,2
+USA,US09,2,Connecticut AdministrativeArea1,USA,2,2
+USA,US10,2,Delaware AdministrativeArea1,USA,2,2
+USA,US11,2,District of Columbia AdministrativeArea1,USA,2,2
+USA,US12,2,Florida AdministrativeArea1,USA,2,2
+USA,US13,2,Georgia AdministrativeArea1,USA,2,2
+USA,US15,2,Hawaii AdministrativeArea1,USA,2,2
+USA,US16,2,Idaho AdministrativeArea1,USA,2,2
+USA,US17,2,Illinois AdministrativeArea1,USA,2,2
+USA,US18,2,Indiana AdministrativeArea1,USA,2,2
+USA,US19,2,Iowa AdministrativeArea1,USA,2,2
+USA,US20,2,Kansas AdministrativeArea1,USA,2,2
+USA,US21,2,Kentucky AdministrativeArea1,USA,2,2
+USA,US22,2,Louisiana AdministrativeArea1,USA,2,2
+USA,US23,2,Maine AdministrativeArea1,USA,2,2
+USA,US24,2,Maryland AdministrativeArea1,USA,2,2
+USA,US25,2,Massachusetts AdministrativeArea1,USA,2,2
+USA,US26,2,Michigan AdministrativeArea1,USA,2,2
+USA,US27,2,Minnesota AdministrativeArea1,USA,2,2
+USA,US28,2,Mississippi AdministrativeArea1,USA,2,2
+USA,US29,2,Missouri AdministrativeArea1,USA,2,2
+USA,US30,2,Montana (US) AdministrativeArea1,USA,2,2
+USA,US31,2,Nebraska AdministrativeArea1,USA,2,2
+USA,US32,2,Nevada AdministrativeArea1,USA,2,2
+USA,US33,2,New Hampshire AdministrativeArea1,USA,2,2
+USA,US34,2,New Jersey AdministrativeArea1,USA,2,2
+USA,US35,2,New Mexico AdministrativeArea1,USA,2,2
+USA,US36,2,New York AdministrativeArea1,USA,2,2
+USA,US37,2,North Carolina AdministrativeArea1,USA,2,2
+USA,US38,2,North Dakota AdministrativeArea1,USA,2,2
+USA,US39,2,Ohio AdministrativeArea1,USA,2,2
+USA,US40,2,Oklahoma AdministrativeArea1,USA,2,2
+USA,US41,2,Oregon AdministrativeArea1,USA,2,2
+USA,US42,2,Pennsylvania AdministrativeArea1,USA,2,2
+USA,US44,2,Rhode Island AdministrativeArea1,USA,2,2
+USA,US45,2,South Carolina AdministrativeArea1,USA,2,2
+USA,US46,2,South Dakota AdministrativeArea1,USA,2,2
+USA,US47,2,Tennessee AdministrativeArea1,USA,2,2
+USA,US48,2,Texas AdministrativeArea1,USA,2,2
+USA,US49,2,Utah AdministrativeArea1,USA,2,2
+USA,US50,2,Vermont AdministrativeArea1,USA,2,2
+USA,US51,2,Virginia AdministrativeArea1,USA,2,2
+USA,US53,2,Washington AdministrativeArea1,USA,2,2
+USA,US54,2,West Virginia AdministrativeArea1,USA,2,2
+USA,US55,2,Wisconsin AdministrativeArea1,USA,2,2
+USA,US56,2,Wyoming AdministrativeArea1,USA,2,2
+..,USA_TL3,..,United States TL3,USA,..,..
+EA18,EA18,1,Euro Area (18 countries),EA18,1,1
+E19,EA19,1,Euro Area (19 countries),EA19,1,1
+E28,EU28,1,EU-28,EU28,1,1
+OECD,OECD,1,OECD,OECD,1,1
+..,,..,Non-OECD Member Economies,,..,..
+BRA,BRA,1,Brazil,,1,1
+BRA,BR01,2,Acre AdministrativeArea1,BRA,2,2
+BRA,BR02,2,Amapá AdministrativeArea1,BRA,2,2
+BRA,BR03,2,Amazonas AdministrativeArea1,BRA,2,2
+BRA,BR04,2,Pará AdministrativeArea1,BRA,2,2
+BRA,BR05,2,Rondônia AdministrativeArea1,BRA,2,2
+BRA,BR06,2,Roraima AdministrativeArea1,BRA,2,2
+BRA,BR07,2,Tocantins AdministrativeArea1,BRA,2,2
+BRA,BR08,2,Alagoas AdministrativeArea1,BRA,2,2
+BRA,BR09,2,Bahia AdministrativeArea1,BRA,2,2
+BRA,BR10,2,Ceará AdministrativeArea1,BRA,2,2
+BRA,BR11,2,Maranhão AdministrativeArea1,BRA,2,2
+BRA,BR12,2,Paraíba AdministrativeArea1,BRA,2,2
+BRA,BR13,2,Pernambuco AdministrativeArea1,BRA,2,2
+BRA,BR14,2,Piauí AdministrativeArea1,BRA,2,2
+BRA,BR15,2,Rio Grande Do Norte AdministrativeArea1,BRA,2,2
+BRA,BR16,2,Sergipe AdministrativeArea1,BRA,2,2
+BRA,BR17,2,Espírito Santo AdministrativeArea1,BRA,2,2
+BRA,BR18,2,Minas Gerais AdministrativeArea1,BRA,2,2
+BRA,BR19,2,Rio De Janeiro AdministrativeArea1,BRA,2,2
+BRA,BR20,2,São Paulo AdministrativeArea1,BRA,2,2
+BRA,BR21,2,Paraná AdministrativeArea1,BRA,2,2
+BRA,BR22,2,Rio Grande Do Sul AdministrativeArea1,BRA,2,2
+BRA,BR23,2,Santa Catarina AdministrativeArea1,BRA,2,2
+BRA,BR24,2,Distrito Federal (BR) AdministrativeArea1,BRA,2,2
+BRA,BR25,2,Goiás AdministrativeArea1,BRA,2,2
+BRA,BR26,2,Mato Grosso AdministrativeArea1,BRA,2,2
+BRA,BR27,2,Mato Grosso Do Sul AdministrativeArea1,BRA,2,2
+BGR,BGR,1,Bulgaria,,1,1
+BGR,BG31,2,North West AdministrativeArea1,BGR,2,2
+BGR,BG311,3,Vidin,BG31,3_PRC,3
+BGR,BG312,3,Montana (BG),BG31,3_INC,3
+BGR,BG313,3,Vratsa,BG31,3_INC,3
+BGR,BG314,3,Pleven,BG31,3_INC,3
+BGR,BG315,3,Lovech,BG31,3_INR,3
+BGR,BG32,2,North Central AdministrativeArea1,BGR,2,2
+BGR,BG321,3,Veliko Tarnovo,BG32,3_INC,3
+BGR,BG322,3,Gabrovo,BG32,3_INC,3
+BGR,BG323,3,Ruse,BG32,3_INC,3
+BGR,BG324,3,Razgrad,BG32,3_PRC,3
+BGR,BG325,3,Silistra,BG32,3_PRR,3
+BGR,BG33,2,North East AdministrativeArea1,BGR,2,2
+BGR,BG331,3,Varna,BG33,3_INC,3
+BGR,BG332,3,Dobrich,BG33,3_INC,3
+BGR,BG333,3,Shumen,BG33,3_INC,3
+BGR,BG334,3,Targovishte,BG33,3_PRR,3
+BGR,BG34,2,South East AdministrativeArea1,BGR,2,2
+BGR,BG341,3,Burgas,BG34,3_INC,3
+BGR,BG342,3,Sliven,BG34,3_INC,3
+BGR,BG343,3,Yambol,BG34,3_INC,3
+BGR,BG344,3,Starazagora,BG34,3_INC,3
+BGR,BG41,2,South West AdministrativeArea1,BGR,2,2
+BGR,BG411,3,Sofia (Stolitsa),BG41,3_PU,3
+BGR,BG412,3,Sofia,BG41,3_PRC,3
+BGR,BG413,3,Blagoevgrad,BG41,3_INR,3
+BGR,BG414,3,Pernik,BG41,3_INC,3
+BGR,BG415,3,Kyustendil,BG41,3_INC,3
+BGR,BG42,2,South Central AdministrativeArea1,BGR,2,2
+BGR,BG421,3,Plovdiv,BG42,3_INC,3
+BGR,BG422,3,Haskovo,BG42,3_INC,3
+BGR,BG423,3,Pazardzhik,BG42,3_INC,3
+BGR,BG424,3,Smolyan,BG42,3_PRR,3
+BGR,BG425,3,Kardzhali,BG42,3_PRR,3
+CHN,CHN,1,China,,1,1
+CHN,CN01,2,Beijing AdministrativeArea1,CHN,2,2
+CHN,CN02,2,Tianjin AdministrativeArea1,CHN,2,2
+CHN,CN03,2,Hebei AdministrativeArea1,CHN,2,2
+CHN,CN04,2,Shanxi AdministrativeArea1,CHN,2,2
+CHN,CN05,2,Inner Mongolia AdministrativeArea1,CHN,2,2
+CHN,CN06,2,Liaoning AdministrativeArea1,CHN,2,2
+CHN,CN07,2,Jilin AdministrativeArea1,CHN,2,2
+CHN,CN08,2,Heilongjiang AdministrativeArea1,CHN,2,2
+CHN,CN09,2,Shanghai AdministrativeArea1,CHN,2,2
+CHN,CN10,2,Jiangsu AdministrativeArea1,CHN,2,2
+CHN,CN11,2,Zhejiang AdministrativeArea1,CHN,2,2
+CHN,CN12,2,Anhui AdministrativeArea1,CHN,2,2
+CHN,CN13,2,Fujian AdministrativeArea1,CHN,2,2
+CHN,CN14,2,Jiangxi AdministrativeArea1,CHN,2,2
+CHN,CN15,2,Shandong AdministrativeArea1,CHN,2,2
+CHN,CN16,2,Henan AdministrativeArea1,CHN,2,2
+CHN,CN17,2,Hubei AdministrativeArea1,CHN,2,2
+CHN,CN18,2,Hunan AdministrativeArea1,CHN,2,2
+CHN,CN19,2,Guangdong AdministrativeArea1,CHN,2,2
+CHN,CN20,2,Guangxi AdministrativeArea1,CHN,2,2
+CHN,CN21,2,Hainan AdministrativeArea1,CHN,2,2
+CHN,CN22,2,Chongqing AdministrativeArea1,CHN,2,2
+CHN,CN23,2,Sichuan AdministrativeArea1,CHN,2,2
+CHN,CN24,2,Guizhou AdministrativeArea1,CHN,2,2
+CHN,CN25,2,Yunnan AdministrativeArea1,CHN,2,2
+CHN,CN26,2,Tibet AdministrativeArea1,CHN,2,2
+CHN,CN27,2,Shaanxi AdministrativeArea1,CHN,2,2
+CHN,CN28,2,Gansu AdministrativeArea1,CHN,2,2
+CHN,CN29,2,Qinghai AdministrativeArea1,CHN,2,2
+CHN,CN30,2,Ningxia AdministrativeArea1,CHN,2,2
+CHN,CN31,2,Xinjiang AdministrativeArea1,CHN,2,2
+COL,COL,1,Colombia,,1,1
+COL,CO05,2,Antioquia AdministrativeArea1,COL,2,2
+COL,CO08,2,Atlántico AdministrativeArea1,COL,2,2
+COL,CO11,2,Bogotá Capital District AdministrativeArea1,COL,2,2
+COL,CO13,2,Bolívar AdministrativeArea1,COL,2,2
+COL,CO15,2,Boyacá AdministrativeArea1,COL,2,2
+COL,CO17,2,Caldas AdministrativeArea1,COL,2,2
+COL,CO18,2,Caquetá AdministrativeArea1,COL,2,2
+COL,CO19,2,Cauca AdministrativeArea1,COL,2,2
+COL,CO20,2,Cesar AdministrativeArea1,COL,2,2
+COL,CO23,2,Córdoba (CO) AdministrativeArea1,COL,2,2
+COL,CO25,2,Cundinamarca AdministrativeArea1,COL,2,2
+COL,CO27,2,Chocó AdministrativeArea1,COL,2,2
+COL,CO41,2,Huila AdministrativeArea1,COL,2,2
+COL,CO44,2,La Guajira AdministrativeArea1,COL,2,2
+COL,CO47,2,Magdalena AdministrativeArea1,COL,2,2
+COL,CO50,2,Meta AdministrativeArea1,COL,2,2
+COL,CO52,2,Nariño AdministrativeArea1,COL,2,2
+COL,CO54,2,Norte de Santander AdministrativeArea1,COL,2,2
+COL,CO63,2,Quindio AdministrativeArea1,COL,2,2
+COL,CO66,2,Risaralda AdministrativeArea1,COL,2,2
+COL,CO68,2,Santander AdministrativeArea1,COL,2,2
+COL,CO70,2,Sucre AdministrativeArea1,COL,2,2
+COL,CO73,2,Tolima AdministrativeArea1,COL,2,2
+COL,CO76,2,Valle del Cauca AdministrativeArea1,COL,2,2
+COL,CO81,2,Arauca AdministrativeArea1,COL,2,2
+COL,CO85,2,Casanare AdministrativeArea1,COL,2,2
+COL,CO86,2,Putumayo AdministrativeArea1,COL,2,2
+COL,CO88,2,San Andrés AdministrativeArea1,COL,2,2
+COL,CO90,2,Grupo Amazonía AdministrativeArea1,COL,2,2
+COL,CO91,2,Amazonas AdministrativeArea1,COL,2,2
+COL,CO94,2,Guainía AdministrativeArea1,COL,2,2
+COL,CO95,2,Guaviare AdministrativeArea1,COL,2,2
+COL,CO97,2,Vaupés AdministrativeArea1,COL,2,2
+COL,CO99,2,Vichada AdministrativeArea1,COL,2,2
+CRI,CRI,1,Costa Rica,,1,1
+CRI,CR01,2,Central  AdministrativeArea1,CRI,2,2
+CRI,CR02,2,Chorotega AdministrativeArea1,CRI,2,2
+CRI,CR03,2,Central Pacific AdministrativeArea1,CRI,2,2
+CRI,CR04,2,Brunca AdministrativeArea1,CRI,2,2
+CRI,CR05,2,Huetar Caribbean AdministrativeArea1,CRI,2,2
+CRI,CR06,2,North Huetar  AdministrativeArea1,CRI,2,2
+HRV,HRV,1,Croatia,,1,1
+HRV,HR03,2,Adriatic Croatia AdministrativeArea1,HRV,2,2
+HRV,HR031,3,Primorje-Gorski Kotar County,HR03,3_INC,3
+HRV,HR032,3,Lika-Senj County,HR03,3_PRR,3
+HRV,HR033,3,Zadar County,HR03,3_PRR,3
+HRV,HR034,3,Sibenik-Knin County,HR03,3_INR,3
+HRV,HR035,3,Split-Dalmatia County,HR03,3_INC,3
+HRV,HR036,3,Istria County,HR03,3_PRR,3
+HRV,HR037,3,Dubrovnik-Neretva County,HR03,3_INR,3
+HRV,HR04,2,Continental Croatia AdministrativeArea1,HRV,2,2
+HRV,HR041,3,City of Zagreb,HR04,3_PU,3
+HRV,HR042,3,Zagreb County,HR04,3_PRC,3
+HRV,HR043,3,Krapina-Zagorje County,HR04,3_PRC,3
+HRV,HR044,3,Varazdin County,HR04,3_INR,3
+HRV,HR045,3,Koprivnica-Krizevci County,HR04,3_PRR,3
+HRV,HR046,3,Medimurje County,HR04,3_PRR,3
+HRV,HR047,3,Bjelovar-Bilogora County,HR04,3_PRR,3
+HRV,HR048,3,Virovitica-Podravina County,HR04,3_PRR,3
+HRV,HR049,3,Pozega-Slavonia County,HR04,3_PRR,3
+HRV,HR04A,3,Brod-Posavina County,HR04,3_INC,3
+HRV,HR04B,3,Osijek-Baranja County,HR04,3_INC,3
+HRV,HR04C,3,Vukovar-Srijem County,HR04,3_PRC,3
+HRV,HR04D,3,Karlovac County,HR04,3_PRC,3
+HRV,HR04E,3,Sisak-Moslavina County,HR04,3_PRR,3
+IND,IND,1,India,,1,1
+IND,IN01,2,Jammu and Kashmir AdministrativeArea1,IND,2,2
+IND,IN02,2,Himachal Pradesh AdministrativeArea1,IND,2,2
+IND,IN03,2,National Capital Territory of Delhi AdministrativeArea1,IND,2,2
+IND,IN04,2,Rajasthan AdministrativeArea1,IND,2,2
+IND,IN05,2,Uttar Pradesh AdministrativeArea1,IND,2,2
+IND,IN06,2,Sikkim AdministrativeArea1,IND,2,2
+IND,IN07,2,Arunachal Pradesh AdministrativeArea1,IND,2,2
+IND,IN08,2,Nagaland AdministrativeArea1,IND,2,2
+IND,IN09,2,Meghalaya AdministrativeArea1,IND,2,2
+IND,IN10,2,Assam AdministrativeArea1,IND,2,2
+IND,IN11,2,West Bengal AdministrativeArea1,IND,2,2
+IND,IN12,2,Gujarat AdministrativeArea1,IND,2,2
+IND,IN13,2,Dadra & Nagar Haveli  AdministrativeArea1,IND,2,2
+IND,IN14,2,Maharashtra AdministrativeArea1,IND,2,2
+IND,IN15,2,Daman & Diu AdministrativeArea1,IND,2,2
+IND,IN16,2,Lakshadweep  AdministrativeArea1,IND,2,2
+IND,IN17,2,Kerala AdministrativeArea1,IND,2,2
+IND,IN18,2,Punjab AdministrativeArea1,IND,2,2
+IND,IN19,2,Chandigarh  AdministrativeArea1,IND,2,2
+IND,IN20,2,Haryana AdministrativeArea1,IND,2,2
+IND,IN21,2,Uttaranchal AdministrativeArea1,IND,2,2
+IND,IN22,2,Bihar AdministrativeArea1,IND,2,2
+IND,IN23,2,Jharkhand AdministrativeArea1,IND,2,2
+IND,IN24,2,Manipur AdministrativeArea1,IND,2,2
+IND,IN25,2,Mizoram AdministrativeArea1,IND,2,2
+IND,IN26,2,Tripura AdministrativeArea1,IND,2,2
+IND,IN27,2,Orissa AdministrativeArea1,IND,2,2
+IND,IN28,2,Madhya Pradesh AdministrativeArea1,IND,2,2
+IND,IN29,2,Chhattisgarh AdministrativeArea1,IND,2,2
+IND,IN30,2,Andhra Pradesh AdministrativeArea1,IND,2,2
+IND,IN31,2,Karnataka AdministrativeArea1,IND,2,2
+IND,IN32,2,Goa AdministrativeArea1,IND,2,2
+IND,IN33,2,Tamil Nadu AdministrativeArea1,IND,2,2
+IND,IN34,2,Puducherry AdministrativeArea1,IND,2,2
+IND,IN35,2,Andaman and Nicobar Islands AdministrativeArea1,IND,2,2
+IND,IN36,2,Telangana AdministrativeArea1,IND,2,2
+IDN,IDN,1,Indonesia,,1,1
+IDN,ID01,2,DKI Jakarta Province AdministrativeArea1,IDN,2,2
+IDN,ID02,2,Banten Province  AdministrativeArea1,IDN,2,2
+IDN,ID03,2,D.I. Yogyakarta Province AdministrativeArea1,IDN,2,2
+IDN,ID04,2,West Java Province AdministrativeArea1,IDN,2,2
+IDN,ID05,2,East Java Province AdministrativeArea1,IDN,2,2
+IDN,ID06,2,Central Java Province AdministrativeArea1,IDN,2,2
+IDN,ID07,2,Bali Province AdministrativeArea1,IDN,2,2
+IDN,ID08,2,Aceh Province AdministrativeArea1,IDN,2,2
+IDN,ID09,2,North Sumatera Province AdministrativeArea1,IDN,2,2
+IDN,ID10,2,Bengkulu Province AdministrativeArea1,IDN,2,2
+IDN,ID11,2,Riau Province AdministrativeArea1,IDN,2,2
+IDN,ID12,2,Riau Mainland Province AdministrativeArea1,IDN,2,2
+IDN,ID13,2,West Sumatera Province AdministrativeArea1,IDN,2,2
+IDN,ID14,2,South Sumatera Province AdministrativeArea1,IDN,2,2
+IDN,ID15,2,Bangka Belitung Province AdministrativeArea1,IDN,2,2
+IDN,ID16,2,Jambi Province AdministrativeArea1,IDN,2,2
+IDN,ID17,2,Lampung Province AdministrativeArea1,IDN,2,2
+IDN,ID18,2,Papua Province AdministrativeArea1,IDN,2,2
+IDN,ID19,2,West Papua Province AdministrativeArea1,IDN,2,2
+IDN,ID20,2,Gorontalo Province AdministrativeArea1,IDN,2,2
+IDN,ID21,2,West Kalimantan Province AdministrativeArea1,IDN,2,2
+IDN,ID22,2,South Kalimantan Province AdministrativeArea1,IDN,2,2
+IDN,ID23,2,Middle Kalimantan Province AdministrativeArea1,IDN,2,2
+IDN,ID24,2,East Kalimantan Province AdministrativeArea1,IDN,2,2
+IDN,ID25,2,Maluku Province AdministrativeArea1,IDN,2,2
+IDN,ID26,2,North Maluku Province AdministrativeArea1,IDN,2,2
+IDN,ID27,2,South East Sulawesi Province AdministrativeArea1,IDN,2,2
+IDN,ID28,2,North Sulawesi Province AdministrativeArea1,IDN,2,2
+IDN,ID29,2,South Sulawesi Province AdministrativeArea1,IDN,2,2
+IDN,ID30,2,Middle Sulawesi Province AdministrativeArea1,IDN,2,2
+IDN,ID31,2,West Sulawesi Province AdministrativeArea1,IDN,2,2
+IDN,ID32,2,Western Lesser Sundas Province AdministrativeArea1,IDN,2,2
+IDN,ID33,2,Eastern Lesser Sundas Province AdministrativeArea1,IDN,2,2
+MLT,MLT,1,Malta,,1,1
+MLT,MT00,2,Malta AdministrativeArea1,MLT,2,2
+MLT,MT001,3,Malta,MT00,3_PU,3
+MLT,MT002,3,Malta,MT00,3_PU,3
+PER,PER,1,Peru,,1,1
+PER,PE01,2,Amazonas (PE) AdministrativeArea1,PER,2,2
+PER,PE02,2,Áncash AdministrativeArea1,PER,2,2
+PER,PE03,2,Apurímac AdministrativeArea1,PER,2,2
+PER,PE04,2,Arequipa AdministrativeArea1,PER,2,2
+PER,PE05,2,Ayacucho AdministrativeArea1,PER,2,2
+PER,PE06,2,Cajamarca AdministrativeArea1,PER,2,2
+PER,PE07,2,Prov. const. del Callao AdministrativeArea1,PER,2,2
+PER,PE08,2,Cusco AdministrativeArea1,PER,2,2
+PER,PE09,2,Huancavelica AdministrativeArea1,PER,2,2
+PER,PE10,2,Huánuco AdministrativeArea1,PER,2,2
+PER,PE11,2,Ica AdministrativeArea1,PER,2,2
+PER,PE12,2,Junín AdministrativeArea1,PER,2,2
+PER,PE13,2,La Libertad AdministrativeArea1,PER,2,2
+PER,PE14,2,Lambayeque AdministrativeArea1,PER,2,2
+PER,PE15,2,Lima AdministrativeArea1,PER,2,2
+PER,PE16,2,Loreto AdministrativeArea1,PER,2,2
+PER,PE17,2,Madre de dios AdministrativeArea1,PER,2,2
+PER,PE18,2,Moquegua AdministrativeArea1,PER,2,2
+PER,PE19,2,Pasco AdministrativeArea1,PER,2,2
+PER,PE20,2,Piura AdministrativeArea1,PER,2,2
+PER,PE21,2,Puno AdministrativeArea1,PER,2,2
+PER,PE22,2,San Martin AdministrativeArea1,PER,2,2
+PER,PE23,2,Tacna AdministrativeArea1,PER,2,2
+PER,PE24,2,Tumbes AdministrativeArea1,PER,2,2
+PER,PE25,2,Ucayali AdministrativeArea1,PER,2,2
+ROU,ROU,1,Romania,,1,1
+ROU,RO11,2,North West AdministrativeArea1,ROU,2,2
+ROU,RO111,3,Bihor,RO11,3_PRC,3
+ROU,RO112,3,Bistrita-Nasaud,RO11,3_PRR,3
+ROU,RO113,3,Cluj,RO11,3_INC,3
+ROU,RO114,3,Maramures,RO11,3_PRR,3
+ROU,RO115,3,Satumare,RO11,3_PRC,3
+ROU,RO116,3,Salaj,RO11,3_PRR,3
+ROU,RO12,2,Center AdministrativeArea1,ROU,2,2
+ROU,RO121,3,Alba,RO12,3_PRC,3
+ROU,RO122,3,Brasov,RO12,3_INC,3
+ROU,RO123,3,Covasna,RO12,3_PRR,3
+ROU,RO124,3,Harghita,RO12,3_PRR,3
+ROU,RO125,3,Mures,RO12,3_PRC,3
+ROU,RO126,3,Sibiu,RO12,3_INC,3
+ROU,RO21,2,North East AdministrativeArea1,ROU,2,2
+ROU,RO211,3,Bacau,RO21,3_PRC,3
+ROU,RO212,3,Botosani,RO21,3_PRC,3
+ROU,RO213,3,Iasi,RO21,3_INC,3
+ROU,RO214,3,Neamt,RO21,3_PRC,3
+ROU,RO215,3,Suceava,RO21,3_PRC,3
+ROU,RO216,3,Vaslui,RO21,3_PRR,3
+ROU,RO22,2,South East AdministrativeArea1,ROU,2,2
+ROU,RO221,3,Braila,RO22,3_PU,3
+ROU,RO222,3,Buzau,RO22,3_PRC,3
+ROU,RO223,3,Constanta,RO22,3_INC,3
+ROU,RO224,3,Galati,RO22,3_INC,3
+ROU,RO225,3,Tulcea,RO22,3_PRC,3
+ROU,RO226,3,Vrancea,RO22,3_PRC,3
+ROU,RO31,2,South - Muntenia AdministrativeArea1,ROU,2,2
+ROU,RO311,3,Arges,RO31,3_PRC,3
+ROU,RO312,3,Calarasi,RO31,3_PRC,3
+ROU,RO313,3,Dambovita,RO31,3_PRC,3
+ROU,RO314,3,Giurgiu,RO31,3_PRC,3
+ROU,RO315,3,Ialomita,RO31,3_PRR,3
+ROU,RO316,3,Prahova,RO31,3_INC,3
+ROU,RO317,3,Teleorman,RO31,3_PRR,3
+ROU,RO32,2,Bucharest - Ilfov AdministrativeArea1,ROU,2,2
+ROU,RO321,3,Bucuresti,RO32,3_PU,3
+ROU,RO322,3,Ilfov,RO32,3_PU,3
+ROU,RO41,2,South West Oltenia AdministrativeArea1,ROU,2,2
+ROU,RO411,3,Dolj,RO41,3_INC,3
+ROU,RO412,3,Gorj,RO41,3_PRC,3
+ROU,RO413,3,Mehedinti,RO41,3_PRC,3
+ROU,RO414,3,Olt,RO41,3_PRC,3
+ROU,RO415,3,Valcea,RO41,3_PRC,3
+ROU,RO42,2,West AdministrativeArea1,ROU,2,2
+ROU,RO421,3,Arad,RO42,3_INC,3
+ROU,RO422,3,Caras-Severin,RO42,3_PRR,3
+ROU,RO423,3,Hunedoara,RO42,3_INR,3
+ROU,RO424,3,Timis,RO42,3_INC,3
+RUS,RUS,1,Russia,,1,1
+RUS,RU01,2,Belgorod Oblast AdministrativeArea1,RUS,2,2
+RUS,RU02,2,Bryansk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU03,2,Vladimir Oblast AdministrativeArea1,RUS,2,2
+RUS,RU04,2,Voronezh Oblast AdministrativeArea1,RUS,2,2
+RUS,RU05,2,Ivanovo Oblast AdministrativeArea1,RUS,2,2
+RUS,RU06,2,Kaluga Oblast AdministrativeArea1,RUS,2,2
+RUS,RU07,2,Kostroma Oblast AdministrativeArea1,RUS,2,2
+RUS,RU08,2,Kursk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU09,2,Lipetsk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU10,2,Moscow Oblast AdministrativeArea1,RUS,2,2
+RUS,RU11,2,Oryol Oblast AdministrativeArea1,RUS,2,2
+RUS,RU12,2,Ryazan Oblast AdministrativeArea1,RUS,2,2
+RUS,RU13,2,Smolensk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU14,2,Tambov Oblast AdministrativeArea1,RUS,2,2
+RUS,RU15,2,Tver Oblast AdministrativeArea1,RUS,2,2
+RUS,RU16,2,Tula Oblast AdministrativeArea1,RUS,2,2
+RUS,RU17,2,Yaroslavl Oblast AdministrativeArea1,RUS,2,2
+RUS,RU18,2,City of Moscow AdministrativeArea1,RUS,2,2
+RUS,RU19,2,Republic of Karelia AdministrativeArea1,RUS,2,2
+RUS,RU20,2,Komi republic AdministrativeArea1,RUS,2,2
+RUS,RU21,2,Arkhangelsk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU22,2,Nenets Autonomous Okrug AdministrativeArea1,RUS,2,2
+RUS,RU23,2,Vologda Oblast AdministrativeArea1,RUS,2,2
+RUS,RU24,2,Kaliningrad Oblast AdministrativeArea1,RUS,2,2
+RUS,RU25,2,Leningrad Oblast AdministrativeArea1,RUS,2,2
+RUS,RU26,2,Murmansk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU27,2,Novgorod Oblast AdministrativeArea1,RUS,2,2
+RUS,RU28,2,Pskov Oblast AdministrativeArea1,RUS,2,2
+RUS,RU29,2,Federal City of Saint Petersburg AdministrativeArea1,RUS,2,2
+RUS,RU30,2,Republic of Adygea AdministrativeArea1,RUS,2,2
+RUS,RU31,2,Republic of Kalmykia AdministrativeArea1,RUS,2,2
+RUS,RU32,2,Krasnodar Krai AdministrativeArea1,RUS,2,2
+RUS,RU33,2,Astrakhan Oblast AdministrativeArea1,RUS,2,2
+RUS,RU34,2,Volgograd Oblast AdministrativeArea1,RUS,2,2
+RUS,RU35,2,Rostov Oblast AdministrativeArea1,RUS,2,2
+RUS,RU36,2,Republic of Dagestan AdministrativeArea1,RUS,2,2
+RUS,RU37,2,Republic of Ingushetia AdministrativeArea1,RUS,2,2
+RUS,RU38,2,Kabardino-Balkar Republic AdministrativeArea1,RUS,2,2
+RUS,RU39,2,Karachay-Cherkhess Republic AdministrativeArea1,RUS,2,2
+RUS,RU40,2,Republic of North Ossetia-Alania AdministrativeArea1,RUS,2,2
+RUS,RU41,2,Chechen Republic AdministrativeArea1,RUS,2,2
+RUS,RU42,2,Stavropol Krai AdministrativeArea1,RUS,2,2
+RUS,RU43,2,Republic of Bashkorstostan AdministrativeArea1,RUS,2,2
+RUS,RU44,2,Mari El Republic AdministrativeArea1,RUS,2,2
+RUS,RU45,2,Republic of Mordovia AdministrativeArea1,RUS,2,2
+RUS,RU46,2,Republic of Tatarstan AdministrativeArea1,RUS,2,2
+RUS,RU47,2,Udmurt Republic AdministrativeArea1,RUS,2,2
+RUS,RU48,2,Chuvash Republic AdministrativeArea1,RUS,2,2
+RUS,RU49,2,Perm Krai AdministrativeArea1,RUS,2,2
+RUS,RU50,2,Kirov Oblast AdministrativeArea1,RUS,2,2
+RUS,RU51,2,Nizhny Novgorod Oblast AdministrativeArea1,RUS,2,2
+RUS,RU52,2,Orenburg Oblast AdministrativeArea1,RUS,2,2
+RUS,RU53,2,Penza Oblast AdministrativeArea1,RUS,2,2
+RUS,RU54,2,Samara Oblast AdministrativeArea1,RUS,2,2
+RUS,RU55,2,Saratov Oblast AdministrativeArea1,RUS,2,2
+RUS,RU56,2,Ulianov Oblast AdministrativeArea1,RUS,2,2
+RUS,RU57,2,Kurgan Oblast AdministrativeArea1,RUS,2,2
+RUS,RU58,2,Sverdlovsk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU59,2,Tyumen Oblast AdministrativeArea1,RUS,2,2
+RUS,RU60,2,Khanty-Mansi Autonomous Okrug - Yugra AdministrativeArea1,RUS,2,2
+RUS,RU61,2,Yamalo-Nenets Autonomous Okrug AdministrativeArea1,RUS,2,2
+RUS,RU62,2,Chelyabinsk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU63,2,Republic of Altai AdministrativeArea1,RUS,2,2
+RUS,RU64,2,Buryat Republic AdministrativeArea1,RUS,2,2
+RUS,RU65,2,Tyva Republic AdministrativeArea1,RUS,2,2
+RUS,RU66,2,Republic of Khakassia  AdministrativeArea1,RUS,2,2
+RUS,RU67,2,Altai Krai AdministrativeArea1,RUS,2,2
+RUS,RU68,2,Zabaykalsky Krai AdministrativeArea1,RUS,2,2
+RUS,RU69,2,Krasnoyarsk Krai AdministrativeArea1,RUS,2,2
+RUS,RU70,2,Irkutsk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU71,2,Kemerovo oblast AdministrativeArea1,RUS,2,2
+RUS,RU72,2,Novosibirsk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU73,2,Omsk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU74,2,Tomsk Oblast AdministrativeArea1,RUS,2,2
+RUS,RU75,2,Sakha Republic (Yakutia) AdministrativeArea1,RUS,2,2
+RUS,RU76,2,Kamchatka Krai AdministrativeArea1,RUS,2,2
+RUS,RU77,2,Primorsky Krai AdministrativeArea1,RUS,2,2
+RUS,RU78,2,Khabarovsk Krai AdministrativeArea1,RUS,2,2
+RUS,RU79,2,Amur Oblast AdministrativeArea1,RUS,2,2
+RUS,RU80,2,Magadan Oblast AdministrativeArea1,RUS,2,2
+RUS,RU81,2,Sakhalin Oblast AdministrativeArea1,RUS,2,2
+RUS,RU82,2,Jewish Autonomous Oblast AdministrativeArea1,RUS,2,2
+RUS,RU83,2,Chukotka Autonomous Okrug AdministrativeArea1,RUS,2,2
+TUN,TUN,1,Tunisia,,1,1
+TUN,TN1,2,District de Tunis AdministrativeArea1,TUN,2,2
+TUN,TN11,3,Tunis,TN1,3_PU,3
+TUN,TN12,3,Ariana,TN1,3_PU,3
+TUN,TN13,3,Ben Arous,TN1,3_PU,3
+TUN,TN14,3,Manouba,TN1,3_PU,3
+TUN,TN2,2,Nord-Est AdministrativeArea1,TUN,2,2
+TUN,TN21,3,Nabeul,TN2,3_INR,3
+TUN,TN22,3,Zaghouan,TN2,3_INR,3
+TUN,TN23,3,Bizerte,TN2,3_INC,3
+TUN,TN3,2,Nord-Ouest AdministrativeArea1,TUN,2,2
+TUN,TN31,3,Béja,TN3,3_INR,3
+TUN,TN32,3,Jendouba,TN3,3_PU,3
+TUN,TN33,3,Le Kef,TN3,3_INC,3
+TUN,TN34,3,Siliana,TN3,3_INR,3
+TUN,TN4,2,Centre-Est AdministrativeArea1,TUN,2,2
+TUN,TN41,3,Sousse,TN4,3_PU,3
+TUN,TN42,3,Monastir,TN4,3_PU,3
+TUN,TN43,3,Mahdia,TN4,3_INC,3
+TUN,TN44,3,Sfax,TN4,3_PU,3
+TUN,TN5,2,Centre-Ouest AdministrativeArea1,TUN,2,2
+TUN,TN51,3,Kairouan,TN5,3_INC,3
+TUN,TN52,3,Kasserine,TN5,3_PU,3
+TUN,TN53,3,Sidi Bouzid,TN5,3_PU,3
+TUN,TN6,2,Sud-Est AdministrativeArea1,TUN,2,2
+TUN,TN61,3,Gabés,TN6,3_PU,3
+TUN,TN62,3,Médenine,TN6,3_INR,3
+TUN,TN63,3,Tataouine,TN6,3_INC,3
+TUN,TN7,2,Sud-Ouest AdministrativeArea1,TUN,2,2
+TUN,TN71,3,Gafsa,TN7,3_PU,3
+TUN,TN72,3,Tozeur,TN7,3_INR,3
+TUN,TN73,3,Kébili,TN7,3_INR,3
+ZAF,ZAF,1,South Africa,,1,1
+ZAF,ZA01,2,Eastern Cape AdministrativeArea1,ZAF,2,2
+ZAF,ZA02,2,Free State AdministrativeArea1,ZAF,2,2
+ZAF,ZA03,2,Gauteng AdministrativeArea1,ZAF,2,2
+ZAF,ZA04,2,KwaZulu-Natal AdministrativeArea1,ZAF,2,2
+ZAF,ZA05,2,Limpopo AdministrativeArea1,ZAF,2,2
+ZAF,ZA06,2,Mpumalanga AdministrativeArea1,ZAF,2,2
+ZAF,ZA07,2,Northern Cape AdministrativeArea1,ZAF,2,2
+ZAF,ZA08,2,North West AdministrativeArea1,ZAF,2,2
+ZAF,ZA09,2,Western Cape AdministrativeArea1,ZAF,2,2
