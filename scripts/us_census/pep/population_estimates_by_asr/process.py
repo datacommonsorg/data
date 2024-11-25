@@ -286,7 +286,9 @@ class USCensusPEPByASR:
             self._generate_mcf(sv_list)
             self._generate_tmcf()
         else:
-            logging.fatal(f"File processing mismatch: Expected {total_files_to_process} files, but processed {processed_count}. Output file generation aborted")
+            logging.fatal(
+                f"File processing mismatch: Expected {total_files_to_process} files, but processed {processed_count}. Output file generation aborted"
+            )
 
 
 def download_files():
@@ -358,6 +360,7 @@ def main(_):
                                   tmcf_path)
         loader.process()
     logging.info("Task completed!")
+
 
 if __name__ == "__main__":
     app.run(main)

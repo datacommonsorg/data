@@ -28,10 +28,14 @@ def national2029(url_file: str, output_folder: str):
     df = pd.read_csv(url_file, header=0)
     df.drop(df[(df['SEX'] == 0) | (df['AGE'] == 999)].index, inplace=True)
     df = df.replace({'SEX': {2: 'Female', 1: 'Male'}})
-    pop_estimate_cols = [col for col in df.columns if col.startswith('POPESTIMATE')]
-    df = df.drop(columns=df.columns.difference(['geo_ID','AGE','SEX','RACE']+pop_estimate_cols))
+    pop_estimate_cols = [
+        col for col in df.columns if col.startswith('POPESTIMATE')
+    ]
+    df = df.drop(
+        columns=df.columns.difference(['geo_ID', 'AGE', 'SEX', 'RACE'] +
+                                      pop_estimate_cols))
     df['SVs'] = "Count_Person_" + df['AGE'].astype(str) + "Years_" + df['SEX']
-    df.drop(columns=['AGE','SEX'], inplace=True)
+    df.drop(columns=['AGE', 'SEX'], inplace=True)
     df = df.melt(id_vars=['SVs'], var_name='Year', value_name='observation')
     df['Year'] = df['Year'].apply(extract_year)
     df['Measurement_Method'] = 'CensusPEPSurvey'

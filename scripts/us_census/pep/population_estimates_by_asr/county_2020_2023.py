@@ -53,17 +53,18 @@ def county2029(url_file: str, output_folder: str):
         'HNA_MALE', 'HNA_FEMALE', 'HTOM_MALE', 'HTOM_FEMALE'
     ])
 
-    columns = ['Year', 'geo_ID', 'AGEGRP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE',
-       'WA_FEMALE', 'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE',
-       'AA_FEMALE', 'NA_MALE', 'NA_FEMALE', 'TOM_MALE', 'TOM_FEMALE',
-       'WAC_MALE', 'WAC_FEMALE', 'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE',
-       'IAC_FEMALE', 'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE',
-       'NHWAC_MALE', 'NHWAC_FEMALE', 'NHBAC_MALE', 'NHBAC_FEMALE',
-       'NHIAC_MALE', 'NHIAC_FEMALE', 'NHAAC_MALE', 'NHAAC_FEMALE',
-       'NHNAC_MALE', 'NHNAC_FEMALE', 'HWAC_MALE', 'HWAC_FEMALE', 'HBAC_MALE',
-       'HBAC_FEMALE', 'HIAC_MALE', 'HIAC_FEMALE', 'HAAC_MALE', 'HAAC_FEMALE',
-       'HNAC_MALE', 'HNAC_FEMALE']
-
+    columns = [
+        'Year', 'geo_ID', 'AGEGRP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE',
+        'WA_FEMALE', 'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE',
+        'AA_FEMALE', 'NA_MALE', 'NA_FEMALE', 'TOM_MALE', 'TOM_FEMALE',
+        'WAC_MALE', 'WAC_FEMALE', 'BAC_MALE', 'BAC_FEMALE', 'IAC_MALE',
+        'IAC_FEMALE', 'AAC_MALE', 'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE',
+        'NHWAC_MALE', 'NHWAC_FEMALE', 'NHBAC_MALE', 'NHBAC_FEMALE',
+        'NHIAC_MALE', 'NHIAC_FEMALE', 'NHAAC_MALE', 'NHAAC_FEMALE',
+        'NHNAC_MALE', 'NHNAC_FEMALE', 'HWAC_MALE', 'HWAC_FEMALE', 'HBAC_MALE',
+        'HBAC_FEMALE', 'HIAC_MALE', 'HIAC_FEMALE', 'HAAC_MALE', 'HAAC_FEMALE',
+        'HNAC_MALE', 'HNAC_FEMALE'
+    ]
 
     df['Year'] = df['YEAR']
     df.drop(columns=['YEAR'], inplace=True)

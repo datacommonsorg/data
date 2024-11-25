@@ -56,12 +56,16 @@ def state2029(url_file: str, output_folder: str):
     # df.drop(columns=['SUMLEV','REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
     #    'ESTIMATESBASE2020'], inplace=True)
 
-    pop_estimate_cols = [col for col in df.columns if col.startswith('POPESTIMATE')]
-    df = df.drop(columns=df.columns.difference(['geo_ID','AGE','SEX','RACE']+pop_estimate_cols))
+    pop_estimate_cols = [
+        col for col in df.columns if col.startswith('POPESTIMATE')
+    ]
+    df = df.drop(
+        columns=df.columns.difference(['geo_ID', 'AGE', 'SEX', 'RACE'] +
+                                      pop_estimate_cols))
     df = df.melt(id_vars=['geo_ID','AGE','SEX','RACE'], var_name='Year' , \
        value_name='observation')
     # Making the years more understandable.
-    df['Year'] = df['Year'].apply(extract_year)    
+    df['Year'] = df['Year'].apply(extract_year)
     # df = df.replace({
     #     "Year": {
     #         'POPESTIMATE2020': '2020',
@@ -73,7 +77,7 @@ def state2029(url_file: str, output_folder: str):
     df['SVs'] = 'Count_Person_' + df['AGE'] + '_' + df['SEX'] + '_' + df['RACE']
     # df_as is used to get aggregated data of age/sex.
     df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
-    df = df.drop(columns=['AGE','SEX','RACE'])
+    df = df.drop(columns=['AGE', 'SEX', 'RACE'])
     df_as = pd.DataFrame()
     df_as = pd.concat([df_as, df])
     df_as = df_as[~df_as["SVs"].str.contains("Total")]
