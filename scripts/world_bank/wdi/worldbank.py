@@ -27,12 +27,16 @@ import zipfile
 import io
 import time
 import re
+import os
 
-FLAGS = flags.FLAGS
-flags.DEFINE_boolean("fetchFromSource", False,
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_FLAGS = flags.FLAGS
+flags.DEFINE_boolean("fetchFromSource", True,
                      "Whether to bypass cached CSVs and fetch from source.")
-flags.DEFINE_string("indicatorSchemaFile", None,
-                    "Path to indicator schema CSV file.")
+flags.DEFINE_string("indicatorSchemaFile",
+                    os.path.join(_MODULE_DIR,
+                                 "schema_csvs/WorldBankIndicators_prod.csv"),"")
+flags.DEFINE_string('mode', '', 'Options: download or process')
 
 # Remaps the columns provided by World Bank API.
 WORLDBANK_COL_REMAP = {
@@ -46,9 +50,10 @@ TEMPLATE_TMCF = """Node: E:WorldBank->E{idx}
 typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
-observationPeriod: "P1Y"
+observationPeriod: C:WorldBank->observationPeriod
 observationAbout: C:WorldBank->ISO3166Alpha3
 value: C:WorldBank->Value{idx}
+unit: C:WorldBank->unit
 """
 
 TEMPLATE_STAT_VAR = """
@@ -203,7 +208,7 @@ RESOLUTION_TO_EXISTING_DCID = {
 }
 
 
-def read_worldbank(iso3166alpha3, fetchFromSource):
+def read_worldbank(iso3166alpha3, mode):
     """ Fetches and tidies all ~1500 World Bank indicators
         for a given ISO 3166 alpha 3 code.
 
@@ -224,7 +229,7 @@ def read_worldbank(iso3166alpha3, fetchFromSource):
             Takes approximately 10 seconds to download and
             tidy one country in a Jupyter notebook.
     """
-    if fetchFromSource:
+    if mode in ["download", '']:
         logging.info('Downloading %s', iso3166alpha3)
         country_zip = ("http://api.worldbank.org/v2/en/country/" +
                        iso3166alpha3 + "?downloadformat=csv")
@@ -279,6 +284,8 @@ def read_worldbank(iso3166alpha3, fetchFromSource):
         # Convert to numeric and drop empty values.
         df['Value'] = pd.to_numeric(df['Value'])
         df = df.dropna()
+        if not os.path.exists(os.path.join(_MODULE_DIR, 'preprocessed_source_csv')):
+            os.mkdir(os.path.join(_MODULE_DIR, 'preprocessed_source_csv'))
         df.to_csv('preprocessed_source_csv/' + iso3166alpha3 + '.csv',
                   index=False)
     else:
@@ -346,7 +353,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
     """
     # All the statistical observation properties that we included.
     properties_of_stat_var_observation = ([
-        'measurementMethod', 'scalingFactor', 'unit'
+        'measurementMethod', 'scalingFactor'
     ])
     # List of tuples to return.
     tmcfs_for_stat_vars = []
@@ -359,7 +366,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
                               repeat=len(properties_of_stat_var_observation))):
         codes_that_match = null_status.copy()
         base_template_mcf = TEMPLATE_TMCF
-        cols_to_include_in_csv = ['IndicatorCode']
+        cols_to_include_in_csv = ['IndicatorCode', 'unit']
 
         # Loop over each obs column and whether to include it.
         for include_col, column in (zip(permutation,
@@ -380,7 +387,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
 
 
 def download_indicator_data(worldbank_countries, indicator_codes,
-                            fetchFromSource):
+                            mode):
     """ Downloads World Bank country data for all countries and
             indicators provided.
 
@@ -400,7 +407,7 @@ def download_indicator_data(worldbank_countries, indicator_codes,
     indicators_to_keep = list(indicator_codes['IndicatorCode'].unique())
 
     for index, country_code in enumerate(worldbank_countries['ISO3166Alpha3']):
-        country_df = read_worldbank(country_code, fetchFromSource)
+        country_df = read_worldbank(country_code, mode)
 
         # Remove unneccessary indicators.
         country_df = country_df[country_df['IndicatorCode'].isin(
@@ -433,7 +440,7 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
     """
     # Only include a subset of columns in the final csv
     output_csv = worldbank_dataframe[[
-        'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year', 'Value'
+        'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year', 'Value', 'observationPeriod'
     ]]
 
     # Output tmcf and csv for each unique World Bank grouping.
@@ -442,6 +449,7 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
         'IndicatorCode',
         'ISO3166Alpha3',
         'Year',
+        'observationPeriod'
     ])
     with open('output/WorldBank.tmcf', 'w', newline='') as f_out:
         for index, enum in enumerate(tmcfs_for_stat_vars):
@@ -464,6 +472,7 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
                     'IndicatorCode',
                     'ISO3166Alpha3',
                     'Year',
+                    'observationPeriod',
                 ])
     # Include the Stat Observation columns in the output CSV.
     df = df.merge(indicator_codes[stat_var_obs_cols], on='IndicatorCode')
@@ -503,11 +512,7 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
                                       existing_stat_var_lookup[indicator_code])
     return row
 
-
-def main(_):
-    # Load statistical variable configuration file.
-    indicator_codes = pd.read_csv(FLAGS.indicatorSchemaFile, dtype=str)
-
+def process(indicator_codes, worldbank_dataframe):
     # Add source description to note.
     def add_source_to_description(row):
         if not pd.isna(row['Source']):
@@ -531,12 +536,6 @@ def main(_):
     tmcfs_for_stat_vars = (
         group_stat_vars_by_observation_properties(indicator_codes))
 
-    # Download data for all countries.
-    worldbank_countries = pd.read_csv("WorldBankCountries.csv")
-    worldbank_dataframe = download_indicator_data(worldbank_countries,
-                                                  indicator_codes,
-                                                  FLAGS.fetchFromSource)
-
     # Remap columns to match expected format.
     worldbank_dataframe['Value'] = pd.to_numeric(worldbank_dataframe['Value'])
     worldbank_dataframe['ISO3166Alpha3'] = (
@@ -549,27 +548,37 @@ def main(_):
 
     # Scale values by scaling factor and replace exisiting StatVars.
     scaling_factor_lookup = (indicator_codes.set_index('IndicatorCode')
-                             ['sourceScalingFactor'].dropna().to_dict())
+                            ['sourceScalingFactor'].dropna().to_dict())
     existing_stat_var_lookup = (indicator_codes.set_index('IndicatorCode')
                                 ['ExistingStatVar'].dropna().to_dict())
     worldbank_dataframe = worldbank_dataframe.apply(
         lambda row: source_scaling_remap(row, scaling_factor_lookup,
-                                         existing_stat_var_lookup),
+                                        existing_stat_var_lookup),
         axis=1)
 
     # Convert integer columns.
     int_cols = (list(indicator_codes[indicator_codes['ConvertToInt'] == True]
-                     ['IndicatorCode'].unique()))
+                    ['IndicatorCode'].unique()))
     worldbank_subset = worldbank_dataframe[
         worldbank_dataframe['IndicatorCode'].isin(int_cols)].index
     worldbank_dataframe.loc[worldbank_subset, "Value"] = (pd.to_numeric(
         worldbank_dataframe.loc[worldbank_subset, "Value"], downcast="integer"))
-
+    worldbank_dataframe['observationPeriod'] = worldbank_dataframe['StatisticalVariable'].apply(
+    lambda x: '' if x in ['dcid:FertilityRate_Person_Female', 'dcid:LifeExpectancy_Person'] else 'P1Y')
     # Output final CSVs and variables.
     output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
                                     indicator_codes)
 
+def main(_):
+    mode = _FLAGS.mode
+    # Load statistical variable configuration file.
+    indicator_codes = pd.read_csv(_FLAGS.indicatorSchemaFile, dtype=str)
+    worldbank_countries = pd.read_csv("WorldBankCountries.csv")
+    worldbank_dataframe = download_indicator_data(worldbank_countries,
+                                                    indicator_codes,
+                                                    _FLAGS.mode)
+    if mode == "" or mode == "process":
+        process(indicator_codes, worldbank_dataframe)
 
 if __name__ == '__main__':
-    flags.mark_flag_as_required('indicatorSchemaFile')
     app.run(main)

@@ -1,0 +1,23 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "WorldDevelopmentIndicators",
+            "curator_emails": [
+                "sanikap@google.com"
+            ],
+            "provenance_url": "https://datacatalog.worldbank.org/dataset/world-development-indicators/",
+            "provenance_description": "Variables related to demographics, energy, health, labor, etc. from the World Bank",
+            "scripts": [
+                "worldbank.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "WorldBank.tmcf",
+                    "cleaned_csv": "WorldBank.csv",
+                    "node_mcf": "WorldBank.mcf"
+                }
+            ],
+            "cron_schedule": "15 17 15 * *"
+        }
+    ]
+}
