@@ -288,6 +288,7 @@ class CensusUSACountryPopulation:
         bool: Returns True if the transformation and file saving are successful, 
               False if an error occurs during processing.
         """
+
         try:
             df = self._transform_df(df)
 
@@ -310,7 +311,6 @@ class CensusUSACountryPopulation:
             self._df.to_csv(self._cleaned_csv_file_path, index=False)
         except Exception as e:
             logging.fatal(f'Error when processing file:-{e}')
-            return False
         return True
 
     def _generate_mcf(self, df_cols: list) -> None:
@@ -324,47 +324,49 @@ class CensusUSACountryPopulation:
         Returns:
             None
         """
-
-        mcf_nodes = []
-        for col in df_cols:
-            pvs = []
-            residence = ""
-            status = ""
-            armedf = ""
-            if col.lower() in ["date", "location"]:
-                continue
-            if re.findall('Resident', col):
-                if re.findall('InUSArmedForcesOverseas', col):
-                    status = "USResident__InUSArmedForcesOverseas"
-                else:
-                    status = "USResident"
-                residence = "residentStatus: dcs:" + status
-                pvs.append(residence)
-            elif re.findall('ArmedForces', col):
-                residence = "residentStatus: dcs:" + "InUSArmedForcesOverseas"
-                pvs.append(residence)
-            if re.findall('Resides', col):
-                if re.findall('Household', col):
-                    residence = "residenceType: dcs:" + "Household"
+        try:
+            mcf_nodes = []
+            for col in df_cols:
+                pvs = []
+                residence = ""
+                status = ""
+                armedf = ""
+                if col.lower() in ["date", "location"]:
+                    continue
+                if re.findall('Resident', col):
+                    if re.findall('InUSArmedForcesOverseas', col):
+                        status = "USResident__InUSArmedForcesOverseas"
+                    else:
+                        status = "USResident"
+                    residence = "residentStatus: dcs:" + status
                     pvs.append(residence)
-            if re.findall('Civilian', col):
-                armedf = "armedForcesStatus: dcs:Civilian"
-                pvs.append(armedf)
-                if re.findall('NonInstitutionalized', col):
-                    residence = ("institutionalization: dcs:" +
-                                 "USC_NonInstitutionalized")
+                elif re.findall('ArmedForces', col):
+                    residence = "residentStatus: dcs:" + "InUSArmedForcesOverseas"
                     pvs.append(residence)
-            if re.findall('Count_Person_InUSArmedForcesOverseas', col):
-                armedf = "armedForcesStatus: dcs:InArmedForces"
-                pvs.append(armedf)
-            node = _MCF_TEMPLATE.format(dcid=col, xtra_pvs='\n'.join(pvs))
-            mcf_nodes.append(node)
+                if re.findall('Resides', col):
+                    if re.findall('Household', col):
+                        residence = "residenceType: dcs:" + "Household"
+                        pvs.append(residence)
+                if re.findall('Civilian', col):
+                    armedf = "armedForcesStatus: dcs:Civilian"
+                    pvs.append(armedf)
+                    if re.findall('NonInstitutionalized', col):
+                        residence = ("institutionalization: dcs:" +
+                                     "USC_NonInstitutionalized")
+                        pvs.append(residence)
+                if re.findall('Count_Person_InUSArmedForcesOverseas', col):
+                    armedf = "armedForcesStatus: dcs:InArmedForces"
+                    pvs.append(armedf)
+                node = _MCF_TEMPLATE.format(dcid=col, xtra_pvs='\n'.join(pvs))
+                mcf_nodes.append(node)
 
-            mcf = '\n'.join(mcf_nodes)
+                mcf = '\n'.join(mcf_nodes)
 
-        # Writing Genereated MCF to local path.
-        with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(mcf.rstrip('\n'))
+            # Writing Genereated MCF to local path.
+            with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
+                f_out.write(mcf.rstrip('\n'))
+        except Exception as e:
+            logging.fatal(f'Error when Generating MCF file:-{e}')
 
     def _generate_tmcf(self, df_cols: list) -> None:
         """
