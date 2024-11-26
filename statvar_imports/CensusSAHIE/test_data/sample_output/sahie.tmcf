@@ -4,4 +4,5 @@ observationDate: C:sahie->observationDate
 value: C:sahie->value
 variableMeasured: C:sahie->variableMeasured
 observationPeriod: C:sahie->observationPeriod
+measurementMethod: C:sahie->measurementMethod
 typeOf: dcs:StatVarObservation

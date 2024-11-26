@@ -8,7 +8,7 @@ end_date,2022
 release_frequency,1Year
 process,
 comments,
-output_columns,"observationAbout, observationDate, value, variableMeasured,observationPeriod"
+output_columns,"observationAbout, observationDate, value, variableMeasured,observationPeriod, measurementMethod"
 #places_resolved_csv,
 mapped_rows,1
 mapped_columns,9
