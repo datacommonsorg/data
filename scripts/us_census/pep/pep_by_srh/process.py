@@ -712,11 +712,31 @@ def _process_county_files_2000_2010(download_dir):
                 df.insert(7, 'LOCATION', '', True)
                 df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(
                     2) + (df['COUNTY'].map(str)).str.zfill(3)
-                df.drop([
-                    'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'
-                ],
-                        axis=1,
-                        inplace=True)
+
+                # Dynamically select columns to keep
+                columns_to_keep = ['YEAR', 'LOCATION'
+                                  ]  # Retain YEAR and LOCATION columns
+
+                # Population columns (male and female for various racial/ethnic groups)
+                population_columns = [
+                    'TOT_POP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE', 'WA_FEMALE',
+                    'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE',
+                    'AA_FEMALE', 'NA_MALE', 'NA_FEMALE', 'TOM_MALE',
+                    'TOM_FEMALE', 'NH_MALE', 'NH_FEMALE', 'NHWA_MALE',
+                    'NHWA_FEMALE', 'NHBA_MALE', 'NHBA_FEMALE', 'NHIA_MALE',
+                    'NHIA_FEMALE', 'NHAA_MALE', 'NHAA_FEMALE', 'NHNA_MALE',
+                    'NHNA_FEMALE', 'NHTOM_MALE', 'NHTOM_FEMALE', 'H_MALE',
+                    'H_FEMALE', 'HWA_MALE', 'HWA_FEMALE', 'HBA_MALE',
+                    'HBA_FEMALE', 'HIA_MALE', 'HIA_FEMALE', 'HAA_MALE',
+                    'HAA_FEMALE', 'HNA_MALE', 'HNA_FEMALE', 'HTOM_MALE',
+                    'HTOM_FEMALE'
+                ]
+
+                # Add population columns to columns_to_keep
+                columns_to_keep.extend(population_columns)
+
+                # Retain only the necessary columns
+                df = df[columns_to_keep]
 
                 # Append data to the output CSV
                 if file == files_list[0]:
@@ -764,7 +784,7 @@ def _process_county_files_2000_2010(download_dir):
 
     except Exception as e:
         logging.fatal(
-            f"Fatal error during the processing of county files 2010-2020: {e}")
+            f"Fatal error during the processing of county files 2000-2010: {e}")
         return
 
 
@@ -807,33 +827,58 @@ def _process_county_files_2010_2020(download_dir):
                                  encoding='ISO-8859-1',
                                  low_memory=False)
 
-                # filter by agegrp = 0 (0 = sum of all age group added)
-                # filter years 3 - 12 (1, 2 - is base estimate and not for month July)
-                # Year 13 is removed as we getting the same for other files which is processed in _process_county_files_2020_2029
-                df = df.query("AGEGRP == 0 & YEAR not in [1, 2,13]").copy()
+                # Filter by AGEGRP = 0 (sum of all age groups added)
+                # Filter out base estimates (YEAR 1, 2) and year 13 (already processed)
+                df = df.query("AGEGRP == 0 & YEAR not in [1, 2, 13]").copy()
 
-                # convert year code to year
-                # Year code starting from 3 for Year 2010
+                # Convert year code to actual year
                 df['YEAR'] = df['YEAR'] + 2010 - 3
 
-                # add fips code for location
+                # Add fips code for location
                 df.insert(6, 'LOCATION', 'geoId/', True)
                 df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(
                     2) + (df['COUNTY'].map(str)).str.zfill(3)
 
-                # drop not reuqire columns
-                df.drop([
-                    'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'
-                ],
-                        axis=1,
-                        inplace=True)
+                # Dynamically select columns to keep
+                columns_to_keep = ['YEAR', 'LOCATION'
+                                  ]  # Retain YEAR and LOCATION columns
 
+                # Population columns (male and female for various racial/ethnic groups)
+                population_columns = [
+                    'TOT_POP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE', 'WA_FEMALE',
+                    'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE',
+                    'AA_FEMALE', 'NA_MALE', 'NA_FEMALE', 'TOM_MALE',
+                    'TOM_FEMALE', 'WAC_MALE', 'WAC_FEMALE', 'BAC_MALE',
+                    'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE', 'AAC_MALE',
+                    'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE', 'NH_MALE',
+                    'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE', 'NHBA_MALE',
+                    'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE', 'NHAA_MALE',
+                    'NHAA_FEMALE', 'NHNA_MALE', 'NHNA_FEMALE', 'NHTOM_MALE',
+                    'NHTOM_FEMALE', 'NHWAC_MALE', 'NHWAC_FEMALE', 'NHBAC_MALE',
+                    'NHBAC_FEMALE', 'NHIAC_MALE', 'NHIAC_FEMALE', 'NHAAC_MALE',
+                    'NHAAC_FEMALE', 'NHNAC_MALE', 'NHNAC_FEMALE', 'H_MALE',
+                    'H_FEMALE', 'HWA_MALE', 'HWA_FEMALE', 'HBA_MALE',
+                    'HBA_FEMALE', 'HIA_MALE', 'HIA_FEMALE', 'HAA_MALE',
+                    'HAA_FEMALE', 'HNA_MALE', 'HNA_FEMALE', 'HTOM_MALE',
+                    'HTOM_FEMALE', 'HWAC_MALE', 'HWAC_FEMALE', 'HBAC_MALE',
+                    'HBAC_FEMALE', 'HIAC_MALE', 'HIAC_FEMALE', 'HAAC_MALE',
+                    'HAAC_FEMALE', 'HNAC_MALE', 'HNAC_FEMALE'
+                ]
+
+                # Add population columns to columns_to_keep
+                columns_to_keep.extend(population_columns)
+
+                # Retain only the necessary columns
+                df = df[columns_to_keep]
+
+                # Write processed data to the output file
                 if file == files_list[0]:
                     df.to_csv(output_file_path + output_file_name, index=False)
                 else:
                     df.to_csv(output_file_path + output_file_name,
                               index=False,
-                              mode='a')
+                              mode='a',
+                              header=False)
 
                 logging.info(f"Processed and saved file: {file}")
 
@@ -858,6 +903,7 @@ def _process_county_files_2010_2020(download_dir):
             'HIAC', 'HAAC', 'HNAC'
         ]
 
+        # Dynamically aggregate male and female data for races
         for p in _NOT_HISPANIC_RACES:
             df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
@@ -916,32 +962,59 @@ def _process_county_files_2020_2029(download_dir):
                                  encoding='ISO-8859-1',
                                  low_memory=False)
 
-                # filter by agegrp = 0 (0 = sum of all age group added)
-                # filter years 3 - 13 (1, 2 - is base estimate and not for month July)
+                # Filter by AGEGRP = 0 (sum of all age groups added)
+                # Filter years 1 - 5 (exclude years 1 as it is base estimates)
                 df = df.query("AGEGRP == 0 & YEAR not in [1]").copy()
 
-                # convert year code to year
-                # Year code starting from 3 for Year 2010
+                # Convert year code to actual year
+                # Year code starting from 1 for Year 2020
                 df['YEAR'] = df['YEAR'] + 2020 - 2
 
-                # add fips code for location
+                # Add fips code for location
                 df.insert(6, 'LOCATION', 'geoId/', True)
                 df['LOCATION'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(
                     2) + (df['COUNTY'].map(str)).str.zfill(3)
 
-                # drop not reuqire columns
-                df.drop([
-                    'SUMLEV', 'STATE', 'COUNTY', 'STNAME', 'CTYNAME', 'AGEGRP'
-                ],
-                        axis=1,
-                        inplace=True)
+                # Dynamically select columns to retain
+                columns_to_keep = ['YEAR', 'LOCATION'
+                                  ]  # Retain YEAR and LOCATION columns
 
+                # Include population columns (male and female)
+                population_columns = [
+                    'TOT_POP', 'TOT_MALE', 'TOT_FEMALE', 'WA_MALE', 'WA_FEMALE',
+                    'BA_MALE', 'BA_FEMALE', 'IA_MALE', 'IA_FEMALE', 'AA_MALE',
+                    'AA_FEMALE', 'NA_MALE', 'NA_FEMALE', 'TOM_MALE',
+                    'TOM_FEMALE', 'WAC_MALE', 'WAC_FEMALE', 'BAC_MALE',
+                    'BAC_FEMALE', 'IAC_MALE', 'IAC_FEMALE', 'AAC_MALE',
+                    'AAC_FEMALE', 'NAC_MALE', 'NAC_FEMALE', 'NH_MALE',
+                    'NH_FEMALE', 'NHWA_MALE', 'NHWA_FEMALE', 'NHBA_MALE',
+                    'NHBA_FEMALE', 'NHIA_MALE', 'NHIA_FEMALE', 'NHAA_MALE',
+                    'NHAA_FEMALE', 'NHNA_MALE', 'NHNA_FEMALE', 'NHTOM_MALE',
+                    'NHTOM_FEMALE', 'NHWAC_MALE', 'NHWAC_FEMALE', 'NHBAC_MALE',
+                    'NHBAC_FEMALE', 'NHIAC_MALE', 'NHIAC_FEMALE', 'NHAAC_MALE',
+                    'NHAAC_FEMALE', 'NHNAC_MALE', 'NHNAC_FEMALE', 'H_MALE',
+                    'H_FEMALE', 'HWA_MALE', 'HWA_FEMALE', 'HBA_MALE',
+                    'HBA_FEMALE', 'HIA_MALE', 'HIA_FEMALE', 'HAA_MALE',
+                    'HAA_FEMALE', 'HNA_MALE', 'HNA_FEMALE', 'HTOM_MALE',
+                    'HTOM_FEMALE', 'HWAC_MALE', 'HWAC_FEMALE', 'HBAC_MALE',
+                    'HBAC_FEMALE', 'HIAC_MALE', 'HIAC_FEMALE', 'HAAC_MALE',
+                    'HAAC_FEMALE', 'HNAC_MALE', 'HNAC_FEMALE'
+                ]
+
+                # Add population columns to columns_to_keep
+                columns_to_keep.extend(population_columns)
+
+                # Retain only the necessary columns
+                df = df[columns_to_keep]
+
+                # Write processed data to the output file
                 if file == files_list[0]:
                     df.to_csv(output_file_path + output_file_name, index=False)
                 else:
                     df.to_csv(output_file_path + output_file_name,
                               index=False,
-                              mode='a')
+                              mode='a',
+                              header=False)
 
                 logging.info(f"Processed and saved file: {file}")
 
@@ -966,6 +1039,7 @@ def _process_county_files_2020_2029(download_dir):
             'HIAC', 'HAAC', 'HNAC'
         ]
 
+        # Dynamically aggregate male and female data for races
         for p in _NOT_HISPANIC_RACES:
             df1[p] = (df[p + '_MALE'] + df[p + '_FEMALE']).copy()
 
@@ -1005,107 +1079,141 @@ def _consolidate_national_files():
     Only SV relevant for SRH processing are retained and all other stats are 
     dropped.
 
-    This funtion consolidates both as-is and agg data into two seperate files.
+    This function consolidates both as-is and agg data into two separate files.
     """
-    national_as_is_files = [
-        _CODEDIR + PROCESS_AS_IS_DIR + yr + '/national/national_' + yr + '.csv'
-        for yr in
-        ['1980_1990', '1990_2000', '2000_2010', '2010_2020', '2020_2029']
-    ]
+    try:
+        national_as_is_files = [
+            _CODEDIR + PROCESS_AS_IS_DIR + yr + '/national/national_' + yr +
+            '.csv' for yr in
+            ['1980_1990', '1990_2000', '2000_2010', '2010_2020', '2020_2029']
+        ]
 
-    for file in national_as_is_files:
-        df = pd.read_csv(file)
+        for file in national_as_is_files:
+            try:
+                df = pd.read_csv(file)
 
-        # Drop S, SR columns 2000 - 2010 file
-        if file == national_as_is_files[2]:
-            df.drop(_SR_COLUMNS, axis=1, inplace=True)
+                # Drop S, SR columns 2000 - 2010 file
+                if file == national_as_is_files[2]:
+                    df.drop(_SR_COLUMNS, axis=1, inplace=True)
 
-        # Drop S, SR, Race Combination columns 2010 - 2020 file
-        if file == national_as_is_files[3]:
-            df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS, axis=1, inplace=True)
+                # Drop S, SR, Race Combination columns 2010 - 2020 file
+                if file == national_as_is_files[3]:
+                    df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS,
+                            axis=1,
+                            inplace=True)
 
-        if file == national_as_is_files[4]:
-            df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS, axis=1, inplace=True)
+                if file == national_as_is_files[4]:
+                    df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS,
+                            axis=1,
+                            inplace=True)
 
-        df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                     var_name='SV',
-                     value_name='OBSERVATION')
-        df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-        df["SV"] = 'dcid:' + df["SV"]
+                df = df.melt(id_vars=['YEAR', 'LOCATION'],
+                             var_name='SV',
+                             value_name='OBSERVATION')
+                df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
+                df["SV"] = 'dcid:' + df["SV"]
+                df.insert(3, 'MEASUREMENT_METHOD',
+                          'dcs:dcAggregate/CensusPEPSurvey', True)
+                df["MEASUREMENT_METHOD"] = df.apply(
+                    lambda r: _calculate_agg_measure_method(r.YEAR, r.SV),
+                    axis=1)
 
-        df.insert(3, 'MEASUREMENT_METHOD', 'dcs:dcAggregate/CensusPEPSurvey',
-                  True)
+                # Write to temp file (append)
+                if file == national_as_is_files[0]:
+                    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                              'national_consolidated_temp.csv',
+                              header=True,
+                              index=False)
+                else:
+                    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                              'national_consolidated_temp.csv',
+                              header=False,
+                              index=False,
+                              mode='a')
 
-        df["MEASUREMENT_METHOD"] = df.apply(
-            lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
 
-        if file == national_as_is_files[0]:
+        # Finalizing As-Is Data
+        try:
+            df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                             'national_consolidated_temp.csv')
+            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                      'national_consolidated_temp.csv',
+                      'national_consolidated_as_is_final.csv',
                       header=True,
                       index=False)
-        else:
-            df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                      'national_consolidated_temp.csv',
-                      header=False,
-                      index=False,
-                      mode='a')
 
-    df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                     'national_consolidated_temp.csv')
+            if os.path.exists(_CODEDIR + PROCESS_AS_IS_DIR +
+                              'national_consolidated_temp.csv'):
+                os.remove(_CODEDIR + PROCESS_AS_IS_DIR +
+                          'national_consolidated_temp.csv')
 
-    df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
-    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-              'national_consolidated_as_is_final.csv',
-              header=True,
-              index=False)
+            logging.info("Successfully consolidated as-is national data.")
 
-    if os.path.exists(_CODEDIR + PROCESS_AS_IS_DIR \
-        + 'national_consolidated_temp.csv'):
-        os.remove(_CODEDIR + PROCESS_AS_IS_DIR +
-                  'national_consolidated_temp.csv')
+        except Exception as e:
+            logging.error(f"Error during finalizing As-Is national data: {e}")
 
-    # Aggregate file processing
-    national_agg_files = [
-        _CODEDIR + PROCESS_AGG_DIR + yr + '/national/national_' + yr + '.csv'
-        for yr in
-        ['1980_1990', '1990_2000', '2000_2010', '2010_2020', '2020_2029']
-    ]
+        # Aggregate file processing
+        national_agg_files = [
+            _CODEDIR + PROCESS_AGG_DIR + yr + '/national/national_' + yr +
+            '.csv' for yr in
+            ['1980_1990', '1990_2000', '2000_2010', '2010_2020', '2020_2029']
+        ]
 
-    for file in national_agg_files:
-        df = pd.read_csv(file)
-        df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                     var_name='SV',
-                     value_name='OBSERVATION')
-        df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-        df["SV"] = 'dcid:' + df["SV"]
+        for file in national_agg_files:
+            try:
+                df = pd.read_csv(file)
+                df = df.melt(id_vars=['YEAR', 'LOCATION'],
+                             var_name='SV',
+                             value_name='OBSERVATION')
+                df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
+                df["SV"] = 'dcid:' + df["SV"]
 
-        if file == national_agg_files[0]:
+                # Write to temp file (append)
+                if file == national_agg_files[0]:
+                    df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
+                              'national_consolidated_temp.csv',
+                              header=True,
+                              index=False)
+                else:
+                    df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
+                              'national_consolidated_temp.csv',
+                              header=False,
+                              index=False,
+                              mode='a')
+
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+
+        # Finalizing Agg Data
+        try:
+            df = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR +
+                             'national_consolidated_temp.csv')
+            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+            df.insert(3, 'MEASUREMENT_METHOD',
+                      'dcs:dcAggregate/CensusPEPSurvey', True)
+            df["MEASUREMENT_METHOD"] = df.apply(
+                lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
             df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
-                      'national_consolidated_temp.csv',
+                      'national_consolidated_agg_final.csv',
                       header=True,
                       index=False)
-        else:
-            df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
-                      'national_consolidated_temp.csv',
-                      header=False,
-                      index=False,
-                      mode='a')
 
-    df = pd.read_csv(
-        _CODEDIR + PROCESS_AGG_DIR + 'national_consolidated_temp.csv',)
-    df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
-    df.insert(3, 'MEASUREMENT_METHOD', 'dcs:dcAggregate/CensusPEPSurvey', True)
-    df["MEASUREMENT_METHOD"] = df.apply(
-        lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
-    df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
-              'national_consolidated_agg_final.csv',
-              header=True,
-              index=False)
+            if os.path.exists(_CODEDIR + PROCESS_AGG_DIR +
+                              'national_consolidated_temp.csv'):
+                os.remove(_CODEDIR + PROCESS_AGG_DIR +
+                          'national_consolidated_temp.csv')
 
-    if os.path.exists(_CODEDIR + PROCESS_AGG_DIR \
-        + 'national_consolidated_temp.csv'):
-        os.remove(_CODEDIR + PROCESS_AGG_DIR + 'national_consolidated_temp.csv')
+            logging.info("Successfully consolidated agg national data.")
+
+        except Exception as e:
+            logging.error(f"Error during finalizing Agg national data: {e}")
+
+    except Exception as e:
+        logging.fatal(
+            f"Fatal error during the consolidation of national files: {e}")
+        return
 
 
 def _consolidate_state_files():
@@ -1114,225 +1222,339 @@ def _consolidate_state_files():
     Only SV relevant for SRH processing are retained and all other stats are 
     dropped.
 
-    This funtion consolidates both as-is and agg data into two seperate files.
+    This function consolidates both as-is and agg data into two separate files.
     """
-    state_as_is_files = [
-        _CODEDIR + PROCESS_AS_IS_DIR + yr + '/state/state_' + yr + '.csv' for yr
-        in ['1980_1990', '1990_2000', '2000_2010', '2010_2020', '2020_2029']
-    ]
+    try:
+        # List of state level files for as-is data
+        state_as_is_files = [
+            _CODEDIR + PROCESS_AS_IS_DIR + yr + '/state/state_' + yr + '.csv'
+            for yr in
+            ['1980_1990', '1990_2000', '2000_2010', '2010_2020', '2020_2029']
+        ]
 
-    for file in state_as_is_files:
-        df = pd.read_csv(file)
-        df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS,
-                axis=1,
-                inplace=True,
-                errors='ignore')
-        df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                     var_name='SV',
-                     value_name='OBSERVATION')
-        df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-        df["SV"] = 'dcid:' + df["SV"]
-        df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
-        df["MEASUREMENT_METHOD"] = df.apply(
-            lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
-        if file == state_as_is_files[0]:
+        # Processing As-Is Files
+        for file in state_as_is_files:
+            try:
+                df = pd.read_csv(file)
+                df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS,
+                        axis=1,
+                        inplace=True,
+                        errors='ignore')
+                df = df.melt(id_vars=['YEAR', 'LOCATION'],
+                             var_name='SV',
+                             value_name='OBSERVATION')
+                df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
+                df["SV"] = 'dcid:' + df["SV"]
+                df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
+                df["MEASUREMENT_METHOD"] = df.apply(
+                    lambda r: _calculate_asis_measure_method(r.YEAR, r.SV),
+                    axis=1)
+
+                # Writing to temp file (appending)
+                if file == state_as_is_files[0]:
+                    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                              'state_consolidated_temp.csv',
+                              header=True,
+                              index=False)
+                else:
+                    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                              'state_consolidated_temp.csv',
+                              header=False,
+                              index=False,
+                              mode='a')
+
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+
+        # Finalizing As-Is Data
+        try:
+            df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                             'state_consolidated_temp.csv')
+            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                      'state_consolidated_temp.csv',
+                      'state_consolidated_as_is_final.csv',
                       header=True,
                       index=False)
-        else:
-            df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                      'state_consolidated_temp.csv',
-                      header=False,
-                      index=False,
-                      mode='a')
 
-    df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                     'state_consolidated_temp.csv')
-    df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
-    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-              'state_consolidated_as_is_final.csv',
-              header=True,
-              index=False)
+            if os.path.exists(_CODEDIR + PROCESS_AS_IS_DIR +
+                              'state_consolidated_temp.csv'):
+                os.remove(_CODEDIR + PROCESS_AS_IS_DIR +
+                          'state_consolidated_temp.csv')
 
-    if os.path.exists(_CODEDIR + PROCESS_AS_IS_DIR \
-        + 'state_consolidated_temp.csv'):
-        os.remove(_CODEDIR + PROCESS_AS_IS_DIR + 'state_consolidated_temp.csv')
+            logging.info("Successfully consolidated as-is state data.")
 
-    # Agg file processing
-    state_agg_files = [
-        _CODEDIR + PROCESS_AGG_DIR + yr + '/state/state_' + yr + '.csv' for yr
-        in ['1980_1990', '1990_2000', '2000_2010', '2010_2020', '2020_2029']
-    ]
+        except Exception as e:
+            logging.error(f"Error during finalizing As-Is state data: {e}")
 
-    for file in state_agg_files:
-        df = pd.read_csv(file)
-        df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                     var_name='SV',
-                     value_name='OBSERVATION')
-        df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-        df["SV"] = 'dcid:' + df["SV"]
+        # Processing Agg Files
+        state_agg_files = [
+            _CODEDIR + PROCESS_AGG_DIR + yr + '/state/state_' + yr + '.csv'
+            for yr in
+            ['1980_1990', '1990_2000', '2000_2010', '2010_2020', '2020_2029']
+        ]
 
-        if file == state_agg_files[0]:
+        # Processing Agg Data Files
+        for file in state_agg_files:
+            try:
+                df = pd.read_csv(file)
+                df = df.melt(id_vars=['YEAR', 'LOCATION'],
+                             var_name='SV',
+                             value_name='OBSERVATION')
+                df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
+                df["SV"] = 'dcid:' + df["SV"]
+
+                # Writing to temp file (appending)
+                if file == state_agg_files[0]:
+                    df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
+                              'state_consolidated_temp.csv',
+                              header=True,
+                              index=False)
+                else:
+                    df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
+                              'state_consolidated_temp.csv',
+                              header=False,
+                              index=False,
+                              mode='a')
+
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+
+        # Finalizing Agg Data
+        try:
+            df = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR +
+                             'state_consolidated_temp.csv')
+            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+            df.insert(3, 'MEASUREMENT_METHOD',
+                      'dcs:dcAggregate/CensusPEPSurvey', True)
+            df["MEASUREMENT_METHOD"] = df.apply(
+                lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
             df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
-                      'state_consolidated_temp.csv',
+                      'state_consolidated_agg_final.csv',
                       header=True,
                       index=False)
-        else:
-            df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
-                      'state_consolidated_temp.csv',
-                      header=False,
-                      index=False,
-                      mode='a')
 
-    df = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR + 'state_consolidated_temp.csv')
-    df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
-    df.insert(3, 'MEASUREMENT_METHOD', 'dcs:dcAggregate/CensusPEPSurvey', True)
-    df["MEASUREMENT_METHOD"] = df.apply(
-        lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
-    df.to_csv(_CODEDIR + PROCESS_AGG_DIR + 'state_consolidated_agg_final.csv',
-              header=True,
-              index=False)
+            if os.path.exists(_CODEDIR + PROCESS_AGG_DIR +
+                              'state_consolidated_temp.csv'):
+                os.remove(_CODEDIR + PROCESS_AGG_DIR +
+                          'state_consolidated_temp.csv')
 
-    if os.path.exists(_CODEDIR + PROCESS_AGG_DIR \
-    + 'state_consolidated_temp.csv'):
-        os.remove(_CODEDIR + PROCESS_AGG_DIR + 'state_consolidated_temp.csv')
+            logging.info("Successfully consolidated agg state data.")
+
+        except Exception as e:
+            logging.error(f"Error during finalizing Agg state data: {e}")
+
+    except Exception as e:
+        logging.fatal(
+            f"Fatal error during the consolidation of state files: {e}")
+        return
 
 
 def _consolidate_county_files():
     """
-    Consolidate all (4) county level files into single county level file.
+    Consolidate all (4) county-level files into a single county-level file.
     Only SV relevant for SRH processing are retained and all other stats are 
     dropped.
 
     This function consolidates both as-is and agg data into two separate files.
     """
 
-    county_file = [
-        _CODEDIR + PROCESS_AS_IS_DIR + '1990_2000/county/county_1990_2000.csv',
-        _CODEDIR + PROCESS_AS_IS_DIR + '2000_2010/county/county_2000_2010.csv',
-        _CODEDIR + PROCESS_AS_IS_DIR + '2010_2020/county/county_2010_2020.csv',
-        _CODEDIR + PROCESS_AS_IS_DIR + '2020_2029/county/county_2020_2029.csv'
-    ]
+    try:
+        county_file = [
+            _CODEDIR + PROCESS_AS_IS_DIR +
+            '1990_2000/county/county_1990_2000.csv', _CODEDIR +
+            PROCESS_AS_IS_DIR + '2000_2010/county/county_2000_2010.csv',
+            _CODEDIR + PROCESS_AS_IS_DIR +
+            '2010_2020/county/county_2010_2020.csv', _CODEDIR +
+            PROCESS_AS_IS_DIR + '2020_2029/county/county_2020_2029.csv'
+        ]
 
-    for file in county_file:
-        df = pd.read_csv(file)
-        df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS,
-                axis=1,
-                inplace=True,
-                errors='ignore')
-        df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                     var_name='SV',
-                     value_name='OBSERVATION')
-        df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-        df["SV"] = 'dcid:' + df["SV"]
-        df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
-        df["MEASUREMENT_METHOD"] = df.apply(
-            lambda r: _calculate_asis_measure_method(r.YEAR, r.SV), axis=1)
+        # Processing As-Is Files
+        for file in county_file:
+            try:
+                df = pd.read_csv(file)
+                df.drop(_SR_COLUMNS + _SR_CMBN_COLUMNS,
+                        axis=1,
+                        inplace=True,
+                        errors='ignore')
+                df = df.melt(id_vars=['YEAR', 'LOCATION'],
+                             var_name='SV',
+                             value_name='OBSERVATION')
+                df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
+                df["SV"] = 'dcid:' + df["SV"]
+                df.insert(3, 'MEASUREMENT_METHOD', 'dcs:CensusPEPSurvey', True)
+                df["MEASUREMENT_METHOD"] = df.apply(
+                    lambda r: _calculate_asis_measure_method(r.YEAR, r.SV),
+                    axis=1)
 
-        if file == county_file[0]:
+                # Writing to temp file (appending)
+                if file == county_file[0]:
+                    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                              'county_consolidated_temp.csv',
+                              header=True,
+                              index=False)
+                else:
+                    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                              'county_consolidated_temp.csv',
+                              header=False,
+                              index=False,
+                              mode='a')
 
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+
+        # Finalizing As-Is Data
+        try:
+            df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
+                             'county_consolidated_temp.csv')
+            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
             df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                      'county_consolidated_temp.csv',
+                      'county_consolidated_as_is_final.csv',
                       header=True,
                       index=False)
-        else:
 
-            df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                      'county_consolidated_temp.csv',
-                      header=False,
-                      index=False,
-                      mode='a')
+            if os.path.exists(_CODEDIR + PROCESS_AS_IS_DIR +
+                              'county_consolidated_temp.csv'):
+                os.remove(_CODEDIR + PROCESS_AS_IS_DIR +
+                          'county_consolidated_temp.csv')
 
-    df = pd.read_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-                     'county_consolidated_temp.csv')
-    df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+            logging.info("Successfully consolidated as-is county data.")
 
-    df.to_csv(_CODEDIR + PROCESS_AS_IS_DIR +
-              'county_consolidated_as_is_final.csv',
-              header=True,
-              index=False)
+        except Exception as e:
+            logging.error(f"Error during finalizing As-Is county data: {e}")
 
-    if os.path.exists(_CODEDIR + PROCESS_AS_IS_DIR \
-        + 'county_consolidated_temp.csv'):
-        os.remove(_CODEDIR + PROCESS_AS_IS_DIR + 'county_consolidated_temp.csv')
+        # Processing Agg Files
+        county_file = [
+            _CODEDIR + PROCESS_AS_IS_DIR +
+            '1990_2000/county/county_1990_2000.csv', _CODEDIR +
+            PROCESS_AGG_DIR + '1990_2000/county/county_1990_2000.csv',
+            _CODEDIR + PROCESS_AGG_DIR +
+            '2000_2010/county/county_2000_2010.csv', _CODEDIR +
+            PROCESS_AGG_DIR + '2010_2020/county/county_2010_2020.csv',
+            _CODEDIR + PROCESS_AGG_DIR + '2020_2029/county/county_2020_2029.csv'
+        ]
 
-    # Agg file processing
-    county_file = [
-        _CODEDIR + PROCESS_AS_IS_DIR + '1990_2000/county/county_1990_2000.csv',
-        _CODEDIR + PROCESS_AGG_DIR + '1990_2000/county/county_1990_2000.csv',
-        _CODEDIR + PROCESS_AGG_DIR + '2000_2010/county/county_2000_2010.csv',
-        _CODEDIR + PROCESS_AGG_DIR + '2010_2020/county/county_2010_2020.csv',
-        _CODEDIR + PROCESS_AGG_DIR + '2020_2029/county/county_2020_2029.csv'
-    ]
+        for file in county_file:
+            try:
+                df = pd.read_csv(file)
+                df = df.melt(id_vars=['YEAR', 'LOCATION'],
+                             var_name='SV',
+                             value_name='OBSERVATION')
+                df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
+                df["SV"] = 'dcid:' + df["SV"]
 
-    for file in county_file:
-        df = pd.read_csv(file)
-        df = df.melt(id_vars=['YEAR', 'LOCATION'],
-                     var_name='SV',
-                     value_name='OBSERVATION')
-        df.replace({"SV": STAT_VAR_COL_MAPPING}, inplace=True)
-        df["SV"] = 'dcid:' + df["SV"]
+                # Writing to temp file (appending)
+                if file == county_file[0]:
+                    df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
+                              'county_consolidated_temp.csv',
+                              header=True,
+                              index=False)
+                else:
+                    df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
+                              'county_consolidated_temp.csv',
+                              header=False,
+                              index=False,
+                              mode='a')
 
-        if file == county_file[0]:
+            except Exception as e:
+                logging.error(f"Error processing file {file}: {e}")
+
+        # Finalizing Agg Data
+        try:
+            df = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR +
+                             'county_consolidated_temp.csv')
+            df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
+            df.insert(3, 'MEASUREMENT_METHOD',
+                      'dcs:dcAggregate/CensusPEPSurvey', True)
+            df["MEASUREMENT_METHOD"] = df.apply(
+                lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
             df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
-                      'county_consolidated_temp.csv',
+                      'county_consolidated_agg_final.csv',
                       header=True,
                       index=False)
-        else:
-            df.to_csv(_CODEDIR + PROCESS_AGG_DIR +
-                      'county_consolidated_temp.csv',
-                      header=False,
-                      index=False,
-                      mode='a')
 
-    df = pd.read_csv(_CODEDIR + PROCESS_AGG_DIR +
-                     'county_consolidated_temp.csv')
-    df.sort_values(by=['LOCATION', 'SV', 'YEAR'], inplace=True)
-    df.insert(3, 'MEASUREMENT_METHOD', 'dcs:dcAggregate/CensusPEPSurvey', True)
-    df["MEASUREMENT_METHOD"] = df.apply(
-        lambda r: _calculate_agg_measure_method(r.YEAR, r.SV), axis=1)
-    df.to_csv(_CODEDIR + PROCESS_AGG_DIR + 'county_consolidated_agg_final.csv',
-              header=True,
-              index=False)
+            if os.path.exists(_CODEDIR + PROCESS_AGG_DIR +
+                              'county_consolidated_temp.csv'):
+                os.remove(_CODEDIR + PROCESS_AGG_DIR +
+                          'county_consolidated_temp.csv')
 
-    if os.path.exists(_CODEDIR + PROCESS_AGG_DIR \
-        + 'county_consolidated_temp.csv'):
-        os.remove(_CODEDIR + PROCESS_AGG_DIR + 'county_consolidated_temp.csv')
+            logging.info("Successfully consolidated agg county data.")
+
+        except Exception as e:
+            logging.error(f"Error during finalizing Agg county data: {e}")
+
+    except Exception as e:
+        logging.fatal(
+            f"Fatal error during the consolidation of county files: {e}")
+        return
 
 
 def _consolidate_all_geo_files(output_path):
     """
-    Consolidate National, State and County files into single file
-    This function generates final csv file for both as-is and agg
+    Consolidate National, State and County files into a single file.
+    This function generates final csv files for both as-is and agg
     data processing which will be used for importing into DC.
 
-    Output files are written to /output_files/ folder
+    Output files are written to /output_files/ folder.
     """
-    as_is_df = pd.DataFrame()
-    for file in [
-            _CODEDIR + PROCESS_AS_IS_DIR + geo + '_consolidated_as_is_final.csv'
-            for geo in ['national', 'state', 'county']
-    ]:
-        as_is_df = pd.concat([as_is_df, pd.read_csv(file)])
 
-    # Saving the cleaned 'as_is_df' DataFrame to a CSV file.
-    as_is_df.to_csv(_CODEDIR + output_path + 'population_estimate_by_srh.csv',
-                    header=True,
-                    index=False)
+    try:
+        # Initialize empty DataFrames
+        as_is_df = pd.DataFrame()
+        agg_df = pd.DataFrame()
 
-    agg_df = pd.DataFrame()
-    for file in [
-            _CODEDIR + PROCESS_AGG_DIR + geo + '_consolidated_agg_final.csv'
-            for geo in ['national', 'state', 'county']
-    ]:
-        agg_df = pd.concat([agg_df, pd.read_csv(file)])
+        # Process as-is files
+        for file in [
+                _CODEDIR + PROCESS_AS_IS_DIR + geo +
+                '_consolidated_as_is_final.csv'
+                for geo in ['national', 'state', 'county']
+        ]:
+            try:
+                # Read the file and concatenate
+                df = pd.read_csv(file)
+                as_is_df = pd.concat([as_is_df, df])
+            except Exception as e:
+                logging.error(f"Error processing 'as-is' file {file}: {e}")
 
-        # Saving the cleaned 'agg_df' DataFrame to a CSV file.
-        agg_df.to_csv(_CODEDIR + output_path +
-                      'population_estimate_by_srh_agg.csv',
-                      header=True,
-                      index=False)
+        # Save the consolidated as-is DataFrame
+        try:
+            as_is_df.to_csv(_CODEDIR + output_path +
+                            'population_estimate_by_srh.csv',
+                            header=True,
+                            index=False)
+            logging.info(
+                "Successfully saved 'as-is' consolidated file to population_estimate_by_srh.csv"
+            )
+        except Exception as e:
+            logging.error(f"Error saving 'as-is' consolidated file: {e}")
+
+        # Process agg files
+        for file in [
+                _CODEDIR + PROCESS_AGG_DIR + geo + '_consolidated_agg_final.csv'
+                for geo in ['national', 'state', 'county']
+        ]:
+            try:
+                # Read the file and concatenate
+                df = pd.read_csv(file)
+                agg_df = pd.concat([agg_df, df])
+            except Exception as e:
+                logging.error(f"Error processing 'agg' file {file}: {e}")
+
+        # Save the consolidated agg DataFrame
+        try:
+            agg_df.to_csv(_CODEDIR + output_path +
+                          'population_estimate_by_srh_agg.csv',
+                          header=True,
+                          index=False)
+            logging.info(
+                "Successfully saved 'agg' consolidated file to population_estimate_by_srh_agg.csv"
+            )
+        except Exception as e:
+            logging.error(f"Error saving 'agg' consolidated file: {e}")
+
+    except Exception as e:
+        logging.fatal(
+            f"Fatal error during the consolidation of all geo files: {e}")
+        return
 
 
 def _consolidate_files(output_path):
