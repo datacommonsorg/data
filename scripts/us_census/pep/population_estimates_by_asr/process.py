@@ -309,7 +309,6 @@ def download_files():
         national1980(national_url_file, output_folder)
         national2000(national_url_file, output_folder)
         national2010(national_url_file, output_folder)
-        # national2020(national_url_file, output_folder)
 
         state1970(state_url_file, output_folder)
         state1990(state_url_file, output_folder)
@@ -341,8 +340,6 @@ def main(_):
     input_path = FLAGS.input_path
     if not os.path.exists(input_path):
         os.mkdir(input_path)
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
     data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "output")
     # Defining Output Files.
@@ -350,12 +347,13 @@ def main(_):
     mcf_path = os.path.join(data_file_path, "usa_population_asr.mcf")
     tmcf_path = os.path.join(data_file_path, "usa_population_asr.tmcf")
     # Running the fuctions in individual files by Year and Area
-    download_status = True
     if mode == "" or mode == "download":
         # download & process
         add_future_year_urls()
         download_files()
     if mode == "" or mode == "process":
+        ip_files = os.listdir(input_path)
+        ip_files = [input_path + os.sep + file for file in ip_files]
         loader = USCensusPEPByASR(ip_files, cleaned_csv_path, mcf_path,
                                   tmcf_path)
         loader.process()
