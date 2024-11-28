@@ -133,7 +133,17 @@ To generate `output/WorldBank_StatisticalVariables.mcf`,
 `output/WorldBank.tmcf`, and `output/WorldBank.csv`, run:
 
 ```bash
-python3 worldbank.py --indicatorSchemaFile=schema_csvs/WorldBankIndicators_prod.csv --fetchFromSource=true
+python3 worldbank.py
+```
+
+If you want to perform "only process", run the below command:
+```bash
+python3 preprocess.py --mode=process
+```
+
+If you want to perform "only download", run the below command:
+```bash
+python3 preprocess.py --mode=download
 ```
 
 We highly recommend the use of the import validation tool for this import which
