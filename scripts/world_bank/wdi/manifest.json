@@ -12,9 +12,8 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "WorldBank.tmcf",
-                    "cleaned_csv": "WorldBank.csv",
-                    "node_mcf": "WorldBank.mcf"
+                    "template_mcf": "output/WorldBank.tmcf",
+                    "cleaned_csv": "output/WorldBank.csv"
                 }
             ],
             "cron_schedule": "15 17 15 * *"

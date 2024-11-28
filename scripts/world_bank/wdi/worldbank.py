@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,9 +33,9 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _FLAGS = flags.FLAGS
 flags.DEFINE_boolean("fetchFromSource", True,
                      "Whether to bypass cached CSVs and fetch from source.")
-flags.DEFINE_string("indicatorSchemaFile",
-                    os.path.join(_MODULE_DIR,
-                                 "schema_csvs/WorldBankIndicators_prod.csv"),"")
+flags.DEFINE_string(
+    "indicatorSchemaFile",
+    os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"), "")
 flags.DEFINE_string('mode', '', 'Options: download or process')
 
 # Remaps the columns provided by World Bank API.
@@ -230,7 +230,7 @@ def read_worldbank(iso3166alpha3, mode):
             tidy one country in a Jupyter notebook.
     """
     if mode in ["download", '']:
-        logging.info('Downloading %s', iso3166alpha3)
+        logging.info('Downloading input file for country %s', iso3166alpha3)
         country_zip = ("http://api.worldbank.org/v2/en/country/" +
                        iso3166alpha3 + "?downloadformat=csv")
         r = retry_call(requests.get,
@@ -268,8 +268,9 @@ def read_worldbank(iso3166alpha3, mode):
                 if df is None:
                     df = pd.DataFrame(columns=cols)
                 else:
-                    df = df.append(pd.DataFrame([cols], columns=df.columns),
-                                   ignore_index=True)
+                    df = pd.concat(
+                        [df, pd.DataFrame([cols], columns=df.columns)],
+                        ignore_index=True)
 
         df = df.rename(columns=WORLDBANK_COL_REMAP)
 
@@ -284,7 +285,8 @@ def read_worldbank(iso3166alpha3, mode):
         # Convert to numeric and drop empty values.
         df['Value'] = pd.to_numeric(df['Value'])
         df = df.dropna()
-        if not os.path.exists(os.path.join(_MODULE_DIR, 'preprocessed_source_csv')):
+        if not os.path.exists(
+                os.path.join(_MODULE_DIR, 'preprocessed_source_csv')):
             os.mkdir(os.path.join(_MODULE_DIR, 'preprocessed_source_csv'))
         df.to_csv('preprocessed_source_csv/' + iso3166alpha3 + '.csv',
                   index=False)
@@ -386,8 +388,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
     return tmcfs_for_stat_vars
 
 
-def download_indicator_data(worldbank_countries, indicator_codes,
-                            mode):
+def download_indicator_data(worldbank_countries, indicator_codes, mode):
     """ Downloads World Bank country data for all countries and
             indicators provided.
 
@@ -417,7 +418,7 @@ def download_indicator_data(worldbank_countries, indicator_codes,
         country_df['ISO3166Alpha3'] = country_code
 
         # Add new row to main datframe.
-        worldbank_dataframe = worldbank_dataframe.append(country_df)
+        worldbank_dataframe = pd.concat([worldbank_dataframe, country_df])
 
     # Map indicator codes to unique Statistical Variable.
     worldbank_dataframe['StatisticalVariable'] = (
@@ -440,15 +441,13 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
     """
     # Only include a subset of columns in the final csv
     output_csv = worldbank_dataframe[[
-        'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year', 'Value', 'observationPeriod'
+        'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year',
+        'Value', 'observationPeriod'
     ]]
 
     # Output tmcf and csv for each unique World Bank grouping.
     df = pd.DataFrame(columns=[
-        'StatisticalVariable',
-        'IndicatorCode',
-        'ISO3166Alpha3',
-        'Year',
+        'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year',
         'observationPeriod'
     ])
     with open('output/WorldBank.tmcf', 'w', newline='') as f_out:
@@ -481,6 +480,7 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
     df['StatisticalVariable'] = df['StatisticalVariable'].astype(str)
     df = df.replace({'StatisticalVariable': RESOLUTION_TO_EXISTING_DCID})
 
+    logging.info("Writing output csv")
     df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
                                             float_format='%.10f',
                                             index=False)
@@ -512,7 +512,10 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
                                       existing_stat_var_lookup[indicator_code])
     return row
 
+
 def process(indicator_codes, worldbank_dataframe):
+    logging.info("Processing the input files")
+
     # Add source description to note.
     def add_source_to_description(row):
         if not pd.isna(row['Source']):
@@ -548,26 +551,29 @@ def process(indicator_codes, worldbank_dataframe):
 
     # Scale values by scaling factor and replace exisiting StatVars.
     scaling_factor_lookup = (indicator_codes.set_index('IndicatorCode')
-                            ['sourceScalingFactor'].dropna().to_dict())
+                             ['sourceScalingFactor'].dropna().to_dict())
     existing_stat_var_lookup = (indicator_codes.set_index('IndicatorCode')
                                 ['ExistingStatVar'].dropna().to_dict())
     worldbank_dataframe = worldbank_dataframe.apply(
         lambda row: source_scaling_remap(row, scaling_factor_lookup,
-                                        existing_stat_var_lookup),
+                                         existing_stat_var_lookup),
         axis=1)
 
     # Convert integer columns.
     int_cols = (list(indicator_codes[indicator_codes['ConvertToInt'] == True]
-                    ['IndicatorCode'].unique()))
+                     ['IndicatorCode'].unique()))
     worldbank_subset = worldbank_dataframe[
         worldbank_dataframe['IndicatorCode'].isin(int_cols)].index
     worldbank_dataframe.loc[worldbank_subset, "Value"] = (pd.to_numeric(
         worldbank_dataframe.loc[worldbank_subset, "Value"], downcast="integer"))
-    worldbank_dataframe['observationPeriod'] = worldbank_dataframe['StatisticalVariable'].apply(
-    lambda x: '' if x in ['dcid:FertilityRate_Person_Female', 'dcid:LifeExpectancy_Person'] else 'P1Y')
+    worldbank_dataframe['observationPeriod'] = worldbank_dataframe[
+        'StatisticalVariable'].apply(lambda x: '' if x in [
+            'dcid:FertilityRate_Person_Female', 'dcid:LifeExpectancy_Person'
+        ] else 'P1Y')
     # Output final CSVs and variables.
     output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
                                     indicator_codes)
+
 
 def main(_):
     mode = _FLAGS.mode
@@ -575,10 +581,10 @@ def main(_):
     indicator_codes = pd.read_csv(_FLAGS.indicatorSchemaFile, dtype=str)
     worldbank_countries = pd.read_csv("WorldBankCountries.csv")
     worldbank_dataframe = download_indicator_data(worldbank_countries,
-                                                    indicator_codes,
-                                                    _FLAGS.mode)
+                                                  indicator_codes, _FLAGS.mode)
     if mode == "" or mode == "process":
         process(indicator_codes, worldbank_dataframe)
+
 
 if __name__ == '__main__':
     app.run(main)
