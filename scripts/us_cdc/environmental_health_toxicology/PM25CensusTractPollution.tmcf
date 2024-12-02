@@ -4,7 +4,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:PM25CTPollution->date
 variableMeasured: dcs:Mean_Concentration_AirPollutant_PM2.5
 observationPeriod: "P24H"
-unit: μg/m3
+unit: dcs:MicrogramsPerCubicMeter
 value: C:PM25CTPollution->Value
 
 Node: E:PM25CTPollution->E2
