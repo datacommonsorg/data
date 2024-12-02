@@ -15,11 +15,6 @@
     indicator codes provided by the indicatorSchemaFile flag for all years
     and for all countries provided in WorldBankCountries.csv. """
 
-from absl import app
-from absl import flags
-import pandas as pd
-from retry.api import retry_call
-
 import logging
 import itertools
 import requests
@@ -28,6 +23,13 @@ import io
 import time
 import re
 import os
+import sys
+
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
+from retry.api import retry_call
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _FLAGS = flags.FLAGS
@@ -239,7 +241,12 @@ def read_worldbank(iso3166alpha3, mode):
                        delay=20,
                        backoff=1.5)
         if r.status_code != 200:
-            logging.info('Failed to retrieve %s', iso3166alpha3)
+            logging.fatal('Failed to retrieve %s', iso3166alpha3)
+        if not os.path.exists(os.path.join(_MODULE_DIR, 'raw_data')):
+            os.mkdir(os.path.join(_MODULE_DIR, 'raw_data'))
+        with open(os.path.join(_MODULE_DIR, 'raw_data', iso3166alpha3 + '.zip'),
+                  'wb') as f:
+            f.write(r.content)
 
         filebytes = io.BytesIO(r.content)
         myzipfile = zipfile.ZipFile(filebytes)
@@ -440,50 +447,53 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
             indicator_codes -> Dataframe with INDICATOR_CODES to include.
     """
     # Only include a subset of columns in the final csv
-    output_csv = worldbank_dataframe[[
-        'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year',
-        'Value', 'observationPeriod'
-    ]]
+    try:
+        output_csv = worldbank_dataframe[[
+            'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year',
+            'Value', 'observationPeriod'
+        ]]
 
-    # Output tmcf and csv for each unique World Bank grouping.
-    df = pd.DataFrame(columns=[
-        'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year',
-        'observationPeriod'
-    ])
-    with open('output/WorldBank.tmcf', 'w', newline='') as f_out:
-        for index, enum in enumerate(tmcfs_for_stat_vars):
-            tmcf, stat_var_obs_cols, stat_vars_in_group = enum
-            if len(stat_vars_in_group) == 0:
-                continue
-            f_out.write(tmcf.format_map({'idx': index}) + '\n')
+        # Output tmcf and csv for each unique World Bank grouping.
+        df = pd.DataFrame(columns=[
+            'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year',
+            'observationPeriod'
+        ])
+        with open('output/WorldBank.tmcf', 'w', newline='') as f_out:
+            for index, enum in enumerate(tmcfs_for_stat_vars):
+                tmcf, stat_var_obs_cols, stat_vars_in_group = enum
+                if len(stat_vars_in_group) == 0:
+                    continue
+                f_out.write(tmcf.format_map({'idx': index}) + '\n')
 
-            # Get only the indicator codes in that grouping.
-            matching_csv = output_csv[output_csv['IndicatorCode'].isin(
-                stat_vars_in_group)]
+                # Get only the indicator codes in that grouping.
+                matching_csv = output_csv[output_csv['IndicatorCode'].isin(
+                    stat_vars_in_group)]
 
-            # Format to decimals.
-            matching_csv = matching_csv.round(10)
-            df = df.merge(
-                matching_csv.rename(columns={'Value': f"Value{index}"}),
-                how='outer',
-                on=[
-                    'StatisticalVariable',
-                    'IndicatorCode',
-                    'ISO3166Alpha3',
-                    'Year',
-                    'observationPeriod',
-                ])
-    # Include the Stat Observation columns in the output CSV.
-    df = df.merge(indicator_codes[stat_var_obs_cols], on='IndicatorCode')
+                # Format to decimals.
+                matching_csv = matching_csv.round(10)
+                df = df.merge(
+                    matching_csv.rename(columns={'Value': f"Value{index}"}),
+                    how='outer',
+                    on=[
+                        'StatisticalVariable',
+                        'IndicatorCode',
+                        'ISO3166Alpha3',
+                        'Year',
+                        'observationPeriod',
+                    ])
+        # Include the Stat Observation columns in the output CSV.
+        df = df.merge(indicator_codes[stat_var_obs_cols], on='IndicatorCode')
 
-    # Coverting dcid to existing dcid
-    df['StatisticalVariable'] = df['StatisticalVariable'].astype(str)
-    df = df.replace({'StatisticalVariable': RESOLUTION_TO_EXISTING_DCID})
+        # Coverting dcid to existing dcid
+        df['StatisticalVariable'] = df['StatisticalVariable'].astype(str)
+        df = df.replace({'StatisticalVariable': RESOLUTION_TO_EXISTING_DCID})
 
-    logging.info("Writing output csv")
-    df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
-                                            float_format='%.10f',
-                                            index=False)
+        logging.info("Writing output csv")
+        df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
+                                                float_format='%.10f',
+                                                index=False)
+    except Exception as e:
+        logging.fatal(f"Error generating output {e}")
 
 
 def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
@@ -515,64 +525,68 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
 
 def process(indicator_codes, worldbank_dataframe):
     logging.info("Processing the input files")
+    try:
+        # Add source description to note.
+        def add_source_to_description(row):
+            if not pd.isna(row['Source']):
+                return row['SourceNote'] + " " + str(row['Source'])
+            else:
+                return row['SourceNote']
 
-    # Add source description to note.
-    def add_source_to_description(row):
-        if not pd.isna(row['Source']):
-            return row['SourceNote'] + " " + str(row['Source'])
-        else:
-            return row['SourceNote']
+        indicator_codes['SourceNote'] = indicator_codes.apply(
+            add_source_to_description, axis=1)
 
-    indicator_codes['SourceNote'] = indicator_codes.apply(
-        add_source_to_description, axis=1)
+        # Generate stat vars
+        with open("output/WorldBank_StatisticalVariables.mcf", "w+") as f_out:
+            # Generate StatVars for fields that don't exist. Some fields such as
+            # Count_Person_Unemployed are already statistical variables so we do
+            # not need to recreate them.
+            for _, row in indicator_codes[
+                    indicator_codes['ExistingStatVar'].isna()].iterrows():
+                f_out.write(build_stat_vars_from_indicator_list(row))
 
-    # Generate stat vars
-    with open("output/WorldBank_StatisticalVariables.mcf", "w+") as f_out:
-        # Generate StatVars for fields that don't exist. Some fields such as
-        # Count_Person_Unemployed are already statistical variables so we do
-        # not need to recreate them.
-        for _, row in indicator_codes[
-                indicator_codes['ExistingStatVar'].isna()].iterrows():
-            f_out.write(build_stat_vars_from_indicator_list(row))
+        # Create template MCFs for each grouping of stat vars.
+        tmcfs_for_stat_vars = (
+            group_stat_vars_by_observation_properties(indicator_codes))
 
-    # Create template MCFs for each grouping of stat vars.
-    tmcfs_for_stat_vars = (
-        group_stat_vars_by_observation_properties(indicator_codes))
+        # Remap columns to match expected format.
+        worldbank_dataframe['Value'] = pd.to_numeric(
+            worldbank_dataframe['Value'])
+        worldbank_dataframe['ISO3166Alpha3'] = (
+            worldbank_dataframe['ISO3166Alpha3'].apply(
+                lambda code: "dcid:Earth"
+                if code == "WLD" else "dcid:country/" + code))
+        worldbank_dataframe['StatisticalVariable'] = \
+            worldbank_dataframe['StatisticalVariable'].apply(
+                lambda code: "dcs:" + code)
 
-    # Remap columns to match expected format.
-    worldbank_dataframe['Value'] = pd.to_numeric(worldbank_dataframe['Value'])
-    worldbank_dataframe['ISO3166Alpha3'] = (
-        worldbank_dataframe['ISO3166Alpha3'].apply(
-            lambda code: "dcid:Earth"
-            if code == "WLD" else "dcid:country/" + code))
-    worldbank_dataframe['StatisticalVariable'] = \
-        worldbank_dataframe['StatisticalVariable'].apply(
-            lambda code: "dcs:" + code)
+        # Scale values by scaling factor and replace exisiting StatVars.
+        scaling_factor_lookup = (indicator_codes.set_index('IndicatorCode')
+                                 ['sourceScalingFactor'].dropna().to_dict())
+        existing_stat_var_lookup = (indicator_codes.set_index('IndicatorCode')
+                                    ['ExistingStatVar'].dropna().to_dict())
+        worldbank_dataframe = worldbank_dataframe.apply(
+            lambda row: source_scaling_remap(row, scaling_factor_lookup,
+                                             existing_stat_var_lookup),
+            axis=1)
 
-    # Scale values by scaling factor and replace exisiting StatVars.
-    scaling_factor_lookup = (indicator_codes.set_index('IndicatorCode')
-                             ['sourceScalingFactor'].dropna().to_dict())
-    existing_stat_var_lookup = (indicator_codes.set_index('IndicatorCode')
-                                ['ExistingStatVar'].dropna().to_dict())
-    worldbank_dataframe = worldbank_dataframe.apply(
-        lambda row: source_scaling_remap(row, scaling_factor_lookup,
-                                         existing_stat_var_lookup),
-        axis=1)
-
-    # Convert integer columns.
-    int_cols = (list(indicator_codes[indicator_codes['ConvertToInt'] == True]
-                     ['IndicatorCode'].unique()))
-    worldbank_subset = worldbank_dataframe[
-        worldbank_dataframe['IndicatorCode'].isin(int_cols)].index
-    worldbank_dataframe.loc[worldbank_subset, "Value"] = (pd.to_numeric(
-        worldbank_dataframe.loc[worldbank_subset, "Value"], downcast="integer"))
-    worldbank_dataframe['observationPeriod'] = worldbank_dataframe[
-        'StatisticalVariable'].apply(lambda x: '' if x in [
-            'dcid:FertilityRate_Person_Female', 'dcid:LifeExpectancy_Person'
-        ] else 'P1Y')
-    # Output final CSVs and variables.
-    output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
-                                    indicator_codes)
+        # Convert integer columns.
+        int_cols = (list(indicator_codes[indicator_codes['ConvertToInt'] ==
+                                         True]['IndicatorCode'].unique()))
+        worldbank_subset = worldbank_dataframe[
+            worldbank_dataframe['IndicatorCode'].isin(int_cols)].index
+        worldbank_dataframe.loc[worldbank_subset, "Value"] = (pd.to_numeric(
+            worldbank_dataframe.loc[worldbank_subset, "Value"],
+            downcast="integer"))
+        worldbank_dataframe['observationPeriod'] = worldbank_dataframe[
+            'StatisticalVariable'].apply(lambda x: '' if x in [
+                'dcid:FertilityRate_Person_Female', 'dcid:LifeExpectancy_Person'
+            ] else 'P1Y')
+        # Output final CSVs and variables.
+        output_csv_and_tmcf_by_grouping(worldbank_dataframe,
+                                        tmcfs_for_stat_vars, indicator_codes)
+    except Exception as e:
+        logging.fatal(f"Error processing input file {e}")
 
 
 def main(_):
