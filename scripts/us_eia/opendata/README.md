@@ -22,9 +22,9 @@ This dataset is available for public use, license is available at https://www.ei
     python3 process.py --dataset=INTL
     python3 process.py --dataset=ELEC
     python3 process.py --dataset=NG
-    python3 process.py --dataset=NUC_STATUS
-    python3 process.py --dataset=SEDS
     python3 process.py --dataset=PET
+    python3 process.py --dataset=SEDS
+    python3 process.py --dataset=NUC_STATUS
 
     ```
 

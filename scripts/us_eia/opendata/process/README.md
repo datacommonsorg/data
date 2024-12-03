@@ -64,10 +64,15 @@ script.
 To generate CSV, TMCF and stat-var MCF for a supported dataset:
 
 ```bash
-python3 process.py --dataset=ELEC
+python3 process.py --dataset=INTL --mode=process
+        python3 process.py --dataset=ELEC --mode=process
+        python3 process.py --dataset=PET --mode=process
+        python3 process.py --dataset=NG --mode=process
+        python3 process.py --dataset=SEDS --mode=process
+        python3 process.py --dataset=NUC_STATUS --mode=process
+        python3 process.py --dataset=TOTAL --mode=process
 ```
 
-Replace `ELEC` with any of the other dataset codes listed above.
 
 To run tests:
 

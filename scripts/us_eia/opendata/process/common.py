@@ -23,7 +23,6 @@ from sys import path
 
 # For import util.alpha2_to_dcid
 # Setup path for import from data/util
-# or set export PYTHONPATH="./:<repo>/data/util" in bash
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2_to_dcid

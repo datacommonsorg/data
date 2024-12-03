@@ -14,6 +14,11 @@
 """
 Utility to download all EIA data from https://api.eia.gov/bulk/manifest.txt
 Files are stored in raw_data.
+
+Run this script in this folder:
+python3 process.py --dataset=INTL --mode=download
+
+Replace `INTL` with any of the other dataset codes
 """
 
 import io

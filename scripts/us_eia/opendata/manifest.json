@@ -124,7 +124,7 @@
           "cleaned_csv": "tmp_raw_data/TOTAL/TOTAL.csv"
         }
       ],
-      "cron_schedule": "0 7  1 * *"
+      "cron_schedule": "20 6  1 * *"
     }
   ]
 }
