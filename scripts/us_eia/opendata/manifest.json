@@ -16,7 +16,7 @@
           "cleaned_csv": "tmp_raw_data/ELEC/ELEC.csv"
         }
       ],
-      "cron_schedule": "0 8 1 2 *"
+      "cron_schedule": "0 1  1 * *"
     },
     {
       "import_name": "EIA_NaturalGas",
@@ -34,7 +34,7 @@
           "cleaned_csv": "tmp_raw_data/NG/NG.csv"
         }
       ],
-      "cron_schedule": "05 10 * * *"
+      "cron_schedule": "0 2  1 * *"
     },
     {
       "import_name": "EIA_NuclearOutages",
@@ -52,7 +52,7 @@
           "cleaned_csv": "tmp_raw_data/NUC_STATUS/NUC_STATUS.csv"
         }
       ],
-      "cron_schedule": "01 9 * * *"
+      "cron_schedule": "0 3  1 * *"
     },
     {
       "import_name": "EIA_Petroleum",
@@ -70,7 +70,7 @@
           "cleaned_csv": "tmp_raw_data/PET/PET.csv"
         }
       ],
-      "cron_schedule": "5 9 2 2 *"
+      "cron_schedule": "0 4  1 * *"
     },
     {
       "import_name": "EIA_International",
@@ -88,7 +88,7 @@
           "cleaned_csv": "tmp_raw_data/INTL/INTL.csv"
         }
       ],
-      "cron_schedule": "1 7 * 1,4,7,10 *"
+      "cron_schedule": "0 5  1 * *"
     },
     {
       "import_name": "EIA_SEDS",
@@ -106,8 +106,8 @@
           "cleaned_csv": "tmp_raw_data/SEDS/SEDS.csv"
         }
       ],
-      "cron_schedule": "0 0 1 1 *"
-      },
+      "cron_schedule": "0 6  1 * *"
+    },
     {
       "import_name": "EIA_TotalEnergy",
       "curator_emails": [
@@ -124,7 +124,7 @@
           "cleaned_csv": "tmp_raw_data/TOTAL/TOTAL.csv"
         }
       ],
-      "cron_schedule": "0 0 1 * *"
+      "cron_schedule": "0 7  1 * *"
     }
   ]
 }

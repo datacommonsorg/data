@@ -24,8 +24,6 @@ from sys import path
 # For import util.alpha2_to_dcid
 # Setup path for import from data/util
 # or set export PYTHONPATH="./:<repo>/data/util" in bash
-#path.insert(1, '/usr/local/google/home/chandaluri/data/')
-#path.insert(2, '/usr/local/google/home/chandaluri/data/scripts/us_eia/opendata/')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2_to_dcid
@@ -216,7 +214,6 @@ _ALPHA3_COUNTRY_SET = frozenset(
 
 
 def _parse_date(d):
-    #print("_parse_date", d)
     """Given a date from EIA JSON convert to DC compatible date."""
 
     if not _DATE_RE.match(d):
@@ -397,21 +394,24 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
 def _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map,
                        sv_schemaful2raw, svg_info):
     nodes = []
-    for sv, mcf in sv_map.items():
-        raw_sv = sv_schemaful2raw[sv] if sv in sv_schemaful2raw else sv
+    try:
+        for sv, mcf in sv_map.items():
+            raw_sv = sv_schemaful2raw[sv] if sv in sv_schemaful2raw else sv
 
-        pvs = [mcf]
-        if raw_sv in sv_name_map:
-            pvs.append(f'name: "{sv_name_map[raw_sv]}"')
+            pvs = [mcf]
+            if raw_sv in sv_name_map:
+                pvs.append(f'name: "{sv_name_map[raw_sv]}"')
 
-        if dataset == 'NUC_STATUS':
-            pvs.append(f'memberOf: dcid:{category.NUC_STATUS_ROOT}')
-        if raw_sv in sv_membership_map:
-            for svg in sorted(sv_membership_map[raw_sv]):
-                if svg in svg_info:
-                    pvs.append(f'memberOf: dcid:{svg}')
+            if dataset == 'NUC_STATUS':
+                pvs.append(f'memberOf: dcid:{category.NUC_STATUS_ROOT}')
+            if raw_sv in sv_membership_map:
+                for svg in sorted(sv_membership_map[raw_sv]):
+                    if svg in svg_info:
+                        pvs.append(f'memberOf: dcid:{svg}')
 
-        nodes.append('\n'.join(pvs))
+            nodes.append('\n'.join(pvs))
+    except Exception as e:
+        logging.fatal(f"error while generating the SV nodes,{sv_name_map} -{e}")
 
     return nodes
 
@@ -482,7 +482,6 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                 continue
 
             time_series = data.get('data', None)
-            #print(time_series)
             if not time_series:
                 counters['error_missing_time_series'] += 1
                 continue
@@ -512,9 +511,7 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
 
             # Add to rows.
             rows = []
-            #print(time_series)
             for k, v in time_series:
-                #print(k,v)
 
                 try:
                     # The following non-numeric values exist:
@@ -588,5 +585,4 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
     with open(out_tmcf, 'w') as out_fp:
         out_fp.write(_TMCF_STRING)
 
-    print('=== FINAL COUNTERS ===')
-    _print_counters(counters)
+    logging.info(f"FINAL COUNTERS {_print_counters(counters)}")
