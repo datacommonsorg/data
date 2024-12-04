@@ -9,6 +9,9 @@ import string
 import datetime
 import pandas as pd
 from absl import app, flags
+from absl import logging
+
+from download_weekly_data import download_weekly_nnds_data_across_years
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -24,6 +27,7 @@ flags.DEFINE_string(
 flags.DEFINE_string(
     'weekly_nndss_output', './data/output',
     'Path to the directory where generated files are to be stored.')
+flags.DEFINE_string('mode', '', 'Options: download or process')
 
 _PREFIX = 'cdc_nndss_weekly_tables'
 
@@ -251,8 +255,7 @@ def concat_rows_with_column_headers(rows_with_col_names, df_column_list):
 def process_nndss_current_weekly(input_filepath: str):
     ## from the csv files get the year, and week count
     filename = input_filepath.split('/')[-1]
-    # print("File name ", filename, end='\r')
-    print("File name ", filename)
+    logging.info("File name ", filename)
     year = int(filename[10:14])
     week = int(filename[25:27])
 
@@ -504,10 +507,9 @@ def generate_processed_csv(input_path):
             processed_dataframe_list.append(df)
     # concat list of all processed data frames
 
-    print()
     cleaned_dataframe = pd.concat(processed_dataframe_list, ignore_index=False)
-    print("Count of processed_dataframe_list ", len(processed_dataframe_list))
-    #print(cleaned_dataframe)
+    logging.info("Count of processed_dataframe_list ",
+                 len(processed_dataframe_list))
     del processed_dataframe_list
 
     # set measurement method
@@ -518,84 +520,94 @@ def generate_processed_csv(input_path):
         lambda x: float(x['value']) if len(x['value']) > 0 else np.nan, axis=1)
     cleaned_dataframe.dropna(subset=['value', 'observationAbout'], inplace=True)
     cleaned_dataframe['value'] = cleaned_dataframe['value'].astype(float)
-    #print(cleaned_dataframe)
     cleaned_dataframe.to_csv("processed_raw_weekly_data.csv", index=False)
 
     return cleaned_dataframe
 
 
 def main(_) -> None:
-    try:
-        global _PLACE_DCID_DF
-        print("main")
-        input_path = FLAGS.weekly_nndss_input
-        output_path = FLAGS.weekly_nndss_output
+    mode = FLAGS.mode
+    if mode == "" or mode == "download":
+        _START = 2006
+        _END = 2025
+        flags.DEFINE_string(
+            'output_path', './data',
+            'Path to the directory where generated files are to be stored.')
+        year_range = range(_START, _END)
+        download_weekly_nnds_data_across_years(year_range, FLAGS.output_path)
 
-        _PLACE_DCID_DF = pd.read_csv(
-            "./data/place_name_to_dcid.csv",
-            usecols=["Place Name", "Resolved place dcid"])
-        print("calling cleaned_dataframe")
-        cleaned_dataframe = generate_processed_csv(input_path)
+    if mode == "" or mode == "process":
+        try:
+            global _PLACE_DCID_DF
+            logging.info("main")
+            input_path = FLAGS.weekly_nndss_input
+            output_path = FLAGS.weekly_nndss_output
 
-        #cleaned_dataframe = pd.read_csv("processed_raw_weekly_data.csv")
+            _PLACE_DCID_DF = pd.read_csv(
+                "./data/place_name_to_dcid.csv",
+                usecols=["Place Name", "Resolved place dcid"])
+            logging.info("calling cleaned_dataframe")
+            cleaned_dataframe = generate_processed_csv(input_path)
 
-        # for each unique column generate the statvar with constraints
-        unique_columns = cleaned_dataframe['column_name'].unique().tolist()
-        unique_places = cleaned_dataframe['Reporting Area'].unique().tolist()
+            #cleaned_dataframe = pd.read_csv("processed_raw_weekly_data.csv")
 
-        # column - statvar dictionary map
-        sv_map, dcid_df = generate_statvar_map_for_columns(
-            unique_columns, unique_places)
-        print("sv_map, dcid_df", end='\r')
-        # map the statvars to column names
-        cleaned_dataframe = pd.merge(cleaned_dataframe,
-                                     dcid_df,
-                                     on=['Reporting Area', 'column_name'],
-                                     how='left')
+            # for each unique column generate the statvar with constraints
+            unique_columns = cleaned_dataframe['column_name'].unique().tolist()
+            unique_places = cleaned_dataframe['Reporting Area'].unique().tolist(
+            )
 
-        #TODO: 2. If reporting area is US Territories, drop observation and make a sum of case counts across US States with mMethod = dc/Aggregate
+            # column - statvar dictionary map
+            sv_map, dcid_df = generate_statvar_map_for_columns(
+                unique_columns, unique_places)
+            logging.info("sv_map, dcid_df", end='\r')
+            # map the statvars to column names
+            cleaned_dataframe = pd.merge(cleaned_dataframe,
+                                         dcid_df,
+                                         on=['Reporting Area', 'column_name'],
+                                         how='left')
 
-        ## Create output directory if not present
-        if not os.path.exists(output_path):
-            os.makedirs(output_path)
-        # write outputs to file
-        f = open(os.path.join(output_path, f'{_PREFIX}.tmcf'), 'w')
-        f.write(_TEMPLATE_MCF)
-        f.close()
+            #TODO: 2. If reporting area is US Territories, drop observation and make a sum of case counts across US States with mMethod = dc/Aggregate
 
-        # write statvar mcf file from col_map
-        f = open(os.path.join(output_path, f'{_PREFIX}.mcf'), 'w')
+            ## Create output directory if not present
+            if not os.path.exists(output_path):
+                os.makedirs(output_path)
+            # write outputs to file
+            f = open(os.path.join(output_path, f'{_PREFIX}.tmcf'), 'w')
+            f.write(_TEMPLATE_MCF)
+            f.close()
 
-        for dcid, pvdict in sv_map.items():
-            #print(dcid, pvdict, end='\r')
-            f.write(dcid + '\n')
-            for p, v in pvdict.items():
-                if v == 'dcs:AllSerotypes' or v == 'dcs:AllSerogroups':
-                    f.write('#' + p + ": " + v + "\n")
-                else:
-                    f.write(p + ": " + v + "\n")
-            f.write("\n")
-        f.close()
+            # write statvar mcf file from col_map
+            f = open(os.path.join(output_path, f'{_PREFIX}.mcf'), 'w')
 
-        # write csv
-        cleaned_dataframe = cleaned_dataframe[[
-            'observationDate', 'observationAbout', 'observationPeriod',
-            'variableMeasured', 'value', 'measurementMethod', 'week',
-            'column_name'
-        ]]
-        cleaned_dataframe = cleaned_dataframe.drop_duplicates(subset=[
-            'observationDate', 'observationAbout', 'observationPeriod',
-            'variableMeasured', 'measurementMethod', 'week', 'column_name'
-        ],
-                                                              keep='last')
-        #print("cleaned_dataframe", end='\r')
-        cleaned_dataframe.to_csv(os.path.join(output_path, f'{_PREFIX}.csv'),
-                                 index=False)
-        print("Completed")
-    except Exception as e:
-        print(e)
+            for dcid, pvdict in sv_map.items():
+                f.write(dcid + '\n')
+                for p, v in pvdict.items():
+                    if v == 'dcs:AllSerotypes' or v == 'dcs:AllSerogroups':
+                        f.write('#' + p + ": " + v + "\n")
+                    else:
+                        f.write(p + ": " + v + "\n")
+                f.write("\n")
+            f.close()
+
+            # write csv
+            cleaned_dataframe = cleaned_dataframe[[
+                'observationDate', 'observationAbout', 'observationPeriod',
+                'variableMeasured', 'value', 'measurementMethod', 'week',
+                'column_name'
+            ]]
+            cleaned_dataframe = cleaned_dataframe.drop_duplicates(subset=[
+                'observationDate', 'observationAbout', 'observationPeriod',
+                'variableMeasured', 'measurementMethod', 'week', 'column_name'
+            ],
+                                                                  keep='last')
+            cleaned_dataframe.to_csv(os.path.join(output_path,
+                                                  f'{_PREFIX}.csv'),
+                                     index=False)
+            logging.info("Completed")
+        except Exception as e:
+            logging.info("Exception: %s", e)
 
 
 if __name__ == '__main__':
-    print("start")
+    logging.info("start")
     app.run(main)
