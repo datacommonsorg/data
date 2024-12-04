@@ -1,0 +1,28 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "USCensusPEP_PopulationEstimatebyRace",
+      "curator_emails": ["chandaluri@google.com"],
+      "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables/",
+      "provenance_description": "The Census Bureau's Population Estimates Program (PEP) produces estimates of the population for the United States.",
+      "scripts": ["preprocess.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "output/USA_Population_Count_by_Race_National_state_2000.tmcf",
+          "cleaned_csv": "output/USA_Population_Count_by_Race_National_state_2000.csv"
+        },
+        {
+          "template_mcf": "output/USA_Population_Count_by_Race_before_2000.tmcf",
+          "cleaned_csv": "output/USA_Population_Count_by_Race_before_2000.csv"
+        },
+        {
+          "template_mcf": "output/USA_Population_Count_by_Race_county_after_2000.tmcf",
+          "cleaned_csv": "output/USA_Population_Count_by_Race_county_after_2000.csv"
+        }
+      ],
+      "cron_schedule": "0 04 * * 1"
+
+    }
+  ]
+}
+

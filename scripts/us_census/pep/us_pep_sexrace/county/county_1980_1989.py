@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@ def process_county_1980_1989(url: str) -> pd.DataFrame:
     """
     # reading the csv input file
     df = pd.read_csv(url, skiprows=5)
+    df.to_csv(_CODEDIR + "/../input_files/" + "county_result_1980_1989.csv")
     df = df.drop(index=[0])
     df.rename(columns={
         'Year of Estimate': 'Year',
