@@ -18,15 +18,6 @@ value: C:OECD_life_expectancy_and_mortality_cleaned->Count_Death_Male_AsAFractio
 
 Node: E:OECD_life_expectancy_and_mortality_cleaned->E3
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Death_AsAFractionOf_Count_Person
-measurementMethod: dcs:OECDRegionalStatistics
-observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->Region
-observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
-observationPeriod: "P1Y"
-value: C:OECD_life_expectancy_and_mortality_cleaned->Count_Death_AsAFractionOf_Count_Person
-
-Node: E:OECD_life_expectancy_and_mortality_cleaned->E4
-typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Death_LessThan1Year_Female_AsAFractionOf_Count_BirthEvent_Female
 measurementMethod: dcs:OECDRegionalStatistics
 observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->Region
@@ -34,7 +25,7 @@ observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
 observationPeriod: "P1Y"
 value: C:OECD_life_expectancy_and_mortality_cleaned->Count_Death_LessThan1Year_Female_AsAFractionOf_Count_BirthEvent_Female
 
-Node: E:OECD_life_expectancy_and_mortality_cleaned->E5
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E4
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Death_LessThan1Year_Male_AsAFractionOf_Count_BirthEvent_Male
 measurementMethod: dcs:OECDRegionalStatistics
@@ -43,7 +34,7 @@ observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
 observationPeriod: "P1Y"
 value: C:OECD_life_expectancy_and_mortality_cleaned->Count_Death_LessThan1Year_Male_AsAFractionOf_Count_BirthEvent_Male
 
-Node: E:OECD_life_expectancy_and_mortality_cleaned->E6
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E5
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Death_LessThan1Year_AsAFractionOf_Count_BirthEvent
 measurementMethod: dcs:OECDRegionalStatistics
@@ -105,3 +96,12 @@ observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->Region
 observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
 observationPeriod: "P1Y"
 value: C:OECD_life_expectancy_and_mortality_cleaned->Count_Death_Upto14Years_AsAFractionOf_Count_Person_Upto14Years
+
+Node: E:OECD_life_expectancy_and_mortality_cleaned->E16
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Count_Death_AsAFractionOfCount_Person
+measurementMethod: dcs:OECDRegionalStatistics
+observationAbout: C:OECD_life_expectancy_and_mortality_cleaned->Region
+observationDate: C:OECD_life_expectancy_and_mortality_cleaned->Year
+observationPeriod: "P1Y"
+value: C:OECD_life_expectancy_and_mortality_cleaned->Count_Death_AsAFractionOfCount_Person

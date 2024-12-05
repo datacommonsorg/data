@@ -20,6 +20,7 @@ import pandas as pd
 import logging
 from absl import flags
 from absl import app
+from columns import *
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -57,28 +58,26 @@ def process_data(df, output_file_path):
     df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
 
     # process the source data
-    df = df[['REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
+    df = df[['Region', 'VAR', 'SEX', 'Year', 'Value']]
     df_clear = df.drop(df[(df['VAR'] == 'INF_SEXDIF') |
                           (df['VAR'] == 'LIFE_SEXDIF')].index)
     df_clear['Year'] = '"' + df_clear['Year'].astype(str) + '"'
 
     df_cleaned = df_clear.pivot_table(values='Value',
-                                      index=['REG_ID', 'Region', 'Year'],
+                                      index=['Region', 'Year'],
                                       columns=['VAR', 'SEX'])
 
     df_cleaned = multi_index_to_single_index(df_cleaned)
-
-    VAR_to_statsvars = {
-        'LFEXP_T': 'LifeExpectancy_Person',
-        'LFEXPF': 'LifeExpectancy_Person_Female',
-        'LFEXPM': 'LifeExpectancy_Person_Male',
-    }
-
+    # Renaming column header to SVs.
     df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-    df_cleaned.drop(columns=["REG_ID"], inplace=True)
+    # Filtering the reuired columns
+    df_cleaned_reset = df_cleaned.reindex(columns=reindex_columns)
     logging.info("Writing output to %s", output_file_path)
-    df_cleaned.to_csv(output_file_path, index=False, quoting=csv.QUOTE_NONE)
-    return df_cleaned
+    df_cleaned_reset.to_csv(output_file_path,
+                            index=False,
+                            quoting=csv.QUOTE_NONE)
+
+    return df_cleaned_reset
 
 
 def generate_tmcf(df_cleaned, filepath):
@@ -137,7 +136,8 @@ def main(_):
         output_file_path = os.path.join(_MODULE_DIR,
                                         "OECD_life_expectancy_cleaned.csv")
         df_cleaned = process_data(df, output_file_path)
-        filepath = os.path.join(_MODULE_DIR, "OECD_life_expectancy.tmcf")
+        filepath = os.path.join(_MODULE_DIR,
+                                "OECD_life_expectancy_cleaned.tmcf")
         generate_tmcf(df_cleaned, filepath)
 
 

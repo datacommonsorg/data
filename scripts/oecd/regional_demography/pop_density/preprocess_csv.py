@@ -65,15 +65,18 @@ def process_data(df, output_file_path):
     df_cleaned = multi_index_to_single_index(temp_multi_index)[[
         'REG_ID', 'Region', 'Year', 'POP'
     ]]
-
+    # Renaming column header to SVs
     VAR_to_statsvars = {
         'POP': 'Count_Person_PerArea'
         # 'SURF': 'Area',
     }
-
     df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
+    # Filtering the column
+    df_cleaned_reset = df_cleaned[["Region", "Year", "Count_Person_PerArea"]]
     logging.info("Writing output to %s", output_file_path)
-    df_cleaned.to_csv(output_file_path, index=False, quoting=csv.QUOTE_NONE)
+    df_cleaned_reset.to_csv(output_file_path,
+                            index=False,
+                            quoting=csv.QUOTE_NONE)
 
 
 def main(_):

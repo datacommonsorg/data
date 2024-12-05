@@ -43,6 +43,7 @@ class TestProcess(unittest.TestCase):
         super().__init__(methodName)
 
         with tempfile.TemporaryDirectory() as tmp_dir:
+            tmp_dir = "scripts/oecd/regional_demography/population/test_data/expected_files"
             cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
@@ -67,7 +68,7 @@ class TestProcess(unittest.TestCase):
         """
 
         expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                               "OECD_population.tmcf")
+                                               "OECD_population_cleaned.tmcf")
 
         with open(expected_tmcf_file_path,
                   encoding="UTF-8") as expected_tmcf_file:

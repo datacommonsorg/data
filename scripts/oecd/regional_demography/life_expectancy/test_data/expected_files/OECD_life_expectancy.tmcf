@@ -1,6 +1,16 @@
 
     Node: E:OECD_life_expectancy_cleaned->E1
     typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:LifeExpectancy_Person
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_life_expectancy_cleaned->Region
+    observationDate: C:OECD_life_expectancy_cleaned->Year
+    observationPeriod: "P1Y"
+    value: C:OECD_life_expectancy_cleaned->LifeExpectancy_Person
+    unit: dcs:Year
+    
+    Node: E:OECD_life_expectancy_cleaned->E2
+    typeOf: dcs:StatVarObservation
     variableMeasured: dcs:LifeExpectancy_Person_Female
     measurementMethod: dcs:OECDRegionalStatistics
     observationAbout: C:OECD_life_expectancy_cleaned->Region
@@ -9,7 +19,7 @@
     value: C:OECD_life_expectancy_cleaned->LifeExpectancy_Person_Female
     unit: dcs:Year
     
-    Node: E:OECD_life_expectancy_cleaned->E2
+    Node: E:OECD_life_expectancy_cleaned->E3
     typeOf: dcs:StatVarObservation
     variableMeasured: dcs:LifeExpectancy_Person_Male
     measurementMethod: dcs:OECDRegionalStatistics
@@ -17,15 +27,5 @@
     observationDate: C:OECD_life_expectancy_cleaned->Year
     observationPeriod: "P1Y"
     value: C:OECD_life_expectancy_cleaned->LifeExpectancy_Person_Male
-    unit: dcs:Year
-    
-    Node: E:OECD_life_expectancy_cleaned->E3
-    typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:LifeExpectancy_Person
-    measurementMethod: dcs:OECDRegionalStatistics
-    observationAbout: C:OECD_life_expectancy_cleaned->Region
-    observationDate: C:OECD_life_expectancy_cleaned->Year
-    observationPeriod: "P1Y"
-    value: C:OECD_life_expectancy_cleaned->LifeExpectancy_Person
     unit: dcs:Year
     
