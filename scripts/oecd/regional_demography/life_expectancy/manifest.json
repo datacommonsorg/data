@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "OECDRegionalDemography_lifeexpectancy",
+      "import_name": "OECDRegionalDemography_LifeExpectancy",
       "curator_emails": [
         "chharish@google.com"
       ],

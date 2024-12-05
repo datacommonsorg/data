@@ -54,10 +54,9 @@ def process_data(df, output_file_path):
         with open(regid_file, 'r') as f:
             regid2dcid = dict(json.loads(f.read()))
         logging.info("Resolving places")
-        df = df[df['REF_AREA'].isin(regid2dcid.keys())]
+        df = df[df['REG_ID'].isin(regid2dcid.keys())]
         # Second, replace the names with dcids
-        df['Reference area'] = df.apply(lambda row: regid2dcid[row['REF_AREA']],
-                                        axis=1)
+        df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
     except (FileNotFoundError, json.JSONDecodeError) as e:
         logging.error(f"Error processing regid2dcid.json: {e}")
         return None  # Indicate failure

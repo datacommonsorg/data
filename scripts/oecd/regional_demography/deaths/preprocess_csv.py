@@ -51,10 +51,10 @@ def process_data(df, output_file_path):
         with open(regid_file, 'r') as f:
             regid2dcid = dict(json.loads(f.read()))
         logging.info("Resolving places")
-        df = df[df['REF_AREA'].isin(regid2dcid.keys())]
+        df1 = df1[df1['REF_AREA'].isin(regid2dcid.keys())]
         # Second, replace the names with dcids
-        df['Reference area'] = df.apply(lambda row: regid2dcid[row['REF_AREA']],
-                                        axis=1)
+        df1['Reference area'] = df1.apply(
+            lambda row: regid2dcid[row['REF_AREA']], axis=1)
     except (FileNotFoundError, json.JSONDecodeError) as e:
         logging.error(f"Error processing regid2dcid.json: {e}")
         return None  # Indicate failure
@@ -70,7 +70,7 @@ def process_data(df, output_file_path):
         df_cleaned = multi_index_to_single_index(temp_multi_index)
     except Exception as e:
         logging.error(
-            f"Unable to pivot the dataframe and retain the column:{e}")
+            f"Unable to pivot the dataframe and retain the columns:{e}")
         return None
     # Renaming column headers to their SVs
     df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)

@@ -39,7 +39,6 @@ def process_data(df, output_file_path):
     logging.info("Processing the input file")
     logging.info("Filtering the required columns")
     df = df[df['UNIT_MEASURE'] == "PS"]
-    # df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
     df = df[[
         'TERRITORIAL_LEVEL', 'REF_AREA', 'Reference area', 'AGE', 'SEX',
         'TIME_PERIOD', 'OBS_VALUE'

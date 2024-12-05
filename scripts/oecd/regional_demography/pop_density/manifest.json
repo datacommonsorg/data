@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "OECDRegionalDemography_populationdensity",
+      "import_name": "OECDRegionalDemography_PopulationDensity",
       "curator_emails": [
         "chharish@google.com"
       ],
