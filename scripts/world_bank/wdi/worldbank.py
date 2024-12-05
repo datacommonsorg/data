@@ -434,8 +434,10 @@ def download_indicator_data(worldbank_countries, indicator_codes, mode):
     return worldbank_dataframe.rename({'year': 'Year'}, axis=1)
 
 
-def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
-                                    indicator_codes):
+def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
+                                    tmcfs_for_stat_vars,
+                                    indicator_codes,
+                                    saveOutput=True):
     """ Outputs TMCFs and CSVs for each grouping of stat vars.
 
         Args:
@@ -487,11 +489,13 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
         # Coverting dcid to existing dcid
         df['StatisticalVariable'] = df['StatisticalVariable'].astype(str)
         df = df.replace({'StatisticalVariable': RESOLUTION_TO_EXISTING_DCID})
-
-        logging.info("Writing output csv")
-        df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
-                                                float_format='%.10f',
-                                                index=False)
+        if saveOutput:
+            logging.info("Writing output csv")
+            df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
+                                                    float_format='%.10f',
+                                                    index=False)
+        else:
+            return df
     except Exception as e:
         logging.fatal(f"Error generating output {e}")
 
@@ -523,7 +527,7 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
     return row
 
 
-def process(indicator_codes, worldbank_dataframe):
+def process(indicator_codes, worldbank_dataframe, saveOutput=True):
     logging.info("Processing the input files")
     try:
         # Add source description to note.
@@ -583,8 +587,11 @@ def process(indicator_codes, worldbank_dataframe):
                 'dcid:FertilityRate_Person_Female', 'dcid:LifeExpectancy_Person'
             ] else 'P1Y')
         # Output final CSVs and variables.
-        output_csv_and_tmcf_by_grouping(worldbank_dataframe,
-                                        tmcfs_for_stat_vars, indicator_codes)
+        df = output_csv_and_tmcf_by_grouping(worldbank_dataframe,
+                                             tmcfs_for_stat_vars,
+                                             indicator_codes, saveOutput)
+        if not saveOutput:
+            return df
     except Exception as e:
         logging.fatal(f"Error processing input file {e}")
 
@@ -596,6 +603,9 @@ def main(_):
     worldbank_countries = pd.read_csv("WorldBankCountries.csv")
     worldbank_dataframe = download_indicator_data(worldbank_countries,
                                                   indicator_codes, _FLAGS.mode)
+    worldbank_dataframe.to_csv(
+        "/usr/local/google/home/sanikap/wdiGit/data/scripts/world_bank/wdi/sa.csv"
+    )
     if mode == "" or mode == "process":
         process(indicator_codes, worldbank_dataframe)
 
