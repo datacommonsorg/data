@@ -63,6 +63,11 @@ def main():
     clean_air_quality_data(file_path, output_file)
 
 
+# this method is applicable only for "census tract PM25"
+def add_prefix_zero(value, length):
+    return value.zfill(length)
+
+
 def clean_air_quality_data(file_path, output_file):
     """
     Args:
@@ -73,12 +78,8 @@ def clean_air_quality_data(file_path, output_file):
     """
     print("Cleaning file...")
     data = pd.read_csv(file_path)
-    if "Ozone" in file_path and "County" in file_path:
-        data["Month"] = data["Month"].map(MONTH_MAP)
-        data["date"] = pd.to_datetime(data[["Year", "Month", "Day"]],
-                                      yearfirst=True)
-    else:
-        data["date"] = pd.to_datetime(data["date"], yearfirst=True)
+    data["date"] = pd.to_datetime(data["date"], yearfirst=True)
+
     if "PM2.5" in file_path:
         census_tract = "DS_PM"
     elif "Ozone" in file_path:
@@ -93,14 +94,19 @@ def clean_air_quality_data(file_path, output_file):
                        var_name='StatisticalVariable',
                        value_name='Value')
         data.rename(columns={census_tract + '_stdd': 'Error'}, inplace=True)
+        max_length = data['ctfips'].astype(str).str.len().max()
+        data['ctfips'] = data['ctfips'].astype(str).apply(
+            lambda x: add_prefix_zero(x, max_length))
         data["dcid"] = "geoId/" + data["ctfips"].astype(str)
         data['StatisticalVariable'] = data['StatisticalVariable'].map(STATVARS)
     elif "County" in file_path and "PM" in file_path:
-        data["countyfips"] = "1200" + data["countyfips"].astype(str)
-        data["dcid"] = "geoId/" + data["countyfips"].astype(str)
+        data["statefips"] = data["statefips"].astype(str).str.zfill(2)
+        data["countyfips"] = data["countyfips"].astype(str).str.zfill(3)
+        data["dcid"] = "geoId/" + data["statefips"] + data["countyfips"]
     elif "County" in file_path and "Ozone" in file_path:
-        data["countyfips"] = "1200" + data["countyfips"].astype(str)
-        data["dcid"] = "geoId/" + data["countyfips"].astype(str)
+        data["statefips"] = data["statefips"].astype(str).str.zfill(2)
+        data["countyfips"] = data["countyfips"].astype(str).str.zfill(3)
+        data["dcid"] = "geoId/" + data["statefips"] + data["countyfips"]
     data.to_csv(output_file, float_format='%.6f', index=False)
     print("Finished cleaning file!")
 
