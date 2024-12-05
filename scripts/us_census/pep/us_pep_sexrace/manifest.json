@@ -1,0 +1,31 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "USCensusPEP_By_Sex_Race",
+        "curator_emails": ["shamimansari@google.com"],
+        "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
+        "provenance_description": "US Census Population Estimates Program (PEP)",
+        "scripts": ["preprocess.py"],
+        "import_inputs": [
+          {
+            "template_mcf": "output_files/final/national_after_2000.tmcf",
+            "cleaned_csv": "output_files/final/national_after_2000.csv"
+          },
+          {
+            "template_mcf": "output_files/final/national_before_2000.tmcf",
+            "cleaned_csv": "output_files/final/national_before_2000.csv"
+          },
+          {
+            "template_mcf": "output_files/final/state_county_after_2000.tmcf",
+            "cleaned_csv": "output_files/final/state_county_after_2000.csv"
+          },
+          {
+            "template_mcf": "output_files/final/state_county_before_2000.tmcf",
+            "cleaned_csv": "output_files/final/state_county_before_2000.csv"
+          }
+        ],
+        "cron_schedule": "0 10 * * 1"
+      }
+    ]
+  }
+  

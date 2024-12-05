@@ -1,3 +1,16 @@
+# Copyright 2024 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 # US Census PEP: Populations Estimates By Sex And Race
 
 ## About the Dataset
@@ -76,7 +89,10 @@ The below command will run preprocess_test.py `python3 -m unittest script/us_cen
 The below command will run preprocess.py and generate three output csv, mcf and tmcf.  `python3 script/us_census/pep/population_estimate_by_sr/preprocess.py`
 
 ### Additional Notes
-This import has seperate .py script for different year ranges. They are as follow:
+
+We have modified the script for Automation setup, now it's not required to add below mentioned python file from year(2023). Code will take care of future URL formation automatically.
+
+<!-- This import has seperate .py script for different year ranges. They are as follow:
 
 1. county_1970_1979.py, county_1980_1989.py, county_1990_2000.py, county_2000_2009.py, county_2010_2020.py
 - These scripts process as is data for County from year 1970 to 2020. Different python modules are written as schema changes across decades. 
@@ -91,6 +107,20 @@ This import has seperate .py script for different year ranges. They are as follo
 - These scripts process as is data for National from year 1900 to 2000. Different python modules are written as schema changes across decades.
 
 5. national_2010_2020.py 
-- This script aggregates data from  state level to national level from year 2010 to 2020 as the    intercensal files were not availabel for this year range at state level.
+- This script aggregates data from  state level to national level from year 2010 to 2020 as the    intercensal files were not availabel for this year range at state level. -->
 
 All these scripts are processed by running preprocess.py script.
+
+Execute the 'preprocess.py' script by using the following commands:
+
+  - if you want to perform "download and process" at a time, then run the below command:
+
+       python3 preprocess.py
+
+  - if you want to perform "only process", run the below command:
+
+       python3 preprocess.py --mode=process
+ 
+  - if you want to perform "only download", run the below command:
+
+       python3 preprocess.py --mode=download
