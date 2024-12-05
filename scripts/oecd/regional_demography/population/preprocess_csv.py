@@ -46,21 +46,29 @@ def process_data(df, output_file_path):
     ]]
     df['TIME_PERIOD'] = df['TIME_PERIOD'].astype(int)
     # First remove geos with names that we don't have mappings to dcid for.
-    regid_file = "scripts/oecd/regional_demography/regid2dcid.json"
-    with open(regid_file, 'r') as f:
-        regid2dcid = dict(json.loads(f.read()))
-    logging.info("Resolving places")
-    df = df[df['REF_AREA'].isin(regid2dcid.keys())]
-    # Second, replace the names with dcids
-    #print(df.head())
-    df['Reference area'] = df.apply(lambda row: regid2dcid[row['REF_AREA']],
-                                    axis=1)
+    try:
+        regid_file = "scripts/oecd/regional_demography/regid2dcid.json"
+        with open(regid_file, 'r') as f:
+            regid2dcid = dict(json.loads(f.read()))
+        logging.info("Resolving places")
+        df = df[df['REF_AREA'].isin(regid2dcid.keys())]
+        # Second, replace the names with dcids
+        df['Reference area'] = df.apply(lambda row: regid2dcid[row['REF_AREA']],
+                                        axis=1)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        logging.error(f"Error processing regid2dcid.json: {e}")
+        return None  # Indicate failure
 
-    df_cleaned = df.pivot_table(
-        values='OBS_VALUE',
-        index=['REF_AREA', 'Reference area', 'TIME_PERIOD'],
-        columns=['AGE', 'SEX'])
-    df_cleaned = multi_index_to_single_index(df_cleaned)
+    try:
+        df_cleaned = df.pivot_table(
+            values='OBS_VALUE',
+            index=['REF_AREA', 'Reference area', 'TIME_PERIOD'],
+            columns=['AGE', 'SEX'])
+        df_cleaned = multi_index_to_single_index(df_cleaned)
+    except Exception as e:
+        logging.error(
+            f"Unable to pivot the dataframe and retain the column:{e}")
+        return None
     # Renaming column headers to SVs
     df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
     drop_cols = []

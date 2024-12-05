@@ -46,24 +46,32 @@ def process_data(df, output_file_path):
     df1["AGE"] = df1["UNIT_MEASURE"] + "_" + df1["AGE"] + df1["SEX"]
 
     # First remove geos with names that we don't have mappings to dcid for.
-    # regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
-    regid_file = "scripts/oecd/regional_demography/regid2dcid.json"
-    with open(regid_file, 'r') as f:
-        regid2dcid = dict(json.loads(f.read()))
-    logging.info("Resolving places")
-    df1 = df1[df1['REF_AREA'].isin(regid2dcid.keys())]
-
-    # Second, replace the names with dcids
-    df1['Reference area'] = df1.apply(lambda row: regid2dcid[row['REF_AREA']],
-                                      axis=1)
+    try:
+        regid_file = "scripts/oecd/regional_demography/regid2dcid.json"
+        with open(regid_file, 'r') as f:
+            regid2dcid = dict(json.loads(f.read()))
+        logging.info("Resolving places")
+        df = df[df['REF_AREA'].isin(regid2dcid.keys())]
+        # Second, replace the names with dcids
+        df['Reference area'] = df.apply(lambda row: regid2dcid[row['REF_AREA']],
+                                        axis=1)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        logging.error(f"Error processing regid2dcid.json: {e}")
+        return None  # Indicate failure
 
     df1['TIME_PERIOD'] = '"' + df1['TIME_PERIOD'].astype(str) + '"'
 
     temp = df1[['Reference area', 'AGE', 'SEX', 'TIME_PERIOD', 'OBS_VALUE']]
-    temp_multi_index = temp.pivot_table(values='OBS_VALUE',
-                                        index=['Reference area', 'TIME_PERIOD'],
-                                        columns=['AGE', 'SEX'])
-    df_cleaned = multi_index_to_single_index(temp_multi_index)
+    try:
+        temp_multi_index = temp.pivot_table(
+            values='OBS_VALUE',
+            index=['Reference area', 'TIME_PERIOD'],
+            columns=['AGE', 'SEX'])
+        df_cleaned = multi_index_to_single_index(temp_multi_index)
+    except Exception as e:
+        logging.error(
+            f"Unable to pivot the dataframe and retain the column:{e}")
+        return None
     # Renaming column headers to their SVs
     df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
     # Filtering the reuired columns

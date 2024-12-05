@@ -49,22 +49,32 @@ def process_data(df, output_file_path):
     logging.info("Filtering the required columns")
     df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
     # First remove geos with names that we don't have mappings to dcid for.
-    regid_file = "scripts/oecd/regional_demography/regid2dcid.json"
-    with open(regid_file, 'r') as f:
-        regid2dcid = dict(json.loads(f.read()))
-    logging.info("Resolving places")
-    df = df[df['REG_ID'].isin(regid2dcid.keys())]
-    # Second, replace the names with dcids
-    df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
+    try:
+        regid_file = "scripts/oecd/regional_demography/regid2dcid.json"
+        with open(regid_file, 'r') as f:
+            regid2dcid = dict(json.loads(f.read()))
+        logging.info("Resolving places")
+        df = df[df['REF_AREA'].isin(regid2dcid.keys())]
+        # Second, replace the names with dcids
+        df['Reference area'] = df.apply(lambda row: regid2dcid[row['REF_AREA']],
+                                        axis=1)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        logging.error(f"Error processing regid2dcid.json: {e}")
+        return None  # Indicate failure
 
     df['Year'] = '"' + df['Year'].astype(str) + '"'
     temp = df[['REG_ID', 'Region', 'VAR', 'Year', 'Value']]
-    temp_multi_index = temp.pivot_table(values='Value',
-                                        index=['REG_ID', 'Region', 'Year'],
-                                        columns=['VAR'])
-    df_cleaned = multi_index_to_single_index(temp_multi_index)[[
-        'REG_ID', 'Region', 'Year', 'POP'
-    ]]
+    try:
+        temp_multi_index = temp.pivot_table(values='Value',
+                                            index=['REG_ID', 'Region', 'Year'],
+                                            columns=['VAR'])
+        df_cleaned = multi_index_to_single_index(temp_multi_index)[[
+            'REG_ID', 'Region', 'Year', 'POP'
+        ]]
+    except Exception as e:
+        logging.error(
+            f"Unable to pivot the dataframe and retain the column:{e}")
+        return None
     # Renaming column header to SVs
     VAR_to_statsvars = {
         'POP': 'Count_Person_PerArea'
