@@ -47,6 +47,11 @@ flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 _HEADER = 1
 _SCALING_FACTOR_TXT_FILE = 1000
 
+#Creating folder to store the raw data from source
+raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"raw_data")
+if not os.path.exists(raw_data_path):
+    os.mkdir(raw_data_path)
+    
 _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Person\n"
@@ -438,8 +443,8 @@ def add_future_year_urls():
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/national/totals/NA-EST{YEAR}-POP.xlsx"
     ]
-    # This method will generate URLs for the years 2024 to 2029
-    for future_year in range(2024, 2030):
+    # This method will generate URLs for the years 2021 to 2029
+    for future_year in range(2021, 2029):
         if dt.now().year > future_year:
             YEAR = future_year
             for url in urls_to_scan:
@@ -592,6 +597,7 @@ def download_files():
                 file_name = url.split("/")[-1]
                 if ".xls" in url:
                     df = pd.read_excel(url, header=_HEADER)
+                    df.to_excel(os.path.join(raw_data_path,file_name),index=False,header=False,engine='xlsxwriter')
                     df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
                                 index=False,
                                 header=False,
@@ -600,6 +606,7 @@ def download_files():
                     file_name = file_name.replace(".csv", ".xlsx")
                     df = pd.read_csv(url, header=None)
                     df = _clean_csv_file(df)
+                    df.to_excel(os.path.join(raw_data_path,file_name),index=False,engine='xlsxwriter')
                     df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
                                 index=False,
                                 engine='xlsxwriter')
@@ -620,6 +627,7 @@ def download_files():
                     # Skipping 17 rows as the initial 17 rows contains the information about
                     # the file being used, heading files spread accross multiple lines and
                     # other irrelevant information like source/contact details.
+                    df.to_excel(os.path.join(raw_data_path,file_name),index=False,engine='xlsxwriter')
                     df = _clean_txt_file(df)
                     # Multiplying the data with scaling factor 1000.
                     for col in df.columns:
