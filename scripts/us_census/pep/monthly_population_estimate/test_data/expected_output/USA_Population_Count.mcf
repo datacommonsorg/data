@@ -34,3 +34,10 @@ statType: dcs:measuredValue
 measuredProperty: dcs:count
 armedForcesStatus: dcs:Civilian
 institutionalization: dcs:USC_NonInstitutionalized
+
+Node: dcid:Count_Person_ResidesInHousehold
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+residenceType: dcs:Household
