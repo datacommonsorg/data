@@ -77,6 +77,7 @@ def state1990(url_file: str, output_folder: str):
     final_df['geo_ID'] = 'country/USA'
     final_df = final_df.groupby(['geo_ID','Year','Measurement_Method','SVs'])\
         .sum()
+
     final_df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
                      'national_1990_2000.csv'))

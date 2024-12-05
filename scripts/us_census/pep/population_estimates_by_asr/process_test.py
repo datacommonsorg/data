@@ -74,7 +74,6 @@ class TestPreprocess(unittest.TestCase):
     base = USCensusPEPByASR(ip_data, cleaned_csv_file_path, mcf_file_path,
                             tmcf_file_path)
     base.process()
-    shutil.rmtree(input_path, ignore_errors=True)
 
     def test_mcf_tmcf_files(self):
         """
@@ -100,11 +99,6 @@ class TestPreprocess(unittest.TestCase):
 
         with open(self.tmcf_file_path, encoding="UTF-8") as tmcf_file:
             tmcf_data = tmcf_file.read()
-        if path.exists(self.mcf_file_path):
-            os.remove(self.mcf_file_path)
-        if path.exists(self.tmcf_file_path):
-            os.remove(self.tmcf_file_path)
-
         self.assertEqual(expected_mcf_data.strip(), mcf_data.strip())
         self.assertEqual(expected_tmcf_data.strip(), tmcf_data.strip())
 
@@ -123,7 +117,9 @@ class TestPreprocess(unittest.TestCase):
 
         with open(self.cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
             csv_data = csv_file.read()
-        if path.exists(self.cleaned_csv_file_path):
-            os.remove(self.cleaned_csv_file_path)
 
         self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+
+
+if __name__ == '__main__':
+    unittest.main()

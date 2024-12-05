@@ -45,6 +45,8 @@ def national1900(output_folder: str):
         df = pd.read_csv(url,names=cols,engine='python',skiprows=9,\
             skipfooter=15,encoding='ISO-8859-1')
         df['Age'] = df['Age'].astype(str)
+        df['Age'] = df['Age'].str.replace("75+", "75OrMore")
+        df['Age'] = df['Age'].str.replace("85+", "85OrMore")
         df['Age'] = df['Age'].str.replace("75\\+", "75OrMore")
         df['Age'] = df['Age'].str.replace("85\\+", "85OrMore")
         df['Age'] = df['Age'] + 'Years'

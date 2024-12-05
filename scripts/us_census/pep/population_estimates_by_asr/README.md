@@ -1,3 +1,18 @@
+# Copyright 2024 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 # US Census PEP: Population Estimates by Age, Sex and Race
 
 ## About the Dataset
@@ -19,7 +34,7 @@ These are the attributes that we will use
 |-------------------------------------------------------|---------------------------------------------------------------------------------------|
 | Year       					| The Year of the population estimates provided. 				|
 | Age   				| The Individual Ages or Age Buckets of the population in the US. 						|
-| Race   	| Races of the population in the US (https://www.census.gov/topics/population/race/about.html, https://www.census.gov/newsroom/blogs/random-samplings/2021/08/measuring-racial-ethnic-diversity-2020-census.html).  	|
+| Race   	| Races of the population in the US (https://www.census.gov/topics/population/race/about.html, https://www.census.gov/newsroom/blogs/random-samplings/2021/08/measuring-racial-ethnic-diversi   ty-2020-census.html).  	|
 | Sex   				| Gender either Male or Female. 							|
 
 
@@ -53,3 +68,23 @@ Run the test cases
 The below script will download the data and clean the data, Also generate final csv, mcf and tmcf files.
 
 `/bin/python3 scripts/us_census/pep/Population_Estimate_by_ASR/process.py`
+
+Execute the 'process.py' script by using the following commands:
+
+  - if you want to perform "download and process", run the below command:
+
+        `python3 process.py
+
+  - if you want to perform "only process", run the below command:
+
+        `python3 process.py --mode=process`
+        
+  - if you want to perform "only download", run the below command:
+
+        `python3 process.py --mode=download`
+
+### New Implentation:
+- [Updated the script on October 29, 2024]
+- Downloading input files is now integrated into preprocess.py, eliminating the need to run the separate download.sh script. 
+- All source file URLs, including future URLs adhering to the same structure, are centrally managed in the input_url.json file.
+- All input files required for processing should be stored within the designated "input_files" folder.

@@ -80,6 +80,7 @@ def state2000(url_file: str, output_folder: str):
     df = df.drop(columns=['AGEGRP', 'RACE', 'SEX'])
     df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
     df['SVs'] = df['SVs'].str.replace('_Total', '')
+
     df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
                      'state_2000_2010.csv'))
