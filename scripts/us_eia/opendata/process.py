@@ -31,7 +31,7 @@ from absl import flags
 from absl import app
 from absl import logging
 
-from process import  common, elec, intl, ng, nuclear, pet, seds, total
+from process import common, elec, intl, ng, nuclear, pet, seds, total
 
 MANIFEST_URL = "https://api.eia.gov/bulk/manifest.txt"
 
@@ -41,7 +41,7 @@ flags.DEFINE_string('dataset', '',
                     'Datasets to download. Everything, if empty.')
 flags.DEFINE_string('mode', '', 'Options: download or process')
 
-# Value: (name, extract_fn, schema_fn)
+## Value: (name, extract_fn, schema_fn)
 _DATASETS = {
     'COAL': ('Coal', coal.extract_place_statvar, coal.generate_statvar_schema),
     'ELEC': ('Electricity', elec.extract_place_statvar,

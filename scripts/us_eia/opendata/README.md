@@ -34,7 +34,7 @@ This dataset is available for public use, license is available at https://www.ei
 
    If you want to perform "only process", run the below command:
 
-   Running this command generates input_fles and csv, mcf, tmcf, svg.mcf files
+   Running this command generates input_fles and csv, mcf, tmcf, svg.mcf files.
 
         python3 process.py --dataset=INTL --mode=process
         python3 process.py --dataset=ELEC --mode=process
@@ -44,7 +44,7 @@ This dataset is available for public use, license is available at https://www.ei
         python3 process.py --dataset=NUC_STATUS --mode=process
         python3 process.py --dataset=TOTAL --mode=process
         
-    To Download and process the data together, run the below command
+    To Download and process the data together, run the below command:
     ```bash
     python3 process.py --dataset=TOTAL
     python3 process.py --dataset=INTL
