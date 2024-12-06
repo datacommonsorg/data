@@ -8,10 +8,13 @@ import requests
 import pandas as pd
 from absl import logging
 
-YEARS = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
+YEARS = [
+    '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023',
+    '2024'
+]
 
 NORM_CSV_COLUMNS = ['ID', 'DSLPM', 'CANCER', 'RESP', 'OZONE', 'PM25']
-NORM_CSV_COLUMNS1 = ['ID', 'DSLPM',  'OZONE', 'PM25']
+NORM_CSV_COLUMNS1 = ['ID', 'DSLPM', 'OZONE', 'PM25']
 
 # 2015 has different csv column names
 CSV_COLUMNS_BY_YEAR = {
@@ -137,8 +140,8 @@ if __name__ == '__main__':
             if year == '2024':
                 logging.info(f'inside 2024 {zip_filename}')
                 response = requests.get(
-            f'https://gaftp.epa.gov/EJSCREEN/2024/2.32_August_UseMe/{zip_filename}.zip',
-            verify=False)
+                    f'https://gaftp.epa.gov/EJSCREEN/2024/2.32_August_UseMe/{zip_filename}.zip',
+                    verify=False)
             elif year == '2023':
                 logging.info(f'inside 2023 {zip_filename}')
                 response = requests.get(
@@ -169,26 +172,15 @@ if __name__ == '__main__':
             dfs[year] = pd.read_csv(io.StringIO(response.text),
                                     sep=',',
                                     usecols=columns)
-            #response_content=response.content
-            #dfs[year] = pd.read_csv(io.StringIO(response_content.decode('utf-8')))
 
-    #     # rename weird column names to match other years
-    #     if columns != NORM_CSV_COLUMNS:
-    #         cols_renamed = dict(zip(columns, NORM_CSV_COLUMNS))
-    #         dfs[year] = dfs[year].rename(columns=cols_renamed)
-
-    # write_csv(dfs, 'ejscreen_airpollutants.csv')
-    # write_tmcf('ejscreen.tmcf')
-# Rename weird column names to match other years
         if year == '2024':
             # Use NORM_CSV_COLUMNS1 for 2024
             cols_renamed = dict(zip(columns, NORM_CSV_COLUMNS1))
         else:
             # Use NORM_CSV_COLUMNS for other years
             cols_renamed = dict(zip(columns, NORM_CSV_COLUMNS))
-        
+
         dfs[year] = dfs[year].rename(columns=cols_renamed)
 
     write_csv(dfs, 'ejscreen_airpollutants.csv')
     write_tmcf('ejscreen.tmcf')
-    
