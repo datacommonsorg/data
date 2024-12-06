@@ -4,7 +4,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:PM25CountyPollution->date
 value: C:PM25CountyPollution->PM25_mean_pred
 observationPeriod: "P24H"
-unit: μg/m3
+unit: MicrogramsPerCubicMeter
 variableMeasured: dcs:Mean_Concentration_AirPollutant_PM2.5
 
 Node: E:PM25CountyPollution->E2
@@ -13,7 +13,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:PPM25CountyPollution->date
 value: C:PM25CountyPollution->PM25_med_pred
 observationPeriod: "P24H"
-unit: μg/m3
+unit: MicrogramsPerCubicMeter
 variableMeasured: dcs:Median_Concentration_AirPollutant_PM2.5
 
 Node: E:PM25CountyPollution->E3
@@ -22,7 +22,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:PM25CountyPollution->date
 value: C:PM25CountyPollution->PM25_max_pred
 observationPeriod: "P24H"
-unit: μg/m3
+unit: MicrogramsPerCubicMeter
 variableMeasured: dcs:Max_Concentration_AirPollutant_PM2.5
 
 Node: E:PM25CountyPollution->E4
@@ -31,5 +31,5 @@ typeOf: dcs:StatVarObservation
 observationDate: C:PM25CountyPollution->date
 value: C:PM25CountyPollution->PM25_pop_pred
 observationPeriod: "P24H"
-unit: μg/m3
+unit: MicrogramsPerCubicMeter
 variableMeasured: dcs:PopulationWeighted_Concentration_AirPollutant_PM2.5
