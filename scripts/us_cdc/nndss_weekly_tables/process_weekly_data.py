@@ -20,6 +20,7 @@ sys.path.append(os.path.join(_SCRIPT_PATH,
 
 from statvar_dcid_generator import get_statvar_dcid
 
+end_year = datetime.date.today().year + 1
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'weekly_nndss_input', './data/nndss_weekly_data',
@@ -28,6 +29,9 @@ flags.DEFINE_string(
     'weekly_nndss_output', './data/output',
     'Path to the directory where generated files are to be stored.')
 flags.DEFINE_string('mode', '', 'Options: download or process')
+flags.DEFINE_integer('start_year', 2006,
+                     'give the download year deault is 2006')
+flags.DEFINE_integer('end_year', end_year, 'give the download year')
 
 _PREFIX = 'cdc_nndss_weekly_tables'
 
@@ -255,7 +259,7 @@ def concat_rows_with_column_headers(rows_with_col_names, df_column_list):
 def process_nndss_current_weekly(input_filepath: str):
     ## from the csv files get the year, and week count
     filename = input_filepath.split('/')[-1]
-    logging.info("File name ", filename)
+    logging.info(f"File name {filename}")
     year = int(filename[10:14])
     week = int(filename[25:27])
 
@@ -508,8 +512,8 @@ def generate_processed_csv(input_path):
     # concat list of all processed data frames
 
     cleaned_dataframe = pd.concat(processed_dataframe_list, ignore_index=False)
-    logging.info("Count of processed_dataframe_list ",
-                 len(processed_dataframe_list))
+    logging.info(
+        f"Count of processed_dataframe_list {len(processed_dataframe_list)}")
     del processed_dataframe_list
 
     # set measurement method
@@ -528,8 +532,8 @@ def generate_processed_csv(input_path):
 def main(_) -> None:
     mode = FLAGS.mode
     if mode == "" or mode == "download":
-        _START = 2006
-        _END = 2025
+        _START = FLAGS.start_year
+        _END = FLAGS.end_year
         flags.DEFINE_string(
             'output_path', './data',
             'Path to the directory where generated files are to be stored.')
@@ -559,7 +563,6 @@ def main(_) -> None:
             # column - statvar dictionary map
             sv_map, dcid_df = generate_statvar_map_for_columns(
                 unique_columns, unique_places)
-            logging.info("sv_map, dcid_df", end='\r')
             # map the statvars to column names
             cleaned_dataframe = pd.merge(cleaned_dataframe,
                                          dcid_df,
@@ -605,7 +608,7 @@ def main(_) -> None:
                                      index=False)
             logging.info("Completed")
         except Exception as e:
-            logging.info("Exception: %s", e)
+            logging.fatal(f"Exception: {e}")
 
 
 if __name__ == '__main__':

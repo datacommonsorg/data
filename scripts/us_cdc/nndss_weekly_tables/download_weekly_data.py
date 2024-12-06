@@ -19,11 +19,10 @@ import os
 import requests
 import pandas as pd
 from absl import flags, app
+from absl import logging
 from bs4 import BeautifulSoup
 
-_START = 2006
-_END = 2025  #datetime.date.today().year + 1  #to make the last year inclusive
-
+# URLS to process the dataset
 _BASE_URL = "https://wonder.cdc.gov/nndss/"
 _WEEKLY_TABLE_2010 = _BASE_URL + "nndss_weekly_tables_menu.asp?mmwr_year={year}&mmwr_week={week}"
 _WEEKLY_TABLE_2017 = _BASE_URL + 'nndss_weekly_tables_menu.asp?mmwr_year={year}&mmwr_week={week}'
@@ -53,7 +52,7 @@ def parse_html_table(table_url: str, file_path: str) -> None:
             except IndexError:
                 # This case occurs when downloading https://wonder.cdc.gov/nndss/nndss_reps.asp?mmwr_year=2007&mmwr_week=13&mmwr_table=1&request=Submit
                 # The link is unaccessible even from the website and we need to skip this table's download
-                print("Link not working. Skipping table...")
+                logging.error("Link not working. Skipping table...")
                 pass
 
 
@@ -66,20 +65,17 @@ def extract_table_from_link(table_url: str,
     num_tries = 10
     file_path = os.path.join(output_path, f'{filename}.csv')
     if not os.path.exists(file_path) or update:
-        print(f"Downloading {table_url}", end=" ..... ", flush=True)
+        logging.info(f"Downloading {table_url}")
         try:
             parse_html_table(table_url, file_path)
-            print("Done.", flush=True)
+            logging.info(f"Done. {table_url}")
         except:
-            print("Terminated with error. Please check the link.", flush=True)
-            while num_tries > 1:
-                num_tries = num_tries - 1
-                parse_html_table(table_url, file_path)
-                print(f"Attempting download again. Tries remaining {num_tries}")
-                time.sleep(1)
+            logging.fatal(
+                f"Terminated with error. Please check the link. {table_url}")
         time.sleep(2)
     else:
-        print(f"Download from {table_url} already exists in {output_path}")
+        logging.info(
+            f"Download from {table_url} already exists in {output_path}")
         time.sleep(0.2)
 
 
@@ -102,7 +98,8 @@ def scrape_table_links_from_page(page_url: str,
             # extract filename from link patterns like https://wonder.cdc.gov/nndss/nndss_reps.asp?mmwr_year=1996&mmwr_week=01&mmwr_table=2A&request=Submit
             filename = table_url.split('?')[1].split('&request')[0].replace(
                 '=', '_').replace('&', '_')
-            print("Submit", table_url, filename, output_path, update)
+            logging.info(
+                f"Submit , {table_url}, {filename}, {output_path}, {update}")
             extract_table_from_link(table_url, filename, output_path, update)
 
         # From year 2017, the base link structure has changed to: https://wonder.cdc.gov/nndss/static/2017/01/2017-01-table1.html
@@ -142,7 +139,7 @@ def download_weekly_nnds_data_across_years(year_range: str,
             week_range = [str(x).zfill(2) for x in range(1, 54)]
         for week in week_range:
             index_url = get_index_url(year, week)
-            print(f"Fetching data from {index_url}")
+            logging.info(f"Fetching data from {index_url}")
             scrape_table_links_from_page(index_url, output_path, update=False)
 
 
@@ -167,12 +164,18 @@ def download_latest_weekly_nndss_data(year: str, output_path: str) -> None:
     """
 	"""
     index_url = "https://wonder.cdc.gov/nndss/nndss_weekly_tables_menu.asp"
-    print(f"Fetching data from {index_url}")
+    logging.info(f"Fetching data from {index_url}")
     scrape_table_links_from_page(index_url, output_path)
 
 
 def main(_) -> None:
     FLAGS = flags.FLAGS
+    end_year = datetime.date.today().year + 1
+    flags.DEFINE_integer('start_year', 2006,
+                         'give the download year deault is 2006')
+    flags.DEFINE_integer('end_year', end_year, 'give the download year')
+    _START = FLAGS.start_year
+    _END = FLAGS.end_year
     flags.DEFINE_string(
         'output_path', './data',
         'Path to the directory where generated files are to be stored.')
