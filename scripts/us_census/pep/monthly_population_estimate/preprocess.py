@@ -15,22 +15,43 @@
     from the datasets in the provided local path.
     Typical usage:
     1. python3 preprocess.py
-    2. python3 preprocess.py -i input_data
+    2. python3 preprocess.py -mode='download'
+    3. python3 preprocess.py -mode='process'
 """
 from dataclasses import replace
 import os
 import re
+import warnings
+import requests
+import numpy as np
+import time
+import json
+import sys
+from datetime import datetime as dt
 
+warnings.filterwarnings('ignore')
 import pandas as pd
 from absl import app
 from absl import flags
+from absl import logging
 
 pd.set_option("display.max_columns", None)
 
 FLAGS = flags.FLAGS
+flags.DEFINE_string('mode', '', 'Options: download or process')
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "input_data")
+                                  "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
+_HEADER = 1
+_SCALING_FACTOR_TXT_FILE = 1000
+
+#Creating folder to store the raw data from source
+raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "raw_data")
+if not os.path.exists(raw_data_path):
+    os.mkdir(raw_data_path)
 
 _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                  "typeOf: dcs:StatisticalVariable\n"
@@ -174,9 +195,9 @@ class CensusUSACountryPopulation:
     Files using pre-defined templates.
     """
 
-    def __init__(self, input_files: list, csv_file_path: str,
-                 mcf_file_path: str, tmcf_file_path: str) -> None:
-        self._input_files = input_files
+    def __init__(self, input_path: str, csv_file_path: str, mcf_file_path: str,
+                 tmcf_file_path: str) -> None:
+        self.input_path = input_path  #added
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
@@ -267,28 +288,37 @@ class CensusUSACountryPopulation:
         CSV file format.
 
         Arguments:
-            file (str) : Dataset File Path
+        df (DataFrame): Input DataFrame containing the raw data to be transformed.
 
         Returns:
-            df (DataFrame) : DataFrame.
+        bool: Returns True if the transformation and file saving are successful, 
+              False if an error occurs during processing.
         """
 
-        df = self._transform_df(df)
+        try:
+            df = self._transform_df(df)
 
-        if self._df is None:
-            self._df = df
-        else:
-            self._df = self._df.append(df, ignore_index=True)
+            if self._df is None:
+                self._df = df
+            else:
+                self._df = pd.concat([self._df, df], ignore_index=True)
 
-        self._df.sort_values(by=['Date', 'date_range'],
-                             ascending=False,
-                             inplace=True)
-        self._df.drop_duplicates("Date", keep="first", inplace=True)
-        self._df.drop(['date_range'], axis=1, inplace=True)
-        float_col = self._df.select_dtypes(include=['float64'])
-        for col in float_col.columns.values:
-            self._df[col] = self._df[col].astype('int64')
-        self._df.to_csv(self._cleaned_csv_file_path, index=False)
+            self._df.sort_values(by=['Date', 'date_range'],
+                                 ascending=False,
+                                 inplace=True)
+            # Data for 2020 exists in two sources, causing overlap. We'll eliminate duplicates
+            self._df.drop_duplicates("Date", keep="first", inplace=True)
+            self._df.drop(['date_range'], axis=1, inplace=True)
+            float_col = self._df.select_dtypes(include=['float64'])
+            for col in float_col.columns.values:
+                try:
+                    self._df[col] = self._df[col].astype('int64')
+                except:
+                    pass
+            self._df.to_csv(self._cleaned_csv_file_path, index=False)
+        except Exception as e:
+            logging.fatal(f'Error when processing file:-{e}')
+        return True
 
     def _generate_mcf(self, df_cols: list) -> None:
         """
@@ -301,47 +331,49 @@ class CensusUSACountryPopulation:
         Returns:
             None
         """
-
-        mcf_nodes = []
-        for col in df_cols:
-            pvs = []
-            residence = ""
-            status = ""
-            armedf = ""
-            if col.lower() in ["date", "location"]:
-                continue
-            if re.findall('Resident', col):
-                if re.findall('InUSArmedForcesOverseas', col):
-                    status = "USResident__InUSArmedForcesOverseas"
-                else:
-                    status = "USResident"
-                residence = "residentStatus: dcs:" + status
-                pvs.append(residence)
-            elif re.findall('ArmedForces', col):
-                residence = "residentStatus: dcs:" + "InUSArmedForcesOverseas"
-                pvs.append(residence)
-            if re.findall('Resides', col):
-                if re.findall('Household', col):
-                    residence = "residenceType: dcs:" + "Household"
+        try:
+            mcf_nodes = []
+            for col in df_cols:
+                pvs = []
+                residence = ""
+                status = ""
+                armedf = ""
+                if col.lower() in ["date", "location"]:
+                    continue
+                if re.findall('Resident', col):
+                    if re.findall('InUSArmedForcesOverseas', col):
+                        status = "USResident__InUSArmedForcesOverseas"
+                    else:
+                        status = "USResident"
+                    residence = "residentStatus: dcs:" + status
                     pvs.append(residence)
-            if re.findall('Civilian', col):
-                armedf = "armedForcesStatus: dcs:Civilian"
-                pvs.append(armedf)
-                if re.findall('NonInstitutionalized', col):
-                    residence = ("institutionalization: dcs:" +
-                                 "USC_NonInstitutionalized")
+                elif re.findall('ArmedForces', col):
+                    residence = "residentStatus: dcs:" + "InUSArmedForcesOverseas"
                     pvs.append(residence)
-            if re.findall('Count_Person_InUSArmedForcesOverseas', col):
-                armedf = "armedForcesStatus: dcs:InArmedForces"
-                pvs.append(armedf)
-            node = _MCF_TEMPLATE.format(dcid=col, xtra_pvs='\n'.join(pvs))
-            mcf_nodes.append(node)
+                if re.findall('Resides', col):
+                    if re.findall('Household', col):
+                        residence = "residenceType: dcs:" + "Household"
+                        pvs.append(residence)
+                if re.findall('Civilian', col):
+                    armedf = "armedForcesStatus: dcs:Civilian"
+                    pvs.append(armedf)
+                    if re.findall('NonInstitutionalized', col):
+                        residence = ("institutionalization: dcs:" +
+                                     "USC_NonInstitutionalized")
+                        pvs.append(residence)
+                if re.findall('Count_Person_InUSArmedForcesOverseas', col):
+                    armedf = "armedForcesStatus: dcs:InArmedForces"
+                    pvs.append(armedf)
+                node = _MCF_TEMPLATE.format(dcid=col, xtra_pvs='\n'.join(pvs))
+                mcf_nodes.append(node)
 
-            mcf = '\n'.join(mcf_nodes)
+                mcf = '\n'.join(mcf_nodes)
 
-        # Writing Genereated MCF to local path.
-        with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
-            f_out.write(mcf.rstrip('\n'))
+            # Writing Genereated MCF to local path.
+            with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
+                f_out.write(mcf.rstrip('\n'))
+        except Exception as e:
+            logging.fatal(f'Error when Generating MCF file:-{e}')
 
     def _generate_tmcf(self, df_cols: list) -> None:
         """
@@ -378,30 +410,289 @@ class CensusUSACountryPopulation:
         calls defined methods to clean, generate final
         cleaned CSV file, MCF file and TMCF file.
         """
-        for file in self._input_files:
+        #input_path = FLAGS.input_path
+        ip_files = os.listdir(self.input_path)
+        self.input_files = [
+            self.input_path + os.sep + file for file in ip_files
+        ]
+        if len(self.input_files) == 0:
+            logging.info("No files to process")
+            return
+        processed_count = 0
+        total_files_to_process = len(self.input_files)
+        logging.info(f"No of files to be processed {len(self.input_files)}")
+        for file in self.input_files:
             df = self._load_data(file)
-            self._transform_data(df)
-        self._generate_mcf(self._df.columns)
-        self._generate_tmcf(self._df.columns)
+            result = self._transform_data(df)
+            if result:
+                processed_count += 1
+            else:
+                logging.fatal(f'Failed to process {file}')
+        logging.info(f"No of files processed {processed_count}")
+        if total_files_to_process > 0 & (processed_count
+                                         == total_files_to_process):
+            self._generate_mcf(self._df.columns)
+            self._generate_tmcf(self._df.columns)
+        else:
+            logging.fatal(
+                "Aborting output files as no of files to process not matching processed files"
+            )
+
+
+def add_future_year_urls():
+    """
+    This method scans the download URLs for future years.
+    """
+    global _FILES_TO_DOWNLOAD
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
+        _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    urls_to_scan = [
+        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/national/totals/NA-EST{YEAR}-POP.xlsx"
+    ]
+    # This method will generate URLs for the years 2021 to 2029
+    # need to the latest avaibale year
+    for future_year in range(2030, 2021, -1):
+        if dt.now().year > future_year:
+            YEAR = future_year
+            for url in urls_to_scan:
+                url_to_check = url.format(YEAR=YEAR)
+                try:
+                    check_url = requests.head(url_to_check)
+                    if check_url.status_code == 200:
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": url_to_check})
+                        break
+
+                except:
+                    logging.error(f"URL is not accessable {url_to_check}")
+
+
+def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    This method cleans the dataframe loaded from a csv file format.
+    Also, Performs transformations on the data.
+
+    Args:
+        df (DataFrame) : DataFrame of csv dataset
+
+    Returns:
+        df (DataFrame) : Transformed DataFrame for txt dataset.
+    """
+    # Removal of file description and headers in the initial lines of the input
+    #
+    # Input Data:
+    # table with row headers in column A and column headers in rows 3 through 5 (leading dots indicate sub-parts)
+    # Table 1. Monthly Population Estimates for the United States:  April 1, 2000 to December 1, 2010
+    # Year and Month    Resident Population     Resident Population Plus Armed Forces Overseas   Civilian Population	Civilian Noninstitutionalized Population
+    # 2000
+    # .April 1	28,14,24,602	28,16,52,670	28,02,00,922	27,61,62,490
+    # .May 1	28,16,46,806	28,18,76,634	28,04,28,534	27,63,89,920
+    #
+    # Output Data:
+    # (Made Headers) Year and Month    Resident Population     Resident Population Plus Armed Forces Overseas   Civilian Population    Civilian Noninstitutionalized Population
+    # 2000
+    # .April 1	28,14,24,602	28,16,52,670	28,02,00,922	27,61,62,490
+    # .May 1	28,16,46,806	28,18,76,634	28,04,28,534	27,63,89,920
+
+    idx = df[df[0] == "Year and Month"].index
+    df = df.iloc[idx.values[0] + 1:][:]
+    df = df.dropna(axis=1, how='all')
+    cols = [
+        "Year and Month", "Resident Population",
+        "Resident Population Plus Armed Forces Overseas", "Civilian Population",
+        "Civilian NonInstitutionalized Population"
+    ]
+    df.columns = cols
+    for col in df.columns:
+        df[col] = df[col].str.replace(",", "")
+    return df
+
+
+def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    This method cleans the dataframe loaded from a txt file format.
+    Also, Performs transformations on the data.
+
+    Arguments:
+        df (DataFrame): DataFrame representing the loaded TXT dataset.
+    
+    Returns:
+        DataFrame: Transformed DataFrame after cleaning operations.
+    """
+    df['Year and Month'] = df[['Year and Month', 'Date']]\
+                                    .apply(_concat_cols, axis=1)
+    df.drop(columns=['Date'], inplace=True)
+    for col in df.columns:
+        df[col] = df[col].str.replace(",", "")
+
+    # The index numbers alotted as per where the columns are present to
+    # move the columns left
+    resident_population = 1
+    resident_population_plus_armed_forces_overseas = 2
+    civilian_population = 3
+    civilian_noninstitutionalized_population = 4
+    # Moving the row data left upto one index value.
+    # As the text file has (census) mentioned in some rows and it makes the
+    # other column's data shift by one place, we need to shift it back to the
+    # original place.
+    idx = df[df['Resident Population'] == "(census)"].index
+    df.iloc[idx, resident_population] = df.iloc[idx][
+        "Resident Population Plus Armed Forces Overseas"]
+    df.iloc[idx, resident_population_plus_armed_forces_overseas] = df.iloc[idx][
+        "Civilian Population"]
+    df.iloc[idx, civilian_population] = df.iloc[idx][
+        "Civilian NonInstitutionalized Population"]
+    df.iloc[idx, civilian_noninstitutionalized_population] = np.NAN
+    return df
+
+
+def _mulitply_scaling_factor(col: pd.Series) -> pd.Series:
+    """
+    This method multiply dataframe column with scaling factor.
+
+    Arguments:
+        col (Series): A DataFrame column of dtype int, containing the values to be scaled.
+
+    Returns:
+        Series: A DataFrame column with values multiplied by the scaling factor.
+    """
+    res = col
+    if col not in [None, np.NAN]:
+        if col.isdigit():
+            res = int(col) * _SCALING_FACTOR_TXT_FILE
+    return res
+
+
+def _concat_cols(col: pd.Series) -> pd.Series:
+    """
+    This method concats two DataFrame column values
+    with space in-between.
+
+    Args:
+        col (Series): A pandas Series containing two values from the DataFrame.
+
+    Returns:
+        res (Series) : Concatenated DataFrame Columns
+    """
+    res = col[0]
+    if col[1] is None:
+        return res
+    res = col[0] + ' ' + col[1]
+    return res
+
+
+def download_files():
+    """
+    This method allows to download the input files.
+    """
+    global _FILES_TO_DOWNLOAD
+    session = requests.session()
+    max_retry = 5
+    for file_to_dowload in _FILES_TO_DOWNLOAD:
+        file_name = None
+        url = file_to_dowload['download_path']
+        if 'file_name' in file_to_dowload and len(
+                file_to_dowload['file_name'] > 5):
+            file_name = file_to_dowload['file_name']
+        else:
+            file_name = url.split('/')[-1]
+        retry_number = 0
+
+        is_file_downloaded = False
+        while is_file_downloaded == False:
+            try:
+                df = None
+                file_name = url.split("/")[-1]
+
+                if ".xls" in url:
+                    df = pd.read_excel(url, header=_HEADER)
+                    df.to_excel(os.path.join(raw_data_path, file_name),
+                                index=False,
+                                header=False,
+                                engine='xlsxwriter')
+                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
+                                index=False,
+                                header=False,
+                                engine='xlsxwriter')
+                elif ".csv" in url:
+                    with requests.get(url, stream=True) as response:
+                        response.raise_for_status()
+                        if response.status_code == 200:
+                            with open(os.path.join(raw_data_path, file_name),
+                                      'wb') as f:
+                                f.write(response.content)
+                    file_name = file_name.replace(".csv", ".xlsx")
+                    df = pd.read_csv(url, header=None)
+                    df = _clean_csv_file(df)
+                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
+                                index=False,
+                                engine='xlsxwriter')
+                elif ".txt" in url:
+                    with requests.get(url, stream=True) as response:
+                        response.raise_for_status()
+                        if response.status_code == 200:
+                            with open(os.path.join(raw_data_path, file_name),
+                                      'wb') as f:
+                                f.write(response.content)
+                    file_name = file_name.replace(".txt", ".xlsx")
+                    cols = [
+                        "Year and Month", "Date", "Resident Population",
+                        "Resident Population Plus Armed Forces Overseas",
+                        "Civilian Population",
+                        "Civilian NonInstitutionalized Population"
+                    ]
+                    df = pd.read_table(url,
+                                       index_col=False,
+                                       delim_whitespace=True,
+                                       engine='python',
+                                       skiprows=17,
+                                       names=cols)
+                    # Skipping 17 rows as the initial 17 rows contains the information about
+                    # the file being used, heading files spread accross multiple lines and
+                    # other irrelevant information like source/contact details.
+                    df = _clean_txt_file(df)
+                    # Multiplying the data with scaling factor 1000.
+                    for col in df.columns:
+                        if "year" not in col.lower():
+                            df[col] = df[col].apply(_mulitply_scaling_factor)
+                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
+                                index=False,
+                                engine='xlsxwriter')
+
+                is_file_downloaded = True
+                logging.info(f"Downloaded file : {url}")
+
+            except Exception as e:
+                logging.error(f"Retry file download {url} - {e}")
+                time.sleep(5)
+                retry_number += 1
+                if retry_number > max_retry:
+                    logging.fatal(f"Error downloading {url}")
+                    logging.error("Exit from script")
+                    sys.exit(1)
+    return True
 
 
 def main(_):
-    input_path = FLAGS.input_path
-
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
-
+    mode = FLAGS.mode
     # Defining Output file names
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "output")
-    cleaned_csv_path = os.path.join(data_file_path, "USA_Population_Count.csv")
-    mcf_path = os.path.join(data_file_path, "USA_Population_Count.mcf")
-    tmcf_path = os.path.join(data_file_path, "USA_Population_Count.tmcf")
-
-    loader = CensusUSACountryPopulation(ip_files, cleaned_csv_path, mcf_path,
-                                        tmcf_path)
-
-    loader.process()
+    output_path = os.path.join(_MODULE_DIR, "output")
+    input_path = os.path.join(_MODULE_DIR, "input_files")
+    if not os.path.exists(input_path):
+        os.mkdir(input_path)
+    if not os.path.exists(output_path):
+        os.mkdir(output_path)
+    cleaned_csv_path = os.path.join(output_path, "USA_Population_Count.csv")
+    mcf_path = os.path.join(output_path, "USA_Population_Count.mcf")
+    tmcf_path = os.path.join(output_path, "USA_Population_Count.tmcf")
+    download_status = True
+    if mode == "" or mode == "download":
+        add_future_year_urls()
+        download_status = download_files()
+    if download_status and (mode == "" or mode == "process"):
+        loader = CensusUSACountryPopulation(FLAGS.input_path, cleaned_csv_path,
+                                            mcf_path, tmcf_path)
+        loader.process()
 
 
 if __name__ == "__main__":
