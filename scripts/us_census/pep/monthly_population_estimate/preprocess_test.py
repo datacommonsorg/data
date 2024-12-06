@@ -14,7 +14,6 @@
 """
 Script to automate the testing for USA Population preprocess script.
 """
-
 import os
 import unittest
 from os import path

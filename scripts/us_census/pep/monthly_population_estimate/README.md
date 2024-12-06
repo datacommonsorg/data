@@ -44,8 +44,6 @@ Run the test cases
 ```/bin/python3 scripts/us_census/pep/monthly_population_estimate/preprocess_test.py
 ```
 
-
-
 ### Import Procedure
 
 [Updated the script on November 11, 2024]
