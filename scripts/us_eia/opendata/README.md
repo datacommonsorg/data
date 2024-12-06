@@ -14,19 +14,6 @@ To ease analysis of the datasets, see [`generate_jsonl_for_bq.py`](generate_json
 
 This dataset is available for public use, license is available at https://www.eia.gov/about/copyrights_reuse.php
 
-### Import procedure
-
-- Download data and will process the data
-    ```bash
-    python3 process.py --dataset=TOTAL
-    python3 process.py --dataset=INTL
-    python3 process.py --dataset=ELEC
-    python3 process.py --dataset=NG
-    python3 process.py --dataset=PET
-    python3 process.py --dataset=SEDS
-    python3 process.py --dataset=NUC_STATUS
-
-    ```
 
 - Run the [processor](process/README.md)
 
@@ -57,4 +44,14 @@ This dataset is available for public use, license is available at https://www.ei
         python3 process.py --dataset=NUC_STATUS --mode=process
         python3 process.py --dataset=TOTAL --mode=process
         
-   
+    To Download and process the data together, run the below command
+    ```bash
+    python3 process.py --dataset=TOTAL
+    python3 process.py --dataset=INTL
+    python3 process.py --dataset=ELEC
+    python3 process.py --dataset=NG
+    python3 process.py --dataset=PET
+    python3 process.py --dataset=SEDS
+    python3 process.py --dataset=NUC_STATUS
+
+    ```

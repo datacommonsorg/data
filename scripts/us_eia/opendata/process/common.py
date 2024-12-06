@@ -16,8 +16,8 @@ import os
 import sys
 import csv
 import json
-import logging
 import re
+from absl import logging
 from collections import defaultdict
 from sys import path
 
