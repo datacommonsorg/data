@@ -24,7 +24,7 @@ sys.path.append(
     os.path.dirname(
         os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
-from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
+from us_eia.opendata.process import common, elec, intl, ng, nuclear, pet, seds, total
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
@@ -32,8 +32,6 @@ module_dir_ = os.path.dirname(__file__)
 _TEST_CASES = [
     # dataset-code, dataset-name, test-case-filename,
     #   extract-fn, schema-fn
-    ('COAL', 'Coal', 'coal', coal.extract_place_statvar,
-     coal.generate_statvar_schema),
     ('ELEC', 'Electricity', 'elec', elec.extract_place_statvar,
      elec.generate_statvar_schema),
     ('INTL', 'Internationa', 'intl', intl.extract_place_statvar, None),
