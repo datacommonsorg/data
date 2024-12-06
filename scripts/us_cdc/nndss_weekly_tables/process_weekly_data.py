@@ -32,6 +32,11 @@ flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_integer('start_year', 2006,
                      'give the download year deault is 2006')
 flags.DEFINE_integer('end_year', end_year, 'give the download year')
+_START = FLAGS.start_year
+_END = FLAGS.end_year
+flags.DEFINE_string(
+    'output_path', './data',
+    'Path to the directory where generated files are to be stored.')
 
 _PREFIX = 'cdc_nndss_weekly_tables'
 
@@ -532,11 +537,7 @@ def generate_processed_csv(input_path):
 def main(_) -> None:
     mode = FLAGS.mode
     if mode == "" or mode == "download":
-        _START = FLAGS.start_year
-        _END = FLAGS.end_year
-        flags.DEFINE_string(
-            'output_path', './data',
-            'Path to the directory where generated files are to be stored.')
+
         year_range = range(_START, _END)
         download_weekly_nnds_data_across_years(year_range, FLAGS.output_path)
 

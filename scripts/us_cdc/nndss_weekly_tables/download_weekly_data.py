@@ -22,6 +22,11 @@ from absl import flags, app
 from absl import logging
 from bs4 import BeautifulSoup
 
+_START = FLAGS.start_year
+_END = FLAGS.end_year
+flags.DEFINE_string(
+    'output_path', './data',
+    'Path to the directory where generated files are to be stored.')
 # URLS to process the dataset
 _BASE_URL = "https://wonder.cdc.gov/nndss/"
 _WEEKLY_TABLE_2010 = _BASE_URL + "nndss_weekly_tables_menu.asp?mmwr_year={year}&mmwr_week={week}"
@@ -174,11 +179,6 @@ def main(_) -> None:
     flags.DEFINE_integer('start_year', 2006,
                          'give the download year deault is 2006')
     flags.DEFINE_integer('end_year', end_year, 'give the download year')
-    _START = FLAGS.start_year
-    _END = FLAGS.end_year
-    flags.DEFINE_string(
-        'output_path', './data',
-        'Path to the directory where generated files are to be stored.')
     year_range = range(_START, _END)
     download_weekly_nnds_data_across_years(year_range, FLAGS.output_path)
 
