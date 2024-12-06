@@ -1,0 +1,5 @@
+,StatisticalVariable,IndicatorCode,ISO3166Alpha3,Year,observationPeriod,Value0,Value1,Value2,Value3,unit,measurementMethod,scalingFactor
+0,Amount_Consumption_RenewableEnergy_AsFractionOf_Amount_Consumption_Energy,EG.FEC.RNEW.ZS,dcid:country/MKD,2001,P1Y,0.152,,,,,,
+1,LifeExpectancy_Person_Male,SP.DYN.LE00.MA.IN,dcid:country/UZB,1973,P1Y,58.621,,,,Year,,
+2,Count_CriminalActivities_MurderAndNonNegligentManslaughter_AsFractionOf_Count_Person,VC.IHR.PSRC.P5,dcid:country/AFG,2009,P1Y,4.0715263102,,,,Per100000Persons,,
+3,Count_CriminalActivities_MurderAndNonNegligentManslaughter_AsFractionOf_Count_Person,VC.IHR.PSRC.P5,dcid:country/AFG,2009,P1Y,4.0715263102,,,,Per100000Persons,,
