@@ -48,10 +48,11 @@ _HEADER = 1
 _SCALING_FACTOR_TXT_FILE = 1000
 
 #Creating folder to store the raw data from source
-raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),"raw_data")
+raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             "raw_data")
 if not os.path.exists(raw_data_path):
     os.mkdir(raw_data_path)
-    
+
 _MCF_TEMPLATE = ("Node: dcid:{dcid}\n"
                  "typeOf: dcs:StatisticalVariable\n"
                  "populationType: dcs:Person\n"
@@ -305,6 +306,7 @@ class CensusUSACountryPopulation:
             self._df.sort_values(by=['Date', 'date_range'],
                                  ascending=False,
                                  inplace=True)
+            # Data for 2020 exists in two sources, causing overlap. We'll eliminate duplicates
             self._df.drop_duplicates("Date", keep="first", inplace=True)
             self._df.drop(['date_range'], axis=1, inplace=True)
             float_col = self._df.select_dtypes(include=['float64'])
@@ -413,6 +415,9 @@ class CensusUSACountryPopulation:
         self.input_files = [
             self.input_path + os.sep + file for file in ip_files
         ]
+        if len(self.input_files) == 0:
+            logging.info("No files to process")
+            return
         processed_count = 0
         total_files_to_process = len(self.input_files)
         logging.info(f"No of files to be processed {len(self.input_files)}")
@@ -424,7 +429,8 @@ class CensusUSACountryPopulation:
             else:
                 logging.fatal(f'Failed to process {file}')
         logging.info(f"No of files processed {processed_count}")
-        if processed_count == total_files_to_process & total_files_to_process > 0:
+        if total_files_to_process > 0 & (processed_count
+                                         == total_files_to_process):
             self._generate_mcf(self._df.columns)
             self._generate_tmcf(self._df.columns)
         else:
@@ -444,7 +450,8 @@ def add_future_year_urls():
         "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/national/totals/NA-EST{YEAR}-POP.xlsx"
     ]
     # This method will generate URLs for the years 2021 to 2029
-    for future_year in range(2021, 2029):
+    # need to the latest avaibale year
+    for future_year in range(2030, 2021, -1):
         if dt.now().year > future_year:
             YEAR = future_year
             for url in urls_to_scan:
@@ -454,6 +461,7 @@ def add_future_year_urls():
                     if check_url.status_code == 200:
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
+                        break
 
                 except:
                     logging.error(f"URL is not accessable {url_to_check}")
@@ -595,22 +603,37 @@ def download_files():
             try:
                 df = None
                 file_name = url.split("/")[-1]
+
                 if ".xls" in url:
                     df = pd.read_excel(url, header=_HEADER)
-                    df.to_excel(os.path.join(raw_data_path,file_name),index=False,header=False,engine='xlsxwriter')
+                    df.to_excel(os.path.join(raw_data_path, file_name),
+                                index=False,
+                                header=False,
+                                engine='xlsxwriter')
                     df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
                                 index=False,
                                 header=False,
                                 engine='xlsxwriter')
                 elif ".csv" in url:
+                    with requests.get(url, stream=True) as response:
+                        response.raise_for_status()
+                        if response.status_code == 200:
+                            with open(os.path.join(raw_data_path, file_name),
+                                      'wb') as f:
+                                f.write(response.content)
                     file_name = file_name.replace(".csv", ".xlsx")
                     df = pd.read_csv(url, header=None)
                     df = _clean_csv_file(df)
-                    df.to_excel(os.path.join(raw_data_path,file_name),index=False,engine='xlsxwriter')
                     df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
                                 index=False,
                                 engine='xlsxwriter')
                 elif ".txt" in url:
+                    with requests.get(url, stream=True) as response:
+                        response.raise_for_status()
+                        if response.status_code == 200:
+                            with open(os.path.join(raw_data_path, file_name),
+                                      'wb') as f:
+                                f.write(response.content)
                     file_name = file_name.replace(".txt", ".xlsx")
                     cols = [
                         "Year and Month", "Date", "Resident Population",
@@ -627,7 +650,6 @@ def download_files():
                     # Skipping 17 rows as the initial 17 rows contains the information about
                     # the file being used, heading files spread accross multiple lines and
                     # other irrelevant information like source/contact details.
-                    df.to_excel(os.path.join(raw_data_path,file_name),index=False,engine='xlsxwriter')
                     df = _clean_txt_file(df)
                     # Multiplying the data with scaling factor 1000.
                     for col in df.columns:
