@@ -31,7 +31,7 @@ from absl import flags
 from absl import app
 from absl import logging
 
-from process import coal, common, elec, intl, ng, nuclear, pet, seds, total
+from process import  common, elec, intl, ng, nuclear, pet, seds, total
 
 MANIFEST_URL = "https://api.eia.gov/bulk/manifest.txt"
 
