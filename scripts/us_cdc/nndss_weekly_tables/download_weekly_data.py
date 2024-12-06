@@ -27,7 +27,8 @@ _END = FLAGS.end_year
 flags.DEFINE_string(
     'output_path', './data',
     'Path to the directory where generated files are to be stored.')
-# URLS to process the dataset
+
+## URLS to process the dataset
 _BASE_URL = "https://wonder.cdc.gov/nndss/"
 _WEEKLY_TABLE_2010 = _BASE_URL + "nndss_weekly_tables_menu.asp?mmwr_year={year}&mmwr_week={week}"
 _WEEKLY_TABLE_2017 = _BASE_URL + 'nndss_weekly_tables_menu.asp?mmwr_year={year}&mmwr_week={week}'

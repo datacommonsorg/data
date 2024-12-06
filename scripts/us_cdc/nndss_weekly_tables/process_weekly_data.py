@@ -13,7 +13,7 @@ from absl import logging
 
 from download_weekly_data import download_weekly_nnds_data_across_years
 
-# Allows the following module imports to work when running as a script
+## Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH,
                              '../../../util/'))  # for statvar_dcid_generator
