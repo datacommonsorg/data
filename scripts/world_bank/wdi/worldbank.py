@@ -603,9 +603,6 @@ def main(_):
     worldbank_countries = pd.read_csv("WorldBankCountries.csv")
     worldbank_dataframe = download_indicator_data(worldbank_countries,
                                                   indicator_codes, _FLAGS.mode)
-    worldbank_dataframe.to_csv(
-        "/usr/local/google/home/sanikap/wdiGit/data/scripts/world_bank/wdi/sa.csv"
-    )
     if mode == "" or mode == "process":
         process(indicator_codes, worldbank_dataframe)
 
