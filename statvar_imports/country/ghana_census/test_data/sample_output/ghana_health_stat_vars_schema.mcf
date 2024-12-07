@@ -1,0 +1,319 @@
+Node: dcid:gender
+typeOf: dcs:Property
+name: "gender"
+domainIncludes: dcid:MortalityEvent,dcid:Child,dcid:PregnantWomen
+rangeIncludes: dcid:GenderType
+
+Node: dcid:ageGroupClassification
+typeOf: dcs:Property
+name: "ageGroupClassification"
+domainIncludes: dcid:MortalityEvent
+
+Node: dcid:placeOfResidenceClassification
+typeOf: dcs:Property
+name: "placeOfResidenceClassification"
+domainIncludes: dcid:MortalityEvent,dcid:Child,dcid:Person
+rangeIncludes: dcid:HumanSettlementClassificationEnum
+
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Count_BirthEvent_Infant_LiveBirth_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Birth Event_ Infant_ Live Birth_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:age
+typeOf: dcs:Property
+name: "age"
+domainIncludes: dcid:MortalityEvent,dcid:Child,dcid:PregnantWomen
+rangeIncludes: dcid:QuantityRange
+
+Node: dcid:Count_BirthEvent_5OrLessYears_Female_LiveBirth
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Birth Event_ 5Or Less Years_ Female_ Live Birth"
+isProvisional: dcs:True
+
+Node: dcid:Count_BirthEvent_5OrLessYears_LiveBirth_Rural
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Birth Event_ 5Or Less Years_ Live Birth_ Rural"
+isProvisional: dcs:True
+
+Node: dcid:Count_BirthEvent_5OrLessYears_LiveBirth
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Birth Event_ 5Or Less Years_ Live Birth"
+isProvisional: dcs:True
+
+Node: dcid:Count_BirthEvent_LiveBirth_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Birth Event_ Live Birth_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:vaccineStatus
+typeOf: dcs:Property
+name: "vaccineStatus"
+domainIncludes: dcid:Person,dcid:Child
+
+Node: dcid:vaccineType
+typeOf: dcs:Property
+name: "vaccineType"
+rangeIncludes: dcid:ICD10_113CausesOfDeath
+domainIncludes: dcid:Child
+
+Node: dcid:Count_Child_1Years_Female
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ 1Years_ Female"
+isProvisional: dcs:True
+
+Node: dcid:Count_Child_1Years_Male
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ 1Years_ Male"
+isProvisional: dcs:True
+
+Node: dcid:Count_Child_1Years_Rural
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ 1Years_ Rural"
+isProvisional: dcs:True
+
+Node: dcid:Count_Child_1Years
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ 1Years"
+isProvisional: dcs:True
+
+Node: dcid:Count_Child_1Years_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ 1Years_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:birthControlMethod
+typeOf: dcs:Property
+name: "birthControlMethod"
+domainIncludes: dcid:Person
+
+Node: dcid:UsageCondom
+typeOf: dcid:BirthControlMethodEnum
+name: "Usage Condom"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To24Years_Female_HighRiskIntercourse
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 24 Years_ Female_ High Risk Intercourse"
+isProvisional: dcs:True
+
+Node: dcid:lastIntercourseType
+typeOf: dcs:Property
+name: "lastIntercourseType"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:LastIntercourseTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:LastIntercourseTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "LastIntercourseTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:HighRiskIntercourse
+typeOf: dcid:LastIntercourseTypeEnum
+name: "High Risk Intercourse"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To24Years_Male_HighRiskIntercourse
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 24 Years_ Male_ High Risk Intercourse"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To24Years_Female_HighRiskIntercourse_Rural
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 24 Years_ Female_ High Risk Intercourse_ Rural"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To24Years_Male_HighRiskIntercourse_Rural
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 24 Years_ Male_ High Risk Intercourse_ Rural"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To24Years_Female_HighRiskIntercourse_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 24 Years_ Female_ High Risk Intercourse_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To24Years_Male_HighRiskIntercourse_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 24 Years_ Male_ High Risk Intercourse_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To49Years_Female_Married
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 49 Years_ Female_ Married"
+isProvisional: dcs:True
+
+Node: dcid:ContraceptivePrevalence
+typeOf: dcid:BirthControlMethodEnum
+name: "Contraceptive Prevalence"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To49Years_Male_Married
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 49 Years_ Male_ Married"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To49Years_Male_Married_Rural
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 49 Years_ Male_ Married_ Rural"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_15To49Years_Male_Married_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ 15 To 49 Years_ Male_ Married_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:healthRiskFactors
+typeOf: dcs:Property
+name: "healthRiskFactors"
+domainIncludes: dcid:Person,dcid:PregnantWomen
+rangeIncludes: dcid:HealthRiskFactorsEnum
+isProvisional: dcs:True
+
+Node: dcid:HealthRiskFactorsEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "HealthRiskFactorsEnum"
+isProvisional: dcs:True
+
+Node: dcid:PrevalenceOfHiv
+typeOf: dcid:HealthRiskFactorsEnum
+name: "Prevalence Of Hiv"
+isProvisional: dcs:True
+
+Node: dcid:PregnantWomen
+typeOf: dcid:Thing
+name: "Pregnant Women"
+isProvisional: dcs:True
+
+Node: dcid:Count_PregnantWomen_15To19Years_Female
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Pregnant Women_ 15 To 19 Years_ Female"
+isProvisional: dcs:True
+
+Node: dcid:healthDiseasePrevention
+typeOf: dcs:Property
+name: "healthDiseasePrevention"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:HealthDiseasePreventionEnum
+isProvisional: dcs:True
+
+Node: dcid:HealthDiseasePreventionEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "HealthDiseasePreventionEnum"
+isProvisional: dcs:True
+
+Node: dcid:ComprehensiveCorrectKnowledgeOfHIV/AIDS
+typeOf: dcid:HealthDiseasePreventionEnum
+name: "Comprehensive Correct Knowledge Of HIV/ AIDS"
+isProvisional: dcs:True
+
+Node: dcid:healthPrevention
+typeOf: dcs:Property
+name: "healthPrevention"
+domainIncludes: dcid:Child
+
+Node: dcid:AntiMalarialDrug
+typeOf: dcid:HealthPreventionEnum
+name: "Anti Malarial Drug"
+isProvisional: dcs:True
+
+Node: dcid:Count_Child_5OrLessYears_Female
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ 5Or Less Years_ Female"
+isProvisional: dcs:True
+
+Node: dcid:medicalCondition
+typeOf: dcs:Property
+name: "medicalCondition"
+domainIncludes: dcid:Child,dcid:Person
+rangeIncludes: dcid:ICD10_113CausesOfDeath
+
+Node: dcid:Count_Child_5OrLessYears_Male
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ 5Or Less Years_ Male"
+isProvisional: dcs:True
+
+Node: dcid:Count_Child_5OrLessYears_Rural
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ 5Or Less Years_ Rural"
+isProvisional: dcs:True
+
+Node: dcid:Count_Child_5OrLessYears
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ 5Or Less Years"
+isProvisional: dcs:True
+
+Node: dcid:Count_Child_5OrLessYears_Urban
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Child_ 5Or Less Years_ Urban"
+isProvisional: dcs:True
+
+Node: dcid:antenatalStatus
+typeOf: dcs:Property
+name: "antenatalStatus"
+domainIncludes: dcid:Person
+
+Node: dcid:Atleast1AntenatalCareVisit
+typeOf: dcid:AntenatalStatusEnum
+name: "Atleast 1Antenatal Care Visit"
+isProvisional: dcs:True
+
+Node: dcid:familyPlanningType
+typeOf: dcs:Property
+name: "familyPlanningType"
+rangeIncludes: dcid:FamilyPlanningTypeEnum
+
+Node: dcid:FamilyPlanningTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "FamilyPlanningTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:UnmetFamilyPlanning
+typeOf: dcid:FamilyPlanningTypeEnum
+name: "Unmet Family Planning"
+isProvisional: dcs:True
+
+Node: dcid:treatmentTechnique
+typeOf: dcs:Property
+name: "treatmentTechnique"
+domainIncludes: dcid:Person
+rangeIncludes: dcid:TreatmentTechniqueEnum
+isProvisional: dcs:True
+
+Node: dcid:TreatmentTechniqueEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "TreatmentTechniqueEnum"
+isProvisional: dcs:True
+
+Node: dcid:DirectlyObservedTherapy
+typeOf: dcid:TreatmentTechniqueEnum
+name: "Directly Observed Therapy"
+isProvisional: dcs:True
+
+Node: dcid:Count_Person_ConditionTuberculosis
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Count_ Person_ Condition Tuberculosis"
+isProvisional: dcs:True
+
+Node: dcid:medicalStatus
+typeOf: dcs:Property
+name: "medicalStatus"
+domainIncludes: dcid:Person
+
+Node: dcid:healthBehavior
+typeOf: dcs:Property
+name: "healthBehavior"
+domainIncludes: dcid:Child
+
