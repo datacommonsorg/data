@@ -1,0 +1,3 @@
+observationAbout,observationDate,observationPeriod,value,variableMeasured,unit,measurementQualifier
+dcid:wikidataId/Q1808899,2021-12,P1M,999,dcid:Count_Person_AuxilioBrasil,,
+dcid:wikidataId/Q1808899,2021-12,P1M,32143100,dcid:Amount_Person_AuxilioBrasil,BRL,Monthly
