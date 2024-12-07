@@ -28,7 +28,6 @@ import pandas as pd
 # Process the dataset.
 ag_df = []
 df1 = pd.read_csv("REGION_DEMOGR_population.csv",
-                  sep='\t',
                   low_memory=False,
                   index_col=None,
                   header=0)
@@ -37,7 +36,7 @@ df2 = pd.read_csv("manual_curated_population.csv", index_col=None, header=0)
 ag_df.append(df1)
 ag_df.append(df2)
 df = pd.concat(ag_df, axis=0, ignore_index=True)
-
+#print(df.head())
 # There can be AVG for national average, here we only care stats for Total Regions.
 df = df[df['POS'] == 'ALL']
 # Filter TL like "1_MR-L"(Country - Large metro TL3 regions)m "1_NMR-R"(Country - Remote TL3 regions).
@@ -47,6 +46,7 @@ df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
 regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
 df = df[df['REG_ID'].isin(regid2dcid.keys())]
 # Second, replace the names with dcids
+#print(df.head())
 df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
 
 df['Year'] = '"' + df['Year'].astype(str) + '"'
