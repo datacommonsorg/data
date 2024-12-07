@@ -8,3 +8,4 @@ Year,StateAbbr,StateDesc,CountyName,CountyFIPS,LocationName,DataSource,Category,
 2018,AL,Alabama,Colbert,01033,01033020400,BRFSS,Unhealthy Behaviors,Obesity among adults aged >=18 years,%,Crude prevalence,32.1,,,30.4,34.1,1530,POINT (-87.72782325 34.74169033),01033020400,UNHBEH,OBESITY,CrdPrv,Obesity
 2018,AL,Alabama,Conecuh,01035,01035960500,BRFSS,Health Outcomes,Stroke among adults aged >=18 years,%,Crude prevalence,6.4,,,6.0,6.9,1771,POINT (-87.00225928 31.46626901),01035960500,HLTHOUT,STROKE,CrdPrv,Stroke
 2018,AL,Alabama,Covington,01039,01039962400,BRFSS,Prevention,Mammography use among women aged 50-74 years,%,Crude prevalence,76.7,,,73.4,79.7,3144,POINT (-86.23830634 31.35679532),01039962400,PREVENT,MAMMOUSE,CrdPrv,Mammography
+2020,AL,Alabama,Coosa,01037,01037961200,BRFSS,Health Outcomes,Depression among adults aged >=18 years,%,Crude prevalence,24.0,,,23.3,24.8,3656,POINT (-86.2059794 32.83390258),01037961200,HLTHOUT,DEPRESSION,CrdPrv,Depression
