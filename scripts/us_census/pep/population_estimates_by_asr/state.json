@@ -10,4 +10,5 @@
     "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh98.txt",
     "https://www2.census.gov/programs-surveys/popest/tables/1990-2000/state/asrh/sasrh99.txt"],
 "2000-10":"https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/state/st-est00int-alldata.csv",
-"2010-20":"https://www2.census.gov/programs-surveys/popest/datasets/2010-2020/state/asrh/SC-EST2020-ALLDATA6.csv"}
+"2010-20":"https://www2.census.gov/programs-surveys/popest/datasets/2010-2020/state/asrh/SC-EST2020-ALLDATA6.csv",
+"2020-22":"https://www2.census.gov/programs-surveys/popest/datasets/2020-2022/state/asrh/sc-est2022-alldata6.csv"}
