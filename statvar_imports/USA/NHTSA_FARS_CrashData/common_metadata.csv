@@ -1,0 +1,15 @@
+parameter,value
+url,https://www.nhtsa.gov/file-downloads?p=nhtsa/downloads/FARS/
+description,Data on fatal motor vehicle crashes in the USA.
+#place_type,"country, state, county"
+#places_within,country/USA
+start_date,1975
+end_date,2022
+release_frequency,P1Y
+process,
+comments,
+#places_resolved_csv,FIPS codes present in data sheet
+multi_value_properties,"observationDate, observationAbout, observationPeriod"
+header_rows,1
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,observationPeriod"
+word_delimiter,""""""
