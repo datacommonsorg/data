@@ -101,12 +101,32 @@ def write_csv(csv_file_path, reader):
 
 
 def request_and_write_csv(csv_file_path, filename):
-    response = requests.get(
-        f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
-    with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
-        with zf.open(f'{filename}.csv', 'r') as infile:
-            reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-            write_csv(csv_file_path, reader)
+    try:
+        # Fetch the ZIP archive
+        response = requests.get(
+            f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
+        # Create the output folder if it doesn't exist
+        output_folder = "./input_files"
+        if not os.path.exists(output_folder):
+            os.makedirs(output_folder)
+        #download zip file locally
+        with open(f'./input_files/{filename}.zip', 'wb') as output_file:
+            output_file.write(response.content)
+
+        response.raise_for_status(
+        )  # Raise an exception for non-2xx status codes
+        # Extract the CSV file
+        with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
+            try:
+                with zf.open(f'{filename}.csv', 'r') as infile:
+                    reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
+                    write_csv(csv_file_path, reader)
+            except FileNotFoundError:
+                raise FileNotFoundError(
+                    f"CSV file '{filename}.csv' not found in the ZIP archive")
+    except (requests.exceptions.RequestException, zipfile.BadZipFile,
+            csv.Error) as e:
+        raise e  # Re-raise the original exception for clearer error handling
 
 
 def write_tmcf(tmcf_file_path):
