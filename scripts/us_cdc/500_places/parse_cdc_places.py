@@ -84,7 +84,25 @@ MEASURE_TO_STATVAR_MAP = {
     "CHD":
         "Percent_Person_WithCoronaryHeartDisease",
     "CERVICAL":
-        "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening"
+        "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening",
+    "DEPRESSION":
+        "Percent_Person_18OrMoreYears_WithDepression",
+    "VISION":
+        "Percent_Person_18OrMoreYears_WithVisionDisability",
+    "MOBILITY":
+        "Percent_Person_18OrMoreYears_WithMobilityDisability",
+    "SELFCARE":
+        "Percent_Person_18OrMoreYears_WithSelfCareDisability",
+    "DISABILITY":
+        "Percent_Person_18OrMoreYears_WithAnyDisability",
+    "INDEPLIVE":
+        "Percent_Person_18OrMoreYears_WithIndependentLivingDisability",
+    "GHLTH":
+        "Percent_Person_18OrMoreYears_WithPoorGeneralHealth",
+    "COGNITION":
+        "Percent_Person_18OrMoreYears_WithCognitiveDisability",
+    "HEARING":
+        "Percent_Person_18OrMoreYears_WithHearingDisability"
 }
 
 # Mapping of data value type abbreviations to StatVar dcids
