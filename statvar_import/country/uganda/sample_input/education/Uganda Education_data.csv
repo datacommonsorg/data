@@ -1,0 +1,1639 @@
+Region,Indicator,Sex,Units,2011,2012,2013,2014,2015,2016
+Uganda,"Gross Enrolment Ratio , primary",Both Sex,%,,115,113,117,109,
+Uganda,"Gross Intake  Ratio , primary",Both Sex,%,,133,130,148,152,
+Uganda,"Net Intake  Ratio , primary",Both Sex,%,,60,60,59,65,
+Uganda,"Net Enrolment  Ratio (Total) , primary",Both Sex,%,,96,96,97,91,
+Uganda,"Pupil Teacher Ratio , primary",Both Sex,Number of students per Teacher,,49,46,46,43,43
+Uganda,"Pupil Classroom Ratio , primary",Both Sex,Number of students per classroom,,57,57,58,63,54
+Uganda,"Pupil Stance Ratio , primary",Both Sex,Number of students per latrine stance,,36,63,53,52,47
+Uganda,"Enrolment , primary",Both Sex,thousands,,8329,8459,8773,8264,8656
+Uganda,"Enrolment , primary",Male,thousands,,4158,4219,4377,4122,4294
+Uganda,"Enrolment , primary",Female,thousands,,4171,4240,4395,4142,4361
+Uganda,"Annual change in Enrolment (%) , primary",Both Sex,%,,2.8,1.6,3.7,-5.8,4.7
+Uganda,"Number of Schools , primary",Both Sex,Number,,17682,18079,18408,18889,19718
+Uganda,"Number of Teachers , primary",Both Sex,thousands,,171,185,191,193,203
+Uganda,"Number of classrooms , primary",Both Sex,Number,,145390,148711,149591,131325,160381
+Uganda,"Number of Toilet Stances , primary",Both Sex,Number,,234073,133367,165791,159130,182576
+Uganda,"Population (6 - 12 years) , primary",Both Sex,Persons,,,,7297,7463,7618
+Uganda,"Population (6 - 12 years) , primary",Male,Persons,,,,3691,3790,3887
+Uganda,"Population (6 - 12 years) , primary",Female,Persons,,,,3606,3673,3731
+Uganda,"Orphans in Primary School , primary",Both Sex,Number,,1256172,1237431,1156856,956972,1073569
+Uganda,"Orphans in Primary School , primary",Male,Number,,635975,628287,587868,485475,543791
+Uganda,"Orphans in Primary School , primary",Female,Number,,620197,609144,568988,471497,529778
+Uganda,"Share of orphans to total Enrolment , primary",Both Sex,%,,15.1,14.6,13.2,11.6,12.4
+Uganda,"Enrolment , primary",Both Sex,Number,,,,,,8655924
+Uganda,"Enrolment, P1 , primary",Both Sex,Number,,,,,,1888847
+Uganda,"Enrolment, P2 , primary",Both Sex,Number,,,,,,1352893
+Uganda,"Enrolment, P3 , primary",Both Sex,Number,,,,,,1349293
+Uganda,"Enrolment, P4 , primary",Both Sex,Number,,,,,,1328035
+Uganda,"Enrolment, P5 , primary",Both Sex,Number,,,,,,1156465
+Uganda,"Enrolment, P6 , primary",Both Sex,Number,,,,,,958298
+Uganda,"Enrolment, P7 , primary",Both Sex,Number,,,,,,622093
+Uganda,"Pupils with adequate , primary",Both Sex,Number,,,,,,5895742
+Uganda,"Pupils with adequate, P1 , primary",Both Sex,Number,,,,,,1049698
+Uganda,"Pupils with adequate, P2 , primary",Both Sex,Number,,,,,,851540
+Uganda,"Pupils with adequate, P3 , primary",Both Sex,Number,,,,,,906111
+Uganda,"Pupils with adequate, P4 , primary",Both Sex,Number,,,,,,942026
+Uganda,"Pupils with adequate, P5 , primary",Both Sex,Number,,,,,,865432
+Uganda,"Pupils with adequate, P6 , primary",Both Sex,Number,,,,,,752342
+Uganda,"Pupils with adequate, P7 , primary",Both Sex,Number,,,,,,528593
+Uganda,"Share of pupils with adequate
+space total Enrolment , primary",Both Sex,%,,,,,,68.1
+Uganda,"Share of pupils with adequate
+space total Enrolment, P1 , primary",Both Sex,%,,,,,,55.6
+Uganda,"Share of pupils with adequate
+space total Enrolment, P2 , primary",Both Sex,%,,,,,,62.9
+Uganda,"Share of pupils with adequate
+space total Enrolment, P3 , primary",Both Sex,%,,,,,,67.2
+Uganda,"Share of pupils with adequate
+space total Enrolment, P4 , primary",Both Sex,%,,,,,,70.9
+Uganda,"Share of pupils with adequate
+space total Enrolment, P5 , primary",Both Sex,%,,,,,,74.8
+Uganda,"Share of pupils with adequate
+space total Enrolment, P6 , primary",Both Sex,%,,,,,,78.5
+Uganda,"Share of pupils with adequate
+space total Enrolment, P7 , primary",Both Sex,%,,,,,,85
+Uganda,"Pupils who registered , primary",Both Sex,Number,,,,,,639037
+Uganda,"Pupils who registered , primary",Male,Number,,,,,,310837
+Uganda,"Pupils who registered , primary",Female,Number,,,,,,328200
+Uganda,"Pupils Who Sat for PLE , primary",Both Sex,Number,,,,,,622296
+Uganda,"Pupils Who Sat for PLE , primary",Male,Number,,,,,,303382
+Uganda,"Pupils Who Sat for PLE , primary",Female,Number,,,,,,318914
+Uganda,"Pupils who passed PLE , primary",Both Sex,Number,,,,,,541086
+Uganda,"Pupils who passed PLE , primary",Male,Number,,,,,,270046
+Uganda,"Pupils who passed PLE , primary",Female,Number,,,,,,271040
+Uganda,"Division I , primary",Both Sex,Number,,,,,,63399
+Uganda,"Division I , primary",Male,Number,,,,,,37265
+Uganda,"Division I , primary",Female,Number,,,,,,26134
+Uganda,"Division II , primary",Both Sex,Number,,,,,,251783
+Uganda,"Division II , primary",Male,Number,,,,,,129647
+Uganda,"Division II , primary",Female,Number,,,,,,122136
+Uganda,"Division III , primary",Both Sex,Number,,,,,,129254
+Uganda,"Division III , primary",Male,Number,,,,,,59320
+Uganda,"Division III , primary",Female,Number,,,,,,69934
+Uganda,"Division IV , primary",Both Sex,Number,,,,,,96650
+Uganda,"Division IV , primary",Male,Number,,,,,,43814
+Uganda,"Division IV , primary",Female,Number,,,,,,52836
+Uganda,"Division U , primary",Both Sex,Number,,,,,,81210
+Uganda,"Division U , primary",Male,Number,,,,,,33336
+Uganda,"Division U , primary",Female,Number,,,,,,47874
+Uganda,"Division X , primary",Both Sex,Number,,,,,,16741
+Uganda,"Division X , primary",Male,Number,,,,,,7455
+Uganda,"Division X , primary",Female,Number,,,,,,9286
+Uganda,"Pass Rate (Percent) , primary",Both Sex,%,,,,,,86.9
+Uganda,"Pass Rate (Percent) , primary",Male,%,,,,,,89
+Uganda,"Pass Rate (Percent) , primary",Female,%,,,,,,85
+Uganda,"Performance index , primary",Both Sex,Index,,,,,,54.8
+Uganda,"Performance index , primary",Male,Index,,,,,,57.7
+Uganda,"Performance index , primary",Female,Index,,,,,,52
+Uganda,"Primary seven (P.7) Completion rate , primary",Both Sex,%,,67,67.4,72,61.6,61.5
+Uganda,"Primary seven (P.7) Completion rate , primary",Male,%,,68,68,72,59.8,59.7
+Uganda,"Primary seven (P.7) Completion rate , primary",Female,%,,66,67,72,63.3,63.4
+Uganda,"Senior one (S.1) Transition rate to S1 , primary",Both Sex,%,,66,72.2,70.5,63.2,64.8
+Uganda,"Senior one (S.1) Transition rate to S2 , primary",Male,%,,68,72.3,70.5,62.8,64.4
+Uganda,"Senior one (S.1) Transition rate to S3 , primary",Female,%,,65,72,70.5,63.6,65.2
+Uganda,"Primary teachers by level of qualification and sex , primary",Both Sex,Number,,,,,,182829
+Uganda,"Primary teachers by level of qualification and sex , primary",Male,Number,,,,,,104989
+Uganda,"Primary teachers by level of qualification and sex , primary",Female,Number,,,,,,77840
+Uganda,"DPE (Diploma in Primary Education) , primary",Both Sex,Number,,,,,,30102
+Uganda,"DPE (Diploma in Primary Education) , primary",Male,Number,,,,,,17732
+Uganda,"DPE (Diploma in Primary Education) , primary",Female,Number,,,,,,12370
+Uganda,"Grade II Teacher , primary",Both Sex,Number,,,,,,975
+Uganda,"Grade II Teacher , primary",Male,Number,,,,,,468
+Uganda,"Grade II Teacher , primary",Female,Number,,,,,,507
+Uganda,"Grade III Teacher , primary",Both Sex,Number,,,,,,121025
+Uganda,"Grade III Teacher , primary",Male,Number,,,,,,68758
+Uganda,"Grade III Teacher , primary",Female,Number,,,,,,52267
+Uganda,"Grade IV Teacher , primary",Both Sex,Number,,,,,,2943
+Uganda,"Grade IV Teacher , primary",Male,Number,,,,,,1590
+Uganda,"Grade IV Teacher , primary",Female,Number,,,,,,1353
+Uganda,"Grade V Teacher including DSNE, DSE,DTE , primary",Both Sex,Number,,,,,,10442
+Uganda,"Grade V Teacher including DSNE, DSE,DTE , primary",Male,Number,,,,,,6391
+Uganda,"Grade V Teacher including DSNE, DSE,DTE , primary",Female,Number,,,,,,4051
+Uganda,"Graduate Teacher , primary",Both Sex,Number,,,,,,7275
+Uganda,"Graduate Teacher , primary",Male,Number,,,,,,4537
+Uganda,"Graduate Teacher , primary",Female,Number,,,,,,2738
+Uganda,"Licensed Teacher , primary",Both Sex,Number,,,,,,2802
+Uganda,"Licensed Teacher , primary",Male,Number,,,,,,1637
+Uganda,"Licensed Teacher , primary",Female,Number,,,,,,1165
+Uganda,"Other Training , primary",Both Sex,Number,,,,,,7265
+Uganda,"Other Training , primary",Male,Number,,,,,,3876
+Uganda,"Other Training , primary",Female,Number,,,,,,3389
+Uganda,"Primary school enrolment by class , primary",Both Sex,Number,,8328640,8459720,8772655,8264317,8655924
+Uganda,"Primary school enrolment by class , primary",Male,Number,,4157932,4219523,4377412,4122663,4294473
+Uganda,"Primary school enrolment by class , primary",Female,Number,,4170708,4240197,4395243,4141654,4361451
+Uganda,"Primary school enrolment by class and sex, P1 , primary",Both Sex,Number,,1877801,1883803,1932489,1842006,1888847
+Uganda,"Primary school enrolment by class and sex, P1 , primary",Male,Number,,943061,945886,973641,929397,949261
+Uganda,"Primary school enrolment by class and sex, P1 , primary",Female,Number,,934740,937917,958848,912609,939586
+Uganda,"Primary school enrolment by class and sex, P2 , primary",Both Sex,Number,,1284122,1307745,1349233,1277974,1352893
+Uganda,"Primary school enrolment by class and sex, P2 , primary",Male,Number,,642732,653310,676340,640607,676636
+Uganda,"Primary school enrolment by class and sex, P2 , primary",Female,Number,,641390,654435,672893,637367,676257
+Uganda,"Primary school enrolment by class and sex, P3 , primary",Both Sex,Number,,1291268,1312592,1362786,1283194,1349293
+Uganda,"Primary school enrolment by class and sex, P3 , primary",Male,Number,,644642,656110,682153,642761,672964
+Uganda,"Primary school enrolment by class and sex, P3 , primary",Female,Number,,646626,656482,680633,640433,676329
+Uganda,"Primary school enrolment by class and sex, P4 , primary",Both Sex,Number,,1299994,1317315,1359448,1272522,1328035
+Uganda,"Primary school enrolment by class and sex, P4 , primary",Male,Number,,647063,653289,673677,631502,655305
+Uganda,"Primary school enrolment by class and sex, P4 , primary",Female,Number,,652931,664026,685771,641020,672730
+Uganda,"Primary school enrolment by class and sex, P5 , primary",Both Sex,Number,,1118900,1138789,1178273,1101698,1156465
+Uganda,"Primary school enrolment by class and sex, P5 , primary",Male,Number,,552338,561709,579905,541290,564606
+Uganda,"Primary school enrolment by class and sex, P5 , primary",Female,Number,,566562,577080,598368,560408,591859
+Uganda,"Primary school enrolment by class and sex, P6 , primary",Both Sex,Number,,892338,920045,963083,901939,958298
+Uganda,"Primary school enrolment by class and sex, P6 , primary",Male,Number,,441656,455609,476069,443672,466660
+Uganda,"Primary school enrolment by class and sex, P6 , primary",Female,Number,,450682,464436,487014,458267,491638
+Uganda,"Primary school enrolment by class and sex, P7 , primary",Both Sex,Number,,564217,579431,627343,584984,622093
+Uganda,"Primary school enrolment by class and sex, P7 , primary",Male,Number,,286440,293610,315627,293434,309041
+Uganda,"Primary school enrolment by class and sex, P7 , primary",Female,Number,,277777,285821,311716,291550,313052
+Uganda,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,118,115,113,117,109,
+Uganda,"Net Intake Rate (PNI) , primary , primary",Both Sex,%,98,96,96,97,91,
+Uganda,"Primary Gross Enrolment (PGE) , primary , primary",Both Sex,%,118,115,113,117,109,
+Uganda,"Primary Net Enrolment Rates (PNE) , primary , primary",Both Sex,%,98,96,96,97,91,
+Uganda,"Pupil Teacher Ratio (PTR) , primary , primary",Both Sex,Students per teacher,,48,46,46,43,43
+Uganda,"Pupil Classroom Ratio (PCR) , primary , primary",Both Sex,Students per classroom,,57,57,58,63,54
+Uganda,"Gross Enrolment rate , secondary",Both Sex,Pupils in primary school per total population,,28,29,30,25,
+Uganda,"Net Enrolment rate , secondary",Both Sex,Pupils in primary school per total population,,24,26,26,22,
+Uganda,"Student Teacher Ratio , secondary",Both Sex,Number of students per Teacher,,30,22,22,22,22
+Uganda,"Student Classroom Ratio , secondary",Both Sex,Number of students per classroom,,50,55,50,52,51
+Uganda,"Student Stance Ratio , secondary",Both Sex,Number of students per latrine stance,,25,44,37,35,
+Uganda,"Enrolment , secondary",Both Sex,thousands,,1252,1362,1391,1284,1457
+Uganda,"Enrolment , secondary",Male,thousands,,671,727,738,675,765
+Uganda,"Enrolment , secondary",Female,thousands,,581,635,653,609,692
+Uganda,"Annual change in enrolment (%) , secondary",Both Sex,%,,,8.9,2.1,-7.7,13.5
+Uganda,"Number of Schools , secondary",Both Sex,Number,,2612,2838,2950,2695,3070
+Uganda,"Number of Teachers , secondary",Both Sex,Number,,55270,61505,63957,58051,66542
+Uganda,"Number of classrooms , secondary",Both Sex,Number,,25076,28242,27706,25888,27239
+Uganda,"Orphans in Secondary School , secondary",Both Sex,Number,,243535,258483,260351,216320,235443
+Uganda,"Orphans in Secondary School , secondary",Male,Number,,124669,132600,133131,109741,119426
+Uganda,"Orphans in Secondary School , secondary",Female,Number,,118866,125883,127220,106579,116017
+Uganda,"Share of orphans to total enrolment , secondary",Both Sex,%,,19.5,18.9,18.7,16.8,16.1
+Uganda,"Secondary teachers by level of qualification , secondary",Both Sex,Number,,,,,,57947
+Uganda,"Secondary teachers by level of qualification , secondary",Male,Number,,,,,,43625
+Uganda,"Secondary teachers by level of qualification , secondary",Female,Number,,,,,,14322
+Uganda,"Grade V Teacher including DSNE, DSE,DTE , secondary",Both Sex,Number,,,,,,24314
+Uganda,"Grade V Teacher including DSNE, DSE,DTE , secondary",Male,Number,,,,,,18965
+Uganda,"Grade V Teacher including DSNE, DSE,DTE , secondary",Female,Number,,,,,,5349
+Uganda,"Graduate Teacher , secondary",Both Sex,Number,,,,,,29939
+Uganda,"Graduate Teacher , secondary",Male,Number,,,,,,21640
+Uganda,"Graduate Teacher , secondary",Female,Number,,,,,,8299
+Uganda,"Licensed Teacher , secondary",Both Sex,Number,,,,,,640
+Uganda,"Licensed Teacher , secondary",Male,Number,,,,,,552
+Uganda,"Licensed Teacher , secondary",Female,Number,,,,,,88
+Uganda,"Other Training , secondary",Both Sex,Number,,,,,,3054
+Uganda,"Other Training , secondary",Male,Number,,,,,,2468
+Uganda,"Other Training , secondary",Female,Number,,,,,,586
+Uganda,"Students who registered , secondary",Both Sex,Number,,,,,,323276
+Uganda,"Students who registered , secondary",Male,Number,,,,,,164473
+Uganda,"Students who registered , secondary",Female,Number,,,,,,158722
+Uganda,"Students Who Sat for UCE , secondary",Both Sex,Number,,,,,,316624
+Uganda,"Students Who Sat for UCE , secondary",Male,Number,,,,,,161346
+Uganda,"Students Who Sat for UCE , secondary",Female,Number,,,,,,155278
+Uganda,"Pass Rate , secondary",Both Sex,%,,,,,,96
+Uganda,"Pass Rate , secondary",Male,%,,,,,,97
+Uganda,"Pass Rate , secondary",Female,%,,,,,,95
+Uganda,"Performance Index , secondary",Both Sex,Index,,,,,,39
+Uganda,"Performance Index , secondary",Male,Index,,,,,,40
+Uganda,"Performance Index , secondary",Female,Index,,,,,,38
+Uganda,"Students who registered , secondary",Both Sex,Number,,,,,,104316
+Uganda,"Students who registered , secondary",Male,Number,,,,,,61820
+Uganda,"Students who registered , secondary",Female,Number,,,,,,42496
+Uganda,"Students Who Sat for UACE , secondary",Both Sex,Number,,,,,,102858
+Uganda,"Students Who Sat for UACE , secondary",Male,Number,,,,,,60804
+Uganda,"Students Who Sat for UACE , secondary",Female,Number,,,,,,42054
+Uganda,"Students Who didn’t sit for UACE , secondary",Both Sex,Number,,,,,,1458
+Uganda,"Students Who didn’t sit for UACE , secondary",Male,Number,,,,,,1016
+Uganda,"Students Who didn’t sit for UACE , secondary",Female,Number,,,,,,442
+Uganda,"Students who passed , secondary",Both Sex,Number,,,,,,88734
+Uganda,"Students who passed , secondary",Male,Number,,,,,,51343
+Uganda,"Students who passed , secondary",Female,Number,,,,,,37391
+Uganda,"Principal passes, 3 , secondary",Both Sex,Number,,,,,,39844
+Uganda,"Principal passes, 3 , secondary",Male,Number,,,,,,21305
+Uganda,"Principal passes, 3 , secondary",Female,Number,,,,,,18539
+Uganda,"Principal passes, 2 , secondary",Both Sex,Number,,,,,,27851
+Uganda,"Principal passes, 2 , secondary",Male,Number,,,,,,16404
+Uganda,"Principal passes, 2 , secondary",Female,Number,,,,,,11447
+Uganda,"Principal passes, 1 , secondary",Both Sex,Number,,,,,,21039
+Uganda,"Principal passes, 1 , secondary",Male,Number,,,,,,13634
+Uganda,"Principal passes, 1 , secondary",Female,Number,,,,,,7405
+Uganda,"Students who failed , secondary",Both Sex,Number,,,,,,14124
+Uganda,"Students who failed , secondary",Male,Number,,,,,,9461
+Uganda,"Students who failed , secondary",Female,Number,,,,,,4663
+Uganda,"Subsidiary, 1 , secondary",Both Sex,Number,,,,,,12806
+Uganda,"Subsidiary, 1 , secondary",Male,Number,,,,,,8507
+Uganda,"Subsidiary, 1 , secondary",Female,Number,,,,,,4299
+Uganda,"Failure , secondary",Both Sex,Number,,,,,,1318
+Uganda,"Failure , secondary",Male,Number,,,,,,954
+Uganda,"Failure , secondary",Female,Number,,,,,,364
+Uganda,"Pass Rate , secondary",Both Sex,%,,,,,,86
+Uganda,"Pass Rate , secondary",Male,%,,,,,,84
+Uganda,"Pass Rate , secondary",Female,%,,,,,,89
+Uganda,"Performance Index , secondary",Both Sex,Index,,,,,,64
+Uganda,"Performance Index , secondary",Male,Index,,,,,,60
+Uganda,"Performance Index , secondary",Female,Index,,,,,,68
+Uganda,"Senior 4 Completion rate , secondary",Both Sex,%,,35.5,35.3,35.8,36.2,37.8
+Uganda,"Senior 4 Completion rate , secondary",Male,%,,37.6,36.7,36.4,36.4,39.6
+Uganda,"Senior 4 Completion rate , secondary",Female,%,,33.5,33.8,33.9,35.9,36
+Uganda,"Transition rate to Secondary five (S.5) , secondary",Both Sex,%,,34,32,30,25,30.2
+Uganda,"Transition rate to Secondary five (S.5) , secondary",Male,%,,39,37,33.6,28.1,31
+Uganda,"Transition rate to Secondary five (S.5) , secondary",Female,%,,29,27,25.9,21.4,29.4
+Uganda,"Secondary school enrolment by class , secondary",Both Sex,Number,,1251507,1362439,1391250,1284008,1457277
+Uganda,"Secondary school enrolment by class , secondary",Male,Number,,671347,727212,738391,675163,765406
+Uganda,"Secondary school enrolment by class , secondary",Female,Number,,580160,635527,652859,608845,691871
+Uganda,"Secondary school enrolment by class S1 , secondary",Both Sex,Number,,317286,346537,348701,326591,358724
+Uganda,"Secondary school enrolment by class S1 , secondary",Male,Number,,164920,179013,180634,166922,183195
+Uganda,"Secondary school enrolment by class S1 , secondary",Female,Number,,152366,167524,168067,159669,175529
+Uganda,"Secondary school enrolment by class S2 , secondary",Both Sex,Number,,296297,305501,327016,299262,346050
+Uganda,"Secondary school enrolment by class S2 , secondary",Male,Number,,154798,158539,169257,154799,177788
+Uganda,"Secondary school enrolment by class S2 , secondary",Female,Number,,141499,146962,157759,144463,168262
+Uganda,"Secondary school enrolment by class S3 , secondary",Both Sex,Number,,259003,284919,289219,279851,317329
+Uganda,"Secondary school enrolment by class S3 , secondary",Male,Number,,136022,149995,150346,145404,164684
+Uganda,"Secondary school enrolment by class S3 , secondary",Female,Number,,122981,134924,138873,134447,152645
+Uganda,"Secondary school enrolment by class S4 , secondary",Both Sex,Number,,216754,250274,268253,242248,276810
+Uganda,"Secondary school enrolment by class S4 , secondary",Male,Number,,116727,133314,142623,126314,144783
+Uganda,"Secondary school enrolment by class S4 , secondary",Female,Number,,100027,116960,125630,115934,132027
+Uganda,"Secondary school enrolment by class S5 , secondary",Both Sex,Number,,87549,85760,76649,70317,81253
+Uganda,"Secondary school enrolment by class S5 , secondary",Male,Number,,53230,51769,46193,41899,48516
+Uganda,"Secondary school enrolment by class S5 , secondary",Female,Number,,34319,33991,30456,28418,32737
+Uganda,"Secondary school enrolment by class S6 , secondary",Both Sex,Number,,74618,89448,81412,65739,77111
+Uganda,"Secondary school enrolment by class S6 , secondary",Male,Number,,45650,54582,49338,39825,46440
+Uganda,"Secondary school enrolment by class S6 , secondary",Female,Number,,28968,35166,32074,25914,30671
+Uganda,"Gross Intake Ratio (GIR) , secondary , secondary",Both Sex,%,,,,43,33,
+Uganda,"Net Intake  Ratio (NIR) , secondary , secondary",Both Sex,%,,,,8,6,
+Uganda,"Gross Enrolment Ratio (GER) , secondary , secondary",Both Sex,%,,,,30,25,
+Uganda,"Net Enrolment  Ratio (NER) , secondary , secondary",Both Sex,%,,,,26,22,
+Uganda,All tertiary Institutions,Both Sex,Number,,198066,201376,250621,257855,258866
+Uganda,All tertiary Institutions,Male,Number,,111831,113688,139727,143212,144314
+Uganda,All tertiary Institutions,Female,Number,,86235,87572,110894,114643,114552
+Uganda,"Of which, Universities",Both Sex,Number,,140096,140403,180360,185315,186412
+Uganda,"Of which, Universities",Male,Number,,78817,79709,100525,103280,104432
+Uganda,"Of which, Universities",Female,Number,,61270,60398,79835,82035,81980
+Uganda,Percentage enrolled in universities (%),Both Sex,%,,70.7,69.7,72,71.9,72
+Uganda,"Institutions, total",Both Sex,Number,,126,118,118,119,129
+Uganda,Government,Both Sex,Number,,110,103,103,103,115
+Uganda,Private,Both Sex,Number,,16,15,15,16,14
+Uganda,Enrolment,Both Sex,Number,,34380,42674,39712,40830,63209
+Uganda,Enrolment,Male,Number,,21499,28024,25485,26338,36960
+Uganda,Enrolment,Female,Number,,12881,14650,14227,14492,26249
+Uganda,"Competency in literacy at   Primary 3, Total",Both Sex,%,,53.8,56.2,64.2,60.2,
+Uganda,"Competency in literacy at   Primary 3, Total",Male,%,,52.1,53.9,62,59,
+Uganda,"Competency in literacy at   Primary 3, Total",Female,%,,55.6,56.4,66.5,61.3,
+Uganda,"Competency in literacy at  Primary 6, Total",Both Sex,%,,40.8,40.2,38.3,51.9,
+Uganda,"Competency in literacy at  Primary 6, Total",Male,%,,39.6,38.7,37.8,51.6,
+Uganda,"Competency in literacy at  Primary 6, Total",Female,%,,42,40.1,38.7,52.2,
+Uganda,"Competency in numeracy at Primary 3, Total",Both Sex,%,,72.8,63,69.9,69.8,72.7
+Uganda,"Competency in numeracy at Primary 3, Total",Male,%,,74.1,65,71.3,70.6,73.9
+Uganda,"Competency in numeracy at Primary 3, Total",Female,%,,71.7,61,68.4,68.8,71.4
+Uganda,"Competency in numeracy at Primary 6 , Total",Both Sex,%,,54.8,45.6,45.2,41.4,39.4
+Uganda,"Competency in numeracy at Primary 6 , Total",Male,%,,57.9,49.6,49.7,45.8,44.2
+Uganda,"Competency in numeracy at Primary 6 , Total",Female,%,,52.1,41.7,40.9,37.4,35
+Uganda,Biology Total,Both Sex,%,,17.7,14.5,20.5,,
+Uganda,Biology Total,Male,%,,23.6,19.9,26.9,,
+Uganda,Biology Total,Female,%,,10.7,9.2,13.4,,
+Uganda,"Mathematics, Total",Both Sex,%,,43.3,46.1,41.5,,
+Uganda,"Mathematics, Total",Male,%,,50.8,53,48.7,,
+Uganda,"Mathematics, Total",Female,%,,34.3,41,33.2,,
+Uganda,English language Total,Both Sex,%,,48.3,43.1,49.3,,
+Uganda,English language Total,Male,%,,50,40.9,49.9,,
+Uganda,English language Total,Female,%,,46.3,45.3,48.6,,
+Butambala,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,158,156,174,185,226,
+Butambala,"Net Intake Rate (PNI) , primary",Both Sex,%,84,89,90,83,114,
+Butambala,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,114,122,130,125,139,
+Butambala,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,98,107,114,108,120,
+Butambala,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,42,34,39,34,33
+Butambala,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,42,36,38,45,41
+Butambala,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,105,101,
+Butambala,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,36,23,
+Butambala,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,89,92,
+Butambala,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,84,86,
+Butambala,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,28,19,18,20,23
+Butambala,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,55,55,72,55,43
+Buikwe,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,100,97,89,97,119,
+Buikwe,"Net Intake Rate (PNI) , primary",Both Sex,%,44,46,37,33,47,
+Buikwe,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,93,95,84,85,88,
+Buikwe,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,76,79,70,72,73,
+Buikwe,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,43,40,46,36,35
+Buikwe,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,47,49,45,51,43
+Buikwe,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,41,43,
+Buikwe,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,11,13,
+Buikwe,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,31,31,
+Buikwe,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,29,28,
+Buikwe,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,27,22,20,21,22
+Buikwe,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,47,51,51,54,55
+Mityana,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,135,118,119,126,115,
+Mityana,"Net Intake Rate (PNI) , primary",Both Sex,%,59,57,58,50,58,
+Mityana,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,112,104,101,98,84,
+Mityana,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,93,88,88,84,72,
+Mityana,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,38,33,39,33,31
+Mityana,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,40,38,39,47,37
+Mityana,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,49,32,
+Mityana,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,14,7,
+Mityana,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,39,24,
+Mityana,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,36,22,
+Mityana,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,38,20,20,21,19
+Mityana,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,59,57,53,67,48
+Sembabule,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,261,261,265,286,234,
+Sembabule,"Net Intake Rate (PNI) , primary",Both Sex,%,112,115,116,106,104,
+Sembabule,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,157,153,160,161,121,
+Sembabule,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,132,132,143,139,104,
+Sembabule,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,39,37,38,36,36
+Sembabule,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,56,56,64,60,51
+Sembabule,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,35,26,
+Sembabule,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,9,5,
+Sembabule,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,23,19,
+Sembabule,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,21,16,
+Sembabule,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,30,18,19,21,20
+Sembabule,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,42,53,50,53,46
+Luweero,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,186,201,177,177,226,
+Luweero,"Net Intake Rate (PNI) , primary",Both Sex,%,100,99,90,79,99,
+Luweero,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,136,146,127,125,137,
+Luweero,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,116,125,112,105,117,
+Luweero,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,48,43,44,37,38
+Luweero,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,52,55,50,49,46
+Luweero,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,65,59,
+Luweero,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,16,16,
+Luweero,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,52,46,
+Luweero,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,48,42,
+Luweero,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,27,21,20,20,21
+Luweero,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,48,57,44,50,55
+Gomba,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,156,161,140,146,139,
+Gomba,"Net Intake Rate (PNI) , primary",Both Sex,%,77,81,73,66,65,
+Gomba,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,123,132,116,111,94,
+Gomba,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,105,112,103,97,81,
+Gomba,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,52,47,44,35,36
+Gomba,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,55,60,51,57,44
+Gomba,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,37,25,
+Gomba,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,2,
+Gomba,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,25,19,
+Gomba,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,23,18,
+Gomba,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,20,18,17,17,18
+Gomba,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,39,46,33,53,40
+Rakai,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,146,147,152,166,171,
+Rakai,"Net Intake Rate (PNI) , primary",Both Sex,%,72,70,77,69,77,
+Rakai,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,114,119,120,117,106,
+Rakai,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,98,103,106,97,90,
+Rakai,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,44,43,41,39,39
+Rakai,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,60,61,59,70,55
+Rakai,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,47,38,
+Rakai,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,11,10,
+Rakai,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,31,29,
+Rakai,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,29,27,
+Rakai,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,38,29,26,27,29
+Rakai,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,55,60,47,51,58
+Bukomansimbi,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,155,142,156,177,204,
+Bukomansimbi,"Net Intake Rate (PNI) , primary",Both Sex,%,8,74,89,80,104,
+Bukomansimbi,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,113,113,127,131,138,
+Bukomansimbi,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,99,98,115,116,124,
+Bukomansimbi,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,51,53,52,53,55
+Bukomansimbi,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,60,68,66,37,73
+Bukomansimbi,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,38,27,
+Bukomansimbi,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,11,
+Bukomansimbi,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,28,23,
+Bukomansimbi,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,26,22,
+Bukomansimbi,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,25,29,29,28,30
+Bukomansimbi,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,37,53,55,50,49
+Nakaseke,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,182,201,184,201,243,
+Nakaseke,"Net Intake Rate (PNI) , primary",Both Sex,%,90,91,85,81,106,
+Nakaseke,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,128,143,130,138,155,
+Nakaseke,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,110,121,112,118,132,
+Nakaseke,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,46,40,50,39,43
+Nakaseke,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,44,41,46,49,46
+Nakaseke,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,40,35,
+Nakaseke,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,7,8,
+Nakaseke,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,32,25,
+Nakaseke,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,29,23,
+Nakaseke,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,21,18,17,17,16
+Nakaseke,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,46,54,47,36,34
+Lyantonde,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,204,226,234,215,201,
+Lyantonde,"Net Intake Rate (PNI) , primary",Both Sex,%,91,104,111,104,96,
+Lyantonde,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,120,138,147,149,123,
+Lyantonde,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,103,121,132,133,105,
+Lyantonde,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,43,40,34,36,36
+Lyantonde,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,47,46,43,51,36
+Lyantonde,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,50,43,
+Lyantonde,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,3,
+Lyantonde,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,34,28,
+Lyantonde,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,30,25,
+Lyantonde,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,23,20,20,19,20
+Lyantonde,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,52,53,50,77,52
+Mubende,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,148,136,115,127,135,
+Mubende,"Net Intake Rate (PNI) , primary",Both Sex,%,60,53,45,44,54,
+Mubende,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,105,107,85,88,85,
+Mubende,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,85,87,71,70,69,
+Mubende,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,53,45,45,39,35
+Mubende,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,50,58,54,61,42
+Mubende,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,34,31,
+Mubende,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,4,
+Mubende,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,24,22,
+Mubende,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,21,20,
+Mubende,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,24,24,25,20
+Mubende,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,53,57,47,51,48
+Kiboga,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,111,105,110,122,157,
+Kiboga,"Net Intake Rate (PNI) , primary",Both Sex,%,47,38,43,42,60,
+Kiboga,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,91,91,91,90,103,
+Kiboga,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,71,73,76,71,83,
+Kiboga,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,33,31,28,27,27
+Kiboga,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,44,43,35,42,37
+Kiboga,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,41,39,
+Kiboga,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,8,
+Kiboga,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,30,29,
+Kiboga,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,28,27,
+Kiboga,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,31,18,18,21,19
+Kiboga,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,53,62,50,56,50
+Lwengo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,201,184,185,210,202,
+Lwengo,"Net Intake Rate (PNI) , primary",Both Sex,%,91,89,93,88,94,
+Lwengo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,138,137,135,137,112,
+Lwengo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,116,117,120,120,97,
+Lwengo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,48,48,52,38,41
+Lwengo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,56,60,62,71,50
+Lwengo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,41,37,
+Lwengo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,9,8,
+Lwengo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,26,28,
+Lwengo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,25,26,
+Lwengo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,32,22,24,23,22
+Lwengo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,58,89,51,49,56
+Buvuma,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,160,150,176,231,153,
+Buvuma,"Net Intake Rate (PNI) , primary",Both Sex,%,56,64,71,89,65,
+Buvuma,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,125,154,179,198,103,
+Buvuma,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,104,124,160,172,86,
+Buvuma,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,43,50,59,36,41
+Buvuma,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,56,82,77,123,54
+Buvuma,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,24,9,
+Buvuma,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,0,
+Buvuma,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,10,6,
+Buvuma,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,9,5,
+Buvuma,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,11,12,11,11,16
+Buvuma,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,19,25,20,53,49
+Wakiso,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,74,70,82,88,59,
+Wakiso,"Net Intake Rate (PNI) , primary",Both Sex,%,33,33,38,44,29,
+Wakiso,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,77,78,89,89,61,
+Wakiso,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,63,65,75,75,51,
+Wakiso,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,30,26,26,27,26
+Wakiso,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,37,36,39,40,36
+Wakiso,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,37,35,
+Wakiso,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,14,12,
+Wakiso,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,30,26,
+Wakiso,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,27,23,
+Wakiso,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,25,19,20,20,19
+Wakiso,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,46,49,52,51,50
+Mpigi,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,125,127,129,135,137,
+Mpigi,"Net Intake Rate (PNI) , primary",Both Sex,%,61,65,65,62,62,
+Mpigi,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,108,119,110,115,107,
+Mpigi,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,89,100,95,96,92,
+Mpigi,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,42,41,40,36,37
+Mpigi,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,49,54,46,51,44
+Mpigi,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,63,53,
+Mpigi,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,13,12,
+Mpigi,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,50,41,
+Mpigi,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,46,38,
+Mpigi,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,22,15,16,17,15
+Mpigi,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,39,47,39,39,41
+Kampala,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,57,59,65,75,73,
+Kampala,"Net Intake Rate (PNI) , primary",Both Sex,%,27,29,35,36,40,
+Kampala,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,61,64,76,82,78,
+Kampala,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,50,53,64,71,66,
+Kampala,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,29,26,30,28,25
+Kampala,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,38,34,41,42,34
+Kampala,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,42,38,
+Kampala,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,16,13,
+Kampala,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,30,25,
+Kampala,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,27,23,
+Kampala,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,21,19,21,19
+Kampala,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,52,57,49,59,51
+Nakasongola,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,178,174,161,156,137,
+Nakasongola,"Net Intake Rate (PNI) , primary",Both Sex,%,92,91,85,67,65,
+Nakasongola,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,146,145,143,131,95,
+Nakasongola,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,114,116,118,104,76,
+Nakasongola,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,39,34,31,29,25
+Nakasongola,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,43,39,36,39,33
+Nakasongola,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,63,41,
+Nakasongola,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,12,8,
+Nakasongola,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,41,30,
+Nakasongola,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,37,28,
+Nakasongola,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,27,23,21,22,21
+Nakasongola,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,49,52,46,43,35
+Kyankwanzi,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,167,157,151,153,142,
+Kyankwanzi,"Net Intake Rate (PNI) , primary",Both Sex,%,63,57,59,51,53,
+Kyankwanzi,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,118,111,115,114,86,
+Kyankwanzi,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,94,90,97,91,68,
+Kyankwanzi,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,38,34,35,33,32
+Kyankwanzi,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,48,46,45,58,44
+Kyankwanzi,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,29,21,
+Kyankwanzi,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,4,
+Kyankwanzi,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,16,14,
+Kyankwanzi,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,15,13,
+Kyankwanzi,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,18,15,15,20,15
+Kyankwanzi,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,30,37,37,47,37
+Kayunga,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,172,160,127,144,144,
+Kayunga,"Net Intake Rate (PNI) , primary",Both Sex,%,85,81,64,64,70,
+Kayunga,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,147,140,114,120,100,
+Kayunga,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,123,116,97,100,84,
+Kayunga,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,52,50,41,44,38
+Kayunga,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,59,57,53,67,51
+Kayunga,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,46,33,
+Kayunga,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,11,7,
+Kayunga,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,35,27,
+Kayunga,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,31,25,
+Kayunga,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,30,21,19,25,21
+Kayunga,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,41,62,48,52,50
+Masaka,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,165,141,156,161,126,
+Masaka,"Net Intake Rate (PNI) , primary",Both Sex,%,75,66,80,68,61,
+Masaka,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,12,113,122,127,91,
+Masaka,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,103,97,109,110,79,
+Masaka,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,37,31,33,30,29
+Masaka,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,43,38,39,43,38
+Masaka,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,73,41,
+Masaka,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,27,1,
+Masaka,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,56,35,
+Masaka,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,52,32,
+Masaka,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,18,19,19,19
+Masaka,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,47,48,33,49,40
+Kalangala,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,77,93,99,102,111,
+Kalangala,"Net Intake Rate (PNI) , primary",Both Sex,%,33,35,41,37,49,
+Kalangala,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,60,54,73,78,87,
+Kalangala,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,48,45,60,62,72,
+Kalangala,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,30,29,27,29,31
+Kalangala,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,28,26,29,25,31
+Kalangala,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,17,20,
+Kalangala,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,1,
+Kalangala,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,7,16,
+Kalangala,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,6,12,
+Kalangala,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,13,12,12,13,9
+Kalangala,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,39,58,40,35,29
+Mukono,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,128,119,107,122,111,
+Mukono,"Net Intake Rate (PNI) , primary",Both Sex,%,60,53,46,47,50,
+Mukono,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,111,105,100,109,91,
+Mukono,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,91,88,84,91,77,
+Mukono,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,42,39,44,37,38
+Mukono,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,49,43,51,53,45
+Mukono,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,45,34,
+Mukono,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,13,8,
+Mukono,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,41,27,
+Mukono,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,37,25,
+Mukono,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,34,20,18,23,22
+Mukono,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,43,58,43,57,55
+Kalungu,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,209,212,227,265,229,
+Kalungu,"Net Intake Rate (PNI) , primary",Both Sex,%,113,112,119,115,105,
+Kalungu,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,145,148,156,168,139,
+Kalungu,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,123,126,138,143,119,
+Kalungu,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,48,48,49,45,45
+Kalungu,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,60,64,68,84,57
+Kalungu,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,66,61,
+Kalungu,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,14,11,
+Kalungu,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,52,46,
+Kalungu,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,48,43,
+Kalungu,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,49,21,21,20,20
+Kalungu,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,43,14,41,47,45
+Serere,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,137,125,133,161,168,
+Serere,"Net Intake Rate (PNI) , primary",Both Sex,%,81,75,81,74,82,
+Serere,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,130,133,146,146,130,
+Serere,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,115,118,131,125,109,
+Serere,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,63,55,52,49,52
+Serere,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,67,67,69,71,66
+Serere,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,43,18,
+Serere,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,3,1,
+Serere,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,24,13,
+Serere,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,21,11,
+Serere,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,35,24,26,23,24
+Serere,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,67,86,70,60,57
+Sironko,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,149,134,146,149,175,
+Sironko,"Net Intake Rate (PNI) , primary",Both Sex,%,87,71,84,72,84,
+Sironko,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,152,137,137,143,142,
+Sironko,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,133,119,121,123,118,
+Sironko,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,53,53,50,48,46
+Sironko,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,66,73,63,66,59
+Sironko,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,45,33,
+Sironko,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,7,4,
+Sironko,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,32,26,
+Sironko,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,29,24,
+Sironko,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,34,21,23,22,23
+Sironko,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,49,56,49,61,66
+Jinja,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,74,88,56,80,101,
+Jinja,"Net Intake Rate (PNI) , primary",Both Sex,%,45,52,32,44,59,
+Jinja,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,87,98,67,91,98,
+Jinja,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,75,84,59,80,85,
+Jinja,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,40,36,40,37,36
+Jinja,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,53,51,53,58,49
+Jinja,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,65,62,
+Jinja,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,14,13,
+Jinja,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,49,48,
+Jinja,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,44,43,
+Jinja,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,34,27,25,25,25
+Jinja,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,57,64,58,54,54
+Bududa,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,144,146,163,167,148,
+Bududa,"Net Intake Rate (PNI) , primary",Both Sex,%,76,68,82,78,65,
+Bududa,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,127,129,131,133,107,
+Bududa,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,108,110,116,109,91,
+Bududa,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,48,47,46,50,54
+Bududa,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,59,59,70,74,65
+Bududa,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,38,27,
+Bududa,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,3,2,
+Bududa,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,25,18,
+Bududa,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,21,16,
+Bududa,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,43,33,32,39,47
+Bududa,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,71,66,47,56,65
+Bulambuli,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,155,150,164,176,120,
+Bulambuli,"Net Intake Rate (PNI) , primary",Both Sex,%,101,84,98,94,64,
+Bulambuli,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,162,167,170,172,101,
+Bulambuli,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,142,146,149,150,88,
+Bulambuli,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,55,51,50,48,47
+Bulambuli,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,76,68,63,35,63
+Bulambuli,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,103,40,
+Bulambuli,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,18,6,
+Bulambuli,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,50,29,
+Bulambuli,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,47,25,
+Bulambuli,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,57,31,32,34,31
+Bulambuli,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,62,107,74,63,50
+Butaleja,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,208,208,225,261,219,
+Butaleja,"Net Intake Rate (PNI) , primary",Both Sex,%,122,120,135,144,122,
+Butaleja,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,169,172,179,190,141,
+Butaleja,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,149,152,163,168,127,
+Butaleja,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,71,68,64,59,63
+Butaleja,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,94,100,133,108,94
+Butaleja,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,51,32,
+Butaleja,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,3,
+Butaleja,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,32,24,
+Butaleja,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,28,22,
+Butaleja,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,36,26,25,32,29
+Butaleja,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,59,92,57,63,49
+Kween,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,133,124,105,113,141,
+Kween,"Net Intake Rate (PNI) , primary",Both Sex,%,68,71,59,59,85,
+Kween,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,138,137,112,122,126,
+Kween,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,117,116,99,103,111,
+Kween,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,50,47,45,42,35
+Kween,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,51,69,74,133,51
+Kween,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,61,47,
+Kween,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,7,8,
+Kween,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,42,38,
+Kween,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,39,34,
+Kween,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,28,26,22,26,24
+Kween,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,57,63,54,112,56
+Kumi,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,143,135,130,153,160,
+Kumi,"Net Intake Rate (PNI) , primary",Both Sex,%,89,83,82,70,80,
+Kumi,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,142,139,132,134,134,
+Kumi,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,120,115,111,108,108,
+Kumi,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,71,72,74,67,72
+Kumi,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,94,99,97,124,93
+Kumi,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,33,24,
+Kumi,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,3,2,
+Kumi,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,22,16,
+Kumi,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,19,14,
+Kumi,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,32,23,26,29,29
+Kumi,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,62,69,53,60,63
+Amuria,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,95,91,84,86,119,
+Amuria,"Net Intake Rate (PNI) , primary",Both Sex,%,79,75,69,65,94,
+Amuria,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,95,91,84,86,119,
+Amuria,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,79,75,69,65,94,
+Amuria,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,66,62,62,56,56
+Amuria,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,82,78,81,73,67
+Amuria,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,23,25,
+Amuria,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,1,
+Amuria,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,15,18,
+Amuria,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,13,15,
+Amuria,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,35,25,23,19,18
+Amuria,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,55,68,55,54,39
+Kapchorwa,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,131,126,114,121,153,
+Kapchorwa,"Net Intake Rate (PNI) , primary",Both Sex,%,79,74,62,67,85,
+Kapchorwa,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,142,138,121,123,142,
+Kapchorwa,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,114,114,105,106,120,
+Kapchorwa,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,37,39,40,36,37
+Kapchorwa,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,49,57,56,77,53
+Kapchorwa,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,77,46,
+Kapchorwa,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,15,8,
+Kapchorwa,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,60,44,
+Kapchorwa,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,54,40,
+Kapchorwa,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,32,27,26,23,24
+Kapchorwa,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,56,71,77,48,48
+Katakwi,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,154,160,167,195,204,
+Katakwi,"Net Intake Rate (PNI) , primary",Both Sex,%,83,88,90,86,92,
+Katakwi,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,134,136,135,134,126,
+Katakwi,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,107,114,116,109,100,
+Katakwi,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,64,68,65,64,62
+Katakwi,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,76,83,82,79,71
+Katakwi,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,31,19,
+Katakwi,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,3,1,
+Katakwi,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,18,12,
+Katakwi,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,16,10,
+Katakwi,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,32,27,25,22,23
+Katakwi,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,57,62,52,42,41
+Namutumba,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,175,147,158,209,165,
+Namutumba,"Net Intake Rate (PNI) , primary",Both Sex,%,98,78,78,107,75,
+Namutumba,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,154,136,153,174,125,
+Namutumba,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,133,120,136,152,107,
+Namutumba,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,64,61,43,39,43
+Namutumba,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,79,90,76,75,70
+Namutumba,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,74,47,
+Namutumba,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,10,5,
+Namutumba,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,49,37,
+Namutumba,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,44,34,
+Namutumba,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,47,35,34,36,39
+Namutumba,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,69,89,70,76,75
+Bukwa,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,226,203,217,237,207,
+Bukwa,"Net Intake Rate (PNI) , primary",Both Sex,%,127,106,120,114,112,
+Bukwa,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,240,227,218,228,177,
+Bukwa,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,212,198,194,203,157,
+Bukwa,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,54,51,50,61,61
+Bukwa,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,61,59,101,86,81
+Bukwa,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,84,56,
+Bukwa,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,16,10,
+Bukwa,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,57,42,
+Bukwa,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,52,40,
+Bukwa,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,28,29,29,25,27
+Bukwa,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,57,61,56,55,62
+Manafwa,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,165,151,168,175,182,
+Manafwa,"Net Intake Rate (PNI) , primary",Both Sex,%,91,87,94,81,89,
+Manafwa,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,146,143,145,148,143,
+Manafwa,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,130,125,132,124,124,
+Manafwa,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,62,63,53,55,55
+Manafwa,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,80,82,77,93,72
+Manafwa,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,58,50,
+Manafwa,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,5,
+Manafwa,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,37,35,
+Manafwa,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,33,31,
+Manafwa,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,37,29,29,30,26
+Manafwa,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,69,73,59,45,66
+Mayuge,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,133,122,146,136,92,
+Mayuge,"Net Intake Rate (PNI) , primary",Both Sex,%,68,55,57,53,44,
+Mayuge,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,134,116,116,126,70,
+Mayuge,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,116,99,103,107,61,
+Mayuge,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,47,51,61,60,58
+Mayuge,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,53,62,62,103,78
+Mayuge,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,50,13,
+Mayuge,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,9,2,
+Mayuge,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,31,10,
+Mayuge,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,29,9,
+Mayuge,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,44,28,30,32,31
+Mayuge,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,63,74,63,76,94
+Budaka,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,175,181,176,194,167,
+Budaka,"Net Intake Rate (PNI) , primary",Both Sex,%,98,87,87,94,87,
+Budaka,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,169,166,170,180,135,
+Budaka,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,145,130,147,154,116,
+Budaka,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,61,57,58,61,61
+Budaka,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,75,75,83,108,83
+Budaka,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,79,54,
+Budaka,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,9,8,
+Budaka,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,53,39,
+Budaka,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,47,34,
+Budaka,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,37,28,29,30,35
+Budaka,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,62,87,72,74,95
+Busia,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,173,163,161,173,168,
+Busia,"Net Intake Rate (PNI) , primary",Both Sex,%,99,97,93,80,83,
+Busia,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,166,162,162,163,138,
+Busia,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,141,137,141,135,115,
+Busia,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,58,56,56,54,56
+Busia,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,74,72,68,76,69
+Busia,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,65,45,
+Busia,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,8,4,
+Busia,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,42,32,
+Busia,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,36,27,
+Busia,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,43,28,30,30,31
+Busia,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,70,74,55,54,63
+Kibuku,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,157,154,162,174,158,
+Kibuku,"Net Intake Rate (PNI) , primary",Both Sex,%,80,82,80,77,70,
+Kibuku,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,143,145,145,156,121,
+Kibuku,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,125,125,129,131,105,
+Kibuku,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,48,42,42,43,41
+Kibuku,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,72,71,72,67,67
+Kibuku,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,69,43,
+Kibuku,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,15,7,
+Kibuku,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,48,31,
+Kibuku,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,43,28,
+Kibuku,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,20,23,25,29
+Kibuku,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,70,67,73,61,60
+Kaberamaido,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,163,150,152,186,172,
+Kaberamaido,"Net Intake Rate (PNI) , primary",Both Sex,%,105,94,96,86,99,
+Kaberamaido,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,157,158,161,162,136,
+Kaberamaido,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,134,134,137,130,114,
+Kaberamaido,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,74,74,68,63,60
+Kaberamaido,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,78,83,81,72,66
+Kaberamaido,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,40,22,
+Kaberamaido,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,1,
+Kaberamaido,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,25,15,
+Kaberamaido,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,22,13,
+Kaberamaido,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,32,24,25,26,21
+Kaberamaido,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,61,56,46,52,43
+Iganga,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,109,110,106,121,140,
+Iganga,"Net Intake Rate (PNI) , primary",Both Sex,%,56,53,53,52,72,
+Iganga,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,116,129,119,124,119,
+Iganga,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,99,111,105,107,104,
+Iganga,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,43,36,39,34,37
+Iganga,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,61,57,59,58,59
+Iganga,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,70,57,
+Iganga,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,16,10,
+Iganga,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,56,46,
+Iganga,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,51,43,
+Iganga,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,36,26,28,30,30
+Iganga,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,61,69,65,69,53
+Ngora,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,127,123,111,138,155,
+Ngora,"Net Intake Rate (PNI) , primary",Both Sex,%,71,73,64,61,87,
+Ngora,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,140,136,127,132,130,
+Ngora,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,116,112,107,102,104,
+Ngora,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,61,58,48,43,44
+Ngora,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,72,78,66,62,52
+Ngora,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,62,47,
+Ngora,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,7,
+Ngora,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,40,37,
+Ngora,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,34,32,
+Ngora,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,26,26,24,22
+Ngora,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,65,74,50,62,46
+Tororo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,139,145,144,161,171,
+Tororo,"Net Intake Rate (PNI) , primary",Both Sex,%,73,81,80,86,89,
+Tororo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,143,157,159,164,141,
+Tororo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,117,129,135,138,116,
+Tororo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,68,66,69,59,59
+Tororo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,85,84,80,83,75
+Tororo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,64,44,
+Tororo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,9,5,
+Tororo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,43,34,
+Tororo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,37,29,
+Tororo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,34,26,26,27,27
+Tororo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,58,70,61,57,63
+Kamuli,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,112,120,106,108,139,
+Kamuli,"Net Intake Rate (PNI) , primary",Both Sex,%,64,65,59,53,75,
+Kamuli,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,121,119,108,107,115,
+Kamuli,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,104,101,96,92,101,
+Kamuli,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,53,49,47,44,48
+Kamuli,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,63,63,64,63,62
+Kamuli,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,54,39,
+Kamuli,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,11,10,
+Kamuli,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,37,30,
+Kamuli,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,34,28,
+Kamuli,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,33,28,28,29,31
+Kamuli,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,54,73,61,60,66
+Bugiri,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,133,122,118,125,141,
+Bugiri,"Net Intake Rate (PNI) , primary",Both Sex,%,69,64,64,57,69,
+Bugiri,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,123,115,113,112,103,
+Bugiri,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,105,99,100,93,87,
+Bugiri,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,62,63,62,58,58
+Bugiri,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,73,68,71,80,70
+Bugiri,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,40,26,
+Bugiri,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,7,5,
+Bugiri,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,27,19,
+Bugiri,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,24,17,
+Bugiri,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,36,26,28,28,27
+Bugiri,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,51,60,54,63,57
+Soroti,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,100,105,110,124,107,
+Soroti,"Net Intake Rate (PNI) , primary",Both Sex,%,54,54,58,52,49,
+Soroti,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,119,114,122,123,94,
+Soroti,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,92,90,97,93,73,
+Soroti,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,56,49,52,47,50
+Soroti,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,60,60,61,57,56
+Soroti,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,75,44,
+Soroti,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,16,5,
+Soroti,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,50,35,
+Soroti,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,43,30,
+Soroti,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,25,26,24,25
+Soroti,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,70,80,74,66,75
+Buyende,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,163,170,161,169,121,
+Buyende,"Net Intake Rate (PNI) , primary",Both Sex,%,80,80,77,73,59,
+Buyende,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,137,141,136,139,90,
+Buyende,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,117,122,120,121,78,
+Buyende,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,55,48,59,56,50
+Buyende,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,70,70,66,99,66
+Buyende,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,49,28,
+Buyende,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,8,6,
+Buyende,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,29,19,
+Buyende,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,26,18,
+Buyende,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,44,31,28,29,27
+Buyende,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,55,71,57,87,60
+Kaliro,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,131,146,145,155,147,
+Kaliro,"Net Intake Rate (PNI) , primary",Both Sex,%,70,73,79,71,77,
+Kaliro,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,114,130,126,132,112,
+Kaliro,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,95,110,109,113,97,
+Kaliro,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,47,46,47,45,52
+Kaliro,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,71,73,70,101,82
+Kaliro,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,80,39,
+Kaliro,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,3,
+Kaliro,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,54,29,
+Kaliro,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,48,26,
+Kaliro,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,34,37,36,45,47
+Kaliro,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,57,85,64,83,78
+Namayingo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,127,123,114,126,147,
+Namayingo,"Net Intake Rate (PNI) , primary",Both Sex,%,49,44,57,52,64,
+Namayingo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,123,100,111,108,110,
+Namayingo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,102,83,97,89,94,
+Namayingo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,70,63,53,60,58
+Namayingo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,82,76,68,72,66
+Namayingo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,34,27,
+Namayingo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,2,1,
+Namayingo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,17,17,
+Namayingo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,15,16,
+Namayingo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,31,35,33,43,41
+Namayingo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,47,99,54,72,54
+Luuka,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,132,111,126,139,163,
+Luuka,"Net Intake Rate (PNI) , primary",Both Sex,%,64,58,63,60,84,
+Luuka,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,139,114,129,131,133,
+Luuka,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,117,97,112,111,116,
+Luuka,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,48,40,39,38,43
+Luuka,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,64,58,75,81,63
+Luuka,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,65,50,
+Luuka,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,9,8,
+Luuka,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,41,34,
+Luuka,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,38,32,
+Luuka,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,36,26,24,26,29
+Luuka,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,67,82,75,56,65
+Pallisa,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,153,143,134,163,158,
+Pallisa,"Net Intake Rate (PNI) , primary",Both Sex,%,94,81,76,78,87,
+Pallisa,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,137,137,136,148,123,
+Pallisa,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,121,117,120,126,106,
+Pallisa,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,56,52,50,47,48
+Pallisa,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,70,72,68,64,65
+Pallisa,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,57,39,
+Pallisa,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,5,
+Pallisa,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,37,28,
+Pallisa,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,34,25,
+Pallisa,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,32,26,28,30,31
+Pallisa,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,45,65,49,75,59
+Bukedea,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,162,164,160,190,184,
+Bukedea,"Net Intake Rate (PNI) , primary",Both Sex,%,86,88,87,71,81,
+Bukedea,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,154,156,160,165,135,
+Bukedea,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,127,127,132,130,106,
+Bukedea,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,42,43,43,43,44
+Bukedea,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,78,79,101,80,74
+Bukedea,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,43,30,
+Bukedea,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,5,
+Bukedea,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,27,21,
+Bukedea,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,23,18,
+Bukedea,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,30,28,23,27,26
+Bukedea,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,60,65,61,66,58
+Mbale,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,157,136,135,135,119,
+Mbale,"Net Intake Rate (PNI) , primary",Both Sex,%,81,74,75,68,59,
+Mbale,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,146,137,138,140,110,
+Mbale,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,123,114,116,116,90,
+Mbale,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,47,46,45,42,43
+Mbale,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,68,65,63,87,64
+Mbale,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,90,61,
+Mbale,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,20,12,
+Mbale,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,73,50,
+Mbale,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,64,44,
+Mbale,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,47,25,28,28,28
+Mbale,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,74,74,83,79,132
+Dokolo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,142,135,115,125,111,
+Dokolo,"Net Intake Rate (PNI) , primary",Both Sex,%,115,111,95,99,91,
+Dokolo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,142,135,115,125,111,
+Dokolo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,115,111,95,99,91,
+Dokolo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,66,67,59,59,64
+Dokolo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,66,66,64,75,69
+Dokolo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,25,12,
+Dokolo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,0,
+Dokolo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,16,8,
+Dokolo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,14,7,
+Dokolo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,28,21,20,19,18
+Dokolo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,50,59,40,43,77
+Lira,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,133,134,140,142,124,
+Lira,"Net Intake Rate (PNI) , primary",Both Sex,%,111,114,121,121,104,
+Lira,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,133,134,140,142,124,
+Lira,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,111,114,121,121,104,
+Lira,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,52,51,53,51,51
+Lira,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,67,70,94,78,73
+Lira,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,53,27,
+Lira,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,5,2,
+Lira,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,37,18,
+Lira,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,33,16,
+Lira,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,26,23,23,22,23
+Lira,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,51,69,65,47,51
+Amolatar,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,159,158,158,164,123,
+Amolatar,"Net Intake Rate (PNI) , primary",Both Sex,%,128,127,130,131,100,
+Amolatar,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,159,158,158,164,123,
+Amolatar,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,128,127,130,131,100,
+Amolatar,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,58,50,53,43,47
+Amolatar,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,68,66,66,70,63
+Amolatar,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,29,17,
+Amolatar,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,3,
+Amolatar,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,19,13,
+Amolatar,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,17,12,
+Amolatar,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,19,20,20,19,18
+Amolatar,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,40,64,53,40,33
+Kole,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,132,130,128,128,112,
+Kole,"Net Intake Rate (PNI) , primary",Both Sex,%,114,110,112,104,94,
+Kole,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,132,130,128,128,112,
+Kole,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,114,110,112,104,94,
+Kole,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,60,57,53,54,49
+Kole,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,82,74,108,115,84
+Kole,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,43,20,
+Kole,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,4,
+Kole,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,25,16,
+Kole,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,20,14,
+Kole,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,19,19,22,21,18
+Kole,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,39,51,56,45,49
+Oyam,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,152,135,138,149,128,
+Oyam,"Net Intake Rate (PNI) , primary",Both Sex,%,132,119,124,143,111,
+Oyam,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,152,135,138,149,128,
+Oyam,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,132,119,124,143,111,
+Oyam,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,64,64,69,59,64
+Oyam,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,80,77,68,86,77
+Oyam,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,14,7,
+Oyam,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,0,0,
+Oyam,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,10,5,
+Oyam,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,8,4,
+Oyam,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,27,22,19,15,13
+Oyam,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,43,47,37,41,33
+Moroto,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,45,44,37,39,47,
+Moroto,"Net Intake Rate (PNI) , primary",Both Sex,%,35,33,29,29,36,
+Moroto,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,45,44,37,39,47,
+Moroto,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,35,33,29,29,36,
+Moroto,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,30,27,24,23,24
+Moroto,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,43,35,42,40,40
+Moroto,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,17,19,
+Moroto,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,1,
+Moroto,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,9,13,
+Moroto,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,8,9,
+Moroto,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,23,19,22,19,20
+Moroto,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,38,46,52,40,52
+Kotido,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,42,39,42,38,42,
+Kotido,"Net Intake Rate (PNI) , primary",Both Sex,%,33,31,35,30,33,
+Kotido,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,42,39,42,38,42,
+Kotido,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,33,31,35,30,33,
+Kotido,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,81,82,74,79,75
+Kotido,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,51,80,68,94,72
+Kotido,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,13,12,
+Kotido,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,0,0,
+Kotido,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,8,9,
+Kotido,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,6,8,
+Kotido,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,88,37,39,43,42
+Kotido,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,72,108,98,104,117
+Kaabong,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,52,49,51,49,107,
+Kaabong,"Net Intake Rate (PNI) , primary",Both Sex,%,45,42,44,42,89,
+Kaabong,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,52,49,51,49,107,
+Kaabong,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,45,42,44,42,89,
+Kaabong,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,91,92,95,74,92
+Kaabong,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,99,108,140,98,124
+Kaabong,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,3,9,
+Kaabong,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,0,0,
+Kaabong,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,2,5,
+Kaabong,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,2,4,
+Kaabong,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,30,27,30,28,32
+Kaabong,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,47,49,35,35,32
+Amudat,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,28,28,33,21,22,
+Amudat,"Net Intake Rate (PNI) , primary",Both Sex,%,24,24,30,19,18,
+Amudat,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,28,28,33,21,22,
+Amudat,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,24,24,30,19,18,
+Amudat,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,60,63,51,57,61
+Amudat,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,77,97,59,68,68
+Amudat,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,3,1,
+Amudat,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,0,0,
+Amudat,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,1,0,
+Amudat,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,1,0,
+Amudat,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,14,15,17,3,14
+Amudat,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,25,29,28,14,36
+Kitgum,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,128,117,115,112,126,
+Kitgum,"Net Intake Rate (PNI) , primary",Both Sex,%,100,94,93,91,100,
+Kitgum,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,128,117,115,112,126,
+Kitgum,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,100,94,93,91,100,
+Kitgum,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,53,55,52,50,51
+Kitgum,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,58,64,69,57,52
+Kitgum,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,60,54,
+Kitgum,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,7,4,
+Kitgum,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,36,39,
+Kitgum,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,33,34,
+Kitgum,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,41,32,28,32,26
+Kitgum,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,42,76,54,76,62
+Nebbi,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,142,141,151,157,129,
+Nebbi,"Net Intake Rate (PNI) , primary",Both Sex,%,116,114,125,126,108,
+Nebbi,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,142,141,151,157,129,
+Nebbi,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,116,114,125,126,108,
+Nebbi,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,62,61,64,62,64
+Nebbi,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,88,86,98,104,80
+Nebbi,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,30,16,
+Nebbi,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,2,1,
+Nebbi,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,19,9,
+Nebbi,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,17,8,
+Nebbi,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,24,21,22,22
+Nebbi,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,43,72,40,49,50
+Maracha,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,183,174,179,184,162,
+Maracha,"Net Intake Rate (PNI) , primary",Both Sex,%,159,149,160,160,145,
+Maracha,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,183,174,179,184,162,
+Maracha,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,159,149,160,160,145,
+Maracha,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,66,69,68,67,70
+Maracha,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,115,131,171,222,145
+Maracha,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,28,23,
+Maracha,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,3,
+Maracha,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,18,14,
+Maracha,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,16,12,
+Maracha,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,22,16,17,18,17
+Maracha,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,32,38,33,34,36
+Amuru,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,109,110,112,130,111,
+Amuru,"Net Intake Rate (PNI) , primary",Both Sex,%,84,81,84,93,77,
+Amuru,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,109,110,112,130,111,
+Amuru,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,84,81,84,93,77,
+Amuru,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,65,64,62,64,58
+Amuru,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,70,66,72,75,69
+Amuru,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,24,16,
+Amuru,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,1,
+Amuru,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,15,12,
+Amuru,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,13,10,
+Amuru,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,30,21,18,19,18
+Amuru,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,51,48,32,60,34
+Yumbe,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,75,64,57,60,57,
+Yumbe,"Net Intake Rate (PNI) , primary",Both Sex,%,62,53,48,49,48,
+Yumbe,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,75,64,57,60,57,
+Yumbe,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,62,53,48,49,48,
+Yumbe,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,49,49,52,51,54
+Yumbe,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,79,85,85,86,88
+Yumbe,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,18,29,
+Yumbe,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,2,3,
+Yumbe,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,11,9,
+Yumbe,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,9,8,
+Yumbe,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,36,23,23,23,22
+Yumbe,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,63,58,55,46,58
+Alebtong,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,136,137,137,150,128,
+Alebtong,"Net Intake Rate (PNI) , primary",Both Sex,%,116,116,119,123,105,
+Alebtong,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,136,137,137,150,128,
+Alebtong,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,116,116,119,123,105,
+Alebtong,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,67,63,60,63,60
+Alebtong,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,78,81,99,88,78
+Alebtong,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,18,8,
+Alebtong,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,0,
+Alebtong,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,11,7,
+Alebtong,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,10,6,
+Alebtong,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,19,18,17,18,14
+Alebtong,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,38,69,54,41,44
+Arua,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,170,164,165,160,154,
+Arua,"Net Intake Rate (PNI) , primary",Both Sex,%,144,139,144,137,133,
+Arua,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,170,164,165,160,154,
+Arua,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,144,139,144,137,133,
+Arua,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,64,65,62,62,62
+Arua,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,101,101,103,101,97
+Arua,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,32,85,
+Arua,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,9,
+Arua,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,21,16,
+Arua,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,19,14,
+Arua,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,22,17,17,17,16
+Arua,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,42,46,41,39,40
+Abim,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,256,262,216,219,91,
+Abim,"Net Intake Rate (PNI) , primary",Both Sex,%,201,209,182,181,72,
+Abim,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,256,262,216,219,91,
+Abim,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,201,209,182,181,72,
+Abim,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,54,51,43,48,49
+Abim,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,66,78,74,83,77
+Abim,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,77,16,
+Abim,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,7,1,
+Abim,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,44,13,
+Abim,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,41,12,
+Abim,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,44,30,28,25,36
+Abim,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,59,63,51,51,110
+Gulu,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,144,146,138,146,128,
+Gulu,"Net Intake Rate (PNI) , primary",Both Sex,%,115,116,115,119,104,
+Gulu,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,144,146,138,146,128,
+Gulu,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,115,116,115,119,104,
+Gulu,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,45,44,44,43,44
+Gulu,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,58,58,59,60,57
+Gulu,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,46,27,
+Gulu,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,3,
+Gulu,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,30,20,
+Gulu,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,26,17,
+Gulu,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,19,19,19,18
+Gulu,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,46,43,43,39,37
+Moyo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,42,39,37,37,100,
+Moyo,"Net Intake Rate (PNI) , primary",Both Sex,%,30,27,26,26,69,
+Moyo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,42,39,37,37,100,
+Moyo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,30,27,26,26,69,
+Moyo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,46,47,45,39,38
+Moyo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,52,50,50,50,44
+Moyo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,15,12,
+Moyo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,1,
+Moyo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,8,22,
+Moyo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,7,18,
+Moyo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,20,21,20,19,19
+Moyo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,38,42,35,59,85
+Pader,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,145,129,131,148,157,
+Pader,"Net Intake Rate (PNI) , primary",Both Sex,%,117,104,110,125,134,
+Pader,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,145,129,131,148,157,
+Pader,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,117,104,110,125,134,
+Pader,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,74,79,82,80,82
+Pader,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,59,67,67,73,77
+Pader,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,22,21,
+Pader,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,2,
+Pader,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,11,13,
+Pader,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,10,12,
+Pader,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,22,17,16,16,17
+Pader,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,35,39,43,42,42
+Napak,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,45,55,48,46,50,
+Napak,"Net Intake Rate (PNI) , primary",Both Sex,%,33,43,38,37,38,
+Napak,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,45,55,48,46,50,
+Napak,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,33,43,38,37,38,
+Napak,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,85,76,70,66,65
+Napak,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,76,72,72,159,60
+Napak,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,9,11,
+Napak,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,0,1,
+Napak,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,5,7,
+Napak,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,4,5,
+Napak,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,18,19,20,22,24
+Napak,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,29,51,51,47,45
+Apac,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,144,144,138,150,129,
+Apac,"Net Intake Rate (PNI) , primary",Both Sex,%,122,123,121,125,111,
+Apac,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,144,144,138,150,129,
+Apac,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,122,123,121,125,111,
+Apac,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,63,63,67,63,70
+Apac,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,79,83,89,96,87
+Apac,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,17,9,
+Apac,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,0,2,
+Apac,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,10,6,
+Apac,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,9,6,
+Apac,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,30,22,16,15,17
+Apac,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,45,44,31,28,36
+Koboko,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,111,108,110,114,130,
+Koboko,"Net Intake Rate (PNI) , primary",Both Sex,%,91,85,90,93,106,
+Koboko,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,111,108,110,114,130,
+Koboko,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,91,85,90,93,106,
+Koboko,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,57,59,55,60,60
+Koboko,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,81,89,89,120,86
+Koboko,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,35,33,
+Koboko,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,5,
+Koboko,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,18,21,
+Koboko,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,16,18,
+Koboko,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,21,17,17,18,16
+Koboko,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,42,42,44,42,35
+Agago,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,126,115,125,132,155,
+Agago,"Net Intake Rate (PNI) , primary",Both Sex,%,102,96,105,110,122,
+Agago,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,126,115,125,132,155,
+Agago,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,102,96,105,110,122,
+Agago,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,85,84,80,82,83
+Agago,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,73,73,78,75,78
+Agago,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,20,21,
+Agago,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,2,1,
+Agago,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,11,13,
+Agago,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,10,11,
+Agago,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,39,28,28,19,22
+Agago,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,53,62,58,50,46
+Zombo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,131,134,135,142,114,
+Zombo,"Net Intake Rate (PNI) , primary",Both Sex,%,111,114,115,123,96,
+Zombo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,131,134,135,142,114,
+Zombo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,111,114,115,123,96,
+Zombo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,66,62,60,59,60
+Zombo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,93,89,97,94,84
+Zombo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,23,16,
+Zombo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,1,
+Zombo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,13,11,
+Zombo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,11,9,
+Zombo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,24,19,20,25,21
+Zombo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,32,34,37,51,40
+Otuke,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,204,172,172,163,128,
+Otuke,"Net Intake Rate (PNI) , primary",Both Sex,%,170,142,149,162,109,
+Otuke,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,204,172,172,163,128,
+Otuke,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,170,142,149,162,109,
+Otuke,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,58,59,64,55,56
+Otuke,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,64,74,94,102,60
+Otuke,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,39,30,
+Otuke,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,7,1,
+Otuke,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,25,17,
+Otuke,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,23,15,
+Otuke,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,23,20,17,19,20
+Otuke,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,37,60,40,43,57
+Nwoya,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,310,324,367,366,91,
+Nwoya,"Net Intake Rate (PNI) , primary",Both Sex,%,238,261,302,279,72,
+Nwoya,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,310,324,367,366,91,
+Nwoya,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,238,261,302,279,72,
+Nwoya,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,68,68,56,54,53
+Nwoya,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,65,74,67,62,62
+Nwoya,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,64,14,
+Nwoya,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,0,
+Nwoya,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,36,10,
+Nwoya,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,29,9,
+Nwoya,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,20,17,21,17
+Nwoya,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,38,39,32,37,30
+Lamwo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,134,134,115,130,141,
+Lamwo,"Net Intake Rate (PNI) , primary",Both Sex,%,106,106,94,100,111,
+Lamwo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,134,134,115,130,141,
+Lamwo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,106,106,94,100,111,
+Lamwo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,75,75,75,62,66
+Lamwo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,64,68,67,62,59
+Lamwo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,14,17,
+Lamwo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,0,1,
+Lamwo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,7,11,
+Lamwo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,7,10,
+Lamwo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,28,37,37,17,21
+Lamwo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,63,61,58,40,38
+Nakapiripirit,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,56,50,40,41,40,
+Nakapiripirit,"Net Intake Rate (PNI) , primary",Both Sex,%,45,40,32,31,31,
+Nakapiripirit,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,56,50,40,41,40,
+Nakapiripirit,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,45,40,32,31,31,
+Nakapiripirit,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,39,38,29,31,31
+Nakapiripirit,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,59,54,55,55,54
+Nakapiripirit,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,9,8,
+Nakapiripirit,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,1,
+Nakapiripirit,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,5,4,
+Nakapiripirit,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,4,10,
+Nakapiripirit,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,43,25,27,26,34
+Nakapiripirit,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,33,45,41,37,145
+Adjumani,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,47,46,48,53,85,
+Adjumani,"Net Intake Rate (PNI) , primary",Both Sex,%,31,30,31,34,54,
+Adjumani,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,47,46,48,53,85,
+Adjumani,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,31,30,31,34,54,
+Adjumani,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,54,55,59,69,59
+Adjumani,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,53,54,61,74,65
+Adjumani,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,13,4,
+Adjumani,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,0,0,
+Adjumani,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,7,8,
+Adjumani,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,6,7,
+Adjumani,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,43,21,20,22,19
+Adjumani,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,51,40,40,35,34
+Rubirizi,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,127,119,113,101,92,
+Rubirizi,"Net Intake Rate (PNI) , primary",Both Sex,%,103,97,92,82,75,
+Rubirizi,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,127,119,113,101,92,
+Rubirizi,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,103,97,92,82,75,
+Rubirizi,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,42,38,38,37,39
+Rubirizi,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,44,45,45,45,43
+Rubirizi,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,61,26,
+Rubirizi,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,8,2,
+Rubirizi,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,36,17,
+Rubirizi,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,32,15,
+Rubirizi,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,25,19,18,18,16
+Rubirizi,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,46,52,36,43,46
+Kyenjojo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,102,100,97,99,83,
+Kyenjojo,"Net Intake Rate (PNI) , primary",Both Sex,%,76,78,80,124,67,
+Kyenjojo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,102,100,97,99,83,
+Kyenjojo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,76,78,80,124,67,
+Kyenjojo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,62,53,52,52,46
+Kyenjojo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,62,58,58,78,51
+Kyenjojo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,32,26,
+Kyenjojo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,3,3,
+Kyenjojo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,20,17,
+Kyenjojo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,18,16,
+Kyenjojo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,31,24,22,21,19
+Kyenjojo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,56,69,58,51,51
+Isingiro,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,113,109,98,107,86,
+Isingiro,"Net Intake Rate (PNI) , primary",Both Sex,%,87,85,79,82,67,
+Isingiro,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,113,109,98,107,86,
+Isingiro,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,87,85,79,82,67,
+Isingiro,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,51,44,44,35,37
+Isingiro,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,47,44,46,43,38
+Isingiro,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,30,20,
+Isingiro,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,3,2,
+Isingiro,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,20,13,
+Isingiro,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,17,11,
+Isingiro,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,31,17,17,16,16
+Isingiro,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,40,42,44,40,41
+Kisoro,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,136,137,136,133,122,
+Kisoro,"Net Intake Rate (PNI) , primary",Both Sex,%,116,116,117,115,105,
+Kisoro,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,136,137,136,133,122,
+Kisoro,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,116,116,117,115,105,
+Kisoro,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,50,48,48,46,46
+Kisoro,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,45,48,48,55,48
+Kisoro,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,38,18,
+Kisoro,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,2,
+Kisoro,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,25,14,
+Kisoro,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,22,11,
+Kisoro,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,31,21,20,19,17
+Kisoro,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,47,54,37,39,33
+Ntungamo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,117,107,103,88,115,
+Ntungamo,"Net Intake Rate (PNI) , primary",Both Sex,%,91,83,85,67,93,
+Ntungamo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,117,107,103,88,115,
+Ntungamo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,91,83,85,67,93,
+Ntungamo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,43,42,40,38,37
+Ntungamo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,39,41,42,50,41
+Ntungamo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,43,36,
+Ntungamo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,4,
+Ntungamo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,29,28,
+Ntungamo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,24,24,
+Ntungamo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,26,21,20,20,19
+Ntungamo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,52,54,47,44,32
+Kiryandongo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,91,101,90,97,108,
+Kiryandongo,"Net Intake Rate (PNI) , primary",Both Sex,%,74,79,72,80,83,
+Kiryandongo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,91,101,90,97,108,
+Kiryandongo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,74,79,72,80,83,
+Kiryandongo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,55,52,55,53,49
+Kiryandongo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,70,70,70,96,63
+Kiryandongo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,37,84,
+Kiryandongo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,8,3,
+Kiryandongo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,22,22,
+Kiryandongo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,20,20,
+Kiryandongo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,25,23,26,20,19
+Kiryandongo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,44,49,51,51,50
+Kasese,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,115,106,103,114,128,
+Kasese,"Net Intake Rate (PNI) , primary",Both Sex,%,96,87,88,96,109,
+Kasese,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,115,106,103,114,128,
+Kasese,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,96,87,88,96,109,
+Kasese,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,43,41,40,37,37
+Kasese,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,59,61,60,60,52
+Kasese,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,36,39,
+Kasese,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,3,5,
+Kasese,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,27,27,
+Kasese,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,23,24,
+Kasese,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,19,18,18,18
+Kasese,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,47,54,46,47,41
+Kyegegwa,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,157,158,141,157,89,
+Kyegegwa,"Net Intake Rate (PNI) , primary",Both Sex,%,116,116,103,120,68,
+Kyegegwa,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,157,158,141,157,89,
+Kyegegwa,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,116,116,103,120,68,
+Kyegegwa,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,56,50,48,42,43
+Kyegegwa,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,53,52,50,58,48
+Kyegegwa,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,41,19,
+Kyegegwa,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,1,
+Kyegegwa,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,22,13,
+Kyegegwa,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,20,11,
+Kyegegwa,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,29,19,17,18,18
+Kyegegwa,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,45,47,35,41,37
+Kanungu,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,124,115,113,125,125,
+Kanungu,"Net Intake Rate (PNI) , primary",Both Sex,%,96,92,94,101,102,
+Kanungu,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,124,115,113,125,125,
+Kanungu,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,96,92,94,101,102,
+Kanungu,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,41,39,33,33,34
+Kanungu,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,46,41,38,46,37
+Kanungu,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,51,47,
+Kanungu,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,8,6,
+Kanungu,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,35,32,
+Kanungu,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,32,28,
+Kanungu,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,22,21,21,19,20
+Kanungu,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,42,41,53,41,41
+Kibaale,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,119,118,117,124,108,
+Kibaale,"Net Intake Rate (PNI) , primary",Both Sex,%,94,94,97,99,86,
+Kibaale,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,119,118,117,124,108,
+Kibaale,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,94,94,97,99,86,
+Kibaale,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,52,43,42,37,35
+Kibaale,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,53,49,46,48,41
+Kibaale,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,36,30,
+Kibaale,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,4,4,
+Kibaale,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,23,20,
+Kibaale,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,20,18,
+Kibaale,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,30,20,20,21,20
+Kibaale,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,42,54,48,62,41
+Hoima,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,93,93,86,90,78,
+Hoima,"Net Intake Rate (PNI) , primary",Both Sex,%,75,76,73,75,63,
+Hoima,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,93,93,86,90,78,
+Hoima,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,75,76,73,75,63,
+Hoima,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,49,42,39,37,36
+Hoima,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,55,53,46,47,45
+Hoima,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,38,29,
+Hoima,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,6,
+Hoima,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,26,23,
+Hoima,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,23,20,
+Hoima,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,36,25,26,26,24
+Hoima,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,59,63,56,57,53
+Buhweju,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,110,94,91,115,105,
+Buhweju,"Net Intake Rate (PNI) , primary",Both Sex,%,89,76,76,97,86,
+Buhweju,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,110,94,91,115,105,
+Buhweju,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,89,76,76,97,86,
+Buhweju,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,38,36,40,36,36
+Buhweju,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,39,38,39,44,37
+Buhweju,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,29,24,
+Buhweju,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,2,1,
+Buhweju,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,20,16,
+Buhweju,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,18,12,
+Buhweju,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,26,13,12,11,11
+Buhweju,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,37,41,29,45,29
+Ntoroko,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,97,90,73,82,98,
+Ntoroko,"Net Intake Rate (PNI) , primary",Both Sex,%,74,76,62,67,78,
+Ntoroko,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,97,90,73,82,98,
+Ntoroko,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,74,76,62,67,78,
+Ntoroko,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,38,36,38,32,34
+Ntoroko,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,49,46,53,42,34
+Ntoroko,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,25,29,
+Ntoroko,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,1,2,
+Ntoroko,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,12,16,
+Ntoroko,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,11,15,
+Ntoroko,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,69,19,31,21,20
+Ntoroko,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,98,76,59,44,38
+Kabale,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,136,136,134,137,138,
+Kabale,"Net Intake Rate (PNI) , primary",Both Sex,%,113,113,114,117,116,
+Kabale,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,136,136,134,137,138,
+Kabale,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,113,113,114,117,116,
+Kabale,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,39,37,38,35,36
+Kabale,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,44,42,47,47,46
+Kabale,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,52,38,
+Kabale,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,9,6,
+Kabale,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,40,31,
+Kabale,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,36,28,
+Kabale,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,28,19,19,18,18
+Kabale,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,44,31,40,40,56
+Ibanda,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,126,118,109,125,87,
+Ibanda,"Net Intake Rate (PNI) , primary",Both Sex,%,103,95,88,103,73,
+Ibanda,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,126,118,109,125,87,
+Ibanda,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,103,95,88,103,73,
+Ibanda,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,39,34,37,33,34
+Ibanda,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,38,35,39,58,39
+Ibanda,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,56,44,
+Ibanda,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,7,6,
+Ibanda,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,41,32,
+Ibanda,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,35,28,
+Ibanda,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,22,19,17,18,17
+Ibanda,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,36,53,42,51,41
+Kamwenge,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,128,115,122,123,92,
+Kamwenge,"Net Intake Rate (PNI) , primary",Both Sex,%,98,87,96,95,72,
+Kamwenge,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,128,115,122,123,92,
+Kamwenge,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,98,87,96,95,72,
+Kamwenge,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,53,48,49,41,42
+Kamwenge,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,52,50,51,56,47
+Kamwenge,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,37,24,
+Kamwenge,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,3,1,
+Kamwenge,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,23,17,
+Kamwenge,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,19,14,
+Kamwenge,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,24,22,20,18,18
+Kamwenge,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,39,51,51,45,58
+Bushenyi,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,110,108,106,115,139,
+Bushenyi,"Net Intake Rate (PNI) , primary",Both Sex,%,89,90,91,98,119,
+Bushenyi,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,110,108,106,115,139,
+Bushenyi,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,89,90,91,98,119,
+Bushenyi,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,35,33,35,33,33
+Bushenyi,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,32,33,37,37,34
+Bushenyi,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,60,57,
+Bushenyi,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,14,13,
+Bushenyi,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,51,47,
+Bushenyi,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,46,42,
+Bushenyi,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,27,20,19,16,16
+Bushenyi,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,46,54,46,40,40
+Mitooma,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,119,115,109,114,139,
+Mitooma,"Net Intake Rate (PNI) , primary",Both Sex,%,96,95,92,96,117,
+Mitooma,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,119,115,109,114,139,
+Mitooma,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,96,95,92,96,117,
+Mitooma,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,40,35,34,34,34
+Mitooma,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,39,37,36,40,37
+Mitooma,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,58,60,
+Mitooma,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,10,9,
+Mitooma,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,41,44,
+Mitooma,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,36,39,
+Mitooma,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,33,19,19,19,20
+Mitooma,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,48,64,43,44,49
+Masindi,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,94,99,79,88,111,
+Masindi,"Net Intake Rate (PNI) , primary",Both Sex,%,76,77,64,71,89,
+Masindi,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,94,99,79,88,111,
+Masindi,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,76,77,64,71,89,
+Masindi,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,46,44,40,36,35
+Masindi,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,57,57,57,63,47
+Masindi,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,35,40,
+Masindi,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,7,5,
+Masindi,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,22,26,
+Masindi,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,20,23,
+Masindi,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,39,19,22,23,22
+Masindi,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,52,57,48,47,47
+Rukungiri,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,127,119,105,104,108,
+Rukungiri,"Net Intake Rate (PNI) , primary",Both Sex,%,102,96,86,84,88,
+Rukungiri,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,127,119,105,104,108,
+Rukungiri,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,102,96,86,84,88,
+Rukungiri,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,33,32,36,30,28
+Rukungiri,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,35,35,34,39,32
+Rukungiri,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,56,50,
+Rukungiri,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,5,7,
+Rukungiri,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,41,38,
+Rukungiri,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,36,33,
+Rukungiri,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,37,24,23,23,21
+Rukungiri,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,43,53,44,43,42
+Buliisa,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,144,131,142,137,96,
+Buliisa,"Net Intake Rate (PNI) , primary",Both Sex,%,118,109,125,118,81,
+Buliisa,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,144,131,142,137,96,
+Buliisa,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,118,109,125,118,81,
+Buliisa,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,60,61,59,52,51
+Buliisa,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,103,64,90,87,73
+Buliisa,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,32,11,
+Buliisa,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,5,0,
+Buliisa,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,17,6,
+Buliisa,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,16,5,
+Buliisa,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,34,24,20,22,17
+Buliisa,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,58,60,64,62,37
+Sheema,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,115,110,110,104,117,
+Sheema,"Net Intake Rate (PNI) , primary",Both Sex,%,94,93,94,88,87,
+Sheema,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,115,110,110,104,117,
+Sheema,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,94,93,94,88,87,
+Sheema,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,39,37,36,28,29
+Sheema,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,38,38,49,34,28
+Sheema,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,64,73,
+Sheema,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,15,15,
+Sheema,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,51,53,
+Sheema,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,45,47,
+Sheema,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,30,20,20,18,20
+Sheema,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,49,48,45,48,45
+Mbarara,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,111,110,116,121,114,
+Mbarara,"Net Intake Rate (PNI) , primary",Both Sex,%,87,87,96,101,95,
+Mbarara,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,111,110,116,121,114,
+Mbarara,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,87,87,96,101,95,
+Mbarara,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,34,32,36,33,33
+Mbarara,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,34,34,37,50,36
+Mbarara,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,50,37,
+Mbarara,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,11,7,
+Mbarara,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,38,30,
+Mbarara,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,33,26,
+Mbarara,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,24,25,18,18,19
+Mbarara,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,41,50,52,43,42
+Kabarole,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,127,122,111,110,103,
+Kabarole,"Net Intake Rate (PNI) , primary",Both Sex,%,100,96,92,90,86,
+Kabarole,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,127,122,111,110,103,
+Kabarole,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,100,96,92,90,86,
+Kabarole,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,51,48,48,40,40
+Kabarole,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,64,61,62,66,50
+Kabarole,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,58,38,
+Kabarole,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,6,6,
+Kabarole,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,43,28,
+Kabarole,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,37,26,
+Kabarole,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,39,27,27,24,24
+Kabarole,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,60,61,52,45,55
+Bundibugyo,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,93,92,78,86,103,
+Bundibugyo,"Net Intake Rate (PNI) , primary",Both Sex,%,77,76,67,72,86,
+Bundibugyo,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,93,92,78,86,103,
+Bundibugyo,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,77,76,67,72,86,
+Bundibugyo,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,46,43,43,40,40
+Bundibugyo,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,52,54,55,71,52
+Bundibugyo,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,28,27,
+Bundibugyo,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,2,1,
+Bundibugyo,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,14,15,
+Bundibugyo,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,12,12,
+Bundibugyo,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,35,23,26,27,29
+Bundibugyo,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,41,63,52,55,84
+Kiruhura,"Primary Gross Intake Rate (PGI) , primary",Both Sex,%,114,105,102,105,90,
+Kiruhura,"Net Intake Rate (PNI) , primary",Both Sex,%,91,82,84,85,71,
+Kiruhura,"Primary Gross Enrolment (PGE) , primary",Both Sex,%,114,105,102,105,90,
+Kiruhura,"Primary Net Enrolment Rates (PNE) , primary",Both Sex,%,91,82,84,85,71,
+Kiruhura,"Pupil Teacher Ratio (PTR) , primary",Both Sex,Students per teacher,,45,41,44,39,37
+Kiruhura,"Pupil Classroom Ratio (PCR) , primary",Both Sex,Students per classroom,,45,44,50,56,38
+Kiruhura,"Gross Intake Ratio (GIR) , secondary",Both Sex,%,,,,21,21,
+Kiruhura,"Net Intake  Ratio (NIR) , secondary",Both Sex,%,,,,3,2,
+Kiruhura,"Gross Enrolment Ratio (GER) , secondary",Both Sex,%,,,,16,15,
+Kiruhura,"Net Enrolment  Ratio (NER) , secondary",Both Sex,%,,,,14,13,
+Kiruhura,"Student Teacher (STR) , secondary",Both Sex,Number of students per Teacher,,24,19,17,16,17
+Kiruhura,"Student Classroom Ratio (SCR) , secondary",Both Sex,Number of students per classroom,,42,48,36,39,34
