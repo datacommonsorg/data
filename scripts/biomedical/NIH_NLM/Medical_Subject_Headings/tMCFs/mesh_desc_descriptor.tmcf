@@ -1,0 +1,11 @@
+Node: E:mesh_desc_descriptor->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_desc_descriptor->Descriptor_dcid
+name: C:mesh_desc_descriptor->DescriptorName
+dateCreated: C:mesh_desc_descriptor->DateCreated
+dateRevised: C:mesh_desc_descriptor->DateRevised
+dateEstablished: C:mesh_desc_descriptor->DateEstablished
+identifier: C:mesh_desc_descriptor->DescriptorID
+medicalSubjectHeadingTreeNumber: C:mesh_desc_descriptor->TreeNumber
+nationalLibraryOfMedicineClassificationNumber: C:mesh_desc_descriptor->NLMClassificationNumber
+scopeNote: C:mesh_desc_descriptor->ScopeNote
