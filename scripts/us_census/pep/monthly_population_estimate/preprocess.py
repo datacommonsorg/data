@@ -278,7 +278,7 @@ class CensusUSACountryPopulation:
         if self._df is None:
             self._df = df
         else:
-            self._df = self._df.append(df, ignore_index=True)
+            self._df = self._df._append(df, ignore_index=True)
 
         self._df.sort_values(by=['Date', 'date_range'],
                              ascending=False,
@@ -287,7 +287,8 @@ class CensusUSACountryPopulation:
         self._df.drop(['date_range'], axis=1, inplace=True)
         float_col = self._df.select_dtypes(include=['float64'])
         for col in float_col.columns.values:
-            self._df[col] = self._df[col].astype('int64')
+            #self._df[col] = self._df[col].astype('int64')
+            self._df[col] = self._df[col].astype('int64', errors='ignore')
         self._df.to_csv(self._cleaned_csv_file_path, index=False)
 
     def _generate_mcf(self, df_cols: list) -> None:
