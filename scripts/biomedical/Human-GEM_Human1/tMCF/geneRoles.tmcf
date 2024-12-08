@@ -1,0 +1,13 @@
+Node: E:geneRoles->E1
+typeOf: dcs:Gene
+dcid: C:geneRoles->hm_38_gene
+geneRole: E:geneRoles->E2
+
+Node: E:geneRoles->E2
+typeOf: dcs:MetabolicReaction
+dcid: C:geneRoles->reactionID
+
+Node: E:geneRoles->E3
+typeOf: dcs:Gene
+dcid: C:geneRoles->hm_19_gene
+geneRole: E:geneRoles->E2
