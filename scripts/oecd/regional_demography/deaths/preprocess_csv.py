@@ -17,16 +17,13 @@ import os
 import csv
 import json
 import pandas as pd
-import logging
-from absl import flags
+from absl import flags,logging
 from absl import app
 from columns import *
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 flags.DEFINE_string('mode', '', 'Options: download or process')
-
-logging.basicConfig(level=logging.INFO)
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -56,7 +53,7 @@ def process_data(df, output_file_path):
         df1['Reference area'] = df1.apply(
             lambda row: regid2dcid[row['REF_AREA']], axis=1)
     except (FileNotFoundError, json.JSONDecodeError) as e:
-        logging.error(f"Error processing regid2dcid.json: {e}")
+        logging.fatal(f"Error processing regid2dcid.json: {e}")
         return None  # Indicate failure
 
     df1['TIME_PERIOD'] = '"' + df1['TIME_PERIOD'].astype(str) + '"'

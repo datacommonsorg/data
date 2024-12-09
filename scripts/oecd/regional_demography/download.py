@@ -16,10 +16,9 @@ import io
 import requests
 import sys
 import pandas as pd
-import logging
+from absl import logging
 
 sys.path.append('../')
-logging.basicConfig(level=logging.INFO)
 
 
 def download_data_to_file_and_df(url,
@@ -47,7 +46,7 @@ def download_data_to_file_and_df(url,
             return df
 
         else:
-            print(f"Error downloading data: {response.status_code}")
+            logging.error(f"Error downloading data: {response.status_code}")
             return None
     else:
         logging.info("Reading from a file  %s", csv_filepath)

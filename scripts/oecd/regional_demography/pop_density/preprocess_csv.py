@@ -19,7 +19,6 @@ import json
 import pandas as pd
 from absl import flags, logging
 from absl import app
-from columns import *
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -34,83 +33,63 @@ from download import download_data_to_file_and_df
 
 def process_data(df, output_file_path):
     logging.info("Processing the input file")
+    column_rename = {
+        'TERRITORIAL_LEVEL': 'TL',
+        'REF_AREA': 'REG_ID',
+        'Reference area': 'Region',
+        'MEASURE': 'VAR',
+        'TIME_PERIOD': 'Year',
+        'OBS_VALUE': 'Value'
+    }
+    df = df.rename(columns=column_rename)
+    df = df[df['UNIT_MEASURE'] == "PS_KM2"]
     logging.info("Filtering the required columns")
-    df = df[df['UNIT_MEASURE'] == "PS"]
-    df = df[[
-        'TERRITORIAL_LEVEL', 'REF_AREA', 'Reference area', 'AGE', 'SEX',
-        'TIME_PERIOD', 'OBS_VALUE'
-    ]]
-    df['TIME_PERIOD'] = df['TIME_PERIOD'].astype(int)
+    df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
     # First remove geos with names that we don't have mappings to dcid for.
     try:
         regid_file = "scripts/oecd/regional_demography/regid2dcid.json"
         with open(regid_file, 'r') as f:
             regid2dcid = dict(json.loads(f.read()))
         logging.info("Resolving places")
-        df = df[df['REF_AREA'].isin(regid2dcid.keys())]
+        df = df[df['REG_ID'].isin(regid2dcid.keys())]
         # Second, replace the names with dcids
-        df['Reference area'] = df.apply(lambda row: regid2dcid[row['REF_AREA']],
+        df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']],
                                         axis=1)
     except (FileNotFoundError, json.JSONDecodeError) as e:
         logging.fatal(f"Error processing regid2dcid.json: {e}")
         return None  # Indicate failure
 
+    df['Year'] = '"' + df['Year'].astype(str) + '"'
+    temp = df[['REG_ID', 'Region', 'VAR', 'Year', 'Value']]
     try:
-        df_cleaned = df.pivot_table(
-            values='OBS_VALUE',
-            index=['REF_AREA', 'Reference area', 'TIME_PERIOD'],
-            columns=['AGE', 'SEX'])
-        df_cleaned = multi_index_to_single_index(df_cleaned)
+        temp_multi_index = temp.pivot_table(values='Value',
+                                            index=['REG_ID', 'Region', 'Year'],
+                                            columns=['VAR'])
+        df_cleaned = multi_index_to_single_index(temp_multi_index)[[
+            'REG_ID', 'Region', 'Year', 'POP'
+        ]]
     except Exception as e:
         logging.error(
             f"Unable to pivot the dataframe and retain the column:{e}")
         return None
-    # Renaming column headers to SVs
+    # Renaming column header to SVs
+    VAR_to_statsvars = {
+        'POP': 'Count_Person_PerArea'
+        # 'SURF': 'Area',
+    }
     df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-    drop_cols = []
-    csv_columns = {'REG_ID', 'Reference area', 'TIME_PERIOD'}
-    csv_columns.update(VAR_to_statsvars.values())
-    for col in df_cleaned.columns:
-        if col not in csv_columns:
-            drop_cols.append(col)
-    df_cleaned.drop(columns=drop_cols, axis=0, inplace=True)
-    # Resetting the columns according to the requirement
-    df_cleaned_reset = df_cleaned.reindex(columns=reindex_column)
+    # Filtering the column
+    df_cleaned_reset = df_cleaned[["Region", "Year", "Count_Person_PerArea"]]
     logging.info("Writing output to %s", output_file_path)
     df_cleaned_reset.to_csv(output_file_path,
                             index=False,
                             quoting=csv.QUOTE_NONE)
 
-    return df_cleaned_reset
-
-
-def generate_tmcf(df_cleaned, filepath):
-    # Automate Template MCF generation since there are many Statitical Variables.
-    TEMPLATE_MCF_TEMPLATE = """
-    Node: E:OECD_population_cleaned->E{index}
-    typeOf: dcs:StatVarObservation
-    variableMeasured: dcs:{stat_var}
-    measurementMethod: dcs:OECDRegionalStatistics
-    observationAbout: C:OECD_population_cleaned->Reference area
-    observationDate: C:OECD_population_cleaned->TIME_PERIOD
-    observationPeriod: "P1Y"
-    value: C:OECD_population_cleaned->{stat_var}
-    """
-
-    stat_vars = df_cleaned.columns[3:]
-    with open(filepath, 'w', newline='') as f_out:
-        for i in range(len(stat_vars)):
-            f_out.write(
-                TEMPLATE_MCF_TEMPLATE.format_map({
-                    'index': i + 1,
-                    'stat_var': stat_vars[i]
-                }))
-
 
 def main(_):
     mode = _FLAGS.mode
-    url = "https://sdmx.oecd.org/public/rest/data/OECD.CFE.EDS,DSD_REG_DEMO@DF_POP_5Y,2.0/all?dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
-    filename = os.path.join(_MODULE_DIR, "REGION_DEMOGR_population.csv")
+    url = "https://sdmx.oecd.org/public/rest/data/OECD.CFE.EDS,DSD_REG_DEMO@DF_DENSITY,2.0/all?dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
+    filename = os.path.join(_MODULE_DIR, "REGION_DEMOGR_pop_density.csv")
 
     if mode == "" or mode == "download":
         download_data_to_file_and_df(url,
@@ -119,11 +98,9 @@ def main(_):
                                      csv_filepath=None)
     if mode == "" or mode == "process":
         df = pd.read_csv(filename)
-        csv_filepath = os.path.join(_MODULE_DIR, "OECD_population_cleaned.csv")
-        df_cleaned = process_data(df, csv_filepath)
-        tmcf_filepath = os.path.join(_MODULE_DIR,
-                                     "OECD_population_cleaned.tmcf")
-        generate_tmcf(df_cleaned, tmcf_filepath)
+        output_file_path = os.path.join(_MODULE_DIR,
+                                        "OECD_pop_density_cleaned.csv")
+        process_data(df, output_file_path)
 
 
 if __name__ == "__main__":
