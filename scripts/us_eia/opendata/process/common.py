@@ -21,8 +21,9 @@ from absl import logging
 from collections import defaultdict
 from sys import path
 
-# For import util.alpha2_to_dcid
-# Setup path for import from data/util
+## For import util.alpha2_to_dcid
+## Setup path for import from data/util
+
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2_to_dcid
