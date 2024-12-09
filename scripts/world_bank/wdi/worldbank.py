@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -242,10 +242,11 @@ def read_worldbank(iso3166alpha3, mode):
                        backoff=1.5)
         if r.status_code != 200:
             logging.fatal('Failed to retrieve %s', iso3166alpha3)
-        if not os.path.exists(os.path.join(_MODULE_DIR, 'raw_data')):
-            os.mkdir(os.path.join(_MODULE_DIR, 'raw_data'))
-        with open(os.path.join(_MODULE_DIR, 'raw_data', iso3166alpha3 + '.zip'),
-                  'wb') as f:
+        if not os.path.exists(os.path.join(_MODULE_DIR, 'source_data')):
+            os.mkdir(os.path.join(_MODULE_DIR, 'source_data'))
+        with open(
+                os.path.join(_MODULE_DIR, 'source_data',
+                             iso3166alpha3 + '.zip'), 'wb') as f:
             f.write(r.content)
 
         filebytes = io.BytesIO(r.content)
@@ -414,6 +415,7 @@ def download_indicator_data(worldbank_countries, indicator_codes, mode):
     worldbank_dataframe = pd.DataFrame()
     indicators_to_keep = list(indicator_codes['IndicatorCode'].unique())
 
+    country_df_list = []
     for index, country_code in enumerate(worldbank_countries['ISO3166Alpha3']):
         country_df = read_worldbank(country_code, mode)
 
@@ -425,8 +427,9 @@ def download_indicator_data(worldbank_countries, indicator_codes, mode):
         country_df['ISO3166Alpha3'] = country_code
 
         # Add new row to main datframe.
-        worldbank_dataframe = pd.concat([worldbank_dataframe, country_df])
-
+        country_df_list.append(country_df)
+        #worldbank_dataframe = pd.concat([worldbank_dataframe, country_df])
+    worldbank_dataframe = pd.concat(country_df_list)
     # Map indicator codes to unique Statistical Variable.
     worldbank_dataframe['StatisticalVariable'] = (
         worldbank_dataframe['IndicatorCode'].apply(
@@ -460,7 +463,11 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
             'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year',
             'observationPeriod'
         ])
-        with open('output/WorldBank.tmcf', 'w', newline='') as f_out:
+        if saveOutput:
+            TMCF_PATH = 'output/WorldBank.tmcf'
+        else:
+            TMCF_PATH = 'test_data/output/output_generated.tmcf'
+        with open(TMCF_PATH, 'w', newline='') as f_out:
             for index, enum in enumerate(tmcfs_for_stat_vars):
                 tmcf, stat_var_obs_cols, stat_vars_in_group = enum
                 if len(stat_vars_in_group) == 0:

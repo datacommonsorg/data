@@ -17,10 +17,18 @@ import numpy as np
 import unittest
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-GENERATED_OUTPUT_PATH = os.path.join(_MODULE_DIR,
-                                     "test_data/output/output_generated.csv")
-EXPECTED_OUTPUT_PATH = os.path.join(
+OUTPUT_PATH = "test_data/output"
+if not os.path.exists(
+        os.path.join(_MODULE_DIR, OUTPUT_PATH, "output_generated.csv")):
+    os.mkdir(os.path.join(_MODULE_DIR, OUTPUT_PATH))
+GENERATED_CSV_PATH = os.path.join(_MODULE_DIR, OUTPUT_PATH,
+                                  "output_generated.csv")
+GENERATED_TMCF_PATH = os.path.join(_MODULE_DIR, OUTPUT_PATH,
+                                   "output_generated.tmcf")
+EXPECTED_CSV_PATH = os.path.join(
     _MODULE_DIR, 'test_data/expected_ouput/expected_output.csv')
+EXPECTED_TMCF_PATH = os.path.join(
+    _MODULE_DIR, 'test_data/expected_ouput/expected_output.tmcf')
 
 INPUT_ROWS = np.array([
     [
@@ -39,7 +47,7 @@ INPUT_ROWS = np.array([
     ],
 ])
 
-EXPECTED_OUTPUT = pd.read_csv(EXPECTED_OUTPUT_PATH)
+EXPECTED_OUTPUT_CSV = pd.read_csv(EXPECTED_CSV_PATH)
 worldbank_dataframe = pd.DataFrame(INPUT_ROWS,
                                    columns=[
                                        '', 'CountryName', 'CountryCode',
@@ -58,9 +66,16 @@ class WDITest(unittest.TestCase):
         outputGenerated = process(indicator_codes,
                                   worldbank_dataframe,
                                   saveOutput=False)
-        outputGenerated.to_csv(GENERATED_OUTPUT_PATH)
-        GENERATED_OUTPUT = pd.read_csv(GENERATED_OUTPUT_PATH)
-        self.assertTrue(GENERATED_OUTPUT.equals(EXPECTED_OUTPUT))
+        outputGenerated.to_csv(GENERATED_CSV_PATH)
+        GENERATED_OUTPUT_CSV = pd.read_csv(GENERATED_CSV_PATH)
+        self.assertTrue(GENERATED_OUTPUT_CSV.equals(EXPECTED_OUTPUT_CSV))
+
+        with open(EXPECTED_TMCF_PATH, encoding="UTF-8") as expected_tmcf_file:
+            expected_tmcf_data = expected_tmcf_file.read()
+        with open(GENERATED_TMCF_PATH, encoding="UTF-8") as generated_tmcf_file:
+            generated_tmcf_data = generated_tmcf_file.read()
+        self.assertEqual(expected_tmcf_data.strip(),
+                         generated_tmcf_data.strip())
 
 
 if __name__ == '__main__':
