@@ -11,17 +11,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Wrapper utilities for data commons API.'''
+"""Wrapper utilities for data commons API."""
 
-import sys
+from collections import OrderedDict
 import os
-import datacommons as dc
-import requests_cache
+import sys
 import time
 import urllib
 
 from absl import logging
-from collections import OrderedDict
+import datacommons as dc
+import requests_cache
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -39,28 +39,33 @@ _DC_API_PATH_RESOLVE_ID = '/v1/recon/resolve/id'
 _DC_API_PATH_RESOLVE_COORD = '/v1/recon/resolve/coordinate'
 
 
-def dc_api_wrapper(function,
-                   args: dict,
-                   retries: int = 3,
-                   retry_secs: int = 1,
-                   use_cache: bool = False,
-                   api_root: str = None):
-    '''Wrapper for a DC APi call with retries and caching.
-    Returns the result from the DC APi call function.
-    In case of errors, retries the function with a delay a fixed number of times.
+def dc_api_wrapper(
+    function,
+    args: dict,
+    retries: int = 3,
+    retry_secs: int = 1,
+    use_cache: bool = False,
+    api_root: str = None,
+):
+    """Wrapper for a DC APi call with retries and caching.
 
-    Args:
-      function: The DataCommons API function.
-      args: dictionary with any the keyword arguments for the DataCommons API function.
-      retries: Number of retries in case of HTTP errors.
-      retry_sec: Interval in seconds between retries for which caller is blocked.
-      use_cache: If True, uses request cache for faster response.
-      api_root: The API server to use. Default is 'http://api.datacommons.org'.
-         To use autopush with more recent data, set it to 'http://autopush.api.datacommons.org'
+  Returns the result from the DC APi call function. In case of errors, retries
+  the function with a delay a fixed number of times.
 
-    Returns:
-      The response from the DataCommons API call.
-    '''
+  Args:
+    function: The DataCommons API function.
+    args: dictionary with any the keyword arguments for the DataCommons API
+      function.
+    retries: Number of retries in case of HTTP errors.
+    retry_sec: Interval in seconds between retries for which caller is blocked.
+    use_cache: If True, uses request cache for faster response.
+    api_root: The API server to use. Default is 'http://api.datacommons.org'. To
+      use autopush with more recent data, set it to
+      'http://autopush.api.datacommons.org'
+
+  Returns:
+    The response from the DataCommons API call.
+  """
     if api_root:
         dc.utils._API_ROOT = api_root
         logging.debug(f'Setting DC API root to {api_root} for {function}')
@@ -80,42 +85,54 @@ def dc_api_wrapper(function,
         for attempt in range(retries):
             try:
                 logging.debug(
-                    f'Invoking DC API {function}, #{attempt} with {args}, retries={retries}'
-                )
+                    f'Invoking DC API {function}, #{attempt} with {args},'
+                    f' retries={retries}')
                 response = function(**args)
                 logging.debug(
                     f'Got API response {response} for {function}, {args}')
                 return response
-            except KeyError:
-                # Exception in case of API error.
+            except KeyError as e:
+                # Exception in case of missing dcid. Don't retry.
+                logging.error(f'Got exception for api: {function}, {e}')
                 return None
-            except urllib.error.URLError:
+            except (urllib.error.URLError, urllib.error.HTTPError,
+                    ValueError) as e:
                 # Exception when server is overloaded, retry after a delay
                 if attempt >= retries:
+                    logging.error(
+                        f'Got exception for api: {function}, {e}, no more retries'
+                    )
                     raise urllib.error.URLError
                 else:
                     logging.debug(
-                        f'Retrying API {function} after {retry_secs}...')
+                        f'Got exception {e}, retrying API {function} after'
+                        f' {retry_secs}...')
                     time.sleep(retry_secs)
     return None
 
 
-def dc_api_batched_wrapper(function,
-                           dcids: list,
-                           args: dict,
-                           config: dict = None) -> dict:
-    '''A wrapper for DC API on dcids with batching support.
+def dc_api_batched_wrapper(
+    function,
+    dcids: list,
+    args: dict,
+    dcid_arg_kw: str = 'dcid',
+    headers: dict = {},
+    config: dict = None,
+) -> dict:
+    """A wrapper for DC API on dcids with batching support.
+
     Returns the dictionary result for the function call across all arguments.
-  It batches the dcids to make multiple calls to the DC API and merges all results.
+  It batches the dcids to make multiple calls to the DC API and merges all
+  results.
 
   Args:
     function: DC API to be invoked. It should have dcids as one of the arguments
       and should return a dictionary with dcid as the key.
-    dcids: List of dcids to be invoked with the function.
-        The namespace is stripped from the dcid before the call to the DC API.
+    dcids: List of dcids to be invoked with the function. The namespace is
+      stripped from the dcid before the call to the DC API.
     args: Additional arguments for the function call.
-    config: dictionary of DC API configuration settings.
-      The supported settings are:
+    config: dictionary of DC API configuration settings. The supported settings
+      are:
         dc_api_batch_size: Number of dcids to invoke per API call.
         dc_api_retries: Number of times an API can be retried.
         dc_api_retry_sec: Interval in seconds between retries.
@@ -124,7 +141,7 @@ def dc_api_batched_wrapper(function,
 
   Returns:
     Merged function return values across all dcids.
-  '''
+  """
     if not config:
         config = {}
     api_result = {}
@@ -132,8 +149,8 @@ def dc_api_batched_wrapper(function,
     num_dcids = len(dcids)
     api_batch_size = config.get('dc_api_batch_size', dc.utils._MAX_LIMIT)
     logging.debug(
-        f'Calling DC API {function} on {len(dcids)} dcids in batches of {api_batch_size} with args: {args}...'
-    )
+        f'Calling DC API {function} on {len(dcids)} dcids in batches of'
+        f' {api_batch_size} with args: {args}...')
     while index < num_dcids:
         #  dcids in batches.
         dcids_batch = [
@@ -141,11 +158,14 @@ def dc_api_batched_wrapper(function,
         ]
         index += api_batch_size
         args['dcids'] = dcids_batch
-        batch_result = dc_api_wrapper(function, args,
-                                      config.get('dc_api_retries', 3),
-                                      config.get('dc_api_retry_secs', 5),
-                                      config.get('dc_api_use_cache', False),
-                                      config.get('dc_api_root', None))
+        batch_result = dc_api_wrapper(
+            function,
+            args,
+            config.get('dc_api_retries', 3),
+            config.get('dc_api_retry_secs', 5),
+            config.get('dc_api_use_cache', False),
+            config.get('dc_api_root', None),
+        )
         if batch_result:
             api_result.update(batch_result)
             logging.debug(f'Got DC API result for {function}: {batch_result}')
@@ -155,17 +175,19 @@ def dc_api_batched_wrapper(function,
 
 
 def dc_api_is_defined_dcid(dcids: list, wrapper_config: dict = None) -> dict:
-    '''Returns a dicttionary with dcids mapped to True/False based on whether
-    the dcid is defined in the API and has a 'typeOf' property.
-       Uses the property_value() DC API to lookup 'typeOf' for each dcid.
-       dcids not defined in KG get a value of False.
-    Args:
-      dcids: List of dcids. The namespace is stripped from the dcid.
-      wrapper_config: dictionary of configurationparameters for the wrapper.
-         See dc_api_batched_wrapper and dc_api_wrapper for details.
-    Returns:
-      dictionary with each input dcid mapped to a True/False value.
-    '''
+    """Returns a dictionary with dcids mapped to True/False based on whether
+
+  the dcid is defined in the API and has a 'typeOf' property.
+     Uses the property_value() DC API to lookup 'typeOf' for each dcid.
+     dcids not defined in KG get a value of False.
+  Args:
+    dcids: List of dcids. The namespace is stripped from the dcid.
+    wrapper_config: dictionary of configurationparameters for the wrapper. See
+      dc_api_batched_wrapper and dc_api_wrapper for details.
+
+  Returns:
+    dictionary with each input dcid mapped to a True/False value.
+  """
     api_function = dc.get_property_values
     args = {
         'prop': 'typeOf',
@@ -183,26 +205,68 @@ def dc_api_is_defined_dcid(dcids: list, wrapper_config: dict = None) -> dict:
     return response
 
 
+def dc_api_get_node_property(dcids: list,
+                             prop: str,
+                             wrapper_config: dict = None) -> dict:
+    """Returns a dictionary keyed by dcid with { prop:value } for each dcid.
+
+     Uses the get_property_values() DC API to lookup the property for each dcid.
+
+  Args:
+    dcids: List of dcids. The namespace is stripped from the dcid.
+    wrapper_config: dictionary of configurationparameters for the wrapper. See
+      dc_api_batched_wrapper and dc_api_wrapper for details.
+
+  Returns:
+    dictionary with each input dcid mapped to a True/False value.
+  """
+    api_function = dc.get_property_values
+    args = {
+        'prop': prop,
+        'out': True,
+    }
+    api_result = dc_api_batched_wrapper(api_function, dcids, args,
+                                        wrapper_config)
+    response = {}
+    for dcid in dcids:
+        dcid_stripped = _strip_namespace(dcid)
+        value = api_result.get(dcid_stripped)
+        if value:
+            response[dcid] = {prop: value}
+    return response
+
+
 def dc_api_get_node_property_values(dcids: list,
                                     wrapper_config: dict = None) -> dict:
-    '''Returns all the property values for a set of dcids from the DC API.
-    Args:
-      dcids: list of dcids to lookup
-      wrapper_config: configuration parameters for the wrapper.
-         See dc_api_batched_wrapper() and dc_api_wrapper() for details.
-    Returns:
-      dictionary with each dcid with the namspace 'dcid:' as the key
-      mapped to a dictionary of property:value.
-    '''
+    """Returns all the property values for a set of dcids from the DC API.
+
+  Args:
+    dcids: list of dcids to lookup
+    wrapper_config: configuration parameters for the wrapper. See
+      dc_api_batched_wrapper() and dc_api_wrapper() for details.
+
+  Returns:
+    dictionary with each dcid with the namspace 'dcid:' as the key
+    mapped to a dictionary of property:value.
+  """
     predefined_nodes = OrderedDict()
     api_function = dc.get_triples
     api_triples = dc_api_batched_wrapper(api_function, dcids, {},
                                          wrapper_config)
     if api_triples:
         for dcid, triples in api_triples.items():
+            if (_strip_namespace(dcid) not in dcids and
+                    _add_namespace(dcid) not in dcids):
+                continue
             pvs = {}
             for d, prop, val in triples:
-                pvs[prop] = val
+                if d == dcid and val:
+                    # quote string values with spaces if needed
+                    if ' ' in val and val[0] != '"':
+                        val = '"' + val + '"'
+                    if prop in pvs:
+                        val = pvs[prop] + ',' + val
+                    pvs[prop] = val
             if len(pvs) > 0:
                 if 'Node' not in pvs:
                     pvs['Node'] = _add_namespace(dcid)
@@ -210,16 +274,16 @@ def dc_api_get_node_property_values(dcids: list,
     return predefined_nodes
 
 
-def dc_api_resolve_placeid(dcids: list) -> dict:
-    '''Returns the resolved dcid for each of the placeid.
+def dc_api_resolve_placeid(dcids: list, in_prop: str = 'placeId') -> dict:
+    """Returns the resolved dcid for each of the placeid.
 
-    Args:
-      dcids: list of placeids to be resolved.
+  Args:
+    dcids: list of placeids to be resolved.
 
-    Returns:
-      dictionary keyed by input placeid with reoslved dcid as value.
-    '''
-    data = {'in_prop': 'placeId', 'out_prop': 'dcid'}
+  Returns:
+    dictionary keyed by input placeid with reoslved dcid as value.
+  """
+    data = {'in_prop': in_prop, 'out_prop': 'dcid'}
     data['ids'] = dcids
     num_ids = len(dcids)
     api_url = dc.utils._API_ROOT + _DC_API_PATH_RESOLVE_ID
@@ -241,14 +305,14 @@ def dc_api_resolve_placeid(dcids: list) -> dict:
 
 
 def dc_api_resolve_latlng(dcids: list) -> dict:
-    '''Returns the resolved dcid for each of the placeid.
+    """Returns the resolved dcid for each of the placeid.
 
-    Args:
-      dcids: list of placeids to be resolved.
+  Args:
+    dcids: list of placeids to be resolved.
 
-    Returns:
-      dictionary keyed by input placeid with reoslved dcid as value.
-    '''
+  Returns:
+    dictionary keyed by input placeid with reoslved dcid as value.
+  """
     data = {}
     data['coordinates'] = dcids
     num_ids = len(dcids)
@@ -264,8 +328,8 @@ def dc_api_resolve_latlng(dcids: list) -> dict:
     if recon_resp:
         for entity in recon_resp.get('placeCoordinates', []):
             dcids = entity.get('placeDcids', '')
-            lat = entity.get("latitude", "")
-            lng = entity.get("longitude", "")
+            lat = entity.get('latitude', '')
+            lng = entity.get('longitude', '')
             place_id = f'{lat}{lng}'
             if place_id and dcids:
                 results[place_id] = entity
@@ -273,17 +337,19 @@ def dc_api_resolve_latlng(dcids: list) -> dict:
 
 
 def _add_namespace(value: str, namespace: str = 'dcid') -> str:
-    '''Returns the value with a namespace prefix for references.
-    Args:
-      value: string to which namespace is to be added.
-    Returns:
-      value with the namespace prefix if the value is not a quoted string
-      and doesn't have a namespace already.
-      O/w return the value as is.
+    """Returns the value with a namespace prefix for references.
 
-    Any sequence of letters followed by a ':' is treated as a namespace.
-    Quoted strings are assumed to start with '"' and won't get a namespace.
-    '''
+  Args:
+    value: string to which namespace is to be added.
+
+  Returns:
+    value with the namespace prefix if the value is not a quoted string
+    and doesn't have a namespace already.
+    O/w return the value as is.
+
+  Any sequence of letters followed by a ':' is treated as a namespace.
+  Quoted strings are assumed to start with '"' and won't get a namespace.
+  """
     if value and isinstance(value, str):
         if value[0].isalpha() and value.find(':') < 0:
             return f'{namespace}:{value}'
@@ -291,15 +357,17 @@ def _add_namespace(value: str, namespace: str = 'dcid') -> str:
 
 
 def _strip_namespace(value: str) -> str:
-    '''Returns the value without the namespace prefix.
-    Args:
-      value: string from which the namespace prefix is to be removed.
-    Returns:
-      value without the namespace prefix if there was a namespace
+    """Returns the value without the namespace prefix.
 
-    Any sequence of letters followed by a ':' is treated as a namespace.
-    Quoted strings are assumed to start with '"' and won't be filtered.
-    '''
+  Args:
+    value: string from which the namespace prefix is to be removed.
+
+  Returns:
+    value without the namespace prefix if there was a namespace
+
+  Any sequence of letters followed by a ':' is treated as a namespace.
+  Quoted strings are assumed to start with '"' and won't be filtered.
+  """
     if value and isinstance(value, str) and value[0].isalnum():
         return value[value.find(':') + 1:].strip()
     return value
