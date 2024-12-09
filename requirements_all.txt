@@ -40,3 +40,4 @@ yapf
 zipp
 beautifulsoup4
 ratelimit
+xlrd
