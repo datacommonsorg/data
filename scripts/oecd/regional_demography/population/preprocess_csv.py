@@ -97,7 +97,7 @@ def generate_tmcf(df_cleaned, filepath):
     value: C:OECD_population_cleaned->{stat_var}
     """
 
-    stat_vars = df_cleaned.columns[3:]
+    stat_vars = df_cleaned.columns[2:]
     with open(filepath, 'w', newline='') as f_out:
         for i in range(len(stat_vars)):
             f_out.write(

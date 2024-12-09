@@ -53,8 +53,7 @@ def process_data(df, output_file_path):
         logging.info("Resolving places")
         df = df[df['REG_ID'].isin(regid2dcid.keys())]
         # Second, replace the names with dcids
-        df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']],
-                                        axis=1)
+        df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
     except (FileNotFoundError, json.JSONDecodeError) as e:
         logging.fatal(f"Error processing regid2dcid.json: {e}")
         return None  # Indicate failure
