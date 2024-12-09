@@ -4,10 +4,6 @@
         "file_path": "1990_2000/county/"
     },
     {
-        "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/cc-est2023-alldata.csv",
-        "file_path": "2020_2029/county/"
-    },
-    {
         "download_path": "https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/county/co-est00int-alldata-01.csv",
         "file_path": "2000_2010/county/"
     },
