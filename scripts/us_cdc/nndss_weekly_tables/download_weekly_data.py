@@ -22,11 +22,9 @@ from absl import flags, app
 from absl import logging
 from bs4 import BeautifulSoup
 
-_START = FLAGS.start_year
-_END = FLAGS.end_year
-flags.DEFINE_string(
-    'output_path', './data',
-    'Path to the directory where generated files are to be stored.')
+FLAGS = flags.FLAGS
+start_year = 2006
+end_year = datetime.date.today().year + 1
 
 ## URLS to process the dataset
 _BASE_URL = "https://wonder.cdc.gov/nndss/"
@@ -131,7 +129,7 @@ def get_index_url(year, week):
         return _WEEKLY_TABLE_2017.format(year=year, week=week)
 
 
-def download_weekly_nnds_data_across_years(year_range: str,
+def download_weekly_nnds_data_across_years(year_range,
                                            output_path: str) -> None:
     """
 	"""
@@ -175,12 +173,10 @@ def download_latest_weekly_nndss_data(year: str, output_path: str) -> None:
 
 
 def main(_) -> None:
-    FLAGS = flags.FLAGS
-    end_year = datetime.date.today().year + 1
-    flags.DEFINE_integer('start_year', 2006,
-                         'give the download year deault is 2006')
-    flags.DEFINE_integer('end_year', end_year, 'give the download year')
-    year_range = range(_START, _END)
+    flags.DEFINE_string(
+        'output_path', './data',
+        'Path to the directory where generated files are to be stored.')
+    year_range = range(start_year, end_year)
     download_weekly_nnds_data_across_years(year_range, FLAGS.output_path)
 
 
