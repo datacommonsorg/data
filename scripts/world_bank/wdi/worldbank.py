@@ -428,7 +428,7 @@ def download_indicator_data(worldbank_countries, indicator_codes, mode):
 
         # Add new row to main datframe.
         country_df_list.append(country_df)
-        #worldbank_dataframe = pd.concat([worldbank_dataframe, country_df])
+
     worldbank_dataframe = pd.concat(country_df_list)
     # Map indicator codes to unique Statistical Variable.
     worldbank_dataframe['StatisticalVariable'] = (
