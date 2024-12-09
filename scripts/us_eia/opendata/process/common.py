@@ -316,7 +316,6 @@ def _find_dc_place(raw_place, is_us_place, counters):
             if raw_place == 'WORL':
                 return 'Earth'
 
-    # logging.error('ERROR: unsupported place %s %r', raw_place, is_us_place)
     counters[f'error_unsupported_places_{raw_place}'] += 1
     return None
 
