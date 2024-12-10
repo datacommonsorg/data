@@ -80,7 +80,7 @@ metadata:
   name: import-executor-app
   namespace: import-automation
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: import-automation-executor-app
