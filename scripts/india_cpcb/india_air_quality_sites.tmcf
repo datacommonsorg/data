@@ -1,0 +1,6 @@
+Node: E:India_AirQuality->E1
+typeOf: dcs:AirQualitySite
+dcid: C:india_air_quality_sites->SiteId
+name: C:india_air_quality_sites->SiteName
+location: C:india_air_quality_sites->Coordinates
+containedInPlace: C:india_air_quality_sites->DistrictDCID
