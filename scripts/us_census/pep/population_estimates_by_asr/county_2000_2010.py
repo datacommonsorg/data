@@ -23,7 +23,7 @@ from common_functions import replace_agegrp
 
 def county2000(output_folder: str):
     """
-    This Python Script Loads csv datasets from 2000-2010 on a County Level,
+    This Python Script Loads csv datasets from 2000-2009 on a County Level,
     cleans it and create a cleaned csv.
     """
     # Used to collect data after every loop for every file's df.
@@ -36,6 +36,11 @@ def county2000(output_folder: str):
             url = 'https://www2.census.gov/programs-surveys/popest/datasets/2'+\
                 '000-2010/intercensal/county/co-est00int-alldata-'+str(j)+'.csv'
             df = pd.read_csv(url, encoding='ISO-8859-1')
+            #Writing raw data to csv
+            df.to_csv(os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "raw_data",
+                'raw_data_county_2000_2009_file_' + str(i) + '.csv'),
+                      index=False)
             # Filter years 1 - 12.
             df['Year'] = df['YEAR']
             df.drop(columns=['YEAR'], inplace=True)
@@ -134,5 +139,5 @@ def county2000(output_folder: str):
     # Write to final file.
     final_df.to_csv(
         os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), output_folder,'county_2000_2010.csv'), \
+        os.path.abspath(__file__)), output_folder,'county_2000_2009.csv'), \
         index=False)

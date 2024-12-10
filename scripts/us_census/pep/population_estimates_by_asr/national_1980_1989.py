@@ -73,6 +73,10 @@ def national1980(url_file: str, output_folder: str):
             # unzipping the dataset
             with ZipFile(BytesIO(resp.read()), 'r') as zipfile:
                 zipfile.extractall()
+                #Copying the raw data
+                zipfile.extractall(
+                    os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                 "raw_data"))
     _urls = _urls = input_url(url_file, "1980-90files")
 
     cols = ["0", "1", "2", "3", "4", "5", "6", "7",\
