@@ -8,13 +8,14 @@ import requests
 import pandas as pd
 from absl import logging
 
-YEARS = [
-    '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023',
-    '2024'
-]
+
+logging.set_verbosity(logging.INFO) 
+logger = logging
+
+YEARS = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
 
 NORM_CSV_COLUMNS = ['ID', 'DSLPM', 'CANCER', 'RESP', 'OZONE', 'PM25']
-NORM_CSV_COLUMNS1 = ['ID', 'DSLPM', 'OZONE', 'PM25']
+NORM_CSV_COLUMNS1 = ['ID', 'DSLPM',  'OZONE', 'PM25']
 
 # 2015 has different csv column names
 CSV_COLUMNS_BY_YEAR = {
@@ -109,10 +110,10 @@ unit: dcs:MicrogramsPerCubicMeter
 def write_csv(data, outfilename):
     full_df = pd.DataFrame()
     for curr_year, one_year_df in data.items():
-        one_year_df['year'] = curr_year  # add year column
+        one_year_df['year'] = curr_year  
         full_df = pd.concat(
             [full_df, one_year_df],
-            ignore_index=True)  # concatenate year onto larger dataframe
+            ignore_index=True) 
 
     # sort by FIPS and make into dcid
     full_df = full_df.rename(columns={'ID': 'FIPS'})
@@ -132,55 +133,52 @@ def write_tmcf(outfilename):
 if __name__ == '__main__':
     dfs = {}
     for year in YEARS:
+        logger.info(year)
         columns = CSV_COLUMNS_BY_YEAR[year]
-        #request file
         zip_filename = ZIP_FILENAMES[year]
 
         if zip_filename is not None:
             if year == '2024':
-                logging.info(f'inside 2024 {zip_filename}')
-                response = requests.get(
-                    f'https://gaftp.epa.gov/EJSCREEN/2024/2.32_August_UseMe/{zip_filename}.zip',
-                    verify=False)
+                
+                url = f'https://gaftp.epa.gov/EJSCREEN/2024/2.32_August_UseMe/{zip_filename}.zip'
             elif year == '2023':
-                logging.info(f'inside 2023 {zip_filename}')
-                response = requests.get(
-                    f'https://gaftp.epa.gov/EJSCREEN/2023/2.22_September_UseMe/{zip_filename}.zip',
-                    verify=False)
+                
+                url = f'https://gaftp.epa.gov/EJSCREEN/2023/2.22_September_UseMe/{zip_filename}.zip'
             else:
-                response = requests.get(
-                    f'https://gaftp.epa.gov/EJSCREEN/{year}/{zip_filename}.zip',
-                    verify=False)
-            #response = requests.get(f'https://gaftp.epa.gov/EJSCREEN/2023/2.22_September_UseMe/{year}/{zip_filename}.zip',verify=False)
-            with zipfile.ZipFile(io.BytesIO(response.content)) as zfile:
-                with zfile.open(f'{FILENAMES[year]}.csv', 'r') as newfile:
-                    #dfs[year] = pd.read_csv(newfile, usecols=columns)
-                    dfs[year] = pd.read_csv(newfile,
-                                            engine='python',
-                                            encoding='latin1',
-                                            usecols=columns)
+                url = f'https://gaftp.epa.gov/EJSCREEN/{year}/{zip_filename}.zip'
 
-        # some years are not zipped
+            logger.info(f"Requesting file: {url}")
+            response = requests.get(url, verify=False)
+
+            if response.status_code == 200:
+                with zipfile.ZipFile(io.BytesIO(response.content)) as zfile:
+                    with zfile.open(f'{FILENAMES[year]}.csv', 'r') as newfile:
+                        dfs[year] = pd.read_csv(newfile, engine='python', encoding='latin1', usecols=columns)
+            else:
+                logger.error(f"Failed to download file for {year}. HTTP Status Code: {response.status_code}")
+
         else:
-            print(
-                f'https://gaftp.epa.gov/EJSCREEN/{year}/{FILENAMES[year]}.csv')
-            response = requests.get(
-                f'https://gaftp.epa.gov/EJSCREEN/{year}/{FILENAMES[year]}.csv',
-                verify=False)
-            logging.info(f'Response Type is :  {type(response)}')
-            #dfs[year] = pd.read_csv(response, usecols=columns)
-            dfs[year] = pd.read_csv(io.StringIO(response.text),
-                                    sep=',',
-                                    usecols=columns)
+            # If the file is not zipped, download the CSV directly
+            url = f'https://gaftp.epa.gov/EJSCREEN/{year}/{FILENAMES[year]}.csv'
+            logger.info(f"Requesting CSV file: {url}")
+            response = requests.get(url, verify=False)
 
+            # Check if the response is successful (status code 200)
+            if response.status_code == 200:
+                dfs[year] = pd.read_csv(io.StringIO(response.text), sep=',', usecols=columns)
+            else:
+                logger.error(f"Failed to download CSV for {year}. HTTP Status Code: {response.status_code}")
+
+        # Rename weird column names to match other years
         if year == '2024':
             # Use NORM_CSV_COLUMNS1 for 2024
             cols_renamed = dict(zip(columns, NORM_CSV_COLUMNS1))
         else:
             # Use NORM_CSV_COLUMNS for other years
             cols_renamed = dict(zip(columns, NORM_CSV_COLUMNS))
-
+        
         dfs[year] = dfs[year].rename(columns=cols_renamed)
 
     write_csv(dfs, 'ejscreen_airpollutants.csv')
     write_tmcf('ejscreen.tmcf')
+    
