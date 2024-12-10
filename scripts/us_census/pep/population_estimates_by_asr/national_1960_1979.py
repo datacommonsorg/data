@@ -40,6 +40,11 @@ def national1960(output_folder: str):
         # Skipping unwanted rows from top and bottom.
         df = pd.read_csv(url,names=cols,engine='python',skiprows=8,\
             skipfooter=15)
+        #Writing raw data to csv
+        df.to_csv(os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "raw_data",
+            'raw_data_national_1960_1979_file_' + str(i) + '.csv'),
+                  index=False)
         df['Age'] = df['Age'].astype(str)
         df['Age'] = df['Age'].str.replace("85\\+", "85OrMore")
         df['Age'] = df['Age'].str.replace("85+", "85OrMore")

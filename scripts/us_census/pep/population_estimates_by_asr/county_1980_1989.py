@@ -37,7 +37,10 @@ def county1980(url_file: str, output_folder: str):
                     ,8,9,10,11,12,13,14,15,16,17]
     df = pd.read_csv(_url,skiprows=7,names=cols,low_memory=False,\
         encoding='ISO-8859-1')
-
+    #Writing raw data to csv
+    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "raw_data", 'raw_data_county_1980_1989.csv'),
+              index=False)
     df = (df.drop(cols, axis=1).join(df[cols]))
     df['geo_ID'] = df['geo_ID'].astype(int)
     df['geo_ID'] = [f'{x:05}' for x in df['geo_ID']]
@@ -76,12 +79,9 @@ def county1980(url_file: str, output_folder: str):
                      'county_1980_1989.csv'))
     # Aggregating the County Data on geo_ID to make State Data.
     final_df['geo_ID'] = final_df['geo_ID'].str[:-3]
-    final_df.to_csv("county1980_1.csv", index=False)
-
     final_df = final_df.groupby(['Year','geo_ID','SVs', 'Measurement_Method']).sum()\
     .stack(0).reset_index()
     final_df['observation'] = final_df[0]
-    final_df.to_csv("county1980_2.csv", index=False)
     final_df.drop(columns=['level_4', 0], inplace=True)
     final_df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey'
     final_df.to_csv(

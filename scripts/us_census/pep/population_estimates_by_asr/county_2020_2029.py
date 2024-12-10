@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is for County Level Data 2020-2022.
+This Python Script is for County Level Data 2020-2029.
 '''
 import os
 import numpy as np
@@ -22,11 +22,14 @@ from common_functions import input_url, replace_agegrp
 
 def county2029(url_file: str, output_folder: str):
     '''
-    This Python Script Loads csv datasets from 2010-2020 on a County Level,
+    This Python Script Loads csv datasets from 2020-2029 on a County Level,
     cleans it and create a cleaned csv.
     '''
-    # _url = input_url(url_file, "2020-23")
     df = pd.read_csv(url_file, encoding='ISO-8859-1', low_memory=False)
+    #Writing raw data to csv
+    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "raw_data", 'raw_data_county_2020_2029.csv'),
+              index=False)
     # Filter by agegrp = 0.
     df = df.query("YEAR not in [1]")
     df = df.query("AGEGRP != 0")
@@ -187,5 +190,5 @@ def county2029(url_file: str, output_folder: str):
     # Write to final file.
     df.to_csv(
         os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), output_folder,'county_2020_2023.csv'),\
+        os.path.abspath(__file__)), output_folder,'county_2020_2029.csv'),\
         index=False)

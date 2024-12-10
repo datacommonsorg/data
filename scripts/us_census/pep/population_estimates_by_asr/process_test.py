@@ -22,7 +22,7 @@ import unittest
 import shutil
 
 from national_2020_2021 import national2020
-from national_2010_2019 import national2010
+from scripts.us_census.pep.population_estimates_by_asr.national_2010_2019 import national2010
 from national_2000_2010 import national2000
 from state_1990_2000 import state1990
 from state_2010_2020 import state2010

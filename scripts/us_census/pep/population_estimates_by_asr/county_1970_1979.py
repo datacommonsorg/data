@@ -34,6 +34,10 @@ def county1970(url_file: str, output_folder: str):
     # Contains aggregated data for age and race.
     df_ar = pd.DataFrame()
     df = pd.read_csv(_url, names=_cols, low_memory=False, encoding='ISO-8859-1')
+    #Writing raw data to csv
+    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "raw_data", 'raw_data_county_1970_1979.csv'),
+              index=False)
     df = (df.drop(_cols, axis=1).join(df[_cols]))
     df['geo_ID'] = df['geo_ID'].astype(int)
     df['geo_ID'] = [f'{x:05}' for x in df['geo_ID']]

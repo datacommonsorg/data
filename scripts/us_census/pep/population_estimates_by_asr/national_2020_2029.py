@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is for National Level Data 2010-2019.
+This Python Script is for National Level Data 2020-2029.
 '''
 import os
 import pandas as pd
@@ -21,11 +21,16 @@ from common_functions import input_url, extract_year
 
 def national2029(url_file: str, output_folder: str):
     '''
-    This Python Script Loads csv datasets from 2010-2019 on a National Level,
+    This Python Script Loads csv datasets from 2020-2029 on a National Level,
     cleans it and create a cleaned csv.
     '''
     # Getting input URL from the JSON file.
     df = pd.read_csv(url_file, header=0)
+    #Writing raw data to csv
+    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "raw_data", 'raw_data_national_2020_2029.csv'),
+              index=False)
+
     df.drop(df[(df['SEX'] == 0) | (df['AGE'] == 999)].index, inplace=True)
     df = df.replace({'SEX': {2: 'Female', 1: 'Male'}})
     pop_estimate_cols = [
@@ -43,4 +48,4 @@ def national2029(url_file: str, output_folder: str):
 
     df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
-                     'national_2020_2023.csv'))
+                     'national_2020_2029.csv'))

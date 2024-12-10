@@ -33,19 +33,18 @@ from national_1960_1979 import national1960
 from national_1980_1989 import national1980
 from national_2000_2010 import national2000
 from national_2010_2019 import national2010
-from national_2020_2021 import national2020
-from national_2020_2023 import national2029
+from national_2020_2029 import national2029
 from state_1970_1979 import state1970
 from state_1990_2000 import state1990
 from state_2000_2010 import state2000
 from state_2010_2020 import state2010
-from state_2020_2023 import state2029
+from state_2020_2029 import state2029
 from county_1970_1979 import county1970
 from county_1980_1989 import county1980
 from county_1990_2000 import county1990
 from county_2000_2010 import county2000
 from county_2010_2020 import county2010
-from county_2020_2023 import county2029
+from county_2020_2029 import county2029
 
 FLAGS = flags.FLAGS
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -54,27 +53,26 @@ flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_string("input_path", DEFAULT_INPUT_PATH, "Import Data File's List")
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
-_FILES_TO_DOWNLOAD = None
+_FILES_TO_DOWNLOAD = []
 
 
-# This method will generate URLs for the years 2024 to 2029
+# This method will generate URLs for the years 2020 to 2029
 def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
-    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
-        _FILES_TO_DOWNLOAD = json.load(inpit_file)
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv",
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/national/asrh/nc-est{YEAR}-agesex-res.csv",
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/asrh/sc-est{YEAR}-alldata6.csv"
     ]
-    if dt.now().year > 2023:
-        YEAR = dt.now().year
-        for url in urls_to_scan:
+    #To check the latest available year
+    for url in urls_to_scan:
+        for YEAR in range(2030, 2020, -1):
             url_to_check = url.format(YEAR=YEAR)
             try:
                 check_url = requests.head(url_to_check)
                 if check_url.status_code == 200:
                     _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                    break
 
             except:
                 logging.fatal(f"URL is not accessable {url_to_check}")
@@ -264,7 +262,6 @@ class USCensusPEPByASR:
             if not data_df.empty:
                 processed_count += 1
                 final_df = pd.concat([final_df, data_df])
-                # final_df.to_csv("final_csv.csv")
                 sv_list += data_df["SVs"].to_list()
             else:
                 logging.fatal(f"Failed to process {file_path}")
@@ -323,7 +320,6 @@ def download_files():
 
         global _FILES_TO_DOWNLOAD
         for file in _FILES_TO_DOWNLOAD:
-            #file_name_to_save = None
             url = file['download_path']
             if 'national' in url:
                 national2029(url, output_folder)
@@ -348,7 +344,11 @@ def main(_):
     tmcf_path = os.path.join(data_file_path, "usa_population_asr.tmcf")
     # Running the fuctions in individual files by Year and Area
     if mode == "" or mode == "download":
-        # download & process
+        #Creating folder to store the raw data from source
+        raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                     "raw_data")
+        if not os.path.exists(raw_data_path):
+            os.mkdir(raw_data_path)
         add_future_year_urls()
         download_files()
     if mode == "" or mode == "process":

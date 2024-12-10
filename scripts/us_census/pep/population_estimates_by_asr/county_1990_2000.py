@@ -45,6 +45,10 @@ def county1990(output_folder: str):
             df = pd.read_table(url,index_col=False,delim_whitespace=True\
                 ,skiprows=16,skipfooter=14,engine='python',names=cols,\
                     encoding='ISO-8859-1')
+            #Writing raw data to csv
+            df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   "raw_data", 'raw_data_county_1990_2000.csv'),
+                      index=False)
             # Removing the lines that have false symbols.
             num_df = (df.drop(cols, axis=1).join(df[cols]\
                 .apply(pd.to_numeric, errors='coerce')))

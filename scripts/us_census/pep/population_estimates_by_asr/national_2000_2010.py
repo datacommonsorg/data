@@ -28,6 +28,10 @@ def national2000(url_file: str, output_folder: str):
     _url = input_url(url_file, "2000-10")
     # Reading the csv format input file and converting it to a dataframe.
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
+    #Writing raw data to csv
+    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "raw_data", 'national_2000_2010.csv'),
+              index=False)
     # Removing the unwanted rows.
     # 4 removed as July month is being considered
     df = df.query("MONTH != 4")
@@ -83,8 +87,6 @@ def national2000(url_file: str, output_folder: str):
     df_ar = pd.concat([df_ar, df])
     # DF sent to an external function for aggregation based on race.
     df_ar = race_based_grouping(df_ar)
-    df_ar.to_csv("df_ar_after_grouping.csv", index=False)
-    df_ar.to_csv("df_ar_after_adding_MM.csv", index=False)
     df_ar = df_ar[df_ar.SVs.str.contains('Years_')]
 
     df = pd.concat([df_ar, df])
