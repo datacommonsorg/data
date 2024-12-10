@@ -77,15 +77,18 @@ def national2000(url_file: str, output_folder: str):
     # Inserting geoId to the dataframe.
     df.insert(1, 'geo_ID', 'country/USA', True)
     # Inserting measurement method to the dataframe.
-    df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
+    df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)  # changed
     # Contains aggregated data for age and race.
     df_ar = pd.DataFrame()
     df_ar = pd.concat([df_ar, df])
     # DF sent to an external function for aggregation based on race.
     df_ar = race_based_grouping(df_ar)
-    df_ar.insert(3, 'Measurement_Method', 'dcAggregate/CensusPEPSurvey', True)
+    df_ar.to_csv("df_ar_after_grouping.csv", index=False)
+    df_ar.to_csv("df_ar_after_adding_MM.csv", index=False)
     df_ar = df_ar[df_ar.SVs.str.contains('Years_')]
+
     df = pd.concat([df_ar, df])
+
     # Writing the dataframe to output csv.
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                            output_folder, 'national_2000_2010.csv'),

@@ -73,6 +73,7 @@ def national2010(url_file: str, output_folder: str):
     df_final['SVs'] = 'Count_Person_' + df_final['SVs']
     df_final['Measurement_Method'] = 'CensusPEPSurvey'
     df_final['geo_ID'] = 'country/USA'
+
     df_final.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
                      'national_2010_2019.csv'))
