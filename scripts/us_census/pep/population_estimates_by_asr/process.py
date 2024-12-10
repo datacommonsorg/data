@@ -23,7 +23,6 @@ import requests
 import shutil
 import time
 import json
-from datetime import datetime as dt
 from absl import logging
 
 from absl import app
@@ -75,7 +74,7 @@ def add_future_year_urls():
                     break
 
             except:
-                logging.fatal(f"URL is not accessable {url_to_check}")
+                logging.error(f"URL is not accessable {url_to_check}")
 
 
 MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -241,7 +240,7 @@ class USCensusPEPByASR:
             os.mkdir(output_path)
         processed_count = 0
         total_files_to_process = len(self._input_files)
-        if total_files_to_process is None:
+        if total_files_to_process == 0:
             logging.fatal(
                 f"No input files found in the directory: {self._input_files}")
         logging.info(
