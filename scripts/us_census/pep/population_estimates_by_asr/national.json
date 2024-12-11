@@ -14,4 +14,5 @@
 "1980-90files":["E8081CQI.TXT", "E8182CQI.TXT", "E8283CQI.TXT", "E8384CQI.TXT",
     "E8485CQI.TXT", "E8586CQI.TXT", "E8687CQI.TXT", "E8788CQI.TXT",
     "E8889CQI.TXT", "E8990CQI.TXT"],
-"2000-10":"https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/national/us-est00int-alldata.csv"}
+"2000-10":"https://www2.census.gov/programs-surveys/popest/datasets/2000-2010/intercensal/national/us-est00int-alldata.csv",
+"2020-22":"https://www2.census.gov/programs-surveys/popest/datasets/2020-2022/national/asrh/nc-est2022-agesex-res.csv"}
