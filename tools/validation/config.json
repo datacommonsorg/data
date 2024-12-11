@@ -1,0 +1,9 @@
+[
+    {
+        "name": "DELETED_COUNT_CHECK",
+        "threshold": 1
+    },
+    {
+        "name": "LATEST_DATA_CHECK"
+    }
+]
