@@ -1,0 +1,15 @@
+[
+    {
+        "validation": "DELETED_COUNT",
+        "threshold": 1
+    },
+    {
+        "validation": "MODIFIED_COUNT"
+    },
+    {
+        "validation": "ADDED_COUNT"
+    },
+    {
+        "validation": "UNMODIFIED_COUNT"
+    }
+]
