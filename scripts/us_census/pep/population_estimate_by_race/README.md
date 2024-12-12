@@ -1,14 +1,14 @@
 # US Census PEP: Population Estimate by Race
 
 ## About the Dataset
-This import includes the Population Count Estimates by Race for the United States from the year 1900 to 2020 on a yearly basis.
+This import includes the Population Count Estimates by Race for the United States from the year 1900 to latest year data on a yearly basis.
 
 The population is categorized by Race:
 AmericanIndianAndAlaskaNativeAlone,AsianAlone,BlackOrAfricanAmericanAlone,WhiteAlone,NativeHawaiianAndOtherPacificIslanderAlone
  
 
 ### Download URL
-The data in txt/csv formats are downloadable from within "https://www2.census.gov/programs-surveys/popest/tables" and "https://www2.census.gov/programs-surveys/popest/datasets". The actual URLs are listed in file_urls.json and file_url.txt(County data from 2020).
+The data in txt/csv formats are downloadable from within "https://www2.census.gov/programs-surveys/popest/tables" and "https://www2.census.gov/programs-surveys/popest/datasets". The actual URLs are listed in input_url.json.
 
 #### API Output
 These are the attributes that we will use
@@ -50,11 +50,31 @@ Run the test cases
 
 ```/bin/python3 scripts/us_census/pep/population_estimate_by_race/preprocess_test.py```
 
-### Import Procedure
+[Updated the script on November 06, 2024]
+Downloading input files is now integrated into preprocess.py, eliminating the need to run the separate download.sh script. 
+All source file URLs, including future URLs adhering to the same structure, are centrally managed in the input_url.json file.
+All input files required for processing should be stored within the designated "input_files" folder.
 
-The below scripts will download the data
-`/bin/python3 scripts/us_census/pep/population_estimate_by_race/download.py`
-`sh scripts/us_census/pep/population_estimate_by_race/download1.sh`
 
-The below script will generate csv and mcf files.
-`/bin/python3 scripts/us_census/pep/population_estimate_by_race/preprocess.py`
+### Downloading and Processing Data
+
+To perform "download and process", run the below command:
+    python3 preprocess.py 
+
+Running this command generates input_fles and csv, mcf, tmcf files
+
+
+   If you want to perform "only process", run the below command:
+
+        python3 preprocess.py --mode=process
+        
+   If you want to perform "only download", run the below command:
+
+        python3 preprocess.py --mode=download
+
+
+
+
+
+
+
