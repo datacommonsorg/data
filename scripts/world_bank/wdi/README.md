@@ -127,6 +127,25 @@ To generate `output/WorldBank_StatisticalVariables.mcf`,
 python3 worldbank.py --indicatorSchemaFile=<DESIRED INDICATOR CSV FILE> --fetchFromSource=<true TO RE-FETCH FROM WDI WEBSITE INSTEAD OF USING CHECKED-IN PREPROCESSED CSVS ELSE false>
 ```
 
+#### Processing Steps for Refreshing Data
+
+To generate `output/WorldBank_StatisticalVariables.mcf`,
+`output/WorldBank.tmcf`, and `output/WorldBank.csv`, run:
+
+```bash
+python3 worldbank.py
+```
+
+If you want to perform "only process", run the below command:
+```bash
+python3 preprocess.py --mode=process
+```
+
+If you want to perform "only download", run the below command:
+```bash
+python3 preprocess.py --mode=download
+```
+
 We highly recommend the use of the import validation tool for this import which
 you can find in
 https://github.com/datacommonsorg/tools/tree/master/import-validation-helper.

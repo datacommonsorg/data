@@ -15,11 +15,6 @@
     indicator codes provided by the indicatorSchemaFile flag for all years
     and for all countries provided in WorldBankCountries.csv. """
 
-from absl import app
-from absl import flags
-import pandas as pd
-from retry.api import retry_call
-
 import logging
 import itertools
 import requests
@@ -27,12 +22,23 @@ import zipfile
 import io
 import time
 import re
+import os
+import sys
 
-FLAGS = flags.FLAGS
-flags.DEFINE_boolean("fetchFromSource", False,
+from absl import app
+from absl import flags
+from absl import logging
+import pandas as pd
+from retry.api import retry_call
+
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_FLAGS = flags.FLAGS
+flags.DEFINE_boolean("fetchFromSource", True,
                      "Whether to bypass cached CSVs and fetch from source.")
-flags.DEFINE_string("indicatorSchemaFile", None,
-                    "Path to indicator schema CSV file.")
+flags.DEFINE_string(
+    "indicatorSchemaFile",
+    os.path.join(_MODULE_DIR, "schema_csvs/WorldBankIndicators_prod.csv"), "")
+flags.DEFINE_string('mode', '', 'Options: download or process')
 
 # Remaps the columns provided by World Bank API.
 WORLDBANK_COL_REMAP = {
@@ -46,9 +52,10 @@ TEMPLATE_TMCF = """Node: E:WorldBank->E{idx}
 typeOf: dcs:StatVarObservation
 variableMeasured: C:WorldBank->StatisticalVariable
 observationDate: C:WorldBank->Year
-observationPeriod: "P1Y"
+observationPeriod: C:WorldBank->observationPeriod
 observationAbout: C:WorldBank->ISO3166Alpha3
 value: C:WorldBank->Value{idx}
+unit: C:WorldBank->unit
 """
 
 TEMPLATE_STAT_VAR = """
@@ -63,8 +70,147 @@ measurementDenominator: dcs:{measurementDenominator}
 {CONSTRAINTS}
 """
 
+RESOLUTION_TO_EXISTING_DCID = {
+    'dcs:WorldBank/SE_TER_CUAT_BA_FE_ZS':
+        'Count_Person_25OrMoreYears_Female_BachelorsDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears_Female',
+    'dcs:WorldBank/SE_TER_CUAT_BA_MA_ZS':
+        'Count_Person_25OrMoreYears_Male_BachelorsDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears_Male',
+    'dcs:WorldBank/SE_TER_CUAT_BA_ZS':
+        'Count_Person_25OrMoreYears_BachelorsDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears',
+    'dcs:WorldBank/SE_TER_CUAT_DO_FE_ZS':
+        'Count_Person_25OrMoreYears_Female_DoctorateDegree_AsFractionOf_Count_Person_25OrMoreYears_Female',
+    'dcs:WorldBank/SE_TER_CUAT_DO_MA_ZS':
+        'Count_Person_25OrMoreYears_Male_DoctorateDegree_AsFractionOf_Count_Person_25OrMoreYears_Male',
+    'dcs:WorldBank/SE_TER_CUAT_DO_ZS':
+        'Count_Person_25OrMoreYears_DoctorateDegree_AsFractionOf_Count_Person_25OrMoreYears',
+    'dcs:WorldBank/SE_TER_CUAT_MS_FE_ZS':
+        'Count_Person_25OrMoreYears_Female_MastersDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears_Female',
+    'dcs:WorldBank/SE_TER_CUAT_MS_MA_ZS':
+        'Count_Person_25OrMoreYears_Male_MastersDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears_Male',
+    'dcs:WorldBank/SE_TER_CUAT_MS_ZS':
+        'Count_Person_25OrMoreYears_MastersDegreeOrHigher_AsFractionOf_Count_Person_25OrMoreYears',
+    'dcs:WorldBank/SE_TER_CUAT_ST_FE_ZS':
+        'Count_Person_25OrMoreYears_Female_TertiaryEducation_AsFractionOf_Count_Person_25OrMoreYears_Female',
+    'dcs:WorldBank/SE_TER_CUAT_ST_MA_ZS':
+        'Count_Person_25OrMoreYears_Male_TertiaryEducation_AsFractionOf_Count_Person_25OrMoreYears_Male',
+    'dcs:WorldBank/SE_TER_CUAT_ST_ZS':
+        'Count_Person_25OrMoreYears_TertiaryEducation_AsFractionOf_Count_Person_25OrMoreYears',
+    'dcs:WorldBank/SH_STA_OWGH_FE_ZS':
+        'Count_Person_Upto4Years_Female_Overweight_AsFractionOf_Count_Person_Upto4Years_Female',
+    'dcs:WorldBank/SH_STA_OWGH_MA_ZS':
+        'Count_Person_Upto4Years_Male_Overweight_AsFractionOf_Count_Person_Upto4Years_Male',
+    'dcs:WorldBank/SH_STA_OWGH_ZS':
+        'Count_Person_Upto4Years_Overweight_AsFractionOf_Count_Person_Upto4Years',
+    'dcs:WorldBank/SH_STA_SUIC_FE_P5':
+        'Count_Death_IntentionalSelfHarm_Female_AsFractionOf_Count_Person_Female',
+    'dcs:WorldBank/SH_STA_SUIC_MA_P5':
+        'Count_Death_IntentionalSelfHarm_Male_AsFractionOf_Count_Person_Male',
+    'dcs:WorldBank/SH_STA_SUIC_P5':
+        'Count_Death_IntentionalSelfHarm_AsFractionOf_Count_Person',
+    'dcs:WorldBank/SL_TLF_ACTI_FE_ZS':
+        'Count_Person_15To64Years_Female_InLaborForce_AsFractionOf_Count_Person_15To64Years_Female',
+    'dcs:WorldBank/SL_TLF_ACTI_MA_ZS':
+        'Count_Person_15To64Years_Male_InLaborForce_AsFractionOf_Count_Person_15To64Years_Male',
+    'dcs:WorldBank/SL_TLF_ACTI_ZS':
+        'Count_Person_15To64Years_InLaborForce_AsFractionOf_Count_Person_15To64Years',
+    'dcs:WorldBank/SL_TLF_TOTL_FE_ZS':
+        'Count_Person_15OrMoreYears_InLaborForce_Female_AsFractionOf_Count_Person_InLaborForce',
+    'dcs:WorldBank/VC_IHR_PSRC_FE_P5':
+        'Count_CriminalActivities_MurderAndNonNegligentManslaughter_Female_AsFractionOf_Count_Person_Female',
+    'dcs:WorldBank/VC_IHR_PSRC_MA_P5':
+        'Count_CriminalActivities_MurderAndNonNegligentManslaughter_Male_AsFractionOf_Count_Person_Male',
+    'dcs:WorldBank/VC_IHR_PSRC_P5':
+        'Count_CriminalActivities_MurderAndNonNegligentManslaughter_AsFractionOf_Count_Person',
+    'dcs:WorldBank/SP_RUR_TOTL':
+        'Count_Person_Rural',
+    'dcs:WorldBank/SP_URB_TOTL':
+        'Count_Person_Urban',
+    'dcs:WorldBank/SP_DYN_IMRT_IN':
+        'Count_Death_0Years_AsFractionOf_Count_BirthEvent_LiveBirth',
+    'dcs:WorldBank/SP_DYN_IMRT_MA_IN':
+        'Count_Death_0Years_Male_AsFractionOf_Count_BirthEvent_LiveBirth_Male',
+    'dcs:WorldBank/SP_DYN_IMRT_FE_IN':
+        'Count_Death_0Years_Female_AsFractionOf_Count_BirthEvent_LiveBirth_Female',
+    'dcs:WorldBank/SH_DTH_IMRT':
+        'Count_Death_0Years',
+    'dcs:WorldBank/SL_TLF_0714_ZS':
+        'Count_Person_7To14Years_Employed_AsFractionOf_Count_Person_7To14Years',
+    'dcs:WorldBank/SL_TLF_0714_MA_ZS':
+        'Count_Person_7To14Years_Male_Employed_AsFractionOf_Count_Person_7To14Years_Male',
+    'dcs:WorldBank/SL_TLF_0714_FE_ZS':
+        'Count_Person_7To14Years_Female_Employed_AsFractionOf_Count_Person_7To14Years_Female',
+    'dcs:WorldBank/SH_SVR_WAST_ZS':
+        'Count_Person_Upto4Years_SevereWasting_AsFractionOf_Count_Person_Upto4Years',
+    'dcs:WorldBank/SH_SVR_WAST_MA_ZS':
+        'Count_Person_Upto4Years_Male_SevereWasting_AsFractionOf_Count_Person_Upto4Years_Male',
+    'dcs:WorldBank/SH_SVR_WAST_FE_ZS':
+        'Count_Person_Upto4Years_Female_SevereWasting_AsFractionOf_Count_Person_Upto4Years_Female',
+    'dcs:WorldBank/SH_STA_WAST_ZS':
+        'Count_Person_Upto4Years_Wasting_AsFractionOf_Count_Person_Upto4Years',
+    'dcs:WorldBank/SH_STA_WAST_MA_ZS':
+        'Count_Person_Upto4Years_Male_Wasting_AsFractionOf_Count_Person_Upto4Years_Male',
+    'dcs:WorldBank/SH_STA_WAST_FE_ZS':
+        'Count_Person_Upto4Years_Female_Wasting_AsFractionOf_Count_Person_Upto4Years_Female',
+    'dcs:WorldBank/SH_XPD_CHEX_PC_CD':
+        'Amount_EconomicActivity_ExpenditureActivity_HealthcareExpenditure_AsFractionOf_Count_Person',
+    'dcs:WorldBank/SH_ALC_PCAP_LI':
+        'Amount_Consumption_Alcohol_15OrMoreYears_AsFractionOf_Count_Person_15OrMoreYears',
+    'dcs:WorldBank/SI_POV_GINI':
+        'GiniIndex_EconomicActivity',
+    'dcs:WorldBank/SE_XPD_TOTL_GB_ZS':
+        'Amount_EconomicActivity_ExpenditureActivity_EducationExpenditure_Government_AsFractionOf_Amount_EconomicActivity_ExpenditureActivity_Government',
+    'dcs:WorldBank/SE_XPD_TOTL_GD_ZS':
+        'Amount_EconomicActivity_ExpenditureActivity_EducationExpenditure_Government_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
+    'dcs:WorldBank/MS_MIL_XPND_CD':
+        'Amount_EconomicActivity_ExpenditureActivity_MilitaryExpenditure_Government',
+    'dcs:WorldBank/MS_MIL_XPND_GD_ZS':
+        'Amount_EconomicActivity_ExpenditureActivity_MilitaryExpenditure_Government_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
+    'dcs:WorldBank/CM_MKT_LCAP_GD_ZS':
+        'Amount_Stock_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
+    'dcs:WorldBank/CM_MKT_LCAP_CD':
+        'Amount_Stock',
+    'dcs:WorldBank/BX_TRF_PWKR_DT_GD_ZS':
+        'Amount_Remittance_InwardRemittance_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
+    'dcs:WorldBank/BX_TRF_PWKR_CD_DT':
+        'Amount_Remittance_InwardRemittance',
+    'dcs:WorldBank/BM_TRF_PWKR_CD_DT':
+        'Amount_Remittance_OutwardRemittance',
+    'dcs:WorldBank/SH_DYN_MORT':
+        'MortalityRate_Person_Upto4Years_AsFractionOf_Count_BirthEvent_LiveBirth',
+    'dcs:WorldBank/SH_PRV_SMOK':
+        'Count_Person_15OrMoreYears_Smoking_AsFractionOf_Count_Person_15OrMoreYears',
+    'dcs:WorldBank/SH_PRV_SMOK_FE':
+        'Count_Person_15OrMoreYears_Female_Smoking_AsFractionOf_Count_Person_15OrMoreYears_Female',
+    'dcs:WorldBank/SH_PRV_SMOK_MA':
+        'Count_Person_15OrMoreYears_Male_Smoking_AsFractionOf_Count_Person_15OrMoreYears_Male',
+    'dcs:WorldBank/SH_STA_DIAB_ZS':
+        'Count_Person_20To79Years_Diabetes_AsFractionOf_Count_Person_20To79Years',
+    'dcs:WorldBank/SP_DYN_CBRT_IN':
+        'Count_BirthEvent_LiveBirth_AsFractionOf_Count_Person',
+    'dcs:WorldBank/SP_DYN_LE00_FE_IN':
+        'LifeExpectancy_Person_Female',
+    'dcs:WorldBank/SP_DYN_LE00_MA_IN':
+        'LifeExpectancy_Person_Male',
+    'dcs:WorldBank/EG_ELC_FOSL_ZS':
+        'Amount_Production_ElectricityFromOilGasOrCoalSources_AsFractionOf_Amount_Production_Energy',
+    'dcs:WorldBank/EG_ELC_NUCL_ZS':
+        'Amount_Production_ElectricityFromNuclearSources_AsFractionOf_Amount_Production_Energy',
+    'dcs:WorldBank/EG_FEC_RNEW_ZS':
+        'Amount_Consumption_RenewableEnergy_AsFractionOf_Amount_Consumption_Energy',
+    'dcs:WorldBank/EN_POP_EL5M_ZS':
+        'Count_Person_ResidingLessThan5MetersAboveSeaLevel_AsFractionOf_Count_Person',
+    'dcs:WorldBank/IT_CEL_SETS_P2':
+        'Count_Product_MobileCellularSubscription_AsFractionOf_Count_Person',
+    'dcs:WorldBank/SE_XPD_TERT_ZS':
+        'Amount_EconomicActivity_ExpenditureActivity_TertiaryEducationExpenditure_Government_AsFractionOf_Amount_EconomicActivity_ExpenditureActivity_EducationExpenditure_Government',
+    'dcs:WorldBank/SH_XPD_CHEX_PP_CD':
+        'Amount_EconomicActivity_ExpenditureActivity_HealthcareExpenditure_AsFractionOf_Count_Person',
+    'dcs:WorldBank/SH_XPD_CHEX_PC_CD':
+        'Amount_EconomicActivity_ExpenditureActivity_HealthcareExpenditure_AsFractionOf_Count_Person'
+}
 
-def read_worldbank(iso3166alpha3, fetchFromSource):
+
+def read_worldbank(iso3166alpha3, mode):
     """ Fetches and tidies all ~1500 World Bank indicators
         for a given ISO 3166 alpha 3 code.
 
@@ -85,8 +231,8 @@ def read_worldbank(iso3166alpha3, fetchFromSource):
             Takes approximately 10 seconds to download and
             tidy one country in a Jupyter notebook.
     """
-    if fetchFromSource:
-        logging.info('Downloading %s', iso3166alpha3)
+    if mode in ["download", '']:
+        logging.info('Downloading input file for country %s', iso3166alpha3)
         country_zip = ("http://api.worldbank.org/v2/en/country/" +
                        iso3166alpha3 + "?downloadformat=csv")
         r = retry_call(requests.get,
@@ -95,7 +241,13 @@ def read_worldbank(iso3166alpha3, fetchFromSource):
                        delay=20,
                        backoff=1.5)
         if r.status_code != 200:
-            logging.info('Failed to retrieve %s', iso3166alpha3)
+            logging.fatal('Failed to retrieve %s', iso3166alpha3)
+        if not os.path.exists(os.path.join(_MODULE_DIR, 'source_data')):
+            os.mkdir(os.path.join(_MODULE_DIR, 'source_data'))
+        with open(
+                os.path.join(_MODULE_DIR, 'source_data',
+                             iso3166alpha3 + '.zip'), 'wb') as f:
+            f.write(r.content)
 
         filebytes = io.BytesIO(r.content)
         myzipfile = zipfile.ZipFile(filebytes)
@@ -124,8 +276,9 @@ def read_worldbank(iso3166alpha3, fetchFromSource):
                 if df is None:
                     df = pd.DataFrame(columns=cols)
                 else:
-                    df = df.append(pd.DataFrame([cols], columns=df.columns),
-                                   ignore_index=True)
+                    df = pd.concat(
+                        [df, pd.DataFrame([cols], columns=df.columns)],
+                        ignore_index=True)
 
         df = df.rename(columns=WORLDBANK_COL_REMAP)
 
@@ -140,6 +293,9 @@ def read_worldbank(iso3166alpha3, fetchFromSource):
         # Convert to numeric and drop empty values.
         df['Value'] = pd.to_numeric(df['Value'])
         df = df.dropna()
+        if not os.path.exists(
+                os.path.join(_MODULE_DIR, 'preprocessed_source_csv')):
+            os.mkdir(os.path.join(_MODULE_DIR, 'preprocessed_source_csv'))
         df.to_csv('preprocessed_source_csv/' + iso3166alpha3 + '.csv',
                   index=False)
     else:
@@ -207,8 +363,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
     """
     # All the statistical observation properties that we included.
     properties_of_stat_var_observation = ([
-        'measurementMethod', 'measurementDenominator', 'scalingFactor',
-        'sourceScalingFactor', 'unit'
+        'measurementMethod', 'scalingFactor'
     ])
     # List of tuples to return.
     tmcfs_for_stat_vars = []
@@ -221,7 +376,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
                               repeat=len(properties_of_stat_var_observation))):
         codes_that_match = null_status.copy()
         base_template_mcf = TEMPLATE_TMCF
-        cols_to_include_in_csv = ['IndicatorCode']
+        cols_to_include_in_csv = ['IndicatorCode', 'unit']
 
         # Loop over each obs column and whether to include it.
         for include_col, column in (zip(permutation,
@@ -241,8 +396,7 @@ def group_stat_vars_by_observation_properties(indicator_codes):
     return tmcfs_for_stat_vars
 
 
-def download_indicator_data(worldbank_countries, indicator_codes,
-                            fetchFromSource):
+def download_indicator_data(worldbank_countries, indicator_codes, mode):
     """ Downloads World Bank country data for all countries and
             indicators provided.
 
@@ -261,8 +415,9 @@ def download_indicator_data(worldbank_countries, indicator_codes,
     worldbank_dataframe = pd.DataFrame()
     indicators_to_keep = list(indicator_codes['IndicatorCode'].unique())
 
+    country_df_list = []
     for index, country_code in enumerate(worldbank_countries['ISO3166Alpha3']):
-        country_df = read_worldbank(country_code, fetchFromSource)
+        country_df = read_worldbank(country_code, mode)
 
         # Remove unneccessary indicators.
         country_df = country_df[country_df['IndicatorCode'].isin(
@@ -272,8 +427,9 @@ def download_indicator_data(worldbank_countries, indicator_codes,
         country_df['ISO3166Alpha3'] = country_code
 
         # Add new row to main datframe.
-        worldbank_dataframe = worldbank_dataframe.append(country_df)
+        country_df_list.append(country_df)
 
+    worldbank_dataframe = pd.concat(country_df_list)
     # Map indicator codes to unique Statistical Variable.
     worldbank_dataframe['StatisticalVariable'] = (
         worldbank_dataframe['IndicatorCode'].apply(
@@ -281,8 +437,10 @@ def download_indicator_data(worldbank_countries, indicator_codes,
     return worldbank_dataframe.rename({'year': 'Year'}, axis=1)
 
 
-def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
-                                    indicator_codes):
+def output_csv_and_tmcf_by_grouping(worldbank_dataframe,
+                                    tmcfs_for_stat_vars,
+                                    indicator_codes,
+                                    saveOutput=True):
     """ Outputs TMCFs and CSVs for each grouping of stat vars.
 
         Args:
@@ -294,44 +452,59 @@ def output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
             indicator_codes -> Dataframe with INDICATOR_CODES to include.
     """
     # Only include a subset of columns in the final csv
-    output_csv = worldbank_dataframe[[
-        'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year', 'Value'
-    ]]
+    try:
+        output_csv = worldbank_dataframe[[
+            'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year',
+            'Value', 'observationPeriod'
+        ]]
 
-    # Output tmcf and csv for each unique World Bank grouping.
-    df = pd.DataFrame(columns=[
-        'StatisticalVariable',
-        'IndicatorCode',
-        'ISO3166Alpha3',
-        'Year',
-    ])
-    with open('output/WorldBank.tmcf', 'w', newline='') as f_out:
-        for index, enum in enumerate(tmcfs_for_stat_vars):
-            tmcf, stat_var_obs_cols, stat_vars_in_group = enum
-            if len(stat_vars_in_group) == 0:
-                continue
-            f_out.write(tmcf.format_map({'idx': index}) + '\n')
+        # Output tmcf and csv for each unique World Bank grouping.
+        df = pd.DataFrame(columns=[
+            'StatisticalVariable', 'IndicatorCode', 'ISO3166Alpha3', 'Year',
+            'observationPeriod'
+        ])
+        if saveOutput:
+            TMCF_PATH = 'output/WorldBank.tmcf'
+        else:
+            TMCF_PATH = 'test_data/output/output_generated.tmcf'
+        with open(TMCF_PATH, 'w', newline='') as f_out:
+            for index, enum in enumerate(tmcfs_for_stat_vars):
+                tmcf, stat_var_obs_cols, stat_vars_in_group = enum
+                if len(stat_vars_in_group) == 0:
+                    continue
+                f_out.write(tmcf.format_map({'idx': index}) + '\n')
 
-            # Get only the indicator codes in that grouping.
-            matching_csv = output_csv[output_csv['IndicatorCode'].isin(
-                stat_vars_in_group)]
+                # Get only the indicator codes in that grouping.
+                matching_csv = output_csv[output_csv['IndicatorCode'].isin(
+                    stat_vars_in_group)]
 
-            # Format to decimals.
-            matching_csv = matching_csv.round(10)
-            df = df.merge(
-                matching_csv.rename(columns={'Value': f"Value{index}"}),
-                how='outer',
-                on=[
-                    'StatisticalVariable',
-                    'IndicatorCode',
-                    'ISO3166Alpha3',
-                    'Year',
-                ])
-    # Include the Stat Observation columns in the output CSV.
-    df = df.merge(indicator_codes[stat_var_obs_cols], on='IndicatorCode')
-    df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
-                                            float_format='%.10f',
-                                            index=False)
+                # Format to decimals.
+                matching_csv = matching_csv.round(10)
+                df = df.merge(
+                    matching_csv.rename(columns={'Value': f"Value{index}"}),
+                    how='outer',
+                    on=[
+                        'StatisticalVariable',
+                        'IndicatorCode',
+                        'ISO3166Alpha3',
+                        'Year',
+                        'observationPeriod',
+                    ])
+        # Include the Stat Observation columns in the output CSV.
+        df = df.merge(indicator_codes[stat_var_obs_cols], on='IndicatorCode')
+
+        # Coverting dcid to existing dcid
+        df['StatisticalVariable'] = df['StatisticalVariable'].astype(str)
+        df = df.replace({'StatisticalVariable': RESOLUTION_TO_EXISTING_DCID})
+        if saveOutput:
+            logging.info("Writing output csv")
+            df.drop('IndicatorCode', axis=1).to_csv('output/WorldBank.csv',
+                                                    float_format='%.10f',
+                                                    index=False)
+        else:
+            return df
+    except Exception as e:
+        logging.fatal(f"Error generating output {e}")
 
 
 def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
@@ -361,72 +534,85 @@ def source_scaling_remap(row, scaling_factor_lookup, existing_stat_var_lookup):
     return row
 
 
+def process(indicator_codes, worldbank_dataframe, saveOutput=True):
+    logging.info("Processing the input files")
+    try:
+        # Add source description to note.
+        def add_source_to_description(row):
+            if not pd.isna(row['Source']):
+                return row['SourceNote'] + " " + str(row['Source'])
+            else:
+                return row['SourceNote']
+
+        indicator_codes['SourceNote'] = indicator_codes.apply(
+            add_source_to_description, axis=1)
+
+        # Generate stat vars
+        with open("output/WorldBank_StatisticalVariables.mcf", "w+") as f_out:
+            # Generate StatVars for fields that don't exist. Some fields such as
+            # Count_Person_Unemployed are already statistical variables so we do
+            # not need to recreate them.
+            for _, row in indicator_codes[
+                    indicator_codes['ExistingStatVar'].isna()].iterrows():
+                f_out.write(build_stat_vars_from_indicator_list(row))
+
+        # Create template MCFs for each grouping of stat vars.
+        tmcfs_for_stat_vars = (
+            group_stat_vars_by_observation_properties(indicator_codes))
+
+        # Remap columns to match expected format.
+        worldbank_dataframe['Value'] = pd.to_numeric(
+            worldbank_dataframe['Value'])
+        worldbank_dataframe['ISO3166Alpha3'] = (
+            worldbank_dataframe['ISO3166Alpha3'].apply(
+                lambda code: "dcid:Earth"
+                if code == "WLD" else "dcid:country/" + code))
+        worldbank_dataframe['StatisticalVariable'] = \
+            worldbank_dataframe['StatisticalVariable'].apply(
+                lambda code: "dcs:" + code)
+
+        # Scale values by scaling factor and replace exisiting StatVars.
+        scaling_factor_lookup = (indicator_codes.set_index('IndicatorCode')
+                                 ['sourceScalingFactor'].dropna().to_dict())
+        existing_stat_var_lookup = (indicator_codes.set_index('IndicatorCode')
+                                    ['ExistingStatVar'].dropna().to_dict())
+        worldbank_dataframe = worldbank_dataframe.apply(
+            lambda row: source_scaling_remap(row, scaling_factor_lookup,
+                                             existing_stat_var_lookup),
+            axis=1)
+
+        # Convert integer columns.
+        int_cols = (list(indicator_codes[indicator_codes['ConvertToInt'] ==
+                                         True]['IndicatorCode'].unique()))
+        worldbank_subset = worldbank_dataframe[
+            worldbank_dataframe['IndicatorCode'].isin(int_cols)].index
+        worldbank_dataframe.loc[worldbank_subset, "Value"] = (pd.to_numeric(
+            worldbank_dataframe.loc[worldbank_subset, "Value"],
+            downcast="integer"))
+        worldbank_dataframe['observationPeriod'] = worldbank_dataframe[
+            'StatisticalVariable'].apply(lambda x: '' if x in [
+                'dcid:FertilityRate_Person_Female', 'dcid:LifeExpectancy_Person'
+            ] else 'P1Y')
+        # Output final CSVs and variables.
+        df = output_csv_and_tmcf_by_grouping(worldbank_dataframe,
+                                             tmcfs_for_stat_vars,
+                                             indicator_codes, saveOutput)
+        if not saveOutput:
+            return df
+    except Exception as e:
+        logging.fatal(f"Error processing input file {e}")
+
+
 def main(_):
+    mode = _FLAGS.mode
     # Load statistical variable configuration file.
-    indicator_codes = pd.read_csv(FLAGS.indicatorSchemaFile)
-
-    # Add source description to note.
-    def add_source_to_description(row):
-        if not pd.isna(row['Source']):
-            return row['SourceNote'] + " " + str(row['Source'])
-        else:
-            return row['SourceNote']
-
-    indicator_codes['SourceNote'] = indicator_codes.apply(
-        add_source_to_description, axis=1)
-
-    # Generate stat vars
-    with open("output/WorldBank_StatisticalVariables.mcf", "w+") as f_out:
-        # Generate StatVars for fields that don't exist. Some fields such as
-        # Count_Person_Unemployed are already statistical variables so we do
-        # not need to recreate them.
-        for _, row in indicator_codes[
-                indicator_codes['ExistingStatVar'].isna()].iterrows():
-            f_out.write(build_stat_vars_from_indicator_list(row))
-
-    # Create template MCFs for each grouping of stat vars.
-    tmcfs_for_stat_vars = (
-        group_stat_vars_by_observation_properties(indicator_codes))
-
-    # Download data for all countries.
+    indicator_codes = pd.read_csv(_FLAGS.indicatorSchemaFile, dtype=str)
     worldbank_countries = pd.read_csv("WorldBankCountries.csv")
     worldbank_dataframe = download_indicator_data(worldbank_countries,
-                                                  indicator_codes,
-                                                  FLAGS.fetchFromSource)
-
-    # Remap columns to match expected format.
-    worldbank_dataframe['Value'] = pd.to_numeric(worldbank_dataframe['Value'])
-    worldbank_dataframe['ISO3166Alpha3'] = (
-        worldbank_dataframe['ISO3166Alpha3'].apply(
-            lambda code: "dcid:Earth"
-            if code == "WLD" else "dcid:country/" + code))
-    worldbank_dataframe['StatisticalVariable'] = \
-        worldbank_dataframe['StatisticalVariable'].apply(
-            lambda code: "dcs:" + code)
-
-    # Scale values by scaling factor and replace exisiting StatVars.
-    scaling_factor_lookup = (indicator_codes.set_index('IndicatorCode')
-                             ['sourceScalingFactor'].dropna().to_dict())
-    existing_stat_var_lookup = (indicator_codes.set_index('IndicatorCode')
-                                ['ExistingStatVar'].dropna().to_dict())
-    worldbank_dataframe = worldbank_dataframe.apply(
-        lambda row: source_scaling_remap(row, scaling_factor_lookup,
-                                         existing_stat_var_lookup),
-        axis=1)
-
-    # Convert integer columns.
-    int_cols = (list(indicator_codes[indicator_codes['ConvertToInt'] == True]
-                     ['IndicatorCode'].unique()))
-    worldbank_subset = worldbank_dataframe[
-        worldbank_dataframe['IndicatorCode'].isin(int_cols)].index
-    worldbank_dataframe.loc[worldbank_subset, "Value"] = (pd.to_numeric(
-        worldbank_dataframe.loc[worldbank_subset, "Value"], downcast="integer"))
-
-    # Output final CSVs and variables.
-    output_csv_and_tmcf_by_grouping(worldbank_dataframe, tmcfs_for_stat_vars,
-                                    indicator_codes)
+                                                  indicator_codes, _FLAGS.mode)
+    if mode == "" or mode == "process":
+        process(indicator_codes, worldbank_dataframe)
 
 
 if __name__ == '__main__':
-    flags.mark_flag_as_required('indicatorSchemaFile')
     app.run(main)

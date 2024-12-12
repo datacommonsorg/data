@@ -1,0 +1,22 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "USCensusPEP_MonthlyPopulation",
+            "curator_emails": [
+                "mogalluru@google.com"
+            ],
+            "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables/",
+            "provenance_description": "The Census Bureau's Population Estimates Program (PEP) produces estimates of the population for the United States.",
+            "scripts": [
+                "preprocess.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/USA_Population_Count.tmcf",
+                    "cleaned_csv": "output/USA_Population_Count.csv"
+                }
+            ],
+            "cron_schedule": "0 07 * * 1"
+        }
+    ]
+}
