@@ -19,7 +19,6 @@ Produces:
 Usage:
 python3 process.py
 '''
-
 import csv
 import datetime
 import os
@@ -97,18 +96,18 @@ def compute_150(df, person):
         lambda x: round(x[f'l80_{person}'] / 80 * 150), axis=1)
 
 
-def process(year, matches, output_data, input_folder):
+def process(year, matches, input_folder):
     '''Generate cleaned data and accumulate it in output_data.'''
     url = get_url(year)
 
     if year == 2023 or year == 2024:
         try:
             filename = f"Section8-FY{year}.xlsx"
-            download_file(url, filename, input_folder)
+            # Read the Excel file and process the generator output
             with open(os.path.join(input_folder, filename), 'rb') as f:
                 rows = iter_excel_calamine(f)
-                data = [row for row in rows]
-            df = pd.DataFrame(data)
+                data = list(rows)  # Convert the generator to a list of rows
+            df = pd.DataFrame(data)  # Now create the DataFrame
         except Exception as e:
             logging.fatal(f'Error in the process method : {year}: {url} {e}.')
             return
@@ -116,7 +115,6 @@ def process(year, matches, output_data, input_folder):
         # For other years, download via URL
         try:
             filename = f"Section8-FY{year}.xls"
-            download_file(url, filename, input_folder)
             df = pd.read_excel(os.path.join(input_folder, filename))
         except Exception as e:
             logging.fatal(f'Error in the process method : {url} {e}.')
@@ -133,7 +131,7 @@ def process(year, matches, output_data, input_folder):
     ]]
 
     # Format FIPS codes
-    df['fips'] = df.apply(lambda x: 'dcs:geoId/' + str(x['fips']).zfill(10),
+    df['fips'] = df.apply(lambda x: 'dcs:geoId/' + str(x['fips']).zfill(5),
                           axis=1)
     df['fips'] = df.apply(lambda x: x['fips'][:-5]
                           if x['fips'][-5:] == '99999' else x['fips'],
@@ -151,9 +149,7 @@ def process(year, matches, output_data, input_folder):
     if not df_match.empty:
         df_match['fips'] = df_match.apply(lambda x: matches[x['fips']], axis=1)
         df = pd.concat([df, df_match])
-
-    # Append this year's data to the output_data list
-    output_data.append(df)
+    return df
 
 
 def main(argv):
@@ -165,6 +161,7 @@ def main(argv):
     # Ensure the output directory exists
     if not os.path.exists(FLAGS.income_output_dir):
         os.makedirs(FLAGS.income_output_dir)
+
     today = datetime.date.today()
 
     # List to accumulate all data
@@ -173,10 +170,18 @@ def main(argv):
     # Define input folder for downloaded files
     input_folder = 'input'
 
-    # Process data for years 2006 to the current year
+    # First, download all files for years 2006 to current year
     for year in range(2006, today.year + 1):
-        print(year)
-        process(year, matches, output_data, input_folder)
+        url = get_url(year)
+        if url:
+            filename = f"Section8-FY{year}.xlsx" if year >= 2016 else f"Section8-FY{year}.xls"
+            download_file(url, filename, input_folder)
+
+    # Now process the data after all files are downloaded
+    for year in range(2006, today.year + 1):
+        print(f"Processing data for year: {year}")
+        df = process(year, matches, input_folder)
+        output_data.append(df)
 
     # Concatenate all DataFrames in output_data into one single DataFrame
     final_df = pd.concat(output_data, ignore_index=True)
