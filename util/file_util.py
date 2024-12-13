@@ -561,7 +561,8 @@ def file_load_csv_dict(
         with FileIO(filename) as csvfile:
             reader = csv.DictReader(
                 csvfile,
-                **file_get_csv_reader_options(csvfile, {'delimiter': delimiter}))
+                **file_get_csv_reader_options(csvfile,
+                                              {'delimiter': delimiter}))
             if reader.fieldnames:
                 # Get the key and value column names
                 if not key_column:
@@ -578,7 +579,7 @@ def file_load_csv_dict(
                 # Get the key for the row.
                 key = None
                 if key_index:
-                  key = len(csv_dict)
+                    key = len(csv_dict)
                 elif key_column in row:
                     key = row.pop(key_column)
                 # Get the value for the key
@@ -657,7 +658,7 @@ def file_write_csv_dict(py_dict: dict,
         columns = []
         # Add a columns for key.
         if key_column_name:
-          columns.append(key_column_name)
+            columns.append(key_column_name)
     if len(columns) <= 1:
         # Get columns across all entries.
         for key, value in py_dict.items():
@@ -671,7 +672,7 @@ def file_write_csv_dict(py_dict: dict,
         columns.append(value_column_name)
     # Use the first column for the key.
     if key_column_name is None:
-      key_column_name = columns[0]
+        key_column_name = columns[0]
 
     # Get the output filename
     output_files = file_get_matching(filename)
@@ -1035,9 +1036,9 @@ def file_get_encoding(file: str,
         rawdata = file_get_sample_bytes(file)
     encoding_result = chardet.detect(rawdata)
     if encoding_result:
-        encoding =  encoding_result.get('encoding')
+        encoding = encoding_result.get('encoding')
         if encoding:
-          return encoding
+            return encoding
     return default
 
 
@@ -1081,7 +1082,7 @@ def file_get_csv_reader_options(
         # Use default as excel as it may not be detected well.
         dialect = 'excel'
     if dialect:
-      result['dialect'] = dialect
+        result['dialect'] = dialect
 
     # Get CSV delimiter by counting possible delimiter characters
     # across rows and picking the most common delimiter.
@@ -1101,11 +1102,11 @@ def file_get_csv_reader_options(
     for c in char_counts.keys():
         c_counts = char_counts[c]
         if c_counts:
-          c_min = min(c_counts)
-          c_med = np.median(c_counts)
-          if c_min > 0 and c_min == c_med:
-            result['delimiter'] = c
-            break
+            c_min = min(c_counts)
+            c_med = np.median(c_counts)
+            if c_min > 0 and c_min == c_med:
+                result['delimiter'] = c
+                break
     logging.level_debug() and logging.debug(
         f'Got options for file: {file}: {result}')
     return result
