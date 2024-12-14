@@ -115,6 +115,12 @@ class ExecutorConfig:
     user_script_args: List[str] = ()
     # Environment variables for the user script
     user_script_env: dict = None
+    # Skip uploading the data to GCS (for local testing).
+    skip_gcs_upload: bool = True
+    # Invoke validations before upload.
+    invoke_import_validation: bool = True
+    # Import validation config file.
+    validation_config_file: str = 'tools/validation/config.json'
     # Maximum time venv creation can take in seconds.
     venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.
