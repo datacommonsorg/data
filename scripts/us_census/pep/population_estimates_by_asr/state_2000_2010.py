@@ -26,6 +26,10 @@ def state2000(url_file: str, output_folder: str):
     '''
     _url = input_url(url_file, "2000-10")
     df = pd.read_csv(_url, encoding='ISO-8859-1')
+    #Writing raw data to csv
+    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "raw_data", 'raw_data_state_2000_2010.csv'),
+              index=False)
     # Filtering the data needed.
     df.drop(df[(df['RACE'] == 0) & (df['SEX'] == 0)].index, inplace=True)
     df = df.query("STATE != 0")
@@ -80,6 +84,7 @@ def state2000(url_file: str, output_folder: str):
     df = df.drop(columns=['AGEGRP', 'RACE', 'SEX'])
     df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
     df['SVs'] = df['SVs'].str.replace('_Total', '')
+
     df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
                      'state_2000_2010.csv'))
