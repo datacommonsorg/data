@@ -40,7 +40,7 @@ class TestParseAirQuality(unittest.TestCase):
         test_csv = os.path.join(module_dir_, 'test_data/small_Ozone_County.csv')
         output_csv = os.path.join(module_dir_,
                                   'test_data/small_Ozone_County_output.csv')
-        clean_air_quality_data(test_csv, output_csv)
+        clean_air_quality_data(test_csv, output_csv, "CDC_PM25CensusTract")
 
         expected_csv = os.path.join(
             module_dir_, 'test_data/small_Ozone_County_expected.csv')

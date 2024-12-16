@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,12 +22,105 @@ URL: https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology
 python3 parse_air_quality.py input_file output_file
 '''
 
-import sys
+import json
+import os
+import requests
 import pandas as pd
+from absl import app
+from absl import logging
+from absl import flags
+from pathlib import Path
+import sys
+
+_FLAGS = flags.FLAGS
+
+flags.DEFINE_string('mode', 'process', 'Options: download or process')
+flags.DEFINE_string('input_path', 'input_files', 'Input files path')
+flags.DEFINE_string('output_path', 'output', 'Output files path')
+
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_INPUT_FILE_PATH = None
+_OUTOUT_FILE_PATH = None
+# add the future urls (APIendpoints)) in the below urls_list
+
+urls_list = [
+    "https://data.cdc.gov/resource/v5qq-ktfc.csv",
+    "https://data.cdc.gov/resource/ujra-cbx5.csv",
+    "https://data.cdc.gov/resource/qjxm-7fny.csv",
+    "https://data.cdc.gov/resource/96sd-hxdt.csv"
+]
+
+# urls_list = [
+#     "https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/cc-est2023-agesex-01.csv", "https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/cc-est2023-agesex-01.csv",
+#     "https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/cc-est2023-agesex-01.csv", "https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/cc-est2023-agesex-01.csv"
+# ]
+
+#Making a dictionary to keep each all 4 imports and it's correspondence download
+# source url and output path to save final output
+import_configs = [{
+    "import_name":
+        "CDC_PM25CensusTract",
+    "files": [{
+        "url": "https://data.cdc.gov/resource/v5qq-ktfc.csv",
+        "input_file_name": "PM2.5CensusTractPollution_input_0.csv",
+        "output_file_name": "PM2.5CensusTract_0.csv"
+    }, {
+        "url": "https://data.cdc.gov/resource/ujra-cbx5.csv",
+        "input_file_name": "PM2.5CensusTractPollution_input_1.csv",
+        "output_file_name": "PM2.5CensusTract_1.csv"
+    }, {
+        "url": "https://data.cdc.gov/resource/qjxm-7fny.csv",
+        "input_file_name": "PM2.5CensusTractPollution_input_2.csv",
+        "output_file_name": "PM2.5CensusTract_2.csv"
+    }, {
+        "url": "https://data.cdc.gov/resource/96sd-hxdt.csv",
+        "input_file_name": "PM2.5CensusTractPollution_input_3.csv",
+        "output_file_name": "PM2.5CensusTract_3.csv"
+    }]
+}, {
+    "import_name":
+        "CDC_OzoneCensusTract",
+    "files": [{
+        "url": "https://data.cdc.gov/resource/v76h-zdce.csv",
+        "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input.csv",
+        "output_file_name": "Census_Tract_Level_Ozone_Concentrations_0.csv"
+    }, {
+        "url": "https://data.cdc.gov/resource/xm94-zmtx.csv",
+        "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input.csv",
+        "output_file_name": "Census_Tract_Level_Ozone_Concentrations_1.csv"
+    }, {
+        "url": "https://data.cdc.gov/resource/847z-pxin.csv",
+        "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input.csv",
+        "output_file_name": "Census_Tract_Level_Ozone_Concentrations_2.csv"
+    }, {
+        "url": "https://data.cdc.gov/resource/hf2a-3ebq.csv",
+        "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input.csv",
+        "output_file_name": "Census_Tract_Level_Ozone_Concentrations_3.csv"
+    }]
+}, {
+    "import_name":
+        "CDC_PM25County",
+    "files": [{
+        "url": "https://data.cdc.gov/resource/dqwm-pbi7.csv",
+        "input_file_name": "PM2.5County_input.csv",
+        "output_file_name": "PM25county.csv"
+    }]
+}, {
+    "import_name":
+        "CDC_OzoneCounty",
+    "files": [{
+        "url": "https://data.cdc.gov/resource/jcn4-jcv5.csv",
+        "input_file_name": "OzoneCounty_input.csv",
+        "output_file_name": "OzoneCounty.csv"
+    }]
+}]
+
+record_count_query = '?$query=select%20count(*)%20as%20COLUMN_ALIAS_GUARD__count'
 
 # Mapping of column names in file to StatVar names.
 STATVARS = {
     "DS_PM_pred": "Mean_Concentration_AirPollutant_PM2.5",
+    "ds_pm_pred": "Mean_Concentration_AirPollutant_PM2.5",
     "DS_O3_pred": "Mean_Concentration_AirPollutant_Ozone",
     "PM25_max_pred": "Max_Concentration_AirPollutant_PM2.5",
     "PM25_med_pred": "Median_Concentration_AirPollutant_PM2.5",
@@ -56,14 +149,12 @@ MONTH_MAP = {
 }
 
 
-def main():
-    """Main function to generate the cleaned csv file."""
-    file_path = sys.argv[1]
-    output_file = sys.argv[2]
-    clean_air_quality_data(file_path, output_file)
+# this method is applicable only for "census tract PM25"
+def add_prefix_zero(value, length):
+    return value.zfill(length)
 
 
-def clean_air_quality_data(file_path, output_file):
+def clean_air_quality_data(file_path, output_file, importname):
     """
     Args:
         file_path: path to a comma-separated CDC air quality data file
@@ -71,39 +162,138 @@ def clean_air_quality_data(file_path, output_file):
     Returns:
         a cleaned csv file
     """
-    print("Cleaning file...")
-    data = pd.read_csv(file_path)
-    if "Ozone" in file_path and "County" in file_path:
-        data["Month"] = data["Month"].map(MONTH_MAP)
-        data["date"] = pd.to_datetime(data[["Year", "Month", "Day"]],
-                                      yearfirst=True)
-    else:
-        data["date"] = pd.to_datetime(data["date"], yearfirst=True)
-    if "PM2.5" in file_path:
-        census_tract = "DS_PM"
-    elif "Ozone" in file_path:
-        census_tract = "DS_O3"
-    if "Census" in file_path:
-        data = pd.melt(data,
-                       id_vars=[
-                           'year', 'date', 'statefips', 'countyfips', 'ctfips',
-                           'latitude', 'longitude', census_tract + '_stdd'
-                       ],
-                       value_vars=[str(census_tract + '_pred')],
-                       var_name='StatisticalVariable',
-                       value_name='Value')
-        data.rename(columns={census_tract + '_stdd': 'Error'}, inplace=True)
-        data["dcid"] = "geoId/" + data["ctfips"].astype(str)
-        data['StatisticalVariable'] = data['StatisticalVariable'].map(STATVARS)
-    elif "County" in file_path and "PM" in file_path:
-        data["countyfips"] = "1200" + data["countyfips"].astype(str)
-        data["dcid"] = "geoId/" + data["countyfips"].astype(str)
-    elif "County" in file_path and "Ozone" in file_path:
-        data["countyfips"] = "1200" + data["countyfips"].astype(str)
-        data["dcid"] = "geoId/" + data["countyfips"].astype(str)
-    data.to_csv(output_file, float_format='%.6f', index=False)
-    print("Finished cleaning file!")
+    global output_file_name
+    logging.info(f"import name from command line {importname}")
+    for config in import_configs:
+        import_name = config["import_name"]
+    for config1 in import_configs:
+        if config1["import_name"] == importname:
+            import_name = config1["import_name"]
+            files = config1["files"]
+            for file_info in files:
+                output_file_name = file_info["output_file_name"]
+                logging.info(f"output_file_name {output_file_name}")
+
+                for file in os.listdir(file_path):
+                    logging.info(f"file_path====== {file_path}")
+                    if str(file).endswith('.csv'):
+                        logging.info(f"Cleaning {file} ....")
+                        data = pd.read_csv(os.path.join(file_path, file))
+                        data["date"] = pd.to_datetime(data["date"],
+                                                      yearfirst=True)
+                        data["date"] = pd.to_datetime(data["date"],
+                                                      format="%Y-%m-%d")
+
+                        if "PM2.5" in file_path:
+                            census_tract = "DS_PM"
+                        elif "Ozone" in file_path:
+                            census_tract = "DS_O3"
+                        if "Census" in file_path:
+                            data = pd.melt(
+                                data,
+                                id_vars=[
+                                    'year', 'date', 'statefips', 'countyfips',
+                                    'ctfips', 'latitude', 'longitude',
+                                    census_tract + '_stdd'
+                                ],
+                                value_vars=[str(census_tract + '_pred')],
+                                var_name='StatisticalVariable',
+                                value_name='Value')
+                            data.rename(
+                                columns={census_tract + '_stdd': 'Error'},
+                                inplace=True)
+                            max_length = data['ctfips'].astype(
+                                str).str.len().max()
+                            data['ctfips'] = data['ctfips'].astype(str).apply(
+                                lambda x: add_prefix_zero(x, max_length))
+                            data["dcid"] = "geoId/" + data["ctfips"].astype(str)
+                            data['StatisticalVariable'] = data[
+                                'StatisticalVariable'].map(STATVARS)
+                        elif "County" in file_path and "PM" in file_path:
+                            data["statefips"] = data["statefips"].astype(
+                                str).str.zfill(2)
+                            data["countyfips"] = data["countyfips"].astype(
+                                str).str.zfill(3)
+                            data["dcid"] = "geoId/" + data["statefips"] + data[
+                                "countyfips"]
+                        elif "County" in file_path and "Ozone" in file_path:
+                            data["statefips"] = data["statefips"].astype(
+                                str).str.zfill(2)
+                            data["countyfips"] = data["countyfips"].astype(
+                                str).str.zfill(3)
+                            data["dcid"] = "geoId/" + data["statefips"] + data[
+                                "countyfips"]
+                        output_file_path_with_file_name = output_file + "/" + output_file_name
+                        data.to_csv(output_file_path_with_file_name,
+                                    float_format='%.6f',
+                                    index=False)
+                        logging.info(
+                            f"Finished cleaning file {output_file_name}!")
+
+
+def download_files(importname):
+    global _INPUT_FILE_PATH
+    global import_name
+    global url_new
+    try:
+        logging.info(f"import name from command line {importname}")
+        for config in import_configs:
+            import_name = config["import_name"]
+        for config1 in import_configs:
+            if config1["import_name"] == importname:
+                import_name = config1["import_name"]
+                files = config1["files"]
+                for file_info in files:
+                    url_new = file_info["url"]
+                    logging.info(f"URL from link {url_new}")
+                    input_file_name = file_info["input_file_name"]
+                    logging.info(f"Input File Name {input_file_name}")
+
+                    get_record_count = requests.get(
+                        url_new.replace('.csv', record_count_query))
+                    if get_record_count.status_code == 200:
+                        record_count = json.loads(
+                            get_record_count.text
+                        )[0]['COLUMN_ALIAS_GUARD__count']
+                        logging.info(
+                            f"No of records found for the URL {url_new} is {record_count}"
+                        )
+                        url_new = f"{url_new}?$limit={record_count}&$offset=0"
+                        response = requests.get(url_new)
+                        response.raise_for_status()
+                        if response.status_code == 200:
+                            if not response.content:
+                                logging.fatal(
+                                    f"No data available for URL: {url_new}. Aborting download."
+                                )
+                                return
+                            filename = os.path.join(_INPUT_FILE_PATH,
+                                                    f"{input_file_name}.csv")
+                            with open(filename, 'wb') as f:
+                                f.write(response.content)
+    except Exception as e:
+        logging.fatal(f"Error downloading URL {url_new} - {e}")
+
+
+def main(_):
+    """Main function to generate the cleaned csv file."""
+
+    global _INPUT_FILE_PATH, _OUTOUT_FILE_PATH
+    _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_path)
+    _OUTOUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.output_path)
+    Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
+    Path(_OUTOUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
+
+    mode = _FLAGS.mode
+
+    # Get command-line arguments
+    importname = sys.argv[1]
+
+    if (mode == "" or mode == "download") and importname is not None:
+        download_files(importname)
+    if mode == "" or mode == "process":
+        clean_air_quality_data(_INPUT_FILE_PATH, _OUTOUT_FILE_PATH, importname)
 
 
 if __name__ == "__main__":
-    main()
+    app.run(main)
