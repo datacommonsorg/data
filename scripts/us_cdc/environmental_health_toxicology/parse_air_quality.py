@@ -41,19 +41,6 @@ flags.DEFINE_string('output_path', 'output', 'Output files path')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = None
 _OUTOUT_FILE_PATH = None
-# add the future urls (APIendpoints)) in the below urls_list
-
-urls_list = [
-    "https://data.cdc.gov/resource/v5qq-ktfc.csv",
-    "https://data.cdc.gov/resource/ujra-cbx5.csv",
-    "https://data.cdc.gov/resource/qjxm-7fny.csv",
-    "https://data.cdc.gov/resource/96sd-hxdt.csv"
-]
-
-# urls_list = [
-#     "https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/cc-est2023-agesex-01.csv", "https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/cc-est2023-agesex-01.csv",
-#     "https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/cc-est2023-agesex-01.csv", "https://www2.census.gov/programs-surveys/popest/datasets/2020-2023/counties/asrh/cc-est2023-agesex-01.csv"
-# ]
 
 #Making a dictionary to keep each all 4 imports and it's correspondence download
 # source url and output path to save final output
