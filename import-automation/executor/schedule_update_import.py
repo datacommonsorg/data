@@ -313,6 +313,9 @@ def main(_):
         logging.info("*************************************************")
         res = dataclasses.asdict(
             update(cfg, absolute_import_path, local_repo_dir=repo_dir))
+        logging.info('Update completed with status: %s', res['status'])
+        if (res['status'] != 'succeeded'):
+            return
         logging.info("*************************************************")
         logging.info("*********** Update Complete. ********************")
         logging.info("*************************************************")
