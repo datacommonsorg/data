@@ -145,10 +145,11 @@ def strip_namespace(value: str) -> str:
 
 
 def strip_value(value: str) -> str:
-    """Returns the string value with spacesding/trailing space stripped.
+    """Returns the string value with leading/trailing space stripped
+    even if the value is enclosed in double quotes.
 
   Args:
-    value: string to be cleaned.
+    value: string to be cleaned as text or qithin double quotes.
 
   Returns:
     string without extra leading and trailing spaces.
@@ -346,7 +347,7 @@ def update_mcf_nodes(
     append_values: bool = True,
     normalize: bool = True,
 ) -> dict:
-    """Returns output_nodes with Property:values form nodes added.
+    """Returns output_nodes with Property:values from nodes added.
 
   Args:
     nodes: dictionary of MCF nodes in the form:
@@ -409,8 +410,6 @@ def load_mcf_nodes(
         ...
       }
   """
-    if nodes is None:
-      nodes = {}
     if not filenames:
         return nodes
     # Load files in order of input
