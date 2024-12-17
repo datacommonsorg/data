@@ -25,7 +25,7 @@ The population is categorized by various set of combinations as below:
         
 
 ### Download URL
-The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/health/data/database -> 	Health -> Health determinants (hlth_det).
+The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/main/data/database -> 	Health -> Health determinants (hlth_det).
 The actual URLs are listed in input_files.py.
 
 

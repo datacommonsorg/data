@@ -20,7 +20,7 @@ The population is categorized by various set of combinations as below:
         
 
 ### Download URL
-Input files are available for download from url: https://ec.europa.eu/eurostat/web/health/data/database -> Health -> Health determinants (hlth_det).
+Input files are available for download from url: https://ec.europa.eu/eurostat/web/main/data/database -> Health -> Health determinants (hlth_det).
 
 ### Import Procedure
 The below script will download the data and extract it.

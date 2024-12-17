@@ -136,7 +136,7 @@ class EuroStat:
         df = split_column(df, df.columns.values.tolist()[0])
 
         df.rename(columns={
-            r'geo\time': 'geo',
+            r'geo\TIME_PERIOD': 'geo',
             r'time\geo': 'time',
             'isced97': 'isced11',
             'quantile': 'quant_inc'
