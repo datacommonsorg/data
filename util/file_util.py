@@ -434,7 +434,7 @@ def file_get_name(file_path: str,
     file name combined from path, suffix and extension.
   """
     if not file_path:
-        return ''
+        return None
     if file_is_google_spreadsheet(file_path):
         # Don't modify spreadsheets
         return file_path
