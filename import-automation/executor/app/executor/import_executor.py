@@ -627,7 +627,7 @@ def _run_with_timeout(args: List[str],
         logging.exception(
             f'An unexpected exception was thrown: {e} when running {args}:'
             f' {message}')
-        raise subprocess.TimeoutExpired(args, timeout)
+        raise e
 
 
 def _create_venv(requirements_path: Iterable[str], venv_dir: str,
