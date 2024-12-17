@@ -9,16 +9,16 @@ Select the CAGDP9: Real GDP in chaied dollars by County & MSA
 
 
 Processing: 
-Earlier code : https://source.corp.google.com/piper///depot/google3/datacommons/mcf/bea/v2/ ( 2017-2022 data)
-Current execution : Using statvarProcessor.
+Earlier code : https://source.corp.google.com/piper///depot/google3/datacommons/mcf/bea/v2/ ( 2001-2021 data)
+Current execution : Using statvarProcessor ( 2001-2023 data).
 
 File paths in gcs:
 
-inut file : gs://unresolved_mcf/us_bea/gdp_chained_dollar_county_msa/20241028/input_files/CAGDP9__ALL_AREAS_2017_2022.csv
-pv_map: gs://unresolved_mcf/us_bea/gdp_chained_dollar_county_msa/20241028/configs/pv_map.py
-place mappings : gs://unresolved_mcf/us_bea/gdp_chained_dollar_county_msa/20241028/configs/place_mapping.json
-config file: gs://unresolved_mcf/us_bea/gdp_chained_dollar_county_msa/20241028/configs/config.py
-output files: gs://unresolved_mcf/us_bea/gdp_chained_dollar_county_msa/20241028/output_files/
+input file : gs://unresolved_mcf/us_bea/gdp_chained_dollar_county_msa/20241217/input_files/CAGDP9__ALL_AREAS_2001_2023.csv
+pv_map: gs://unresolved_mcf/us_bea/gdp_chained_dollar_county_msa/20241217/configs/pv_map.py
+place mappings : gs://unresolved_mcf/us_bea/gdp_chained_dollar_county_msa/20241217/configs/place_mapping.json
+config file: gs://unresolved_mcf/us_bea/gdp_chained_dollar_county_msa/20241217/configs/config.py
+output files: gs://unresolved_mcf/us_bea/gdp_chained_dollar_county_msa/20241217/output_files/
 
 
 Check for any addiitonal NAICS to be mapped from source and update the pv_map.py
