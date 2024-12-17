@@ -558,9 +558,8 @@ def file_load_csv_dict(
     input_files = file_get_matching(filename)
     logging.debug(f'Loading dict from csv files: {input_files}')
     if key_column and key_index:
-        logging.error(
-            f'Key_column: {key_column} ignored when key_index is True for {filename}'
-        )
+        raise ValueError(
+            f'Both Key_column: {key_column} and key_index set for {filename}')
 
     for filename in input_files:
         num_rows = 0
