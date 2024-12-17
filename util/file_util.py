@@ -37,6 +37,7 @@ from absl import app
 from absl import logging
 from aggregation_util import aggregate_dict, aggregate_value
 from google.cloud import storage
+from retry.api import retry_call
 from typing import Union
 
 
@@ -548,13 +549,19 @@ def file_load_csv_dict(
     config: dictionary of aggregation settings in case there are multiple rows
       with the same key. refer to aggregation_util.aggregate_dict for config
       settings.
-    key_index: if True, each rows is loaded with a unique key for row index.
+    key_index: if True, each row is loaded with a unique key for row index.
+      Overrides key_column and uses index as key.
   Returns:
     dictionary of {key:value} loaded from the CSV file.
   """
     csv_dict = {}
     input_files = file_get_matching(filename)
     logging.debug(f'Loading dict from csv files: {input_files}')
+    if key_column and key_index:
+        logging.error(
+            f'Key_column: {key_column} ignored when key_index is True for {filename}'
+        )
+
     for filename in input_files:
         num_rows = 0
         # Load each CSV file
@@ -644,8 +651,8 @@ def file_write_csv_dict(py_dict: dict,
       column names are picked from each entry's value if the value is a dict.
       Else the value is written as column name 'value'.
     key_column_name: name of the column used as key.
-      if None, the first column is used as key.
-      if set to '', the key is ignored.
+      if '', the first column is used as key.
+      if set to None, the key is ignored.
 
   Returns:
     list of columns written to the output csv
@@ -671,7 +678,7 @@ def file_write_csv_dict(py_dict: dict,
         value_column_name = 'value'
         columns.append(value_column_name)
     # Use the first column for the key.
-    if key_column_name is None:
+    if key_column_name is '':
         key_column_name = columns[0]
 
     # Get the output filename
@@ -833,17 +840,15 @@ def file_open_google_spreadsheet(url: str,
     google spreadsheet object for the given url
   """
     # Get a handle for the whole spreadsheet
-    while retries >= 0:
-        try:
-            gs = _file_get_gspread_client().open_by_url(url)
-            return gs
-        except gspread.exceptions.APIError as e:
-            if retries > 0:
-                logging.debug(
-                    f'Retrying opening spreadsheet: {url}, retry:{retries}')
-                retries -= 1
-    logging.error(f'Failed to open {url}')
-    return None
+    gs = retry_call(
+        _file_get_gspread_client().open_by_url,
+        f_args=[url],
+        exceptions=gspread.exceptions.APIError,
+        tries=retries,
+    )
+    if gs is None:
+        logging.error(f'Failed to open {url}')
+    return gs
 
 
 def file_get_gspread_worksheet(
@@ -997,24 +1002,24 @@ def file_copy_to_spreadsheet(filename: str,
     return ws.url
 
 
-def file_get_sample_bytes(file: str, size: int = 4096) -> bytes:
+def file_get_sample_bytes(file: str, byte_count: int = 4096) -> bytes:
     """Returns sample bytes from file.
 
     Args:
       file: a file name or an open file handle.
-      size: buyes to be returned.
+      byte_count: buyes to be returned.
 
     Returns:
-      bytes of the given size.
+      bytes of the given byte_count.
       The file handle is reset to the start.
     """
     if isinstance(file, io.TextIOWrapper):
         # File is a handle. Get the filename
         file = file.name
     if isinstance(file, str):
-        logging.debug(f'Getting sample {size} bytes from {file}')
+        logging.debug(f'Getting sample {byte_count} bytes from {file}')
         with FileIO(file, 'rb') as fh:
-            return fh.read(size)
+            return fh.read(byte_count)
     else:
         return b''
 
@@ -1090,8 +1095,8 @@ def file_get_csv_reader_options(
     if not delim_chars:
         # Get non alphanumeric characters from data.
         delim_chars = {c for c in rows[0].strip() if not c.isalnum()}
-        logging.level_debug() and logging.debug(
-            f'Looking for delimiter in {file} among {delim_chars}')
+        logging.debug(f'Looking for delimiter in %s among %s', file,
+                      delim_chars)
     char_counts = {c: [] for c in delim_chars}
     for index in range(1, len(rows) - 1):
         # Count possible delimiter characters per row
@@ -1107,8 +1112,7 @@ def file_get_csv_reader_options(
             if c_min > 0 and c_min == c_med:
                 result['delimiter'] = c
                 break
-    logging.level_debug() and logging.debug(
-        f'Got options for file: {file}: {result}')
+    logging.debug('Got options for file: %s: result = %s', file, result)
     return result
 
 
