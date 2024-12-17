@@ -64,6 +64,47 @@ The attributes used for the import are as follows
 
 
 
+### Import Procedure
+
+#### Downloading the input files using scripts.
+    - There are 3 scripts created to download the input files.
+    - fetch_ncid.py
+    - download_config.py
+    - download_file_details.py
+    - download.py
+
+    #### fetch_ncid.py script
+     - The code is a Python function that retrieves National Center for Education Statistics (NCES) IDs for a given school and year. It automates interacting with a webpage using Selenium to select options and then extracts the corresponding IDs.
+
+    ##### download_config.py script  
+     - The download_config.py script has all the configurations required to download the file.
+     - It has filter, download url, maximum tries etc. The values are same under all cases.
+
+    ##### download_config.py script
+     - The download_file_details.py script has values for "default column", "columns to be downloaded" and "key coulmns".
+     - Every input file can only accommodate 60 columns. In Public Schools multiple input files will be downloaded. All these input files will have a common column called as "Key Column" which acts as primary key.
+     - In the "Public columns to be downloaded" create a list of columns.
+        -ex: PUBLIC_COLUMNS = ["State Name [Public School]", "State Abbr [Public School]", "School Name [Public School]"]
+     - Steps to add columns to the list.
+        - Under "Select Table Columns" 
+        - select the "Information" tab 
+        - expand the hit area "BasicInformation" 
+        - right click on the desired column checkbox and choose inspect 
+        - from the elements on the right hand side, check the number assigned to "value" and add confirm the column under that list which corresponds to value.
+
+    ##### download.py script
+     - The download.py script is the main script. It considers the import_name and year to be downloaded. It downloads, extracts and places the input csv in "input_files" folder under the desired school directory.
+
+
+### Command to Download input file
+  - `/bin/python3 scripts/us_nces/demographics/download.py --import_name={"PrivateSchool"(or)"District"(or)"PublicSchool"} --years_to_download= "{select the available years mentioned under each school type}"`
+
+    For Example:  `/bin/python3 scripts/us_nces/demographics/download.py --import_name="PublicSchool" --years_to_download="2023"`.
+    - The input_files folder containing all the files will be present in: 
+    `scripts/us_nces/demographics/public_school/input_files`
+ - Note: Give one year at a time for District and Public Schools as there are large number of column values.
+ 
+
 #### Cleaned Data
 import_name consists of the school name being used 
 - "private_school"
@@ -133,23 +174,3 @@ Run the test cases
 - `/bin/python3 -m unittest scripts/us_nces/demographics/school_district/process_test.py`
 - `/bin/python3 -m unittest scripts/us_nces/demographics/public_school/process_test.py`
 
-
-
-### Import Procedure
-
-The below script will download the data and extract it.
-
-`/bin/python3 scripts/us_nces/demographics/download.py`
-
-For Example:  `/bin/python3 scripts/us_nces/demographics/download.py --import_name="PublicSchool" --years_to_download="2023"`.
-- The input_files folder containing all the files will be present in: 
-`scripts/us_nces/demographics/public_school/input_files`
-
-
-The below script will clean the data, Also generate final csv, mcf and tmcf files.
-- for Private Schools:
-`/bin/python3 scripts/us_nces/demographics/private_school/process.py`
-- for School Districts:
-`/bin/python3 scripts/us_nces/demographics/school_district/process.py`
-- for Public Schools:
-`/bin/python3 scripts/us_nces/demographics/public_school/process.py`
