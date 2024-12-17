@@ -60,7 +60,7 @@
             'aggregate':
                 'max',
             'rename_columns': {
-              'band:1': 'T2MWET',
+                'band:1': 'T2MWET',
             },
             'input_data_filter': {
                 # Convert WetBulbTemperature to Celsius
@@ -92,7 +92,8 @@
                 'events',
 
             # Process all data files for the whole year.
-            'input_files': 'tmp/fixed-temp/*.csv',
+            'input_files':
+                'tmp/fixed-temp/*.csv',
             #'input_files':
             #    'gs://{gcs_bucket}/{gcs_folder}/raster_csv/{year}/*{year}*raster_csv.csv',
             'output_dir':
