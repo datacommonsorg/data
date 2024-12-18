@@ -360,13 +360,16 @@ class USEducation:
             'County_code'].apply(lambda x: 'geoId/' + x if x != '' else '')
         self._final_df_place[
             'State_code'] = "geoId/" + self._final_df_place['State_code']
+
         def add_leading_zero(text):
             parts = text.split('/')
             if len(parts) == 2 and len(parts[1]) == 1:
                 return f"{parts[0]}/0{parts[1]}"
             else:
                 return text
-        self._final_df_place['State_code'] = self._final_df_place['State_code'].apply(add_leading_zero)
+
+        self._final_df_place['State_code'] = self._final_df_place[
+            'State_code'].apply(add_leading_zero)
         # Renaming the property values according to DataCommons.
         self._final_df_place = replace_values(self._final_df_place,
                                               replace_with_all_mappers=False,
@@ -727,10 +730,10 @@ class USEducation:
             df_cleaned["school_state_code"] = "nces/" + df_cleaned[
                 "School ID - NCES Assigned"]
         elif self._import_name == "district_school":
-            df_cleaned['Agency ID - NCES Assigned'] = df_cleaned['Agency ID - NCES Assigned'].astype(str).str.zfill(7)
+            df_cleaned['Agency ID - NCES Assigned'] = df_cleaned[
+                'Agency ID - NCES Assigned'].astype(str).str.zfill(7)
             df_cleaned["school_state_code"] = \
                 "geoId/sch" + df_cleaned["Agency ID - NCES Assigned"]
-
 
         # Consider only the required columns for Demographics
         curr_cols = df_cleaned.columns.values.tolist()
@@ -839,7 +842,8 @@ class USEducation:
         # Dropping empty obsevation values.
         df_cleaned["observation"] = df_cleaned["observation"].replace(
             to_replace={'': pd.NA})
-        df_cleaned = df_cleaned.drop(df_cleaned[df_cleaned["observation"] < 0].index)
+        df_cleaned = df_cleaned.drop(
+            df_cleaned[df_cleaned["observation"] < 0].index)
         df_cleaned = df_cleaned.dropna(subset=['observation'])
 
         return df_cleaned
@@ -939,9 +943,11 @@ class USEducation:
             self._final_df_place.to_csv(self._csv_file_place,
                                         index=False,
                                         quoting=csv.QUOTE_NONNUMERIC)
-            for Physical_Address, group in self._final_df_place.groupby('Physical_Address'):
-                if len(group) >1:
-                    city_dict[Physical_Address] = group['school_state_code'].tolist()
+            for Physical_Address, group in self._final_df_place.groupby(
+                    'Physical_Address'):
+                if len(group) > 1:
+                    city_dict[Physical_Address] = group[
+                        'school_state_code'].tolist()
 
         if self._import_name == "district_school":
             self._transform_district_place()

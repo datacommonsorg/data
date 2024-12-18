@@ -77,8 +77,7 @@ RENAMING_DISTRICT_COLUMNS = {
     "State Name": "State_Name",
     "Location ZIP4": "Location_ZIP4",
     "State Abbr": "State_Abbr",
-    "Locale":"Locale",
-    "Latitude":"Latitude",
-    "Longitude":"Longitude"
-    
+    "Locale": "Locale",
+    "Latitude": "Latitude",
+    "Longitude": "Longitude"
 }
