@@ -18,22 +18,27 @@ Spreadsheets.
 """
 
 import ast
+import chardet
 import csv
 import fnmatch
 import glob
+import gspread
+import io
 import json
 import os
 import pickle
 import pprint
 import sys
 import tempfile
-from typing import Union
+
+import numpy as np
 
 from absl import app
 from absl import logging
 from aggregation_util import aggregate_dict, aggregate_value
 from google.cloud import storage
-import gspread
+from retry.api import retry_call
+from typing import Union
 
 
 class FileIO:
@@ -428,9 +433,12 @@ def file_get_name(file_path: str,
   Returns:
     file name combined from path, suffix and extension.
   """
-    # Create the file directory if it doesn't exist.
+    if not file_path:
+        return None
     if file_is_google_spreadsheet(file_path):
+        # Don't modify spreadsheets
         return file_path
+    # Create the file directory if it doesn't exist.
     file_makedirs(file_path)
     file_prefix, ext = os.path.splitext(file_path)
     if file_prefix.endswith(suffix):
@@ -508,6 +516,7 @@ def file_load_csv_dict(
     value_column: str = None,
     delimiter: str = ',',
     config: dict = {},
+    key_index: bool = False,
 ) -> dict:
     """Returns a dictionary loaded from a CSV file.
 
@@ -540,18 +549,26 @@ def file_load_csv_dict(
     config: dictionary of aggregation settings in case there are multiple rows
       with the same key. refer to aggregation_util.aggregate_dict for config
       settings.
-
+    key_index: if True, each row is loaded with a unique key for row index.
+      Overrides key_column and uses index as key.
   Returns:
     dictionary of {key:value} loaded from the CSV file.
   """
     csv_dict = {}
     input_files = file_get_matching(filename)
     logging.debug(f'Loading dict from csv files: {input_files}')
+    if key_column and key_index:
+        raise ValueError(
+            f'Both Key_column: {key_column} and key_index set for {filename}')
+
     for filename in input_files:
         num_rows = 0
         # Load each CSV file
         with FileIO(filename) as csvfile:
-            reader = csv.DictReader(csvfile, delimiter=delimiter)
+            reader = csv.DictReader(
+                csvfile,
+                **file_get_csv_reader_options(csvfile,
+                                              {'delimiter': delimiter}))
             if reader.fieldnames:
                 # Get the key and value column names
                 if not key_column:
@@ -567,7 +584,9 @@ def file_load_csv_dict(
             for row in reader:
                 # Get the key for the row.
                 key = None
-                if key_column in row:
+                if key_index:
+                    key = len(csv_dict)
+                elif key_column in row:
                     key = row.pop(key_column)
                 # Get the value for the key
                 value = None
@@ -597,7 +616,8 @@ def file_load_csv_dict(
 
 def file_write_csv_dict(py_dict: dict,
                         filename: str,
-                        columns: list = None) -> list:
+                        columns: list = None,
+                        key_column_name: str = 'key') -> list:
     """Returns the filename after writing py_dict with a csv row per item.
 
   Each dictionary items is written as a row in the CSV file.
@@ -629,6 +649,9 @@ def file_write_csv_dict(py_dict: dict,
       is used as the key's column name. If no columns are specified for values,
       column names are picked from each entry's value if the value is a dict.
       Else the value is written as column name 'value'.
+    key_column_name: name of the column used as key.
+      if '', the first column is used as key.
+      if set to None, the key is ignored.
 
   Returns:
     list of columns written to the output csv
@@ -638,8 +661,10 @@ def file_write_csv_dict(py_dict: dict,
     # Get the list of columns
     value_column_name = ''
     if not columns:
+        columns = []
         # Add a columns for key.
-        columns = ['key']
+        if key_column_name:
+            columns.append(key_column_name)
     if len(columns) <= 1:
         # Get columns across all entries.
         for key, value in py_dict.items():
@@ -652,7 +677,8 @@ def file_write_csv_dict(py_dict: dict,
         value_column_name = 'value'
         columns.append(value_column_name)
     # Use the first column for the key.
-    key_column_name = columns[0]
+    if key_column_name is '':
+        key_column_name = columns[0]
 
     # Get the output filename
     output_files = file_get_matching(filename)
@@ -799,7 +825,9 @@ def file_is_google_spreadsheet(filename: str) -> bool:
     return False
 
 
-def file_open_google_spreadsheet(url: str) -> gspread.spreadsheet.Spreadsheet:
+def file_open_google_spreadsheet(url: str,
+                                 retries: int = 3
+                                ) -> gspread.spreadsheet.Spreadsheet:
     """Returns the google spreasheet handle.
 
   Assumes caller has access to the spreadsheet.
@@ -811,7 +839,14 @@ def file_open_google_spreadsheet(url: str) -> gspread.spreadsheet.Spreadsheet:
     google spreadsheet object for the given url
   """
     # Get a handle for the whole spreadsheet
-    gs = _file_get_gspread_client().open_by_url(url)
+    gs = retry_call(
+        _file_get_gspread_client().open_by_url,
+        f_args=[url],
+        exceptions=gspread.exceptions.APIError,
+        tries=retries,
+    )
+    if gs is None:
+        logging.error(f'Failed to open {url}')
     return gs
 
 
@@ -943,7 +978,10 @@ def file_copy_to_spreadsheet(filename: str,
     # Read the rows from the source file
     rows = []
     with FileIO(filename) as file:
-        csv_reader = csv.reader(file, skipinitialspace=True, escapechar='\\')
+        csv_reader = csv.reader(file,
+                                skipinitialspace=True,
+                                escapechar='\\',
+                                **file_get_csv_reader_options(file))
         for row in csv_reader:
             rows.append(row)
 
@@ -961,6 +999,120 @@ def file_copy_to_spreadsheet(filename: str,
     logging.debug(f'Wrote {len(rows)} rows from {filename} into'
                   f' spreadsheet:{url},{ws.title}')
     return ws.url
+
+
+def file_get_sample_bytes(file: str, byte_count: int = 4096) -> bytes:
+    """Returns sample bytes from file.
+
+    Args:
+      file: a file name or an open file handle.
+      byte_count: buyes to be returned.
+
+    Returns:
+      bytes of the given byte_count.
+      The file handle is reset to the start.
+    """
+    if isinstance(file, io.TextIOWrapper):
+        # File is a handle. Get the filename
+        file = file.name
+    if isinstance(file, str):
+        logging.debug(f'Getting sample {byte_count} bytes from {file}')
+        with FileIO(file, 'rb') as fh:
+            return fh.read(byte_count)
+    else:
+        return b''
+
+
+def file_get_encoding(file: str,
+                      rawdata: bytes = None,
+                      default: str = 'utf-8-sig') -> str:
+    """Returns the encoding for the file
+
+    Args:
+      file: filename whose encoding is required.
+      rawdata: content whose encoding is to be detected if available.
+      default: default encoding to be retruned if it can't be determined.
+
+    Returns:
+      string with encoding such as 'utf8'
+    """
+    if rawdata is None:
+        rawdata = file_get_sample_bytes(file)
+    encoding_result = chardet.detect(rawdata)
+    if encoding_result:
+        encoding = encoding_result.get('encoding')
+        if encoding:
+            return encoding
+    return default
+
+
+def file_get_csv_reader_options(
+        file: str,
+        default_options: dict = {},
+        data: str = None,
+        encoding: str = None,
+        delim_chars: list = [',', '	', ';', '|', ':']) -> dict:
+    """Returns a dictionary with options for the CSV file reader.
+
+    Args:
+      file: name of the csv file to get encoding
+      default_options: default options returned if not detected
+        such as 'delimiter'.
+      data: string for which delimiter is to be detected
+        If data is not given, sample data is read from the file.
+      encoding: character encoding in the file.
+      delim_chars: list of possible delimiter characters.
+        If not set, non-alphanumeric characters from the first line
+        are used as candidate delimiter characters.
+
+    Returns:
+      dict with the following:
+        'delimiter': delimiter character for CSV files.
+        'dialect': File dialect, such as 'unix', 'excel'
+    """
+    result = dict(default_options)
+
+    if data is None:
+        # Get data from file decoded with the right encoding
+        rawdata = file_get_sample_bytes(file)
+        if encoding is None:
+            encoding = file_get_encoding(file, rawdata=rawdata)
+        data = rawdata.decode(encoding)
+
+    # Get the dialect for the data
+    try:
+        dialect = csv.Sniffer().sniff(data)
+    except csv.Error:
+        # Use default as excel as it may not be detected well.
+        dialect = 'excel'
+    if dialect:
+        result['dialect'] = dialect
+
+    # Get CSV delimiter by counting possible delimiter characters
+    # across rows and picking the most common delimiter.
+    rows = data.split('\n')
+    if not delim_chars:
+        # Get non alphanumeric characters from data.
+        delim_chars = {c for c in rows[0].strip() if not c.isalnum()}
+        logging.debug(f'Looking for delimiter in %s among %s', file,
+                      delim_chars)
+    char_counts = {c: [] for c in delim_chars}
+    for index in range(1, len(rows) - 1):
+        # Count possible delimiter characters per row
+        row = rows[index]
+        for char in delim_chars:
+            char_counts[char].append(row.count(char))
+    # Get the char with the same count across rows.
+    for c in char_counts.keys():
+        c_counts = char_counts[c]
+        if c_counts:
+            c_min = min(c_counts)
+            c_med = np.median(c_counts)
+            if c_min > 0 and c_min == c_med:
+                result['delimiter'] = c
+                break
+    logging.debug('Got options for file: %s: result = %s', file, result)
+    return result
 
 
 def file_is_csv(filename: str) -> bool:

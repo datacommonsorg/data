@@ -2,6 +2,7 @@
 
 absl-py
 arcgis2geojson
+chardet
 dataclasses==0.6
 datacommons==1.4.3
 frozendict
