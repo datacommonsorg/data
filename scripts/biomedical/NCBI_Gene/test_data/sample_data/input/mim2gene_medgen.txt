@@ -1,0 +1,42 @@
+#MIM number	GeneID	type	Source	MedGenCUI	Comment
+143870	55811	phenotype	 GeneMap	C0342639	susceptibility
+147150	4599	gene	-	-	-
+147935	5267	gene	-	-	-
+300526	11152	gene	-	-	-
+300610	3188	gene	-	-	-
+300840	11230	gene	-	-	-
+300894	11152	phenotype	 GeneMap	C3550973	-
+300902	6173	gene	-	-	-
+300986	3188	phenotype	 GeneMap	C4310814	-
+601841	5104	gene	-	-	-
+602621	1525	gene	-	-	-
+603102	1362	gene	-	-	-
+603482	8945	gene	-	-	-
+604230	23536	gene	-	-	-
+604817	23563	gene	-	-	-
+605205	55811	gene	-	-	-
+606559	10346	gene	-	-	-
+606956	10172	gene	-	-	-
+607294	60436	gene	-	-	-
+607390	23648	gene	-	-	-
+607406	8987	gene	-	-	-
+607732	23098	gene	-	-	-
+607946	79602	gene	-	-	-
+610289	64064	gene	-	-	-
+610609	51659	gene	-	-	-
+610853	25909	gene	-	-	-
+612104	79035	gene	-	-	-
+612429	91975	gene	-	-	-
+614604	55625	gene	-	-	-
+614864	54919	gene	-	-	-
+614874	54919	phenotype	 GeneMap; GeneReviews	C3543825	-
+614949	79583	gene	-	-	-
+614970	79583	phenotype	 GeneMap	C3554235	-
+615179	11152	phenotype	 NCBI curation	C3808786	-
+615397	79583	phenotype	 GeneMap	C3809352	-
+616815	147007	gene	-	-	-
+616829	147007	phenotype	 GeneMap	C4225190	-
+616994	55969	phenotype	 GeneMap	C5676895	question
+619925	51019	gene	-	-	-
+619960	55969	gene	-	-	-
+620758	100652748	gene	-	-	-
