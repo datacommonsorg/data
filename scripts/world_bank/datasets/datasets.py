@@ -13,6 +13,12 @@
 # limitations under the License.
 """Processes WB datasets.
 
+update september 2024:
+To run all processing methods , please do not pass the mode 
+Run: python3 datasets.py
+
+Or If required to check issue in any individual process follow all the steps as below:
+
 Supports the following tasks:
 
 ============================
@@ -41,7 +47,7 @@ load_stat_vars: Loads stat vars from a mapping file specified via the `stat_vars
 
 Use this for debugging to ensure that the mappings load correctly and fix any errors logged by this operation.
 
-Run: python3 datasets.py --mode=load_stat_vars --stat_vars_file=/path/to/sv_mappings.csv
+Run: python3 datasets.py --mode=load_stat_vars --stat_vars_file=/path/to/statvars.csv
 
 See `sample-svs.csv` for a sample mappings file.
 
@@ -53,7 +59,7 @@ The stat vars file to be used for mappings should be specified using the `stat_v
 
 It only operates on files that are named '*_CSV.zip'.
 
-Run: python3 datasets.py --mode=write_observations --stat_vars_file=/path/to/sv_mappings.csv
+Run: python3 datasets.py --mode=write_observations --stat_vars_file=/path/to/statvars.csv
 """
 
 import requests
@@ -66,11 +72,13 @@ import csv
 import re
 import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
+from urllib3.exceptions import HTTPError
 from absl import flags
 import zipfile
 import codecs
 from itertools import repeat
 from datetime import datetime
+from retry import retry
 
 FLAGS = flags.FLAGS
 
@@ -84,7 +92,7 @@ class Mode:
 
 
 flags.DEFINE_string(
-    'mode', Mode.WRITE_OBSERVATIONS,
+    'mode', None,
     f"Specify one of the following modes: {Mode.FETCH_DATASETS}, {Mode.DOWNLOAD_DATASETS}, {Mode.WRITE_WB_CODES}, {Mode.LOAD_STAT_VARS}, {Mode.WRITE_OBSERVATIONS}"
 )
 
@@ -111,7 +119,7 @@ os.makedirs(DATASET_VIEWS_RESPONSE_DIR, exist_ok=True)
 os.makedirs(DOWNLOADS_DIR, exist_ok=True)
 os.makedirs(OBSERVATIONS_DIR, exist_ok=True)
 
-POOL_SIZE = max(2, multiprocessing.cpu_count() - 1)
+POOL_SIZE = 3  #max(2, multiprocessing.cpu_count() - 1)
 
 DOWNLOADABLE_RESOURCE_TYPES = set(["Download", "Dataset"])
 
@@ -131,7 +139,7 @@ DATASETS_CSV_COLUMNS = [
 
 def download_datasets():
     '''Downloads dataset files. This is a very expensive operation so run it with care. It assumes that the datasets CSV is already available.'''
-
+    logging.info('start download_datasets')
     with open(DATASETS_CSV_FILE_PATH, 'r') as f:
         csv_rows = list(csv.DictReader(f))
         download_urls = []
@@ -139,11 +147,13 @@ def download_datasets():
             download_url = csv_row.get(DATASET_DOWNLOAD_URL_COLUMN_NAME)
             if download_url:
                 download_urls.append(download_url)
-
+    try:
         with multiprocessing.Pool(POOL_SIZE) as pool:
             pool.starmap(download, zip(download_urls))
 
         logging.info('# files downloaded: %s', len(download_urls))
+    except Exception as e:
+        logging.error("Error downloading %s", exc_info=e)
 
 
 def download(url):
@@ -154,16 +164,24 @@ def download(url):
         return
 
     logging.info('Downloading %s to file %s', url, file_path)
+
+    # response = requests.get(url)
+    # Using urllib3 for downloading content to avoid SSL issue.
+    # See: https://github.com/urllib3/urllib3/issues/2653#issuecomment-1165418616
     try:
-        # response = requests.get(url)
-        # Using urllib3 for downloading content to avoid SSL issue.
-        # See: https://github.com/urllib3/urllib3/issues/2653#issuecomment-1165418616
-        with urllib3.PoolManager(ssl_context=ctx) as http:
-            response = http.request("GET", url)
+        response = download_retry(url)
         with open(file_path, 'wb') as f:
             f.write(response.data)
     except Exception as e:
         logging.error("Error downloading %s", url, exc_info=e)
+
+
+@retry(tries=3, delay=2, backoff=2)
+def download_retry(url):
+    with urllib3.PoolManager(ssl_context=ctx, timeout=90) as http:
+        logging.info('# retrying for url: %s', url)
+        response = http.request("GET", url)
+        return response
 
 
 def fetch_and_write_datasets_csv():
@@ -201,7 +219,7 @@ def get_datasets_csv_rows():
     return csv_rows
 
 
-DATASET_URL_FIELDS = ['harvet_source', 'url', 'website_url']
+DATASET_URL_FIELDS = ['website_url', 'harvest_source', 'url']
 
 # URLs with this pattern are downloadable only if the URL is trunctated until it. Probably a bug in WB APIs.
 VERSION_ID_PATTERN = '?versionId='
@@ -277,11 +295,15 @@ def load_json(url, params, response_file):
             return json.load(f)
 
     logging.info("Fetching url %s, params %s", url, params)
-    response = requests.get(url, params=params).json()
-    with open(response_file, 'w') as f:
-        logging.info('Writing response to file %s', response_file)
-        json.dump(response, f, indent=2)
-    return response
+    try:
+        response = requests.get(url, params=params)
+        with open(response_file, 'w') as f:
+            logging.info('Writing response to file %s', response_file)
+            json.dump(response.json(), f, indent=2)
+        return True
+    except Exception as e:
+        print(f"Http error {e}")
+        return None
 
 
 def load_json_file(json_file):
@@ -351,7 +373,8 @@ def write_wb_codes():
 def get_all_codes():
     all_codes = {}
     for file_name in os.listdir(DOWNLOADS_DIR):
-        if file_name.endswith(CSV_ZIP_FILE_SUFFIX):
+        if file_name.endswith(CSV_ZIP_FILE_SUFFIX) or file_name.endswith(
+                '_csv.zip'):
             zip_file = f"{DOWNLOADS_DIR}/{file_name}"
             codes = get_codes_from_zip(zip_file)
             if codes:
@@ -366,47 +389,55 @@ def get_all_codes():
 
 
 def get_codes_from_zip(zip_file):
-    with zipfile.ZipFile(zip_file, 'r') as zip:
-        (_, series_file) = get_data_and_series_file_names(zip)
-        if series_file is None:
-            logging.warning('No series file found in ZIP file: %s', zip_file)
-        else:
-            with zip.open(series_file, 'r') as csv_file:
-                series_rows = sanitize_csv_rows(
-                    list(csv.DictReader(codecs.iterdecode(csv_file, 'utf-8'))))
-                num_codes = len(series_rows)
-                logging.info('# code(s) in %s: %s', zip_file, num_codes)
-                if num_codes == 0:
-                    return {}
+    try:
+        with zipfile.ZipFile(zip_file, 'r') as zip:
+            (_, series_file) = get_data_and_series_file_names(zip)
+            if series_file is None:
+                logging.warning('No series file found in ZIP file: %s',
+                                zip_file)
+            else:
+                with zip.open(series_file, 'r') as csv_file:
+                    series_rows = sanitize_csv_rows(
+                        list(
+                            csv.DictReader(codecs.iterdecode(csv_file,
+                                                             'utf-8'))))
+                    num_codes = len(series_rows)
+                    logging.info('# code(s) in %s: %s', zip_file, num_codes)
+                    if num_codes == 0:
+                        return {}
 
-                if series_rows[0].get(SERIES_CODE_KEY) is None:
-                    logging.error('No series code found in %s, sample row: %s',
-                                  zip_file, series_rows[0])
-                    return {}
+                    if series_rows[0].get(SERIES_CODE_KEY) is None:
+                        logging.error(
+                            'No series code found in %s, sample row: %s',
+                            zip_file, series_rows[0])
+                        return {}
 
-                codes = {}
-                for series_row in series_rows:
-                    code = series_row.get(SERIES_CODE_KEY)
-                    codes[code] = {
-                        SERIES_CODE_KEY:
-                            code,
-                        INDICATOR_NAME_KEY:
-                            series_row.get(INDICATOR_NAME_KEY),
-                        NUM_DATASETS_KEY:
-                            1,
-                        TOPIC_KEY:
-                            series_row.get(TOPIC_KEY),
-                        UNIT_OF_MEASURE_KEY:
-                            series_row.get(UNIT_OF_MEASURE_KEY),
-                        SHORT_DEFINITION_KEY:
-                            series_row.get(SHORT_DEFINITION_KEY),
-                        LONG_DEFINITION_KEY:
-                            series_row.get(LONG_DEFINITION_KEY),
-                        LICENSE_TYPE_KEY:
-                            series_row.get(LICENSE_TYPE_KEY),
-                    }
-                return codes
-        return {}
+                    codes = {}
+                    for series_row in series_rows:
+                        code = series_row.get(SERIES_CODE_KEY)
+                        codes[code] = {
+                            SERIES_CODE_KEY:
+                                code,
+                            INDICATOR_NAME_KEY:
+                                series_row.get(INDICATOR_NAME_KEY),
+                            NUM_DATASETS_KEY:
+                                1,
+                            TOPIC_KEY:
+                                series_row.get(TOPIC_KEY),
+                            UNIT_OF_MEASURE_KEY:
+                                series_row.get(UNIT_OF_MEASURE_KEY),
+                            SHORT_DEFINITION_KEY:
+                                series_row.get(SHORT_DEFINITION_KEY),
+                            LONG_DEFINITION_KEY:
+                                series_row.get(LONG_DEFINITION_KEY),
+                            LICENSE_TYPE_KEY:
+                                series_row.get(LICENSE_TYPE_KEY),
+                        }
+                    return codes
+            return {}
+    except Exception as e:
+        print("There is some problem in processing the file", e,
+              "File name is:", zipfile)
 
 
 def write_csv(csv_file_path, csv_columns, csv_rows):
@@ -426,15 +457,34 @@ def write_all_observations(stat_vars_file):
 
     zip_files = []
     for file_name in os.listdir(DOWNLOADS_DIR):
-        if file_name.endswith(CSV_ZIP_FILE_SUFFIX):
+        if file_name.endswith(CSV_ZIP_FILE_SUFFIX) or file_name.endswith(
+                '_csv.zip'):
             zip_files.append(f"{DOWNLOADS_DIR}/{file_name}")
 
     with multiprocessing.Pool(POOL_SIZE) as pool:
         pool.starmap(write_observations_from_zip, zip(zip_files, repeat(svs)))
 
+    check_allFiles_processed()
+
     end = datetime.now()
     logging.info('End: %s', end)
     logging.info('Duration: %s', str(end - start))
+
+
+def check_allFiles_processed():
+    expected_files = [
+        'ASPIRE_CSV_obs.csv', 'DB_CSV_obs.csv', 'Economic_Fitness_CSV_obs.csv',
+        'EdStats_CSV_obs.csv', 'FINDEX_CSV_obs.csv', 'GFDD_CSV_obs.csv',
+        'GPFI_CSV_obs.csv', 'HCI_CSV_obs.csv', 'HEFPI_CSV_obs.csv',
+        'IDA_CSV_obs.csv', 'MDG_CSV_obs.csv', 'PovStats_CSV_obs.csv',
+        'SDG_CSV_obs.csv', 'SE4ALL_CSV_obs.csv',
+        'Subnational-Population_CSV_obs.csv', 'Subnational-Poverty_CSV_obs.csv',
+        'WWBI_CSV_obs.csv'
+    ]
+    expected_files = sorted(set(expected_files))
+    actual_output_files = sorted(set(os.listdir(OBSERVATIONS_DIR)))
+    if actual_output_files != expected_files:
+        logging.fatal('actual output files are not equal to expected')
 
 
 def write_observations_from_zip(zip_file, svs):
@@ -453,27 +503,33 @@ def write_observations_from_zip(zip_file, svs):
 
 
 def get_observations_from_zip(zip_file, svs):
-    with zipfile.ZipFile(zip_file, 'r') as zip:
-        (data_file, _) = get_data_and_series_file_names(zip)
-        if data_file is None:
-            logging.warning('No data file found in ZIP file: %s', zip_file)
-            return []
-        else:
-            # Use name of file (excluding the extension) as the measurement method
-            measurement_method = f"{WORLD_BANK_MEASUREMENT_METHOD_PREFIX}_{zip_file.split('/')[-1].split('.')[0]}"
-            with zip.open(data_file, 'r') as csv_file:
-                data_rows = sanitize_csv_rows(
-                    list(csv.DictReader(codecs.iterdecode(csv_file, 'utf-8'))))
-                num_rows = len(data_rows)
-                logging.info('# data rows in %s: %s', zip_file, num_rows)
+    try:
+        with zipfile.ZipFile(zip_file, 'r') as zip:
+            (data_file, _) = get_data_and_series_file_names(zip)
+            if data_file is None:
+                logging.warning('No data file found in ZIP file: %s', zip_file)
+                return []
+            else:
+                # Use name of file (excluding the extension) as the measurement method
+                measurement_method = f"{WORLD_BANK_MEASUREMENT_METHOD_PREFIX}_{zip_file.split('/')[-1].split('.')[0]}"
+                with zip.open(data_file, 'r') as csv_file:
+                    data_rows = sanitize_csv_rows(
+                        list(
+                            csv.DictReader(codecs.iterdecode(csv_file,
+                                                             'utf-8'))))
+                    num_rows = len(data_rows)
+                    logging.info('# data rows in %s: %s', zip_file, num_rows)
 
-                obs_csv_rows = []
-                for data_row in data_rows:
-                    obs_csv_rows.extend(
-                        get_observations_from_data_row(data_row, svs,
-                                                       measurement_method))
+                    obs_csv_rows = []
+                    for data_row in data_rows:
+                        obs_csv_rows.extend(
+                            get_observations_from_data_row(
+                                data_row, svs, measurement_method))
 
-                return obs_csv_rows
+                    return obs_csv_rows
+    except Exception as e:
+        print("There is problem while processing the zip file:", e)
+        return []
 
 
 def get_observations_from_data_row(data_row, svs, measurement_method):
@@ -571,19 +627,27 @@ def get_data_and_series_file_names(zip):
 
 
 def main(_):
-    match FLAGS.mode:
-        case Mode.FETCH_DATASETS:
-            download_datasets()
-        case Mode.DOWNLOAD_DATASETS:
-            fetch_and_write_datasets_csv()
-        case Mode.WRITE_WB_CODES:
-            write_wb_codes()
-        case Mode.LOAD_STAT_VARS:
-            load_stat_vars(FLAGS.stat_vars_file)
-        case Mode.WRITE_OBSERVATIONS:
-            write_all_observations(FLAGS.stat_vars_file)
-        case _:
-            logging.error('No mode specified.')
+    logging.info(FLAGS.mode)
+    if not FLAGS.mode:
+        fetch_and_write_datasets_csv()
+        download_datasets()
+        write_wb_codes()
+        load_stat_vars(FLAGS.stat_vars_file)
+        write_all_observations(FLAGS.stat_vars_file)
+    else:
+        match FLAGS.mode:
+            case Mode.FETCH_DATASETS:
+                fetch_and_write_datasets_csv()
+            case Mode.DOWNLOAD_DATASETS:
+                download_datasets()
+            case Mode.WRITE_WB_CODES:
+                write_wb_codes()
+            case Mode.LOAD_STAT_VARS:
+                load_stat_vars(FLAGS.stat_vars_file)
+            case Mode.WRITE_OBSERVATIONS:
+                write_all_observations(FLAGS.stat_vars_file)
+            case _:
+                logging.error('No mode specified.')
 
 
 if __name__ == '__main__':
