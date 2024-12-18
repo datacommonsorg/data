@@ -1,0 +1,22 @@
+Node: E:medgen->E1
+typeOf: dcs:MedGenConceptUniqueIdentifier
+dcid: C:medgen->dcid
+name: C:medgen->name
+atcCode: C:medgen->dcid_atc_code
+compoundID: C:medgen->dcid_compound
+conceptUniqueIdentifier C:medgen->CUI
+description: C:medgen->DEF
+descriptionSource: C:medgen->source_definition
+geneticAndRareDiseasesID: C:medgen->GARD
+humanPhenotypeOntologyID: C:medgen->HPO
+mondoID: C:medgen->MONDO
+medicalSubjectHeadingID: C:medgen->MeSH
+medicalSubjectHeadingID: C:medgen->dcid_mesh
+omimAllelicVariantID C:medgen->OMIM_Allelic_Variant
+omimID: C:medgen->OMIM
+omimPhenotypicSeriesID C:medgen->OMIM_Phenotypic_Series
+orphaNumber: C:medgen->Orphanet
+snomedCT: C:medgen->SNOMEDCT_US
+source: C:medgen->source
+
+
