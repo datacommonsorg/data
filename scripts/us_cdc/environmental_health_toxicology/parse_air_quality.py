@@ -255,7 +255,7 @@ def download_files(importname):
                                 )
                                 return
                             filename = os.path.join(_INPUT_FILE_PATH,
-                                                    f"{input_file_name}.csv")
+                                                    f"{input_file_name}")
                             with open(filename, 'wb') as f:
                                 f.write(response.content)
     except Exception as e:
