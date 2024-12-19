@@ -25,7 +25,7 @@ def download_gz_file(download_file_url: str, download_path: str) -> None:
 
     Args:
         download_file_url (str): url of the file to be downloaded as a string
-        download_path (str): local directory to dlownload the file
+        download_path (str): local directory to download the file
 
     Returns:
         None
@@ -49,7 +49,7 @@ def download_files(download_files_url: list, download_path: str) -> None:
 
     Args:
         download_file_url (str): url of the file to be downloaded as a string
-        download_path (str): local directory to dlownload the file
+        download_path (str): local directory to download the file
 
     Returns:
         None
@@ -64,4 +64,6 @@ def download_files(download_files_url: list, download_path: str) -> None:
         elif file_extension == "csv":
             download_gz_file(download_file_url, download_path)
         elif file_extension == "pdf":
+            download_gz_file(download_file_url, download_path)
+        else:
             download_gz_file(download_file_url, download_path)
