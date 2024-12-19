@@ -41,7 +41,7 @@ _FLAGS = flags.FLAGS
 _CONFIG = None
 
 # Columns in cleaned CSV
-_OUTPUT_COLUMNS = ('Year', 'Geo', 'StatVar', 'Quantity')
+_OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
 
 
 def state_resolver(state: str) -> str:
@@ -88,10 +88,11 @@ def _process_file(file_name: str, csv_reader: csv.DictReader,
 
         processed_dict = {
             'Year': year_with_month,
-            'Geo': geo_dcid,
             'StatVar': row_statvar['Node'],
-            'Quantity': quantity
+            'Quantity': quantity,
+            'Geo': geo_dcid,
         }
+        processed_dict['measurementMethod'] = ""
         csv_writer.writerow(processed_dict)
         statvars.append(row_statvar)
 
