@@ -162,7 +162,7 @@ def download(url):
     if os.path.exists(file_path):
         logging.info('Already downloaded %s to file %s', url, file_path)
         return
-
+    print("just checking")
     logging.info('Downloading %s to file %s', url, file_path)
 
     # response = requests.get(url)
