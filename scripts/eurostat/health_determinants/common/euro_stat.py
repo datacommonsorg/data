@@ -76,11 +76,13 @@ class EuroStat:
                  input_files: list,
                  csv_file_path: str = None,
                  mcf_file_path: str = None,
-                 tmcf_file_path: str = None) -> None:
+                 tmcf_file_path: str = None,
+                 import_name: str = None) -> None:
         self._input_files = input_files
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
+        self._import_name = import_name
         self._df = pd.DataFrame()
 
     # pylint: disable=pointless-statement
@@ -151,8 +153,8 @@ class EuroStat:
         df = df[df['age'] == 'TOTAL']
         df = replace_col_values(df)
 
-        if file_name in file_to_sv_mapping[import_name]:
-            df['SV'] = eval(file_to_sv_mapping[import_name][file_name])
+        if file_name in file_to_sv_mapping[self._import_name]:
+            df['SV'] = eval(file_to_sv_mapping[self._import_name][file_name])
         else:
             print(
                 '#########\nERROR: File (', file_name,
