@@ -30,6 +30,7 @@ from common import import_download_details, download
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')
 
+
 class EuroStatTobaccoConsumption(EuroStat):
     """
     This Class has requried methods to generate Cleaned CSV,
@@ -117,11 +118,16 @@ class EuroStatTobaccoConsumption(EuroStat):
             
         """
         download_details = import_download_details.download_details[import_name]
-        download_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', import_name,"input_files"))
+        download_path = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), '..', import_name,
+                         "input_files"))
         os.makedirs(download_path, exist_ok=True)
 
         for file in download_details["filenames"]:
-            download_files_urls = [download_details["input_url"] + str(file) +download_details["file_extension"]]
+            download_files_urls = [
+                download_details["input_url"] + str(file) +
+                download_details["file_extension"]
+            ]
             download.download_files(download_files_urls, download_path)
         return True
 
@@ -179,6 +185,7 @@ class EuroStatTobaccoConsumption(EuroStat):
 
     # pylint: enable=no-self-use
 
+
 def main(_):
     mode = _FLAGS.mode
     global import_name
@@ -187,14 +194,14 @@ def main(_):
         EuroStatTobaccoConsumption.download_data(import_name)
     if mode == "" or mode == "process":
         try:
-            input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                    "input_files")
+            input_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "input_files")
             ip_files = os.listdir(input_path)
             ip_files = [input_path + os.sep + file for file in ip_files]
 
             # Defining Output Files
-            data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                        "output")
+            data_file_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "output")
 
             csv_name = "eurostat_population_tobaccoconsumption.csv"
             mcf_name = "eurostat_population_tobaccoconsumption.mcf"
@@ -204,8 +211,9 @@ def main(_):
             mcf_path = os.path.join(data_file_path, mcf_name)
             tmcf_path = os.path.join(data_file_path, tmcf_name)
 
-            loader = EuroStatTobaccoConsumption(ip_files, cleaned_csv_path, mcf_path,
-                                                tmcf_path, import_name)
+            loader = EuroStatTobaccoConsumption(ip_files, cleaned_csv_path,
+                                                mcf_path, tmcf_path,
+                                                import_name)
             loader.generate_csv()
             loader.generate_mcf()
             loader.generate_tmcf()
@@ -213,6 +221,6 @@ def main(_):
         except Exception as e:
             logging.fatal(f'Download error')
 
-if __name__ == "__main__":
-    app.run(main) 
 
+if __name__ == "__main__":
+    app.run(main)
