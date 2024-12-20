@@ -22,7 +22,7 @@ python3 parse_air_quality_test.py input_file output_file
 
 import unittest
 import os
-from parse_air_quality import clean_air_quality_data
+from .parse_air_quality import clean_air_quality_data
 
 module_dir_ = os.path.dirname(__file__)
 
