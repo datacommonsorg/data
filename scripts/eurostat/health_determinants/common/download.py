@@ -19,6 +19,7 @@ import gzip
 import urllib.request
 from absl import logging
 
+
 def download_gz_file(download_file_url: str, download_path: str) -> None:
     """
     Function to download and unzip the file.
@@ -70,4 +71,3 @@ def download_files(download_files_url: list, download_path: str) -> None:
                 download_gz_file(download_file_url, download_path)
     except Exception as e:
         logging.fatal(f'Download Error: {e}')
-

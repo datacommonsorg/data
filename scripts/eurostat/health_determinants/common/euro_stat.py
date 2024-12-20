@@ -156,7 +156,10 @@ class EuroStat:
         if file_name in file_to_sv_mapping[self._import_name]:
             df['SV'] = eval(file_to_sv_mapping[self._import_name][file_name])
         else:
-            logging.fatal(f"#########\nERROR: File ({file_name}) to SV mapping missing.\n"f"Add a File - SV mapping statement in common/sv_config.py.\n#########")
+            logging.fatal(
+                f"#########\nERROR: File ({file_name}) to SV mapping missing.\n"
+                f"Add a File - SV mapping statement in common/sv_config.py.\n#########"
+            )
             exit(1)
 
         del_columns = list(df.columns.difference(original_df_columns))
@@ -191,8 +194,9 @@ class EuroStat:
             df (pd.DataFrame)
         """
         try:
-            final_df = pd.DataFrame(
-                columns=['time', 'geo', 'SV', 'observation', 'Measurement_Method'])
+            final_df = pd.DataFrame(columns=[
+                'time', 'geo', 'SV', 'observation', 'Measurement_Method'
+            ])
             # Creating Output Directory
             output_path = os.path.dirname(self._cleaned_csv_file_path)
             if not os.path.exists(output_path):
@@ -211,15 +215,16 @@ class EuroStat:
                 dfs.append(df)
             final_df = pd.concat(dfs, axis=0)
 
-            final_df = final_df.sort_values(by=['time', 'geo', 'SV', 'observation'])
+            final_df = final_df.sort_values(
+                by=['time', 'geo', 'SV', 'observation'])
             final_df = final_df.drop_duplicates(subset=['time', 'geo', 'SV'],
                                                 keep='first')
             final_df['observation'] = final_df['observation'].astype(
                 str).str.strip()
             # derived_df generated to get the year/SV/location sets
             # where 'u' exist
-            derived_df = final_df[final_df['observation'].astype(str).str.contains(
-                'u')]
+            derived_df = final_df[final_df['observation'].astype(
+                str).str.contains('u')]
             u_rows = list(derived_df['SV'] + derived_df['geo'])
             final_df['info'] = final_df['SV'] + final_df['geo']
             # Adding Measurement Method based on a condition, whereever u is found
@@ -235,8 +240,8 @@ class EuroStat:
                 final_df['info'].isin(u_rows),
                 'EurostatRegionalStatistics_LowReliability',
                 'EurostatRegionalStatistics')
-            derived_df = final_df[final_df['observation'].astype(str).str.contains(
-                'd')]
+            derived_df = final_df[final_df['observation'].astype(
+                str).str.contains('d')]
             u_rows = list(derived_df['SV'] + derived_df['geo'])
             final_df['info'] = final_df['SV'] + final_df['geo']
             # Adding Measurement Method based on a condition, whereever d is found
@@ -262,13 +267,16 @@ class EuroStat:
             final_df['observation'].replace('', np.nan, inplace=True)
             final_df.dropna(subset=['observation'], inplace=True)
             self._df = final_df
-            final_df.to_csv(
-                self._cleaned_csv_file_path,
-                columns=['time', 'geo', 'SV', 'observation', 'Measurement_Method'],
-                index=False)
+            final_df.to_csv(self._cleaned_csv_file_path,
+                            columns=[
+                                'time', 'geo', 'SV', 'observation',
+                                'Measurement_Method'
+                            ],
+                            index=False)
             return self._df
         except Exception as e:
-            logging.fatal(f'Error encountered while generating output csv file: {e}')
+            logging.fatal(
+                f'Error encountered while generating output csv file: {e}')
 
     def generate_mcf(self, df: pd.DataFrame = None) -> None:
         """
@@ -317,7 +325,7 @@ class EuroStat:
                                     sv_property].format(property_value=prop)
 
                 sv_name = sv_name.replace(", Among,",
-                                        "Among").rstrip(', ').rstrip('with')
+                                          "Among").rstrip(', ').rstrip('with')
                 # Adding spaces before every capital letter,
                 # to make SV look more like a name.
                 sv_name = re.sub(r"(\w)([A-Z])", r"\1 \2", sv_name)
@@ -341,7 +349,8 @@ class EuroStat:
                 f_out.write(final_mcf_template.rstrip('\n'))
             # pylint: enable=R0914
         except Exception as e:
-            logging.fatal(f'Error encountered while generating output mcf file: {e}')
+            logging.fatal(
+                f'Error encountered while generating output mcf file: {e}')
 
     def generate_tmcf(self) -> None:
         """
@@ -360,4 +369,5 @@ class EuroStat:
             with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
                 f_out.write(tmcf.rstrip('\n'))
         except Exception as e:
-            logging.fatal(f'Error encountered while generating output tmcf file: {e}')
+            logging.fatal(
+                f'Error encountered while generating output tmcf file: {e}')
