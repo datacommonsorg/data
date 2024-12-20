@@ -8,8 +8,8 @@
       "scripts": ["process.py"],
       "import_inputs": [
         {
-          "template_mcf": "eurostat_population_tobaccoconsumption.tmcf",
-          "cleaned_csv": "eurostat_population_tobaccoconsumption.csv"
+          "template_mcf": "output/eurostat_population_tobaccoconsumption.tmcf",
+          "cleaned_csv": "output/eurostat_population_tobaccoconsumption.csv"
         }
       ],
       "cron_schedule": "0 3 2 * *"

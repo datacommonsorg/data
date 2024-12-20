@@ -8,8 +8,8 @@
       "scripts": ["process.py"],
       "import_inputs": [
         {
-          "template_mcf": "eurostat_population_alcoholconsumption.tmcf",
-          "cleaned_csv": "eurostat_population_alcoholconsumption.csv"
+          "template_mcf": "output/eurostat_population_alcoholconsumption.tmcf",
+          "cleaned_csv": "output/eurostat_population_alcoholconsumption.csv"
         }
       ],
       "cron_schedule": "0 2 2 * *"
