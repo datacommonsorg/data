@@ -152,6 +152,8 @@ def download_datasets():
             pool.starmap(download, zip(download_urls))
 
         logging.info('# files downloaded: %s', len(download_urls))
+    # While downloading from source there is multiple files which may not be required so below exception can be ignored. 
+    # Verifying if all the required files have been generated after writing the output files
     except Exception as e:
         logging.error("Error downloading %s", exc_info=e)
 
@@ -162,7 +164,6 @@ def download(url):
     if os.path.exists(file_path):
         logging.info('Already downloaded %s to file %s', url, file_path)
         return
-    print("just checking")
     logging.info('Downloading %s to file %s', url, file_path)
 
     # response = requests.get(url)
@@ -172,6 +173,7 @@ def download(url):
         response = download_retry(url)
         with open(file_path, 'wb') as f:
             f.write(response.data)
+    # After retrying for multiple times it will move to download next one, fatal not required.
     except Exception as e:
         logging.error("Error downloading %s", url, exc_info=e)
 
@@ -302,7 +304,7 @@ def load_json(url, params, response_file):
             json.dump(response.json(), f, indent=2)
         return True
     except Exception as e:
-        print(f"Http error {e}")
+        logging.info("Http error %s",e)
         return None
 
 
@@ -436,8 +438,7 @@ def get_codes_from_zip(zip_file):
                     return codes
             return {}
     except Exception as e:
-        print("There is some problem in processing the file", e,
-              "File name is:", zipfile)
+        logging.info("There is some problem in processing the file %s File name is: %s",e,zipfile)
 
 
 def write_csv(csv_file_path, csv_columns, csv_rows):
@@ -472,6 +473,7 @@ def write_all_observations(stat_vars_file):
 
 
 def check_allFiles_processed():
+    # Verify below observation csv are getting generated or not
     expected_files = [
         'ASPIRE_CSV_obs.csv', 'DB_CSV_obs.csv', 'Economic_Fitness_CSV_obs.csv',
         'EdStats_CSV_obs.csv', 'FINDEX_CSV_obs.csv', 'GFDD_CSV_obs.csv',
@@ -483,6 +485,7 @@ def check_allFiles_processed():
     ]
     expected_files = sorted(set(expected_files))
     actual_output_files = sorted(set(os.listdir(OBSERVATIONS_DIR)))
+    # If actual processed files are not equal to expected files, raising fatal
     if actual_output_files != expected_files:
         logging.fatal('actual output files are not equal to expected')
 
@@ -527,8 +530,9 @@ def get_observations_from_zip(zip_file, svs):
                                 data_row, svs, measurement_method))
 
                     return obs_csv_rows
+    # Exception can be ignored as there might be some corrupted zip files from source
     except Exception as e:
-        print("There is problem while processing the zip file:", e)
+        logging.info("There is problem while processing the zip file: %s",e)
         return []
 
 
