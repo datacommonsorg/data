@@ -1,0 +1,19 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EuroStatHealth_AlcoholConsumption",
+      "curator_emails": ["sudhisha@google.com"],
+      "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+      "provenance_description": "European Union (EU) Eurostat",
+      "scripts": ["process.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "eurostat_population_alcoholconsumption.tmcf",
+          "cleaned_csv": "eurostat_population_alcoholconsumption.csv"
+        }
+      ],
+      "cron_schedule": "0 10 21 * *"
+    }
+  ]
+}
+

@@ -17,7 +17,7 @@ Unzips it and makes it available for further processing
 """
 import gzip
 import urllib.request
-
+from absl import logging
 
 def download_gz_file(download_file_url: str, download_path: str) -> None:
     """
@@ -54,16 +54,20 @@ def download_files(download_files_url: list, download_path: str) -> None:
     Returns:
         None
     """
-    for download_file_url in download_files_url:
-        file_extension = download_file_url.split(".")[-1]
+    try:
+        for download_file_url in download_files_url:
+            file_extension = download_file_url.split(".")[-1]
 
-        if file_extension == "gz":
-            download_gz_file(download_file_url, download_path)
-        elif file_extension == "txt":
-            download_gz_file(download_file_url, download_path)
-        elif file_extension == "csv":
-            download_gz_file(download_file_url, download_path)
-        elif file_extension == "pdf":
-            download_gz_file(download_file_url, download_path)
-        else:
-            download_gz_file(download_file_url, download_path)
+            if file_extension == "gz":
+                download_gz_file(download_file_url, download_path)
+            elif file_extension == "txt":
+                download_gz_file(download_file_url, download_path)
+            elif file_extension == "csv":
+                download_gz_file(download_file_url, download_path)
+            elif file_extension == "pdf":
+                download_gz_file(download_file_url, download_path)
+            else:
+                download_gz_file(download_file_url, download_path)
+    except Exception as e:
+        logging.fatal(f'Download Error: {e}')
+

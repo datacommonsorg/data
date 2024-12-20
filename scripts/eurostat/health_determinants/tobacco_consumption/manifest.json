@@ -1,0 +1,19 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EurostatHealth_Tobacco_Consumption",
+      "curator_emails": ["sudhisha@google.com"],
+      "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+      "provenance_description": "European Union (EU) Eurostat",
+      "scripts": ["process.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "eurostat_population_tobaccoconsumption.tmcf",
+          "cleaned_csv": "eurostat_population_tobaccoconsumption.csv"
+        }
+      ],
+      "cron_schedule": "0 10 21 * *"
+    }
+  ]
+}
+
