@@ -152,7 +152,7 @@ def download_datasets():
             pool.starmap(download, zip(download_urls))
 
         logging.info('# files downloaded: %s', len(download_urls))
-    # While downloading from source there is multiple files which may not be required so below exception can be ignored. 
+    # While downloading from source there is multiple files which may not be required so below exception can be ignored.
     # Verifying if all the required files have been generated after writing the output files
     except Exception as e:
         logging.error("Error downloading %s", exc_info=e)
@@ -304,7 +304,7 @@ def load_json(url, params, response_file):
             json.dump(response.json(), f, indent=2)
         return True
     except Exception as e:
-        logging.info("Http error %s",e)
+        logging.info("Http error %s", e)
         return None
 
 
@@ -438,7 +438,9 @@ def get_codes_from_zip(zip_file):
                     return codes
             return {}
     except Exception as e:
-        logging.info("There is some problem in processing the file %s File name is: %s",e,zipfile)
+        logging.info(
+            "There is some problem in processing the file %s File name is: %s",
+            e, zipfile)
 
 
 def write_csv(csv_file_path, csv_columns, csv_rows):
@@ -532,7 +534,7 @@ def get_observations_from_zip(zip_file, svs):
                     return obs_csv_rows
     # Exception can be ignored as there might be some corrupted zip files from source
     except Exception as e:
-        logging.info("There is problem while processing the zip file: %s",e)
+        logging.info("There is problem while processing the zip file: %s", e)
         return []
 
 
