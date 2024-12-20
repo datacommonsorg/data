@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -100,7 +100,7 @@ def process(year, matches, input_folder):
     '''Generate cleaned data and accumulate it in output_data.'''
     url = get_url(year)
 
-    if year == 2023 or year == 2024:
+    if year >= 2023:
         try:
             filename = f"Section8-FY{year}.xlsx"
             # Read the Excel file and process the generator output
@@ -142,7 +142,8 @@ def process(year, matches, input_folder):
         compute_150(df, i)
 
     # Add year column
-    df['year'] = [year for _ in range(len(df))]
+    #df['year'] = [year for _ in range(len(df))]
+    df['year'] = year
 
     # Add stats for matching dcids
     df_match = df.copy().loc[df['fips'].isin(matches)]
