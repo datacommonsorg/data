@@ -264,7 +264,6 @@ def download_files(importname):
 
 def main(_):
     """Main function to generate the cleaned csv file."""
-
     global _INPUT_FILE_PATH, _OUTOUT_FILE_PATH
     _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_path)
     _OUTOUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.output_path)
