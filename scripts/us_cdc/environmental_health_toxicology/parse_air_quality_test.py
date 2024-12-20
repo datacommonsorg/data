@@ -22,7 +22,7 @@ python3 parse_air_quality_test.py input_file output_file
 
 import unittest
 import os
-from parse_air_quality import clean_air_quality_data
+from .parse_air_quality import clean_air_quality_data
 
 module_dir_ = os.path.dirname(__file__)
 
@@ -40,10 +40,10 @@ class TestParseAirQuality(unittest.TestCase):
         test_csv = os.path.join(module_dir_, 'test_data/small_Ozone_County.csv')
         output_csv = os.path.join(module_dir_,
                                   'test_data/PM2.5CensusTract_Expected.csv')
-        clean_air_quality_data(module_dir_, output_csv,"CDC_PM25CensusTract")
-        expected_csv = os.path.join(
-            module_dir_, 'test_data/PM2.5CensusTract_Expected.csv')
-            
+        clean_air_quality_data(module_dir_, output_csv, "CDC_PM25CensusTract")
+        expected_csv = os.path.join(module_dir_,
+                                    'test_data/PM2.5CensusTract_Expected.csv')
+
         with open(output_csv, 'r') as test:
             test_str: str = test.read()
             with open(expected_csv, 'r') as expected:
