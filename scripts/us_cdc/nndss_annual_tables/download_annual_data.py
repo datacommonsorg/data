@@ -28,9 +28,11 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'output_path', './data',
     'Path to the directory where generated files are to be stored.')
-flags.DEFINE_string('start_year', '2016', 'Start year for downloading source files')
+flags.DEFINE_string('start_year', '2016',
+                    'Start year for downloading source files')
 flags.DEFINE_string('end_year', '', 'End year for downloading source files')
 flags.mark_flag_as_required("end_year")
+
 
 def parse_html_table(table_url: str, file_path: str) -> None:
     if table_url not in _BAD_URLS:
@@ -121,11 +123,13 @@ def download_annual_nnds_data_across_years(year_range: str,
         print(f"Fetching data from {index_url}")
         scrape_table_links_from_page(index_url, output_path, update=False)
 
-def main(_) -> None:    
+
+def main(_) -> None:
     start_year1 = _FLAGS.start_year
     end_year1 = _FLAGS.end_year
     year_range = range(int(start_year1), int(end_year1))
     download_annual_nnds_data_across_years(year_range, _FLAGS.output_path)
+
 
 if __name__ == '__main__':
     app.run(main)
