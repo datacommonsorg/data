@@ -89,8 +89,26 @@ Additional information about each dataframe.
   """
   
 IMPORTANT: 
-	If any new statistical variable comes in future , it is to be added to the dictionaries :
-		1. _dcid_map in map_config.py
-		2. _mcf_map in mcf_config.py
-		
+	If any new statistical variable comes in future , it is to be added to the dictionaries : _dcid_map in map_config.py
+	
+### Import Procedure
+
+The below script will download the data, generate csv and mcf files.
+
+`/usr/bin/python3 scripts/us_bls/jolts/bls_jolts.py`
+
+Execute the 'bls_jolts.py' script by using the following commands:
+
+  - if you want to perform "download and process", run the below command:
+
+        `python3 bls_jolts.py`
+        
+  - if you want to perform "only download", run the below command:
+
+        `python3 bls_jolts.py --mode=download`
+
+  - if you want to perform "only process", run the below command:
+
+        `python3 bls_jolts.py --mode=process`
+
 		
