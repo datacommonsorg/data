@@ -12,23 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-This Python Script is for State Level Data 2010-2019.
+This Python Script is for State Level Data 2020-2029.
 '''
 import os
 import pandas as pd
-from common_functions import input_url, gender_based_grouping
+from common_functions import input_url, gender_based_grouping, extract_year
 
 
-def state2010(url_file: str, output_folder: str):
+def state2029(url_file: str, output_folder: str):
     '''
-   This Python Script Loads csv datasets from 2010-2019 on a State Level,
+   This Python Script Loads csv datasets from 2020-2029 on a State Level,
    cleans it and create a cleaned csv.
    '''
-    _url = input_url(url_file, "2010-20")
-    df = pd.read_csv(_url, encoding='ISO-8859-1')
+    df = pd.read_csv(url_file, encoding='ISO-8859-1')
     #Writing raw data to csv
     df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                           "raw_data", 'raw_data_state_2010_2019.csv'),
+                           "raw_data", 'raw_data_state_2020_2029.csv'),
               index=False)
     # Filter years 3 - 13.
     df.insert(2, 'geo_ID', 'geoId/', True)
@@ -54,38 +53,30 @@ def state2010(url_file: str, output_folder: str):
     df['AGE'] = df['AGE'].astype(str)
     df['AGE'] = df['AGE'] + 'Years'
     df['AGE'] = df['AGE'].str.replace("85Years", "85OrMoreYears")
-    # Drop unwanted columns.
-    df.drop(columns=['SUMLEV','REGION','DIVISION', 'STATE', 'NAME', 'ORIGIN',\
-       'ESTIMATESBASE2010','CENSUS2010POP','POPESTIMATE042020','POPESTIMATE2020'], inplace=True)
+
+    pop_estimate_cols = [
+        col for col in df.columns if col.startswith('POPESTIMATE')
+    ]
+    df = df.drop(
+        columns=df.columns.difference(['geo_ID', 'AGE', 'SEX', 'RACE'] +
+                                      pop_estimate_cols))
     df = df.melt(id_vars=['geo_ID','AGE','SEX','RACE'], var_name='Year' , \
        value_name='observation')
     # Making the years more understandable.
-    df = df.replace({
-        "Year": {
-            'POPESTIMATE2010': '2010',
-            'POPESTIMATE2011': '2011',
-            'POPESTIMATE2012': '2012',
-            'POPESTIMATE2013': '2013',
-            'POPESTIMATE2014': '2014',
-            'POPESTIMATE2015': '2015',
-            'POPESTIMATE2016': '2016',
-            'POPESTIMATE2017': '2017',
-            'POPESTIMATE2018': '2018',
-            'POPESTIMATE2019': '2019'
-        }
-    })
+    df['Year'] = df['Year'].apply(extract_year)
     df['SVs'] = 'Count_Person_' + df['AGE'] + '_' + df['SEX'] + '_' + df['RACE']
-    df = df.drop(columns=['AGE', 'RACE', 'SEX'])
+
     # df_as is used to get aggregated data of age/sex.
     df.insert(3, 'Measurement_Method', 'CensusPEPSurvey', True)
+    df = df.drop(columns=['AGE', 'SEX', 'RACE'])
     df_as = pd.DataFrame()
     df_as = pd.concat([df_as, df])
     df_as = df_as[~df_as["SVs"].str.contains("Total")]
+
     # DF sent to an external function for aggregation based on gender.
     df_as = gender_based_grouping(df_as)
     df['SVs'] = df['SVs'].str.replace('_Total', '')
     df = pd.concat([df, df_as])
-
     df.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
-                     'state_2010_2019.csv'))
+                     'state_2020_2029.csv'))
