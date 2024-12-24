@@ -28,6 +28,7 @@ import textwrap
 from absl import app
 from absl import logging
 from absl import flags
+from retry import retry
 import time
 import pandas as pd
 import requests
@@ -83,96 +84,99 @@ def generate_cleaned_dataframe():
         jolts_df: The 6 job data categories by industry, year, and adjustment, as a dataframe.
         schema_mapping: List of tuples that contains information for each dataset.
     """
-    
+
     header = {'User-Agent': 'support@datacommons.org'}
-    max_retry = 5
-    
-    def download_with_retries(url, retries=max_retry):
+
+    # Retry configuration to handle retries for failed downloads.
+    @retry(exceptions=Exception, tries=5, delay=5, backoff=2, logger=logging)
+    def download_with_retries(url):
         """Download file with retry logic."""
-        retry_count = 0
-        while retry_count <= retries:
-            try:
-                data = pd.read_csv(url, storage_options=header, sep="\\s+")
-                return data
-            except Exception as e:
-                logging.error(f"Error downloading {url}, retrying... ({retry_count + 1}/{retries})")
-                time.sleep(5)
-                retry_count += 1
-                if retry_count > retries:
-                    logging.fatal(f"Error downloading {url} after {retries} retries.")
-                    raise e
-    
+        return pd.read_csv(url, storage_options=header, sep="\\s+")
+
     # Download and process series description
     try:
         series_desc = pd.read_csv(
             "https://download.bls.gov/pub/time.series/jt/jt.series",
             storage_options=header,
             converters={'industry_code': str},
-            sep="\\t"
-        )
+            sep="\\t")
         series_desc.columns = [
             'series_id', 'seasonal', 'industry_code', 'state_code', 'area_code',
             'sizeclass_code', 'dataelement_code', 'ratelevel_code',
-            'footnote_codes', 'begin_year', 'begin_period', 'end_year', 'end_period'
+            'footnote_codes', 'begin_year', 'begin_period', 'end_year',
+            'end_period'
         ]
-        series_desc["series_id"] = series_desc["series_id"].apply(lambda x: x.strip())
+        series_desc["series_id"] = series_desc["series_id"].apply(
+            lambda x: x.strip())
         series_desc.to_csv("jolts_input_jt_series.csv")
         series_desc = series_desc.set_index("series_id")
     except Exception as e:
         logging.fatal(f"Failed to download series description: {e}")
         return
-    
+
     # Download and process other datasets with retries
     try:
-        job_openings = download_with_retries("https://download.bls.gov/pub/time.series/jt/jt.data.2.JobOpenings")
+        job_openings = download_with_retries(
+            "https://download.bls.gov/pub/time.series/jt/jt.data.2.JobOpenings")
         job_openings.to_csv("jolts_input_jt_job_openings.csv")
     except Exception as e:
         logging.fatal(f"Failed to download job openings data: {e}")
         return
 
     try:
-        job_hires = download_with_retries("https://download.bls.gov/pub/time.series/jt/jt.data.3.Hires")
+        job_hires = download_with_retries(
+            "https://download.bls.gov/pub/time.series/jt/jt.data.3.Hires")
         job_hires.to_csv("jolts_input_jt_job_hires.csv")
     except Exception as e:
         logging.fatal(f"Failed to download job hires data: {e}")
         return
 
     try:
-        total_seps = download_with_retries("https://download.bls.gov/pub/time.series/jt/jt.data.4.TotalSeparations")
+        total_seps = download_with_retries(
+            "https://download.bls.gov/pub/time.series/jt/jt.data.4.TotalSeparations"
+        )
         total_seps.to_csv("jolts_input_jt_totlal_separations.csv")
     except Exception as e:
         logging.fatal(f"Failed to download total separations data: {e}")
         return
 
     try:
-        total_quits = download_with_retries("https://download.bls.gov/pub/time.series/jt/jt.data.5.Quits")
+        total_quits = download_with_retries(
+            "https://download.bls.gov/pub/time.series/jt/jt.data.5.Quits")
         total_quits.to_csv("jolts_input_jt_total_quits.csv")
     except Exception as e:
         logging.fatal(f"Failed to download total quits data: {e}")
         return
 
     try:
-        total_layoffs = download_with_retries("https://download.bls.gov/pub/time.series/jt/jt.data.6.LayoffsDischarges")
+        total_layoffs = download_with_retries(
+            "https://download.bls.gov/pub/time.series/jt/jt.data.6.LayoffsDischarges"
+        )
         total_layoffs.to_csv("jolts_input_jt_total_layoffs.csv")
     except Exception as e:
         logging.fatal(f"Failed to download total layoffs data: {e}")
         return
 
     try:
-        total_other_seps = download_with_retries("https://download.bls.gov/pub/time.series/jt/jt.data.7.OtherSeparations")
+        total_other_seps = download_with_retries(
+            "https://download.bls.gov/pub/time.series/jt/jt.data.7.OtherSeparations"
+        )
         total_other_seps.to_csv("jolts_input_jt_total_other_separations.csv")
     except Exception as e:
         logging.fatal(f"Failed to download other separations data: {e}")
         return
-    
+
     # Additional information about each dataframe.
     schema_mapping = [
         ("Count_JobPosting", "schema:JobPosting", "", job_openings),
         ("Count_Worker_Hire", "dcs:BLSWorker", "Hire", job_hires),
         ("Count_Worker_Separation", "dcs:BLSWorker", "Separation", total_seps),
-        ("Count_Worker_VoluntarySeparation", "dcs:BLSWorker", "VoluntarySeparation", total_quits),
-        ("Count_Worker_InvoluntarySeparation", "dcs:BLSWorker", "InvoluntarySeparation", total_layoffs),
-        ("Count_Worker_OtherSeparation", "dcs:BLSWorker", "OtherSeparation", total_other_seps),
+        ("Count_Worker_VoluntarySeparation", "dcs:BLSWorker",
+         "VoluntarySeparation", total_quits),
+        ("Count_Worker_InvoluntarySeparation", "dcs:BLSWorker",
+         "InvoluntarySeparation", total_layoffs),
+        ("Count_Worker_OtherSeparation", "dcs:BLSWorker", "OtherSeparation",
+         total_other_seps),
     ]
 
     # Combine datasets into a single dataframe including origin of data.
@@ -283,15 +287,18 @@ def process(jolts_df, schema_mapping):
     measurementQualifier: {BLS_ADJUSTMENT}
     naics: dcid:NAICS/{INDUSTRY}
     """
-    
+
     # Map industry and seasonal adjustment to statistical variable name.
     adjustment_types = [("Adjusted", "dcs:BLSSeasonallyAdjusted"),
                         ("Unadjusted", "dcs:BLSSeasonallyUnadjusted")]
 
     try:
         # Output the schema mapping to a new file.
-        with open("BLSJolts_StatisticalVariables.mcf", "w+", newline="") as f_out:
-            logging.info("Started writing statistical variable schemas to 'BLSJolts_StatisticalVariables.mcf'.")
+        with open("BLSJolts_StatisticalVariables.mcf", "w+",
+                  newline="") as f_out:
+            logging.info(
+                "Started writing statistical variable schemas to 'BLSJolts_StatisticalVariables.mcf'."
+            )
             for schema_name, pop_type, job_change_event, _ in schema_mapping:
                 for industry_code in list(jolts_df['industry_code'].unique()):
                     for adjusted_dcid_map, adjusted_schema in adjustment_types:
@@ -313,19 +320,25 @@ def process(jolts_df, schema_mapping):
                             f_out.write(
                                 stat_var_schema.replace(
                                     "{STAT_CLASS}", schema_name).replace(
-                                    "{INDUSTRY}", industry_code).replace(
-                                    "{ADJUSTMENT}", adjusted_dcid_map).replace(
-                                    "{BLS_ADJUSTMENT}", adjusted_schema).replace(
-                                    "{POPULATION}", pop_type).replace(
-                                    "{JOB_CHANGE_EVENT}", job_change_event)
-                            )                            
+                                        "{INDUSTRY}", industry_code).replace(
+                                            "{ADJUSTMENT}",
+                                            adjusted_dcid_map).replace(
+                                                "{BLS_ADJUSTMENT}",
+                                                adjusted_schema).replace(
+                                                    "{POPULATION}",
+                                                    pop_type).replace(
+                                                        "{JOB_CHANGE_EVENT}",
+                                                        job_change_event))
                         except Exception as e:
-                            logging.error(f"Error writing schema for {schema_name}, {industry_code}, {adjusted_dcid_map}: {e}")
+                            logging.error(
+                                f"Error writing schema for {schema_name}, {industry_code}, {adjusted_dcid_map}: {e}"
+                            )
                             continue  # Skip to the next item if writing fails
 
             logging.info("Finished writing all statistical variable schemas.")
     except Exception as e:
-        logging.error(f"Error processing BLS Jolts data or writing to file: {e}")
+        logging.error(
+            f"Error processing BLS Jolts data or writing to file: {e}")
 
 
 def main(_):
@@ -341,7 +354,9 @@ def main(_):
         jolts_df, schema_mapping = generate_cleaned_dataframe()
         # Process and output final cleaned CSV and MCF
         final_columns = ['Date', 'StatisticalVariable', 'Value']
-        jolts_df.loc[:, final_columns].to_csv("BLSJolts.csv", index=False, encoding="utf-8")
+        jolts_df.loc[:, final_columns].to_csv("BLSJolts.csv",
+                                              index=False,
+                                              encoding="utf-8")
         process(jolts_df, schema_mapping)
         logging.info("Process completed!")
 
