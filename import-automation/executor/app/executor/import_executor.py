@@ -564,6 +564,7 @@ def _run_with_timeout_async(args: List[str],
             stdout.append(line)
             logging.info(f'Process stdout: {line}')
 
+        process.wait()
         end_time = time.time()
 
         return_code = process.returncode
