@@ -43,6 +43,12 @@ _SEE_LOGS_MESSAGE = (
     'Please find logs in the Logs Explorer of the GCP project associated with'
     ' Import Automation.')
 
+_IMPORT_METADATA_MCF_TEMPLATE = """
+Node: dcid:dc/base/{import_name}
+typeOf: dcid:Provenance
+lastDataRefeshDate: "{last_data_refresh_date}"
+"""
+
 
 @dataclasses.dataclass
 class ExecutionResult:
@@ -379,7 +385,7 @@ class ImportExecutor:
             import_dir=absolute_import_dir,
             output_dir=f'{relative_import_dir}/{import_spec["import_name"]}',
             version=version,
-            import_inputs=import_spec.get('import_inputs', []),
+            import_spec=import_spec,
         )
 
         if self.importer:
@@ -410,7 +416,7 @@ class ImportExecutor:
         import_dir: str,
         output_dir: str,
         version: str,
-        import_inputs: List[Dict[str, str]],
+        import_spec: dict,
     ) -> import_service.ImportInputs:
         """Uploads the generated import data files.
 
@@ -422,14 +428,13 @@ class ImportExecutor:
         import_dir: Absolute path to the directory with the manifest, as a
           string.
         output_dir: Path to the output directory, as a string.
-        import_inputs: List of import inputs each as a dict mapping import types
-          to relative paths within the repository. This is parsed from the
-          'import_inputs' field in the manifest.
+        import_inputs: Specification of the import as a dict.
 
     Returns:
         ImportInputs object containing the paths to the uploaded inputs.
     """
         uploaded = import_service.ImportInputs()
+        import_inputs = import_spec.get('import_inputs', [])
         for import_input in import_inputs:
             for input_type in self.config.import_input_types:
                 path = import_input.get(input_type)
@@ -443,6 +448,9 @@ class ImportExecutor:
         self.uploader.upload_string(
             version,
             os.path.join(output_dir, self.config.storage_version_filename))
+        self.uploader.upload_string(
+            self._import_metadata_mcf_helper(import_spec),
+            os.path.join(output_dir, self.config.import_metadata_mcf_filename))
         return uploaded
 
     def _upload_file_helper(self, src: str, dest: str) -> None:
@@ -453,6 +461,25 @@ class ImportExecutor:
         dest: Path to where the file is to be uploaded to, as a string.
     """
         self.uploader.upload_file(src, dest)
+
+    def _import_metadata_mcf_helper(self, import_spec: dict) -> str:
+        """Generates import_metadata_mcf node for import.
+
+        Args:
+            import_spec: Specification of the import as a dict.
+        
+        Returns:
+            import_metadata_mcf node.
+        """
+        node = _IMPORT_METADATA_MCF_TEMPLATE.format_map({
+            "import_name": import_spec.get('import_name'),
+            "last_data_refresh_date": _clean_date(utils.pacific_time())
+        })
+        next_data_refresh_date = utils.next_pacific_date(
+            import_spec.get('cron_schedule'))
+        if next_data_refresh_date:
+            node += f'nextDataRefreshDate: "{next_data_refresh_date}"\n'
+        return node
 
 
 def parse_manifest(path: str) -> dict:
@@ -600,7 +627,7 @@ def _run_with_timeout(args: List[str],
         logging.exception(
             f'An unexpected exception was thrown: {e} when running {args}:'
             f' {message}')
-        return None
+        raise e
 
 
 def _create_venv(requirements_path: Iterable[str], venv_dir: str,
@@ -689,6 +716,18 @@ def _clean_time(
     for char in chars_to_replace:
         time = time.replace(char, '_')
     return time
+
+
+def _clean_date(time: str) -> str:
+    """Converts ISO8601 time string to YYYY-MM-DD format.
+
+    Args:
+        time: Time string in ISO8601 format.
+
+    Returns:
+        YYYY-MM-DD date.
+    """
+    return time[:10]
 
 
 def _construct_process_message(message: str,

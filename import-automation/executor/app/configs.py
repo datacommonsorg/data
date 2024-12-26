@@ -70,6 +70,9 @@ class ExecutorConfig:
     # The content of latest_version.txt would be a single line of
     # '2020_07_15T12_07_17_365264_07_00'.
     storage_version_filename: str = 'latest_version.txt'
+    # Name of the file that contains the import_metadata_mcf for the import.
+    # These files are stored at the same level as the storage_version_filename.
+    import_metadata_mcf_filename: str = 'import_metadata_mcf.mcf'
     # Types of inputs accepted by the Data Commons importer. These are
     # also the accepted fields of an import_inputs value in the manifest.
     import_input_types: List[str] = ('template_mcf', 'cleaned_csv', 'node_mcf')
