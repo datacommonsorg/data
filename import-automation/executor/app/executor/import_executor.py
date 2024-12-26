@@ -547,9 +547,8 @@ def _run_with_timeout_async(args: List[str],
       Same exceptions as subprocess.run.
   """
     try:
-        logging.info(
-            f'Launching async command for {name}: {args} '
-            f'with timeout {timeout} in {cwd}, env: {env}')
+        logging.info(f'Launching async command for {name}: {args} '
+                     f'with timeout {timeout} in {cwd}, env: {env}')
         start_time = time.time()
         stdout = []
         stderr = []
@@ -574,10 +573,9 @@ def _run_with_timeout_async(args: List[str],
         end_time = time.time()
 
         return_code = process.returncode
-        end_msg = (
-            f'Completed script:{name}: "{args}", '
-            f'Return code: {return_code}, '
-            f'time: {end_time - start_time:.3f} secs.\n')
+        end_msg = (f'Completed script:{name}: "{args}", '
+                   f'Return code: {return_code}, '
+                   f'time: {end_time - start_time:.3f} secs.\n')
         logging.info(end_msg)
         return subprocess.CompletedProcess(
             args=args,
@@ -733,7 +731,7 @@ def _run_user_script(
   """
     script_args = []
     if interpreter_path:
-      script_args.append(interpreter_path)
+        script_args.append(interpreter_path)
     script_args.extend(script_path.split(' '))
     if args:
         script_args.extend(args)
