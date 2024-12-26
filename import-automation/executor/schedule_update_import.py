@@ -303,7 +303,8 @@ def main(_):
     cfg.gcp_project_id = _FLAGS.gke_project_id
 
     logging.info(
-        f'Updating any config fields from local file: {_FLAGS.config_override}.')
+        f'Updating any config fields from local file: {_FLAGS.config_override}.'
+    )
     cfg = _override_configs(_FLAGS.config_override, cfg)
 
     logging.info('Reading Cloud scheduler configs from GCS.')
