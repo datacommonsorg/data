@@ -683,6 +683,7 @@ def _get_script_interpreter(script: str, py_interpreter: str) -> str:
 
     Returns:
         interpreter for user script, such as python for .py, bash for .sh
+        Returns None if the script has no extension.
     """
     if not script:
         return None
