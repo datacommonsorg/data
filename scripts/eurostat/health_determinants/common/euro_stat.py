@@ -56,6 +56,7 @@ _TMCF_TEMPLATE = ("Node: E:eurostat_population_{import_name}->E0\n"
                   "Measurement_Method\n"
                   "observationAbout: C:eurostat_population_{import_name}->geo\n"
                   "observationDate: C:eurostat_population_{import_name}->time\n"
+                  "unit: Percent\n"
                   "scalingFactor: 100\n"
                   "value: C:eurostat_population_{import_name}->observation\n")
 
