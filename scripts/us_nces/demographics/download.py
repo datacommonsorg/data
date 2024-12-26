@@ -100,13 +100,13 @@ def _call_download_api(compressed_src_file: str, year: str) -> int:
         with zipfile.ZipFile(io.BytesIO(res.content)) as zipfileout:
             if _FLAGS.import_name == "PrivateSchool":
                 zipfileout.extractall(
-                    f"scripts/us_nces/demographics/private_school/input_files")
+                    f"private_school/input_files")
             elif _FLAGS.import_name == "District":
                 zipfileout.extractall(
-                    f"scripts/us_nces/demographics/school_district/input_files")
+                    f"school_district/input_files")
             elif _FLAGS.import_name == "PublicSchool":
                 zipfileout.extractall(
-                    f"scripts/us_nces/demographics/public_school/input_files")
+                    f"public_school/input_files")
         return 0
     else:
         logging.error(

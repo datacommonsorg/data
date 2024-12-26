@@ -1,0 +1,20 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "NCES_PrivateSchoolStats",
+      "curator_emails": ["dhhhanushree@google.com"],
+      "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+      "provenance_description": "US nces shool data for private",
+      "scripts": ["download.py --import_name=PrivateSchool","private_school/process.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "private_school/output_files/us_nces_demographics_private_school.tmcf",
+          "cleaned_csv": "private_school/output_files/us_nces_demographics_private_school.csv"
+                 }
+      ],
+      "cron_schedule": "0 10 21 * *"
+    }
+  ]
+}
+
+

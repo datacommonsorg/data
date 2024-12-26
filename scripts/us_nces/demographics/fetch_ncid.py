@@ -24,10 +24,15 @@ def fetch_school_ncid(school, year, column_names):
     FINAL_LIST = []
 
     # Initialize WebDriver
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--window-size=1920,1080')
+
     svc = webdriver.ChromeService(
         executable_path=binary_path)  # Get the path for ChromeDriver
-    driver = webdriver.Chrome(
-        service=svc)  # Start Chrome with the given service
+    driver = webdriver.Chrome(service=svc, options=chrome_options)  # Start Chrome with the given service
+    
+    
 
     # Prepare the year variable by formatting it to match the expected input format
     year = 'cb_year_' + year + ''
