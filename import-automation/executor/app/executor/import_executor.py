@@ -687,12 +687,17 @@ def _get_script_interpreter(script: str, py_interpreter: str) -> str:
         interpreter for user script, such as python for .py, bash for .sh
     """
     if not script:
-        return py_interpreter
+        return None
 
-    cmd = script.split(' ')[0]
-    if cmd.endswith('.sh'):
-        # Use bash for shell scripts.
-        return 'bash'
+    base, ext = os.path.splitext(script.split(' ')[0])
+    match ext:
+        case '.py':
+            return py_interpreter
+        case '.sh':
+            return 'bash'
+        case _:
+            logging.info(f'Unknown extension for script: {script}.')
+            return None
 
     return py_interpreter
 
@@ -726,7 +731,9 @@ def _run_user_script(
       subprocess.TimeoutExpired: The user script did not finish
           within timeout.
   """
-    script_args = [interpreter_path]
+    script_args = []
+    if interpreter_path:
+      script_args.append(interpreter_path)
     script_args.extend(script_path.split(' '))
     if args:
         script_args.extend(args)
