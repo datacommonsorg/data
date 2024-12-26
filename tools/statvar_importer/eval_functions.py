@@ -70,24 +70,24 @@ def str_to_camel_case(input_string: str, strip_re: str = r'[^A-Za-z_0-9]') -> st
         return ''
     if not isinstance(input_string, str):
         input_string = str(input_string)
-    # replace any non-alpha characters with space
+    # Replace any non-alpha characters with space
     clean_str = re.sub(strip_re, ' ', input_string)
     clean_str = clean_str.strip()
-    # split by space and capitalize first letter, preserving any other capitals
+    # Split by space and capitalize first letter, preserving any other capitals
     return ''.join(
         [w[0].upper() + w[1:] for w in clean_str.split(' ') if len(w) > 0])
 
 
 EVAL_GLOBALS = {
-    # date time functions
+    # Date time functions
     'dateutil_parser_parse': dateutil.parser.parse,
     'format_date': format_date,
     'datetime': datetime,
     'datetime_strptime': datetime.strptime,
     'relativedelta': relativedelta,
-    # string functions
+    # String functions
     'str_to_camel_case': str_to_camel_case,
-    # regex functions
+    # Regex functions
     're': re,
     're_sub': re.sub,
 }

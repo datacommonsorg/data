@@ -245,7 +245,7 @@ class PropertyValueMapper:
         return self._pv_map
 
     def process_pvs_for_data(self, key: str, pvs: dict) -> bool:
-        """Returns true if property:values are processed successfully.
+      """Processes property:value and returns true if processed successfully.
 
     Processes values for actionable props such as '#Regex', '#Eval', '#Format'.
     Args: pvs (input/output) dictionary of property:values Properties such as

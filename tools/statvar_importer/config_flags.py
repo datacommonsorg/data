@@ -37,7 +37,7 @@ from mcf_file_util import get_numeric_value
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string('config', '', 'File with configuration parameters.')
+flags.DEFINE_string('config_file', '', 'File with configuration parameters.')
 flags.DEFINE_list('data_url', '', 'URLs to download the data from.')
 flags.DEFINE_string('shard_input_by_column', '',
                     'Shard input data by unique values in column.')
@@ -53,9 +53,9 @@ flags.DEFINE_list('input_data', [],
                   'Comma separated list of data files to be processed.')
 flags.DEFINE_string('input_encoding', 'utf-8', 'Encoding for input_data files.')
 flags.DEFINE_list(
-    'input_xls',
+    'input_xls_sheets',
     [],
-    'Comma separated list of sheets within xls files to be processed.',
+    'Comma separated list of sheet names within input_data xls files to be processed.',
 )
 flags.DEFINE_integer('input_rows', sys.maxsize,
                      'Number of rows per input file to process.')
@@ -317,10 +317,14 @@ def get_default_config() -> dict:
             _FLAGS.places_within,
 
         # Filter settings
-        'filter_data_min_value': None,
-        'filter_data_max_value': None,
-        'filter_data_max_change_ratio': None,
-        'filter_data_max_yearly_change_ratio': None,
+        'filter_data_min_value':
+            None,
+        'filter_data_max_value':
+            None,
+        'filter_data_max_change_ratio':
+            None,
+        'filter_data_max_yearly_change_ratio':
+            None,
 
         # Output options
         'output_path':
@@ -405,11 +409,11 @@ def get_default_config() -> dict:
         'generate_statvar_name':
             _FLAGS.generate_statvar_name,  # Generate names for StatVars
         'llm_generate_statvar_name':
-            _FLAGS.llm_generate_statvar_name,
+     get_config_from_flags       _FLAGS.llm_generate_statvar_name,
     }
 
 
-def get_config_from_flags(filename: str = None) -> ConfigMap:
+def init_config_from_flags(filename: str = None) -> ConfigMap:
     """Returns a Config object with parameters loaded from a file.
 
   Args:
@@ -438,14 +442,18 @@ def get_config_from_flags(filename: str = None) -> ConfigMap:
             update_config(file_config, config_dict)
     else:
         logging.error(f'Unknown config {filename}, ignored')
+    _set_verbosity(config_dict)
     config = ConfigMap(config_dict=config_dict)
-    # Set logging verbosity
+    return config
+
+
+def _set_verbosity(config: dict):
+    """Set logging verbosity by the config."""
     if config.get('debug'):
         logging.set_verbosity(1)
     if config.get('log_level'):
         logging.set_verbosity(config.get('log_level'))
     logging.info(f'Logging verbosity {logging.get_verbosity()}')
-    return config
 
 
 def set_config_value(param: str, value: str, config: dict):
