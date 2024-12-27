@@ -1,19 +1,3 @@
-# Copyright 2021 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-"""Module to download and do light processing on import data."""
-# TODO(beets): Add tests
-
 import io
 import logging
 import os
@@ -58,7 +42,7 @@ def get_csv_filename(sheet_name):
     """
     if re.match(_DIRECT_EMITTERS_SHEET, sheet_name):
         return 'direct_emitters.csv'
-    return SHEET_NAMES_TO_CSV_FILENAMES.get(sheet_name, None)
+    return SHEET_NAMES_TO_CSV_FILENAMES.get(sheet_name)
 
 
 class Downloader:
@@ -67,7 +51,7 @@ class Downloader:
     """
 
     def __init__(self, save_path):
-        self.years = list(range(2010, 2024))
+        self.years = list(range(2010, datetime.now().year))
         self.current_year = None
         self.files = []  # list of (year, filename) of all extracted files
         self.save_path = save_path
@@ -161,24 +145,29 @@ class Downloader:
     def _extract_data(self, headers):
         summary_filename = os.path.join(
             self.save_path, YEAR_DATA_FILENAME.format(year=self.current_year))
-        try:
-            xl = pd.ExcelFile(summary_filename, engine='openpyxl')
-            logging.info(
-                f"Available sheets in {summary_filename}: {xl.sheet_names}")
-            for sheet in xl.sheet_names:
-                csv_filename = get_csv_filename(sheet)
-                if not csv_filename:
-                    logging.info(f'Skipping sheet: {sheet}')
-                    continue
-                summary_file = xl.parse(sheet, header=HEADER_ROW, dtype=str)
-                csv_path = self._csv_path(csv_filename)
-                summary_file.to_csv(csv_path, index=None, header=True)
-                headers.setdefault(sheet,
-                                   {})[self.current_year] = summary_file.columns
-                self.files.append((self.current_year, csv_path))
-        except Exception as e:
+
+        xl = pd.ExcelFile(summary_filename, engine='openpyxl')
+        logging.info(
+            f"Available sheets in {summary_filename}: {xl.sheet_names}")
+        check_list = []
+        for sheet in xl.sheet_names:
+            csv_filename = get_csv_filename(sheet)
+            check_list.append(csv_filename)
+            if not csv_filename:
+                logging.info(f'Skipping sheet: {sheet}')
+                continue
+            summary_file = xl.parse(sheet, header=HEADER_ROW, dtype=str)
+            csv_path = self._csv_path(csv_filename)
+            summary_file.to_csv(csv_path, index=None, header=True)
+            headers.setdefault(sheet,
+                               {})[self.current_year] = summary_file.columns
+            self.files.append((self.current_year, csv_path))
+        if "direct_emitters.csv" not in check_list:
             logging.error(
-                f"Aborting process for {summary_filename} due to missing required sheet. Error: {e}"
+                f"'direct_emitters.csv' not found in the sheets for {self.current_year}. Aborting!"
+            )
+            raise SystemExit(
+                f"Missing required sheet for 'direct_emitters.csv' in year {self.current_year}. Exiting."
             )
 
     def _gen_crosswalk(self):
@@ -218,10 +207,10 @@ class Downloader:
 
 
 if __name__ == '__main__':
-    downloader = Downloader('tmp_data_latest')
-    for year in range(2024, 2030):
-        if datetime.now().year > year:
-            downloader.download_data(year, year - 1)
+    downloader = Downloader('tmp_data')
+    url_year = datetime.now().year
+    if url_year < 2030:
+        downloader.download_data(url_year, url_year - 1)
     downloader.extract_all_years()
     downloader.save_all_crosswalks(
         os.path.join(downloader.save_path, 'crosswalks.csv'))

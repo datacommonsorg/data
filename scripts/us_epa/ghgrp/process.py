@@ -17,6 +17,8 @@ import os
 import sys
 import unittest
 import csv
+from datetime import datetime
+import logging
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
@@ -36,44 +38,52 @@ _OUT_PATH = 'import_data'
 
 
 def process_data(data_filepaths, crosswalk, out_filepath):
-    print(f'Writing to {out_filepath}')
-    with open(out_filepath, 'w') as out_fp:
-        csv_writer = csv.DictWriter(out_fp, fieldnames=_OUT_FIELDNAMES)
-        csv_writer.writeheader()
-        all_processed_facilities = {}  # map of year -> set(dcid)
-        for (year, filepath) in data_filepaths:
-            print(f'Processing {filepath}')
-            year_processed_facilities = all_processed_facilities.get(
-                year, set())
-            with open(filepath, 'r') as fp:
-                for row in csv.DictReader(fp):
-                    if not row[_FACILITY_ID]:
-                        continue
-                    dcid = crosswalk.get_dcid(row[_FACILITY_ID])
-                    assert dcid
-                    if dcid in year_processed_facilities:
-                        continue
-                    for key, value in row.items():
-                        if not value:
+    logging.info(f'Writing to {out_filepath}')
+    try:
+        with open(out_filepath, 'w') as out_fp:
+            csv_writer = csv.DictWriter(out_fp, fieldnames=_OUT_FIELDNAMES)
+            csv_writer.writeheader()
+            all_processed_facilities = {}  # map of year -> set(dcid)
+            count = 0
+            for (year, filepath) in data_filepaths:
+                logging.info(f'Processing {filepath}')
+                year_processed_facilities = all_processed_facilities.get(
+                    year, set())
+                with open(filepath, 'r') as fp:
+                    for row in csv.DictReader(fp):
+                        if not row[_FACILITY_ID]:
                             continue
-                        sv = gas.col_to_sv(key)
-                        if not sv:
-                            sv = sources.col_to_sv(key)
-                            if not sv:
+                        dcid = crosswalk.get_dcid(row[_FACILITY_ID])
+                        assert dcid
+                        if dcid in year_processed_facilities:
+                            continue
+                        for key, value in row.items():
+                            if not value:
                                 continue
-                        csv_writer.writerow({
-                            _DCID: f'dcid:{dcid}',
-                            _SV: f'dcid:{sv}',
-                            _YEAR: year,
-                            _VALUE: value
-                        })
-                    year_processed_facilities.add(dcid)
-            all_processed_facilities[year] = year_processed_facilities
+                            sv = gas.col_to_sv(key)
+                            if not sv:
+                                sv = sources.col_to_sv(key)
+                                if not sv:
+                                    continue
+                            csv_writer.writerow({
+                                _DCID: f'dcid:{dcid}',
+                                _SV: f'dcid:{sv}',
+                                _YEAR: year,
+                                _VALUE: value
+                            })
+                        year_processed_facilities.add(dcid)
+                all_processed_facilities[year] = year_processed_facilities
+                count += 1
+            logging.info(f"Number of files processed:{count}")
+    except Exception as e:
+        logging.warning(f"Aborting processing due to the error: {e}")
 
 
 if __name__ == '__main__':
     downloader = download.Downloader(_SAVE_PATH)
-    downloader.download_data()
+    url_year = datetime.now().year
+    if url_year < 2030:
+        downloader.download_data(url_year, url_year - 1)
     files = downloader.extract_all_years()
     crosswalk_file = os.path.join(_SAVE_PATH, 'crosswalks.csv')
     downloader.save_all_crosswalks(crosswalk_file)
