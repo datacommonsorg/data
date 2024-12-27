@@ -121,6 +121,8 @@ class ExecutorConfig:
     email_account: str = ''
     # The corresponding password, app password, or access token.
     email_token: str = ''
+    # Disbale email alert notifications.
+    disable_email_notifications: bool = False
     # Maximum time a blocking call to the importer to
     # perform an import can take in seconds.
     importer_import_timeout: float = 20 * 60
