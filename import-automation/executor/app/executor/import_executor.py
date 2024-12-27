@@ -291,6 +291,8 @@ class ImportExecutor:
         import_name = import_spec['import_name']
         absolute_import_name = import_target.get_absolute_import_name(
             relative_import_dir, import_name)
+        curator_emails = import_spec['curator_emails']
+        dc_email_aliases = [_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR]
         time_start = time.time()
         try:
             self._import_one_helper(
@@ -300,17 +302,11 @@ class ImportExecutor:
                 import_spec=import_spec,
             )
             time_taken = '{0:.2f}'.format(time.time() - time_start)
-            if self.notifier:
-                msg = f'Successful Import: {import_name} ({absolute_import_name})\nn'
-                msg += f'Script execution time taken = {time_taken}s'
-                self.notifier.send(
-                    subject=f'Import Automation Success - {import_name}',
-                    body=msg,
-                    receiver_addresses=[_DEBUG_EMAIL_ADDR],
-                )
+            logging.info(f'Import Automation Success - {import_name}')
+            logging.info(f'Script execution time taken = {time_taken}s')
 
         except Exception as exc:
-            if self.notifier:
+            if self.notifier and not self.config.disable_email_notifications:
                 msg = f'Failed Import: {import_name} ({absolute_import_name})\n\n'
                 msg += f'{_SEE_LOGS_MESSAGE}\n\n'
                 msg += f'Stack Trace: \n'
@@ -318,7 +314,7 @@ class ImportExecutor:
                 self.notifier.send(
                     subject=f'Import Automation Failure - {import_name}',
                     body=msg,
-                    receiver_addresses=[_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR],
+                    receiver_addresses=dc_email_aliases + curator_emails,
                 )
             raise exc
 
