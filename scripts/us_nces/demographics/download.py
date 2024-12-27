@@ -21,7 +21,7 @@ from download_config import YEAR_PAYLOAD, YEAR_URL
 from download_files_details import DEFAULT_COLUMNS_SELECTED
 from download_files_details import KEY_COLUMNS_PUBLIC, PUBLIC_COLUMNS
 from download_files_details import KEY_COLUMNS_PRIVATE, PRIVATE_COLUMNS
-from download_files_details import KEY_COLUMNS_DISTRICT, DISTRICT_COLUMNS,PUBLIC_2017,DISTRICT_2017
+from download_files_details import KEY_COLUMNS_DISTRICT, DISTRICT_COLUMNS, PUBLIC_2017, DISTRICT_2017
 import fetch_ncid
 
 _FLAGS = flags.FLAGS
@@ -129,9 +129,10 @@ def get_year_list(school):
         logging.error(
             f"Failed to retrieve years with status code: {response.status_code}"
         )
-    if school=="PublicSchool" or school=="District":
-        years_to_download=[y for y in years_to_download if int(y) >= 2010]
+    if school == "PublicSchool" or school == "District":
+        years_to_download = [y for y in years_to_download if int(y) >= 2010]
     return years_to_download
+
 
 def main(_):
     logging.info(f"Downloading files for import {_FLAGS.import_name}")
@@ -149,10 +150,10 @@ def main(_):
     for year in years_to_download:
         # fecthing 2017column id's from config file for PublicSchool and District
         # as id is not listed in the website as expected
-        if year=="2017" and school=="PublicSchool":
-            id_list=PUBLIC_2017
-        elif year=="2017" and school=="District":
-            id_list=DISTRICT_2017
+        if year == "2017" and school == "PublicSchool":
+            id_list = PUBLIC_2017
+        elif year == "2017" and school == "District":
+            id_list = DISTRICT_2017
         else:
             id_list = fetch_ncid.fetch_school_ncid(school, year, column_names)
         index_columns_selected = 0
@@ -177,6 +178,7 @@ def main(_):
 
             nces_elsi_file_download(school, year, curr_columns_selected)
         logging.info(f"Download complete for year {year}")
+
 
 @retry
 def nces_elsi_file_download(school, year, curr_columns_selected):
