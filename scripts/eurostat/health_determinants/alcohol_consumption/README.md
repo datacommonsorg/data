@@ -65,11 +65,11 @@ The below script will download the data, clean the data, Also generate final csv
 
 `python scripts/eurostat/health_determinants/alcohol_consumption/process.py`
 
-if we want to perform only the download of this import, execute the below command:
+To download data for this import, run:
 
 `python scripts/eurostat/health_determinants/alcohol_consumption/process.py --mode=download`
 
-if we want to perform only process for this import, execute the below command:
+To process the downloaded data, run:
 
 `python scripts/eurostat/health_determinants/alcohol_consumption/process.py --mode=process`
 
