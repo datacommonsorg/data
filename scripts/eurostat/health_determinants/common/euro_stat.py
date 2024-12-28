@@ -183,7 +183,7 @@ class EuroStat:
         df = df[df['geo'] != 'EU28']
         return df
 
-    def generate_csv(self) -> pd.DataFrame:
+    def generate_csv(self, importname = None) -> pd.DataFrame:
         """
         This Method calls the required methods to generate
         cleaned CSV, MCF, and TMCF file.
@@ -195,6 +195,11 @@ class EuroStat:
             df (pd.DataFrame)
         """
         try:
+            if inspect.stack()[1][3] == "test_csv":
+                self._import_name = importname
+            else:
+                self._import_name = self._import_name
+
             final_df = pd.DataFrame(columns=[
                 'time', 'geo', 'SV', 'observation', 'Measurement_Method'
             ])
@@ -353,7 +358,7 @@ class EuroStat:
             logging.fatal(
                 f'Error encountered while generating output mcf file: {e}')
 
-    def generate_tmcf(self) -> None:
+    def generate_tmcf(self, importname = None) -> None:
         """
         This method generates TMCF file w.r.t
         dataframe headers and defined TMCF template.
@@ -365,6 +370,11 @@ class EuroStat:
             None
         """
         try:
+            if inspect.stack()[1][3] == "test_tmcf":
+                self._import_name = importname
+            else:
+                self._import_name = self._import_name
+            
             tmcf = _TMCF_TEMPLATE.format(import_name=self._import_name)
             # Writing Genereated TMCF to local path.
             with open(self._tmcf_file_path, 'w+', encoding='utf-8') as f_out:
