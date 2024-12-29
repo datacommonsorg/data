@@ -42,17 +42,13 @@ class ProcessTest(unittest.TestCase):
             fname = 'all_data.csv'
             got_filepath = os.path.join(tmp_dir, fname)
             process.process_data([
-                ('2010', os.path.join(_RAW_DATA_DIR,
-                                      '2010_direct_emitters.csv')),
-                ('2012', os.path.join(_RAW_DATA_DIR, '2012_elec_equip.csv')),
-                ('2013', os.path.join(_RAW_DATA_DIR, '2013_oil_and_gas.csv')),
-                ('2016',
-                 os.path.join(_RAW_DATA_DIR,
-                              '2016_gathering_and_boosting.csv')),
-                ('2017',
-                 os.path.join(_RAW_DATA_DIR, '2017_local_distribution.csv')),
-                ('2019', os.path.join(_RAW_DATA_DIR,
-                                      '2019_direct_emitters.csv')),
+                (2010, os.path.join(_RAW_DATA_DIR, '2010_direct_emitters.csv')),
+                (2011, os.path.join(_RAW_DATA_DIR, '2011_direct_emitters.csv')),
+                (2012, os.path.join(_RAW_DATA_DIR, '2012_elec_equip.csv')),
+                (2013, os.path.join(_RAW_DATA_DIR, '2013_local_distribution.csv')),
+                (2014, os.path.join(_RAW_DATA_DIR, '2014_local_distribution.csv')),
+                (2016, os.path.join(_RAW_DATA_DIR, '2016_gathering_and_boosting.csv')),
+                (2016, os.path.join(_RAW_DATA_DIR, '2016_oil_and_gas.csv'))
             ], crosswalk, got_filepath)
             with open(got_filepath) as gotf:
                 got = gotf.read()
