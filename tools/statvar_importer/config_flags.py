@@ -171,6 +171,8 @@ def get_default_config() -> dict:
             2,
         'input_data':
             _FLAGS.input_data,
+        'data_url':
+            _FLAGS.data_url,
         'input_encoding':
             _FLAGS.input_encoding,
         'input_xls':
@@ -289,6 +291,9 @@ def get_default_config() -> dict:
         # Word separator, used to split words into phrases for PV map lookups.
         'word_delimiter':
             ' ',
+        # Enable merged cells that inherit PVs from previous column.
+        'merged_cells':
+            True,
         # List of default PVS maps to lookup column values if there is no map for a
         # column name.
         'default_pv_maps': ['GLOBAL'],
@@ -364,6 +369,7 @@ def get_default_config() -> dict:
             _FLAGS.input_columns,
         'skip_rows':
             _FLAGS.skip_rows,
+        'ignore_rows': [0],
         'header_rows':
             _FLAGS.header_rows,
         'header_columns':
@@ -409,7 +415,7 @@ def get_default_config() -> dict:
         'generate_statvar_name':
             _FLAGS.generate_statvar_name,  # Generate names for StatVars
         'llm_generate_statvar_name':
-     get_config_from_flags       _FLAGS.llm_generate_statvar_name,
+            _FLAGS.llm_generate_statvar_name,
     }
 
 
@@ -464,7 +470,7 @@ def set_config_value(param: str, value: str, config: dict):
         config = config.get_configs()
     orig_value = config.get(param)
     if orig_value is not None:
-        value = _get_value_type(value, orig_value)
+        value = get_value_type(value, orig_value)
     config[param] = value
 
 
@@ -475,7 +481,7 @@ def update_config(new_config: dict, config: dict) -> dict:
     return config
 
 
-def _get_value_type(value: str, default_value):
+def get_value_type(value: str, default_value):
     """Returns value in the type of value_type."""
     if value is None:
         return value
@@ -495,7 +501,7 @@ def _get_value_type(value: str, default_value):
                 if value[-1] == ']':
                     value = value[:-1]
         return [
-            _get_value_type(v.strip(), default_element)
+            get_value_type(v.strip(), default_element)
             for v in str(value).split(',')
         ]
     if value_type is str:
@@ -503,6 +509,16 @@ def _get_value_type(value: str, default_value):
     if value_type is int or value_type is float:
         return get_numeric_value(value)
     if value_type is bool:
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, str):
+            match value.lower():
+                case 'true':
+                    return True
+                case 'false':
+                    return False
+                case '':
+                    return False
         return get_numeric_value(value) > 0
     if value_type is dict or value_type is OrderedDict:
         if isinstance(value, str):
