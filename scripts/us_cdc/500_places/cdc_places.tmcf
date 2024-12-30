@@ -6,6 +6,8 @@ variableMeasured: C:CDC_Places->StatVar
 observationPeriod: "P1Y"
 measurementMethod: C:CDC_Places->DataValueTypeID
 value: C:CDC_Places->Data_Value
+unit: Percent
+scalingFactor: 100
 
 Node: E:CDC_Places->E1
 observationAbout: C:CDC_Places->Location

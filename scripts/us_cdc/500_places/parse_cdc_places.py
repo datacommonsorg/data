@@ -84,7 +84,39 @@ MEASURE_TO_STATVAR_MAP = {
     "CHD":
         "Percent_Person_WithCoronaryHeartDisease",
     "CERVICAL":
-        "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening"
+        "Percent_Person_21To65Years_Female_ReceivedCervicalCancerScreening",
+    "DEPRESSION":
+        "Percent_Person_18OrMoreYears_WithDepression",
+    "VISION":
+        "Percent_Person_18OrMoreYears_WithVisionDisability",
+    "MOBILITY":
+        "Percent_Person_18OrMoreYears_WithMobilityDisability",
+    "SELFCARE":
+        "Percent_Person_18OrMoreYears_WithSelfCareDisability",
+    "DISABILITY":
+        "Percent_Person_18OrMoreYears_WithAnyDisability",
+    "INDEPLIVE":
+        "Percent_Person_18OrMoreYears_WithIndependentLivingDisability",
+    "GHLTH":
+        "Percent_Person_18OrMoreYears_WithPoorGeneralHealth",
+    "COGNITION":
+        "Percent_Person_18OrMoreYears_WithCognitiveDisability",
+    "HEARING":
+        "Percent_Person_18OrMoreYears_WithHearingDisability",
+    "LACKTRPT":
+        "Count_Person_18OrMoreYears_LackReliableTransport_AsAFractionOf_Count_Person_18OrMoreYears",
+    "HOUSINSECU":
+        "Count_Person_18OrMoreYears_HousingInsecurity_AsAFractionOf_Count_Person_18OrMoreYears",
+    "EMOTIONSPT":
+        "Count_Person_18OrMoreYears_LackSocialAndEmotionalSupport_AsAFractionOf_Count_Person_18OrMoreYears",
+    "FOODSTAMP":
+        "Count_Person_18OrMoreYears_ReceivedFoodStamp_AsAFractionOf_Count_Person_18OrMoreYears",
+    "FOODINSECU":
+        "Count_Person_18OrMoreYears_FoodInsecurity_AsAFractionOf_Count_Person_18OrMoreYears",
+    "SHUTUTILITY":
+        "Count_Person_18OrMoreYears_UtilityServiceShutoffThreat_AsAFractionOf_Count_Person_18OrMoreYears",
+    "ISOLATION":
+        "Count_Person_18OrMoreYears_SociallyIsolated_AsAFractionOf_Count_Person_18OrMoreYears",
 }
 
 # Mapping of data value type abbreviations to StatVar dcids
@@ -186,8 +218,8 @@ def clean_county_data(data):
     data = data.drop(columns=[
         "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
         "StateDesc", "Data_Value_Unit", "Data_Value_Footnote_Symbol",
-        "Data_Value_Footnote", "geolocation", "LocationName", "CategoryID",
-        "Short_Question_Text", "Latitude", "Longitude"
+        "Data_Value_Footnote", "Geolocation", "LocationName", "CategoryID",
+        "Short_Question_Text"
     ])
     return data
 
