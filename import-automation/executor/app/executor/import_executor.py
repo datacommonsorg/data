@@ -291,6 +291,8 @@ class ImportExecutor:
         import_name = import_spec['import_name']
         absolute_import_name = import_target.get_absolute_import_name(
             relative_import_dir, import_name)
+        curator_emails = import_spec['curator_emails']
+        dc_email_aliases = [_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR]
         time_start = time.time()
         try:
             self._import_one_helper(
@@ -300,17 +302,11 @@ class ImportExecutor:
                 import_spec=import_spec,
             )
             time_taken = '{0:.2f}'.format(time.time() - time_start)
-            if self.notifier:
-                msg = f'Successful Import: {import_name} ({absolute_import_name})\nn'
-                msg += f'Script execution time taken = {time_taken}s'
-                self.notifier.send(
-                    subject=f'Import Automation Success - {import_name}',
-                    body=msg,
-                    receiver_addresses=[_DEBUG_EMAIL_ADDR],
-                )
+            logging.info(f'Import Automation Success - {import_name}')
+            logging.info(f'Script execution time taken = {time_taken}s')
 
         except Exception as exc:
-            if self.notifier:
+            if self.notifier and not self.config.disable_email_notifications:
                 msg = f'Failed Import: {import_name} ({absolute_import_name})\n\n'
                 msg += f'{_SEE_LOGS_MESSAGE}\n\n'
                 msg += f'Stack Trace: \n'
@@ -318,7 +314,7 @@ class ImportExecutor:
                 self.notifier.send(
                     subject=f'Import Automation Failure - {import_name}',
                     body=msg,
-                    receiver_addresses=[_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR],
+                    receiver_addresses=dc_email_aliases + curator_emails,
                 )
             raise exc
 
@@ -333,6 +329,7 @@ class ImportExecutor:
 
     Args: See _import_one.
     """
+        import_name = import_spec['import_name']
         urls = import_spec.get('data_download_url')
         if urls:
             for url in urls:
@@ -370,20 +367,23 @@ class ImportExecutor:
                     )
                 else:
                     # Run import script locally.
+                    script_interpreter = _get_script_interpreter(
+                        script_path, interpreter_path)
                     process = _run_user_script(
-                        interpreter_path=interpreter_path,
+                        interpreter_path=script_interpreter,
                         script_path=script_path,
                         timeout=self.config.user_script_timeout,
                         args=self.config.user_script_args,
                         cwd=absolute_import_dir,
                         env=self.config.user_script_env,
+                        name=import_name,
                     )
                     _log_process(process=process)
                     process.check_returncode()
 
         inputs = self._upload_import_inputs(
             import_dir=absolute_import_dir,
-            output_dir=f'{relative_import_dir}/{import_spec["import_name"]}',
+            output_dir=f'{relative_import_dir}/{import_name}',
             version=version,
             import_spec=import_spec,
         )
@@ -527,7 +527,8 @@ def run_and_handle_exception(
 def _run_with_timeout_async(args: List[str],
                             timeout: float,
                             cwd: str = None,
-                            env: dict = None) -> subprocess.CompletedProcess:
+                            env: dict = None,
+                            name: str = None) -> subprocess.CompletedProcess:
     """Runs a command in a subprocess asynchronously and emits the stdout/stderr.
 
   Args:
@@ -542,9 +543,8 @@ def _run_with_timeout_async(args: List[str],
       Same exceptions as subprocess.run.
   """
     try:
-        logging.info(
-            f'Launching async command: {args} with timeout {timeout} in {cwd}, env:'
-            f' {env}')
+        logging.info(f'Launching async command for {name}: {args} '
+                     f'with timeout {timeout} in {cwd}, env: {env}')
         start_time = time.time()
         stdout = []
         stderr = []
@@ -559,17 +559,19 @@ def _run_with_timeout_async(args: List[str],
         # Log output continuously until the command completes.
         for line in process.stderr:
             stderr.append(line)
-            logging.info(f'Process stderr: {line}')
+            logging.info(f'Process stderr:{name}: {line}')
         for line in process.stdout:
             stdout.append(line)
-            logging.info(f'Process stdout: {line}')
+            logging.info(f'Process stdout:{name}: {line}')
 
+        # Wait in case script has closed stderr/stdout early.
+        process.wait()
         end_time = time.time()
 
         return_code = process.returncode
-        end_msg = (
-            f'Completed script: "{args}", Return code: {return_code}, time:'
-            f' {end_time - start_time:.3f} secs.\n')
+        end_msg = (f'Completed script:{name}: "{args}", '
+                   f'Return code: {return_code}, '
+                   f'time: {end_time - start_time:.3f} secs.\n')
         logging.info(end_msg)
         return subprocess.CompletedProcess(
             args=args,
@@ -580,8 +582,8 @@ def _run_with_timeout_async(args: List[str],
     except Exception as e:
         message = traceback.format_exc()
         logging.exception(
-            f'An unexpected exception was thrown: {e} when running {args}:'
-            f' {message}')
+            f'An unexpected exception was thrown: {e} when running {name}:'
+            f'{args}: {message}')
         return subprocess.CompletedProcess(
             args=args,
             returncode=1,
@@ -668,6 +670,33 @@ def _create_venv(requirements_path: Iterable[str], venv_dir: str,
         return os.path.join(venv_dir, 'bin/python3'), process
 
 
+def _get_script_interpreter(script: str, py_interpreter: str) -> str:
+    """Returns the interpreter for the script.
+
+    Args:
+        script: user script to be executed
+        py_interpreter: Path to python within virtual environment
+
+    Returns:
+        interpreter for user script, such as python for .py, bash for .sh
+        Returns None if the script has no extension.
+    """
+    if not script:
+        return None
+
+    base, ext = os.path.splitext(script.split(' ')[0])
+    match ext:
+        case '.py':
+            return py_interpreter
+        case '.sh':
+            return 'bash'
+        case _:
+            logging.info(f'Unknown extension for script: {script}.')
+            return None
+
+    return py_interpreter
+
+
 def _run_user_script(
     interpreter_path: str,
     script_path: str,
@@ -675,6 +704,7 @@ def _run_user_script(
     args: list = None,
     cwd: str = None,
     env: dict = None,
+    name: str = None,
 ) -> subprocess.CompletedProcess:
     """Runs a user Python script.
 
@@ -687,6 +717,7 @@ def _run_user_script(
         the command line.
       cwd: Current working directory of the process as a string.
       env: Dict of environment variables for the user script run.
+      name: Name of the script.
 
   Returns:
       subprocess.CompletedProcess object used to run the script.
@@ -695,11 +726,13 @@ def _run_user_script(
       subprocess.TimeoutExpired: The user script did not finish
           within timeout.
   """
-    script_args = [interpreter_path]
+    script_args = []
+    if interpreter_path:
+        script_args.append(interpreter_path)
     script_args.extend(script_path.split(' '))
     if args:
         script_args.extend(args)
-    return _run_with_timeout_async(script_args, timeout, cwd, env)
+    return _run_with_timeout_async(script_args, timeout, cwd, env, name)
 
 
 def _clean_time(
