@@ -39,17 +39,17 @@ class TestParseAirQuality(unittest.TestCase):
         print(module_dir_)
         test_csv = os.path.join(module_dir_, 'test_data/small_Ozone_County.csv')
         output_csv = os.path.join(module_dir_,
-                                  'test_data/small_Ozone_County_output.csv')
-        clean_air_quality_data(test_csv, output_csv)
+                                  'test_data/PM2.5CensusTract_Expected.csv')
+        clean_air_quality_data(module_dir_, output_csv, "CDC_PM25CensusTract")
+        expected_csv = os.path.join(module_dir_,
+                                    'test_data/PM2.5CensusTract_Expected.csv')
 
-        expected_csv = os.path.join(
-            module_dir_, 'test_data/small_Ozone_County_expected.csv')
         with open(output_csv, 'r') as test:
             test_str: str = test.read()
             with open(expected_csv, 'r') as expected:
                 expected_str: str = expected.read()
                 self.assertEqual(test_str, expected_str)
-        os.remove(output_csv)
+        #os.remove(output_csv)
 
 
 if __name__ == '__main__':
