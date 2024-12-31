@@ -1,8 +1,0 @@
-Node: E:c_cpi_u_1999_2020->E1
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_BLSSeasonallyUnadjusted
-measurementMethod: dcs:BLSChained
-observationAbout: dcid:country/USA
-observationDate: C:c_cpi_u:1999_2020->date
-value: C:c_cpi_u:1999_2020->cpi
-unit: dcs:IndexPointBasePeriodDecember1999Equals100

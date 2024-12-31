@@ -1,9 +1,9 @@
-Node: E:c_cpi_u->E1
+Node: E:c_cpi_u_1999_2024->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: C:c_cpi_u->statvar
+variableMeasured: dcs:dc/x6l3mg60hpe7c
 measurementMethod: dcs:BLSChained
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
 observationAbout: dcid:country/USA
-observationDate: C:c_cpi_u->date
-observationPeriod: C:c_cpi_u->duration
-value: C:c_cpi_u->value
-unit: C:c_cpi_u->unit
+observationDate: C:c_cpi_u_1999_2024->date
+value: C:c_cpi_u_1999_2024->cpi
+unit: dcs:IndexPointBasePeriodDecember1999Equals100
