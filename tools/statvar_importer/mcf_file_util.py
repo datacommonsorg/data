@@ -224,13 +224,13 @@ def add_pv_to_node(
             value_list = get_value_list(value)
         if value_list:
             if len(value_list) == 1:
-              value = value_list[0]
+                value = value_list[0]
             else:
-              # Add each value recursively.
-              for v in value_list:
-                add_pv_to_node(prop, v, node, append_value, strip_namespaces,
-                               normalize)
-              return node
+                # Add each value recursively.
+                for v in value_list:
+                    add_pv_to_node(prop, v, node, append_value,
+                                   strip_namespaces, normalize)
+                return node
     # allow empty values
     # if not value:
     #    return node
