@@ -1,0 +1,8 @@
+Node: E:OneDegreeGridSPI->E0
+variableMeasured: C:OneDegreeGridSPI->variable
+value: C:OneDegreeGridSPI->spi
+observationAbout: C:OneDegreeGridSPI->place
+observationDate: C:OneDegreeGridSPI->time
+typeOf: dcs:StatVarObservation
+observationPeriod: C:OneDegreeGridSPI->observationPeriod
+measurementMethod: dcs:PearsonDistribution
