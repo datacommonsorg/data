@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,12 +33,14 @@ class TestDiffer(unittest.TestCase):
     def test_diff_analysis(self):
         groupby_columns = 'variableMeasured,observationAbout,observationDate'
         value_columns = 'value'
+        current_data = os.path.join(module_dir, 'test', 'current.mcf')
+        previous_data = os.path.join(module_dir, 'test', 'previous.mcf')
+        output_location = os.path.join(module_dir, 'test')
 
-        differ = DatasetDiffer(groupby_columns, value_columns)
-        current = helper.load_mcf_file(
-            os.path.join(module_dir, 'test', 'current.mcf'))
-        previous = helper.load_mcf_file(
-            os.path.join(module_dir, 'test', 'previous.mcf'))
+        differ = DatasetDiffer(current_data, previous_data, output_location,
+                               groupby_columns, value_columns)
+        current = helper.load_mcf_file(current_data)
+        previous = helper.load_mcf_file(previous_data)
 
         in_data = differ.process_data(previous, current)
         summary, result = differ.point_analysis(in_data)

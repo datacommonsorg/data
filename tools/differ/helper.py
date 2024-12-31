@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import re
 
+from absl import logging
 from google.cloud.storage import Client
 
 
@@ -14,7 +15,7 @@ def load_mcf_file(file: str) -> pd.DataFrame:
     # nodes separated by a blank line
     mcf_nodes_text = mcf_contents.split('\n\n')
     # lines seprated as property: constraint
-    mcf_line = re.compile(r'^(\w+): (.*)$')
+    mcf_line = re.compile(r'^(\w+)\s*:\s*(.*)$')
     mcf_nodes = []
     for node in mcf_nodes_text:
         current_mcf_node = {}
@@ -22,9 +23,12 @@ def load_mcf_file(file: str) -> pd.DataFrame:
             parsed_line = mcf_line.match(line)
             if parsed_line is not None:
                 current_mcf_node[parsed_line.group(1)] = parsed_line.group(2)
-        if current_mcf_node and current_mcf_node[
-                'typeOf'] == 'dcid:StatVarObservation':
-            mcf_nodes.append(current_mcf_node)
+        if current_mcf_node:
+            if current_mcf_node['typeOf'] == 'dcid:StatVarObservation':
+                mcf_nodes.append(current_mcf_node)
+            else:
+                logging.warning(
+                    f'Ignoring node of type:{current_mcf_node["typeOf"]}')
     df = pd.DataFrame(mcf_nodes)
     return df
 
@@ -32,17 +36,17 @@ def load_mcf_file(file: str) -> pd.DataFrame:
 def load_mcf_files(path: str) -> pd.DataFrame:
     """ Loads all sharded mcf files in the given directory and 
     returns a single combined dataframe."""
-    df = pd.DataFrame()
+    df_list = []
     filenames = glob.glob(path + '.mcf')
     for filename in filenames:
-        df2 = load_mcf_file(filename)
-        # Merge data frames, expects same headers
-        df = pd.concat([df, df2])
-    return df
+        df = load_mcf_file(filename)
+        df_list.append(df)
+    result = pd.concat(df_list, ignore_index=True)
+    return result
 
 
 def write_data(df: pd.DataFrame, path: str, file: str):
-    """ Write a dataframe to a CSV file with the given path."""
+    """ Writes a dataframe to a CSV file with the given path."""
     out_file = open(os.path.join(path, file), mode='w', encoding='utf-8')
     df.to_csv(out_file, index=False, mode='w')
     out_file.close()
@@ -52,6 +56,7 @@ def load_data(path: str, tmp_dir: str) -> pd.DataFrame:
     """ Loads data from the given path and returns as a dataframe.
     Args:
       path: local or gcs path (single file or folder/* format)
+      tmp_dir: destination folder
     Returns:
       dataframe with the input data
     """
@@ -68,6 +73,7 @@ def get_gcs_data(uri: str, tmp_dir: str) -> str:
     """ Downloads files form GCS and copies them to local.
     Args:
       uri: single file path or folder/* format 
+      tmp_dir: destination folder
     Returns:
       path to the output file/folder
     """
@@ -77,12 +83,12 @@ def get_gcs_data(uri: str, tmp_dir: str) -> str:
     if uri.endswith('*'):
         blobs = client.list_blobs(bucket)
         for blob in blobs:
-            path = os.path.join(os.getcwd(), tmp_dir, blob.name)
+            path = os.path.join(tmp_dir, blob.name.replace('/', '_'))
             blob.download_to_filename(path)
-        return os.path.join(os.getcwd(), tmp_dir, '*')
+        return os.path.join(tmp_dir, '*')
     else:
         file_name = uri.split('/')[3]
         blob = bucket.get_blob(file_name)
-        path = os.path.join(os.getcwd(), tmp_dir, file_name)
+        path = os.path.join(tmp_dir, blob.name.replace('/', '_'))
         blob.download_to_filename(path)
         return path

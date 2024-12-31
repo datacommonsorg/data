@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,20 +26,20 @@ import helper
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'current_data', '', 'Path to the current MCF data \
-  (single mcf file or folder/* supported).')
+  (single mcf file or folder/* on local/GCS supported).')
 flags.DEFINE_string(
     'previous_data', '', 'Path to the previous MCF data \
-  (single mcf file or folder/* supported).')
+  (single mcf file or folder/* on local/GCS supported).')
 flags.DEFINE_string('output_location', 'results', \
   'Path to the output data folder.')
 
 flags.DEFINE_string(
-    'groupby_columns', 'variableMeasured,observationAbout,observationDate',
+    'groupby_columns',
+    'variableMeasured,observationAbout,observationDate,measurementMethod,unit',
     'Columns to group data for diff analysis in the order (var,place,time etc.).'
 )
-flags.DEFINE_string(
-    'value_columns', 'value,unit',
-    'Columns with statvar value (unit etc.) for diff analysis.')
+flags.DEFINE_string('value_columns', 'value,scalingFactor',
+                    'Columns with statvar value for diff analysis.')
 
 SAMPLE_COUNT = 3
 
@@ -69,13 +69,17 @@ class DatasetDiffer:
 
   """
 
-    def __init__(self, groupby_columns, value_columns):
+    def __init__(self, current_data, previous_data, output_location,
+                 groupby_columns, value_columns):
+        self.current_data = current_data
+        self.previous_data = previous_data
+        self.output_location = output_location
         self.groupby_columns = groupby_columns.split(',')
         self.value_columns = value_columns.split(',')
         self.variable_column = self.groupby_columns[0]
         self.place_column = self.groupby_columns[1]
         self.time_column = self.groupby_columns[2]
-        self.diff_column = '_diff_result'
+        self.diff_column = 'diff_result'
 
     def _cleanup_data(self, df: pd.DataFrame):
         for column in ['added', 'deleted', 'modified', 'same']:
@@ -208,43 +212,48 @@ class DatasetDiffer:
                                          axis=1)
         return summary, result
 
+    def run_differ(self):
+        if not os.path.exists(FLAGS.output_location):
+            os.makedirs(FLAGS.output_location)
+        logging.info('Loading data...')
+        current_df = helper.load_data(self.current_data, self.output_location)
+        previous_df = helper.load_data(self.previous_data, self.output_location)
+
+        logging.info('Processing data...')
+        in_data = self.process_data(previous_df, current_df)
+
+        logging.info('Point analysis:')
+        summary, result = self.point_analysis(in_data)
+        result.sort_values(by=[self.diff_column, self.variable_column],
+                           inplace=True)
+        print(summary.head(10))
+        print(result.head(10))
+        helper.write_data(summary, self.output_location,
+                          'point-analysis-summary.csv')
+        helper.write_data(result, self.output_location,
+                          'point-analysis-results.csv')
+
+        logging.info('Series analysis:')
+        summary, result = self.series_analysis(in_data)
+        result.sort_values(by=[self.diff_column, self.variable_column],
+                           inplace=True)
+        print(summary.head(10))
+        print(result.head(10))
+        helper.write_data(summary, self.output_location,
+                          'series-analysis-summary.csv')
+        helper.write_data(result, self.output_location,
+                          'series-analysis-results.csv')
+
+        logging.info('Differ output written to folder: %s',
+                     self.output_location)
+
 
 def main(_):
     '''Runs the differ.'''
-    differ = DatasetDiffer(FLAGS.groupby_columns, FLAGS.value_columns)
-
-    if not os.path.exists(FLAGS.output_location):
-        os.makedirs(FLAGS.output_location)
-    logging.info('Loading data...')
-    current_df = helper.load_data(FLAGS.current_data, FLAGS.output_location)
-    previous_df = helper.load_data(FLAGS.previous_data, FLAGS.output_location)
-
-    logging.info('Processing data...')
-    in_data = differ.process_data(previous_df, current_df)
-
-    logging.info('Point analysis:')
-    summary, result = differ.point_analysis(in_data)
-    result.sort_values(by=[differ.diff_column, differ.variable_column],
-                       inplace=True)
-    print(summary.head(10))
-    print(result.head(10))
-    helper.write_data(summary, FLAGS.output_location,
-                      'point-analysis-summary.csv')
-    helper.write_data(result, FLAGS.output_location,
-                      'point-analysis-results.csv')
-
-    logging.info('Series analysis:')
-    summary, result = differ.series_analysis(in_data)
-    result.sort_values(by=[differ.diff_column, differ.variable_column],
-                       inplace=True)
-    print(summary.head(10))
-    print(result.head(10))
-    helper.write_data(summary, FLAGS.output_location,
-                      'series-analysis-summary.csv')
-    helper.write_data(result, FLAGS.output_location,
-                      'series-analysis-results.csv')
-
-    logging.info('Differ output written to folder: %s', FLAGS.output_location)
+    differ = DatasetDiffer(FLAGS.current_data, FLAGS.previous_data,
+                           FLAGS.output_location, FLAGS.groupby_columns,
+                           FLAGS.value_columns)
+    differ.run_differ()
 
 
 if __name__ == '__main__':
