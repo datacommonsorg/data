@@ -70,4 +70,6 @@ def download_files(download_files_url: list, download_path: str) -> None:
             else:
                 download_gz_file(download_file_url, download_path)
     except Exception as e:
-        logging.fatal(f'Download Error: {e}')
+        logging.fatal(
+            f'Download Error: {e} - URL - {download_file_url} path - {download_path}'
+        )
