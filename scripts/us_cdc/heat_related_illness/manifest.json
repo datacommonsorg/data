@@ -1,0 +1,23 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EPHHeatRelatedIllness",
+      "curator_emails": ["sudhisha@google.com"],
+      "provenance_url": "https://ephtracking.cdc.gov/qrlist/35",
+      "provenance_description": "EPH Heat Related Illness",
+      "scripts": ["clean_data.py", "preprocess.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "state/output.tmcf",
+          "cleaned_csv": "state/cleaned.csv"
+        },
+        {
+          "template_mcf": "state/output.tmcf",
+          "cleaned_csv": "state/country_output.csv"
+        }
+      ],
+      "cron_schedule": "0 3 3 * *"
+    }
+  ]
+}
+

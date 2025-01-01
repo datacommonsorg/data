@@ -19,8 +19,7 @@ import json
 import csv
 import copy
 
-from absl import app
-from absl import flags
+from absl import app, logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -29,19 +28,31 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '..', '..', '..', 'util'))
 from statvar_dcid_generator import get_statvar_dcid
 from name_to_alpha2 import USSTATE_MAP_SPACE
 from alpha2_to_dcid import USSTATE_MAP
-
-flags.DEFINE_string('input_path', None,
-                    'Path to directory with files to process')
-flags.DEFINE_string('config_path', None, 'Path to config file')
-flags.DEFINE_string('output_path', None,
-                    'Path to directory where CSV, MCF will be written')
-
-_FLAGS = flags.FLAGS
+import pandas as pd
 
 _CONFIG = None
 
 # Columns in cleaned CSV
-_OUTPUT_COLUMNS = ('Year', 'Geo', 'StatVar', 'Quantity')
+_OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
+input_path = "./source_data/combined_csv_files/"
+
+config_path = "./config.json"
+output_path = "./state"
+
+
+def generate_tmcf():
+    _TMCF_TEMPLATE = ("Node: E:EPHHeatIllness->E0\n"
+                      "typeOf: dcs:StatVarObservation\n"
+                      "measurementMethod: C:EPHHeatIllness->measurementMethod\n"
+                      "observationAbout: C:EPHHeatIllness->Geo\n"
+                      "observationDate: C:EPHHeatIllness->Year\n"
+                      "variableMeasured: C:EPHHeatIllness->StatVar\n"
+                      "observationPeriod: P5M\n"
+                      "value: C:EPHHeatIllness->Quantity\n")
+
+    # Writing Genereated TMCF to local path.
+    with open(output_path + "/output.tmcf", 'w+', encoding='utf-8') as f_out:
+        f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
 
 
 def state_resolver(state: str) -> str:
@@ -88,10 +99,11 @@ def _process_file(file_name: str, csv_reader: csv.DictReader,
 
         processed_dict = {
             'Year': year_with_month,
-            'Geo': geo_dcid,
             'StatVar': row_statvar['Node'],
-            'Quantity': quantity
+            'Quantity': quantity,
+            'Geo': geo_dcid,
         }
+        processed_dict['measurementMethod'] = ""
         csv_writer.writerow(processed_dict)
         statvars.append(row_statvar)
 
@@ -127,34 +139,53 @@ def write_to_mcf(sv_list: list, mcf_path: str):
                 f.write(statvar_mcf)
 
 
+def aggregate():
+    """Method to aggregate EPH Heat Illness data from state level data."""
+    df = pd.read_csv(output_path + "/cleaned.csv",
+                     dtype={'Quantity': 'float64'})
+
+    # Aggregating all stat vars
+    df.drop_duplicates(subset=['Year', 'Geo', 'StatVar'],
+                       keep='first',
+                       inplace=True)
+    country_df = df.groupby(by=['Year', 'StatVar'],
+                            as_index=False).agg({'Quantity': 'sum'})
+    country_df['Geo'] = "country/USA"
+    country_df['measurementMethod'] = "dcs:DataCommonsAggregate"
+    country_df.to_csv(output_path + "/country_output.csv", index=False)
+
+
 def main(argv):
-    global _CONFIG
-    with open(_FLAGS.config_path, 'r', encoding='utf-8') as config_f:
-        _CONFIG = json.load(config_f)
+    try:
+        global _CONFIG
+        with open(config_path, 'r', encoding='utf-8') as config_f:
+            _CONFIG = json.load(config_f)
 
-    cleaned_csv_path = os.path.join(_FLAGS.output_path, 'cleaned.csv')
-    output_mcf_path = os.path.join(_FLAGS.output_path, 'output.mcf')
+        cleaned_csv_path = os.path.join(output_path, 'cleaned.csv')
+        output_mcf_path = os.path.join(output_path, 'output.mcf')
 
-    with open(cleaned_csv_path, 'w', encoding='utf-8') as cleaned_f:
+        with open(cleaned_csv_path, 'w', encoding='utf-8') as cleaned_f:
+            f_writer = csv.DictWriter(cleaned_f, fieldnames=_OUTPUT_COLUMNS)
+            f_writer.writeheader()
 
-        f_writer = csv.DictWriter(cleaned_f, fieldnames=_OUTPUT_COLUMNS)
-        f_writer.writeheader()
+            statvar_list = []
+            for file_name in os.listdir(input_path):
+                if file_name.endswith('.csv'):
+                    file_path = os.path.join(input_path, file_name)
+                    with open(file_path, 'r', encoding='utf-8') as csv_f:
+                        f_reader = csv.DictReader(csv_f,
+                                                  delimiter=',',
+                                                  quotechar='"')
+                        statvars = _process_file(file_name, f_reader, f_writer)
+                        if statvars:
+                            statvar_list.extend(statvars)
 
-        statvar_list = []
-        for file_name in os.listdir(_FLAGS.input_path):
-            if file_name.endswith('.csv'):
-                file_path = os.path.join(_FLAGS.input_path, file_name)
-                with open(file_path, 'r', encoding='utf-8') as csv_f:
-                    f_reader = csv.DictReader(csv_f,
-                                              delimiter=',',
-                                              quotechar='"')
-                    statvars = _process_file(file_name, f_reader, f_writer)
-                    if statvars:
-                        statvar_list.extend(statvars)
-
-        write_to_mcf(statvar_list, output_mcf_path)
+            write_to_mcf(statvar_list, output_mcf_path)
+        generate_tmcf()
+        aggregate()
+    except Exception as e:
+        logging.fatal(f"Processing Error - {e}")
 
 
 if __name__ == "__main__":
-    flags.mark_flags_as_required(['input_path', 'config_path', 'output_path'])
     app.run(main)
