@@ -21,7 +21,7 @@ pandas
 psutil
 pylint
 pytest
-requests==2.27.1
+requests==2.32.2
 requests_cache
 retry==0.9.2
 shapely==1.8.5
