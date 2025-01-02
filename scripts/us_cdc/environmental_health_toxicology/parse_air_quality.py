@@ -108,6 +108,7 @@ record_count_query = '?$query=select%20count(*)%20as%20COLUMN_ALIAS_GUARD__count
 STATVARS = {
     "DS_PM_pred": "Mean_Concentration_AirPollutant_PM2.5",
     "ds_pm_pred": "Mean_Concentration_AirPollutant_PM2.5",
+    "ds_pm_stdd": "Mean_Concentration_AirPollutant_PM2.5_StandardError",
     "DS_O3_pred": "Mean_Concentration_AirPollutant_Ozone",
     "PM25_max_pred": "Max_Concentration_AirPollutant_PM2.5",
     "PM25_med_pred": "Median_Concentration_AirPollutant_PM2.5",
@@ -151,11 +152,8 @@ def clean_air_quality_data(file_path, output_file, importname):
     """
     global output_file_name
     logging.info(f"import name from command line {importname}")
-    for config in import_configs:
-        import_name = config["import_name"]
     for config1 in import_configs:
         if config1["import_name"] == importname:
-            import_name = config1["import_name"]
             files = config1["files"]
             for file_info in files:
                 output_file_name = file_info["output_file_name"]
@@ -177,16 +175,28 @@ def clean_air_quality_data(file_path, output_file, importname):
                         elif "Ozone" in file:
                             census_tract = "ds_o3"
                         if "Census" in file:
-                            data = pd.melt(
-                                data,
-                                id_vars=[
-                                    'year', 'date', 'statefips', 'countyfips',
-                                    'ctfips', 'latitude', 'longitude',
-                                    census_tract + '_stdd'
-                                ],
-                                value_vars=[str(census_tract + '_pred')],
-                                var_name='StatisticalVariable',
-                                value_name='Value')
+                            if "PM2.5" in file: 
+                                data = pd.melt(   
+                                    data,
+                                    id_vars=[
+                                        'year', 'date', 'statefips', 'countyfips',
+                                        'ctfips', 'latitude', 'longitude'
+                                    ],
+                                    value_vars=[str(census_tract + '_pred'),str(census_tract + '_stdd')],
+                                    var_name='StatisticalVariable',
+                                    value_name='Value')
+                                    
+                            elif "Ozone" in file:
+                                data = pd.melt(
+                                    data,
+                                    id_vars=[
+                                        'year', 'date', 'statefips', 'countyfips',
+                                        'ctfips', 'latitude', 'longitude',
+                                        census_tract + '_stdd'
+                                    ],
+                                    value_vars=[str(census_tract + '_pred')],
+                                    var_name='StatisticalVariable',
+                                    value_name='Value')   
                             data.rename(
                                 columns={census_tract + '_stdd': 'Error'},
                                 inplace=True)
@@ -207,6 +217,7 @@ def clean_air_quality_data(file_path, output_file, importname):
                         elif "County" in file and "Ozone" in file:
                             data["statefips"] = data["statefips"].astype(
                                 str).str.zfill(2)
+                            print("checkingggg")
                             data["countyfips"] = data["countyfips"].astype(
                                 str).str.zfill(3)
                             data["dcid"] = "geoId/" + data["statefips"] + data[
@@ -290,3 +301,4 @@ def main(_):
 
 if __name__ == "__main__":
     app.run(main)
+    
