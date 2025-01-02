@@ -1,0 +1,104 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "CDC_PM25CensusTract",
+        "curator_emails": [
+          "sudhisha@google.com"
+        ],
+        "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
+        "provenance_description": "Environmental Health Toxicology",
+        "scripts": [
+          "parse_air_quality.py CDC_PM25CensusTract"
+        ],
+        "import_inputs": [
+          {
+            "template_mcf": "PM25CensusTractPollution.tmcf",
+            "cleaned_csv": "output/PM2.5CensusTract_0.csv"
+          },
+          {
+            "template_mcf": "PM25CensusTractPollution.tmcf",
+            "cleaned_csv": "output/PM2.5CensusTract_1.csv"
+          },
+          {
+            "template_mcf": "PM25CensusTractPollution.tmcf",
+            "cleaned_csv": "output/PM2.5CensusTract_2.csv"
+          },
+          {
+            "template_mcf": "PM25CensusTractPollution.tmcf",
+            "cleaned_csv": "output/PM2.5CensusTract_3.csv"
+          }
+          
+        ],
+        "cron_schedule": "0 1  2 * *"
+      },
+      {
+        "import_name": "CDC_OzoneCensusTract",
+        "curator_emails": [
+          "sudhisha@google.com"
+        ],
+        "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
+        "provenance_description": "Environmental Health Toxicology",
+        "scripts": [
+          "parse_air_quality.py CDC_OzoneCensusTract"
+        ],
+        "import_inputs": [
+          {
+            "template_mcf": "OzoneCensusTractPollution.tmcf",
+            "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_0.csv"
+          },
+          {
+            "template_mcf": "OzoneCensusTractPollution.tmcf",
+            "cleaned_csv": "output/PM2.Census_Tract_Level_Ozone_Concentrations_1.csv"
+          },
+          {
+            "template_mcf": "OzoneCensusTractPollution.tmcf",
+            "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_2.csv"
+          },
+          {
+            "template_mcf": "OzoneCensusTractPollution.tmcf",
+            "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_3.csv"
+          }
+          
+        ],
+        "cron_schedule": "0 1  3 * *"
+      },
+      {
+        "import_name": "CDC_PM25County",
+        "curator_emails": [
+          "sudhisha@google.com"
+        ],
+        "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
+        "provenance_description": "Environmental Health Toxicology",
+        "scripts": [
+          "parse_air_quality.py CDC_PM25County"
+        ],
+        "import_inputs": [
+          {
+            "template_mcf": "PM25CountyPollution.tmcf",
+            "cleaned_csv": "output/PM25county.csv"
+          }
+          
+        ],
+        "cron_schedule": "0 1  4 * *"
+      },
+      {
+        "import_name": "CDC_OzoneCounty",
+        "curator_emails": [
+          "sudhisha@google.com"
+        ],
+        "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
+        "provenance_description": "Environmental Health Toxicology",
+        "scripts": [
+          "parse_air_quality.py CDC_OzoneCounty"
+        ],
+        "import_inputs": [
+          {
+            "template_mcf": "OzoneCountyPollution.tmcf",
+            "cleaned_csv": "output/OzoneCounty.csv"
+          }
+          
+        ],
+        "cron_schedule": "0 1  5 * *"
+      }
+    ]
+  }
