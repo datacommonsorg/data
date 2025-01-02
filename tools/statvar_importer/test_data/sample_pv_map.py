@@ -39,10 +39,10 @@
 
     # Race: Mapping for values in Column Person Race
     "WH": {
-       "race": "dcs:WhiteAlone",
+        "race": "dcs:WhiteAlone",
     },
     "A-PI": {
-       "race": "dcs:AsianOrPacificIslander",
+        "race": "dcs:AsianOrPacificIslander",
     },
 
     # Population count observations fom column: "Total Persons".
@@ -50,11 +50,11 @@
     "total persons": {
         "value": "@Number",
         "populationType": "dcs:Person",
-        "measuredProperty" : "dcs:count",
+        "measuredProperty": "dcs:count",
     },
 
     # Another observation for column: Fraction of population
-    "fraction" : {
+    "fraction": {
         "populationType": "dcs:Person",
         # "measuredProperty" : "dcs:count", # Is the default value for SVObs.
         "measurementDenominator": "dcid:Count_Person",
@@ -62,10 +62,10 @@
     },
 
     # Extract PVs from section headers
-    'Males' : {
+    'Males': {
         'gender': "dcs:Male",
     },
-    'Females' : {
+    'Females': {
         'gender': "dcs:Female",
     },
 }

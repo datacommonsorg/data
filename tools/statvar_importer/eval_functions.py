@@ -54,7 +54,8 @@ def format_date(date_str: str, format_str: str = '%Y-%m-%d') -> str:
         return ''
 
 
-def str_to_camel_case(input_string: str, strip_re: str = r'[^A-Za-z_0-9]') -> str:
+def str_to_camel_case(input_string: str,
+                      strip_re: str = r'[^A-Za-z_0-9]') -> str:
     """Returns the string in CamelCase without spaces and special characters.
 
   Example: "Abc-def(HG-123)" -> "AbcDefHG".
