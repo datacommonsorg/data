@@ -9,7 +9,8 @@ import pandas as pd
 import zipfile
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 # URL templates
 download_url = 'https://www.epa.gov/system/files/other-files/{year}-10/{year_minus_1}_data_summary_spreadsheets.zip'
@@ -33,6 +34,7 @@ SHEET_NAMES_TO_CSV_FILENAMES = {
     'SF6 from Elec. Equip.': 'elec_equip.csv',
 }
 
+
 def get_csv_filename(sheet_name):
     """
     Determines the CSV filename for a given sheet name.
@@ -41,6 +43,7 @@ def get_csv_filename(sheet_name):
     if re.match(_DIRECT_EMITTERS_SHEET, sheet_name):
         return 'direct_emitters.csv'
     return SHEET_NAMES_TO_CSV_FILENAMES.get(sheet_name)
+
 
 class Downloader:
     """
@@ -82,7 +85,9 @@ class Downloader:
         """
         Downloads and unzips Excel files from dynamically generated DOWNLOAD_URI.
         """
-        uri = self.generate_and_validate(download_url, year = year, year_minus_1 = year_minus_1)
+        uri = self.generate_and_validate(download_url,
+                                         year=year,
+                                         year_minus_1=year_minus_1)
         logging.info(f'Downloading data from {uri}')
         try:
             r = requests.get(uri)
@@ -91,8 +96,10 @@ class Downloader:
             for file in z.namelist():
                 # Skip directories
                 if not file.endswith('/'):
-                    target_path = os.path.join(self.save_path, os.path.basename(file))
-                    with z.open(file) as source, open(target_path, 'wb') as target:
+                    target_path = os.path.join(self.save_path,
+                                               os.path.basename(file))
+                    with z.open(file) as source, open(target_path,
+                                                      'wb') as target:
                         target.write(source.read())
         except Exception as e:
             logging.error(f"Failed to download or extract data for {year}: {e}")
@@ -110,7 +117,9 @@ class Downloader:
             self._extract_data(headers)
         for sheet, csv_name in SHEET_NAMES_TO_CSV_FILENAMES.items():
             headers_df = pd.DataFrame.from_dict(headers[sheet], orient='index')
-            headers_df.transpose().to_csv(os.path.join(self.save_path, f'cols_{csv_name}'), index=None)
+            headers_df.transpose().to_csv(os.path.join(self.save_path,
+                                                       f'cols_{csv_name}'),
+                                          index=None)
         return self.files
 
     def save_all_crosswalks(self, filepath):
@@ -135,12 +144,12 @@ class Downloader:
 
     def _extract_data(self, headers):
         summary_filename = os.path.join(
-                self.save_path, YEAR_DATA_FILENAME.format(year=self.current_year)
-                        )
-        
+            self.save_path, YEAR_DATA_FILENAME.format(year=self.current_year))
+
         xl = pd.ExcelFile(summary_filename, engine='openpyxl')
-        logging.info(f"Available sheets in {summary_filename}: {xl.sheet_names}")
-        check_list=[]
+        logging.info(
+            f"Available sheets in {summary_filename}: {xl.sheet_names}")
+        check_list = []
         for sheet in xl.sheet_names:
             csv_filename = get_csv_filename(sheet)
             check_list.append(csv_filename)
@@ -150,34 +159,36 @@ class Downloader:
             summary_file = xl.parse(sheet, header=HEADER_ROW, dtype=str)
             csv_path = self._csv_path(csv_filename)
             summary_file.to_csv(csv_path, index=None, header=True)
-            headers.setdefault(sheet, {})[self.current_year] = summary_file.columns
+            headers.setdefault(sheet,
+                               {})[self.current_year] = summary_file.columns
             self.files.append((self.current_year, csv_path))
         if "direct_emitters.csv" not in check_list:
-                logging.error(f"'direct_emitters.csv' not found in the sheets for {self.current_year}. Aborting!")
-                raise SystemExit(f"Missing required sheet for 'direct_emitters.csv' in year {self.current_year}. Exiting.")
-            
+            logging.error(
+                f"'direct_emitters.csv' not found in the sheets for {self.current_year}. Aborting!"
+            )
+            raise SystemExit(
+                f"Missing required sheet for 'direct_emitters.csv' in year {self.current_year}. Exiting."
+            )
 
     def _gen_crosswalk(self):
         ssl._create_default_https_context = ssl._create_unverified_context
         try:
-            oris_df = pd.read_excel(
-                self.generate_and_validate(crosswalk_url, yr=self.current_year),
-                'ORIS Crosswalk',
-                header=0,
-                dtype=str,
-                usecols=CROSSWALK_COLS_TO_KEEP,
-                engine='openpyxl'
-            )
+            oris_df = pd.read_excel(self.generate_and_validate(
+                crosswalk_url, yr=self.current_year),
+                                    'ORIS Crosswalk',
+                                    header=0,
+                                    dtype=str,
+                                    usecols=CROSSWALK_COLS_TO_KEEP,
+                                    engine='openpyxl')
         except Exception:
             logging.warning(f"Using fallback CROSSWALK_URI for 2022")
-            oris_df = pd.read_excel(
-                self.generate_and_validate(crosswalk_url, yr=2022),
-                'ORIS Crosswalk',
-                header=0,
-                dtype=str,
-                usecols=CROSSWALK_COLS_TO_KEEP,
-                engine='openpyxl'
-            )
+            oris_df = pd.read_excel(self.generate_and_validate(crosswalk_url,
+                                                               yr=2022),
+                                    'ORIS Crosswalk',
+                                    header=0,
+                                    dtype=str,
+                                    usecols=CROSSWALK_COLS_TO_KEEP,
+                                    engine='openpyxl')
 
         oris_df = oris_df.rename(columns={'GHGRP Facility ID': GHGRP_ID_COL})
         all_facilities_df = pd.DataFrame()
@@ -185,8 +196,11 @@ class Downloader:
             csv_path = self._csv_path(csv_filename)
             if not os.path.exists(csv_path):
                 continue
-            df = pd.read_csv(csv_path, usecols=[GHGRP_ID_COL, 'FRS Id'], dtype=str)
-            all_facilities_df = pd.concat([all_facilities_df, df], ignore_index=True)
+            df = pd.read_csv(csv_path,
+                             usecols=[GHGRP_ID_COL, 'FRS Id'],
+                             dtype=str)
+            all_facilities_df = pd.concat([all_facilities_df, df],
+                                          ignore_index=True)
         all_facilities_df = all_facilities_df.join(
             oris_df.set_index(GHGRP_ID_COL), on=GHGRP_ID_COL, how='left')
         return all_facilities_df
@@ -194,8 +208,9 @@ class Downloader:
 
 if __name__ == '__main__':
     downloader = Downloader('tmp_data')
-    url_year= datetime.now().year
+    url_year = datetime.now().year
     if url_year < 2030:
-        downloader.download_data(url_year,url_year-1)
+        downloader.download_data(url_year, url_year - 1)
     downloader.extract_all_years()
-    downloader.save_all_crosswalks(os.path.join(downloader.save_path, 'crosswalks.csv'))
+    downloader.save_all_crosswalks(
+        os.path.join(downloader.save_path, 'crosswalks.csv'))

@@ -45,9 +45,13 @@ class ProcessTest(unittest.TestCase):
                 (2010, os.path.join(_RAW_DATA_DIR, '2010_direct_emitters.csv')),
                 (2011, os.path.join(_RAW_DATA_DIR, '2011_direct_emitters.csv')),
                 (2012, os.path.join(_RAW_DATA_DIR, '2012_elec_equip.csv')),
-                (2013, os.path.join(_RAW_DATA_DIR, '2013_local_distribution.csv')),
-                (2014, os.path.join(_RAW_DATA_DIR, '2014_local_distribution.csv')),
-                (2016, os.path.join(_RAW_DATA_DIR, '2016_gathering_and_boosting.csv')),
+                (2013, os.path.join(_RAW_DATA_DIR,
+                                    '2013_local_distribution.csv')),
+                (2014, os.path.join(_RAW_DATA_DIR,
+                                    '2014_local_distribution.csv')),
+                (2016,
+                 os.path.join(_RAW_DATA_DIR,
+                              '2016_gathering_and_boosting.csv')),
                 (2016, os.path.join(_RAW_DATA_DIR, '2016_oil_and_gas.csv'))
             ], crosswalk, got_filepath)
             with open(got_filepath) as gotf:
