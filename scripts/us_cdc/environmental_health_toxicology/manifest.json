@@ -48,7 +48,7 @@
           },
           {
             "template_mcf": "OzoneCensusTractPollution.tmcf",
-            "cleaned_csv": "output/PM2.Census_Tract_Level_Ozone_Concentrations_1.csv"
+            "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_1.csv"
           },
           {
             "template_mcf": "OzoneCensusTractPollution.tmcf",
