@@ -280,11 +280,11 @@ class Counters():
                              max(0, (totals - num_processed)) / rate)
 
     def _update_process_counters(self):
-       '''Update process counters for memory and time.'''
-       process = psutil.Process(os.getpid())
-       mem = process.memory_info()
-       self.max_counter('process-mem-rss', mem.rss)
-       self.max_counter('process-mem', mem.vms)
-       cpu_times = process.cpu_times()
-       self.set_counter('process-time-user-secs', cpu_times.user)
-       self.set_counter('process-time-sys-secs', cpu_times.system)
+        '''Update process counters for memory and time.'''
+        process = psutil.Process(os.getpid())
+        mem = process.memory_info()
+        self.max_counter('process-mem-rss', mem.rss)
+        self.max_counter('process-mem', mem.vms)
+        cpu_times = process.cpu_times()
+        self.set_counter('process-time-user-secs', cpu_times.user)
+        self.set_counter('process-time-sys-secs', cpu_times.system)
