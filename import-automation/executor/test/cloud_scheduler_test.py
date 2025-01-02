@@ -140,6 +140,4 @@ class CloudSchedulerTest(unittest.TestCase):
                 }
             }
         }
-        print(got)
-        print(DeepDiff(got, want))
         assert DeepDiff(got, want) == {}
