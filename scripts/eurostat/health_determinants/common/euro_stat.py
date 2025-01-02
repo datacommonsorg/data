@@ -211,7 +211,7 @@ class EuroStat:
             dfs = []
             for file_path in self._input_files:
                 df = pd.read_csv(file_path, sep='\t', header=0)
-                file_name = file_path.split("/")[-1][:-4]
+                file_name = file_path.split("/")[-1]
                 df.columns = df.columns.str.strip()
                 df = self._parse_file(file_name, df, self._import_name)
                 df['SV'] = df['SV'].str.replace('_Total', '')

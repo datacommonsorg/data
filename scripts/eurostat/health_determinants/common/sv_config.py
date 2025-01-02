@@ -27,41 +27,41 @@ Dictionary structure:
 
 file_to_sv_mapping = {
     "alcohol_consumption": {
-        "hlth_ehis_al1c?format=TSV&compress": "'Percent_' + df['frequenc_alcohol']"+\
+        "hlth_ehis_al1c": "'Percent_' + df['frequenc_alcohol']"+\
             " + '_AlcoholConsumption' + '_In_Count_Person_' + df['citizen']"+\
             " + '_' + df['sex']",
-        "hlth_ehis_al1u?format=TSV&compress": "'Percent_' + df['frequenc_alcohol']"+\
+        "hlth_ehis_al1u": "'Percent_' + df['frequenc_alcohol']"+\
             " + '_AlcoholConsumption' + '_In_Count_Person_' + df['deg_urb']"+\
             " + '_' + df['sex']",
-        "hlth_ehis_al1e?format=TSV&compress": "'Percent_' + df['frequenc_alcohol']"+\
+        "hlth_ehis_al1e": "'Percent_' + df['frequenc_alcohol']"+\
             " + '_AlcoholConsumption' + '_In_Count_Person_' + df['isced11']"+\
             " + '_' + df['sex']",
-        "hlth_ehis_de10?format=TSV&compress": "'Percent_' + df['frequenc_alcohol']"+\
+        "hlth_ehis_de10": "'Percent_' + df['frequenc_alcohol']"+\
             " + '_AlcoholConsumption' + '_In_Count_Person_' + df['isced11']"+\
             " + '_' + df['sex']",
-        "hlth_ehis_al1b?format=TSV&compress": "'Percent_' + df['frequenc_alcohol']"+\
+        "hlth_ehis_al1b": "'Percent_' + df['frequenc_alcohol']"+\
             " + '_AlcoholConsumption' + '_In_Count_Person_' + df['sex'] + '_'"+\
             " + df['c_birth']",
-        "hlth_ehis_al1i?format=TSV&compress": "'Percent_' + df['frequenc_alcohol']"+\
+        "hlth_ehis_al1i": "'Percent_' + df['frequenc_alcohol']"+\
             " + '_AlcoholConsumption' + '_In_Count_Person_' + df['sex'] + '_'"+\
             " + df['quant_inc']",
-        "hlth_ehis_al3u?format=TSV&compress": "'Percent_' + df['frequenc_alcohol']"+\
+        "hlth_ehis_al3u": "'Percent_' + df['frequenc_alcohol']"+\
             " + '_BingeDrinking' + '_In_Count_Person_' + df['deg_urb'] + '_'"+\
             " + df['sex']",
-        "hlth_ehis_al3e?format=TSV&compress": "'Percent_' + df['frequenc_alcohol']"+\
+        "hlth_ehis_al3e": "'Percent_' + df['frequenc_alcohol']"+\
             " + '_BingeDrinking' + '_In_Count_Person_' + df['isced11'] + '_'"+\
             " + df['sex']",
-        "hlth_ehis_de6?format=TSV&compress" : "'Percent_' + df['frequenc_alcohol']"+\
+        "hlth_ehis_de6" : "'Percent_' + df['frequenc_alcohol']"+\
             " + '_BingeDrinking' + '_In_Count_Person_' + df['isced11'] + '_'"+\
             " + df['sex']",
-        "hlth_ehis_al3i?format=TSV&compress": "'Percent_' + df['frequenc_alcohol']"+\
+        "hlth_ehis_al3i": "'Percent_' + df['frequenc_alcohol']"+\
             " + '_BingeDrinking' + '_In_Count_Person_' + df['sex'] + '_'"+\
             " + df['quant_inc']",
-        "hlth_ehis_al2u?format=TSV&compress": "'Percent_HazardousAlcoholConsumption'"+\
+        "hlth_ehis_al2u": "'Percent_HazardousAlcoholConsumption'"+\
             " + '_In_Count_Person_' + df['deg_urb'] + '_' + df['sex']",
-        "hlth_ehis_al2e?format=TSV&compress": "'Percent_HazardousAlcoholConsumption'"+\
+        "hlth_ehis_al2e": "'Percent_HazardousAlcoholConsumption'"+\
             " + '_In_Count_Person_' + df['isced11'] + '_' + df['sex']",
-        "hlth_ehis_al2i?format=TSV&compress": "'Percent_HazardousAlcoholConsumption'"+\
+        "hlth_ehis_al2i": "'Percent_HazardousAlcoholConsumption'"+\
             " + '_In_Count_Person_' + df['sex'] + '_' + df['quant_inc']",
     },
 
@@ -140,71 +140,71 @@ file_to_sv_mapping = {
     },
 
     "tobacco_consumption":  {
-        "hlth_ehis_sk1b?format=TSV&compressed=true":
+        "hlth_ehis_sk1b":
         "'Percent'+'_'+df['smoking']+'_'+'TobaccoProducts'"+\
         "+'_In_Count_Person_'+df['sex']+'_'+df['c_birth']",
 
-        "hlth_ehis_sk1c?format=TSV&compressed=true":
+        "hlth_ehis_sk1c":
             "'Percent'+'_'+df['smoking']+'_'+'TobaccoProducts'"+\
             "+'_In_Count_Person_'+df['citizen']+'_'+df['sex']",
 
-        "hlth_ehis_sk1e?format=TSV&compressed=true":
+        "hlth_ehis_sk1e":
             "'Percent'+'_'+df['smoking']+'_TobaccoProducts'"+\
             "+'_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-        "hlth_ehis_sk1i?format=TSV&compressed=true":
+        "hlth_ehis_sk1i":
             " 'Percent'+'_'+df['smoking']+'_TobaccoProducts'"+\
             "+'_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
 
-        "hlth_ehis_sk1u?format=TSV&compressed=true":
+        "hlth_ehis_sk1u":
             "'Percent'+'_'+df['smoking']+'_TobaccoProducts'"+\
             "+'_In_Count_Person_'+df['deg_urb']+'_'+df['sex']",
 
-        "hlth_ehis_sk2i?format=TSV&compressed=true":
+        "hlth_ehis_sk2i":
             "'Percent_FormerSmoker_Daily_TobaccoProducts'"+\
             "+'_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
 
-        "hlth_ehis_sk2e?format=TSV&compressed=true":
+        "hlth_ehis_sk2e":
             "'Percent_FormerSmoker_Daily_TobaccoProducts'"+\
             "+'_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-        "hlth_ehis_sk3e?format=TSV&compressed=true":
+        "hlth_ehis_sk3e":
             "'Percent_Daily_'+df['smoking']+'_TobaccoSmoking'+'_Cigarettes'"+\
             "+'_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-        "hlth_ehis_sk3i?format=TSV&compressed=true":
+        "hlth_ehis_sk3i":
             "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+'_Cigarettes'"+\
             "+'_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
 
-        "hlth_ehis_sk3u?format=TSV&compressed=true":
+        "hlth_ehis_sk3u":
             "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'+'_Cigarettes'"+\
             "+'_In_Count_Person_'+df['deg_urb']+'_'+df['sex']",
 
-        "hlth_ehis_sk4e?format=TSV&compressed=true":
+        "hlth_ehis_sk4e":
             "'Percent'+'_'+df['frequenc_tobacco']+'_ExposureToTobaccoSmoke'"+\
             "+'_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-        "hlth_ehis_sk4u?format=TSV&compressed=true":
+        "hlth_ehis_sk4u":
             "'Percent'+'_'+df['frequenc_tobacco']+'_ExposureToTobaccoSmoke'"+\
             "+'_In_Count_Person_'+df['deg_urb']+'_'+df['sex']",
 
-        "hlth_ehis_sk5e?format=TSV&compressed=true":
+        "hlth_ehis_sk5e":
             "'Percent_Daily_TobaccoSmoking_'+df['duration']+'_TobaccoProducts'"+\
             "+'_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-        "hlth_ehis_sk6e?format=TSV&compressed=true":
+        "hlth_ehis_sk6e":
             "'Percent_'+df['frequenc_tobacco']+'_'+'ECigarettes'"+\
             "+'_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-        "hlth_ehis_de3?format=TSV&compressed=true":
+        "hlth_ehis_de3":
             "'Percent_Daily_TobaccoSmoking'+'_Cigarettes'"+\
             "+'_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-        "hlth_ehis_de4?format=TSV&compressed=true":
+        "hlth_ehis_de4":
             "'Percent_Daily_TobaccoSmoking'"+\
             "+'_Cigarettes'+'_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
 
-        "hlth_ehis_de5?format=TSV&compressed=true":
+        "hlth_ehis_de5":
             "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'"+\
             "+'_Cigarettes'+'_In_Count_Person_'+df['isced11']+'_'+df['sex']"
 
@@ -315,6 +315,4 @@ file_to_sv_mapping = {
        "hlth_ehis_fv5e" : " 'Percent_'+ df['frequenc_fruitsvegetables'] + '_' +'ConsumptionOfPureFruitOrConsumptionOfVegetableJuice_' "+\
              " +  'In_Count_Person_' +df['isced11'] +'_' + df['sex']",
     },
-
-
 }

@@ -31,7 +31,7 @@ def download_gz_file(download_file_url: str, download_path: str) -> None:
     Returns:
         None
     """
-    file_name = download_file_url.split("/")[-1][:-3]
+    file_name = download_file_url.split("/")[-1][:-3].split("?")[0]
     output_file = download_path + "/" + file_name
 
     with urllib.request.urlopen(download_file_url) as response:
@@ -57,18 +57,7 @@ def download_files(download_files_url: list, download_path: str) -> None:
     """
     try:
         for download_file_url in download_files_url:
-            file_extension = download_file_url.split(".")[-1]
-
-            if file_extension == "gz":
-                download_gz_file(download_file_url, download_path)
-            elif file_extension == "txt":
-                download_gz_file(download_file_url, download_path)
-            elif file_extension == "csv":
-                download_gz_file(download_file_url, download_path)
-            elif file_extension == "pdf":
-                download_gz_file(download_file_url, download_path)
-            else:
-                download_gz_file(download_file_url, download_path)
+            download_gz_file(download_file_url, download_path)
     except Exception as e:
         logging.fatal(
             f'Download Error: {e} - URL - {download_file_url} path - {download_path}'
