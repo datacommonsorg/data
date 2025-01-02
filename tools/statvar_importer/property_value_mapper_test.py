@@ -97,10 +97,16 @@ class PropertyValueMapperTest(unittest.TestCase):
         ])
 
         pvs = pv_mapper.get_pvs_for_key('Person Age')
-        self.assertEqual(pvs, {'#Regex': '(?P<StartAge>[0-9]+)-(?P<EndAge>[0-9]+)',
-                               'age': 'dcid:{@StartAge}To{@EndAge}Years'})
+        self.assertEqual(
+            pvs, {
+                '#Regex': '(?P<StartAge>[0-9]+)-(?P<EndAge>[0-9]+)',
+                'age': 'dcid:{@StartAge}To{@EndAge}Years'
+            })
         # Verify processing of regex for range
         self.assertTrue(pv_mapper.process_pvs_for_data('10-20', pvs))
-        self.assertEqual(pvs, {'EndAge': '20', 'StartAge': '10', 'age': 'dcid:{@StartAge}To{@EndAge}Years'})
-
-
+        self.assertEqual(
+            pvs, {
+                'EndAge': '20',
+                'StartAge': '10',
+                'age': 'dcid:{@StartAge}To{@EndAge}Years'
+            })
