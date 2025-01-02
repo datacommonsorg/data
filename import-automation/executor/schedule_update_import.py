@@ -54,6 +54,8 @@ flags.DEFINE_string(
     'A string specifying the path of an import in the following format:'
     '<path_to_directory_relative_to_repository_root>:<import_name>.'
     'Example: scripts/us_usda/quickstats:UsdaAgSurvey')
+flags.DEFINE_string('config_override', _CONFIG_OVERRIDE_FILE,
+                    'Config file with overridden parameters.')
 
 _FLAGS(sys.argv)
 
@@ -301,8 +303,9 @@ def main(_):
     cfg.gcp_project_id = _FLAGS.gke_project_id
 
     logging.info(
-        f'Updating any config fields from local file: {_CONFIG_OVERRIDE_FILE}.')
-    cfg = _override_configs(_CONFIG_OVERRIDE_FILE, cfg)
+        f'Updating any config fields from local file: {_FLAGS.config_override}.'
+    )
+    cfg = _override_configs(_FLAGS.config_override, cfg)
 
     logging.info('Reading Cloud scheduler configs from GCS.')
     scheduler_config_dict = _get_cloud_config(_FLAGS.scheduler_config_filename)
