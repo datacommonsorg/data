@@ -1,0 +1,19 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EPA_GHGRP",
+      "curator_emails": ["kuru@google.com"],
+      "provenance_url": "https://www.epa.gov/ghgreporting",
+      "provenance_description": "EPA emissions data reported as part of the Greenhouse Gas Reporting Program (GHGRP).",
+      "scripts": ["gen_data.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "import_data/observations.tmcf",
+          "cleaned_csv": "import_data/all_data.csv"
+        }
+      ],
+      "cron_schedule": "0 03 * * 1"
+    }
+  ]
+}
+
