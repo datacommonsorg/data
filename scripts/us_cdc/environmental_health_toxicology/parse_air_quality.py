@@ -72,17 +72,26 @@ import_configs = [{
         "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input.csv",
         "output_file_name": "Census_Tract_Level_Ozone_Concentrations_0.csv"
     }, {
-        "url": "https://data.cdc.gov/resource/xm94-zmtx.csv",
-        "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input_1.csv",
-        "output_file_name": "Census_Tract_Level_Ozone_Concentrations_1.csv"
+        "url":
+            "https://data.cdc.gov/resource/xm94-zmtx.csv",
+        "input_file_name":
+            "Census_Tract_Level_Ozone_Concentrations_input_1.csv",
+        "output_file_name":
+            "Census_Tract_Level_Ozone_Concentrations_1.csv"
     }, {
-        "url": "https://data.cdc.gov/resource/847z-pxin.csv",
-        "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input_2.csv",
-        "output_file_name": "Census_Tract_Level_Ozone_Concentrations_2.csv"
+        "url":
+            "https://data.cdc.gov/resource/847z-pxin.csv",
+        "input_file_name":
+            "Census_Tract_Level_Ozone_Concentrations_input_2.csv",
+        "output_file_name":
+            "Census_Tract_Level_Ozone_Concentrations_2.csv"
     }, {
-        "url": "https://data.cdc.gov/resource/hf2a-3ebq.csv",
-        "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input_3.csv",
-        "output_file_name": "Census_Tract_Level_Ozone_Concentrations_3.csv"
+        "url":
+            "https://data.cdc.gov/resource/hf2a-3ebq.csv",
+        "input_file_name":
+            "Census_Tract_Level_Ozone_Concentrations_input_3.csv",
+        "output_file_name":
+            "Census_Tract_Level_Ozone_Concentrations_3.csv"
     }]
 }, {
     "import_name":
@@ -161,7 +170,7 @@ def clean_air_quality_data(file_path, output_file, importname):
 
                 for file in os.listdir(file_path):
                     logging.info(f"file_path: {file_path}")
-                    
+
                     if str(file).endswith('.csv'):
                         logging.info(f"Cleaning {file} ....")
                         data = pd.read_csv(os.path.join(file_path, file))
@@ -175,28 +184,31 @@ def clean_air_quality_data(file_path, output_file, importname):
                         elif "Ozone" in file:
                             census_tract = "ds_o3"
                         if "Census" in file:
-                            if "PM2.5" in file: 
-                                data = pd.melt(   
-                                    data,
-                                    id_vars=[
-                                        'year', 'date', 'statefips', 'countyfips',
-                                        'ctfips', 'latitude', 'longitude'
-                                    ],
-                                    value_vars=[str(census_tract + '_pred'),str(census_tract + '_stdd')],
-                                    var_name='StatisticalVariable',
-                                    value_name='Value')
-                                    
+                            if "PM2.5" in file:
+                                data = pd.melt(data,
+                                               id_vars=[
+                                                   'year', 'date', 'statefips',
+                                                   'countyfips', 'ctfips',
+                                                   'latitude', 'longitude'
+                                               ],
+                                               value_vars=[
+                                                   str(census_tract + '_pred'),
+                                                   str(census_tract + '_stdd')
+                                               ],
+                                               var_name='StatisticalVariable',
+                                               value_name='Value')
+
                             elif "Ozone" in file:
                                 data = pd.melt(
                                     data,
                                     id_vars=[
-                                        'year', 'date', 'statefips', 'countyfips',
-                                        'ctfips', 'latitude', 'longitude',
-                                        census_tract + '_stdd'
+                                        'year', 'date', 'statefips',
+                                        'countyfips', 'ctfips', 'latitude',
+                                        'longitude', census_tract + '_stdd'
                                     ],
                                     value_vars=[str(census_tract + '_pred')],
                                     var_name='StatisticalVariable',
-                                    value_name='Value')   
+                                    value_name='Value')
                             data.rename(
                                 columns={census_tract + '_stdd': 'Error'},
                                 inplace=True)
@@ -301,4 +313,3 @@ def main(_):
 
 if __name__ == "__main__":
     app.run(main)
-    
