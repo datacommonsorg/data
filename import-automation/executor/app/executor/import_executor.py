@@ -473,9 +473,9 @@ class ImportExecutor:
         """
         node = _IMPORT_METADATA_MCF_TEMPLATE.format_map({
             "import_name": import_spec.get('import_name'),
-            "last_data_refresh_date": _clean_date(utils.pacific_time())
+            "last_data_refresh_date": _clean_date(utils.utctime())
         })
-        next_data_refresh_date = utils.next_pacific_date(
+        next_data_refresh_date = utils.next_utc_date(
             import_spec.get('cron_schedule'))
         if next_data_refresh_date:
             node += f'nextDataRefreshDate: "{next_data_refresh_date}"\n'
