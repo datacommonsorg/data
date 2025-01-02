@@ -41,7 +41,7 @@ def pacific_time():
 
 
 def next_utc_date(cron_expression: str, from_time: str = None) -> str:
-    """Returns the next date from today in ISO8601 with timezone UTC+0, 
+    """Returns the next date from today in ISO8601 with timezone UTC+0,
     given a cron schedule.
 
     Args:
