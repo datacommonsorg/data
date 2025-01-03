@@ -240,7 +240,6 @@ class ImportExecutor:
         with tempfile.TemporaryDirectory() as tmpdir:
             repo_dir = self.github.download_repo(
                 tmpdir, commit_sha, self.config.repo_download_timeout)
-
             logging.info(f'Downloaded repo: {repo_dir}')
 
             imports_to_execute = import_target.find_imports_to_execute(
