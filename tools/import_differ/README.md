@@ -1,10 +1,10 @@
-# Dataset Differ
+# Import Differ
 
 This utility generates a diff (point and series analysis) of two versions of the same dataset for import analysis.
 
 **Usage**
 ```
-python differ.py --current_data=<path> --previous_data=<path>
+python import_differ.py --current_data=<path> --previous_data=<path>
 ```
 
 Parameter description:
@@ -26,7 +26,7 @@ Summary output generated is of the form below showing counts of differences for 
 |3|dcid:var4|0|2|0|0|2|
 
 Detailed diff output is written to files for further analysis. Sample result files can be found under folder 'test/results'.
-- point-analysis-summary.csv: diff summry for point analysis
-- point-analysis-results.csv: detailed results for point analysis
-- series-analysis-summary.csv: diff summry for series analysis
-- series-analysis-results.csv: detailed results for series analysis
+- point\_analysis\_summary.csv: diff summry for point analysis
+- point\_analysis\_results.csv: detailed results for point analysis
+- series\_analysis\_summary.csv: diff summry for series analysis
+- series\_analysis\_results.csv: detailed results for series analysis
