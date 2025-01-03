@@ -465,7 +465,7 @@ measuredProperty: dcs:area
 statType: dcs:measuredValue
 farmInventoryType: dcs:CornForGrain
 
-Node: dcid:Amout_FarmInventory_CornForGrain
+Node: dcid:Amount_FarmInventory_CornForGrain
 description: "Amount of corn for grain on farms."
 typeOf: dcs:StatisticalVariable
 populationType: dcs:FarmInventory
