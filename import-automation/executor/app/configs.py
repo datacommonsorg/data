@@ -84,6 +84,8 @@ class ExecutorConfig:
     dashboard_oauth_client_id: str = ''
     # Oauth Client ID used to authenticate with the proxy.
     importer_oauth_client_id: str = ''
+    # URL for the import executor container image.
+    executor_docker_image: str = 'gcr.io/datcom-ci/dc-import-executor:latest'
     # Access token of the account used to authenticate with GitHub. This is not
     # the account password. See
     # https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token.
@@ -121,6 +123,8 @@ class ExecutorConfig:
     email_account: str = ''
     # The corresponding password, app password, or access token.
     email_token: str = ''
+    # Disbale email alert notifications.
+    disable_email_notifications: bool = False
     # Maximum time a blocking call to the importer to
     # perform an import can take in seconds.
     importer_import_timeout: float = 20 * 60
