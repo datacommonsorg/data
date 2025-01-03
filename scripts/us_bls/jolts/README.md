@@ -89,8 +89,6 @@ Additional information about each dataframe.
   """
   
 IMPORTANT: 
-	If any new statistical variable comes in future , it is to be added to the dictionaries :
-		1. _dcid_map in map_config.py
-		2. _mcf_map in mcf_config.py
+	If any new statistical variable comes in future , it is to be added to the dictionaries : _dcid_map in map_config.py
 		
-		
+
