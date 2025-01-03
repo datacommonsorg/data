@@ -109,7 +109,7 @@ The expected output of this test can be found in [`small_Palmer_expected.csv`](h
 
 #### Processing Steps
 
-`@input_file_name` - path to the input csv file to be cleaned
+<!-- `@input_file_name` - path to the input csv file to be cleaned
 
 `@output_file_name` - path to write the cleaned csv file
 
@@ -122,5 +122,57 @@ $ python3 parse_air_quality.py input_file_name output_file_name
 To clean the precipitation index data files, run: 
 
 ```bash
-$ python3 parse_precipitation_index.py input_file_name output_file_name
-```
+$ python3 parse_precipitation_index.py input_file_name output_file_name -->
+
+1. Import name: CDC_PM25CensusTract
+
+   command to download the file
+   ============================
+
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_PM25CensusTract --mode=download
+   
+
+   Command to process the file
+   ===========================
+
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_PM25CensusTract --mode=process
+
+
+2. Import name: CDC_OzoneCensusTract
+
+   command to download the file
+   ============================
+
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_OzoneCensusTract --mode=download
+   
+
+   Command to process the file
+   ===========================
+
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_OzoneCensusTract --mode=process
+
+   3. Import name: CDC_PM25County
+
+   command to download the file
+   ============================
+
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_PM25County --mode=download
+   
+
+   Command to process the file
+   ===========================
+
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_PM25County --mode=process
+
+   4. Import name: CDC_OzoneCounty
+
+   command to download the file
+   ============================
+
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_OzoneCounty --mode=download
+   
+
+   Command to process the file
+   ===========================
+
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_OzoneCounty --mode=process
