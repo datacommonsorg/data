@@ -32,12 +32,12 @@ import pandas as pd
 
 _CONFIG = None
 
-# Columns in cleaned CSV
-_OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
 input_path = "./source_data/combined_csv_files/"
-
 config_path = "./config.json"
 output_path = "./state"
+
+# Columns in cleaned CSV
+_OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
 
 
 def generate_tmcf():
@@ -155,36 +155,38 @@ def aggregate():
     country_df.to_csv(output_path + "/country_output.csv", index=False)
 
 
+def process(cleaned_csv_path, output_mcf_path, input_path):
+    global _CONFIG
+    with open(config_path, 'r', encoding='utf-8') as config_f:
+        _CONFIG = json.load(config_f)
+
+    with open(cleaned_csv_path, 'w', encoding='utf-8') as cleaned_f:
+        f_writer = csv.DictWriter(cleaned_f, fieldnames=_OUTPUT_COLUMNS)
+        f_writer.writeheader()
+        statvar_list = []
+        for file_name in os.listdir(input_path):
+            if file_name.endswith('.csv'):
+                file_path = os.path.join(input_path, file_name)
+                with open(file_path, 'r', encoding='utf-8') as csv_f:
+                    f_reader = csv.DictReader(csv_f,
+                                              delimiter=',',
+                                              quotechar='"')
+                    statvars = _process_file(file_name, f_reader, f_writer)
+                    if statvars:
+                        statvar_list.extend(statvars)
+        write_to_mcf(statvar_list, output_mcf_path)
+
+
 def main(argv):
     try:
-        global _CONFIG
-        with open(config_path, 'r', encoding='utf-8') as config_f:
-            _CONFIG = json.load(config_f)
-
         cleaned_csv_path = os.path.join(output_path, 'cleaned.csv')
         output_mcf_path = os.path.join(output_path, 'output.mcf')
-
-        with open(cleaned_csv_path, 'w', encoding='utf-8') as cleaned_f:
-            f_writer = csv.DictWriter(cleaned_f, fieldnames=_OUTPUT_COLUMNS)
-            f_writer.writeheader()
-
-            statvar_list = []
-            for file_name in os.listdir(input_path):
-                if file_name.endswith('.csv'):
-                    file_path = os.path.join(input_path, file_name)
-                    with open(file_path, 'r', encoding='utf-8') as csv_f:
-                        f_reader = csv.DictReader(csv_f,
-                                                  delimiter=',',
-                                                  quotechar='"')
-                        statvars = _process_file(file_name, f_reader, f_writer)
-                        if statvars:
-                            statvar_list.extend(statvars)
-
-            write_to_mcf(statvar_list, output_mcf_path)
+        process(cleaned_csv_path, output_mcf_path, input_path)
         generate_tmcf()
         aggregate()
+        logging.info("Processing completed!")
     except Exception as e:
-        logging.fatal(f"Processing Error - {e}")
+        logging.fatal(f"Encountered some issue with process - {e}")
 
 
 if __name__ == "__main__":

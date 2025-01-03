@@ -1,0 +1,12 @@
+Year,State,Data Value,Age Group,Gender
+2001,California,5,0 TO 4,Male
+2002,California,2,0 TO 4,Female
+2003,California,4,5 TO 14,Male
+2004,California,0,5 TO 14,Female
+2005,California,40,15 TO 34,Male
+2006,California,15,15 TO 34,Female
+2007,California,97,35 TO 64,Male
+2008,California,32,35 TO 64,Female
+2009,California,90,>= 65,Male
+2010,California,71,>= 65,Female
+2011,Connecticut,0,0 TO 4,Male
