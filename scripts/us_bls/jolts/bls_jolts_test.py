@@ -32,6 +32,9 @@ OUTPUT_DIR = 'actual_output_files'
 OUTPUT_FILES = 'expected_output_files'
 TEST_DATA_DIR = 'test_data'
 
+if not os.path.exists("./test_data/actual_results/"):
+    os.makedirs("./test_data/actual_output_files/")
+
 
 class TestPreprocess(unittest.TestCase):
     """
