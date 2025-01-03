@@ -1,0 +1,9 @@
+param,value
+places_within,country/USA
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
+url,https://ncses.nsf.gov/surveys/graduate-students-postdoctorates-s-e/2021#data
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/1gP_IldO2vtscX-Kn687AQ1-1D-XJ1YuRUQO6JyYBIOM/edit#gid=1032652832
+comments,Ingnoring Percentage value 100 to remove SV's with same numerator and denominator
+mapped_rows,6
+mapped_columns,1
+drop_statvars_without_svobs,0
