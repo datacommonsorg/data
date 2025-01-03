@@ -32,9 +32,8 @@ OUTPUT_DIR = 'actual_output_files'
 OUTPUT_FILES = 'expected_output_files'
 TEST_DATA_DIR = 'test_data'
 
-if not os.path.exists("./test_data/actual_results/"):
+if not os.path.exists("./test_data/actual_output_files/"):
     os.makedirs("./test_data/actual_output_files/")
-
 
 class TestPreprocess(unittest.TestCase):
     """
@@ -50,11 +49,9 @@ class TestPreprocess(unittest.TestCase):
 
         data_file_path = os.path.join(_MODULE_DIR, TEST_DATA_DIR, OUTPUT_DIR)
 
-        cleaned_csv_path = os.path.join(data_file_path,
-                                        "BLSJolts_StatisticalVariables.csv")
-        mcf_path = os.path.join(data_file_path,
-                                "BLSJolts_StatisticalVariables.mcf")
-
+        cleaned_csv_path = os.path.join(data_file_path, "BLSJolts_StatisticalVariables.csv")
+        mcf_path = os.path.join(data_file_path, "BLSJolts_StatisticalVariables.mcf")
+        
         jolts_df, schema_mapping = generate_cleaned_dataframe(files_dir)
         final_columns = ['Date', 'StatisticalVariable', 'Value']
         # output_csv_path = os.path.join(OUTPUT_FILES, "BLSJolts_StatisticalVariables.csv")
@@ -74,9 +71,8 @@ class TestPreprocess(unittest.TestCase):
         This method tests MCF files generated using process module against
         expected results.
         """
-        expected_mcf_file_path = os.path.join(
-            _MODULE_DIR, TEST_DATA_DIR, OUTPUT_FILES,
-            "BLSJolts_StatisticalVariables.mcf")
+        expected_mcf_file_path = os.path.join(_MODULE_DIR, TEST_DATA_DIR, OUTPUT_FILES,
+                                              "BLSJolts_StatisticalVariables.mcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -90,15 +86,14 @@ class TestPreprocess(unittest.TestCase):
         This method tests CSV file generated using process module against
         expected CSV result.
         """
-        expected_csv_file_path = os.path.join(
-            _MODULE_DIR, TEST_DATA_DIR, OUTPUT_FILES,
-            "BLSJolts_StatisticalVariables.csv")
+        expected_csv_file_path = os.path.join(_MODULE_DIR, TEST_DATA_DIR, OUTPUT_FILES,
+                                              "BLSJolts_StatisticalVariables.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
-
+            
         self.assertEqual(expected_csv_data.strip(),
                          self._actual_csv_data.strip())
 
