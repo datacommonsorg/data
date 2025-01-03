@@ -1,0 +1,9 @@
+Node: E:eurostat_population_alcohol_consumption->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:eurostat_population_alcohol_consumption->SV
+measurementMethod: C:eurostat_population_alcohol_consumption->Measurement_Method
+observationAbout: C:eurostat_population_alcohol_consumption->geo
+observationDate: C:eurostat_population_alcohol_consumption->time
+unit: Percent
+scalingFactor: 100
+value: C:eurostat_population_alcohol_consumption->observation

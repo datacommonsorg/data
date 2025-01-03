@@ -18,8 +18,8 @@ Dataset with Degree of Urbanisation, Country of Birth, Country of Citizenship an
 
 
 ### Download URL
-The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/health/data/database -> 	Health -> Health determinants (hlth_det).
-The actual URLs are listed in download_input_files.py.
+The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/main/data/database -> Data navigation tree -> Detailed datasets -> Population and social conditions -> Health -> Health determinants (hlth_det).
+The actual URLs are listed in import_download_details.py
 
 
 #### API Output
@@ -38,8 +38,6 @@ These are the attributes that we will use
 | Degree of Activity Limitation   				|  Different Activity Levels							|
 
 
-
-
 #### Cleaned Data
 Cleaned data will be inside [output_files/eurostat_population_bmi.csv] as a CSV file with the following columns.
 
@@ -48,7 +46,6 @@ Cleaned data will be inside [output_files/eurostat_population_bmi.csv] as a CSV 
 - SV
 - Measurement_Method
 - observation
-
 
 
 #### MCFs and Template MCFs
@@ -62,14 +59,18 @@ Run the test cases
 `/bin/python3 -m unittest scripts/eurostat/health_determinants/bmi/process_test.py`
 
 
-
-
 ### Import Procedure
 
-The below script will download the data and save it to local folder **input_files**.
+The below script will download the data, clean the data, Also generate final csv, mcf and tmcf files.
 
-`/bin/python3 scripts/eurostat/health_determinants/bmi/download_input_files.py`
+`python scripts/eurostat/health_determinants/bmi/process.py`
 
-The below script will clean the data, Also generate final csv, mcf and tmcf files.
+To download data for this import, run:
 
-`/bin/python3 scripts/eurostat/health_determinants/bmi/process.py`
+`python scripts/eurostat/health_determinants/bmi/process.py --mode=download`
+
+To process the downloaded data, run:
+
+`python scripts/eurostat/health_determinants/bmi/process.py --mode=process`
+
+Downloaded Files are created inside 'input_files' directory.

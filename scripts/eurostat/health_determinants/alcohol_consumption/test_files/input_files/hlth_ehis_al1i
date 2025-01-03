@@ -1,0 +1,6 @@
+freq,unit,quant_inc,frequenc,sex,age,geo\TIME_PERIOD	2014 	2019 
+A,PC,QU1,DAY,F,TOTAL,AT	1.9 	3.4 
+A,PC,QU1,DAY,F,TOTAL,BE	7.7 u	6.7 
+A,PC,QU1,DAY,F,TOTAL,BG	2.2 	2.6 
+A,PC,QU1,DAY,F,TOTAL,CY	0.1 	0.8 
+A,PC,QU1,DAY,F,TOTAL,CZ	1.8 	3.1 

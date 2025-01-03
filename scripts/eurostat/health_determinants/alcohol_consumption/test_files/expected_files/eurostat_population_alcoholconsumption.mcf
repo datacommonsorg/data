@@ -1,0 +1,140 @@
+Node: dcid:Percent_AtLeastOnceAWeek_BingeDrinking_In_Count_Person_Female_IncomeOf0To20Percentile
+name: "Percentage At Least Once A Week, Binge Drinking Among Female, Income Of 0 To 20 Percentile Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+healthBehavior: dcs:BingeDrinking
+gender: dcs:Female
+activityFrequency: dcs:AtLeastOnceAWeek
+income: [0 20 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_BingeDrinking_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage At Least Once A Week, Binge Drinking Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+healthBehavior: dcs:BingeDrinking
+gender: dcs:Female
+activityFrequency: dcs:AtLeastOnceAWeek
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_BingeDrinking_In_Count_Person_Urban_Female
+name: "Percentage At Least Once A Week, Binge Drinking Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:BingeDrinking
+gender: dcs:Female
+activityFrequency: dcs:AtLeastOnceAWeek
+placeOfResidenceClassification: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_AlcoholConsumption_In_Count_Person_Female_ForeignBornWithinEU27
+name: "Percentage Daily, Alcohol Consumption Among Female, Foreign Born Within EU27 Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU27
+healthBehavior: dcs:AlcoholConsumption
+gender: dcs:Female
+activityFrequency: dcs:Daily
+nativity: dcs:ForeignBornWithinEU27
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_AlcoholConsumption_In_Count_Person_Female_IncomeOf0To20Percentile
+name: "Percentage Daily, Alcohol Consumption Among Female, Income Of 0 To 20 Percentile Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+healthBehavior: dcs:AlcoholConsumption
+gender: dcs:Female
+activityFrequency: dcs:Daily
+income: [0 20 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_AlcoholConsumption_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Daily, Alcohol Consumption Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+healthBehavior: dcs:AlcoholConsumption
+gender: dcs:Female
+activityFrequency: dcs:Daily
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_AlcoholConsumption_In_Count_Person_Urban_Female
+name: "Percentage Daily, Alcohol Consumption Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:AlcoholConsumption
+gender: dcs:Female
+activityFrequency: dcs:Daily
+placeOfResidenceClassification: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_AlcoholConsumption_In_Count_Person_WithinEU27AndNotACitizen_Female
+name: "Percentage Daily, Alcohol Consumption Among Within EU27 And Not A Citizen, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_WithinEU27AndNotACitizen_Female
+healthBehavior: dcs:AlcoholConsumption
+gender: dcs:Female
+activityFrequency: dcs:Daily
+citizenship: dcs:WithinEU27AndNotACitizen
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_BingeDrinking_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Daily, Binge Drinking Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+healthBehavior: dcs:BingeDrinking
+gender: dcs:Female
+activityFrequency: dcs:Daily
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_HazardousAlcoholConsumption_In_Count_Person_Female_IncomeOf0To20Percentile
+name: "Percentage Hazardous Alcohol Consumption Among Female, Income Of 0 To 20 Percentile Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+healthBehavior: dcs:HazardousAlcoholConsumption
+gender: dcs:Female
+income: [0 20 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_HazardousAlcoholConsumption_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Hazardous Alcohol Consumption Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+healthBehavior: dcs:HazardousAlcoholConsumption
+gender: dcs:Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_HazardousAlcoholConsumption_In_Count_Person_Urban_Female
+name: "Percentage Hazardous Alcohol Consumption Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HazardousAlcoholConsumption
+gender: dcs:Female
+placeOfResidenceClassification: dcs:Urban
+statType: dcs:measuredValue
+measuredProperty: dcs:count
