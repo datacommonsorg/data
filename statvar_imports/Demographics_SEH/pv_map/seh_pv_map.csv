@@ -1,0 +1,37 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+Male,gender,Male,,,,,,,,,,
+Female,gender,Female,,,,,,,,,,
+U.S. citizens and permanent residentsa,citizenship,Citizen,#header,citizenship,ethnicity,"""""",,,,,,
+Hispanic or Latino,ethnicity,HispanicOrLatino,,,,,,,,,,
+Not Hispanic or Latino,ethnicity,NotHispanicOrLatino,#header,ethnicity,,,,,,,,
+American Indian or Alaska Native,race,AmericanIndianOrAlaskaNativeAlone,,,,,,,,,,
+Asian,race,Asian,,,,,,,,,,
+Black or African American,race,BlackOrAfricanAmericanAlone,,,,,,,,,,
+Native Hawaiian or Other Pacific Islander,race,NativeHawaiianOrOtherPacificIslanderAlone,,,,,,,,,,
+White,race,WhiteAlone,,,,,,,,,,
+More than one race,race,TwoOrMoreRaces,,,,,,,,,,
+Unknown ethnicity and race,ethnicity,UnknownEthnicity,race,UnknownRace,,,,,,,,
+Temporary visa holders,citizenship,VisaHolder,ethnicity,"""""",,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+All graduate students,educationalProgram,MastersDegree__DoctorateDegree,populationType,Student,value,{Number},,,,,,
+Master's,educationalProgram,MastersDegree,populationType,Student,value,{Number},,,,,,
+Doctoral,educationalProgram,DoctorateDegree,populationType,Student,value,{Number},,,,,,
+Postdoctoral appointees,occupation,PostDoctoralAppointee,educationalAttainment,DoctorateDegree,value,{Number},populationType,Person,,,,
+Doctorate-holding nonfaculty researchers,occupation,NonFacultyResearcher,educationalAttainment,DoctorateDegree,value,{Number},populationType,Person,,,,
+,,,,,,,,,,,,
+2017,observationDate,2017,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+Number,unit,"""""",scalingFactor,""""" ",statType,measuredValue,,,,,,
+Percent,unit,Percent,scalingFactor,100,measurementDenominator,"-race,-gender,-ethnicity, -citizenship",,,,,,
+Percent:100.0,#ignore,To remove values with same denomiator and numerator,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+2018,observationDate,2018,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+2019,observationDate,2019,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+2020,observationDate,2020,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+2021,observationDate,2021,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+2022,observationDate,2022,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
