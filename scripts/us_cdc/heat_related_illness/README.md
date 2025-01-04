@@ -10,6 +10,7 @@ To download and clean the source data, run:
 ```bash
 python clean_data.py
 ```
+Final csv input files are available in `source_data/combined_csv_files/` directory.
 
 ## Generating artifacts at a State level & Aggregating at a Country level:
 The artifacts can be generated from the cleaned data and At a country level, aggregation is performed by summing over the state level `cleaned.csv` and country level data is generated as `state/country_output.csv`.
