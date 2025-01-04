@@ -229,7 +229,6 @@ def clean_air_quality_data(file_path, output_file, importname):
                         elif "County" in file and "Ozone" in file:
                             data["statefips"] = data["statefips"].astype(
                                 str).str.zfill(2)
-                            print("checkingggg")
                             data["countyfips"] = data["countyfips"].astype(
                                 str).str.zfill(3)
                             data["dcid"] = "geoId/" + data["statefips"] + data[
