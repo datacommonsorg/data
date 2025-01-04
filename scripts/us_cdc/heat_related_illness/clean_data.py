@@ -98,7 +98,7 @@ def combine_csvs_by_string(directory, string_list):
                             dataframes[string] = []
                         dataframes[string].append(df)
                     except Exception as e:
-                        print(f"Error reading {filename}: {e}")
+                        logging.info(f"Error reading {filename}: {e}")
                     break  # Move to the next filename after a match
 
     for string, df_list in dataframes.items():
@@ -106,7 +106,8 @@ def combine_csvs_by_string(directory, string_list):
             merged_df = pd.concat(df_list, ignore_index=True)
             output_file = os.path.join(combined_input_csv, string + '.csv')
             merged_df.to_csv(output_file, index=False)
-            print(f"Successfully merged CSVs for '{string}' to {output_file}")
+            logging.info(
+                f"Successfully merged CSVs for '{string}' to {output_file}")
 
 
 def main(argv):
@@ -153,7 +154,7 @@ def main(argv):
                 elif "438/37" in url:
                     filename = f"./source_data/html_files/edVsits_age_gender_{year}.html"
                 else:
-                    print("No Urls found!")
+                    logging.info("No Urls found!")
 
                 download_dynamic_page(base_url, filename)
 
@@ -163,7 +164,6 @@ def main(argv):
                     with open(file_path, 'r', encoding='utf-8') as f:
                         cleaned_csv_path = os.path.join(input_csv_files,
                                                         file_name[:-5] + '.csv')
-                        print("cleaned_csv_path=======", cleaned_csv_path)
                         table_to_csv(f.read(), cleaned_csv_path)
 
             string_to_match = [
