@@ -26,9 +26,8 @@ import json
 import os
 import requests
 import pandas as pd
-from absl import app
-from absl import logging
-from absl import flags
+from absl import app, logging, flags
+from retry import retry
 from pathlib import Path
 import sys
 
@@ -245,6 +244,25 @@ def download_files(importname):
     global _INPUT_FILE_PATH
     global import_name
     global url_new
+
+    @retry(tries=3, delay=2, backoff=2)
+    def download_with_retry(url, input_file_name):
+        logging.info(f"Downloading file from URL: {url}")
+        response = requests.get(url)
+        response.raise_for_status()
+        if response.status_code == 200:
+            if not response.content:
+                logging.fatal(
+                    f"No data available for URL: {url}. Aborting download.")
+                return
+            filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
+            with open(filename, 'wb') as f:
+                f.write(response.content)
+        else:
+            logging.error(
+                f"Failed to download file from URL: {url}. Status code: {response.status_code}"
+            )
+
     try:
         logging.info(f"import name from command line {importname}")
         for config in import_configs:
@@ -269,19 +287,8 @@ def download_files(importname):
                             f"Numbers of records found for the URL {url_new} is {record_count}"
                         )
                         url_new = f"{url_new}?$limit={record_count}&$offset=0"
-                        response = requests.get(url_new)
-                        response.raise_for_status()
-                        if response.status_code == 200:
+                        download_with_retry(url_new, input_file_name)
 
-                            if not response.content:
-                                logging.fatal(
-                                    f"No data available for URL: {url_new}. Aborting download."
-                                )
-                                return
-                            filename = os.path.join(_INPUT_FILE_PATH,
-                                                    f"{input_file_name}")
-                            with open(filename, 'wb') as f:
-                                f.write(response.content)
     except Exception as e:
         logging.fatal(f"Error downloading URL {url_new} - {e}")
 
