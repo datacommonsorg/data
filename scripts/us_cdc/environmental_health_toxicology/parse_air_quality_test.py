@@ -15,7 +15,7 @@ import unittest
 import os
 
 from absl import logging
-import parse_air_quality as paq
+from parse_air_quality import clean_air_quality_data
 
 _MODULE_DIR = os.path.dirname(__file__)
 TEST_DATA_DIR = os.path.join(_MODULE_DIR, 'test_data')
@@ -89,8 +89,8 @@ class TestParseAirQuality(unittest.TestCase):
             output_dir = test_data["output_dir"]
             os.makedirs(output_dir, exist_ok=True)
 
-            paq.clean_air_quality_data(test_data["input_dir"],
-                                       test_data["output_dir"], import_type)
+            clean_air_quality_data(test_data["input_dir"],
+                                   test_data["output_dir"], import_type)
 
             with open(test_data["actual_file"],
                       encoding="utf-8") as actual_csv_file:
