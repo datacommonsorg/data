@@ -21,7 +21,7 @@ from absl import app
 from absl import flags
 from absl import logging
 
-import helper
+import differ_utils
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -44,13 +44,13 @@ flags.DEFINE_string('value_columns', 'value,scalingFactor',
 SAMPLE_COUNT = 3
 
 
-class DatasetDiffer:
+class ImportDiffer:
     """
   Utility to generate a diff (point and series analysis) 
   of two versions of the same dataset for import analysis. 
 
   Usage:
-  $ python differ.py --current_data=<path> --previous_data=<path>
+  $ python import_differ.py --current_data=<path> --previous_data=<path>
 
   Summary output generated is of the form below showing 
   counts of differences for each variable.  
@@ -62,10 +62,10 @@ class DatasetDiffer:
   3   dcid:var4       0      2       0          0     2
 
   Detailed diff output is written to files for further analysis.
-  - point-analysis-summary.csv: diff summry for point analysis
-  - point-analysis-results.csv: detailed results for point analysis
-  - series-analysis-summary.csv: diff summry for series analysis
-  - series-analysis-results.csv: detailed results for series analysis
+  - point_analysis_summary.csv: diff summry for point analysis
+  - point_analysis_results.csv: detailed results for point analysis
+  - series_analysis_summary.csv: diff summry for series analysis
+  - series_analysis_results.csv: detailed results for series analysis
 
   """
 
@@ -216,8 +216,10 @@ class DatasetDiffer:
         if not os.path.exists(FLAGS.output_location):
             os.makedirs(FLAGS.output_location)
         logging.info('Loading data...')
-        current_df = helper.load_data(self.current_data, self.output_location)
-        previous_df = helper.load_data(self.previous_data, self.output_location)
+        current_df = differ_utils.load_data(self.current_data,
+                                            self.output_location)
+        previous_df = differ_utils.load_data(self.previous_data,
+                                             self.output_location)
 
         logging.info('Processing data...')
         in_data = self.process_data(previous_df, current_df)
@@ -228,10 +230,10 @@ class DatasetDiffer:
                            inplace=True)
         print(summary.head(10))
         print(result.head(10))
-        helper.write_data(summary, self.output_location,
-                          'point-analysis-summary.csv')
-        helper.write_data(result, self.output_location,
-                          'point-analysis-results.csv')
+        differ_utils.write_data(summary, self.output_location,
+                                'point_analysis_summary.csv')
+        differ_utils.write_data(result, self.output_location,
+                                'point_analysis_results.csv')
 
         logging.info('Series analysis:')
         summary, result = self.series_analysis(in_data)
@@ -239,10 +241,10 @@ class DatasetDiffer:
                            inplace=True)
         print(summary.head(10))
         print(result.head(10))
-        helper.write_data(summary, self.output_location,
-                          'series-analysis-summary.csv')
-        helper.write_data(result, self.output_location,
-                          'series-analysis-results.csv')
+        differ_utils.write_data(summary, self.output_location,
+                                'series_analysis_summary.csv')
+        differ_utils.write_data(result, self.output_location,
+                                'series_analysis_results.csv')
 
         logging.info('Differ output written to folder: %s',
                      self.output_location)
@@ -250,9 +252,9 @@ class DatasetDiffer:
 
 def main(_):
     '''Runs the differ.'''
-    differ = DatasetDiffer(FLAGS.current_data, FLAGS.previous_data,
-                           FLAGS.output_location, FLAGS.groupby_columns,
-                           FLAGS.value_columns)
+    differ = ImportDiffer(FLAGS.current_data, FLAGS.previous_data,
+                          FLAGS.output_location, FLAGS.groupby_columns,
+                          FLAGS.value_columns)
     differ.run_differ()
 
 
