@@ -11,45 +11,96 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''
-Author: Padma Gundapaneni @padma-g
-Date: 7/28/21
-Description: This script contains unit tests for the parse_air_quality.py script.
-@input_file   filepath to the original csv that needs to be cleaned
-@output_file  filepath to the csv to which the cleaned data is written
-python3 parse_air_quality_test.py input_file output_file
-'''
-
 import unittest
 import os
-from .parse_air_quality import clean_air_quality_data
 
-module_dir_ = os.path.dirname(__file__)
+from absl import logging
+from parse_air_quality import clean_air_quality_data
+
+_MODULE_DIR = os.path.dirname(__file__)
+TEST_DATA_DIR = os.path.join(_MODULE_DIR, 'test_data')
+INPUT_DIR = 'input_files'
+OUTPUT_DIR = 'actual_output_files'
+OUTPUT_FILES = 'expected_output_files'
+
+# test data for each import type
+TEST_DATA = {
+    "CDC_OzoneCensusTract": {
+        "input_dir":
+            os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", INPUT_DIR),
+        "output_dir":
+            os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", OUTPUT_DIR),
+        "expected_file":
+            os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", OUTPUT_FILES,
+                         "Census_Tract_Level_Ozone_Concentrations_0.csv"),
+        "actual_file":
+            os.path.join(TEST_DATA_DIR, "CDC_OzoneCensusTract", OUTPUT_DIR,
+                         "Census_Tract_Level_Ozone_Concentrations_0.csv"),
+    },
+    "CDC_OzoneCounty": {
+        "input_dir":
+            os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", INPUT_DIR),
+        "output_dir":
+            os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", OUTPUT_DIR),
+        "expected_file":
+            os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", OUTPUT_FILES,
+                         "OzoneCounty.csv"),
+        "actual_file":
+            os.path.join(TEST_DATA_DIR, "CDC_OzoneCounty", OUTPUT_DIR,
+                         "OzoneCounty.csv"),
+    },
+    "CDC_PM25CensusTract": {
+        "input_dir":
+            os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", INPUT_DIR),
+        "output_dir":
+            os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", OUTPUT_DIR),
+        "expected_file":
+            os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", OUTPUT_FILES,
+                         "PM2.5CensusTract_0.csv"),
+        "actual_file":
+            os.path.join(TEST_DATA_DIR, "CDC_PM25CensusTract", OUTPUT_DIR,
+                         "PM2.5CensusTract_0.csv"),
+    },
+    "CDC_PM25County": {
+        "input_dir":
+            os.path.join(TEST_DATA_DIR, "CDC_PM25County", INPUT_DIR),
+        "output_dir":
+            os.path.join(TEST_DATA_DIR, "CDC_PM25County", OUTPUT_DIR),
+        "expected_file":
+            os.path.join(TEST_DATA_DIR, "CDC_PM25County", OUTPUT_FILES,
+                         "PM25county.csv"),
+        "actual_file":
+            os.path.join(TEST_DATA_DIR, "CDC_PM25County", OUTPUT_DIR,
+                         "PM25county.csv"),
+    },
+}
 
 
 class TestParseAirQuality(unittest.TestCase):
-    """
-    Tests the functions in parse_air_quality.py.
-    """
+
+    def __init__(self, methodName: str = ...) -> None:
+        super().__init__(methodName)
 
     def test_clean_air_quality_data(self):
         """
-        Tests the clean_air_quality_data function.
+        Tests the clean_air_quality_data function for all the 4 imports.
         """
-        print(module_dir_)
-        test_csv = os.path.join(module_dir_, 'test_data/small_Ozone_County.csv')
-        output_csv = os.path.join(module_dir_,
-                                  'test_data/PM2.5CensusTract_Expected.csv')
-        clean_air_quality_data(module_dir_, output_csv, "CDC_PM25CensusTract")
-        expected_csv = os.path.join(module_dir_,
-                                    'test_data/PM2.5CensusTract_Expected.csv')
+        for import_type, test_data in TEST_DATA.items():
+            output_dir = test_data["output_dir"]
+            os.makedirs(output_dir, exist_ok=True)
 
-        with open(output_csv, 'r') as test:
-            test_str: str = test.read()
-            with open(expected_csv, 'r') as expected:
-                expected_str: str = expected.read()
-                self.assertEqual(test_str, expected_str)
-        #os.remove(output_csv)
+            clean_air_quality_data(test_data["input_dir"],
+                                   test_data["output_dir"], import_type)
+
+            with open(test_data["actual_file"],
+                      encoding="utf-8") as actual_csv_file:
+                actual_csv_data = actual_csv_file.read().strip()
+
+            with open(test_data["expected_file"],
+                      encoding="utf-8") as expected_csv_file:
+                expected_csv_data = expected_csv_file.read().strip()
+
+            self.assertEqual(expected_csv_data, actual_csv_data)
 
 
 if __name__ == '__main__':

@@ -109,26 +109,19 @@ The expected output of this test can be found in [`small_Palmer_expected.csv`](h
 
 #### Processing Steps
 
-<!-- `@input_file_name` - path to the input csv file to be cleaned
-
-`@output_file_name` - path to write the cleaned csv file
-
-To clean the air quality data files, run:
-
-```bash
-$ python3 parse_air_quality.py input_file_name output_file_name
-```
-
 To clean the precipitation index data files, run: 
 
 ```bash
-$ python3 parse_precipitation_index.py input_file_name output_file_name -->
+$ python3 parse_precipitation_index.py input_file_name output_file_name
+```
+
+To clean the air quality data files, run:
 
 1. Import name: CDC_PM25CensusTract
 
    command to download the file
    ============================
-
+    
    $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_PM25CensusTract --mode=download
    
 
@@ -151,7 +144,7 @@ $ python3 parse_precipitation_index.py input_file_name output_file_name -->
 
    $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_OzoneCensusTract --mode=process
 
-   3. Import name: CDC_PM25County
+3. Import name: CDC_PM25County
 
    command to download the file
    ============================
@@ -164,7 +157,7 @@ $ python3 parse_precipitation_index.py input_file_name output_file_name -->
 
    $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_PM25County --mode=process
 
-   4. Import name: CDC_OzoneCounty
+4. Import name: CDC_OzoneCounty
 
    command to download the file
    ============================
