@@ -141,10 +141,10 @@ def create_or_update_import_schedule(absolute_import_name: str, schedule: str,
         req = cloud_scheduler.cloud_run_job_request(
             absolute_import_name, schedule, json_encoded_config,
             cloud_run_job_url, scheduler_config_dict[_GKE_SERVICE_ACCOUNT_KEY])
-        return cloud_scheduler.create_or_update_job(config.gcp_project_id,
-                                                    config.scheduler_location,
-                                                    req)
     else:
         raise Exception(
             "Invalid executor_type %s, expects one of ('GKE', 'GAE', 'CLOUD_RUN')",
             config.executor_type)
+
+    return cloud_scheduler.create_or_update_job(config.gcp_project_id,
+                                                config.scheduler_location, req)
