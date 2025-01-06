@@ -15,7 +15,7 @@ import unittest
 import os
 
 from absl import logging
-import parse_air_quality
+import parse_air_quality as paq
 
 _MODULE_DIR = os.path.dirname(__file__)
 TEST_DATA_DIR = os.path.join(_MODULE_DIR, 'test_data')
