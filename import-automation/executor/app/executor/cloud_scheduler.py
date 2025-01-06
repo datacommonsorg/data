@@ -58,21 +58,20 @@ def _base_job_request(absolute_import_name, schedule: str):
 def cloud_run_job_request(absolute_import_name, schedule,
                           json_encoded_config: str, cloud_run_job_url: str,
                           cloud_run_service_account: str) -> Dict:
-    """Cloud Scheduler request that targets jossZ [;bs in CLOUD_RUN."""
-    json_encoded_job_body = json.dumps({}).encode("utf-8")
-    # json.dumps({
-    #     'overrides': {
-    #         "containerOverrides": [{
-    #             'args': [
-    #                 f'--import_name={absolute_import_name}',
-    #                 f'--import_config={json_encoded_config}'
-    #             ]
-    #         }]
-    #     }
-    # }).encode("utf-8")
+    """Cloud Scheduler request that targets jobs in CLOUD_RUN."""
+    json_encoded_job_body = json.dumps({
+        'overrides': {
+            "containerOverrides": [{
+                'args': [
+                    f'--import_name={absolute_import_name}',
+                    f'--import_config={json_encoded_config}'
+                ]
+            }]
+        }
+    }).encode("utf-8")
 
     job = _base_job_request(absolute_import_name, schedule)
-    job_name = absolute_import_name.split(':')[1]
+    job_name = _fix_absolute_import_name(absolute_import_name)
     job['name'] = f'{job_name}'
     job['http_target'] = {
         'uri': f'https://{cloud_run_job_url}',
