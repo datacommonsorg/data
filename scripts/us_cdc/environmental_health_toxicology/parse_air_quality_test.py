@@ -15,13 +15,14 @@ import unittest
 import os
 
 from absl import logging
-from parse_air_quality import clean_air_quality_data
 
 _MODULE_DIR = os.path.dirname(__file__)
 TEST_DATA_DIR = os.path.join(_MODULE_DIR, 'test_data')
 INPUT_DIR = 'input_files'
 OUTPUT_DIR = 'actual_output_files'
 OUTPUT_FILES = 'expected_output_files'
+
+from parse_air_quality import clean_air_quality_data
 
 # test data for each import type
 TEST_DATA = {
