@@ -22,7 +22,7 @@ INPUT_DIR = 'input_files'
 OUTPUT_DIR = 'actual_output_files'
 OUTPUT_FILES = 'expected_output_files'
 
-from parse_air_quality import clean_air_quality_data
+from .parse_air_quality import clean_air_quality_data
 
 # test data for each import type
 TEST_DATA = {
