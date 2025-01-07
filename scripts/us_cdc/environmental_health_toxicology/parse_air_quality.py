@@ -34,8 +34,8 @@ import sys
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_string('input_path', 'input_files', 'Input files path')
-flags.DEFINE_string('output_path', 'output', 'Output files path')
+flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
+flags.DEFINE_string('output_file_path', 'output', 'Output files path')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = None
@@ -296,8 +296,8 @@ def download_files(importname):
 def main(_):
     """Main function to generate the cleaned csv file."""
     global _INPUT_FILE_PATH, _OUTOUT_FILE_PATH
-    _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_path)
-    _OUTOUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.output_path)
+    _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_file_path)
+    _OUTOUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.output_file_path)
     Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
     Path(_OUTOUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
     mode = _FLAGS.mode
