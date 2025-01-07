@@ -99,8 +99,8 @@ class NgramMatcher:
     """
         normalized_key = self._normalize_string(key)
         ngrams = self._get_ngrams(normalized_key)
-        logging.level_debug() and logging.log(2,
-            f'looking up ngrams {ngrams} for {key}')
+        logging.level_debug() and logging.log(
+            2, f'looking up ngrams {ngrams} for {key}')
         lookup_config = self._config
         if config:
             # Use the match config passed in.
@@ -129,7 +129,8 @@ class NgramMatcher:
                         key_match['ngram_pos'] = min(key_match['ngram_pos'],
                                                      ngram_pos)
 
-        logging.level_debug() and logging.log(2, f'Matches for {key}: {matches}')
+        logging.level_debug() and logging.log(2,
+                                              f'Matches for {key}: {matches}')
         # Collect all key indices that matches with counts.
         match_indices = list()
         min_matches = max(
@@ -144,8 +145,8 @@ class NgramMatcher:
         match_indices.sort(
             key=lambda x: self._get_ngram_match_score(x[1], key_len),
             reverse=True)
-        logging.level_debug() and logging.log(2,
-            f'Sorted matches for {key}: {match_indices}')
+        logging.level_debug() and logging.log(
+            2, f'Sorted matches for {key}: {match_indices}')
 
         # Collect results in sorted order
         results = list()

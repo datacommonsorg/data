@@ -1,0 +1,28 @@
+# Builds the docker image of import executor, pushes it to artifact registry, 
+# and creates a cloud run job using this images.
+# 
+# Run it using:
+# gcloud builds submit --config=cloudbuild.yaml --substitutions=_DOCKER_IMAGE="us-docker.pkg.dev/datcom-ci/gcr.io/dc-import-executor:latest" .
+
+steps:
+  # Install dependencies
+  - name: python
+    entrypoint: pip
+    args: ["install", "-r", "requirements.txt", "--user"]
+
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '${_DOCKER_IMAGE}', '.']
+
+  # Docker push to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push',  '${_DOCKER_IMAGE}']
+
+  # Deploy to Cloud Run
+  #- name: google/cloud-sdk
+  #  args: ['gcloud', 'run', 'jobs', 'deploy', '${_JOB_NAME}',
+  #         '--image=${_DOCKER_IMAGE}', '--region', '${_REGION}']
+
+# Store images in Google Artifact Registry
+images:
+  - ${_DOCKER_IMAGE}
