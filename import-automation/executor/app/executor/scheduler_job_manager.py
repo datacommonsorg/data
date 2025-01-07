@@ -70,18 +70,13 @@ def schedule_on_commit(github: github_api.GitHubRepoAPI,
 
         scheduled = []
         for relative_dir, spec in imports_to_execute:
-            schedule = spec.get('cron_schedule')
-            if not schedule:
-                manifest_path = os.path.join(relative_dir,
-                                             config.manifest_filename)
-                raise KeyError(f'cron_schedule not found in {manifest_path}')
             try:
                 absolute_import_name = import_target.get_absolute_import_name(
                     relative_dir, spec['import_name'])
                 logging.info('Scheduling a data update job for %s',
                              absolute_import_name)
                 job = create_or_update_import_schedule(absolute_import_name,
-                                                       schedule, config, {})
+                                                       spec, config, {})
                 scheduled.append(job)
             except Exception:
                 raise import_executor.ExecutionError(
@@ -91,10 +86,22 @@ def schedule_on_commit(github: github_api.GitHubRepoAPI,
                                                'No issues')
 
 
-def create_or_update_import_schedule(absolute_import_name: str, schedule: str,
+def create_or_update_import_schedule(absolute_import_name: str,
+                                     import_spec: dict,
                                      config: configs.ExecutorConfig,
                                      scheduler_config_dict: Dict):
     """Create/Update the import schedule for 1 import."""
+    schedule = import_spec.get('cron_schedule')
+    if not schedule:
+        raise KeyError(
+            f'cron_schedule not found in manifest for {absolute_import_name}')
+    resources = {"cpu": "2", "memory": "4G"}  # default resources.
+    if 'resource_limits' in import_spec:
+        resources = import_spec['resource_limits']
+    timeout = config.user_script_timeout
+    if 'task_timeout' in import_spec:
+        timeout = import_spec['task_timeout']
+
     if config.executor_type == "GKE":
         # Note: this is the content of what is passed to /update API
         # inside each cronjob http calls.
@@ -128,19 +135,18 @@ def create_or_update_import_schedule(absolute_import_name: str, schedule: str,
             f'--import_name={absolute_import_name}',
             f'--import_config={json_encoded_config}'
         ]
-        resources = {"cpu": "2", "memory": "2G"}
         env_vars = {}
         job = cloud_run.create_or_update_cloud_run_job(
             config.gcp_project_id, config.scheduler_location, job_name,
-            docker_image, env_vars, args, resources)
+            docker_image, env_vars, args, resources, timeout)
         job_id = job.name.rsplit('/', 1)[1]
         if not job:
             logging.error(
                 f'Failed to setup cloud run job for {absolute_import_name}')
         cloud_run_job_url = f'{config.scheduler_location}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/{config.gcp_project_id}/jobs/{job_id}:run'
         req = cloud_scheduler.cloud_run_job_request(
-            absolute_import_name, schedule, json_encoded_config,
-            cloud_run_job_url, scheduler_config_dict[_GKE_SERVICE_ACCOUNT_KEY])
+            absolute_import_name, schedule, cloud_run_job_url,
+            scheduler_config_dict[_GKE_SERVICE_ACCOUNT_KEY])
     else:
         raise Exception(
             "Invalid executor_type %s, expects one of ('GKE', 'GAE', 'CLOUD_RUN')",
