@@ -108,7 +108,7 @@ class ExecutorConfig:
     # ID of the location where Cloud Scheduler is hosted.
     scheduler_location: str = 'us-central1'
     # Location of the local git data repo.
-    local_repo_dir: str = '/workspace/data'
+    local_repo_dir: str = '/data'
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 3600
     # Arguments for the user script
