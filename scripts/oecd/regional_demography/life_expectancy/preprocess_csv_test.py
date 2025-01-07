@@ -66,8 +66,8 @@ class TestProcess(unittest.TestCase):
         preprocess script and expected output files like MCF File
         """
 
-        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                               "OECD_life_expectancy.tmcf")
+        expected_tmcf_file_path = os.path.join(
+            EXPECTED_FILES_DIR, "OECD_life_expectancy_cleaned.tmcf")
 
         with open(expected_tmcf_file_path,
                   encoding="UTF-8") as expected_tmcf_file:

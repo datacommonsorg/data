@@ -67,7 +67,7 @@ class TestProcess(unittest.TestCase):
         """
 
         expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                               "OECD_deaths.tmcf")
+                                               "OECD_deaths_cleaned.tmcf")
 
         with open(expected_tmcf_file_path,
                   encoding="UTF-8") as expected_tmcf_file:
