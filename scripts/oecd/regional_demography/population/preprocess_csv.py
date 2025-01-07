@@ -23,6 +23,7 @@ from columns import *
 
 _FLAGS = flags.FLAGS
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(_MODULE_DIR)
 flags.DEFINE_string('mode', '', 'Options: download or process')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -43,7 +44,7 @@ def process_data(df, output_file_path):
     df['TIME_PERIOD'] = df['TIME_PERIOD'].astype(int)
     # First remove geos with names that we don't have mappings to dcid for.
     try:
-        regid_file = "scripts/oecd/regional_demography/regid2dcid.json"
+        regid_file = os.path.join(parent_dir,"regid2dcid.json")
         with open(regid_file, 'r') as f:
             regid2dcid = dict(json.loads(f.read()))
         logging.info("Resolving places")
