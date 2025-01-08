@@ -52,7 +52,7 @@ def process_data(df, output_file_path):
         # Second, replace the names with dcids
         df['Reference area'] = df.apply(lambda row: regid2dcid[row['REF_AREA']],
                                         axis=1)
-    except (FileNotFoundError, json.JSONDecodeError) as e:
+    except Exception as e:
         logging.fatal(f"Error processing regid2dcid.json: {e}")
         return None  # Indicate failure
 
@@ -63,7 +63,7 @@ def process_data(df, output_file_path):
             columns=['AGE', 'SEX'])
         df_cleaned = multi_index_to_single_index(df_cleaned)
     except Exception as e:
-        logging.error(
+        logging.fatal(
             f"Unable to pivot the dataframe and retain the column:{e}")
         return None
     # Renaming column headers to SVs

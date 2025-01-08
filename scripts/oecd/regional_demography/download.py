@@ -15,6 +15,7 @@
 import io
 import requests
 import sys
+import time
 import pandas as pd
 from absl import logging
 
@@ -36,18 +37,29 @@ def download_data_to_file_and_df(url,
     """
     if is_download_required and filename:
         logging.info("Downloading from url %s", url)
-        response = requests.get(url)
+        max_retries = 3
+        retry_delay = 2
 
-        if response.status_code == 200:
-            with open(filename, 'wb') as f:
-                f.write(response.content)
-                logging.info("Downloaded input file to %s", filename)
-            df = pd.read_csv(filename, low_memory=False)
-            return df
+        for attempt in range(1, max_retries + 1):
+            response = requests.get(url, stream=True)
+            if response.status_code == 200:
+                with open(filename, 'wb') as f:
+                    f.write(response.content)
+                logging.info("Downloaded input file to %s (attempt %d)",
+                             filename, attempt)
+                df = pd.read_csv(filename, low_memory=False)
+                return df
 
-        else:
-            logging.error(f"Error downloading data: {response.status_code}")
-            return None
+            else:
+                logging.error(
+                    f"Error downloading data: {response.status_code} (attempt {attempt})"
+                )
+                time.sleep(retry_delay)  # Wait before retrying
+
+        # If all retries fail, return None
+        logging.error(f"Failed to download data after {max_retries} attempts")
+        return None
+
     else:
         logging.info("Reading from a file  %s", csv_filepath)
         df = pd.read_csv(csv_filepath, low_memory=False)
