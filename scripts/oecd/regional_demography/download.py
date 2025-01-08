@@ -18,8 +18,15 @@ import sys
 import time
 import pandas as pd
 from absl import logging
+from retry import retry
 
 sys.path.append('../')
+
+
+@retry(tries=3, delay=2)
+def download_retry(url):
+    response = requests.get(url, stream=True)
+    return response
 
 
 def download_data_to_file_and_df(url,
@@ -37,28 +44,12 @@ def download_data_to_file_and_df(url,
     """
     if is_download_required and filename:
         logging.info("Downloading from url %s", url)
-        max_retries = 3
-        retry_delay = 2
-
-        for attempt in range(1, max_retries + 1):
-            response = requests.get(url, stream=True)
-            if response.status_code == 200:
-                with open(filename, 'wb') as f:
-                    f.write(response.content)
-                logging.info("Downloaded input file to %s (attempt %d)",
-                             filename, attempt)
-                df = pd.read_csv(filename, low_memory=False)
-                return df
-
-            else:
-                logging.error(
-                    f"Error downloading data: {response.status_code} (attempt {attempt})"
-                )
-                time.sleep(retry_delay)  # Wait before retrying
-
-        # If all retries fail, return None
-        logging.error(f"Failed to download data after {max_retries} attempts")
-        return None
+        response = download_retry(url)
+        with open(filename, 'wb') as f:
+            f.write(response.content)
+        logging.info("Downloaded input file to %s", filename)
+        df = pd.read_csv(filename, low_memory=False)
+        return df
 
     else:
         logging.info("Reading from a file  %s", csv_filepath)
