@@ -1,0 +1,106 @@
+
+Node: dcid:Count_JobPosting_NAICSJOLTS_000000_Adjusted
+typeOf: dcs:StatisticalVariable
+populationType: schema:JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Adjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_JobPosting_NAICSJOLTS_000000_Unadjusted
+typeOf: dcs:StatisticalVariable
+populationType: schema:JobPosting
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Unadjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_Worker_Hire_NAICSJOLTS_000000_Adjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSWorker
+jobChangeEvent: dcs:Hire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Adjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_Worker_Hire_NAICSJOLTS_000000_Unadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSWorker
+jobChangeEvent: dcs:Hire
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Unadjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_Worker_Separation_NAICSJOLTS_000000_Adjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSWorker
+jobChangeEvent: dcs:Separation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Adjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_Worker_Separation_NAICSJOLTS_000000_Unadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSWorker
+jobChangeEvent: dcs:Separation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Unadjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_Worker_VoluntarySeparation_NAICSJOLTS_000000_Adjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSWorker
+jobChangeEvent: dcs:VoluntarySeparation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Adjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_Worker_VoluntarySeparation_NAICSJOLTS_000000_Unadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSWorker
+jobChangeEvent: dcs:VoluntarySeparation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Unadjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_Worker_InvoluntarySeparation_NAICSJOLTS_000000_Adjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSWorker
+jobChangeEvent: dcs:InvoluntarySeparation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Adjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_Worker_InvoluntarySeparation_NAICSJOLTS_000000_Unadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSWorker
+jobChangeEvent: dcs:InvoluntarySeparation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Unadjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_Worker_OtherSeparation_NAICSJOLTS_000000_Adjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSWorker
+jobChangeEvent: dcs:OtherSeparation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Adjusted
+naics: dcid:NAICS/JOLTS_000000
+
+Node: dcid:Count_Worker_OtherSeparation_NAICSJOLTS_000000_Unadjusted
+typeOf: dcs:StatisticalVariable
+populationType: dcs:BLSWorker
+jobChangeEvent: dcs:OtherSeparation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+measurementQualifier: dcs:Unadjusted
+naics: dcid:NAICS/JOLTS_000000
