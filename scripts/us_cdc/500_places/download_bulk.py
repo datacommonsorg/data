@@ -24,22 +24,29 @@ python3 download_bulk.py
 """
 
 import os
-
 import requests
+import json
+from google.cloud import storage
 
-DATA_URLS = {
-    "county_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/swc5-untb/rows.csv?accessType=DOWNLOAD",
-    "city_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/eav7-hnsx/rows.csv?accessType=DOWNLOAD",
-    "censustract_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/cwsq-ngmh/rows.csv?accessType=DOWNLOAD",
-    "zipcode_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/qnzd-25i4/rows.csv?accessType=DOWNLOAD"
-}
+# Initialize GCP storage client
+client = storage.Client()
+
+# Define your GCP bucket and file name
+bucket_name = 'datcom-csv'  # Replace with your bucket name
+file_name = 'cdc500_places/download_config.json'  # Replace with your file name
+
+# Download the file from GCP Storage
+bucket = client.get_bucket(bucket_name)
+blob = bucket.blob(file_name)
+
+# Read the JSON content from the blob
+json_data = blob.download_as_text()
+
+# Load the JSON data
+_CONFIG_FILE = json.loads(json_data)
 
 
-def download_file(url: str, save_path: str):
+def download_file(release_year, url: str, save_path: str):
     """
     Args:
         url: url to the file to be downloaded
@@ -47,7 +54,7 @@ def download_file(url: str, save_path: str):
     Returns:
         a downloaded csv file in the specified file path
     """
-    print(f'Downloading {url} to {save_path}')
+    print(f'Downloading {url} for the year {release_year} to {save_path}')
     request = requests.get(url, stream=True)
     with open(save_path, 'wb') as file:
         file.write(request.content)
@@ -58,10 +65,11 @@ def main():
     data_dir = os.path.join(os.getcwd(), 'raw_data')
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
-    for dataset_name, url in DATA_URLS.items():
-        print(dataset_name)
-        save_path = os.path.join(data_dir, dataset_name)
-        download_file(url, save_path)
+    for item in _CONFIG_FILE:
+        release_year = item["release_year"]
+        for url_dict in item["parameter"]:
+            save_path = os.path.join(data_dir, url_dict['FILE_NAME'])
+            download_file(release_year, url_dict['URL'], save_path)
 
 
 if __name__ == '__main__':

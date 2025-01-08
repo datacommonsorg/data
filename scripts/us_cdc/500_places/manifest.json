@@ -1,0 +1,22 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CDC500",
+            "curator_emails": [
+                "sanikap@google.com"
+            ],
+            "provenance_url": "https://www.cdc.gov/places/index.html",
+            "provenance_description": "Variables related to health from the CDC",
+            "scripts": [
+                "run.sh"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "cdc_places.tmcf",
+                    "cleaned_csv": "cleaned_csv/*.csv"
+                }
+            ],
+            "cron_schedule": "0 11 * * 2"
+        }
+    ]
+}
