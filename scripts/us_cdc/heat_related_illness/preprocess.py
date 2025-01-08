@@ -179,8 +179,15 @@ def process(cleaned_csv_path, output_mcf_path, input_path):
 
 def main(argv):
     try:
+        os.makedirs(output_path, exist_ok=True)
         cleaned_csv_path = os.path.join(output_path, 'cleaned.csv')
         output_mcf_path = os.path.join(output_path, 'output.mcf')
+        try:
+            os.listdir(input_path)
+        except:
+            logging.fatal(
+                "\n\nData not found!!!!!! Please run the script clean_data.py to download source data\n"
+            )
         process(cleaned_csv_path, output_mcf_path, input_path)
         generate_tmcf()
         aggregate()
