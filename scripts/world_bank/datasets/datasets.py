@@ -79,6 +79,8 @@ import codecs
 from itertools import repeat
 from datetime import datetime
 from retry import retry
+import subprocess
+import sys
 
 FLAGS = flags.FLAGS
 
@@ -98,6 +100,7 @@ flags.DEFINE_string(
 
 flags.DEFINE_string('stat_vars_file', 'statvars.csv',
                     'Path to CSV file with Stat Var mappings.')
+flags.DEFINE_string('output_dir', None, 'Path to output directory')
 
 ctx = create_urllib3_context()
 ctx.load_default_certs()
@@ -452,7 +455,12 @@ def write_csv(csv_file_path, csv_columns, csv_rows):
         csv_writer.writerows(csv_rows)
 
 
-def write_all_observations(stat_vars_file):
+def write_all_observations(stat_vars_file, output_dir=None):
+    if output_dir:
+        os.makedirs(output_dir, exist_ok=True)
+        global OBSERVATIONS_DIR
+        OBSERVATIONS_DIR = output_dir
+
     start = datetime.now()
     logging.info('Start: %s', start)
 
@@ -639,7 +647,7 @@ def main(_):
         download_datasets()
         write_wb_codes()
         load_stat_vars(FLAGS.stat_vars_file)
-        write_all_observations(FLAGS.stat_vars_file)
+        write_all_observations(FLAGS.stat_vars_file, FLAGS.output_dir)
     else:
         match FLAGS.mode:
             case Mode.FETCH_DATASETS:
@@ -651,7 +659,7 @@ def main(_):
             case Mode.LOAD_STAT_VARS:
                 load_stat_vars(FLAGS.stat_vars_file)
             case Mode.WRITE_OBSERVATIONS:
-                write_all_observations(FLAGS.stat_vars_file)
+                write_all_observations(FLAGS.stat_vars_file, FLAGS.output_dir)
             case _:
                 logging.error('No mode specified.')
 
