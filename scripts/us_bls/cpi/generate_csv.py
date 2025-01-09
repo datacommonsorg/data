@@ -17,12 +17,15 @@ Downloading and converting BLS CPI raw csv files to csv files of two columns:
 
 Usage: python3 generate_csv.py
 '''
-
 import io
-
 import requests
 import frozendict
 import pandas as pd
+from absl import flags
+from absl import app
+from absl import logging
+import os
+from pathlib import Path
 
 # Dict from series names to download links
 CSV_URLS = frozendict.frozendict({
@@ -33,7 +36,13 @@ CSV_URLS = frozendict.frozendict({
     "c_cpi_u_1999_2024":
         "https://download.bls.gov/pub/time.series/su/su.data.1.AllItems"
 })
-
+_FLAGS = flags.FLAGS
+flags.DEFINE_integer('date_from_start_processing',1946, 'Data will process from assigned date, if user want they can change also')
+flags.DEFINE_string('input_path', 'input_files', 'Input files path')
+flags.DEFINE_string('output_path', 'output', 'Output files path')
+MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_INPUT_FILE_PATH = None
+_OUTOUT_FILE_PATH = None
 # Dict from series names to series IDs
 SERIES_IDS = frozendict.frozendict({
     "cpi_u_1913_2024": "CUSR0000SA0",
@@ -41,12 +50,14 @@ SERIES_IDS = frozendict.frozendict({
     "c_cpi_u_1999_2024": "SUUR0000SA0E"
 })
 
-
-def main():
+def main(_):
     """Runs the script. See module docstring."""
+    _INPUT_FILE_PATH = os.path.join(MODULE_DIR, _FLAGS.input_path)
+    _OUTOUT_FILE_PATH = os.path.join(MODULE_DIR, _FLAGS.output_path)
+    Path(_OUTOUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
+    Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
     for series_name, url in CSV_URLS.items():
         series_id = SERIES_IDS[series_name]
-
         # If the downloading fails, an exception will be thrown and the
         # script will crash.
         # See https://requests.readthedocs.io/en/latest/user/quickstart/#errors-and-exceptions.
@@ -58,8 +69,16 @@ def main():
         }
         response = requests.get(url, headers=header)
         response.raise_for_status()
-
         buffer = io.StringIO(response.text)
+        #Start saving file locally
+        response.raise_for_status()
+        if response.status_code == 200:
+            if not response.content:
+                logging.fatal(f"No data available for URL: {url}. Aborting download.")
+            filename = f"{series_name}.csv" 
+            file_path = os.path.join(_INPUT_FILE_PATH, filename)
+            with open(file_path, 'wb') as f:f.write(response.content)
+        #End file after saving locally
 
         # The raw csv has four columns: "series_id", "year", "period", "value",
         # and "footnote_codes".
@@ -68,16 +87,21 @@ def main():
         # "period" is the months of the observations and is of the form "MM"
         # preceded by char 'M', e.g. "M05".
         in_df = pd.read_csv(buffer, sep=r"\s+", dtype="str")
-        # "M13" is annual averages
+        # "M13" is annual averages        
         in_df = in_df[(in_df["series_id"] == series_id) &
                       (in_df["period"] != "M13")]
         # Format "date" column as "YYYY-MM"
         in_df["date"] = in_df["year"] + "-" + in_df["period"].str[-2:]
         in_df = in_df[["date", "value"]]
         in_df.columns = ["date", "cpi"]
-
-        in_df.to_csv(series_name + ".csv", index=False)
-
+        # Convert 'date' column to datetime format
+        date_from_start_processing = _FLAGS.date_from_start_processing
+        logging.info(f"date_from_start_processing {date_from_start_processing}")
+        in_df['date'] = pd.to_datetime(in_df['date'], format='%Y-%m') 
+        in_df = in_df[in_df['date'].dt.year > date_from_start_processing]
+        in_df['date'] = in_df['date'].dt.strftime('%Y-%m')
+        logging.info(f"Data frame before writing to output csv file {in_df}")
+        in_df.to_csv(_OUTOUT_FILE_PATH + "/" + series_name + ".csv", index=False)
 
 if __name__ == "__main__":
-    main()
+    app.run(main)

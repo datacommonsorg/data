@@ -46,17 +46,15 @@ and prices. The difference is their population group. C-CPI-U stands for Chained
 CPI for All Urban Consumers. It is the chained version of CPI-U. Each of the
 three can have seasonally adjusted and unadjusted series.
 
-The StatisticalVariable for CPI-U and C-CPI-U is
-`dc/x6l3mg60hpe7c`
-
-The StatisticalVariable for CPI-W is
-`dc/e4cm4rj4d5fyc`
 ### Notes and Caveats
 
 Since CPIs can have different population groups and baskets of goods and can be
 chained or unchained and seasonally adjusted or unadjusted and different
 countries and areas have their own CPIs, we should have support for importing
 any type of CPI into Data Commons.
+
+Only monthly series for the US as a whole and not for parts of the US are
+imported.
 
 ### License
 
@@ -66,43 +64,93 @@ The license is available online at https://www.bls.gov/bls/linksite.htm.
 
 ### Dataset Documentation and Relevant Links
 
--   Descriptions of all available series of CPI-U:
-    https://download.bls.gov/pub/time.series/cu/cu.series
--   Descriptions of all available series of CPI-W:
-    https://download.bls.gov/pub/time.series/cw/cw.series
--   Description of all available series of C-CPI-U:
-    https://download.bls.gov/pub/time.series/su/su.series
--   CPI method handbook: https://www.bls.gov/opub/hom/pdf/cpihom.pdf
+- Descriptions of all available series of CPI-U:
+  https://download.bls.gov/pub/time.series/cu/cu.series
+- Descriptions of all available series of CPI-W:
+  https://download.bls.gov/pub/time.series/cw/cw.series
+- Description of all available series of C-CPI-U:
+  https://download.bls.gov/pub/time.series/su/su.series
+- CPI method handbook: https://www.bls.gov/opub/hom/pdf/cpihom.pdf
 
 ## About the Import
+
+### Status
+
+- In prod: All 3 measures of CPI _without product breakdown_.
+  - To see this directory at prod (_without product breakdown_):
+    [see commit d84f967](https://github.com/datacommonsorg/data/tree/d84f96744ae5ad2df1fbc81890a0dd76bd5dc54c/scripts/us_bls/cpi)
+  - The manifest.json points to the prod config.
+- State of this GitHub directory: All 3 measures, _with product breakdown_.
+  - When there is demand for this data, please check and do the
+    import process before productionizing.
+  - See the end of this file for intrepiditee's proposed manifest.json
+    from PR #296.
 
 ### Artifacts
 
 #### Cleaned Data
 
--   [c_cpi_u_1999_2024.csv](c_cpi_u_1999_2024.csv) contains seasonally
-    unadjusted Chained CPI for All Urban Consumers (C-CPI-U) data from 1999
-    to 2024. Series ID is "SUUR0000SA0".
--   [cpi_u_1913_2024.csv](cpi_u_1913_2024.csv) contains seasonally unadjusted
-    CPI for All Urban Consumers (CPI-U) data from 1913 to 2024. Series ID is
-    "CUUR0000SA0".
--   [cpi_w_1913_2024.csv](cpi_w_1913_2024.csv) contains seasonally unadjusted
-    CPI for Urban Wage Earners and Clerical Workers (CPI-W) data from 1913
-    to 2024. Series ID is "CWUR0000SA0".
+- [c_cpi_u.csv](c_cpi_u.csv) contains
+  Chained CPI for All Urban Consumers (C-CPI-U) data.
+- [cpi_u.csv](cpi_u.csv) contains
+  CPI for All Urban Consumers (CPI-U) data.
+- [cpi_w.csv](cpi_w.csv) contains
+  Urban Wage Earners and Clerical Workers (CPI-W) data.
 
 #### Template MCFs
-    Created tmcf manually and added variable measured as the two existing statistical variables for cpi-u cpi-w. Defined observationAbout, measurementQualifier, measurementMethod, unit and variableMeasured in tmcf itself. observationDate and value points to the two coulmns in the cleaned data csv's(Date and CPI) 
 
--   [c_cpi_u_1999_2024.tmcf](c_cpi_u_1999_2024.tmcf)
--   [cpi_u_1913_2024.tmcf](cpi_u_1913_2024.tmcf)
--   [cpi_w_1913_2024.tmcf](cpi_w_1913_2024.tmcf)
+- [c_cpi_u.tmcf](c_cpi_u_1999_2020.tmcf)
+  - Contains the template MCF for C-CPI-U series.
+- [cpi_u.tmcf](cpi_u_1913_2020.tmcf)
+- [cpi_w.tmcf](cpi_w_1913_2020.tmcf)
+
+#### Node MCFs
+
+- [c_cpi_u.mcf](c_cpi_u.mcf)
+  - Contains StatisticalVariables for C-CPI-U series.
+- [cpi_u.mcf](cpi_u.mcf)
+- [cpi_w.mcf](cpi_w.mcf)
+- [pop_type_enums.mcf](pop_type_enums.mcf)
+  - Contains populationType enums for all three types of series.
+- [unit_enums.mcf](unit_enums.mcf)
+  - Contains unit enums for all three types of series.
 
 #### Scripts
 
--   [generate_csv.py](generate_csv.py) downloads and converts BLS CPI raw csv
-    files to csv files of two columns: "date" and "cpi", where "date" is of the
-    form "YYYY-MM" and "cpi" is numeric.
+- [generate_csv_mcf.py](generate_csv_mcf.py) generates the CSVs,
+  StatisticalVariable MCFs, and template MCFs. See module docstring.
 
-### Import Procedure
+## Proposed manifest.json for adding product breakdown
 
-1.  Run `python3 generate_csv.py`
+See About the Import > Status above for context.
+
+```
+{
+  "import_specifications": [
+    {
+      "import_name": "BLS_CPI",
+      "curator_emails": ["swethakumari@google.com"],
+      "provenance_url": "https://www.bls.gov/cpi/",
+      "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index.BLS publishes three main types of CPIs: CPI-U, CPI-W, and C-CPI-U. CPI-U stands for CPI for All Urban Consumers. CPI-W stands for CPI for Urban Wage Earners and Clerical Workers. The two are both unchained and use the same basket of goods and prices. The difference is their population group. C-CPI-U stands for Chained CPI for All Urban Consumers. It is the chained version of CPI-U. Each of the three can have seasonally adjusted and unadjusted series.",
+      "scripts": ["generate_csv.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "cpi_u.tmcf",
+          "cleaned_csv": "output/cpi_u_1913_2024.csv"
+        },
+        {
+           "template_mcf": "cpi_w.tmcf",
+          "cleaned_csv": "output/cpi_w_1913_2024.csv"
+        },
+        {
+           "template_mcf": "c_cpi_u.tmcf",
+		  "cleaned_csv": "output/c_cpi_u_1999_2024.csv"
+        }
+      ],
+      "cron_schedule": "5 3 15 * *"
+    }
+  ]
+}
+```
+
+Note: Data is available from 1947 in source , so the historical data is retained in GCP bucket i.e., from 1913 to 1946.

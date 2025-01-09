@@ -9,15 +9,15 @@
       "import_inputs": [
         {
           "template_mcf": "cpi_u.tmcf",
-          "cleaned_csv": "cpi_u_1913_2024.csv"
+          "cleaned_csv": "output/cpi_u_1913_2024.csv"
         },
         {
            "template_mcf": "cpi_w.tmcf",
-          "cleaned_csv": "cpi_w_1913_2024.csv"
+          "cleaned_csv": "output/cpi_w_1913_2024.csv"
         },
         {
            "template_mcf": "c_cpi_u.tmcf",
-          "cleaned_csv": "c_cpi_u_1999_2024.csv"
+		  "cleaned_csv": "output/c_cpi_u_1999_2024.csv"
         }
       ],
       "cron_schedule": "5 3 15 * *"
