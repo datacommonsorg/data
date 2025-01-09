@@ -31,5 +31,6 @@ RUN pip install -r /workspace/requirements.txt
 RUN git clone https://github.com/datacommonsorg/data.git
 RUN wget https://github.com/datacommonsorg/import/releases/download/0.1-alpha.1k/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar
 COPY app/. /workspace/app/
+COPY main.py /workspace/
 
-CMD gunicorn --timeout 0 --workers 5 -b :$PORT app.main:FLASK_APP
+ENTRYPOINT ["python","./main.py"]
