@@ -17,15 +17,26 @@ based on manifests.
 """
 
 import dataclasses
+import glob
 import json
 import logging
 import os
+import sys
 import subprocess
 import tempfile
 import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
 
+REPO_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_differ'))
+sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_validation'))
+
+from import_differ import ImportDiffer
+from import_validation import ImportValidation
 from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
@@ -319,9 +330,8 @@ class ImportExecutor:
             raise exc
 
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
-                                  absolute_import_dir: str, import_spec: dict,
-                                  interpreter_path: str,
-                                  process: subprocess.CompletedProcess) -> None:
+                                  absolute_import_dir: str,
+                                  import_spec: dict) -> None:
         """ 
         Performs validations on import data.
         """
@@ -330,57 +340,49 @@ class ImportExecutor:
             mcf_path = import_input['node_mcf']
             current_data_path = os.path.join(absolute_import_dir, mcf_path)
             previous_data_path = os.path.join(absolute_import_dir,
-                                              mcf_path) + '.old'
-            differ_results_path = os.path.join(absolute_import_dir, 'results')
-            config_file_path = os.path.join(absolute_import_dir,
-                                            self.config.validation_config_file)
+                                              'previous_data.mcf')
+            summary_stats = os.path.join(absolute_import_dir,
+                                         'summary_report.csv')
+            validation_output_path = os.path.join(absolute_import_dir,
+                                                  'validation')
+            config_file = import_spec.get('validation_config_file', '')
+            if not config_file:
+                config_file = self.config.validation_config_file
+            config_file_path = os.path.join(REPO_DIR, config_file)
+            logging.info(f'Validation config file: {config_file_path}')
 
             # Download previous import data.
             bucket = storage.Client(self.config.gcs_project_id).bucket(
                 self.config.storage_prod_bucket_name)
             folder = relative_import_dir + '/' + import_spec['import_name'] + '/'
             blob = bucket.blob(folder + 'latest_version.txt')
+            if not blob:
+                logging.error(
+                    "Not able to download latest version from GCS, skipping validation."
+                )
+                return
             blob = bucket.blob(folder + blob.download_as_text() + '/' +
                                mcf_path)
-            blob.download_to_filename(previous_data_path)
+            if not blob:
+                logging.error(
+                    "Not able to download previous import from GCS, skipping validation."
+                )
+                return
+            # blob.download_to_filename(previous_data_path)
 
-            # Invoke data differ script.
-            differ_script_path = os.path.join(repo_dir, 'tools', 'differ',
-                                              'differ.py')
-            differ_script_args: List[str] = ('--current_data=' +
-                                             current_data_path,
-                                             '--previous_data=' +
-                                             previous_data_path,
-                                             '--output_location=' +
-                                             differ_results_path)
-            process = _run_user_script(
-                interpreter_path=interpreter_path,
-                script_path=differ_script_path,
-                timeout=self.config.user_script_timeout,
-                args=differ_script_args,
-                cwd=absolute_import_dir,
-                env=self.config.user_script_env,
-            )
-            _log_process(process=process)
-            process.check_returncode()
+            # Invoke differ script.
+            differ = ImportDiffer(current_data_path, previous_data_path,
+                                  validation_output_path)
+            differ.run_differ()
 
-            # Invoke data validation script.
-            validation_script_path = os.path.join(repo_dir, 'tools',
-                                                  'validation', 'validation.py')
-            validation_script_args: List[str] = ('--differ_output_location=' +
-                                                 differ_results_path,
-                                                 '--config_file=' +
-                                                 config_file_path)
-            process = _run_user_script(
-                interpreter_path=interpreter_path,
-                script_path=validation_script_path,
-                timeout=self.config.user_script_timeout,
-                args=validation_script_args,
-                cwd=absolute_import_dir,
-                env=self.config.user_script_env,
-            )
-            _log_process(process=process)
-            process.check_returncode()
+            # Invoke validation script.
+            validation_output = os.path.join(validation_output_path,
+                                             'validation_output.csv')
+            differ_output = os.path.join(validation_output_path,
+                                         'point_analysis_summary.csv')
+            validation = ImportValidation(config_file_path, differ_output,
+                                          summary_stats, validation_output)
+            validation.run_validations()
 
     def _invoke_import_job(self, absolute_import_dir: str, import_spec: dict,
                            version: str, interpreter_path: str,
@@ -452,22 +454,31 @@ class ImportExecutor:
                                     process=process)
 
             if self.config.invoke_import_validation:
+                logging.info("Invoking import validations")
                 self._invoke_import_validation(
                     repo_dir=repo_dir,
                     relative_import_dir=relative_import_dir,
                     absolute_import_dir=absolute_import_dir,
-                    import_spec=import_spec,
-                    interpreter_path=interpreter_path,
-                    process=process)
+                    import_spec=import_spec)
 
         if self.config.skip_gcs_upload:
+            logging.info("Skipping GCS upload")
             return
+
         inputs = self._upload_import_inputs(
             import_dir=absolute_import_dir,
             output_dir=f'{relative_import_dir}/{import_name}',
             version=version,
             import_spec=import_spec,
         )
+
+        validation_output_path = os.path.join(absolute_import_dir, 'validation')
+        for filepath in glob.iglob(f'{validation_output_path}/*.csv'):
+            dest = f'{relative_import_dir}/{import_name}/{version}/validation/{os.path.basename(filepath)}'
+            self.uploader.upload_file(
+                src=filepath,
+                dest=dest,
+            )
 
         if self.importer:
             self.importer.delete_previous_output(relative_import_dir,
