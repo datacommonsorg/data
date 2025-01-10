@@ -61,8 +61,8 @@ _FLAGS(sys.argv)
 logging.basicConfig(level=logging.INFO)
 
 
-def _get_cron_schedule(repo_dir: str, absolute_import_path: str,
-                       manifest_filename: str):
+def _get_import_spec(repo_dir: str, absolute_import_path: str,
+                     manifest_filename: str):
 
     # Retain the path to the import (ignoring the name of the import).
     path = absolute_import_path.split(":")[0]
@@ -78,7 +78,7 @@ def _get_cron_schedule(repo_dir: str, absolute_import_path: str,
 
     for spec in manifest['import_specifications']:
         if absolute_import_path.endswith(':' + spec['import_name']):
-            return spec['cron_schedule']
+            return spec
 
     # If we are here, the the import name was not found in the manifest.
     raise Exception(
@@ -310,10 +310,10 @@ def main(_):
         logging.info("***** Beginning Schedule Operation **************")
         logging.info("*************************************************")
         # Retrieve the cron schedule.
-        cron_schedule = _get_cron_schedule(repo_dir, absolute_import_path,
-                                           cfg.manifest_filename)
+        import_spec = _get_import_spec(repo_dir, absolute_import_path,
+                                       cfg.manifest_filename)
         res = scheduler_job_manager.create_or_update_import_schedule(
-            absolute_import_path, cron_schedule, cfg, scheduler_config_dict)
+            absolute_import_path, import_spec, cfg, scheduler_config_dict)
         logging.info("*************************************************")
         logging.info("*********** Schedule Operation Complete. ********")
         logging.info("*************************************************")
