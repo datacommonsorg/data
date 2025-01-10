@@ -97,10 +97,10 @@ def create_or_update_import_schedule(absolute_import_name: str,
             f'cron_schedule not found in manifest for {absolute_import_name}')
     resources = {"cpu": "2", "memory": "4G"}  # default resources.
     if 'resource_limits' in import_spec:
-        resources = import_spec['resource_limits']
+        resources.update(import_spec['resource_limits'])
     timeout = config.user_script_timeout
-    if 'task_timeout' in import_spec:
-        timeout = import_spec['task_timeout']
+    if 'user_script_timeout' in import_spec:
+        timeout = import_spec['user_script_timeout']
 
     if config.executor_type == "GKE":
         # Note: this is the content of what is passed to /update API
