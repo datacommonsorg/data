@@ -120,7 +120,7 @@ def create_or_update_import_schedule(absolute_import_name: str, schedule: str,
                                                     schedule,
                                                     json_encoded_job_body)
     elif config.executor_type == "CLOUD_RUN":
-        docker_image = config.executor_docker_image
+        docker_image = config.importer_docker_image
         job_name = absolute_import_name.split(':')[1]
 
         json_encoded_config = json.dumps(config.get_data_refresh_config())
