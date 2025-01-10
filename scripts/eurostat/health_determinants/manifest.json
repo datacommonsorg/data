@@ -2,7 +2,7 @@
     "import_specifications": [
       {
       "import_name": "EuroStatHealth_AlcoholConsumption",
-      "curator_emails": ["sudhisha@google.com"],
+      "curator_emails": [],
       "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
       "provenance_description": "European Union (EU) Eurostat",
       "scripts": ["alcohol_consumption/process.py"],
@@ -16,7 +16,7 @@
     },
       {
       "import_name": "EuroStatHealth_BodyMassIndex",
-      "curator_emails": ["sudhisha@google.com"],
+      "curator_emails": [],
       "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
       "provenance_description": "European Union (EU) Eurostat",
       "scripts": ["bmi/process.py"],
@@ -30,7 +30,7 @@
     },
       {
       "import_name": "EuroStatHealth_FruitsAndVegetables",
-      "curator_emails": ["sudhisha@google.com"],
+      "curator_emails": [],
       "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
       "provenance_description": "European Union (EU) Eurostat",
       "scripts": ["fruits_vegetables/process.py"],
@@ -44,7 +44,7 @@
     },
       {
       "import_name": "EuroStatHealth_PhysicalActivity",
-      "curator_emails": ["sudhisha@google.com"],
+      "curator_emails": [],
       "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
       "provenance_description": "European Union (EU) Eurostat",
       "scripts": ["physical_activity/process.py"],
@@ -58,7 +58,7 @@
     },
     {
       "import_name": "EuroStatHealth_SocialEnvironment",
-      "curator_emails": ["sudhisha@google.com"],
+      "curator_emails": [],
       "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
       "provenance_description": "European Union (EU) Eurostat",
       "scripts": ["social_environment/process.py"],
@@ -72,14 +72,14 @@
     },
     {
       "import_name": "EurostatHealth_Tobacco_Consumption",
-      "curator_emails": ["sudhisha@google.com"],
+      "curator_emails": [],
       "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
       "provenance_description": "European Union (EU) Eurostat",
-      "scripts": ["process.py"],
+      "scripts": ["tobacco_consumption/process.py"],
       "import_inputs": [
         {
-          "template_mcf": "output/eurostat_population_tobaccoconsumption.tmcf",
-          "cleaned_csv": "output/eurostat_population_tobaccoconsumption.csv"
+          "template_mcf": "tobacco_consumption/output/eurostat_population_tobaccoconsumption.tmcf",
+          "cleaned_csv": "tobacco_consumption/output/eurostat_population_tobaccoconsumption.csv"
         }
       ],
       "cron_schedule": "0 3 2 * *"
