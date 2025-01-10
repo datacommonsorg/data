@@ -2489,6 +2489,9 @@
         "Indeterminate/Other/Unknown": {
             "modeOfTransmission": "IndeterminateOrOtherOrUnknownTramissionMode"
         },
+        "Indeterminate/unknown": {
+            "modeOfTransmission": "IndeterminateOrOtherOrUnknownTramissionMode"
+        },
         "Animal Contact": {
             "modeOfTransmission": "AnimalContact"
         },
@@ -2497,6 +2500,9 @@
         },
         "Environmental contamination other than food/water": {
             "modeOfTransmission": "EnvironmentalContaminationExceptFoodOrWater"
+        },
+        "Animal contact": {
+            "modeOfTransmission": "AnimalContact"
         }
     },
     "Etiology": {
