@@ -101,17 +101,14 @@ class CloudSchedulerTest(unittest.TestCase):
     def test_cloud_run_job_request(self):
         absolute_import_name = "scripts/preprocess:A"
         schedule = "0 5 * * *"
-        json_encoded_config = '{"k":"v"}'
 
         cloud_run_service_account = 'service_account'
         cloud_run_job_url = 'run.googleapis.com/run'
         got = cloud_scheduler.cloud_run_job_request(absolute_import_name,
-                                                    schedule,
-                                                    json_encoded_config,
-                                                    cloud_run_job_url,
+                                                    schedule, cloud_run_job_url,
                                                     cloud_run_service_account)
         want = {
-            'name': 'scripts_preprocess_A',
+            'name': 'A',
             'description': 'scripts/preprocess:A',
             'schedule': "0 5 * * *",
             'time_zone': 'Etc/UTC',
@@ -125,15 +122,12 @@ class CloudSchedulerTest(unittest.TestCase):
                 'seconds': 60 * 30
             },
             'http_target': {
-                'uri':
-                    'https://run.googleapis.com/run',
-                'http_method':
-                    'POST',
+                'uri': 'https://run.googleapis.com/run',
+                'http_method': 'POST',
                 'headers': {
                     'Content-Type': 'application/json',
                 },
-                'body':
-                    b'{"overrides": {"containerOverrides": [{"args": ["--import_name=scripts/preprocess:A", "--import_config={\\"k\\":\\"v\\"}"]}]}}',
+                'body': b'{}',
                 'oauth_token': {
                     'service_account_email': 'service_account',
                     'scope': 'https://www.googleapis.com/auth/cloud-platform'

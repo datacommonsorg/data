@@ -24,11 +24,12 @@ import time
 from absl import logging
 from google.api_core.exceptions import NotFound
 from google.cloud import run_v2
+from google.protobuf import duration_pb2
 
 
 def create_or_update_cloud_run_job(project_id: str, location: str, job_id: str,
                                    image: str, env_vars: dict, args: list,
-                                   resources: dict) -> run_v2.Job:
+                                   resources: dict, timeout: int) -> run_v2.Job:
     """Creates a new cloud run job or updates an existing one.
 
   If the jobs exists, the container is updated with new image and environment
@@ -43,6 +44,7 @@ def create_or_update_cloud_run_job(project_id: str, location: str, job_id: str,
     env_vars: dict of environment variables as {'VAR': '<value>'}
     args: list of command line arguments
     resources: cpu/memory resources
+    timeout: duration in seconds
 
   Returns:
     Job created as a dict.
@@ -59,8 +61,11 @@ def create_or_update_cloud_run_job(project_id: str, location: str, job_id: str,
 
     res = run_v2.types.ResourceRequirements(limits=resources)
     container = run_v2.Container(image=image, env=env, resources=res, args=args)
-    exe_template = run_v2.ExecutionTemplate(template=run_v2.TaskTemplate(
-        containers=[container]))
+    exe_template = run_v2.ExecutionTemplate(
+        template=run_v2.TaskTemplate(containers=[container],
+                                     max_retries=2,
+                                     timeout=duration_pb2.Duration(
+                                         seconds=timeout)))
     new_job = run_v2.Job(template=exe_template)
     logging.info(f"Creating job: {job_name}")
 
