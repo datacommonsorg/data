@@ -53,7 +53,7 @@ class NCESPrivateSchool(USEducation):
     _observation_period = OBSERVATION_PERIOD
     _exclude_list = EXCLUDE_LIST
     _school_id = DROP_BY_VALUE
-    _renaming_columns = RENAMEING_PRIVATE_COLUMNS
+    _renaming_columns = RENAMING_PRIVATE_COLUMNS
 
     def set_include_columns(self, columns: list):
         self._include_columns = columns

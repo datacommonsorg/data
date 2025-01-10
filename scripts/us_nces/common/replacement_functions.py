@@ -26,7 +26,7 @@ _COEDUCATIONAL = {
     "–": ""
 }
 
-_RELIGIOUS_AFFLIATION = {
+_RELIGIOUS_AFFILIATION = {
     "1-Catholic": "Catholic",
     "2-Other religious": "OtherReligious",
     "3-Nonsectarian": "Nonsectarian",
@@ -461,7 +461,7 @@ def replace_values(data_df: pd.DataFrame,
     """
     cols_mapper = {
         "Coeducational": _COEDUCATIONAL,
-        "School_Religion_Affliation": _RELIGIOUS_AFFLIATION,
+        "School_Religion_Affiliation": _RELIGIOUS_AFFILIATION,
         "School_Religion": _RELIGIOUS,
         "School_Type": _SCHOOL_TYPE,
         "SchoolGrade": _SCHOOL_LEVEL,

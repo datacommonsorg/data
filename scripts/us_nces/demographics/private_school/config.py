@@ -71,7 +71,7 @@ EXCLUDE_LIST = [
 # Dropping the Duplicate entries based on School ID
 DROP_BY_VALUE = "School ID - NCES Assigned"
 # Renaming column name.
-RENAMEING_PRIVATE_COLUMNS = {
+RENAMING_PRIVATE_COLUMNS = {
     "Private School Name":
         "Private_School_Name",
     "School ID - NCES Assigned":
@@ -79,7 +79,7 @@ RENAMEING_PRIVATE_COLUMNS = {
     "School Type":
         "School_Type",
     "School's Religious Affiliation or Orientation":
-        "School_Religion_Affliation",
+        "School_Religion_Affiliation",
     "Religious Orientation":
         "School_Religion",
     "Physical Address":
