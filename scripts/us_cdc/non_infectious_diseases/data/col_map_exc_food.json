@@ -9,6 +9,9 @@
         "Indeterminate/Other/Unknown": {
             "transmissionMode": "IndeterminateOrOtherOrUnknownTramissionMode"
         },
+        "Indeterminate/unknown": {
+            "transmissionMode": "IndeterminateOrUnknown"
+        },
         "Animal Contact": {
             "transmissionMode": "AnimalContactTransmission"
         },
@@ -17,17 +20,187 @@
         },
         "Environmental contamination other than food/water": {
             "transmissionMode": "EnvironmentalContaminationTransmissionExceptFoodOrWater"
+        },
+        "Animal contact": {
+            "transmissionMode": "AnimalContactTransmission"
         }
     },
     "Etiology Status": {
         "Confirmed": {
             "medicalStatus": "ConfirmedCase"
         },
+        "Confirmed;Confirmed": {
+            "medicalStatus": "ConfirmedConfirmed"
+        },
         "Suspected": {
             "medicalStatus": "SuspectedCase"
+        },
+        "Suspected;Confirmed": {
+            "medicalStatus": "SuspectedConfirmed"
+        },
+        "Suspected;Suspected": {
+            "medicalStatus": "SuspectedSuspected"
+        },
+        "Confirmed;Suspected": {
+            "medicalStatus": "ConfirmedSuspected"
+        },
+        "Confirmed;Suspected;Suspected;Suspected;Suspected": {
+            "medicalStatus": "ConfirmedSuspectedSuspectedSuspectedSuspected"
+        },
+        
+        "Confirmed;Suspected;Suspected": {
+            "medicalStatus": "ConfirmedSuspectedSuspected"
+        },
+        "Confirmed;Suspected;Suspected;Suspected": {
+            "medicalStatus": "ConfirmedSuspectedSuspectedSuspected"
+        },
+        "Confirmed;Confirmed;Confirmed": {
+            "medicalStatus": "ConfirmedConfirmedConfirmed"
+        },
+        "Confirmed;Confirmed;Suspected": {
+            "medicalStatus": "ConfirmedConfirmedSuspected"
+        },
+        "Suspected;Suspected;Suspected;Suspected": {
+            "medicalStatus": "SuspectedSuspectedSuspectedSuspected"
+        },
+        "Confirmed;Suspected;Confirmed": {
+            "medicalStatus": "ConfirmedSuspectedConfirmed"
+        },
+        "Suspected;Suspected;Suspected": {
+            "medicalStatus": "SuspectedSuspectedSuspected"
+        },
+        "Suspected;Confirmed;Confirmed;Confirmed;Confirmed": {
+            "medicalStatus": "SuspectedConfirmedConfirmedConfirmedConfirmed"
+        },
+        "Confirmed;Suspected;Confirmed;Suspected": {
+            "medicalStatus": "ConfirmedSuspectedConfirmedSuspected"
+        },
+        "Suspected;Suspected;Confirmed": {
+            "medicalStatus": "SuspectedSuspectedConfirmed"
+        },
+        "Suspected;Confirmed;Confirmed": {
+            "medicalStatus": "SuspectedConfirmedConfirmed"
+        },
+        "Suspected;Confirmed;Suspected;Suspected;Suspected": {
+            "medicalStatus": "SuspectedConfirmedSuspectedSuspectedSuspected"
+        },
+        "Confirmed;Confirmed;Confirmed;Suspected;Confirmed;Suspected;Suspected;Suspected;Suspected": {
+            "medicalStatus": "ConfirmedSuspected"
+        },
+        "Confirmed;Confirmed;Confirmed;Confirmed;Suspected;Confirmed": {
+            "medicalStatus": "ConfirmedConfirmedConfirmedConfirmedSuspectedConfirmed"
+        },
+        "Confirmed;Confirmed;Suspected;Suspected;Suspected;Suspected": {
+            "medicalStatus": "ConfirmedSuspected"
+        },
+        "Suspected;Confirmed;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedConfirmedConfirmedSuspected"
+        },
+        "Suspected;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedConfirmedSuspected"
+        },
+        "Suspected;Confirmed;Confirmed;Confirmed": {
+            "medicalStatus": "SuspectedConfirmedConfirmedConfirmed"
+        },
+        "Confirmed;Suspected;Suspected;Confirmed": {
+            "medicalStatus": "ConfirmedSuspectedSuspectedConfirmed"
+        },
+        "Confirmed;Confirmed;Suspected;Confirmed": {
+            "medicalStatus": "ConfirmedConfirmedSuspectedConfirmed"
+        },
+        "Confirmed;Confirmed;Confirmed;Confirmed": {
+            "medicalStatus": "ConfirmedConfirmedConfirmedConfirmed"
+        },
+        "Suspected;Confirmed;Suspected;Suspected;Suspected;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedConfirmed"
+        },
+        "Suspected;Suspected;Suspected;Confirmed;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedSuspectedSuspectedConfirmedConfirmedSuspected"
+        },
+        "Suspected;Suspected;Suspected;Suspected;Suspected": {
+            "medicalStatus": "SuspectedSuspectedSuspectedSuspectedSuspected"
+        },
+        "Confirmed;Suspected;Confirmed;Suspected;Suspected": {
+            "medicalStatus": "ConfirmedSuspectedConfirmedSuspectedSuspected"
+        },
+        "Suspected;Confirmed;Suspected;Suspected": {
+            "medicalStatus": "SuspectedConfirmedSuspectedSuspected"
+        },
+        "Suspected;Confirmed;Confirmed;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedConfirmedConfirmedConfirmedSuspected"
+        },
+        "Suspected;Suspected;Suspected;Suspected;Confirmed;Confirmed;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedConfirmed"
+        },
+        "Suspected;Suspected;Confirmed;Confirmed;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedSuspectedConfirmedConfirmedConfirmedSuspected"
+        },
+        "Confirmed;Confirmed;Suspected;Suspected": {
+            "medicalStatus": "ConfirmedConfirmedSuspectedSuspected"
+        },
+        "Confirmed;Confirmed;Confirmed;Confirmed;Suspected": {
+            "medicalStatus": "ConfirmedConfirmedConfirmedConfirmedSuspected"
+        },
+        "Suspected;Suspected;Suspected;Suspected;Confirmed;Suspected;Suspected;Suspected;Confirmed;Confirmed": {
+            "medicalStatus": "SuspectedSuspectedSuspectedSuspectedConfirmedSuspectedSuspectedSuspectedConfirmedConfirmed"
+        },
+        "Suspected;Confirmed;Confirmed;Suspected;Confirmed": {
+            "medicalStatus": "SuspectedConfirmedConfirmedSuspectedConfirmed"
+        },
+        "Confirmed;Confirmed;Confirmed;Suspected": {
+            "medicalStatus": "ConfirmedConfirmedConfirmedSuspected"
+        },
+        "Confirmed;Confirmed;Confirmed;Confirmed;Confirmed": {
+            "medicalStatus": "ConfirmedConfirmedConfirmedConfirmedConfirmed"
+        },
+        "Confirmed;Confirmed;Confirmed;Suspected;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedConfirmedSuspected"
+        },
+        "Confirmed;Confirmed;Confirmed;Confirmed;Confirmed;Confirmed": {
+            "medicalStatus": "ConfirmedConfirmedConfirmedConfirmedConfirmedConfirmed"
+        },
+        "Suspected;Suspected;Confirmed;Suspected;Confirmed;Confirmed;Suspected;Suspected": {
+            "medicalStatus": "SuspectedSuspectedConfirmedSuspected"
+        },
+        "Suspected;Confirmed;Suspected;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedConfirmedSuspectedConfirmedSuspected"
+        },
+        "Suspected;Confirmed;Suspected;Confirmed;Confirmed;Confirmed": {
+            "medicalStatus": "SuspectedConfirmedSuspectedConfirmedConfirmedConfirmed"
+        },
+        "Suspected;Suspected;Confirmed;Confirmed": {
+            "medicalStatus": "SuspectedSuspectedConfirmedConfirmed"
+        },
+        "Suspected;Confirmed;Suspected;Confirmed;Suspected;Suspected;Confirmed": {
+            "medicalStatus": "SuspectedConfirmedSuspectedConfirmedSuspectedSuspectedConfirmed"
+        },
+        "Suspected;Suspected;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedSuspectedConfirmedSuspected"
+        },
+        "Confirmed;Suspected;Suspected;Confirmed;Suspected": {
+            "medicalStatus": "ConfirmedSuspectedSuspectedConfirmedSuspected"
+        },
+        "Suspected;Confirmed;Confirmed;Suspected;Suspected": {
+            "medicalStatus": "SuspectedConfirmedConfirmedSuspectedSuspected"
+        },
+        "Suspected;Suspected;Suspected;Confirmed": {
+            "medicalStatus": "SuspectedSuspectedSuspectedConfirmed"
+        },
+        "Suspected;Suspected;Confirmed;Confirmed;Suspected;Suspected": {
+            "medicalStatus": "SuspectedSuspectedConfirmedConfirmedSuspectedSuspected"
+        },
+        "Suspected;Suspected;Suspected;Confirmed;Confirmed;Suspected;Suspected;Suspected;Confirmed;Confirmed;Suspected;Confirmed;Suspected": {
+            "medicalStatus": "SuspectedSuspectedSuspectedConfirmedConfirmedSuspectedSuspectedSuspectedConfirmedConfirmedSuspectedConfirmedSuspected"
+        },
+        "Suspected;Confirmed;Confirmed;Confirmed;Confirmed;Confirmed;Confirmed": {
+            "medicalStatus": "SuspectedConfirmed"
+        },
+        "Confirmed;Suspected;Confirmed;Confirmed": {
+            "medicalStatus": "ConfirmedSuspectedConfirmedConfirmed"
         }
     },
     "Etiology": {
+       
         "Acanthamoeba unknown": {
             "etiology": "AcanthamoebaUnknown"
         },
@@ -57,9 +230,6 @@
         },
         "Amnesic shellfish poison": {
             "etiology": "AmnesicShellfishPoison"
-        },
-        "Anatoxin-a": {
-            "etiology": "AnatoxinA"
         },
         "Anisakis": {
             "etiology": "Anisakis"
@@ -621,6 +791,1875 @@
         },
         "Yersinia unknown": {
             "etiology": "YersiniaUnknown"
+        },
+        "Norovirus unknown;Clostridium difficile": {
+            "etiology": "NorovirusUnknownClostridiumDifficile"
+        },
+        "Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Clostridium difficile;Norovirus unknown": {
+            "etiology": "ClostridiumDifficileNorovirusUnknown"
+        },
+        "Norovirus Genogroup II;Campylobacter;Clostridium difficile;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupIICampylobacterClostridiumDifficileNorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Sapovirus unknown;Rotavirus": {
+            "etiology": "SapovirusUnknownRotavirus"
+        },
+        "Escherichia coli, Enterotoxigenic;Escherichia coli, Enteroaggregative": {
+            "etiology": "EscherichiaColiEnterotoxigenicEscherichiaColiEnteroaggregative"
+        },
+        "Norovirus Genogroup II;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupIINorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Norovirus Genogroup I;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupINorovirusGenogroupII"
+        },
+        "Legionella unknown;Legionella pneumophila": {
+            "etiology": "LegionellaUnknownLegionellaPneumophila"
+        },
+        "Norovirus Genogroup II;Norovirus Genogroup II;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupIINorovirusGenogroupIINorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Clostridium perfringens;Bacillus cereus": {
+            "etiology": "ClostridiumPerfringensBacillusCereus"
+        },
+        "Other - Virus;Other": {
+            "etiology": "OtherVirusOther"
+        },
+        "Norovirus Genogroup I;Clostridium difficile;Norovirus Genogroup I": {
+            "etiology": "NorovirusGenogroupIClostridiumDifficileNorovirusGenogroupI"
+        },
+        "Norovirus unknown;Norovirus unknown": {
+            "etiology": "NorovirusUnknownNorovirusUnknown"
+        },
+        "Astrovirus;Norovirus Genogroup II": {
+            "etiology": "AstrovirusNorovirusGenogroupII"
+        },
+        "Norovirus Genogroup II;Astrovirus;Rotavirus": {
+            "etiology": "NorovirusGenogroupIIAstrovirusRotavirus"
+        },
+        "Norovirus unknown;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "NorovirusUnknownNorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Norovirus Genogroup II;Norovirus Genogroup I": {
+            "etiology": "NorovirusGenogroupIINorovirusGenogroupI"
+        },
+        "Norovirus unknown;Norovirus Genogroup I;Norovirus Genogroup I": {
+            "etiology": "NorovirusUnknownNorovirusGenogroupINorovirusGenogroupI"
+        },
+        "Escherichia coli, Shiga toxin-producing;Rotavirus": {
+            "etiology": "EscherichiaColiShigaToxinProducingRotavirus"
+        },
+        "Norovirus Genogroup II;Escherichia coli, Enteropathogenic": {
+            "etiology": "NorovirusGenogroupIIEscherichiaColiEnteropathogenic"
+        },
+        "Norovirus unknown;Staphylococcus aureus": {
+            "etiology": "NorovirusUnknownStaphylococcusAureus"
+        },
+        "Norovirus;Clostridium difficile": {
+            "etiology": "NorovirusClostridiumDifficile"
+        },
+        "Norovirus Genogroup I;Norovirus Genogroup I": {
+            "etiology": "NorovirusGenogroupINorovirusGenogroupI"
+        },
+        "Escherichia coli, Enteropathogenic;Campylobacter unknown": {
+            "etiology": "EscherichiaColiEnteropathogenicCampylobacterUnknown"
+        },
+        "Norovirus unknown;Rotavirus": {
+            "etiology": "NorovirusUnknownRotavirus"
+        },
+        "Norovirus Genogroup I;Adenovirus unknown": {
+            "etiology": "NorovirusGenogroupIAdenovirusUnknown"
+        },
+        "Norovirus Genogroup II;Norovirus unknown": {
+            "etiology": "NorovirusGenogroupIINorovirusUnknown"
+        },
+        "Norovirus Genogroup I;Norovirus Genogroup II;Escherichia coli, Enterotoxigenic": {
+            "etiology": "NorovirusGenogroupINorovirusGenogroupIIEscherichiaColiEnterotoxigenic"
+        },
+        "Norovirus Genogroup II;Clostridium difficile": {
+            "etiology": "NorovirusGenogroupIIClostridiumDifficile"
+        },
+        "Norovirus unknown;Norovirus Genogroup II": {
+            "etiology": "NorovirusUnknownNorovirusGenogroupII"
+        },
+        "Norovirus;Rotavirus": {
+            "etiology": "NorovirusRotavirus"
+        },
+        "Sapovirus unknown;Norovirus unknown": {
+            "etiology": "SapovirusUnknownNorovirusUnknown"
+        },
+        "Campylobacter jejuni;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "CampylobacterJejuniEscherichiaColiShigaToxinProducing"
+        },
+        "Salmonella enterica;Norovirus Genogroup II": {
+            "etiology": "SalmonellaEntericaNorovirusGenogroupII"
+        },
+        "Norovirus;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "NorovirusNorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Escherichia coli, Shiga toxin-producing;Norovirus unknown": {
+            "etiology": "EscherichiaColiShigaToxinProducingNorovirusUnknown"
+        },
+        "Clostridium difficile;Adenovirus unknown;Escherichia coli, Unknown;Rotavirus;Norovirus unknown": {
+            "etiology": "ClostridiumDifficileAdenovirusUnknownEscherichiaColiUnknownRotavirusNorovirusUnknown"
+        },
+        "Enterovirus unknown": {
+            "etiology": "EnterovirusUnknown"
+        },
+        "Norovirus Genogroup I;Norovirus Genogroup II;Norovirus unknown;Sapovirus unknown": {
+            "etiology": "NorovirusGenogroupINorovirusGenogroupIINorovirusUnknownSapovirusUnknown"
+        },
+        "Norovirus Genogroup II;Rotavirus": {
+            "etiology": "NorovirusGenogroupIIRotavirus"
+        },
+        "Norovirus;Escherichia coli, Enteropathogenic": {
+            "etiology": "NorovirusEscherichiaColiEnteropathogenic"
+        },
+        "Clostridium difficile;Norovirus Genogroup II": {
+            "etiology": "ClostridiumDifficileNorovirusGenogroupII"
+        },
+        "Norovirus unknown;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "NorovirusUnknownEscherichiaColiShigaToxinProducing"
+        },
+        "Salmonella enterica;Salmonella enterica": {
+            "etiology": "SalmonellaEntericaSalmonellaEnterica"
+        },
+        "Bacillus cereus;Clostridium perfringens": {
+            "etiology": "BacillusCereusClostridiumPerfringens"
+        },
+        "Clostridium difficile;Rotavirus": {
+            "etiology": "ClostridiumDifficileRotavirus"
+        },
+        "Vibrio;Norovirus unknown": {
+            "etiology": "VibrioNorovirusUnknown"
+        },
+        "Norovirus unknown;Giardia unknown": {
+            "etiology": "NorovirusUnknownGiardiaUnknown"
+        },
+        "Salmonella enterica;Clostridium difficile": {
+            "etiology": "SalmonellaEntericaClostridiumDifficile"
+        },
+        "Rotavirus;Campylobacter unknown": {
+            "etiology": "RotavirusCampylobacterUnknown"
+        },
+        "Norovirus unknown;Sapovirus": {
+            "etiology": "NorovirusUnknownSapovirus"
+        },
+        "Rotavirus;Norovirus unknown": {
+            "etiology": "RotavirusNorovirusUnknown"
+        },
+        "Norovirus Genogroup I;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "NorovirusGenogroupIEscherichiaColiShigaToxinProducing"
+        },
+        "Vibrio cholerae;Escherichia coli, Enteropathogenic;Escherichia coli, Enterotoxigenic": {
+            "etiology": "VibrioCholeraeEscherichiaColiEnteropathogenicEscherichiaColiEnterotoxigenic"
+        },
+        "Escherichia coli, Shiga toxin-producing;Staphylococcus aureus;Escherichia coli, Enteropathogenic": {
+            "etiology": "EscherichiaColiShigaToxinProducingStaphylococcusAureusEscherichiaColiEnteropathogenic"
+        },
+        "Norovirus unknown;Salmonella enterica": {
+            "etiology": "NorovirusUnknownSalmonellaEnterica"
+        },
+        "Salmonella unknown;Campylobacter unknown": {
+            "etiology": "SalmonellaUnknownCampylobacterUnknown"
+        },
+        "Norovirus unknown;Campylobacter unknown;Escherichia coli, Enteropathogenic": {
+            "etiology": "NorovirusUnknownCampylobacterUnknownEscherichiaColiEnteropathogenic"
+        },
+        "Sapovirus;Rotavirus": {
+            "etiology": "SapovirusRotavirus"
+        },
+        "Escherichia coli, Unknown": {
+            "etiology": "EscherichiaColiUnknown"
+        },
+        "Cryptosporidium parvum;Cryptosporidium parvum": {
+            "etiology": "CryptosporidiumParvumCryptosporidiumParvum"
+        },
+        "Salmonella enterica;Norovirus unknown": {
+            "etiology": "SalmonellaEntericaNorovirusUnknown"
+        },
+        "Escherichia coli, Shiga toxin-producing;Campylobacter unknown": {
+            "etiology": "EscherichiaColiShigaToxinProducingCampylobacterUnknown"
+        },
+        "Cyanotoxin other;Microcystis other;Other - Bacterium": {
+            "etiology": "CyanotoxinOtherMicrocystisOtherOtherBacterium"
+        },
+        "Cyanotoxin other;Microcystis unknown": {
+            "etiology": "CyanotoxinOtherMicrocystisUnknown"
+        },
+        "Vibrio parahaemolyticus;Vibrio other;Vibrio cholerae": {
+            "etiology": "VibrioParahaemolyticusVibrioOtherVibrioCholerae"
+        },
+        "Listeria": {
+            "etiology": "Listeria"
+        },
+        "Norovirus Genogroup I;Rotavirus": {
+            "etiology": "NorovirusGenogroupIRotavirus"
+        },
+        "Clostridium difficile;Escherichia coli, Enteroaggregative;Yersinia enterocolitica;Adenovirus F;Sapovirus unknown": {
+            "etiology": "ClostridiumDifficileEscherichiaColiEnteroaggregativeYersiniaEnterocoliticaAdenovirusFSapovirusUnknown"
+        },
+        "Escherichia coli, Enteropathogenic;Sapovirus unknown;Adenovirus unknown": {
+            "etiology": "EscherichiaColiEnteropathogenicSapovirusUnknownAdenovirusUnknown"
+        },
+        "Escherichia coli, Enteropathogenic;Sapovirus unknown": {
+            "etiology": "EscherichiaColiEnteropathogenicSapovirusUnknown"
+        },
+        "Escherichia coli, Shiga toxin-producing;Escherichia coli, Enteropathogenic": {
+            "etiology": "EscherichiaColiShigaToxinProducingEscherichiaColiEnteropathogenic"
+        },
+        "Microcystis unknown;Cyanotoxin other;Other - Bacterium": {
+            "etiology": "MicrocystisUnknownCyanotoxinOtherOtherBacterium"
+        },
+        "Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "EscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducing"
+        },
+        "Escherichia coli, Enteroaggregative;Escherichia coli, Enteropathogenic;Escherichia coli, Enterotoxigenic": {
+            "etiology": "EscherichiaColiEnteroaggregativeEscherichiaColiEnteropathogenicEscherichiaColiEnterotoxigenic"
+        },
+        "Shigella sonnei;Plesiomonas shigelloides": {
+            "etiology": "ShigellaSonneiPlesiomonasShigelloides"
+        },
+        "Escherichia coli, Shiga toxin-producing;Escherichia coli, Enterotoxigenic;Escherichia coli, Enteropathogenic;Norovirus unknown;Clostridium difficile;Escherichia coli, Enteroaggregative;Rotavirus;Sapovirus;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "EscherichiaColiShigaToxinProducingEnterotoxigenicEnteropathogenicNorovirusUnknownClostridiumDifficileEnteroaggregativeRotavirusSapovirus"
+        },
+        "Escherichia coli, Shiga toxin-producing;Campylobacter jejuni": {
+            "etiology": "EscherichiaColiShigaToxinProducingCampylobacterJejuni"
+        },
+        "Campylobacter;Norovirus unknown": {
+            "etiology": "CampylobacterNorovirusUnknown"
+        },
+        "Brucella other": {
+            "etiology": "BrucellaOther"
+        },
+        "Norovirus Genogroup II;Escherichia coli, Enterotoxigenic": {
+            "etiology": "NorovirusGenogroupIIEscherichiaColiEnterotoxigenic"
+        },
+        "Clostridium difficile;Norovirus Genogroup I": {
+            "etiology": "ClostridiumDifficileNorovirusGenogroupI"
+        },
+        "Adenovirus F;Escherichia coli, Enteropathogenic": {
+            "etiology": "AdenovirusFEscherichiaColiEnteropathogenic"
+        },
+        "Norovirus Genogroup I;Escherichia coli, Enteropathogenic": {
+            "etiology": "NorovirusGenogroupIEscherichiaColiEnteropathogenic"
+        },
+        "Cryptosporidium;Norovirus Genogroup II;Sapovirus unknown;Escherichia coli, Enteropathogenic;Escherichia coli, Enteroaggregative;Rotavirus": {
+            "etiology": "CryptosporidiumNorovirusGenogroupIISapovirusUnknownEscherichiaColiEnteropathogenicEscherichiaColiEnteroaggregativeRotavirus"
+        },
+        "Escherichia coli, Enteropathogenic;Norovirus unknown": {
+            "etiology": "EscherichiaColiEnteropathogenicNorovirusUnknown"
+        },
+        "Norovirus unknown;Salmonella unknown": {
+            "etiology": "NorovirusUnknownSalmonellaUnknown"
+        },
+        "Clostridium perfringens;Bacillus cereus;Staphylococcus aureus;Yersinia enterocolitica;Clostridium difficile;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "ClostridiumPerfringensBacillusCereusStaphylococcusAureusYersiniaEnterocoliticaClostridiumDifficileEscherichiaColiShigaToxinProducing"
+        },
+        "Norovirus Genogroup I;Norovirus unknown;Norovirus Genogroup I": {
+            "etiology": "NorovirusGenogroupINorovirusUnknownNorovirusGenogroupI"
+        },
+        "Clostridium perfringens;Staphylococcus aureus;Clostridium difficile;Escherichia coli, Enteropathogenic": {
+            "etiology": "ClostridiumPerfringensStaphylococcusAureusClostridiumDifficileEscherichiaColiEnteropathogenic"
+        },
+        "Astrovirus;Adenovirus;Rotavirus": {
+            "etiology": "AstrovirusAdenovirusRotavirus"
+        },
+        "Norovirus Genogroup II;Norovirus Genogroup I;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupIINorovirusGenogroupINorovirusGenogroupII"
+        },
+        "Norovirus;Norovirus Genogroup II": {
+            "etiology": "NorovirusNorovirusGenogroupII"
+        },
+        "Adenovirus;Norovirus Genogroup II": {
+            "etiology": "AdenovirusNorovirusGenogroupII"
+        },
+        "Rotavirus;Escherichia coli, Enteropathogenic": {
+            "etiology": "RotavirusEscherichiaColiEnteropathogenic"
+        },
+        "Salmonella enterica;Salmonella enterica;Salmonella enterica": {
+            "etiology": "SalmonellaEntericaSalmonellaEntericaSalmonellaEnterica"
+        },
+        "Legionella pneumophila;Legionella pneumophila": {
+            "etiology": "LegionellaPneumophilaLegionellaPneumophila"
+        },
+        "Bacillus cereus;Clostridium difficile": {
+            "etiology": "BacillusCereusClostridiumDifficile"
+        },
+        "Adenovirus;Rotavirus;Other - Virus;Clostridium difficile": {
+            "etiology": "AdenovirusRotavirusOtherVirusClostridiumDifficile"
+        },
+        "Sapovirus;Norovirus Genogroup II": {
+            "etiology": "SapovirusNorovirusGenogroupII"
+        },
+        "Campylobacter unknown;Norovirus unknown;Clostridium difficile": {
+            "etiology": "CampylobacterUnknownNorovirusUnknownClostridiumDifficile"
+        },
+        "Chlorine;Other": {
+            "etiology": "ChlorineOther"
+        },
+        "Rotavirus;Norovirus Genogroup II": {
+            "etiology": "RotavirusNorovirusGenogroupII"
+        },
+        "Giardia unknown;Norovirus unknown": {
+            "etiology": "GiardiaUnknownNorovirusUnknown"
+        },
+        "Rotavirus;Clostridium difficile": {
+            "etiology": "RotavirusClostridiumDifficile"
+        },
+        "Campylobacter jejuni;Campylobacter coli;Campylobacter": {
+            "etiology": "CampylobacterJejuniCampylobacterColiCampylobacter"
+        },
+        "Norovirus Genogroup II;Giardia unknown": {
+            "etiology": "NorovirusGenogroupIIGiardiaUnknown"
+        },
+        "Rotavirus;Norovirus": {
+            "etiology": "RotavirusNorovirus"
+        },
+        "Giardia;Rotavirus;Sapovirus;Norovirus unknown": {
+            "etiology": "GiardiaRotavirusSapovirusNorovirusUnknown"
+        },
+        "Norovirus Genogroup I;Clostridium difficile": {
+            "etiology": "NorovirusGenogroupIClostridiumDifficile"
+        },
+        "Giardia;Norovirus Genogroup II": {
+            "etiology": "GiardiaNorovirusGenogroupII"
+        },
+        "Rotavirus;Sapovirus": {
+            "etiology": "RotavirusSapovirus"
+        },
+        "Norovirus unknown;Adenovirus unknown;Clostridium difficile": {
+            "etiology": "NorovirusUnknownAdenovirusUnknownClostridiumDifficile"
+        },
+        "Bacillus cereus;Bacillus other;Staphylococcus aureus": {
+            "etiology": "BacillusCereusBacillusOtherStaphylococcusAureus"
+        },
+        "Adenovirus;Rotavirus": {
+            "etiology": "AdenovirusRotavirus"
+        },
+        "Norovirus Genogroup I;Norovirus Genogroup I;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupINorovirusGenogroupINorovirusGenogroupII"
+        },
+        "Shigella;Rotavirus;Norovirus": {
+            "etiology": "ShigellaRotavirusNorovirus"
+        },
+        "Clostridium perfringens;Norovirus": {
+            "etiology": "ClostridiumPerfringensNorovirus"
+        },
+        "Yersinia enterocolitica;Salmonella enterica": {
+            "etiology": "YersiniaEnterocoliticaSalmonellaEnterica"
+        },
+        "Escherichia coli, Shiga toxin-producing;Cryptosporidium unknown": {
+            "etiology": "EscherichiaColiShigaToxinProducingCryptosporidiumUnknown"
+        },
+        "Salmonella;Norovirus unknown": {
+            "etiology": "SalmonellaNorovirusUnknown"
+        },
+        "Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "EscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducing"
+        },
+        "Salmonella enterica;Norovirus": {
+            "etiology": "SalmonellaEntericaNorovirus"
+        },
+        "Cryptosporidium unknown;Norovirus unknown": {
+            "etiology": "CryptosporidiumUnknownNorovirusUnknown"
+        },
+        "Sapovirus;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "SapovirusEscherichiaColiShigaToxinProducing"
+        },
+        "Campylobacter unknown;Norovirus unknown": {
+            "etiology": "CampylobacterUnknownNorovirusUnknown"
+        },
+        "Shigella;Rotavirus;Norovirus unknown": {
+            "etiology": "ShigellaRotavirusNorovirusUnknown"
+        },
+        "Yersinia unknown;Norovirus unknown": {
+            "etiology": "YersiniaUnknownNorovirusUnknown"
+        },
+        "Campylobacter;Rotavirus": {
+            "etiology": "CampylobacterRotavirus"
+        },
+        "Rotavirus;Yersinia enterocolitica": {
+            "etiology": "RotavirusYersiniaEnterocolitica"
+        },
+        "Campylobacter jejuni;Campylobacter coli;Campylobacter coli": {
+            "etiology": "CampylobacterJejuniCampylobacterColiCampylobacterColi"
+        },
+        "Rotavirus;Yersinia unknown;Norovirus unknown": {
+            "etiology": "RotavirusYersiniaUnknownNorovirusUnknown"
+        },
+        "Escherichia coli, Enteropathogenic;Norovirus Genogroup II": {
+            "etiology": "EscherichiaColiEnteropathogenicNorovirusGenogroupII"
+        },
+        "Rotavirus;Escherichia coli, Shiga toxin-producing;Sapovirus": {
+            "etiology": "RotavirusEscherichiaColiShigaToxinProducingSapovirus"
+        },
+        "Escherichia coli, Enteropathogenic;Sapovirus;Astrovirus": {
+            "etiology": "EscherichiaColiEnteropathogenicSapovirusAstrovirus"
+        },
+        "Other - Parasite;Other - Parasite;Other - Parasite": {
+            "etiology": "OtherParasiteOtherParasiteOtherParasite"
+        },
+        "Salmonella unknown;Norovirus unknown": {
+            "etiology": "SalmonellaUnknownNorovirusUnknown"
+        },
+        "Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica": {
+            "etiology": "SalmonellaEntericaSalmonellaEntericaSalmonellaEntericaSalmonellaEnterica"
+        },
+        "Astrovirus;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "AstrovirusNorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Other - Virus;Escherichia coli, Enterotoxigenic;Vibrio cholerae": {
+            "etiology": "OtherVirusEscherichiaColiEnterotoxigenicVibrioCholerae"
+        },
+        "Chlorine;Muriatic acid": {
+            "etiology": "ChlorineMuriaticAcid"
+        },
+        "Astrovirus;Escherichia coli, Other": {
+            "etiology": "AstrovirusEscherichiaColiOther"
+        },
+        "Astrovirus;Clostridium difficile": {
+            "etiology": "AstrovirusClostridiumDifficile"
+        },
+        "Astrovirus;Adenovirus;Rotavirus;Escherichia coli, Shiga toxin-producing;Escherichia coli, Enterotoxigenic;Sapovirus;Escherichia coli, Enteropathogenic": {
+            "etiology": "AstrovirusAdenovirusRotavirusEscherichiaColiShigaToxinProducingEscherichiaColiEnterotoxigenicSapovirusEscherichiaColiEnteropathogenic"
+        },
+        "Salmonella other;Salmonella other": {
+            "etiology": "SalmonellaOtherSalmonellaOther"
+        },
+        "Campylobacter jejuni;Salmonella enterica": {
+            "etiology": "CampylobacterJejuniSalmonellaEnterica"
+        },
+        "Legionella anisa;Legionella pneumophila": {
+            "etiology": "LegionellaAnisaLegionellaPneumophila"
+        },
+        "Astrovirus;Rotavirus;Giardia unknown;Sapovirus unknown;Norovirus unknown;Clostridium difficile": {
+            "etiology": "AstrovirusRotavirusGiardiaUnknownSapovirusUnknownNorovirusUnknownClostridiumDifficile"
+        },
+        "Giardia unknown;Adenovirus unknown": {
+            "etiology": "GiardiaUnknownAdenovirusUnknown"
+        },
+        "Norovirus Genogroup II;Norovirus": {
+            "etiology": "NorovirusGenogroupIINorovirus"
+        },
+        "Campylobacter jejuni;Norovirus unknown": {
+            "etiology": "CampylobacterJejuniNorovirusUnknown"
+        },
+        "Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing;Norovirus Genogroup IX": {
+            "etiology": "EscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducingNorovirusGenogroupIX"
+        },
+        "Cryptosporidium unknown;Sapovirus;Norovirus unknown": {
+            "etiology": "CryptosporidiumUnknownSapovirusNorovirusUnknown"
+        },
+        "Yersinia enterocolitica;Norovirus unknown;Clostridium difficile;Norovirus Genogroup II": {
+            "etiology": "YersiniaEnterocoliticaNorovirusUnknownClostridiumDifficileNorovirusGenogroupII"
+        },
+        "Escherichia coli, Enteropathogenic;Salmonella enterica;Clostridium difficile": {
+            "etiology": "EscherichiaColiEnteropathogenicSalmonellaEntericaClostridiumDifficile"
+        },
+        "Cyanotoxin unknown;Saxitoxin;Other - Bacterium": {
+            "etiology": "CyanotoxinUnknownSaxitoxinOtherBacterium"
+        },
+        "Other - Chemical/Toxin;Other - Bacterium;Other - Bacterium": {
+            "etiology": "OtherChemical/ToxinOtherBacteriumOtherBacterium"
+        },
+        "Norovirus Genogroup II;Escherichia coli, Enteropathogenic;Escherichia coli, Enterotoxigenic": {
+            "etiology": "NorovirusGenogroupIIEscherichiaColiEnteropathogenicEscherichiaColiEnterotoxigenic"
+        },
+        "Other - Bacterium;Saxitoxin;Other - Chemical/Toxin": {
+            "etiology": "OtherBacteriumSaxitoxinOtherChemical/Toxin"
+        },
+        "Microcystis unknown;Other - Bacterium;Other - Chemical/Toxin": {
+            "etiology": "MicrocystisUnknownOtherBacteriumOtherChemical/Toxin"
+        },
+        "Other - Bacterium;Cyanotoxin unknown;Microcystis unknown": {
+            "etiology": "OtherBacteriumCyanotoxinUnknownMicrocystisUnknown"
+        },
+        "Campylobacter unknown;Other - Bacterium": {
+            "etiology": "CampylobacterUnknownOtherBacterium"
+        },
+        "Clostridium perfringens;Staphylococcus aureus": {
+            "etiology": "ClostridiumPerfringensStaphylococcusAureus"
+        },
+        "Escherichia coli, Enteropathogenic;Escherichia coli, Enteroaggregative": {
+            "etiology": "EscherichiaColiEnteropathogenicEscherichiaColiEnteroaggregative"
+        },
+        "Escherichia coli, Shiga toxin-producing;Salmonella enterica": {
+            "etiology": "EscherichiaColiShigaToxinProducingSalmonellaEnterica"
+        },
+        "Other - Bacterium;Other - Chemical/Toxin": {
+            "etiology": "OtherBacteriumOtherChemical/Toxin"
+        },
+        "Campylobacter jejuni;Campylobacter coli;Salmonella enterica;Campylobacter unknown": {
+            "etiology": "CampylobacterJejuniCampylobacterColiSalmonellaEntericaCampylobacterUnknown"
+        },
+        "Escherichia coli, Enteropathogenic;Norovirus": {
+            "etiology": "EscherichiaColiEnteropathogenicNorovirus"
+        },
+        "Salmonella enterica;Salmonella enterica;Norovirus unknown": {
+            "etiology": "SalmonellaEntericaSalmonellaEntericaNorovirusUnknown"
+        },
+        "Rotavirus;Rotavirus": {
+            "etiology": "RotavirusRotavirus"
+        },
+        "Vibrio parahaemolyticus;Vibrio other": {
+            "etiology": "VibrioParahaemolyticusVibrioOther"
+        },
+        "Cyanotoxin unknown;Other - Bacterium": {
+            "etiology": "CyanotoxinUnknownOtherBacterium"
+        },
+        "Escherichia coli, Shiga toxin-producing;Escherichia coli, Unknown": {
+            "etiology": "EscherichiaColiShigaToxinProducingEscherichiaColiUnknown"
+        },
+        "Shigella sonnei;Shigella flexneri": {
+            "etiology": "ShigellaSonneiShigellaFlexneri"
+        },
+        "Norovirus Genogroup II;Yersinia enterocolitica": {
+            "etiology": "NorovirusGenogroupIIYersiniaEnterocolitica"
+        },
+        "Campylobacter jejuni;Campylobacter coli;Campylobacter unknown": {
+            "etiology": "CampylobacterJejuniCampylobacterColiCampylobacterUnknown"
+        },
+        "Bacillus;Clostridium perfringens": {
+            "etiology": "BacillusClostridiumPerfringens"
+        },
+        "Norovirus Genogroup II;Norovirus unknown;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupIINorovirusUnknownNorovirusGenogroupII"
+        },
+        "Other - Bacterium;Norovirus unknown": {
+            "etiology": "OtherBacteriumNorovirusUnknown"
+        },
+        "Salmonella enterica;Vibrio parahaemolyticus;Plesiomonas shigelloides": {
+            "etiology": "SalmonellaEntericaVibrioParahaemolyticusPlesiomonasShigelloides"
+        },
+        "Blastomyces gilchristii": {
+            "etiology": "BlastomycesGilchristii"
+        },
+        "Norovirus Genogroup I;Norovirus Genogroup I;Norovirus Genogroup I": {
+            "etiology": "NorovirusGenogroupINorovirusGenogroupINorovirusGenogroupI"
+        },
+        "Astrovirus;Sapovirus;Norovirus": {
+            "etiology": "AstrovirusSapovirusNorovirus"
+        },
+        "Bacillus cereus;Staphylococcus aureus": {
+            "etiology": "BacillusCereusStaphylococcusAureus"
+        },
+        "Anatoxin-a": {
+            "etiology": "AnatoxinA"
+        },
+        "Scombroid toxin;Other - Bacterium": {
+            "etiology": "ScombroidToxinOtherBacterium"
+        },
+        "Sapovirus unknown;Norovirus Genogroup II": {
+            "etiology": "SapovirusUnknownNorovirusGenogroupII"
+        },
+        "Astrovirus;Rotavirus;Norovirus Genogroup II": {
+            "etiology": "AstrovirusRotavirusNorovirusGenogroupII"
+        },
+        "Astrovirus;Norovirus unknown": {
+            "etiology": "AstrovirusNorovirusUnknown"
+        },
+        "Norovirus unknown;Norovirus Genogroup II;Clostridium difficile": {
+            "etiology": "NorovirusUnknownNorovirusGenogroupIIClostridiumDifficile"
+        },
+        "Salmonella other;Norovirus Genogroup II;Clostridium difficile": {
+            "etiology": "SalmonellaOtherNorovirusGenogroupIIClostridiumDifficile"
+        },
+        "Campylobacter unknown;Cryptosporidium unknown": {
+            "etiology": "CampylobacterUnknownCryptosporidiumUnknown"
+        },
+        "Campylobacter jejuni;Campylobacter unknown": {
+            "etiology": "CampylobacterJejuniCampylobacterUnknown"
+        },
+        "Campylobacter;Campylobacter jejuni;Campylobacter jejuni;Campylobacter coli": {
+            "etiology": "CampylobacterCampylobacterJejuniCampylobacterJejuniCampylobacterColi"
+        },
+        "Staphylococcus aureus;Other - Bacterium": {
+            "etiology": "StaphylococcusAureusOtherBacterium"
+        },
+        "Clostridium difficile;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "ClostridiumDifficileEscherichiaColiShigaToxinProducing"
+        },
+        "Giardia;Norovirus": {
+            "etiology": "GiardiaNorovirus"
+        },
+        "Escherichia coli, Shiga toxin-producing;Cryptosporidium unknown;Sapovirus unknown;Escherichia coli, Enteropathogenic;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "EscherichiaColiShigaToxinProducingCryptosporidiumUnknownSapovirusUnknownEscherichiaColiEnteropathogenicEscherichiaColiShigaToxinProducing"
+        },
+        "Cryptosporidium hominis;Cryptosporidium parvum": {
+            "etiology": "CryptosporidiumHominisCryptosporidiumParvum"
+        },
+        "Salmonella unknown;Salmonella unknown": {
+            "etiology": "SalmonellaUnknownSalmonellaUnknown"
+        },
+        "Salmonella unknown;Escherichia coli, Enterotoxigenic": {
+            "etiology": "SalmonellaUnknownEscherichiaColiEnterotoxigenic"
+        },
+        "Sapovirus unknown;Clostridium difficile": {
+            "etiology": "SapovirusUnknownClostridiumDifficile"
+        },
+        "Salmonella bongori": {
+            "etiology": "SalmonellaBongori"
+        },
+        "Vibrio other;Norovirus Genogroup II": {
+            "etiology": "VibrioOtherNorovirusGenogroupII"
+        },
+        "Campylobacter coli;Salmonella enterica;Escherichia coli, Enterotoxigenic;Cryptosporidium unknown;Escherichia coli, Enteropathogenic": {
+            "etiology": "CampylobacterColiSalmonellaEntericaEscherichiaColiEnterotoxigenicCryptosporidiumUnknownEscherichiaColiEnteropathogenic"
+        },
+        "Norovirus unknown;Norovirus Genogroup IX": {
+            "etiology": "NorovirusUnknownNorovirusGenogroupIX"
+        },
+        "Salmonella unknown;Salmonella enterica": {
+            "etiology": "SalmonellaUnknownSalmonellaEnterica"
+        },
+        "Campylobacter unknown;Norovirus Genogroup II": {
+            "etiology": "CampylobacterUnknownNorovirusGenogroupII"
+        },
+        "Bacillus cereus;Bacillus cereus": {
+            "etiology": "BacillusCereusBacillusCereus"
+        },
+        "Escherichia coli, Enteropathogenic;Norovirus Genogroup I": {
+            "etiology": "EscherichiaColiEnteropathogenicNorovirusGenogroupI"
+        },
+        "Campylobacter jejuni;Campylobacter jejuni;Campylobacter lari": {
+            "etiology": "CampylobacterJejuniCampylobacterJejuniCampylobacterLari"
+        },
+        "Clostridium perfringens;Other - Bacterium": {
+            "etiology": "ClostridiumPerfringensOtherBacterium"
+        },
+        "Rotavirus;Sapovirus;Escherichia coli, Enteropathogenic;Clostridium difficile": {
+            "etiology": "RotavirusSapovirusEscherichiaColiEnteropathogenicClostridiumDifficile"
+        },
+        "Sapovirus Genogroup I;Escherichia coli, Enteropathogenic": {
+            "etiology": "SapovirusGenogroupIEscherichiaColiEnteropathogenic"
+        },
+        "Escherichia coli, Enteroaggregative;Norovirus Genogroup I": {
+            "etiology": "EscherichiaColiEnteroaggregativeNorovirusGenogroupI"
+        },
+        "Escherichia coli, Enteroaggregative;Norovirus unknown;Escherichia coli, Enteropathogenic": {
+            "etiology": "EscherichiaColiEnteroaggregativeNorovirusUnknownEscherichiaColiEnteropathogenic"
+        },
+        "Escherichia coli, Enterotoxigenic;Norovirus unknown": {
+            "etiology": "EscherichiaColiEnterotoxigenicNorovirusUnknown"
+        },
+        "Escherichia coli, Enteroaggregative;Giardia unknown;Norovirus unknown": {
+            "etiology": "EscherichiaColiEnteroaggregativeGiardiaUnknownNorovirusUnknown"
+        },
+        "Escherichia coli, Enteroaggregative;Norovirus;Escherichia coli, Enteropathogenic": {
+            "etiology": "EscherichiaColiEnteroaggregativeNorovirusEscherichiaColiEnteropathogenic"
+        },
+        "Rotavirus;Norovirus Genogroup I": {
+            "etiology": "RotavirusNorovirusGenogroupI"
+        },
+        "Escherichia coli, Enteroinvasive;Escherichia coli, Enteroinvasive": {
+            "etiology": "EscherichiaColiEnteroinvasiveEscherichiaColiEnteroinvasive"
+        },
+        "Chlorine;Pseudomonas aeruginosa": {
+            "etiology": "ChlorinePseudomonasAeruginosa"
+        },
+        "Hepatitis A;Hepatitis A": {
+            "etiology": "HepatitisAHepatitisA"
+        },
+        "Shigella sonnei;Escherichia coli, Enteroaggregative;Escherichia coli, Enteroinvasive": {
+            "etiology": "ShigellaSonneiEscherichiaColiEnteroaggregativeEscherichiaColiEnteroinvasive"
+        },
+        "Salmonella enterica;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "SalmonellaEntericaEscherichiaColiShigaToxinProducing"
+        },
+        "Campylobacter;Salmonella enterica;Salmonella enterica": {
+            "etiology": "CampylobacterSalmonellaEntericaSalmonellaEnterica"
+        },
+        "Campylobacter coli;Escherichia coli, Enteropathogenic": {
+            "etiology": "CampylobacterColiEscherichiaColiEnteropathogenic"
+        },
+        "Shigella flexneri;Shigella sonnei": {
+            "etiology": "ShigellaFlexneriShigellaSonnei"
+        },
+        "Escherichia coli, Enteroaggregative;Escherichia coli, Enterotoxigenic": {
+            "etiology": "EscherichiaColiEnteroaggregativeEscherichiaColiEnterotoxigenic"
+        },
+        "Other - Chemical/Toxin;Anatoxin-a": {
+            "etiology": "OtherChemical/ToxinanatoxinA"
+        },
+        "Escherichia coli, Other;Salmonella unknown": {
+            "etiology": "EscherichiaColiOtherSalmonellaUnknown"
+        },
+        "Vibrio parahaemolyticus;Vibrio parahaemolyticus": {
+            "etiology": "VibrioParahaemolyticusVibrioParahaemolyticus"
+        },
+        "Cryptosporidium parvum;Cryptosporidium unknown;Escherichia coli, Enteropathogenic;Escherichia coli, Enteroaggregative": {
+            "etiology": "CryptosporidiumParvumCryptosporidiumUnknownEscherichiaColiEnteropathogenicEscherichiaColiEnteroaggregative"
+        },
+        "Norovirus;Norovirus;Norovirus": {
+            "etiology": "NorovirusNorovirusNorovirus"
+        },
+        "Yersinia unknown;Cryptosporidium unknown;Norovirus unknown": {
+            "etiology": "YersiniaUnknownCryptosporidiumUnknownNorovirusUnknown"
+        },
+        "Campylobacter;Norovirus": {
+            "etiology": "CampylobacterNorovirus"
+        },
+        "Escherichia coli, Enteropathogenic;Norovirus Genogroup II;Norovirus Genogroup II;Norovirus Genogroup II;Clostridium difficile": {
+            "etiology": "EscherichiaColiEnteropathogenicNorovirusGenogroupIINorovirusGenogroupIINorovirusGenogroupIIClostridiumDifficile"
+        },
+        "Cryptosporidium unknown;Norovirus Genogroup I": {
+            "etiology": "CryptosporidiumUnknownNorovirusGenogroupI"
+        },
+        "Astrovirus;Sapovirus unknown": {
+            "etiology": "AstrovirusSapovirusUnknown"
+        },
+        "Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing;Norovirus Genogroup II": {
+            "etiology": "EscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducingNorovirusGenogroupII"
+        },
+        "Vibrio cholerae;Clostridium difficile": {
+            "etiology": "VibrioCholeraeClostridiumDifficile"
+        },
+        "Clostridium;Norovirus unknown": {
+            "etiology": "ClostridiumNorovirusUnknown"
+        },
+        "Escherichia coli, Enteroaggregative;Escherichia coli, Enteroaggregative": {
+            "etiology": "EscherichiaColiEnteroaggregativeEscherichiaColiEnteroaggregative"
+        },
+        "Rotavirus;Giardia unknown;Sapovirus unknown": {
+            "etiology": "RotavirusGiardiaUnknownSapovirusUnknown"
+        },
+        "Bacillus cereus;Clostridium perfringens;Staphylococcus aureus;Norovirus Genogroup II": {
+            "etiology": "BacillusCereusClostridiumPerfringensStaphylococcusAureusNorovirusGenogroupII"
+        },
+        "Shigella unknown;Norovirus unknown": {
+            "etiology": "ShigellaUnknownNorovirusUnknown"
+        },
+        "Chlorine Gas;Other - Chemical/Toxin": {
+            "etiology": "ChlorineGasOtherChemical/Toxin"
+        },
+        "Norovirus Genogroup I;Escherichia coli, Enteropathogenic;Norovirus Genogroup I": {
+            "etiology": "NorovirusGenogroupIEscherichiaColiEnteropathogenicNorovirusGenogroupI"
+        },
+        "Rotavirus;Salmonella enterica;Norovirus Genogroup I;Norovirus Genogroup II": {
+            "etiology": "RotavirusSalmonellaEntericaNorovirusGenogroupINorovirusGenogroupII"
+        },
+        "Giardia duodenalis;Escherichia coli, Enteropathogenic;Cryptosporidium parvum": {
+            "etiology": "GiardiaDuodenalisEscherichiaColiEnteropathogenicCryptosporidiumParvum"
+        },
+        "Campylobacter;Shigella sonnei": {
+            "etiology": "CampylobacterShigellaSonnei"
+        },
+        "Norovirus unknown;Norovirus Genogroup I;Clostridium difficile": {
+            "etiology": "NorovirusUnknownNorovirusGenogroupIClostridiumDifficile"
+        },
+        "Rotavirus;Escherichia coli, Enteroaggregative": {
+            "etiology": "RotavirusEscherichiaColiEnteroaggregative"
+        },
+        "Norovirus unknown;Norovirus Genogroup I": {
+            "etiology": "NorovirusUnknownNorovirusGenogroupI"
+        },
+        "Rotavirus;Salmonella enterica": {
+            "etiology": "RotavirusSalmonellaEnterica"
+        },
+        "Norovirus;Norovirus Genogroup I;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "NorovirusNorovirusGenogroupINorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "EscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducing"
+        },
+        "Clostridium perfringens;Enterobacter other;Proteus mirabilis;Vibrio parahaemolyticus;Vibrio unknown;Other - Bacterium;Other - Bacterium;Other - Bacterium": {
+            "etiology": "ClostridiumPerfringensEnterobacterOtherproteusMirabilisVibrioParahaemolyticusVibrioUnknownOtherBacteriumOtherBacteriumOtherBacterium"
+        },
+        "Escherichia coli, Shiga toxin-producing;Norovirus Genogroup II": {
+            "etiology": "EscherichiaColiShigaToxinProducingNorovirusGenogroupII"
+        },
+        "Campylobacter unknown;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "CampylobacterUnknownEscherichiaColiShigaToxinProducing"
+        },
+        "Shigella sonnei;Shigella unknown": {
+            "etiology": "ShigellaSonneiShigellaUnknown"
+        },
+        "Cyclospora cayetanensis;Entamoeba coli": {
+            "etiology": "CyclosporaCayetanensisEntamoebaColi"
+        },
+        "Escherichia coli, Enteroaggregative;Escherichia coli, Enterotoxigenic;Escherichia coli, Enteropathogenic": {
+            "etiology": "EscherichiaColiEnteroaggregativeEscherichiaColiEnterotoxigenicEscherichiaColiEnteropathogenic"
+        },
+        "Trichinella;Trichinella unknown": {
+            "etiology": "TrichinellaTrichinellaUnknown"
+        },
+        "Cryptosporidium parvum;Cryptosporidium unknown": {
+            "etiology": "CryptosporidiumParvumCryptosporidiumUnknown"
+        },
+        "Cryptosporidium hominis;Cryptosporidium unknown": {
+            "etiology": "CryptosporidiumHominisCryptosporidiumUnknown"
+        },
+        "Sapovirus;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "SapovirusNorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Cyclospora cayetanensis;Other - Parasite": {
+            "etiology": "CyclosporaCayetanensisOtherParasite"
+        },
+        "Clostridium unknown;Norovirus unknown": {
+            "etiology": "ClostridiumUnknownNorovirusUnknown"
+        },
+        "Shigella sonnei;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "ShigellaSonneiEscherichiaColiShigaToxinProducing"
+        },
+        "Shigella;Norovirus": {
+            "etiology": "ShigellaNorovirus"
+        },
+        "Sapovirus;Escherichia coli, Enteropathogenic;Norovirus Genogroup II;Norovirus Genogroup II;Adenovirus F;Clostridium difficile": {
+            "etiology": "SapovirusEscherichiaColiEnteropathogenicNorovirusGenogroupIINorovirusGenogroupIIAdenovirusFClostridiumDifficile"
+        },
+        "Bacillus cereus;Norovirus Genogroup I": {
+            "etiology": "BacillusCereusNorovirusGenogroupI"
+        },
+        "Campylobacter jejuni;Norovirus Genogroup II": {
+            "etiology": "CampylobacterJejuniNorovirusGenogroupII"
+        },
+        "Campylobacter unknown;Salmonella unknown": {
+            "etiology": "CampylobacterUnknownSalmonellaUnknown"
+        },
+        "Cryptosporidium parvum;Escherichia coli, Enterotoxigenic": {
+            "etiology": "CryptosporidiumParvumEscherichiaColiEnterotoxigenic"
+        },
+        "Bacillus cereus;Norovirus": {
+            "etiology": "BacillusCereusNorovirus"
+        },
+        "Norovirus unknown;Norovirus Genogroup I;Norovirus Genogroup II": {
+            "etiology": "NorovirusUnknownNorovirusGenogroupINorovirusGenogroupII"
+        },
+        "Clostridium perfringens;Clostridium difficile": {
+            "etiology": "ClostridiumPerfringensClostridiumDifficile"
+        },
+        "Adenovirus;Norovirus unknown": {
+            "etiology": "AdenovirusNorovirusUnknown"
+        },
+        "Norovirus unknown;Escherichia coli, Enteropathogenic": {
+            "etiology": "NorovirusUnknownEscherichiaColiEnteropathogenic"
+        },
+        "Shigella;Shigella sonnei": {
+            "etiology": "ShigellaShigellaSonnei"
+        },
+        "Campylobacter;Campylobacter": {
+            "etiology": "CampylobacterCampylobacter"
+        },
+        "Escherichia coli, Enterotoxigenic;Norovirus unknown;Clostridium difficile": {
+            "etiology": "EscherichiaColiEnterotoxigenicNorovirusUnknownClostridiumDifficile"
+        },
+        "Legionella longbeachae;Legionella pneumophila;Legionella pneumophila;Legionella pneumophila": {
+            "etiology": "LegionellaLongbeachaeLegionellaPneumophilaLegionellaPneumophilaLegionellaPneumophila"
+        },
+        "Listeria monocytogenes;Listeria monocytogenes": {
+            "etiology": "ListeriaMonocytogenesListeriaMonocytogenes"
+        },
+        "Escherichia coli, Shiga toxin-producing;Cryptosporidium unknown;Cryptosporidium parvum": {
+            "etiology": "EscherichiaColiShigaToxinProducingCryptosporidiumUnknownCryptosporidiumParvum"
+        },
+        "Escherichia coli, Enteroaggregative;Norovirus Genogroup II": {
+            "etiology": "EscherichiaColiEnteroaggregativeNorovirusGenogroupII"
+        },
+        "Bacillus cereus;Clostridium perfringens;Staphylococcus aureus": {
+            "etiology": "BacillusCereusClostridiumPerfringensStaphylococcusAureus"
+        },
+        "Bacillus;Clostridium": {
+            "etiology": "BacillusClostridium"
+        },
+        "Campylobacter unknown;Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing;Cryptosporidium unknown;Cryptosporidium parvum": {
+            "etiology": "CampylobacterUnknownEscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducingCryptosporidiumUnknownCryptosporidiumParvum"
+        },
+        "Cryptosporidium;Cryptosporidium parvum": {
+            "etiology": "CryptosporidiumCryptosporidiumParvum"
+        },
+        "Cryptosporidium unknown;Giardia unknown;Cryptosporidium parvum": {
+            "etiology": "CryptosporidiumUnknownGiardiaUnknownCryptosporidiumParvum"
+        },
+        "Escherichia coli, Shiga toxin-producing;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "EscherichiaColiShigaToxinProducingNorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Astrovirus;Salmonella enterica;Escherichia coli, Enteropathogenic;Shigella sonnei": {
+            "etiology": "AstrovirusSalmonellaEntericaEscherichiaColiEnteropathogenicShigellaSonnei"
+        },
+        "Shigella flexneri;Shigella sonnei;Shigella unknown": {
+            "etiology": "ShigellaFlexneriShigellaSonneiShigellaUnknown"
+        },
+        "Shigella sonnei;Norovirus Genogroup II": {
+            "etiology": "ShigellaSonneiNorovirusGenogroupII"
+        },
+        "Shigella unknown;Shigella unknown": {
+            "etiology": "ShigellaUnknownShigellaUnknown"
+        },
+        "Sapovirus unknown;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "SapovirusUnknownEscherichiaColiShigaToxinProducing"
+        },
+        "Salmonella enterica;Escherichia coli, Shiga toxin-producing;Escherichia coli, Enterotoxigenic;Other - Bacterium;Escherichia coli, Enteropathogenic": {
+            "etiology": "SalmonellaEntericaEscherichiaColiShigaToxinProducingEscherichiaColiEnterotoxigenicOtherBacteriumEscherichiaColiEnteropathogenic"
+        },
+        "Cryptosporidium unknown;Cryptosporidium parvum": {
+            "etiology": "CryptosporidiumUnknownCryptosporidiumParvum"
+        },
+        "Cyclospora cayetanensis;Cyclospora cayetanensis": {
+            "etiology": "CyclosporaCayetanensisCyclosporaCayetanensis"
+        },
+        "Astrovirus;Escherichia coli, Enteropathogenic": {
+            "etiology": "AstrovirusEscherichiaColiEnteropathogenic"
+        },
+        "Cryptosporidium unknown;Giardia unknown;Norovirus unknown;Escherichia coli, Enteropathogenic;Escherichia coli, Enteropathogenic;Escherichia coli, Enteroaggregative;Escherichia coli, Enteroinvasive;Norovirus Genogroup I;Norovirus Genogroup II;Norovirus Genogroup IX": {
+            "etiology": "CryptosporidiumUnknownGiardiaUnknownNorovirusUnknownEscherichiaColiEnteropathogenicEnteroaggregativeEnteroinvasiveNorovirusGenogroupIOrIIOrIX"
+        },
+        "Cryptosporidium unknown;Giardia unknown;Escherichia coli, Shiga toxin-producing;Escherichia coli, Other": {
+            "etiology": "CryptosporidiumUnknownGiardiaUnknownEscherichiaColiShigaToxinProducingEscherichiaColiOther"
+        },
+        "Chlorine;Chlorine Gas": {
+            "etiology": "ChlorineChlorineGas"
+        },
+        "Campylobacter coli;Campylobacter unknown": {
+            "etiology": "CampylobacterColiCampylobacterUnknown"
+        },
+        "Campylobacter unknown;Salmonella enterica;Salmonella enterica": {
+            "etiology": "CampylobacterUnknownSalmonellaEntericaSalmonellaEnterica"
+        },
+        "Escherichia coli, Shiga toxin-producing;Sapovirus unknown;Escherichia coli, Enteropathogenic;Escherichia coli, Shiga toxin-producing;Clostridium difficile": {
+            "etiology": "EscherichiaColiShigaToxinProducingSapovirusUnknownEscherichiaColiEnteropathogenicEscherichiaColiShigaToxinProducingClostridiumDifficile"
+        },
+        "Cryptosporidium;Cryptosporidium parvum;Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "CryptosporidiumCryptosporidiumParvumEscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducing"
+        },
+        "Escherichia coli, Enteroaggregative;Norovirus unknown": {
+            "etiology": "EscherichiaColiEnteroaggregativeNorovirusUnknown"
+        },
+        "Escherichia coli, Enteropathogenic;Escherichia coli, Enteropathogenic": {
+            "etiology": "EscherichiaColiEnteropathogenicEscherichiaColiEnteropathogenic"
+        },
+        "Escherichia coli, Enterotoxigenic;Escherichia coli, Enteropathogenic;Norovirus Genogroup I;Norovirus Genogroup I;Norovirus Genogroup II": {
+            "etiology": "EscherichiaColiEnterotoxigenicEscherichiaColiEnteropathogenicNorovirusGenogroupINorovirusGenogroupINorovirusGenogroupII"
+        },
+        "Cryptosporidium unknown;Shigella unknown": {
+            "etiology": "CryptosporidiumUnknownShigellaUnknown"
+        },
+        "Salmonella enterica;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "SalmonellaEntericaNorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Escherichia coli, Other;Escherichia coli, Enteroaggregative;Escherichia coli, Enteroaggregative;Escherichia coli, Enteroaggregative;Escherichia coli, Enterotoxigenic;Escherichia coli, Enterotoxigenic": {
+            "etiology": "EscherichiaColiOtherEnteroaggregativeEnteroaggregativeEnteroaggregativeEnterotoxigenicEnterotoxigenic"
+        },
+        "Escherichia coli, Enterotoxigenic;Escherichia coli, Shiga toxin-producing;Cryptosporidium unknown": {
+            "etiology": "EscherichiaColiEnterotoxigenicEscherichiaColiShigaToxinProducingCryptosporidiumUnknown"
+        },
+        "Vibrio unknown;Vibrio parahaemolyticus": {
+            "etiology": "VibrioUnknownVibrioParahaemolyticus"
+        },
+        "Escherichia coli, Enteroaggregative;Norovirus Genogroup I;Clostridium difficile": {
+            "etiology": "EscherichiaColiEnteroaggregativeNorovirusGenogroupIClostridiumDifficile"
+        },
+        "Legionella dumoffii;Legionella pneumophila": {
+            "etiology": "LegionellaDumoffiiLegionellaPneumophila"
+        },
+        "Clostridium perfringens;Clostridium perfringens": {
+            "etiology": "ClostridiumPerfringensClostridiumPerfringens"
+        },
+        "Clostridium perfringens;Escherichia coli, Enteropathogenic": {
+            "etiology": "ClostridiumPerfringensEscherichiaColiEnteropathogenic"
+        },
+        "Escherichia coli, Enteroaggregative;Sapovirus unknown": {
+            "etiology": "EscherichiaColiEnteroaggregativeSapovirusUnknown"
+        },
+        "Salmonella enterica;Cryptosporidium unknown;Cryptosporidium parvum": {
+            "etiology": "SalmonellaEntericaCryptosporidiumUnknownCryptosporidiumParvum"
+        },
+        "Escherichia coli, Shiga toxin-producing;Escherichia coli, Enterotoxigenic;Adenovirus unknown": {
+            "etiology": "EscherichiaColiShigaToxinProducingEscherichiaColiEnterotoxigenicAdenovirusUnknown"
+        },
+        "Salmonella;Salmonella enterica": {
+            "etiology": "SalmonellaSalmonellaEnterica"
+        },
+        "Escherichia coli, Enteroaggregative;Giardia unknown;Escherichia coli, Enteropathogenic;Adenovirus unknown": {
+            "etiology": "EscherichiaColiEnteroaggregativeGiardiaUnknownEscherichiaColiEnteropathogenicAdenovirusUnknown"
+        },
+        "Norovirus unknown;Escherichia coli, Enteropathogenic;Norovirus Genogroup II": {
+            "etiology": "NorovirusUnknownEscherichiaColiEnteropathogenicNorovirusGenogroupII"
+        },
+        "Giardia unknown;Norovirus unknown;Escherichia coli, Enteropathogenic": {
+            "etiology": "GiardiaUnknownNorovirusUnknownEscherichiaColiEnteropathogenic"
+        },
+        "Legionella anisa;Legionella pneumophila;Legionella pneumophila": {
+            "etiology": "LegionellaAnisaLegionellaPneumophilaLegionellaPneumophila"
+        },
+        "Escherichia coli, Enteropathogenic;Adenovirus F": {
+            "etiology": "EscherichiaColiEnteropathogenicAdenovirusF"
+        },
+        "Norovirus;Norovirus": {
+            "etiology": "NorovirusNorovirus"
+        },
+        "Escherichia coli, Enteroaggregative;Norovirus unknown;Norovirus Genogroup II;Escherichia coli, Enteropathogenic": {
+            "etiology": "EscherichiaColiEnteroaggregativeNorovirusUnknownNorovirusGenogroupIIEscherichiaColiEnteropathogenic"
+        },
+        "Escherichia coli, Enteroaggregative;Sapovirus;Norovirus Genogroup II": {
+            "etiology": "EscherichiaColiEnteroaggregativeSapovirusNorovirusGenogroupII"
+        },
+        "Norovirus unknown;Adenovirus unknown": {
+            "etiology": "NorovirusUnknownAdenovirusUnknown"
+        },
+        "Shigella;Escherichia coli, Enteropathogenic;Clostridium difficile": {
+            "etiology": "ShigellaEscherichiaColiEnteropathogenicClostridiumDifficile"
+        },
+        "Salmonella enterica;Cryptosporidium unknown;Giardia unknown": {
+            "etiology": "SalmonellaEntericaCryptosporidiumUnknownGiardiaUnknown"
+        },
+        "Sapovirus unknown;Escherichia coli, Enteropathogenic": {
+            "etiology": "SapovirusUnknownEscherichiaColiEnteropathogenic"
+        },
+        "Salmonella other;Norovirus Genogroup I;Norovirus Genogroup II": {
+            "etiology": "SalmonellaOtherNorovirusGenogroupINorovirusGenogroupII"
+        },
+        "Norovirus Genogroup I;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupINorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Campylobacter coli;Norovirus Genogroup II": {
+            "etiology": "CampylobacterColiNorovirusGenogroupII"
+        },
+        "Giardia;Norovirus unknown": {
+            "etiology": "GiardiaNorovirusUnknown"
+        },
+        "Shigella flexneri;Vibrio parahaemolyticus;Vibrio cholerae;Campylobacter lari;Norovirus Genogroup I;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "ShigellaFlexneriVibrioParahaemolyticusVibrioCholeraeCampylobacterLariNorovirusGenogroupIEscherichiaColiShigaToxinProducing"
+        },
+        "Norovirus unknown;Norovirus Genogroup II;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "NorovirusUnknownNorovirusGenogroupIINorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Cryptosporidium;Norovirus Genogroup II": {
+            "etiology": "CryptosporidiumNorovirusGenogroupII"
+        },
+        "Norovirus;Staphylococcus aureus": {
+            "etiology": "NorovirusStaphylococcusAureus"
+        },
+        "Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica": {
+            "etiology": "SalmonellaEntericaSalmonellaEntericaSalmonellaEntericaSalmonellaEntericaSalmonellaEntericaSalmonellaEnterica"
+        },
+        "Legionella other;Legionella pneumophila": {
+            "etiology": "LegionellaOtherLegionellaPneumophila"
+        },
+        "Campylobacter unknown;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "CampylobacterUnknownNorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Shigella;Escherichia coli, Enteropathogenic": {
+            "etiology": "ShigellaEscherichiaColiEnteropathogenic"
+        },
+        "Shigella sonnei;Norovirus unknown": {
+            "etiology": "ShigellaSonneiNorovirusUnknown"
+        },
+        "Astrovirus;Salmonella unknown;Sapovirus": {
+            "etiology": "AstrovirusSalmonellaUnknownSapovirus"
+        },
+        "Escherichia coli, Enteropathogenic;Escherichia coli, Enteroaggregative;Sapovirus;Norovirus unknown": {
+            "etiology": "EscherichiaColiEnteropathogenicEscherichiaColiEnteroaggregativeSapovirusNorovirusUnknown"
+        },
+        "Rotavirus;Norovirus Genogroup I;Norovirus Genogroup II": {
+            "etiology": "RotavirusNorovirusGenogroupINorovirusGenogroupII"
+        },
+        "Sapovirus;Norovirus Genogroup I;Norovirus Genogroup I;Norovirus Genogroup I;Norovirus Genogroup II;Norovirus Genogroup II;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "SapovirusNorovirusGenogroupINorovirusGenogroupINorovirusGenogroupINorovirusGenogroupIINorovirusGenogroupIINorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Rotavirus;Adenovirus F": {
+            "etiology": "RotavirusAdenovirusF"
+        },
+        "Escherichia coli, Enteroaggregative;Adenovirus F": {
+            "etiology": "EscherichiaColiEnteroaggregativeAdenovirusF"
+        },
+        "Campylobacter;Norovirus Genogroup II": {
+            "etiology": "CampylobacterNorovirusGenogroupII"
+        },
+        "Norovirus other;Norovirus Genogroup II": {
+            "etiology": "NorovirusOtherNorovirusGenogroupII"
+        },
+        "Rotavirus;Norovirus Genogroup II;Clostridium difficile": {
+            "etiology": "RotavirusNorovirusGenogroupIIClostridiumDifficile"
+        },
+        "Sapovirus;Norovirus Genogroup I": {
+            "etiology": "SapovirusNorovirusGenogroupI"
+        },
+        "Norovirus;Norovirus Genogroup I": {
+            "etiology": "NorovirusNorovirusGenogroupI"
+        },
+        "Campylobacter unknown;Norovirus": {
+            "etiology": "CampylobacterUnknownNorovirus"
+        },
+        "Cryptosporidium;Sapovirus;Escherichia coli, Enteropathogenic;Escherichia coli, Enterotoxigenic": {
+            "etiology": "CryptosporidiumSapovirusEscherichiaColiEnteropathogenicEscherichiaColiEnterotoxigenic"
+        },
+        "Astrovirus;Norovirus Genogroup I;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "AstrovirusNorovirusGenogroupINorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Legionella other;Legionella pneumophila;Legionella pneumophila": {
+            "etiology": "LegionellaOtherLegionellaPneumophilaLegionellaPneumophila"
+        },
+        "Bacillus;Staphylococcus": {
+            "etiology": "BacillusStaphylococcus"
+        },
+        "Yersinia enterocolitica;Norovirus Genogroup I": {
+            "etiology": "YersiniaEnterocoliticaNorovirusGenogroupI"
+        },
+        "Rotavirus;Campylobacter unknown;Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "RotavirusCampylobacterUnknownEscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducing"
+        },
+        "Clostridium perfringens;Staphylococcus aureus;Staphylococcus other": {
+            "etiology": "ClostridiumPerfringensStaphylococcusAureusStaphylococcusOther"
+        },
+        "Cryptosporidium;Campylobacter jejuni;Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "CryptosporidiumCampylobacterJejuniEscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducing"
+        },
+        "Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica": {
+            "etiology": "SalmonellaEntericaSalmonellaEntericaSalmonellaEntericaSalmonellaEntericaSalmonellaEnterica"
+        },
+        "Anatoxin-a;Microcystis unknown": {
+            "etiology": "AnatoxinAMicrocystisUnknown"
+        },
+        "Norovirus unknown;Norovirus Genogroup I;Norovirus Genogroup I;Norovirus Genogroup II;Norovirus Genogroup I;Norovirus Genogroup II": {
+            "etiology": "NorovirusUnknownNorovirusGenogroupINorovirusGenogroupINorovirusGenogroupIINorovirusGenogroupINorovirusGenogroupII"
+        },
+        "Astrovirus;Campylobacter jejuni;Shigella sonnei;Sapovirus": {
+            "etiology": "AstrovirusCampylobacterJejuniShigellaSonneiSapovirus"
+        },
+        "Shigella sonnei;Shigella sonnei": {
+            "etiology": "ShigellaSonneiShigellaSonnei"
+        },
+        "Cryptosporidium unknown;Cyclospora cayetanensis": {
+            "etiology": "CryptosporidiumUnknownCyclosporaCayetanensis"
+        },
+        "Campylobacter;Salmonella enterica": {
+            "etiology": "CampylobacterSalmonellaEnterica"
+        },
+        "Paralytic shellfish poison;Paralytic shellfish poison": {
+            "etiology": "ParalyticShellfishPoisonparalyticShellfishPoison"
+        },
+        "Salmonella enterica;Salmonella enterica;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "SalmonellaEntericaSalmonellaEntericaEscherichiaColiShigaToxinProducing"
+        },
+        "Vibrio parahaemolyticus;Other - Bacterium": {
+            "etiology": "VibrioParahaemolyticusOtherBacterium"
+        },
+        "Legionella pneumophila;Legionella pneumophila;Legionella pneumophila": {
+            "etiology": "LegionellaPneumophilaLegionellaPneumophilaLegionellaPneumophila"
+        },
+        "Vibrio parahaemolyticus;Vibrio unknown": {
+            "etiology": "VibrioParahaemolyticusVibrioUnknown"
+        },
+        "Adenovirus;Adenovirus other": {
+            "etiology": "AdenovirusAdenovirusOther"
+        },
+        "Escherichia coli, Enteropathogenic;Adenovirus F;Clostridium difficile": {
+            "etiology": "EscherichiaColiEnteropathogenicAdenovirusFClostridiumDifficile"
+        },
+        "Astrovirus;Salmonella unknown": {
+            "etiology": "AstrovirusSalmonellaUnknown"
+        },
+        "Clostridium perfringens;Escherichia coli, Enterotoxigenic;Escherichia coli, Enteropathogenic": {
+            "etiology": "ClostridiumPerfringensEscherichiaColiEnterotoxigenicEscherichiaColiEnteropathogenic"
+        },
+        "Adenovirus;Other - Virus;Other - Virus;Sapovirus;Norovirus Genogroup II;Escherichia coli, Enteropathogenic;Clostridium difficile": {
+            "etiology": "AdenovirusOtherVirusOtherVirusSapovirusNorovirusGenogroupIIEscherichiaColiEnteropathogenicClostridiumDifficile"
+        },
+        "Bacillus cereus;Clostridium perfringens;Staphylococcus aureus;Salmonella enterica": {
+            "etiology": "BacillusCereusClostridiumPerfringensStaphylococcusAureusSalmonellaEnterica"
+        },
+        "Campylobacter jejuni;Campylobacter coli": {
+            "etiology": "CampylobacterJejuniCampylobacterColi"
+        },
+        "Vibrio parahaemolyticus;Other - Bacterium;Norovirus Genogroup I;Escherichia coli, Enteropathogenic": {
+            "etiology": "VibrioParahaemolyticusOtherBacteriumNorovirusGenogroupIEscherichiaColiEnteropathogenic"
+        },
+        "Astrovirus;Norovirus": {
+            "etiology": "AstrovirusNorovirus"
+        },
+        "Norovirus unknown;Escherichia coli, Enteropathogenic;Norovirus Genogroup I;Norovirus Genogroup II;Clostridium difficile": {
+            "etiology": "NorovirusUnknownEscherichiaColiEnteropathogenicNorovirusGenogroupINorovirusGenogroupIIClostridiumDifficile"
+        },
+        "Shigella unknown;Norovirus Genogroup II": {
+            "etiology": "ShigellaUnknownNorovirusGenogroupII"
+        },
+        "Clostridium perfringens;Norovirus Genogroup II": {
+            "etiology": "ClostridiumPerfringensNorovirusGenogroupII"
+        },
+        "Campylobacter unknown;Shigella unknown;Norovirus Genogroup II": {
+            "etiology": "CampylobacterUnknownShigellaUnknownNorovirusGenogroupII"
+        },
+        "Clostridium other;Norovirus Genogroup II": {
+            "etiology": "ClostridiumOtherNorovirusGenogroupII"
+        },
+        "Campylobacter jejuni;Salmonella enterica;Salmonella enterica": {
+            "etiology": "CampylobacterJejuniSalmonellaEntericaSalmonellaEnterica"
+        },
+        "Other;Norovirus unknown": {
+            "etiology": "OtherNorovirusUnknown"
+        },
+        "Ciguatoxin;Staphylococcus aureus": {
+            "etiology": "CiguatoxinStaphylococcusAureus"
+        },
+        "Staphylococcus aureus;Staphylococcus unknown": {
+            "etiology": "StaphylococcusAureusStaphylococcusUnknown"
+        },
+        "Staphylococcus aureus;Norovirus Genogroup II": {
+            "etiology": "StaphylococcusAureusNorovirusGenogroupII"
+        },
+        "Other - Chemical/Toxin;Other - Chemical/Toxin": {
+            "etiology": "OtherChemical/ToxinOtherChemical/Toxin"
+        },
+        "Cryptosporidium unknown;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "CryptosporidiumUnknownEscherichiaColiShigaToxinProducing"
+        },
+        "Campylobacter;Norovirus Genogroup I": {
+            "etiology": "CampylobacterNorovirusGenogroupI"
+        },
+        "Clostridium other;Norovirus unknown": {
+            "etiology": "ClostridiumOtherNorovirusUnknown"
+        },
+        "Campylobacter coli;Salmonella enterica": {
+            "etiology": "CampylobacterColiSalmonellaEnterica"
+        },
+        "Campylobacter jejuni;Campylobacter jejuni": {
+            "etiology": "CampylobacterJejuniCampylobacterJejuni"
+        },
+        "Legionella unknown;Legionella pneumophila;Legionella pneumophila": {
+            "etiology": "LegionellaUnknownLegionellaPneumophilaLegionellaPneumophila"
+        },
+        "Campylobacter unknown;Shigella unknown": {
+            "etiology": "CampylobacterUnknownShigellaUnknown"
+        },
+        "Giardia duodenalis;Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "GiardiaDuodenalisEscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducing"
+        },
+        "Salmonella other;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "SalmonellaOtherEscherichiaColiShigaToxinProducing"
+        },
+        "Cryptosporidium hominis;Cryptosporidium other": {
+            "etiology": "CryptosporidiumHominisCryptosporidiumOther"
+        },
+        "Cryptosporidium unknown;Norovirus Genogroup II": {
+            "etiology": "CryptosporidiumUnknownNorovirusGenogroupII"
+        },
+        "Clostridium perfringens;Salmonella enterica;Cryptosporidium unknown": {
+            "etiology": "ClostridiumPerfringensSalmonellaEntericaCryptosporidiumUnknown"
+        },
+        "Cryptosporidium;Escherichia coli, Enteropathogenic": {
+            "etiology": "CryptosporidiumEscherichiaColiEnteropathogenic"
+        },
+        "Cryptosporidium;Clostridium difficile": {
+            "etiology": "CryptosporidiumClostridiumDifficile"
+        },
+        "Cryptosporidium;Cryptosporidium": {
+            "etiology": "CryptosporidiumCryptosporidium"
+        },
+        "Astrovirus;Vibrio parahaemolyticus;Vibrio other;Sapovirus;Norovirus other": {
+            "etiology": "AstrovirusVibrioParahaemolyticusVibrioOtherSapovirusNorovirusOther"
+        },
+        "Legionella pneumophila;Legionella other;Legionella pneumophila": {
+            "etiology": "LegionellaPneumophilaLegionellaOtherLegionellaPneumophila"
+        },
+        "Rotavirus;Sapovirus;Norovirus": {
+            "etiology": "RotavirusSapovirusNorovirus"
+        },
+        "Bacillus cereus;Staphylococcus other": {
+            "etiology": "BacillusCereusStaphylococcusOther"
+        },
+        "Cryptosporidium;Shigella sonnei": {
+            "etiology": "CryptosporidiumShigellaSonnei"
+        },
+        "Shigella;Sapovirus": {
+            "etiology": "ShigellaSapovirus"
+        },
+        "Norovirus Genogroup II;Sapovirus Genogroup V": {
+            "etiology": "NorovirusGenogroupIISapovirusGenogroupV"
+        },
+        "Bacillus cereus;Bacillus cereus;Clostridium perfringens": {
+            "etiology": "BacillusCereusBacillusCereusClostridiumPerfringens"
+        },
+        "Campylobacter unknown;Other - Bacterium;Norovirus Genogroup II": {
+            "etiology": "CampylobacterUnknownOtherBacteriumNorovirusGenogroupII"
+        },
+        "Staphylococcus aureus;Escherichia coli, Enteroaggregative;Norovirus Genogroup I": {
+            "etiology": "StaphylococcusAureusEscherichiaColiEnteroaggregativeNorovirusGenogroupI"
+        },
+        "Escherichia coli, Enteropathogenic;Escherichia coli, Enterotoxigenic;Escherichia coli, Enteroinvasive;Escherichia coli, Enteroaggregative": {
+            "etiology": "EscherichiaColiEnteropathogenicEscherichiaColiEnterotoxigenicEscherichiaColiEnteroinvasiveEscherichiaColiEnteroaggregative"
+        },
+        "Rotavirus;Shigella sonnei;Norovirus Genogroup II": {
+            "etiology": "RotavirusShigellaSonneiNorovirusGenogroupII"
+        },
+        "Clostridium other;Norovirus": {
+            "etiology": "ClostridiumOtherNorovirus"
+        },
+        "Rotavirus;Norovirus;Norovirus Genogroup II": {
+            "etiology": "RotavirusNorovirusNorovirusGenogroupII"
+        },
+        "Rotavirus;Clostridium other;Norovirus": {
+            "etiology": "RotavirusClostridiumOtherNorovirus"
+        },
+        "Shigella;Escherichia coli, Shiga toxin-producing;Salmonella enterica;Norovirus Genogroup II": {
+            "etiology": "ShigellaEscherichiaColiShigaToxinProducingSalmonellaEntericaNorovirusGenogroupII"
+        },
+        "Campylobacter jejuni;Escherichia coli, Enterotoxigenic;Cryptosporidium unknown": {
+            "etiology": "CampylobacterJejuniEscherichiaColiEnterotoxigenicCryptosporidiumUnknown"
+        },
+        "Other;Other;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "OtherOtherNorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Shigella;Escherichia coli, Shiga toxin-producing;Salmonella enterica;Norovirus": {
+            "etiology": "ShigellaEscherichiaColiShigaToxinProducingSalmonellaEntericaNorovirus"
+        },
+        "Shigella;Other;Salmonella enterica;Escherichia coli, Shiga toxin-producing;Norovirus": {
+            "etiology": "ShigellaOtherSalmonellaEntericaEscherichiaColiShigaToxinProducingNorovirus"
+        },
+        "Salmonella enterica;Salmonella enterica;Norovirus": {
+            "etiology": "SalmonellaEntericaSalmonellaEntericaNorovirus"
+        },
+        "Cryptosporidium parvum;Giardia duodenalis": {
+            "etiology": "CryptosporidiumParvumGiardiaDuodenalis"
+        },
+        "Campylobacter;Campylobacter jejuni": {
+            "etiology": "CampylobacterCampylobacterJejuni"
+        },
+        "Campylobacter jejuni;Giardia unknown": {
+            "etiology": "CampylobacterJejuniGiardiaUnknown"
+        },
+        "Escherichia coli, Enteropathogenic;Clostridium difficile": {
+            "etiology": "EscherichiaColiEnteropathogenicClostridiumDifficile"
+        },
+        "Other;Norovirus": {
+            "etiology": "OtherNorovirus"
+        },
+        "Shigella;Other;Escherichia coli, Shiga toxin-producing;Salmonella enterica;Salmonella enterica;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "ShigellaOtherEscherichiaColiShigaToxinProducingSalmonellaEntericaSalmonellaEntericaEscherichiaColiShigaToxinProducing"
+        },
+        "Escherichia coli, Enteroaggregative;Escherichia coli, Enteropathogenic": {
+            "etiology": "EscherichiaColiEnteroaggregativeEscherichiaColiEnteropathogenic"
+        },
+        "Salmonella enterica;Sapovirus unknown": {
+            "etiology": "SalmonellaEntericaSapovirusUnknown"
+        },
+        "Salmonella enterica;Escherichia coli, Shiga toxin-producing;Norovirus": {
+            "etiology": "SalmonellaEntericaEscherichiaColiShigaToxinProducingNorovirus"
+        },
+        "Cryptosporidium;Giardia": {
+            "etiology": "CryptosporidiumGiardia"
+        },
+        "Cryptosporidium parvum;Cryptosporidium unknown;Cryptosporidium other;Cryptosporidium parvum": {
+            "etiology": "CryptosporidiumParvumCryptosporidiumUnknownCryptosporidiumOtherCryptosporidiumParvum"
+        },
+        "Giardia;Cryptosporidium hominis": {
+            "etiology": "GiardiaCryptosporidiumHominis"
+        },
+        "Campylobacter jejuni;Norovirus unknown;Shigella sonnei": {
+            "etiology": "CampylobacterJejuniNorovirusUnknownShigellaSonnei"
+        },
+        "Campylobacter jejuni;Shigella sonnei": {
+            "etiology": "CampylobacterJejuniShigellaSonnei"
+        },
+        "Salmonella;Escherichia coli, Other": {
+            "etiology": "SalmonellaEscherichiaColiOther"
+        },
+        "Bacillus;Other - Chemical/Toxin": {
+            "etiology": "BacillusOtherChemical/Toxin"
+        },
+        "Other - Bacterium;Bacillus unknown": {
+            "etiology": "OtherBacteriumBacillusUnknown"
+        },
+        "Norovirus Genogroup IV;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupIvNorovirusGenogroupII"
+        },
+        "Campylobacter coli;Campylobacter other": {
+            "etiology": "CampylobacterColiCampylobacterOther"
+        },
+        "Pseudomonas;Pseudomonas unknown": {
+            "etiology": "PseudomonasPseudomonasUnknown"
+        },
+        "Norovirus Genogroup I;Salmonella enterica": {
+            "etiology": "NorovirusGenogroupISalmonellaEnterica"
+        },
+        "Rotavirus;Salmonella unknown": {
+            "etiology": "RotavirusSalmonellaUnknown"
+        },
+        "Shigella sonnei;Salmonella enterica": {
+            "etiology": "ShigellaSonneiSalmonellaEnterica"
+        },
+        "Clostridium other;Escherichia coli, Enteropathogenic": {
+            "etiology": "ClostridiumOtherEscherichiaColiEnteropathogenic"
+        },
+        "Campylobacter;Salmonella enterica;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "CampylobacterSalmonellaEntericaEscherichiaColiShigaToxinProducing"
+        },
+        "Campylobacter jejuni;Campylobacter lari": {
+            "etiology": "CampylobacterJejuniCampylobacterLari"
+        },
+        "Cryptosporidium unknown;Giardia unknown": {
+            "etiology": "CryptosporidiumUnknownGiardiaUnknown"
+        },
+        "Norovirus Genogroup II;Salmonella enterica": {
+            "etiology": "NorovirusGenogroupIISalmonellaEnterica"
+        },
+        "Norovirus Genogroup I;Norovirus Genogroup II;Norovirus Genogroup II;Norovirus Genogroup II": {
+            "etiology": "NorovirusGenogroupINorovirusGenogroupIINorovirusGenogroupIINorovirusGenogroupII"
+        },
+        "Giardia;Campylobacter jejuni;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "GiardiaCampylobacterJejuniEscherichiaColiShigaToxinProducing"
+        },
+        "Giardia;Rotavirus;Clostridium other;Escherichia coli, Enteropathogenic": {
+            "etiology": "GiardiaRotavirusClostridiumOtherEscherichiaColiEnteropathogenic"
+        },
+        "Cryptosporidium unknown;Giardia duodenalis": {
+            "etiology": "CryptosporidiumUnknownGiardiaDuodenalis"
+        },
+        "Bacillus cereus;Staphylococcus aureus;Norovirus unknown": {
+            "etiology": "BacillusCereusStaphylococcusAureusNorovirusUnknown"
+        },
+        "Pseudomonas aeruginosa;Pseudomonas aeruginosa": {
+            "etiology": "PseudomonasAeruginosaPseudomonasAeruginosa"
+        },
+        "Campylobacter;Clostridium": {
+            "etiology": "CampylobacterClostridium"
+        },
+        "Clostridium perfringens;Norovirus unknown": {
+            "etiology": "ClostridiumPerfringensNorovirusUnknown"
+        },
+        "Norovirus other;Norovirus Genogroup I": {
+            "etiology": "NorovirusOtherNorovirusGenogroupI"
+        },
+        "Rotavirus;Salmonella enterica;Sapovirus": {
+            "etiology": "RotavirusSalmonellaEntericaSapovirus"
+        },
+        "Staphylococcus aureus;Bacillus cereus": {
+            "etiology": "StaphylococcusAureusBacillusCereus"
+        },
+        "Staphylococcus aureus;Norovirus unknown": {
+            "etiology": "StaphylococcusAureusNorovirusUnknown"
+        },
+        "Aeromonas hydrophilia;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "AeromonasHydrophiliaEscherichiaColiShigaToxinProducing"
+        },
+        "Sapovirus unknown;Adenovirus unknown": {
+            "etiology": "SapovirusUnknownAdenovirusUnknown"
+        },
+        "Sapovirus unknown;Sapovirus Genogroup I": {
+            "etiology": "SapovirusUnknownSapovirusGenogroupI"
+        },
+        "Cryptosporidium parvum;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "CryptosporidiumParvumEscherichiaColiShigaToxinProducing"
+        },
+        "Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica": {
+            "etiology": "SalmonellaEnterica"
+        },
+        "Cryptosporidium;Cryptosporidium parvum;Cryptosporidium hominis": {
+            "etiology": "CryptosporidiumCryptosporidiumParvumCryptosporidiumHominis"
+        },
+        "Campylobacter;Cryptosporidium": {
+            "etiology": "CampylobacterCryptosporidium"
+        },
+        "Adenovirus;Clostridium other;Norovirus Genogroup II": {
+            "etiology": "AdenovirusClostridiumOtherNorovirusGenogroupII"
+        },
+        "Clostridium;Norovirus": {
+            "etiology": "ClostridiumNorovirus"
+        },
+        "Clostridium perfringens;Norovirus Genogroup I": {
+            "etiology": "ClostridiumPerfringensNorovirusGenogroupI"
+        },
+        "Staphylococcus aureus;Legionella pneumophila": {
+            "etiology": "StaphylococcusAureusLegionellaPneumophila"
+        },
+        "Other - Bacterium;Norovirus Genogroup II": {
+            "etiology": "OtherBacteriumNorovirusGenogroupII"
+        },
+        "Campylobacter unknown;Giardia unknown": {
+            "etiology": "CampylobacterUnknownGiardiaUnknown"
+        },
+        "Blastocystis hominis;Giardia duodenalis": {
+            "etiology": "BlastocystisHominisGiardiaDuodenalis"
+        },
+        "Escherichia coli, Shiga toxin-producing;Cryptosporidium parvum": {
+            "etiology": "EscherichiaColiShigaToxinProducingCryptosporidiumParvum"
+        },
+        "Cryptosporidium unknown;Giardia unknown;Norovirus Genogroup I": {
+            "etiology": "CryptosporidiumUnknownGiardiaUnknownNorovirusGenogroupI"
+        },
+        "Shigella sonnei;Norovirus Genogroup I": {
+            "etiology": "ShigellaSonneiNorovirusGenogroupI"
+        },
+        "Cryptosporidium parvum;Cryptosporidium unknown;Cryptosporidium unknown": {
+            "etiology": "CryptosporidiumParvumCryptosporidiumUnknownCryptosporidiumUnknown"
+        },
+        "Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica;Salmonella enterica": {
+            "etiology": "SalmonellaEntericaSalmonellaEntericaSalmonellaEntericaSalmonellaEntericaSalmonellaEntericaSalmonellaEntericaSalmonellaEnterica"
+        },
+        "Pantoea agglomerans;Pantoea agglomerans": {
+            "etiology": "PantoeaAgglomeranspantoeaAgglomerans"
+        },
+        "Sapovirus unknown;Sapovirus": {
+            "etiology": "SapovirusUnknownSapovirus"
+        },
+        "Cryptosporidium parvum;Cryptosporidium hominis": {
+            "etiology": "CryptosporidiumParvumCryptosporidiumHominis"
+        },
+        "Shigella sonnei;Sapovirus;Norovirus Genogroup I": {
+            "etiology": "ShigellaSonneiSapovirusNorovirusGenogroupI"
+        },
+        "Escherichia coli, Enterotoxigenic;Escherichia coli, Enteropathogenic": {
+            "etiology": "EscherichiaColiEnterotoxigenicEscherichiaColiEnteropathogenic"
+        },
+        "Norovirus;Norovirus unknown": {
+            "etiology": "NorovirusNorovirusUnknown"
+        },
+        "Clostridium other;Norovirus Genogroup I": {
+            "etiology": "ClostridiumOtherNorovirusGenogroupI"
+        },
+        "Cryptosporidium unknown;Cryptosporidium unknown": {
+            "etiology": "CryptosporidiumUnknownCryptosporidiumUnknown"
+        },
+        "Plesiomonas shigelloides;Escherichia coli, Shiga toxin-producing;Shigella sonnei": {
+            "etiology": "PlesiomonasShigelloidesEscherichiaColiShigaToxinProducingShigellaSonnei"
+        },
+        "Campylobacter unknown;Salmonella enterica": {
+            "etiology": "CampylobacterUnknownSalmonellaEnterica"
+        },
+        "Bacillus cereus;Staphylococcus aureus;Salmonella enterica": {
+            "etiology": "BacillusCereusStaphylococcusAureusSalmonellaEnterica"
+        },
+        "Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing;Cryptosporidium unknown": {
+            "etiology": "EscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducingCryptosporidiumUnknown"
+        },
+        "Campylobacter other;Vibrio other;Vibrio cholerae": {
+            "etiology": "CampylobacterOtherVibrioOtherVibrioCholerae"
+        },
+        "Rotavirus;Norovirus unknown;Norovirus Genogroup II": {
+            "etiology": "RotavirusNorovirusUnknownNorovirusGenogroupII"
+        },
+        "Clostridium;Adenovirus": {
+            "etiology": "ClostridiumAdenovirus"
+        },
+        "Campylobacter other;Norovirus Genogroup II": {
+            "etiology": "CampylobacterOtherNorovirusGenogroupII"
+        },
+        "Clostridium other;Cryptosporidium unknown;Norovirus unknown": {
+            "etiology": "ClostridiumOtherCryptosporidiumUnknownNorovirusUnknown"
+        },
+        "Campylobacter unknown;Giardia duodenalis": {
+            "etiology": "CampylobacterUnknownGiardiaDuodenalis"
+        },
+        "Campylobacter unknown;Campylobacter jejuni": {
+            "etiology": "CampylobacterUnknownCampylobacterJejuni"
+        },
+        "Campylobacter unknown;Campylobacter unknown": {
+            "etiology": "CampylobacterUnknownCampylobacterUnknown"
+        },
+        "Campylobacter jejuni;Cryptosporidium parvum": {
+            "etiology": "CampylobacterJejuniCryptosporidiumParvum"
+        },
+        "Cryptosporidium hominis;Cryptosporidium hominis;Cryptosporidium hominis;Cryptosporidium unknown;Cryptosporidium unknown;Cryptosporidium unknown": {
+            "etiology": "CryptosporidiumHominisCryptosporidiumUnknown"
+        },
+        "Campylobacter other;Escherichia coli, Enteroaggregative": {
+            "etiology": "CampylobacterOtherEscherichiaColiEnteroaggregative"
+        },
+        "Legionella unknown;Legionella unknown;Legionella pneumophila": {
+            "etiology": "LegionellaUnknownLegionellaUnknownLegionellaPneumophila"
+        },
+        "Rotavirus;Clostridium other;Norovirus unknown;Norovirus Genogroup II": {
+            "etiology": "RotavirusClostridiumOtherNorovirusUnknownNorovirusGenogroupII"
+        },
+        "Bacillus other;Norovirus unknown": {
+            "etiology": "BacillusOtherNorovirusUnknown"
+        },
+        "Staphylococcus unknown;Norovirus unknown": {
+            "etiology": "StaphylococcusUnknownNorovirusUnknown"
+        },
+        "Campylobacter jejuni;Listeria monocytogenes": {
+            "etiology": "CampylobacterJejuniListeriaMonocytogenes"
+        },
+        "Blastocystis hominis;Campylobacter jejuni;Endolimax nana;Shigella unknown;Norovirus Genogroup I": {
+            "etiology": "BlastocystisHominisCampylobacterJejuniendolimaxNanaShigellaUnknownNorovirusGenogroupI"
+        },
+        "Clostridium other;Salmonella enterica": {
+            "etiology": "ClostridiumOtherSalmonellaEnterica"
+        },
+        "Staphylococcus aureus;Bacillus cereus;Enterobacter other": {
+            "etiology": "StaphylococcusAureusBacillusCereusEnterobacterOther"
+        },
+        "Giardia duodenalis;Giardia duodenalis;Giardia duodenalis;Giardia duodenalis;Giardia duodenalis": {
+            "etiology": "GiardiaDuodenalisGiardiaDuodenalisGiardiaDuodenalisGiardiaDuodenalisGiardiaDuodenalis"
+        },
+        "Shigella sonnei;Escherichia coli, Enteroaggregative;Escherichia coli, Enterotoxigenic": {
+            "etiology": "ShigellaSonneiEscherichiaColiEnteroaggregativeEscherichiaColiEnterotoxigenic"
+        },
+        "Clostridium perfringens;Staphylococcus aureus;Salmonella enterica": {
+            "etiology": "ClostridiumPerfringensStaphylococcusAureusSalmonellaEnterica"
+        },
+        "Yersinia enterocolitica;Norovirus Genogroup II;Shigella sonnei": {
+            "etiology": "YersiniaEnterocoliticaNorovirusGenogroupIIShigellaSonnei"
+        },
+        "Bacillus cereus;Bacillus other": {
+            "etiology": "BacillusCereusBacillusOther"
+        },
+        "Giardia duodenalis;Cryptosporidium unknown;Shigella sonnei": {
+            "etiology": "GiardiaDuodenalisCryptosporidiumUnknownShigellaSonnei"
+        },
+        "Cryptosporidium hominis;Giardia duodenalis": {
+            "etiology": "CryptosporidiumHominisGiardiaDuodenalis"
+        },
+        "Campylobacter jejuni;Clostridium perfringens": {
+            "etiology": "CampylobacterJejuniClostridiumPerfringens"
+        },
+        "Campylobacter unknown;Salmonella unknown;Norovirus Genogroup I": {
+            "etiology": "CampylobacterUnknownSalmonellaUnknownNorovirusGenogroupI"
+        },
+        "Salmonella enterica;Norovirus Genogroup I": {
+            "etiology": "SalmonellaEntericaNorovirusGenogroupI"
+        },
+        "Campylobacter jejuni;Campylobacter other": {
+            "etiology": "CampylobacterJejuniCampylobacterOther"
+        },
+        "Campylobacter jejuni;Campylobacter coli;Salmonella enterica": {
+            "etiology": "CampylobacterJejuniCampylobacterColiSalmonellaEnterica"
+        },
+        "Unknown;Legionella pneumophila": {
+            "etiology": "UnknownLegionellaPneumophila"
+        },
+        "Legionella anisa;Legionella anisa": {
+            "etiology": "LegionellaAnisaLegionellaAnisa"
+        },
+        "Cryptosporidium hominis;Cryptosporidium hominis": {
+            "etiology": "CryptosporidiumHominisCryptosporidiumHominis"
+        },
+        "Campylobacter jejuni;Norovirus other;Norovirus other": {
+            "etiology": "CampylobacterJejuniNorovirusOtherNorovirusOther"
+        },
+        "Cryptosporidium hominis;Cryptosporidium hominis;Cryptosporidium parvum": {
+            "etiology": "CryptosporidiumHominisCryptosporidiumHominisCryptosporidiumParvum"
+        },
+        "Unknown;Cryptosporidium hominis": {
+            "etiology": "UnknownCryptosporidiumHominis"
+        },
+        "Clostridium perfringens;Salmonella enterica;Salmonella enterica": {
+            "etiology": "ClostridiumPerfringensSalmonellaEntericaSalmonellaEnterica"
+        },
+        "Campylobacter jejuni;Escherichia coli, Shiga toxin-producing;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "CampylobacterJejuniEscherichiaColiShigaToxinProducingEscherichiaColiShigaToxinProducing"
+        },
+        "Bacillus cereus;Campylobacter jejuni": {
+            "etiology": "BacillusCereusCampylobacterJejuni"
+        },
+        "Leptospira interrogans;Leptospira interrogans": {
+            "etiology": "LeptospiraInterrogansLeptospiraInterrogans"
+        },
+        "Naegleria fowleri;Naegleria fowleri": {
+            "etiology": "NaegleriaFowlerinaegleriaFowleri"
+        },
+        "Bacillus cereus;Clostridium perfringens;Other - Bacterium": {
+            "etiology": "BacillusCereusClostridiumPerfringensOtherBacterium"
+        },
+        "Campylobacter lari;Campylobacter jejuni;Helicobacter canadensis;Cryptosporidium unknown": {
+            "etiology": "CampylobacterLariCampylobacterJejunihelicobacterCanadensisCryptosporidiumUnknown"
+        },
+        "Unknown;Norovirus unknown": {
+            "etiology": "UnknownNorovirusUnknown"
+        },
+        "Campylobacter jejuni;Norovirus Genogroup I": {
+            "etiology": "CampylobacterJejuniNorovirusGenogroupI"
+        },
+        "Clostridium perfringens;Salmonella enterica": {
+            "etiology": "ClostridiumPerfringensSalmonellaEnterica"
+        },
+        "Campylobacter jejuni;Giardia duodenalis;Norovirus other": {
+            "etiology": "CampylobacterJejuniGiardiaDuodenalisNorovirusOther"
+        },
+        "Clostridium perfringens;Streptococcus Group A": {
+            "etiology": "ClostridiumPerfringensStreptococcusGroupA"
+        },
+        "Adenovirus;Norovirus Genogroup I": {
+            "etiology": "AdenovirusNorovirusGenogroupI"
+        },
+        "Bromate;Disinfection byproducts": {
+            "etiology": "BromateDisinfectionByproducts"
+        },
+        "Campylobacter jejuni;Shigella unknown": {
+            "etiology": "CampylobacterJejuniShigellaUnknown"
+        },
+        "Vibrio parahaemolyticus;Vibrio cholerae;Other - Bacterium": {
+            "etiology": "VibrioParahaemolyticusVibrioCholeraeOtherBacterium"
+        },
+        "Shigella unknown;Norovirus Genogroup I": {
+            "etiology": "ShigellaUnknownNorovirusGenogroupI"
+        },
+        "Unknown;Pseudomonas aeruginosa": {
+            "etiology": "UnknownPseudomonasAeruginosa"
+        },
+        "Vibrio parahaemolyticus;Norovirus Genogroup I": {
+            "etiology": "VibrioParahaemolyticusNorovirusGenogroupI"
+        },
+        "Campylobacter other;Norovirus Genogroup I": {
+            "etiology": "CampylobacterOtherNorovirusGenogroupI"
+        },
+        "Cryptosporidium unknown;Shigella sonnei;Norovirus unknown": {
+            "etiology": "CryptosporidiumUnknownShigellaSonneiNorovirusUnknown"
+        },
+        "Unknown;Unknown;Legionella unknown": {
+            "etiology": "UnknownUnknownLegionellaUnknown"
+        },
+        "Unknown;Unknown": {
+            "etiology": "UnknownUnknown"
+        },
+        "Salmonella enterica;Salmonella enterica;Norovirus Genogroup I": {
+            "etiology": "SalmonellaEntericaSalmonellaEntericaNorovirusGenogroupI"
+        },
+        "Chlorine;Hydrochloric Acid": {
+            "etiology": "ChlorinehydrochloricAcid"
+        },
+        "Escherichia coli, Enteropathogenic;Salmonella enterica": {
+            "etiology": "EscherichiaColiEnteropathogenicSalmonellaEnterica"
+        },
+        "Unknown;Giardia duodenalis": {
+            "etiology": "UnknownGiardiaDuodenalis"
+        },
+        "Campylobacter jejuni;Giardia unknown;Entamoeba unknown": {
+            "etiology": "CampylobacterJejuniGiardiaUnknownEntamoebaUnknown"
+        },
+        "Staphylococcus aureus;Streptococcus Group B, C or G": {
+            "etiology": "StaphylococcusAureusStreptococcusGroupBOrCOrG"
+        },
+        "Bacillus cereus;Bacillus subtilus;Bacillus stearothermophilus": {
+            "etiology": "BacillusCereusBacillusSubtilusBacillusStearOthermophilus"
+        },
+        "Listeria monocytogenes;Norovirus Genogroup I": {
+            "etiology": "ListeriaMonocytogenesNorovirusGenogroupI"
+        },
+        "Campylobacter jejuni;Yersinia enterocolitica": {
+            "etiology": "CampylobacterJejuniYersiniaEnterocolitica"
+        },
+        "Campylobacter jejuni;Staphylococcus aureus": {
+            "etiology": "CampylobacterJejuniStaphylococcusAureus"
+        },
+        "Ethyl benzene;Toluene;Xylene": {
+            "etiology": "EthylBenzenetoluenexylene"
+        },
+        "Copper;Other Minerals": {
+            "etiology": "CopperOtherMinerals"
+        },
+        "Bacillus other;Clostridium perfringens": {
+            "etiology": "BacillusOtherClostridiumPerfringens"
+        },
+        "Neurotoxic shellfish poison;Paralytic shellfish poison": {
+            "etiology": "NeurotoxicShellfishPoisonparalyticShellfishPoison"
+        },
+        "Escherichia coli, Shiga toxin-producing;Norovirus Genogroup I": {
+            "etiology": "EscherichiaColiShigaToxinProducingNorovirusGenogroupI"
+        },
+        "Cryptosporidium parvum;Shigella sonnei": {
+            "etiology": "CryptosporidiumParvumShigellaSonnei"
+        },
+        "Unknown;Legionella anisa": {
+            "etiology": "UnknownLegionellaAnisa"
+        },
+        "Pseudomonas aeruginosa;Staphylococcus aureus": {
+            "etiology": "PseudomonasAeruginosaStaphylococcusAureus"
+        },
+        "Bacillus cereus;Salmonella enterica": {
+            "etiology": "BacillusCereusSalmonellaEnterica"
+        },
+        "Unknown;Unknown;Pseudomonas aeruginosa": {
+            "etiology": "UnknownUnknownPseudomonasAeruginosa"
+        },
+        "Staphylococcus aureus;Norovirus Genogroup I": {
+            "etiology": "StaphylococcusAureusNorovirusGenogroupI"
+        },
+        "Unknown;Unknown;Pseudomonas aeruginosa;Pseudomonas aeruginosa": {
+            "etiology": "UnknownUnknownPseudomonasAeruginosaPseudomonasAeruginosa"
+        },
+        "Rotavirus;Clostridium perfringens;Norovirus Genogroup I": {
+            "etiology": "RotavirusClostridiumPerfringensNorovirusGenogroupI"
+        },
+        "Streptococcus Group A;Norovirus Genogroup I": {
+            "etiology": "StreptococcusGroupANorovirusGenogroupI"
+        },
+        "Unknown;Unknown;Unknown;Legionella unknown": {
+            "etiology": "UnknownUnknownUnknownLegionellaUnknown"
+        },
+        "Shigella boydii;Shigella sonnei": {
+            "etiology": "ShigellaBoydiiShigellaSonnei"
+        },
+        "Unknown;Leptospira interrogans;Leptospira unknown": {
+            "etiology": "UnknownLeptospiraInterrogansLeptospiraUnknown"
+        },
+        "Unknown;Norovirus unknown;Staphylococcus aureus": {
+            "etiology": "UnknownNorovirusUnknownStaphylococcusAureus"
+        },
+        "Bacillus cereus;Enterobacter cloacae;Other - Bacterium": {
+            "etiology": "BacillusCereusEnterobacterCloacaeOtherBacterium"
+        },
+        "Legionella pneumophila;Legionella bozemanii": {
+            "etiology": "LegionellaPneumophilaLegionellaBozemanii"
+        },
+        "Giardia duodenalis;Plesiomonas shigelloides;Escherichia coli, Shiga toxin-producing": {
+            "etiology": "GiardiaDuodenalisPlesiomonasShigelloidesEscherichiaColiShigaToxinProducing"
+        },
+        "Unknown;Unknown;Cryptosporidium parvum;Giardia duodenalis": {
+            "etiology": "UnknownUnknownCryptosporidiumParvumGiardiaDuodenalis"
+        },
+        "Entamoeba histolytica;Giardia duodenalis": {
+            "etiology": "EntamoebaHistolyticaGiardiaDuodenalis"
+        },
+        "Campylobacter jejuni;Plesiomonas shigelloides": {
+            "etiology": "CampylobacterJejuniPlesiomonasShigelloides"
+        },
+        "Legionella pneumophila;Legionella pneumophila;Legionella pneumophila;Legionella longbeachae": {
+            "etiology": "LegionellaPneumophilaLegionellaPneumophilaLegionellaPneumophilaLegionellaLongbeachae"
+        },
+        "Leptospira interrogans;Leptospira unknown": {
+            "etiology": "LeptospiraInterrogansLeptospiraUnknown"
+        },
+        "Campylobacter coli;Yersinia other": {
+            "etiology": "CampylobacterColiYersiniaOther"
+        },
+        "Aeromonas unknown;Plesiomonas shigelloides": {
+            "etiology": "AeromonasUnknownPlesiomonasShigelloides"
+        },
+        "Legionella pneumophila;Pseudomonas unknown": {
+            "etiology": "LegionellaPneumophilaPseudomonasUnknown"
+        },
+        "Unknown;Unknown;Legionella unknown;Legionella pneumophila": {
+            "etiology": "UnknownUnknownLegionellaUnknownLegionellaPneumophila"
+        },
+        "Legionella pneumophila;Legionella pneumophila;Legionella pneumophila;Legionella pneumophila": {
+            "etiology": "LegionellaPneumophilaLegionellaPneumophilaLegionellaPneumophilaLegionellaPneumophila"
+        },
+        "Legionella micdadei;Legionella pneumophila;Legionella feeleii": {
+            "etiology": "LegionellaMicdadeiLegionellaPneumophilaLegionellaFeeleii"
+        },
+        "Unknown;Unknown;Other;Other": {
+            "etiology": "UnknownUnknownOtherOther"
+        },
+        "Copper;Fluoride": {
+            "etiology": "CopperFluoride"
+        },
+        "Unknown;Unknown;Norovirus unknown": {
+            "etiology": "UnknownUnknownNorovirusUnknown"
+        },
+        "Shigella sonnei;Shigella boydii": {
+            "etiology": "ShigellaSonneiShigellaBoydii"
+        },
+        "Legionella micdadei;Legionella dumoffii;Legionella pneumophila": {
+            "etiology": "LegionellaMicdadeiLegionellaDumoffiiLegionellaPneumophila"
+        },
+        "Pseudomonas unknown;Pseudomonas unknown": {
+            "etiology": "PseudomonasUnknownPseudomonasUnknown"
+        },
+        "Pseudomonas aeruginosa;Pseudomonas unknown": {
+            "etiology": "PseudomonasAeruginosaPseudomonasUnknown"
+        },
+        "Giardia duodenalis;Salmonella unknown": {
+            "etiology": "GiardiaDuodenalisSalmonellaUnknown"
+        },
+        "Unknown;Hepatitis A": {
+            "etiology": "UnknownHepatitisA"
+        },
+        "Chlordane;Heptachlor;Kerosene;Toxaphene": {
+            "etiology": "Chlordaneheptachlorkerosenetoxaphene"
         }
     },
     "Serotype or Genotype": {
@@ -1040,7 +3079,7 @@
         "Hydrant": {},
         "Puddle": {},
         "Treated Wastewater": {}
-    }, 
+    },
     "Animal Type": {
         "Cattle": {},
         "Sheep or goats": {},
@@ -1084,6 +3123,7 @@
         "Unknown": {},
         "Beach - Public": {},
         "Camp/Cabin Setting": {},
+        "Camp/Cabin": {},
         "Religious facility": {},
         "School/College/University": {},
         "Ship/boat": {},
@@ -1273,4 +3313,4 @@
         "Backyard Poultry (Chickens, Ducks, etc.)": {},
         "Backyard poultry (Chickens, Ducks, etc.)": {}
     }
-   }
+}

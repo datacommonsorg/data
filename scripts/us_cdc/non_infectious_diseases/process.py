@@ -119,10 +119,10 @@ def generate_aggregates(df: pd.DataFrame,
                                                'Deaths': sum
                                            })
     us_aggreagte_df['observationAbout'] = 'country/USA'
-    us_aggreagte_df = us_aggreagte_df[[
-        'observationDate', 'observationAbout', 'Primary Mode', 'Illnesses',
-        'Hospitalizations', 'Deaths'
-    ]]
+    # us_aggreagte_df = us_aggreagte_df[[
+    #     'observationDate', 'observationAbout', 'Primary Mode', 'Illnesses',
+    #     'Hospitalizations', 'Deaths'
+    # ]]
 
     # merge all aggregations
     aggregate_df = pd.concat([aggregate_df, us_aggreagte_df, country_stat_df],
@@ -158,6 +158,7 @@ def make_stat_vars(row, PV_MAP):
                         'Etiology'][etiology]['etiology']
 
             # Etiology status is dependent on the Etiology column
+
             if pd.notna(row['Etiology Status']):
                 etiology_status_list = row['Etiology Status'].split('; ')
                 assert len(etiology_status_list) == len(
@@ -235,9 +236,10 @@ def process_non_infectious_data(input_path: str, sheet_name: str,
     trans_mode_df = generate_aggregates(
         df,
         groupby_cols=['observationDate', 'observationAbout', 'Primary Mode'])
-    trans_mode_df = trans_mode_df.drop_duplicates(
-        subset=['observationDate', 'observationAbout', 'Primary Mode'],
-        keep='last')
+    trans_mode_df = trans_mode_df.drop_duplicates(subset=[
+        'observationDate', 'observationAbout', 'Primary Mode', 'variable'
+    ],
+                                                  keep='last')
     trans_mode_df['agg_by'] = 'Transmission Mode'
 
     etiology_df = generate_aggregates(df,
@@ -266,7 +268,11 @@ def process_non_infectious_data(input_path: str, sheet_name: str,
     sv_df = clean_df[[
         'variable', 'Primary Mode', 'Etiology', 'Etiology Status'
     ]]
+    sv_df.to_csv(f'{output_path}/sv_df1.csv', index=False)
+
     sv_df = sv_df.drop_duplicates()
+
+    sv_df.to_csv(f'{output_path}/sv_df2.csv', index=False)
     sv_df = sv_df.apply(make_stat_vars, args=(PV_MAP,), axis=1)
 
     # write statvar_dct to mcf file
