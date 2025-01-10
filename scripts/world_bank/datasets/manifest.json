@@ -2,7 +2,7 @@
     "import_specifications": [
       {
         "import_name": "WorldBankDatasets",
-        "curator_emails": ["prajapata@google.com"],
+        "curator_emails": [],
         "provenance_url": "https://databank.worldbank.org/source/world-development-indicators",
         "provenance_description": "The WorldBankDatasets contains data about multiple databases like World development Indicators,Jobs,Education Statistics",
         "scripts": ["datasets.py"],
