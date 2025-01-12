@@ -13,8 +13,9 @@
 
 ### How to run:
 
-`python3 stat_var_processor.py --input_data=test_data/sample_input/*.xls --pv_map=statvar_imports/NCSES/Demographics_SEH/pv_map/seh_pv_map.csv --config=statvar_imports/NCSES/Demographics_SEH/seh_metadata.csv --output_path=--output_path=<filepath/filename>`
+`python3 stat_var_processor.py --data_url="download url" --input_data=test_data/sample_input/input*.xls --pv_map=statvar_imports/NCSES/Demographics_SEH/pv_map/seh_pv_map.csv --config=statvar_imports/NCSES/Demographics_SEH/seh_metadata.csv --output_path=<filepath/filename>`
+
 
 #### Example
-`python3 stat_var_processor.py --input_data=/statvar_imports/NCSES/Demographics_SEH/test_data/sample_input/*.xls --pv_map=/statvar_imports/NCSES/Demographics_SEH/pv_map/seh_pv_map.csv --config=/statvar_imports/NSCES/Demographics_SEH/seh_metadata.csv --output_path=/statvar_imports/NCSES/Demographics_SEH/test_data/sample_output/ncses_stem`
 
+'python3 stat_var_processor.py --data_url="https://wayback.archive-it.org/5902/20240828214053/https://ncsesdata.nsf.gov/gradpostdoc/2017/excel/gss17-dt-tab002-1.xlsx" --input_data='/statvar_imports/NCSES/Demographics_SEH/test_data/sample_input/input1.xls' --output_path=/statvar_imports/NCSES/Demographics_SEH/test_data/sample_output/ncses_stem --pv_map=/statvar_imports/NCSES/Demographics_SEH/pv_map/seh_pv_map.csv --config=/statvar_imports/NSCES/Demographics_SEH/seh_metadata.csv'
