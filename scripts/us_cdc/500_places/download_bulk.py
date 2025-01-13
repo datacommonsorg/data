@@ -26,6 +26,9 @@ python3 download_bulk.py
 import os
 import requests
 import json
+
+from absl import logging
+from retry import retry
 from google.cloud import storage
 
 # Initialize GCP storage client
@@ -45,6 +48,9 @@ json_data = blob.download_as_text()
 # Load the JSON data
 _CONFIG_FILE = json.loads(json_data)
 
+@retry(tries=3, delay=5, backoff=5)
+def retry_method(url):
+    return requests.get(url)
 
 def download_file(release_year, url: str, save_path: str):
     """
@@ -54,8 +60,10 @@ def download_file(release_year, url: str, save_path: str):
     Returns:
         a downloaded csv file in the specified file path
     """
-    print(f'Downloading {url} for the year {release_year} to {save_path}')
-    request = requests.get(url, stream=True)
+    logging.info(f'Downloading {url} for the year {release_year} to {save_path}')
+    request = retry_method(url)
+    if request.status_code != 200:
+            logging.fatal(f'Failed to retrieve {url} for the year {release_year} to {save_path}')    
     with open(save_path, 'wb') as file:
         file.write(request.content)
 
@@ -65,6 +73,7 @@ def main():
     data_dir = os.path.join(os.getcwd(), 'raw_data')
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
+    logging.set_verbosity(2)
     for item in _CONFIG_FILE:
         release_year = item["release_year"]
         for url_dict in item["parameter"]:

@@ -24,10 +24,10 @@ python3 parse_cdc_places.py input_file output_file delimiter
 '''
 
 import os
-import requests
 import pandas as pd
 import numpy as np
 import json
+from absl import logging
 from google.cloud import storage
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -206,26 +206,29 @@ def clean_census_tract_data(data):
     Returns:
         a dataframe with cleaned census tract-level data
     """
-    data["LocationName"] = data["LocationName"].apply(
-        generate_census_tract_dcids)
-    data.rename(columns={
-        'MeasureId': 'StatVar',
-        'LocationName': 'Location'
-    },
-                inplace=True)
-    data = data.drop(columns=[
-        "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
-        "StateDesc", "CountyName", "CountyFIPS", "Data_Value_Unit",
-        "Data_Value_Footnote_Symbol", "Data_Value_Footnote", "Geolocation",
-        "LocationID", "CategoryID", "Short_Question_Text"
-    ])
-    data = data[[
-        'Year', 'Data_Value', 'Low_Confidence_Limit', 'High_Confidence_Limit',
-        'TotalPopulation', 'Location', 'StatVar', 'DataValueTypeID',
-        'release_year', 'Low_Confidence_Limit_StatVar',
-        'High_Confidence_Limit_StatVar', 'Population_StatVar'
-    ]]
-    return data
+    try:
+        data["LocationName"] = data["LocationName"].apply(
+            generate_census_tract_dcids)
+        data.rename(columns={
+            'MeasureId': 'StatVar',
+            'LocationName': 'Location'
+        },
+                    inplace=True)
+        data = data.drop(columns=[
+            "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
+            "StateDesc", "CountyName", "CountyFIPS", "Data_Value_Unit",
+            "Data_Value_Footnote_Symbol", "Data_Value_Footnote", "Geolocation",
+            "LocationID", "CategoryID", "Short_Question_Text"
+        ])
+        data = data[[
+            'Year', 'Data_Value', 'Low_Confidence_Limit', 'High_Confidence_Limit',
+            'TotalPopulation', 'Location', 'StatVar', 'DataValueTypeID',
+            'release_year', 'Low_Confidence_Limit_StatVar',
+            'High_Confidence_Limit_StatVar', 'Population_StatVar'
+        ]]
+        return data
+    except Exception as e:
+        logging.fatal(f"Error processing census tract input file {e}")
 
 
 def clean_county_data(data):
@@ -235,19 +238,22 @@ def clean_county_data(data):
     Returns:
         a dataframe with cleaned county-level data
     """
-    data["LocationID"] = data["LocationID"].apply(generate_county_dcids)
-    data.rename(columns={
-        'MeasureId': 'StatVar',
-        'LocationID': 'Location'
-    },
-                inplace=True)
-    data = data.drop(columns=[
-        "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
-        "StateDesc", "Data_Value_Unit", "Data_Value_Footnote_Symbol",
-        "Data_Value_Footnote", "Geolocation", "LocationName", "CategoryID",
-        "Short_Question_Text"
-    ])
-    return data
+    try:
+        data["LocationID"] = data["LocationID"].apply(generate_county_dcids)
+        data.rename(columns={
+            'MeasureId': 'StatVar',
+            'LocationID': 'Location'
+        },
+                    inplace=True)
+        data = data.drop(columns=[
+            "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
+            "StateDesc", "Data_Value_Unit", "Data_Value_Footnote_Symbol",
+            "Data_Value_Footnote", "Geolocation", "LocationName", "CategoryID",
+            "Short_Question_Text"
+        ])
+        return data
+    except Exception as e:
+        logging.fatal(f"Error processing county input file {e}")
 
 
 def clean_city_data(data):
@@ -257,19 +263,22 @@ def clean_city_data(data):
     Returns:
         a dataframe with cleaned city-level data
     """
-    data["LocationID"] = data["LocationID"].apply(generate_city_dcids)
-    data.rename(columns={
-        'MeasureId': 'StatVar',
-        'LocationID': 'Location'
-    },
-                inplace=True)
-    data = data.drop(columns=[
-        "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
-        "StateDesc", "Data_Value_Unit", "Data_Value_Footnote_Symbol",
-        "Data_Value_Footnote", "Geolocation", "LocationName", "CategoryID",
-        "Short_Question_Text"
-    ])
-    return data
+    try:
+        data["LocationID"] = data["LocationID"].apply(generate_city_dcids)
+        data.rename(columns={
+            'MeasureId': 'StatVar',
+            'LocationID': 'Location'
+        },
+                    inplace=True)
+        data = data.drop(columns=[
+            "Measure", "Category", "DataSource", "Data_Value_Type", "StateAbbr",
+            "StateDesc", "Data_Value_Unit", "Data_Value_Footnote_Symbol",
+            "Data_Value_Footnote", "Geolocation", "LocationName", "CategoryID",
+            "Short_Question_Text"
+        ])
+        return data
+    except Exception as e:
+        logging.fatal(f"Error processing city input file {e}")
 
 
 def clean_zip_code_data(data):
@@ -279,18 +288,21 @@ def clean_zip_code_data(data):
     Returns:
         a dataframe with cleaned zip code-level data
     """
-    data["LocationID"] = data["LocationID"].apply(generate_zip_code_dcids)
-    data.rename(columns={
-        'MeasureId': 'StatVar',
-        'LocationID': 'Location'
-    },
-                inplace=True)
-    data = data.drop(columns=[
-        "Measure", "Category", "DataSource", "Data_Value_Type",
-        "Data_Value_Unit", "Data_Value_Footnote_Symbol", "Data_Value_Footnote",
-        "Geolocation", "LocationName", "CategoryID", "Short_Question_Text"
-    ])
-    return data
+    try:
+        data["LocationID"] = data["LocationID"].apply(generate_zip_code_dcids)
+        data.rename(columns={
+            'MeasureId': 'StatVar',
+            'LocationID': 'Location'
+        },
+                    inplace=True)
+        data = data.drop(columns=[
+            "Measure", "Category", "DataSource", "Data_Value_Type",
+            "Data_Value_Unit", "Data_Value_Footnote_Symbol", "Data_Value_Footnote",
+            "Geolocation", "LocationName", "CategoryID", "Short_Question_Text"
+        ])
+        return data
+    except Exception as e:
+        logging.fatal(f"Error processing zipcode input file {e}")
 
 
 def generate_statvar_names(data):
@@ -300,18 +312,21 @@ def generate_statvar_names(data):
     Returns:
         a dataframe with additional columns of StatVar names
     """
-    data[
-        "Low_Confidence_Limit_StatVar"] = "dcs:LowerConfidenceIntervalLimit_" + data[
-            "MeasureId"].map(MEASURE_TO_STATVAR_MAP)
-    data[
-        "High_Confidence_Limit_StatVar"] = "dcs:UpperConfidenceIntervalLimit_" + data[
-            "MeasureId"].map(MEASURE_TO_STATVAR_MAP)
-    data["Population_StatVar"] = "dcs:SampleSize_" + data["MeasureId"].map(
-        MEASURE_TO_STATVAR_MAP)
-    data["MeasureId"] = "dcs:" + data["MeasureId"].map(MEASURE_TO_STATVAR_MAP)
-    data["DataValueTypeID"] = "dcs:" + data["DataValueTypeID"].map(
-        DATA_VALUE_TYPE_MAP)
-    return data
+    try:
+        data[
+            "Low_Confidence_Limit_StatVar"] = "dcs:LowerConfidenceIntervalLimit_" + data[
+                "MeasureId"].map(MEASURE_TO_STATVAR_MAP)
+        data[
+            "High_Confidence_Limit_StatVar"] = "dcs:UpperConfidenceIntervalLimit_" + data[
+                "MeasureId"].map(MEASURE_TO_STATVAR_MAP)
+        data["Population_StatVar"] = "dcs:SampleSize_" + data["MeasureId"].map(
+            MEASURE_TO_STATVAR_MAP)
+        data["MeasureId"] = "dcs:" + data["MeasureId"].map(MEASURE_TO_STATVAR_MAP)
+        data["DataValueTypeID"] = "dcs:" + data["DataValueTypeID"].map(
+            DATA_VALUE_TYPE_MAP)
+        return data
+    except Exception as e:
+        logging.fatal(f"Error additional columns of StatVar names {e}")
 
 
 def clean_cdc_places_data(input_file, file_type, sep, release_year):
@@ -322,7 +337,7 @@ def clean_cdc_places_data(input_file, file_type, sep, release_year):
     Returns:
         a cleaned dataframe
     """
-    print("Cleaning file...")
+    logging.info(f"Processing input files for {file_type} for the year {release_year}")
     data = pd.read_csv(input_file, sep=sep)
     data["release_year"] = release_year
     data = generate_statvar_names(data)
@@ -340,6 +355,7 @@ def clean_cdc_places_data(input_file, file_type, sep, release_year):
 
 def main():
     """Main function to generate the cleaned csv file."""
+    logging.set_verbosity(2)
     sep = ","
     for file_type in ["County", "City", "ZipCode", "CensusTract"]:
         FINAL_LIST = []
@@ -353,15 +369,21 @@ def main():
                                               release_year['release_year']))
         df_final = pd.concat(FINAL_LIST)
         df_final = df_final.sort_values(by='release_year')
+        # Added drop duplicate as all the year data are not present
+        # as part of latest year release of data only points modified
+        # are present for previoud years in the latest year.
         df_final = df_final.drop_duplicates(
             subset=[
                 'Year', 'Location', 'StatVar', 'DataValueTypeID',
                 'Low_Confidence_Limit_StatVar', 'High_Confidence_Limit_StatVar',
                 'Population_StatVar'
-            ],  #add all columns headers
+            ],
+            # add all columns headers except value columns to get
+            # modified value from latest year release
             keep='last')
         df_final = df_final.drop('release_year', axis=1)
         output_file = os.path.join(_OUTPUT_FILE_PATH, file_type + ".csv")
+        logging.info(f"Writing output CSV for {file_type} for the year {release_year['release_year']}")
         df_final.to_csv(output_file, index=False)
 
 
