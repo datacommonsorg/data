@@ -40,9 +40,9 @@ def pacific_time():
     return datetime.datetime.now(pytz.timezone(_PACIFIC_TIME)).isoformat()
 
 
-def next_pacific_date(cron_expression: str, from_time: str = None) -> str:
-    """Returns the next date from today in ISO8601 with timezone
-    America/Los_Angeles, given a cron schedule.
+def next_utc_date(cron_expression: str, from_time: str = None) -> str:
+    """Returns the next date from today in ISO8601 with timezone UTC+0,
+    given a cron schedule.
 
     Args:
         cron_expression: Expression for cron schedule.
@@ -53,7 +53,7 @@ def next_pacific_date(cron_expression: str, from_time: str = None) -> str:
     """
     try:
         if not from_time:
-            from_time = datetime.datetime.now(pytz.timezone(_PACIFIC_TIME))
+            from_time = datetime.datetime.now(datetime.timezone.utc)
         iter = croniter(cron_expression, from_time)
         return iter.get_next(datetime.datetime).date().isoformat()
     except Exception as e:
