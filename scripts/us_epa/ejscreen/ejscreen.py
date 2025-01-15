@@ -24,6 +24,12 @@ TEMPLATE_MCF = config["TEMPLATE_MCF"]
 # outfilename: name of the csv that data will be written to
 # write_csv concatenates the dataframe from each year together
 
+# def read_config():
+#     # Load configuration from config.json
+#     with open('config.json', 'r') as f:
+#         config = json.load(f)
+#     return config
+
 
 def write_csv(data, outfilename):
     full_df = pd.DataFrame()
@@ -100,10 +106,6 @@ if __name__ == '__main__':
 
     write_csv(dfs, 'ejscreen_airpollutants.csv')
     write_tmcf('ejscreen.tmcf')
-logger.info("Loading configuration from config.json")
-with open('config.json', 'r') as f:
-    config = json.load(f)
-logger.info("Configuration loaded successfully")
 
 YEARS = config["YEARS"]
 logger.info(f"Processing years: {YEARS}")
