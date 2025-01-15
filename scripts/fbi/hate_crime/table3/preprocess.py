@@ -30,7 +30,8 @@ import utils
 import file_util
 
 flags.DEFINE_string(
-    'config_file', 'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
+    'config_file',
+    'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
     'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
@@ -40,7 +41,7 @@ flags.DEFINE_bool(
     'gen_statvar_mcf', False, 'Generate MCF of StatVars. Default behaviour is'
     'to not generate the MCF file.')
 _FLAGS = flags.FLAGS
- 
+
 _YEAR_INDEX = 0
 
 # Columns in final cleaned CSV
@@ -145,9 +146,9 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
 
 def _clean_dataframe(df: pd.DataFrame, year: str) -> pd.DataFrame:
     """Clean the column names and offense type values in a dataframe."""
-    
+
     # config_path = os.path.join(os.path.dirname(_SCRIPT_PATH), 'table_config.json')
-    
+
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
     config = _YEARWISE_CONFIG['table_config']
@@ -157,14 +158,14 @@ def _clean_dataframe(df: pd.DataFrame, year: str) -> pd.DataFrame:
     year_config = config['3']
 
     if year_config:
-        if isinstance(year_config,list):
+        if isinstance(year_config, list):
             df.columns = year_config
         else:
             for year_range_str, columns in year_config.items():
                 year_range = year_range_str.split(",")
                 if year in year_range:
                     df.columns = columns
-    
+
     # if year in ['2023','2022','2021','2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013']:
     #     df.columns = [
     #         'offense type', 'total offenses', 'white',
@@ -209,13 +210,13 @@ def _clean_dataframe(df: pd.DataFrame, year: str) -> pd.DataFrame:
 def main(argv):
     csv_files = []
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
-       _YEARWISE_CONFIG = json.load(f)
+        _YEARWISE_CONFIG = json.load(f)
     config = _YEARWISE_CONFIG['year_config']
     with tempfile.TemporaryDirectory() as tmp_dir:
         for year, config in config['3'].items():
             xls_file_path = config["path"]
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
-            print("**************",xls_file_path)
+            print("**************", xls_file_path)
             read_file = pd.read_excel(xls_file_path, **config['args'])
             read_file = _clean_dataframe(read_file, year)
             read_file.insert(_YEAR_INDEX, 'Year', year)

@@ -30,7 +30,8 @@ import utils
 import file_util
 
 flags.DEFINE_string(
-    'config_file', 'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
+    'config_file',
+    'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
     'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
@@ -151,13 +152,13 @@ def _clean_dataframe(df: pd.DataFrame, year: str) -> pd.DataFrame:
 def main(argv):
     csv_files = []
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
-       config = json.load(f)
+        config = json.load(f)
     _YEARWISE_CONFIG = config['year_config']
     with tempfile.TemporaryDirectory() as tmp_dir:
         for year, config in _YEARWISE_CONFIG['2'].items():
             xls_file_path = config['path']
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
-            print("**************",xls_file_path)
+            print("**************", xls_file_path)
             read_file = pd.read_excel(xls_file_path, **config['args'])
             read_file = _clean_dataframe(read_file, year)
             read_file.insert(_YEAR_INDEX, 'Year', year)

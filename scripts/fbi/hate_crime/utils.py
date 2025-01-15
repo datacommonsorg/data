@@ -126,7 +126,7 @@ def agg_hate_crime_df(df: pd.DataFrame,
           Default aggregation is done with columns like year, place and state,
           additional columns based on which groupby needs to be done can be
           specified as a list. Defaults to
-          ['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'].
+          ['DATA_YEAR', 'PUG_AGENCY_NAME', 'STATE_ABBR'].
         agg_dict: dictionary where the key is the column to aggregate on and
           it's value is the aggregation method. Defaults to {}.
         multi_index: Flag if set returns multi-index dataframe.
@@ -140,7 +140,7 @@ def agg_hate_crime_df(df: pd.DataFrame,
         agg_hate_crime_df(df, groupby_cols=[], agg_dict={'INCIDENT_ID':'count'})
     """
     if groupby_cols is None:
-        groupby_cols = ['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR']
+        groupby_cols = ['DATA_YEAR', 'PUG_AGENCY_NAME', 'STATE_ABBR']
     if agg_dict is None:
         agg_dict = {}
     agg_tuple = list(agg_dict.items())[-1]
@@ -221,14 +221,14 @@ def make_time_place_aggregation(dataframe,
     city_df = dataframe[dataframe['AGENCY_TYPE_NAME'] == 'City']
     agg_city = agg_hate_crime_df(
         city_df,
-        groupby_cols=(['DATA_YEAR', 'PUB_AGENCY_NAME', 'STATE_ABBR'] +
+        groupby_cols=(['DATA_YEAR', 'PUG_AGENCY_NAME', 'STATE_ABBR'] +
                       groupby_cols),
         agg_dict=agg_dict,
         multi_index=multi_index)
     agg_city['Place'] = agg_city.apply(lambda row: convert_to_place_dcid(
-        row['STATE_ABBR'], row['PUB_AGENCY_NAME'], 'City'),
+        row['STATE_ABBR'], row['PUG_AGENCY_NAME'], 'City'),
                                        axis=1)
-    agg_city.drop(columns=['PUB_AGENCY_NAME', 'STATE_ABBR'], inplace=True)
+    agg_city.drop(columns=['PUG_AGENCY_NAME', 'STATE_ABBR'], inplace=True)
     agg_list.append(agg_city)
 
     return agg_list
