@@ -735,49 +735,55 @@ class USEducation:
             df_cleaned["school_state_code"] = \
                 "geoId/sch" + df_cleaned["Agency ID - NCES Assigned"]
 
-        # Consider only the required columns for Demographics
         curr_cols = df_cleaned.columns.values.tolist()
+        curr_place = curr_cols
         data_cols = []
+        data_place = []
+        # Excludes the column name that are not required for Demographics.
+        for pattern in self._exclude_columns:
+            pat = f"^((?!{pattern}).)*$"
+            r = re.compile(pat)
+            curr_cols = list(filter(r.match, curr_cols))
+        # Consideres only the column name patterns required for Demographics.
         for pattern in self._include_columns:
             r = re.compile(pattern)
             data_cols += list(filter(r.match, curr_cols))
-
-        # Consider only the required columns for Place Data
-        curr_place = curr_cols
-        data_place = []
+        # Excludes the column name that are not required for Place Data.
+        for pattern in self._exclude_col_place:
+            pat = f"^((?!{pattern}).)*$"
+            r = re.compile(pat)
+            curr_place = list(filter(r.match, curr_place))
+        # Consideres only the column name patterns required for Place Data.
         for pattern in self._include_col_place:
             r = re.compile(pattern)
             data_place += list(filter(r.match, curr_place))
 
-        # Create list of columns to check for null values
-        col_list = list(set([*data_cols, *data_place]))
-
-        # Remove columns that are not required
+        # Creating a list which is used to check for null values
+        col_list = [*data_cols, *data_place]
+        col_list = list(set(col_list))
+        # Creating an exclude_list which has columns that will not be null.
+        # Creating a drop_list through which the exclude_list items will be
+        # removed
         drop_list = [
             item for item in col_list if item not in self._exclude_list
         ]
-
-        # Replace unreadable text values with NaN
+        # Replacing '–','†' with nan values.
         df_cleaned = df_cleaned.replace(_UNREADABLE_TEXT)
-
-        # Handle duplicate school IDs
-        df_duplicate = df_cleaned[df_cleaned.duplicated(subset=self._school_id)]
+        # Writing duplicate school IDs to a file.
+        df_duplicate = df_cleaned.copy()
+        df_duplicate = df_duplicate[df_duplicate.duplicated(
+            subset=self._school_id)]
         if df_duplicate.shape[0] >= 1:
             df_duplicate.to_csv(self._duplicate_csv_place,
                                 index=False,
                                 mode='a',
                                 header=False)
-
-        # Drop rows where all required columns are null
+        # Dropping school IDs whose entities are null based on the drop_list
         df_cleaned = df_cleaned.dropna(how='all', subset=drop_list)
-
-        # Select only the place data columns
+        # Passing data_place list that contain columns required for place entities.
         df_place = df_cleaned[data_place]
-
-        # Sort values by data columns
         df_cleaned = df_cleaned.sort_values(by=data_cols, ascending=True)
-
-        # Drop duplicates based on School ID
+        # Dropping Duplicate Schools based on School ID which is sort_value.
         df_cleaned = df_cleaned.drop_duplicates(subset=self._school_id,
                                                 keep="first")
 
@@ -842,8 +848,6 @@ class USEducation:
         # Dropping empty obsevation values.
         df_cleaned["observation"] = df_cleaned["observation"].replace(
             to_replace={'': pd.NA})
-        df_cleaned = df_cleaned.drop(
-            df_cleaned[df_cleaned["observation"] < 0].index)
         df_cleaned = df_cleaned.dropna(subset=['observation'])
 
         return df_cleaned
@@ -943,8 +947,7 @@ class USEducation:
             self._final_df_place.to_csv(self._csv_file_place,
                                         index=False,
                                         quoting=csv.QUOTE_NONNUMERIC)
-            for Physical_Address, group in self._final_df_place.groupby(
-                    'Physical_Address'):
+            for Physical_Address, group in self._final_df_place.groupby('Physical_Address'):
                 if len(group) > 1:
                     city_dict[Physical_Address] = group[
                         'school_state_code'].tolist()
