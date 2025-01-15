@@ -35,7 +35,7 @@ import numpy as np
 
 from absl import app
 from absl import logging
-from aggregation_util import aggregate_dict, aggregate_value
+from .aggregation_util import aggregate_dict, aggregate_value
 from google.cloud import storage
 from retry.api import retry_call
 from typing import Union

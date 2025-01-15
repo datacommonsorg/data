@@ -1,0 +1,41 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex",
+            "curator_emails": [],
+            "provenance_url": "https://www.drought.gov/data-maps-tools/global-precipitation-climatology-centre-gpcc-standardized-precipitation-index-spi",
+            "provenance_description": "SPI for 1 degree grids calculated from monthly precipitation data using the Pearson distribution.",
+            "scripts": [
+                "download.py",
+                "preprocess_gpcc_spi.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "gpcc_spi.tmcf",
+                    "cleaned_csv": "output_files/gpcc_spi_pearson_01.csv"
+                },
+                {
+                    "template_mcf": "gpcc_spi.tmcf",
+                    "cleaned_csv": "output_files/gpcc_spi_pearson_03.csv"
+                },
+                {
+                    "template_mcf": "gpcc_spi.tmcf",
+                    "cleaned_csv": "output_files/gpcc_spi_pearson_06.csv"
+                },
+                {
+                    "template_mcf": "gpcc_spi.tmcf",
+                    "cleaned_csv": "output_files/gpcc_spi_pearson_09.csv"
+                },
+                {
+                    "template_mcf": "gpcc_spi.tmcf",
+                    "cleaned_csv": "output_files/gpcc_spi_pearson_36.csv"
+                },
+                {
+                    "template_mcf": "gpcc_spi.tmcf",
+                    "cleaned_csv": "output_files/gpcc_spi_pearson_72.csv"
+                }
+            ],
+            "cron_schedule": "0 0 30 * *"
+        }
+    ]
+}
