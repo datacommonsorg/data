@@ -368,26 +368,29 @@ def main():
                     FINAL_LIST.append(
                         clean_cdc_places_data(input_file, file_type, sep,
                                               release_year['release_year']))
-        df_final = pd.concat(FINAL_LIST)
-        df_final = df_final.sort_values(by='release_year')
-        # Added drop duplicate as all the year data are not present
-        # as part of latest year release of data only points modified
-        # are present for previoud years in the latest year.
-        df_final = df_final.drop_duplicates(
-            subset=[
-                'Year', 'Location', 'StatVar', 'DataValueTypeID',
-                'Low_Confidence_Limit_StatVar', 'High_Confidence_Limit_StatVar',
-                'Population_StatVar'
-            ],
-            # add all columns headers except value columns to get
-            # modified value from latest year release
-            keep='last')
-        df_final = df_final.drop('release_year', axis=1)
-        output_file = os.path.join(_OUTPUT_FILE_PATH, file_type + ".csv")
-        logging.info(
-            f"Writing output CSV for {file_type} for the year {release_year['release_year']}"
-        )
-        df_final.to_csv(output_file, index=False)
+        try:
+            df_final = pd.concat(FINAL_LIST)
+            df_final = df_final.sort_values(by='release_year')
+            # Added drop duplicate as all the year data are not present
+            # as part of latest year release of data only points modified
+            # are present for previoud years in the latest year.
+            df_final = df_final.drop_duplicates(
+                subset=[
+                    'Year', 'Location', 'StatVar', 'DataValueTypeID',
+                    'Low_Confidence_Limit_StatVar',
+                    'High_Confidence_Limit_StatVar', 'Population_StatVar'
+                ],
+                # add all columns headers except value columns to get
+                # modified value from latest year release
+                keep='last')
+            df_final = df_final.drop('release_year', axis=1)
+            output_file = os.path.join(_OUTPUT_FILE_PATH, file_type + ".csv")
+            logging.info(
+                f"Writing output CSV for {file_type} for the year {release_year['release_year']}"
+            )
+            df_final.to_csv(output_file, index=False)
+        except Exception as e:
+            logging.fatal(f"Error in processing and generating output {e}")
 
 
 if __name__ == "__main__":
