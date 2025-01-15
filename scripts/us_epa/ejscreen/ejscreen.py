@@ -1,4 +1,5 @@
 import io
+import os
 import zipfile
 import requests
 import pandas as pd
@@ -8,8 +9,11 @@ from absl import logging
 logging.set_verbosity(logging.INFO)
 logger = logging
 
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_CONFIG_PATH = os.path.join(_MODULE_DIR, 'config.json')
+
 # Load configuration from config.json
-with open('config.json', 'r') as f:
+with open(_CONFIG_PATH, 'r') as f:
     config = json.load(f)
 
 YEARS = config["YEARS"]
@@ -23,12 +27,6 @@ TEMPLATE_MCF = config["TEMPLATE_MCF"]
 # data: dictionary of dataframes in the format {year: dataframe}
 # outfilename: name of the csv that data will be written to
 # write_csv concatenates the dataframe from each year together
-
-# def read_config():
-#     # Load configuration from config.json
-#     with open('config.json', 'r') as f:
-#         config = json.load(f)
-#     return config
 
 
 def write_csv(data, outfilename):
