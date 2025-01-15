@@ -283,6 +283,10 @@
             "biasMotivation": "religion",
             "targetedReligion": "Mormonism"
         },
+        "Anti-Church of Jesus Christ": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Mormonism"
+        },
         "Anti-Jehovah's Witness": {
             "biasMotivation": "religion",
             "targetedReligion": "JehovahsWitnesses"

@@ -28,6 +28,11 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils
 
 import utils
 
+import file_util
+
+flags.DEFINE_string(
+    'config_file', 'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
+    'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
     'MCF. Default behaviour is to write the artifacts in the current working'
@@ -44,144 +49,10 @@ _OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity')
 
 # A config that maps the year to corresponding xls file with args to be used
 # with pandas.read_excel()
-_YEARWISE_CONFIG = {
-    '2020': {
-        'type': 'xls',
-        'path': '../source_data/2020/table_1.xlsx',
-        'args': {
-            'header': 4,
-            'skipfooter': 3
-        }
-    },
-    '2019': {
-        'type': 'xls',
-        'path': '../source_data/2019/table_1.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 3
-        }
-    },
-    '2018': {
-        'type': 'xls',
-        'path': '../source_data/2018/table_1.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 3
-        }
-    },
-    '2017': {
-        'type': 'xls',
-        'path': '../source_data/2017/table_1.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 3
-        }
-    },
-    '2016': {
-        'type': 'xls',
-        'path': '../source_data/2016/table_1.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 3
-        }
-    },
-    '2015': {
-        'type': 'xls',
-        'path': '../source_data/2015/table_1.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 3
-        }
-    },
-    '2014': {
-        'type': 'xls',
-        'path': '../source_data/2014/table_1.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 4
-        }
-    },
-    '2013': {
-        'type': 'xls',
-        'path': '../source_data/2013/table_1.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 4
-        }
-    },
-    '2012': {
-        'type': 'xls',
-        'path': '../source_data/2012/table_1.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 3
-        }
-    },
-    '2011': {
-        'type': 'xls',
-        'path': '../source_data/2011/table_1.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 3
-        }
-    },
-    '2010': {
-        'type': 'xls',
-        'path': '../source_data/2010/table_1.xls',
-        'args': {
-            'header': 2,
-            'skipfooter': 3
-        }
-    },
-    '2009': {
-        'type': 'xls',
-        'path': '../source_data/2009/table_1.xls',
-        'args': {
-            'header': 2,
-            'skipfooter': 3
-        }
-    },
-    '2008': {
-        'type': 'xls',
-        'path': '../source_data/2008/table_1.xls',
-        'args': {
-            'header': 2,
-            'skipfooter': 3
-        }
-    },
-    '2007': {
-        'type': 'xls',
-        'path': '../source_data/2007/table_1.xls',
-        'args': {
-            'header': 2,
-            'skipfooter': 3
-        }
-    },
-    '2006': {
-        'type': 'xls',
-        'path': '../source_data/2006/table_1.xls',
-        'args': {
-            'header': 2,
-            'skipfooter': 3
-        }
-    },
-    '2005': {
-        'type': 'xls',
-        'path': '../source_data/2005/table_1.xls',
-        'args': {
-            'header': 2,
-            'skipfooter': 3
-        }
-    },
-    '2004': {
-        'type': 'xls',
-        'path': '../source_data/2004/table_1.xls',
-        'args': {
-            'header': 2,
-            'skipfooter': 3
-        }
-    }
-}
+
+# with file_util.FileIO(_FLAGS.config_file, 'r') as f:
+#     config = json.load(f)
+# _YEARWISE_CONFIG = config['year_config']
 
 
 def _write_row(year: int, statvar_dcid: str, quantity: str,
@@ -260,12 +131,17 @@ def _clean_dataframe(df: pd.DataFrame) -> pd.DataFrame:
 
 def main(argv):
     csv_files = []
+    with file_util.FileIO(_FLAGS.config_file, 'r') as f:
+        config = json.load(f)
+    _YEARWISE_CONFIG = config['year_config']
     with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in _YEARWISE_CONFIG.items():
-            xls_file_path = os.path.join(_SCRIPT_PATH, config['path'])
+        for year, config in _YEARWISE_CONFIG['1'].items():
+            xls_file_path = config['path']
+            print("*************",xls_file_path)
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
+            read_file = pd.read_excel(xls_file_path,**config['args'])
 
-            read_file = pd.read_excel(xls_file_path, **config['args'])
+            # read_file = pd.read_excel(xls_file_path, **config['args'])
             read_file = _clean_dataframe(read_file)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, index=None, header=True)

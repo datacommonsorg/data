@@ -193,6 +193,10 @@
             "biasMotivation": "religion",
             "targetedReligion": "Mormonism"
         },
+        "Anti-Church of Jesus Christ": {
+            "biasMotivation": "religion",
+            "targetedReligion": "Mormonism"
+        },
         "Anti-Buddhist": {
             "biasMotivation": "religion",
             "targetedReligion": "Buddhism"
@@ -404,6 +408,9 @@
         },
         "Human Trafficking, Commercial Sex Acts": {
             "crimeType": "HumanTrafficking_CommercialSexActs"
+        },
+        "Human Trafficking, Involuntary Servitude": {
+            "crimeType": "HumanTrafficking_InvoluntaryServitude"
         },
         "Hacking/Computer Invasion": {
             "crimeType": "HackingOrComputerInvasion"
