@@ -36,22 +36,19 @@ _OUTPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'cleaned_csv')
 if not os.path.exists(_OUTPUT_FILE_PATH):
     os.mkdir(_OUTPUT_FILE_PATH)
 
-# Initialize GCP storage client
-client = storage.Client()
 
-# Define your GCP bucket and file name
-bucket_name = 'datcom-csv'  # Replace with your bucket name
-file_name = 'cdc500_places/download_config.json'  # Replace with your file name
+def read_config_file_from_gcs():
+    client = storage.Client()
+    bucket_name = 'datcom-csv'
+    file_name = 'cdc500_places/download_config.json'
+    # Download the file from GCP Storage
+    bucket = client.get_bucket(bucket_name)
+    blob = bucket.blob(file_name)
+    # Read the JSON content from the blob
+    json_data = blob.download_as_text()
+    CONFIG_FILE = json.loads(json_data)
+    return CONFIG_FILE
 
-# Download the file from GCP Storage
-bucket = client.get_bucket(bucket_name)
-blob = bucket.blob(file_name)
-
-# Read the JSON content from the blob
-json_data = blob.download_as_text()
-
-# Load the JSON data
-_CONFIG_FILE = json.loads(json_data)
 
 # Mapping of measure abbreviations to StatVar dcids
 MEASURE_TO_STATVAR_MAP = {
@@ -359,10 +356,11 @@ def clean_cdc_places_data(input_file, file_type, sep, release_year):
 def main():
     """Main function to generate the cleaned csv file."""
     logging.set_verbosity(2)
+    CONFIG_FILE = read_config_file_from_gcs()
     sep = ","
     for file_type in ["County", "City", "ZipCode", "CensusTract"]:
         FINAL_LIST = []
-        for release_year in _CONFIG_FILE:
+        for release_year in CONFIG_FILE:
             for file in release_year['parameter']:
                 if file['FILE_TYPE'] == file_type:
                     input_file = os.path.join(_INPUT_FILE_PATH,
