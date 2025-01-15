@@ -947,7 +947,8 @@ class USEducation:
             self._final_df_place.to_csv(self._csv_file_place,
                                         index=False,
                                         quoting=csv.QUOTE_NONNUMERIC)
-            for Physical_Address, group in self._final_df_place.groupby('Physical_Address'):
+            for Physical_Address, group in self._final_df_place.groupby(
+                    'Physical_Address'):
                 if len(group) > 1:
                     city_dict[Physical_Address] = group[
                         'school_state_code'].tolist()
