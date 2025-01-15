@@ -48,9 +48,11 @@ json_data = blob.download_as_text()
 # Load the JSON data
 _CONFIG_FILE = json.loads(json_data)
 
+
 @retry(tries=3, delay=5, backoff=5)
 def retry_method(url):
     return requests.get(url)
+
 
 def download_file(release_year, url: str, save_path: str):
     """
@@ -60,10 +62,13 @@ def download_file(release_year, url: str, save_path: str):
     Returns:
         a downloaded csv file in the specified file path
     """
-    logging.info(f'Downloading {url} for the year {release_year} to {save_path}')
+    logging.info(
+        f'Downloading {url} for the year {release_year} to {save_path}')
     request = retry_method(url)
     if request.status_code != 200:
-            logging.fatal(f'Failed to retrieve {url} for the year {release_year} to {save_path}')    
+        logging.fatal(
+            f'Failed to retrieve {url} for the year {release_year} to {save_path}'
+        )
     with open(save_path, 'wb') as file:
         file.write(request.content)
 

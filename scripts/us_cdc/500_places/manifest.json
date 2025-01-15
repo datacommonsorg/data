@@ -8,12 +8,24 @@
             "provenance_url": "https://www.cdc.gov/places/index.html",
             "provenance_description": "Variables related to health from the CDC",
             "scripts": [
-                "run.sh"
+                "download_bulk.py","parse_cdc_places.py"
             ],
             "import_inputs": [
                 {
                     "template_mcf": "cdc_places.tmcf",
-                    "cleaned_csv": "cleaned_csv/*.csv"
+                    "cleaned_csv": "cleaned_csv/County.csv"
+                },
+                {
+                    "template_mcf": "cdc_places.tmcf",
+                    "cleaned_csv": "cleaned_csv/City.csv"
+                },
+                {
+                    "template_mcf": "cdc_places.tmcf",
+                    "cleaned_csv": "cleaned_csv/ZipCode.csv"
+                },
+                {
+                    "template_mcf": "cdc_places.tmcf",
+                    "cleaned_csv": "cleaned_csv/CensusTract.csv"
                 }
             ],
             "cron_schedule": "0 11 * * 2"

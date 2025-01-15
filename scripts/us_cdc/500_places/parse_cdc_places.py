@@ -221,9 +221,9 @@ def clean_census_tract_data(data):
             "LocationID", "CategoryID", "Short_Question_Text"
         ])
         data = data[[
-            'Year', 'Data_Value', 'Low_Confidence_Limit', 'High_Confidence_Limit',
-            'TotalPopulation', 'Location', 'StatVar', 'DataValueTypeID',
-            'release_year', 'Low_Confidence_Limit_StatVar',
+            'Year', 'Data_Value', 'Low_Confidence_Limit',
+            'High_Confidence_Limit', 'TotalPopulation', 'Location', 'StatVar',
+            'DataValueTypeID', 'release_year', 'Low_Confidence_Limit_StatVar',
             'High_Confidence_Limit_StatVar', 'Population_StatVar'
         ]]
         return data
@@ -297,8 +297,9 @@ def clean_zip_code_data(data):
                     inplace=True)
         data = data.drop(columns=[
             "Measure", "Category", "DataSource", "Data_Value_Type",
-            "Data_Value_Unit", "Data_Value_Footnote_Symbol", "Data_Value_Footnote",
-            "Geolocation", "LocationName", "CategoryID", "Short_Question_Text"
+            "Data_Value_Unit", "Data_Value_Footnote_Symbol",
+            "Data_Value_Footnote", "Geolocation", "LocationName", "CategoryID",
+            "Short_Question_Text"
         ])
         return data
     except Exception as e:
@@ -321,7 +322,8 @@ def generate_statvar_names(data):
                 "MeasureId"].map(MEASURE_TO_STATVAR_MAP)
         data["Population_StatVar"] = "dcs:SampleSize_" + data["MeasureId"].map(
             MEASURE_TO_STATVAR_MAP)
-        data["MeasureId"] = "dcs:" + data["MeasureId"].map(MEASURE_TO_STATVAR_MAP)
+        data["MeasureId"] = "dcs:" + data["MeasureId"].map(
+            MEASURE_TO_STATVAR_MAP)
         data["DataValueTypeID"] = "dcs:" + data["DataValueTypeID"].map(
             DATA_VALUE_TYPE_MAP)
         return data
@@ -337,7 +339,8 @@ def clean_cdc_places_data(input_file, file_type, sep, release_year):
     Returns:
         a cleaned dataframe
     """
-    logging.info(f"Processing input files for {file_type} for the year {release_year}")
+    logging.info(
+        f"Processing input files for {file_type} for the year {release_year}")
     data = pd.read_csv(input_file, sep=sep)
     data["release_year"] = release_year
     data = generate_statvar_names(data)
@@ -383,7 +386,9 @@ def main():
             keep='last')
         df_final = df_final.drop('release_year', axis=1)
         output_file = os.path.join(_OUTPUT_FILE_PATH, file_type + ".csv")
-        logging.info(f"Writing output CSV for {file_type} for the year {release_year['release_year']}")
+        logging.info(
+            f"Writing output CSV for {file_type} for the year {release_year['release_year']}"
+        )
         df_final.to_csv(output_file, index=False)
 
 
