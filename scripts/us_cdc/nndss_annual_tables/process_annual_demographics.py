@@ -278,7 +278,7 @@ def process_table_4(file_list):
             full_sv_df = pd.concat([full_sv_df, sv_df], ignore_index=True)
         return clean_dataframe, full_sv_df
     except Exception as e:
-        logging.error(f"Error processing file: {filename}. Error: {e}")
+        logging.fatal(f"Error processing file: {filename}. Error: {e}")
 
 
 def process_table_5(file_list):
@@ -303,7 +303,7 @@ def process_table_5(file_list):
             full_sv_df = pd.concat([full_sv_df, sv_df], ignore_index=True)
         return clean_dataframe, full_sv_df
     except Exception as e:
-        logging.error(f"Error processing file: {filename}. Error: {e}")
+        logging.fatal(f"Error processing file: {filename}. Error: {e}")
 
 
 def process_table_6(file_list):
@@ -328,7 +328,7 @@ def process_table_6(file_list):
             full_sv_df = pd.concat([full_sv_df, sv_df], ignore_index=True)
         return clean_dataframe, full_sv_df
     except Exception as e:
-        logging.error(f"Error processing file: {filename}. Error: {e}")
+        logging.fatal(f"Error processing file: {filename}. Error: {e}")
 
 
 def process_table_7(file_list):
@@ -355,7 +355,7 @@ def process_table_7(file_list):
         return clean_dataframe, full_sv_df
 
     except Exception as e:
-        logging.error(f"Error processing file: {filename}. Error: {e}")
+        logging.fatal(f"Error processing file: {filename}. Error: {e}")
 
 
 def generate_statvars(full_sv_df):

@@ -178,7 +178,6 @@ _PV_MAP = {
 #TODO: Wrap this within the main function
 
 _DISEASE_DCID_DF = pd.read_csv("./data/annual_tables_counts.csv")
-print(_DISEASE_DCID_DF.head)
 _DISEASE_DCID_DF = _DISEASE_DCID_DF[_DISEASE_DCID_DF['replacement'] != 'NAN']
 
 
@@ -344,7 +343,7 @@ def make_name_str(column_components, dcid):
         name = name.rstrip()
         return name
     except Exception as e:
-        logging.error(
+        logging.fatal(
             f"Error creating name string for dcid: {dcid}. Error: {e}")
 
 
@@ -453,7 +452,6 @@ def generate_statvar_map_for_columns(column_list, place_list):
                         key = 'Node: dcid:' + dcid
                         if key not in sv_map.keys():
                             sv_map[key] = svdict_tmp
-                        # print("type-----------",type(dcid_df))
                         dcid_df = dcid_df._append(
                             {
                                 'Reporting Area': place,
