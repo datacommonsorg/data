@@ -38,6 +38,8 @@
       "2023": "EJSCREEN_2023_BG_with_AS_CNMI_GU_VI",
       "2024": "EJScreen_2024_Tract_with_AS_CNMI_GU_VI"
     },
+    "URL_TEMPLATE": "https://gaftp.epa.gov/EJSCREEN/{year}/{zip_filename}.zip",
+    "URL_TEMPLATE_NON_ZIPPED": "https://gaftp.epa.gov/EJSCREEN/{year}/{filename}.csv",
     "TEMPLATE_MCF": [
       {
         "Node": "E:ejscreen_airpollutants->E0",
