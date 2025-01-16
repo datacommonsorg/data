@@ -1,5 +1,7 @@
 import logging
 import json
+import os
+import time
 
 from absl import flags
 from absl import app
@@ -14,8 +16,14 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('import_name', '', 'Absoluate import name.')
 flags.DEFINE_string('import_config', '', 'Import executor configuration.')
 
+CLOUD_RUN_JOB_NAME = os.getenv("CLOUD_RUN_JOB")
+# This label categorizes log entries, which is useful for filtering and creating metrics based on logs.
+LOG_TYPE_LABEL = "log_type"
+AUTO_IMPORT_JOB_STATUS_LOG_TYPE = "auto-import-job-status"
+
 
 def scheduled_updates(absolute_import_name: str, import_config: str):
+    start_time = time.time()
     logging.info(absolute_import_name)
     cfg = json.loads(import_config)
     config = configs.ExecutorConfig(**cfg)
@@ -35,6 +43,17 @@ def scheduled_updates(absolute_import_name: str, import_config: str):
         local_repo_dir=config.local_repo_dir)
     result = executor.execute_imports_on_update(absolute_import_name)
     logging.info(result)
+    elapsed_time_secs = int(time.time() - start_time)
+    message = (f"Cloud Run Job [{CLOUD_RUN_JOB_NAME}] completed with status= "
+               f"[{result.status}] in [{elapsed_time_secs}] seconds.)")
+    logging.log(
+        logging.INFO if result.status == 'succeeded' else logging.ERROR,
+        json.dumps({
+            LOG_TYPE_LABEL: AUTO_IMPORT_JOB_STATUS_LOG_TYPE,
+            "message": message,
+            "status": result.status,
+            "latency_secs": elapsed_time_secs,
+        }))
     if result.status == 'failed':
         return 1
     return 0
