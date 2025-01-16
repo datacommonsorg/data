@@ -61,7 +61,7 @@ def create_or_update_cloud_run_job(project_id: str, location: str, job_id: str,
 
     res = run_v2.types.ResourceRequirements(limits=resources)
     container = run_v2.Container(image=image, env=env, resources=res, args=args)
-    # Labels allow filtering of automated import cloud run jobs, used in log-based metrs.
+    # Labels allow filtering of automated import cloud run jobs, used in log-based metrics.
     exe_template = run_v2.ExecutionTemplate(
         labels={"datacommons_cloud_run_job_type": "auto-import_job"},
         template=run_v2.TaskTemplate(
