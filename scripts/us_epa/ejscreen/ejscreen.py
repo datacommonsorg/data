@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import io
 import os
 import zipfile
@@ -45,6 +44,7 @@ URL_TEMPLATE_NON_ZIPPED = config["URL_TEMPLATE_NON_ZIPPED"]
 # outfilename: name of the csv that data will be written to
 # write_csv concatenates the dataframe from each year together
 
+
 def write_csv(data, outfilename):
     full_df = pd.DataFrame()
     for curr_year, one_year_df in data.items():
@@ -60,9 +60,11 @@ def write_csv(data, outfilename):
     full_df = full_df.replace('None', '')
     full_df.to_csv(outfilename, index=False)
 
+
 def write_tmcf(outfilename):
     with open(outfilename, 'w') as f_out:
         f_out.write(TEMPLATE_MCF)
+
 
 if __name__ == '__main__':
     dfs = {}
@@ -81,19 +83,28 @@ if __name__ == '__main__':
                 with zipfile.ZipFile(io.BytesIO(response.content)) as zfile:
                     with zfile.open(f'{FILENAMES[year]}.csv', 'r') as newfile:
                         dfs[year] = pd.read_csv(newfile, usecols=columns)
-                logger.info(f"File downloaded and processed for {year} successfully")
+                logger.info(
+                    f"File downloaded and processed for {year} successfully")
             else:
-                logger.error(f"Failed to download file for {year}. HTTP Status Code: {response.status_code}")
+                logger.error(
+                    f"Failed to download file for {year}. HTTP Status Code: {response.status_code}"
+                )
         else:
-            url = URL_TEMPLATE_NON_ZIPPED.format(year=year, filename=FILENAMES[year])
+            url = URL_TEMPLATE_NON_ZIPPED.format(year=year,
+                                                 filename=FILENAMES[year])
             logger.info(f"Requesting CSV file: {url}")
             response = requests.get(url, verify=False)
 
             if response.status_code == 200:
-                dfs[year] = pd.read_csv(io.StringIO(response.text), sep=',', usecols=columns)
-                logger.info(f"CSV downloaded and processed for {year} successfully")
+                dfs[year] = pd.read_csv(io.StringIO(response.text),
+                                        sep=',',
+                                        usecols=columns)
+                logger.info(
+                    f"CSV downloaded and processed for {year} successfully")
             else:
-                logger.error(f"Failed to download CSV for {year}. HTTP Status Code: {response.status_code}")
+                logger.error(
+                    f"Failed to download CSV for {year}. HTTP Status Code: {response.status_code}"
+                )
 
         # Rename weird column names to match other years
         if year == '2024':
