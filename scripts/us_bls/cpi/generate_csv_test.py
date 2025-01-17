@@ -13,20 +13,10 @@
 # limitations under the License.
 import unittest
 import os
-import frozendict
 from absl import logging
-from .generate_csv import process
 from .generate_csv import retry_method
-global buffer
-import requests
 import io
 import pandas as pd
-
-
-#@retry(tries=3, delay=5, backoff=5)
-def retry_method(url, header):
-    return requests.get(url, headers=header)
-
 
 _MODULE_DIR = os.path.dirname(__file__)
 TEST_DATA_DIR = os.path.join(_MODULE_DIR, 'test_data')
@@ -72,10 +62,8 @@ class TestGenerateCSV(unittest.TestCase):
         in_df = in_df[in_df['date'].dt.year > start_date]
         in_df['date'] = in_df['date'].dt.strftime('%Y-%m')
         in_df["cpi"] = pd.to_numeric(in_df["cpi"], errors='coerce')
-        # print("==================in_df ",in_df)
         df_from_csv = pd.read_csv(
             os.path.join(TEST_DATA_DIR, "cpi_u_1913_2024.csv"))
-        #print("==================df_from_csv ",df_from_csv)
         pd.testing.assert_frame_equal(in_df, df_from_csv)
 
 
