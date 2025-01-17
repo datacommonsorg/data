@@ -29,13 +29,13 @@ import requests
 
 DATA_URLS = {
     "county_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/swc5-untb/rows.csv?accessType=DOWNLOAD",
+        "https://data.cdc.gov/api/views/swc5-untb/rows.csv?accessType=DOWNLOAD",
     "city_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/eav7-hnsx/rows.csv?accessType=DOWNLOAD",
+        "https://data.cdc.gov/api/views/eav7-hnsx/rows.csv?accessType=DOWNLOAD",
     "censustract_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/cwsq-ngmh/rows.csv?accessType=DOWNLOAD",
+        "https://data.cdc.gov/api/views/cwsq-ngmh/rows.csv?accessType=DOWNLOAD",
     "zipcode_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/qnzd-25i4/rows.csv?accessType=DOWNLOAD"
+        "https://data.cdc.gov/api/views/qnzd-25i4/rows.csv?accessType=DOWNLOAD"
 }
 
 
