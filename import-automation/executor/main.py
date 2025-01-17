@@ -17,9 +17,11 @@ flags.DEFINE_string('import_name', '', 'Absoluate import name.')
 flags.DEFINE_string('import_config', '', 'Import executor configuration.')
 
 CLOUD_RUN_JOB_NAME = os.getenv("CLOUD_RUN_JOB")
-# This label categorizes log entries, which is useful for filtering
-# and creating metrics based on logs.
+# The `log_type` label helps filter log lines, which is useful for creating
+# log-based metrics.  Each log type has a similar set of fields for easier parsing.
 LOG_TYPE_LABEL = "log_type"
+# log_type for capturing status of auto import cloud run jobs.
+# Required fields - log_type, message, status, latency_secs.
 AUTO_IMPORT_JOB_STATUS_LOG_TYPE = "auto-import-job-status"
 
 
