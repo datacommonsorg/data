@@ -2,9 +2,7 @@
     "import_specifications": [
       {
         "import_name": "CDC_PM25CensusTract",
-        "curator_emails": [
-          "sudhisha@google.com"
-        ],
+        "curator_emails": [],
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
@@ -33,9 +31,7 @@
       },
       {
         "import_name": "CDC_OzoneCensusTract",
-        "curator_emails": [
-          "sudhisha@google.com"
-        ],
+        "curator_emails": [],
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
@@ -64,9 +60,7 @@
       },
       {
         "import_name": "CDC_PM25County",
-        "curator_emails": [
-          "sudhisha@google.com"
-        ],
+        "curator_emails": [],
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
@@ -83,9 +77,7 @@
       },
       {
         "import_name": "CDC_OzoneCounty",
-        "curator_emails": [
-          "sudhisha@google.com"
-        ],
+        "curator_emails": [],
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
