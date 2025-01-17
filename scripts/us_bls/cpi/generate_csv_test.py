@@ -15,8 +15,8 @@ import unittest
 import os
 import frozendict
 from absl import logging
-from generate_csv import process
-from generate_csv import retry_method
+from .generate_csv import process
+from .generate_csv import retry_method
 global buffer
 import requests
 import io
