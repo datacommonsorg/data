@@ -28,15 +28,17 @@ from retry import retry
 
 import os
 from pathlib import Path
-
 '''Defining the retry_method which will accepts below parameters
    url: input url
    headers: headers if you want to set
 '''
 global buffer
+
+
 @retry(tries=3, delay=5, backoff=5)
-def retry_method(url,header):
-    return requests.get(url,headers=header)
+def retry_method(url, header):
+    return requests.get(url, headers=header)
+
 
 # Dict from series names to download links
 CSV_URLS = frozendict.frozendict({
@@ -62,57 +64,65 @@ SERIES_IDS = frozendict.frozendict({
     "cpi_w_1913_2024": "CWSR0000SA0",
     "c_cpi_u_1999_2024": "SUUR0000SA0E"
 })
-def downloadUrl(url,header,series_name,_INPUT_FILE_PATH,response,buffer):
-    
-    #Start saving file locally
-        logging.info(f'Downloading files from url {url} and svae to path {_INPUT_FILE_PATH}')
-        response.raise_for_status()
-        
-        if response.status_code != 200:
-            logging.fatal(f"No data available for URL: {url}. Aborting download.")
-        
-        elif response.status_code == 200:
-            if not response.content:
-                logging.fatal(
-                    f"No data available for URL: {url}. Aborting download.")
-            filename = f"{series_name}.csv"
-            logging.info(f'filename: {filename} _INPUT_FILE_PATH : {_INPUT_FILE_PATH}')
-            file_path = os.path.join(_INPUT_FILE_PATH, filename)
-            with open(file_path, 'wb') as f:
-                f.write(response.content)
-        #End file after saving locally
 
-def process(buffer,series_id,series_name,_OUTOUT_FILE_PATH):
-    
-     # The raw csv has four columns: "series_id", "year", "period", "value",
-        # and "footnote_codes".
-        # "value" is the CPI values.
-        # "year" is of the form "YYYY".
-        # "period" is the months of the observations and is of the form "MM"
-        # preceded by char 'M', e.g. "M05".
-    
+
+def downloadUrl(url, header, series_name, _INPUT_FILE_PATH, response, buffer):
+
+    #Start saving file locally
+    logging.info(
+        f'Downloading files from url {url} and svae to path {_INPUT_FILE_PATH}')
+    response.raise_for_status()
+
+    if response.status_code != 200:
+        logging.fatal(f"No data available for URL: {url}. Aborting download.")
+
+    elif response.status_code == 200:
+        if not response.content:
+            logging.fatal(
+                f"No data available for URL: {url}. Aborting download.")
+        filename = f"{series_name}.csv"
+        logging.info(
+            f'filename: {filename} _INPUT_FILE_PATH : {_INPUT_FILE_PATH}')
+        file_path = os.path.join(_INPUT_FILE_PATH, filename)
+        with open(file_path, 'wb') as f:
+            f.write(response.content)
+    #End file after saving locally
+
+
+def process(buffer, series_id, series_name, _OUTOUT_FILE_PATH):
+
+    # The raw csv has four columns: "series_id", "year", "period", "value",
+    # and "footnote_codes".
+    # "value" is the CPI values.
+    # "year" is of the form "YYYY".
+    # "period" is the months of the observations and is of the form "MM"
+    # preceded by char 'M', e.g. "M05".
+
     try:
-            in_df = pd.read_csv(buffer, sep=r"\s+", dtype="str")
-            logging.info(f'buffer=========== {buffer} series_id======={series_id} series_name=========={series_name} _OUTOUT_FILE_PATH========{_OUTOUT_FILE_PATH}')
-            # "M13" is annual averages
-            in_df = in_df[(in_df["series_id"] == series_id) &
-                        (in_df["period"] != "M13")]
-            # Format "date" column as "YYYY-MM"
-            in_df["date"] = in_df["year"] + "-" + in_df["period"].str[-2:]
-            in_df = in_df[["date", "value"]]
-            in_df.columns = ["date", "cpi"]
-            # Convert 'date' column to datetime format
-            date_from_start_processing = _FLAGS.date_from_start_processing
-            logging.info(f"date_from_start_processing {date_from_start_processing}")
-            in_df['date'] = pd.to_datetime(in_df['date'], format='%Y-%m')
-            in_df = in_df[in_df['date'].dt.year > date_from_start_processing]
-            in_df['date'] = in_df['date'].dt.strftime('%Y-%m')
-            logging.info(f"Data frame before writing to output csv file {in_df}")
-            in_df.to_csv(_OUTOUT_FILE_PATH + "/" + series_name + ".csv",
-                        index=False)
+        in_df = pd.read_csv(buffer, sep=r"\s+", dtype="str")
+        logging.info(
+            f'buffer=========== {buffer} series_id======={series_id} series_name=========={series_name} _OUTOUT_FILE_PATH========{_OUTOUT_FILE_PATH}'
+        )
+        # "M13" is annual averages
+        in_df = in_df[(in_df["series_id"] == series_id) &
+                      (in_df["period"] != "M13")]
+        # Format "date" column as "YYYY-MM"
+        in_df["date"] = in_df["year"] + "-" + in_df["period"].str[-2:]
+        in_df = in_df[["date", "value"]]
+        in_df.columns = ["date", "cpi"]
+        # Convert 'date' column to datetime format
+        date_from_start_processing = _FLAGS.date_from_start_processing
+        logging.info(f"date_from_start_processing {date_from_start_processing}")
+        in_df['date'] = pd.to_datetime(in_df['date'], format='%Y-%m')
+        in_df = in_df[in_df['date'].dt.year > date_from_start_processing]
+        in_df['date'] = in_df['date'].dt.strftime('%Y-%m')
+        logging.info(f"Data frame before writing to output csv file {in_df}")
+        in_df.to_csv(_OUTOUT_FILE_PATH + "/" + series_name + ".csv",
+                     index=False)
     except Exception as e:
-            logging.fatal(f"Error while processing input files {e}")
-    
+        logging.fatal(f"Error while processing input files {e}")
+
+
 def main(_):
     """Runs the script. See module docstring."""
     _INPUT_FILE_PATH = os.path.join(MODULE_DIR, _FLAGS.input_path)
@@ -131,13 +141,15 @@ def main(_):
                 'application/octet-stream',
         }
         #Retry method is calling
-        response = retry_method(url,header=header)
+        response = retry_method(url, header=header)
         response.raise_for_status()
         buffer = io.StringIO(response.text)
         #Calling download method to download the file locally
-        downloadUrl(url,header,series_name,_INPUT_FILE_PATH,response,buffer)
+        downloadUrl(url, header, series_name, _INPUT_FILE_PATH, response,
+                    buffer)
         #Calling process method
-        process(buffer,series_id,series_name,_OUTOUT_FILE_PATH)
-        
+        process(buffer, series_id, series_name, _OUTOUT_FILE_PATH)
+
+
 if __name__ == "__main__":
     app.run(main)
