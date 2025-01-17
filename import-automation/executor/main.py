@@ -49,11 +49,14 @@ def scheduled_updates(absolute_import_name: str, import_config: str):
     elapsed_time_secs = int(time.time() - start_time)
     message = (f"Cloud Run Job [{CLOUD_RUN_JOB_NAME}] completed with status= "
                f"[{result.status}] in [{elapsed_time_secs}] seconds.)")
-    logging.log(
-        logging.INFO if result.status == 'succeeded' else logging.ERROR,
+    # With Python logging lib, json is interpreted as text (populates textPayload field).
+    # Using print to populate json as structured logs (populate jsonPayload field).
+    # Ref: https://cloud.google.com/functions/docs/monitoring/logging#writing_structured_logs
+    print(
         json.dumps({
             LOG_TYPE_LABEL: AUTO_IMPORT_JOB_STATUS_LOG_TYPE,
             "message": message,
+            "severity": "INFO" if result.status == 'succeeded' else "ERROR",
             "status": result.status,
             "latency_secs": elapsed_time_secs,
         }))
