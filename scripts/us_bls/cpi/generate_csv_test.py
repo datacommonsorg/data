@@ -66,10 +66,10 @@ class TestGenerateCSV(unittest.TestCase):
         in_df = in_df[["date", "value"]]
         in_df.columns = ["date", "cpi"]
         # Convert 'date' column to datetime format
-        date_from_start_processing = int(46)
-        logging.info(f"date_from_start_processing {date_from_start_processing}")
+        start_date = int(46)
+        logging.info(f"start_date {start_date}")
         in_df['date'] = pd.to_datetime(in_df['date'], format='%Y-%m')
-        in_df = in_df[in_df['date'].dt.year > date_from_start_processing]
+        in_df = in_df[in_df['date'].dt.year > start_date]
         in_df['date'] = in_df['date'].dt.strftime('%Y-%m')
         in_df["cpi"] = pd.to_numeric(in_df["cpi"], errors='coerce')
         # print("==================in_df ",in_df)

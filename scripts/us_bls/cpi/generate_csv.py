@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Downloading and converting BLS CPI raw csv files to csv files of two columns:
+Downloads and converts BLS CPI raw csv files to csv files of two columns:
 "date" and "cpi", where "date" is of the form "YYYY-MM" and "cpi" is numeric.
 
 Usage: python3 generate_csv.py
@@ -51,7 +51,7 @@ CSV_URLS = frozendict.frozendict({
 })
 _FLAGS = flags.FLAGS
 flags.DEFINE_integer(
-    'date_from_start_processing', 1946,
+    'start_date', 1946,
     'Data will process from assigned date, if user want they can change also')
 flags.DEFINE_string('input_path', 'input_files', 'Input files path')
 flags.DEFINE_string('output_path', 'output', 'Output files path')
@@ -111,12 +111,11 @@ def process(buffer, series_id, series_name, _OUTOUT_FILE_PATH):
         in_df = in_df[["date", "value"]]
         in_df.columns = ["date", "cpi"]
         # Convert 'date' column to datetime format
-        date_from_start_processing = _FLAGS.date_from_start_processing
-        logging.info(f"date_from_start_processing {date_from_start_processing}")
+        start_date = _FLAGS.start_date
+        logging.info(f"start_date {start_date}")
         in_df['date'] = pd.to_datetime(in_df['date'], format='%Y-%m')
-        in_df = in_df[in_df['date'].dt.year > date_from_start_processing]
+        in_df = in_df[in_df['date'].dt.year > start_date]
         in_df['date'] = in_df['date'].dt.strftime('%Y-%m')
-        logging.info(f"Data frame before writing to output csv file {in_df}")
         in_df.to_csv(_OUTOUT_FILE_PATH + "/" + series_name + ".csv",
                      index=False)
     except Exception as e:
