@@ -153,5 +153,5 @@ See About the Import > Status above for context.
 }
 ```
 
-Note: Data is available from 1947 in source , so the historical data is retained in GCP bucket from 1913 to 1946.
+Note: Data is available from 1947 in source , so the historical data is retained in GCP bucket (unresolved_mcf/bls/cpi/HistoricalData) from 1913 to 1946.
 Auto-refresh is done only for 1947 and more year data.
