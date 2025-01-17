@@ -338,6 +338,10 @@ class ImportExecutor:
         import_inputs = import_spec.get('import_inputs', [])
         for import_input in import_inputs:
             mcf_path = import_input['node_mcf']
+            if not mcf_path:
+                # TODO: Generate node mcf using dc-import tool
+                logging.error(
+                    'Empty node_mcf in manifest, skipping validation.')
             current_data_path = os.path.join(absolute_import_dir, mcf_path)
             previous_data_path = os.path.join(absolute_import_dir,
                                               'previous_data.mcf')
@@ -358,14 +362,14 @@ class ImportExecutor:
             blob = bucket.blob(folder + 'latest_version.txt')
             if not blob:
                 logging.error(
-                    "Not able to download latest version from GCS, skipping validation."
+                    f'Not able to download latest_version.txt from {folder}, skipping validation.'
                 )
                 return
-            blob = bucket.blob(folder + blob.download_as_text() + '/' +
-                               mcf_path)
+            latest_version = blob.download_as_text()
+            blob = bucket.blob(folder + latest_version + '/' + mcf_path)
             if not blob:
                 logging.error(
-                    "Not able to download previous import from GCS, skipping validation."
+                    f'Not able to download previous import from {latest_version}, skipping validation.'
                 )
                 return
             # blob.download_to_filename(previous_data_path)
@@ -403,8 +407,10 @@ class ImportExecutor:
                 )
             else:
                 # Run import script locally.
+                script_interpreter = _get_script_interpreter(
+                    script_path, interpreter_path)
                 process = _run_user_script(
-                    interpreter_path=interpreter_path,
+                    interpreter_path=script_interpreter,
                     script_path=script_path,
                     timeout=self.config.user_script_timeout,
                     args=self.config.user_script_args,

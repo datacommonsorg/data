@@ -24,7 +24,7 @@ from absl import logging
 import differ_utils
 
 SAMPLE_COUNT = 3
-GROUPBY_COLUMNS = 'variableMeasured,observationAbout,observationDate,measurementMethod,unit'
+GROUPBY_COLUMNS = 'variableMeasured,observationAbout,observationDate,measurementMethod,unit,observationPeriod'
 VALUE_COLUMNS = 'value,scalingFactor'
 
 FLAGS = flags.FLAGS
