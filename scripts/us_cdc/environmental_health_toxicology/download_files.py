@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import json, os, requests, sys
 from pathlib import Path
 from absl import app, logging, flags
@@ -20,7 +19,9 @@ from retry import retry
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
-flags.DEFINE_string('config_file', 'gs://unresolved_mcf/cdc/environmental/import_configs.json', 'Config file path')
+flags.DEFINE_string(
+    'config_file', 'gs://unresolved_mcf/cdc/environmental/import_configs.json',
+    'Config file path')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = None
@@ -28,6 +29,7 @@ sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
 import file_util
 
 record_count_query = '?$query=select%20count(*)%20as%20COLUMN_ALIAS_GUARD__count'
+
 
 def download_files(importname, config):
 
@@ -82,12 +84,12 @@ def main(_):
     _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_file_path)
     Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
     importname = sys.argv[1]
-    logging.info(
-        f'Loading config: {_FLAGS.config_file}')
+    logging.info(f'Loading config: {_FLAGS.config_file}')
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         config = json.load(f)
     download_files(importname, config)
     logging.info("Successfully downloaded the source data...!!!!")
+
 
 if __name__ == "__main__":
     app.run(main)

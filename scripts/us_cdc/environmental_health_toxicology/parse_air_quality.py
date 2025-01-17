@@ -18,13 +18,17 @@ import pandas as pd
 from absl import app, logging, flags
 from pathlib import Path
 import sys
+
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
 import file_util
+
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
-flags.DEFINE_string('config_file', 'gs://unresolved_mcf/cdc/environmental/import_configs.json', 'Config file path')
-flags.DEFINE_string('output_file_path', 'output', 'Output files path') 
+flags.DEFINE_string(
+    'config_file', 'gs://unresolved_mcf/cdc/environmental/import_configs.json',
+    'Config file path')
+flags.DEFINE_string('output_file_path', 'output', 'Output files path')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = None
 _OUTPUT_FILE_PATH = None
@@ -68,6 +72,7 @@ MONTH_MAP = {
 def add_prefix_zero(value, length):
     return value.zfill(length)
 
+
 def clean_air_quality_data(config, importname, inputpath, outputpath):
     """
     Args:
@@ -81,7 +86,7 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
     for config1 in config:
         if config1["import_name"] == importname:
             files = config1["files"]
-            for file_info in files: 
+            for file_info in files:
                 output_file_name = file_info["output_file_name"]
                 input_file_name = file_info["input_file_name"]
                 input_file_path = os.path.join(inputpath, input_file_name)
@@ -94,9 +99,9 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
                     try:
                         data = pd.read_csv(input_file_path)
                         data["date"] = pd.to_datetime(data["date"],
-                                                        yearfirst=True)
+                                                      yearfirst=True)
                         data["date"] = pd.to_datetime(data["date"],
-                                                        format="%Y-%m-%d")
+                                                      format="%Y-%m-%d")
 
                         if "PM2.5" in input_file_name:
                             census_tract = "ds_pm"
@@ -105,17 +110,17 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
                         if "Census" in input_file_name:
                             if "PM2.5" in input_file_name:
                                 data = pd.melt(data,
-                                                id_vars=[
-                                                    'year', 'date', 'statefips',
-                                                    'countyfips', 'ctfips',
-                                                    'latitude', 'longitude'
-                                                ],
-                                                value_vars=[
-                                                    str(census_tract + '_pred'),
-                                                    str(census_tract + '_stdd')
-                                                ],
-                                                var_name='StatisticalVariable',
-                                                value_name='Value')
+                                               id_vars=[
+                                                   'year', 'date', 'statefips',
+                                                   'countyfips', 'ctfips',
+                                                   'latitude', 'longitude'
+                                               ],
+                                               value_vars=[
+                                                   str(census_tract + '_pred'),
+                                                   str(census_tract + '_stdd')
+                                               ],
+                                               var_name='StatisticalVariable',
+                                               value_name='Value')
                             elif "Ozone" in input_file_name:
                                 data = pd.melt(
                                     data,
@@ -156,7 +161,7 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
                                     index=False)
                         logging.info(
                             f"Finished cleaning file {output_file_name}!")
-                    except :
+                    except:
                         logging.info("Not reading input file...!")
 
 
@@ -173,8 +178,10 @@ def main(_):
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         config = json.load(f)
     logging.info("Started processing the script...!")
-    clean_air_quality_data(config, importname, _INPUT_FILE_PATH, _OUTPUT_FILE_PATH)
+    clean_air_quality_data(config, importname, _INPUT_FILE_PATH,
+                           _OUTPUT_FILE_PATH)
     logging.info("Finished processing the script...!")
+
 
 if __name__ == "__main__":
     app.run(main)
