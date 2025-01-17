@@ -90,6 +90,7 @@ _PREFILLED_RESPONSE = {}
 def request_url(url: str,
                 params: dict = {},
                 method: str = 'GET',
+                headers: dict = {},
                 output: str = 'text',
                 timeout: int = 30,
                 retries: int = 3,
@@ -147,12 +148,18 @@ def request_url(url: str,
         for attempt in range(retries):
             try:
                 logging.debug(
-                    f'Downloading URL {url}, params:{params}, {method} #{attempt}, retries={retries}'
+                    f'Downloading URL {url}, headers:{headers} params:{params}, {method} #{attempt}, retries={retries}'
                 )
                 if 'get' in method.lower():
-                    response = requests.get(url, params=params, timeout=timeout)
+                    response = requests.get(url,
+                                            headers=headers,
+                                            params=params,
+                                            timeout=timeout)
                 else:
-                    response = requests.post(url, json=params, timeout=timeout)
+                    response = requests.post(url,
+                                             headers=headers,
+                                             json=params,
+                                             timeout=timeout)
                 logging.debug(
                     f'Got API response {response} for {url}, {params}')
                 if response.ok:
@@ -166,14 +173,16 @@ def request_url(url: str,
                 # Exception in case of API error.
                 return None
             except (requests.exceptions.ConnectTimeout,
-                    urllib.error.URLError) as e:
-                # Exception when server is overloaded, retry after a delay
-                if attempt >= retries:
-                    raise urllib.error.URLError
-                else:
-                    logging.debug(
-                        f'Retrying URL {url} after {retry_secs} secs ...')
-                    time.sleep(retry_secs)
+                    requests.exceptions.ConnectionError, urllib.error.URLError,
+                    urllib.error.HTTPError) as e:
+                logging.debug(f'Got exception {e} for {url}, {params}')
+
+            # retry in case of errors
+            if attempt >= retries:
+                raise urllib.error.URLError
+            else:
+                logging.debug(f'Retrying URL {url} after {retry_secs} secs ...')
+                time.sleep(retry_secs)
     return None
 
 

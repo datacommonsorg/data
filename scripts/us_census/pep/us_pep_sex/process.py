@@ -535,7 +535,7 @@ def _state_2010_2020(file_path: str) -> pd.DataFrame:
 
         df = df[(df['Year'] != 'April2010Census') &
                 (df['Year'] != 'April2010Estimate') &
-                (df['Year'] != 'April2020')]
+                (df['Year'] != 'April2020') & (df['Year'] != '2020')]
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
@@ -563,16 +563,20 @@ def _state_latest(file_path: str) -> pd.DataFrame:
         'July2020Male',
         'July2020Female',
     ]
-    # Adding year-specific columns dynamically till current year
-    current_year = dt.now().year
+    # Adding year-specific columns dynamically till latest year
+    df = pd.read_excel(file_path, engine='openpyxl')
+
+    fourth_row_list = df.iloc[2].tolist()
+    max_year = np.nanmax(fourth_row_list) if any(
+        not pd.isna(i) for i in fourth_row_list) else np.nan
+
+    df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
+    current_year = int(max_year) + 1
     for year in range(2021, current_year):
         if current_year < 2030:
             base_columns.append(f'July{year}Total')
             base_columns.append(f'July{year}Male')
             base_columns.append(f'July{year}Female')
-
-    # Load the data with no column names initially
-    df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
 
     # Assign dynamic column names
     df.columns = base_columns
@@ -1103,35 +1107,17 @@ def add_future_year_urls():
     # A set to track downloaded URLs for unique {YEAR} and URLs without {i}
     downloaded_year_urls = set()
 
-    # This method will generate URLs for the years 2024 to 2029
-    for future_year in range(2023, 2030):
-        if dt.now().year > future_year:
-            YEAR = future_year
-            # Loop through URLs
-            for url in urls_to_scan:
-                if "{i}" in url:  # This URL contains the {i} variable, so we loop through i from 01 to 56
-                    for i in range(1, 57):  # Loop i from 01 to 56
-                        formatted_i = f"{i:02}"  # Ensure i is always 2 digits (01, 02, ..., 56)
-                        url_to_check = url.format(YEAR=YEAR, i=formatted_i)
+    # Loop through years in reverse order from 2030 to 2023
+    for future_year in range(2030, 2022, -1):  # From 2030 to 2023
 
-                        try:
-                            check_url = requests.head(url_to_check,
-                                                      allow_redirects=True)
-                            if check_url.status_code == 200:
-                                _FILES_TO_DOWNLOAD.append(
-                                    {"download_path": url_to_check})
-
-                        except requests.exceptions.RequestException as e:
-                            logging.fatal(
-                                f"URL is not accessible {url_to_check} due to {e}"
-                            )
-
-                else:  # This URL does not contain {i}, so we only need to process it once per year
-                    url_to_check = url.format(YEAR=YEAR)
-
-                    # If the URL has already been processed for this year, skip it
-                    if url_to_check in downloaded_year_urls:
-                        continue  # Skip this URL if it's already processed
+        YEAR = future_year
+        # Loop through URLs
+        for url in urls_to_scan:
+            if "{i}" in url:  # This URL contains the {i} variable, so we loop through i from 01 to 56
+                for i in range(1, 57):  # Loop i from 01 to 56
+                    formatted_i = f"{i:02}"  # Ensure i is always 2 digits (01, 02, ..., 56)
+                    url_to_check = url.format(YEAR=YEAR, i=formatted_i)
+                    logging.info(f"checking url: {url_to_check}")
 
                     try:
                         check_url = requests.head(url_to_check,
@@ -1139,17 +1125,35 @@ def add_future_year_urls():
                         if check_url.status_code == 200:
                             _FILES_TO_DOWNLOAD.append(
                                 {"download_path": url_to_check})
-                            downloaded_year_urls.add(
-                                url_to_check)  # Mark this URL as processed
-
-                        else:
-                            logging.fatal(
-                                f"URL returned status code {check_url.status_code}: {url_to_check}"
-                            )
 
                     except requests.exceptions.RequestException as e:
-                        logging.fatal(
+                        logging.error(
                             f"URL is not accessible {url_to_check} due to {e}")
+
+            else:  # This URL does not contain {i}, so we only need to process it once per year
+                url_to_check = url.format(YEAR=YEAR)
+                logging.info(f"checking url: {url_to_check}")
+                # If the URL has already been processed for this year, skip it
+                if url_to_check in downloaded_year_urls:
+                    continue  # Skip this URL if it's already processed
+
+                try:
+                    check_url = requests.head(url_to_check,
+                                              allow_redirects=True)
+                    if check_url.status_code == 200:
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": url_to_check})
+                        downloaded_year_urls.add(
+                            url_to_check)  # Mark this URL as processed
+
+                    else:
+                        logging.error(
+                            f"URL returned status code {check_url.status_code}: {url_to_check}"
+                        )
+
+                except requests.exceptions.RequestException as e:
+                    logging.error(
+                        f"URL is not accessible {url_to_check} due to {e}")
 
 
 def download_files():

@@ -3,6 +3,7 @@
 absl-py
 arcgis2geojson
 chembl-webresource-client>=0.10.2
+chardet
 dataclasses==0.6
 datacommons==1.4.3
 deepdiff==6.3.0
@@ -25,6 +26,7 @@ netCDF4==1.6.4
 numpy==1.26.4
 openpyxl>=3.1.0
 pandas
+psutil
 pylint
 pytest
 rasterio

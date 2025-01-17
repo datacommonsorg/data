@@ -13,6 +13,8 @@
 # limitations under the License.
 '''Class for dictionary of named counters.'''
 
+import os
+import psutil
 import sys
 import time
 
@@ -89,7 +91,7 @@ class Counters():
 
     def __del__(self):
         '''Log the counters.'''
-        self._update_processing_rate()
+        self._update_periodic_counters()
         logging.info(self.get_counters_string())
 
     def add_counter(self,
@@ -212,7 +214,7 @@ class Counters():
         Args:
             file: file handle to emit counters string.
         '''
-        self._update_processing_rate()
+        self._update_periodic_counters()
         print(self.get_counters_string(), file=file)
 
     def print_counters_periodically(self):
@@ -234,7 +236,7 @@ class Counters():
     def set_prefix(self, prefix: str):
         '''Set the prefix for the counter names.
         Also resets the start_time and processing rate counters.'''
-        self._update_processing_rate()
+        self._update_periodic_counters()
         self._prefix = prefix
         self.reset_start_time()
         logging.info(self.get_counters_string())
@@ -250,6 +252,11 @@ class Counters():
         if debug_context:
             name = name + f'_{debug_context}'
         return name
+
+    def _update_periodic_counters(self):
+        '''Update periodic counters.'''
+        self._update_processing_rate()
+        self._update_process_counters()
 
     def _update_processing_rate(self):
         '''Update the processing rate and remaining time.
@@ -271,3 +278,13 @@ class Counters():
         if totals:
             self.set_counter('process_remaining_time',
                              max(0, (totals - num_processed)) / rate)
+
+    def _update_process_counters(self):
+        '''Update process counters for memory and time.'''
+        process = psutil.Process(os.getpid())
+        mem = process.memory_info()
+        self.max_counter('process-mem-rss', mem.rss)
+        self.max_counter('process-mem', mem.vms)
+        cpu_times = process.cpu_times()
+        self.set_counter('process-time-user-secs', cpu_times.user)
+        self.set_counter('process-time-sys-secs', cpu_times.system)
