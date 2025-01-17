@@ -24,6 +24,7 @@ This dataset is available for public use, license is available at https://www.ei
 
         python3 process.py --dataset=INTL --mode=download
         python3 process.py --dataset=ELEC --mode=download
+        python3 process.py --dataset=COAL --mode=download
         python3 process.py --dataset=PET --mode=download
         python3 process.py --dataset=NG --mode=download
         python3 process.py --dataset=SEDS --mode=download
@@ -38,6 +39,7 @@ This dataset is available for public use, license is available at https://www.ei
 
         python3 process.py --dataset=INTL --mode=process
         python3 process.py --dataset=ELEC --mode=process
+        python3 process.py --dataset=COAL --mode=process
         python3 process.py --dataset=PET --mode=process
         python3 process.py --dataset=NG --mode=process
         python3 process.py --dataset=SEDS --mode=process
@@ -49,6 +51,7 @@ This dataset is available for public use, license is available at https://www.ei
     python3 process.py --dataset=TOTAL
     python3 process.py --dataset=INTL
     python3 process.py --dataset=ELEC
+    python3 process.py --dataset=COAL
     python3 process.py --dataset=NG
     python3 process.py --dataset=PET
     python3 process.py --dataset=SEDS
