@@ -129,7 +129,7 @@ See About the Import > Status above for context.
   "import_specifications": [
     {
       "import_name": "BLS_CPI",
-      "curator_emails": ["swethakumari@google.com"],
+      "curator_emails": [],
       "provenance_url": "https://www.bls.gov/cpi/",
       "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index.BLS publishes three main types of CPIs: CPI-U, CPI-W, and C-CPI-U. CPI-U stands for CPI for All Urban Consumers. CPI-W stands for CPI for Urban Wage Earners and Clerical Workers. The two are both unchained and use the same basket of goods and prices. The difference is their population group. C-CPI-U stands for Chained CPI for All Urban Consumers. It is the chained version of CPI-U. Each of the three can have seasonally adjusted and unadjusted series.",
       "scripts": ["generate_csv.py"],
@@ -153,4 +153,5 @@ See About the Import > Status above for context.
 }
 ```
 
-Note: Data is available from 1947 in source , so the historical data is retained in GCP bucket i.e., from 1913 to 1946.
+Note: Data is available from 1947 in source , so the historical data is retained in GCP bucket from 1913 to 1946.
+Auto-refresh is done only for 1947 and more year data.
