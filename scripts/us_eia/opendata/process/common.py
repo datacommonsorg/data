@@ -16,14 +16,13 @@ import os
 import sys
 import csv
 import json
+import logging
 import re
-from absl import logging
 from collections import defaultdict
 from sys import path
 
-## For import util.alpha2_to_dcid
-## Setup path for import from data/util
-
+# For import util.alpha2_to_dcid
+# Setup path for import from data/util
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 import util.alpha2_to_dcid as alpha2_to_dcid
@@ -61,6 +60,8 @@ UNIT_MAPPING_DICT = {
         '',
     'NumberOfDays':
         'Day',
+    '$/ShortTon':
+        'USDollarPerShortTon',
     'Dollars':
         'USDollar',
     'MillionBarrels':
@@ -317,6 +318,7 @@ def _find_dc_place(raw_place, is_us_place, counters):
             if raw_place == 'WORL':
                 return 'Earth'
 
+    # logging.error('ERROR: unsupported place %s %r', raw_place, is_us_place)
     counters[f'error_unsupported_places_{raw_place}'] += 1
     return None
 
