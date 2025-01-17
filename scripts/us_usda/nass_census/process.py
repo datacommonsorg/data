@@ -46,7 +46,7 @@ SKIPPED_VALUES = [
 ]
 
 
-# Functions
+# Download Functions
 def generate_urls(start_year=2017, step=5):
     current_year = datetime.now().year
     years = [year for year in range(start_year, current_year + 1, step)]
@@ -203,7 +203,7 @@ def main(_):
     mode = _FLAGS.mode
     if mode == 'download' or mode == '':
         files = []
-        for year in [2002, 2007, 2012, 2017, 2022, 2027]:
+        for year in range(1997, 2048, 5):
             if year <= datetime.now().year:
                 file = download_and_process_data(year, d)
                 if file:
