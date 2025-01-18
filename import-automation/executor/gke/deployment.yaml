@@ -43,7 +43,7 @@ metadata:
   namespace: import-automation
 spec:
   # Note that this timeout must account for the entire duration of preprocess scripts.
-  timeoutSec: 600
+  timeoutSec: 1800
   connectionDraining:
     drainingTimeoutSec: 600
   healthCheck:
@@ -80,7 +80,7 @@ metadata:
   name: import-executor-app
   namespace: import-automation
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: import-automation-executor-app

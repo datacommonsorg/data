@@ -1,0 +1,5 @@
+key,property,value
+#Sample PVMap for test,lines begining with #,ignored
+total,populationType,dcs:Person,
+woman,gender,dcs:Female,age,[18 - Years]
+man,gender,dcs:Male,age,[18 - Years]

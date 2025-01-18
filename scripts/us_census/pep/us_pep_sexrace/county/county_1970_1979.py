@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,6 +37,7 @@ def process_county_1970_1979(url: str) -> pd.DataFrame:
     """
     # reading the csv input file
     df = pd.read_csv(url, header=None)
+    df.to_csv(_CODEDIR + "/../input_files/" + "county_result_1970_1979.csv")
 
     # listing the columns to be dropped as age gaps are not required
     COLUMNS_TO_SUM = [

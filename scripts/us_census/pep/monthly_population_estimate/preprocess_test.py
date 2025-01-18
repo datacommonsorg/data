@@ -14,15 +14,16 @@
 """
 Script to automate the testing for USA Population preprocess script.
 """
-
 import os
 import unittest
 from os import path
 from preprocess import CensusUSACountryPopulation
+from absl import flags
 # module_dir_ is the path to where this test is running from.
-module_dir_ = os.path.dirname(__file__)
-test_data_folder = os.path.join(module_dir_, "test_data")
-op_data_folder = os.path.join(module_dir_, "test_output_data")
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, "test_data", "input_files")
+test_output_folder = os.path.join(_MODULE_DIR, "test_data", "output_data")
+expected_op_folder = os.path.join(_MODULE_DIR, "test_data", "expected_output")
 
 
 class TestPreprocess(unittest.TestCase):
@@ -31,13 +32,11 @@ class TestPreprocess(unittest.TestCase):
     properties which further requried for unit testing
     """
 
-    cleaned_csv_file_path = os.path.join(op_data_folder, "data.csv")
-    mcf_file_path = os.path.join(op_data_folder, "test_census.mcf")
-    tmcf_file_path = os.path.join(op_data_folder, "test_census.tmcf")
+    cleaned_csv_file_path = os.path.join(test_output_folder, "data.csv")
+    mcf_file_path = os.path.join(test_output_folder, "test_census.mcf")
+    tmcf_file_path = os.path.join(test_output_folder, "test_census.tmcf")
 
-    ip_data_path = [os.path.join(test_data_folder, "test_census_data.xlsx")]
-
-    base = CensusUSACountryPopulation(ip_data_path, cleaned_csv_file_path,
+    base = CensusUSACountryPopulation(_INPUT_FILE_PATH, cleaned_csv_file_path,
                                       mcf_file_path, tmcf_file_path)
     base.process()
 
@@ -46,11 +45,11 @@ class TestPreprocess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        expected_mcf_file_path = os.path.join(
-            test_data_folder, "expected_USA_Population_Count.mcf")
+        expected_mcf_file_path = os.path.join(expected_op_folder,
+                                              "USA_Population_Count.mcf")
 
-        expected_tmcf_file_path = os.path.join(
-            test_data_folder, "expected_USA_Population_Count.tmcf")
+        expected_tmcf_file_path = os.path.join(expected_op_folder,
+                                               "USA_Population_Count.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -79,8 +78,8 @@ class TestPreprocess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        expected_csv_file_path = os.path.join(
-            test_data_folder, "expected_USA_Population_Count.csv")
+        expected_csv_file_path = os.path.join(expected_op_folder,
+                                              "USA_Population_Count.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
@@ -94,3 +93,7 @@ class TestPreprocess(unittest.TestCase):
             os.remove(self.cleaned_csv_file_path)
 
         self.assertEqual(expected_csv_data.strip(), csv_data.strip())
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ import os
 import unittest
 import sys
 import tempfile
+from absl import flags
+
 # module_dir is the path to where this test is running from.
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)
@@ -38,12 +40,6 @@ class TestProcess(unittest.TestCase):
     It will be generating CSV, MCF and TMCF files based on the sample input.
     Comparing the data with the expected files.
     """
-    test_data_files = os.listdir(TEST_DATASET_DIR)
-
-    ip_data = [
-        os.path.join(TEST_DATASET_DIR, file_name)
-        for file_name in test_data_files
-    ]
 
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
@@ -53,17 +49,19 @@ class TestProcess(unittest.TestCase):
             mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            base = PopulationEstimateBySex(self.ip_data, cleaned_csv_file_path,
-                                           mcf_file_path, tmcf_file_path)
+            base = PopulationEstimateBySex(TEST_DATASET_DIR,
+                                           cleaned_csv_file_path, mcf_file_path,
+                                           tmcf_file_path)
             base.process()
 
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
+            with open(mcf_file_path, mode='r', encoding="UTF-8") as mcf_file:
                 self.actual_mcf_data = mcf_file.read()
 
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
+            with open(tmcf_file_path, mode='r', encoding="UTF-8") as tmcf_file:
                 self.actual_tmcf_data = tmcf_file.read()
 
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
+            with open(cleaned_csv_file_path, mode='r',
+                      encoding="utf-8-sig") as csv_file:
                 self.actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):
@@ -71,11 +69,11 @@ class TestProcess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and expected output files like MCF File
         """
-        expected_mcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "expected_population_estimate_sex.mcf")
+        expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR,
+                                              "population_estimate_sex.mcf")
 
-        expected_tmcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "expected_population_estimate_sex.tmcf")
+        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
+                                               "population_estimate_sex.tmcf")
 
         with open(expected_mcf_file_path,
                   encoding="UTF-8") as expected_mcf_file:
@@ -95,13 +93,16 @@ class TestProcess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and expected output files like CSV
         """
-        expected_csv_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "expected_population_estimate_sex.csv")
+        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR,
+                                              "population_estimate_sex.csv")
 
         expected_csv_data = ""
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
+            self.assertEqual(expected_csv_data.strip(),
+                             self.actual_csv_data.strip())
 
-        self.assertEqual(expected_csv_data.strip(),
-                         self.actual_csv_data.strip())
+
+if __name__ == "__main__":
+    unittest.main()
