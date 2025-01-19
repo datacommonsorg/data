@@ -41,7 +41,7 @@ def process_data(df, output_file_path):
         'TERRITORIAL_LEVEL', 'REF_AREA', 'Reference area', 'AGE', 'SEX',
         'TIME_PERIOD', 'OBS_VALUE', 'UNIT_MEASURE'
     ]]
-    df1["AGE"] = df1["UNIT_MEASURE"] + "_" + df1["AGE"] + df1["SEX"]
+    df1.loc[:, "AGE"] = df1["UNIT_MEASURE"] + "_" + df1["AGE"] + df1["SEX"]
 
     # First remove geos with names that we don't have mappings to dcid for.
     try:
