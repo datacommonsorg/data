@@ -31,7 +31,7 @@ from absl import flags
 from absl import app
 from absl import logging
 
-from process import coal, common, elec, intl, ng, nuclear, pet, seds, total
+from process import common, coal, elec, intl, ng, nuclear, pet, seds, total
 
 MANIFEST_URL = "https://api.eia.gov/bulk/manifest.txt"
 
@@ -41,7 +41,7 @@ flags.DEFINE_string('dataset', '',
                     'Datasets to download. Everything, if empty.')
 flags.DEFINE_string('mode', '', 'Options: download or process')
 
-# Value: (name, extract_fn, schema_fn)
+## Value: (name, extract_fn, schema_fn)
 _DATASETS = {
     'COAL': ('Coal', coal.extract_place_statvar, coal.generate_statvar_schema),
     'ELEC': ('Electricity', elec.extract_place_statvar,
@@ -79,6 +79,7 @@ def main(_):
     assert FLAGS.data_dir
     manifest_json = download_manifest()
     datasets = manifest_json.get('dataset', {})
+    logging.info("================Calling main method")
     for dataset_name in datasets:
         if FLAGS.dataset and dataset_name not in FLAGS.dataset:
             continue
@@ -89,6 +90,7 @@ def main(_):
         if mode == "" or mode == "process":
             file_prefix = os.path.join(f'{FLAGS.data_dir}/{dataset_name}',
                                        FLAGS.dataset)
+            logging.info("================Calling process method")
             common.process(
                 dataset=FLAGS.dataset,
                 dataset_name=_DATASETS[FLAGS.dataset],
@@ -99,6 +101,7 @@ def main(_):
                 out_tmcf=file_prefix + '.tmcf',
                 extract_place_statvar_fn=_DATASETS[FLAGS.dataset][1],
                 generate_statvar_schema_fn=_DATASETS[FLAGS.dataset][2])
+            logging.info("================process completed")
 
 
 if __name__ == '__main__':
