@@ -22,7 +22,6 @@ import gzip
 import shutil
 from datetime import datetime
 from absl import app, flags, logging
-import pdb
 from retry import retry
 
 # Define flags

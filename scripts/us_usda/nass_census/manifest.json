@@ -2,7 +2,7 @@
   "import_specifications": [
     {
       "import_name": "USDA_AgricultureCensus",
-      "curator_emails": [""],
+      "curator_emails": [],
       "provenance_url": "https://www.nass.usda.gov/datasets/",
       "provenance_description": "USDA census provides data on food, agriculture, nutrition, and other issues based on public policy, available science, and effective management.",
       "scripts": ["process.py"],
