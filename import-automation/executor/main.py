@@ -1,3 +1,19 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""
+Import executor entrypoint.
+"""
 import logging
 import json
 import os
@@ -26,11 +42,13 @@ AUTO_IMPORT_JOB_STATUS_LOG_TYPE = "auto-import-job-status"
 
 
 def scheduled_updates(absolute_import_name: str, import_config: str):
+    """
+    Invokes import update workflow.
+    """
     start_time = time.time()
     logging.info(absolute_import_name)
     cfg = json.loads(import_config)
     config = configs.ExecutorConfig(**cfg)
-    logging.info(config)
     executor = import_executor.ImportExecutor(
         uploader=file_uploader.GCSFileUploader(
             project_id=config.gcs_project_id,
