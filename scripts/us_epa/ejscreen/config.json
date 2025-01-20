@@ -1,5 +1,5 @@
 {
-    "YEARS": ["2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
+    "YEARS": [ "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
     "NORM_CSV_COLUMNS": ["ID", "DSLPM", "CANCER", "RESP", "OZONE", "PM25"],
     "NORM_CSV_COLUMNS1": ["ID", "DSLPM", "OZONE", "PM25"],
     "CSV_COLUMNS_BY_YEAR": {
@@ -40,6 +40,9 @@
     },
     "URL_TEMPLATE": "https://gaftp.epa.gov/EJSCREEN/{year}/{zip_filename}.zip",
     "URL_TEMPLATE_NON_ZIPPED": "https://gaftp.epa.gov/EJSCREEN/{year}/{filename}.csv",
+    "URL_TEMPLATE": "https://gaftp.epa.gov/EJSCREEN/{year}/{zip_filename}.zip",
+    "URL_TEMPLATE_2023": "https://gaftp.epa.gov/EJSCREEN/2023/2.22_September_UseMe/{zip_filename}.zip",
+    "URL_TEMPLATE_2024": "https://gaftp.epa.gov/EJSCREEN/2024/2.32_August_UseMe/{zip_filename}.zip",
     "TEMPLATE_MCF": [
       {
         "Node": "E:ejscreen_airpollutants->E0",
