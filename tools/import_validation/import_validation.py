@@ -27,7 +27,9 @@ flags.DEFINE_string('config_file', 'validation_config.json',
 flags.DEFINE_string('differ_output_location', '.',
                     'Path to the differ output data folder.')
 flags.DEFINE_string('stats_summary_location', '.',
-                    'Path to the stats summary report.')
+                    'Path to the stats summary report folder.')
+flags.DEFINE_string('validation_output_location', '.',
+                    'Path to the validation output folder.')
 
 POINT_ANALAYSIS_FILE = 'point_analysis_summary.csv'
 STATS_SUMMARY_FILE = 'summary_report.csv'
@@ -67,8 +69,8 @@ class ImportValidation:
   Sample config and output files can be found in test folder.
   """
 
-    def __init__(self, config_file: str, differ_output: str,
-                 stats_summary: str):
+    def __init__(self, config_file: str, differ_output: str, stats_summary: str,
+                 validation_output: str):
         logging.info('Reading config from %s', config_file)
         self.differ_results = pd.read_csv(differ_output)
         self.validation_map = {
@@ -77,6 +79,7 @@ class ImportValidation:
             Validation.DELETED_COUNT: self._deleted_count_validation,
             Validation.UNMODIFIED_COUNT: self._unmodified_count_validation
         }
+        self.validation_output = validation_output
         self.validation_result = []
         with open(config_file, encoding='utf-8') as fd:
             self.validation_config = json.load(fd)
@@ -114,7 +117,7 @@ class ImportValidation:
             return ValidationResult('FAILED', config['validation'], repr(exc))
 
     def run_validations(self):
-        output_file = open(VALIDATION_OUTPUT_FILE, mode='w', encoding='utf-8')
+        output_file = open(self.validation_output, mode='w', encoding='utf-8')
         output_file.write('test,status,message\n')
         for config in self.validation_config:
             result = self._run_validation(config)
@@ -128,7 +131,8 @@ def main(_):
     validation = ImportValidation(
         FLAGS.config_file,
         os.path.join(FLAGS.differ_output_location, POINT_ANALAYSIS_FILE),
-        os.path.join(FLAGS.stats_summary_location, STATS_SUMMARY_FILE))
+        os.path.join(FLAGS.stats_summary_location, STATS_SUMMARY_FILE),
+        os.paht.join(FLAGS.validation_output_location, VALIDATION_OUTPUT_FILE))
     validation.run_validations()
 
 
