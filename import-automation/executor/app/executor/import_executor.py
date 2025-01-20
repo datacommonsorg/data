@@ -17,15 +17,26 @@ based on manifests.
 """
 
 import dataclasses
+import glob
 import json
 import logging
 import os
+import sys
 import subprocess
 import tempfile
 import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
 
+REPO_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_differ'))
+sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_validation'))
+
+from import_differ import ImportDiffer
+from import_validation import ImportValidation
 from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
@@ -34,6 +45,7 @@ from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
 from app.service import import_service
+from google.cloud import storage
 
 # Email address for status messages.
 _DEBUG_EMAIL_ADDR = 'datacommons-debug+imports@google.com'
@@ -317,6 +329,97 @@ class ImportExecutor:
                 )
             raise exc
 
+    def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
+                                  absolute_import_dir: str,
+                                  import_spec: dict) -> None:
+        """ 
+        Performs validations on import data.
+        """
+        import_inputs = import_spec.get('import_inputs', [])
+        for import_input in import_inputs:
+            mcf_path = import_input['node_mcf']
+            if not mcf_path:
+                # TODO: Generate node mcf using dc-import tool
+                logging.error(
+                    'Empty node_mcf in manifest, skipping validation.')
+            current_data_path = os.path.join(absolute_import_dir, mcf_path)
+            previous_data_path = os.path.join(absolute_import_dir,
+                                              'previous_data.mcf')
+            summary_stats = os.path.join(absolute_import_dir,
+                                         'summary_report.csv')
+            validation_output_path = os.path.join(absolute_import_dir,
+                                                  'validation')
+            config_file = import_spec.get('validation_config_file', '')
+            if not config_file:
+                config_file = self.config.validation_config_file
+            config_file_path = os.path.join(REPO_DIR, config_file)
+            logging.info(f'Validation config file: {config_file_path}')
+
+            # Download previous import data.
+            bucket = storage.Client(self.config.gcs_project_id).bucket(
+                self.config.storage_prod_bucket_name)
+            folder = relative_import_dir + '/' + import_spec['import_name'] + '/'
+            blob = bucket.blob(folder + 'latest_version.txt')
+            if not blob:
+                logging.error(
+                    f'Not able to download latest_version.txt from {folder}, skipping validation.'
+                )
+                return
+            latest_version = blob.download_as_text()
+            blob = bucket.blob(folder + latest_version + '/' + mcf_path)
+            if not blob:
+                logging.error(
+                    f'Not able to download previous import from {latest_version}, skipping validation.'
+                )
+                return
+            # blob.download_to_filename(previous_data_path)
+
+            # Invoke differ script.
+            differ = ImportDiffer(current_data_path, previous_data_path,
+                                  validation_output_path)
+            differ.run_differ()
+
+            # Invoke validation script.
+            validation_output = os.path.join(validation_output_path,
+                                             'validation_output.csv')
+            differ_output = os.path.join(validation_output_path,
+                                         'point_analysis_summary.csv')
+            validation = ImportValidation(config_file_path, differ_output,
+                                          summary_stats, validation_output)
+            validation.run_validations()
+
+    def _invoke_import_job(self, absolute_import_dir: str, import_spec: dict,
+                           version: str, interpreter_path: str,
+                           process: subprocess.CompletedProcess) -> None:
+        script_paths = import_spec.get('scripts')
+        for path in script_paths:
+            script_path = os.path.join(absolute_import_dir, path)
+            simple_job = cloud_run_simple_import.get_simple_import_job_id(
+                import_spec, script_path)
+            if simple_job:
+                # Running simple import as cloud run job.
+                cloud_run_simple_import.cloud_run_simple_import_job(
+                    import_spec=import_spec,
+                    config_file=script_path,
+                    env=self.config.user_script_env,
+                    version=version,
+                    image=import_spec.get('image'),
+                )
+            else:
+                # Run import script locally.
+                script_interpreter = _get_script_interpreter(
+                    script_path, interpreter_path)
+                process = _run_user_script(
+                    interpreter_path=script_interpreter,
+                    script_path=script_path,
+                    timeout=self.config.user_script_timeout,
+                    args=self.config.user_script_args,
+                    cwd=absolute_import_dir,
+                    env=self.config.user_script_env,
+                )
+                _log_process(process=process)
+                process.check_returncode()
+
     def _import_one_helper(
         self,
         repo_dir: str,
@@ -350,35 +453,23 @@ class ImportExecutor:
             _log_process(process=process)
             process.check_returncode()
 
-            script_paths = import_spec.get('scripts')
-            for path in script_paths:
-                script_path = os.path.join(absolute_import_dir, path)
-                simple_job = cloud_run_simple_import.get_simple_import_job_id(
-                    import_spec, script_path)
-                if simple_job:
-                    # Running simple import as cloud run job.
-                    cloud_run_simple_import.cloud_run_simple_import_job(
-                        import_spec=import_spec,
-                        config_file=script_path,
-                        env=self.config.user_script_env,
-                        version=version,
-                        image=import_spec.get('image'),
-                    )
-                else:
-                    # Run import script locally.
-                    script_interpreter = _get_script_interpreter(
-                        script_path, interpreter_path)
-                    process = _run_user_script(
-                        interpreter_path=script_interpreter,
-                        script_path=script_path,
-                        timeout=self.config.user_script_timeout,
-                        args=self.config.user_script_args,
-                        cwd=absolute_import_dir,
-                        env=self.config.user_script_env,
-                        name=import_name,
-                    )
-                    _log_process(process=process)
-                    process.check_returncode()
+            self._invoke_import_job(absolute_import_dir=absolute_import_dir,
+                                    import_spec=import_spec,
+                                    version=version,
+                                    interpreter_path=interpreter_path,
+                                    process=process)
+
+            if self.config.invoke_import_validation:
+                logging.info("Invoking import validations")
+                self._invoke_import_validation(
+                    repo_dir=repo_dir,
+                    relative_import_dir=relative_import_dir,
+                    absolute_import_dir=absolute_import_dir,
+                    import_spec=import_spec)
+
+        if self.config.skip_gcs_upload:
+            logging.info("Skipping GCS upload")
+            return
 
         inputs = self._upload_import_inputs(
             import_dir=absolute_import_dir,
@@ -386,6 +477,14 @@ class ImportExecutor:
             version=version,
             import_spec=import_spec,
         )
+
+        validation_output_path = os.path.join(absolute_import_dir, 'validation')
+        for filepath in glob.iglob(f'{validation_output_path}/*.csv'):
+            dest = f'{relative_import_dir}/{import_name}/{version}/validation/{os.path.basename(filepath)}'
+            self.uploader.upload_file(
+                src=filepath,
+                dest=dest,
+            )
 
         if self.importer:
             self.importer.delete_previous_output(relative_import_dir,
