@@ -38,8 +38,8 @@ ZIP_FILENAMES = config["ZIP_FILENAMES"]
 FILENAMES = config["FILENAMES"]
 TEMPLATE_MCF = config["TEMPLATE_MCF"]
 URL_TEMPLATE = config["URL_TEMPLATE"]
-URL_TEMPLATE_2023 = config.get("URL_TEMPLATE_2023", URL_TEMPLATE)  
-URL_TEMPLATE_2024 = config.get("URL_TEMPLATE_2024", URL_TEMPLATE)  
+URL_TEMPLATE_2023 = config.get("URL_TEMPLATE_2023", URL_TEMPLATE)
+URL_TEMPLATE_2024 = config.get("URL_TEMPLATE_2024", URL_TEMPLATE)
 
 # data: dictionary of dataframes in the format {year: dataframe}
 # outfilename: name of the csv that data will be written to
@@ -78,9 +78,11 @@ if __name__ == '__main__':
         if zip_filename:
             # Select the appropriate URL template based on the year
             if year == '2023':
-                url = URL_TEMPLATE_2023.format(year=year, zip_filename=zip_filename)
+                url = URL_TEMPLATE_2023.format(year=year,
+                                               zip_filename=zip_filename)
             elif year == '2024':
-                url = URL_TEMPLATE_2024.format(year=year, zip_filename=zip_filename)
+                url = URL_TEMPLATE_2024.format(year=year,
+                                               zip_filename=zip_filename)
             else:
                 url = URL_TEMPLATE.format(year=year, zip_filename=zip_filename)
 
@@ -91,10 +93,15 @@ if __name__ == '__main__':
                 with zipfile.ZipFile(io.BytesIO(response.content)) as zfile:
                     with zfile.open(f'{FILENAMES[year]}.csv', 'r') as newfile:
                         # Specify encoding to handle special characters
-                        dfs[year] = pd.read_csv(newfile, usecols=columns, encoding='latin1')  # Added encoding='latin1'
-                logger.info(f"File downloaded and processed for {year} successfully")
+                        dfs[year] = pd.read_csv(
+                            newfile, usecols=columns,
+                            encoding='latin1')  # Added encoding='latin1'
+                logger.info(
+                    f"File downloaded and processed for {year} successfully")
             else:
-                logger.error(f"Failed to download file for {year}. HTTP Status Code: {response.status_code}")
+                logger.error(
+                    f"Failed to download file for {year}. HTTP Status Code: {response.status_code}"
+                )
         else:
             url = URL_TEMPLATE.format(year=year, filename=FILENAMES[year])
             logger.info(f"Requesting CSV file: {url}")
@@ -102,10 +109,17 @@ if __name__ == '__main__':
 
             if response.status_code == 200:
                 # Specify encoding to handle special characters
-                dfs[year] = pd.read_csv(io.StringIO(response.text), sep=',', usecols=columns, encoding='latin1')  # Added encoding='latin1'
-                logger.info(f"CSV downloaded and processed for {year} successfully")
+                dfs[year] = pd.read_csv(
+                    io.StringIO(response.text),
+                    sep=',',
+                    usecols=columns,
+                    encoding='latin1')  # Added encoding='latin1'
+                logger.info(
+                    f"CSV downloaded and processed for {year} successfully")
             else:
-                logger.error(f"Failed to download CSV for {year}. HTTP Status Code: {response.status_code}")
+                logger.error(
+                    f"Failed to download CSV for {year}. HTTP Status Code: {response.status_code}"
+                )
 
         # Rename weird column names to match other years
         if year == '2024':
@@ -121,8 +135,3 @@ if __name__ == '__main__':
     logger.info("Writing template to tmcf")
     write_tmcf('ejscreen.tmcf')
     logger.info("Process completed successfully")
-
-
-
-
-
