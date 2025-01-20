@@ -2,7 +2,7 @@
   "import_specifications": [
     {
       "import_name": "EPHHeatRelatedIllness",
-      "curator_emails": ["sudhisha@google.com"],
+      "curator_emails": [],
       "provenance_url": "https://ephtracking.cdc.gov/qrlist/35",
       "provenance_description": "EPH Heat Related Illness",
       "scripts": ["clean_data.py", "preprocess.py"],
