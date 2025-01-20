@@ -85,7 +85,7 @@ class ExecutorConfig:
     # Oauth Client ID used to authenticate with the proxy.
     importer_oauth_client_id: str = ''
     # URL for the import executor container image.
-    executor_docker_image: str = 'gcr.io/datcom-ci/dc-import-executor:latest'
+    importer_docker_image: str = 'gcr.io/datcom-ci/dc-import-executor:stable'
     # Access token of the account used to authenticate with GitHub. This is not
     # the account password. See
     # https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token.
@@ -107,6 +107,8 @@ class ExecutorConfig:
     requirements_filename: str = 'requirements.txt'
     # ID of the location where Cloud Scheduler is hosted.
     scheduler_location: str = 'us-central1'
+    # Location of the local git data repo.
+    local_repo_dir: str = '/data'
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 3600
     # Arguments for the user script

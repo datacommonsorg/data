@@ -31,7 +31,8 @@ def scheduled_updates(absolute_import_name: str, import_config: str):
             auth_access_token=config.github_auth_access_token),
         config=config,
         notifier=email_notifier.EmailNotifier(config.email_account,
-                                              config.email_token))
+                                              config.email_token),
+        local_repo_dir=config.local_repo_dir)
     result = executor.execute_imports_on_update(absolute_import_name)
     logging.info(result)
     if result.status == 'failed':
