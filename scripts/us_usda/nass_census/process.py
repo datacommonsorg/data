@@ -23,6 +23,7 @@ import shutil
 from datetime import datetime
 from absl import app, flags, logging
 import pdb
+from retry import retry
 
 # Define flags
 _FLAGS = flags.FLAGS
@@ -46,37 +47,35 @@ SKIPPED_VALUES = [
 ]
 
 
-# Download Functions
-def generate_urls(start_year=2017, step=5):
-    current_year = datetime.now().year
-    years = [year for year in range(start_year, current_year + 1, step)]
-    urls = [
-        f"https://www.nass.usda.gov/datasets/qs.census{year}.txt.gz"
-        for year in years
-    ]
-    return urls
-
-
 def check_url_status(url):
     try:
         response = requests.head(url)
         return response.status_code == 200
     except requests.RequestException as e:
-        logging.warning(f"Error checking URL {url}: {e}")
+        logging.fatal(f"Error checking URL {url}: {e}")
         return False
 
 
+@retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
 def download_file(url, output_path):
+    """
+    Download a file from the specified URL with retry logic.
+
+    Args:
+        url (str): URL of the file to download.
+        output_path (str): Local path to save the downloaded file.
+    """
     try:
         response = requests.get(url, stream=True)
-        response.raise_for_status()
+        response.raise_for_status()  # Raise HTTPError for bad responses
         with open(output_path, 'wb') as f:
             for chunk in response.iter_content(chunk_size=1024):
-                if chunk:
+                if chunk:  # Filter out keep-alive new chunks
                     f.write(chunk)
         logging.info(f"Downloaded file: {output_path}")
     except requests.RequestException as e:
-        logging.warning(f"Error downloading file from {url}: {e}")
+        logging.fatal(f"Error downloading file from {url}: {e}")
+        raise
 
 
 def unzip_file(input_path, output_dir):
@@ -91,7 +90,7 @@ def unzip_file(input_path, output_dir):
         logging.info(f"Unzipped file to: {output_path}")
         return output_path
     except Exception as e:
-        logging.warning(f"Error unzipping file {input_path}: {e}")
+        logging.fatal(f"Error unzipping file {input_path}: {e}")
 
 
 def get_statvars(filename):
@@ -145,7 +144,7 @@ def write_csv(reader, out, d):
             f"Output file: {out.name} has been successfully generated.")
 
     except Exception as e:
-        logging.warning(f"The write_csv method failed due to the error: {e}")
+        logging.fatal(f"The write_csv method failed due to the error: {e}")
 
 
 def merge_csv_files(output_file, input_files):
@@ -187,7 +186,7 @@ def download_and_process_data(year, d):
         logging.info(f"Processed file saved to: {output_file}")
         return output_file
     else:
-        logging.warning(f"URL not accessible: {url}")
+        logging.fatal(f"URL not accessible: {url}")
         return None
 
 
@@ -203,7 +202,7 @@ def main(_):
     mode = _FLAGS.mode
     if mode == 'download' or mode == '':
         files = []
-        for year in range(1997, 2048, 5):
+        for year in range(2002, 2048, 5):
             if year <= datetime.now().year:
                 file = download_and_process_data(year, d)
                 if file:
@@ -212,7 +211,7 @@ def main(_):
             merge_csv_files(_FLAGS.output, files)
     elif mode == 'process':
         if not os.path.exists('input'):
-            logging.warning(
+            logging.fatal(
                 "Input directory does not exist. Run with --mode=download first."
             )
             return
