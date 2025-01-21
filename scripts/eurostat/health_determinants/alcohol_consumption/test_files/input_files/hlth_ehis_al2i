@@ -1,0 +1,5 @@
+freq,unit,quant_inc,sex,age,geo\TIME_PERIOD	2014 
+A,PC,QU1,F,TOTAL,AT	0.7 
+A,PC,QU1,F,TOTAL,BE	3.2 
+A,PC,QU1,F,TOTAL,BG	1.2 
+A,PC,QU1,F,TOTAL,CY	0 
