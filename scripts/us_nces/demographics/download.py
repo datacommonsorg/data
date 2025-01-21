@@ -7,7 +7,6 @@ import requests
 import time
 from absl import app, flags
 from bs4 import BeautifulSoup
-
 from download_config import COLUMNS_SELECTOR_URL
 from download_config import COMPRESS_FILE_URL
 from download_config import DOWNLOAD_URL
@@ -21,8 +20,15 @@ from download_config import YEAR_PAYLOAD, YEAR_URL
 from download_files_details import DEFAULT_COLUMNS_SELECTED
 from download_files_details import KEY_COLUMNS_PUBLIC, PUBLIC_COLUMNS
 from download_files_details import KEY_COLUMNS_PRIVATE, PRIVATE_COLUMNS
-from download_files_details import KEY_COLUMNS_DISTRICT, DISTRICT_COLUMNS, PUBLIC_2017, DISTRICT_2017
+from download_files_details import KEY_COLUMNS_DISTRICT, DISTRICT_COLUMNS
 import fetch_ncid
+
+import os
+import sys
+
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
+import file_util
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_enum("import_name", None,
@@ -31,6 +37,10 @@ flags.DEFINE_enum("import_name", None,
 flags.DEFINE_list("years_to_download", None,
                   "Years for which file has to be downloaded")
 flags.mark_flag_as_required("import_name")
+flags.DEFINE_string(
+    'config_file',
+    'gs://unresolved_mcf/us_nces/demographics/school_id_list.json',
+    'Path to config file')
 
 
 def _call_export_csv_api(school: str, year: str, columns: list) -> str:
@@ -135,6 +145,8 @@ def get_year_list(school):
 
 
 def main(_):
+    logging.info(f'Loading config: {_FLAGS.config_file}')
+
     logging.info(f"Downloading files for import {_FLAGS.import_name}")
     school = _FLAGS.import_name
     years_to_download = get_year_list(school)
@@ -147,15 +159,19 @@ def main(_):
     elif school == "District":
         primary_key = KEY_COLUMNS_DISTRICT
         column_names = DISTRICT_COLUMNS
+
+    with file_util.FileIO(_FLAGS.config_file, 'r') as f:
+        data = json.load(f)
     for year in years_to_download:
-        # fecthing 2017column id's from config file for PublicSchool and District
-        # as id is not listed in the website as expected
-        if year == "2017" and school == "PublicSchool":
-            id_list = PUBLIC_2017
-        elif year == "2017" and school == "District":
-            id_list = DISTRICT_2017
+        if school in data and year in data[school]:
+            id_list = data[school][year]
+            print(f"Year {year} exists for {school} in the JSON file.")
         else:
             id_list = fetch_ncid.fetch_school_ncid(school, year, column_names)
+            data[school][year] = id_list
+            with file_util.FileIO(_FLAGS.config_file, 'w') as f:
+                json.dump(data, f, indent=4)
+
         index_columns_selected = 0
         COLUMNS_TO_DOWNLOAD = id_list
         total_columns_to_download = len(COLUMNS_TO_DOWNLOAD)

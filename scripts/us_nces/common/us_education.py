@@ -848,6 +848,8 @@ class USEducation:
         # Dropping empty obsevation values.
         df_cleaned["observation"] = df_cleaned["observation"].replace(
             to_replace={'': pd.NA})
+        # Drop rows where the 'observation' column has negative values
+        df_cleaned = df_cleaned[df_cleaned["observation"] >= 0]
         df_cleaned = df_cleaned.dropna(subset=['observation'])
 
         return df_cleaned

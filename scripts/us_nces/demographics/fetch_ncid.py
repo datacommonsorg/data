@@ -25,8 +25,8 @@ def fetch_school_ncid(school, year, column_names):
 
     # Initialize WebDriver
     chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--window-size=1920,1080')
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--window-size=1920,1080')
 
     svc = webdriver.ChromeService(
         executable_path=binary_path)  # Get the path for ChromeDriver
@@ -118,5 +118,4 @@ def fetch_school_ncid(school, year, column_names):
     for item in FINAL_LIST:
         if item['label_header'] in column_names:
             id_list.append(item['value'])  # Add the value (NCID) to the list
-
     return id_list  # Return the list of NCIDs that match the requested columns
