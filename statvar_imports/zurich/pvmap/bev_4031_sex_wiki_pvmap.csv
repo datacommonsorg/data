@@ -1,0 +1,6 @@
+key,prop,val,p1,v1
+Zeit,observationDate,{Number},,
+bir,value,{Number},populationType,BirthEvent
+place,observationAbout,{Data},,
+Sex:M,gender,dcs:Male,,
+Sex:F,gender,dcs:Female,,
