@@ -2,9 +2,7 @@
     "import_specifications": [
         {
             "import_name": "EPA_EJSCREEN",
-            "curator_emails": [
-                "rbhande@google.com"
-            ],
+            "curator_emails": [],
             "provenance_url": "https://gaftp.epa.gov/EJSCREEN/",
             "provenance_description": "The Census Bureau's Ejscreen data",
             "scripts": [
@@ -12,8 +10,8 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "us_epa/ejscreen/ejscreen.tmcf",
-                    "cleaned_csv": "us_epa/ejscreen/ejscreen_airpollutants.csv"
+                    "template_mcf": "ejscreen.tmcf",
+                    "cleaned_csv": "ejscreen_airpollutants.csv"
                 }
             ],
             "cron_schedule": "0 07 * * 1"
