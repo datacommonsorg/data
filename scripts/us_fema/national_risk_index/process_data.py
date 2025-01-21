@@ -87,21 +87,7 @@ def process_csv(input_path, output_path, csv_structure_f):
         normalized_table.to_csv(new_output_path)
         new_input_file =rename_file(input_path, nri_ver)
         os.rename(input_path, new_input_file)
-    
-        print("****************************",new_input_file)
-        # for filename in os.listdir(folder_path):
-        #     if filename.endswith(".csv"):
-        #         old_filepath = os.path.join(folder_path, filename)
-        #         new_filename = filename + suffix + ".csv"  # Add suffix before existing extension
-        #         new_filepath = os.path.join(folder_path, new_filename)
-        #         try:
-        #             os.rename(old_filepath, new_filepath)
-        #             print(f"Renamed {old_filepath} to {new_filepath}")
-        #         except OSError as e:
-        #             print(f"Error renaming {old_filepath}: {e}")
-
         
-       
     except FileNotFoundError as e:
         logging.error(f"FileNotFoundError: {e}")
         print(f"Error: The file '{input_path}' was not found.")
@@ -110,22 +96,9 @@ def process_csv(input_path, output_path, csv_structure_f):
         print(f"An unexpected error occurred: {e}")
 
 def main(argv):
-    # path = "source_data/"
-    # input_files =os.listdir(path)
-    # file_name = "source_data/" + input_files[0]
-    # data_table = pd.read_csv(file_name)
-    # nri_ver =data_table["NRI_VER"].iloc[1]
-    # for files in input_files:
-    #     file = Path(files)
-    #     new_input_path = file.stem + "_"+ nri_ver + file.suffix  # Modify filename
-    #     new_input_path = file.with_name(new_input_path) 
-    #     print(new_input_path)
-    print(FLAGS.output_path)
-       
     for input_path in INPUT_TO_OUTPUT_PATHS:
-        
         output_path_new = os.path.join(FLAGS.output_path, INPUT_TO_OUTPUT_PATHS[input_path])
-       
         process_csv(input_path, output_path_new, "output/csv_columns.json")
+
 if __name__ == "__main__":
   app.run(main)
