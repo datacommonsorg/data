@@ -95,8 +95,7 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
                     output_file_name = file_info["output_file_name"]
                     input_file_name = file_info["input_file_name"]
                     input_file_path = os.path.join(inputpath, input_file_name)
-                    output_file_path = os.path.join(outputpath,
-                                                    output_file_name)
+                    output_file_path = os.path.join(outputpath, output_file_name)
                     logging.info(f"input_file_name: {input_file_name}")
                     logging.info(f"output_file_name: {output_file_name}")
                     if str(input_file_name).endswith('.csv'):
@@ -105,9 +104,9 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
                         try:
                             data = pd.read_csv(input_file_path)
                             data["date"] = pd.to_datetime(data["date"],
-                                                          yearfirst=True)
+                                                        yearfirst=True)
                             data["date"] = pd.to_datetime(data["date"],
-                                                          format="%Y-%m-%d")
+                                                        format="%Y-%m-%d")
 
                             if "PM2.5" in input_file_name:
                                 census_tract = "ds_pm"
@@ -115,19 +114,18 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
                                 census_tract = "ds_o3"
                             if "Census" in input_file_name:
                                 if "PM2.5" in input_file_name:
-                                    data = pd.melt(
-                                        data,
-                                        id_vars=[
-                                            'year', 'date', 'statefips',
-                                            'countyfips', 'ctfips', 'latitude',
-                                            'longitude'
-                                        ],
-                                        value_vars=[
-                                            str(census_tract + '_pred'),
-                                            str(census_tract + '_stdd')
-                                        ],
-                                        var_name='StatisticalVariable',
-                                        value_name='Value')
+                                    data = pd.melt(data,
+                                                id_vars=[
+                                                    'year', 'date', 'statefips',
+                                                    'countyfips', 'ctfips',
+                                                    'latitude', 'longitude'
+                                                ],
+                                                value_vars=[
+                                                    str(census_tract + '_pred'),
+                                                    str(census_tract + '_stdd')
+                                                ],
+                                                var_name='StatisticalVariable',
+                                                value_name='Value')
                                 elif "Ozone" in input_file_name:
                                     data = pd.melt(
                                         data,
@@ -136,9 +134,7 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
                                             'countyfips', 'ctfips', 'latitude',
                                             'longitude', census_tract + '_stdd'
                                         ],
-                                        value_vars=[
-                                            str(census_tract + '_pred')
-                                        ],
+                                        value_vars=[str(census_tract + '_pred')],
                                         var_name='StatisticalVariable',
                                         value_name='Value')
                                 data.rename(
@@ -146,11 +142,9 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
                                     inplace=True)
                                 max_length = data['ctfips'].astype(
                                     str).str.len().max()
-                                data['ctfips'] = data['ctfips'].astype(
-                                    str).apply(lambda x: add_prefix_zero(
-                                        x, max_length))
-                                data["dcid"] = "geoId/" + data["ctfips"].astype(
-                                    str)
+                                data['ctfips'] = data['ctfips'].astype(str).apply(
+                                    lambda x: add_prefix_zero(x, max_length))
+                                data["dcid"] = "geoId/" + data["ctfips"].astype(str)
                                 data['StatisticalVariable'] = data[
                                     'StatisticalVariable'].map(STATVARS)
                             elif "County" in input_file_name and "PM" in input_file_name:
@@ -158,15 +152,15 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
                                     str).str.zfill(2)
                                 data["countyfips"] = data["countyfips"].astype(
                                     str).str.zfill(3)
-                                data["dcid"] = "geoId/" + data[
-                                    "statefips"] + data["countyfips"]
+                                data["dcid"] = "geoId/" + data["statefips"] + data[
+                                    "countyfips"]
                             elif "County" in input_file_name and "Ozone" in input_file_name:
                                 data["statefips"] = data["statefips"].astype(
                                     str).str.zfill(2)
                                 data["countyfips"] = data["countyfips"].astype(
                                     str).str.zfill(3)
-                                data["dcid"] = "geoId/" + data[
-                                    "statefips"] + data["countyfips"]
+                                data["dcid"] = "geoId/" + data["statefips"] + data[
+                                    "countyfips"]
                             data.to_csv(output_file_path,
                                         float_format='%.6f',
                                         index=False)

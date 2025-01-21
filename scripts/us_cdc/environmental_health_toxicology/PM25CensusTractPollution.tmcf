@@ -6,11 +6,3 @@ variableMeasured: C:PM25CTPollution->StatisticalVariable
 observationPeriod: "P24H"
 unit: dcs:MicrogramsPerCubicMeter
 value: C:PM25CTPollution->Value
-
-Node: E:PM25CTPollution->E2
-observationAbout: C:PM25CTPollution->dcid
-typeOf: dcs:StatVarObservation
-observationDate: C:PM25CTPollution->date
-variableMeasured: C:PM25CTPollution->StatisticalVariable
-observationPeriod: "P24H"
-value: C:PM25CTPollution->Value
