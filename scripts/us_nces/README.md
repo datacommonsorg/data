@@ -6,6 +6,12 @@ This dataset has Population Estimates for the National Center for Education Stat
 - School District - 2010-2023
 - Public Schools - 2010-2023
 
+## The NCES import script operates as follows:
+If it's the beginning of a new year:
+-The script downloads the latest data using Selenium.
+Otherwise:
+-The script retrieves school IDs for Private, Public, and District schools from a local JSON file located at gs://unresolved_mcf/us_nces/demographics/school_id_list.json.
+
 The population is categorized on various attributes and their combinations:
         
         1. Count of Students categorised based on Race.
