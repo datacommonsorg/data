@@ -16,7 +16,7 @@ Author: Padma Gundapaneni @padma-g
 ## About the Dataset
 
 ### Download URL
-The datasets can be downloaded at the following links from [the CDC website](https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places&sortBy=newest&utf8). We need to manually serach in the website for the latest release files for the below dataset and add the required configuration in json file present in the [GCP Bucket Location](gs://datcom-csv/cdc500_places/)
+The datasets can be downloaded at the following links from [the CDC website](https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places&sortBy=newest&utf8). We need to manually search in the website for the latest release files for the below dataset and add the required configuration in json file present in the [GCP Bucket Location](gs://datcom-csv/cdc500_places/)
 - PLACES: Local Data for Better Health, Census Tract Data
 - PLACES: Local Data for Better Health, County/Country Data
 - PLACES: Local Data for Better Health, Place (City) Data
@@ -34,7 +34,7 @@ The data imported in this effort is from the CDC's [500 Places project](https://
 
 ### Notes and Caveats
 
-For data refresh for CDC500 import we need to manually serach in the website for the latest release files across all geo levels and add the required configuration in [Json file](gs://datcom-csv/cdc500_places/download_config.json) present in the GCP Bucket Location.
+For data refresh for CDC500 import we need to manually search in the website for the latest release files across all geo levels and add the required configuration in [Json file](gs://datcom-csv/cdc500_places/download_config.json) present in the GCP Bucket Location.
 
 Please fill the json file for the latest release data in below format:
 
@@ -117,7 +117,7 @@ The expected output of this test can be found in the [`test_data`](https://githu
 
 #### Data Download and Processing Steps
 
-To download and clean all the data files at once run `clean_files.sh`:
+To download and clean all the data files at once run `run.sh`:
 
 ```bash
 $ sh run.sh

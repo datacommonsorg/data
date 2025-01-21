@@ -64,13 +64,13 @@ def download_file(release_year, url: str, save_path: str):
     """
     logging.info(
         f'Downloading {url} for the year {release_year} to {save_path}')
-    request = retry_method(url)
-    if request.status_code != 200:
+    response = retry_method(url)
+    if response.status_code != 200:
         logging.fatal(
             f'Failed to retrieve {url} for the year {release_year} to {save_path}'
         )
     with open(save_path, 'wb') as file:
-        file.write(request.content)
+        file.write(response.content)
 
 
 def main():
