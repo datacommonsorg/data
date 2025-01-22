@@ -33,6 +33,7 @@ flags.DEFINE_string('config_path',
                     'gs://unresolved_mcf/epa/ejscreen/config.json',
                     'Path to config file')
 
+
 # Function to build the correct URL for each year
 def build_url(year, zip_filename=None):
     if zip_filename:
@@ -44,19 +45,25 @@ def build_url(year, zip_filename=None):
         url = f'{BASE_URL}/{year}/{FILENAMES[year]}.csv'
     return url
 
+
 # Download the file and save it in the input folder
 def download_file(url, year, zip_filename=None):
     response = requests.get(url, verify=False)
     if response.status_code == 200:
         input_folder = os.path.join(_MODULE_DIR, 'input')
-        os.makedirs(input_folder, exist_ok=True)  # Create the folder if it doesn't exist
-        
-        file_path = os.path.join(input_folder, f'{year}.zip' if zip_filename else f'{year}.csv')
+        os.makedirs(input_folder,
+                    exist_ok=True)  # Create the folder if it doesn't exist
+
+        file_path = os.path.join(
+            input_folder, f'{year}.zip' if zip_filename else f'{year}.csv')
         with open(file_path, 'wb') as f:
             f.write(response.content)
         logger.info(f"File downloaded and saved as {file_path}")
     else:
-        logger.fatal(f"Failed to download file for {year}. HTTP Status Code: {response.status_code}")
+        logger.fatal(
+            f"Failed to download file for {year}. HTTP Status Code: {response.status_code}"
+        )
+
 
 # Data processing function
 def write_csv(data, outfilename):
@@ -67,10 +74,12 @@ def write_csv(data, outfilename):
 
     full_df = full_df.rename(columns={'ID': 'FIPS'})
     full_df = full_df.sort_values(by=['FIPS'], ignore_index=True)
-    full_df['FIPS'] = 'dcid:geoId/' + (full_df['FIPS'].astype(str).str.zfill(12))
+    full_df['FIPS'] = 'dcid:geoId/' + (
+        full_df['FIPS'].astype(str).str.zfill(12))
     full_df = full_df.fillna('')
     full_df = full_df.replace('None', '')
     full_df.to_csv(outfilename, index=False)
+
 
 def write_tmcf(outfilename):
     if isinstance(TEMPLATE_MCF, list):
@@ -80,6 +89,7 @@ def write_tmcf(outfilename):
 
     with open(outfilename, 'w') as f_out:
         f_out.write(template_content)
+
 
 def main(_):
     global URL_SUFFIX, BASE_URL, TEMPLATE_MCF, FILENAMES
@@ -110,7 +120,9 @@ def main(_):
 
                 # If the file for the current year is not already downloaded, download it
                 input_folder = os.path.join(_MODULE_DIR, 'input')
-                file_path = os.path.join(input_folder, f'{year}.zip' if zip_filename else f'{year}.csv')
+                file_path = os.path.join(
+                    input_folder,
+                    f'{year}.zip' if zip_filename else f'{year}.csv')
 
                 # Download if the file is missing
                 if not os.path.exists(file_path):
@@ -121,15 +133,14 @@ def main(_):
                 # Process the downloaded file
                 if zip_filename:
                     with zipfile.ZipFile(file_path, 'r') as zfile:
-                        with zfile.open(f'{FILENAMES[year]}.csv', 'r') as newfile:
+                        with zfile.open(f'{FILENAMES[year]}.csv',
+                                        'r') as newfile:
                             dfs[year] = pd.read_csv(newfile,
                                                     engine='python',
                                                     encoding='latin1',
                                                     usecols=columns)
                 else:
-                    dfs[year] = pd.read_csv(file_path,
-                                            sep=',',
-                                            usecols=columns)
+                    dfs[year] = pd.read_csv(file_path, sep=',', usecols=columns)
 
                 logger.info(f"File processed for {year} successfully")
 
@@ -157,6 +168,7 @@ def main(_):
     except Exception as e:
         logger.fatal(f"Unexpected error in the main process: {e}")
         sys.exit(1)
+
 
 if __name__ == '__main__':
     app.run(main)
