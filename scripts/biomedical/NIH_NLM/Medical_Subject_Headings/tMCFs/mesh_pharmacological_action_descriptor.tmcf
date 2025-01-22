@@ -1,0 +1,14 @@
+Node: E:mesh_pharmacological_action_descriptor->E1
+typeOf: dcs:MeSHDescriptor
+dcid: C:mesh_pharmacological_action_descriptor->Descriptor_dcid
+name: C:mesh_pharmacological_action_descriptor->DescriptorName
+identifier: C:mesh_pharmacological_action_descriptor->DescriptorUI
+
+Node: E:mesh_pharmacological_action_descriptor->E2
+typeOf: dcs:MeSHDescriptor
+typeOf: schema:Drug
+dcid: C:mesh_pharmacological_action_descriptor->dcid
+name: C:mesh_pharmacological_action_descriptor->RecordName
+identifier: C:mesh_pharmacological_action_descriptor->RecordUI
+mechanismOfAction: E:mesh_pharmacological_action_descriptor->E1
+	
