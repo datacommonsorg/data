@@ -2,7 +2,7 @@
 
 This subject table provides data on the median earnings distinguished by class of worker.
 
-Years: 2015-2019  
+Years: 2015-2023 
 Geo : Country, State, County and Place
 
 Notes:
