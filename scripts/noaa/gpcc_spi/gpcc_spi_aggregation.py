@@ -14,8 +14,6 @@
 
 import pandas as pd
 import json
-from typing import List
-import logging
 from datetime import datetime
 import os
 import glob
@@ -23,6 +21,7 @@ from pathlib import Path
 
 from absl import flags
 from absl import app
+from absl import logging
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 FLAGS = flags.FLAGS

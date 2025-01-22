@@ -49,27 +49,27 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "gpcc_spi.tmcf",
+                    "template_mcf": "gpcc_spi_aggregation.tmcf",
                     "cleaned_csv": "output_files/aggregations/gpcc_spi_pearson_01_agg.csv"
                 },
                 {
-                    "template_mcf": "gpcc_spi.tmcf",
+                    "template_mcf": "gpcc_spi_aggregation.tmcf",
                     "cleaned_csv": "output_files/aggregations/gpcc_spi_pearson_03_agg.csv"
                 },
                 {
-                    "template_mcf": "gpcc_spi.tmcf",
+                    "template_mcf": "gpcc_spi_aggregation.tmcf",
                     "cleaned_csv": "output_files/aggregations/gpcc_spi_pearson_06_agg.csv"
                 },
                 {
-                    "template_mcf": "gpcc_spi.tmcf",
+                    "template_mcf": "gpcc_spi_aggregation.tmcf",
                     "cleaned_csv": "output_files/aggregations/gpcc_spi_pearson_09_agg.csv"
                 },
                 {
-                    "template_mcf": "gpcc_spi.tmcf",
+                    "template_mcf": "gpcc_spi_aggregation.tmcf",
                     "cleaned_csv": "output_files/aggregations/gpcc_spi_pearson_36_agg.csv"
                 },
                 {
-                    "template_mcf": "gpcc_spi.tmcf",
+                    "template_mcf": "gpcc_spi_aggregation.tmcf",
                     "cleaned_csv": "output_files/aggregations/gpcc_spi_pearson_72_agg.csv"
                 }
             ],

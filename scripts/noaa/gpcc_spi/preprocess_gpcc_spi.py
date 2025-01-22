@@ -17,7 +17,6 @@ import math
 import glob
 import xarray
 from datetime import datetime
-import logging
 import os
 import sys
 from pathlib import Path
@@ -26,6 +25,7 @@ import pandas as pd
 
 from absl import flags
 from absl import app
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -60,6 +60,7 @@ def to_one_degree_grid_place(latlon):
 
 def nc_to_df(nc_path, period, spi_col, start_date, end_date):
     """Read a netcdf and parse to df."""
+    logging.info("Read a netcdf and parse to df.")
     ds = xarray.open_dataset(nc_path, engine='netcdf4')
     df = ds.to_dataframe()
     df = df[(df.index.get_level_values('time') >= start_date) &
@@ -92,9 +93,7 @@ def preprocess_one(start_date,
     """Create a single csv file from a single input nc file."""
     logging.info('processing file:  %s: %s', in_file,
                  datetime.now().strftime('%H:%M:%S'))
-    print("################in_file", in_file)
     path = Path(in_file)
-    print("################path", path)
     period = int(path.stem.split('_')[-1])
     spi_col = f"spi_{path.stem.split('_')[-1]}"
 
@@ -129,13 +128,12 @@ def preprocess_gpcc_spi(start_date, end_date, in_pattern,
     full_pattern = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                 in_pattern)
     for file in sorted(glob.glob(full_pattern)):
-        print("#################3file", file)
         preprocess_one(start_date, end_date, file, preprocessed_dir)
 
 
 def main(_):
     """Run pre-preocess spis with flags."""
-    print(FLAGS.gpcc_spi_input_pattern)
+    logging.info(FLAGS.gpcc_spi_input_pattern)
     preprocess_gpcc_spi(FLAGS.start_date, FLAGS.end_date,
                         FLAGS.gpcc_spi_input_pattern,
                         FLAGS.gpcc_spi_preprocessed_dir)

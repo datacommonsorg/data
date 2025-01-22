@@ -25,14 +25,18 @@ config=spi_9m_polygon
 set -x
 
 
-# #Run download script
-# python3 download.py
+#Run download script
+python3 download.py
 
-# # Run NOAA_GPCC_StandardardizedPrecipitationIndex script
-# python3 preprocess_gpcc_spi.py
+# Run NOAA_GPCC_StandardardizedPrecipitationIndex script
+python3 preprocess_gpcc_spi.py
+echo "Created intermediate files for processing"
 
 # shard data by year
+echo "Creating a directory for the sharded files"
 mkdir -p output_files/shard
+
+echo "Sharding pcc_spi_pearson_09.csv based on year and writing them to the shard folder."
 pd_csv -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 -sort time "df['year']=df['time'].str.slice(0,4)" -shard year
 
 
