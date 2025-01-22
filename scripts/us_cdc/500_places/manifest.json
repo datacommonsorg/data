@@ -26,7 +26,7 @@
                     "cleaned_csv": "cleaned_csv/CensusTract.csv"
                 }
             ],
-            "cron_schedule": "0 11 * * 2"
+            "cron_schedule": "0 4 * * 5"
         }
     ]
 }
