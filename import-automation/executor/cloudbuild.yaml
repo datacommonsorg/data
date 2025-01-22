@@ -7,12 +7,12 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', '${_DOCKER_IMAGE}:latest', '.']
+    args: ['build', '-t', '${_DOCKER_IMAGE}:${COMMIT_SHA}', '-t', '${_DOCKER_IMAGE}:latest', '.']
     dir: 'import-automation/executor'
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',  '${_DOCKER_IMAGE}:latest']
+    args: ['push', '${_DOCKER_IMAGE}', '--all-tags']
 
   # Install dependencies
   - name: python:3.11.11
@@ -32,5 +32,5 @@ steps:
     args:
     - '-c'
     - |
-      docker tag ${_DOCKER_IMAGE}:latest ${_DOCKER_IMAGE}:stable \
+      docker tag ${_DOCKER_IMAGE}:${COMMIT_SHA} ${_DOCKER_IMAGE}:stable \
       && docker push ${_DOCKER_IMAGE}:stable
