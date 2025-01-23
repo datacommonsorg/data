@@ -100,7 +100,6 @@ class TestPreprocess(unittest.TestCase):
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
-        print(str(self._actual_csv_data))
         self.assertEqual(expected_csv_data.strip(),
                          self._actual_csv_data.strip())
 
