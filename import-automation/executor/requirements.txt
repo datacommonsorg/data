@@ -12,3 +12,4 @@ gunicorn
 pytz
 absl-py
 croniter
+pandas
