@@ -34,7 +34,9 @@ The data imported in this effort is from the CDC's [500 Places project](https://
 
 ### Notes and Caveats
 
-For data refresh for CDC500 import we need to manually search in the website for the latest release files across all geo levels and add the required configuration in [Json file](gs://datcom-csv/cdc500_places/download_config.json) present in the GCP Bucket Location.
+For data refresh for CDC500 import we need to manually search in the website for the latest release files across all geo levels and add the required configuration in [Json file](gs://datcom-csv/cdc500_places/download_config.json) present in the GCP Bucket Location. The config file is present locally as well [download_config.json](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/download_config.json) we can use this file as well to generate the output.
+
+NOTE: If any changes made in local config update same changes in config file present in GCP as well vice versa. We should always keep both config file in sync. We can test if files are in sync by run [config_file_test.py](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/config_file_test.py) and make sure both files are identical.
 
 Please fill the json file for the latest release data in below format:
 
@@ -96,6 +98,8 @@ These data were collected and provided by the [CDC National Center for Chronic D
 [`run.sh`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/run.sh)
 
 #### Test Scripts
+[`config_file_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/config_file_test.py)
+
 [`parse_cdc_places_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/500_places/parse_cdc_places_test.py)
 
 #### tMCFs
@@ -107,7 +111,11 @@ These data were collected and provided by the [CDC National Center for Chronic D
 
 ##### Test Data Cleaning Script
 
-To test the data cleaning script, run:
+To test the config file is sync with each other and data cleaning script, run:
+
+```bash
+$ python3 config_file_test.py
+```
 
 ```bash
 $ python3 parse_cdc_places_test.py

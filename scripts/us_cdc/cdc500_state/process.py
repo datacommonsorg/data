@@ -54,7 +54,6 @@ FROM
     WHERE
       SVO.prov_id = 'dc/base/CDC500'
       AND SVO.variable_measured like 'Percent_%'
-      AND SVO.observation_date > '2018'
       GROUP BY CDC500, pop_statvar
    ) AS CDC_SV ON TRUE
   WHERE
@@ -70,7 +69,6 @@ FROM
 """
 
 client = bigquery.Client(project='datcom-store')
-
 try:
     logging.info("Running the query")
     query_job = client.query(query)
@@ -82,5 +80,4 @@ results = query_job.to_dataframe()
 
 logging.info("Writing output to CSV")
 output_file = os.path.join(_OUTPUT_FILE_PATH + "/CDC500State_Output.csv")
-print(output_file)
 results.to_csv(output_file, index=False)

@@ -26,27 +26,27 @@ python3 download_bulk.py
 import os
 import requests
 import json
+import sys
 
 from absl import logging
 from retry import retry
-from google.cloud import storage
+from absl import flags
+from absl import app
 
-# Initialize GCP storage client
-client = storage.Client()
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
+import file_util
 
-# Define your GCP bucket and file name
-bucket_name = 'datcom-csv'  # Replace with your bucket name
-file_name = 'cdc500_places/download_config.json'  # Replace with your file name
+_FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    'config_path', 'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
+    'Path to config file')
 
-# Download the file from GCP Storage
-bucket = client.get_bucket(bucket_name)
-blob = bucket.blob(file_name)
 
-# Read the JSON content from the blob
-json_data = blob.download_as_text()
-
-# Load the JSON data
-_CONFIG_FILE = json.loads(json_data)
+def read_config_file_from_gcs(file_path):
+    with file_util.FileIO(file_path, 'r') as f:
+        CONFIG_FILE = json.load(f)
+    return CONFIG_FILE
 
 
 @retry(tries=3, delay=5, backoff=5)
@@ -73,12 +73,13 @@ def download_file(release_year, url: str, save_path: str):
         file.write(response.content)
 
 
-def main():
+def main(_):
     """Main function to download the files."""
     data_dir = os.path.join(os.getcwd(), 'raw_data')
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
     logging.set_verbosity(2)
+    _CONFIG_FILE = read_config_file_from_gcs(_FLAGS.config_path)
     for item in _CONFIG_FILE:
         release_year = item["release_year"]
         for url_dict in item["parameter"]:
@@ -87,4 +88,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    app.run(main)

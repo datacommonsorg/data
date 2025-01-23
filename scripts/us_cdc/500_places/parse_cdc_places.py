@@ -20,16 +20,27 @@ URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
 @input_file     filepath to the original csv that needs to be cleaned
 @output_file    filepath to the csv to which the cleaned data is written
 @delimiter      delimiter used in the original csv
-python3 parse_cdc_places.py input_file output_file delimiter
+python3 parse_cdc_places.py
 '''
 
 import os
+import sys
 import pandas as pd
 import numpy as np
 import json
 from absl import logging
+from absl import flags
+from absl import app
 from google.cloud import storage
 
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
+import file_util
+
+_FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    'config_path', 'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
+    'Path to config file')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'raw_data')
 _OUTPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'cleaned_csv')
@@ -37,16 +48,9 @@ if not os.path.exists(_OUTPUT_FILE_PATH):
     os.mkdir(_OUTPUT_FILE_PATH)
 
 
-def read_config_file_from_gcs():
-    client = storage.Client()
-    bucket_name = 'datcom-csv'
-    file_name = 'cdc500_places/download_config.json'
-    # Download the file from GCP Storage
-    bucket = client.get_bucket(bucket_name)
-    blob = bucket.blob(file_name)
-    # Read the JSON content from the blob
-    json_data = blob.download_as_text()
-    CONFIG_FILE = json.loads(json_data)
+def read_config_file_from_gcs(file_path):
+    with file_util.FileIO(file_path, 'r') as f:
+        CONFIG_FILE = json.load(f)
     return CONFIG_FILE
 
 
@@ -353,10 +357,10 @@ def clean_cdc_places_data(input_file, file_type, sep, release_year):
     return data
 
 
-def main():
+def main(_):
     """Main function to generate the cleaned csv file."""
     logging.set_verbosity(2)
-    CONFIG_FILE = read_config_file_from_gcs()
+    CONFIG_FILE = read_config_file_from_gcs(_FLAGS.config_path)
     sep = ","
     for file_type in ["County", "City", "ZipCode", "CensusTract"]:
         FINAL_LIST = []
@@ -394,4 +398,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    app.run(main)
