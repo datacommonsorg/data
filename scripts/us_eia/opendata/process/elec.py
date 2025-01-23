@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ def extract_place_statvar(series_id, counters):
     # ELEC.{MEASURE}.{FUEL_TYPE}-{PLACE}-{PRODUCER_SECTOR}.{PERIOD}
     m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
                  series_id)
+
     if m:
         measure = m.group(1)
         fuel_type = m.group(2)
@@ -222,7 +223,7 @@ _UNIT_MAP = {
     'CONS_EG': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
     'CONS_EG_BTU': ('MMBtu', '', 1000000),
     'COST': (_PLACEHOLDER_FUEL_UNIT, '', 1),
-    'COST_BTU': ('MMBtu', '', 1),
+    'COST_BTU': ('USDollarPerMMBtu', '', 1),
     'CUSTOMERS': ('', '', 1),
     'GEN': ('GigawattHour', '', 1),
     'PRICE': ('USCentPerKilowattHour', '', 1),
