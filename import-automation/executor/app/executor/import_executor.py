@@ -551,6 +551,20 @@ class ImportExecutor:
                         )
                 uploaded_dest = f'{output_dir}/{version}/{os.path.basename(path)}'
                 setattr(uploaded, input_type, uploaded_dest)
+
+        # Upload any files downloaded from source
+        source_files = [
+            os.path.join(import_dir, file)
+            for file in import_spec.get('source_files', [])
+        ]
+        source_files = file_util.file_get_matching(source_files)
+        for file in source_files:
+            dest = f'{output_dir}/{version}/source_files/{os.path.basename(file)}'
+            self._upload_file_helper(
+                src=file,
+                dest=dest,
+            )
+
         self.uploader.upload_string(
             version,
             os.path.join(output_dir, self.config.storage_version_filename))
