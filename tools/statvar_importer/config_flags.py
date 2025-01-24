@@ -156,8 +156,6 @@ flags.DEFINE_bool('generate_statvar_name', False,
 flags.DEFINE_bool('llm_generate_statvar_name', False,
                   'Generate names for Statvars.')
 
-_FLAGS(sys.argv)  # Allow invocation without app.run()
-
 
 def get_default_config() -> dict:
     """Returns the default config as dictionary of config parameters and values."""
