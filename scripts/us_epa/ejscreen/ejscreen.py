@@ -20,14 +20,15 @@ import pandas as pd
 import json
 from absl import logging, flags, app
 import sys
-import time  # Import time for delay in retries
+import time
+from retry import retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
 import file_util
 
 logging.set_verbosity(logging.INFO)
-logger = logging
+
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('config_path',
@@ -50,16 +51,16 @@ def build_url(year, zip_filename=None):
         url = f'{BASE_URL}/{year}/{FILENAMES[year]}.csv'
     return url
 
+@retry(tries=5, delay=5, backoff=5)
+def download_with_retry(url):
+    logging.info(f"Downloading URL : {url}")
+    return requests.get(url=url, verify=False)
 
 # Download the file and save it in the input folder
-def download_file(url, year, zip_filename=None):
-    max_retry = 5
-    retry_number = 0
-    while retry_number < max_retry:
+def download_file(url, year, input_folder, zip_filename=None):
         try:
-            response = requests.get(url, verify=False)
+            response = download_with_retry(url)
             if response.status_code == 200:
-                input_folder = os.path.join(_MODULE_DIR, 'input')
                 os.makedirs(input_folder, exist_ok=True)
 
                 file_path = os.path.join(
@@ -67,23 +68,19 @@ def download_file(url, year, zip_filename=None):
                     f'{year}.zip' if zip_filename else f'{year}.csv')
                 with open(file_path, 'wb') as f:
                     f.write(response.content)
-                logger.info(f"File downloaded and saved as {file_path}")
+                logging.info(f"File downloaded and saved as {file_path}")
                 return
             else:
-                logger.fatal(
-                    f"Failed to download file for {year}. HTTP Status Code: {response.status_code}"
+                logging.fatal(
+                    f"Failed to download file for {year}. HTTP Status Code: {response.status_code} URL : {url}"
                 )
-                retry_number += 1
-                time.sleep(5)
         except Exception as e:
-            logger.error(f"Error downloading file for {year}: {e}")
-            retry_number += 1
-            time.sleep(5)
+            logging.fatal(
+        f"Failed to download file for {year} after {url} .")
 
-    # If we reached max retries and failed, log the fatal error
-    logger.fatal(
-        f"Failed to download file for {year} after {max_retry} retries.")
 
+   
+    
 
 # Data processing function
 def write_csv(data, outfilename):
@@ -131,39 +128,39 @@ def main(_):
         RENAME_COLUMNS_YEARS = config["RENAME_COLUMNS_YEARS"]
 
         dfs = {}
+        input_folder = os.path.join(_MODULE_DIR, 'input')
 
         # Download files if the mode is 'download' or if no mode is specified
         if _FLAGS.mode == "" or _FLAGS.mode == "download":
             for year in YEARS:
                 try:
-                    logger.info(f"Processing year: {year}")
+                    logging.info(f"Processing year: {year}")
                     columns = CSV_COLUMNS_BY_YEAR[year]
                     zip_filename = ZIP_FILENAMES.get(year, None)
 
-                    input_folder = os.path.join(_MODULE_DIR, 'input')
                     file_path = os.path.join(
                         input_folder,
                         f'{year}.zip' if zip_filename else f'{year}.csv')
 
                     if not os.path.exists(file_path):
-                        logger.info(
+                        logging.info(
                             f"File for {year} not found. Downloading...")
                         url = build_url(year, zip_filename)
-                        download_file(url, year, zip_filename)
+                        download_file(url, year, input_folder,zip_filename)
 
                 except Exception as e:
-                    logger.fatal(f"Error processing data for year {year}: {e}")
+                    logging.fatal(f"Error processing data for year {year}: {e}")
                     continue
 
         # Process files if the mode is 'process' or if no mode is specified
         if _FLAGS.mode == "" or _FLAGS.mode == "process":
             for year in YEARS:
                 try:
-                    logger.info(f"Processing data for year {year}")
+                    logging.info(f"Processing data for year {year}")
                     columns = CSV_COLUMNS_BY_YEAR[year]
                     zip_filename = ZIP_FILENAMES.get(year, None)
 
-                    input_folder = os.path.join(_MODULE_DIR, 'input')
+                    
                     file_path = os.path.join(
                         input_folder,
                         f'{year}.zip' if zip_filename else f'{year}.csv')
@@ -182,7 +179,7 @@ def main(_):
                                                 sep=',',
                                                 usecols=columns)
 
-                    logger.info(f"File processed for {year} successfully")
+                    logging.info(f"File processed for {year} successfully")
 
                     if year in RENAME_COLUMNS_YEARS:
                         cols_renamed = dict(zip(columns, NORM_CSV_COLUMNS1))
@@ -190,23 +187,23 @@ def main(_):
                         cols_renamed = dict(zip(columns, NORM_CSV_COLUMNS))
 
                     dfs[year] = dfs[year].rename(columns=cols_renamed)
-                    logger.info(f"Columns renamed for {year} successfully")
+                    logging.info(f"Columns renamed for {year} successfully")
 
                 except Exception as e:
-                    logger.fatal(f"Error processing data for year {year}: {e}")
+                    logging.fatal(f"Error processing data for year {year}: {e}")
                     continue
 
             # Write the combined data and template
-            logger.info("Writing data to CSV")
+            logging.info("Writing data to CSV")
             write_csv(dfs, 'ejscreen_airpollutants.csv')
 
-            logger.info("Writing template to TMCF")
+            logging.info("Writing template to TMCF")
             write_tmcf('ejscreen.tmcf')
 
-            logger.info("Process completed successfully")
+            logging.info("Process completed successfully")
 
     except Exception as e:
-        logger.fatal(f"Unexpected error in the main process: {e}")
+        logging.fatal(f"Unexpected error in the main process: {e}")
 
 
 if __name__ == '__main__':
