@@ -1,0 +1,20 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CDC500_States",
+            "curator_emails": [],
+            "provenance_url": "https://www.cdc.gov/places/index.html",
+            "provenance_description": "Variables related to health from the CDC",
+            "scripts": [
+                "process.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "cdc500_state.tmcf",
+                    "cleaned_csv": "CDC500State_Output/CDC500State_Output.csv"
+                }
+            ],
+            "cron_schedule": "0 1 * * 1"
+        }
+    ]
+}

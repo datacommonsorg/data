@@ -1,0 +1,8 @@
+Node: E:CDC->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:CDC->statvar
+observationAbout: C:CDC->observation_about
+observationDate: C:CDC->observation_date
+value: C:CDC->percent
+measurementMethod: C:CDC->measurement_method
+observationPeriod: "P1Y"

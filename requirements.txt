@@ -5,6 +5,7 @@ arcgis2geojson
 chardet
 dataclasses==0.6
 datacommons==1.4.3
+db-dtypes
 frozendict
 func-timeout==4.3.5
 geojson==2.5.0
