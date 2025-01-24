@@ -51,36 +51,33 @@ def build_url(year, zip_filename=None):
         url = f'{BASE_URL}/{year}/{FILENAMES[year]}.csv'
     return url
 
+
 @retry(tries=5, delay=5, backoff=5)
 def download_with_retry(url):
     logging.info(f"Downloading URL : {url}")
     return requests.get(url=url, verify=False)
 
+
 # Download the file and save it in the input folder
 def download_file(url, year, input_folder, zip_filename=None):
-        try:
-            response = download_with_retry(url)
-            if response.status_code == 200:
-                os.makedirs(input_folder, exist_ok=True)
+    try:
+        response = download_with_retry(url)
+        if response.status_code == 200:
+            os.makedirs(input_folder, exist_ok=True)
 
-                file_path = os.path.join(
-                    input_folder,
-                    f'{year}.zip' if zip_filename else f'{year}.csv')
-                with open(file_path, 'wb') as f:
-                    f.write(response.content)
-                logging.info(f"File downloaded and saved as {file_path}")
-                return
-            else:
-                logging.fatal(
-                    f"Failed to download file for {year}. HTTP Status Code: {response.status_code} URL : {url}"
-                )
-        except Exception as e:
+            file_path = os.path.join(
+                input_folder, f'{year}.zip' if zip_filename else f'{year}.csv')
+            with open(file_path, 'wb') as f:
+                f.write(response.content)
+            logging.info(f"File downloaded and saved as {file_path}")
+            return
+        else:
             logging.fatal(
-        f"Failed to download file for {year} after {url} .")
+                f"Failed to download file for {year}. HTTP Status Code: {response.status_code} URL : {url}"
+            )
+    except Exception as e:
+        logging.fatal(f"Failed to download file for {year} after {url} .")
 
-
-   
-    
 
 # Data processing function
 def write_csv(data, outfilename):
@@ -146,7 +143,7 @@ def main(_):
                         logging.info(
                             f"File for {year} not found. Downloading...")
                         url = build_url(year, zip_filename)
-                        download_file(url, year, input_folder,zip_filename)
+                        download_file(url, year, input_folder, zip_filename)
 
                 except Exception as e:
                     logging.fatal(f"Error processing data for year {year}: {e}")
@@ -160,7 +157,6 @@ def main(_):
                     columns = CSV_COLUMNS_BY_YEAR[year]
                     zip_filename = ZIP_FILENAMES.get(year, None)
 
-                    
                     file_path = os.path.join(
                         input_folder,
                         f'{year}.zip' if zip_filename else f'{year}.csv')
