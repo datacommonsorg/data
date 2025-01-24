@@ -33,7 +33,11 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string('config_path',
                     'gs://unresolved_mcf/epa/ejscreen/config.json',
                     'Path to config file')
-flags.DEFINE_string('mode', '', 'Mode of operation: "download" to only download, "process" to only process, leave empty for both.')
+flags.DEFINE_string(
+    'mode', '',
+    'Mode of operation: "download" to only download, "process" to only process, leave empty for both.'
+)
+
 
 # Function to build the correct URL for each year
 def build_url(year, zip_filename=None):
@@ -49,32 +53,36 @@ def build_url(year, zip_filename=None):
 
 # Download the file and save it in the input folder
 def download_file(url, year, zip_filename=None):
-    max_retry = 5 
+    max_retry = 5
     retry_number = 0
     while retry_number < max_retry:
         try:
             response = requests.get(url, verify=False)
             if response.status_code == 200:
                 input_folder = os.path.join(_MODULE_DIR, 'input')
-                os.makedirs(input_folder, exist_ok=True)  
+                os.makedirs(input_folder, exist_ok=True)
 
-                file_path = os.path.join(input_folder, f'{year}.zip' if zip_filename else f'{year}.csv')
+                file_path = os.path.join(
+                    input_folder,
+                    f'{year}.zip' if zip_filename else f'{year}.csv')
                 with open(file_path, 'wb') as f:
                     f.write(response.content)
                 logger.info(f"File downloaded and saved as {file_path}")
-                return  
+                return
             else:
-                logger.fatal(f"Failed to download file for {year}. HTTP Status Code: {response.status_code}")
+                logger.fatal(
+                    f"Failed to download file for {year}. HTTP Status Code: {response.status_code}"
+                )
                 retry_number += 1
-                time.sleep(5)  
+                time.sleep(5)
         except Exception as e:
             logger.error(f"Error downloading file for {year}: {e}")
             retry_number += 1
-            time.sleep(5) 
+            time.sleep(5)
 
     # If we reached max retries and failed, log the fatal error
-    logger.fatal(f"Failed to download file for {year} after {max_retry} retries.")
-    
+    logger.fatal(
+        f"Failed to download file for {year} after {max_retry} retries.")
 
 
 # Data processing function
@@ -86,7 +94,8 @@ def write_csv(data, outfilename):
 
     full_df = full_df.rename(columns={'ID': 'FIPS'})
     full_df = full_df.sort_values(by=['FIPS'], ignore_index=True)
-    full_df['FIPS'] = 'dcid:geoId/' + (full_df['FIPS'].astype(str).str.zfill(12))
+    full_df['FIPS'] = 'dcid:geoId/' + (
+        full_df['FIPS'].astype(str).str.zfill(12))
     full_df = full_df.fillna('')
     full_df = full_df.replace('None', '')
     full_df.to_csv(outfilename, index=False)
@@ -132,10 +141,13 @@ def main(_):
                     zip_filename = ZIP_FILENAMES.get(year, None)
 
                     input_folder = os.path.join(_MODULE_DIR, 'input')
-                    file_path = os.path.join(input_folder, f'{year}.zip' if zip_filename else f'{year}.csv')
+                    file_path = os.path.join(
+                        input_folder,
+                        f'{year}.zip' if zip_filename else f'{year}.csv')
 
                     if not os.path.exists(file_path):
-                        logger.info(f"File for {year} not found. Downloading...")
+                        logger.info(
+                            f"File for {year} not found. Downloading...")
                         url = build_url(year, zip_filename)
                         download_file(url, year, zip_filename)
 
@@ -152,15 +164,23 @@ def main(_):
                     zip_filename = ZIP_FILENAMES.get(year, None)
 
                     input_folder = os.path.join(_MODULE_DIR, 'input')
-                    file_path = os.path.join(input_folder, f'{year}.zip' if zip_filename else f'{year}.csv')
+                    file_path = os.path.join(
+                        input_folder,
+                        f'{year}.zip' if zip_filename else f'{year}.csv')
 
                     # Process the downloaded file
                     if zip_filename:
                         with zipfile.ZipFile(file_path, 'r') as zfile:
-                            with zfile.open(f'{FILENAMES[year]}.csv', 'r') as newfile:
-                                dfs[year] = pd.read_csv(newfile, engine='python', encoding='latin1', usecols=columns)
+                            with zfile.open(f'{FILENAMES[year]}.csv',
+                                            'r') as newfile:
+                                dfs[year] = pd.read_csv(newfile,
+                                                        engine='python',
+                                                        encoding='latin1',
+                                                        usecols=columns)
                     else:
-                        dfs[year] = pd.read_csv(file_path, sep=',', usecols=columns)
+                        dfs[year] = pd.read_csv(file_path,
+                                                sep=',',
+                                                usecols=columns)
 
                     logger.info(f"File processed for {year} successfully")
 
@@ -187,7 +207,6 @@ def main(_):
 
     except Exception as e:
         logger.fatal(f"Unexpected error in the main process: {e}")
-        
 
 
 if __name__ == '__main__':
