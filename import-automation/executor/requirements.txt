@@ -13,3 +13,5 @@ pytz
 absl-py
 croniter
 pandas
+chardet
+retry
