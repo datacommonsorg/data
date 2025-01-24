@@ -23,6 +23,10 @@ from absl import logging
 
 import differ_utils
 
+SAMPLE_COUNT = 3
+GROUPBY_COLUMNS = 'variableMeasured,observationAbout,observationDate,measurementMethod,unit,observationPeriod'
+VALUE_COLUMNS = 'value,scalingFactor'
+
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'current_data', '', 'Path to the current MCF data \
@@ -34,14 +38,11 @@ flags.DEFINE_string('output_location', 'results', \
   'Path to the output data folder.')
 
 flags.DEFINE_string(
-    'groupby_columns',
-    'variableMeasured,observationAbout,observationDate,measurementMethod,unit',
+    'groupby_columns', GROUPBY_COLUMNS,
     'Columns to group data for diff analysis in the order (var,place,time etc.).'
 )
-flags.DEFINE_string('value_columns', 'value,scalingFactor',
+flags.DEFINE_string('value_columns', VALUE_COLUMNS,
                     'Columns with statvar value for diff analysis.')
-
-SAMPLE_COUNT = 3
 
 
 class ImportDiffer:
@@ -69,8 +70,12 @@ class ImportDiffer:
 
   """
 
-    def __init__(self, current_data, previous_data, output_location,
-                 groupby_columns, value_columns):
+    def __init__(self,
+                 current_data,
+                 previous_data,
+                 output_location,
+                 groupby_columns=GROUPBY_COLUMNS,
+                 value_columns=VALUE_COLUMNS):
         self.current_data = current_data
         self.previous_data = previous_data
         self.output_location = output_location
@@ -89,8 +94,8 @@ class ImportDiffer:
     def _get_samples(self, row):
         years = sorted(row[self.time_column])
         if len(years) > SAMPLE_COUNT:
-            return years[0] + random.sample(years[1:-1],
-                                            SAMPLE_COUNT - 2) + years[-1]
+            return [years[0]] + random.sample(years[1:-1],
+                                              SAMPLE_COUNT - 2) + [years[-1]]
         else:
             return years
 
@@ -213,8 +218,8 @@ class ImportDiffer:
         return summary, result
 
     def run_differ(self):
-        if not os.path.exists(FLAGS.output_location):
-            os.makedirs(FLAGS.output_location)
+        if not os.path.exists(self.output_location):
+            os.makedirs(self.output_location)
         logging.info('Loading data...')
         current_df = differ_utils.load_data(self.current_data,
                                             self.output_location)
