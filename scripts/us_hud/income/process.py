@@ -29,7 +29,7 @@ from absl import flags
 FLAGS = flags.FLAGS
 flags.DEFINE_string('income_output_dir', 'csv', 'Path to write cleaned CSVs.')
 
-URL_PREFIX = 'https://www.huduser.gov/portal/datasets/il/il'
+URL_PREFIX = 'https://www.huduser.gov/portal/datasets/il/il23/Section8-FY23.xlsx'
 
 
 def get_url(year):
@@ -85,9 +85,13 @@ def process(year, matches, output_dir):
   '''
     url = get_url(year)
     try:
-        df = pd.read_excel(url)
-    except:
-        print(f'No file found for {url}.')
+        if year < 2023:
+            df = pd.read_excel(url, 0)
+        else:
+            df = pd.read_excel("scripts/us_hud/income/Section8-FY23.xlsx",
+                               "Section8-FY23")
+    except Exception as e:
+        print(f'No file found for {url}-{e}.')
         return
     if 'fips2010' in df:
         df = df.rename(columns={'fips2010': 'fips'})
@@ -123,7 +127,7 @@ def main(argv):
     if not os.path.exists(FLAGS.income_output_dir):
         os.makedirs(FLAGS.income_output_dir)
     today = datetime.date.today()
-    for year in range(2006, today.year):
+    for year in range(2019, today.year + 1):
         print(year)
         process(year, matches, FLAGS.income_output_dir)
 
