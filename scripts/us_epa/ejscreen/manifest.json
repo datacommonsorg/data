@@ -2,7 +2,7 @@
     "import_specifications": [
         {
             "import_name": "EPA_EJSCREEN",
-            "curator_emails": ["rbhande@google.com"],
+            "curator_emails": [],
             "provenance_url": "https://gaftp.epa.gov/EJSCREEN/",
             "provenance_description": "The Census Bureau's Ejscreen data",
             "scripts": [
