@@ -204,6 +204,7 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
 
 
 def main(argv):
+    global _YEARWISE_CONFIG
     csv_files = []
     #Fetching the config from GCS location
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
@@ -214,7 +215,7 @@ def main(argv):
         for year, config in config['14'].items():
             xls_file_path = config['path']
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
-            logging.info("*** Processing : ", xls_file_path)
+            logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])
             read_file = _clean_dataframe(read_file, year)
             read_file.insert(_YEAR_INDEX, 'Year', year)

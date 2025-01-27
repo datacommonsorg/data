@@ -26,11 +26,13 @@ from absl import app
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
-    'input', 'gs://unresolved_mcf/fbi/hate_crime/20250107/hate_crime.csv',
+    'input',
+    'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/input_files/hate_crime.csv',
     'Input csv file from https://cde.ucr.cjis.gov/LATEST/webapp/#')
-flags.DEFINE_string('config_file',
-                    'gs://unresolved_mcf/fbi/hate_crime/20250107/config.json',
-                    'Input config file')
+flags.DEFINE_string(
+    'config_file',
+    'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/config.json',
+    'Input config file')
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))

@@ -21,6 +21,7 @@ import pandas as pd
 
 from absl import app
 from absl import flags
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -138,11 +139,9 @@ def main(argv):
     with tempfile.TemporaryDirectory() as tmp_dir:
         for year, config in _YEARWISE_CONFIG['1'].items():
             xls_file_path = config['path']
-            print("*************", xls_file_path)
+            logging.info(f"Processing : {xls_file_path}")
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
             read_file = pd.read_excel(xls_file_path, **config['args'])
-
-            # read_file = pd.read_excel(xls_file_path, **config['args'])
             read_file = _clean_dataframe(read_file)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, index=None, header=True)

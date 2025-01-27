@@ -21,6 +21,7 @@ import pandas as pd
 
 from absl import app
 from absl import flags
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -53,43 +54,6 @@ _YEARS_WITH_TWO_RAPE_COLUMNS = ('2013', '2014', '2015', '2016')
 # A config that maps the year to corresponding xls file with args to be used
 # with pandas.read_excel()
 _YEARWISE_CONFIG = None
-# {
-#     '2023': {
-#         'type': 'xlsx',
-#         'path': 'gs://unresolved_mcf/fbi/hate_crime/20250107/2023/Table_3_Offenses_Known_Offenders_Race_and_Ethnicity_by_Offense_Type_2023.xlsx',
-#         'args': {
-#             'header': 5,
-#             'skipfooter': 2,
-#             'usecols': list(range(0, 14))
-#         }
-#     },
-#     '2022': {
-#         'type': 'xlsx',
-#         'path': 'gs://unresolved_mcf/fbi/hate_crime/20250107/2022/Table_3_Offenses_Known_Offenders_Race_and_Ethnicity_by_Offense_Type_2022.xlsx',
-#         'args': {
-#             'header': 5,
-#             'skipfooter': 2,
-#             'usecols': list(range(0, 14))
-#         }
-#     },
-#     '2021': {
-#         'type': 'xls',
-#         'path': 'gs://unresolved_mcf/fbi/hate_crime/20250107/2021/Table_3_Offenses_Known_Offenders_Race_and_Ethnicity_by_Offense_Type_2021.xls',
-#         'args': {
-#             'header': 5,
-#             'skipfooter': 2,
-#             'usecols': list(range(0, 14))
-#         }
-#     },
-#     '2020': {
-#         'type': 'xlsx',
-#         'path': 'gs://unresolved_mcf/fbi/hate_crime/20250107/2020/Table_3_Offenses_Known_Offenders_Race_and_Ethnicity_by_Offense_Type_2020.xlsx',
-#         'args': {
-#             'header': 5,
-#             'skipfooter': 3,
-#             'usecols': list(range(0, 14))
-#         }
-# }
 
 
 def _write_row(year: int, statvar_dcid: str, quantity: str,
@@ -146,15 +110,10 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
 
 def _clean_dataframe(df: pd.DataFrame, year: str) -> pd.DataFrame:
     """Clean the column names and offense type values in a dataframe."""
-
-    # config_path = os.path.join(os.path.dirname(_SCRIPT_PATH), 'table_config.json')
-
+    global _YEARWISE_CONFIG
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
     config = _YEARWISE_CONFIG['table_config']
-    # with open(config_path, 'r', encoding='utf-8') as f:
-    #     config = json.load(f)
-    # table_config = config.get('table_config')
     year_config = config['3']
 
     if year_config:
@@ -166,22 +125,6 @@ def _clean_dataframe(df: pd.DataFrame, year: str) -> pd.DataFrame:
                 if year in year_range:
                     df.columns = columns
 
-    # if year in ['2023','2022','2021','2020', '2019', '2018', '2017', '2016', '2015', '2014', '2013']:
-    #     df.columns = [
-    #         'offense type', 'total offenses', 'white',
-    #         'black or african american', 'american indian or alaska native',
-    #         'asian', 'native hawaiian or other pacific islander',
-    #         'multiple races', 'unknown race', 'hispanic or latino',
-    #         'not hispanic or latino', 'group of multiple ethnicities',
-    #         'unknown ethnicity', 'unknown offender'
-    #     ]
-    # else:  # 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004
-    #     df.columns = [
-    #         'offense type', 'total offenses', 'white',
-    #         'black or african american', 'american indian or alaska native',
-    #         'asian or pacific islander', 'multiple races', 'unknown race',
-    #         'unknown offender'
-    #     ]
     df['offense type'] = df['offense type'].replace(r'[\d:]+', '', regex=True)
     df['offense type'] = df['offense type'].replace(r'\s+', ' ', regex=True)
     df['offense type'] = df['offense type'].str.strip()
@@ -216,7 +159,7 @@ def main(argv):
         for year, config in config['3'].items():
             xls_file_path = config["path"]
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
-            print("**************", xls_file_path)
+            logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])
             read_file = _clean_dataframe(read_file, year)
             read_file.insert(_YEAR_INDEX, 'Year', year)

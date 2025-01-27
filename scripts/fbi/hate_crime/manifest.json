@@ -1,20 +1,50 @@
 {
     "import_specifications": [
       {
-        "import_name": "FBIHateCrime",
-        "curator_emails": ["bipina@google.com"],
+        "import_name": "FBIHateCrimePublications",
+        "curator_emails": [],
         "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
         "provenance_description": "US Hate Crime Statistics",
-        "scripts": ["preprocess_aggregations.py"],
+        "scripts": ["run.sh"],
         "import_inputs": [
           {
-            "template_mcf": "../aggregations.tmcf",
-            "cleaned_csv": "aggregation.csv",
-            "cleaned_csv": "aggregation.csv"
+            "template_mcf": "tables1-10/output.tmcf",
+            "cleaned_csv": "tables1-10/all_combined.csv"
+          },
+          {
+            "template_mcf": "table11/output.tmcf",
+            "cleaned_csv": "table11/cleaned.csv"
+          },
+          {
+            "template_mcf": "table12/output.tmcf",
+            "cleaned_csv": "table12/cleaned.csv"
+          },
+          {
+            "template_mcf": "table13/output.tmcf",
+            "cleaned_csv": "table13/cleaned.csv"
+          },
+          {
+            "template_mcf": "table14/output.tmcf",
+            "cleaned_csv": "table14/cleaned.csv"
           }
         ],
         "cron_schedule": "0 10 21 * *"
+      },
+      {
+        "import_name": "FBIHateCrime",
+        "curator_emails": [],
+        "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
+        "provenance_description": "US Hate Crime Statistics",
+        "scripts": ["preprocess_aggregation.py"],
+        "import_inputs": [
+          {
+            "template_mcf": "aggregations.tmcf",
+            "cleaned_csv": "aggregations/aggregation.csv"
+          }
+        ],
+        "cron_schedule": "0 10 21 * *" 
       }
     ]
-  }
+  
+}
   

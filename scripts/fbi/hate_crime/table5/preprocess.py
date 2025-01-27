@@ -21,6 +21,7 @@ import pandas as pd
 
 from absl import app
 from absl import flags
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -107,6 +108,7 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
 
 def _clean_dataframe(df: pd.DataFrame, year: str):
     """Clean the column names and offense type values in a dataframe."""
+    global _YEARWISE_CONFIG
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
     config = _YEARWISE_CONFIG['table_config']
@@ -132,6 +134,7 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
 
 
 def main(argv):
+    global _YEARWISE_CONFIG
     csv_files = []
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
@@ -140,7 +143,7 @@ def main(argv):
         for year, config in config['5'].items():
             xls_file_path = config['path']
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
-            print("****************", xls_file_path)
+            logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])
             read_file = _clean_dataframe(read_file, year)
             read_file.insert(_YEAR_INDEX, 'Year', year)

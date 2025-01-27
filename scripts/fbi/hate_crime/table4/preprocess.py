@@ -21,6 +21,7 @@ import pandas as pd
 
 from absl import app
 from absl import flags
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -124,41 +125,6 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
                 if year in year_range:
                     df.columns = columns
 
-    # if year in ['2020','2021', '2018']:
-    #     df.columns = [
-    #         'bias motivation', 'total offenses', 'murder', 'rape',
-    #         'aggravated assault', 'simple assault', 'intimidation',
-    #         'other crimes against person', 'robbery', 'burglary',
-    #         'larceny theft', 'motor vehicle theft', 'arson', 'vandalism',
-    #         'other crimes against property', 'crimes against society'
-    #     ]
-    # elif year in ['2019', '2017','2022','2023']:
-    #     df.columns = [
-    #         'bias motivation', 'total offenses', 'murder', 'rape',
-    #         'aggravated assault', 'simple assault', 'intimidation',
-    #         'trafficking', 'other crimes against person', 'robbery', 'burglary',
-    #         'larceny theft', 'motor vehicle theft', 'arson', 'vandalism',
-    #         'other crimes against property', 'crimes against society'
-    #     ]
-    # elif year in ['2016', '2015', '2014', '2013']:
-    #     df.columns = [
-    #         'bias motivation', 'total offenses', 'murder', 'rape1', 'rape2',
-    #         'aggravated assault', 'simple assault', 'intimidation',
-    #         'other crimes against person', 'robbery', 'burglary',
-    #         'larceny theft', 'motor vehicle theft', 'arson', 'vandalism',
-    #         'other crimes against property', 'crimes against society'
-    #     ]
-    #     df['rape'] = df['rape1'] + df['rape2']
-    #     df.drop(['rape1', 'rape2'], axis=1, inplace=True)
-    # else:  # 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004
-    #     df.columns = [
-    #         'bias motivation', 'total offenses', 'murder', 'forcible rape',
-    #         'aggravated assault', 'simple assault', 'intimidation',
-    #         'other crimes against person', 'robbery', 'burglary',
-    #         'larceny theft', 'motor vehicle theft', 'arson', 'vandalism',
-    #         'other crimes against property', 'crimes against society'
-    #     ]
-
     df['bias motivation'] = df['bias motivation'].replace(r'[\d:]+',
                                                           '',
                                                           regex=True)
@@ -171,6 +137,7 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
 
 def main(argv):
     csv_files = []
+    global _YEARWISE_CONFIG
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
     config = _YEARWISE_CONFIG['year_config']
@@ -178,7 +145,7 @@ def main(argv):
         for year, config in config['4'].items():
             xls_file_path = config['path']
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
-            print("****************", xls_file_path)
+            logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])
             read_file = _clean_dataframe(read_file, year)
             read_file.insert(_YEAR_INDEX, 'Year', year)
