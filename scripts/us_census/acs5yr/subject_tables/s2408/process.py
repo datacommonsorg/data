@@ -135,7 +135,13 @@ class S2408SubjectTableLoader(SubjectTableDataLoaderBase):
                 obs_df = pd.DataFrame(columns=self.csv_columns)
                 obs_df['Place'] = place_geoIds
                 obs_df['StatVar'] = column_map[column]['Node']
-                obs_df['Quantity'] = df[column].values.tolist()
+                # obs_df['Quantity'] = df[column].values.tolist()
+
+                # Clean the quantity values by removing commas, dashes, and any non-numeric characters like '+'
+                obs_df['Quantity'] = df[column].apply(lambda x: str(x).replace(
+                    ',', '').replace('-', '').replace('+', '')).astype(
+                        float).tolist()
+
                 # add unit to the csv
                 try:
                     unit = column_map[column]['unit']
