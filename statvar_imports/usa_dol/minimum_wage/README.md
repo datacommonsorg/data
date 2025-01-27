@@ -22,4 +22,4 @@
 `python3 main.py`
 
 #### Processing
-`python3 stat_var_processor.py --input_data=statvar_imports/usa_dol/minimum_wage/download_script/input_files/final_data.csv --pv_map=statvar_imports/usa_dol/minimum_wage/US_Dol_Wages_pvmap.csv --config=statvar_imports/usa_dol/minimum_wage/US_Dol_Wages_metadata.csv --output_path=statvar_imports/usa_dol/minimum_wage/test_data/sample_output/US_DOL_Wages`
+`python3 stat_var_processor.py --input_data=statvar_imports/usa_dol/minimum_wage/download_script/input_files/final_data.csv --pv_map=statvar_imports/usa_dol/minimum_wage/us_dol_wages_pvmap.csv --config=statvar_imports/usa_dol/minimum_wage/us_dol_wages_metadata.csv --output_path=statvar_imports/usa_dol/minimum_wage/test_data/sample_output/us_dol_wges`
