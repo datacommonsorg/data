@@ -45,6 +45,7 @@ from common.dcid_existance import *
 from common.dcid__mcf_existance import check_dcid_existence
 from util.alpha2_to_dcid import USSTATE_MAP
 
+
 def log_method_execution(func):
     """
     Decorator to log the execution of methods within a class.
@@ -58,6 +59,7 @@ def log_method_execution(func):
     Returns:
         The decorated method.
     """
+
     def wrapper(*args, **kwargs):
         try:
             logging.info(f"Starting method: {func.__qualname__}")
@@ -67,8 +69,10 @@ def log_method_execution(func):
         except Exception as e:
             logging.error(f"Error executing method: {func.__qualname__}")
             logging.error(f"Error message: {e}")
-            raise 
+            raise
+
     return wrapper
+
 
 class USEducation:
     """
@@ -126,7 +130,7 @@ class USEducation:
 
     def set_tmcf_place_path(self, tmcf_file_place: str) -> None:
         self._tmcf_file_place = tmcf_file_place
-        
+
     @log_method_execution
     def input_file_to_df(self, f_path: str) -> pd.DataFrame:
         """Convert a file path to a dataframe."""
@@ -138,7 +142,7 @@ class USEducation:
             #assert lines[-5].startswith('Data Source')
             f_content = io.StringIO('\n'.join(lines[6:-5]))
             return pd.read_csv(f_content)
-        
+
     @log_method_execution
     def _extract_year_from_headers(self, headers: list) -> str:
         """Extracting year from the headers."""
@@ -174,7 +178,7 @@ class USEducation:
                     raw_df[col].str.replace('"', '\'')
 
         return raw_df
-    
+
     @log_method_execution
     def _clean_columns(self, raw_df: pd.DataFrame) -> pd.DataFrame:
         '''
@@ -374,7 +378,8 @@ class USEducation:
                 year = match.groupdict()["year"]
                 if year != self._year:
                     year_match = False
-                    logging.info(f"Column {header} is not for expectd year {self._year}")
+                    logging.info(
+                        f"Column {header} is not for expectd year {self._year}")
         return year_match
 
     @log_method_execution
@@ -910,7 +915,7 @@ class USEducation:
             df["sv_name"].str.contains(
                 "Percent_Student_AsAFractionOf_Count_Teacher"), '', df["unit"])
         return df
-    
+
     @log_method_execution
     def generate_csv(self) -> pd.DataFrame:
         """

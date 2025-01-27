@@ -6,7 +6,8 @@ from selenium.webdriver.common.by import By
 from chromedriver_py import binary_path  # this will get you the path variable for ChromeDriver
 from absl import logging
 
-def fetch_school_ncid(school, year, column_names,NCES_DOWNLOAD_URL):
+
+def fetch_school_ncid(school, year, column_names, NCES_DOWNLOAD_URL):
     """
     Fetches the NCID (National Center for Education Statistics ID) for a given school and year.
 
@@ -33,7 +34,7 @@ def fetch_school_ncid(school, year, column_names,NCES_DOWNLOAD_URL):
     driver = webdriver.Chrome(
         service=svc,
         options=chrome_options)  # Start Chrome with the given service
-    
+
     # Prepare the year variable by formatting it to match the expected input format
     year = 'cb_year_' + year + ''
 
@@ -65,19 +66,21 @@ def fetch_school_ncid(school, year, column_names,NCES_DOWNLOAD_URL):
             if i.get_attribute('id') == 'aTableColumns':
                 i.click()
                 break
-        time.sleep(2)  # Wait for 2 seconds to allow page interactions to complete
+        time.sleep(
+            2)  # Wait for 2 seconds to allow page interactions to complete
 
         # Find all <li> elements within the column tabs
         logging.info("Processing column options")
-        li_items = driver.find_elements(By.XPATH, "//*[@id='dColumnTabs']/ul/li")
+        li_items = driver.find_elements(By.XPATH,
+                                        "//*[@id='dColumnTabs']/ul/li")
         for div_id in li_items:
             # Click each <li> tab one by one to access the column options
             div_id.click()
             time.sleep(5)  # Wait for 5 seconds for the tab content to load
 
             # Locate the corresponding div for the clicked tab
-            div_tab = driver.find_elements(By.ID,
-                                        div_id.get_attribute('aria-controls'))[0]
+            div_tab = driver.find_elements(
+                By.ID, div_id.get_attribute('aria-controls'))[0]
             first_ul = div_tab.find_elements(By.XPATH, "ul")
 
             # Ensure the <ul> is found and proceed to extract <li> items within it
@@ -117,7 +120,6 @@ def fetch_school_ncid(school, year, column_names,NCES_DOWNLOAD_URL):
     finally:
         # Close the WebDriver in the finally block to ensure it's closed even if an exception occurs
         driver.quit()
-        
 
         # Prepare to return a list of NCIDs corresponding to the requested columns
         id_list = []
@@ -125,5 +127,6 @@ def fetch_school_ncid(school, year, column_names,NCES_DOWNLOAD_URL):
         # Filter the options by matching the label_header with the provided column names
         for item in FINAL_LIST:
             if item['label_header'] in column_names:
-                id_list.append(item['value'])  # Add the value (NCID) to the list
+                id_list.append(
+                    item['value'])  # Add the value (NCID) to the list
         return id_list  # Return the list of NCIDs that match the requested columns

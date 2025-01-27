@@ -249,12 +249,12 @@ _GENDER_PATTERN = (r"("
                    r")")
 
 _LUNCH_ELIGIBILITY_PATTERN = (r"("
-                            r"Free Lunch"
-                            r"|"
-                            r"Reduced-price Lunch"
-                            r"|"
-                            r"Free and Reduced Lunch"
-                            r")")
+                              r"Free Lunch"
+                              r"|"
+                              r"Reduced-price Lunch"
+                              r"|"
+                              r"Free and Reduced Lunch"
+                              r")")
 
 _SCHOOL_STAFF_PATTERN = (r"("
                          r"Paraprofessionals/Instructional Aides"

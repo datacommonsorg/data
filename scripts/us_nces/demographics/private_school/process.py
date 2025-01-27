@@ -37,6 +37,7 @@ from config import *
 # pylint:enable=import-error
 # pylint:disable=wildcard-import
 
+
 # pylint:disable=too-few-public-methods
 class NCESPrivateSchool(USEducation):
     """
@@ -71,7 +72,7 @@ if __name__ == '__main__':
     try:
         logging.info("Main Method Starts For Private School District ")
         input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                "input_files")
+                                  "input_files")
         input_files = [
             os.path.join(input_path, file)
             for file in sorted(os.listdir(input_path))
@@ -79,8 +80,8 @@ if __name__ == '__main__':
         ]
 
         # Defining Output Files
-        output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                        "output_files")
+        output_file_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "output_files")
 
         output_file_path_place = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "output_place")
@@ -90,11 +91,11 @@ if __name__ == '__main__':
         tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
         cleaned_csv_place = os.path.join(output_file_path_place, CSV_FILE_PLACE)
         duplicate_csv_place = os.path.join(output_file_path_place,
-                                        CSV_DUPLICATE_NAME)
+                                           CSV_DUPLICATE_NAME)
         tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
         loader = NCESPrivateSchool(input_files, cleaned_csv_path, mcf_path,
-                                tmcf_path, cleaned_csv_place,
-                                duplicate_csv_place, tmcf_path_place)
+                                   tmcf_path, cleaned_csv_place,
+                                   duplicate_csv_place, tmcf_path_place)
 
         loader.generate_csv()
         loader.generate_mcf()

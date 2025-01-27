@@ -168,7 +168,8 @@ def main(_):
             id_list = data[school][year]
             print(f"Year {year} exists for {school} in the JSON file.")
         else:
-            id_list = fetch_ncid.fetch_school_ncid(school, year, column_names,NCES_DOWNLOAD_URL)
+            id_list = fetch_ncid.fetch_school_ncid(school, year, column_names,
+                                                   NCES_DOWNLOAD_URL)
             data[school][year] = id_list
             with file_util.FileIO(_FLAGS.config_file, 'w') as f:
                 json.dump(data, f, indent=4)

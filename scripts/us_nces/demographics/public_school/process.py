@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 This Python Script Load the datasets, cleans it
 and generates cleaned CSV, MCF, TMCF file.
@@ -64,7 +63,7 @@ if __name__ == '__main__':
     try:
         logging.info("Main Method Starts For Public School District ")
         input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                "input_files")
+                                  "input_files")
         input_files = [
             os.path.join(input_path, file)
             for file in sorted(os.listdir(input_path))
@@ -72,8 +71,8 @@ if __name__ == '__main__':
         ]
 
         # Defining Output Files
-        output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                        "output_files")
+        output_file_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "output_files")
 
         output_file_path_place = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "output_place")
@@ -83,12 +82,12 @@ if __name__ == '__main__':
         tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
         csv_path_place = os.path.join(output_file_path_place, CSV_FILE_PLACE)
         duplicate_csv_place = os.path.join(output_file_path_place,
-                                        CSV_DUPLICATE_NAME)
+                                           CSV_DUPLICATE_NAME)
         tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
 
         loader = NCESPublicSchool(input_files, cleaned_csv_path, mcf_path,
-                                tmcf_path, csv_path_place, duplicate_csv_place,
-                                tmcf_path_place)
+                                  tmcf_path, csv_path_place,
+                                  duplicate_csv_place, tmcf_path_place)
         loader.generate_csv()
         loader.generate_mcf()
         loader.generate_tmcf()
