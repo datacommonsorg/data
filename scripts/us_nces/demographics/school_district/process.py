@@ -23,6 +23,7 @@ output_files - output files (mcf, tmcf and csv are written here)
 
 import os
 import sys
+from absl import logging
 
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, MODULE_DIR + '/../..')
@@ -59,32 +60,37 @@ class NCESDistrictSchool(USEducation):
 # pylint:enable=too-few-public-methods
 
 if __name__ == '__main__':
-    input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                              "input_files")
-    input_files = [
-        os.path.join(input_path, file)
-        for file in sorted(os.listdir(input_path))
-        if file != ".DS_Store"
-    ]
+    try:
+        logging.info("Main Method Starts For School District ")
+        input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "input_files")
+        input_files = [
+            os.path.join(input_path, file)
+            for file in sorted(os.listdir(input_path))
+            if file != ".DS_Store"
+        ]
 
-    # Defining Output Files
-    output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                    "output_files")
+        # Defining Output Files
+        output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                        "output_files")
 
-    output_file_path_place = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "output_place")
+        output_file_path_place = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "output_place")
 
-    cleaned_csv_path = os.path.join(output_file_path, CSV_FILE_NAME)
-    mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
-    tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
-    csv_path_place = os.path.join(output_file_path_place, CSV_FILE_PLACE)
-    duplicate_csv_place = os.path.join(output_file_path_place,
-                                       CSV_DUPLICATE_NAME)
-    tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
+        cleaned_csv_path = os.path.join(output_file_path, CSV_FILE_NAME)
+        mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
+        tmcf_path = os.path.join(output_file_path, TMCF_FILE_NAME)
+        csv_path_place = os.path.join(output_file_path_place, CSV_FILE_PLACE)
+        duplicate_csv_place = os.path.join(output_file_path_place,
+                                        CSV_DUPLICATE_NAME)
+        tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
 
-    loader = NCESDistrictSchool(input_files, cleaned_csv_path, mcf_path,
-                                tmcf_path, csv_path_place, duplicate_csv_place,
-                                tmcf_path_place)
-    loader.generate_csv()
-    loader.generate_mcf()
-    loader.generate_tmcf()
+        loader = NCESDistrictSchool(input_files, cleaned_csv_path, mcf_path,
+                                    tmcf_path, csv_path_place, duplicate_csv_place,
+                                    tmcf_path_place)
+        loader.generate_csv()
+        loader.generate_mcf()
+        loader.generate_tmcf()
+        
+    except Exception as e:
+        logging.fatal(f"Error While Running District School Process: {e} ")

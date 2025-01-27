@@ -10,6 +10,7 @@ from bs4 import BeautifulSoup
 from download_config import COLUMNS_SELECTOR_URL
 from download_config import COMPRESS_FILE_URL
 from download_config import DOWNLOAD_URL
+from download_config import NCES_DOWNLOAD_URL
 from download_config import COLUMNS_SELECTOR
 from download_config import COMPRESS_FILE
 from download_config import HEADERS
@@ -167,7 +168,7 @@ def main(_):
             id_list = data[school][year]
             print(f"Year {year} exists for {school} in the JSON file.")
         else:
-            id_list = fetch_ncid.fetch_school_ncid(school, year, column_names)
+            id_list = fetch_ncid.fetch_school_ncid(school, year, column_names,NCES_DOWNLOAD_URL)
             data[school][year] = id_list
             with file_util.FileIO(_FLAGS.config_file, 'w') as f:
                 json.dump(data, f, indent=4)
@@ -192,7 +193,10 @@ def main(_):
                 f"{school} - {year} - {index_columns_selected} columns out of {total_columns_to_download}"
             )
 
-            nces_elsi_file_download(school, year, curr_columns_selected)
+            try:
+                nces_elsi_file_download(school, year, curr_columns_selected)
+            except Exception as e:
+                logging.fatal(f"An error occurred during download: {e}")
         logging.info(f"Download complete for year {year}")
 
 

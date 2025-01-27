@@ -248,7 +248,7 @@ _GENDER_PATTERN = (r"("
                    r"male"
                    r")")
 
-_LUNCH_ELIGIBITY_PATTERN = (r"("
+_LUNCH_ELIGIBILITY_PATTERN = (r"("
                             r"Free Lunch"
                             r"|"
                             r"Reduced-price Lunch"
@@ -340,7 +340,7 @@ FORM_STATVAR = {
     },
     "lunchEligibility": {
         "regex": {
-            "pattern": _LUNCH_ELIGIBITY_PATTERN,
+            "pattern": _LUNCH_ELIGIBILITY_PATTERN,
             "position": 1
         },
         "column": MELT_VAR_COL,

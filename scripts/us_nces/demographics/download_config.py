@@ -35,6 +35,8 @@ YEAR_URL = "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx/GetTableGeneratorYe
 
 YEAR_PAYLOAD = {'sLevel': '{school_type}'}
 
+NCES_DOWNLO_URL = "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx"
+
 COLUMNS_TO_DOWNLOAD_WITH_SINGLE_API_CALL = 59
 
 MAX_RETRIES = 5

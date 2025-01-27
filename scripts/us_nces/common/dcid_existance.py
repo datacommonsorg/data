@@ -1,8 +1,8 @@
 import datacommons as dc
 import time
-import logging
 import requests_cache
 import urllib
+from absl import logging
 
 dc.utils._API_ROOT = 'http://api.datacommons.org'
 

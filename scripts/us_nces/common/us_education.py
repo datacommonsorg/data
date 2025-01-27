@@ -30,6 +30,7 @@ import re
 import csv
 import pandas as pd
 import numpy as np
+from absl import logging
 
 pd.set_option("display.max_columns", None)
 
@@ -44,6 +45,30 @@ from common.dcid_existance import *
 from common.dcid__mcf_existance import check_dcid_existence
 from util.alpha2_to_dcid import USSTATE_MAP
 
+def log_method_execution(func):
+    """
+    Decorator to log the execution of methods within a class.
+
+    Logs the start and end of each method, and logs errors using logging.error 
+    and critical errors using logging.fatal.
+
+    Args:
+        func: The method to be decorated.
+
+    Returns:
+        The decorated method.
+    """
+    def wrapper(*args, **kwargs):
+        try:
+            logging.info(f"Starting method: {func.__qualname__}")
+            result = func(*args, **kwargs)
+            logging.info(f"Finished method: {func.__qualname__}")
+            return result
+        except Exception as e:
+            logging.error(f"Error executing method: {func.__qualname__}")
+            logging.error(f"Error message: {e}")
+            raise 
+    return wrapper
 
 class USEducation:
     """
@@ -101,7 +126,8 @@ class USEducation:
 
     def set_tmcf_place_path(self, tmcf_file_place: str) -> None:
         self._tmcf_file_place = tmcf_file_place
-
+        
+    @log_method_execution
     def input_file_to_df(self, f_path: str) -> pd.DataFrame:
         """Convert a file path to a dataframe."""
         with open(f_path, "r", encoding="UTF-8") as file:
@@ -112,7 +138,8 @@ class USEducation:
             #assert lines[-5].startswith('Data Source')
             f_content = io.StringIO('\n'.join(lines[6:-5]))
             return pd.read_csv(f_content)
-
+        
+    @log_method_execution
     def _extract_year_from_headers(self, headers: list) -> str:
         """Extracting year from the headers."""
         year_pattern = r"\[(District|((Private|Public) School))\](\s)(?P<year>\d\d\d\d-\d\d)"
@@ -123,6 +150,7 @@ class USEducation:
                 break
         return year
 
+    @log_method_execution
     def _clean_data(self, raw_df: pd.DataFrame) -> pd.DataFrame:
         """
         Extracts the required words using regex.
@@ -146,7 +174,8 @@ class USEducation:
                     raw_df[col].str.replace('"', '\'')
 
         return raw_df
-
+    
+    @log_method_execution
     def _clean_columns(self, raw_df: pd.DataFrame) -> pd.DataFrame:
         '''
         Extracts the required name from the column name
@@ -163,6 +192,7 @@ class USEducation:
         raw_df.columns = cleaned_columns
         return raw_df
 
+    @log_method_execution
     def _apply_regex(self, data_df: pd.DataFrame, conf: dict,
                      curr_prop_column: str):
         """
@@ -189,6 +219,7 @@ class USEducation:
                 data_df[curr_prop_column] = 'None'
         return data_df
 
+    @log_method_execution
     def _generate_prop(self,
                        data_df: pd.DataFrame,
                        default_mcf_prop: list = None,
@@ -235,6 +266,7 @@ class USEducation:
             data_df[curr_value_column] = data_df[column].map(curr_val_mapper)
         return data_df
 
+    @log_method_execution
     def _generate_stat_vars(self, data_df: pd.DataFrame, prop_cols: str,
                             sv_node_column: str) -> pd.DataFrame:
         """
@@ -268,6 +300,7 @@ class USEducation:
 
         return (stat_var_with_dcs, stat_var_without_dcs)
 
+    @log_method_execution
     def _generate_mcf_data(self, data_df: pd.DataFrame,
                            prop_cols: list) -> pd.DataFrame:
         '''
@@ -288,6 +321,7 @@ class USEducation:
         mcf_mapper = dict(zip(data_df["all_prop"], data_df['mcf']))
         return mcf_mapper
 
+    @log_method_execution
     def _generate_stat_var_and_mcf(self,
                                    data_df: pd.DataFrame,
                                    sv_prop_order: list = None):
@@ -322,6 +356,7 @@ class USEducation:
         data_df = data_df.drop(columns=prop_cols).reset_index(drop=True)
         return data_df
 
+    @log_method_execution
     def _verify_year_uniqueness(self, headers: list) -> bool:
         """
         Checks for particual year in the file which is being executed and
@@ -339,10 +374,10 @@ class USEducation:
                 year = match.groupdict()["year"]
                 if year != self._year:
                     year_match = False
-                    print(
-                        f"Column {header} is not for expectd year {self._year}")
+                    logging.info(f"Column {header} is not for expectd year {self._year}")
         return year_match
 
+    @log_method_execution
     def _transform_private_place(self):
         """
         The Data for Place Entities is cleaned and written to a file.
@@ -433,6 +468,7 @@ class USEducation:
         self._final_df_place = self._final_df_place.drop_duplicates(
             subset=["school_state_code"]).reset_index(drop=True)
 
+    @log_method_execution
     def _transform_public_place(self):
         """
         The Data for Place Entities is cleaned and written to a file.
@@ -583,6 +619,7 @@ class USEducation:
         self._final_df_place = self._final_df_place.drop_duplicates(
             subset=["school_state_code"]).reset_index(drop=True)
 
+    @log_method_execution
     def _transform_district_place(self):
         """
         The Data for Place Entities is cleaned and written to a file.
@@ -684,6 +721,7 @@ class USEducation:
         self._final_df_place = self._final_df_place.drop_duplicates(
             subset=["school_state_code"]).reset_index(drop=True)
 
+    @log_method_execution
     def _parse_file(self, raw_df: pd.DataFrame) -> pd.DataFrame:
         '''
         This method combines and melts all the columns to one Final DataFrame.
@@ -702,7 +740,7 @@ class USEducation:
         year_check = self._verify_year_uniqueness(
             raw_df.columns.values.tolist())
         if not year_check:
-            print(
+            logging.info(
                 f"Some columns in file are not of expected year {self._year} - correct the download config. Exiting.."
             )
             exit()
@@ -854,6 +892,7 @@ class USEducation:
 
         return df_cleaned
 
+    @log_method_execution
     def dropping_scalingFactor_unit(self, df: pd.DataFrame) -> pd.DataFrame:
         '''
         Dropping the scalingFactor and unit for Pupil/Teacher Ratio variable.
@@ -871,7 +910,8 @@ class USEducation:
             df["sv_name"].str.contains(
                 "Percent_Student_AsAFractionOf_Count_Teacher"), '', df["unit"])
         return df
-
+    
+    @log_method_execution
     def generate_csv(self) -> pd.DataFrame:
         """
         This Method calls the required methods to generate
@@ -897,7 +937,7 @@ class USEducation:
         city_dict = {}
         for input_file in sorted(self._input_files):
             c += 1
-            print(f"{c} - {os.path.basename(input_file)}")
+            logging.info(f"{c} - {os.path.basename(input_file)}")
 
             raw_df = self.input_file_to_df(input_file)
             df_parsed = self._parse_file(raw_df)
@@ -972,6 +1012,7 @@ class USEducation:
             df_merged = pd.concat([df_merged, df])
         self._df = df_merged
 
+    @log_method_execution
     def generate_mcf(self) -> None:
         """
         This method generates MCF file w.r.t
@@ -1008,6 +1049,7 @@ class USEducation:
         with open(self._mcf_file_path, "w", encoding="UTF-8") as file:
             file.write(mcf_)
 
+    @log_method_execution
     def generate_tmcf(self) -> None:
         """
         This method generates TMCF file w.r.t
