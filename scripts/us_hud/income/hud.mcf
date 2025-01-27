@@ -1,0 +1,127 @@
+Node: dcid:Median_Income_Household_With1Person_80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 1]
+income: [dcs:Percentile 80]
+
+Node: dcid:Median_Income_Household_With2Person_80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 2]
+income: [dcs:Percentile 80]
+
+Node: dcid:Median_Income_Household_With3Person_80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 3]
+income: [dcs:Percentile 80]
+
+Node: dcid:Median_Income_Household_With4Person_80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 4]
+income: [dcs:Percentile 80]
+
+Node: dcid:Median_Income_Household_With5Person_80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 5]
+income: [dcs:Percentile 80]
+
+Node: dcid:Median_Income_Household_With6Person_80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 6]
+income: [dcs:Percentile 80]
+
+Node: dcid:Median_Income_Household_With7Person_80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 7]
+income: [dcs:Percentile 80]
+
+Node: dcid:Median_Income_Household_With8Person_80Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 8]
+income: [dcs:Percentile 80]
+
+Node: dcid:Median_Income_Household_With1Person_150Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 1]
+income: [dcs:Percentile 150]
+
+Node: dcid:Median_Income_Household_With2Person_150Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 2]
+income: [dcs:Percentile 150]
+
+Node: dcid:Median_Income_Household_With3Person_150Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 3]
+income: [dcs:Percentile 150]
+
+Node: dcid:Median_Income_Household_With4Person_150Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 4]
+income: [dcs:Percentile 150]
+
+Node: dcid:Median_Income_Household_With5Person_150Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 5]
+income: [dcs:Percentile 150]
+
+Node: dcid:Median_Income_Household_With6Person_150Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 6]
+income: [dcs:Percentile 150]
+
+Node: dcid:Median_Income_Household_With7Person_150Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 7]
+income: [dcs:Percentile 150]
+
+Node: dcid:Median_Income_Household_With8Person_150Percentile
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Household
+measuredProperty: dcs:income
+statType: dcs:medianValue
+householdSize: [dcs:Person 8]
+income: [dcs:Percentile 150]

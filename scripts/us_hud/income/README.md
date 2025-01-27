@@ -15,4 +15,8 @@ The `match_bq.csv` file contains places that have additional dcids that we would
 To run unit tests: 
 ```
 python3 -m unittest discover -v -s ../ -p "*_test.py"
+
+Install the python-calamine package to process xls files by running:
+
+pip install python-calamine
 ```
