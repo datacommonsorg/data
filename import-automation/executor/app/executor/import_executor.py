@@ -445,10 +445,8 @@ class ImportExecutor:
         with tempfile.TemporaryDirectory() as tmpdir:
             requirements_path = os.path.join(absolute_import_dir,
                                              self.config.requirements_filename)
-            central_requirements_path = os.path.join(
-                repo_dir, self.config.requirements_filename)
             interpreter_path, process = _create_venv(
-                (central_requirements_path, requirements_path),
+                (requirements_path),
                 tmpdir,
                 timeout=self.config.venv_create_timeout,
             )
