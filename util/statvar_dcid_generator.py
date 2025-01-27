@@ -14,20 +14,20 @@
 """A utility to generate dcid for statistical variables."""
 
 import copy
-import re
 import os
+import re
 import sys
 
-#pylint: disable=wrong-import-position
-#pylint: disable=import-error
+# pylint: disable=wrong-import-position
+# pylint: disable=import-error
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '.'))  # For soc_codes_names
 
 from soc_codes_names import SOC_MAP
-#pylint: enable=wrong-import-position
-#pylint: enable=import-error
+# pylint: enable=wrong-import-position
+# pylint: enable=import-error
 
 # Global constants
 # Regex to match the quantity notations - [value quantity], [quantity value]
@@ -48,10 +48,20 @@ _QUANTITY_RANGE_REGEX_2 = re.compile(r'\[(?P<quantity>[A-Za-z_/\d]+) '
                                      r'(?P<upper_limit>-|-?\d+(\.\d+)?)\]')
 
 # These are the default properties ignored during dcid generation
-_DEFAULT_IGNORE_PROPS = ('unit', 'Node', 'memberOf', 'typeOf',
-                         'constraintProperties', 'name', 'description',
-                         'descriptionUrl', 'label', 'url', 'alternateName',
-                         'scalingFactor')
+_DEFAULT_IGNORE_PROPS = (
+    'unit',
+    'Node',
+    'memberOf',
+    'typeOf',
+    'constraintProperties',
+    'name',
+    'description',
+    'descriptionUrl',
+    'label',
+    'url',
+    'alternateName',
+    'scalingFactor',
+)
 
 # Regex to match prefixes to be removed from constraints. The regex checks for
 # specific prefixes followed by an upper case letter or underscore. This helps
@@ -109,7 +119,7 @@ _NAICS_MAP = {
     '1026': 'LeisureHospitality',
     '1027': 'OtherServices',
     '1028': 'PublicAdministration',
-    '1029': 'Unclassified'
+    '1029': 'Unclassified',
 }
 
 # Regex to match NAICS Codes. These codes could be a single code or a range
@@ -201,12 +211,12 @@ _PREPEND_APPEND_REPLACE_MAP = {
     'householderRelatedChildrenUnder18Years': {
         'prepend': 'Householder',
         'replace': 'Child',
-        'replacement': 'RelatedChildren'
+        'replacement': 'RelatedChildren',
     },
     'householderOwnChildrenUnder18Years': {
         'prepend': 'Householder',
         'replace': 'Child',
-        'replacement': 'OwnChildren'
+        'replacement': 'OwnChildren',
     },
     'occupation': {
         'append': 'Occupation'
@@ -220,7 +230,7 @@ _PREPEND_APPEND_REPLACE_MAP = {
     'dateOfEntry': {
         'prepend': 'DateOfEntry',
         'replace': 'Date',
-        'replacement': ''
+        'replacement': '',
     },
     'placeOfBirth': {
         'prepend': 'PlaceOfBirth'
@@ -228,7 +238,7 @@ _PREPEND_APPEND_REPLACE_MAP = {
     'dateMovedIn': {
         'prepend': 'MovedInDate',
         'replace': 'Date',
-        'replacement': ''
+        'replacement': '',
     },
     'bachelorsDegreeMajor': {
         'prepend': 'BachelorOf'
@@ -265,17 +275,36 @@ _PREPEND_APPEND_REPLACE_MAP = {
     },
     'mothersEducation': {
         'prepend': 'Mother'
-    }
+    },
+    'importSource': {
+        'prepend': 'ImportFrom',
+    },
+    'exportDestination': {
+        'prepend': 'ExportTo',
+    },
+    'lendingEntity': {
+        'prepend': 'Lender',
+    },
 }
 
 # This is a list of boolean properties
 _BOOLEAN_PROPS = [
-    'hasComputer', 'hasFunctionalToilet', 'isAccessibleForFree',
-    'isEnergyStored', 'isFDAReferenceStandard', 'isFamilyFriendly',
-    'isGenomeRepresentationFull', 'isGift', 'isInternetUser',
-    'isLiquefiedNaturalGasStored', 'isLiveBroadcast', 'isNaturalGasStored',
-    'isPharmacodynamicRelationship', 'isPharmacokineticRelationship',
-    'isRefSeqGenBankAssembliesIdentical', 'isHateCrime'
+    'hasComputer',
+    'hasFunctionalToilet',
+    'isAccessibleForFree',
+    'isEnergyStored',
+    'isFDAReferenceStandard',
+    'isFamilyFriendly',
+    'isGenomeRepresentationFull',
+    'isGift',
+    'isInternetUser',
+    'isLiquefiedNaturalGasStored',
+    'isLiveBroadcast',
+    'isNaturalGasStored',
+    'isPharmacodynamicRelationship',
+    'isPharmacokineticRelationship',
+    'isRefSeqGenBankAssembliesIdentical',
+    'isHateCrime',
 ]
 
 # To map stat vars which do not follow the conventions of stat var dcid naming
@@ -283,29 +312,30 @@ _BOOLEAN_PROPS = [
 # the replacement dcid.
 _LEGACY_MAP = {
     'Count_Person_WithDisability_NoHealthInsurance':
-        'Count_Person_NoHealthInsurance_WithDisability',
+        ('Count_Person_NoHealthInsurance_WithDisability'),
     'Count_Person_NoDisability_NoHealthInsurance':
-        'Count_Person_NoHealthInsurance_NoDisability'
+        ('Count_Person_NoHealthInsurance_NoDisability'),
 }
 
 
 def _capitalize_process(word: str) -> str:
     """Capitalizes, removes namespaces, measurement constraint prefixes and
-    underscores from a word.
 
-    Manual upper casing is preferred compared to the builtin function
-    str.capitalize() because we want to change only the case of the first
-    character and ignore the case of other characters. Firstly, all namespaces
-    are removed from the string. Then, constraint prefixes and underscores
-    are removed. Lastly, the first character is upper cased.
+  underscores from a word.
 
-    Args:
-        word: A string literal to capitalize and process.
+  Manual upper casing is preferred compared to the builtin function
+  str.capitalize() because we want to change only the case of the first
+  character and ignore the case of other characters. Firstly, all namespaces
+  are removed from the string. Then, constraint prefixes and underscores
+  are removed. Lastly, the first character is upper cased.
 
-    Returns:
-        Returns a string that can be used in dcid generation.
-        Returns None if the string is empty.
-    """
+  Args:
+      word: A string literal to capitalize and process.
+
+  Returns:
+      Returns a string that can be used in dcid generation.
+      Returns None if the string is empty.
+  """
     if word:
         # Removing namespaces
         word = word[word.find(':') + 1:]
@@ -319,6 +349,15 @@ def _capitalize_process(word: str) -> str:
 
         # Removing all underscores
         word = word.replace('_', '')
+        # Remove '/' or replace with '-' when used as number separator
+        words = []
+        for tok in word.split('/'):
+            if tok:
+                if tok[0].isdigit() and len(
+                        words) > 0 and words[-1][-1].isdigit():
+                    words.append('-')
+            words.append(tok[0].upper() + tok[1:]),
+        word = ''.join(words)
 
         # Upper casing the first character
         word = word[0].upper() + word[1:]
@@ -329,19 +368,15 @@ def _capitalize_process(word: str) -> str:
 def _generate_quantity_range_name(match_dict: dict) -> str:
     """Generate a name for a quantity range.
 
-    Args:
-        match_dict: A dictionary containing quantity range regex groups.
-          Expected syntax of match_dict is
-          {
-            'lower_limit': <value>,
-            'upper_limit': <value>,
-            'quantity': <value>
-          }
+  Args:
+      match_dict: A dictionary containing quantity range regex groups. Expected
+        syntax of match_dict is { 'lower_limit': <value>, 'upper_limit':
+        <value>, 'quantity': <value> }
 
-    Returns:
-        A string representing the quantity range name to be used in the dcid.
-        Returns None if any of the expected keys are not in the dictionary.
-    """
+  Returns:
+      A string representing the quantity range name to be used in the dcid.
+      Returns None if any of the expected keys are not in the dictionary.
+  """
     try:
         lower_limit = match_dict['lower_limit']
         upper_limit = match_dict['upper_limit']
@@ -369,19 +404,20 @@ def _generate_quantity_range_name(match_dict: dict) -> str:
 
 def _naics_code_to_name(naics_val: str) -> str:
     """Converts NAICS codes to their industry using the _NAICS_MAP.
-    Args:
-        naics_val: A NAICS string literal to process.
-          Expected syntax of naics_val - NAICS/{codes}
-          '-' can be used to denote range of codes that may or may not belong
-          to the same industry. For eg, 44-45 will be mapped to 'RetailTrade'.
-          '_' can be used to represent multiple industries. For eg, 51_52 will
-          be mapped to 'InformationFinanceInsurance'. A combination of '-' and
-          '_' is acceptable.
-    Returns:
-        A string with all NAICS codes changed to their respective industry.
-        This string can be used in dcid generation. Returns None if the string
-        is empty or if the string does not follow the expected syntax.
-    """
+
+  Args:
+      naics_val: A NAICS string literal to process. Expected syntax of naics_val
+        - NAICS/{codes} '-' can be used to denote range of codes that may or may
+        not belong to the same industry. For eg, 44-45 will be mapped to
+        'RetailTrade'. '_' can be used to represent multiple industries. For eg,
+        51_52 will be mapped to 'InformationFinanceInsurance'. A combination of
+        '-' and '_' is acceptable.
+
+  Returns:
+      A string with all NAICS codes changed to their respective industry.
+      This string can be used in dcid generation. Returns None if the string
+      is empty or if the string does not follow the expected syntax.
+  """
 
     # Helper function to process NAICS ranges
     def _process_naics_range(range_str: str) -> str:
@@ -419,7 +455,9 @@ def _naics_code_to_name(naics_val: str) -> str:
             if match_str.find('-') != -1:  # Range
                 industry_str = _process_naics_range(match_str)
             else:
-                industry_str = _NAICS_MAP[match_str]
+                industry_str = _NAICS_MAP.get(match_str)
+                if not industry_str:
+                    return None
             processed_str = processed_str + industry_str
         return processed_str
     return None
@@ -427,16 +465,18 @@ def _naics_code_to_name(naics_val: str) -> str:
 
 def _soc_code_to_name(soc_val: str) -> str:
     """Converts SOCv2018 codes to their industry using the SOC_MAP from
-    soc_codes_names.py
 
-    Args:
-        soc_val: A SOCv2018 string literal to process.
-          Expected syntax of soc_val - SOCv2018/{code}
-    Returns:
-        A string with SOC code changed to it's occupation.
-        This string can be used in dcid generation. Returns the original string
-        if the code is not in the SOC_MAP. Returns None if the string is empty.
-    """
+  soc_codes_names.py
+
+  Args:
+      soc_val: A SOCv2018 string literal to process. Expected syntax of soc_val
+        - SOCv2018/{code}
+
+  Returns:
+      A string with SOC code changed to it's occupation.
+      This string can be used in dcid generation. Returns the original string
+      if the code is not in the SOC_MAP. Returns None if the string is empty.
+  """
     if soc_val:
         processed_str = soc_val
 
@@ -458,20 +498,22 @@ def _prepend_append_replace(word,
                             replace='',
                             replacement=''):
     """Prepends, appends and replaces text in a word.
-    Args:
-        word: A string literal to prepend, append or replace on.
-        prepend: A string literal to prepend to word.
-        append: A string literal to append to word.
-        replace: A string literal that repersents a substring in word to be
-          replaced.
-        replacement: A string literal. In word, all occurances of replace will
-          be changed to replacement.
-    Returns:
-        A string after appending, prepending and replacing to word.
-    """
+
+  Args:
+      word: A string literal to prepend, append or replace on.
+      prepend: A string literal to prepend to word.
+      append: A string literal to append to word.
+      replace: A string literal that repersents a substring in word to be
+        replaced.
+      replacement: A string literal. In word, all occurances of replace will be
+        changed to replacement.
+
+  Returns:
+      A string after appending, prepending and replacing to word.
+  """
     if replace:
         word = word.replace(replace, replacement)
-    if prepend:
+    if prepend and not word.lower().startswith(prepend.lower()):
         word = prepend + word
     if append:
         word = word + append
@@ -481,18 +523,14 @@ def _prepend_append_replace(word,
 def _generate_quantity_name(match_dict: dict) -> str:
     """Generate a name for a quantity.
 
-    Args:
-        match_dict: A dictionary containing quantity regex groups.
-          Expected syntax of match_dict
-          {
-            'value': <value>,
-            'quantity': <value>
-          }
+  Args:
+      match_dict: A dictionary containing quantity regex groups. Expected syntax
+        of match_dict { 'value': <value>, 'quantity': <value> }
 
-    Returns:
-        A string representing the quantity name to be used in the dcid.
-        Returns None if any of the expected keys are not in the dictionary.
-    """
+  Returns:
+      A string representing the quantity name to be used in the dcid.
+      Returns None if any of the expected keys are not in the dictionary.
+  """
     try:
         value = match_dict['value']
         quantity = match_dict['quantity']
@@ -505,37 +543,41 @@ def _generate_quantity_name(match_dict: dict) -> str:
 
 def _generate_boolean_value_name(prop: str, value: str) -> str:
     """Generates a name given a boolean property and value.
-    Args:
-        prop: A string literal representing the boolean property name.
-        value: A string literal representing the boolean property value.
-    Returns:
-        A string that can be used in dcid generation
-    """
+
+  Args:
+      prop: A string literal representing the boolean property name.
+      value: A string literal representing the boolean property value.
+
+  Returns:
+      A string that can be used in dcid generation
+  """
     if value in ('True', 'False'):
-        constraint_value = value == "True"
+        constraint_value = value == 'True'
         pop = None
         prefix = None
-        if prop.startswith("has"):
+        if prop.startswith('has'):
             pop = prop[3:]
-            prefix = "Has" if constraint_value else "No"
-        elif prop.startswith("is"):
+            prefix = 'Has' if constraint_value else 'No'
+        elif prop.startswith('is'):
             pop = prop[2:]
-            prefix = "Is" if constraint_value else "Not"
+            prefix = 'Is' if constraint_value else 'Not'
         else:
-            assert False, f"Unhandled prefix {prop}"
+            assert False, f'Unhandled prefix {prop}'
         return prefix + pop
     return None
 
 
 def _process_constraint_property(prop: str, value: str) -> str:
     """Processes constraint property, value and returns a name that can be used
-    in dcid generation.
-    Args:
-        prop: A string literal representing the constraint property name.
-        value: A string literal representing the constraint property value.
-    Returns:
-        A string that can be used in dcid generation.
-    """
+
+  in dcid generation.
+  Args:
+      prop: A string literal representing the constraint property name.
+      value: A string literal representing the constraint property value.
+
+  Returns:
+      A string that can be used in dcid generation.
+  """
     if 'NAICS' in value:
         name = _naics_code_to_name(value)
     elif 'SOCv2018/' in value:
@@ -568,68 +610,66 @@ def _process_constraint_property(prop: str, value: str) -> str:
 def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
     """Generates the dcid given a statistical variable.
 
-    The generated dcid will follow the pattern
-    <statType>_<measuredProp>_<populationType>_<constraintVal1>_<constraintVal2>
+  The generated dcid will follow the pattern
+  <statType>_<measuredProp>_<populationType>_<constraintVal1>_<constraintVal2>
 
-    1. measurementQualifier is added as a prefix to the dcid.
-    2. statType is included when it is not measuredValue.
-    3. measurementDenominator is added as a suffix to the dcid.
-    4. Constraints are sorted alphabetically based on the prop and values are
-         added to the dcid.
-    5. Existing dcids may not follow the above conventions. The _LEGACY_MAP maps
-         generated dcids to their existing dcid.
-    6. NAICS and SOC codes are replaced with their industry and occupation names
-         respectively. See _NAICS_MAP and util/soc_codes_names.py for the
-         mapping.
-    7. Boolean constraints are replaced by their populations. For example,
-         p=isInternetUser and v=True/False becomes v=isInternetUser/
-         notInternetUser. See _BOOLEAN_PROPS for the properties that are
-         considered for this renaming.
-    8. Quantities and Quantity Ranges are changed into a name to be used in the
-         dcid. For example p=age and v=[10 20 Years] becomes v=10To20Years.
-    9. Certain variables have text prepended or appended to their constraints to
-         improve readability. See _PREPEND_APPEND_REPLACE_MAP for more details.
+  1. measurementQualifier is added as a prefix to the dcid.
+  2. statType is included when it is not measuredValue.
+  3. measurementDenominator is added as a suffix to the dcid.
+  4. Constraints are sorted alphabetically based on the prop and values are
+       added to the dcid.
+  5. Existing dcids may not follow the above conventions. The _LEGACY_MAP maps
+       generated dcids to their existing dcid.
+  6. NAICS and SOC codes are replaced with their industry and occupation names
+       respectively. See _NAICS_MAP and util/soc_codes_names.py for the
+       mapping.
+  7. Boolean constraints are replaced by their populations. For example,
+       p=isInternetUser and v=True/False becomes v=isInternetUser/
+       notInternetUser. See _BOOLEAN_PROPS for the properties that are
+       considered for this renaming.
+  8. Quantities and Quantity Ranges are changed into a name to be used in the
+       dcid. For example p=age and v=[10 20 Years] becomes v=10To20Years.
+  9. Certain variables have text prepended or appended to their constraints to
+       improve readability. See _PREPEND_APPEND_REPLACE_MAP for more details.
 
-    Args:
-        stat_var_dict: A dictionary with property: value of the statistical
-          variable as key-value pairs.
-        ignore_props: A list of properties to ignore from stat_var_dict when
-          generating the dcid. This list of ignore_props will be added to the
-          default set of properties that are ignored. The ignore_props can be
-          used to account for dependent properties to ignore when generating
-          the dcid. For example in the following statVar,
-          {
-            populationType: Person
-            measuredProperty: count
-            statType: measuredValue
-            healthInsurance: NoHealthInsurance
-            armedForceStatus: Civilian
-            institutionalization: USC_NonInstitutionalized
-          }
-          since the healthInsurance property indicates they are Civilian and
-          USC_NonInstitutionalized, ignore_props can be the list
-          ['armedForceStatus', 'institutionalization']. During the dcid
-          generation process, these properties will not be considered.
+  Args:
+      stat_var_dict: A dictionary with property: value of the statistical
+        variable as key-value pairs.
+      ignore_props: A list of properties to ignore from stat_var_dict when
+        generating the dcid. This list of ignore_props will be added to the
+        default set of properties that are ignored. The ignore_props can be used
+        to account for dependent properties to ignore when generating the dcid.
+        For example in the following statVar, {
+          populationType: Person
+          measuredProperty: count
+          statType: measuredValue
+          healthInsurance: NoHealthInsurance
+          armedForceStatus: Civilian
+          institutionalization: USC_NonInstitutionalized } since the
+            healthInsurance property indicates they are Civilian and
+            USC_NonInstitutionalized, ignore_props can be the list
+            ['armedForceStatus', 'institutionalization']. During the dcid
+            generation process, these properties will not be considered.
 
-    Returns:
-        A string representing the dcid of the statistical variable.
+  Returns:
+      A string representing the dcid of the statistical variable.
 
-    Caveats:
-        1. Currently, there is no support for renaming ICD10 cause of death
-             values and DEA drug names.
-        2. MeasuredProp=InsuredUnemploymentRate is not changed to
-             Rate_InsuredUnemployment.
-        3. The generated dcids can get too long due to the large number of
-             constraint props. In such cases, manual generation or the
-             ignore_props arg can be used to exclude a few props from the
-             generation process. It is recommended to limit the length of
-             statvar dcids to 80 characters or less.
-        4. This function does not differentiate between property names and only
-             uses the values to generate the dcid. Two props having the same
-             value, say p1=fuel, v1=Coal and p2=energy, v2=Coal will result in
-             the same dcid. The _PREPEND_APPEND_REPLACE_MAP can be modified to
-             disambiguate in this case.
-    """
+  Caveats:
+      1. Currently, there is no support for renaming ICD10 cause of death
+           values and DEA drug names.
+      2. MeasuredProp=InsuredUnemploymentRate is not changed to
+           Rate_InsuredUnemployment.
+      3. The generated dcids can get too long due to the large number of
+           constraint props. In such cases, manual generation or the
+           ignore_props arg can be used to exclude a few props from the
+           generation process. It is recommended to limit the length of
+           statvar dcids to 80 characters or less.
+      4. This function does not differentiate between property names and only
+           uses the values to generate the dcid. Two props having the same
+           value, say p1=fuel, v1=Coal and p2=energy, v2=Coal will result in
+           the same dcid. The _PREPEND_APPEND_REPLACE_MAP can be modified to
+           disambiguate in this case.
+  """
 
     # TODO: Renaming cause of death properties
     # TODO: Renaming DEA drug names
@@ -693,7 +733,6 @@ def get_statvar_dcid(stat_var_dict: dict, ignore_props: list = None) -> str:
 
     if denominator_suffix:
         dcid_list.append(denominator_suffix)
-
     dcid = '_'.join(dcid_list)
     dcid = _LEGACY_MAP.get(dcid, dcid)
     return dcid

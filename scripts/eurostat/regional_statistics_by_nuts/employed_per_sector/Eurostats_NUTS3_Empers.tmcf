@@ -1,4 +1,3 @@
-
 Node: E:EurostatsNUTS3_Employed_per_Sector->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_Employed_NACE/A
@@ -127,9 +126,9 @@ measurementMethod: dcs:EurostatRegionalStatistics
 
 Node: E:EurostatsNUTS3_Employed_per_Sector->E14
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:Count_Person_Employed
+variableMeasured: dcs:dc/nm9hcklgg5zb3
 observationAbout: C:EurostatsNUTS3_Employed_per_Sector->GeoId
 observationDate: C:EurostatsNUTS3_Employed_per_Sector->Date
-value: C:EurostatsNUTS3_Employed_per_Sector->Count_Person_Employed
+value: C:EurostatsNUTS3_Employed_per_Sector->dc/nm9hcklgg5zb3
 sourceScalingFactor: 1000
 measurementMethod: dcs:EurostatRegionalStatistics

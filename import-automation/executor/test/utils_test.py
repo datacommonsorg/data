@@ -47,6 +47,15 @@ class AppUtilsTest(unittest.TestCase):
         time_datetime = datetime.datetime.fromisoformat(time_iso)
         self.assertEqual(time_iso, time_datetime.isoformat())
 
+    def test_next_utc_date(self):
+        """Tests next_utc_date."""
+        # At 00:00 on Friday.
+        cron_expression = '0 0 * * FRI'
+        # Friday.
+        from_time = datetime.datetime(2024, 12, 13)
+        self.assertEqual(app.utils.next_utc_date(cron_expression, from_time),
+                         '2024-12-20')
+
     def test_download_file(self):
         """Response does not have a Content-Disposition header."""
         url = ('https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/'
