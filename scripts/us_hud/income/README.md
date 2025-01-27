@@ -16,6 +16,7 @@ To run unit tests:
 ```
 python3 -m unittest discover -v -s ../ -p "*_test.py"
 
-you need to  install the required packages ,the python-calamine package for handling .xls files:
-pip install python-calamine==0.3.0
+Install the python-calamine package to process xls files by running:
+
+pip install python-calamine
 ```
