@@ -85,7 +85,7 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output_files/events_spi_9m_polygon/place_svobs/drought_spi_9m_polygon_place_svobs.tmcf",
+                    "template_mcf": "drought_spi_9m_polygon_place_svobs.tmcf",
                     "cleaned_csv": "output_files/events_spi_9m_polygon/place_svobs/drought_spi_9m_polygon_place_svobs.csv"
                 }
             ],
@@ -101,7 +101,7 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events.tmcf",
+                    "template_mcf": "drought_spi_9m_polygon_events.tmcf",
                     "cleaned_csv": "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events.csv"
                 }
             ],
