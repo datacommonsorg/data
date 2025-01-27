@@ -2,10 +2,11 @@
 
 absl-py
 arcgis2geojson
+beautifulsoup4
 chardet
 croniter
 dataclasses==0.6
-datacommons==1.4.3
+datacommons
 frozendict
 func-timeout==4.3.5
 geojson==2.5.0
@@ -13,9 +14,9 @@ google-auth
 google-cloud-bigquery
 google-cloud-datastore
 google-cloud-run
-google-cloud-storage>=2.7.0
-google-cloud-logging==3.4.0
-google-cloud-scheduler==2.10.0
+google-cloud-storage
+google-cloud-logging
+google-cloud-scheduler
 gspread==5.12.0
 gunicorn
 lxml==4.9.1
@@ -27,6 +28,7 @@ psutil
 pylint
 pytest
 pytz
+ratelimit
 requests==2.27.1
 requests_cache
 retry==0.9.2
@@ -34,7 +36,5 @@ shapely==1.8.5
 urllib3==1.26.8
 xarray==0.19.0
 xlrd
-zipp
-beautifulsoup4
-ratelimit
 xlsxwriter==3.2.0
+zipp
