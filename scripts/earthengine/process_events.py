@@ -1051,7 +1051,8 @@ class GeoEventsProcessor:
         self.cache_event_place_property(event_ids)
         _set_counter_stage(self._counters, utils.strip_namespace(counter_stage))
         num_output_events = 0
-        with file_util.FileIO(output_csv, 'a') as csv_file:
+        # Generate a csv row for each event
+        with file_util.FileIO(output_csv, 'w') as csv_file:
             writer = csv.DictWriter(csv_file,
                                     fieldnames=output_columns,
                                     delimiter=self._config.get(
@@ -1061,19 +1062,17 @@ class GeoEventsProcessor:
                                     quotechar='"',
                                     quoting=csv.QUOTE_NONNUMERIC,
                                     doublequote=False)
-
-            # Check if the file is empty (i.e., first write) and write the header if so
-            if csv_file.tell() == 0:
-                writer.writeheader()
+            writer.writeheader()
+            self._counters.set_counter('total', len(event_ids))
             for event_id in event_ids:
                 event_pvs = self.get_event_output_properties(event_id)
                 if event_pvs:
                     writer.writerow(_format_property_values(event_pvs))
-                    num_output_events += 1
                     self._counters.add_counter('output_events', 1)
                 else:
                     self.delete_event(event_id)
                     self._counters.add_counter('output_events_filtered', 1)
+                num_output_events += 1
                 self._counters.add_counter('processed', 1)
         logging.info(
             f'Wrote {num_output_events} events into {output_csv} with columns: {output_columns}'
@@ -1129,7 +1128,7 @@ class GeoEventsProcessor:
                 output_columns.append(prop)
         if not event_ids:
             event_ids = self.get_all_event_ids()
-        with file_util.FileIO(output_csv, 'a') as csv_file:
+        with file_util.FileIO(output_csv, 'w') as csv_file:
             writer = csv.DictWriter(csv_file,
                                     fieldnames=output_columns,
                                     delimiter=self._config.get(
@@ -1139,8 +1138,7 @@ class GeoEventsProcessor:
                                     quotechar='"',
                                     quoting=csv.QUOTE_NONNUMERIC,
                                     doublequote=False)
-            if csv_file.tell() == 0:
-                writer.writeheader()
+            writer.writeheader()
             num_output_events = 0
             self._counters.set_counter('total', len(event_ids))
             for event_id in event_ids:
@@ -1258,7 +1256,7 @@ class GeoEventsProcessor:
         logging.info(
             f'Writing {len(place_date_pvs)} place svobs with columns {output_columns} into {output_csv}'
         )
-        with file_util.FileIO(output_csv, 'a') as csv_file:
+        with file_util.FileIO(output_csv, 'w') as csv_file:
             writer = csv.DictWriter(csv_file,
                                     fieldnames=output_columns,
                                     delimiter=self._config.get(
@@ -1268,8 +1266,7 @@ class GeoEventsProcessor:
                                     quotechar='"',
                                     quoting=csv.QUOTE_NONNUMERIC,
                                     doublequote=False)
-            if csv_file.tell() == 0:
-                writer.writeheader()
+            writer.writeheader()
 
             _set_counter_stage(self._counters, 'write_place_svobs_')
             self._counters.set_counter('total', len(place_date_pvs))
