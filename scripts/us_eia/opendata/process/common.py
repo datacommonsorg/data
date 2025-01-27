@@ -24,10 +24,15 @@ from sys import path
 # For import util.alpha2_to_dcid
 # Setup path for import from data/util
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
-import util.alpha2_to_dcid as alpha2_to_dcid
-import util.name_to_alpha2 as name_to_alpha2
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+_DATA_DIR = _SCRIPT_DIR.split('/data/')[0]
+sys.path.append(os.path.join(_DATA_DIR, 'data/util'))
+import alpha2_to_dcid as alpha2_to_dcid
+import name_to_alpha2 as name_to_alpha2
 
+import file_util
+from counters import Counters
 from . import category
 
 PERIOD_MAP = {
@@ -282,11 +287,11 @@ def _enumify(in_str):
     return in_str.title().replace(' ', '')
 
 
-def _print_counters(counters):
-    print('\nSTATS:')
-    for k in sorted(counters):
-        print(f"\t{k} = {counters[k]}")
-    print('')
+# def _print_counters(counters):
+#     print('\nSTATS:')
+#     for k in sorted(counters):
+#         print(f"\t{k} = {counters[k]}")
+#     print('')
 
 
 def _find_dc_place(raw_place, is_us_place, counters):
@@ -319,7 +324,7 @@ def _find_dc_place(raw_place, is_us_place, counters):
                 return 'Earth'
 
     # logging.error('ERROR: unsupported place %s %r', raw_place, is_us_place)
-    counters[f'error_unsupported_places_{raw_place}'] += 1
+    counters.add_counter(f'error_unsupported_places_{raw_place}', 1)
     return None
 
 
@@ -388,7 +393,7 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
 
     # If we didn't find the name for the place, likely the name doesn't include
     # the place (e.g., TOTAL).
-    counters['info_unmodified_names'] += 1
+    counters.add_counter('info_unmodified_names', 1)
     return cleanup_name(name)
 
 
@@ -461,17 +466,20 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
     counters = defaultdict(lambda: 0)
     sv_map = {}
     sv_name_map = {}
-    with open(in_json) as in_fp, open(out_csv, 'w', newline='') as csv_fp:
+    counters = Counters()
+    counters.add_counter('total', file_util.file_estimate_num_rows(in_json))
+    with file_util.FileIO(in_json) as in_fp, open(out_csv, 'w',
+                                                  newline='') as csv_fp:
+        #with open(in_json) as in_fp, open(out_csv, 'w', newline='') as csv_fp:
         csvwriter = csv.DictWriter(csv_fp, fieldnames=_COLUMNS)
         csvwriter.writeheader()
 
         for line in in_fp:
-            counters['info_lines_processed'] += 1
-            if counters['info_lines_processed'] % 100000 == 99999:
-                _print_counters(counters)
+            counters.add_counter('processed', 1)
             if not line.startswith('{'):
                 continue
             data = json.loads(line)
+            logging.info(f"Loaded data: {data}")
 
             # Preliminary checks
             series_id = data.get('series_id', None)
@@ -479,25 +487,25 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                 category.process_category(dataset, data,
                                           extract_place_statvar_fn, svg_info,
                                           sv_membership_map, counters)
-                counters['info_categories_processed'] += 1
+
                 continue
 
             time_series = data.get('data', None)
             if not time_series:
-                counters['error_missing_time_series'] += 1
+                counters.add_counter('error_missing_time_series', 1)
                 continue
 
             # Extract raw place and stat-var from series_id.
             (raw_place, raw_sv,
              is_us_place) = extract_place_statvar_fn(series_id, counters)
             if not raw_place or not raw_sv:
-                counters['error_extract_place_sv'] += 1
+                counters.add_counter('error_extract_place_sv', 1)
                 continue
 
             # Map raw place to DC place
             dc_place = _find_dc_place(raw_place, is_us_place, counters)
             if not dc_place:
-                counters['error_place_mapping'] += 1
+                counters.add_counter('error_place_mapping', 1)
                 continue
 
             raw_unit = _enumify(data.get('units', ''))
@@ -512,7 +520,6 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
 
             # Add to rows.
             rows = []
-
             for k, v in time_series:
 
                 try:
@@ -530,15 +537,14 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                     #
                     # TODO: Handle some these better.
                     _ = float(v)
-
                 except Exception:
-                    counters['error_non_numeric_values'] += 1
+                    counters.add_counter('error_non_numeric_values', 1)
                     continue
 
                 dt = _parse_date(k)
                 if not dt:
                     logging.error('ERROR: failed to parse date "%s"', k)
-                    counters['error_date_parsing'] += 1
+                    counters.add_counter('error_date_parsing', 1)
                     continue
 
                 rows.append({
@@ -552,31 +558,24 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                 })
 
             if not rows:
-                counters['error_empty_series'] += 1
+                counters.add_counter('error_empty_series', 1)
                 continue
 
             schema_sv = None
             if generate_statvar_schema_fn:
                 schema_sv = generate_statvar_schema_fn(raw_sv, rows, sv_map,
                                                        counters)
-                logging.info("================ process5 {sv_map}")
             if schema_sv:
                 sv_schemaful2raw[schema_sv] = raw_sv
-                counters['info_schemaful_series'] += 1
-                logging.info("================ process6 {raw_sv}")
+                counters.add_counter('info_schemaful_series', 1)
             else:
-                counters['info_schemaless_series'] += 1
+                counters.add_counter('info_schemaless_series', 1)
                 _generate_default_statvar(raw_sv, sv_map)
-                logging.info("================ process7")
 
             csvwriter.writerows(rows)
-            logging.info("================ process8 {rows}")
-            counters['info_rows_output'] += len(rows)
-            logging.info("================ process9 {rows}")
+            counters.add_counter('info_rows_output', len(rows))
 
-    logging.info("================ process4")
     category.trim_area_categories(svg_info, counters)
-    logging.info("================ process3 {counters} {svg_info}")
 
     with open(out_sv_mcf, 'w') as out_fp:
         nodes = _generate_sv_nodes(dataset, sv_map, sv_name_map,
@@ -585,17 +584,14 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
 
         out_fp.write('\n\n'.join(nodes))
         out_fp.write('\n')
-        logging.info("================ process {nodes}")
 
     with open(out_svg_mcf, 'w') as out_fp:
         nodes = category.generate_svg_nodes(dataset, dataset_name, svg_info)
 
         out_fp.write('\n\n'.join(nodes))
         out_fp.write('\n')
-        logging.info("================ process1 {dataset_name} {dataset}")
 
     with open(out_tmcf, 'w') as out_fp:
         out_fp.write(_TMCF_STRING)
-        logging.info("================ process2 {_TMCF_STRING}")
 
-    logging.info(f"FINAL COUNTERS {_print_counters(counters)}")
+    logging.info(f"FINAL COUNTERS ")
