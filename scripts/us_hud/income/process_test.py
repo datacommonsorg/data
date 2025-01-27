@@ -11,45 +11,52 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Tests for process.py.
 
-Usage: python3 -m unittest discover -v -s ../ -p "process_test.py"
-'''
 import os
-import pandas as pd
-import sys
 import unittest
-from unittest.mock import patch
+import filecmp
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+TEST_DIR = os.path.join(script_dir, 'testdata')
+OUTPUT_DIR = os.path.join(TEST_DIR, 'output')
+
+# Ensure the module is loaded correctly
+import sys
 
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
+
 from us_hud.income import process
-
-module_dir_ = os.path.dirname(__file__)
-
-TEST_DIR = os.path.join(module_dir_, 'testdata')
 
 
 class ProcessTest(unittest.TestCase):
 
     def test_get_url(self):
+        """Test the get_url function and check if it returns the correct URL for the given year."""
+        year = 2022
         self.assertEqual(
-            process.get_url(2022),
+            process.get_url(year),
             'https://www.huduser.gov/portal/datasets/il/il22/Section8-FY22.xlsx'
         )
-        self.assertEqual(process.get_url(1997), '')
+        year = 1997
+        self.assertEqual(process.get_url(year), '')
 
-    def test_compute_150(self):
-        pass
-
-    @patch('pandas.read_excel')
-    def test_process(self, mock_df):
-        mock_df.return_value = pd.DataFrame(
-            pd.read_csv(os.path.join(TEST_DIR, 'test_input_2006.csv')))
+    def test_process_with_dynamic_csv(self):
         matches = {'dcs:geoId/02110': 'dcs:geoId/0236400'}
-        process.process(2006, matches, TEST_DIR)
-        with open(os.path.join(TEST_DIR, 'output_2006.csv')) as result:
-            with open(os.path.join(TEST_DIR,
-                                   'expected_output_2006.csv')) as expected:
-                self.assertEqual(result.read(), expected.read())
+        output_data = []
+        input_folder = TEST_DIR
+
+        if not os.path.exists(OUTPUT_DIR):
+            os.makedirs(OUTPUT_DIR)
+        df = process.process(2006, matches, input_folder)
+        df.to_csv(os.path.join(OUTPUT_DIR, "output_test.csv"), index=False)
+        same = filecmp.cmp(os.path.join(OUTPUT_DIR, "output_test.csv"),
+                           os.path.join(TEST_DIR, "expected_output.csv"))
+        # Assert that the files are identical
+        self.assertTrue(same)
+
+
+if __name__ == '__main__':
+    unittest.main()
