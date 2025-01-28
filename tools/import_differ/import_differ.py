@@ -21,7 +21,7 @@ from absl import app
 from absl import flags
 from absl import logging
 
-import differ_utils
+from tools.import_differ import differ_utils
 
 SAMPLE_COUNT = 3
 GROUPBY_COLUMNS = 'variableMeasured,observationAbout,observationDate,measurementMethod,unit,observationPeriod'
