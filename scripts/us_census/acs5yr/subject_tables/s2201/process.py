@@ -41,8 +41,7 @@ value: C:Subject_Table->{stat_var}{unit}
 _UNIT_TEMPLATE = """
 unit: dcs:{unit}"""
 
-_IGNORED_VALUES = set(
-    ['**', '-', '***', '*****', 'N', '(X)', 'null', '-888888888'])
+_IGNORED_VALUES = set(['**', '-', '***', '*****', 'N', '(X)', 'null','-888888888'])
 
 
 def convert_column_to_stat_var(column, features):
@@ -114,21 +113,22 @@ def write_csv(filename, reader, output, features, stat_vars):
             # Check if GEO_ID ends with '99999' and ignore it
             if row['GEO_ID'].endswith('99999'):
                 continue
-            if row['GEO_ID'] == 'Geography' or row['GEO_ID'] == 'id':
+            if row['GEO_ID'] == 'Geography':
 
                 # Map feature names to stat vars
                 for c in row:
-
+                
                     sv = convert_column_to_stat_var(row[c], features)
                     if sv in stat_var_set:
                         valid_columns[c] = sv
                 continue
-            elif row['GEO_ID'] != 'Geography' or row['GEO_ID'] != 'id':
+            else:
                 for c in row:
-                    if row[c].__contains__(",") == True:
-                        row[c] = str(row[c]).replace(",", "")
-                #  if str(c)[-1:] == '-' or str(c)[-1:] == '+':
-                #             c=str(c)[:-1]
+                     if row[c].__contains__(",")==True:
+                        row[c]=str(row[c]).replace(",","")
+                    #  if str(c)[-1:] == '-' or str(c)[-1:] == '+':
+                    #             c=str(c)[:-1]
+                    
 
             #new_row = {
             #'observationDate': observation_date,
@@ -143,27 +143,26 @@ def write_csv(filename, reader, output, features, stat_vars):
                 }
             else:
                 #if check the second variable is matching with zip..
-                if geo[0][:3] == '860':
-                    new_row = {
-                        'observationDate': observation_date,
-                        'observationAbout': 'dcid:zip/' + geo[1]
-                    }
+                if geo[0][:3] == '860': 
+                    new_row ={
+                    'observationDate': observation_date,
+                    'observationAbout': 'dcid:zip/' + geo[1]
+                }
                 elif geo[0][:3] == '310':
+                    new_row ={
+                    'observationDate': observation_date,
+                    'observationAbout': 'dcid:geoId/C' + geo[1]
+                }
+                elif geo[0][:3] == "950" or  geo[0][:3] =="960" or geo[0][:3] =="970":
+                    new_row ={
+                    'observationDate': observation_date,
+                    'observationAbout': 'geoId/sch' + geo[1]
+                }
+                else:    
                     new_row = {
-                        'observationDate': observation_date,
-                        'observationAbout': 'dcid:geoId/C' + geo[1]
-                    }
-                elif geo[0][:3] == "950" or geo[0][:3] == "960" or geo[
-                        0][:3] == "970":
-                    new_row = {
-                        'observationDate': observation_date,
-                        'observationAbout': 'geoId/sch' + geo[1]
-                    }
-                else:
-                    new_row = {
-                        'observationDate': observation_date,
-                        'observationAbout': 'dcid:geoId/' + geo[1]
-                    }
+                    'observationDate': observation_date,
+                    'observationAbout': 'dcid:geoId/' + geo[1]
+                }
             for c in row:
 
                 # We currently only support the stat vars in the list
@@ -219,9 +218,7 @@ def main(argv):
                 with zf.open(filename, 'r') as infile:
                     reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
                     if '\ufeff"GEO_ID"' in reader.fieldnames:
-                        reader.fieldnames = [
-                            name.strip('\ufeff"') for name in reader.fieldnames
-                        ]
+                        reader.fieldnames = [name.strip('\ufeff"') for name in reader.fieldnames]
                     write_csv(filename, reader, output_csv, features, stat_vars)
     create_tmcf(os.path.join(FLAGS.output, 'output.tmcf'), features, stat_vars)
 
