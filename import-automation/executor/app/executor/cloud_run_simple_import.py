@@ -188,8 +188,11 @@ def cloud_run_simple_import_job(
     logging.info(
         f'Setting up simple import cloud run {project_id}:{job_id} for'
         f' {config_file} with output: {gcs_output_dir}, env: {env_vars}')
+    resources = {}
+    args = []
     job = cloud_run.create_or_update_cloud_run_job(project_id, location, job_id,
-                                                   image, env_vars)
+                                                   image, env_vars, args,
+                                                   resources)
     if not job:
         logging.error(
             f'Failed to setup cloud run job {job_id} for {config_file}')
