@@ -2,10 +2,10 @@
   "import_specifications": [
     {
       "import_name": "EPA_GHGRP",
-      "curator_emails": ["kuru@google.com"],
+      "curator_emails": [],
       "provenance_url": "https://www.epa.gov/ghgreporting",
       "provenance_description": "EPA emissions data reported as part of the Greenhouse Gas Reporting Program (GHGRP).",
-      "scripts": ["gen_data.py"],
+      "scripts": ["gas.py","sources.py","download.py","process.py"],
       "import_inputs": [
         {
           "template_mcf": "import_data/observations.tmcf",

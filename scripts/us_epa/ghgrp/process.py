@@ -15,10 +15,10 @@
 
 import os
 import sys
-import unittest
 import csv
 from datetime import datetime
 import logging
+from absl import app, flags, logging
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
@@ -26,6 +26,9 @@ sys.path.append(
         os.path.abspath(__file__)))))
 from us_epa.ghgrp import download, gas, sources
 from us_epa.util import crosswalk as cw
+
+_FLAGS = flags.FLAGS
+flags.DEFINE_string('mode', '', 'Mode to run: "download", "process", or both')
 
 _FACILITY_ID = 'Facility Id'
 _DCID = 'dcid'
@@ -76,16 +79,42 @@ def process_data(data_filepaths, crosswalk, out_filepath):
                 count += 1
             logging.info(f"Number of files processed:{count}")
     except Exception as e:
-        logging.warning(f"Aborting processing due to the error: {e}")
+        logging.fatal(f"Aborting processing due to the error: {e}")
+
+
+def main(_):
+    try:
+        # Initialize downloader
+        url_year = datetime.now().year
+        downloader = download.Downloader('tmp_data', url_year)
+
+        # Extract all years
+        logging.info("Starting extraction of all years.")
+        files = downloader.extract_all_years()
+        logging.info(f"Extraction complete. Files: {files}")
+
+        # Generate and save crosswalk file
+        crosswalk_file = os.path.join(_SAVE_PATH, 'crosswalks.csv')
+        logging.info(f"Saving crosswalk file to: {crosswalk_file}")
+        downloader.save_all_crosswalks(crosswalk_file)
+        logging.info("Crosswalk file saved successfully.")
+
+        # Initialize Crosswalk
+        logging.info(
+            f"Initializing Crosswalk object with file: {crosswalk_file}")
+        crosswalk = cw.Crosswalk(crosswalk_file)
+
+        # Process data
+        output_file = os.path.join(_OUT_PATH, 'all_data.csv')
+        logging.info(f"Processing data and saving output to: {output_file}")
+        process_data(files, crosswalk, output_file)
+        logging.info("Data processing completed successfully.")
+
+    except FileNotFoundError as e:
+        logging.fatal(f"File not found: {e}")
+    except Exception as e:
+        logging.fatal(f"An unexpected error occurred: {e}")
 
 
 if __name__ == '__main__':
-    downloader = download.Downloader(_SAVE_PATH)
-    url_year = datetime.now().year
-    if url_year < 2030:
-        downloader.download_data(url_year, url_year - 1)
-    files = downloader.extract_all_years()
-    crosswalk_file = os.path.join(_SAVE_PATH, 'crosswalks.csv')
-    downloader.save_all_crosswalks(crosswalk_file)
-    crosswalk = cw.Crosswalk(crosswalk_file)
-    process_data(files, crosswalk, os.path.join(_OUT_PATH, 'all_data.csv'))
+    app.run(main)
