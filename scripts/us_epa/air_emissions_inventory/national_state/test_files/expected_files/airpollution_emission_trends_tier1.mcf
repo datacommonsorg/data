@@ -448,16 +448,6 @@ emittedThing: dcs:OxidesOfNitrogen
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
-Node: dcid:Annual_Amount_Emissions_IndustrialAndOtherProcesses_NonBiogenicEmissionSource_PM10
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:IndustrialAndOtherProcesses
-emittedThing: dcs:PM10
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
 Node: dcid:Annual_Amount_Emissions_IndustrialAndOtherProcesses_NonBiogenicEmissionSource_SulfurDioxide
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
@@ -855,16 +845,6 @@ emissionSourceType: dcs:NonBiogenicEmissionSource
 measurementQualifier: dcs:Annual
 emissionSource: dcs:StationaryFuelCombustion
 emittedThing: dcs:OxidesOfNitrogen
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_StationaryFuelCombustion_NonBiogenicEmissionSource_PM10
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:StationaryFuelCombustion
-emittedThing: dcs:PM10
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
