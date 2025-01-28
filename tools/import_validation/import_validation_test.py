@@ -17,7 +17,7 @@ import pandas as pd
 import unittest
 
 from pandas.testing import assert_frame_equal
-from import_validation import ImportValidation
+from tools.import_validation import import_validation
 
 module_dir = os.path.dirname(__file__)
 
@@ -32,8 +32,11 @@ class TestValidation(unittest.TestCase):
         result_file = os.path.join(module_dir, 'test', 'test_output.csv')
         config_file = os.path.join(module_dir, 'test', 'test_config.json')
         differ_output = os.path.join(module_dir, 'test', 'differ_output.csv')
+        validation_output = os.path.join(module_dir, 'validation_output.csv')
 
-        validation = ImportValidation(config_file, differ_output, '')
+        validation = import_validation.ImportValidation(config_file,
+                                                        differ_output, '',
+                                                        validation_output)
         validation.run_validations()
 
         expected = pd.read_csv(result_file)
