@@ -1,9 +1,9 @@
-Node: E:cpi_w->E1
+Node: E:cpi_w_1913_2023->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: C:cpi_w->statvar
+variableMeasured: dcs:dc/e4cm4rj4d5fyc
 measurementMethod: dcs:BLSUnchained
+measurementQualifier: dcs:BLSSeasonallyUnadjusted
 observationAbout: dcid:country/USA
-observationDate: C:cpi_w->date
-observationPeriod: C:cpi_w->duration
-value: C:cpi_w->value
-unit: C:cpi_w->unit
+observationDate: C:cpi_w_1913_2023->date
+value: C:cpi_w_1913_2023->cpi
+unit: dcs:IndexPointBasePeriod1982To1984Equals100
