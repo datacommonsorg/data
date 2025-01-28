@@ -1,0 +1,21 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "USFEMA_NationalRiskIndex",
+            "curator_emails": ["dhhhanushree@google.com"],
+            "provenance_url": "https://hazards.fema.gov/nri/data-resources",
+            "provenance_description": "USFEMA National RiskIndex",
+            "scripts": ["sh/e2e.sh"],
+            "import_inputs": [{
+                "template_mcf": "output/fema_nri_counties.tmcf",
+                "cleaned_csv": "output/nri_tracts_table_March 2023.csv"
+            },
+            {
+                "template_mcf": "output/fema_nri_counties.tmcf",
+                "cleaned_csv": "output/nri_counties_table_March 2023.csv"
+            }],
+        "cron_schedule": "0 4 2 * * *"
+        }
+    ]
+}
+
