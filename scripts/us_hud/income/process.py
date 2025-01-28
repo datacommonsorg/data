@@ -37,7 +37,12 @@ URL_PREFIX = 'https://www.huduser.gov/portal/datasets/il/il'
 
 
 def get_url(year):
-    '''Return xls url for year.'''
+    '''Return xls url for year.
+  Args:
+    year: Input year.
+  Returns:
+    xls url for given year.
+  '''
     if year < 2006:
         return ''
     suffix = str(year)[-2:]
@@ -62,7 +67,15 @@ def get_url(year):
 
 
 def download_file(url: str, filename: str, input_folder: str):
-    '''Download file and save it locally in the specified folder.'''
+    '''Download file and save it locally in the specified folder
+
+    Args: 
+    url: URL of the file to download
+    filename: Name of the file to save
+    input_folder: Folder to save the file
+    Returns: 
+    None
+    '''
     try:
         if not os.path.exists(input_folder):
             os.makedirs(input_folder)
@@ -91,13 +104,26 @@ def iter_excel_calamine(file: IO[bytes]) -> Iterator[dict[str, object]]:
 
 
 def compute_150(df, person):
-    '''Compute 150th percentile income in-place.'''
+    '''Compute 150th percentile income in-place.
+    Args:
+    df: DataFrame with income data
+    person: Number of persons in the household
+    Returns:
+    None
+    '''
     df[f'l150_{person}'] = df.apply(
         lambda x: round(x[f'l80_{person}'] / 80 * 150), axis=1)
 
 
 def process(year, matches, input_folder):
-    '''Generate cleaned data and accumulate it in output_data.'''
+    '''Generate cleaned CSV.
+  Args:
+   year: Input year.
+    matches: Map of fips dcid -> city dcid.
+    input_folder: Folder to save the file
+    Returns:
+    DataFrame with cleaned data.
+  '''
     url = get_url(year)
 
     if year >= 2023:
@@ -142,7 +168,6 @@ def process(year, matches, input_folder):
         compute_150(df, i)
 
     # Add year column
-    #df['year'] = [year for _ in range(len(df))]
     df['year'] = year
 
     # Add stats for matching dcids
@@ -153,13 +178,14 @@ def process(year, matches, input_folder):
     return df
 
 
-def main(argv):
-    '''Main function to process data for all years and merge into a single CSV.'''
+def process_all():
+    '''Function to process data for all years and merge into a single CSV.'''
+
     with open('match_bq.csv') as f:
         reader = csv.DictReader(f)
         matches = {'dcs:' + row['fips']: 'dcs:' + row['city'] for row in reader}
 
-    # Ensure the output directory exists
+# Ensure the output directory exists
     if not os.path.exists(FLAGS.income_output_dir):
         os.makedirs(FLAGS.income_output_dir)
 
@@ -178,12 +204,12 @@ def main(argv):
             filename = f"Section8-FY{year}.xlsx" if year >= 2016 else f"Section8-FY{year}.xls"
             download_file(url, filename, input_folder)
 
-    # Now process the data after all files are downloaded
+# Now process the data after all files are downloaded
     for year in range(2006, today.year + 1):
         df = process(year, matches, input_folder)
         output_data.append(df)
 
-    # Concatenate all DataFrames in output_data into one single DataFrame
+# Concatenate all DataFrames in output_data into one single DataFrame
     final_df = pd.concat(output_data, ignore_index=True)
 
     # Save the merged data to a single CSV
@@ -192,6 +218,10 @@ def main(argv):
                     index=False)
     logging.info(
         f'Merged data saved to {FLAGS.income_output_dir}/output_all_years.csv')
+
+
+def main(argv):
+    process_all()
 
 
 if __name__ == '__main__':
