@@ -33,11 +33,10 @@ sys.path.insert(1, MODULE_DIR + '/../..')
 from common.us_education import USEducation
 from config import *
 
+
 # pylint:enable=wrong-import-position
 # pylint:enable=import-error
 # pylint:disable=wildcard-import
-
-
 # pylint:disable=too-few-public-methods
 class NCESDistrictSchool(USEducation):
     """
