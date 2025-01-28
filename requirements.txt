@@ -30,3 +30,4 @@ zipp
 beautifulsoup4
 ratelimit
 xlsxwriter==3.2.0
+python-calamine
