@@ -30,9 +30,7 @@ from app.service import github_api
 from app.service import email_notifier
 
 REPO_DIR = os.path.dirname(
-    os.path.dirname(
-        os.path.dirname(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
 from log_util import log_metric
