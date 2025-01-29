@@ -1,0 +1,17 @@
+Node: E:us_nces_demographics_district_place->E0
+dcid: C:us_nces_demographics_district_place->school_state_code
+typeOf: dcs:SchoolDistrict
+address: C:us_nces_demographics_district_place->Physical_Address
+name: C:us_nces_demographics_district_place->District_School_name
+geoId: C:us_nces_demographics_district_place->geoID
+ncesId: C:us_nces_demographics_district_place->School_ID
+postalCode: C:us_nces_demographics_district_place->ZIP
+containedInPlace: C:us_nces_demographics_district_place->ContainedInPlace
+schoolStateID: C:us_nces_demographics_district_place->State_school_ID
+telephone: C:us_nces_demographics_district_place->PhoneNumber
+lowestGrade: C:us_nces_demographics_district_place->Lowest_Grade_Dist
+highestGrade: C:us_nces_demographics_district_place->Highest_Grade_Dist
+longitude: C:us_nces_demographics_district_place->Longitude
+latitude: C:us_nces_demographics_district_place->Latitude
+ncesLocale: C:us_nces_demographics_district_place->Locale
+schoolManagement: C:us_nces_demographics_district_place->School_Management
