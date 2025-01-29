@@ -126,7 +126,6 @@ def process(year, matches, input_folder):
     return df
 
 
-
 def process_all():
     '''Processes all years based on mode flag.'''
     with open('match_bq.csv') as f:
@@ -148,11 +147,14 @@ def process_all():
     if FLAGS.mode == "" or FLAGS.mode == "process":
         logging.info("Starting processing phase...")
         for year in range(2006, today.year):
-             if not os.path.exists(os.path.join(input_folder, f"Section8-FY{year}.xlsx" if year > 2016 else f"Section8-FY{year}.xls")):
+            if not os.path.exists(
+                    os.path.join(
+                        input_folder, f"Section8-FY{year}.xlsx"
+                        if year > 2016 else f"Section8-FY{year}.xls")):
                 logging.warning(f"File not found for year {year}")
                 continue
-             df = process(year, matches, input_folder)
-             if df is not None:
+            df = process(year, matches, input_folder)
+            if df is not None:
                 output_data.append(df)
 
         if output_data:
