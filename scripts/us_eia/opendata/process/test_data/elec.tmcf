@@ -8,3 +8,4 @@ value: C:EIATable->value
 unit: C:EIATable->unit
 scalingFactor: C:EIATable->scaling_factor
 eiaSeriesId: C:EIATable->eia_series_id
+measurementMethod: C:EIATable->measurementMethod

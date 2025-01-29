@@ -184,8 +184,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
 
     Returns schema-ful stat-var ID if schema was generated, None otherwise.
     """
-    counters['generate_statvar_schema'] += 1
-
+    counters.add_counter('generate_statvar_schema', 1)
     # COAL.{Measure}.{ConsumingSector}.{Period}
     m = re.match(r"^COAL\.([^._]+_?[^._]+)\.([0-9]+)\.([AQM])$", raw_sv)
     if m:
@@ -193,14 +192,14 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         consuming_sector = m.group(2)
         period = m.group(3)
     else:
-        counters['error_unparsable_raw_statvar'] += 1
+        counters.add_counter('error_unparsable_raw_statvar', 1)
         return None
-    counters[f'measure-{measure}'] += 1
+    counters.add_counter(f'measure-{measure}', 1)
 
     # Get popType and mprop based on measure.
     measure_pvs = _MEASURE_MAP.get(measure, None)
     if not measure_pvs:
-        counters[f'error_missing_measure-{measure}'] += 1
+        counters.add_counter(f'error_missing_measure-{measure}', 1)
         return None
 
     sv_id_parts = [common.PERIOD_MAP[period], measure_pvs[0]]
@@ -213,13 +212,14 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
     if consuming_sector:
         cs = _CONSUMING_SECTOR.get(consuming_sector, None)
         if not cs:
-            counters[f'error_missing_consuming_sector-{consumingSector}'] += 1
+            counters.add_counter(
+                f'error_missing_consuming_sector-{consuming_sector}', 1)
             return None
         sv_id_parts.append(cs)
         sv_pvs.append(f'consumingSector: dcs:{cs}')
 
     if measure not in _UNIT_MAP:
-        counters[f'error_missing_unit-{measure}'] += 1
+        counters.add_counter(f'error_missing_unit-{measure}', 1)
         return None
     (unit, sfactor) = _UNIT_MAP[measure]
 
