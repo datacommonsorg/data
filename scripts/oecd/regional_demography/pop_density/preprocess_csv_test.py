@@ -34,26 +34,26 @@ class TestProcess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class
     properties which further requried for unit testing.
-    The test will be conducted for EuroStat BMI Sample Datasets,
-    It will be generating CSV, MCF and TMCF files based on the sample input.
+    The test will be conducted for OECD Population Density Sample Datasets,
+    It will be generating CSV file based on the sample input.
     Comparing the data with the expected files.
     """
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
-
+    @classmethod
+    def setUpClass(cls):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
+            cls.cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
 
             input_file = os.path.join(TEST_DATASET_DIR, "data.csv")
             input_df = download_data_to_file_and_df('',
                                                     filename=False,
                                                     is_download_required=False,
                                                     csv_filepath=input_file)
-            process_data(input_df, cleaned_csv_file_path)
+            process_data(input_df, cls.cleaned_csv_file_path)
 
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_data = csv_file.read()
+            with open(cls.cleaned_csv_file_path,
+                      encoding="utf-8-sig") as csv_file:
+                cls.actual_csv_data = csv_file.read()
 
     def test_create_csv(self):
         """
@@ -70,3 +70,7 @@ class TestProcess(unittest.TestCase):
 
         self.assertEqual(expected_csv_data.strip(),
                          self.actual_csv_data.strip())
+
+
+if __name__ == '__main__':
+    unittest.main()

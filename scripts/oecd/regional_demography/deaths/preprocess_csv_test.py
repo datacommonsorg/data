@@ -34,31 +34,31 @@ class TestProcess(unittest.TestCase):
     """
     TestPreprocess is inherting unittest class
     properties which further requried for unit testing.
-    The test will be conducted for EuroStat BMI Sample Datasets,
-    It will be generating CSV, MCF and TMCF files based on the sample input.
+    The test will be conducted for OECD Deaths Sample Datasets,
+    It will be generating CSV and TMCF files based on the sample input.
     Comparing the data with the expected files.
     """
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
-
+    @classmethod
+    def setUpClass(cls):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+            cls.cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
+            cls.tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
             input_file = os.path.join(TEST_DATASET_DIR, "data.csv")
             input_df = download_data_to_file_and_df('',
                                                     filename=False,
                                                     is_download_required=False,
                                                     csv_filepath=input_file)
-            preprocess_df = process_data(input_df, cleaned_csv_file_path)
-            generate_tmcf(preprocess_df, tmcf_file_path)
+            preprocess_df = process_data(input_df, cls.cleaned_csv_file_path)
+            generate_tmcf(preprocess_df, cls.tmcf_file_path)
 
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_data = tmcf_file.read()
+            with open(cls.tmcf_file_path, encoding="UTF-8") as tmcf_file:
+                cls.actual_tmcf_data = tmcf_file.read()
 
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_data = csv_file.read()
+            with open(cls.cleaned_csv_file_path,
+                      encoding="utf-8-sig") as csv_file:
+                cls.actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):
         """
@@ -91,3 +91,7 @@ class TestProcess(unittest.TestCase):
 
         self.assertEqual(expected_csv_data.strip(),
                          self.actual_csv_data.strip())
+
+
+if __name__ == '__main__':
+    unittest.main()

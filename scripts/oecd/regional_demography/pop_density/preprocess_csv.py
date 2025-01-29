@@ -51,8 +51,13 @@ def process_data(df, output_file_path):
         regid_file = os.path.join(parent_dir, "regid2dcid.json")
         with open(regid_file, 'r') as f:
             regid2dcid = dict(json.loads(f.read()))
-        logging.info("Resolving places")
+        logging.info(f"Resolving places from {regid_file}")
+        df2 = df[~df['REG_ID'].isin(regid2dcid.keys())]
+        unmapped = len(df2["REG_ID"].unique())
+        logging.info(f"{unmapped} places have not been resolved")
         df = df[df['REG_ID'].isin(regid2dcid.keys())]
+        mapped = len(df["REG_ID"].unique())
+        logging.info(f"{mapped} places have been resolved")
         # Second, replace the names with dcids
         df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
     except Exception as e:
