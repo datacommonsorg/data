@@ -103,9 +103,9 @@ The attributes used for the import are as follows
 
 
 ### Command to Download input file
-  - `/bin/python3 scripts/us_nces/demographics/download.py --import_name={"PrivateSchool"(or)"District"(or)"PublicSchool"} --years_to_download= "{select the available years mentioned under each school type}"`
+  - `/bin/python3 download.py --import_name={"PrivateSchool"(or)"District"(or)"PublicSchool"} --years_to_download= "{select the available years mentioned under each school type}"`
 
-    For Example:  `/bin/python3 scripts/us_nces/demographics/download.py --import_name="PublicSchool" --years_to_download="2023"`.
+    For Example:  `/bin/python3 download.py --import_name="PublicSchool" --years_to_download="2023"`.
     - The input_files folder containing all the files will be present in: 
     `scripts/us_nces/demographics/public_school/input_files`
  - Note: Give one year at a time for District and Public Schools as there are large number of column values.
