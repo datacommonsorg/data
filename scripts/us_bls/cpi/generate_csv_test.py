@@ -24,9 +24,9 @@ actual_output_dir = os.path.join(TEST_DATA_DIR, 'actual_output')
 input_files_dir = os.path.join(TEST_DATA_DIR, 'input_files')
 output_dir = os.path.join(TEST_DATA_DIR, 'output_dir')
 Path(output_dir).mkdir(parents=True, exist_ok=True)
-series_name_cpi_u = "cpi_u"
-series_name_cpi_w = "cpi_w"
-series_name_c_cpi_u = "c_cpi_u"
+SERIES_NAME_CPI_U = "cpi_u"
+SERIES_NAME_CPI_W = "cpi_w"
+SERIES_NAME_C_CPI_U = "c_cpi_u"
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -36,38 +36,38 @@ class TestGenerateCSV(unittest.TestCase):
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
 
-    def test_GenerateCSV_data(self):
+    def test_generate_csv_data(self):
         #Calling process method
         process(input_files_dir, output_dir, int(1946))
         #expected and actual comaparision for series_name_cpi_u = "cpi_u"
-        expected_df_cpi_u = pd.read_csv(output_dir + "/" + series_name_cpi_u +
+        expected_df_cpi_u = pd.read_csv(output_dir + "/" + SERIES_NAME_CPI_U +
                                         ".csv",
                                         sep=r"\s+",
                                         dtype="str")
         actual_df_cpi_u = pd.read_csv(actual_output_dir + "/" +
-                                      series_name_cpi_u + "_output" + ".csv",
+                                      SERIES_NAME_CPI_U + "_output" + ".csv",
                                       sep=r"\s+",
                                       dtype="str")
         pd.testing.assert_frame_equal(actual_df_cpi_u, expected_df_cpi_u)
 
         #expected and actual comaparision for series_name_cpi_w = "cpi_w"
-        expected_df_cpi_w = pd.read_csv(output_dir + "/" + series_name_cpi_w +
+        expected_df_cpi_w = pd.read_csv(output_dir + "/" + SERIES_NAME_CPI_W +
                                         ".csv",
                                         sep=r"\s+",
                                         dtype="str")
         actual_df_cpi_w = pd.read_csv(actual_output_dir + "/" +
-                                      series_name_cpi_w + "_output" + ".csv",
+                                      SERIES_NAME_CPI_W + "_output" + ".csv",
                                       sep=r"\s+",
                                       dtype="str")
         pd.testing.assert_frame_equal(actual_df_cpi_w, expected_df_cpi_w)
 
         #expected and actual comaparision for series_name_c_cpi_u = "c_cpi_u"
         expected_df_c_cpi_u = pd.read_csv(output_dir + "/" +
-                                          series_name_c_cpi_u + ".csv",
+                                          SERIES_NAME_C_CPI_U + ".csv",
                                           sep=r"\s+",
                                           dtype="str")
         actual_df_c_cpi_u = pd.read_csv(
-            actual_output_dir + "/" + series_name_c_cpi_u + "_output" + ".csv",
+            actual_output_dir + "/" + SERIES_NAME_C_CPI_U + "_output" + ".csv",
             sep=r"\s+",
             dtype="str")
         pd.testing.assert_frame_equal(actual_df_c_cpi_u, expected_df_c_cpi_u)

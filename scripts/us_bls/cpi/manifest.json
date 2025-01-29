@@ -13,11 +13,11 @@
         },
         {
            "template_mcf": "cpi_w.tmcf",
-          "cleaned_csv": "output/cpi_w.csv"
+           "cleaned_csv": "output/cpi_w.csv"
         },
         {
            "template_mcf": "c_cpi_u.tmcf",
-		  "cleaned_csv": "output/c_cpi_u.csv"
+		       "cleaned_csv": "output/c_cpi_u.csv"
         }
       ],
       "cron_schedule": "0 3 2,16 * *"

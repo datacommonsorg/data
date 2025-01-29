@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Downloading and converting BLS CPI raw csv files to csv files of two columns:
+Downloads and converts BLS CPI raw csv files to csv files of two columns:
 "date" and "cpi", where "date" is of the form "YYYY-MM" and "cpi" is numeric.
 
 Usage: python3 generate_csv.py
@@ -57,6 +57,13 @@ MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = None
 _OUTOUT_FILE_PATH = None
 
+header = {
+    'User-Agent':
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+    'Content-Type':
+        'application/octet-stream',
+}
+
 # Dict from series names to series IDs
 SERIES_IDS = frozendict.frozendict({
     "cpi_u": "CUSR0000SA0",
@@ -65,7 +72,7 @@ SERIES_IDS = frozendict.frozendict({
 })
 
 
-def downloadUrl(header, _INPUT_FILE_PATH):
+def downloadUrl(_INPUT_FILE_PATH):
 
     for series_name, url in CSV_URLS.items():
         #Retry method is calling
@@ -143,14 +150,9 @@ def main(_):
     date_from_start_processing = _FLAGS.start_date
     Path(_OUTOUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
     Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
-    header = {
-        'User-Agent':
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-        'Content-Type':
-            'application/octet-stream',
-    }
+
     if mode == "" or mode == "download":
-        downloadUrl(header, _INPUT_FILE_PATH)
+        downloadUrl(_INPUT_FILE_PATH)
     if mode == "" or mode == "process":
         process(_INPUT_FILE_PATH, _OUTOUT_FILE_PATH, date_from_start_processing)
 
