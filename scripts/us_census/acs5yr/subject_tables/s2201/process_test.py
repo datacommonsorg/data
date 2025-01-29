@@ -8,7 +8,9 @@ import sys
 import unittest
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(1, _CODEDIR)
 
+# Import the functions from 'process.py' in the correct directory
 from process import convert_column_to_stat_var, create_csv, create_tmcf, write_csv
 
 _FEATURES = os.path.join(_CODEDIR, 'features.json')
