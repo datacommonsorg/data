@@ -101,7 +101,7 @@ def iter_excel_calamine(file: IO[bytes]) -> Iterator[dict[str, object]]:
 def process(year, matches, input_folder):
     '''Generate cleaned CSV.'''
     url = get_url(year)
-    filename = f"Section8-FY{year}.xlsx" if year >= 2023 else f"Section8-FY{year}.xls"
+    filename = f"Section8-FY{year}.xlsx" if year > 2016 else f"Section8-FY{year}.xls"
     try:
         with open(os.path.join(input_folder, filename), 'rb') as f:
             rows = iter_excel_calamine(f)
@@ -126,6 +126,7 @@ def process(year, matches, input_folder):
     return df
 
 
+
 def process_all():
     '''Processes all years based on mode flag.'''
     with open('match_bq.csv') as f:
@@ -138,17 +139,20 @@ def process_all():
 
     if FLAGS.mode == "" or FLAGS.mode == "download":
         logging.info("Starting download phase...")
-        for year in range(2006, today.year + 1):
+        for year in range(2006, today.year):
             url = get_url(year)
             if url:
-                filename = f"Section8-FY{year}.xlsx" if year >= 2016 else f"Section8-FY{year}.xls"
+                filename = f"Section8-FY{year}.xlsx" if year > 2016 else f"Section8-FY{year}.xls"
                 download_file(url, filename, input_folder)
 
     if FLAGS.mode == "" or FLAGS.mode == "process":
         logging.info("Starting processing phase...")
-        for year in range(2006, today.year + 1):
-            df = process(year, matches, input_folder)
-            if df is not None:
+        for year in range(2006, today.year):
+             if not os.path.exists(os.path.join(input_folder, f"Section8-FY{year}.xlsx" if year > 2016 else f"Section8-FY{year}.xls")):
+                logging.warning(f"File not found for year {year}")
+                continue
+             df = process(year, matches, input_folder)
+             if df is not None:
                 output_data.append(df)
 
         if output_data:
