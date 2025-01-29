@@ -18,7 +18,7 @@ python3 common/process.py --output=s2201 --download_id=df462630dbf2e2a5f4ec4d776
 
 ## Steps to obtain dowload ID:
 
-Visit the ACS Data Table:
+Visit the ACS Data Table: 
 
 Go to the following URL: https://data.census.gov/table/ACSST5Y2023.S2201?q=S2201.
 Inspect the Network Traffic:

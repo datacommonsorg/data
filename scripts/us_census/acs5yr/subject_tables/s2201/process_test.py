@@ -54,22 +54,21 @@ class ProcessTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             test_csv = os.path.join(tmp_dir, 'test_csv.csv')
             create_csv(test_csv, stat_vars)
-            
+
             year = 2023
             filename = f'ACSST5Y{year}.S2201-Data.csv'
-            
+
             with open(os.path.join(_TEST_DATA, filename)) as f:
                 reader = csv.DictReader(f)
                 write_csv(filename, reader, test_csv, features, stat_vars)
-            
+
             with open(test_csv) as f_result:
                 test_result = f_result.read()
                 with open(os.path.join(_TEST_DATA, 'expected.csv')) as f_test:
                     expected = f_test.read()
                     self.assertEqual(test_result, expected)
-            
-            os.remove(test_csv)
 
+            os.remove(test_csv)
 
     def test_create_tmcf(self):
         f = open(_FEATURES)
