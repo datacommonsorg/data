@@ -209,6 +209,7 @@ def process_all():
         df = process(year, matches, input_folder)
         output_data.append(df)
 
+
 # Concatenate all DataFrames in output_data into one single DataFrame
     final_df = pd.concat(output_data, ignore_index=True)
 
