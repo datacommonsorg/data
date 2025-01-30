@@ -33,7 +33,8 @@
             "Science and Engineering Related Fields": "ScienceAndEngineeringRelatedMajor",
             "Business": "BusinessMajor",
             "Education": "EducationMajor",
-            "Arts, Humanities and Others": "ArtsHumanitiesAndOtherMajor"
+            "Arts, Humanities and Others": "ArtsHumanitiesAndOtherMajor",
+            "Arts, Humanities, and Others": "ArtsHumanitiesAndOtherMajor"
         }
     },
     "universePVs": [
@@ -90,6 +91,7 @@
     },
     "ignoreColumns": [
         "id",
+        "Geography",
         "Geographic Area Name",
         "Percent",
         "Percent MOE",
@@ -98,6 +100,14 @@
         "Percent Female",
         "Percent Female MOE",
         "Percent Males",
-        "Percent Females"
+        "Percent Females",
+        "Annotation of Estimate",
+        "Annotation of Percent Females",
+        "Annotation of Females",
+        "Annotation of Percent Males",
+        "Annotation of Males",
+        "Annotation of Percent",
+        "Annotation of Total",
+        "Annotation of Margin of Error"
     ]
 }

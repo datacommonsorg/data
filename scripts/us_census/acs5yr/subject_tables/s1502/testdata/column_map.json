@@ -1,5 +1,5 @@
 {
-    "2019": {
+    "2023": {
         "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher": {
             "Node": "dcid:Count_Person_EducationalAttainmentBachelorsDegreeOrHigher",
             "measuredProperty": "dcs:count",
@@ -98,7 +98,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities and Others": {
+        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -108,7 +108,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities and Others": {
+        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -216,7 +216,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
+        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -226,7 +226,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
+        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -334,7 +334,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
+        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -344,7 +344,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
+        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -452,7 +452,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
+        "Estimate!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -462,7 +462,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
+        "Margin of Error!!Total!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -580,7 +580,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities and Others": {
+        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -591,7 +591,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities and Others": {
+        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -710,7 +710,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
+        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -721,7 +721,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
+        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -840,7 +840,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
+        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -851,7 +851,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
+        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -970,7 +970,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
+        "Estimate!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -981,7 +981,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
+        "Margin of Error!!Male!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Male",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1100,7 +1100,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities and Others": {
+        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1111,7 +1111,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities and Others": {
+        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1230,7 +1230,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
+        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1241,7 +1241,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities and Others": {
+        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!25 to 39 years!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_25To39Years_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1360,7 +1360,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
+        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1371,7 +1371,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities and Others": {
+        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!40 to 64 years!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_40To64Years_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1490,7 +1490,7 @@
             "bachelorsDegreeMajor": "dcs:EducationMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
+        "Estimate!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
             "Node": "dcid:Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1501,7 +1501,7 @@
             "bachelorsDegreeMajor": "dcs:ArtsHumanitiesAndOtherMajor",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities and Others": {
+        "Margin of Error!!Female!!Total population 25 years and over with a Bachelor's degree or higher!!DETAILED AGE!!65 years and over!!Arts, Humanities, and Others": {
             "Node": "dcid:MarginOfError_Count_Person_65OrMoreYears_BachelorOfArtsHumanitiesAndOtherMajor_Female",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
