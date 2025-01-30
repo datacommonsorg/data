@@ -22,7 +22,7 @@ import os
 import json
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('config_file', 'validation_config.json',
+flags.DEFINE_string('validation_config_file', 'validation_config.json',
                     'Path to the validation config file.')
 flags.DEFINE_string('differ_output_location', '.',
                     'Path to the differ output data folder.')
@@ -61,7 +61,7 @@ class ImportValidation:
   Class to perform validations for import automation.
 
   Usage:
-  $ python import_validation.py --config_file=<path> \
+  $ python import_validation.py --validation_config_file=<path> \
     --differ_output_location=<path> --stats_summary_location=<path>
 
   Each import can provide configuration (JSON) to select which validation
@@ -129,7 +129,7 @@ class ImportValidation:
 
 def main(_):
     validation = ImportValidation(
-        FLAGS.config_file,
+        FLAGS.validation_config_file,
         os.path.join(FLAGS.differ_output_location, POINT_ANALAYSIS_FILE),
         os.path.join(FLAGS.stats_summary_location, STATS_SUMMARY_FILE),
         os.paht.join(FLAGS.validation_output_location, VALIDATION_OUTPUT_FILE))
