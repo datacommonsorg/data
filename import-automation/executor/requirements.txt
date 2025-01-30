@@ -7,6 +7,7 @@ chardet
 croniter
 dataclasses==0.6
 datacommons
+db-dtypes
 frozendict
 func-timeout==4.3.5
 geojson==2.5.0
