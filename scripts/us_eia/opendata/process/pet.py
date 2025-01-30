@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ def _parse_with_place_prefix(m):
     return (place, sv_id, in_us)
 
 
-def extract_place_statvar(series_id, counters):
+def extract_place_statvar(series_id):
     """Given the series_id, extract the raw place and stat-var ID.
 
     Args:

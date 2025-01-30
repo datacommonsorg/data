@@ -13,13 +13,13 @@
 # limitations under the License.
 """EIA Coal Dataset specific functions."""
 
-import logging
+from absl import logging
 import re
 
 from . import common
 
 
-def extract_place_statvar(series_id, counters):
+def extract_place_statvar(series_id):
     """Given the series_id, extract the raw place and stat-var ID.
 
     Args:

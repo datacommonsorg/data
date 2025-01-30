@@ -103,16 +103,12 @@ def process_all():
         for file in sorted(files):
             if not file.endswith('.txt'):
                 continue
-            print(f'Processing1 {subdir}/{file}')
-
             process_single(subdir, file)
 
 
 if __name__ == '__main__':
     args = sys.argv[1:]
     if len(args) == 0:
-        print('Processing all files')
         process_all()
     else:
-        print(f'Processing {args[0]}/{args[1]}')
         process_single(args[0], args[1])

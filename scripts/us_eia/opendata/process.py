@@ -26,7 +26,7 @@ import os
 import sys
 import zipfile
 import requests
-
+from retry import retry
 from absl import flags
 from absl import app
 from absl import logging
@@ -57,6 +57,7 @@ _DATASETS = {
 }
 
 
+@retry(tries=5, delay=3, backoff=2)
 def download_file(url: str, save_path: str):
     try:
         r = requests.get(url, stream=True)
@@ -66,6 +67,7 @@ def download_file(url: str, save_path: str):
         logging.fatal(f"error while downloading the file,{url} -{e}")
 
 
+@retry(tries=5, delay=3, backoff=2)
 def download_manifest():
     try:
         return requests.get(MANIFEST_URL).json()

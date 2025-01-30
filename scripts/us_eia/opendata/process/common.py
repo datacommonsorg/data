@@ -16,7 +16,7 @@ import os
 import sys
 import csv
 import json
-import logging
+from absl import logging
 import re
 from collections import defaultdict
 from sys import path
@@ -237,13 +237,11 @@ def _parse_date(d):
         m_or_q = d[4:]
 
         if m_or_q.startswith('Q'):
-            #print("withQ",yr + '-' + _QUARTER_MAP[m_or_q])
             # Quarterly
             if m_or_q in _QUARTER_MAP:
                 return yr + '-' + _QUARTER_MAP[m_or_q]
         else:
             # Monthly
-            #print("withOutQ",yr + '-' + m_or_q)
             return yr + '-' + m_or_q
 
     if len(d) == 8:
