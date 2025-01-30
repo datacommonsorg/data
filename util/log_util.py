@@ -35,7 +35,7 @@ def log_metric(log_type: str, level: str, message: str, metric_labels: dict):
         In GCP Log Explorer, the labels will appear under `jsonPayload`.
 
         Guidelines for GCP log-based metrics:
-        - Keep loggin queries simple and focused.
+        - Keep logging queries simple and focused.
             - More query fields might increase the chances of false negatives.
             - Filter logs by resource.type to focus on specific resources. This is auto populated by 
                 GCP and does not need to be set here.
