@@ -34,6 +34,9 @@ REPO_DIR = os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_differ'))
 sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_validation'))
+sys.path.append(os.path.join(REPO_DIR, 'util'))
+
+import file_util
 
 from import_differ import ImportDiffer
 from import_validation import ImportValidation
@@ -350,9 +353,12 @@ class ImportExecutor:
             validation_output_path = os.path.join(absolute_import_dir,
                                                   'validation')
             config_file = import_spec.get('validation_config_file', '')
-            if not config_file:
-                config_file = self.config.validation_config_file
-            config_file_path = os.path.join(REPO_DIR, config_file)
+            if config_file:
+                config_file_path = os.path.join(absolute_import_dir,
+                                                config_file)
+            else:
+                config_file_path = os.path.join(
+                    repo_dir, self.config.validation_config_file)
             logging.info(f'Validation config file: {config_file_path}')
 
             # Download previous import data.
@@ -443,7 +449,8 @@ class ImportExecutor:
             requirements_path = os.path.join(absolute_import_dir,
                                              self.config.requirements_filename)
             central_requirements_path = os.path.join(
-                repo_dir, self.config.requirements_filename)
+                repo_dir, 'import-automation', 'executor',
+                self.config.requirements_filename)
             interpreter_path, process = _create_venv(
                 (central_requirements_path, requirements_path),
                 tmpdir,
@@ -536,13 +543,32 @@ class ImportExecutor:
         for import_input in import_inputs:
             for input_type in self.config.import_input_types:
                 path = import_input.get(input_type)
-                if path:
-                    dest = f'{output_dir}/{version}/{os.path.basename(path)}'
-                    self._upload_file_helper(
-                        src=os.path.join(import_dir, path),
-                        dest=dest,
-                    )
-                    setattr(uploaded, input_type, dest)
+                if not path:
+                    continue
+                for file in file_util.file_get_matching(
+                        os.path.join(import_dir, path)):
+                    if file:
+                        dest = f'{output_dir}/{version}/{os.path.basename(file)}'
+                        self._upload_file_helper(
+                            src=file,
+                            dest=dest,
+                        )
+                uploaded_dest = f'{output_dir}/{version}/{os.path.basename(path)}'
+                setattr(uploaded, input_type, uploaded_dest)
+
+        # Upload any files downloaded from source
+        source_files = [
+            os.path.join(import_dir, file)
+            for file in import_spec.get('source_files', [])
+        ]
+        source_files = file_util.file_get_matching(source_files)
+        for file in source_files:
+            dest = f'{output_dir}/{version}/source_files/{os.path.basename(file)}'
+            self._upload_file_helper(
+                src=file,
+                dest=dest,
+            )
+
         self.uploader.upload_string(
             version,
             os.path.join(output_dir, self.config.storage_version_filename))
@@ -565,7 +591,7 @@ class ImportExecutor:
 
         Args:
             import_spec: Specification of the import as a dict.
-        
+
         Returns:
             import_metadata_mcf node.
         """
