@@ -16,12 +16,16 @@
 import os
 import pandas as pd
 import random
+import sys
 
 from absl import app
 from absl import flags
 from absl import logging
 
-from tools.import_differ import differ_utils
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+
+import differ_utils
 
 SAMPLE_COUNT = 3
 GROUPBY_COLUMNS = 'variableMeasured,observationAbout,observationDate,measurementMethod,unit,observationPeriod'
