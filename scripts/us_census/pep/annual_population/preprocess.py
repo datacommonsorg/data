@@ -1042,7 +1042,6 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
             ] or file_name.startswith("sub-est202"):
                 data_df = _process_cities(file, is_summary_levels)
                 processed_count += 1
-                continue
 
             if not data_df.empty:
                 processed_count += 1
@@ -1057,7 +1056,7 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
         logging.fatal(f"Error while processing files {e}")
 
     logging.info(f"No of files processed {processed_count}")
-    if processed_count == total_files_to_process & total_files_to_process > 0:
+    if processed_count >= total_files_to_process & total_files_to_process > 0:
         final_df["Year"] = final_df["Year"].astype("int")
         final_df = final_df.sort_values(by=["Location", "Year"])
         final_df = final_df.drop_duplicates(["Year", "Location"])
