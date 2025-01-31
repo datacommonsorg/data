@@ -2,7 +2,7 @@
     "import_specifications": [
         {
             "import_name": "CDC500_States",
-            "curator_emails": [],
+            "curator_emails": ["support@datacommons.org"],
             "provenance_url": "https://www.cdc.gov/places/index.html",
             "provenance_description": "Variables related to health from the CDC",
             "scripts": [
