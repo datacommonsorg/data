@@ -9,7 +9,7 @@
       "import_inputs": [
         {
           "template_mcf": "hud.tmcf",
-          "cleaned_csv": "csv/output_2006.csv"
+          "cleaned_csv": "csv/output_all_years"
         }
       ],
       "cron_schedule": "15 23 * * 7"
