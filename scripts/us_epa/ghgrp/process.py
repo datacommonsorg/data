@@ -17,10 +17,10 @@ import os
 import sys
 import csv
 from datetime import datetime
-import logging
 from absl import app, flags, logging
 
 # Allows the following module imports to work when running as a script
+
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
