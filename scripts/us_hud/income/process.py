@@ -32,7 +32,9 @@ import requests
 from retry import retry
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('income_output_dir', 'csv', 'Path to write cleaned CSVs.')
+flags.DEFINE_string('income_output_dir', 'output',
+                    'Path to write cleaned CSVs.')
+flags.DEFINE_string('input_files', 'input', 'Path to download input CSVs.')
 flags.DEFINE_string('mode', '',
                     'Mode: "download", "process", or both (default: both).')
 
@@ -133,7 +135,7 @@ def process_all():
         matches = {'dcs:' + row['fips']: 'dcs:' + row['city'] for row in reader}
 
     today = datetime.date.today()
-    input_folder = 'input'
+    input_folder = FLAGS.input_files
     output_data = []
 
     if FLAGS.mode == "" or FLAGS.mode == "download":
