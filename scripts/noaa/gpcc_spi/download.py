@@ -21,7 +21,7 @@ https://www.ncei.noaa.gov/pub/data/nidis/gpcc/nidis_gpcc_readme_c20220520.txt
 from absl import app
 from absl import flags
 import concurrent.futures
-import logging
+from absl import logging
 import urllib
 import urllib.request
 import shutil

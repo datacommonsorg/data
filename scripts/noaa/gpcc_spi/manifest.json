@@ -35,7 +35,7 @@
                     "cleaned_csv": "output_files/gpcc_spi_pearson_72.csv"
                 }
             ],
-            "cron_schedule": "0 0 30 * *"
+            "cron_schedule": "0 0 1,15 * *"
         },
         {
             "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex_AggPlace",
@@ -73,7 +73,7 @@
                     "cleaned_csv": "output_files/aggregations/gpcc_spi_pearson_72_agg.csv"
                 }
             ],
-            "cron_schedule": "0 0 30 * *"
+            "cron_schedule": "0 0 1,15 * *"
         },
         {
             "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex_Event_Places",
@@ -89,7 +89,7 @@
                     "cleaned_csv": "output_files/events_spi_9m_polygon/place_svobs/drought_spi_9m_polygon_place_svobs.csv"
                 }
             ],
-            "cron_schedule": "0 0-23/2 30 * * "
+            "cron_schedule": "0 0 1,15 * *"
         },
         {
             "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex_Event",
@@ -105,7 +105,7 @@
                     "cleaned_csv": "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events.csv"
                 }
             ],
-            "cron_schedule": "0 0-23/2 30 * * "
+            "cron_schedule": "0 0 1,15 * *"
         },
         {
             "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex_Event_Observations",
@@ -121,7 +121,7 @@
                     "cleaned_csv": "output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
                 }
             ],
-            "cron_schedule": "0 0-23/2 30 * * "
+            "cron_schedule": "0 0 1,15 * *"
         }
     ]
 }
