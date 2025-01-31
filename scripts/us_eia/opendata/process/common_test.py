@@ -24,7 +24,7 @@ sys.path.append(
     os.path.dirname(
         os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
-from .us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
+from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
