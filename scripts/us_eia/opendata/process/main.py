@@ -25,7 +25,7 @@ sys.path.append(
     os.path.dirname(
         os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
-from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
+from .us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Raw data dir')
