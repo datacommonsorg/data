@@ -112,9 +112,9 @@ def write_csv(filename, reader, output, features, stat_vars):
         for row in reader:
 
             # Check if GEO_ID ends with '99999' and ignore it
-            if row['GEO_ID'].endswith('99999'):
+            if row['\ufeff"GEO_ID"'].endswith('99999'):
                 continue
-            if row['GEO_ID'] == 'Geography':
+            if row['\ufeff"GEO_ID"'] == 'Geography':
 
                 # Map feature names to stat vars
                 for c in row:
@@ -135,7 +135,7 @@ def write_csv(filename, reader, output, features, stat_vars):
             # TODO: Expand to support other prefixes?
             #'observationAbout': 'dcid:geoId/' + row['GEO_ID'].split('US')[1]
         # }
-            geo = row['GEO_ID'].split('US')
+            geo = row['\ufeff"GEO_ID"'].split('US')
             if geo[1] == "":
                 new_row = {
                     'observationDate': observation_date,
