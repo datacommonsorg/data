@@ -1581,7 +1581,8 @@ class GeoEventsProcessor:
         if self._config.get('output_events', True):
             _set_counter_stage(self._counters, 'emit_events_csv_')
             output_files.append(
-                self.write_events_csv(output_path=output_path,
+                self.write_events_csv(output_path=_get_output_subdir_path(
+                    output_path, 'events'),
                                       output_ended_events=output_ended_events))
         if self._config.get('output_svobs', False):
             _set_counter_stage(self._counters, 'emit_events_svobs_')
