@@ -28,6 +28,7 @@ protobuf
 psutil
 pylint
 pytest
+python_calamine
 pytz
 ratelimit
 requests==2.27.1
