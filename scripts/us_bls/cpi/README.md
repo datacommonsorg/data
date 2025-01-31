@@ -110,80 +110,11 @@ The license is available online at https://www.bls.gov/bls/linksite.htm.
   - Contains StatisticalVariables for C-CPI-U series.
 - [cpi_u.mcf](cpi_u.mcf)
 - [cpi_w.mcf](cpi_w.mcf)
-- [pop_type_enums.mcf](pop_type_enums.mcf)
-  - Contains populationType enums for all three types of series.
-- [unit_enums.mcf](unit_enums.mcf)
-  - Contains unit enums for all three types of series.
 
-#### Scripts
+### Steps to download and process
 
-- [generate_csv_mcf.py](generate_csv_mcf.py) generates the CSVs,
-  StatisticalVariable MCFs, and template MCFs. See module docstring.
+python3 generate_csv.py --mode=download
+python3 generate_csv.py --mode=process
 
-## Proposed manifest.json for adding product breakdown
-
-See About the Import > Status above for context.
-
-```
-{
-    "import_specifications": [
-        {
-            "import_name": "USBLS_CPI_U",
-            "curator_emails": [
-                "shijunjie@google.com"
-            ],
-            "provenance_url": "https://www.bls.gov/cpi/",
-            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index for All Urban Consumers",
-            "scripts": [
-                "generate_csv_mcf.py"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "cpi_u.tmcf",
-                    "cleaned_csv": "cpi_u.csv",
-                    "node_mcf": "cpi_u.mcf"
-                }
-            ],
-            "cron_schedule": "0 17 15 * *"
-        },
-        {
-            "import_name": "USBLS_CPI_W",
-            "curator_emails": [
-                "shijunjie@google.com"
-            ],
-            "provenance_url": "https://www.bls.gov/cpi/",
-            "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index for Urban Wage Earners and Clerical Workers",
-            "scripts": [
-                "generate_csv_mcf.py"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "cpi_w.tmcf",
-                    "cleaned_csv": "cpi_w.csv",
-                    "node_mcf": "cpi_w.mcf"
-                }
-            ],
-            "cron_schedule": "15 17 15 * *"
-        },
-        {
-            "import_name": "USBLS_C_CPI_U",
-            "curator_emails": [
-                "shijunjie@google.com"
-            ],
-            "provenance_url": "https://www.bls.gov/cpi/",
-            "provenance_description": "U.S. Bureau of Labor Statistics Chained Consumer Price Index for All Urban Consumers",
-            "scripts": [
-                "generate_csv_mcf.py"
-            ],
-            "import_inputs": [
-                {
-                    "template_mcf": "c_cpi_u.tmcf",
-                    "cleaned_csv": "c_cpi_u.csv",
-                    "node_mcf": "c_cpi_u.mcf"
-                }
-            ],
-            "cron_schedule": "30 17 15 * *"
-        }
-    ]
-}
-```
+### Note: Data is available from 1947 in source , so the historical data is retained in GCP bucket (unresolved_mcf/bls/cpi/HistoricalData) from 1913 to 1946.
+### Auto-refresh is done only for 1947 and more year data.
