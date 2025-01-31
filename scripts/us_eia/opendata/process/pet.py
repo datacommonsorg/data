@@ -27,7 +27,7 @@ def _parse_with_place_prefix(m):
     return (place, sv_id, in_us)
 
 
-def extract_place_statvar(series_id, counters):
+def extract_place_statvar(series_id):
     """Given the series_id, extract the raw place and stat-var ID.
 
     Args:
