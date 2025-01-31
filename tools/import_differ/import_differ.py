@@ -16,10 +16,14 @@
 import os
 import pandas as pd
 import random
+import sys
 
 from absl import app
 from absl import flags
 from absl import logging
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
 
 import differ_utils
 

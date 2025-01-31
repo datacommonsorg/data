@@ -17,9 +17,8 @@ import pandas as pd
 import unittest
 
 from pandas.testing import assert_frame_equal
-from import_differ import ImportDiffer
-
-import differ_utils
+from tools.import_differ import import_differ
+from tools.import_differ import differ_utils
 
 module_dir = os.path.dirname(__file__)
 
@@ -37,8 +36,9 @@ class TestImportDiffer(unittest.TestCase):
         previous_data = os.path.join(module_dir, 'test', 'previous.mcf')
         output_location = os.path.join(module_dir, 'test')
 
-        differ = ImportDiffer(current_data, previous_data, output_location,
-                              groupby_columns, value_columns)
+        differ = import_differ.ImportDiffer(current_data, previous_data,
+                                            output_location, groupby_columns,
+                                            value_columns)
         current = differ_utils.load_mcf_file(current_data)
         previous = differ_utils.load_mcf_file(previous_data)
 
