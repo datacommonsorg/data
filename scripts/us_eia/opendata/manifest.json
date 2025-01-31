@@ -2,7 +2,9 @@
   "import_specifications": [
     {
       "import_name": "EIA_Coal",
-      "curator_emails": [],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://www.eia.gov/opendata/qb.php?category=717234",
       "provenance_description": "Coal dataset has country, state-level level information .",
       "scripts": [
@@ -14,11 +16,13 @@
           "cleaned_csv": "tmp_raw_data/COAL/COAL.csv"
         }
       ],
-      "cron_schedule": "0 6 1 2 *"
+      "cron_schedule": "0 6 5,20 * *"
     },
     {
       "import_name": "EIA_Electricity",
-      "curator_emails": [],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
       "provenance_description": "Electricity dataset has country, state-level and plant-level information on electricity generation, consumption, sales etc by energy source and “sectors” (like residential, commercial, etc.).",
       "scripts": [
@@ -30,11 +34,13 @@
           "cleaned_csv": "tmp_raw_data/ELEC/ELEC.csv"
         }
       ],
-      "cron_schedule": "0 8 1 2 *"
+      "cron_schedule": "0 7 5,20 * *"
     },
     {
       "import_name": "EIA_NaturalGas",
-      "curator_emails": [],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
       "provenance_description": "Natural gas dataset has country and state-level data.",
       "scripts": [
@@ -46,11 +52,13 @@
           "cleaned_csv": "tmp_raw_data/NG/NG.csv"
         }
       ],
-      "cron_schedule": "05 10 * * *"
+      "cron_schedule": "0 8 5,20 * *"
     },
     {
       "import_name": "EIA_NuclearOutages",
-      "curator_emails": [],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
       "provenance_description": "Nuclear outage dataset has nuclear-plant and national data about Nuclear energy generation capacity and planned outages.",
       "scripts": [
@@ -62,11 +70,13 @@
           "cleaned_csv": "tmp_raw_data/NUC_STATUS/NUC_STATUS.csv"
         }
       ],
-      "cron_schedule": "01 9 * * *"
+      "cron_schedule": "0 9 5,20 * *"
     },
     {
       "import_name": "EIA_Petroleum",
-      "curator_emails": [],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
       "provenance_description": "EIA Petroleum dataset has country and state-level data.",
       "scripts": [
@@ -78,11 +88,13 @@
           "cleaned_csv": "tmp_raw_data/PET/PET.csv"
         }
       ],
-      "cron_schedule": "5 9 2 2 *"
+      "cron_schedule": "0 10 5,20 * *"
     },
     {
       "import_name": "EIA_International",
-      "curator_emails": [],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
       "provenance_description": "EIA International Energy dataset has country, continent and world-level data.",
       "scripts": [
@@ -94,11 +106,13 @@
           "cleaned_csv": "tmp_raw_data/INTL/INTL.csv"
         }
       ],
-      "cron_schedule": "1 7 * 1,4,7,10 *"
+      "cron_schedule": "0 11 5,20 * * *"
     },
     {
       "import_name": "EIA_SEDS",
-      "curator_emails": [],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
       "provenance_description": "EIA SEDS International Energy dataset has US country-level and state-level data.",
       "scripts": [
@@ -110,11 +124,13 @@
           "cleaned_csv": "tmp_raw_data/SEDS/SEDS.csv"
         }
       ],
-      "cron_schedule": "0 0 1 1 *"
+      "cron_schedule": "0 12 5,20 * *"
     },
     {
       "import_name": "EIA_TotalEnergy",
-      "curator_emails": [],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
       "provenance_description": "Total Energy dataset has US country-level data.",
       "scripts": [
@@ -126,7 +142,7 @@
           "cleaned_csv": "tmp_raw_data/TOTAL/TOTAL.csv"
         }
       ],
-      "cron_schedule": "0 0 1 * *"
+      "cron_schedule": "0 13 5,20 * *"
     }
   ]
 }
