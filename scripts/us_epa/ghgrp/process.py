@@ -20,16 +20,17 @@ from datetime import datetime
 from absl import app, flags, logging
 
 # Allows the following module imports to work when running as a script
-
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
 from us_epa.ghgrp import download, gas, sources
 from us_epa.util import crosswalk as cw
 
+# Define command-line flags
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Mode to run: "download", "process", or both')
 
+# Define constants
 _FACILITY_ID = 'Facility Id'
 _DCID = 'dcid'
 _SV = 'sv'
@@ -41,6 +42,17 @@ _OUT_PATH = 'import_data'
 
 
 def process_data(data_filepaths, crosswalk, out_filepath):
+    """Processes multiple CSV data files and writes the output to a single CSV file.
+    
+    Args:
+        data_filepaths (list of tuples): A list containing tuples of (year, file path).
+        crosswalk (Crosswalk): An instance of the Crosswalk class for mapping facility IDs.
+        out_filepath (str): The output file path where processed data will be stored.
+    
+    Returns:
+        None
+    """
+
     logging.info(f'Writing to {out_filepath}')
     try:
         with open(out_filepath, 'w') as out_fp:
