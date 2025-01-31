@@ -21,15 +21,13 @@ from absl import logging
 
 # Allows the following module imports to work when running as a script.
 # relative to scripts/
-sys.path.append(
-    os.path.dirname(
-        os.path.dirname(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
-#from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
-from main import *
 
-# module_dir_ is the path to where this test is running from.
+#from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
+
 module_dir_ = os.path.dirname(__file__)
+sys.path.insert(0, module_dir_)
+from main import *
+# module_dir_ is the path to where this test is running from.
 
 _TEST_CASES = [
     # dataset-code, dataset-name, test-case-filename,
