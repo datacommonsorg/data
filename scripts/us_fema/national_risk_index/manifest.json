@@ -8,11 +8,11 @@
             "scripts": ["sh/e2e.sh"],
             "import_inputs": [{
                 "template_mcf": "output/fema_nri_counties.tmcf",
-                "cleaned_csv": "output/nri_tracts_table_March 2023.csv"
+                "cleaned_csv": ""
             },
             {
                 "template_mcf": "output/fema_nri_counties.tmcf",
-                "cleaned_csv": "output/nri_counties_table_March 2023.csv"
+                "cleaned_csv": ""
             }],
         "cron_schedule": "0 4 2 * * *"
         }
