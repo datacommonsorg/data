@@ -13,7 +13,10 @@
       "import_inputs": [
         {
           "template_mcf": "tmp_raw_data/COAL/COAL.tmcf",
-          "cleaned_csv": "tmp_raw_data/COAL/COAL.csv"
+          "cleaned_csv": "tmp_raw_data/COAL/COAL.csv",
+          "source_files": [
+            "tmp_raw_data/COAL/COAL.txt"
+          ]
         }
       ],
       "cron_schedule": "0 6 5,20 * *"
@@ -34,7 +37,10 @@
           "cleaned_csv": "tmp_raw_data/ELEC/ELEC.csv"
         }
       ],
-      "cron_schedule": "0 7 5,20 * *"
+      "cron_schedule": "0 7 5,20 * *",
+      "source_files": [
+        "tmp_raw_data/ELEC/ELEC.txt"
+      ]
     },
     {
       "import_name": "EIA_NaturalGas",
@@ -52,7 +58,10 @@
           "cleaned_csv": "tmp_raw_data/NG/NG.csv"
         }
       ],
-      "cron_schedule": "0 8 5,20 * *"
+      "cron_schedule": "0 8 5,20 * *",
+      "source_files": [
+        "tmp_raw_data/NG/NG.txt"
+      ]
     },
     {
       "import_name": "EIA_NuclearOutages",
@@ -70,7 +79,10 @@
           "cleaned_csv": "tmp_raw_data/NUC_STATUS/NUC_STATUS.csv"
         }
       ],
-      "cron_schedule": "0 9 5,20 * *"
+      "cron_schedule": "0 9 5,20 * *",
+      "source_files": [
+        "tmp_raw_data/NUC_STATUS/NUC_STATUS.txt"
+      ]
     },
     {
       "import_name": "EIA_Petroleum",
@@ -88,7 +100,10 @@
           "cleaned_csv": "tmp_raw_data/PET/PET.csv"
         }
       ],
-      "cron_schedule": "0 10 5,20 * *"
+      "cron_schedule": "0 10 5,20 * *",
+      "source_files": [
+        "tmp_raw_data/PET/PET.txt"
+      ]
     },
     {
       "import_name": "EIA_International",
@@ -106,7 +121,10 @@
           "cleaned_csv": "tmp_raw_data/INTL/INTL.csv"
         }
       ],
-      "cron_schedule": "0 11 5,20 * * *"
+      "cron_schedule": "0 11 5,20 * * *",
+      "source_files": [
+        "tmp_raw_data/INTL/INTL.txt"
+      ]
     },
     {
       "import_name": "EIA_SEDS",
@@ -124,7 +142,10 @@
           "cleaned_csv": "tmp_raw_data/SEDS/SEDS.csv"
         }
       ],
-      "cron_schedule": "0 12 5,20 * *"
+      "cron_schedule": "0 12 5,20 * *",
+      "source_files": [
+        "tmp_raw_data/SEDS/SEDS.txt"
+      ]
     },
     {
       "import_name": "EIA_TotalEnergy",
@@ -142,7 +163,10 @@
           "cleaned_csv": "tmp_raw_data/TOTAL/TOTAL.csv"
         }
       ],
-      "cron_schedule": "0 13 5,20 * *"
+      "cron_schedule": "0 13 5,20 * *",
+      "source_files": [
+        "tmp_raw_data/TOTAL/TOTAL.txt"
+      ]
     }
   ]
 }
