@@ -2,12 +2,17 @@
     "import_specifications": [
         {
             "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex",
-            "curator_emails": [],
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
             "provenance_url": "https://www.drought.gov/data-maps-tools/global-precipitation-climatology-centre-gpcc-standardized-precipitation-index-spi",
             "provenance_description": "SPI for 1 degree grids calculated from monthly precipitation data using the Pearson distribution.",
             "scripts": [
                 "download.py",
                 "preprocess_gpcc_spi.py"
+            ],
+            "source_files": [
+                "input_files/*"
             ],
             "import_inputs": [
                 {
@@ -35,7 +40,7 @@
                     "cleaned_csv": "output_files/gpcc_spi_pearson_72.csv"
                 }
             ],
-            "cron_schedule": "0 0 1,15 * *"
+            "cron_schedule": "0 9 2,16 * *"
         },
         {
             "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex_AggPlace",
@@ -46,6 +51,9 @@
                 "download.py",
                 "preprocess_gpcc_spi.py",
                 "gpcc_spi_aggregation.py"
+            ],
+            "source_files": [
+                "input_files/*"
             ],
             "import_inputs": [
                 {
@@ -73,7 +81,7 @@
                     "cleaned_csv": "output_files/aggregations/gpcc_spi_pearson_72_agg.csv"
                 }
             ],
-            "cron_schedule": "0 0 1,15 * *"
+            "cron_schedule": "0 10 2,16 * *"
         },
         {
             "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex_Event_Places",
@@ -83,13 +91,16 @@
             "scripts": [
                 "run.sh"
             ],
+            "source_files": [
+                "input_files/*"
+            ],
             "import_inputs": [
                 {
                     "template_mcf": "drought_spi_9m_polygon_place_svobs.tmcf",
                     "cleaned_csv": "output_files/events_spi_9m_polygon/place_svobs/drought_spi_9m_polygon_place_svobs.csv"
                 }
             ],
-            "cron_schedule": "0 0 1,15 * *"
+            "cron_schedule": "0 11 2,16 * *"
         },
         {
             "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex_Event",
@@ -99,13 +110,16 @@
             "scripts": [
                 "run.sh"
             ],
+            "source_files": [
+                "input_files/*"
+            ],
             "import_inputs": [
                 {
                     "template_mcf": "drought_spi_9m_polygon_events.tmcf",
                     "cleaned_csv": "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events.csv"
                 }
             ],
-            "cron_schedule": "0 0 1,15 * *"
+            "cron_schedule": "0 12 2,16 * *"
         },
         {
             "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex_Event_Observations",
@@ -115,13 +129,16 @@
             "scripts": [
                 "run.sh"
             ],
+            "source_files": [
+                "input_files/*"
+            ],
             "import_inputs": [
                 {
                     "template_mcf": "drought_spi_9m_polygon_svobs.tmcf",
                     "cleaned_csv": "output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
                 }
             ],
-            "cron_schedule": "0 0 1,15 * *"
+            "cron_schedule": "0 13 2,16 * *"
         }
     ]
 }
