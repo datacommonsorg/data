@@ -2,24 +2,22 @@
   "import_specifications": [
     {
       "import_name": "EIA_Coal",
-      "curator_emails": [
-        "support@datacommons.org"
-      ],
+      "curator_emails": [],
       "provenance_url": "https://www.eia.gov/opendata/qb.php?category=717234",
       "provenance_description": "Coal dataset has country, state-level level information .",
       "scripts": [
         "process.py --dataset=COAL"
       ],
+      "source_files": [
+        "tmp_raw_data/COAL/COAL.txt"
+      ],
       "import_inputs": [
         {
           "template_mcf": "tmp_raw_data/COAL/COAL.tmcf",
-          "cleaned_csv": "tmp_raw_data/COAL/COAL.csv",
-          "source_files": [
-            "tmp_raw_data/COAL/COAL.txt"
-          ]
+          "cleaned_csv": "tmp_raw_data/COAL/COAL.csv"
         }
       ],
-      "cron_schedule": "0 6 5,20 * *"
+      "cron_schedule": "0 6 1 2 *"
     },
     {
       "import_name": "EIA_Electricity",
@@ -31,16 +29,16 @@
       "scripts": [
         "process.py --dataset=ELEC"
       ],
+      "source_files": [
+        "tmp_raw_data/ELEC/ELEC.txt"
+      ],
       "import_inputs": [
         {
           "template_mcf": "tmp_raw_data/ELEC/ELEC.tmcf",
           "cleaned_csv": "tmp_raw_data/ELEC/ELEC.csv"
         }
       ],
-      "cron_schedule": "0 7 5,20 * *",
-      "source_files": [
-        "tmp_raw_data/ELEC/ELEC.txt"
-      ]
+      "cron_schedule": "0 7 5,20 * *"
     },
     {
       "import_name": "EIA_NaturalGas",
@@ -52,16 +50,16 @@
       "scripts": [
         "process.py --dataset=NG"
       ],
+      "source_files": [
+        "tmp_raw_data/NG/NG.txt"
+      ],
       "import_inputs": [
         {
           "template_mcf": "tmp_raw_data/NG/NG.tmcf",
           "cleaned_csv": "tmp_raw_data/NG/NG.csv"
         }
       ],
-      "cron_schedule": "0 8 5,20 * *",
-      "source_files": [
-        "tmp_raw_data/NG/NG.txt"
-      ]
+      "cron_schedule": "0 8 5,20 * *"
     },
     {
       "import_name": "EIA_NuclearOutages",
@@ -73,16 +71,16 @@
       "scripts": [
         "process.py --dataset=NUC_STATUS"
       ],
+      "source_files": [
+        "tmp_raw_data/NUC_STATUS/NUC_STATUS.txt"
+      ],
       "import_inputs": [
         {
           "template_mcf": "tmp_raw_data/NUC_STATUS/NUC_STATUS.tmcf",
           "cleaned_csv": "tmp_raw_data/NUC_STATUS/NUC_STATUS.csv"
         }
       ],
-      "cron_schedule": "0 9 5,20 * *",
-      "source_files": [
-        "tmp_raw_data/NUC_STATUS/NUC_STATUS.txt"
-      ]
+      "cron_schedule": "0 9 5,20 * *"
     },
     {
       "import_name": "EIA_Petroleum",
@@ -94,16 +92,16 @@
       "scripts": [
         "process.py --dataset=PET"
       ],
+      "source_files": [
+        "tmp_raw_data/PET/PET.txt"
+      ],
       "import_inputs": [
         {
           "template_mcf": "tmp_raw_data/PET/PET.tmcf",
           "cleaned_csv": "tmp_raw_data/PET/PET.csv"
         }
       ],
-      "cron_schedule": "0 10 5,20 * *",
-      "source_files": [
-        "tmp_raw_data/PET/PET.txt"
-      ]
+      "cron_schedule": "0 10 5,20 * *"
     },
     {
       "import_name": "EIA_International",
@@ -115,16 +113,16 @@
       "scripts": [
         "process.py --dataset=INTL"
       ],
+      "source_files": [
+        "tmp_raw_data/INTL/INTL.txt"
+      ],
       "import_inputs": [
         {
           "template_mcf": "tmp_raw_data/INTL/INTL.tmcf",
           "cleaned_csv": "tmp_raw_data/INTL/INTL.csv"
         }
       ],
-      "cron_schedule": "0 11 5,20 * * *",
-      "source_files": [
-        "tmp_raw_data/INTL/INTL.txt"
-      ]
+      "cron_schedule": "0 11 5,20 * * *"
     },
     {
       "import_name": "EIA_SEDS",
@@ -136,16 +134,16 @@
       "scripts": [
         "process.py --dataset=SEDS"
       ],
+      "source_files": [
+        "tmp_raw_data/SEDS/SEDS.txt"
+      ],
       "import_inputs": [
         {
           "template_mcf": "tmp_raw_data/SEDS/SEDS.tmcf",
           "cleaned_csv": "tmp_raw_data/SEDS/SEDS.csv"
         }
       ],
-      "cron_schedule": "0 12 5,20 * *",
-      "source_files": [
-        "tmp_raw_data/SEDS/SEDS.txt"
-      ]
+      "cron_schedule": "0 12 5,20 * *"
     },
     {
       "import_name": "EIA_TotalEnergy",
@@ -157,16 +155,16 @@
       "scripts": [
         "process.py --dataset=TOTAL"
       ],
+      "source_files": [
+        "tmp_raw_data/TOTAL/TOTAL.txt"
+      ],
       "import_inputs": [
         {
           "template_mcf": "tmp_raw_data/TOTAL/TOTAL.tmcf",
           "cleaned_csv": "tmp_raw_data/TOTAL/TOTAL.csv"
         }
       ],
-      "cron_schedule": "0 13 5,20 * *",
-      "source_files": [
-        "tmp_raw_data/TOTAL/TOTAL.txt"
-      ]
+      "cron_schedule": "0 13 5,20 * *"
     }
   ]
 }
