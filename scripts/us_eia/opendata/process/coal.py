@@ -13,13 +13,13 @@
 # limitations under the License.
 """EIA Coal Dataset specific functions."""
 
-from absl import logging
+import logging
 import re
 
 from . import common
 
 
-def extract_place_statvar(series_id):
+def extract_place_statvar(series_id, counters):
     """Given the series_id, extract the raw place and stat-var ID.
 
     Args:
@@ -33,6 +33,7 @@ def extract_place_statvar(series_id):
     m = re.match(r"^COAL\.([^._]+_?[^._]+)\.([A-Z]+)-([0-9]+)\.([AQM])$",
                  series_id)
     if m:
+        counters.add_counter('info_coal_record_count', 1)
         measure = m.group(1)
         place = m.group(2)
         code = m.group(3)

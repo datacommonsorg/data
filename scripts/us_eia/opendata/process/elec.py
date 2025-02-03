@@ -13,7 +13,7 @@
 # limitations under the License.
 """EIA Electricity Dataset specific functions."""
 
-from absl import logging
+import logging
 import re
 
 from . import common
@@ -40,6 +40,7 @@ def extract_place_statvar(series_id, counters):
                  series_id)
 
     if m:
+        counters.add_counter('info_elec_record_count', 1)
         measure = m.group(1)
         fuel_type = m.group(2)
         place = m.group(3)

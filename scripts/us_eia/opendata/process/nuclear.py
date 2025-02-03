@@ -13,13 +13,13 @@
 # limitations under the License.
 """EIA Nuclear Status Dataset specific functions."""
 
-from absl import logging
+import logging
 import re
 
 from . import common
 
 
-def extract_place_statvar(series_id):
+def extract_place_statvar(series_id, counters):
     """Given the series_id, extract the raw place and stat-var ID.
 
     Args:
@@ -30,6 +30,7 @@ def extract_place_statvar(series_id):
     """
     m = re.match(r"^NUC_STATUS\.([^.]+)\.([^.]+)\.(D)$", series_id)
     if m:
+        counters.add_counter('info_nuclear_record_count', 1)
         measure = m.group(1)
         place = m.group(2)
         if not place == 'US':
