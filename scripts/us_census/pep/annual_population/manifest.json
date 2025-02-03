@@ -2,7 +2,7 @@
     "import_specifications": [
       {
         "import_name": "USCensusPEP_Annual_Population",
-        "curator_emails": [],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://www2.census.gov/programs-surveys/popest/",
         "provenance_description": "U.S. Census Bureau PEP Annual Population",
         "scripts": ["preprocess.py"],
