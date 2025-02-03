@@ -17,14 +17,10 @@ import os
 import sys
 import tempfile
 import unittest
-import inspect
 from absl import logging
 
 # Allows the following module imports to work when running as a script.
 # relative to scripts/
-
-#from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
-
 module_dir_ = os.path.dirname(__file__)
 sys.path.insert(0, module_dir_)
 from main import *
@@ -68,8 +64,6 @@ class TestProcess(unittest.TestCase):
                 act_mcf = os.path.join(tmp_dir, exp_mcf)
                 act_svg_mcf = os.path.join(tmp_dir, exp_svg_mcf)
                 act_tmcf = os.path.join(tmp_dir, exp_tmcf)
-                logging.debug(f"extract_fn {inspect.getmodule(extract_fn)}")
-
                 common.process(dataset, dataset_name, in_file, act_csv, act_mcf,
                                act_svg_mcf, act_tmcf, extract_fn, schema_fn)
 
