@@ -7,6 +7,7 @@ chardet
 croniter
 dataclasses==0.6
 datacommons
+db-dtypes
 frozendict
 func-timeout==4.3.5
 geojson==2.5.0
@@ -27,6 +28,7 @@ protobuf
 psutil
 pylint
 pytest
+python_calamine
 pytz
 ratelimit
 requests==2.27.1
