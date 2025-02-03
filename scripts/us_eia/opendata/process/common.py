@@ -18,7 +18,6 @@ import csv
 import json
 import logging
 import re
-import inspect
 from collections import defaultdict
 from sys import path
 
@@ -489,9 +488,6 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
             if not time_series:
                 counters.add_counter('error_missing_time_series', 1)
                 continue
-            logging.info(
-                f"extract_place_statvar_fn {inspect.getmodule(extract_place_statvar_fn)}"
-            )
 
             # Extract raw place and stat-var from series_id.
             (raw_place, raw_sv,
