@@ -17,7 +17,7 @@ import os
 import sys
 import csv
 from datetime import datetime
-from absl import app, flags, logging
+from absl import app, logging
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
@@ -25,10 +25,6 @@ sys.path.append(
         os.path.abspath(__file__)))))
 from us_epa.ghgrp import download, gas, sources
 from us_epa.util import crosswalk as cw
-
-# Define command-line flags
-_FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Mode to run: "download", "process", or both')
 
 # Define constants
 _FACILITY_ID = 'Facility Id'
