@@ -19,7 +19,7 @@
           "cleaned_csv": "tmp_raw_data/COAL/COAL.csv"
         }
       ],
-      "cron_schedule": "0 6 1 2 *"
+      "cron_schedule": "0 14 5,20 * *"
     },
     {
       "import_name": "EIA_Electricity",
