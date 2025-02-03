@@ -20,6 +20,7 @@ import unittest
 import inspect
 from absl import logging
 
+
 # Allows the following module imports to work when running as a script.
 # relative to scripts/
 
@@ -29,6 +30,7 @@ module_dir_ = os.path.dirname(__file__)
 sys.path.insert(0, module_dir_)
 from main import *
 # module_dir_ is the path to where this test is running from.
+
 
 _TEST_CASES = [
     # dataset-code, dataset-name, test-case-filename,
@@ -68,7 +70,7 @@ class TestProcess(unittest.TestCase):
                 act_mcf = os.path.join(tmp_dir, exp_mcf)
                 act_svg_mcf = os.path.join(tmp_dir, exp_svg_mcf)
                 act_tmcf = os.path.join(tmp_dir, exp_tmcf)
-                logging.info(f"extract_fn {inspect.getmodule(extract_fn)}")
+                logging.debug(f"extract_fn {inspect.getmodule(extract_fn)}")
 
                 common.process(dataset, dataset_name, in_file, act_csv, act_mcf,
                                act_svg_mcf, act_tmcf, extract_fn, schema_fn)
@@ -114,5 +116,5 @@ class TestProcess(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    logging.set_verbosity(logging.INFO)
+    logging.set_verbosity(logging.DEBUG)
     unittest.main()
