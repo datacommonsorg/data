@@ -16,8 +16,9 @@ import os
 import sys
 import csv
 import json
-from absl import logging
+import logging
 import re
+import inspect
 from collections import defaultdict
 from sys import path
 
@@ -237,11 +238,13 @@ def _parse_date(d):
         m_or_q = d[4:]
 
         if m_or_q.startswith('Q'):
+            #print("withQ",yr + '-' + _QUARTER_MAP[m_or_q])
             # Quarterly
             if m_or_q in _QUARTER_MAP:
                 return yr + '-' + _QUARTER_MAP[m_or_q]
         else:
             # Monthly
+            #print("withOutQ",yr + '-' + m_or_q)
             return yr + '-' + m_or_q
 
     if len(d) == 8:
@@ -471,7 +474,7 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
             if not line.startswith('{'):
                 continue
             data = json.loads(line)
-            logging.info(f"Loaded data: {data}")
+            #logging.info(f"Loaded data: {data}")
 
             # Preliminary checks
             series_id = data.get('series_id', None)
@@ -486,6 +489,9 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
             if not time_series:
                 counters.add_counter('error_missing_time_series', 1)
                 continue
+            logging.info(
+                f"extract_place_statvar_fn {inspect.getmodule(extract_place_statvar_fn)}"
+            )
 
             # Extract raw place and stat-var from series_id.
             (raw_place, raw_sv,
