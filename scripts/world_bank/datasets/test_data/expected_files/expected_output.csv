@@ -1,0 +1,3 @@
+indicatorcode,statvar,measurementmethod,observationabout,observationdate,observationvalue,unit
+account.t.d,worldBank/account_t_d,WorldBank_FINDEX_CSV,dcid:country/ARB,2011,22.48,
+account.t.d.1,worldBank/account_t_d_1,WorldBank_FINDEX_CSV,dcid:country/EAS,2011,57.5,
