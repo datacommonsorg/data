@@ -116,15 +116,20 @@ class ImportValidation:
             logging.error(repr(exc))
             return ValidationResult('FAILED', config['validation'], repr(exc))
 
-    def run_validations(self):
+    def run_validations(self) -> bool:
+        # Returns false if any validation fails.
         output_file = open(self.validation_output, mode='w', encoding='utf-8')
         output_file.write('test,status,message\n')
+        status = True
         for config in self.validation_config:
             result = self._run_validation(config)
             output_file.write(
                 f'{result.name},{result.status},{result.message}\n')
             self.validation_result.append(result)
+            if result.status == 'FAILED':
+                status = False
         output_file.close()
+        return status
 
 
 def main(_):
