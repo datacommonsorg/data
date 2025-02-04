@@ -746,8 +746,8 @@ class USEducation:
             raw_df.columns.values.tolist())
         if not year_check:
             logging.info(
-                f"Some columns in file are not of expected year {self._year} - correct the download config. Exiting..")
-            
+                f"Some columns in file are not of expected year {self._year} - correct the download config. Exiting.."
+            )
 
         # Extracting the lower interval year as per DataCommons K12 Import
         raw_df["year"] = self._year[0:4].strip()
