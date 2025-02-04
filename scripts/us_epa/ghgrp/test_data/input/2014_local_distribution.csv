@@ -1,0 +1,6 @@
+Facility Id,FRS Id,Facility Name,State where Emissions Occur,Reported City,Reported State,Reported Zip Code,Reported Address,Reported County,Reported Latitude,Reported Longitude,Primary NAICS Code,Industry Type (subparts),Total reported direct emissions from Local Distribution Companies,CO2 emissions (non-biogenic) ,Methane (CH4) emissions ,Nitrous Oxide (N2O) emissions ,Does the facility employ continuous emissions monitoring? 
+1008026,110010724216,Ameren Illinois,IL,Peoria,IL,61602,300 Liberty Street,PEORIA COUNTY,40.69048,-89.59244,221210,"NN-LDC,W-LDC",75801.6,1873.1,73928.5,,N
+1004034,110011771948,Ameren Missouri,MO,St. Louis,MO,63103,1901 Chouteau Avenue,ST. LOUIS CITY,38.620785,-90.211635,221210,"NN-LDC,W-LDC",13412.6,16.1,13396.5,,N
+1004975,110025098249,Arkansas Oklahoma Gas Corp (AR),AR,Fort Smith,AR,72903,5030 South S Street,SEBASTIAN COUNTY,35.36353,-94.37573,221210,"NN-LDC,W-LDC",10870.5,12.5,10858,,N
+1006481,110025080267,Arkansas Oklahoma Gas Corp (OK),OK,Fort Smith,AR,72903,5030 South S Street,SEBASTIAN COUNTY,35.36353,-94.37573,221210,"NN-LDC,W-LDC",2447.55,2.8,2444.75,,N
+1007872,110043799654,Atlanta Gas Light Company,GA,Atlanta,GA,30309,Ten Peachtree Place,FULTON COUNTY,33.780708,-84.387782,221210,"NN-LDC,W-LDC",155671.85,178.1,155493.75,,N
