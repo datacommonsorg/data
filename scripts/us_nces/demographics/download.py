@@ -80,10 +80,9 @@ def retry(f):
                     )
                     time.sleep(RETRY_SLEEP_SECS)
                 else:
-                    logging.error(
+                    logging.fatal(
                         f'Execution failed after {MAX_RETRIES} retries for {args}'
                     )
-                    raise
 
     return wrapped
 
@@ -137,7 +136,7 @@ def get_year_list(school):
             year = input_tag['value']
             years_to_download.append(year)
     else:
-        logging.error(
+        logging.fatal(
             f"Failed to retrieve years with status code: {response.status_code}"
         )
     if school == "PublicSchool" or school == "District":
@@ -166,7 +165,6 @@ def main(_):
     for year in years_to_download:
         if school in data and year in data[school]:
             id_list = data[school][year]
-            print(f"Year {year} exists for {school} in the JSON file.")
         else:
             id_list = fetch_ncid.fetch_school_ncid(school, year, column_names,
                                                    NCES_DOWNLOAD_URL)

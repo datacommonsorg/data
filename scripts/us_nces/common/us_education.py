@@ -746,9 +746,8 @@ class USEducation:
             raw_df.columns.values.tolist())
         if not year_check:
             logging.info(
-                f"Some columns in file are not of expected year {self._year} - correct the download config. Exiting.."
-            )
-            exit()
+                f"Some columns in file are not of expected year {self._year} - correct the download config. Exiting..")
+            
 
         # Extracting the lower interval year as per DataCommons K12 Import
         raw_df["year"] = self._year[0:4].strip()
@@ -1013,9 +1012,7 @@ class USEducation:
                                         quoting=csv.QUOTE_NONNUMERIC)
 
         df_merged = pd.DataFrame()
-        for df in dfs:
-            df_merged = pd.concat([df_merged, df])
-        self._df = df_merged
+        self._df = pd.concat(dfs)
 
     @log_method_execution
     def generate_mcf(self) -> None:
