@@ -109,6 +109,8 @@ class ExecutorConfig:
     scheduler_location: str = 'us-central1'
     # Location of the local git data repo.
     local_repo_dir: str = '/data'
+    # Location of the import tool jar.
+    import_tool_path: str = '/data/import-automation/executor/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar'
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 3600
     # Arguments for the user script
@@ -117,6 +119,8 @@ class ExecutorConfig:
     user_script_env: dict = None
     # Invoke validations before upload.
     invoke_import_validation: bool = False
+    # Ignore validation status during import.
+    ignore_validation_status: bool = True
     # Import validation config file.
     validation_config_file: str = 'tools/import_validation/validation_config.json'
     # Maximum time venv creation can take in seconds.
