@@ -3125,6 +3125,7 @@ COUNTY_MAP: dict = {
         "Chesapeake city": "geoId/51550",
         "Clifton Forge": "geoId/51560",
         "Colonial Heights": "geoId/51570",
+        "Colonial Heights city": "geoId/51570",
         "Covington": "geoId/51580",
         "Danville": "geoId/51590",
         "Emporia": "geoId/51595",

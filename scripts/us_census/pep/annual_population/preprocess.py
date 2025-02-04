@@ -40,10 +40,30 @@ output_files - output files (mcf, tmcf and csv are written here)
 import os
 import sys
 import json
+import warnings
+import requests
+import time
+import re
+from datetime import datetime as dt
+
+warnings.filterwarnings('ignore')
 import pandas as pd
 from absl import app
+from absl import logging
+from absl import flags
+from retry import retry
+
+_FLAGS = flags.FLAGS
+
+flags.DEFINE_string('mode', '', 'Options: download or process')
+flags.DEFINE_bool(
+    'is_summary_levels', False,
+    'Options: True for all summary_levels and False for only 162')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
+excel_file_name_pattern = r"NST-EST(\d{4})-POP\.xlsx"
 sys.path.insert(1, _MODULE_DIR)
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
@@ -61,6 +81,7 @@ import util.name_to_alpha2 as statetoshortform
 import util.county_to_dcid as countytodcid
 # pylint: enable=wrong-import-position
 # pylint: enable=import-error
+_FILES_TO_DOWNLOAD = []
 
 USSTATE_MAP = alpha2todcid.USSTATE_MAP
 COUNTY_MAP = countytodcid.COUNTY_MAP
@@ -374,6 +395,28 @@ def _process_nationals_2010_2020(ip_file: str, op_file: str) -> None:
                 national_pop_stats.write("\n" + k[-4:] + ",country/USA," + v)
 
 
+def _process_nationals_2020_2029(ip_file: str, op_file: str) -> None:
+    """
+    Process the nationals data for the year 2020-2022.
+    Args:
+        ip_file (str): Input File Path
+        op_file (str): Output File Path
+    """
+    with open(op_file, 'w', encoding='utf-8') as national_pop_stats:
+        national_pop_stats.write("Year,Location,Count_Person")
+        with open(ip_file, encoding='utf-8') as ipfile:
+            for line in ipfile.readlines():
+                if "POPESTIMATE2020" in line:
+                    header = line.strip('\n').split(",")
+                elif USA in line:
+                    values = line.strip('\n').split(",")
+        for k, v in dict(zip(header, values)).items():
+            if "POPESTIMATE2" in k:
+                # k contains values such as POPESTIMATE2010,POPESTIMATE2011,
+                # POPESTIMATE2012 and index at [-4:] provides year value
+                national_pop_stats.write("\n" + k[-4:] + ",country/USA," + v)
+
+
 def _process_nationals_2000_2009(file_path: str) -> pd.DataFrame:
     """
     Process the nationals data for the year 2000-2009.
@@ -441,6 +484,26 @@ def _process_nationals_2021(file_path: str) -> pd.DataFrame:
     return data_df
 
 
+def _process_nationals_2029(file_path: str) -> pd.DataFrame:
+    data_df = pd.DataFrame()
+    data_df = _load_data_df(path=file_path, file_format="xlsx", header=3)
+    df_cols = ["Location", "042020", "072020", "072021", "2022", "2023"]
+    unpivot_cols = ["2022", "2023"]
+    # extend df_cols & unpivot_cols with all years > 2023
+    newly_added_years = [
+        str(x)
+        for x in data_df.columns.to_list()
+        if isinstance(x, int) and x > 2023
+    ]
+    df_cols.extend(newly_added_years)
+    unpivot_cols.extend(newly_added_years)
+    data_df.columns = df_cols
+    data_df = data_df[data_df["Location"] == USA]
+    data_df = _unpivot_data_df(data_df, ["Location"], unpivot_cols)
+    data_df["Location"] = USA_GEO_ID
+    return data_df
+
+
 def _process_states_2021(file_path: str) -> pd.DataFrame:
     """
     Process the nationals data for the year 2021.
@@ -459,6 +522,47 @@ def _process_states_2021(file_path: str) -> pd.DataFrame:
                                          "Location_short_form")
     data_df = _add_geo_id(data_df, "Location_short_form", "Location")
     data_df = _unpivot_data_df(data_df, ["Location"], ["2021"])
+    return data_df
+
+
+def _process_states_2029(file_path: str) -> pd.DataFrame:
+    """
+    Process the state data from 2022 to 2029.
+    Args:
+        file_path (str): Input FIle Path
+
+    Returns:
+        pd.DataFrame: Cleaned DataFrame
+    """
+    data_df = pd.DataFrame()
+    df_cols = [
+        "Region", "ignore_col1", "ignore_col2", "ignore_col3", "2022", "2023"
+    ]
+    unpivot_cols = ["2022", "2023"]
+    try:
+        # extend df_cols & unpivot_cols with all years > 2023
+        year_column_row = _load_data_df(
+            path=file_path, file_format="xlsx",
+            header=0).iloc[2:3].values.flatten().tolist()
+        if year_column_row:
+            newly_added_years = [
+                str(int(x))
+                for x in year_column_row
+                if isinstance(x, float) and x > 2023
+            ]
+            df_cols.extend(newly_added_years)
+            unpivot_cols.extend(newly_added_years)
+    except:
+        # this error can be ignored
+        pass
+    data_df = _load_data_df(path=file_path, file_format="xlsx", header=8)
+    data_df.columns = df_cols
+
+    data_df["Region"] = data_df["Region"].str.replace(".", "", regex=False)
+    data_df = _states_full_to_short_form(data_df, "Region",
+                                         "Location_short_form")
+    data_df = _add_geo_id(data_df, "Location_short_form", "Location")
+    data_df = _unpivot_data_df(data_df, ["Location"], unpivot_cols)
     return data_df
 
 
@@ -570,11 +674,58 @@ def _process_county_coest2020(file_path: str) -> pd.DataFrame:
 
     data_df.insert(0, 'Location', data_df[["STATE", "COUNTY"]].apply(_geo_id,
                                                                      axis=1))
+    if data_df.shape != data_df[data_df['Location'].str.startswith(
+            'geo')].shape:
+        logging.info(f"Check this file {file_path}")
     data_df.columns = data_df.columns.str.replace('POPESTIMATE', '')
 
     # Dropping Unwanted Columns
     data_df = data_df.drop(
         columns=["STATE", "COUNTY", "STNAME", "CTYNAME", "042020"])
+    data_df = _unpivot_data_df(data_df, ["Location"], data_df.columns[1:])
+    return data_df
+
+
+def _process_county_coest2029(file_path: str) -> pd.DataFrame:
+    """
+    Process DataFrame of County data for year 2020.
+    Args:
+        file_path (str): Input File Path
+
+    Returns:
+        pd.DataFrame: Cleaned DataFrame
+    """
+    data_df = _load_data_df(file_path, "csv", header=0, encoding='ISO-8859-1')
+
+    cols = [
+        "STATE", "COUNTY", "STNAME", "CTYNAME", "POPESTIMATE2020",
+        "POPESTIMATE2021", "POPESTIMATE2022", "POPESTIMATE2023"
+    ]
+    data_df = data_df[cols]
+    # Modifying actual city name for State: District of Columbia
+    # and City Name: District of Columbia. This is havind duplicate
+    idx = data_df[(data_df["STATE"] == DISTRICT_OF_COLUMBIA_STATE_CODE) &
+                  (data_df["COUNTY"] == DISTRICT_OF_COLUMBIA_COUNTY_CODE)]\
+                      .index.values[0]
+    data_df.loc[idx, "CTYNAME"] = "Washington County"
+
+    data_df['COUNTY'] = data_df['COUNTY'].astype('str').str.pad(3,
+                                                                side='left',
+                                                                fillchar='0')
+    data_df['STATE'] = data_df['STATE'].astype('str').str.pad(2,
+                                                              side='left',
+                                                              fillchar='0')
+
+    data_df.insert(0, 'Location', data_df[["STATE", "COUNTY"]].apply(_geo_id,
+                                                                     axis=1))
+    if data_df.shape != data_df[data_df['Location'].str.startswith(
+            'geo')].shape:
+        logging.info(f"Check this file {file_path}")
+
+    data_df.columns = data_df.columns.str.replace('POPESTIMATE', '')
+
+    # Dropping Unwanted Columns
+    data_df = data_df.drop(columns=["STATE", "COUNTY", "STNAME", "CTYNAME"])
     data_df = _unpivot_data_df(data_df, ["Location"], data_df.columns[1:])
     return data_df
 
@@ -589,6 +740,7 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Processed County DataFrame
     """
     data_df = None
+    future_year_file_list = [f"co-est{x}-alldata" for x in range(2024, 2030)]
 
     if "99c8_00.txt" in file_path:
         data_df = _process_county_file_99c8_00(file_path)
@@ -598,6 +750,8 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df = data_df[data_df["Location"].str.len() != 8]
     elif "co-est2020" in file_path:
         data_df = _process_county_coest2020(file_path)
+    elif "co-est2023-alldata" in file_path:
+        data_df = _process_county_coest2029(file_path)
     elif "co-est2021" in file_path:
         data_df = _load_data_df(file_path, "xlsx", header=4)
 
@@ -611,6 +765,7 @@ def _process_counties(file_path: str) -> pd.DataFrame:
             lambda x: _county_to_dcid(COUNTY_MAP, x.State, x.County), axis=1)
         data_df = _unpivot_data_df(data_df, ["Location"], ["2020", "2021"])
     elif "co-est" in file_path:
+
         data_df = _load_data_df(file_path, "csv", encoding='ISO-8859-1')
         data_df = clean_data_df(data_df, "csv")
         data_df = data_df.dropna(subset=[11, 12])
@@ -641,6 +796,8 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df["Count_Person"] = data_df["Count_Person"].str.replace(
             ",", "", regex=False)
         data_df = data_df[["Year", "Location", "Count_Person"]]
+    elif any([x for x in future_year_file_list if x in file_path]):
+        data_df = _process_county_coest2029(file_path)
     data_df = data_df[data_df["Location"] != "country/USA"]
     return data_df
 
@@ -698,12 +855,13 @@ def _process_city_1990_1999(file_path: str) -> pd.DataFrame:
         return data_df
 
 
-def _process_cities(file_path: str) -> pd.DataFrame:
+def _process_cities(file_path: str,
+                    is_summary_levels: bool = False) -> pd.DataFrame:
     """
     Process DataFrame of Cities dataset
     Args:
         file_path (str): Input File Path
-        file_name (str): Input File Name
+        is_summary_levels (bool): True for all Summary levels, False for Summary levels 162
 
     Returns:
         pd.DataFrame: Processed City DataFrame
@@ -715,42 +873,62 @@ def _process_cities(file_path: str) -> pd.DataFrame:
         data_df = _process_city_1990_1999(file_path)
     if file_name_without_ext in [
             "sub-est2010-alt", "SUB-EST2020_ALL", "sub-est2021_all"
-    ]:
+    ] or file_name_without_ext.startswith("sub-est202"):
         data_df = _load_data_df(file_path,
                                 file_format="csv",
                                 header=0,
                                 encoding="ISO-8859-1")
-        data_df = data_df[data_df["SUMLEV"] == 162]
-        data_df['STATE'] = data_df['STATE'].astype('str').str.pad(2,
-                                                                  side='left',
-                                                                  fillchar='0')
-        data_df['PLACE'] = data_df['PLACE'].astype('str').str.pad(5,
-                                                                  side='left',
-                                                                  fillchar='0')
-        data_df["Location"] = "geoId/" + data_df["STATE"] + data_df["PLACE"]
+        # excluding SUMLEV=170 as no placed mapping in DC
+        data_df = data_df[data_df['SUMLEV'] != 170]
+        # drop place code 99990 codes
+        data_df = data_df[data_df['PLACE'] != 99990]
+
+        if not is_summary_levels:
+            data_df = data_df[data_df['SUMLEV'] == 162]
+
+        # generate FIPS code as perSUMLEV 040
+        data_df['Location'] = data_df.apply(lambda x: _generate_fips_code(x),
+                                            axis=1)
+
+        data_df.dropna(subset=['Location'], inplace=True)
+
+        key = "POPESTIMATE"
         if "sub-est2010-alt" == file_name_without_ext:
             key = "POPESTIMATE07"
-            pop_cols = [
-                "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007",
-                "2008", "2009"
-            ]
-            final_cols = ["Location"] + pop_cols
-        elif "SUB-EST2020_ALL" == file_name_without_ext:
-            key = "POPESTIMATE"
-            pop_cols = [
-                "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017",
-                "2018", "2019"
-            ]
-            final_cols = ["Location"] + pop_cols
-        elif "sub-est2021_all" == file_name_without_ext:
-            key = "POPESTIMATE"
-            pop_cols = ["2020", "2021"]
-            final_cols = ["Location"] + pop_cols
+        col_mapping = {}
+        pop_cols = []
+        df_cols = data_df.columns
+        for c in df_cols:
+            if c.startswith(key):
+                yr = c.replace(key, '')
+                if len(yr) == 4:
+                    col_mapping[c] = yr
+                    pop_cols.append(yr)
 
-        data_df.columns = data_df.columns.str.replace(key, '')
+        data_df = data_df.rename(columns=col_mapping, errors="raise")
+        final_cols = ["Location"] + pop_cols
         data_df = data_df[final_cols]
         data_df = _unpivot_data_df(data_df, ["Location"], pop_cols)
+
     return data_df
+
+
+def _generate_fips_code(row_data) -> str:
+    geo_id = None
+    if row_data['SUMLEV'] == 40:
+        geo_id = str(row_data['STATE']).zfill(2)
+    elif row_data['SUMLEV'] == 50:
+        geo_id = str(row_data['STATE']).zfill(2) + str(
+            row_data['COUNTY']).zfill(3)
+    elif row_data['SUMLEV'] == 61:
+        geo_id = str(row_data['STATE']).zfill(2) + str(
+            row_data['COUNTY']).zfill(3) + str(row_data['COUSUB']).zfill(5)
+    elif row_data['SUMLEV'] in [71, 157, 162, 172]:
+        geo_id = str(row_data['STATE']).zfill(2) + str(
+            row_data['PLACE']).zfill(5)
+    if geo_id:
+        geo_id = "geoId/" + geo_id
+    return geo_id
 
 
 def _generate_mcf(mcf_file_path) -> None:
@@ -779,90 +957,214 @@ def _generate_tmcf(tmcf_file_path) -> None:
         f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
 
 
-def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
-            tmcf_file_path: str):
+def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
+            tmcf_file_path: str, is_summary_levels: bool):
     """
     This Method calls the required methods to generate cleaned CSV,
     MCF, and TMCF file
     """
+    input_files = []
+    input_files += [
+        os.path.join(input_path, file)
+        for file in sorted(os.listdir(input_path))
+    ]
+
     final_df = pd.DataFrame()
     if not os.path.exists(os.path.dirname(cleaned_csv_file_path)):
         os.mkdir(os.path.dirname(cleaned_csv_file_path))
-    for file in input_files:
-        file_name = os.path.basename(file)
-        op_file = os.path.join(os.path.dirname(cleaned_csv_file_path),
-                               file_name.replace(".txt", ".csv"))
-        if "popclockest.txt" in file:
-            _process_nationals_1900_1979(file, op_file)
-            data_df = _load_data_df(op_file, "csv", 0)
-            os.remove(op_file)
-        elif "us-est90int-08" in file:
-            data_df = _process_nationals_1990_1999(file)
-        elif "st-est00int-01" in file:
-            nat_df = _process_nationals_2000_2009(file)
-            state_df = _process_states_2000_2009(file)
-            data_df = pd.concat([nat_df, state_df])
-        elif "nst-est2020.csv" in file:
-            _process_nationals_2010_2020(file, op_file)
-            data_df = _load_data_df(op_file, "csv", 0)
-            os.remove(op_file)
-        elif "NST-EST2021-POP" in file:
-            nat_df = _process_nationals_2021(file)
-            state_df = _process_states_2021(file)
-            data_df = pd.concat([nat_df, state_df])
-        elif file_name in [
-                "st0009ts.txt", "st1019ts.txt", "st2029ts.txt", "st3039ts.txt",
-                "st4049ts.txt", "st5060ts.txt", "st6070ts.txt"
-        ]:
-            data_df = process_states_1900_1969(_STATE_CONFIG, file, file_name,
-                                               SCALING_FACTOR_STATE_1900_1960)
-        elif "st7080ts" in file:
-            data_df = process_states_1970_1979(file)
-        elif "st8090ts" in file:
-            data_df = process_states_1980_1989(file)
-            data_df["Location"] = data_df["Location"].apply(_state_to_geo_id)
-        elif "st-99-03" in file:
-            data_df = process_states_1990_1999(file)
-            data_df = _states_full_to_short_form(data_df, "Location",
-                                                 "Location")
-            data_df["Location"] = data_df["Location"].apply(_state_to_geo_id)
-        elif "e8089co.txt" in file:
-            nat_df = _process_nationals_1980_1989(file)
-            county_df = _process_counties(file)
-            data_df = pd.concat([nat_df, county_df])
-        elif file_name in ["e7079co.txt", "99c8_00.txt"
-                          ] or "co-est" in file_name:
-            data_df = _process_counties(file)
-        elif file_name in [
-                'su-99-7_us.txt', "sub-est2010-alt.csv", "SUB-EST2020_ALL.csv",
-                "sub-est2021_all.csv"
-        ]:
-            data_df = _process_cities(file)
-        final_df = pd.concat([final_df, data_df], axis=0)
-    final_df = final_df.sort_values(by=["Location", "Year"])
-    final_df = final_df.drop_duplicates(["Year", "Location"])
-    final_df["Count_Person"] = final_df["Count_Person"].astype("int")
-    final_df[["Year", "Location", "Count_Person"]].to_csv(cleaned_csv_file_path,
-                                                          index=False)
-    _generate_mcf(mcf_file_path)
-    _generate_tmcf(tmcf_file_path)
+    processed_count = 0
+    total_files_to_process = len(input_files)
+    logging.info(f"No of files to be processed {len(input_files)}")
+
+    try:
+        for file in input_files:
+            data_df = pd.DataFrame()
+            file_name = os.path.basename(file)
+            logging.info(f"Processing {file_name}")
+            op_file = os.path.join(os.path.dirname(cleaned_csv_file_path),
+                                   file_name.replace(".txt", ".csv"))
+            if "popclockest.txt" in file:
+                _process_nationals_1900_1979(file, op_file)
+                data_df = _load_data_df(op_file, "csv", 0)
+                os.remove(op_file)
+            elif "us-est90int-08" in file:
+                data_df = _process_nationals_1990_1999(file)
+            elif "st-est00int-01" in file:
+                nat_df = _process_nationals_2000_2009(file)
+                state_df = _process_states_2000_2009(file)
+                data_df = pd.concat([nat_df, state_df])
+            elif "nst-est2020.csv" in file:
+                _process_nationals_2010_2020(file, op_file)
+                data_df = _load_data_df(op_file, "csv", 0)
+                os.remove(op_file)
+            elif "NST-EST2023-POPCHG2020_2023.csv" in file:
+                _process_nationals_2020_2029(file, op_file)
+                data_df = _load_data_df(op_file, "csv", 0)
+                os.remove(op_file)
+            elif "NST-EST2021-POP" in file:
+                nat_df = _process_nationals_2021(file)
+                state_df = _process_states_2021(file)
+                data_df = pd.concat([nat_df, state_df])
+            elif re.match(excel_file_name_pattern, file_name):
+                nat_df = _process_nationals_2029(file)
+                state_df = _process_states_2029(file)
+                data_df = pd.concat([nat_df, state_df])
+            elif file_name in [
+                    "st0009ts.txt", "st1019ts.txt", "st2029ts.txt",
+                    "st3039ts.txt", "st4049ts.txt", "st5060ts.txt",
+                    "st6070ts.txt"
+            ]:
+                data_df = process_states_1900_1969(
+                    _STATE_CONFIG, file, file_name,
+                    SCALING_FACTOR_STATE_1900_1960)
+            elif "st7080ts" in file:
+                data_df = process_states_1970_1979(file)
+            elif "st8090ts" in file:
+                data_df = process_states_1980_1989(file)
+                data_df["Location"] = data_df["Location"].apply(
+                    _state_to_geo_id)
+            elif "st-99-03" in file:
+                data_df = process_states_1990_1999(file)
+                data_df = _states_full_to_short_form(data_df, "Location",
+                                                     "Location")
+                data_df["Location"] = data_df["Location"].apply(
+                    _state_to_geo_id)
+            elif "e8089co.txt" in file:
+                nat_df = _process_nationals_1980_1989(file)
+                county_df = _process_counties(file)
+                data_df = pd.concat([nat_df, county_df])
+            elif file_name in ["e7079co.txt", "99c8_00.txt"
+                              ] or "co-est" in file_name:
+                data_df = _process_counties(file)
+            elif file_name in [
+                    'su-99-7_us.txt', "sub-est2010-alt.csv",
+                    "SUB-EST2020_ALL.csv", "sub-est2021_all.csv"
+            ] or file_name.startswith("sub-est202"):
+                data_df = _process_cities(file, is_summary_levels)
+                processed_count += 1
+
+            if not data_df.empty:
+                processed_count += 1
+                # data_df['len'] = data_df['Location'].astype(str).map(len)
+                # geo_code_len = data_df['len'].unique()
+                # if 13 in geo_code_len:
+                #     pass
+                final_df = pd.concat([final_df, data_df], axis=0)
+            else:
+                logging.error(f"Failed to process {file}")
+    except Exception as e:
+        logging.fatal(f"Error while processing files {e}")
+
+    logging.info(f"No of files processed {processed_count}")
+    if processed_count >= total_files_to_process & total_files_to_process > 0:
+        final_df["Year"] = final_df["Year"].astype("int")
+        final_df = final_df.sort_values(by=["Location", "Year"])
+        final_df = final_df.drop_duplicates(["Year", "Location"])
+        final_df["Count_Person"] = final_df["Count_Person"].astype("int")
+        final_df[["Year", "Location",
+                  "Count_Person"]].to_csv(cleaned_csv_file_path, index=False)
+        _generate_mcf(mcf_file_path)
+        _generate_tmcf(tmcf_file_path)
+    else:
+        logging.fatal(
+            "The script has been terminated due to a mismatch between the number of files expected to be processed and the actual number processed"
+        )
+
+
+def add_future_year_urls():
+    """ This method will generate future URLs specified in the urls_to_scan object.
+        If valid URL, it will append to the _FILES_TO_DOWNLOAD global variable.
+
+        Args: None
+        Returns: None
+    """
+    global _FILES_TO_DOWNLOAD
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
+        _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    urls_to_scan = [
+        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/cities/totals/sub-est{YEAR}.csv",
+        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/totals/co-est{YEAR}-alldata.csv",
+        "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/state/totals/NST-EST{YEAR}-POP.xlsx",
+        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/totals/NST-EST{YEAR}-POPCHG2020_{YEAR}.csv"
+    ]
+    # This method will get the latest year URLs available for the years 2023 to 2030
+    for url in urls_to_scan:
+        for future_year in range(2030, 2022, -1):
+            url_to_check = url.format(YEAR=future_year)
+            try:
+                logging.info(f"checking furute url if available {url_to_check}")
+                check_url = requests.head(url_to_check, allow_redirects=True)
+                if check_url.status_code == 200:
+                    logging.info(f"Furute url found {url_to_check}")
+                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                    break
+            except:
+                logging.error(f"URL is not accessable {url_to_check}")
+
+
+@retry(tries=5, delay=5, backoff=5)
+def download_with_retry(url, file_name_to_save):
+    logging.info(f"Downloaded file : {file_name_to_save} - URL {url}")
+    return requests.get(url=url, stream=True)
+
+
+def download_files():
+    """ This method will download data from the URLs specified in the input_url.json file.
+        If any download attempt fails, the script will terminate.
+
+        Args: None
+        Returns: None
+    """
+    global _FILES_TO_DOWNLOAD
+    if not os.path.exists(_INPUT_FILE_PATH):
+        os.makedirs(_INPUT_FILE_PATH)
+    try:
+        for file_to_dowload in _FILES_TO_DOWNLOAD:
+            file_name_to_save = None
+            url = file_to_dowload['download_path']
+            if 'file_name' in file_to_dowload and len(
+                    file_to_dowload['file_name'] > 5):
+                file_name_to_save = file_to_dowload['file_name']
+            else:
+                file_name_to_save = url.split('/')[-1]
+            if 'file_path' in file_to_dowload:
+                if not os.path.exists(
+                        os.path.join(_INPUT_FILE_PATH,
+                                     file_to_dowload['file_path'])):
+                    os.makedirs(
+                        os.path.join(_INPUT_FILE_PATH,
+                                     file_to_dowload['file_path']))
+                file_name_to_save = file_to_dowload[
+                    'file_path'] + file_name_to_save
+
+            response = download_with_retry(url, file_name_to_save)
+            if response.status_code == 200:
+                with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save),
+                          'wb') as f:
+                    f.write(response.content)
+                    file_to_dowload['is_downloaded'] = True
+
+    except Exception as e:
+        logging.fatal(f"Error occurred in download method {e}")
 
 
 def main(_):
-    ip_files = []
-    for dir_path in INPUT_DIRS:
-        files_dir = os.path.join(_MODULE_DIR, INPUT_DIR, dir_path)
-        ip_files += [
-            os.path.join(files_dir, file)
-            for file in sorted(os.listdir(files_dir))
-        ]
+    mode = _FLAGS.mode
+    is_summary_levels = _FLAGS.is_summary_levels
+
     # Defining Output file names
     data_file_path = os.path.join(_MODULE_DIR, OUTPUT_DIR)
+    os.makedirs(data_file_path, exist_ok=True)
     cleaned_csv_path = os.path.join(data_file_path, "usa_annual_population.csv")
     mcf_path = os.path.join(data_file_path, "usa_annual_population.mcf")
     tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
 
-    process(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
+    if mode == "" or mode == "download":
+        add_future_year_urls()
+        download_files()
+    if mode == "" or mode == "process":
+        process(_INPUT_FILE_PATH, cleaned_csv_path, mcf_path, tmcf_path,
+                is_summary_levels)
 
 
 if __name__ == "__main__":

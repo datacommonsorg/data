@@ -1,0 +1,19 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "USCensusPEP_Annual_Population",
+        "curator_emails": ["support@datacommons.org"],
+        "provenance_url": "https://www2.census.gov/programs-surveys/popest/",
+        "provenance_description": "U.S. Census Bureau PEP Annual Population",
+        "scripts": ["preprocess.py"],
+        "source_files": ["input_files/*"],
+        "import_inputs": [
+          {
+            "template_mcf": "output_files/usa_annual_population.tmcf",
+            "cleaned_csv": "output_files/usa_annual_population.csv"
+          } 
+        ],
+        "cron_schedule": "0 10 * * 2"
+      }
+    ]
+  }
