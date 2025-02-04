@@ -1,4 +1,5 @@
 import glob
+import fnmatch
 import os
 import pandas as pd
 import re
@@ -37,7 +38,7 @@ def load_mcf_files(path: str) -> pd.DataFrame:
     """ Loads all sharded mcf files in the given directory and 
     returns a single combined dataframe."""
     df_list = []
-    filenames = glob.glob(path + '.mcf')
+    filenames = glob.glob(path)
     for filename in filenames:
         df = load_mcf_file(filename)
         df_list.append(df)
@@ -55,24 +56,20 @@ def write_data(df: pd.DataFrame, path: str, file: str):
 def load_data(path: str, tmp_dir: str) -> pd.DataFrame:
     """ Loads data from the given path and returns as a dataframe.
     Args:
-      path: local or gcs path (single file or folder/* format)
+      path: local or gcs path (single file or wildcard format)
       tmp_dir: destination folder
     Returns:
       dataframe with the input data
     """
     if path.startswith('gs://'):
         path = get_gcs_data(path, tmp_dir)
-
-    if path.endswith('*'):
-        return load_mcf_files(path)
-    else:
-        return load_mcf_file(path)
+    return load_mcf_files(path)
 
 
 def get_gcs_data(uri: str, tmp_dir: str) -> str:
-    """ Downloads files form GCS and copies them to local.
+    """ Downloads files from GCS and copies them to local.
     Args:
-      uri: single file path or folder/* format 
+      uri: single file path or wildcard format 
       tmp_dir: destination folder
     Returns:
       path to the output file/folder
@@ -80,11 +77,13 @@ def get_gcs_data(uri: str, tmp_dir: str) -> str:
 
     client = Client()
     bucket = client.get_bucket(uri.split('/')[2])
-    if uri.endswith('*'):
-        blobs = client.list_blobs(bucket)
-        for blob in blobs:
-            path = os.path.join(tmp_dir, blob.name.replace('/', '_'))
-            blob.download_to_filename(path)
+    if '*' in uri:
+        file_pat = uri.split(bucket.name, 1)[1][1:]
+        dirname = os.path.dirname(file_pat)
+        for blob in bucket.list_blobs(prefix=dirname):
+            if fnmatch.fnmatch(blob.name, file_pat):
+                path = os.path.join(tmp_dir, blob.name.replace('/', '_'))
+                blob.download_to_filename(path)
         return os.path.join(tmp_dir, '*')
     else:
         file_name = uri.split('/')[3]

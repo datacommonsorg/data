@@ -34,10 +34,10 @@ VALUE_COLUMNS = 'value,scalingFactor'
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'current_data', '', 'Path to the current MCF data \
-  (single mcf file or folder/* on local/GCS supported).')
+  (single mcf file or wildcard on local/GCS supported).')
 flags.DEFINE_string(
     'previous_data', '', 'Path to the previous MCF data \
-  (single mcf file or folder/* on local/GCS supported).')
+  (single mcf file or wildcard on local/GCS supported).')
 flags.DEFINE_string('output_location', 'results', \
   'Path to the output data folder.')
 
@@ -222,13 +222,15 @@ class ImportDiffer:
         return summary, result
 
     def run_differ(self):
-        if not os.path.exists(self.output_location):
-            os.makedirs(self.output_location)
         logging.info('Loading data...')
-        current_df = differ_utils.load_data(self.current_data,
-                                            self.output_location)
-        previous_df = differ_utils.load_data(self.previous_data,
-                                             self.output_location)
+        current_dir = os.path.join(self.output_location, 'current')
+        if not os.path.exists(current_dir):
+            os.makedirs(current_dir)
+        current_df = differ_utils.load_data(self.current_data, current_dir)
+        previous_dir = os.path.join(self.output_location, 'previous')
+        if not os.path.exists(previous_dir):
+            os.makedirs(previous_dir)
+        previous_df = differ_utils.load_data(self.previous_data, previous_dir)
 
         logging.info('Processing data...')
         in_data = self.process_data(previous_df, current_df)
