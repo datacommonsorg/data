@@ -19,9 +19,8 @@ made available for further processing.
 import os
 import json
 import urllib.request
-import logging
 from google.cloud import storage  # For GCS integration
-from absl import flags, app  # Use absl for flag handling
+from absl import flags, app, logging  # Use absl for flag handling
 
 # Configure logging to show messages in the terminal
 logging.basicConfig(level=logging.INFO,
