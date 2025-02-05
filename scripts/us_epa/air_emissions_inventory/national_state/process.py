@@ -18,10 +18,9 @@ and generates cleaned CSV, MCF, TMCF file.
 
 import os
 import sys
-from absl import app, flags
+from absl import app, flags, logging
 import pandas as pd
 import numpy as np
-import logging
 import re
 
 sys.path.insert(1, os.path.abspath(os.path.join(os.path.dirname(__file__),
@@ -152,7 +151,7 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
                 sv_replacement, regex=True)
             self._final_df.loc[:, ('mcf')] = self._final_df['mcf'].replace(
                 mcf, regex=True)
-        except KeyError as e:
+        except Exception as e:
             logging.fatal(f"Missing column during SV and MCF generation: {e}")
 
     def _state_emissions(self, file_path: str) -> pd.DataFrame:
@@ -198,7 +197,7 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             return df
         except FileNotFoundError as e:
             logging.fatal(f"File not found: {file_path}")
-        except KeyError as e:
+        except Exception as e:
             logging.fatal(f"Missing column in state emissions file: {e}")
 
     def _national_emissions(self, file_path: str) -> pd.DataFrame:
@@ -258,7 +257,7 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             return final_df
         except FileNotFoundError as e:
             logging.fatal(f"File not found: {file_path}")
-        except KeyError as e:
+        except Exception as e:
             logging.fatal(f"Missing column in national emissions file: {e}")
 
     def _parse_source_files(self):
@@ -313,11 +312,8 @@ class USAirPollutionEmissionTrendsNationalAndState(USAirPollutionEmissionTrends
             self._final_df['observation'] = self._final_df[
                 'observation'].astype(float) * _SCALING_FACTOR
             self._add_sv_and_mcf_column_to_final_df()
-        except KeyError as e:
+        except Exception as e:
             logging.fatal(f"Error parsing source files: {e}")
-            raise
-        except FileNotFoundError as e:
-            logging.fatal(f"Source file not found: {e}")
             raise
 
 
