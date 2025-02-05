@@ -2,7 +2,7 @@
   "import_specifications": [
     {
       "import_name": "BLS_JOLTS",
-      "curator_emails": [],
+      "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.bls.gov/jlt/",
       "provenance_description": "U.S. Bureau of Labor Statistics data on job openings, hires, and separations.",
       "scripts": ["bls_jolts.py"],
