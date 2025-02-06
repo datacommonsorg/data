@@ -2,7 +2,7 @@
     "import_specifications": [
       {
         "import_name": "CDCWonder_NNDSS_InfectiousAnnual",
-        "curator_emails": [],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://wonder.cdc.gov/nndss/nndss_annual_tables_menu.asp",
         "provenance_description": "Notifiable Infectious Diseases Data: Annual tables from CDC WONDER which has the incident counts of different infectious diseases per year and are aggregated based on demographic factors. The statistics are reported by the 50 states, New York City, the District of Columbia, and the U.S. territories.",
         "scripts": ["download_annual_data.py","process_annual_demographics.py","process_annual_reporting.py"],
