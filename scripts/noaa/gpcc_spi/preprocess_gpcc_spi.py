@@ -60,7 +60,7 @@ def to_one_degree_grid_place(latlon):
 
 def nc_to_df(nc_path, period, spi_col, start_date, end_date):
     """Read a netcdf and parse to df."""
-    logging.info("Read a netcdf and parse to df.")
+    logging.info(f"Read a netcdf file - {nc_path} and parse to df.")
     ds = xarray.open_dataset(nc_path, engine='netcdf4')
     df = ds.to_dataframe()
     df = df[(df.index.get_level_values('time') >= start_date) &
@@ -91,13 +91,13 @@ def preprocess_one(start_date,
                    preprocessed_dir: Optional[str] = None,
                    write: bool = True):
     """Create a single csv file from a single input nc file."""
-    logging.info('processing file:  %s: %s', in_file,
-                 datetime.now().strftime('%H:%M:%S'))
     path = Path(in_file)
     period = int(path.stem.split('_')[-1])
     spi_col = f"spi_{path.stem.split('_')[-1]}"
 
     df = nc_to_df(in_file, period, spi_col, start_date, end_date)
+    logging.info('processing file:  %s: %s', in_file,
+                 datetime.now().strftime('%H:%M:%S'))
     if not write:
         return df
 
@@ -115,8 +115,6 @@ def preprocess_one(start_date,
               ],
               index=False,
               quotechar="'")  # This writes double quote as is.
-    logging.info('finished writing csv: %s',
-                 datetime.now().strftime('%H:%M:%S'))
     return output_path
 
 
@@ -129,6 +127,8 @@ def preprocess_gpcc_spi(start_date, end_date, in_pattern,
                                 in_pattern)
     for file in sorted(glob.glob(full_pattern)):
         preprocess_one(start_date, end_date, file, preprocessed_dir)
+        logging.info('finished writing csv: %s: %s \n', file,
+                     datetime.now().strftime('%H:%M:%S'))
 
 
 def main(_):
