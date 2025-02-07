@@ -24,7 +24,7 @@ unit,geo is further broken down into:
 
 ### Download URL
 
-[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_d3dens.tsv.gz).
+[TSV] file is available for [download](https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_d3dens/?format=TSV&compressed=true).
 
 ### License
 
@@ -74,8 +74,24 @@ The cleaned csv has the columns:
 
 To generate `PopulationDensity_Eurostat_NUTS3.tmcf` and `PopulationDensity_Eurostat_NUTS3.csv`, run:
 
+
+This script offers three modes of operation: download, process, or both download and process.
+
 ```bash
-python3 PopulationDensity_preprocess_gen_tmcf.py
+1. Download and Process (python3 PopulationDensity_preprocess_gen_tmcf.py or no mode flag):
+2. Download Only (python3 PopulationDensity_preprocess_gen_tmcf.py --mode=download):
+3. Process Only (python3 PopulationDensity_preprocess_gen_tmcf.py --mode=process):
+```
+
+### Testing Procedure
+
+How to Create Sample Data: Extract a subset of rows from your source input file to generate sample input and output CSV files.
+
+To test import procedure, run the following command:
+
+```
+python3 PopulationDensity_preprocess_gen_tmcf_test.py
+
 ```
 
 ### Post-Processing Validation

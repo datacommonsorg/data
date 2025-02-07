@@ -60,15 +60,15 @@ class CloudSchedulerTest(unittest.TestCase):
         }
         assert DeepDiff(got, want) == {}
 
-    def test_http_job_request(self):
+    def test_gke_job_request(self):
         absolute_import_name = "scripts/preprocess:A"
         schedule = "0 5 * * *"
         json_encoded_job_body = '{"k":"v"}'
         cloud_scheduler.GKE_CALLER_SERVICE_ACCOUNT = 'account'
         cloud_scheduler.GKE_OAUTH_AUDIENCE = 'audience'
 
-        got = cloud_scheduler.http_job_request(absolute_import_name, schedule,
-                                               json_encoded_job_body)
+        got = cloud_scheduler.gke_job_request(absolute_import_name, schedule,
+                                              json_encoded_job_body)
         want = {
             'name': 'scripts_preprocess_A_GKE',
             'description': 'scripts/preprocess:A',
@@ -93,6 +93,44 @@ class CloudSchedulerTest(unittest.TestCase):
                 'oidc_token': {
                     'service_account_email': 'account',
                     'audience': 'audience',
+                }
+            }
+        }
+        assert DeepDiff(got, want) == {}
+
+    def test_cloud_run_job_request(self):
+        absolute_import_name = "scripts/preprocess:A"
+        schedule = "0 5 * * *"
+
+        cloud_run_service_account = 'service_account'
+        cloud_run_job_url = 'run.googleapis.com/run'
+        got = cloud_scheduler.cloud_run_job_request(absolute_import_name,
+                                                    schedule, cloud_run_job_url,
+                                                    cloud_run_service_account)
+        want = {
+            'name': 'A',
+            'description': 'scripts/preprocess:A',
+            'schedule': "0 5 * * *",
+            'time_zone': 'Etc/UTC',
+            'retry_config': {
+                'retry_count': 2,
+                'min_backoff_duration': {
+                    'seconds': 60 * 60
+                }
+            },
+            'attempt_deadline': {
+                'seconds': 60 * 30
+            },
+            'http_target': {
+                'uri': 'https://run.googleapis.com/run',
+                'http_method': 'POST',
+                'headers': {
+                    'Content-Type': 'application/json',
+                },
+                'body': b'{}',
+                'oauth_token': {
+                    'service_account_email': 'service_account',
+                    'scope': 'https://www.googleapis.com/auth/cloud-platform'
                 }
             }
         }

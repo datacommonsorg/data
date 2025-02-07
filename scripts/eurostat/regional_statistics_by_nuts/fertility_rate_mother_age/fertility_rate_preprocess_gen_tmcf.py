@@ -11,14 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
 
+sys.path.insert(1, '../../../../util')
+from six.moves import urllib
+from alpha2_to_dcid import COUNTRY_MAP
+from nuts_codes_names import NUTS1_CODES_NAMES
+import numpy as np
 import pandas as pd
 import io
 import csv
+from absl import app
+from absl import logging
+from absl import flags
+import os
 
-_DATA_URL = "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/demo_r_find3.tsv.gz"
-_CLEANED_CSV = "./Eurostats_NUTS3_FRate_Age.csv"
-_TMCF = "./Eurostats_NUTS3_FRate_Age.tmcf"
+_FLAGS = flags.FLAGS
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+flags.DEFINE_string('mode', '', 'Options: download or process')
 
 _OUTPUT_COLUMNS = [
     'Date',
@@ -29,83 +39,186 @@ _OUTPUT_COLUMNS = [
 ]
 
 
-def translate_wide_to_long(data_url):
-    df = pd.read_csv(data_url, delimiter='\t')
-    assert df.head
+def download_data(download_link, download_path):
+    """Downloads raw data from Eurostat website and stores it in instance
+       data frame.
+    
+        Args:
+        download_link(str): A string representing the URL of the data source.
+        download_path(str): A string specifying the local file path where the downloaded data will be saved.
+        
+        Returns:None
+        
+    """
+    try:
+        logging.info(f'Downloading: {download_link}')
+        urllib.request.urlretrieve(download_link, "demo_r_find3.tsv.gz")
+        raw_df = pd.read_table("demo_r_find3.tsv.gz")
+        raw_df.to_csv(download_path, index=False, sep='\t')
+        logging.info(f'Downloaded {download_path} from {download_link}')
+    except Exception as e:
+        logging.fatal(f'Download error for: {download_link}: {e}')
 
-    header = list(df.columns.values)
-    years = header[1:]
 
-    # Pandas.melt() unpivots a DataFrame from wide format to long format.
-    df = pd.melt(df,
-                 id_vars=header[0],
-                 value_vars=years,
-                 var_name='time',
-                 value_name='value')
-
-    # Separate geo and unit columns.
-    new = df[header[0]].str.split(",", n=-1, expand=True)
-    df = df.join(
-        pd.DataFrame({
-            'geo': new[2],
-            'unit': new[1],
-            'indic_de': new[0]
+def translate_wide_to_long(file_path):
+    """ Reshaping DataFrames from Wide to Long Format
+    Args: 
+        This argument specifies the path to the input file
+    Returns:
+        df: long-format version of the original raw_df.
+    
+    """
+    try:
+        logging.info('Transforming data: wide to long.. ')
+        df = pd.read_csv(file_path, delimiter='\t')
+        df = df.rename(columns=({
+            'freq,indic_de,unit,geo\TIME_PERIOD': 'indic_de,unit,geo\\time'
         }))
-    df["indicator_unit"] = df["indic_de"] + "_" + df["unit"]
-    df.drop(columns=[header[0]], inplace=True)
+        df['indic_de,unit,geo\\time'] = df['indic_de,unit,geo\\time'].str.slice(
+            2)
 
-    # Remove empty rows, clean values to have all digits.
-    df = df[df.value.str.contains('[0-9]')]
-    possible_flags = [' ', ':']
-    for flag in possible_flags:
-        df['value'] = df['value'].str.replace(flag, '')
+        header = list(df.columns.values)
+        years = header[1:]
 
-    df['value'] = pd.to_numeric(df['value'])
-    df = df.pivot_table(values='value',
-                        index=['geo', 'time'],
-                        columns=['indicator_unit'],
-                        aggfunc='first').reset_index().rename_axis(None, axis=1)
-    return df
+        # Pandas.melt() unpivots a DataFrame from wide format to long format.
+        df = pd.melt(df,
+                     id_vars=header[0],
+                     value_vars=years,
+                     var_name='time',
+                     value_name='value')
+
+        # Separate geo and unit columns.
+
+        new = df[header[0]].str.split(",", n=-1, expand=True)
+        df = df.join(
+            pd.DataFrame({
+                'geo': new[2],
+                'unit': new[1],
+                'indic_de': new[0]
+            }))
+        df["indicator_unit"] = df["indic_de"] + "_" + df["unit"]
+        df['geo'] = df['geo'].apply(lambda geo: f'nuts/{geo}' if any(
+            g.isdigit() for g in geo) or ('nuts/' + geo in NUTS1_CODES_NAMES)
+                                    else COUNTRY_MAP.get(geo, f'{geo}'))
+
+        df.drop(columns=[header[0]], inplace=True)
+
+        # Remove empty rows, clean values to have all digits.
+        df = df[df.value.str.contains('[0-9]')]
+        possible_flags = [' ', ':', 'b', 'p', 'e']
+        for flag in possible_flags:
+            df['value'] = df['value'].str.replace(flag, '')
+
+        df['value'] = pd.to_numeric(df['value'])
+        df = df.pivot_table(values='value',
+                            index=['geo', 'time'],
+                            columns=['indicator_unit'],
+                            aggfunc='first').reset_index().rename_axis(None,
+                                                                       axis=1)
+        logging.info('Transforming data: wide to long.. completed ')
+        return df
+    except Exception as e:
+        logging.fatal(f'Transforming error {e}')
 
 
 def preprocess(df, cleaned_csv):
-    with open(cleaned_csv, 'w', newline='') as f_out:
-        writer = csv.DictWriter(f_out,
-                                fieldnames=_OUTPUT_COLUMNS,
-                                lineterminator='\n')
-        writer.writeheader()
-        for _, row in df.iterrows():
-            writer.writerow({
-                'Date': '%s' % (row['time'][:4]),
-                'GeoId': 'dcid:nuts/%s' % row['geo'],
-                'MeanMothersAge_BirthEvent': (row['AGEMOTH_YR']),
-                'MedianMothersAge_BirthEvent': (row['MEDAGEMOTH_YR']),
-                'FertilityRate_Person_Female': (row['TOTFERRT_NR']),
-            })
+    """ Preprocesses a DataFrame and saves the cleaned data to a CSV file.
+    Args:
+        df: The raw, unprocessed DataFrame.
+        cleaned_csv: The path to the CSV file where the cleaned data will be saved.
+
+    Returns:
+        None
+    """
+    try:
+        logging.info(f'Processing file: {cleaned_csv}')
+        df = df.replace(np.NaN, '', regex=True)
+        with open(cleaned_csv, 'w', newline='') as f_out:
+            writer = csv.DictWriter(f_out,
+                                    fieldnames=_OUTPUT_COLUMNS,
+                                    lineterminator='\n')
+            writer.writeheader()
+            for _, row in df.iterrows():
+                writer.writerow({
+                    'Date': '%s' % (row['time'][:4]),
+                    'GeoId': '%s' % row['geo'],
+                    'MeanMothersAge_BirthEvent': (row['AGEMOTH_YR']),
+                    'MedianMothersAge_BirthEvent': (row['MEDAGEMOTH_YR']),
+                    'FertilityRate_Person_Female': (row['TOTFERRT_NR']),
+                })
+        logging.info('File processing completed')
+
+    except Exception as e:
+        logging.fatal(f'Processing error {e}')
 
 
-def get_template_mcf():
-    # Automate Template MCF generation since there are many Statistical Variables.
+def get_template_mcf(output_columns, _TMCF):
+    """Automate Template MCF generation since there are many Statistical Variables.
+      Args:
+            output_columns: A list of strings representing all the output columns from the data.
+            _TMCF: The path to a template MCF file used as the base structure.
+        Returns:
+            None
+    """
     TEMPLATE_MCF_TEMPLATE = """
-  Node: E:Eurostats_NUTS3_FRate_Age->E{index}
-  typeOf: dcs:StatVarObservation
-  variableMeasured: dcs:{stat_var}
-  observationAbout: C:Eurostats_NUTS3_FRate_Age->GeoId
-  observationDate: C:Eurostats_NUTS3_FRate_Age->Date
-  value: C:Eurostats_NUTS3_FRate_Age->{stat_var}
-  measurementMethod: dcs:EurostatRegionalStatistics
-  """
+        Node: E:Eurostats_NUTS3_FRate_Age->E{index}
+        typeOf: dcs:StatVarObservation
+        variableMeasured: dcs:{stat_var}
+        observationAbout: C:Eurostats_NUTS3_FRate_Age->GeoId
+        observationDate: C:Eurostats_NUTS3_FRate_Age->Date
+        value: C:Eurostats_NUTS3_FRate_Age->{stat_var}
+        measurementMethod: dcs:EurostatRegionalStatistics
+        """
 
-    stat_vars = _OUTPUT_COLUMNS[2:]
-    with open(_TMCF, 'w', newline='') as f_out:
-        for i in range(len(stat_vars)):
-            f_out.write(
-                TEMPLATE_MCF_TEMPLATE.format_map({
-                    'index': i,
-                    'stat_var': _OUTPUT_COLUMNS[2:][i]
-                }))
+    TEMPLATE_MCF_TEMPLATE1 = """
+        Node: E:Eurostats_NUTS3_FRate_Age->E{index}
+        typeOf: dcs:StatVarObservation
+        variableMeasured: dcs:{stat_var}
+        observationAbout: C:Eurostats_NUTS3_FRate_Age->GeoId
+        observationDate: C:Eurostats_NUTS3_FRate_Age->Date
+        value: C:Eurostats_NUTS3_FRate_Age->{stat_var}
+        measurementMethod: dcs:EurostatRegionalStatistics
+        unit:Year
+        """
+    try:
+        logging.info('Template MCF processing ')
+        stat_vars = output_columns[2:]
+        with open(_TMCF, 'w', newline='') as f_out:
+            for i in range(len(stat_vars)):
+                if _OUTPUT_COLUMNS[2:][i] == "FertilityRate_Person_Female":
+                    f_out.write(
+                        TEMPLATE_MCF_TEMPLATE.format_map({
+                            'index': i,
+                            'stat_var': _OUTPUT_COLUMNS[2:][i]
+                        }))
+                else:
+                    f_out.write(
+                        TEMPLATE_MCF_TEMPLATE1.format_map({
+                            'index': i,
+                            'stat_var': _OUTPUT_COLUMNS[2:][i]
+                        }))
+        logging.info('Template MCF processing completed')
+    except Exception as e:
+        logging.fatal(f'Processing error {e}')
+
+
+def main(_):
+    mode = _FLAGS.mode
+    _DATA_URL = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_find3/?format=TSV&compressed=true"
+    _CLEANED_CSV = "./Eurostats_NUTS3_FRate_Age.csv"
+    _TMCF = "./Eurostats_NUTS3_FRate_Age.tmcf"
+    input_path = os.path.join(_MODULE_DIR, 'input_files')
+    if not os.path.exists(input_path):
+        os.makedirs(input_path)
+    input_file = os.path.join(input_path, 'input_file.tsv')
+
+    if mode == "" or mode == "download":
+        download_data(_DATA_URL, input_file)
+    if mode == "" or mode == "process":
+        translate_df = translate_wide_to_long(input_file)
+        preprocess(translate_df, _CLEANED_CSV)
+        get_template_mcf(_OUTPUT_COLUMNS, _TMCF)
 
 
 if __name__ == "__main__":
-    preprocess(translate_wide_to_long(_DATA_URL), _CLEANED_CSV)
-    get_template_mcf()
+    app.run(main)
