@@ -6,7 +6,7 @@ This dataset has Annual Population Estimates from the year 1900 to 2021 for diff
 The population is categorized by [Count_Person](https://datacommons.org/browser/Count_Person) StatVar in Datacommons.org
 
 ### Download URL
-The data in txt/csv formats are downloadable from within https://www2.census.gov/programs-surveys/popest/tables and https://www2.census.gov/programs-surveys/popest/datasets. The actual URLs are listed in file_urls.txt.
+The data in txt/csv formats are downloadable from within https://www2.census.gov/programs-surveys/popest/tables and https://www2.census.gov/programs-surveys/popest/datasets. The actual URLs are listed in input_url.json.
 
 #### API Output
 These are the attributes that we will use
@@ -17,7 +17,7 @@ These are the attributes that we will use
 
 
 #### Cleaned Data
-Cleaned data will be inside [Output/USA_Annual_Population.csv] as a CSV file with the following columns.
+Cleaned data will be inside [output_files/usa_annual_population.csv] as a CSV file with the following columns.
 
 - Year
 - Location
@@ -25,23 +25,28 @@ Cleaned data will be inside [Output/USA_Annual_Population.csv] as a CSV file wit
 
 
 #### MCFs and Template MCFs
-- [output_files/USA_Annual_Population.mcf]
-- [output_files/USA_Annual_Population.tmcf]
+- [output_files/usa_annual_population.mcf]
+- [output_files/usa_annual_population.tmcf]
 
 ### Running Tests
 
 Run the test cases
 
-`/bin/python3 -m unittest scripts/us_census/pep/annual_population_estimate/preprocess_test.py`
+`python3 scripts/us_census/pep/annual_population/preprocess_test.py`
 
 ### Import Procedure
 
-The below script will download the data
+The below script will download the data, generate csv, mcf and tmcf files.
 
-`/usr/bin/sh scripts/us_census/pep/annual_population_estimate/download.sh`
+`python3 scripts/us_census/pep/annual_population/preprocess.py`
 
-The below script will generate csv and mcf files.
+To download data, run:
 
-`/usr/bin/python3 scripts/us_census/pep/annual_population_estimate/preprocess.py`
+`python3 scripts/us_census/pep/annual_population/preprocess.py` --mode=download
 
+To process data, run:
+
+`python3 scripts/us_census/pep/annual_population/preprocess.py` --mode=process
+
+Downloaded files will be inside 'scripts/us_census/pep/annual_population/input_files' directory and output will be generated on 'scripts/us_census/pep/annual_population/output_files' directory.
 
