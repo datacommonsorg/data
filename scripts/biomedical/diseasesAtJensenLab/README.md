@@ -50,10 +50,7 @@ The DISEASES datasource is composed of three datasets that were generated using 
 
 ### dcid Generation
 
-Dcids for DiseaseGeneAssociation nodes were generated as follow either:
-'bio/DOID_<trailing_DOID>_<geneSymbol>
-'bio/ICD10_<trailing_ICD10Code>_<geneSymbol>
-where the <DOID> and <trailing_ICD10Code> represent the id following the ':', <geneSymbol> represents the Gene's gene symbol. For example: `bio/DOID_0050177_SEMA3F` and `bio/DOID_0050736_SEMA3F`.
+Dcids for DiseaseGeneAssociation nodes were generated as either: 'bio/DOID_<trailing_DOID>_<geneSymbol> or 'bio/ICD10_<trailing_ICD10Code>_<geneSymbol> where the <DOID> and <trailing_ICD10Code> represent the id following the ':', <geneSymbol> represents the Gene's gene symbol. For example: `bio/DOID_0050177_SEMA3F` and `bio/DOID_0050736_SEMA3F`.
 
 ### License
 
