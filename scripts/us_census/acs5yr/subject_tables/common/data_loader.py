@@ -260,7 +260,7 @@ class SubjectTableDataLoaderBase:
         df = self._replace_ignore_values_with_nan(
             df)  #handle the values to be ignored
         year = filename.split(f'ACSST{self.estimate_period}Y')[1][:4]
-        logging.info(f"Processing: {filename}", end=" |  ", flush=True)
+        logging.info(f"Processing: {filename}")
         # if has_percent is set, convert percentages to counts. Requires the
         # 'denominators' key to be specified in the spec
         if self.has_percent:
