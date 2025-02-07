@@ -357,8 +357,7 @@ class SubjectTableDataLoaderBase:
             f"""Completed with { self.counter_dict[year]['number of observations'] }
             observation for { self.counter_dict[year]['number of unique StatVars with observations'] }
             StatVars at { self.counter_dict[year]['number of unique geos'] } places.
-            """,
-            flush=True)
+            """)
 
     def _generate_mcf_from_column_map(self):
         """
