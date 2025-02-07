@@ -8,8 +8,8 @@ python import_differ.py --current_data=<path> --previous_data=<path>
 ```
 
 Parameter description:
-- current\_data: Path to the current MCF data (single mcf file or folder/* on local/GCS supported).
-- previous\_data: Path to the previous MCF data (single mcf file or folder/* on local/GCS supported).
+- current\_data: Path to the current MCF data (single mcf file or wildcard on local/GCS supported).
+- previous\_data: Path to the previous MCF data (single mcf file or wildcard on local/GCS supported).
 - output\_location: Path to the output data folder. Default value: results.
 - groupby\_columns: Columns to group data for diff analysis in the order var,place,time etc. Default value: “variableMeasured,observationAbout,observationDate,measureMethod,unit”.
 - value\_columns: Columns with statvar value for diff analysis. Default value: "value,scalingFactor".
