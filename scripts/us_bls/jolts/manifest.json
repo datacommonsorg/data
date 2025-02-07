@@ -6,6 +6,7 @@
       "provenance_url": "https://www.bls.gov/jlt/",
       "provenance_description": "U.S. Bureau of Labor Statistics data on job openings, hires, and separations.",
       "scripts": ["bls_jolts.py"],
+      "source_files": ["input_files/*"],
       "import_inputs": [
         {
                     "template_mcf": "BLSJolts.tmcf",
