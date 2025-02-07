@@ -5,4 +5,3 @@ observationAbout: C:SubjectTable->Place
 observationDate: C:SubjectTable->Year
 variableMeasured: C:SubjectTable->StatVar
 value: C:SubjectTable->Quantity
-unit: C:SubjectTable->Unit
