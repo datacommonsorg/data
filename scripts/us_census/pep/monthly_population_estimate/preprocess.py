@@ -621,6 +621,10 @@ def download_files():
                             with open(os.path.join(raw_data_path, file_name),
                                       'wb') as f:
                                 f.write(response.content)
+                        else:
+                            logging.fatal(
+                                f"status_code is not 200,returned status_code is :{response.status_code}"
+                            )
                     file_name = file_name.replace(".csv", ".xlsx")
                     df = pd.read_csv(url, header=None)
                     df = _clean_csv_file(df)
@@ -634,6 +638,10 @@ def download_files():
                             with open(os.path.join(raw_data_path, file_name),
                                       'wb') as f:
                                 f.write(response.content)
+                        else:
+                            logging.fatal(
+                                f"status_code is not 200,returned status_code is :{response.status_code}"
+                            )
                     file_name = file_name.replace(".txt", ".xlsx")
                     cols = [
                         "Year and Month", "Date", "Resident Population",

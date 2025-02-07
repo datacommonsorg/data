@@ -1234,7 +1234,10 @@ def add_future_yearurls():
                     if checkurl.status_code == 200:
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
-
+                    else:
+                        logging.fatal(
+                            f"Eror while accessing the url, Returned status code is : {checkurl.status_code}"
+                        )
                 except:
                     logging.error(f"URL is not accessable {url_to_check}")
 

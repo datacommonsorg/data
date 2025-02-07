@@ -1143,7 +1143,10 @@ def download_files():
                           'wb') as f:
                     f.write(response.content)
                     file_to_dowload['is_downloaded'] = True
-
+            else:
+                logging.fatal(
+                    f"Status code is not 200, Status code returned is :{response.status_code}"
+                )
     except Exception as e:
         logging.fatal(f"Error occurred in download method {e}")
 

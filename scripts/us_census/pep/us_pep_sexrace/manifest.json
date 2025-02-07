@@ -6,6 +6,7 @@
         "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
         "provenance_description": "US Census Population Estimates Program (PEP)",
         "scripts": ["preprocess.py"],
+        "source_files": ["output_files/intermediate/*"],
         "import_inputs": [
           {
             "template_mcf": "output_files/final/national_after_2000.tmcf",
