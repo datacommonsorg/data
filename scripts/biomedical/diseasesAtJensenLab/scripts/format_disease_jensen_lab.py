@@ -375,7 +375,7 @@ def format_csv(data_type):
 def main():
 	format_csv('experiments')
 	format_csv('knowledge')
-	#format_csv('textmining')
+	format_csv('textmining')
 
 
 if __name__ == '__main__':
