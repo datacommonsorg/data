@@ -294,7 +294,8 @@ class GitHubAPITest(unittest.TestCase):
 
     @mock.patch('requests.get')
     def test_download_repo(self, get):
-        tar_path = 'test/data/treasury_constant_maturity_rates.tar.gz'
+        tar_path = os.path.join(os.path.dirname(__file__),
+                                'data/treasury_constant_maturity_rates.tar.gz')
         with open(tar_path, 'rb') as tar:
             headers = {'Content-Disposition': 'attachment; filename=abc'}
             get.return_value = utils.ResponseMock(200, raw=tar, headers=headers)
@@ -307,24 +308,28 @@ class GitHubAPITest(unittest.TestCase):
                 file = os.path.join(downloaded,
                                     'treasury_constant_maturity_rates.csv')
                 assert test.utils.compare_lines(
-                    'test/data/treasury_constant_maturity_rates.csv', file,
-                    integration_test.NUM_LINES_TO_CHECK)
+                    os.path.join(os.path.dirname(__file__),
+                                 'data/treasury_constant_maturity_rates.csv'),
+                    file, integration_test.NUM_LINES_TO_CHECK)
 
                 file = os.path.join(downloaded,
                                     'treasury_constant_maturity_rates.mcf')
                 assert test.utils.compare_lines(
-                    'test/data/treasury_constant_maturity_rates.mcf', file,
-                    integration_test.NUM_LINES_TO_CHECK)
+                    os.path.join(os.path.dirname(__file__),
+                                 'data/treasury_constant_maturity_rates.mcf'),
+                    file, integration_test.NUM_LINES_TO_CHECK)
 
                 file = os.path.join(downloaded,
                                     'treasury_constant_maturity_rates.tmcf')
                 assert test.utils.compare_lines(
-                    'test/data/treasury_constant_maturity_rates.tmcf', file,
-                    integration_test.NUM_LINES_TO_CHECK)
+                    os.path.join(os.path.dirname(__file__),
+                                 'data/treasury_constant_maturity_rates.tmcf'),
+                    file, integration_test.NUM_LINES_TO_CHECK)
 
     @mock.patch('requests.get')
     def test_download_repo_timeout(self, get):
-        tar_path = 'test/data/treasury_constant_maturity_rates.tar.gz'
+        tar_path = os.path.join(os.path.dirname(__file__),
+                                'data/treasury_constant_maturity_rates.tar.gz')
         with open(tar_path, 'rb') as tar:
             headers = {'Content-Disposition': 'attachment; filename=abc'}
             get.return_value = utils.ResponseMock(200, raw=tar, headers=headers)
@@ -335,7 +340,8 @@ class GitHubAPITest(unittest.TestCase):
 
     @mock.patch('requests.get')
     def test_download_repo_empty(self, get):
-        with open('test/data/empty.tar.gz', 'rb') as tar:
+        with open(os.path.join(os.path.dirname(__file__), 'data/empty.tar.gz'),
+                  'rb') as tar:
             headers = {'Content-Disposition': 'attachment; filename=abc'}
             get.return_value = utils.ResponseMock(200, raw=tar, headers=headers)
 
@@ -345,7 +351,8 @@ class GitHubAPITest(unittest.TestCase):
 
     @mock.patch('requests.get')
     def test_download_repo_http_error(self, get):
-        tar_path = 'test/data/treasury_constant_maturity_rates.tar.gz'
+        tar_path = os.path.join(os.path.dirname(__file__),
+                                'data/treasury_constant_maturity_rates.tar.gz')
         with open(tar_path, 'rb') as tar:
             get.return_value = utils.ResponseMock(400, raw=tar)
 

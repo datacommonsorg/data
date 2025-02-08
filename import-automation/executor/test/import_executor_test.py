@@ -33,6 +33,11 @@ class ImportExecutorTest(unittest.TestCase):
             '2020_07_15T12_07_17_365264_07_00',
             import_executor._clean_time('2020-07-15T12:07:17.365264-07:00'))
 
+    def test_clean_date(self):
+        self.assertEqual(
+            '2020-07-15',
+            import_executor._clean_date('2020-07-15T12:07:17.365264+00:00'))
+
     def test_run_with_timeout(self):
         self.assertRaises(subprocess.TimeoutExpired,
                           import_executor._run_with_timeout, ['sleep', '5'],
@@ -57,25 +62,16 @@ class ImportExecutorTest(unittest.TestCase):
                     self.assertEqual('123\n', proc.stdout)
 
     @mock.patch('app.utils.utctime', lambda: '2020-07-28T20:22:18.311294+00:00')
-    @mock.patch('app.service.dashboard_api.DashboardAPI')
-    def test_run_and_handle_exception(self, dashboard):
+    def test_run_and_handle_exception(self):
 
         def raise_exception():
             raise Exception
 
-        result = import_executor.run_and_handle_exception(
-            'run', dashboard, raise_exception)
+        result = import_executor.run_and_handle_exception(raise_exception)
         self.assertEqual('failed', result.status)
         self.assertEqual([], result.imports_executed)
         self.assertIn('Exception', result.message)
         self.assertIn('Traceback', result.message)
-        dashboard.critical.assert_called_once()
-        dashboard.update_run.assert_called_once_with(
-            {
-                'status': 'failed',
-                'time_completed': '2020-07-28T20:22:18.311294+00:00'
-            },
-            run_id='run')
 
     def test_construct_process_message(self):
         process = subprocess.run('printf "out" & >&2 printf "err" & exit 1',

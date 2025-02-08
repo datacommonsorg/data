@@ -1,0 +1,9 @@
+Node: E:Flood->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Area_FloodEvent
+value: C:Flood->area
+observationAbout: C:Flood->s2CellId
+observationDate: C:Flood->date
+observationPeriod: P1M
+unit: dcs:SquareKilometer
+measurementMethod: dcid:DataCommonsAggregate

@@ -1,0 +1,21 @@
+city,site_name,state,PM25,PM10,NO2,NH3,SO2,CO,O3,AT,BP,SR,RH,WD,NO,NOx,Benzene,Toluene,Xylene,MP_Xylene,Eth_Benzene,Date,dcid
+Patna,"IGSC Planetarium Complex, Patna - BSPCB",Bihar,nan,90.25,21.61,nan,2.58,1.1,5.13,nan,747.54,37.47,nan,193.86,29.86,51.48,0.44,4.81,nan,nan,nan,2012-06-20T00:00:00,cpcbAq/212_IGSCPlanetariumComplex_Patna
+Bengaluru,"Peenya, Bengaluru - CPCB",Karnataka,nan,nan,15.07,3.08,15.21,0.29,nan,nan,990.2,86.34,88.69,230.82,2.81,10.76,nan,nan,nan,nan,nan,2012-06-30T04:00:00,cpcbAq/525_Peenya_Bengaluru
+Chennai,"Velachery Res. Area, Chennai - CPCB",Tamil Nadu,nan,nan,7.69,nan,nan,0.1,nan,nan,nan,nan,1.93,0.12,9.04,9.66,nan,nan,nan,nan,nan,2014-06-12T20:00:00,cpcbAq/568_VelacheryRes.Area_Chennai
+Navi Mumbai,"Airoli, Navi Mumbai - MPCB",Maharashtra,27.37,58.23,nan,nan,19.41,1.04,nan,nan,nan,nan,72.24,49.0,nan,24.74,nan,nan,nan,nan,nan,2014-10-27T20:00:00,cpcbAq/482_Airoli_NaviMumbai
+Faridabad,"Sector- 16A, Faridabad - HSPCB",Haryana,44.38,nan,5.62,nan,0.75,11.62,19.0,31.72,724.78,47.87,40.06,113.56,4.7,23.48,1.31,2.53,0.74,nan,nan,2015-05-31T20:00:00,cpcbAq/060_Sector16A_Faridabad
+Faridabad,"Sector- 16A, Faridabad - HSPCB",Haryana,30.5,nan,8.47,nan,34.62,3.71,19.84,26.42,721.78,41.24,60.86,114.78,40.01,46.8,1.46,2.32,0.35,nan,nan,2015-06-21T00:00:00,cpcbAq/060_Sector16A_Faridabad
+Ahmedabad,"Maninagar, Ahmedabad - GPCB",Gujarat,165.75,nan,66.36,nan,26.12,2.76,1.51,27.24,1018.6,5.45,32.59,128.87,20.43,86.78,15.66,45.13,8.13,8.07,15.98,2015-11-08T20:00:00,cpcbAq/438_Maninagar_Ahmedabad
+Tirupati,"Tirumala, Tirupati - APPCB",Andhra Pradesh,2.0,19.75,41.39,7.14,184.65,5.51,15.07,24.49,nan,515.0,66.0,219.75,13.66,30.32,0.88,5.68,0.1,nan,nan,2016-06-23T08:00:00,cpcbAq/503_Tirumala_Tirupati
+Delhi,"Punjabi Bagh, Delhi - DPCC",Delhi,2.35,65.75,59.81,nan,7.62,0.51,20.44,13.11,738.0,18.12,71.83,105.62,11.43,68.91,0.27,1.03,nan,nan,nan,2017-03-10T04:00:00,cpcbAq/079_PunjabiBagh_Delhi
+Mandi Gobindgarh,"RIMT University, Mandi Gobindgarh - PPCB",Punjab,29.04,101.17,21.79,nan,6.56,0.38,nan,nan,nan,553.75,21.4,222.15,47.03,nan,3.31,0.0,nan,nan,nan,2017-04-28T08:00:00,cpcbAq/030_RIMTUniversity_MandiGobindgarh
+Bengaluru,"BWSSB Kadabesanahalli, Bengaluru - CPCB",Karnataka,nan,nan,22.42,nan,4.31,nan,11.02,28.08,1009.12,286.53,75.71,243.13,5.18,nan,0.65,0.7,nan,0.34,0.16,2017-07-07T12:00:00,cpcbAq/525_BWSSBKadabesanahalli_Bengaluru
+Amaravati,"Secretariat, Amaravati - APPCB",Andhra Pradesh,65.31,129.62,48.71,11.59,14.38,0.2,24.86,23.24,756.0,12.0,73.25,290.5,1.25,26.92,0.24,7.04,0.11,0.04,nan,2017-12-10T00:00:00,cpcbAq/506_Secretariat_Amaravati
+Amritsar,"Golden Temple, Amritsar - PPCB",Punjab,nan,nan,9.03,7.08,1.32,0.04,28.96,nan,nan,245.0,87.6,127.85,14.2,23.22,1.94,1.44,12.55,nan,nan,2018-08-04T04:00:00,cpcbAq/027_GoldenTemple_Amritsar
+Udaipur,"Ashok Nagar, Udaipur - RSPCB",Rajasthan,51.49,132.06,34.0,39.37,7.64,0.46,8.54,nan,764.14,60.94,67.47,321.34,6.47,40.32,1.24,nan,nan,0.21,1.03,2019-01-10T04:00:00,cpcbAq/117_AshokNagar_Udaipur
+Ballabgarh,"Nathu Colony, Ballabgarh - HSPCB",Haryana,21.57,79.18,15.39,47.69,1.4,1.36,34.53,nan,nan,197.82,62.86,259.26,11.09,18.45,2.88,0.53,3.33,9.87,6.0,2019-08-12T16:00:00,cpcbAq/060_NathuColony_Ballabgarh
+Mumbai,"Colaba, Mumbai - MPCB",Maharashtra,43.45,74.12,68.86,4.34,7.24,0.5,19.76,17.78,nan,nan,49.01,255.1,6.93,75.79,6.98,nan,nan,19.93,13.38,2020-01-17T00:00:00,cpcbAq/482_Colaba_Mumbai
+Hyderabad,"Zoo Park, Hyderabad - TSPCB",Telangana,64.44,156.56,66.99,12.06,3.58,0.21,13.21,23.04,708.94,267.25,58.5,110.88,2.56,37.72,0.97,8.34,0.68,nan,nan,2020-12-05T08:00:00,cpcbAq/507_ZooPark_Hyderabad
+Sonipat,"Murthal, Sonipat - HSPCB",Haryana,37.8,244.24,18.35,18.34,5.11,0.46,43.98,nan,nan,32.32,94.31,205.21,27.3,18.2,3.73,71.85,nan,4.55,2.82,2021-06-03T04:00:00,cpcbAq/075_Murthal_Sonipat
+Kolkata,"Rabindra Bharati University, Kolkata - WBPCB",West Bengal,46.83,87.53,17.62,14.35,13.45,0.39,27.34,nan,nan,80.96,98.73,60.93,7.05,24.67,2.97,4.87,nan,0.51,nan,2021-09-26T04:00:00,cpcbAq/315_RabindraBharatiUniversity_Kolkata
+Kalaburagi,"Lal Bahadur Shastri Nagar, Kalaburagi - KSPCB",Karnataka,51.05,114.09,15.32,13.9,17.45,0.04,37.73,nan,nan,nan,nan,nan,4.4,19.71,nan,nan,nan,nan,nan,2022-04-09T00:00:00,cpcbAq/538_LalBahadurShastriNagar_Kalaburagi

@@ -1,0 +1,159 @@
+name,sv,unit
+FARM OPERATIONS - NUMBER OF OPERATIONS,dcs:Count_Farm,
+FARM OPERATIONS - NUMBER OF OPERATIONS%%AREA OPERATED: (1.0 TO 9.9 ACRES),dcs:Count_Farm_1To9.9Acre,
+FARM OPERATIONS - NUMBER OF OPERATIONS%%AREA OPERATED: (10.0 TO 49.9 ACRES),dcs:Count_Farm_10To49.9Acre,
+FARM OPERATIONS - NUMBER OF OPERATIONS%%AREA OPERATED: (50 TO 179 ACRES),dcs:Count_Farm_50To179Acre,
+FARM OPERATIONS - NUMBER OF OPERATIONS%%AREA OPERATED: (180 TO 499 ACRES),dcs:Count_Farm_180To499Acre,
+FARM OPERATIONS - NUMBER OF OPERATIONS%%AREA OPERATED: (500 TO 999 ACRES),dcs:Count_Farm_500To999Acre,
+"FARM OPERATIONS - NUMBER OF OPERATIONS%%AREA OPERATED: (1,000 OR MORE ACRES)",dcs:Count_1000OnwardsAcre,
+FARM OPERATIONS - ACRES OPERATED,dcs:Area_Farm,dcs:Acre
+"FARM OPERATIONS - AREA OPERATED, MEASURED IN ACRES / OPERATION",dcs:Mean_Area_Farm,dcs:Acre
+"FARM OPERATIONS - AREA OPERATED, MEASURED IN ACRES / OPERATION, MEDIAN",dcs:Median_Area_Farm,dcs:Acre
+"AG LAND, INCL BUILDINGS - ASSET VALUE, MEASURED IN $ / OPERATION",dcs:Mean_MarketValue_Farm_LandAndBuildings,dcs:USDollarPerFarm
+"AG LAND, INCL BUILDINGS - ASSET VALUE, MEASURED IN $ / ACRE",dcs:Mean_MarketValue_Farm_LandAndBuildings,dcs:USDollarPerAcre
+"MACHINERY TOTALS - ASSET VALUE, MEASURED IN $",dcs:MarketValue_Farm_MachinferyAndEquipment,dcs:USDollar
+"MACHINERY TOTALS - ASSET VALUE, MEASURED IN $ / OPERATION",dcs:Mean_MarketValue_Farm_MachineryAndEquipment,dcs:USDollarPerFarm
+"AG LAND, CROPLAND - NUMBER OF OPERATIONS",dcs:Count_Farm_Cropland,
+"AG LAND, CROPLAND - ACRES",dcs:Area_Farm_Cropland,dcs:Acre
+"AG LAND, CROPLAND, HARVESTED - NUMBER OF OPERATIONS",dcs:Count_Farm_HarvestedCropland,
+"AG LAND, CROPLAND, HARVESTED - ACRES",dcs:Area_Farm_HarvestedCropland,dcs:Acre
+"AG LAND, IRRIGATED - NUMBER OF OPERATIONS",dcs:Count_Farm_IrrigatedLand,
+"AG LAND, IRRIGATED - ACRES",dcs:Area_Farm_IrrigatedLand,dcs:Acre
+"COMMODITY TOTALS - SALES, MEASURED IN $",dcs:MarketValue_Farm_AgriculturalProducts,dcs:USDollar
+"COMMODITY TOTALS - SALES, MEASURED IN $ / OPERATION",dcs:Mean_MarketValue_Farm_AgriculturalProducts,dcs:USDollarPerFarm
+"CROP TOTALS - SALES, MEASURED IN $",dcs:MarketValue_Farm_Crops,dcs:USDollar
+"ANIMAL TOTALS, INCL PRODUCTS - SALES, MEASURED IN $",dcs:MarketValue_Farm_LivestockAndPoultry,dcs:USDollar
+"COMMODITY TOTALS - OPERATIONS WITH SALES%%FARM SALES: (LESS THAN 2,500 $)",dcs:Count_Farm_Upto1000USDollar,
+"COMMODITY TOTALS - OPERATIONS WITH SALES%%FARM SALES: (2,500 TO 4,999 $)",dcs:Count_Farm_2500To4999USDollar,
+"COMMODITY TOTALS - OPERATIONS WITH SALES%%FARM SALES: (5,000 TO 9,999 $)",dcs:Count_Farm_5000To9999USDollar,
+"COMMODITY TOTALS - OPERATIONS WITH SALES%%FARM SALES: (10,000 TO 24,999 $)",dcs:Count_Farm_10000To24999USDollar,
+"COMMODITY TOTALS - OPERATIONS WITH SALES%%FARM SALES: (25,000 TO 49,999 $)",dcs:Count_Farm_25000To49999USDollar,
+"COMMODITY TOTALS - OPERATIONS WITH SALES%%FARM SALES: (50,000 TO 99,999 $)",dcs:Count_Farm_50000To99999USDollar,
+"COMMODITY TOTALS - OPERATIONS WITH SALES%%FARM SALES: (100,000 OR MORE $)",dcs:Count_Farm_100000OnwardsUSDollar,
+"GOVT PROGRAMS, FEDERAL - OPERATIONS WITH RECEIPTS",dcs:Count_Farm_ReceivedGovernmentPayment,
+"GOVT PROGRAMS, FEDERAL - RECEIPTS, MEASURED IN $",dcs:MonetaryValue_Farm_GovernmentPayment,dcs:USDollar
+"INCOME, FARM-RELATED - OPERATIONS WITH RECEIPTS",dcs:Count_Farm_ReportedIncome,
+"INCOME, FARM-RELATED - RECEIPTS, MEASURED IN $",dcs:Income_Farm,dcs:USDollar
+"EXPENSE TOTALS, OPERATING - EXPENSE, MEASURED IN $",dcs:Expenses_Farm,dcs:USDollar
+"EXPENSE TOTALS, OPERATING - EXPENSE, MEASURED IN $ / OPERATION",dcs:Mean_Expenses_Farm,dcs:USDollarPerFarm
+"INCOME, NET CASH FARM, OF OPERATIONS - OPERATIONS WITH NET INCOME",dcs:Count_Farm_ReportedNetIncome,
+"INCOME, NET CASH FARM, OF OPERATIONS - NET INCOME, MEASURED IN $",dcs:NetMeasure_Income_Farm,dcs:USDollar
+"INCOME, NET CASH FARM, OF OPERATIONS - NET INCOME, MEASURED IN $ / OPERATION",dcs:Mean_NetMeasure_Income_Farm,dcs:USDollarPerFarm
+"CATTLE, INCL CALVES - OPERATIONS WITH INVENTORY",dcs:Count_Farm_CattleAndCalves,
+"CATTLE, INCL CALVES - INVENTORY",dcs:Count_FarmInventory_CattleAndCalves,
+"CATTLE, COWS, BEEF - OPERATIONS WITH INVENTORY",dcs:Count_Farm_BeefCows,
+"CATTLE, COWS, BEEF - INVENTORY",dcs:Count_FarmInventory_BeefCows,
+"CATTLE, COWS, MILK - OPERATIONS WITH INVENTORY",dcs:Count_Farm_MilkCows,
+"CATTLE, COWS, MILK - INVENTORY",dcs:Count_FarmInventory_MilkCows,
+"CATTLE, INCL CALVES - OPERATIONS WITH SALES",dcs:Count_Farm_InventorySold_CattleAndCalves,
+"CATTLE, INCL CALVES - SALES, MEASURED IN HEAD",dcs:QuantitySold_FarmInventory_CattleAndCalves,
+HOGS - OPERATIONS WITH INVENTORY,dcs:Count_Farm_HogsAndPigs,
+HOGS - INVENTORY,dcs:Count_FarmInventory_HogsAndPigs,
+HOGS - OPERATIONS WITH SALES,dcs:Count_Farm_InventorySold_HogsAndPigs,
+"HOGS - SALES, MEASURED IN HEAD",dcs:QuantitySold_FarmInventory_HogsAndPigs,
+"SHEEP, INCL LAMBS - OPERATIONS WITH INVENTORY",dcs:Count_Farm_SheepAndLambs,
+"SHEEP, INCL LAMBS - INVENTORY",dcs:Count_FarmInventory_SheepAndLambs,
+"CHICKENS, LAYERS - OPERATIONS WITH INVENTORY",dcs:Count_Farm_Layers,
+"CHICKENS, LAYERS - INVENTORY",dcs:Count_FarmInventory_Layers,
+"CHICKENS, BROILERS - OPERATIONS WITH SALES",dcs:Count_Farm_Broilers,
+"CHICKENS, BROILERS - SALES, MEASURED IN HEAD",dcs:Count_FarmInventory_Broilers,
+"CORN, GRAIN - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_CornForGrain,
+"CORN, GRAIN - ACRES HARVESTED",dcs:Area_Farm_CornForGrain,dcs:Acre
+"CORN, GRAIN - PRODUCTION, MEASURED IN BU",dcs:Amout_FarmInventory_CornForGrain,dcs:Bushel
+"CORN, SILAGE - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_CornForSilageOrGreenchop,
+"CORN, SILAGE - ACRES HARVESTED",dcs:Area_Farm_CornForSilageOrGreenchop,dcs:Acre
+"CORN, SILAGE - PRODUCTION, MEASURED IN TONS",dcs:Amount_FarmInventory_CornForSilageOrGreenchop,dcs:Ton
+WHEAT - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_WheatForGrain,
+WHEAT - ACRES HARVESTED,dcs:Area_Farm_WheatForGrain,dcs:Acre
+"WHEAT - PRODUCTION, MEASURED IN BU",dcs:Amount_FarmInventory_WheatForGrain,dcs:Bushel
+"WHEAT, SPRING, DURUM - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_DurumWheatForGrain,
+"WHEAT, SPRING, DURUM - ACRES HARVESTED",dcs:Area_Farm_DurumWheatForGrain,dcs:Acre
+"WHEAT, SPRING, DURUM - PRODUCTION, MEASURED IN BU",dcs:Amount_FarmInventory_DurumWheatForGrain,dcs:Bushel
+"WHEAT, SPRING, (EXCL DURUM) - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_OtherSpringWheatForGrain,
+"WHEAT, SPRING, (EXCL DURUM) - ACRES HARVESTED",dcs:Area_Farm_OtherSpringWheatForGrain,dcs:Acre
+"WHEAT, SPRING, (EXCL DURUM) - PRODUCTION, MEASURED IN BU",dcs:Amount_FarmInventory_OtherSpringWheatForGrain,dcs:Bushel
+"WHEAT, WINTER - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_WinterWheatForGrain,
+"WHEAT, WINTER - ACRES HARVESTED",dcs:Area_Farm_WinterWheatForGrain,dcs:Acre
+"WHEAT, WINTER - PRODUCTION, MEASURED IN BU",dcs:AmountFarmInventory_WinterWheatForGrain,dcs:Bushel
+OATS - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_OatsForGrain,
+OATS - ACRES HARVESTED,dcs:Area_Farm_OatsForGrain,dcs:Acre
+"OATS - PRODUCTION, MEASURED IN BU",dcs:Amount_FarmInventory_OatsForGrain,dcs:Bushel
+BARLEY - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_BarleyForGrain,
+BARLEY - ACRES HARVESTED,dcs:Area_Farm_BarleyForGrain,dcs:Acre
+"BARLEY - PRODUCTION, MEASURED IN BU",dcs:Amount_FarmInventory_BarleyForGrain,dcs:Bushel
+"SORGHUM, GRAIN - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_SorghumForGrain,
+"SORGHUM, GRAIN - ACRES HARVESTED",dcs:Area_Farm_SorghumForGrain,dcs:Acre
+"SORGHUM, GRAIN - PRODUCTION, MEASURED IN BU",dcs:Amount_FarmInventory_SorghumForGrain,dcs:Bushel
+"SORGHUM, SILAGE - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_SorghumForSilageOrGreenchop,
+"SORGHUM, SILAGE - ACRES HARVESTED",dcs:Area_Farm_SorghumForSilageOrGreenchop,dcs:Acre
+"SORGHUM, SILAGE - PRODUCTION, MEASURED IN TONS",dcs:Amount_FarmInventory_SorghumForSilageOrGreenchop,dcs:Ton
+"BEANS, DRY EDIBLE, (EXCL CHICKPEAS & LIMA) - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_DryEdibleBeans,
+"BEANS, DRY EDIBLE, (EXCL CHICKPEAS & LIMA) - ACRES HARVESTED",dcs:Area_Farm_DryEdibleBeans,dcs:Acre
+"BEANS, DRY EDIBLE, (EXCL CHICKPEAS & LIMA) - PRODUCTION, MEASURED IN CWT",dcs:Amount_FarmInventory_DryEdibleBeans,dcs:Hundredweight
+COTTON - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_Cotton,
+COTTON - ACRES HARVESTED,dcs:Area_Farm_Cotton,dcs:Acre
+"COTTON - PRODUCTION, MEASURED IN BALES",dcs:Amount_FarmInventory_Cotton,dcs:Bale
+"COTTON, UPLAND - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_UplandCotton,
+"COTTON, UPLAND - ACRES HARVESTED",dcs:Area_Farm_UplandCotton,dcs:Acre
+"COTTON, UPLAND - PRODUCTION, MEASURED IN BALES",dcs:Amount_FarmInventory_UplandCotton,dcs:Bale
+"COTTON, PIMA - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_PimaCotton,
+"COTTON, PIMA - ACRES HARVESTED",dcs:Area_Farm_PimaCotton,dcs:Acre
+"COTTON, PIMA - PRODUCTION, MEASURED IN BALES",dcs:Amount_FarmInventory_PimaCotton,dcs:Bale
+HAY & HAYLAGE - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_Forage,
+HAY & HAYLAGE - ACRES HARVESTED,dcs:Area_Farm_Forage,dcs:Acre
+"HAY & HAYLAGE - PRODUCTION, MEASURED IN TONS, DRY BASIS",dcs:Amount_FarmInventory_Forage,dcs:Ton
+RICE - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_Rice,
+RICE - ACRES HARVESTED,dcs:Area_Farm_Rice,dcs:Acre
+"RICE - PRODUCTION, MEASURED IN CWT",dcs:Amount_FarmInventory_Rice,dcs:Hundredweight
+SUNFLOWER - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_SunflowerSeed,
+SUNFLOWER - ACRES HARVESTED,dcs:Area_Farm_SunflowerSeed,dcs:Acre
+"SUNFLOWER - PRODUCTION, MEASURED IN LB",dcs:Amount_FarmInventory_SunflowerSeed,dcs:Pound
+SUGARBEETS - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_SugarbeetsForSugar,
+SUGARBEETS - ACRES HARVESTED,dcs:Area_Farm_SugarbeetsForSugar,dcs:Acre
+"SUGARBEETS - PRODUCTION, MEASURED IN TONS",dcs:Amount_FarmInventory_SugarbeetsForSugar,dcs:Ton
+PEANUTS - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_PeanutsForNuts,
+PEANUTS - ACRES HARVESTED,dcs:Area_Farm_PeanutsForNuts,dcs:Acre
+"PEANUTS - PRODUCTION, MEASURED IN LB",dcs:Amount_FarmInventory_PeanutsForNuts,dcs:Pound
+"VEGETABLE TOTALS, IN THE OPEN - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_VegetablesHarvestedForSale,
+"VEGETABLE TOTALS, IN THE OPEN - ACRES HARVESTED",dcs:Area_Farm_VegetablesHarvestedForSale,dcs:Acre
+POTATOES - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_Potatoes,
+POTATOES - ACRES HARVESTED,dcs:Area_Farm_Potatoes,dcs:Acre
+SWEET POTATOES - OPERATIONS WITH AREA HARVESTED,dcs:Count_Farm_SweetPotatoes,
+SWEET POTATOES - ACRES HARVESTED,dcs:Area_Farm_SweetPotatoes,dcs:Acre
+ORCHARDS - OPERATIONS WITH AREA BEARING & NON-BEARING,dcs:Count_Farm_Orchards,
+ORCHARDS - ACRES BEARING & NON-BEARING,dcs:Area_Farm_Orchards,dcs:Acre
+"PRODUCERS, HISPANIC - NUMBER OF OPERATIONS",dcs:Count_Farm_Producer_HispanicOrLatino,
+"PRODUCERS, HISPANIC - NUMBER OF PRODUCERS",dcs:Count_Person_Producer_HispanicOrLatino,
+"PRODUCERS, HISPANIC - ACRES OPERATED",dcs:Area_Farm_Producer_HispanicOrLatino,dcs:Acre
+"PRODUCERS, PRINCIPAL, HISPANIC - NUMBER OF OPERATIONS",dcs:Count_Farm_PrimaryProducer_HispanicOrLatino,
+"PRODUCERS, PRINCIPAL, HISPANIC - ACRES OPERATED",dcs:Area_Farm_PrimaryProducer_HispanicOrLatino,dcs:Acre
+"PRODUCERS, AMERICAN INDIAN OR ALASKA NATIVE - NUMBER OF OPERATIONS",dcs:Count_Farm_Producer_AmericanIndianOrAlaskaNativeAlone,
+"PRODUCERS, AMERICAN INDIAN OR ALASKA NATIVE - NUMBER OF PRODUCERS",dcs:Count_Person_Producer_AmericanIndianOrAlaskaNativeAlone,
+"PRODUCERS, AMERICAN INDIAN OR ALASKA NATIVE - ACRES OPERATED",dcs:Area_Farm_Producer_AmericanIndianOrAlaskaNativeAlone,dcs:Acre
+"PRODUCERS, PRINCIPAL, AMERICAN INDIAN OR ALASKA NATIVE - NUMBER OF OPERATIONS",dcs:Count_Farm_PrimaryProducer_AmericanIndianOrAlaskaNativeAlone,
+"PRODUCERS, PRINCIPAL, AMERICAN INDIAN OR ALASKA NATIVE - ACRES OPERATED",dcs:Area_Farm_PrimaryProducer_AmericanIndianOrAlaskaNativeAlone,dcs:Acre
+"PRODUCERS, ASIAN - NUMBER OF OPERATIONS",dcs:Count_Farm_Producer_AsianAlone,
+"PRODUCERS, ASIAN - NUMBER OF PRODUCERS",dcs:Count_Person_Producer_AsianAlone,
+"PRODUCERS, ASIAN - ACRES OPERATED",dcs:Area_Farm_Producer_AsianAlone,dcs:Acre
+"PRODUCERS, PRINCIPAL, ASIAN - NUMBER OF OPERATIONS",dcs:Count_Farm_PrimaryProducer_AsianAlone,
+"PRODUCERS, PRINCIPAL, ASIAN - ACRES OPERATED",dcs:Area_Farm_PrimaryProducer_AsianAlone,dcs:Acre
+"PRODUCERS, BLACK OR AFRICAN AMERICAN - NUMBER OF OPERATIONS",dcs:Count_Farm_Producer_BlackOrAfricanAmericanAlone,
+"PRODUCERS, BLACK OR AFRICAN AMERICAN - NUMBER OF PRODUCERS",dcs:Count_Person_Producer_BlackOrAfricanAmericanAlone,
+"PRODUCERS, BLACK OR AFRICAN AMERICAN - ACRES OPERATED",dcs:Area_Farm_Producer_BlackOrAfricanAmericanAlone,dcs:Acre
+"PRODUCERS, PRINCIPAL, BLACK OR AFRICAN AMERICAN - NUMBER OF OPERATIONS",dcs:Count_Farm_PrimaryProducer_BlackOrAfricanAmericanAlone,
+"PRODUCERS, PRINCIPAL, BLACK OR AFRICAN AMERICAN - ACRES OPERATED",dcs:Area_Farm_PrimaryProducer_BlackOrAfricanAmericanAlone,dcs:Acre
+"PRODUCERS, NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER - NUMBER OF OPERATIONS",dcs:Count_Farm_Producer_NativeHawaiianOrOtherPacificIslanderAlone,
+"PRODUCERS, NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER - NUMBER OF PRODUCERS",dcs:Count_Person_Producer_NativeHawaiianOrOtherPacificIslanderAlone,
+"PRODUCERS, NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER - ACRES OPERATED",dcs:Area_Farm_Producer_NativeHawaiianOrOtherPacificIslanderAlone,dcs:Acre
+"PRODUCERS, PRINCIPAL, NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER - NUMBER OF OPERATIONS",dcs:Count_Farm_PrimaryProducer_NativeHawaiianOrOtherPacificIslanderAlone,
+"PRODUCERS, PRINCIPAL, NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER - ACRES OPERATED",dcs:Area_Farm_PrimaryProducer_NativeHawaiianOrOtherPacificIslanderAlone,dcs:Acre
+"PRODUCERS, WHITE - NUMBER OF OPERATIONS",dcs:Count_Farm_Producer_WhiteAlone,
+"PRODUCERS, WHITE - NUMBER OF PRODUCERS",dcs:Count_Person_Producer_WhiteAlone,
+"PRODUCERS, WHITE - ACRES OPERATED",dcs:Area_Farm_Producer_WhiteAlone,dcs:Acre
+"PRODUCERS, PRINCIPAL, WHITE - NUMBER OF OPERATIONS",dcs:Count_Farm_PrimaryProducer_WhiteAlone,
+"PRODUCERS, PRINCIPAL, WHITE - ACRES OPERATED",dcs:Area_Farm_PrimaryProducer_WhiteAlone,dcs:Acre
+"PRODUCERS, MULTI-RACE - NUMBER OF OPERATIONS",dcs:Count_Farm_Producer_TwoOrMoreRaces,
+"PRODUCERS, MULTI-RACE - NUMBER OF PRODUCERS",dcs:Count_Person_Producer_TwoOrMoreRaces,
+"PRODUCERS, MULTI-RACE - ACRES OPERATED",dcs:Area_Farm_Producer_TwoOrMoreRaces,dcs:Acre
+"PRODUCERS, PRINCIPAL, MULTI-RACE - NUMBER OF OPERATIONS",dcs:Count_Farm_PrimaryProducer_TwoOrMoreRaces,
+"PRODUCERS, PRINCIPAL, MULTI-RACE - ACRES OPERATED",dcs:Area_Farm_PrimaryProducer_TwoOrMoreRaces,dcs:Acre

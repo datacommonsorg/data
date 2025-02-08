@@ -1,0 +1,35 @@
+Node: cpcb_air_quality/E17/944d9e6d-ec38-4e61-175a-9bbabfd35f97
+observationDate: "2024-09-24T12:00:00"
+unit: dcid:MicrogramsPerCubicMeter
+observationAbout: dcid:cpcpAq/Secretariat_Amaravati___APPCB
+variableMeasured: dcid:Max_Concentration_AirPollutant_Ozone
+value: 53.0
+typeOf: dcid:StatVarObservation
+dcid: "dc/o/bhdp3vy7dee0d"
+
+Node: cpcb_air_quality/E18/944d9e6d-ec38-4e61-175a-9bbabfd35f97
+observationDate: "2024-09-24T12:00:00"
+unit: dcid:MicrogramsPerCubicMeter
+observationAbout: dcid:cpcpAq/Secretariat_Amaravati___APPCB
+variableMeasured: dcid:Mean_Concentration_AirPollutant_Ozone
+value: 28.0
+typeOf: dcid:StatVarObservation
+dcid: "dc/o/8e11gqvkt183b"
+
+Node: cpcb_air_quality/E15/944d9e6d-ec38-4e61-175a-9bbabfd35f97
+observationDate: "2024-09-24T12:00:00"
+unit: dcid:MicrogramsPerCubicMeter
+observationAbout: dcid:cpcpAq/Secretariat_Amaravati___IMD
+variableMeasured: dcid:Mean_Concentration_AirPollutant_CO
+value: 42.0
+typeOf: dcid:StatVarObservation
+dcid: "dc/o/h1sjhdxycwwmc"
+
+Node: cpcb_air_quality/E15/944d9e6d-ec38-4e61-175a-9bbabfd35f97
+observationDate: "2024-09-25T12:00:00"
+unit: dcid:MicrogramsPerCubicMeter
+observationAbout: dcid:cpcpAq/Secretariat_Amaravati___IMD
+variableMeasured: dcid:Mean_Concentration_AirPollutant_CO
+value: 40.0
+typeOf: dcid:StatVarObservation
+dcid: "dc/o/h1sjhdxycwwmc"

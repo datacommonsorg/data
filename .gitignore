@@ -8,3 +8,11 @@ __pycache__/
 .idea/
 *.iml
 **/tmp/
+dc_generated/
+# Ignore the data folder under the un_census/enhanced_tmcf/ directory.
+*/*/*/data/*
+lib/
+bin/
+pyvenv.cfg
+# Ignore updates to the local configs json file.
+import-automation/executor/config_override.json

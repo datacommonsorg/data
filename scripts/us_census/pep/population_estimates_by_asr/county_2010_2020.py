@@ -27,8 +27,12 @@ def county2010(url_file: str, output_folder: str):
     '''
     _url = input_url(url_file, "2010-20")
     df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
+    #Writing raw data to csv
+    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           "raw_data", 'raw_data_county_2010_2020.csv'),
+              index=False)
     # Filter by agegrp = 0.
-    df = df.query("YEAR not in [1, 2, 13]")
+    df = df.query("YEAR not in [1, 2, 13, 14]")
     df = df.query("AGEGRP != 0")
     # Filter years 3 - 14.
     df['YEAR'] = df['YEAR'].astype(str)
@@ -43,8 +47,7 @@ def county2010(url_file: str, output_folder: str):
             '9': '2016',
             '10': '2017',
             '11': '2018',
-            '12': '2019',
-            '14': '2020'
+            '12': '2019'
         }
     })
     df.insert(6, 'geo_ID', 'geoId/', True)

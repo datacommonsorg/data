@@ -1,0 +1,10 @@
+Node: E:simple_processed->E0
+typeOf: schema:Place
+dcid: C:simple_processed->GEO_ID
+
+Node: E:simple_processed->E1
+typeOf: schema:StatVarObservation
+value: C:simple_processed->B01001_001E
+variableMeasured: T:Estimate!!Total
+observationAbout: E:simple_processed->E0
+observationDate: "2020"

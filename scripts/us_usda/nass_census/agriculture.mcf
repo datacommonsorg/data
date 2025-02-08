@@ -1,0 +1,1676 @@
+Node: dcid:Count_Farm
+description: "Number of farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+
+Node: dcid:Area_Farm
+description: "Area of farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+
+Node: dcid:Mean_Area_Farm
+description: "Mean area of farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:meanValue
+
+Node: dcid:Median_Area_Farm
+description: "Median area of farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:medianValue
+
+Node: dcid:Mean_MarketValue_Farm_LandAndBuildings
+description: "Mean market value of farm land and buildings."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:marketValue
+statType: dcs:meanValue
+farmInventoryType: dcs:LandAndBuildings
+
+Node: dcid:MarketValue_Farm_MachineryAndEquipment
+description: "Market value of farm machinery and equipment."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:marketValue
+statType: dcs:measuredValue
+farmInventoryType: dcs:MachineryAndEquipment
+
+Node: dcid:Mean_MarketValue_Farm_MachineryAndEquipment
+description: "Mean market value of farm machinery and equipment."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:marketValue
+statType: dcs:meanValue
+farmInventoryType: dcs:MachineryAndEquipment
+
+Node: dcid:Count_Farm_1To9.9Acre
+description: "Number of farms of size 1-9.9 acres."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmSize: [Acre 1 9.9]
+
+Node: dcid:Count_Farm_10To49.9Acre
+description: "Number of farms of size 10-49.9 acres."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmSize: [Acre 10 49.9]
+
+Node: dcid:Count_Farm_50To179Acre
+description: "Number of farms of size 50-179 acres."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmSize: [Acre 50 179]
+
+Node: dcid:Count_Farm_180To499Acre
+description: "Number of farms of size 180-499 acres."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmSize: [Acre 180 499]
+
+Node: dcid:Count_Farm_500To999Acre
+description: "Number of farms of size 500-999 acres."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmSize: [Acre 500 999]
+
+Node: dcid:Count_1000OnwardsAcre
+description: "Number of farms of size 1000 or more acres."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmSize: [Acre 1000 -]
+
+Node: dcid:Count_Farm_Cropland
+description: "Numberu of farms with cropland."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmType: dcs:Cropland
+
+Node: dcid:Area_Farm_Cropland
+description: "Area of farms with cropland."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmType: dcs:Cropland
+
+Node: dcid:Count_Farm_HarvestedCropland
+description: "Number of farms with harvested cropland."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmType: dcs:HarvestedCropland
+
+Node: dcid:Area_Farm_HarvestedCropland
+description: "Area of farms with harvested cropland."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmType: dcs:HarvestedCropland
+
+Node: dcid:Count_Farm_IrrigatedLand
+description: "Number of farms with irrigated land."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmType: dcs:IrrigatedLand
+
+Node: dcid:Area_Farm_IrrigatedLand
+description: "Area of farms with irrigated land."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmType: dcs:IrrigatedLand
+
+Node: dcid:MarketValue_Farm_AgriculturalProducts
+description: "Market value of farm agricultural products."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:marketValue
+statType: dcs:measuredValue
+farmInventoryType: dcs:AgriculturalProducts
+
+Node: dcid:Mean_MarketValue_Farm_AgriculturalProducts
+description: "Mean market value of farm agricultural products."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:marketValue
+statType: dcs:meanValue
+farmInventoryType: dcs:AgriculturalProducts
+
+Node: dcid:MarketValue_Farm_Crops
+description: "Market value of farm crops."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:marketValue
+statType: dcs:measuredValue
+farmInventoryType: dcs:Crops
+
+Node: dcid:MarketValue_Farm_LivestockAndPoultry
+description: "Market value of farm livestock and poultry."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:marketValue
+statType: dcs:measuredValue
+farmInventoryType: dcs:LivestockAndPoultry
+
+Node: dcid:Count_Farm_Upto1000USDollar
+description: "Number of farms with value of sales up to $1000."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+valueOfSales: [USDollar - 1000]
+
+Node: dcid:Count_Farm_2500To4999USDollar
+description: "Number of farms with value of sales $2500 - $4999."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+valueOfSales: [USDollar 2500 4999]
+
+Node: dcid:Count_Farm_5000To9999USDollar
+description: "Number of farms with value of sales 5000 - $9999."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+valueOfSales: [USDollar 5000 9999]
+
+Node: dcid:Count_Farm_10000To24999USDollar
+description: "Number of farms with value of sales $10000 - $24999."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+valueOfSales: [USDollar 10000 24999]
+
+Node: dcid:Count_Farm_25000To49999USDollar
+description: "Number of farms with value of sales $25009 - $49999."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+valueOfSales: [USDollar 25000 49999]
+
+Node: dcid:Count_Farm_50000To99999USDollar
+description: "Number of farms with value of sales $50000 - $99999."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+valueOfSales: [USDollar 50000 99999]
+
+Node: dcid:Count_Farm_100000OnwardsUSDollar
+description: "Number of farms with value of sales $10000 or more."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+valueOfSales: [USDollar 100000 -]
+
+Node: dcid:Count_Farm_ReceivedGovernmentPayment
+description: "Number of farms that received government payments."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+governmentPaymentStatus: dcs:GovernmentPayment
+
+Node: dcid:MonetaryValue_Farm_GovernmentPayment
+description: "Value of government payments to farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:monetaryValue
+statType: dcs:measuredValue
+governmentPaymentStatus: dcs:GovernmentPayment
+
+Node: dcid:Count_Farm_ReportedIncome
+description: "Number of farms that reported income."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+incomeStatus: dcs:ReportedIncome
+
+Node: dcid:Income_Farm
+description: "Income from farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:income
+statType: dcs:measuredValue
+
+Node: dcid:Expenses_Farm
+description: "Farm expenses."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:expenses
+statType: dcs:measuredValue
+
+Node: dcid:Mean_Expenses_Farm
+description: "Mean farm expenses."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:expenses
+statType: dcs:meanValue
+
+Node: dcid:Count_Farm_ReportedNetIncome
+description: "Number of farms that reported net income."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+incomeStatus: dcs:ReportedNetIncome
+
+Node: dcid:NetMeasure_Income_Farm
+description: "Net income from farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:income
+statType: dcs:measuredValue
+measurementQualifier: dcs:NetMeasure
+
+Node: dcid:Mean_NetMeasure_Income_Farm
+description: "Mean net income from farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:income
+statType: dcs:meanValue
+measurementQualifier: dcs:NetMeasure
+
+Node: dcid:Count_Farm_CattleAndCalves
+description: "Number of farms with cattle and calves."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:CattleAndCalves
+
+Node: dcid:Count_FarmInventory_CattleAndCalves
+description: "Number of cattle and calves on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:CattleAndCalves
+
+Node: dcid:Count_Farm_BeefCows
+description: "Number of farms with beef cows."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:BeefCows
+
+Node: dcid:Count_FarmInventory_BeefCows
+description: "Number of beef cows on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:BeefCows
+
+Node: dcid:Count_Farm_MilkCows
+description: "Number of farms with milke cows."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:MilkCows
+
+Node: dcid:Count_FarmInventory_MilkCows
+description: "Number of milk cows on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:MilkCows
+
+Node: dcid:Count_Farm_InventorySold_CattleAndCalves
+description: "Number of farms that sold cattle and calves."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryStatus: dcs:InventorySold
+farmInventoryType: dcs:CattleAndCalves
+
+Node: dcid:QuantitySold_FarmInventory_CattleAndCalves
+description: "Number of cattle and calves sold froms farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:quantitySold
+statType: dcs:measuredValue
+farmInventoryType: dcs:CattleAndCalves
+
+Node: dcid:Count_Farm_HogsAndPigs
+description: "Number of farms with hogs and pigs."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:HogsAndPigs
+
+Node: dcid:Count_FarmInventory_HogsAndPigs
+description: "Number of hogs and pigs on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:HogsAndPigs
+
+Node: dcid:Count_Farm_InventorySold_HogsAndPigs
+description: "Number of farms that sold hogs and pigs."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryStatus: dcs:InventorySold
+farmInventoryType: dcs:HogsAndPigs
+
+Node: dcid:QuantitySold_FarmInventory_HogsAndPigs
+description: "Number of hogs and pigs sold froms farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:quantitySold
+statType: dcs:measuredValue
+farmInventoryType: dcs:HogsAndPigs
+
+Node: dcid:Count_Farm_SheepAndLambs
+description: "Number of farms with sheep and lambs."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:SheepAndLambs
+
+Node: dcid:Count_FarmInventory_SheepAndLambs
+description: "Number of sheep and lambs on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:SheepAndLambs
+
+Node: dcid:Count_Farm_Layers
+description: "Number of farms with layers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:Layers
+
+Node: dcid:Count_FarmInventory_Layers
+description: "Number of layers on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:Layers
+
+Node: dcid:Count_Farm_Broilers
+description: "Number of farms with broilers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:Broilers
+
+Node: dcid:Count_FarmInventory_Broilers
+description: "Number of broilers on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:Broilers
+
+Node: dcid:Count_Farm_CornForGrain
+description: "Number of farms with corn for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:CornForGrain
+
+Node: dcid:Area_Farm_CornForGrain
+description: "Area of farms with corn for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:CornForGrain
+
+Node: dcid:Amout_FarmInventory_CornForGrain
+description: "Amount of corn for grain on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:CornForGrain
+
+Node: dcid:Count_Farm_CornForSilageOrGreenchop
+description: "Number of farms with corn for silage or greenchop."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:CornForSilageOrGreenchop
+
+Node: dcid:Area_Farm_CornForSilageOrGreenchop
+description: "Area of farms with corn for silage or greenchop."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:CornForSilageOrGreenchop
+
+Node: dcid:Amount_FarmInventory_CornForSilageOrGreenchop
+description: "Amount of corn for silage or greenchop on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:CornForSilageOrGreenchop
+
+Node: dcid:Count_Farm_WheatForGrain
+description: "Number of farms with wheat for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:WheatForGrain
+
+Node: dcid:Area_Farm_WheatForGrain
+description: "Area of farms with wheat for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:WheatForGrain
+
+Node: dcid:Amount_FarmInventory_WheatForGrain
+description: "Amount of wheat for grain on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:WheatForGrain
+
+Node: dcid:Count_Farm_DurumWheatForGrain
+description: "Number of farms with durum wheat for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:DurumWheatForGrain
+
+Node: dcid:Area_Farm_DurumWheatForGrain
+description: "Area of farms with durum wheat for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:DurumWheatForGrain
+
+Node: dcid:Amount_FarmInventory_DurumWheatForGrain
+description: "Amount of durum wheat for grain on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:DurumWheatForGrain
+
+Node: dcid:Count_Farm_OtherSpringWheatForGrain
+description: "Number of farms with other spring wheat for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:OtherSpringWheatForGrain
+
+Node: dcid:Area_Farm_OtherSpringWheatForGrain
+description: "Area of farms with other spring wheat for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:OtherSpringWheatForGrain
+
+Node: dcid:Amount_FarmInventory_OtherSpringWheatForGrain
+description: "Amount of other spring wheat for grain on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:OtherSpringWheatForGrain
+
+Node: dcid:Count_Farm_WinterWheatForGrain
+description: "Number of farms with winter wheat for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:WinterWheatForGrain
+
+Node: dcid:Area_Farm_WinterWheatForGrain
+description: "Area of farms with winter wheat for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:WinterWheatForGrain
+
+Node: dcid:AmountFarmInventory_WinterWheatForGrain
+description: "Amount of winter wheat for grain on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:WinterWheatForGrain
+
+Node: dcid:Count_Farm_OatsForGrain
+description: "Number of farms with oats for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:OatsForGrain
+
+Node: dcid:Area_Farm_OatsForGrain
+description: "Area of farms with oats for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:OatsForGrain
+
+Node: dcid:Amount_FarmInventory_OatsForGrain
+description: "Amount of oats for grain on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:OatsForGrain
+
+Node: dcid:Count_Farm_BarleyForGrain
+description: "Number of farms with barley for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:BarleyForGrain
+
+Node: dcid:Area_Farm_BarleyForGrain
+description: "Area of farms with barley for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:BarleyForGrain
+
+Node: dcid:Amount_FarmInventory_BarleyForGrain
+description: "Amount of barley for grain on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:BarleyForGrain
+
+Node: dcid:Count_Farm_SorghumForGrain
+description: "Number of farms with sorghum for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:SorghumForGrain
+
+Node: dcid:Area_Farm_SorghumForGrain
+description: "Area of farms with sorghum for grain."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:SorghumForGrain
+
+Node: dcid:Amount_FarmInventory_SorghumForGrain
+description: "Amount of sorghum for grain on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:SorghumForGrain
+
+Node: dcid:Count_Farm_SorghumForSilageOrGreenchop
+description: "Number of farms with sorghum for silage or greenchop."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:SorghumForSilageOrGreenchop
+
+Node: dcid:Area_Farm_SorghumForSilageOrGreenchop
+description: "Area of farms with sorghum for silage or greenchop."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:SorghumForSilageOrGreenchop
+
+Node: dcid:Amount_FarmInventory_SorghumForSilageOrGreenchop
+description: "Amount of sorghum for silage or greenchop on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:SorghumForSilageOrGreenchop
+
+Node: dcid:Count_Farm_DryEdibleBeans
+description: "Number of farms with dry edible beans."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:DryEdibleBeans
+
+Node: dcid:Area_Farm_DryEdibleBeans
+description: "Area of farms with dry edible beans."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:DryEdibleBeans
+
+Node: dcid:Amount_FarmInventory_DryEdibleBeans
+description: "Amount of dry edible beans on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:DryEdibleBeans
+
+Node: dcid:Count_Farm_Cotton
+description: "Number of farms with cotton."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:Cotton
+
+Node: dcid:Area_Farm_Cotton
+description: "Area of farms with cotton."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:Cotton
+
+Node: dcid:Amount_FarmInventory_Cotton
+description: "Amount of cotton on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:Cotton
+
+Node: dcid:Count_Farm_UplandCotton
+description: "Number of farms with upland cotton."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:UplandCotton
+
+Node: dcid:Area_Farm_UplandCotton
+description: "Area of farms with upland cotton."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:UplandCotton
+
+Node: dcid:Amount_FarmInventory_UplandCotton
+description: "Amount of upland cotton on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:UplandCotton
+
+Node: dcid:Count_Farm_PimaCotton
+description: "Number of farms with pima cotton."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:PimaCotton
+
+Node: dcid:Area_Farm_PimaCotton
+description: "Area of farms with pima cotton."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:PimaCotton
+
+Node: dcid:Amount_FarmInventory_PimaCotton
+description: "Amount of pima cotton on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:PimaCotton
+
+Node: dcid:Count_Farm_Forage
+description: "Number of farms with forage."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:Forage
+
+Node: dcid:Area_Farm_Forage
+description: "Area of farms with forage."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:Forage
+
+Node: dcid:Amount_FarmInventory_Forage
+description: "Amount of forage on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:Forage
+
+Node: dcid:Count_Farm_Rice
+description: "Number of farms with rice."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:Rice
+
+Node: dcid:Area_Farm_Rice
+description: "Area of farms with rice."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:Rice
+
+Node: dcid:Amount_FarmInventory_Rice
+description: "Amount of forage on rice."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:Rice
+
+Node: dcid:Count_Farm_SunflowerSeed
+description: "Number of farms with sunflower seed."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:SunflowerSeed
+
+Node: dcid:Area_Farm_SunflowerSeed
+description: "Area of farms with sunflower seed."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:SunflowerSeed
+
+Node: dcid:Amount_FarmInventory_SunflowerSeed
+description: "Amount of forage on sunflower seed."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:SunflowerSeed
+
+Node: dcid:Count_Farm_SugarbeetsForSugar
+description: "Number of farms with sugarbeets for sugar."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:SugarbeetsForSugar
+
+Node: dcid:Area_Farm_SugarbeetsForSugar
+description: "Area of farms with sugarbeets for sugar."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:SugarbeetsForSugar
+
+Node: dcid:Amount_FarmInventory_SugarbeetsForSugar
+description: "Amount of forage on sugarbeets for sugar."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:SugarbeetsForSugar
+
+Node: dcid:Count_Farm_PeanutsForNuts
+description: "Number of farms with peanuts for nuts."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:PeanutsForNuts
+
+Node: dcid:Area_Farm_PeanutsForNuts
+description: "Area of farms with peanuts for nuts."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:PeanutsForNuts
+
+Node: dcid:Amount_FarmInventory_PeanutsForNuts
+description: "Amount of peanuts for nuts on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:FarmInventory
+measuredProperty: dcs:amount
+statType: dcs:measuredValue
+farmInventoryType: dcs:PeanutsForNuts
+
+Node: dcid:Count_Farm_VegetablesHarvestedForSale
+description: "Number of farms with vegetables harvested for sale."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:VegetablesHarvestedForSale
+
+Node: dcid:Area_Farm_VegetablesHarvestedForSale
+description: "Area of farms with vegetables harvested for sale."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:VegetablesHarvestedForSale
+
+Node: dcid:Count_Farm_Potatoes
+description: "Number of farms with potatoes."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:Potatoes
+
+Node: dcid:Area_Farm_Potatoes
+description: "Area of farms with potatoes."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:Potatoes
+
+Node: dcid:Count_Farm_SweetPotatoes
+description: "Number of farms with sweet potatoes."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:SweetPotatoes
+
+Node: dcid:Area_Farm_SweetPotatoes
+description: "Area of farms with sweet potatoes."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:SweetPotatoes
+
+Node: dcid:Count_Farm_Orchards
+description: "Number of farms with orchards."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+farmInventoryType: dcs:Orchards
+
+Node: dcid:Area_Farm_Orchards
+description: "Area of farms with orchards."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+farmInventoryType: dcs:Orchards
+
+Node: dcid:Count_Farm_Producer_HispanicOrLatino
+description: "Number of farms with Hispanic or Latino producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:HispanicOrLatino
+
+Node: dcid:Count_Person_Producer_HispanicOrLatino
+description: "Number of Hispanic or Latino producers on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:HispanicOrLatino
+
+Node: dcid:Area_Farm_Producer_HispanicOrLatino
+description: "Area of farms with Hispanic or Latino producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:HispanicOrLatino
+
+Node: dcid:Count_Farm_PrimaryProducer_HispanicOrLatino
+description: "Number of farms with Hispanic or Latino primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:HispanicOrLatino
+
+Node: dcid:Area_Farm_PrimaryProducer_HispanicOrLatino
+description: "Area of farms with Hispanic or Latino primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:HispanicOrLatino
+
+Node: dcid:Count_Farm_Producer_AmericanIndianOrAlaskaNativeAlone
+description: "Number of farms with American Indian or Alaska Native producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+
+Node: dcid:Count_Person_Producer_AmericanIndianOrAlaskaNativeAlone
+description: "Number of American Indian or Alaska Native producers on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+
+Node: dcid:Area_Farm_Producer_AmericanIndianOrAlaskaNativeAlone
+description: "Area of farms with American Indian or Alaska Native producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+
+Node: dcid:Count_Farm_PrimaryProducer_AmericanIndianOrAlaskaNativeAlone
+description: "Number of farms with American Indian or Alaska Native primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+
+Node: dcid:Area_Farm_PrimaryProducer_AmericanIndianOrAlaskaNativeAlone
+description: "Area of farms with American Indian or Alaska Native primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:AmericanIndianOrAlaskaNativeAlone
+
+Node: dcid:Count_Farm_Producer_AsianAlone
+description: "Number of farms with Asian producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:AsianAlone
+
+Node: dcid:Count_Person_Producer_AsianAlone
+description: "Number of Asian producers on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:AsianAlone
+
+Node: dcid:Area_Farm_Producer_AsianAlone
+description: "Area of farms with Asian producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:AsianAlone
+
+Node: dcid:Count_Farm_PrimaryProducer_AsianAlone
+description: "Number of farms with Asian primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:AsianAlone
+
+Node: dcid:Area_Farm_PrimaryProducer_AsianAlone
+description: "Area of farms with Asian primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:AsianAlone
+
+Node: dcid:Count_Farm_Producer_BlackOrAfricanAmericanAlone
+description: "Number of farms with Black or African American producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Person_Producer_BlackOrAfricanAmericanAlone
+description: "Number of Black or African American producers on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:BlackOrAfricanAmericanAlone
+
+Node: dcid:Area_Farm_Producer_BlackOrAfricanAmericanAlone
+description: "Area of farms with Black or African American producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Farm_PrimaryProducer_BlackOrAfricanAmericanAlone
+description: "Number of farms with Black or African American priamry producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:BlackOrAfricanAmericanAlone
+
+Node: dcid:Area_Farm_PrimaryProducer_BlackOrAfricanAmericanAlone
+description: "Area of farms with Black or African American primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:BlackOrAfricanAmericanAlone
+
+Node: dcid:Count_Farm_Producer_NativeHawaiianOrOtherPacificIslanderAlone
+description: "Number of farms with Native Hawaiian or other Pacific Islander producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Person_Producer_NativeHawaiianOrOtherPacificIslanderAlone
+description: "Number of Native Hawaiian or other Pacific Islander producers on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Area_Farm_Producer_NativeHawaiianOrOtherPacificIslanderAlone
+description: "Area of farms with Native Hawaiian or other Pacific Islander producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Farm_PrimaryProducer_NativeHawaiianOrOtherPacificIslanderAlone
+description: "Number of farms with Native Hawaiian or other Pacific Islander primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Area_Farm_PrimaryProducer_NativeHawaiianOrOtherPacificIslanderAlone
+description: "Area of farms with Native Hawaiian or other Pacific Islander primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:NativeHawaiianOrOtherPacificIslanderAlone
+
+Node: dcid:Count_Farm_Producer_WhiteAlone
+description: "Number of farms with White producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:WhiteAlone
+
+Node: dcid:Count_Person_Producer_WhiteAlone
+description: "Number of White producers on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:WhiteAlone
+
+Node: dcid:Area_Farm_Producer_WhiteAlone
+description: "Area of farms with White producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:WhiteAlone
+
+Node: dcid:Count_Farm_PrimaryProducer_WhiteAlone
+description: "Number of farms with White primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:WhiteAlone
+
+Node: dcid:Area_Farm_PrimaryProducer_WhiteAlone
+description: "Area of farms with White primary producers."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:WhiteAlone
+
+Node: dcid:Count_Farm_Producer_TwoOrMoreRaces
+description: "Number of farms with producers of two or more races."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:TwoOrMoreRaces
+
+Node: dcid:Count_Person_Producer_TwoOrMoreRaces
+description: "Number of producers of two of more races on farms."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:TwoOrMoreRaces
+
+Node: dcid:Area_Farm_Producer_TwoOrMoreRaces
+description: "Area of farms with producers of two or more races."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:Producer
+race: dcs:TwoOrMoreRaces
+
+Node: dcid:Count_Farm_PrimaryProducer_TwoOrMoreRaces
+description: "Number of farms with primary producers of two or more races."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:TwoOrMoreRaces
+
+Node: dcid:Area_Farm_PrimaryProducer_TwoOrMoreRaces
+description: "Area of farms with primary producers of two or more races."
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Farm
+measuredProperty: dcs:area
+statType: dcs:measuredValue
+ownershipStatus: dcs:PrimaryProducer
+race: dcs:TwoOrMoreRaces
+
+## Classes
+
+Node: dcid:Farm
+typeOf: schema:Class
+description: "An area of land and its buildings used for growing crops and rearing animals."
+subClassOf: schema:Place
+name: "Farm"
+
+Node: dcid:FarmInventory
+typeOf: schema:Class
+description: "Something grown or produced on a farm."
+subClassOf: schema:Thing
+name: "FarmInventory"
+
+Node: dcid:Bushel
+typeOf: dcs:VolumeUnitOfMeasure
+description: "A measure of capacity equal to 64 US pints (equivalent to 35.2 liters), used for dry goods."
+name: "Bushel"
+
+Node: dcid:Bale
+typeOf: dcs:VolumeUnitOfMeasure
+description: "A bundle of paper, hay, cotton, etc., tightly wrapped and bound with cords or hoops."
+name: "Bale"
+
+Node: dcid:Ton
+typeOf: dcs:WeightUnitOfMeasure
+description: "A unit of weight equal to 2,000 pounds avoirdupois (907.19 kg)."
+name: "Ton"
+
+Node: dcid:Pound
+typeOf: dcs:WeightUnitOfMeasure
+description: "A unit of weight in general use equal to 16 oz. avoirdupois (0.4536 kg)."
+name: "Pound"
+
+Node: dcid:Hundredweight
+typeOf: dcs:WeightUnitOfMeasure
+description: "A unit of weight equal to 100 lb avoirdupois (about 45.4 kg)."
+name: "Hundredweight"
+
+Node: dcid:USDollarPerFarm
+typeOf: dcs:CurrencyUnitOfMeasure
+name: "USDollarPerFarm"
+
+Node: dcid:USDollarPerAcre
+typeOf: dcs:CurrencyUnitOfMeasure
+name: "USDollarPerAcre"
+
+## Properties
+
+Node: dcid:marketValue
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:Quantity
+name: "marketValue"
+
+Node: dcid:farmSize
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:QuantityRange
+name: "farmSize"
+
+Node: dcid:valueOfSales
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:QuantityRange
+name: "valueOfSales"
+
+Node: dcid:farmType
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:FarmTypeEnum
+name: "farmType"
+
+Node: dcid:governmentPaymentStatus
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:GovernmentPaymentStatusEnum
+name: "governmentPaymentStatus"
+
+Node: dcid:incomeStatus
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:IncomeStatusEnum
+name: "incomeStatus"
+
+Node: dcid:expenses
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:Quantity
+name: "expenses"
+
+Node: dcid:farmInventoryType
+typeOf: schema:Property
+domainIncludes: dcs:Farm, dcs:FarmInventory
+rangeIncludes: dcs:FarmInventoryTypeEnum
+name: "farmInventoryType"
+
+Node: dcid:quantitySold
+typeOf: schema:Property
+domainIncludes: dcs:FarmInventory
+rangeIncludes: dcs:Quantity
+name: "quantitySold"
+
+Node: dcid:farmInventoryStatus
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:FarmInventoryStatusEnum
+name: "farmInventoryStatus"
+
+Node: dcid:ownershipStatus
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+rangeIncludes: dcs:OwnershipStatusEnum
+name: "ownershipStatus"
+
+Node: dcid:amount
+typeOf: schema:Property
+domainIncludes: dcs:FarmInventory
+
+Node: dcid:area
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+
+Node: dcid:income
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+
+Node: dcid:monetaryValue
+typeOf: schema:Property
+domainIncludes: dcs:Farm
+
+## Enums
+
+Node: dcid:FarmTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "FarmTypeEnum"
+
+Node: dcid:Cropland
+typeOf: dcs:FarmTypeEnum
+name: "Cropland"
+
+Node: dcid:HarvestedCropland
+typeOf: dcs:FarmTypeEnum
+name: "HarvestedCropland"
+specializationOf: dcs:Cropland
+
+Node: dcid:IrrigatedLand
+typeOf: dcs:FarmTypeEnum
+name: "IrrigatedLand"
+
+Node: dcid:GovernmentPaymentStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "GovernmentPaymentStatusEnum"
+
+Node: dcid:GovernmentPayment
+typeOf: dcs:GovernmentPaymentStatusEnum
+name: "GovernmentPayment"
+
+Node: dcid:IncomePaymentStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "IncomePaymentStatusEnum"
+
+Node: dcid:ReportedIncome
+typeOf: dcs:IncomePaymentStatusEnum
+name: "ReportedIncome"
+
+Node: dcid:ReportedNetIncome
+typeOf: dcs:IncomePaymentStatusEnum
+name: "ReportedNetIncome"
+
+Node: dcid:IncomeMeasurementEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "IncomeMeasurementEnum"
+
+Node: dcid:NetMeasure
+typeOf: dcs:IncomeMeasurementEnum
+name: "NetMeasure"
+
+Node: dcid:FarmInventoryTypeEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "FarmInventoryTypeEnum"
+
+Node: dcid:LandAndBuildings
+typeOf: dcs:FarmInventoryTypeEnum
+name: "LandAndBuildings"
+
+Node: dcid:MachineryAndEquipment
+typeOf: dcs:FarmInventoryTypeEnum
+name: "MachineryAndEquipment"
+
+Node: dcid:AgriculturalProducts
+typeOf: dcs:FarmInventoryTypeEnum
+name: "AgriculturalProducts"
+
+Node: dcid:LivestockAndPoultry
+typeOf: dcs:FarmInventoryTypeEnum
+name: "LivestockAndPoultry"
+specializationOf: dcs:AgriculturalProducts
+
+Node: dcid:CattleAndCalves
+typeOf: dcs:FarmInventoryTypeEnum
+name: "CattleAndCalves"
+specializationOf: dcs:LivestockAndPoultry
+
+Node: dcid:BeefCows
+typeOf: dcs:FarmInventoryTypeEnum
+name: "BeefCows"
+specializationOf: dcs:CattleAndCalves
+
+Node: dcid:MilkCows
+typeOf: dcs:FarmInventoryTypeEnum
+name: "MilkCows"
+specializationOf: dcs:CattleAndCalves
+
+Node: dcid:HogsAndPigs
+typeOf: dcs:FarmInventoryTypeEnum
+name: "HogsAndPigs"
+specializationOf: dcs:LivestockAndPoultry
+
+Node: dcid:SheepAndLambs
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SheepAndLambs"
+specializationOf: dcs:LivestockAndPoultry
+
+Node: dcid:Layers
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Layers"
+specializationOf: dcs:LivestockAndPoultry
+
+Node: dcid:Broilers
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Broilers"
+specializationOf: dcs:LivestockAndPoultry
+
+Node: dcid:Crops
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Crops"
+specializationOf: dcs:AgriculturalProducts
+
+Node: dcid:Corn
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Corn"
+specializationOf: dcs:Crops
+
+Node: dcid:CornForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "CornForGrain"
+specializationOf: dcs:Corn
+
+Node: dcid:CornForSilageOrGreenchop
+typeOf: dcs:FarmInventoryTypeEnum
+name: "CornForSilageOrGreenchop"
+specializationOf: dcs:Corn
+
+Node: dcid:WheatForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "WheatForGrain"
+specializationOf: dcs:Crops
+
+Node: dcid:DurumWheatForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "DurumWheatForGrain"
+specializationOf: dcs:WheatForGrain
+
+Node: dcid:OtherSpringWheatForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "OtherSpringWheatForGrain"
+specializationOf: dcs:WheatForGrain
+
+Node: dcid:WinterWheatForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "WinterWheatForGrain"
+specializationOf: dcs:WheatForGrain
+
+Node: dcid:OatsForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "OatsForGrain"
+specializationOf: dcs:Crops
+
+Node: dcid:BarleyForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "BarleyForGrain"
+specializationOf: dcs:Crops
+
+Node: dcid:BarleyForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "BarleyForGrain"
+specializationOf: dcs:Crops
+
+Node: dcid:SorghumForGrain
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SorghumForGrain"
+specializationOf: dcs:Crops
+
+Node: dcid:SorghumForSilageOrGreenchop
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SorghumForSilageOrGreenchop"
+specializationOf: dcs:Crops
+
+Node: dcid:DryEdibleBeans
+typeOf: dcs:FarmInventoryTypeEnum
+name: "DryEdibleBeans"
+specializationOf: dcs:Crops
+
+Node: dcid:Cotton
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Cotton"
+specializationOf: dcs:Crops
+
+Node: dcid:UplandCotton
+typeOf: dcs:FarmInventoryTypeEnum
+name: "UplandCotton"
+specializationOf: dcs:Cotton
+
+Node: dcid:PimaCotton
+typeOf: dcs:FarmInventoryTypeEnum
+name: "PimaCotton"
+specializationOf: dcs:Cotton
+
+Node: dcid:Forage
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Forage"
+specializationOf: dcs:Crops
+
+Node: dcid:Rice
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Rice"
+specializationOf: dcs:Crops
+
+Node: dcid:SunflowerSeed
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SunflowerSeed"
+specializationOf: dcs:Crops
+
+Node: dcid:SugarbeetsForSugar
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SugarbeetsForSugar"
+specializationOf: dcs:Crops
+
+Node: dcid:PeanutsForNuts
+typeOf: dcs:FarmInventoryTypeEnum
+name: "PeanutsForNuts"
+specializationOf: dcs:Crops
+
+Node: dcid:VegetablesHarvestedForSale
+typeOf: dcs:FarmInventoryTypeEnum
+name: "VegetablesHarvestedForSale"
+specializationOf: dcs:Crops
+
+Node: dcid:Potatoes
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Potatoes"
+specializationOf: dcs:VegetablesHarvestedForSale
+
+Node: dcid:SweetPotatoes
+typeOf: dcs:FarmInventoryTypeEnum
+name: "SweetPotatoes"
+specializationOf: dcs:VegetablesHarvestedForSale
+
+Node: dcid:Orchards
+typeOf: dcs:FarmInventoryTypeEnum
+name: "Orchards"
+specializationOf: dcs:Crops
+
+Node: dcid:FarmInventoryStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "FarmInventoryStatusEnum"
+
+Node: dcid:InventorySold
+typeOf: dcs:FarmInventoryStatusEnum
+name: "InventorySold"
+
+Node: dcid:OwnershipStatusEnum
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+name: "OwnershipStatusEnum"
+
+Node: dcid:Producer
+typeOf: dcs:OwnershipStatusEnum
+name: "Producer"
+
+Node: dcid:PrimaryProducer
+typeOf: dcs:OwnershipStatusEnum
+name: "PrimaryProducer"
