@@ -25,46 +25,41 @@ sys.path.insert(1, _MODULE_DIR)
 # pylint: disable=wrong-import-position
 # pylint: disable=import-error
 from preprocess import process
-from constants import TEST_DATA_DIR, INPUT_DIRS
+from constants import TEST_DATA_DIR
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 
 
 class TestPreprocess(unittest.TestCase):
     """
-    This module is used to test EuroStat BMI data processing.
+    This module is used to test USCensus PEP_Annual_Population data processing.
     It will generate and test CSV, MCF and TMCF files for given test input files
-    and comapre it with expected results.
+    and compare it with expected results.
     """
 
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
 
-        test_files = []
-        for dir_path in INPUT_DIRS:
-            files_dir = os.path.join(_MODULE_DIR, TEST_DATA_DIR, "datasets",
-                                     dir_path)
-            test_files += [
-                os.path.join(files_dir, file)
-                for file in sorted(os.listdir(files_dir))
-            ]
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir,
-                                                 "test_output_data.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+        files_dir = os.path.join(_MODULE_DIR, TEST_DATA_DIR, "datasets")
 
-            process(test_files, cleaned_csv_file_path, mcf_file_path,
-                    tmcf_file_path)
+        data_file_path = os.path.join(_MODULE_DIR, TEST_DATA_DIR,
+                                      "output_files")
 
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
-                self._actual_mcf_data = mcf_file.read()
+        cleaned_csv_path = os.path.join(data_file_path,
+                                        "usa_annual_population.csv")
+        mcf_path = os.path.join(data_file_path, "usa_annual_population.mcf")
+        tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
 
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
-                self._actual_tmcf_data = tmcf_file.read()
+        process(files_dir, cleaned_csv_path, mcf_path, tmcf_path, False)
 
-            with open(cleaned_csv_file_path, encoding="utf-8") as csv_file:
-                self._actual_csv_data = csv_file.read()
+        with open(mcf_path, encoding="UTF-8") as mcf_file:
+            self._actual_mcf_data = mcf_file.read()
+
+        with open(tmcf_path, encoding="UTF-8") as tmcf_file:
+            self._actual_tmcf_data = tmcf_file.read()
+
+        with open(cleaned_csv_path, encoding="utf-8") as csv_file:
+            self._actual_csv_data = csv_file.read()
 
     def test_mcf_tmcf_files(self):
         """
@@ -105,6 +100,9 @@ class TestPreprocess(unittest.TestCase):
         with open(expected_csv_file_path,
                   encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
-
         self.assertEqual(expected_csv_data.strip(),
                          self._actual_csv_data.strip())
+
+
+if __name__ == '__main__':
+    unittest.main()

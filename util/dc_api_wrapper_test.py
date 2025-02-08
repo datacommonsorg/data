@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Tests for dc_api_wrapper.'''
+"""Tests for dc_api_wrapper."""
 
 import os
 import sys
@@ -30,7 +30,7 @@ from absl import logging
 class TestDCAPIWrapper(unittest.TestCase):
 
     def test_dc_api_wrapper(self):
-        '''Test the wrapper for DC API.'''
+        """Test the wrapper for DC API."""
         api_function = dc.get_property_labels
         dcids = [
             'Count_Person',  # 'dcid:' namespace will be removed.
@@ -42,7 +42,7 @@ class TestDCAPIWrapper(unittest.TestCase):
         self.assertTrue('typeOf' in response['Count_Person'])
 
     def test_dc_api_batched_wrapper(self):
-        '''Test DC API wrapper for batched calls.'''
+        """Test DC API wrapper for batched calls."""
         api_function = dc.get_property_values
         dcids = [
             'Count_Person',  # Statvar defined in DC
@@ -58,7 +58,7 @@ class TestDCAPIWrapper(unittest.TestCase):
         self.assertFalse(response['NewStatVar_NotInDC'])
 
     def test_dc_api_is_defined_dcid(self):
-        '''Test API wrapper for defined DCIDs.'''
+        """Test API wrapper for defined DCIDs."""
         dcids = [
             'geoId/06',  # Geo Id defined.
             'country/ZZZ',  # Geo Id not defined.
@@ -66,10 +66,12 @@ class TestDCAPIWrapper(unittest.TestCase):
             'schema:Year',  # Class
         ]
         response = dc_api.dc_api_is_defined_dcid(
-            dcids, {
+            dcids,
+            {
                 'dc_api_batch_size': 2,
-                'dc_api_root': 'http://autopush.api.datacommons.org'
-            })
+                'dc_api_root': 'http://autopush.api.datacommons.org',
+            },
+        )
         self.assertTrue(response is not None)
         self.assertEqual(len(response), len(dcids))
         self.assertTrue(response['geoId/06'])
@@ -79,8 +81,8 @@ class TestDCAPIWrapper(unittest.TestCase):
         self.assertTrue(response['dcs:value'])
 
     def test_dc_get_node_property_values(self):
-        '''Test API wrapper to get all property:values for a node.'''
-        node_pvs = dc_api.dc_api_get_node_property_values(['dcs:Count_Person'])
+        """Test API wrapper to get all property:values for a node."""
+        node_pvs = dc_api.dc_api_get_node_property_values(['dcid:Count_Person'])
         self.assertTrue(node_pvs)
         # Verify the resposnse has dcid with the namespace prefix 'dcid:'
         self.assertTrue('dcid:Count_Person' in node_pvs)

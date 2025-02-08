@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -46,7 +46,8 @@ def process_county_2000_2009(url: str) -> pd.DataFrame:
 
             # reading the input csv as dataframe
             df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
-
+            df.to_csv(_CODEDIR + "/../input_files/" +
+                      "county_result_2000_2009.csv")
             # years having 1 and 12 and 13 value are not requried
             # as estimate is for April Month and 2010
             df = df.query("YEAR not in [1, 12, 13]")
