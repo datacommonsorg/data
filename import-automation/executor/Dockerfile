@@ -18,11 +18,13 @@ RUN apt-get update \
     && apt-get -y upgrade \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
-WORKDIR /workspace
 
-ADD requirements.txt /workspace/requirements.txt
-RUN pip install -r /workspace/requirements.txt
+ENV JAVA_HOME=/usr/local/openjdk-17
+COPY --from=openjdk:17-slim $JAVA_HOME $JAVA_HOME
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
-COPY app/. /workspace/app/
-
-CMD gunicorn --timeout 0 --workers 5 -b :$PORT app.main:FLASK_APP
+RUN git clone https://github.com/datacommonsorg/data.git
+WORKDIR /data/import-automation/executor
+RUN wget https://storage.googleapis.com/datacommons_public/import_tools/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar
+RUN pip install -r requirements.txt
+ENTRYPOINT ["python", "main.py"]

@@ -1,0 +1,143 @@
+Node: E:hud->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With1Person_80Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l80_1
+unit: dcs:USDollar
+
+Node: E:hud->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With2Person_80Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l80_2
+unit: dcs:USDollar
+
+Node: E:hud->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With3Person_80Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l80_3
+unit: dcs:USDollar
+
+Node: E:hud->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With4Person_80Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l80_4
+unit: dcs:USDollar
+
+Node: E:hud->E4
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With5Person_80Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l80_5
+unit: dcs:USDollar
+
+Node: E:hud->E5
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With6Person_80Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l80_6
+unit: dcs:USDollar
+
+Node: E:hud->E6
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With7Person_80Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l80_7
+unit: dcs:USDollar
+
+Node: E:hud->E7
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With8Person_80Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l80_8
+unit: dcs:USDollar
+
+Node: E:hud->E8
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With1Person_150Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l150_1
+unit: dcs:USDollar
+
+Node: E:hud->E9
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With2Person_150Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l150_2
+unit: dcs:USDollar
+
+Node: E:hud->E10
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With3Person_150Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l150_3
+unit: dcs:USDollar
+
+Node: E:hud->E11
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With4Person_150Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l150_4
+unit: dcs:USDollar
+
+Node: E:hud->E12
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With5Person_150Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l150_5
+unit: dcs:USDollar
+
+Node: E:hud->E13
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With6Person_150Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l150_6
+unit: dcs:USDollar
+
+Node: E:hud->E14
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With7Person_150Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l150_7
+unit: dcs:USDollar
+
+Node: E:hud->E15
+typeOf: dcs:StatVarObservation
+variableMeasured: dcs:Median_Income_Household_With8Person_150Percentile
+observationDate: C:hud->year
+observationAbout: C:hud->fips
+observationPeriod: "P1Y"
+value: C:hud->l150_8
+unit: dcs:USDollar

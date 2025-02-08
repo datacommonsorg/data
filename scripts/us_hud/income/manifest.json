@@ -1,0 +1,22 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "HUD_IncomeLimits",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.huduser.gov/portal/datasets/il.html",
+      "provenance_description": "HUD sets income limits for eligibility in assisted housing programs based on Median Family Income for metropolitan and non-metropolitan areas.",
+      "scripts": ["process.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "hud.tmcf",
+          "cleaned_csv": "output/output_all_years.csv"
+        }
+      ],
+      "cron_schedule": "15 23 * * 7"
+    }
+  ]
+}
+
+
+
+

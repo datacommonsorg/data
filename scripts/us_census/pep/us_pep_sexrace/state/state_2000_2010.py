@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ def process_state_2000_2010(url: str) -> pd.DataFrame:
     """
     # reading the csv input file
     df = pd.read_csv(url, header=0)
-
+    df.to_csv(_CODEDIR + "/../input_files/" + "state_result_2000_2010.csv")
     # dropping unwanted columns
     df.drop(columns=[
         "REGION", "DIVISION", "ESTIMATESBASE2000", "CENSUS2010POP",
