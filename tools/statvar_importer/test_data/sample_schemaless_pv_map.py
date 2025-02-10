@@ -31,18 +31,18 @@
         "observationDate": "@Number",
     },
 
-    # Extract age bucket from a range of values.
+    # Add schemaless property with caps for Person Age.
+    # The age grop goes into statvar but the proporty starting with caps
+    # are not valid in DC schema, so will be commented out.
     "Person Age": {
-        "#Regex": "(?P<StartAge>[0-9]+)-(?P<EndAge>[0-9]+)",
-        "age": "dcid:{@StartAge}To{@EndAge}Years",
+        "PersonAge": "{@Data}",
     },
 
     # Race: Mapping for values in Column Person Race
-    "WH": {
-       "race": "dcs:WhiteAlone",
-    },
-    "A-PI": {
-       "race": "dcs:AsianOrPacificIslander",
+    "Race": {
+        # The property 'raceCode' is not defined in schema, so this will be
+        # commented out in the statvar mcf but used in the statvar dcid.
+        "raceCode": "{@Data}",
     },
 
     # Population count observations fom column: "Total Persons".
@@ -50,6 +50,7 @@
     "total persons": {
         "value": "@Number",
         "populationType": "dcs:Person",
+        # Measured property is overridden to dcid for schemaless.
         "measuredProperty" : "dcs:count",
     },
 
@@ -57,7 +58,7 @@
     "fraction" : {
         "populationType": "dcs:Person",
         # "measuredProperty" : "dcs:count", # Is the default value for SVObs.
-        "measurementDenominator": "dcid:Count_Person",
+        "Fraction" : "Fraction",
         "value": "@Number",
     },
 

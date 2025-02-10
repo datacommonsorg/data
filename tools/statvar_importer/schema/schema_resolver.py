@@ -31,8 +31,8 @@ sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
-    os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))), 'util'))
+    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
+                 'util'))
 
 import process_http_server
 
@@ -130,8 +130,9 @@ class SchemaResolver:
     def load_schema_mcf(self, schema_mcf_files: list):
         """Load nodes from schema MCF files and add to the index."""
         mcf_nodes = load_mcf_nodes(schema_mcf_files)
-        for dcid, node in mcf_nodes.items():
-            self.add_node(node)
+        if mcf_nodes:
+            for dcid, node in mcf_nodes.items():
+                self.add_node(node)
         logging.info(
             f'Loaded {len(self._schema_nodes)} schema MCF nodes: {schema_mcf_files}'
         )
