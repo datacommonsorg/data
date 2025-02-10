@@ -1,1 +1,2479 @@
-{'https://www.googleapis.com/customsearch/v1?key=TEST_KEY&cx=b5b4628916b534fef&q=Bengaluru': {'context': {'title': 'Wikidata'}, 'items': [{'displayLink': 'www.wikidata.org', 'formattedUrl': 'https://www.wikidata.org/wiki/Q1355', 'htmlFormattedUrl': 'https://www.wikidata.org/wiki/Q1355', 'htmlTitle': '<b>Bengaluru</b> - Wikidata', 'kind': 'customsearch#result', 'link': 'https://www.wikidata.org/wiki/Q1355', 'title': 'Bengaluru - Wikidata'}, {'displayLink': 'www.wikidata.org', 'formattedUrl': 'https://www.wikidata.org/wiki/Q948720', 'htmlFormattedUrl': 'https://www.wikidata.org/wiki/Q948720', 'htmlTitle': 'Indian Institute of Science, <b>Bengaluru</b> - Wikidata', 'link': 'https://www.wikidata.org/wiki/Q948720', 'title': 'Indian Institute of Science, Bengaluru - Wikidata'}], 'kind': 'customsearch#search', 'queries': {'nextPage': [{'count': 10, 'cx': 'b5b4628916b534fef', 'inputEncoding': 'utf8', 'outputEncoding': 'utf8', 'safe': 'off', 'searchTerms': 'Bengaluru', 'startIndex': 11, 'title': 'Google Custom Search - Bengaluru', 'totalResults': '2360'}], 'request': [{'count': 10, 'cx': 'b5b4628916b534fef', 'inputEncoding': 'utf8', 'outputEncoding': 'utf8', 'safe': 'off', 'searchTerms': 'Bengaluru', 'startIndex': 1, 'title': 'Google Custom Search - Bengaluru', 'totalResults': '2360'}]}, 'searchInformation': {'formattedSearchTime': '0.13', 'formattedTotalResults': '2,360', 'searchTime': 0.126495, 'totalResults': '2360'}, 'url': {'template': 'https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json', 'type': 'application/json'}}, 'https://www.googleapis.com/customsearch/v1?key=TEST_KEY&cx=b5b4628916b534fef&q=California': {'context': {'title': 'Wikidata'}, 'items': [{'displayLink': 'www.wikidata.org', 'formattedUrl': 'https://www.wikidata.org/wiki/Q99', 'htmlFormattedUrl': 'https://www.wikidata.org/wiki/Q99', 'htmlSnippet': 'state of the United States of America.', 'htmlTitle': '<b>California</b> - Wikidata', 'kind': 'customsearch#result', 'link': 'https://www.wikidata.org/wiki/Q99', 'snippet': 'state of the United States of America.', 'title': 'California - Wikidata'}, {'displayLink': 'www.wikidata.org', 'formattedUrl': 'https://www.wikidata.org/wiki/Q174710', 'htmlFormattedUrl': 'https://www.wikidata.org/wiki/Q174710', 'htmlSnippet': 'public university in Los Angeles, <b>California</b>, USA.', 'htmlTitle': 'University of <b>California</b>, Los Angeles - Wikidata', 'kind': 'customsearch#result', 'link': 'https://www.wikidata.org/wiki/Q174710', 'snippet': 'public university in Los Angeles, California, USA.', 'title': 'University of California, Los Angeles - Wikidata'}], 'kind': 'customsearch#search', 'queries': {'nextPage': [{'count': 10, 'cx': 'b5b4628916b534fef', 'inputEncoding': 'utf8', 'outputEncoding': 'utf8', 'safe': 'off', 'searchTerms': 'California', 'startIndex': 11, 'title': 'Google Custom Search - California', 'totalResults': '52900'}], 'request': [{'count': 10, 'cx': 'b5b4628916b534fef', 'inputEncoding': 'utf8', 'outputEncoding': 'utf8', 'safe': 'off', 'searchTerms': 'California', 'startIndex': 1, 'title': 'Google Custom Search - California', 'totalResults': '52900'}]}, 'searchInformation': {'formattedSearchTime': '0.17', 'formattedTotalResults': '52,900', 'searchTime': 0.170779, 'totalResults': '52900'}, 'url': {'template': 'https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json', 'type': 'application/json'}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q11271835': {'descriptions': {'ar': 'عاصمة الكيان دون الوطني', 'en': 'capital city of a subnational entity'}, 'labels': {'en': 'state capital', 'zh-hant': '州首府'}, 'statements': {}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q1355': {'descriptions': {'en': 'city in Karnataka, India', 'en-ca': 'capital of the Indian state of Karnataka', 'en-gb': 'capital of the Indian state of Karnataka'}, 'labels': {'af': 'Bangalore', 'am': 'በንጋሉሩ', 'ar': 'بنغالور', 'ary': 'بانڭالور', 'arz': 'بنجالور', 'as': 'বেংগালুৰু', 'ast': 'Bangalore', 'az': 'Banqalor', 'azb': 'بنقلور', 'ba': 'Бангалор', 'ban': 'Béngaluru', 'be': 'Бангалор', 'be-tarask': 'Бангалор', 'bg': 'Бенгалуру', 'bho': 'बंगलौर', 'bn': 'বেঙ্গালুরু', 'bpy': 'বাঙ্গালোর', 'br': 'Bengaluru', 'bs': 'Bangalore', 'bxr': 'Бенгалуру', 'ca': 'Bangalore', 'ce': 'Бангалор', 'ceb': 'Benggaluru', 'ckb': 'بەنگالۆر', 'cs': 'Bengalúru', 'cy': 'Bangalore', 'da': 'Bangalore', 'de': 'Bengaluru', 'de-ch': 'Bangalore', 'dsb': 'Bangalore', 'dty': 'बेङ्गलोर', 'el': 'Μπανγκαλόρ', 'en': 'Bengaluru', 'en-ca': 'Beṅgaḷūru', 'en-gb': 'Beṅgaḷūru', 'eo': 'Bengaluro', 'es': 'Bengaluru', 'et': 'Bangalore', 'eu': 'Bangalore', 'fa': 'بنگلور', 'fi': 'Bangalore', 'fj': 'Begaluru', 'fr': 'Bangalore', 'frp': 'Bangalore', 'frr': 'Bangalore', 'ga': 'Bangalore', 'gd': 'Bangalore', 'gl': 'Bangalore', 'gom': 'ಬೆಂಗ್ಳುರ್', 'gu': 'બેંગલોર', 'ha': 'Bengaluru', 'he': 'בנגלור', 'hi': 'बेंगुलुरु', 'hif': 'बेंगलुरु', 'hif-latn': 'Beṅgluru', 'hr': 'Bangalore', 'hsb': 'Bangalore', 'hu': 'Bengaluru', 'hy': 'Բանդալոր', 'id': 'Bengaluru', 'ie': 'Bangalore', 'io': 'Bangalore', 'is': 'Bangalore', 'it': 'Bangalore', 'ja': 'ベンガルール', 'jv': 'Bengaluru', 'ka': 'ბენგალურუ', 'kaa': 'Bangalor', 'kge': 'Bengaluru', 'kk-cyrl': 'Бангалор', 'kl': 'Bangalore', 'kn': 'ಬೆಂಗಳೂರು', 'ko': '벵갈루루', 'krj': 'Benggaluru', 'ks': 'بنگلور', 'ku': 'Bangalor', 'kw': 'Bengalour', 'ky': 'Бангалор', 'la': 'Bengalurus', 'lld': 'Bangalore', 'lt': 'Bengalūras', 'lv': 'Bengalūru', 'mai': 'बेङ्गलोर', 'mg': 'Bangalore', 'mhr': 'Бангалор', 'mi': 'Bangalore', 'mk': 'Бенгалуру', 'ml': 'ബെംഗളൂരു', 'mn': 'Бангалор', 'mr': 'बंगळूर', 'ms': 'Bangalore', 'mt': 'Bengaluru', 'mwl': 'Bangalore', 'my': 'ဘန်ဂလိုမြို့', 'mzn': 'بنگلور', 'nan': 'Bangalore', 'nb': 'Bangalore', 'ne': 'बेङ्गलोर', 'new': 'बेङ्गलूरु', 'nl': 'Bangalore', 'nn': 'Bangalore', 'ny': 'Bangalore', 'oc': 'Bengaluru', 'or': 'ବେଙ୍ଗାଳୁରୁ', 'os': 'Бангалор', 'pa': 'ਬੰਗਲੌਰ', 'pam': 'Benggalúru', 'pl': 'Bengaluru', 'pnb': 'بینگلور', 'ps': 'بنگلور', 'pt': 'Bangalore', 'pt-br': 'Bangalore', 'qu': 'Bangalore', 'ro': 'Bengaluru', 'ru': 'Бангалор', 'sa': 'बेङ्गळूरु', 'sat': 'ᱵᱮᱝᱜᱟᱞᱩᱨᱩ', 'scn': 'Bangaluri', 'sco': 'Bangalore', 'sd': 'بنگلورو', 'sh': 'Bangalor', 'si': 'බැංගලෝර්', 'sk': 'Bangalúr', 'sl': 'Bengaluru', 'so': 'Bengaluru', 'sq': 'Bangalore', 'sr': 'Бангалор', 'sv': 'Bangalore', 'sw': 'Bangalore', 'syl': 'ꠛꠦꠋꠉꠣꠟꠥꠞꠥ ꠘꠉꠞ', 'szl': 'Bengaluru', 'ta': 'பெங்களூர்', 'tcy': 'ಬೆಂಗಳೂರು', 'te': 'బెంగుళూరు', 'tg': 'Бангалор', 'tg-cyrl': 'Бангалор', 'th': 'บังคาลอร์', 'tk': 'Bangalor', 'tl': 'Benggaluru', 'tr': 'Bangalore', 'tt': 'Бәңгәлуру', 'tw': 'Bangalore', 'ug': "Ban'galor", 'ug-arab': 'بانگالور', 'ug-latn': "Ban'galor", 'uk': 'Бенгалуру', 'ur': 'بنگلور', 'uz': 'Bangalor', 'vec': 'Beṅgluru', 'vep': 'Bangalor', 'vi': 'Bengaluru', 'vo': 'Bangalore', 'war': 'Benggaluru', 'wuu': '班加罗尔', 'xmf': 'ბანგალორი', 'yi': 'באנגאלאר', 'yo': 'Bangalore', 'yue': '班加羅爾', 'zh': '班加羅爾', 'zh-cn': '班加罗尔', 'zh-hans': '班加罗尔', 'zh-hant': '邦加羅爾', 'zh-hk': '班加羅爾', 'zh-mo': '班加羅爾', 'zh-my': '班加罗尔', 'zh-sg': '班加罗尔', 'zh-tw': '邦加羅爾'}, 'statements': {'P131': [{'id': 'q1355$BD6D8A90-22AA-45BE-8D7B-F930B3EDAA50', 'property': {'data_type': 'wikibase-item', 'id': 'P131'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1956-11-01T00:00:00Z'}, 'type': 'value'}}], 'rank': 'preferred', 'references': [], 'value': {'content': 'Q806463', 'type': 'value'}}, {'id': 'Q1355$7f9956e5-4516-9595-4d04-dc25a0953b03', 'property': {'data_type': 'wikibase-item', 'id': 'P131'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1956-10-31T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1947-08-15T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q3374892', 'type': 'value'}}, {'id': 'Q1355$6003344f-4c05-838e-d277-93288da4e551', 'property': {'data_type': 'wikibase-item', 'id': 'P131'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1947-08-15T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q266923', 'type': 'value'}}], 'P17': [{'id': 'q1355$30748051-9151-4F89-A0DF-661CB0DD1540', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1947-08-15T00:00:00Z'}, 'type': 'value'}}], 'rank': 'preferred', 'references': [{'hash': 'f2a2d6ede8fcfb1f057f6cbb68cce56f9ffc8c44', 'parts': [{'property': {'data_type': 'external-id', 'id': 'P5573'}, 'value': {'content': '3121', 'type': 'value'}}, {'property': {'data_type': 'wikibase-item', 'id': 'P248'}, 'value': {'content': 'Q265049', 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P813'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+2018-08-06T00:00:00Z'}, 'type': 'value'}}]}], 'value': {'content': 'Q668', 'type': 'value'}}, {'id': 'Q1355$0908c9ab-4c94-f91f-c888-861778a4eab2', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1791-03-21T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1798-05-04T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q2001966', 'type': 'value'}}, {'id': 'Q1355$4aaa42d2-452d-8739-cb6f-17ee4b809689', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1638-00-00T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1687-00-00T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q83821', 'type': 'value'}}, {'id': 'Q1355$4cc23316-4f19-87eb-01e4-bfcc7b7d5cb9', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985786', 'precision': 9, 'time': '+1537-00-00T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1638-00-00T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q167639', 'type': 'value'}}], 'P31': [{'id': 'Q1355$a53079eb-43d8-5340-bc7c-46de7dd826b0', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'wikibase-item', 'id': 'P452'}, 'value': {'content': 'Q110702998', 'type': 'value'}}, {'property': {'data_type': 'wikibase-item', 'id': 'P452'}, 'value': {'content': 'Q1875606', 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q745456', 'type': 'value'}}, {'id': 'Q1355$617e3319-4ac1-d5d5-9f3b-ef93501b55c9', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'wikibase-item', 'id': 'P642'}, 'value': {'content': 'Q1185', 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q51929311', 'type': 'value'}}, {'id': 'Q1355$C01FC2B2-A3A3-4097-BB00-9479AB5DBE4B', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q1549591', 'type': 'value'}}, {'id': 'Q1355$530c3c66-4542-7a67-e679-024b7cab7569', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q174844', 'type': 'value'}}, {'id': 'Q1355$c48f15da-4f78-b549-db3a-0be67c8a8c9d', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q11271835', 'type': 'value'}}, {'id': 'Q1355$5c809bf0-41ee-525f-b0a3-463297aa6c56', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q208511', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q1549591': {'descriptions': {'am': 'ከ100,000 በላይ ነዋሪዎች ያሉበት ከተማ', 'ar': 'مدينة بعدد سكان يفوق 100,000 نسمة', 'ast': 'ciudá con una población mayor de 100.000', 'be-tarask': 'горад з насельніцтвам больш за 100 000 чалавек', 'bho': '𑂍𑂧 𑂮𑂵 𑂍𑂧 𑂉𑂍 𑂪𑂰𑂎 𑂍𑂵 𑂄𑂥𑂰𑂠𑂲 𑂫𑂰𑂪𑂰 𑂢𑂏𑂩', 'bjn': 'kuta bapanduduk 100.000 ikung labih', 'bs': 'grad s više od 100.000 stanovnika', 'ca': 'ciutat amb una població de més de 100.000 habitants', 'cs': 'město s počtem obyvatel vyšším než 100 000', 'cy': 'dinas gyda phoblogaeth o fwy na 100.000', 'da': 'by med flere end 100.000 indbyggere', 'de': 'Stadt mit mindestens 100.000 Einwohnern', 'el': 'πόλη με πληθυσμό περισσότερο από 100.000 κατοίκους', 'en': 'city with a population of at least 100,000', 'en-ca': 'city with a population of more than 100,000 inhabitants', 'en-gb': 'city with a population of more than 100,000 inhabitants', 'eo': 'urbo kun super 100000 loĝantoj', 'es': 'ciudad con más de 100 000 habitantes', 'et': 'üle 100 000 elanikuga linn', 'eu': '100\xa0000 biztanle baino gehiago dituen hiria', 'ext': 'cidá cona puebración mayol de 100.000 abitantis', 'fa': 'شهر با حداقل ۱۰۰.۰۰۰ نفر ساکن', 'fi': 'yli 100 000 asukkaan kaupunki', 'fr': 'ville de plus de 100 000 habitants', 'gd': 'Baile aig a bheil sluagh > 100,000', 'gl': 'cidade cunha poboación de máis de 100.000 habitantes', 'gn': 'táva oreko 100.000 tapicha térã hetavéva', 'gsw': 'e Stadt, wo hunderttuusig oder meh Ywooner het', 'he': 'עיר שאוכלוסייתה גדולה מ־100,000 תושבים', 'hi': '1,000,000 से अधिक की आबादी वाले शहर', 'hsb': 'město z wjace hač 100.000 wobydlerjemi', 'hy': '100,000 կամ ավելի մեծ բնակչություն ունեցող քաղաք', 'ia': 'citate con plus de 100 000 habitantes', 'id': 'kota dengan populasi lebih dari 100.000 jiwa', 'ig': 'obodo nwere opekata mpe mmadụ otu narị puku', 'it': 'città con un numero di abitanti superiore a 100.000 unità', 'ja': '10万人以上の人口を持つ都市', 'ko': '10만 명 이상의 인구를 가진 도시', 'lb': "Stad mat op d'mannst 100.000 Awunner", 'mk': 'град во кој живеат повеќе од 100.000 жители', 'ms': 'bandar dengan populasi melebihi 100,000 orang', 'mt': "belt b'popolazzjoni ta' mill-inqas 100,000 ruħ", 'my': 'လူဦးရေ ၁၀၀၀၀၀၀ အထက် နေထိုင်သူများရှိသော မြို့', 'nb': 'definert som byer med mer enn 100 000 innbyggere', 'nl': 'stad met meer dan 100.000 inwoners', 'nn': 'by med over 100 000 innbyggjarar', 'nqo': 'ߛߏ ߡߍ߲ ߛߌ߰ߓߊ߮ ߓߘߊ߫ ߕߊ߬ߡߌ߲߬ ߡߐ߱ ߁߀߀,߀߀߀ ߟߊ߫', 'oc': 'mei de 100 000 abitants', 'pa': '1 ਲੱਖ ਤੋਂ ਵੱਧ ਆਬਾਦੀ ਵਾਲਾ ਸ਼ਹਿਰ', 'pl': 'Miasto z liczbą ludności powyżej 100 000.', 'pt': 'cidade com mais de 100.000 habitantes', 'pt-br': 'cidade com mais de 100.000 habitantes', 'ro': 'oraș cu o populație mai mare de 100.000 locuitori', 'ru': 'градация населённых пунктов по Атласу мира, 1999 год, 3-е изд.', 'scn': "cità unni stannu cchiu' ssai di 100.000 abbitanti", 'shi': 'tamdint nna ɣ illa uggar n 100,000 n umzdaɣ', 'sk': 'mesto, ktoré má viac ako 100 000 obyvateľov', 'sr': 'град у коме живи преко 100.000 становника', 'sr-ec': 'град у коме живи преко 100.000 становника', 'sr-el': 'grad u kome živi preko 100.000 stanovnika', 'sv': 'stad med fler än 100 000 invånare', 'szl': 'miasto z numerym ludności powyżyj 100 000', 'ta': '100,000 பேருக்கு மேற்பட்ட சனத்தொகையைக் கொண்ட நகரம்', 'te': '100,000 కంటే ఎక్కువ జనాభా కలిగిన నగరం', 'tg': 'шаҳр бо аҳолии беш аз 100 000', 'th': 'นครที่มีผู้อยู่อาศัยมากกว่า 100,000 คน', 'tok': 'jan 100 000+ li lon ma tomo ni', 'tr': "nüfusu 100,000'den fazla olan şehir", 'uk': 'місто з населенням понад 100 000 жителів', 'uz': 'Olmoniyada aholisi 100 000 dan ortiq shahar', 'yi': 'שטאט מיט מער ווי 100,000 איינוואוינער'}, 'labels': {'af': 'groot stad', 'am': 'ትልቅ ከተማ', 'ar': 'مدينة كبيرة (>100,000)', 'arz': 'مدينه كبيره', 'ast': 'gran ciudá', 'az': 'iri şəhər', 'ba': 'халҡы 100 меңдән ашыу кеше булған ҡала', 'bar': 'Großstod', 'be': 'горад з насельніцтвам больш за 100 000 чалавек', 'be-tarask': 'вялікі горад', 'bho': '𑂥𑂙𑂍𑂰 𑂢𑂏𑂩', 'bjn': 'kuta ganal', 'bn': 'বড় শহর', 'br': 'kêr vras', 'bs': 'veliki grad', 'ca': 'gran ciutat', 'ckb': 'شارێکی گەورە', 'cs': 'velkoměsto', 'cy': 'dinas fawr', 'da': 'storby', 'de': 'Großstadt', 'diq': 'sûka gırse', 'el': 'μεγάλη πόλη', 'en': 'big city', 'en-ca': 'big city', 'en-gb': 'big city', 'eo': 'urbego', 'es': 'gran ciudad', 'et': 'suurlinn', 'eu': 'hiri handi', 'ext': 'gran cidá', 'fa': 'شهر بزرگ', 'fi': 'suuri kaupunki', 'fon': 'Toxo ɖaxo', 'fr': 'grande ville', 'frc': 'grande ville', 'frr': 'gratstääd', 'fy': 'grutte stêd', 'ga': 'cathair mhór', 'gd': 'baile susbainteach', 'gl': 'cidade grande', 'gn': 'táva guasu', 'got': '𐌱𐌰𐌿𐍂𐌲𐍃', 'gsw': 'Grossstadt', 'ha': 'babban birni', 'he': 'עיר גדולה', 'hi': 'विशाल शहर', 'hr': 'veliki grad', 'hsb': 'wulkoměsto', 'hu': 'város százezernél több lakossal', 'hy': 'մեծ քաղաք', 'ia': 'citate grande', 'id': 'kota besar', 'ig': 'Nnụkwụ obodo', 'it': 'grande città', 'ja': '10万都市', 'ka': 'დიდი ქალაქი', 'ko': '인구 10만 명 이상 도시', 'ks': 'بۆڈ شَہَر', 'ku': 'bajarê mezin', 'ku-latn': 'bajarê mezin', 'kw': 'cita vras', 'la': 'megalopolis', 'lb': 'Groussstad', 'lt': 'didmiestis', 'lv': 'liela pilsēta', 'mk': 'голем град', 'mr': 'मोठे शहर', 'ms': 'bandar besar', 'mt': 'belt kbira', 'my': 'မြို့ကြီး', 'nb': 'storby', 'nds': 'Grootstadt', 'nl': 'grote stad', 'nn': 'storby', 'nqo': 'ߛߏ ߞߎ߲ߓߊ', 'oc': 'granda ciutat', 'or': 'ଏକଲକ୍ଷରୁ ଅଧିକ ଲୋକ ବାସକରୁଥିବା ସହର', 'os': 'стыр сахар', 'pa': 'ਵੱਡੇ ਸ਼ਹਿਰ', 'pap': 'siudat grandi', 'pap-aw': 'ciudad grandi', 'pl': 'miasto liczące ponad 100 tysięcy mieszkańców', 'ps': 'لوی ښار', 'pt': 'cidade grande', 'pt-br': 'cidade grande', 'ro': 'oraș mare', 'ru': 'большой город', 'sat': 'ᱢᱟᱨᱟᱝ ᱥᱚᱦᱚᱨ', 'scn': 'cità granni', 'sco': 'ceety wi hundreds o thoosands o indwallers', 'se': 'stuorragávpot', 'sgs': 'Dėdmiestis', 'shi': 'tamdint imqqurn', 'sjd': 'шӯрр ланнҍ', 'sk': 'veľkomesto', 'sl': 'veliko mesto', 'smn': 'stuorrâkaavpug', 'sms': 'jõnn gåårad', 'sr': 'велики град', 'sr-ec': 'велики град', 'sr-el': 'veliki grad', 'sv': 'storstad', 'szl': 'miasto majōnce bez 100 tysiyncy miyszkańcōw', 'ta': 'பெருநகரம்', 'te': 'పెద్ద నగరం', 'tg': 'шаҳр бо зиёда аз 100 ҳаз. аҳолӣ', 'th': 'นครใหญ่', 'tig': 'መዲነት ዓባይ', 'tok': 'ma li jo e jan 100 000+', 'tr': 'büyük şehir', 'tt': '100 000+ кеше яшәгән шәһәр', 'uk': 'місто з населенням понад 100 тис. осіб', 'ur': 'بڑا شہر', 'uz': 'Katta shahar', 'vec': 'granda sità', 'vi': 'thành phố lớn', 'xmf': 'კაბეტი ნოღა', 'yi': 'גרויסע שטאט', 'yo': 'ìlú ńlá', 'yue': '大城市', 'zh': '大城市', 'zh-cn': '大城市', 'zh-hans': '大城市', 'zh-hant': '大城市', 'zh-hk': '大城市', 'zh-mo': '大城市', 'zh-my': '大城市', 'zh-sg': '大城市', 'zh-tw': '大城市'}, 'statements': {'P31': [{'id': 'Q1549591$fcb164e4-4d7f-0617-d7ee-ba0f85a40c41', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [{'hash': 'ff363401d8a8e82dbaf8738151533dbcff2f661d', 'parts': [{'property': {'data_type': 'wikibase-item', 'id': 'P248'}, 'value': {'content': 'Q757187', 'type': 'value'}}, {'property': {'data_type': 'string', 'id': 'P393'}, 'value': {'content': '3-е изд.', 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P577'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1999-00-00T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'string', 'id': 'P958'}, 'value': {'content': 'Условные обозначения. Населённые пункты', 'type': 'value'}}, {'property': {'data_type': 'wikibase-item', 'id': 'P407'}, 'value': {'content': 'Q7737', 'type': 'value'}}]}], 'value': {'content': 'Q98966309', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q167639': {'descriptions': {'be-tarask': 'гістарычная дзяржава', 'bn': 'দক্ষিণ ভারত মধ্যযুগীয় রাজ্য', 'ca': "estat hindú de l'edat mitjana i l'edat moderna", 'cs': 'historický státní útvar', 'de': 'historischer hinduistischer Staat in Südindien', 'en': 'Hindu kingdom in Southern India (14th-17th century)', 'en-gb': 'Hindu kingdom in Southern India (14th-17th century)', 'es': 'Imperio del sur del Subcontinente Indio', 'fi': 'hindukuningaskunta Etelä-Intiassa 1336–1565', 'fr': 'ancien royaume hindou', 'gu': 'નિષાદવંશી નાયક સામ્રાજ્ય (ઈ.સ ૧૩૩૬-૧૬૪૬)', 'he': 'ישות מדינית היסטורית בדרום הודו', 'hi': 'दक्षिणी भारत में हिंदू साम्राज्य (14वीं-17वीं शताब्दी)', 'hu': 'dél-hindusztáni monarchia (1336–1646)', 'it': "antico impero dell'India meridionale", 'kn': 'ಭಾರತದ ಒಂದು ಸಾಮ್ರಾಜ್ಯ', 'mr': 'दक्षिण भारतातील हिंदू राज्य (१४वे-१७वे शतक)', 'nl': 'historisch land', 'ru': 'империя XIV-XVII веков на плато Декан в Индии', 'si': 'දකුණු ඉන්දියානු හින්දු රාජධානිය (14වන-17වන සියවස්)', 'sl': 'hindujsko kraljestvo v južni Indiji (14.–17. stol.)', 'ta': 'ஒரு தென்னிந்தியப் பேரரசு (1336-1646)', 'te': 'విజయనగర సామ్రాజ్యం (కర్ణాట సామ్రాజ్యం)', 'zh': '印度南部的印度教王國（14-17世紀）'}, 'labels': {'ar': 'إمبراطورية فيجاياناغارا', 'arz': 'امبراطورية فيجاياناجارا', 'ast': 'Imperiu vijayanagara', 'az': 'Vicayanaqar imperiyası', 'azb': 'ویجایاناقار ایمپیراتورلوغو', 'be': 'Віджаянагарская імперыя', 'be-tarask': 'Віджаянагарская імпэрыя', 'bg': 'Виджаянагара (империя)', 'bn': 'বিজয়নগর সাম্রাজ্য', 'ca': 'Imperi de Vijayanagara', 'cs': 'Vidžajanagárská říše', 'da': 'Vijayanagar-kongeriget', 'de': 'Vijayanagar', 'en': 'Vijayanagara Empire', 'en-gb': 'Vijayanagara Empire', 'eo': 'Viĝajanagara imperio', 'es': 'Imperio Vijayanagara', 'eu': 'Vijayanagarko erreinua', 'fa': 'امپراتوری ویجایاناگارا', 'fi': 'Vijayanagara', 'fr': 'royaume de Vijayanâgara', 'fur': 'Vijayanagar', 'gl': 'Imperio Vijayanagara', 'gu': 'વિજયનગર સામ્રાજ્ય', 'he': "אימפריית ויג'איאנגר", 'hi': 'विजयनगर साम्राज्य', 'hu': 'Vidzsajanagara Birodalom', 'id': 'Kekaisaran Wijayanagara', 'it': 'Impero di Vijayanagara', 'ja': 'ヴィジャナガル王国', 'ka': 'ვიჯაიანაგარის იმპერია', 'kn': 'ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯ', 'ko': '비자야나가라 제국', 'lt': 'Vidžajanagaras', 'ml': 'വിജയനഗര സാമ്രാജ്യം', 'mr': 'विजयनगर साम्राज्य', 'ms': 'Empayar Vijayanagara', 'nan': 'Vijayanagara Tè-kok', 'nb': 'Vijayanagarariket', 'ne': 'विजयनगर साम्राज्य', 'new': 'विजयनगर साम्राज्य', 'nl': 'Vijayanagararijk', 'nn': 'Vidjayanagarariket', 'oc': 'Empèri de Vijayanagar', 'pa': 'ਵਿਜੈਨਗਰ ਸਾਮਰਾਜ', 'pl': 'Królestwo Widźajanagaru', 'pnb': 'وجیانگر سلطنت', 'pt': 'Reino de Bisnaga', 'ro': 'Imperiul Vijayanagara', 'ru': 'Виджаянагарская империя', 'sa': 'विजयनगरसाम्राज्यम्', 'si': 'විජයනගර අධිරාජ්\u200dයය', 'sl': 'Vidžajanagarski imperij', 'sq': 'Perandoria Vijayanagara', 'sr': 'Vidžajanagarsko carstvo', 'sv': 'Vijayanagar', 'ta': 'விஜயநகரப் பேரரசு', 'tcy': 'ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯ', 'te': 'విజయనగర సామ్రాజ్యము', 'tg': 'Виҷаянагар', 'th': 'จักรวรรดิวิชัยนคร', 'tr': 'Vijayanagar İmparatorluğu', 'uk': 'Віджаянагарська імперія', 'ur': 'وجے نگر سلطنت', 'uz': 'Vijayanagar', 'vec': 'Vijayanagar', 'vi': 'Đế quốc Vijayanagara', 'wuu': '毗奢耶那伽罗王朝', 'yue': '毗奢耶那伽羅帝國', 'zh': '毗奢耶那伽罗王朝', 'zh-cn': '毗奢耶那伽罗王朝', 'zh-hans': '毗奢耶那伽罗王朝', 'zh-hant': '毗奢耶那伽羅王朝', 'zh-hk': '毗奢耶那伽羅王朝', 'zh-sg': '毗奢耶那伽罗王朝', 'zh-tw': '毗奢耶那伽羅王朝'}, 'statements': {'P17': [{'id': 'Q167639$A37EB283-7E6D-4CA6-ADFD-08FD53F56DA9', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q668', 'type': 'value'}}], 'P31': [{'id': 'Q167639$65089F33-4A6F-488F-A2E0-FC21FD4AB6EA', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1646-00-00T00:00:00Z'}, 'type': 'value'}}], 'rank': 'preferred', 'references': [], 'value': {'content': 'Q3024240', 'type': 'value'}}, {'id': 'Q167639$68cd0bb8-422f-26bd-3ed9-f8424f5f31e6', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q48349', 'type': 'value'}}, {'id': 'Q167639$de1ce8dc-4144-2ba1-ccdd-97dce6fecd19', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q11514315', 'type': 'value'}}, {'id': 'Q167639$9e1dfab8-4a44-5d28-b3ac-dc83fca8668f', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q15401699', 'type': 'value'}}, {'id': 'Q167639$DE7D4075-C81E-4F64-B473-83F2E2B5719F', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985786', 'precision': 9, 'time': '+1336-00-00T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1646-00-00T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q48349', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q174844': {'descriptions': {'ar': 'منطقة حضرية يبلغ مجموع سكانها أكثر من عشرة ملايين شخص', 'ast': "área metropolitana con más de 10 millones d'habitantes", 'be-tarask': 'вялікае места з насельніцтвам больш за 10 мільёнаў чалавек', 'bjn': 'Kuta nang panduduknya labih pada 10 juta urang', 'bn': 'অত্যন্ত বৃহৎ মহানগরী যার জনসংখ্যা ১ কোটিরও বেশি', 'cy': 'dinas anferthol', 'de': 'Stadt mit mehr als 10 Millionen Einwohnern', 'el': 'πολύ μεγάλη πόλη με πληθυσμό άνω των δέκα εκατομμυρίων κατοίκων', 'en': 'very large city with a total population in excess of ten million people', 'eo': 'metropola urbo kun pli ol 10 milionoj da loĝantoj', 'es': 'metrópoli con más de 10 millones de habitantes', 'fi': '10 miljoonan asukkaan kaupunki', 'fr': 'très grande agglomération', 'hu': 'Tízmillió főnél nagyobb népességű település', 'id': 'kota yang sangat besar dengan jumlah penduduk melebihi sepuluh juta jiwa', 'ja': '巨大な都市', 'ko': '인구 1000만이 넘는 도시', 'nb': 'byer med flere enn 10 millioner innbyggere', 'nl': 'stad met meer dan 10.000.000 inwoners', 'pt': 'cidade com mais de dez milhões de habitantes', 'ru': 'метропольная область с суммарным населением более 10 миллионов человек', 'sl': 'zelo veliko mesto s skupno več kot desetimi milijoni prebivalcev', 'sv': 'storstadsområde med total befolkning bestående av minst 10 miljoner människor'}, 'labels': {'ar': 'مدينة كبيرة', 'ast': 'megaciudá', 'azb': 'بویوک شهر', 'be-tarask': 'мэгаместа', 'bjn': 'megakuta', 'bn': 'অতিমহানগরী', 'bs': 'megagrad', 'ca': 'megaciutat', 'cs': 'megaměsto', 'cy': 'mega-ddinas', 'da': 'Megaby', 'de': 'Megastadt', 'diq': 'Megasûke', 'el': 'μεγάπολη', 'en': 'megacity', 'eo': 'megaurbo', 'es': 'megaciudad', 'fa': 'بزرگشهر', 'fi': 'megakaupunki', 'fr': 'mégapole', 'frr': 'megastääd', 'ga': 'meigeacathair', 'gl': 'megacidade', 'he': 'מגה-עיר', 'hu': 'megaváros', 'ia': 'Megacitate', 'id': 'megakota', 'it': 'megalopoli', 'ja': 'メガシティ', 'kk': 'Мегақала', 'ko': '메가시티', 'lv': 'megapilsēta', 'mi': 'Tāone nui', 'mr': 'महानगर', 'nb': 'megaby', 'nl': 'miljoenenstad', 'os': 'мегæсахар', 'pl': 'megamiasto', 'ps': 'ستر ښار', 'pt': 'megacidade', 'ru': 'мегагород', 'sl': 'megamesto', 'sr': 'мегаград', 'sv': 'megastad', 'th': 'เมกะซิตี', 'tr': 'Megakent', 'tt': 'мега-шәһәр', 'tt-cyrl': 'мега-шәһәр', 'ur': 'میگا شہر', 'vi': 'siêu đô thị', 'yue': '巨型城市', 'zh': '巨型都市', 'zh-hant': '巨型都市'}, 'statements': {}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q2001966': {'descriptions': {'ar': 'حكم أو سيطرة شركة الهند الشرقية البريطانية على أجزاء من شبه القارة الهندية', 'az': '1757-ci ildə Plassey döyüşü ilə başlayan və 2 avqust 1858-ci ildə Britaniya Parlamenti tərəfindən qəbul edilən Hindistan Hökuməti Qanunu ilə ləğv edilmiş administrasiyadır', 'be-tarask': 'Індыя пад кіраваньнем Брытанскай Ост-Індзкай кампаніі', 'bn': 'ভারতীয় উপমহাদেশে ব্রিটিশ ইস্ট ইন্ডিয়া কোম্পানির শাসন (১৭৫৭- ১৮৫৮)', 'de': 'historischer Staat', 'en': 'rule of the British East India Company on the Indian subcontinent (1757–1858)', 'eo': 'regado de la Orient-Hinda Kompanio sur la Hinda subkontinento (1757-1858)', 'es': 'dominio británico (1757-1858)', 'hi': 'ब्रिटिश भारत का एक दौर', 'it': 'dominio esercitato dalla Compagnia britannica delle Indie orientali sul subcontinente indiano (1757-1858)', 'ko': '영국 동인도 회사 지배 하의 인도', 'pt': 'Governo da Companhia Britânica das Índias Orientais no subcontinente indiano (1757-1858)', 'pt-br': 'Governo da Companhia Britânica das Índias Orientais no subcontinente indiano (1757-1858)', 'sl': 'vladavina Britanske vzhodnoindijske družbe na indijski podcelini (1757–1858)', 'te': 'భారతదేశంలో ఈస్టిండియా కంపెనీ పాలన', 'tr': 'İngiliz Doğu Hindistan Şirketinin 1757-1858 yıllarında egemen olduğu politik yapı'}, 'labels': {'ar': 'حكم الشركة في الهند', 'ast': 'Dominiu de la Compañía na India', 'az': 'Ost-Hind şirkətinin administrasiyası altında olan Hindistan', 'be': 'Індыя пад кіраваннем Брытанскай Ост-Індскай кампаніі', 'be-tarask': 'Індыя пад уладай кампаніі', 'bn': 'ভারতে কোম্পানি শাসন', 'ca': "Domini de la Companyia a l'Índia", 'ckb': 'فەرمانڕەوایی کۆمپانیا لە ھیندستان', 'cs': 'Indie pod vládou východoindické společnosti', 'da': 'kompagnistyre i Indien', 'en': 'Company rule in India', 'eo': 'Hindio sub regado de Brita Orient-Hinda Kompanio', 'es': 'Dominio de la Compañía en la India', 'fa': 'نقش کمپانی هند شرقی در هندوستان', 'fr': 'domination de la Compagnie britannique des Indes orientales en Inde', 'he': 'הודו הבריטית', 'hi': 'कंपनी राज', 'hy': 'Հնդկաստանը Բրիտանական ՕՍՏ-հնդկական ընկերության կառավարման ներքո', 'it': 'Company Raj', 'ja': '東インド会社統治', 'ka': 'კომპანიის მმართველობა ინდოეთში', 'ko': '회사령 인도', 'ml': 'ഇന്ത്യയിലെ കമ്പനി ഭരണം', 'ne': 'कम्पनी राज', 'nl': 'Company rule in India', 'pa': 'ਭਾਰਤ ਵਿੱਚ ਕੰਪਨੀ ਰਾਜ', 'pnb': 'کمپنی راج', 'ps': 'په هند باندې د ختیځ هند د بریتانوي شرکت واکمني', 'pt': 'Governo da Companhia Britânica das Índias Orientais na Índia', 'pt-br': 'Governo da Companhia Britânica das Índias Orientais na Índia', 'ro': 'Dominația Companiei britanice a Indiilor Orientale în India', 'ru': 'Индия под управлением Британской Ост-Индской компании', 'sl': 'Indija pod vladavino Britanske vzhodnoindijske družbe', 'sq': 'Sundimi i Kompanisë Britanike të Indisë Lindore', 'sr': 'Владавина Компаније у Индији', 'sv': 'Ostindiska kompaniets styre', 'ta': '1757-1857', 'te': 'భారతదేశంలో కంపెనీ పాలన', 'th': 'การปกครองของบริษัทในอินเดีย', 'tr': 'Doğu Hindistan Şirketi Yönetimi Altındaki Hindistan', 'ur': 'کمپنی راج', 'vi': 'Công ty Đông Ấn cai trị Ấn Độ', 'zh': '东印度公司治下的印度'}, 'statements': {'P17': [{'id': 'Q2001966$a0625ffe-4aef-b945-89a6-3f506cbe7e0f', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q8680', 'type': 'value'}}], 'P31': [{'id': 'Q2001966$eab18f60-4a06-5dad-60c9-3f6cd60882b0', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1757-00-00T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1858-00-00T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q133156', 'type': 'value'}}, {'id': 'Q2001966$31f6e5f1-4a0b-1494-7bb5-41eba1103a28', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'preferred', 'references': [], 'value': {'content': 'Q3024240', 'type': 'value'}}, {'id': 'Q2001966$fc20d878-4329-efa4-09f1-e1aa9c24a072', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'preferred', 'references': [], 'value': {'content': 'Q1351282', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q208511': {'descriptions': {'ar': 'مدينة ذات أهمية عالمية قصوى', 'be-tarask': 'горад сусьветнай эканамічнай значнасьці', 'bn': 'বিশ্ব অর্থনীতিতে গুরুত্বপূর্ণ শহর', 'de': 'Stadt, die als primärer Knoten im globalen Wirtschaftsnetzwerk dient', 'el': 'πόλη η οποία είναι σημαντικός κόμβος στην παγκόσμια οικονομία', 'en': 'city which is an important node in the global economy', 'eo': 'urbo kiu havas gravan rolon en tutmonda ekonomio kaj socio', 'es': 'ciudad que es un nodo importante en la economía global', 'fi': 'kaupunki, jolla on merkittävä vaikutus maailmaan sosioekonomisesti, kulttuurisesti tai poliittisesti', 'fr': "ville qui exerce des fonctions stratégiques à l'échelle mondiale", 'frp': 'vela qu’ègzèrce de fonccions stratègiques a l’èchiéla mondiâla', 'he': 'עיר גלובלית. עיר שיש לה השפעה בינלאומית', 'it': 'città generalmente considerata essere un importante nodo nel sistema economico globale', 'ja': '人類文明の中枢を担い、重要性・影響力が高い都市', 'nb': 'verdens viktigste byer innen kultur og økonomi', 'nl': 'stad die een directe en wezenlijke invloed op de wereldpolitiek heeft door sociaal-economische, culturele en/of politieke middelen', 'pt': 'cidade com grande importância econômica global', 'ru': 'город, имеющий стратегическое значение в мировом масштабе', 'scn': 'cità cunsiddirata impurtanti ntô sistema ecunòmicu munniali', 'sco': 'ceety generally considered tae be an important node in the global economic seestem', 'sr': 'град који се генерално сматра важним у глобалном економском систему', 'sv': 'stad som spelar en avgörande roll i världen vad gäller kultur och ekonomi', 'tr': 'küresel ekonomide önemli bir merkez hâline gelmiş yer', 'vi': 'thành phố có vai trò quan trọng trong nền kinh tế thế giới', 'zh': '在社經文化及政治上直接影響全球的城市'}, 'labels': {'ace': 'Banda global', 'ar': 'مدينة عالمية', 'ast': 'ciudá global', 'be': 'глабальны горад', 'be-tarask': 'глябальны горад', 'bg': 'Глобален град', 'bho': 'बैस्विक शहर', 'bn': 'বৈশ্বিক শহর', 'bs': 'globalni grad', 'ca': 'ciutat global', 'cs': 'globální město', 'cy': 'dinas global', 'da': 'Verdensby', 'de': 'Weltstadt', 'el': 'παγκόσμια πόλη', 'en': 'global city', 'eo': 'mondurbo', 'es': 'ciudad global', 'et': 'maailmalinn', 'eu': 'Hiri global', 'fa': 'شهر جهانی', 'fi': 'maailmankaupunki', 'fj': 'Vuravura siti', 'fr': 'ville mondiale', 'frp': 'vela mondiâla', 'frr': 'weltstääd', 'fy': 'Wrâldstêd', 'ga': 'cathair dhomhanda', 'gl': 'cidade global', 'gsw': 'Weltstadt', 'hak': 'Chhiòn-khiû Sàng-sṳ', 'he': 'עיר עולם', 'hr': 'Velegrad', 'hu': 'világváros', 'hy': 'գլոբալ քաղաք', 'ia': 'Citate global', 'id': 'kota global', 'it': 'città globale', 'ja': '世界都市', 'ka': 'გლობალური ქალაქი', 'ko': '세계도시', 'ku': 'bajarê global', 'ku-latn': 'bajarê global', 'lad': 'Sivdad globala', 'mk': 'велеград', 'ml': 'ആഗോള നഗരം', 'ms': 'Bandar raya global', 'nb': 'verdensby', 'nl': 'wereldstad', 'os': 'глобалон сахар', 'pl': 'metropolia globalna', 'pnb': 'عالمی شہر', 'pt': 'cidade global', 'ro': 'oraș global', 'ru': 'глобальный город', 'scn': 'cità glubbali', 'sco': 'global ceety', 'se': 'máilmmigávpot', 'sh': 'globalni grad', 'sk': 'Svetové mesto', 'sl': 'svetovno mesto', 'smn': 'maailmkaavpug', 'sms': 'maaiʹlmgåårad', 'sr': 'глобални град', 'sr-ec': 'Велеград', 'sr-el': 'Velegrad', 'sv': 'världsstad', 'ta': 'உலகளாவிய நகரம்', 'te': 'ఆల్ఫా వరల్డ్ సిటీ', 'tg': 'шаҳри дунявӣ', 'tl': 'Lungsod pandaigdig', 'tr': 'küresel kent', 'uk': 'світове місто', 'ur': 'عالمی شہر', 'vec': 'sità mondiałe', 'vi': 'thành phố toàn cầu', 'wuu': '全球城市', 'xmf': 'გლობალური ნოღა', 'yue': '國際大都會', 'zh': '全球城市', 'zh-cn': '全球城市', 'zh-hans': '全球城市', 'zh-hant': '全球城市', 'zh-hk': '全球城市', 'zh-sg': '全球城市', 'zh-tw': '全球城市'}, 'statements': {}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q266923': {'descriptions': {'ar': 'مملكة زائلة في الوقت الحالي تقع في جنوب الهند', 'bn': 'ভারতের ঐতিহাসিক রাষ্ট্র', 'cs': 'historický státní útvar', 'de': 'historischer Staat', 'en': 'Monarchy in India (1399–1947)', 'fi': 'historiallinen valtio Intiassa', 'fr': 'État princier du Raj britannique (1399 à 1950)', 'hi': 'भारत का ऐतिहासिक राज्य', 'id': 'kerajaan di Asia Selatan', 'it': "regno nell'India meridionale (1399-1947)", 'ja': 'カルナータカ州のマイソール地方に存在したヒンドゥー王朝', 'ks': 'سٲبقہٕ مُلُک', 'mag': 'भारतके ऐतिहासिक राज्य (१३९९-१९४७)', 'mk': 'поранешна држава во Индија', 'ml': 'ഇന്ത്യയിലെ ഒരു രാജവംശം', 'nl': 'historisch land', 'ru': 'историческое государство', 'si': 'මයිසූර් රාජධානිය දකුණු ඉන්දියාවේ රාජධානියක් වූ අතර, සම්ප්\u200dරදායිකව නූතන මයිසූර් නගරය ආශ්\u200dරිතව 1399 දී පිහිටුවන ලද බවට විශ්වාස කෙරේ. 1799 සිට 1950 දක්වා, එය බ්\u200dරිතාන්\u200dය ඉන්දියාව සමඟ අනුබද්ධ සන්ධානයකින් 1947 දක්වා කුමාර රාජ්\u200dයයක් විය', 'sl': 'monarhija v Indiji (1399–1947)', 'te': 'భారతదేశంలో చారిత్రక రాష్ట్రం', 'th': 'ราชอาณาจักรในอนุทวีปอินเดีย (ค.ศ. 1399–1947)', 'zh': '在印度歷史上的國家'}, 'labels': {'ar': 'مملكة ميسور', 'ast': 'Reinu de Mysore', 'az': 'Maysur əmirliyi', 'azb': 'میسور شاهلیغی', 'bg': 'Майсор', 'bho': 'मैसूर राज', 'bn': 'মহীশূর রাজ্য', 'br': 'Stad Maisor', 'ca': 'Mysore', 'cs': 'Maisúrské království', 'da': 'Kongeriget Mysore', 'de': 'Mysore', 'el': 'Βασίλειο της Μυσόρης', 'en': 'Kingdom of Mysore', 'eo': 'Misora reĝlando', 'es': 'Reino de Mysore', 'eu': 'Mysoreko erresuma', 'fa': 'پادشاهی میسور', 'fi': 'Mysoren kuningaskunta', 'fr': 'royaume de Mysore', 'ga': 'Ríocht Mysore', 'he': 'ממלכת מייסור', 'hi': 'मैसूर का साम्राज्य', 'hu': 'Maiszúri Királyság', 'hy': 'Մայսուրի թագավորություն', 'id': 'Kerajaan Mysore', 'it': 'Regno di Mysore', 'ja': 'マイソール王国', 'ka': 'მაისურის სამეფო', 'kn': 'ಮೈಸೂರು ಸಂಸ್ಥಾನ', 'ko': '마이소르 왕국', 'mag': 'मैसूर राज्य', 'mk': 'Мајсур', 'ml': 'മൈസൂർ രാജ്യം', 'mr': 'म्हैसूरचे राजतंत्र', 'ms': 'Kerajaan Mysore', 'nan': 'Mysore Ông-kok', 'nb': 'Kongedømmet Mysore', 'nl': 'Koninkrijk Mysore', 'pa': 'ਮੈਸੂਰ ਦਾ ਰਾਜ', 'pl': 'Majsur', 'pnb': 'سلطنت خداداد میسور', 'pt': 'Reino de Mysore', 'ro': 'Regatul Mysore', 'ru': 'Майсур', 'sa': 'मैसूरु राज्यम्', 'si': 'මයිසූර් රාජධානිය', 'sl': 'Misorsko kraljestvo', 'sv': 'Mysore', 'ta': 'மைசூர் அரசு', 'te': 'మైసూర్ రాజ్యం', 'th': 'ราชอาณาจักรไมสูรุ', 'tr': 'Maisur Krallığı', 'uk': 'Майсур', 'ur': 'سلطنت خداداد میسور', 'uz': 'Maysur', 'vec': 'Regno de Mysore', 'vi': 'Vương quốc Mysore', 'zh': '迈索尔王国', 'zh-cn': '迈索尔土邦', 'zh-hant': '邁索爾邦'}, 'statements': {'P17': [{'id': 'Q266923$7524abfd-4661-5a30-ef0d-cb68c2b54a4e', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q129286', 'type': 'value'}}], 'P31': [{'id': 'Q266923$9E28EFAF-FCEB-4B29-A8B5-1A250FBF55A9', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985786', 'precision': 9, 'time': '+1565-00-00T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'wikibase-item', 'id': 'P2210'}, 'value': {'content': 'Q167639', 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q1371288', 'type': 'value'}}, {'id': 'Q266923$c826326c-4dff-617b-4f23-a2a303f64f63', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1799-00-00T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1947-00-00T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q1336152', 'type': 'value'}}, {'id': 'Q266923$106eecef-4490-a11e-5ffa-89f1e1f776d4', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1948-00-00T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q3024240', 'type': 'value'}}, {'id': 'Q266923$077f54a7-4354-9b02-95a5-304f1c95472e', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985786', 'precision': 9, 'time': '+1399-00-00T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 9, 'time': '+1948-00-00T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q417175', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q30': {'descriptions': {'af': 'land in Noord-Amerika', 'am': 'በሰሜን አሜሪካ ውስጥ አገር', 'an': "País d'America d'o Norte", 'ar': 'دولة في أمريكا الشمالية', 'ary': 'جمهورية دستورية فيديرالية فيها خمسين ولاية ولعاصمة لفيديرالية ديالها هي واشينطون', 'arz': 'جمهوريه فدراليه فى امريكا الشماليه', 'as': 'উত্তৰ আমেৰিকাৰ এখন ৰাষ্ট্ৰ', 'ast': "país d'América del Norte", 'az': 'Şimali Amerikada demokratik ölkə', 'ba': 'Төньяҡ Америкала урынлашҡан федератив дәүләт', 'bar': 'Stoot in Noadamerika', 'be': 'краіна ў Паўночнай Амерыцы', 'be-tarask': 'дзяржава ў Паўночнай Амэрыцы', 'bg': 'държава в Северна Америка', 'bho': 'उत्तर अमेरिका में एगो देस, संघीय गणतंत्र (फेडरल रिपब्लिक)', 'bi': 'kaontri long Not Amerika', 'blk': 'လိုꩻခွိုꩻ', 'bn': 'উত্তর আমেরিকা মহাদেশের মধ্যভাগের দেশ', 'br': 'bro eus Norzhamerika', 'bs': 'država u Sjevernoj Americi', 'ca': "país de l'Amèrica del Nord", 'ceb': 'nasod sa Amerikang Amihanan', 'ckb': 'کۆمارێکی فیدراڵی لە ئەمریکای باکوور', 'co': "paese di l'America settentriunale", 'crh-ro': "Sîrtbetí-Amerika'da bír memleket", 'cs': 'stát v Severní Americe', 'cy': 'gwlad yng Ngogledd America', 'da': 'forbundsrepublik i Nordamerika', 'de': 'Staat in Nordamerika', 'de-at': 'Staat in Nordamerika', 'de-ch': 'Staat in Nordamerika', 'diq': 'Amerika zımey de yew ware', 'dty': 'उत्तर अमेरिका महादेशमैं रयाऽ विश्वको चौथो ठूलो राष्ट्र', 'el': 'χώρα της Βόρειας Αμερικής', 'en': 'country primarily located in North America', 'en-ca': 'country in North America', 'en-us': 'country in North America', 'eo': 'lando, kies ĉefparto estas en Nord-Ameriko inter Kanado kaj Meksiko, kiu ankaŭ regas Alaskon en nordokcidenta Nord-Ameriko, Havajo-insularon en Pacifiko, kaj ankaŭ aliajn Pacifikajn kaj Karibajn insulojn', 'es': 'país de América del Norte', 'et': 'Põhja-Ameerika föderaalne vabariik', 'eu': 'Ipar Amerikako herrialdea', 'fa': 'کشوری در آمریکای شمالی', 'fi': 'valtio Pohjois-Amerikassa', 'fr': "pays d'Amérique du Nord", 'frc': "pays d'Amérique du Nord", 'fy': 'lân yn Noard-Amearika', 'ga': 'tír i Meiriceá Thuaidh', 'gd': 'dùthaich ann an Ameireaga a Tuath', 'gl': 'país de América do Norte', 'gn': 'tetã Yvate Amérikape', 'gpe': 'country wey dey locate insyd North America', 'gsw': 'Staat z Nordamerika', 'gu': 'ઉત્તર અમેરિકા ખંડમાં આવેલ એક સમવાય તંત્રી રાજ્ય', 'gv': 'çheer ayns America Hwoaie', 'haw': 'mokuhonua ʻo ʻAmelika ʻĀkau', 'he': 'מדינה פדרלית באמריקה הצפונית', 'hi': 'उत्तरी अमेरिका में स्थित एक देश', 'hif': 'des North America me hae', 'hr': 'država u Sjevernoj Americi', 'hsb': 'stat w sewjernej Americe', 'ht': 'peyi nan Amerik dinò', 'hu': 'ország Észak-Amerikában', 'hy': 'պետություն Հյուսիսային Ամերիկայում', 'hyw': 'Հիւսիսային Ամերիկայի մէջ երկիր', 'id': 'negara di Amerika Utara', 'ilo': 'pagilian idiay Amianan nga Amerika', 'inh': 'ГӀинбухерча Америке улла федеративни паччахьалкхе', 'is': 'land í Norður-Ameríku', 'isv-latn': 'Država v Sěvernoj Amerikě', 'it': 'Stato sovrano federale dell’America settentrionale', 'ja': '北アメリカの国', 'jv': 'nagara ing Amérika Lor', 'ka': 'ქვეყანა ჩრდილოეთ ამერიკაში', 'kcg': 'a̱byin di̱ fam-a̱byin Amerika A̱za', 'kk': 'Солтүстік Америкада орналасқан федеративтік мемлекет', 'kk-cyrl': 'Солтүстік Америкада орналасқан федеративтік мемлекет', 'kk-latn': 'Soltüstik Amerıkada ornalasqan federatıvtik memleket', 'kn': 'ಉತ್ತರ ಅಮೇರಿಕದ ಒಂದು ದೇಶ', 'ko': '북아메리카의 국가', 'kr': 'Cidi gǝdiya America yǝ', 'ks': 'مُلُک', 'la': 'civitas in America Septentrionali', 'lb': 'Staat an Nordamerika', 'lez': 'Төньяк Америкада урнашкан дәүләт', 'lo': 'ປະເທດໃນທະວີບອາເມຣິກາເໜືອ', 'lt': 'valstybė Šiaurės Amerikoje', 'lv': 'valsts Ziemeļamerikā', 'lzh': '都華盛頓，當世首強', 'mad': 'naghârâ è Amèrika Dâjâ. Ebhukoṭṭana iyâ arèya Washington, D.C. bân koṭṭa palèng rajâ iyâ arèya Koṭṭa New York. Loas bilajâhna iyâ arèya 9,833,520 km².', 'min': 'nagara di Amerika Utara', 'mk': 'земја во Северна Америка', 'ml': 'വടക്കേ അമേരിക്കൻ ഭൂഖണ്ഡത്തിലുളള 50 സംസ്ഥാനങ്ങൾ ചേർന്നുള്ള ഫെഡറൽ റിപ്പബ്ലിക്ക്\u200c', 'mr': 'उत्तर अमेरिका खंडातील देश', 'ms': 'negara republik persekutuan di Amerika Utara', 'mt': 'stat sovran fl-Amerka ta’ Fuq', 'my': 'မြောက်အမေရိကရှိ ဖက်ဒရယ်ပြည်ထောင်စုနိုင်ငံ', 'nah': 'Wexteyowalli pan Amerikah Miktlanpa', 'nan': 'Pak-bí-chiu ê kok-ka', 'nb': 'land i Nord-Amerika', 'ne': 'उत्तर अमेरिका महादेशमा रहेको विश्वको चौथो ठूलो राष्ट्र हो', 'nl': 'land in Noord-Amerika', 'nn': 'land i Nord-Amerika', 'nqo': 'ߞߊ߬ߝߏ ߡߍ߲ ߝߊ߲߬ߓߊ ߛߌ߰ߣߍ߲߬ ߦߋ߫ ߊߡߍߙߌߞߌ߬ ߞߐ߬ߘߎ߮ ߘߐ߫', 'oc': 'país en America del Nòrd', 'pa': "ਉੱਤਰੀ ਅਮਰੀਕਾ 'ਚ ਦੇਸ਼", 'pap': 'pais den Nort Amerika', 'pih': "kuntrii i' North Merika", 'pl': 'państwo federacyjne w Ameryce Północnej', 'ps': 'فدرالي جمهوریت په شمالي امریکا کي', 'pt': 'país na América do Norte', 'pt-br': 'país da América do Norte', 'rmy': 'them andi Nordutni Amerika', 'ro': 'stat în America de Nord', 'roa-tara': "repubbleche federale ccu 'nu sisteme rappresendative de ll'Americhe settentrionale", 'ru': 'федеративное государство в Северной Америке', 'rue': 'федератівна презідентьска републіка в Северній Америцї', 'sah': 'федерал конституция өрөспүүбүлүкэтэ', 'sc': "paisu de s'Amèrica setentrionale", 'scn': 'pajisi dâ Mèrica dû nord', 'sco': 'kintra in North Americae', 'sd': 'اتر آمريڪا کنڊ جو هڪ ملڪ', 'si': 'උතුරු ඇමෙරිකාවේ රටක්', 'sk': 'federatívny štát v Severnej Amerike', 'sl': 'država v Severni Ameriki', 'so': 'dalka', 'sq': 'shtet në Amerikën e Veriut', 'sr': 'држава у Северној Америци', 'sr-ec': 'држава у Северној Америци', 'sr-el': 'država u Severnoj Americi', 'sv': 'federal republik i Nordamerika', 'sw': 'nchi katika Amerika Kaskazini', 'syl': 'ꠄꠉꠥ ꠖꠦꠡ', 'ta': 'மத்திய வட அமெரிக்க நாடு', 'te': 'ఉత్తర అమెరికా ఖండంలోని సమాఖ్య గణతంత్ర దేశం', 'tg': 'кишваре дар қураи Амрикои Шимолӣ', 'tg-cyrl': 'кишваре дар қураи Амрикои Шимолӣ', 'th': 'ประเทศในทวีปอเมริกาเหนือ', 'ti': 'ኣብ ሰሜን ኣመሪካ እትርከብ ሃገር', 'tig': 'እት ቅብለት ኣሜሪካ ለትትረከብ ዓድ', 'tok': 'ma lawa li lon ma Amelika lete', 'tr': "Kuzey Amerika'da bulunan ülke", 'tt': 'Төньяк Америкада урнашкан дәүләт', 'tt-cyrl': 'Төньяк Америкада урнашкан дәүләт', 'tt-latn': 'Tönyaq Amerikada urnaşqan däwlät', 'tum': 'charu ku Amelika Wakumpoto', 'uk': "федеративне об'єднання в Північній Америці, що складається з 50 штатів та столичного округу Колумбія", 'ur': 'براعظم شمالی امریکا کا ایک ملک', 'uz': 'Shimoliy Amerikadagi davlat', 'vec': "Stato del Nord de l'Amèrica", 'vi': 'quốc gia cộng hoà lập hiến liên bang nằm tại khu vực Bắc Mỹ', 'xmf': 'ფედერაციული სახენწჷფო ოორუე ამერიკას', 'yi': 'פעדעראלע לאנד אין צפון אמעריקע', 'yue': '北美洲一國，本土喺北美大陸，外加一啲飛地同埋屬地，首都華盛頓特區', 'zgh': 'ⵜⴰⵎⵓⵔⵜ ⴳ ⵜⵎⵔⵉⴽⵜ ⵏ ⵓⴳⴰⴼⴰ', 'zh': '北美洲國家', 'zh-cn': '北美洲国家', 'zh-hans': '北美洲国家', 'zh-hant': '北美洲國家', 'zh-hk': '北美洲國家', 'zh-mo': '北美洲國家', 'zh-my': '北美洲国家', 'zh-sg': '北美洲国家', 'zh-tw': '北美洲國家'}, 'labels': {'ab': 'Еиду Америкатәи Аштатқәа', 'ace': 'Amirika Carékat', 'ady': 'Америкэ Штат Зэхэтхэр', 'aeb-arab': 'أمريكيا', 'af': 'Verenigde State', 'alt': 'Американыҥ Бириктирилген Штаттары', 'am': 'የተባበሩት ግዛቶች', 'ami': 'Amilika', 'an': 'Estatos Unitos', 'ang': 'Geānedu Rīcu America', 'anp': 'अमेरिका', 'ar': 'الولايات المتحدة', 'arc': 'ܐܘܚܕܢܐ ܡܚܝܕܐ', 'arq': 'مريكان', 'ary': 'الولايات المتاحدة د ميريكان', 'arz': 'امريكا', 'as': 'আমেৰিকা যুক্তৰাষ্ট্ৰ', 'ast': 'Estaos Xuníos', 'atj': 'Kitci mokoman aski', 'av': 'Америкалъул Цолъарал Штатал', 'avk': 'Amerikatanarasokeem', 'awa': 'संयुक्त राज्य अमेरिका', 'ay': 'Istadus Unidus', 'az': 'Amerika Birləşmiş Ştatları', 'azb': 'آمریکا بیرلشمیش ایالت\u200cلری', 'ba': 'Америка Ҡушма Штаттары', 'ban': 'Amérika Serikat', 'bar': 'Vaoanigte Stootn', 'bbc': 'Amerika Serikat', 'bcl': 'Estados Unidos', 'be': 'Злучаныя Штаты Амерыкі', 'be-tarask': 'Злучаныя Штаты Амэрыкі', 'bew': 'Amerikè Serikat', 'bg': 'САЩ', 'bgn': 'آیالات موته هیده', 'bho': 'अमेरिका', 'bi': 'Yunaeted Stet blong Amerika', 'bjn': 'Amirika Serikat', 'blk': 'အမေႏရိကန်ႏခမ်းခြွဉ်းဗူႏ', 'bm': 'Amerika ka Kelenyalen Jamanaw', 'bn': 'মার্কিন যুক্তরাষ্ট্র', 'bo': 'ཨ་མེ་རི་ཁ་རྒྱལ་ཕྲན་མཉམ་འབྲེལ་རྒྱལ་ཁབ།', 'bpy': 'তিলপারাষ্ট্র', 'br': 'Stadoù-Unanet', 'brh': 'Amríká ná Baddhí Riyásat', 'bs': 'Sjedinjene Američke Države', 'btm': 'Amerika Serikat', 'bug': 'ᨕᨆᨙᨑᨗᨀ ᨔᨙᨑᨗᨀᨈ', 'bxr': 'Америкын Нэгэдэһэн Улас', 'ca': "Estats Units d'Amèrica", 'cbk-zam': 'Estados Unidos de America', 'cdo': 'Mī-guók', 'ce': 'Ӏaьмаркан Цхьаьнатоьхна Пачхьалкхаш', 'ceb': 'mga Estadong Hiniusa', 'ch': 'Estados Unidus', 'chr': 'ᏌᏊᎢᏳᎾᎵᏍᏔᏅᏍᎦᏚᎩ', 'chy': 'United States', 'ckb': 'ویلایەتە یەکگرتووەکانی ئەمریکا', 'co': "Stati Uniti d'America", 'cr': 'ᑭᐦᒋ ᒨᐦᑯᒫᓇᐢᑭᕀ', 'crh': 'Amerika Qoşma Devletleri', 'crh-cyrl': 'Америка Къошма Девлетлери', 'crh-latn': 'Amerika Qoşma Ştatları', 'crh-ro': 'Amerika Bírleşík Dewletlerí', 'cs': 'Spojené státy americké', 'csb': 'Zjednóné Kraje Americzi', 'cu': 'Амєрїканьскꙑ Ѥдьнѥнꙑ Дрьжавꙑ', 'cv': 'Америкăри Пĕрлешӳллĕ Штатсем', 'cy': 'Unol Daleithiau America', 'da': 'USA', 'dag': 'America', 'de': 'Vereinigte Staaten', 'de-at': 'Vereinigte Staaten', 'de-ch': 'Vereinigte Staaten', 'dga': 'United State Of America', 'din': 'Pawuut Matiic', 'diq': 'Dewletê Yewbiyaeyê Amerika', 'dsb': 'Zjadnośone staty Ameriki', 'dtp': 'Amerika Syarikat', 'dty': 'संयुक्त राज्य अमेरिका', 'dv': 'އެމެރިކާ', 'dz': 'ཡུ་ནའིཊེཊ་སི་ཊེས', 'ee': 'United States', 'el': 'Ηνωμένες Πολιτείες Αμερικής', 'eml': 'Stat Unî', 'en': 'United States', 'en-us': 'United States', 'eo': 'Usono', 'es': 'Estados Unidos', 'et': 'Ameerika Ühendriigid', 'eu': 'Ameriketako Estatu Batuak', 'ext': 'Estaus Unius', 'fa': 'ایالات متحده آمریکا', 'ff': 'Dowlaaji Dentuɗi', 'fi': 'Yhdysvallat', 'fit': 'Yhtysvallat', 'fj': 'Matanitu Cokovata o Amerika', 'fo': 'Sameindu Statirnir', 'fon': 'Amɛlikatò', 'fr': 'États-Unis', 'frc': 'États-Unis', 'frp': 'Ètats-Unis d’Amèrica', 'frr': 'Ferianigt Stooten faan Ameerikaa', 'fur': 'Stâts Unîts di Americhe', 'fy': 'Feriene Steaten fan Amearika', 'ga': 'Stáit Aontaithe Mheiriceá', 'gag': 'Amerika Birleşik Devletläri', 'gan': '美國', 'gcr': 'Létazini', 'gd': 'Na Stàitean Aonaichte', 'gl': 'Estados Unidos de América', 'glk': 'آمریکا', 'gn': 'Amérika Retãvorekuéra Joaju', 'gom': 'अमेरिकेचीं संयुक्त संस्थानाः', 'gor': 'Amerika Serikat', 'got': '𐌱𐌰𐌽𐌳𐌰𐍂𐌴𐌹𐌺𐌾𐌰', 'gpe': 'United States', 'grc': 'Ἡνωμέναι Πολιτεῖαι', 'gsw': 'Verainigte Staate vu Amerika', 'gu': 'યુનાઇટેડ સ્ટેટ્સ ઓફ અમેરિકા', 'guc': "Mma Mulo'usu Ameerikajatü", 'guw': 'Plidopọ Ayimatẹn lẹ tọn Amẹlika tọn', 'gv': 'Steatyn Unnaneysit America', 'ha': 'Tarayyar Amurka', 'hak': 'Mî-koet', 'haw': '‘Amelika Hui Pū ‘ia', 'he': 'ארצות הברית', 'hi': 'संयुक्त राज्य अमेरिका', 'hif': 'United States', 'hil': 'mga Estado Tingob', 'hr': 'Sjedinjene Američke Države', 'hsb': 'Zjednoćene staty Ameriki', 'ht': 'Etazini', 'hu': 'Amerikai Egyesült Államok', 'hy': 'Ամերիկայի Միացյալ Նահանգներ', 'hyw': 'Ամերիկայի Միացեալ Նահանգներ', 'ia': 'Statos Unite de America', 'iba': 'Amerika Serikat', 'id': 'Amerika Serikat', 'ie': 'Unit States de America', 'ig': 'Njikota Obodo Amerika', 'ii': 'ꂯꇩ', 'ik': 'Tannapta Nunaat', 'ike-latn': 'amialika', 'ilo': 'Estados Unidos iti Amerika', 'inh': 'Хетта Америкера Штаташ', 'io': 'Usa', 'is': 'Bandaríkin', 'isv-latn': 'Sjedinjene Štaty Ameriky', 'it': "Stati Uniti d'America", 'iu': 'ᐊᒥᐊᓕᑲ', 'ja': 'アメリカ合衆国', 'jam': 'Yunaitid Stiet', 'jbo': "mergu'e", 'jv': 'Amérikah Sarékat', 'ka': 'ამერიკის შეერთებული შტატები', 'kaa': 'Amerika Qurama Shtatları', 'kab': 'Iwunak Yeddukklen n Temrikt', 'kbd': 'Америкэ Штат Зэгуэт', 'kbp': 'Etaazuunii', 'kcg': 'Muná̱pyia̱ Sí̱tet A̱merika', 'kea': 'Stadus Unidus', 'kg': 'Etats-Unis ya Amelika', 'kge': 'Amerika Serikat', 'ki': 'United States', 'kjp': 'အ်ုမေရိကိုင်ခါန်ႋပ္ကုံ', 'kk': 'Америка Құрама Штаттары', 'kk-cyrl': 'Америка Құрама Штаттары', 'kk-latn': 'Amerïka Qurama Ştattarı', 'kl': 'Amerika', 'km': 'សហរដ្ឋអាមេរិក', 'kn': 'ಅಮೇರಿಕ ಸಂಯುಕ್ತ ಸಂಸ್ಥಾನ', 'ko': '미국', 'ko-kp': '미국', 'koi': 'Америкаись Ӧтлаасьӧм Штаттэз', 'kr': 'United State of America', 'krc': 'Американы Бирлешген Штатлары', 'krj': 'manga Estado Tingëb', 'ks': 'اَمريٖکہ', 'ksh': 'Vereenichde Staate van Amerika', 'ku': 'Dewletên Yekbûyî yên Amerîkayê', 'kv': 'Америкаса Ӧтувтчӧм Штатъяс', 'kw': 'Statys Unys', 'ky': 'АКШ', 'la': 'Civitates Foederatae Americae', 'lad': "Estatos Unitos d'Amerika", 'lb': 'Vereenegt Staate vun Amerika', 'lbe': 'Американал ЦачӀунхьу Штатру', 'lez': 'Америкадин Садхьанвай Штатар', 'lfn': 'Statos Unida de America', 'lg': 'Amereka', 'li': 'Vereinegde State van Amerika', 'lij': "Stati Unïi d'America", 'liv': 'Amērik Ītõnd-Valdõd', 'lld': "Stac Unii d'America", 'lmo': "Stat Unid d'America", 'ln': 'Lisangá lya Ameríka', 'lo': 'ສະຫະລັດອາເມຣິກາ', 'lrc': 'ولاتیا یکاگرته امریکا', 'lt': 'Jungtinės Amerikos Valstijos', 'ltg': 'Amerikys Saškierstuos Vaļsteibys', 'lv': 'Amerikas Savienotās Valstis', 'lzh': '美國', 'mad': 'Amèrika Sarikat', 'mai': 'अमेरिका', 'map-bms': 'Amerika Serikat', 'mdf': 'Америконь Соткс', 'mg': 'Etazonia', 'mhr': 'Ушымо Американ Штат-влак', 'mi': 'Hononga-o-Amerika', 'min': 'Amerika Sarikat', 'mk': 'САД', 'ml': 'അമേരിക്കൻ ഐക്യനാടുകൾ', 'mn': 'Америкийн Нэгдсэн Улс', 'mni': 'ꯑꯃꯦꯔꯤꯀꯥ', 'mnw': 'အမေရိကန်ပြည်ထောင်စု', 'mo': 'Стателе Уните але Америчий', 'mos': 'America', 'mr': 'अमेरिकेची संयुक्त संस्थाने', 'mrj': 'Америкын Ушымы Штатвлӓжӹ', 'ms': 'Amerika Syarikat', 'ms-arab': 'اميريکا شريکت', 'mt': 'Stati Uniti tal-Amerka', 'mwl': 'Stados Ounidos de la América', 'my': 'အမေရိကန်ပြည်ထောင်စု', 'myv': 'Американь Вейтьсэндявкс Штаттнэ', 'mzn': 'متحده ایالات آمریکا', 'na': 'Eben Merika', 'nah': 'Estadosonidos', 'nan': 'Bí-kok', 'nap': "State Aunite d'Amereca", 'nb': 'USA', 'nds': 'Vereenigte Staten', 'nds-nl': 'Verienigde Staoten van Amerika', 'ne': 'संयुक्त राज्य अमेरिका', 'new': 'अमेरिका', 'nia': 'Amerika Sorudu', 'nl': 'Verenigde Staten', 'nn': 'USA', 'nod': 'ᩈᩉᩁᩢᨭᩛ᩺', 'nov': 'Unionati States de Amerika', 'nqo': 'ߊߡߋߙߌߞߌ߬ ߞߊ߬ߝߏ߫ ߘߍ߬ߣߍ߲', 'nr': 'I-United States', 'nrm': "Êtats Unnis d'Améthique", 'nso': 'United States of America', 'nv': 'Wááshindoon Bikéyah Ałhidadiidzooígíí', 'ny': 'United States', 'oc': "Estats Units d'America", 'olo': 'Amierikan Yhtysvallat', 'om': 'Tokkummaa Koonyoota Ameerikaa', 'or': 'ଯୁକ୍ତରାଷ୍ଟ୍ର ଆମେରିକା', 'os': 'Америкæйы Иугонд Штаттæ', 'pa': 'ਸੰਯੁਕਤ ਰਾਜ ਅਮਰੀਕਾ', 'pag': 'United States', 'pam': 'Kaestaduang Misásanmetung', 'pap': 'Estadonan Uni di Merka', 'pcd': 'Étots-Unnis', 'pcm': 'Amerika', 'pdc': 'Amerikaa', 'pfl': 'Verainischde Schdaade vun Ameriga', 'pi': 'संयुक्त राज्य अमेरिका', 'pih': 'Yunitid Staits', 'pl': 'Stany Zjednoczone', 'pms': "Stat Unì d'América", 'pnb': 'امریکا', 'pnt': 'Ηνωμένες Πολιτείες Αμερικής', 'ps': 'د امریکا متحده ایالات', 'pt': 'Estados Unidos', 'pt-br': 'Estados Unidos', 'qu': 'Hukllachasqa Amirika Suyukuna', 'qug': 'Shukllachishka America Suyukuna', 'rm': 'Stadis Unids', 'rmc': 'Amerikakere spojimen Thema', 'rmf': 'Ameriko them', 'rmy': 'Phandle Staturya la Amerikiyake', 'rn': 'Leta z’Unze Ubumwe za Amerika', 'ro': 'Statele Unite ale Americii', 'roa-tara': "Statère Aunìte d'Americhe", 'ru': 'США', 'rue': 'США', 'rup': 'Vãsãliili Diadunu ali Americhia', 'rw': 'Leta Zunze Ubumwe z’Amerika', 'ryu': 'アミリカ合衆国', 'sa': 'अमेरिका संयुक्त संस्थानः', 'sah': 'Америка Холбоһуктаах Штааттара', 'sat': 'ᱥᱮᱞᱮᱫ ᱯᱚᱱᱚᱛ', 'sc': 'Istados Unidos', 'scn': 'Stati Uniti dâ Mèrica', 'sco': 'Unitit States', 'sd': 'آمريڪا', 'se': 'Amerihká ovttastuvvan stáhtat', 'sg': 'ÂKödörö-ôko tî Amerîka', 'sgs': 'JAV', 'sh': 'Sjedinjene Američke Države', 'shi': 'Iwankn Munnin n Marikan', 'shn': 'မိူင်းႁူမ်ႈတုမ် ဢမႄႇရိၵ', 'si': 'ඇමරිකානු එක්සත් ජනපදය', 'sk': 'Spojené štáty americké', 'skr': 'امریکہ', 'sl': 'Združene države Amerike', 'sm': 'Iunaite Sitete o Amerika', 'smn': 'Amerik ovtâstum staatah', 'sms': 'Ameriikk õhttõõvvâmvääʹld', 'sn': 'United States of America', 'so': 'Gobolada Isku Tegay ee Ameerika', 'sq': 'Shtetet e Bashkuara të Amerikës', 'sr': 'Сједињене Америчке Државе', 'sr-ec': 'Сједињене Америчке Државе', 'sr-el': 'Sjedinjene Američke Države', 'srn': 'Kondre Makandrameki', 'ss': 'IMelika', 'st': 'United States of America', 'stq': 'Fereende Stoaten fon Amerikoa', 'su': 'Amérika Sarikat', 'sv': 'USA', 'sw': 'Marekani', 'syl': 'ꠀꠝꠦꠞꠤꠇꠣ', 'szl': 'Zjednoczůne Sztaty', 'szy': 'United states', 'ta': 'அமெரிக்க ஐக்கிய நாடு', 'tay': "Amirika'", 'tcy': 'ಅಮೇರಿಕದ ಸಂಯುಕ್ತ ಸಂಸ್ಥಾನೊಲು', 'te': 'అమెరికా సంయుక్త రాష్ట్రాలు', 'tet': 'Estadu Naklibur Sira Amérika Nian', 'tg': 'Иёлоти Муттаҳидаи Амрико', 'tg-cyrl': 'Иёлоти Муттаҳидаи Амрико', 'tg-latn': 'Iyoloti Muttahidai Amriko', 'th': 'สหรัฐอเมริกา', 'ti': 'ኣመሪካ', 'tk': 'Amerikanyň Birleşen Ştatlary', 'tl': 'Estados Unidos ng Amerika', 'tly': 'Amerika İbə Devləton', 'tn': 'USA', 'to': 'Puleʻanga fakatahataha ʻAmelika', 'tok': 'ma Mewika', 'tpi': 'Ol Yunaitet Stet', 'tr': 'Amerika Birleşik Devletleri', 'trv': 'United States', 'ts': 'Amerikha', 'tt': 'Америка Кушма Штатлары', 'tt-cyrl': 'Америка Кушма Штатлары', 'tt-latn': 'Amerika Quşma Ştatları', 'tum': 'United States', 'tw': 'Amerika', 'ty': 'Fenua Marite', 'tyv': 'Американың Катышкан Штаттары', 'udm': 'Америкалэн Огазеяськем Штатъёсыз', 'ug': 'ئامېرىكا قوشما شىتاتلىرى', 'uk': 'Сполучені Штати Америки', 'ur': 'ریاستہائے متحدہ امریکا', 'uz': 'Amerika Qoʻshma Shtatlari', 've': 'United States', 'vec': "Stati Unii de l'Amèrica", 'vep': 'Amerikan Ühtenzoittud Valdkundad', 'vi': 'Hoa Kỳ', 'vls': 'Verênigde Stoaten van Amerika', 'vo': 'Lamerikän', 'vro': 'Ameeriga Ütisriigiq', 'wa': 'Estats Unis', 'war': 'Estados Unidos', 'wo': 'Diiwaan yu Bennoo', 'wuu': '美利坚合众国', 'xal': 'Америкин Ниицәтә Орн Нутгуд', 'xh': 'IYunayithedi Steyitsi', 'xmf': 'ამერიკაშ აკოართაფილი შტატეფი', 'yi': 'פאראייניקטע שטאטן פון אמעריקע', 'yo': 'Àwọn Ìpínlẹ̀ Aṣọ̀kan Amẹ́ríkà', 'yue': '美國', 'za': 'Meijgoz', 'zea': 'Vereênigde Staeten', 'zgh': 'ⵉⵡⵓⵏⴰⴽ ⵉⵎⵓⵏⵏ', 'zh': '美國', 'zh-cn': '美国', 'zh-hans': '美国', 'zh-hant': '美國', 'zh-hk': '美國', 'zh-mo': '美國', 'zh-my': '美国', 'zh-sg': '美国', 'zh-tw': '美國', 'zu': 'IMelika'}, 'statements': {'P17': [{'id': 'Q30$4fdcaebd-420b-20db-750c-5700311c222a', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q30', 'type': 'value'}}], 'P31': [{'id': 'q30$21F2DBD8-C4F6-4A60-B5ED-309A9140FD92', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'preferred', 'references': [{'hash': '276bdb149bd1bb080b3251350f8e25f70c4222ce', 'parts': [{'property': {'data_type': 'url', 'id': 'P854'}, 'value': {'content': 'https://www.state.gov/independent-states-in-the-world/', 'type': 'value'}}]}], 'value': {'content': 'Q3624078', 'type': 'value'}}, {'id': 'Q30$cde6e254-4473-e0d7-e653-8923eb7b7cd7', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'preferred', 'references': [{'hash': '056a2d059117bd224833283026f6a9820af59e4b', 'parts': [{'property': {'data_type': 'url', 'id': 'P854'}, 'value': {'content': 'https://ar.usembassy.gov/education-culture/irc/u-s-government/', 'type': 'value'}}]}], 'value': {'content': 'Q1520223', 'type': 'value'}}, {'id': 'Q30$353a6885-4dc4-eb06-da52-02175c11c0f0', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'preferred', 'references': [{'hash': '056a2d059117bd224833283026f6a9820af59e4b', 'parts': [{'property': {'data_type': 'url', 'id': 'P854'}, 'value': {'content': 'https://ar.usembassy.gov/education-culture/irc/u-s-government/', 'type': 'value'}}]}], 'value': {'content': 'Q5255892', 'type': 'value'}}, {'id': 'Q30$58e96d61-4940-b5b2-a739-9a10770e6598', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'preferred', 'references': [], 'value': {'content': 'Q512187', 'type': 'value'}}, {'id': 'Q30$41515d88-454d-addc-aa84-fa205f3b90bc', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'preferred', 'references': [{'hash': 'fa278ebfc458360e5aed63d5058cca83c46134f1', 'parts': [{'property': {'data_type': 'wikibase-item', 'id': 'P143'}, 'value': {'content': 'Q328', 'type': 'value'}}]}, {'hash': 'f79cb7d5c2c1851f55012174b5a02d8a68e46d64', 'parts': [{'property': {'data_type': 'wikibase-item', 'id': 'P248'}, 'value': {'content': 'Q24715317', 'type': 'value'}}]}], 'value': {'content': 'Q1489259', 'type': 'value'}}, {'id': 'q30$2b29cf99-4b72-27e7-9518-ce933ffdf4fa', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'preferred', 'references': [{'hash': 'd42fa7edcf12d348e2186f16336ceabf91bcc99a', 'parts': [{'property': {'data_type': 'url', 'id': 'P854'}, 'value': {'content': 'https://www.britannica.com/place/United-States', 'type': 'value'}}]}], 'value': {'content': 'Q6256', 'type': 'value'}}, {'id': 'Q30$2f478889-4a3f-0b2b-e9de-856c4987d8a9', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1776-07-04T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1784-05-12T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'wikibase-item', 'id': 'P1534'}, 'value': {'content': 'Q217450', 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q99541706', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q3374892': {'descriptions': {'ca': "antic nom de l'estat de Karnataka", 'en': 'Indian state from 1947 to 1956; predecessor of Karnataka', 'hi': 'बहुविकल्पी पृष्ठ', 'id': 'Negara Bagian India Dari 1947 hingga 1956 Diperbesar dan Berganti Nama Menjadi Negara Bagian Karnataka', 'kn': 'ಮೈಸೂರು ರಾಜ್ಯ ಈಗ ಕರ್ನಾಟಕ ನವೆಂಬರ್ ಒಂದು', 'mr': '१९४७ ते १९५६ पर्यंत भारतीय राज्य; मोठे करून कर्नाटक राज्य असे नामकरण केले', 'nb': 'delstat i India', 'ru': 'бывший штат Индии', 'sl': 'nekdanja indijska zvezna država (1947–1956); predhodnica Karnatake', 'ta': '1947 முதல் 1956 வரை இருந்த இந்திய மாநிலம்; பின்னர் கர்நாடக மாநிலம் என மாறியது', 'te': '1947 నుండి 1956 వరకు భారత పూర్వ రాష్ట్రం.', 'uk': 'колишній штат Індії'}, 'labels': {'ca': 'Estat de Mysore', 'en': 'Mysore State', 'es': 'Estado de Mysore', 'hy': 'Մայսուր', 'id': 'Negara bagian Mysore', 'kk': 'Майсур', 'kn': 'ಮೈಸೂರು ರಾಜ್ಯ', 'ko': '마이소르주', 'mr': 'म्हैसूरचे राज्य', 'my': 'မိုင်ဆိုပြည်နယ်', 'nb': 'Mysore', 'ru': 'Майсур', 'sl': 'Misore', 'ta': 'மைசூர் மாநிலம்', 'te': 'మైసూర్ రాష్ట్రం', 'uk': 'Майсур', 'ur': 'میسورریاست', 'vi': 'Mysore (bang)', 'zh': '邁索爾邦'}, 'statements': {'P131': [{'id': 'Q3374892$9730e7a9-41c3-817a-611e-42153ed07d2f', 'property': {'data_type': 'wikibase-item', 'id': 'P131'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q668', 'type': 'value'}}], 'P17': [{'id': 'Q3374892$7ac8a916-4423-4b6b-5595-78ec62d4fec5', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1950-01-26T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q668', 'type': 'value'}}, {'id': 'Q3374892$a4c863e0-4df4-e9b3-0a7b-85051aaf5fb8', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1950-01-26T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q1775277', 'type': 'value'}}], 'P31': [{'id': 'Q3374892$fb200b2e-4388-a387-53c0-7f8617fde119', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1947-08-09T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1973-11-01T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q12443800', 'type': 'value'}}, {'id': 'Q3374892$85d3cc0f-4ac1-5e63-bd55-31ee6109ce18', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q19953632', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q35657': {'descriptions': {'af': 'lys van die 50 deelstate van die Verenigde State van Amerika', 'ar': 'الكيان السياسي المكون للولايات المتحدة الأمريكية', 'az': 'öz suverenliyni ABŞ federal hökuməti ilə bölüşən 50 inzibati ərazi vahidinin hər biri', 'ba': 'административ-территориал берәмек', 'be': 'адміністрацыйна-тэрытарыяльная адзінка', 'be-tarask': 'адміністрацыйна-тэрытарыяльная адзінка', 'bn': 'মার্কিন যুক্তরাষ্ট্রের সাংবিধানিক প্রশাসনিক অঞ্চল', 'cs': 'jeden z federovaných států tvořících dohromady Spojené státy americké', 'de': 'Gliedstaat der Vereinigten Staaten von Amerika', 'en': 'constituent political entity of the United States of America', 'eo': 'unu el la 50 ĉefaj provincoj de Usono', 'es': 'entidad subnacional de los Estados Unidos de América', 'et': 'USA haldusüksuse tüüp', 'fi': 'Yhdysvaltain liittovaltion 50 itsehallinnollista aluetta', 'fr': "division administrative aux États-Unis d'Amérique", 'gl': 'entidade política constituínte dos Estados Unidos de América', 'gsw': 'en Gliidstaat vo de USA', 'he': 'המדינות שמהוות חלק מפדרציית ארצות הברית', 'hi': 'संयुक्त राज्य अमेरिका के साथ संविधान राजनीतिक इकाई साझा करने वाला संप्रभूता', 'hsb': 'dźělny stat Zjednoćenych statow Ameriki', 'ilo': 'konstituente dagiti politikal nga entidad a makibinningay iti kinaturay iti pederal a gobierno ti Estados Unidos', 'is': 'stjórnsýslueiningar í Bandaríkjunum', 'it': "entità federali degli Stati Uniti d'America", 'ja': 'アメリカ合衆国を構成する「国家」的な存在', 'kn': 'ಅಮೇರಿಕಾ ಸಂಯುಕ್ತ ಸಂಸ್ಥಾನದೊಂದಿಗೆ ರಾಜನೀತಿಕ ಸಂಬಂಧ ಹೊಂದಿರುವ ಪ್ರದೇಶಗಳು', 'ko': '미연방 합중국을 구성하는 독립적인 구역', 'lt': 'JAV administraciniai vienetai', 'nb': 'føderalsubjekter som utgjør Amerikas Forente Stater', 'nl': 'administratieve onderverdeling van de VS', 'nqo': 'ߞߊ߬ߝߏ߫ ߘߍ߬ߣߍ߲ ߞߙߎߝߊ ߞߊ߬ߝߏ ߘߏ߫', 'pl': 'autonomiczna jednostka podziału administracyjnego Stanów Zjednoczonych', 'pt': 'entidades políticas constituintes dos Estados Unidos', 'ro': 'componentă federală a Statelor Unite ale Americii', 'ru': 'административно-территориальная единица Соединённых Штатов Америки', 'sa': 'अमेरिका अस्य संयुक्त राज्यानां संविधाय्यीई प्लुतगति सह सौराज्य भजन कुर्वन्ति', 'sco': 'constituent poleetical entity o the Unitit States o Americae', 'sl': 'politična entiteta, ki sestavlja Združene države Amerike', 'sr': 'административне јединице САД', 'sv': 'politiska delenheter som tillsammans utgör suveränitet som USA', 'tr': 'Liste maddesi', 'uk': 'адміністративно-територіальна одиниця першого рівня Сполучених Штатів Америки', 'vi': 'các thực thể hành chính, chính trị cấu tạo thành Hoa Kỳ', 'zh': '作為美利堅合眾國分享主權的組成政治實體'}, 'labels': {'af': 'Deelstate van die Verenigde State van Amerika', 'an': "Organización territorial d'os Estatos Unitos", 'ang': 'Rīce þāra Geānlǣhtra Rīca American', 'ar': 'ولاية الولايات المتحدة', 'arc': 'ܐܬܪܘܬܐ ܕܐܬܪܘܬܐ ܡܚܝܕܐ ܕܐܡܪܝܩܐ', 'arz': 'ولايه امريكانيه', 'as': 'আমেৰিকা যুক্তৰাষ্ট্ৰৰ ৰাজ্যসমূহ', 'ast': "Estaos d'Estaos Xuníos", 'az': 'Ştat', 'azb': 'آمریکا ایالتلری', 'ba': 'АҠШ штаты', 'ban': 'Negara wagian Amérika Serikat', 'be': 'штат ЗША', 'be-tarask': 'штат ЗША', 'bew': 'Negeri di Amrik Serèkat', 'bg': 'Щатите в САЩ', 'bn': 'মার্কিন যুক্তরাষ্ট্রের অঙ্গরাজ্য', 'bpy': 'তিলপারাষ্ট্রর রাজ্যহানি', 'br': 'stad ar Stadoù-Unanet', 'bs': 'savezna država Sjedinjenih Američkih Država', 'ca': 'estat dels Estats Units', 'ceb': 'Estado (Tinipong Bansa)', 'ckb': 'ویلایەتەکانی ئەمریکا', 'co': "statu federale di i Stati Uniti d'America", 'cs': 'stát USA', 'cv': 'АПШ штачĕсем', 'cy': 'talaith yn yr Unol Daleithiau', 'da': 'delstat i USA', 'de': 'Bundesstaat der Vereinigten Staaten', 'de-ch': 'Bundesstaat der Vereinigten Staaten', 'diq': 'Eyaletê Dewletanê Amerikayê Yewbiyayeyan', 'el': 'πολιτεία των Ηνωμένες Πολιτείες', 'en': 'U.S. state', 'en-ca': 'state of the United States', 'en-gb': 'state of the United States', 'en-us': 'state of the United States', 'eo': 'subŝtato de Usono', 'es': 'Estado de los Estados Unidos', 'et': 'osariik', 'eu': 'Ameriketako Estatu Batuetako estatu', 'fa': 'ایالات آمریکا', 'fi': 'Yhdysvaltain osavaltio', 'fr': 'État des États-Unis', 'frp': 'Ètats des Ètats-Unis d’Amèrica', 'fy': 'Amerikaanske steaten', 'ga': 'stát sna Stáit Aontaithe', 'gl': 'estado dos Estados Unidos', 'gsw': 'Bundesstaat vo de Vereinigte Staate', 'gv': 'Steat ny Steatyn Unnaneysit', 'ha': 'jihar Tarayyar Amurika', 'haw': 'Nā mokuʻāina o ʻAmelika Hui', 'he': 'מדינות ארצות הברית', 'hi': 'संयुक्त राज्य अमेरिका के राज्य', 'hr': 'Savezne države Sjedinjenih Američkih Država', 'hsb': 'zwjazkowy stat Zjednoćenych statow', 'hu': 'USA-tagállam', 'hy': 'ԱՄՆ-ի նահանգ', 'ia': 'stato del Statos Unite de America', 'id': 'negara bagian di Amerika Serikat', 'ig': 'U.S. state', 'ilo': 'Estado ti Estados Unidos', 'io': 'Stati di Usa', 'is': 'Fylki Bandaríkjanna', 'it': "Stato federato degli Stati Uniti d'America", 'ja': 'アメリカ合衆国の州', 'jbo': "mergu'e vipygu'e", 'jv': 'Dhaptar negara bagéan Amérika Sarékat miturut tanggal mlebu Union', 'ka': 'აშშ-ის შტატი', 'kk': 'АҚШ әкімшілік бөлінуі', 'kn': 'ಅಮೇರಿಕ ಸಂಯುಕ್ತ ಸಂಸ್ಥಾನದ ಪ್ರದೇಶ', 'ko': '미국의 주', 'krc': 'АБШ-ны административ бёлюнюую', 'ku': 'dewleta DYAyê', 'ku-latn': 'dewleta DYAyê', 'ky': 'Штат', 'la': 'Civitatum Foederatarum civitas', 'lad': 'Estados de los Estados Unidos', 'lb': 'Bundesstaat', 'lld': "Stac de i Stac Unii d'America", 'lt': 'JAV valstijos', 'lv': 'ASV štats', 'mg': 'Faritany Amerikana', 'mk': 'сојузна држава во САД', 'mr': 'अमेरिकेची राज्ये', 'mrj': 'Америкын Ушымы Штатвлӓн штатвлӓжӹ', 'ms': 'Negeri di Amerika Syarikat', 'my': 'အမေရိကန်ပြည်ထောင်စု၏ ပြည်နယ်များ', 'mzn': 'آمریکای ایالتون', 'nan': 'Bí-kok ê hêng-chèng-khu', 'nb': 'delstat i USA', 'nds': 'US-Bundsstaat', 'nds-nl': 'staotn van Amerika', 'nl': 'staat van de Verenigde Staten', 'nn': 'delstat i USA', 'nov': 'Liste de federali states del USA', 'nqo': 'ߞߊ߬ߝߏ߫ ߘߍ߬ߣߍ߲ ߞߊ߬ߝߏ ߘߏ߫', 'oc': 'estat dels Estats Units', 'or': 'ଯୁକ୍ତରାଷ୍ଟ୍ର ଆମେରିକାର ରାଜ୍ୟ', 'os': 'АИШ-ы штат', 'pa': 'ਅਮਰੀਕੀ ਰਾਜ', 'pam': 'U.S. state', 'pap': 'estado di Estadonan Uni di Merka', 'pl': 'stan USA', 'pnb': 'امریکا دیاں ریاستاں', 'pt': 'estado dos Estados Unidos', 'pt-br': 'estado dos Estados Unidos', 'ro': 'stat al SUA', 'ru': 'штат США', 'rue': 'Штаты США', 'sa': 'अमेरिका राज्यस्य संयुक्त राज्य', 'sc': "Istadu federadu de Istados Unidos d'Amèrica", 'sco': 'state o the Unitit States', 'se': 'Amerihká ovttastuvvan stáhtaid oassestáhta', 'sgs': 'JAV valstėjės', 'sh': 'Savezne države Sjedinjenih Američkih Država', 'sk': 'štát USA', 'sl': 'zvezna država Združenih držav Amerike', 'smn': 'Ovtâstum staatâi uásistaatâ', 'sms': 'Ameriikk õhttõõvvâmvaaʹldi vueʹssvaldia', 'sq': 'Shtetet Federale të Amerikës', 'sr': 'савезна држава САД', 'stq': 'Buundesstoat fon do Fereende Stoaten', 'sv': 'USA:s delstater', 'sw': 'jimbo la Marekani', 'szl': 'sztat we Zjydnoczůnych Sztatach', 'ta': 'ஐக்கிய அமெரிக்காவின் அரசியல் பிரிவுகள்', 'te': 'అమెరికా లోని రాష్ట్రం', 'tg': 'иёлатҳои ИМА', 'th': 'รัฐของสหรัฐ', 'tl': 'Estado ng Estados Unidos', 'tr': "ABD'nin eyaletleri", 'tt': 'АКШ административ бүленеше', 'uk': 'штат США', 'ur': 'امریکہ کی ریاستیں', 'uz': 'Shtat (AQSh)', 'vec': 'stato dei Stati Unii', 'vi': 'tiểu bang Hoa Kỳ', 'vls': 'Stoaten van de Verênigde Stoaten', 'wuu': '美国个州', 'xmf': 'ააშ-იშ ადმინისტრაციული დორთუალა', 'yi': 'יו. עס. שטאט', 'yo': 'Àwọn Ìpínlẹ̀ Orílẹ̀-èdè Amẹ́ríkà', 'yue': '美國州份', 'za': 'Couh Meijgoz', 'zgh': 'ⴰⵡⴰⵏⴽ ⵏ ⵉⵡⵓⵏⴰⴽ ⵉⵎⵓⵏⵏ', 'zh': '美国州份', 'zh-cn': '美国州份', 'zh-hans': '美国州份', 'zh-hant': '美國州份', 'zh-hk': '美國州份', 'zh-mo': '美國州份', 'zh-my': '美国州份', 'zh-sg': '美国州份', 'zh-tw': '美國州份'}, 'statements': {'P17': [{'id': 'q35657$B34FBF05-4EA7-4831-B72F-BF236F8D6E82', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [], 'rank': 'normal', 'references': [{'hash': '393bdc82e4acc41678dbf8c4103a2e4f032a2dd4', 'parts': [{'property': {'data_type': 'wikibase-item', 'id': 'P248'}, 'value': {'content': 'Q5375741', 'type': 'value'}}, {'property': {'data_type': 'external-id', 'id': 'P1417'}, 'value': {'content': 'topic/state-United-States-political-subdivision', 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P813'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+2023-11-16T00:00:00Z'}, 'type': 'value'}}]}], 'value': {'content': 'Q30', 'type': 'value'}}], 'P31': [{'id': 'Q35657$695225bf-4579-e5cc-1603-61644928b6fe', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q28872924', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q51929311': {'descriptions': {'ar': 'المدينة التي لديها أكبر عدد من السكان في بلد ما', 'be': 'найвялікшы горад краіны паводле колькасці насельніцтва', 'cs': 'město s největším počtem obyvatel', 'da': 'byen med det største indbyggertal i et land', 'de': 'Stadt mit der größten Einwohnerzahl in einem Land', 'en': 'city which has the greatest population in a country', 'eo': 'urbo, kies nombro de loĝantoj estas la plej granda en iu lando', 'es': 'la ciudad más poblada de un país', 'fr': 'type de ville', 'hr': 'grad s najvećim brojem stanovnika u državi', 'hu': 'egy ország vagy régió legnagyobb népességű városa', 'id': 'kota dengan jumlah penduduk terbesar pada suatu negara', 'it': 'città con la maggior popolazione in uno Stato', 'ja': '当該国において一番目の人口の都市', 'ko': '해당국의 최대 인구 도시', 'nb': 'byen med den største befolkningen i et land', 'pl': 'miasto o największej liczbie ludności w swoim kraju', 'sv': 'stad som har den största befolkningen i ett land', 'szl': 'nojsrogsze (liczbōm ludności) miasto spostrzōd miast danego kraju/regiōnu', 'tr': 'bir ülkede en fazla nüfusa sahip şehir', 'zh': '一个国家中人口最多的城市'}, 'labels': {'ar': 'أكبر مدينة', 'az': 'ən böyük şəhər', 'be': 'найвялікшы горад', 'bn': 'বৃহত্তম নগরী', 'br': 'kêr vrasañ', 'bs': 'najveći grad', 'ca': 'ciutat més gran', 'cs': 'nejlidnatější město', 'cu': 'наиболии гра́дъ', 'cy': 'y ddinas fwyaf', 'da': 'største by', 'de': 'größte Stadt', 'dsb': 'nejwětše město', 'el': 'μεγαλύτερη πόλη', 'en': 'largest city', 'eo': 'plej granda urbo', 'es': 'ciudad mayor', 'et': 'suuruselt linn', 'eu': 'hiri handien', 'fi': 'suurin kaupunki', 'fr': 'plus grande ville', 'frr': 'gratst stääd', 'ga': 'an chathair is mó', 'gl': 'meirande cidade', 'ha': 'babban birni', 'he': 'העיר הגדולה ביותר', 'hr': 'najveći grad', 'hu': 'legnagyobb város', 'hy': 'ըստ մեծության առաջին քաղաք', 'id': 'kota terbesar', 'it': 'città più grande', 'ja': '国内で人口1位の都市', 'ko': '최대 도시', 'ku': 'bajarê herî mezin', 'ku-latn': 'bajarê herî mezin', 'lv': 'lielākā pilsēta', 'ms': 'bandar terbesar', 'ms-arab': 'باندر تربسر', 'nb': 'største by', 'nl': 'grootste stad', 'nn': 'største by', 'no': 'største by', 'oc': 'ciutat més granda', 'os': 'стырдæр сахар', 'pl': 'największe miasto', 'pt': 'cidade mais populosa do país', 'ro': 'cel mai mare oraș', 'ru': 'первый по величине город', 'ryu': 'マギさるミヤク', 'se': 'stuorámus gávpot', 'sl': 'največje mesto', 'smn': 'stuárráámuš kaavpug', 'sms': 'šuurmõs gåårad', 'sr': 'највећи град', 'sv': 'största stad', 'szl': 'nojsrogsze miasto', 'tr': 'en büyük şehir', 'tt': 'иң эре шәһәр', 'uk': 'найбільше місто', 'ur': 'سب سے بڑا شہر', 'vec': 'sità pì granda', 'vi': 'thành phố lớn nhất', 'xmf': 'უკაბეტაში ნოღა', 'zgh': 'ⵜⴰⵎⴷⵉⵏⵜ ⵜⴰⵎⵇⵔⴰⵏⵜ', 'zh': '最大城市', 'zh-cn': '最大城市', 'zh-hans': '最大城市', 'zh-hant': '最大城市'}, 'statements': {'P31': [{'id': 'Q51929311$3292b2e4-44c4-37b1-c212-d8fa1f26e579', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q1789452', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q668': {'descriptions': {'af': 'Republiek in Suid-Asië', 'ar': 'دولة في جنوب آسيا', 'as': 'দক্ষিণ এছিয়াত অৱস্থিত এখন গণতান্ত্ৰিক ৰাষ্ট্ৰ', 'az': 'Cənubi Asiyada federal dövlət', 'ba': 'Көньяҡ Азиялағы дәүләт', 'be': 'краіна ў Паўднёвай Азіі', 'be-tarask': 'краіна ў Паўднёвай Азіі', 'bg': 'Държава в Южна Азия', 'bho': 'दक्खिन एशिया में एगो देस', 'blk': 'လိုꩻခွိုꩻ', 'bn': 'দক্ষিণ এশিয়ার সার্বভৌম দেশ', 'br': 'bro eus Su Azia', 'bs': 'država u Južnoj Aziji', 'ca': "país de l'Àsia", 'ceb': 'nasod sa habagatang Ewrasya', 'ckb': 'وڵاتێک لە باشووری ئاسیا', 'co': "statu in l'Asia meridiunale", 'crh-ro': "Kúnbetí-Asiye'de bír memleket", 'cs': 'stát v Asii', 'cy': 'gweriniaeth ffederal yn ne Asia', 'da': 'land i Sydasien', 'de': 'Staat auf dem indischen Subkontinent in Südasien', 'de-at': 'Staat in Südasien', 'de-ch': 'Staat in Südasien', 'dsb': 'stat w pódpołdnjowej Aziji', 'dty': 'दक्षिण एसिया मी रयाऽ सङ्घीय गणतन्त्र', 'dv': 'އޭޝިއާގެ ގައުމެކެވެ', 'dz': 'ཏཱ་ལེ་བླ་མ', 'el': 'ομοσπονδιακή δημοκρατία της νότιας Ασίας', 'en': 'country in South Asia', 'eo': 'ŝtato en Suda Azio bordanta la Araban Maron kaj la Hindan Oceanon, apud Pakistano, Ĉinio, Nepalo, Butano, Bangladeŝo kaj Birmo', 'es': 'país de Asia', 'ext': "país d'Asia", 'fa': 'کشوری در جنوب آسیا', 'fi': 'valtio Etelä-Aasiassa', 'fr': "pays d'Asie du Sud", 'gl': 'Estado situado en Asia', 'gu': 'દક્ષિણ એશિયામાં આવેલ દેશ', 'gv': 'çheer ayns jiass yn Aishey', 'he': 'מדינה בדרום אסיה', 'hi': 'दक्षिण एशिया में संप्रभु देश', 'hif': 'Bharatiya Upmahadwip ka desh', 'hr': 'država u južnoj Aziji', 'hsb': 'stat w južnej Aziji', 'ht': 'peyi ki nan sid kontinan Azi', 'hu': 'állam Dél-Ázsiában', 'hy': 'պետություն Հարավային Ասիայում', 'id': 'negara di Asia Selatan', 'ilo': 'pagilian idiay Abagatan nga Asia', 'is': 'land í Suður-Asíu', 'it': "stato dell'Asia meridionale", 'ja': '南アジアの国', 'jv': 'nagara ing Asia Kidul', 'ka': 'სახელმწიფო სამხრეთ აზიაში', 'kcg': 'a̱byin di̱ fam a̱tak A̱siya', 'kn': 'ದಕ್ಷಿಣ ಏಷ್ಯಾದಲ್ಲಿರುವ ಒಂದು ದೇಶ', 'ko': '남아시아의 국가', 'ks': 'مُلُک', 'lb': 'Staat a Südasien', 'lrc': 'ترانمهاا', 'lv': 'Valsts Āzijas dienvidos', 'lzh': '南亞一國，處南亞次大陸，都新德里', 'mag': 'दक्खिन एसियामे सम्प्रभु देस', 'ml': 'തെക്കനേഷ്യയിലെ ഒരു രാജ്യം.', 'mr': 'आशिया खंडातील देश', 'ms-arab': 'نݢارا برداولت دأسيا سلاتن', 'mt': 'stat sovran fl-Asja tan-Nofsinhar', 'my': 'တောင်အာရှနိုင်ငံ', 'nb': 'land i Sør-Asia', 'ne': 'दक्षिण एसियाली मुलुक', 'nl': 'land in Zuid-Azië', 'oc': 'país en Asia', 'or': 'ଏସିଆର ଦେଶ', 'pa': 'ਦੱਖਣੀ-ਏਸ਼ੀਆਈ ਦੇਸ਼', 'pap': 'pais den parti sur di Asia', 'pi': 'राष्ट्र', 'pl': 'państwo w Azji', 'pnb': 'جنوبی ایشیا دا مُلک', 'pt': 'país na Ásia Meridional', 'rmy': 'them andi Sudutni Asiya', 'ro': 'țară din Asia', 'ru': 'страна в Южной Азии', 'sa': 'एकः देशः', 'sat': 'ᱮᱥᱤᱭᱟ ᱨᱮᱱᱟᱜ ᱫᱤᱥᱚᱢ', 'sco': 'kintra in Sooth Asie', 'sd': 'ڏکڻ ايشيا ۾ ملڪ', 'se': 'iehčanas riika Lulli-Ásias', 'si': 'දකුණු ආසියානු රටක්', 'sk': 'štát v Južnej Ázii', 'sl': 'država na indijski podcelini v Južni Aziji', 'smn': 'jiečânâs staatâ Maadâ-Aasiast', 'sms': 'jiõččnaž valdia Saujj-Aasiast', 'so': 'Wadan ku yaala Aasiya', 'sr': 'држава у јужној Азији', 'sr-ec': 'држава у јужној Азији', 'sr-el': 'država u južnoj Aziji', 'sv': 'förbundsrepublik i Sydasien', 'syl': 'ꠖꠇ꠆ꠇꠤꠘ ꠄꠡꠤꠀꠞ ꠉꠥ ꠖꠦꠡ', 'ta': 'தெற்கு ஆசியாவிலுள்ள ஒரு நாடு', 'tcy': 'ದಕ್ಷಿಣ ಏಷ್ಯೊಡುಪ್ಪುನ ಒಂಜಿ ದೇಸೊ', 'te': 'దక్షిణ ఆసియా లోని దేశం', 'th': 'ประเทศในทวีปเอเชีย', 'ti': 'ኣብ ደቡብ ኤስያ እትርከብ ሃገር', 'tl': 'bansa sa Timog Asya', 'tok': 'ma lawa li lon ma Asija', 'tpi': 'Kantri bilong Saut Esia', 'tr': "Güney Asya'da bir ülke", 'tt': 'Көньяк Азиядә урнашкан дәүләт', 'tt-cyrl': 'Көньяк Азиядә урнашкан дәүлә', 'tt-latn': 'Könyak Aziädä urnaşqan däwlät', 'uk': 'країна в Південній Азії', 'ur': 'جنوبی ایشیا کا ملک', 'uz': 'Janubiy Osiyodagi davlat', 'vi': 'quốc gia nằm ở khu vực Nam Á', 'wuu': '南亚国家', 'xmf': 'ქიანა ობჟათე აზიას', 'yo': 'Orílẹ̀-èdè kan ní Guusu Asia', 'yue': '南亞國家，喺南亞次大陸，首都新德里', 'zh': '南亞國家', 'zh-cn': '南亚社会主义国家', 'zh-hans': '亚洲社会主义国家', 'zh-hant': '南亞國家', 'zh-hk': '南亞國家', 'zh-mo': '南亞國家', 'zh-my': '南亚国家', 'zh-sg': '南亚国家', 'zh-tw': '南亞國家'}, 'labels': {'ab': 'Индиа', 'ace': 'India', 'ady': 'Индие', 'aeb-arab': 'الهند', 'af': 'Indië', 'am': 'ህንድ', 'ami': 'India', 'an': 'India', 'ang': 'Indea', 'ann': 'India', 'anp': 'भारत', 'ar': 'الهند', 'arc': 'ܗܢܕܘ', 'ary': 'لهيند', 'arz': 'الهند', 'as': 'ভাৰত', 'ast': 'India', 'atj': 'Inda', 'av': 'Хиндистан', 'avk': 'Barata', 'awa': 'भारत', 'ay': 'Indya', 'az': 'Hindistan', 'azb': 'هیندوستان', 'ba': 'Һиндостан', 'ban': 'India', 'bar': 'Indien', 'bbc': 'India', 'bcl': 'Indya', 'be': 'Індыя', 'be-tarask': 'Індыя', 'bew': 'Hindi', 'bg': 'Индия', 'bgn': 'هندوستان', 'bho': 'भारत', 'bi': 'India', 'bjn': 'India', 'blk': 'အေင်ဒိယခမ်းထီ', 'bn': 'ভারত', 'bo': 'རྒྱ་གར།', 'bpy': 'ভারত', 'br': 'India', 'brh': 'Inđíá', 'bs': 'Indija', 'btm': 'India', 'bug': 'India', 'bxr': 'Энэдхэг', 'ca': 'Índia', 'cbk-zam': 'India', 'cdo': 'Éng-dô', 'ce': 'Инди', 'ceb': 'Indiya', 'ch': 'India', 'chr': 'ᎢᏅᏗᎾ', 'chy': 'India', 'ckb': 'ھیندستان', 'co': 'India', 'cr': 'ᙜᓃ', 'crh': 'İndistan', 'crh-latn': 'İndistan', 'crh-ro': 'Hindístan', 'cs': 'Indie', 'csb': 'Indie', 'cu': 'Їндїꙗ', 'cv': 'Инди', 'cy': 'India', 'da': 'Indien', 'dag': 'India', 'de': 'Indien', 'de-at': 'Indien', 'de-ch': 'Indien', 'dga': 'India', 'din': 'Indiɛn', 'diq': 'Hindıstan', 'dsb': 'Indiska', 'dtp': 'India', 'dty': 'भारत', 'dv': 'އިންޑިޔާ', 'dz': 'རྒྱ་གར་', 'ee': 'India', 'el': 'Ινδία', 'en': 'India', 'eo': 'Barato', 'es': 'India', 'et': 'India', 'eu': 'India', 'ext': 'La Índia', 'fa': 'هند', 'ff': 'Hinndi', 'fi': 'Intia', 'fj': 'Idia', 'fo': 'India', 'fr': 'Inde', 'frp': 'Ende', 'frr': 'Indien', 'fur': 'Indie', 'fy': 'Yndia', 'ga': 'an India', 'gag': 'İndiya', 'gan': '印度', 'gcr': 'End', 'gd': 'Na h-Innseachan', 'gl': 'India', 'glk': 'هند', 'gn': 'India', 'gom': 'Dn/भारत', 'gom-deva': 'भारत', 'gom-latn': 'Bharot', 'gor': 'India', 'got': '𐌹𐌽𐌳𐌹𐌰/India', 'gpe': 'India', 'gsw': 'Indie', 'gu': 'ભારત', 'gv': 'yn Injey', 'ha': 'Indiya', 'hak': 'Yin-thu', 'haw': '‘Īnia', 'he': 'הודו', 'hi': 'भारत', 'hif': 'India', 'hr': 'Indija', 'hsb': 'Indiska', 'ht': 'End', 'hu': 'India', 'hy': 'Հնդկաստան', 'hyw': 'Հնդկաստան', 'ia': 'India', 'iba': 'India', 'id': 'India', 'ie': 'India', 'ig': 'Ndia', 'ik': 'India', 'ilo': 'India', 'inh': 'ХIиндиче', 'io': 'India', 'is': 'Indland', 'it': 'India', 'iu': 'ᐃᓐᑎᐊ', 'ja': 'インド', 'jam': 'India', 'jbo': "xingu'e", 'jv': 'Indhi', 'ka': 'ინდოეთი', 'kaa': 'Hindistan', 'kab': 'Lhend', 'kbd': 'Индиэ', 'kbp': 'Ɛɛndɩ', 'kcg': 'Ndiya', 'kea': 'Índia', 'kg': 'India', 'kge': 'India', 'ki': 'India', 'kjp': 'အေန်ဍီးယးခါန်ႋ', 'kk': 'Үндістан', 'kl': 'India', 'km': 'ឥណ្ឌា', 'kn': 'ಭಾರತ', 'ko': '인도', 'ko-kp': '인디아', 'krc': 'Индия', 'ks': 'ہِندوستان', 'ku': 'Hindistan', 'kv': 'Индия', 'kw': 'Eynda', 'ky': 'Индия', 'la': 'India', 'lad': 'India', 'lb': 'Indien', 'lbe': 'Гьиндусттан', 'lez': 'Гьиндистан', 'lfn': 'Barat', 'li': 'India', 'lij': 'India', 'lld': 'India', 'lmo': 'India', 'ln': 'India', 'lo': 'ປະເທດອິນເດຍ', 'lrc': 'هئن', 'lt': 'Indija', 'ltg': 'Iņdeja', 'lv': 'Indija', 'lzh': '印度', 'mad': 'India', 'mag': 'भारत', 'mai': 'भारत', 'map-bms': 'India', 'mdf': 'Индия', 'mg': 'India', 'mhr': 'Индий', 'mi': 'Īnia', 'min': 'India', 'mk': 'Индија', 'ml': 'ഇന്ത്യ', 'mn': 'Энэтхэг', 'mni': 'ꯏꯟꯗꯤꯌꯥ', 'mos': 'India', 'mr': 'भारत', 'ms': 'India', 'ms-arab': 'اينديا', 'mt': 'Indja', 'mwl': 'Índia', 'my': 'အိန္ဒိယနိုင်ငံ', 'myv': 'Индия Мастор', 'mzn': 'هند', 'na': 'Indjiya', 'nah': 'India', 'nan': 'Ìn-tō͘', 'nap': 'Innia', 'nb': 'India', 'nds': 'Indien', 'nds-nl': 'India', 'ne': 'भारत', 'new': 'भारत', 'nl': 'India', 'nn': 'India', 'nov': 'India', 'nrm': 'Înde', 'nso': 'India', 'nv': 'Tó Wónaanídę́ę́ʼ Bitsįʼ Yishtłizhii Bikéyah', 'ny': 'India', 'oc': 'Índia', 'olo': 'Indii', 'om': 'Indiyaa', 'or': 'ଭାରତ', 'os': 'Инди', 'pa': 'ਭਾਰਤ', 'pam': 'India', 'pap': 'India', 'pcd': 'Inde', 'pdc': 'India', 'pi': 'भारत', 'pih': 'Endya', 'pl': 'Indie', 'pms': 'India', 'pnb': 'بھارت', 'ps': 'هند', 'pt': 'Índia', 'pt-br': 'Índia', 'qu': 'Indya', 'rm': 'India', 'rmy': 'Bharat', 'rn': 'Ubuhindi', 'ro': 'India', 'roa-tara': 'Indie', 'ru': 'Индия', 'rue': 'Індія', 'rup': 'India', 'rw': 'Ubuhinde', 'ryu': '天竺', 'sa': 'भारतम्', 'sah': 'Индия', 'sat': 'ᱥᱤᱧᱚᱛ', 'sc': 'Ìndia', 'scn': 'Innia', 'sco': 'Indie', 'sd': 'ڀارت', 'se': 'India', 'sg': 'Indïi', 'sgs': 'Indėjė', 'sh': 'Indija', 'shn': 'ဢိၼ်ႇတိယ', 'si': 'භාරත ජනරජය', 'sk': 'India', 'skr': 'بھارت', 'sl': 'Indija', 'sm': 'Igitia', 'smn': 'India', 'sms': 'Intia', 'sn': 'India', 'so': 'Hindiya', 'sq': 'India', 'sr': 'Индија', 'sr-ec': 'Индија', 'sr-el': 'Indija', 'srn': 'Indiakondre', 'ss': 'INdiya', 'st': 'India', 'stq': 'Indien', 'su': 'India', 'sv': 'Indien', 'sw': 'Uhindi', 'syl': 'ꠄꠘ꠆ꠒꠤꠀ', 'szl': 'Indyje', 'szy': 'India', 'ta': 'இந்தியா', 'tay': 'India', 'tcy': 'ಭಾರತ', 'tdd': 'ᥛᥫᥒᥰ ᥟᥤᥢᥰ ᥖᥤᥰ ᥕᥣᥰ', 'te': 'భారతదేశం', 'tet': 'Índia', 'tg': 'Ҳиндустон', 'tg-cyrl': 'Ҳиндустон', 'th': 'ประเทศอินเดีย', 'ti': 'ህንዲ', 'tk': 'Hindistan', 'tl': 'India', 'tly': 'Hindistan', 'to': 'ʻInitia', 'tok': 'ma Palata', 'tpi': 'India', 'tr': 'Hindistan', 'trv': 'India', 'ts': 'India', 'tt': 'Һиндстан', 'tt-cyrl': 'Һиндстан', 'tt-latn': 'Hindstan', 'tum': 'India', 'tw': 'India', 'ty': '’Inītia', 'udm': 'Индия', 'ug': 'ھىندىستان', 'ug-arab': 'ھىندىستان', 'ug-latn': 'Hindistan', 'uk': 'Індія', 'ur': 'بھارت', 'uz': 'Hindiston', 'vec': 'India', 'vep': 'Indii', 'vi': 'Ấn Độ', 'vls': 'Indië', 'vo': 'Lindän', 'vro': 'India', 'wa': 'Inde', 'war': 'Indya', 'wo': 'End', 'wuu': '印度', 'xal': 'Энедигин Орн', 'xh': 'IIndia', 'xmf': 'ინდოეთი', 'yi': 'אינדיע', 'yo': 'Índíà', 'yue': '印度', 'za': 'Yindu', 'zea': 'India', 'zgh': 'ⵀⵉⵏⴷⵓⵙⵜⴰⵏ', 'zh': '印度', 'zh-cn': '印度', 'zh-hans': '印度', 'zh-hant': '印度', 'zh-hk': '印度', 'zh-mo': '印度', 'zh-my': '印度', 'zh-sg': '印度', 'zh-tw': '印度', 'zu': 'INdiya'}, 'statements': {'P17': [{'id': 'Q668$7912e556-4f1a-94bc-9592-d3259f69c167', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q668', 'type': 'value'}}], 'P31': [{'id': 'q668$F3C705A4-E22B-4E31-B023-B54D0A293623', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'preferred', 'references': [], 'value': {'content': 'Q6256', 'type': 'value'}}, {'id': 'q668$4A765D94-BBE5-4E19-BB91-B1AF8CD383E7', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1947-08-15T00:00:00Z'}, 'type': 'value'}}], 'rank': 'preferred', 'references': [{'hash': '276bdb149bd1bb080b3251350f8e25f70c4222ce', 'parts': [{'property': {'data_type': 'url', 'id': 'P854'}, 'value': {'content': 'https://www.state.gov/independent-states-in-the-world/', 'type': 'value'}}]}], 'value': {'content': 'Q3624078', 'type': 'value'}}, {'id': 'Q668$17bc7bba-4ffe-20d9-09ed-1691da2cf83f', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1947-08-15T00:00:00Z'}, 'type': 'value'}}, {'property': {'data_type': 'time', 'id': 'P582'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1950-01-26T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q223832', 'type': 'value'}}, {'id': 'Q668$76e9794c-4da4-552e-d46b-a97cb0b00594', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1950-01-26T00:00:00Z'}, 'type': 'value'}}], 'rank': 'preferred', 'references': [], 'value': {'content': 'Q7270', 'type': 'value'}}, {'id': 'Q668$98e77c48-4f4a-3c77-adf7-a0a6ac2d3e81', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1950-01-26T00:00:00Z'}, 'type': 'value'}}], 'rank': 'preferred', 'references': [], 'value': {'content': 'Q1520223', 'type': 'value'}}, {'id': 'Q668$6932bf08-4ee3-43c4-6ed2-31b003664324', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1950-01-26T00:00:00Z'}, 'type': 'value'}}], 'rank': 'preferred', 'references': [], 'value': {'content': 'Q5255892', 'type': 'value'}}, {'id': 'Q668$740dd4ea-43c2-c4f6-a70b-516afcf0d309', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1950-01-26T00:00:00Z'}, 'type': 'value'}}], 'rank': 'preferred', 'references': [], 'value': {'content': 'Q512187', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q745456': {'descriptions': {'ca': 'concentració geogràfica de negocis interconnectats en un camp específic', 'cs': 'módní označení pro sdružení spolupracujících ekonomických subjektů', 'de': 'geographische Konzentration von Unternehmen des gleichen Wirtschaftszweigs', 'en': 'geographic concentration of interconnected businesses in a particular field', 'es': 'concentración geográfica de negocios interconectados en un campo determinado', 'fr': "région où s'accumulent des savoir-faire dans un domaine technique", 'hu': 'egymással kapcsolatban álló vállalkozások földrajzi koncentrációja egy adott területen', 'it': 'insieme di imprese interconnesse gestite da una società capogruppo', 'ja': '特定の分野における、相互に関係のあるビジネスの地理的集中', 'nl': 'economie', 'ru': 'географическое сосредоточение компаний для упрощения взаимодействия', 'sl': 'geografska koncentracija medsebojno povezanih podjetij z določenega področja', 'zh': '特定领域内相互关联的企业、供应商和相关机构的地理上的集中'}, 'labels': {'ar': 'تجمع الأعمال', 'az': 'Biznes klasteri', 'bg': 'Индустриален клъстер', 'ca': 'clúster indústrial', 'cs': 'klastry', 'de': 'Wirtschaftscluster', 'en': 'business cluster', 'eo': 'industria grapolo', 'es': 'clúster industrial', 'et': 'Majandusklaster', 'eu': 'enpresa-kluster', 'fa': 'خوشه صنعتی', 'fi': 'Klusteri', 'fr': 'cluster', 'frr': 'wiartskap cluster', 'he': 'אשכול עסקי', 'hu': 'klaszter', 'it': 'cluster aziendale', 'ja': 'ビジネス・クラスター', 'kk': 'Кластер', 'kk-arab': 'كلاستەر', 'kk-cyrl': 'Кластер', 'kk-latn': 'Klaster', 'kn': 'ವ್ಯಾಪಾರ ಸಮೂಹಗಳು', 'lt': 'Klasteris', 'lv': 'komercdarbības klasteris', 'nb': 'næringsklynge', 'nl': 'cluster', 'pl': 'klaster', 'pt': 'cluster industrial', 'ru': 'экономический кластер', 'sco': 'business cluster', 'sk': 'Klaster', 'sl': 'poslovni grozd', 'sv': 'Näringslivskluster', 'tr': 'İş kümesi', 'uk': 'кластер', 'zh': '商业集群', 'zh-hans': '产业聚集', 'zh-hant': '產業群聚', 'zh-hk': '產業聚集'}, 'statements': {}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q806463': {'descriptions': {'ar': 'سي أكاديمي', 'bn': 'ভারতের কর্ণাটক রাজ্যের একটি জেলা', 'de': 'Distrikt in Indien', 'el': 'οικισμός της Ινδίας', 'en': 'district of Karnataka, India', 'en-ca': 'human settlement in India', 'en-gb': 'human settlement in India', 'es': 'distrito del estado de Karnataka, India', 'fr': "district de l'État indien du Karnataka", 'gu': 'ભારતના કર્ણાટક રાજ્યમાં આવેલ એક જિલ્લો', 'hi': 'कर्नाटक का जिला', 'it': 'distretto indiano', 'kn': 'ಕರ್ನಾಟಕದ ಜಿಲ್ಲೆ, ಭಾರತ. ಬೆಂಗಳೂರು ನಗರ ಮತ್ತು ಆನೇಕಲ್ ಪಟ್ಟಣಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.', 'ml': 'കർണ്ണാടകസംസ്ഥാനത്തിലെ ജില്ല', 'mr': 'भारतातील कर्नाटक राज्यातील एक जिल्हा', 'nb': 'distrikt i India', 'ne': 'भारतको एक जिल्ला हो', 'nl': 'district in Karnataka, India', 'pa': 'ਕਰਨਾਟਕ ਦਾ ਜਿਲ਼੍ਹਾ, ਭਾਰਤ', 'sat': 'ᱠᱚᱨᱱᱟᱴᱚᱠ ᱨᱮᱱᱟᱜ ᱦᱚᱱᱚᱛ', 'ta': 'கர்நாடகத்தில் உள்ள மாவட்டம்', 'te': 'కర్ణాటక లోని జిల్లా'}, 'labels': {'ar': 'بنغالور منطقة الحضرية', 'arz': 'بنجالور الحضريه', 'ast': 'Distritu de Bangalore', 'bho': 'बंगलौर शहरी जिला', 'bn': 'বেঙ্গালুরু নগর জেলা', 'ca': 'districte de Bangalore Urbà', 'ceb': 'Bangalore Urban', 'de': 'Bengaluru Urban', 'en': 'Bengaluru Urban district', 'es': 'Bangalore', 'eu': 'Bengaluru Urban barrutia', 'fa': 'بخش شهری بنگلور', 'fr': 'district de Bangalore Urbain', 'gu': 'બેંગલોર (શહેરી) જિલ્લો', 'hi': 'बेंगलूरु शहरी जिला', 'id': 'Distrik Nagara Bengaluru', 'it': 'distretto Urbano di Bangalore', 'ja': 'バンガロール市街県', 'kn': 'ಬೆಂಗಳೂರು ನಗರ ಜಿಲ್ಲೆ', 'ml': 'ബെംഗളുരു നഗര ജില്ല', 'mr': 'बंगळूर शहर जिल्हा', 'nan': 'Bangalore Urban', 'nb': 'Bangalore Urban', 'ne': 'बंगलोर जिल्ला', 'new': 'बेङ्गलूरु नगर जिल्ला', 'nl': 'Bengaluru Urban', 'pa': 'ਜਿਲ਼੍ਹਾ ਬੰਗਲੋਰ ਸਹਿਰੀ', 'pnb': 'ضلع شہری بنگلور', 'ru': 'Городской округ Бангалор', 'sa': 'बेङ्गळूरु नगरमण्डलम्', 'sat': 'ᱵᱟᱸᱜᱽᱞᱳᱨ ᱥᱚᱦᱨᱤ ᱦᱚᱱᱚᱛ', 'sv': 'Bangalore Urban', 'ta': 'பெங்களூரு நகர மாவட்டம்', 'te': 'బెంగుళూరు జిల్లా', 'ur': 'بنگلور شہری ضلع', 'vi': 'Arasinakunte, Magadi', 'zh': '班加羅爾市區縣', 'zh-hant': '班加羅爾市區縣'}, 'statements': {'P131': [{'id': 'q806463$84AEA0E2-7E2E-4463-B0FB-F7DFB83C5412', 'property': {'data_type': 'wikibase-item', 'id': 'P131'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q806457', 'type': 'value'}}], 'P17': [{'id': 'q806463$92CFD6A1-F922-44A8-BD33-25522D204E2D', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [], 'rank': 'normal', 'references': [{'hash': 'c456dc5cd2117249948c288206ff3f8b1bf574f0', 'parts': [{'property': {'data_type': 'wikibase-item', 'id': 'P143'}, 'value': {'content': 'Q8449', 'type': 'value'}}]}], 'value': {'content': 'Q668', 'type': 'value'}}], 'P31': [{'id': 'Q806463$E157BBF0-DF6D-444C-9FA0-D2E94F0FE6D2', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q1149652', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q83821': {'descriptions': {'cs': 'historický státní útvar', 'de': 'historischer Staat', 'en': 'historical country', 'es': 'Estado indio entre los siglos XV y XVII', 'fi': 'historiallinen valtio Intiassa', 'fr': 'ancien pays', 'mag': 'दक्कनके ऐतिहासिक राज्य', 'mr': '१४९० ते १६८६ पर्यंत विजापूरची सल्तनत म्हणून नैऋत्य भारतावर राज्य करणारे मुस्लिम राजवंश', 'te': 'దక్షిణ భారతదేశానికి చెందిన రాజవంశం'}, 'labels': {'ar': 'عادلشاهيون', 'ast': 'Sultanatu de Bijapur', 'az': 'Bicapur Krallığı', 'azb': 'بیجاپور شاهلیغی', 'bn': 'আদিল শাহী রাজবংশ', 'ca': 'sultanat de Bijapur', 'ckb': 'شانشینی عادلشاھی', 'cs': 'Bidžápurský sultanát', 'de': 'Bijapur', 'en': 'Bijapur Sultanate', 'es': 'Sultanato de Bijapur', 'fa': 'عادل\u200cشاهیان', 'fi': 'Bijapurin sulttaanikunta', 'fr': 'sultanat de Bijapur', 'gom': 'Adil Shahi Ghorannem', 'gom-deva': 'आदिलशाय', 'gom-latn': 'Adil Shahi Ghorannem', 'gu': 'આદિલ શાહી', 'hi': 'बीजापुर सल्तनत', 'id': 'Adil Shahi', 'it': 'Sultanato di Bijapur', 'ja': 'ビジャープル王国', 'kn': 'ಆದಿಲ್ ಶಾಹಿ ವಂಶ', 'ko': '비자푸르 왕국', 'mag': 'बीजापुर सल्तनत', 'mr': 'आदिलशाही', 'nb': 'Adil Shahi-dynastiet', 'nl': 'Sultanaat Bijapur', 'pl': 'Bijapur', 'pnb': 'بیجاپور سلطنت', 'pt': 'Sultanato de Bijapur', 'ru': 'Биджапурский султанат', 'skr': 'بیجاپور سلطنت', 'sl': 'Bidžapurski sultanat', 'sv': 'Bijapur (furstendöme)', 'ta': 'பிஜப்பூர் சுல்தானகம்', 'te': 'ఆదిల్\u200cషాహీ వంశము', 'tg': 'Султонии Биҷапур', 'tr': 'Adilşahlar', 'uk': 'Аділ-шахи', 'ur': 'بیجاپور سلطنت', 'uz': 'Bijopur', 'vec': 'Sultanà de Bijapur', 'wuu': '阿迪勒·沙阿王朝', 'zh': '阿迪勒·沙阿王朝'}, 'statements': {'P31': [{'id': 'Q83821$EA9A71E2-8829-46BB-ADC0-1C348E76E1BF', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q12759805', 'type': 'value'}}, {'id': 'Q83821$f6749417-4505-2f83-5592-ea5ebca81ef5', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [], 'rank': 'normal', 'references': [], 'value': {'content': 'Q3024240', 'type': 'value'}}]}}, 'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q99': {'descriptions': {'af': 'deelstaat van die Verenigde State van Amerika', 'an': "estau d'Estaus Unius", 'ar': 'ولاية الولايات المتحدة الأمريكية', 'ary': 'ولاية ف ميريكان', 'ast': "estáu de los Estaos Xuníos d'América", 'az': 'ABŞ-da ştat', 'bar': 'Bundestoot vo de USA', 'be': 'штат ЗША', 'be-tarask': 'штат ЗША', 'bg': 'щат в САЩ', 'bho': 'अमेरिका में एगो राज्य', 'bn': 'মার্কিন যুক্তরাষ্ট্রের অঙ্গরাজ্য', 'bo': 'ཁཱ་ལི་ཧྥོར་ཉི་ཡ།', 'bs': 'savezna država Sjedinjenih Američkih Država', 'ca': "estat dels Estats Units d'Amèrica", 'co': "statu di i Stati Uniti d'America", 'cs': 'stát Spojených států amerických', 'cy': 'talaith yn Unol Daleithiau America', 'da': 'delstat i USA', 'de': 'Bundesstaat der Vereinigten Staaten von Amerika', 'de-at': 'Bundesstaat der Vereinigten Staaten', 'de-ch': 'Bundesstaat der Vereinigten Staaten', 'el': 'πολιτεία των ΗΠΑ', 'en': 'state of the United States of America', 'eo': 'federacia subŝtato en okcidenta Usono, bordanta Pacifikon, norda de Meksiko, suda de Oregono, okcidenta de Nevado', 'es': 'estado de los Estados Unidos de América', 'et': 'Ameerika Ühendriikide osariik', 'fa': 'ایالتی در جنوب غربی آمریکا', 'fi': 'Yhdysvaltain osavaltio', 'fr': "État des États-Unis d'Amérique", 'fy': 'steat fan de Feriene Steaten fan Amearika', 'ga': 'stát sna Stáit Aontaithe', 'gl': 'estado dos Estados Unidos de América', 'gn': 'Amérika Retãvorekuéra Joaju retãvore', 'gv': 'steat ayns ny Steatyn Unnaneysit', 'ha': 'jiha a Amurka', 'he': 'מדינה בארצות הברית', 'hi': 'संयुक्त राज्य अमेरिका में स्थित एक राज्य', 'hif': 'United States ke state', 'hr': 'savezna država SAD-a', 'hsb': 'zwjazkowy stat Zjednoćenych statow Ameriki', 'hu': 'tagállam az Amerikai Egyesült Államokban', 'ia': 'stato del Statos Unite', 'id': 'negara bagian di Amerika Serikat', 'ilo': 'estado ti Estados Unidos iti Amerika', 'inh': 'Хетта Америкерча Штатех цаӀ', 'is': 'fylki í Bandaríkjunum', 'it': "stato degli Stati Uniti d'America", 'ja': 'アメリカ合衆国の州', 'ka': 'შტატი აშშ-ში', 'kk': 'АҚШ штаты', 'ko': '미국의 주', 'ks': 'اَمریٖکاہٕچ رِیاستَھ', 'lb': 'Bundesstaat vun den USA', 'lv': 'ASV štats', 'ml': 'അമേരിക്കൻ ഐക്യനാടുകളിലെ ഒരു സംസ്ഥാനം', 'my': 'အမေရိကန်ပြည်ထောင်စု၏ပြည်နယ်', 'nb': 'delstat i USA', 'ne': 'क्यालिफोर्निया, संयुक्त राज्य अमेरिकाको राज्य', 'nl': 'staat van de Verenigde Staten', 'oc': "estat dels Estats Units d'America", 'pa': 'ਸੰਯੁਕਤ ਰਾਜ ਅਮਰੀਕਾ ਦਾ ਇੱਕ ਰਾਜ', 'pap': 'estado merikano', 'pl': 'stan w Stanach Zjednoczonych', 'pt': 'estado dos Estados Unidos', 'pt-br': 'estado dos Estados Unidos', 'ro': 'stat al Statelor Unite ale Americii', 'ru': 'штат на юго-западе США', 'sc': 'istadu de sos Istados Unidos de Amèrica', 'scn': 'Statu dî Stati Uniti dâ Mèrica', 'sk': 'štát v západo-oceánskej oblasti USA', 'sq': 'shteti i SHBA', 'sr': 'америчка савезна држава на западној обали САД', 'sv': 'delstat i västra USA', 'sw': 'jimbo la Marekani', 'ta': 'ஐக்கிய அமெரிக்க மாநிலம்', 'th': 'รัฐของสหรัฐอเมริกา', 'tok': 'ma lawa lili lon ma Mewika', 'tr': "Amerika Birleşik Devletleri'nde eyalet", 'uk': 'штат, що охоплює південну половину західного узбережжя Сполучених Штатів', 'vi': 'tiểu bang ở phía tây của Hoa Kỳ', 'vls': 'e stoat in de Verenigde Stoatn', 'yo': 'Ìkan lára àwọn ìpínlẹ̀ ní orílé-èdè ìṣọ̀kan Amẹ́ríkà', 'yue': '美國州份', 'zh': '美國州份', 'zh-cn': '美国州份', 'zh-hans': '美国州份', 'zh-hant': '美國州份', 'zh-hk': '美國州份', 'zh-mo': '美國州份', 'zh-my': '美国州份', 'zh-sg': '美国州份', 'zh-tw': '美國州份'}, 'labels': {'af': 'Kalifornië', 'am': 'ካሊፎርኒያ', 'ar': 'كاليفورنيا', 'arc': 'ܟܐܠܦܘܪܢܝܐ', 'ary': 'كاليفورنيا', 'arz': 'كاليفورنيا', 'ast': 'California', 'ay': 'California suyu', 'az': 'Kaliforniya', 'azb': 'کالیفورنیا ایالتی', 'ba': 'Калифорния', 'bar': 'Kalifornien', 'be': 'Каліфорнія', 'be-tarask': 'Каліфорнія', 'bew': 'Kaliporni', 'bg': 'Калифорния', 'bho': 'कैलिफोर्निया', 'bi': 'Kalifornia', 'bn': 'ক্যালিফোর্নিয়া', 'bo': 'ཁྰ་ལེ་ཧྥོར་ནི་ཡ།', 'bpy': 'ক্যালিফোর্নিয়া', 'br': 'Kalifornia', 'bs': 'Kalifornija', 'bxr': 'Калифорни', 'ca': 'Califòrnia', 'ce': 'Калифорни', 'chr': 'ᎠᏕᎳᏧᏢᎢ', 'ckb': 'کالیفۆڕنیا', 'crh': 'Kaliforniya', 'crh-latn': 'Kaliforniya', 'cs': 'Kalifornie', 'cv': 'Калифорни', 'cy': 'Califfornia', 'da': 'Californien', 'de': 'Kalifornien', 'de-ch': 'Kalifornien', 'diq': 'Kaliforniya', 'dsb': 'Kaliforniska', 'el': 'Καλιφόρνια', 'eml': 'Califòrgna', 'en': 'California', 'en-us': 'California', 'eo': 'Kalifornio', 'es': 'California', 'eu': 'Kalifornia', 'fa': 'کالیفرنیا', 'fi': 'Kalifornia', 'fo': 'Kalifornia', 'fr': 'Californie', 'frr': 'Kalifornien', 'fy': 'Kalifornje', 'ga': 'California', 'gag': 'Kaliforniya', 'gan': '加利福尼亞州', 'gd': 'Calafòrnia', 'gl': 'California', 'glk': 'کاليفؤرنيا', 'gn': 'Kalifórnia', 'got': '𐌺𐌰𐌻𐌹𐍆𐌰𐌿𐍂𐌽𐌾𐌰', 'gsw': 'Kalifornie', 'gu': 'કેલિફોર્નિયા', 'gv': 'California', 'ha': 'Kalifoniya', 'haw': 'Kaleponi', 'he': 'קליפורניה', 'hi': 'कैलिफ़ोर्निया', 'hr': 'Kalifornija', 'hsb': 'Kaliforniska', 'ht': 'Kalifòni', 'hu': 'Kalifornia', 'hy': 'Կալիֆոռնիա', 'hyw': 'Քալիֆորնիա', 'ia': 'California', 'inh': 'Калифорни', 'io': 'Kalifornia', 'is': 'Kalifornía', 'iu': 'ᑳᓖᐴᕐᓃᐊ', 'ja': 'カリフォルニア州', 'jbo': 'kalifornias', 'ka': 'კალიფორნია', 'kaa': 'Kaliforniya shtati', 'kab': 'Kalifurnya', 'kbp': 'Kalɩfɔrnii', 'kk': 'Калифорния', 'km': 'កាលីហ្វញ៉ា', 'kn': 'ಕ್ಯಾಲಿಫೊರ್ನಿಯ', 'ko': '캘리포니아주', 'krc': 'Калифорния', 'ku': 'Kalîforniya', 'kw': 'Kaliforni', 'ky': 'Калифорния', 'lad': 'Kalifornia', 'lb': 'Kalifornien', 'li': 'Californië', 'lo': 'ຄາລິຟໍເນຍ', 'lrc': 'کالیفرنیا', 'lt': 'Kalifornija', 'lv': 'Kalifornija', 'lzh': '加利福尼亞州', 'mai': 'क्यालिफोर्निया', 'mdf': 'Калифорния', 'mg': 'Kalifornia', 'mhr': 'Калифорний', 'mi': 'Karapōnia', 'mk': 'Калифорнија', 'ml': 'കാലിഫോർണിയ', 'mn': 'Калифорни', 'mni': 'ꯀꯥꯂꯤꯐꯣꯔꯅꯤꯌꯥ', 'mo': 'Калифорния', 'mr': 'कॅलिफोर्निया', 'mrj': 'Калифорни', 'mul': 'California', 'my': 'ကယ်လီဖိုးနီးယားပြည်နယ်', 'mzn': 'کالیفرنیا', 'nb': 'California', 'nds': 'Kalifornien', 'nds-nl': 'Kalifornië', 'ne': 'क्यालिफोर्निया', 'new': 'क्यालिफोर्निया', 'nl': 'Californië', 'nv': 'Ahééháshį́į́h Hahoodzo', 'oc': 'Califòrnia', 'or': 'କାଲିଫର୍ଣ୍ଣିଆ', 'os': 'Калифорни', 'pa': 'ਕੈਲੀਫ਼ੋਰਨੀਆ', 'pcd': 'Californie', 'pdc': 'Kalifornie', 'pfl': 'Kalifornien', 'pi': 'क्यालिफोर्निया', 'pih': 'Kaeliforniya', 'pl': 'Kalifornia', 'pms': 'Califòrnia', 'pnb': 'کیلیفورنیا', 'ps': 'کالېفورنیا', 'pt': 'Califórnia', 'pt-br': 'Califórnia', 'qu': 'California suyu', 'ru': 'Калифорния', 'rue': 'Калифорния', 'sa': 'कालिफ़ोर्निया', 'sah': 'Калифорния', 'sat': 'ᱠᱮᱞᱤᱯᱷᱳᱨᱱᱤᱭᱟ', 'sc': 'Califòrnia', 'scn': 'California', 'sco': 'Californie', 'sd': 'ڪيليفورنيا', 'se': 'Kalifornia', 'sgs': 'Kalėfuornėjė', 'sh': 'Kalifornija', 'si': 'කැලිෆෝනියා', 'sk': 'Kalifornia', 'sl': 'Kalifornija', 'sm': 'Kalefonia', 'smn': 'Kalifornia', 'sms': 'Kalifornia', 'so': 'Kalifornia', 'sq': 'Kaliforni', 'sr': 'Калифорнија', 'stq': 'Kalifornien', 'su': 'Kalifornia', 'sv': 'Kalifornien', 'szl': 'Kaliforńijo', 'ta': 'கலிபோர்னியா', 'te': 'కాలిఫోర్నియా', 'tg': 'Калифорния', 'th': 'รัฐแคลิฟอร์เนีย', 'tly': 'Kaliforniya', 'to': 'Kalefōnia', 'tok': 'ma Kaliponija', 'tr': 'Kaliforniya', 'tt': 'Калифорния', 'tt-cyrl': 'Калифорния', 'ug': 'Kaliforniye Shitati', 'uk': 'Каліфорнія', 'ur': 'کیلی فورنیا', 'uz': 'Kaliforniya', 'vec': 'Całifornia', 'vep': 'Kalifornii', 'vls': 'Californië', 'vo': 'Kalifornän', 'wa': 'Californeye', 'wuu': '加利福尼亚', 'xal': 'Калифорни', 'xh': 'IKhalifoniya', 'xmf': 'კალიფორნია', 'yi': 'קאליפארניע', 'yue': '加利福尼亞州', 'zea': 'Californië', 'zh': '加利福尼亚州', 'zh-cn': '加利福尼亚州', 'zh-hans': '加利福尼亚州', 'zh-hant': '加利福尼亞州', 'zh-hk': '加利福尼亞州', 'zh-mo': '加利福尼亚州', 'zh-my': '加利福尼亚州', 'zh-sg': '加利福尼亚州', 'zh-tw': '加利福尼亞州'}, 'statements': {'P131': [{'id': 'q99$2D645D41-8AF6-4FE3-B547-0338C71E322D', 'property': {'data_type': 'wikibase-item', 'id': 'P131'}, 'qualifiers': [], 'rank': 'normal', 'references': [{'hash': 'd5847b9b6032aa8b13dae3c2dfd9ed5d114d21b3', 'parts': [{'property': {'data_type': 'wikibase-item', 'id': 'P143'}, 'value': {'content': 'Q11920', 'type': 'value'}}]}], 'value': {'content': 'Q30', 'type': 'value'}}], 'P17': [{'id': 'q99$FB2C1F7F-5397-4AFA-AE0B-F57EAD7831D0', 'property': {'data_type': 'wikibase-item', 'id': 'P17'}, 'qualifiers': [], 'rank': 'normal', 'references': [{'hash': 'fa278ebfc458360e5aed63d5058cca83c46134f1', 'parts': [{'property': {'data_type': 'wikibase-item', 'id': 'P143'}, 'value': {'content': 'Q328', 'type': 'value'}}]}], 'value': {'content': 'Q30', 'type': 'value'}}], 'P31': [{'id': 'Q99$AF13EDE9-BD02-43E2-BEE0-1B50977E5247', 'property': {'data_type': 'wikibase-item', 'id': 'P31'}, 'qualifiers': [{'property': {'data_type': 'time', 'id': 'P580'}, 'value': {'content': {'calendarmodel': 'http://www.wikidata.org/entity/Q1985727', 'precision': 11, 'time': '+1850-09-09T00:00:00Z'}, 'type': 'value'}}], 'rank': 'normal', 'references': [], 'value': {'content': 'Q35657', 'type': 'value'}}]}}}
+{
+    'https://www.googleapis.com/customsearch/v1?key=TEST_KEY&cx=b5b4628916b534fef&q=Bengaluru':
+        {
+            'context': {
+                'title': 'Wikidata'
+            },
+            'items': [{
+                'displayLink': 'www.wikidata.org',
+                'formattedUrl': 'https://www.wikidata.org/wiki/Q1355',
+                'htmlFormattedUrl': 'https://www.wikidata.org/wiki/Q1355',
+                'htmlTitle': '<b>Bengaluru</b> - Wikidata',
+                'kind': 'customsearch#result',
+                'link': 'https://www.wikidata.org/wiki/Q1355',
+                'title': 'Bengaluru - Wikidata'
+            }, {
+                'displayLink':
+                    'www.wikidata.org',
+                'formattedUrl':
+                    'https://www.wikidata.org/wiki/Q948720',
+                'htmlFormattedUrl':
+                    'https://www.wikidata.org/wiki/Q948720',
+                'htmlTitle':
+                    'Indian Institute of Science, <b>Bengaluru</b> - Wikidata',
+                'link':
+                    'https://www.wikidata.org/wiki/Q948720',
+                'title':
+                    'Indian Institute of Science, Bengaluru - Wikidata'
+            }],
+            'kind': 'customsearch#search',
+            'queries': {
+                'nextPage': [{
+                    'count': 10,
+                    'cx': 'b5b4628916b534fef',
+                    'inputEncoding': 'utf8',
+                    'outputEncoding': 'utf8',
+                    'safe': 'off',
+                    'searchTerms': 'Bengaluru',
+                    'startIndex': 11,
+                    'title': 'Google Custom Search - Bengaluru',
+                    'totalResults': '2360'
+                }],
+                'request': [{
+                    'count': 10,
+                    'cx': 'b5b4628916b534fef',
+                    'inputEncoding': 'utf8',
+                    'outputEncoding': 'utf8',
+                    'safe': 'off',
+                    'searchTerms': 'Bengaluru',
+                    'startIndex': 1,
+                    'title': 'Google Custom Search - Bengaluru',
+                    'totalResults': '2360'
+                }]
+            },
+            'searchInformation': {
+                'formattedSearchTime': '0.13',
+                'formattedTotalResults': '2,360',
+                'searchTime': 0.126495,
+                'totalResults': '2360'
+            },
+            'url': {
+                'template':
+                    'https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json',
+                'type':
+                    'application/json'
+            }
+        },
+    'https://www.googleapis.com/customsearch/v1?key=TEST_KEY&cx=b5b4628916b534fef&q=California':
+        {
+            'context': {
+                'title': 'Wikidata'
+            },
+            'items': [{
+                'displayLink': 'www.wikidata.org',
+                'formattedUrl': 'https://www.wikidata.org/wiki/Q99',
+                'htmlFormattedUrl': 'https://www.wikidata.org/wiki/Q99',
+                'htmlSnippet': 'state of the United States of America.',
+                'htmlTitle': '<b>California</b> - Wikidata',
+                'kind': 'customsearch#result',
+                'link': 'https://www.wikidata.org/wiki/Q99',
+                'snippet': 'state of the United States of America.',
+                'title': 'California - Wikidata'
+            }, {
+                'displayLink':
+                    'www.wikidata.org',
+                'formattedUrl':
+                    'https://www.wikidata.org/wiki/Q174710',
+                'htmlFormattedUrl':
+                    'https://www.wikidata.org/wiki/Q174710',
+                'htmlSnippet':
+                    'public university in Los Angeles, <b>California</b>, USA.',
+                'htmlTitle':
+                    'University of <b>California</b>, Los Angeles - Wikidata',
+                'kind':
+                    'customsearch#result',
+                'link':
+                    'https://www.wikidata.org/wiki/Q174710',
+                'snippet':
+                    'public university in Los Angeles, California, USA.',
+                'title':
+                    'University of California, Los Angeles - Wikidata'
+            }],
+            'kind': 'customsearch#search',
+            'queries': {
+                'nextPage': [{
+                    'count': 10,
+                    'cx': 'b5b4628916b534fef',
+                    'inputEncoding': 'utf8',
+                    'outputEncoding': 'utf8',
+                    'safe': 'off',
+                    'searchTerms': 'California',
+                    'startIndex': 11,
+                    'title': 'Google Custom Search - California',
+                    'totalResults': '52900'
+                }],
+                'request': [{
+                    'count': 10,
+                    'cx': 'b5b4628916b534fef',
+                    'inputEncoding': 'utf8',
+                    'outputEncoding': 'utf8',
+                    'safe': 'off',
+                    'searchTerms': 'California',
+                    'startIndex': 1,
+                    'title': 'Google Custom Search - California',
+                    'totalResults': '52900'
+                }]
+            },
+            'searchInformation': {
+                'formattedSearchTime': '0.17',
+                'formattedTotalResults': '52,900',
+                'searchTime': 0.170779,
+                'totalResults': '52900'
+            },
+            'url': {
+                'template':
+                    'https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json',
+                'type':
+                    'application/json'
+            }
+        },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q11271835':
+        {
+            'descriptions': {
+                'ar': 'عاصمة الكيان دون الوطني',
+                'en': 'capital city of a subnational entity'
+            },
+            'labels': {
+                'en': 'state capital',
+                'zh-hant': '州首府'
+            },
+            'statements': {}
+        },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q1355': {
+        'descriptions': {
+            'en': 'city in Karnataka, India',
+            'en-ca': 'capital of the Indian state of Karnataka',
+            'en-gb': 'capital of the Indian state of Karnataka'
+        },
+        'labels': {
+            'en': 'Bengaluru',
+            'en-ca': 'Beṅgaḷūru',
+            'en-gb': 'Beṅgaḷūru',
+            'eo': 'Bengaluro',
+            'es': 'Bengaluru',
+        },
+        'statements': {
+            'P131': [{
+                'id': 'q1355$BD6D8A90-22AA-45BE-8D7B-F930B3EDAA50',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P131'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1956-11-01T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'preferred',
+                'references': [],
+                'value': {
+                    'content': 'Q806463',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q1355$7f9956e5-4516-9595-4d04-dc25a0953b03',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P131'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1956-10-31T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1947-08-15T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q3374892',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q1355$6003344f-4c05-838e-d277-93288da4e551',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P131'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1947-08-15T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q266923',
+                    'type': 'value'
+                }
+            }],
+            'P17': [{
+                'id': 'q1355$30748051-9151-4F89-A0DF-661CB0DD1540',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1947-08-15T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'preferred',
+                'references': [{
+                    'hash':
+                        'f2a2d6ede8fcfb1f057f6cbb68cce56f9ffc8c44',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'external-id',
+                            'id': 'P5573'
+                        },
+                        'value': {
+                            'content': '3121',
+                            'type': 'value'
+                        }
+                    }, {
+                        'property': {
+                            'data_type': 'wikibase-item',
+                            'id': 'P248'
+                        },
+                        'value': {
+                            'content': 'Q265049',
+                            'type': 'value'
+                        }
+                    }, {
+                        'property': {
+                            'data_type': 'time',
+                            'id': 'P813'
+                        },
+                        'value': {
+                            'content': {
+                                'calendarmodel':
+                                    'http://www.wikidata.org/entity/Q1985727',
+                                'precision':
+                                    11,
+                                'time':
+                                    '+2018-08-06T00:00:00Z'
+                            },
+                            'type': 'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q668',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q1355$0908c9ab-4c94-f91f-c888-861778a4eab2',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1791-03-21T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1798-05-04T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q2001966',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q1355$4aaa42d2-452d-8739-cb6f-17ee4b809689',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1638-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1687-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q83821',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q1355$4cc23316-4f19-87eb-01e4-bfcc7b7d5cb9',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985786',
+                            'precision':
+                                9,
+                            'time':
+                                '+1537-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1638-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q167639',
+                    'type': 'value'
+                }
+            }],
+            'P31': [{
+                'id': 'Q1355$a53079eb-43d8-5340-bc7c-46de7dd826b0',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'wikibase-item',
+                        'id': 'P452'
+                    },
+                    'value': {
+                        'content': 'Q110702998',
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'wikibase-item',
+                        'id': 'P452'
+                    },
+                    'value': {
+                        'content': 'Q1875606',
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q745456',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q1355$617e3319-4ac1-d5d5-9f3b-ef93501b55c9',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'wikibase-item',
+                        'id': 'P642'
+                    },
+                    'value': {
+                        'content': 'Q1185',
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q51929311',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q1355$C01FC2B2-A3A3-4097-BB00-9479AB5DBE4B',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q1549591',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q1355$530c3c66-4542-7a67-e679-024b7cab7569',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q174844',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q1355$c48f15da-4f78-b549-db3a-0be67c8a8c9d',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q11271835',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q1355$5c809bf0-41ee-525f-b0a3-463297aa6c56',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q208511',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q1549591': {
+        'descriptions': {
+            'el':
+                'πόλη με πληθυσμό περισσότερο από 100.000 κατοίκους',
+            'en':
+                'city with a population of at least 100,000',
+            'en-ca':
+                'city with a population of more than 100,000 inhabitants',
+            'en-gb':
+                'city with a population of more than 100,000 inhabitants',
+            'eo':
+                'urbo kun super 100000 loĝantoj',
+            'es':
+                'ciudad con más de 100 000 habitantes',
+            'et':
+                'üle 100 000 elanikuga linn',
+            'eu':
+                '100\xa0000 biztanle baino gehiago dituen hiria',
+        },
+        'labels': {
+            'el': 'μεγάλη πόλη',
+            'en': 'big city',
+            'en-ca': 'big city',
+            'en-gb': 'big city',
+            'eo': 'urbego',
+            'es': 'gran ciudad',
+        },
+        'statements': {
+            'P31': [{
+                'id': 'Q1549591$fcb164e4-4d7f-0617-d7ee-ba0f85a40c41',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [{
+                    'hash':
+                        'ff363401d8a8e82dbaf8738151533dbcff2f661d',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'wikibase-item',
+                            'id': 'P248'
+                        },
+                        'value': {
+                            'content': 'Q757187',
+                            'type': 'value'
+                        }
+                    }, {
+                        'property': {
+                            'data_type': 'string',
+                            'id': 'P393'
+                        },
+                        'value': {
+                            'content': '3-е изд.',
+                            'type': 'value'
+                        }
+                    }, {
+                        'property': {
+                            'data_type': 'time',
+                            'id': 'P577'
+                        },
+                        'value': {
+                            'content': {
+                                'calendarmodel':
+                                    'http://www.wikidata.org/entity/Q1985727',
+                                'precision':
+                                    9,
+                                'time':
+                                    '+1999-00-00T00:00:00Z'
+                            },
+                            'type': 'value'
+                        }
+                    }, {
+                        'property': {
+                            'data_type': 'string',
+                            'id': 'P958'
+                        },
+                        'value': {
+                            'content':
+                                'Условные обозначения. Населённые пункты',
+                            'type':
+                                'value'
+                        }
+                    }, {
+                        'property': {
+                            'data_type': 'wikibase-item',
+                            'id': 'P407'
+                        },
+                        'value': {
+                            'content': 'Q7737',
+                            'type': 'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q98966309',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q167639': {
+        'descriptions': {
+            'de': 'historischer hinduistischer Staat in Südindien',
+            'en': 'Hindu kingdom in Southern India (14th-17th century)',
+            'en-gb': 'Hindu kingdom in Southern India (14th-17th century)',
+            'es': 'Imperio del sur del Subcontinente Indio',
+            'fr': 'ancien royaume hindou',
+        },
+        'labels': {
+            'de': 'Vijayanagar',
+            'en': 'Vijayanagara Empire',
+            'en-gb': 'Vijayanagara Empire',
+            'eo': 'Viĝajanagara imperio',
+            'es': 'Imperio Vijayanagara',
+            'eu': 'Vijayanagarko erreinua',
+            'fa': 'امپراتوری ویجایاناگارا',
+            'fi': 'Vijayanagara',
+            'fr': 'royaume de Vijayanâgara',
+        },
+        'statements': {
+            'P17': [{
+                'id': 'Q167639$A37EB283-7E6D-4CA6-ADFD-08FD53F56DA9',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q668',
+                    'type': 'value'
+                }
+            }],
+            'P31': [{
+                'id': 'Q167639$65089F33-4A6F-488F-A2E0-FC21FD4AB6EA',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1646-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'preferred',
+                'references': [],
+                'value': {
+                    'content': 'Q3024240',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q167639$68cd0bb8-422f-26bd-3ed9-f8424f5f31e6',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q48349',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q167639$de1ce8dc-4144-2ba1-ccdd-97dce6fecd19',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q11514315',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q167639$9e1dfab8-4a44-5d28-b3ac-dc83fca8668f',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q15401699',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q167639$DE7D4075-C81E-4F64-B473-83F2E2B5719F',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985786',
+                            'precision':
+                                9,
+                            'time':
+                                '+1336-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1646-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q48349',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q174844': {
+        'descriptions': {
+            'el':
+                'πολύ μεγάλη πόλη με πληθυσμό άνω των δέκα εκατομμυρίων κατοίκων',
+            'en':
+                'very large city with a total population in excess of ten million people',
+            'eo':
+                'metropola urbo kun pli ol 10 milionoj da loĝantoj',
+            'es':
+                'metrópoli con más de 10 millones de habitantes',
+            'fi':
+                '10 miljoonan asukkaan kaupunki',
+            'fr':
+                'très grande agglomération',
+        },
+        'labels': {
+            'en': 'megacity',
+            'eo': 'megaurbo',
+            'es': 'megaciudad',
+            'fa': 'بزرگشهر',
+            'fi': 'megakaupunki',
+            'fr': 'mégapole',
+        },
+        'statements': {}
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q2001966': {
+        'descriptions': {
+            'de':
+                'historischer Staat',
+            'en':
+                'rule of the British East India Company on the Indian subcontinent (1757–1858)',
+            'eo':
+                'regado de la Orient-Hinda Kompanio sur la Hinda subkontinento (1757-1858)',
+            'es':
+                'dominio británico (1757-1858)',
+        },
+        'labels': {
+            'da':
+                'kompagnistyre i Indien',
+            'en':
+                'Company rule in India',
+            'eo':
+                'Hindio sub regado de Brita Orient-Hinda Kompanio',
+            'es':
+                'Dominio de la Compañía en la India',
+            'fa':
+                'نقش کمپانی هند شرقی در هندوستان',
+            'fr':
+                'domination de la Compagnie britannique des Indes orientales en Inde',
+        },
+        'statements': {
+            'P17': [{
+                'id': 'Q2001966$a0625ffe-4aef-b945-89a6-3f506cbe7e0f',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q8680',
+                    'type': 'value'
+                }
+            }],
+            'P31': [{
+                'id': 'Q2001966$eab18f60-4a06-5dad-60c9-3f6cd60882b0',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1757-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1858-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q133156',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q2001966$31f6e5f1-4a0b-1494-7bb5-41eba1103a28',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'preferred',
+                'references': [],
+                'value': {
+                    'content': 'Q3024240',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q2001966$fc20d878-4329-efa4-09f1-e1aa9c24a072',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'preferred',
+                'references': [],
+                'value': {
+                    'content': 'Q1351282',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q208511': {
+        'descriptions': {
+            'en':
+                'city which is an important node in the global economy',
+            'eo':
+                'urbo kiu havas gravan rolon en tutmonda ekonomio kaj socio',
+            'es':
+                'ciudad que es un nodo importante en la economía global',
+            'fi':
+                'kaupunki, jolla on merkittävä vaikutus maailmaan sosioekonomisesti, kulttuurisesti tai poliittisesti',
+            'fr':
+                "ville qui exerce des fonctions stratégiques à l'échelle mondiale",
+        },
+        'labels': {
+            'el': 'παγκόσμια πόλη',
+            'en': 'global city',
+            'eo': 'mondurbo',
+            'es': 'ciudad global',
+            'et': 'maailmalinn',
+            'eu': 'Hiri global',
+            'fa': 'شهر جهانی',
+            'fi': 'maailmankaupunki',
+            'fj': 'Vuravura siti',
+            'fr': 'ville mondiale',
+        },
+        'statements': {}
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q266923': {
+        'descriptions': {
+            'de':
+                'historischer Staat',
+            'en':
+                'Monarchy in India (1399–1947)',
+            'fi':
+                'historiallinen valtio Intiassa',
+            'fr':
+                'État princier du Raj britannique (1399 à 1950)',
+        },
+        'labels': {
+            'en': 'Kingdom of Mysore',
+            'eo': 'Misora reĝlando',
+            'es': 'Reino de Mysore',
+            'eu': 'Mysoreko erresuma',
+            'fa': 'پادشاهی میسور',
+            'fi': 'Mysoren kuningaskunta',
+            'fr': 'royaume de Mysore',
+            'ga': 'Ríocht Mysore',
+        },
+        'statements': {
+            'P17': [{
+                'id': 'Q266923$7524abfd-4661-5a30-ef0d-cb68c2b54a4e',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q129286',
+                    'type': 'value'
+                }
+            }],
+            'P31': [{
+                'id': 'Q266923$9E28EFAF-FCEB-4B29-A8B5-1A250FBF55A9',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985786',
+                            'precision':
+                                9,
+                            'time':
+                                '+1565-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'wikibase-item',
+                        'id': 'P2210'
+                    },
+                    'value': {
+                        'content': 'Q167639',
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q1371288',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q266923$c826326c-4dff-617b-4f23-a2a303f64f63',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1799-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1947-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q1336152',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q266923$106eecef-4490-a11e-5ffa-89f1e1f776d4',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1948-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q3024240',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q266923$077f54a7-4354-9b02-95a5-304f1c95472e',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985786',
+                            'precision':
+                                9,
+                            'time':
+                                '+1399-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                9,
+                            'time':
+                                '+1948-00-00T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q417175',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q30': {
+        'descriptions': {
+            'el':
+                'χώρα της Βόρειας Αμερικής',
+            'en':
+                'country primarily located in North America',
+            'en-ca':
+                'country in North America',
+            'en-us':
+                'country in North America',
+            'eo':
+                'lando, kies ĉefparto estas en Nord-Ameriko inter Kanado kaj Meksiko, kiu ankaŭ regas Alaskon en nordokcidenta Nord-Ameriko, Havajo-insularon en Pacifiko, kaj ankaŭ aliajn Pacifikajn kaj Karibajn insulojn',
+            'es':
+                'país de América del Norte',
+        },
+        'labels': {
+            'el': 'Ηνωμένες Πολιτείες Αμερικής',
+            'eml': 'Stat Unî',
+            'en': 'United States',
+            'en-us': 'United States',
+            'eo': 'Usono',
+            'es': 'Estados Unidos',
+        },
+        'statements': {
+            'P17': [{
+                'id': 'Q30$4fdcaebd-420b-20db-750c-5700311c222a',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q30',
+                    'type': 'value'
+                }
+            }],
+            'P31': [{
+                'id': 'q30$21F2DBD8-C4F6-4A60-B5ED-309A9140FD92',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'preferred',
+                'references': [{
+                    'hash':
+                        '276bdb149bd1bb080b3251350f8e25f70c4222ce',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'url',
+                            'id': 'P854'
+                        },
+                        'value': {
+                            'content':
+                                'https://www.state.gov/independent-states-in-the-world/',
+                            'type':
+                                'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q3624078',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q30$cde6e254-4473-e0d7-e653-8923eb7b7cd7',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'preferred',
+                'references': [{
+                    'hash':
+                        '056a2d059117bd224833283026f6a9820af59e4b',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'url',
+                            'id': 'P854'
+                        },
+                        'value': {
+                            'content':
+                                'https://ar.usembassy.gov/education-culture/irc/u-s-government/',
+                            'type':
+                                'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q1520223',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q30$353a6885-4dc4-eb06-da52-02175c11c0f0',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'preferred',
+                'references': [{
+                    'hash':
+                        '056a2d059117bd224833283026f6a9820af59e4b',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'url',
+                            'id': 'P854'
+                        },
+                        'value': {
+                            'content':
+                                'https://ar.usembassy.gov/education-culture/irc/u-s-government/',
+                            'type':
+                                'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q5255892',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q30$58e96d61-4940-b5b2-a739-9a10770e6598',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'preferred',
+                'references': [],
+                'value': {
+                    'content': 'Q512187',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q30$41515d88-454d-addc-aa84-fa205f3b90bc',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'preferred',
+                'references': [{
+                    'hash':
+                        'fa278ebfc458360e5aed63d5058cca83c46134f1',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'wikibase-item',
+                            'id': 'P143'
+                        },
+                        'value': {
+                            'content': 'Q328',
+                            'type': 'value'
+                        }
+                    }]
+                }, {
+                    'hash':
+                        'f79cb7d5c2c1851f55012174b5a02d8a68e46d64',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'wikibase-item',
+                            'id': 'P248'
+                        },
+                        'value': {
+                            'content': 'Q24715317',
+                            'type': 'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q1489259',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'q30$2b29cf99-4b72-27e7-9518-ce933ffdf4fa',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'preferred',
+                'references': [{
+                    'hash':
+                        'd42fa7edcf12d348e2186f16336ceabf91bcc99a',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'url',
+                            'id': 'P854'
+                        },
+                        'value': {
+                            'content':
+                                'https://www.britannica.com/place/United-States',
+                            'type':
+                                'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q6256',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q30$2f478889-4a3f-0b2b-e9de-856c4987d8a9',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1776-07-04T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1784-05-12T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'wikibase-item',
+                        'id': 'P1534'
+                    },
+                    'value': {
+                        'content': 'Q217450',
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q99541706',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q3374892': {
+        'descriptions': {
+            'ca':
+                "antic nom de l'estat de Karnataka",
+            'en':
+                'Indian state from 1947 to 1956; predecessor of Karnataka',
+            'hi':
+                'बहुविकल्पी पृष्ठ',
+            'id':
+                'Negara Bagian India Dari 1947 hingga 1956 Diperbesar dan Berganti Nama Menjadi Negara Bagian Karnataka',
+            'kn':
+                'ಮೈಸೂರು ರಾಜ್ಯ ಈಗ ಕರ್ನಾಟಕ ನವೆಂಬರ್ ಒಂದು',
+            'mr':
+                '१९४७ ते १९५६ पर्यंत भारतीय राज्य; मोठे करून कर्नाटक राज्य असे नामकरण केले',
+            'nb':
+                'delstat i India',
+            'ru':
+                'бывший штат Индии',
+            'sl':
+                'nekdanja indijska zvezna država (1947–1956); predhodnica Karnatake',
+            'ta':
+                '1947 முதல் 1956 வரை இருந்த இந்திய மாநிலம்; பின்னர் கர்நாடக மாநிலம் என மாறியது',
+            'te':
+                '1947 నుండి 1956 వరకు భారత పూర్వ రాష్ట్రం.',
+            'uk':
+                'колишній штат Індії'
+        },
+        'labels': {
+            'ca': 'Estat de Mysore',
+            'en': 'Mysore State',
+            'es': 'Estado de Mysore',
+            'hy': 'Մայսուր',
+            'id': 'Negara bagian Mysore',
+            'kk': 'Майсур',
+            'kn': 'ಮೈಸೂರು ರಾಜ್ಯ',
+            'ko': '마이소르주',
+            'mr': 'म्हैसूरचे राज्य',
+            'my': 'မိုင်ဆိုပြည်နယ်',
+            'nb': 'Mysore',
+            'ru': 'Майсур',
+            'sl': 'Misore',
+            'ta': 'மைசூர் மாநிலம்',
+            'te': 'మైసూర్ రాష్ట్రం',
+            'uk': 'Майсур',
+            'ur': 'میسورریاست',
+            'vi': 'Mysore (bang)',
+            'zh': '邁索爾邦'
+        },
+        'statements': {
+            'P131': [{
+                'id': 'Q3374892$9730e7a9-41c3-817a-611e-42153ed07d2f',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P131'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q668',
+                    'type': 'value'
+                }
+            }],
+            'P17': [{
+                'id': 'Q3374892$7ac8a916-4423-4b6b-5595-78ec62d4fec5',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1950-01-26T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q668',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q3374892$a4c863e0-4df4-e9b3-0a7b-85051aaf5fb8',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1950-01-26T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q1775277',
+                    'type': 'value'
+                }
+            }],
+            'P31': [{
+                'id': 'Q3374892$fb200b2e-4388-a387-53c0-7f8617fde119',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1947-08-09T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1973-11-01T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q12443800',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q3374892$85d3cc0f-4ac1-5e63-bd55-31ee6109ce18',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q19953632',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q35657': {
+        'descriptions': {
+            'de':
+                'Gliedstaat der Vereinigten Staaten von Amerika',
+            'en':
+                'constituent political entity of the United States of America',
+            'eo':
+                'unu el la 50 ĉefaj provincoj de Usono',
+            'es':
+                'entidad subnacional de los Estados Unidos de América',
+            'et':
+                'USA haldusüksuse tüüp',
+            'fi':
+                'Yhdysvaltain liittovaltion 50 itsehallinnollista aluetta',
+            'fr':
+                "division administrative aux États-Unis d'Amérique",
+        },
+        'labels': {
+            'el':
+                'πολιτεία των Ηνωμένες Πολιτείες',
+            'en':
+                'U.S. state',
+            'en-ca':
+                'state of the United States',
+            'en-gb':
+                'state of the United States',
+            'en-us':
+                'state of the United States',
+            'eo':
+                'subŝtato de Usono',
+            'es':
+                'Estado de los Estados Unidos',
+        },
+        'statements': {
+            'P17': [{
+                'id': 'q35657$B34FBF05-4EA7-4831-B72F-BF236F8D6E82',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [{
+                    'hash':
+                        '393bdc82e4acc41678dbf8c4103a2e4f032a2dd4',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'wikibase-item',
+                            'id': 'P248'
+                        },
+                        'value': {
+                            'content': 'Q5375741',
+                            'type': 'value'
+                        }
+                    }, {
+                        'property': {
+                            'data_type': 'external-id',
+                            'id': 'P1417'
+                        },
+                        'value': {
+                            'content':
+                                'topic/state-United-States-political-subdivision',
+                            'type':
+                                'value'
+                        }
+                    }, {
+                        'property': {
+                            'data_type': 'time',
+                            'id': 'P813'
+                        },
+                        'value': {
+                            'content': {
+                                'calendarmodel':
+                                    'http://www.wikidata.org/entity/Q1985727',
+                                'precision':
+                                    11,
+                                'time':
+                                    '+2023-11-16T00:00:00Z'
+                            },
+                            'type': 'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q30',
+                    'type': 'value'
+                }
+            }],
+            'P31': [{
+                'id': 'Q35657$695225bf-4579-e5cc-1603-61644928b6fe',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q28872924',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q51929311': {
+        'descriptions': {
+            'de':
+                'Stadt mit der größten Einwohnerzahl in einem Land',
+            'en':
+                'city which has the greatest population in a country',
+            'eo':
+                'urbo, kies nombro de loĝantoj estas la plej granda en iu lando',
+            'es':
+                'la ciudad más poblada de un país',
+            'fr':
+                'type de ville',
+        },
+        'labels': {
+            'el': 'μεγαλύτερη πόλη',
+            'en': 'largest city',
+            'eo': 'plej granda urbo',
+            'es': 'ciudad mayor',
+            'et': 'suuruselt linn',
+            'eu': 'hiri handien',
+            'fi': 'suurin kaupunki',
+            'fr': 'plus grande ville',
+        },
+        'statements': {
+            'P31': [{
+                'id': 'Q51929311$3292b2e4-44c4-37b1-c212-d8fa1f26e579',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q1789452',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q668': {
+        'descriptions': {
+            'el':
+                'ομοσπονδιακή δημοκρατία της νότιας Ασίας',
+            'en':
+                'country in South Asia',
+            'eo':
+                'ŝtato en Suda Azio bordanta la Araban Maron kaj la Hindan Oceanon, apud Pakistano, Ĉinio, Nepalo, Butano, Bangladeŝo kaj Birmo',
+            'es':
+                'país de Asia',
+            'ext':
+                "país d'Asia",
+            'fa':
+                'کشوری در جنوب آسیا',
+            'fi':
+                'valtio Etelä-Aasiassa',
+            'fr':
+                "pays d'Asie du Sud",
+        },
+        'labels': {
+            'el': 'Ινδία',
+            'en': 'India',
+            'eo': 'Barato',
+            'es': 'India',
+            'et': 'India',
+            'eu': 'India',
+        },
+        'statements': {
+            'P17': [{
+                'id': 'Q668$7912e556-4f1a-94bc-9592-d3259f69c167',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q668',
+                    'type': 'value'
+                }
+            }],
+            'P31': [{
+                'id': 'q668$F3C705A4-E22B-4E31-B023-B54D0A293623',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'preferred',
+                'references': [],
+                'value': {
+                    'content': 'Q6256',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'q668$4A765D94-BBE5-4E19-BB91-B1AF8CD383E7',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1947-08-15T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'preferred',
+                'references': [{
+                    'hash':
+                        '276bdb149bd1bb080b3251350f8e25f70c4222ce',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'url',
+                            'id': 'P854'
+                        },
+                        'value': {
+                            'content':
+                                'https://www.state.gov/independent-states-in-the-world/',
+                            'type':
+                                'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q3624078',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q668$17bc7bba-4ffe-20d9-09ed-1691da2cf83f',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1947-08-15T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }, {
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P582'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1950-01-26T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q223832',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q668$76e9794c-4da4-552e-d46b-a97cb0b00594',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1950-01-26T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'preferred',
+                'references': [],
+                'value': {
+                    'content': 'Q7270',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q668$98e77c48-4f4a-3c77-adf7-a0a6ac2d3e81',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1950-01-26T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'preferred',
+                'references': [],
+                'value': {
+                    'content': 'Q1520223',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q668$6932bf08-4ee3-43c4-6ed2-31b003664324',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1950-01-26T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'preferred',
+                'references': [],
+                'value': {
+                    'content': 'Q5255892',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q668$740dd4ea-43c2-c4f6-a70b-516afcf0d309',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1950-01-26T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'preferred',
+                'references': [],
+                'value': {
+                    'content': 'Q512187',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q745456': {
+        'descriptions': {
+            'ca':
+                'concentració geogràfica de negocis interconnectats en un camp específic',
+            'cs':
+                'módní označení pro sdružení spolupracujících ekonomických subjektů',
+            'de':
+                'geographische Konzentration von Unternehmen des gleichen Wirtschaftszweigs',
+            'en':
+                'geographic concentration of interconnected businesses in a particular field',
+            'es':
+                'concentración geográfica de negocios interconectados en un campo determinado',
+            'fr':
+                "région où s'accumulent des savoir-faire dans un domaine technique",
+            'hu':
+                'egymással kapcsolatban álló vállalkozások földrajzi koncentrációja egy adott területen',
+            'it':
+                'insieme di imprese interconnesse gestite da una società capogruppo',
+            'ja':
+                '特定の分野における、相互に関係のあるビジネスの地理的集中',
+            'nl':
+                'economie',
+            'ru':
+                'географическое сосредоточение компаний для упрощения взаимодействия',
+            'sl':
+                'geografska koncentracija medsebojno povezanih podjetij z določenega področja',
+            'zh':
+                '特定领域内相互关联的企业、供应商和相关机构的地理上的集中'
+        },
+        'labels': {
+            'ar': 'تجمع الأعمال',
+            'az': 'Biznes klasteri',
+            'bg': 'Индустриален клъстер',
+            'ca': 'clúster indústrial',
+            'cs': 'klastry',
+            'de': 'Wirtschaftscluster',
+            'en': 'business cluster',
+            'eo': 'industria grapolo',
+            'es': 'clúster industrial',
+            'et': 'Majandusklaster',
+            'eu': 'enpresa-kluster',
+            'fa': 'خوشه صنعتی',
+            'fi': 'Klusteri',
+            'fr': 'cluster',
+            'frr': 'wiartskap cluster',
+            'he': 'אשכול עסקי',
+            'hu': 'klaszter',
+            'it': 'cluster aziendale',
+            'ja': 'ビジネス・クラスター',
+            'kk': 'Кластер',
+            'kk-arab': 'كلاستەر',
+            'kk-cyrl': 'Кластер',
+            'kk-latn': 'Klaster',
+            'kn': 'ವ್ಯಾಪಾರ ಸಮೂಹಗಳು',
+            'lt': 'Klasteris',
+            'lv': 'komercdarbības klasteris',
+            'nb': 'næringsklynge',
+            'nl': 'cluster',
+            'pl': 'klaster',
+            'pt': 'cluster industrial',
+            'ru': 'экономический кластер',
+            'sco': 'business cluster',
+            'sk': 'Klaster',
+            'sl': 'poslovni grozd',
+            'sv': 'Näringslivskluster',
+            'tr': 'İş kümesi',
+            'uk': 'кластер',
+            'zh': '商业集群',
+            'zh-hans': '产业聚集',
+            'zh-hant': '產業群聚',
+            'zh-hk': '產業聚集'
+        },
+        'statements': {}
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q806463': {
+        'descriptions': {
+            'ar':
+                'سي أكاديمي',
+            'bn':
+                'ভারতের কর্ণাটক রাজ্যের একটি জেলা',
+            'de':
+                'Distrikt in Indien',
+            'el':
+                'οικισμός της Ινδίας',
+            'en':
+                'district of Karnataka, India',
+            'en-ca':
+                'human settlement in India',
+            'en-gb':
+                'human settlement in India',
+            'es':
+                'distrito del estado de Karnataka, India',
+            'fr':
+                "district de l'État indien du Karnataka",
+            'gu':
+                'ભારતના કર્ણાટક રાજ્યમાં આવેલ એક જિલ્લો',
+            'hi':
+                'कर्नाटक का जिला',
+            'it':
+                'distretto indiano',
+            'kn':
+                'ಕರ್ನಾಟಕದ ಜಿಲ್ಲೆ, ಭಾರತ. ಬೆಂಗಳೂರು ನಗರ ಮತ್ತು ಆನೇಕಲ್ ಪಟ್ಟಣಗಳನ್ನು ಒಳಗೊಂಡಿದೆ.',
+            'ml':
+                'കർണ്ണാടകസംസ്ഥാനത്തിലെ ജില്ല',
+            'mr':
+                'भारतातील कर्नाटक राज्यातील एक जिल्हा',
+            'nb':
+                'distrikt i India',
+            'ne':
+                'भारतको एक जिल्ला हो',
+            'nl':
+                'district in Karnataka, India',
+            'pa':
+                'ਕਰਨਾਟਕ ਦਾ ਜਿਲ਼੍ਹਾ, ਭਾਰਤ',
+            'sat':
+                'ᱠᱚᱨᱱᱟᱴᱚᱠ ᱨᱮᱱᱟᱜ ᱦᱚᱱᱚᱛ',
+            'ta':
+                'கர்நாடகத்தில் உள்ள மாவட்டம்',
+            'te':
+                'కర్ణాటక లోని జిల్లా'
+        },
+        'labels': {
+            'ar': 'بنغالور منطقة الحضرية',
+            'arz': 'بنجالور الحضريه',
+            'ast': 'Distritu de Bangalore',
+            'bho': 'बंगलौर शहरी जिला',
+            'bn': 'বেঙ্গালুরু নগর জেলা',
+            'ca': 'districte de Bangalore Urbà',
+            'ceb': 'Bangalore Urban',
+            'de': 'Bengaluru Urban',
+            'en': 'Bengaluru Urban district',
+            'es': 'Bangalore',
+            'eu': 'Bengaluru Urban barrutia',
+            'fa': 'بخش شهری بنگلور',
+            'fr': 'district de Bangalore Urbain',
+            'gu': 'બેંગલોર (શહેરી) જિલ્લો',
+            'hi': 'बेंगलूरु शहरी जिला',
+            'id': 'Distrik Nagara Bengaluru',
+            'it': 'distretto Urbano di Bangalore',
+            'ja': 'バンガロール市街県',
+            'kn': 'ಬೆಂಗಳೂರು ನಗರ ಜಿಲ್ಲೆ',
+            'ml': 'ബെംഗളുരു നഗര ജില്ല',
+            'mr': 'बंगळूर शहर जिल्हा',
+            'nan': 'Bangalore Urban',
+            'nb': 'Bangalore Urban',
+            'ne': 'बंगलोर जिल्ला',
+            'new': 'बेङ्गलूरु नगर जिल्ला',
+            'nl': 'Bengaluru Urban',
+            'pa': 'ਜਿਲ਼੍ਹਾ ਬੰਗਲੋਰ ਸਹਿਰੀ',
+            'pnb': 'ضلع شہری بنگلور',
+            'ru': 'Городской округ Бангалор',
+            'sa': 'बेङ्गळूरु नगरमण्डलम्',
+            'sat': 'ᱵᱟᱸᱜᱽᱞᱳᱨ ᱥᱚᱦᱨᱤ ᱦᱚᱱᱚᱛ',
+            'sv': 'Bangalore Urban',
+            'ta': 'பெங்களூரு நகர மாவட்டம்',
+            'te': 'బెంగుళూరు జిల్లా',
+            'ur': 'بنگلور شہری ضلع',
+            'vi': 'Arasinakunte, Magadi',
+            'zh': '班加羅爾市區縣',
+            'zh-hant': '班加羅爾市區縣'
+        },
+        'statements': {
+            'P131': [{
+                'id': 'q806463$84AEA0E2-7E2E-4463-B0FB-F7DFB83C5412',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P131'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q806457',
+                    'type': 'value'
+                }
+            }],
+            'P17': [{
+                'id': 'q806463$92CFD6A1-F922-44A8-BD33-25522D204E2D',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [{
+                    'hash':
+                        'c456dc5cd2117249948c288206ff3f8b1bf574f0',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'wikibase-item',
+                            'id': 'P143'
+                        },
+                        'value': {
+                            'content': 'Q8449',
+                            'type': 'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q668',
+                    'type': 'value'
+                }
+            }],
+            'P31': [{
+                'id': 'Q806463$E157BBF0-DF6D-444C-9FA0-D2E94F0FE6D2',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q1149652',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q83821': {
+        'descriptions': {
+            'cs':
+                'historický státní útvar',
+            'de':
+                'historischer Staat',
+            'en':
+                'historical country',
+            'es':
+                'Estado indio entre los siglos XV y XVII',
+            'fi':
+                'historiallinen valtio Intiassa',
+            'fr':
+                'ancien pays',
+            'mag':
+                'दक्कनके ऐतिहासिक राज्य',
+            'mr':
+                '१४९० ते १६८६ पर्यंत विजापूरची सल्तनत म्हणून नैऋत्य भारतावर राज्य करणारे मुस्लिम राजवंश',
+            'te':
+                'దక్షిణ భారతదేశానికి చెందిన రాజవంశం'
+        },
+        'labels': {
+            'ar': 'عادلشاهيون',
+            'ast': 'Sultanatu de Bijapur',
+            'az': 'Bicapur Krallığı',
+            'azb': 'بیجاپور شاهلیغی',
+            'bn': 'আদিল শাহী রাজবংশ',
+            'ca': 'sultanat de Bijapur',
+            'ckb': 'شانشینی عادلشاھی',
+            'cs': 'Bidžápurský sultanát',
+            'de': 'Bijapur',
+            'en': 'Bijapur Sultanate',
+            'es': 'Sultanato de Bijapur',
+            'fa': 'عادل\u200cشاهیان',
+            'fi': 'Bijapurin sulttaanikunta',
+            'fr': 'sultanat de Bijapur',
+            'gom': 'Adil Shahi Ghorannem',
+            'gom-deva': 'आदिलशाय',
+            'gom-latn': 'Adil Shahi Ghorannem',
+            'gu': 'આદિલ શાહી',
+            'hi': 'बीजापुर सल्तनत',
+            'id': 'Adil Shahi',
+            'it': 'Sultanato di Bijapur',
+            'ja': 'ビジャープル王国',
+            'kn': 'ಆದಿಲ್ ಶಾಹಿ ವಂಶ',
+            'ko': '비자푸르 왕국',
+            'mag': 'बीजापुर सल्तनत',
+            'mr': 'आदिलशाही',
+            'nb': 'Adil Shahi-dynastiet',
+            'nl': 'Sultanaat Bijapur',
+            'pl': 'Bijapur',
+            'pnb': 'بیجاپور سلطنت',
+            'pt': 'Sultanato de Bijapur',
+            'ru': 'Биджапурский султанат',
+            'skr': 'بیجاپور سلطنت',
+            'sl': 'Bidžapurski sultanat',
+            'sv': 'Bijapur (furstendöme)',
+            'ta': 'பிஜப்பூர் சுல்தானகம்',
+            'te': 'ఆదిల్\u200cషాహీ వంశము',
+            'tg': 'Султонии Биҷапур',
+            'tr': 'Adilşahlar',
+            'uk': 'Аділ-шахи',
+            'ur': 'بیجاپور سلطنت',
+            'uz': 'Bijopur',
+            'vec': 'Sultanà de Bijapur',
+            'wuu': '阿迪勒·沙阿王朝',
+            'zh': '阿迪勒·沙阿王朝'
+        },
+        'statements': {
+            'P31': [{
+                'id': 'Q83821$EA9A71E2-8829-46BB-ADC0-1C348E76E1BF',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q12759805',
+                    'type': 'value'
+                }
+            }, {
+                'id': 'Q83821$f6749417-4505-2f83-5592-ea5ebca81ef5',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q3024240',
+                    'type': 'value'
+                }
+            }]
+        }
+    },
+    'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q99': {
+        'descriptions': {
+            'el':
+                'πολιτεία των ΗΠΑ',
+            'en':
+                'state of the United States of America',
+            'eo':
+                'federacia subŝtato en okcidenta Usono, bordanta Pacifikon, norda de Meksiko, suda de Oregono, okcidenta de Nevado',
+            'es':
+                'estado de los Estados Unidos de América',
+            'et':
+                'Ameerika Ühendriikide osariik',
+            'fa':
+                'ایالتی در جنوب غربی آمریکا',
+            'fi':
+                'Yhdysvaltain osavaltio',
+            'fr':
+                "État des États-Unis d'Amérique",
+        },
+        'labels': {
+            'eml': 'Califòrgna',
+            'en': 'California',
+            'en-us': 'California',
+            'eo': 'Kalifornio',
+            'es': 'California',
+            'eu': 'Kalifornia',
+            'fa': 'کالیفرنیا',
+            'fi': 'Kalifornia',
+            'fo': 'Kalifornia',
+            'fr': 'Californie',
+        },
+        'statements': {
+            'P131': [{
+                'id': 'q99$2D645D41-8AF6-4FE3-B547-0338C71E322D',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P131'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [{
+                    'hash':
+                        'd5847b9b6032aa8b13dae3c2dfd9ed5d114d21b3',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'wikibase-item',
+                            'id': 'P143'
+                        },
+                        'value': {
+                            'content': 'Q11920',
+                            'type': 'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q30',
+                    'type': 'value'
+                }
+            }],
+            'P17': [{
+                'id': 'q99$FB2C1F7F-5397-4AFA-AE0B-F57EAD7831D0',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P17'
+                },
+                'qualifiers': [],
+                'rank': 'normal',
+                'references': [{
+                    'hash':
+                        'fa278ebfc458360e5aed63d5058cca83c46134f1',
+                    'parts': [{
+                        'property': {
+                            'data_type': 'wikibase-item',
+                            'id': 'P143'
+                        },
+                        'value': {
+                            'content': 'Q328',
+                            'type': 'value'
+                        }
+                    }]
+                }],
+                'value': {
+                    'content': 'Q30',
+                    'type': 'value'
+                }
+            }],
+            'P31': [{
+                'id': 'Q99$AF13EDE9-BD02-43E2-BEE0-1B50977E5247',
+                'property': {
+                    'data_type': 'wikibase-item',
+                    'id': 'P31'
+                },
+                'qualifiers': [{
+                    'property': {
+                        'data_type': 'time',
+                        'id': 'P580'
+                    },
+                    'value': {
+                        'content': {
+                            'calendarmodel':
+                                'http://www.wikidata.org/entity/Q1985727',
+                            'precision':
+                                11,
+                            'time':
+                                '+1850-09-09T00:00:00Z'
+                        },
+                        'type': 'value'
+                    }
+                }],
+                'rank': 'normal',
+                'references': [],
+                'value': {
+                    'content': 'Q35657',
+                    'type': 'value'
+                }
+            }]
+        }
+    }
+}

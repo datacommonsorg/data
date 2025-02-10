@@ -348,8 +348,7 @@ class WikiPlaceResolver:
 
     def _get_wiki_search_url(self) -> str:
         """Returns the wiki search URL is config is setup properly. """
-        api_key = self._config.get('custom_search_key',
-                                   '')
+        api_key = self._config.get('custom_search_key', '')
         if not api_key:
             logging.debug(
                 f'custom_search_key not set in config. Unable to look for wikiId'
@@ -384,7 +383,7 @@ class WikiPlaceResolver:
             wiki_json = self._get_wiki_json(wiki_id)
             names = self._get_wiki_json_property(wiki_json, 'labels')
             if names:
-              self._wiki_id_names[wiki_id] = names
+                self._wiki_id_names[wiki_id] = names
         return names
 
     def _get_wiki_json_property(self,
@@ -477,7 +476,6 @@ def main(_):
         if not output_csv:
             output_csv = input_csv
         file_util.file_write_py_dict(wiki_places, output_csv)
-
 
 
 if __name__ == '__main__':
