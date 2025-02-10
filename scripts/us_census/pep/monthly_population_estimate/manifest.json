@@ -10,6 +10,7 @@
             "scripts": [
                 "preprocess.py"
             ],
+            "source_files": ["input_files/*"],
             "import_inputs": [
                 {
                     "template_mcf": "output/USA_Population_Count.tmcf",

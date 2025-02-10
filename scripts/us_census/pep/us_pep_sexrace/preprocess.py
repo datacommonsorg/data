@@ -110,7 +110,10 @@ def add_future_year_urls():
                     if check_url.status_code == 200:
                         _FILES_TO_DOWNLOAD.append(
                             {"download_path": url_to_check})
-
+                    else:
+                        logging.fatal(
+                            f"url: {url_to_check} is not accessible,returned status code is: {check_url.status_code}"
+                        )
                 except:
                     logging.error(f"URL is not accessable {url_to_check}")
 
