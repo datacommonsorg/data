@@ -606,12 +606,19 @@ def get_value_list(value: str) -> list:
         return value
     value_list = []
     # Read the string as a comma separated line.
-    rows = list(
-        csv.reader([value], delimiter=',', quotechar='"',
-                   skipinitialspace=True))
-    for v in rows[0]:
-        val_normalized = get_quoted_value(v)
-        value_list.append(val_normalized)
+    try:
+        rows = list(
+            csv.reader([value],
+                       delimiter=',',
+                       quotechar='"',
+                       skipinitialspace=True))
+        for v in rows[0]:
+            val_normalized = get_quoted_value(v)
+            value_list.append(val_normalized)
+    except csv.Error:
+        logging.error(
+            f'Too large value {len(value)}, failed to convert to list')
+        value_list = [value]
     return value_list
 
 
