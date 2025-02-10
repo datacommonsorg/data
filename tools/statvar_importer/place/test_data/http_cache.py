@@ -580,22 +580,14 @@
     },
     'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q1549591': {
         'descriptions': {
-            'el':
-                'πόλη με πληθυσμό περισσότερο από 100.000 κατοίκους',
-            'en':
-                'city with a population of at least 100,000',
-            'en-ca':
-                'city with a population of more than 100,000 inhabitants',
-            'en-gb':
-                'city with a population of more than 100,000 inhabitants',
-            'eo':
-                'urbo kun super 100000 loĝantoj',
-            'es':
-                'ciudad con más de 100 000 habitantes',
-            'et':
-                'üle 100 000 elanikuga linn',
-            'eu':
-                '100\xa0000 biztanle baino gehiago dituen hiria',
+            'el': 'πόλη με πληθυσμό περισσότερο από 100.000 κατοίκους',
+            'en': 'city with a population of at least 100,000',
+            'en-ca': 'city with a population of more than 100,000 inhabitants',
+            'en-gb': 'city with a population of more than 100,000 inhabitants',
+            'eo': 'urbo kun super 100000 loĝantoj',
+            'es': 'ciudad con más de 100 000 habitantes',
+            'et': 'üle 100 000 elanikuga linn',
+            'eu': '100\xa0000 biztanle baino gehiago dituen hiria',
         },
         'labels': {
             'el': 'μεγάλη πόλη',
@@ -998,14 +990,10 @@
     },
     'https://www.wikidata.org/w/rest.php/wikibase/v1/entities/items/Q266923': {
         'descriptions': {
-            'de':
-                'historischer Staat',
-            'en':
-                'Monarchy in India (1399–1947)',
-            'fi':
-                'historiallinen valtio Intiassa',
-            'fr':
-                'État princier du Raj britannique (1399 à 1950)',
+            'de': 'historischer Staat',
+            'en': 'Monarchy in India (1399–1947)',
+            'fi': 'historiallinen valtio Intiassa',
+            'fr': 'État princier du Raj britannique (1399 à 1950)',
         },
         'labels': {
             'en': 'Kingdom of Mysore',
@@ -1652,20 +1640,13 @@
                 "division administrative aux États-Unis d'Amérique",
         },
         'labels': {
-            'el':
-                'πολιτεία των Ηνωμένες Πολιτείες',
-            'en':
-                'U.S. state',
-            'en-ca':
-                'state of the United States',
-            'en-gb':
-                'state of the United States',
-            'en-us':
-                'state of the United States',
-            'eo':
-                'subŝtato de Usono',
-            'es':
-                'Estado de los Estados Unidos',
+            'el': 'πολιτεία των Ηνωμένες Πολιτείες',
+            'en': 'U.S. state',
+            'en-ca': 'state of the United States',
+            'en-gb': 'state of the United States',
+            'en-us': 'state of the United States',
+            'eo': 'subŝtato de Usono',
+            'es': 'Estado de los Estados Unidos',
         },
         'statements': {
             'P17': [{
