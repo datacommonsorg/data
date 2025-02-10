@@ -1,0 +1,15 @@
+parameter,value
+url,https://www.dol.gov/agencies/whd/state/minimum-wage/history
+description,Minimum wages in USA country
+#place_type,State
+#places_within,country/USA
+start_date,1968
+end_date,2024
+release_frequency,Yearly
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor"
+drop_statvars_without_svobs,0
+header_rows,1
+mapped_rows,1
+mapped_columns,1
