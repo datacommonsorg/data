@@ -171,7 +171,6 @@ def _replace_name(final_cols: list) -> list:
     Returns:
         final_cols (list) : List of dtype str
     """
-    logging.info(f"Before {final_cols}")
     final_cols = [
         "Count_Person_" + (col.replace("Population ", "").replace(
             "Population", "").replace(" Plus ", "Or").replace(
@@ -183,7 +182,7 @@ def _replace_name(final_cols: list) -> list:
                                 " ", "_").replace("__", "_"))
         for col in final_cols
     ]
-    logging.info(f"After {final_cols}")
+
     return final_cols
 
 
@@ -256,9 +255,16 @@ class CensusUSACountryPopulation:
         df['Date'] = pd.to_datetime(df['Date'],
                                     format='%Y%B%d',
                                     errors="coerce")
-        # dropping 2010 data from na-est2009-01.xlsx file as it is available in na-est2019-01.xlsx file
+        # dropping 2010, 2020 overlapping values from different files
+        # dropping < 2000 files having some text in the value column
+
+        if 'nat-total.xlsx' in file:
+            df = df[df['Resident Population Plus Armed Forces Overseas'] !=
+                    'with']
         if 'na-est2009-01.xlsx' in file:
-            df = df[df['Date'].dt.strftime('%Y') != '2010']
+            df = df[df['Date'] < dt(2010, 4, 1)]
+        if 'na-est2019-01.xlsx' in file:
+            df = df[df['Date'] < dt(2020, 4, 1)]
         df.dropna(subset=['Date'], inplace=True)
         df['Date'] = df['Date'].dt.strftime('%Y-%m')
         df.drop_duplicates(subset=['Date'], inplace=True)
@@ -459,19 +465,17 @@ def add_future_year_urls():
     # need to the latest avaibale year
     for url in urls_to_scan:
         for future_year in range(2030, 2021, -1):
-            if dt.now().year > future_year:
-                YEAR = future_year
+            YEAR = future_year
 
-                url_to_check = url.format(YEAR=YEAR)
-                try:
-                    check_url = requests.head(url_to_check)
-                    if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
-                        break
+            url_to_check = url.format(YEAR=YEAR)
+            try:
+                check_url = requests.head(url_to_check)
+                if check_url.status_code == 200:
+                    _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
+                    break
 
-                except:
-                    logging.error(f"URL is not accessable {url_to_check}")
+            except:
+                logging.error(f"URL is not accessable {url_to_check}")
 
 
 def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
