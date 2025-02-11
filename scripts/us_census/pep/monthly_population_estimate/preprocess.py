@@ -461,8 +461,8 @@ def add_future_year_urls():
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/tables/2020-{YEAR}/national/totals/NA-EST{YEAR}-POP.xlsx"
     ]
-    # This method will generate URLs for the years 2021 to 2029
-    # need to the latest avaibale year
+    # This method checks for URLs from 2030 down to 2021. If a valid URL is found for any year, the method stops and adds it to the download URL.
+    #
     for url in urls_to_scan:
         for future_year in range(2030, 2021, -1):
             YEAR = future_year
