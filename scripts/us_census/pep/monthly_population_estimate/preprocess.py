@@ -41,15 +41,13 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
-default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "input_files")
+default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 _HEADER = 1
 _SCALING_FACTOR_TXT_FILE = 1000
 
 #Creating folder to store the raw data from source
-raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                             "raw_data")
+raw_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "raw_data")
 if not os.path.exists(raw_data_path):
     os.mkdir(raw_data_path)
 
@@ -171,17 +169,15 @@ def _replace_name(final_cols: list) -> list:
     Returns:
         final_cols (list) : List of dtype str
     """
+    logging.info(f"Before {final_cols}")
     final_cols = [
-        "Count_Person_" + (col.replace("Population ", "").replace(
-            "Population", "").replace(" Plus ", "Or").replace(
-                "Armed Forces Overseas", "InUSArmedForcesOverseas").replace(
-                    "Household", "ResidesInHousehold").replace(
-                        "Resident", "USResident").replace(
-                            "Noninstitutionalized",
-                            "NonInstitutionalized").strip().replace(
-                                " ", "_").replace("__", "_"))
-        for col in final_cols
+        "Count_Person_" + (col.replace("Population ", "").replace("Population", "").replace(
+            " Plus ", "Or").replace("Armed Forces Overseas", "InUSArmedForcesOverseas").replace(
+                "Household", "ResidesInHousehold").replace("Resident", "USResident").replace(
+                    "Noninstitutionalized", "NonInstitutionalized").strip().replace(
+                        " ", "_").replace("__", "_")) for col in final_cols
     ]
+    logging.info(f"After {final_cols}")
     return final_cols
 
 
@@ -224,7 +220,7 @@ class CensusUSACountryPopulation:
             df = pd.read_excel(file)
         return df
 
-    def _transform_df(self, df: pd.DataFrame) -> pd.DataFrame:
+    def _transform_df(self, df: pd.DataFrame, file: str) -> pd.DataFrame:
         """
         This method transforms Dataframe into cleaned DF.
         Also, It Creates new columns, remove duplicates,
@@ -240,8 +236,7 @@ class CensusUSACountryPopulation:
         final_cols = [col for col in df.columns if 'year' not in col.lower()]
         # _return_year("1999") or _return_year("1999 [1]"): 1999
         # _return_year(".07 1"): pd.NA
-        df['Year'] = df['Year and Month'].apply(_return_year).fillna(
-            method='ffill', limit=12)
+        df['Year'] = df['Year and Month'].apply(_return_year).fillna(method='ffill', limit=12)
         # _return_year("1999") or _return_year("1999 [1]"): pd.NA
         # _return_year(".07 1"): 07
         df['Month'] = df['Year and Month'].apply(_return_month)
@@ -249,11 +244,11 @@ class CensusUSACountryPopulation:
 
         # Creating new Date Column and Final Date format is yyyy-mm
         df['Date'] = df['Year'] + df['Month']
-        df['Date'] = df['Date'].str.replace(".", "").str.replace(
-            " ", "").str.replace("*", "")
-        df['Date'] = pd.to_datetime(df['Date'],
-                                    format='%Y%B%d',
-                                    errors="coerce")
+        df['Date'] = df['Date'].str.replace(".", "").str.replace(" ", "").str.replace("*", "")
+        df['Date'] = pd.to_datetime(df['Date'], format='%Y%B%d', errors="coerce")
+        # dropping 2010 data from na-est2009-01.xlsx file as it is available in na-est2019-01.xlsx file
+        if 'na-est2009-01.xlsx' in file:
+            df = df[df['Date'].dt.strftime('%Y') != '2010']
         df.dropna(subset=['Date'], inplace=True)
         df['Date'] = df['Date'].dt.strftime('%Y-%m')
         df.drop_duplicates(subset=['Date'], inplace=True)
@@ -281,7 +276,7 @@ class CensusUSACountryPopulation:
         df.insert(0, 'date_range', _year_range(df['Date']), True)
         return df
 
-    def _transform_data(self, df: pd.DataFrame) -> None:
+    def _transform_data(self, df: pd.DataFrame, file: str) -> None:
         """
         This method calls the required functions to transform
         the dataframe and saves the final cleaned data in
@@ -296,18 +291,16 @@ class CensusUSACountryPopulation:
         """
 
         try:
-            df = self._transform_df(df)
+            df = self._transform_df(df, file)
 
             if self._df is None:
                 self._df = df
             else:
                 self._df = pd.concat([self._df, df], ignore_index=True)
 
-            self._df.sort_values(by=['Date', 'date_range'],
-                                 ascending=False,
-                                 inplace=True)
+            self._df.sort_values(by=['Date', 'date_range'], ascending=False, inplace=True)
             # Data for 2020 exists in two sources, causing overlap. We'll eliminate duplicates
-            self._df.drop_duplicates("Date", keep="first", inplace=True)
+            #self._df.drop_duplicates("Date", keep="last", inplace=True)
             self._df.drop(['date_range'], axis=1, inplace=True)
             float_col = self._df.select_dtypes(include=['float64'])
             for col in float_col.columns.values:
@@ -358,8 +351,7 @@ class CensusUSACountryPopulation:
                     armedf = "armedForcesStatus: dcs:Civilian"
                     pvs.append(armedf)
                     if re.findall('NonInstitutionalized', col):
-                        residence = ("institutionalization: dcs:" +
-                                     "USC_NonInstitutionalized")
+                        residence = ("institutionalization: dcs:" + "USC_NonInstitutionalized")
                         pvs.append(residence)
                 if re.findall('Count_Person_InUSArmedForcesOverseas', col):
                     armedf = "armedForcesStatus: dcs:InArmedForces"
@@ -412,9 +404,7 @@ class CensusUSACountryPopulation:
         """
         #input_path = FLAGS.input_path
         ip_files = os.listdir(self.input_path)
-        self.input_files = [
-            self.input_path + os.sep + file for file in ip_files
-        ]
+        self.input_files = [self.input_path + os.sep + file for file in ip_files]
         if len(self.input_files) == 0:
             logging.info("No files to process")
             return
@@ -422,21 +412,20 @@ class CensusUSACountryPopulation:
         total_files_to_process = len(self.input_files)
         logging.info(f"No of files to be processed {len(self.input_files)}")
         for file in self.input_files:
+            logging.info(f"Processing file: {file}")
             df = self._load_data(file)
-            result = self._transform_data(df)
+            result = self._transform_data(df, file)
             if result:
                 processed_count += 1
             else:
                 logging.fatal(f'Failed to process {file}')
         logging.info(f"No of files processed {processed_count}")
-        if total_files_to_process > 0 & (processed_count
-                                         == total_files_to_process):
+        if total_files_to_process > 0 & (processed_count == total_files_to_process):
             self._generate_mcf(self._df.columns)
             self._generate_tmcf(self._df.columns)
         else:
             logging.fatal(
-                "Aborting output files as no of files to process not matching processed files"
-            )
+                "Aborting output files as no of files to process not matching processed files")
 
 
 def add_future_year_urls():
@@ -451,16 +440,16 @@ def add_future_year_urls():
     ]
     # This method will generate URLs for the years 2021 to 2029
     # need to the latest avaibale year
-    for future_year in range(2030, 2021, -1):
-        if dt.now().year > future_year:
-            YEAR = future_year
-            for url in urls_to_scan:
+    for url in urls_to_scan:
+        for future_year in range(2030, 2021, -1):
+            if dt.now().year > future_year:
+                YEAR = future_year
+
                 url_to_check = url.format(YEAR=YEAR)
                 try:
                     check_url = requests.head(url_to_check)
                     if check_url.status_code == 200:
-                        _FILES_TO_DOWNLOAD.append(
-                            {"download_path": url_to_check})
+                        _FILES_TO_DOWNLOAD.append({"download_path": url_to_check})
                         break
 
                 except:
@@ -498,9 +487,8 @@ def _clean_csv_file(df: pd.DataFrame) -> pd.DataFrame:
     df = df.iloc[idx.values[0] + 1:][:]
     df = df.dropna(axis=1, how='all')
     cols = [
-        "Year and Month", "Resident Population",
-        "Resident Population Plus Armed Forces Overseas", "Civilian Population",
-        "Civilian NonInstitutionalized Population"
+        "Year and Month", "Resident Population", "Resident Population Plus Armed Forces Overseas",
+        "Civilian Population", "Civilian NonInstitutionalized Population"
     ]
     df.columns = cols
     for col in df.columns:
@@ -536,12 +524,11 @@ def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
     # other column's data shift by one place, we need to shift it back to the
     # original place.
     idx = df[df['Resident Population'] == "(census)"].index
-    df.iloc[idx, resident_population] = df.iloc[idx][
-        "Resident Population Plus Armed Forces Overseas"]
-    df.iloc[idx, resident_population_plus_armed_forces_overseas] = df.iloc[idx][
-        "Civilian Population"]
-    df.iloc[idx, civilian_population] = df.iloc[idx][
-        "Civilian NonInstitutionalized Population"]
+    df.iloc[idx,
+            resident_population] = df.iloc[idx]["Resident Population Plus Armed Forces Overseas"]
+    df.iloc[idx,
+            resident_population_plus_armed_forces_overseas] = df.iloc[idx]["Civilian Population"]
+    df.iloc[idx, civilian_population] = df.iloc[idx]["Civilian NonInstitutionalized Population"]
     df.iloc[idx, civilian_noninstitutionalized_population] = np.NAN
     return df
 
@@ -591,8 +578,7 @@ def download_files():
     for file_to_dowload in _FILES_TO_DOWNLOAD:
         file_name = None
         url = file_to_dowload['download_path']
-        if 'file_name' in file_to_dowload and len(
-                file_to_dowload['file_name'] > 5):
+        if 'file_name' in file_to_dowload and len(file_to_dowload['file_name'] > 5):
             file_name = file_to_dowload['file_name']
         else:
             file_name = url.split('/')[-1]
@@ -618,8 +604,7 @@ def download_files():
                     with requests.get(url, stream=True) as response:
                         response.raise_for_status()
                         if response.status_code == 200:
-                            with open(os.path.join(raw_data_path, file_name),
-                                      'wb') as f:
+                            with open(os.path.join(raw_data_path, file_name), 'wb') as f:
                                 f.write(response.content)
                     file_name = file_name.replace(".csv", ".xlsx")
                     df = pd.read_csv(url, header=None)
@@ -631,14 +616,12 @@ def download_files():
                     with requests.get(url, stream=True) as response:
                         response.raise_for_status()
                         if response.status_code == 200:
-                            with open(os.path.join(raw_data_path, file_name),
-                                      'wb') as f:
+                            with open(os.path.join(raw_data_path, file_name), 'wb') as f:
                                 f.write(response.content)
                     file_name = file_name.replace(".txt", ".xlsx")
                     cols = [
                         "Year and Month", "Date", "Resident Population",
-                        "Resident Population Plus Armed Forces Overseas",
-                        "Civilian Population",
+                        "Resident Population Plus Armed Forces Overseas", "Civilian Population",
                         "Civilian NonInstitutionalized Population"
                     ]
                     df = pd.read_table(url,
@@ -690,8 +673,7 @@ def main(_):
         add_future_year_urls()
         download_status = download_files()
     if download_status and (mode == "" or mode == "process"):
-        loader = CensusUSACountryPopulation(FLAGS.input_path, cleaned_csv_path,
-                                            mcf_path, tmcf_path)
+        loader = CensusUSACountryPopulation(FLAGS.input_path, cleaned_csv_path, mcf_path, tmcf_path)
         loader.process()
 
 
