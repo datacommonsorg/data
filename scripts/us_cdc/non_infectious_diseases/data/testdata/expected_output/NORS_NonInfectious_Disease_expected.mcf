@@ -1,0 +1,924 @@
+Node: dcid:Count_MedicalConditionIncident_EColiEnterotoxigenicEtiology_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:EColiEnterotoxigenicEtiology
+
+Node: dcid:Count_MedicalConditionIncident_Phenol_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Phenol
+
+Node: dcid:Count_MedicalConditionIncident_GiardiaDuodenalisEtiology_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:GiardiaDuodenalisEtiology
+
+Node: dcid:Count_MedicalConditionIncident_Herbicide_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Herbicide
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaSonneiEtiology_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaSonneiEtiology
+
+Node: dcid:Count_MedicalConditionIncident_FuelOil_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:FuelOil
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_Chromium_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Chromium
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaEntericaEtiology_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaEntericaEtiology
+
+Node: dcid:Count_MedicalConditionIncident_EColiEnterotoxigenicEtiology_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:EColiEnterotoxigenicEtiology
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaEntericaEtiology_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaEntericaEtiology
+
+Node: dcid:Count_MedicalConditionIncident_GiardiaDuodenalisEtiology_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:GiardiaDuodenalisEtiology
+
+Node: dcid:Count_MedicalConditionIncident_FuelOil_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:FuelOil
+
+Node: dcid:Count_MedicalConditionIncident_Arsenic_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Arsenic
+
+Node: dcid:Count_MedicalConditionIncident_NORSUnknown_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:NORSUnknown
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaUnknown_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaPneumophilaEtiology_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaPneumophilaEtiology
+
+Node: dcid:Count_MedicalConditionIncident_Arsenic_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Arsenic
+
+Node: dcid:Count_MedicalConditionIncident_Arsenic_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Arsenic
+
+Node: dcid:Count_MedicalConditionIncident_HepatitisA_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:HepatitisA
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaPneumophilaEtiology_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaPneumophilaEtiology
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaUnknown_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_Fluorine_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Fluorine
+
+Node: dcid:Count_MedicalConditionIncident_NORSUnknown_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:NORSUnknown
+
+Node: dcid:Count_MedicalConditionIncident_Herbicide_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Herbicide
+
+Node: dcid:Count_MedicalConditionIncident_HepatitisA_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:HepatitisA
+
+Node: dcid:Count_MedicalConditionIncident_Fluorine_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Fluorine
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaUnknown_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_Phenol_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Phenol
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaUnknown_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_EColiEnterotoxigenicEtiology_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:EColiEnterotoxigenicEtiology
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaSonneiEtiology_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaSonneiEtiology
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaUnknown_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_Fluorine_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Fluorine
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_Herbicide_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Herbicide
+
+Node: dcid:Count_MedicalConditionIncident_EColiEnterotoxigenicEtiology_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:EColiEnterotoxigenicEtiology
+
+Node: dcid:Count_MedicalConditionIncident_GiardiaDuodenalisEtiology_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:GiardiaDuodenalisEtiology
+
+Node: dcid:Count_MedicalConditionIncident_GiardiaDuodenalisEtiology_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:GiardiaDuodenalisEtiology
+
+Node: dcid:Count_MedicalConditionIncident_HepatitisA_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:HepatitisA
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaUnknown_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_NORSUnknown_PatientHospitalized_SuspectedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__SuspectedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:NORSUnknown
+
+Node: dcid:Count_MedicalConditionIncident_EColiEnterotoxigenicEtiology_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:EColiEnterotoxigenicEtiology
+
+Node: dcid:Count_MedicalConditionIncident_Copper_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Copper
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaUnknown_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_HepatitisA_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:HepatitisA
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaEntericaEtiology_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaEntericaEtiology
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaPneumophilaEtiology_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaPneumophilaEtiology
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaUnknown_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaUnknown
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaUnknown_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_HepatitisA_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:HepatitisA
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaUnknown_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaEntericaEtiology_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaEntericaEtiology
+
+Node: dcid:Count_MedicalConditionIncident_Fluorine_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Fluorine
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaSonneiEtiology_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaSonneiEtiology
+
+Node: dcid:Count_MedicalConditionIncident_FuelOil_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:FuelOil
+
+Node: dcid:Count_MedicalConditionIncident_Arsenic_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Arsenic
+
+Node: dcid:Count_MedicalConditionIncident_Copper_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Copper
+
+Node: dcid:Count_MedicalConditionIncident_Fluorine_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Fluorine
+
+Node: dcid:Count_MedicalConditionIncident_Fluorine_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Fluorine
+
+Node: dcid:Count_MedicalConditionIncident_NORSUnknown_SuspectedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:NORSUnknown
+medicalStatus: dcs:SuspectedCase
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaSonneiEtiology_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaSonneiEtiology
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaEntericaEtiology_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaEntericaEtiology
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_Copper_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Copper
+
+Node: dcid:Count_MedicalConditionIncident_GiardiaDuodenalisEtiology_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:GiardiaDuodenalisEtiology
+
+Node: dcid:Count_MedicalConditionIncident_Arsenic_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Arsenic
+
+Node: dcid:Count_MedicalConditionIncident_Chromium_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Chromium
+
+Node: dcid:Count_MedicalConditionIncident_FuelOil_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:FuelOil
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaUnknown_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_Chromium_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Chromium
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_Phenol_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Phenol
+
+Node: dcid:Count_MedicalConditionIncident_Copper_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Copper
+
+Node: dcid:Count_MedicalConditionIncident_EColiEnterotoxigenicEtiology_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:EColiEnterotoxigenicEtiology
+
+Node: dcid:Count_MedicalConditionIncident_NORSUnknown_PatientDeceased_SuspectedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__SuspectedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:NORSUnknown
+
+Node: dcid:Count_MedicalConditionIncident_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+
+Node: dcid:Count_MedicalConditionIncident_NORSUnknown_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:NORSUnknown
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaPneumophilaEtiology_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaPneumophilaEtiology
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_Phenol_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Phenol
+
+Node: dcid:Count_MedicalConditionIncident_Copper_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Copper
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_Chromium_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Chromium
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaEntericaEtiology_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaEntericaEtiology
+
+Node: dcid:Count_MedicalConditionIncident_Herbicide_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Herbicide
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaUnknown_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_Phenol_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Phenol
+
+Node: dcid:Count_MedicalConditionIncident_Chromium_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Chromium
+
+Node: dcid:Count_MedicalConditionIncident_GiardiaDuodenalisEtiology_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:GiardiaDuodenalisEtiology
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaUnknown_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaUnknown
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_Chromium_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Chromium
+
+Node: dcid:Count_MedicalConditionIncident_SalmonellaUnknown_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:SalmonellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_Arsenic_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Arsenic
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_FuelOil_PatientDeceased_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:FuelOil
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaUnknown_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaPneumophilaEtiology_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaPneumophilaEtiology
+
+Node: dcid:Count_MedicalConditionIncident_Copper_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Copper
+
+Node: dcid:Count_MedicalConditionIncident_Phenol_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Phenol
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaUnknown_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaPneumophilaEtiology_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaPneumophilaEtiology
+
+Node: dcid:Count_MedicalConditionIncident_HepatitisA_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:HepatitisA
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaSonneiEtiology_PatientHospitalized_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaSonneiEtiology
+
+Node: dcid:Count_MedicalConditionIncident_LegionellaUnknown_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:LegionellaUnknown
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_Herbicide_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Herbicide
+medicalStatus: dcs:ConfirmedCase
+
+Node: dcid:Count_MedicalConditionIncident_Herbicide_PatientHospitalized_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientHospitalized
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:Herbicide
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaUnknown_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaUnknown
+
+Node: dcid:Count_MedicalConditionIncident_ShigellaSonneiEtiology_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:ShigellaSonneiEtiology
+
+Node: dcid:Count_MedicalConditionIncident_FuelOil_PatientDeceased_ConfirmedCase_WaterborneTransmission
+populationType: dcs:MedicalConditionIncident
+typeOf: dcs:StatisticalVariable
+statType: dcs:measuredValue
+medicalStatus: dcs:PatientDeceased__ConfirmedCase
+measuredProperty: dcs:count
+transmissionMode: dcs:WaterborneTransmission
+etiology: dcs:FuelOil
+
