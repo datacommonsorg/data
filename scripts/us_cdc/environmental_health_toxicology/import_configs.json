@@ -1,0 +1,65 @@
+[
+    {
+        "import_name":
+            "CDC_PM25CensusTract",
+        "files": [{
+            "url": "https://data.cdc.gov/resource/v5qq-ktfc.csv",
+            "input_file_name": "PM2.5CensusTractPollution_input_0.csv",
+            "output_file_name": "PM2.5CensusTract_0.csv"
+        }, {
+            "url": "https://data.cdc.gov/resource/ujra-cbx5.csv",
+            "input_file_name": "PM2.5CensusTractPollution_input_1.csv",
+            "output_file_name": "PM2.5CensusTract_1.csv"
+        }, {
+            "url": "https://data.cdc.gov/resource/qjxm-7fny.csv",
+            "input_file_name": "PM2.5CensusTractPollution_input_2.csv",
+            "output_file_name": "PM2.5CensusTract_2.csv"
+        }, {
+            "url": "https://data.cdc.gov/resource/96sd-hxdt.csv",
+            "input_file_name": "PM2.5CensusTractPollution_input_3.csv",
+            "output_file_name": "PM2.5CensusTract_3.csv"
+        }]
+    }, {
+        "import_name":
+            "CDC_OzoneCensusTract",
+        "files": [{
+            "url": "https://data.cdc.gov/resource/v76h-zdce.csv",
+            "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input_0.csv",
+            "output_file_name": "Census_Tract_Level_Ozone_Concentrations_0.csv"
+        }, {
+            "url":
+                "https://data.cdc.gov/resource/xm94-zmtx.csv",
+            "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input_1.csv",
+            "output_file_name":
+                "Census_Tract_Level_Ozone_Concentrations_1.csv"
+        }, {
+            "url":
+                "https://data.cdc.gov/resource/847z-pxin.csv",
+            "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input_2.csv",
+            "output_file_name":
+                "Census_Tract_Level_Ozone_Concentrations_2.csv"
+        }, {
+            "url":
+                "https://data.cdc.gov/resource/hf2a-3ebq.csv",
+            "input_file_name": "Census_Tract_Level_Ozone_Concentrations_input_3.csv",
+            "output_file_name":
+                "Census_Tract_Level_Ozone_Concentrations_3.csv"
+        }]
+    }, {
+        "import_name":
+            "CDC_PM25County",
+        "files": [{
+            "url": "https://data.cdc.gov/resource/dqwm-pbi7.csv",
+            "input_file_name": "PM2.5County_input_0.csv",
+            "output_file_name": "PM25county.csv" 
+        }]
+    }, {
+        "import_name":
+            "CDC_OzoneCounty",
+        "files": [{
+            "url": "https://data.cdc.gov/resource/jcn4-jcv5.csv",
+            "input_file_name": "OzoneCounty_input.csv",
+            "output_file_name": "OzoneCounty.csv"
+        }]
+    }
+]
