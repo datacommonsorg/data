@@ -27,6 +27,7 @@ pandas
 protobuf
 psutil
 pylint
+pyspellchecker
 pytest
 python_calamine
 pytz
