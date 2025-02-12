@@ -18,12 +18,17 @@ and generates cleaned CSV, MCF, TMCF file.
 import os
 import sys
 import pandas as pd
+from absl import app, flags, logging
 
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
 from common.euro_stat import EuroStat
+from common import import_download_details, download
 # pylint: enable=wrong-import-position
+
+_FLAGS = flags.FLAGS
+flags.DEFINE_string('mode', '', 'Options: download or process')
 
 
 class EuroStatAlcoholConsumption(EuroStat):
@@ -31,7 +36,6 @@ class EuroStatAlcoholConsumption(EuroStat):
     This Class has requried methods to generate Cleaned CSV,
     MCF and TMCF Files.
     """
-    _import_name = "alcohol_consumption"
 
     _mcf_template = ("Node: dcid:{sv}"
                      "\n{sv_name}"
@@ -88,6 +92,30 @@ class EuroStatAlcoholConsumption(EuroStat):
         "NotACitizen": "citizenship",
     }
 
+    @staticmethod
+    def download_data(import_name):
+        """Downloads raw data from Eurostat website and stores it in instance data frame.
+        
+            Args:
+            import_name(str): A string representing the import name.
+            
+            Returns:True
+            
+        """
+        download_details = import_download_details.download_details[import_name]
+        download_path = os.path.abspath(
+            os.path.join(os.path.dirname(__file__), '..', import_name,
+                         "input_files"))
+        os.makedirs(download_path, exist_ok=True)
+
+        for file in download_details["filenames"]:
+            download_files_urls = [
+                download_details["input_url"] + str(file) +
+                download_details["file_extension"]
+            ]
+            download.download_files(download_files_urls, download_path)
+        return True
+
     # over-ridden parent abstract method
     def _property_correction(self):
         for k, v in self._sv_properties.items():
@@ -119,26 +147,41 @@ class EuroStatAlcoholConsumption(EuroStat):
         return df.rename(columns={'frequenc': 'frequenc_alcohol'})
 
 
-if __name__ == '__main__':
-    input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                              "input_files")
-    ip_files = os.listdir(input_path)
-    ip_files = [input_path + os.sep + file for file in ip_files]
+def main(_):
+    mode = _FLAGS.mode
+    global import_name
+    import_name = "alcohol_consumption"
+    if mode == "" or mode == "download":
+        EuroStatAlcoholConsumption.download_data(import_name)
+    if mode == "" or mode == "process":
+        try:
+            input_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "input_files")
+            ip_files = os.listdir(input_path)
+            ip_files = [input_path + os.sep + file for file in ip_files]
 
-    # Defining Output Files
-    data_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "output")
+            # Defining Output Files
+            data_file_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), "output")
 
-    csv_name = "eurostat_population_alcoholconsumption.csv"
-    mcf_name = "eurostat_population_alcoholconsumption.mcf"
-    tmcf_name = "eurostat_population_alcoholconsumption.tmcf"
+            csv_name = "eurostat_population_alcoholconsumption.csv"
+            mcf_name = "eurostat_population_alcoholconsumption.mcf"
+            tmcf_name = "eurostat_population_alcoholconsumption.tmcf"
 
-    cleaned_csv_path = os.path.join(data_file_path, csv_name)
-    mcf_path = os.path.join(data_file_path, mcf_name)
-    tmcf_path = os.path.join(data_file_path, tmcf_name)
+            cleaned_csv_path = os.path.join(data_file_path, csv_name)
+            mcf_path = os.path.join(data_file_path, mcf_name)
+            tmcf_path = os.path.join(data_file_path, tmcf_name)
 
-    loader = EuroStatAlcoholConsumption(ip_files, cleaned_csv_path, mcf_path,
-                                        tmcf_path)
-    loader.generate_csv()
-    loader.generate_mcf()
-    loader.generate_tmcf()
+            loader = EuroStatAlcoholConsumption(ip_files, cleaned_csv_path,
+                                                mcf_path, tmcf_path,
+                                                import_name)
+            loader.generate_csv()
+            loader.generate_mcf()
+            loader.generate_tmcf()
+            logging.info("Processing completed!")
+        except Exception as e:
+            logging.fatal(f'Processing error - {e}')
+
+
+if __name__ == "__main__":
+    app.run(main)

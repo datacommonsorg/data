@@ -27,4 +27,5 @@ from common.unitest_common_methods import CommonTestClass
 
 class TobaccoConsumptionTest(CommonTestClass.CommonTestCases):
     _import_class = EuroStatTobaccoConsumption
+    _import_name = "tobacco_consumption"
     _test_module_directory = os.path.dirname(__file__)

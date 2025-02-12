@@ -36,10 +36,9 @@ download_details = {
             "al2u", "al1b", "al1c", "de10", "de6"
         ],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-                "BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/hlth_ehis_",
         "file_extension":
-            ".tsv.gz"
+            "?format=TSV&compressed=true"
     },
     "bmi": {
         "filenames": [
@@ -69,10 +68,9 @@ download_details = {
             "sk1b", "sk1c", "sk2i", "sk2e", "sk5e", "sk6e", "de3", "de4", "de5"
         ],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-                "BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/hlth_ehis_",
         "file_extension":
-            ".tsv.gz"
+            "?format=TSV&compressed=true"
     },
     "social_environment": {
         "filenames": ["ss1e", "ss1u", "ic1e", "ic1u", "ss1b", "ss1c", "ss1d"],

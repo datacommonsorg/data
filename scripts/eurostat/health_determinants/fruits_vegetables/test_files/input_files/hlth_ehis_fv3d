@@ -1,0 +1,5 @@
+freq,n_portion,lev_limit,sex,age,unit,geo\TIME_PERIOD	2014 	2019 
+A,0,MOD,F,TOTAL,PC,AT	23.1 	25.8 
+A,0,MOD,F,TOTAL,PC,BE	12.6 	12.3 
+A,0,MOD,F,TOTAL,PC,BG	58.3 	50.5 
+A,0,MOD,F,TOTAL,PC,CY	28.9 	37.1

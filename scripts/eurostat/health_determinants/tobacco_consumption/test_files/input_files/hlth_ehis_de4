@@ -1,0 +1,5 @@
+freq,sex,age,quantile,geo\TIME_PERIOD	2008 
+A,F,TOTAL,QU1,AT	17.0 
+A,F,TOTAL,QU1,BE	21.9 u
+A,F,TOTAL,QU1,BG	8.9 
+A,F,TOTAL,QU1,CY	10.2

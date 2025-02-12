@@ -27,4 +27,5 @@ from common.unitest_common_methods import CommonTestClass
 
 class FruitsVegetablesTest(CommonTestClass.CommonTestCases):
     _import_class = EuroStatFruitsVegetables
+    _import_name = "fruits_vegetables"
     _test_module_directory = os.path.dirname(__file__)

@@ -27,4 +27,5 @@ from common.unitest_common_methods import CommonTestClass
 
 class PhysicalActivityTest(CommonTestClass.CommonTestCases):
     _import_class = EuroStatPhysicalActivity
+    _import_name = "physical_activity"
     _test_module_directory = os.path.dirname(__file__)
