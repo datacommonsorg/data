@@ -1,0 +1,18 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/2/MTQwMiMy/unmet-need-of-health-services-by-province--percent-.html
+description,"Unmet Need of Health Services by Province, 2015-2017"
+#place_type,
+#places_within,
+start_date,2015
+end_date,2023
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,2
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1ktw3P4cVsDKTjtpxTtwR7rVwSPuZVk3z3dAtkZcUv20/edit?resourcekey=0-NOaG4rXONTiOgJ1RVI9Z8w#gid=2003764501
+,
+mapped_rows,2
+mapped_columns,1
+pv_map,https://docs.google.com/spreadsheets/d/155QOzFjFXgm787zVdr7YscO5v7PtYCo2E7YqHULbh30/edit?resourcekey=0-wxRRlIwYKvW7Pb3d-pcN6Q#gid=765311169
