@@ -367,6 +367,7 @@ def process_non_infectious_data(input_path: str, sheet_name: str,
         sv_dict_list = sv_df['sv_dict'].values.tolist()
         mcf_file_path = os.path.join(output_path, f'{_FILE_PREFIX}.mcf')
         write_svdicts_to_file(sv_dict_list, mcf_file_path)
+
         sv_df = sv_df[[
             "variable", "Primary Mode", "Etiology", "Etiology Status",
             "variableMeasured"
