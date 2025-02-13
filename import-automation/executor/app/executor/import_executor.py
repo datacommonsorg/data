@@ -333,21 +333,26 @@ class ImportExecutor:
             raise exc
 
     def _get_latest_version(self, import_dir: str) -> str:
-        # Download previous import data.
+        """
+        Find previous import data in GCS.
+        Returns:
+          GCS path for the latest import data.
+
+        """
         bucket = storage.Client(self.config.gcs_project_id).bucket(
             self.config.storage_prod_bucket_name)
-        blob = bucket.blob(
+        blob = bucket.get_blob(
             f'{import_dir}/{self.config.storage_version_filename}')
-        if not blob:
+        if not blob or not blob.download_as_text():
             logging.error(
-                f'Not able to download latest_version.txt from {folder}, skipping validation.'
+                f'Not able to find latest_version.txt in {folder}, skipping validation.'
             )
             return ''
         latest_version = blob.download_as_text()
-        blob = bucket.blob(f'{import_dir}/{latest_version}')
+        blob = bucket.get_blob(f'{import_dir}/{latest_version}')
         if not blob:
             logging.error(
-                f'Not able to download previous import from {latest_version}, skipping validation.'
+                f'Not able to find previous import in {latest_version}, skipping validation.'
             )
             return ''
         return f'gs://{bucket.name}/{blob.name}'
@@ -401,7 +406,7 @@ class ImportExecutor:
             )
             _log_process(process=process)
             process.check_returncode()
-            logging.info('Generated resolved mcf')
+            logging.info('Generated resolved mcf in %s', validation_output_path)
 
             if latest_version:
                 # Invoke differ and validation scripts.
