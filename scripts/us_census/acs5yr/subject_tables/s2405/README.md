@@ -2,5 +2,5 @@
 
 This subject table provides data on the number of civilian employed workers in various industries. It further distinguishes workers based on their occupation.
 
-Years: 2010-2019  
+Years: 2010-2023 
 Geo : Country, State, County and Place
