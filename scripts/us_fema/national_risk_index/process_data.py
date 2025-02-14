@@ -2,7 +2,6 @@ import json
 import os
 import pandas as pd
 import numpy as np
-import logging
 import sys
 from pathlib import Path
 from absl import app
@@ -69,8 +68,8 @@ def convert_month_year(date_str):
     year = str(date_obj.year)
     month = str(date_obj.month).zfill(2)  # Pad single-digit months with zero
     return f"{year}-{month}"
-  except ValueError:
-    logging.fatal(f"Invalid date format: {date_str}")
+  except Exception as e:
+    logging.fatal(f"An error occurred: {e}")
     sys.exit(1)
     
 
