@@ -1,0 +1,854 @@
+Node: dcid:Count_Person_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Upto19Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [- 19 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19OrLessYears_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [- 19 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19To64Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [19 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19To64Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [19 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [65 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [65 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Civilian_NonInstitutionalized_1.38OrLessRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+povertyStatus: [- 1.38 RatioToPovertyLine]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Civilian_NonInstitutionalized_1.38OrLessRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+povertyStatus: [- 1.38 RatioToPovertyLine]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_Civilian_NonInstitutionalized_1.38OrMoreRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+povertyStatus: [1.38 - RatioToPovertyLine]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_Civilian_NonInstitutionalized_1.38OrMoreRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+povertyStatus: [1.38 - RatioToPovertyLine]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19To64Years_Civilian_NonInstitutionalized_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [19 64 Years]
+workExperience: dcs:USC_FullTimeYearRoundWorker
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19To64Years_Civilian_NonInstitutionalized_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [19 64 Years]
+workExperience: dcs:USC_FullTimeYearRoundWorker
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_6OrLessYears_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [- 6 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_6OrLessYears_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [- 6 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_6To18Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [6 18 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_6To18Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [6 18 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19To25Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [19 25 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19To25Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [19 25 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_26To34Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [26 34 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_26To34Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [26 34 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To44Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [35 44 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To44Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [35 44 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To54Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [45 54 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To54Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [45 54 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To64Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [55 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To64Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [55 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [65 74 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [65 74 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+age: [75 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_Civilian_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+age: [75 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithPrivateHealthInsuranceOnly
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+healthInsurance: dcs:WithPrivateHealthInsuranceOnly
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithPrivateHealthInsuranceOnly
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+healthInsurance: dcs:WithPrivateHealthInsuranceOnly
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithEmployerBasedHealthInsuranceOnly
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+healthInsurance: dcs:WithEmployerBasedHealthInsuranceOnly
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithEmployerBasedHealthInsuranceOnly
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+healthInsurance: dcs:WithEmployerBasedHealthInsuranceOnly
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDirectPurchaseHealthInsuranceOnly
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+healthInsurance: dcs:WithDirectPurchaseHealthInsuranceOnly
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDirectPurchaseHealthInsuranceOnly
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+healthInsurance: dcs:WithDirectPurchaseHealthInsuranceOnly
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithTricareMilitaryHealthCoverageOnly
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+healthInsurance: dcs:WithTricareMilitaryHealthCoverageOnly
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithTricareMilitaryHealthCoverageOnly
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+populationType: schema:Person
+healthInsurance: dcs:WithTricareMilitaryHealthCoverageOnly
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithEmployerBasedHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithEmployerBasedHealthInsurance
+populationType: schema:Person
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithEmployerBasedHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithEmployerBasedHealthInsurance
+populationType: schema:Person
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19OrLessYears_WithEmployerBasedHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithEmployerBasedHealthInsurance
+populationType: schema:Person
+age: [- 19 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19OrLessYears_WithEmployerBasedHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithEmployerBasedHealthInsurance
+populationType: schema:Person
+age: [- 19 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19To64Years_WithEmployerBasedHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithEmployerBasedHealthInsurance
+populationType: schema:Person
+age: [19 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19To64Years_WithEmployerBasedHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithEmployerBasedHealthInsurance
+populationType: schema:Person
+age: [19 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_WithEmployerBasedHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithEmployerBasedHealthInsurance
+populationType: schema:Person
+age: [65 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_WithEmployerBasedHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithEmployerBasedHealthInsurance
+populationType: schema:Person
+age: [65 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithDirectPurchaseHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithDirectPurchaseHealthInsurance
+populationType: schema:Person
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithDirectPurchaseHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithDirectPurchaseHealthInsurance
+populationType: schema:Person
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19OrLessYears_WithDirectPurchaseHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithDirectPurchaseHealthInsurance
+populationType: schema:Person
+age: [- 19 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19OrLessYears_WithDirectPurchaseHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithDirectPurchaseHealthInsurance
+populationType: schema:Person
+age: [- 19 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19To64Years_WithDirectPurchaseHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithDirectPurchaseHealthInsurance
+populationType: schema:Person
+age: [19 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19To64Years_WithDirectPurchaseHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithDirectPurchaseHealthInsurance
+populationType: schema:Person
+age: [19 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_WithDirectPurchaseHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithDirectPurchaseHealthInsurance
+populationType: schema:Person
+age: [65 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_WithDirectPurchaseHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithDirectPurchaseHealthInsurance
+populationType: schema:Person
+age: [65 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithTricareMilitaryHealthCoverage
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithTricareMilitaryHealthCoverage
+populationType: schema:Person
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithTricareMilitaryHealthCoverage
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithTricareMilitaryHealthCoverage
+populationType: schema:Person
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19OrLessYears_WithTricareMilitaryHealthCoverage
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithTricareMilitaryHealthCoverage
+populationType: schema:Person
+age: [- 19 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19OrLessYears_WithTricareMilitaryHealthCoverage
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithTricareMilitaryHealthCoverage
+populationType: schema:Person
+age: [- 19 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19To64Years_WithTricareMilitaryHealthCoverage
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithTricareMilitaryHealthCoverage
+populationType: schema:Person
+age: [19 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19To64Years_WithTricareMilitaryHealthCoverage
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithTricareMilitaryHealthCoverage
+populationType: schema:Person
+age: [19 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65OrMoreYears_WithTricareMilitaryHealthCoverage
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithTricareMilitaryHealthCoverage
+populationType: schema:Person
+age: [65 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65OrMoreYears_WithTricareMilitaryHealthCoverage
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithTricareMilitaryHealthCoverage
+populationType: schema:Person
+age: [65 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithPrivateHealthInsurance_1.38OrLessRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+povertyStatus: [- 1.38 RatioToPovertyLine]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithPrivateHealthInsurance_1.38OrLessRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+povertyStatus: [- 1.38 RatioToPovertyLine]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_WithPrivateHealthInsurance_1.38OrMoreRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+povertyStatus: [1.38 - RatioToPovertyLine]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_WithPrivateHealthInsurance_1.38OrMoreRatioToPovertyLine
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+povertyStatus: [1.38 - RatioToPovertyLine]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19To64Years_WithPrivateHealthInsurance_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [19 64 Years]
+workExperience: dcs:USC_FullTimeYearRoundWorker
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19To64Years_WithPrivateHealthInsurance_FullTimeYearRoundWorker
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [19 64 Years]
+workExperience: dcs:USC_FullTimeYearRoundWorker
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_6OrLessYears_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [- 6 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_6OrLessYears_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [- 6 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_6To18Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [6 18 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_6To18Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [6 18 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_19To25Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [19 25 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_19To25Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [19 25 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_26To34Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [26 34 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_26To34Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [26 34 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_35To44Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [35 44 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_35To44Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [35 44 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_45To54Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [45 54 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_45To54Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [45 54 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_55To64Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [55 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_55To64Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [55 64 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_65To74Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [65 74 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_65To74Years_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [65 74 Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:Count_Person_75OrMoreYears_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [75 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
+Node: dcid:MarginOfError_Count_Person_75OrMoreYears_WithPrivateHealthInsurance
+measuredProperty: dcs:count
+statType: dcs:marginOfError
+healthInsurance: dcs:WithPrivateHealthInsurance
+populationType: schema:Person
+age: [75 - Years]
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+
