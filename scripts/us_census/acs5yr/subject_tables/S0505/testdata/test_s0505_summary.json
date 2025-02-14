@@ -1,0 +1,17 @@
+{
+    "summary": {
+        "column map generator commit SHA": "",
+        "data processing script commit SHA": "",
+        "total StatVarObservations": 1591
+    },
+    "2016": {
+        "filename": "census_acs5yr_subject_tables_20250107_S0505_S0505/ACSST5Y2016.S0505_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 1742,
+        "number of rows in dataset": 8,
+        "number of statVars generated for columns": 1608,
+        "number of observations": 1591,
+        "number of unique StatVars with observations": 1591,
+        "number of unique geos": 1,
+        "number of StatVars in mcf_dict": 1608
+    }
+}
