@@ -1,0 +1,17 @@
+{
+    "summary": {
+        "column map generator commit SHA": "",
+        "data processing script commit SHA": "",
+        "total StatVarObservations": 2928
+    },
+    "2023": {
+        "filename": "subject_tables_2701_test/ACSST5Y2023.S2701_data_with_overlays_1111-11-11T111111.csv",
+        "number of columns in dataset": 612,
+        "number of rows in dataset": 8,
+        "number of statVars generated for columns": 366,
+        "number of observations": 2928,
+        "number of unique StatVars with observations": 366,
+        "number of unique geos": 8,
+        "number of StatVars in mcf_dict": 354
+    }
+}
