@@ -2,16 +2,16 @@
     "summary": {
         "column map generator commit SHA": "",
         "data processing script commit SHA": "",
-        "total StatVarObservations": 785
+        "total StatVarObservations": 187
     },
     "2022": {
         "filename": "census_acs5yr_subject_tables_20250107_S0503_S0503/ACSST5Y2022.S0503_data_with_overlays_1111-11-11T11111.csv",
-        "number of columns in dataset": 1162,
-        "number of rows in dataset": 5,
-        "number of statVars generated for columns": 804,
-        "number of observations": 785,
-        "number of unique StatVars with observations": 785,
+        "number of columns in dataset": 489,
+        "number of rows in dataset": 2,
+        "number of statVars generated for columns": 189,
+        "number of observations": 187,
+        "number of unique StatVars with observations": 187,
         "number of unique geos": 1,
-        "number of StatVars in mcf_dict": 804
+        "number of StatVars in mcf_dict": 189
     }
 }
