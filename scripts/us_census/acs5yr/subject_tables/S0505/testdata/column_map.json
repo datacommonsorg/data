@@ -1,0 +1,3047 @@
+{
+    "2016": {
+        "Total!!Estimate!!Foreign-born population": {
+            "Node": "dcid:Count_Person",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Foreign-born population": {
+            "Node": "dcid:MarginOfError_Count_Person",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2010 or later": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2010OrLater",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2010 or later": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_DateOfEntry2010OrLater",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2000To2009",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_DateOfEntry2000To2009",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered before 2000": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2000OrEarlier",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered before 2000": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_DateOfEntry2000OrEarlier",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Not a citizen": {
+            "Node": "dcid:Count_Person_NotAUSCitizen",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Not a citizen": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Not a citizen!!Entered 2010 or later": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2010OrLater",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Not a citizen!!Entered 2010 or later": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_DateOfEntry2010OrLater",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Not a citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2000To2009",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Not a citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_DateOfEntry2000To2009",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Not a citizen!!Entered before 2000": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Not a citizen!!Entered before 2000": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!SEX AND AGE!!Male": {
+            "Node": "dcid:Count_Person_Male",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!SEX AND AGE!!Male": {
+            "Node": "dcid:MarginOfError_Count_Person_Male",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!SEX AND AGE!!Female": {
+            "Node": "dcid:Count_Person_Female",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!SEX AND AGE!!Female": {
+            "Node": "dcid:MarginOfError_Count_Person_Female",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Under 5 years": {
+            "Node": "dcid:Count_Person_5OrLessYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Under 5 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5OrLessYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!5 to 17 years": {
+            "Node": "dcid:Count_Person_5To17Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!5 to 17 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!18 to 24 years": {
+            "Node": "dcid:Count_Person_18To24Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[18 24 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!18 to 24 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To24Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[18 24 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!25 to 44 years": {
+            "Node": "dcid:Count_Person_25To44Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[25 44 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!25 to 44 years": {
+            "Node": "dcid:MarginOfError_Count_Person_25To44Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[25 44 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!45 to 54 years": {
+            "Node": "dcid:Count_Person_45To54Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[45 54 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!45 to 54 years": {
+            "Node": "dcid:MarginOfError_Count_Person_45To54Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[45 54 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!55 to 64 years": {
+            "Node": "dcid:Count_Person_55To64Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[55 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!55 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_55To64Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[55 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!65 to 74 years": {
+            "Node": "dcid:Count_Person_65To74Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!65 to 74 years": {
+            "Node": "dcid:MarginOfError_Count_Person_65To74Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!75 to 84 years": {
+            "Node": "dcid:Count_Person_75To84Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[75 84 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!75 to 84 years": {
+            "Node": "dcid:MarginOfError_Count_Person_75To84Years",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[75 84 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!85 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_85OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Median age (years)": {
+            "Node": "dcid:Median_Age_Person",
+            "measuredProperty": "dcs:age",
+            "unit": "Years",
+            "statType": "dcs:medianValue",
+            "populationType": "dcs:Person",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": {
+            "Node": "dcid:Count_Person_OneRace",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "race": "dcs:OneRace",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": {
+            "Node": "dcid:MarginOfError_Count_Person_OneRace",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "race": "dcs:OneRace",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": {
+            "Node": "dcid:Count_Person_WhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "race": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": {
+            "Node": "dcid:MarginOfError_Count_Person_WhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "race": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": {
+            "Node": "dcid:Count_Person_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": {
+            "Node": "dcid:MarginOfError_Count_Person_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": {
+            "Node": "dcid:Count_Person_AmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "race": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": {
+            "Node": "dcid:MarginOfError_Count_Person_AmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "race": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": {
+            "Node": "dcid:Count_Person_AsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "race": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": {
+            "Node": "dcid:MarginOfError_Count_Person_AsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "race": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:Count_Person_NativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "race": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:MarginOfError_Count_Person_NativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "race": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": {
+            "Node": "dcid:Count_Person_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": {
+            "Node": "dcid:MarginOfError_Count_Person_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": {
+            "Node": "dcid:Count_Person_TwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "race": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!Two or more races": {
+            "Node": "dcid:MarginOfError_Count_Person_TwoOrMoreRaces",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "race": "dcs:TwoOrMoreRaces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Hispanic or Latino origin (of any race)": {
+            "Node": "dcid:Count_Person_HispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "race": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Hispanic or Latino origin (of any race)": {
+            "Node": "dcid:MarginOfError_Count_Person_HispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "race": "dcs:HispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!White alone, not Hispanic or Latino": {
+            "Node": "dcid:Count_Person_WhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "race": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!White alone, not Hispanic or Latino": {
+            "Node": "dcid:MarginOfError_Count_Person_WhiteAloneNotHispanicOrLatino",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "race": "dcs:WhiteAloneNotHispanicOrLatino",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!HOUSEHOLD TYPE!!In married-couple family": {
+            "Node": "dcid:Count_Person_MarriedCoupleFamilyHousehold",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "householdType": "dcs:MarriedCoupleFamilyHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!HOUSEHOLD TYPE!!In married-couple family": {
+            "Node": "dcid:MarginOfError_Count_Person_MarriedCoupleFamilyHousehold",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "householdType": "dcs:MarriedCoupleFamilyHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!HOUSEHOLD TYPE!!In other households": {
+            "Node": "dcid:Count_Person_OtherFamilyHousehold",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "householdType": "dcs:OtherFamilyHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!HOUSEHOLD TYPE!!In other households": {
+            "Node": "dcid:MarginOfError_Count_Person_OtherFamilyHousehold",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "householdType": "dcs:OtherFamilyHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Average household size": {
+            "Node": "dcid:Mean_HouseholdSize_Household",
+            "measuredProperty": "dcs:householdSize",
+            "statType": "dcs:meanValue",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Average family size": {
+            "Node": "dcid:Mean_FamilySize_Household_FamilyHousehold",
+            "measuredProperty": "dcs:familySize",
+            "statType": "dcs:meanValue",
+            "householdType": "dcs:FamilyHousehold",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!MARITAL STATUS!!Population 15 years and over": {
+            "Node": "dcid:Count_Person_15OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[15 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!MARITAL STATUS!!Population 15 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_15OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[15 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!MARITAL STATUS!!Population 15 years and over!!Never married": {
+            "Node": "dcid:Count_Person_NeverMarried",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:NeverMarried",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!MARITAL STATUS!!Population 15 years and over!!Never married": {
+            "Node": "dcid:MarginOfError_Count_Person_NeverMarried",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:NeverMarried",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated": {
+            "Node": "dcid:Count_Person_MarriedAndNotSeparated",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:MarriedAndNotSeparated",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!MARITAL STATUS!!Population 15 years and over!!Now married, except separated": {
+            "Node": "dcid:MarginOfError_Count_Person_MarriedAndNotSeparated",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:MarriedAndNotSeparated",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated": {
+            "Node": "dcid:Count_Person_DivorcedOrSeparated",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:DivorcedOrSeparated",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!MARITAL STATUS!!Population 15 years and over!!Divorced or separated": {
+            "Node": "dcid:MarginOfError_Count_Person_DivorcedOrSeparated",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:DivorcedOrSeparated",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!MARITAL STATUS!!Population 15 years and over!!Widowed": {
+            "Node": "dcid:Count_Person_Widowed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:Widowed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!MARITAL STATUS!!Population 15 years and over!!Widowed": {
+            "Node": "dcid:MarginOfError_Count_Person_Widowed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[15 - Years]",
+            "maritalStatus": "dcs:Widowed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": {
+            "Node": "dcid:Count_Person_3OrMoreYears_EnrolledInSchool",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[3 - Years]",
+            "schoolEnrollment": "dcs:EnrolledInSchool",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school": {
+            "Node": "dcid:MarginOfError_Count_Person_3OrMoreYears_EnrolledInSchool",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[3 - Years]",
+            "schoolEnrollment": "dcs:EnrolledInSchool",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school, preschool": {
+            "Node": "dcid:Count_Person_EnrolledInNurserySchoolPreschool",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[3 - Years]",
+            "schoolEnrollment": "dcs:EnrolledInSchool",
+            "levelOfSchool": "dcs:EnrolledInNurserySchoolPreschool",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Nursery school, preschool": {
+            "Node": "dcid:MarginOfError_Count_Person_EnrolledInNurserySchoolPreschool",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[3 - Years]",
+            "schoolEnrollment": "dcs:EnrolledInSchool",
+            "levelOfSchool": "dcs:EnrolledInNurserySchoolPreschool",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Elementary school (grades K-8)": {
+            "Node": "dcid:Count_Person_ElementarySchool",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[3 - Years]",
+            "schoolEnrollment": "dcs:EnrolledInSchool",
+            "levelOfSchool": "dcs:ElementarySchool",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!Elementary school (grades K-8)": {
+            "Node": "dcid:MarginOfError_Count_Person_ElementarySchool",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[3 - Years]",
+            "schoolEnrollment": "dcs:EnrolledInSchool",
+            "levelOfSchool": "dcs:ElementarySchool",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!High school (grades 9-12)": {
+            "Node": "dcid:Count_Person_EnrolledInGrade9ToGrade12",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[3 - Years]",
+            "schoolEnrollment": "dcs:EnrolledInSchool",
+            "levelOfSchool": "dcs:EnrolledInGrade9ToGrade12",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!High school (grades 9-12)": {
+            "Node": "dcid:MarginOfError_Count_Person_EnrolledInGrade9ToGrade12",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[3 - Years]",
+            "schoolEnrollment": "dcs:EnrolledInSchool",
+            "levelOfSchool": "dcs:EnrolledInGrade9ToGrade12",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school": {
+            "Node": "dcid:Count_Person_EnrolledInCollegeOrGraduateSchool",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[3 - Years]",
+            "schoolEnrollment": "dcs:EnrolledInSchool",
+            "levelOfSchool": "dcs:EnrolledInCollegeOrGraduateSchool",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!SCHOOL ENROLLMENT!!Population 3 years and over enrolled in school!!College or graduate school": {
+            "Node": "dcid:MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[3 - Years]",
+            "schoolEnrollment": "dcs:EnrolledInSchool",
+            "levelOfSchool": "dcs:EnrolledInCollegeOrGraduateSchool",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": {
+            "Node": "dcid:Count_Person_25OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_25OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate": {
+            "Node": "dcid:Count_Person_EducationalAttainmentLessThanHighSchoolGraduate",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "dcs:LessThanHighSchoolGraduate",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Less than high school graduate": {
+            "Node": "dcid:MarginOfError_Count_Person_EducationalAttainmentLessThanHighSchoolGraduate",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "dcs:LessThanHighSchoolGraduate",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)": {
+            "Node": "dcid:Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "dcs:HighSchoolGraduateIncludesEquivalency",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!High school graduate (includes equivalency)": {
+            "Node": "dcid:MarginOfError_Count_Person_EducationalAttainmentHighSchoolGraduateIncludesEquivalency",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "dcs:HighSchoolGraduateIncludesEquivalency",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college or associate's degree": {
+            "Node": "dcid:Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "dcs:SomeCollegeOrAssociatesDegree",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Some college or associate's degree": {
+            "Node": "dcid:MarginOfError_Count_Person_EducationalAttainmentSomeCollegeOrAssociatesDegree",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "dcs:SomeCollegeOrAssociatesDegree",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree": {
+            "Node": "dcid:Count_Person_EducationalAttainmentBachelorsDegree",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "dcs:BachelorsDegree",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Bachelor's degree": {
+            "Node": "dcid:MarginOfError_Count_Person_EducationalAttainmentBachelorsDegree",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "dcs:BachelorsDegree",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Graduate or professional degree": {
+            "Node": "dcid:Count_Person_EducationalAttainmentGraduateOrProfessionalDegree",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "dcs:GraduateOrProfessionalDegree",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EDUCATIONAL ATTAINMENT!!Population 25 years and over!!Graduate or professional degree": {
+            "Node": "dcid:MarginOfError_Count_Person_EducationalAttainmentGraduateOrProfessionalDegree",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[25 - Years]",
+            "educationalAttainment": "dcs:GraduateOrProfessionalDegree",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over": {
+            "Node": "dcid:Count_Person_5OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[5 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_5OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[5 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only": {
+            "Node": "dcid:Count_Person_OnlyEnglishSpokenAtHome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[5 - Years]",
+            "languageSpokenAtHome": "dcs:OnlyEnglish",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!English only": {
+            "Node": "dcid:MarginOfError_Count_Person_OnlyEnglishSpokenAtHome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[5 - Years]",
+            "languageSpokenAtHome": "dcs:OnlyEnglish",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English": {
+            "Node": "dcid:Count_Person_LanguageOtherThanEnglishSpokenAtHome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[5 - Years]",
+            "languageSpokenAtHome": "dcs:LanguageOtherThanEnglish",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English": {
+            "Node": "dcid:MarginOfError_Count_Person_LanguageOtherThanEnglishSpokenAtHome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[5 - Years]",
+            "languageSpokenAtHome": "dcs:LanguageOtherThanEnglish",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"": {
+            "Node": "dcid:Count_Person_SpeakEnglishLessThanVeryWell",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[5 - Years]",
+            "languageSpokenAtHome": "dcs:LanguageOtherThanEnglish",
+            "abilityToSpeakEnglish": "dcs:SpeakEnglishLessThanVeryWell",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!LANGUAGE SPOKEN AT HOME AND ABILITY TO SPEAK ENGLISH!!Population 5 years and over!!Language other than English!!Speak English less than \"very well\"": {
+            "Node": "dcid:MarginOfError_Count_Person_SpeakEnglishLessThanVeryWell",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[5 - Years]",
+            "languageSpokenAtHome": "dcs:LanguageOtherThanEnglish",
+            "abilityToSpeakEnglish": "dcs:SpeakEnglishLessThanVeryWell",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over": {
+            "Node": "dcid:Count_Person_16OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_16OrMoreYears",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force": {
+            "Node": "dcid:Count_Person_InLaborForce",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "employmentStatus": "dcs:BLS_InLaborForce",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force": {
+            "Node": "dcid:MarginOfError_Count_Person_InLaborForce",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "employmentStatus": "dcs:BLS_InLaborForce",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force": {
+            "Node": "dcid:Count_Person_Civilian_InLaborForce",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "employmentStatus": "dcs:BLS_InLaborForce",
+            "armedForcesStatus": "dcs:Civilian",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force": {
+            "Node": "dcid:MarginOfError_Count_Person_Civilian_InLaborForce",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "employmentStatus": "dcs:BLS_InLaborForce",
+            "armedForcesStatus": "dcs:Civilian",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed": {
+            "Node": "dcid:Count_Person_Unemployed_InLaborForce",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "employmentStatus": "dcs:BLS_InLaborForce",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Unemployed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Unemployed": {
+            "Node": "dcid:MarginOfError_Count_Person_Unemployed_InLaborForce",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "employmentStatus": "dcs:BLS_InLaborForce",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Unemployed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Civilian labor force!!Percent of civilian labor force": {
+            "Node": "dcid:Count_Person_Civilian_InLaborForce_AsAFractionOf_Count_Person_Civilian_NonInstitutionalized",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "measurementDenominator": "dcs:Count_Person_Civilian_NonInstitutionalized",
+            "employmentStatus": "dcs:BLS_InLaborForce",
+            "scalingFactor": "100",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces": {
+            "Node": "dcid:Count_Person_InArmedForces_InLaborForce",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "employmentStatus": "dcs:BLS_InLaborForce",
+            "armedForcesStatus": "dcs:InArmedForces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!In labor force!!Armed Forces": {
+            "Node": "dcid:MarginOfError_Count_Person_InArmedForces_InLaborForce",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "employmentStatus": "dcs:BLS_InLaborForce",
+            "armedForcesStatus": "dcs:InArmedForces",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force": {
+            "Node": "dcid:Count_Person_NotInLaborForce",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "employmentStatus": "dcs:BLS_NotInLaborForce",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EMPLOYMENT STATUS!!Population 16 years and over!!Not in labor force": {
+            "Node": "dcid:MarginOfError_Count_Person_NotInLaborForce",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "employmentStatus": "dcs:BLS_NotInLaborForce",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over": {
+            "Node": "dcid:Count_Person_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!Civilian employed population 16 years and over!!CLASS OF WORKER!!Private wage and salary workers": {
+            "Node": "dcid:Count_Person_Employed_PrivatelyOwnedForProfitEstablishment_PaidWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "establishmentOwnership": "dcs:PrivatelyOwnedForProfit",
+            "workerClassification": "dcs:PaidWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!Civilian employed population 16 years and over!!CLASS OF WORKER!!Private wage and salary workers": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_PrivatelyOwnedForProfitEstablishment_PaidWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "establishmentOwnership": "dcs:PrivatelyOwnedForProfit",
+            "workerClassification": "dcs:PaidWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!Civilian employed population 16 years and over!!CLASS OF WORKER!!Government workers": {
+            "Node": "dcid:Count_Person_Employed_GovernmentOwnedEstablishment_Worker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "establishmentOwnership": "dcs:GovernmentOwned",
+            "workerClassification": "dcs:Worker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!Civilian employed population 16 years and over!!CLASS OF WORKER!!Government workers": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_GovernmentOwnedEstablishment_Worker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "establishmentOwnership": "dcs:GovernmentOwned",
+            "workerClassification": "dcs:Worker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!Civilian employed population 16 years and over!!CLASS OF WORKER!!Self-employed workers in own not incorporated business": {
+            "Node": "dcid:Count_Person_Employed_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwner",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "establishmentOwnership": "dcs:PrivatelyOwned",
+            "workerClassification": "dcs:UnincorporatedBusinessOwner",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!Civilian employed population 16 years and over!!CLASS OF WORKER!!Self-employed workers in own not incorporated business": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_PrivatelyOwnedEstablishment_UnincorporatedBusinessOwner",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "establishmentOwnership": "dcs:PrivatelyOwned",
+            "workerClassification": "dcs:UnincorporatedBusinessOwner",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!Civilian employed population 16 years and over!!CLASS OF WORKER!!Unpaid family workers": {
+            "Node": "dcid:Count_Person_Employed_PrivatelyOwnedEstablishment_UnpaidFamilyWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "establishmentOwnership": "dcs:PrivatelyOwned",
+            "workerClassification": "dcs:UnpaidFamilyWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!Civilian employed population 16 years and over!!CLASS OF WORKER!!Unpaid family workers": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_PrivatelyOwnedEstablishment_UnpaidFamilyWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "establishmentOwnership": "dcs:PrivatelyOwned",
+            "workerClassification": "dcs:UnpaidFamilyWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!OCCUPATION!!Management, business, science, and arts occupations": {
+            "Node": "dcid:Count_Person_Employed_SOCManagementBusinessScienceArtsOccupation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "occupation": "dcs:SOCv2018/highLevelAggregation-1",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!OCCUPATION!!Management, business, science, and arts occupations": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_SOCManagementBusinessScienceArtsOccupation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "occupation": "dcs:SOCv2018/highLevelAggregation-1",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!OCCUPATION!!Service occupations": {
+            "Node": "dcid:Count_Person_Employed_SOCServiceOccupation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "occupation": "dcs:SOCv2018/highLevelAggregation-2",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!OCCUPATION!!Service occupations": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_SOCServiceOccupation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "occupation": "dcs:SOCv2018/highLevelAggregation-2",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!OCCUPATION!!Sales and office occupations": {
+            "Node": "dcid:Count_Person_Employed_SOCSalesOfficeOccupation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "occupation": "dcs:SOCv2018/highLevelAggregation-3",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!OCCUPATION!!Sales and office occupations": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_SOCSalesOfficeOccupation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "occupation": "dcs:SOCv2018/highLevelAggregation-3",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
+            "Node": "dcid:Count_Person_Employed_SOCNaturalResourcesConstructionMaintenanceOccupation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "occupation": "dcs:SOCv2018/highLevelAggregation-4",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!OCCUPATION!!Natural resources, construction, and maintenance occupations": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_SOCNaturalResourcesConstructionMaintenanceOccupation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "occupation": "dcs:SOCv2018/highLevelAggregation-4",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!OCCUPATION!!Production, transportation, and material moving occupations": {
+            "Node": "dcid:Count_Person_Employed_SOCProductionTransportationMaterialMovingOccupation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "occupation": "dcs:SOCv2018/highLevelAggregation-5",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!OCCUPATION!!Production, transportation, and material moving occupations": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_SOCProductionTransportationMaterialMovingOccupation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "occupation": "dcs:SOCv2018/highLevelAggregation-5",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Agriculture, forestry, fishing and hunting, and mining": {
+            "Node": "dcid:Count_Person_Employed_NAICSAgricultureForestryFishingHuntingMiningQuarryingOilGasExtraction",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/11_21",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Agriculture, forestry, fishing and hunting, and mining": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSAgricultureForestryFishingHuntingMiningQuarryingOilGasExtraction",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/11_21",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Construction": {
+            "Node": "dcid:Count_Person_Employed_NAICSConstruction",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/23",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Construction": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSConstruction",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/23",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Manufacturing": {
+            "Node": "dcid:Count_Person_Employed_NAICSManufacturing",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/33",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Manufacturing": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSManufacturing",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/33",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Wholesale trade": {
+            "Node": "dcid:Count_Person_Employed_NAICSWholesaleTrade",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/42",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Wholesale trade": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSWholesaleTrade",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/42",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Retail trade": {
+            "Node": "dcid:Count_Person_Employed_NAICSRetailTrade",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/44-45",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Retail trade": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSRetailTrade",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/44-45",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Transportation and warehousing, and utilities": {
+            "Node": "dcid:Count_Person_Employed_NAICSTransportationWarehousingUtilities",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/48-49_22",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Transportation and warehousing, and utilities": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSTransportationWarehousingUtilities",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/48-49_22",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Information": {
+            "Node": "dcid:Count_Person_Employed_NAICSInformation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/51",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Information": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSInformation",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/51",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Finance and insurance, and real estate and rental and leasing": {
+            "Node": "dcid:Count_Person_Employed_NAICSFinanceInsuranceRealEstateRentalLeasing",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/52-53",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Finance and insurance, and real estate and rental and leasing": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSFinanceInsuranceRealEstateRentalLeasing",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/52-53",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Professional, scientific, and management, and administrative and waste management services": {
+            "Node": "dcid:Count_Person_Employed_NAICSProfessionalScientificTechnicalServicesManagementOfCompaniesEnterprisesAdministrativeSupportWasteManagementRemediationServices",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/54-56",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Professional, scientific, and management, and administrative and waste management services": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSProfessionalScientificTechnicalServicesManagementOfCompaniesEnterprisesAdministrativeSupportWasteManagementRemediationServices",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/54-56",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Educational services, and health care and social assistance": {
+            "Node": "dcid:Count_Person_Employed_NAICSEducationalServicesHealthCareSocialAssistance",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/61-62",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Educational services, and health care and social assistance": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSEducationalServicesHealthCareSocialAssistance",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/61-62",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Arts, entertainment, and recreation, and accommodation and food services": {
+            "Node": "dcid:Count_Person_Employed_NAICSArtsEntertainmentRecreationAccommodationFoodServices",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/71-72",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Arts, entertainment, and recreation, and accommodation and food services": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSArtsEntertainmentRecreationAccommodationFoodServices",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/71-72",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Other services (except public administration)": {
+            "Node": "dcid:Count_Person_Employed_NAICSOtherServices",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/81",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Other services (except public administration)": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSOtherServices",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/81",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Civilian employed population 16 years and over!!INDUSTRY!!Public administration": {
+            "Node": "dcid:Count_Person_Employed_NAICSPublicAdministration",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/92",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Civilian employed population 16 years and over!!INDUSTRY!!Public administration": {
+            "Node": "dcid:MarginOfError_Count_Person_Employed_NAICSPublicAdministration",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "armedForcesStatus": "dcs:Civilian",
+            "employment": "dcs:BLS_Employed",
+            "naics": "dcs:NAICS/92",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings": {
+            "Node": "dcid:Count_Person_WithEarnings",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings": {
+            "Node": "dcid:MarginOfError_Count_Person_WithEarnings",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss": {
+            "Node": "dcid:Count_Person_9999OrLessInflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[- 9999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$1 to $9,999 or loss": {
+            "Node": "dcid:MarginOfError_Count_Person_9999OrLessInflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[- 9999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$10,000 to $14,999": {
+            "Node": "dcid:Count_Person_10000To14999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[10000 14999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$10,000 to $14,999": {
+            "Node": "dcid:MarginOfError_Count_Person_10000To14999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[10000 14999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$15,000 to $24,999": {
+            "Node": "dcid:Count_Person_15000To24999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[15000 24999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$15,000 to $24,999": {
+            "Node": "dcid:MarginOfError_Count_Person_15000To24999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[15000 24999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$25,000 to $34,999": {
+            "Node": "dcid:Count_Person_25000To34999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[25000 34999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$25,000 to $34,999": {
+            "Node": "dcid:MarginOfError_Count_Person_25000To34999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[25000 34999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$35,000 to $49,999": {
+            "Node": "dcid:Count_Person_35000To49999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[35000 49999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$35,000 to $49,999": {
+            "Node": "dcid:MarginOfError_Count_Person_35000To49999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[35000 49999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$50,000 to $74,999": {
+            "Node": "dcid:Count_Person_50000To74999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[50000 74999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$50,000 to $74,999": {
+            "Node": "dcid:MarginOfError_Count_Person_50000To74999InflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[50000 74999 InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$75,000 or more": {
+            "Node": "dcid:Count_Person_75000OrMoreInflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[75000 - InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!EARNINGS IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS) FOR FULL-TIME, YEAR-ROUND WORKERS!!Population 16 years and over with earnings!!$75,000 or more": {
+            "Node": "dcid:MarginOfError_Count_Person_75000OrMoreInflationAdjustedUSDCurrentYear_WithEarnings_FullTimeYearRoundWorker",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "earnings": "[75000 - InflationAdjustedUSD_CurrentYear]",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Median earnings (dollars) for full-time, year-round workers!!Male": {
+            "Node": "dcid:Median_Earnings_Person_Male",
+            "measuredProperty": "dcs:earnings",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "statType": "dcs:medianValue",
+            "populationType": "dcs:Person",
+            "gender": "dcs:Male",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Median earnings (dollars) for full-time, year-round workers!!Female": {
+            "Node": "dcid:Median_Earnings_Person_Female",
+            "measuredProperty": "dcs:earnings",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "statType": "dcs:medianValue",
+            "populationType": "dcs:Person",
+            "gender": "dcs:Female",
+            "age": "[16 - Years]",
+            "incomeStatus": "dcs:WithEarnings",
+            "workStatus": "dcs:USC_FullTimeYearRoundWorker",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households": {
+            "Node": "dcid:Count_Household",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households": {
+            "Node": "dcid:MarginOfError_Count_Household",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With earnings": {
+            "Node": "dcid:Count_Household_WithEarnings",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "incomeStatus": "dcs:WithEarnings",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With earnings": {
+            "Node": "dcid:MarginOfError_Count_Household_WithEarnings",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Household",
+            "incomeStatus": "dcs:WithEarnings",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!Mean earnings (dollars)": {
+            "Node": "dcid:Mean_Earnings_Household",
+            "measuredProperty": "dcs:earnings",
+            "statType": "dcs:meanValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With Social Security income": {
+            "Node": "dcid:Count_Household_WithSocialSecurityIncomeInThePast12Months",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "benefitsStatus": "dcs:WithSocialSecurityIncomeInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With Social Security income": {
+            "Node": "dcid:MarginOfError_Count_Household_WithSocialSecurityIncomeInThePast12Months",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Household",
+            "benefitsStatus": "dcs:WithSocialSecurityIncomeInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!Mean Social Security income (dollars)": {
+            "Node": "dcid:Mean_SocialSecurityIncome_Household",
+            "measuredProperty": "dcs:socialSecurityIncome",
+            "statType": "dcs:meanValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With Supplemental Security Income": {
+            "Node": "dcid:Count_Household_WithSSIInThePast12Months",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "benefitsStatus": "dcs:WithSSIInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With Supplemental Security Income": {
+            "Node": "dcid:MarginOfError_Count_Household_WithSSIInThePast12Months",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Household",
+            "benefitsStatus": "dcs:WithSSIInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!Mean Supplemental Security Income (dollars)": {
+            "Node": "dcid:Mean_SupplementalSecurityIncome_Household",
+            "measuredProperty": "dcs:supplementalSecurityIncome",
+            "statType": "dcs:meanValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With cash public assistance income": {
+            "Node": "dcid:Count_Household_WithCashAssistanceInThePast12Months",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "benefitsStatus": "dcs:WithCashAssistanceInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With cash public assistance income": {
+            "Node": "dcid:MarginOfError_Count_Household_WithCashAssistanceInThePast12Months",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Household",
+            "benefitsStatus": "dcs:WithCashAssistanceInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!Mean cash public assistance income (dollars)": {
+            "Node": "dcid:Mean_CashAssistance_Household",
+            "measuredProperty": "dcs:cashAssistance",
+            "statType": "dcs:meanValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With retirement income": {
+            "Node": "dcid:Count_Household_WithRetirementIncomeInThePast12Months",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "benefitsStatus": "dcs:WithRetirementIncomeInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With retirement income": {
+            "Node": "dcid:MarginOfError_Count_Household_WithRetirementIncomeInThePast12Months",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Household",
+            "benefitsStatus": "dcs:WithRetirementIncomeInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!Mean retirement income (dollars)": {
+            "Node": "dcid:Mean_RetirementIncome_Household",
+            "measuredProperty": "dcs:retirementIncome",
+            "statType": "dcs:meanValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With Food Stamp/SNAP benefits": {
+            "Node": "dcid:Count_Household_WithFoodStampsInThePast12Months",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "benefitsStatus": "dcs:WithFoodStampsInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!INCOME IN THE PAST 12 MONTHS (IN 2016 INFLATION-ADJUSTED DOLLARS)!!Households!!With Food Stamp/SNAP benefits": {
+            "Node": "dcid:MarginOfError_Count_Household_WithFoodStampsInThePast12Months",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Household",
+            "benefitsStatus": "dcs:WithFoodStampsInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Median Household income (dollars)": {
+            "Node": "dcid:Median_Income_Household",
+            "measuredProperty": "dcs:income",
+            "statType": "dcs:medianValue",
+            "unit": "InflationAdjustedUSD_CurrentYear",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Average number of workers per household": {
+            "Node": "dcid:Mean_HouseholdWorkerSize_Household",
+            "measuredProperty": "dcs:householdWorkerSize",
+            "statType": "dcs:meanValue",
+            "populationType": "dcs:Household",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population for whom poverty status is determined": {
+            "Node": "dcid:Count_Person_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population for whom poverty status is determined": {
+            "Node": "dcid:MarginOfError_Count_Person_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population for whom poverty status is determined!!Below 100 percent of the poverty level": {
+            "Node": "dcid:Count_Person_1OrLessRatioToPovertyLine",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "[- 1 RatioToPovertyLine]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population for whom poverty status is determined!!Below 100 percent of the poverty level": {
+            "Node": "dcid:MarginOfError_Count_Person_1OrLessRatioToPovertyLine",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "[- 1 RatioToPovertyLine]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population for whom poverty status is determined!!100 to 199 percent of the poverty level": {
+            "Node": "dcid:Count_Person_1To1.99RatioToPovertyLine",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "[1 1.99 RatioToPovertyLine]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population for whom poverty status is determined!!100 to 199 percent of the poverty level": {
+            "Node": "dcid:MarginOfError_Count_Person_1To1.99RatioToPovertyLine",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "[1 1.99 RatioToPovertyLine]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population for whom poverty status is determined!!At or above 200 percent of the poverty level": {
+            "Node": "dcid:Count_Person_2OrMoreRatioToPovertyLine",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "[2 - RatioToPovertyLine]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY STATUS IN THE PAST 12 MONTHS!!Population for whom poverty status is determined!!At or above 200 percent of the poverty level": {
+            "Node": "dcid:MarginOfError_Count_Person_2OrMoreRatioToPovertyLine",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "[2 - RatioToPovertyLine]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!All families": {
+            "Node": "dcid:Count_Person_FamilyHousehold_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:FamilyHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!All families": {
+            "Node": "dcid:MarginOfError_Count_Person_FamilyHousehold_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:FamilyHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!All families!!With related children of the householder under 18 years": {
+            "Node": "dcid:Count_Person_FamilyHousehold_WithChildrenUnder18_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:FamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder18",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!All families!!With related children of the householder under 18 years": {
+            "Node": "dcid:MarginOfError_Count_Person_FamilyHousehold_WithChildrenUnder18_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:FamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder18",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!All families!!With related children of the householder under 5 years only": {
+            "Node": "dcid:Count_Person_FamilyHousehold_WithChildrenUnder5_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:FamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder5",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!All families!!With related children of the householder under 5 years only": {
+            "Node": "dcid:MarginOfError_Count_Person_FamilyHousehold_WithChildrenUnder5_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:FamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder5",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Married-couple family": {
+            "Node": "dcid:Count_Person_MarriedCoupleFamilyHousehold_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:MarriedCoupleFamilyHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Married-couple family": {
+            "Node": "dcid:MarginOfError_Count_Person_MarriedCoupleFamilyHousehold_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:MarriedCoupleFamilyHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Married-couple family!!With related children of the householder under 18 years": {
+            "Node": "dcid:Count_Person_MarriedCoupleFamilyHousehold_WithChildrenUnder18_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:MarriedCoupleFamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder18",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Married-couple family!!With related children of the householder under 18 years": {
+            "Node": "dcid:MarginOfError_Count_Person_MarriedCoupleFamilyHousehold_WithChildrenUnder18_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:MarriedCoupleFamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder18",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Married-couple family!!With related children of the householder under 5 years only": {
+            "Node": "dcid:Count_Person_MarriedCoupleFamilyHousehold_WithChildrenUnder5_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:MarriedCoupleFamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder5",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Married-couple family!!With related children of the householder under 5 years only": {
+            "Node": "dcid:MarginOfError_Count_Person_MarriedCoupleFamilyHousehold_WithChildrenUnder5_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:MarriedCoupleFamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder5",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family": {
+            "Node": "dcid:Count_Person_SingleMotherFamilyHousehold_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:SingleMotherFamilyHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family": {
+            "Node": "dcid:MarginOfError_Count_Person_SingleMotherFamilyHousehold_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:SingleMotherFamilyHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children of the householder under 18 years": {
+            "Node": "dcid:Count_Person_SingleMotherFamilyHousehold_WithChildrenUnder18_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:SingleMotherFamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder18",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children of the householder under 18 years": {
+            "Node": "dcid:MarginOfError_Count_Person_SingleMotherFamilyHousehold_WithChildrenUnder18_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:SingleMotherFamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder18",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children of the householder under 5 years only": {
+            "Node": "dcid:Count_Person_SingleMotherFamilyHousehold_WithChildrenUnder5_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:SingleMotherFamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder5",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!POVERTY RATES FOR FAMILIES FOR WHOM POVERTY STATUS IS DETERMINED!!Female householder, no husband present, family!!With related children of the householder under 5 years only": {
+            "Node": "dcid:MarginOfError_Count_Person_SingleMotherFamilyHousehold_WithChildrenUnder5_PovertyStatusDetermined",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "povertyStatus": "dcs:PovertyStatusDetermined",
+            "householdType": "dcs:SingleMotherFamilyHousehold",
+            "memberStatus": "dcs:WithChildrenUnder5",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Occupied housing units": {
+            "Node": "dcid:Count_HousingUnit_OccupiedHousingUnit",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Occupied housing units": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_OccupiedHousingUnit",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Average household size of owner-occupied unit": {
+            "Node": "dcid:Mean_HouseholdSize_HousingUnit_OwnerOccupied",
+            "populationType": "dcs:HousingUnit",
+            "measuredProperty": "dcs:householdSize",
+            "statType": "dcs:meanValue",
+            "occupancyTenure": "dcs:OwnerOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Average household size of renter-occupied unit": {
+            "Node": "dcid:Mean_HouseholdSize_HousingUnit_RenterOccupied",
+            "populationType": "dcs:HousingUnit",
+            "measuredProperty": "dcs:householdSize",
+            "statType": "dcs:meanValue",
+            "occupancyTenure": "dcs:RenterOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!ROOMS!!1 room": {
+            "Node": "dcid:Count_HousingUnit_WithTotalRooms1",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "numberOfRooms": "dcs:Rooms1",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!ROOMS!!1 room": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_WithTotalRooms1",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "numberOfRooms": "dcs:Rooms1",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!ROOMS!!2 or 3 rooms": {
+            "Node": "dcid:Count_HousingUnit_WithTotal2To3Rooms",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "numberOfRooms": "[2 3 Rooms]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!ROOMS!!2 or 3 rooms": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_WithTotal2To3Rooms",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "numberOfRooms": "[2 3 Rooms]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!ROOMS!!4 or 5 rooms": {
+            "Node": "dcid:Count_HousingUnit_WithTotal4To5Rooms",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "numberOfRooms": "[4 5 Rooms]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!ROOMS!!4 or 5 rooms": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_WithTotal4To5Rooms",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "numberOfRooms": "[4 5 Rooms]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!ROOMS!!6 or 7 rooms": {
+            "Node": "dcid:Count_HousingUnit_WithTotal6To7Rooms",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "numberOfRooms": "[6 7 Rooms]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!ROOMS!!6 or 7 rooms": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_WithTotal6To7Rooms",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "numberOfRooms": "[6 7 Rooms]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!ROOMS!!8 or more rooms": {
+            "Node": "dcid:Count_HousingUnit_WithTotal8OrMoreRooms",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "numberOfRooms": "[8 - Rooms]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!ROOMS!!8 or more rooms": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_WithTotal8OrMoreRooms",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "numberOfRooms": "[8 - Rooms]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Median number of rooms": {
+            "Node": "dcid:Median_NumberOfRooms_HousingUnit_OccupiedHousingUnit",
+            "statType": "dcs:medianValue",
+            "measuredProperty": "dcs:numberOfRooms",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "unit": "Rooms",
+            "populationType": "dcs:HousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Occupied housing units!!1.01 or more occupants per room": {
+            "Node": "dcid:Count_HousingUnit_1OrMoreOccupantsPerRoom",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "numberOfOccupants": "[1 - OccupantsPerRoom]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Occupied housing units!!1.01 or more occupants per room": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_1OrMoreOccupantsPerRoom",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "numberOfOccupants": "[1 - OccupantsPerRoom]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!VEHICLES AVAILABLE!!None": {
+            "Node": "dcid:Count_HousingUnit_With0AvailableVehicles",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "numberOfVehicles": "[0 AvailableVehicles]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!VEHICLES AVAILABLE!!None": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_With0AvailableVehicles",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "numberOfVehicles": "[0 AvailableVehicles]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!VEHICLES AVAILABLE!!1 or more": {
+            "Node": "dcid:Count_HousingUnit_With1OrMoreAvailableVehicles",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "numberOfVehicles": "[1 - AvailableVehicles]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!VEHICLES AVAILABLE!!1 or more": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_With1OrMoreAvailableVehicles",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "numberOfVehicles": "[1 - AvailableVehicles]",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!SELECTED CHARACTERISTICS!!No telephone service available": {
+            "Node": "dcid:Count_HousingUnit_NoTelephoneService",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "telephoneServiceAvailability": "dcs:NoTelephoneService",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!SELECTED CHARACTERISTICS!!No telephone service available": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_NoTelephoneService",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "telephoneServiceAvailability": "dcs:NoTelephoneService",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!SELECTED CHARACTERISTICS!!Limited English Speaking Households": {
+            "Node": "dcid:Count_Household_LimitedEnglishSpeakingHousehold",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Household",
+            "abilityToSpeakEnglish": "dcs:LimitedEnglishSpeakingHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!SELECTED CHARACTERISTICS!!Limited English Speaking Households": {
+            "Node": "dcid:MarginOfError_Count_Household_LimitedEnglishSpeakingHousehold",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Household",
+            "abilityToSpeakEnglish": "dcs:LimitedEnglishSpeakingHousehold",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Owner-occupied housing units": {
+            "Node": "dcid:Count_HousingUnit_OwnerOccupied",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "occupancyTenure": "dcs:OwnerOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Owner-occupied housing units": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_OwnerOccupied",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "occupancyTenure": "dcs:OwnerOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Owner-occupied housing units!!Owner-occupied housing units!!owner costs less than 30 percent": {
+            "Node": "dcid:Count_HousingUnit_0.3OrLessRatioToHouseholdIncome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "ownerCost": "[- 0.3 RatioToHouseholdIncome]",
+            "occupancyTenure": "dcs:OwnerOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Owner-occupied housing units!!Owner-occupied housing units!!owner costs less than 30 percent": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_0.3OrLessRatioToHouseholdIncome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "ownerCost": "[- 0.3 RatioToHouseholdIncome]",
+            "occupancyTenure": "dcs:OwnerOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Owner-occupied housing units!!Owner-occupied housing units!!owner costs 30 percent or more": {
+            "Node": "dcid:Count_HousingUnit_0.3OrMoreRatioToHouseholdIncome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "ownerCost": "[0.3 - RatioToHouseholdIncome]",
+            "occupancyTenure": "dcs:OwnerOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Owner-occupied housing units!!Owner-occupied housing units!!owner costs 30 percent or more": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_0.3OrMoreRatioToHouseholdIncome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "ownerCost": "[0.3 - RatioToHouseholdIncome]",
+            "occupancyTenure": "dcs:OwnerOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Renter-occupied housing units": {
+            "Node": "dcid:Count_HousingUnit_RenterOccupied",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "occupancyTenure": "dcs:RenterOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Renter-occupied housing units": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_RenterOccupied",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "occupancyTenure": "dcs:RenterOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Renter-occupied housing units!!Renter-occupied housing units!!gross rent less than 30 percent": {
+            "Node": "dcid:Count_HousingUnit_GrossRent0.3OrLessRatioToHouseholdIncome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "grossRent": "[- 0.3 RatioToHouseholdIncome]",
+            "occupancyTenure": "dcs:RenterOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Renter-occupied housing units!!Renter-occupied housing units!!gross rent less than 30 percent": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_GrossRent0.3OrLessRatioToHouseholdIncome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "grossRent": "[- 0.3 RatioToHouseholdIncome]",
+            "occupancyTenure": "dcs:RenterOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Estimate!!Renter-occupied housing units!!Renter-occupied housing units!!gross rent 30 percent or more": {
+            "Node": "dcid:Count_HousingUnit_GrossRent0.3OrMoreRatioToHouseholdIncome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:HousingUnit",
+            "grossRent": "[0.3 - RatioToHouseholdIncome]",
+            "occupancyTenure": "dcs:RenterOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Total!!Margin of Error!!Renter-occupied housing units!!Renter-occupied housing units!!gross rent 30 percent or more": {
+            "Node": "dcid:MarginOfError_Count_HousingUnit_GrossRent0.3OrMoreRatioToHouseholdIncome",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:HousingUnit",
+            "grossRent": "[0.3 - RatioToHouseholdIncome]",
+            "occupancyTenure": "dcs:RenterOccupied",
+            "occupancyStatus": "dcs:OccupiedHousingUnit",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!Foreign-born population": {
+            "Node": "dcid:Count_Person_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!Foreign-born population": {
+            "Node": "dcid:MarginOfError_Count_Person_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2010 or later": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2010 or later": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2000To2009_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_DateOfEntry2000To2009_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered before 2000": {
+            "Node": "dcid:Count_Person_USCitizenByNaturalization_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!CITIZENSHIP AND PERIOD OF ENTRY!!Naturalized citizen!!Entered before 2000": {
+            "Node": "dcid:MarginOfError_Count_Person_USCitizenByNaturalization_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:USCitizenByNaturalization",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!Not a citizen": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!Not a citizen": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:NotAUSCitizen",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!Not a citizen!!Entered 2010 or later": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!Not a citizen!!Entered 2010 or later": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_DateOfEntry2010OrLater_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2010 - Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!Not a citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2000To2009_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!Not a citizen!!Entered 2000 to 2009": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_DateOfEntry2000To2009_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[2000 2009 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!Not a citizen!!Entered before 2000": {
+            "Node": "dcid:Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!Not a citizen!!Entered before 2000": {
+            "Node": "dcid:MarginOfError_Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "citizenship": "dcs:NotAUSCitizen",
+            "dateOfEntry": "[- 2000 Date]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!SEX AND AGE!!Male": {
+            "Node": "dcid:Count_Person_Male_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!SEX AND AGE!!Male": {
+            "Node": "dcid:MarginOfError_Count_Person_Male_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "gender": "dcs:Male",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!SEX AND AGE!!Female": {
+            "Node": "dcid:Count_Person_Female_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!SEX AND AGE!!Female": {
+            "Node": "dcid:MarginOfError_Count_Person_Female_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "gender": "dcs:Female",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!Under 5 years": {
+            "Node": "dcid:Count_Person_5OrLessYears_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!Under 5 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5OrLessYears_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[- 5 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!5 to 17 years": {
+            "Node": "dcid:Count_Person_5To17Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!5 to 17 years": {
+            "Node": "dcid:MarginOfError_Count_Person_5To17Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[5 17 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!18 to 24 years": {
+            "Node": "dcid:Count_Person_18To24Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[18 24 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!18 to 24 years": {
+            "Node": "dcid:MarginOfError_Count_Person_18To24Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[18 24 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!25 to 44 years": {
+            "Node": "dcid:Count_Person_25To44Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[25 44 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!25 to 44 years": {
+            "Node": "dcid:MarginOfError_Count_Person_25To44Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[25 44 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!45 to 54 years": {
+            "Node": "dcid:Count_Person_45To54Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[45 54 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!45 to 54 years": {
+            "Node": "dcid:MarginOfError_Count_Person_45To54Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[45 54 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!55 to 64 years": {
+            "Node": "dcid:Count_Person_55To64Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[55 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!55 to 64 years": {
+            "Node": "dcid:MarginOfError_Count_Person_55To64Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[55 64 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!65 to 74 years": {
+            "Node": "dcid:Count_Person_65To74Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!65 to 74 years": {
+            "Node": "dcid:MarginOfError_Count_Person_65To74Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[65 74 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!75 to 84 years": {
+            "Node": "dcid:Count_Person_75To84Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[75 84 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!75 to 84 years": {
+            "Node": "dcid:MarginOfError_Count_Person_75To84Years_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[75 84 Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!85 years and over": {
+            "Node": "dcid:Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!85 years and over": {
+            "Node": "dcid:MarginOfError_Count_Person_85OrMoreYears_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "age": "[85 - Years]",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!Median age (years)": {
+            "Node": "dcid:Median_Age_Person_ForeignBorn_PlaceOfBirthAsia",
+            "measuredProperty": "dcs:age",
+            "unit": "Years",
+            "statType": "dcs:medianValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAsia_OneRace",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:OneRace",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAsia_OneRace",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:OneRace",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAsia_WhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!White": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAsia_WhiteAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:WhiteAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAsia_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Black or African American": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAsia_BlackOrAfricanAmericanAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:BlackOrAfricanAmericanAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAsia_AmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!American Indian and Alaska Native": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAsia_AmericanIndianOrAlaskaNativeAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:AmericanIndianOrAlaskaNativeAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAsia_AsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Asian": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAsia_AsianAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:AsianAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAsia_NativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Native Hawaiian and Other Pacific Islander": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAsia_NativeHawaiianOrOtherPacificIslanderAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:NativeHawaiianOrOtherPacificIslanderAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Estimate!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": {
+            "Node": "dcid:Count_Person_ForeignBorn_PlaceOfBirthAsia_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "Foreign born; Born in Asia!!Margin of Error!!RACE AND HISPANIC OR LATINO ORIGIN!!One race!!Some other race": {
+            "Node": "dcid:MarginOfError_Count_Person_ForeignBorn_PlaceOfBirthAsia_SomeOtherRaceAlone",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:marginOfError",
+            "populationType": "dcs:Person",
+            "nativity": "dcs:USC_ForeignBorn",
+            "placeOfBirth": "dcs:asia",
+            "race": "dcs:SomeOtherRaceAlone",
+            "typeOf": "dcs:StatisticalVariable"
+        }
+    }
+}
