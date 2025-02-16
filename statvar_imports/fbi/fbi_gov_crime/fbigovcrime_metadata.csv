@@ -1,0 +1,25 @@
+parameter,value
+url,https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads
+description,Offenses Known to Law Enforcement at state and city level for the year 2020
+#place_type,
+#places_within,
+start_date,2008
+end_date,2022
+release_frequency,
+process,"To download the file:
+Go to the url -> ""Crime in the United States Annual Reports"" Section -> Select Year -> Select ""Offenses Known to Law Enforcement"" -> Click ""Download"".
+A zip file will get downloaded. Unzip it and select table number 8 to get the same dataset."
+comments,"Added ""combined_crime"" column in data set. This column is sum of ""Violent Crime Total"" and ""Property Crime Total"" which give combine crime sv.(Count_CriminalActivities_CombinedCrime)"
+output_columns,"observationAbout,observationDate,value,variableMeasured,observationPeriod"
+#header_rows,6
+word_delimitter,""""""
+pv_map,"https://docs.google.com/spreadsheets/d/1ssDuGPCV_z4B0XLFGt1zQmJh7FCcG76D2S8ybt_a_S8/edit?gid=1854657286#gid=1854657286,observationAbout:https://docs.google.com/spreadsheets/d/1ssDuGPCV_z4B0XLFGt1zQmJh7FCcG76D2S8ybt_a_S8/edit?gid=989200221#gid=989200221"
+#places_resolved_csv,https://docs.google.com/spreadsheets/d/1ssDuGPCV_z4B0XLFGt1zQmJh7FCcG76D2S8ybt_a_S8/edit?gid=1132909588#gid=1132909588
+multi_value_properties,crimeType
+debug,0
+#input_rows,5
+existing_statvar_mcf,""""""
+#log_level,2
+,
+,
+#process_rows,"1,2,3,4,5,47"

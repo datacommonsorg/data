@@ -1,0 +1,7 @@
+Node: E:fbi_gov_crime->E0
+observationAbout: C:fbi_gov_crime->observationAbout
+observationDate: C:fbi_gov_crime->observationDate
+value: C:fbi_gov_crime->value
+variableMeasured: C:fbi_gov_crime->variableMeasured
+observationPeriod: C:fbi_gov_crime->observationPeriod
+typeOf: dcs:StatVarObservation
