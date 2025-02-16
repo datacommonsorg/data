@@ -163,16 +163,16 @@ class PlaceNameMatcher:
                     continue
             places_dict = file_util.file_load_csv_dict(file, key_column='dcid')
             places_filter = set(places_within)
-            for placeid, pvs in places_dict.items():
+            for dcid, pvs in places_dict.items():
                 # Check if the place is within places of interest
                 if places_filter:
                     parentids = set(pvs.get('containedInPlace', '').split(','))
                     if not parentids.intersection(places_filter):
                         continue
-                if placeid in self._places_dict:
-                    self._places_dict[placeid].update(pvs)
+                if dcid in self._places_dict:
+                    self._places_dict[dcid].update(pvs)
                 else:
-                    self._places_dict[placeid] = pvs
+                    self._places_dict[dcid] = pvs
         logging.info(
             f'Loaded {len(self._places_dict)} places from {place_csv} within'
             f' {places_within}')
@@ -289,9 +289,9 @@ class PlaceNameMatcher:
                         csv_writer.writerow(row)
                         counters.add_counter('processed', 1)
 
-    def get_parent_places(self, placeid: str) -> list:
+    def get_parent_places(self, dcid: str) -> list:
         """Returns the list of containedInPlace parents."""
-        place_values = self._places_dict.get(placeid, {})
+        place_values = self._places_dict.get(dcid, {})
         if not place_values:
             return None
         contained_places = place_values.get('containedInPlace', '').split(',')
@@ -310,9 +310,9 @@ class PlaceNameMatcher:
                     break
         return reversed(ordered_parents)
 
-    def _get_place_names(self, placeid: str) -> list:
+    def _get_place_names(self, dcid: str) -> list:
         """Returns the list of names of the dcid."""
-        place_values = self._places_dict.get(placeid, {})
+        place_values = self._places_dict.get(dcid, {})
         if not place_values:
             return []
         name_properties = self._config.get(
@@ -325,16 +325,16 @@ class PlaceNameMatcher:
                 place_names.append(name)
         return place_names
 
-    def _get_full_place_names(self, placeid: str) -> list:
+    def _get_full_place_names(self, dcid: str) -> list:
         """Get the full place name for the id with parent places appended."""
         # List of list of names for each name component in contained in order.
         full_names = []
-        place_names = self._get_place_names(placeid)
+        place_names = self._get_place_names(dcid)
         if not place_names:
             # Skip parents names if place doesn't have a name.
             return []
         full_names.append(place_names)
-        parent_places = self.get_parent_places(placeid)
+        parent_places = self.get_parent_places(dcid)
         parent_names = []
         for parentid in parent_places:
             parent_names = self._get_place_names(parentid)
