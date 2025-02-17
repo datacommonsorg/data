@@ -99,8 +99,9 @@ def process_zip_file(zip_file_path,
                     for index, line in enumerate(csv_reader):
                         if index == header_row:
                             year = filename.split(f'ACSST5Y')[1][:4]
-                            column_map[year],col_map_obj = generate_stat_var_map(
-                                spec_dict, line, delimiter)
+                            column_map[
+                                year], col_map_obj = generate_stat_var_map(
+                                    spec_dict, line, delimiter)
                             break
                         continue
     ## save the column_map
@@ -108,7 +109,7 @@ def process_zip_file(zip_file_path,
         f = open(f'{output_dir_path}/column_map.json', 'w')
         json.dump(column_map, f, indent=4)
         f.close()
-    return column_map,col_map_obj
+    return column_map, col_map_obj
 
 
 def generate_stat_var_map(spec_dict, column_list, delimiter='!!'):
@@ -133,7 +134,7 @@ def generate_stat_var_map(spec_dict, column_list, delimiter='!!'):
     col_map_obj = GenerateColMapBase(spec_dict=spec_dict,
                                      column_list=column_list,
                                      delimiter=delimiter)
-    return col_map_obj._generate_stat_vars_from_spec(),col_map_obj
+    return col_map_obj._generate_stat_vars_from_spec(), col_map_obj
 
 
 class GenerateColMapBase:
@@ -164,6 +165,7 @@ class GenerateColMapBase:
                     self.features[key] = []
                 else:
                     self.features[key] = {}
+
     def _find_and_replace_column_names(self, column):
         """
         if spec has find_and_replace defined, this function updates column names
@@ -172,10 +174,10 @@ class GenerateColMapBase:
             find_and_replace_dict = self.features['preprocess'][
                 'find_and_replace']
             # replace entire column name
-            for key,value in find_and_replace_dict.items():
+            for key, value in find_and_replace_dict.items():
                 if key in column:
-                    final_column = column.replace(key,value)
-                    print("this is the returned value",final_column)
+                    final_column = column.replace(key, value)
+                    print("this is the returned value", final_column)
                     return final_column
 
             # replace a token in the column name
@@ -245,14 +247,16 @@ class GenerateColMapBase:
                 # if renamed_col == col:
                 #     self.column_list.remove(col)
                 # else:
-                self.column_map[renamed_col] = self._column_to_statvar(renamed_col)
-                ignore_values = ["Average","Median","Mean","Percent"]
+                self.column_map[renamed_col] = self._column_to_statvar(
+                    renamed_col)
+                ignore_values = ["Average", "Median", "Mean", "Percent"]
                 for column in self.features['ignoreColumns']:
                     if "!!" in column:
                         if column in col:
                             del self.column_map[renamed_col]
                             break
-                        elif "Margin of Error" in renamed_col and any(val in renamed_col for val in ignore_values):
+                        elif "Margin of Error" in renamed_col and any(
+                                val in renamed_col for val in ignore_values):
                             del self.column_map[renamed_col]
                             break
                     else:
@@ -263,9 +267,6 @@ class GenerateColMapBase:
                 # if "Margin of Error" in renamed_col:
                 #     if "Median" in renamed_col or "Mean" in renamed_col or "Average" in renamed_col or "Percent" in renamed_col:
                 #         del self.column_map[renamed_col]
-
-                
-
 
         # TODO: Deprecate this function, since enumSpecialization are used to
         # remove the generalized token from the column name
@@ -293,7 +294,7 @@ class GenerateColMapBase:
         # part_list contains a list of tokens of the column name after splitting the
         # column name based on the '!!' delimiter
         part_list = column.split(self.delimiter)
-        print("this is the part list",part_list)
+        print("this is the part list", part_list)
         ## set the measurement for special cases: Median, Mean, etc.
         ## Pass 1: Check if the entire column is present in spec
         if not measurement_assigned and column in self.features['measurement']:
@@ -305,7 +306,7 @@ class GenerateColMapBase:
             # set the base for special cases like median, etc.
             if not measurement_assigned and part in self.features['measurement']:
                 stat_var.update(self.features['measurement'][part])
-                print("going inside second if condition",stat_var)
+                print("going inside second if condition", stat_var)
                 measurement_assigned = True
 
         # set the default statVar definition
@@ -322,8 +323,8 @@ class GenerateColMapBase:
         for part in part_list:
             ##  p = property and k = dictionary of substrings in column that points to a propertyValue
             for p, k in self.features['pvs'].items():
-                if p in ['grossRent','ownerCost']:
-                    for c, v in k.items():          
+                if p in ['grossRent', 'ownerCost']:
+                    for c, v in k.items():
                         if str(column.lower()).endswith(c.lower()):
                             full_column_match_found = True
                             if p in stat_var:
@@ -343,7 +344,6 @@ class GenerateColMapBase:
                                 f"For column: {column} | Property {p} has an existing value {stat_var[p]} which is modified to value {p}"
                             )
                         stat_var[p] = v
-
 
         # for part in part_list:
         #     # print("going inside the for loop------------------")
@@ -403,7 +403,8 @@ class GenerateColMapBase:
                         ## if the dependentPVs are not in statVar add them
                         if not set(list(elem['dependentPVs'].keys())).issubset(
                                 set(list(stat_var.keys()))):
-                            print("going insie the universePVs 6th if condition")
+                            print(
+                                "going insie the universePVs 6th if condition")
                             stat_var.update(elem['dependentPVs'])
                         ## add the depedent keys to a list
                         dependent_properties = list(elem['dependentPVs'].keys())
