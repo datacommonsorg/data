@@ -19,6 +19,7 @@ from zipfile import ZipFile
 
 import numpy as np
 import pandas as pd
+from generate_col_map import *
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -42,7 +43,8 @@ def process_subject_tables(table_prefix='',
                            has_percent=False,
                            decimal_places=3,
                            header_row=1,
-                           estimate_period=5):
+                           estimate_period=5,
+                           col_map_obj=None):
     """
     Wrapper method for invoking the data processing module, maps files with the
     corresponding processing function based on input format (*.zip/*.csv),
@@ -103,7 +105,8 @@ def process_subject_tables(table_prefix='',
                                              column_map_path=column_map_path,
                                              decimal_places=decimal_places,
                                              estimate_period=estimate_period,
-                                             header_row=header_row)
+                                             header_row=header_row,
+                                             col_map_obj=col_map_obj)
 
     ## if input_path is a file, select csv/zip processing methods
     _, file_extension = os.path.splitext(input_path)
@@ -151,7 +154,8 @@ class SubjectTableDataLoaderBase:
                  column_map_path='./',
                  decimal_places=3,
                  estimate_period=5,
-                 header_row=1):
+                 header_row=1,
+                 col_map_obj=None):
         """module init"""
         ## static inputs
         self.table_id = table_id
@@ -161,6 +165,7 @@ class SubjectTableDataLoaderBase:
         self.delimiter = col_delimiter
         self.estimate_period = estimate_period
         self.header_row = header_row
+        self.col_map_obj = col_map_obj
 
         ## set the output path, if not exists, make directory
         if not os.path.exists(output_path_dir):
@@ -289,37 +294,54 @@ class SubjectTableDataLoaderBase:
         csv_file = open(self.clean_csv_path, 'a')
         place_geoIds = df['id'].apply(convert_to_place_dcid)
 
+        ############################################
+
+        # f = open(spec_path, 'r')
+        # spec_dict = json.load(f)
+        # f.close()
+
+        # col_map_obj = GenerateColMapBase(spec_dict=spec_dict,
+        #                              column_list=column_list,
+        #                              delimiter=delimiter)
+
         # update the clean csv
+
         for column in df.columns.tolist():
-            if column in column_map:
+            col_replace = self.col_map_obj._find_and_replace_column_names(
+                column)
+
+            if col_replace in column_map:
                 obs_df = pd.DataFrame(columns=self.csv_columns)
                 obs_df['Place'] = place_geoIds
-                obs_df['StatVar'] = column_map[column]['Node']
-                obs_df['Quantity'] = df[column].values.tolist()
+                obs_df['StatVar'] = column_map[col_replace]['Node']
+                #obs_df['Quantity'] = df[column].values.tolist()
+                obs_df['Quantity'] = df[column].apply(lambda x: str(x).replace(
+                    ',', '').replace('-', '').replace('+', '')).astype(
+                        float).tolist()
                 # add unit to the csv
                 try:
-                    unit = column_map[column]['unit']
-                    del column_map[column]['unit']
+                    unit = column_map[col_replace]['unit']
+                    del column_map[col_replace]['unit']
                 except KeyError:
                     unit = np.nan
                 obs_df['Unit'] = unit
 
                 # add scaling factor to the csv
                 try:
-                    scalingFactor = column_map[column]['scalingFactor']
-                    del column_map[column]['scalingFactor']
+                    scalingFactor = column_map[col_replace]['scalingFactor']
+                    del column_map[col_replace]['scalingFactor']
                 except KeyError:
                     scalingFactor = np.nan
                 obs_df['ScalingFactor'] = scalingFactor
 
                 # if StatVar not in mcf_dict, add dcid
-                dcid = column_map[column]['Node']
+                dcid = column_map[col_replace]['Node']
 
                 if dcid not in self.mcf_dict:
                     ## key --> node dcid
                     self.mcf_dict[dcid] = {}
                     ## add pvs to dict
-                    for key, value in column_map[column].items():
+                    for key, value in column_map[col_replace].items():
                         if key != 'Node':
                             self.mcf_dict[dcid][key] = value
 
@@ -327,7 +349,7 @@ class SubjectTableDataLoaderBase:
                 obs_df['Column'] = column
 
                 # Replace empty places (unresolved geoIds) as null values
-                obs_df['Place'] = obs_df['Place'].replace('', np.nan)
+                obs_df['Place'].replace('', np.nan, inplace=True)
 
                 # Drop rows with observations for empty (null) values
                 obs_df.dropna(subset=['Place', 'Quantity'],
@@ -352,12 +374,12 @@ class SubjectTableDataLoaderBase:
                 self.counter_dict[year]["number of StatVars in mcf_dict"] = len(
                     list(self.mcf_dict.keys()))
         csv_file.close()
-        print(
-            f"""Completed with { self.counter_dict[year]['number of observations'] }
-            observation for { self.counter_dict[year]['number of unique StatVars with observations'] }
-            StatVars at { self.counter_dict[year]['number of unique geos'] } places.
-            """,
-            flush=True)
+        # print(
+        #     f"""Completed with { self.counter_dict[year]['number of observations'] }
+        #     observation for { self.counter_dict[year]['number of unique StatVars with observations'] }
+        #     StatVars at { self.counter_dict[year]['number of unique geos'] } places.
+        #     """,
+        #     flush=True)
 
     def _generate_mcf_from_column_map(self):
         """
@@ -432,7 +454,7 @@ class SubjectTableDataLoaderBase:
             debug_df = pd.DataFrame(columns=['Year', 'Column', 'StatVarID'])
             for year, val in self.column_map.items():
                 for column, stat_var in val.items():
-                    debug_df = debug_df.append(
+                    debug_df = debug_df._append(
                         {
                             'Year': year,
                             'Column': column,

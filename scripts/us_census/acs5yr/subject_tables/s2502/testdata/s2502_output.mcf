@@ -332,55 +332,55 @@ occupancyStatus: dcs:OccupiedHousingUnit
 householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2017OrLater_OccupiedHousingUnit
+Node: dcid:Count_HousingUnit_2021OrLaterDate_OccupiedHousingUnit
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2017 - Date]
+dateMovedIn: [2021 - Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2017OrLater_OccupiedHousingUnit
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2021OrLater_OccupiedHousingUnit
 statType: dcs:marginOfError
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2017 - Date]
+dateMovedIn: [2021 - Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2015To2016_OccupiedHousingUnit
+Node: dcid:Count_HousingUnit_2018To2020Date_OccupiedHousingUnit
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2015 2016 Date]
+dateMovedIn: [2018 2020 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2015To2016_OccupiedHousingUnit
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2018To2020_OccupiedHousingUnit
 statType: dcs:marginOfError
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2015 2016 Date]
+dateMovedIn: [2018 2020 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2010To2014_OccupiedHousingUnit
+Node: dcid:Count_HousingUnit_2010To2017Date_OccupiedHousingUnit
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2010 2014 Date]
+dateMovedIn: [2010 2017 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2014_OccupiedHousingUnit
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2017_OccupiedHousingUnit
 statType: dcs:marginOfError
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2010 2014 Date]
+dateMovedIn: [2010 2017 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2000To2009_OccupiedHousingUnit
+Node: dcid:Count_HousingUnit_2000To2009Date_OccupiedHousingUnit
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
@@ -396,7 +396,7 @@ occupancyStatus: dcs:OccupiedHousingUnit
 dateMovedIn: [2000 2009 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate1990To1999_OccupiedHousingUnit
+Node: dcid:Count_HousingUnit_1990To1999Date_OccupiedHousingUnit
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
@@ -412,7 +412,7 @@ occupancyStatus: dcs:OccupiedHousingUnit
 dateMovedIn: [1990 1999 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate1989OrEarlier_OccupiedHousingUnit
+Node: dcid:Count_HousingUnit_1989OrEarlierDate_OccupiedHousingUnit
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
@@ -804,61 +804,61 @@ occupancyStatus: dcs:OccupiedHousingUnit
 householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2017OrLater_OwnerOccupied
+Node: dcid:Count_HousingUnit_2021OrLaterDate_OwnerOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:OwnerOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2017 - Date]
+dateMovedIn: [2021 - Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2017OrLater_OwnerOccupied
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2021OrLater_OwnerOccupied
 statType: dcs:marginOfError
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:OwnerOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2017 - Date]
+dateMovedIn: [2021 - Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2015To2016_OwnerOccupied
+Node: dcid:Count_HousingUnit_2018To2020Date_OwnerOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:OwnerOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2015 2016 Date]
+dateMovedIn: [2018 2020 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2015To2016_OwnerOccupied
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2018To2020_OwnerOccupied
 statType: dcs:marginOfError
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:OwnerOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2015 2016 Date]
+dateMovedIn: [2018 2020 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2010To2014_OwnerOccupied
+Node: dcid:Count_HousingUnit_2010To2017Date_OwnerOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:OwnerOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2010 2014 Date]
+dateMovedIn: [2010 2017 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2014_OwnerOccupied
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2017_OwnerOccupied
 statType: dcs:marginOfError
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:OwnerOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2010 2014 Date]
+dateMovedIn: [2010 2017 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2000To2009_OwnerOccupied
+Node: dcid:Count_HousingUnit_2000To2009Date_OwnerOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
@@ -876,7 +876,7 @@ occupancyStatus: dcs:OccupiedHousingUnit
 dateMovedIn: [2000 2009 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate1990To1999_OwnerOccupied
+Node: dcid:Count_HousingUnit_1990To1999Date_OwnerOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
@@ -894,7 +894,7 @@ occupancyStatus: dcs:OccupiedHousingUnit
 dateMovedIn: [1990 1999 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate1989OrEarlier_OwnerOccupied
+Node: dcid:Count_HousingUnit_1989OrEarlierDate_OwnerOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
@@ -1288,61 +1288,61 @@ occupancyStatus: dcs:OccupiedHousingUnit
 householderEducationalAttainment: dcs:BachelorsDegreeOrHigher
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2017OrLater_RenterOccupied
+Node: dcid:Count_HousingUnit_2021OrLaterDate_RenterOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:RenterOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2017 - Date]
+dateMovedIn: [2021 - Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2017OrLater_RenterOccupied
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2021OrLater_RenterOccupied
 statType: dcs:marginOfError
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:RenterOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2017 - Date]
+dateMovedIn: [2021 - Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2015To2016_RenterOccupied
+Node: dcid:Count_HousingUnit_2018To2020Date_RenterOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:RenterOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2015 2016 Date]
+dateMovedIn: [2018 2020 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2015To2016_RenterOccupied
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2018To2020_RenterOccupied
 statType: dcs:marginOfError
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:RenterOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2015 2016 Date]
+dateMovedIn: [2018 2020 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2010To2014_RenterOccupied
+Node: dcid:Count_HousingUnit_2010To2017Date_RenterOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:RenterOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2010 2014 Date]
+dateMovedIn: [2010 2017 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2014_RenterOccupied
+Node: dcid:MarginOfError_Count_HousingUnit_MovedInDate2010To2017_RenterOccupied
 statType: dcs:marginOfError
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
 occupancyTenure: dcs:RenterOccupied
 occupancyStatus: dcs:OccupiedHousingUnit
-dateMovedIn: [2010 2014 Date]
+dateMovedIn: [2010 2017 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate2000To2009_RenterOccupied
+Node: dcid:Count_HousingUnit_2000To2009Date_RenterOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
@@ -1360,7 +1360,7 @@ occupancyStatus: dcs:OccupiedHousingUnit
 dateMovedIn: [2000 2009 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate1990To1999_RenterOccupied
+Node: dcid:Count_HousingUnit_1990To1999Date_RenterOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit
@@ -1378,7 +1378,7 @@ occupancyStatus: dcs:OccupiedHousingUnit
 dateMovedIn: [1990 1999 Date]
 typeOf: dcs:StatisticalVariable
 
-Node: dcid:Count_HousingUnit_MovedInDate1989OrEarlier_RenterOccupied
+Node: dcid:Count_HousingUnit_1989OrEarlierDate_RenterOccupied
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 populationType: dcs:HousingUnit

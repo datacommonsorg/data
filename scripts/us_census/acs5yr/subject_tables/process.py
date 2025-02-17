@@ -49,11 +49,14 @@ flags.DEFINE_boolean(
     'debug', False,
     '[for processing]set the flag to add additional columns to debug')
 
+col_map_obj = None
+
 
 def set_column_map(input_path, spec_path, output_dir):
-    generated_col_map = process_zip_file(input_path,
-                                         spec_path,
-                                         write_output=False)
+    global col_map_obj
+    generated_col_map, col_map_obj = process_zip_file(input_path,
+                                                      spec_path,
+                                                      write_output=False)
     f = open(os.path.join(output_dir, 'column_map.json'), 'w')
     json.dump(generated_col_map, f, indent=4)
     f.close()
@@ -68,6 +71,7 @@ def main(argv):
     output_dir = FLAGS.output_dir
     has_percent = FLAGS.has_percent
     debug = FLAGS.debug
+    global col_map_obj
 
     # TODO: remove the constraint of inputs being only zip file
     # context: the current implementation of the column map generator accepts
@@ -87,7 +91,8 @@ def main(argv):
                                    spec_path=spec_path,
                                    debug=debug,
                                    delimiter='!!',
-                                   has_percent=has_percent)
+                                   has_percent=has_percent,
+                                   col_map_obj=col_map_obj)
 
         if option == 'all':
             set_column_map(input_path, spec_path, output_dir)
@@ -99,7 +104,8 @@ def main(argv):
                                    spec_path=spec_path,
                                    debug=debug,
                                    delimiter='!!',
-                                   has_percent=has_percent)
+                                   has_percent=has_percent,
+                                   col_map_obj=col_map_obj)
     else:
         print("At the moment, we support only zip files.")
 
