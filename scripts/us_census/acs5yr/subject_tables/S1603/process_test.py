@@ -85,3 +85,4 @@ class ProcessTest(unittest.TestCase):
                 with open(_EXPECTED_CMAP) as expected_cmap_f:
                     expected_cmap_result = expected_cmap_f.read()
                     self.assertEqual(cmap_result, expected_cmap_result)
+                    
