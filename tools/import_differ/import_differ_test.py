@@ -44,15 +44,16 @@ class TestImportDiffer(unittest.TestCase):
         previous = differ_utils.load_mcf_file(previous_data)
 
         diff_path = os.path.join(module_dir, job_name, 'diff.csv')
-        stats_path = os.path.join(module_dir, job_name, 'stats.csv')
-        diff, stats = differ.process_data(diff_path, stats_path)
+        diff = differ.process_data(diff_path)
 
-        summary, result = differ.point_analysis(diff, stats)
-        result = pd.read_csv(os.path.join(module_dir, job_name, 'result1.csv'))
+        summary, result = differ.point_analysis(diff)
+        result = pd.read_csv(
+            os.path.join(module_dir, job_name, 'point_analysis_summary.csv'))
         assert_frame_equal(summary, result)
 
-        summary, result = differ.series_analysis(diff, stats)
-        result = pd.read_csv(os.path.join(module_dir, job_name, 'result2.csv'))
+        summary, result = differ.series_analysis(diff)
+        result = pd.read_csv(
+            os.path.join(module_dir, job_name, 'series_analysis_summary.csv'))
         assert_frame_equal(summary, result)
 
 
