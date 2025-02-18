@@ -11,6 +11,9 @@ db-dtypes
 frozendict
 func-timeout==4.3.5
 geojson==2.5.0
+func-timeout
+geojson
+google-api-python-client
 google-auth
 google-cloud-bigquery
 google-cloud-datastore
