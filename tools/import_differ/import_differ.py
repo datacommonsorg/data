@@ -40,8 +40,6 @@ Diff = Enum('Diff', [
     ('ADDED', 1),
     ('DELETED', 2),
     ('MODIFIED', 3),
-    ('SAME', 4),
-    ('TOTAL', 5),
 ])
 
 _FLAGS = flags.FLAGS
@@ -130,8 +128,7 @@ class ImportDiffer:
             args = {
                 'currentData': self.current_data,
                 'previousData': self.previous_data,
-                'diffOutput': os.path.join(self.output_path, 'diff'),
-                'statsOutput': os.path.join(self.output_path, 'stats')
+                'outputLocation': os.path.join(self.output_path, 'diff'),
             }
             if self.file_format == 'mcf':
                 args['useMcfFormat'] = 'true'
@@ -151,11 +148,11 @@ class ImportDiffer:
                                              self.file_format, self.output_path)
             status = 'JOB_STATE_UNKNONW'
             while (status != 'JOB_STATE_DONE' and status != 'JOB_STATE_FAILED'):
-                status = differ_utils.get_job_status(_DATAFLOW_PROJECT,
-                                                     self.job_name)
                 logging.info(
                     f'Waiting for job {self.job_name} to complete. Status:{status}'
                 )
+                status = differ_utils.get_job_status(_DATAFLOW_PROJECT,
+                                                     self.job_name)
                 time.sleep(60)
             if status == 'JOB_STATE_FAILED':
                 logging.error('Dataflow job failed to process input data')
@@ -163,21 +160,16 @@ class ImportDiffer:
             else:
                 return 0
 
-    def process_data(self, diff_path: str,
-                     stats_path: str) -> (pd.DataFrame, pd.DataFrame):
+    def process_data(self, diff_path: str) -> pd.DataFrame:
         column_list = self.groupby_columns + [
             '_value_combined_x', '_value_combined_y', 'diff_result'
         ]
         logging.info("Loading data from: %s", diff_path)
         diff = differ_utils.load_csv_data(diff_path, column_list, self.tmp_path)
+        return diff
 
-        logging.info("Loading data from: %s", stats_path)
-        counts = differ_utils.load_csv_data(
-            stats_path, self.groupby_columns + [Diff.TOTAL.name], self.tmp_path)
-        return diff, counts
-
-    def point_analysis(self, diff: pd.DataFrame,
-                       stats: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
+    def point_analysis(self,
+                       diff: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
         """ 
         Performs point diff analysis to identify data point changes.
 
@@ -207,20 +199,13 @@ class ImportDiffer:
         summary = result.pivot(
           index=self.variable_column, columns=self.diff_column, values='size')\
           .reset_index().rename_axis(None, axis=1)
-        counts = stats.loc[:, [self.variable_column, Diff.TOTAL.name]]
-        counts = counts.groupby([self.variable_column],
-                                as_index=False)['TOTAL'].sum()
-        out_data = summary.merge(counts, on=[self.variable_column], how='outer')
-        self._cleanup_data(out_data)
-        out_data[Diff.SAME.name] = out_data.apply(lambda row: row[
-            Diff.TOTAL.name] - row[Diff.ADDED.name] - row[Diff.MODIFIED.name],
-                                                  axis=1)
+        self._cleanup_data(summary)
         result.sort_values(by=[self.diff_column, self.variable_column],
                            inplace=True)
-        return out_data, result
+        return summary, result
 
-    def series_analysis(self, diff: pd.DataFrame,
-                        stats: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
+    def series_analysis(self,
+                        diff: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
         """ 
         Performs series diff analysis to identify time series changes.
 
@@ -231,49 +216,23 @@ class ImportDiffer:
             return pd.DataFrame(), pd.DataFrame()
 
         column_list = [
-            self.variable_column, self.place_column, self.diff_column
+            self.variable_column, self.place_column, self.time_column,
+            self.diff_column
         ]
         result = diff.loc[:, column_list]
-        result = result.groupby(column_list, as_index=False).size()
-        result = result.pivot(
+        column_list = [
+            self.variable_column, self.place_column, self.diff_column
+        ]
+        result = result.groupby(column_list,
+                                as_index=False)[[self.time_column
+                                                ]].agg(lambda x: x.tolist())
+        result['size'] = result.apply(lambda row: len(row[self.time_column]),
+                                      axis=1)
+        summary = result.pivot(
           index=[self.variable_column, self.place_column], columns=self.diff_column, values='size')\
           .reset_index().rename_axis(None, axis=1)
-        counts = stats.loc[:, [
-            self.variable_column, self.place_column, Diff.TOTAL.name
-        ]]
-        counts = counts.groupby([self.variable_column, self.place_column],
-                                as_index=False)['TOTAL'].sum()
-        result = result.merge(counts,
-                              on=[self.variable_column, self.place_column],
-                              how='outer')
-        self._cleanup_data(result)
-        result[Diff.SAME.name] = result.apply(lambda row: row[
-            Diff.TOTAL.name] - row[Diff.ADDED.name] - row[Diff.MODIFIED.name],
-                                              axis=1)
-        result[self.diff_column] = result.apply(lambda row: Diff.ADDED.name if row[Diff.ADDED.name] > 0 \
-          and row[Diff.DELETED.name] + row[Diff.MODIFIED.name] + row[Diff.SAME.name] == 0 \
-          else Diff.DELETED.name if row[Diff.DELETED.name] > 0 and row[Diff.ADDED.name] + row[Diff.MODIFIED.name] + row[Diff.SAME.name] == 0 \
-          else Diff.MODIFIED.name if row[Diff.DELETED.name] > 0 or row[Diff.ADDED.name] > 0 or row[Diff.MODIFIED.name] > 0 \
-          else Diff.SAME.name, axis=1)
-        result = result[column_list]
-        result = result.groupby(
-            [self.variable_column, self.diff_column],
-            observed=True,
-            as_index=False)[self.place_column].agg(lambda x: x.tolist())
-        result['size'] = result.apply(lambda row: len(row[self.place_column]),
-                                      axis=1)
-        result[self.place_column] = result.apply(lambda row: random.sample(
-            row[self.place_column],
-            min(_SAMPLE_COUNT, len(row[self.place_column]))),
-                                                 axis=1)
-        summary = result.pivot(
-          index=self.variable_column, columns=self.diff_column, values='size')\
-          .reset_index().rename_axis(None, axis=1)
+        result[self.time_column] = result.apply(self._get_samples, axis=1)
         self._cleanup_data(summary)
-        summary[Diff.TOTAL.name] = summary.apply(
-            lambda row: row[Diff.ADDED.name] + row[Diff.DELETED.name] + row[
-                Diff.MODIFIED.name] + row[Diff.SAME.name],
-            axis=1)
         result.sort_values(by=[self.diff_column, self.variable_column],
                            inplace=True)
         return summary, result
@@ -290,14 +249,11 @@ class ImportDiffer:
             logging.error('Dataflow pipeline run failed.')
             return
 
-        logging.info('Processing data...')
-        diff, stats = self.process_data(
-            os.path.join(self.output_path, 'diff*'),
-            os.path.join(self.output_path, 'stats*'),
-        )
+        logging.info('Processing diff data...')
+        diff = self.process_data(os.path.join(self.output_path, 'diff*'))
 
         logging.info('Point analysis:')
-        summary, result = self.point_analysis(diff, stats)
+        summary, result = self.point_analysis(diff)
         print(summary.head(10))
         print(result.head(10))
         differ_utils.write_csv_data(summary, self.output_path,
@@ -306,7 +262,7 @@ class ImportDiffer:
                                     'point_analysis_results.csv', self.tmp_path)
 
         logging.info('Series analysis:')
-        summary, result = self.series_analysis(diff, stats)
+        summary, result = self.series_analysis(diff)
         print(summary.head(10))
         print(result.head(10))
         differ_utils.write_csv_data(summary, self.output_path,

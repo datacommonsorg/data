@@ -78,8 +78,7 @@ def launch_dataflow_job(project: str, job: str, current_data: str,
     parameters = {
         'currentData': current_data,
         'previousData': previous_data,
-        'statsOutput': output_location + '/stats',
-        'diffOutput': output_location + '/diff'
+        'outputLocation': output_location + '/diff',
     }
     if file_format == 'mcf':
         logging.info('Using mcf file format')
