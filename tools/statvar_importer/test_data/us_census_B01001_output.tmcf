@@ -1,0 +1,7 @@
+Node: E:us_census_B01001_output->E0
+observationAbout: C:us_census_B01001_output->observationAbout
+value: C:us_census_B01001_output->value
+variableMeasured: C:us_census_B01001_output->variableMeasured
+observationDate: 2020
+typeOf: dcs:StatVarObservation
+measurementMethod: dcs:CensusACS5yrSurvey
