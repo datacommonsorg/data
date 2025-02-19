@@ -1,0 +1,10 @@
+Node: E:us_nces_demographics_district_school->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:us_nces_demographics_district_school->sv_name
+measurementMethod: dcs:US_NCES_Demographics
+observationAbout: C:us_nces_demographics_district_school->school_state_code
+observationDate: C:us_nces_demographics_district_school->year
+scalingFactor: C:us_nces_demographics_district_school->scaling_factor
+unit: C:us_nces_demographics_district_school->unit
+observationPeriod: "P1Y"
+value: C:us_nces_demographics_district_school->observation
