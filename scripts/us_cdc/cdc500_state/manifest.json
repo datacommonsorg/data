@@ -2,7 +2,7 @@
     "import_specifications": [
         {
             "import_name": "CDC500_States",
-            "curator_emails": [],
+            "curator_emails": ["support@datacommons.org"],
             "provenance_url": "https://www.cdc.gov/places/index.html",
             "provenance_description": "Variables related to health from the CDC",
             "scripts": [
@@ -14,7 +14,8 @@
                     "cleaned_csv": "CDC500State_Output/CDC500State_Output.csv"
                 }
             ],
-            "cron_schedule": "0 1 * * 1"
+            "cron_schedule": "0 1 * * 1",
+            "user_script_timeout": 4500
         }
     ]
 }

@@ -2,7 +2,7 @@
     "import_specifications": [
         {
             "import_name": "CDC500",
-            "curator_emails": [],
+            "curator_emails": ["support@datacommons.org"],
             "provenance_url": "https://www.cdc.gov/places/index.html",
             "provenance_description": "Variables related to health from the CDC",
             "scripts": [
@@ -26,7 +26,9 @@
                     "cleaned_csv": "cleaned_csv/CensusTract.csv"
                 }
             ],
-            "cron_schedule": "0 4 * * 5"
+            "cron_schedule": "0 4 * * 5",
+            "resource_limits": {"cpu": "8", "memory": "34G"}
+
         }
     ]
 }

@@ -1,0 +1,23 @@
+table with row headers in column A and column headers in rows 3 through 4 (leading dots indicate sub-parts),,,,,,,,,,,,,
+"Table 1. Intercensal Estimates of the Resident Population for Counties of Connecticut: April 1, 2000 to July 1, 2010",,,,,,,,,,,,,
+Geographic Area,"April 1, 20001",Intercensal Estimates (as of July 1),,,,,,,,,,"April 1, 20102","July 1, 20103"
+,,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,,
+Connecticut,"3,405,650","3,411,777","3,432,835","3,458,749","3,484,336","3,496,094","3,506,956","3,517,460","3,527,270","3,545,579","3,561,807","3,574,097","3,577,073"
+.Fairfield County,"882,622","884,364","889,063","892,900","896,342","897,472","897,653","896,254","897,498","903,824","910,421","916,829","918,714"
+.Hartford County,"857,184","858,416","862,573","867,451","873,335","874,449","878,081","881,298","884,548","887,891","891,667","894,014","894,478"
+.Litchfield County,"182,183","182,597","184,118","185,974","187,424","188,601","188,912","189,682","189,866","190,175","190,015","189,927","189,840"
+.Middlesex County,"155,088","155,593","157,006","159,187","160,864","161,450","162,191","163,473","164,129","164,962","165,607","165,676","165,697"
+.New Haven County,"823,993","824,911","829,875","835,099","841,939","844,505","847,162","850,207","853,598","856,622","860,025","862,477","862,989"
+.New London County,"259,108","259,848","261,396","264,698","266,584","268,595","269,664","270,814","270,669","272,634","273,630","274,055","274,055"
+.Tolland County,"136,377","136,863","138,934","142,362","145,195","146,706","147,657","148,954","149,718","151,583","152,330","152,691","152,781"
+.Windham County,"109,095","109,185","109,870","111,078","112,653","114,316","115,636","116,778","117,244","117,888","118,112","118,428","118,519"
+"1 The April 1, 2000 Population Estimates base reflects changes to the Census 2000 population from the Count Question Resolution program, 
+legal boundary updates, and other geographic program revisions.",,,,,,,,,,,,,
+"2 The data source for April 1, 2010 is the 2010 Census count.",,,,,,,,,,,,,
+"3 The values for July 1, 2010 were produced by applying estimates of change in the population between April 1 and July 1 of 2010 to the 2010 Census counts.  Further details on this methodology
+are available at http://www.census.gov/popest/methodology/intercensal_nat_meth.pdf.",,,,,,,,,,,,,
+"Note: All geographic boundaries for the 2000-2010 intercensal estimates are defined as of January 1, 2010.",,,,,,,,,,,,,
+Suggested Citation:,,,,,,,,,,,,,
+"Table 1. Intercensal Estimates of the Resident Population for Counties of Connecticut: April 1, 2000 to July 1, 2010 (CO-EST00INT-01-09)",,,,,,,,,,,,,
+"Source: U.S. Census Bureau, Population Division",,,,,,,,,,,,,
+Release Date: September 2011,,,,,,,,,,,,,
