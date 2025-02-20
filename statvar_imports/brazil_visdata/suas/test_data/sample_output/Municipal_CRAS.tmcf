@@ -1,0 +1,8 @@
+Node: E:Municipal_CRAS->E0
+observationAbout: C:Municipal_CRAS->observationAbout
+observationDate: C:Municipal_CRAS->observationDate
+variableMeasured: C:Municipal_CRAS->variableMeasured
+value: C:Municipal_CRAS->value
+unit: C:Municipal_CRAS->unit
+observationPeriod: C:Municipal_CRAS->observationPeriod
+typeOf: dcs:StatVarObservation
