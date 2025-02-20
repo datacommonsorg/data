@@ -1,0 +1,88 @@
+Node: dcid:Count_Household_BrazilSingleRegistry_UpdatedRegistration
+typeOf: dcid:StatisticalVariable
+name: "Total number of families with updated registration"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadun qtd familias atualizadas i@pt"
+registeredIn: dcid:Brazil_SingleRegistry
+registrationStatus: dcid:UpdatedRegistration
+
+Node: dcid:Count_Household_BrazilSingleRegistry_UpdatedRegistration_AsAFractionOf_Count_Household_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "General cadastral update rate"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Household_BrazilSingleRegistry
+alternateName: "cadun taxa atualizacao cadastral d@pt"
+registeredIn: dcid:Brazil_SingleRegistry
+registrationStatus: dcid:UpdatedRegistration
+
+Node: dcid:Count_Household_HalfOfMinimumWageOrMore_BrazilSingleRegistry_UpdatedRegistration
+typeOf: dcid:StatisticalVariable
+name: " Number of families with monthly per capita income greater than half the minimum wage with updated registration"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadun qtd familias atualizadas rfpc acima meio sm i@pt"
+incomeStatus: dcid:HalfOfMinimumWageOrMore
+registeredIn: dcid:Brazil_SingleRegistry
+registrationStatus: dcid:UpdatedRegistration
+
+Node: dcid:Count_Household_InPovertyAccordingToBolsaFamilyProgram_BrazilSingleRegistry_UpdatedRegistration
+typeOf: dcid:StatisticalVariable
+name: "Number of families in poverty, according to the Bolsa Famíly Program range, with updated registration"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadun qtd familias atualizadas pobreza pbf i@pt"
+povertyStatus: dcid:InPovertyAccordingToBolsaFamilyProgram
+registeredIn: dcid:Brazil_SingleRegistry
+registrationStatus: dcid:UpdatedRegistration
+
+Node: dcid:Count_Household_LowIncome_BrazilSingleRegistry_UpdatedRegistration
+typeOf: dcid:StatisticalVariable
+name: "Number of low income families with updated registration"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadun qtd familias atualizadas baixa renda i@pt"
+incomeStatus: dcid:LowIncome
+registeredIn: dcid:Brazil_SingleRegistry
+registrationStatus: dcid:UpdatedRegistration
+
+Node: dcid:Count_Household_NoIncome_BrazilSingleRegistry_UpdatedRegistration
+typeOf: dcid:StatisticalVariable
+name: "Number of families with zero income with updated registration"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadun qtd familias atualizadas renda zero i@pt"
+incomeStatus: dcid:NoIncome
+registeredIn: dcid:Brazil_SingleRegistry
+registrationStatus: dcid:UpdatedRegistration
+
+Node: dcid:Count_Household_UptoHalfOfMinimumWage_BrazilSingleRegistry_UpdatedRegistration
+typeOf: dcid:StatisticalVariable
+name: "Number of families with monthly per capita income up to half the minimum wage ,(Poverty + Low income) with updated registration"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "cadun qtd familias atualizadas rfpc ate meio sm i@pt"
+incomeStatus: dcid:UptoHalfOfMinimumWage
+registeredIn: dcid:Brazil_SingleRegistry
+registrationStatus: dcid:UpdatedRegistration
+
+Node: dcid:Count_Household_UptoHalfOfMinimumWage_BrazilSingleRegistry_UpdatedRegistration_AsAFractionOf_Count_Household_UptoHalfOfMinimumWage_BrazilSingleRegistry
+typeOf: dcid:StatisticalVariable
+name: "Registry update rate for families with monthly per capita income up to half the minimum wage , (Poverty + Low income)"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Household_UptoHalfOfMinimumWage_BrazilSingleRegistry
+alternateName: "cadun taxa atualizacao cadastral rfpc ate meio sm d@pt"
+incomeStatus: dcid:UptoHalfOfMinimumWage
+registeredIn: dcid:Brazil_SingleRegistry
+registrationStatus: dcid:UpdatedRegistration
+
