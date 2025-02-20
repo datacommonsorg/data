@@ -1,0 +1,17 @@
+Node: E:Events->E0
+typeOf: dcs:StatVarObservation
+observationAbout: C:Events->dcid
+observationDate: C:Events->observationDate
+variableMeasured: dcs:Area_DroughtEvent
+value: C:Events->area
+unit: dcs:SquareKilometer
+measurementMethod: dcs:dcAggregate/PearsonDistribution
+
+
+Node: E:Events->E1
+typeOf: dcs:StatVarObservation
+observationAbout: C:Events->dcid
+observationDate: C:Events->observationDate
+variableMeasured: standardizedPrecipitationIndex
+value: C:Events->standardizedPrecipitationIndex
+measurementMethod: dcs:dcAggregate/PearsonDistribution
