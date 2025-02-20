@@ -17,6 +17,7 @@ Import executor entrypoint.
 import logging
 import json
 import os
+import sys
 import time
 
 from absl import flags
@@ -28,14 +29,18 @@ from app.service import file_uploader
 from app.service import github_api
 from app.service import email_notifier
 
+REPO_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.join(REPO_DIR, 'util'))
+
+from log_util import log_metric
+
 FLAGS = flags.FLAGS
 flags.DEFINE_string('import_name', '', 'Absoluate import name.')
 flags.DEFINE_string('import_config', '', 'Import executor configuration.')
 
 CLOUD_RUN_JOB_NAME = os.getenv("CLOUD_RUN_JOB")
-# The `log_type` label helps filter log lines, which is useful for creating
-# log-based metrics.  Each log type has a similar set of fields for easier parsing.
-LOG_TYPE_LABEL = "log_type"
+
 # log_type for capturing status of auto import cloud run jobs.
 # Required fields - log_type, message, status, latency_secs.
 AUTO_IMPORT_JOB_STATUS_LOG_TYPE = "auto-import-job-status"
@@ -67,17 +72,12 @@ def scheduled_updates(absolute_import_name: str, import_config: str):
     elapsed_time_secs = int(time.time() - start_time)
     message = (f"Cloud Run Job [{CLOUD_RUN_JOB_NAME}] completed with status= "
                f"[{result.status}] in [{elapsed_time_secs}] seconds.)")
-    # With Python logging lib, json is interpreted as text (populates textPayload field).
-    # Using print to populate json as structured logs (populate jsonPayload field).
-    # Ref: https://cloud.google.com/functions/docs/monitoring/logging#writing_structured_logs
-    print(
-        json.dumps({
-            LOG_TYPE_LABEL: AUTO_IMPORT_JOB_STATUS_LOG_TYPE,
-            "message": message,
-            "severity": "INFO" if result.status == 'succeeded' else "ERROR",
-            "status": result.status,
-            "latency_secs": elapsed_time_secs,
-        }))
+
+    log_metric(AUTO_IMPORT_JOB_STATUS_LOG_TYPE,
+               "INFO" if result.status == 'succeeded' else "ERROR", message, {
+                   "status": result.status,
+                   "latency_secs": elapsed_time_secs,
+               })
     if result.status == 'failed':
         return 1
     return 0

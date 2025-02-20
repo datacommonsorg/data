@@ -22,11 +22,11 @@ from process import get_statvars, write_csv
 class ProcessTest(unittest.TestCase):
 
     def test_write_csv(self):
-        with open('./testdata/input.csv') as f_in:
+        with open('./testdata/ag_census_input.txt') as f_in:
             d = get_statvars('statvars')
             reader = csv.DictReader(f_in, delimiter='\t')
             f_out = io.StringIO()
-            f_expected = open('testdata/expected.csv')
+            f_expected = open('testdata/ag_census_output.csv')
             expected = f_expected.read()
             f_expected.close()
             write_csv(reader, f_out, d)
