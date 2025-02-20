@@ -25,6 +25,6 @@ ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 RUN git clone https://github.com/datacommonsorg/data.git
 WORKDIR /data/import-automation/executor
-RUN wget https://storage.googleapis.com/datacommons_public/import_tools/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar
+RUN wget https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar
 RUN pip install -r requirements.txt
 ENTRYPOINT ["python", "main.py"]
