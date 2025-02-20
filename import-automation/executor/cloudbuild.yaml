@@ -1,0 +1,36 @@
+# Builds the docker image of import executor, verifies using integration test,
+# and pushes it to artifact registry.
+# 
+# Run it using:
+# gcloud builds submit --config=cloudbuild.yaml --substitutions=_DOCKER_IMAGE="us-docker.pkg.dev/datcom-ci/gcr.io/dc-import-executor" .
+
+steps:
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', '${_DOCKER_IMAGE}:${COMMIT_SHA}', '-t', '${_DOCKER_IMAGE}:latest', '.']
+    dir: 'import-automation/executor'
+
+  # Docker push to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_DOCKER_IMAGE}', '--all-tags']
+
+  # Install dependencies
+  - name: python:3.11.11
+    entrypoint: pip
+    args: ['install', '-r', 'requirements.txt', '--user']
+    dir: 'import-automation/executor'
+
+  # Run import executor integration test
+  - name: python:3.11.11
+    entrypoint: python
+    args: ['verify_import.py']
+    dir: 'import-automation/executor'
+
+  # Tag image as stable and push
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+    - '-c'
+    - |
+      docker tag ${_DOCKER_IMAGE}:${COMMIT_SHA} ${_DOCKER_IMAGE}:stable \
+      && docker push ${_DOCKER_IMAGE}:stable
