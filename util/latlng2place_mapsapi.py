@@ -78,11 +78,18 @@ class Resolver(object):
     Args:
         api_key: Maps API key
         cache_file: Optional path to the cache file
+        placeid2dcid_csv: If provided, this is a header-less CSV with
+                          `placeId,dcid` rows used in lieu of making recon API
+                          calls (for efficiency).
         cache_only: If true, then only the cache_file is used and
                     no API calls are made. Requires that cache_file is set.
     """
 
-    def __init__(self, api_key, cache_file='', cache_only=False):
+    def __init__(self,
+                 api_key,
+                 cache_file='',
+                 placeid2dcid_csv='',
+                 cache_only=False):
         assert api_key, 'Resolver() needs a valid API key'
         self._api_key = api_key
         self._cache_only = cache_only
@@ -91,6 +98,14 @@ class Resolver(object):
         self._latlng2place = {}
         # Opened cache file
         self._cf = None
+        # placeid2dcid map
+        self._placeid2dcid = {}
+
+        if placeid2dcid_csv:
+            with open(placeid2dcid_csv, 'r') as fp:
+                for line in fp:
+                    placeid, dcid = line.strip().split(',')
+                    self._placeid2dcid[placeid] = dcid
 
         if cache_file:
             try:
@@ -134,7 +149,11 @@ class Resolver(object):
                     break
 
         dcids = {}
-        resolved_id = _placeid2dcid(place_id)
+        resolved_id = None
+        if self._placeid2dcid:
+            resolved_id = self._placeid2dcid.get(place_id, '')
+        else:
+            resolved_id = _placeid2dcid(place_id)
         if resolved_id:
             dcids[place_type] = resolved_id
 
