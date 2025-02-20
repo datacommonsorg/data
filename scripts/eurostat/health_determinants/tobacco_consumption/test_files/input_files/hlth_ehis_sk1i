@@ -1,0 +1,5 @@
+freq,unit,smoking,quant_inc,sex,age,geo\TIME_PERIOD	2014 	2019 
+A,PC,NSM,QU1,F,TOTAL,AT	72.5 	76.1 
+A,PC,NSM,QU1,F,TOTAL,BE	72.5 u	76.7 
+A,PC,NSM,QU1,F,TOTAL,BG	74.2 	81.5 
+A,PC,NSM,QU1,F,TOTAL,CY	83.9 	83.7

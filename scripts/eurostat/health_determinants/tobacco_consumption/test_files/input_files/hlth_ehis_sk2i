@@ -1,0 +1,5 @@
+freq,unit,sex,age,quant_inc,geo\TIME_PERIOD	2019 
+A,PC,F,TOTAL,QU1,AT	21.8 
+A,PC,F,TOTAL,QU1,BE	16.8 u
+A,PC,F,TOTAL,QU1,BG	6.6 
+A,PC,F,TOTAL,QU1,CY	5.4

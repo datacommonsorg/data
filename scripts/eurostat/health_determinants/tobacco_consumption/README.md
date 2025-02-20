@@ -22,12 +22,6 @@ The population is categorized by various set of combinations as below:
         15. Daily Smokers of Cigarettes by Sex and Educational Attainment level
 	16. Daily Smokers of Cigarettes by Sex and Income Quintile
 	17. Daily Smokers by number of Cigarettes by Sex and Educational Attainment level
-        
-
-### Download URL
-The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/health/data/database -> 	Health -> Health determinants (hlth_det).
-The actual URLs are listed in input_files.py.
-
 
 #### API Output
 These are the attributes that will be used
@@ -44,9 +38,6 @@ These are the attributes that will be used
 | Country of Citizenship   				| The citizenship of the population.				|
 | Degree of Activity Limitation   				|  							|
 
-
-
-
 #### Cleaned Data
 Cleaned data will be inside [output/eurostat_population_tobaccoconsumption.csv] as a CSV file with the following columns.
 
@@ -56,7 +47,9 @@ Cleaned data will be inside [output/eurostat_population_tobaccoconsumption.csv] 
 - Measurement_Method
 - Observation
 
-
+### Download URL
+The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/main/data/database -> Data navigation tree -> Detailed datasets -> Population and social conditions -> Health -> Health determinants (hlth_det).
+The actual URLs are listed in import_download_details.py
 
 #### MCFs and Template MCFs
 - [output/eurostat_population_tobaccoconsumption.mcf]
@@ -68,15 +61,18 @@ Run the test cases
 
 `python3 -m unittest scripts/eurostat/health_determinants/Tobacco_consumption/process_test.py`
 
-
-
-
 ### Import Procedure
 
-The below script will download the data and extract it.
+The below script will download the data, clean the data, Also generate final csv, mcf and tmcf files.
 
-`/bin/python scripts/eurostat/health_determinants/Tobacco_consumption/input_files.py`
+`python scripts/eurostat/health_determinants/Tobacco_consumption/process.py`
 
-The below script will clean the data, Also generate final csv, mcf and tmcf files.
+To download data for this import, run:
 
-`/bin/python scripts/eurostat/health_determinants/Tobacco_consumption/process.py`
+`python scripts/eurostat/health_determinants/tobacco_consumption/process.py --mode=download`
+
+To process the downloaded data, run:
+
+`python scripts/eurostat/health_determinants/tobacco_consumption/process.py --mode=process`
+
+Downloaded Files are created inside 'input_files' directory.
