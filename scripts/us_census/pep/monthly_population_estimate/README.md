@@ -63,3 +63,8 @@ If you want to perform "only process", run the below command:
 If you want to perform "only download", run the below command:
     python3 preprocess.py --mode=download
     
+
+Note: 11-Feb-2025:
+1. Code fix done the remove overlapping values from different files for year 2010 & 2020
+2. dropping junk value rows from files for year < 2000.
+3. Future years (e.g., 2030) should also be checked for overlapping data. Update the script accordingly.

@@ -1,0 +1,5 @@
+freq,unit,n_portion,quant_inc,sex,age,geo\TIME_PERIOD	2014 	2019 
+A,PC,0,QU1,F,TOTAL,AT	22.3 	30.1 
+A,PC,0,QU1,F,TOTAL,BE	17.2 	17.2 
+A,PC,0,QU1,F,TOTAL,BG	73.1 	58.5 
+A,PC,0,QU1,F,TOTAL,CY	38.7 	35.9

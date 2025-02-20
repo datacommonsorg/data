@@ -1,0 +1,78 @@
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCareOrAssistance_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage At Least Once A Week, Not Providing Informal Care Or Assistance Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+socialSupportType: dcs:NotProvidingInformalCareOrAssistance
+gender: dcs:Female
+activityFrequency: dcs:AtLeastOnceAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeastOnceAWeek_NotProvidingInformalCareOrAssistance_In_Count_Person_Urban_Female
+name: "Percentage At Least Once A Week, Not Providing Informal Care Or Assistance Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+placeOfResidenceClassification: dcs:Urban
+socialSupportType: dcs:NotProvidingInformalCareOrAssistance
+gender: dcs:Female
+activityFrequency: dcs:AtLeastOnceAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Female_ForeignBornWithinEU27
+name: "Percentage Receiving Intermediate Social Support Among Female, Foreign Born Within EU27 Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU27
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU27
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Female_ModerateActivityLimitation
+name: "Percentage Receiving Intermediate Social Support Among Female, Moderate Activity Limitation Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ModerateActivityLimitation
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Receiving Intermediate Social Support Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_Urban_Female
+name: "Percentage Receiving Intermediate Social Support Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_ReceivingIntermediateSocialSupport_In_Count_Person_WithinEU27AndNotACitizen_Female
+name: "Percentage Receiving Intermediate Social Support Among Within EU27 And Not A Citizen, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_WithinEU27AndNotACitizen_Female
+socialSupportLevel: dcs:ReceivingIntermediateSocialSupport
+gender: dcs:Female
+citizenship: dcs:WithinEU27AndNotACitizen
+statType: dcs:measuredValue
+measuredProperty: dcs:count

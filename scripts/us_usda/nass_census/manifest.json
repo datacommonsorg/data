@@ -1,0 +1,25 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "USDA_AgricultureCensus",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.nass.usda.gov/datasets/",
+      "provenance_description": "USDA census provides data on food, agriculture, nutrition, and other issues based on public policy, available science, and effective management.",
+      "scripts": ["process.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "agriculture.tmcf",
+          "cleaned_csv": "output/agriculture.csv"
+        }
+      ],
+      "cron_schedule": "0 10 1,15 * *",
+      "source_files": ["input/*.csv"],
+      "user_script_timeout":7200
+
+    }
+  ]
+}
+
+
+
+
