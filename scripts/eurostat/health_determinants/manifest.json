@@ -1,0 +1,94 @@
+{
+    "import_specifications": [
+      {
+      "import_name": "EuroStatHealth_AlcoholConsumption",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+      "provenance_description": "European Union (EU) Eurostat",
+      "scripts": ["alcohol_consumption/process.py"],
+      "import_inputs": [
+        {
+          "source_files": ["input_files/*"],
+          "template_mcf": "alcohol_consumption/output/eurostat_population_alcoholconsumption.tmcf",
+          "cleaned_csv": "alcohol_consumption/output/eurostat_population_alcoholconsumption.csv"
+        }
+      ],
+      "cron_schedule": "0 2 2 * *"
+    },
+      {
+      "import_name": "EuroStatHealth_BodyMassIndex",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+      "provenance_description": "European Union (EU) Eurostat",
+      "scripts": ["bmi/process.py"],
+      "import_inputs": [
+        {
+          "source_files": ["input_files/*"],
+          "template_mcf": "bmi/output/eurostat_population_bmi.tmcf",
+          "cleaned_csv": "bmi/output/eurostat_population_bmi.csv"
+        }
+      ],
+      "cron_schedule": "0 7 2 * *"
+    },
+      {
+      "import_name": "EuroStatHealth_FruitsAndVegetables",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+      "provenance_description": "European Union (EU) Eurostat",
+      "scripts": ["fruits_vegetables/process.py"],
+      "import_inputs": [
+        {
+          "source_files": ["input_files/*"],
+          "template_mcf": "fruits_vegetables/output/eurostat_population_fruits_vegetables.tmcf",
+          "cleaned_csv": "fruits_vegetables/output/eurostat_population_fruits_vegetables.csv"
+        }
+      ],
+      "cron_schedule": "0 6 2 * *"
+    },
+      {
+      "import_name": "EuroStatHealth_PhysicalActivity",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+      "provenance_description": "European Union (EU) Eurostat",
+      "scripts": ["physical_activity/process.py"],
+      "import_inputs": [
+        {
+          "source_files": ["input_files/*"],
+          "template_mcf": "physical_activity/output/eurostat_population_physicalactivity.tmcf",
+          "cleaned_csv": "physical_activity/output/eurostat_population_physicalactivity.csv"
+        }
+      ],
+      "cron_schedule": "0 5 2 * *"
+    },
+    {
+      "import_name": "EuroStatHealth_SocialEnvironment",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+      "provenance_description": "European Union (EU) Eurostat",
+      "scripts": ["social_environment/process.py"],
+      "import_inputs": [
+        {
+          "source_files": ["input_files/*"],
+          "template_mcf": "social_environment/output/eurostat_population_social_environment.tmcf",
+          "cleaned_csv": "social_environment/output/eurostat_population_social_environment.csv"
+        }
+      ],
+      "cron_schedule": "0 4 2 * *"
+    },
+    {
+      "import_name": "EurostatHealth_Tobacco_Consumption",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://ec.europa.eu/eurostat/web/main/data/database",
+      "provenance_description": "European Union (EU) Eurostat",
+      "scripts": ["tobacco_consumption/process.py"],
+      "import_inputs": [
+        {
+          "source_files": ["input_files/*"],
+          "template_mcf": "tobacco_consumption/output/eurostat_population_tobaccoconsumption.tmcf",
+          "cleaned_csv": "tobacco_consumption/output/eurostat_population_tobaccoconsumption.csv"
+        }
+      ],
+      "cron_schedule": "0 3 2 * *"
+    }
+    ]
+  }
