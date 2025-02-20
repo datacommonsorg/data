@@ -1,0 +1,18 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/2/MjE4IzI=/percentage-of-married-women-aged-15-49-years-old-currently-using-contraception-method--percent-.html
+description,"Percentage of Married Women Aged 15-49 Years Old Currently Using Contraception Method, 2000-2002"
+#place_type,
+#places_within,
+start_date,2000
+end_date,2023
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,2
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1BQ1J-RB3QCmIFFPDnCHigXYVQxLGYNwIjmZ-97RtC2Y/edit#gid=1792088812
+mapped_rows,2
+mapped_columns,1
+pv_map,https://docs.google.com/spreadsheets/d/1BQ1J-RB3QCmIFFPDnCHigXYVQxLGYNwIjmZ-97RtC2Y/edit#gid=1195914678
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/1BQ1J-RB3QCmIFFPDnCHigXYVQxLGYNwIjmZ-97RtC2Y/edit#gid=1944769391

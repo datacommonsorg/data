@@ -1,0 +1,6 @@
+Node: E:idn_crime->E0
+observationDate: C:idn_crime->observationDate
+observationAbout: C:idn_crime->observationAbout
+value: C:idn_crime->value
+variableMeasured: dcid:Count_CriminalActivities
+typeOf: dcs:StatVarObservation
