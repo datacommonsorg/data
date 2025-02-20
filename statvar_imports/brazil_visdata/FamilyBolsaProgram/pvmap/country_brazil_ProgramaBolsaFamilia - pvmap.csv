@@ -1,0 +1,8 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Referência,observationDate,{Data},observationAbout,country/BRA,benefitProgram,Brazil_BolsaFamilyProgram,observationPeriod,P1M,,,,,,
+Famílias PBF (até Out/2021),measuredProperty,count,populationType,Household,value,{Number},,,,,name,"""The total number of Bolsa Família Program families""",alternateName,"""Famílias in Bolsa Família Program@pt"""
+Famílias PBF (a partir de Mar/2023),measuredProperty,count,populationType,Household,value,{Number},,,,,name,"""The total number of Bolsa Família Program families""",alternateName,"""Famílias in Bolsa Família Program@pt"""
+Valor repassado às famílias PBF (até Out/2021),measuredProperty,amount,populationType,Household,value,{Number},,,,,name,"""Amount transferred to Bolsa Família Program families""",alternateName,"""Valor repassado às famílias Bolsa Família Program@pt"""
+Valor repassado às famílias PBF (a partir de Mar/2023),measuredProperty,amount,populationType,Household,value,{Number},,,,,name,"""Amount passed on to Bolsa Família Program families""",alternateName,"""Valor repassado às famílias Bolsa Família Program@pt"""
+Valor do Benefício médio (até Out/2021),measuredProperty,amount,populationType,EconomicActivity,value,{Number},benefitsStatus,Benefited,statType,meanValue,name,"""Average Benefit Value on to Bolsa Família Program""",alternateName,"""Valor do Benefício médio Bolsa Família Program@pt"""
+Valor do Benefício médio (a partir de Mar/2023),measuredProperty,amount,populationType,EconomicActivity,value,{Number},benefitsStatus,Benefited,statType,meanValue,name,"""Average Benefit Value on to Bolsa Família Program""",alternateName,"""Valor do Benefício médio Bolsa Família Program@pt"""
