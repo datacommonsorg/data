@@ -13,6 +13,10 @@
 # limitations under the License.
 """Utilities to sanity schema nodes.
 
+It checks schema for:
+  - spell errors in name, description and CamelCase dcids.
+  - URLs to be active
+The errors are reported in counters as well as an output file.
 
 To check a list of MCF files, run the command:
   python schema_checker.py --schema_input_mcf=<input-mcf-file> \
@@ -217,7 +221,7 @@ def check_mcf_urls(nodes: dict[str, dict],
     """Returns the URLs that don't load for each MCF node.
 
     Args:
-      nodes: dictionary of node with porperty: values per node.
+      nodes: dictionary of node with property: values per node.
       config: configMap with configuration parameters.
       counters: counters to be updated.
       url_status_cache: Caches status of URLs.
