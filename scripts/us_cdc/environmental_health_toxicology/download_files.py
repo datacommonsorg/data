@@ -31,7 +31,7 @@ import file_util
 record_count_query = '?$query=select%20count(*)%20as%20COLUMN_ALIAS_GUARD__count'
 
 
-def download_files(importname, config):
+def download_files(importname, configs):
 
     @retry(tries=3, delay=2, backoff=2)
     def download_with_retry(url, input_file_name):
@@ -52,9 +52,9 @@ def download_files(importname, config):
             )
 
     try:
-        for config1 in config:
-            if config1["import_name"] == importname:
-                files = config1["files"]
+        for config in configs:
+            if config["import_name"] == importname:
+                files = config["files"]
                 for file_info in files:
                     url_new = file_info["url"]
                     logging.info(f"URL from config file {url_new}")
@@ -72,6 +72,11 @@ def download_files(importname, config):
                         )
                         url_new = f"{url_new}?$limit={record_count}&$offset=0"
                         download_with_retry(url_new, input_file_name)
+                        logging.info("Successfully downloaded the source data...!!!!")
+                    else:
+                        logging.error(
+                            f"Failed to download files, Status code: {get_record_count.status_code}"
+                        )
 
     except Exception as e:
         logging.fatal(f"Error downloading URL {url_new} - {e}")
@@ -88,7 +93,6 @@ def main(_):
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         config = json.load(f)
     download_files(importname, config)
-    logging.info("Successfully downloaded the source data...!!!!")
 
 
 if __name__ == "__main__":

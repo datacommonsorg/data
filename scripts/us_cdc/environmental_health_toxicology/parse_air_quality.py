@@ -73,10 +73,10 @@ def add_prefix_zero(value, length):
     return value.zfill(length)
 
 
-def clean_air_quality_data(config, importname, inputpath, outputpath):
+def clean_air_quality_data(configs, importname, inputpath, outputpath):
     """
     Args:
-        config: dictionary of all info required for this import 
+        configs: dictionary of all info required for this import 
                 such as source urls, input and output file names
                 for the 4 cdc imports.
         importname: name of the import
@@ -88,9 +88,9 @@ def clean_air_quality_data(config, importname, inputpath, outputpath):
     try:
         global output_file_name
         logging.info(f"import name from command line {importname}")
-        for config1 in config:
-            if config1["import_name"] == importname:
-                files = config1["files"]
+        for config in configs:
+            if config["import_name"] == importname:
+                files = config["files"]
                 for file_info in files:
                     output_file_name = file_info["output_file_name"]
                     input_file_name = file_info["input_file_name"]
