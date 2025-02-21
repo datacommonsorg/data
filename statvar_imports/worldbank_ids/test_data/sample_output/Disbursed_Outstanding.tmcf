@@ -1,0 +1,8 @@
+Node: E:Disbursed_Outstanding->E0
+observationDate: C:Disbursed_Outstanding->observationDate
+observationAbout: C:Disbursed_Outstanding->observationAbout
+value: C:Disbursed_Outstanding->value
+variableMeasured: C:Disbursed_Outstanding->variableMeasured
+unit: C:Disbursed_Outstanding->unit
+measurementMethod: C:Disbursed_Outstanding->measurementMethod
+typeOf: dcs:StatVarObservation
