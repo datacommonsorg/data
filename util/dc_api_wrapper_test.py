@@ -82,7 +82,7 @@ class TestDCAPIWrapper(unittest.TestCase):
 
     def test_dc_get_node_property_values(self):
         """Test API wrapper to get all property:values for a node."""
-        node_pvs = dc_api.dc_api_get_node_property_values(['dcs:Count_Person'])
+        node_pvs = dc_api.dc_api_get_node_property_values(['dcid:Count_Person'])
         self.assertTrue(node_pvs)
         # Verify the resposnse has dcid with the namespace prefix 'dcid:'
         self.assertTrue('dcid:Count_Person' in node_pvs)
