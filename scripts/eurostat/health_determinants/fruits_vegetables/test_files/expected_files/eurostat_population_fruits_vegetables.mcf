@@ -1,0 +1,231 @@
+Node: dcid:Percent_Daily_0Portion_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ForeignBornWithinEU27
+name: "Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Foreign Born Within EU27 Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU27
+consumptionQuantity: [0 Portion]
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU27
+healthBehavior: dcs:ConsumptionOfFruits__ConsumptionOfVegetables
+activityFrequency: dcs:Daily
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_0Portion_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_IncomeOf0To20Percentile
+name: "Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Income Of 0 To 20 Percentile Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+consumptionQuantity: [0 Portion]
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfFruits__ConsumptionOfVegetables
+activityFrequency: dcs:Daily
+income: [0 20 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_0Portion_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_ModerateActivityLimitation
+name: "Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Moderate Activity Limitation Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ModerateActivityLimitation
+consumptionQuantity: [0 Portion]
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+healthBehavior: dcs:ConsumptionOfFruits__ConsumptionOfVegetables
+activityFrequency: dcs:Daily
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_0Portion_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Female_Normalweight
+name: "Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Female, Normalweight Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_Normalweight
+consumptionQuantity: [0 Portion]
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfFruits__ConsumptionOfVegetables
+activityFrequency: dcs:Daily
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_0Portion_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+consumptionQuantity: [0 Portion]
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfFruits__ConsumptionOfVegetables
+activityFrequency: dcs:Daily
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_0Portion_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_Urban_Female
+name: "Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+placeOfResidenceClassification: dcs:Urban
+consumptionQuantity: [0 Portion]
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfFruits__ConsumptionOfVegetables
+activityFrequency: dcs:Daily
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Daily_0Portion_ConsumptionOfFruitsOrConsumptionOfVegetables_In_Count_Person_WithinEU27AndNotACitizen_Female
+name: "Percentage Daily, 0 Portions, Consumption Of Fruits Or Consumption Of Vegetables Among Within EU27 And Not a Citizen, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_WithinEU27AndNotACitizen_Female
+consumptionQuantity: [0 Portion]
+gender: dcs:Female
+citizenship: dcs:WithinEU27AndNotACitizen
+healthBehavior: dcs:ConsumptionOfFruits__ConsumptionOfVegetables
+activityFrequency: dcs:Daily
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfFruits_In_Count_Person_Female_ForeignBornWithinEU27
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Fruits Among Female, Foreign Born Within EU27 Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU27
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU27
+healthBehavior: dcs:ConsumptionOfFruits
+activityFrequency: dcs:From1To3TimesAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfFruits_In_Count_Person_Female_IncomeOf0To20Percentile
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Fruits Among Female, Income Of 0 To 20 Percentile Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfFruits
+activityFrequency: dcs:From1To3TimesAWeek
+income: [0 20 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfFruits_In_Count_Person_Female_ModerateActivityLimitation
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Fruits Among Female, Moderate Activity Limitation Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ModerateActivityLimitation
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+healthBehavior: dcs:ConsumptionOfFruits
+activityFrequency: dcs:From1To3TimesAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfFruits_In_Count_Person_Female_Normalweight
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Fruits Among Female, Normalweight Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_Normalweight
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfFruits
+activityFrequency: dcs:From1To3TimesAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfFruits_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Fruits Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfFruits
+activityFrequency: dcs:From1To3TimesAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfFruits_In_Count_Person_Urban_Female
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Fruits Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfFruits
+activityFrequency: dcs:From1To3TimesAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfFruits_In_Count_Person_WithinEU27AndNotACitizen_Female
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Fruits Among Within EU27 And Not a Citizen, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_WithinEU27AndNotACitizen_Female
+gender: dcs:Female
+citizenship: dcs:WithinEU27AndNotACitizen
+healthBehavior: dcs:ConsumptionOfFruits
+activityFrequency: dcs:From1To3TimesAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfPureFruitOrConsumptionOfVegetableJuice_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Pure Fruit Or Consumption Of Vegetable Juice Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfPureFruit__ConsumptionOfVegetableJuice
+activityFrequency: dcs:From1To3TimesAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_IncomeOf0To20Percentile
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Sugar Sweetened Soft Drinks Among Female, Income Of 0 To 20 Percentile Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfSugarSweetenedSoftDrinks
+activityFrequency: dcs:From1To3TimesAWeek
+income: [0 20 Percentile]
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_Female_Normalweight
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Sugar Sweetened Soft Drinks Among Female, Normalweight Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_Normalweight
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfSugarSweetenedSoftDrinks
+activityFrequency: dcs:From1To3TimesAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfSugarSweetenedSoftDrinks_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Sugar Sweetened Soft Drinks Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfSugarSweetenedSoftDrinks
+activityFrequency: dcs:From1To3TimesAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_From1To3TimesAWeek_ConsumptionOfVegetables_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage From 1 To 3 Times a Week, Consumption Of Vegetables Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+gender: dcs:Female
+healthBehavior: dcs:ConsumptionOfVegetables
+activityFrequency: dcs:From1To3TimesAWeek
+statType: dcs:measuredValue
+measuredProperty: dcs:count
