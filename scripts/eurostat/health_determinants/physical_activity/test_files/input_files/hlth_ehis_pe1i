@@ -1,0 +1,5 @@
+freq,unit,levels,quant_inc,sex,age,geo\TIME_PERIOD	2014 	2019 
+A,PC,HVY,QU1,F,TOTAL,AT	2.8 	4.4 
+A,PC,HVY,QU1,F,TOTAL,BE	: 	2.6 
+A,PC,HVY,QU1,F,TOTAL,BG	2.3 	0.6 
+A,PC,HVY,QU1,F,TOTAL,CY	1.5 	2.8
