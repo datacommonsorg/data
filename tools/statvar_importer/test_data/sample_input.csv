@@ -1,0 +1,13 @@
+Sample input for StatVarProcessor with headers lines that are ignored.
+The file has columns that map to schema and data values.
+County,Place Fips Code,Year,Person Age,Person Race,Total Persons,Fraction of Population
+Kings County CA, 6223, 2020, 25-30, WH, 23456.0, 10.1
+Kings County CA, 6223, 2021, 25-30, WH, 24567.0, 10.1
+Count of all Males,,,,,,,
+Orange County CA, 6123, 2020, 25-30, A-PI, 12345.0, 10.1
+Orange County CA, 6123, 2021, 25-30, A-PI, 13345.0, 10.5
+Count of all Females,,,,,,,
+Orange County CA, 6123, 2020, 30-35, WH, 12345.0, 10.1
+Orange County CA, 6123, 2021, 30-35, WH, 14456.0, 11.3
+
+Such lines without columns as footer are also ignored.
