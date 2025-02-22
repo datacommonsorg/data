@@ -1,0 +1,61 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "NCES_PrivateSchoolStats",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+      "provenance_description": "US nces school data for private",
+      "scripts": ["download.py --import_name=PrivateSchool","private_school/process.py"],
+      "source_files": ["private_school/input_files/*"],
+      "import_inputs": [
+        {
+          "template_mcf": "private_school/output_files/us_nces_demographics_private_school.tmcf",
+          "cleaned_csv": "private_school/output_files/us_nces_demographics_private_school.csv"
+                 },
+        {
+        "template_mcf": "private_school/output_place/us_nces_demographics_private_place.tmcf",
+        "cleaned_csv": "private_school/output_place/us_nces_demographics_private_place.csv"
+                }
+      ],
+      "cron_schedule": "0 0 1,15 * *"
+    }, {
+      "import_name": "NCES_PublicSchoolStats",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+      "provenance_description": "US nces school data for public",
+      "scripts": ["download.py --import_name=PublicSchool","public_school/process.py"],
+      "source_files": ["public_school/input_files/*"],
+      "import_inputs": [
+        {
+          "template_mcf": "public_school/output_files/us_nces_demographics_public_school.tmcf",
+          "cleaned_csv": "public_school/output_files/us_nces_demographics_public_school.csv"
+                 },
+          {
+          "template_mcf": "public_school/output_place/us_nces_demographics_public_place.tmcf",
+          "cleaned_csv": "public_school/output_place/us_nces_demographics_public_place.csv"
+                  }
+      ],
+      "cron_schedule": "0 0 2,16 * *"
+    }, {
+      "import_name": "NCES_SchoolDistrictStats",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
+      "provenance_description": "US nces school data for district",
+      "scripts": ["download.py --import_name=District","school_district/process.py"],
+      "source_files": ["school_district/input_files/*"],
+      "import_inputs": [
+        {
+          "template_mcf": "school_district/output_files/us_nces_demographics_district_school.tmcf",
+          "cleaned_csv": "school_district/output_files/us_nces_demographics_district_school.csv"
+                 },
+          {
+          "template_mcf": "school_district/output_place/us_nces_demographics_district_place.tmcf",
+          "cleaned_csv": "school_district/output_place/us_nces_demographics_district_place.csv"
+                  }
+      ],
+      "cron_schedule": "0 0 3,17 * *"
+    }
+  ]
+}
+
+
