@@ -1,0 +1,7 @@
+variableMeasured,observationAbout,ADDED,DELETED,MODIFIED
+dcid:Max_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___APPCB,1,0,0
+dcid:Mean_Concentration_AirPollutant_CO,dcid:cpcpAq/Secretariat_Amaravati___APPCB,0,2,0
+dcid:Mean_Concentration_AirPollutant_CO,dcid:cpcpAq/Secretariat_Amaravati___IMD,0,0,1
+dcid:Mean_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___APPCB,0,0,1
+dcid:Min_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___APPCB,0,1,0
+dcid:Min_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___IMD,0,1,0
