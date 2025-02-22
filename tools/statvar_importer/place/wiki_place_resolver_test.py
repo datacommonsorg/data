@@ -68,15 +68,15 @@ class WikiPlaceResolverTest(unittest.TestCase):
                     '"city in Karnataka, India"',
                 'PlaceType':
                     'Q745456,Q51929311,Q1549591,Q174844,Q11271835,Q208511',
-                'PlaceType_name':
+                'PlaceTypeName':
                     '"business cluster","largest city","big city","megacity","state capital","global city"',
                 'ContainedInPlace':
                     'Q806463,Q3374892,Q266923',
-                'ContainedInPlace_name':
+                'ContainedInPlaceName':
                     '"Bengaluru Urban district","Mysore State","Kingdom of Mysore"',
                 'Country':
                     'Q668,Q2001966,Q83821,Q167639',
-                'Country_name':
+                'CountryName':
                     '"India","Company rule in India","Bijapur Sultanate","Vijayanagara Empire"'
             },
             2: {
@@ -84,11 +84,11 @@ class WikiPlaceResolverTest(unittest.TestCase):
                 'wikidataId': 'Q99',
                 'description': '"state of the United States of America"',
                 'PlaceType': 'Q35657',
-                'PlaceType_name': '"U.S. state"',
+                'PlaceTypeName': '"U.S. state"',
                 'ContainedInPlace': 'Q30',
-                'ContainedInPlace_name': '"United States"',
+                'ContainedInPlaceName': '"United States"',
                 'Country': 'Q30',
-                'Country_name': '"United States"'
+                'CountryName': '"United States"'
             }
         }
         self.assertEqual(expected_results, results)
