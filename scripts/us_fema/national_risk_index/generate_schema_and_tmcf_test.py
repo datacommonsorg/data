@@ -11,7 +11,7 @@ _TESTDIR = os.path.join(os.path.dirname(os.path.realpath(__file__)),
 
 import tempfile
 import unittest
-from us_fema.national_risk_index.generate_schema_and_tmcf import generate_schema_and_tmcf_from_file
+from scripts.us_fema.national_risk_index.generate_schema_and_tmcf import generate_schema_and_tmcf_from_file
 
 # module_dir_ is the path to where this test is running from.
 module_dir_ = os.path.dirname(__file__)
