@@ -1,0 +1,10 @@
+Node: E:auxilio_brazil_pagamentos->E0
+observationAbout: C:auxilio_brazil_pagamentos->observationAbout
+observationDate: C:auxilio_brazil_pagamentos->observationDate
+observationPeriod: C:auxilio_brazil_pagamentos->observationPeriod
+value: C:auxilio_brazil_pagamentos->value
+variableMeasured: C:auxilio_brazil_pagamentos->variableMeasured
+unit: C:auxilio_brazil_pagamentos->unit
+typeOf: dcs:StatVarObservation
+#Aggregate: sum
+measurementQualifier: Monthly
