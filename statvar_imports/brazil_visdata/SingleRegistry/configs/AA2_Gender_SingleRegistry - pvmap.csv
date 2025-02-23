@@ -1,0 +1,5 @@
+key,prop,val,p1,v1,,,,,,,,,,
+Código,observationAbout,{Data},,,,,,,,,,,,
+Referência,observationDate,{Data},,,,,,,,,,,,
+Quantidade de pessoas do sexo masculino inscritas no Cadastro Único,measuredProperty,count,populationType,Person,gender,Male,value,{Number},name,"""Number of male people registered in the Single Registry""",alternateName,"""Quantidade de pessoas brancas inscritas no Cadastro Único@pt""",registeredIn,Brazil_SingleRegistry
+Quantidade de pessoas do sexo feminino inscritas no Cadastro Único,measuredProperty,count,populationType,Person,gender,Female,value,{Number},name,"""Number of female people registered in the Single Registry""",alternateName,"""Quantidade de pessoas pretas inscritas no Cadastro Único@pt""",registeredIn,Brazil_SingleRegistry
