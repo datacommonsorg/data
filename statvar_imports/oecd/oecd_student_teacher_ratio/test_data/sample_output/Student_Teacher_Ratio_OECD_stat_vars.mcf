@@ -1,0 +1,28 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/swethakumari/DC_26_july/data/statvar_imports/oecd/oecd_student_teacher_ratio/test_data/sample_input/*.csv --output_path=/usr/local/google/home/swethakumari/DC_26_july/data/statvar_imports/oecd/oecd_student_teacher_ratio/test_data/sample_output/Student_Teacher_Ratio_OECD --pv_map=/usr/local/google/home/swethakumari/DC_26_july/data/statvar_imports/oecd/oecd_student_teacher_ratio/pv_map.csv --config=/usr/local/google/home/swethakumari/DC_26_july/data/statvar_imports/oecd/oecd_student_teacher_ratio/metadata.csv --places_resolved_csv=/usr/local/google/home/swethakumari/DC_26_july/data/statvar_imports/oecd/oecd_student_teacher_ratio/Places_Resolved.csv --existing_statvar_mcf=stat_vars.mcf" on 2024-07-26 09:47:46.327060
+
+Node: dcid:Count_ClassRoom_PrimaryEducation_GovernmentOwned
+typeOf: dcid:StatisticalVariable
+populationType: dcid:ClassRoom
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+schoolGradeLevel: dcid:PrimaryEducation
+schoolManagement: dcid:GovernmentOwned
+
+Node: dcid:Count_Student_PrimaryEducation_GovernmentOwned_AsAFractionOf_-populationType
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: -populationType
+schoolGradeLevel: dcid:PrimaryEducation
+schoolManagement: dcid:GovernmentOwned
+
+Node: dcid:Count_Student_PrimaryEducation_GovernmentOwned_AsAFractionOf_Count_ClassRoom_PrimaryEducation_GovernmentOwned
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_ClassRoom_PrimaryEducation_GovernmentOwned
+schoolGradeLevel: dcid:PrimaryEducation
+schoolManagement: dcid:GovernmentOwned
+
