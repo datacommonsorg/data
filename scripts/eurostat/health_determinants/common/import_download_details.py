@@ -78,7 +78,11 @@ download_details = {
             "?format=TSV&compressed=true"
     },
     "fruits_vegetables": {
-        "filenames": ["fv1b","fv1c","fv1d","fv1e","fv1i","fv1m","fv1u","fv3b","fv3c","fv3d","fv3e","fv3i","fv3m","fv3u","fv7e","fv7i","fv7m","de7","de8","fv5e"],
+        "filenames": [
+            "fv1b", "fv1c", "fv1d", "fv1e", "fv1i", "fv1m", "fv1u", "fv3b",
+            "fv3c", "fv3d", "fv3e", "fv3i", "fv3m", "fv3u", "fv7e", "fv7i",
+            "fv7m", "de7", "de8", "fv5e"
+        ],
         "input_url":
             "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/hlth_ehis_",
         "file_extension":
