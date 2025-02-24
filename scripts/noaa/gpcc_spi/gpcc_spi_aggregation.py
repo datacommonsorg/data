@@ -52,7 +52,7 @@ def get_place_grid_ratio_dict(path):
 # TODO(alexyfchen): Improve with df operations rather than loop.
 def aggregate_with_loop(agg_dir, place_grid_ratio_dict, spi_df, period):
     """Loop over resolved places and aggregate spi for each place."""
-    path = os.path.join(agg_dir, f'gpcc_spi_pearson_{period}_agg.csv')
+    path = os.path.join(agg_dir, f'agg_gpcc_spi_pearson_{period}.csv')
     if os.path.isfile(path):
         os.remove(path)
 

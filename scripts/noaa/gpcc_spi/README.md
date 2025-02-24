@@ -10,7 +10,7 @@ These script cover two imports which are:
 ```
 download.py
 ```
-Above scipt creates necessary input files with .nc extention required for processing files and store it in a tmp directory. (/tmp/gpcc_spi/)
+Above script creates necessary input files with .nc extention required for processing files and store it in a tmp directory. (/tmp/gpcc_spi/)
 
 
 ```
