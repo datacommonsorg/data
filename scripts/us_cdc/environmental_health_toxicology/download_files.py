@@ -72,7 +72,8 @@ def download_files(importname, configs):
                         )
                         url_new = f"{url_new}?$limit={record_count}&$offset=0"
                         download_with_retry(url_new, input_file_name)
-                        logging.info("Successfully downloaded the source data...!!!!")
+                        logging.info(
+                            "Successfully downloaded the source data...!!!!")
                     else:
                         logging.error(
                             f"Failed to download files, Status code: {get_record_count.status_code}"
