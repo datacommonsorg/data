@@ -1,0 +1,8 @@
+Node: E:cagdp9->E0
+observationDate: C:cagdp9->observationDate
+observationAbout: C:cagdp9->observationAbout
+value: C:cagdp9->value
+variableMeasured: C:cagdp9->variableMeasured
+observationPeriod: P1Y
+unit: ChainedUSDollarBaseYr2017
+typeOf: dcs:StatVarObservation
