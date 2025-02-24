@@ -8,15 +8,15 @@
 -r import-automation/executor/requirements.txt
 
 chembl-webresource-client>=0.10.2
-deepdiff==6.3.0
+deepdiff
 earthengine-api
-flask_restful==0.3.9
-geopandas==0.8.1
+flask_restful
+geopandas
 geopy
-matplotlib==3.3.0
-netCDF4==1.6.4
+matplotlib
+netCDF4
 rasterio
-rdp==0.8
-s2sphere==0.2.5
+rdp
+s2sphere
 tabula-py
 yapf
