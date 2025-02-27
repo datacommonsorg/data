@@ -122,8 +122,7 @@ def download_energy_dataset(
         end_year = year_batch[-1]
         years_str = ','.join(year_batch)
         output = f'{output_path}-{energy_dataset}-{start_year}-{end_year}'
-        # logging.info('Downloading UNData energy dataset: ',
-        #       f'{energy_dataset} from {start_year} to {end_year}')
+        logging.info(f'Downloading UNData energy dataset: {energy_dataset} from {start_year} to {end_year}')
         download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
                                             years=years_str)
         downloaded_files = download_zip_file(download_url, output)
