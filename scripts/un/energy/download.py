@@ -19,7 +19,7 @@ Run this script in this folder:
 python3 download.py
 """
 
-from un.energy.un_energy_codes import get_all_energy_source_codes
+from un_energy_codes import get_all_energy_source_codes
 import datetime
 import io
 import os
@@ -29,6 +29,7 @@ import zipfile
 
 from absl import app
 from absl import flags
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
@@ -64,12 +65,11 @@ def download_zip_file(url: str, output_dir: str) -> list:
     Returns:
       A list of files downloaded and unzipped.
     """
-    print(f'Downloading {url} to {output_dir}/', flush=True)
+    logging.info(f'Downloading {url} to {output_dir}/')
     r = requests.get(url, stream=True)
     if r.status_code != 200:
-        print(f'Failed to download {url}, response code: ',
-              r.status_code,
-              flush=True)
+        logging.info(f'Failed to download {url}, response code: ',
+              r.status_code)
         return False
     z = zipfile.ZipFile(io.BytesIO(r.content))
     z.extractall(output_dir)
@@ -106,9 +106,8 @@ def download_energy_dataset(
     output_files = []
     supported_datasets = get_all_energy_source_codes()
     if energy_dataset not in supported_datasets:
-        print(f'Dataset "{energy_dataset}" not in list of supported codes:' +
-              str(supported_datasets),
-              flush=True)
+        logging.info(f'Dataset "{energy_dataset}" not in list of supported codes:' +
+              str(supported_datasets))
         return output_files
     # Download data in batches of years as the download has a limit of 100k rows.
     years_list = list(range(start_year, years_per_batch + 1))
@@ -123,9 +122,8 @@ def download_energy_dataset(
         end_year = year_batch[-1]
         years_str = ','.join(year_batch)
         output = f'{output_path}-{energy_dataset}-{start_year}-{end_year}'
-        print('Downloading UNData energy dataset: ',
-              f'{energy_dataset} from {start_year} to {end_year}',
-              flush=True)
+        # logging.info('Downloading UNData energy dataset: ',
+        #       f'{energy_dataset} from {start_year} to {end_year}')
         download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
                                             years=years_str)
         downloaded_files = download_zip_file(download_url, output)
@@ -152,7 +150,7 @@ def download_un_energy_dataset() -> list:
         if len(downloaded_files) == 0:
             errors += 1
         output_files.extend(downloaded_files)
-    print(f'Downloaded the following files: {output_files}', flush=True)
+    logging.info(f'Downloaded the following files: {output_files}')
     return output_files
 
 
