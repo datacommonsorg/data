@@ -14,8 +14,8 @@ In the new page click on "More Formatting Options" and in the "Select view of th
 
 ### How to run:
 
-`python3 stat_var_processor.py --input_data=<input_file>.csv --pv_map=statvar_imports/us_bls/ces/bls_ces_pvmap.csv --config=statvar_imports/us_bls/ces/bls_ces_metadata.csv --output_path=<filepath/filename>`
+`python3 stat_var_processor.py --input_data=<input_file>.csv --pv_map=statvar_imports/us_bls/bls_ces/bls_ces_pvmap.csv --config=statvar_imports/us_bls/bls_ces/bls_ces_metadata.csv --output_path=<filepath/filename>`
 
 #### Example
 #### Processing
-`python3 stat_var_processor.py --input_data=statvar_imports/us_bls/ces/test_data/sample_input/bls_ces_data.csv --pv_map=statvar_imports/us_bls/ces/bls_ces_pvmap.csv --config=statvar_imports/us_bls/ces/bls_ces_metadata.csv --output_path=statvar_imports/us_bls/ces/test_data/sample_output/bls_ces`
+`python3 stat_var_processor.py --input_data=statvar_imports/us_bls/bls_ces/test_data/bls_ces_input.csv --pv_map=statvar_imports/us_bls/bls_ces/bls_ces_pvmap.csv --config=statvar_imports/us_bls/bls_ces/bls_ces_metadata.csv --output_path=statvar_imports/us_bls/bls_ces/test_data/bls_ces_output`
