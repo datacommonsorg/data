@@ -5,11 +5,9 @@ description,"Employment, Hours, and Earnings from the Current Employment Statist
 #places_within,country/USA
 start_date,2015
 end_date,2025
-#process_rows,"1,2,3,4,69,70"
 output_columns,"observationAbout,observationDate,value,variableMeasured,observationPeriod,measurementMethod"
 word_delimitter,""" """
-#input_columns,5
 debug,0
 mapped_rows,4
 mapped_columns,1
-statvar_dcid_remap_csv,./bls_ces_dcid_remap.csv
+statvar_dcid_remap_csv,statvar_imports/us_bls/bls_ces/bls_ces_remap.csv
