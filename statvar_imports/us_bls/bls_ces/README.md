@@ -3,7 +3,7 @@
 - source: https://www.bls.gov/ces/ 
 
 - how to download data: Go to https://www.bls.gov/webapps/legacy/cesbtab1.htm and select all the industries check boxes and click on "Retrieve Data".
-In the new page click on "More Formatting Options" and in the "Select view of the data" field select "Multi series view" and click on "Retrieve Data", now there will be an option to download the file in xlsx
+In the new page click on "More Formatting Options" and in the "Select view of the data" field select "Multi series view" and click on "Retrieve Data", now there will be an option to download the file in xlsx.
 
 - type of place: Country.
 
