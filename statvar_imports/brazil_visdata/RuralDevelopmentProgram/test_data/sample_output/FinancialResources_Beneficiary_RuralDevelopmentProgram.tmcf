@@ -1,9 +1,0 @@
-Node: E:.tmcf->E0
-observationAbout: C:.tmcf->observationAbout
-observationDate: C:.tmcf->observationDate
-value: C:.tmcf->value
-variableMeasured: C:.tmcf->variableMeasured
-observationPeriod: C:.tmcf->observationPeriod
-unit: C:.tmcf->unit
-typeOf: dcs:StatVarObservation
-measurementQualifier: Annual

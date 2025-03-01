@@ -1,3 +1,0 @@
-key,prop,val,p1,v1,p2,v2,,
-Referência,observationDate,{Data},observationAbout,country/BRA,populationType,Household,benefitProgram,Brazil_RuralDevelopmentProgram
-Nº total de famílias beneficiárias do Programa Fomento Rural (Acumulado),value,{Number},name,"""Total number of families benefiting from the Rural Development Program (Accumulated)""",alternateName,"""Nº total de famílias beneficiárias do Programa Fomento Rural (Acumulado)""",measuredProperty,cumulativeCount
