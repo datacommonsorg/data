@@ -1,0 +1,27 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Referência,observationDate,{Data},populationType,Person,benefitProgram,Brazil_BolsaFamilyProgram,age,[4 17 Years],observationPeriod,P2M,,,,
+Código,observationAbout,{Data},,,,,,,,,,,,
+Total de beneficiários com perfil educação (4 a 17 anos),value,{Number},beneficiariesType,Education,name,"""Total number of beneficiaries with an education profile(4 to 17 years old)""",alternateName,"""Total beneficiaries with education profile@pt""",,,,,,
+Total de beneficiários acompanhados pela educação (4 a 17 anos),value,{Number},beneficiariesType,AccompaniedByEducation,name,"""Total number of beneficiaries monitored by the education component(4 to 17 years old)""",alternateName,"""Total number of beneficiaries accompanied by education@pt""",,,,,,
+Percentual de beneficiários acompanhados pela educação (4 a 17 anos),value,{Number},beneficiariesType,AccompaniedByEducation,name,"""Percentage of beneficiaries aged 4-17 accompanied by education(4 to 17 years old)""",alternateName,"""Percentage of beneficiaries accompanied by education@pt""",measurementDenominator,"-beneficiariesType,-name,-alternateName",unit,Percent,scalingFactor,100
+Total de beneficiários acompanhados com frequência acima da exigida (4 a 17 anos),value,{Number},beneficiariesType,MonitoredMoreFrequentlyThanRequired,name,"""Total number of beneficiaries monitored more frequently than required(4 to 17 years old)""",alternateName,"""Total number of beneficiaries monitored more frequently than required@pt""",,,,,,
+Total de Beneficiários acompanhados com frequência abaixo da exigida (4 a 17 anos),value,{Number},beneficiariesType,MonitoredBelowFrequentlyThanRequired,name,"""Total number of beneficiaries monitored less frequently than required(4 to 17 years old)""",alternateName,"""Total number of beneficiaries monitored with a frequency below that required@pt""",,,,,,
+Percentual de beneficiários acompanhados com frequência acima da exigida (4 a 17 anos),value,{Number},beneficiariesType,MonitoredMoreFrequentlyThanRequired,name,"""Percentage of beneficiaries aged 4-17 accompanied more frequently than required(4 to 17 years old)""",alternateName,"""Percentage of beneficiaries monitored more frequently than required@pt""",measurementDenominator,"-beneficiariesType,-name,-alternateName",unit,Percent,scalingFactor,100
+Total de beneficiários sem informação de frequência escolar (4 a 17 anos),value,{Number},beneficiariesType,MonitoredWithoutSchoolAttendance,name,"""Total number of beneficiaries without school attendance information(4 to 17 years old)""",alternateName,"""Total number of beneficiaries without information on school attendance@pt""",,,,,,
+Percentual de beneficiários sem informação de frequência escolar (4 a 17 anos),value,{Number},beneficiariesType,MonitoredWithoutSchoolAttendance,name,"""Percentage of beneficiaries aged 4-17 without school attendance information(4 to 17 years old)""",alternateName,"""Percentage of beneficiaries without information on school attendance@pt""",measurementDenominator,"-beneficiariesType,-name,-alternateName",unit,Percent,scalingFactor,100
+Total de beneficiários localizados no acompanhamento pela educação mas sem informação de frequência (4 a 17 anos),value,{Number},beneficiariesType,MonitoredEducationWithoutFrequency,name,"""Total number of beneficiaries located in the education monitoring but without attendance information(4 to 17 years old)""",alternateName,"""Total beneficiaries located in education monitoring but without attendance information@pt""",,,,,,
+Total de beneficiários não localizados no acompanhamento pela educação (4 a 17 anos),value,{Number},beneficiariesType,MonitoredWithoutEducation,name,"""Total number of beneficiaries not located for education monitoring(4 to 17 years old)""",alternateName,"""Total beneficiaries not located in education monitoring@pt""",,,,,,
+Percentual de beneficiários não localizados no acompanhamento pela educação (4 a 17 anos),value,{Number},beneficiariesType,MonitoredWithoutEducation,name,"""Percentage of beneficiaries aged 4-17 not located for education monitoring(4 to 17 years old)""",alternateName,"""Percentage of beneficiaries not located in education monitoring@pt""",measurementDenominator,"-beneficiariesType,-name,-alternateName",unit,Percent,scalingFactor,100
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+,Education Monitoring of the Brazil Aid Program (PAB) - Beneficiaries aged 4 to 5 years - (Bimonthly),,,,,,,,,,,,,
