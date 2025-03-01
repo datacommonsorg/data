@@ -81,7 +81,7 @@ class USAirPollutionEmissionTrends:
             df (pd.DataFrame): modified df as output
         """
         for i in filter_values:
-            df = df.drop(df[(df['SV_TEMP'].str.contains(i))].index)
+            df = df.drop(df[(df['SV_TEMP'].str.contains(i,na=False))].index)
 
         # Replacing the columns for grouping as per
         # StationaryFuelCombustion -    FuelCombustionElectricUtility
@@ -150,10 +150,11 @@ class USAirPollutionEmissionTrends:
         """
         if df is not None:
             self._final_df = df
-
         mcf_df = self._final_df.drop_duplicates(subset=['SV_TEMP']).reset_index(
             drop=True).sort_values(by=['SV_TEMP'])
-
+        mcf_df=mcf_df.dropna()
+        mcf_df = mcf_df.reset_index(drop=True)
+        print("==============mcf_df"+str(mcf_df))
         # Writing Genereated MCF to local path.
         with open(self._mcf_file_path, 'w+', encoding='utf-8') as f_out:
             f_out.write("".join(mcf_df['mcf'].to_list()))
