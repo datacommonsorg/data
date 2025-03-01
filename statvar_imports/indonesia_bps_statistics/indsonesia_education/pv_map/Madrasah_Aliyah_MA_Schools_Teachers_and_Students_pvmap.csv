@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Provinsi,observationAbout,{Data},measuredProperty,count,schoolManagement,UnderMinistryOfReligion,,,,
+Jumlah Sekolah MA (Negeri),populationType,School,levelOfSchool,MadrasahAliyah,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Sekolah MA (Negeri)@id"""
+Jumlah Sekolah MA (Swasta),populationType,School,levelOfSchool,MadrasahAliyah,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah MA (Swasta)@id"""
+Jumlah Sekolah MA (Negeri+Swasta),populationType,School,levelOfSchool,MadrasahAliyah,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah MA (Negeri+Swasta)@id"""
+Jumlah Guru MA (Negeri),populationType,Teacher,levelOfSchool,MadrasahAliyah,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Guru MA (Negeri)@id"""
+Jumlah Guru MA (Swasta),populationType,Teacher,levelOfSchool,MadrasahAliyah,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru MA (Swasta)@id"""
+Jumlah Guru MA (Negeri+Swasta),populationType,Teacher,levelOfSchool,MadrasahAliyah,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru MA (Negeri+Swasta)@id"""
+Jumlah Murid MA (Negeri),populationType,Student,levelOfSchool,MadrasahAliyah,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Murid MA (Negeri)@id"""
+Jumlah Murid MA (Swasta),populationType,Student,levelOfSchool,MadrasahAliyah,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid MA (Swasta)@id"""
+Jumlah Murid MA (Negeri+Swasta),populationType,Student,levelOfSchool,MadrasahAliyah,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid MA (Negeri+Swasta)@id"""
+observationDate,observationDate,{Data},,,,,,,,
