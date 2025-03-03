@@ -11,65 +11,60 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Tests for process.py"""
+"""Tests for brfss_asthma_import.py"""
 
 import os
 import unittest
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
-from process import process_non_infectious_data
+from .brfss_asthma_import import process_brfss_asthma
 
 
 class ProcessTest(unittest.TestCase):
 
-    def test_nors(self):
+    def test_brfss_asthma_extracted_data(self):
         self.maxDiff = None
         base_path = os.path.dirname(__file__)
-        test_path = os.path.join(base_path, './data/testdata')
-        inputfile_path = os.path.join(test_path,
-                                      "./NationalOutbreakPublicDataTool.xlsx")
-        schema_path = os.path.join(test_path, '../col_map_exc_food.json')
-        process_non_infectious_data(inputfile_path, 'Outbreak Data',
-                                    schema_path, test_path)
+        base_path = os.path.join(base_path, './data/test_data')
+        inputfile_path = os.path.join(
+            base_path, "./Extracted_State-maps-for-asthma-prevalence.tsv")
+        process_brfss_asthma(input_dataset=inputfile_path,
+                             sep="\t",
+                             output_path=base_path)
 
         ## validate the csvs
-        test_df = pd.read_csv(
-            os.path.join(test_path, 'NORS_NonInfectious_Disease.csv'))
+        test_df = pd.read_csv(os.path.join(base_path, 'brfss_asthma.csv'))
         expected_df = pd.read_csv(
-            os.path.join(test_path, 'NORS_NonInfectious_Disease_expected.csv'))
+            os.path.join(base_path, 'brfss_asthma_expected.csv'))
         assert_frame_equal(test_df, expected_df)
 
         ## validate the statvar mcf
-        f = open(os.path.join(test_path, 'NORS_NonInfectious_Disease.mcf'), 'r')
+        f = open(os.path.join(base_path, 'brfss_asthma.mcf'), 'r')
         test_mcf = f.read()
         f.close()
 
-        f = open(
-            os.path.join(test_path, 'NORS_NonInfectious_Disease_expected.mcf'),
-            'r')
+        f = open(os.path.join(base_path, 'brfss_asthma_expected.mcf'), 'r')
         expected_mcf = f.read()
         f.close()
+
         self.assertEqual(test_mcf, expected_mcf)
 
         ## validate the template mcf
-        f = open(os.path.join(test_path, 'NORS_NonInfectious_Disease.tmcf'),
-                 'r')
+        f = open(os.path.join(base_path, 'brfss_asthma.tmcf'), 'r')
         test_tmcf = f.read()
         f.close()
 
-        f = open(
-            os.path.join(test_path, 'NORS_NonInfectious_Disease_expected.tmcf'),
-            'r')
+        f = open(os.path.join(base_path, 'brfss_asthma_expected.tmcf'), 'r')
         expected_tmcf = f.read()
         f.close()
 
         self.assertEqual(test_tmcf, expected_tmcf)
 
         # clean up
-        os.remove(os.path.join(test_path, 'NORS_NonInfectious_Disease.csv'))
-        os.remove(os.path.join(test_path, 'NORS_NonInfectious_Disease.tmcf'))
-        os.remove(os.path.join(test_path, 'NORS_NonInfectious_Disease.mcf'))
+        os.remove(os.path.join(base_path, 'brfss_asthma.csv'))
+        os.remove(os.path.join(base_path, 'brfss_asthma.tmcf'))
+        os.remove(os.path.join(base_path, 'brfss_asthma.mcf'))
 
 
 if __name__ == '__main__':
