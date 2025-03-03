@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 PATH=$PATH:$(dirname $0)
 # Sleep as long as N jobs of given name are running in background
