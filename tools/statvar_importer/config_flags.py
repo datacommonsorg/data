@@ -159,6 +159,7 @@ flags.DEFINE_bool('llm_generate_statvar_name', False,
 
 def get_default_config() -> dict:
     """Returns the default config as dictionary of config parameters and values."""
+    _FLAGS(sys.argv)
     return {
         # 'config parameter in snake_case': value
         'ignore_numeric_commas':
@@ -174,7 +175,7 @@ def get_default_config() -> dict:
         'input_encoding':
             _FLAGS.input_encoding,
         'input_xls':
-            _FLAGS.input_xls,
+            _FLAGS.input_xls_sheets,
         'pv_map_drop_undefined_nodes':
             (False),  # Don't drop undefined PVs in the column PV Map.
         'duplicate_svobs_key':
