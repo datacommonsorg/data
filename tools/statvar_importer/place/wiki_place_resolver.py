@@ -35,11 +35,11 @@ The output file will have the following columns:
   "name": Name of the wikidata entry
   "description": Description of the wikidata item
   "PlaceType": wikidata id of the type
-  "PlaceType_name": name of hte wikidata id for type
+  "PlaceTypeName": name of the wikidata id for type
   "ContainedInPlace": Wikidata Id of parent places
-  "ContainedInPlace_name": parent place name
+  "ContainedInPlaceName": parent place name
   "Country": parent country wikidata id
-  "Country_name": parent country name
+  "CountryName": parent country name
 """
 
 import json
@@ -341,15 +341,14 @@ class WikiPlaceResolver:
                             if names:
                                 val_names.append(names[0])
                     if val_names:
-                        wiki_pvs[dc_prop + '_name'] = val_names
+                        wiki_pvs[dc_prop + 'Name'] = val_names
         logging.level_debug() and logging.debug(
             f'Got wiki properties for {wiki_id}: {props}: {wiki_pvs}')
         return wiki_pvs
 
     def _get_wiki_search_url(self) -> str:
         """Returns the wiki search URL is config is setup properly. """
-        api_key = self._config.get('custom_search_key',
-                                   '')
+        api_key = self._config.get('custom_search_key', '')
         if not api_key:
             logging.debug(
                 f'custom_search_key not set in config. Unable to look for wikiId'
@@ -384,7 +383,7 @@ class WikiPlaceResolver:
             wiki_json = self._get_wiki_json(wiki_id)
             names = self._get_wiki_json_property(wiki_json, 'labels')
             if names:
-              self._wiki_id_names[wiki_id] = names
+                self._wiki_id_names[wiki_id] = names
         return names
 
     def _get_wiki_json_property(self,
@@ -477,7 +476,6 @@ def main(_):
         if not output_csv:
             output_csv = input_csv
         file_util.file_write_py_dict(wiki_places, output_csv)
-
 
 
 if __name__ == '__main__':
