@@ -47,13 +47,13 @@ To create a web form for any script with commandline args, use it as follows:
 
 
   Run it with commandline flags:
-    python3 my_process.py --my_flag1=123 --my_flag2=def --http_port=8100
+    python my_process.py --my_flag1=123 --my_flag2=def --http_port=8100
 
   This will create a form on localhost:8100 with an input for input_sheet.
 
   On form submit, the following script will be run and
   its stdout/strerr is returned:
-    python3 my_process.py --my_flag1=123 --my_flag2=def
+    python my_process.py --my_flag1=123 --my_flag2=def
     --input_file=<form-value>
 """
 
@@ -142,7 +142,7 @@ class ProcessHandler(server.SimpleHTTPRequestHandler):
         form_config = _HTTP_CONFIG.get('forms', [{}])[0]
         form_data = self.parse_form_data(form_config)
         # Create args for child process, copying over any scripts args.
-        args = ['python3']
+        args = ['python']
         sys_args = sys.argv
         script = _HTTP_CONFIG.get('script', None)
         if script:
@@ -165,7 +165,7 @@ class ProcessHandler(server.SimpleHTTPRequestHandler):
         process = subprocess.Popen(
             args,
             stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
         )
 
         # Stream the output back to the client
@@ -173,13 +173,13 @@ class ProcessHandler(server.SimpleHTTPRequestHandler):
         self.send_header('Content-Type', 'text/plain')
         self.end_headers()
         self.wfile.write(bytes(f'Running script: "{cmd}"\n\n', 'utf-8'))
+        for line in process.stdout:
+            logging.info(f'Process stdout: {line}')
+            self.wfile.write(bytes(line))
         for line in process.stderr:
             logging.info(f'Process stderr: {line}')
             self.wfile.write(bytes(line))
 
-        for line in process.stdout:
-            logging.info(f'Process stdout: {line}')
-            self.wfile.write(bytes(line))
         end_time = time.perf_counter()
         return_code = process.returncode
         end_msg = (
