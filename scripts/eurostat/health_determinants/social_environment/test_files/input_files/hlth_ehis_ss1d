@@ -1,0 +1,5 @@
+freq,unit,lev_perc,sex,age,lev_limit,geo\TIME_PERIOD	2014 	2019 
+A,PC,INT,F,TOTAL,MOD,AT	40.8 	39.6 
+A,PC,INT,F,TOTAL,MOD,BE	49.3 	49.7 
+A,PC,INT,F,TOTAL,MOD,BG	57.0 	59.9 
+A,PC,INT,F,TOTAL,MOD,CY	36.7 	27.0

@@ -27,4 +27,5 @@ from common.unitest_common_methods import CommonTestClass
 
 class SocialEnvironmentTest(CommonTestClass.CommonTestCases):
     _import_class = EuroStatSocialEnvironment
+    _import_name = "social_environment"
     _test_module_directory = os.path.dirname(__file__)
