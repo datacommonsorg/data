@@ -42,8 +42,8 @@ sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
-    os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))), 'util'))
+    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
+                 'util'))
 
 _FLAGS = flags.FLAGS
 
@@ -366,7 +366,7 @@ def search_pvs(
       output_file: Output CSV file with query and list of property,values for each.
 
     Returns:
-      dictionary of property values for each query:
+      dictionary of matching property values for each query:
       {
         1: { 'query': '<input-query>',
              'property1': '<prop>',
@@ -375,6 +375,7 @@ def search_pvs(
         2: { ... },
         ...
       }
+      or an empty dict when there are no matches.
     """
     counters = Counters()
     matcher = SchemaMatcher(mcf_file, config, counters)

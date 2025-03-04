@@ -34,8 +34,8 @@ sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
-    os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))), 'util'))
+    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
+                 'util'))
 
 _DEFAULT_ALLOWLIST = os.path.join(_SCRIPT_DIR, 'words_allowlist.txt')
 
@@ -121,7 +121,7 @@ def get_words(value: str) -> list:
 def should_ignore_spell_pv(prop: str,
                            value: str,
                            config: ConfigMap = None) -> bool:
-    """Returns Trus if the property:value shoudl be ignored.
+    """Returns True if the property:value should be ignored.
   values such as URLs or json objects are ignored.
 
   Args:
@@ -240,7 +240,7 @@ def spell_check_nodes(nodes: dict,
                       config: ConfigMap = None,
                       counters: Counters = None,
                       spell_checker: SpellChecker = None) -> dict:
-    """Spell check property:value sin MCF nodes.
+    """Spell check property:values in MCF nodes.
 
     Args:
       nodes: dictionary of nodes, each node as dictionary of property:value
