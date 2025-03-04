@@ -1,0 +1,13 @@
+parameter,value
+url,https://data.bls.gov/pdq/SurveyOutputServlet
+description,"Employment, Hours, and Earnings from the Current Employment Statistics survey (National)"
+#place_type,Country
+#places_within,country/USA
+start_date,2015
+end_date,2025
+output_columns,"observationAbout,observationDate,value,variableMeasured,observationPeriod,measurementMethod"
+word_delimitter,""" """
+debug,0
+mapped_rows,4
+mapped_columns,1
+statvar_dcid_remap_csv,statvar_imports/us_bls/bls_ces/bls_ces_remap.csv
