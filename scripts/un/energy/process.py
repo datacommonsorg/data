@@ -478,6 +478,7 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
 
 
 def rename_the_mapping_value(sv_id, mapping_names):
+    # Renaming the mapping value.
     if sv_id is not None:
         key_to_check = sv_id.split(":")[1]
         if key_to_check in mapping_names:
