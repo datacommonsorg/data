@@ -1,0 +1,41 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.drought.gov/data-maps-tools/global-precipitation-climatology-centre-gpcc-standardized-precipitation-index-spi",
+            "provenance_description": "SPI for 1 degree grids calculated from monthly precipitation data using the Pearson distribution.",
+            "scripts": [
+                "run.sh"
+            ],
+            "source_files": [
+                "input_files/*"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "gpcc_spi.tmcf",
+                    "cleaned_csv": "output_files/*.csv"
+                },
+                {
+                    "template_mcf": "gpcc_spi_aggregation.tmcf",
+                    "cleaned_csv": "output_files/aggregations/*.csv"
+                },
+                {
+                    "template_mcf": "drought_spi_9m_polygon_place_svobs.tmcf",
+                    "cleaned_csv": "output_files/events_spi_9m_polygon/place_svobs/drought_spi_9m_polygon_place_svobs.csv"
+                },
+                {
+                    "template_mcf": "drought_spi_9m_polygon_events.tmcf",
+                    "cleaned_csv": "output_files/events_spi_9m_polygon/events/drought_spi_9m_polygon_events.csv"
+                },
+                {
+                    "template_mcf": "drought_spi_9m_polygon_svobs.tmcf",
+                    "cleaned_csv": "output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
+                }
+            ],
+            "cron_schedule": "0 9 * * 2"
+        }
+    ]
+}
