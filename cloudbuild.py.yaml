@@ -2,7 +2,7 @@
 steps:
 
 - id: python_install
-  name: python:3.11
+  name: python:3.12.8
   entrypoint: /bin/sh
   waitFor: ['-']
   args:
@@ -11,7 +11,7 @@ steps:
       ./run_tests.sh -r
 
 - id: python_test
-  name: python:3.11
+  name: python:3.12.8
   entrypoint: /bin/sh
   waitFor:
   - python_install
@@ -21,7 +21,7 @@ steps:
       ./run_tests.sh -a
 
 - id: python_format_check
-  name: python:3.11
+  name: python:3.12.8
   entrypoint: /bin/sh
   waitFor:
   - python_install
