@@ -61,6 +61,7 @@ flags.DEFINE_bool(
     'Append new values to existing properties. If False, new values overwrite'
     ' existing value.',
 )
+flags.DEFINE_bool('normalize', True, 'If True, values are normalized.')
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -982,7 +983,9 @@ def main(_):
         print(f'Please provide input and output MCF files with --input_mcf and'
               f' --output_mcf.')
         return
-    nodes = load_mcf_nodes(_FLAGS.input_mcf, append_values=_FLAGS.append_values)
+    nodes = load_mcf_nodes(_FLAGS.input_mcf,
+                           append_values=_FLAGS.append_values,
+                           normalize=_FLAGS.normalize)
     write_mcf_nodes([nodes], _FLAGS.output_mcf)
     logging.info(f'{len(nodes)} MCF nodes from {_FLAGS.input_mcf} written to'
                  f' {_FLAGS.output_mcf}')
