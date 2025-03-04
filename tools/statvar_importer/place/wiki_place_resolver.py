@@ -35,11 +35,11 @@ The output file will have the following columns:
   "name": Name of the wikidata entry
   "description": Description of the wikidata item
   "PlaceType": wikidata id of the type
-  "PlaceType_name": name of hte wikidata id for type
+  "PlaceTypeName": name of the wikidata id for type
   "ContainedInPlace": Wikidata Id of parent places
-  "ContainedInPlace_name": parent place name
+  "ContainedInPlaceName": parent place name
   "Country": parent country wikidata id
-  "Country_name": parent country name
+  "CountryName": parent country name
 """
 
 import json
@@ -341,7 +341,7 @@ class WikiPlaceResolver:
                             if names:
                                 val_names.append(names[0])
                     if val_names:
-                        wiki_pvs[dc_prop + '_name'] = val_names
+                        wiki_pvs[dc_prop + 'Name'] = val_names
         logging.level_debug() and logging.debug(
             f'Got wiki properties for {wiki_id}: {props}: {wiki_pvs}')
         return wiki_pvs

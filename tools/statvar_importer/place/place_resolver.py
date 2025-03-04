@@ -15,11 +15,17 @@
 
 To resolve a set of place names on command line, create a CSV with the
 place names to be resolved in a column called 'place_name',
-- Get a custom search API key (described in wiki_place_resolver.py)
 - Get a DataCommons API key
+  This is used for the /resolve API to lookup dcid by place name.
 - Get a Maps API key
+  This is used for Maps Place API to lookup placeid for a place name.
+- Get a custom search API key (described in wiki_place_resolver.py)
+  This is used for Google search lookup of wikidata page for the place name
+  when dcid can't be determined using DC API and maps place API.
 - Get a CSV file 'places.csv' with list of all places as described in place_name_matcher.py
-- create an input csv with place_name column contaiing places to be resolved,
+  This is used for approximate string match on place names.
+
+Create an input csv with place_name column containing places to be resolved,
 then run the following:
   python place_resolver.py --resolve_input_csv=<input-csv> \
       --resolve_output_csv=<output-csv> \
