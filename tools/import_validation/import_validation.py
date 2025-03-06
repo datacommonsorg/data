@@ -21,7 +21,7 @@ import pandas as pd
 import os
 import json
 
-FLAGS = flags.FLAGS
+_FLAGS = flags.FLAGS
 flags.DEFINE_string('validation_config_file', 'validation_config.json',
                     'Path to the validation config file.')
 flags.DEFINE_string('differ_output_location', '.',
@@ -31,9 +31,9 @@ flags.DEFINE_string('stats_summary_location', '.',
 flags.DEFINE_string('validation_output_location', '.',
                     'Path to the validation output folder.')
 
-POINT_ANALAYSIS_FILE = 'point_analysis_summary.csv'
-STATS_SUMMARY_FILE = 'summary_report.csv'
-VALIDATION_OUTPUT_FILE = 'validation_output.csv'
+_POINT_ANALAYSIS_FILE = 'point_analysis_summary.csv'
+_STATS_SUMMARY_FILE = 'summary_report.csv'
+_VALIDATION_OUTPUT_FILE = 'validation_output.csv'
 
 Validation = Enum('Validation', [
     ('MODIFIED_COUNT', 1),
@@ -116,23 +116,30 @@ class ImportValidation:
             logging.error(repr(exc))
             return ValidationResult('FAILED', config['validation'], repr(exc))
 
-    def run_validations(self):
-        output_file = open(self.validation_output, mode='w', encoding='utf-8')
-        output_file.write('test,status,message\n')
-        for config in self.validation_config:
-            result = self._run_validation(config)
-            output_file.write(
-                f'{result.name},{result.status},{result.message}\n')
-            self.validation_result.append(result)
-        output_file.close()
+    def run_validations(self) -> bool:
+        # Returns false if any validation fails.
+        status = True
+        with open(self.validation_output, mode='w',
+                  encoding='utf-8') as output_file:
+            output_file.write('test,status,message\n')
+            for config in self.validation_config:
+                result = self._run_validation(config)
+                # TODO: use CSV writer libs
+                output_file.write(
+                    f'{result.name},{result.status},{result.message}\n')
+                self.validation_result.append(result)
+                if result.status == 'FAILED':
+                    status = False
+        return status
 
 
 def main(_):
     validation = ImportValidation(
-        FLAGS.validation_config_file,
-        os.path.join(FLAGS.differ_output_location, POINT_ANALAYSIS_FILE),
-        os.path.join(FLAGS.stats_summary_location, STATS_SUMMARY_FILE),
-        os.paht.join(FLAGS.validation_output_location, VALIDATION_OUTPUT_FILE))
+        _FLAGS.validation_config_file,
+        os.path.join(_FLAGS.differ_output_location, _POINT_ANALAYSIS_FILE),
+        os.path.join(_FLAGS.stats_summary_location, _STATS_SUMMARY_FILE),
+        os.paht.join(_FLAGS.validation_output_location,
+                     _VALIDATION_OUTPUT_FILE))
     validation.run_validations()
 
 
