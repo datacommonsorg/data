@@ -1,0 +1,175 @@
+
+PLACE RESOLUTION STATISTICS
+
+This only tracks the resolution statistics from `tools/place_name_resolver/`.
+
+The final mapping used by the OECD datasets overrides the `place_name_resolver`
+mapping for special cases such as NUTS codes, USA states, etc., where we know
+the OECD Region ID corresponds with a well-known standard, such as NUTS or
+FIPS. We also address the many-to-one OECD to DCID mapping issues by removing
+DCIDs for lower level places that resolve to a DCID already used by a higher
+level place. This filtering avoids inconsistent statistics (when data from
+multiple places is incorrectly associated with the same place, there is often
+vastly different or duplicate values for a variable). These optimizations are
+made in `clean_geos_resolved_to_dict.py`.
+
+To see changes in the final mapping, just use diffs in `regid2dcid.json`.
+
+To regenerate this file, run `python3 gen_place_mapping_stats.py > stats.txt`
+
+
+1. Number of resolved DCIDs by namespace (ignoring N to 1 issues):
+wikidataId    1484
+nuts           759
+nan            246
+country         79
+geoId           52
+Name: namespace, dtype: int64
+
+2. Summary of resolution errors (NaN = no error):
+
+NaN                             2374
+Missing dcid for placeId ...     211
+Empty geocoding result fo...      35
+Name: errors, dtype: int64
+
+3. Number of OECD places mapped to each DCID, grouped by namespace (only those
+   with N to 1 issues):
+
+namespace   dcid                
+country     country/BGR             6
+            country/CRI             2
+            country/CZE             5
+            country/FIN             2
+            country/LTU             2
+            country/LVA             2
+            country/MLT             4
+            country/NOR             2
+            country/ROU             3
+            country/SWE             7
+            country/TUN             3
+            country/TUR             2
+            country/USA             3
+nuts        nuts/AT11               2
+            nuts/AT12               2
+            nuts/AT21               3
+            nuts/AT31               2
+            nuts/AT334              2
+            nuts/CH033              2
+            nuts/CH04               2
+            nuts/CH05               2
+            nuts/CH066              2
+            nuts/CH07               2
+            nuts/CZ01               2
+            nuts/CZ064              2
+            nuts/CZ080              2
+            nuts/DE3                2
+            nuts/DE404              2
+            nuts/DE501              2
+            nuts/DE6                2
+            nuts/DK01               3
+            nuts/DK04               2
+            nuts/EL24               2
+            nuts/ES12               2
+            nuts/ES13               2
+            nuts/ES22               2
+            nuts/ES23               2
+            nuts/ES3                2
+            nuts/ES41               2
+            nuts/FI193              2
+            nuts/IS001              2
+            nuts/ITC2               2
+            nuts/LU0                2
+            nuts/NL121              2
+            nuts/NO021              2
+            nuts/NO043              4
+            nuts/PL127              4
+            nuts/PL213              2
+            nuts/PT150              3
+            nuts/PT16               3
+            nuts/PT18               4
+            nuts/PT200              2
+            nuts/PT300              2
+            nuts/RO321              2
+            nuts/SOF46              2
+            nuts/TR1                2
+            nuts/TR611              6
+            nuts/UKD1               2
+            nuts/UKD3               4
+            nuts/UKG3               4
+            nuts/UKH3               2
+            nuts/UKJ23              2
+            nuts/UKJ24              2
+            nuts/UKJ4               3
+            nuts/UKL                2
+            nuts/UKN                5
+wikidataId  wikidataId/Q10686       2
+            wikidataId/Q122723      2
+            wikidataId/Q127676      2
+            wikidataId/Q139907      2
+            wikidataId/Q140207      2
+            wikidataId/Q140246      2
+            wikidataId/Q155583      3
+            wikidataId/Q173616      2
+            wikidataId/Q173620      2
+            wikidataId/Q179567      2
+            wikidataId/Q180200      2
+            wikidataId/Q185845      2
+            wikidataId/Q188612      2
+            wikidataId/Q188781      2
+            wikidataId/Q188785      2
+            wikidataId/Q189942      2
+            wikidataId/Q192232      2
+            wikidataId/Q192811      2
+            wikidataId/Q1973593     2
+            wikidataId/Q1979        3
+            wikidataId/Q2009        2
+            wikidataId/Q21          5
+            wikidataId/Q212768      2
+            wikidataId/Q2175        2
+            wikidataId/Q23092       2
+            wikidataId/Q23115       2
+            wikidataId/Q23204       2
+            wikidataId/Q234         2
+            wikidataId/Q251825      2
+            wikidataId/Q266623      2
+            wikidataId/Q3033        2
+            wikidataId/Q3206        2
+            wikidataId/Q3224        4
+            wikidataId/Q3235        2
+            wikidataId/Q3258        3
+            wikidataId/Q328109      2
+            wikidataId/Q34366       2
+            wikidataId/Q35715       2
+            wikidataId/Q35997       2
+            wikidataId/Q3640        2
+            wikidataId/Q36687       2
+            wikidataId/Q3899        2
+            wikidataId/Q393         2
+            wikidataId/Q41070       3
+            wikidataId/Q41071       2
+            wikidataId/Q41151       2
+            wikidataId/Q41154       3
+            wikidataId/Q41161       2
+            wikidataId/Q41164       2
+            wikidataId/Q521869      2
+            wikidataId/Q5245991     2
+            wikidataId/Q541468      2
+            wikidataId/Q54150       2
+            wikidataId/Q54169       2
+            wikidataId/Q54171       2
+            wikidataId/Q54187       3
+            wikidataId/Q54188       2
+            wikidataId/Q57278       2
+            wikidataId/Q57695350    8
+            wikidataId/Q59596       2
+            wikidataId/Q657004      2
+            wikidataId/Q672744      2
+            wikidataId/Q684369      5
+            wikidataId/Q692912      2
+            wikidataId/Q696235      2
+            wikidataId/Q700586      2
+            wikidataId/Q726917      2
+            wikidataId/Q856010      2
+            wikidataId/Q864971      2
+dtype: int64
