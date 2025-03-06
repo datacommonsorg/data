@@ -30,6 +30,7 @@ from absl import logging
 from spellchecker import SpellChecker
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+logging.info(f'DELETE ME: file: {__file__}, dir: {_SCRIPT_DIR}')
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))

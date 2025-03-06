@@ -159,7 +159,8 @@ flags.DEFINE_bool('llm_generate_statvar_name', False,
 
 def get_default_config() -> dict:
     """Returns the default config as dictionary of config parameters and values."""
-    _FLAGS(sys.argv)
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     return {
         # 'config parameter in snake_case': value
         'ignore_numeric_commas':
