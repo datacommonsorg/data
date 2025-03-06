@@ -2,7 +2,9 @@
   "import_specifications": [
     {
       "import_name": "OECDRegionalDemography_Population",
-      "curator_emails": [],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://data-explorer.oecd.org/vis?fs[0]=Topic%2C0%7CRegional%252C%20rural%20and%20urban%20development%23GEO%23&pg=40&fc=Topic&bp=true&snb=117&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_REG_DEMO%40DF_POP_5Y&df[ag]=OECD.CFE.EDS&df[vs]=2.0&dq=A.......&to[TIME_PERIOD]=false&vw=tb&pd=%2C",
       "provenance_description": "Population statistics by age and sex measured by OECD (Organisation for Economic Co-operation and Development).",
       "scripts": [
