@@ -25,7 +25,9 @@
         "age": "[{@StartAge} {@EndAge} Years]",
         "#Regex": "(?P<StartAge>[0-9]+)-(?P<EndAge>[0-9]+)",
     },
-    "All ages": { "age": "" },  # No age bracket required
+    "All ages": {
+        "age": ""
+    },  # No age bracket required
     "Age not stated": {
         "age": "dcs:AgeNotStated"
     },

@@ -51,22 +51,22 @@
         "value": "@Number",
         "populationType": "dcs:Person",
         # Measured property is overridden to dcid for schemaless.
-        "measuredProperty" : "dcs:count",
+        "measuredProperty": "dcs:count",
     },
 
     # Another observation for column: Fraction of population
-    "fraction" : {
+    "fraction": {
         "populationType": "dcs:Person",
         # "measuredProperty" : "dcs:count", # Is the default value for SVObs.
-        "Fraction" : "Fraction",
+        "Fraction": "Fraction",
         "value": "@Number",
     },
 
     # Extract PVs from section headers
-    'Males' : {
+    'Males': {
         'gender': "dcs:Male",
     },
-    'Females' : {
+    'Females': {
         'gender': "dcs:Female",
     },
 }

@@ -51,7 +51,6 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-
 import stat_var_processor
 import file_util
 import config_flags
@@ -79,6 +78,7 @@ _OUTPUT_SHEETS = [
     'output_counters',
     'output_sanity_check',
 ]
+
 
 def file_is_gdrive_folder(filename: str) -> bool:
     """Returns True if the filename is a google folder url."""
@@ -219,7 +219,7 @@ def process_spreadsheets(
         data_sets = {}
         sheets = list(_INPUT_SHEETS)
         sheets.extend(_OUTPUT_SHEETS)
-        sheet_names = [ re.sub(r'[^a-z0-9]', '', s.lower()) for  s in sheets]
+        sheet_names = [re.sub(r'[^a-z0-9]', '', s.lower()) for s in sheets]
         for ws in gs.worksheets():
             title = ws.title.lower().replace('_', '')
             for prefix in sheet_names:
@@ -282,10 +282,11 @@ def process_spreadsheets(
                     # Generate outputs into sheets.
                     data_config['output_path'] = ''
                     for sheet_name in _OUTPUT_SHEETS:
-                      s = sheet_name.replace('_', '').lower()
-                      if s not in data_sets:
-                        ws = _add_worksheet(gs, title=f'{sheet_name}{index}')
-                        data_config[sheet_name] = ws.url
+                        s = sheet_name.replace('_', '').lower()
+                        if s not in data_sets:
+                            ws = _add_worksheet(gs,
+                                                title=f'{sheet_name}{index}')
+                            data_config[sheet_name] = ws.url
 
                 # Process the sheet
                 logging.info(f'Processing sheet: {data_config}')

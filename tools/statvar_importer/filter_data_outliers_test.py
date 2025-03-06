@@ -141,7 +141,7 @@ class FilterDataOutlierTest(unittest.TestCase):
                 'value': 10
             },
             '2021-10-02': {
-                'value': 20, # filtered as change > 100% per year
+                'value': 20,  # filtered as change > 100% per year
             },
             '2022-10-07': {
                 'value': 25,

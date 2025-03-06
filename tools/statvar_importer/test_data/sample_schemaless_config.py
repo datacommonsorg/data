@@ -7,4 +7,3 @@
     ],
     'skip_constant_csv_columns': True,
 }
-
