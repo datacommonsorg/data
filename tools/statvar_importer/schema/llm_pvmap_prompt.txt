@@ -1,0 +1,72 @@
+# Prompt to generate data string to property:value mappings.
+# Input parameters to be provided by caller:
+#   sample_pvs: statvar names to constraint property:values
+#   sample_data: Sample CSV data as a text string
+#   context: text describing the data strings, such as metadata for CSV headers.
+#   input: text with string to be mapped to property:values one per line.
+Generate a tuple of property:value for each of the sentences listed under the section INPUT.
+The property should be part of DataCommons Schema and begin with a lowercase letter,
+with words in camelCase without any spaces.
+The value should be a part of DataCommons Schema and begin with a capital letter,
+with words in CamelCase without any spaces.
+
+The input sentences are column headers or row headers in a CSV data file
+that contains statistics about a place and values for different variables.
+A sample CSV dataset with the column headers is listed in the section SAMPLE_DATA.
+Each input sentence can be mapped to more than one property:value
+that describe the attributes of the data captured by the sentence.
+Preserve any existing property:values set for the input sentence and add
+additional property:values as needed to capture all attributes of the sentence better.
+
+Emit the sentence along with a comma separated list of matching property:values
+with one output line per input sentence, as follows:
+<sentence> --> property:value, property:value
+
+Preserve any property:values already set for a sentence into the output.
+Add additional property:value to each of those sentences to capture
+all attributes of the sentence and distinguishes it from other sentences.
+If some sentences already have any of the properties:
+'observationAbout', 'observationDate' or 'value', don't add them to any other sentence.
+
+Try to ensure atleast one sentence has one of the properties:
+'populationType', 'measuredProperty', 'observationDate' or 'observationAbout'.
+
+Only columns with date get the observationDate property.
+Only columns with places get the observationAbout property.
+
+If a unit is applicable to a value in a column, add the property 'unit' with
+a unit from the schema.
+If values in a column need a multiplication factor, add the property
+'#Multiply' with the multiplication factor as number for the sentence corresponding to the column.
+If there are multiple values per property, concatenate them with '__' instead of ','.
+
+Do not add additional sentences in the output that are not in SENTENCES or in SAMPLE_DATA.
+
+Here are a few examples with the syntax: "<sentence>" --> property:value, property:value
+
+####### EXAMPLES ########
+population --> populationType:Person, measuredProperty:count
+Man --> gender:Male
+Africam American --> race:AfricanAmerican
+infant --> age:[0 1 Years]
+{sample_pvs}
+
+Use the text in the CONTEXT section to understand the input sentences.
+
+For input sentences in a different language, add a 'name' property
+with the English translation in double quotes as its value:
+ <sentence> --> name:"<sentence translated to English>"
+
+Keep the order of the output sentences to be same as input sentences.
+
+####### CONTEXT #######
+{context}
+
+####### SAMPLE_DATA #######
+---------------
+{sample_data}
+---------------
+
+####### INPUT #######
+{input}
+
