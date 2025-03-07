@@ -68,7 +68,7 @@ def write_csv_data(df: pd.DataFrame, dest: str, file: str, tmp_dir: str):
     """ Writes a dataframe to a CSV file with the given path."""
     tmp_file = os.path.join(tmp_dir, file)
     with open(tmp_file, mode='w', encoding='utf-8') as out_file:
-        df.to_csv(out_file, index=False, mode='w')
+        df.to_csv(out_file, index=False, mode='w', header=True)
     upload_output_data(tmp_file, dest)
 
 

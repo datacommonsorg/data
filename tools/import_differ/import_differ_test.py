@@ -38,7 +38,8 @@ class TestImportDiffer(unittest.TestCase):
         output_location = os.path.join(module_dir)
 
         differ = import_differ.ImportDiffer(current_data, previous_data,
-                                            output_location, job_name, 'mcf',
+                                            output_location, 'differ.jar',
+                                            'project-1', job_name, 'mcf',
                                             'local')
         current = differ_utils.load_mcf_file(current_data)
         previous = differ_utils.load_mcf_file(previous_data)
