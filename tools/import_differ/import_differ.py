@@ -32,7 +32,6 @@ import differ_utils
 _SAMPLE_COUNT = 3
 _GROUPBY_COLUMNS = 'variableMeasured,observationAbout,observationDate,measurementMethod,unit,observationPeriod'
 _VALUE_COLUMNS = 'value,scalingFactor'
-_DIFFER_JAR_LOCATION = '<path-to-differ>/differ-bundled-0.1.jar'  # required for local runner mode
 _TMP_LOCATION = '/tmp'
 
 Diff = Enum('Diff', [
@@ -50,6 +49,8 @@ flags.DEFINE_string(
   (wildcard on local/GCS supported).')
 flags.DEFINE_string('output_location', 'results', \
   'Path (local/GCS) to the output data folder.')
+flags.DEFINE_string('differ_jar_location', '', \
+  'Path to the differ tool jar (local runner mode).')
 flags.DEFINE_string('file_format', 'mcf',
                     'Format of the input data (mcf,tfrecord)')
 flags.DEFINE_string('runner_mode', 'local', 'Dataflow runner mode(local/cloud)')
@@ -87,6 +88,7 @@ class ImportDiffer:
                  current_data,
                  previous_data,
                  output_location,
+                 differ_tool,
                  project_id,
                  job_name,
                  file_format,
@@ -97,6 +99,7 @@ class ImportDiffer:
         self.previous_data = previous_data
         self.output_path = os.path.join(output_location, job_name)
         self.tmp_path = os.path.join(_TMP_LOCATION, job_name)
+        self.differ_tool = differ_tool
         self.project_id = project_id
         self.job_name = job_name
         self.file_format = file_format
@@ -132,12 +135,10 @@ class ImportDiffer:
                 'previousData': self.previous_data,
                 'outputLocation': os.path.join(self.output_path, 'diff'),
             }
-            if self.file_format == 'mcf':
-                args['useMcfFormat'] = 'true'
-            else:  # tfrecord format
-                args['useTfrFormat'] = 'true'
+            if self.file_format == 'tfrecord':
+                args['useOptimizedGraphFormat'] = 'true'
             logging.info("Running local dataflow job")
-            cmd = f'java -jar {_DIFFER_JAR_LOCATION}'
+            cmd = f'java -jar {self.differ_tool}'
             for k, v in args.items():
                 cmd += f' --{k}={v}'
             logging.info(cmd)
@@ -179,7 +180,12 @@ class ImportDiffer:
           summary and results from the analysis
         """
         if diff.empty:
-            return pd.DataFrame(), pd.DataFrame()
+            return pd.DataFrame(
+                columns=['variableMeasured', 'ADDED', 'DELETED', 'MODIFIED'
+                        ]), pd.DataFrame(columns=[
+                            'variableMeasured', 'diff_result',
+                            'observationAbout', 'observationDate', 'size'
+                        ])
 
         column_list = [
             self.variable_column, self.place_column, self.time_column,
@@ -215,7 +221,13 @@ class ImportDiffer:
           summary and results from the analysis
         """
         if diff.empty:
-            return pd.DataFrame(), pd.DataFrame()
+            return pd.DataFrame(columns=[
+                'variableMeasured', 'observationAbout', 'ADDED', 'DELETED',
+                'MODIFIED'
+            ]), pd.DataFrame(columns=[
+                'variableMeasured', 'observationAbout', 'diff_result',
+                'observationDate', 'size'
+            ])
 
         column_list = [
             self.variable_column, self.place_column, self.time_column,
@@ -280,9 +292,9 @@ class ImportDiffer:
 def main(_):
     '''Runs the differ.'''
     differ = ImportDiffer(_FLAGS.current_data, _FLAGS.previous_data,
-                          _FLAGS.output_location, _FLAGS.project_id,
-                          _FLAGS.job_name, _FLAGS.file_format,
-                          _FLAGS.runner_mode)
+                          _FLAGS.output_location, _FLAGS.differ_jar_location,
+                          _FLAGS.project_id, _FLAGS.job_name,
+                          _FLAGS.file_format, _FLAGS.runner_mode)
     differ.run_differ()
 
 
