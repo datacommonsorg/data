@@ -68,7 +68,7 @@ def write_csv_data(df: pd.DataFrame, dest: str, file: str, tmp_dir: str):
     """ Writes a dataframe to a CSV file with the given path."""
     tmp_file = os.path.join(tmp_dir, file)
     with open(tmp_file, mode='w', encoding='utf-8') as out_file:
-        df.to_csv(out_file, index=False, mode='w')
+        df.to_csv(out_file, index=False, mode='w', header=True)
     upload_output_data(tmp_file, dest)
 
 
@@ -83,11 +83,10 @@ def launch_dataflow_job(project: str, job: str, current_data: str,
     if file_format == 'mcf':
         logging.info('Using mcf file format')
         template = 'gs://datcom-dataflow/templates/differ-mcf'
-        parameters['useMcfFormat'] = 'true'
     else:
         logging.info('Using tfrecord file format')
         template = 'gs://datcom-dataflow/templates/differ-tfr'
-        parameters['useTfrFormat'] = 'true'
+        parameters['useOptimizedGraphFormat'] = 'true'
 
     dataflow = build("dataflow", "v1b3")
     request = (dataflow.projects().templates().launch(
@@ -124,7 +123,8 @@ def upload_output_data(src: str, dest: str):
     else:
         os.makedirs(dest, exist_ok=True)
         for filepath in glob.iglob(src):
-            shutil.copyfile(filepath, dest + '/' + os.path.basename(filepath))
+            shutil.copyfile(filepath,
+                            os.path.join(dest, os.path.basename(filepath)))
 
 
 def get_gcs_data(uri: str, tmp_dir: str) -> str:
