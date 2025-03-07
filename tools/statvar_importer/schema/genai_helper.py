@@ -35,7 +35,8 @@ _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('genai_api_key', '', 'Google API key for generative AI')
 flags.DEFINE_string('genai_input', '', 'Input file with input query.')
-flags.DEFINE_string('genai_input_params', '', 'File with dictionary if input parameters')
+flags.DEFINE_string('genai_input_params', '',
+                    'File with dictionary if input parameters')
 flags.DEFINE_string('genai_output', '',
                     'Output file with generated response text.')
 flags.DEFINE_string('genai_model', 'gemini-2.0-flash', 'Model to use with LLM.')
@@ -200,9 +201,10 @@ def generate_content(input_prompt: str,
         genai_helper.load_prompt(input_file)
     params = {}
     if input_params_file:
-      params = file_util.file_load_py_dict(input_params_file)
+        params = file_util.file_load_py_dict(input_params_file)
     logging.info(f'Querying LLM with prompt: {input_prompt}, {input_file}')
-    resp = genai_helper.generate_content(prompt=input_prompt, prompt_params=params)
+    resp = genai_helper.generate_content(prompt=input_prompt,
+                                         prompt_params=params)
     if output_file:
         write_text_to_file(resp, output_file)
     else:
@@ -231,9 +233,8 @@ def main(_):
 
     counters = Counters()
     config = ConfigMap(get_genai_helper_config_from_flags())
-    generate_content('', _FLAGS.genai_input,
-                     _FLAGS.genai_input_params, _FLAGS.genai_output,
-                     config.get_configs(), counters)
+    generate_content('', _FLAGS.genai_input, _FLAGS.genai_input_params,
+                     _FLAGS.genai_output, config.get_configs(), counters)
 
 
 if __name__ == '__main__':

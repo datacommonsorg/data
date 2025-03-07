@@ -93,8 +93,7 @@ class LLM_StatVarNameGenerator:
         self._sample_statvars = {}
         self.load_sample_statvars(self._config.get('sample_statvars', ''))
         self._context_text = ''
-        self.load_context(context_file=self._config.get('context',
-                                                        ''),
+        self.load_context(context_file=self._config.get('context', ''),
                           context=self._config.get('description', ''))
 
     def load_sample_statvars(self, mcf_file: str):
@@ -155,7 +154,8 @@ class LLM_StatVarNameGenerator:
             remaining_dcids = remaining_dcids[batch_size:]
 
         logging.info(
-            f'Generated names for {len(nodes)} statvars in {num_batches} batches')
+            f'Generated names for {len(nodes)} statvars in {num_batches} batches'
+        )
         # Update the iput nodes with the generated names from output.
         for dcid, node in output_nodes.items():
             input_node = nodes.get(dcid)

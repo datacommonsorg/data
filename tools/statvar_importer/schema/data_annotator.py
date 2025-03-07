@@ -201,7 +201,8 @@ class DataTypeAnnotator:
         self._counters.add_counter(f'{self._data_type}-lookups', 1)
         if matches:
             self._counters.add_counter(f'{self._data_type}-matches', 1)
-            logging.level_debug() and logging.log(2,
+            logging.level_debug() and logging.log(
+                2,
                 f'Got {len(matches)} {self._data_type} matches for {value} {matches}'
             )
             return self._data_pvs
@@ -322,8 +323,8 @@ class DataAnnotator:
                         pvs: list):
         """Add a set of property:values for a data string at row_index:column_index."""
         # Add counts for annotataion pvs for row and column.
-        logging.level_debug() and logging.log(2,
-            f'Adding annotations: {row_index}:{col_index}:{value}:{pvs}')
+        logging.level_debug() and logging.log(
+            2, f'Adding annotations: {row_index}:{col_index}:{value}:{pvs}')
         add_index_counts(col_index, pvs, self._col_pv_counts)
         add_index_counts(row_index, pvs, self._row_pv_counts)
         if value is not None:
@@ -569,7 +570,8 @@ class DataAnnotator:
         result_pvs = {}
         logging.info(f'Looking up schema PVs for {len(pv_map)} queries')
         for key in pv_map.keys():
-            pvs = self._schema_matcher.lookup_pvs_for_query(key, prop_as_key=True)
+            pvs = self._schema_matcher.lookup_pvs_for_query(key,
+                                                            prop_as_key=True)
             if pvs:
                 result_pvs[key] = pvs
         return result_pvs

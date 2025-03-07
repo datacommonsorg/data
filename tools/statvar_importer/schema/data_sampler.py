@@ -242,7 +242,8 @@ class DataSampler:
                 with file_util.FileIO(output_file, mode=output_mode) as output:
                     csv_writer = csv.writer(output,
                                             delimiter=output_delimiter,
-                                            doublequote=False, escapechar='\\')
+                                            doublequote=False,
+                                            escapechar='\\')
                     logging.level_debug() and logging.debug(
                         f'Sampling rows from {file} with config: {self._config.get_configs()}'
                     )

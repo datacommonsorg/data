@@ -109,8 +109,7 @@ class LLM_PVMapGenerator:
         self._sample_statvars = {}
         self.load_sample_statvars(self._config.get('sample_statvars', ''))
         self._context_text = ''
-        self.load_context(context_file=self._config.get('context',
-                                                        ''),
+        self.load_context(context_file=self._config.get('context', ''),
                           context=self._config.get('description', ''))
         self._sample_data = ''
         self.load_sample_data(self._config.get('sample_data', ''))
