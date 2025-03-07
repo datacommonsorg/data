@@ -45,10 +45,9 @@ download_details = {
             "bm1e", "bm1i", "bm1u", "bm1b", "bm1c", "bm1d", "de1", "de2"
         ],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-                "BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/hlth_ehis_",
         "file_extension":
-            ".tsv.gz"
+            "?format=TSV&compressed=true"
     },
     "physical_activity": {
         "filenames": [
@@ -57,10 +56,9 @@ download_details = {
             "de9", "pe6e"
         ],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-                "BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/hlth_ehis_",
         "file_extension":
-            ".tsv.gz"
+            "?format=TSV&compressed=true"
     },
     "tobacco_consumption": {
         "filenames": [
@@ -75,17 +73,19 @@ download_details = {
     "social_environment": {
         "filenames": ["ss1e", "ss1u", "ic1e", "ic1u", "ss1b", "ss1c", "ss1d"],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-                "BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/hlth_ehis_",
         "file_extension":
-            ".tsv.gz"
+            "?format=TSV&compressed=true"
     },
     "fruits_vegetables": {
-        "filenames": ["fv1b","fv1c","fv1d","fv1e","fv1i","fv1m","fv1u","fv3b","fv3c","fv3d","fv3e","fv3i","fv3m","fv3u","fv7e","fv7i","fv7m","de7","de8","fv5e"],
+        "filenames": [
+            "fv1b", "fv1c", "fv1d", "fv1e", "fv1i", "fv1m", "fv1u", "fv3b",
+            "fv3c", "fv3d", "fv3e", "fv3i", "fv3m", "fv3u", "fv7e", "fv7i",
+            "fv7m", "de7", "de8", "fv5e"
+        ],
         "input_url":
-            "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/"+\
-                "BulkDownloadListing?file=data/hlth_ehis_",
+            "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/hlth_ehis_",
         "file_extension":
-            ".tsv.gz"
+            "?format=TSV&compressed=true"
     }
 }

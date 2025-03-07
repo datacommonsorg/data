@@ -27,7 +27,7 @@ import re
 import pandas as pd
 import numpy as np
 from absl import flags, logging
-
+import inspect
 # For import common.replacement_functions
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
@@ -216,7 +216,7 @@ class EuroStat:
                 df = self._parse_file(file_name, df, self._import_name)
                 df['SV'] = df['SV'].str.replace('_Total', '')
                 df['SV'] = df['SV'].str.replace('_TOTAL', '')
-                replace_val = [': ', ': u']
+                replace_val = [': ', ': u', ': @C']
                 df['observation'] = df['observation'].replace(replace_val, '')
                 dfs.append(df)
             final_df = pd.concat(dfs, axis=0)
