@@ -58,16 +58,21 @@ takes a raw stat-var and generates a fully defined stat-var for it.
 
 Download and unzip the data files based on the
 [manifest](https://api.eia.gov/bulk/manifest.txt) by running the
-[`download_bulk.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_eia/opendata/download_bulk.py)
+[`python3 process.py --dataset=TOTAL`](https://github.com/datacommonsorg/data/blob/master/scripts/us_eia/opendata/process.py)
 script.
 
 To generate CSV, TMCF and stat-var MCF for a supported dataset:
 
 ```bash
-python3 main.py --data_dir=tmp_raw_data/ELEC --dataset=ELEC
+python3 process.py --dataset=INTL --mode=process
+        python3 process.py --dataset=ELEC --mode=process
+        python3 process.py --dataset=PET --mode=process
+        python3 process.py --dataset=NG --mode=process
+        python3 process.py --dataset=SEDS --mode=process
+        python3 process.py --dataset=NUC_STATUS --mode=process
+        python3 process.py --dataset=TOTAL --mode=process
 ```
 
-Replace `ELEC` with any of the other dataset codes listed above.
 
 To run tests:
 
