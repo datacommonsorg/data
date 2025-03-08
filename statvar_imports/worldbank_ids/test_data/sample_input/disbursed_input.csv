@@ -1,0 +1,101 @@
+country,counterpart_area,series,year,value,series_code
+Syrian Arab Republic,World,"PPG, official creditors (DOD, current US$)",2015-01-01,3510002525.0,DT.DOD.OFFT.CD
+Middle income,Cyprus,"PPG, private creditors (DOD, current US$)",2016-01-01,17303051.5,DT.DOD.PRVT.CD
+Turkmenistan,OPEC Fund for International Dev.,"PPG, official creditors (DOD, current US$)",2001-01-01,0.0,DT.DOD.OFFT.CD
+"Yemen, Rep.",Kuwait,"External debt stocks, long-term (DOD, current US$)",2006-01-01,216821253.0,DT.DOD.DLXF.CD
+St. Lucia,France,"External debt stocks, long-term (DOD, current US$)",2019-01-01,2507428.8,DT.DOD.DLXF.CD
+Sudan,UN-World Food Programme (WFP),"PPG, official creditors (DOD, current US$)",2000-01-01,0.0,DT.DOD.OFFT.CD
+Serbia,World,"PPG, multilateral (DOD, current US$)",1974-01-01,431459479.5,DT.DOD.MLAT.CD
+IDA total,Arab Fund for Tech. Assist. to African Countries,"External debt stocks, long-term (DOD, current US$)",1990-01-01,784000.0,DT.DOD.DLXF.CD
+Mauritania,Morocco,"PPG, bilateral (DOD, current US$)",1989-01-01,39000000.0,DT.DOD.BLAT.CD
+Bangladesh,Belgium,"PPG, bilateral (DOD, current US$)",1985-01-01,22372663.5,DT.DOD.BLAT.CD
+Kenya,India,"PPG, private creditors (DOD, current US$)",1989-01-01,339000.0,DT.DOD.PRVT.CD
+Niger,World Bank-IDA                         ,"External debt stocks, long-term (DOD, current US$)",2011-01-01,354586000.0,DT.DOD.DLXF.CD
+Middle income,Pakistan,"PPG, official creditors (DOD, current US$)",1999-01-01,33339000.0,DT.DOD.OFFT.CD
+East Asia & Pacific (excluding high income),Netherlands,"PPG, bilateral (DOD, current US$)",2013-01-01,497254657.4,DT.DOD.BLAT.CD
+Middle East & North Africa (excluding high income),Sweden,"PPG, bilateral concessional (DOD, current US$)",2004-01-01,12580645.1,DT.DOD.BLTC.CD
+Honduras,World,"PPG, private creditors (DOD, current US$)",1981-01-01,368056111.3,DT.DOD.PRVT.CD
+Mozambique,World Bank-IDA                         ,"PPG, multilateral (DOD, current US$)",2000-01-01,760297000.0,DT.DOD.MLAT.CD
+Middle income,Angola,"PPG, official creditors (DOD, current US$)",1991-01-01,39273000.0,DT.DOD.OFFT.CD
+Nicaragua,Spain,"PPG, private creditors (DOD, current US$)",1993-01-01,80021773.0,DT.DOD.PRVT.CD
+Low & middle income,Honduras,"External debt stocks, long-term (DOD, current US$)",1987-01-01,63730000.0,DT.DOD.DLXF.CD
+Dominican Republic,Mexico,"External debt stocks, long-term (DOD, current US$)",1982-01-01,61570000.0,DT.DOD.DLXF.CD
+Somalia,Iraq,"PPG, bilateral (DOD, current US$)",2013-01-01,16422518.8,DT.DOD.BLAT.CD
+Tajikistan,"Germany, Fed. Rep. of","PPG, other private creditors (DOD, current US$)",2007-01-01,0.0,DT.DOD.PROP.CD
+Botswana,World,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",2002-01-01,472423923.3,DT.DOD.DPPG.CD
+Middle income,Turkiye,"External debt stocks, long-term (DOD, current US$)",1971-01-01,729000.0,DT.DOD.DLXF.CD
+Lower middle income,Multiple Lenders,"PPG, private creditors (DOD, current US$)",1987-01-01,37274873807.6,DT.DOD.PRVT.CD
+Jordan,OPEC Fund for International Dev.,"External debt stocks, long-term (DOD, current US$)",1991-01-01,8695000.0,DT.DOD.DLXF.CD
+Ghana,Russian Federation,"PPG, bilateral (DOD, current US$)",2008-01-01,727696.0,DT.DOD.BLAT.CD
+Sub-Saharan Africa (excluding high income),South Africa,"PPG, private creditors (DOD, current US$)",1997-01-01,69778883.8,DT.DOD.PRVT.CD
+Turkiye,"Korea, Republic of","External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",2007-01-01,52433317.0,DT.DOD.DPPG.CD
+Low & middle income,Japan,"PPG, other private creditors (DOD, current US$)",1979-01-01,4414697176.9,DT.DOD.PROP.CD
+Argentina,Czechoslovakia,"PPG, commercial banks (DOD, current US$)",1980-01-01,22916000.0,DT.DOD.PCBK.CD
+IDA only,World Bank-IDA                         ,"External debt stocks, long-term (DOD, current US$)",1985-01-01,9135454835.0,DT.DOD.DLXF.CD
+Rwanda,India,"External debt stocks, long-term (DOD, current US$)",2022-01-01,62722000.0,DT.DOD.DLXF.CD
+St. Vincent and the Grenadines,World Bank-IBRD                         ,"PPG, multilateral (DOD, current US$)",1996-01-01,334000.0,DT.DOD.MLAT.CD
+Lesotho,Arab Bank for Economic Dev. in Africa (BADEA),"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",2000-01-01,8921000.0,DT.DOD.DPPG.CD
+Thailand,France,"External debt stocks, long-term (DOD, current US$)",1985-01-01,176114214.2,DT.DOD.DLXF.CD
+Europe & Central Asia (excluding high income),United Arab Emirates,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",1993-01-01,511324160.6,DT.DOD.DPPG.CD
+Lower middle income,New Zealand,"PPG, other private creditors (DOD, current US$)",2011-01-01,0.0,DT.DOD.PROP.CD
+Middle income,Cyprus,"External debt stocks, long-term (DOD, current US$)",1993-01-01,2600000.0,DT.DOD.DLXF.CD
+Low income,France,"PPG, other private creditors (DOD, current US$)",1994-01-01,200115837.4,DT.DOD.PROP.CD
+Sri Lanka,"Korea, Republic of","PPG, official creditors (DOD, current US$)",1998-01-01,25879.7,DT.DOD.OFFT.CD
+Honduras,Panama,"PPG, commercial banks (DOD, current US$)",1994-01-01,340000.0,DT.DOD.PCBK.CD
+Latin America & Caribbean (excluding high income),"Korea, Republic of","PPG, official creditors (DOD, current US$)",2005-01-01,52221792.6,DT.DOD.OFFT.CD
+El Salvador,Bondholders,"PPG, bonds (DOD, current US$)",2007-01-01,2238900000.0,DT.DOD.PBND.CD
+Sri Lanka,World,"PPG, bilateral concessional (DOD, current US$)",2016-01-01,3130642759.7,DT.DOD.BLTC.CD
+Low & middle income,Finland,"PPG, official creditors (DOD, current US$)",2020-01-01,265005339.8,DT.DOD.OFFT.CD
+Nigeria,African Dev. Bank         ,"PPG, multilateral (DOD, current US$)",2015-01-01,1071773915.0,DT.DOD.MLAT.CD
+"Congo, Dem. Rep.",European Development Fund (EDF),"PPG, multilateral (DOD, current US$)",1973-01-01,10810334.7,DT.DOD.MLAT.CD
+Malawi,World,"PPG, multilateral concessional (DOD, current US$)",1972-01-01,34233000.0,DT.DOD.MLTC.CD
+Burundi,World,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",1983-01-01,273948583.4,DT.DOD.DPPG.CD
+Liberia,Arab Bank for Economic Dev. in Africa (BADEA),"PPG, multilateral (DOD, current US$)",1993-01-01,6461000.0,DT.DOD.MLAT.CD
+Lower middle income,Canada,"PPG, other private creditors (DOD, current US$)",2017-01-01,159426066.2,DT.DOD.PROP.CD
+"Yemen, Rep.",Japan,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",1983-01-01,47493289.0,DT.DOD.DPPG.CD
+Lower middle income,China,"PPG, private creditors (DOD, current US$)",2009-01-01,1026598297.6,DT.DOD.PRVT.CD
+Afghanistan,Bulgaria,"External debt stocks, long-term (DOD, current US$)",2016-01-01,6951000.0,DT.DOD.DLXF.CD
+Cote d'Ivoire,Entente Council,"PPG, multilateral (DOD, current US$)",2004-01-01,0.0,DT.DOD.MLAT.CD
+Haiti,OPEC Fund for International Dev.,"PPG, official creditors (DOD, current US$)",1993-01-01,7649000.0,DT.DOD.OFFT.CD
+Middle East & North Africa (excluding high income),World,"PPG, private creditors (DOD, current US$)",2010-01-01,38880494965.1,DT.DOD.PRVT.CD
+Ecuador,Italy,"PPG, other private creditors (DOD, current US$)",1977-01-01,5101000.0,DT.DOD.PROP.CD
+"Congo, Dem. Rep.",Spain,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",2010-01-01,11526000.0,DT.DOD.DPPG.CD
+Middle income,"Gambia, The","PPG, official creditors (DOD, current US$)",1990-01-01,0.0,DT.DOD.OFFT.CD
+Senegal,USSR,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",1974-01-01,4577564.0,DT.DOD.DPPG.CD
+Sudan,Libya,"PPG, bilateral (DOD, current US$)",1985-01-01,10472625.0,DT.DOD.BLAT.CD
+Turkiye,Denmark,"PPG, bilateral concessional (DOD, current US$)",1982-01-01,2319898.8,DT.DOD.BLTC.CD
+IDA only,Other Multiple Lenders,"External debt stocks, private nonguaranteed (PNG) (DOD, current US$)",1997-01-01,5779939000.0,DT.DOD.DPNG.CD
+Bolivia,World,"PPG, private creditors (DOD, current US$)",2017-01-01,2009971147.9,DT.DOD.PRVT.CD
+Peru,Spain,"PPG, bilateral (DOD, current US$)",1981-01-01,50209107.5,DT.DOD.BLAT.CD
+South Asia,World,"External debt stocks, long-term (DOD, current US$)",1984-01-01,42485245806.1,DT.DOD.DLXF.CD
+Angola,France,"PPG, official creditors (DOD, current US$)",1993-01-01,75969344.8,DT.DOD.OFFT.CD
+Lower middle income,Japan,"External debt stocks, long-term (DOD, current US$)",2008-01-01,64537345238.8,DT.DOD.DLXF.CD
+Togo,Islamic Dev. Bank,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",2017-01-01,81470157.5,DT.DOD.DPPG.CD
+"Egypt, Arab Rep.",Serbia,"PPG, official creditors (DOD, current US$)",1970-01-01,16956000.0,DT.DOD.OFFT.CD
+Zambia,Serbia,"PPG, private creditors (DOD, current US$)",1990-01-01,7760000.0,DT.DOD.PRVT.CD
+Lower middle income,Algeria,"PPG, bilateral (DOD, current US$)",1976-01-01,5659100.0,DT.DOD.BLAT.CD
+Mexico,Spain,"PPG, other private creditors (DOD, current US$)",1999-01-01,115945006.4,DT.DOD.PROP.CD
+Europe & Central Asia (excluding high income),Japan,"PPG, commercial banks (DOD, current US$)",1998-01-01,99881525.8,DT.DOD.PCBK.CD
+Cote d'Ivoire,World,"PPG, multilateral (DOD, current US$)",2013-01-01,686062180.4,DT.DOD.MLAT.CD
+Benin,"Congo, Dem. Rep.","PPG, bilateral (DOD, current US$)",2009-01-01,1884592.0,DT.DOD.BLAT.CD
+Papua New Guinea,Multiple Lenders,"PPG, other private creditors (DOD, current US$)",1992-01-01,15000000.0,DT.DOD.PROP.CD
+IDA only,Hungary,"PPG, bilateral (DOD, current US$)",1978-01-01,31187488.5,DT.DOD.BLAT.CD
+Cabo Verde,World,"PPG, bilateral concessional (DOD, current US$)",2010-01-01,79035075.3,DT.DOD.BLTC.CD
+Solomon Islands,OPEC Fund for International Dev.,"PPG, multilateral (DOD, current US$)",1980-01-01,1000000.0,DT.DOD.MLAT.CD
+Senegal,Italy,"PPG, private creditors (DOD, current US$)",1997-01-01,0.0,DT.DOD.PRVT.CD
+Eswatini,World,"PPG, commercial banks (DOD, current US$)",1987-01-01,641000.0,DT.DOD.PCBK.CD
+Latin America & Caribbean (excluding high income),Serbia,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",1979-01-01,132943925.3,DT.DOD.DPPG.CD
+South Asia,Qatar,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",1970-01-01,9993600.0,DT.DOD.DPPG.CD
+Dominican Republic,World Bank-IBRD                         ,"PPG, multilateral (DOD, current US$)",2006-01-01,438015000.0,DT.DOD.MLAT.CD
+Lesotho,Arab Bank for Economic Dev. in Africa (BADEA),"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",1978-01-01,871000.0,DT.DOD.DPPG.CD
+Colombia,Denmark,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",1987-01-01,488970.4,DT.DOD.DPPG.CD
+Lower middle income,Dev. Bank of the Central African States (BDEAC),"External debt stocks, long-term (DOD, current US$)",1993-01-01,23565978.0,DT.DOD.DLXF.CD
+India,World,"PPG, official creditors (DOD, current US$)",1975-01-01,12006895038.4,DT.DOD.OFFT.CD
+Burkina Faso,Algeria,"PPG, official creditors (DOD, current US$)",2002-01-01,4127089.6,DT.DOD.OFFT.CD
+Guyana,United Kingdom,"PPG, official creditors (DOD, current US$)",2005-01-01,120533.0,DT.DOD.OFFT.CD
+Least developed countries: UN classification,Switzerland,"PPG, other private creditors (DOD, current US$)",1973-01-01,14770263.0,DT.DOD.PROP.CD
+Middle income,Greece,"External debt stocks, public and publicly guaranteed (PPG) (DOD, current US$)",2000-01-01,18734122.2,DT.DOD.DPPG.CD
+Haiti,Canada,"External debt stocks, long-term (DOD, current US$)",1983-01-01,9304000.0,DT.DOD.DLXF.CD
+Middle East & North Africa (excluding high income),Belgium,"PPG, bilateral concessional (DOD, current US$)",1974-01-01,2076300.0,DT.DOD.BLTC.CD
+Sudan,UN-World Food Programme (WFP),"PPG, multilateral (DOD, current US$)",2000-01-01,0.0,DT.DOD.MLAT.CD
+Burundi,OPEC Fund for International Dev.,"PPG, multilateral concessional (DOD, current US$)",1983-01-01,2714000.0,DT.DOD.MLTC.CD
