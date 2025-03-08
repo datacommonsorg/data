@@ -1,0 +1,6 @@
+Node: E:mesh_desc_concept->E1
+typeOf: dcs:MeSHConcept
+dcid: C:mesh_desc_concept->Concept_dcid
+name: C:mesh_desc_concept->ConceptName
+identifier: C:mesh_desc_concept->ConceptID
+scopeNote: C:mesh_desc_concept->ScopeNote
