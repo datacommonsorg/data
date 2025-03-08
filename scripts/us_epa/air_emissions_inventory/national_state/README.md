@@ -1,12 +1,12 @@
 # US-EPA: Air Pollutant Emissions Trends Data
 
 ## About the Dataset
-This dataset has Air Pollution Emission data for the National and State geographic levels in the United States for the years 1970 to 2021.
+This dataset has Air Pollution Emission data for the National and State geographic levels in the United States for the years 1970 to latest.
 
 The data is categorized by geographic levels as below:
         
-        1. Criteria pollutants National Tier 1 for 1970 - 2021
-        2. Criteria pollutants State Tier 1 for 1990 - 2021
+        1. Criteria pollutants National Tier 1 for 1970 - latest
+        2. Criteria pollutants State Tier 1 for 1990 - latest
 
 
 ### Download URL
@@ -43,7 +43,11 @@ Cleaned data will be inside [output/airpollution_emission_trends_tier1.csv] as a
 
 Run the test cases
 
-`run_tests.sh -p scripts/us_epa/air_emissions_inventory/national_state`
+`sh run_tests.sh -p scripts/us_epa/air_emissions_inventory/national_state` from the data folder
+
+or 
+
+`python -m unittest process_test.py` from the current folder
 
 
 ### Import Procedure
