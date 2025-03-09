@@ -1,0 +1,26 @@
+Node: dcid:establishmentOwnership
+typeOf: dcs:Property
+name: "establishmentOwnership"
+domainIncludes: dcid:CollegeOrUniversity,dcid:Teacher,dcid:Student
+rangeIncludes: dcid:EstablishmentOwnershipEnum
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:CollegeOrUniversity,dcid:Teacher,dcid:Student
+
+Node: dcid:schoolManagement
+typeOf: dcs:Property
+name: "schoolManagement"
+domainIncludes: dcid:CollegeOrUniversity,dcid:Teacher,dcid:Student
+
+Node: dcid:UnderMinistryOfResearchTechnologyAndHigherEducation
+typeOf: dcid:SchoolManagementEnum
+name: "Under Ministry Of Research Technology And Higher Education"
+isProvisional: dcs:True
+
+Node: dcid:LocalGovernmentOwned__PrivatelyOwned
+typeOf: dcid:SchoolManagementEnum
+name: "Local Government Owned__ Privately Owned"
+isProvisional: dcs:True
+

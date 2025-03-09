@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/2/MTAxIzI=/number-of-crime-according-to-police-territorial-jurisdiction.html
+description,Number Of Crime According To Police Territorial Jurisdiction
+#place_type,
+#places_within,
+start_date,2000
+end_date,2022
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,2
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/14TFf5LfnFb703mZ9gn1zeMu7NgYslWqC3IbvqaW8LFc/edit?resourcekey=0-ZrlP1X1PdDmlfC-dtpDnDg#gid=646526473
+mapped_rows,2
+mapped_columns,1
+pv_map,https://docs.google.com/spreadsheets/d/14TFf5LfnFb703mZ9gn1zeMu7NgYslWqC3IbvqaW8LFc/edit?resourcekey=0-ZrlP1X1PdDmlfC-dtpDnDg#gid=1365610892
