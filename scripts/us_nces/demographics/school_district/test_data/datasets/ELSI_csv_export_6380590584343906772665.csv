@@ -1,0 +1,24 @@
+﻿ELSI Export
+
+National Center for Education Statistics - http://nces.ed.gov/ccd/elsi/
+
+This is a District based table with the following filters applied: State(s) (All Years): All 50 + DC and outlying territories
+
+Agency Name,State Name [District] Latest available year,School Administrative Support Staff [District] 2018-19,Student Support Services Staff [District] 2018-19,Other Support Services Staff [District] 2018-19,Agency ID - NCES Assigned [District] Latest available year
+RICHMOND COMMUNITY SCHOOLS,Michigan,12.05,6.30,39.18,2629670
+RICHMOND COMMUNITY SCHOOLS,Indiana,44.00,74.72,230.17,1809510
+RICHMOND COUNTY,Georgia,184.00,129.50,951.80,1304380
+RICHMOND COUNTY SCHOOLS,North Carolina,37.39,95.87,200.97,3703870
+RICHMOND ELEMENTARY,California,1.50,="0.00",3.58,="0632520"
+RICHMOND HEIGHTS LOCAL,Ohio,8.00,4.00,59.00,3904659
+RICHMOND R-XVI,Missouri,2.00,5.57,1.00,2926480
+RICHMOND SCHOOL DISTRICT,Wisconsin,2.51,3.95,5.15,5508130
+RICHMOND-BURTON CHSD 157,Illinois,4.00,14.00,43.00,1733510
+ZURICH ELEM,Montana,="0.00",="0.00",="0.60",3028910
+
+
+Data Source: U.S. Department of Education National Center for Education Statistics Common Core of Data (CCD) "Local Education Agency (School District) Universe Survey" 2018-19 v.1a  2020-21 v.1a.
+
+† indicates that the data are not applicable.
+– indicates that the data are missing.
+‡ indicates that the data do not meet NCES data quality standards.
