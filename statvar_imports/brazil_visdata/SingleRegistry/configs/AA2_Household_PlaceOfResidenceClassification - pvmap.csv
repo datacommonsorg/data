@@ -1,0 +1,6 @@
+key,prop,val,p1,v1,,,,,,,,,,
+Código,observationAbout,{Data},,,,,,,,,,,,
+Referência,observationDate,{Data},,,,,,,,,,,,
+Quantidade de famílias cadastradas em domicílios rurais,measuredProperty,count,populationType,Household,placeOfResidenceClassification,Rural,value,{Number},name,"""Number of families registered in rural households""",alternateName,"""Quantidade de famílias cadastradas em domicílios rurais@pt""",registeredIn,Brazil_SingleRegistry
+Quantidade de famílias cadastradas em domicílios urbanos,measuredProperty,count,populationType,Household,placeOfResidenceClassification,Urban,value,{Number},name,"""Number of families registered in urban households""",alternateName,"""Quantidade de famílias cadastradas em domicílios urbanos@pt""",registeredIn,Brazil_SingleRegistry
+Quantidade de famílias cadastradas em domicílios sem classificação urbano/rural registrada,measuredProperty,count,populationType,Household,placeOfResidenceClassification,UnknownPlaceOfResidence,value,{Number},name,"""Number of families registered in households without registered urban/rural classification""",alternateName,"""Quantidade de famílias cadastradas em domicílios sem classificação urbano/rural registrada@pt""",registeredIn,Brazil_SingleRegistry
