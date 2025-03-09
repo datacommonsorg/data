@@ -21,11 +21,39 @@ import ssl
 import pandas as pd
 import requests
 import zipfile
+import configparser
+import sys
 
-DOWNLOAD_URI = 'https://www.epa.gov/sites/default/files/2020-11/2019_data_summary_spreadsheets.zip'
-YEAR_DATA_FILENAME = 'ghgp_data_{year}.xlsx'
+#DOWNLOAD_URI = 'https://www.epa.gov/sites/default/files/2020-11/2019_data_summary_spreadsheets.zip'
+#DOWNLOAD_URI = 'https://www.epa.gov/system/files/other-files/2022-10/2021_data_summary_spreadsheets.zip'
+
+file_directry = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+file_directry_str = str(file_directry) + '/config.txt'
+print(">>>>>>>>>>>>", file_directry_str)
+#Moved the download URL to config.txt file and reading from there
+config = configparser.ConfigParser()
+#config.readfp(open(r'config.txt'))
+file_content = open(file_directry_str, "r")
+config.readfp(file_content)
+DOWNLOAD_URI = config.get('downloadUrl', 'DOWNLOAD_URI')
+
+#YEAR_DATA_FILENAME = 'ghgp_data_{year}.xlsx'
+#YEAR_DATA_FILENAME = '2021_data_summary_spreadsheets/ghgp_data_{year}.xlsx'
+YEAR_DATA_FILENAME = config.get('downloadUrl', 'YEAR_DATA_FILENAME')
+
+#Taking Year Range from config file
+Start_Year_Range = int(config.get('downloadUrl', 'Start_Year_Range'))
+End_Year_Range = int(config.get('downloadUrl', 'End_Year_Range'))
+#print("===========Start_Year_Range ==End_Year_Range====="+End_Year_Range)
+
 HEADER_ROW = 3
-CROSSWALK_URI = 'https://www.epa.gov/sites/default/files/2020-12/ghgrp_oris_power_plant_crosswalk_11_24_20.xlsx'
+#CROSSWALK_URI = 'https://www.epa.gov/sites/default/files/2020-12/ghgrp_oris_power_plant_crosswalk_11_24_20.xlsx'
+#CROSSWALK_URI = 'https://www.epa.gov/system/files/documents/2022-04/ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx'
+
+CROSSWALK_URI = config.get('downloadUrl', 'CROSSWALK_URI')
+print("===DOWNLOAD_URI===" + DOWNLOAD_URI)
+print("===CROSSWALK_URI===" + CROSSWALK_URI)
+
 CROSSWALK_COLS_TO_KEEP = [
     'GHGRP Facility ID', 'ORIS CODE', 'ORIS CODE 2', 'ORIS CODE 3',
     'ORIS CODE 4', 'ORIS CODE 5'
@@ -57,7 +85,8 @@ class Downloader:
     """
 
     def __init__(self, save_path):
-        self.years = list(range(2010, 2020))
+        #self.years = list(range(2010, 2022))
+        self.years = list(range(Start_Year_Range, End_Year_Range))
         self.current_year = None
         self.files = []  # list of (year, filename) of all extracted files
         self.save_path = save_path
@@ -83,6 +112,7 @@ class Downloader:
             headers_df.transpose().to_csv(os.path.join(self.save_path,
                                                        f'cols_{csv_name}'),
                                           index=None)
+
         return self.files
 
     def save_all_crosswalks(self, filepath):
@@ -106,6 +136,8 @@ class Downloader:
     def _extract_data(self, headers):
         summary_filename = os.path.join(
             self.save_path, YEAR_DATA_FILENAME.format(year=self.current_year))
+
+        print(f'=======self.save_path=tmp_data======' + self.save_path)
         xl = pd.ExcelFile(summary_filename, engine='openpyxl')
         for sheet in xl.sheet_names:
             csv_filename = SHEET_NAMES_TO_CSV_FILENAMES.get(sheet, None)
