@@ -1,0 +1,58 @@
+Node: dcid:schoolEnrollment
+typeOf: dcs:Property
+name: "schoolEnrollment"
+domainIncludes: dcid:Student
+
+Node: dcid:gender
+typeOf: dcs:Property
+name: "gender"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:GenderType
+
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:Student
+
+Node: dcid:enrollmentType
+typeOf: dcs:Property
+name: "enrollmentType"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:EnrollmentTypeEnum
+isProvisional: dcs:True
+
+Node: dcid:EnrollmentTypeEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "EnrollmentTypeEnum"
+isProvisional: dcs:True
+
+Node: dcid:SharedTime
+typeOf: dcid:EnrollmentTypeEnum
+name: "Shared Time"
+isProvisional: dcs:True
+
+Node: dcid:kindergartenProgram
+typeOf: dcs:Property
+name: "kindergartenProgram"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:KindergartenProgramEnum
+isProvisional: dcs:True
+
+Node: dcid:KindergartenProgramEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "KindergartenProgramEnum"
+isProvisional: dcs:True
+
+Node: dcid:HalfDay
+typeOf: dcid:KindergartenProgramEnum
+name: "Half Day"
+isProvisional: dcs:True
+
+Node: dcid:schoolGradeLevel
+typeOf: dcs:Property
+name: "schoolGradeLevel"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:SchoolGradeLevelEnum
+
