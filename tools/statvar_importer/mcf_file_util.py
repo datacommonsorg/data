@@ -549,9 +549,9 @@ def get_numeric_value(value: str,
     if value and isinstance(value, str):
         try:
             # Strip separator characters from the numeric string
-            normalized_value = value
-            if (value[0].isdigit() or value[0] == '.' or value[0] == '-' or
-                    value[0] == '+'):
+            normalized_value = value.strip()
+            if (normalized_value[0].isdigit() or normalized_value[0] == '.' or
+                    normalized_value[0] == '-' or normalized_value[0] == '+'):
                 # Input looks like a number. Remove allowed extra characters.
                 normalized_value = ''.join(
                     [c for c in normalized_value if c not in separator_chars])
@@ -563,7 +563,12 @@ def get_numeric_value(value: str,
                     # Period may be used instead of commas. Remove it.
                     normalized_value = normalized_value.replace('.', '')
             if normalized_value.count('.') == 1:
-                return float(normalized_value)
+                float_val = float(normalized_value)
+                # Convert to int if there are no decimal values
+                int_val = int(float_val)
+                if int_val == float_val:
+                    return int_val
+                return float_val
             return int(normalized_value)
         except ValueError:
             # Value is not a number. Ignore it.
