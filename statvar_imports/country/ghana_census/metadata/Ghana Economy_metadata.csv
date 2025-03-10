@@ -1,0 +1,15 @@
+parameter,value
+url,https://ghana.opendataforafrica.org/RSG2016/regional-statistics-of-ghana-1988-2010
+description,Regional Statistics of Ghana for economy
+#place_type,Country
+#places_within,country/GHA
+start_date,1990
+end_date,2010
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1muiX9KiWua6_vo0to3Fh4uJ_Bwylsd9JiytwN5Dt_Ng/edit?resourcekey=0-et9O-_sczoifBZ6Mm91sUw#gid=0
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/1cCiTNy2F6jdAzqYOXBfDbXjgewM3TzON1letHMVP6Yg/edit#gid=1755330187
