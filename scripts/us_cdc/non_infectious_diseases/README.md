@@ -11,14 +11,6 @@ To download the data,
 3. Scroll down towards the footer of the page to find a link to download data in
    excel format. Select the link called *Download all NORS Dashboard data (Excel)*. This will download all the required dataset.
 
-### Data processing
-1. Copy the downloaded data to the `data` sub-directory
-2. Run the following command to generate the clean csv, statvar mcf files,
-   ```bash
-   python3 process.py
-   --input_file=./data/NationalOutbreakPublicDataTool.xlsx
-   --output_path=./data/output
-   ```
 
 ### Notes
 There are some notes and caveats with this dataset.
@@ -28,3 +20,15 @@ There are some notes and caveats with this dataset.
 	> The other columns add more classification of the etiology outbreak which can be added to the script at a later time -- since it requires new schema
 4. This import also imports statistics only for a single etiology -- since it is unclear how to interpret the statistics with multiple Etiologies
 5. The columns `Info on Hospitalisations` and `Info on Deaths` are not used in this import.
+
+### Automation Refresh
+The process.py has a parameter 'mode' with values 'download' and 'process'
+
+when the file 'process.py' is ran with the flag --mode=download, it will only download the files and place it in the 'input_files' directory.
+i.e. python3 process.py mode=download
+
+when the file 'process.py' is ran with the flag --mode=process, it will process the downloaded files and place it in the 'output' directory.
+i.e. python3 process.py mode=process
+
+when the file 'process .py' is ran without any flag, it will download and process the files and keep it in the respective directories as mentioned above.
+i.e. python3 process.py
