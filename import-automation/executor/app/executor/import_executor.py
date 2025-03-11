@@ -410,7 +410,7 @@ class ImportExecutor:
                 timeout=self.config.user_script_timeout,
                 args=import_tool_args,
                 cwd=absolute_import_dir,
-                env={},
+                env=os.environ.copy(),
             )
             _log_process(process=process)
             process.check_returncode()
