@@ -1,0 +1,63 @@
+# Auto generated using command: "python -m unittest stat_var_processor_test.py" on 2024-01-04 12:57:25.645441
+
+Node: dcid:Count_Person_Female_PersonAge_30-35_WH
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:Count_Person_Female_PersonAge_30-35_WH
+statType: dcid:measuredValue
+# PersonAge: 30-35
+# measuredProperty:dcid:count
+# raceCode: dcid:WH
+gender: dcid:Female
+
+Node: dcid:Count_Person_Fraction_Female_PersonAge_30-35_WH
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:Count_Person_Fraction_Female_PersonAge_30-35_WH
+statType: dcid:measuredValue
+# Fraction: dcid:Fraction
+# PersonAge: 30-35
+# measuredProperty:dcid:count
+# raceCode: dcid:WH
+gender: dcid:Female
+
+Node: dcid:Count_Person_Fraction_Male_PersonAge_25-30_A-PI
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:Count_Person_Fraction_Male_PersonAge_25-30_A-PI
+statType: dcid:measuredValue
+# Fraction: dcid:Fraction
+# PersonAge: 25-30
+# measuredProperty:dcid:count
+# raceCode: dcid:A-PI
+gender: dcid:Male
+
+Node: dcid:Count_Person_Fraction_PersonAge_25-30_WH
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:Count_Person_Fraction_PersonAge_25-30_WH
+statType: dcid:measuredValue
+# Fraction: dcid:Fraction
+# PersonAge: 25-30
+# measuredProperty:dcid:count
+# raceCode: dcid:WH
+
+Node: dcid:Count_Person_Male_PersonAge_25-30_A-PI
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:Count_Person_Male_PersonAge_25-30_A-PI
+statType: dcid:measuredValue
+# PersonAge: 25-30
+# measuredProperty:dcid:count
+# raceCode: dcid:A-PI
+gender: dcid:Male
+
+Node: dcid:Count_Person_PersonAge_25-30_WH
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:Count_Person_PersonAge_25-30_WH
+statType: dcid:measuredValue
+# PersonAge: 25-30
+# measuredProperty:dcid:count
+# raceCode: dcid:WH
+

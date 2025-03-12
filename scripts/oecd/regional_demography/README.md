@@ -72,14 +72,30 @@ In each subdirectory, the StatVarObservation template MCF files are saved as `OE
 
 ### Script
 
-The script file `preprocess_csv.py` in each subdirectory is used to generate cleaned CSV and template MCF files.
+The script file `preprocess_csv.py` in each subdirectory is used to download, process and generate cleaned CSV and template MCF files.
 
 ## Generating Artifacts
 
 To generate the cleaned csv and template MCF files, run
 
+- To download the input file of the particular file run-
+```bash
+python3 preprocess_csv.py --mode=download
+```
+
+- To process the input file of the particular file run-
+```bash
+python3 preprocess_csv.py --mode=process
+```
+
+- To download and process the input file of the particular file run-
 ```bash
 python3 preprocess_csv.py
+```
+
+- To run the test scripts
+```bash
+python3 -m unittest process_csv_test.py
 ```
 
 For population, following the Raw Data section, first copy its raw data to population direction. 

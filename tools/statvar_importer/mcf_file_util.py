@@ -61,6 +61,7 @@ flags.DEFINE_bool(
     'Append new values to existing properties. If False, new values overwrite'
     ' existing value.',
 )
+flags.DEFINE_bool('normalize', True, 'If True, values are normalized.')
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -548,9 +549,9 @@ def get_numeric_value(value: str,
     if value and isinstance(value, str):
         try:
             # Strip separator characters from the numeric string
-            normalized_value = value
-            if (value[0].isdigit() or value[0] == '.' or value[0] == '-' or
-                    value[0] == '+'):
+            normalized_value = value.strip()
+            if (normalized_value[0].isdigit() or normalized_value[0] == '.' or
+                    normalized_value[0] == '-' or normalized_value[0] == '+'):
                 # Input looks like a number. Remove allowed extra characters.
                 normalized_value = ''.join(
                     [c for c in normalized_value if c not in separator_chars])
@@ -562,7 +563,12 @@ def get_numeric_value(value: str,
                     # Period may be used instead of commas. Remove it.
                     normalized_value = normalized_value.replace('.', '')
             if normalized_value.count('.') == 1:
-                return float(normalized_value)
+                float_val = float(normalized_value)
+                # Convert to int if there are no decimal values
+                int_val = int(float_val)
+                if int_val == float_val:
+                    return int_val
+                return float_val
             return int(normalized_value)
         except ValueError:
             # Value is not a number. Ignore it.
@@ -606,12 +612,19 @@ def get_value_list(value: str) -> list:
         return value
     value_list = []
     # Read the string as a comma separated line.
-    rows = list(
-        csv.reader([value], delimiter=',', quotechar='"',
-                   skipinitialspace=True))
-    for v in rows[0]:
-        val_normalized = get_quoted_value(v)
-        value_list.append(val_normalized)
+    try:
+        rows = list(
+            csv.reader([value],
+                       delimiter=',',
+                       quotechar='"',
+                       skipinitialspace=True))
+        for v in rows[0]:
+            val_normalized = get_quoted_value(v)
+            value_list.append(val_normalized)
+    except csv.Error:
+        logging.error(
+            f'Too large value {len(value)}, failed to convert to list')
+        value_list = [value]
     return value_list
 
 
@@ -975,7 +988,9 @@ def main(_):
         print(f'Please provide input and output MCF files with --input_mcf and'
               f' --output_mcf.')
         return
-    nodes = load_mcf_nodes(_FLAGS.input_mcf, append_values=_FLAGS.append_values)
+    nodes = load_mcf_nodes(_FLAGS.input_mcf,
+                           append_values=_FLAGS.append_values,
+                           normalize=_FLAGS.normalize)
     write_mcf_nodes([nodes], _FLAGS.output_mcf)
     logging.info(f'{len(nodes)} MCF nodes from {_FLAGS.input_mcf} written to'
                  f' {_FLAGS.output_mcf}')

@@ -7,7 +7,7 @@
 
 -r import-automation/executor/requirements.txt
 
-chembl-webresource-client>=0.10.2
+chembl-webresource-client
 deepdiff
 earthengine-api
 flask_restful
