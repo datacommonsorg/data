@@ -2,12 +2,13 @@
     "import_specifications": [
       {
         "import_name": "CDC_PM25CensusTract",
-        "curator_emails": [],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
           "parse_air_quality.py CDC_PM25CensusTract"
         ],
+        "source_files": ["input_files/*"],
         "import_inputs": [
           {
             "template_mcf": "PM25CensusTractPollution.tmcf",
@@ -25,18 +26,19 @@
             "template_mcf": "PM25CensusTractPollution.tmcf",
             "cleaned_csv": "output/PM2.5CensusTract_3.csv"
           }
-          
+
         ],
         "cron_schedule": "0 1  2 * *"
       },
       {
         "import_name": "CDC_OzoneCensusTract",
-        "curator_emails": [],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
           "parse_air_quality.py CDC_OzoneCensusTract"
         ],
+        "source_files": ["input_files/*"],
         "import_inputs": [
           {
             "template_mcf": "OzoneCensusTractPollution.tmcf",
@@ -60,12 +62,13 @@
       },
       {
         "import_name": "CDC_PM25County",
-        "curator_emails": [],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
           "parse_air_quality.py CDC_PM25County"
         ],
+        "source_files": ["input_files/*"],
         "import_inputs": [
           {
             "template_mcf": "PM25CountyPollution.tmcf",
@@ -77,12 +80,13 @@
       },
       {
         "import_name": "CDC_OzoneCounty",
-        "curator_emails": [],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
           "parse_air_quality.py CDC_OzoneCounty"
         ],
+        "source_files": ["input_files/*"],
         "import_inputs": [
           {
             "template_mcf": "OzoneCountyPollution.tmcf",
