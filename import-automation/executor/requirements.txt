@@ -22,11 +22,12 @@ gspread
 gunicorn
 lxml
 numpy
-openpyxl>=3.1.0
+openpyxl
 pandas
 protobuf
 psutil
 pylint
+pyspellchecker
 pytest
 python_calamine
 pytz

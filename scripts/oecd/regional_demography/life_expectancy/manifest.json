@@ -1,0 +1,22 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "OECDRegionalDemography_LifeExpectancy",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://data-explorer.oecd.org/vis?df[ds]=DisseminateFinalDMZ&df[id]=DSD_REG_DEMO%40DF_LIFE_EXP&df[ag]=OECD.CFE.EDS&df[vs]=2.0&dq=A.......&pd=%2C&to[TIME_PERIOD]=false&vw=tb",
+      "provenance_description": "Life Expectancy statistics by gender measured by OECD (Organisation for Economic Co-operation and Development).",
+      "scripts": [
+        "preprocess_csv.py"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "OECD_life_expectancy_cleaned.tmcf",
+          "cleaned_csv": "OECD_life_expectancy_cleaned.csv"
+        }
+      ],
+      "cron_schedule": "0 3 1 3 *"
+    }
+  ]
+}
