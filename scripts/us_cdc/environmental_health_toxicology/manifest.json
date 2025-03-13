@@ -6,6 +6,7 @@
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
+          "download_files.py CDC_PM25CensusTract",
           "parse_air_quality.py CDC_PM25CensusTract"
         ],
         "source_files": ["input_files/*"],
@@ -36,6 +37,7 @@
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
+          "download_files.py CDC_OzoneCensusTract",
           "parse_air_quality.py CDC_OzoneCensusTract"
         ],
         "source_files": ["input_files/*"],
@@ -66,6 +68,7 @@
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
+          "download_files.py CDC_PM25County",
           "parse_air_quality.py CDC_PM25County"
         ],
         "source_files": ["input_files/*"],
@@ -84,6 +87,7 @@
         "provenance_url": "https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology",
         "provenance_description": "Environmental Health Toxicology",
         "scripts": [
+          "download_files.py CDC_OzoneCounty",
           "parse_air_quality.py CDC_OzoneCounty"
         ],
         "source_files": ["input_files/*"],
