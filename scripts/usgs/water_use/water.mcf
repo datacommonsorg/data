@@ -1,0 +1,606 @@
+Node: dcid:WithdrawalRate_Water
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+
+Node: dcid:WithdrawalRate_Water_PublicSupply
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:PublicSupply
+
+Node: dcid:WithdrawalRate_Water_PublicSupply_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:PublicSupply
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_PublicSupply_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:PublicSupply
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_PublicSupply_FreshWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:PublicSupply
+waterType: dcs:FreshWater
+
+Node: dcid:WithdrawalRate_Water_PublicSupply_FreshWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:PublicSupply
+waterType: dcs:FreshWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_PublicSupply_FreshWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:PublicSupply
+waterType: dcs:FreshWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_PublicSupply_SalineWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:PublicSupply
+waterType: dcs:SalineWater
+
+Node: dcid:WithdrawalRate_Water_PublicSupply_SalineWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:PublicSupply
+waterType: dcs:SalineWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_PublicSupply_SalineWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:PublicSupply
+waterType: dcs:SalineWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Domestic
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Domestic
+
+Node: dcid:WithdrawalRate_Water_Domestic_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Domestic
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Domestic_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Domestic
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Domestic_FreshWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Domestic
+waterType: dcs:FreshWater
+
+Node: dcid:WithdrawalRate_Water_Domestic_FreshWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Domestic
+waterType: dcs:FreshWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Domestic_FreshWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Domestic
+waterType: dcs:FreshWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Domestic_SalineWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Domestic
+waterType: dcs:SalineWater
+
+Node: dcid:WithdrawalRate_Water_Domestic_SalineWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Domestic
+waterType: dcs:SalineWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Domestic_SalineWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Domestic
+waterType: dcs:SalineWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Industrial
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Industrial
+
+Node: dcid:WithdrawalRate_Water_Industrial_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Industrial
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Industrial_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Industrial
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Industrial_FreshWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Industrial
+waterType: dcs:FreshWater
+
+Node: dcid:WithdrawalRate_Water_Industrial_FreshWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Industrial
+waterType: dcs:FreshWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Industrial_FreshWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Industrial
+waterType: dcs:FreshWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Industrial_SalineWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Industrial
+waterType: dcs:SalineWater
+
+Node: dcid:WithdrawalRate_Water_Industrial_SalineWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Industrial
+waterType: dcs:SalineWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Industrial_SalineWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Industrial
+waterType: dcs:SalineWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Irrigation
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Irrigation
+
+Node: dcid:WithdrawalRate_Water_Irrigation_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Irrigation
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Irrigation_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Irrigation
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Irrigation_FreshWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Irrigation
+waterType: dcs:FreshWater
+
+Node: dcid:WithdrawalRate_Water_Irrigation_FreshWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Irrigation
+waterType: dcs:FreshWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Irrigation_FreshWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Irrigation
+waterType: dcs:FreshWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Irrigation_SalineWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Irrigation
+waterType: dcs:SalineWater
+
+Node: dcid:WithdrawalRate_Water_Irrigation_SalineWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Irrigation
+waterType: dcs:SalineWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Irrigation_SalineWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Irrigation
+waterType: dcs:SalineWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Thermoelectric
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Thermoelectric
+
+Node: dcid:WithdrawalRate_Water_Thermoelectric_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Thermoelectric
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Thermoelectric_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Thermoelectric
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Thermoelectric_FreshWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Thermoelectric
+waterType: dcs:FreshWater
+
+Node: dcid:WithdrawalRate_Water_Thermoelectric_FreshWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Thermoelectric
+waterType: dcs:FreshWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Thermoelectric_FreshWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Thermoelectric
+waterType: dcs:FreshWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Thermoelectric_SalineWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Thermoelectric
+waterType: dcs:SalineWater
+
+Node: dcid:WithdrawalRate_Water_Thermoelectric_SalineWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Thermoelectric
+waterType: dcs:SalineWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Thermoelectric_SalineWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Thermoelectric
+waterType: dcs:SalineWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Mining
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Mining
+
+Node: dcid:WithdrawalRate_Water_Mining_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Mining
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Mining_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Mining
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Mining_FreshWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Mining
+waterType: dcs:FreshWater
+
+Node: dcid:WithdrawalRate_Water_Mining_FreshWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Mining
+waterType: dcs:FreshWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Mining_FreshWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Mining
+waterType: dcs:FreshWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Mining_SalineWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Mining
+waterType: dcs:SalineWater
+
+Node: dcid:WithdrawalRate_Water_Mining_SalineWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Mining
+waterType: dcs:SalineWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Mining_SalineWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Mining
+waterType: dcs:SalineWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Livestock
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Livestock
+
+Node: dcid:WithdrawalRate_Water_Livestock_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Livestock
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Livestock_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Livestock
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Livestock_FreshWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Livestock
+waterType: dcs:FreshWater
+
+Node: dcid:WithdrawalRate_Water_Livestock_FreshWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Livestock
+waterType: dcs:FreshWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Livestock_FreshWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Livestock
+waterType: dcs:FreshWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Livestock_SalineWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Livestock
+waterType: dcs:SalineWater
+
+Node: dcid:WithdrawalRate_Water_Livestock_SalineWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Livestock
+waterType: dcs:SalineWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Livestock_SalineWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Livestock
+waterType: dcs:SalineWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Aquaculture
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Aquaculture
+
+Node: dcid:WithdrawalRate_Water_Aquaculture_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Aquaculture
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Aquaculture_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Aquaculture
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Aquaculture_FreshWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Aquaculture
+waterType: dcs:FreshWater
+
+Node: dcid:WithdrawalRate_Water_Aquaculture_FreshWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Aquaculture
+waterType: dcs:FreshWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Aquaculture_FreshWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Aquaculture
+waterType: dcs:FreshWater
+waterSource: dcs:SurfaceWater
+
+Node: dcid:WithdrawalRate_Water_Aquaculture_SalineWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Aquaculture
+waterType: dcs:SalineWater
+
+Node: dcid:WithdrawalRate_Water_Aquaculture_SalineWater_GroundWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Aquaculture
+waterType: dcs:SalineWater
+waterSource: dcs:GroundWater
+
+Node: dcid:WithdrawalRate_Water_Aquaculture_SalineWater_SurfaceWater
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Water
+measuredProperty: dcs:withdrawalRate
+statType: dcs:measuredValue
+usedFor: dcs:Aquaculture
+waterType: dcs:SalineWater
+waterSource: dcs:SurfaceWater
+
