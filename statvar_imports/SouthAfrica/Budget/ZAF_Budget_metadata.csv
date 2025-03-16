@@ -1,0 +1,10 @@
+parameter,value
+url,
+description,South Africa coutry budget
+start_date,2018
+end_date,2023
+release_frequency,Yearly
+process,
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured"
+header_rows,1
