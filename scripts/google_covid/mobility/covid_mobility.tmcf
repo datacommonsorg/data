@@ -1,0 +1,7 @@
+Node: E:CovidMobility->E1
+typeOf: dcs:StatVarObservation
+observationAbout: C:CovidMobility->observationAbout
+variableMeasured: C:CovidMobility->variableMeasured
+observationDate: C:CovidMobility->observationDate
+value: C:CovidMobility->value
+unit: dcs:Percent
