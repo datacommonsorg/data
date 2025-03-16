@@ -1,0 +1,12 @@
+,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p5,v5,p6,v6
+Provinsi,observationAbout,{Data},measuredProperty,count,,,,,,,,,,
+Jumlah Kasus,populationType,MedicalConditionIncident,measurementQualifier,Annual,incidentType	,AIDS,medicalStatus,ConfirmedCase,alternateName,"""AIDS Jumlah Kasus@id""",,,,
+Kasus Kumulatif,populationType,MedicalConditionIncident,measurementQualifier,Annual,incidentType	,AIDS,medicalStatus,ConfirmedCase,alternateName,"""AIDS Kasus Kumulatif@id""",measuredProperty	,cumulativeCount,,
+Meninggal,populationType,MedicalConditionIncident,measurementQualifier,Annual,incidentType	,AIDS,medicalStatus,PatientDeceased,alternateName,"""AIDS Meninggal@id""",,,,
+Angka Kumulatif Kasus,populationType,MedicalConditionIncident,measurementQualifier,Annual,incidentType	,AIDS,medicalStatus,ConfirmedCase,alternateName,"""AIDS Angka Kumulatif Kasus@id""",measurementDenominator,"-alternateName,-medicalStatus,-incidentType",scalingFactor,100000
+Kasus Baru,populationType,MedicalConditionIncident,measurementQualifier,Annual,incidentType	,AIDS,medicalStatus,NewlyConfirmedCase,alternateName,"""AIDS Kasus Baru@id""",,,,
+2008,value,{Number},observationDate,2008,,,,,,,,,,
+2009,value,{Number},observationDate,2009,,,,,,,,,,
+2010,value,{Number},observationDate,2010,,,,,,,,,,
+2011,value,{Number},observationDate,2011,,,,,,,,,,
+2012,value,{Number},observationDate,2012,,,,,,,,,,
