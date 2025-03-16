@@ -1,0 +1,9 @@
+Node: E:national_emissions->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:national_emissions->SV
+measurementMethod: C:national_emissions->Measurement_Method
+observationAbout: C:national_emissions->geo_Id
+observationDate: C:national_emissions->year
+unit: Ton
+observationPeriod: "P1Y"
+value: C:national_emissions->observation
