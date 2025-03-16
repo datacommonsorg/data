@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SOURCE_POLLUTANT = {
+POLLUTANT = {
     'CO': 'CarbonMonoxide',
     'NOX': 'OxidesOfNitrogen',
     'PM10Primary': 'PM10',
@@ -22,6 +22,11 @@ SOURCE_POLLUTANT = {
     'SO2': 'SulfurDioxide',
     'VOC': 'VolatileOrganicCompound',
     'NH3': 'Ammonia',
+    'BLACK CARBON': 'BlackCarbon',
+    'ORGANIC CARBON': 'OrganicCarbon'
+}
+
+SOURCE = {
     'FUEL COMB. ELEC. UTIL.': 'FuelCombustionElectricUtility',
     'FUEL COMB. INDUSTRIAL': 'FuelCombustionIndustrial',
     'FUEL COMB. OTHER': 'EPA_FuelCombustionOther',
@@ -37,7 +42,10 @@ SOURCE_POLLUTANT = {
     'MISCELLANEOUS': 'EPA_MiscellaneousEmissionSource',
     'Wildfires': 'Wildfire',
     'WILDFIRES': 'Wildfire',
-    'PRESCRIBED FIRES': 'PrescribedFire'
+    'PRESCRIBED FIRES': 'PrescribedFire',
+    'Stationary fuel combustion': 'StationaryFuelCombustion',
+    'Industrial and other processes': 'IndustrialAndOtherProcesses',
+    'Transportation': 'Transportation'
 }
 
 SHEETS_NATIONAL = [
@@ -46,7 +54,7 @@ SHEETS_NATIONAL = [
 
 SKIPHEAD_AMMONIA_NATIONAL = 6
 SKIPHEAD_OTHERS_NATIONAL = 5
-SKIPFOOT_PM_NATIONAL = 0
-SKIPFOOT_OTHERS_NATIONAL = 5
+# SKIPFOOT_PM_NATIONAL = 0
+# SKIPFOOT_OTHERS_NATIONAL = 5
 
 SHEET_STATE = 'State_Trends'
