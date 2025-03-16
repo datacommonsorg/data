@@ -1,5 +1,5 @@
-GEO_ID,NAICS2012,TAXSTAT,TYPOP,YEAR,ESTAB
-Geographic identifier code,2012 NAICS code,Tax status code,Type of operation code,Year,Number of establishments
-0100000US,21,0,0,2012,25417
-0100000US,22,0,0,2012,17595
-0100000US,23,0,0,2012,598065
+GEO_ID,NAME,NAICS2012,TAXSTAT,TYPOP,YEAR,ESTAB,NAICS2012_LABEL,TAXSTAT_LABEL,TYPOP_LABEL
+Geographic identifier code,Name,2012 NAICS code,Tax status code,Type of operation code,Year,Number of establishments,Naics2012 Label String,Taxstate Label string,Typop Label string
+0100000US,United States,21,0,0,2012,25417,Naics Label 1,Taxstat Label 1,Typop Label 1
+0100000US,United States,22,0,0,2012,17595,Naics Label 2,Taxstat Label 2,Typop Label 2
+0100000US,United States,23,0,0,2012,598065,Naics Label 3,Taxstat Label 3,Typop Label 3
