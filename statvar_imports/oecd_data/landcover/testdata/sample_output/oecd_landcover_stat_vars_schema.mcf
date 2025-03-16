@@ -1,0 +1,35 @@
+Node: dcid:TreeCover
+typeOf: dcid:LandCoverClassEnum
+name: "Tree Cover"
+isProvisional: dcs:True
+
+Node: dcid:GrassLand
+typeOf: dcid:LandCoverClassEnum
+name: "Grass Land"
+isProvisional: dcs:True
+
+Node: dcid:SparseVegetation
+typeOf: dcid:LandCoverClassEnum
+name: "Sparse Vegetation"
+isProvisional: dcs:True
+
+Node: dcid:ArtificialSurfaces
+typeOf: dcid:LandCoverClassEnum
+name: "Artificial Surfaces"
+isProvisional: dcs:True
+
+Node: dcid:InlandWater
+typeOf: dcid:LandCoverClassEnum
+name: "Inland Water"
+isProvisional: dcs:True
+
+Node: dcid:BareArea
+typeOf: dcid:LandCoverClassEnum
+name: "Bare Area"
+isProvisional: dcs:True
+
+Node: dcid:Wetland
+typeOf: dcid:LandCoverClassEnum
+name: "Wetland"
+isProvisional: dcs:True
+
