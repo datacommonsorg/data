@@ -1,0 +1,10 @@
+Node: E:Data->E0
+observationAbout: C:Data->observationAbout
+observationDate: C:Data->observationDate
+variableMeasured: C:Data->variableMeasured
+value: C:Data->value
+unit: C:Data->unit
+observationPeriod: C:Data->observationPeriod
+#Aggregate: sum
+measurementMethod: DataCommonsAggregate
+typeOf: dcs:StatVarObservation
