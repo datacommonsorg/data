@@ -1,0 +1,4 @@
+key,prop,val,p1,v1,,,,,,
+Referência,observationDate,{Data},populationType,School,measuredProperty,cumulativeCount,,,,
+Código,observationAbout,{Data},,,,,,,,
+Cisternas Escolares entregues pelo MDS  (Acumulado),value,{Number},facilityType,Cisterns,brazilCisternDeliveryPartner,MinistrySocialDevelopmentAndFightAgainstHunger,name,"""School cisterns delivered by Ministry of Social Development and Fight Against Hunger (MDS) (Accumulated)""",alternateName,"""Cisternas Escolares entregues pelo O Ministério do Desenvolvimento Social e Combate à Fome (MDS)  (Acumulado)@pt"""
