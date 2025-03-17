@@ -1,0 +1,7 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,,
+OBS_VALUE,value,{Number},populationType,Person,,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,,,
+NAMEARAB_GOVERNORATES,observationAbout,{Data},,,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,
+Percentage distribution %,employmentStatus,Employed,age,[15 - Years],measurementDenominator,-employmentStatus,unit,Percent,name,"""Employment Rate (Persons 15+ Years)"""
+Estimation of employees (15 years and over),employmentStatus,Employed,age,[15 - Years],#Multiply,100,name,"""Number of Employed Persons (15+ Years)""",,

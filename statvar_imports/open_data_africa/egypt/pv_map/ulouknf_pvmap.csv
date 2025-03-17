@@ -1,0 +1,13 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,,
+OBS_VALUE,value,{Number},observationAbout,country/EGY,populationType,Person,,,,
+2017-Q1,observationDate,2017-03,name,"""{Name1} {Name2}""",,,,,,
+2017-Q2,observationDate,2017-06,name,"""{Name1} {Name2}""",,,,,,
+2017-Q3,observationDate,2017-09,name,"""{Name1} {Name2}""",,,,,,
+2017-Q4,observationDate,2017-12,name,"""{Name1} {Name2}""",,,,,,
+GENDER:2,gender,Male,Name2,Male,,,,,,
+GENDER:3,gender,Female,Name2,Female,,,,,,
+FREQ:Q,observationPeriod,P3M,,,,,,,,
+The power of work,employmentStatus,InLaborForce,Name1,"""Number of Persons in the Labor Force""",,,,,,
+The workers,workStatus,Worker,Name1,"""Number of Workers""",,,,,,
+The unemployed,employmentStatus,Unemployed,Name1,"""Number of Unemployed Persons""",,,,,,
+Unemployment rate (%),employmentStatus,Unemployed,measurementDenominator,-employmentStatus,unit,Percent,scalingFactor,100,Name1,"""Total Number of Unemployed Persons as a Fraction of Total Population"""

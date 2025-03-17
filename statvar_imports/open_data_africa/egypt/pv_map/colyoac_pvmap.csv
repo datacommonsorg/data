@@ -1,0 +1,5 @@
+key,prop,val,p1,v1,,,,,,,,,,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,,,,,,,,,,,
+OBS_VALUE,value,{Number},populationType,MortalityEvent,measurementDenominator,Count_BirthEvent_LiveBirth,measuredProperty,count,ageGroupClassification,Infant,statType,measuredValue,scalingFactor,1000,name,"""The number of deaths of infants under one year old per 1,000 live""",alternateName,"""عدد وفيات الأطفال الرضع أقل من سنة واحدة لكل 1000 حي@ar"""
+FREQ:A,observationPeriod,P1Y,,,,,,,,,,,,,,,,
+ID_GOVERNORATES,observationAbout,{Number},,,,,,,,,,,,,,,,

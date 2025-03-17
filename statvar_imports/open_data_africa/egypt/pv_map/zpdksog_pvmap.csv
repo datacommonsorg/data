@@ -1,0 +1,11 @@
+key,prop,val,p1,v1,Name1,"""""",Name2,"""""",AlternateName1,"""""",AlternateName2,"""""",#End,#value,,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,,,,,,,,,,,,,
+OBS_VALUE,value,{Number},name,"""{Name1} ,{Name2}""",alternateName,"""{AlternateName1},{AlternateName2}@ar""",,,,,,,,,,,,,,
+ID_GOVERNORATES,observationAbout,{Number},,,,,,,,,,,,,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,,,,,,,,,,,
+معدلات وفيات الأطفال الرضع (أقل من عام),measuredProperty,count,populationType,MortalityEvent,ageGroupClassification,Infant,statType,measuredValue,measurementDenominator,Count_BirthEvent_LiveBirth,age,YearsUpto1,unit,Percent,scalingFactor,100,Name1,Infant mortality rates (under one year),AlternateName1,معدلات وفيات الأطفال الرضع (أقل من عام)
+عدد وفيات الاطفال الرضع (أقل من سنة),measuredProperty,count,populationType,MortalityEvent,statType,measuredValue,age,YearsUpto1,,,,,,,,,Name1,Number of deaths of infants (less than one year old),AlternateName1,عدد وفيات الاطفال الرضع (أقل من سنة)
+اجمالى الجمهورية,,,,,,,,,,,,,,,,,Name1,"""""",AlternateName1,""""""
+حضر,placeOfResidenceClassification,Urban,Name2,urban,AlternateName2,حضر,,,,,,,,,,,,,,
+ريف,placeOfResidenceClassification,Rural,Name2,rural,AlternateName2,ريف,,,,,,,,,,,,,,
+اجمالى الجمهورية,,,Name2,"""""",AlternateName2,"""""",,,,,,,,,,,,,,

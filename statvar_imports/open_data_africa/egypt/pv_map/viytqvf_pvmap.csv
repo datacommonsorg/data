@@ -1,0 +1,12 @@
+key,prop,val,p1,v1,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,
+OBS_VALUE,value,{Number},observationAbout,country/EGY,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,
+NAMEARAB_INDICATORS:معدل الخصوبة الكلى,measuredProperty,fertilityRate,populationType,Person,name,"""fertility rate""",alternateName,"""معدل الخصوبة الكلى@ar"""
+15-19,age,[15 19 Years],,,name,"""15 to 19 Years""",alternateName,"""من 15 إلى 19 سنة@ar"""
+20-24,age,[20 24 Years],,,name,"""20 to 24 Years""",alternateName,"""20 إلى 24 سنة@ar"""
+25-29,age,[25 29 Years],,,name,"""25 to 29 Years""",alternateName,"""من 25 إلى 29 سنة@ar"""
+30-34,age,[30 34 Years],,,name,"""30 to 34 Years""",alternateName,"""30 إلى 34 سنة@ar"""
+35-39,age,[35 39 Years],,,name,"""35 to 39 Years""",alternateName,"""35 إلى 39 سنة@ar"""
+40-44,age,[40 44 Years],,,name,"""40 to 44 Years""",alternateName,"""من 40 إلى 44 سنة@ar"""
+45-49,age,[45 49 Years],,,name,"""45 to 49 Years""",alternateName,"""من 45 إلى 49 سنة@ar"""
