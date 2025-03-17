@@ -1,0 +1,44 @@
+key,prop,val,p1,v1,Name1,"""""",Name2,"""""",Name3,"""""",#End,#value
+OBS_VALUE,value,{Number},observationAbout,country/EGY,populationType,Person,employmentStatus,Employed,measurementDenominator,-employmentStatus,unit,Percent
+TIME_PERIOD,observationDate,{Number},name,"""{Name1} {Name2} {Name3}""",,,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,,,
+GENDER:1,,,Name1,"""""",,,,,,,,
+GENDER:2,gender,Male,Name1,Male,,,,,,,,
+GENDER:3,gender,Female,Name1,Female,,,,,,,,
+INDICATORS:1,value,{Number},,,,,,,,,,
+INDICATORS:2,age,[15 19 Years],Name2,from 15 to 19  years old,,,,,,,,
+INDICATORS:3,age,[20 24 Years],Name2,from 20 to 24  years old,,,,,,,,
+INDICATORS:4,age,[25 29 Years],Name2,from 25 to 29  years old,,,,,,,,
+INDICATORS:5,age,[30 39 Years],Name2,from 30 to 39  years old,,,,,,,,
+INDICATORS:6,age,[40 49 Years],Name2,from 40 to 49  years old,,,,,,,,
+INDICATORS:7,age,[50 59 Years],Name2,from 50 to 59  years old,,,,,,,,
+INDICATORS:8,age,[60 64 Years],Name2,from 60 to 64  years old,,,,,,,,
+INDICATORS:9,literacyStatus,Illiterate,Name3,Employed Illiterate Persons as a Fraction of Total Illiterate Population,,,,,,,,
+INDICATORS:10,educationalAttainment,ReadAndWrite,Name3,Employment Rate Among Literate Persons,,,,,,,,
+INDICATORS:11,educationalAttainment,LessThanIntermediate,Name3,Employment Rate Among Persons with Less Than Intermediate Education,,,,,,,,
+INDICATORS:12,educationalAttainment,GeneralOrAzhariSecondaryEducation,Name3,Employment Rate (General or Azhari Secondary Education),,,,,,,,
+INDICATORS:13,educationalAttainment,TechnicalSecondaryEducation,Name3,Employment Rate Among Persons with Technical Secondary Education,,,,,,,,
+INDICATORS:14,educationalAttainment,AboveIntermediateEducation,Name3,Employment Rate Among Persons with Above Intermediate Education,,,,,,,,
+INDICATORS:15,educationalAttainment,UniversityOrHigher,Name3,Employment Rate Among Persons with University or Higher Education,,,,,,,,
+INDICATORS:16,#ignore,skip,,,,,,,,,,
+INDICATORS:17,#ignore,skip,,,,,,,,,,
+INDICATORS:18,#ignore,skip,,,,,,,,,,
+INDICATORS:19,#ignore,skip,,,,,,,,,,
+INDICATORS:20,#ignore,skip,,,,,,,,,,
+INDICATORS:21,#ignore,skip,,,,,,,,,,
+INDICATORS:22,#ignore,skip,,,,,,,,,,
+,,,,,,,,,,,,
+,,,,,,,,,,,,10
+,,,,,,,,,,,,11
+,,,,,,,,,,,,12
+,,,,,,,,,,,,13
+,,,,,,,,,,,,14
+,,,,,,,,,,,,15
+,,,,,,,,,,,,88
+,,,,,,,,,,,,16
+,,,,,,,,,,,,17
+,,,,,,,,,,,,18
+,,,,,,,,,,,,19
+,,,,,,,,,,,,20
+,,,,,,,,,,,,21
+,,,,,,,,,,,,22
