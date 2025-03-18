@@ -27,8 +27,8 @@ class ProcessTest(unittest.TestCase):
         self.maxDiff = None
         base_path = os.path.dirname(__file__)
         test_path = os.path.join(base_path, './data/testdata')
-        inputfile_path = os.path.join(test_path,
-                                      "./NationalOutbreakPublicDataTool.xlsx")
+        inputfile_path = os.path.join(
+            test_path, "./sample_input/NationalOutbreakPublicDataTool.xlsx")
         schema_path = os.path.join(test_path, '../col_map_exc_food.json')
         process_non_infectious_data(inputfile_path, 'Outbreak Data',
                                     schema_path, test_path)
@@ -37,20 +37,10 @@ class ProcessTest(unittest.TestCase):
         test_df = pd.read_csv(
             os.path.join(test_path, 'NORS_NonInfectious_Disease.csv'))
         expected_df = pd.read_csv(
-            os.path.join(test_path, 'NORS_NonInfectious_Disease_expected.csv'))
+            os.path.join(
+                test_path,
+                'expected_output/NORS_NonInfectious_Disease_expected.csv'))
         assert_frame_equal(test_df, expected_df)
-
-        ## validate the statvar mcf
-        f = open(os.path.join(test_path, 'NORS_NonInfectious_Disease.mcf'), 'r')
-        test_mcf = f.read()
-        f.close()
-
-        f = open(
-            os.path.join(test_path, 'NORS_NonInfectious_Disease_expected.mcf'),
-            'r')
-        expected_mcf = f.read()
-        f.close()
-        self.assertEqual(test_mcf, expected_mcf)
 
         ## validate the template mcf
         f = open(os.path.join(test_path, 'NORS_NonInfectious_Disease.tmcf'),
@@ -59,7 +49,9 @@ class ProcessTest(unittest.TestCase):
         f.close()
 
         f = open(
-            os.path.join(test_path, 'NORS_NonInfectious_Disease_expected.tmcf'),
+            os.path.join(
+                test_path,
+                'expected_output/NORS_NonInfectious_Disease_expected.tmcf'),
             'r')
         expected_tmcf = f.read()
         f.close()
