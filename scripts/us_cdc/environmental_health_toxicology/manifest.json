@@ -9,7 +9,9 @@
           "download_files.py CDC_PM25CensusTract",
           "parse_air_quality.py CDC_PM25CensusTract"
         ],
-        "source_files": ["input_files/*"],
+        "source_files": ["input/*.gz"],
+        "user_script_timeout": 259200,
+        "resource_limits": {"cpu": "4", "memory": "32G"},
         "import_inputs": [
           {
             "template_mcf": "PM25CensusTractPollution.tmcf",
@@ -40,7 +42,9 @@
           "download_files.py CDC_OzoneCensusTract",
           "parse_air_quality.py CDC_OzoneCensusTract"
         ],
-        "source_files": ["input_files/*"],
+        "source_files": ["input/*.gz"],
+        "user_script_timeout": 259200,
+        "resource_limits": {"cpu": "4", "memory": "32G"},
         "import_inputs": [
           {
             "template_mcf": "OzoneCensusTractPollution.tmcf",
