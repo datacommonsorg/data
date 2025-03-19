@@ -1,0 +1,17 @@
+key,property,value,property2,value2
+Rural,placeOfResidenceClassification,dcs:Rural
+Urban,placeOfResidenceClassification,dcs:Urban
+Hispanic,race,HispanicOrLatino
+White,race,White
+Black,race,BlackOrAfricanAmericanAlone
+Asian,race,Asian
+Native,race,AmericanIndianOrAlaskaNativeAlone
+Under 5 years,age,[- 5 Years]
+Less than 18,age,[- 18 Years]
+More than 21,age,[21 - Years]
+18-60 years,age,[18 60 Years]
+Married,maritalStatus,Married
+Divorced,maritalStatus,Divorced
+total persons,populationType,Person,measuredProperty,count
+Men,gender,Male
+Women,gender,Female
