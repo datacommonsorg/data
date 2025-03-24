@@ -61,7 +61,7 @@ MATURITIES = {
 CSV_URL = "https://www.federalreserve.gov/datadownload/Output.aspx?rel=H15&"\
           "series=bf17364827e38702b42a58cf8eaa3f78&lastobs=&from=&to="\
           "&filetype=csv&label=include&layout=seriescolumn&type=package"
-MIN_ROWS = 100
+MIN_ROWS = 1000
 
 
 def generate_csv():
