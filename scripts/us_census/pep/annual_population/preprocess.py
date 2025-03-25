@@ -696,11 +696,15 @@ def _process_county_coest2029(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Cleaned DataFrame
     """
     data_df = _load_data_df(file_path, "csv", header=0, encoding='ISO-8859-1')
-
+    year = os.path.basename(file_path).split('-')[1][3:7]
     cols = [
         "STATE", "COUNTY", "STNAME", "CTYNAME", "POPESTIMATE2020",
         "POPESTIMATE2021", "POPESTIMATE2022", "POPESTIMATE2023"
     ]
+    if cols[-1].split()[11:15] == year:
+        pass
+    else:
+        cols.append(f"POPESTIMATE{year}")
     data_df = data_df[cols]
     # Modifying actual city name for State: District of Columbia
     # and City Name: District of Columbia. This is havind duplicate
@@ -754,7 +758,6 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df = _process_county_coest2029(file_path)
     elif "co-est2021" in file_path:
         data_df = _load_data_df(file_path, "xlsx", header=4)
-
         data_df.columns = ["Region", "04_2020", "2020", "2021"]
         data_df = data_df.dropna(subset=["04_2020"])
         data_df["Region"] = data_df["Region"].apply(_remove_initial_dot_values)
@@ -764,8 +767,9 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df["Location"] = data_df.apply(
             lambda x: _county_to_dcid(COUNTY_MAP, x.State, x.County), axis=1)
         data_df = _unpivot_data_df(data_df, ["Location"], ["2020", "2021"])
+    elif any([x for x in future_year_file_list if x in file_path]):
+        data_df = _process_county_coest2029(file_path)
     elif "co-est" in file_path:
-
         data_df = _load_data_df(file_path, "csv", encoding='ISO-8859-1')
         data_df = clean_data_df(data_df, "csv")
         data_df = data_df.dropna(subset=[11, 12])
@@ -796,8 +800,7 @@ def _process_counties(file_path: str) -> pd.DataFrame:
         data_df["Count_Person"] = data_df["Count_Person"].str.replace(
             ",", "", regex=False)
         data_df = data_df[["Year", "Location", "Count_Person"]]
-    elif any([x for x in future_year_file_list if x in file_path]):
-        data_df = _process_county_coest2029(file_path)
+
     data_df = data_df[data_df["Location"] != "country/USA"]
     return data_df
 
@@ -1041,7 +1044,6 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
                     "SUB-EST2020_ALL.csv", "sub-est2021_all.csv"
             ] or file_name.startswith("sub-est202"):
                 data_df = _process_cities(file, is_summary_levels)
-                processed_count += 1
 
             if not data_df.empty:
                 processed_count += 1
