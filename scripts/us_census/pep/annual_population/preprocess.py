@@ -696,15 +696,12 @@ def _process_county_coest2029(file_path: str) -> pd.DataFrame:
         pd.DataFrame: Cleaned DataFrame
     """
     data_df = _load_data_df(file_path, "csv", header=0, encoding='ISO-8859-1')
-    year = os.path.basename(file_path).split('-')[1][3:7]
-    cols = [
-        "STATE", "COUNTY", "STNAME", "CTYNAME", "POPESTIMATE2020",
-        "POPESTIMATE2021", "POPESTIMATE2022", "POPESTIMATE2023"
+
+    cols = ["STATE", "COUNTY", "STNAME", "CTYNAME"]
+    popestimate_cols = [
+        col for col in data_df.columns if str(col).startswith("POPESTIMATE")
     ]
-    if cols[-1].split()[11:15] == year:
-        pass
-    else:
-        cols.append(f"POPESTIMATE{year}")
+    cols.extend(popestimate_cols)
     data_df = data_df[cols]
     # Modifying actual city name for State: District of Columbia
     # and City Name: District of Columbia. This is havind duplicate
