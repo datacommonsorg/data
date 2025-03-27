@@ -459,14 +459,14 @@ class ImportExecutor:
             import_name = import_spec['import_name']
             mount_path = os.path.join(self.config.gcs_volume_mount_dir,
                                       import_name)
-            out_path = os.path.join(absolute_import_dir, 'output')
+            out_path = os.path.join(absolute_import_dir, 'gcs_output')
             logging.info(f'Mount path: {mount_path}, Out path: {out_path}')
             if os.path.exists(mount_path):
                 shutil.rmtree(mount_path)
             if os.path.lexists(out_path):
                 os.unlink(out_path)
             os.makedirs(mount_path, exist_ok=True)
-            os.symlink(mount_path, out_path, True)
+            os.symlink(mount_path, out_path, target_is_directory=True)
             simple_job = cloud_run_simple_import.get_simple_import_job_id(
                 import_spec, script_path)
             if simple_job:

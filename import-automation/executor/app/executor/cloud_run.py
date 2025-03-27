@@ -60,10 +60,10 @@ def create_or_update_cloud_run_job(project_id: str, location: str, job_id: str,
         env.append(run_v2.EnvVar(name=var, value=value))
 
     res = run_v2.types.ResourceRequirements(limits=resources)
-    mount = run_v2.types.VolumeMount(name='datcom-import-volume',
+    mount = run_v2.types.VolumeMount(name='datcom-mount-volume',
                                      mount_path='/mnt')
-    source = run_v2.GCSVolumeSource(bucket='dc-import-volume')
-    volume = run_v2.types.Volume(name='datcom-import-volume', gcs=source)
+    source = run_v2.GCSVolumeSource(bucket='datcom-mount-volume')
+    volume = run_v2.types.Volume(name='datcom-mount-volume', gcs=source)
     container = run_v2.Container(image=image,
                                  env=env,
                                  resources=res,
