@@ -60,12 +60,21 @@ def create_or_update_cloud_run_job(project_id: str, location: str, job_id: str,
         env.append(run_v2.EnvVar(name=var, value=value))
 
     res = run_v2.types.ResourceRequirements(limits=resources)
-    container = run_v2.Container(image=image, env=env, resources=res, args=args)
+    mount = run_v2.types.VolumeMount(name='datcom-import-volume',
+                                     mount_path='/mnt')
+    source = run_v2.GCSVolumeSource(bucket='dc-import-volume')
+    volume = run_v2.types.Volume(name='datcom-import-volume', gcs=source)
+    container = run_v2.Container(image=image,
+                                 env=env,
+                                 resources=res,
+                                 args=args,
+                                 volume_mounts=[mount])
     # Labels allow filtering of automated import cloud run jobs, used in log-based metrics.
     exe_template = run_v2.ExecutionTemplate(
         labels={"datacommons_cloud_run_job_type": "auto_import_job"},
         template=run_v2.TaskTemplate(
             containers=[container],
+            volumes=[volume],
             max_retries=2,
             timeout=duration_pb2.Duration(seconds=timeout)))
     new_job = run_v2.Job(template=exe_template)
