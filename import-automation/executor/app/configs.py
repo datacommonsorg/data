@@ -107,6 +107,10 @@ class ExecutorConfig:
     requirements_filename: str = 'requirements.txt'
     # ID of the location where Cloud Scheduler is hosted.
     scheduler_location: str = 'us-central1'
+    # Name of the GCS bucket for volume mount.
+    gcs_bucket_volume_mount: str = 'datcom-volume-mount'
+    # Location of the GCS bucket volume mount.
+    gcs_volume_mount_dir: str = '/mnt'
     # Location of the local git data repo.
     local_repo_dir: str = '/data'
     # Location of the import tool jar.
