@@ -1,0 +1,101 @@
+country,counterpart_area,series,year,value,series_code
+Upper middle income,African Dev. Bank         ,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",1985-01-01,5211263.9,DT.INT.DPPG.CD
+Turkmenistan,World,"PPG, other private creditors (INT, current US$)",1999-01-01,62957732.7,DT.INT.PROP.CD
+Benin,West African Development Bank - BOAD,"PPG, multilateral (INT, current US$)",2007-01-01,2633017.7,DT.INT.MLAT.CD
+Lebanon,Denmark,"PPG, official creditors (INT, current US$)",2018-01-01,396901.6,DT.INT.OFFT.CD
+Middle East & North Africa (excluding high income),United Kingdom,"Interest payments on external debt, long-term (INT, current US$)",2020-01-01,132286765.0,DT.INT.DLXF.CD
+India,Italy,"PPG, private creditors (INT, current US$)",1973-01-01,4992047.0,DT.INT.PRVT.CD
+St. Lucia,Caribbean Dev. Bank,"PPG, multilateral concessional (INT, current US$)",1993-01-01,261306.2,DT.INT.MLTC.CD
+Cameroon,World Bank-IDA                         ,"PPG, IDA (INT, current US$)",1988-01-01,1755619.5,DT.INT.MIDA.CD
+Ethiopia,Libya,"Interest payments on external debt, long-term (INT, current US$)",1980-01-01,459000.0,DT.INT.DLXF.CD
+Togo,Saudi Arabia,"PPG, bilateral (INT, current US$)",2027-01-01,277866.6,DT.INT.BLAT.CD
+Viet Nam,World,"PPG, official creditors (INT, current US$)",2023-01-01,987126945.4,DT.INT.OFFT.CD
+Togo,Netherlands,"Interest payments on external debt, long-term (INT, current US$)",1981-01-01,848827.3,DT.INT.DLXF.CD
+Togo,OPEC Fund for International Dev.,"PPG, official creditors (INT, current US$)",1982-01-01,18000.0,DT.INT.OFFT.CD
+Latin America & Caribbean (excluding high income),Italy,"PPG, private creditors (INT, current US$)",1989-01-01,54545438.6,DT.INT.PRVT.CD
+Latin America & Caribbean (excluding high income),Mexico,"PPG, bilateral (INT, current US$)",1997-01-01,14648000.0,DT.INT.BLAT.CD
+Middle income,Bahamas,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",2016-01-01,5011000.0,DT.INT.DPPG.CD
+Cote d'Ivoire,Belgium,"PPG, private creditors (INT, current US$)",1982-01-01,7069783.3,DT.INT.PRVT.CD
+Tanzania,Bulgaria,"Interest payments on external debt, long-term (INT, current US$)",1977-01-01,433697.0,DT.INT.DLXF.CD
+Togo,World,"PPG, IDA (INT, current US$)",1972-01-01,33000.0,DT.INT.MIDA.CD
+Low & middle income,Qatar,"Interest payments on external debt, long-term (INT, current US$)",2009-01-01,0.0,DT.INT.DLXF.CD
+Niger,United Kingdom,"PPG, bilateral (INT, current US$)",1998-01-01,125887.3,DT.INT.BLAT.CD
+Cambodia,Russian Federation,"Interest payments on external debt, long-term (INT, current US$)",2021-01-01,0.0,DT.INT.DLXF.CD
+IDA total,Netherlands,"PPG, bilateral (INT, current US$)",2018-01-01,3935940.6,DT.INT.BLAT.CD
+Iraq,Spain,"PPG, bilateral (INT, current US$)",2021-01-01,537000.0,DT.INT.BLAT.CD
+Low income,Norway,"PPG, official creditors (INT, current US$)",2005-01-01,217540.8,DT.INT.OFFT.CD
+Sudan,Kuwait,"Interest payments on external debt, long-term (INT, current US$)",2010-01-01,3786196.2,DT.INT.DLXF.CD
+East Asia & Pacific (excluding high income),Hungary,"PPG, private creditors (INT, current US$)",2007-01-01,28000.0,DT.INT.PRVT.CD
+Colombia,Japan,"PPG, commercial banks (INT, current US$)",1994-01-01,1460036.1,DT.INT.PCBK.CD
+Morocco,Kuwait,"PPG, official creditors (INT, current US$)",1989-01-01,24525170.5,DT.INT.OFFT.CD
+Eritrea,World,"Interest payments on external debt, long-term (INT, current US$)",2011-01-01,7948918.1,DT.INT.DLXF.CD
+Ghana,Spain,"Interest payments on external debt, long-term (INT, current US$)",2000-01-01,1132000.0,DT.INT.DLXF.CD
+Bosnia and Herzegovina,United States,"PPG, bilateral (INT, current US$)",2023-01-01,47000.0,DT.INT.BLAT.CD
+Lower middle income,Canada,"PPG, private creditors (INT, current US$)",2004-01-01,421309.9,DT.INT.PRVT.CD
+Brazil,Luxembourg,"PPG, private creditors (INT, current US$)",1970-01-01,2513257.0,DT.INT.PRVT.CD
+Djibouti,European Investment Bank,"PPG, multilateral (INT, current US$)",2006-01-01,20090.4,DT.INT.MLAT.CD
+Least developed countries: UN classification,Other Multiple Lenders,"PNG, commercial banks and other creditors (INT, current US$)",2026-01-01,2026634856.8,DT.INT.PNGC.CD
+Argentina,Spain,"PPG, bilateral concessional (INT, current US$)",2024-01-01,136000.0,DT.INT.BLTC.CD
+Sub-Saharan Africa (excluding high income),Belgium,"PPG, other private creditors (INT, current US$)",2019-01-01,323000.0,DT.INT.PROP.CD
+Sri Lanka,Kuwait,"PPG, official creditors (INT, current US$)",1993-01-01,633105.7,DT.INT.OFFT.CD
+Middle income,Sri Lanka,"PPG, private creditors (INT, current US$)",2013-01-01,23127.0,DT.INT.PRVT.CD
+Low & middle income,"Venezuela, Republic Bolivarian","PPG, other private creditors (INT, current US$)",1986-01-01,40460.3,DT.INT.PROP.CD
+Colombia,Nordic Development Fund,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",2005-01-01,112000.0,DT.INT.DPPG.CD
+Lesotho,France,"PPG, private creditors (INT, current US$)",2029-01-01,35197.8,DT.INT.PRVT.CD
+East Asia & Pacific (excluding high income),Spain,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",2019-01-01,5335803.8,DT.INT.DPPG.CD
+Kyrgyz Republic,Islamic Dev. Bank,"Interest payments on external debt, long-term (INT, current US$)",2012-01-01,243517.3,DT.INT.DLXF.CD
+Paraguay,OPEC Fund for International Dev.,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",2007-01-01,38000.0,DT.INT.DPPG.CD
+IDA only,Belarus,"PPG, official creditors (INT, current US$)",2019-01-01,425000.0,DT.INT.OFFT.CD
+Guatemala,World,"PPG, multilateral concessional (INT, current US$)",2005-01-01,6875000.0,DT.INT.MLTC.CD
+Iraq,Czechia,"PPG, bilateral (INT, current US$)",2027-01-01,280000.0,DT.INT.BLAT.CD
+Jordan,China,"Interest payments on external debt, long-term (INT, current US$)",2028-01-01,32923.0,DT.INT.DLXF.CD
+IDA total,Belgium,"PPG, bilateral concessional (INT, current US$)",1970-01-01,10000.0,DT.INT.BLTC.CD
+Lower middle income,Canada,"PPG, official creditors (INT, current US$)",1977-01-01,19220339.3,DT.INT.OFFT.CD
+Maldives,Other Multiple Lenders,"Interest payments on external debt, long-term (INT, current US$)",2019-01-01,3258000.0,DT.INT.DLXF.CD
+Mauritania,Italy,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",1995-01-01,26000.0,DT.INT.DPPG.CD
+Mexico,World,"PPG, bonds (INT, current US$)",1990-01-01,1111670373.5,DT.INT.PBND.CD
+"Congo, Dem. Rep.",United States,"PPG, bilateral concessional (INT, current US$)",1981-01-01,2214.2,DT.INT.BLTC.CD
+IDA only,European Development Fund (EDF),"Interest payments on external debt, long-term (INT, current US$)",1986-01-01,2599646.6,DT.INT.DLXF.CD
+Turkiye,Czechia,"PPG, private creditors (INT, current US$)",2003-01-01,11061000.0,DT.INT.PRVT.CD
+Low income,United States,"PPG, private creditors (INT, current US$)",2028-01-01,15008251.0,DT.INT.PRVT.CD
+"Congo, Rep.",World,"PPG, bilateral (INT, current US$)",1976-01-01,2282648.7,DT.INT.BLAT.CD
+South Africa,Bondholders,"PNG, bonds (INT, current US$)",2025-01-01,142470000.0,DT.INT.PNGB.CD
+Madagascar,Saudi Arabia,"PPG, bilateral (INT, current US$)",2004-01-01,26666.7,DT.INT.BLAT.CD
+Brazil,World,"PPG, IBRD (INT, current US$)",2020-01-01,359961000.0,DT.INT.MIBR.CD
+Costa Rica,World Bank-IBRD                         ,"PPG, multilateral (INT, current US$)",1998-01-01,12063000.0,DT.INT.MLAT.CD
+Indonesia,World,"PPG, private creditors (INT, current US$)",2022-01-01,7718610440.4,DT.INT.PRVT.CD
+Nepal,European Economic Community (EEC),"PPG, multilateral concessional (INT, current US$)",2011-01-01,31704.2,DT.INT.MLTC.CD
+Grenada,International Fund for Agricultural Dev.,"Interest payments on external debt, long-term (INT, current US$)",2016-01-01,6950.3,DT.INT.DLXF.CD
+Low income,Portugal,"Interest payments on external debt, long-term (INT, current US$)",1989-01-01,3493711.1,DT.INT.DLXF.CD
+"Yemen, Rep.",OPEC Fund for International Dev.,"Interest payments on external debt, long-term (INT, current US$)",2012-01-01,633000.0,DT.INT.DLXF.CD
+Lesotho,European Economic Community (EEC),"Interest payments on external debt, long-term (INT, current US$)",1996-01-01,14000.0,DT.INT.DLXF.CD
+Senegal,West African Development Bank - BOAD,"PPG, multilateral (INT, current US$)",1989-01-01,3176695.6,DT.INT.MLAT.CD
+Bulgaria,World,"PPG, commercial banks (INT, current US$)",1992-01-01,52816432.8,DT.INT.PCBK.CD
+Least developed countries: UN classification,World,"PPG, other private creditors (INT, current US$)",1998-01-01,64355033.9,DT.INT.PROP.CD
+India,Italy,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",2011-01-01,51000.0,DT.INT.DPPG.CD
+Senegal,Kuwait,"Interest payments on external debt, long-term (INT, current US$)",2004-01-01,2124198.6,DT.INT.DLXF.CD
+"Egypt, Arab Rep.",Norway,"PPG, bilateral (INT, current US$)",2014-01-01,254452.8,DT.INT.BLAT.CD
+Mauritania,United Arab Emirates,"PPG, official creditors (INT, current US$)",2026-01-01,907519.4,DT.INT.OFFT.CD
+Moldova,Austria,"PPG, private creditors (INT, current US$)",2026-01-01,20265.4,DT.INT.PRVT.CD
+South Africa,United States,"PPG, commercial banks (INT, current US$)",2019-01-01,125317000.0,DT.INT.PCBK.CD
+Papua New Guinea,Other Multiple Lenders,"PNG, commercial banks and other creditors (INT, current US$)",1989-01-01,86058000.0,DT.INT.PNGC.CD
+Nigeria,Canada,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",1977-01-01,56460.8,DT.INT.DPPG.CD
+IDA total,India,"PPG, bilateral (INT, current US$)",1984-01-01,4092671.1,DT.INT.BLAT.CD
+Morocco,United Kingdom,"Interest payments on external debt, long-term (INT, current US$)",2020-01-01,17122060.9,DT.INT.DLXF.CD
+India,Norway,"PPG, official creditors (INT, current US$)",2008-01-01,496159.9,DT.INT.OFFT.CD
+Lower middle income,European Development Fund (EDF),"PPG, official creditors (INT, current US$)",1992-01-01,19800622.4,DT.INT.OFFT.CD
+Algeria,Norway,"PPG, official creditors (INT, current US$)",1998-01-01,668841.8,DT.INT.OFFT.CD
+Low & middle income,Hungary,"PPG, official creditors (INT, current US$)",1978-01-01,2177547.5,DT.INT.OFFT.CD
+Low & middle income,Nigeria,"Interest payments on external debt, long-term (INT, current US$)",2002-01-01,0.0,DT.INT.DLXF.CD
+Guinea,World,"PPG, official creditors (INT, current US$)",1974-01-01,9237086.0,DT.INT.OFFT.CD
+IDA only,Norway,"PPG, commercial banks (INT, current US$)",2007-01-01,34040.5,DT.INT.PCBK.CD
+Senegal,Belgium,"Interest payments on external debt, long-term (INT, current US$)",2021-01-01,5916.3,DT.INT.DLXF.CD
+Tunisia,Italy,"PPG, other private creditors (INT, current US$)",1994-01-01,3682020.6,DT.INT.PROP.CD
+Morocco,African Dev. Bank         ,"PPG, official creditors (INT, current US$)",2026-01-01,131151991.6,DT.INT.OFFT.CD
+Latin America & Caribbean (excluding high income),Netherlands,"PPG, other private creditors (INT, current US$)",2018-01-01,5351000.0,DT.INT.PROP.CD
+IDA total,Greece,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",1986-01-01,121653.2,DT.INT.DPPG.CD
+Paraguay,France,"PPG, bilateral (INT, current US$)",2010-01-01,103497.8,DT.INT.BLAT.CD
+Middle East & North Africa (excluding high income),Saudi Arabia,"PPG, bilateral concessional (INT, current US$)",2012-01-01,654133.3,DT.INT.BLTC.CD
+Malawi,Kuwait,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",2005-01-01,705486.1,DT.INT.DPPG.CD
+Sri Lanka,United States,"Interest payments on external debt, long-term (INT, current US$)",1996-01-01,30972203.2,DT.INT.DLXF.CD
+Middle income,Brunei,"Interest payments on external debt, public and publicly guaranteed (PPG) (INT, current US$)",2008-01-01,0.0,DT.INT.DPPG.CD
