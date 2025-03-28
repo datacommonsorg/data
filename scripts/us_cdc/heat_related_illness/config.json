@@ -9,7 +9,7 @@
             "statType": "measuredValue",
             "typeOf": "StatisticalVariable"
         },
-        "edVisits_age.csv": {
+        "edVisit_age.csv": {
             "populationType": "MedicalConditionIncident",
             "medicalStatus": "VisitedEmergencyDepartment",
             "medicalCondition": "HeatStress",
@@ -18,7 +18,7 @@
             "statType": "measuredValue",
             "typeOf": "StatisticalVariable"
         },
-        "edVisits_gender.csv": {
+        "edVists_gender.csv": {
             "populationType": "MedicalConditionIncident",
             "medicalStatus": "VisitedEmergencyDepartment",
             "medicalCondition": "HeatStress",
@@ -27,7 +27,7 @@
             "statType": "measuredValue",
             "typeOf": "StatisticalVariable"
         },
-        "edVisits_age_gender.csv": {
+        "edVsits_age_gender.csv": {
             "populationType": "MedicalConditionIncident",
             "medicalStatus": "VisitedEmergencyDepartment",
             "medicalCondition": "HeatStress",
@@ -45,7 +45,7 @@
             "statType": "measuredValue",
             "typeOf": "StatisticalVariable"           
         },
-        "hospitalizations_age.csv": {
+        "hospitalization_age.csv": {
             "populationType": "MedicalConditionIncident",
             "medicalStatus": "PatientHospitalized",
             "medicalCondition": "HeatStress",
@@ -54,7 +54,7 @@
             "statType": "measuredValue",
             "typeOf": "StatisticalVariable"           
         },
-        "hospitalizations_gender.csv": {
+        "hospitalizatin_gender.csv": {
             "populationType": "MedicalConditionIncident",
             "medicalStatus": "PatientHospitalized",
             "medicalCondition": "HeatStress",
@@ -63,7 +63,7 @@
             "statType": "measuredValue",
             "typeOf": "StatisticalVariable"           
         },
-        "hospitalizations_age_gender.csv": {
+        "hospitlizations_age_gender.csv": {
             "populationType": "MedicalConditionIncident",
             "medicalStatus": "PatientHospitalized",
             "medicalCondition": "HeatStress",
