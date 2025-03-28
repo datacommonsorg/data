@@ -67,10 +67,15 @@ _USDA_API_KEY = 'usda_api_key'
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_string('start_year', '2024', 'start_year')
-flags.DEFINE_string(_USDA_API_KEY, "BC32BF1C-2FD0-324A-907B-DA467A0491F1", 'USDA quickstats API key.')
-flags.DEFINE_string('downloadfilepath', 'gs://datcom-prod-imports/scripts/us_usda/quickstats/persistent_download', 'fixed download path')
+flags.DEFINE_string(_USDA_API_KEY, "BC32BF1C-2FD0-324A-907B-DA467A0491F1",
+                    'USDA quickstats API key.')
+flags.DEFINE_string(
+    'downloadfilepath',
+    'gs://datcom-prod-imports/scripts/us_usda/quickstats/persistent_download',
+    'fixed download path')
 MODULE_DIR = os.path.dirname(__file__)
 destination_path = f"{MODULE_DIR}/historical_data"
+
 
 def process_survey_data(year, svs, input_dir, out_dir):
     process_success = False
@@ -99,7 +104,8 @@ def process_survey_data(year, svs, input_dir, out_dir):
             logging.info(f'# counties =, {len(county_names)}')
 
             # pool_size = 2 #max(2, multiprocessing.cpu_count() - 1)
-            county_lst = list(zip(county_names, repeat(year), repeat(svs), repeat(input_dir)))
+            county_lst = list(
+                zip(county_names, repeat(year), repeat(svs), repeat(input_dir)))
             for cl in county_lst:
                 fetch_and_write(cl[0], cl[1], cl[2], cl[3])
                 time.sleep(5)
@@ -113,20 +119,26 @@ def process_survey_data(year, svs, input_dir, out_dir):
                     process_success = True
                     break
                 except Exception as e:
-                    logging.info("processing failed %s : %s",(attempt+1),e)
-                    if attempt < max_retries-1:
-                        logging.info("retrying in %s",retry_delay)
+                    logging.info("processing failed %s : %s", (attempt + 1), e)
+                    if attempt < max_retries - 1:
+                        logging.info("retrying in %s", retry_delay)
                     else:
-                        logging.fatal("Max retries reached : Problem while processing the input data")
+                        logging.fatal(
+                            "Max retries reached : Problem while processing the input data"
+                        )
         if process_success:
             parts_list_pattern = f"{_FLAGS.downloadfilepath}/parts/{year}/*.csv"
             response_list_pattern = f"{_FLAGS.downloadfilepath}/response/{year}/*.json"
-            parts_list_files = fileutil.file_get_matching([parts_list_pattern,response_list_pattern])
+            parts_list_files = fileutil.file_get_matching(
+                [parts_list_pattern, response_list_pattern])
             for file in parts_list_files:
-                destination_file_path = os.path.join(destination_path,os.path.basename(file))
-                fileutil.file_copy(file,destination_file_path)
-            folder_prefix = re.search(r"gs://[^/]+/(([^/]+/)?.*)",_FLAGS.downloadfilepath).group(1)    
-            fileutil.delete_file_from_gcs(_FLAGS.downloadfilepath,folder_prefix)
+                destination_file_path = os.path.join(destination_path,
+                                                     os.path.basename(file))
+                fileutil.file_copy(file, destination_file_path)
+            folder_prefix = re.search(r"gs://[^/]+/(([^/]+/)?.*)",
+                                      _FLAGS.downloadfilepath).group(1)
+            fileutil.delete_file_from_gcs(_FLAGS.downloadfilepath,
+                                          folder_prefix)
 
         end = datetime.datetime.now()
         logging.info(f'End, {year}, =, {end}')
@@ -172,7 +184,9 @@ def write_aggregate_csv(year, input_dir, out_dir):
     logging.info(f'Writing aggregate CSV, {out_file}')
 
     with open(out_file, 'w', newline='') as out:
-        csv_writer = csv.DictWriter(out, fieldnames=CSV_COLUMNS, lineterminator='\n')
+        csv_writer = csv.DictWriter(out,
+                                    fieldnames=CSV_COLUMNS,
+                                    lineterminator='\n')
         csv_writer.writeheader()
         for part_file in part_files:
             if part_file.endswith(".csv"):
@@ -201,7 +215,8 @@ def fetch_and_write(county_name, year, svs, input_dir):
         county_csv_rows = to_csv_rows(api_data, svs)
         # if county_csv_rows:
         logging.info(
-            f"Writing {len(county_csv_rows)} rows for county {county_name} to file {out_file}")
+            f"Writing {len(county_csv_rows)} rows for county {county_name} to file {out_file}"
+        )
         with open(out_file, 'w', newline='') as out:
             write_csv(out, county_csv_rows)
         # else:
@@ -209,7 +224,8 @@ def fetch_and_write(county_name, year, svs, input_dir):
         # logging.info(
         #     f"Writing {len(county_csv_rows)} rows for county {county_name} to file {out_file}")
     except Exception as e:
-        logging.fatal(f"Error processing data for county: {county_name}. Error: {e}")
+        logging.fatal(
+            f"Error processing data for county: {county_name}. Error: {e}")
 
 
 def get_survey_county_data(year, county, input_dir):
@@ -237,7 +253,9 @@ def get_survey_county_data(year, county, input_dir):
             else:
                 logging.error(f"Response file not found: {response_file}")
         except Exception as e:
-            logging.error(f"Error while reading response file: {response_file}. Error: {e}")
+            logging.error(
+                f"Error while reading response file: {response_file}. Error: {e}"
+            )
 
     if _FLAGS.mode == "" or _FLAGS.mode == "download":
 
@@ -284,8 +302,11 @@ def is_rate_limited():
     return False
 
 
-@retry(tries=3, delay=2, backoff=2,
-       exceptions=requests.exceptions.RequestException)  # Retry only for request exceptions
+@retry(tries=3,
+       delay=2,
+       backoff=2,
+       exceptions=requests.exceptions.RequestException
+      )  # Retry only for request exceptions
 def get_data(params):
     """
     Download data from the API with retry, rate limiting, and status code handling.
@@ -335,7 +356,8 @@ def get_param_values(param):
     """
     params = {'key': get_usda_api_key(), 'param': param}
     try:
-        response = requests.get(f'{API_BASE}/get_param_values', params=params).json()
+        response = requests.get(f'{API_BASE}/get_param_values',
+                                params=params).json()
         return [] if param not in response else response[param]
 
     except Exception as e:
@@ -354,11 +376,12 @@ returns = {variableMeasured: ..., observationAbout: ..., value: ..., unit: ...}
 
 def to_csv_row(data_row, svs):
     name = data_row['short_desc']
-    if data_row['domaincat_desc'] and data_row['domaincat_desc'] != 'NOT SPECIFIED':
+    if data_row['domaincat_desc'] and data_row[
+            'domaincat_desc'] != 'NOT SPECIFIED':
         name = f"{name}%%{data_row['domaincat_desc']}"
 
     if name not in svs:
-        logging.info(f'SKIPPED, No SV mapped for {name}' )       
+        logging.info(f'SKIPPED, No SV mapped for {name}')
         return None
 
     county_code = data_row['county_code']
@@ -366,8 +389,8 @@ def to_csv_row(data_row, svs):
         logging.info(f"SKIPPED, Unsupported county code {county_code}")
         return None
 
-    value = (data_row['value'] if 'value' in data_row else data_row['Value']).strip().replace(
-        ',', '')
+    value = (data_row['value'] if 'value' in data_row else
+             data_row['Value']).strip().replace(',', '')
     if value in SKIPPED_VALUES:
         logging.info(f'SKIPPED, Invalid value {value} for name')
         return None

@@ -986,7 +986,7 @@ def _add_to_list(comma_string: str, items_list: list) -> list:
     return items_list
 
 
-def delete_file_from_gcs(file_path,folder_prefix):
+def delete_file_from_gcs(file_path, folder_prefix):
     try:
         bucket = file_get_gcs_bucket(file_path)
         blobs = list(bucket.list_blobs(prefix=folder_prefix))
@@ -994,7 +994,7 @@ def delete_file_from_gcs(file_path,folder_prefix):
             blob.delete()
     except Exception as e:
         logging.info(f"could not delete folder {e}")
-    
+
 
 def main(_):
     if len(sys.argv) <= 1:
