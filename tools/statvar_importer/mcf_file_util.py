@@ -621,8 +621,9 @@ def get_value_list(value: str) -> list:
         return value
     value_list = []
     # Read the string as a comma separated line.
+    is_quoted = '"' in value
     try:
-        if '"' in value:
+        if is_quoted and "," in value:
             # Read the string as a quoted comma separated line.
             row = list(
                 csv.reader([value],
@@ -634,7 +635,7 @@ def get_value_list(value: str) -> list:
             # Avoiding csv reader calls for performance.
             row = value.split(',')
         for v in row:
-            val_normalized = get_quoted_value(v)
+            val_normalized = get_quoted_value(v, is_quoted=is_quoted)
             value_list.append(val_normalized)
     except csv.Error:
         logging.error(

@@ -203,13 +203,13 @@ class TestAddPVToNode(unittest.TestCase):
                                      normalize=False)
         self.assertEqual(node, {"prop1": "value1"})
 
-    def test_add_pv_to_node_strip_namespaces(self):
+    def test_add_pv_to_node_normalize_strip_namespaces(self):
         node = {}
         mcf_file_util.add_pv_to_node("prop1",
                                      "dcid:value1",
                                      node,
                                      strip_namespaces=True,
-                                     normalize=False)
+                                     normalize=True)
         self.assertEqual(node, {"prop1": "value1"})
 
     def test_add_pv_to_node_spaces_not_stripped(self):
@@ -256,7 +256,7 @@ class TestAddPVToNode(unittest.TestCase):
         mcf_file_util.add_pv_to_node("prop1", ["value1", "value2"],
                                      node,
                                      normalize=True)
-        self.assertEqual(node, {"prop1": "value1,value2"})
+        self.assertEqual(node, {"prop1": "dcid:value1,dcid:value2"})
 
     def test_add_pv_to_node_existing_list_values(self):
         node = {"prop1": "value1,value2"}
