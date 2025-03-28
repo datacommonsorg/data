@@ -115,6 +115,8 @@ class ExecutorConfig:
     local_repo_dir: str = '/data'
     # Location of the import tool jar.
     import_tool_path: str = '/data/import-automation/executor/import-tool.jar'
+    # Location of the differ tool jar.
+    differ_tool_path: str = '/data/import-automation/executor/differ-tool.jar'
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 3600
     # Arguments for the user script
@@ -122,7 +124,7 @@ class ExecutorConfig:
     # Environment variables for the user script
     user_script_env: dict = None
     # Invoke validations before upload.
-    invoke_import_validation: bool = False
+    invoke_import_validation: bool = True
     # Ignore validation status during import.
     ignore_validation_status: bool = True
     # Import validation config file path (relative to data repo).

@@ -11,6 +11,7 @@ db-dtypes
 frozendict
 func-timeout
 geojson
+google-api-python-client
 google-auth
 google-cloud-bigquery
 google-cloud-datastore
