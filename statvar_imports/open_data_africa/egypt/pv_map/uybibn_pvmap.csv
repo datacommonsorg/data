@@ -1,0 +1,114 @@
+key,prop,val,p1,v1,Name1,"""""",Name2,"""""",#End,#value
+TIME_PERIOD,observationDate,{Number},,,,,,,,
+OBS_VALUE,value,{Number},name,"""{Name1} {Name2}""",,,,,,
+ID_LOCATION,observationAbout,{Data},,,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,
+KN.E2,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,MethodicalSchool__UnmethodicalSchool,Name1,,Name1,Total Methodical Unmethodical and  Schools
+KN.E3,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,MethodicalSchool,,,Name1,Total Methodical Schools
+KN.E4,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,UnmethodicalSchool,,,Name1,Total Unmethodical Schools
+KN.E5,#ignore,ignore,,,,,,,,
+KN.E6,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,MethodicalSchool__UnmethodicalSchool,,,Name1,Total  Methodical  and UnMethodical Students
+KN.E7,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,MethodicalSchool,,,Name1,Total Methodical Students
+KN.E8,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,UnmethodicalSchool,,,Name1,Total Unmethodical Students
+KN.E9,#ignore,ignore,,,,,,,,
+KN.E10,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,MethodicalSchool__UnmethodicalSchool,educationalAttainment,Graduate,Name1,Total Graduates Methodical and UnMethodical Graduates
+KN.E11,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,MethodicalSchool,educationalAttainment,Graduate,Name1,Total Methodical Graduates
+KN.E12,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,UnmethodicalSchool,educationalAttainment,Graduate,Name1,Total Unmethodical Graduates
+KN.E13,#ignore,ignore,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,
+KN.E16,populationType,School,schoolType,VocationalTrainingCenters,,,,,Name1,Number of Schools by Specialization
+KN.E17,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,StatisticalTraining,,,Name1,Educational Institutions with Statistical Specializations
+KN.E18,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,TechnicalTraining,,,Name1,Technical Training Programs Organized by Specialization
+KN.E19,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Construction,,,Name1,Schools Offering Specialized Construction Training
+KN.E20,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,AgriculturalGuidance,,,Name1,Agricultural Skills Training by Area of Specialization
+KN.E21,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Transport,,,Name1,Specialized Transport and Communication Training
+KN.E22,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Post,,,Name1,Schools Offering Specialized Postal Training
+KN.E23,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Electricity,,,Name1,Schools Offering Specialized Training in Electrical and Mechanical Fields
+KN.E24,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,ScientificEquipments,,,Name1,Schools Offering Specialized Training in Scientific Equipment
+KN.E25,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Nursing,,,Name1,Nursing Skills Training by Area of Specialization
+KN.E26,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,FilingMetal,,,Name1,Schools Offering Specialized Metal Filing Training
+KN.E27,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Spinning,,,Name1,Specialized Spinning and Weaving Training
+KN.E28,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Print,,,Name1,Institutions Providing Training in Specific Printing Fields
+KN.E29,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Veterinary,,,Name1,Institutions Providing Training in Specific Veterinary Fields
+KN.E30,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Chemical,,,Name1,Chemical Skills Training by Area of Specialization
+KN.E31,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,TechnicalHygiene,,,Name1,Technical Hygiene Skills Training by Area of Specialization
+KN.E32,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Banks,,,Name1,Institutions Providing Training in Specific Banking Fields
+KN.E33,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,CarDriving,,,Name1,Institutions Providing Training in Specific Driving Fields
+KN.E34,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Carving,,,Name1,Carving Skills Training by Area of Specialization
+KN.E35,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Information,,,Name1,Information Skills Training by Area of Specialization
+KN.E36,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Meteorological,,,Name1,Meteorological Skills Training by Area of Specialization
+KN.E37,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Petroleum,,,Name1,Schools Offering Specialized Petroleum Training
+KN.E38,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Trade,,,Name1,Institutions Providing Training in Specific Trade Fields
+KN.E39,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Tax,,,Name1,Tax Skills Training by Area of Specialization
+KN.E40,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Insurance,,,Name1,Insurance Skills Training by Area of Specialization
+KN.E41,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,LanguageEducation,,,Name1,Schools Offering Specialized Language Education Training
+KN.E42,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Flight,,,Name1,Schools Offering Specialized Flight Training
+KN.E43,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,FoodProduction,,,Name1,Schools Offering Specialized Food Production Training
+KN.E44,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Illiteracy,,,Name1,Schools Offering Specialized Literacy Programs
+KN.E45,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,GardenCultivation,,,Name1,Schools Offering Specialized Garden Cultivation Training
+,,,,,,,,,,
+KN.E47,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Health,,,Name1,Specialized Health Training Programs
+KN.E48,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,IndustryAndPetroleum,,,Name1,Specialized Petroleum Training Programs
+KN.E49,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,TransportationAndCommunication,,,Name1,Specialized Training in Transportation and Communication
+KN.E50,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Electricity,,,Name1,Specialized Electrical Training Programs
+KN.E51,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,CultureAndInformation,,,Name1,Specialized Training in Culture and Information
+KN.E52,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Tourism,,,Name1,Schools with Specialized Tourism Training
+KN.E53,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Population,,,Name1,Comprehensive Training in Population Studies
+KN.E54,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Agriculture,,,Name1,agriculture Schools by Subordination
+KN.E55,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Economy,,,Name1,economy Schools by Subordination
+KN.E56,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,Insurance,,,Name1,insurance Schools by Subordination
+KN.E62,populationType,School,schoolType,VocationalTrainingCenters,schoolSpecialization,FinanceAndDevelopmentMinistries,,,Name1,FinanceDevolopment Ministries Schools by Subordination
+KN.E66,populationType,Student,schoolType,VocationalTrainingCenters,,,,,Name1,Total Students by Specialization
+KN.E67,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,StatisticalTraining,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Statistical Training by Specialization
+KN.E68,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,TechnicalTraining,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students in Technical Training by Specialization
+KN.E69,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Construction,enrollmentStatus,EnrolledInEducationOrTraining,Name1,construction Students by Specialization
+KN.E70,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,AgriculturalGuidance,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Electrical and Mechanical Training by Specialization
+KN.E71,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,ElectricityAndMechanic,enrollmentStatus,EnrolledInEducationOrTraining,Name1,electricity and mechanic Students by Specialization
+KN.E72,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,ScientificEquipments,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Scientific Equipment Training by Specialization
+KN.E73,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,TransportAndCommunicate,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Transportation and Communication Training by Specialization
+KN.E74,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Post,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Postal Training by Specialization
+KN.E75,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Nursing,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Nursing by Specialization
+KN.E76,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,FilingMetal,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Metal Filing Training by Specialization
+KN.E77,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,SpinningAndWeaving,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Spinning and Weaving Training by Specialization
+KN.E78,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Hotels,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Hotel Management Education with Student Specializations
+KN.E79,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Print,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Student Specializations in Printing
+KN.E80,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,CarDriving,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Driving by Specialization
+KN.E81,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Veterinary,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Student Specializations in Veterinary Medicine
+KN.E82,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Chemical,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Chemistry by Specialization
+KN.E83,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,TechnicalHygiene,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Technical Hygiene by Specialization
+KN.E84,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Banks,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Banking by Specialization
+KN.E85,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Carving,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Carving by Specialization
+KN.E86,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Information,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Information Students by Specialization
+KN.E87,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Meteorological,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Students of Meteorology by Specialization
+KN.E88,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Petroleum,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Student Specializations in Petroleum Engineering/Studies
+KN.E89,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Trade,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Student Specializations in Trade Skills
+KN.E90,populationType,Student,schoolType,VocationalTrainingCenters,schoolSpecialization,Tax,enrollmentStatus,EnrolledInEducationOrTraining,Name1,Student Specializations in Taxation
+,,,,,,,,,,
+KN.E134,populationType,Person,educationalAttainment,Graduate,schoolType,VocationalTrainingCenters,,,Name1,Total Graduates by Specialization
+KN.E135,populationType,Person,educationalAttainment,Graduate,schoolType,VocationalTrainingCenters,schoolSpecialization,StatisticalTraining,Name1,Statistical Training Graduates by Specialization
+KN.E136,populationType,Person,educationalAttainment,Graduate,schoolType,VocationalTrainingCenters,schoolSpecialization,TechnicalTraining,Name1,Graduates of Technical Training by Specialization
+KN.E137,populationType,Person,educationalAttainment,Graduate,schoolType,VocationalTrainingCenters,schoolSpecialization,Construction,Name1,Graduates of Construction Programs by Specialization
+KN.E138,populationType,Person,educationalAttainment,Graduate,schoolType,VocationalTrainingCenters,schoolSpecialization,AgriculturalGuidance,Name1,Agricultural Guidance Graduates by Specialization
+KN.E139,populationType,Person,educationalAttainment,Graduate,schoolType,VocationalTrainingCenters,schoolSpecialization,ElectricityAndMechanic,Name1,Electrical and Mechanical Graduates by Specialization
+KN.E140,populationType,Person,educationalAttainment,Graduate,schoolType,VocationalTrainingCenters,schoolSpecialization,ScientificEquipments,Name1,Scientific Equipment Graduates by Specialization
+KN.E141,populationType,Person,educationalAttainment,Graduate,schoolType,VocationalTrainingCenters,schoolSpecialization,TransportAndCommunicate,Name1,Transportation and Communication Graduates by Specialization
+KN.E186,populationType,Teacher,schoolType,VocationalTrainingCenters,,,,,Name1,Total Teachers by Specialization
+KN.E187,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,StatisticalTraining,,,Name1,Statistical Training Teachers by Specialization
+KN.E188,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,TechnicalTraining,,,Name1,Technical Training Teachers by Specialization
+KN.E189,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,Construction,,,Name1,Construction Teachers by Specialization
+KN.E190,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,AgriculturalGuidance,,,Name1,Agricultural Guidance Teachers by Specialization
+KN.E191,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,TransportAndCommunicate,,,Name1,Transportation and Communication Teachers by Specialization
+KN.E192,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,Post,,,Name1,"Teachers of Postal Services by Specialization"""
+KN.E193,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,ElectricityAndMechanic,,,Name1,electricitymechanic Teatchers by Specialization
+KN.E194,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,ScientificEquipments,,,Name1,Scientific Equipment Teachers by Specialization
+KN.E195,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,Nursing,,,Name1,Nursing Teachers by Specialization
+KN.E196,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,FilingMetal,,,Name1,Metal Filing Teachers by Specialization
+KN.E197,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,SpinningAndWeaving,,,Name1,Spinning and Weaving Teachers by Specialization
+KN.E198,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,Print,,,Name1,Teachers of Printing by Specialization
+KN.E199,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,Veterinary,,,Name1,Veterinary Teachers by Specialization
+KN.E200,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,Chemical,,,Name1,Chemistry Teachers by Specialization
+KN.E201,populationType,Teacher,schoolType,VocationalTrainingCenters,schoolSpecialization,Banks,,,Name1,Banking Teachers by Specialization
+KN.S1,gender,Male,,,,,,,Name2,Male
+KN.S2,gender,Female,,,,,,,Name2,Female
+KN.S3,,,,,,,,,Name2,""""""
