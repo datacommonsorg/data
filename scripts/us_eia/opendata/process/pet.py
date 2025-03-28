@@ -40,6 +40,7 @@ def extract_place_statvar(series_id, counters):
     # Pattern #1: PET.K{MEASURE1}[SN]{PLACE}{MEASURE2}.{PERIOD}
     m = re.match(r"^(PET\.K[^_]+)([NS][A-Z][A-Z])([0-9]\.[A-Z])$", series_id)
     if m:
+        counters.add_counter('info_pet_record_count', 1)
         return _parse_with_place_prefix(m)
 
     # Pattern #2: PET.{MEASURE1}[SN]{PLACE}_{MEASURE2}.{PERIOD}
