@@ -2,7 +2,7 @@
 steps:
 
 - id: python_install
-  name: python:3.11
+  name: python:3.12.8
   entrypoint: /bin/sh
   waitFor: ['-']
   args:
@@ -10,27 +10,18 @@ steps:
     - |
       ./run_tests.sh -r
 
-# We can't just test everything under our Cloud Build working directory because
-# that's where python installs all of its packages also, and we don't really
-# want to test all of that other unrelated code everytime.
-#
-# The unittest module only supports one -s path at a time, so we need multiple rules
-# to get both places where we submit code.
-#
 - id: python_test
-  name: python:3.11
+  name: python:3.12.8
   entrypoint: /bin/sh
   waitFor:
   - python_install
   args:
     - -c
     - |
-      ./run_tests.sh -p util/
-      ./run_tests.sh -p import-automation/executor
-      ./run_tests.sh -p scripts/
+      ./run_tests.sh -a
 
 - id: python_format_check
-  name: python:3.11
+  name: python:3.12.8
   entrypoint: /bin/sh
   waitFor:
   - python_install

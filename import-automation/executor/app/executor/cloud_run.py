@@ -24,15 +24,13 @@ import time
 from absl import logging
 from google.api_core.exceptions import NotFound
 from google.cloud import run_v2
+from google.protobuf import duration_pb2
 
 
-def create_or_update_cloud_run_job(
-    project_id: str,
-    location: str,
-    job_id: str,
-    image: str,
-    env_vars: dict,
-) -> run_v2.Job:
+def create_or_update_cloud_run_job(project_id: str, location: str, job_id: str,
+                                   image: str, mount_bucket: str,
+                                   env_vars: dict, args: list, resources: dict,
+                                   timeout: int) -> run_v2.Job:
     """Creates a new cloud run job or updates an existing one.
 
   If the jobs exists, the container is updated with new image and environment
@@ -44,7 +42,11 @@ def create_or_update_cloud_run_job(
     location: Region for the execution, such as 'us-central1'
     job_id: Name of the job
     image: Container image URL such as 'gcr.io/your-project/your-image:latest'
+    mount_bucket: Name of GCS bucket to mount as a volume
     env_vars: dict of environment variables as {'VAR': '<value>'}
+    args: list of command line arguments
+    resources: cpu/memory resources
+    timeout: duration in seconds
 
   Returns:
     Job created as a dict.
@@ -59,17 +61,32 @@ def create_or_update_cloud_run_job(
     for var, value in env_vars.items():
         env.append(run_v2.EnvVar(name=var, value=value))
 
-    container = run_v2.Container(image=image, env=env)
-    exe_template = run_v2.ExecutionTemplate(template=run_v2.TaskTemplate(
-        containers=[container]))
+    res = run_v2.types.ResourceRequirements(limits=resources)
+    mount = run_v2.types.VolumeMount(name='datcom-mount-volume',
+                                     mount_path='/mnt')
+    source = run_v2.GCSVolumeSource(bucket=mount_bucket)
+    volume = run_v2.types.Volume(name='datcom-mount-volume', gcs=source)
+    container = run_v2.Container(image=image,
+                                 env=env,
+                                 resources=res,
+                                 args=args,
+                                 volume_mounts=[mount])
+    # Labels allow filtering of automated import cloud run jobs, used in log-based metrics.
+    exe_template = run_v2.ExecutionTemplate(
+        labels={"datacommons_cloud_run_job_type": "auto_import_job"},
+        template=run_v2.TaskTemplate(
+            containers=[container],
+            volumes=[volume],
+            max_retries=2,
+            timeout=duration_pb2.Duration(seconds=timeout)))
     new_job = run_v2.Job(template=exe_template)
-    logging.info(f"Creating job {job_name}: {new_job}")
+    logging.info(f"Creating job: {job_name}")
 
     # Look for existing job to update
     job = None
     try:
         job = client.get_job(request=run_v2.GetJobRequest(name=job_name))
-        logging.info(f"Found existing job {job_name}: {job}")
+        logging.info(f"Found existing job: {job_name}")
     except NotFound:
         logging.info(f"No existing job, creating new job: {job_name}")
 
@@ -85,11 +102,11 @@ def create_or_update_cloud_run_job(
         # Update existing Cloud Run job
         # Overrides container settings including image, env
         job.template.template.containers = new_job.template.template.containers
-        logging.info(f"Updating job {job_name}: {job}")
+        logging.info(f"Updating job: {job_name}")
         update_request = run_v2.UpdateJobRequest(job=job)
         update_operation = client.update_job(request=update_request)
         result = update_operation.result()  # Blocks until update completes
-        logging.info(f"Job updated {job_name}: {result}")
+        logging.info(f"Job updated: {job_name}")
     return result
 
 

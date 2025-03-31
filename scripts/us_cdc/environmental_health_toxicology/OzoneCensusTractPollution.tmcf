@@ -4,7 +4,7 @@ typeOf: dcs:StatVarObservation
 observationDate: C:OzoneCTPollution->date
 variableMeasured: dcs:Mean_Concentration_AirPollutant_Ozone
 observationPeriod: "P8H"
-unit: parts per billion (ppb)
+unit: PartsPerBillion
 value: C:OzoneCTPollution->Value
 
 Node: E:OzoneCTPollution->E2

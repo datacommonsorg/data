@@ -27,4 +27,5 @@ from common.unitest_common_methods import CommonTestClass
 
 class BMITest(CommonTestClass.CommonTestCases):
     _import_class = EuroStatBMI
+    _import_name = "bmi"
     _test_module_directory = os.path.dirname(__file__)

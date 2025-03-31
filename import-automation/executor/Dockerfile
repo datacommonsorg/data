@@ -12,17 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM python:3.11.4
+FROM python:3.12.8
 
 RUN apt-get update \
     && apt-get -y upgrade \
     && apt-get -y autoremove \
     && rm -rf /var/lib/apt/lists/*
-WORKDIR /workspace
 
-ADD requirements.txt /workspace/requirements.txt
-RUN pip install -r /workspace/requirements.txt
+ENV JAVA_HOME=/usr/local/openjdk-17
+COPY --from=openjdk:17-slim $JAVA_HOME $JAVA_HOME
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
-COPY app/. /workspace/app/
-
-CMD gunicorn --timeout 0 --workers 5 -b :$PORT app.main:FLASK_APP
+RUN git clone https://github.com/datacommonsorg/data.git
+WORKDIR /data/import-automation/executor
+RUN wget https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar
+RUN pip install -r requirements.txt
+ENTRYPOINT ["python", "main.py"]

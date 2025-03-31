@@ -13,120 +13,120 @@
 # limitations under the License.
 
 import sys
-
-sys.path.append('../')
-from utils import multi_index_to_single_index
+import os
 import csv
 import json
 import pandas as pd
+from absl import flags, logging
+from absl import app
+from columns import *
 
-# Read csv from source csv
-df = pd.read_csv('REGION_DEMOGR_death_tl3.csv')
-df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
+_FLAGS = flags.FLAGS
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(_MODULE_DIR)
+flags.DEFINE_string('mode', '', 'Options: download or process')
 
-# First remove geos with names that we don't have mappings to dcid for.
-regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
-df = df[df['REG_ID'].isin(regid2dcid.keys())]
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Second, replace the names with dcids
-df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
+sys.path.insert(1, os.path.join(_MODULE_DIR, '../'))
+from utils import multi_index_to_single_index
+from download import download_data_to_file_and_df
 
-df['Year'] = '"' + df['Year'].astype(str) + '"'
 
-temp = df[['REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
-temp_multi_index = temp.pivot_table(values='Value',
-                                    index=['REG_ID', 'Region', 'Year'],
-                                    columns=['VAR', 'SEX'])
-df_cleaned = multi_index_to_single_index(temp_multi_index)
+def process_data(df, output_file_path):
+    logging.info("Processing the input file")
+    logging.info("Filtering the required columns")
+    df1 = df[(df['TERRITORIAL_LEVEL'] == "TL3")]
+    df1 = df[[
+        'TERRITORIAL_LEVEL', 'REF_AREA', 'Reference area', 'AGE', 'SEX',
+        'TIME_PERIOD', 'OBS_VALUE', 'UNIT_MEASURE'
+    ]]
+    df1.loc[:, "AGE"] = df1["UNIT_MEASURE"] + "_" + df1["AGE"] + df1["SEX"]
 
-VAR_to_statsvars = {
-    'D_TT': 'Count_Death',
-    'D_Y0_4T': 'Count_Death_Upto4Years',
-    'D_Y5_9T': 'Count_Death_5To9Years',
-    'D_Y10_14T': 'Count_Death_10To14Years',
-    'D_Y15_19T': 'Count_Death_15To19Years',
-    'D_Y20_24T': 'Count_Death_20To24Years',
-    'D_Y25_29T': 'Count_Death_25To29Years',
-    'D_Y30_34T': 'Count_Death_30To34Years',
-    'D_Y35_39T': 'Count_Death_35To39Years',
-    'D_Y40_44T': 'Count_Death_40To44Years',
-    'D_Y45_49T': 'Count_Death_45To49Years',
-    'D_Y50_54T': 'Count_Death_50To54Years',
-    'D_Y55_59T': 'Count_Death_55To59Years',
-    'D_Y60_64T': 'Count_Death_60To64Years',
-    'D_Y65_69T': 'Count_Death_65To69Years',
-    'D_Y70_74T': 'Count_Death_70To74Years',
-    'D_Y75_79T': 'Count_Death_75To79Years',
-    'D_Y80_MAXT': 'Count_Death_80OrMoreYears',
-    'D_Y0_14T': 'Count_Death_Upto14Years',
-    'D_Y15_64T': 'Count_Death_15To64Years',
-    'D_Y65_MAXT': 'Count_Death_65OrMoreYears',
-    'D_TM': 'Count_Death_Male',
-    'D_Y0_4M': 'Count_Death_Upto4Years_Male',
-    'D_Y5_9M': 'Count_Death_5To9Years_Male',
-    'D_Y10_14M': 'Count_Death_10To14Years_Male',
-    'D_Y15_19M': 'Count_Death_15To19Years_Male',
-    'D_Y20_24M': 'Count_Death_20To24Years_Male',
-    'D_Y25_29M': 'Count_Death_25To29Years_Male',
-    'D_Y30_34M': 'Count_Death_30To34Years_Male',
-    'D_Y35_39M': 'Count_Death_35To39Years_Male',
-    'D_Y40_44M': 'Count_Death_40To44Years_Male',
-    'D_Y45_49M': 'Count_Death_45To49Years_Male',
-    'D_Y50_54M': 'Count_Death_50To54Years_Male',
-    'D_Y55_59M': 'Count_Death_55To59Years_Male',
-    'D_Y60_64M': 'Count_Death_60To64Years_Male',
-    'D_Y65_69M': 'Count_Death_65To69Years_Male',
-    'D_Y70_74M': 'Count_Death_70To74Years_Male',
-    'D_Y75_79M': 'Count_Death_75To79Years_Male',
-    'D_Y80_MAXM': 'Count_Death_80OrMoreYears_Male',
-    'D_Y0_14M': 'Count_Death_Upto14Years_Male',
-    'D_Y15_64M': 'Count_Death_15To64Years_Male',
-    'D_Y65_MAXM': 'Count_Death_65OrMoreYears_Male',
-    'D_TF': 'Count_Death_Female',
-    'D_Y0_4F': 'Count_Death_Upto4Years_Female',
-    'D_Y5_9F': 'Count_Death_5To9Years_Female',
-    'D_Y10_14F': 'Count_Death_10To14Years_Female',
-    'D_Y15_19F': 'Count_Death_15To19Years_Female',
-    'D_Y20_24F': 'Count_Death_20To24Years_Female',
-    'D_Y25_29F': 'Count_Death_25To29Years_Female',
-    'D_Y30_34F': 'Count_Death_30To34Years_Female',
-    'D_Y35_39F': 'Count_Death_35To39Years_Female',
-    'D_Y40_44F': 'Count_Death_40To44Years_Female',
-    'D_Y45_49F': 'Count_Death_45To49Years_Female',
-    'D_Y50_54F': 'Count_Death_50To54Years_Female',
-    'D_Y55_59F': 'Count_Death_55To59Years_Female',
-    'D_Y60_64F': 'Count_Death_60To64Years_Female',
-    'D_Y65_69F': 'Count_Death_65To69Years_Female',
-    'D_Y70_74F': 'Count_Death_70To74Years_Female',
-    'D_Y75_79F': 'Count_Death_75To79Years_Female',
-    'D_Y80_MAXF': 'Count_Death_80OrMoreYears_Female',
-    'D_Y0_14F': 'Count_Death_Upto14Years_Female',
-    'D_Y15_64F': 'Count_Death_15To64Years_Female',
-    'D_Y65_MAXF': 'Count_Death_65OrMoreYears_Female',
-}
+    # First remove geos with names that we don't have mappings to dcid for.
+    try:
+        regid_file = os.path.join(parent_dir, "regid2dcid.json")
+        with open(regid_file, 'r') as f:
+            regid2dcid = dict(json.loads(f.read()))
+        logging.info(f"Resolving places from {regid_file}")
+        df2 = df1[~df1['REF_AREA'].isin(regid2dcid.keys())]
+        unmapped = len(df2["REF_AREA"].unique())
+        logging.info(f"{unmapped} places have not been resolved")
+        df1 = df1[df1['REF_AREA'].isin(regid2dcid.keys())]
+        mapped = len(df1["REF_AREA"].unique())
+        logging.info(f"{mapped} places have been resolved")
+        # Second, replace the names with dcids
+        df1['Reference area'] = df1.apply(
+            lambda row: regid2dcid[row['REF_AREA']], axis=1)
+    except Exception as e:
+        logging.fatal(f"Error processing regid2dcid.json: {e}")
+        return None  # Indicate failure
 
-df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
-df_cleaned.to_csv('OECD_deaths_cleaned.csv',
-                  index=False,
-                  quoting=csv.QUOTE_NONE)
+    df1['TIME_PERIOD'] = '"' + df1['TIME_PERIOD'].astype(str) + '"'
 
-# Automate Template MCF generation since there are many Statistical Variables.
-TEMPLATE_MCF_TEMPLATE = """
-Node: E:OECD_deaths_cleaned->E{index}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{stat_var}
-measurementMethod: dcs:OECDRegionalStatistics
-observationAbout: C:OECD_deaths_cleaned->Region
-observationDate: C:OECD_deaths_cleaned->Year
-observationPeriod: "P1Y"
-value: C:OECD_deaths_cleaned->{stat_var}
-"""
+    temp = df1[['Reference area', 'AGE', 'SEX', 'TIME_PERIOD', 'OBS_VALUE']]
+    try:
+        temp_multi_index = temp.pivot_table(
+            values='OBS_VALUE',
+            index=['Reference area', 'TIME_PERIOD'],
+            columns=['AGE', 'SEX'])
+        df_cleaned = multi_index_to_single_index(temp_multi_index)
+    except Exception as e:
+        logging.fatal(
+            f"Unable to pivot the dataframe and retain the columns:{e}")
+        return None
+    # Renaming column headers to their SVs
+    df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
+    # Filtering the reuired columns
+    df_cleaned_reset = df_cleaned.reindex(columns=reindex_columns)
+    logging.info("Writing output to %s", output_file_path)
+    df_cleaned_reset.to_csv(output_file_path,
+                            index=False,
+                            quoting=csv.QUOTE_NONE)
 
-stat_vars = df_cleaned.columns[3:]
-with open('OECD_deaths.tmcf', 'w', newline='') as f_out:
-    for i in range(len(stat_vars)):
-        f_out.write(
-            TEMPLATE_MCF_TEMPLATE.format_map({
-                'index': i + 1,
-                'stat_var': stat_vars[i]
-            }))
+    return df_cleaned_reset
+
+
+def generate_tmcf(df_cleaned_reset, filepath):
+    # Automate Template MCF generation since there are many Statistical Variables.
+    TEMPLATE_MCF_TEMPLATE = """
+    Node: E:OECD_deaths_cleaned->E{index}
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:{stat_var}
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_deaths_cleaned->Reference area
+    observationDate: C:OECD_deaths_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_deaths_cleaned->{stat_var}
+    """
+
+    stat_vars = df_cleaned_reset.columns[2:]
+    with open(filepath, 'w', newline='') as f_out:
+        for i in range(len(stat_vars)):
+            f_out.write(
+                TEMPLATE_MCF_TEMPLATE.format_map({
+                    'index': i + 1,
+                    'stat_var': stat_vars[i]
+                }))
+
+
+def main(_):
+    mode = _FLAGS.mode
+    url = "https://sdmx.oecd.org/public/rest/data/OECD.CFE.EDS,DSD_REG_DEMO@DF_DEATH_5Y,2.0/all?dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
+    filename = os.path.join(_MODULE_DIR, "REGION_DEMOGR_death_5Y.csv")
+
+    if mode == "" or mode == "download":
+        download_data_to_file_and_df(url,
+                                     filename,
+                                     is_download_required=True,
+                                     csv_filepath=None)
+    if mode == "" or mode == "process":
+        df = pd.read_csv(filename)
+        output_file_path = os.path.join(_MODULE_DIR, "OECD_deaths_cleaned.csv")
+        df_cleaned = process_data(df, output_file_path)
+        filepath = os.path.join(_MODULE_DIR, "OECD_deaths_cleaned.tmcf")
+        generate_tmcf(df_cleaned, filepath)
+
+
+if __name__ == "__main__":
+    app.run(main)

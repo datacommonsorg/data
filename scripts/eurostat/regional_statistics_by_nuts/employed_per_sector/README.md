@@ -31,7 +31,7 @@ It has the employees and employed persons counts categorized by NACE classificat
 
 ### Download URL
 
-[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/nama_10r_3empers.tsv.gz).
+[TSV] file is available for [download](https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10r_3empers/?format=TSV&compressed=true).
 
 ### License
 
@@ -90,8 +90,24 @@ The original dataset is broken up into the following columns:
 
 To generate `Eurostats_NUTS3_Empers.tmcf` and `Eurostats_NUTS3_Empers.csv`, run:
 
+This script offers three modes of operation: download, process, or both download and process.
+
 ```bash
-python3 emp_persec_preprocess_gen_tmcf.py
+1. Download and Process (python3 emp_persec_preprocess_gen_tmcf.py or no mode flag):
+2. Download Only (python3 emp_persec_preprocess_gen_tmcf.py --mode=download):
+3. Process Only (python3 emp_persec_preprocess_gen_tmcf.py --mode=process):
+```
+
+### Testing Procedure
+
+How to Create Sample Data: Extract a subset of rows from your source input file to generate sample input and output CSV files.
+
+
+To test import procedure, run the following command:
+
+```
+python3 emp_persec_preprocess_gen_tmcf_test.py
+
 ```
 
 ### Post-Processing Validation

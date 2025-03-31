@@ -12,148 +12,125 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import sys
-
-sys.path.append('../')
-from utils import multi_index_to_single_index
 import csv
 import json
 import pandas as pd
+from absl import flags, logging
+from absl import app
+from columns import *
 
-# Prod REGION_DEMOGR_population.csv is stored at
-# https://pantheon.corp.google.com/storage/browser/_details/datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv?authuser=0&project=datcom-204919.
-# Copy it over before running preprocess_csv:
-# gsutil cp gs://datcom-source-data/oecd/regional_demography/population/REGION_DEMOGR_population.csv
+_FLAGS = flags.FLAGS
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(_MODULE_DIR)
+flags.DEFINE_string('mode', '', 'Options: download or process')
 
-# Process the dataset.
-ag_df = []
-df1 = pd.read_csv("REGION_DEMOGR_population.csv",
-                  sep='\t',
-                  low_memory=False,
-                  index_col=None,
-                  header=0)
-# See README for how manual_curated_population is generated.
-df2 = pd.read_csv("manual_curated_population.csv", index_col=None, header=0)
-ag_df.append(df1)
-ag_df.append(df2)
-df = pd.concat(ag_df, axis=0, ignore_index=True)
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# There can be AVG for national average, here we only care stats for Total Regions.
-df = df[df['POS'] == 'ALL']
-# Filter TL like "1_MR-L"(Country - Large metro TL3 regions)m "1_NMR-R"(Country - Remote TL3 regions).
-df = df[df['TL'].isin(['1', '2', '3'])]
-df = df[['TL', 'REG_ID', 'Region', 'VAR', 'SEX', 'Year', 'Value']]
-# First remove geos with names that we don't have mappings to dcid for.
-regid2dcid = dict(json.loads(open('../regid2dcid.json').read()))
-df = df[df['REG_ID'].isin(regid2dcid.keys())]
-# Second, replace the names with dcids
-df['Region'] = df.apply(lambda row: regid2dcid[row['REG_ID']], axis=1)
+sys.path.insert(1, os.path.join(_MODULE_DIR, '../'))
+from utils import multi_index_to_single_index
+from download import download_data_to_file_and_df
 
-df['Year'] = '"' + df['Year'].astype(str) + '"'
 
-df_cleaned = df.pivot_table(values='Value',
-                            index=['REG_ID', 'Region', 'Year'],
-                            columns=['VAR', 'SEX'])
-df_cleaned = multi_index_to_single_index(df_cleaned)
+def process_data(df, output_file_path):
+    logging.info("Processing the input file")
+    logging.info("Filtering the required columns")
+    df = df[df['UNIT_MEASURE'] == "PS"]
+    df = df[[
+        'TERRITORIAL_LEVEL', 'REF_AREA', 'Reference area', 'AGE', 'SEX',
+        'TIME_PERIOD', 'OBS_VALUE'
+    ]]
+    df['TIME_PERIOD'] = df['TIME_PERIOD'].astype(int)
+    # First remove geos with names that we don't have mappings to dcid for.
+    try:
+        regid_file = os.path.join(parent_dir, "regid2dcid.json")
+        with open(regid_file, 'r') as f:
+            regid2dcid = dict(json.loads(f.read()))
+        logging.info(f"Resolving places from {regid_file}")
+        df2 = df[~df['REF_AREA'].isin(regid2dcid.keys())]
+        unmapped = len(df2["REF_AREA"].unique())
+        logging.info(f"{unmapped} places have not been resolved")
+        df = df[df['REF_AREA'].isin(regid2dcid.keys())]
+        mapped = len(df["REF_AREA"].unique())
+        logging.info(f"{mapped} places have been resolved")
+        # Second, replace the names with dcids
+        df['Reference area'] = df.apply(lambda row: regid2dcid[row['REF_AREA']],
+                                        axis=1)
+    except Exception as e:
+        logging.fatal(f"Error processing regid2dcid.json: {e}")
+        return None  # Indicate failure
 
-VAR_to_statsvars = {
-    'TT': 'Count_Person',
-    'Y0_4T': 'Count_Person_Upto4Years',
-    'Y5_9T': 'Count_Person_5To9Years',
-    'Y10_14T': 'Count_Person_10To14Years',
-    'Y15_19T': 'Count_Person_15To19Years',
-    'Y20_24T': 'Count_Person_20To24Years',
-    'Y25_29T': 'Count_Person_25To29Years',
-    'Y30_34T': 'Count_Person_30To34Years',
-    'Y35_39T': 'Count_Person_35To39Years',
-    'Y40_44T': 'Count_Person_40To44Years',
-    'Y45_49T': 'Count_Person_45To49Years',
-    'Y50_54T': 'Count_Person_50To54Years',
-    'Y55_59T': 'Count_Person_55To59Years',
-    'Y60_64T': 'Count_Person_60To64Years',
-    'Y65_69T': 'Count_Person_65To69Years',
-    'Y70_74T': 'Count_Person_70To74Years',
-    'Y75_79T': 'Count_Person_75To79Years',
-    'Y80_MAXT': 'Count_Person_80OrMoreYears',
-    'Y0_14T': 'Count_Person_Upto14Years',
-    'Y15_64T': 'Count_Person_15To64Years',
-    'Y65_MAXT': 'Count_Person_65OrMoreYears',
-    'TM': 'Count_Person_Male',
-    'Y0_4M': 'Count_Person_Upto4Years_Male',
-    'Y5_9M': 'Count_Person_5To9Years_Male',
-    'Y10_14M': 'Count_Person_10To14Years_Male',
-    'Y15_19M': 'Count_Person_15To19Years_Male',
-    'Y20_24M': 'Count_Person_20To24Years_Male',
-    'Y25_29M': 'Count_Person_25To29Years_Male',
-    'Y30_34M': 'Count_Person_30To34Years_Male',
-    'Y35_39M': 'Count_Person_35To39Years_Male',
-    'Y40_44M': 'Count_Person_40To44Years_Male',
-    'Y45_49M': 'Count_Person_45To49Years_Male',
-    'Y50_54M': 'Count_Person_50To54Years_Male',
-    'Y55_59M': 'Count_Person_55To59Years_Male',
-    'Y60_64M': 'Count_Person_60To64Years_Male',
-    'Y65_69M': 'Count_Person_65To69Years_Male',
-    'Y70_74M': 'Count_Person_70To74Years_Male',
-    'Y75_79M': 'Count_Person_75To79Years_Male',
-    'Y80_MAXM': 'Count_Person_80OrMoreYears_Male',
-    'Y0_14M': 'Count_Person_Upto14Years_Male',
-    'Y15_64M': 'Count_Person_15To64Years_Male',
-    'Y65_MAXM': 'Count_Person_65OrMoreYears_Male',
-    'TF': 'Count_Person_Female',
-    'Y0_4F': 'Count_Person_Upto4Years_Female',
-    'Y5_9F': 'Count_Person_5To9Years_Female',
-    'Y10_14F': 'Count_Person_10To14Years_Female',
-    'Y15_19F': 'Count_Person_15To19Years_Female',
-    'Y20_24F': 'Count_Person_20To24Years_Female',
-    'Y25_29F': 'Count_Person_25To29Years_Female',
-    'Y30_34F': 'Count_Person_30To34Years_Female',
-    'Y35_39F': 'Count_Person_35To39Years_Female',
-    'Y40_44F': 'Count_Person_40To44Years_Female',
-    'Y45_49F': 'Count_Person_45To49Years_Female',
-    'Y50_54F': 'Count_Person_50To54Years_Female',
-    'Y55_59F': 'Count_Person_55To59Years_Female',
-    'Y60_64F': 'Count_Person_60To64Years_Female',
-    'Y65_69F': 'Count_Person_65To69Years_Female',
-    'Y70_74F': 'Count_Person_70To74Years_Female',
-    'Y75_79F': 'Count_Person_75To79Years_Female',
-    'Y80_MAXF': 'Count_Person_80OrMoreYears_Female',
-    'Y0_14F': 'Count_Person_Upto14Years_Female',
-    'Y15_64F': 'Count_Person_15To64Years_Female',
-    'Y65_MAXF': 'Count_Person_65OrMoreYears_Female',
-}
+    try:
+        df_cleaned = df.pivot_table(
+            values='OBS_VALUE',
+            index=['REF_AREA', 'Reference area', 'TIME_PERIOD'],
+            columns=['AGE', 'SEX'])
+        df_cleaned = multi_index_to_single_index(df_cleaned)
+    except Exception as e:
+        logging.fatal(
+            f"Unable to pivot the dataframe and retain the column:{e}")
+        return None
+    # Renaming column headers to SVs
+    df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
+    drop_cols = []
+    csv_columns = {'REG_ID', 'Reference area', 'TIME_PERIOD'}
+    csv_columns.update(VAR_to_statsvars.values())
+    for col in df_cleaned.columns:
+        if col not in csv_columns:
+            drop_cols.append(col)
+    df_cleaned.drop(columns=drop_cols, axis=0, inplace=True)
+    # Resetting the columns according to the requirement
+    df_cleaned_reset = df_cleaned.reindex(columns=reindex_column)
+    logging.info("Writing output to %s", output_file_path)
+    df_cleaned_reset.to_csv(output_file_path,
+                            index=False,
+                            quoting=csv.QUOTE_NONE)
 
-df_cleaned.rename(columns=VAR_to_statsvars, inplace=True)
+    return df_cleaned_reset
 
-# Drop columns that are not related with populations.
-drop_cols = []
-csv_columns = {'REG_ID', 'Region', 'Year'}
-csv_columns.update(VAR_to_statsvars.values())
-for col in df_cleaned.columns:
-    if col not in csv_columns:
-        drop_cols.append(col)
-df_cleaned.drop(columns=drop_cols, axis=0, inplace=True)
 
-df_cleaned.to_csv('OECD_population_cleaned.csv',
-                  index=False,
-                  quoting=csv.QUOTE_NONE)
+def generate_tmcf(df_cleaned, filepath):
+    # Automate Template MCF generation since there are many Statitical Variables.
+    TEMPLATE_MCF_TEMPLATE = """
+    Node: E:OECD_population_cleaned->E{index}
+    typeOf: dcs:StatVarObservation
+    variableMeasured: dcs:{stat_var}
+    measurementMethod: dcs:OECDRegionalStatistics
+    observationAbout: C:OECD_population_cleaned->Reference area
+    observationDate: C:OECD_population_cleaned->TIME_PERIOD
+    observationPeriod: "P1Y"
+    value: C:OECD_population_cleaned->{stat_var}
+    """
 
-# Automate Template MCF generation since there are many Statitical Variables.
-TEMPLATE_MCF_TEMPLATE = """
-Node: E:OECD_population_cleaned->E{index}
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:{stat_var}
-measurementMethod: dcs:OECDRegionalStatistics
-observationAbout: C:OECD_population_cleaned->Region
-observationDate: C:OECD_population_cleaned->Year
-observationPeriod: "P1Y"
-value: C:OECD_population_cleaned->{stat_var}
-"""
+    stat_vars = df_cleaned.columns[2:]
+    with open(filepath, 'w', newline='') as f_out:
+        for i in range(len(stat_vars)):
+            f_out.write(
+                TEMPLATE_MCF_TEMPLATE.format_map({
+                    'index': i + 1,
+                    'stat_var': stat_vars[i]
+                }))
 
-stat_vars = df_cleaned.columns[3:]
-with open('OECD_population.tmcf', 'w', newline='') as f_out:
-    for i in range(len(stat_vars)):
-        f_out.write(
-            TEMPLATE_MCF_TEMPLATE.format_map({
-                'index': i + 1,
-                'stat_var': stat_vars[i]
-            }))
+
+def main(_):
+    mode = _FLAGS.mode
+    url = "https://sdmx.oecd.org/public/rest/data/OECD.CFE.EDS,DSD_REG_DEMO@DF_POP_5Y,2.0/all?dimensionAtObservation=AllDimensions&format=csvfilewithlabels"
+    filename = os.path.join(_MODULE_DIR, "REGION_DEMOGR_population.csv")
+
+    if mode == "" or mode == "download":
+        download_data_to_file_and_df(url,
+                                     filename,
+                                     is_download_required=True,
+                                     csv_filepath=None)
+    if mode == "" or mode == "process":
+        df = pd.read_csv(filename)
+        csv_filepath = os.path.join(_MODULE_DIR, "OECD_population_cleaned.csv")
+        df_cleaned = process_data(df, csv_filepath)
+        tmcf_filepath = os.path.join(_MODULE_DIR,
+                                     "OECD_population_cleaned.tmcf")
+        generate_tmcf(df_cleaned, tmcf_filepath)
+
+
+if __name__ == "__main__":
+    app.run(main)
