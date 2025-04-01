@@ -107,8 +107,14 @@ class ExecutorConfig:
     requirements_filename: str = 'requirements.txt'
     # ID of the location where Cloud Scheduler is hosted.
     scheduler_location: str = 'us-central1'
+    # Name of the GCS bucket for volume mount.
+    gcs_bucket_volume_mount: str = 'datcom-volume-mount'
+    # Location of the GCS bucket volume mount.
+    gcs_volume_mount_dir: str = '/mnt'
     # Location of the local git data repo.
     local_repo_dir: str = '/data'
+    # Location of the import tool jar.
+    import_tool_path: str = '/data/import-automation/executor/import-tool.jar'
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 3600
     # Arguments for the user script
@@ -117,7 +123,9 @@ class ExecutorConfig:
     user_script_env: dict = None
     # Invoke validations before upload.
     invoke_import_validation: bool = False
-    # Import validation config file.
+    # Ignore validation status during import.
+    ignore_validation_status: bool = True
+    # Import validation config file path (relative to data repo).
     validation_config_file: str = 'tools/import_validation/validation_config.json'
     # Maximum time venv creation can take in seconds.
     venv_create_timeout: float = 3600

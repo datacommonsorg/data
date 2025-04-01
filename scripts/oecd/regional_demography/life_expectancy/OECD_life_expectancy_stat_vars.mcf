@@ -1,0 +1,19 @@
+Node: dcid:LifeExpectancy_Person
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+
+Node: dcid:LifeExpectancy_Person_Female
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Female
+
+Node: dcid:LifeExpectancy_Person_Male
+typeOf: dcs:StatisticalVariable
+populationType: schema:Person
+measuredProperty: dcs:lifeExpectancy
+statType: dcs:measuredValue
+gender: schema:Male

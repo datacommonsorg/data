@@ -85,6 +85,62 @@ These data were collected as part of the [CDC National Environment Public Health
 
 ### Import Procedure
 
+#### Processing Steps
+
+To clean the air quality data files, run:
+
+1. Import name: CDC_PM25CensusTract
+ 
+ To download the air quality data files, run:
+```
+    python3 download_files.py CDC_PM25CensusTract
+```
+   Command to process the file
+   ===========================
+```
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_PM25CensusTract
+```
+2. Import name: CDC_OzoneCensusTract
+
+    To download the air quality data files, run:
+```
+    python3 download_files.py CDC_OzoneCensusTract
+```
+   Command to process the file
+   ===========================
+```
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_OzoneCensusTract
+```
+3. Import name: CDC_PM25County
+
+    To download the air quality data files, run:
+```
+    python3 download_files.py CDC_PM25County
+```
+   Command to process the file
+   ===========================
+```
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_PM25County
+```
+4. Import name: CDC_OzoneCounty
+
+    To download the air quality data files, run:
+```
+    python3 download_files.py CDC_OzoneCounty
+```
+   Command to process the file
+   ===========================
+```bash
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_OzoneCounty
+```
+### Note:
+=========
+=> "import_configs.json" file is uploaded on the GCP which includes the configurations of the import such as source urls, input and output filenames.
+    GCP location: "unresolved_mcf/cdc/environmental/import_configs.json"
+    download_files.py and parse_air_quality.py scripts reads this config file for download and process the files respectively.
+    Future urls should be include in this config file for processing the upcoming data.
+=> Downloaded files are available in "input_files" directory.
+=> Output files are generated on "output" directory.
 #### Testing
 
 ##### Test Air Quality Data Cleaning Script
@@ -94,9 +150,6 @@ To test the air quality data cleaning script, run:
 ```bash
 $ python3 parse_air_quality_test.py
 ```
-
-The expected output of this test can be found in [`small_Ozone_County_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Ozone_County_expected.csv).
-
 ##### Test Precipitation Index Data Cleaning Script
 
 To test the precipitation index data cleaning script, run:
@@ -109,18 +162,9 @@ The expected output of this test can be found in [`small_Palmer_expected.csv`](h
 
 #### Processing Steps
 
-`@input_file_name` - path to the input csv file to be cleaned
-
-`@output_file_name` - path to write the cleaned csv file
-
-To clean the air quality data files, run:
-
-```bash
-$ python3 parse_air_quality.py input_file_name output_file_name
-```
-
 To clean the precipitation index data files, run: 
 
 ```bash
 $ python3 parse_precipitation_index.py input_file_name output_file_name
 ```
+

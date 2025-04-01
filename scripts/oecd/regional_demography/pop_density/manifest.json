@@ -1,0 +1,22 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "OECDRegionalDemography_PopulationDensity",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://data-explorer.oecd.org/vis?pg=0&snb=1&tm=pop%20density&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_REG_DEMO%40DF_DENSITY&df[ag]=OECD.CFE.EDS&df[vs]=2.0&dq=A.......&pd=%2C&to[TIME_PERIOD]=false&vw=tb",
+      "provenance_description": "Population density statistics measured by OECD (Organisation for Economic Co-operation and Development).",
+      "scripts": [
+        "preprocess_csv.py"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "OECD_pop_density_cleaned.tmcf",
+          "cleaned_csv": "OECD_pop_density_cleaned.csv"
+        }
+      ],
+      "cron_schedule": "0 6 1 3 *"
+    }
+  ]
+}
