@@ -206,43 +206,52 @@ def add_pv_to_node(
   """
     if node is None:
         node = {}
+    if value and isinstance(value, str):
+        if strip_namespaces:
+            value = strip_namespace(value)
+    if isinstance(value, list):
+        if strip_namespaces:
+            value = [strip_namespace(v) for v in value]
+        value = ",".join(value)
 
     if normalize:
         if value and isinstance(value, str):
             value = strip_value(value)
-            if strip_namespaces:
-                value = strip_namespace(value)
             if value and ',' in value:
                 # Split the comma separated value into a list.
                 value = normalize_list(value, False)
         # Allow empty value
         # if not value:
         #    return node
-        value_list = []
-        if isinstance(value, list):
-            value_list = value
-        elif isinstance(value, str) and ',' in value:
-            value_list = get_value_list(value)
-        if value_list:
-            if len(value_list) == 1:
-                value = value_list[0]
-            else:
-                # Add each value recursively.
-                for v in value_list:
-                    add_pv_to_node(prop, v, node, append_value,
-                                   strip_namespaces, normalize)
-                return node
+
     # allow empty values
     # if not value:
     #    return node
     existing_value = node.get(prop)
     if existing_value is not None and prop != 'Node' and prop != 'dcid':
         # Property already exists. Add value to a list if not present.
-        if (value is not None and value != existing_value and
-                value not in existing_value.split(',')):
+        if value is not None and value != existing_value:
             if append_value:
-                # Append value to a list of existing values
-                node[prop] = f'{node[prop]},{value}'
+                # If new value or existing value is a list, need to dedup and merge
+                if (isinstance(existing_value, list) or ',' in existing_value or
+                        isinstance(value, list) or ',' in value):
+                    # Merge the lists
+                    unique_values = set()
+                    unique_values.update(get_value_list(existing_value))
+                    unique_values.update(get_value_list(value))
+                    if '"' in existing_value or '"' in value:
+                        unique_values = [
+                            get_quoted_value(v, is_quoted=True)
+                            for v in unique_values
+                        ]
+                    if strip_namespaces:
+                        unique_values = [
+                            strip_namespace(v) for v in unique_values
+                        ]
+                    node[prop] = ",".join(sorted(unique_values))
+                else:
+                    # Existing and new values are not list, so can be appended.
+                    node[prop] = f'{node[prop]},{value}'
             else:
                 # Replace with new value
                 node[prop] = value
@@ -612,14 +621,21 @@ def get_value_list(value: str) -> list:
         return value
     value_list = []
     # Read the string as a comma separated line.
+    is_quoted = '"' in value
     try:
-        rows = list(
-            csv.reader([value],
-                       delimiter=',',
-                       quotechar='"',
-                       skipinitialspace=True))
-        for v in rows[0]:
-            val_normalized = get_quoted_value(v)
+        if is_quoted and "," in value:
+            # Read the string as a quoted comma separated line.
+            row = list(
+                csv.reader([value],
+                           delimiter=',',
+                           quotechar='"',
+                           skipinitialspace=True))[0]
+        else:
+            # Without " quotes, the line can be split on commas.
+            # Avoiding csv reader calls for performance.
+            row = value.split(',')
+        for v in row:
+            val_normalized = get_quoted_value(v, is_quoted=is_quoted)
             value_list.append(val_normalized)
     except csv.Error:
         logging.error(

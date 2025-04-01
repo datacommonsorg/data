@@ -21,6 +21,7 @@ import glob
 import json
 import logging
 import os
+import shutil
 import sys
 import subprocess
 import tempfile
@@ -455,6 +456,17 @@ class ImportExecutor:
         script_paths = import_spec.get('scripts')
         for path in script_paths:
             script_path = os.path.join(absolute_import_dir, path)
+            import_name = import_spec['import_name']
+            mount_path = os.path.join(self.config.gcs_volume_mount_dir,
+                                      import_name)
+            out_path = os.path.join(absolute_import_dir, 'gcs_output')
+            logging.info(f'Mount path: {mount_path}, Out path: {out_path}')
+            if os.path.exists(mount_path):
+                shutil.rmtree(mount_path)
+            if os.path.lexists(out_path):
+                os.unlink(out_path)
+            os.makedirs(mount_path, exist_ok=True)
+            os.symlink(mount_path, out_path, target_is_directory=True)
             simple_job = cloud_run_simple_import.get_simple_import_job_id(
                 import_spec, script_path)
             if simple_job:
