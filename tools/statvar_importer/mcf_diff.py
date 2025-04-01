@@ -284,9 +284,9 @@ def diff_mcf_nodes(nodes1: dict,
         if not config.get('show_diff_nodes_only', True) or has_diff:
             diff_str.append(node_diff)
             diff_str.append('\n')
-            if diff_map:
+            if diff_map is not None:
                 for prop in added | deleted | modified:
-                    diff_map[dcid] = {
+                    diff_map[f'{dcid}__{prop}'] = {
                         "dcid":
                             dcid,
                         "diff_type":
