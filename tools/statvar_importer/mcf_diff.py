@@ -60,6 +60,7 @@ instead of a changed node.
 import difflib
 import os
 import sys
+import typing
 
 from absl import app
 from absl import flags
@@ -73,6 +74,7 @@ sys.path.append(
 
 from counters import Counters
 from mcf_file_util import load_mcf_nodes, filter_mcf_nodes, normalize_mcf_node, normalize_value, node_dict_to_text, get_node_dcid, strip_namespace
+import file_util
 
 flags.DEFINE_string('mcf1', '', 'MCF file with nodes')
 flags.DEFINE_string('mcf2', '', 'MCF file with nodes')
@@ -113,6 +115,8 @@ flags.DEFINE_list(
 )
 flags.DEFINE_bool('show_diff_nodes_only', True, 'Output nodes with diff only.')
 
+flags.DEFINE_string('diff_csv_path', '',
+                    'Path to write the diff as a CSV file.')
 _FLAGS = flags.FLAGS
 # _FLAGS(sys.argv)  # Allow invocation without app.run()
 
@@ -127,6 +131,7 @@ def get_diff_config() -> dict:
         'compare_dcids': _FLAGS.compare_dcids,
         'compare_nodes_with_pv': _FLAGS.compare_nodes_with_pv,
         'show_diff_nodes_only': _FLAGS.show_diff_nodes_only,
+        'get_diff_as_map': True if _FLAGS.diff_csv_path else False,
     }
 
 
@@ -237,7 +242,7 @@ def diff_mcf_node_pvs(node_1: dict,
 def diff_mcf_nodes(nodes1: dict,
                    nodes2: dict,
                    config: dict = {},
-                   counters: Counters = None) -> str:
+                   counters: Counters = None) -> typing.Tuple[str, dict]:
     """Compare nodes across two dicts and report differences as a dict of counters.
 
   Args:
@@ -249,6 +254,17 @@ def diff_mcf_nodes(nodes1: dict,
   Returns:
     string with diffs across all nodes or empty string if there are no diffs.
   """
+
+    def get_diff_type(prop, added, deleted, modified):
+        if prop in added:
+            return 'added'
+        if prop in deleted:
+            return 'deleted'
+        return 'modified'
+
+    diff_map = None
+    if config.get('get_diff_as_map', False):
+        diff_map = {}
     if counters is None:
         counters = Counters()
     diff_str = []
@@ -268,6 +284,20 @@ def diff_mcf_nodes(nodes1: dict,
         if not config.get('show_diff_nodes_only', True) or has_diff:
             diff_str.append(node_diff)
             diff_str.append('\n')
+            if diff_map:
+                for prop in added | deleted | modified:
+                    diff_map[dcid] = {
+                        "dcid":
+                            dcid,
+                        "diff_type":
+                            get_diff_type(prop, added, deleted, modified),
+                        "prop":
+                            prop,
+                        "old_value":
+                            nodes1.get(dcid, {}).get(prop, ""),
+                        "new_value":
+                            nodes2.get(dcid, {}).get(prop, "")
+                    }
 
     dcids1 = set(nodes1.keys())
     dcids2 = set(nodes2.keys())
@@ -275,7 +305,7 @@ def diff_mcf_nodes(nodes1: dict,
     for dcid2 in diff:
         counters.add_counter(f'dcid-missing-in-nodes1', 1,
                              f'dcid={dcid2}, PVs={nodes2[dcid2]}')
-    return '\n'.join(diff_str)
+    return '\n'.join(diff_str), diff_map
 
 
 def fingerprint_node(pvs: dict,
@@ -329,7 +359,7 @@ def fingerprint_mcf_nodes(nodes: dict,
 def diff_mcf_files(file1: str,
                    file2: str,
                    config: dict = {},
-                   counters: Counters = None) -> str:
+                   counters: Counters = None) -> typing.Tuple[str, dict]:
     """Compares MCF nodes in two files and returns the diffs.
 
   Args:
@@ -374,9 +404,9 @@ def diff_mcf_files(file1: str,
     logging.info(
         f'Comparing {len(nodes1)} nodes from {file1} with {len(nodes2)} nodes'
         f' from {file2}')
-    diff_str = diff_mcf_nodes(nodes1, nodes2, config, counters)
+    diff_str, diff_map = diff_mcf_nodes(nodes1, nodes2, config, counters)
     print(f'Diff:{file1} vs {file2}:\n{diff_str}')
-    return diff_str
+    return diff_str, diff_map
 
 
 def main(_):
@@ -384,7 +414,11 @@ def main(_):
         print(f'Please provide two MCF files to compare with --mcf1=<file1>'
               f' --mcf2=<file2>')
     else:
-        diff_mcf_files(_FLAGS.mcf1, _FLAGS.mcf2, get_diff_config())
+        _, diff_map = diff_mcf_files(_FLAGS.mcf1, _FLAGS.mcf2,
+                                     get_diff_config())
+        if _FLAGS.diff_csv_path and diff_map:
+            print(f'Writing diff to {_FLAGS.diff_csv_path}')
+            file_util.file_write_csv_dict(diff_map, _FLAGS.diff_csv_path)
 
 
 if __name__ == '__main__':

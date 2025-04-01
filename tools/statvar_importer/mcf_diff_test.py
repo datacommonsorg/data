@@ -137,7 +137,7 @@ class TestMCFDiff(unittest.TestCase):
         write_mcf_nodes(nodes, mcf_file2)
 
         counters = Counters()
-        diff_str = mcf_diff.diff_mcf_files(
+        diff_str, _ = mcf_diff.diff_mcf_files(
             self._sample_mcf_file,
             mcf_file2,
             {'ignore_property': ['name']},

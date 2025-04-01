@@ -55,8 +55,8 @@ class TestStatVarProcessor(unittest.TestCase):
         """Compare files with MCF nodes allowing reordering of nodes and properties."""
         for actual_file, expected_file in file_pairs.items():
             counters = Counters()
-            diff = diff_mcf_files(actual_file, expected_file,
-                                  {'show_diff_nodes_only': True}, counters)
+            diff, _ = diff_mcf_files(actual_file, expected_file,
+                                     {'show_diff_nodes_only': True}, counters)
             self.assertEqual(
                 diff,
                 '',
