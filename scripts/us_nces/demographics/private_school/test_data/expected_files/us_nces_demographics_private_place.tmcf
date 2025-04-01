@@ -1,0 +1,14 @@
+Node: E:us_nces_demographics_private_place->E0
+dcid: C:us_nces_demographics_private_place->school_state_code
+typeOf: dcs:PrivateSchool
+address: C:us_nces_demographics_private_place->Physical_Address
+name: C:us_nces_demographics_private_place->Private_School_Name
+ncesId: C:us_nces_demographics_private_place->SchoolID
+lowestGrade: C:us_nces_demographics_private_place->Lowest_Grade
+highestGrade: C:us_nces_demographics_private_place->Highest_Grade
+schoolGradeLevel: C:us_nces_demographics_private_place->SchoolGrade
+containedInPlace: C:us_nces_demographics_private_place->ContainedInPlace
+telephone: C:us_nces_demographics_private_place->PhoneNumber
+educationalMethod: C:us_nces_demographics_private_place->School_Type
+religiousOrientation: C:us_nces_demographics_private_place->School_Religion
+coeducationStatus: C:us_nces_demographics_private_place->Coeducational
