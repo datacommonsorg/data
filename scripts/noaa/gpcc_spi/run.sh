@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+if [ -f ../../../../tools/pd_csv.sh ]; then
+    echo "pd_csv 4 level up found!"
+fi
+
+if [ -f /data/tools/pd_csv.sh ]; then
+    echo "pd_csv direct reference found!"
+fi
+
 # PATH=$PATH:$(dirname $0)
 # # Sleep as long as N jobs of given name are running in background
 # function num_jobs {
