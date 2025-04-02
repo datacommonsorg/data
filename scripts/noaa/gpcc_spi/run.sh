@@ -1,14 +1,6 @@
 #!/bin/bash
 set -e
 
-if [ -f ../../../../tools/pd_csv.sh ]; then
-    echo "pd_csv 4 level up found!"
-fi
-
-if [ -f /data/tools/pd_csv.sh ]; then
-    echo "pd_csv direct reference found!"
-fi
-
 # PATH=$PATH:$(dirname $0)
 # # Sleep as long as N jobs of given name are running in background
 # function num_jobs {
@@ -35,20 +27,20 @@ set -x
 
 
 #Run download script
-python3 download.py
+# python3 download.py
 
-# Run NOAA_GPCC_StandardardizedPrecipitationIndex script
-python3 preprocess_gpcc_spi.py
+# # Run NOAA_GPCC_StandardardizedPrecipitationIndex script
+# python3 preprocess_gpcc_spi.py
 
-# Run NOAA_GPCC_StandardardizedPrecipitationIndex_AggPlace script
-python3 gpcc_spi_aggregation.py
+# # Run NOAA_GPCC_StandardardizedPrecipitationIndex_AggPlace script
+# python3 gpcc_spi_aggregation.py
 
-# shard data by year
-echo "Creating a directory for the sharded files"
-mkdir -p output_files/shard
+# # shard data by year
+# echo "Creating a directory for the sharded files"
+# mkdir -p output_files/shard
 
 echo "Sharding pcc_spi_pearson_09.csv based on year and writing them to the shard folder."
-sh ../../../tools/pd_csv.sh -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 -sort time "df['year']=df['time'].str.slice(0,4)" -shard year
+bash /data/tools/pd_csv.sh -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 -sort time "df['year']=df['time'].str.slice(0,4)" -shard year
 
 
 # Convert into events
