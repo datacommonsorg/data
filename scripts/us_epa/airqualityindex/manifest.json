@@ -1,0 +1,19 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EPAAirQualityIndex",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://aqs.epa.gov/aqsweb/airdata/download_files.html",
+      "provenance_description": "Air quality data collected from outdoor monitors on the county, CBSA, and site monitor level.",
+      "scripts": ["air_quality_aggregate.py"],
+      "source_files": ["input_files/*"],
+      "import_inputs": [
+        {
+          "template_mcf": "EPA_AQI.tmcf",
+          "cleaned_csv": "output/EPA_AQI.csv"
+        }
+      ],
+      "cron_schedule": "15 22 10 1,7 *"
+    }
+  ]
+}
