@@ -1,0 +1,13 @@
+Node: E:mesh_qual_concept->E1
+typeOf: dcs:MeSHQualifier
+dcid: C:mesh_qual_concept->Qualifier_dcid
+identifier: C:mesh_qual_concept->QualifierUI
+
+Node: E:mesh_qual_concept->E2
+typeOf: dcs:MeSHConcept
+dcid: C:mesh_qual_concept->Concept_dcid
+name: C:mesh_qual_concept->ConceptName
+hasMeSHQualifier: E:mesh_qual_concept->E1
+identifier: C:mesh_qual_concept->ConceptUI
+isPreferredConcept: C:mesh_qual_concept->IsPreferredConcept
+scopeNote: C:mesh_qual_concept->ScopeNote
