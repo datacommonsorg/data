@@ -1,0 +1,75 @@
+Node: dcid:benefitType
+typeOf: dcs:Property
+name: "benefitType"
+domainIncludes: dcid:EconomicActivity
+
+Node: dcid:CitizenshipIncomeBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Citizenship Income Benefit"
+isProvisional: dcs:True
+
+Node: dcid:alternateName
+typeOf: dcs:Property
+name: "alternateName"
+domainIncludes: dcid:EconomicActivity,dcid:Household
+
+Node: dcid:benefitProgram
+typeOf: dcs:Property
+name: "benefitProgram"
+domainIncludes: dcid:EconomicActivity,dcid:Household
+
+Node: dcid:Brazil_BolsaFamilyProgram
+typeOf: dcid:UnemploymentInsuranceProgramEnum
+name: "Brazil_ Bolsa Family Program"
+isProvisional: dcs:True
+
+Node: dcid:ComplementaryBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Complementary Benefit"
+isProvisional: dcs:True
+
+Node: dcid:EarlyChildhoodBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Early Childhood Benefit"
+isProvisional: dcs:True
+
+Node: dcid:PregnantFamilyBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Pregnant Family Benefit"
+isProvisional: dcs:True
+
+Node: dcid:NursingFamilyBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Nursing Family Benefit"
+isProvisional: dcs:True
+
+Node: dcid:ChildFamilyVariableBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Child Family Variable Benefit"
+isProvisional: dcs:True
+
+Node: dcid:AdolescentFamilyVariableBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Adolescent Family Variable Benefit"
+isProvisional: dcs:True
+
+Node: dcid:FamilyVariableBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Family Variable Benefit"
+isProvisional: dcs:True
+
+Node: dcid:ChildAndAdolescentFamilyVariableBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Child And Adolescent Family Variable Benefit"
+isProvisional: dcs:True
+
+Node: dcid:ExtraordinaryTransitionBenefit
+typeOf: dcid:BenefitTypeEnum
+name: "Extraordinary Transition Benefit"
+isProvisional: dcs:True
+
+Node: dcid:PartialBenefitsSuspensionByDefesoInsurance
+typeOf: dcid:BenefitTypeEnum
+name: "Partial Benefits Suspension By Defeso Insurance"
+isProvisional: dcs:True
+
