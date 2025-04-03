@@ -448,26 +448,6 @@ emittedThing: dcs:OxidesOfNitrogen
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
-Node: dcid:Annual_Amount_Emissions_IndustrialAndOtherProcesses_NonBiogenicEmissionSource_PM10
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:IndustrialAndOtherProcesses
-emittedThing: dcs:PM10
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_IndustrialAndOtherProcesses_NonBiogenicEmissionSource_PM2.5
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:IndustrialAndOtherProcesses
-emittedThing: dcs:PM2.5
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
 Node: dcid:Annual_Amount_Emissions_IndustrialAndOtherProcesses_NonBiogenicEmissionSource_SulfurDioxide
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
@@ -768,76 +748,6 @@ emittedThing: dcs:VolatileOrganicCompound
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
-Node: dcid:Annual_Amount_Emissions_PrescribedFire_NonBiogenicEmissionSource_Ammonia
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:PrescribedFire
-emittedThing: dcs:Ammonia
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_PrescribedFire_NonBiogenicEmissionSource_CarbonMonoxide
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:PrescribedFire
-emittedThing: dcs:CarbonMonoxide
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_PrescribedFire_NonBiogenicEmissionSource_OxidesOfNitrogen
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:PrescribedFire
-emittedThing: dcs:OxidesOfNitrogen
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_PrescribedFire_NonBiogenicEmissionSource_PM10
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:PrescribedFire
-emittedThing: dcs:PM10
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_PrescribedFire_NonBiogenicEmissionSource_PM2.5
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:PrescribedFire
-emittedThing: dcs:PM2.5
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_PrescribedFire_NonBiogenicEmissionSource_SulfurDioxide
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:PrescribedFire
-emittedThing: dcs:SulfurDioxide
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_PrescribedFire_NonBiogenicEmissionSource_VolatileOrganicCompound
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:PrescribedFire
-emittedThing: dcs:VolatileOrganicCompound
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
 Node: dcid:Annual_Amount_Emissions_SolventUtilization_NonBiogenicEmissionSource_Ammonia
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
@@ -938,26 +848,6 @@ emittedThing: dcs:OxidesOfNitrogen
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
-Node: dcid:Annual_Amount_Emissions_StationaryFuelCombustion_NonBiogenicEmissionSource_PM10
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:StationaryFuelCombustion
-emittedThing: dcs:PM10
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_StationaryFuelCombustion_NonBiogenicEmissionSource_PM2.5
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:StationaryFuelCombustion
-emittedThing: dcs:PM2.5
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
 Node: dcid:Annual_Amount_Emissions_StationaryFuelCombustion_NonBiogenicEmissionSource_SulfurDioxide
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
@@ -1048,6 +938,69 @@ emittedThing: dcs:VolatileOrganicCompound
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_NonBiogenicEmissionSource_Ammonia
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+emissionSourceType: dcs:NonBiogenicEmissionSource
+measurementQualifier: dcs:Annual
+emittedThing: dcs:Ammonia
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_NonBiogenicEmissionSource_CarbonMonoxide
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+emissionSourceType: dcs:NonBiogenicEmissionSource
+measurementQualifier: dcs:Annual
+emittedThing: dcs:CarbonMonoxide
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_NonBiogenicEmissionSource_OxidesOfNitrogen
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+emissionSourceType: dcs:NonBiogenicEmissionSource
+measurementQualifier: dcs:Annual
+emittedThing: dcs:OxidesOfNitrogen
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_NonBiogenicEmissionSource_PM10
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+emissionSourceType: dcs:NonBiogenicEmissionSource
+measurementQualifier: dcs:Annual
+emittedThing: dcs:PM10
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_NonBiogenicEmissionSource_PM2.5
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+emissionSourceType: dcs:NonBiogenicEmissionSource
+measurementQualifier: dcs:Annual
+emittedThing: dcs:PM2.5
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_NonBiogenicEmissionSource_SulfurDioxide
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+emissionSourceType: dcs:NonBiogenicEmissionSource
+measurementQualifier: dcs:Annual
+emittedThing: dcs:SulfurDioxide
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_NonBiogenicEmissionSource_VolatileOrganicCompound
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+emissionSourceType: dcs:NonBiogenicEmissionSource
+measurementQualifier: dcs:Annual
+emittedThing: dcs:VolatileOrganicCompound
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_Transportation_NonBiogenicEmissionSource_Ammonia
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
@@ -1075,26 +1028,6 @@ emissionSourceType: dcs:NonBiogenicEmissionSource
 measurementQualifier: dcs:Annual
 emissionSource: dcs:Transportation
 emittedThing: dcs:OxidesOfNitrogen
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_Transportation_NonBiogenicEmissionSource_PM10
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:Transportation
-emittedThing: dcs:PM10
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
-Node: dcid:Annual_Amount_Emissions_Transportation_NonBiogenicEmissionSource_PM2.5
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:Transportation
-emittedThing: dcs:PM2.5
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
@@ -1238,16 +1171,6 @@ emittedThing: dcs:PM2.5
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
-Node: dcid:Annual_Amount_Emissions_Wildfire_NonBiogenicEmissionSource_SulfurDioxide
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-emissionSourceType: dcs:NonBiogenicEmissionSource
-measurementQualifier: dcs:Annual
-emissionSource: dcs:Wildfire
-emittedThing: dcs:SulfurDioxide
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
 Node: dcid:Annual_Amount_Emissions_Wildfire_NonBiogenicEmissionSource_VolatileOrganicCompound
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
@@ -1257,3 +1180,4 @@ emissionSource: dcs:Wildfire
 emittedThing: dcs:VolatileOrganicCompound
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
+
