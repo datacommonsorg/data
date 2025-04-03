@@ -1,0 +1,9 @@
+key,prop,val,p1,v1,p2,v2,p3,v3
+Emirates_EN,observationAbout,{Data},populationType,Person,,,,
+ value  ,value,{Number},,,,,,
+Value,value,{Number},,,,,,
+year ,observationDate,{Number},,,,,,
+Male,gender,Male,gender,"""""",#Aggregate,Sum,,
+female ,gender,Female,gender,"""""",#Aggregate,Sum,,
+National,citizenship,Citizen,citizenship,"""""",#Aggregate,Sum,,
+Non-National,citizenship,NotACitizen,citizenship,"""""",#Aggregate,Sum,,
