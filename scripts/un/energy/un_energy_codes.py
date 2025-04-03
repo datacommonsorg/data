@@ -18,6 +18,7 @@ from typing import List
 import os
 import re
 import sys
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
@@ -157,7 +158,7 @@ UN_ENERGY_FUEL_CODES = {
     },
     'LP': {
         'populationType': 'Fuel',
-        'fuelType': 'LiquifiedPetroleumGas'
+        'fuelType': 'LiquefiedPetroleumGas'
     },
     'LU': {
         'populationType': 'Fuel',
@@ -434,6 +435,7 @@ UN_ENERGY_SOURCE_TYPE = {
 
 def get_all_energy_source_codes() -> List[str]:
     """Returns a list of all 2-letter energy codes in the UN energy dataset"""
+    logging.info("get_all_energy_source_codes()")
     return list(UN_ENERGY_FUEL_CODES.keys())
 
 
@@ -747,7 +749,7 @@ UN_ENERGY_USAGE_CODES = {
         'usedFor': 'EnergyIndustryOwnUse'
     },
     '0934': {
-        'consumingSector': 'LiquifiedNaturalGasPlants',
+        'consumingSector': 'LiquefiedNaturalGasPlants',
         'usedFor': 'EnergyIndustryOwnUse'
     },
 }
