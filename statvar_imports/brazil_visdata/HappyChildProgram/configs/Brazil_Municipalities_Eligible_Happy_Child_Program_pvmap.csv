@@ -1,0 +1,3 @@
+key,prop,value,,,,,,,,,,,,
+Referência,observationDate,{Data},observationAbout,country/BRA,,,,,,,,,,
+Municípios elegíveis para adesão ao Programa Crianca Feliz,populationType,Municipality,measuredProperty,count,benefitProgram,Brazil_HappyChildProgram,eligiblityStaus,Eligible,value,{Number},name,"""Municipality eligible to join the Happy Child Program""",alternateName,"""Municípios elegíveis para adesão ao Programa Crianca Feliz@pt"""

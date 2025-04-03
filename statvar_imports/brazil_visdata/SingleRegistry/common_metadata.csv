@@ -1,0 +1,13 @@
+parameter,value
+url,https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.php
+description,Data about Single registry in Brazil by country and municipality.
+#place_type,"country, AA2"
+#places_within,country/BRA
+start_date,2012-08
+end_date,2024-02
+release_frequency,P1M
+process,
+comments,
+places_resolved_csv,statvar_imports/brazil_visdata/Brazil_Places_Resolved.csv
+header_rows,1
+output_columns,"'observationAbout, observationDate, value, variableMeasured, unit, scalingFactor, observationPeriod"

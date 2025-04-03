@@ -1,0 +1,4 @@
+key,prop,val,p1,v1,,,,,,,,
+Código,observationAbout,{Data},,,,,,,,,,
+Referência,observationDate,{Data},,,,,,,,,,
+Quantidade total de famílias inscritas no Cadastro Único,measuredProperty,count,populationType,Household,value,{Number},name,Total number of families registered in the Single Registry,alternateName,Quantidade total de famílias inscritas no Cadastro Único@pt,registeredIn,Brazil_SingleRegistry
