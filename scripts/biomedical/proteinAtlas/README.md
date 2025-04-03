@@ -42,6 +42,7 @@ This dataset is available under [CC BY-SA 3.0](https://creativecommons.org/licen
 ### Artifacts
 
 #### Scripts 
+[download.sh](https://github.com/datacommonsorg/data/blob/master/scripts/proteinAtlas/download.sh)
 
 [parse_protein_atlas.py](https://github.com/datacommonsorg/data/blob/master/scripts/proteinAtlas/parse_protein_atlas.py) 
 
@@ -53,12 +54,16 @@ This dataset is available under [CC BY-SA 3.0](https://creativecommons.org/licen
 ### Import Procedure
 
 #### Processing Steps 
+To generate the [normal_tissue.tsv](https://www.proteinatlas.org/download/normal_tissue.tsv.zip) and  [proteinatlas.tsv.zip](https://www.proteinatlas.org/download/proteinatlas.tsv.zip), run 
+''' bash download.sh '''
+
+ 
 
 
 To generate 'uniprot_list.txt' which contains all the UniProt entries and [gene_to_uniprot_list.txt](https://github.com/datacommonsorg/data/blob/master/scripts/proteinAtlas/gene_to_uniprot_list.txt) which contains the paired gene name and the UniProt entry list, run:
 
 ```bash
-python3 generate_gene_to_uniprot_mapping.py -f proteinatlas.tsv --uniprot uniprot_list.txt --gene_to_uniprot gene_to_uniprot_list.txt 
+python3 generate_gene_to_uniprot_mapping.py 
 ```
 Then upload the file uniprot_list.txt containing UniProt entries separated by space to [UniProt Retrieve/ID mapping](https://www.uniprot.org/uploadlists/) to generate the UniProt \[Entry, Entry Name] pairs and save to file [uniprot_to_dcid.tsv](https://github.com/datacommonsorg/data/blob/master/scripts/proteinAtlas/uniprot_to_dcid.tsv). The pair example is \['Q96GF1', 'RN185_HUMAN']. The UniProt Entry Name is the DCID for protein instances in Data Commons. Thus we can create the mapping from gene name to protein DCID.
 
@@ -67,7 +72,7 @@ Then upload the file uniprot_list.txt containing UniProt entries separated by sp
 To generate the data MCF file and enumeration files, run:
 
 ```bash
-python3 parse_protein_atlas.py --database normal_tissue.tsv -g gene_to_uniprot_list -u uniprot_to_dcid.tsv -m ProteinAtlasData.mcf --tissue_mcf human_tissue_enum.mcf --cell_mcf human_cell_type_enum.mcf
+ python3 parse_protein_atlas.py 
 ```
 
 To test the script, run:
