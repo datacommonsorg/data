@@ -25,8 +25,11 @@ from absl import app
 from absl import flags
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('database', None, 'database file path.', short_name='f')
-
+# flags.DEFINE_string('database', None, 'http://www.ebi.ac.uk/Tools/webservices/psicquic/mint/webservices/current/search/query/*', short_name='f')
+flags.DEFINE_string('database',
+                    'mint-database.txt',
+                    'mint_database.txt file path.',
+                    short_name='f')
 flags.DEFINE_string('psimi_to_dcid',
                     'psimi2dcid.txt',
                     'psimi2dcid.txt file path.',
@@ -49,6 +52,7 @@ flags.DEFINE_string('no_uniprot', 'no_uniprot_cases.txt',
 
 flags.DEFINE_string('wrong_dcid', 'wrong_dcid_cases.txt',
                     'The cases with incorrect dcid format.')
+missing_psimi_ids = set()
 
 
 def get_references(term):
@@ -208,8 +212,10 @@ def check_dcid(alias):
         alias_map[key] = value
     if 'display_long' in alias_map:
         dcid = alias_map['display_long']
+
         if re.search('[\W]+', dcid) or len(dcid.split('_')) != 2:
             return False
+
     return True
 
 
@@ -248,32 +254,23 @@ def get_cur_line(key_name, value_list, prefix):
     return cur_line
 
 
+def get_confidence(confidence_term):
+    """Extracts confidence information."""
+    if confidence_term.startswith('intact-miscore:'):
+        return f'{confidence_term.split(":")[1]} dcs:IntactMiScore', None
+    return '', None
+
+
 def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
     """
     Args:
         terms: a list with each item containing the information
-        new_source_map: a map contaning new source information. For example:
+        new_source_map: a map containing new source information. For example:
         {"refereces":{},"identifier":{},"confidence":{"newConfidence":"AA10010"}}
 
     Returns:
         a string, which is a data schema
-        new_source_map: and a map with new reference,identifier and confidence sources. For example:
-
-        ['''Node: dcid:bio/MT1A_HUMAN_P53_HUMAN
-        typeOf: ProteinProteinInteraction
-        name: "MT1A_HUMAN_P53_HUMAN"
-        interactingProtein: dcs:bio/UniProt_MT1A_HUMAN,dcs:bio/UniProt_P53_HUMAN
-        interactionDetectionMethod: dcs:AntiBaitCoimmunoprecipitation
-        interactionType: dcs:PhysicalAssociation
-        interactionSource: dcs:Mint
-        intActID: "EBI-8045171"
-        mintID: "MINT-1781444"
-        imexID: "IM-11231-3"
-        confidenceScore: [0.54 dcs:IntactMiScore]
-        pubMedID: "16442532"
-        imexID: "IM-11231"
-        mintID: "MINT-5218281"''',{"references":{},"identifier":{},
-        "confidence":{"newConfidence":"AA10010"}}]
+        new_source_map: and a map with new reference,identifier and confidence sources.
     """
     term_map = collections.defaultdict(list)
     protein = get_protein_dcid(terms[4])
@@ -292,22 +289,25 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
     def get_value_helper(key, idx):
         """Help to get the target value from terms, idx shows which column
         contains the relevant information."""
-        value = psimi_to_dcid[terms[idx].split(':"')[1].split('(')[0][:-1]]
-        term_map[key].append(value)
+        try:
+            psimi_id = terms[idx].split(':"')[1].split('(')[0][:-1]
+            if psimi_id in psimi_to_dcid:
+                value = psimi_to_dcid[psimi_id]
+                term_map[key].append(value)
+            else:
+                missing_psimi_ids.add(psimi_id)
+        except (IndexError, KeyError) as e:
+            print(
+                f"Warning: Error processing term {terms[idx]}"
+            )
+        # except Exception as e:
+        #     logging.error(f"An unexpected error occured processing term {terms[idx]}. Key: {key}, Error: {e}")
+        #     print(f"Error: An unexpected error occured processing term {terms[idx]}. Check missing_psimi_ids.log.")
 
     key_idx_pairs = [('interactionDetectionMethod', 6), ('interactionType', 11),
                      ('interactionSource', 12)]
     for key, idx in key_idx_pairs:
         get_value_helper(key, idx)
-
-    # term_map example:
-    # interactingProtein:  ['RPN1_YEAST', 'RPN3_YEAST']
-    # interactionDetectionMethod:  ['TandemAffinityPurification']
-    # references:  ['pubmed:16554755', 'imex:IM-15332', 'mint:MINT-5218454']
-    # interactionType:  ['PhysicalAssociation']
-    # interactionSource:  ['Mint']
-    # identifier:  ['intact:EBI-6941860', 'mint:MINT-1984371', 'imex:IM-15332-8532']
-    # confidence:  ['intact-miscore:0.76']
 
     schema_piece_list = []
     key_list = [
@@ -366,7 +366,8 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
             for cur_term in term_map[key]:
                 if cur_term:
                     item, new_confidence_source = get_confidence(cur_term)
-                    item_list.append(item)
+                    if item:
+                        item_list.append(item)
             if item_list:
                 cur_line = 'confidenceScore: ' + ','.join(item_list)
                 schema_piece_list.append(cur_line)
@@ -374,6 +375,7 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
                 new_source_map[key] = new_source_map[key].update(
                     new_confidence_source)
     return '\n'.join(schema_piece_list), new_source_map
+
 
 
 def main(argv):
@@ -422,6 +424,7 @@ def main(argv):
         if not if_uniprot1 or not if_uniprot2:
             no_uniprot_cases.append(line)
             continue
+    
         schema, new_source_map = get_schema_from_text(terms, new_source_map,
                                                       psimi_to_dcid)
         if schema:
@@ -466,6 +469,7 @@ def main(argv):
         str(not_import_count) +
         " records failed the parsing and have been saved to the corresponding files."
     )
+    print(missing_psimi_ids)
 
 
 if __name__ == '__main__':
