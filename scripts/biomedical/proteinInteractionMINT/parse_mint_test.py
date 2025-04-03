@@ -101,8 +101,6 @@ class TestParseEbi(unittest.TestCase):
             if schema:
                 mcf_list.append(schema)
         mcf_text = '\n\n'.join(mcf_list)
-        print("00000000000000000000")
-        print(mcf_text)
         self.maxDiff = None
         self.assertEqual(mcf_text, CONST_OUTPUT)
 
