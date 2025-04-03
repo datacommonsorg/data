@@ -16,6 +16,7 @@ def extract_place_statvar(series_id, counters):
     # INTL.{MEASURE1}-{MEASURE2}-{PLACE}-{MEASURE3}.{PERIOD}
     m = re.match(r"^(INTL\.[^-]+-[^-]+)-([^-]+)-([^-]+\.[A-Z])$", series_id)
     if m:
+        counters.add_counter('info_intl_record_count', 1)
         sv_part1 = m.group(1)
         place = m.group(2)
         sv_part2 = m.group(3)
