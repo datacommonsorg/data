@@ -1,0 +1,29 @@
+key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4,,
+,,,,,,,,,,,,
+Region,observationAbout,{Data},,,,,,,,,,
+Ghana,observationAbout,country/GHA,,,,,,,,,,
+"Proportion of population using an improved drinking water source, Rural, Percent",measuredProperty,count,populationType,Person,householdFacilityStatus,ImprovedDrinkingWaterSource,measurementDenominator,"-name,-drinkingWaterSourceType",placeOfResidenceClassification,Rural,name,"""proportion of rural people using a reliable water source."""
+"Proportion of population using an improved drinking water source, Urban, Percent",measuredProperty,count,populationType,Person,householdFacilityStatus,ImprovedDrinkingWaterSource,measurementDenominator,"-name,-drinkingWaterSourceType",placeOfResidenceClassification,Urban,name,"""percentage of rural people have access to clean drinking water."""
+"Proportion of land area covered by forest, Total, Percent",measuredProperty,area,populationType,LandCover,measurementDenominator,landArea,landCoverType,Forest,,,name,"""percentage of the total land area is covered by forests."""
+"Proportion of population using an improved sanitation facility, Rural, Percent",measuredProperty,count,populationType,Person,householdFacilityStatus,ImprovedSanitationFacility,measurementDenominator,"-name,-sanitationFacilityType",placeOfResidenceClassification,Rural,name,"""percentage of rural people have access to proper sanitation."""
+"Proportion of population using an improved sanitation facility, Total, Percent",measuredProperty,count,populationType,Person,householdFacilityStatus,ImprovedSanitationFacility,measurementDenominator,"-name,-sanitationFacilityType",,,name,"""The proportion of the population using safe and hygienic toilets."""
+"Proportion of population using an improved sanitation facility, Urban, Percent",measuredProperty,count,populationType,Person,householdFacilityStatus,ImprovedSanitationFacility,measurementDenominator,"-name,-sanitationFacilityType",placeOfResidenceClassification,Urban,name,"""percentage of urban people have access to proper sanitation."""
+"Proportion of urban population living in slums, Total, Percent",variableMeasured,worldBank/EN_POP_SLUM_UR_ZS,,,,,,,,,name,"""percentage of the urban population lives in slums."""
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+Units,unit,Percentage,,,,,,,,,,
+1990,value,{Number},observationDate,1990,,,,,,,,
+1993,value,{Number},observationDate,1993,,,,,,,,
+1997,value,{Number},observationDate,1997,,,,,,,,
+1998,value,{Number},observationDate,1998,,,,,,,,
+1999,value,{Number},observationDate,1999,,,,,,,,
+2000,value,{Number},observationDate,2000,,,,,,,,
+2001,value,{Number},observationDate,2001,,,,,,,,
+2002,value,{Number},observationDate,2002,,,,,,,,
+2003,value,{Number},observationDate,2003,,,,,,,,
+2004,value,{Number},observationDate,2004,,,,,,,,
+2005,value,{Number},observationDate,2005,,,,,,,,
+2006,value,{Number},observationDate,2006,,,,,,,,
+2007,value,{Number},observationDate,2007,,,,,,,,
+2008,value,{Number},observationDate,2008,,,,,,,,
+2009,value,{Number},observationDate,2009,,,,,,,,
