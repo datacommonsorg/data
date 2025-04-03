@@ -60,7 +60,7 @@ wait
 
 #bash scripts to merge multiple csv files into one file
 
-input_folders=("output_files/events_spi_9m_polygon/events" "output_files/events_spi_9m_polygon/event_svobs" "output_files/events_spi_9m_polygon/place_svobs")
+input_folders=("data/scripts/noaa/gpcc_spi/output_files/events_spi_9m_polygon/events" "data/scripts/noaa/gpcc_spi/output_files/events_spi_9m_polygon/event_svobs" "data/scripts/noaa/gpcc_spi/output_files/events_spi_9m_polygon/place_svobs")
 output_file_name=("drought_spi_9m_polygon_events" "drought_spi_9m_polygon_svobs"  "drought_spi_9m_polygon_place_svobs")
 index=0
 for fld in "${input_folders[@]}"; do
