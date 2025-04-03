@@ -1,0 +1,278 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/sumakaranam/data/oecd/oecd_air_emmision/test_data/sample_input/air emission.csv --pv_map=/usr/local/google/home/sumakaranam/data/oecd/oecd_air_emmision/air_emission_pvmap.csv --places_resolved_csv=/usr/local/google/home/sumakaranam/data/oecd/oecd_air_emmision/air_emission_places_resolved.csv --config=/usr/local/google/home/sumakaranam/data/oecd/oecd_air_emmision/air_emission_metadata.csv --output_path=/usr/local/google/home/sumakaranam/data/oecd/oecd_air_emmision/test_data/sample_output/" on 2024-07-14 13:32:56.510141
+
+Node: dcid:Amount_Emissions_Agriculture_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Agriculture"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:Agriculture
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_Agriculture_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Agriculture"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:Agriculture
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Carbon Monoxide emmited from Road Transport"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Amount_Emissions_CombustionExcludingIndustrial_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Other combustion"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:CombustionExcludingIndustrial
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_CombustionExcludingIndustrial_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Other combustion"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:CombustionExcludingIndustrial
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_Combustion_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Combustion"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:Combustion
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_Combustion_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Combustion"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:Combustion
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_IndustrialCombustion_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Industrial combustion"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:IndustrialCombustion
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_IndustrialCombustion_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Industrial combustion"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:IndustrialCombustion
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_IndustrialProcessesOrProductUse_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Industrial processes and product use"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:IndustrialProcesses__ProductUse
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_IndustrialProcessesOrProductUse_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Industrial processes and product use"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:IndustrialProcesses__ProductUse
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_ManMadeEmission_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Carbon Monoxide emmited from Total man-made emissions"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:ManMadeEmission
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Amount_Emissions_ManMadeEmission_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Total man-made emissions"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:ManMadeEmission
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_ManMadeEmission_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Total man-made emissions"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:ManMadeEmission
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_Miscellaneous_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Miscellaneous"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:Miscellaneous
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_Miscellaneous_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Miscellaneous"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:Miscellaneous
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_MobileSourceExcludingRoadTransport_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Other Mobile Sources"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:MobileSourceExcludingRoadTransport
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_MobileSourceExcludingRoadTransport_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Other Mobile Sources"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:MobileSourceExcludingRoadTransport
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Road Transport"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_NitrogenOxide_PerCapita
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Total emissions per capita"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:PerCapita
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_PowerStation_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Power stations"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:PowerStation
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_PowerStation_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Power stations"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:PowerStation
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_RoadTransport_CarbonMonoxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Carbon Monoxide emmited from Total Mobile Sources"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:RoadTransport
+emittedThing: dcid:CarbonMonoxide
+
+Node: dcid:Amount_Emissions_RoadTransport_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Total Mobile Sources"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:RoadTransport
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_RoadTransport_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Total Mobile Sources"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:RoadTransport
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_StationarySource_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Total Stationary Sources"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:StationarySource
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_StationarySource_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Total Stationary Sources"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:StationarySource
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Road Transport"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_SulphurOxide_PerCapita
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Total emissions per capita"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:PerCapita
+emittedThing: dcid:SulphurOxide
+
+Node: dcid:Amount_Emissions_WasteManagement_NitrogenOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Nitrogen Oxides emmited from Waste"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:WasteManagement
+emittedThing: dcid:NitrogenOxide
+
+Node: dcid:Amount_Emissions_WasteManagement_SulphurOxide
+typeOf: dcid:StatisticalVariable
+name: "Amount of Sulphur Oxides emmited from Waste"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+emissionSource: dcid:WasteManagement
+emittedThing: dcid:SulphurOxide
+
