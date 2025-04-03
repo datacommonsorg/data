@@ -1,0 +1,5 @@
+Facility Id,FRS Id,Facility Name,Basin,Reported City,Reported State,Reported Zip Code,Reported Address,Reported County,Reported Latitude,Reported Longitude,Primary NAICS Code,Industry Type (subparts),Total reported emissions from Onshore Oil & Gas Production ,CO2 emissions (non-biogenic) ,Methane (CH4) emissions ,Nitrous Oxide (N2O) emissions ,Does the facility employ continuous emissions monitoring? 
+1000355,,#540 BONANZA CREEK ENERGY - DENVER BASIN,540 - Denver Basin,Denver,CO,80202,"410 17th Street, Suite 1500",,39.74431,-104.98858,211111,W-ONSH,261382.84,154176.7,107115.25,90.89,N
+1009263,110071162236,220 Gulf Coast,"220 - Gulf Coast Basin (LA, TX)",Oklahoma City,OK,73114,701 Cedar Lake Blvd,OKLAHOMA COUNTY,35.56719,-97.49827,211111,W-ONSH,3181.694,1730.8,1450,0.894,N
+1009238,,220 Gulf Coast Basin DEC,"220 - Gulf Coast Basin (LA, TX)",Oklahoma City,OK,73102,333 West Sheridan Ave,,35.466697,-97.51453,211111,W-ONSH,808767.966,600130.6,208416.25,221.116,N
+1009283,,230 Arkla Basin QEP Energy Company,230 - Arkla Basin,Denver,CO,80265,1050 17th Street Unit 800,,39.7480769,-104.994564,211111,W-ONSH,57168.136,12931.4,44219.75,16.986,N
