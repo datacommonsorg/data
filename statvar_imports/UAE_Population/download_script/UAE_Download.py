@@ -17,7 +17,7 @@ UAE_Population_URL = config["DEFAULT"]["UAE_Population_URL"]
 
 #Ensure output directory exists
 
-OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "output")
+OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input")
 Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
 
