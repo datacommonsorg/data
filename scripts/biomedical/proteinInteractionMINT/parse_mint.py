@@ -298,7 +298,7 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
                 missing_psimi_ids.add(psimi_id)
         except (IndexError, KeyError) as e:
             print(
-                f"Warning: Error processing term {terms[idx]}. Check missing_psimi_ids.log."
+                f"Warning: Error processing term {terms[idx]}"
             )
         # except Exception as e:
         #     logging.error(f"An unexpected error occured processing term {terms[idx]}. Key: {key}, Error: {e}")
@@ -377,12 +377,6 @@ def get_schema_from_text(terms, new_source_map, psimi_to_dcid):
     return '\n'.join(schema_piece_list), new_source_map
 
 
-import logging
-
-logging.basicConfig(filename='missing_psimi_ids.log',
-                    level=logging.WARNING,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
-
 
 def main(argv):
     "Main function to read the database file and generate data mcf"
@@ -430,7 +424,7 @@ def main(argv):
         if not if_uniprot1 or not if_uniprot2:
             no_uniprot_cases.append(line)
             continue
-        # print(terms,"7777777")
+    
         schema, new_source_map = get_schema_from_text(terms, new_source_map,
                                                       psimi_to_dcid)
         if schema:
