@@ -9,7 +9,7 @@
 
 - statvars: Demographics
 
-- years: 1975 to 2005
+- years: 1975 to 2005.
 
 - place_resolution: Places resolved to wikidataId in metadata sheet itself.
 
@@ -22,6 +22,6 @@
 `python3 UAE_Download.py`
 
 #### Processing
-`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='statvar_imports/uae_Population/UAE_Population/test_data/sample_input/output/UAEPopulationByEmiratesNationalityandgender.xlsx' --pv_map='statvar_imports/uae_Population/UAE_Population/UAEPopulationByEmiratesNationality_pvmap.csv,observationAbout:statvar_imports/uae_Population/UAE_Population/UAEPopulation_places_resolved_csv.csv' --config='statvar_imports/uae_Population/UAE_Population/UAEPopulationByEmiratesNationality_metadata.csv' --output_path=/statvar_imports/uae_Population/UAE_Population/test_data/sample_output/output``
+`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='uae_population/data/statvar_imports/uae_population/test_data/uae_population_input.xlsx' --pv_map='uae_population/data/statvar_imports/uae_population/uae_popolation_pvmap.csv' --config='uae_population/data/statvar_imports/uae_population/uae_popolation_metadata.csv' --output_path=uae_population/data/statvar_imports/uae_population/test_data/output`
 
 
