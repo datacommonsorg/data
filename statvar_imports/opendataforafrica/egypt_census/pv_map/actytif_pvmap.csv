@@ -1,0 +1,78 @@
+key,prop,val,p1,v1,,,,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,,,,,
+OBS_VALUE,value,{Number},,,,,,,,,,
+ID_LOCATION,observationAbout,{Data},,,,,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,,,
+,,,,,,,,,,,,
+KN.S2,#ignore,no mapping in data sheet,,,,,,,,,,
+KN.S3,populationType,HealthEstablishment,establishmentType,PublicAndCentralHospital,measuredProperty,count,name,"""Public and central Hospitals""",,,,
+KN.S4,populationType,HealthEstablishment,establishmentType,PublicHospital,numberOfBeds,[200 - Beds],name,"""Number of Public hospitals (more than 200 beds)""",,,,
+KN.S5,populationType,HealthEstablishment,establishmentType,CentralHospital,numberOfBeds,[100 200 Beds],name,"""Number of Central hospitals (100-200 beds)""",,,,
+KN.S6,populationType,HealthEstablishment,establishmentType,CentralHospital,numberOfBeds,[- 99 Beds],name,"""Number of Central hospitals (less than 100 beds)""",,,,
+KN.S7,populationType,HealthEstablishment,establishmentType,PublicAndCentralHospital,,,name,"""Total Number of Public and central hospitals""",,,,
+KN.S8,populationType,HealthEstablishment,establishmentType,SpecialtyHospital,,,name,"""Number of Specialty Hospitals""",,,,
+KN.S9,#ignore,no mapping in data sheet,,,,,,,,,,
+KN.S10,,,populationType,Bed,establishmentType,PublicAndCentralHospital,name,"""Number of Beds in Public and central Hospitals""",,,,
+KN.S11,,,populationType,Bed,establishmentType,PublicHospital,numberOfBeds,[200 - Beds],name,"""Number of Beds in Public hospitals more than 200 beds""",,
+KN.S12,,,populationType,Bed,establishmentType,CentralHospital,numberOfBeds,[100 200 Beds],name,"""Number of Beds in Central hospital 100-200 beds""",,
+KN.S13,,,populationType,Bed,establishmentType,CentralHospital,numberOfBeds,[- 99 Beds],name,"""Number of Beds in Central hospital less than 100 beds""",,
+KN.S14,,,populationType,Bed,establishmentType,PublicAndCentralHospital,,,name,"""Total Number of Beds in Public and central hospitals""",,
+KN.S15,,,populationType,Bed,establishmentType,SpecialtyHospital,,,name,"""Number of beds in Specialty Hospitals""",,
+KN.S16,populationType,CriminalIncidents,measuredProperty,count,,,,,name,"""Number of Crimes""",,
+KN.S17,#ignore,no mapping in data sheet,,,,,,,,,,
+KN.S18,populationType,Establishment,measuredProperty,count,establishmentType,SocialCareFacility,,,name,"""Number of Social Care Facilities""",,
+KN.S19,#Ignore,Ignore,,,,,,,,,,
+KN.S20,#Ignore,Ignore,,,,,,,,,,
+KN.S21,#ignore,no mapping in data sheet,,,,,,,,,,
+KN.S22,populationType,Establishment,measuredProperty,count,establishmentType,AmbulanceStation,,,name,"""Number of Ambulance stations""",,
+KN.S23,#ignore,no mapping in data sheet,,,,,,,,,,
+KN.S24,#Ignore,Ignore,,,,,,,,,,
+KN.S25,populationType,Incident,measuredProperty,count,accidentType,TrafficAccident,accidentCause,Tram,,,name,"""Number of accidents from tram (Traffic accidents)"""
+KN.S26,populationType,Incident,measuredProperty,count,accidentType,TrafficAccident,accidentCause,Car,,,name,"""Number of accidents from cars (Traffic accidents)"""
+KN.S27,populationType,Incident,measuredProperty,count,accidentType,TrafficAccident,accidentCause,BicycleOrMotorbike,,,name,"""Number of accidents from bicycles or motorbike (Traffic accidents)"""
+KN.S28,populationType,Incident,measuredProperty,count,accidentType,TrafficAccident,accidentCause,Railway,,,name,"""Number of accidents from railway (Traffic accidents)"""
+KN.S29,populationType,Incident,measuredProperty,count,accidentType,TrafficAccident,accidentCause,Subway,,,name,"""Number of accidents from subway (Traffic accidents)"""
+KN.S30,populationType,Incident,measuredProperty,count,accidentType,TrafficAccident,accidentCause,Other,,,name,"""Number of accidents from other means (Traffic accidents)"""
+KN.S31,populationType,Incident,measuredProperty,count,accidentType,TrafficAccident,,,,,name,"""Total number of traffic accidents"""
+KN.S32,populationType,Incident,incidentType,FallFromHeight,,,,,,,name,"""Number of Incidence of fall from heights"""
+KN.S33,populationType,Incident,incidentType,CollapseOfBuildings,,,,,,,name,"""Number of Incidence of collapse of buildings"""
+KN.S34,populationType,Incident,incidentType,InjuriesDuringWork,,,,,,,name,"""Number of Incidence of injuries during work"""
+KN.S35,#Ignore,Ignore,,,,,,,,,,
+KN.S36,populationType,Incident,incidentType,Scuffles,,,,,,,name,"""Number of Incidence of scuffles"""
+KN.S37,populationType,Incident,incidentType,Suicide,,,,,,,name,"""Number of Incidence of suicide"""
+KN.S38,populationType,Incident,incidentType,PoisonGasAndElectricShocks,,,,,,,name,"""Incidence of poison gas and electric shocks"""
+KN.S39,populationType,MedicalConditionIncident,incidentType,RenalColicAndDifferentIntestinalDiseases,,,,,,,name,"""Number of Incidence of renal colic and different intestinal diseases"""
+KN.S40,populationType,MedicalConditionIncident,incidentType,HardBirthAndBleeding,,,,,,,name,"""Incidence of hard birth and bleeding"""
+KN.S41,populationType,MedicalConditionIncident,incidentType,Burns,,,,,,,name,"""Number of Incidence of burns"""
+KN.S42,populationType,MedicalConditionIncident,incidentType,Poisoning,,,,,,,name,"""Number of Incidence of poisoning"""
+KN.S43,populationType,MedicalConditionIncident,incidentType,Drowning,,,,,,,name,"""Number of Incidence of drowning"""
+KN.S47,populationType,MedicalConditionIncident,incidentType,SportsGamesAccidents,,,,,,,name,"""Number of incidences of sports games accidents"""
+KN.S44,populationType,MedicalConditionIncident,incidentType,InjuryFromOtherReasons,,,,,,,name,"""Number of Incidence with other reasons"""
+KN.S45,populationType,Incident,measuredProperty,count,incidentType,Accident,,,,,name,"""The total number of accidents"""
+KN.S46,#Ignore,Ignore,,,,,,,,,,
+KN.S48,#ignore,no mapping in data sheet,,,,,,,,,,
+KN.S49,variableMeasured,Count_Death,,,,,,,,,name,"""The total number of deaths"""
+KN.S50,populationType,MedicalConditionIncident,incidentType,Bleeding,,,,,,,name,"""Number of Incidence of bleeding"""
+KN.S51,populationType,MedicalConditionIncident,incidentType,Wounds,,,,,,,name,"""Number of Incidence of wounds"""
+KN.S52,populationType,MedicalConditionIncident,incidentType,LossOfConsciousness,,,,,,,name,"""Number of Incidence of loss of consciousness"""
+KN.S53,populationType,MedicalConditionIncident,incidentType,Suffocation,,,,,,,name,"""Number of Incidence of suffocation"""
+KN.S54,populationType,Incident,measuredProperty,count,accidentType,AccidentDamage,accidentCause,Poisoning,,,name,"""Number of accidents from Poisoning, Damages"""
+KN.S55,populationType,MedicalConditionIncident,incidentType,InsectBites,,,,,,,name,"""Number of Incidence of Insect Bites"""
+KN.S56,populationType,Incident,measuredProperty,count,accidentType,AccidentDamage,accidentCause,Burns,,,name,"""Number of accidents from Burns, Damage from accidents"""
+KN.S57,populationType,MedicalConditionIncident,incidentType,Dislocation,,,,,,,name,"""Number of Incidence of Dislocation"""
+KN.S58,populationType,MedicalConditionIncident,incidentType,Fracture,,,,,,,name,"""Number of Incidence of Fracture"""
+KN.S59,populationType,MedicalConditionIncident,incidentType,Hernia,,,,,,,name,"""Number of Incidence of Hernia"""
+KN.S60,populationType,MedicalConditionIncident,incidentType,Anaesthetics,,,,,,,name,"""Number of Incidence of Anaesthetics"""
+KN.S64,populationType,MedicalConditionIncident,incidentType,ScorpionOrSnakeBites,,,,,,,name,"""Number of Incidence of Scorpion or snake bites"""
+KN.S61,populationType,MedicalConditionIncident,incidentType,Others,,,,,,,name,"""Number of other incidences(including contusion, bruises, fracture, etc.)"""
+KN.S62,populationType,Incident,measuredProperty,count,accidentType,AccidentDamage,accidentCause,Other,,,name,"""Number of accidents from Other Damage"""
+KN.S63,populationType,Incident,measuredProperty,count,accidentType,AccidentDamage,,,,,name,"""Total Damages from accidents"""
+KN.S65,#ignore,no mapping in data sheet,,,,,,,,,,
+KN.S66,#Ignore,Ignore,,,,,,,,,,
+KN.S67,#Ignore,Ignore,,,,,,,,,,
+KN.S68,#Ignore,Ignore,,,,,,,,,,
+KN.S69,#Ignore,Ignore,,,,,,,,,,
+KN.S70,populationType,Establishment,measuredProperty,count,establishmentType,YouthCenter,placeType,City,,,name,"""Total number of youth centers in cities"""
+KN.S71,populationType,Establishment,measuredProperty,count,establishmentType,YouthCenter,placeType,Village,,,name,"""Total number youth centers in village"""
+KN.S72,populationType,Establishment,measuredProperty,count,establishmentType,YouthCenter,,,,,name,"""Total number of youth centers"""
+KN.S73,populationType,Establishment,measuredProperty,count,establishmentType,AthleticEstablishment,,,,,name,"""Total number of athletic establishments"""

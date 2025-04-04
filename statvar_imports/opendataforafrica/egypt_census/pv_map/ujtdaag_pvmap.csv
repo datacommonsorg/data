@@ -1,0 +1,8 @@
+key,prop,val,p1,v1,Name1,"""""",Name2,"""""",#End,#value
+OBS_VALUE,value,{Number},observationAbout,country/EGY,,,,,,
+TIME_PERIOD,observationDate,{Number},name,"""{Name1} {Name2}""",,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,
+SEX:1,gender,Female,Name2,Female,,,,,,
+SEX:2,gender,Male,Name2,Male,,,,,,
+INDICATORS:1,populationType,Person,measuredProperty,lifeExpectancy,Name1,Life Expectancy at Birth for Females,unit,Year,,
+INDICATORS:2,#ignore,ignore,,,,,,,,

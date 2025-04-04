@@ -1,0 +1,10 @@
+key,prop,val,p1,v1,p2,v2,,
+OBS_VALUE,value,{Number},observationAbout,country/EGY,populationType,Teacher,,
+TIME_PERIOD,observationDate,{Number},,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,
+الجامعات الحكومية والازهر,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,PublicUniversity__AlAzharUniversity,name,"""Number of Public and Al-Azhar universities""",alternateName,"""الجامعات الحكومية والازهر@ar"""
+الجامعات الخاصة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,PrivateUniversity,name,"""Number of Private universities""",alternateName,"""الجامعات الخاصة@ar"""
+المعاهد العليا الخاصة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,PrivateHigherInstitute,name,"""Number of Private higher institutes""",alternateName,"""المعاهد العليا الخاصة@ar"""
+الاكاديميات,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,Academy,name,"""Number of Academies""",alternateName,"""الاكاديميات@ar"""
+المعاهد الفنية فوق المتوسطة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,UpperMediumTechnicalInstitute,name,"""Number of Upper-medium technical institutes""",alternateName,"""المعاهد الفنية فوق المتوسطة@ar"""
+المعاهد المتنوعة,enrollmentStatus,EnrolledInEducationOrTraining,institutionType,OtherInstitute,name,"""Other institutes""",alternateName,"""المعاهد المتنوعة@ar"""

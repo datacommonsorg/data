@@ -1,0 +1,9 @@
+Node: E:zkjifzd->E0
+observationAbout: C:zkjifzd->observationAbout
+observationDate: C:zkjifzd->observationDate
+variableMeasured: C:zkjifzd->variableMeasured
+value: C:zkjifzd->value
+unit: C:zkjifzd->unit
+scalingFactor: C:zkjifzd->scalingFactor
+observationPeriod: C:zkjifzd->observationPeriod
+typeOf: dcs:StatVarObservation
