@@ -1,0 +1,7 @@
+"key","prop","val","p1","v1",,
+"SEX:M","gender","Male",,,,
+"SEX:F","gender","Female",,,,
+"TIME_PERIOD","observationDate","{Number}",,,,
+"OBS_VALUE","value","{Number}","populationType","Student","schoolGradeLevel","AdultEducation"
+"FREQ","observationPeriod","P1Y",,,,
+"COUNTY","observationAbout","{Data}",,,,

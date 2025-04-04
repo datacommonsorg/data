@@ -1,0 +1,16 @@
+"key","prop","val","p1","v1","p2","v2"
+"OBS_VALUE","value","{Number}","populationType","MortalityEvent","observationAbout","country/KEN"
+"TIME_PERIOD","observationDate","{Number}",,,,
+"FREQ","observationPeriod","P1Y",,,,
+"AGE_GROUP:A1","age","Years0To1",,,,
+"AGE_GROUP:A2","age","[1 4 Years]",,,,
+"AGE_GROUP:A3","age","[5 14 Years]",,,,
+"AGE_GROUP:A4","age","[15 24 Years]",,,,
+"AGE_GROUP:A5","age","[25 34 Years]",,,,
+"AGE_GROUP:A6","age","[35 44 Years]",,,,
+"AGE_GROUP:A7","age","[45 54 Years]",,,,
+"AGE_GROUP:A8","age","[55 74 Years]",,,,
+"AGE_GROUP:A9","age","[75 - Years]",,,,
+"AGE_GROUP:A10","age","USC_AgeNotStated",,,,
+"SEX:M","gender","Male",,,,
+"SEX:F","gender","Female",,,,

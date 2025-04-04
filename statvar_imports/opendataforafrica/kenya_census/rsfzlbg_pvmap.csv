@@ -1,0 +1,9 @@
+"key","p1","v1","p2","v2","p3","v3","p4","v4","p5","v5"
+"INDICATOR:1","populationType","BirthEvent","medicalStatus","LiveBirth",,,,,,
+"INDICATOR:2","#ignore","ignore",,,,,,,,
+"INDICATOR:3","#ignore","ignore",,,,,,,,
+"INDICATOR:4","populationType","MaternalMortalityEvent",,,,,,,,
+"TIME_PERIOD","observationDate","{Number}",,,,,,,,
+"OBS_VALUE","value","{Number}",,,,,,,,
+"FREQ","observationPeriod","P1Y",,,,,,,,
+"ADMINISTRATIVE_UNIT","observationAbout","{Data}",,,,,,,,

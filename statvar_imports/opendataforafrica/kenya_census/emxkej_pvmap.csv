@@ -1,0 +1,23 @@
+"key","p1","v1","p2","v2","p3","v3","p4","v4","p5","v5"
+"AGE_GROUP:1","populationType","Person","measuredProperty","count","age","[0 4 Years]","statType","measuredValue",,
+"AGE_GROUP:2","populationType","Person","measuredProperty","count","age","[5 9 Years]","statType","measuredValue",,
+"AGE_GROUP:3","populationType","Person","measuredProperty","count","age","[10 14 Years]","statType","measuredValue",,
+"AGE_GROUP:4","populationType","Person","measuredProperty","count","age","[15 19 Years]","statType","measuredValue",,
+"AGE_GROUP:5","populationType","Person","measuredProperty","count","age","[20 24 Years]","statType","measuredValue",,
+"AGE_GROUP:6","populationType","Person","measuredProperty","count","age","[25 29 Years]","statType","measuredValue",,
+"AGE_GROUP:7","populationType","Person","measuredProperty","count","age","[30 34 Years]","statType","measuredValue",,
+"AGE_GROUP:8","populationType","Person","measuredProperty","count","age","[35 39 Years]","statType","measuredValue",,
+"AGE_GROUP:9","populationType","Person","measuredProperty","count","age","[40 44 Years]","statType","measuredValue","#Multiply",1000
+"AGE_GROUP:10","populationType","Person","measuredProperty","count","age","[45 49 Years]","statType","measuredValue","#Multiply",1000
+"AGE_GROUP:11","populationType","Person","measuredProperty","count","age","[50 54 Years]","statType","measuredValue","#Multiply",1000
+"AGE_GROUP:12","populationType","Person","measuredProperty","count","age","[55 59 Years]","statType","measuredValue","#Multiply",1000
+"AGE_GROUP:13","populationType","Person","measuredProperty","count","age","[60 64 Years]","statType","measuredValue","#Multiply",1000
+"AGE_GROUP:14","populationType","Person","measuredProperty","count","age","[65 69 Years]","statType","measuredValue","#Multiply",1000
+"AGE_GROUP:15","populationType","Person","measuredProperty","count","age","[70 74 Years]","statType","measuredValue","#Multiply",1000
+"AGE_GROUP:16","populationType","Person","measuredProperty","count","age","[75 79 Years]","statType","measuredValue","#Multiply",1000
+"AGE_GROUP:17","populationType","Person","measuredProperty","count","age","[80 - Years]","statType","measuredValue","#Multiply",1000
+"GENDER:1","gender","Female","measuredProperty","count",,,,,,
+"GENDER:2","gender","Male","measuredProperty","count",,,,,,
+"TIME_PERIOD","observationDate","{Number}",,,,,,,,
+"OBS_VALUE","value","{Number}","observationAbout","country/KEN",,,,,,
+"FREQ","observationPeriod","P1Y",,,,,,,,
