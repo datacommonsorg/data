@@ -1,0 +1,17 @@
+"key","prop","val","p1","v1","p2","v2",,,,
+"TIME_PERIOD","observationDate","{Number}",,,,,,,,
+"OBS_VALUE","value","{Number}","populationType","ExpenditureActivity","observationAbout","country/KEN","measuredProperty","amount",,
+"I1","activitySource","GrossDomesticProduction","measurementQualifier","RealValue","name","""Expenditure on the Gross Domestic Product, current Price on {ET}""","unit","KES","#Multiply",1000000
+"I2","activitySource","GrossDomesticProduction","measurementDenominator","-expenditureType","name","""Expenditure on the Gross Domestic Product, percentage contribution to GDP on {ET}""","unit","Percent",,
+"I3","activitySource","GrossDomesticProduction","measurementQualifier","Nominal","name","""Expenditure on the Gross Domestic Product, constant 2016 prices on {ET}""","unit","KES","#Multiply",1000000
+"I4","activitySource","GrossDomesticProduction","#ignore","ignore",,,,,,
+"EX1","expenditureType","GovernmentFinalConsumption","ET","""government final consumption expenditure""",,,,,,
+"EX2","expenditureType","PrivateFinalConsumption","ET","""private final consumption expenditure""",,,,,,
+"EX3","expenditureType","NonProfitInstitutionsServingHouseholds","ET","""final consumption expenditure by NPISH1""",,,,,,
+"EX4","expenditureType","GrossFixedCapitalFormation","ET","""gross fixed capital formation""",,,,,,
+"EX5","expenditureType","InventoryChanges","ET","""changes in inventories""",,,,,,
+"EX6","expenditureType","GrossDomesticExpenditure","ET","""gross domestic expenditure""",,,,,,
+"EX7","expenditureType","ExportsGoodsAndServices","ET","""exports of goods and services""",,,,,,
+"EX8","expenditureType","ImportsGoodsAndServices","ET","""Imports of goods and services""",,,,,,
+"EX9","expenditureType","DiscrepancyExpenditure","ET","""discrepancy expenditure""",,,,,,
+"EX10","measurementQualifier","Nominal",,,,,,,,

@@ -1,0 +1,16 @@
+"I1","Expenditure on the Gross Domestic Product, Current Price",TRUE,"ID_EXPENDITURE_X0020_CATEGORY"
+"I2","Expenditure on the Gross Domestic Product, Percentage contribution to GDP",TRUE,"EX1"
+"I3","Expenditure on the Gross Domestic Product, Constant 2016 Prices",TRUE,"EX2"
+"I4","Expenditure on the Gross Domestic Product, Percentage Changes (growth)",TRUE,"EX3"
+,,,"EX4"
+"Name","Region ID",,"EX5"
+"EX10","Gross domestic product at market prices",,"EX6"
+"EX6","Gross domestic expenditure",,"EX7"
+"EX1","Government final consumption expenditure",,"EX8"
+"EX2","Private final consumption expenditure",,"EX9"
+"EX3","Final consumption expenditure by NPISH1",,"EX10"
+"EX4","Gross fixed capital formation",,
+"EX5","Changes in inventories",,
+"EX7","Exports of goods and services",,
+"EX8","Imports of goods and services",,
+"EX9","Discrepancy",,

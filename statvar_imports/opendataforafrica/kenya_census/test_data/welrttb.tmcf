@@ -1,0 +1,9 @@
+Node: E:-welrttb->E0
+observationAbout: C:-welrttb->observationAbout
+observationDate: C:-welrttb->observationDate
+variableMeasured: C:-welrttb->variableMeasured
+value: C:-welrttb->value
+unit: C:-welrttb->unit
+scalingFactor: C:-welrttb->scalingFactor
+observationPeriod: C:-welrttb->observationPeriod
+typeOf: dcs:StatVarObservation

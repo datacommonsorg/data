@@ -1,0 +1,9 @@
+Node: E:-srricmg->E0
+observationAbout: C:-srricmg->observationAbout
+observationDate: C:-srricmg->observationDate
+variableMeasured: C:-srricmg->variableMeasured
+value: C:-srricmg->value
+unit: C:-srricmg->unit
+scalingFactor: C:-srricmg->scalingFactor
+observationPeriod: C:-srricmg->observationPeriod
+typeOf: dcs:StatVarObservation

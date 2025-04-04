@@ -1,0 +1,17 @@
+"key","prop","val","p1","v1","p2","v2"
+"SEX:M","gender","Male",,,,
+"SEX:F","gender","Female",,,,
+"SEX:I","gender","Intersex",,,,
+"T1","populationType","Person",,,,
+"T2","populationType","Household",,,,
+"T3","populationType","Person",,,,
+"H1","householdType","ConventionalHousehold",,,,
+"H2","householdType","Kenya_GroupQuarters",,,,
+"U","placeOfResidenceClassification","Urban",,,,
+"R","placeOfResidenceClassification","Rural",,,,
+"M1","measuredProperty","area","unit","SquareKilometer","populationType","LandCover"
+"M2","measurementDenominator","area","unit","PersonPerSquareKilometer",,
+"TIME_PERIOD","observationDate","{Number}",,,,
+"OBS_VALUE","value","{Number}",,,,
+"FREQ","observationPeriod","P1Y",,,,
+"COUNTY","observationAbout","{Data}",,,,

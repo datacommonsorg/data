@@ -1,0 +1,17 @@
+"parameter","value"
+"url","https://ethiopia.opendataforafrica.org/xtqdbuc/ethiopia-statistics-2011?regionId=ET-AA#"
+"description",
+"#place_type",
+"#places_within",
+"start_date",
+"end_date",
+"release_frequency",
+"process",
+"comments",
+"places_resolved_csv","https://docs.google.com/spreadsheets/d/1kVz-_AGhlq5MBpL216U24m2vR2UJjCfG9YRXWjB6jJQ/edit?resourcekey=0-MWIcMtdjmWYlxjObYt2Rww&gid=1675260859#gid=1675260859"
+"output_columns","observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod"
+"header_rows",1
+"drop_statvars_without_svobs",0
+"mapped_rows",1
+"mapped_columns",5
+"#input_rows",19

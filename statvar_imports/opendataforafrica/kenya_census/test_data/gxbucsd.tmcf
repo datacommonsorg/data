@@ -1,0 +1,9 @@
+Node: E:-gxbucsd->E0
+observationAbout: C:-gxbucsd->observationAbout
+observationDate: C:-gxbucsd->observationDate
+variableMeasured: C:-gxbucsd->variableMeasured
+value: C:-gxbucsd->value
+unit: C:-gxbucsd->unit
+scalingFactor: C:-gxbucsd->scalingFactor
+observationPeriod: C:-gxbucsd->observationPeriod
+typeOf: dcs:StatVarObservation
