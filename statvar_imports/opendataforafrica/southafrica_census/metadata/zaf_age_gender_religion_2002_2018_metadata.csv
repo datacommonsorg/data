@@ -1,0 +1,13 @@
+parameter,value
+url,https://southafrica.opendataforafrica.org/
+description,"Age, gender and religion for South Africa country"
+#place_type,Country
+#places_within,country/ZAF
+start_date,2002
+end_date,2018
+release_frequency,P1Y
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+mapped_rows,1
+mapped_columns,17
