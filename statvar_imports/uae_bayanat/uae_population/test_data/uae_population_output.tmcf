@@ -1,0 +1,8 @@
+Node: E:uae_population_output->E0
+observationAbout: C:uae_population_output->observationAbout
+observationDate: C:uae_population_output->observationDate
+variableMeasured: C:uae_population_output->variableMeasured
+value: C:uae_population_output->value
+observationPeriod: C:uae_population_output->observationPeriod
+measurementMethod: C:uae_population_output->measurementMethod
+typeOf: dcs:StatVarObservation
