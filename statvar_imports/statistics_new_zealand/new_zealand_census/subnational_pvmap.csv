@@ -1,0 +1,8 @@
+mapped_rows,2,,,,,
+mapped_coloumns,3,,,,,
+name,observationAbout,{Data},populationType,Person,statType,measuredValue
+erp18,value,{Number},observationDate,2018,measuredProperty,count
+erp19,value,{Number},observationDate,2019,measuredProperty,count
+erp20,value,{Number},observationDate,2020,measuredProperty,count
+erp21,value,{Number},observationDate,2021,measuredProperty,count
+chg2021num,value,{Number},observationDate,2021,measuredProperty,incrementalCount
