@@ -1,0 +1,9 @@
+Node: E:hivlaeg->E0
+observationAbout: C:hivlaeg->observationAbout
+observationDate: C:hivlaeg->observationDate
+variableMeasured: C:hivlaeg->variableMeasured
+value: C:hivlaeg->value
+unit: C:hivlaeg->unit
+scalingFactor: C:hivlaeg->scalingFactor
+observationPeriod: C:hivlaeg->observationPeriod
+typeOf: dcs:StatVarObservation

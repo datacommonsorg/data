@@ -1,0 +1,16 @@
+parameter,value
+url,https://southafrica.opendataforafrica.org/
+description,"Table 11. Distribution of Educational attainement and field of Education by Labour market status, RLFS 2018 - 2022Q3"
+#place_type,Country
+#places_within,country/RWA
+start_date,2019
+end_date,2022
+release_frequency,P3M
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod"
+header_rows,1
+#drop_statvars_without_svobs,0
+mapped_columns,6
+mapped_rows,1
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/1fLbL7zPv2tu5-uKNEeMUxcaQpfPPeb5oeNrRgX_as-E/edit?resourcekey=0-ihxSq4LtNc0n8QG8PDj-VA&gid=1320806390#gid=1320806390
