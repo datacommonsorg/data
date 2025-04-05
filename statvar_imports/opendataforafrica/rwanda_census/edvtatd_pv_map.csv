@@ -1,0 +1,27 @@
+key,prop,val,p1,v1,p2,v2,p3,v3
+OBS_VALUE,value,{Number},populationType,Person,age,[16 - Years],observationAbout,country/RWA
+I3,employmentStatus,BLS_InLaborForce,,,,,,
+I4,employmentStatus,Employed,,,,,,
+I5,employmentStatus,Unemployed,,,,,,
+I6,employmentStatus,BLS_NotInLaborForce,,,,,,
+I7,employmentStatus,BLS_InLaborForce,measurementDenominator,-employmentStatus,unit,Percent,scalingFactor,100
+I8,employmentStatus,Employed,measurementDenominator,-employmentStatus,unit,Percent,scalingFactor,100
+I9,employmentStatus,Unemployed,measurementDenominator,-employmentStatus,unit,Percent,scalingFactor,100
+2021,observationDate,2021,,,,,,
+2020-Q1,observationDate,2020-03,,,,,,
+2020-Q3,observationDate,2020-06,,,,,,
+2020-Q4,observationDate,2020-12,,,,,,
+2021-Q2,observationDate,2021-06,,,,,,
+2021-Q3,observationDate,2021-09,,,,,,
+2021-Q4,observationDate,2021-12,,,,,,
+2022-Q1,observationDate,2022-03,,,,,,
+2022-Q3,observationDate,2022-09,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,
+FREQ:Q,observationPeriod,P3M,,,,,,
+I1,#ignore,ignore,,,,,,
+TOT,#ignore,ignore,,,,,,
+EA1,educationalAttainment,NoEducation,,,,,,
+EA2,educationalAttainment,PrimaryEducation,,,,,,
+EA3,educationalAttainment,LowerSecondaryEducation,,,,,,
+EA4,educationalAttainment,UpperSecondaryEducation,,,,,,
+EA5,educationalAttainment,UpperSecondaryEducationOrHigher,,,,,,

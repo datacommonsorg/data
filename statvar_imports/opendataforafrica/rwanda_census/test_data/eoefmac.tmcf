@@ -1,0 +1,9 @@
+Node: E:eoefmac->E0
+observationAbout: C:eoefmac->observationAbout
+observationDate: C:eoefmac->observationDate
+variableMeasured: C:eoefmac->variableMeasured
+value: C:eoefmac->value
+unit: C:eoefmac->unit
+scalingFactor: C:eoefmac->scalingFactor
+observationPeriod: C:eoefmac->observationPeriod
+typeOf: dcs:StatVarObservation

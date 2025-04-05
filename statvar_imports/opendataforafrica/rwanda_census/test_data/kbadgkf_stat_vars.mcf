@@ -1,0 +1,16 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/chharish/opendata_africa/data/statvar_imports/opendataforafrica/rwanda_census/test_data/kbadgkf_data.csv --pv_map=/usr/local/google/home/chharish/opendata_africa/data/statvar_imports/opendataforafrica/rwanda_census/kbadgkf_pv_map.csv --config=/usr/local/google/home/chharish/opendata_africa/data/statvar_imports/opendataforafrica/rwanda_census/kbadgkf_metadata.csv --output_path=/usr/local/google/home/chharish/opendata_africa/data/statvar_imports/opendataforafrica/rwanda_census/test_data/kbadgkf" on 2025-04-05 11:33:09.955578
+
+Node: dcid:Count_Person_NotInLaborForce
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:NotInLaborForce
+
+Node: dcid:Count_Person_Unemployed
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+employmentStatus: dcid:Unemployed
+
