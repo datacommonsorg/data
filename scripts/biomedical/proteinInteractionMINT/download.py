@@ -1,5 +1,8 @@
 import requests
 from retry import retry
+from absl import logging
+
+logging.set_verbosity(logging.INFO)
 
 @retry(tries=3, delay=5, backoff=2)
 def download_and_save_data(url, output_file="mint-database.txt"):
@@ -19,14 +22,14 @@ def download_and_save_data(url, output_file="mint-database.txt"):
         with open(output_file, "w", encoding="utf-8") as f:
             f.write(data)
 
-        print(f"Data successfully saved to {output_file}")
+        logging.info(f"Data successfully saved to {output_file}")
 
     except requests.exceptions.RequestException as e:
-        print(f"Error downloading data: {e}")
+        logging.error(f"Error downloading data: {e}")
     except IOError as e:
-        print(f"Error writing to file: {e}")
+        logging.error(f"Error writing to file: {e}")
     except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        logging.error(f"An unexpected error occurred: {e}")
 
 def main():
     url_to_download = "http://www.ebi.ac.uk/Tools/webservices/psicquic/mint/webservices/current/search/query/*"  
