@@ -10,6 +10,6 @@ process,"In the data sheet, added ""country/NZL"" as country id manually under o
 comments,
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod"
 debug,1
-statvar_dcid_remap_csv,/usr/local/google/home/sudhisha/statvarWorks/New_zealand_census/input_files/worksheets/nat/nzl_demographics_statvar_remap.csv
+statvar_dcid_remap_csv,nzl_demographics_statvar_remap.csv
 mapped_coloumns,1
 header_rows,4
