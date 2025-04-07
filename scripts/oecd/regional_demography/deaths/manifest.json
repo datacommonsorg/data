@@ -1,0 +1,22 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "OECDRegionalDemography_Deaths",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://data-explorer.oecd.org/vis?df[ds]=DisseminateFinalDMZ&df[id]=DSD_REG_DEMO%40DF_DEATH_5Y&df[ag]=OECD.CFE.EDS&df[vs]=2.0&dq=A.......&to[TIME_PERIOD]=false&pd=%2C",
+      "provenance_description": "Regional demographic statistics of deaths by age and sex measured by OECD (Organisation for Economic Co-operation and Development).",
+      "scripts": [
+        "preprocess_csv.py"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "OECD_deaths_cleaned.tmcf",
+          "cleaned_csv": "OECD_deaths_cleaned.csv"
+        }
+      ],
+      "cron_schedule": "0 0 1 3 *"
+    }
+  ]
+}

@@ -200,7 +200,6 @@ file_to_sv_mapping = {
             "'Percent_Daily_TobaccoSmoking'+'_Cigarettes'"+\
             "+'_In_Count_Person_'+df['isced11']+'_'+df['sex']",
 
-
         "hlth_ehis_de4":
             "'Percent_Daily_TobaccoSmoking'"+\
             "+'_Cigarettes'+'_In_Count_Person_'+df['sex']+'_'+df['quant_inc']",
@@ -208,7 +207,6 @@ file_to_sv_mapping = {
         "hlth_ehis_de5":
             "'Percent_Daily'+'_'+df['smoking']+'_TobaccoSmoking'"+\
             "+'_Cigarettes'+'_In_Count_Person_'+df['isced11']+'_'+df['sex']"
-
 
     },
 
@@ -317,6 +315,4 @@ file_to_sv_mapping = {
        "hlth_ehis_fv5e" : " 'Percent_'+ df['frequenc_fruitsvegetables'] + '_' +'ConsumptionOfPureFruitOrConsumptionOfVegetableJuice_' "+\
              " +  'In_Count_Person_' +df['isced11'] +'_' + df['sex']",
     },
-
-
 }

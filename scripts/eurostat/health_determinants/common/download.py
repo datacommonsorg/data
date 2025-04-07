@@ -17,6 +17,7 @@ Unzips it and makes it available for further processing
 """
 import gzip
 import urllib.request
+from absl import logging
 
 
 def download_gz_file(download_file_url: str, download_path: str) -> None:
@@ -25,12 +26,12 @@ def download_gz_file(download_file_url: str, download_path: str) -> None:
 
     Args:
         download_file_url (str): url of the file to be downloaded as a string
-        download_path (str): local directory to dlownload the file
+        download_path (str): local directory to download the file
 
     Returns:
         None
     """
-    file_name = download_file_url.split("/")[-1][:-3]
+    file_name = download_file_url.split("/")[-1][:-3].split("?")[0]
     output_file = download_path + "/" + file_name
 
     with urllib.request.urlopen(download_file_url) as response:
@@ -49,19 +50,15 @@ def download_files(download_files_url: list, download_path: str) -> None:
 
     Args:
         download_file_url (str): url of the file to be downloaded as a string
-        download_path (str): local directory to dlownload the file
+        download_path (str): local directory to download the file
 
     Returns:
         None
     """
-    for download_file_url in download_files_url:
-        file_extension = download_file_url.split(".")[-1]
-
-        if file_extension == "gz":
+    try:
+        for download_file_url in download_files_url:
             download_gz_file(download_file_url, download_path)
-        elif file_extension == "txt":
-            download_gz_file(download_file_url, download_path)
-        elif file_extension == "csv":
-            download_gz_file(download_file_url, download_path)
-        elif file_extension == "pdf":
-            download_gz_file(download_file_url, download_path)
+    except Exception as e:
+        logging.fatal(
+            f'Download Error: {e} - URL - {download_file_url} path - {download_path}'
+        )

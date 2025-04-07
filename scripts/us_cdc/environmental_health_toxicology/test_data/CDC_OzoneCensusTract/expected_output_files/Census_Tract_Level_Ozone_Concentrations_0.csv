@@ -1,0 +1,6 @@
+year,date,statefips,countyfips,ctfips,latitude,longitude,Error,StatisticalVariable,Value,dcid
+2001,2001-01-01,1,1,1001020100,32.477180,-86.490010,5.931458,Mean_Concentration_AirPollutant_Ozone,31.659713,geoId/1001020100
+2001,2001-01-01,1,1,1001020200,32.474250,-86.473390,5.703084,Mean_Concentration_AirPollutant_Ozone,31.939058,geoId/1001020200
+2001,2001-01-01,1,1,1001020300,32.475440,-86.460200,5.779281,Mean_Concentration_AirPollutant_Ozone,31.859155,geoId/1001020300
+2001,2001-01-01,1,1,1001020400,32.472040,-86.443700,5.784730,Mean_Concentration_AirPollutant_Ozone,31.681802,geoId/1001020400
+2001,2001-01-01,1,1,1001020500,32.458920,-86.422710,5.797620,Mean_Concentration_AirPollutant_Ozone,31.752820,geoId/1001020500
