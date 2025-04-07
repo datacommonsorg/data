@@ -154,3 +154,137 @@ class TestMCFFileUtil(unittest.TestCase):
             diff_str = diff_mcf_nodes({dcid: expected_node},
                                       {dcid: mcf_nodes[dcid]})
             self.assertEqual(diff_str, '')
+
+    def test_get_numeric_value(self):
+        self.assertEqual(2010, mcf_file_util.get_numeric_value('2010'))
+        self.assertEqual(2020, mcf_file_util.get_numeric_value('2020.0'))
+        self.assertEqual(5.6, mcf_file_util.get_numeric_value('05.6%'))
+        self.assertEqual(123456, mcf_file_util.get_numeric_value('1,23,456.0'))
+        self.assertEqual(10.123, mcf_file_util.get_numeric_value('10.123'))
+        self.assertEqual(-1.23, mcf_file_util.get_numeric_value('-1.23'))
+        self.assertEqual(
+            1234567.8,
+            mcf_file_util.get_numeric_value(
+                '1 234 567,8',
+                decimal_char=',',
+                separator_chars=' ',
+            ))
+        self.assertEqual(None, mcf_file_util.get_numeric_value('not number'))
+        self.assertEqual(None, mcf_file_util.get_numeric_value('10e5'))
+
+
+class TestAddPVToNode(unittest.TestCase):
+
+    def test_add_pv_to_node_new_property(self):
+        node = {}
+        mcf_file_util.add_pv_to_node("prop1", "value1", node, normalize=False)
+        self.assertEqual(node, {"prop1": "value1"})
+
+    def test_add_pv_to_node_existing_property_append(self):
+        node = {"prop1": "value1"}
+        mcf_file_util.add_pv_to_node("prop1", "value2", node, normalize=False)
+        self.assertEqual(node, {"prop1": "value1,value2"})
+
+    def test_add_pv_to_node_existing_property_replace(self):
+        node = {"prop1": "value1"}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     "value2",
+                                     node,
+                                     append_value=False,
+                                     normalize=False)
+        self.assertEqual(node, {"prop1": "value2"})
+
+    def test_add_pv_to_node_strip_namespaces(self):
+        node = {}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     "dcid:value1",
+                                     node,
+                                     strip_namespaces=True,
+                                     normalize=False)
+        self.assertEqual(node, {"prop1": "value1"})
+
+    def test_add_pv_to_node_normalize_strip_namespaces(self):
+        node = {}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     "dcid:value1",
+                                     node,
+                                     strip_namespaces=True,
+                                     normalize=True)
+        self.assertEqual(node, {"prop1": "value1"})
+
+    def test_add_pv_to_node_spaces_not_stripped(self):
+        node = {}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     "  value1  ",
+                                     node,
+                                     normalize=False)
+        self.assertEqual(node, {"prop1": "  value1  "})
+
+    def test_add_pv_to_node_normalize_strip_spaces(self):
+        node = {}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     "  value1  ",
+                                     node,
+                                     normalize=True)
+        self.assertEqual(node, {"prop1": "value1"})
+
+    def test_add_pv_to_node_comma_separated_values(self):
+        node = {}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     "value1, value2,value3",
+                                     node,
+                                     normalize=False)
+        self.assertEqual(node, {"prop1": "value1, value2,value3"})
+
+    def test_add_pv_to_node_normalized_comma_separated_values(self):
+        node = {}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     "value1, value2,value3",
+                                     node,
+                                     normalize=True)
+        self.assertEqual(node, {"prop1": "dcid:value1,dcid:value2,dcid:value3"})
+
+    def test_add_pv_to_node_normalize_list_values(self):
+        node = {}
+        mcf_file_util.add_pv_to_node("prop1", ["value1", "value2"],
+                                     node,
+                                     normalize=False)
+        self.assertEqual(node, {"prop1": "value1,value2"})
+
+    def test_add_pv_to_node_normalize_list_values(self):
+        node = {}
+        mcf_file_util.add_pv_to_node("prop1", ["value1", "value2"],
+                                     node,
+                                     normalize=True)
+        self.assertEqual(node, {"prop1": "dcid:value1,dcid:value2"})
+
+    def test_add_pv_to_node_existing_list_values(self):
+        node = {"prop1": "value1,value2"}
+        mcf_file_util.add_pv_to_node("prop1", "value3", node, normalize=False)
+        self.assertEqual(node, {"prop1": "value1,value2,value3"})
+
+    def test_add_pv_to_node_existing_list_values_with_duplicates(self):
+        node = {"prop1": "value1,value2"}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     "value2,value3",
+                                     node,
+                                     normalize=False)
+        self.assertEqual(node, {"prop1": "value1,value2,value3"})
+
+    def test_add_pv_to_node_existing_list_values_with_duplicates_and_quotes(
+            self):
+        node = {"prop1": '"value1",value2'}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     '"value2",value3',
+                                     node,
+                                     normalize=False)
+        self.assertEqual(node, {"prop1": '"value1","value2","value3"'})
+
+    def test_add_pv_to_node_existing_list_values_with_quotes_and_spaces_and_duplicates(
+            self):
+        node = {"prop1": '"value , 1",value2'}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     '"value , 1",value3',
+                                     node,
+                                     normalize=False)
+        self.assertEqual(node, {"prop1": '"value , 1","value2","value3"'})

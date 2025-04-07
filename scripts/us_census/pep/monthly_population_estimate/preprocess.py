@@ -553,7 +553,7 @@ def _clean_txt_file(df: pd.DataFrame) -> pd.DataFrame:
         "Civilian Population"]
     df.iloc[idx, civilian_population] = df.iloc[idx][
         "Civilian NonInstitutionalized Population"]
-    df.iloc[idx, civilian_noninstitutionalized_population] = np.NAN
+    df.iloc[idx, civilian_noninstitutionalized_population] = np.nan
     return df
 
 
@@ -568,7 +568,7 @@ def _mulitply_scaling_factor(col: pd.Series) -> pd.Series:
         Series: A DataFrame column with values multiplied by the scaling factor.
     """
     res = col
-    if col not in [None, np.NAN]:
+    if col not in [None, np.nan]:
         if col.isdigit():
             res = int(col) * _SCALING_FACTOR_TXT_FILE
     return res
