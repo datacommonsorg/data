@@ -9,7 +9,7 @@
             "provenance_description": "Information about the occurrence of proteins in human cells, tissues and organs",
             "scripts": [
                 "download.sh",
-                "generate_gene_to_uniprot_mapping.py  ",
+                "generate_gene_to_uniprot_mapping.py",
                 "parse_protein_atlas.py"
             ],
             "source_files": [
