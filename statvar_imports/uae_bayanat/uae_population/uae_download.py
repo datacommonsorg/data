@@ -1,13 +1,12 @@
 import os
 import requests
-import logging
+from absl import logging
 import configparser
 from pathlib import Path
 from retry import retry
 
 ##Configure Logging
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 #Read Config file
 
