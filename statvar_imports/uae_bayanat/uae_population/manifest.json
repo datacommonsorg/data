@@ -9,7 +9,7 @@
       "provenance_description": "UAE_Population statical data",
       "scripts": [
         "uae_download.py",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/UAEPopulationByEmiratesNationalityandgender.xlsx --pv_map=uae_popolation_pvmap.csv --config_file=uae_popolation_metadata.csv --output_path=test_data/uae_population_output"
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/UAEPopulationByEmiratesNationalityandgender.xlsx --pv_map=uae_popolation_pvmap.csv --config_file=uae_popolation_metadata.csv --places_resolved_csv=uae_popolation_places_resolved_csv.csv --output_path=test_data/uae_population_output"
       ],
       "import_inputs": [
         {

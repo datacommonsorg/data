@@ -346,8 +346,7 @@ class ImportExecutor:
             f'{import_dir}/{self.config.storage_version_filename}')
         if not blob or not blob.download_as_text():
             logging.error(
-                f'Not able to find latest_version.txt in {folder}, skipping validation.'
-            )
+                f'Not able to find latest_version.txt , skipping validation.')
             return ''
         latest_version = blob.download_as_text()
         blob = bucket.get_blob(f'{import_dir}/{latest_version}')
