@@ -1,0 +1,8 @@
+Node: E:ethiopia_demographics->E0
+observationAbout: C:ethiopia_demographics->observationAbout
+observationDate: C:ethiopia_demographics->observationDate
+value: C:ethiopia_demographics->value
+variableMeasured: C:ethiopia_demographics->variableMeasured
+unit: C:ethiopia_demographics->unit
+scalingFactor: C:ethiopia_demographics->scalingFactor
+typeOf: dcs:StatVarObservation

@@ -1,0 +1,8 @@
+Node: E:ethiopia_population_2007->E0
+observationAbout: C:ethiopia_population_2007->observationAbout
+observationDate: C:ethiopia_population_2007->observationDate
+value: C:ethiopia_population_2007->value
+variableMeasured: C:ethiopia_population_2007->variableMeasured
+unit: C:ethiopia_population_2007->unit
+scalingFactor: C:ethiopia_population_2007->scalingFactor
+typeOf: dcs:StatVarObservation
