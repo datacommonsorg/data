@@ -14,7 +14,9 @@
 
 ### How to run:
 
-`python3 stat_var_processor.py --input_data= --pv_map= --config= --output_path=
+`python3 stat_var_processor.py --input_data= --pv_map= --config= --output_path= [--places_resolved_csv=]
+
+Note: Optional: --places_resolved_csv. If omitted, the file is automatically fetched from metadata.csv. This option is provided for future reference or manual specification.
 
 Example:
 python3 stat_var_processor.py --input_data='/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/test_data/ethiopia-Population_Projection_by_Region_and_Sex_2022_data.csv'  --pv_map='/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/ethiopia-Population_Projection_by_Region_and_Sex_2022_pvmap.csv'  --config='/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/ethiopia-Population_Projection_by_Region_and_Sex_2022_metadata.csv'  --output_path="/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/test_data"
