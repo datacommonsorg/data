@@ -3,9 +3,6 @@
     "executor_type": "CLOUD_RUN",
     "user_script_args": [],
     "user_script_env": {},
-    "gcs_volume_mount_dir": "/tmp/UAE_Population",
-    "disable_email_notifications": true,
-    "user_script_timeout": 3600,
-    "import_tool_path": "/usr/local/google/home/chandaluri/uae_population/data/import-automation/executor/import-tool.jar"
+    "user_script_timeout": 3600
   }
 }
