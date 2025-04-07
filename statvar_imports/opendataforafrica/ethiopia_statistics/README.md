@@ -14,9 +14,7 @@
 
 ### How to run:
 
-`python3 stat_var_processor.py --input_data= --pv_map= --config= --output_path= [--places_resolved_csv=]
-
-Note: Optional: --places_resolved_csv. If omitted, the file is automatically fetched from metadata.csv. This option is provided for future reference or manual specification.
+python3 stat_var_processor.py --input_data= --pv_map= --config= --places_resolved_csv= --output_path= 
 
 Example:
-python3 stat_var_processor.py --input_data='/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/test_data/ethiopia-Population_Projection_by_Region_and_Sex_2022_data.csv'  --pv_map='/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/ethiopia-Population_Projection_by_Region_and_Sex_2022_pvmap.csv'  --config='/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/ethiopia-Population_Projection_by_Region_and_Sex_2022_metadata.csv'  --output_path="/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/test_data"
+python3 stat_var_processor.py --input_data='data/statvar_imports/opendataforafrica/ethiopia_statistics/test_data/ethiopia-Ethiopia_Demographics_data.csv'  --pv_map='data/statvar_imports/opendataforafrica/ethiopia_statistics/ethiopia-Ethiopia_Demographics_pvmap.csv'  --config='data/statvar_imports/opendataforafrica/ethiopia_statistics/ethiopia-Ethiopia_Demographics_metadata.csv'  --places_resolved_csv='data/statvar_imports/opendataforafrica/ethiopia_statistics/ethiopia-Ethiopia_Demographics_places_resolved.csv'  --output_path="data/statvar_imports/opendataforafrica/ethiopia_statistics/test_data/ethiopia_demographics"

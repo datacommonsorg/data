@@ -8,7 +8,7 @@ end_date,
 release_frequency,
 process,"Click on the url. select all check boxes in region, variable, wealth index, age, sex. Click on the Export on the title bar and select the .xlsx to download. Click on the export blue button."
 comments,
-places_resolved_csv,https://docs.google.com/spreadsheets/d/1i8Hqfajid8H3uQUnHbWSRt5Q-yd5q006sD2C_mG8Rc4/edit?gid=931002772#gid=931002772
+#places_resolved_csv,
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
 header_rows,1
 drop_statvars_without_svobs,0

@@ -1,0 +1,34 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/kuru/Downloads/ethiopia_population_2007_data.csv --pv_map=/usr/local/google/home/kuru/Downloads/ethiopia_population_2007_pvmap.csv --config=/usr/local/google/home/kuru/Downloads/ethiopia_population_2007_metadata.csv --places_resolved_csv=/usr/local/google/home/kuru/Downloads/ethiopia_population_2007_places_resolved.csv --output_path=/usr/local/google/home/kuru/Downloads/ethiopia_population_2007" on 2025-04-07 10:46:55.243526
+
+Node: dcid:Count_Person_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+

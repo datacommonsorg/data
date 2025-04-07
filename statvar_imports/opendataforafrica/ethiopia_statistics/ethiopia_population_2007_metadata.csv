@@ -1,12 +1,12 @@
 parameter,value
-url,https://ethiopia.opendataforafrica.org/xpcyhcf/population-projection-by-region-and-sex
+url,https://ethiopia.opendataforafrica.org/teakvke/population-and-households-of-ethiopia-2007#
 description,
 #place_type,
 #places_within,
 start_date,
 end_date,
 release_frequency,
-process,Click on the URL. Select all regions and sexes. Click on the Export. Choose .xlsx format. Click on the Export Data blue button to download the data.
+process,"Click in the url. Select all regions, variables Both sex, Male, Female. Select all residence. Click on the Export on the side bar and select the .xlsx to download."
 comments,
 #places_resolved_csv,
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
