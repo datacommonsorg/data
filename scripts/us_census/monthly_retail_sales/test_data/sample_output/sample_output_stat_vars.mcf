@@ -1,0 +1,520 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/spateriya/monthly_retail_pr/data/scripts/us_census/monthly_retail_sales/test_data/sample_input/input_data.xlsx --pv_map=/usr/local/google/home/spateriya/monthly_retail_pr/data/scripts/us_census/monthly_retail_sales/pv_map/monthly_retail_pvmap.csv --statvar_dcid_remap_csv=/usr/local/google/home/spateriya/monthly_retail_pr/data/scripts/us_census/monthly_retail_sales/remap/remap.csv --output_path=/usr/local/google/home/spateriya/monthly_retail_pr/data/scripts/us_census/monthly_retail_sales/test_data/sample_output/sample_output --config=/usr/local/google/home/spateriya/monthly_retail_pr/data/scripts/us_census/monthly_retail_sales/metadata/monthly_retail_metadata.csv" on 2025-04-08 19:13:25.762389
+
+Node: dcid:Monthly_Amount_Sales_AllOtherGeneralMerchandiseStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/45299
+
+Node: dcid:Monthly_Amount_Sales_AutomobileDealers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4411
+
+Node: dcid:Monthly_Amount_Sales_AutomobileDealersOtherMotorVehicleDealers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4411_4412
+
+Node: dcid:Monthly_Amount_Sales_AutomotivePartsAccessoriesAndTireStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4413
+
+Node: dcid:Monthly_Amount_Sales_BeerWineAndLiquorStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4453
+
+Node: dcid:Monthly_Amount_Sales_BookStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/451211
+
+Node: dcid:Monthly_Amount_Sales_BuildingMaterialAndGardenEquipmentAndSuppliesDealers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/444
+
+Node: dcid:Monthly_Amount_Sales_BuildingMaterialAndSuppliesDealers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4441
+
+Node: dcid:Monthly_Amount_Sales_ClothingAndClothingAccessStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/448
+
+Node: dcid:Monthly_Amount_Sales_ClothingStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4481
+
+Node: dcid:Monthly_Amount_Sales_DepartmentStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4521
+
+Node: dcid:Monthly_Amount_Sales_DepartmentStoresExcludingDiscountDepartmentStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/452111
+
+Node: dcid:Monthly_Amount_Sales_DiscountDeptStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/452112
+
+Node: dcid:Monthly_Amount_Sales_ElectronicShoppingAndMailOrderHouses
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4541
+
+Node: dcid:Monthly_Amount_Sales_ElectronicsStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/443142
+
+Node: dcid:Monthly_Amount_Sales_FamilyClothingStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/44814
+
+Node: dcid:Monthly_Amount_Sales_FoodAndBeverageStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/445
+
+Node: dcid:Monthly_Amount_Sales_FoodServicesAndDrinkingPlaces
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/722
+
+Node: dcid:Monthly_Amount_Sales_FuelDealers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/45431
+
+Node: dcid:Monthly_Amount_Sales_FurnitureFurnishingsStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/442
+
+Node: dcid:Monthly_Amount_Sales_FurnitureFurnishingsStores_ElectronicsApplianceStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/442_443
+
+Node: dcid:Monthly_Amount_Sales_FurnitureStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4421
+
+Node: dcid:Monthly_Amount_Sales_GasolineStations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/447
+
+Node: dcid:Monthly_Amount_Sales_GeneralMerchandiseRetailers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/455
+
+Node: dcid:Monthly_Amount_Sales_GeneralMerchandiseStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/452
+
+Node: dcid:Monthly_Amount_Sales_GiftNoveltyAndSouvenirStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/45322
+
+Node: dcid:Monthly_Amount_Sales_GroceryStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4451
+
+Node: dcid:Monthly_Amount_Sales_HardwareStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/44413
+
+Node: dcid:Monthly_Amount_Sales_HealthAndPersonalCareStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/446
+
+Node: dcid:Monthly_Amount_Sales_HobbyToyAndGameStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/45112
+
+Node: dcid:Monthly_Amount_Sales_HouseholdApplianceStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/443141
+
+Node: dcid:Monthly_Amount_Sales_LimitedServiceEatingPlaces
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/72221
+
+Node: dcid:Monthly_Amount_Sales_MiscellaneousStoreRetailers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/453
+
+Node: dcid:Monthly_Amount_Sales_MotorVehicleAndPartsDealers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/441
+
+Node: dcid:Monthly_Amount_Sales_NewCarDealers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/44111
+
+Node: dcid:Monthly_Amount_Sales_NonstoreRetailers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/454
+
+Node: dcid:Monthly_Amount_Sales_OfficeSuppliesAndStationeryStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/45321
+
+Node: dcid:Monthly_Amount_Sales_OfficeSuppliesStationeryAndGiftStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4532
+
+Node: dcid:Monthly_Amount_Sales_OtherClothingStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/44819
+
+Node: dcid:Monthly_Amount_Sales_OtherGeneralMerchandiseStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4529
+
+Node: dcid:Monthly_Amount_Sales_PaintAndWallpaperStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/44412
+
+Node: dcid:Monthly_Amount_Sales_PharmaciesAndDrugStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/44611
+
+Node: dcid:Monthly_Amount_Sales_RestaurantsAndOtherEatingPlaces
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/7225
+
+Node: dcid:Monthly_Amount_Sales_RetailAndFoodServices
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailAndFoodServices
+
+Node: dcid:Monthly_Amount_Sales_RetailAndFoodServicesExcludingGasolineStations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailAndFoodServicesExcludingGasolineStations
+
+Node: dcid:Monthly_Amount_Sales_RetailAndFoodServicesExcludingGasolineStations_FullServiceRestaurants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailAndFoodServicesExcludingGasolineStations
+naics: dcid:NAICS/722511
+
+Node: dcid:Monthly_Amount_Sales_RetailAndFoodServicesExcludingMotorVehicleParts
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailAndFoodServicesExcludingMotorVehicleParts
+
+Node: dcid:Monthly_Amount_Sales_RetailAndFoodServicesExcludingMotorVehiclePartsAndGasolineStations
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailAndFoodServicesExcludingMotorVehiclePartsAndGasolineStations
+
+Node: dcid:Monthly_Amount_Sales_RetailAndFoodServicesExcludingMotorVehiclePartsAndGasolineStations_FullServiceRestaurants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailAndFoodServicesExcludingMotorVehiclePartsAndGasolineStations
+naics: dcid:NAICS/722511
+
+Node: dcid:Monthly_Amount_Sales_RetailAndFoodServicesExcludingMotorVehicleParts_FullServiceRestaurants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailAndFoodServicesExcludingMotorVehicleParts
+naics: dcid:NAICS/722511
+
+Node: dcid:Monthly_Amount_Sales_RetailAndFoodServices_FullServiceRestaurants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailAndFoodServices
+naics: dcid:NAICS/722511
+
+Node: dcid:Monthly_Amount_Sales_RetailServices
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailServices
+
+Node: dcid:Monthly_Amount_Sales_RetailServicesExcludingMotorVehiclePartsDealer
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailServicesExcludingMotorVehiclePartsDealer
+
+Node: dcid:Monthly_Amount_Sales_RetailServicesExcludingMotorVehiclePartsDealer_FullServiceRestaurants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailServicesExcludingMotorVehiclePartsDealer
+naics: dcid:NAICS/722511
+
+Node: dcid:Monthly_Amount_Sales_RetailServices_FullServiceRestaurants
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+industry: dcid:RetailServices
+naics: dcid:NAICS/722511
+
+Node: dcid:Monthly_Amount_Sales_ShoeStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/4482
+
+Node: dcid:Monthly_Amount_Sales_SportingGoodsHobbyMusicalInstrumentAndBookStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/451
+
+Node: dcid:Monthly_Amount_Sales_SportingGoodsStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/45111
+
+Node: dcid:Monthly_Amount_Sales_SupermarketsAndOtherGroceryStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/44511
+
+Node: dcid:Monthly_Amount_Sales_UsedCarDealers
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/44112
+
+Node: dcid:Monthly_Amount_Sales_UsedMerchandiseStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/453310
+
+Node: dcid:Monthly_Amount_Sales_WarehouseClubsAndSuperstores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/45291
+
+Node: dcid:Monthly_Amount_Sales_WomenClothingStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/44812
+
+Node: dcid:Monthly_Amount_Sales__ElectronicsApplianceStores
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Sales
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+naics: dcid:NAICS/443
+
