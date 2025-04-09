@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """
 statvar_download_util.py
 
@@ -38,13 +37,18 @@ from urllib.parse import urlparse
 import requests
 from absl import app, logging
 
+
 class StatVarDownloader:
+
     def __init__(self, retry_count: int = 3, timeout: int = 10):
         #Initializes the downloader with retry and timeout settings.
         self.retry_count = retry_count
         self.timeout = timeout
-        
-    def _download_file(self, url: str, destination_path: str = None, output_filename: str = None) -> bool:
+
+    def _download_file(self,
+                       url: str,
+                       destination_path: str = None,
+                       output_filename: str = None) -> bool:
         """
         Downloads a single file with retry logic
         If destination_path is not provided, uses current directory
@@ -55,7 +59,7 @@ class StatVarDownloader:
             return False
         if destination_path is None:
             destination_path = os.getcwd()
-            
+
         #Extract filename from URL if not provided
         if output_filename is None:
             output_filename = os.path.basename(urlparse(url).path)
@@ -63,7 +67,7 @@ class StatVarDownloader:
                 logging.warning("Unable to infer filename from URL.")
                 return False
         output_path = os.path.join(destination_path, output_filename)
-        
+
         for attempt in range(1, self.retry_count + 1):
             try:
                 logging.info(f"Downloading from {url} (Attempt {attempt})...")
@@ -77,26 +81,30 @@ class StatVarDownloader:
                     logging.info(f"File saved to: {output_path}")
                     return True
                 else:
-                    logging.warning(f"Attempt {attempt+1} failed: Status{response.status_code}")
+                    logging.warning(
+                        f"Attempt {attempt+1} failed: Status{response.status_code}"
+                    )
             except Exception as e:
                 logging.warning(f"Attempt {attempt+1} failed: {e}")
                 time.sleep(1)
         logging.error(f"Failed to download after {self.retry_count} attempts.")
         return False
-    
+
+
 def main(argv):
     #Sample test inside the execution
     url = "https://example.com/data/sample.csv"
     destination_path = "./downloads"
     output_filename = "my_data.csv"
-    
+
     downloader = StatVarDownloader()
     success = downloader._download_file(url, destination_path, output_filename)
-    
+
     if success:
         logging.info("File download completed successfully.")
     else:
         logging.error("File download failed.")
-        
+
+
 if __name__ == "__main__":
     app.run(main)
