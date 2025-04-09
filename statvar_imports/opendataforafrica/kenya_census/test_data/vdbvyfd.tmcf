@@ -1,0 +1,9 @@
+Node: E:-vdbvyfd->E0
+observationAbout: C:-vdbvyfd->observationAbout
+observationDate: C:-vdbvyfd->observationDate
+variableMeasured: C:-vdbvyfd->variableMeasured
+value: C:-vdbvyfd->value
+unit: C:-vdbvyfd->unit
+scalingFactor: C:-vdbvyfd->scalingFactor
+observationPeriod: C:-vdbvyfd->observationPeriod
+typeOf: dcs:StatVarObservation
