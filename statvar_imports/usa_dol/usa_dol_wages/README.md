@@ -22,4 +22,10 @@
 `python3 usa_dol_wages_download_script.py`
 
 #### Processing
-`python3 stat_var_processor.py --input_data=statvar_imports/usa_dol/usa_dol_wages/input_files/final_data.csv --pv_map=statvar_imports/usa_dol/usa_dol_wages/us_dol_wages_pvmap.csv --config=statvar_imports/usa_dol/usa_dol_wages/us_dol_wages_metadata.csv --output_path=statvar_imports/usa_dol/usa_dol_wages/test_data/us_dol_wges`
+If processing from current import folder :
+
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/final_data.csv --pv_map=us_dol_wages_pvmap.csv --config_file=us_dol_wages_metadata.csv --output_path=output/us_dol`
+
+If running from statvar_importer folder :
+
+`python3 stat_var_processor.py --input_data=data/statvar_imports/usa_dol/usa_dol_wages/input_files/final_data.csv --pv_map=data/statvar_imports/usa_dol/usa_dol_wages/us_dol_wages_pvmap.csv --config=data/statvar_imports/usa_dol/usa_dol_wages/us_dol_wages_metadata.csv --output_path=data/statvar_imports/usa_dol/usa_dol_wages/output/us_dol_wges`
