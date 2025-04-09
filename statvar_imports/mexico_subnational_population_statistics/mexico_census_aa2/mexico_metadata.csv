@@ -1,0 +1,11 @@
+parameter,value
+url,https://data.humdata.org/dataset/05d82fd1-c2a8-402a-86f5-745837553eed/resource/18fab7ed-b244-4245-95b6-9734afa98714/download/mex_admpop_adm2_2021_v2.csv
+description,Total Population of Mexico
+#place_type,AdministrativeArea2
+#places_within,country/MEX
+start_date,2021
+end_date,2024
+release_frequency,1Year
+process,
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
