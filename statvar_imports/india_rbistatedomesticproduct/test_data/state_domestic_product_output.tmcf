@@ -1,0 +1,9 @@
+Node: E:state_domestic_product_output->E0
+observationAbout: C:state_domestic_product_output->observationAbout
+observationDate: C:state_domestic_product_output->observationDate
+variableMeasured: C:state_domestic_product_output->variableMeasured
+value: C:state_domestic_product_output->value
+unit: C:state_domestic_product_output->unit
+measurementMethod: C:state_domestic_product_output->measurementMethod
+observationPeriod: C:state_domestic_product_output->observationPeriod
+typeOf: dcs:StatVarObservation

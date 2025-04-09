@@ -1,0 +1,5 @@
+Node: dcid:economicSector
+typeOf: dcs:Property
+name: "economicSector"
+rangeIncludes: dcid:EnergyConsumptionSectorEnum,dcid:WorkZoneTypeEnum
+
