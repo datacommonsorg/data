@@ -32,7 +32,7 @@ def retry_method(url, headers=None):
 
 def download_UAE_Population():
     logging.info("Starting UAE_Population file download...")
-    output_file = os.path.join(OUTPUT_DIR, "UAEPopulationByEmiratesNationalityandgender.xlsx")
+    output_file = os.path.join(OUTPUT_DIR, "uae_populationbyemiratesnationalityandgender.xlsx")
     
     try:
         response = retry_method(UAE_Population_URL)

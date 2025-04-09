@@ -19,9 +19,11 @@
 
 #### Example
 #### Download : 
-`python3 UAE_Download.py`
+`python3 uae_download.py`
+
+'After running the script python3 uae_download.py, it successfully creates an "input" folder and downloaded the source file named uae_populationbyemiratesnationalityandgender.xlsx into it.'
 
 #### Processing
-`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='data/statvar_imports/uae_population/test_data/uae_population_input.xlsx' --pv_map='data/statvar_imports/uae_population/uae_popolation_pvmap.csv' --config='data/statvar_imports/uae_population/uae_popolation_metadata.csv' --output_path=data/statvar_imports/uae_population/test_data/output`
+`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='/data/statvar_imports/uae_bayanat/uae_population/input/UAEPopulationByEmiratesNationalityandgender.xlsx' --pv_map='data/statvar_imports/uae_bayanat/uae_population/uae_population_pvmap.csv' --places_resolved_csv='data/statvar_imports/uae_bayanat/uae_population/uae_population_places_resolved_csv.csv' --config='data/statvar_imports/uae_bayanat/uae_population/uae_population_metadata.csv' --output_path=data/statvar_imports/uae_bayanat/uae_population/output/uae_population_output`
 
 
