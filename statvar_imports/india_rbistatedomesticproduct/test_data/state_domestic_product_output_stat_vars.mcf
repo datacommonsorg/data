@@ -1,4 +1,4 @@
-# Auto generated using command: "/usr/local/google/home/rbhande/data/statvar_imports/india_rbistatedomesticproduct/../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=state_domestic_product_pv_map.csv --config_file=state_domestic_product_metadata.csv --places_resolved_csv=state_domestic_product_places_resolved.csv --output_path=test_data/state_domestic_product_output" on 2025-04-09 10:27:36.275372
+# Auto generated using command: "/usr/local/google/home/rbhande/data/statvar_imports/india_rbistatedomesticproduct/../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=state_domestic_product_pv_map.csv --config_file=state_domestic_product_metadata.csv --places_resolved_csv=state_domestic_product_places_resolved.csv --output_path=test_data/state_domestic_product_output" on 2025-04-09 11:09:29.719732
 
 Node: dcid:Nominal_Amount_EconomicActivity_GrossValueAdded_Services
 typeOf: dcid:StatisticalVariable

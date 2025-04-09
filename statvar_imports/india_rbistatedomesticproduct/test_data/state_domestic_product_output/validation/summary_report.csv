@@ -1,5 +1,0 @@
-StatVar,NumPlaces,NumObservations,MinValue,MaxValue,NumObservationsDates,MinDate,MaxDate,MeasurementMethods,Units,ScalingFactors,observationPeriods
-Nominal_Amount_EconomicActivity_GrossValueAdded_Services,33,774,9.1436E9,1.29319604E13,20,2005-03,2024-03,"[ConstantPrice_WithBaseYear2004_05, ConstantPrice_WithBaseYear2011_12]",[INR],[],[P1Y]
-Nominal_Amount_EconomicActivity_NetValueAdded_Services,33,774,7.9608E9,1.06701795E13,20,2005-03,2024-03,"[ConstantPrice_WithBaseYear2004_05, ConstantPrice_WithBaseYear2011_12]",[INR],[],[P1Y]
-RealValue_Amount_EconomicActivity_NetValueAdded_Services,33,775,7.9608E9,1.89191398E13,20,2005-03,2024-03,"[CurrentPrice_WithBaseYear2004_05, CurrentPrice_WithBaseYear2011_12]",[INR],[],[P1Y]
-Nominal_Amount_EconomicActivity_NetValueAdded_Construction,33,774,2.778E9,1.5253759E12,20,2005-03,2024-03,"[ConstantPrice_WithBaseYear2004_05, ConstantPrice_WithBaseYear2011_12]",[INR],[],[P1Y]
