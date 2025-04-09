@@ -13,7 +13,9 @@
         },
       ],
       "source_file":[
-          "input_files/final_data.csv"
+          "input_files/final_data.csv",
+          "source_files/raw_data.csv",
+          "source_files/raw_data.html"
       ],
       "cron_schedule": "30 05 * * 1"
     }
