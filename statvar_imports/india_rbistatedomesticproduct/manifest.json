@@ -20,7 +20,7 @@
             "cleaned_csv": "test_data/state_domestic_product_output.csv"
           }
         ],
-        "cron_schedule": "0 05 * * 1"
+        "cron_schedule": "0 09 4,18 * *"
       }
     ]
   }

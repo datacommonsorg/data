@@ -1,7 +1,7 @@
 India_RBIStateDomesticProduct
 source: https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook%20of%20Statistics%20on%20Indian%20States
 
-how to download data: Download script (download_script/rbi_sdp_download.py). To download the data, you'll need to use the provided download script, download_script/rbi_sdp_download.py. This script will automatically create an "input" folder where you should place the file to be processed. The script also requires a configuration file (config.ini) to function correctly.
+how to download data: Download script (rbi_sdp_download.py). To download the data, you'll need to use the provided download script,rbi_sdp_download.py. This script will automatically create an "input" folder where you should place the file to be processed. The script also requires a configuration file (config.ini) to function correctly.
 
 type of place: State.
 
