@@ -14,4 +14,7 @@
 
 ### How to run:
 
-`python3 stat_var_processor.py --input_data=/usr/local/google/home/chharish/opendata_africa/data/statvar_imports/opendataforafrica/rwanda_census/test_data/ztaoyl_data.csv --pv_map=/usr/local/google/home/chharish/opendata_africa/data/statvar_imports/opendataforafrica/rwanda_census/ztaoyl_pv_map.csv --config=/usr/local/google/home/chharish/opendata_africa/data/statvar_imports/opendataforafrica/rwanda_census/ztaoyl_metadata.csv --output_path=/usr/local/google/home/chharish/opendata_africa/data/statvar_imports/opendataforafrica/rwanda_census/test_data/ztaoyl`
+`python3 stat_var_processor.py --input_data=/data/statvar_imports/opendataforafrica/rwanda_census/test_data/ztaoyl_data.csv --pv_map=/data/statvar_imports/opendataforafrica/rwanda_census/ztaoyl_pv_map.csv --config=/data/statvar_imports/opendataforafrica/rwanda_census/ztaoyl_metadata.csv --output_path=/data/statvar_imports/opendataforafrica/rwanda_census/test_data/ztaoyl`
+
+## If place resolution is involved,use:
+` --places_resolved_csv=data/statvar_imports/opendataforafrica/rwanda_census/places_resolved_csv.csv` along with the remaining command.
