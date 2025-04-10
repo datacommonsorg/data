@@ -7,7 +7,6 @@ import xml.etree.ElementTree as ET
 from io import StringIO
 from unittest.mock import patch
 
-# Assume your script with convert_xml_to_json is named 'xml_to_json.py'
 import xml_to_json
 
 class XMLToJsonConverterTest(unittest.TestCase):

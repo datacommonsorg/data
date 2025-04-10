@@ -94,17 +94,6 @@ def process_json_files(folder_path, output_folder):
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
-# Example usage:
-import json
-import csv
-import os
-from absl import app
-from absl import flags
-import xmltodict
-
-
-
-
 
 def main(argv):
     if len(argv) > 1:
