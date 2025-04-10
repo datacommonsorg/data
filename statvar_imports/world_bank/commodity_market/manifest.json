@@ -1,0 +1,26 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "WB_CommodityMarket",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.worldbank.org/en/research/commodity-markets",
+      "provenance_description": "dataset contains commodity price and its index value for monthly and annual",
+      "scripts": ["run.sh"],
+      "import_inputs": [
+        {
+          "template_mcf": "commodity.tmcf",
+          "cleaned_csv": "output/*.csv"
+        }
+      ],
+      "cron_schedule": "0 10 1,15 * *",
+      "source_files": ["input/*.csv"],
+      "user_script_timeout":7200,
+      "resource_limits": {"cpu": "4", "memory": "16G"}
+
+    }
+  ]
+}
+
+
+
+
