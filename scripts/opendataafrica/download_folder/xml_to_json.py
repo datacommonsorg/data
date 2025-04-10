@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,11 +17,14 @@ from absl import app
 from absl import flags
 import xmltodict
 from absl import logging
+
 _FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'input_xml', None, 'Input xml file to convert to json.', required=True
-)
+flags.DEFINE_string('input_xml',
+                    None,
+                    'Input xml file to convert to json.',
+                    required=True)
 flags.DEFINE_string('output_json', None, 'Output json file.', required=True)
+
 
 def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
     """Converts an XML file to a JSON file.
@@ -47,10 +50,12 @@ def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
     except Exception as e:
         logging.eror(f"An error occurred during conversion: {e}")
 
+
 def main(argv):
     if len(argv) > 1:
         raise app.UsageError('Too many command-line arguments.')
     convert_xml_to_json(_FLAGS.input_xml, _FLAGS.output_json)
+
 
 if __name__ == '__main__':
     app.run(main)
