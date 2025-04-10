@@ -1,12 +1,15 @@
 key,p1,v1,p2,v2,p3,v3,,
-observationAbout,observationAbout,{Data},,,,,,
+Country or Area,Country,{Data},,,,,,
+City,CityName,{Data},,,,,,
+Record Type,observationAbout,{CityName} {Country},,,,,,
+#place,observationAbout,{Data},,,,,,
 Year,observationDate,{Number},measuredProperty,count,populationType,Person,,
 Both Sexes,gender,,#EndProp,value,,,,
 Male,gender,Male,,,,,,
 Female,gender,Female,,,,,,
 #City proper,placeOfResidenceClassification,Urban,,,,,,
 Urban agglomeration,placeOfResidenceClassification,Urban__Rural,#ignore,skip agglomeration,,,,
-Value,measurementMethod,UNData,value,{Number},#Aggregate,max,#Filter,value > 1
+Value,measurementMethod,UNData,value,{Number},#Aggregate,max,#Filter,int(value) > 1
 #Value,value,{Number},,,,,,
 Value Footnotes,,,,,,,,
 "El Wad, Algeria",#ignore,skip value,,,,,,

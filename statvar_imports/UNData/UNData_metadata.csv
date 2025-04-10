@@ -20,7 +20,7 @@ debug,0
 existing_statvar_mcf,""""""
 #resolve_places,0
 word_delimiter,""""""
-#filter_data_min_value,2
+filter_data_min_value,2
 #filter_data_max_value,
-#filter_data_max_change_ratio,1
-#filter_data_max_yearly_change_ratio,0.5
+filter_data_max_change_ratio,1
+filter_data_max_yearly_change_ratio,0.5
