@@ -25,7 +25,7 @@ Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
 
 @retry(tries=3, delay=5, backoff=2)
 def retry_method(url, headers=None):
-    response = requests.get(url, headers=headers, timeout=10)
+    response = requests.get(url, headers=headers, timeout=50)
     response.raise_for_status()
     return response
 
