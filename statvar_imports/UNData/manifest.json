@@ -21,7 +21,7 @@
             "cleaned_csv": "output/UNData-filtered.csv"
           }
         ],
-        "cron_schedule": "0 09 4,18 * *"
+        "cron_schedule": "0 05 * * 3"
       }
     ]
   }
