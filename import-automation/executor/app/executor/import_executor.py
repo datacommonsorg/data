@@ -346,17 +346,11 @@ class ImportExecutor:
             f'{import_dir}/{self.config.storage_version_filename}')
         if not blob or not blob.download_as_text():
             logging.error(
-                f'Not able to find latest_version.txt in {folder}, skipping validation.'
+                f'Not able to find latest_version.txt in {import_dir}, skipping validation.'
             )
             return ''
         latest_version = blob.download_as_text()
-        blob = bucket.get_blob(f'{import_dir}/{latest_version}')
-        if not blob:
-            logging.error(
-                f'Not able to find previous import in {latest_version}, skipping validation.'
-            )
-            return ''
-        return f'gs://{bucket.name}/{blob.name}'
+        return f'gs://{bucket.name}/{import_dir}/{latest_version}'
 
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
                                   absolute_import_dir: str, import_spec: dict,
@@ -461,7 +455,8 @@ class ImportExecutor:
                                       import_name)
             out_path = os.path.join(absolute_import_dir, 'gcs_output')
             logging.info(f'Mount path: {mount_path}, Out path: {out_path}')
-            if os.path.exists(mount_path):
+            if self.config.cleanup_gcs_volume_mount and os.path.exists(
+                    mount_path):
                 shutil.rmtree(mount_path)
             if os.path.lexists(out_path):
                 os.unlink(out_path)
