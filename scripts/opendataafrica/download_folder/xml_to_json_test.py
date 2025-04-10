@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 import xml_to_json
 
+
 class XMLToJsonConverterTest(unittest.TestCase):
     """This class has the method required to test the convert_xml_to_json function."""
 
@@ -56,13 +57,15 @@ class XMLToJsonConverterTest(unittest.TestCase):
         }
 
         # Call the conversion function with the file paths
-        xml_to_json.convert_xml_to_json(self.input_xml_path, self.output_json_path)
+        xml_to_json.convert_xml_to_json(self.input_xml_path,
+                                        self.output_json_path)
 
         # Read the generated JSON file
         actual_json = self._read_json_file()
 
         # Compare the actual JSON with the expected JSON
         self.assertEqual(actual_json, expected_json)
+
 
 if __name__ == "__main__":
     unittest.main()
