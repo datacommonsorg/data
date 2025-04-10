@@ -1,9 +1,22 @@
-"""Converts an xml file to json file."""
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import json
 from absl import app
 from absl import flags
 import xmltodict
-
+from absl import logging
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'input_xml', None, 'Input xml file to convert to json.', required=True
@@ -30,9 +43,9 @@ def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
             with open(output_json_path, 'w') as json_file:
                 json_file.write('{}')
     except FileNotFoundError:
-        print(f"Error: Input XML file not found at '{input_xml_path}'")
+        logging.error(f"Error: Input XML file not found at '{input_xml_path}'")
     except Exception as e:
-        print(f"An error occurred during conversion: {e}")
+        logging.eror(f"An error occurred during conversion: {e}")
 
 def main(argv):
     if len(argv) > 1:

@@ -1,9 +1,24 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import json
 import csv
 import os
 from absl import app
 from absl import flags
 import xmltodict
+from absl import logging
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -31,7 +46,7 @@ def process_json_files(folder_path, output_folder):
                     if "StructureSpecificData" in data and "DataSet" in data["StructureSpecificData"]:
                         data_set = data["StructureSpecificData"]["DataSet"]
                         if data_set is None:
-                            print(f"Warning: 'DataSet' is null in {filename}. Skipping CSV creation.")
+                            logging.info(f"Warning: 'DataSet' is null in {filename}. Skipping CSV creation.")
                             continue
 
                         if "Series" in data_set:
@@ -41,7 +56,7 @@ def process_json_files(folder_path, output_folder):
                                 series_data = [series_data]  # Make it a list for consistent processing
 
                             if not series_data:
-                                print(f"No 'Series' data found in {filename}.")
+                                logging.info(f"No 'Series' data found in {filename}.")
                                 continue
 
                             headers = list(series_data[0].keys())
@@ -74,25 +89,25 @@ def process_json_files(folder_path, output_folder):
                                         cleaned_item = {cleaned_headers[headers.index(key)]: value for key, value in new_item.items()}
                                         writer.writerow(cleaned_item)
                                     elif obs_data is not None:
-                                        print(f"Warning: Unexpected 'Obs' data type in {filename}.")
+                                        logging.info(f"Warning: Unexpected 'Obs' data type in {filename}.")
 
-                            print(f"Data from {filename} written to {csv_filename}")
+                            logging.info(f"Data from {filename} written to {csv_filename}")
 
                         else:
-                            print(f"Warning: 'Series' key not found in 'DataSet' of {filename}. Skipping CSV creation.")
+                            logging.info(f"Warning: 'Series' key not found in 'DataSet' of {filename}. Skipping CSV creation.")
 
                     else:
-                        print(f"Warning: JSON structure in {filename} does not match the expected 'StructureSpecificData' with 'DataSet'.")
+                        logging.info(f"Warning: JSON structure in {filename} does not match the expected 'StructureSpecificData' with 'DataSet'.")
 
                 except json.JSONDecodeError:
-                    print(f"Error: Invalid JSON format in {filename}.")
+                    logging.error(f"Error: Invalid JSON format in {filename}.")
                 except Exception as e:
-                    print(f"An unexpected error occurred while processing {filename}: {e}")
+                    logging.error(f"An unexpected error occurred while processing {filename}: {e}")
 
     except FileNotFoundError:
-        print(f"Error: Folder '{folder_path}' not found.")
+        logging.error(f"Error: Folder '{folder_path}' not found.")
     except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        logging.error(f"An unexpected error occurred: {e}")
 
 
 def main(argv):
