@@ -1,0 +1,8 @@
+Node: E:bls_ces_output->E0
+observationAbout: C:bls_ces_output->observationAbout
+observationDate: C:bls_ces_output->observationDate
+value: C:bls_ces_output->value
+variableMeasured: C:bls_ces_output->variableMeasured
+observationPeriod: C:bls_ces_output->observationPeriod
+measurementMethod: C:bls_ces_output->measurementMethod
+typeOf: dcs:StatVarObservation
