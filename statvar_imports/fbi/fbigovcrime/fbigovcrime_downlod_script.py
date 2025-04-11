@@ -29,8 +29,19 @@ CITY_COLUMN = 1
 COLUMN_VALUES = ['State','City']
 
 
-if not os.path.exists(DOWNLOAD_DIRECTORY):  # Check if the path exists
-  os.makedirs(DOWNLOAD_DIRECTORY)
+if not os.path.exists(DOWNLOAD_DIRECTORY):
+    os.makedirs(DOWNLOAD_DIRECTORY)
+else:
+    # Folder exists, clear its contents (files and folders)
+    for filename in os.listdir(DOWNLOAD_DIRECTORY):
+        file_path = os.path.join(DOWNLOAD_DIRECTORY, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            logging.fatal(f"Failed to delete {file_path}. Reason: {e}")
 
 def create_chrome_webdriver(DOWNLOAD_DIRECTORY):
   """Creates a Chrome WebDriver instance."""
