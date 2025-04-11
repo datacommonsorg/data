@@ -333,30 +333,30 @@ class ImportExecutor:
                 )
             raise exc
 
-    def _get_latest_version(self, import_dir: str) -> str:
+    def _get_latest_version(self, import_dir: str, import_prefix: str) -> str:
         """
         Find previous import data in GCS.
         Returns:
           GCS path for the latest import data.
 
         """
-        bucket = storage.Client(self.config.gcs_project_id).bucket(
-            self.config.storage_prod_bucket_name)
+        client = storage.Client(self.config.gcs_project_id)
+        bucket = client.bucket(self.config.storage_prod_bucket_name)
         blob = bucket.get_blob(
             f'{import_dir}/{self.config.storage_version_filename}')
         if not blob or not blob.download_as_text():
             logging.error(
-                f'Not able to find latest_version.txt in {folder}, skipping validation.'
-            )
+                f'Not able to find latest_version.txt in {import_dir}')
             return ''
-        latest_version = blob.download_as_text()
-        blob = bucket.get_blob(f'{import_dir}/{latest_version}')
-        if not blob:
+        latest_version = f'{import_dir}/{blob.download_as_text()}'
+        previous_data_path = f'{latest_version}/{import_prefix}/validation/table_mcf_nodes_'
+        blobs = client.list_blobs(bucket.name, previous_data_path)
+        if not blobs:
             logging.error(
-                f'Not able to find previous import in {latest_version}, skipping validation.'
-            )
+                f'Not able to find latest mcf at {previous_data_path}')
             return ''
-        return f'gs://{bucket.name}/{blob.name}'
+        logging.info(f'Latest version: {previous_data_path}')
+        return f'gs://{bucket.name}/{previous_data_path}*.mcf'
 
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
                                   absolute_import_dir: str, import_spec: dict,
@@ -374,8 +374,6 @@ class ImportExecutor:
         logging.info(f'Validation config file: {config_file_path}')
 
         import_dir = f'{relative_import_dir}/{import_spec["import_name"]}'
-        latest_version = self._get_latest_version(import_dir)
-        logging.info(f'Latest version: {latest_version}')
 
         # Trigger validations for each tmcf/csv under import_inputs.
         import_inputs = import_spec.get('import_inputs', [])
@@ -392,12 +390,11 @@ class ImportExecutor:
             validation_output_path = os.path.join(absolute_import_dir,
                                                   import_prefix, 'validation')
             current_data_path = os.path.join(validation_output_path, '*.mcf')
-            previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
             summary_stats = os.path.join(validation_output_path,
                                          'summary_report.csv')
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
-            differ_output = os.path.join(validation_output_path,
+            differ_output = os.path.join(validation_output_path, 'differ',
                                          'point_analysis_summary.csv')
             # Run dc import tool to generate resolved mcf.
             logging.info('Generating resolved mcf...')
@@ -419,21 +416,30 @@ class ImportExecutor:
 
             if self.config.invoke_import_validation:
                 # Invoke differ and validation scripts.
-                if latest_version:
+                previous_data_path = self._get_latest_version(
+                    import_dir, import_prefix)
+                if previous_data_path:
                     logging.info('Invoking differ tool...')
                     differ = ImportDiffer(current_data_path, previous_data_path,
-                                          validation_output_path)
+                                          validation_output_path,
+                                          self.config.differ_tool_path,
+                                          self.config.gcp_project_id, 'differ',
+                                          'mcf', 'local')
                     differ.run_differ()
 
-                logging.info('Invoking validation script...')
-                validation = ImportValidation(config_file_path, differ_output,
-                                              summary_stats,
-                                              validation_output_file)
-                status = validation.run_validations()
-                if validation_status:
-                    validation_status = status
+                    logging.info('Invoking validation script...')
+                    validation = ImportValidation(config_file_path,
+                                                  differ_output, summary_stats,
+                                                  validation_output_file)
+                    status = validation.run_validations()
+                    if validation_status:
+                        validation_status = status
+                else:
+                    logging.error(
+                        'Skipping validation due to missing latest mcf file')
             else:
-                logging.info('Skipping import validations.')
+                logging.info(
+                    'Skipping import validations as per import config.')
 
             if not self.config.skip_gcs_upload:
                 # Upload output to GCS.
