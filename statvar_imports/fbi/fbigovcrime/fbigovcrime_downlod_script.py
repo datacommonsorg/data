@@ -45,6 +45,7 @@ def create_chrome_webdriver(DOWNLOAD_DIRECTORY):
         "safebrowsing.enabled": True
     }
     chrome_options.add_experimental_option("prefs", prefs)
+    chrome_options.add_argument('--headless')
 
     svc = webdriver.ChromeService(
         executable_path=binary_path)
@@ -134,10 +135,10 @@ def extract_zip_files(download_directory):
           extract_zip(zip_file_path)   # Function to extract the zip file
           logging.info(f"zip file extracted {filename}")
         else:
-          print(f"Skipped (doesn't match pattern): {filename}")
+          logging.info(f"Skipped (doesn't match pattern): {filename}")
 
   except Exception as e:
-    print(f"Error processing files: {e}")
+    logging.fatal(f"Error processing files: {e}")
 
 def extract_zip(zip_file_path):
   """
@@ -150,9 +151,9 @@ def extract_zip(zip_file_path):
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
       zip_ref.extractall(path=zip_file_path[:-4])  # Extract to the same directory 
   except zipfile.BadZipFile:
-    print(f"Error: Invalid zip file: {zip_file_path}")
+    logging.fatal(f"Error: Invalid zip file: {zip_file_path}")
   except Exception as e:
-    print(f"Error extracting zip file: {e}")
+    logging.fatal(f"Error extracting zip file: {e}")
 
 
 def access_extracted_folder():
@@ -173,22 +174,22 @@ def clean_headers(file_to_access):
     for i in range(10):
       all_headers = df.iloc[i].tolist()
       if header_value in all_headers:
-        print(header_value,all_headers)
+        logging.info(f"{header_value},{all_headers}")
         cleaned_headers = [header[:-1] if header and header[-1].isdigit() else header for header in all_headers]
         df.iloc[i] = cleaned_headers
     df.to_excel(file_to_access,index=False,header=False)
   except FileNotFoundError:
-        print(f"Error: File '{file_to_access}' not found.")
+        logging.fatal(f"Error: File '{file_to_access}' not found.")
   except ValueError as e:
-        print(f"Error: {e}")
+        logging.fatal(f"Error: {e}")
   except IndexError:
-        print("Error: headers not found or file is empty.")
+        logging.fatal("Error: headers not found or file is empty.")
   except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        logging.fatal(f"An unexpected error occurred: {e}")
 
 
 def clean_state_column(file_path):
-  # try:
+  try:
     df = pd.read_excel(file_path,header=None)
     state_row_index = df[df.iloc[:,STATE_COLUMN] == 'State'].index.values[0] if 'State' in df.iloc[:,STATE_COLUMN].values else None
     city_row_index = df[df.iloc[:,CITY_COLUMN] == 'City'].index.values[0] if 'City' in df.iloc[:,CITY_COLUMN].values else None
@@ -202,7 +203,6 @@ def clean_state_column(file_path):
             value =  str(df.iloc[i,0])
             if value and value[-1].isdigit():
               df.iloc[i,STATE_COLUMN] = value[:-1]
-              # print(df.iloc[i,STATE_COLUMN])
             if not pd.isna(df.iloc[i, STATE_COLUMN]):  # Check for NaN
                 df.iloc[i, STATE_COLUMN] = str(df.iloc[i, STATE_COLUMN]) + " State"  
               
@@ -210,28 +210,24 @@ def clean_state_column(file_path):
         for i in range(city_row_index+1,len(df)):
           value =  str(df.iloc[i,CITY_COLUMN])
           if value and value[-1].isdigit():
-            # df.iloc[i,CITY_COLUMN] = value[:-1]
             cleaned_value = re.sub(r"[^a-zA-Z\s]+$", "", value)  # Remove non-alphanumeric from end
             df.iloc[i, CITY_COLUMN] = cleaned_value
-        # df.dropna(subset=['CityName'], inplace=True)
+
     df.iloc[city_row_index,CITY_COLUMN] = 'City_Name' 
-    # df.dropna(subset=['City_Name'], inplace=True)   
-    # print(city_row_index)    
     df_new = df.copy()
     df_below_header = df_new[city_row_index:]
     df_below_header = df_below_header.dropna(subset=[1])
-    # print("below header",df_below_header)
     df_below_header[1] = df_below_header[1].str.replace(',','',regex=False)
     df_new = pd.concat([df_new.iloc[:city_row_index+1], df_below_header.iloc[1:]], ignore_index=True)
     df_new.to_excel(file_path,index=False,header=False)    
-  # except FileNotFoundError:
-  #       print(f"Error: File '{file_path}' not found.")
-  # except ValueError as e:
-  #       print(f"Error: {e}")
-  # except IndexError:
-  #       print("Error: 'State' or 'City' header not found or file is empty.")
-  # except Exception as e:
-  #       print(f"An unexpected error occurred: {e}")
+  except FileNotFoundError:
+        logging.fatal(f"Error: File '{file_path}' not found.")
+  except ValueError as e:
+        logging.fatal(f"Error: {e}")
+  except IndexError:
+        logging.fatal("Error: 'State' or 'City' header not found or file is empty.")
+  except Exception as e:
+        logging.fatal(f"An unexpected error occurred: {e}")
 
 
 if __name__ == '__main__':
@@ -246,5 +242,3 @@ if __name__ == '__main__':
 
 
     
-
-      
