@@ -85,6 +85,15 @@ _DEFAULT_NODE_PVS = OrderedDict({
     'measurementDenominator': '',
 })
 
+_STATVAR_DCID_IGNORE_PROPS = {
+    'name',
+    'description',
+    'descriptionUrl',
+    'alternateName',
+    'nameWithLanguage',
+    'constraintProperties',
+}
+
 
 def add_namespace(value: str, namespace: str = 'dcid') -> str:
     """Returns the value with a namespace prefix for references.
@@ -308,6 +317,77 @@ def get_node_dcid(pvs: dict) -> str:
     dcid = dcid.strip(' "')
     return strip_namespace(dcid)
 
+def get_non_name_props(pvs: dict,
+                       ignore_props: list = _STATVAR_DCID_IGNORE_PROPS) -> set:
+    """Returns the properties of the node ignoring name/descriptions.
+
+    Args:
+      pvs: dictionary of property:values in the statvar
+
+    Returns:
+      properties for the node excluding ignored properties and comments.
+    """
+    props = set()
+    if not pvs:
+      return props
+    for prop in pvs.keys():
+      if prop and not prop in ignore_props and prop[0] != '#':
+        props.add(prop)
+    return props
+
+
+def check_nodes_merge_conflict(node1: dict, node2: dict) -> bool:
+    """Returns True if two nodes can be merged.
+    Statvars can't be merged if there are any updates to constraint properties.
+
+    Args:
+      node1: dictionary of property:values
+      node2: dictionary of property values
+
+    Returns:
+      True if property:values from node2 can be added into node1.
+      StatVar can't have new constraint values or properties with multiple
+      values.
+    """
+    # Check dcid for conflict
+    dcid1 = get_node_dcid(node1)
+    dcid2 = get_node_dcid(node2)
+    if dcid1 and dcid2 and dcid1 != dcid2:
+        logging.error(
+            f'Cannot merge nodes with different dcids: {node1}, {node2}')
+        return False
+
+    typeof1 = strip_namespace(node1.get('typeOf', ''))
+    typeof2 = strip_namespace(node1.get('typeOf', ''))
+
+    if typeof1 == 'StatisticalVariable' or typeof2 == 'StatisticalVariable':
+        # Additional checks for statistical variable
+        # 1. Constraint properties should not be added/modified
+        # 2. Constraing properties should have a single value
+        if typeof1 and typeof2 and typeof1 != typeof2:
+            logging.error(f'Cannot merge {dcid1} of type: {type1}, {type2}')
+            return False
+
+        cprops1 = get_non_name_props(node1)
+        cprops2 = get_non_name_props(node2)
+        if cprops1 != cprops2:
+            logging.error(
+                f'Conflict in merging statvar props for {dcid1}: {cprops1}, {cprops2}'
+            )
+            return False
+        for prop in cprops1:
+          val1 = normalize_value(node1.get(prop, ''))
+          val2 = normalize_value(node1.get(prop, ''))
+          if ',' in val1 or ',' in val2:
+            logging.error(f'Statvar {dcid1} has multiple values for {prop}: {node1}, {node2}')
+            return False
+          if val1 and val2 and val1 != val2:
+            logging.error(f'Statvar {dcid1} has conflicting values for {prop}: {node1}, {node2}')
+            return False
+
+    # No conflicts, nodes can be merged
+    return True
+
 
 def add_mcf_node(
     pvs: dict,
@@ -341,6 +421,12 @@ def add_mcf_node(
         dcid = add_namespace(dcid)
     if dcid not in nodes:
         nodes[dcid] = {}
+    else:
+      node = nodes[dcid]
+      can_merge = check_nodes_merge_conflict(node, pvs)
+      if not can_merge:
+        logging.error(f'Cannot merge {node} with {pvs}')
+        return nodes
     node = nodes[dcid]
     for prop, value in pvs.items():
         add_pv_to_node(prop, value, node, append_values, strip_namespaces,
