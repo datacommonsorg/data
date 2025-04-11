@@ -207,6 +207,7 @@ class TestMCFFileUtil(unittest.TestCase):
         self.assertNotIn('age', nodes['dcid:TestStatVar'])
         self.assertEqual(nodes['dcid:TestStatVar'], orig_node)
 
+
 class TestAddPVToNode(unittest.TestCase):
 
     def test_add_pv_to_node_new_property(self):

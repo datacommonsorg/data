@@ -92,6 +92,7 @@ _STATVAR_DCID_IGNORE_PROPS = {
     'alternateName',
     'nameWithLanguage',
     'constraintProperties',
+    'memberOf',
 }
 
 
@@ -317,6 +318,7 @@ def get_node_dcid(pvs: dict) -> str:
     dcid = dcid.strip(' "')
     return strip_namespace(dcid)
 
+
 def get_non_name_props(pvs: dict,
                        ignore_props: list = _STATVAR_DCID_IGNORE_PROPS) -> set:
     """Returns the properties of the node ignoring name/descriptions.
@@ -329,10 +331,10 @@ def get_non_name_props(pvs: dict,
     """
     props = set()
     if not pvs:
-      return props
+        return props
     for prop in pvs.keys():
-      if prop and not prop in ignore_props and prop[0] != '#':
-        props.add(prop)
+        if prop and not prop in ignore_props and prop[0] != '#':
+            props.add(prop)
     return props
 
 
@@ -376,14 +378,18 @@ def check_nodes_merge_conflict(node1: dict, node2: dict) -> bool:
             )
             return False
         for prop in cprops1:
-          val1 = normalize_value(node1.get(prop, ''))
-          val2 = normalize_value(node1.get(prop, ''))
-          if ',' in val1 or ',' in val2:
-            logging.error(f'Statvar {dcid1} has multiple values for {prop}: {node1}, {node2}')
-            return False
-          if val1 and val2 and val1 != val2:
-            logging.error(f'Statvar {dcid1} has conflicting values for {prop}: {node1}, {node2}')
-            return False
+            val1 = normalize_value(node1.get(prop, ''))
+            val2 = normalize_value(node1.get(prop, ''))
+            if ',' in val1 or ',' in val2:
+                logging.error(
+                    f'Statvar {dcid1} has multiple values for {prop}: {node1}, {node2}'
+                )
+                return False
+            if val1 and val2 and val1 != val2:
+                logging.error(
+                    f'Statvar {dcid1} has conflicting values for {prop}: {node1}, {node2}'
+                )
+                return False
 
     # No conflicts, nodes can be merged
     return True
@@ -422,11 +428,11 @@ def add_mcf_node(
     if dcid not in nodes:
         nodes[dcid] = {}
     else:
-      node = nodes[dcid]
-      can_merge = check_nodes_merge_conflict(node, pvs)
-      if not can_merge:
-        logging.error(f'Cannot merge {node} with {pvs}')
-        return nodes
+        node = nodes[dcid]
+        can_merge = check_nodes_merge_conflict(node, pvs)
+        if not can_merge:
+            logging.error(f'Cannot merge {node} with {pvs}')
+            return nodes
     node = nodes[dcid]
     for prop, value in pvs.items():
         add_pv_to_node(prop, value, node, append_values, strip_namespaces,
