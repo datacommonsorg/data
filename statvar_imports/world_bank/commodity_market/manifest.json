@@ -1,0 +1,53 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "WB_CommodityMarket",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.worldbank.org/en/research/commodity-markets",
+      "provenance_description": "dataset contains commodity price and its index value for monthly and annual",
+      "scripts": ["download.py",
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/monthly_prices_data.csv --pv_map=commodity_monthly_price_pvmap.csv --config_file=commodity_monthly_price_metadata.csv -output_path=output/commodity_monthly_price",
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/annual_prices_real_data.csv --pv_map=commodity_annual_price_pvmap_real.csv --config_file=commodity_annual_price_metadata.csv --output_path=output/commodity_annual_real_price",
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/annual_prices_nominal_data.csv --pv_map=commodity_annual_price_pvmap_nominal.csv --config_file=commodity_annual_price_metadata.csv --output_path=output/commodity_annual_nominal_price",
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/monthly_indices_data.csv --pv_map=commodity_monthly_indices_pvmap.csv --config_file=commodity_monthly_indices_metadata.csv --output_path=output/commodity_monthly_indices",
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/annual_indices_nominal_data.csv --pv_map=commodity_annual_indices_pvmap_nominal.csv --config_file=commodity_annual_indices_metadata.csv --output_path=output/commodity_annual_nominal_indices",
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/annual_indices_real_data.csv --pv_map=commodity_annual_indices_pvmap_real.csv --config_file=commodity_annual_indices_metadata.csv --output_path=output/commodity_annual_real_indices"
+    ],
+      "import_inputs": [
+        {
+          "template_mcf": "commodity.tmcf",
+          "cleaned_csv": "output/commodity_monthly_price.csv"
+        },
+        {
+          "template_mcf": "commodity.tmcf",
+          "cleaned_csv": "output/commodity_annual_real_price.csv"
+        },
+        {
+          "template_mcf": "commodity.tmcf",
+          "cleaned_csv": "output/commodity_annual_nominal_price.csv"
+        },
+        {
+          "template_mcf": "commodity.tmcf",
+          "cleaned_csv": "output/commodity_monthly_indices.csv"
+        },
+        {
+          "template_mcf": "commodity.tmcf",
+          "cleaned_csv": "output/commodity_annual_real_indices.csv"
+        },
+        {
+          "template_mcf": "commodity.tmcf",
+          "cleaned_csv": "output/commodity_annual_nominal_indices.csv"
+        }
+      ],
+      "cron_schedule": "0 10 1,15 * *",
+      "source_files": ["input/*.csv"],
+      "user_script_timeout":7200,
+      "resource_limits": {"cpu": "4", "memory": "16G"}
+
+    }
+  ]
+}
+
+
+
+
