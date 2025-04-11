@@ -137,8 +137,8 @@ class ExecutorConfig:
     email_account: str = ''
     # The corresponding password, app password, or access token.
     email_token: str = ''
-    # Disable email alert notifications.
-    disable_email_notifications: bool = False
+    # Email alerts are disabled by default. Cloud Run jobs use GCP alerting.
+    disable_email_notifications: bool = True
     # Skip uploading the data to GCS (for local testing).
     skip_gcs_upload: bool = False
     # Maximum time a blocking call to the importer to
