@@ -53,7 +53,7 @@ from google.cloud import storage
 
 # Email address for status messages.
 _DEBUG_EMAIL_ADDR = 'datacommons-debug+imports@google.com'
-_ALERT_EMAIL_ADDR = 'datacommons-test-alerts+imports@google.com'
+_ALERT_EMAIL_ADDR = 'datacommons-debug+imports@google.com'
 
 _SEE_LOGS_MESSAGE = (
     'Please find logs in the Logs Explorer of the GCP project associated with'
