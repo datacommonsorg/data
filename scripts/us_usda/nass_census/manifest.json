@@ -13,8 +13,9 @@
         }
       ],
       "cron_schedule": "0 10 1,15 * *",
-      "source_files": ["input/*.csv"],
-      "user_script_timeout":7200
+      "source_files": ["input/*.gz"],
+      "user_script_timeout":7200,
+      "resource_limits": {"cpu": "4", "memory": "16G"}
 
     }
   ]

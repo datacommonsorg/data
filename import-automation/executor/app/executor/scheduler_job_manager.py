@@ -138,7 +138,8 @@ def create_or_update_import_schedule(absolute_import_name: str,
         env_vars = {}
         job = cloud_run.create_or_update_cloud_run_job(
             config.gcp_project_id, config.scheduler_location, job_name,
-            docker_image, env_vars, args, resources, timeout)
+            docker_image, config.gcs_bucket_volume_mount, env_vars, args,
+            resources, timeout)
         job_id = job.name.rsplit('/', 1)[1]
         if not job:
             logging.error(

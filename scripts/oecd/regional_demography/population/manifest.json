@@ -1,0 +1,27 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "OECDRegionalDemography_Population",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://data-explorer.oecd.org/vis?fs[0]=Topic%2C0%7CRegional%252C%20rural%20and%20urban%20development%23GEO%23&pg=40&fc=Topic&bp=true&snb=117&df[ds]=dsDisseminateFinalDMZ&df[id]=DSD_REG_DEMO%40DF_POP_5Y&df[ag]=OECD.CFE.EDS&df[vs]=2.0&dq=A.......&to[TIME_PERIOD]=false&vw=tb&pd=%2C",
+      "provenance_description": "Population statistics by age and sex measured by OECD (Organisation for Economic Co-operation and Development).",
+      "scripts": [
+        "preprocess_csv.py"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "OECD_population_cleaned.tmcf",
+          "cleaned_csv": "OECD_population_cleaned.csv"
+        }
+      ],
+      "cron_schedule": "0 9 1 3 *",
+      "user_script_timeout": 7200,
+      "resource_limits": {
+        "cpu": "4",
+        "memory": "16G"
+      }
+    }
+  ]
+}

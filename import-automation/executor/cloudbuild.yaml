@@ -15,17 +15,25 @@ steps:
     args: ['push', '${_DOCKER_IMAGE}', '--all-tags']
 
   # Install dependencies
-  - name: python:3.11.11
+  - name: python:3.12.8
     entrypoint: pip
     args: ['install', '-r', 'requirements.txt', '--user']
     dir: 'import-automation/executor'
 
   # Run import executor integration test
-  - name: python:3.11.11
+  - name: python:3.12.8
     entrypoint: python
     args: ['verify_import.py']
     dir: 'import-automation/executor'
 
+  # Run unit tests
+  - name: 'python:3.12.8'
+    args:
+      - '-c'
+      - |
+        ./run_tests.sh -a
+    entrypoint: bash
+  
   # Tag image as stable and push
   - name: 'gcr.io/cloud-builders/docker'
     entrypoint: 'bash'
