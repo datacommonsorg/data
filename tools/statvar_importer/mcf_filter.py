@@ -173,8 +173,8 @@ def filter_mcf_file(
     # Load nodes from MCF files.
     if not counters:
         counters = Counters()
-    input_nodes = load_mcf_nodes(input_mcf_files)
-    ignore_nodes = load_mcf_nodes(ignore_mcf_files)
+    input_nodes = load_mcf_nodes(input_mcf_files, counters=counters)
+    ignore_nodes = load_mcf_nodes(ignore_mcf_files, counters=counters)
     counters.add_counter('input-nodes', len(input_nodes))
     counters.add_counter('ignore-nodes-loaded', len(input_nodes))
 

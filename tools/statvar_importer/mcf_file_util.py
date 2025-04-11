@@ -72,6 +72,8 @@ sys.path.append(
 
 import file_util
 
+from counters import Counters
+
 _DEFAULT_NODE_PVS = OrderedDict({
     'Node': '',
     'typeOf': '',
@@ -401,7 +403,8 @@ def add_mcf_node(
     strip_namespaces: bool = False,
     append_values: bool = True,
     normalize: bool = True,
-) -> dict:
+    counters: Counters = None,
+) -> bool:
     """Add a node with property values into the nodes dict
 
   If the node exists, the PVs are added to the existing node.
@@ -412,12 +415,15 @@ def add_mcf_node(
     strip_namespaces: if True, strip namespace from the dcid key and values.
     append_values: if True, append new value for an exsting property, else
       replace with new value.
+    normalize: if True, the property values are normalized
+      for a consistent namespace like 'dcid:'
+    counters: update any counters
 
   Returns
-    nodes dictionary to which the new node is added.
+    True if the node was added
   """
     if pvs is None or len(pvs) == 0:
-        return None
+        return False
     dcid = get_node_dcid(pvs)
     if dcid == '':
         logging.warning(f'Ignoring node without a dcid: {pvs}')
@@ -431,15 +437,17 @@ def add_mcf_node(
         node = nodes[dcid]
         can_merge = check_nodes_merge_conflict(node, pvs)
         if not can_merge:
-            logging.error(f'Cannot merge {node} with {pvs}')
-            return nodes
+            logging.error(f'Cannot merge {dcid}: {node} with {pvs}')
+            if counters is not None:
+                counters.add_counter(f'error-mcf-node-merge', 1, dcid)
+            return False
     node = nodes[dcid]
     for prop, value in pvs.items():
         add_pv_to_node(prop, value, node, append_values, strip_namespaces,
                        normalize)
     logging.level_debug() and logging.log(
         2, f'Added node {dcid} with properties: {pvs.keys()}')
-    return nodes
+    return True
 
 
 def update_mcf_nodes(
@@ -448,6 +456,7 @@ def update_mcf_nodes(
     strip_namespaces: bool = False,
     append_values: bool = True,
     normalize: bool = True,
+    counters: Counters = None,
 ) -> dict:
     """Returns output_nodes with Property:values from nodes added.
 
@@ -459,6 +468,7 @@ def update_mcf_nodes(
     append_values: if True, append new value for an exsting property, else
       replace with new value.
     normalize: if True, values are normalized.
+    counters: counters to be updated
 
   Returns:
     dictionary of output_nodes updated with property:values from nodes.
@@ -474,7 +484,7 @@ def update_mcf_nodes(
             node['Node'] = add_namespace(dcid)
         # Add PVs from node to output_nodes
         add_mcf_node(node, output_nodes, strip_namespaces, append_values,
-                     normalize)
+                     normalize, counters)
     return output_nodes
 
 
@@ -484,6 +494,7 @@ def load_mcf_nodes(
     strip_namespaces: bool = False,
     append_values: bool = True,
     normalize: bool = True,
+    counters: Counters = None,
 ) -> dict:
     """Return a dict of nodes from the MCF file with the key as the dcid
 
@@ -514,6 +525,10 @@ def load_mcf_nodes(
   """
     if not filenames:
         return nodes
+
+    if counters == None:
+        counters = Counters()
+
     # Load files in order of input
     files = []
     if isinstance(filenames, str):
@@ -525,6 +540,7 @@ def load_mcf_nodes(
     for file in files:
         if not file:
             continue
+        counters.add_counter('mcf-files-loaded', 1)
         num_nodes = 0
         num_props = 0
         if file.endswith('.csv'):
@@ -535,7 +551,7 @@ def load_mcf_nodes(
                     pvs['Node'] = key
                 num_props += len(pvs)
                 add_mcf_node(pvs, nodes, strip_namespaces, append_values,
-                             normalize)
+                             normalize, counters)
             num_nodes = len(file_nodes)
         else:
             # Load nodes from MCF file.
@@ -555,7 +571,7 @@ def load_mcf_nodes(
                     if line == '':
                         if pvs:
                             add_mcf_node(pvs, nodes, strip_namespaces,
-                                         append_values, normalize)
+                                         append_values, normalize, counters)
                             num_nodes += 1
                             pvs = _get_new_node(normalize)
                     elif line[0] == '#':
@@ -569,11 +585,12 @@ def load_mcf_nodes(
                         num_props += 1
                 if pvs:
                     add_mcf_node(pvs, nodes, strip_namespaces, append_values,
-                                 normalize)
+                                 normalize, counters)
                     num_nodes += 1
         logging.info(
             f'Loaded {num_nodes} nodes with {num_props} properties from file {file}'
         )
+        counters.add_counter('mcf-nodes-loaded', num_nodes)
     return nodes
 
 

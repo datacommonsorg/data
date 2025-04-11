@@ -174,6 +174,7 @@ class TestMCFFileUtil(unittest.TestCase):
         self.assertEqual(None, mcf_file_util.get_numeric_value('10e5'))
 
     def test_add_mcf_node(self):
+        nodes = {}
         node = {
             'Node': 'dcid:TestStatVar',
             'typeOf': 'dcs:StatisticalVariable',
@@ -181,29 +182,29 @@ class TestMCFFileUtil(unittest.TestCase):
             'populationType': 'dcs:Person',
             'statType': 'dcs:measuredValue',
         }
-        nodes = mcf_file_util.add_mcf_node(node, {})
+        self.assertTrue(mcf_file_util.add_mcf_node(node, nodes))
 
         # Allow name addition
         node2 = dict(node)
         node2['name'] = 'Sample Variable'
-        mcf_file_util.add_mcf_node(node2, nodes)
+        self.assertTrue(mcf_file_util.add_mcf_node(node2, nodes))
         self.assertEqual(nodes['dcid:TestStatVar'].get('name'), node2['name'])
 
         # Allow duplicate descriptions
         node3 = dict(node)
         node3['description'] = 'Test variable with samples'
-        mcf_file_util.add_mcf_node(node3, nodes)
+        self.assertTrue(mcf_file_util.add_mcf_node(node3, nodes))
         self.assertEqual(nodes['dcid:TestStatVar'].get('description'),
                          node3['description'])
         node3['description'] = 'additional description'
-        mcf_file_util.add_mcf_node(node3, nodes)
+        self.assertTrue(mcf_file_util.add_mcf_node(node3, nodes))
         self.assertTrue(',' in nodes['dcid:TestStatVar'].get('description'))
 
         # Block adding new property:value
         node4 = dict(node)
         orig_node = dict(nodes['dcid:TestStatVar'])
         node4['age'] = '[10 20 Years]'
-        mcf_file_util.add_mcf_node(node4, nodes)
+        self.assertFalse(mcf_file_util.add_mcf_node(node4, nodes))
         self.assertNotIn('age', nodes['dcid:TestStatVar'])
         self.assertEqual(nodes['dcid:TestStatVar'], orig_node)
 
