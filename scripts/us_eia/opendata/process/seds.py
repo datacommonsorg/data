@@ -20,6 +20,7 @@ def extract_place_statvar(series_id, counters):
     # (https://user-images.githubusercontent.com/4375037/117168919-74618f00-ad7d-11eb-8306-bb4db3f52e03.png)
     m = re.match(r"^(SEDS\.[^.]+)\.([A-Z][A-Z])\.([A-Z])$", series_id)
     if m:
+        counters.add_counter('info_seds_record_count', 1)
         sv_part1 = m.group(1)
         place = m.group(2)
         sv_part2 = m.group(3)
