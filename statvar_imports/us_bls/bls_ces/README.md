@@ -11,6 +11,9 @@ In the new page click on "More Formatting Options" and in the "Select view of th
 
 - years: 2015 5o 2025
 
+### How to download the state data:
+`pip install -r requirement.txt`
+`python3 download_state_data.py --output_folder='state_folder`
 
 ### How to run:
 
