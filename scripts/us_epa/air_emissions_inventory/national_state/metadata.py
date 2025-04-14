@@ -23,25 +23,41 @@ SOURCE_POLLUTANT = {
     'VOC': 'VolatileOrganicCompound',
     'NH3': 'Ammonia',
     'FUEL COMB. ELEC. UTIL.': 'FuelCombustionElectricUtility',
+    'Fuel Comb. Elec. Util.': 'FuelCombustionElectricUtility',
     'FUEL COMB. INDUSTRIAL': 'FuelCombustionIndustrial',
+    'Fuel Comb. Industrial': 'FuelCombustionIndustrial',
     'FUEL COMB. OTHER': 'EPA_FuelCombustionOther',
+    'Fuel Comb. Other': 'EPA_FuelCombustionOther',
     'CHEMICAL & ALLIED PRODUCT MFG': 'ChemicalAndAlliedProductManufacturing',
+    'Chemical & Allied Product Mfg': 'ChemicalAndAlliedProductManufacturing',
     'METALS PROCESSING': 'MetalsProcessing',
+    'Metals Processing': 'MetalsProcessing',
     'PETROLEUM & RELATED INDUSTRIES': 'PetroleumAndRelatedIndustries',
+    'Petroleum & Related Industries': 'PetroleumAndRelatedIndustries',
     'OTHER INDUSTRIAL PROCESSES': 'EPA_OtherIndustrialProcesses',
+    'Other Industrial Processes': 'EPA_OtherIndustrialProcesses',
     'SOLVENT UTILIZATION': 'SolventUtilization',
+    'Solvent Utilization': 'SolventUtilization',
     'STORAGE & TRANSPORT': 'StorageAndTransport',
     'WASTE DISPOSAL & RECYCLING': 'WasteDisposalAndRecycling',
+    'Waste Disposal & Recycling': 'WasteDisposalAndRecycling',
+    'Storage & Transport': 'StorageAndTransport',
+    'Highway Vehicles': 'OnRoadVehicles',
     'HIGHWAY VEHICLES': 'OnRoadVehicles',
     'OFF-HIGHWAY': 'NonRoadEnginesAndVehicles',
+    'Off-Highway': 'NonRoadEnginesAndVehicles',
     'MISCELLANEOUS': 'EPA_MiscellaneousEmissionSource',
+    'Miscellaneous': 'EPA_MiscellaneousEmissionSource',
     'Wildfires': 'Wildfire',
     'WILDFIRES': 'Wildfire',
-    'PRESCRIBED FIRES': 'PrescribedFire'
+    'PRESCRIBED FIRES': 'PrescribedFire',
+    'Prescribed fires': 'PrescribedFire',
+    'Organic Carbon': 'OrganicCarbon',
+    'Black Carbon': 'BlackCarbon'
 }
 
 SHEETS_NATIONAL = [
-    'CO', 'NOX', 'PM10Primary', 'PM25Primary', 'SO2', 'VOC', 'NH3'
+    'CO', 'NOX', 'PM10Primary', 'PM25Primary', 'SO2', 'VOC', 'NH3', 'Black Carbon', 'Organic Carbon'
 ]
 
 SKIPHEAD_AMMONIA_NATIONAL = 6
