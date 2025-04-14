@@ -1,7 +1,0 @@
-Node: E:EPHHeatIllness->E0
-typeOf: dcs:StatVarObservation
-observationAbout: C:EPHHeatIllness->Geo
-observationDate: C:EPHHeatIllness->Year
-variableMeasured: C:EPHHeatIllness->StatVar
-observationPeriod: "P5M"
-value: C:EPHHeatIllness->Quantity
