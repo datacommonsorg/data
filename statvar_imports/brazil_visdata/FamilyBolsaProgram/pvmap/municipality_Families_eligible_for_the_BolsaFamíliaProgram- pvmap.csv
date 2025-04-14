@@ -1,0 +1,4 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Referência,observationDate,{Data},observationAbout,country/BRA,populationType,Household,benefitProgram,Brazil_BolsaFamilyProgram,observationPeriod,P1M,,,,
+Total de Famílias em Fase de Suspensão,benefitsStatus,Suspended,name,"""Total number of families in a suspension phase.""",alternateName,"""Total de Famílias em Fase de Suspensão@pt""",value,{Number},,,,,,
+Famílias que tiveram acompanhamento familiar registrado no Sicon,registrationStatus,SiconRegistered,name,"""Families who had family support registered with Sicon""",alternateName,"""Famílias que tiveram acompanhamento familiar registrado no Sicon@pt""",value,{Number},,,,,,
