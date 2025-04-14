@@ -52,13 +52,14 @@ class StateGDPDataLoader:
         'West Virginia', 'Wisconsin', 'Wyoming'
     ]
     _ZIP_LINK = 'https://apps.bea.gov/regional/zip/SQGDP.zip'
-    _STATE_QUARTERLY_GDP_FILE = 'SQGDP1__ALL_AREAS_2005_2020.csv'
+    _STATE_QUARTERLY_GDP_FILE = 'SQGDP1__ALL_AREAS_2005_2023.csv'
     _QUARTER_MONTH_MAP = {'Q1': '03', 'Q2': '06', 'Q3': '09', 'Q4': '12'}
 
     def __init__(self):
         """Initializes instance, assigning member data frames to None."""
         self.raw_df = None
         self.clean_df = None
+        self.clean_df1 = None
 
     def download_data(self, zip_link=None, file=None):
         """Downloads ZIP file, extracts the desired CSV, and puts it into a data
