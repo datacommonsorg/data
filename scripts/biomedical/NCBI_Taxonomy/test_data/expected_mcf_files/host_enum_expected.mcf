@@ -1,0 +1,22 @@
+Node: dcid:BiologicalHostEnum
+name: "BiologicalHostEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "A host is a larger organism that harbors a smaller organism. The relationship between the two organisms can be parasitic, mutualistic, or commensalist. This encodes the type of larger organism that is serving as a host."
+
+Node: dcid:BiologicalHostBacteria
+name: "Bacteria"
+typeOf: dcs:BiologicalHostEnum
+
+Node: dcid:BiologicalHostHuman
+name: "Human"
+typeOf: dcs:BiologicalHostEnum
+
+Node: dcid:BiologicalHostLandPlants
+name: "Land Plants"
+typeOf: dcs:BiologicalHostEnum
+
+Node: dcid:BiologicalHostVertebrates
+name: "Vertebrates"
+typeOf: dcs:BiologicalHostEnum
+

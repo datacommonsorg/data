@@ -1,0 +1,22 @@
+Node: E:ncbi_taxonomy->E1
+typeOf: dcs:Taxon
+dcid: C:ncbi_taxonomy->parentDcid
+
+Node: E:ncbi_taxonomy->E2
+typeOf: dcs:Taxon
+dcid: C:ncbi_taxonomy->dcid
+name: C:ncbi_taxonomy->scientificName
+abbreviation: C:ncbi_taxonomy->acronym
+biologicalHost:  C:ncbi_taxonomy->host
+citation: C:ncbi_taxonomy->citation
+commonName: C:ncbi_taxonomy->commonName
+genBankName: C:ncbi_taxonomy->genBankName
+hasInheritedDivsion: C:ncbi_taxonomy->hasInheritedDivision
+ncbiBlastName: C:ncbi_taxonomy->ncbiBlastName
+ncbiTaxId: C:ncbi_taxonomy->taxID
+scientificName: C:ncbi_taxonomy->scientificName
+specializationOf: E:ncbi_taxonomy->E1
+synonym: C:ncbi_taxonomy->synonym
+taxonDivision: C:ncbi_taxonomy->division
+taxonRank: C:ncbi_taxonomy->taxonRank
+taxonTopLevelCategory: C:ncbi_taxonomy->taxonTopLevelCategory

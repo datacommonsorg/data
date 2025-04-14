@@ -1,0 +1,40 @@
+Node: dcid:BiologicalTaxonomicRankEnum
+name: "BiologicalTaxonomicRankEnum"
+typeOf: schema:Class
+subClassOf: schema:Enumeration
+description: "In biology, taxonomic rank is the relative level of a group of organisms (a taxon) in an ancestral or hereditary hierarchy. A common system of biological classification (taxonomy) consists of species, genus, family, order, class, phylum, kingdom, and domain. However, todays taxonomic rankings have expanded beyond these seven basic classifications."
+descriptionUrl: "https://en.wikipedia.org/wiki/Taxonomic_rank"
+
+
+Node: dcid:BiologicalTaxonomicRankClade
+name: "Clade"
+typeOf: dcs:BiologicalTaxonomicRankEnum
+
+Node: dcid:BiologicalTaxonomicRankClass
+name: "Class"
+typeOf: dcs:BiologicalTaxonomicRankEnum
+
+Node: dcid:BiologicalTaxonomicRankNoRank
+name: "No Rank"
+typeOf: dcs:BiologicalTaxonomicRankEnum
+
+Node: dcid:BiologicalTaxonomicRankOrder
+name: "Order"
+typeOf: dcs:BiologicalTaxonomicRankEnum
+
+Node: dcid:BiologicalTaxonomicRankPhylum
+name: "Phylum"
+typeOf: dcs:BiologicalTaxonomicRankEnum
+
+Node: dcid:BiologicalTaxonomicRankSpecies
+name: "Species"
+typeOf: dcs:BiologicalTaxonomicRankEnum
+
+Node: dcid:BiologicalTaxonomicRankSubspecies
+name: "Subspecies"
+typeOf: dcs:BiologicalTaxonomicRankEnum
+
+Node: dcid:BiologicalTaxonomicRankVarietas
+name: "Varietas"
+typeOf: dcs:BiologicalTaxonomicRankEnum
+
