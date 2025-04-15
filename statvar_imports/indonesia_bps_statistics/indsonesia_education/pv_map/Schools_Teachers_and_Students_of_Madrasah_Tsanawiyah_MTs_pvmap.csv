@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Provinsi,observationAbout,{Data},,,measuredProperty,count,schoolManagement,UnderMinistryOfReligion,,
+Jumlah Sekolah MTs (Negeri),populationType,School,levelOfSchool,MadrasahTsanawiyah,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Sekolah MTs (Negeri)@id"""
+Jumlah Sekolah MTs (Swasta),populationType,School,levelOfSchool,MadrasahTsanawiyah,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah MTs (Swasta)@id"""
+Jumlah Sekolah MTs (Negeri+Swasta),populationType,School,levelOfSchool,MadrasahTsanawiyah,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah MTs (Negeri+Swasta)@id"""
+Jumlah Guru MTs (Negeri),populationType,Teacher,levelOfSchool,MadrasahTsanawiyah,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Guru MTs (Negeri)@id"""
+Jumlah Guru MTs (Swasta),populationType,Teacher,levelOfSchool,MadrasahTsanawiyah,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru MTs (Swasta)@id"""
+Jumlah Guru MTs (Negeri+Swasta),populationType,Teacher,levelOfSchool,MadrasahTsanawiyah,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru MTs (Negeri+Swasta)@id"""
+Jumlah Murid MTs (Negeri),populationType,Student,levelOfSchool,MadrasahTsanawiyah,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Murid MTs (Negeri)@id"""
+Jumlah Murid MTs (Swasta),populationType,Student,levelOfSchool,MadrasahTsanawiyah,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid MTs (Swasta)@id"""
+Jumlah Murid MTs (Negeri+Swasta),populationType,Student,levelOfSchool,MadrasahTsanawiyah,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid MTs (Negeri+Swasta)@id"""
+observationDate,observationDate,{Data},,,,,,,,
