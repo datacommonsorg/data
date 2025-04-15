@@ -1,3 +1,18 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 import json
 import os
 import tempfile
@@ -6,6 +21,18 @@ import pandas as pd
 import xml.etree.ElementTree as ET
 from io import StringIO
 from unittest.mock import patch
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the path to the 'util' directory three levels up
+import sys
+import os
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+util_dir = os.path.abspath(os.path.join(current_dir, '../../../util'))
+
+if util_dir not in sys.path:
+    sys.path.insert(0, util_dir)
+    print(f"Added to sys.path: {util_dir}")
 
 import xml_to_json
 
