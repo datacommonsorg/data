@@ -111,10 +111,12 @@ class ExecutorConfig:
     gcs_bucket_volume_mount: str = 'datcom-volume-mount'
     # Location of the GCS bucket volume mount.
     gcs_volume_mount_dir: str = '/mnt'
+    # Clean up GCS volume mount dir.
+    cleanup_gcs_volume_mount: bool = True
     # Location of the local git data repo.
     local_repo_dir: str = '/data'
     # Location of the import tool jar.
-    import_tool_path: str = '/data/import-automation/executor/import-tool.jar'
+    import_tool_path: str = '/import-tool.jar'
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 3600
     # Arguments for the user script
