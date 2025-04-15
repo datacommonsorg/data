@@ -2,7 +2,7 @@
 
 tmp="source_data_tmp" # where to store temporary artifacts
 dest="source_data" # where to put the final files
-files="input_files"
+files="input_data"
 # Make directories
 mkdir -p "$tmp"
 mkdir -p "$dest"
