@@ -1,16 +1,16 @@
-# Copyright 2025 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# # Copyright 2025 Google LLC
+# #
+# # Licensed under the Apache License, Version 2.0 (the "License");
+# # you may not use this file except in compliance with the License.
+# # You may obtain a copy of the License at
+# #
+# #      http://www.apache.org/licenses/LICENSE-2.0
+# #
+# # Unless required by applicable law or agreed to in writing, software
+# # distributed under the License is distributed on an "AS IS" BASIS,
+# # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# # See the License for the specific language governing permissions and
+# # limitations under the License.
 
 import json
 import csv
@@ -19,13 +19,7 @@ from absl import app
 from absl import flags
 import xmltodict
 from absl import logging
-
-_FLAGS = flags.FLAGS
-flags.DEFINE_string('input_json',
-                    None,
-                    'Input XML file',
-                    required=True)
-flags.DEFINE_string('output_csv', None, 'Output CSV file.', required=True)
+import sys
 
 
 def process_json_files(folder_path, output_folder):
@@ -148,21 +142,6 @@ def process_json_files(folder_path, output_folder):
         logging.fatal(f"An unexpected error occurred: {e}")
 
 
-# def main(argv):
-#     if len(argv) > 1:
-#         raise app.UsageError('Too many command-line arguments.')
-# json_file = _FLAGS.input_json
-# csv_file = _FLAGS.output_csv
-# process_json_files(json_file, csv_file)
-
-
-# if __name__ == '__main__':
-#     app.run(main)
-def main(argv):
-    if len(argv) > 1:
-        raise app.UsageError('Too many command-line arguments.')
-    process_json_files(_FLAGS.input_json, _FLAGS.output_csv)
-
-
-if __name__ == '__main__':
-    app.run(main)
+input_json_file = sys.argv[1]
+output_csv_file = sys.argv[2]
+process_json_files(input_json_file, output_csv_file)

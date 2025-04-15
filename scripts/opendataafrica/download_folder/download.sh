@@ -58,7 +58,7 @@ function xml_to_json() {
   local xml_file="$1"
   local json_file="$2"
     local script_path="../../../util/xml_to_json.py"
-  python3 "$script_path" --input_xml="$xml_file" --output_json="$json_file"
+  python3 "$script_path" "$xml_file" "$json_file"
   # python3 xml_to_json.py --input_xml="$xml_file" --output_json="$json_file"
 }
 
@@ -69,11 +69,11 @@ function download_selected_DATASETS() {
       local json_output_file="$OUTPUT_XML_JSON_DIR/${dataset}.json"
       local csv_output_file="$OUTPUT_CSV_DIR/${dataset}.csv"
       local script_path="../../../util/xml_to_json.py"
-      if python3 "$script_path"  --input_xml="$OUTPUT_XML_JSON_DIR/${dataset}.xml" --output_json="$json_output_file"; then
+      if python3 "$script_path"  "$OUTPUT_XML_JSON_DIR/${dataset}.xml" "$json_output_file"; then
         echo "Successfully converted ${dataset}.xml to ${dataset}.json"
         local script_path1="../../../util/json_to_csv.py"
 
-        if python3 "$script_path1"  --input_json="$OUTPUT_XML_JSON_DIR" --output_csv="$OUTPUT_CSV_DIR"; then
+        if python3 "$script_path1"  "$OUTPUT_XML_JSON_DIR" "$OUTPUT_CSV_DIR"; then
           echo "Successfully converted JSON files in $OUTPUT_XML_JSON_DIR to CSV files in $OUTPUT_CSV_DIR"
         else
           echo "Error: Failed to convert JSON files to CSV files."
@@ -101,9 +101,9 @@ function download_all_DATASETS() {
       local json_output_file="$OUTPUT_XML_JSON_DIR/${dataset}.json"
       local csv_output_file="$OUTPUT_CSV_DIR/${dataset}.csv"
 
-      if python3 "$xml_to_json_script_path" --input_xml="$xml_output_file" --output_json="$json_output_file"; then
+      if python3 "$xml_to_json_script_path" "$xml_output_file" "$json_output_file"; then
         echo "Successfully converted ${dataset}.xml to ${dataset}.json"
-        if python3 "$json_to_csv_script_path" --input_json="$OUTPUT_XML_JSON_DIR" --output_csv="$OUTPUT_CSV_DIR"; then
+        if python3 "$json_to_csv_script_path" "$OUTPUT_XML_JSON_DIR" "$OUTPUT_CSV_DIR"; then
           echo "Successfully converted JSON files in $OUTPUT_XML_JSON_DIR to CSV files in $OUTPUT_CSV_DIR"
         else
           echo "Error: Failed to convert JSON files in $OUTPUT_XML_JSON_DIR to CSV files in $OUTPUT_CSV_DIR."

@@ -17,13 +17,7 @@ from absl import app
 from absl import flags
 import xmltodict
 from absl import logging
-
-_FLAGS = flags.FLAGS
-flags.DEFINE_string('input_xml',
-                    None,
-                    'Input xml file to convert to json.',
-                    required=True)
-flags.DEFINE_string('output_json', None, 'Output json file.', required=True)
+import sys
 
 
 def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
@@ -50,12 +44,6 @@ def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
     except Exception as e:
         logging.fatal(f"An error occurred during conversion: {e}")
 
-
-def main(argv):
-    if len(argv) > 1:
-        raise app.UsageError('Too many command-line arguments.')
-    convert_xml_to_json(_FLAGS.input_xml, _FLAGS.output_json)
-
-
-if __name__ == '__main__':
-    app.run(main)
+input_xml_file = sys.argv[1]
+output_json_file = sys.argv[2]
+convert_xml_to_json(input_xml_file , sys.argv[2])
