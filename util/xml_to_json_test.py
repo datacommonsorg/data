@@ -21,21 +21,8 @@ import pandas as pd
 import xml.etree.ElementTree as ET
 from io import StringIO
 from unittest.mock import patch
-current_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Construct the path to the 'util' directory three levels up
-import sys
-import os
-
-current_dir = os.path.dirname(os.path.abspath(__file__))
-util_dir = os.path.abspath(os.path.join(current_dir, '../../../util'))
-
-if util_dir not in sys.path:
-    sys.path.insert(0, util_dir)
-    print(f"Added to sys.path: {util_dir}")
 
 import xml_to_json
-
 
 class XMLToJsonConverterTest(unittest.TestCase):
     """This class has the method required to test the convert_xml_to_json function."""
