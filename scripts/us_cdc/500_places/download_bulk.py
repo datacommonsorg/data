@@ -88,4 +88,20 @@ def main(_):
 
 
 if __name__ == '__main__':
+    logging.set_verbosity(2)
+    logging.info("checking for mount storage")
+    try:
+        if os.path.isdir("gcs_output"):
+
+            logging.info("mount path found")
+            os.mkdir('/gcs_output/input_files')
+            logging.info("directory created")
+            with open("/gcs_output/input_files/text.txt", 'w') as file:
+                file.write("this is for testing mount path")
+            logging.info("file created")
+        else:
+            logging.info("not exist")
+
+    except:
+        logging.fetal("mount path not found")
     app.run(main)
