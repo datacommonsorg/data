@@ -8,40 +8,25 @@ from selenium.webdriver.support import expected_conditions as EC
 from chromedriver_py import binary_path
 import time
 from absl import logging
+from absl import flags
+from absl import app
 import zipfile
 import os
 import re
 import pandas as pd
 import shutil
 
-
+FLAGS = flags.FLAGS
+flags.DEFINE_string('output_folder', 'download_folder', 'download folder name')
 COLLECTION_VALUE = ' Offenses Known to Law Enforcement '
 DOWNLOAD_BUTTON_LOCATOR="//div[@class='col-md-auto']/a[@title='Publication Table Download Button']"
 NB_OPTION = "//nb-option[contains(text()"
 PARENT_DIV_ID = "ciusDownloads"
-_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-DESTINATION_PATH = os.path.join(_SCRIPT_PATH,'download_folder/input_files/')
-DOWNLOAD_DIRECTORY = (os.path.join(_SCRIPT_PATH, 'download_folder'))
 LAST_YEAR = 2020
 SOURCE_URL = "https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads"
 STATE_COLUMN = 0
 CITY_COLUMN = 1
 COLUMN_VALUES = ['State','City']
-
-
-if not os.path.exists(DOWNLOAD_DIRECTORY):
-    os.makedirs(DOWNLOAD_DIRECTORY)
-else:
-    # Folder exists, clear its contents (files and folders)
-    for filename in os.listdir(DOWNLOAD_DIRECTORY):
-        file_path = os.path.join(DOWNLOAD_DIRECTORY, filename)
-        try:
-            if os.path.isfile(file_path) or os.path.islink(file_path):
-                os.unlink(file_path)
-            elif os.path.isdir(file_path):
-                shutil.rmtree(file_path)
-        except Exception as e:
-            logging.fatal(f"Failed to delete {file_path}. Reason: {e}")
 
 def create_chrome_webdriver(DOWNLOAD_DIRECTORY):
   """Creates a Chrome WebDriver instance."""
@@ -120,7 +105,7 @@ def access_elements(driver, parent_div_id,year):
     logging.info("Error getting child elements: %s",e)
     return []
 
-def download():
+def download(DOWNLOAD_DIRECTORY):
    try: 
     driver = create_chrome_webdriver(DOWNLOAD_DIRECTORY)
     years = get_years(driver,PARENT_DIV_ID)
@@ -167,7 +152,7 @@ def extract_zip(zip_file_path):
     logging.fatal(f"Error extracting zip file: {e}")
 
 
-def access_extracted_folder():
+def access_extracted_folder(DESTINATION_PATH):
 
   for file in extracted_files_path:
     year = file[-4:]
@@ -240,16 +225,31 @@ def clean_state_column(file_path):
   except Exception as e:
         logging.fatal(f"An unexpected error occurred: {e}")
 
+def main(unused_argv):
+    folder_path = FLAGS.output_folder
+    destination_folder = folder_path+'/input_files/'
+  
+    _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+    DESTINATION_PATH = os.path.join(_SCRIPT_PATH,'download_folder/input_files/')
+    DOWNLOAD_DIRECTORY = (os.path.join(_SCRIPT_PATH, 'download_folder'))
+    if not os.path.exists(DOWNLOAD_DIRECTORY):
+      os.makedirs(DOWNLOAD_DIRECTORY)
+    else:
+    # Folder exists, clear its contents (files and folders)
+      for filename in os.listdir(DOWNLOAD_DIRECTORY):
+        file_path = os.path.join(DOWNLOAD_DIRECTORY, filename)
+        try:
+            if os.path.isfile(file_path) or os.path.islink(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            logging.fatal(f"Failed to delete {file_path}. Reason: {e}")
+
+    download(DOWNLOAD_DIRECTORY)
+    extract_zip_files(DOWNLOAD_DIRECTORY)
+    access_extracted_folder(destination_folder)
+
 
 if __name__ == '__main__':
-    download()
-    extract_zip_files(DOWNLOAD_DIRECTORY)
-    access_extracted_folder()
-
-
-
-
-
-
-
-    
+    app.run(main)
