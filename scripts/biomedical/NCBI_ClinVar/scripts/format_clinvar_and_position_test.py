@@ -20,7 +20,7 @@ import os
 import unittest
 from pathlib import Path
 from absl import flags
-from .format_clinvar_and_position import *
+from format_clinvar_and_position import *
 
 CURRENT_ROW = None
 
@@ -38,9 +38,9 @@ class TestNCBIClinVar(unittest.TestCase):
         ]
         expected_result = {
             'dcid':
-                'dcid:bio/rs2124183611',
+                'bio/rs2124183611',
             'name':
-                '2124183611',
+                'rs2124183611',
             'dcid_pos':
                 'bio/hg38_chrY_641068',
             'name_pos':
@@ -122,7 +122,7 @@ class TestNCBIClinVar(unittest.TestCase):
             'referenceAllele':
                 'T',
             'rsID':
-                '2124183611',
+                'rs2124183611',
             'sequenceOntologyID':
                 'dcid:bio/SO_0000667',
             'sequenceOntologyID_mc':
@@ -152,6 +152,7 @@ class TestNCBIClinVar(unittest.TestCase):
             'measuredPopulation':
                 ''
         }
+
         CURRENT_ROW = copy.deepcopy(CLINVAR_OUTPUT_DICT)
         CURRENT_ROW.update(copy.deepcopy(CLINVAR_CONFLICTING_OUTPUT_DICT))
         CURRENT_ROW.update(copy.deepcopy(CLINVAR_OBS_OUTPUT_DICT))
@@ -169,7 +170,7 @@ class TestNCBIClinVar(unittest.TestCase):
         ]
 
         expected_result = {
-            'dcid': 'dcid:bio/rs2052840553',
+            'dcid': 'bio/rs2052840553',
             'name': '2052840553',
             'dcid_pos': 'bio/hg19_chrY_551575',
             'name_pos': '"hg19 chrY 551575"',
@@ -177,6 +178,7 @@ class TestNCBIClinVar(unittest.TestCase):
             'position': '551575',
             'rsID': '2052840553'
         }
+
         CURRENT_ROW = copy.deepcopy(CLINVAR_POS_OUTPUT_DICT)
         w = WriteToCsv()
         row = parse_clinvar_pos_row(line, w, CURRENT_ROW)

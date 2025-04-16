@@ -35,6 +35,16 @@ from absl import logging
 
 MODULE_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'output')
 
+# Setup path for import from data/util
+# or set `export PYTHONPATH="./:<repo>/data/util"` in bash
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+_DATA_DIR = _SCRIPT_DIR.split('/data/')[0]
+sys.path.append(os.path.join(_DATA_DIR, 'data/util'))
+
+import file_util
+from counters import Counters
+
 # Declare Universal Variables
 _BASE_32_MAP = [
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'b', 'c', 'd', 'f', 'g',
@@ -380,7 +390,7 @@ def write_sequence_ontology(prop, dictionary, key, f):
     value = dictionary[key]
     if len(value) > 0:
         value = value.replace(':', '_')
-        value = 'dcid:bio/' + value
+        value = 'bio/' + value
         #f.write(prop + ': ' + value + '\n')
         f.write(prop, value)
     return
@@ -417,7 +427,7 @@ def writeClinicalDiseases(dictionary, key, w):
                     db, value = e.split(':')
                     db_prop = df_property_names[db]
                     if db_prop == 'medicalSubjectHeadingID':
-                        value = 'dcid:bio/' + value
+                        value = 'bio/' + value
                         writeEntry(db_prop, value, w, False)
                     else:
                         writeEntry(db_prop, value, w, True)
@@ -564,7 +574,7 @@ def convertToClassEnum(dictionary, key):
     return
 
 
-def writeGeneInfo(dictionary, key, file, ASSEMBLY_HG38):
+def writeGeneInfo(dictionary, key, file):
     if key not in dictionary:
         return ()
     genes = dictionary[key].split('|')
@@ -574,7 +584,7 @@ def writeGeneInfo(dictionary, key, file, ASSEMBLY_HG38):
     for g in genes:
         try:
             geneSymbol, ncbiGeneID = g.split(':', maxsplit=1)
-            geneIDs.append('dcid:bio/' + geneSymbol.replace("@", "_Cluster"))
+            geneIDs.append('bio/' + geneSymbol.replace("@", "_Cluster"))
             geneSymbols.append(geneSymbol)
             ncbiGeneIDs.append(ncbiGeneID)
         except:
@@ -634,7 +644,7 @@ def writeSeqOntologyFunctionalType(dictionary, key, file):
     for entry in pairs:
         try:
             seqOntology, funcType = entry.split('|')
-            seqOntology = 'dcid:bio/' + seqOntology.replace(':', '_')
+            seqOntology = 'bio/' + seqOntology.replace(':', '_')
             # writeEntry('sequenceOntologyID', seqOntology, file, False)
             sequenceOntologyID_mcs.append(seqOntology)
             geneticVariantFunctionalCategories.add(
@@ -903,10 +913,11 @@ def writeClincalConflicting(dcid, ref, alt, dictionary, key, w, rsID):
         if ('(') in value:
             clinicalSignificance, count = value.split('(')
             count = count.strip(')')
-            w.write('dcid', f"dcid:{dcid}")
+            w.write('dcid', dcid)
             clinical_dcid = re.sub('\W+', '', clinicalSignificance).title()
             w.write('dcid_conflicting', f"{dcid}_{clinical_dcid}")
-            w.write('name_conflicting', f'"{dcid} {clinical_dcid}"')
+            w.write('name_conflicting',
+                    f"{str(dcid).replace('bio/', '')} {clinical_dcid}")
             w.write('alternativeAllele', alt)
             w.write('clinicalSignificance', clinical_dcid)
             w.write('count', count)
@@ -937,7 +948,7 @@ def write_disease_name(dictionary, key, f):
     return
 
 
-def writeNode(line, count, ASSEMBLY_HG38, start_time, w):
+def writeNode(line, w):
     try:
         w, dict_info, dcid, rsID, _ = parse_clinvar_row(line, w, None)
 
@@ -949,13 +960,7 @@ def writeNode(line, count, ASSEMBLY_HG38, start_time, w):
 
         w.write_to_file(['clinvar'])
         w.close()
-        count += 1
 
-        if count % 100000 == 0:  # start writing to new output file
-            time_running = time.time() - start_time
-            logging.info(f"{count} lines processed: {time_running:.2f} second")
-
-        return (count)
     except Exception as e:
         logging.error(f"Error in line {line} - with exception {e}")
         sys.exit(0)
@@ -977,12 +982,12 @@ def parse_clinvar_row(line, w, curr_row=None):
     if 'RS' in dict_info:
         rsID = dict_info['RS']
         dcid = f"bio/rs{rsID}"
-        w.write('dcid', f"dcid:{dcid}")
-        w.write('name', rsID)
-        w.write('rsID', rsID)
+        w.write('dcid', dcid)
+        w.write('name', f'rs{rsID}')
+        w.write('rsID', f'rs{rsID}')
 
     elif line[2].isdigit():
-        w.write('dcid', f"dcid:{dcid}")
+        w.write('dcid', dcid)
         w.write('name', line[2])
     else:
         logging.info(line)
@@ -1017,7 +1022,7 @@ def parse_clinvar_row(line, w, curr_row=None):
                False)
     write_variant_database_ids(dict_info, 'CLNVI', w)
     write_sequence_ontology('sequenceOntologyID', dict_info, 'CLNVCSO', w)
-    writeGeneInfo(dict_info, 'GENEINFO', w, ASSEMBLY_HG38)
+    writeGeneInfo(dict_info, 'GENEINFO', w)
     writeSeqOntologyFunctionalType(dict_info, 'MC', w)
 
     writeOrigin(dict_info, 'ORIGIN', w)
@@ -1068,11 +1073,11 @@ def parse_clinvar_pos_row(line, w, curr_row=None):
     if 'RS' in dict_info:
         dcid = 'bio/rs' + dict_info['RS']
         rsID = dict_info['RS']
-        w.write('dcid', f"dcid:{dcid}")
-        w.write('name', f'{rsID}')
-        w.write('rsID', rsID)
+        w.write('dcid', dcid)
+        w.write('name', f'rs{rsID}')
+        w.write('rsID', f'rs{rsID}')
     elif line[2].isdigit():
-        w.write('dcid', f"dcid:{dcid}")
+        w.write('dcid', dcid)
         w.write('name', f'{line[2]}')
     else:
         logging.info(line)
@@ -1120,32 +1125,31 @@ def process_clinvar_files():
                                                  quoting=csv.QUOTE_MINIMAL)
         CLINVAR_OBS_FILE_WRITER.writeheader()
 
-        count = 0
+        counters = Counters()
+
         for file_input in HG38_INPUT_FILES:
             # write the ClinVar file into csv
+            counters.add_counter('total',
+                                 file_util.file_estimate_num_rows(file_input))
             with open(file_input, 'r') as r:
                 logging.info(f"processing file {r.name}")
-                # r = open(file_input, 'r')
-                count_skip = 42  # skip header
-                while count_skip != 0:
-                    #next(r)
-                    current_line = r.readline()
-                    if 'fileDate' in current_line:
-                        date = current_line.split('=')
+                for line in r:
+                    if 'fileDate' in line:
+                        date = line.split('=')
                         global OBSERVATION_DATE
                         OBSERVATION_DATE = date[1].replace('\n', '')
 
-                    count_skip -= 1
+                    if line.startswith("#"):  # skip header lines
+                        continue  # go to next header line
 
-                    #masterList = set()
-                for line in r:
                     line = line.strip('\r\n').split('\t')
                     CURRENT_ROW = copy.deepcopy(CLINVAR_OUTPUT_DICT)
                     CURRENT_ROW.update(
                         copy.deepcopy(CLINVAR_CONFLICTING_OUTPUT_DICT))
                     CURRENT_ROW.update(copy.deepcopy(CLINVAR_OBS_OUTPUT_DICT))
                     w = WriteToCsv()
-                    count = writeNode(line, count, ASSEMBLY_HG38, start_time, w)
+                    writeNode(line, w)
+                    counters.add_counter('processed', 1)
 
     except Exception as e:
         logging.error(f"Error processing files {e}")
@@ -1154,7 +1158,7 @@ def process_clinvar_files():
         conflicting_file.close()
         obs_file.close()
         logging.info(
-            f'Number of GeneticVariant instances: {count} in {round((time.time() - start_time)/60,2)} mins'
+            f'Process completed in {round((time.time() - start_time)/60,2)} mins'
         )
 
 
@@ -1177,12 +1181,10 @@ def process_clinvar_pos_files():
         for file_input in HG19_INPUT_FILES:
             with open(file_input, 'r') as r:
                 logging.info(f"processing file {r.name}")
-                count_skip = 42  # skip header
-                while count_skip != 0:
-                    next(r)
-                    count_skip -= 1
 
                 for line in r:
+                    if line.startswith("#"):  # skip header lines
+                        continue  # go to next header line
                     line = line.strip('\r\n').split('\t')
                     CURRENT_ROW = copy.deepcopy(CLINVAR_POS_OUTPUT_DICT)
                     count = writeNode_POS(line, count, ASSEMBLY_HG19,

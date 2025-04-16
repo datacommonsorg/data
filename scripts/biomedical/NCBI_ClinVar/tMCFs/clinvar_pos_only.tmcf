@@ -11,3 +11,4 @@ typeOf: dcs:GeneticVariant
 dcid: C:clinvar_pos_only->dcid
 name: C:clinvar_pos_only->name
 rsID: C:clinvar_pos_only->rsID
+hg19GenomicPosition: E:clinvar_pos_only->E1
