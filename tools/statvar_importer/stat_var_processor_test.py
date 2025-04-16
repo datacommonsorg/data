@@ -48,7 +48,6 @@ class TestStatVarProcessor(unittest.TestCase):
             os.path.join(_SCRIPT_DIR, 'test_data', 'us_census_B01001'),
         ]
         self.pv_maps = []
-        logging.set_verbosity(1)
         logging.info(
             f'Setting test files: {self.test_files}, pv_maps: {self.pv_maps}')
 

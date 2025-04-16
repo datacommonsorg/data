@@ -107,10 +107,16 @@ class ExecutorConfig:
     requirements_filename: str = 'requirements.txt'
     # ID of the location where Cloud Scheduler is hosted.
     scheduler_location: str = 'us-central1'
+    # Name of the GCS bucket for volume mount.
+    gcs_bucket_volume_mount: str = 'datcom-volume-mount'
+    # Location of the GCS bucket volume mount.
+    gcs_volume_mount_dir: str = '/mnt'
+    # Clean up GCS volume mount dir.
+    cleanup_gcs_volume_mount: bool = True
     # Location of the local git data repo.
     local_repo_dir: str = '/data'
     # Location of the import tool jar.
-    import_tool_path: str = '/data/import-automation/executor/import-tool.jar'
+    import_tool_path: str = '/import-tool.jar'
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 3600
     # Arguments for the user script
@@ -133,8 +139,8 @@ class ExecutorConfig:
     email_account: str = ''
     # The corresponding password, app password, or access token.
     email_token: str = ''
-    # Disable email alert notifications.
-    disable_email_notifications: bool = False
+    # Email alerts are disabled by default. Cloud Run jobs use GCP alerting.
+    disable_email_notifications: bool = True
     # Skip uploading the data to GCS (for local testing).
     skip_gcs_upload: bool = False
     # Maximum time a blocking call to the importer to
