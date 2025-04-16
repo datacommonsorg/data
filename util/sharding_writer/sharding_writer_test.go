@@ -525,7 +525,6 @@ func TestWriterWriteString(t *testing.T) {
 		}
 
 		// Close the writer to ensure it's all saved.
-		// Close the writer to ensure it's all saved.
 		closeErr := w.Close()
 		if closeErr != nil {
 			log.Printf("ERROR: failed to close writer: %v", err)
