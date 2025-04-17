@@ -5,7 +5,7 @@
       "curator_emails": [""],
       "provenance_url": "https://nces.ed.gov/programs/digest/d23/tables/dt23_313.30.asp",
       "provenance_description": "TStatistics on degree-granting historically Black colleges and universities, by control and level of institution",
-      "scripts": ["download_script.py", "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/tabn313.30.xlsx --pv_map=nces_hbcu_pvmap.csv --config_file=nces_hbcu_metadata.csv --output_path=testdata/nces_hbcu_output"],
+      "scripts": ["download_script.py", "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/* --pv_map=nces_hbcu_pvmap.csv --config_file=nces_hbcu_metadata.csv --output_path=testdata/nces_hbcu_output"],
       "import_inputs": [
         {
           "template_mcf": "testdata/nces_hbcu_output.tmcf",
