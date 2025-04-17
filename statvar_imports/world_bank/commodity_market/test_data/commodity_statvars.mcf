@@ -1,0 +1,2407 @@
+Node: dcid:Nominal_Index_Commodity
+name: "Commodity price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+
+Node: dcid:Nominal_Index_Commodity_Agriculture
+name: "Agriculture commodity price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:Agriculture
+
+Node: dcid:Nominal_Index_Commodity_BaseMetalsExceptIronOre
+name: "Base metals (excluding iron ore) price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:BaseMetalsExceptIronOre
+
+Node: dcid:Nominal_Index_Commodity_Beverage
+name: "Beverage price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:Beverage
+
+Node: dcid:Nominal_Index_Commodity_Energy
+name: "Energy commodity price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:Energy
+
+Node: dcid:Nominal_Index_Commodity_Fertilizer
+name: "Fertilizer commodity price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:Fertilizer
+
+Node: dcid:Nominal_Index_Commodity_Food
+name: "Nominal food price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:Food
+
+Node: dcid:Nominal_Index_Commodity_Grain
+name: "Grain price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:Grain
+
+Node: dcid:Nominal_Index_Commodity_MetalAndMineral
+name: "Metal and mineral price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:MetalAndMineral
+
+Node: dcid:Nominal_Index_Commodity_NonEnergy
+name: "Non-energy commodity price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:NonEnergy
+
+Node: dcid:Nominal_Index_Commodity_OilAndMeal
+name: "Oil and meal commodity price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:OilAndMeal
+
+Node: dcid:Nominal_Index_Commodity_OtherFoods
+name: "Price index of other foods (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:OtherFoods
+
+Node: dcid:Nominal_Index_Commodity_OtherRawMaterial
+name: "Nominal price index of other raw materials (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:OtherRawMaterial
+
+Node: dcid:Nominal_Index_Commodity_PreciousMetal
+name: "Precious metal commodity price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:PreciousMetal
+
+Node: dcid:Nominal_Index_Commodity_RawMaterials
+name: "Raw materials commodity price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:RawMaterials
+
+Node: dcid:Nominal_Index_Commodity_Timber
+name: "Timber commodity price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityCategory: dcid:Timber
+
+Node: dcid:RealValue_DeflatorManufacturedExportsUnitValueIndex_EconomicActivity
+name: "Deflator of the unit value index of manufactured exports (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:deflatorManufacturedExportsUnitValueIndex
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+
+Node: dcid:RealValue_Index_Commodity
+name: "Commodity price index (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+
+Node: dcid:RealValue_Index_Commodity_Agriculture
+name: "Real value index of agricultural commodities"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:Agriculture
+
+Node: dcid:RealValue_Index_Commodity_BaseMetalsExceptIronOre
+name: "Real value index for base metals (except iron ore) commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:BaseMetalsExceptIronOre
+
+Node: dcid:RealValue_Index_Commodity_Beverage
+name: "Real value index of beverage commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:Beverage
+
+Node: dcid:RealValue_Index_Commodity_Energy
+name: "Real value index of energy commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:Energy
+
+Node: dcid:RealValue_Index_Commodity_Fertilizer
+name: "Real value index of fertilizer prices"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:Fertilizer
+
+Node: dcid:RealValue_Index_Commodity_Food
+name: "Real value index of food commodities"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:Food
+
+Node: dcid:RealValue_Index_Commodity_Grain
+name: "Real value index of grain commodities"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:Grain
+
+Node: dcid:RealValue_Index_Commodity_MetalAndMineral
+name: "Metal and mineral commodity price index (in real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:MetalAndMineral
+
+Node: dcid:RealValue_Index_Commodity_NonEnergy
+name: "Real value index of non-energy commodities"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:NonEnergy
+
+Node: dcid:RealValue_Index_Commodity_OilAndMeal
+name: "Real value index for oil and meal commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:OilAndMeal
+
+Node: dcid:RealValue_Index_Commodity_OtherFoods
+name: "Real value index of other foods commodities"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:OtherFoods
+
+Node: dcid:RealValue_Index_Commodity_OtherRawMaterial
+name: "Real value index of other raw materials commodity prices"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:OtherRawMaterial
+
+Node: dcid:RealValue_Index_Commodity_PreciousMetal
+name: "Real value index of precious metals commodities"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:PreciousMetal
+
+Node: dcid:RealValue_Index_Commodity_RawMaterials
+name: "Real value index of raw material commodities"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:RawMaterials
+
+Node: dcid:RealValue_Index_Commodity_Timber
+name: "Real value index for timber"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityGoodsCategory: dcid:Timber
+
+Node: dcid:Monthly_Index_Commodity
+name: "Monthly commodity price index"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+
+Node: dcid:Monthly_Index_Commodity_Agriculture
+name: "Monthly commodity index for agriculture"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:Agriculture
+
+Node: dcid:Monthly_Index_Commodity_BaseMetalsExceptIronOre
+name: "Monthly index of commodity price for base metals (except iron ore)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:BaseMetalsExceptIronOre
+
+Node: dcid:Monthly_Index_Commodity_Beverage
+name: "Monthly commodity price index for beverages"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:Beverage
+
+Node: dcid:Monthly_Index_Commodity_Energy
+name: "Monthly energy commodity price index"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:Energy
+
+Node: dcid:Monthly_Index_Commodity_Fertilizer
+name: "Monthly fertilizer commodity price index"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:Fertilizer
+
+Node: dcid:Monthly_Index_Commodity_Food
+name: "Monthly food price index"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:Food
+
+Node: dcid:Monthly_Index_Commodity_Grain
+name: "Monthly grain price index"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:Grain
+
+Node: dcid:Monthly_Index_Commodity_MetalAndMineral
+name: "Monthly commodity price index for metal and mineral"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:MetalAndMineral
+
+Node: dcid:Monthly_Index_Commodity_NonEnergy
+name: "Monthly commodity price index - non-energy"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:NonEnergy
+
+Node: dcid:Monthly_Index_Commodity_OilAndMeal
+name: "Monthly commodity price index - oil and meal"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:OilAndMeal
+
+Node: dcid:Monthly_Index_Commodity_OtherFoods
+name: "Monthly commodity price index for other foods"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:OtherFoods
+
+Node: dcid:Monthly_Index_Commodity_OtherRawMaterial
+name: "Monthly commodity price index for other raw material"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:OtherRawMaterial
+
+Node: dcid:Monthly_Index_Commodity_PreciousMetal
+name: "Monthly commodity price index: precious metal"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:PreciousMetal
+
+Node: dcid:Monthly_Index_Commodity_RawMaterials
+name: "Monthly raw materials commodity price index"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:RawMaterials
+
+Node: dcid:Monthly_Index_Commodity_Timber
+name: "Monthly timber price index"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityCategory: dcid:Timber
+
+Node: dcid:Monthly_Index_Commodity_NaturalGas
+name: "Monthly natural gas price index"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:NaturalGas
+
+Node: dcid:Monthly_Mean_Price_Commodity_CrudeOil
+name: "Monthly average price of crude oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:meanValue
+commodityType: dcid:CrudeOil
+
+Node: dcid:Monthly_Price_Commodity_A1Rice_Thailand
+name: "Monthly price of a1 quality rice in thailand"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:A1Rice
+geographicalIndicator: dcid:Thailand
+
+Node: dcid:Monthly_Price_Commodity_Aluminum
+name: "Monthly price of aluminum"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Aluminum
+
+Node: dcid:Monthly_Price_Commodity_Bananas_Europe
+name: "Monthly price of bananas in europe"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Bananas
+geographicalIndicator: dcid:Europe
+
+Node: dcid:Monthly_Price_Commodity_Bananas_UnitedStates
+name: "Monthly price of bananas in united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Bananas
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:Monthly_Price_Commodity_Barley
+name: "Monthly price of barley"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Barley
+
+Node: dcid:Monthly_Price_Commodity_Beef
+name: "Monthly price of beef"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Beef
+
+Node: dcid:Monthly_Price_Commodity_Broilers
+name: "Monthly price of broiler meat"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Broilers
+
+Node: dcid:Monthly_Price_Commodity_Coal_Australia
+name: "Monthly coal price in australia"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Coal
+geographicalIndicator: dcid:Australia
+
+Node: dcid:Monthly_Price_Commodity_Coal_SouthAfrica
+name: "Monthly coal price in south africa"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Coal
+geographicalIndicator: dcid:SouthAfrica
+
+Node: dcid:Monthly_Price_Commodity_Cocoa
+name: "Monthly price of cocoa"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Cocoa
+
+Node: dcid:Monthly_Price_Commodity_CoconutOil
+name: "Monthly price of coconut oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:CoconutOil
+
+Node: dcid:Monthly_Price_Commodity_CoffeeArabic
+name: "Monthly price of coffee arabica"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:CoffeeArabic
+
+Node: dcid:Monthly_Price_Commodity_CoffeeRobusta
+name: "Monthly price of robusta coffee"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:CoffeeRobusta
+
+Node: dcid:Monthly_Price_Commodity_Copper
+name: "Monthly price of copper"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Copper
+
+Node: dcid:Monthly_Price_Commodity_CottonAIndex
+name: "Monthly cotton a index price"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:CottonAIndex
+
+Node: dcid:Monthly_Price_Commodity_CrudeOil_Dubai
+name: "Monthly price of crude oil (dubai)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:CrudeOil
+geographicalIndicator: dcid:Dubai
+
+Node: dcid:Monthly_Price_Commodity_CrudeOil_NorthSeaBrent
+name: "Monthly crude oil (north sea brent) price"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:CrudeOil
+geographicalIndicator: dcid:NorthSea_Brent
+
+Node: dcid:Monthly_Price_Commodity_CrudeOil_WestTexasIntermediate
+name: "Monthly crude oil (west texas intermediate) price"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:CrudeOil
+geographicalIndicator: dcid:WestTexasIntermediate
+
+Node: dcid:Monthly_Price_Commodity_DiammoniumPhosphate
+name: "Monthly price of diammonium phosphate commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:DiammoniumPhosphate
+
+Node: dcid:Monthly_Price_Commodity_FishAndSeafood
+name: "Monthly price of fish and seafood"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:FishAndSeafood
+
+Node: dcid:Monthly_Price_Commodity_Gold
+name: "Monthly price of gold"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Gold
+
+Node: dcid:Monthly_Price_Commodity_Groundnut
+name: "Monthly price of groundnut"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Groundnut
+
+Node: dcid:Monthly_Price_Commodity_GroundnutOil
+name: "Monthly price of groundnut oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:GroundnutOil
+
+Node: dcid:Monthly_Price_Commodity_IronOreCFRSpot
+name: "Monthly iron ore cfr spot price"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:IronOreCFRSpot
+
+Node: dcid:Monthly_Price_Commodity_Lead
+name: "Monthly price of lead commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Lead
+
+Node: dcid:Monthly_Price_Commodity_LiquefiedNaturalGas_Japan
+name: "Monthly price of liquefied natural gas in japan"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:LiquefiedNaturalGas
+geographicalIndicator: dcid:Japan
+
+Node: dcid:Monthly_Price_Commodity_Maize
+name: "Monthly price of maize"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Maize
+
+Node: dcid:Monthly_Price_Commodity_NaturalGas_Europe
+name: "Monthly price of natural gas in europe"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:NaturalGas
+geographicalIndicator: dcid:Europe
+
+Node: dcid:Monthly_Price_Commodity_NaturalGas_UnitedStates
+name: "Monthly price of natural gas in the united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:NaturalGas
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:Monthly_Price_Commodity_Nickel
+name: "Monthly price of nickel"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Nickel
+
+Node: dcid:Monthly_Price_Commodity_OrangesIncludingTangerines
+name: "Monthly price of oranges (including tangerines)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:OrangesIncludingTangerines
+
+Node: dcid:Monthly_Price_Commodity_PalmKernelOil
+name: "Monthly price of palm kernel oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:PalmKernelOil
+
+Node: dcid:Monthly_Price_Commodity_PalmOil
+name: "Monthly price of palm oil commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:PalmOil
+
+Node: dcid:Monthly_Price_Commodity_PhosphateRock
+name: "Monthly price of phosphate rock"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:PhosphateRock
+
+Node: dcid:Monthly_Price_Commodity_Platinum
+name: "Monthly price of platinum"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Platinum
+
+Node: dcid:Monthly_Price_Commodity_Plywood
+name: "Monthly price of plywood"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Plywood
+
+Node: dcid:Monthly_Price_Commodity_PotassiumChloride
+name: "Monthly price of Potassium chloride"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:PotassiumChloride
+
+Node: dcid:Monthly_Price_Commodity_RSS3Rubber
+name: "Monthly price of rss3 rubber"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:RSS3Rubber
+
+Node: dcid:Monthly_Price_Commodity_RapseedOil
+name: "Monthly price of rapeseed oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:RapseedOil
+
+Node: dcid:Monthly_Price_Commodity_RiceFivePercentKernel_Thailand
+name: "Monthly price of rice - 5% kernel (thailand)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:RiceFivePercentKernel
+geographicalIndicator: dcid:Thailand
+
+Node: dcid:Monthly_Price_Commodity_RiceFivePercentKernel_Vietnam
+name: "Monthly price of rice - 5% broken, vietnam"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:RiceFivePercentKernel
+geographicalIndicator: dcid:Vietnam
+
+Node: dcid:Monthly_Price_Commodity_RiceTwentyFivePercentKernel_Thailand
+name: "Monthly price of rice (25% kernel) in thailand"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:RiceTwentyFivePercentKernel
+geographicalIndicator: dcid:Thailand
+
+Node: dcid:Monthly_Price_Commodity_Sawnwood_Cameroon
+name: "Monthly price of sawnwood in cameroon"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Sawnwood
+geographicalIndicator: dcid:Cameroon
+
+Node: dcid:Monthly_Price_Commodity_Sawnwood_Malaysia
+name: "Monthly price of sawnwood in malaysia"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Sawnwood
+geographicalIndicator: dcid:Malaysia
+
+Node: dcid:Monthly_Price_Commodity_SheepAndLambs
+name: "Monthly sheep and lambs price"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:SheepAndLambs
+
+Node: dcid:Monthly_Price_Commodity_Shrimp_Mexico
+name: "Monthly price of shrimp in mexico"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Shrimp
+geographicalIndicator: dcid:Mexico
+
+Node: dcid:Monthly_Price_Commodity_Silver
+name: "Monthly price of silver"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Silver
+
+Node: dcid:Monthly_Price_Commodity_Sorghum
+name: "Monthly price of sorghum"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Sorghum
+
+Node: dcid:Monthly_Price_Commodity_Soybean
+name: "Monthly price of soybean"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Soybean
+
+Node: dcid:Monthly_Price_Commodity_SoybeanMeal
+name: "Monthly price of soybean meal"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:SoybeanMeal
+
+Node: dcid:Monthly_Price_Commodity_SoybeanOil
+name: "Monthly price of soybean oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:SoybeanOil
+
+Node: dcid:Monthly_Price_Commodity_Sugar
+name: "Monthly price of sugar"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Sugar
+
+Node: dcid:Monthly_Price_Commodity_Sugar_Europe
+name: "Monthly price of sugar in europe"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Sugar
+geographicalIndicator: dcid:Europe
+
+Node: dcid:Monthly_Price_Commodity_Sugar_UnitedStates
+name: "Monthly price of sugar in united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Sugar
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:Monthly_Price_Commodity_SunflowerOil
+name: "Monthly price of sunflower oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:SunflowerOil
+
+Node: dcid:Monthly_Price_Commodity_TSR20Rubber
+name: "Monthly price of tsr20 rubber"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:TSR20Rubber
+
+Node: dcid:Monthly_Price_Commodity_Tea
+name: "Monthly price of tea"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+
+Node: dcid:Monthly_Price_Commodity_Tea_Colombo
+name: "Monthly tea price in colombo"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+geographicalIndicator: dcid:Colombo
+
+Node: dcid:Monthly_Price_Commodity_Tea_Kolkata
+name: "Monthly price of tea in kolkata"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+geographicalIndicator: dcid:Kolkata
+
+Node: dcid:Monthly_Price_Commodity_Tea_Mombasa
+name: "Monthly price of tea in mombasa"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+geographicalIndicator: dcid:Mombasa
+
+Node: dcid:Monthly_Price_Commodity_Tin
+name: "Monthly price of tin"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Tin
+
+Node: dcid:Monthly_Price_Commodity_Tobacco_USImportUnitValue
+name: "Monthly import unit value of tobacco in the us."
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Tobacco
+geographicalIndicator: dcid:US_ImportUnitValue
+
+Node: dcid:Monthly_Price_Commodity_TripleSuperphosphate
+name: "Monthly price of the commodity - triple superphosphate"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:TripleSuperphosphate
+
+Node: dcid:Monthly_Price_Commodity_Urea
+name: "Monthly price of urea commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Urea
+
+Node: dcid:Monthly_Price_Commodity_WheatHRW_UnitedStates
+name: "Monthly price of hard red winter (hrw) wheat in the united states."
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:WheatHRW
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:Monthly_Price_Commodity_WheatSRW_UnitedStates
+name: "Monthly price of wheat srw in united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:WheatSRW
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:Monthly_Price_Commodity_WoodLog_Cameroon
+name: "Monthly price of wood logs in cameroon"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:WoodLog
+geographicalIndicator: dcid:Cameroon
+
+Node: dcid:Monthly_Price_Commodity_WoodLog_Malaysia
+name: "Monthly price of wood logs in malaysia"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:WoodLog
+geographicalIndicator: dcid:Malaysia
+
+Node: dcid:Monthly_Price_Commodity_Zinc
+name: "Monthly price of zinc"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Monthly
+statType: dcid:measuredValue
+commodityType: dcid:Zinc
+
+Node: dcid:RealValue_Index_Commodity_NaturalGas
+name: "Natural gas commodity price index (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:NaturalGas
+
+Node: dcid:RealValue_ManufacturedExportsUnitValueIndex_EconomicActivity
+name: "Unit value index of manufactured exports  (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:manufacturedExportsUnitValueIndex
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+
+Node: dcid:RealValue_Mean_Price_Commodity_CrudeOil
+name: "Average price of crude oil  (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:meanValue
+commodityType: dcid:CrudeOil
+
+Node: dcid:RealValue_Price_Commodity_A1Rice_Thailand
+name: "Real price of a1 rice in thailand  (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:A1Rice
+geographicalIndicator: dcid:Thailand
+
+Node: dcid:RealValue_Price_Commodity_Aluminum
+name: "Real price of aluminum  (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Aluminum
+
+Node: dcid:RealValue_Price_Commodity_Bananas_Europe
+name: "Price of bananas in europe (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Bananas
+geographicalIndicator: dcid:Europe
+
+Node: dcid:RealValue_Price_Commodity_Bananas_UnitedStates
+name: "Price of bananas in the united states (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Bananas
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:RealValue_Price_Commodity_Barley
+name: "Real price of barley"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Barley
+
+Node: dcid:RealValue_Price_Commodity_Beef
+name: "Real price of beef"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Beef
+
+Node: dcid:RealValue_Price_Commodity_Broilers
+name: "Real value of broilers"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Broilers
+
+Node: dcid:RealValue_Price_Commodity_Coal_Australia
+name: "Real value of coal prices in australia"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Coal
+geographicalIndicator: dcid:Australia
+
+Node: dcid:RealValue_Price_Commodity_Coal_SouthAfrica
+name: "Coal price in south africa (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Coal
+geographicalIndicator: dcid:SouthAfrica
+
+Node: dcid:RealValue_Price_Commodity_Cocoa
+name: "Real value price of cocoa"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Cocoa
+
+Node: dcid:RealValue_Price_Commodity_CoconutOil
+name: "Real price of coconut oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:CoconutOil
+
+Node: dcid:RealValue_Price_Commodity_CoffeeArabic
+name: "Real price of arabica coffee"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:CoffeeArabic
+
+Node: dcid:RealValue_Price_Commodity_CoffeeRobusta
+name: "Real price of robusta coffee"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:CoffeeRobusta
+
+Node: dcid:RealValue_Price_Commodity_Copper
+name: "Real value of copper"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Copper
+
+Node: dcid:RealValue_Price_Commodity_CottonAIndex
+name: "Real price of cotton a index"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:CottonAIndex
+
+Node: dcid:RealValue_Price_Commodity_CrudeOil_Dubai
+name: "Price of crude oil (dubai)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:CrudeOil
+geographicalIndicator: dcid:Dubai
+
+Node: dcid:RealValue_Price_Commodity_CrudeOil_NorthSeaBrent
+name: "Spot price of north sea brent crude oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:CrudeOil
+geographicalIndicator: dcid:NorthSea_Brent
+
+Node: dcid:RealValue_Price_Commodity_CrudeOil_WestTexasIntermediate
+name: "Real value of west texas intermediate crude oil price"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:CrudeOil
+geographicalIndicator: dcid:WestTexasIntermediate
+
+Node: dcid:RealValue_Price_Commodity_DiammoniumPhosphate
+name: "Real price of diammonium phosphate commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:DiammoniumPhosphate
+
+Node: dcid:RealValue_Price_Commodity_FishAndSeafood
+name: "Real value price of fish and seafood"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:FishAndSeafood
+
+Node: dcid:RealValue_Price_Commodity_Gold
+name: "Real value of gold price"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Gold
+
+Node: dcid:RealValue_Price_Commodity_Groundnut
+name: "Real value of groundnut"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Groundnut
+
+Node: dcid:RealValue_Price_Commodity_GroundnutOil
+name: "Real value price of groundnut oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:GroundnutOil
+
+Node: dcid:RealValue_Price_Commodity_IronOreCFRSpot
+name: "Spot price of iron ore (cfr)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:IronOreCFRSpot
+
+Node: dcid:RealValue_Price_Commodity_Lead
+name: "Lead price (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Lead
+
+Node: dcid:RealValue_Price_Commodity_LiquefiedNaturalGas_Japan
+name: "Price of liquefied natural gas in japan (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:LiquefiedNaturalGas
+geographicalIndicator: dcid:Japan
+
+Node: dcid:RealValue_Price_Commodity_Maize
+name: "Real price of maize"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Maize
+
+Node: dcid:RealValue_Price_Commodity_NaturalGas_Europe
+name: "Natural gas price in europe (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:NaturalGas
+geographicalIndicator: dcid:Europe
+
+Node: dcid:RealValue_Price_Commodity_NaturalGas_UnitedStates
+name: "Natural gas price in the united states (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:NaturalGas
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:RealValue_Price_Commodity_Nickel
+name: "Real price of nickel"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Nickel
+
+Node: dcid:RealValue_Price_Commodity_OrangesIncludingTangerines
+name: "Real price of oranges (including tangerines)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:OrangesIncludingTangerines
+
+Node: dcid:RealValue_Price_Commodity_PalmKernelOil
+name: "Real price of palm kernel oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:PalmKernelOil
+
+Node: dcid:RealValue_Price_Commodity_PalmOil
+name: "Real price of palm oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:PalmOil
+
+Node: dcid:RealValue_Price_Commodity_PhosphateRock
+name: "Real value of phosphate rock"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:PhosphateRock
+
+Node: dcid:RealValue_Price_Commodity_Platinum
+name: "Real value of platinum"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Platinum
+
+Node: dcid:RealValue_Price_Commodity_Plywood
+name: "Real value of plywood"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Plywood
+
+Node: dcid:RealValue_Price_Commodity_PotassiumChloride
+name: "Real price of Potassium chloride"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:PotassiumChloride
+
+Node: dcid:RealValue_Price_Commodity_RSS3Rubber
+name: "Real value price of the commodity rss3 rubber"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:RSS3Rubber
+
+Node: dcid:RealValue_Price_Commodity_RiceFivePercentKernel_Thailand
+name: "Real price of rice - five percent kernel in thailand"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:RiceFivePercentKernel
+geographicalIndicator: dcid:Thailand
+
+Node: dcid:RealValue_Price_Commodity_RiceFivePercentKernel_Vietnam
+name: "Real price of rice - 5% kernel in vietnam"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:RiceFivePercentKernel
+geographicalIndicator: dcid:Vietnam
+
+Node: dcid:RealValue_Price_Commodity_RiceTwentyFivePercentKernel_Thailand
+name: "Real price of rice (twenty five percent kernel) in thailand"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:RiceTwentyFivePercentKernel
+geographicalIndicator: dcid:Thailand
+
+Node: dcid:RealValue_Price_Commodity_Sawnwood_Cameroon
+name: "Real price of sawnwood in cameroon"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Sawnwood
+geographicalIndicator: dcid:Cameroon
+
+Node: dcid:RealValue_Price_Commodity_Sawnwood_Malaysia
+name: "Real value of sawnwood in malaysia"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Sawnwood
+geographicalIndicator: dcid:Malaysia
+
+Node: dcid:RealValue_Price_Commodity_SheepAndLambs
+name: "Real value of the sheep and lamb commodity price"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:SheepAndLambs
+
+Node: dcid:RealValue_Price_Commodity_Shrimp_Mexico
+name: "Real price of shrimp in mexico"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Shrimp
+geographicalIndicator: dcid:Mexico
+
+Node: dcid:RealValue_Price_Commodity_Silver
+name: "Real price of silver"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Silver
+
+Node: dcid:RealValue_Price_Commodity_Sorghum
+name: "Real price of sorghum"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Sorghum
+
+Node: dcid:RealValue_Price_Commodity_Soybean
+name: "Real value of soybean price"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Soybean
+
+Node: dcid:RealValue_Price_Commodity_SoybeanMeal
+name: "Real price of soybean meal commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:SoybeanMeal
+
+Node: dcid:RealValue_Price_Commodity_SoybeanOil
+name: "Real price of soybean oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:SoybeanOil
+
+Node: dcid:RealValue_Price_Commodity_Sugar
+name: "Real price of sugar"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Sugar
+
+Node: dcid:RealValue_Price_Commodity_Sugar_Europe
+name: "Real price of sugar in europe"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Sugar
+geographicalIndicator: dcid:Europe
+
+Node: dcid:RealValue_Price_Commodity_Sugar_UnitedStates
+name: "Real value of sugar price in united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Sugar
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:RealValue_Price_Commodity_TSR20Rubber
+name: "Real price of tsr20 rubber"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:TSR20Rubber
+
+Node: dcid:RealValue_Price_Commodity_Tea
+name: "Real price of tea commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+
+Node: dcid:RealValue_Price_Commodity_Tea_Colombo
+name: "Real price of tea in colombo"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+geographicalIndicator: dcid:Colombo
+
+Node: dcid:RealValue_Price_Commodity_Tea_Kolkata
+name: "Real value of tea price in kolkata"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+geographicalIndicator: dcid:Kolkata
+
+Node: dcid:RealValue_Price_Commodity_Tea_Mombasa
+name: "Real price of tea in mombasa"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+geographicalIndicator: dcid:Mombasa
+
+Node: dcid:RealValue_Price_Commodity_Tin
+name: "Real value of tin commodity price"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Tin
+
+Node: dcid:RealValue_Price_Commodity_Tobacco_USImportUnitValue
+name: "Tobacco import unit value in us dollars"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Tobacco
+geographicalIndicator: dcid:US_ImportUnitValue
+
+Node: dcid:RealValue_Price_Commodity_TripleSuperphosphate
+name: "Real price of triple superphosphate"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:TripleSuperphosphate
+
+Node: dcid:RealValue_Price_Commodity_Urea
+name: "Real price of urea"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Urea
+
+Node: dcid:RealValue_Price_Commodity_WheatHRW_UnitedStates
+name: "Price of hard red winter (hrw) wheat in the united states (real value)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:WheatHRW
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:RealValue_Price_Commodity_WheatSRW_UnitedStates
+name: "Real price of wheat srw in united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:WheatSRW
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:RealValue_Price_Commodity_WoodLog_Cameroon
+name: "Real value of wood logs in cameroon"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:WoodLog
+geographicalIndicator: dcid:Cameroon
+
+Node: dcid:RealValue_Price_Commodity_WoodLog_Malaysia
+name: "Real price of wood log in malaysia"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:WoodLog
+geographicalIndicator: dcid:Malaysia
+
+Node: dcid:RealValue_Price_Commodity_Zinc
+name: "Real price of zinc"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+commodityType: dcid:Zinc
+
+Node: dcid:Nominal_Index_Commodity_NaturalGas
+name: "Natural gas price index (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:index
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:NaturalGas
+
+Node: dcid:Nominal_Mean_Price_Commodity_CrudeOil
+name: "Average nominal price of crude oil (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:meanValue
+commodityType: dcid:CrudeOil
+
+Node: dcid:Nominal_Price_Commodity_A1Rice_Thailand
+name: "Nominal price of a1 rice in thailand"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:A1Rice
+geographicalIndicator: dcid:Thailand
+
+Node: dcid:Nominal_Price_Commodity_Aluminum
+name: "Nominal price of aluminum"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Aluminum
+
+Node: dcid:Nominal_Price_Commodity_Bananas_Europe
+name: "Nominal price of bananas in europe"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Bananas
+geographicalIndicator: dcid:Europe
+
+Node: dcid:Nominal_Price_Commodity_Bananas_UnitedStates
+name: "Nominal price of bananas in united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Bananas
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:Nominal_Price_Commodity_Barley
+name: "Nominal price of barley"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Barley
+
+Node: dcid:Nominal_Price_Commodity_Beef
+name: "Nominal price of beef"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Beef
+
+Node: dcid:Nominal_Price_Commodity_Broilers
+name: "Nominal price of broilers"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Broilers
+
+Node: dcid:Nominal_Price_Commodity_Coal_Australia
+name: "Nominal price of coal in australia"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Coal
+geographicalIndicator: dcid:Australia
+
+Node: dcid:Nominal_Price_Commodity_Coal_SouthAfrica
+name: "Nominal price of coal in south africa"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Coal
+geographicalIndicator: dcid:SouthAfrica
+
+Node: dcid:Nominal_Price_Commodity_Cocoa
+name: "Nominal price of cocoa"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Cocoa
+
+Node: dcid:Nominal_Price_Commodity_CoconutOil
+name: "Nominal price of coconut oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:CoconutOil
+
+Node: dcid:Nominal_Price_Commodity_CoffeeArabic
+name: "Nominal price of coffee arabica"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:CoffeeArabic
+
+Node: dcid:Nominal_Price_Commodity_CoffeeRobusta
+name: "Nominal price of robusta coffee"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:CoffeeRobusta
+
+Node: dcid:Nominal_Price_Commodity_Copper
+name: "Nominal price of copper"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Copper
+
+Node: dcid:Nominal_Price_Commodity_CottonAIndex
+name: "Nominal price of cotton a index"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:CottonAIndex
+
+Node: dcid:Nominal_Price_Commodity_CrudeOil_Dubai
+name: "Nominal price of crude oil (dubai)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:CrudeOil
+geographicalIndicator: dcid:Dubai
+
+Node: dcid:Nominal_Price_Commodity_CrudeOil_NorthSeaBrent
+name: "North sea brent crude oil price (nominal)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:CrudeOil
+geographicalIndicator: dcid:NorthSea_Brent
+
+Node: dcid:Nominal_Price_Commodity_CrudeOil_WestTexasIntermediate
+name: "Nominal price of west texas intermediate crude oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:CrudeOil
+geographicalIndicator: dcid:WestTexasIntermediate
+
+Node: dcid:Nominal_Price_Commodity_DiammoniumPhosphate
+name: "Nominal price of diammonium phosphate"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:DiammoniumPhosphate
+
+Node: dcid:Nominal_Price_Commodity_FishAndSeafood
+name: "Nominal price of fish and seafood"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:FishAndSeafood
+
+Node: dcid:Nominal_Price_Commodity_Gold
+name: "Nominal price of gold"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Gold
+
+Node: dcid:Nominal_Price_Commodity_Groundnut
+name: "Nominal price of groundnut"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Groundnut
+
+Node: dcid:Nominal_Price_Commodity_GroundnutOil
+name: "Nominal price of groundnut oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:GroundnutOil
+
+Node: dcid:Nominal_Price_Commodity_IronOreCFRSpot
+name: "Nominal price of iron ore (cfr)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:IronOreCFRSpot
+
+Node: dcid:Nominal_Price_Commodity_Lead
+name: "Nominal price of lead"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Lead
+
+Node: dcid:Nominal_Price_Commodity_LiquefiedNaturalGas_Japan
+name: "Nominal price of liquefied natural gas in japan"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:LiquefiedNaturalGas
+geographicalIndicator: dcid:Japan
+
+Node: dcid:Nominal_Price_Commodity_Maize
+name: "Nominal price of maize"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Maize
+
+Node: dcid:Nominal_Price_Commodity_NaturalGas_Europe
+name: "Natural gas price in europe"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:NaturalGas
+geographicalIndicator: dcid:Europe
+
+Node: dcid:Nominal_Price_Commodity_NaturalGas_UnitedStates
+name: "Nominal price of natural gas in united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:NaturalGas
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:Nominal_Price_Commodity_Nickel
+name: "Nominal price of nickel"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Nickel
+
+Node: dcid:Nominal_Price_Commodity_OrangesIncludingTangerines
+name: "Nominal price of oranges (including tangerines)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:OrangesIncludingTangerines
+
+Node: dcid:Nominal_Price_Commodity_PalmKernelOil
+name: "Nominal price of palm kernel oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:PalmKernelOil
+
+Node: dcid:Nominal_Price_Commodity_PalmOil
+name: "Nominal price of palm oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:PalmOil
+
+Node: dcid:Nominal_Price_Commodity_PhosphateRock
+name: "Nominal price of phosphate rock"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:PhosphateRock
+
+Node: dcid:Nominal_Price_Commodity_Platinum
+name: "Nominal price of platinum"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Platinum
+
+Node: dcid:Nominal_Price_Commodity_Plywood
+name: "Nominal price of plywood"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Plywood
+
+Node: dcid:Nominal_Price_Commodity_PotassiumChloride
+name: "Nominal price of Potassium chloride"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:PotassiumChloride
+
+Node: dcid:Nominal_Price_Commodity_RSS3Rubber
+name: "Nominal price of rss3 rubber"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:RSS3Rubber
+
+Node: dcid:Nominal_Price_Commodity_RiceFivePercentKernel_Thailand
+name: "Nominal price of rice - five percent broken in thailand"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:RiceFivePercentKernel
+geographicalIndicator: dcid:Thailand
+
+Node: dcid:Nominal_Price_Commodity_RiceFivePercentKernel_Vietnam
+name: "Nominal price of rice - 5% broken in vietnam"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:RiceFivePercentKernel
+geographicalIndicator: dcid:Vietnam
+
+Node: dcid:Nominal_Price_Commodity_RiceTwentyFivePercentKernel_Thailand
+name: "Nominal price of rice (25% broken) in thailand"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:RiceTwentyFivePercentKernel
+geographicalIndicator: dcid:Thailand
+
+Node: dcid:Nominal_Price_Commodity_Sawnwood_Cameroon
+name: "Nominal price of sawnwood in cameroon"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Sawnwood
+geographicalIndicator: dcid:Cameroon
+
+Node: dcid:Nominal_Price_Commodity_Sawnwood_Malaysia
+name: "Nominal price of sawnwood in malaysia"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Sawnwood
+geographicalIndicator: dcid:Malaysia
+
+Node: dcid:Nominal_Price_Commodity_SheepAndLambs
+name: "Nominal price of sheep and lambs"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:SheepAndLambs
+
+Node: dcid:Nominal_Price_Commodity_Shrimp_Mexico
+name: "Nominal price of shrimp in mexico"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Shrimp
+geographicalIndicator: dcid:Mexico
+
+Node: dcid:Nominal_Price_Commodity_Silver
+name: "Nominal price of silver"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Silver
+
+Node: dcid:Nominal_Price_Commodity_Sorghum
+name: "Nominal price of sorghum"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Sorghum
+
+Node: dcid:Nominal_Price_Commodity_Soybean
+name: "Nominal price of soybean"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Soybean
+
+Node: dcid:Nominal_Price_Commodity_SoybeanMeal
+name: "Nominal price of soybean meal"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:SoybeanMeal
+
+Node: dcid:Nominal_Price_Commodity_SoybeanOil
+name: "Nominal price of soybean oil"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:SoybeanOil
+
+Node: dcid:Nominal_Price_Commodity_Sugar
+name: "Nominal price of sugar"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Sugar
+
+Node: dcid:Nominal_Price_Commodity_Sugar_Europe
+name: "Nominal sugar price in europe"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Sugar
+geographicalIndicator: dcid:Europe
+
+Node: dcid:Nominal_Price_Commodity_Sugar_UnitedStates
+name: "Nominal price of sugar in united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Sugar
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:Nominal_Price_Commodity_TSR20Rubber
+name: "Nominal price of tsr20 rubber"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:TSR20Rubber
+
+Node: dcid:Nominal_Price_Commodity_Tea
+name: "Nominal price of tea commodity"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+
+Node: dcid:Nominal_Price_Commodity_Tea_Colombo
+name: "Nominal price of tea in colombo"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+geographicalIndicator: dcid:Colombo
+
+Node: dcid:Nominal_Price_Commodity_Tea_Kolkata
+name: "Nominal price of tea in kolkata"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+geographicalIndicator: dcid:Kolkata
+
+Node: dcid:Nominal_Price_Commodity_Tea_Mombasa
+name: "Nominal tea price in mombasa"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Tea
+geographicalIndicator: dcid:Mombasa
+
+Node: dcid:Nominal_Price_Commodity_Tin
+name: "Nominal price of tin"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Tin
+
+Node: dcid:Nominal_Price_Commodity_Tobacco_USImportUnitValue
+name: "Import unit value of tobacco (nominal price)"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Tobacco
+geographicalIndicator: dcid:US_ImportUnitValue
+
+Node: dcid:Nominal_Price_Commodity_TripleSuperphosphate
+name: "Nominal price of the commodity triple superphosphate"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:TripleSuperphosphate
+
+Node: dcid:Nominal_Price_Commodity_Urea
+name: "Nominal price of urea"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Urea
+
+Node: dcid:Nominal_Price_Commodity_WheatHRW_UnitedStates
+name: "Nominal price of hard red winter (hrw) wheat in the united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:WheatHRW
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:Nominal_Price_Commodity_WheatSRW_UnitedStates
+name: "Nominal price of wheat srw in united states"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:WheatSRW
+geographicalIndicator: dcid:UnitedStates
+
+Node: dcid:Nominal_Price_Commodity_WoodLog_Cameroon
+name: "Nominal price of wood logs in cameroon"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:WoodLog
+geographicalIndicator: dcid:Cameroon
+
+Node: dcid:Nominal_Price_Commodity_WoodLog_Malaysia
+name: "Nominal price of wood log in malaysia"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:WoodLog
+geographicalIndicator: dcid:Malaysia
+
+Node: dcid:Nominal_Price_Commodity_Zinc
+name: "Nominal price of zinc"
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Commodity
+measuredProperty: dcid:price
+measurementQualifier: dcid:Nominal
+statType: dcid:measuredValue
+commodityType: dcid:Zinc
+

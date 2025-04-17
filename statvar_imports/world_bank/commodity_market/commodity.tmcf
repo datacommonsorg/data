@@ -1,0 +1,10 @@
+Node: E:commodity-CMO_Annual2->E0
+observationAbout: C:commodity-CMO_Annual2->observationAbout
+observationDate: C:commodity-CMO_Annual2->observationDate
+value: C:commodity-CMO_Annual2->value
+variableMeasured: C:commodity-CMO_Annual2->variableMeasured
+unit: C:commodity-CMO_Annual2->unit
+scalingFactor: C:commodity-CMO_Annual2->scalingFactor
+measurementMethod: C:commodity-CMO_Annual2->measurementMethod
+observationPeriod: C:commodity-CMO_Annual2->observationPeriod
+typeOf: dcs:StatVarObservation
