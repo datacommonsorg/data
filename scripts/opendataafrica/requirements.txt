@@ -1,3 +1,0 @@
-xmltodict
-absl-py
-sudo apt-get install jq
