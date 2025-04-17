@@ -30,7 +30,8 @@ from google.cloud import storage
 
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('output_folder', 'state_folder', 'download folder name')
+flags.DEFINE_string('place_type', '', 'state or national')
+flags.DEFINE_string('output_folder', '', 'download folder name')
 
 
 def read_gcs_path(config_path):
@@ -41,11 +42,11 @@ def read_gcs_path(config_path):
     return blob
 
 
-def series_id_from_gcs():
-    config_path ="us_bls/ces/latest/state_series_id.py"
+def series_id_from_gcs(series_id_filename):
+    config_path =f"us_bls/ces/latest/{series_id_filename}"
     blob = read_gcs_path(config_path)
     file_contents = blob.download_as_text()
-    match = re.search(r'series_id\s*=\s*(\[.*?\])', file_contents)
+    match = re.search(r'series_id\s*=\s*(\[.*?\])', file_contents, re.DOTALL)
     if match:
         series_id_str = match.group(1)
         series_id_list = ast.literal_eval(series_id_str)
@@ -63,6 +64,7 @@ def get_api_key():
     except Exception as e:
         logging.error(f"Error in get_api_key: {e}")
         raise
+
 
 def convert_to_raw_csv(download_folder):
     logging.info("Converting raw text file to csvs")
@@ -170,14 +172,14 @@ def clear_folder(folder_path):
         logging.error(f"Error in clear_folder: {e}")
 
 
-def download_data(download_folder_name, reg_key, bls_ces_url):
+def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename):
     logging.info("Downloading started..")
     try:
         if not os.path.exists(download_folder_name):
             os.makedirs(download_folder_name)
         else:
             clear_folder(download_folder_name)
-        series_id = series_id_from_gcs()
+        series_id = series_id_from_gcs(series_id_filename)
         chunk_size = 25
         current_year = datetime.now().year
         headers = {'Content-type': 'application/json'}
@@ -218,19 +220,34 @@ def download_data(download_folder_name, reg_key, bls_ces_url):
             except Exception as e:
                 logging.error(f"Error in API chunk {chunk}: {e}")
                 time.sleep(2)
+        logging.info("downlod completed...")
     except Exception as e:
         logging.error(f"Error in download_data: {e}")
 
 
 def main(argv):
-    logging.info("Start")
+    logging.info("Start..")
     try:
         reg_key, bls_ces_url = get_api_key()
         download_folder_name = _FLAGS.output_folder
-        download_data(download_folder_name, reg_key, bls_ces_url)
-        convert_to_raw_csv(download_folder_name)
-        process_raw_data_csv(download_folder_name)
-        merge_all_csvs(download_folder_name)
+        if _FLAGS.place_type == "state":
+            series_if_file_name = "state_series_id.py"
+            download_data(download_folder_name, reg_key, bls_ces_url, series_if_file_name)
+            convert_to_raw_csv(download_folder_name)
+            process_raw_data_csv(download_folder_name)
+            merge_all_csvs(download_folder_name)
+            logging.info("Completed...")
+
+        elif _FLAGS.place_type == "national":
+            series_if_file_name = "national_series_id.py"
+            download_data(download_folder_name, reg_key, bls_ces_url, series_if_file_name)
+            convert_to_raw_csv(download_folder_name)
+            merge_all_csvs(download_folder_name)
+            logging.info("Completed...")
+
+        else:
+            logging.info("Place type must be either state or national")
+    
     except Exception as e:
         logging.error(f"Main function error: {e}")
 
