@@ -71,7 +71,7 @@ function download_selected_DATASETS() {
       local script_path="../../../util/xml_to_json.py"
       if python3 "$script_path"  "$OUTPUT_XML_JSON_DIR/${dataset}.xml" "$json_output_file"; then
         echo "Successfully converted ${dataset}.xml to ${dataset}.json"
-        local script_path1="../../../util/json_to_csv.py"
+        local script_path1="json_to_csv.py"
 
         if python3 "$script_path1"  "$OUTPUT_XML_JSON_DIR" "$OUTPUT_CSV_DIR"; then
           echo "Successfully converted JSON files in $OUTPUT_XML_JSON_DIR to CSV files in $OUTPUT_CSV_DIR"
@@ -89,7 +89,7 @@ function download_selected_DATASETS() {
 function download_all_DATASETS() {
   local last_download_status=0
   local xml_to_json_script_path="../../../util/xml_to_json.py"
-  local json_to_csv_script_path="../../../util/json_to_csv.py"
+  local json_to_csv_script_path="json_to_csv.py"
 
   for dataset in "${DATASETS[@]}"; do
     download_dataset "$dataset"
