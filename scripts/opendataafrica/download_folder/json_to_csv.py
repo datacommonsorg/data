@@ -45,18 +45,21 @@ def process_json_files(folder_path, output_folder):
                         data_set = data["StructureSpecificData"]["DataSet"]
                         if data_set is None:
                             logging.info(
-                                f"Warning: 'DataSet' is null in {filename}. Skipping CSV creation.")
+                                f"Warning: 'DataSet' is null in {filename}. Skipping CSV creation."
+                            )
                             continue
 
                         if "Series" in data_set:
                             series_data = data_set["Series"]
 
                             if isinstance(series_data, dict):
-                                series_data = [series_data
-                                              ]  # Make it a list for consistent processing
+                                series_data = [
+                                    series_data
+                                ]  # Make it a list for consistent processing
 
                             if not series_data:
-                                logging.info(f"No 'Series' data found in {filename}.")
+                                logging.info(
+                                    f"No 'Series' data found in {filename}.")
                                 continue
 
                             headers = list(series_data[0].keys())
@@ -64,42 +67,57 @@ def process_json_files(folder_path, output_folder):
                                 headers.remove("Obs")
                                 headers.extend(["TIME_PERIOD", "OBS_VALUE"])
 
-                            cleaned_headers = [header.lstrip('@') for header in headers]
+                            cleaned_headers = [
+                                header.lstrip('@') for header in headers
+                            ]
 
-                            with open(csv_file_path, 'w', newline='', encoding='utf-8') as csvfile:
-                                writer = csv.DictWriter(csvfile, fieldnames=cleaned_headers)
+                            with open(csv_file_path,
+                                      'w',
+                                      newline='',
+                                      encoding='utf-8') as csvfile:
+                                writer = csv.DictWriter(
+                                    csvfile, fieldnames=cleaned_headers)
                                 writer.writeheader()
                                 for item in series_data:
                                     obs_data = item.pop(
-                                        "Obs", [])  # Use .pop() with default to avoid KeyError
+                                        "Obs", []
+                                    )  # Use .pop() with default to avoid KeyError
                                     if isinstance(obs_data, list):
                                         for obs in obs_data:
-                                            time_period = obs.get("@TIME_PERIOD")
+                                            time_period = obs.get(
+                                                "@TIME_PERIOD")
                                             obs_value = obs.get("@OBS_VALUE")
                                             new_item = item.copy()
-                                            new_item["TIME_PERIOD"] = time_period
+                                            new_item[
+                                                "TIME_PERIOD"] = time_period
                                             new_item["OBS_VALUE"] = obs_value
                                             cleaned_item = {
-                                                cleaned_headers[headers.index(key)]: value
-                                                for key, value in new_item.items()
+                                                cleaned_headers[headers.index(key)]:
+                                                    value for key, value in
+                                                new_item.items()
                                             }
                                             writer.writerow(cleaned_item)
                                     elif isinstance(obs_data, dict):
-                                        time_period = obs_data.get("@TIME_PERIOD")
+                                        time_period = obs_data.get(
+                                            "@TIME_PERIOD")
                                         obs_value = obs_data.get("@OBS_VALUE")
                                         new_item = item.copy()
                                         new_item["TIME_PERIOD"] = time_period
                                         new_item["OBS_VALUE"] = obs_value
                                         cleaned_item = {
-                                            cleaned_headers[headers.index(key)]: value
+                                            cleaned_headers[headers.index(key)]:
+                                                value
                                             for key, value in new_item.items()
                                         }
                                         writer.writerow(cleaned_item)
                                     elif obs_data is not None:
                                         logging.info(
-                                            f"Warning: Unexpected 'Obs' data type in {filename}.")
+                                            f"Warning: Unexpected 'Obs' data type in {filename}."
+                                        )
 
-                            logging.info(f"Data from {filename} written to {csv_filename}")
+                            logging.info(
+                                f"Data from {filename} written to {csv_filename}"
+                            )
 
                         else:
                             logging.info(
@@ -114,7 +132,9 @@ def process_json_files(folder_path, output_folder):
                 except json.JSONDecodeError:
                     logging.error(f"Error: Invalid JSON format in {filename}.")
                 except Exception as e:
-                    logging.error(f"An unexpected error occurred while processing {filename}: {e}")
+                    logging.error(
+                        f"An unexpected error occurred while processing {filename}: {e}"
+                    )
 
     except FileNotFoundError:
         logging.fatal(f"Error: Folder '{folder_path}' not found.")
