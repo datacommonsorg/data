@@ -1,0 +1,2885 @@
+# Auto generated using command: "stat_var_processor.py --pv_map=/usr/local/google/home/rbhande/Downloads/data/statvar_imports/IndiaNSS_HealthAilments/pvmap.csv --config=/usr/local/google/home/rbhande/Downloads/data/statvar_imports/IndiaNSS_HealthAilments/metadata.csv --input_data=/usr/local/google/home/rbhande/Downloads/data/statvar_imports/IndiaNSS_HealthAilments/7300_source_data.csv --output_path=/usr/local/google/home/rbhande/Downloads/data/statvar_imports/IndiaNSS_HealthAilments/output/nss --places_resolved_csv=/usr/local/google/home/rbhande/Downloads/data/statvar_imports/IndiaNSS_HealthAilments/place_resolved.csv" on 2025-04-16 07:23:39.567340
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Female_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Female_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Female_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Female_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Female_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Female_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Male_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Male_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Male_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Male_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Male_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_0To4Years_Male_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [0 4 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionBloodDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:BloodDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionBloodDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:BloodDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionBloodDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:BloodDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionCancer_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionCancer_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:Cancer
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionCancer_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:Cancer
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionCardiovascularDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:CardiovascularDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionCardiovascularDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:CardiovascularDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionCardiovascularDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:CardiovascularDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionEarCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:EarCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionEarCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:EarCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionEarCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:EarCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionEndocrineMetabolicCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:EndocrineMetabolicCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionEndocrineMetabolicCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:EndocrineMetabolicCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionEndocrineMetabolicCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:EndocrineMetabolicCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionEyeCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:EyeCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionEyeCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:EyeCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionEyeCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:EyeCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionGastroIntestinalCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:GastroIntestinalCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionGastroIntestinalCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:GastroIntestinalCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionGastroIntestinalCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:GastroIntestinalCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionGenitoUrinaryCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:GenitoUrinaryCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionGenitoUrinaryCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:GenitoUrinaryCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionGenitoUrinaryCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:GenitoUrinaryCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionInfection_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:Infection
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionInfection_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:Infection
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionInfection_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:Infection
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionInjury_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:Injury
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionInjury_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:Injury
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionInjury_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:Injury
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionMusculoSkeletalCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:MusculoSkeletalCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionMusculoSkeletalCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:MusculoSkeletalCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionMusculoSkeletalCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:MusculoSkeletalCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionObstetricCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:ObstetricCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionObstetricCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:ObstetricCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionObstetricCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:ObstetricCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionPsychiatricNeurologicalCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:PsychiatricNeurologicalCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionPsychiatricNeurologicalCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:PsychiatricNeurologicalCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionPsychiatricNeurologicalCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:PsychiatricNeurologicalCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionRespiratoryDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:RespiratoryDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionRespiratoryDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:RespiratoryDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionRespiratoryDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:RespiratoryDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionSkinDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:SkinDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionSkinDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:SkinDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_ConditionSkinDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+medicalCondition: dcid:SkinDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionBloodDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:BloodDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionBloodDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:BloodDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionBloodDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:BloodDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionCancer_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionCancer_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionCancer_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Cancer
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionCardiovascularDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:CardiovascularDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionCardiovascularDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:CardiovascularDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionCardiovascularDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:CardiovascularDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionEarCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:EarCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionEarCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:EarCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionEarCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:EarCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionEndocrineMetabolicCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:EndocrineMetabolicCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionEndocrineMetabolicCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:EndocrineMetabolicCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionEndocrineMetabolicCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:EndocrineMetabolicCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionEyeCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:EyeCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionEyeCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:EyeCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionEyeCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:EyeCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionGastroIntestinalCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:GastroIntestinalCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionGastroIntestinalCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:GastroIntestinalCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionGastroIntestinalCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:GastroIntestinalCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionGenitoUrinaryCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:GenitoUrinaryCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionGenitoUrinaryCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:GenitoUrinaryCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionGenitoUrinaryCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:GenitoUrinaryCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionInfection_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Infection
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionInfection_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Infection
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionInfection_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Infection
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionInjury_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Injury
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionInjury_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Injury
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionInjury_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:Injury
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionMusculoSkeletalCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:MusculoSkeletalCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionMusculoSkeletalCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:MusculoSkeletalCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionMusculoSkeletalCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:MusculoSkeletalCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionObstetricCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:ObstetricCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionObstetricCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:ObstetricCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionObstetricCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:ObstetricCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionPsychiatricNeurologicalCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:PsychiatricNeurologicalCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionPsychiatricNeurologicalCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:PsychiatricNeurologicalCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionPsychiatricNeurologicalCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:PsychiatricNeurologicalCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionRespiratoryDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:RespiratoryDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionRespiratoryDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:RespiratoryDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionRespiratoryDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:RespiratoryDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionSkinDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:SkinDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionSkinDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:SkinDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Female_ConditionSkinDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Female
+medicalCondition: dcid:SkinDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionBloodDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:BloodDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionBloodDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:BloodDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionBloodDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:BloodDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionCancer_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionCancer_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionCancer_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Cancer
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionCardiovascularDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:CardiovascularDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionCardiovascularDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:CardiovascularDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionCardiovascularDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:CardiovascularDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionEarCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:EarCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionEarCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:EarCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionEarCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:EarCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionEndocrineMetabolicCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:EndocrineMetabolicCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionEndocrineMetabolicCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:EndocrineMetabolicCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionEndocrineMetabolicCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:EndocrineMetabolicCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionEyeCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:EyeCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionEyeCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:EyeCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionEyeCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:EyeCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionGastroIntestinalCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:GastroIntestinalCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionGastroIntestinalCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:GastroIntestinalCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionGastroIntestinalCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:GastroIntestinalCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionGenitoUrinaryCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:GenitoUrinaryCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionGenitoUrinaryCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:GenitoUrinaryCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionGenitoUrinaryCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:GenitoUrinaryCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionInfection_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Infection
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionInfection_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Infection
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionInfection_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Infection
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionInjury_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Injury
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionInjury_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Injury
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionInjury_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:Injury
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionMusculoSkeletalCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:MusculoSkeletalCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionMusculoSkeletalCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:MusculoSkeletalCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionMusculoSkeletalCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:MusculoSkeletalCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionObstetricCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:ObstetricCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionObstetricCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:ObstetricCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionObstetricCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:ObstetricCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionPsychiatricNeurologicalCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:PsychiatricNeurologicalCondition
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionPsychiatricNeurologicalCondition_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:PsychiatricNeurologicalCondition
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionPsychiatricNeurologicalCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:PsychiatricNeurologicalCondition
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionRespiratoryDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:RespiratoryDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionRespiratoryDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:RespiratoryDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionRespiratoryDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:RespiratoryDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionSkinDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:SkinDisease
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionSkinDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:SkinDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_15To19Years_Male_ConditionSkinDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [15 19 Years]
+gender: dcid:Male
+medicalCondition: dcid:SkinDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Female_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Female_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Female_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Female_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Female_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Female_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Male_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Male_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Male_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Male_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Male_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_30To44Years_Male_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [30 44 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Female_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Female_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Female_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Female_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Female_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Female_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Male_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Male_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Male_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Male_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Male_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_45To59Years_Male_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [45 59 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Female_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Female_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Female_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Female_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Female_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Female_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Male_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Male_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Male_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Male_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Male_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_5To14Years_Male_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [5 14 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Female_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Female_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Female_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Female_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Female_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Female_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Male_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Male_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Male_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Male_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Male_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60OrMoreYears_Male_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 - Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Female_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Female_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Female_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Female_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Female_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Female_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Male_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Male_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Male_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Male_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Male_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_Male_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [60 69 Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Female_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Female_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Female_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Female
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Female_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Female_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Female_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Female
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Male_ConditionAllDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Male_ConditionAllDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Male_ConditionAllDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Male
+medicalCondition: dcid:AllDisease
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Male_ConditionOtherDisease_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Male_ConditionOtherDisease_Rural_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MedicalConditionIncident_70OrMoreYears_Male_ConditionOtherDisease_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: [70 - Years]
+gender: dcid:Male
+medicalCondition: dcid:OtherDisease
+placeOfResidenceClassification: dcid:Urban
+
