@@ -1,0 +1,9 @@
+param,value
+word_delimiter,""""""
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
+data_url,https://nces.ed.gov/programs/digest/d23/tables/xls/tabn313.30.xlsx
+header_rows,6
+#input_rows,26
+mapped_rows,21
+mapped_columns,1
+process_rows,"1,2,3,4,5,6,22,23,24,25,26"
