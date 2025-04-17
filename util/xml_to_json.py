@@ -44,6 +44,7 @@ def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
     except Exception as e:
         logging.fatal(f"An error occurred during conversion: {e}")
 
+
 input_xml_file = sys.argv[1]
 output_json_file = sys.argv[2]
-convert_xml_to_json(input_xml_file , sys.argv[2])
+convert_xml_to_json(input_xml_file, sys.argv[2])

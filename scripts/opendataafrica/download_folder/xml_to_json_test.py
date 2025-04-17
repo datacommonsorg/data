@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import json
 import os
 import tempfile
@@ -21,20 +20,8 @@ import pandas as pd
 import xml.etree.ElementTree as ET
 from io import StringIO
 from unittest.mock import patch
-current_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Construct the path to the 'util' directory three levels up
-import sys
-import os
-
-current_dir = os.path.dirname(os.path.abspath(__file__))
-util_dir = os.path.abspath(os.path.join(current_dir, '../../../util'))
-
-if util_dir not in sys.path:
-    sys.path.insert(0, util_dir)
-    print(f"Added to sys.path: {util_dir}")
-
-import xml_to_json
+import test_xml_to_json
 
 
 class XMLToJsonConverterTest(unittest.TestCase):
@@ -84,8 +71,8 @@ class XMLToJsonConverterTest(unittest.TestCase):
         }
 
         # Call the conversion function with the file paths
-        xml_to_json.convert_xml_to_json(self.input_xml_path,
-                                        self.output_json_path)
+        test_xml_to_json.convert_xml_to_json(self.input_xml_path,
+                                             self.output_json_path)
 
         # Read the generated JSON file
         actual_json = self._read_json_file()

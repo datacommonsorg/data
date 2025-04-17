@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 import json
 import os
 import tempfile
@@ -23,6 +22,7 @@ from io import StringIO
 from unittest.mock import patch
 
 import xml_to_json
+
 
 class XMLToJsonConverterTest(unittest.TestCase):
     """This class has the method required to test the convert_xml_to_json function."""
