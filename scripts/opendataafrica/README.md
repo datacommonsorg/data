@@ -21,3 +21,6 @@ bash download.sh 'egypt' 'opendata_csv_folders'
 
 To download specific dataset
 bash download.sh 'cotedivoire' 'opendata_csv_folders' 'qdanpdb,sfulpbb'
+
+Installation part:
+pip install xmltodict

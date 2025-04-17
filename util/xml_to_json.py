@@ -45,6 +45,7 @@ def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
         logging.fatal(f"An error occurred during conversion: {e}")
 
 
+"""calling this script from a bash script where we are passing tese 2 parameter"""
 input_xml_file = sys.argv[1]
 output_json_file = sys.argv[2]
 convert_xml_to_json(input_xml_file, sys.argv[2])

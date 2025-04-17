@@ -121,12 +121,15 @@ function download_all_DATASETS() {
 
 function download_DATASETS_for_country() {
   if [ -z "$1" ]; then
+    echo "Usage: download_DATASETS_for_country <country_name>"
+    echo "  <country_name>: The full name of the country (e.g., cotedivoire)."
     echo "No country specified. Exiting"
     exit 1
   fi
   COUNTRY="$1"
 
   if [ -z "$2" ]; then
+    echo "  <output_folder>: The path to the directory where the downloaded CSV files will be stored ."
     echo "No output CSV folder specified. Exiting"
     exit 1
   fi
@@ -158,9 +161,11 @@ function download_DATASETS_for_country() {
       fi
     else
       echo "Error: key_family.xml not found. Download failed. (Path: $OUTPUT_XML_JSON_DIR/key_family.xml)"
+      exit 1
     fi
   else
     echo "Error: key_family.json not found. Conversion failed. (Path: $OUTPUT_XML_JSON_DIR/key_family.json)"
+    exit 1
   fi
 }
 

@@ -71,8 +71,7 @@ class XMLToJsonConverterTest(unittest.TestCase):
         }
 
         # Call the conversion function with the file paths
-        xml_to_json.convert_xml_to_json(self.input_xml_path,
-                                        self.output_json_path)
+        xml_to_json.convert_xml_to_json(self.input_xml_path, self.output_json_path)
 
         # Read the generated JSON file
         actual_json = self._read_json_file()
