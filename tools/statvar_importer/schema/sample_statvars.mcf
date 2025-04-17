@@ -1,0 +1,1062 @@
+Node: dcid:Count_Person_90Years_Female_HispanicOrLatino_WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+typeOf: dcid:StatisticalVariable
+name: "Population: Years 90,Female,Hispanic or Latino & White Alone or In Combination With One or More Other Races"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:HispanicOrLatino__WhiteAloneOrInCombinationWithOneOrMoreOtherRaces
+gender: dcid:Female
+age: dcid:Years90
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_ModerateActivityOrHeavyActivity_In_Count_Person_Male_IncomeOf80To100Percentile
+typeOf: dcid:StatisticalVariable
+name: "Percentage Work Related Physical Activity,Moderate Activity Or Heavy Activity Among Male,Income Of 80 To 100 Percentile Population"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male_IncomeOf80To100Percentile
+gender: dcid:Male
+income: dcid:Percentile80To100
+healthBehavior: dcid:WorkRelatedPhysicalActivity
+physicalActivityEffortLevel: dcid:ModerateActivityLevel__HeavyActivityLevel
+
+Node: dcid:Exports_EconomicActivity_ExportToCountryFJI_Unspecified_AsAFractionOf_Exports_EconomicActivity_Unspecified
+typeOf: dcid:StatisticalVariable
+name: "Percent exports of Unspecified to Fiji"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Exports_EconomicActivity_Unspecified
+product: dcid:Unspecified
+exportDestination: dcid:country/FJI
+
+Node: dcid:Median_AssessmentScore_Student_AsianAlone_SchoolGrade8_VisualArts
+typeOf: dcid:StatisticalVariable
+name: "Median Assessment Score of Student: Asian Alone,School Grade 8,Visual Arts"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:medianValue
+race: dcid:AsianAlone
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:VisualArts
+
+Node: dcid:Percent_CA_StandardExceeded_In_Count_Student_OnlyEnglish_SchoolGrade8_EnglishLanguageArts
+typeOf: dcid:StatisticalVariable
+name: "Count of Student: CA_Standard Exceeded,Only English,School Grade 8,English Language Arts (As Fraction of Count Student Only English School Grade 8 English Language Arts)"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Student_OnlyEnglish_SchoolGrade8_EnglishLanguageArts
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:EnglishLanguageArts
+languageLearned: dcid:OnlyEnglish
+educationalAchievementLevel: dcid:CA_StandardExceeded
+
+Node: dcid:MarginOfError_Count_Person_NotAUSCitizen_DateOfEntry2000OrEarlier_ForeignBorn_PlaceOfBirthSouthernEasternEurope
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:NotAUSCitizen
+dateOfEntry: dcid:DateUpto2000
+placeOfBirth: dcid:SouthernEasternEurope
+
+Node: dcid:Consumption_FarmInventory_Fertilizer_AsAFractionOf_Area_Farm
+typeOf: dcid:StatisticalVariable
+name: "Consumption of Farm Inventory: Fertilizer (As Fraction of Area Farm)"
+populationType: dcid:FarmInventory
+measuredProperty: dcid:consumption
+statType: dcid:measuredValue
+measurementDenominator: dcid:Area_Farm
+farmInventoryType: dcid:Fertilizer
+
+Node: dcid:Percentile10_AssessmentScore_Student_EnglishLearner_NotCurrentLearner_SchoolGrade4_Science_PublicSchool
+typeOf: dcid:StatisticalVariable
+name: "Percentile 10 Assessment Score of Student: English Learner,Not Current Learner,School Grade 4,Science,Public School"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:percentile10
+schoolGradeLevel: dcid:SchoolGrade4
+schoolSubject: dcid:Science
+schoolType: dcid:NCES_PublicSchool
+languageLearned: dcid:EnglishLearner
+languageLearningStatus: dcid:NotCurrentLearner
+
+Node: dcid:Imports_EconomicActivity_ImportFromCountryTLS_OtherTextileProducts_AsAFractionOf_Imports_EconomicActivity_OtherTextileProducts
+typeOf: dcid:StatisticalVariable
+name: "Percent imports of OtherTextileProducts from TimorLeste"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:imports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Imports_EconomicActivity_OtherTextileProducts
+product: dcid:OtherTextileProducts
+importSource: dcid:country/TLS
+
+Node: dcid:Victim_Count_CriminalIncidents_BiasMotivationReligion_FalsePretenseOrSwindleOrConfidenceGame_IsHateCrime_Sikhism
+typeOf: dcid:StatisticalVariable
+name: "Count of Hate Crime Incidents (Victim): Bias Against Religion,False Pretense or Swindle or Confidence Game,Sikhism Faith Victim"
+populationType: dcid:HateCrimeIncidents
+measuredProperty: dcid:count
+measurementQualifier: dcid:Victim
+statType: dcid:measuredValue
+crimeType: dcid:FalsePretenseOrSwindleOrConfidenceGame
+biasMotivation: dcid:religion
+targetedReligion: dcid:Sikhism
+
+Node: dcid:Imports_EconomicActivity_ImportFromCountryBRN_OtherChemicalProducts_AsAFractionOf_Imports_EconomicActivity_OtherChemicalProducts
+typeOf: dcid:StatisticalVariable
+name: "Percent imports of OtherChemicalProducts from BruneiDarussalam"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:imports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Imports_EconomicActivity_OtherChemicalProducts
+product: dcid:OtherChemicalProducts
+importSource: dcid:country/BRN
+
+Node: dcid:Exports_EconomicActivity_ExportToCountrySTP_AnimalFats_AsAFractionOf_Exports_EconomicActivity_AnimalFats
+typeOf: dcid:StatisticalVariable
+name: "Percent exports of AnimalFats to SaoTomAndPrincipe"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Exports_EconomicActivity_AnimalFats
+product: dcid:AnimalFats
+exportDestination: dcid:country/STP
+
+Node: dcid:Median_AssessmentScore_Student_SchoolGrade8_Suburb_USHistory_PrivateSchool_TechnologyScale
+typeOf: dcid:StatisticalVariable
+name: "Median Assessment Score of Student: School Grade 8,Suburb,USHistory,Private School,Technology Scale"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:medianValue
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:USHistory
+subjectAssessmentScale: dcid:TechnologyScale
+schoolType: dcid:NCES_PrivateSchool
+schoolLocationType: dcid:Suburb
+
+Node: dcid:Count_CriminalIncidents_BiasMotivationRace_IsHateCrime_OffenderEthnicityUnknownEthnicity_Arab
+typeOf: dcid:StatisticalVariable
+name: "Count of Hate Crime Incidents: Bias Against Race,Unknown Ethnicity Offender,Arab Victim"
+populationType: dcid:HateCrimeIncidents
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+biasMotivation: dcid:race
+targetedRace: dcid:Arab
+offenderEthnicity: dcid:UCR_UnknownEthnicity
+
+Node: dcid:Count_MedicalConditionIncident_ConditionDengueDisease_OtherRace
+typeOf: dcid:StatisticalVariable
+name: "Count of Dengue,Other Race dengue fever incidents"
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:CDC_OtherRace
+medicalCondition: dcid:DengueDisease
+
+Node: dcid:DifferenceRelativeToObservationalData_Max_Temperature_CMCC-CM2-SR5
+typeOf: dcid:StatisticalVariable
+name: "Max Temperature (Difference Relative To Observed Data): CMCC-CM2-SR5 (Italy - CMCC),CMIP6 Historcial Run"
+populationType: dcid:Place
+measuredProperty: dcid:temperature
+measurementQualifier: dcid:DifferenceRelativeToObservedData
+statType: dcid:maxValue
+climateModel: dcid:CMCC-CM2-SR5
+climateModelExperimentType: dcid:CMIP6_HistorcialRun
+
+Node: dcid:Count_MortalityEvent_AllOtherFormsOfChronicIschemicHeartDisease_BlackOrAfricanAmericanAlone_AsAFractionOf_Count_Person_BlackOrAfricanAmericanAlone
+typeOf: dcid:StatisticalVariable
+name: "Count of Mortality Event: All Other Forms of Chronic Ischemic Heart Disease,Black or African American Alone (As Fraction of Count Person Black or African American Alone)"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_BlackOrAfricanAmericanAlone
+race: dcid:BlackOrAfricanAmericanAlone
+causeOfDeath: dcid:AllOtherFormsOfChronicIschemicHeartDisease
+
+Node: dcid:MarginOfError_Count_HousingUnit_ForeignBorn_0.3OrLessRatioToHouseholdIncome_PlaceOfBirthEasternAsia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:HousingUnit
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+occupancyStatus: dcid:OccupiedHousingUnit
+occupancyTenure: dcid:OwnerOccupied
+nativity: dcid:USC_ForeignBorn
+placeOfBirth: dcid:EasternAsia
+ownerCost: dcid:RatioToHouseholdIncomeUpto0.3
+
+Node: dcid:Percent_150To299Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+typeOf: dcid:StatisticalVariable
+name: "Percentage 150 To 299 Minutes,Health Enhancing Physical Activity Among Upper Secondary Education Or Post Secondary Non Tertiary Education,Female Population"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
+gender: dcid:Female
+educationalAttainment: dcid:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
+healthBehavior: dcid:HealthEnhancingPhysicalActivity
+activityDuration: dcid:Minute150To299
+
+Node: dcid:Exports_EconomicActivity_ExportToCountryTJK_PowerGeneratingEquipment_AsAFractionOf_Exports_EconomicActivity_PowerGeneratingEquipment
+typeOf: dcid:StatisticalVariable
+name: "Percent exports of PowerGeneratingEquipment to Tajikistan"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Exports_EconomicActivity_PowerGeneratingEquipment
+product: dcid:PowerGeneratingEquipment
+exportDestination: dcid:country/TJK
+
+Node: dcid:Count_Person_ForeignBorn_PlaceOfBirthAsia_NativeHawaiianOrOtherPacificIslanderAlone
+typeOf: dcid:StatisticalVariable
+name: "Population: Foreign Born,Asia,Native Hawaiian or Other Pacific Islander Alone"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+nativity: dcid:USC_ForeignBorn
+placeOfBirth: dcid:asia
+
+Node: dcid:Count_Person_15Years_Male_HispanicOrLatino_AsianOrPacificIslander
+typeOf: dcid:StatisticalVariable
+name: "Population: Years 15,Male,Hispanic or Latino & Asian or Pacific Islander"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:HispanicOrLatino__AsianOrPacificIslander
+gender: dcid:Male
+age: dcid:Years15
+
+Node: dcid:MarginOfError_Count_Person_IncomeOf65000To74999USDollar_DifferentHouseInDifferentCountyDifferentState
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+income: dcid:USDollar65000To74999
+incomeStatus: dcid:WithIncome
+age: dcid:Years15Onwards
+residentStatus: dcid:DifferentHouseInDifferentCountyDifferentState
+
+Node: dcid:Count_Person_16OrMoreYears_WhiteAlone
+typeOf: dcid:StatisticalVariable
+name: "Population: 16 Years or More,White Alone"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:WhiteAlone
+age: dcid:Years16Onwards
+
+Node: dcid:Percent_NAEP_DiscreteAtProficient_In_Count_Student_WithDisability_SchoolGrade12_USHistory
+typeOf: dcid:StatisticalVariable
+name: "Count of Student: With Disability,NAEP_Discrete At Proficient,School Grade 12,USHistory (As Fraction of Count Student With Disability School Grade 12 USHistory)"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Student_WithDisability_SchoolGrade12_USHistory
+disabilityStatus: dcid:WithDisability
+schoolGradeLevel: dcid:SchoolGrade12
+schoolSubject: dcid:USHistory
+educationalAchievementLevel: dcid:NAEP_DiscreteAtProficient
+
+Node: dcid:Median_Earnings_Person_30To39Years_EducationalAttainmentCollegeGraduate_Employed_NotHispanicOrLatino_Female_SOCBiologicalScientistsAllOtherOccupation_WhiteAlone
+typeOf: dcid:StatisticalVariable
+name: "Median Earnings: 30 - 39 Years,College Graduate,Employed,Not Hispanic or Latino,Female,Biological Scientists,All Other,White Alone"
+populationType: dcid:Person
+measuredProperty: dcid:earnings
+statType: dcid:medianValue
+race: dcid:WhiteAlone
+employmentStatus: dcid:Employed
+gender: dcid:Female
+educationalAttainment: dcid:CollegeGraduate
+age: dcid:Years30To39
+occupation: dcid:SOCv2018/19-1029
+ethnicity: dcid:NotHispanicOrLatino
+
+Node: dcid:Mean_AssessmentScore_Student_EnglishLearner_CurrentLearner_SchoolGrade8_USHistory_PublicSchool
+typeOf: dcid:StatisticalVariable
+name: "Mean Assessment Score of Student: English Learner,Current Learner,School Grade 8,USHistory,Public School"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:meanValue
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:USHistory
+schoolType: dcid:NCES_PublicSchool
+languageLearned: dcid:EnglishLearner
+languageLearningStatus: dcid:CurrentLearner
+
+Node: dcid:Count_Person_Male_NonWhite
+typeOf: dcid:StatisticalVariable
+name: "Non White Male Population"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NonWhite
+gender: dcid:Male
+
+Node: dcid:Count_Person_Employed_NAICSManufacturing_ForeignBorn_PlaceOfBirthEasternAsia
+typeOf: dcid:StatisticalVariable
+name: "Population: 16 Years or More,Civilian,Employed,Manufacturing (NAICS/33),Foreign Born,Eastern Asia"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+armedForcesStatus: dcid:Civilian
+nativity: dcid:USC_ForeignBorn
+placeOfBirth: dcid:EasternAsia
+age: dcid:Years16Onwards
+employment: dcid:BLS_Employed
+naics: dcid:NAICS/33
+
+Node: dcid:Annual_Generation_Electricity_WoodAndWoodDerivedFuels_IndustrialNonCogen
+typeOf: dcid:StatisticalVariable
+name: "Net generation,wood and wood-derived fuels,industrial non-cogen,annual"
+populationType: dcid:Electricity
+measuredProperty: dcid:generation
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+energySource: dcid:WoodAndWoodDerivedFuels
+producingSector: dcid:IndustrialNonCogen
+
+Node: dcid:Exports_EconomicActivity_ExportToCountryECU_FruitsNutsAndTheirPreparations_AsAFractionOf_Exports_EconomicActivity_FruitsNutsAndTheirPreparations
+typeOf: dcid:StatisticalVariable
+name: "Percent exports of FruitsNutsAndTheirPreparations to Ecuador"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Exports_EconomicActivity_FruitsNutsAndTheirPreparations
+product: dcid:FruitsNutsAndTheirPreparations
+exportDestination: dcid:country/ECU
+
+Node: dcid:Percentile25_AssessmentScore_Student_SchoolGrade12_Suburb_USHistory_PublicSchool_TechnologyScale
+typeOf: dcid:StatisticalVariable
+name: "Percentile 25 Assessment Score of Student: School Grade 12,Suburb,USHistory,Public School,Technology Scale"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:percentile25
+schoolGradeLevel: dcid:SchoolGrade12
+schoolSubject: dcid:USHistory
+subjectAssessmentScale: dcid:TechnologyScale
+schoolType: dcid:NCES_PublicSchool
+schoolLocationType: dcid:Suburb
+
+Node: dcid:Mean_HouseholdSize_Household_ForeignBorn_PlaceOfBirthSouthernEasternEurope
+typeOf: dcid:StatisticalVariable
+name: "Mean Household Size of Household: Foreign Born,Southern Eastern Europe"
+populationType: dcid:Household
+measuredProperty: dcid:householdSize
+statType: dcid:meanValue
+nativity: dcid:USC_ForeignBorn
+placeOfBirth: dcid:SouthernEasternEurope
+
+Node: dcid:Percentile10_AssessmentScore_Student_SchoolGrade4_City_Mathematics_GeometryScale
+typeOf: dcid:StatisticalVariable
+name: "Percentile 10 Assessment Score of Student: School Grade 4,City,Mathematics,Geometry Scale"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:percentile10
+schoolGradeLevel: dcid:SchoolGrade4
+schoolSubject: dcid:Mathematics
+subjectAssessmentScale: dcid:GeometryScale
+schoolLocationType: dcid:City
+
+Node: dcid:MarginOfError_Count_Person_LocalGovernmentOwnedEstablishment_Female_Worker
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+gender: dcid:Female
+armedForcesStatus: dcid:Civilian
+age: dcid:Years16Onwards
+employment: dcid:BLS_Employed
+establishmentOwnership: dcid:LocalGovernmentOwned
+workerClassification: dcid:Worker
+
+Node: dcid:Percentile25_AssessmentScore_Student_CharterYes_SchoolGrade8_TechnologyAndEngineeringLiteracy_PublicSchool
+typeOf: dcid:StatisticalVariable
+name: "Percentile 25 Assessment Score of Student: Charter Yes,School Grade 8,Technology And Engineering Literacy,Public School"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:percentile25
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:TechnologyAndEngineeringLiteracy
+schoolType: dcid:NCES_PublicSchool
+charterStatus: dcid:NCES_CharterYes
+
+Node: dcid:Offense_Count_CriminalIncidents_BiasMotivationGender_IsHateCrime_Transgender
+typeOf: dcid:StatisticalVariable
+name: "Count of Hate Crime Incidents (Offense): Bias Against Gender,Transgender Victim"
+populationType: dcid:HateCrimeIncidents
+measuredProperty: dcid:count
+measurementQualifier: dcid:Offense
+statType: dcid:measuredValue
+biasMotivation: dcid:gender
+targetedGender: dcid:Transgender
+
+Node: dcid:Count_MedicalConditionIncident_ConditionSyphilisPrimaryAndSecondary_NonUSResident
+typeOf: dcid:StatisticalVariable
+name: "Count of Syphilis primary and secondary incidents"
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+residentStatus: dcid:NonUSResident
+medicalCondition: dcid:SyphilisPrimaryAndSecondary
+
+Node: dcid:Exports_EconomicActivity_ExportToCountryTON_VegetableOils_AsAFractionOf_Exports_EconomicActivity_VegetableOils
+typeOf: dcid:StatisticalVariable
+name: "Percent exports of VegetableOils to Tonga"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Exports_EconomicActivity_VegetableOils
+product: dcid:VegetableOils
+exportDestination: dcid:country/TON
+
+Node: dcid:Count_MortalityEvent_Suicide
+typeOf: dcid:StatisticalVariable
+name: "Count of Mortality Event: Suicide"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+causeOfDeath: dcid:Suicide
+
+Node: dcid:Exports_EconomicActivity_ExportToCountryTCD_AnimalFeedsAndOtherOilFatProducts_AsAFractionOf_Exports_EconomicActivity_AnimalFeedsAndOtherOilFatProducts
+typeOf: dcid:StatisticalVariable
+name: "Percent exports of AnimalFeedsAndOtherOilFatProducts to Chad"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Exports_EconomicActivity_AnimalFeedsAndOtherOilFatProducts
+product: dcid:AnimalFeedsAndOtherOilFatProducts
+exportDestination: dcid:country/TCD
+
+Node: dcid:Imports_EconomicActivity_ImportFromCountryCHL_MilkAndCream_AsAFractionOf_Imports_EconomicActivity_MilkAndCream
+typeOf: dcid:StatisticalVariable
+name: "Percent imports of MilkAndCream from Chile"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:imports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Imports_EconomicActivity_MilkAndCream
+product: dcid:MilkAndCream
+importSource: dcid:country/CHL
+
+Node: dcid:Exports_EconomicActivity_ExportToCountryMAC_BicyclesAndMotorcycles_AsAFractionOf_Exports_EconomicActivity_BicyclesAndMotorcycles
+typeOf: dcid:StatisticalVariable
+name: "Percent exports of BicyclesAndMotorcycles to MacaoChina"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Exports_EconomicActivity_BicyclesAndMotorcycles
+product: dcid:BicyclesAndMotorcycles
+exportDestination: dcid:country/MAC
+
+Node: dcid:Count_Person_75To79Years_Urban_Male
+typeOf: dcid:StatisticalVariable
+name: "Population: 75 - 79 Years,Male,Urban"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+age: dcid:Years75To79
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Victim_Count_CriminalIncidents_BiasMotivationRace_WeaponLawViolations_IsHateCrime_TwoOrMoreRaces
+typeOf: dcid:StatisticalVariable
+name: "Count of Hate Crime Incidents (Victim): Bias Against Race,Weapon Law Violations,Two or More Races Victim"
+populationType: dcid:HateCrimeIncidents
+measuredProperty: dcid:count
+measurementQualifier: dcid:Victim
+statType: dcid:measuredValue
+crimeType: dcid:WeaponLawViolations
+biasMotivation: dcid:race
+targetedRace: dcid:TwoOrMoreRaces
+
+Node: dcid:Count_MedicalConditionIncident_ConditionMusculoSkeletalCondition_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Count of Medical Condition Incident: Musculo Skeletal Condition (Per Capita)"
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+medicalCondition: dcid:MusculoSkeletalCondition
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade13_EnglishLanguageArts
+typeOf: dcid:StatisticalVariable
+name: "Count of Student: Native Hawaiian or Other Pacific Islander Alone,School Grade 13,English Language Arts"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade13
+schoolSubject: dcid:EnglishLanguageArts
+
+Node: dcid:Count_Person_22Years_Female_NativeHawaiianAndOtherPacificIslanderAlone
+typeOf: dcid:StatisticalVariable
+name: "Population: Years 22,Female,Native Hawaiian or Other Pacific Islander Alone"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianAndOtherPacificIslanderAlone
+gender: dcid:Female
+age: dcid:Years22
+
+Node: dcid:Percent_NAEP_CumulativeBelowBasic_In_Count_Student_Male_SchoolGrade8_USHistory_PublicSchool
+typeOf: dcid:StatisticalVariable
+name: "Count of Student: NAEP_Cumulative Below Basic,Male,School Grade 8,USHistory,Public School (As Fraction of Count Student Male School Grade 8 USHistory Public School)"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Student_Male_SchoolGrade8_USHistory_PublicSchool
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:USHistory
+schoolType: dcid:NCES_PublicSchool
+gender: dcid:Male
+educationalAchievementLevel: dcid:NAEP_CumulativeBelowBasic
+
+Node: dcid:Annual_Emissions_NitrousOxide_EntericFermentation
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Enteric Fermentation,Nitrous Oxide"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:EntericFermentation
+emittedThing: dcid:NitrousOxide
+
+Node: dcid:Percent_NotInTheLast12Months_AlcoholConsumption_In_Count_Person_Rural_Female
+typeOf: dcid:StatisticalVariable
+name: "Percentage Not In The Last 12 Months,Alcohol Consumption Among Rural,Female Population"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Rural_Female
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+healthBehavior: dcid:AlcoholConsumption
+activityFrequency: dcid:NotInTheLast12Months
+
+Node: dcid:Percentile75_AssessmentScore_Student_CharterNo_SchoolGrade12_Geography_EnvironmentAndSocietyScale
+typeOf: dcid:StatisticalVariable
+name: "Percentile 75 Assessment Score of Student: Charter No,School Grade 12,Geography,Environment And Society Scale"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:percentile75
+schoolGradeLevel: dcid:SchoolGrade12
+schoolSubject: dcid:Geography
+subjectAssessmentScale: dcid:EnvironmentAndSocietyScale
+charterStatus: dcid:NCES_CharterNo
+
+Node: dcid:Count_Household_FamilyHousehold_With1Worker
+typeOf: dcid:StatisticalVariable
+name: "Count of Household: Family Household,Worker 1"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+householdType: dcid:FamilyHousehold
+householdWorkerSize: dcid:Worker1
+
+Node: dcid:Exports_EconomicActivity_ExportToCountryCHE_HouseholdEquipment_AsAFractionOf_Exports_EconomicActivity_HouseholdEquipment
+typeOf: dcid:StatisticalVariable
+name: "Percent exports of HouseholdEquipment to Switzerland"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Exports_EconomicActivity_HouseholdEquipment
+product: dcid:HouseholdEquipment
+exportDestination: dcid:country/CHE
+
+Node: dcid:Percent_NAEP_DiscreteAtAdvanced_In_Count_Student_Female_SchoolGrade4_Writing_PrivateSchool
+typeOf: dcid:StatisticalVariable
+name: "Count of Student: NAEP_Discrete At Advanced,Female,School Grade 4,Writing,Private School (As Fraction of Count Student Female School Grade 4 Writing Private School)"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Student_Female_SchoolGrade4_Writing_PrivateSchool
+schoolGradeLevel: dcid:SchoolGrade4
+schoolSubject: dcid:Writing
+schoolType: dcid:NCES_PrivateSchool
+gender: dcid:Female
+educationalAchievementLevel: dcid:NAEP_DiscreteAtAdvanced
+
+Node: dcid:Offense_Count_CriminalIncidents_NotSpecified_IsHateCrime_VictimTypeFinancialInstitution
+typeOf: dcid:StatisticalVariable
+name: "Count of Hate Crime Incidents (Offense): Not Specified,Financial Institution"
+populationType: dcid:HateCrimeIncidents
+measuredProperty: dcid:count
+measurementQualifier: dcid:Offense
+statType: dcid:measuredValue
+crimeType: dcid:UCR_NotSpecified
+victimType: dcid:FinancialInstitution
+
+Node: dcid:Exports_EconomicActivity_ExportToCountryDOM_ComputersAndOfficeMachinery_AsAFractionOf_Exports_EconomicActivity_ComputersAndOfficeMachinery
+typeOf: dcid:StatisticalVariable
+name: "Percent exports of ComputersAndOfficeMachinery to DominicanRepublic"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Exports_EconomicActivity_ComputersAndOfficeMachinery
+product: dcid:ComputersAndOfficeMachinery
+exportDestination: dcid:country/DOM
+
+Node: dcid:Annual_Consumption_Fuel_MainActivityProducerCombinedHeatPowerPlants_BlackLiquor_FuelTransformation
+typeOf: dcid:StatisticalVariable
+name: "Annual Consumption of Fuel: Main Activity Producer Combined Heat Power Plants,Black Liquor,Fuel Transformation"
+populationType: dcid:Fuel
+measuredProperty: dcid:consumption
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+fuelType: dcid:BlackLiquor
+consumingSector: dcid:MainActivityProducerCombinedHeatPowerPlants
+usedFor: dcid:FuelTransformation
+
+Node: dcid:Median_AssessmentScore_Student_FreeLunchEligibilityInfoMissing_SchoolGrade8_Science_PrivateSchool_LifeScienceScale
+typeOf: dcid:StatisticalVariable
+name: "Median Assessment Score of Student: Free Lunch Eligibility Info Missing,School Grade 8,Science,Private School,Life Science Scale"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:medianValue
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:Science
+subjectAssessmentScale: dcid:LifeScienceScale
+schoolType: dcid:NCES_PrivateSchool
+lunchEligibility: dcid:FreeLunchEligibilityInfoMissing
+
+Node: dcid:Count_CriminalIncidents_BiasMotivationDisabilityStatus_AllOtherLarceny_IsHateCrime
+typeOf: dcid:StatisticalVariable
+name: "Count of Hate Crime Incidents: Bias Against Disability Status,All Other Larceny"
+populationType: dcid:HateCrimeIncidents
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:UCR_AllOtherLarceny
+biasMotivation: dcid:disabilityStatus
+
+Node: dcid:Exports_EconomicActivity_ExportToCountryCIV_VegetableOils_AsAFractionOf_Exports_EconomicActivity_VegetableOils
+typeOf: dcid:StatisticalVariable
+name: "Percent exports of VegetableOils to CteDIvoire"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:exports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Exports_EconomicActivity_VegetableOils
+product: dcid:VegetableOils
+exportDestination: dcid:country/CIV
+
+Node: dcid:Count_Student_NativeHawaiianOrOtherPacificIslanderAlone_SchoolGrade5_EnglishLanguageArts_EconomicallyDisadvantaged
+typeOf: dcid:StatisticalVariable
+name: "Count of Student: Native Hawaiian or Other Pacific Islander Alone,School Grade 5,English Language Arts,Economically Disadvantaged"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:NativeHawaiianOrOtherPacificIslanderAlone
+schoolGradeLevel: dcid:SchoolGrade5
+schoolSubject: dcid:EnglishLanguageArts
+socialVulnerabilityStatus: dcid:EconomicallyDisadvantaged
+
+Node: dcid:Count_Student_EnglishLearner_CurrentLearner_SchoolGrade4_Reading
+typeOf: dcid:StatisticalVariable
+name: "Count of Student: English Learner,Current Learner,School Grade 4,Reading"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+schoolGradeLevel: dcid:SchoolGrade4
+schoolSubject: dcid:Reading
+languageLearned: dcid:EnglishLearner
+languageLearningStatus: dcid:CurrentLearner
+
+Node: dcid:Annual_Consumption_Fuel_Kerosene_NonEnergyUse
+typeOf: dcid:StatisticalVariable
+name: "Annual Consumption of Fuel: EIA_Kerosene,Non Energy Use"
+populationType: dcid:Fuel
+measuredProperty: dcid:consumption
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+fuelType: dcid:EIA_Kerosene
+usedFor: dcid:NonEnergyUse
+
+Node: dcid:Annual_Emissions_CarbonDioxideEquivalent100YearGlobalWarmingPotential_RiceCultivation
+typeOf: dcid:StatisticalVariable
+name: "Annual Amount of Emissions: Rice Cultivation,Carbon Dioxide Equivalent 100 Year Global Warming Potential"
+populationType: dcid:Emissions
+measuredProperty: dcid:amount
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+emissionSource: dcid:RiceCultivation
+emittedThing: dcid:CarbonDioxideEquivalent100YearGlobalWarmingPotential
+
+Node: dcid:Imports_EconomicActivity_ImportFromCountryPER_OtherChemicalProducts_AsAFractionOf_Imports_EconomicActivity_OtherChemicalProducts
+typeOf: dcid:StatisticalVariable
+name: "Percent imports of OtherChemicalProducts from Peru"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:imports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Imports_EconomicActivity_OtherChemicalProducts
+product: dcid:OtherChemicalProducts
+importSource: dcid:country/PER
+
+Node: dcid:Percent_Student_EnglishLearner_NotCurrentLearner_SchoolGrade12_Geography_EnvironmentAndSocietyScale
+typeOf: dcid:StatisticalVariable
+name: "Percent of Student: English Learner,Not Current Learner,School Grade 12,Geography,Environment And Society Scale"
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+schoolGradeLevel: dcid:SchoolGrade12
+schoolSubject: dcid:Geography
+subjectAssessmentScale: dcid:EnvironmentAndSocietyScale
+languageLearned: dcid:EnglishLearner
+languageLearningStatus: dcid:NotCurrentLearner
+
+Node: dcid:Percentile75_AssessmentScore_Student_WhiteAlone_SchoolGrade12_Writing_PublicSchool
+typeOf: dcid:StatisticalVariable
+name: "Percentile 75 Assessment Score of Student: White Alone,School Grade 12,Writing,Public School"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:percentile75
+race: dcid:WhiteAlone
+schoolGradeLevel: dcid:SchoolGrade12
+schoolSubject: dcid:Writing
+schoolType: dcid:NCES_PublicSchool
+
+Node: dcid:Count_Person_Employed_NAICSTransportationWarehousingUtilities_ForeignBorn_PlaceOfBirthSouthCentralAsia
+typeOf: dcid:StatisticalVariable
+name: "Population: 16 Years or More,Civilian,Employed,Transportation And Warehousing,And Utilities (NAICS/48-49_22),Foreign Born,South Central Asia"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+armedForcesStatus: dcid:Civilian
+nativity: dcid:USC_ForeignBorn
+placeOfBirth: dcid:SouthCentralAsia
+age: dcid:Years16Onwards
+employment: dcid:BLS_Employed
+naics: dcid:NAICS/48-49_22
+
+Node: dcid:Annual_Consumption_Fuel_AutoProducerCombinedHeatPowerPlants_BioDiesel_FuelTransformation
+typeOf: dcid:StatisticalVariable
+name: "Annual Consumption of Fuel: Auto Producer Combined Heat Power Plants,Bio Diesel,Fuel Transformation"
+populationType: dcid:Fuel
+measuredProperty: dcid:consumption
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+fuelType: dcid:BioDiesel
+consumingSector: dcid:AutoProducerCombinedHeatPowerPlants
+usedFor: dcid:FuelTransformation
+
+Node: dcid:Imports_EconomicActivity_ImportFromCountryUKR_Aircraft_AsAFractionOf_Imports_EconomicActivity_Aircraft
+typeOf: dcid:StatisticalVariable
+name: "Percent imports of Aircraft from Ukraine"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:imports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Imports_EconomicActivity_Aircraft
+product: dcid:Aircraft
+importSource: dcid:country/UKR
+
+Node: dcid:Count_HousingUnit_WithCashRent
+typeOf: dcid:StatisticalVariable
+name: "Count of Housing Unit: With Cash Rent"
+populationType: dcid:HousingUnit
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+occupancyStatus: dcid:OccupiedHousingUnit
+occupancyTenure: dcid:RenterOccupied
+cashRentStatus: dcid:WithCashRent
+
+Node: dcid:Annual_Consumption_Fuel_UnspecifiedSector_PeatProducts
+typeOf: dcid:StatisticalVariable
+name: "Annual Consumption of Fuel: UN_Unspecified Sector,Peat Products"
+populationType: dcid:Fuel
+measuredProperty: dcid:consumption
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+fuelType: dcid:PeatProducts
+consumingSector: dcid:UN_UnspecifiedSector
+
+Node: dcid:Count_Person_45To49Years_ConditionDiseasesOfHeart
+typeOf: dcid:StatisticalVariable
+name: "Population: 45 - 49 Years,Diseases of Heart"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years45To49
+medicalCondition: dcid:DiseasesOfHeart
+
+Node: dcid:Imports_EconomicActivity_ImportFromCountryUSA_OtherTextileProducts_AsAFractionOf_Imports_EconomicActivity_OtherTextileProducts
+typeOf: dcid:StatisticalVariable
+name: "Percent imports of OtherTextileProducts from Usa"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:imports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Imports_EconomicActivity_OtherTextileProducts
+product: dcid:OtherTextileProducts
+importSource: dcid:country/USA
+
+Node: dcid:Count_Person_27Years_Male_HispanicOrLatino_AsianOrPacificIslander
+typeOf: dcid:StatisticalVariable
+name: "Population: Years 27,Male,Hispanic or Latino & Asian or Pacific Islander"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:HispanicOrLatino__AsianOrPacificIslander
+gender: dcid:Male
+age: dcid:Years27
+
+Node: dcid:Count_MedicalConditionIncident_15To29Years_Male_ConditionCancer_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Count of Medical Condition Incident: 15 - 29 Years,Male,Cancer,Urban (Per Capita)"
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+gender: dcid:Male
+age: dcid:Years15To29
+placeOfResidenceClassification: dcid:Urban
+medicalCondition: dcid:Cancer
+
+Node: dcid:Percentile90_AssessmentScore_Student_FreeLunchEligibilityInfoMissing_SchoolGrade8_USHistory_DemocracyScale
+typeOf: dcid:StatisticalVariable
+name: "Percentile 90 Assessment Score of Student: Free Lunch Eligibility Info Missing,School Grade 8,USHistory,Democracy Scale"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:percentile90
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:USHistory
+subjectAssessmentScale: dcid:DemocracyScale
+lunchEligibility: dcid:FreeLunchEligibilityInfoMissing
+
+Node: dcid:Percent_NAEP_DiscreteAtProficient_In_Count_Student_AsianAlone_SchoolGrade8_Mathematics
+typeOf: dcid:StatisticalVariable
+name: "Count of Student: NAEP_Discrete At Proficient,Asian Alone,School Grade 8,Mathematics (As Fraction of Count Student Asian Alone School Grade 8 Mathematics)"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Student_AsianAlone_SchoolGrade8_Mathematics
+race: dcid:AsianAlone
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:Mathematics
+educationalAchievementLevel: dcid:NAEP_DiscreteAtProficient
+
+Node: dcid:Percentile75_AssessmentScore_Student_AmericanIndianAndAlaskaNativeAlone_SchoolGrade4_Mathematics_PublicSchool
+typeOf: dcid:StatisticalVariable
+name: "Percentile 75 Assessment Score of Student: American Indian or Alaska Native Alone,School Grade 4,Mathematics,Public School"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:percentile75
+race: dcid:AmericanIndianAndAlaskaNativeAlone
+schoolGradeLevel: dcid:SchoolGrade4
+schoolSubject: dcid:Mathematics
+schoolType: dcid:NCES_PublicSchool
+
+Node: dcid:StandardizedCurrency_ExchangeRate_Currency_FromCurrency_USD_ToCurrency_BZD
+typeOf: dcid:StatisticalVariable
+name: "Standardized currency exchange rate from US Dollar (USD) to Belize Dollar (BZD)"
+populationType: dcid:Currency
+measuredProperty: dcid:exchangeRate
+measurementQualifier: dcid:StandardizedCurrency
+statType: dcid:measuredValue
+fromCurrency: dcid:USD
+toCurrency: dcid:BZD
+
+Node: dcid:Percentile90_AssessmentScore_Student_FreeLunchEligibilityInfoMissing_SchoolGrade8_Reading_GainInformationEvaluationScale
+typeOf: dcid:StatisticalVariable
+name: "Percentile 90 Assessment Score of Student: Free Lunch Eligibility Info Missing,School Grade 8,Reading,Gain Information Evaluation Scale"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:percentile90
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:Reading
+subjectAssessmentScale: dcid:GainInformationEvaluationScale
+lunchEligibility: dcid:FreeLunchEligibilityInfoMissing
+
+Node: dcid:Median_AssessmentScore_Student_FreeOrReducedLunch_SchoolGrade4_USHistory_CulturesScale
+typeOf: dcid:StatisticalVariable
+name: "Median Assessment Score of Student: Free or Reduced Lunch,School Grade 4,USHistory,Cultures Scale"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:medianValue
+schoolGradeLevel: dcid:SchoolGrade4
+schoolSubject: dcid:USHistory
+subjectAssessmentScale: dcid:CulturesScale
+lunchEligibility: dcid:FreeOrReducedLunch
+
+Node: dcid:Count_Person_SpeakEnglishNotWell_18To64Years_AsianAndPacificIslandLanguagesSpokenAtHome
+typeOf: dcid:StatisticalVariable
+name: "Population: Speak English Not Well,18 - 64 Years,Asian And Pacific Island Languages"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+languageSpokenAtHome: dcid:AsianAndPacificIslandLanguages
+abilityToSpeakEnglish: dcid:SpeakEnglishNotWell
+age: dcid:Years18To64
+
+Node: dcid:Mean_AssessmentScore_Student_HispanicOrLatino_SchoolGrade8_Reading_PublicSchool
+typeOf: dcid:StatisticalVariable
+name: "Mean Assessment Score of Student: Hispanic or Latino,School Grade 8,Reading,Public School"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:meanValue
+race: dcid:HispanicOrLatino
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:Reading
+schoolType: dcid:NCES_PublicSchool
+
+Node: dcid:Count_School_HasFunctionalToilet_HigherSecondarySchool_Grade11To12_RailwaySchool
+typeOf: dcid:StatisticalVariable
+name: "Count of School: Has Functional Toilet,11 - 12 Higher Secondary School_Grade,Railway School"
+populationType: dcid:School
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+schoolManagement: dcid:UDISE_RailwaySchool
+levelOfSchool: dcid:UDISE_HigherSecondarySchool_Grade11To12
+hasFunctionalToilet: dcid:True
+
+Node: dcid:Count_Person_USCitizenByNaturalization_DateOfEntry1990OrEarlier_ForeignBorn_PlaceOfBirthCentralAmericaExceptMexico
+typeOf: dcid:StatisticalVariable
+name: "Population: US Citizen by Naturalization,Before 1990,Foreign Born,Central America Except Mexico"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+nativity: dcid:USC_ForeignBorn
+citizenship: dcid:USCitizenByNaturalization
+dateOfEntry: dcid:DateUpto1990
+placeOfBirth: dcid:CentralAmericaExceptMexico
+
+Node: dcid:Count_Student_SchoolGrade12_PublicSchool_Civics
+typeOf: dcid:StatisticalVariable
+name: "Count of Student: School Grade 12,Public School,Civics"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+schoolGradeLevel: dcid:SchoolGrade12
+schoolSubject: dcid:Civics
+schoolManagement: dcid:PublicSchool
+
+Node: dcid:Imports_EconomicActivity_ImportFromCountryWSM_Furniture_AsAFractionOf_Imports_EconomicActivity_Furniture
+typeOf: dcid:StatisticalVariable
+name: "Percent imports of Furniture from Samoa"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:imports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Imports_EconomicActivity_Furniture
+product: dcid:Furniture
+importSource: dcid:country/WSM
+
+Node: dcid:Count_Person_4Years_Urban
+typeOf: dcid:StatisticalVariable
+name: "Population: Years 4,Urban"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years4
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Percent_Student_SchoolGrade8_PublicSchool_USHistory_PublicSchool_DemocracyScale
+typeOf: dcid:StatisticalVariable
+name: "Percent of Student: School Grade 8,Public School,USHistory,Democracy Scale"
+populationType: dcid:Student
+measuredProperty: dcid:percent
+statType: dcid:measuredValue
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:USHistory
+subjectAssessmentScale: dcid:DemocracyScale
+schoolType: dcid:NCES_PublicSchool
+schoolManagement: dcid:PublicSchool
+
+Node: dcid:Count_MedicalConditionIncident_60To69Years_ConditionEyeCondition_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Count of Medical Condition Incident: 60 - 69 Years,Eye Condition,Urban (Per Capita)"
+populationType: dcid:MedicalConditionIncident
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+age: dcid:Years60To69
+placeOfResidenceClassification: dcid:Urban
+medicalCondition: dcid:EyeCondition
+
+Node: dcid:Count_Person_Male_BodyMassIndexBelowNormal_Rural_AsAFractionOf_Count_Person_Rural_Male
+typeOf: dcid:StatisticalVariable
+name: "Men with body mass index ( BMI ) below normal (%),rural"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Rural_Male
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+healthBehavior: dcid:BodyMassIndexBelowNormal
+
+Node: dcid:Imports_EconomicActivity_ImportFromCountryMAR_OtherProductsOfVegetableOrigin_AsAFractionOf_Imports_EconomicActivity_OtherProductsOfVegetableOrigin
+typeOf: dcid:StatisticalVariable
+name: "Percent imports of OtherProductsOfVegetableOrigin from Morocco"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:imports
+statType: dcid:measuredValue
+measurementDenominator: dcid:Imports_EconomicActivity_OtherProductsOfVegetableOrigin
+product: dcid:OtherProductsOfVegetableOrigin
+importSource: dcid:country/MAR
+
+Node: dcid:Annual_Consumption_Fuel_ForUsefulThermalOutput_Coal_IndependentPowerProducers
+typeOf: dcid:StatisticalVariable
+name: "Consumption for useful thermal output,coal,independent power producers (total),annual"
+populationType: dcid:Fuel
+measuredProperty: dcid:consumption
+measurementQualifier: dcid:Annual
+statType: dcid:measuredValue
+fuelType: dcid:Coal
+usedFor: dcid:UsefulThermalOutputInCHPSystem
+electricityProducingSector: dcid:IndependentPowerProducers
+
+Node: dcid:Count_CriminalIncidents_BiasMotivationGender_CreditCardOrAutomatedTellerMachineFraud_IsHateCrime_GenderNonConforming
+typeOf: dcid:StatisticalVariable
+name: "Count of Hate Crime Incidents: Bias Against Gender,Credit Card or Automated Teller Machine Fraud,Gender Non Conforming Victim"
+populationType: dcid:HateCrimeIncidents
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+crimeType: dcid:CreditCardOrAutomatedTellerMachineFraud
+biasMotivation: dcid:gender
+targetedGender: dcid:GenderNonConforming
+
+Node: dcid:Percentile25_AssessmentScore_Student_FreeOrReducedLunch_SchoolGrade8_Geography_PrivateSchool_EnvironmentAndSocietyScale
+typeOf: dcid:StatisticalVariable
+name: "Percentile 25 Assessment Score of Student: Free or Reduced Lunch,School Grade 8,Geography,Private School,Environment And Society Scale"
+populationType: dcid:Student
+measuredProperty: dcid:assessmentScore
+statType: dcid:percentile25
+schoolGradeLevel: dcid:SchoolGrade8
+schoolSubject: dcid:Geography
+subjectAssessmentScale: dcid:EnvironmentAndSocietyScale
+schoolType: dcid:NCES_PrivateSchool
+lunchEligibility: dcid:FreeOrReducedLunch
+
+Node: dcid:Count_Person_ScienceAndEngineeringRelatedMajor_EducationalAttainmentDoctorateDegree_UniversityAndCollegeTeacher_Male_SOCPsychologistsOccupation_Asian_TenureNotApplicable
+typeOf: dcid:StatisticalVariable
+name: "Population: Science And Engineering Related Major,Doctorate Degree,University And College Teacher,Male,Psychologists,Asian,Tenure Not Applicable"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+race: dcid:Asian
+gender: dcid:Male
+educationalAttainment: dcid:DoctorateDegree
+occupation: dcid:SOCv2018/19-3030
+facultyType: dcid:UniversityAndCollegeTeacher
+doctorateDegreeMajor: dcid:ScienceAndEngineeringRelatedMajor
+tenureStatus: dcid:TenureNotApplicable
+
+Node: dcid:MarginOfError_Count_Person_EnrolledInCollegeOrGraduateSchool_ForeignBorn_PlaceOfBirthSouthamerica
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:marginOfError
+nativity: dcid:USC_ForeignBorn
+placeOfBirth: dcid:southamerica
+age: dcid:Years3Onwards
+schoolEnrollment: dcid:EnrolledInSchool
+levelOfSchool: dcid:EnrolledInCollegeOrGraduateSchool
+
+Node: dcid:Percent_CA_StandardNearlyMet_In_Count_Student_Asian_SchoolGrade11_EnglishLanguageArts
+typeOf: dcid:StatisticalVariable
+name: "Count of Student: CA_Standard Nearly Met,Asian,School Grade 11,English Language Arts (As Fraction of Count Student Asian School Grade 11 English Language Arts)"
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Student_Asian_SchoolGrade11_EnglishLanguageArts
+race: dcid:Asian
+schoolGradeLevel: dcid:SchoolGrade11
+schoolSubject: dcid:EnglishLanguageArts
+educationalAchievementLevel: dcid:CA_StandardNearlyMet
+
