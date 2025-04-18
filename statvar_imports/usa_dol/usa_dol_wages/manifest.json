@@ -1,0 +1,23 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "USA_DOL_Wages",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.dol.gov/agencies/whd/state/minimum-wage/history",
+      "provenance_description": "USA minimum wages presents the minimum wages for every year at country and state level. The data comes from the US Department of Labor.",
+      "scripts": ["usa_dol_wages_download_script.py","../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/final_data.csv --pv_map=us_dol_wages_pvmap.csv --config_file=us_dol_wages_metadata.csv --output_path=output/us_dol"],
+      "import_inputs": [
+        {
+          "template_mcf": "output/us_dol.tmcf",
+          "cleaned_csv": "output/us_dol.csv"
+        },
+      ],
+      "source_file":[
+          "input_files/final_data.csv",
+          "source_files/raw_data.csv",
+          "source_files/raw_data.html"
+      ],
+      "cron_schedule": "30 05 * * 1"
+    }
+  ]
+}
