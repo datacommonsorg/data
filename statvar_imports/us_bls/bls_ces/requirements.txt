@@ -1,2 +1,0 @@
-# Requirements for Python scripts in this repo that have automation enabled!
-prettytable

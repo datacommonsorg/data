@@ -26,13 +26,15 @@ from datetime import datetime
 from absl import app
 from absl import flags
 from absl import logging
+from retry import retry
 from google.cloud import storage
 
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('place_type', '', 'state or national')
-flags.DEFINE_string('output_folder', '', 'download folder name')
+flags.DEFINE_string('input_folder', '', 'download folder name')
 
+BASE_GCS_PATH = "us_bls/ces/latest"   
 
 def read_gcs_path(config_path):
     GCS_BUCKET_NAME = "unresolved_mcf"
@@ -43,7 +45,7 @@ def read_gcs_path(config_path):
 
 
 def series_id_from_gcs(series_id_filename):
-    config_path =f"us_bls/ces/latest/{series_id_filename}"
+    config_path =f"{BASE_GCS_PATH}/{series_id_filename}"
     blob = read_gcs_path(config_path)
     file_contents = blob.download_as_text()
     match = re.search(r'series_id\s*=\s*(\[.*?\])', file_contents, re.DOTALL)
@@ -55,7 +57,7 @@ def series_id_from_gcs(series_id_filename):
 
 def get_api_key():
     try:
-        config_path = "us_bls/ces/latest/config.json"
+        config_path = f"{BASE_GCS_PATH}/config.json"
         blob = read_gcs_path(config_path)
         config_data = json.loads(blob.download_as_text())
         key = config_data.get("registrationkey")
@@ -89,7 +91,7 @@ def convert_to_raw_csv(download_folder):
                     time.sleep(0.7)
                 os.remove(input_file_path)
     except Exception as e:
-        logging.error(f"Error in convert_to_raw_csv: {e}")
+        logging.fatal(f"Error in convert_to_raw_csv: {e}")
 
 
 def process_raw_data_csv(download_folder):
@@ -124,7 +126,7 @@ def process_raw_data_csv(download_folder):
                                 logging.error(f"Row processing error: {e}")
                 os.remove(input_csv_filename)
     except Exception as e:
-        logging.error(f"Error in process_raw_data_csv: {e}")
+        logging.fatal(f"Error in process_raw_data_csv: {e}")
 
 
 def merge_all_csvs(folder_path):
@@ -171,7 +173,8 @@ def clear_folder(folder_path):
     except Exception as e:
         logging.error(f"Error in clear_folder: {e}")
 
-
+# Retry decorator: Retries 3 times, with a 2-second delay, doubling each retry
+@retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
 def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename):
     logging.info("Downloading started..")
     try:
@@ -229,7 +232,7 @@ def main(argv):
     logging.info("Start..")
     try:
         reg_key, bls_ces_url = get_api_key()
-        download_folder_name = _FLAGS.output_folder
+        download_folder_name = _FLAGS.input_folder
         if _FLAGS.place_type == "state":
             series_if_file_name = "state_series_id.py"
             download_data(download_folder_name, reg_key, bls_ces_url, series_if_file_name)
