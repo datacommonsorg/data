@@ -11,6 +11,8 @@ In the new page click on "More Formatting Options" and in the "Select view of th
 
 - years: 2015 5o 2025
 
+### How to download the data:
+`python3 download_bls_ces.py --place_type=<state or national> --input_folder=<output folder name> --source_folder=<source folder name>`
 
 ### How to run:
 
