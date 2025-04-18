@@ -20,5 +20,3 @@ rdp
 s2sphere
 tabula-py
 yapf
-xmltodict
-absl-py
