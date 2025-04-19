@@ -258,42 +258,54 @@
   "universePVs": [
     {
       "populationType": "Person",
-      "obs_props": { "mprop": "earnings"},
+      "obs_props": {
+        "mprop": "earnings"
+      },
       "dependentPVs": {
         "incomeStatus": "WithEarnings"
       }
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["maritalStatus"],
+      "constraintProperties": [
+        "maritalStatus"
+      ],
       "dependentPVs": {
         "age": "[15 - Years]"
       }
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["educationalAttainment"],
+      "constraintProperties": [
+        "educationalAttainment"
+      ],
       "dependentPVs": {
         "age": "[25 - Years]"
       }
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["schoolEnrollment"],
+      "constraintProperties": [
+        "schoolEnrollment"
+      ],
       "dependentPVs": {
         "age": "[3 - Years]"
       }
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["detailedLevelOfSchool"],
+      "constraintProperties": [
+        "detailedLevelOfSchool"
+      ],
       "dependentPVs": {
         "age": "[3 - Years]"
       }
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["veteranStatus"],
+      "constraintProperties": [
+        "veteranStatus"
+      ],
       "dependentPVs": {
         "age": "[18 - Years]",
         "armedForcesStatus": "Civilian"
@@ -301,21 +313,27 @@
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["placeOfBirth"],
+      "constraintProperties": [
+        "placeOfBirth"
+      ],
       "dependentPVs": {
         "nativity": "USC_ForeignBorn"
       }
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["employmentStatus"],
+      "constraintProperties": [
+        "employmentStatus"
+      ],
       "dependentPVs": {
         "age": "[16 - Years]"
       }
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["employment"],
+      "constraintProperties": [
+        "employment"
+      ],
       "dependentPVs": {
         "age": "[16 - Years]",
         "employmentStatus": "BLS_InLaborForce"
@@ -323,7 +341,9 @@
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["occupation"],
+      "constraintProperties": [
+        "occupation"
+      ],
       "dependentPVs": {
         "age": "[16 - Years]",
         "armedForcesStatus": "Civilian",
@@ -333,14 +353,16 @@
     },
     {
       "populationType": "Person",
-      "constraintProperties": ["dateOfEntry"],
+      "constraintProperties": [
+        "dateOfEntry"
+      ],
       "dependentPVs": {
         "nativity": "dcid:USC_ForeignBorn"
       }
     }
   ],
   "ignoreColumns": [
-    "id",
+    "Geography",
     "Geographic Area Name",
     "Per capita income (dollars)",
     "Percent of civilian labor force",
@@ -442,7 +464,121 @@
     "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
     "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
     "Margin of Error!!Military quarters/military ships MOE!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2017 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars)!!Male",
-    "Margin of Error!!Total group quarters population MOE!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars)!!Male"
+    "Margin of Error!!Total group quarters population MOE!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars)!!Male",
+    "Annotation of Estimate",
+    "Annotation of Margin of Error",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male",
+    "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female"
   ],
   "denominators": {
     "Estimate!!Adult correctional facilities!!DISABILITY STATUS!!Population 18 to 64 years": [
@@ -2292,12 +2428,14 @@
     "EMPLOYMENT STATUS",
     "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)",
     "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2018 INFLATION-ADJUSTED DOLLARS)",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2020 INFLATION-ADJUSTED DOLLARS)",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2021 INFLATION-ADJUSTED DOLLARS)",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2022 INFLATION-ADJUSTED DOLLARS)",
+    "INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)",
     "RESIDENCE 1 YEAR AGO",
     "PLACE OF BIRTH, NATIVITY AND CITIZENSHIP STATUS, AND YEAR OF ENTRY",
     "SEX AND AGE",
     "RACE AND HISPANIC ORIGIN OR LATINO ORIGIN",
     "VETERAN STATUS"
-
-
   ]
 }
