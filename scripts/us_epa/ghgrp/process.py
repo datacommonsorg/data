@@ -15,8 +15,9 @@
 
 import os
 import sys
-import unittest
 import csv
+from datetime import datetime
+from absl import app, logging
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
@@ -25,6 +26,7 @@ sys.path.append(
 from us_epa.ghgrp import download, gas, sources
 from us_epa.util import crosswalk as cw
 
+# Define constants
 _FACILITY_ID = 'Facility Id'
 _DCID = 'dcid'
 _SV = 'sv'
@@ -36,46 +38,91 @@ _OUT_PATH = 'import_data'
 
 
 def process_data(data_filepaths, crosswalk, out_filepath):
-    print(f'Writing to {out_filepath}')
-    with open(out_filepath, 'w') as out_fp:
-        csv_writer = csv.DictWriter(out_fp, fieldnames=_OUT_FIELDNAMES)
-        csv_writer.writeheader()
-        all_processed_facilities = {}  # map of year -> set(dcid)
-        for (year, filepath) in data_filepaths:
-            print(f'Processing {filepath}')
-            year_processed_facilities = all_processed_facilities.get(
-                year, set())
-            with open(filepath, 'r') as fp:
-                for row in csv.DictReader(fp):
-                    if not row[_FACILITY_ID]:
-                        continue
-                    dcid = crosswalk.get_dcid(row[_FACILITY_ID])
-                    assert dcid
-                    if dcid in year_processed_facilities:
-                        continue
-                    for key, value in row.items():
-                        if not value:
+    """Processes multiple CSV data files and writes the output to a single CSV file.
+    
+    Args:
+        data_filepaths (list of tuples): A list containing tuples of (year, file path).
+        crosswalk (Crosswalk): An instance of the Crosswalk class for mapping facility IDs.
+        out_filepath (str): The output file path where processed data will be stored.
+    
+    Returns:
+        None
+    """
+
+    logging.info(f'Writing to {out_filepath}')
+    try:
+        with open(out_filepath, 'w') as out_fp:
+            csv_writer = csv.DictWriter(out_fp, fieldnames=_OUT_FIELDNAMES)
+            csv_writer.writeheader()
+            all_processed_facilities = {}  # map of year -> set(dcid)
+            count = 0
+            for (year, filepath) in data_filepaths:
+                logging.info(f'Processing {filepath}')
+                year_processed_facilities = all_processed_facilities.get(
+                    year, set())
+                with open(filepath, 'r') as fp:
+                    for row in csv.DictReader(fp):
+                        if not row[_FACILITY_ID]:
                             continue
-                        sv = gas.col_to_sv(key)
-                        if not sv:
-                            sv = sources.col_to_sv(key)
-                            if not sv:
+                        dcid = crosswalk.get_dcid(row[_FACILITY_ID])
+                        assert dcid
+                        if dcid in year_processed_facilities:
+                            continue
+                        for key, value in row.items():
+                            if not value:
                                 continue
-                        csv_writer.writerow({
-                            _DCID: f'dcid:{dcid}',
-                            _SV: f'dcid:{sv}',
-                            _YEAR: year,
-                            _VALUE: value
-                        })
-                    year_processed_facilities.add(dcid)
-            all_processed_facilities[year] = year_processed_facilities
+                            sv = gas.col_to_sv(key)
+                            if not sv:
+                                sv = sources.col_to_sv(key)
+                                if not sv:
+                                    continue
+                            csv_writer.writerow({
+                                _DCID: f'dcid:{dcid}',
+                                _SV: f'dcid:{sv}',
+                                _YEAR: year,
+                                _VALUE: value
+                            })
+                        year_processed_facilities.add(dcid)
+                all_processed_facilities[year] = year_processed_facilities
+                count += 1
+            logging.info(f"Number of files processed:{count}")
+    except Exception as e:
+        logging.fatal(f"Aborting processing due to the error: {e}")
+
+
+def main(_):
+    try:
+        # Initialize downloader
+        url_year = datetime.now().year
+        downloader = download.Downloader('tmp_data', url_year)
+
+        # Extract all years
+        logging.info("Starting extraction of all years.")
+        files = downloader.extract_all_years()
+        logging.info(f"Extraction complete. Files: {files}")
+
+        # Generate and save crosswalk file
+        crosswalk_file = os.path.join(_SAVE_PATH, 'crosswalks.csv')
+        logging.info(f"Saving crosswalk file to: {crosswalk_file}")
+        downloader.save_all_crosswalks(crosswalk_file)
+        logging.info("Crosswalk file saved successfully.")
+
+        # Initialize Crosswalk
+        logging.info(
+            f"Initializing Crosswalk object with file: {crosswalk_file}")
+        crosswalk = cw.Crosswalk(crosswalk_file)
+
+        # Process data
+        output_file = os.path.join(_OUT_PATH, 'all_data.csv')
+        logging.info(f"Processing data and saving output to: {output_file}")
+        process_data(files, crosswalk, output_file)
+        logging.info("Data processing completed successfully.")
+
+    except FileNotFoundError as e:
+        logging.fatal(f"File not found: {e}")
+    except Exception as e:
+        logging.fatal(f"An unexpected error occurred: {e}")
 
 
 if __name__ == '__main__':
-    downloader = download.Downloader(_SAVE_PATH)
-    downloader.download_data()
-    files = downloader.extract_all_years()
-    crosswalk_file = os.path.join(_SAVE_PATH, 'crosswalks.csv')
-    downloader.save_all_crosswalks(crosswalk_file)
-    crosswalk = cw.Crosswalk(crosswalk_file)
-    process_data(files, crosswalk, os.path.join(_OUT_PATH, 'all_data.csv'))
+    app.run(main)
