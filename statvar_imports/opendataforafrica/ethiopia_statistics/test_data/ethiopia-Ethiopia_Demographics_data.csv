@@ -1,0 +1,100 @@
+Region,Variable,Units,2000,2005,2011
+Addis Ababa,"Regional Population Distribution, Male",%,,,45
+,"Regional Population Distribution, Female",%,,,55
+,"Place of Residence, Urban",%,,,100
+,"Gross Calories, All",kcal/capita/day,1829,1989,2237
+,"Gross Calories, Rural",kcal/capita/day,2117,2369,
+,"Gross Calories, Urban",kcal/capita/day,1824,1984,2237
+,"Net Calories, All",kcal/capita/day,,,2195
+,"Net Calories, Urban",kcal/capita/day,,,2195
+Ethiopia,"Regional Population Distribution, Male",%,,,49
+,"Regional Population Distribution, Female",%,,,51
+,"Place of Residence, Urban",%,,,17
+,"Place of Residence, Rural",%,,,83
+,"Gross Calories, All",kcal/capita/day,2211,2353,2455
+,"Gross Calories, Rural",kcal/capita/day,2292,2397,2479
+,"Gross Calories, Urban",kcal/capita/day,1738,2073,2337
+,"Net Calories, All",kcal/capita/day,,,2380
+,"Net Calories, Rural",kcal/capita/day,,,2400
+,"Net Calories, Urban",kcal/capita/day,,,2283
+Afar,"Regional Population Distribution, Male",%,,,52
+,"Regional Population Distribution, Female",%,,,48
+,"Place of Residence, Urban",%,,,29
+,"Place of Residence, Rural",%,,,71
+,"Gross Calories, All",kcal/capita/day,1743,1873,2364
+,"Gross Calories, Rural",kcal/capita/day,1617,1861,2352
+,"Gross Calories, Urban",kcal/capita/day,2337,1890,2392
+,"Net Calories, All",kcal/capita/day,,,2318
+,"Net Calories, Rural",kcal/capita/day,,,2303
+,"Net Calories, Urban",kcal/capita/day,,,2357
+Amhara,"Regional Population Distribution, Male",%,,,50
+,"Regional Population Distribution, Female",%,,,50
+,"Place of Residence, Urban",%,,,12
+,"Place of Residence, Rural",%,,,88
+,"Gross Calories, All",kcal/capita/day,2155,2058,2195
+,"Gross Calories, Rural",kcal/capita/day,2197,2067,2176
+,"Gross Calories, Urban",kcal/capita/day,1801,1966,2332
+,"Net Calories, All",kcal/capita/day,,,2145
+,"Net Calories, Rural",kcal/capita/day,,,2124
+,"Net Calories, Urban",kcal/capita/day,,,2293
+Benishangul-Gumuz,"Regional Population Distribution, Male",%,,,51
+,"Regional Population Distribution, Female",%,,,49
+,"Place of Residence, Urban",%,,,14
+,"Place of Residence, Rural",%,,,86
+,"Gross Calories, All",kcal/capita/day,2245,2099,2573
+,"Gross Calories, Rural",kcal/capita/day,2273,2113,2572
+,"Gross Calories, Urban",kcal/capita/day,1911,1993,2578
+,"Net Calories, All",kcal/capita/day,,,2487
+,"Net Calories, Rural",kcal/capita/day,,,2485
+,"Net Calories, Urban",kcal/capita/day,,,2498
+Dire Dawa,"Regional Population Distribution, Male",%,,,50
+,"Regional Population Distribution, Female",%,,,50
+,"Place of Residence, Urban",%,,,68
+,"Place of Residence, Rural",%,,,32
+,"Gross Calories, All",kcal/capita/day,1876,1990,2363
+,"Gross Calories, Rural",kcal/capita/day,2198,2255,2649
+,"Gross Calories, Urban",kcal/capita/day,1761,1861,2227
+,"Net Calories, All",kcal/capita/day,,,2322
+,"Net Calories, Rural",kcal/capita/day,,,2612
+,"Net Calories, Urban",kcal/capita/day,,,2185
+Gambela,"Regional Population Distribution, Male",%,,,48
+,"Regional Population Distribution, Female",%,,,52
+,"Place of Residence, Urban",%,,,32
+,"Place of Residence, Rural",%,,,68
+,"Gross Calories, All",kcal/capita/day,2177,2285,2660
+,"Gross Calories, Rural",kcal/capita/day,2285,,2824
+,"Gross Calories, Urban",kcal/capita/day,1809,,2310
+,"Net Calories, All",kcal/capita/day,,,2524
+,"Net Calories, Rural",kcal/capita/day,,,2663
+,"Net Calories, Urban",kcal/capita/day,,,2228
+Harari,"Regional Population Distribution, Male",%,,,47
+,"Regional Population Distribution, Female",%,,,53
+,"Place of Residence, Urban",%,,,47
+,"Place of Residence, Rural",%,,,53
+,"Gross Calories, All",kcal/capita/day,1967,2247,2515
+,"Gross Calories, Rural",kcal/capita/day,2304,2586,2739
+,"Gross Calories, Urban",kcal/capita/day,1730,1955,2267
+,"Net Calories, All",kcal/capita/day,,,2478
+,"Net Calories, Rural",kcal/capita/day,,,2709
+,"Net Calories, Urban",kcal/capita/day,,,2222
+Oromiya,"Regional Population Distribution, Male",%,,,50
+,"Regional Population Distribution, Female",%,,,50
+,"Place of Residence, Urban",%,,,13
+,"Place of Residence, Rural",%,,,87
+,"Gross Calories, All",kcal/capita/day,2257,2440,2475
+,"Gross Calories, Rural",kcal/capita/day,2344,2470,2501
+,"Gross Calories, Urban",kcal/capita/day,1588,2173,2307
+,"Net Calories, All",kcal/capita/day,,,2406
+,"Net Calories, Rural",kcal/capita/day,,,2429
+,"Net Calories, Urban",kcal/capita/day,,,2252
+"Southern Nations, Nationalities, and People's Region","Regional Population Distribution, Male",%,,,49
+,"Regional Population Distribution, Female",%,,,51
+,"Place of Residence, Urban",%,,,10
+,"Place of Residence, Rural",%,,,90
+,"Gross Calories, All",kcal/capita/day,2359,2728,2788
+,"Gross Calories, Rural",kcal/capita/day,2401,2770,2814
+,"Gross Calories, Urban",kcal/capita/day,1821,2272,2567
+,"Net Calories, All",kcal/capita/day,,,2654
+,"Net Calories, Rural",kcal/capita/day,,,2676
+,"Net Calories, Urban",kcal/capita/day,,,2463
+Somali,"Regional Population Distribution, Male",%,,,51
