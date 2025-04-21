@@ -24,9 +24,5 @@
 #### Processing
 If processing from current import folder :
 
-`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=data/statvar_imports/fbi/fbigovcrime/download_folder/input_files/* --config_file=data/statvar_imports/fbi/fbigovcrime/fbigovcrime_metadata.csv --output_path=data/statvar_imports/fbi/fbigovcrime/output/fbi_gov_crime`
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=download_folder/input_files/* --pv_map=fbigovcrime_pvmap.csv --config_file=fbigovcrime_metadata.csv --output_path=output/fbi_gov_crime`
 
-
-If processing from statvar_importer folder :
-
-`python3 stat_var_processor.py --input_data=data/statvar_imports/fbi/fbigovcrime/download_files/input_files/* --pv_map=data/statvar_imports/fbi/fbigovcrime/fbigovcrime_pvmap.csv --config_file=data/statvar_imports/fbi/fbigovcrime/fbigovcrime_metadata.csv --output_path=data/statvar_imports/fbi/fbigovcrime/output/fbi_gov_crime`
