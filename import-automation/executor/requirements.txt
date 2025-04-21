@@ -5,14 +5,11 @@ arcgis2geojson
 beautifulsoup4
 chardet
 croniter
-chromedriver_py
 dataclasses
 datacommons
 db-dtypes
 frozendict
-fsspec
 func-timeout
-gcsfs
 geojson
 google-auth
 google-cloud-bigquery
@@ -21,6 +18,7 @@ google-cloud-run
 google-cloud-storage
 google-cloud-logging
 google-cloud-scheduler
+google-generativeai
 gspread
 gunicorn
 lxml
@@ -38,10 +36,9 @@ ratelimit
 requests
 requests_cache
 retry
-selenium
+sentence-transformers
 shapely
 urllib3
-webdriver_manager
 xarray
 xlrd
 xlsxwriter

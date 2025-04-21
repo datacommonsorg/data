@@ -298,6 +298,10 @@ def sample_csv_file(input_file: str,
 
 
 def get_default_config() -> dict:
+    """Returns a dictionary of config parameter values from flags."""
+    # Use default values of flags for tests
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     return {
         'sampler_rate': _FLAGS.sampler_rate,
         'sampler_input': _FLAGS.sampler_input,
