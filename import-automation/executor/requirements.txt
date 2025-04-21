@@ -35,6 +35,7 @@ ratelimit
 requests
 requests_cache
 retry
+sentence-transformers
 shapely
 urllib3
 xarray
