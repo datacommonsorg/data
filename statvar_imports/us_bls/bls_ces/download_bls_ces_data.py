@@ -231,32 +231,34 @@ def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename
 
 def main(argv):
     logging.info("Start..")
-    # try:
-    reg_key, bls_ces_url = get_api_key()
-    source_data_folder = _FLAGS.source_folder
-    if not os.path.exists(source_data_folder):
-            os.makedirs(source_data_folder)
-    download_folder_name = _FLAGS.input_folder
-    if _FLAGS.place_type == "state":
-        series_if_file_name = "state_series_id.py"
-        download_data(download_folder_name, reg_key, bls_ces_url, series_if_file_name)
-        convert_to_raw_csv(download_folder_name, source_data_folder)
-        process_raw_data_csv(download_folder_name)
-        merge_all_csvs(download_folder_name)
-        logging.info("Completed...")
+    try:
+        reg_key, bls_ces_url = get_api_key()
+        source_data_folder = _FLAGS.source_folder
+        if not os.path.exists(source_data_folder):
+                os.makedirs(source_data_folder)
+        else:
+            clear_folder(source_data_folder)
+        download_folder_name = _FLAGS.input_folder
+        if _FLAGS.place_type == "state":
+            series_if_file_name = "state_series_id.py"
+            download_data(download_folder_name, reg_key, bls_ces_url, series_if_file_name)
+            convert_to_raw_csv(download_folder_name, source_data_folder)
+            process_raw_data_csv(download_folder_name)
+            merge_all_csvs(download_folder_name)
+            logging.info("Completed...")
 
-    elif _FLAGS.place_type == "national":
-        series_if_file_name = "national_series_id.py"
-        download_data(download_folder_name, reg_key, bls_ces_url, series_if_file_name)
-        convert_to_raw_csv(download_folder_name, source_data_folder)
-        merge_all_csvs(download_folder_name)
-        logging.info("Completed...")
+        elif _FLAGS.place_type == "national":
+            series_if_file_name = "national_series_id.py"
+            download_data(download_folder_name, reg_key, bls_ces_url, series_if_file_name)
+            convert_to_raw_csv(download_folder_name, source_data_folder)
+            merge_all_csvs(download_folder_name)
+            logging.info("Completed...")
 
-    else:
-        logging.info("Place type must be either state or national")
+        else:
+            logging.info("Place type must be either state or national")
     
-    # except Exception as e:
-    #     logging.error(f"Main function error: {e}")
+    except Exception as e:
+        logging.error(f"Main function error: {e}")
 
 
 if __name__ == '__main__':
