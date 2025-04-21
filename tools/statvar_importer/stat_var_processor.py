@@ -2992,7 +2992,7 @@ def main(_):
         StatVarDataProcessor,
         input_data=_FLAGS.input_data,
         output_path=_FLAGS.output_path,
-        config=_FLAGS.config,
+        config=_FLAGS.config_file,
         pv_map_files=_FLAGS.pv_map,
         parallelism=_FLAGS.parallelism,
     )

@@ -35,7 +35,12 @@
                     "cleaned_csv": "output_files/events_spi_9m_polygon/event_svobs/drought_spi_9m_polygon_svobs.csv"
                 }
             ],
-            "cron_schedule": "0 9 * * 2"
+            "cron_schedule": "0 9 * * 2",
+            "user_script_timeout": 7200,
+            "resource_limits": {
+                "cpu": "8",
+                "memory": "32G"
+            }
         }
     ]
 }
