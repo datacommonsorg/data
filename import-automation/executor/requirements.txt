@@ -18,6 +18,7 @@ google-cloud-run
 google-cloud-storage
 google-cloud-logging
 google-cloud-scheduler
+google-generativeai
 gspread
 gunicorn
 lxml
