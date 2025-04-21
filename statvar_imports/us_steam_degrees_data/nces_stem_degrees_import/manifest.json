@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "NCES_STEM_Degrees_Import",
+        "curator_emails": [
+          ""
+        ],
+        "provenance_url": "https://nces.ed.gov/programs/digest/d22/tables/dt22_318.45.asp",
+        "provenance_description": "NCES STEM Degrees Dataset",
+        "scripts": [
+          "download_script.py",
+          "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --statvar_dcid_remap_csv=dcid_remap.csv --output_path=test_data/output"
+        ],
+        "source_files": [
+         "source_files/*.xlsx"
+      ],
+        "import_inputs": [
+          {
+            "template_mcf": "test_data/output.tmcf",
+            "cleaned_csv": "test_data/output.csv"
+          }
+        ],
+        "cron_schedule": "0 05 4,18 * *"
+      }
+    ]
+  }
