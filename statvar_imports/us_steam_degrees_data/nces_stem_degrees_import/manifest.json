@@ -3,7 +3,7 @@
       {
         "import_name": "NCES_STEM_Degrees_Import",
         "curator_emails": [
-          ""
+          "support@datacommons.org"
         ],
         "provenance_url": "https://nces.ed.gov/programs/digest/d22/tables/dt22_318.45.asp",
         "provenance_description": "NCES STEM Degrees Dataset",
