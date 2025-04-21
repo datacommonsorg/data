@@ -252,6 +252,9 @@ class SemanticMatcher:
 
 def get_semantic_matcher_default_config() -> dict:
     """Get default config for semantic_matcher."""
+    # Use default values of flags for tests
+    if not _FLAGS.is_parsed():
+        _FLAGS.mark_as_parsed()
     return {
         'embeddings_model': _FLAGS.semantic_matcher_model,
         'semantic_matcher_cache': _FLAGS.semantic_matcher_cache,
