@@ -4,12 +4,15 @@ absl-py
 arcgis2geojson
 beautifulsoup4
 chardet
+chromedriver_py
 croniter
 dataclasses
 datacommons
 db-dtypes
 frozendict
+fsspec
 func-timeout
+gcsfs
 geojson
 google-auth
 google-cloud-bigquery
@@ -36,9 +39,11 @@ ratelimit
 requests
 requests_cache
 retry
+selenium
 sentence-transformers
 shapely
 urllib3
+webdriver_manager
 xarray
 xlrd
 xlsxwriter
