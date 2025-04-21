@@ -32,8 +32,7 @@ import utils
 import file_util
 
 flags.DEFINE_string(
-    'config_file',
-    'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
+    'config_file', 'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
     'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
@@ -141,7 +140,7 @@ def main(argv):
             xls_file_path = config['path']
             logging.info(f"Processing : {xls_file_path}")
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
-            read_file = pd.read_excel(xls_file_path, **config['args'])
+            read_file = pd.read_excel(xls_file_path,**config['args'])
             read_file = _clean_dataframe(read_file)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, index=None, header=True)

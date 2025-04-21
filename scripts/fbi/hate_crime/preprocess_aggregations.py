@@ -26,12 +26,10 @@ from absl import app
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
-    'input',
-    'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/input_files/hate_crime.csv',
+    'input', 'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/input_files/hate_crime.csv',
     'Input csv file from https://cde.ucr.cjis.gov/LATEST/webapp/#')
 flags.DEFINE_string(
-    'config_file',
-    'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/config.json',
+    'config_file', 'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/config.json',
     'Input config file')
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -1738,9 +1736,8 @@ def _write_to_csv(df: pd.DataFrame, csv_file_name: str):
     """
     df['Place'].replace('', np.nan, inplace=True)
     df.dropna(subset=['Place'], inplace=True)
-    df = df.sort_values("Value")  #Getting error Sanity_InconsistentSvObsValues
-    df = df.drop_duplicates(subset=['DATA_YEAR', 'Place', 'StatVar'],
-                            keep='last')
+    df = df.sort_values("Value") #Getting error Sanity_InconsistentSvObsValues
+    df = df.drop_duplicates(subset=['DATA_YEAR','Place','StatVar'],keep='last')
     df.to_csv(csv_file_name, index=False)
 
 
@@ -1750,12 +1747,14 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
     global _SCRIPT_PATH, _INPUT_COLUMNS, _AGGREGATIONS
     # input_csv = os.path.expanduser(input_csv)
     output_path = os.path.expanduser(output_path)
-    logging.info(f'Processing input: {_FLAGS.input}')
+    logging.info(
+            f'Processing input: {_FLAGS.input}')
     with file_util.FileIO(_FLAGS.input, 'r') as input_f:
         df = pd.read_csv(input_f)
     df.columns = df.columns.str.upper()
     df = df[_INPUT_COLUMNS]
-    logging.info(f'Loading config: {_FLAGS.config_file}')
+    logging.info(
+        f'Loading config: {_FLAGS.config_file}')
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         config = json.load(f)
 

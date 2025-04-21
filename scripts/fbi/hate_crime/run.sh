@@ -1,24 +1,11 @@
 #Running the process scripts for all the publication tables
-echo "Starting the processing"
-python3 table1/preprocess.py
-python3 table2/preprocess.py
-python3 table3/preprocess.py
-python3 table4/preprocess.py
-python3 table5/preprocess.py
-python3 table6/preprocess.py
-python3 table7/preprocess.py
-python3 table8/preprocess.py
-python3 table9/preprocess.py
-python3 table10/preprocess.py
-python3 table11/preprocess.py
-python3 table12/preprocess.py
-python3 table13/preprocess.py
-python3 table14/preprocess.py
+set -e
+echo "Starting the combining"
 
 
 #As the table1 to table10 is imported as single table, moving and combining the files in those folders to new table1-10 folder
 output_dir="tables1-10"
-output_file="$output_dir/all_combined.csv"
+output_file="$output_dir/t1tot10_combined.csv"
 tmcf_file="table1/output.tmcf"
 
 # Create the output directory if it doesn't exist
@@ -52,9 +39,9 @@ done
 
 # Copy the tmcf file
 if [[ -f "$tmcf_file" ]]; then
-    cp "$tmcf_file" "$output_dir/output.tmcf"
+    cp "$tmcf_file" "$output_dir/t1tot10.tmcf"
     if [[ $? -eq 0 ]]; then
-      echo "Copied $tmcf_file to $output_dir/output.tmcf"
+      echo "Copied $tmcf_file to $output_dir/t1tot10.tmcf"
     else
       echo "Error copying $tmcf_file"
       exit 1
