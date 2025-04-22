@@ -18,3 +18,6 @@
 
 ## If place resolution is involved,use:
 ` --places_resolved_csv=data/statvar_imports/opendataforafrica/rwanda_census/places_resolved_csv.csv` along with the remaining command.
+
+## If statvar remap is involved,use:
+` --statvar_dcid_remap_csv=data/statvar_imports/opendataforafrica/rwanda_census/edvtatd_statvar_remap.csv` along with the remaining command for that particular file.
