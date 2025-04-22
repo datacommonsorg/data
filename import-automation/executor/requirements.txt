@@ -50,3 +50,4 @@ xlrd
 xlsxwriter
 zipp
 netCDF4
+xmltodict
