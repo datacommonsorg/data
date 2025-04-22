@@ -444,22 +444,29 @@ class ImportExecutor:
                         )
         return validation_status
 
-    def _invoke_import_job(self, absolute_import_dir: str, import_spec: dict,
-                           version: str, interpreter_path: str,
-                           process: subprocess.CompletedProcess) -> None:
-        script_paths = import_spec.get('scripts')
-        mount_path = os.path.join(self.config.gcs_volume_mount_dir, import_name)
+    def _create_mount_point(self, gcs_volume_mount_dir: str,
+                            cleanup_gcs_volume_mount: bool,
+                            absolute_import_dir: str, import_name: str) -> None:
+        mount_path = os.path.join(gcs_volume_mount_dir, import_name)
         out_path = os.path.join(absolute_import_dir, 'gcs_output')
         logging.info(f'Mount path: {mount_path}, Out path: {out_path}')
-        if self.config.cleanup_gcs_volume_mount and os.path.exists(mount_path):
+        if cleanup_gcs_volume_mount and os.path.exists(mount_path):
             shutil.rmtree(mount_path)
         if os.path.lexists(out_path):
             os.unlink(out_path)
         os.makedirs(mount_path, exist_ok=True)
         os.symlink(mount_path, out_path, target_is_directory=True)
+
+    def _invoke_import_job(self, absolute_import_dir: str, import_spec: dict,
+                           version: str, interpreter_path: str,
+                           process: subprocess.CompletedProcess) -> None:
+        script_paths = import_spec.get('scripts')
+        import_name = import_spec['import_name']
+        self._create_mount_point(self.config.gcs_volume_mount_dir,
+                                 self.config.cleanup_gcs_volume_mount,
+                                 absolute_import_dir, import_name)
         for path in script_paths:
             script_path = os.path.join(absolute_import_dir, path)
-            import_name = import_spec['import_name']
             simple_job = cloud_run_simple_import.get_simple_import_job_id(
                 import_spec, script_path)
             if simple_job:
