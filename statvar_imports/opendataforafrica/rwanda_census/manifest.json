@@ -21,67 +21,43 @@
             "import_inputs": [
                 {
                     "template_mcf": "output/edvtatd.tmcf",
-                    "cleaned_csv": "output/edvtatd.csv",
-                    "source_files": [
-                        "input_files/edvtatd.csv"
-                    ]
+                    "cleaned_csv": "output/edvtatd.csv"
                 },
                 {
                     "template_mcf": "output/eoefmac.tmcf",
-                    "cleaned_csv": "output/eoefmac.csv",
-                    "source_files": [
-                        "input_files/eoefmac.csv"
-                    ]
+                    "cleaned_csv": "output/eoefmac.csv"
                 },
                 {
                     "template_mcf": "output/hivlaeg.tmcf",
-                    "cleaned_csv": "output/hivlaeg.csv",
-                    "source_files": [
-                        "input_files/hivlaeg.csv"
-                    ]
+                    "cleaned_csv": "output/hivlaeg.csv"
                 },
                 {
                     "template_mcf": "output/kbadgkf.tmcf",
-                    "cleaned_csv": "output/kbadgkf.csv",
-                    "source_files": [
-                        "input_files/kbadgkf.csv"
-                    ]
+                    "cleaned_csv": "output/kbadgkf.csv"
                 },
                 {
                     "template_mcf": "output/mnoirpd.tmcf",
-                    "cleaned_csv": "output/mnoirpd.csv",
-                    "source_files": [
-                        "input_files/mnoirpd.csv"
-                    ]
+                    "cleaned_csv": "output/mnoirpd.csv"
                 },
                 {
                     "template_mcf": "output/shdirje.tmcf",
-                    "cleaned_csv": "output/shdirje.csv",
-                    "source_files": [
-                        "input_files/shdirje.csv"
-                    ]
+                    "cleaned_csv": "output/shdirje.csv"
                 },
                 {
                     "template_mcf": "output/uymcezb.tmcf",
-                    "cleaned_csv": "output/uymcezb.csv",
-                    "source_files": [
-                        "input_files/uymcezb.csv"
-                    ]
+                    "cleaned_csv": "output/uymcezb.csv"
                 },
                 {
                     "template_mcf": "output/vafqyfg.tmcf",
-                    "cleaned_csv": "output/vafqyfg.csv",
-                    "source_files": [
-                        "input_files/vafqyfg.csv"
-                    ]
+                    "cleaned_csv": "output/vafqyfg.csv"
                 },
                 {
                     "template_mcf": "output/ztaoyl.tmcf",
-                    "cleaned_csv": "output/ztaoyl.csv",
-                    "source_files": [
-                        "input_files/ztaoyl.csv"
-                    ]
+                    "cleaned_csv": "output/ztaoyl.csv"
                 }
+            ],
+            "source_files": [
+                "input_files/*.csv"
             ],
             "cron_schedule": "30 05 * * 1"
         }
