@@ -16,6 +16,7 @@ import zipfile
 import io, os, config
 import logging
 import pandas as pd
+from retry import retry
 
 # Create a logger
 logger = logging.getLogger(__name__)
@@ -27,6 +28,13 @@ logger.addHandler(handler)
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, "input_files")
+
+
+@retry(tries=3, delay=5, backoff=2)
+def download_with_retry_method(url, headers=None):
+    response = requests.get(url, stream=True)
+    response.raise_for_status()
+    return response
 
 def download_files(urls, excel_file, output_path):
     """Downloads zip files from URLs, unzips them, and copies an Excel file to the output path.
@@ -41,8 +49,7 @@ def download_files(urls, excel_file, output_path):
 
         for url in urls:
             try:
-                response = requests.get(url, stream=True)
-                response.raise_for_status()
+                response = download_with_retry_method(url)
 
                 with zipfile.ZipFile(io.BytesIO(response.content)) as zip_file:
                     for file_info in zip_file.infolist():
