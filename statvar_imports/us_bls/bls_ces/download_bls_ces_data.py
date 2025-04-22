@@ -255,10 +255,10 @@ def main(argv):
             logging.info("Completed...")
 
         else:
-            logging.info("Place type must be either state or national")
+            logging.fatal("Place type must be either state or national")
     
     except Exception as e:
-        logging.error(f"Main function error: {e}")
+        logging.fatal(f"Main function error: {e}")
 
 
 if __name__ == '__main__':
