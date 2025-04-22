@@ -46,6 +46,7 @@ def read_gcs_path(config_path):
 
 
 def series_id_from_gcs(series_id_filename):
+    logging.info("Getting series ids from gcs")
     config_path =f"{BASE_GCS_PATH}/{series_id_filename}"
     blob = read_gcs_path(config_path)
     file_contents = blob.download_as_text()
@@ -173,6 +174,7 @@ def clear_folder(folder_path):
                         logging.error(f"Error while clearing {file_path}: {e}")
     except Exception as e:
         logging.error(f"Error in clear_folder: {e}")
+        
 
 # Retry decorator: Retries 3 times, with a 2-second delay, doubling each retry
 @retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
