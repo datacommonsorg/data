@@ -27,5 +27,5 @@ Notes: Files will be downloaded inside "input_files" folder.
 
 #### Process the data:
 
-`python3 stat_var_processor.py --input_data=/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/input_files/* --pv_map=/data/statvar_imports/us_hbcu_data/nces_hbcu_enrollment_import/nces_hbcu_pvmap.csv --config_file=/data/statvar_imports/us_hbcu_data/nces_hbcu_enrollment_import/nces_hbcu_metadata.csv --output_path='/data/statvar_imports/us_hbcu_data/nces_hbcu_enrollment_import/output_files/CurrencyFAO_output'`
+`python3 stat_var_processor.py --input_data=/data/statvar_imports/fao_currency_and_exchange_rate/fao_currency_statvar/input_files/* --pv_map=/data/statvar_imports/us_hbcu_data/nces_hbcu_enrollment_import/nces_hbcu_pvmap.csv --config_file=/data/statvar_imports/us_hbcu_data/nces_hbcu_enrollment_import/nces_hbcu_metadata.csv --output_path='/data/statvar_imports/us_hbcu_data/nces_hbcu_enrollment_import/output_files/nces_hbcu_output'`
 
