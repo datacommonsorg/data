@@ -881,8 +881,8 @@ def _county_latest(file_path: str) -> pd.DataFrame:
                 4: '2022',
                 5: '2023',
                 6: '2024',
-                7: '2025',
-                8: '2026',
+                7: '2030',
+                8: '2030',
                 9: '2027',
                 10: '2028',
                 11: '2029'
@@ -1179,7 +1179,7 @@ def download_files():
         is_file_downloaded = False
         while is_file_downloaded == False:
             try:
-                with session.get(url, stream=True) as response:
+                with session.get(url, stream=True, timeout=120) as response:
                     response.raise_for_status()
                     if response.status_code == 200:
                         with open(
