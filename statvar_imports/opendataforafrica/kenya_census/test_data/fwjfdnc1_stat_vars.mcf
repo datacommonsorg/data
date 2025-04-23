@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/rbhande/data/statvar_imports/opendataforafrica/kenya_census/input_files/fwjfdnc.csv --pv_map=/usr/local/google/home/rbhande/data/statvar_imports/opendataforafrica/kenya_census/fwjfdnc_pvmap.csv --config_file=/usr/local/google/home/rbhande/data/statvar_imports/opendataforafrica/kenya_census/fwjfdnc_metadata.csv --output_path=/usr/local/google/home/rbhande/data/statvar_imports/opendataforafrica/kenya_census/test_data/fwjfdnc1" on 2025-04-23 10:09:03.765865
-
 Node: dcid:Area_LandCover_Urban
 typeOf: dcid:StatisticalVariable
 populationType: dcid:LandCover
