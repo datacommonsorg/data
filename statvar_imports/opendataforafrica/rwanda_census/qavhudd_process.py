@@ -12,6 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+'''
+The script is created for one particular file in rwanda dataset.
+File name: 'qavhudd'
+The data is for lower level geos and the places to be mapped come from two
+different columns.
+Hence creating a new column based on the available of the two columns
+'''
+
 import pandas as pd
 import numpy as np
 
