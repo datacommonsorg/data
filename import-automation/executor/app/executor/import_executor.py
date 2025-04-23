@@ -62,7 +62,7 @@ _SEE_LOGS_MESSAGE = (
 _IMPORT_METADATA_MCF_TEMPLATE = """
 Node: dcid:dc/base/{import_name}
 typeOf: dcid:Provenance
-lastDataRefeshDate: "{last_data_refresh_date}"
+lastDataRefreshDate: "{last_data_refresh_date}"
 """
 
 
