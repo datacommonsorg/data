@@ -8,7 +8,7 @@
             "provenance_url": "https://rwanda.opendataforafrica.org/",
             "provenance_description": "",
             "scripts": [
-                "../../../scripts/opendataafrica/download_folder/download.sh 'rwanda' 'edvtatd,eoefmac,hivlaeg,kbadgkf,kwekfdd,mnoirpd,shdirje,uymcezb,vafqyfg,ztaoyl' 'statvar_imports/opendataforafrica/rwanda_census/input_files/'",
+                "../../../scripts/opendataafrica/download_folder/download.sh 'rwanda' 'edvtatd,eoefmac,hivlaeg,kbadgkf,kwekfdd,mnoirpd,shdirje,uymcezb,vafqyfg,ztaoyl,qavhudd' 'statvar_imports/opendataforafrica/rwanda_census/input_files/'",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/edvtatd.csv --pv_map=edvtatd_pv_map.csv --config_file=edvtatd_metadata.csv --output_path=output/edvtatd --statvar_dcid_remap_csv=edvtatd_statvar_remap.csv",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/eoefmac.csv --pv_map=eoefmac_pv_map.csv --config_file=eoefmac_metadata.csv --output_path=output/eoefmac",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/hivlaeg.csv --pv_map=hivlaeg_pv_map.csv --config_file=hivlaeg_metadata.csv --output_path=output/hivlaeg",
@@ -18,7 +18,9 @@
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/shdirje.csv --pv_map=shdirje_pv_map.csv --config_file=shdirje_metadata.csv --output_path=output/shdirje",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/uymcezb.csv --pv_map=uymcezb_pv_map.csv --config_file=uymcezb_metadata.csv --output_path=output/uymcezb",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/vafqyfg.csv --pv_map=vafqyfg_pv_map.csv --config_file=vafqyfg_metadata.csv --output_path=output/vafqyfg",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ztaoyl.csv --pv_map=ztaoyl_pv_map.csv --config_file=ztaoyl_metadata.csv --output_path=output/ztaoyl"
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ztaoyl.csv --pv_map=ztaoyl_pv_map.csv --config_file=ztaoyl_metadata.csv --output_path=output/RWA-ztaoyl",
+                "qavhudd_process.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/qavhudd_modified.csv --pv_map=qavhudd_pv_map.csv --config_file=qavhudd_metadata.csv --places_resolved_csv=places_resolved_csv.csv --output_path=output/qavhudd"
             ],
             "import_inputs": [
                 {
@@ -56,6 +58,10 @@
                 {
                     "template_mcf": "output/ztaoyl.tmcf",
                     "cleaned_csv": "output/ztaoyl.csv"
+                },
+                {
+                    "template_mcf": "output/qavhudd.tmcf",
+                    "cleaned_csv": "output/qavhudd.csv"
                 }
             ],
             "source_files": [
