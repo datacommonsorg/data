@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"path"
@@ -18,7 +17,7 @@ var (
 
 func init() {
 	var err error
-	tmpDir, err = ioutil.TempDir("", "sharding_writer_test")
+	tmpDir, err = os.MkdirTemp("", "sharding_writer_test")
 	if err != nil {
 		log.Fatalf("unable to create temporary directory for tests")
 	}
@@ -303,7 +302,7 @@ func cmpBytes(t *testing.T, label string, a, b []byte) {
 // checkFileBeginEndContents checks that a file begins and ends with the expected values.
 func checkFileBeginEndContents(t *testing.T, testPath, filename string, begins, ends []byte) {
 	fn := makeFilename(testPath, filename)
-	contents, err := ioutil.ReadFile(fn)
+	contents, err := os.ReadFile(fn)
 	if err != nil {
 		t.Errorf("error reading %q for content checks: %v", fn, err)
 	}
@@ -371,7 +370,10 @@ func TestWriterWrite(t *testing.T) {
 		}
 
 		// Close the writer to ensure it's all saved.
-		w.Close()
+		closeErr := w.Close()
+		if closeErr != nil {
+			log.Printf("ERROR: failed to close writer: %v", err)
+		}
 
 		// Now perform the various checks of the outputs.
 		checkExpectedNumShards(t, test.path, test.wantNumShards)
@@ -523,7 +525,10 @@ func TestWriterWriteString(t *testing.T) {
 		}
 
 		// Close the writer to ensure it's all saved.
-		w.Close()
+		closeErr := w.Close()
+		if closeErr != nil {
+			log.Printf("ERROR: failed to close writer: %v", err)
+		}
 
 		// Now perform the various checks of the outputs.
 		checkExpectedNumShards(t, test.path, test.wantNumShards)
