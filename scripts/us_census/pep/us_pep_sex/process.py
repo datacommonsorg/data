@@ -1179,7 +1179,7 @@ def download_files():
         is_file_downloaded = False
         while is_file_downloaded == False:
             try:
-                with session.get(url, stream=True) as response:
+                with session.get(url, stream=True, timeout=120) as response:
                     response.raise_for_status()
                     if response.status_code == 200:
                         with open(

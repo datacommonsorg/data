@@ -2,10 +2,11 @@
   "import_specifications": [
     {
       "import_name": "USCensusPEP_Sex",
-      "curator_emails": ["kuru@google.com"],
+      "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
       "provenance_description": "US Census Population Estimates Program (PEP).",
       "scripts": ["process.py"],
+      "source_files": ["input_files/*"],
       "import_inputs": [
         {
           "template_mcf": "output/population_estimate_sex.tmcf",

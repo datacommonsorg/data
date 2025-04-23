@@ -135,7 +135,7 @@ def download(DOWNLOAD_DIRECTORY):
 extracted_files_path = []
 
 def extract_zip_files(download_directory):
-  zip_file_pattern = "offenses-known-to-le-\d{4}.zip"  # Pattern for ZIP files
+  zip_file_pattern = 'offenses-known-to-le\\-\\d{4}.zip'  # Pattern for ZIP files
   try:
     for filename in os.listdir(download_directory):
       if filename.endswith(".zip") and zipfile.is_zipfile(os.path.join(download_directory, filename)):
@@ -220,7 +220,7 @@ def clean_state_column(file_path):
         for i in range(city_row_index+1,len(df)):
           value =  str(df.iloc[i,CITY_COLUMN])
           if value and value[-1].isdigit():
-            cleaned_value = re.sub(r"[^a-zA-Z\s]+$", "", value)  # Remove non-alphanumeric from end
+            cleaned_value = re.sub(r'[^a-zA-Z\s]+$', '', value)  # Remove non-alphanumeric from end
             df.iloc[i, CITY_COLUMN] = cleaned_value
 
     df.iloc[city_row_index,CITY_COLUMN] = 'City_Name' 
