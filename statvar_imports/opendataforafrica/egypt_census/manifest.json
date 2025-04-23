@@ -1,0 +1,111 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Egypt_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://egypt.opendataforafrica.org/",
+            "provenance_description": "",
+            "scripts": [
+                "../../../scripts/opendataafrica/download_folder/download.sh 'egypt' 'xovpotd,mptocre,ulouknf,pqpump,wcssteb,zkjifzd,actytif,bluhqme,txbrrac,wtxyghf,zpdksog,viytqvf,ujtdaag,cjczlcd,szfufmb,lxoyale,behvqtc,colyoac' 'statvar_imports/opendataforafrica/egypt_census/input_files/'",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/xovpotd.csv --pv_map=xovpotd_pv_map.csv --config_file=xovpotd_metadata.csv --output_path=output/xovpotd --statvar_dcid_remap_csv=xovpotd_statvar_remap.csv --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/mptocre.csv --pv_map=mptocre_pv_map.csv --config_file=mptocre_metadata.csv --output_path=output/mptocre --statvar_dcid_remap_csv=mptocre_statvar_remap.csv --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ulouknf.csv --pv_map=ulouknf_pv_map.csv --config_file=ulouknf_metadata.csv --output_path=output/ulouknf --statvar_dcid_remap_csv=ulouknf_statvar_remap.csv --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/pqpump.csv --pv_map=pqpump_pv_map.csv --config_file=pqpump_metadata.csv --output_path=output/pqpump --statvar_dcid_remap_csv=pqpump_statvar_remap.csv --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wcssteb.csv --pv_map=wcssteb_pv_map.csv --config_file=wcssteb_metadata.csv --output_path=output/wcssteb --statvar_dcid_remap_csv=wcssteb_statvar_remap.csv --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/zkjifzd.csv --pv_map=zkjifzd_pv_map.csv --config_file=zkjifzd_metadata.csv --output_path=output/zkjifzd --statvar_dcid_remap_csv=zkjifzd_statvar_remap.csv --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/actytif.csv --pv_map=actytif_pv_map.csv --config_file=actytif_metadata.csv --output_path=output/actytif --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/bluhqme.csv --pv_map=bluhqme_pv_map.csv --config_file=bluhqme_metadata.csv --output_path=output/bluhqme --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/txbrrac.csv --pv_map=txbrrac_pv_map.csv --config_file=txbrrac_metadata.csv --output_path=output/txbrrac --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wtxyghf.csv --pv_map=wtxyghf_pv_map.csv --config_file=wtxyghf_metadata.csv --output_path=output/wtxyghf --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/zpdksog.csv --pv_map=zpdksog_pv_map.csv --config_file=zpdksog_metadata.csv --output_path=output/zpdksog --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/viytqvf.csv --pv_map=viytqvf_pv_map.csv --config_file=viytqvf_metadata.csv --output_path=output/viytqvf --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ujtdaag.csv --pv_map=ujtdaag_pv_map.csv --config_file=ujtdaag_metadata.csv --output_path=output/ujtdaag --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/cjczlcd.csv --pv_map=cjczlcd_pv_map.csv --config_file=cjczlcd_metadata.csv --output_path=output/cjczlcd --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/szfufmb.csv --pv_map=szfufmb_pv_map.csv --config_file=szfufmb_metadata.csv --output_path=output/szfufmb --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/lxoyale.csv --pv_map=lxoyale_pv_map.csv --config_file=lxoyale_metadata.csv --output_path=output/lxoyale --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/behvqtc.csv --pv_map=behvqtc_pv_map.csv --config_file=behvqtc_metadata.csv --output_path=output/behvqtc --places_resolved_csv=Egypt_Place_Resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/colyoac.csv --pv_map=colyoac_pv_map.csv --config_file=colyoac_metadata.csv --output_path=output/colyoac --places_resolved_csv=Egypt_Place_Resolved.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/xovpotd.tmcf",
+                    "cleaned_csv": "output/xovpotd.csv"
+                },
+               {
+                    "template_mcf": "output/mptocre.tmcf",
+                    "cleaned_csv": "output/mptocre.csv"
+                },
+               {
+                    "template_mcf": "output/ulouknf.tmcf",
+                    "cleaned_csv": "output/ulouknf.csv"
+                },
+               {
+                    "template_mcf": "output/pqpump.tmcf",
+                    "cleaned_csv": "output/pqpump.csv"
+                },
+               {
+                    "template_mcf": "output/wcssteb.tmcf",
+                    "cleaned_csv": "output/wcssteb.csv"
+                },
+               {
+                    "template_mcf": "output/zkjifzd.tmcf",
+                    "cleaned_csv": "output/zkjifzd.csv"
+                },
+               {
+                    "template_mcf": "output/actytif.tmcf",
+                    "cleaned_csv": "output/actytif.csv"
+                },
+               {
+                    "template_mcf": "output/bluhqme.tmcf",
+                    "cleaned_csv": "output/bluhqme.csv"
+                },
+               {
+                    "template_mcf": "output/txbrrac.tmcf",
+                    "cleaned_csv": "output/txbrrac.csv"
+                },
+               {
+                    "template_mcf": "output/wtxyghf.tmcf",
+                    "cleaned_csv": "output/wtxyghf.csv"
+                },
+               {
+                    "template_mcf": "output/zpdksog.tmcf",
+                    "cleaned_csv": "output/zpdksog.csv"
+                },
+               {
+                    "template_mcf": "output/viytqvf.tmcf",
+                    "cleaned_csv": "output/viytqvf.csv"
+                },
+               {
+                    "template_mcf": "output/ujtdaag.tmcf",
+                    "cleaned_csv": "output/ujtdaag.csv"
+                },
+               {
+                    "template_mcf": "output/cjczlcd.tmcf",
+                    "cleaned_csv": "output/cjczlcd.csv"
+                },
+               {
+                    "template_mcf": "output/szfufmb.tmcf",
+                    "cleaned_csv": "output/szfufmb.csv"
+                },
+               {
+                    "template_mcf": "output/lxoyale.tmcf",
+                    "cleaned_csv": "output/lxoyale.csv"
+                },
+               {
+                    "template_mcf": "output/behvqtc.tmcf",
+                    "cleaned_csv": "output/behvqtc.csv"
+                },
+               {
+                    "template_mcf": "output/colyoac.tmcf",
+                    "cleaned_csv": "output/colyoac.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "30 05 * * 1"
+        }
+    ]
+}
