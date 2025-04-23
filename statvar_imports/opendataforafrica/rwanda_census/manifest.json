@@ -8,7 +8,7 @@
             "provenance_url": "https://rwanda.opendataforafrica.org/",
             "provenance_description": "",
             "scripts": [
-                "../../../scripts/opendataafrica/download_folder/download.sh 'rwanda' 'edvtatd,eoefmac,hivlaeg,kbadgkf,kwekfdd,mnoirpd,shdirje,uymcezb,vafqyfg,ztaoyl,qavhudd' 'statvar_imports/opendataforafrica/rwanda_census/input_files/'",
+                "../../../scripts/opendataafrica/download_folder/download.sh 'rwanda' 'edvtatd,eoefmac,hivlaeg,kbadgkf,kwekfdd,mnoirpd,shdirje,uymcezb,vafqyfg,ztaoyl,qavhudd'",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/edvtatd.csv --pv_map=edvtatd_pv_map.csv --config_file=edvtatd_metadata.csv --output_path=output/edvtatd --statvar_dcid_remap_csv=edvtatd_statvar_remap.csv",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/eoefmac.csv --pv_map=eoefmac_pv_map.csv --config_file=eoefmac_metadata.csv --output_path=output/eoefmac",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/hivlaeg.csv --pv_map=hivlaeg_pv_map.csv --config_file=hivlaeg_metadata.csv --output_path=output/hivlaeg",
