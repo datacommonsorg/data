@@ -120,6 +120,9 @@ _NAICS_MAP = {
     '1027': 'OtherServices',
     '1028': 'PublicAdministration',
     '1029': 'Unclassified',
+    'JOLTS_540099': 'ProfessionalAndBusinessServices',
+    'JOLTS_340000': 'NondurableGoodsManufacturing',
+    'JOLTS_320000': 'DurableGoodsManufacturing',
 }
 
 # Regex to match NAICS Codes. These codes could be a single code or a range

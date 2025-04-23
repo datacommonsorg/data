@@ -5,5 +5,6 @@
   'output_columns':'observationAbout,observationDate,value,variableMeasured',
   'mapped_columns':8,
   'mapped_rows':1,
-  '#input_rows': 100
+  '#input_rows': 60000,
+  '#input_columns': 10
 }
