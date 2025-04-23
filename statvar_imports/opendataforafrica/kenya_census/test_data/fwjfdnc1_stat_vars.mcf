@@ -1,0 +1,57 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/rbhande/data/statvar_imports/opendataforafrica/kenya_census/input_files/fwjfdnc.csv --pv_map=/usr/local/google/home/rbhande/data/statvar_imports/opendataforafrica/kenya_census/fwjfdnc_pvmap.csv --config_file=/usr/local/google/home/rbhande/data/statvar_imports/opendataforafrica/kenya_census/fwjfdnc_metadata.csv --output_path=/usr/local/google/home/rbhande/data/statvar_imports/opendataforafrica/kenya_census/test_data/fwjfdnc1" on 2025-04-23 10:09:03.765865
+
+Node: dcid:Area_LandCover_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:area
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Rural_PerArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:area
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Urban_PerArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:area
+placeOfResidenceClassification: dcid:Urban
+
