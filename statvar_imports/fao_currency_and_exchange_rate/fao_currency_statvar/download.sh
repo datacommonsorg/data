@@ -2,28 +2,54 @@
 
 tmp="source_data_tmp" # where to store temporary artifacts
 dest="source_data" # where to put the final files
-files="input_data"
+files="input_files"
+retries=3
+wait=5 # seconds to wait between retries
+download_url="https://bulks-faostat.fao.org/production/Exchange_rate_E_All_Data.zip"
+output_file="Exchange_rate_E_All_Data.zip"
+
 # Make directories
 mkdir -p "$tmp"
 mkdir -p "$dest"
 mkdir -p "$files"
-# Download data files
-## Links copied from https://hazards.fema.gov/nri/data-resources
+
+# Download data file with retry
 cd "$tmp"
 
+download_with_retry() {
+  url="$1"
+  output="$2"
+  attempt=1
+  while [[ $attempt -le "$retries" ]]; do
+    echo "Attempt $attempt: Downloading '$url' to '$output'..."
+    curl -f -L "$url" -o "$output"
+    if [ $? -eq 0 ]; then
+      echo "Download successful."
+      return 0 # Success
+    else
+      echo "Download failed (attempt $attempt). Waiting $wait seconds before retrying..."
+      sleep "$wait"
+      attempt=$((attempt + 1))
+    fi
+  done
+  echo "Failed to download '$url' after $retries attempts."
+  return 1 # Failure
+}
 
-curl -L https://bulks-faostat.fao.org/production/Exchange_rate_E_All_Data.zip -o Exchange_rate_E_All_Data.zip
-unzip Exchange_rate_E_All_Data.zip -d Exchange_rate_E_All_Data
-
-cd ..
-# cd Exchange_rate_E_All_Data
-mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_All_Data.csv" "$files"
-mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_All_Data_NOFLAG.csv" "$dest"
-mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_AreaCodes.csv" "$dest"
-mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_Currencys.csv" "$dest"
-mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_Elements.csv" "$dest"
-mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_Flags.csv" "$dest"
-
+if download_with_retry "$download_url" "$output_file"; then
+  unzip "$output_file" -d Exchange_rate_E_All_Data
+  cd ..
+  mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_All_Data.csv" "$files"
+  mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_All_Data_NOFLAG.csv" "$dest"
+  mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_AreaCodes.csv" "$dest"
+  mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_Currencys.csv" "$dest"
+  mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_Elements.csv" "$dest"
+  mv "$tmp/Exchange_rate_E_All_Data/Exchange_rate_E_Flags.csv" "$dest"
+else
+  echo "Skipping unzip and move operations due to download failure."
+fi
 
 # Clean up temporary artifacts
 rm -rf "$tmp"
+
+echo "Script finished."
