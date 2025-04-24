@@ -17,6 +17,7 @@ This Python Script is for County Level Data 1990-2000.
 import os
 import numpy as np
 import pandas as pd
+import requests
 from common_functions import (replace_age, gender_based_grouping,
                               race_based_grouping)
 
@@ -32,6 +33,9 @@ def county1990(output_folder: str):
     df_as = pd.DataFrame()
     # Contains aggregated data for age and race.
     df_ar = pd.DataFrame()
+    raw_data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "raw_data")
+    os.makedirs(raw_data_dir, exist_ok=True)
     # Reading the csv input file.
     # The numbers 1 to 57 signify the available files as per state numbers
     # The [3, 7, 14, 43, 52] signify the state numbers absent
@@ -42,13 +46,24 @@ def county1990(output_folder: str):
                 '/popest/tables/1990-2000/counties/asrh/casrh'+str(j)+'.txt'
             cols=['Year','geo_ID','Race',0,1,2,3,4,5,6,7\
                 ,8,9,10,11,12,13,14,15,16,17]
-            df = pd.read_table(url,index_col=False,delim_whitespace=True\
-                ,skiprows=16,skipfooter=14,engine='python',names=cols,\
-                    encoding='ISO-8859-1')
-            #Writing raw data to csv
-            df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   "raw_data", 'raw_data_county_1990_2000.csv'),
-                      index=False)
+            filename = 'raw_data_county_1990_2000.csv'
+            file_path = os.path.join(raw_data_dir, filename)
+            headers = {"User-Agent": "Mozilla/5.0"}
+            response = requests.get(url, headers=headers)
+            if response.status_code == 200:
+                with open(file_path, "wb") as f:
+                    f.write(response.content)
+                df = pd.read_csv(file_path,
+                                 engine='python',
+                                 names=cols,
+                                 index_col=False,
+                                 sep='\s+',
+                                 skiprows=16,
+                                 skipfooter=14,
+                                 encoding='ISO-8859-1')
+                #Writing raw data to csv
+                df.to_csv(file_path, index=False)
+
             # Removing the lines that have false symbols.
             num_df = (df.drop(cols, axis=1).join(df[cols]\
                 .apply(pd.to_numeric, errors='coerce')))

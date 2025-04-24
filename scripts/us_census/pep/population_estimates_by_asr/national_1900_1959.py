@@ -15,6 +15,7 @@
 This Python Script is for National Level Data 1900-1959
 '''
 import os
+import requests
 import pandas as pd
 
 
@@ -30,6 +31,12 @@ def national1900(output_folder: str):
         j = f'{i:02}'
         url = 'https://www2.census.gov/programs-surveys/popest/tables/'+\
             '1900-1980/national/asrh/pe-11-19'+str(j)+'.csv'
+        file_name = 'raw_data_national_1900_1959_file_' + str(i) + '.csv'
+        raw_data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                    "raw_data")
+        os.makedirs(raw_data_dir, exist_ok=True)
+        file_path = os.path.join(raw_data_dir, file_name)
+
         # 0=Total_AllRaces
         # 1=Male_AllRaces
         # 2=Female_AllRaces
@@ -41,14 +48,24 @@ def national1900(output_folder: str):
         # 8=Female_NonWhiteAlone
         cols = ['Age', '0', '1', '2', '3', '4', '5', '6', '7', '8']
         # reading the csv format input file and converting it to a dataframe
-        df = pd.read_csv(url,names=cols,engine='python',skiprows=9,\
-            skipfooter=15,encoding='ISO-8859-1')
-        #Writing raw data to csv
-        df.to_csv(os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "raw_data",
-            'raw_data_national_1900_1959_file_' + str(i) + '.csv'),
-                  index=False)
-        # skipping unwanted rows from top and bottom
+        # df = pd.read_csv(url,names=cols,engine='python',skiprows=9,\
+        #     skipfooter=15,encoding='ISO-8859-1')
+        headers = {"User-Agent": "Mozilla/5.0"}
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 200:
+            with open(file_path, "wb") as f:
+                f.write(response.content)
+            # skipping unwanted rows from top and bottom
+            df = pd.read_csv(file_path,
+                             names=cols,
+                             engine='python',
+                             skiprows=9,
+                             skipfooter=15,
+                             encoding='ISO-8859-1')
+            #Writing raw data to csv
+            df.to_csv(file_path, index=False)
+
         df['Age'] = df['Age'].astype(str)
         df['Age'] = df['Age'].str.replace("75+", "75OrMore")
         df['Age'] = df['Age'].str.replace("85+", "85OrMore")
