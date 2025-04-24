@@ -32,16 +32,7 @@ To Download, run:
 `python3 bea_download.py`
 Note : The downloaded file will be saved in "input_files/CAGDP9__ALL_AREAS_2001_2023.csv"
 
-To divide the input file into smaller files, Run:
-
-`sh preprocess.sh`
-Note: the input file will be divided into multiple files. These files will be named following the pattern "bea_gdp_input_*.csv", where the asterisk will be replaced by a sequential number to distinguish each part.
-
 To Process the files, Run:
-
-`sh run.sh`
-
-or
 
 `python3 {$SCRIPT_PATH}/stat_var_processor.py --pv_map={$INPUT_PATH}/pv_map.py,observationAbout:{$INPUT_PATH}/place_mapping.json --config={$INPUT_PATH}/config.py --input_data={$INPUT_PATH}/input_files/bea_gdp_input_*.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path={$OUTPUT_PATH}/cagdp9  2>&1 | tee gdp.log`
 
