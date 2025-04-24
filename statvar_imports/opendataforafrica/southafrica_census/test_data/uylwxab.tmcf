@@ -1,0 +1,9 @@
+Node: E:ZAF->E0
+observationAbout: C:ZAF->observationAbout
+observationDate: C:ZAF->observationDate
+variableMeasured: C:ZAF->variableMeasured
+value: C:ZAF->value
+unit: C:ZAF->unit
+scalingFactor: C:ZAF->scalingFactor
+observationPeriod: C:ZAF->observationPeriod
+typeOf: dcs:StatVarObservation

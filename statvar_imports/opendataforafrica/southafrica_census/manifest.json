@@ -1,0 +1,31 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "SouthAfrica_Census",
+            "curator_emails": [
+                ""
+            ],
+            "provenance_url": "https://southafrica.opendataforafrica.org/",
+            "provenance_description": "",
+            "scripts": [
+                "../../../scripts/opendataafrica/download_folder/download.sh 'southafrica' 'cyaiujd,uylwxab' 'statvar_imports/opendataforafrica/southafrica_census/input_files/'",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/cyaiujd.csv --pv_map=cyaiujd_pv_map.csv --config_file=cyaiujd_metadata.csv --output_path=output/cyaiujd",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/uylwxab.csv --pv_map=uylwxab_pv_map.csv --config_file=uylwxab_metadata.csv --places_resolved_csv=places_resolved_csv.csv --output_path=output/uylwxab"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/cyaiujd.tmcf",
+                    "cleaned_csv": "output/cyaiujd.csv"
+                },
+                {
+                    "template_mcf": "output/uylwxab.tmcf",
+                    "cleaned_csv": "output/uylwxab.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "30 06 * * 1"
+        }
+    ]
+}

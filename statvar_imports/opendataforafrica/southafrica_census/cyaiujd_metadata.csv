@@ -1,10 +1,10 @@
 parameter,value
-url,https://southafrica.opendataforafrica.org/
+url,https://southafrica.opendataforafrica.org/cyaiujd
 description,"Population living in slum areas, 1990-2010"
 #place_type,
 #places_within,
 start_date,1990
-end_date,2010
+end_date,2011
 release_frequency,P1Y
 process,
 comments,
