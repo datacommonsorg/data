@@ -6,9 +6,9 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://kenya.opendataforafrica.org/",
-            "provenance_description": "",
+            "provenance_description": "Kenya Demographics, Health and Education data from Kenya National Bureau Of Statistics by country, county and towns and suburbs.",
             "scripts": [
-                "../../../scripts/opendataafrica/download_folder/download.sh 'kenya' 'dlrrjxg,egdxgkd,emxkej,fwjfdnc,gxbucsd,ixdvqrf,rsfzlbg,srricmg,tdxdksf,vdbvyfd,welrttb,xszlbb' 'statvar_imports/opendataforafrica/kenya_census/input_files/'",
+                "../../../scripts/opendataafrica/download_folder/download.sh 'kenya' 'dlrrjxg,egdxgkd,emxkej,fwjfdnc,gxbucsd,ixdvqrf,rsfzlbg,srricmg,tdxdksf,vdbvyfd,welrttb,xszlbb'",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/dlrrjxg.csv --pv_map=dlrrjxg_pvmap.csv --config_file=dlrrjxg_metadata.csv --output_path=output/dlrrjxg",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/egdxgkd.csv --pv_map=egdxgkd_pvmap.csv --config_file=egdxgkd_metadata.csv --output_path=output/egdxgkd",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/emxkej.csv --pv_map=emxkej_pvmap.csv --config_file=emxkej_metadata.csv --output_path=output/emxkej",
