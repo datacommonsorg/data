@@ -2,7 +2,21 @@
 
 - source: https://kenya.opendataforafrica.org/
 
-- how to download data: Manual download from source based on filter - 
+- how to download data: 
+
+You can download the input files using the script located at:
+data/scripts/opendataafrica/download_folder/download.sh
+
+Run the following command from that directory:
+
+sh download.sh 'kenya' 'dlrrjxg,egdxgkd,emxkej,fwjfdnc,gxbucsd,ixdvqrf,rsfzlbg,srricmg,tdxdksf,vdbvyfd,welrttb,xszlbb' 
+
+- Make sure to run this command from the data/scripts/opendataafrica/download_folder/ directory.
+
+- The output path is optional. If not provided, it defaults to {PWD}/input_files (i.e., an input_files folder in the current working directory).
+
+- If you need to specify a custom path, add it as the third argument to the command.
+
 
 - type of place: Country and AdministrativeArea1.
 
@@ -10,7 +24,7 @@
 
 - years: 2002 to 2023
 
-- place_resolution:Places are resolved based on name.
+- place_resolution: Place resolution is performed by the StatVar processor using the places_resolved_csv flag.
 
 ### How to run:
 
