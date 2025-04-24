@@ -26,6 +26,7 @@ import requests
 import numpy as np
 import time
 import json
+import csv
 import sys
 from datetime import datetime as dt
 
@@ -308,7 +309,6 @@ class CensusUSACountryPopulation:
 
         try:
             df = self._transform_df(df, file)
-
             if self._df is None:
                 self._df = df
             else:
@@ -616,24 +616,41 @@ def download_files():
                 file_name = url.split("/")[-1]
 
                 if ".xls" in url:
-                    df = pd.read_excel(url, header=_HEADER)
-                    df.to_excel(os.path.join(raw_data_path, file_name),
-                                index=False,
-                                header=False,
-                                engine='xlsxwriter')
-                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
-                                index=False,
-                                header=False,
-                                engine='xlsxwriter')
+                    headers = {
+                        "User-Agent":
+                            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+                    }
+                    with requests.get(url,
+                                      headers=headers,
+                                      allow_redirects=True) as response:
+                        response.raise_for_status()
+                        if response.status_code == 200:
+                            file_path = os.path.join(raw_data_path, file_name)
+                            with open(file_path, 'wb') as f:
+                                f.write(response.content)
+                            df = pd.read_excel(file_path,
+                                               header=None,
+                                               skiprows=2)
+
+                            df.to_excel(os.path.join(raw_data_path, file_name),
+                                        index=False,
+                                        header=False,
+                                        engine='xlsxwriter')
+
+                            df.to_excel(os.path.join(_INPUT_FILE_PATH,
+                                                     file_name),
+                                        index=False,
+                                        header=False,
+                                        engine='xlsxwriter')
                 elif ".csv" in url:
                     with requests.get(url, stream=True) as response:
                         response.raise_for_status()
                         if response.status_code == 200:
-                            with open(os.path.join(raw_data_path, file_name),
-                                      'wb') as f:
+                            file_path = os.path.join(raw_data_path, file_name)
+                            with open(file_path, 'wb') as f:
                                 f.write(response.content)
                     file_name = file_name.replace(".csv", ".xlsx")
-                    df = pd.read_csv(url, header=None)
+                    df = pd.read_csv(file_path, header=None, skiprows=2)
                     df = _clean_csv_file(df)
                     df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
                                 index=False,
@@ -645,28 +662,31 @@ def download_files():
                             with open(os.path.join(raw_data_path, file_name),
                                       'wb') as f:
                                 f.write(response.content)
-                    file_name = file_name.replace(".txt", ".xlsx")
                     cols = [
                         "Year and Month", "Date", "Resident Population",
                         "Resident Population Plus Armed Forces Overseas",
                         "Civilian Population",
                         "Civilian NonInstitutionalized Population"
                     ]
-                    df = pd.read_table(url,
-                                       index_col=False,
-                                       delim_whitespace=True,
-                                       engine='python',
-                                       skiprows=17,
-                                       names=cols)
+                    txt_file_path = os.path.join(raw_data_path, file_name)
+
+                    df = pd.read_csv(txt_file_path,
+                                     delim_whitespace=True,
+                                     engine='python',
+                                     skiprows=17,
+                                     names=cols,
+                                     index_col=False)
+
                     # Skipping 17 rows as the initial 17 rows contains the information about
                     # the file being used, heading files spread accross multiple lines and
                     # other irrelevant information like source/contact details.
                     df = _clean_txt_file(df)
+                    txt_file_path = txt_file_path.replace(".txt", ".xlsx")
                     # Multiplying the data with scaling factor 1000.
                     for col in df.columns:
                         if "year" not in col.lower():
                             df[col] = df[col].apply(_mulitply_scaling_factor)
-                    df.to_excel(os.path.join(_INPUT_FILE_PATH, file_name),
+                    df.to_excel(os.path.join(_INPUT_FILE_PATH, txt_file_path),
                                 index=False,
                                 engine='xlsxwriter')
 
