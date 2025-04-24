@@ -2,7 +2,7 @@
 SCRIPT_PATH=$(realpath "$(dirname "$0")")
 input_file="$SCRIPT_PATH/input_files/CAGDP9__ALL_AREAS_2001_2023.csv"
 output_prefix="$SCRIPT_PATH/input_files/bea_gdp_input_"
-lines_per_file=10000
+lines_per_file=5000
 
 # Get the header line
 header=$(head -n 1 "$input_file")
