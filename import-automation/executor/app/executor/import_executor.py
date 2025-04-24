@@ -53,7 +53,7 @@ from google.cloud import storage
 
 # Email address for status messages.
 _DEBUG_EMAIL_ADDR = 'datacommons-debug+imports@google.com'
-_ALERT_EMAIL_ADDR = 'datacommons-alerts+imports@google.com'
+_ALERT_EMAIL_ADDR = 'datacommons-test-alerts+imports@google.com'
 
 _SEE_LOGS_MESSAGE = (
     'Please find logs in the Logs Explorer of the GCP project associated with'
@@ -62,7 +62,7 @@ _SEE_LOGS_MESSAGE = (
 _IMPORT_METADATA_MCF_TEMPLATE = """
 Node: dcid:dc/base/{import_name}
 typeOf: dcid:Provenance
-lastDataRefeshDate: "{last_data_refresh_date}"
+lastDataRefreshDate: "{last_data_refresh_date}"
 """
 
 
@@ -346,17 +346,11 @@ class ImportExecutor:
             f'{import_dir}/{self.config.storage_version_filename}')
         if not blob or not blob.download_as_text():
             logging.error(
-                f'Not able to find latest_version.txt in {folder}, skipping validation.'
+                f'Not able to find latest_version.txt in {import_dir}, skipping validation.'
             )
             return ''
         latest_version = blob.download_as_text()
-        blob = bucket.get_blob(f'{import_dir}/{latest_version}')
-        if not blob:
-            logging.error(
-                f'Not able to find previous import in {latest_version}, skipping validation.'
-            )
-            return ''
-        return f'gs://{bucket.name}/{blob.name}'
+        return f'gs://{bucket.name}/{import_dir}/{latest_version}'
 
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
                                   absolute_import_dir: str, import_spec: dict,
@@ -450,23 +444,29 @@ class ImportExecutor:
                         )
         return validation_status
 
+    def _create_mount_point(self, gcs_volume_mount_dir: str,
+                            cleanup_gcs_volume_mount: bool,
+                            absolute_import_dir: str, import_name: str) -> None:
+        mount_path = os.path.join(gcs_volume_mount_dir, import_name)
+        out_path = os.path.join(absolute_import_dir, 'gcs_output')
+        logging.info(f'Mount path: {mount_path}, Out path: {out_path}')
+        if cleanup_gcs_volume_mount and os.path.exists(mount_path):
+            shutil.rmtree(mount_path)
+        if os.path.lexists(out_path):
+            os.unlink(out_path)
+        os.makedirs(mount_path, exist_ok=True)
+        os.symlink(mount_path, out_path, target_is_directory=True)
+
     def _invoke_import_job(self, absolute_import_dir: str, import_spec: dict,
                            version: str, interpreter_path: str,
                            process: subprocess.CompletedProcess) -> None:
         script_paths = import_spec.get('scripts')
+        import_name = import_spec['import_name']
+        self._create_mount_point(self.config.gcs_volume_mount_dir,
+                                 self.config.cleanup_gcs_volume_mount,
+                                 absolute_import_dir, import_name)
         for path in script_paths:
             script_path = os.path.join(absolute_import_dir, path)
-            import_name = import_spec['import_name']
-            mount_path = os.path.join(self.config.gcs_volume_mount_dir,
-                                      import_name)
-            out_path = os.path.join(absolute_import_dir, 'gcs_output')
-            logging.info(f'Mount path: {mount_path}, Out path: {out_path}')
-            if os.path.exists(mount_path):
-                shutil.rmtree(mount_path)
-            if os.path.lexists(out_path):
-                os.unlink(out_path)
-            os.makedirs(mount_path, exist_ok=True)
-            os.symlink(mount_path, out_path, target_is_directory=True)
             simple_job = cloud_run_simple_import.get_simple_import_job_id(
                 import_spec, script_path)
             if simple_job:
