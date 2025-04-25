@@ -2,6 +2,17 @@
 
 - source: https://kenya.opendataforafrica.org/
 
+File descriptions:
+
+*_pvmap.csv: StatVar processor schema mappings for a specific source table
+
+*_metadata.csv: StatVar processor configs for a specific source table
+
+*_places_resolved.csv: Mapping from place names in a source table to dcid for StatVar processor
+
+*_indicator.csv: Useful for understanding the columns in the source file when creating PV mappings
+
+
 - how to download data: 
 
 You can download the input files using the script located at:
