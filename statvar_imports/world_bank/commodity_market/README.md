@@ -21,10 +21,18 @@
 `python3 download.py`
 
 #### Processing
+
 If processing from current import folder :
 
 `python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=<input_file>.csv --pv_map=<pv_map>.csv --config=<metadata>.csv --output_path=<filepath/filename>`
 
+
+
 If processing from statvar_importer folder :
 
-`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/monthly_prices_data_input.csv --pv_map=commodity_monthly_price_pvmap.csv --config_file=commodity_monthly_price_metadata.csv -output_path=test/commodity_monthly_price_sample_output`
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=test_data/monthly_price_data_input.csv --pv_map=commodity_monthly_price_pvmap.csv --config_file=commodity_monthly_price_metadata.csv -output_path=test/commodity_monthly_price_sample_output`
+
+
+
+
+
