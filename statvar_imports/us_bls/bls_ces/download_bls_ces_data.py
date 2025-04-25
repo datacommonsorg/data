@@ -11,7 +11,18 @@
  # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  # See the License for the specific language governing permissions and
  # limitations under the License.
+ 
 
+""" A Script to download BLS_CES State and National data.
+    This script contains a download method which requires registered API key
+    Go to "https://www.bls.gov/developers/api_faqs.htm#register2" to register for the key
+    The key should be saved in config.json which is uploaded 
+    to GCS bucket path "unresolved_mcf/us_bls/ces/latest"
+    Sample config.json is added in README.md. 
+    How to run:
+    - python3 download_bls_ces.py --place_type=<state or national> 
+    --input_folder=<input folder name> --source_folder=<source folder name>`
+"""
 
 import requests
 import json
@@ -28,6 +39,7 @@ from absl import flags
 from absl import logging
 from retry import retry
 from google.cloud import storage
+from google.api_core.exceptions import NotFound
 
 
 _FLAGS = flags.FLAGS
@@ -38,6 +50,14 @@ flags.DEFINE_string('source_folder', 'raw_data', 'raw data folder')
 BASE_GCS_PATH = "us_bls/ces/latest"   
 
 def read_gcs_path(config_path):
+    """
+    Retrieves a blob object from a specified Google Cloud Storage bucket.
+    Parameters:
+    - config_path (str): The path to the file (blob) inside the GCS bucket
+
+    Returns:
+    - google.cloud.storage.blob.Blob: The blob object corresponding to the given path
+    """
     GCS_BUCKET_NAME = "unresolved_mcf"
     client = storage.Client()
     bucket = client.get_bucket(GCS_BUCKET_NAME)
@@ -46,6 +66,15 @@ def read_gcs_path(config_path):
 
 
 def series_id_from_gcs(series_id_filename):
+    """
+    Extracts a list of series IDs from a configuration file stored in Google Cloud Storage.
+
+    Parameters:
+    - series_id_filename (str): The name of the config file stored in GCS
+
+    Returns:
+    - list: A list of series IDs extracted from the config file, or None if not found
+    """
     logging.info("Getting series ids from gcs")
     config_path =f"{BASE_GCS_PATH}/{series_id_filename}"
     blob = read_gcs_path(config_path)
@@ -58,6 +87,14 @@ def series_id_from_gcs(series_id_filename):
     
 
 def get_api_key():
+    """
+    Retrieves the API key and BLS CES URL from a JSON config file stored in Google cloud storage.
+    Returns:
+    - tuple: (registrationkey, bls_ces_url) if successful
+             (None, None) if the file is not found
+    - Raises:
+      - Any other unexpected exception encountered during the process
+    """
     try:
         config_path = f"{BASE_GCS_PATH}/config.json"
         blob = read_gcs_path(config_path)
@@ -65,14 +102,30 @@ def get_api_key():
         key = config_data.get("registrationkey")
         bls_ces_url = config_data.get("bls_ces_url")
         return key, bls_ces_url
+
+    except NotFound:
+        logging.fatal(f"Config file not found at {config_path}")
+        return None, None
     except Exception as e:
-        logging.error(f"Error in get_api_key: {e}")
+        logging.fatal(f"Error in get_api_key: {e}")
         raise
 
 
 def convert_to_raw_csv(download_folder, raw_data_folder):
+    """
+    Converts all .txt files in the specified download folder into .csv files.
+    - Parses the files assuming they are pipe-delimited and skips the first 3 lines
+    - Writes the cleaned data into .csv files with a predefined header
+    - Moves the original .txt files into the specified raw data folder
+    - Introduces a short delay after writing each file to avoid system overload
+
+    Parameters:
+    - download_folder (str): Path to the folder containing .txt files
+    - raw_data_folder (str): Path to the folder where original .txt files will be moved
+    """
     logging.info("Converting raw text file to csvs")
     try:
+        header = ["series id", "year", "period", "value", "footnotes"]
         for filename in os.listdir(download_folder):
             if filename.lower().endswith('.txt'):
                 basename = filename.split('.')[0]
@@ -82,7 +135,7 @@ def convert_to_raw_csv(download_folder, raw_data_folder):
                     text_data = file.read()
                 lines = text_data.strip().split("\n")
                 cleaned_data = []
-                header = ["series id", "year", "period", "value", "footnotes"]  # Move header outside loop
+                #skippig first 3 empty lines
                 for line in lines[3:]:
                     cleaned_line = [field.strip() for field in line.split('|')[1:-1]]
                     cleaned_data.append(cleaned_line)
@@ -97,6 +150,16 @@ def convert_to_raw_csv(download_folder, raw_data_folder):
 
 
 def process_raw_data_csv(download_folder):
+    """
+    Processes the csv which splits the columns based on the series id values.
+    - Looks for the csv files in the given path
+    - Parses the csv file to spit the series id value and creates three different columns
+    - Writes the csv as a new .csv with '_output' as a suffix
+    - Deletes the old csv from the folder.
+
+    Parameters:
+    - download_folder (str): Path to the folder containing raw csv files
+    """
     try:
         for input_csv_filename in os.listdir(download_folder):
             base_name, extension = os.path.splitext(input_csv_filename)
@@ -132,6 +195,12 @@ def process_raw_data_csv(download_folder):
 
 
 def merge_all_csvs(folder_path):
+    """
+    Merges all the csv files into a one single csv file
+
+    Parameters:
+    - folder_path (str): Path to the folder containing csv files
+    """
     logging.info("Merging all the csvs..")
     try:
         csv_files = [file for file in os.listdir(folder_path) if file.endswith('.csv')]
@@ -160,6 +229,12 @@ def merge_all_csvs(folder_path):
 
 
 def clear_folder(folder_path):
+    """
+    Clears the folder before download takes place to avoid the ambiguity.
+
+    Parameters:
+    - folder_path (str): Path to the folder containing csv files
+    """
     try:
         if os.path.exists(folder_path):
             if os.listdir(folder_path):
@@ -179,6 +254,18 @@ def clear_folder(folder_path):
 # Retry decorator: Retries 3 times, with a 2-second delay, doubling each retry
 @retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
 def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename):
+    """
+    Downloads the raw txt files from source.
+    - Each api request takes at most 25 series ids at once.
+    - Start year is considerd to be 2015 and current year to be the end year
+    - raw .txt file is saved to the folder
+
+    Parameters:
+    - download_folder_name (str): Path to the folder to save the .txt files
+    - reg_key : Api key to be passed to API request
+    - bls_ces_url : Api base url to be passed in API request
+    - series_id_file_name : File name containing all the series ids.
+    """
     logging.info("Downloading started..")
     try:
         if not os.path.exists(download_folder_name):
@@ -186,7 +273,6 @@ def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename
         else:
             clear_folder(download_folder_name)
         series_id = series_id_from_gcs(series_id_filename)
-        chunk_size = 25
         current_year = datetime.now().year
         headers = {'Content-type': 'application/json'}
         for i in range(0, len(series_id), chunk_size):
@@ -265,3 +351,4 @@ def main(argv):
 
 if __name__ == '__main__':
     app.run(main)
+
