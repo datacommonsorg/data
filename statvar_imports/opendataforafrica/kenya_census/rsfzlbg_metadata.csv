@@ -8,7 +8,6 @@ end_date,
 release_frequency,
 process,
 comments,
-#places_resolved_csv,
 output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod"
 header_rows,1
 drop_statvars_without_svobs,0
