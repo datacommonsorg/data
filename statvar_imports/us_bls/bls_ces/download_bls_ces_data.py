@@ -273,6 +273,7 @@ def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename
         else:
             clear_folder(download_folder_name)
         series_id = series_id_from_gcs(series_id_filename)
+        chunk_size = 25
         current_year = datetime.now().year
         headers = {'Content-type': 'application/json'}
         for i in range(0, len(series_id), chunk_size):
