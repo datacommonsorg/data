@@ -24,6 +24,7 @@ ENV JAVA_HOME=/usr/local/openjdk-17
 COPY --from=openjdk:17-slim $JAVA_HOME $JAVA_HOME
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
 RUN wget https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar
+RUN wget https://storage.googleapis.com/datacommons_public/import_tools/differ-tool.jar
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
