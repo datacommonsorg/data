@@ -285,6 +285,9 @@ _PREPEND_APPEND_REPLACE_MAP = {
     'lendingEntity': {
         'prepend': 'Lender',
     },
+    'internetUsageLocation': {
+        'prepend': 'InternetUsageAt',
+    },
 }
 
 # This is a list of boolean properties

@@ -1,0 +1,56 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import os
+import pandas as pd
+import logging
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
+
+COMMON_COLUMNS = ["dataset", "variable", "description", "universe"]
+AGE_COLUMNS = ["age314Count", "age1524Count", "age2544Count", "age4564Count", "age65pCount"]
+INPUT_FILE = os.path.join(INPUT_DIR, "ntia-analyze-table.csv")
+INPUT_FILE_1 = os.path.join(INPUT_DIR, "ntia-data-age-only.csv")
+INPUT_FILE_2 = os.path.join(INPUT_DIR, "ntia-data.csv")
+
+def preprocess_data():
+    try:
+        org_df = pd.read_csv(INPUT_FILE)
+
+        df1 = org_df[COMMON_COLUMNS + AGE_COLUMNS].copy()
+        df1['universeAgeResol'] = df1['universe'].apply(
+            lambda x: 'CivilPerson' if x == 'isPerson' else ('Adult' if x == 'isAdult' else None)
+        )
+        df1['variableAgeResol'] = df1['variable'].apply(
+            lambda x: 'CivilPerson' if x == 'isPerson' else ('Adult' if x == 'isAdult' else None)
+        )
+        df1.to_csv(INPUT_FILE_1, index=False)
+
+        df2_cols_to_keep = [col for col in org_df.columns if not col.startswith('age')]
+        df2 = org_df[df2_cols_to_keep].copy()
+        df2['universeAgeResol'] = df2['universe'].apply(
+            lambda x: 'CivilPerson' if x == 'isPerson' else ('Adult' if x == 'isAdult' else None)
+        )
+        df2['variableAgeResol'] = df2['variable'].apply(
+            lambda x: 'CivilPerson' if x == 'isPerson' else ('Adult' if x == 'isAdult' else None)
+        )
+        df2.to_csv(INPUT_FILE_2, index=False)
+
+    except Exception as e:
+        logging.fatal(f"An error occurred while preprocessing the input data: {e}")
+        return None
+
+if __name__ == "__main__":
+    preprocess_data()
