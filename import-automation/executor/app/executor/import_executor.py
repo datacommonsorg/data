@@ -482,13 +482,16 @@ class ImportExecutor:
                 # Run import script locally.
                 script_interpreter = _get_script_interpreter(
                     script_path, interpreter_path)
+                script_env = os.environ.copy()
+                if self.config.user_script_env:
+                    script_env.update(self.config.user_script_env)
                 process = _run_user_script(
                     interpreter_path=script_interpreter,
                     script_path=script_path,
                     timeout=self.config.user_script_timeout,
                     args=self.config.user_script_args,
                     cwd=absolute_import_dir,
-                    env=self.config.user_script_env,
+                    env=script_env,
                 )
                 _log_process(process=process)
                 process.check_returncode()
@@ -854,6 +857,8 @@ def _create_venv(requirements_path: Iterable[str], venv_dir: str,
         script.flush()
 
         process = _run_with_timeout(['bash', script.name], timeout)
+        os.environ['PATH'] = os.path.join(venv_dir,
+                                          'bin') + ':' + os.environ.get('PATH')
         return os.path.join(venv_dir, 'bin/python3'), process
 
 
