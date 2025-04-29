@@ -28,10 +28,14 @@ import json
 from datetime import datetime as dt
 from absl import logging
 from absl import flags
+from retry import retry
+from google.cloud import storage  # GCS Client
 
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('mode', '', 'Options: download or process')
+flags.DEFINE_string('config_path', '',
+                    'Path to the configuration file in the GCS bucket.')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
@@ -74,6 +78,18 @@ _COLUMNS_TO_SUM = [
     '60 to 64 years', '65 to 69 years', '70 to 74 years', '75 to 79 years',
     '80 to 84 years', '85 years and over'
 ]
+
+
+#Extract the bucket name and path from the config_path flag
+def extract_gcs_info():
+    parts = _FLAGS.config_path.split('/', 1)
+    if len(parts) != 2:
+        raise ValueError(
+            "Invalid GCS config_path format. Expected 'bucket_name/path/to/object'."
+        )
+    gcs_bucket_name = parts[0]
+    gcs_object_path = parts[1]
+    return gcs_bucket_name, gcs_object_path
 
 
 def _states_full_to_short_form(data_df: pd.DataFrame,
@@ -988,8 +1004,7 @@ class PopulationEstimateBySex:
         logging.info(f"No of files to be processed {len(ip_files)}")
         for file_path in ip_files:
             logging.info(f"Processing the file:{file_path}")
-            if 'pe-02-1983.csv' in file_path or 'pe-02-1982.csv' in file_path:
-                pass
+            processed_count += 1
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .tsv extension
@@ -1054,9 +1069,9 @@ class PopulationEstimateBySex:
             df = file_to_function_mapping[file_name](file_path)
 
             if not df.empty:
-                processed_count += 1
                 final_df = pd.concat([final_df, df])
                 final_df = final_df.sort_values(by=['Year', 'geo_ID'])
+                logging.info(f'Processed the file:{file_path}')
             else:
                 logging.fatal(f"Failed to process {file_path}")
 
@@ -1077,10 +1092,22 @@ class PopulationEstimateBySex:
             sv_list = ['Count_Person_Female', 'Count_Person_Male']
             self._generate_mcf(sv_list)
             self._generate_tmcf()
+            logging.info(f'Processing is completed successfully!')
         else:
             logging.fatal(
                 "Aborting output files as no of files to process not matching processed files"
             )
+
+
+def fetch_skip_urls_from_gcs(GCS_BUCKET_NAME: str,
+                             GCS_SKIP_FILE_PATH: str) -> list:
+    """Fetch skip_url.json from GCS and return list of URLs to skip."""
+    client = storage.Client()
+    bucket = client.bucket(GCS_BUCKET_NAME)
+    blob = bucket.blob(GCS_SKIP_FILE_PATH)
+    data = blob.download_as_text()
+    skip_urls = json.loads(data)
+    return skip_urls
 
 
 def add_future_year_urls():
@@ -1093,7 +1120,8 @@ def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
     # Initialize the list to store files to download
     _FILES_TO_DOWNLOAD = []
-    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
+    with open(os.path.join(_MODULE_DIR, 'input_url_copy.json'),
+              'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
 
     # List of URLs with placeholders for {YEAR} and {i}
@@ -1156,52 +1184,75 @@ def add_future_year_urls():
                         f"URL is not accessible {url_to_check} due to {e}")
 
 
+@retry(tries=3,
+       delay=2,
+       backoff=2,
+       exceptions=(requests.RequestException, Exception))
 def download_files():
     """
-    This method download the files and if there any file/files is not downloaded throws an exception
-    Args : None
-    Return : None
-
+    Download files from URLs listed in _FILES_TO_DOWNLOAD.
+    Skips URLs listed in skip_url.json from GCS.
     """
     global _FILES_TO_DOWNLOAD
     session = requests.session()
-    max_retry = 5
-    for file_to_dowload in _FILES_TO_DOWNLOAD:
+
+    GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH = extract_gcs_info()
+    # Read URLs from the GCS-hosted config file
+
+    # Fetch skip urls from GCS
+    skip_urls = fetch_skip_urls_from_gcs(GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH)
+
+    logging.info(f"Fetched {len(skip_urls)} URLs to skip from GCS.")
+
+    skipped = []
+    print(skip_urls)
+    for file_to_download in _FILES_TO_DOWNLOAD:
         file_name_to_save = None
-        url = file_to_dowload['download_path']
-        if 'file_name' in file_to_dowload and len(
-                file_to_dowload['file_name'] > 5):
-            file_name_to_save = file_to_dowload['file_name']
+        url = file_to_download['download_path']
+
+        # Check if this URL should be skipped
+        if url in skip_urls:
+            skipped.append(url)
+            logging.info(f"File is corrupted: {url}")
+            file_to_download['is_downloaded'] = False
+            continue
+
+        if 'file_name' in file_to_download and len(
+                file_to_download['file_name']) > 5:
+            file_name_to_save = file_to_download['file_name']
         else:
             file_name_to_save = url.split('/')[-1]
-        retry_number = 0
 
-        is_file_downloaded = False
-        while is_file_downloaded == False:
-            try:
-                with session.get(url, stream=True) as response:
-                    response.raise_for_status()
-                    if response.status_code == 200:
-                        with open(
-                                os.path.join(_INPUT_FILE_PATH,
-                                             file_name_to_save), 'wb') as f:
-                            f.write(response.content)
-                            file_to_dowload['is_downloaded'] = True
-                            logging.info(f"Downloaded file : {url}")
-                            is_file_downloaded = True
-                    else:
-                        logging.error(f"Retry file download {{url}}")
-                        time.sleep(5)
-                        retry_number += 1
-                        if retry_number > max_retry:
-                            logging.fatal(f"Error downloading {url}")
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        try:
+            with session.get(url, stream=True, timeout=120,
+                             headers=headers) as response:
+                response.raise_for_status()
 
-            except Exception as e:
-                logging.fatal(f"Retry file download {url}")
-                time.sleep(5)
-                retry_number += 1
-                if retry_number > max_retry:
-                    logging.fatal(f"Error downloading {url}")
+                content_type = response.headers.get('Content-Type', '')
+                if 'html' in content_type.lower():
+                    raise Exception(
+                        f"Server returned HTML error page for URL: {url}")
+
+                if response.status_code == 200:
+                    with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save),
+                              'wb') as f:
+                        for chunk in response.iter_content(chunk_size=8192):
+                            if chunk:
+                                f.write(chunk)
+                    file_to_download['is_downloaded'] = True
+                    logging.info(f"Downloaded file: {url}")
+                else:
+                    raise Exception(
+                        f"Unexpected response {response.status_code} for URL: {url}"
+                    )
+
+        except Exception as e:
+            file_to_download['is_downloaded'] = False
+            logging.error(f"Error downloading {url}: {e}")
+            raise  # re-raise to trigger @retry
+    for s in skipped:
+        logging.info(f"Skipped corrupted file: {s}")
 
     return True
 
@@ -1230,6 +1281,13 @@ def main(_):
 
     download_status = True
     if mode == "" or mode == "download":
+        # Get the config path from the flags
+        config_path = _FLAGS.config_path
+
+        if not config_path:
+            logging.fatal(
+                "Please provide the --config_path flag with a valid GCS path.")
+            return
         # download & process
         add_future_year_urls()
         download_status = download_files()
