@@ -1,0 +1,10 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4
+ID_DÉPARTEMENT,observationAbout,{Data},measuredProperty,count,observationPeriod,P1Y,,
+I1,populationType,Teacher,,,,,,
+I3,populationType,Student,,,,,,
+I4,populationType,ClassRoom,,,,,,
+C3,schoolGradeLevel,LowerSecondary,,,,,,
+C4,schoolGradeLevel,UpperSecondaryEducation,,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,
+OBS_VALUE,value,{Number},,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,

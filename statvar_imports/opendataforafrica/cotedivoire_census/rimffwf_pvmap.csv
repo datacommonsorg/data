@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+I1,observationAbout,{Data},populationType,Teacher,measuredProperty,count,,,,
+G1,gender,Male,,,,,,,,
+G2,gender,Female,,,,,,,,
+G3,populationType,Teacher,,,,,,,,
+CEN9,#ignore,ignored,,,,,,,,
+CEN11,facultyType,PermanentProfessor,,,,,,,,
+CEN12,facultyType,CivilServantVacancyProfessor,,,,,,,,
+CEN13,facultyType,NonCivilServantVacancyProfessor,,,,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,,,
+OBS_VALUE,value,{Number},,,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,

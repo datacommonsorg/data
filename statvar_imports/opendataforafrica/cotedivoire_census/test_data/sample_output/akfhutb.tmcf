@@ -1,0 +1,10 @@
+Node: E:-akfhutb->E0
+observationAbout: C:-akfhutb->observationAbout
+observationDate: C:-akfhutb->observationDate
+variableMeasured: C:-akfhutb->variableMeasured
+value: C:-akfhutb->value
+unit: C:-akfhutb->unit
+scalingFactor: C:-akfhutb->scalingFactor
+observationPeriod: C:-akfhutb->observationPeriod
+measurementMethod: C:-akfhutb->measurementMethod
+typeOf: dcs:StatVarObservation

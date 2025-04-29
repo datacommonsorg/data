@@ -1,0 +1,15 @@
+key,prop,value,p1,v1,,
+ID_INDICATEUR:I2,measuredProperty,count,populationType,School,,
+ID_INDICATEUR:I5,measuredProperty,count,populationType,Student,gender,Male
+ID_INDICATEUR:I6,measuredProperty,count,populationType,Student,gender,Female
+ID_INDICATEUR:I7,measuredProperty,count,populationType,Student,,
+ID_INDICATEUR:I8,measuredProperty,count,populationType,Teacher,gender,Male
+ID_INDICATEUR:I9,measuredProperty,count,populationType,Teacher,gender,Female
+ID_INDICATEUR:I10,measuredProperty,count,populationType,Teacher,,
+ID_INDICATEUR:I11,measuredProperty,count,populationType,ClassRoom,,
+ID_STATUT_ETABLISSEMENTS:PRV,schoolType,PrivateSchool,,,,
+ID_STATUT_ETABLISSEMENTS:PUB,schoolType,PublicSchool,,,,
+TIME_PERIOD,observationDate,{Number},,,,
+OBS_VALUE,value,{Number},,,,
+ID_DÉPARTEMENT,observationAbout,{Data},,,,
+FREQ:A,observationPeriod,P1Y,,,,
