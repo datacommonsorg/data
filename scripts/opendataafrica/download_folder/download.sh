@@ -14,11 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set -e
 COUNTRY=""
 DATASETS=()
 SELECTED_DATASETS=()
 
 function download_key_families() {
+  echo "extract_key_families method"
   echo "Downloading key family for country = $COUNTRY"
   if [ -f "$WORKING_DIR/key_family.xml" ] && [ $(stat -c%s "$WORKING_DIR/key_family.xml") -gt 0 ]; then
     echo "File $WORKING_DIR/key_family.xml already exists. Skipping download."
@@ -33,41 +35,49 @@ function download_key_families() {
 }
 
 function extract_key_families() {
-  
+  echo "in extract_key_families method"
   DATASETS=($(jq -r '."message:Structure"."message:KeyFamilies".KeyFamily.[]."@id"' "$WORKING_DIR/key_family.json"))
 }
 
 function download_and_convert_dataset() {
-  # local dataset="$1"
-  echo "Downloading ${dataset} to file $WORKING_DIR/${dataset}.xml"
-  if [ -f "$WORKING_DIR/${dataset}.xml" ] && [ $(stat -c%s "$WORKING_DIR/${dataset}.xml") -gt 0 ]; then
-    echo "File $WORKING_DIR/${dataset}.xml exists, skipping download."
-  else
-    curl -s --location "http://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx/data/${dataset}" \
-      --header 'Accept: text/html,application/xhtml+xml,application/xml' \
-      --header 'Accept-Encoding: gzip, deflate, br, zstd' \
-      --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
-      --output "$WORKING_DIR/${dataset}.xml" \
-      --compressed
-    if [ $? -ne 0 ]; then
-      echo "Error: Failed to download dataset $dataset"
-      return 1
-    fi
+  echo "download_and_convert_dataset method"
+  echo "Downloading ${dataset} to file $WORKING_DIR/${dataset}.xml path" 
+  echo "downloading http://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx/data/${dataset} is the URL"
+  curl -s --location "http://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx/data/${dataset}" \
+    --header 'Accept: text/html,application/xhtml+xml,application/xml' \
+    --header 'Accept-Encoding: gzip, deflate, br, zstd' \
+    --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
+    --output "$WORKING_DIR/${dataset}.xml" \
+    --compressed
+  echo "ls after download input_files/"
+  ls "$WORKING_DIR"
+  if [ $? -ne 0 ]; then
+    echo "Error: Failed to download dataset $dataset"
+    return 1
   fi
 
   local json_output_file="$WORKING_DIR/${dataset}.json"
   local csv_output_file="$WORKING_DIR/${dataset}.csv"
+  
   local xml_to_json_script_path="../../../util/xml_to_json.py"
-  local json_to_csv_script_path="json_to_csv.py"
+  local json_to_csv_script_path="../../../scripts/opendataafrica/download_folder/json_to_csv.py"
+  echo  "$ realpath --relative-to='${PWD}' '$xml_to_json_script_path' path"
+  echo "Script path of xml script $xml_to_json_script_path - json $json_to_csv_script_path path"
+  echo "-----------------------------------------------------------------------------------------"
+  echo "File path of xml $WORKING_DIR/${dataset}.xml - json $json_output_file - csv $csv_output_file  path"
 
+  echo "python3" "$xml_to_json_script_path" "'$WORKING_DIR/${dataset}.xml'" "'$json_output_file'"
+  if [ -f "$WORKING_DIR/${dataset}.xml" ]; then
+    echo "XML file found at $WORKING_DIR/${dataset}.xml path"
+  fi
   if python3 "$xml_to_json_script_path" "$WORKING_DIR/${dataset}.xml" "$json_output_file"; then
     echo "Successfully converted ${dataset}.xml to ${dataset}.json"
-    if python3 "$json_to_csv_script_path" "$WORKING_DIR" "$WORKING_DIR"; then
+    ls "$WORKING_DIR"
+    if python3 "$json_to_csv_script_path" "$json_output_file" "$csv_output_file"; then
       echo "Successfully converted JSON files in $WORKING_DIR to CSV files in $WORKING_DIR"
       rm -f "$WORKING_DIR/${dataset}.xml"
       echo "Removed XML file: $WORKING_DIR/${dataset}.xml"
       rm -f "$WORKING_DIR/${dataset}.json"
-        # rm -f "$WORKING_DIR/${dataset}.json"
       echo "Removed JSON file: $WORKING_DIR/${dataset}.json"
       return 0
     else
@@ -81,6 +91,7 @@ function download_and_convert_dataset() {
 }
 
 function download_datasets_for_country() {
+  echo "in download_datasets_for_country method"
   if [ -z "$1" ]; then
     echo "Usage: download_datasets_for_country <country_name> [<dataset_ids>] [<WORKING_DIR>]"
     echo "  <country_name>: The full name of the country (e.g., cotedivoire)."
@@ -90,9 +101,11 @@ function download_datasets_for_country() {
     echo "No country specified. Exiting"
     exit 1
   fi
-  COUNTRY="$1"
-  SELECTED_DATASETS_STRING="$2"
-  WORKING_DIR="$3"
+
+  COUNTRY="${1//\'/}"
+  SELECTED_DATASETS_STRING="${2//\'/}"
+  WORKING_DIR="${3//\'/}"
+  echo "COUNTRY=$COUNTRY - SELECTED_DATASETS_STRING=$SELECTED_DATASETS_STRING - WORKING_DIR=$WORKING_DIR"
 
   if [ -z "$WORKING_DIR" ]; then
     WORKING_DIR=$(pwd)/"input_files"
@@ -107,6 +120,7 @@ function download_datasets_for_country() {
     echo "Downloading selected DATASETS: ${SELECTED_DATASETS[@]}"
     for dataset in "${SELECTED_DATASETS[@]}"; do
       download_and_convert_dataset "$dataset"
+      echo "completed  $dataset ~~~~~~~~~~~~~~~~~~"
     done
 
     echo "Completed processing selected datasets. Removing JSON files."
@@ -127,6 +141,7 @@ function download_datasets_for_country() {
         echo "No specific DATASETS provided. Only key family information downloaded."
         for dataset in "${DATASETS[@]}"; do
           download_and_convert_dataset "$dataset"
+          echo "completed  $dataset ~~~~~~~~~~~~~~~~~~"
         done
         echo "Removing key family XML and JSON files."
         rm -f "$WORKING_DIR/key_family.xml" "$WORKING_DIR/key_family.json"
