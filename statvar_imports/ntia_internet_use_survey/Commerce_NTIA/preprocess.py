@@ -25,10 +25,22 @@ INPUT_FILE = os.path.join(INPUT_DIR, "ntia-analyze-table.csv")
 INPUT_FILE_1 = os.path.join(INPUT_DIR, "ntia-data-age-only.csv")
 INPUT_FILE_2 = os.path.join(INPUT_DIR, "ntia-data.csv")
 
+
+def move_column_left(df, column_to_move, target_column):
+    """Moves a specified column to the left of another specified column."""
+    cols = df.columns.tolist()
+    if column_to_move in cols and target_column in cols:
+        cols.remove(column_to_move)
+        target_index = cols.index(target_column)
+        new_cols = cols[:target_index] + [column_to_move] + cols[target_index:]
+        return df[new_cols]
+    return df
+
+
 def preprocess_data():
     try:
         org_df = pd.read_csv(INPUT_FILE)
-
+    
         df1 = org_df[COMMON_COLUMNS + AGE_COLUMNS].copy()
         df1['universeAgeResol'] = df1['universe'].apply(
             lambda x: 'CivilPerson' if x == 'isPerson' else ('Adult' if x == 'isAdult' else None)
@@ -36,7 +48,8 @@ def preprocess_data():
         df1['variableAgeResol'] = df1['variable'].apply(
             lambda x: 'CivilPerson' if x == 'isPerson' else ('Adult' if x == 'isAdult' else None)
         )
-        df1.to_csv(INPUT_FILE_1, index=False)
+        df1_moved = move_column_left(df1, 'universe', 'variable')
+        df1_moved.to_csv(INPUT_FILE_1, index=False)
 
         df2_cols_to_keep = [col for col in org_df.columns if not col.startswith('age')]
         df2 = org_df[df2_cols_to_keep].copy()
@@ -46,7 +59,8 @@ def preprocess_data():
         df2['variableAgeResol'] = df2['variable'].apply(
             lambda x: 'CivilPerson' if x == 'isPerson' else ('Adult' if x == 'isAdult' else None)
         )
-        df2.to_csv(INPUT_FILE_2, index=False)
+        df2_moved = move_column_left(df2, 'universe', 'variable')
+        df2_moved.to_csv(INPUT_FILE_2, index=False)
 
     except Exception as e:
         logging.fatal(f"An error occurred while preprocessing the input data: {e}")
