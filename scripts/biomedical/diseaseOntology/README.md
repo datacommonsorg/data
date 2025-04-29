@@ -81,8 +81,7 @@ This data is under a Creative Commons Public Domain Dedication [CC0 1.0 Universa
 To test disease_ontology_test.py run:
 
 ```
-python disease_ontology_test.py unit-tests/test-do.owl unit-tests/test-output.owl
-```
+python disease_ontology_test.py 
 
 #### Import
 
@@ -95,5 +94,5 @@ bash download.sh
 2. Clean and convert the downloaded Disease Ontology data into `.csv` format
 
 ```
-python format_disease_ontology.py HumanDO.owl HumanDO.csv
+python format_disease_ontology.py 
 ```

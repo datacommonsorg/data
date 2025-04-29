@@ -29,6 +29,15 @@ import pandas as pd
 import re
 import numpy as np
 import sys
+from absl import flags
+from absl import app
+
+FLAGS = flags.FLAGS
+flags.DEFINE_string('HumanDO', 'scratch/HumanDO.owl',
+                    'HumanDO.owl  file input  path.')
+flags.DEFINE_string('HumanDO_out', 'scratch/HumanDO.csv',
+                    'HumanDO.owl output file path.')
+
 
 
 def format_tag(tag: str) -> str:
@@ -249,13 +258,15 @@ def wrapper_fun(file_input):
 	df_do = df_do.apply(lambda x: check_for_dcid(x),axis=1)
 	return df_do
 
-def main():
-	file_input = sys.argv[1]
-	file_output = sys.argv[2]
+def main(argv):
+	del argv 
+	file_input = FLAGS.HumanDO
+	file_output=FLAGS.HumanDO_out
+
 	df = wrapper_fun(file_input)
 	df.columns = ['diseaseDescription' if x=='IAO_0000115' else x for x in df.columns]
 	df.to_csv(file_output, doublequote=False, escapechar='\\')
 
 
 if __name__ == '__main__':
-	main()
+	app.run(main)
