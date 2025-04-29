@@ -22,6 +22,7 @@ import json
 import logging
 import os
 import shutil
+import shlex
 import sys
 import subprocess
 import tempfile
@@ -921,7 +922,7 @@ def _run_user_script(
     script_args = []
     if interpreter_path:
         script_args.append(interpreter_path)
-    script_args.extend(script_path.split(' '))
+    script_args.extend(shlex.split(script_path))
     if args:
         script_args.extend(args)
     return _run_with_timeout_async(script_args, timeout, cwd, env, name)
