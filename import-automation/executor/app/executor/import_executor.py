@@ -377,7 +377,7 @@ class ImportExecutor:
         for import_input in import_inputs:
             try:
                 template_mcf = import_input['template_mcf']
-                cleaned_csv = import_input['cleaned_csv']
+                cleaned_csv = glob.glob(import_input['cleaned_csv'])
             except KeyError:
                 logging.error(
                     'Skipping validation due to missing template mcf or CSV path missing from import input.'
@@ -397,9 +397,12 @@ class ImportExecutor:
             # Run dc import tool to generate resolved mcf.
             logging.info('Generating resolved mcf...')
             import_tool_args = [
-                f'-o={validation_output_path}', 'genmcf', template_mcf,
-                cleaned_csv
+                f'-o={validation_output_path}',
+                'genmcf',
+                template_mcf,
             ]
+            if cleaned_csv:
+                import_tool_args.extend(cleaned_csv)
             process = _run_user_script(
                 interpreter_path='java',
                 script_path='-jar ' + self.config.import_tool_path,
