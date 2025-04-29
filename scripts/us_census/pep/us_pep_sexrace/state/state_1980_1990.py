@@ -19,6 +19,11 @@ and Count_person_Female are aggregated for this file.
 
 import pandas as pd
 import os
+import sys
+
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from api_calls import get_api_response
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -46,12 +51,15 @@ def process_state_1980_1990(url: str) -> pd.DataFrame:
     _cols.extend(COLUMNS_TO_SUM)
 
     # reading the csv input file
-    df = pd.read_table(url,
-                       index_col=False,
-                       delim_whitespace=True,
-                       engine='python',
-                       names=_cols)
-    df.to_csv(_CODEDIR + "/../input_files/" + "state_result_1980_1990.csv")
+    file_path = os.path.join(_CODEDIR + "/../input_files/" +
+                             "state_result_1980_1990.csv")
+    file_path = get_api_response(file_path, url, 0)
+    df = pd.read_csv(file_path,
+                     engine='python',
+                     encoding='ISO-8859-1',
+                     names=_cols,
+                     delim_whitespace=True)
+
     # adding all the ages to get total value
     df['Total'] = df[COLUMNS_TO_SUM].sum(axis=1)
 

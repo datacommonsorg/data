@@ -19,6 +19,10 @@ is processed as is.
 
 import pandas as pd
 import os
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -45,9 +49,11 @@ def process_county_2000_2009(url: str) -> pd.DataFrame:
             _url = url + str(j) + '.csv'
 
             # reading the input csv as dataframe
-            df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
-            df.to_csv(_CODEDIR + "/../input_files/" +
-                      "county_result_2000_2009.csv")
+            file_path = os.path.join(_CODEDIR + "/../input_files/" +
+                                     "county_result_2000_2009.csv")
+            file_path = get_api_response(file_path, _url, 0)
+            df = pd.read_csv(file_path, engine='python', encoding='ISO-8859-1')
+
             # years having 1 and 12 and 13 value are not requried
             # as estimate is for April Month and 2010
             df = df.query("YEAR not in [1, 12, 13]")

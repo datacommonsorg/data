@@ -19,6 +19,11 @@ is processed as is.
 
 import pandas as pd
 import os
+import sys
+
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from api_calls import get_api_response
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -38,8 +43,17 @@ def process_national_2000_2010(url: str) -> pd.DataFrame:
     # reading the csv format input file and converting it to a dataframe
     # skipping unwanted rows from top and bottom
     # removing commas from the row values
-    df = pd.read_csv(url, skiprows=3, skipfooter=8, header=0, thousands=',')
-    df.to_csv(_CODEDIR + "/../input_files/" + "nationals_result_2000_2010.csv")
+    file_path = os.path.abspath(
+        os.path.join(_CODEDIR, "..", "input_files",
+                     "nationals_result_2000_2010.csv"))
+    file_path = get_api_response(file_path, url, 0)
+    df = pd.read_csv(file_path,
+                     skiprows=3,
+                     skipfooter=8,
+                     engine='python',
+                     encoding='ISO-8859-1',
+                     header=0,
+                     thousands=',')
     df.rename(columns={
         'Unnamed: 0': 'SRH',
         'Unnamed: 13': '2010'

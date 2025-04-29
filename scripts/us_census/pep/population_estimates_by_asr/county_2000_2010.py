@@ -19,6 +19,10 @@ import os
 import pandas as pd
 import numpy as np
 import requests
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 from common_functions import replace_agegrp
 
 
@@ -40,17 +44,10 @@ def county2000(output_folder: str):
             url = 'https://www2.census.gov/programs-surveys/popest/datasets/2'+\
                 '000-2010/intercensal/county/co-est00int-alldata-'+str(j)+'.csv'
             filename = 'raw_data_county_2000_2009_file_' + str(i) + '.csv'
-            file_path = os.path.join(raw_data_dir, filename)
-            headers = {"User-Agent": "Mozilla/5.0"}
-            response = requests.get(url, headers=headers)
-            if response.status_code == 200:
-                with open(file_path, "wb") as f:
-                    f.write(response.content)
-                df = pd.read_csv(file_path,
-                                 engine='python',
-                                 encoding='ISO-8859-1')
-                #Writing raw data to csv
-                df.to_csv(file_path, index=False)
+            file_path = get_api_response(filename, url, 1)
+            df = pd.read_csv(file_path, engine='python', encoding='ISO-8859-1')
+            #Writing raw data to csv
+            df.to_csv(file_path, index=False)
             df['Year'] = df['YEAR']
             df.drop(columns=['YEAR'], inplace=True)
             df = df.query("Year not in [1,12,13]")

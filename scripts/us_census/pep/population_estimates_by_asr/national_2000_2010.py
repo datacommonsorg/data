@@ -17,6 +17,11 @@ This Python Script is for National Level Data 2000-2010.
 import os
 import pandas as pd
 import requests
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
+
 from common_functions import input_url, race_based_grouping
 
 
@@ -28,17 +33,9 @@ def national2000(url_file: str, output_folder: str):
     # Getting input URL from the JSON file.
     _url = input_url(url_file, "2000-10")
     file_name = 'national_2000_2010.csv'
-    raw_data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                "raw_data")
-    os.makedirs(raw_data_dir, exist_ok=True)
-    file_path = os.path.join(raw_data_dir, file_name)
-    headers = {"User-Agent": "Mozilla/5.0"}
-    response = requests.get(_url, headers=headers)
-    if response.status_code == 200:
-        with open(file_path, "wb") as f:
-            f.write(response.content)
-        df = pd.read_csv(file_path, engine='python', encoding='ISO-8859-1')
-        df.to_csv(file_path, index=False)
+    file_path = get_api_response(file_name, _url, 1)
+    df = pd.read_csv(file_path, engine='python', encoding='ISO-8859-1')
+    df.to_csv(file_path, index=False)
     # Removing the unwanted rows.
     # 4 removed as July month is being considered
     df = df.query("MONTH != 4")

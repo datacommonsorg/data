@@ -15,8 +15,11 @@
 This Python Script is for National Level Data 1960-1979.
 '''
 import os
-import requests
 import pandas as pd
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 
 
 def national1960(output_folder: str):
@@ -31,10 +34,6 @@ def national1960(output_folder: str):
         url = 'https://www2.census.gov/programs-surveys/popest/tables/'+\
             '1900-1980/national/asrh/pe-11-19'+str(i)+'.csv'
         file_name = 'raw_data_national_1960_1979_file_' + str(i) + '.csv'
-        raw_data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                    "raw_data")
-        os.makedirs(raw_data_dir, exist_ok=True)
-        file_path = os.path.join(raw_data_dir, file_name)
         # 0-All races total,1-All races male,2-All races female,3-White total,
         # 4-White male,5-White female,6-Black total,7-Black male,8-Black female,
         # 9-Other races total,10-Other races male,11-Other races female.
@@ -43,20 +42,16 @@ def national1960(output_folder: str):
         ]
         # Reading the csv format input file and converting it to a dataframe.
 
-        headers = {"User-Agent": "Mozilla/5.0"}
-        response = requests.get(url, headers=headers)
-        if response.status_code == 200:
-            with open(file_path, "wb") as f:
-                f.write(response.content)
-            # skipping unwanted rows from top and bottom
-            df = pd.read_csv(file_path,
-                             names=cols,
-                             engine='python',
-                             skiprows=8,
-                             skipfooter=15,
-                             encoding='ISO-8859-1')
-            #Writing raw data to csv
-            df.to_csv(file_path, index=False)
+        file_path = get_api_response(file_name, url, 1)
+        # skipping unwanted rows from top and bottom
+        df = pd.read_csv(file_path,
+                         names=cols,
+                         engine='python',
+                         skiprows=8,
+                         skipfooter=15,
+                         encoding='ISO-8859-1')
+        #Writing raw data to csv
+        df.to_csv(file_path, index=False)
 
         df['Age'] = df['Age'].astype(str)
         df['Age'] = df['Age'].str.replace("85\\+", "85OrMore")

@@ -19,6 +19,11 @@ from state 1990-2000 file.
 
 import pandas as pd
 import os
+import sys
+
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from api_calls import get_api_response
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -36,16 +41,19 @@ def process_national_1990_2000(urls: str) -> pd.DataFrame:
         df.columns (pd.DataFrame) : Column names of cleaned dataframe
     """
     final_df = pd.DataFrame()
+    file_path = os.path.abspath(
+        os.path.join(_CODEDIR, "..", "input_files",
+                     "nationals_result_1990_2000.csv"))
     for url in urls:
-        # reading the csv input file
-        df = pd.read_table(url,
-                           skiprows=15,
-                           header=None,
-                           delim_whitespace=True,
-                           index_col=False,
-                           engine='python')
-        df.to_csv(_CODEDIR + "/../input_files/" +
-                  "nationals_result_1990_2000.csv")
+        file_path = get_api_response(file_path, url, 0)
+        df = pd.read_csv(file_path,
+                         index_col=False,
+                         skiprows=15,
+                         engine='python',
+                         encoding='ISO-8859-1',
+                         header=None,
+                         delim_whitespace=True)
+
         # NHWM = Non-Hispnic White Male, NHFM = Non-Hispnic White Female,
         # NHBM = Non-Hispnic Black Male, NHFM = Non-Hispnic Black Female,
         # NHAIANM = Non-Hispanic American Indian and Alaska Native Male,
