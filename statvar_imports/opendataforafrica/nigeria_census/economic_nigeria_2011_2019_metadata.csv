@@ -1,5 +1,0 @@
-parameter,value
-header_rows,7
-output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod,measurementMethod"
-mapped_rows,7
-mapped_columns,2
