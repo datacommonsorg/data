@@ -2,9 +2,7 @@
     "import_specifications": [
         {
             "import_name": "NOAA_GPCC_StandardardizedPrecipitationIndex",
-            "curator_emails": [
-                "support@datacommons.org"
-            ],
+            "curator_emails": [],
             "provenance_url": "https://www.drought.gov/data-maps-tools/global-precipitation-climatology-centre-gpcc-standardized-precipitation-index-spi",
             "provenance_description": "SPI for 1 degree grids calculated from monthly precipitation data using the Pearson distribution.",
             "scripts": [
