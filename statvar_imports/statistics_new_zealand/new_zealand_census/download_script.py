@@ -14,17 +14,9 @@
 import requests
 import zipfile
 import io, os, config
-import logging
+from absl import logging
 import pandas as pd
 from retry import retry
-
-# Create a logger
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)  
-handler = logging.StreamHandler()  
-formatter = logging.Formatter('%(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, "input_files")
@@ -61,14 +53,10 @@ def download_files(urls, excel_file, output_path):
                         with zip_file.open(file_info) as source, open(file_path, "wb") as target:
                             target.write(source.read())
 
-                logger.info(f"Zip file from {url} downloaded and unzipped.")
+                logging.info(f"Zip file from {url} downloaded and unzipped.")
 
-            except requests.exceptions.RequestException as e:
-                logger.fatal(f"Error downloading {url}: {e}")
-            except zipfile.BadZipFile as e:
-                logger.fatal(f"Error: Invalid zip file from {url}: {e}")
             except Exception as e:
-                logger.fatal(f"An unexpected error occurred processing {url}: {e}")
+                logging.fatal(f"An unexpected error occurred processing {url}: {e}")
 
         try:
             df = pd.read_excel(excel_file)
@@ -76,16 +64,14 @@ def download_files(urls, excel_file, output_path):
             new_excel_path = os.path.join(output_path, os.path.basename(excel_file))
             if processed_df is not None:
                 processed_df.to_excel(new_excel_path, index=False)
-            logger.info(f"Excel file copied to: {new_excel_path}")
-        except FileNotFoundError:
-            logger.fatal(f"Error: Excel file not found at: {excel_file}")
+            logging.info(f"Excel file copied to: {new_excel_path}")
         except Exception as e:
-            logger.fatal(f"Error processing Excel file: {e}")
+            logging.fatal(f"Error processing Excel file: {e}")
 
-        logger.info("File processing complete.")
+        logging.info("File processing complete.")
 
     except Exception as e:
-        logger.fatal(f"A general error occurred: {e}")  
+        logging.fatal(f"A general error occurred: {e}")  
 
 
 def process_excel_data(df):

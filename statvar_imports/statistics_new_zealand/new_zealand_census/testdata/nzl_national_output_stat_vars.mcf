@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/sudhisha/Git_works/new_zealand_census/data/statvar_imports/statistics_new_zealand/new_zealand_census/testdata/Summary-figures-for-the-NZ-population-1991-2023.xlsx --pv_map=/usr/local/google/home/sudhisha/statvarWorks/New_zealand_census/input_files/worksheets/nat/national_pvmap.csv --config=/usr/local/google/home/sudhisha/statvarWorks/New_zealand_census/input_files/worksheets/nat/national_metadata.csv --existing_statvar_mcf=stat_vars.mcf --output_path=/usr/local/google/home/sudhisha/Git_works/new_zealand_census/data/statvar_imports/statistics_new_zealand/new_zealand_census/testdata/nzl_national_output" on 2025-04-04 10:37:46.655487
-
 Node: dcid:Count_BirthEvent_LiveBirth
 typeOf: dcid:StatisticalVariable
 populationType: dcid:BirthEvent
