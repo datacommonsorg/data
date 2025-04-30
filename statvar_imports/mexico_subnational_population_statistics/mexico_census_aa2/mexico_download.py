@@ -54,7 +54,7 @@ def download_and_convert_excel_to_csv():
                         df.to_csv(csv_filename, index=False, encoding='utf-8')
                         logging.info(f"Sheet '{sheet_name}' converted to: {csv_filename}")
                 except Exception as e:
-                    logging.error(f"Error processing sheet '{sheet_name}' : {e}")
+                    logging.fatal(f"Failed to process the sheet '{sheet_name}' : {e}")
 
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Failed to download Mexico Census data file: {e}")
