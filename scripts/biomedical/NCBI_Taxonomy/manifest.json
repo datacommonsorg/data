@@ -11,28 +11,12 @@
                 "download.sh",
                 "scripts/format_ncbi_taxonomy.py"
             ],
-            "source_files": [
-                "input/categories.dmp",
-                "input/delnodes.dmp",
-                "input/excludedfromtype.dmp",
-                "input/gencode.dmp",
-                "input/images.dmp",
-                "input/names.dmp",
-                "input/rankedlineage.dmp",
-                "input/typematerial.dmp",
-                "input/citations.dmp",
-                "input/division.dmp",
-                "input/fullnamelineage.dmp",
-                "input/host.dmp",
-                "input/merged.dmp",
-                "input/nodes.dmp",
-                "input/taxidlineage.dmp",
-                "input/typeoftype.dmp"
-            ],
+            "source_files": ["input/*.dmp"],
             "import_inputs": [
                 {
                     "cleaned_csv": "output/ncbi_taxonomy.csv",
-                    "node_mcf": "output/ncbi_taxonomy_schema_enum.mcf"
+                    "node_mcf": "output/ncbi_taxonomy_schema_enum.mcf",
+                    "template_mcf" : "tMCFs/ncbi_taxonomy.tmcf"
 
                 }
             ],
