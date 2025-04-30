@@ -1,4 +1,8 @@
-Node: E:DiseaseOntology->E1
+Node: E:DiseaseOntology-E1
+typeOf: dcs:ICD10Code
+dcid: C:DiseaseOntology->ICD10CM
+
+Node: E:DiseaseOntology->E2
 typeOf: dcs:Disease
 dcid: C:DiseaseOntology->id
 name: C:DiseaseOntology->label
@@ -9,7 +13,7 @@ diseaseOntologyID: C:DiseaseOntology->diseaseId
 experimentalFactorOntologyID: C:DiseaseOntology->EFO
 geneticAndRareDiseasesID: C:DiseaseOntology->GARD
 icd9CMCode: C:DiseaseOntology->ICD9CM
-icd10CMCode: C:DiseaseOntology->ICD10CM
+icd10CMCode: E:DiseaseOntology->E1
 icd11CMCode: C:DiseaseOntology->ICD11
 internationalClassificationOfDiseasesOntologyID: C:DiseaseOntology->ICDO
 medicalSubjectHeadingDescriptorID: C:DiseaseOntology->meshDescriptor
