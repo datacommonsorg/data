@@ -16,7 +16,7 @@
           "cleaned_csv": "OECD_population_cleaned.csv"
         }
       ],
-      "cron_schedule": "0 9 1 3 *",
+      "cron_schedule": "0 10 1,15 * *",
       "user_script_timeout": 7200,
       "resource_limits": {
         "cpu": "4",
