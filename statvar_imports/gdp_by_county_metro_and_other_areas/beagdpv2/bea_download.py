@@ -13,12 +13,11 @@
 # limitations under the License.
 
 import os, shutil, requests
-import zipfile, logging
+import zipfile
+from absl import logging
 from pathlib import Path
 from retry import retry
 import config
-
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 BEA_ZIP_URL = config.BEA_ZIP_URL
 
@@ -44,7 +43,7 @@ def download_file():
         logging.info(f"Downloaded file saved to {zip_path}")
         return  zip_path
     
-    except requests.exceptions.RequestException as e:
+    except Exception as e:
         logging.fatal(f"Failed to download file: {e}")
         return None
     
@@ -66,8 +65,8 @@ def extract_and_process(zip_path):
                     os.remove(file_path)
                 elif os.path.isdir(file_path):
                     shutil.rmtree(file_path)             
-    except zipfile.BadZipFile:
-        logging.fatal("Invalid ZIP file format!")
+    except Exception as e:
+        logging.fatal(f"Failed to extract the file: {e}")
 
 if __name__ == "__main__":
     zip_path = download_file()
