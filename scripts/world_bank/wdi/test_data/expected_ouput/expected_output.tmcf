@@ -1,0 +1,40 @@
+Node: E:WorldBank->E0
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: C:WorldBank->observationPeriod
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value0
+unit: C:WorldBank->unit
+
+Node: E:WorldBank->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: C:WorldBank->observationPeriod
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value1
+unit: C:WorldBank->unit
+scalingFactor: C:WorldBank->scalingFactor
+
+Node: E:WorldBank->E2
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: C:WorldBank->observationPeriod
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value2
+unit: C:WorldBank->unit
+measurementMethod: C:WorldBank->measurementMethod
+
+Node: E:WorldBank->E3
+typeOf: dcs:StatVarObservation
+variableMeasured: C:WorldBank->StatisticalVariable
+observationDate: C:WorldBank->Year
+observationPeriod: C:WorldBank->observationPeriod
+observationAbout: C:WorldBank->ISO3166Alpha3
+value: C:WorldBank->Value3
+unit: C:WorldBank->unit
+measurementMethod: C:WorldBank->measurementMethod
+scalingFactor: C:WorldBank->scalingFactor
+

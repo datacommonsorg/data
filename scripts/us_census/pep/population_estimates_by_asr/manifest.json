@@ -1,0 +1,19 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "USCensusPEP_AgeSexRace",
+      "curator_emails": ["bipina@google.com"],
+      "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
+      "provenance_description": ".The Census Bureau's Population Estimates Program (PEP) produces estimates of the population for the United States.",
+      "scripts": ["process.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "output/usa_population_asr.tmcf",
+          "cleaned_csv": "output/usa_population_asr.csv"
+        }
+      ],
+      "cron_schedule": "0 05 * * 1"
+    }
+  ]
+}
+

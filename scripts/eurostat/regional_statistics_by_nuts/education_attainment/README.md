@@ -30,7 +30,7 @@ ISCED standard education levels:
 
 ### Download URL
 
-[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/edat_lfse_04.tsv.gz).
+[TSV] file is available for [download](https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/edat_lfse_04/?format=TSV&compressed=true).
 
 ### License
 
@@ -93,10 +93,24 @@ The original dataset is broken up into 3 columns:
 
 `Eurostats_NUTS2_Edat.mcf` and `Eurostats_NUTS2_Edat_Enum.mcf` were handwritten.
 
-To generate `Eurostats_NUTS2_Edat.tmcf` and `Eurostats_NUTS2_Edat.csv`, run:
+To generate `Eurostats_NUTS2_Edat.tmcf` and `Eurostats_NUTS2_Edat.csv`, run
+
+This script offers three modes of operation: download, process, or both download and process.
 
 ```bash
-python3 education_attainment_preprocess_gen_tmcf.py
+1. Download and Process (python3 education_attainment_preprocess_gen_tmcf.py or no mode flag):
+2. Download Only (python3 education_attainment_preprocess_gen_tmcf.py --mode=download):
+3. Process Only (python3 education_attainment_preprocess_gen_tmcf.py --mode=process):
+```
+### Testing Procedure
+
+How to Create Sample Data: Extract a subset of rows from your source input file to generate sample input and output CSV files.
+
+To test import procedure, run the following command:
+
+```
+python3 education_attainment_preprocess_gen_tmcf_test.py
+
 ```
 
 ### Validating Artifacts

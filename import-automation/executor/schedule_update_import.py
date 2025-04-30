@@ -25,6 +25,7 @@ from app import configs
 from app.executor import import_target
 from app.executor import import_executor
 from app.executor import cloud_scheduler
+from app.executor import scheduler_job_manager
 from app.executor import validation
 from app.service import email_notifier
 from app.service import file_uploader
@@ -32,8 +33,6 @@ from app.service import github_api
 from google.cloud import storage
 
 _CONFIG_OVERRIDE_FILE: str = 'config_override.json'
-_GKE_SERVICE_ACCOUNT_KEY: str = 'gke_service_account'
-_GKE_OAUTH_AUDIENCE_KEY: str = 'gke_oauth_audience'
 
 _FLAGS = flags.FLAGS
 
@@ -54,14 +53,16 @@ flags.DEFINE_string(
     'A string specifying the path of an import in the following format:'
     '<path_to_directory_relative_to_repository_root>:<import_name>.'
     'Example: scripts/us_usda/quickstats:UsdaAgSurvey')
+flags.DEFINE_string('config_override', _CONFIG_OVERRIDE_FILE,
+                    'Config file with overridden parameters.')
 
 _FLAGS(sys.argv)
 
 logging.basicConfig(level=logging.INFO)
 
 
-def _get_cron_schedule(repo_dir: str, absolute_import_path: str,
-                       manifest_filename: str):
+def _get_import_spec(repo_dir: str, absolute_import_path: str,
+                     manifest_filename: str):
 
     # Retain the path to the import (ignoring the name of the import).
     path = absolute_import_path.split(":")[0]
@@ -77,7 +78,7 @@ def _get_cron_schedule(repo_dir: str, absolute_import_path: str,
 
     for spec in manifest['import_specifications']:
         if absolute_import_path.endswith(':' + spec['import_name']):
-            return spec['cron_schedule']
+            return spec
 
     # If we are here, the the import name was not found in the manifest.
     raise Exception(
@@ -238,34 +239,6 @@ def update(cfg: configs.ExecutorConfig,
     return executor.execute_imports_on_update(absolute_import_path)
 
 
-def schedule(cfg: configs.ExecutorConfig,
-             absolute_import_name: str,
-             repo_dir: str,
-             gke_service_account: str = "",
-             gke_oauth_audience: str = "") -> Dict:
-    # This is the content of what is passed to /update API
-    # inside each cronjob http calls from Cloud Scheduler.
-    json_encoded_job_body = json.dumps({
-        'absolute_import_name': absolute_import_name,
-        'configs': cfg.get_data_refresh_config()
-    }).encode("utf-8")
-
-    # Retrieve the cron schedule.
-    cron_schedule = _get_cron_schedule(repo_dir, absolute_import_name,
-                                       cfg.manifest_filename)
-
-    # Create an HTTP Job Request.
-    req = cloud_scheduler.http_job_request(
-        absolute_import_name,
-        cron_schedule,
-        json_encoded_job_body,
-        gke_caller_service_account=gke_service_account,
-        gke_oauth_audience=gke_oauth_audience)
-
-    return cloud_scheduler.create_or_update_job(cfg.gcp_project_id,
-                                                cfg.scheduler_location, req)
-
-
 def main(_):
     mode = _FLAGS.mode
     absolute_import_path = _FLAGS.absolute_import_path
@@ -301,8 +274,9 @@ def main(_):
     cfg.gcp_project_id = _FLAGS.gke_project_id
 
     logging.info(
-        f'Updating any config fields from local file: {_CONFIG_OVERRIDE_FILE}.')
-    cfg = _override_configs(_CONFIG_OVERRIDE_FILE, cfg)
+        f'Updating any config fields from local file: {_FLAGS.config_override}.'
+    )
+    cfg = _override_configs(_FLAGS.config_override, cfg)
 
     logging.info('Reading Cloud scheduler configs from GCS.')
     scheduler_config_dict = _get_cloud_config(_FLAGS.scheduler_config_filename)
@@ -332,19 +306,14 @@ def main(_):
         _print_fileupload_results(cfg, absolute_import_path)
 
     elif mode == 'schedule':
-        # Before proceeding, ensure that the configs read from GCS have the expected fields.
-        assert _GKE_SERVICE_ACCOUNT_KEY in scheduler_config_dict
-        assert _GKE_OAUTH_AUDIENCE_KEY in scheduler_config_dict
-
         logging.info("*************************************************")
         logging.info("***** Beginning Schedule Operation **************")
         logging.info("*************************************************")
-        res = schedule(
-            cfg,
-            absolute_import_path,
-            repo_dir,
-            gke_service_account=scheduler_config_dict[_GKE_SERVICE_ACCOUNT_KEY],
-            gke_oauth_audience=scheduler_config_dict[_GKE_OAUTH_AUDIENCE_KEY])
+        # Retrieve the cron schedule.
+        import_spec = _get_import_spec(repo_dir, absolute_import_path,
+                                       cfg.manifest_filename)
+        res = scheduler_job_manager.create_or_update_import_schedule(
+            absolute_import_path, import_spec, cfg, scheduler_config_dict)
         logging.info("*************************************************")
         logging.info("*********** Schedule Operation Complete. ********")
         logging.info("*************************************************")

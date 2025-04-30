@@ -1,0 +1,17 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "EurostatData_LifeExpectancy",
+            "curator_emails": ["spateriya@google.com"],
+            "provenance_url":"https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/demo_r_mlifexp/?format=TSV&compressed=true",
+            "provenance_description": "Regional Statistics by NUTS Classification.",
+            "scripts": ["preprocess.py"],
+            "import_inputs": [{
+                "template_mcf": "demo_r_mlifexp.tmcf",
+                "cleaned_csv": "demo_r_mlifexp_cleaned.csv"
+            }],
+        "cron_schedule": "00 05 * * 2"
+        }
+    ]
+}
+

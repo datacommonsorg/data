@@ -1,7 +1,5 @@
-# US Census PEP: Population Estimates by Age, Sex and Race
-
 ## About the Dataset
-This dataset has Population Estimates for the National, State and County geographic levels in United States from the year 1900 to 2020 on a yearly basis.
+This dataset has Population Estimates for the National, State and County geographic levels in United States from the year 1900 on a yearly basis till latest year.
 
 The population is categorized by various set of combinations as below:
         
@@ -53,3 +51,23 @@ Run the test cases
 The below script will download the data and clean the data, Also generate final csv, mcf and tmcf files.
 
 `/bin/python3 scripts/us_census/pep/Population_Estimate_by_ASR/process.py`
+
+Execute the 'process.py' script by using the following commands:
+
+  - if you want to perform "download and process", run the below command:
+
+        `python3 process.py
+
+  - if you want to perform "only process", run the below command:
+
+        `python3 process.py --mode=process`
+        
+  - if you want to perform "only download", run the below command:
+
+        `python3 process.py --mode=download`
+
+### New Implentation:
+- [Updated the script on October 29, 2024]
+- Downloading input files is now integrated into preprocess.py, eliminating the need to run the separate download.sh script. 
+- All source file URLs, including future URLs adhering to the same structure, are centrally managed in the input_url.json file.
+- All input files required for processing should be stored within the designated "input_files" folder.

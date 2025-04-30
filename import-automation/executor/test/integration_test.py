@@ -27,10 +27,10 @@ CONFIGS = {
     # The GitHub params belong to the public Data Commons gmail account.
     # Auth tokens, user name and other details can be found in the inbox
     # and in the inbox of teammates.
-    'github_repo_owner_username': os.environ['_GITHUB_REPO_OWNER_USERNAME'],
+    'github_repo_owner_username': os.getenv('_GITHUB_REPO_OWNER_USERNAME', ''),
     'github_repo_name': 'data-demo',
-    'github_auth_username': os.environ['_GITHUB_AUTH_USERNAME'],
-    'github_auth_access_token': os.environ['_GITHUB_AUTH_ACCESS_TOKEN']
+    'github_auth_username': os.getenv('_GITHUB_AUTH_USERNAME', ''),
+    'github_auth_access_token': os.getenv('_GITHUB_AUTH_ACCESS_TOKEN', '')
 }
 
 

@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ def process_state_1990_2000(urls: str) -> pd.DataFrame:
                            delim_whitespace=True,
                            index_col=False,
                            engine='python')
-
+        df.to_csv(_CODEDIR + "/../input_files/" + "state_result_1990_2000.csv")
         # NHWM = Non-Hispnic White Male, NHFM = Non-Hispnic White Female,
         # NHBM = Non-Hispnic Black Male, NHFM = Non-Hispnic Black Female,
         # NHAIANM = Non-Hispanic American Indian and Alaska Native Male,

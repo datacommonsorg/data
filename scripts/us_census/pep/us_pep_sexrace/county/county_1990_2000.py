@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -63,7 +63,8 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
                                engine='python',
                                names=_cols,
                                encoding='ISO-8859-1')
-
+            df.to_csv(_CODEDIR + "/../input_files/" +
+                      'county_result_1990_2000.csv')
             # dropping the rows which are having broken values
             num_df = (df.drop(_cols,
                               axis=1).join(df[_cols].apply(pd.to_numeric,
@@ -75,7 +76,6 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             # providing geoId to the dataframe
             # and making the geoId of 5 digit as county
             df.loc[:, 'geo_ID'] = [f'{x:05}' for x in df.loc[:, 'geo_ID']]
-
             # columns after 11 where having origin hence not required
             df.drop(df[df['Race'] >= 11].index, inplace=True)
 
@@ -114,7 +114,6 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             # splitting column into geoId and Year
             df['geo_ID'] = df['Year'].str.split('-', expand=True)[1]
             df['Year'] = df['Year'].str.split('-', expand=True)[0]
-
             # dropping unwanted column
             df.drop(columns=['level_0'], inplace=True)
 
@@ -122,8 +121,10 @@ def process_county_1990_2000(url: str) -> pd.DataFrame:
             final_df = pd.concat([final_df, df])
 
     # creating proper geoId
-    final_df['geo_ID'] = 'geoId/' + final_df['geo_ID'].astype("str")
-
+    # import pdb;
+    # pdb.set_trace()
+    final_df['geo_ID'] = 'geoId/' + final_df['geo_ID'].astype(str).str.replace(
+        '.0', '')
     # aggregating required columns to get Count_Person_Male
     final_df["Count_Person_Male"] = final_df.loc[:, [
         'Count_Person_Male_WhiteAlone',

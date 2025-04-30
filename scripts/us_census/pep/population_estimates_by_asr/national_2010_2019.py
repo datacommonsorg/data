@@ -32,6 +32,11 @@ def national2010(url_file: str, output_folder: str):
     for sheet in _sheets:
         df_sheet = pd.DataFrame()
         df = pd.read_excel(_urls, sheet, skiprows=4, header=0)
+        #Writing raw data to csv
+        df.to_csv(os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "raw_data",
+            'raw_data_national_2010_2019_' + str(sheet) + '.csv'),
+                  index=False)
         # Dropping extra columns
         df = df.drop(['Census', 'Estimates Base'], axis=1)
         # Deleting the row with garbage information , 0 denotes the row
@@ -73,6 +78,7 @@ def national2010(url_file: str, output_folder: str):
     df_final['SVs'] = 'Count_Person_' + df_final['SVs']
     df_final['Measurement_Method'] = 'CensusPEPSurvey'
     df_final['geo_ID'] = 'country/USA'
+
     df_final.to_csv(
         os.path.join(os.path.dirname(os.path.abspath(__file__)), output_folder,
                      'national_2010_2019.csv'))

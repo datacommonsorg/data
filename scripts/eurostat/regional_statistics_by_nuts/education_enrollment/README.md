@@ -17,7 +17,7 @@ It has the enrollment rate for the years of [2000-2019] categorized by
 
 ### Download URL
 
-[TSV] file is available for [download](https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/trng_lfse_04.tsv.gz).
+[TSV] file is available for [download](https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/trng_lfse_04/?format=TSV&compressed=true).
 
 ### License
 
@@ -86,8 +86,23 @@ This import uses StatVars in the Data Commons graph:
 
 To generate `Eurostats_NUTS2_Enrollment.tmcf` and `Eurostats_NUTS2_Enrollment.csv`, run:
 
+This script offers three modes of operation: download, process, or both download and process.
+
 ```bash
-python3 education_enrollment_preprocess_gen_tmcf.py
+1. Download and Process (python3 education_enrollment_preprocess_gen_tmcf.py or no mode flag):
+2. Download Only (python3 education_enrollment_preprocess_gen_tmcf.py --mode=download):
+3. Process Only (python3 education_enrollment_preprocess_gen_tmcf.py --mode=process):
+```
+
+### Testing Procedure
+
+How to Create Sample Data: Extract a subset of rows from your source input file to generate sample input and output CSV files.
+
+To test import procedure, run the following command:
+
+```
+python3 education_enrollment_preprocess_gen_tmcf_test.py
+
 ```
 
 #### Post-Processing Validation
