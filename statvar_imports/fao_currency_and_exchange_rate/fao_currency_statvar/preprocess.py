@@ -15,6 +15,7 @@
 import pandas as pd
 import os
 from absl import logging
+
 input_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_data/")
 input_file = input_dir + 'Exchange_rate_E_All_Data.csv'
 output_file = input_dir + 'final_input_data.csv'
@@ -68,10 +69,8 @@ def melt_year_and_flag_columns(input_csv_file, output_csv_file):
 
         logging.info(f"Successfully melted year and flag columns from '{input_csv_file}' to '{output_csv_file}'")
 
-    except FileNotFoundError:
-        logging.error(f"Error: Input CSV file '{input_csv_file}' not found.")
     except Exception as e:
-        logging.fatal(f"An error occurred: {e}")
+        logging.fatal(f"An error occurred while preprocessing the data: {e}")
 
 if __name__== "__main__":
     melt_year_and_flag_columns(input_file, output_file)
