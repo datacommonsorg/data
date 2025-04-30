@@ -14,9 +14,8 @@
 
 import os
 import pandas as pd
-import logging
+from absl import logging
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
 
 COMMON_COLUMNS = ["dataset", "variable", "description", "universe"]
@@ -27,7 +26,7 @@ INPUT_FILE_2 = os.path.join(INPUT_DIR, "ntia-data.csv")
 
 
 def move_column_left(df, column_to_move, target_column):
-    """Moves a specified column to the left of another specified column."""
+    """Moves the universe column to the left of variable column."""
     cols = df.columns.tolist()
     if column_to_move in cols and target_column in cols:
         cols.remove(column_to_move)
