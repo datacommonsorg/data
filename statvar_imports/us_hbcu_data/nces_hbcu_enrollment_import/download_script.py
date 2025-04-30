@@ -17,19 +17,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-import logging
+from absl import logging
 import os
 import shutil
 import pandas as pd
 from pathlib import Path
-
-# logging configuration
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-handler = logging.StreamHandler()
-formatter = logging.Formatter('%(message)s')
-handler.setFormatter(formatter)
-logger.addHandler(handler)
 
 def download_file(input_file_path):
     """
@@ -50,7 +42,6 @@ def download_file(input_file_path):
     chrome_options.add_experimental_option("prefs", prefs)
     driver = webdriver.Chrome(options=chrome_options)
     count = 0
-    logger.info(driver)
     try:
         for year in range(22, 100):
             url = f'https://nces.ed.gov/programs/digest/d{year}/tables/dt{year}_313.30.asp'
@@ -60,7 +51,7 @@ def download_file(input_file_path):
                     EC.element_to_be_clickable((By.XPATH, "//a[contains(text(),'Download Excel')]"))
                 )
                 excel_link.click()
-                logger.info("Excel link clicked.")
+                logging.info("Excel link clicked.")
                 time.sleep(5)
                 for filename in os.listdir(tmpdir):
                     if filename.endswith((".xlsx", ".xls")):
@@ -71,13 +62,13 @@ def download_file(input_file_path):
                         os.remove(old_file)
                         count += 1
             except Exception as e:
-                logger.fatal(f"No Excel link found for year 20{year} or an error occurred")
+                logging.fatal(f"No Excel link found for year 20{year} or an error occurred")
                 break
     except Exception as e:
-        logger.fatal(f"Error during the main loop")
+        logging.fatal(f"Error during the main loop")
     finally:
         driver.quit()
-        logger.info("ChromeDriver has been closed.")
+        logging.info("ChromeDriver has been closed.")
 
 if __name__ == "__main__":
     inputdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
