@@ -1,0 +1,96 @@
+# Prompt to generate or correct name sfor StatVars.
+# Caller should provide the following parameters:
+#  sample_statvars: MCF nodes of statvars with expected names.
+#  context: Text string describing property:values used in statvars.
+#  input_statvars: MCF nodes for stavtars for whcih name is to be added.
+Generate the name property for each of the Node in the NODES section
+where a Node is a list of property:value tuples. Nodes are seperated by empty lines.
+Use the text in the CONTEXT section to understand the property:values better.
+
+If the Node has a 'name' property, then correct any grammar or spelling mistakes in it
+and convert it into a concise title that captures all the properties.
+
+If the Node has a 'description' property, fix any English grammar or spelling mistakes
+in the value.
+
+If a node doesn't have a name, then generate a name based on the node's properties.
+The name should capture all the properties in the node.
+
+If a node doesn't have a description, then generate a detailed description based
+on the node's properties.
+
+Return the corrected nodes in the same order with the updated name and description values.
+
+Here are a few examples:
+##### EXAMPLES ######
+---------------
+Node: dcid:Count_Student
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+name: "Count of Student"
+description: "Individuals in an educational institutions like school or college"
+
+
+Node: dcid:Count_Person_Civilian_Female_NonInstitutionalized
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: schema:Person
+gender: dcs:Female
+institutionalization: dcs:USC_NonInstitutionalized
+armedForcesStatus: dcs:Civilian
+typeOf: dcs:StatisticalVariable
+name: "Count of Women who are Non Institutionalized"
+
+Node: dcid:Count_Person_0To1Years_Urban_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [0 1 Years]
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+description: "Number of women aged 0 to 1 years living in urban areas"
+
+Node: dcid:Count_Person_Literate_Male_AsAFractionOf_Count_Person_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Male
+gender: dcid:Male
+literacyStatus: dcid:Literate
+
+Node: dcid:Count_Person_PrimaryEducation_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+educationalAttainment: dcid:PrimaryEducation
+
+{sample_statvars}
+--------------
+In the above fix the name for the node dcid:Count_Student to: "Number of Students"
+and it's description to: "Number of students studying in an educational institutions like school or college"
+
+Update the name for the node Count_Person_Civilian_Female_NonInstitutionalized to "Female Population Non Institutionalized"
+
+For the node: Count_Person_0To1Years_Urban_Female, add a name property
+with the value: "Number of women aged 0 to 1 years living in urban areas"
+
+For the node Count_Person_Literate_Male_AsAFractionOf_Count_Person_Male generate the name: "Percentage of Literates in Male Population"
+
+For the node Count_Person_PrimaryEducation_AsAFractionOf_Count_Person, generate the name: "Percentage of people who have completed primary education"
+
+For the node Count_Person_Civilian_Female_NonInstitutionalized add a description: "Individuals in an educational institutions like school or college who are not Institutionalized"
+
+
+##### CONTEXT #####
+{context}
+
+##### NODES #####
+{input_statvars}
+
+
+

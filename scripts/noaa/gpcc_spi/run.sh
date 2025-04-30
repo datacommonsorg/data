@@ -26,7 +26,7 @@ config=spi_9m_polygon
 set -x
 
 
-#Run download script
+# Run download script
 python3 download.py
 
 # Run NOAA_GPCC_StandardardizedPrecipitationIndex script
@@ -40,7 +40,7 @@ echo "Creating a directory for the sharded files"
 mkdir -p output_files/shard
 
 echo "Sharding pcc_spi_pearson_09.csv based on year and writing them to the shard folder."
-sh ../../../tools/pd_csv.sh -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 -sort time "df['year']=df['time'].str.slice(0,4)" -shard year
+bash /data/tools/pd_csv.sh -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 -sort time "df['year']=df['time'].str.slice(0,4)" -shard year
 
 
 # Convert into events
@@ -60,7 +60,7 @@ wait
 
 #bash scripts to merge multiple csv files into one file
 
-input_folders=("output_files/events_spi_9m_polygon/events" "output_files/events_spi_9m_polygon/event_svobs" "output_files/events_spi_9m_polygon/place_svobs")
+input_folders=("data/scripts/noaa/gpcc_spi/output_files/events_spi_9m_polygon/events" "data/scripts/noaa/gpcc_spi/output_files/events_spi_9m_polygon/event_svobs" "data/scripts/noaa/gpcc_spi/output_files/events_spi_9m_polygon/place_svobs")
 output_file_name=("drought_spi_9m_polygon_events" "drought_spi_9m_polygon_svobs"  "drought_spi_9m_polygon_place_svobs")
 index=0
 for fld in "${input_folders[@]}"; do
