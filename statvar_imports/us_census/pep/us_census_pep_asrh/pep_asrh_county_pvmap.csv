@@ -1,0 +1,105 @@
+key,p1,v1,p2,v2,,,,
+STATE,#Format,DataVar={Number:02d},,,,,,
+COUNTY,#Format,State={Number:03d},observationAbout,geoId/{DataVar}{State},populationType,Person,measurementMethod,CensusPEPSurvey_Race2000Onwards
+TOT_POP,,,,,,,value,{Number}
+TOT_MALE,gender,Male,,,,,value,{Number}
+TOT_FEMALE,gender,Female,,,,,value,{Number}
+WA_MALE,gender,Male,race,WhiteAlone,,,value,{Number}
+WA_FEMALE,gender,Female,race,WhiteAlone,,,value,{Number}
+BA_MALE,gender,Male,race,BlackOrAfricanAmericanAlone,,,value,{Number}
+BA_FEMALE,gender,Female,race,BlackOrAfricanAmericanAlone,,,value,{Number}
+IA_MALE,gender,Male,race,AmericanIndianAndAlaskaNativeAlone,,,value,{Number}
+IA_FEMALE,gender,Female,race,AmericanIndianAndAlaskaNativeAlone,,,value,{Number}
+AA_MALE,gender,Male,race,AsianAlone,,,value,{Number}
+AA_FEMALE,gender,Female,race,AsianAlone,,,value,{Number}
+NA_MALE,gender,Male,race,NativeHawaiianAndOtherPacificIslanderAlone,,,value,{Number}
+NA_FEMALE,gender,Female,race,NativeHawaiianAndOtherPacificIslanderAlone,,,value,{Number}
+TOM_MALE,gender,Male,race,TwoOrMoreRaces,,,value,{Number}
+TOM_FEMALE,gender,Female,race,TwoOrMoreRaces,,,value,{Number}
+WAC_MALE,gender,Male,race,WhiteAloneOrInCombinationWithOneOrMoreOtherRaces,,,value,{Number}
+WAC_FEMALE,gender,Female,race,WhiteAloneOrInCombinationWithOneOrMoreOtherRaces,,,value,{Number}
+BAC_MALE,gender,Male,race,BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces,,,value,{Number}
+BAC_FEMALE,gender,Female,race,BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces,,,value,{Number}
+IAC_MALE,gender,Male,race,AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces,,,value,{Number}
+IAC_FEMALE,gender,Female,race,AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces,,,value,{Number}
+AAC_MALE,gender,Male,race,AsianAloneOrInCombinationWithOneOrMoreOtherRaces,,,value,{Number}
+AAC_FEMALE,gender,Female,race,AsianAloneOrInCombinationWithOneOrMoreOtherRaces,,,value,{Number}
+NAC_MALE,gender,Male,race,NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces,,,value,{Number}
+NAC_FEMALE,gender,Female,race,NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces,,,value,{Number}
+NH_MALE,gender,Male,,,ethnicity,NotHispanicOrLatino,value,{Number}
+NH_FEMALE,gender,Female,,,ethnicity,NotHispanicOrLatino,value,{Number}
+NHWA_MALE,gender,Male,race,WhiteAlone,ethnicity,NotHispanicOrLatino,value,{Number}
+NHWA_FEMALE,gender,Female,race,WhiteAlone,ethnicity,NotHispanicOrLatino,value,{Number}
+NHBA_MALE,gender,Male,race,BlackOrAfricanAmericanAlone,ethnicity,NotHispanicOrLatino,value,{Number}
+NHBA_FEMALE,gender,Female,race,BlackOrAfricanAmericanAlone,ethnicity,NotHispanicOrLatino,value,{Number}
+NHIA_MALE,gender,Male,race,AmericanIndianAndAlaskaNativeAlone,ethnicity,NotHispanicOrLatino,value,{Number}
+NHIA_FEMALE,gender,Female,race,AmericanIndianAndAlaskaNativeAlone,ethnicity,NotHispanicOrLatino,value,{Number}
+NHAA_MALE,gender,Male,race,AsianAlone,ethnicity,NotHispanicOrLatino,value,{Number}
+NHAA_FEMALE,gender,Female,race,AsianAlone,ethnicity,NotHispanicOrLatino,value,{Number}
+NHNA_MALE,gender,Male,race,NativeHawaiianAndOtherPacificIslanderAlone,ethnicity,NotHispanicOrLatino,value,{Number}
+NHNA_FEMALE,gender,Female,race,NativeHawaiianAndOtherPacificIslanderAlone,ethnicity,NotHispanicOrLatino,value,{Number}
+NHTOM_MALE,gender,Male,race,TwoOrMoreRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHTOM_FEMALE,gender,Female,race,TwoOrMoreRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHWAC_MALE,gender,Male,race,WhiteAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHWAC_FEMALE,gender,Female,race,WhiteAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHBAC_MALE,gender,Male,race,BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHBAC_FEMALE,gender,Female,race,BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHIAC_MALE,gender,Male,race,AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHIAC_FEMALE,gender,Female,race,AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHAAC_MALE,gender,Male,race,AsianAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHAAC_FEMALE,gender,Female,race,AsianAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHNAC_MALE,gender,Male,race,NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+NHNAC_FEMALE,gender,Female,race,NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,NotHispanicOrLatino,value,{Number}
+H_MALE,gender,Male,,,ethnicity,HispanicOrLatino,value,{Number}
+H_FEMALE,gender,Female,,,ethnicity,HispanicOrLatino,value,{Number}
+HWA_MALE,gender,Male,race,WhiteAlone,ethnicity,HispanicOrLatino,value,{Number}
+HWA_FEMALE,gender,Female,race,WhiteAlone,ethnicity,HispanicOrLatino,value,{Number}
+HBA_MALE,gender,Male,race,BlackOrAfricanAmericanAlone,ethnicity,HispanicOrLatino,value,{Number}
+HBA_FEMALE,gender,Female,race,BlackOrAfricanAmericanAlone,ethnicity,HispanicOrLatino,value,{Number}
+HIA_MALE,gender,Male,race,AmericanIndianAndAlaskaNativeAlone,ethnicity,HispanicOrLatino,value,{Number}
+HIA_FEMALE,gender,Female,race,AmericanIndianAndAlaskaNativeAlone,ethnicity,HispanicOrLatino,value,{Number}
+HAA_MALE,gender,Male,race,AsianAlone,ethnicity,HispanicOrLatino,value,{Number}
+HAA_FEMALE,gender,Female,race,AsianAlone,ethnicity,HispanicOrLatino,value,{Number}
+HNA_MALE,gender,Male,race,NativeHawaiianAndOtherPacificIslanderAlone,ethnicity,HispanicOrLatino,value,{Number}
+HNA_FEMALE,gender,Female,race,NativeHawaiianAndOtherPacificIslanderAlone,ethnicity,HispanicOrLatino,value,{Number}
+HTOM_MALE,gender,Male,race,TwoOrMoreRaces,ethnicity,HispanicOrLatino,value,{Number}
+HTOM_FEMALE,gender,Female,race,TwoOrMoreRaces,ethnicity,HispanicOrLatino,value,{Number}
+HWAC_MALE,gender,Male,race,WhiteAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,HispanicOrLatino,value,{Number}
+HWAC_FEMALE,gender,Female,race,WhiteAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,HispanicOrLatino,value,{Number}
+HBAC_MALE,gender,Male,race,BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,HispanicOrLatino,value,{Number}
+HBAC_FEMALE,gender,Female,race,BlackOrAfricanAmericanAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,HispanicOrLatino,value,{Number}
+HIAC_MALE,gender,Male,race,AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,HispanicOrLatino,value,{Number}
+HIAC_FEMALE,gender,Female,race,AmericanIndianAndAlaskaNativeAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,HispanicOrLatino,value,{Number}
+HAAC_MALE,gender,Male,race,AsianAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,HispanicOrLatino,value,{Number}
+HAAC_FEMALE,gender,Female,race,AsianAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,HispanicOrLatino,value,{Number}
+HNAC_MALE,gender,Male,race,NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,HispanicOrLatino,value,{Number}
+HNAC_FEMALE,gender,Female,race,NativeHawaiianAndOtherPacificIslanderAloneOrInCombinationWithOneOrMoreOtherRaces,ethnicity,HispanicOrLatino,value,{Number}
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+,,,,,,,,
+AGEGRP:1,age,[0 4 Years],,,,,,
+AGEGRP:2,age,[5 9 Years],,,,,,
+AGEGRP:3,age,[10 14 Years],,,,,,
+AGEGRP:4,age,[15 19 Years],,,,,,
+AGEGRP:5,age,[20 24 Years],,,,,,
+AGEGRP:6,age,[25 29 Years],,,,,,
+AGEGRP:7,age,[30 34 Years],,,,,,
+AGEGRP:8,age,[35 39 Years],,,,,,
+AGEGRP:9,age,[40 44 Years],,,,,,
+AGEGRP:10,age,[45 49 Years],,,,,,
+AGEGRP:11,age,[50 54 Years],,,,,,
+AGEGRP:12,age,[55 59 Years],,,,,,
+AGEGRP:13,age,[60 64 Years],,,,,,
+AGEGRP:14,age,[65 69 Years],,,,,,
+AGEGRP:15,age,[70 74 Years],,,,,,
+AGEGRP:16,age,[75 79 Years],,,,,,
+AGEGRP:17,age,[80 84 Years],,,,,,
+AGEGRP:18,age,[85 - Years],,,,,,
+,,,,,,,,
+,,,,,,,,
+YEAR:1,observationDate,"""""",,,,,,
+YEAR:2,observationDate,2020,,,,,,
+YEAR:3,observationDate,2021,,,,,,
+YEAR:4,observationDate,2022,,,,,,
+YEAR:5,observationDate,2023,,,,,,
