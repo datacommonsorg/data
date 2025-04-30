@@ -36,6 +36,8 @@ from absl import app
 from absl import logging
 from absl import flags
 from time import time
+from google.cloud import storage
+from urllib.parse import urlparse
 # Setup path for import from data/util
 # or set `export PYTHONPATH="./:<repo>/data/util"` in bash
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -45,6 +47,7 @@ sys.path.append(os.path.join(_DATA_DIR, 'data/util'))
 
 import file_util
 from counters import Counters
+FLAGS = flags.FLAGS
 
 _FLAGS = flags.FLAGS
 
@@ -54,10 +57,11 @@ flags.DEFINE_string('output_dir', 'output',
                     'Output directory for generated files.')
 flags.DEFINE_string('input_dir', 'input',
                     'Input directory where .dmp files downloaded.')
+
 flags.DEFINE_string(
-    'mapping_file_path', 'tax_id_dcid_mapping.txt',
-    'Please specify the path to the "tax_id_dcid_mapping.txt" file generated in Taxonomy. If not provided, the script will default to the current working directory.'
-)
+        'mapping_file_path',
+        'gs://datcom-prod-imports/scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mapping.txt',
+        'Input directory where .txt files downloaded.')
 
 _FLAGS(sys.argv)
 
@@ -464,9 +468,24 @@ def load_tax_id_dcid_mapping() -> None:
     """ Load tax_id dcid mapping file to process gene info file
     """
     global TAX_ID_DCID_MAPPING, TAX_ID_DCID_MAPPING_PATH
-    with open(TAX_ID_DCID_MAPPING_PATH, 'r') as csv_file:
-        reader = csv.reader(csv_file)
-        TAX_ID_DCID_MAPPING = {rows[0]: rows[1] for rows in reader}
+
+    gcs_output_path = FLAGS.mapping_file_path
+    parsed_url = urlparse(gcs_output_path)
+    bucket_name = parsed_url.netloc
+    blob_name = parsed_url.path.lstrip('/')
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+    # Download the file contents as a string.
+    file_contents = blob.download_as_text()
+
+    # Create a CSV reader from the string.
+    csv_reader = csv.DictReader(file_contents.splitlines())
+
+    for row in csv_reader:
+        # TAX_ID_DCID_MAPPING = {rows[0]: rows[1] for rows in csv_reader}
+        TAX_ID_DCID_MAPPING[int(row['tax_id'])] = row['dcid']
+    
 
     logging.info(f"No of TAX_ID loaded {len(TAX_ID_DCID_MAPPING)}")
 
