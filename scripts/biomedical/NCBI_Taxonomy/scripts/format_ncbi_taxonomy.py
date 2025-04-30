@@ -34,7 +34,15 @@ import pandas as pd
 from absl import app
 from absl import flags
 from absl import logging
+from google.cloud import storage
+from urllib.parse import urlparse
 
+FLAGS = flags.FLAGS
+
+flags.DEFINE_string(
+        'tax_id_dcid_mapping',
+        'gs://datcom-prod-imports/scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mappings.txt',
+        'Input directory where .txt files downloaded.')
 SOURCE_FILE_PATH = 'input/'
 OUTPUT_FILE_PATH = 'output/'
 OUTPUT_MCF_FILE = 'ncbi_taxonomy_schema_enum.mcf'
@@ -655,6 +663,24 @@ def main(_):
     NamesCls().clean_names_dataframe(names_df)
     NamesCls().create_tax_id_dcid_mapping_file(
         path_join(OUTPUT_FILE_PATH, OUTPUT_TAXID_DCID_MAPPING_FILE))
+    local_file_path = path_join(OUTPUT_FILE_PATH, OUTPUT_TAXID_DCID_MAPPING_FILE)
+    try:
+        with open(local_file_path, 'rb') as f:
+            data_to_upload = f.read()
+        gcs_output_path = FLAGS.tax_id_dcid_mapping
+        parsed_url = urlparse(gcs_output_path)
+        bucket_name = parsed_url.netloc
+        blob_name = parsed_url.path.lstrip('/')
+        storage_client = storage.Client()
+        bucket = storage_client.bucket(bucket_name)
+        blob = bucket.blob(blob_name)
+        blob.upload_from_string(data_to_upload, content_type='text/plain')
+        print(f"Data uploaded to gs://{bucket_name}/{blob_name}")
+
+    except FileNotFoundError:
+        print(f"Error: Local file not found at {local_file_path}. GCS upload skipped.")
+    except Exception as e:
+        print(f"An error occurred during GCS upload: {e}")
     logging.info("Processing Host dataframe")
     host_df = HostCls().create_dataframe(SOURCE_FILE_PATH)
     HostCls().append_mcf_data(host_df,
