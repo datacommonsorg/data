@@ -4,5 +4,3 @@ mapped_rows,1
 mapped_columns,7
 header_rows,1
 output_columns,"observationAbout,observationDate,value,variableMeasured,measurementMethod"
-#input_rows,10
-#input_columns,10

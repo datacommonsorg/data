@@ -1,14 +1,9 @@
 from absl import logging
-from absl import flags
 from retry import retry
-from google.cloud import storage  # GCS Client
 import os
 import shutil
-import pandas as pd
-import numpy as np
-from absl import app, flags
+from absl import app
 import requests
-import json
 
 
 input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -33,18 +28,20 @@ def add_future_urls():
     for key,value in _URLS_TO_SCAN.items():
         _FILES_TO_DOWNLOAD[key] = []        
         for future_year in range(2030, 2022, -1):  # From 2030 to 2023
-            YEAR = future_year            
+            YEAR = future_year
             if "{i}" in value:  # This URL contains the {i} variable, so we loop through i from 01 to 10
                 
                 for i in range(1, 11):
                     formatted_i = f"{i:02}"  # Ensure i is always 2 digits (01, 02, ..., 10)
-                    url_to_check = value.format(YEAR=YEAR, i=formatted_i)
+                    url_to_check = value.format(YEAR=YEAR, i=formatted_i)  
+                    logging.info(f"checking url: {url_to_check}")                  
                     try:
                         
                         check_url = requests.head(url_to_check,
                                                     allow_redirects=True)
                         if check_url.status_code == 200:
                             _FILES_TO_DOWNLOAD[key].append(url_to_check)
+                            logging.info(f"Adding {url_to_check}")
                     except requests.exceptions.RequestException as e:
                         logging.fatal(
                             f"URL is not accessible {value} due to {e}")
@@ -57,11 +54,10 @@ def add_future_urls():
                                                 allow_redirects=True)
                     if check_url.status_code == 200:
                         _FILES_TO_DOWNLOAD[key].append(url_to_check)
-                        print(_FILES_TO_DOWNLOAD)
+                        logging.info(f"Adding {url_to_check}")
                 except requests.exceptions.RequestException as e:
                     logging.error(
                         f"URL is not accessible {value} due to {e}")
-    print("files to download",_FILES_TO_DOWNLOAD)
 
             
 def download_files():
@@ -71,13 +67,12 @@ def download_files():
         for url in value:
             output_file_name = url.split('/')[-1]
             download_folder = os.path.join(input_path, key)
-            output_file_path = f"input_files/{key}/"+output_file_name
+            output_file_path = f"{download_folder}/"+output_file_name
 
             # Send GET request
             response = requests.get(url)
             if not (os.path.exists(download_folder)):
-                os.mkdir(download_folder)
-
+                os.makedirs(download_folder)
             
             
             # Save the file content
@@ -112,10 +107,10 @@ def main(_):
         logging.error(f"Error in clear_folder: {e}")
 
 
-    # add_future_urls(_URLS_TO_SCAN.("state"))
+    # add_future_urls
+    logging.info("Generating future URLs")
     add_future_urls()
-    # add_future_urls(_URLS_TO_SCAN.get("state"))
-    
+    logging.info("Starting download")
     download_files()
     
 if __name__ == "__main__":
