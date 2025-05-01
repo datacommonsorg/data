@@ -2,20 +2,27 @@
 
 - source: https://www.bls.gov/ces/ 
 
-- how to download data: Go to https://www.bls.gov/webapps/legacy/cesbtab1.htm and select all the industries check boxes and click on "Retrieve Data".
-In the new page click on "More Formatting Options" and in the "Select view of the data" field select "Multi series view" and click on "Retrieve Data", now there will be an option to download the file in xlsx
+- How to download data: We have the download script bls_ces_download_script.py to download the data from source website and keep csv files inside the input_files folder.
+### How to run:
+`python3 ../bls_ces_download_script.py --place_type=national input_folder=bls_ces
+### Example:
+`python3 bls_ces_download_script.py --place_type=national input_folder=bls_ces`
 
 - type of place: Country.
 
 - statvars: Economy
 
-- years: 2015 5o 2025
+- years: 2015 till latest available data
 
 
 ### How to run:
 
-`python3 stat_var_processor.py --input_data=<input_file>.csv --pv_map=statvar_imports/us_bls/bls_ces/bls_ces_pvmap.csv --config=statvar_imports/us_bls/bls_ces/bls_ces_metadata.csv --output_path=<filepath/filename>`
+`python3 stat_var_processor.py --input_data=<input_file>.csv --pv_map=data/statvar_imports/us_bls/bls_ces/bls_ces_pvmap.csv --config_file=data/statvar_imports/us_bls/bls_ces/bls_ces_metadata.csv --output_path=<filepath/filename>`
 
 #### Example
+
+#### Download
+`python3 bls_ces_download_script.py --place_type=national input_folder=bls_ces`
+
 #### Processing
-`python3 stat_var_processor.py --input_data=statvar_imports/us_bls/bls_ces/test_data/bls_ces_input.csv --pv_map=statvar_imports/us_bls/bls_ces/bls_ces_pvmap.csv --config=statvar_imports/us_bls/bls_ces/bls_ces_metadata.csv --output_path=statvar_imports/us_bls/bls_ces/test_data/bls_ces_output`
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/merged_output.csv --pv_map=bls_ces_pvmap.csv --config_file=bls_ces_metadata.csv --output_path=output/bls_ces_state`

@@ -29,6 +29,7 @@ lxml
 numpy
 openpyxl
 pandas
+prettytable
 protobuf
 psutil
 pylint
