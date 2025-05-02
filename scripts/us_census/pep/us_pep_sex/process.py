@@ -1236,7 +1236,6 @@ def download_files():
                     if 'html' in content_type.lower():
                         logging.fatal(
                             f"Server returned HTML error page for URL: {url}")
-                        continue
                     else:
                         if response.status_code == 200:
                             with open(
