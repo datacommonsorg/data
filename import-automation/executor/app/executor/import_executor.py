@@ -22,6 +22,7 @@ import json
 import logging
 import os
 import shutil
+import shlex
 import sys
 import subprocess
 import tempfile
@@ -62,7 +63,7 @@ _SEE_LOGS_MESSAGE = (
 _IMPORT_METADATA_MCF_TEMPLATE = """
 Node: dcid:dc/base/{import_name}
 typeOf: dcid:Provenance
-lastDataRefeshDate: "{last_data_refresh_date}"
+lastDataRefreshDate: "{last_data_refresh_date}"
 """
 
 
@@ -376,7 +377,7 @@ class ImportExecutor:
         for import_input in import_inputs:
             try:
                 template_mcf = import_input['template_mcf']
-                cleaned_csv = import_input['cleaned_csv']
+                cleaned_csv = glob.glob(import_input['cleaned_csv'])
             except KeyError:
                 logging.error(
                     'Skipping validation due to missing template mcf or CSV path missing from import input.'
@@ -396,9 +397,12 @@ class ImportExecutor:
             # Run dc import tool to generate resolved mcf.
             logging.info('Generating resolved mcf...')
             import_tool_args = [
-                f'-o={validation_output_path}', 'genmcf', template_mcf,
-                cleaned_csv
+                f'-o={validation_output_path}',
+                'genmcf',
+                template_mcf,
             ]
+            if cleaned_csv:
+                import_tool_args.extend(cleaned_csv)
             process = _run_user_script(
                 interpreter_path='java',
                 script_path='-jar ' + self.config.import_tool_path,
@@ -444,24 +448,29 @@ class ImportExecutor:
                         )
         return validation_status
 
+    def _create_mount_point(self, gcs_volume_mount_dir: str,
+                            cleanup_gcs_volume_mount: bool,
+                            absolute_import_dir: str, import_name: str) -> None:
+        mount_path = os.path.join(gcs_volume_mount_dir, import_name)
+        out_path = os.path.join(absolute_import_dir, 'gcs_output')
+        logging.info(f'Mount path: {mount_path}, Out path: {out_path}')
+        if cleanup_gcs_volume_mount and os.path.exists(mount_path):
+            shutil.rmtree(mount_path)
+        if os.path.lexists(out_path):
+            os.unlink(out_path)
+        os.makedirs(mount_path, exist_ok=True)
+        os.symlink(mount_path, out_path, target_is_directory=True)
+
     def _invoke_import_job(self, absolute_import_dir: str, import_spec: dict,
                            version: str, interpreter_path: str,
                            process: subprocess.CompletedProcess) -> None:
         script_paths = import_spec.get('scripts')
+        import_name = import_spec['import_name']
+        self._create_mount_point(self.config.gcs_volume_mount_dir,
+                                 self.config.cleanup_gcs_volume_mount,
+                                 absolute_import_dir, import_name)
         for path in script_paths:
             script_path = os.path.join(absolute_import_dir, path)
-            import_name = import_spec['import_name']
-            mount_path = os.path.join(self.config.gcs_volume_mount_dir,
-                                      import_name)
-            out_path = os.path.join(absolute_import_dir, 'gcs_output')
-            logging.info(f'Mount path: {mount_path}, Out path: {out_path}')
-            if self.config.cleanup_gcs_volume_mount and os.path.exists(
-                    mount_path):
-                shutil.rmtree(mount_path)
-            if os.path.lexists(out_path):
-                os.unlink(out_path)
-            os.makedirs(mount_path, exist_ok=True)
-            os.symlink(mount_path, out_path, target_is_directory=True)
             simple_job = cloud_run_simple_import.get_simple_import_job_id(
                 import_spec, script_path)
             if simple_job:
@@ -477,13 +486,16 @@ class ImportExecutor:
                 # Run import script locally.
                 script_interpreter = _get_script_interpreter(
                     script_path, interpreter_path)
+                script_env = os.environ.copy()
+                if self.config.user_script_env:
+                    script_env.update(self.config.user_script_env)
                 process = _run_user_script(
                     interpreter_path=script_interpreter,
                     script_path=script_path,
                     timeout=self.config.user_script_timeout,
                     args=self.config.user_script_args,
                     cwd=absolute_import_dir,
-                    env=self.config.user_script_env,
+                    env=script_env,
                 )
                 _log_process(process=process)
                 process.check_returncode()
@@ -849,6 +861,8 @@ def _create_venv(requirements_path: Iterable[str], venv_dir: str,
         script.flush()
 
         process = _run_with_timeout(['bash', script.name], timeout)
+        os.environ['PATH'] = os.path.join(venv_dir,
+                                          'bin') + ':' + os.environ.get('PATH')
         return os.path.join(venv_dir, 'bin/python3'), process
 
 
@@ -911,7 +925,7 @@ def _run_user_script(
     script_args = []
     if interpreter_path:
         script_args.append(interpreter_path)
-    script_args.extend(script_path.split(' '))
+    script_args.extend(shlex.split(script_path))
     if args:
         script_args.extend(args)
     return _run_with_timeout_async(script_args, timeout, cwd, env, name)

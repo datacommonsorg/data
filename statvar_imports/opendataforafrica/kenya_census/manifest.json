@@ -1,0 +1,77 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Kenya_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://kenya.opendataforafrica.org/",
+            "provenance_description": "Kenya Demographics, Health and Education data from Kenya National Bureau Of Statistics by country, county and towns and suburbs.",
+            "scripts": [
+                "../../../scripts/opendataafrica/download_folder/download.sh 'kenya' 'dlrrjxg,egdxgkd,emxkej,fwjfdnc,gxbucsd,ixdvqrf,rsfzlbg,srricmg,tdxdksf,vdbvyfd,welrttb,xszlbb'",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/dlrrjxg.csv --pv_map=dlrrjxg_pvmap.csv --config_file=dlrrjxg_metadata.csv --output_path=output/dlrrjxg",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/egdxgkd.csv --pv_map=egdxgkd_pvmap.csv --config_file=egdxgkd_metadata.csv --output_path=output/egdxgkd",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/emxkej.csv --pv_map=emxkej_pvmap.csv --config_file=emxkej_metadata.csv --output_path=output/emxkej",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/fwjfdnc.csv --pv_map=fwjfdnc_pvmap.csv --config_file=fwjfdnc_metadata.csv --output_path=output/fwjfdnc --places_resolved_csv=fwjfdnc_places_resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/gxbucsd.csv --pv_map=gxbucsd_pvmap.csv --config_file=gxbucsd_metadata.csv --output_path=output/gxbucsd --places_resolved_csv=gxbucsd_places_resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ixdvqrf.csv --pv_map=ixdvqrf_pvmap.csv --config_file=ixdvqrf_metadata.csv --output_path=output/ixdvqrf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/rsfzlbg.csv --pv_map=rsfzlbg_pvmap.csv --config_file=rsfzlbg_metadata.csv --output_path=output/rsfzlbg --places_resolved_csv=rsfzlbg_places_resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/srricmg.csv --pv_map=srricmg_pvmap.csv --config_file=srricmg_metadata.csv --output_path=output/srricmg",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/tdxdksf.csv --pv_map=tdxdksf_pvmap.csv --config_file=tdxdksf_metadata.csv --output_path=output/tdxdksf",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/vdbvyfd.csv --pv_map=vdbvyfd_pvmap.csv --config_file=vdbvyfd_metadata.csv --output_path=output/vdbvyfd --places_resolved_csv=rsfzlbg_places_resolved.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/welrttb.csv --pv_map=welrttb_pvmap.csv --config_file=welrttb_metadata.csv --output_path=output/welrttb",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/xszlbb.csv --pv_map=xszlbb_pvmap.csv --config_file=xszlbb_metadata.csv --output_path=output/xszlbb"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/dlrrjxg.tmcf",
+                    "cleaned_csv": "output/dlrrjxg.csv"
+                },
+                {
+                    "template_mcf": "output/egdxgkd.tmcf",
+                    "cleaned_csv": "output/egdxgkd.csv"
+                },
+                {
+                    "template_mcf": "output/emxkej.tmcf",
+                    "cleaned_csv": "output/emxkej.csv"
+                },
+                {
+                    "template_mcf": "output/fwjfdnc.tmcf",
+                    "cleaned_csv": "output/fwjfdnc.csv"
+                },
+                {
+                    "template_mcf": "output/ixdvqrf.tmcf",
+                    "cleaned_csv": "output/ixdvqrf.csv"
+                },
+                {
+                    "template_mcf": "output/rsfzlbg.tmcf",
+                    "cleaned_csv": "output/rsfzlbg.csv"
+                },
+                {
+                    "template_mcf": "output/srricmg.tmcf",
+                    "cleaned_csv": "output/srricmg.csv"
+                },
+                {
+                    "template_mcf": "output/tdxdksf.tmcf",
+                    "cleaned_csv": "output/tdxdksf.csv"
+                },
+                {
+                    "template_mcf": "output/vdbvyfd.tmcf",
+                    "cleaned_csv": "output/vdbvyfd.csv"
+                },
+                {
+                    "template_mcf": "output/welrttb.tmcf",
+                    "cleaned_csv": "output/welrttb.csv"
+                },
+                {
+                    "template_mcf": "output/xszlbb.tmcf",
+                    "cleaned_csv": "output/xszlbb.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "30 05 * * 1"
+        }
+    ]
+}
