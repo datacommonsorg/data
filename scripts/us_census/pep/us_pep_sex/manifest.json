@@ -5,7 +5,7 @@
       "curator_emails": ["kuru@google.com"],
       "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
       "provenance_description": "US Census Population Estimates Program (PEP).",
-      "scripts": ["process.py"],
+      "scripts": ["process.py --config_path=unresolved_mcf/us_census/pep/population_estimate_by_sex/skip_url.json"],
       "import_inputs": [
         {
           "template_mcf": "output/population_estimate_sex.tmcf",

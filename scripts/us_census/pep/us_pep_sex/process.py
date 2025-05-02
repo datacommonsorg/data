@@ -39,6 +39,7 @@ flags.DEFINE_string('config_path', '',
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+_INPUT_URL_JSON = "input_url.json"
 _FILES_TO_DOWNLOAD = None
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
@@ -1120,8 +1121,7 @@ def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
     # Initialize the list to store files to download
     _FILES_TO_DOWNLOAD = []
-    with open(os.path.join(_MODULE_DIR, 'input_url_copy.json'),
-              'r') as inpit_file:
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
 
     # List of URLs with placeholders for {YEAR} and {i}
@@ -1230,27 +1230,54 @@ def download_files():
                 response.raise_for_status()
 
                 content_type = response.headers.get('Content-Type', '')
-                if 'html' in content_type.lower():
-                    raise Exception(
-                        f"Server returned HTML error page for URL: {url}")
-
-                if response.status_code == 200:
-                    with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save),
-                              'wb') as f:
-                        for chunk in response.iter_content(chunk_size=8192):
-                            if chunk:
-                                f.write(chunk)
-                    file_to_download['is_downloaded'] = True
-                    logging.info(f"Downloaded file: {url}")
+                with open(_INPUT_URL_JSON, 'r') as f:
+                    json_data = json.load(f)
+                if url in json_data:
+                    if 'html' in content_type.lower():
+                        logging.fatal(
+                            f"Server returned HTML error page for URL: {url}")
+                        continue
+                    else:
+                        if response.status_code == 200:
+                            with open(
+                                    os.path.join(_INPUT_FILE_PATH,
+                                                 file_name_to_save), 'wb') as f:
+                                for chunk in response.iter_content(
+                                        chunk_size=8192):
+                                    if chunk:
+                                        f.write(chunk)
+                            file_to_download['is_downloaded'] = True
+                            logging.info(f"Downloaded file: {url}")
+                        else:
+                            raise Exception(
+                                f"Unexpected response {response.status_code} for URL: {url}"
+                            )
                 else:
-                    raise Exception(
-                        f"Unexpected response {response.status_code} for URL: {url}"
-                    )
+                    if 'html' in content_type.lower():
+                        logging.info(
+                            f"Server returned HTML error page for URL: {url}")
+                        continue
+                    else:
+                        if response.status_code == 200:
+                            with open(
+                                    os.path.join(_INPUT_FILE_PATH,
+                                                 file_name_to_save), 'wb') as f:
+                                for chunk in response.iter_content(
+                                        chunk_size=8192):
+                                    if chunk:
+                                        f.write(chunk)
+                            file_to_download['is_downloaded'] = True
+                            logging.info(f"Downloaded file: {url}")
+                        else:
+                            raise Exception(
+                                f"Unexpected response {response.status_code} for URL: {url}"
+                            )
 
         except Exception as e:
             file_to_download['is_downloaded'] = False
             logging.error(f"Error downloading {url}: {e}")
             raise  # re-raise to trigger @retry
+        time.sleep(1)
     for s in skipped:
         logging.info(f"Skipped corrupted file: {s}")
 
