@@ -41,8 +41,8 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'config_path', 'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
     'Path to config file')
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'raw_data')
+_MODULE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),'gcs_output')
+_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _OUTPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'cleaned_csv')
 if not os.path.exists(_OUTPUT_FILE_PATH):
     os.mkdir(_OUTPUT_FILE_PATH)
