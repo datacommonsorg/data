@@ -1205,7 +1205,7 @@ def download_files():
     logging.info(f"Fetched {len(skip_urls)} URLs to skip from GCS.")
 
     skipped = []
-    print(skip_urls)
+
     for file_to_download in _FILES_TO_DOWNLOAD:
         file_name_to_save = None
         url = file_to_download['download_path']
