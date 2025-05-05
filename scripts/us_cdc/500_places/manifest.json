@@ -8,7 +8,7 @@
             "scripts": [
                 "download_bulk.py","parse_cdc_places.py"
             ],
-            "source_files": ["input_files/*.csv"],
+            "source_files": ["gcs_output/input_files/*.csv"],
             "import_inputs": [
                 {
                     "template_mcf": "cdc_places.tmcf",
