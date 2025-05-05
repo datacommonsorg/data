@@ -17,7 +17,7 @@ Date: 8/30/2021
 Description: Utility to download all CDC 500 PLACES data.
 URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
 
-Files are stored in raw_data.
+Files are stored in input_files.
 
 Run this script from this directory:
 python3 download_bulk.py
