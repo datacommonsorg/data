@@ -2,7 +2,8 @@
 
 - source: https://nigeria.opendataforafrica.org, 
 
-- how to download data: Manual download from source based on filter
+- You can download the input files using the script located at:
+  data/scripts/opendataafrica/download_folder/download.sh
 
 - type of place: Country.
 
