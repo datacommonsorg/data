@@ -16,7 +16,7 @@
           "cleaned_csv": "OECD_deaths_cleaned.csv"
         }
       ],
-      "cron_schedule": "0 0 1 3 *"
+      "cron_schedule": "0 7 1,15 * *"
     }
   ]
 }
