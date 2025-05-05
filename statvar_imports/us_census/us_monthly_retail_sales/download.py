@@ -36,7 +36,7 @@ def rename_excel_sheets_in_place(input_file):
     except FileNotFoundError:
         logging.fatal(f"Error: Input file '{input_file}' not found.")
     except Exception as e:
-        logging.fatal(f"An error occurred: {e}")
+        logging.fatal(f"Error occurred while reading file [{input_file}] : {e}")
 
 def main():
     """Main function to download and process the Excel file."""
