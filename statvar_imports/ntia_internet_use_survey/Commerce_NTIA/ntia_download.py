@@ -14,13 +14,10 @@
 
 import os
 import requests
-import logging
-import configparser
+from absl import logging
 from pathlib import Path
 from retry import retry
 import config
-
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 
 Commerce_NTIA_URL = config.Commerce_NTIA_URL
 
