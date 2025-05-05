@@ -61,7 +61,6 @@ function download_and_convert_dataset() {
   
   local xml_to_json_script_path="../../../util/xml_to_json.py"
   local json_to_csv_script_path="../../../scripts/opendataafrica/download_folder/json_to_csv.py"
-  echo  "$ realpath --relative-to='${PWD}' '$xml_to_json_script_path' path"
   echo "Script path of xml script $xml_to_json_script_path - json $json_to_csv_script_path path"
   echo "-----------------------------------------------------------------------------------------"
   echo "File path of xml $WORKING_DIR/${dataset}.xml - json $json_output_file - csv $csv_output_file  path"
