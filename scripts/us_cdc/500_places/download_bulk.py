@@ -18,7 +18,7 @@ Description: Utility to download all CDC 500 PLACES data.
 URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
 
 Files are stored in input_files.
-
+gcs_output folder is the mount storage
 Run this script from this directory:
 python3 download_bulk.py
 """
