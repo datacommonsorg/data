@@ -11,7 +11,7 @@
 
 - years: 1960 to 2023.
 
-- place_resolution:Places are resolved based on region ID.
+- place_resolution:Places are resolved based on region ID.[data/statvar_imports/opendataforafrica/nigeria_census/places_resolved_csv.csv]
 
 ### How to run:
 
