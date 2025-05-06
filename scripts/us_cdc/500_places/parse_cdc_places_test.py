@@ -22,7 +22,7 @@ python3 parse_cdc_places_test.py input_file output_file
 
 import unittest
 import os
-from parse_cdc_places import clean_cdc_places_data
+from .parse_cdc_places import clean_cdc_places_data
 
 TEST_CASE_FILES = [
     # Pairs of input CSV and expected CSV files.
