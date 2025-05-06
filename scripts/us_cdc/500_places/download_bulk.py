@@ -33,8 +33,8 @@ from retry import retry
 from absl import flags
 from absl import app
 
-_MODULE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                           'gcs_output')
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
 _UTIL_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_UTIL_DIR, '../../../util/'))
 import file_util
@@ -78,7 +78,7 @@ def download_file(release_year, url: str, save_path: str):
 def main(_):
     """Main function to download the files."""
 
-    data_dir = os.path.join(_MODULE_DIR, 'input_files')
+    data_dir = os.path.join(_GCS_OUTPUT_DIR, 'input_files')
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
     logging.set_verbosity(2)
