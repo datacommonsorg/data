@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1
+
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,19 +14,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM python:3.12.8
+# build_type: local or cloud
+ARG build_type=cloud
 
-RUN apt-get update \
-    && apt-get -y upgrade \
-    && apt-get -y autoremove \
-    && rm -rf /var/lib/apt/lists/*
-
+# build base image with all the dependencies installed
+FROM python:3.12.8 as base
+RUN apt-get update && apt-get install -y jq
 ENV JAVA_HOME=/usr/local/openjdk-17
 COPY --from=openjdk:17-slim $JAVA_HOME $JAVA_HOME
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
-
-RUN git clone https://github.com/datacommonsorg/data.git
-WORKDIR /data/import-automation/executor
 RUN wget https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar
+COPY requirements.txt .
 RUN pip install -r requirements.txt
+
+# build_type: local (copy local data repo)
+FROM base as local
+COPY --from=data . /data
+
+# build_type: cloud (clone github data repo) 
+FROM base as cloud
+RUN git clone https://github.com/datacommonsorg/data.git
+
+# build the final image
+FROM ${build_type} as final
+WORKDIR /data/import-automation/executor
 ENTRYPOINT ["python", "main.py"]
