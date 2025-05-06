@@ -1272,6 +1272,7 @@ def download_files():
                                 f"Unexpected response {response.status_code} for URL: {url}"
                             )
 
+
         except Exception as e:
             file_to_download['is_downloaded'] = False
             logging.error(f"Error downloading {url}: {e}")
