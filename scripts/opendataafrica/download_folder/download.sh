@@ -93,9 +93,9 @@ function download_datasets_for_country() {
   echo "in download_datasets_for_country method"
   if [ -z "$1" ]; then
     echo "Usage: download_datasets_for_country <country_name> [<dataset_ids>] [<WORKING_DIR>]"
-    echo "  <country_name>: The full name of the country (e.g., cotedivoire)."
-    echo "  <dataset_ids> (optional): A comma-separated list of dataset IDs to download."
-    echo "  <WORKING_DIR> (optional): The directory to store the downloaded files."
+    echo "  <country_name>: The full name of the country (e.g., cotedivoire, kenya, rwanda, egypt)."
+    echo "  <dataset_ids> (optional): A comma-separated list of dataset IDs to download. (e.g., 'dlrrjxg,egdxgkd,emxkej,fwjfdnc,gxbucsd')"
+    echo "  <WORKING_DIR> (optional): The directory to store the downloaded files. relative path from data  (e.g., /data/statvar_imports/opendataforafrica/kenya_census/input_files )"
     echo "                            If not provided, a directory 'input_files' will be created in the current working directory."
     echo "No country specified. Exiting"
     exit 1
