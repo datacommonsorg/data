@@ -11,6 +11,6 @@ comments,
 output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod,measurementMethod"
 #header_rows,5
 #drop_statvars_without_svobs,0
-#mapped_columns,2
-#mapped_rows,5
+mapped_columns,2
+mapped_rows,6
 #pv_map,https://docs.google.com/spreadsheets/d/1GWdUiFmBP-Miiw4ZzAEqoux4V8a3a8co/edit?resourcekey=0-XkM91q13NUCPmRiPWZC8Qw&gid=2010734627#gid=2010734627
