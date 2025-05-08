@@ -13,8 +13,12 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "output_files/*.tmcf",
-          "cleaned_csv": "output_files/*.csv"
+          "template_mcf": "output_files/us_fed_interest_rate_output.tmcf",
+          "cleaned_csv": "output_files/us_fed_interest_rate_output.csv"
+        },
+        {
+          "template_mcf": "output_files/us_fed_fund_output.tmcf",
+          "cleaned_csv": "output_files/us_fed_fund_output.csv"
         }
       ],
       "cron_schedule": "0 06 * * 6"
