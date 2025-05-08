@@ -1,0 +1,10 @@
+mapped_rows,1,,,
+mapped_columns,9,,,
+County and City,observationAbout,{Data},,
+CensusYear,observationDate,{Number},,
+Sex,measuredProperty,count,populationType,Person
+Male,gender,Male,,
+Female,gender,Female,,
+VALUE,value,{Number},,
+Actual change since previous census,#ignore,ignore,,
+Percentage change since previous census,#ignore,ignore,,

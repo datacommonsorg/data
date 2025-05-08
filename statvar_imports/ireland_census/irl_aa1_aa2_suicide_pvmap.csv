@@ -1,0 +1,9 @@
+mapped_rows,1,,,,,
+mapped_columns,9,,,,,
+Year,observationDate,{Number},,,,
+Area of Residence,observationAbout,{Data},,,,
+Suicides,measuredProperty,count,populationType,MortalityEvent,causeOfDeath,Suicide
+VALUE,value,{Number},,,,
+Male,gender,Male,,,,
+Female,gender,Female,,,,
+State,#ignore,ignore,,,,

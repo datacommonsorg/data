@@ -1,0 +1,8 @@
+mapped_rows,1,,,,,,,
+mapped_columns,7,,,,,,,
+Year,observationDate,{Number},,,,,,
+Suicides (Number),measuredProperty,count,populationType,MortalityEvent,causeOfDeath,Suicide,observationAbout,country/IRL
+VALUE,value,{Number},,,,,,
+Male,gender,Male,,,,,,
+Female,gender,Female,,,,,,
+"Suicides (Rate per 100,000 Pop.)",#ignore,ignore,,,,,,

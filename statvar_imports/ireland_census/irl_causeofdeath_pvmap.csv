@@ -1,0 +1,12 @@
+mapped_rows,1,,,
+mapped_columns,9,,,
+Year,observationDate,{Number},,
+Area of Residence,observationAbout,{Data},,
+ICD 10 Diagnostic Group,populationType,MortalityEvent,measuredProperty,count
+V01-X59 Accidents,causeOfDeath,Accidents(UnintentionalInjuries),,
+V01-Y98 External causes of death,causeOfDeath,ExternalCausesOfDeath,,
+X60-X84 Intentional self-harm,causeOfDeath,IntentionalSelf-Harm(Suicide),,
+X85-Y09 Assault,causeOfDeath,Assault(Homicide),,
+Y10-Y34 Events of undetermined intent,causeOfDeath,EventsOfUndeterminedIntent,,
+Y35-Y98 Other external causes,causeOfDeath,OtherExternalCausesOfDeath,,
+VALUE,value,{Number},,

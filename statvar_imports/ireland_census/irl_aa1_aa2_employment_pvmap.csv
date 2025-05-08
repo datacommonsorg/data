@@ -1,0 +1,16 @@
+mapped_rows,1,,,,,,,,,
+mapped_columns,11,,,,,,,,,
+Province County or City,observationAbout,{Data},,,,,,,,
+CensusYear,observationDate,{Number},,,,,,,,
+All persons aged 15 years and over,measuredProperty,count,populationType,Person,age,Years15Onwards,,,,
+Persons at work,employmentStatus,Employed,measuredProperty,count,populationType,Person,age,Years15Onwards,,
+Unemployed looking for first regular job,employmentStatus,Unemployed,employmentExperienceStatus,WithoutRegularJobExperience,measuredProperty,count,populationType,Person,age,Years15Onwards
+Unemployed having lost or given up previous job,employmentStatus,Unemployed,employmentExperienceStatus,WithExperience,measuredProperty,count,populationType,Person,age,Years15Onwards
+Male,gender,Male,,,,,,,,
+Female,gender,Female,,,,,,,,
+VALUE,value,{Number},,,,,,,,
+Looking after home/family,#ignore,ignore,,,,,,,,
+Others not in labour force,#ignore,ignore,,,,,,,,
+Retired,#ignore,ignore,,,,,,,,
+Student or pupil,#ignore,ignore,,,,,,,,
+Unable to work due to permanent sickness or disability,#ignore,ignore,,,,,,,,
