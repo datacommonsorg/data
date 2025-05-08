@@ -1,0 +1,17 @@
+parameter,value
+url,
+description,
+#place_type,
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,
+#places_resolved_csv,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
+header_rows,1
+drop_statvars_without_svobs,0
+mapped_rows,1
+mapped_columns,2
+word_delimiter,
