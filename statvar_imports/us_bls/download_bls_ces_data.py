@@ -269,24 +269,8 @@ def download_data(download_folder_name, reg_key, bls_ces_url, series_id_filename
     logging.info("Downloading started..")
     try:
         
-        # series_id = series_id_from_gcs(series_id_filename)
-        series_id = ['SMS72000000000000026',
-        'SMS72000000500000001',
-        'SMS72000000500000026',
-        'SMS72000000600000001',
-        'SMS72000000700000001',
-        'SMS72000000800000001',
-        'SMS72000001000000001',
-        'SMS72000001500000001',
-        'SMS72000002000000001',
-        'SMS72000003000000001',
-        'SMS72000003100000001',
-        'SMS72000003200000001',
-        'SMS72000004000000001',
-        'SMS72000004100000001',
-        'SMS72000004200000001',
-        'SMS72000004300000001']
-        chunk_size = 25
+        series_id = series_id_from_gcs(series_id_filename)
+        chunk_size = 30
         current_year = datetime.now().year
         headers = {'Content-type': 'application/json'}
         for i in range(0, len(series_id), chunk_size):
