@@ -75,7 +75,7 @@ def series_id_from_gcs(series_id_filename):
     Returns:
     - list: A list of series IDs extracted from the config file, or None if not found
     """
-    logging.info("Getting series ids from gcs")
+    logging.info(f"Getting series ids from {series_id_filename} from gcs")
     config_path =f"{BASE_GCS_PATH}/{series_id_filename}"
     blob = read_gcs_path(config_path)
     file_contents = blob.download_as_text()
@@ -101,11 +101,14 @@ def get_api_key():
         config_data = json.loads(blob.download_as_text())
         key = config_data.get("registrationkey")
         bls_ces_url = config_data.get("bls_ces_url")
+        if key is None:
+            raise KeyError("Missing 'registrationkey' in config.json")
+        if bls_ces_url is None:
+            raise KeyError("Missing 'bls_ces_url' in config.json")
         return key, bls_ces_url
 
     except NotFound:
         logging.fatal(f"Config file not found at {config_path}")
-        return None, None
     except Exception as e:
         logging.fatal(f"Error in get_api_key: {e}")
         raise
@@ -136,7 +139,9 @@ def convert_to_raw_csv(download_folder, raw_data_folder):
                 lines = text_data.strip().split("\n")
                 cleaned_data = []
                 #skippig first 3 empty lines
-                for line in lines[3:]:
+                assert len(lines) > 3,f"Not enough lines to skip headers in file: {filename}"
+                data_lines = lines[3:]
+                for line in data_lines:
                     cleaned_line = [field.strip() for field in line.split('|')[1:-1]]
                     cleaned_data.append(cleaned_line)
                 with open(csv_file_path, 'w', newline='') as csvfile:
