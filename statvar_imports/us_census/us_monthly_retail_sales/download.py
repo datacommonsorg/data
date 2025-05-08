@@ -1,6 +1,9 @@
 import requests
 import pandas as pd
 import os
+from absl import app
+from absl import logging
+from absl import flags
 
 input_file = 'input_file'
 # Create the input file if it doesn't exist
@@ -12,7 +15,7 @@ monthly_response = requests.get("https://www.census.gov/retail/mrts/www/mrtssale
 if monthly_response.status_code == 200:
     with open(file_path, 'wb') as f:
         f.write(monthly_response.content)
-    print(f"Successfully downloaded 'monthly_retail.xlsx' to '{input_file}'")
+    logging.info(f"Successfully downloaded 'monthly_retail.xlsx' to '{input_file}'")
 else:
-    print(f"Failed to download file. Status code: {monthly_response.status_code}")
+    logging.fatal(f"Failed to download file. Status code: {monthly_response.status_code}")
 
