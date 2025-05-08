@@ -30,17 +30,22 @@ from absl import logging
 from absl import flags
 from retry import retry
 from google.cloud import storage  # GCS Client
+import tempfile
 
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_string('config_path', '',
                     'Path to the configuration file in the GCS bucket.')
+# flags.DEFINE_string('gcp_output', '',
+#                     'Path to the persistent folder in the GCS bucket.')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _INPUT_URL_JSON = "input_url.json"
 _FILES_TO_DOWNLOAD = None
+_GCS_OUTPUT = os.path.join(_MODULE_DIR, 'gcs_output/us_pep_sex_source_files')
+_GCS_BASE_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 # pylint: disable=wrong-import-position
@@ -343,7 +348,7 @@ def _national_latest(file_path: str) -> pd.DataFrame:
                 2: 'Count_Person_Female'
             }})
         column_list = []
-        for year in range(2021, 2030):
+        for year in range(2021, 2025):
             column_name = f'POPESTIMATE{year}'
             if column_name in df.columns:
                 df.rename(columns={column_name: str(year)}, inplace=True)
@@ -590,7 +595,7 @@ def _state_latest(file_path: str) -> pd.DataFrame:
     df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
     current_year = int(max_year) + 1
     for year in range(2021, current_year):
-        if current_year < 2030:
+        if current_year < 2025:
             base_columns.append(f'July{year}Total')
             base_columns.append(f'July{year}Male')
             base_columns.append(f'July{year}Female')
@@ -606,7 +611,7 @@ def _state_latest(file_path: str) -> pd.DataFrame:
     df.insert(1, 'geo_ID', 'geoId/' + geoid)
     processed_dfs = []  # List to hold yearly DataFrames
 
-    for year in range(2020, 2030):
+    for year in range(2020, 2025):
         # Generate column names dynamically
         male_col = f'July{year}Male'
         female_col = f'July{year}Female'
@@ -1037,7 +1042,7 @@ class PopulationEstimateBySex:
             }
 
             # Iterate from 2023 to 2029 and add mappings for years dynamically
-            for file_year in range(2023, 2030):
+            for file_year in range(2023, 2025):
                 # For the 'national', 'state', and 'county' entries, use the same method for years 2023 to 2029
                 if file_year < dt.now().year:
                     file_to_function_mapping[
@@ -1111,6 +1116,17 @@ def fetch_skip_urls_from_gcs(GCS_BUCKET_NAME: str,
     return skip_urls
 
 
+def gcp_output_read(GCS_OUTPUT_BUCKET_NAME: str, GCS_OUTPUT_FILE_PATH: str):
+    """ To check files in the gcp_output folder to skip the files 
+        that has been already downloaded in the previous attempt
+    """
+    pass
+
+
+def gcp_output_write():
+    pass
+
+
 def add_future_year_urls():
     """
     This method adds the future year urls that has to be downloaded
@@ -1135,8 +1151,8 @@ def add_future_year_urls():
     # A set to track downloaded URLs for unique {YEAR} and URLs without {i}
     downloaded_year_urls = set()
 
-    # Loop through years in reverse order from 2030 to 2023
-    for future_year in range(2030, 2022, -1):  # From 2030 to 2023
+    # Loop through years in reverse order from 2025 to 2023
+    for future_year in range(2025, 2022, -1):  # From 2025 to 2023
 
         YEAR = future_year
         # Loop through URLs
@@ -1206,10 +1222,18 @@ def download_files():
 
     skipped = []
 
+    # Step 1: Get set of already downloaded files
+    downloaded_files = set(os.listdir(_GCS_OUTPUT))
+
     for file_to_download in _FILES_TO_DOWNLOAD:
         file_name_to_save = None
         url = file_to_download['download_path']
 
+        # Skip if file already exists
+        if file_name_to_save in downloaded_files:
+            logging.info(
+                f"Skipping already downloaded file: {file_name_to_save}")
+            continue
         # Check if this URL should be skipped
         if url in skip_urls:
             skipped.append(url)
@@ -1230,6 +1254,7 @@ def download_files():
                 response.raise_for_status()
 
                 content_type = response.headers.get('Content-Type', '')
+
                 with open(_INPUT_URL_JSON, 'r') as f:
                     json_data = json.load(f)
                 if url in json_data:
@@ -1238,13 +1263,28 @@ def download_files():
                             f"Server returned HTML error page for URL: {url}")
                     else:
                         if response.status_code == 200:
-                            with open(
-                                    os.path.join(_INPUT_FILE_PATH,
-                                                 file_name_to_save), 'wb') as f:
+                            with tempfile.NamedTemporaryFile(
+                                    delete=False) as tmp_file:
+                                # Stream the response into a temp file
                                 for chunk in response.iter_content(
                                         chunk_size=8192):
                                     if chunk:
-                                        f.write(chunk)
+                                        tmp_file.write(chunk)
+                                tmp_file_path = tmp_file.name
+
+                            # Copy to local destination
+                            shutil.copy(
+                                tmp_file_path,
+                                os.path.join(_INPUT_FILE_PATH,
+                                             file_name_to_save))
+
+                            # Copy to gcs destination
+                            shutil.copy(
+                                tmp_file_path,
+                                os.path.join(_GCS_OUTPUT, file_name_to_save))
+
+                            # Optionally delete the temp file
+                            os.remove(tmp_file_path)
                             file_to_download['is_downloaded'] = True
                             logging.info(f"Downloaded file: {url}")
                         else:
@@ -1257,16 +1297,38 @@ def download_files():
                             f"Server returned HTML error page for URL: {url}")
                         continue
                     else:
+                        # Skip if file already exists
+                        if file_name_to_save in downloaded_files:
+                            logging.info(
+                                f"Skipping already downloaded file: {file_name_to_save}"
+                            )
+                            continue
                         if response.status_code == 200:
-                            with open(
-                                    os.path.join(_INPUT_FILE_PATH,
-                                                 file_name_to_save), 'wb') as f:
+                            with tempfile.NamedTemporaryFile(
+                                    delete=False) as tmp_file:
+                                # Stream the response into a temp file
                                 for chunk in response.iter_content(
                                         chunk_size=8192):
                                     if chunk:
-                                        f.write(chunk)
+                                        tmp_file.write(chunk)
+                                tmp_file_path = tmp_file.name
+
+                            # Copy to local destination
+                            shutil.copy(
+                                tmp_file_path,
+                                os.path.join(_INPUT_FILE_PATH,
+                                             file_name_to_save))
+
+                            # Copy to gcs destination
+                            shutil.copy(
+                                tmp_file_path,
+                                os.path.join(_GCS_OUTPUT, file_name_to_save))
+
+                            # Optionally delete the temp file
+                            os.remove(tmp_file_path)
                             file_to_download['is_downloaded'] = True
                             logging.info(f"Downloaded file: {url}")
+
                         else:
                             raise Exception(
                                 f"Unexpected response {response.status_code} for URL: {url}"
@@ -1301,6 +1363,10 @@ def main(_):
         os.mkdir(data_file_path)
     if not (os.path.exists(_INPUT_FILE_PATH)):
         os.mkdir(_INPUT_FILE_PATH)
+    if not (os.path.exists(_GCS_OUTPUT)):
+        os.mkdir(_GCS_OUTPUT)
+    # us_pep_sex_source_files = os.path.join(_GCS_OUTPUT, "us_pep_sex_source_files")
+    # os.makedirs(us_pep_sex_source_files, exist_ok=True)
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name
     tmcf_path = data_file_path + os.sep + tmcf_name
@@ -1321,6 +1387,12 @@ def main(_):
         loader = PopulationEstimateBySex(_INPUT_FILE_PATH, cleaned_csv_path,
                                          mcf_path, tmcf_path)
         loader.process()
+
+        # Only delete if it's a subdirectory of gcs_output, and not gcs_output itself
+        if os.path.exists(_GCS_OUTPUT) and os.path.commonpath([_GCS_OUTPUT, _GCS_BASE_DIR]) == _GCS_BASE_DIR \
+        and os.path.abspath(_GCS_OUTPUT) != os.path.abspath(_GCS_BASE_DIR):
+            shutil.rmtree(_GCS_OUTPUT)
+            logging.info(f"Deleted folder: {_GCS_OUTPUT}")
 
 
 if __name__ == "__main__":
