@@ -58,7 +58,7 @@ _USSTATE_SHORT_FORM = statetoshortform.USSTATE_MAP
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "input_files")
+                                  "gcs_output/us_pep_sex_source_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -348,7 +348,7 @@ def _national_latest(file_path: str) -> pd.DataFrame:
                 2: 'Count_Person_Female'
             }})
         column_list = []
-        for year in range(2021, 2025):
+        for year in range(2021, 2030):
             column_name = f'POPESTIMATE{year}'
             if column_name in df.columns:
                 df.rename(columns={column_name: str(year)}, inplace=True)
@@ -595,7 +595,7 @@ def _state_latest(file_path: str) -> pd.DataFrame:
     df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
     current_year = int(max_year) + 1
     for year in range(2021, current_year):
-        if current_year < 2025:
+        if current_year < 2030:
             base_columns.append(f'July{year}Total')
             base_columns.append(f'July{year}Male')
             base_columns.append(f'July{year}Female')
@@ -611,7 +611,7 @@ def _state_latest(file_path: str) -> pd.DataFrame:
     df.insert(1, 'geo_ID', 'geoId/' + geoid)
     processed_dfs = []  # List to hold yearly DataFrames
 
-    for year in range(2020, 2025):
+    for year in range(2020, 2030):
         # Generate column names dynamically
         male_col = f'July{year}Male'
         female_col = f'July{year}Female'
@@ -903,7 +903,7 @@ def _county_latest(file_path: str) -> pd.DataFrame:
                 4: '2022',
                 5: '2023',
                 6: '2024',
-                7: '2025',
+                7: '2030',
                 8: '2026',
                 9: '2027',
                 10: '2028',
@@ -1042,7 +1042,7 @@ class PopulationEstimateBySex:
             }
 
             # Iterate from 2023 to 2029 and add mappings for years dynamically
-            for file_year in range(2023, 2025):
+            for file_year in range(2023, 2030):
                 # For the 'national', 'state', and 'county' entries, use the same method for years 2023 to 2029
                 if file_year < dt.now().year:
                     file_to_function_mapping[
@@ -1151,8 +1151,8 @@ def add_future_year_urls():
     # A set to track downloaded URLs for unique {YEAR} and URLs without {i}
     downloaded_year_urls = set()
 
-    # Loop through years in reverse order from 2025 to 2023
-    for future_year in range(2025, 2022, -1):  # From 2025 to 2023
+    # Loop through years in reverse order from 2030 to 2023
+    for future_year in range(2030, 2022, -1):  # From 2030 to 2023
 
         YEAR = future_year
         # Loop through URLs
