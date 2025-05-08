@@ -1116,17 +1116,6 @@ def fetch_skip_urls_from_gcs(GCS_BUCKET_NAME: str,
     return skip_urls
 
 
-def gcp_output_read(GCS_OUTPUT_BUCKET_NAME: str, GCS_OUTPUT_FILE_PATH: str):
-    """ To check files in the gcp_output folder to skip the files 
-        that has been already downloaded in the previous attempt
-    """
-    pass
-
-
-def gcp_output_write():
-    pass
-
-
 def add_future_year_urls():
     """
     This method adds the future year urls that has to be downloaded
