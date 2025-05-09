@@ -14,10 +14,12 @@ os.makedirs(input_folder, exist_ok=True)
 file_path = os.path.join(source_folder, "raw_data.html")
 file_path2 = os.path.join(source_folder, "raw_data.csv")
 
-@retry(tries=5,delay=3,backoff=5)
+
+@retry(tries=5, delay=3, backoff=5)
 def download_with_retry(url):
     logging.info(f"Trying to access url : {url}")
-    return requests.get(url) 
+    return requests.get(url)
+
 
 def extract_all_table_data(url):
     try:
@@ -53,6 +55,7 @@ def extract_all_table_data(url):
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Error fetching URL: {e}")
 
+
 def main():
     logging.info("Process starts")
     all_tables_data = extract_all_table_data(url)
@@ -68,6 +71,8 @@ def main():
 
         transposed_df = df.transpose()
         transposed_df.to_csv('input_files/final_data.csv', header=False)
-if __name__ == "__main__" : 
+
+
+if __name__ == "__main__":
     logging.set_verbosity(1)
     main()
