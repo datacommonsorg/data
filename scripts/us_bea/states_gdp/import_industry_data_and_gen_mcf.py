@@ -44,8 +44,11 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
-    
-    def process_data(self, raw_data=None, input_file='SQGDP2__ALL_AREAS_2005_2024.csv', input_folder="input_folders"):
+
+    def process_data(self,
+                     raw_data=None,
+                     input_file='SQGDP2__ALL_AREAS_2005_2024.csv',
+                     input_folder="input_folders"):
         """Cleans data from a specified CSV file in the input folder
         and converts it from wide to long format.
 
@@ -61,7 +64,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
             FileNotFoundError: If the specified CSV file is not found.
             ValueError: If no data could be loaded from the specified file.
         """
-        
+
         file_path = os.path.join(input_folder, input_file)
         print(f"Processing data from file: {file_path}")
 
@@ -90,11 +93,15 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
             if 'GeoName' in df.columns:
                 df = df[df['GeoName'].isin(self.US_STATES)]
             else:
-                print("Warning: 'GeoName' column not found, skipping state filtering.")
+                print(
+                    "Warning: 'GeoName' column not found, skipping state filtering."
+                )
 
             # Gets columns that represent quarters, e.g. 2015:Q2, by matching
             # against a regular expression.
-            all_quarters = [q for q in df.columns if re.match(r'\d\d\d\d:Q\d', str(q))]
+            all_quarters = [
+                q for q in df.columns if re.match(r'\d\d\d\d:Q\d', str(q))
+            ]
 
             if all_quarters:
                 # Convert table from wide to long format.
@@ -121,12 +128,13 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
                 else:
                     print("Warning: 'value' column not found.")
 
-                self.clean_df = df.drop(['GeoFIPS', 'IndustryClassification'], axis=1, errors='ignore')
+                self.clean_df = df.drop(['GeoFIPS', 'IndustryClassification'],
+                                        axis=1,
+                                        errors='ignore')
             else:
                 print("Warning: No quarter columns found for melting.")
         else:
             print("No data to process.")
-
 
     @staticmethod
     def value_converter(val):

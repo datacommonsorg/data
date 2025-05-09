@@ -61,7 +61,10 @@ class StateGDPDataLoader:
         self.raw_df = None
         self.clean_df = None
 
-    def process_data(self, raw_data=None, input_file="SQGDP1__ALL_AREAS_2005_2024.csv", input_folder="input_folders"):
+    def process_data(self,
+                     raw_data=None,
+                     input_file="SQGDP1__ALL_AREAS_2005_2024.csv",
+                     input_folder="input_folders"):
         file_path = os.path.join(input_folder, input_file)
         print(f"Processing data from file: {file_path}")
         try:
@@ -87,38 +90,61 @@ class StateGDPDataLoader:
             if 'GeoName' in df.columns:
                 df = df[df['GeoName'].isin(self.US_STATES)]
             else:
-                print("Warning: 'GeoName' column not found, skipping state filtering.")
-            all_quarters = [q for q in df.columns if re.match(r'....:Q.', str(q))]
+                print(
+                    "Warning: 'GeoName' column not found, skipping state filtering."
+                )
+            all_quarters = [
+                q for q in df.columns if re.match(r'....:Q.', str(q))
+            ]
             if all_quarters:
-                df_melted = pd.melt(df, id_vars=['GeoFIPS', 'Unit'], value_vars=all_quarters, var_name='Quarter')
-                df_melted['Quarter'] = df_melted['Quarter'].apply(self.date_to_obs_date)
-                df_melted['GeoId'] = df_melted['GeoFIPS'].apply(self.convert_geoid)
+                df_melted = pd.melt(df,
+                                    id_vars=['GeoFIPS', 'Unit'],
+                                    value_vars=all_quarters,
+                                    var_name='Quarter')
+                df_melted['Quarter'] = df_melted['Quarter'].apply(
+                    self.date_to_obs_date)
+                df_melted['GeoId'] = df_melted['GeoFIPS'].apply(
+                    self.convert_geoid)
                 one_million = 1000000
-                self.clean_df = df_melted[df_melted['Unit'] == 'Millions of chained 2017 dollars'].copy()
+                self.clean_df = df_melted[
+                    df_melted['Unit'] ==
+                    'Millions of chained 2017 dollars'].copy()
                 if not self.clean_df.empty:
-                    self.clean_df = self.clean_df.set_index(['GeoId', 'Quarter'])
-                    self.clean_df['chained_2017_dollars'] = self.clean_df['value'].astype(float)
+                    self.clean_df = self.clean_df.set_index(
+                        ['GeoId', 'Quarter'])
+                    self.clean_df['chained_2017_dollars'] = self.clean_df[
+                        'value'].astype(float)
                     self.clean_df['chained_2017_dollars'] *= one_million
 
-                quality_indices = df_melted[df_melted['Unit'] == 'Quantity index'].copy()
+                quality_indices = df_melted[df_melted['Unit'] ==
+                                            'Quantity index'].copy()
                 if not quality_indices.empty:
-                    quality_indices['GeoId'] = quality_indices['GeoFIPS'].apply(self.convert_geoid)
-                    quality_indices = quality_indices.set_index(['GeoId', 'Quarter'])
-                    self.clean_df['quantity_index'] = quality_indices['value'].reindex(self.clean_df.index).values.astype(float)
+                    quality_indices['GeoId'] = quality_indices['GeoFIPS'].apply(
+                        self.convert_geoid)
+                    quality_indices = quality_indices.set_index(
+                        ['GeoId', 'Quarter'])
+                    self.clean_df['quantity_index'] = quality_indices[
+                        'value'].reindex(
+                            self.clean_df.index).values.astype(float)
 
-                current_usd = df_melted[df_melted['Unit'] == 'Millions of current dollars'].copy()
+                current_usd = df_melted[df_melted['Unit'] ==
+                                        'Millions of current dollars'].copy()
                 if not current_usd.empty:
-                    current_usd['GeoId'] = current_usd['GeoFIPS'].apply(self.convert_geoid)
+                    current_usd['GeoId'] = current_usd['GeoFIPS'].apply(
+                        self.convert_geoid)
                     current_usd = current_usd.set_index(['GeoId', 'Quarter'])
-                    self.clean_df['current_dollars'] = current_usd['value'].reindex(self.clean_df.index).values.astype(float) * one_million
+                    self.clean_df['current_dollars'] = current_usd[
+                        'value'].reindex(self.clean_df.index).values.astype(
+                            float) * one_million
 
-                self.clean_df = self.clean_df.drop(['GeoFIPS', 'Unit', 'value'], axis=1, errors='ignore')
-                
+                self.clean_df = self.clean_df.drop(['GeoFIPS', 'Unit', 'value'],
+                                                   axis=1,
+                                                   errors='ignore')
+
             else:
                 print("Warning: No quarter columns found for melting.")
         else:
             print("No data to process.")
-
 
     @classmethod
     def date_to_obs_date(cls, date):
@@ -132,17 +158,22 @@ class StateGDPDataLoader:
     def save_csv(self, filename='states_gdp.csv'):
         """Saves instance data frame to specified CSV file."""
         if self.clean_df is None:
-            raise ValueError('Uninitialized value of clean data frame. Please check process_data.')
+            raise ValueError(
+                'Uninitialized value of clean data frame. Please check process_data.'
+            )
 
         # Reset the index to make 'GeoId' and 'Quarter' regular columns
         self.clean_df = self.clean_df.reset_index()
         new_index = pd.Index(range(0, len(self.clean_df) * 3, 3))
         self.clean_df.index = new_index
-        desired_order = ['Quarter', 'GeoId', 'chained_2017_dollars', 'quantity_index', 'current_dollars']
+        desired_order = [
+            'Quarter', 'GeoId', 'chained_2017_dollars', 'quantity_index',
+            'current_dollars'
+        ]
         self.clean_df = self.clean_df[desired_order]
         self.clean_df.to_csv(filename, index=True)
         print(self.clean_df)
-        
+
 
 def main(_):
     """Runs the program."""

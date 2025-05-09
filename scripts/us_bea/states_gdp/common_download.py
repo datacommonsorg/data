@@ -19,7 +19,10 @@ from urllib.error import HTTPError, URLError
 import csv
 import os
 
-def download_and_extract_to_folders(zip_link, file_names, output_folder="input_folders"):
+
+def download_and_extract_to_folders(zip_link,
+                                    file_names,
+                                    output_folder="input_folders"):
     """
     Downloads a ZIP file from a given URL, extracts multiple specified CSV files,
     and saves each CSV file to the specified output folder.
@@ -34,7 +37,7 @@ def download_and_extract_to_folders(zip_link, file_names, output_folder="input_f
     print(f"Downloading ZIP file from: {zip_link}")
 
     try:
-    
+
         os.makedirs(output_folder, exist_ok=True)
 
         # Open zip file from link.
@@ -42,24 +45,34 @@ def download_and_extract_to_folders(zip_link, file_names, output_folder="input_f
             zip_file = zipfile.ZipFile(io.BytesIO(resp.read()))
 
             for file in file_names:
-                print(f"Extracting and saving file: {file} to '{output_folder}'")
+                print(
+                    f"Extracting and saving file: {file} to '{output_folder}'")
                 try:
                     with zip_file.open(file) as csv_file:
                         data = csv_file.read().decode('utf-8')
                         output_path = os.path.join(output_folder, file)
-                        with open(output_path, 'w', encoding='utf-8') as outfile:
+                        with open(output_path, 'w',
+                                  encoding='utf-8') as outfile:
                             outfile.write(data)
-                        print(f"Successfully extracted and saved: {file} to '{output_folder}'")
+                        print(
+                            f"Successfully extracted and saved: {file} to '{output_folder}'"
+                        )
                 except KeyError:
-                    print(f"Warning: File '{file}' not found in the ZIP archive.")
+                    print(
+                        f"Warning: File '{file}' not found in the ZIP archive.")
                 except Exception as e:
-                    print(f"An error occurred while processing file '{file}': {e}")
+                    print(
+                        f"An error occurred while processing file '{file}': {e}"
+                    )
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
 
+
 if __name__ == "__main__":
     zip_url = "https://apps.bea.gov/regional/zip/SQGDP.zip"
-    files_to_extract = ['SQGDP1__ALL_AREAS_2005_2024.csv', 'SQGDP2__ALL_AREAS_2005_2024.csv']
+    files_to_extract = [
+        'SQGDP1__ALL_AREAS_2005_2024.csv', 'SQGDP2__ALL_AREAS_2005_2024.csv'
+    ]
     output_directory = "input_folders"
 
     download_and_extract_to_folders(zip_url, files_to_extract, output_directory)
