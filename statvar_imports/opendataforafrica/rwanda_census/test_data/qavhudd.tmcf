@@ -1,0 +1,9 @@
+Node: E:qavhudd->E0
+observationAbout: C:qavhudd->observationAbout
+observationDate: C:qavhudd->observationDate
+variableMeasured: C:qavhudd->variableMeasured
+value: C:qavhudd->value
+unit: C:qavhudd->unit
+scalingFactor: C:qavhudd->scalingFactor
+observationPeriod: C:qavhudd->observationPeriod
+typeOf: dcs:StatVarObservation
