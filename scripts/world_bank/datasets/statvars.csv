@@ -950,10 +950,10 @@ FM.LBL.BMNY.ZG,,worldBank/FM_LBL_BMNY_ZG
 FP.CPI.TOTL,,worldBank/FP_CPI_TOTL
 FP.CPI.TOTL.ZG,,worldBank/FP_CPI_TOTL_ZG
 FP.WPI.TOTL,,worldBank/FP_WPI_TOTL
-FR.INR.DPST,,worldBank/FR_INR_DPST
-FR.INR.LEND,,worldBank/FR_INR_LEND
+FR.INR.DPST,dcs:Percent,worldBank/FR_INR_DPST
+FR.INR.LEND,dcs:Percent,worldBank/FR_INR_LEND
 FR.INR.LNDP,,worldBank/FR_INR_LNDP
-FR.INR.RINR,,worldBank/FR_INR_RINR
+FR.INR.RINR,dcs:Percent,worldBank/FR_INR_RINR
 FR.INR.RISK,,worldBank/FR_INR_RISK
 FS.AST.CGOV.GD.ZS,dcs:Percent,worldBank/FS_AST_CGOV_GD_ZS
 FS.AST.DOMO.GD.ZS,dcs:Percent,worldBank/FS_AST_DOMO_GD_ZS
@@ -1264,7 +1264,7 @@ NE.RSB.GNFS.CD,dcs:USDollar,worldBank/NE_RSB_GNFS_CD
 NE.RSB.GNFS.CN,,worldBank/NE_RSB_GNFS_CN
 NE.RSB.GNFS.KN,,worldBank/NE_RSB_GNFS_KN
 NE.RSB.GNFS.ZS,dcs:Percent,worldBank/NE_RSB_GNFS_ZS
-NE.TRD.GNFS.ZS,dcs:Percent,worldBank/NE_TRD_GNFS_ZS
+NE.TRD.GNFS.ZS,dcs:PercentGrossDomesticProduct,worldBank/NE_TRD_GNFS_ZS
 NV.AGR.EMPL.KD,,worldBank/NV_AGR_EMPL_KD
 NV.AGR.TOTL.CD,dcs:USDollar,worldBank/NV_AGR_TOTL_CD
 NV.AGR.TOTL.CN,,worldBank/NV_AGR_TOTL_CN
