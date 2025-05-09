@@ -44,10 +44,10 @@ class USStateQuarterlyGDPImportVal(unittest.TestCase):
 
         # Test that the quarters in the downloaded data are exactly the ones
         # from the years 2005-2019.
-        years = range(2005, 2020)
+        years = range(2005, 2023)
         quarters = range(1, 5)
         all_quarters = {f"{y}:Q{q}" for y in years for q in quarters}
-        all_quarters.add("2020:Q1")
+        all_quarters.add("2023:Q1")
         cols = loader.raw_df.columns
         data_quarters = {q for q in cols if re.match(r"....:Q.", q)}
         self.assertSetEqual(all_quarters, data_quarters)
