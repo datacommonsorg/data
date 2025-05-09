@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "NCSES_Employed_College_Grads_Import",
+        "curator_emails": [
+          ""
+        ],
+        "provenance_url": "https://ncsesdata.nsf.gov/explorer/datatables?term=race&exactMatch=no&page=1&filterSuperTopic=Demographics&filterTopic=Sex&datatablespage=2",
+        "provenance_description": "NDAP Dataset",
+        "scripts": [
+          "download_script.py",
+          "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/ncses_employed.xlsx --pv_map=pv_map.csv --config_file=metadata.csv --output_path=test_data/output"
+        ],
+        "source_files": [
+         "source_files/*.xlsx"
+      ],
+        "import_inputs": [
+          {
+            "template_mcf": "test_data/output.tmcf",
+            "cleaned_csv": "test_data/output.csv"
+          }
+        ],
+        "cron_schedule": "0 07 4,18 * *"
+      }
+    ]
+  }
