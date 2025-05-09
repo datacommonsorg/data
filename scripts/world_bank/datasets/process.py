@@ -1,4 +1,3 @@
-import requests
 import datetime
 import os
 import csv
@@ -80,9 +79,9 @@ def transform_worldbank_csv(input_filename,
                                 ])
 
     except FileNotFoundError:
-        logging.info(f"Error: Input file '{input_filename}' not found.")
+        logging.fatal(f"Error: Input file '{input_filename}' not found.")
     except Exception as e:
-        logging.info(f"An error occurred processing '{input_filename}': {e}")
+        logging.fatal(f"An error occurred processing '{input_filename}': {e}")
 
 
 def get_unit_by_indicator(target_indicator_code):
@@ -147,7 +146,7 @@ def main():
         else:
             logging.info("Successfully processed")
     except Exception as e:
-        logging.info(f"An error occurred in the main function: {e}")
+        logging.fatal(f"An error occurred in the main function: {e}")
 
 
 if __name__ == "__main__":
