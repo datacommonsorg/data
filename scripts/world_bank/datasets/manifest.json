@@ -6,6 +6,7 @@
       "provenance_url": "https://databank.worldbank.org/source/world-development-indicators",
       "provenance_description": "The WorldBankDatasets contains data about multiple databases like World development Indicators,Jobs,Education Statistics",
       "scripts": ["download.py","process.py"],
+      "cleanup_gcs_volume_mount": false,
       "import_inputs": [
         {
           "template_mcf": "wb.tmcf",

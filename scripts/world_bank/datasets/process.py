@@ -8,11 +8,10 @@ from collections import Counter
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 current_year = datetime.datetime.now().year
-# csv_filepath = '/usr/local/google/home/prajapata/worldbank_data/data/scripts/world_bank/datasets/statvars_with_unit.csv'
 statvar_csv = os.path.join(_MODULE_DIR, 'statvars.csv')
-# input_directory = '/usr/local/google/home/prajapata/worldbank_data/data/scripts/world_bank/datasets/data_downloaded_from_newAPI/worldbank_data_main'
-input_directory = os.path.join(_MODULE_DIR, 'input_files')
-output = os.path.join(_MODULE_DIR, 'output')
+_GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+input_directory = os.path.join(_GCS_OUTPUT_DIR, 'input_files')
+output = os.path.join(_GCS_OUTPUT_DIR, 'output')
 output_file_path = os.path.join(output, 'transformed_data_for_all_final.csv')
 
 _UTIL_DIR = os.path.dirname(os.path.abspath(__file__))
