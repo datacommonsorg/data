@@ -16,12 +16,16 @@
 - As the source api is not having historical data available, we are keeping the data from 1936 - 2019 as a historical data and refreshing data from 2020 till latest available data
 
 ### pvmap:
-* The pvmap for series id's are generated as per the defenitions given in https://www.bls.gov/sae/additional-resources/list-of-published-state-and-metropolitan-area-series/home.htm
-* The primary series id are in the form of eg:SMS01000000000000001, here SMS refers to the adjustment method(SMS - seasonallu adjusted and SMU - seasonally unadjusted). The next two intergers (here 01) represents the state code( if the 'Area' in source is 'Statewide').
-The remaining integers represent the industry (000000000000001), we saw that industries are repeating among states and we mapped the industries manually in pvmap
+The pvmap for series IDs was generated manually based on the definitions provided at https://www.bls.gov/sae/additional-resources/list-of-published-state-and-metropolitan-area-series/home.htm. 
 
-* Accordingly we split the actual series id into 3 different columns, one is series_type then state_id and series_id_value. So we directly took the state_id as the observationAbout. Based on this three columns we did the pvmap and place mapping in the bls_ces_state_pvmap.csv itself.
+This process included a manual mapping of industries due to observed repetitions across states.
 
+The primary series IDs follow a format such as SMS01000000000000001, where:
+- 'SMS' indicates the adjustment method (Seasonally Adjusted). 'SMU' represents Seasonally Unadjusted.
+- The subsequent two digits (e.g., '01') represent the state code, specifically when the 'Area' in the source is 'Statewide'.
+- The remaining digits represent the industry code (e.g., 000000000000001). Due to the repetition of these industry codes across different states, we performed a manual mapping of industries in the pvmap.
+
+To facilitate this mapping, we split the original series ID into three distinct columns: 'series_type', 'state_id', and 'series_id_value'. We then directly used the 'state_id' as the observationAbout. The resulting pvmap and place mappings were consolidated within the `bls_ces_state_pvmap.csv` file.
 
 
 
