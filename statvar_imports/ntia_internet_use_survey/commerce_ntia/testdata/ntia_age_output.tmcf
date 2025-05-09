@@ -1,0 +1,6 @@
+Node: E:ntia_age_output->E0
+observationAbout: C:ntia_age_output->observationAbout
+observationDate: C:ntia_age_output->observationDate
+value: C:ntia_age_output->value
+variableMeasured: C:ntia_age_output->variableMeasured
+typeOf: dcs:StatVarObservation
