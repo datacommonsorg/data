@@ -6,3 +6,4 @@ observationDate: C:World_Bank_Temp->observationdate
 observationPeriod: "P1Y"
 observationAbout: C:World_Bank_Temp->observationabout
 value: C:World_Bank_Temp->observationvalue
+unit: C:World_Bank_Temp->unit
