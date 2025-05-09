@@ -1,0 +1,4 @@
+observationAbout,observationDate,value,variableMeasured,observationPeriod,unit
+dcid:country/AFG,1970,38.69226,dcid:LocalCurrency_ExchangeRate_Currency_USD_AFA,P1Y,AFA
+dcid:country/AFG,1970-01,38.69226,dcid:LocalCurrency_ExchangeRate_Currency_USD_AFA,P1M,AFA
+dcid:country/DZA,1970-03,4.93706,dcid:LocalCurrency_ExchangeRate_Currency_USD_DZD,P1M,DZD
