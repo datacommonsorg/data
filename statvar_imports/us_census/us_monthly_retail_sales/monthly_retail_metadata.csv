@@ -1,0 +1,15 @@
+parameter,value
+url,https://www.census.gov/retail/index.html
+description,
+#place_type,Country
+#places_within,country/USA
+start_date,1992
+end_date,2025
+release_frequency,P1Y
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod,measurementMethod"
+#header_rows,5
+#drop_statvars_without_svobs,0
+mapped_columns,2
+mapped_rows,6
