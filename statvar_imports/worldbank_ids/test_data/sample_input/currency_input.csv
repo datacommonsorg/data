@@ -1,0 +1,101 @@
+country,counterpart_area,series,year,value,series_code
+Turkiye,World Bank-IBRD                         ,"Currency composition of PPG debt, U.S. dollars (%)",2001-01-01,87.1337,DT.CUR.USDL.ZS
+Costa Rica,Panama,"Currency composition of PPG debt, Japanese yen (%)",1982-01-01,0.0,DT.CUR.JYEN.ZS
+Senegal,World Bank-IBRD                         ,"Currency composition of PPG debt, French franc (%)",1982-01-01,0.0,DT.CUR.FFRC.ZS
+Uganda,South Africa,"Currency composition of PPG debt, U.S. dollars (%)",2011-01-01,0.0,DT.CUR.USDL.ZS
+Ukraine,Luxembourg,"Currency composition of PPG debt, Multiple currencies (%)",2020-01-01,0.0,DT.CUR.MULC.ZS
+Argentina,Sweden,"Currency composition of PPG debt, all other currencies (%)",2022-01-01,0.0,DT.CUR.OTHC.ZS
+Ghana,Hungary,"Currency composition of PPG debt, SDR (%)",2018-01-01,0.0,DT.CUR.SDRW.ZS
+Tanzania,Zambia,"Currency composition of PPG debt, Euro (%)",2016-01-01,0.0,DT.CUR.EURO.ZS
+Lebanon,Islamic Dev. Bank,"Currency composition of PPG debt, U.S. dollars (%)",1995-01-01,0.0,DT.CUR.USDL.ZS
+Madagascar,Italy,"Currency composition of PPG debt, all other currencies (%)",1977-01-01,0.0,DT.CUR.OTHC.ZS
+Pakistan,German Dem. Rep.,"Currency composition of PPG debt, Swiss franc (%)",1984-01-01,0.0,DT.CUR.SWFR.ZS
+Burundi,Kuwait,"Currency composition of PPG debt, Deutsche mark (%)",1994-01-01,0.0,DT.CUR.DMAK.ZS
+North Macedonia,Bosnia-Herzegovina,"Currency composition of PPG debt, Pound sterling (%)",2005-01-01,0.0,DT.CUR.UKPS.ZS
+Upper middle income,Fondo Latinoamericano de Reservas (FLAR),"Currency composition of PPG debt, U.S. dollars (%)",2010-01-01,100.0,DT.CUR.USDL.ZS
+St. Vincent and the Grenadines,Trinidad & Tobago,"Currency composition of PPG debt, Multiple currencies (%)",2004-01-01,0.0,DT.CUR.MULC.ZS
+Guyana,Caribbean Dev. Bank,"Currency composition of PPG debt, Japanese yen (%)",1976-01-01,0.0,DT.CUR.JYEN.ZS
+Kenya,World Bank-IDA                         ,"Currency composition of PPG debt, Multiple currencies (%)",1988-01-01,0.0,DT.CUR.MULC.ZS
+Least developed countries: UN classification,World,"Currency composition of PPG debt, Swiss franc (%)",2013-01-01,2.80939131005308,DT.CUR.SWFR.ZS
+Zambia,Hong Kong,"Currency composition of PPG debt, all other currencies (%)",2016-01-01,100.0,DT.CUR.OTHC.ZS
+Zimbabwe,Other Multiple Lenders,"Currency composition of PPG debt, U.S. dollars (%)",2011-01-01,0.0,DT.CUR.USDL.ZS
+Angola,Mauritius,"Currency composition of PPG debt, Swiss franc (%)",2005-01-01,0.0,DT.CUR.SWFR.ZS
+Somalia,Algeria,"Currency composition of PPG debt, Multiple currencies (%)",1996-01-01,0.0,DT.CUR.MULC.ZS
+Gabon,International Monetary Fund,"Currency composition of PPG debt, SDR (%)",2021-01-01,0.0,DT.CUR.SDRW.ZS
+Dominica,Caribbean Dev. Bank,"Currency composition of PPG debt, Multiple currencies (%)",1983-01-01,0.0,DT.CUR.MULC.ZS
+Peru,Brazil,"Currency composition of PPG debt, Japanese yen (%)",1979-01-01,0.0,DT.CUR.JYEN.ZS
+Belarus,Switzerland,"Currency composition of PPG debt, Swiss franc (%)",2004-01-01,0.0,DT.CUR.SWFR.ZS
+Viet Nam,India,"Currency composition of PPG debt, Deutsche mark (%)",1998-01-01,0.0,DT.CUR.DMAK.ZS
+Brazil,"Germany, Fed. Rep. of","Currency composition of PPG debt, U.S. dollars (%)",1990-01-01,1.8188,DT.CUR.USDL.ZS
+Nicaragua,Bermuda,"Currency composition of PPG debt, U.S. dollars (%)",2003-01-01,0.0,DT.CUR.USDL.ZS
+Nicaragua,Bermuda,"Currency composition of PPG debt, Euro (%)",2009-01-01,0.0,DT.CUR.EURO.ZS
+Dominican Republic,Central American Bank for Econ. Integration (BCIE),"Currency composition of PPG debt, SDR (%)",1993-01-01,0.0,DT.CUR.SDRW.ZS
+Nicaragua,Latin American Agribusiness Dev. Corp. (LAAD),"Currency composition of PPG debt, SDR (%)",1993-01-01,0.0,DT.CUR.SDRW.ZS
+Gabon,United States,"Currency composition of PPG debt, Euro (%)",2004-01-01,0.0,DT.CUR.EURO.ZS
+Brazil,Singapore,"Currency composition of PPG debt, Euro (%)",2015-01-01,0.0,DT.CUR.EURO.ZS
+Bulgaria,Sweden,"Currency composition of PPG debt, Multiple currencies (%)",2003-01-01,0.0,DT.CUR.MULC.ZS
+Ethiopia,Sweden,"Currency composition of PPG debt, U.S. dollars (%)",1975-01-01,0.0,DT.CUR.USDL.ZS
+Low & middle income,Denmark,"Currency composition of PPG debt, U.S. dollars (%)",1982-01-01,23.9018706675329,DT.CUR.USDL.ZS
+Turkiye,Argentina,"Currency composition of PPG debt, all other currencies (%)",2018-01-01,100.0,DT.CUR.OTHC.ZS
+Tanzania,Denmark,"Currency composition of PPG debt, Pound sterling (%)",2009-01-01,0.0,DT.CUR.UKPS.ZS
+Tanzania,Egypt,"Currency composition of PPG debt, Pound sterling (%)",2008-01-01,0.0,DT.CUR.UKPS.ZS
+India,Bahrain,"Currency composition of PPG debt, Pound sterling (%)",1981-01-01,0.0,DT.CUR.UKPS.ZS
+North Macedonia,Sweden,"Currency composition of PPG debt, Swiss franc (%)",1998-01-01,0.0,DT.CUR.SWFR.ZS
+Niger,Japan,"Currency composition of PPG debt, Swiss franc (%)",1981-01-01,0.0,DT.CUR.SWFR.ZS
+Zambia,Switzerland,"Currency composition of PPG debt, U.S. dollars (%)",2008-01-01,0.0,DT.CUR.USDL.ZS
+Mali,Serbia,"Currency composition of PPG debt, French franc (%)",1988-01-01,0.0,DT.CUR.FFRC.ZS
+"Egypt, Arab Rep.",Syrian Arab Republic,"Currency composition of PPG debt, Deutsche mark (%)",1995-01-01,0.0,DT.CUR.DMAK.ZS
+Jamaica,China,"Currency composition of PPG debt, Japanese yen (%)",1977-01-01,0.0,DT.CUR.JYEN.ZS
+"Congo, Rep.","Germany, Fed. Rep. of","Currency composition of PPG debt, Euro (%)",2011-01-01,0.0,DT.CUR.EURO.ZS
+Jordan,Multiple Lenders,"Currency composition of PPG debt, Multiple currencies (%)",2011-01-01,0.0,DT.CUR.MULC.ZS
+Senegal,Saudi Arabia,"Currency composition of PPG debt, Multiple currencies (%)",2016-01-01,0.0,DT.CUR.MULC.ZS
+Suriname,OPEC Fund for International Dev.,"Currency composition of PPG debt, Multiple currencies (%)",2020-01-01,0.0,DT.CUR.MULC.ZS
+"Egypt, Arab Rep.",Czechoslovakia,"Currency composition of PPG debt, French franc (%)",1971-01-01,0.0,DT.CUR.FFRC.ZS
+Peru,Australia,"Currency composition of PPG debt, Multiple currencies (%)",1989-01-01,0.0,DT.CUR.MULC.ZS
+Togo,Austria,"Currency composition of PPG debt, U.S. dollars (%)",1973-01-01,0.0,DT.CUR.USDL.ZS
+Philippines,India,"Currency composition of PPG debt, Swiss franc (%)",2007-01-01,0.0,DT.CUR.SWFR.ZS
+Lesotho,African Dev. Bank         ,"Currency composition of PPG debt, all other currencies (%)",2006-01-01,100.0,DT.CUR.OTHC.ZS
+Mauritius,Nordic Development Fund,"Currency composition of PPG debt, all other currencies (%)",1997-01-01,0.0,DT.CUR.OTHC.ZS
+Guatemala,Japan,"Currency composition of PPG debt, Pound sterling (%)",1987-01-01,0.0,DT.CUR.UKPS.ZS
+Honduras,World Bank-IBRD                         ,"Currency composition of PPG debt, Swiss franc (%)",1992-01-01,0.0,DT.CUR.SWFR.ZS
+Least developed countries: UN classification,International Fund for Agricultural Dev.,"Currency composition of PPG debt, French franc (%)",1992-01-01,25.5588394455314,DT.CUR.FFRC.ZS
+"Gambia, The",Netherlands,"Currency composition of PPG debt, Pound sterling (%)",1980-01-01,0.0,DT.CUR.UKPS.ZS
+"Congo, Dem. Rep.",Israel,"Currency composition of PPG debt, Pound sterling (%)",1991-01-01,0.0,DT.CUR.UKPS.ZS
+Liberia,Italy,"Currency composition of PPG debt, Swiss franc (%)",2001-01-01,0.0,DT.CUR.SWFR.ZS
+Zambia,German Dem. Rep.,"Currency composition of PPG debt, Multiple currencies (%)",1987-01-01,0.0,DT.CUR.MULC.ZS
+Lesotho,United States,"Currency composition of PPG debt, Euro (%)",2013-01-01,0.0,DT.CUR.EURO.ZS
+Upper middle income,Switzerland,"Currency composition of PPG debt, Deutsche mark (%)",1977-01-01,5.58235460928088,DT.CUR.DMAK.ZS
+Uzbekistan,United Arab Emirates,"Currency composition of PPG debt, Pound sterling (%)",2022-01-01,0.0,DT.CUR.UKPS.ZS
+"Yemen, Rep.",Algeria,"Currency composition of PPG debt, Pound sterling (%)",2020-01-01,0.0,DT.CUR.UKPS.ZS
+St. Vincent and the Grenadines,International Monetary Fund,"Currency composition of PPG debt, all other currencies (%)",1997-01-01,100.0,DT.CUR.OTHC.ZS
+St. Lucia,Multiple Lenders,"Currency composition of PPG debt, Multiple currencies (%)",1983-01-01,0.0,DT.CUR.MULC.ZS
+Mexico,Sweden,"Currency composition of PPG debt, all other currencies (%)",2014-01-01,100.0,DT.CUR.OTHC.ZS
+Turkiye,European Development Fund (EDF),"Currency composition of PPG debt, Japanese yen (%)",2000-01-01,0.0,DT.CUR.JYEN.ZS
+Kyrgyz Republic,International Fund for Agricultural Dev.,"Currency composition of PPG debt, SDR (%)",2011-01-01,79.5408,DT.CUR.SDRW.ZS
+Benin,Algeria,"Currency composition of PPG debt, French franc (%)",1996-01-01,0.0,DT.CUR.FFRC.ZS
+"Congo, Dem. Rep.",Multiple Lenders,"Currency composition of PPG debt, Swiss franc (%)",2003-01-01,0.0,DT.CUR.SWFR.ZS
+Sierra Leone,France,"Currency composition of PPG debt, U.S. dollars (%)",2009-01-01,0.0,DT.CUR.USDL.ZS
+Mauritius,World Bank-IDA                         ,"Currency composition of PPG debt, Swiss franc (%)",2019-01-01,0.0,DT.CUR.SWFR.ZS
+Benin,Netherlands,"Currency composition of PPG debt, Pound sterling (%)",1993-01-01,0.0,DT.CUR.UKPS.ZS
+Ecuador,"Germany, Fed. Rep. of","Currency composition of PPG debt, SDR (%)",2000-01-01,0.0,DT.CUR.SDRW.ZS
+Bangladesh,Spain,"Currency composition of PPG debt, Pound sterling (%)",2010-01-01,0.0,DT.CUR.UKPS.ZS
+Uganda,World,"Currency composition of PPG debt, Euro (%)",2012-01-01,2.1893,DT.CUR.EURO.ZS
+Bolivia,European Investment Bank,"Currency composition of PPG debt, Multiple currencies (%)",1992-01-01,0.0,DT.CUR.MULC.ZS
+Jordan,Austria,"Currency composition of PPG debt, Japanese yen (%)",1975-01-01,0.0,DT.CUR.JYEN.ZS
+Madagascar,Italy,"Currency composition of PPG debt, Japanese yen (%)",2007-01-01,0.0,DT.CUR.JYEN.ZS
+Malawi,Arab Bank for Economic Dev. in Africa (BADEA),"Currency composition of PPG debt, all other currencies (%)",1993-01-01,100.0,DT.CUR.OTHC.ZS
+Montenegro,Serbia,"Currency composition of PPG debt, SDR (%)",2018-01-01,0.0,DT.CUR.SDRW.ZS
+Sub-Saharan Africa (excluding high income),African Dev. Bank         ,"Currency composition of PPG debt, Multiple currencies (%)",2013-01-01,5.49222757374847,DT.CUR.MULC.ZS
+Nicaragua,Central American Bank for Econ. Integ. (CABEI),"Currency composition of PPG debt, Deutsche mark (%)",1970-01-01,0.0,DT.CUR.DMAK.ZS
+Grenada,Canada,"Currency composition of PPG debt, Japanese yen (%)",1978-01-01,0.0,DT.CUR.JYEN.ZS
+Cambodia,World,"Currency composition of PPG debt, SDR (%)",2002-01-01,0.4017,DT.CUR.SDRW.ZS
+"Congo, Dem. Rep.",Japan,"Currency composition of PPG debt, Pound sterling (%)",2002-01-01,0.0,DT.CUR.UKPS.ZS
+Kenya,Other Multiple Lenders,"Currency composition of PPG debt, Multiple currencies (%)",2015-01-01,0.0,DT.CUR.MULC.ZS
+Kyrgyz Republic,OPEC Fund for International Dev.,"Currency composition of PPG debt, Swiss franc (%)",2019-01-01,0.0,DT.CUR.SWFR.ZS
+Jordan,Iraq,"Currency composition of PPG debt, Japanese yen (%)",1986-01-01,0.0,DT.CUR.JYEN.ZS
+Papua New Guinea,"Korea, Republic of","Currency composition of PPG debt, French franc (%)",1976-01-01,0.0,DT.CUR.FFRC.ZS
+Burkina Faso,United States,"Currency composition of PPG debt, French franc (%)",1972-01-01,0.0,DT.CUR.FFRC.ZS
+Low & middle income,Bondholders,"Currency composition of PPG debt, Japanese yen (%)",2004-01-01,3.76770543869336,DT.CUR.JYEN.ZS
+Niger,OPEC Fund for International Dev.,"Currency composition of PPG debt, Pound sterling (%)",1992-01-01,0.0,DT.CUR.UKPS.ZS
+"Gambia, The",European Development Fund (EDF),"Currency composition of PPG debt, SDR (%)",1970-01-01,0.0,DT.CUR.SDRW.ZS
+Philippines,Nordic Development Fund,"Currency composition of PPG debt, all other currencies (%)",1974-01-01,100.0,DT.CUR.OTHC.ZS
