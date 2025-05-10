@@ -24,10 +24,13 @@ if [[ $# -le 1 ]]; then
   exit 1
 fi
 
+CONFIG="config_override.json"
+
 while getopts us OPTION; do
   case $OPTION in
     u)
         MODE="update"
+        CONFIG="config_override_test.json"
         ;;
     s)
         MODE="schedule"
@@ -44,6 +47,6 @@ python3 -m venv .env
 . .env/bin/activate
 pip3 install --disable-pip-version-check -r requirements.txt
 
-python3 -m schedule_update_import --gke_project_id=$GKE_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH
+python3 -m schedule_update_import --gke_project_id=$GKE_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH --config_override=$CONFIG
 
 deactivate
