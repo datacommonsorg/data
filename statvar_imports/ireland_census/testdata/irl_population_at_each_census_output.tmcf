@@ -1,0 +1,8 @@
+Node: E:irl_population_at_each_census_output->E0
+observationAbout: C:irl_population_at_each_census_output->observationAbout
+observationDate: C:irl_population_at_each_census_output->observationDate
+value: C:irl_population_at_each_census_output->value
+variableMeasured: C:irl_population_at_each_census_output->variableMeasured
+unit: C:irl_population_at_each_census_output->unit
+scalingFactor: C:irl_population_at_each_census_output->scalingFactor
+typeOf: dcs:StatVarObservation

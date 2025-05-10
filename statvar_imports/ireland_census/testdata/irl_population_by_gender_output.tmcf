@@ -1,0 +1,8 @@
+Node: E:irl_population_by_gender_output->E0
+observationAbout: C:irl_population_by_gender_output->observationAbout
+observationDate: C:irl_population_by_gender_output->observationDate
+value: C:irl_population_by_gender_output->value
+variableMeasured: C:irl_population_by_gender_output->variableMeasured
+unit: C:irl_population_by_gender_output->unit
+scalingFactor: C:irl_population_by_gender_output->scalingFactor
+typeOf: dcs:StatVarObservation
