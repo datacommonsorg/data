@@ -27,7 +27,7 @@ import re
 import os
 import zipfile
 from absl import logging
-from urllib.request import urlopen  # Keep import, might be useful later
+from urllib.request import urlopen 
 from absl import app
 import pandas as pd
 from absl import flags
@@ -35,7 +35,7 @@ from absl import flags
 logging.set_verbosity(logging.INFO)
 
 # Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None  # default='warn'
+pd.options.mode.chained_assignment = None  
 
 FLAGS = flags.FLAGS
 flags.DEFINE_integer('latest_year', None,
@@ -59,7 +59,6 @@ class StateGDPDataLoader:
         'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
         'West Virginia', 'Wisconsin', 'Wyoming'
     ]
-    _STATE_QUARTERLY_GDP_FILE_PATTERN = r'SQGDP1__ALL_AREAS_(\d{4})_(\d{4})\.csv'
     _QUARTER_MONTH_MAP = {'Q1': '03', 'Q2': '06', 'Q3': '09', 'Q4': '12'}
 
     def __init__(self):
@@ -68,34 +67,49 @@ class StateGDPDataLoader:
         self.clean_df = None
         
 
-    def _find_gdp_file_in_folder(self, input_folder, target_year=None):
-        """Finds the state quarterly GDP CSV file in the specified folder."""
+    def _find_gdp_file_in_folder(self, input_folder, file_pattern, target_year=None):
+        """Finds the latest file in the specified folder matching a given pattern.
+
+        Args:
+            input_folder (str): The path to the directory to search.
+            file_pattern (str): A regular expression pattern to match filenames.
+                            It should contain a capturing group for the end year.
+            target_year (int, optional): The specific end year to prioritize. Defaults to None.
+
+        Returns:
+            str: The name of the file found.
+
+        Raises:
+            FileNotFoundError: If no file matching the pattern is found in the folder.
+        """
         matching_files = {}
         for filename in os.listdir(input_folder):
-            match = re.match(self._STATE_QUARTERLY_GDP_FILE_PATTERN, filename)
+            match = re.match(file_pattern, filename)
             if match:
-                end_year = int(match.group(2))
-                matching_files[filename] = end_year
-                
+                try:
+                    end_year = int(match.group(2))
+                    matching_files[filename] = end_year
+                except IndexError:
+                    logging.error(f"Error: Year group 2 not found in pattern '{file_pattern}' for file '{filename}'.")
+                    continue
+                except ValueError:
+                    logging.error(f"Error: Could not convert year to integer for file '{filename}'.")
+                    continue
 
         if not matching_files:
             raise FileNotFoundError(
-                f"Error: No file matching pattern "
-                f"'{self._STATE_QUARTERLY_GDP_FILE_PATTERN}' found in '{input_folder}'."
-            )
+                f"Error: No file matching pattern '{file_pattern}' found in '{input_folder}'.")
 
         if target_year:
             candidate_files = {
                 k: v for k, v in matching_files.items() if v == target_year
             }
-        
             if candidate_files:
                 return next(iter(candidate_files))
             else:
                 logging.warning(
                     f"Warning: No file found ending with year {target_year} in '{input_folder}'. "
-                    f"Falling back to the file with the latest end year available."
-                )
+                    f"Falling back to the file with the latest end year available.")
 
         return max(matching_files, key=matching_files.get)
 
@@ -125,7 +139,8 @@ class StateGDPDataLoader:
             self._input_file = 'provided_data'
         else:
             try:
-                self._input_file = self._find_gdp_file_in_folder(input_folder, FLAGS.latest_year)
+                _STATE_QUARTERLY_GDP_FILE_PATTERN = r'SQGDP1__ALL_AREAS_(\d{4})_(\d{4})\.csv'
+                self._input_file = self._find_gdp_file_in_folder(input_folder,_STATE_QUARTERLY_GDP_FILE_PATTERN, FLAGS.latest_year)
                 file_path = os.path.join(input_folder, self._input_file)
                 logging.info(f"Processing data from file: {file_path}")
                 with open(file_path, 'r', encoding='utf-8') as csvfile:
@@ -237,7 +252,7 @@ class StateGDPDataLoader:
 
 def main(argv):
     """Runs the program."""
-    del argv  # Unused.
+    del argv
     loader = StateGDPDataLoader()
     loader.process_data()
     loader.save_csv()

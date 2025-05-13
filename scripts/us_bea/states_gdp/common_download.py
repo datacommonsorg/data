@@ -16,15 +16,13 @@ import io
 import csv
 import os
 from absl import logging
-from absl import logging
 import requests
 from retry import retry
-
 logging.set_verbosity(logging.INFO)
 
 @retry(tries=3, delay=5, backoff=2)
 def download_and_extract_to_folders(zip_link,
-                                    output_folder="input_folders"):
+                                    output_folder):
     """
     Downloads a ZIP file from a given URL using the requests module with retry,
     stores the ZIP file in the specified output folder, extracts all CSV files
@@ -72,7 +70,7 @@ def download_and_extract_to_folders(zip_link,
                             )
         except requests.exceptions.RequestException as e:
             logging.error(f"Error downloading ZIP file after retries: {e}")
-            return  # Exit the function if download fails
+            return
         except zipfile.BadZipFile:
             logging.error(f"Error: Downloaded file is not a valid ZIP file: {zip_filename}")
             return
@@ -83,7 +81,5 @@ def download_and_extract_to_folders(zip_link,
 if __name__ == "__main__":
     zip_url = "https://apps.bea.gov/regional/zip/SQGDP.zip"
     output_directory = "input_folders"
-
     download_and_extract_to_folders(zip_url, output_folder=output_directory)
-
     logging.info(f"\nZIP and CSV files saved to the '{output_directory}' folder.")
