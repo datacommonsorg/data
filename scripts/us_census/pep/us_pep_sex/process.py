@@ -37,8 +37,6 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_string('config_path', '',
                     'Path to the configuration file in the GCS bucket.')
-# flags.DEFINE_string('gcp_output', '',
-#                     'Path to the persistent folder in the GCS bucket.')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
@@ -1127,7 +1125,7 @@ def is_valid_url(url):
                 return False
         return True
     except Exception as e:
-        print(f"Error checking URL: {url} - {e}")
+        logging.fatal(f"Error checking URL: {url} - {e}")
         return False
 
 def add_future_year_urls():
@@ -1162,7 +1160,7 @@ def add_future_year_urls():
     )
 ]
 
-    logging.info(f"Urls Fetched from input_json:{_FILES_TO_DOWNLOAD}")
+    logging.info(f"Historical urls Fetched from input_json:{_FILES_TO_DOWNLOAD}")
 
     # List of URLs with placeholders for {YEAR} and {i}
     urls_to_scan = [
