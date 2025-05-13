@@ -1113,6 +1113,7 @@ def fetch_skip_urls_from_gcs(GCS_BUCKET_NAME: str,
     skip_urls = json.loads(data)
     return skip_urls
 
+
 def is_valid_url(url):
     try:
         response = requests.get(url, timeout=10)
@@ -1121,12 +1122,14 @@ def is_valid_url(url):
         content_type = response.headers.get("Content-Type", "")
         if "text/html" in content_type:
             # Might be an error page disguised as 200
-            if b"error" in response.content.lower() or len(response.content) < 500:
+            if b"error" in response.content.lower() or len(
+                    response.content) < 500:
                 return False
         return True
     except Exception as e:
         logging.fatal(f"Error checking URL: {url} - {e}")
         return False
+
 
 def add_future_year_urls():
     """
@@ -1147,20 +1150,20 @@ def add_future_year_urls():
     # Fetch skip urls from GCS
     skip_urls = fetch_skip_urls_from_gcs(GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH)
 
-
     logging.info(f"Fetched {len(skip_urls)} URLs to skip from GCS.")
     logging.info(f"Urls fetched from the json to skip:{skip_urls}")
 
     #Filter based on skip list + live URL check
     _FILES_TO_DOWNLOAD = [
-    url for url in _FILES_TO_DOWNLOAD
-    if (
-        url["download_path"] not in skip_urls # not suspicious, keep it
-        or (url["download_path"] in skip_urls and is_valid_url(url["download_path"]))  # suspicious, but passes check
-    )
-]
+        url for url in _FILES_TO_DOWNLOAD
+        if (url["download_path"] not in skip_urls  # not suspicious, keep it
+            or (url["download_path"] in skip_urls and is_valid_url(
+                url["download_path"]))  # suspicious, but passes check
+           )
+    ]
 
-    logging.info(f"Historical urls Fetched from input_json:{_FILES_TO_DOWNLOAD}")
+    logging.info(
+        f"Historical urls Fetched from input_json:{_FILES_TO_DOWNLOAD}")
 
     # List of URLs with placeholders for {YEAR} and {i}
     urls_to_scan = [
@@ -1222,7 +1225,6 @@ def add_future_year_urls():
                         f"URL is not accessible {url_to_check} due to {e}")
 
 
-
 @retry(tries=3,
        delay=2,
        backoff=2,
@@ -1269,8 +1271,7 @@ def download_files():
                         with tempfile.NamedTemporaryFile(
                                 delete=False) as tmp_file:
                             # Stream the response into a temp file
-                            for chunk in response.iter_content(
-                                    chunk_size=8192):
+                            for chunk in response.iter_content(chunk_size=8192):
                                 if chunk:
                                     tmp_file.write(chunk)
                             tmp_file_path = tmp_file.name
@@ -1278,8 +1279,7 @@ def download_files():
                         # Copy to local destination
                         shutil.copy(
                             tmp_file_path,
-                            os.path.join(_INPUT_FILE_PATH,
-                                            file_name_to_save))
+                            os.path.join(_INPUT_FILE_PATH, file_name_to_save))
 
                         # Copy to gcs destination
                         shutil.copy(
@@ -1352,4 +1352,3 @@ def main(_):
 
 if __name__ == "__main__":
     app.run(main)
-  
