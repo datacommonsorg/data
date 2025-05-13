@@ -1,0 +1,17 @@
+Node: dcid:instrumentType
+typeOf: dcs:Property
+name: "instrumentType"
+domainIncludes: dcid:TreasuryBill,dcid:TreasurySecurity
+
+Node: dcid:instrumentTerm
+typeOf: dcs:Property
+name: "instrumentTerm"
+domainIncludes: dcid:TreasuryBill,dcid:TreasurySecurity
+
+Node: interestRate
+dcid: "interestRate"
+rangeIncludes: schema:Number
+name: "interestRate"
+domainIncludes: schema:FinancialProduct, schema:TreasuryBill, schema:TreasuryNote, schema:TreasuryBond, dcid:FinancialInstrument, dcid:TreasurySecurity
+source: "https://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources"
+typeOf: schema:Property
