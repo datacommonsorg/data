@@ -42,7 +42,7 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _INPUT_URL_JSON = "input_url.json"
 _FILES_TO_DOWNLOAD = None
-_GCS_OUTPUT = os.path.join(_MODULE_DIR, 'gcs_output/us_pep_sex_source_files')
+_GCS_OUTPUT_PERSISTENT_PATH = os.path.join(_MODULE_DIR, 'gcs_output/us_pep_sex_source_files')
 _GCS_BASE_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
@@ -1238,7 +1238,7 @@ def download_files():
     session = requests.session()
 
     # Step 1: Get set of already downloaded files
-    downloaded_files = set(os.listdir(_GCS_OUTPUT))
+    downloaded_files = set(os.listdir(_GCS_OUTPUT_PERSISTENT_PATH))
 
     for file_to_download in _FILES_TO_DOWNLOAD:
         file_name_to_save = None
@@ -1284,7 +1284,7 @@ def download_files():
                         # Copy to gcs destination
                         shutil.copy(
                             tmp_file_path,
-                            os.path.join(_GCS_OUTPUT, file_name_to_save))
+                            os.path.join(_GCS_OUTPUT_PERSISTENT_PATH, file_name_to_save))
 
                         # Optionally delete the temp file
                         os.remove(tmp_file_path)
@@ -1318,9 +1318,9 @@ def main(_):
         os.mkdir(data_file_path)
     if not (os.path.exists(_INPUT_FILE_PATH)):
         os.mkdir(_INPUT_FILE_PATH)
-    if not (os.path.exists(_GCS_OUTPUT)):
-        os.mkdir(_GCS_OUTPUT)
-    # us_pep_sex_source_files = os.path.join(_GCS_OUTPUT, "us_pep_sex_source_files")
+    if not (os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH)):
+        os.mkdir(_GCS_OUTPUT_PERSISTENT_PATH)
+    # us_pep_sex_source_files = os.path.join(_GCS_OUTPUT_PERSISTENT_PATH, "us_pep_sex_source_files")
     # os.makedirs(us_pep_sex_source_files, exist_ok=True)
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name
@@ -1344,10 +1344,10 @@ def main(_):
         loader.process()
 
         # Only delete if it's a subdirectory of gcs_output, and not gcs_output itself
-        if os.path.exists(_GCS_OUTPUT) and os.path.commonpath([_GCS_OUTPUT, _GCS_BASE_DIR]) == _GCS_BASE_DIR \
-        and os.path.abspath(_GCS_OUTPUT) != os.path.abspath(_GCS_BASE_DIR):
-            shutil.rmtree(_GCS_OUTPUT)
-            logging.info(f"Deleted folder: {_GCS_OUTPUT}")
+        if os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH) and os.path.commonpath([_GCS_OUTPUT_PERSISTENT_PATH, _GCS_BASE_DIR]) == _GCS_BASE_DIR \
+        and os.path.abspath(_GCS_OUTPUT_PERSISTENT_PATH) != os.path.abspath(_GCS_BASE_DIR):
+            shutil.rmtree(_GCS_OUTPUT_PERSISTENT_PATH)
+            logging.info(f"Deleted folder: {_GCS_OUTPUT_PERSISTENT_PATH}")
 
 
 if __name__ == "__main__":

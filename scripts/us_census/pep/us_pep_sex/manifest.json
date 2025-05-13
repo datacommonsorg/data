@@ -13,7 +13,8 @@
           "cleaned_csv": "output/population_estimate_sex.csv"
         }
       ],
-      "cron_schedule": "0 03 * * 1"
+      "cron_schedule": "0 03 * * 1",
+      "cleanup_gcs_volume_mount": false
     }
   ]
 }
