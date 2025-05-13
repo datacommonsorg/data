@@ -19,6 +19,16 @@ function help {
   echo "## Update an import specified by <absolute_import_path>, e.g. scripts/us_usda/quickstats:UsdaAgSurvey"  exit 1
 }
 
+# Setup files to run import executor locally
+function setup_local {
+  mkdir -p /tmp/import-tool
+  if [[ ! -f '/tmp/import-tool/import-tool.jar' ]]; then
+    wget "https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar" \
+      -O /tmp/import-tool/import-tool.jar
+  fi
+
+}
+
 if [[ $# -le 1 ]]; then
   help
   exit 1
@@ -31,6 +41,7 @@ while getopts us OPTION; do
     u)
         MODE="update"
         CONFIG="config_override_test.json"
+        setup_local
         ;;
     s)
         MODE="schedule"
@@ -46,7 +57,7 @@ IMPORT_PATH=$3
 python3 -m venv .env
 . .env/bin/activate
 pip3 install --disable-pip-version-check -r requirements.txt
-
+echo python3 -m schedule_update_import --gke_project_id=$GKE_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH --config_override=$CONFIG
 python3 -m schedule_update_import --gke_project_id=$GKE_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH --config_override=$CONFIG
 
 deactivate

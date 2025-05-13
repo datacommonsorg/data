@@ -5,7 +5,7 @@
         "user_script_env": {},
         "user_script_timeout": 3600,
         "disable_email_notifications": true,
-        "import_tool_path" : "/usr/local/bin/import-tool.jar",
+        "import_tool_path" : "/tmp/import-tool/import-tool.jar",
         "gcs_volume_mount_dir": "/tmp",
         "storage_prod_bucket_name": "datcom-import-test"
    }
