@@ -5,7 +5,7 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://data.cso.ie/",
       "provenance_description": "Ireland Demographics, Health and Economy data from Central Statistics Office(CSO) by country, county and city",
-      "scripts": ["download_script.py", "run.sh"] ,
+      "scripts": ["download_script.py", "preprocess.py", "run.sh"] ,
       "source_files": [
         "input_files/*.csv"
       ],

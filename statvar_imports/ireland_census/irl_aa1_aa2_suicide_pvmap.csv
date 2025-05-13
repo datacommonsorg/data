@@ -6,4 +6,3 @@ Suicides,measuredProperty,count,populationType,MortalityEvent,causeOfDeath,Suici
 VALUE,value,{Number},,,,
 Male,gender,Male,,,,
 Female,gender,Female,,,,
-State,#ignore,ignore,,,,
