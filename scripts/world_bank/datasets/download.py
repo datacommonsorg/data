@@ -9,6 +9,8 @@ from retry import retry
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+if not os.path.exists(_GCS_OUTPUT_DIR):
+    os.makedirs(_GCS_OUTPUT_DIR)
 target_folder = os.path.join(_GCS_OUTPUT_DIR, "input_files")
 input_statvar_file = os.path.join(_MODULE_DIR, 'statvars.csv')
 config_file = os.path.join(_GCS_OUTPUT_DIR, 'config.json')

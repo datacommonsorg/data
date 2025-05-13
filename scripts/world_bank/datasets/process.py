@@ -22,6 +22,7 @@ def transform_worldbank_csv(input_filename,
                             writer,
                             data_start_row=5,
                             write_header=False):
+    processed_rows = set()
     try:
         with open(input_filename, 'r', newline='', encoding='utf-8') as infile:
             reader = csv.reader(infile)
@@ -72,11 +73,17 @@ def transform_worldbank_csv(input_filename,
                             year = header[j]
                             value = row[j].strip()
                             if value:
-                                writer.writerow([
-                                    indicator_code, stat_var,
-                                    measurement_method, country_code, year,
-                                    value, unit_value
-                                ])
+                                """Keeping the first occurrence and removing subsequent duplicates. Verified with source and production; the initial value from the source now is matching with the production data(checked for 4-5 samples) ."""
+                                duplicate_key = (indicator_code, stat_var,
+                                                 measurement_method,
+                                                 country_code, year, unit_value)
+                                if duplicate_key not in processed_rows:
+                                    writer.writerow([
+                                        indicator_code, stat_var,
+                                        measurement_method, country_code, year,
+                                        value, unit_value
+                                    ])
+                                    processed_rows.add(duplicate_key)
 
     except FileNotFoundError:
         logging.fatal(f"Error: Input file '{input_filename}' not found.")
