@@ -14,8 +14,7 @@
         
             ],
             "source_files": [
-                "input_folders/SQGDP1__ALL_AREAS_2005_2024.csv",
-                "input_folders/SQGDP2__ALL_AREAS_2005_2024.csv"
+                "input_folders/*.csv"
             ],
             "import_inputs": [
                 {

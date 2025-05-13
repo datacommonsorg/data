@@ -1,11 +1,10 @@
-# Copyright 2025 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
+#    http://www.apache.org/licenses/LICENSE-2.0
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,24 +14,32 @@
 per US state. Saves output as a CSV file.
 
 The output CSV contains three measurement methods of GDP per quarter per US
-state from the years 2005-2019.
+state from the years 2005 onwards, based on the available file in the input folder.
     Typical usage:
 
-    python3 import_data.py
+    python3 import_data.py --latest_year 2024 --input_folder my_data
+    or
+    python3 import_data.py --input_folder my_data # To automatically get the latest year
 """
 import csv
 import io
 import re
 import os
 import zipfile
-
-from urllib.request import urlopen
+from absl import logging
+from urllib.request import urlopen  # Keep import, might be useful later
 from absl import app
 import pandas as pd
+from absl import flags
+
+logging.set_verbosity(logging.INFO)
 
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None  # default='warn'
 
+FLAGS = flags.FLAGS
+flags.DEFINE_integer('latest_year', None,
+                     'The latest year to look for in the filename (optional).')
 
 class StateGDPDataLoader:
     """Pulls per-state GDP data from the BEA.
@@ -52,45 +59,98 @@ class StateGDPDataLoader:
         'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
         'West Virginia', 'Wisconsin', 'Wyoming'
     ]
-    _ZIP_LINK = 'https://apps.bea.gov/regional/zip/SQGDP.zip'
-    _STATE_QUARTERLY_GDP_FILE = 'SQGDP1__ALL_AREAS_2005_2024.csv'
+    _STATE_QUARTERLY_GDP_FILE_PATTERN = r'SQGDP1__ALL_AREAS_(\d{4})_(\d{4})\.csv'
     _QUARTER_MONTH_MAP = {'Q1': '03', 'Q2': '06', 'Q3': '09', 'Q4': '12'}
 
     def __init__(self):
         """Initializes instance, assigning member data frames to None."""
         self.raw_df = None
         self.clean_df = None
+        
+
+    def _find_gdp_file_in_folder(self, input_folder, target_year=None):
+        """Finds the state quarterly GDP CSV file in the specified folder."""
+        matching_files = {}
+        for filename in os.listdir(input_folder):
+            match = re.match(self._STATE_QUARTERLY_GDP_FILE_PATTERN, filename)
+            if match:
+                end_year = int(match.group(2))
+                matching_files[filename] = end_year
+                
+
+        if not matching_files:
+            raise FileNotFoundError(
+                f"Error: No file matching pattern "
+                f"'{self._STATE_QUARTERLY_GDP_FILE_PATTERN}' found in '{input_folder}'."
+            )
+
+        if target_year:
+            candidate_files = {
+                k: v for k, v in matching_files.items() if v == target_year
+            }
+        
+            if candidate_files:
+                return next(iter(candidate_files))
+            else:
+                logging.warning(
+                    f"Warning: No file found ending with year {target_year} in '{input_folder}'. "
+                    f"Falling back to the file with the latest end year available."
+                )
+
+        return max(matching_files, key=matching_files.get)
 
     def process_data(self,
                      raw_data=None,
-                     input_file="SQGDP1__ALL_AREAS_2005_2024.csv",
-                     input_folder="input_folders"):
-        file_path = os.path.join(input_folder, input_file)
-        print(f"Processing data from file: {file_path}")
-        try:
-            with open(file_path, 'r', encoding='utf-8') as csvfile:
-                reader = csv.reader(csvfile)
-                header = next(reader)
-                data = list(reader)
-                if data:
-                    self.raw_df = pd.DataFrame(data, columns=header)
-                    print(f"Successfully loaded data from: {input_file}")
-                else:
-                    self.raw_df = None
-                    raise ValueError(f"Error: No data found in '{input_file}'.")
-        except FileNotFoundError as e:
-            raise FileNotFoundError(f"Error: File not found at: {file_path}")
-        except Exception as e:
-            print(f"An error occurred while reading '{input_file}': {e}")
-            self.raw_df = None
-            raise ValueError(f"Error loading data from '{input_file}': {e}")
+                     input_folder='input_folders'):
+        """Processes the state quarterly GDP data from the input folder.
+
+        Args:
+            raw_data: Raw data to process (optional, if not provided, it will
+                      look for the latest file in the input folder).
+            input_folder: The folder containing the input CSV files. If None,
+                          it defaults to the value of the --input_folder flag.
+        """
+        if raw_data is not None:
+            logging.info("Processing data from provided raw data.")
+            csvfile = io.StringIO(raw_data)
+            reader = csv.reader(csvfile)
+            header = next(reader)
+            data = list(reader)
+            if data:
+                self.raw_df = pd.DataFrame(data, columns=header)
+                logging.info(f"Successfully loaded data from provided raw data.")
+            else:
+                self.raw_df = None
+                raise ValueError("Error: No data found in provided raw data.")
+            self._input_file = 'provided_data'
+        else:
+            try:
+                self._input_file = self._find_gdp_file_in_folder(input_folder, FLAGS.latest_year)
+                file_path = os.path.join(input_folder, self._input_file)
+                logging.info(f"Processing data from file: {file_path}")
+                with open(file_path, 'r', encoding='utf-8') as csvfile:
+                    reader = csv.reader(csvfile)
+                    header = next(reader)
+                    data = list(reader)
+                    if data:
+                        self.raw_df = pd.DataFrame(data, columns=header)
+                        logging.info(f"Successfully loaded data from: {self._input_file}")
+                    else:
+                        self.raw_df = None
+                        raise ValueError(f"Error: No data found in '{self._input_file}'.")
+            except FileNotFoundError as e:
+                raise FileNotFoundError(f"Error: {e}")
+            except Exception as e:
+                logging.error(f"An error occurred while reading data: {e}")
+                self.raw_df = None
+                raise ValueError(f"Error loading data: {e}")
 
         if self.raw_df is not None:
             df = self.raw_df.copy()
             if 'GeoName' in df.columns:
                 df = df[df['GeoName'].isin(self.US_STATES)]
             else:
-                print(
+                logging.error(
                     "Warning: 'GeoName' column not found, skipping state filtering."
                 )
             all_quarters = [
@@ -98,9 +158,9 @@ class StateGDPDataLoader:
             ]
             if all_quarters:
                 df_melted = pd.melt(df,
-                                    id_vars=['GeoFIPS', 'Unit'],
-                                    value_vars=all_quarters,
-                                    var_name='Quarter')
+                                     id_vars=['GeoFIPS', 'Unit'],
+                                     value_vars=all_quarters,
+                                     var_name='Quarter')
                 df_melted['Quarter'] = df_melted['Quarter'].apply(
                     self.date_to_obs_date)
                 df_melted['GeoId'] = df_melted['GeoFIPS'].apply(
@@ -117,7 +177,7 @@ class StateGDPDataLoader:
                     self.clean_df['chained_2017_dollars'] *= one_million
 
                 quality_indices = df_melted[df_melted['Unit'] ==
-                                            'Quantity index'].copy()
+                                             'Quantity index'].copy()
                 if not quality_indices.empty:
                     quality_indices['GeoId'] = quality_indices['GeoFIPS'].apply(
                         self.convert_geoid)
@@ -128,7 +188,7 @@ class StateGDPDataLoader:
                             self.clean_df.index).values.astype(float)
 
                 current_usd = df_melted[df_melted['Unit'] ==
-                                        'Millions of current dollars'].copy()
+                                         'Millions of current dollars'].copy()
                 if not current_usd.empty:
                     current_usd['GeoId'] = current_usd['GeoFIPS'].apply(
                         self.convert_geoid)
@@ -138,13 +198,13 @@ class StateGDPDataLoader:
                             float) * one_million
 
                 self.clean_df = self.clean_df.drop(['GeoFIPS', 'Unit', 'value'],
-                                                   axis=1,
-                                                   errors='ignore')
+                                                 axis=1,
+                                                 errors='ignore')
 
             else:
-                print("Warning: No quarter columns found for melting.")
+                logging.error("Warning: No quarter columns found for melting.")
         else:
-            print("No data to process.")
+            logging.fatal("No data to process.")
 
     @classmethod
     def date_to_obs_date(cls, date):
@@ -172,11 +232,12 @@ class StateGDPDataLoader:
         ]
         self.clean_df = self.clean_df[desired_order]
         self.clean_df.to_csv(filename, index=True)
-        print(self.clean_df)
+        logging.info(self.clean_df)
 
 
-def main(_):
+def main(argv):
     """Runs the program."""
+    del argv  # Unused.
     loader = StateGDPDataLoader()
     loader.process_data()
     loader.save_csv()

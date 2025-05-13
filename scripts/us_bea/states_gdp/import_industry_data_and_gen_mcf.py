@@ -1,10 +1,10 @@
-# Copyright 2025 Google LLC
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#    http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -12,190 +12,240 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Pulls data from the US Bureau of Economic Analysis (BEA) on quarterly GDP
-per US state per industry.
+per US state. Saves output as a CSV file.
 
-Saves output as a CSV file.
-
-Also generates the MCF nodes for the data schema.
+The output CSV contains three measurement methods of GDP per quarter per US
+state from the years 2005 onwards, based on the available file in the input folder.
     Typical usage:
 
-    python3 import_industry_data_and_gen_mcf.py
+    python3 import_data.py --latest_year 2024 --input_folder my_data
+    or
+    python3 import_data.py --input_folder my_data # To automatically get the latest year
 """
-import os
+import csv
+import io
 import re
-import sys
-
+import os
+from absl import logging
 from absl import app
 import pandas as pd
+from absl import flags
 
-# Allows the following module import to work when running as a script
-sys.path.append(
-    os.path.dirname(os.path.dirname(os.path.dirname(
-        os.path.abspath(__file__)))))
-from us_bea.states_gdp import import_data
-import csv
+logging.set_verbosity(logging.INFO)
+
 # Suppress annoying pandas DF copy warnings.
 pd.options.mode.chained_assignment = None  # default='warn'
 
+# Define flags only when the script is run directly
+if __name__ == '__main__':
+    FLAGS = flags.FLAGS
+    flags.DEFINE_integer('latest_year', None,
+                         'The latest year to look for in the filename (optional).')
+    
 
-class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
-    """Pulls GDP industry-level state data from BEA.
+class StateGDPDataLoader:
+    """Pulls per-state GDP data from the BEA.
 
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
+    US_STATES = [
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
+        'Connecticut', 'Delaware', 'District of Columbia', 'Florida', 'Georgia',
+        'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+        'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan',
+        'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
+        'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+        'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon',
+        'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
+        'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+        'West Virginia', 'Wisconsin', 'Wyoming'
+    ]
+    _STATE_QUARTERLY_GDP_FILE_PATTERN = r'SQGDP1__ALL_AREAS_(\d{4})_(\d{4})\.csv'
+    _QUARTER_MONTH_MAP = {'Q1': '03', 'Q2': '06', 'Q3': '09', 'Q4': '12'}
+
+    def __init__(self):
+        """Initializes instance, assigning member data frames to None."""
+        self.raw_df = None
+        self.clean_df = None
+        self._input_file = None
+
+    def _find_gdp_file_in_folder(self, input_folder, target_year=None):
+        """Finds the state quarterly GDP CSV file in the specified folder."""
+        matching_files = {}
+        for filename in os.listdir(input_folder):
+            match = re.match(self._STATE_QUARTERLY_GDP_FILE_PATTERN, filename)
+            if match:
+                end_year = int(match.group(2))
+                matching_files[filename] = end_year
+
+        if not matching_files:
+            raise FileNotFoundError(
+                f"Error: No file matching pattern "
+                f"'{self._STATE_QUARTERLY_GDP_FILE_PATTERN}' found in '{input_folder}'."
+            )
+
+        if target_year:
+            candidate_files = {
+                k: v for k, v in matching_files.items() if v == target_year
+            }
+            if candidate_files:
+                return next(iter(candidate_files))
+            else:
+                logging.warning(
+                    f"Warning: No file found ending with year {target_year} in '{input_folder}'. "
+                    f"Falling back to the file with the latest end year available."
+                )
+
+        return max(matching_files, key=matching_files.get)
 
     def process_data(self,
                      raw_data=None,
-                     input_file='SQGDP2__ALL_AREAS_2005_2024.csv',
-                     input_folder="input_folders"):
-        """Cleans data from a specified CSV file in the input folder
-        and converts it from wide to long format.
+                     input_folder='input_folders'):
+        """Processes the state quarterly GDP data from the input folder.
 
         Args:
-            raw_data (optional): raw data frame to be used as starting point.
-            input_file (str, optional): The name of the CSV file to process.
-                                         Defaults to the class constant
-                                         _STATE_QUARTERLY_INDUSTRY_GDP_FILE.
-            input_folder (str, optional): The folder containing the CSV file.
-                                         Defaults to "input_folders".
-
-        Raises:
-            FileNotFoundError: If the specified CSV file is not found.
-            ValueError: If no data could be loaded from the specified file.
+            raw_data: Raw data to process (optional, if not provided, it will
+                      look for the latest file in the input folder).
+            input_folder: The folder containing the input CSV files. If None,
+                          it defaults to the value of the --input_folder flag.
         """
 
-        file_path = os.path.join(input_folder, input_file)
-        print(f"Processing data from file: {file_path}")
-
-        try:
-            with open(file_path, 'r', encoding='utf-8') as csvfile:
-                reader = csv.reader(csvfile)
-                header = next(reader)
-                data = list(reader)
-                if data:
-                    self.raw_df = pd.DataFrame(data, columns=header)
-                    print(f"Successfully loaded data from: {input_file}")
+        if raw_data is not None:
+            logging.info("Processing data from provided raw data.")
+            csvfile = io.StringIO(raw_data)
+            reader = csv.reader(csvfile)
+            header = next(reader)
+            data = list(reader)
+            if data:
+                self.raw_df = pd.DataFrame(data, columns=header)
+                logging.info(f"Successfully loaded data from provided raw data.")
+            else:
+                self.raw_df = None
+                raise ValueError("Error: No data found in provided raw data.")
+            self._input_file = 'provided_data'
+        else:
+            try:
+                if __name__ == '__main__':
+                    target_year = FLAGS.latest_year
                 else:
-                    self.raw_df = None
-                    raise ValueError(f"Error: No data found in '{input_file}'.")
-        except FileNotFoundError:
-            raise FileNotFoundError(f"Error: File not found at: {file_path}")
-        except Exception as e:
-            print(f"An error occurred while reading '{input_file}': {e}")
-            self.raw_df = None
-            raise ValueError(f"Error loading data from '{input_file}': {e}")
+                    target_year = None
+
+                self._input_file = self._find_gdp_file_in_folder(input_folder, target_year)
+                file_path = os.path.join(input_folder, self._input_file)
+                logging.info(f"Processing data from file: {file_path}")
+                with open(file_path, 'r', encoding='utf-8') as csvfile:
+                    reader = csv.reader(csvfile)
+                    header = next(reader)
+                    data = list(reader)
+                    if data:
+                        self.raw_df = pd.DataFrame(data, columns=header)
+                        logging.info(f"Successfully loaded data from: {self._input_file}")
+                    else:
+                        self.raw_df = None
+                        raise ValueError(f"Error: No data found in '{self._input_file}'.")
+            except FileNotFoundError as e:
+                raise FileNotFoundError(f"Error: {e}")
+            except Exception as e:
+                logging.error(f"An error occurred while reading data: {e}")
+                self.raw_df = None
+                raise ValueError(f"Error loading data: {e}")
 
         if self.raw_df is not None:
             df = self.raw_df.copy()
-
-            # Filters out columns that are not US states (e.g. New England).
             if 'GeoName' in df.columns:
                 df = df[df['GeoName'].isin(self.US_STATES)]
             else:
-                print(
+                logging.error(
                     "Warning: 'GeoName' column not found, skipping state filtering."
                 )
-
-            # Gets columns that represent quarters, e.g. 2015:Q2, by matching
-            # against a regular expression.
             all_quarters = [
-                q for q in df.columns if re.match(r'\d\d\d\d:Q\d', str(q))
+                q for q in df.columns if re.match(r'....:Q.', str(q))
             ]
-
             if all_quarters:
-                # Convert table from wide to long format.
-                df = pd.melt(df,
-                             id_vars=['GeoFIPS', 'IndustryClassification'],
-                             value_vars=all_quarters,
-                             var_name='Quarter')
+                df_melted = pd.melt(df,
+                                     id_vars=['GeoFIPS', 'Unit'],
+                                     value_vars=all_quarters,
+                                     var_name='Quarter')
+                df_melted['Quarter'] = df_melted['Quarter'].apply(
+                    self.date_to_obs_date)
+                df_melted['GeoId'] = df_melted['GeoFIPS'].apply(
+                    self.convert_geoid)
+                one_million = 1000000
+                self.clean_df = df_melted[
+                    df_melted['Unit'] ==
+                    'Millions of chained 2017 dollars'].copy()
+                if not self.clean_df.empty:
+                    self.clean_df = self.clean_df.set_index(
+                        ['GeoId', 'Quarter'])
+                    self.clean_df['chained_2017_dollars'] = self.clean_df[
+                        'value'].astype(float)
+                    self.clean_df['chained_2017_dollars'] *= one_million
 
-                df['Quarter'] = df['Quarter'].apply(self.date_to_obs_date)
-                df['GeoId'] = df['GeoFIPS'].apply(self.convert_geoid)
+                quality_indices = df_melted[df_melted['Unit'] ==
+                                             'Quantity index'].copy()
+                if not quality_indices.empty:
+                    quality_indices['GeoId'] = quality_indices['GeoFIPS'].apply(
+                        self.convert_geoid)
+                    quality_indices = quality_indices.set_index(
+                        ['GeoId', 'Quarter'])
+                    self.clean_df['quantity_index'] = quality_indices[
+                        'value'].reindex(
+                            self.clean_df.index).values.astype(float)
 
-                if 'IndustryClassification' in df.columns:
-                    df = df[df['IndustryClassification'] != '...']
-                    df['NAICS'] = df['IndustryClassification'].apply(
-                        self.convert_industry_class)
-                else:
-                    print("Warning: 'IndustryClassification' column not found.")
+                current_usd = df_melted[df_melted['Unit'] ==
+                                         'Millions of current dollars'].copy()
+                if not current_usd.empty:
+                    current_usd['GeoId'] = current_usd['GeoFIPS'].apply(
+                        self.convert_geoid)
+                    current_usd = current_usd.set_index(['GeoId', 'Quarter'])
+                    self.clean_df['current_dollars'] = current_usd[
+                        'value'].reindex(self.clean_df.index).values.astype(
+                            float) * one_million
 
-                if 'value' in df.columns:
-                    df['value'] = df['value'].apply(self.value_converter)
-                    df = df[df['value'] >= 0]
-                    # Convert from millions of current USD to current USD.
-                    df['value'] *= 1000000
-                else:
-                    print("Warning: 'value' column not found.")
+                self.clean_df = self.clean_df.drop(['GeoFIPS', 'Unit', 'value'],
+                                                 axis=1,
+                                                 errors='ignore')
 
-                self.clean_df = df.drop(['GeoFIPS', 'IndustryClassification'],
-                                        axis=1,
-                                        errors='ignore')
             else:
-                print("Warning: No quarter columns found for melting.")
+                logging.error("Warning: No quarter columns found for melting.")
         else:
-            print("No data to process.")
+            logging.fatal("No data to process.")
+
+    @classmethod
+    def date_to_obs_date(cls, date):
+        return date[:4] + '-' + cls._QUARTER_MONTH_MAP[date[5:]]
 
     @staticmethod
-    def value_converter(val):
-        """Converts value to float type, and filters out missing values.
+    def convert_geoid(fips_code):
+        fips_code = fips_code.replace('"', '').replace(' ', '')
+        return 'geoId/' + fips_code[:2]
 
-    Missing
-        values are marked by a letter enclosed in parentheses, e.g., "(D)".
-        """
-        try:
-            return float(val)
-        except ValueError:
-            return -1
-
-    @staticmethod
-    def convert_industry_class(naics_code):
-        """Filters out aggregate NAICS codes and assigns them their Data
-
-        Commons codes.
-        """
-        if isinstance(naics_code, str):
-            naics_code = naics_code.replace('-', '_').replace(',', '&')
-        return f"dcs:USStateQuarterlyIndustryGDP_NAICS_{naics_code}"
-
-    def save_csv(self, filename='states_industry_gdp.csv'):
-        """Saves instance data frame to specified CSV file.
-
-        Raises:
-            ValueError: The instance clean_df data frame has not been
-            initialized. This is probably caused by not having called
-            process_data.
-        """
+    def save_csv(self, filename='states_gdp.csv'):
+        """Saves instance data frame to specified CSV file."""
         if self.clean_df is None:
-            raise ValueError('Uninitialized value of clean data frame. Please '
-                             'check you are calling process_data before '
-                             'save_csv.')
-        self.clean_df.to_csv(filename)
+            raise ValueError(
+                'Uninitialized value of clean data frame. Please check process_data.'
+            )
 
-    def generate_mcf(self):
-        """Generates MCF StatVars for each industry code."""
-        mcf_temp = ('Node: dcid:USStateQuarterlyIndustryGDP_NAICS_{title}\n'
-                    'typeOf: dcs:StatisticalVariable\n'
-                    'populationType: dcs:EconomicActivity\n'
-                    'activitySource: dcs:GrossDomesticProduction\n'
-                    'measuredProperty: dcs:amount\n'
-                    'measurementQualifier: dcs:Nominal\n'
-                    'naics: dcid:NAICS/{naics}\n\n')
-
-        with open('states_gdp_industry_statvars.mcf', 'w') as mcf_f:
-            for naics_code in self.clean_df['NAICS'].unique():
-                code_title = naics_code[38:]
-                code = code_title.replace('_', '-')
-                code = code.replace('&', '&NAICS/')
-                mcf_f.write(mcf_temp.format(title=code_title, naics=code))
+        # Reset the index to make 'GeoId' and 'Quarter' regular columns
+        self.clean_df = self.clean_df.reset_index()
+        new_index = pd.Index(range(0, len(self.clean_df) * 3, 3))
+        self.clean_df.index = new_index
+        desired_order = [
+            'Quarter', 'GeoId', 'chained_2017_dollars', 'quantity_index',
+            'current_dollars'
+        ]
+        self.clean_df = self.clean_df[desired_order]
+        self.clean_df.to_csv(filename, index=True)
+        logging.info(self.clean_df)
 
 
 def main(_):
     """Runs the program."""
-    loader = StateGDPIndustryDataLoader()
+    loader = StateGDPDataLoader()
     loader.process_data()
     loader.save_csv()
-    loader.generate_mcf()
 
 
 if __name__ == '__main__':
