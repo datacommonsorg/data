@@ -89,21 +89,29 @@ class ImportValidation:
 
     # Checks if the number of deleted data points are below a threshold.
     def _deleted_count_validation(self, config: dict):
+        if self.differ_results.empty:
+            return
         if self.differ_results['deleted'].sum() > config['threshold']:
             raise AssertionError(f'Validation failed: {config["validation"]}')
 
     # Checks if number of modified points for each stat var are same.
     def _modified_count_validation(self, config: dict):
+        if self.differ_results.empty:
+            return
         if self.differ_results['modified'].nunique() > 1:
             raise AssertionError(f'Validation failed: {config["validation"]}')
 
     # Checks if number of added points for each stat var are same.
     def _added_count_validation(self, config: dict):
+        if self.differ_results.empty:
+            return
         if self.differ_results['added'].nunique() > 1:
             raise AssertionError(f'Validation failed: {config["validation"]}')
 
     # Checks if number of unmodified points for each stat var are same.
     def _unmodified_count_validation(self, config: dict):
+        if self.differ_results.empty:
+            return
         if self.differ_results['same'].nunique() > 1:
             raise AssertionError(f'Validation failed: {config["validation"]}')
 
