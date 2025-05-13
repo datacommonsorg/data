@@ -1115,6 +1115,20 @@ def fetch_skip_urls_from_gcs(GCS_BUCKET_NAME: str,
     skip_urls = json.loads(data)
     return skip_urls
 
+def is_valid_url(url):
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code != 200:
+            return False
+        content_type = response.headers.get("Content-Type", "")
+        if "text/html" in content_type:
+            # Might be an error page disguised as 200
+            if b"error" in response.content.lower() or len(response.content) < 500:
+                return False
+        return True
+    except Exception as e:
+        print(f"Error checking URL: {url} - {e}")
+        return False
 
 def add_future_year_urls():
     """
@@ -1126,9 +1140,29 @@ def add_future_year_urls():
     global _FILES_TO_DOWNLOAD
     # Initialize the list to store files to download
     _FILES_TO_DOWNLOAD = []
-    _URLS_IN_JSON = []
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
+
+    GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH = extract_gcs_info()
+    # Read URLs from the GCS-hosted config file
+
+    # Fetch skip urls from GCS
+    skip_urls = fetch_skip_urls_from_gcs(GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH)
+
+
+    logging.info(f"Fetched {len(skip_urls)} URLs to skip from GCS.")
+    logging.info(f"Urls fetched from the json to skip:{skip_urls}")
+
+    #Filter based on skip list + live URL check
+    _FILES_TO_DOWNLOAD = [
+    url for url in _FILES_TO_DOWNLOAD
+    if (
+        url["download_path"] not in skip_urls # not suspicious, keep it
+        or (url["download_path"] in skip_urls and is_valid_url(url["download_path"]))  # suspicious, but passes check
+    )
+]
+
+    logging.info(f"Urls Fetched from input_json:{_FILES_TO_DOWNLOAD}")
 
     # List of URLs with placeholders for {YEAR} and {i}
     urls_to_scan = [
@@ -1188,21 +1222,7 @@ def add_future_year_urls():
                 except requests.exceptions.RequestException as e:
                     logging.error(
                         f"URL is not accessible {url_to_check} due to {e}")
-                    
-    GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH = extract_gcs_info()
-    # Read URLs from the GCS-hosted config file
 
-    # Fetch skip urls from GCS
-    skip_urls = fetch_skip_urls_from_gcs(GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH)
-
-
-    logging.info(f"Fetched {len(skip_urls)} URLs to skip from GCS.")
-    logging.info(f"Urls fetched from the json to skip:{skip_urls}")
-
-    # Filter _FILES_TO_DOWNLOAD to exclude skip_urls
-    _FILES_TO_DOWNLOAD = [url for url in _FILES_TO_DOWNLOAD if url not in skip_urls]
-
-    logging.info(f"_FILES_TO_DOWNLOAD:{_FILES_TO_DOWNLOAD}")
 
 
 @retry(tries=3,
@@ -1219,7 +1239,6 @@ def download_files():
 
     # Step 1: Get set of already downloaded files
     downloaded_files = set(os.listdir(_GCS_OUTPUT))
-    print(">>>>>>>>>>>>>>>>>>>>>>",downloaded_files)
 
     for file_to_download in _FILES_TO_DOWNLOAD:
         file_name_to_save = None
