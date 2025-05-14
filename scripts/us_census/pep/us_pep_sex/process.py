@@ -1322,8 +1322,7 @@ def main(_):
         os.mkdir(_INPUT_FILE_PATH)
     if not (os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH)):
         os.mkdir(_GCS_OUTPUT_PERSISTENT_PATH)
-    # us_pep_sex_source_files = os.path.join(_GCS_OUTPUT_PERSISTENT_PATH, "us_pep_sex_source_files")
-    # os.makedirs(us_pep_sex_source_files, exist_ok=True)
+    
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name
     tmcf_path = data_file_path + os.sep + tmcf_name
