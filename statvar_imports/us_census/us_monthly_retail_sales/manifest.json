@@ -1,0 +1,21 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "USMonthlyRetailSales",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.census.gov/retail/",
+      "provenance_description": "The Advance Monthly and Monthly Retail Trade Surveys (MARTS and MRTS), the Annual Retail Trade Survey (ARTS), and the Quarterly E-Commerce Report work together to produce the most comprehensive data available on retail economic activity in the United States.",
+      "scripts": ["download.py","../../../tools/statvar_importer/stat_var_processor.py --input_data=input_file/monthly_retail.xlsx --pv_map=monthly_retail_pvmap.csv --statvar_dcid_remap_csv=monthly_retail_remap.csv --config_file=monthly_retail_metadata.csv --output_path=output/monthly_retail"],
+      "import_inputs": [
+        {
+          "template_mcf": "output/monthly_retail.tmcf",
+          "cleaned_csv": "output/monthly_retail.csv"
+        }
+      ],
+      "source_file":[
+          "input_file/monthly_retail.xlsx"
+      ],
+      "cron_schedule": "30 05 * * 1"
+    }
+  ]
+}
