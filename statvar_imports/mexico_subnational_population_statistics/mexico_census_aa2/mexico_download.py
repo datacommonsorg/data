@@ -11,31 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 import os, config
 import requests, io
-from absl import logging
+from absl import app, logging
 from pathlib import Path
 from retry import retry
 import pandas as pd
 
-#Read urls from Config file
-
 Mexico_Census_URL = config.Mexico_Census_URL
-
-#Ensure output directory exists
 
 OUTPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
 Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
-
-#Retry function for handling request failures
 
 @retry(tries=3, delay=5, backoff=2)
 def retry_method(url, headers=None):
     response = requests.get(url, headers=headers, timeout=10)
     response.raise_for_status()
     return response
-
-#Function to download the Mexico_Census_AA2 Data
 
 def download_and_convert_excel_to_csv():
     logging.info("Starting download and conversion of Excel files...")
@@ -60,5 +53,9 @@ def download_and_convert_excel_to_csv():
         logging.fatal(f"Failed to download Mexico Census data file: {e}")
         return None
 
-if __name__ == "__main__":
+    
+def main(argv):
     download_and_convert_excel_to_csv()
+
+if __name__ == "__main__":  
+    app.run(main)
