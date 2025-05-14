@@ -14,7 +14,7 @@
 import requests
 import zipfile
 import io, os, config
-from absl import logging
+from absl import app, logging
 import pandas as pd
 from retry import retry
 
@@ -101,6 +101,8 @@ def process_excel_data(df):
 
     return pd.DataFrame(result)
 
+def main(argv):
+    download_files(config.urls, config.excel_file, _INPUT_FILE_PATH)
 
 if __name__ == "__main__":  
-    download_files(config.urls, config.excel_file, _INPUT_FILE_PATH)
+    app.run(main)
