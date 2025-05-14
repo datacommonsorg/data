@@ -14,7 +14,7 @@
 
 import os
 import requests
-from absl import logging
+from absl import app, logging
 from pathlib import Path
 from retry import retry
 import config
@@ -47,6 +47,8 @@ def download_Commerce_NTIA():
         logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
         return None
 
+def main(argv):
+    download_Commerce_NTIA()
 
 if __name__ == "__main__":
-    download_Commerce_NTIA()
+    app.run(main)

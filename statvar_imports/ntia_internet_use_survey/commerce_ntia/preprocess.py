@@ -14,7 +14,7 @@
 
 import os
 import pandas as pd
-from absl import logging
+from absl import app, logging
 
 INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
 
@@ -65,5 +65,8 @@ def preprocess_data():
         logging.fatal(f"An error occurred while preprocessing the input data: {e}")
         return None
 
-if __name__ == "__main__":
+def main(argv):
     preprocess_data()
+
+if __name__ == "__main__":
+    app.run(main)
