@@ -14,7 +14,8 @@ if not os.path.exists(_GCS_OUTPUT_DIR):
 target_folder = os.path.join(_GCS_OUTPUT_DIR, "input_files")
 input_statvar_file = os.path.join(_MODULE_DIR, 'statvars.csv')
 config_file = os.path.join(_GCS_OUTPUT_DIR, 'config.json')
-os.makedirs(target_folder, exist_ok=True)
+if not os.path.exists(target_folder):
+    os.makedirs(target_folder, exist_ok=True)
 
 
 def create_config_for_series():
@@ -86,6 +87,7 @@ def process_config(config_file):
                             })
                     except requests.exceptions.RequestException as e:
                         logging.info(f"Error fetching data from {url}: {e}")
+                        """Ignoring this error; retry logic is in place and this script supports persitent volume mounts. Failed URLs will remain False in config and cause script failure at the end."""
                         updated_configs.append(
                             item
                         )  # Keep the original item with is_downloaded as False
