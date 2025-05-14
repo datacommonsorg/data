@@ -14,7 +14,7 @@
 
 import pandas as pd
 import os
-from absl import logging
+from absl import app, logging
 
 input_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_data/")
 input_file = input_dir + 'Exchange_rate_E_All_Data.csv'
@@ -72,5 +72,8 @@ def melt_year_and_flag_columns(input_csv_file, output_csv_file):
     except Exception as e:
         logging.fatal(f"An error occurred while preprocessing the data: {e}")
 
-if __name__== "__main__":
+def main(argv):
     melt_year_and_flag_columns(input_file, output_file)
+
+if __name__ == "__main__":  
+    app.run(main)
