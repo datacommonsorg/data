@@ -5,7 +5,7 @@
         "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://www2.census.gov/programs-surveys/popest/",
         "provenance_description": "U.S. Census Bureau PEP Annual Population",
-        "scripts": ["preprocess.py"],
+        "scripts": ["preprocess.py --config_path=unresolved_mcf/us_census/pep/annual_population/skip_url.json"],
         "source_files": ["input_files/*"],
         "import_inputs": [
           {

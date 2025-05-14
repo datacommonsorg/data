@@ -44,6 +44,7 @@ import warnings
 import requests
 import time
 import re
+import shutil
 from datetime import datetime as dt
 
 warnings.filterwarnings('ignore')
@@ -52,6 +53,7 @@ from absl import app
 from absl import logging
 from absl import flags
 from retry import retry
+from google.cloud import storage  # GCS Client
 
 _FLAGS = flags.FLAGS
 
@@ -59,9 +61,15 @@ flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_bool(
     'is_summary_levels', False,
     'Options: True for all summary_levels and False for only 162')
+flags.DEFINE_string('config_path', '',
+                    'Path to the configuration file in the GCS bucket.')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+_GCS_OUTPUT = os.path.join(_MODULE_DIR,
+                           'gcs_output/us_annual_population_source_files')
+_GCS_BASE_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+_INPUT_FILE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "gcs_output/us_annual_population_source_files")
 os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
 excel_file_name_pattern = r"NST-EST(\d{4})-POP\.xlsx"
 sys.path.insert(1, _MODULE_DIR)
@@ -1068,6 +1076,49 @@ def process(input_path, cleaned_csv_file_path: str, mcf_file_path: str,
         logging.fatal(
             "The script has been terminated due to a mismatch between the number of files expected to be processed and the actual number processed"
         )
+    if os.path.exists(_GCS_OUTPUT) and os.path.commonpath([_GCS_OUTPUT, _GCS_BASE_DIR]) == _GCS_BASE_DIR \
+        and os.path.abspath(_GCS_OUTPUT) != os.path.abspath(_GCS_BASE_DIR):
+        shutil.rmtree(_GCS_OUTPUT)
+        logging.info(f"Deleted folder: {_GCS_OUTPUT}")
+
+
+def fetch_skip_urls_from_gcs(GCS_BUCKET_NAME: str,
+                             GCS_SKIP_FILE_PATH: str) -> list:
+    """Fetch skip_url.json from GCS and return list of URLs to skip."""
+    client = storage.Client()
+    bucket = client.bucket(GCS_BUCKET_NAME)
+    blob = bucket.blob(GCS_SKIP_FILE_PATH)
+    data = blob.download_as_text()
+    skip_urls = json.loads(data)
+    return skip_urls
+
+
+def extract_gcs_info():
+    parts = _FLAGS.config_path.split('/', 1)
+    if len(parts) != 2:
+        raise ValueError(
+            "Invalid GCS config_path format. Expected 'bucket_name/path/to/object'."
+        )
+    gcs_bucket_name = parts[0]
+    gcs_object_path = parts[1]
+    return gcs_bucket_name, gcs_object_path
+
+
+def is_valid_url(url):
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code != 200:
+            return False
+        content_type = response.headers.get("Content-Type", "")
+        if "text/html" in content_type:
+            # Might be an error page disguised as 200
+            if b"error" in response.content.lower() or len(
+                    response.content) < 500:
+                return False
+        return True
+    except Exception as e:
+        print(f"Error checking URL: {url} - {e}")
+        return False
 
 
 def add_future_year_urls():
@@ -1114,10 +1165,32 @@ def download_files():
         Args: None
         Returns: None
     """
+
     global _FILES_TO_DOWNLOAD
+    session = requests.session()
+    GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH = extract_gcs_info()
+    # Read URLs from the GCS-hosted config file
+
+    # Fetch skip urls from GCS
+    skip_urls = fetch_skip_urls_from_gcs(GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH)
+
+    logging.info(f"Fetched {len(skip_urls)} URLs to skip from GCS.")
+    logging.info(f"Urls fetched from the json to skip:{skip_urls}")
+
+    #Filter based on skip list + live URL check
+    _FILES_TO_DOWNLOAD = [
+        url for url in _FILES_TO_DOWNLOAD
+        if (url["download_path"] not in skip_urls  # not suspicious, keep it
+            or (url["download_path"] in skip_urls and is_valid_url(
+                url["download_path"]))  # suspicious, but passes check
+           )
+    ]
+
+    logging.info(f"Urls Fetched from input_json:{_FILES_TO_DOWNLOAD}")
     if not os.path.exists(_INPUT_FILE_PATH):
         os.makedirs(_INPUT_FILE_PATH)
     try:
+        downloaded_files = set(os.listdir(_GCS_OUTPUT))
         for file_to_dowload in _FILES_TO_DOWNLOAD:
             file_name_to_save = None
             url = file_to_dowload['download_path']
@@ -1136,12 +1209,29 @@ def download_files():
                 file_name_to_save = file_to_dowload[
                     'file_path'] + file_name_to_save
 
-            response = download_with_retry(url, file_name_to_save)
-            if response.status_code == 200:
-                with open(os.path.join(_INPUT_FILE_PATH, file_name_to_save),
-                          'wb') as f:
-                    f.write(response.content)
-                    file_to_dowload['is_downloaded'] = True
+            headers = {'User-Agent': 'Mozilla/5.0'}
+            with session.get(url, stream=True, timeout=120,
+                             headers=headers) as response:
+                response.raise_for_status()
+
+                content_type = response.headers.get('Content-Type', '')
+                # Skip if file already exists
+                if file_name_to_save in downloaded_files:
+                    logging.info(
+                        f"Skipping already downloaded file: {file_name_to_save}"
+                    )
+                    continue
+                if 'html' in content_type.lower():
+                    logging.fatal(
+                        f"Server returned HTML error page for URL: {url}")
+                else:
+                    response = download_with_retry(url, file_name_to_save)
+                    if response.status_code == 200:
+                        with open(
+                                os.path.join(_INPUT_FILE_PATH,
+                                             file_name_to_save), 'wb') as f:
+                            f.write(response.content)
+                            file_to_dowload['is_downloaded'] = True
 
     except Exception as e:
         logging.fatal(f"Error occurred in download method {e}")
@@ -1159,6 +1249,11 @@ def main(_):
     tmcf_path = os.path.join(data_file_path, "usa_annual_population.tmcf")
 
     if mode == "" or mode == "download":
+        config_path = _FLAGS.config_path
+        if not config_path:
+            logging.fatal(
+                "Please provide the --config_path flag with a valid GCS path.")
+            return
         add_future_year_urls()
         download_files()
     if mode == "" or mode == "process":
