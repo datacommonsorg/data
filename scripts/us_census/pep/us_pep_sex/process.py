@@ -42,7 +42,8 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _INPUT_URL_JSON = "input_url.json"
 _FILES_TO_DOWNLOAD = None
-_GCS_OUTPUT_PERSISTENT_PATH = os.path.join(_MODULE_DIR, 'gcs_output/us_pep_sex_source_files')
+_GCS_OUTPUT_PERSISTENT_PATH = os.path.join(
+    _MODULE_DIR, 'gcs_output/us_pep_sex_source_files')
 _GCS_BASE_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
@@ -1284,7 +1285,8 @@ def download_files():
                         # Copy to gcs destination
                         shutil.copy(
                             tmp_file_path,
-                            os.path.join(_GCS_OUTPUT_PERSISTENT_PATH, file_name_to_save))
+                            os.path.join(_GCS_OUTPUT_PERSISTENT_PATH,
+                                         file_name_to_save))
 
                         # Optionally delete the temp file
                         os.remove(tmp_file_path)
