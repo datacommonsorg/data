@@ -95,7 +95,7 @@ def create_or_update_import_schedule(absolute_import_name: str,
     if not schedule:
         raise KeyError(
             f'cron_schedule not found in manifest for {absolute_import_name}')
-    resources = {"cpu": "2", "memory": "4G"}  # default resources.
+    resources = {"cpu": "2", "memory": "8G"}  # default resources.
     if 'resource_limits' in import_spec:
         resources.update(import_spec['resource_limits'])
     timeout = config.user_script_timeout

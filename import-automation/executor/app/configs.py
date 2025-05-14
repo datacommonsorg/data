@@ -117,6 +117,8 @@ class ExecutorConfig:
     local_repo_dir: str = '/data'
     # Location of the import tool jar.
     import_tool_path: str = '/import-tool.jar'
+    # Location of the differ tool jar.
+    differ_tool_path: str = '/differ-tool.jar'
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 3600
     # Arguments for the user script
