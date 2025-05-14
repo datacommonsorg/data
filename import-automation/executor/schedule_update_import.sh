@@ -61,7 +61,6 @@ IMPORT_PATH=$3
 python3 -m venv .env
 . .env/bin/activate
 pip3 install --disable-pip-version-check -r requirements.txt
-echo python3 -m schedule_update_import --gke_project_id=$GKE_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH --config_override=$CONFIG
 python3 -m schedule_update_import --gke_project_id=$GKE_PROJECT_ID --mode=$MODE --absolute_import_path=$IMPORT_PATH --config_override=$CONFIG
 
 deactivate
