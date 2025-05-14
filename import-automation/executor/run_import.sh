@@ -18,17 +18,17 @@ DATA_REPO=$(realpath $(dirname $0)/../../)
 DEFAULT_CPU=2
 DEFAULT_MEMORY=4Gi
 DEFAULT_TIMEOUT=30m
-RUN_MODE="local"
+RUN_MODE="executor"
 DOCKER_IMAGE="dc-import-executor"
 CONFIG="config_override_test.json"
 TMP_DIR=${TMP_DIR:-"/tmp"}
 USAGE="$(basename $0) <import-name> [Options]
 Script to run an import through docker in cloud run or locally.
 Options:
-  -local       Run the import locally.
+  -executor    Run the import executor directly with the local repo.
   -cloud       Run import as a cloud run job.
   -docker      Run import locally through docker.
-  -d <image-name>  Build a docker image wiht tage and run the docker.
+  -d <image-name>  Build a docker image with name and run the docker.
   -n <name>    Use <name> for cloud run jobs. Default: $USER-<import-name>
   -i <import-name> Run the import for <import-name> in the manifest.json.
   -p <project> GCP project. Default: $GCP_PROJECT
@@ -39,7 +39,7 @@ Options:
   -cpu <N>       Number of CPUs for the job. Default:$DEFAULT_CPU
   -mem <M>       Memory. Default:$DEFAULT_MEMORY
   -timeout <secs>    Timeout. Default:$DEFAULT_TIMEOUT
-  -config <json> JSON file wiht import executor configs. Default: $CONFIG
+  -config <json> JSON file with import executor configs. Default: $CONFIG
   -h           Show this help message.
 
 
@@ -96,7 +96,7 @@ function parse_options {
   while (( $# > 0 )); do
     case $1 in
       -p) shift; GCP_PROJECT="$1";;
-      -l*) RUN_MODE="local";;
+      -e*) RUN_MODE="executor";;
       -cl*) RUN_MODE="cloud";;
       -do*) RUN_MODE="docker";;
       -reg*) shift; REGION="$1";;
@@ -124,6 +124,12 @@ function parse_options {
   START_TS=$(date +%s)
   echo_log "Starting run_import: $CMD"
   tail -f $LOG &
+}
+
+# Initialize gcloud credentials
+function setup_gcloud {
+  [[ ! -f $HOME/config/gcloud/application_default_credentials.json ]] || \
+    run_cmd gcloud auth application-default login
 }
 
 # Returns the value of a parameter from an override or json dictionary or
@@ -166,9 +172,6 @@ function load_manifest {
 
 # Build a docker image locally if needed
 function build_docker {
-  [[ ! -f $HOME/config/gcloud/application_default_credentials.json ]] || \
-    run_cmd gcloud auth application-default login
-
   if [[ "$DOCKER_IMAGE" == "dc-import-executor" ]] || [[ "$DOCKER_IMAGE" == "prod" ]]; then
     DOCKER_IMAGE="dc-import-executor"
     echo_log "Reusing latest $ARTIFACT_REGISTRY:$DOCKER_IMAGE"
@@ -225,7 +228,7 @@ function run_import_cloud {
 }
 
 # Run an import locally
-function run_import_local {
+function run_import_executor {
   echo_log "Running $IMPORT_DIR:$IMPORT_NAME locally..."
   OUTPUT_DIR=${OUTPUT_DIR:-$TMP_DIR/$IMPORT_NAME}
   mkdir -p $OUTPUT_DIR
@@ -234,6 +237,8 @@ function run_import_local {
   if [[ ! -f '/tmp/import-tool/import-tool.jar' ]]; then
     run_cmd wget "https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar" \
       -O /tmp/import-tool/import-tool.jar
+    run_cmd wget "https://storage.googleapis.com/datacommons_public/import_tools/differ-tool.jar" \
+      -O /tmp/import-tool/differ-tool.jar
   fi
 
   run_cmd $SCRIPT_DIR/run_local_executor.sh \
@@ -281,12 +286,14 @@ function run_import_docker {
 trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 
 parse_options "$@"
+setup_gcloud
 load_manifest "$MANIFEST"
-build_docker "$DOCKER_IMAGE"
-if [[ "$RUN_MODE" == "local" ]]; then
-  run_import_local
+if [[ "$RUN_MODE" == "executor" ]]; then
+  build_docker "$DOCKER_IMAGE"
+  run_import_executor
 fi
 if [[ "$RUN_MODE" == "docker" ]]; then
+  build_docker "$DOCKER_IMAGE"
   run_import_docker
 fi
 if [[ "$RUN_MODE" == "cloud" ]]; then

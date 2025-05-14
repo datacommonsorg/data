@@ -26,6 +26,10 @@ function setup_local {
     wget "https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar" \
       -O /tmp/import-tool/import-tool.jar
   fi
+  if [[ ! -f '/tmp/import-tool/differ-tool.jar' ]]; then
+    wget "https://storage.googleapis.com/datacommons_public/import_tools/differ-tool.jar" \
+      -O /tmp/import-tool/differ-tool.jar
+  fi
 
 }
 
