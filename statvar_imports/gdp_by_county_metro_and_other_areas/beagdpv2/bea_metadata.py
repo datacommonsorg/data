@@ -1,7 +1,6 @@
 {
   'header_rows' :1,
   'input_encoding': 'latin-1',
-  '#input_data_dialect': 'unix',
   'output_columns':'observationAbout,observationDate,value,variableMeasured,unit',
   'mapped_columns':8,
   'mapped_rows':1

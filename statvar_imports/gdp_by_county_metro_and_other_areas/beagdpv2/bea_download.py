@@ -14,7 +14,7 @@
 
 import os, shutil, requests
 import zipfile
-from absl import logging
+from absl import app, logging
 from pathlib import Path
 from retry import retry
 import config
@@ -68,7 +68,11 @@ def extract_and_process(zip_path):
     except Exception as e:
         logging.fatal(f"Failed to extract the file: {e}")
 
-if __name__ == "__main__":
+def main(argv):
     zip_path = download_file()
     if zip_path:
         extract_and_process(zip_path)
+
+if __name__ == "__main__":  
+    app.run(main)
+    
