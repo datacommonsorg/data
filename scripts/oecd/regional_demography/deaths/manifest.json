@@ -16,6 +16,10 @@
           "cleaned_csv": "OECD_deaths_cleaned.csv"
         }
       ],
+      "resource_limits": {
+        "cpu": "4",
+        "memory": "8G"
+      }
       "cron_schedule": "0 7 1,15 * *"
     }
   ]
