@@ -376,7 +376,9 @@ class ImportExecutor:
         for import_input in import_inputs:
             try:
                 template_mcf = import_input['template_mcf']
-                cleaned_csv = glob.glob(import_input['cleaned_csv'])
+                cleaned_csv = glob.glob(
+                    os.path.join(absolute_import_dir,
+                                 import_input['cleaned_csv']))
             except KeyError:
                 logging.error(
                     'Skipping validation due to missing import input spec.')
