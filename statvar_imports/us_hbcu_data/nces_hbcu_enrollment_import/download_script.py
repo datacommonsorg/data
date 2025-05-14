@@ -17,11 +17,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-from absl import logging
+from absl import app, logging
 import os
 import shutil
 import pandas as pd
 from pathlib import Path
+
+tmpdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp")
+Path(tmpdir).mkdir(parents=True, exist_ok=True)
 
 def download_file(input_file_path):
     """
@@ -70,10 +73,11 @@ def download_file(input_file_path):
         driver.quit()
         logging.info("ChromeDriver has been closed.")
 
-if __name__ == "__main__":
+def main(argv):
     inputdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
     Path(inputdir).mkdir(parents=True, exist_ok=True)
-    tmpdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp")
-    Path(tmpdir).mkdir(parents=True, exist_ok=True)
     download_file(inputdir)
     shutil.rmtree(tmpdir)
+
+if __name__ == "__main__":
+    app.run(main)
