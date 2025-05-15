@@ -83,8 +83,7 @@ flags.register_validator('import_name',
                                   f'{_IMPORT_NAME_FORM}.'))
 flags.DEFINE_string('config_override', "config_override_test.json",
                     'Config file with overridden parameters.')
-flags.DEFINE_string('repo_dir', None,
-                    'Local repo directory.')
+flags.DEFINE_string('repo_dir', None, 'Local repo directory.')
 
 
 def _override_configs(filename: str,
