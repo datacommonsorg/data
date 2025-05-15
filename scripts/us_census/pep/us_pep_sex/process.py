@@ -1238,7 +1238,7 @@ def download_files():
     global _FILES_TO_DOWNLOAD
     session = requests.session()
 
-    # Step 1: Get set of already downloaded files
+    #Get set of already downloaded files
     downloaded_files = set(os.listdir(_GCS_OUTPUT_PERSISTENT_PATH))
 
     for file_to_download in _FILES_TO_DOWNLOAD:
@@ -1258,6 +1258,7 @@ def download_files():
                 response.raise_for_status()
 
                 content_type = response.headers.get('Content-Type', '')
+
                 # Skip if file already exists
                 if file_name_to_save in downloaded_files:
                     logging.info(
@@ -1322,7 +1323,7 @@ def main(_):
         os.mkdir(_INPUT_FILE_PATH)
     if not (os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH)):
         os.mkdir(_GCS_OUTPUT_PERSISTENT_PATH)
-    
+
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name
     tmcf_path = data_file_path + os.sep + tmcf_name
