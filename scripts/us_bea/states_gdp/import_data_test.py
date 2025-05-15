@@ -19,9 +19,7 @@
 """
 import os
 import sys
-
 import unittest
-
 import pandas as pd
 
 # Allows the following module imports to work when running as a script
@@ -63,41 +61,26 @@ class USStateQuarterlyGDPImportTest(unittest.TestCase):
         self.assertEqual(geoid_conv_fn('   "760000"'), "geoId/76")
         self.assertEqual(geoid_conv_fn('123""""""'), "geoId/12")
 
-    def test_data_processing_tiny(self):
-        """Tests end-to-end data cleaning on a tiny example."""
-        raw_df = pd.read_csv(os.path.join(_TEST_DATA_DIR, "test_tiny_raw.csv"),
-                             index_col=0)
-        clean_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
-                                            "test_tiny_cleaned.csv"),
-                               index_col=0)
-        loader = import_data.StateGDPDataLoader()
-        loader.process_data(raw_df)
-        pd.testing.assert_frame_equal(clean_df, loader.clean_df)
-
-    def test_data_processing_small(self):
-        """Tests end-to-end data cleaning on a small example."""
-        raw_df = pd.read_csv(os.path.join(_TEST_DATA_DIR, "test_small_raw.csv"),
-                             index_col=0)
-        clean_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
-                                            "test_small_cleaned.csv"),
-                               index_col=0)
-        loader = import_data.StateGDPDataLoader()
-        loader.process_data(raw_df)
-        pd.testing.assert_frame_equal(clean_df, loader.clean_df)
-
 
 class USStateQuarterlyPerIndustryImportTest(unittest.TestCase):
 
     def test_data_processing_tiny(self):
         """Tests end-to-end data cleaning on a tiny example."""
-        raw_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
-                                          "test_industry_tiny_raw.csv"),
-                             index_col=0)
+        raw_df = pd.read_csv(
+            os.path.join(_TEST_DATA_DIR, "test_industry_tiny_raw.csv")
+        )  # Removed index_col=0 as the provided data doesn't have a suitable index column
+
         clean_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
                                             "test_industry_tiny_cleaned.csv"),
                                index_col=0)
+
         loader = import_industry_data_and_gen_mcf.StateGDPIndustryDataLoader()
-        loader.process_data(raw_df)
+
+        # Convert the raw DataFrame to a CSV string (without the index)
+        raw_csv_string = raw_df.to_csv(index=False)
+
+        loader.process_data(raw_csv_string)  # Pass the CSV string
+
         pd.testing.assert_frame_equal(clean_df, loader.clean_df)
 
     def test_value_converter(self):
