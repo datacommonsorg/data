@@ -1341,15 +1341,18 @@ def main(_):
         add_future_year_urls()
         download_status = download_files()
     if download_status and (mode == "" or mode == "process"):
-        loader = PopulationEstimateBySex(_INPUT_FILE_PATH, cleaned_csv_path,
-                                         mcf_path, tmcf_path)
-        loader.process()
+        try:
+            loader = PopulationEstimateBySex(_INPUT_FILE_PATH, cleaned_csv_path,
+                                             mcf_path, tmcf_path)
+            loader.process()
 
-        # Only delete if it's a subdirectory of gcs_output, and not gcs_output itself
-        if os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH) and os.path.commonpath([_GCS_OUTPUT_PERSISTENT_PATH, _GCS_BASE_DIR]) == _GCS_BASE_DIR \
-        and os.path.abspath(_GCS_OUTPUT_PERSISTENT_PATH) != os.path.abspath(_GCS_BASE_DIR):
-            shutil.rmtree(_GCS_OUTPUT_PERSISTENT_PATH)
-            logging.info(f"Deleted folder: {_GCS_OUTPUT_PERSISTENT_PATH}")
+            # Only delete if it's a subdirectory of gcs_output, and not gcs_output itself
+            if os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH) and os.path.commonpath([_GCS_OUTPUT_PERSISTENT_PATH, _GCS_BASE_DIR]) == _GCS_BASE_DIR \
+            and os.path.abspath(_GCS_OUTPUT_PERSISTENT_PATH) != os.path.abspath(_GCS_BASE_DIR):
+                shutil.rmtree(_GCS_OUTPUT_PERSISTENT_PATH)
+                logging.info(f"Deleted folder: {_GCS_OUTPUT_PERSISTENT_PATH}")
+        except Exception as e:
+            logging.fatal(f"The processing is failed due to the error: {e}")
 
 
 if __name__ == "__main__":
