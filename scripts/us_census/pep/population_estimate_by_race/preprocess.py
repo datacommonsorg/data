@@ -31,31 +31,53 @@ import json
 from datetime import datetime as dt
 from absl import logging
 from io import StringIO
+from google.cloud import storage  # GCS Client
+import tempfile
+import shutil
+from retry import retry
+
 # To import util.alpha2_to_dcid
 _COMMON_PATH = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '../../../../'))
 sys.path.insert(1, _COMMON_PATH)
 import warnings
-
-warnings.filterwarnings('ignore')
-
 import pandas as pd
 from absl import app
 from absl import flags
 from util.alpha2_to_dcid import USSTATE_MAP
 from states_to_shortform import get_states
 
+warnings.filterwarnings('ignore')
+
 #pd.options.mode.copy_on_write = True
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')
+flags.DEFINE_string('config_path', '',
+                    'Path to the configuration file in the GCS bucket.')
+
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+_GCS_OUTPUT_PERSISTENT_PATH = os.path.join(
+    _MODULE_DIR, 'gcs_output/us_pep_population_estimate_by_race')
+_GCS_BASE_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
 
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "input_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 _FILES_TO_DOWNLOAD = None
+
+
+#Extract the bucket name and path from the config_path flag
+def extract_gcs_info():
+    parts = _FLAGS.config_path.split('/', 1)
+    if len(parts) != 2:
+        raise ValueError(
+            "Invalid GCS config_path format. Expected 'bucket_name/path/to/object'."
+        )
+    gcs_bucket_name = parts[0]
+    gcs_object_path = parts[1]
+    return gcs_bucket_name, gcs_object_path
 
 
 # Generating geoID by taking Geographical area as input
@@ -1225,6 +1247,34 @@ def _resolve_pe_11(file_name: str, url: str) -> pd.DataFrame:
         logging.fatal(f"Error Downloading the file:", e)
 
 
+def fetch_skip_urls_from_gcs(GCS_BUCKET_NAME: str,
+                             GCS_SKIP_FILE_PATH: str) -> list:
+    """Fetch skip_url.json from GCS and return list of URLs to skip."""
+    client = storage.Client()
+    bucket = client.bucket(GCS_BUCKET_NAME)
+    blob = bucket.blob(GCS_SKIP_FILE_PATH)
+    data = blob.download_as_text()
+    skip_urls = json.loads(data)
+    return skip_urls
+
+
+def is_valid_url(url):
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code != 200:
+            return False
+        content_type = response.headers.get("Content-Type", "")
+        if "text/html" in content_type:
+            # Might be an error page disguised as 200
+            if b"error" in response.content.lower() or len(
+                    response.content) < 500:
+                return False
+        return True
+    except Exception as e:
+        logging.fatal(f"Error checking URL: {url} - {e}")
+        return False
+
+
 def add_future_yearurls():
     """
     This method scans the download URLs for future years.
@@ -1233,6 +1283,28 @@ def add_future_yearurls():
     global _FILES_TO_DOWNLOAD
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
+
+    GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH = extract_gcs_info()
+    # Read URLs from the GCS-hosted config file
+
+    # Fetch skip urls from GCS
+    skip_urls = fetch_skip_urls_from_gcs(GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH)
+
+    logging.info(f"Fetched {len(skip_urls)} URLs to skip from GCS.")
+    logging.info(f"Urls fetched from the json to skip:{skip_urls}")
+
+    #Filter based on skip list + live URL check
+    _FILES_TO_DOWNLOAD = [
+        url for url in _FILES_TO_DOWNLOAD
+        if (url["download_path"] not in skip_urls  # not suspicious, keep it
+            or (url["download_path"] in skip_urls and is_valid_url(
+                url["download_path"]))  # suspicious, but passes check
+           )
+    ]
+
+    logging.info(
+        f"Historical urls Fetched from input_json:{_FILES_TO_DOWNLOAD}")
+
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
     ]
@@ -1252,6 +1324,10 @@ def add_future_yearurls():
                     logging.error(f"URL is not accessable {url_to_check}")
 
 
+@retry(tries=3,
+       delay=2,
+       backoff=2,
+       exceptions=(requests.RequestException, Exception))
 def download_files():
     """
     This method allows to download the input files.
@@ -1260,10 +1336,15 @@ def download_files():
 
     global _FILES_TO_DOWNLOAD
     session = requests.session()
-    max_retry = 5
+
+    #Get set of already downloaded files
+    downloaded_files = set(os.listdir(_GCS_OUTPUT_PERSISTENT_PATH))
+
     for file_to_dowload in _FILES_TO_DOWNLOAD:
         file_name = None
         download_local_path = _INPUT_FILE_PATH
+        gcs_output_persistent_path = _GCS_OUTPUT_PERSISTENT_PATH
+
         url = file_to_dowload['download_path']
         if 'file_name' in file_to_dowload and len(
                 file_to_dowload['file_name'] > 5):
@@ -1273,90 +1354,137 @@ def download_files():
         retry_number = 0
 
         is_file_downloaded = False
-        # headers = {'User-Agent': 'Mozilla/5.0'}
-        # response = requests.get(url, headers=headers)
+
         while is_file_downloaded == False:
             try:
                 headers = {'User-Agent': 'Mozilla/5.0'}
-                response = requests.get(url, headers=headers, timeout=60)
-                response.raise_for_status()
-                if ".csv" in url:
-                    if "st-est" in url or 'SC-EST' in url:
-                        file_name = file_name.replace(".csv", ".xlsx")
-                        df = pd.read_csv(StringIO(response.text),
-                                         on_bad_lines='skip',
-                                         header=0)
-                        df.to_excel(download_local_path + os.sep + file_name\
-                            ,index=False,engine='xlsxwriter')
-                    elif "pe-11" in url:
-                        df = _resolve_pe_11(file_name, url)
-                        df.to_csv(download_local_path + os.sep + file_name,
-                                  index=False)
-                    elif "pe-19" in url:
-                        file_name = file_name.replace(".csv", ".xlsx")
-                        df = pd.read_csv(StringIO(response.text),
-                                         skiprows=5,
-                                         on_bad_lines='skip',
-                                         header=0)
-                        df.to_excel(download_local_path + os.sep + file_name\
-                            ,index=False,engine='xlsxwriter')
-                    elif "co-asr-7079" in url or "pe-02" in url:
-                        file_name = file_name.replace(".csv", ".xlsx")
-                        cols=['Year','FIPS','Race/Sex',1,2,3,4,5,6,7,8,9,10,11,12,\
-                            13,14,15,16,17,18]
-                        if "pe-02" in url:
-                            df = pd.read_csv(StringIO(response.text), skiprows=7, on_bad_lines='skip', \
-                                names=cols)
+                with session.get(url, stream=True, timeout=120,
+                                 headers=headers) as response:
+                    response.raise_for_status()
+
+                    content_type = response.headers.get('Content-Type', '')
+                    # Skip if file already exists
+                    if file_name in downloaded_files:
+                        logging.info(
+                            f"Skipping already downloaded file: {file_name}")
+                        is_file_downloaded = True  # <-- Fix to exit the loop
+                        continue
+
+                    if 'html' in content_type.lower():
+                        logging.fatal(
+                            f"Server returned HTML error page for URL: {url}")
+                    else:
+                        if ".csv" in url:
+                            if "st-est" in url or 'SC-EST' in url:
+                                file_name = file_name.replace(".csv", ".xlsx")
+                                df = pd.read_csv(StringIO(response.text),
+                                                 on_bad_lines='skip',
+                                                 header=0)
+                                #writing the output to the local path for easy access and reference
+                                df.to_excel(download_local_path + os.sep + file_name\
+                                    ,index=False,engine='xlsxwriter')
+                                #writing the output to the gcs_output folder for persistent folder handling and resume the download where it got broke
+                                df.to_excel(gcs_output_persistent_path + os.sep + file_name\
+                                    ,index=False,engine='xlsxwriter')
+
+                            elif "pe-11" in url:
+                                df = _resolve_pe_11(file_name, url)
+                                df.to_csv(download_local_path + os.sep +
+                                          file_name,
+                                          index=False)
+                                df.to_csv(gcs_output_persistent_path + os.sep +
+                                          file_name,
+                                          index=False)
+
+                            elif "pe-19" in url:
+                                file_name = file_name.replace(".csv", ".xlsx")
+                                df = pd.read_csv(StringIO(response.text),
+                                                 skiprows=5,
+                                                 on_bad_lines='skip',
+                                                 header=0)
+                                df.to_excel(download_local_path + os.sep + file_name\
+                                    ,index=False,engine='xlsxwriter')
+                                df.to_excel(gcs_output_persistent_path + os.sep + file_name\
+                                    ,index=False,engine='xlsxwriter')
+
+                            elif "co-asr-7079" in url or "pe-02" in url:
+                                file_name = file_name.replace(".csv", ".xlsx")
+                                cols=['Year','FIPS','Race/Sex',1,2,3,4,5,6,7,8,9,10,11,12,\
+                                    13,14,15,16,17,18]
+                                if "pe-02" in url:
+                                    df = pd.read_csv(StringIO(response.text), skiprows=7, on_bad_lines='skip', \
+                                        names=cols)
+                                else:
+                                    df = pd.read_csv(StringIO(response.text),
+                                                     on_bad_lines='skip',
+                                                     names=cols)
+                                df.to_excel(download_local_path + os.sep + file_name,\
+                                    index=False,engine='xlsxwriter')
+                                df.to_excel(gcs_output_persistent_path + os.sep + file_name,\
+                                    index=False,engine='xlsxwriter')
+
+                            elif "co-est00int-alldata" in url or "CC-EST2020-ALLDATA" in url or "cc-est2022-all" in url or "cc-est20" in url:
+                                df = pd.read_csv(StringIO(response.text),
+                                                 on_bad_lines='skip',
+                                                 encoding='ISO-8859-1',
+                                                 low_memory=False)
+                                df.to_csv(download_local_path + os.sep +
+                                          file_name,
+                                          index=False)
+                                df.to_csv(gcs_output_persistent_path + os.sep +
+                                          file_name,
+                                          index=False)
+
+                            else:
+                                logging.fatal(f'Unknown csv file: {url}')
+
+                        elif ".txt" in url and "srh" in url:
+                            if "crh" in url:
+                                file_name = file_name.replace("crh", "USCounty")
+                                df = pd.read_table(StringIO(response.text),
+                                                   index_col=False,
+                                                   engine='python')
+                                df.to_csv(download_local_path + os.sep +
+                                          file_name,
+                                          index=False)
+                                df.to_csv(gcs_output_persistent_path + os.sep +
+                                          file_name,
+                                          index=False)
+
+                            else:
+                                cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                df = pd.read_table(StringIO(response.text),index_col=False,delim_whitespace=True\
+                                    ,engine='python',skiprows=14,names=cols)
+                                file_name = file_name.replace(".txt", ".csv")
+                                df.to_csv(download_local_path + os.sep +
+                                          file_name,
+                                          index=False)
+                                df.to_csv(gcs_output_persistent_path + os.sep +
+                                          file_name,
+                                          index=False)
+
+                        elif "xlsx" in url:
+                            df = pd.read_excel(StringIO(response.text),
+                                               skiprows=2,
+                                               header=0)
+                            df.to_excel(download_local_path + os.sep + file_name\
+                                ,index=False,header=False,engine='xlsxwriter')
+                            df.to_excel(gcs_output_persistent_path + os.sep + file_name\
+                                ,index=False,header=False,engine='xlsxwriter')
+
                         else:
-                            df = pd.read_csv(StringIO(response.text),
-                                             on_bad_lines='skip',
-                                             names=cols)
-                        df.to_excel(download_local_path + os.sep + file_name,\
-                            index=False,engine='xlsxwriter')
-                    elif "co-est00int-alldata" in url or "CC-EST2020-ALLDATA" in url or "cc-est2022-all" in url or "cc-est20" in url:
-                        df = pd.read_csv(StringIO(response.text),
-                                         on_bad_lines='skip',
-                                         encoding='ISO-8859-1',
-                                         low_memory=False)
-                        df.to_csv(download_local_path + os.sep + file_name,
-                                  index=False)
-                    else:
-                        logging.fatal(f'Unknown csv file: {url}')
+                            logging.fatal(f'Unknown file - {url}')
 
-                elif ".txt" in url and "srh" in url:
-                    if "crh" in url:
-                        file_name = file_name.replace("crh", "USCounty")
-                        df = pd.read_table(StringIO(response.text),
-                                           index_col=False,
-                                           engine='python')
-                        df.to_csv(download_local_path + os.sep + file_name,
-                                  index=False)
-                    else:
-                        cols = ['Area', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                        df = pd.read_table(StringIO(response.text),index_col=False,delim_whitespace=True\
-                            ,engine='python',skiprows=14,names=cols)
-                        file_name = file_name.replace(".txt", ".csv")
-                        df.to_csv(download_local_path + os.sep + file_name,
-                                  index=False)
-
-                elif "xlsx" in url:
-                    df = pd.read_excel(StringIO(response.text),
-                                       skiprows=2,
-                                       header=0)
-                    df.to_excel(download_local_path + os.sep + file_name\
-                        ,index=False,header=False,engine='xlsxwriter')
-                else:
-                    logging.fatal(f'Unknown file - {url}')
-
-                logging.info(f"Downloaded file : {url}")
-                is_file_downloaded = True
+                        logging.info(f"Downloaded file : {url}")
+                        is_file_downloaded = True
 
             except Exception as e:
-                logging.error(f"Retry file download {url} - {e}")
-                time.sleep(5)
-                retry_number += 1
-                if retry_number > max_retry:
-                    logging.fatal(f"Error downloading URL- {url} -{e}")
+                logging.error(f"Error downloading {url}: {e}")
+                raise  # re-raise to trigger @retry
+            time.sleep(5)
+            #retry_number += 1
+            # if retry_number > max_retry:
+            #     logging.fatal(f"Error downloading URL- {url} -{e}")
 
     return True
 
@@ -1370,12 +1498,22 @@ def main(_):
         os.mkdir(input_path)
     if not os.path.exists(output_path):
         os.mkdir(output_path)
+    if not (os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH)):
+        os.mkdir(_GCS_OUTPUT_PERSISTENT_PATH)
     cleaned_csv_path = output_path
     mcf_path = output_path
     tmcf_path = output_path
     input_path = _FLAGS.input_path
 
     if mode == "" or mode == "download":
+        # Get the config path from the flags
+        config_path = _FLAGS.config_path
+
+        if not config_path:
+            logging.fatal(
+                "Please provide the --config_path flag with a valid GCS path.")
+            return
+
         # download & process
         add_future_yearurls()
         download_files()
@@ -1384,7 +1522,13 @@ def main(_):
                                            tmcf_path)
         loader.process()
 
-    logging.info("Processing completed")
+        logging.info("Processing completed")
+
+        # Only delete if it's a subdirectory of gcs_output, and not gcs_output itself
+        if os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH) and os.path.commonpath([_GCS_OUTPUT_PERSISTENT_PATH, _GCS_BASE_DIR]) == _GCS_BASE_DIR \
+        and os.path.abspath(_GCS_OUTPUT_PERSISTENT_PATH) != os.path.abspath(_GCS_BASE_DIR):
+            shutil.rmtree(_GCS_OUTPUT_PERSISTENT_PATH)
+            logging.info(f"Deleted folder: {_GCS_OUTPUT_PERSISTENT_PATH}")
 
 
 if __name__ == "__main__":
