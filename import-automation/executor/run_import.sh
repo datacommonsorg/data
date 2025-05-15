@@ -128,6 +128,7 @@ function parse_options {
       -d) shift; DOCKER_IMAGE="$1";;
       -dr*) DRY_RUN="1";;
       -o) shift; OUTPUT_DIR="$1";;
+      -h) echo "$USAGE" >&2; exit 1;;
       -x) set -x;;
       *) MANIFEST="$1";;
     esac
@@ -140,6 +141,8 @@ function parse_options {
   [[ -f "$LOG" ]] && ( for i in {1..10}; do echo "" >> $LOG; done )
   START_TS=$(date +%s)
   echo_log "Starting run_import: $CMD"
+
+  # Stream logs to console in the background
   tail -f $LOG &
 }
 
@@ -199,7 +202,7 @@ function build_docker {
   echo_log "Building docker image $ARTIFACT_REGISTRY:$DOCKER_IMAGE from $DATA_REPO..."
   cwd="$PWD"
   cd $SCRIPT_DIR
-  export DOCKER_BUILDKIT=1 
+  export DOCKER_BUILDKIT=1
   img=$DOCKER_IMAGE
   [[ "$RUN_MODE" == "cloud" ]] && img="$ARTIFACT_REGISTRY/$DOCKER_IMAGE"
   run_cmd docker buildx build --build-context data=$DATA_REPO \
@@ -262,7 +265,7 @@ function run_import_executor {
     --import_name=$IMPORT_DIR:$IMPORT_NAME \
     --output_dir=$OUTPUT_DIR \
     --config_override=$CONFIG \
-    --repo_dir=$DATA_REPO 
+    --repo_dir=$DATA_REPO
 
   echo_log "Output files in $OUTPUT_DIR"
 }
