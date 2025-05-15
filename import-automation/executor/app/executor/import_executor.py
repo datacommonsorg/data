@@ -392,7 +392,7 @@ class ImportExecutor:
                                          'summary_report.csv')
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
-            differ_output = os.path.join(validation_output_path,
+            differ_output = os.path.join(validation_output_path, 'differ'
                                          'point_analysis_summary.csv')
             # Run dc import tool to generate resolved mcf.
             logging.info('Generating resolved mcf...')
@@ -419,11 +419,15 @@ class ImportExecutor:
                 # Invoke differ and validation scripts.
                 if latest_version:
                     logging.info('Invoking differ tool...')
-                    differ = ImportDiffer(current_data_path, previous_data_path,
-                                          validation_output_path,
-                                          self.config.differ_tool_path,
-                                          self.config.gcp_project_id, 'differ',
-                                          'mcf', 'local')
+                    differ = ImportDiffer(
+                        current_data=current_data_path,
+                        previous_data=previous_data_path,
+                        output_location=validation_output_path,
+                        differ_tool=self.config.differ_tool_path,
+                        project_id=self.config.gcp_project_id,
+                        job_name='differ',
+                        file_format='mcf',
+                        runner_mode='local')
                     differ.run_differ()
 
                     logging.info('Invoking validation script...')
