@@ -370,6 +370,7 @@ class ImportExecutor:
 
         latest_version = self._get_latest_version(import_dir)
         logging.info(f'Latest version: {latest_version}')
+        differ_job_name = 'differ'
 
         # Trigger validations for each tmcf/csv under import_inputs.
         import_inputs = import_spec.get('import_inputs', [])
@@ -392,7 +393,8 @@ class ImportExecutor:
                                          'summary_report.csv')
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
-            differ_output = os.path.join(validation_output_path, 'differ'
+            differ_output = os.path.join(validation_output_path,
+                                         differ_job_name,
                                          'point_analysis_summary.csv')
             # Run dc import tool to generate resolved mcf.
             logging.info('Generating resolved mcf...')
@@ -425,7 +427,7 @@ class ImportExecutor:
                         output_location=validation_output_path,
                         differ_tool=self.config.differ_tool_path,
                         project_id=self.config.gcp_project_id,
-                        job_name='differ',
+                        job_name=differ_job_name,
                         file_format='mcf',
                         runner_mode='local')
                     differ.run_differ()
