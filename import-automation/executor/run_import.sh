@@ -1,15 +1,32 @@
 #!/bin/bash
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# Script to run an import from the manifest.json.
 #
 # Prerequisites:
-# - Install gcloud, docker
-# - Run 'glcoud auth login'
+# 1. Install the following: gcloud, docker
+# 2. Run 'glcoud auth login'
 #
 # Usage:
 # ./run_import.sh <manifest.json> [Options]
+# See USAGE below for options or run './run_import.sh -h'
 #
 #
 # Example:
-# ./cloud_run_import_test.sh scripts/us_fed/treasury_constant_maturity_rates/manifest.json
+# ./run_import.sh ../../scripts/us_fed/treasury_constant_maturity_rates/manifest.json
+#
 GCP_PROJECT="datcom-ci"
 REGION="us-west1"
 GCS_BUCKET="datcom-ci-test"
