@@ -1846,6 +1846,31 @@ class StatVarDataProcessor:
             return True
         return not lookup_pv_rows and not lookup_pv_columns
 
+    def lookup_pv_for_row_column(self, value: str, namespace: str,
+                                 row_index: int, col_index: int) -> list:
+        """Returns a list of PVs for value fomr row:column.
+
+        Looks up the pvmapper with the value.
+        If none match, looks up PVs for 'row:<row>:<col>', else 'column:<col>'
+        """
+        logging.level_debug() and logging.log(
+            2, f'Getting PVs for column:{row_index}:{col_index}:{col_value}')
+        namespace = self.get_last_column_header_key(col_index)
+        pvs_list = self._pv_mapper.get_all_pvs_for_value(col_value, namespace)
+
+        # Fallback to row:<N>:<M> if there are no PVs for value.
+        col_key = col_index + 1
+        if not pvs_list:
+            pvs_list = self._pv_mapper.get_all_pvs_for_value(
+                f'Row:{row_index}:{col_key}', namespace)
+
+        # Fallback to 'col:<N>' if there are no PVs for cell index.
+        if not pvs_list:
+            pvs_list = self._pv_mapper.get_all_pvs_for_value(
+                f'Column:{col_key}', namespace)
+
+        return pvs_list
+
     def is_header_index(self, row_index: int, column_index: int) -> bool:
         """Returns True if the row and columns is a header."""
         header_rows = self._config.get('header_rows', 0)
@@ -1963,20 +1988,10 @@ class StatVarDataProcessor:
         for col_index in range(len(row)):
             col_value = row[col_index].strip().replace('\n', ' ')
             col_pvs = {}
+            self._set_input_context(column_number=col_index)
             if self.should_lookup_pv_for_row_column(row_index, col_index + 1):
-                self._set_input_context(column_number=col_index)
-                logging.level_debug() and logging.log(
-                    2,
-                    f'Getting PVs for column:{row_index}:{col_index}:{col_value}'
-                )
-                pvs_list = self._pv_mapper.get_all_pvs_for_value(
-                    col_value, self.get_last_column_header_key(col_index))
-                # if pvs_list:
-                #    pvs_list.append(
-                #        {self._config.get('data_key', '@Data'): col_value})
-                # else:
-                # if not pvs_list:
-                #    pvs_list = [{self._config.get('data_key', '@Data'): col_value}]
+                pvs_list = self.lookup_pv_for_row_column(
+                    col_value, row_index, col_index)
                 col_pvs = self.resolve_value_references(pvs_list,
                                                         process_pvs=True)
             if col_pvs:
