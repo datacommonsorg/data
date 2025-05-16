@@ -126,7 +126,7 @@ class ExecutorConfig:
     # Environment variables for the user script
     user_script_env: dict = None
     # Invoke validations before upload.
-    invoke_import_validation: bool = False
+    invoke_import_validation: bool = True
     # Ignore validation status during import.
     ignore_validation_status: bool = True
     # Import validation config file path (relative to data repo).
