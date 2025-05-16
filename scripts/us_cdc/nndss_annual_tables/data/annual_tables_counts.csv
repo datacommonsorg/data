@@ -1,0 +1,171 @@
+original,replacement,diseases,dcid,sameAs
+Anthrax,Anthrax,Anthrax,AnthraxDisease,bio/DOID_7427
+Arboviral diseases;Chikungunya virus disease,Chikungunya virus disease,Chikungunya virus disease,Chikungunya,bio/DOID_0050012
+Arboviral diseases;Eastern equine encephalitis virus disease;Neuroinvasive,Eastern equine encephalitis;Neuroinvasive,Eastern equine encephalitis virus disease,EasternEquineEncephalitis,bio/DOID_10841
+Arboviral diseases;Eastern equine encephalitis virus disease;Non-neuroinvasive,Eastern equine encephalitis;Non-neuroinvasive,Eastern equine encephalitis virus disease,EasternEquineEncephalitis,bio/DOID_10841
+Arboviral diseases;Jamestown Canyon virus disease;Neuroinvasive,Jamestown Canyon virus diseases:Neuroinvasive,Jamestown Canyon virus disease,JamestownCanyonVirusDisease,
+Arboviral diseases;Jamestown Canyon virus disease;Non-neuroinvasive,Jamestown Canyon virus diseases;Non-neuroinvasive,Jamestown Canyon virus disease,JamestownCanyonVirusDisease,
+Arboviral diseases;La Crosse virus disease;Neuroinvasive,La Crosse virus disease;Neuroinvasive,La Crosse virus disease,LaCrosseVirusDisease,bio/DOID_0050118
+Arboviral diseases;La Crosse virus disease;Non-neuroinvasive,La Crosse virus disease;Non-neurovasive,La Crosse virus disease,LaCrosseVirusDisease,bio/DOID_0050118
+Arboviral diseases;Powassan virus disease;Neuroinvasive,Powassan virus disease;Neuroinvasive,Powassan virus disease,PowassanVirusDisease,bio/DOID_0050179
+Arboviral diseases;Powassan virus disease;Non-neuroinvasive,Powassan virus disease;Non-neuroinvasive,Powassan virus disease,PowassanVirusDisease,bio/DOID_0050179
+Arboviral diseases;St. Louis encephalitis virus disease;Neuroinvasive,St. Louis encephalitis virus disease;Neuroinvasive,St. Louis encephalitis virus disease,StLouisEncephalitis,bio/DOID_10845
+Arboviral diseases;St. Louis encephalitis virus disease;Non-neuroinvasive,St. Louis encephalitis virus disease;Non-neuroinvasive,St. Louis encephalitis virus disease,StLouisEncephalitis,bio/DOID_10845
+Arboviral diseases;West Nile virus disease;Neuroinvasive,West Nile virus disease;Neuroinvasive,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+Arboviral diseases;West Nile virus disease;Non-neuroinvasive,West Nile virus disease;Non-neuroinvasive,West Nile virus disease,WestNileVirusDisease,bio/DOID_2366
+Arboviral diseases;Western equine encephalitis virus disease;Neuroinvasive,Western equine encephalitis virus disease;Neuroinvasive,Western equine encephalitis virus disease,WesternEquineEncephalitis,bio/DOID_10843
+Arboviral diseases;Western equine encephalitis virus disease;Non-neuroinvasive,Western equine encephalitis virus disease;Non-neuroinvasive,Western equine encephalitis virus disease,WesternEquineEncephalitis,bio/DOID_10843
+Babesiosis;Confirmed,Babesiosis;Confirmed,Babesiosis,Babesiosis,bio/DOID_9643
+Babesiosis;Probable,Babesiosis;Probable,Babesiosis,Babesiosis,bio/DOID_9643
+Babesiosis;Total,Babesiosis,Babesiosis,Babesiosis,bio/DOID_9643
+Botulism;Foodborne,Foodborne Botulism,Foodborne Botulism,FoodborneBotulism,bio/DOID_0050352
+Botulism;Infant,Infant Botulism,Infant Botulism,InfantBotulism,bio/DOID_0050354
+Botulism;Other (wound & unspecified),Other wound & unspecified Botulism,Other wound & unspecified Botulism,WoundBotulism,bio/DOID_0050353
+Botulism;Total,Botulism,Botulism,Botulism,
+Brucellosis,Brucellosis,Brucellosis,Brucellosis,bio/DOID_11077
+Campylobacteriosis,Campylobacteriosis,Campylobacteriosis,Campylobacteriosis,bio/DOID_13622
+"Candida auris , clinical §",Candida auris;clinical,Candida auris,CandidaAuris,
+Carbapenemase-producing carbapenem-resistant Enterobacteriaceae,Carbapenemase-producing carbapenem-resistant Enterobacteriaceae,Carbapenem Resistant Enterobacteriaceae,CarbapenemResistantEnterobacteriaceae,
+Chancroid,Chancroid,Chancroid,Chancroid,bio/DOID_13778
+Chlamydia trachomatis infection,Chlamydia trachomatis  infection,Chlamydia trachomatis infection,Chlamydia,bio/DOID_11263
+Cholera,Cholera,cholera,Cholera,bio/DOID_1498
+Coccidioidomycosis §,Coccidioidomycosis,Coccidioidomycosis,Coccidioidomycosis,bio/DOID_13450
+Coccidioidomycosis *,Coccidioidomycosis,Coccidioidomycosis,Coccidioidomycosis,bio/DOID_13450
+Cryptosporidiosis;Confirmed,Cryptosporidiosis;Confirmed,Cryptosporidiosis,Cryptosporidiosis,bio/DOID_1733
+Cryptosporidiosis;Probable,Cryptosporidiosis;Probable,Cryptosporidiosis,Cryptosporidiosis,bio/DOID_1733
+Cryptosporidiosis;Total,Cryptosporidiosis,Cryptosporidiosis,Cryptosporidiosis,bio/DOID_1733
+Cyclosporiasis,Cyclosporiasis,Cyclosporiasis,Cyclosporiasis,bio/DOID_12750
+Dengue virus infections §;Dengue,Dengue,dengue fever,DengueDisease,bio/DOID_12205
+Dengue virus infections §;Dengue-like illness,Dengue-like illness,Dengue-like illness,DengueLikeIllness,
+Dengue virus infections §;Severe dengue,Severe dengue,Severe dengue,SevereDengue,bio/DOID_12206;bio/DOID_0050125
+Dengue virus infections *;Dengue,Dengue,dengue fever,DengueDisease,bio/DOID_12205
+Dengue virus infections *;Dengue-like illness,Dengue-like illness,Dengue-like illness,DengueLikeIllness,
+Dengue virus infections *;Severe dengue,Severe dengue,Severe dengue,SevereDengue,bio/DOID_12206;bio/DOID_0050125
+Diphtheria,Diphtheria,Diphtheria,Diphtheria,
+Ehrlichiosis and Anaplasmosis;Anaplasma phagocytophilum infection,Anaplasma phagocytophilum  infection,Anaplasma phagocytophilum infection,HumanGranulocyticAnaplasmosis,bio/DOID_0050025
+Ehrlichiosis and Anaplasmosis;Ehrlichia chaffeensis infection,Ehrlichia chaffeensis  infection,Ehrlichia chaffeensis,HumanMonocyticEhrlichiosis,bio/DOID_0050026
+Ehrlichiosis and Anaplasmosis;Ehrlichia ewingii infection,Ehrlichia ewingii  infection,Ehrlichia ewingii infection,EhrlichiaEwingiiInfection,
+Ehrlichiosis and Anaplasmosis;Undetermined ehrlichiosis/anaplasmosis,Undetermined ehrlichiosis/anaplasmosis,UndeterminedEhrlichiosis/Anaplasmosis,Ehrlichiosis,bio/DOID_10242
+Giardiasis,Giardiasis,Giardiasis,Giardiasis,bio/DOID_10718
+Gonorrhea,Gonorrhea,Gonorrhea,Gonorrhea,bio/DOID_7551
+"Haemophilus influenzae, invasive disease;Age <5 years;Non-b serotype",Haemophilus influenzae;invasive disease;Age <5 years;Non-b serotype,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae, invasive disease;Age <5 years;Nontypeable",Haemophilus influenzae;invasive disease;Age <5 years;Nontypeable,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae, invasive disease;Age <5 years;Serotype b",Haemophilus influenzae;invasive disease;Age <5 years;Serotype b,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae, invasive disease;Age <5 years;Unknown serotype",Haemophilus influenzae;invasive disease;Age <5 years;Unknown serotype,Haemophilus influenzae,HaemophilusInfluenzae,
+"Haemophilus influenzae, invasive disease;All ages, all serotypes",Haemophilus influenzae;invasive disease;All ages;all serotypes,Haemophilus influenzae,HaemophilusInfluenzae,
+Hansen's disease,Leprosy,Leprosy,Leprosy,bio/DOID_1024
+"Hantavirus infection, non-hantavirus pulmonary syndrome",Non-hantavirus pulmonary syndrome,Non-hantavirus pulmonary syndrome,HaemophilusMeningitis,bio/DOID_0080179
+"Hantavirus infection, non-hantavirus pulmonary syndrome §",Non-hantavirus pulmonary syndrome,Non-hantavirus pulmonary syndrome,HaemophilusMeningitis,bio/DOID_0080179
+Hantavirus pulmonary syndrome,Hantavirus pulmonary syndrome,Hantavirus pulmonary syndrome,HantavirusPulmonarySyndrome,bio/DOID_14472
+Hemolytic uremic syndrome post-diarrheal,Hemolytic uremic syndrome;post-diarrheal,Hemolytic uremic syndrome,HemolyticUremicSyndrome,bio/DOID_12554
+"Hepatitis ¶;A, acute",Hepatitis A;Acute,Hepatitis A,HepatitisA,bio/DOID_12547
+"Hepatitis ¶;B, acute",Hepatitis B;Acute,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis ¶;B, perinatal infection",Hepatitis B;Perinatal infection,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis ¶;C, acute;Confirmed",Hepatitis C;Acute;Confirmed,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis ¶;C, acute;Probable",Hepatitis C;Acute;Probable,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis ¶;C, perinatal infection",Hepatitis C;Perinatal infection,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis *;A, acute",Hepatitis A;Acute,Hepatitis A,HepatitisA,bio/DOID_12547
+"Hepatitis *;B, acute",Hepatitis B;Acute,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis *;B, perinatal infection",Hepatitis B;Perinatal infection,Hepatitis B,HepatitisB,bio/DOID_2043
+"Hepatitis *;C, acute",Hepatitis C;Acute,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis *;C, acute;Confirmed",Hepatitis C;Acute;Confirmed,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis *;C, acute;Probable",Hepatitis C;Acute;Probable,Hepatitis C,HepatitisC,bio/DOID_1883
+"Hepatitis *;C, perinatal infection",Hepatitis C;Perinatal infection,Hepatitis C,HepatitisC,bio/DOID_1883
+Human immunodeficiency virus diagnoses,HIV/Acquired Immune Deficiency Syndrome,HIV/Acquired Immune Deficiency Syndrome,HIV_AIDS,
+Influenza-associated pediatric mortality,Influenza;pediatric mortality,Influenza,Influenza,bio/DOID_8469
+Invasive pneumococcal disease §;Age <5 years;Confirmed,Invasive pneumococcal disease;Age <5 years;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease §;Age <5 years;Probable,Invasive pneumococcal disease;Age <5 years;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease §;All ages;Confirmed,Invasive pneumococcal disease;All ages;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease §;All ages;Probable,Invasive pneumococcal disease;All ages:Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease *;Age <5 years;Confirmed,Invasive pneumococcal disease;Age <5 years;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease *;Age <5 years;Probable,Invasive pneumococcal disease;Age <5 years;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease *;All ages;Confirmed,Invasive pneumococcal disease;All ages;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease *;All ages;Probable,Invasive pneumococcal disease;All ages:Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease;Age <5 years;Confirmed,Invasive pneumococcal disease;Age <5 years;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease;Age <5 years;Probable,Invasive pneumococcal disease;Age <5 years;Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease;All ages;Confirmed,Invasive pneumococcal disease;All ages;Confirmed,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Invasive pneumococcal disease;All ages;Probable,Invasive pneumococcal disease;All ages:Probable,pneumococcal disease,StreptococcusPneumonia,bio/DOID_0040084
+Legionellosis,LegionnairesDisease,Legionellosis,LegionnairesDisease,bio/DOID_10457
+Leptospirosis,Leptospirosis,Leptospirosis,Leptospirosis,bio/DOID_2297
+Listeriosis,Listeriosis,Listeriosis,Listeriosis,bio/DOID_11573
+Listeriosis §;Confirmed,Listeriosis;Confirmed,Listeriosis,Listeriosis,bio/DOID_11573
+Listeriosis §;Probable,Listeriosis;Probable,Listeriosis,Listeriosis,bio/DOID_11573
+Listeriosis §;Total,Listeriosis,Listeriosis,Listeriosis,bio/DOID_11573
+Lyme disease;Confirmed,Lyme disease;Confirmed,Lyme disease,LymeDisease,
+Lyme disease;Probable,Lyme disease;Probable,Lyme disease,LymeDisease,
+Lyme disease;Total,Lyme disease,Lyme disease,LymeDisease,
+Malaria,Malaria,Malaria,Malaria,bio/DOID_12365
+Measles §;Imported,Measles;Imported,Measles,Measles,bio/DOID_8622
+Measles §;Indigenous,Measles;Indigenous,Measles,Measles,bio/DOID_8622
+Measles §;Total,Measles,Measles,Measles,bio/DOID_8622
+Measles;Imported,Measles;Imported,Measles,Measles,bio/DOID_8622
+Measles;Indigenous,Measles;Indigenous,Measles,Measles,bio/DOID_8622
+Measles;Total,Measles,Measles,Measles,bio/DOID_8622
+Meningococcal disease;All serogroups,Meningococcal disease;All serogroups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;Other serogroups,Meningococcal disease;Other serogroups,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;Serogroup B,Meningococcal disease;Serogroup B,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;Serogroups ACWY,Meningococcal disease;Serogroups ACWY,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Meningococcal disease;Unknown serogroup,Meningococcal disease;Unknown serogroup,Meningococcal disease,MeningococcalMeningitis,bio/DOID_0080176
+Mumps,Mumps,Mumps,Mumps,bio/DOID_10264
+Novel Influenza A virus infections,Novel Influenza A virus infections,Novel Influenza A virus infections,NovelInfluenzaAViralInfection,
+Paratyphoid fever *,Paratyphoid,Paratyphoid,Paratyphoid,
+Pertussis,Pertussis,Pertussis,Pertussis,bio/DOID_1116
+Plague,Plague,Plague,Plague,bio/DOID_3482
+"Poliomyelitis, paralytic",Paralytic poliomyelitis,Paralytic poliomyelitis,ParalyticPoliomyelitis,bio/DOID_0050515
+"Poliovirus infection, nonparalytic",Nonparalytic poliomyelitis,Nonparalytic poliomyelitis,NonparalyticPoliomyelitis,bio/DOID_4986
+Psittacosis,Psittacosis,Psittacosis,Psittacosis,bio/DOID_11262
+Q fever;Acute,Q fever;Acute,Q fever,QFever,bio/DOID_11100
+Q fever;Chronic,Q fever;Chronic,Q fever,QFever,bio/DOID_11100
+Q fever;Total,Q fever,Q fever,QFever,bio/DOID_11100
+Rabies;Animal,NAN,NAN,NAN,NAN
+Rabies;Human,Rabies,Rabies,Rabiesinhuman,bio/DOID_11260
+Rubella,Rubella,Rubella,Rubella,bio/DOID_8781
+"Rubella, congenital syndrome",Rubella;congenital,Rubella,Rubella,bio/DOID_8781
+Salmonella Paratyphi infection §,Paratyphoid,Paratyphoid,Paratyphoid,
+Salmonella Typhi infection ¶,Typhoid fever,Typhoid,TyphoidFever,
+Salmonellosis,Salmonellosis,Salmonellosis,SalmonellosisExceptTyphiAndParatyphi,
+Salmonellosis (excluding paratyphoid fever and typhoid fever) *,Salmonellosis,Salmonellosis,SalmonellosisExceptTyphiAndParatyphi,
+Salmonellosis (excluding S. Typhi infection and S. Paratyphi infection) §,Salmonellosis,Salmonellosis,SalmonellosisExceptTyphiAndParatyphi,
+Severe acute respiratory syndrome-associated coronavirus disease,COVID19,COVID19,COVID19,bio/DOID_0080600;COVID_19
+Shiga toxin-producing Escherichia coli (STEC),Shiga toxin-producing  Escherichia coli,Shiga toxin-producing Escherichia Coli,ShigaToxinEColi,
+Shiga toxin-producing Escherichia coli *,Shiga toxin-producing  Escherichia coli,Shiga toxin-producing Escherichia Coli,ShigaToxinEColi,
+Shigellosis,Shigellosis,Shigellosis,Shigellosis,bio/DOID_12385
+Smallpox,Smallpox,Smallpox,Smallpox,bio/DOID_8736
+Spotted fever rickettsiosis;Confirmed,Spotted fever rickettsiosis;Confirmed,Spotted fever rickettsiosis,SpottedFeverRickettsiosis,
+Spotted fever rickettsiosis;Probable,Spotted fever rickettsiosis;Probable,Spotted fever rickettsiosis,SpottedFeverRickettsiosis,
+Spotted fever rickettsiosis;Total,Spotted fever rickettsiosis,Spotted fever rickettsiosis,SpottedFeverRickettsiosis,
+Streptococcal toxic shock syndrome,Streptococcal toxic shock syndrome,Streptococcal toxic shock syndrome,StreptococcalToxicShockSyndrome,
+Syphilis;Congenital,Congenital Syphilis,congenital syphilis,CongenitalSyphilis,bio/DOID_9856
+Syphilis;Primary and secondary,Syphilis primary and secondary,Syphilis primary and secondary,SyphilisPrimaryAndSecondary,
+"Syphilis;Total, all stages",Syphilis,Syphilis,Syphilis,
+"Syphilis;Total, all stages §",Syphilis,Syphilis,Syphilis,
+"Syphilis;Total, all stages *",Syphilis,Syphilis,Syphilis,
+Tetanus,Tetanus,Tetanus,Tetanus,bio/DOID_11338
+Toxic shock syndrome (other than Streptococcal),Other toxic shock syndrome,ToxicShockSyndromExceptStreptococcal,ToxicShockSyndromExceptStreptococcal,
+Trichinellosis,Trichinellosis,Trichinellosis,Trichinellosis,bio/DOID_9784
+Tuberculosis,Tuberculosis,Tuberculosis,Tuberculosis,bio/DOID_399
+Tularemia,Tularemia,Tularemia,Tularemia,bio/DOID_2123
+Typhoid fever,Typhoid fever,Typhoid,TyphoidFever,
+Vancomycin-intermediate Staphylococcus aureus,Vancomycin-intermediate  Staphylococcus aureus,Vancomycin-intermediate  Staphylococcus aureus,VancomycinIntermediateStaphylococcusAureus,
+Vancomycin-resistant Staphylococcus aureus,Vancomycin-resistant  Staphylococcus aureus,Vancomycin-resistant  Staphylococcus aureus,VancomycinResistantStaphylococcusAureus,
+Varicella morbidity,Chickenpox,Chickenpox,Chickenpox,bio/DOID_8659
+Varicella mortality,Chickenpox;Deaths,Chickenpox,Chickenpox,bio/DOID_8659
+Vibriosis;Confirmed,Vibriosis except cholera;Confirmed,Vibriosis except cholera,VibriosisExcludingCholera,
+Vibriosis;Probable,Vibriosis except cholera;Probable,Vibriosis except cholera,VibriosisExcludingCholera,
+Vibriosis;Total,Vibriosis,Vibriosis except cholera,VibriosisExcludingCholera,
+Viral hemorrhagic fevers;Crimean-Congo hemorrhagic fever virus,Crimean-Congo hemorrhagic fever virus,Crimean-Congo hemorrhagic fever virus,CrimeanCongoHemorrhagicFever,bio/DOID_12287
+Viral hemorrhagic fevers;Ebola virus,Ebola virus,Ebola virus,EbolaHemorrhagicFever,bio/DOID_4325
+Viral hemorrhagic fevers;Guanarito virus,Guanarito virus,Guanarito virus,GuanaritoHemorrhagicFever,
+Viral hemorrhagic fevers;Junin virus,Junin virus,Junin virus,JuninHemorrhagicFever,
+Viral hemorrhagic fevers;Lassa virus,Lassa virus,Lassa virus,LassaHemorrhagicFever,
+Viral hemorrhagic fevers;Lujo virus,Lujo virus,Lujo virus,LujoHemorrhagicFever,bio/DOID_0050202
+Viral hemorrhagic fevers;Machupo virus,Machupo virus,Machupo virus,MachupoHemorrhagicFever,
+Viral hemorrhagic fevers;Marburg virus,Marburg virus,Marburg virus,MarburgHemorrhagicFever,bio/DOID_4327
+Viral hemorrhagic fevers;Sabia virus,Sabia virus,Sabia virus,SabiaHemorrhagicFever,
+Yellow fever,Yellow fever,Yellow fever,YellowFever,bio/DOID_9682
+"Zika virus;Zika virus disease, congenital §",Zika fever;congenital,Zika fever,ZikaVirusDisease,bio/DOID_0060478
+"Zika virus;Zika virus disease, congenital *",Zika fever;congenital,Zika fever,ZikaVirusDisease,bio/DOID_0060478
+"Zika virus;Zika virus disease, non-congenital",Zika fever;non-congenital,Zika fever,ZikaVirusDisease,bio/DOID_0060478
+"Zika virus;Zika virus infection, congenital §",Zika virus infection;congenital,Zika virus infection,ZikaVirusInfection,
+"Zika virus;Zika virus infection, congenital *",Zika virus infection;congenital,Zika virus infection,ZikaVirusInfection,
+"Zika virus;Zika virus infection, non-congenital",Zika virus infection;non-congenital,Zika virus infection,ZikaVirusInfection,
