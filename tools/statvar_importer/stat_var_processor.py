@@ -1846,12 +1846,13 @@ class StatVarDataProcessor:
             return True
         return not lookup_pv_rows and not lookup_pv_columns
 
-    def lookup_pv_for_row_column(self, value: str, namespace: str,
-                                 row_index: int, col_index: int) -> list:
+    def lookup_pv_for_row_column(self, value: str, row_index: int,
+                                 col_index: int) -> list:
         """Returns a list of PVs for value fomr row:column.
 
-        Looks up the pvmapper with the value.
-        If none match, looks up PVs for 'row:<row>:<col>', else 'column:<col>'
+        Looks up the pvmapper with the column value.
+        If no match, looks up PVs for 'row:<row>:<col>', else 'column:<col>'
+        where <col> is 1 based column index.
         """
         logging.level_debug() and logging.log(
             2, f'Getting PVs for column:{row_index}:{col_index}:{col_value}')
