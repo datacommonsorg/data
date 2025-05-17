@@ -63,10 +63,12 @@
         "intimidation": {
             "crimeType": "Intimidation"
         },
-        "human trafficking, commercial sex acts": {
+        "human trafficking": {
             "crimeType": "HumanTrafficking_CommercialSexActs"
         },
-        "other crimes against person": {
+        "human trafficking, commercial sex acts": {
+            "crimeType": "HumanTrafficking_CommercialSexActs"
+        },        "other crimes against person": {
             "crimeType": "UCR_OtherCrimesAgainstPerson"
         },
         "other crimes against property": {
