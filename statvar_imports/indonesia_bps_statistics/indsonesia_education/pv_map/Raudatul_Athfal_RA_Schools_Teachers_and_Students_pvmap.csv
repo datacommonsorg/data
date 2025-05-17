@@ -1,0 +1,6 @@
+key,p1,v1,p2,,p3,v3,p4,v4,p5,v5
+Provinsi,observationAbout,{Data},,,measuredProperty,count,schoolManagement,UnderMinistryOfReligion,,
+Jumlah Sekolah Raudatul Athfal,populationType,School,levelOfSchool,RaudatulAthfal,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Sekolah Raudatul Athfal@id"""
+Jumlah Guru Raudatul Athfal,populationType,Teacher,levelOfSchool,RaudatulAthfal,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru Raudatul Athfal@id"""
+Jumlah Murid Raudatul Athfal,populationType,Student,levelOfSchool,RaudatulAthfal,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid Raudatul Athfal@id"""
+observationDate,observationDate,{Data},,,,,,,,
