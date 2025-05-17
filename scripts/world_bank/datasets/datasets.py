@@ -13,6 +13,12 @@
 # limitations under the License.
 """Processes WB datasets.
 
+update september 2024:
+To run all processing methods , please do not pass the mode 
+Run: python3 datasets.py
+
+Or If required to check issue in any individual process follow all the steps as below:
+
 Supports the following tasks:
 
 ============================
@@ -41,7 +47,7 @@ load_stat_vars: Loads stat vars from a mapping file specified via the `stat_vars
 
 Use this for debugging to ensure that the mappings load correctly and fix any errors logged by this operation.
 
-Run: python3 datasets.py --mode=load_stat_vars --stat_vars_file=/path/to/sv_mappings.csv
+Run: python3 datasets.py --mode=load_stat_vars --stat_vars_file=/path/to/statvars.csv
 
 See `sample-svs.csv` for a sample mappings file.
 
@@ -53,7 +59,7 @@ The stat vars file to be used for mappings should be specified using the `stat_v
 
 It only operates on files that are named '*_CSV.zip'.
 
-Run: python3 datasets.py --mode=write_observations --stat_vars_file=/path/to/sv_mappings.csv
+Run: python3 datasets.py --mode=write_observations --stat_vars_file=/path/to/statvars.csv
 """
 
 import requests
@@ -66,6 +72,7 @@ import csv
 import re
 import urllib3
 from urllib3.util.ssl_ import create_urllib3_context
+from urllib3.exceptions import HTTPError
 from absl import flags
 import zipfile
 import codecs
@@ -84,7 +91,7 @@ class Mode:
 
 
 flags.DEFINE_string(
-    'mode', Mode.WRITE_OBSERVATIONS,
+    'mode', None,
     f"Specify one of the following modes: {Mode.FETCH_DATASETS}, {Mode.DOWNLOAD_DATASETS}, {Mode.WRITE_WB_CODES}, {Mode.LOAD_STAT_VARS}, {Mode.WRITE_OBSERVATIONS}"
 )
 
@@ -131,7 +138,7 @@ DATASETS_CSV_COLUMNS = [
 
 def download_datasets():
     '''Downloads dataset files. This is a very expensive operation so run it with care. It assumes that the datasets CSV is already available.'''
-
+    logging.info('start download_datasets')
     with open(DATASETS_CSV_FILE_PATH, 'r') as f:
         csv_rows = list(csv.DictReader(f))
         download_urls = []
@@ -158,10 +165,13 @@ def download(url):
         # response = requests.get(url)
         # Using urllib3 for downloading content to avoid SSL issue.
         # See: https://github.com/urllib3/urllib3/issues/2653#issuecomment-1165418616
-        with urllib3.PoolManager(ssl_context=ctx) as http:
-            response = http.request("GET", url)
-        with open(file_path, 'wb') as f:
-            f.write(response.data)
+        with urllib3.PoolManager(ssl_context=ctx,timeout=90) as http:
+            try:
+                response = http.request("GET", url)
+                with open(file_path, 'wb') as f:
+                    f.write(response.data)
+            except HTTPError as e:
+                print(f"HTTP error encountered: {e}")
     except Exception as e:
         logging.error("Error downloading %s", url, exc_info=e)
 
@@ -277,11 +287,15 @@ def load_json(url, params, response_file):
             return json.load(f)
 
     logging.info("Fetching url %s, params %s", url, params)
-    response = requests.get(url, params=params).json()
-    with open(response_file, 'w') as f:
-        logging.info('Writing response to file %s', response_file)
-        json.dump(response, f, indent=2)
-    return response
+    try:
+        response = requests.get(url, params=params).json()
+        with open(response_file, 'w') as f:
+            logging.info('Writing response to file %s', response_file)
+            json.dump(response, f, indent=2)
+        return response
+    except Exception as e:
+        print(f"Http error {e}")
+        return None
 
 
 def load_json_file(json_file):
@@ -571,19 +585,27 @@ def get_data_and_series_file_names(zip):
 
 
 def main(_):
-    match FLAGS.mode:
-        case Mode.FETCH_DATASETS:
-            download_datasets()
-        case Mode.DOWNLOAD_DATASETS:
-            fetch_and_write_datasets_csv()
-        case Mode.WRITE_WB_CODES:
-            write_wb_codes()
-        case Mode.LOAD_STAT_VARS:
-            load_stat_vars(FLAGS.stat_vars_file)
-        case Mode.WRITE_OBSERVATIONS:
-            write_all_observations(FLAGS.stat_vars_file)
-        case _:
-            logging.error('No mode specified.')
+    logging.info(FLAGS.mode)
+    if not FLAGS.mode:
+        fetch_and_write_datasets_csv()
+        download_datasets()
+        write_wb_codes()
+        load_stat_vars(FLAGS.stat_vars_file)
+        write_all_observations(FLAGS.stat_vars_file)
+    else:
+        match FLAGS.mode:
+            case Mode.FETCH_DATASETS:
+                download_datasets()
+            case Mode.DOWNLOAD_DATASETS:
+                fetch_and_write_datasets_csv()
+            case Mode.WRITE_WB_CODES:
+                write_wb_codes()
+            case Mode.LOAD_STAT_VARS:
+                load_stat_vars(FLAGS.stat_vars_file)
+            case Mode.WRITE_OBSERVATIONS:
+                write_all_observations(FLAGS.stat_vars_file)
+            case _:
+                logging.error('No mode specified.')
 
 
 if __name__ == '__main__':
