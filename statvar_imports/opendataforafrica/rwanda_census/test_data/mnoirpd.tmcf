@@ -1,0 +1,9 @@
+Node: E:mnoirpd->E0
+observationAbout: C:mnoirpd->observationAbout
+observationDate: C:mnoirpd->observationDate
+variableMeasured: C:mnoirpd->variableMeasured
+value: C:mnoirpd->value
+unit: C:mnoirpd->unit
+scalingFactor: C:mnoirpd->scalingFactor
+observationPeriod: C:mnoirpd->observationPeriod
+typeOf: dcs:StatVarObservation
