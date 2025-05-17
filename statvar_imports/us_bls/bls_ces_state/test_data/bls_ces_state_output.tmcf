@@ -1,0 +1,9 @@
+Node: E:pvmap_test_output->E0
+observationAbout: C:pvmap_test_output->observationAbout
+observationDate: C:pvmap_test_output->observationDate
+value: C:pvmap_test_output->value
+variableMeasured: C:pvmap_test_output->variableMeasured
+observationPeriod: C:pvmap_test_output->observationPeriod
+measurementMethod: C:pvmap_test_output->measurementMethod
+unit: C:pvmap_test_output->unit
+typeOf: dcs:StatVarObservation
