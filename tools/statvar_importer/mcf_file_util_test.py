@@ -125,6 +125,7 @@ class TestMCFFileUtil(unittest.TestCase):
 
         # Verify loading node with additional property adds to existing node.
         dcid = list(mcf_nodes.keys())[0]
+        mcf_nodes[dcid]['typeOf'] = 'TestNode'
         old_node = dict(mcf_nodes[dcid])
         new_node = {'Node': old_node['Node']}
         # Copy some properties
@@ -171,6 +172,41 @@ class TestMCFFileUtil(unittest.TestCase):
             ))
         self.assertEqual(None, mcf_file_util.get_numeric_value('not number'))
         self.assertEqual(None, mcf_file_util.get_numeric_value('10e5'))
+
+    def test_add_mcf_node(self):
+        nodes = {}
+        node = {
+            'Node': 'dcid:TestStatVar',
+            'typeOf': 'dcs:StatisticalVariable',
+            'measuredProperty': 'dcs:count',
+            'populationType': 'dcs:Person',
+            'statType': 'dcs:measuredValue',
+        }
+        self.assertTrue(mcf_file_util.add_mcf_node(node, nodes))
+
+        # Allow name addition
+        node2 = dict(node)
+        node2['name'] = 'Sample Variable'
+        self.assertTrue(mcf_file_util.add_mcf_node(node2, nodes))
+        self.assertEqual(nodes['dcid:TestStatVar'].get('name'), node2['name'])
+
+        # Allow duplicate descriptions
+        node3 = dict(node)
+        node3['description'] = 'Test variable with samples'
+        self.assertTrue(mcf_file_util.add_mcf_node(node3, nodes))
+        self.assertEqual(nodes['dcid:TestStatVar'].get('description'),
+                         node3['description'])
+        node3['description'] = 'additional description'
+        self.assertTrue(mcf_file_util.add_mcf_node(node3, nodes))
+        self.assertTrue(',' in nodes['dcid:TestStatVar'].get('description'))
+
+        # Block adding new property:value
+        node4 = dict(node)
+        orig_node = dict(nodes['dcid:TestStatVar'])
+        node4['age'] = '[10 20 Years]'
+        self.assertFalse(mcf_file_util.add_mcf_node(node4, nodes))
+        self.assertNotIn('age', nodes['dcid:TestStatVar'])
+        self.assertEqual(nodes['dcid:TestStatVar'], orig_node)
 
 
 class TestAddPVToNode(unittest.TestCase):
