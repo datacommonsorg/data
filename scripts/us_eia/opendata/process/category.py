@@ -97,7 +97,7 @@ def trim_area_categories(svg_info, counters):
     # Delete "area" categories.
     for svg, (_, name) in list(svg_info.items()):
         if name and name.lower() == 'by area':
-            counters['info_deleted_area_categories'] += 1
+            counters.add_counter('info_deleted_area_categories', 1)
             del svg_info[svg]
 
     # Trim orphans, except for dataset_root.
@@ -107,7 +107,7 @@ def trim_area_categories(svg_info, counters):
         for svg, (parent, _) in list(svg_info.items()):
             if parent != dataset_root and parent not in svg_info:
                 run_again = True
-                counters['info_deleted_orphan_categories'] += 1
+                counters.add_counter('info_deleted_orphan_categories', 1)
                 del svg_info[svg]
 
 
@@ -139,7 +139,7 @@ def process_category(dataset, data, extract_place_statvar_fn, svg_info,
     for series in child_series:
         (_, raw_sv, _) = extract_place_statvar_fn(series, counters)
         if not raw_sv:
-            counters['error_extract_place_sv_for_category'] += 1
+            counters.add_counter('error_extract_place_sv_for_category', 1)
             continue
 
         if raw_sv not in sv_membership_map:
