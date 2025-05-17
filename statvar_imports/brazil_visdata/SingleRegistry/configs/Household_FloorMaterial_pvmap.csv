@@ -1,0 +1,10 @@
+key,prop,val,p1,v1,,,,,,
+Referência,observationAbout,country/BRA,observationDate,{Data},,,,,,
+material_piso_terra,populationType,Household,measuredProperty,count,floorMaterial,TerraFloorMaterial,value,{Number},registeredIn,Brazil_SingleRegistry
+material_piso_cimento,populationType,Household,measuredProperty,count,floorMaterial,CementFloor,value,{Number},registeredIn,Brazil_SingleRegistry
+material_piso_madeira_aproveitada,populationType,Household,measuredProperty,count,floorMaterial,UtilizedWoodFloorMaterial,value,{Number},registeredIn,Brazil_SingleRegistry
+material_piso_madeira_aparelhada,populationType,Household,measuredProperty,count,floorMaterial,EquippedWoodFloorMaterial,value,{Number},registeredIn,Brazil_SingleRegistry
+material_piso_ceramica,populationType,Household,measuredProperty,count,floorMaterial,CeramicFloor,value,{Number},registeredIn,Brazil_SingleRegistry
+material_piso_carpete,populationType,Household,measuredProperty,count,floorMaterial,CarpetFloor,value,{Number},registeredIn,Brazil_SingleRegistry
+material_piso_outro_material,populationType,Household,measuredProperty,count,floorMaterial,VISDATA_OtherFloorMaterial,value,{Number},registeredIn,Brazil_SingleRegistry
+material_piso_sem_resposta,populationType,Household,measuredProperty,count,floorMaterial,VISDATA_UnknownFloorMaterial,value,{Number},registeredIn,Brazil_SingleRegistry
