@@ -1,0 +1,65 @@
+# Auto generated using command: "../data/tools/statvar_importer/stat_var_processor.py --input_data=testdata/us_fed_input_2.csv --pv_map=us_fed_interest_rates_pvmap.csv --config_file=us_fed_interest_rates_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=testdata/us_fed_interest_rate_output" on 2025-05-08 14:59:18.025551
+
+Node: dcid:InterestRate_TreasuryBill_1Year_SecondaryMarket
+typeOf: dcid:StatisticalVariable
+name: "1-year Treasury bill secondary market rate^  discount basis"
+populationType: dcid:TreasuryBill
+measuredProperty: dcid:interestRate
+statType: dcid:measuredValue
+instrumentTerm: [1 Year]
+instrumentType: dcid:SecondaryMarket
+
+Node: dcid:InterestRate_TreasurySecurity_10Year_ConstantMaturity
+typeOf: dcid:StatisticalVariable
+name: "Market yield on U.S. Treasury securities at 10-year  constant maturity, quoted on investment basis"
+populationType: dcid:TreasurySecurity
+measuredProperty: dcid:interestRate
+statType: dcid:measuredValue
+instrumentTerm: [10 Year]
+instrumentType: dcid:ConstantMaturity
+
+Node: dcid:InterestRate_TreasurySecurity_1Year_ConstantMaturity
+typeOf: dcid:StatisticalVariable
+name: "Market yield on U.S. Treasury securities at 1-year  constant maturity, quoted on investment basis"
+populationType: dcid:TreasurySecurity
+measuredProperty: dcid:interestRate
+statType: dcid:measuredValue
+instrumentTerm: [1 Year]
+instrumentType: dcid:ConstantMaturity
+
+Node: dcid:InterestRate_TreasurySecurity_20Year_ConstantMaturity
+typeOf: dcid:StatisticalVariable
+name: "Market yield on U.S. Treasury securities at 20-year  constant maturity, quoted on investment basis"
+populationType: dcid:TreasurySecurity
+measuredProperty: dcid:interestRate
+statType: dcid:measuredValue
+instrumentTerm: [20 Year]
+instrumentType: dcid:ConstantMaturity
+
+Node: dcid:InterestRate_TreasurySecurity_3Year_ConstantMaturity
+typeOf: dcid:StatisticalVariable
+name: "Market yield on U.S. Treasury securities at 3-year  constant maturity, quoted on investment basis"
+populationType: dcid:TreasurySecurity
+measuredProperty: dcid:interestRate
+statType: dcid:measuredValue
+instrumentTerm: [3 Year]
+instrumentType: dcid:ConstantMaturity
+
+Node: dcid:InterestRate_TreasurySecurity_5Year_ConstantMaturity
+typeOf: dcid:StatisticalVariable
+name: "Market yield on U.S. Treasury securities at 5-year  constant maturity, quoted on investment basis"
+populationType: dcid:TreasurySecurity
+measuredProperty: dcid:interestRate
+statType: dcid:measuredValue
+instrumentTerm: [5 Year]
+instrumentType: dcid:ConstantMaturity
+
+Node: dcid:InterestRate_TreasurySecurity_7Year_ConstantMaturity
+typeOf: dcid:StatisticalVariable
+name: "Market yield on U.S. Treasury securities at 7-year  constant maturity, quoted on investment basis"
+populationType: dcid:TreasurySecurity
+measuredProperty: dcid:interestRate
+statType: dcid:measuredValue
+instrumentTerm: [7 Year]
+instrumentType: dcid:ConstantMaturity
+

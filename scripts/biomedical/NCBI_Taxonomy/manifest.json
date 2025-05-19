@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NCBI_Taxonomy",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.ncbi.nlm.nih.gov/taxonomy/",
+            "provenance_description": "NCBI Taxonomy the Taxonomy database of the National Center for Biotechnology Information (NCBI), which is part of the National Library of Medicine (NLM). It provides a curated classification and nomenclature for organisms found in public sequence databases, covering approximately 10% of all described species",
+            "scripts": [
+                "download.sh",
+                "scripts/format_ncbi_taxonomy.py"
+            ],
+            "source_files": ["input/*.dmp"],
+            "import_inputs": [
+                {
+                    "cleaned_csv": "output/ncbi_taxonomy.csv",
+                    "node_mcf": "output/ncbi_taxonomy_schema_enum.mcf",
+                    "template_mcf" : "tMCFs/ncbi_taxonomy.tmcf"
+
+                }
+            ],
+            "cron_schedule": "0 0 1 * *"
+        }
+    ]
+}
