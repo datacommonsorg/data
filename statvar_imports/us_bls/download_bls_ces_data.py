@@ -75,7 +75,7 @@ def series_id_from_gcs(series_id_filename):
     Returns:
     - list: A list of series IDs extracted from the config file, or None if not found
     """
-    logging.info(f"Getting series ids from {series_id_filename} from gcs")
+    logging.info(f"Getting series ids from {BASE_GCS_PATH}/{series_id_filename}")
     config_path =f"{BASE_GCS_PATH}/{series_id_filename}"
     blob = read_gcs_path(config_path)
     file_contents = blob.download_as_text()
@@ -111,7 +111,6 @@ def get_api_key():
         logging.fatal(f"Config file not found at {config_path}")
     except Exception as e:
         logging.fatal(f"Error in get_api_key: {e}")
-        raise
 
 
 def convert_to_raw_csv(download_folder, raw_data_folder):
