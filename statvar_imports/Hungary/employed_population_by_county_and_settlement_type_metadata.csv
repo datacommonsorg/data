@@ -1,0 +1,16 @@
+parameter,value
+url,https://nepszamlalas2022.ksh.hu/en/database/#/table/WBS014/N4IgFgpghgJiBcBtEAVAkgWQKIH0AKWASmgPIAiIANKkQKoAyOKW96eATFSAHJbY4BlLAA0QAXWoBnAJYwICZM0IMcAcSwkAzFwDSWAGo4AgupwAxEqsYZa3HVzMY03QWiydqAITQCd-gIwArDgB4lIQAMYALtIA9gB2ChIgAGbSADZREABOkgigANbS8XDwIBhQAA5cEPFR2dIQeUiKdIzMrGgcVIXFpSACEFFcAG5Q6QCuTQog-rriAL4SyLz8QqKUvSUIA0Oj41PNiiQoRvRcGA6LyyCOzq7uPSBF22WDw9Rjk9NIIHx410oyG8vgCwVCm2efR27323yOIHoPh0HkRyMCXBQJzOgNaykY6i0Txe_VhnwOP2QAAlaFwaf5_HTaAyAAxM_yo-nsNnUGnsRm82j8gUgPkcpn87SC9icoX8iUyhVS0VC5V8zQi9Wy9iaNW0DVMjWa_XiwUavWaWWW42Wq06w0Wg1my0O7RiJbuhZAA===
+description,"employed population by county and settlement type of Hungary  2001, 2011, 2022. "
+process,"To download data:
+Click on the url -> Dimensions drag them to columns,rows or sections"", -> In columns drag ""Census year"" and ""Types of settlement"", ""Sex"", and In rows drag  ""county, region"" and  ""Age group "", ""Status in employment"" , ""Highest level of education complet"" -> accordingly it creates table  -> click download."
+#place_type,"Country,AdministrativeArea1,AdministrativeArea2"
+#places_within,country/HUN
+start_date,2001
+end_date,2022
+release_frequency,10
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1ylh09HzVYfb00s_a2Q-uBjDI4ip7BUAVDLrT4Jk7Myg/edit?resourcekey=0-F4Ox2_925ZiP1afW5z2qtA#gid=665670251
+mapped_rows,4
+mapped_columns,4
+header_rows,4

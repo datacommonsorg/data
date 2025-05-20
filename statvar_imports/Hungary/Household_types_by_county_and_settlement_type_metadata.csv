@@ -1,0 +1,20 @@
+parameter,value
+url,https://nepszamlalas2022.ksh.hu/en/database/#/table/WBS017/N4IgFgpghgJiBcBtEAVAkgWQKIH0AKWASmgPIAiIANCAHJbY4DKWAGlakQKoAyOKW3dHgBMIALrUAzgEsYEBMn6EeOAOJYSAZnYBpLADUcAQXUBGdgAkhOC4xSiJISRADGAF2kB7AHYLHAM2kAGzcIACdJBFAAa2lvOHgQDCgAB3YIbzcw6QhIpEVMXAJicioYuISQRgg3dgA3KCCAV1yFEGEABmFRak7Tc16OjvMxAF8JRS5edS0ykFj4hCqa-saWvOQLTktOfp3-jv2ekC3TTp3hAZPOS6uty-P7021qe8eby4vur5fr4V_7po7jdNO9_gDOECdkDgUD3kCIaDoZ9XpDvqjQYisbCkRjNNoxhNaPRcMw2JRyotEtVatQGs1WkhUCQUEZuOwMOwAGLicaUZB6QwmLADSmVGmrBkbZms9nUACaOEEpgArOx5aqALQANgALOq1FhtWrCfyTtZbPY5gtxSs6WtGYoWWz2HhCPp2DQ3R7qGg7J7vThODQdLyiUoVPxBGgRNaKksJfapW0tuwfSBQ4SxqMgA
+description,"Household types by county and settlement type of Hungary  2001, 2011, 2022. "
+process,"To download data:
+Click on the url -> Dimensions drag them to columns,rows or sections"", -> In columns drag ""Census year"" and ""Types of settlement"", ""Sex"", and In rows drag  ""county, region"" and  ""Age group "", ""Household typest"" -> accordingly it creates table  -> click download."
+#place_type,"Country,AdministrativeArea1,AdministrativeArea2"
+#places_within,country/HUN
+start_date,2001
+end_date,2022
+release_frequency,10
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1qKW9ckhU65u6u5eYZMVcvTCb6Vp7LRb9K7cMLurj4RM/edit#gid=1547210605
+mapped_rows,4
+mapped_columns,3
+header_rows,4
+#input_rows,10
+#existing_statvar_mcf,""""""
+#debug,1
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/16HzV3wgsMCNkM6YStdzhEqxbyP2H_-QGkSBePX2LQs0/edit?resourcekey=0-2WCpsbyY_qHEdvQvHRMlPg#gid=0

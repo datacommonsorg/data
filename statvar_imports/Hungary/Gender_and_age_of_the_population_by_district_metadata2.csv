@@ -1,0 +1,19 @@
+parameter,value
+url,https://nepszamlalas2022.ksh.hu/en/database/#/table/WBS001/N4IgFgpghgJiBcBtEAVAkgWQKIH0AKWASmgPIAiIANCAHJbY4DKWAGiALrUDOAljBAmQoiAVQAyOAOJYSAFiogA0lgBqOAILSO3CAGMALjwD2AO0GcQAMx4AbfRABOXBKADWPE3HggMUAA4KECb6DjwQzkjIymqaWFRuHl4gjBD6CgBuUDYAruGCqCQo6mIKAJo4YigAjACsZbUAtABMAJxlAMwADA2ybdSlNd0AHPL9UlhDdewAvpzIdAzMbJQJngjJqRlZuRHIGAoAYhyzM9NAA===
+description,Gender and age of the population by county and settlement type of Hungary from 2001 to 2022. 
+process,"To download data:
+Click on the url -> Dimensions drag them to columns,rows or sections"", -> In columns drag ""Census year"" , ""sex"" and ""Types of settlement"", and In rows drag  ""County, region,"" and  ""Age group, itemized""  -> accordingly it creates table  -> click download."
+#place_type,"Country,AdministrativeArea1,AdministrativeArea2"
+#places_within,country/HUN
+start_date,2001
+end_date,2022
+release_frequency,10Year
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1hqLcWqi0AfimztDs_-TBh_6Alj_QqSHdXeSSDJvfmN0/edit#gid=1405057681
+mapped_rows,4
+mapped_columns,2
+header_rows,4
+#input_rows,800
+pv_map,https://docs.google.com/spreadsheets/d/1hqLcWqi0AfimztDs_-TBh_6Alj_QqSHdXeSSDJvfmN0/edit#gid=1125078549
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/16HzV3wgsMCNkM6YStdzhEqxbyP2H_-QGkSBePX2LQs0/edit?resourcekey=0-2WCpsbyY_qHEdvQvHRMlPg#gid=0
