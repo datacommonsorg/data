@@ -26,3 +26,5 @@
 
 #### Processing
 `python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/merged_output.csv --pv_map=bls_ces_pvmap.csv --config_file=bls_ces_metadata.csv --output_path=output/bls_ces_state`
+
+
