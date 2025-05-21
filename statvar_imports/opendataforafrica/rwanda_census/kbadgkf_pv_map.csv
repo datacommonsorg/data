@@ -1,6 +1,5 @@
 key,prop,val,p1,v1,p2,v2,,,,,,
 OBS_VALUE,value,{Number},populationType,Person,observationAbout,country/RWA,unit,Percent,scalingFactor,100,observationPeriod,P3M
-I2,,,,,,,,,,,,
 I3,#ignore,ignore,,,,,,,,,,
 I4,schoolGradeLevel,PrimaryEducation,measurementDenominator,-employmentStatus,I4,Primary,,,,,,
 I5,schoolGradeLevel,LowerSecondaryEducation,measurementDenominator,-employmentStatus,I5,Lower_secondary,,,,,,
