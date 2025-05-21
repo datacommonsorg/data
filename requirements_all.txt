@@ -13,7 +13,7 @@ earthengine-api
 flask_restful
 geopandas
 geopy
-google-generativeai
+google-genai
 matplotlib
 netCDF4
 rasterio

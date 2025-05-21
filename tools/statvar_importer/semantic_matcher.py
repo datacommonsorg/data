@@ -68,11 +68,6 @@ from counters import Counters
 class SemanticMatcher:
 
     def __init__(self, config: ConfigMap = None, counters: Counters = None):
-        # Import modules needed when running SemanticMatcher
-        # This is not imported in import-executor automation
-        # that calls stvtar processor, but doesn't need semantic matching.
-        from sentence_transformers import SentenceTransformer, util
-
         self._config = ConfigMap(get_semantic_matcher_default_config())
         if config:
             self._config.update_config(config.get_configs())
@@ -156,9 +151,16 @@ class SemanticMatcher:
         Initialized on first lookup if not called directly."""
         if self.is_initialized():
             return
+
+        # Import modules needed when running SemanticMatcher
+        # This is not imported in import-executor automation
+        # that calls stvtar processor, but doesn't need semantic matching.
+        from sentence_transformers import SentenceTransformer, util
+
         model = self._config.get('embeddings_model', 'all-MiniLM-L6-v2')
         logging.info(f'Creating SentenceTransformer with {model}')
         self._embedder = SentenceTransformer(model)
+        self._semantic_search_util = util.semantic_search
 
         if self._corpus_embeddings is None:
             logging.info(
@@ -192,9 +194,9 @@ class SemanticMatcher:
 
         # Lookup query embeddings in corpus
         start_time = time.perf_counter()
-        matches = util.semantic_search(query_embedding,
-                                       self._corpus_embeddings,
-                                       top_k=num_results)
+        matches = self._semantic_search_util(query_embedding,
+                                             self._corpus_embeddings,
+                                             top_k=num_results)
         end_time = time.perf_counter()
         logging.level_debug() and logging.debug(
             f'Got semantic search result for {key}: {matches}')

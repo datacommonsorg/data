@@ -27,7 +27,8 @@ sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
-    os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
+    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
+                 'util'))
 
 _FLAGS = flags.FLAGS
 
