@@ -23,7 +23,6 @@ google-cloud-run
 google-cloud-storage
 google-cloud-logging
 google-cloud-scheduler
-google-genai
 gspread
 gunicorn
 lxml
