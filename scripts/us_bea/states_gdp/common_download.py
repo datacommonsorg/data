@@ -33,7 +33,7 @@ def download_and_extract_to_folders(zip_link, output_folder):
         zip_link (str): The URL of the ZIP file to download.
         output_folder (str, optional): The name of the folder where the ZIP
                                        and CSV files will be saved.
-                                       Defaults to "input_folders".
+                                       Defaults to "input_data".
     """
     logging.info(f"Downloading ZIP file from: {zip_link}")
 
@@ -88,7 +88,7 @@ def download_and_extract_to_folders(zip_link, output_folder):
 
 if __name__ == "__main__":
     zip_url = "https://apps.bea.gov/regional/zip/SQGDP.zip"
-    output_directory = "input_folders"
+    output_directory = "input_data"
     download_and_extract_to_folders(zip_url, output_folder=output_directory)
     logging.info(
         f"\nZIP and CSV files saved to the '{output_directory}' folder.")

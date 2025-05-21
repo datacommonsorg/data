@@ -122,7 +122,7 @@ class StateGDPDataLoader:
 
         return max(matching_files, key=matching_files.get)
 
-    def process_data(self, raw_data=None, input_folder='input_folders'):
+    def process_data(self, raw_data=None, input_folder='input_data'):
         """Processes the state quarterly GDP data from the input folder.
 
         Args:

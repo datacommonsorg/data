@@ -52,7 +52,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         df: DataFrame (DF) with the cleaned data.
     """
 
-    def process_data(self, raw_data=None, input_folder='input_folders'):
+    def process_data(self, raw_data=None, input_folder='input_data'):
         """Cleans data from a specified CSV file in the input folder
         and converts it from wide to long format.
 
