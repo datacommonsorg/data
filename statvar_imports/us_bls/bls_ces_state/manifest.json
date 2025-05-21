@@ -1,0 +1,23 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "BLS_CES_State",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.bls.gov/webapps/legacy/cesbtab5.htm",
+      "provenance_description": "Industry estimates of nonfarm employment, hours, and earnings of workers on payrolls",
+      "scripts": ["../download_bls_ces_data.py --place_type=state --input_folder=bls_ces_state",
+      		  "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/merged_output.csv --pv_map=bls_ces_state_pvmap.csv  --config_file=bls_ces_state_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/bls_ces_state"],
+      "import_inputs": [
+        {
+          "template_mcf": "output/bls_ces_state.tmcf",
+          "cleaned_csv": "output/bls_ces_state.csv"
+        }
+      ],
+      "source_files": [
+          "input_files/raw_data/*"
+      ],
+      "user_script_timeout" : "16200",
+      "cron_schedule": "0 06 * * 3"
+    }
+  ]
+}
