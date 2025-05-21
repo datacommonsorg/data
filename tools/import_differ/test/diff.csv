@@ -1,7 +1,7 @@
-dcid:Min_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___IMD,"2024-09-24T12:00:00",,dcid:MicrogramsPerCubicMeter,,,18.0_dcid:MicrogramsPerCubicMeter,DELETED
-dcid:Mean_Concentration_AirPollutant_CO,dcid:cpcpAq/Secretariat_Amaravati___APPCB,"2024-09-24T12:00:00",,dcid:MicrogramsPerCubicMeter,,,41.0_dcid:MicrogramsPerCubicMeter,DELETED
-dcid:Max_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___APPCB,"2024-09-24T12:00:00",,dcid:MicrogramsPerCubicMeter,,53.0_dcid:MicrogramsPerCubicMeter,,ADDED
-dcid:Mean_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___APPCB,"2024-09-24T12:00:00",,dcid:MicrogramsPerCubicMeter,,28.0_dcid:MicrogramsPerCubicMeter,29.0_dcid:MicrogramsPerCubicMeter,MODIFIED
-dcid:Mean_Concentration_AirPollutant_CO,dcid:cpcpAq/Secretariat_Amaravati___IMD,"2024-09-24T12:00:00",,dcid:MicrogramsPerCubicMeter,,42.0_dcid:MicrogramsPerCubicMeter,41.0_dcid:MicrogramsPerCubicMeter,MODIFIED
-dcid:Min_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___APPCB,"2024-09-24T12:00:00",,dcid:MicrogramsPerCubicMeter,,,18.0_dcid:MicrogramsPerCubicMeter,DELETED
-dcid:Mean_Concentration_AirPollutant_CO,dcid:cpcpAq/Secretariat_Amaravati___APPCB,"2024-09-25T12:00:00",,dcid:MicrogramsPerCubicMeter,,,40.0_dcid:MicrogramsPerCubicMeter,DELETED
+dcid:Min_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___IMD,"2024-09-24T12:00:00",,,dcid:MicrogramsPerCubicMeter,,,18.0_dcid:MicrogramsPerCubicMeter,DELETED
+dcid:Mean_Concentration_AirPollutant_CO,dcid:cpcpAq/Secretariat_Amaravati___APPCB,"2024-09-24T12:00:00",,,dcid:MicrogramsPerCubicMeter,,,41.0_dcid:MicrogramsPerCubicMeter,DELETED
+dcid:Max_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___APPCB,"2024-09-24T12:00:00",,,dcid:MicrogramsPerCubicMeter,,53.0_dcid:MicrogramsPerCubicMeter,,ADDED
+dcid:Mean_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___APPCB,"2024-09-24T12:00:00",,,dcid:MicrogramsPerCubicMeter,,28.0_dcid:MicrogramsPerCubicMeter,29.0_dcid:MicrogramsPerCubicMeter,MODIFIED
+dcid:Mean_Concentration_AirPollutant_CO,dcid:cpcpAq/Secretariat_Amaravati___IMD,"2024-09-24T12:00:00",,,dcid:MicrogramsPerCubicMeter,,42.0_dcid:MicrogramsPerCubicMeter,41.0_dcid:MicrogramsPerCubicMeter,MODIFIED
+dcid:Min_Concentration_AirPollutant_Ozone,dcid:cpcpAq/Secretariat_Amaravati___APPCB,"2024-09-24T12:00:00",,,dcid:MicrogramsPerCubicMeter,,,18.0_dcid:MicrogramsPerCubicMeter,DELETED
+dcid:Mean_Concentration_AirPollutant_CO,dcid:cpcpAq/Secretariat_Amaravati___APPCB,"2024-09-25T12:00:00",,,dcid:MicrogramsPerCubicMeter,,,40.0_dcid:MicrogramsPerCubicMeter,DELETED

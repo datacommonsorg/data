@@ -30,8 +30,8 @@ sys.path.append(_SCRIPT_DIR)
 import differ_utils
 
 _SAMPLE_COUNT = 3
-_GROUPBY_COLUMNS = 'variableMeasured,observationAbout,observationDate,measurementMethod,unit,observationPeriod'
-_VALUE_COLUMNS = 'value,scalingFactor'
+_GROUPBY_COLUMNS = 'variableMeasured,observationAbout,observationDate,observationPeriod,measurementMethod,unit,scalingFactor'
+_VALUE_COLUMNS = 'value'
 _TMP_LOCATION = '/tmp'
 
 Diff = Enum('Diff', [
