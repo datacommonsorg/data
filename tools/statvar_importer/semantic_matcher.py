@@ -23,8 +23,6 @@ from absl import app
 from absl import flags
 from absl import logging
 
-from sentence_transformers import SentenceTransformer, util
-
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
@@ -70,6 +68,11 @@ from counters import Counters
 class SemanticMatcher:
 
     def __init__(self, config: ConfigMap = None, counters: Counters = None):
+        # Import modules needed when running SemanticMatcher
+        # This is not imported in import-executor automation
+        # that calls stvtar processor, but doesn't need semantic matching.
+        from sentence_transformers import SentenceTransformer, util
+
         self._config = ConfigMap(get_semantic_matcher_default_config())
         if config:
             self._config.update_config(config.get_configs())

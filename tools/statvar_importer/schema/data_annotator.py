@@ -95,7 +95,7 @@ _DEFAULT_ANNOTATION_CONFIG = [
         'data_type': 'VALUE',
         'wordlist': 'count,total,amount,number,value,cost,price,ratio,index',
         'wordlist_file': '',
-        'regex': [r'^[0-9,\.]+\s*[$%]?'],
+        'regex': [r'^[+0-9,\.$%-]+\s*'],
         'annotations': ['value={Number}',],
     },
     # Place

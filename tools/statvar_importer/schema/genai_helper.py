@@ -18,8 +18,6 @@ import re
 import sys
 import time
 
-import google.generativeai as genai
-
 from absl import app
 from absl import flags
 from absl import logging
@@ -62,6 +60,11 @@ class GenAIHelper:
         config_dict: dict = {},
         counters: Counters = None,
     ):
+        # Import modules needed for GenAi
+        # This is not imported in import-executor that loads this module
+        # due to statvar processor but doesn't invoke genai
+        import google.generativeai as genai
+
         self._config = ConfigMap()
         self._config.update_config(config_dict)
         self._counters = counters
