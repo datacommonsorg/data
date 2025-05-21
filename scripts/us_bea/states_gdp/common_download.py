@@ -18,11 +18,12 @@ import os
 from absl import logging
 import requests
 from retry import retry
+
 logging.set_verbosity(logging.INFO)
 
+
 @retry(tries=3, delay=5, backoff=2)
-def download_and_extract_to_folders(zip_link,
-                                    output_folder):
+def download_and_extract_to_folders(zip_link, output_folder):
     """
     Downloads a ZIP file from a given URL using the requests module with retry,
     stores the ZIP file in the specified output folder, extracts all CSV files
@@ -42,7 +43,8 @@ def download_and_extract_to_folders(zip_link,
 
         try:
             response = requests.get(zip_link, stream=True)
-            response.raise_for_status()  # Raise an exception for bad status codes
+            response.raise_for_status(
+            )  # Raise an exception for bad status codes
 
             # Save the ZIP file
             with open(zip_filename, 'wb') as zip_outfile:
@@ -53,11 +55,14 @@ def download_and_extract_to_folders(zip_link,
             with zipfile.ZipFile(zip_filename) as zip_file:
                 for member in zip_file.namelist():
                     if member.lower().endswith('.csv'):
-                        logging.info(f"Extracting and saving file: {member} to '{output_folder}'")
+                        logging.info(
+                            f"Extracting and saving file: {member} to '{output_folder}'"
+                        )
                         try:
                             with zip_file.open(member) as csv_file:
                                 data = csv_file.read().decode('utf-8')
-                                output_path = os.path.join(output_folder, member)
+                                output_path = os.path.join(
+                                    output_folder, member)
                                 with open(output_path, 'w',
                                           encoding='utf-8') as outfile:
                                     outfile.write(data)
@@ -72,14 +77,18 @@ def download_and_extract_to_folders(zip_link,
             logging.error(f"Error downloading ZIP file after retries: {e}")
             return
         except zipfile.BadZipFile:
-            logging.error(f"Error: Downloaded file is not a valid ZIP file: {zip_filename}")
+            logging.error(
+                f"Error: Downloaded file is not a valid ZIP file: {zip_filename}"
+            )
             return
 
     except Exception as e:
         logging.fatal(f"An unexpected error occurred: {e}")
 
+
 if __name__ == "__main__":
     zip_url = "https://apps.bea.gov/regional/zip/SQGDP.zip"
     output_directory = "input_folders"
     download_and_extract_to_folders(zip_url, output_folder=output_directory)
-    logging.info(f"\nZIP and CSV files saved to the '{output_directory}' folder.")
+    logging.info(
+        f"\nZIP and CSV files saved to the '{output_directory}' folder.")

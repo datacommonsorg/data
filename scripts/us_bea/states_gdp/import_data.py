@@ -27,7 +27,7 @@ import re
 import os
 import zipfile
 from absl import logging
-from urllib.request import urlopen 
+from urllib.request import urlopen
 from absl import app
 import pandas as pd
 from absl import flags
@@ -35,11 +35,12 @@ from absl import flags
 logging.set_verbosity(logging.INFO)
 
 # Suppress annoying pandas DF copy warnings.
-pd.options.mode.chained_assignment = None  
+pd.options.mode.chained_assignment = None
 
 FLAGS = flags.FLAGS
 flags.DEFINE_integer('latest_year', None,
                      'The latest year to look for in the filename (optional).')
+
 
 class StateGDPDataLoader:
     """Pulls per-state GDP data from the BEA.
@@ -65,9 +66,11 @@ class StateGDPDataLoader:
         """Initializes instance, assigning member data frames to None."""
         self.raw_df = None
         self.clean_df = None
-        
 
-    def _find_gdp_file_in_folder(self, input_folder, file_pattern, target_year=None):
+    def _find_gdp_file_in_folder(self,
+                                 input_folder,
+                                 file_pattern,
+                                 target_year=None):
         """Finds the latest file in the specified folder matching a given pattern.
 
         Args:
@@ -90,15 +93,20 @@ class StateGDPDataLoader:
                     end_year = int(match.group(2))
                     matching_files[filename] = end_year
                 except IndexError:
-                    logging.error(f"Error: Year group 2 not found in pattern '{file_pattern}' for file '{filename}'.")
+                    logging.error(
+                        f"Error: Year group 2 not found in pattern '{file_pattern}' for file '{filename}'."
+                    )
                     continue
                 except ValueError:
-                    logging.error(f"Error: Could not convert year to integer for file '{filename}'.")
+                    logging.error(
+                        f"Error: Could not convert year to integer for file '{filename}'."
+                    )
                     continue
 
         if not matching_files:
             raise FileNotFoundError(
-                f"Error: No file matching pattern '{file_pattern}' found in '{input_folder}'.")
+                f"Error: No file matching pattern '{file_pattern}' found in '{input_folder}'."
+            )
 
         if target_year:
             candidate_files = {
@@ -109,13 +117,12 @@ class StateGDPDataLoader:
             else:
                 logging.warning(
                     f"Warning: No file found ending with year {target_year} in '{input_folder}'. "
-                    f"Falling back to the file with the latest end year available.")
+                    f"Falling back to the file with the latest end year available."
+                )
 
         return max(matching_files, key=matching_files.get)
 
-    def process_data(self,
-                     raw_data=None,
-                     input_folder='input_folders'):
+    def process_data(self, raw_data=None, input_folder='input_folders'):
         """Processes the state quarterly GDP data from the input folder.
 
         Args:
@@ -132,7 +139,8 @@ class StateGDPDataLoader:
             data = list(reader)
             if data:
                 self.raw_df = pd.DataFrame(data, columns=header)
-                logging.info(f"Successfully loaded data from provided raw data.")
+                logging.info(
+                    f"Successfully loaded data from provided raw data.")
             else:
                 self.raw_df = None
                 raise ValueError("Error: No data found in provided raw data.")
@@ -140,7 +148,9 @@ class StateGDPDataLoader:
         else:
             try:
                 _STATE_QUARTERLY_GDP_FILE_PATTERN = r'SQGDP1__ALL_AREAS_(\d{4})_(\d{4})\.csv'
-                self._input_file = self._find_gdp_file_in_folder(input_folder,_STATE_QUARTERLY_GDP_FILE_PATTERN, FLAGS.latest_year)
+                self._input_file = self._find_gdp_file_in_folder(
+                    input_folder, _STATE_QUARTERLY_GDP_FILE_PATTERN,
+                    FLAGS.latest_year)
                 file_path = os.path.join(input_folder, self._input_file)
                 logging.info(f"Processing data from file: {file_path}")
                 with open(file_path, 'r', encoding='utf-8') as csvfile:
@@ -149,10 +159,13 @@ class StateGDPDataLoader:
                     data = list(reader)
                     if data:
                         self.raw_df = pd.DataFrame(data, columns=header)
-                        logging.info(f"Successfully loaded data from: {self._input_file}")
+                        logging.info(
+                            f"Successfully loaded data from: {self._input_file}"
+                        )
                     else:
                         self.raw_df = None
-                        raise ValueError(f"Error: No data found in '{self._input_file}'.")
+                        raise ValueError(
+                            f"Error: No data found in '{self._input_file}'.")
             except FileNotFoundError as e:
                 raise FileNotFoundError(f"Error: {e}")
             except Exception as e:
@@ -165,7 +178,7 @@ class StateGDPDataLoader:
             if 'GeoName' in df.columns:
                 df = df[df['GeoName'].isin(self.US_STATES)]
             else:
-                logging.error(
+                logging.warning(
                     "Warning: 'GeoName' column not found, skipping state filtering."
                 )
             all_quarters = [
@@ -173,9 +186,9 @@ class StateGDPDataLoader:
             ]
             if all_quarters:
                 df_melted = pd.melt(df,
-                                     id_vars=['GeoFIPS', 'Unit'],
-                                     value_vars=all_quarters,
-                                     var_name='Quarter')
+                                    id_vars=['GeoFIPS', 'Unit'],
+                                    value_vars=all_quarters,
+                                    var_name='Quarter')
                 df_melted['Quarter'] = df_melted['Quarter'].apply(
                     self.date_to_obs_date)
                 df_melted['GeoId'] = df_melted['GeoFIPS'].apply(
@@ -192,7 +205,7 @@ class StateGDPDataLoader:
                     self.clean_df['chained_2017_dollars'] *= one_million
 
                 quality_indices = df_melted[df_melted['Unit'] ==
-                                             'Quantity index'].copy()
+                                            'Quantity index'].copy()
                 if not quality_indices.empty:
                     quality_indices['GeoId'] = quality_indices['GeoFIPS'].apply(
                         self.convert_geoid)
@@ -203,7 +216,7 @@ class StateGDPDataLoader:
                             self.clean_df.index).values.astype(float)
 
                 current_usd = df_melted[df_melted['Unit'] ==
-                                         'Millions of current dollars'].copy()
+                                        'Millions of current dollars'].copy()
                 if not current_usd.empty:
                     current_usd['GeoId'] = current_usd['GeoFIPS'].apply(
                         self.convert_geoid)
@@ -213,11 +226,12 @@ class StateGDPDataLoader:
                             float) * one_million
 
                 self.clean_df = self.clean_df.drop(['GeoFIPS', 'Unit', 'value'],
-                                                 axis=1,
-                                                 errors='ignore')
+                                                   axis=1,
+                                                   errors='ignore')
 
             else:
-                logging.error("Warning: No quarter columns found for melting.")
+                logging.warning(
+                    "Warning: No quarter columns found for melting.")
         else:
             logging.fatal("No data to process.")
 

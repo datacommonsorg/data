@@ -28,6 +28,7 @@ import io
 from absl import app, flags
 import pandas as pd
 from absl import logging
+
 logging.set_verbosity(logging.INFO)
 # Allows the following module import to work when running as a script
 sys.path.append(
@@ -35,6 +36,7 @@ sys.path.append(
         os.path.abspath(__file__)))))
 from us_bea.states_gdp import import_data
 import csv
+
 FLAGS = flags.FLAGS
 flags.DEFINE_integer('latest_year_industry', None,
                      'The latest year to look for in the filename (optional).')
@@ -49,8 +51,6 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
-
-
 
     def process_data(self, raw_data=None, input_folder='input_folders'):
         """Cleans data from a specified CSV file in the input folder
@@ -73,7 +73,8 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
             data = list(reader)
             if data:
                 self.raw_df = pd.DataFrame(data, columns=header)
-                logging.info(f"Successfully loaded data from provided raw data.")
+                logging.info(
+                    f"Successfully loaded data from provided raw data.")
             else:
                 self.raw_df = None
                 raise ValueError("Error: No data found in provided raw data.")
@@ -82,7 +83,9 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         else:
             try:
                 _STATE_QUARTERLY_GDP_FILE_PATTERN1 = r'SQGDP2__ALL_AREAS_(\d{4})_(\d{4})\.csv'
-                self._input_file = self._find_gdp_file_in_folder(input_folder,_STATE_QUARTERLY_GDP_FILE_PATTERN1, FLAGS.latest_year_industry)
+                self._input_file = self._find_gdp_file_in_folder(
+                    input_folder, _STATE_QUARTERLY_GDP_FILE_PATTERN1,
+                    FLAGS.latest_year_industry)
                 file_path = os.path.join(input_folder, self._input_file)
                 logging.info(f"Processing data from file: {file_path}")
                 with open(file_path, 'r', encoding='utf-8') as csvfile:
@@ -91,10 +94,13 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
                     data = list(reader)
                     if data:
                         self.raw_df = pd.DataFrame(data, columns=header)
-                        logging.info(f"Successfully loaded data from: {self._input_file}")
+                        logging.info(
+                            f"Successfully loaded data from: {self._input_file}"
+                        )
                     else:
                         self.raw_df = None
-                        raise ValueError(f"Error: No data found in '{self._input_file}'.")
+                        raise ValueError(
+                            f"Error: No data found in '{self._input_file}'.")
             except FileNotFoundError as e:
                 raise FileNotFoundError(f"Error: {e}")
             except Exception as e:
@@ -109,11 +115,15 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
             if 'GeoName' in df.columns:
                 df = df[df['GeoName'].isin(self.US_STATES)]
             else:
-                logging.error("Warning: 'GeoName' column not found, skipping state filtering.")
+                logging.warning(
+                    "Warning: 'GeoName' column not found, skipping state filtering."
+                )
 
             # Gets columns that represent quarters, e.g. 2015:Q2, by matching
             # against a regular expression.
-            all_quarters = [q for q in df.columns if re.match(r'\d\d\d\d:Q\d', str(q))]
+            all_quarters = [
+                q for q in df.columns if re.match(r'\d\d\d\d:Q\d', str(q))
+            ]
 
             if all_quarters:
                 # Convert table from wide to long format.
@@ -130,7 +140,8 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
                     df['NAICS'] = df['IndustryClassification'].apply(
                         self.convert_industry_class)
                 else:
-                    logging.error("Warning: 'IndustryClassification' column not found.")
+                    logging.warning(
+                        "Warning: 'IndustryClassification' column not found.")
 
                 if 'value' in df.columns:
                     df['value'] = df['value'].apply(self.value_converter)
@@ -138,14 +149,16 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
                     # Convert from millions of current USD to current USD.
                     df['value'] *= 1000000
                 else:
-                    logging.error("Warning: 'value' column not found.")
+                    logging.warning("Warning: 'value' column not found.")
 
-                self.clean_df = df.drop(['GeoFIPS', 'IndustryClassification'], axis=1, errors='ignore')
+                self.clean_df = df.drop(['GeoFIPS', 'IndustryClassification'],
+                                        axis=1,
+                                        errors='ignore')
             else:
-                logging.error("Warning: No quarter columns found for melting.")
+                logging.warning(
+                    "Warning: No quarter columns found for melting.")
         else:
             logging.fatal("No data to process.")
-
 
     @staticmethod
     def value_converter(val):
