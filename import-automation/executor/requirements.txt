@@ -23,7 +23,6 @@ google-cloud-run
 google-cloud-storage
 google-cloud-logging
 google-cloud-scheduler
-google-generativeai
 gspread
 gunicorn
 lxml
@@ -44,7 +43,6 @@ requests_cache
 retry
 s2sphere
 selenium
-sentence-transformers
 shapely
 urllib3
 webdriver_manager
