@@ -4,10 +4,7 @@ description,"Employment, Hours, and Earnings from the Current Employment Statist
 #place_type,Country
 #places_within,country/USA
 start_date,2015
-end_date,2025
-output_columns,"observationAbout,observationDate,value,variableMeasured,observationPeriod,measurementMethod"
-word_delimitter,""" """
-debug,0
-mapped_rows,4
-mapped_columns,1
-statvar_dcid_remap_csv,statvar_imports/us_bls/bls_ces/bls_ces_remap.csv
+process,"Go to https://www.bls.gov/webapps/legacy/cesbtab1.htm and select all the industries check boxes and click on ""Retrieve Data"". In the new page click on ""More Formatting Options"" and in the ""Select view of the data"" field select ""Multi series view"" and click on ""Retrieve Data"", now there will be an option to download the file in xlsx"
+output_columns,"observationAbout,observationDate,value,variableMeasured,observationPeriod,measurementMethod,unit"
+mapped_rows,1
+mapped_columns,3

@@ -32,23 +32,29 @@ class TestImportDiffer(unittest.TestCase):
     def test_diff_analysis(self):
         groupby_columns = 'variableMeasured,observationAbout,observationDate'
         value_columns = 'value'
-        current_data = os.path.join(module_dir, 'test', 'current.mcf')
-        previous_data = os.path.join(module_dir, 'test', 'previous.mcf')
-        output_location = os.path.join(module_dir, 'test')
+        job_name = 'test'
+        current_data = os.path.join(module_dir, job_name, 'current.mcf')
+        previous_data = os.path.join(module_dir, job_name, 'previous.mcf')
+        output_location = os.path.join(module_dir)
 
         differ = import_differ.ImportDiffer(current_data, previous_data,
-                                            output_location, groupby_columns,
-                                            value_columns)
+                                            output_location, 'differ.jar',
+                                            'project-1', job_name, 'mcf',
+                                            'local')
         current = differ_utils.load_mcf_file(current_data)
         previous = differ_utils.load_mcf_file(previous_data)
 
-        in_data = differ.process_data(previous, current)
-        summary, result = differ.point_analysis(in_data)
-        result = pd.read_csv(os.path.join(module_dir, 'test', 'result1.csv'))
+        diff_path = os.path.join(module_dir, job_name, 'diff.csv')
+        diff = differ.process_data(diff_path)
+
+        summary, result = differ.point_analysis(diff)
+        result = pd.read_csv(
+            os.path.join(module_dir, job_name, 'point_analysis_summary.csv'))
         assert_frame_equal(summary, result)
 
-        summary, result = differ.series_analysis(in_data)
-        result = pd.read_csv(os.path.join(module_dir, 'test', 'result2.csv'))
+        summary, result = differ.series_analysis(diff)
+        result = pd.read_csv(
+            os.path.join(module_dir, job_name, 'series_analysis_summary.csv'))
         assert_frame_equal(summary, result)
 
 
