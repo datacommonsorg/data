@@ -1,0 +1,6 @@
+{
+  "geoId/non_existent_place": [
+    {"grid": "37^-118", "ratio": 0.8},
+    {"grid": "47^-111", "ratio": 0.2}
+  ]
+}
