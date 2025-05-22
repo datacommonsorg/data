@@ -419,7 +419,8 @@ class ImportExecutor:
 
             if self.config.invoke_import_validation:
                 # Invoke differ and validation scripts.
-                if latest_version:
+                if latest_version and len(
+                        file_util.file_get_matching(previous_data_path)) > 0:
                     logging.info('Invoking differ tool...')
                     differ = ImportDiffer(
                         current_data=current_data_path,
