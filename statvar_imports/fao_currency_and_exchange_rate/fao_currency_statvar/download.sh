@@ -2,7 +2,7 @@
 
 tmp="source_data_tmp" # where to store temporary artifacts
 dest="source_data" # where to put the final files
-files="input_files"
+files="input_data"
 retries=3
 wait=5 # seconds to wait between retries
 download_url="https://bulks-faostat.fao.org/production/Exchange_rate_E_All_Data.zip"
