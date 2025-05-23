@@ -19,7 +19,7 @@
       "resource_limits": {
         "cpu": "4",
         "memory": "8G"
-      }
+      },
       "cron_schedule": "0 8 1,15 * *"
     }
   ]
