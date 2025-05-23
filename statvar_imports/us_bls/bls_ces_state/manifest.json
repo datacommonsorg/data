@@ -16,7 +16,7 @@
       "source_files": [
           "input_files/raw_data/*"
       ],
-      "user_script_timeout" : "16200",
+      "user_script_timeout" : 16200,
       "cron_schedule": "0 06 * * 3"
     }
   ]
