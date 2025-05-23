@@ -1,0 +1,8 @@
+Node: E:ethiopia_yusibcg->E0
+observationAbout: C:ethiopia_yusibcg->observationAbout
+observationDate: C:ethiopia_yusibcg->observationDate
+value: C:ethiopia_yusibcg->value
+variableMeasured: C:ethiopia_yusibcg->variableMeasured
+unit: C:ethiopia_yusibcg->unit
+scalingFactor: C:ethiopia_yusibcg->scalingFactor
+typeOf: dcs:StatVarObservation
