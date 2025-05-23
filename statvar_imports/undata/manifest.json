@@ -3,7 +3,7 @@
       {
         "import_name": "UNData",
         "curator_emails": [
-          ""
+          "support@datacommons.org"
         ],
         "provenance_url": "https://data.un.org/Data.aspx?q=city+population&d=POP&f=tableCode%3a240",
         "provenance_description": "Population data for countries, capital cities, urban and rural areas not covered by other sources. Outliers were removed from the output",
@@ -17,7 +17,7 @@
       ],
         "import_inputs": [
           {
-            "template_mcf": "output/output_file.tmcf",
+            "template_mcf": "output/UNData.tmcf",
             "cleaned_csv": "output/filter-undata.csv"
           }
         ],
