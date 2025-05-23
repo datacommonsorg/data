@@ -1,0 +1,25 @@
+parameter,value
+url,"https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=tableCode:240&DataMartId=POP&Format=csv&c=2,3,6,8,10,12,14,16,17,18&s=_countryEnglishNameOrderBy:asc,refYear:desc,areaCode:asc"
+description,"UNData City population by sex, city and city type"
+#place_type,UNData
+#places_within,
+start_date,1972
+release_frequency,1 Year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+header_rows,1
+mapped_rows,1
+mapped_columns,9
+#word_delimiter,
+#drop_statvars_without_svobs,1
+debug,0
+#input_rows,5
+#log_level,2
+existing_statvar_mcf,""""""
+#resolve_places,0
+word_delimiter,""""""
+filter_data_min_value,2
+#filter_data_max_value,
+filter_data_max_change_ratio,1
+filter_data_max_yearly_change_ratio,0.5
