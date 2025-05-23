@@ -16,8 +16,12 @@
       "source_files": [
           "input_files/raw_data/*"
       ],
-      "user_script_timeout" : "16200",
-      "cron_schedule": "0 06 * * 3"
+      "user_script_timeout" : 16200,
+      "cron_schedule": "0 06 * * 3",
+      "resource_limits": {
+                "cpu": "8",
+                "memory": "32G"
+            }
     }
   ]
 }
