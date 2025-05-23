@@ -20,8 +20,6 @@ ARG build_type=cloud
 # build base image with all the dependencies installed
 FROM python:3.12.8 as base
 RUN apt-get update && apt-get install -y jq \
-curl \
-wget \
 gnupg \
 apt-transport-https \
 ca-certificates \
