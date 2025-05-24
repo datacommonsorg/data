@@ -1,0 +1,8 @@
+Node: E:hungary-employed_population_by_county_and_settlement_type->E0
+observationAbout: C:hungary-employed_population_by_county_and_settlement_type->observationAbout
+observationDate: C:hungary-employed_population_by_county_and_settlement_type->observationDate
+value: C:hungary-employed_population_by_county_and_settlement_type->value
+variableMeasured: C:hungary-employed_population_by_county_and_settlement_type->variableMeasured
+unit: C:hungary-employed_population_by_county_and_settlement_type->unit
+scalingFactor: C:hungary-employed_population_by_county_and_settlement_type->scalingFactor
+typeOf: dcs:StatVarObservation
