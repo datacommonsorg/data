@@ -1,0 +1,6 @@
+Node: E:ntia_output->E0
+observationAbout: C:ntia_output->observationAbout
+observationDate: C:ntia_output->observationDate
+value: C:ntia_output->value
+variableMeasured: C:ntia_output->variableMeasured
+typeOf: dcs:StatVarObservation
