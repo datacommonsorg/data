@@ -1,0 +1,26 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "UAE_Population",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://admin.bayanat.ae/Dataset/DownloadDatasetResource?fileId=26585eaf-9a9c-486d-b773-fc51ef0204c9&resourceID=11243",
+      "provenance_description": "UAE_Population statical data",
+      "scripts": [
+        "uae_download.py",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/uae_populationbyemiratesnationalityandgender.xlsx --pv_map=uae_population_pvmap.csv --config_file=uae_population_metadata.csv --places_resolved_csv=uae_population_places_resolved_csv.csv --output_path=output/uae_population_output"
+      ],
+      "source_files": [
+        "input/uae_populationbyemiratesnationalityandgender.xlsx"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/uae_population_output.tmcf",
+          "cleaned_csv": "output/uae_population_output.csv"
+        }
+      ],
+      "cron_schedule": "0 05 * * 1"
+    }
+  ]
+}
