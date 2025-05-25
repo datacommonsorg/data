@@ -1,0 +1,10 @@
+Node: E:hbcu->E0
+observationAbout: C:hbcu->observationAbout
+observationDate: C:hbcu->observationDate
+value: C:hbcu->value
+variableMeasured: C:hbcu->variableMeasured
+unit: C:hbcu->unit
+scalingFactor: C:hbcu->scalingFactor
+measurementMethod: C:hbcu->measurementMethod
+observationPeriod: C:hbcu->observationPeriod
+typeOf: dcs:StatVarObservation
