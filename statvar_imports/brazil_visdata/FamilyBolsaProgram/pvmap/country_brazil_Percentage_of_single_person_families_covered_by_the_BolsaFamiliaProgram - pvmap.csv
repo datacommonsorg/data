@@ -1,0 +1,13 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,,,,
+Referência,observationDate,{Data},observationAbout,country/BRA,benefitProgram,Brazil_BolsaFamilyProgram,observationPeriod,P1M,,,,,,,,,,
+Total de famílias beneficiárias do PBF no mês anterior,value,{Number},benefitsStatus,Benefited,populationType,Household,householdMemberCount,[1 Person],name,"""Total number of families benefiting from the Bolsa Família Program in the previous month""",alternateName,"""Total de famílias beneficiárias do PBF no mês anterior@pt""",,,,,,
+Famílias unipessoais beneficiárias no mês anterior,value,{Number},benefitsStatus,Benefited,populationType,Household,householdMemberCount,[1 Person],name,"""Single-person beneficiary families in the previous month""",alternateName,"""Famílias unipessoais beneficiárias no mês anterior@pt""",,,,,,
+Percentual de famílias unipessoais beneficiárias,value,{Number},benefitsStatus,Benefited,populationType,Household,householdMemberCount,[1 Person],name,"""Percentage of single-person beneficiary families""",alternateName,"""Percentual de famílias unipessoais beneficiárias@pt""",unit,Percent,scalingFactor,100,measurementDenominator,"-householdMemberCount,-name,-alternateName"
+Municípios com 16% ou mais de famílias unipessoais beneficiárias,value,{Number},benefitsStatus,BeneficiaryFamilies16PercentOrMore,populationType,Household,householdMemberCount,[1 Person],name,"""Municipalities with 16% or more of single-person beneficiary families""",alternateName,"""Municípios com 16% ou mais de famílias unipessoais beneficiárias@pt""",,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
+4,,,,,,,,,,,,,,,,,,
