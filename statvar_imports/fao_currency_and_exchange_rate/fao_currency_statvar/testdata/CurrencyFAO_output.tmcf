@@ -1,8 +1,8 @@
-Node: E:CurrencyFAO_output->E0
-observationAbout: C:CurrencyFAO_output->observationAbout
-observationDate: C:CurrencyFAO_output->observationDate
-value: C:CurrencyFAO_output->value
-variableMeasured: C:CurrencyFAO_output->variableMeasured
-observationPeriod: C:CurrencyFAO_output->observationPeriod
-unit: C:CurrencyFAO_output->unit
+Node: E:fao_currency_output->E0
+observationAbout: C:fao_currency_output->observationAbout
+observationDate: C:fao_currency_output->observationDate
+value: C:fao_currency_output->value
+variableMeasured: C:fao_currency_output->variableMeasured
+observationPeriod: C:fao_currency_output->observationPeriod
+unit: C:fao_currency_output->unit
 typeOf: dcs:StatVarObservation

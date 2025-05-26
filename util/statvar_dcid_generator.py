@@ -285,6 +285,867 @@ _PREPEND_APPEND_REPLACE_MAP = {
     'lendingEntity': {
         'prepend': 'Lender',
     },
+    'USD': {
+        'prepend': 'FromCurrency',
+    },
+    'AED': {
+        'prepend': 'ToCurrency',
+    },
+    'AFA': {
+        'prepend': 'ToCurrency',
+    },
+    'AFN': {
+        'prepend': 'ToCurrency',
+    },
+    'AIF': {
+        'prepend': 'ToCurrency',
+    },
+    'ALL': {
+        'prepend': 'ToCurrency',
+    },
+    'AMD': {
+        'prepend': 'ToCurrency',
+    },
+    'ANG': {
+        'prepend': 'ToCurrency',
+    },
+    'AOA': {
+        'prepend': 'ToCurrency',
+    },
+    'AOK': {
+        'prepend': 'ToCurrency',
+    },
+    'AON': {
+        'prepend': 'ToCurrency',
+    },
+    'AOR': {
+        'prepend': 'ToCurrency',
+    },
+    'AOS': {
+        'prepend': 'ToCurrency',
+    },
+    'ARA': {
+        'prepend': 'ToCurrency',
+    },
+    'ARL': {
+        'prepend': 'ToCurrency',
+    },
+    'ARP': {
+        'prepend': 'ToCurrency',
+    },
+    'ARS': {
+        'prepend': 'ToCurrency',
+    },
+    'ATS': {
+        'prepend': 'ToCurrency',
+    },
+    'AUD': {
+        'prepend': 'ToCurrency',
+    },
+    'AWG': {
+        'prepend': 'ToCurrency',
+    },
+    'AZM': {
+        'prepend': 'ToCurrency',
+    },
+    'AZN': {
+        'prepend': 'ToCurrency',
+    },
+    'BAD': {
+        'prepend': 'ToCurrency',
+    },
+    'BAM': {
+        'prepend': 'ToCurrency',
+    },
+    'BAN': {
+        'prepend': 'ToCurrency',
+    },
+    'BBD': {
+        'prepend': 'ToCurrency',
+    },
+    'BDT': {
+        'prepend': 'ToCurrency',
+    },
+    'BEF': {
+        'prepend': 'ToCurrency',
+    },
+    'BGL': {
+        'prepend': 'ToCurrency',
+    },
+    'BGN': {
+        'prepend': 'ToCurrency',
+    },
+    'BHD': {
+        'prepend': 'ToCurrency',
+    },
+    'BIF': {
+        'prepend': 'ToCurrency',
+    },
+    'BMD': {
+        'prepend': 'ToCurrency',
+    },
+    'BND': {
+        'prepend': 'ToCurrency',
+    },
+    'BOB': {
+        'prepend': 'ToCurrency',
+    },
+    'BOP': {
+        'prepend': 'ToCurrency',
+    },
+    'BRB': {
+        'prepend': 'ToCurrency',
+    },
+    'BRC': {
+        'prepend': 'ToCurrency',
+    },
+    'BRE': {
+        'prepend': 'ToCurrency',
+    },
+    'BRL': {
+        'prepend': 'ToCurrency',
+    },
+    'BRN': {
+        'prepend': 'ToCurrency',
+    },
+    'BRR': {
+        'prepend': 'ToCurrency',
+    },
+    'BSD': {
+        'prepend': 'ToCurrency',
+    },
+    'BTN': {
+        'prepend': 'ToCurrency',
+    },
+    'BUK': {
+        'prepend': 'ToCurrency',
+    },
+    'BWP': {
+        'prepend': 'ToCurrency',
+    },
+    'BYB': {
+        'prepend': 'ToCurrency',
+    },
+    'BYN': {
+        'prepend': 'ToCurrency',
+    },
+    'BYR': {
+        'prepend': 'ToCurrency',
+    },
+    'BZD': {
+        'prepend': 'ToCurrency',
+    },
+    'BZH': {
+        'prepend': 'ToCurrency',
+    },
+    'CAD': {
+        'prepend': 'ToCurrency',
+    },
+    'CDF': {
+        'prepend': 'ToCurrency',
+    },
+    'CDZ': {
+        'prepend': 'ToCurrency',
+    },
+    'CHF': {
+        'prepend': 'ToCurrency',
+    },
+    'CKD': {
+        'prepend': 'ToCurrency',
+    },
+    'CLE': {
+        'prepend': 'ToCurrency',
+    },
+    'CLP': {
+        'prepend': 'ToCurrency',
+    },
+    'CNY': {
+        'prepend': 'ToCurrency',
+    },
+    'COP': {
+        'prepend': 'ToCurrency',
+    },
+    'CRC': {
+        'prepend': 'ToCurrency',
+    },
+    'CSD': {
+        'prepend': 'ToCurrency',
+    },
+    'CSK': {
+        'prepend': 'ToCurrency',
+    },
+    'CSX': {
+        'prepend': 'ToCurrency',
+    },
+    'CUP': {
+        'prepend': 'ToCurrency',
+    },
+    'CVE': {
+        'prepend': 'ToCurrency',
+    },
+    'CYP': {
+        'prepend': 'ToCurrency',
+    },
+    'CZK': {
+        'prepend': 'ToCurrency',
+    },
+    'DDM': {
+        'prepend': 'ToCurrency',
+    },
+    'DEM': {
+        'prepend': 'ToCurrency',
+    },
+    'DJF': {
+        'prepend': 'ToCurrency',
+    },
+    'DKK': {
+        'prepend': 'ToCurrency',
+    },
+    'DOP': {
+        'prepend': 'ToCurrency',
+    },
+    'DZD': {
+        'prepend': 'ToCurrency',
+    },
+    'ECS': {
+        'prepend': 'ToCurrency',
+    },
+    'EEK': {
+        'prepend': 'ToCurrency',
+    },
+    'EGP': {
+        'prepend': 'ToCurrency',
+    },
+    'ERN': {
+        'prepend': 'ToCurrency',
+    },
+    'ESP': {
+        'prepend': 'ToCurrency',
+    },
+    'ETB': {
+        'prepend': 'ToCurrency',
+    },
+    'ETD': {
+        'prepend': 'ToCurrency',
+    },
+    'EUR': {
+        'prepend': 'ToCurrency',
+    },
+    'FIM': {
+        'prepend': 'ToCurrency',
+    },
+    'FJD': {
+        'prepend': 'ToCurrency',
+    },
+    'FRF': {
+        'prepend': 'ToCurrency',
+    },
+    'GBP': {
+        'prepend': 'ToCurrency',
+    },
+    'GEK': {
+        'prepend': 'ToCurrency',
+    },
+    'GEL': {
+        'prepend': 'ToCurrency',
+    },
+    'GHC': {
+        'prepend': 'ToCurrency',
+    },
+    'GHR': {
+        'prepend': 'ToCurrency',
+    },
+    'GHS': {
+        'prepend': 'ToCurrency',
+    },
+    'GIP': {
+        'prepend': 'ToCurrency',
+    },
+    'GMD': {
+        'prepend': 'ToCurrency',
+    },
+    'GMP': {
+        'prepend': 'ToCurrency',
+    },
+    'GNF': {
+        'prepend': 'ToCurrency',
+    },
+    'GNI': {
+        'prepend': 'ToCurrency',
+    },
+    'GNS': {
+        'prepend': 'ToCurrency',
+    },
+    'GRD': {
+        'prepend': 'ToCurrency',
+    },
+    'GTQ': {
+        'prepend': 'ToCurrency',
+    },
+    'GWP': {
+        'prepend': 'ToCurrency',
+    },
+    'GYD': {
+        'prepend': 'ToCurrency',
+    },
+    'HKD': {
+        'prepend': 'ToCurrency',
+    },
+    'HNL': {
+        'prepend': 'ToCurrency',
+    },
+    'HRD': {
+        'prepend': 'ToCurrency',
+    },
+    'HRK': {
+        'prepend': 'ToCurrency',
+    },
+    'HTG': {
+        'prepend': 'ToCurrency',
+    },
+    'HUF': {
+        'prepend': 'ToCurrency',
+    },
+    'IDR': {
+        'prepend': 'ToCurrency',
+    },
+    'IEP': {
+        'prepend': 'ToCurrency',
+    },
+    'ILL': {
+        'prepend': 'ToCurrency',
+    },
+    'ILP': {
+        'prepend': 'ToCurrency',
+    },
+    'ILR': {
+        'prepend': 'ToCurrency',
+    },
+    'ILS': {
+        'prepend': 'ToCurrency',
+    },
+    'INR': {
+        'prepend': 'ToCurrency',
+    },
+    'IQD': {
+        'prepend': 'ToCurrency',
+    },
+    'IRR': {
+        'prepend': 'ToCurrency',
+    },
+    'ISJ': {
+        'prepend': 'ToCurrency',
+    },
+    'ISK': {
+        'prepend': 'ToCurrency',
+    },
+    'ITL': {
+        'prepend': 'ToCurrency',
+    },
+    'JMD': {
+        'prepend': 'ToCurrency',
+    },
+    'JOD': {
+        'prepend': 'ToCurrency',
+    },
+    'JPY': {
+        'prepend': 'ToCurrency',
+    },
+    'KES': {
+        'prepend': 'ToCurrency',
+    },
+    'KGS': {
+        'prepend': 'ToCurrency',
+    },
+    'KHO': {
+        'prepend': 'ToCurrency',
+    },
+    'KHR': {
+        'prepend': 'ToCurrency',
+    },
+    'KMF': {
+        'prepend': 'ToCurrency',
+    },
+    'KPW': {
+        'prepend': 'ToCurrency',
+    },
+    'KRW': {
+        'prepend': 'ToCurrency',
+    },
+    'KWD': {
+        'prepend': 'ToCurrency',
+    },
+    'KYD': {
+        'prepend': 'ToCurrency',
+    },
+    'KZT': {
+        'prepend': 'ToCurrency',
+    },
+    'LAJ': {
+        'prepend': 'ToCurrency',
+    },
+    'LAK': {
+        'prepend': 'ToCurrency',
+    },
+    'LAL': {
+        'prepend': 'ToCurrency',
+    },
+    'LAO': {
+        'prepend': 'ToCurrency',
+    },
+    'LBP': {
+        'prepend': 'ToCurrency',
+    },
+    'LKR': {
+        'prepend': 'ToCurrency',
+    },
+    'LNR': {
+        'prepend': 'ToCurrency',
+    },
+    'LRD': {
+        'prepend': 'ToCurrency',
+    },
+    'LSL': {
+        'prepend': 'ToCurrency',
+    },
+    'LTL': {
+        'prepend': 'ToCurrency',
+    },
+    'LTT': {
+        'prepend': 'ToCurrency',
+    },
+    'LUF': {
+        'prepend': 'ToCurrency',
+    },
+    'LVL': {
+        'prepend': 'ToCurrency',
+    },
+    'LVR': {
+        'prepend': 'ToCurrency',
+    },
+    'LYD': {
+        'prepend': 'ToCurrency',
+    },
+    'LYP': {
+        'prepend': 'ToCurrency',
+    },
+    'MAD': {
+        'prepend': 'ToCurrency',
+    },
+    'MDC': {
+        'prepend': 'ToCurrency',
+    },
+    'MDL': {
+        'prepend': 'ToCurrency',
+    },
+    'MDR': {
+        'prepend': 'ToCurrency',
+    },
+    'MGA': {
+        'prepend': 'ToCurrency',
+    },
+    'MKD': {
+        'prepend': 'ToCurrency',
+    },
+    'MKN': {
+        'prepend': 'ToCurrency',
+    },
+    'MLF': {
+        'prepend': 'ToCurrency',
+    },
+    'MMK': {
+        'prepend': 'ToCurrency',
+    },
+    'MNT': {
+        'prepend': 'ToCurrency',
+    },
+    'MOP': {
+        'prepend': 'ToCurrency',
+    },
+    'MRO': {
+        'prepend': 'ToCurrency',
+    },
+    'MRU': {
+        'prepend': 'ToCurrency',
+    },
+    'MTL': {
+        'prepend': 'ToCurrency',
+    },
+    'MUR': {
+        'prepend': 'ToCurrency',
+    },
+    'MVQ': {
+        'prepend': 'ToCurrency',
+    },
+    'MVR': {
+        'prepend': 'ToCurrency',
+    },
+    'MWK': {
+        'prepend': 'ToCurrency',
+    },
+    'MWP': {
+        'prepend': 'ToCurrency',
+    },
+    'MXN': {
+        'prepend': 'ToCurrency',
+    },
+    'MXP': {
+        'prepend': 'ToCurrency',
+    },
+    'MYR': {
+        'prepend': 'ToCurrency',
+    },
+    'MZE': {
+        'prepend': 'ToCurrency',
+    },
+    'MZM': {
+        'prepend': 'ToCurrency',
+    },
+    'MZN': {
+        'prepend': 'ToCurrency',
+    },
+    'NAD': {
+        'prepend': 'ToCurrency',
+    },
+    'NGN': {
+        'prepend': 'ToCurrency',
+    },
+    'NGP': {
+        'prepend': 'ToCurrency',
+    },
+    'NHF': {
+        'prepend': 'ToCurrency',
+    },
+    'NIC': {
+        'prepend': 'ToCurrency',
+    },
+    'NIG': {
+        'prepend': 'ToCurrency',
+    },
+    'NIO': {
+        'prepend': 'ToCurrency',
+    },
+    'NLG': {
+        'prepend': 'ToCurrency',
+    },
+    'NOK': {
+        'prepend': 'ToCurrency',
+    },
+    'NPR': {
+        'prepend': 'ToCurrency',
+    },
+    'NZD': {
+        'prepend': 'ToCurrency',
+    },
+    'OMR': {
+        'prepend': 'ToCurrency',
+    },
+    'OMS': {
+        'prepend': 'ToCurrency',
+    },
+    'PAB': {
+        'prepend': 'ToCurrency',
+    },
+    'PEI': {
+        'prepend': 'ToCurrency',
+    },
+    'PEN': {
+        'prepend': 'ToCurrency',
+    },
+    'PES': {
+        'prepend': 'ToCurrency',
+    },
+    'PGK': {
+        'prepend': 'ToCurrency',
+    },
+    'PHP': {
+        'prepend': 'ToCurrency',
+    },
+    'PKR': {
+        'prepend': 'ToCurrency',
+    },
+    'PLN': {
+        'prepend': 'ToCurrency',
+    },
+    'PLZ': {
+        'prepend': 'ToCurrency',
+    },
+    'PTE': {
+        'prepend': 'ToCurrency',
+    },
+    'PYG': {
+        'prepend': 'ToCurrency',
+    },
+    'QAR': {
+        'prepend': 'ToCurrency',
+    },
+    'ROL': {
+        'prepend': 'ToCurrency',
+    },
+    'RON': {
+        'prepend': 'ToCurrency',
+    },
+    'RSD': {
+        'prepend': 'ToCurrency',
+    },
+    'RUB': {
+        'prepend': 'ToCurrency',
+    },
+    'RUR': {
+        'prepend': 'ToCurrency',
+    },
+    'RWF': {
+        'prepend': 'ToCurrency',
+    },
+    'SAR': {
+        'prepend': 'ToCurrency',
+    },
+    'SBD': {
+        'prepend': 'ToCurrency',
+    },
+    'SCR': {
+        'prepend': 'ToCurrency',
+    },
+    'SDD': {
+        'prepend': 'ToCurrency',
+    },
+    'SDG': {
+        'prepend': 'ToCurrency',
+    },
+    'SDP': {
+        'prepend': 'ToCurrency',
+    },
+    'SEK': {
+        'prepend': 'ToCurrency',
+    },
+    'SGD': {
+        'prepend': 'ToCurrency',
+    },
+    'SIB': {
+        'prepend': 'ToCurrency',
+    },
+    'SIT': {
+        'prepend': 'ToCurrency',
+    },
+    'SKK': {
+        'prepend': 'ToCurrency',
+    },
+    'SLE': {
+        'prepend': 'ToCurrency',
+    },
+    'SLL': {
+        'prepend': 'ToCurrency',
+    },
+    'SOS': {
+        'prepend': 'ToCurrency',
+    },
+    'SRD': {
+        'prepend': 'ToCurrency',
+    },
+    'SRG': {
+        'prepend': 'ToCurrency',
+    },
+    'SSP': {
+        'prepend': 'ToCurrency',
+    },
+    'STD': {
+        'prepend': 'ToCurrency',
+    },
+    'STE': {
+        'prepend': 'ToCurrency',
+    },
+    'STN': {
+        'prepend': 'ToCurrency',
+    },
+    'SUR': {
+        'prepend': 'ToCurrency',
+    },
+    'SVC': {
+        'prepend': 'ToCurrency',
+    },
+    'SYP': {
+        'prepend': 'ToCurrency',
+    },
+    'SZL': {
+        'prepend': 'ToCurrency',
+    },
+    'THB': {
+        'prepend': 'ToCurrency',
+    },
+    'TJR': {
+        'prepend': 'ToCurrency',
+    },
+    'TJS': {
+        'prepend': 'ToCurrency',
+    },
+    'TMM': {
+        'prepend': 'ToCurrency',
+    },
+    'TMT': {
+        'prepend': 'ToCurrency',
+    },
+    'TND': {
+        'prepend': 'ToCurrency',
+    },
+    'TOP': {
+        'prepend': 'ToCurrency',
+    },
+    'TPE': {
+        'prepend': 'ToCurrency',
+    },
+    'TRL': {
+        'prepend': 'ToCurrency',
+    },
+    'TRY': {
+        'prepend': 'ToCurrency',
+    },
+    'TTD': {
+        'prepend': 'ToCurrency',
+    },
+    'TVD': {
+        'prepend': 'ToCurrency',
+    },
+    'TWD': {
+        'prepend': 'ToCurrency',
+    },
+    'TZS': {
+        'prepend': 'ToCurrency',
+    },
+    'UAH': {
+        'prepend': 'ToCurrency',
+    },
+    'UAK': {
+        'prepend': 'ToCurrency',
+    },
+    'UGS': {
+        'prepend': 'ToCurrency',
+    },
+    'UGX': {
+        'prepend': 'ToCurrency',
+    },
+    'USD': {
+        'prepend': 'ToCurrency',
+    },
+    'UYF': {
+        'prepend': 'ToCurrency',
+    },
+    'UYN': {
+        'prepend': 'ToCurrency',
+    },
+    'UYP': {
+        'prepend': 'ToCurrency',
+    },
+    'UYU': {
+        'prepend': 'ToCurrency',
+    },
+    'UZC': {
+        'prepend': 'ToCurrency',
+    },
+    'UZS': {
+        'prepend': 'ToCurrency',
+    },
+    'VDN': {
+        'prepend': 'ToCurrency',
+    },
+    'VEB': {
+        'prepend': 'ToCurrency',
+    },
+    'VED': {
+        'prepend': 'ToCurrency',
+    },
+    'VEF': {
+        'prepend': 'ToCurrency',
+    },
+    'VES': {
+        'prepend': 'ToCurrency',
+    },
+    'VND': {
+        'prepend': 'ToCurrency',
+    },
+    'VNN': {
+        'prepend': 'ToCurrency',
+    },
+    'VUV': {
+        'prepend': 'ToCurrency',
+    },
+    'WST': {
+        'prepend': 'ToCurrency',
+    },
+    'XAF': {
+        'prepend': 'ToCurrency',
+    },
+    'XCD': {
+        'prepend': 'ToCurrency',
+    },
+    'XOF': {
+        'prepend': 'ToCurrency',
+    },
+    'XPF': {
+        'prepend': 'ToCurrency',
+    },
+    'XSS': {
+        'prepend': 'ToCurrency',
+    },
+    'YDD': {
+        'prepend': 'ToCurrency',
+    },
+    'YER': {
+        'prepend': 'ToCurrency',
+    },
+    'YUD': {
+        'prepend': 'ToCurrency',
+    },
+    'YUF': {
+        'prepend': 'ToCurrency',
+    },
+    'YUM': {
+        'prepend': 'ToCurrency',
+    },
+    'YUN': {
+        'prepend': 'ToCurrency',
+    },
+    'YUR': {
+        'prepend': 'ToCurrency',
+    },
+    'ZAR': {
+        'prepend': 'ToCurrency',
+    },
+    'ZMK': {
+        'prepend': 'ToCurrency',
+    },
+    'ZMW': {
+        'prepend': 'ToCurrency',
+    },
+    'ZRN': {
+        'prepend': 'ToCurrency',
+    },
+    'ZRZ': {
+        'prepend': 'ToCurrency',
+    },
+    'ZWC': {
+        'prepend': 'ToCurrency',
+    },
+    'ZWD': {
+        'prepend': 'ToCurrency',
+    },
+    'ZWL': {
+        'prepend': 'ToCurrency',
+    },
+    'ZWN': {
+        'prepend': 'ToCurrency',
+    },
+    'ZWR': {
+        'prepend': 'ToCurrency',
+    },
+    'MYAD': {
+        'prepend': 'ToCurrency',
+    },
+    'XMCF': {
+        'prepend': 'ToCurrency',
+    },
+    'XPGR': {
+        'prepend': 'ToCurrency',
+    }
 }
 
 # This is a list of boolean properties
