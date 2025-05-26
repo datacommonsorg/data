@@ -17,8 +17,8 @@ Date: 8/30/2021
 Description: Utility to download all CDC 500 PLACES data.
 URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
 
-Files are stored in raw_data.
-
+Files are stored in input_files.
+gcs_output folder is the mount storage
 Run this script from this directory:
 python3 download_bulk.py
 """
@@ -34,7 +34,9 @@ from absl import flags
 from absl import app
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
+_GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+_UTIL_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_UTIL_DIR, '../../../util/'))
 import file_util
 
 _FLAGS = flags.FLAGS
@@ -75,7 +77,8 @@ def download_file(release_year, url: str, save_path: str):
 
 def main(_):
     """Main function to download the files."""
-    data_dir = os.path.join(os.getcwd(), 'raw_data')
+
+    data_dir = os.path.join(_GCS_OUTPUT_DIR, 'input_files')
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
     logging.set_verbosity(2)
@@ -88,4 +91,5 @@ def main(_):
 
 
 if __name__ == '__main__':
+    logging.set_verbosity(2)
     app.run(main)

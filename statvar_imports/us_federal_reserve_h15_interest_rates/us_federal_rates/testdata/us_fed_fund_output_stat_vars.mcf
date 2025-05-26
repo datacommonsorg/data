@@ -1,0 +1,18 @@
+# Auto generated using command: "../data/tools/statvar_importer/stat_var_processor.py --input_data=testdata/us_fed_input_1.csv --pv_map=us_fed_fund_pvmap.csv --config_file=us_fed_fund_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=testdata/us_fed_fund_output" on 2025-05-08 14:59:01.710324
+
+Node: dcid:InterestRate_FinancialInstrument_1Year_FederalFund
+typeOf: dcid:StatisticalVariable
+populationType: dcid:FinancialInstrument
+measuredProperty: dcid:interestRate
+statType: dcid:measuredValue
+instrumentTerm: [1 Year]
+instrumentType: dcid:FederalFund
+
+Node: dcid:Mean_PrimeRate_FinancialInstrument_1Year_BankLoan
+typeOf: dcid:StatisticalVariable
+populationType: dcid:FinancialInstrument
+measuredProperty: dcid:primeRate
+statType: dcid:meanValue
+instrumentTerm: [1 Year]
+instrumentType: dcid:BankLoan
+

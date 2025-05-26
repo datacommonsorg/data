@@ -29,6 +29,8 @@ owner_username and repo_name uniquely identify a repository. E.g., in
 and 'data' is the repo_name.
 """
 
+import dataclasses
+import json
 import os
 
 from absl import flags
@@ -79,6 +81,20 @@ flags.register_validator('import_name',
                          import_target.is_absolute_import_name,
                          message=('--import_name must be of the form '
                                   f'{_IMPORT_NAME_FORM}.'))
+flags.DEFINE_string('config_override', "config_override_test.json",
+                    'Config file with overridden parameters.')
+flags.DEFINE_string('repo_dir', None, 'Local repo directory.')
+
+
+def _override_configs(filename: str,
+                      config: configs.ExecutorConfig) -> configs.ExecutorConfig:
+    # Read configs from the local file.
+    d = json.load(open(filename))
+
+    # Update config with any fields and values provided in the local file.
+    # In case of any errors, the line below will raise an Exception which will
+    # report the problem which shoud be fixed in the local config json file.
+    return dataclasses.replace(config, **d["configs"])
 
 
 def main(_):
@@ -89,11 +105,13 @@ def main(_):
         github_auth_username=FLAGS.username,
         github_auth_access_token=FLAGS.access_token,
         user_script_env=os.environ)
+    config = _override_configs(FLAGS.config_override, config)
     executor = import_executor.ImportExecutor(
         uploader=file_uploader.LocalFileUploader(output_dir=FLAGS.output_dir),
         github=github_api.GitHubRepoAPI(config.github_repo_owner_username,
                                         config.github_repo_name),
-        config=config)
+        config=config,
+        local_repo_dir=FLAGS.repo_dir)
     results = executor.execute_imports_on_update(FLAGS.import_name)
     print(results)
 

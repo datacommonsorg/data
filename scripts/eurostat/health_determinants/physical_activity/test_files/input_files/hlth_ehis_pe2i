@@ -1,0 +1,5 @@
+freq,unit,quant_inc,duration,sex,age,geo\TIME_PERIOD	2014 	2019 
+A,PC,QU1,MN0,F,TOTAL,AT	29.4 	48.0 
+A,PC,QU1,MN0,F,TOTAL,BE	: 	68.6 
+A,PC,QU1,MN0,F,TOTAL,BG	95.7 	96.9 
+A,PC,QU1,MN0,F,TOTAL,CY	73.8 	78.8
