@@ -1,0 +1,9 @@
+Node: E:shdirje->E0
+observationAbout: C:shdirje->observationAbout
+observationDate: C:shdirje->observationDate
+variableMeasured: C:shdirje->variableMeasured
+value: C:shdirje->value
+unit: C:shdirje->unit
+scalingFactor: C:shdirje->scalingFactor
+observationPeriod: C:shdirje->observationPeriod
+typeOf: dcs:StatVarObservation

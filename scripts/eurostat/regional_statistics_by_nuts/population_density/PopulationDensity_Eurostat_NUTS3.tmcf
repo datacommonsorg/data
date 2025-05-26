@@ -1,3 +1,4 @@
+
 Node: E:EurostatNUTS3_DensityTracking->E0
 typeOf: dcs:StatVarObservation
 variableMeasured: dcs:Count_Person_PerArea
