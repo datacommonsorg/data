@@ -8,8 +8,5 @@
     },
     {
         "validation": "ADDED_COUNT"
-    },
-    {
-        "validation": "UNMODIFIED_COUNT"
     }
 ]
