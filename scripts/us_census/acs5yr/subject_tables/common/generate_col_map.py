@@ -431,19 +431,18 @@ class GenerateColMapBase:
 
         # check if all values that are not quantity ranges are prefixed
         for k, v in stat_var.items():
-            if v:
-                # if value is not a bracketed quantity range
-                if v[0] == '[' and v[-1] == ']':
-                    continue
-                # do not prefix units or scalingFactors
-                if k in ['unit', 'units', 'scalingFactor']:
-                    continue
-                # if value is not prefixed apriori with dcs: or schema:
-                elif 'schema:' in v or 'dcs:' in v or 'dcid:' in v:
-                    continue
-                # add dcs: prefix to the value
-                else:
-                    stat_var[k] = 'dcs:' + v
+            # if value is not a bracketed quantity range
+            if v[0] == '[' and v[-1] == ']':
+                continue
+            # do not prefix units or scalingFactors
+            if k in ['unit', 'units', 'scalingFactor']:
+                continue
+            # if value is not prefixed apriori with dcs: or schema:
+            elif 'schema:' in v or 'dcs:' in v or 'dcid:' in v:
+                continue
+            # add dcs: prefix to the value
+            else:
+                stat_var[k] = 'dcs:' + v
         return stat_var
 
     def _isvalid_column_map(self):
