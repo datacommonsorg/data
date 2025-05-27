@@ -154,7 +154,7 @@ def load_data(path: str, tmp_dir: str) -> pd.DataFrame:
     Returns:
       dataframe with the input data
     """
-    os.makedirs(tmp_dir, exist_ok=True)
     if path.startswith('gs://'):
+        os.makedirs(tmp_dir, exist_ok=True)
         path = get_gcs_data(path, tmp_dir)
     return load_mcf_files(path)

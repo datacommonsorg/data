@@ -137,10 +137,10 @@ class ImportDiffer:
         Returns:
           intermediate merged data for analysis
         """
-        cur_df_columns = current_df.columns.values.tolist()
         for column in self.groupby_columns:
-            if column not in cur_df_columns:
+            if column not in current_df.columns.values.tolist():
                 current_df[column] = ''
+            if column not in previous_df.columns.values.tolist():
                 previous_df[column] = ''
         df1 = previous_df.loc[:, self.groupby_columns + self.value_columns]
         df2 = current_df.loc[:, self.groupby_columns + self.value_columns]
