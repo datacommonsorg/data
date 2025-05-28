@@ -287,7 +287,10 @@ class SubjectTableDataLoaderBase:
         }
 
         csv_file = open(self.clean_csv_path, 'a')
-        place_geoIds = df['id'].apply(convert_to_place_dcid)
+        if 'id' in df.columns:
+            place_geoIds = df['id'].apply(convert_to_place_dcid)
+        else:
+            place_geoIds = df['Geography'].apply(convert_to_place_dcid)
 
         # update the clean csv
         for column in df.columns.tolist():
