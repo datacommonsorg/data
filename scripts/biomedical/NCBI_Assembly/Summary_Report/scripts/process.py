@@ -399,14 +399,18 @@ def group(df):
 def set_flags():
     global _FLAGS
     _FLAGS = flags.FLAGS
-    flags.DEFINE_string('output_dir', 'output',
+    flags.DEFINE_string('output_dir', 'scripts/output',
                         'Output directory for generated files.')
-    flags.DEFINE_string('input_dir', 'input/assembly_summary_genbank.txt',
+    flags.DEFINE_string('input_dir',
+                        'scripts/input/assembly_summary_genbank.txt',
                         'Input directory where .txt files downloaded.')
-    flags.DEFINE_string('input_dir1', 'input/assembly_summary_refseq.txt',
+    flags.DEFINE_string('input_dir1',
+                        'scripts/input/assembly_summary_refseq.txt',
                         'Output directory for generated files.')
-    flags.DEFINE_string('tax_id_dcid_mapping', 'tax_id_dcid_mapping.txt',
-                        'Input directory where .txt files downloaded.')
+    flags.DEFINE_string(
+        'tax_id_dcid_mapping',
+        'gs://datcom-prod-imports/scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mapping.txt',
+        'Input directory where .txt files downloaded.')
 
 
 def preprocess_data(df):
@@ -452,10 +456,25 @@ def main(_FLAGS):
            df['assembly_accession'].isin(ref_gbrs_paired_asm),
            'gbrs_paired_asm'] = df['assembly_accession']
 
-    with open(tax_id_dcid_mapping, 'r') as file:
-        csv_reader = csv.DictReader(file)
-        for row in csv_reader:
-            TAX_ID_DCID_MAPPING[int(row['tax_id'])] = row['dcid']
+    # with open(tax_id_dcid_mapping, 'r') as file:
+    #     csv_reader = csv.DictReader(file)
+    #     for row in csv_reader:
+    #         TAX_ID_DCID_MAPPING[int(row['tax_id'])] = row['dcid']
+    from google.cloud import storage
+    storage_client = storage.Client()
+    bucket_name = 'datcom-prod-imports'
+    bucket = storage_client.bucket(bucket_name)
+    blob_name = 'scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mapping.txt'
+    blob = bucket.blob(blob_name)
+
+    # Download the file contents as a string.
+    file_contents = blob.download_as_text()
+
+    # Create a CSV reader from the string.
+    csv_reader = csv.DictReader(file_contents.splitlines())
+
+    for row in csv_reader:
+        TAX_ID_DCID_MAPPING[int(row['tax_id'])] = row['dcid']
 
     df = preprocess_data(df)
     file_output = os.path.join(file_output, 'ncbi_assembly_summary.csv')
