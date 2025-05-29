@@ -430,7 +430,7 @@ class ImportExecutor:
                         project_id=self.config.gcp_project_id,
                         job_name=differ_job_name,
                         file_format='mcf',
-                        runner_mode='local')
+                        runner_mode='native')
                     differ.run_differ()
 
                     logging.info('Invoking validation script...')
