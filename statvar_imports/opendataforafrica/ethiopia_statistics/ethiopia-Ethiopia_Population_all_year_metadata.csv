@@ -14,5 +14,3 @@ header_rows,1
 drop_statvars_without_svobs,0
 mapped_rows,1
 mapped_columns,4
-#input_rows,19
-#process_rows,2.3623723823924E+023

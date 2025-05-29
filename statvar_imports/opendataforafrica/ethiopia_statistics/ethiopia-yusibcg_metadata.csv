@@ -1,10 +1,10 @@
 parameter,value
 url,https://ethiopia.opendataforafrica.org/yusibcg/demographic-and-health-survey-2014-ethiopia
-description,
-#place_type,
-#places_within,
-start_date,
-end_date,
+description,"The dataset contains information on education, occupation, birth rates, and other demographic parameters from the Ethiopia census."
+#place_type,"country, state"
+#places_within,Ethiopia
+start_date,2011
+end_date,2014
 release_frequency,
 process,"Click on the url. select all check boxes in region, variable, wealth index, age, sex. Click on the Export on the title bar and select the .xlsx to download. Click on the export blue button."
 comments,
@@ -14,6 +14,4 @@ header_rows,1
 drop_statvars_without_svobs,0
 mapped_rows,1
 mapped_columns,14
-#input_rows,500
 word_delimiter,""""""
-#process_rows,"1, 4137, 4138, 4139"
