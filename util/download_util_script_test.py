@@ -15,7 +15,6 @@
 #     sys.path.insert(0, _SCRIPT_DIR)
 #     import statvar_download_util
 
-
 # class TestStatVarDownloader(unittest.TestCase):
 
 #     def setUp(self):
@@ -138,7 +137,6 @@
 #             # Check if subdirs within tmpdir were created (they shouldn't be)
 #             self.assertEqual(len(os.listdir(destination_path)), 0, "No files or subdirs should be created in dest path on failure.")
 
-
 #     @patch('requests.get')
 #     @patch('time.sleep', return_value=None) # Mock time.sleep to avoid delays
 #     def test_download_failure_request_exception(self, mock_sleep, mock_get):
@@ -193,7 +191,6 @@
 #             with open(expected_output_path, 'rb') as f:
 #                 self.assertEqual(f.read(), b'Success on retry', "File content should match the successful response.")
 
-
 #     def test_download_failure_no_url(self):
 #         """Test behavior when no URL is provided."""
 #         downloader = statvar_download_util.StatVarDownloader()
@@ -209,7 +206,6 @@
 #                 self.assertFalse(success)
 #             self.assertIn("URL must be provided.", log.output[0])
 
-
 #     def test_download_failure_cannot_infer_filename(self):
 #         """Test failure when filename cannot be inferred from URL."""
 #         downloader = statvar_download_util.StatVarDownloader()
@@ -221,10 +217,9 @@
 #                 self.assertFalse(success)
 #             self.assertIn("Unable to infer filename from URL.", log.output[0])
 
-
 # if __name__ == '__main__':
 #     unittest.main()
-    
+
 import unittest
 import os
 import requests_mock
@@ -233,7 +228,9 @@ from absl.testing import flagsaver
 import zipfile
 import shutil
 import download_util_script
+
 FLAGS = flags.FLAGS
+
 
 class DownloadFileTest(unittest.TestCase):
 
@@ -241,7 +238,7 @@ class DownloadFileTest(unittest.TestCase):
         self.temp_dir = "test_output"
         os.makedirs(self.temp_dir, exist_ok=True)
         self.saved_flag_values = flagsaver.save_flag_values()
-        
+
     def tearDown(self):
         if os.path.exists(self.temp_dir):
             shutil.rmtree(self.temp_dir)
@@ -252,9 +249,9 @@ class DownloadFileTest(unittest.TestCase):
         url = "http://example.com/test.txt"
         file_content = b"This is a test file."
         mock.get(url, content=file_content)
-        
+
         download_util_script.download_file(url, self.temp_dir, False)
-        
+
         file_path = os.path.join(self.temp_dir, "test.txt")
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, "rb") as f:
@@ -265,9 +262,9 @@ class DownloadFileTest(unittest.TestCase):
         url = "http://example.com/test"
         file_content = b"This is a test file without extension."
         mock.get(url, content=file_content)
-        
+
         download_util_script.download_file(url, self.temp_dir, False)
-        
+
         file_path = os.path.join(self.temp_dir, "test.xlsx")
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, "rb") as f:
@@ -292,6 +289,7 @@ class DownloadFileTest(unittest.TestCase):
             zf.writestr("test_file.txt", "test content")
         with open(test_zip_file, "rb") as f:
             return f.read()
+
 
 if __name__ == '__main__':
     unittest.main()
