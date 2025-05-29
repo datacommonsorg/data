@@ -1,0 +1,5 @@
+variableMeasured,added,deleted,modified,same,total
+dcid:Max_Concentration_AirPollutant_Ozone,1,0,0,0,1
+dcid:Mean_Concentration_AirPollutant_CO,0,2,1,1,4
+dcid:Mean_Concentration_AirPollutant_Ozone,0,0,1,0,1
+dcid:Min_Concentration_AirPollutant_Ozone,0,2,0,0,2

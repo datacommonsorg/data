@@ -108,7 +108,11 @@ def add_key_value(
     if not append_value and not overwrite and key in pvs:
         # Do not add value if one exists and overwrite and append is disabled.
         return pvs
-    return add_pv_to_node(key, value, pvs, append_value=append_value, normalize=normalize)
+    return add_pv_to_node(key,
+                          value,
+                          pvs,
+                          append_value=append_value,
+                          normalize=normalize)
 
 
 def get_value_as_list(value: str) -> Union[str, list]:
@@ -150,5 +154,3 @@ def get_delimiter_char(re_delimiter: str) -> str:
         if re_delimiter[0] == '[':
             return re_delimiter[1]
     return ' '
-
-

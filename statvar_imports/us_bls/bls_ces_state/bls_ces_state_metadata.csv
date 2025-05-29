@@ -1,0 +1,11 @@
+parameter,value
+url,https://data.bls.gov/pdq/SurveyOutputServlet
+description,"Employment, Hours, and Earnings from the Current Employment Statistics survey (State)"
+#place_type,state and county
+#places_within,country/USA
+start_date,2020
+end_date,2025
+output_columns,"observationAbout,observationDate,value,variableMeasured,observationPeriod,measurementMethod,unit,#input"
+,
+mapped_rows,1
+mapped_columns,5

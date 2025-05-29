@@ -25,22 +25,24 @@ import os
 import pandas as pd
 from absl import app
 from absl import flags
+from absl import logging
+from typing import IO, Iterator
+import python_calamine
+import requests
+from retry import retry
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('income_output_dir', 'csv', 'Path to write cleaned CSVs.')
+flags.DEFINE_string('income_output_dir', 'output',
+                    'Path to write cleaned CSVs.')
+flags.DEFINE_string('input_files', 'input', 'Path to download input CSVs.')
+flags.DEFINE_string('mode', '',
+                    'Mode: "download", "process", or both (default: both).')
 
 URL_PREFIX = 'https://www.huduser.gov/portal/datasets/il/il'
 
 
 def get_url(year):
-    '''Return xls url for year.
-
-  Args:
-    year: Input year.
-
-  Returns:
-    xls url for given year.
-  '''
+    '''Returns xls url for year.'''
     if year < 2006:
         return ''
     suffix = str(year)[-2:]
@@ -60,72 +62,116 @@ def get_url(year):
         return f'{URL_PREFIX}07/Section8-rev.xls'
     elif year == 2006:
         return f'{URL_PREFIX}06/Section8FY2006.xls'
-    else:
-        return ''
+    return ''
 
 
-def compute_150(df, person):
-    '''Compute 150th percentile income in-place.
-
-  Args:
-    df: Input dataframe (will be modified).
-    person: Number of people in household.
-  '''
-    df[f'l150_{person}'] = df.apply(
-        lambda x: round(x[f'l80_{person}'] / 80 * 150), axis=1)
+@retry(tries=5, delay=5, backoff=2)
+def download_with_retry(url):
+    '''Retries downloading a file up to 5 times with exponential backoff.'''
+    logging.info(f"Downloading URL: {url}")
+    return requests.get(url, verify=False)
 
 
-def process(year, matches, output_dir):
-    '''Generate cleaned CSV.
-
-  Args:
-    year: Input year.
-    matches: Map of fips dcid -> city dcid.
-    output_dir: Directory to write cleaned CSV.
-  '''
-    url = get_url(year)
+def download_file(url: str, filename: str, input_folder: str):
+    '''Download file and save it locally.'''
     try:
-        df = pd.read_excel(url)
-    except:
-        print(f'No file found for {url}.')
-        return
+        if not os.path.exists(input_folder):
+            os.makedirs(input_folder)
+        file_path = os.path.join(input_folder, filename)
+        response = download_with_retry(url)
+        if response.status_code == 200:
+            with open(file_path, 'wb') as file:
+                file.write(response.content)
+            logging.info(f"Downloaded file: {file_path}")
+        else:
+            logging.fatal(
+                f"Failed to download from {url}, status code {response.status_code}"
+            )
+    except Exception as e:
+        logging.fatal(f"Failed to download {url}: {str(e)}")
+
+
+def iter_excel_calamine(file: IO[bytes]) -> Iterator[dict[str, object]]:
+    '''Reads Excel file using python_calamine.'''
+    workbook = python_calamine.CalamineWorkbook.from_filelike(file)
+    rows = iter(workbook.get_sheet_by_index(0).to_python())
+    headers = list(map(str, next(rows)))
+    for row in rows:
+        yield dict(zip(headers, row))
+
+
+def process(year, matches, input_folder):
+    '''Generate cleaned CSV.'''
+    url = get_url(year)
+    filename = f"Section8-FY{year}.xlsx" if year > 2016 else f"Section8-FY{year}.xls"
+    try:
+        with open(os.path.join(input_folder, filename), 'rb') as f:
+            rows = iter_excel_calamine(f)
+            data = list(rows)
+        df = pd.DataFrame(data)
+    except Exception as e:
+        logging.fatal(f'Error in processing {year}: {url} {e}.')
+        return None
+
     if 'fips2010' in df:
         df = df.rename(columns={'fips2010': 'fips'})
-
-    # Filter to 80th percentile income stats for each household size.
-    df = df.loc[:, [
-        'fips', 'l80_1', 'l80_2', 'l80_3', 'l80_4', 'l80_5', 'l80_6', 'l80_7',
-        'l80_8'
-    ]]
-
-    df['fips'] = df.apply(lambda x: 'dcs:geoId/' + str(x['fips']).zfill(10),
-                          axis=1)
-    df['fips'] = df.apply(lambda x: x['fips'][:-5]
-                          if x['fips'][-5:] == '99999' else x['fips'],
-                          axis=1)
+    df = df.loc[:, ['fips'] + [f'l80_{i}' for i in range(1, 9)]]
+    df['fips'] = df['fips'].apply(lambda x: f'dcs:geoId/{str(x).zfill(5)}')
+    df['fips'] = df['fips'].apply(lambda x: x[:-5] if x[-5:] == '99999' else x)
     for i in range(1, 9):
-        compute_150(df, i)
-    df['year'] = [year for i in range(len(df))]
-
-    # Add stats for matching dcids.
-    df_match = df.copy().loc[df['fips'].isin(matches)]
+        df[f'l150_{i}'] = df[f'l80_{i}'] * 1.875
+    df['year'] = year
+    df_match = df[df['fips'].isin(matches)].copy()
     if not df_match.empty:
-        df_match['fips'] = df_match.apply(lambda x: matches[x['fips']], axis=1)
+        df_match['fips'] = df_match['fips'].map(matches)
         df = pd.concat([df, df_match])
+    return df
 
-    df.to_csv(os.path.join(output_dir, f'output_{year}.csv'), index=False)
 
-
-def main(argv):
+def process_all():
+    '''Processes all years based on mode flag.'''
     with open('match_bq.csv') as f:
         reader = csv.DictReader(f)
         matches = {'dcs:' + row['fips']: 'dcs:' + row['city'] for row in reader}
-    if not os.path.exists(FLAGS.income_output_dir):
-        os.makedirs(FLAGS.income_output_dir)
+
     today = datetime.date.today()
-    for year in range(2006, today.year):
-        print(year)
-        process(year, matches, FLAGS.income_output_dir)
+    input_folder = FLAGS.input_files
+    output_data = []
+
+    if FLAGS.mode == "" or FLAGS.mode == "download":
+        logging.info("Starting download phase...")
+        for year in range(2006, today.year):
+            url = get_url(year)
+            if url:
+                filename = f"Section8-FY{year}.xlsx" if year > 2016 else f"Section8-FY{year}.xls"
+                download_file(url, filename, input_folder)
+
+    if FLAGS.mode == "" or FLAGS.mode == "process":
+        logging.info("Starting processing phase...")
+        for year in range(2006, today.year):
+            if not os.path.exists(
+                    os.path.join(
+                        input_folder, f"Section8-FY{year}.xlsx"
+                        if year > 2016 else f"Section8-FY{year}.xls")):
+                logging.warning(f"File not found for year {year}")
+                continue
+            df = process(year, matches, input_folder)
+            if df is not None:
+                output_data.append(df)
+
+        if output_data:
+            final_df = pd.concat(output_data, ignore_index=True)
+            os.makedirs(FLAGS.income_output_dir, exist_ok=True)
+            final_df.to_csv(os.path.join(FLAGS.income_output_dir,
+                                         'output_all_years.csv'),
+                            index=False)
+            logging.info(
+                f'Merged data saved to {FLAGS.income_output_dir}/output_all_years.csv'
+            )
+
+
+def main(argv):
+    process_all()
 
 
 if __name__ == '__main__':

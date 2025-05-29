@@ -26,6 +26,7 @@ from google.cloud import scheduler_v1
 from google.protobuf import json_format
 from google.api_core.exceptions import AlreadyExists, NotFound
 
+CLOUD_RUN_SERVICE_ACCOUNT = os.getenv('CLOUD_SCHEDULER_CALLER_SA')
 GKE_SERVICE_DOMAIN = os.getenv('GKE_SERVICE_DOMAIN',
                                'importautomation.datacommons.org')
 GKE_CALLER_SERVICE_ACCOUNT = os.getenv('CLOUD_SCHEDULER_CALLER_SA')
@@ -50,15 +51,38 @@ def _base_job_request(absolute_import_name, schedule: str):
             # 30m is the max allowed deadline
             'seconds': 60 * 30
         }
-        # <'http_request'|'appengine_job_request'>: {...}
+        # <'gke_job_request'|'appengine_job_request'|'cloud_run_job_request'>: {...}
     }
 
 
-def http_job_request(absolute_import_name,
-                     schedule,
-                     json_encoded_job_body: str,
-                     gke_caller_service_account: str = "",
-                     gke_oauth_audience: str = "") -> Dict:
+def cloud_run_job_request(absolute_import_name, schedule,
+                          cloud_run_job_url: str,
+                          cloud_run_service_account: str) -> Dict:
+    """Cloud Scheduler request that targets jobs in CLOUD_RUN."""
+    json_encoded_job_body = json.dumps({}).encode("utf-8")
+    job = _base_job_request(absolute_import_name, schedule)
+    job_name = absolute_import_name.split(':')[1]
+    job['name'] = f'{job_name}'
+    job['http_target'] = {
+        'uri': f'https://{cloud_run_job_url}',
+        'http_method': 'POST',
+        'headers': {
+            'Content-Type': 'application/json',
+        },
+        'body': json_encoded_job_body,
+        'oauth_token': {
+            'service_account_email': f'{cloud_run_service_account}',
+            'scope': 'https://www.googleapis.com/auth/cloud-platform'
+        }
+    }
+    return job
+
+
+def gke_job_request(absolute_import_name,
+                    schedule,
+                    json_encoded_job_body: str,
+                    gke_caller_service_account: str = "",
+                    gke_oauth_audience: str = "") -> Dict:
     """Cloud Scheduler request that targets executors launched in GKE."""
 
     # If the service account and oauth audience are provided as

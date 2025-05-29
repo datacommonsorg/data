@@ -188,15 +188,15 @@ class PropertyValueMapper:
                             #pvs[prop] = value
                             normalize = True
                             if '#' in prop or '=' in value:
-                              # Value is a formula. e value as a string.
-                              normalize = False
-                            pv_utils.add_key_value(
-                                prop,
-                                value,
-                                pvs,
-                                self._config.get('multi_value_properties', {}),
-                                normalize=normalize
-                            )
+                                # Value is a formula. e value as a string.
+                                normalize = False
+                            pv_utils.add_key_value(prop,
+                                                   value,
+                                                   pvs,
+                                                   self._config.get(
+                                                       'multi_value_properties',
+                                                       {}),
+                                                   normalize=normalize)
                         pv_map_input[key] = pvs
         else:
             logging.info(
@@ -245,7 +245,7 @@ class PropertyValueMapper:
         return self._pv_map
 
     def process_pvs_for_data(self, key: str, pvs: dict) -> bool:
-      """Processes property:value and returns true if processed successfully.
+        """Processes property:value and returns true if processed successfully.
 
     Processes values for actionable props such as '#Regex', '#Eval', '#Format'.
     Args: pvs (input/output) dictionary of property:values Properties such as

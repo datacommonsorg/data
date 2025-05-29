@@ -28,14 +28,23 @@ import json
 from datetime import datetime as dt
 from absl import logging
 from absl import flags
+from retry import retry
+from google.cloud import storage  # GCS Client
+import tempfile
 
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('mode', '', 'Options: download or process')
+flags.DEFINE_string('config_path', '',
+                    'Path to the configuration file in the GCS bucket.')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
+_INPUT_URL_JSON = "input_url.json"
 _FILES_TO_DOWNLOAD = None
+_GCS_OUTPUT_PERSISTENT_PATH = os.path.join(
+    _MODULE_DIR, 'gcs_output/us_pep_sex_source_files')
+_GCS_BASE_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
 
 sys.path.insert(1, os.path.join(_MODULE_DIR, '../../../../'))
 # pylint: disable=wrong-import-position
@@ -48,7 +57,7 @@ _USSTATE_SHORT_FORM = statetoshortform.USSTATE_MAP
 
 _FLAGS = flags.FLAGS
 default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                  "input_files")
+                                  "gcs_output/us_pep_sex_source_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{pv1}\n"
@@ -74,6 +83,18 @@ _COLUMNS_TO_SUM = [
     '60 to 64 years', '65 to 69 years', '70 to 74 years', '75 to 79 years',
     '80 to 84 years', '85 years and over'
 ]
+
+
+#Extract the bucket name and path from the config_path flag
+def extract_gcs_info():
+    parts = _FLAGS.config_path.split('/', 1)
+    if len(parts) != 2:
+        raise ValueError(
+            "Invalid GCS config_path format. Expected 'bucket_name/path/to/object'."
+        )
+    gcs_bucket_name = parts[0]
+    gcs_object_path = parts[1]
+    return gcs_bucket_name, gcs_object_path
 
 
 def _states_full_to_short_form(data_df: pd.DataFrame,
@@ -535,7 +556,7 @@ def _state_2010_2020(file_path: str) -> pd.DataFrame:
 
         df = df[(df['Year'] != 'April2010Census') &
                 (df['Year'] != 'April2010Estimate') &
-                (df['Year'] != 'April2020')]
+                (df['Year'] != 'April2020') & (df['Year'] != '2020')]
         df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey_PartialAggregate'
         return df
     except Exception as e:
@@ -563,16 +584,20 @@ def _state_latest(file_path: str) -> pd.DataFrame:
         'July2020Male',
         'July2020Female',
     ]
-    # Adding year-specific columns dynamically till current year
-    current_year = dt.now().year
+    # Adding year-specific columns dynamically till latest year
+    df = pd.read_excel(file_path, engine='openpyxl')
+
+    fourth_row_list = df.iloc[2].tolist()
+    max_year = np.nanmax(fourth_row_list) if any(
+        not pd.isna(i) for i in fourth_row_list) else np.nan
+
+    df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
+    current_year = int(max_year) + 1
     for year in range(2021, current_year):
         if current_year < 2030:
             base_columns.append(f'July{year}Total')
             base_columns.append(f'July{year}Male')
             base_columns.append(f'July{year}Female')
-
-    # Load the data with no column names initially
-    df = pd.read_excel(file_path, skiprows=5, skipfooter=7, header=None)
 
     # Assign dynamic column names
     df.columns = base_columns
@@ -984,8 +1009,7 @@ class PopulationEstimateBySex:
         logging.info(f"No of files to be processed {len(ip_files)}")
         for file_path in ip_files:
             logging.info(f"Processing the file:{file_path}")
-            if 'pe-02-1983.csv' in file_path or 'pe-02-1982.csv' in file_path:
-                pass
+            processed_count += 1
             # Taking the File name out of the complete file address
             # Used -1 to pickup the last part which is file name
             # Read till -4 inorder to remove the .tsv extension
@@ -1050,9 +1074,9 @@ class PopulationEstimateBySex:
             df = file_to_function_mapping[file_name](file_path)
 
             if not df.empty:
-                processed_count += 1
                 final_df = pd.concat([final_df, df])
                 final_df = final_df.sort_values(by=['Year', 'geo_ID'])
+                logging.info(f'Processed the file:{file_path}')
             else:
                 logging.fatal(f"Failed to process {file_path}")
 
@@ -1073,10 +1097,39 @@ class PopulationEstimateBySex:
             sv_list = ['Count_Person_Female', 'Count_Person_Male']
             self._generate_mcf(sv_list)
             self._generate_tmcf()
+            logging.info(f'Processing is completed successfully!')
         else:
             logging.fatal(
                 "Aborting output files as no of files to process not matching processed files"
             )
+
+
+def fetch_skip_urls_from_gcs(GCS_BUCKET_NAME: str,
+                             GCS_SKIP_FILE_PATH: str) -> list:
+    """Fetch skip_url.json from GCS and return list of URLs to skip."""
+    client = storage.Client()
+    bucket = client.bucket(GCS_BUCKET_NAME)
+    blob = bucket.blob(GCS_SKIP_FILE_PATH)
+    data = blob.download_as_text()
+    skip_urls = json.loads(data)
+    return skip_urls
+
+
+def is_valid_url(url):
+    try:
+        response = requests.get(url, timeout=10)
+        if response.status_code != 200:
+            return False
+        content_type = response.headers.get("Content-Type", "")
+        if "text/html" in content_type:
+            # Might be an error page disguised as 200
+            if b"error" in response.content.lower() or len(
+                    response.content) < 500:
+                return False
+        return True
+    except Exception as e:
+        logging.fatal(f"Error checking URL: {url} - {e}")
+        return False
 
 
 def add_future_year_urls():
@@ -1092,6 +1145,27 @@ def add_future_year_urls():
     with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
         _FILES_TO_DOWNLOAD = json.load(inpit_file)
 
+    GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH = extract_gcs_info()
+    # Read URLs from the GCS-hosted config file
+
+    # Fetch skip urls from GCS
+    skip_urls = fetch_skip_urls_from_gcs(GCS_BUCKET_NAME, GCS_SKIP_FILE_PATH)
+
+    logging.info(f"Fetched {len(skip_urls)} URLs to skip from GCS.")
+    logging.info(f"Urls fetched from the json to skip:{skip_urls}")
+
+    #Filter based on skip list + live URL check
+    _FILES_TO_DOWNLOAD = [
+        url for url in _FILES_TO_DOWNLOAD
+        if (url["download_path"] not in skip_urls  # not suspicious, keep it
+            or (url["download_path"] in skip_urls and is_valid_url(
+                url["download_path"]))  # suspicious, but passes check
+           )
+    ]
+
+    logging.info(
+        f"Historical urls Fetched from input_json:{_FILES_TO_DOWNLOAD}")
+
     # List of URLs with placeholders for {YEAR} and {i}
     urls_to_scan = [
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/national/asrh/nc-est{YEAR}-agesex-res.csv",  # No {i}
@@ -1103,35 +1177,17 @@ def add_future_year_urls():
     # A set to track downloaded URLs for unique {YEAR} and URLs without {i}
     downloaded_year_urls = set()
 
-    # This method will generate URLs for the years 2024 to 2029
-    for future_year in range(2023, 2030):
-        if dt.now().year > future_year:
-            YEAR = future_year
-            # Loop through URLs
-            for url in urls_to_scan:
-                if "{i}" in url:  # This URL contains the {i} variable, so we loop through i from 01 to 56
-                    for i in range(1, 57):  # Loop i from 01 to 56
-                        formatted_i = f"{i:02}"  # Ensure i is always 2 digits (01, 02, ..., 56)
-                        url_to_check = url.format(YEAR=YEAR, i=formatted_i)
+    # Loop through years in reverse order from 2030 to 2023
+    for future_year in range(2030, 2022, -1):  # From 2030 to 2023
 
-                        try:
-                            check_url = requests.head(url_to_check,
-                                                      allow_redirects=True)
-                            if check_url.status_code == 200:
-                                _FILES_TO_DOWNLOAD.append(
-                                    {"download_path": url_to_check})
-
-                        except requests.exceptions.RequestException as e:
-                            logging.fatal(
-                                f"URL is not accessible {url_to_check} due to {e}"
-                            )
-
-                else:  # This URL does not contain {i}, so we only need to process it once per year
-                    url_to_check = url.format(YEAR=YEAR)
-
-                    # If the URL has already been processed for this year, skip it
-                    if url_to_check in downloaded_year_urls:
-                        continue  # Skip this URL if it's already processed
+        YEAR = future_year
+        # Loop through URLs
+        for url in urls_to_scan:
+            if "{i}" in url:  # This URL contains the {i} variable, so we loop through i from 01 to 56
+                for i in range(1, 57):  # Loop i from 01 to 56
+                    formatted_i = f"{i:02}"  # Ensure i is always 2 digits (01, 02, ..., 56)
+                    url_to_check = url.format(YEAR=YEAR, i=formatted_i)
+                    logging.info(f"checking url: {url_to_check}")
 
                     try:
                         check_url = requests.head(url_to_check,
@@ -1139,65 +1195,110 @@ def add_future_year_urls():
                         if check_url.status_code == 200:
                             _FILES_TO_DOWNLOAD.append(
                                 {"download_path": url_to_check})
-                            downloaded_year_urls.add(
-                                url_to_check)  # Mark this URL as processed
-
-                        else:
-                            logging.fatal(
-                                f"URL returned status code {check_url.status_code}: {url_to_check}"
-                            )
 
                     except requests.exceptions.RequestException as e:
-                        logging.fatal(
+                        logging.error(
                             f"URL is not accessible {url_to_check} due to {e}")
 
+            else:  # This URL does not contain {i}, so we only need to process it once per year
+                url_to_check = url.format(YEAR=YEAR)
+                logging.info(f"checking url: {url_to_check}")
+                # If the URL has already been processed for this year, skip it
+                if url_to_check in downloaded_year_urls:
+                    continue  # Skip this URL if it's already processed
 
+                try:
+                    check_url = requests.head(url_to_check,
+                                              allow_redirects=True)
+                    if check_url.status_code == 200:
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": url_to_check})
+                        downloaded_year_urls.add(
+                            url_to_check)  # Mark this URL as processed
+
+                    else:
+                        logging.error(
+                            f"URL returned status code {check_url.status_code}: {url_to_check}"
+                        )
+
+                except requests.exceptions.RequestException as e:
+                    logging.error(
+                        f"URL is not accessible {url_to_check} due to {e}")
+
+
+@retry(tries=3,
+       delay=2,
+       backoff=2,
+       exceptions=(requests.RequestException, Exception))
 def download_files():
     """
-    This method download the files and if there any file/files is not downloaded throws an exception
-    Args : None
-    Return : None
-
+    Download files from URLs listed in _FILES_TO_DOWNLOAD.
+    Skips URLs listed in skip_url.json from GCS.
     """
     global _FILES_TO_DOWNLOAD
     session = requests.session()
-    max_retry = 5
-    for file_to_dowload in _FILES_TO_DOWNLOAD:
+
+    #Get set of already downloaded files
+    downloaded_files = set(os.listdir(_GCS_OUTPUT_PERSISTENT_PATH))
+
+    for file_to_download in _FILES_TO_DOWNLOAD:
         file_name_to_save = None
-        url = file_to_dowload['download_path']
-        if 'file_name' in file_to_dowload and len(
-                file_to_dowload['file_name'] > 5):
-            file_name_to_save = file_to_dowload['file_name']
+        url = file_to_download['download_path']
+
+        if 'file_name' in file_to_download and len(
+                file_to_download['file_name']) > 5:
+            file_name_to_save = file_to_download['file_name']
         else:
             file_name_to_save = url.split('/')[-1]
-        retry_number = 0
 
-        is_file_downloaded = False
-        while is_file_downloaded == False:
-            try:
-                with session.get(url, stream=True) as response:
-                    response.raise_for_status()
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        try:
+            with session.get(url, stream=True, timeout=120,
+                             headers=headers) as response:
+                response.raise_for_status()
+
+                content_type = response.headers.get('Content-Type', '')
+
+                # Skip if file already exists
+                if file_name_to_save in downloaded_files:
+                    logging.info(
+                        f"Skipping already downloaded file: {file_name_to_save}"
+                    )
+                    continue
+                if 'html' in content_type.lower():
+                    logging.fatal(
+                        f"Server returned HTML error page for URL: {url}")
+                else:
                     if response.status_code == 200:
-                        with open(
-                                os.path.join(_INPUT_FILE_PATH,
-                                             file_name_to_save), 'wb') as f:
-                            f.write(response.content)
-                            file_to_dowload['is_downloaded'] = True
-                            logging.info(f"Downloaded file : {url}")
-                            is_file_downloaded = True
-                    else:
-                        logging.error(f"Retry file download {{url}}")
-                        time.sleep(5)
-                        retry_number += 1
-                        if retry_number > max_retry:
-                            logging.fatal(f"Error downloading {url}")
+                        with tempfile.NamedTemporaryFile(
+                                delete=False) as tmp_file:
+                            # Stream the response into a temp file
+                            for chunk in response.iter_content(chunk_size=8192):
+                                if chunk:
+                                    tmp_file.write(chunk)
+                            tmp_file_path = tmp_file.name
 
-            except Exception as e:
-                logging.fatal(f"Retry file download {url}")
-                time.sleep(5)
-                retry_number += 1
-                if retry_number > max_retry:
-                    logging.fatal(f"Error downloading {url}")
+                        # Copy to local destination
+                        shutil.copy(
+                            tmp_file_path,
+                            os.path.join(_INPUT_FILE_PATH, file_name_to_save))
+
+                        # Copy to gcs destination
+                        shutil.copy(
+                            tmp_file_path,
+                            os.path.join(_GCS_OUTPUT_PERSISTENT_PATH,
+                                         file_name_to_save))
+
+                        # Optionally delete the temp file
+                        os.remove(tmp_file_path)
+                        file_to_download['is_downloaded'] = True
+                        logging.info(f"Downloaded file: {url}")
+
+        except Exception as e:
+            file_to_download['is_downloaded'] = False
+            logging.error(f"Error downloading {url}: {e}")
+            raise  # re-raise to trigger @retry
+        time.sleep(1)
 
     return True
 
@@ -1220,19 +1321,38 @@ def main(_):
         os.mkdir(data_file_path)
     if not (os.path.exists(_INPUT_FILE_PATH)):
         os.mkdir(_INPUT_FILE_PATH)
+    if not (os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH)):
+        os.mkdir(_GCS_OUTPUT_PERSISTENT_PATH)
+
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name
     tmcf_path = data_file_path + os.sep + tmcf_name
 
     download_status = True
     if mode == "" or mode == "download":
+        # Get the config path from the flags
+        config_path = _FLAGS.config_path
+
+        if not config_path:
+            logging.fatal(
+                "Please provide the --config_path flag with a valid GCS path.")
+            return
         # download & process
         add_future_year_urls()
         download_status = download_files()
     if download_status and (mode == "" or mode == "process"):
-        loader = PopulationEstimateBySex(_INPUT_FILE_PATH, cleaned_csv_path,
-                                         mcf_path, tmcf_path)
-        loader.process()
+        try:
+            loader = PopulationEstimateBySex(_INPUT_FILE_PATH, cleaned_csv_path,
+                                             mcf_path, tmcf_path)
+            loader.process()
+
+            # Only delete if it's a subdirectory of gcs_output, and not gcs_output itself
+            if os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH) and os.path.commonpath([_GCS_OUTPUT_PERSISTENT_PATH, _GCS_BASE_DIR]) == _GCS_BASE_DIR \
+            and os.path.abspath(_GCS_OUTPUT_PERSISTENT_PATH) != os.path.abspath(_GCS_BASE_DIR):
+                shutil.rmtree(_GCS_OUTPUT_PERSISTENT_PATH)
+                logging.info(f"Deleted folder: {_GCS_OUTPUT_PERSISTENT_PATH}")
+        except Exception as e:
+            logging.fatal(f"The processing is failed due to the error: {e}")
 
 
 if __name__ == "__main__":
