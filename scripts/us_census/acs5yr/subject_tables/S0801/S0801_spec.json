@@ -20,9 +20,6 @@
         "statType": {
             "Margin of Error": "marginOfError"
         },
-        "unit": {
-            "Margin of Error": ""
-        },
         "age": {
             "Workers 16 years and over": "Years16Onwards",
             "Workers 16 years and over who did not work from home": "Years16Onwards",
