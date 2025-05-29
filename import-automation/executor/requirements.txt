@@ -15,6 +15,7 @@ func-timeout
 gcsfs
 geojson
 geopy
+google-api-python-client
 google-auth
 google-cloud-bigquery
 google-cloud-datastore
@@ -22,13 +23,13 @@ google-cloud-run
 google-cloud-storage
 google-cloud-logging
 google-cloud-scheduler
-google-generativeai
 gspread
 gunicorn
 lxml
 numpy
 openpyxl
 pandas
+prettytable
 protobuf
 psutil
 pylint
@@ -42,7 +43,6 @@ requests_cache
 retry
 s2sphere
 selenium
-sentence-transformers
 shapely
 urllib3
 webdriver_manager

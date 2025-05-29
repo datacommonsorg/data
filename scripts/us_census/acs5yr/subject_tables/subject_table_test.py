@@ -145,3 +145,7 @@ class TestSubjectTable(unittest.TestCase):
                     test_df, expected_df = _read_csv_files(
                         test_csv_path, paths['csv'])
                     assert_frame_equal(test_df, expected_df)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
