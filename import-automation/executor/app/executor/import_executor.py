@@ -394,7 +394,6 @@ class ImportExecutor:
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
             differ_output = os.path.join(validation_output_path,
-                                         differ_job_name,
                                          'point_analysis_summary.csv')
             # Run dc import tool to generate resolved mcf.
             logging.info('Generating resolved mcf...')

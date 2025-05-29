@@ -97,7 +97,7 @@ class ImportDiffer:
                  value_columns=_VALUE_COLUMNS):
         self.current_data = current_data
         self.previous_data = previous_data
-        self.output_path = os.path.join(output_location, job_name)
+        self.output_path = output_location
         self.tmp_path = os.path.join(_TMP_LOCATION, job_name)
         self.differ_tool = differ_tool
         self.project_id = project_id
