@@ -1,0 +1,27 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "US_Federal_Rates",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.federalreserve.gov/DataDownload/Choose.aspx?rel=H15",
+      "provenance_description": "Federal Reserve System H.15 Selected Interest Rates",
+      "scripts": ["us_fed_download.py",
+       "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/us_fed_input_1.csv --pv_map=us_fed_fund_pvmap.csv --config_file=us_fed_fund_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/us_fed_fund_output",
+       "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/us_fed_input_2.csv --pv_map=us_fed_interest_rates_pvmap.csv --config_file=us_fed_interest_rates_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/us_fed_interest_rate_output"],
+      "source_files": [
+        "input_files/us_fed_input_*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/us_fed_interest_rate_output.tmcf",
+          "cleaned_csv": "output_files/us_fed_interest_rate_output.csv"
+        },
+        {
+          "template_mcf": "output_files/us_fed_fund_output.tmcf",
+          "cleaned_csv": "output_files/us_fed_fund_output.csv"
+        }
+      ],
+      "cron_schedule": "0 06 * * 6"
+    }
+  ]
+}

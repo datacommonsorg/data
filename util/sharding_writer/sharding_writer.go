@@ -220,10 +220,10 @@ func (w *Writer) WriteString(s string) (n int, err error) {
 		return w.Write([]byte(s))
 	case dataTypeText:
 		// TODO(rsned): Implement
-		return -1, fmt.Errorf("sharded writestring for text not implemented yet.")
+		return -1, fmt.Errorf("sharded writestring for text not implemented yet")
 	case dataTypeMCF:
 		// TODO(rsned): Implement
-		return -1, fmt.Errorf("sharded writestring for MCF not implemented yet.")
+		return -1, fmt.Errorf("sharded writestring for MCF not implemented yet")
 	}
 
 	return int(bytesWritten), err

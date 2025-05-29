@@ -38,6 +38,7 @@ _DEFAULT_SIMPLE_IMAGE = os.environ.get(
     'DOCKER_IMAGE', 'gcr.io/datcom-ci/datacommons-simple:stable')
 _DEFAULT_LOCATION = os.environ.get('CLOUD_REGION', 'us-central1')
 _DEFAULT_GCS_BUCKET = os.environ.get('GCS_BUCKET', 'datcom-prod-imports')
+_DEFAULT_VOLUME_MOUNT = os.environ.get('VOLUME_MOUNT', 'datcom-volume-mount')
 _DEFAULT_CONFIG_PREFIX = 'import_config'
 
 # Path for simple import config spec under data/scripts/simple
@@ -136,6 +137,7 @@ def cloud_run_simple_import_job(
     project_id: str = _DEFAULT_PROJECT,
     location: str = _DEFAULT_LOCATION,
     image: str = _DEFAULT_SIMPLE_IMAGE,
+    volume_mount: str = _DEFAULT_VOLUME_MOUNT,
 ) -> str:
     """Create and run a Cloud Run job for simple a import.
 
@@ -151,6 +153,7 @@ def cloud_run_simple_import_job(
       account for the project should have access to the GCS folder for output.
     location: Region for the cloud run instance.
     image: container image URL for the simple-importer.
+    volume_mount: GCS bucket for volume mount;
 
   Returns:
     Output directory with the script outputs.
@@ -191,8 +194,8 @@ def cloud_run_simple_import_job(
     resources = {}
     args = []
     job = cloud_run.create_or_update_cloud_run_job(project_id, location, job_id,
-                                                   image, env_vars, args,
-                                                   resources)
+                                                   image, volume_mount,
+                                                   env_vars, args, resources)
     if not job:
         logging.error(
             f'Failed to setup cloud run job {job_id} for {config_file}')
