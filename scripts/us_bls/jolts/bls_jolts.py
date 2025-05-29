@@ -31,7 +31,7 @@ import requests
 from map_config import _dcid_map
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('mode', '', 'Options: download or process')
+flags.DEFINE_string('modes', '', 'Options: download or process')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 _INPUT_FILES = _MODULE_DIR + "/input_files"
@@ -400,7 +400,7 @@ def process(jolts_df, schema_mapping, _OUTPUT_FILES):
 
 
 def main(_):
-    mode = _FLAGS.mode
+    mode = _FLAGS.modes
 
     # Check for the download mode
     if mode == "download" or mode == "":
