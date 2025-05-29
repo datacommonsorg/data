@@ -9,7 +9,7 @@ Each import has a sub-folder with a config file `<import-name>/import_config.jso
 The parameters for the simple import config file are described in detail 
 [here](https://github.com/datacommonsorg/import/blob/master/simple/stats/config.md).
 If there are multiple imports per source, each import can be in a sub-folder
-with a source specific folder, such as, `<source>/<import>/import_config.json`.
+with a source specific folder, such as `<source>/<import>/import_config.json`.
 
 The config has the following parameters for automated updates:
 ```
@@ -34,7 +34,7 @@ the [import automation](https://github.com/datacommonsorg/data/tree/master/impor
 ## Adding a new import
 
 To add a new data source:
-1. Copy the input files to a GCS bucket that is allows objects and metadata read
+1. Copy the input files to a GCS bucket that allows objects and metadata read
    access for the service account `965988403328-compute@developer.gserviceaccount.com`
    that runs the import automation for Data Commons.
    Note: Grant access to the bucket containing the input files
