@@ -26,3 +26,4 @@ If processing from current import folder :
 
 `python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=download_folder/input_files/* --config_file=fbigovcrime_metadata.csv --output_path=output/fbi_gov_crime`
 
+
