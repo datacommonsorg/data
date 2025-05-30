@@ -1,0 +1,198 @@
+Node: occupancy
+dcid:"occupancy"
+name: "occupancy"
+typeOf: schema:Property
+domainIncludes: schema:SingleFamilyResidence, schema:Vehicle
+source: "https://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources"
+rangeIncludes: schema:QuantitativeValue
+
+Node: dcid:carpoolOccupancy
+typeOf: dcid:QuantityRange
+name: "carpoolOccupancy"
+description: "The count of people carpooling to work"
+
+Node: dcid:commuteType
+typeOf: schema:Property
+name: "commuteType"
+rangeIncludes: dcid:CommuteTypeEnum
+
+Node: dcid:commuteStartTime
+typeOf: dcid:TimeUnitOfMeasure
+name: "commuteStartTime"
+
+Node: dcid:numberOfVehiclesInHousehold
+typeOf: schema:Property
+name: "numberOfVehiclesInHousehold"
+
+Node: dcid:CommuteTypeEnum
+typeOf: dcid:Class
+subClassOf: schema:Enumeration
+name: "CommuteTypeEnum"
+
+Node: dcid:WorkCommute
+typeOf: dcid:CommuteTypeEnum
+name: "WorkCommute"
+description: "To travel to work"
+
+Node: dcid:LivingInAPlace
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "LivingInAPlace"
+
+Node: dcid:NotLivingInAPlace
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "NotLivingInAPlace"
+
+Node: dcid:WorkedOutsideCountyOfResidence
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "WorkedOutsideCountyOfResidence"
+
+Node: dcid:WorkedOutsideMinorCivilDivisionOfResidence
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "WorkedOutsideMinorCivilDivisionOfResidence"
+
+Node: dcid:WorkedOutsidePlaceOfResidence
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "WorkedOutsidePlaceOfResidence"
+
+Node: dcid:WorkedOutsideStateOfResidence
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "WorkedOutsideStateOfResidence"
+
+Node: dcid:WorkedWithinCountyOfResidence
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "WorkedWithinCountyOfResidence"
+
+Node: dcid:WorkedWithinMinorCivilDivisionOfResidence
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "WorkedWithinMinorCivilDivisionOfResidence"
+
+Node: dcid:WorkedWithinPlaceOfResidence
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "WorkedWithinPlaceOfResidence"
+
+Node: dcid:WorkedWithinStateOfResidence
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "WorkedWithinStateOfResidence"
+
+Node: dcid:WorkFromOffice
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "WorkFromOffice"
+
+Node: dcid:WorkedOutsideOfHome
+typeOf: dcs:USC_PlaceOfWorkEnum
+name: "WorkedOutsideOfHome"
+
+Node: dcid:Hour0000To0459
+typeOf: dcs:QuantityRange
+startValue: "00:00"
+endValue: "04:59"
+unit: Hour
+
+
+Node: dcid:Hour0500To0529
+typeOf: dcs:QuantityRange
+startValue: "05:00"
+endValue: "05:29"
+unit: Hour
+
+
+Node: dcid:Hour0530To0559
+typeOf: dcs:QuantityRange
+startValue: "05:30"
+endValue: "05:59"
+unit: Hour
+
+
+Node: dcid:Hour0600To0629
+typeOf: dcs:QuantityRange
+startValue: "06:00"
+endValue: "06:29"
+unit: Hour
+
+
+Node: dcid:Hour0630To0659
+typeOf: dcs:QuantityRange
+startValue: "06:30"
+endValue: "06:59"
+unit: Hour
+
+
+Node: dcid:Hour0700To0729
+typeOf: dcs:QuantityRange
+startValue: "07:00"
+endValue: "07:29"
+unit: Hour
+
+
+Node: dcid:Hour0730To0759
+typeOf: dcs:QuantityRange
+startValue: "07:30"
+endValue: "07:59"
+unit: Hour
+
+
+Node: dcid:Hour0800To0829
+typeOf: dcs:QuantityRange
+startValue: "08:00"
+endValue: "08:29"
+unit: Hour
+
+
+Node: dcid:Hour0830To0859
+typeOf: dcs:QuantityRange
+startValue: "08:30"
+endValue: "08:59"
+unit: Hour
+
+
+Node: dcid:Hour0900To2359
+typeOf: dcs:QuantityRange
+startValue: "09:00"
+endValue: "23:59"
+unit: Hour
+
+Node: dcid:Bicycle
+typeOf: dcid:USC_CommuteModeEnum
+name: "Bicycle"
+
+Node: dcid:CarTruckOrVan
+typeOf: dcid:USC_CommuteModeEnum
+name: "CarTruckOrVan"
+
+Node: dcid:DroveAlone
+typeOf: dcid:USC_CommuteModeEnum
+name: "DroveAlone"
+
+Node: dcid:DroveAlone
+typeOf: dcid:USC_CommuteModeEnum
+name: "DroveAlone"
+
+Node: dcid:WorkedFromHome
+typeOf: dcid:USC_CommuteModeEnum
+name: "WorkedFromHome"
+
+Node: dcid:Count_Vehicle_CarTruckOrVan_WorkCommute
+populationType: dcid:Vehicle
+dcid:"Count_Vehicle_CarTruckOrVan_WorkCommute"
+statType: dcid:measuredValue
+commuteMode: dcid:CarTruckOrVan
+commuteType: dcid:WorkCommute
+measuredProperty: dcid:count
+typeOf: dcid:StatisticalVariable
+
+Node: dcid:Count_Person_WorkCommute_Employed
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+commuteType: dcs:WorkCommute
+employmentStatus: dcs:Employed
+typeOf: StatisticalVariable
+
+Node: dcid:Count_Person_Employed_WorkFromOffice
+measuredProperty: dcs:count
+statType: dcs:measuredValue
+populationType: dcs:Person
+employmentStatus: dcs:Employed
+placeOfWork: dcid:WorkFromOffice
+typeOf: StatisticalVariable
+
