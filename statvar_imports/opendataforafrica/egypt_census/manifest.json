@@ -8,7 +8,7 @@
             "provenance_url": "https://egypt.opendataforafrica.org/",
             "provenance_description": "",
             "scripts": [
-                "../../../scripts/opendataafrica/download_folder/download.sh 'egypt' 'xovpotd,mptocre,ulouknf,pqpump,wcssteb,zkjifzd,actytif,bluhqme,txbrrac,wtxyghf,zpdksog,viytqvf,ujtdaag,cjczlcd,szfufmb,lxoyale,behvqtc,colyoac'",
+                "../../../scripts/opendataafrica/download_folder/download.sh egypt xovpotd,mptocre,ulouknf,pqpump,wcssteb,zkjifzd,actytif,bluhqme,txbrrac,wtxyghf,zpdksog,viytqvf,ujtdaag,cjczlcd,szfufmb,lxoyale,behvqtc,colyoac",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/xovpotd.csv --pv_map=xovpotd_pvmap.csv --config_file=xovpotd_metadata.csv --output_path=output/xovpotd --statvar_dcid_remap_csv=xovpotd_remap.csv --places_resolved_csv=egypt_place_resolved.csv",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/mptocre.csv --pv_map=mptocre_pvmap.csv --config_file=mptocre_metadata.csv --output_path=output/mptocre --statvar_dcid_remap_csv=mptocre_remap.csv --places_resolved_csv=egypt_place_resolved.csv",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ulouknf.csv --pv_map=ulouknf_pvmap.csv --config_file=ulouknf_metadata.csv --output_path=output/ulouknf --statvar_dcid_remap_csv=ulouknf_remap.csv --places_resolved_csv=egypt_place_resolved.csv",
