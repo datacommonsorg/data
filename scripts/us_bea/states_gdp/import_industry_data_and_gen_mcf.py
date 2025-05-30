@@ -179,7 +179,7 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
         Commons codes.
         """
         if isinstance(naics_code, str):
-            naics_code = naics_code.replace('-', '_').replace(',', '&')
+            naics_code = naics_code.replace('-', '_').replace(',', '_')
         return f"dcs:USStateQuarterlyIndustryGDP_NAICS_{naics_code}"
 
     def save_csv(self, filename='states_industry_gdp.csv'):
@@ -204,13 +204,16 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
                     'activitySource: dcs:GrossDomesticProduction\n'
                     'measuredProperty: dcs:amount\n'
                     'measurementQualifier: dcs:Nominal\n'
-                    'naics: dcid:NAICS/{naics}\n\n')
+                    'naics: dcid:NAICS/{naics}\n'
+                    'statType: dcid:measuredValue\n\n')
 
         with open('States_gdp_industry_statvars.mcf', 'w') as mcf_f:
             for naics_code in self.clean_df['NAICS'].unique():
                 code_title = naics_code[38:]
                 code = code_title.replace('_', '-')
-                code = code.replace('&', '&NAICS/')
+                # Apply specific replacements to align with historical NAICS DCID patterns
+                code = code.replace("311-316-322-326", "311-316_322-326")
+                code = code.replace("321-327-339", "321_327-339")
                 mcf_f.write(mcf_temp.format(title=code_title, naics=code))
 
 

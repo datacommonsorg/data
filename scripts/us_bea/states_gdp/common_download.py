@@ -70,7 +70,7 @@ def download_and_extract_to_folders(zip_link, output_folder):
                                     f"Successfully extracted and saved: {member} to '{output_folder}'"
                                 )
                         except Exception as e:
-                            logging.error(
+                            logging.fatal(
                                 f"An error occurred while processing file '{member}': {e}"
                             )
         except requests.exceptions.RequestException as e:
