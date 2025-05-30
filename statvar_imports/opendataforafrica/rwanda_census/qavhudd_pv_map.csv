@@ -1,0 +1,12 @@
+key,prop,val,p1,v1,,,,
+FREQ,observationPeriod,P1Y,,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,
+OBS_VALUE,value,{Number},populationType,Person,,,,
+,,,,,,,,
+INDICATOR:MPOP,gender,Male,,,,,,
+INDICATOR:FPOP,gender,Female,,,,,,
+INDICATOR:SR,gender,Male,measurementDenominator,",+gender=Female",unit,Percent,scalingFactor,100
+INDICATOR:PC,statType,growthRate,unit,Percent,,,,
+INDICATOR:AAGR,#ignore,has average and growth rate in KEY,,,,,,
+INDICATOR:PD,measurementDenominator,area,unit,PersonPerSquareKilometer,,,,
+PLACE,observationAbout,{Data},,,,,,
