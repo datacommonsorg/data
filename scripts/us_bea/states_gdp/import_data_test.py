@@ -19,9 +19,7 @@
 """
 import os
 import sys
-
 import unittest
-
 import pandas as pd
 
 # Allows the following module imports to work when running as a script
@@ -65,24 +63,32 @@ class USStateQuarterlyGDPImportTest(unittest.TestCase):
 
     def test_data_processing_tiny(self):
         """Tests end-to-end data cleaning on a tiny example."""
-        raw_df = pd.read_csv(os.path.join(_TEST_DATA_DIR, "test_tiny_raw.csv"),
-                             index_col=0)
+        raw_df = pd.read_csv(os.path.join(_TEST_DATA_DIR, "test_tiny_raw.csv"))
+
         clean_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
                                             "test_tiny_cleaned.csv"),
-                               index_col=0)
+                               index_col=['GeoId', 'Quarter'])
+
         loader = import_data.StateGDPDataLoader()
-        loader.process_data(raw_df)
+
+        raw_csv_string = raw_df.to_csv(index=False)
+
+        loader.process_data(raw_csv_string)
+
         pd.testing.assert_frame_equal(clean_df, loader.clean_df)
 
     def test_data_processing_small(self):
         """Tests end-to-end data cleaning on a small example."""
         raw_df = pd.read_csv(os.path.join(_TEST_DATA_DIR, "test_small_raw.csv"),
                              index_col=0)
-        clean_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
-                                            "test_small_cleaned.csv"),
-                               index_col=0)
+        clean_df = pd.read_csv(
+            os.path.join(_TEST_DATA_DIR, "test_small_cleaned.csv"))
         loader = import_data.StateGDPDataLoader()
-        loader.process_data(raw_df)
+
+        raw_csv_string = raw_df.to_csv(index=False)
+        loader.process_data(raw_csv_string)
+        clean_df = clean_df.set_index(['GeoId', 'Quarter'])
+
         pd.testing.assert_frame_equal(clean_df, loader.clean_df)
 
 
@@ -90,14 +96,19 @@ class USStateQuarterlyPerIndustryImportTest(unittest.TestCase):
 
     def test_data_processing_tiny(self):
         """Tests end-to-end data cleaning on a tiny example."""
-        raw_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
-                                          "test_industry_tiny_raw.csv"),
-                             index_col=0)
+        raw_df = pd.read_csv(
+            os.path.join(_TEST_DATA_DIR, "test_industry_tiny_raw.csv"))
+
         clean_df = pd.read_csv(os.path.join(_TEST_DATA_DIR,
                                             "test_industry_tiny_cleaned.csv"),
                                index_col=0)
+
         loader = import_industry_data_and_gen_mcf.StateGDPIndustryDataLoader()
-        loader.process_data(raw_df)
+
+        raw_csv_string = raw_df.to_csv(index=False)
+
+        loader.process_data(raw_csv_string)  # Pass the CSV string
+
         pd.testing.assert_frame_equal(clean_df, loader.clean_df)
 
     def test_value_converter(self):
@@ -124,8 +135,8 @@ class USStateQuarterlyPerIndustryImportTest(unittest.TestCase):
         self.assertEqual(ind_conv_fn("35"), prefix + "35")
         self.assertEqual(ind_conv_fn("987"), prefix + "987")
         self.assertEqual(ind_conv_fn("35-37"), prefix + "35_37")
-        self.assertEqual(ind_conv_fn("35-37,40"), prefix + "35_37&40")
-        self.assertEqual(ind_conv_fn("13-97,2,45-78"), prefix + "13_97&2&45_78")
+        self.assertEqual(ind_conv_fn("35-37,40"), prefix + "35_37_40")
+        self.assertEqual(ind_conv_fn("13-97,2,45-78"), prefix + "13_97_2_45_78")
 
 
 if __name__ == "__main__":

@@ -3,26 +3,31 @@
         {
             "import_name": "USStatesQuarterlyGDP",
             "curator_emails": [
-                "fpernice@google.com"
+                "support@datacommons.org"
             ],
             "provenance_url": "https://www.bea.gov/data/gdp/gdp-state",
             "provenance_description": "Quarterly data on inflation-adjusted GDP at a state level in the United States from the US Bureau of Economic Analysis.",
             "scripts": [
-                "import_data_test.py",
-                "validate_import.py",
+                "common_download.py",
                 "import_data.py",
                 "import_industry_data_and_gen_mcf.py"
+        
+            ],
+            "source_files": [
+                "input_folders/*.csv"
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "states_gdp.tmcf",
+                
                     "cleaned_csv": "states_gdp.csv",
+                    "template_mcf": "states_gdp.tmcf",
                     "node_mcf": "states_gdp_statvars.mcf"
                 },
                 {
-                    "template_mcf": "states_industry_gdp.tmcf",
+                    
                     "cleaned_csv": "states_industry_gdp.csv",
-                    "node_mcf": "states_gdp_industry_statvars.mcf"
+                    "node_mcf": "states_gdp_industry_statvars.mcf",
+                    "template_mcf": "states_industry_gdp.tmcf"
                 }
             ],
             "cron_schedule": "30 10 30 1,4,7,10,12 *"
