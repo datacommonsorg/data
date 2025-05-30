@@ -1,0 +1,8 @@
+Node: E:irl_suicide_output->E0
+observationAbout: C:irl_suicide_output->observationAbout
+observationDate: C:irl_suicide_output->observationDate
+value: C:irl_suicide_output->value
+variableMeasured: C:irl_suicide_output->variableMeasured
+unit: C:irl_suicide_output->unit
+scalingFactor: C:irl_suicide_output->scalingFactor
+typeOf: dcs:StatVarObservation

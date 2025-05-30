@@ -1,0 +1,25 @@
+# Auto generated using command: "../data/tools/statvar_importer/stat_var_processor.py --input_data=input_files/population_by_gender.csv --pv_map=configs/demographics/irl_population_by_gender_pvmap.csv --config_file=configs/demographics/irl_population_by_gender_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=configs/places_resolver_gender.csv --output_path=testdata/irl_population_by_gender_output" on 2025-05-08 09:33:54.254206
+
+Node: dcid:Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Total Population"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_Person_Female
+typeOf: dcid:StatisticalVariable
+name: "Female Population"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+
+Node: dcid:Count_Person_Male
+typeOf: dcid:StatisticalVariable
+name: "Male Population"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+
