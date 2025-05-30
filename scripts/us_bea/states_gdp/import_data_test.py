@@ -135,8 +135,8 @@ class USStateQuarterlyPerIndustryImportTest(unittest.TestCase):
         self.assertEqual(ind_conv_fn("35"), prefix + "35")
         self.assertEqual(ind_conv_fn("987"), prefix + "987")
         self.assertEqual(ind_conv_fn("35-37"), prefix + "35_37")
-        self.assertEqual(ind_conv_fn("35-37,40"), prefix + "35_37&40")
-        self.assertEqual(ind_conv_fn("13-97,2,45-78"), prefix + "13_97&2&45_78")
+        self.assertEqual(ind_conv_fn("35-37,40"), prefix + "35_37_40")
+        self.assertEqual(ind_conv_fn("13-97,2,45-78"), prefix + "13_97_2_45_78")
 
 
 if __name__ == "__main__":
