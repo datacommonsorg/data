@@ -1,0 +1,17 @@
+parameter,value
+url,https://ethiopia.opendataforafrica.org/xpcyhcf/population-projection-by-region-and-sex
+description,
+#place_type,
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,Click on the URL. Select all regions and sexes. Click on the Export. Choose .xlsx format. Click on the Export Data blue button to download the data.
+comments,
+#places_resolved_csv,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+header_rows,1
+drop_statvars_without_svobs,0
+mapped_rows,1
+mapped_columns,4
+#input_rows,19

@@ -1,0 +1,16 @@
+parameter,value
+url,https://ethiopia.opendataforafrica.org/teakvke/population-and-households-of-ethiopia-2007#
+description,
+#place_type,
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,"Click in the url. Select all regions, variables Both sex, Male, Female. Select all residence. Click on the Export on the side bar and select the .xlsx to download."
+comments,
+#places_resolved_csv,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+header_rows,1
+drop_statvars_without_svobs,0
+mapped_rows,1
+mapped_columns,4
