@@ -11,11 +11,11 @@
       "import_inputs": [
         {
           "template_mcf": "wb.tmcf",
-          "cleaned_csv": "output/transformed_data_for_all_final.csv"
+          "cleaned_csv": "gcs_output/output/transformed_data_for_all_final.csv"
         },
         {
           "template_mcf": "wb.tmcf",
-          "cleaned_csv": "output/bq-results-20250423.csv"
+          "cleaned_csv": "gcs_output/output/bq-results-20250423.csv"
         }
        ],
        "resource_limits": {
