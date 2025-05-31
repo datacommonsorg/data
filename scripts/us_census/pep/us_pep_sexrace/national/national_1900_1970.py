@@ -19,6 +19,11 @@ is processed as is.
 
 import pandas as pd
 import os
+import sys
+
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+from api_calls import get_api_response
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -37,6 +42,8 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
     """
     final_df = pd.DataFrame()
     final_df2 = pd.DataFrame()
+    file_path = os.path.join(_CODEDIR + "/../input_files/" +
+                             "nationals_result_1900_1959.csv")
     for file in ip_files:
 
         filename = file
@@ -46,15 +53,13 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
 
             # comparing the year value as schema is chaning from 1959
             if int(year) < 1960:
+                file_path = get_api_response(file_path, file, 0)
+                df = pd.read_csv(file_path,
+                                 index_col=False,
+                                 engine='python',
+                                 encoding='ISO-8859-1')
 
-                # reading the csv format input file
-                # and converting it to a dataframe
-                df = pd.read_csv(file)
                 #Saving file to local
-                df.to_csv(_CODEDIR + "/../input_files/" +
-                          "nationals_result_1900_1959.csv",
-                          index=False)
-
                 # providing proper column names
                 df.columns = [
                     "Age", "All race total", "Count_Person_Male",
@@ -82,10 +87,15 @@ def process_national_1900_1970(ip_files: list) -> pd.DataFrame:
             else:
                 # reading the csv format input file
                 # and converting it to a dataframe
-                df2 = pd.read_csv(file)
-                df2.to_csv(_CODEDIR + "/../input_files/" +
-                           "nationals_result_1960_1979.csv",
-                           index=False)
+                file_path = os.path.abspath(
+                    os.path.join(_CODEDIR, "..", "input_files",
+                                 "nationals_result_1960_1979.csv"))
+                file_path = get_api_response(file_path, file, 0)
+                df2 = pd.read_csv(file_path,
+                                  index_col=False,
+                                  engine='python',
+                                  encoding='ISO-8859-1')
+
                 # providing proper column names
                 df2.columns = [
                     "Age", "All race total", "Count_Person_Male",

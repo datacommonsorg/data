@@ -15,6 +15,7 @@
 This Python Script is for National Level Data 1980-1989.
 '''
 import os
+import requests
 from io import BytesIO
 from zipfile import ZipFile
 from urllib.request import urlopen
@@ -69,14 +70,16 @@ def national1980(url_file: str, output_folder: str):
 
     # Extraction of ZIP files.
     for url in _urls:
-        with urlopen(url) as resp:
-            # unzipping the dataset
-            with ZipFile(BytesIO(resp.read()), 'r') as zipfile:
-                zipfile.extractall()
-                #Copying the raw data
-                zipfile.extractall(
-                    os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                 "raw_data"))
+        resp = requests.get(url)
+        if resp.status_code == 200:
+
+            with ZipFile(BytesIO(resp.content)) as zipfile:
+                raw_data_path = os.path.join(
+                    os.path.dirname(os.path.abspath(__file__)), "raw_data")
+                os.makedirs(raw_data_path, exist_ok=True)
+                # Extract all files to the raw_data folder
+                zipfile.extractall(path=raw_data_path)
+
     _urls = _urls = input_url(url_file, "1980-90files")
 
     cols = ["0", "1", "2", "3", "4", "5", "6", "7",\
@@ -89,9 +92,10 @@ def national1980(url_file: str, output_folder: str):
 
         # Reading the txt format input file converting it to a dataframe.
         # Delimitng the columns by whitespace.
-        df = pd.read_table(file,
+        file_path = os.path.join(raw_data_path, file)
+        df = pd.read_table(file_path,
                            index_col=False,
-                           delim_whitespace=True,
+                           sep=r'\s+',
                            engine='python',
                            names=cols)
         df = df.loc[df['0'].isin(['2I', '9P'])]
