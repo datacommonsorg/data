@@ -1,0 +1,7 @@
+Node: E:chembl_uniprot->E1
+typeOf: dcs:Protein
+dcid: C:chembl_uniprot->dcid
+name: C:chembl_uniprot->Name
+proteinType: C:chembl_uniprot->Protein_Type
+uniProtID: C:chembl_uniprot->uniprotID
+chemblID: C:chembl_uniprot->ChemBL
