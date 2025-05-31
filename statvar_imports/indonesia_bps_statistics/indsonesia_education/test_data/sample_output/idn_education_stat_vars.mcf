@@ -1,0 +1,83 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indsonesia_education/test_data/sample_input/idn_Universities_Lecturers_Students_Public_Private_.xlsx --pv_map=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indsonesia_education/pv_map/idn_Universities_Lecturers_Students_Public_and_Private_pvmap.csv --places_resolved_csv=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_place_resolved.csv --config= /usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indsonesia_education/metadata/common_metadata.csv --output_path=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indsonesia_education/test_data/sample_output/Education_Data_Indonesia" on 2024-06-10 16:08:44.706864
+
+Node: dcid:Count_CollegeOrUniversity_LocalGovernmentOwnedEstablishment_UnderMinistryOfResearchTechnologyAndHigherEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:CollegeOrUniversity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Jumlah Perguruan Tinggi di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Negeri@id"
+establishmentOwnership: dcid:LocalGovernmentOwned
+schoolManagement: dcid:UnderMinistryOfResearchTechnologyAndHigherEducation
+
+Node: dcid:Count_CollegeOrUniversity_LocalGovernmentOwnedOrPrivatelyOwnedEstablishment_UnderMinistryOfResearchTechnologyAndHigherEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:CollegeOrUniversity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Jumlah Perguruan Tinggi di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Negeri + Swasta@id"
+establishmentOwnership: dcid:LocalGovernmentOwned__PrivatelyOwned
+schoolManagement: dcid:UnderMinistryOfResearchTechnologyAndHigherEducation
+
+Node: dcid:Count_CollegeOrUniversity_PrivatelyOwnedEstablishment_UnderMinistryOfResearchTechnologyAndHigherEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:CollegeOrUniversity
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Jumlah Perguruan Tinggi di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Swasta@id"
+establishmentOwnership: dcid:PrivatelyOwned
+schoolManagement: dcid:UnderMinistryOfResearchTechnologyAndHigherEducation
+
+Node: dcid:Count_Student_LocalGovernmentOwnedEstablishment_UnderMinistryOfResearchTechnologyAndHigherEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Negeri@id"
+establishmentOwnership: dcid:LocalGovernmentOwned
+schoolManagement: dcid:UnderMinistryOfResearchTechnologyAndHigherEducation
+
+Node: dcid:Count_Student_LocalGovernmentOwnedOrPrivatelyOwnedEstablishment_UnderMinistryOfResearchTechnologyAndHigherEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Negeri + Swasta@id"
+establishmentOwnership: dcid:LocalGovernmentOwned__PrivatelyOwned
+schoolManagement: dcid:UnderMinistryOfResearchTechnologyAndHigherEducation
+
+Node: dcid:Count_Student_PrivatelyOwnedEstablishment_UnderMinistryOfResearchTechnologyAndHigherEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Student
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Jumlah Mahasiswa di Bawah Kementerian Riset, Teknologi dan Pendidikan Tinggi - Swasta@id"
+establishmentOwnership: dcid:PrivatelyOwned
+schoolManagement: dcid:UnderMinistryOfResearchTechnologyAndHigherEducation
+
+Node: dcid:Count_Teacher_LocalGovernmentOwnedEstablishment_UnderMinistryOfResearchTechnologyAndHigherEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Jumlah Pendidik di Bawah Kemenristekdikti - Negara@id"
+establishmentOwnership: dcid:LocalGovernmentOwned
+schoolManagement: dcid:UnderMinistryOfResearchTechnologyAndHigherEducation
+
+Node: dcid:Count_Teacher_LocalGovernmentOwnedOrPrivatelyOwnedEstablishment_UnderMinistryOfResearchTechnologyAndHigherEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Pendidik di Bawah Kementerian Riset, Teknologi, dan Pendidikan Tinggi - Negeri + Swasta@id"
+establishmentOwnership: dcid:LocalGovernmentOwned__PrivatelyOwned
+schoolManagement: dcid:UnderMinistryOfResearchTechnologyAndHigherEducation
+
+Node: dcid:Count_Teacher_PrivatelyOwnedEstablishment_UnderMinistryOfResearchTechnologyAndHigherEducation
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Teacher
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Pendidik di Bawah Kemenristekdikti - Swasta@id"
+establishmentOwnership: dcid:PrivatelyOwned
+schoolManagement: dcid:UnderMinistryOfResearchTechnologyAndHigherEducation
+
