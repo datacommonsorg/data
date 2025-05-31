@@ -44,14 +44,15 @@ class StateGDPIndustryDataLoader(import_data.StateGDPDataLoader):
     Attributes:
         df: DataFrame (DF) with the cleaned data.
     """
-    _STATE_QUARTERLY_INDUSTRY_GDP_FILE = 'SQGDP2__ALL_AREAS_2005_2020.csv'
+    _STATE_QUARTERLY_INDUSTRY_GDP_FILE_PREFIX = 'SQGDP2__ALL_AREAS_'
 
     def download_data(self, zip_link=None, file=None):
         """Downloads ZIP file, extracts the desired CSV, and puts it into a data
 
         frame. Stores that data frame in the instance raw_df variable.
         """
-        super().download_data(file=self._STATE_QUARTERLY_INDUSTRY_GDP_FILE)
+        super().download_data(
+            file_prefix=self._STATE_QUARTERLY_INDUSTRY_GDP_FILE_PREFIX)
 
     def process_data(self, raw_data=None):
         """Cleans raw_df and converts it from wide to long format.
