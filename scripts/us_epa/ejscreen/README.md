@@ -20,9 +20,12 @@ which are a small subset of the available EJSCREEN variables.
 
 To generate `ejscreen_airpollutants.csv` and `ejscreen.tmcf` run the following:  
 
-    `python3 ejscreen.py`
+#Downloading and Processing Data
+To perform "download and process", run the below command: python3 ejscreen.py Running this command generates input_fles and csv, mcf, tmcf files
 
-As of July, 2021 this includes data through the end of 2020.
+If you want to perform "only process", run the below command: python3 ejscreen.py --mode=process
+
+If you want to perform "only download", run the below command: python3 ejscreen.py --mode=download
 
 ### Unit Tests
 
