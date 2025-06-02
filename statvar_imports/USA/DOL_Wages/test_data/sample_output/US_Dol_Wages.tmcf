@@ -1,8 +1,0 @@
-Node: E:US_DOL_Wages->E0
-observationAbout: C:US_DOL_Wages->observationAbout
-observationDate: C:US_DOL_Wages->observationDate
-variableMeasured: C:US_DOL_Wages->variableMeasured
-value: C:US_DOL_Wages->value
-unit: C:US_DOL_Wages->unit
-scalingFactor: C:US_DOL_Wages->scalingFactor
-typeOf: dcs:StatVarObservation

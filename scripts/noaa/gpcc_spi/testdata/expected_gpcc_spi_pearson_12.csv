@@ -1,0 +1,25 @@
+time,spi,variable,period,place,observationPeriod
+1987-12,0.6774628,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-01,0.7214461,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-02,0.36122373,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-03,1.1968277,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-04,0.5834988,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-05,0.77122384,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-06,0.7579139,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-07,1.0726309,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-08,1.2643322,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-09,0.98317623,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-10,0.3700654,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1988-11,0.2551446,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/37_-118,P12M
+1987-12,-1.0703964,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-01,-0.9358352,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-02,-1.3364314,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-03,-1.1851333,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-04,-1.454038,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-05,-1.2386547,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-06,-1.674136,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-07,-2.3123264,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-08,-1.4628884,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-09,-1.163474,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-10,-1.2074763,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
+1988-11,-1.0418444,dcs:StandardizedPrecipitationIndex_Atmosphere_12MonthPeriod,"[12 dcs:Monthly]",grid_1/47_-111,P12M
