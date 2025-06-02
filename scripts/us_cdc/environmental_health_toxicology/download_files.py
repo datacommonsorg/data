@@ -41,7 +41,8 @@ def download_files(importname, configs):
         with requests.get(url, stream=True) as response, file_util.FileIO(filename, 'wb') as f:
             response.raise_for_status()
             if response.status_code == 200:
-                for chunk in response.iter_content(chunk_size=8192):
+                chunk_size = 10 * 1024 * 1024 # 10 MB
+                for chunk in response.iter_content(chunk_size=chunk_size):
                     f.write(chunk)
                     downloaded_bytes += len(chunk)
                     logging.info(f"Downloaded {downloaded_bytes} bytes from {url}")
