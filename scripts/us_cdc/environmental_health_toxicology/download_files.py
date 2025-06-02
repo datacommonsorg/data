@@ -36,20 +36,19 @@ def download_files(importname, configs):
     @retry(tries=3, delay=2, backoff=2)
     def download_with_retry(url, input_file_name):
         logging.info(f"Downloading file from URL: {url}")
-        response = requests.get(url)
-        response.raise_for_status()
-        if response.status_code == 200:
-            if not response.content:
-                logging.fatal(
-                    f"No data available for URL: {url}. Aborting download.")
-                return
-            filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
-            with file_util.FileIO(filename, 'wb') as f:
-                f.write(response.content)
-        else:
-            logging.error(
-                f"Failed to download file from URL: {url}. Status code: {response.status_code}"
-            )
+        filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
+        downloaded_bytes = 0
+        with requests.get(url, stream=True) as response, file_util.FileIO(filename, 'wb') as f:
+            response.raise_for_status()
+            if response.status_code == 200:
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+                    downloaded_bytes += len(chunk)
+                    logging.info(f"Downloaded {downloaded_bytes} bytes from {url}")
+            else:
+                logging.error(
+                    f"Failed to download file from URL: {url}. Status code: {response.status_code}"
+                )
 
     try:
         for config in configs:
