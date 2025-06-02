@@ -1,8 +1,0 @@
-Node: E:Municipality_FoodAcquisitionProgram_ PAA_by_sex->E0
-observationAbout: C:Municipality_FoodAcquisitionProgram_ PAA_by_sex->observationAbout
-observationDate: C:Municipality_FoodAcquisitionProgram_ PAA_by_sex->observationDate
-value: C:Municipality_FoodAcquisitionProgram_ PAA_by_sex->value
-variableMeasured: C:Municipality_FoodAcquisitionProgram_ PAA_by_sex->variableMeasured
-unit: C:Municipality_FoodAcquisitionProgram_ PAA_by_sex->unit
-scalingFactor: C:Municipality_FoodAcquisitionProgram_ PAA_by_sex->scalingFactor
-typeOf: dcs:StatVarObservation

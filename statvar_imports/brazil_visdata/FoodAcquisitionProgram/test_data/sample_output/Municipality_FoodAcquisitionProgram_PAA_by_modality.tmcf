@@ -1,8 +1,0 @@
-Node: E:Municipality_FoodAcquisitionProgram_PAA_by_modality->E0
-observationAbout: C:Municipality_FoodAcquisitionProgram_PAA_by_modality->observationAbout
-observationDate: C:Municipality_FoodAcquisitionProgram_PAA_by_modality->observationDate
-value: C:Municipality_FoodAcquisitionProgram_PAA_by_modality->value
-variableMeasured: C:Municipality_FoodAcquisitionProgram_PAA_by_modality->variableMeasured
-unit: C:Municipality_FoodAcquisitionProgram_PAA_by_modality->unit
-scalingFactor: C:Municipality_FoodAcquisitionProgram_PAA_by_modality->scalingFactor
-typeOf: dcs:StatVarObservation

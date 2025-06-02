@@ -1,8 +1,0 @@
-Node: E:FoodAcquisitionProgram_General_Execution->E0
-observationAbout: C:FoodAcquisitionProgram_General_Execution->observationAbout
-observationDate: C:FoodAcquisitionProgram_General_Execution->observationDate
-value: C:FoodAcquisitionProgram_General_Execution->value
-variableMeasured: C:FoodAcquisitionProgram_General_Execution->variableMeasured
-unit: C:FoodAcquisitionProgram_General_Execution->unit
-scalingFactor: C:FoodAcquisitionProgram_General_Execution->scalingFactor
-typeOf: dcs:StatVarObservation

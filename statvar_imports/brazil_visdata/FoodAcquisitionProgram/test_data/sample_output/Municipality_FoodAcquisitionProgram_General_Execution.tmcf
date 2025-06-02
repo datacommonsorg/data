@@ -1,8 +1,0 @@
-Node: E:Municipality_FoodAcquisitionProgram_General_Execution->E0
-observationAbout: C:Municipality_FoodAcquisitionProgram_General_Execution->observationAbout
-observationDate: C:Municipality_FoodAcquisitionProgram_General_Execution->observationDate
-value: C:Municipality_FoodAcquisitionProgram_General_Execution->value
-variableMeasured: C:Municipality_FoodAcquisitionProgram_General_Execution->variableMeasured
-unit: C:Municipality_FoodAcquisitionProgram_General_Execution->unit
-scalingFactor: C:Municipality_FoodAcquisitionProgram_General_Execution->scalingFactor
-typeOf: dcs:StatVarObservation

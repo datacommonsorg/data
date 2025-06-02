@@ -1,8 +1,0 @@
-Node: E:FoodAcquisitionProgram_Execution_of_Extraordinary_Credit->E0
-observationAbout: C:FoodAcquisitionProgram_Execution_of_Extraordinary_Credit->observationAbout
-observationDate: C:FoodAcquisitionProgram_Execution_of_Extraordinary_Credit->observationDate
-value: C:FoodAcquisitionProgram_Execution_of_Extraordinary_Credit->value
-variableMeasured: C:FoodAcquisitionProgram_Execution_of_Extraordinary_Credit->variableMeasured
-unit: C:FoodAcquisitionProgram_Execution_of_Extraordinary_Credit->unit
-scalingFactor: C:FoodAcquisitionProgram_Execution_of_Extraordinary_Credit->scalingFactor
-typeOf: dcs:StatVarObservation
