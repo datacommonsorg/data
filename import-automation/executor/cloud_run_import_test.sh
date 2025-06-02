@@ -19,7 +19,7 @@ mount_bucket=datcom-ci-test
 data_repo=$(realpath $(dirname $0)/../../)
 cpus=2
 memory=4Gi
-timeout=30m
+timeout=5h
 
 echo "Building docker image $1"
 DOCKER_BUILDKIT=1 docker buildx build --build-context data=$data_repo --build-arg build_type=local -f Dockerfile . -t $artifact_registry/$1:latest
