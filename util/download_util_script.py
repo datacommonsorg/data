@@ -38,11 +38,14 @@ flags.DEFINE_string('output_folder', 'input_folder',
                     'Folder to save the downloaded file')
 flags.DEFINE_bool('unzip', False,
                   'Unzip the downloaded file if it is a zip file')
-                  
+
+flags.DEFINE_integer('retry_tries', 3, 'Number of times to retry a download.')
+flags.DEFINE_integer('retry_delay', 5, 'Initial delay in seconds between retries.')
+flags.DEFINE_integer('retry_backoff', 2,
+                     'Backoff factor for retry delay (e.g., 2 means delay doubles each time).')
 
 
-@retry(tries=3, delay=5, backoff=2)
-def retry_method(url, headers=None):
+def _retry_method(url: str, headers, tries, delay, backoff) -> requests.Response:
     """
     Attempts to make a GET request to a URL with retries.
 
@@ -57,15 +60,21 @@ def retry_method(url, headers=None):
         requests.exceptions.RequestException: If the request fails after retries.
     """
 
-    response = requests.get(url, headers=headers, timeout=10)
-    response.raise_for_status()
-    return response
+    @retry(tries=tries, delay=delay, backoff=backoff)
+    def retry_download(url: str, headers):
+        logging.info("Attempting to download from: %s", url)
+        if headers:
+            response = requests.get(url, headers=headers)
+        else:
+            response = requests.get(url)
+        response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+        return response
 
+    return retry_download(url, headers)
 
 def unzip_file(file_path, output_folder):
     """
     Unzips a zip file to the specified path_to_save.
-
     Args:
         file_path: The path to the zip file.
         path_to_save: The folder where the contents will be extracted.
@@ -86,19 +95,19 @@ def unzip_file(file_path, output_folder):
         logging.error(f"An unexpected error occurred while unzipping file '{file_path}': {e}")
         raise  # Re-raise to terminate the main download process
 
-def download_file(url, output_folder, unzip, headers=None):
+def download_file(url, output_folder, unzip, headers:dict={}, tries=3,
+                 delay=5,
+                 backoff=2):
     """
     Downloads file from the URLs and saves them to a specified folder.
     If a file already exists at the target path, its download is skipped.
     The script will terminate if any single download or unzip operation fails.
-
     Args:
         url: URLs of the files to download.
         output_folder: The local folder to save the downloaded files.
                        Defaults to 'input_files'.
         unzip: If True, attempts to unzip each downloaded file if it's a zip file.
         headers: Optional dictionary of HTTP headers to send with each request.
-
     Raises:
         requests.exceptions.RequestException: If a download fails after retries.
         zipfile.BadZipFile: If an unzip operation encounters an invalid zip file.
@@ -115,7 +124,7 @@ def download_file(url, output_folder, unzip, headers=None):
             file_name = file_name + '.xlsx'
         file_path = os.path.join(output_folder, file_name)
 
-        response = retry_method(url)
+        response = _retry_method(url, headers,tries, delay,backoff)
         with open(file_path, "wb") as f:
             f.write(response.content)
 
@@ -143,15 +152,18 @@ def main(_):
     url = FLAGS.url
     output_folder = FLAGS.output_folder
     unzip = FLAGS.unzip
+    retry_tries = FLAGS.retry_tries
+    retry_delay = FLAGS.retry_delay
+    retry_backoff = FLAGS.retry_backoff
     if not url:
         logging.fatal("--url is required.")
 
-    try:
-        download_file(url, output_folder, unzip)
-        logging.info("Script processing completed")
-    except Exception as ex:
-        logging.fatal(
-            f"terminating script to avoid partial import - error {ex} ")
+    # try:
+    download_file(url, output_folder, unzip, None, retry_tries, retry_delay, retry_backoff)
+    logging.info("Script processing completed")
+    # except Exception as ex:
+    #     logging.fatal(
+    #         f"terminating script to avoid partial import - error {ex} ")
 
     logging.info("Completed...")
 
