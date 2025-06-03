@@ -10,7 +10,7 @@
         "scripts": [
           "download.py",
           "../../tools/statvar_importer/stat_var_processor.py --input_data=input_file/*.csv --pv_map=UNData_pvmap.csv --config_file=UNData_metadata.csv --places_resolved_csv=UNData_places_resolved_csv.csv --output_path=output/UNData",
-          "../../tools/statvar_importer/filter_data_outliers.py --filter_data_input=output/UNData.csv --filter_data_output=output/filter-undata.csv --filter_data_min_value=2 --filter_data_max_yearly_change_ratio=0.5 --filter_data_max_change_ratio=1"
+          "../../tools/statvar_importer/filter_data_outliers.py --filter_data_input=output/UNData.csv --filter_data_output=output/filter_undata.csv --filter_data_min_value=2 --filter_data_max_yearly_change_ratio=0.5 --filter_data_max_change_ratio=1"
         ],
         "source_files": [
          "input_file/*.csv"
@@ -18,7 +18,7 @@
         "import_inputs": [
           {
             "template_mcf": "output/UNData.tmcf",
-            "cleaned_csv": "output/filter-undata.csv"
+            "cleaned_csv": "output/filter_undata.csv"
           }
         ],
         "cron_schedule": "0 05 * * 3"
