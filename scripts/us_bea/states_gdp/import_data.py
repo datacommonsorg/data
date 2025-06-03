@@ -92,13 +92,15 @@ class StateGDPDataLoader:
                     end_year = int(match.group(2))
                     matching_files[filename] = end_year
                 except IndexError:
-                    logging.error(
-                        f"Error: Year group 2 not found in pattern '{file_pattern}' for file '{filename}'."
+                    "Log as a warning if group(2) is missing. This indicates a potential  mismatch between the file_pattern and the expected structure"
+                    logging.warning(
+                        f"Warning: Year capturing group (group 2) not found in "
+                        f"pattern '{file_pattern}' for file '{filename}'. Skipping."
                     )
-                    continue
                 except ValueError:
-                    logging.error(
-                        f"Error: Could not convert year to integer for file '{filename}'."
+                    " Log as a warning if the captured year cannot be converted to an integer "
+                    logging.warning(
+                        f"Warning: Could not convert captured year to integer for file '{filename}'. Skipping."
                     )
                     continue
 

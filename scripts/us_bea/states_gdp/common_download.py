@@ -11,10 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-import zipfile
-import io
-import csv
 import os
+import zipfile
 from absl import logging
 import requests
 from retry import retry
@@ -74,10 +72,10 @@ def download_and_extract_to_folders(zip_link, output_folder):
                                 f"An error occurred while processing file '{member}': {e}"
                             )
         except requests.exceptions.RequestException as e:
-            logging.error(f"Error downloading ZIP file after retries: {e}")
+            logging.fatal(f"Error downloading ZIP file after retries: {e}")
             return
         except zipfile.BadZipFile:
-            logging.error(
+            logging.fatal(
                 f"Error: Downloaded file is not a valid ZIP file: {zip_filename}"
             )
             return
