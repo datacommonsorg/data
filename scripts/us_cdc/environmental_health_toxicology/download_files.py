@@ -46,93 +46,90 @@ RETRYABLE_EXCEPTIONS = (
     google_exceptions.ServiceUnavailable,
 )
 
+@retry(
+    stop=stop_after_attempt(5),  # Stop after 5 attempts
+    wait=wait_exponential(multiplier=1, min=4, max=30),  # Exponential backoff with jitter
+    retry=retry_if_exception_type(RETRYABLE_EXCEPTIONS),
+    reraise=True  # Reraise the exception if all retries fail
+)
+def stream_download_to_gcs(
+    source_url: str,
+    bucket_name: str,
+    blob_name: str,
+    project_id: str = None, # Pass project_id if specific project is needed
+    chunk_size: int = DEFAULT_CHUNK_SIZE
+):
+    """
+    Streams a large file from a URL directly to a GCS blob with retries
+    and a progress indicator.
 
-# It's a good practice to initialize the client once if the function is part of a class.
-# If this is a standalone script, initializing it inside the function is fine.
-storage_client = storage.Client(project="stuniki-runtimes-dev")
+    Args:
+        source_url (str): The URL of the file to download.
+        bucket_name (str): The name of the GCS bucket.
+        blob_name (str): The destination object name in the GCS bucket.
+        project_id (str, optional): GCP project ID. If None, inferred from environment.
+        chunk_size (int, optional): The chunk size in bytes for downloading and uploading.
+                        Must be a multiple of 256 KiB (262144 bytes).
+    """
+    logging.info(f"Starting stream download from {source_url} to gs://{bucket_name}/{blob_name}")
+
+    # Validate chunk size for GCS compatibility
+    if chunk_size % (256 * 1024) != 0:
+        raise ValueError("Chunk size must be a multiple of 256 KiB (262144 bytes).")
+
+    storage_client = storage.Client(project=project_id)
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+    downloaded_bytes = 0
+    last_logged_progress = 0
+
+    try:
+        with requests.get(source_url, stream=True, timeout=60) as response:
+            response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
+
+            total_size_in_bytes = int(response.headers.get('content-length', 0))
+            if total_size_in_bytes > 0:
+                logging.info(f"Total file size: {total_size_in_bytes / (1024 * 1024):.2f} MB")
+            else:
+                logging.warning("Content-Length header not found. Progress will be logged by bytes downloaded.")
+
+            # Use blob.open() which returns a file-like object to write to
+            with blob.open("wb") as f:
+                for chunk in response.iter_content(chunk_size=chunk_size):
+                    if chunk:  # filter out keep-alive new chunks
+                        f.write(chunk)
+                        downloaded_bytes += len(chunk)
+
+                        # --- Smart Progress Indication ---
+                        if total_size_in_bytes > 0:
+                            # Log progress every 10%
+                            progress = int((downloaded_bytes / total_size_in_bytes) * 100)
+                            if progress >= last_logged_progress + 10:
+                                logging.info(f"Progress: {progress}% ({downloaded_bytes / (1024 * 1024):.2f} MB downloaded)")
+                                last_logged_progress = progress
+                        else:
+                            # If total size is unknown, log every 100 MB
+                            if downloaded_bytes >= last_logged_progress + (100 * 1024 * 1024):
+                                logging.info(f"Downloaded {downloaded_bytes / (1024 * 1024):.2f} MB")
+                                last_logged_progress = downloaded_bytes
+
+        logging.info(f"Successfully streamed {downloaded_bytes / (1024 * 1024):.2f} MB to gs://{bucket_name}/{blob_name}")
+
+    except requests.exceptions.HTTPError as e:
+        # This will catch non-transient HTTP errors from the source URL
+        logging.error(f"HTTP Error during download from {source_url}: {e}")
+        # Re-raise to let the Cloud Run Job know it failed
+        raise
+    except google_exceptions.GoogleAPICallError as e:
+        # This will catch errors during the upload to GCS
+        logging.error(f"Failed to write to GCS object gs://{bucket_name}/{blob_name}. Error: {e}")
+        raise
+    except Exception as e:
+        # Catch any other unexpected errors
+        logging.error(f"An unexpected error occurred: {e}")
+        raise
 
 def download_files(importname, configs):
-
-    @retry(
-        stop=stop_after_attempt(5),  # Stop after 5 attempts
-        wait=wait_exponential(multiplier=1, min=4, max=30),  # Exponential backoff with jitter
-        retry=retry_if_exception_type(RETRYABLE_EXCEPTIONS),
-        reraise=True  # Reraise the exception if all retries fail
-    )
-    def stream_download_to_gcs(
-        source_url: str,
-        bucket_name: str,
-        blob_name: str,
-        chunk_size: int = DEFAULT_CHUNK_SIZE
-    ):
-        """
-        Streams a large file from a URL directly to a GCS blob with retries
-        and an improved progress indicator.
-
-        Args:
-            source_url (str): The URL of the file to download.
-            bucket_name (str): The name of the GCS bucket.
-            blob_name (str): The destination object name in the GCS bucket.
-            chunk_size (int): The chunk size in bytes for downloading and uploading.
-                            Must be a multiple of 256 KiB (262144 bytes).
-        """
-        logging.info(f"Starting stream download from {source_url} to gs://{bucket_name}/{blob_name}")
-
-        # Validate chunk size for GCS compatibility
-        if chunk_size % (256 * 1024) != 0:
-            raise ValueError("Chunk size must be a multiple of 256 KiB (262144 bytes).")
-
-        bucket = storage_client.bucket(bucket_name)
-        blob = bucket.blob(blob_name)
-        downloaded_bytes = 0
-        last_logged_progress = 0
-
-        try:
-            with requests.get(source_url, stream=True, timeout=60) as response:
-                response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
-
-                total_size_in_bytes = int(response.headers.get('content-length', 0))
-                if total_size_in_bytes > 0:
-                    logging.info(f"Total file size: {total_size_in_bytes / (1024 * 1024):.2f} MB")
-                else:
-                    logging.warning("Content-Length header not found. Progress will be logged by bytes downloaded.")
-
-                # Use blob.open() which returns a file-like object to write to
-                with blob.open("wb") as f:
-                    for chunk in response.iter_content(chunk_size=chunk_size):
-                        if chunk:  # filter out keep-alive new chunks
-                            f.write(chunk)
-                            downloaded_bytes += len(chunk)
-
-                            # --- Smart Progress Indication ---
-                            if total_size_in_bytes > 0:
-                                # Log progress every 10%
-                                progress = int((downloaded_bytes / total_size_in_bytes) * 100)
-                                if progress >= last_logged_progress + 10:
-                                    logging.info(f"Progress: {progress}% ({downloaded_bytes / (1024 * 1024):.2f} MB downloaded)")
-                                    last_logged_progress = progress
-                            else:
-                                # If total size is unknown, log every 100 MB
-                                if downloaded_bytes >= last_logged_progress + (100 * 1024 * 1024):
-                                    logging.info(f"Downloaded {downloaded_bytes / (1024 * 1024):.2f} MB")
-                                    last_logged_progress = downloaded_bytes
-
-            logging.info(f"Successfully streamed {downloaded_bytes / (1024 * 1024):.2f} MB to gs://{bucket_name}/{blob_name}")
-
-        except requests.exceptions.HTTPError as e:
-            # This will catch non-transient HTTP errors from the source URL
-            logging.error(f"HTTP Error during download from {source_url}: {e}")
-            # Re-raising is important to let the Cloud Run Job know it failed
-            raise
-        except google_exceptions.GoogleAPICallError as e:
-            # This will catch errors during the upload to GCS
-            logging.error(f"Failed to write to GCS object gs://{bucket_name}/{blob_name}. Error: {e}")
-            raise
-        except Exception as e:
-            # Catch any other unexpected errors
-            logging.error(f"An unexpected error occurred: {e}")
-            raise
-
 
     def download_with_retry(url: str, input_file_name: str, chunk_size: int = DEFAULT_CHUNK_SIZE):
         """
