@@ -24,13 +24,14 @@
 # import environment
 from absl import flags
 from pathlib import Path
-
+from absl import logging
 import absl
 import csv
 import numpy as np
 import pandas as pd
 import os
 import sys
+logging.set_verbosity(logging.INFO)
 
 # Declare Universal Variables
 TAX_ID_DCID_MAPPING = {}
@@ -440,6 +441,15 @@ def main(_FLAGS):
     file_input1 = _FLAGS.input_dir1
     tax_id_dcid_mapping = _FLAGS.tax_id_dcid_mapping
     file_output = _FLAGS.output_dir
+    if not os.path.exists(file_output):
+        logging.info(f"Output directory '{file_output}' does not exist. Creating it.")
+        try:
+            os.makedirs(file_output)
+        except OSError as e:
+            logging.fatal(f"Failed to create output directory '{file_output}': {e}")
+
+    else:
+        logging.info(f"Output directory '{file_output}' already exists.")
 
     df = pd.read_csv(file_input, skiprows=1, delimiter='\t')
     df = df.replace('na', '')
