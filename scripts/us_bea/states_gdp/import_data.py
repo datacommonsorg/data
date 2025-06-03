@@ -26,7 +26,9 @@ import io
 import os
 import re
 from urllib.request import urlopen
-from absl import app, flags, logging
+from absl import app
+from absl import flags
+from absl import logging
 import pandas as pd
 
 logging.set_verbosity(logging.INFO)
