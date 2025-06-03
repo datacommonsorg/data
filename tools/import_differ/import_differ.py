@@ -53,7 +53,7 @@ flags.DEFINE_string('differ_jar_location', '', \
   'Path to the differ tool jar (local runner mode).')
 flags.DEFINE_string('file_format', 'mcf',
                     'Format of the input data (mcf,tfrecord)')
-flags.DEFINE_string('runner_mode', 'local', 'Dataflow runner mode(local/cloud)')
+flags.DEFINE_string('runner_mode', 'native', 'Runner mode (native/local/cloud)')
 flags.DEFINE_string('project_id', '', 'GCP project id for the dataflow job.')
 flags.DEFINE_string('job_name', 'differ', 'Name of the differ dataflow job.')
 
@@ -65,7 +65,7 @@ class ImportDiffer:
 
   Usage:
   $ python import_differ.py --current_data=<path> --previous_data=<path> --output_location=<path> \
-    --file_format=<mcf/tfrecord> --runner_mode=<local/cloud> --project_id=<id> --job_name=<name> 
+    --file_format=<mcf/tfrecord> --runner_mode=<native/local/cloud> --project_id=<id> --job_name=<name> 
 
   Summary output generated is of the form below showing 
   counts of differences for each variable.  
@@ -97,7 +97,7 @@ class ImportDiffer:
                  value_columns=_VALUE_COLUMNS):
         self.current_data = current_data
         self.previous_data = previous_data
-        self.output_path = os.path.join(output_location, job_name)
+        self.output_path = output_location
         self.tmp_path = os.path.join(_TMP_LOCATION, job_name)
         self.differ_tool = differ_tool
         self.project_id = project_id
@@ -125,11 +125,66 @@ class ImportDiffer:
         else:
             return years
 
-    def run_pipeline(self):
-        """ 
-        Runs dataflow job to process two datasets to identify changes.
+    # Processes two dataset files to identify changes.
+    def generate_diff(self, previous_df: pd.DataFrame,
+                      current_df: pd.DataFrame) -> pd.DataFrame:
         """
-        if self.runner_mode == 'local':
+        Process previous and current datasets to generate
+        the intermediate data for point and series analysis.
+        Args:
+          current_df: dataframe with current (new) data
+          previous_df: dataframe with previous (old) data
+        Returns:
+          intermediate merged data for analysis
+        """
+        for column in self.groupby_columns:
+            if column not in current_df.columns.values.tolist():
+                current_df[column] = ''
+            if column not in previous_df.columns.values.tolist():
+                previous_df[column] = ''
+        df1 = previous_df.loc[:, self.groupby_columns + self.value_columns]
+        df2 = current_df.loc[:, self.groupby_columns + self.value_columns]
+        df1 = df1.reindex(columns=self.groupby_columns + self.value_columns)
+        df2 = df2.reindex(columns=self.groupby_columns + self.value_columns)
+        df1['_value_combined'] = df1[self.value_columns]\
+          .apply(lambda row: '_'.join(row.values.astype(str)), axis=1)
+        df2['_value_combined'] = df2[self.value_columns]\
+          .apply(lambda row: '_'.join(row.values.astype(str)), axis=1)
+        df1.drop(columns=self.value_columns, inplace=True)
+        df2.drop(columns=self.value_columns, inplace=True)
+        # Perform outer join operation to identify differences.
+        result = pd.merge(df1,
+                          df2,
+                          on=self.groupby_columns,
+                          how='outer',
+                          indicator=self.diff_column)
+        result[self.diff_column] = result.apply(
+          lambda row: 'ADDED' if row[self.diff_column] == 'right_only' \
+          else 'DELETED' if row[self.diff_column] == 'left_only' \
+          else 'MODIFIED' if row['_value_combined_x'] != row['_value_combined_y'] \
+          else 'UNMODIFIED', axis=1)
+        result = result[result[self.diff_column] != 'UNMODIFIED']
+        result.sort_values(by=[self.diff_column], inplace=True)
+        result.reset_index(drop=True, inplace=True)
+        return result
+
+    def process_data(self) -> pd.DataFrame:
+        """ 
+        Runs job to process two datasets to identify changes.
+        """
+        if self.runner_mode == 'native':
+            # Runs native Python differ.
+            logging.info('Loading data...')
+            current_dir = os.path.join(self.tmp_path, 'current')
+            previous_dir = os.path.join(self.tmp_path, 'previous')
+            current_df = differ_utils.load_data(self.current_data, current_dir)
+            previous_df = differ_utils.load_data(self.previous_data,
+                                                 previous_dir)
+            logging.info('Generating diff...')
+            in_data = self.generate_diff(previous_df, current_df)
+            return in_data
+        elif self.runner_mode == 'local':
+            # Runs dataflow job in the local mode.
             args = {
                 'currentData': self.current_data,
                 'previousData': self.previous_data,
@@ -142,8 +197,15 @@ class ImportDiffer:
             for k, v in args.items():
                 cmd += f' --{k}={v}'
             logging.info(cmd)
-            return os.system(cmd)
+            status = os.system(cmd)
+            if status > 0:
+                raise ExecutionError(
+                    'Dataflow job failed to process input data')
+            diff_path = os.path.join(self.output_path, 'diff*')
+            logging.info("Loading diff data from: %s", diff_path)
+            diff = differ_utils.load_csv_data(diff_path, self.tmp_path)
         else:  # cloud runner
+            # Runs dataflow job in GCP.
             logging.info('Launching dataflow job for processing data...')
             url = differ_utils.launch_dataflow_job(
                 self.project_id, self.job_name, self.current_data,
@@ -158,18 +220,11 @@ class ImportDiffer:
                                                      self.job_name)
                 time.sleep(60)
             if status == 'JOB_STATE_FAILED':
-                logging.error('Dataflow job failed to process input data')
-                return 1
-            else:
-                return 0
+                raise ExectionError('Dataflow job failed to process input data')
 
-    def process_data(self, diff_path: str) -> pd.DataFrame:
-        column_list = self.groupby_columns + [
-            '_value_combined_x', '_value_combined_y', 'diff_result'
-        ]
-        logging.info("Loading data from: %s", diff_path)
-        diff = differ_utils.load_csv_data(diff_path, column_list, self.tmp_path)
-        return diff
+            diff_path = os.path.join(self.output_path, 'diff*')
+            logging.info("Loading diff data from: %s", diff_path)
+            diff = differ_utils.load_csv_data(diff_path, self.tmp_path)
 
     def point_analysis(self,
                        diff: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
@@ -257,14 +312,9 @@ class ImportDiffer:
         if not os.path.exists(self.tmp_path):
             os.makedirs(self.tmp_path)
 
-        logging.info('Running dataflow pipeline...')
-        status = self.run_pipeline()
-        if status > 0:
-            logging.error('Dataflow pipeline run failed.')
-            return
-
-        logging.info('Processing diff data...')
-        diff = self.process_data(os.path.join(self.output_path, 'diff*'))
+        logging.info('Processing input data...')
+        diff = self.process_data()
+        print(diff.head(10))
 
         logging.info('Point analysis:')
         summary, result = self.point_analysis(diff)
