@@ -237,10 +237,10 @@ class StateGDPDataLoader:
         """Converts date format from YEAR:QUARTER to YEAR-MONTH.
 
         Args:
-            date: A string representing the date in "YEAR:QUARTER" format (e.g., "2023:Q1").
+            date: A string representing the date in "YEAR:QUARTER" format (e.g., "2024:Q1").
 
         Returns:
-            A string representing the date in "YEAR-MONTH" format (e.g., "2023-03" for Q1).
+            A string representing the date in "YEAR-MONTH" format (e.g., "2024-03" for Q1).
         """
         return date[:4] + '-' + cls._QUARTER_MONTH_MAP[date[5:]]
 
