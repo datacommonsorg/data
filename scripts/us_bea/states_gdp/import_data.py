@@ -23,14 +23,11 @@ state from the years 2005 onwards, based on the available file in the input fold
 """
 import csv
 import io
-import re
 import os
-import zipfile
-from absl import logging
+import re
 from urllib.request import urlopen
-from absl import app
+from absl import app, flags, logging
 import pandas as pd
-from absl import flags
 
 logging.set_verbosity(logging.INFO)
 
@@ -237,6 +234,14 @@ class StateGDPDataLoader:
 
     @classmethod
     def date_to_obs_date(cls, date):
+        """Converts date format from YEAR:QUARTER to YEAR-MONTH.
+
+        Args:
+            date: A string representing the date in "YEAR:QUARTER" format (e.g., "2023:Q1").
+
+        Returns:
+            A string representing the date in "YEAR-MONTH" format (e.g., "2023-03" for Q1).
+        """
         return date[:4] + '-' + cls._QUARTER_MONTH_MAP[date[5:]]
 
     @staticmethod
@@ -266,7 +271,6 @@ class StateGDPDataLoader:
 
 def main(argv):
     """Runs the program."""
-    del argv
     loader = StateGDPDataLoader()
     loader.process_data()
     loader.save_csv()

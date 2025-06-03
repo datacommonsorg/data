@@ -21,13 +21,12 @@ Also generates the MCF nodes for the data schema.
 
     python3 import_industry_data_and_gen_mcf.py
 """
+import io
 import os
 import re
 import sys
-import io
-from absl import app, flags
+from absl import app, flags, logging
 import pandas as pd
-from absl import logging
 
 logging.set_verbosity(logging.INFO)
 # Allows the following module import to work when running as a script
