@@ -344,6 +344,12 @@ _PREPEND_APPEND_REPLACE_MAP = {
     'lendingEntity': {
         'prepend': 'Lender',
     },
+    'fromCurrency': {
+        'prepend': 'FromCurrency',
+    },
+    'toCurrency': {
+        'prepend': 'ToCurrency',
+    },
 }
 
 # This is a list of boolean properties
