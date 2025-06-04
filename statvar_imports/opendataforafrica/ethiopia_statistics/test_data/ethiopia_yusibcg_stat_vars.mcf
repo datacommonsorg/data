@@ -1,0 +1,69 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/test_data/ethiopia-yusibcg_data.csv --pv_map=/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/ethiopia-yusibcg_pvmap.csv --config=/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/ethiopia-yusibcg_metadata.csv --output_path=/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/test_data/ethiopia_yusibcg" on 2025-04-07 08:02:50.476105
+
+Node: dcid:Count_Person_12To14Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [12 14 Years]
+
+Node: dcid:Count_Person_12To14Years_EducationalAttainmentHigherSecondaryEducation_InLaborForce_AsAFractionOf_Count_Person_12To14Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To14Years
+age: [12 14 Years]
+educationalAttainment: dcid:HigherSecondaryEducation
+employmentStatus: dcid:InLaborForce
+
+Node: dcid:Count_Person_12To14Years_EducationalAttainmentPrimaryEducation_InLaborForce_AsAFractionOf_Count_Person_12To14Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To14Years
+age: [12 14 Years]
+educationalAttainment: dcid:PrimaryEducation
+employmentStatus: dcid:InLaborForce
+
+Node: dcid:Count_Person_12To14Years_EducationalAttainmentSecondaryEducation_InLaborForce_AsAFractionOf_Count_Person_12To14Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_12To14Years
+age: [12 14 Years]
+educationalAttainment: dcid:SecondaryEducation
+employmentStatus: dcid:InLaborForce
+
+Node: dcid:Count_Person_5To11Years_EducationalAttainmentHigherSecondaryEducation_InLaborForce_AsAFractionOf_Count_Person_5To11Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_5To11Years
+age: [5 11 Years]
+educationalAttainment: dcid:HigherSecondaryEducation
+employmentStatus: dcid:InLaborForce
+
+Node: dcid:Count_Person_5To11Years_EducationalAttainmentPrimaryEducation_InLaborForce_AsAFractionOf_Count_Person_5To11Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_5To11Years
+age: [5 11 Years]
+educationalAttainment: dcid:PrimaryEducation
+employmentStatus: dcid:InLaborForce
+
+Node: dcid:Count_Person_5To11Years_EducationalAttainmentSecondaryEducation_InLaborForce_AsAFractionOf_Count_Person_5To11Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_5To11Years
+age: [5 11 Years]
+educationalAttainment: dcid:SecondaryEducation
+employmentStatus: dcid:InLaborForce
+

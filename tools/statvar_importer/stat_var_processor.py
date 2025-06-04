@@ -68,7 +68,7 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 import eval_functions
 import file_util
 import config_flags
-# import data_annotator
+import data_annotator
 # import llm_statvar_name_generator
 
 import property_value_utils as pv_utils
@@ -1377,10 +1377,9 @@ class StatVarDataProcessor:
         if not pv_map_file:
             logging.info(f'Skipping pvmap generation without pvmap file')
             return
-        # TODO: uncomment once data_annotator is checked in
-        # logging.info(f'Generating PV map from {input_data} into {pv_map_file}')
-        # pvmap = data_annotator.generate_pvmap(input_data, pv_map_file,
-        #                                       self._config, self._counters)
+        logging.info(f'Generating PV map from {input_data} into {pv_map_file}')
+        pvmap = data_annotator.generate_pvmap(input_data, pv_map_file,
+                                              self._config, self._counters)
         self._pv_mapper.load_pvs_dict(pvmap)
 
     # Functions that can be overridden by child classes.
@@ -2992,7 +2991,7 @@ def main(_):
         StatVarDataProcessor,
         input_data=_FLAGS.input_data,
         output_path=_FLAGS.output_path,
-        config=_FLAGS.config,
+        config=_FLAGS.config_file,
         pv_map_files=_FLAGS.pv_map,
         parallelism=_FLAGS.parallelism,
     )

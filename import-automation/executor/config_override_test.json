@@ -1,0 +1,14 @@
+{
+    "configs":{
+        "executor_type": "CLOUD_RUN",
+        "user_script_args": [],
+        "user_script_env": {},
+        "user_script_timeout": 3600,
+        "disable_email_notifications": true,
+        "import_tool_path" : "/tmp/import-tool/import-tool.jar",
+        "differ_tool_path" : "/tmp/import-tool/differ-tool.jar",
+        "gcp_project_id": "datcom-ci",
+        "gcs_volume_mount_dir": "/tmp",
+        "storage_prod_bucket_name": "datcom-import-test"
+   }
+ }
