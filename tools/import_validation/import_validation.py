@@ -37,6 +37,7 @@ Validation = Enum('Validation', [
     ('ADDED_COUNT', 3),
     ('DELETED_COUNT', 4),
     ('LATEST_DATA', 5),
+    ('MaxDate_Latest', 6),  # Added new validation
 ])
 
 
@@ -70,11 +71,22 @@ class ImportValidation:
         logging.info('Reading config from %s', validation_config)
         self.differ_results = pd.read_csv(differ_output)
         print(self.differ_results)
+        # Load the stats summary report
+        try:
+            self.stats_summary_df = pd.read_csv(stats_summary)
+            logging.info('Loaded stats summary from %s', stats_summary)
+        except FileNotFoundError:
+            logging.error('Stats summary file not found: %s', stats_summary)
+            # Depending on which validations are run, this might be a critical error
+            # For now, we'll allow it to proceed, and validations needing it will fail.
+            self.stats_summary_df = pd.DataFrame() # Empty DataFrame
+
         self.validation_map = {
             Validation.MODIFIED_COUNT: self._modified_count_validation,
             Validation.ADDED_COUNT: self._added_count_validation,
             Validation.DELETED_COUNT: self._deleted_count_validation,
-            Validation.UNMODIFIED_COUNT: self._unmodified_count_validation
+            Validation.UNMODIFIED_COUNT: self._unmodified_count_validation,
+            Validation.MaxDate_Latest: self._max_date_latest_validation, # Added
         }
         self.validation_output = validation_output
         self.validation_result = []
@@ -82,7 +94,68 @@ class ImportValidation:
             self.validation_config = json.load(fd)
 
     def _latest_data_validation(self, config: dict):
-        logging.info('Not yet implemented')
+        logging.info('Not yet implemented (This is a placeholder, MaxDate_Latest is the new one)')
+
+    def _max_date_latest_validation(self, config: dict):
+        logging.info('Running MaxDate_Latest validation.')
+        if self.stats_summary_df.empty:
+            return ValidationResult('FAILED', config['validation'],
+                                    'Stats summary file was not loaded or is empty.')
+
+        errors = []
+        expected_latest_date_str = str(config.get('expectedLatestDate', 'current_year'))
+        current_year = pd.Timestamp.now().year
+        target_year = current_year
+
+        if expected_latest_date_str.startswith('current_year - '):
+            try:
+                offset = int(expected_latest_date_str.split(' - ')[1])
+                target_year = current_year - offset
+            except (IndexError, ValueError) as e:
+                errors.append(f"Invalid format for expectedLatestDate: {expected_latest_date_str}. Error: {e}")
+        elif expected_latest_date_str == 'current_year':
+            target_year = current_year
+        else:
+            try:
+                target_year = int(expected_latest_date_str)
+            except ValueError as e:
+                errors.append(f"Invalid year in expectedLatestDate: {expected_latest_date_str}. Error: {e}")
+
+        if not errors: # Proceed only if target_year was parsed correctly
+            # Assuming 'MaxDate' column exists and contains date strings like 'YYYY', 'YYYY-MM', or 'YYYY-MM-DD'
+            # And 'StatVar' column exists for identifying the StatVar
+            if 'MaxDate' not in self.stats_summary_df.columns or 'StatVar' not in self.stats_summary_df.columns:
+                errors.append("Required columns ('MaxDate', 'StatVar') not found in stats summary.")
+            else:
+                for index, row in self.stats_summary_df.iterrows():
+                    stat_var = row['StatVar']
+                    max_date_str = str(row['MaxDate'])
+                    
+                    # Handle variableMeasured filtering (simplified for now, assumes '*' or list of dcids)
+                    # A more robust implementation would handle regex and property matching as per validation.md
+                    variables_to_check = config.get('variableMeasured', ['*'])
+                    if '*' not in variables_to_check and stat_var not in variables_to_check:
+                        continue
+
+                    try:
+                        # Extract year from MaxDate. Handles YYYY, YYYY-MM, YYYY-MM-DD
+                        max_date_year = int(max_date_str.split('-')[0])
+                        if max_date_year != target_year:
+                            errors.append(
+                                f"StatVar '{stat_var}': MaxDate year {max_date_year} does not match expected year {target_year}."
+                            )
+                    except ValueError:
+                        errors.append(
+                            f"StatVar '{stat_var}': Could not parse year from MaxDate '{max_date_str}'."
+                        )
+        
+        if errors:
+            error_message = 'MaxDate_Latest validation failed: ' + '; '.join(errors)
+            logging.error(error_message)
+            return ValidationResult('FAILED', config['validation'], error_message)
+        
+        logging.info('MaxDate_Latest validation passed.')
+        return ValidationResult('PASSED', config['validation'], '')
 
     # Checks if the number of deleted data points are below a threshold.
     def _deleted_count_validation(self, config: dict):
