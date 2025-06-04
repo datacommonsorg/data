@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Region,observationAbout,{Data},,,,,,,,
+"Population, Both Sexes Total",#ignore,This data is already mapped in the all year data population.,,,,,,,,
+"Population, Both Sexes Rural",#ignore,This data is already mapped in the all year data population.,,,,,,,,
+"Population, Both Sexes Urban",#ignore,This data is already mapped in the all year data population.,,,,,,,,
+"Population, Male Total",#ignore,This data is already mapped in the all year data population.,,,,,,,,
+"Population, Male Rural",populationType,Person,gender,Male,placeOfResidenceClassification,Rural,,,,
+"Population, Male Urban",populationType,Person,gender,Male,placeOfResidenceClassification,Urban,,,,
+"Population, Female Total",#ignore,This data is already mapped in the all year data population.,,,,,,,,
+"Population, Female Rural",populationType,Person,gender,Female,placeOfResidenceClassification,Rural,,,,
+"Population, Female Urban",populationType,Person,gender,Female,placeOfResidenceClassification,Urban,,,,
+2007,observationDate,2007,value,{Number},,,,,,

@@ -1,0 +1,19 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EPA_USAirPollutantEmissionTrends_NationalAndState",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.epa.gov/air-emissions-inventories/air-pollutant-emissions-trends-data",
+      "provenance_description": "US Environment Protection Agency (EPA) Air Pollutant Emissions Trends Data.",
+      "scripts": ["download.py","process.py"],
+      "import_inputs": [
+        {
+          "template_mcf": "output/airpollution_emission_trends_tier1.tmcf",
+          "cleaned_csv": "output/airpollution_emission_trends_tier1.csv"
+        }
+      ],
+      "cron_schedule": "0 10 1,15 * *",
+      "source_files": ["input_files/*"]
+    }
+  ]
+}
