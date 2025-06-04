@@ -1,0 +1,5 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
+country/USA,1970-01-07,8.45,dcid:InterestRate_FinancialInstrument_1Year_FederalFund,PercentPerAnnum,
+country/USA,1970-01-07,8.5,dcid:Mean_PrimeRate_FinancialInstrument_1Year_BankLoan,PercentPerAnnum,
+country/USA,1970-01-14,8.96,dcid:InterestRate_FinancialInstrument_1Year_FederalFund,PercentPerAnnum,
+country/USA,1970-01-14,8.5,dcid:Mean_PrimeRate_FinancialInstrument_1Year_BankLoan,PercentPerAnnum,
