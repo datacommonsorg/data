@@ -19,6 +19,7 @@ import json
 import pandas as pd
 from absl import app, flags, logging
 from sodapy import Socrata
+import requests
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -28,14 +29,6 @@ from statvar_dcid_generator import get_statvar_dcid
 from state_division_to_dcid import get_place_dcid
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('nors_input_path',
-                    './data/input_files/NationalOutbreakPublicDataTool.xlsx',
-                    'Path to the directory where the input files are saved')
-flags.DEFINE_string('nors_sheet_name', 'Outbreak Data', '')
-flags.DEFINE_string('nors_schema_map', './data/col_map_exc_food.json', '')
-flags.DEFINE_string(
-    'nors_output_path', './data/output',
-    'Path to the directory where the generated files are saved')
 flags.DEFINE_string('mode', '', 'Options: download or process')
 
 _TEMPLATE_MCF = """Node: E:NNDSWeekly->E0
@@ -78,30 +71,72 @@ _SV_BASE_MAP = {
         "measuredProperty": "dcs:count"
     }
 }
+dataset_id = "5xkq-dg7x"
+domain = "data.cdc.gov"
+client = Socrata(domain, None)
+filename = "NationalOutbreakPublicDataTool.xlsx"
+sheet_name = "Outbreak Data"
+base_path = "./data"
+schema_map_path = f"{base_path}/col_map_exc_food.json"
+input_directory = f"{base_path}/input_files"  
+output_directory = f"{base_path}/output"  
+sheet_name = "Outbreak Data"
+os.makedirs(input_directory, exist_ok=True)
+os.makedirs(output_directory, exist_ok=True)
+input_path = os.path.join(input_directory,filename)
 
 
-def download_data_from_api(dataset_id="5xkq-dg7x",
-                           domain="data.cdc.gov",
-                           limit=70000,
-                           filename="NationalOutbreakPublicDataTool.xlsx",
-                           nors_input_path="data/input_files",
-                           nors_sheet_name="Outbreak Data",
-                           column_mapping=None):
+def download_data_from_api(column_mapping=None):
     try:
-        logging.info(f'Downloading starts')
-        client = Socrata(domain, None)
-        results = client.get(dataset_id, limit=limit)
-        results_df = pd.DataFrame.from_records(results)
+        logging.info('Downloading starts')
+        # Get the total number of records dynamically
+        count_url = f"https://{domain}/resource/{dataset_id}.json?$select=count(*)"
+        count_response = requests.get(count_url)
+
+        if count_response.status_code == 200:
+            total_records_data = count_response.json()
+            if total_records_data and isinstance(
+                    total_records_data,
+                    list) and len(total_records_data
+                                 ) > 0 and "count" in total_records_data[0]:
+                total_records = int(total_records_data[0]["count"])
+                logging.info(f"Total records available: {total_records}")
+            else:
+                logging.error(
+                    "Could not retrieve the total number of records from the API."
+                )
+                return
+        else:
+            logging.error(
+                f"Error fetching total record count: Received status code {count_response.status_code}"
+            )
+            return
+
+        limit = 10000  # Set a reasonable limit for each request
+        offset = 0
+        all_data = []
+
+        while offset < total_records:
+            logging.info(f"Downloading records {offset} to {offset + limit}")
+            results = client.get(dataset_id, limit=limit, offset=offset)
+            if not results:
+                logging.info("No more data available.")
+                break
+            all_data.extend(results)
+            offset += limit
+            logging.info(f"Retrieved {len(all_data)} rows so far...")
+
+        results_df = pd.DataFrame.from_records(all_data)
+
         # Rename columns if column_mapping is provided
         if column_mapping:
             results_df = results_df.rename(columns=column_mapping)
-        os.makedirs(nors_input_path, exist_ok=True)
-        output_path = os.path.join(nors_input_path, filename)
-        with pd.ExcelWriter(output_path,
+        with pd.ExcelWriter(input_path,
                             engine='openpyxl') as writer:  # Requires openpyxl
-            results_df.to_excel(writer, sheet_name=nors_sheet_name, index=False)
+            results_df.to_excel(writer, sheet_name=sheet_name, index=False)
 
-        logging.info(f"Data saved to {output_path}, sheet '{nors_sheet_name}'")
+        logging.info(f"Data saved to {input_path}, sheet '{sheet_name}'")
+
     except Exception as e:
         logging.fatal(f"Error while downloading : {e}")
 
@@ -191,7 +226,7 @@ def make_stat_vars(row, PV_MAP):
         dict: A dictionary of statistical variables.
     """
     try:
-        logging.info(f"Statvar Generating Starts.. ")
+        logging.info(f"Generating Statvars.")
         row['variableMeasured'] = ''
         row['sv_dict'] = {}
         sv_dict = _SV_BASE_MAP[row['variable']].copy()
@@ -292,30 +327,15 @@ def fix_place_names(clean_df):
         logging.error(f"Error while fixing place name : {e}")
 
 
-def process_non_infectious_data(input_path: str, sheet_name: str,
-                                schema_map_path: str, output_path: str) -> None:
-    """Processes non-infectious data 
-
-    Args:
-        input_path (str): Path to the Excel file.
-        sheet_name (str): Name of the sheet to read.
-
-    Returns:
-        pd.DataFrame: Processed DataFrame, or None if error.
-    """
+def process_non_infectious_data() -> None:
     try:
         logging.info(f"Processing starts.")
         f = open(schema_map_path, 'r')
         PV_MAP = json.load(f)
         f.close()
-
-        if not os.path.exists(output_path):
-            os.makedirs(output_path)
-
         df = pd.read_excel(input_path, sheet_name=sheet_name)
         # The dataset is sparse and hence, all null or empty values are replaced with empty string for easier processing and data manipulation
         df = df[~df.isna()]
-
         # fix the date format and resolve the place to dcids
         df = fix_date_format(df)
         df = fix_place_names(df)
@@ -365,7 +385,7 @@ def process_non_infectious_data(input_path: str, sheet_name: str,
 
         # write statvar_dct to mcf file
         sv_dict_list = sv_df['sv_dict'].values.tolist()
-        mcf_file_path = os.path.join(output_path, f'{_FILE_PREFIX}.mcf')
+        mcf_file_path = os.path.join(output_directory, f'{_FILE_PREFIX}.mcf')
         write_svdicts_to_file(sv_dict_list, mcf_file_path)
 
         sv_df = sv_df[[
@@ -393,9 +413,9 @@ def process_non_infectious_data(input_path: str, sheet_name: str,
         clean_df.drop(
             columns=['variable', 'Primary Mode', 'Etiology', 'Etiology Status'],
             inplace=True)
-        clean_df.to_csv(f'{output_path}/{_FILE_PREFIX}.csv', index=False)
+        clean_df.to_csv(f'{output_directory}/{_FILE_PREFIX}.csv', index=False)
 
-        f = open(f"{output_path}/{_FILE_PREFIX}.tmcf", "w")
+        f = open(f"{output_directory}/{_FILE_PREFIX}.tmcf", "w")
         f.write(_TEMPLATE_MCF)
         f.close()
     except Exception as e:
@@ -428,10 +448,7 @@ def main(_) -> None:
     if mode == "" or mode == "download":
         download_data_from_api(column_mapping=column_mapping)
     if mode == "" or mode == "process":
-        process_non_infectious_data(FLAGS.nors_input_path,
-                                    FLAGS.nors_sheet_name,
-                                    FLAGS.nors_schema_map,
-                                    FLAGS.nors_output_path)
+        process_non_infectious_data()
 
 
 if __name__ == '__main__':

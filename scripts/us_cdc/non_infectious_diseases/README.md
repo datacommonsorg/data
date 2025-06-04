@@ -11,9 +11,6 @@ To download the data,
 3. Scroll down towards the footer of the page to find a link to download data in
    excel format. Select the link called *Download all NORS Dashboard data (Excel)*. This will download all the required dataset.
 
-### Here's an alternative way to download the NORS data:
-Instead of navigating the website, you can try using this direct link to export the data in Excel format: [NORS Dashboard](https://data.cdc.gov/Foodborne-Waterborne-and-Related-Diseases/NORS/5xkq-dg7x/about_data). Clicking on this link should directly initiate the download of the complete dataset in an Excel file.
-
 
 ### Notes
 There are some notes and caveats with this dataset.
@@ -35,4 +32,3 @@ i.e. python3 process.py mode=process
 
 when the file 'process .py' is ran without any flag, it will download and process the files and keep it in the respective directories as mentioned above.
 i.e. python3 process.py
-
