@@ -130,63 +130,6 @@ def stream_download_to_gcs(
         raise
 
 def download_files(importname, configs):
-
-    def download_with_retry(url: str, input_file_name: str, chunk_size: int = DEFAULT_CHUNK_SIZE):
-        """
-        Downloads a large file from a URL with retries and an improved progress indicator.
-
-        Args:
-            url: The URL of the file to download.
-            input_file_name: The name of the file to save the download as.
-            chunk_size: The chunk size in bytes for downloading.
-        """
-        logging.info(f"Starting download from URL: {url}")
-        filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
-
-        @retry(
-            stop=stop_after_attempt(5),  # Stop after 5 attempts
-            wait=wait_exponential(multiplier=1, min=4, max=30),  # Exponential backoff with jitter
-            retry=retry_if_exception_type(RETRYABLE_EXCEPTIONS),
-            reraise=True  # Reraise the exception if all retries fail
-        )
-        def download_file():
-            downloaded_bytes = 0
-            last_logged_progress = 0
-
-            with requests.get(url, stream=True, timeout=60) as response:
-                response.raise_for_status()  # Raise an exception for bad status codes
-
-                total_size_in_bytes = int(response.headers.get('content-length', 0))
-                logging.info(f"Total file size: {total_size_in_bytes / (1024 * 1024):.2f} MB")
-
-                with open(filename, 'wb') as f:
-                    for chunk in response.iter_content(chunk_size=chunk_size):
-                        if chunk:  # filter out keep-alive new chunks
-                            f.write(chunk)
-                            downloaded_bytes += len(chunk)
-
-                            if total_size_in_bytes > 0:
-                                # Log progress every 10%
-                                progress = int((downloaded_bytes / total_size_in_bytes) * 100)
-                                if progress >= last_logged_progress + 10:
-                                    logging.info(f"Downloaded {progress}% ({downloaded_bytes / (1024 * 1024):.2f} MB)")
-                                    last_logged_progress = progress
-                            else:
-                                # If total size is unknown, log every 100 MB
-                                if downloaded_bytes >= last_logged_progress + (100 * 1024 * 1024):
-                                    logging.info(f"Downloaded {downloaded_bytes / (1024 * 1024):.2f} MB")
-                                    last_logged_progress = downloaded_bytes
-
-
-            logging.info(f"Successfully downloaded {downloaded_bytes / (1024 * 1024):.2f} MB to {filename}")
-
-        try:
-            download_file()
-        except requests.exceptions.HTTPError as e:
-            logging.error(f"HTTP Error while downloading {url}: {e}")
-        except Exception as e:
-            logging.error(f"An unexpected error occurred while downloading {url}: {e}")
-
     try:
         for config in configs:
             if config["import_name"] == importname:
@@ -207,8 +150,7 @@ def download_files(importname, configs):
                             f"Numbers of records found for the URL {url_new} is {record_count}"
                         )
                         url_new = f"{url_new}?$limit={record_count}&$offset=0"
-                        # download_with_retry(url_new, input_file_name)
-                        stream_download_to_gcs(url_new, "runtimes-videos", input_file_name)
+                        stream_download_to_gcs(url_new, "runtimes-videos", input_file_name, "stuniki-runtimes-dev")
                         logging.info(
                             "Successfully downloaded the source data...!!!!")
                     else:
