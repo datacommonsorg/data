@@ -33,6 +33,9 @@ import file_util
 
 record_count_query = '?$query=select%20count(*)%20as%20COLUMN_ALIAS_GUARD__count'
 
+_GCS_PROJECT = 'datcom-import-automation-prod'
+_GCS_BUCKET = 'datcom-volume-mount'
+
 # GCS works well with multiples of 256 KiB.
 DEFAULT_CHUNK_SIZE = 8 * 1024 * 1024 # 8 MB
 
@@ -130,43 +133,42 @@ def stream_download_to_gcs(
         raise
 
 def download_files(importname, configs):
+    config = next(
+        (c for c in configs if c["import_name"] == importname),
+        None
+    )
+
+    if not config:
+        raise ValueError(f"No configuration found for importname: {importname}")
+
+    files = config["files"]
+
     try:
-        for config in configs:
-            if config["import_name"] == importname:
-                files = config["files"]
-                for file_info in files:
-                    url_new = file_info["url"]
-                    logging.info(f"URL from config file {url_new}")
-                    input_file_name = file_info["input_file_name"]
-                    logging.info(f"Input File Name {input_file_name}")
+        for file_info in files:
+            url_new = file_info["url"]
+            logging.info(f"URL from config file {url_new}")
+            input_file_name = file_info["input_file_name"]
+            logging.info(f"Input File Name {input_file_name}")
 
-                    get_record_count = requests.get(
-                        url_new.replace('.csv', record_count_query))
-                    if get_record_count.status_code == 200:
-                        record_count = json.loads(
-                            get_record_count.text
-                        )[0]['COLUMN_ALIAS_GUARD__count']
-                        logging.info(
-                            f"Numbers of records found for the URL {url_new} is {record_count}"
-                        )
-                        url_new = f"{url_new}?$limit={record_count}&$offset=0"
-                        stream_download_to_gcs(url_new, "runtimes-videos", input_file_name, "stuniki-runtimes-dev")
-                        logging.info(
-                            "Successfully downloaded the source data...!!!!")
-                    else:
-                        logging.error(
-                            f"Failed to download files, Status code: {get_record_count.status_code}"
-                        )
-
+            get_record_count = requests.get(url_new.replace('.csv', record_count_query))
+            if get_record_count.status_code == 200:
+                record_count = json.loads(get_record_count.text)[0]['COLUMN_ALIAS_GUARD__count']
+                logging.info(f"Numbers of records found for the URL {url_new} is {record_count}")
+                url_new = f"{url_new}?$limit={record_count}&$offset=0"
+                full_file_path = "/".join([importname, "input_files", input_file_name])
+                stream_download_to_gcs(url_new, _GCS_BUCKET, full_file_path, project_id=_GCS_PROJECT)
+                logging.info("Successfully downloaded the source data...!!!!")
+            else:
+                logging.error(f"Failed to download files, Status code: {get_record_count.status_code}")
     except Exception as e:
-        logging.fatal(f"Error downloading URL {url_new} - {e}")
+        logging.fatal(f"A critical error occurred in the download process for import '{importname}': {e}")
 
 
 def main(_):
     """Main function to download the csv files."""
     global _INPUT_FILE_PATH
     _INPUT_FILE_PATH = os.path.join(_FLAGS.input_file_path)
-    _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'gcs_output', _FLAGS.input_file_path)
+    _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_file_path)
     Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
     importname = sys.argv[1]
     logging.info(f'Loading config: {_FLAGS.config_file}')
