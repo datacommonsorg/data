@@ -33,8 +33,10 @@ sys.path.append(os.path.join(DATA_DIR, 'data/util'))
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('url', None, 'URL of the file to download')
-flags.DEFINE_string('output_folder', 'input_folder',
+# --- CHANGE THIS LINE ---
+flags.DEFINE_string('output_folder', None, # Changed default from 'input_folder' to None
                     'Folder to save the downloaded file')
+# --- END CHANGE ---
 flags.DEFINE_bool('unzip', False,
                   'Unzip the downloaded file if it is a zip file')
 
@@ -216,6 +218,10 @@ def main(_):
         logging.fatal("--url is required. Exiting.")
         sys.exit(1) # Indicate failure to the system if URL is missing
 
+    # No need for an explicit check here; absl.flags will handle it
+    # because 'output_folder' is now defined with a default of None
+    # and marked as required.
+
     if not download_file(url, output_folder, unzip, None, retry_tries, retry_delay, retry_backoff):
         logging.error("File download or processing failed. Check logs for details.")
         sys.exit(1)
@@ -225,4 +231,5 @@ def main(_):
 
 if __name__ == '__main__':
     flags.mark_flag_as_required('url')
+    flags.mark_flag_as_required('output_folder')
     app.run(main)
