@@ -1,0 +1,15 @@
+parameter,value
+url,https://www.stats.govt.nz/topics/population
+description,"Population summary figures of New Zealand with respect to Births and deaths,International travel and migration,Life expectancy at birth (years)(7),Fertility,Marriages, civil unions, and divorces"
+place_type,Country
+places_within,country/NZL
+start_date,1991
+end_date,2023
+release_frequency,1 year
+process,"In the data sheet, added ""country/NZL"" as country id manually under observationAbout"
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod"
+debug,1
+statvar_dcid_remap_csv,nzl_demographics_statvar_remap.csv
+mapped_coloumns,1
+header_rows,4
