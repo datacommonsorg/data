@@ -21,6 +21,7 @@ import pandas as pd
 import os
 import json
 import re
+import csv
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('validation_config', 'validation_config.json',
@@ -95,13 +96,13 @@ class ImportValidation:
             self.validation_config = json.load(fd)
 
     def _latest_data_validation(self, config: dict):
-        logging.info('Not yet implemented (This is a placeholder, MaxDate_Latest is the new one)')
+        logging.info('Not yet implemented (This is a placeholder')
 
     def _max_date_latest_validation(self, config: dict):
         logging.info('Running MaxDate_Latest validation.')
         if self.stats_summary_df.empty:
-            return ValidationResult('FAILED', config['validation'],
-                                    'Stats summary file was not loaded or is empty.')
+            # Raise AssertionError for consistency
+            raise AssertionError('Stats summary file was not loaded or is empty.')
 
         errors = []
         expected_latest_date_str = str(config.get('expectedLatestDate', 'current_year'))
@@ -112,7 +113,7 @@ class ImportValidation:
             try:
                 offset = int(expected_latest_date_str.split(' - ')[1])
                 target_year = current_year - offset
-            except (IndexError, ValueError) as e:
+            except (IndexError, ValueError) as e:                
                 errors.append(f"Invalid format for expectedLatestDate: {expected_latest_date_str}. Error: {e}")
         elif expected_latest_date_str == 'current_year':
             target_year = current_year
@@ -122,60 +123,56 @@ class ImportValidation:
             except ValueError as e:
                 errors.append(f"Invalid year in expectedLatestDate: {expected_latest_date_str}. Error: {e}")
 
-        if not errors: # Proceed only if target_year was parsed correctly
-            # Assuming 'MaxDate' column exists and contains date strings like 'YYYY', 'YYYY-MM', or 'YYYY-MM-DD'
-            # And 'StatVar' column exists for identifying the StatVar
-            if 'MaxDate' not in self.stats_summary_df.columns or 'StatVar' not in self.stats_summary_df.columns:
-                errors.append("Required columns ('MaxDate', 'StatVar') not found in stats summary.")
-            else:
-                for index, row in self.stats_summary_df.iterrows():
-                    stat_var = row['StatVar']
-                    max_date_str = str(row['MaxDate'])
-                    
-                    # Make sure re is imported; ideally at the top of the file
+        # If expectedLatestDate parsing itself failed, raise immediately
+        if errors:
+            error_message = 'MaxDate_Latest configuration error: ' + '; '.join(errors)
+            logging.error(error_message)
+            raise AssertionError(error_message)
 
-                    variables_to_check_config = config.get('variableMeasured', ['*'])
-                    should_check_stat_var = False
-                    if '*' in variables_to_check_config:
-                        should_check_stat_var = True
-                    else:
-                        for pattern_or_dcid in variables_to_check_config:
-                            pattern_str = str(pattern_or_dcid)
-                            if pattern_str == stat_var: # Exact match
+        if 'MaxDate' not in self.stats_summary_df.columns or 'StatVar' not in self.stats_summary_df.columns:
+            errors.append("Required columns ('MaxDate', 'StatVar') not found in stats summary.")
+        else:
+            for index, row in self.stats_summary_df.iterrows():
+                stat_var = row['StatVar']
+                max_date_str = str(row['MaxDate'])
+                
+                variables_to_check_config = config.get('variableMeasured', ['*'])
+                should_check_stat_var = False
+                if '*' in variables_to_check_config:
+                    should_check_stat_var = True
+                else:
+                    for pattern_or_dcid in variables_to_check_config:
+                        pattern_str = str(pattern_or_dcid)
+                        if pattern_str == stat_var: # Exact match
+                            should_check_stat_var = True
+                            break
+                        try:
+                            if re.fullmatch(pattern_str, stat_var):
                                 should_check_stat_var = True
                                 break
-                            try:
-                                # Attempt regex match if not an exact DCID match
-                                if re.fullmatch(pattern_str, stat_var):
-                                    should_check_stat_var = True
-                                    break
-                            except re.error:
-                                # If pattern is invalid regex, it won't match here.
-                                # It would only have matched if it was an exact DCID.
-                                pass # Potentially log a warning for invalid patterns if desired
+                        except re.error:
+                            pass 
 
-                    if not should_check_stat_var:
-                        continue
+                if not should_check_stat_var:
+                    continue
 
-                    try:
-                        # Extract year from MaxDate. Handles YYYY, YYYY-MM, YYYY-MM-DD
-                        max_date_year = int(max_date_str.split('-')[0])
-                        if max_date_year != target_year:
-                            errors.append(
-                                f"StatVar '{stat_var}': MaxDate year {max_date_year} does not match expected year {target_year}."
-                            )
-                    except ValueError:
+                try:
+                    max_date_year = int(max_date_str.split('-')[0])
+                    if max_date_year != target_year:
                         errors.append(
-                            f"StatVar '{stat_var}': Could not parse year from MaxDate '{max_date_str}'."
+                            f"StatVar '{stat_var}': MaxDate year {max_date_year} does not match expected year {target_year}."
                         )
+                except ValueError:
+                    errors.append(
+                        f"StatVar '{stat_var}': Could not parse year from MaxDate '{max_date_str}'."
+                    )
         
         if errors:
             error_message = 'MaxDate_Latest validation failed: ' + '; '.join(errors)
             logging.error(error_message)
-            return ValidationResult('FAILED', config['validation'], error_message)
+            raise AssertionError(error_message)
         
         logging.info('MaxDate_Latest validation passed.')
-        return ValidationResult('PASSED', config['validation'], '')
 
     # Checks if the number of deleted data points are below a threshold.
     def _deleted_count_validation(self, config: dict):
@@ -206,25 +203,25 @@ class ImportValidation:
         #    raise AssertionError(f'Validation failed: {config["validation"]}')
 
     def _run_validation(self, config) -> ValidationResult:
+        validation_name = config['validation']
         try:
-            self.validation_map[Validation[config['validation']]](config)
-            logging.info('Validation passed: %s', config['validation'])
-            return ValidationResult('PASSED', config['validation'], '')
+            self.validation_map[Validation[validation_name]](config)
+            logging.info('Validation passed: %s', validation_name)
+            return ValidationResult('PASSED', validation_name, '')
         except AssertionError as exc:
-            logging.error(repr(exc))
-            return ValidationResult('FAILED', config['validation'], repr(exc))
+            logging.error(str(exc))
+            return ValidationResult('FAILED', validation_name, str(exc))
 
     def run_validations(self) -> bool:
         # Returns false if any validation fails.
         status = True
         with open(self.validation_output, mode='w',
-                  encoding='utf-8') as output_file:
-            output_file.write('test,status,message\n')
+                  encoding='utf-8', newline='') as output_file:
+            csv_writer = csv.writer(output_file)
+            csv_writer.writerow(['test', 'status', 'message']) # Write header
             for config in self.validation_config:
                 result = self._run_validation(config)
-                # TODO: use CSV writer libs
-                output_file.write(
-                    f'{result.name},{result.status},{result.message}\n')
+                csv_writer.writerow([result.name, result.status, result.message]) # Write data row
                 self.validation_result.append(result)
                 if result.status == 'FAILED':
                     status = False
