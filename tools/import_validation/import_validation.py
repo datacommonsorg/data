@@ -20,6 +20,7 @@ from enum import Enum
 import pandas as pd
 import os
 import json
+import re
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('validation_config', 'validation_config.json',
@@ -131,10 +132,29 @@ class ImportValidation:
                     stat_var = row['StatVar']
                     max_date_str = str(row['MaxDate'])
                     
-                    # Handle variableMeasured filtering (simplified for now, assumes '*' or list of dcids)
-                    # A more robust implementation would handle regex and property matching as per validation.md
-                    variables_to_check = config.get('variableMeasured', ['*'])
-                    if '*' not in variables_to_check and stat_var not in variables_to_check:
+                    # Make sure re is imported; ideally at the top of the file
+
+                    variables_to_check_config = config.get('variableMeasured', ['*'])
+                    should_check_stat_var = False
+                    if '*' in variables_to_check_config:
+                        should_check_stat_var = True
+                    else:
+                        for pattern_or_dcid in variables_to_check_config:
+                            pattern_str = str(pattern_or_dcid)
+                            if pattern_str == stat_var: # Exact match
+                                should_check_stat_var = True
+                                break
+                            try:
+                                # Attempt regex match if not an exact DCID match
+                                if re.fullmatch(pattern_str, stat_var):
+                                    should_check_stat_var = True
+                                    break
+                            except re.error:
+                                # If pattern is invalid regex, it won't match here.
+                                # It would only have matched if it was an exact DCID.
+                                pass # Potentially log a warning for invalid patterns if desired
+
+                    if not should_check_stat_var:
                         continue
 
                     try:
