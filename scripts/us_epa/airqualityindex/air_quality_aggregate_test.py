@@ -31,7 +31,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
     def setUpClass(cls):
         from absl import flags
         flags.FLAGS(
-            ["air_quality_aggregate_test.py", "--output_path1", "output"])
+            ["air_quality_aggregate_test.py", "--output_file_path", "output"])
 
     def test_write_csv_county(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -80,7 +80,6 @@ class TestCriteriaGasesTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             test_tmcf = os.path.join(tmp_dir, 'test_tmcf.tmcf')
             write_tmcf(test_tmcf)
-
             expected_tmcf = os.path.join(module_dir_, 'EPA_AQI.tmcf')
             with open(test_tmcf, 'r') as test:
                 test_str: str = test.read()

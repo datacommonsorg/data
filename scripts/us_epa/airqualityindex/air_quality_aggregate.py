@@ -37,8 +37,8 @@ flags.DEFINE_integer('aggregate_end_year',
                      os.getenv('END_YEAR',
                                datetime.now().year),
                      'Process data upto this year.')
-flags.DEFINE_string('input_path1', 'input_files', 'Input files path')
-flags.DEFINE_string('output_path1', 'output', 'Output files path')
+flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
+flags.DEFINE_string('output_file_path', 'output', 'Output files path')
 flags.DEFINE_string('mode', '', 'Options: download or process')
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -88,8 +88,8 @@ def get_place(observation):
 
 def create_csv(csv_file_path):
     logging.info(f'Inside create csv value of {csv_file_path}')
-    output_path1 = os.path.join(MODULE_DIR, _FLAGS.output_path1)
-    file_path = os.path.join(output_path1, csv_file_path)
+    output_file_path = os.path.join(MODULE_DIR, _FLAGS.output_file_path)
+    file_path = os.path.join(output_file_path, csv_file_path)
     logging.info(f'file_path {file_path}')
     with open(file_path, 'w', newline='') as f_out:
         writer = csv.DictWriter(f_out,
@@ -122,7 +122,7 @@ def write_csv(csv_file_path, reader):
             writer.writerow(new_row)
 
 
-def downloadUrl(_INPUT_FILE_PATH):
+def download_url(_INPUT_FILE_PATH):
 
     start_year = _FLAGS.aggregate_start_year
     end_year = _FLAGS.aggregate_end_year
@@ -141,7 +141,7 @@ def downloadUrl(_INPUT_FILE_PATH):
                 logging.info(f'============url {url}')
                 response = retry_method(url)
                 logging.info(
-                    f'Downloading files from url {url} and svae to path {_INPUT_FILE_PATH}'
+                    f'Downloading files from url {url} and save to path {_INPUT_FILE_PATH}'
                 )
                 logging.info(f'raise_for_status {response.status_code}')
                 response.raise_for_status()
@@ -157,11 +157,11 @@ def downloadUrl(_INPUT_FILE_PATH):
                         logging.fatal(
                             f"No data available for URL: {url}. Aborting download."
                         )
-                    fileName1 = f"{file_name}.zip"
+                    input_file_name = f"{file_name}.zip"
                     logging.info(
-                        f'filename: {fileName1} _INPUT_FILE_PATH : {_INPUT_FILE_PATH}'
+                        f'filename: {input_file_name} _INPUT_FILE_PATH : {_INPUT_FILE_PATH}'
                     )
-                    file_path = os.path.join(_INPUT_FILE_PATH, fileName1)
+                    file_path = os.path.join(_INPUT_FILE_PATH, input_file_name)
                     #download zip file locally
                     with open(file_path, 'wb') as f:
                         f.write(response.content)
@@ -187,20 +187,21 @@ def process(_INPUT_FILE_PATH):
 
             try:
                 file_path = os.path.join(_INPUT_FILE_PATH, file_name)
-                time.sleep(20)
-                output_path2 = os.path.join(MODULE_DIR, _FLAGS.output_path1,
-                                            output_file_name)
+                #time.sleep(20)
+                output_file_path = os.path.join(MODULE_DIR,
+                                                _FLAGS.output_file_path,
+                                                output_file_name)
                 logging.info(
-                    f'csv_file_path, output_path2 from request_and_write_csv  {output_file_name} {output_path2}'
+                    f'csv_file_path, output_file_path from request_and_write_csv  {output_file_name} {output_file_path}'
                 )
-                fiel_path_with_filename = f"{file_path}.zip"
-                with open(fiel_path_with_filename, 'rb') as zip_file:
+                file_path_with_filename = f"{file_path}.zip"
+                with open(file_path_with_filename, 'rb') as zip_file:
                     with zipfile.ZipFile(zip_file) as zf:
                         try:
                             with zf.open(f'{file_name}.csv', 'r') as infile:
                                 reader = csv.DictReader(
                                     io.TextIOWrapper(infile, 'utf-8'))
-                                write_csv(output_path2, reader)
+                                write_csv(output_file_path, reader)
                         except FileNotFoundError:
                             raise FileNotFoundError(
                                 f"CSV file '{file_name}.csv' not found in the ZIP archive"
@@ -214,8 +215,8 @@ def process(_INPUT_FILE_PATH):
 
 def write_tmcf(tmcf_file_name):
     logging.info(f'Inside write_tmcf value of {tmcf_file_name}')
-    output_path1 = os.path.join(MODULE_DIR, _FLAGS.output_path1)
-    tmcf_file_path = os.path.join(output_path1, tmcf_file_name)
+    output_file_path = os.path.join(MODULE_DIR, _FLAGS.output_file_path)
+    tmcf_file_path = os.path.join(output_file_path, tmcf_file_name)
     logging.info(f'file_path {tmcf_file_name}')
     with open(tmcf_file_path, 'w') as f_out:
         f_out.write(TEMPLATE_MCF)
@@ -223,8 +224,8 @@ def write_tmcf(tmcf_file_name):
 
 def main(_):
     mode = _FLAGS.mode
-    input_file_path = os.path.join(MODULE_DIR, _FLAGS.input_path1)
-    output_file_path = os.path.join(MODULE_DIR, _FLAGS.output_path1)
+    input_file_path = os.path.join(MODULE_DIR, _FLAGS.input_file_path)
+    output_file_path = os.path.join(MODULE_DIR, _FLAGS.output_file_path)
     Path(output_file_path).mkdir(parents=True, exist_ok=True)
     Path(input_file_path).mkdir(parents=True, exist_ok=True)
 
@@ -232,7 +233,7 @@ def main(_):
         logging.info(f'inside mode {mode}')
         #downloading zip file for 'daily_aqi_by_county'
         logging.info(f'downloading zipped files')
-        downloadUrl(input_file_path)
+        download_url(input_file_path)
 
     if mode == "" or mode == "process":
         logging.info(f'inside mode {mode}')
