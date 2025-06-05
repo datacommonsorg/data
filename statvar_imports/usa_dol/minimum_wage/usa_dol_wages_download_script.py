@@ -17,7 +17,9 @@ file_path2 = os.path.join(source_folder, "raw_data.csv")
 @retry(tries=5,delay=3,backoff=5)
 def download_with_retry(url):
     logging.info(f"Trying to access url : {url}")
-    return requests.get(url) 
+    response=requests.get(url)
+    response.raise_for_status()
+    return response 
 
 def extract_all_table_data(url):
     try:
@@ -48,7 +50,7 @@ def extract_all_table_data(url):
             logging.info("Downloaded files")
             return table_data
         else:
-            print(f"No tables found on the page {url}")
+            logging.info(f"No tables found on the page {url}")
             return None
     except requests.exceptions.RequestException as e:
         logging.fatal(f"Error fetching URL: {e}")
