@@ -1,0 +1,10 @@
+Node: E:UNData.tmcf->E0
+observationAbout: C:UNData.tmcf->observationAbout
+observationDate: C:UNData.tmcf->observationDate
+value: C:UNData.tmcf->value
+variableMeasured: C:UNData.tmcf->variableMeasured
+unit: C:UNData.tmcf->unit
+scalingFactor: C:UNData.tmcf->scalingFactor
+typeOf: dcs:StatVarObservation
+#Aggregate: max
+measurementMethod: UNData

@@ -6,7 +6,7 @@ import re
 import shutil
 
 from absl import logging
-from google.cloud.storage import Client
+from google.cloud import storage
 from googleapiclient.discovery import build
 
 
@@ -48,7 +48,7 @@ def load_mcf_files(path: str) -> pd.DataFrame:
     return result
 
 
-def load_csv_data(path: str, column_list: list, tmp_dir: str) -> pd.DataFrame:
+def load_csv_data(path: str, tmp_dir: str) -> pd.DataFrame:
     """ Loads all matched files in the given path and 
     returns a single combined dataframe."""
     df_list = []
@@ -58,7 +58,7 @@ def load_csv_data(path: str, column_list: list, tmp_dir: str) -> pd.DataFrame:
 
     filenames = glob.glob(pattern)
     for filename in filenames:
-        df = pd.read_csv(filename, names=column_list, header=None)
+        df = pd.read_csv(filename)
         df_list.append(df)
     result = pd.concat(df_list, ignore_index=True)
     return result
@@ -111,7 +111,7 @@ def get_job_status(project: str, job: str) -> str:
 
 def upload_output_data(src: str, dest: str):
     if dest.startswith('gs://'):
-        client = Client()
+        client = storage.Client()
         bucket_name = dest.split('/')[2]
         bucket = client.get_bucket(bucket_name)
         for filepath in glob.iglob(src):
@@ -135,7 +135,7 @@ def get_gcs_data(uri: str, tmp_dir: str) -> str:
     Returns:
       path to the output file/folder
     """
-    client = Client()
+    client = storage.Client()
     bucket = client.get_bucket(uri.split('/')[2])
     file_pat = uri.split(bucket.name, 1)[1][1:]
     dirname = os.path.dirname(file_pat)
@@ -144,3 +144,17 @@ def get_gcs_data(uri: str, tmp_dir: str) -> str:
             path = blob.name.replace('/', '_')
             blob.download_to_filename(os.path.join(tmp_dir, path))
     return os.path.join(tmp_dir, file_pat.replace('/', '_'))
+
+
+def load_data(path: str, tmp_dir: str) -> pd.DataFrame:
+    """ Loads data from the given path and returns as a dataframe.
+    Args:
+      path: local or gcs path (single file or wildcard format)
+      tmp_dir: destination folder
+    Returns:
+      dataframe with the input data
+    """
+    if path.startswith('gs://'):
+        os.makedirs(tmp_dir, exist_ok=True)
+        path = get_gcs_data(path, tmp_dir)
+    return load_mcf_files(path)
