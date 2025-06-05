@@ -11,7 +11,7 @@
                 "template_mcf": "data/output/NORS_NonInfectious_Disease.tmcf",
                 "cleaned_csv": "data/output/NORS_NonInfectious_Disease.csv"
             }],
-        "cron_schedule": "0 0 1 * *"
+        "cron_schedule": "30 06 * * 1"
         }
     ]
 }
