@@ -26,7 +26,7 @@ from pathlib import Path
 tmpdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tmp")
 Path(tmpdir).mkdir(parents=True, exist_ok=True)
 
-def download_file(input_file_path):
+def download_file(url, input_file_path):
     """
     Downloads a file from a given URL using Selenium.
 
@@ -47,25 +47,23 @@ def download_file(input_file_path):
     count = 0
     try:
         for year in range(22, 100):
-            url = f'https://nces.ed.gov/programs/digest/d{year}/tables/dt{year}_313.30.asp'
             try:
-                driver.get(url)
+                driver.get(url.format(year, year))
                 excel_link = WebDriverWait(driver, 10).until(
                     EC.element_to_be_clickable((By.XPATH, "//a[contains(text(),'Download Excel')]"))
                 )
                 excel_link.click()
-                logging.info("Excel link clicked.")
                 time.sleep(5)
+                logging.info(f"{url.format(year, year)} clicked.")
                 for filename in os.listdir(tmpdir):
                     if filename.endswith((".xlsx", ".xls")):
                         old_file = os.path.join(tmpdir, filename)
                         new_file = os.path.join(input_file_path, f'nces_hbcu_input_{count}_{filename}')
                         shutil.copyfile(old_file, new_file)
-                        time.sleep(1)
                         os.remove(old_file)
                         count += 1
             except Exception as e:
-                logging.fatal(f"No Excel link found for year 20{year} or an error occurred")
+                logging.warning(f"No Excel link found for year 20{year} or No future url found")
                 break
     except Exception as e:
         logging.fatal(f"Error during the main loop")
@@ -73,10 +71,11 @@ def download_file(input_file_path):
         driver.quit()
         logging.info("ChromeDriver has been closed.")
 
-def main(argv):
+def main(_):
     inputdir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
     Path(inputdir).mkdir(parents=True, exist_ok=True)
-    download_file(inputdir)
+    url = 'https://nces.ed.gov/programs/digest/d{}/tables/dt{}_313.30.asp'
+    download_file(url, inputdir)
     shutil.rmtree(tmpdir)
 
 if __name__ == "__main__":
