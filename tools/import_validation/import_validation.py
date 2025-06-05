@@ -20,6 +20,8 @@ from enum import Enum
 import pandas as pd
 import os
 import json
+import re
+import csv
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('validation_config', 'validation_config.json',
@@ -37,6 +39,7 @@ Validation = Enum('Validation', [
     ('ADDED_COUNT', 3),
     ('DELETED_COUNT', 4),
     ('LATEST_DATA', 5),
+    ('MaxDate_Latest', 6),  # Added new validation
 ])
 
 
@@ -70,11 +73,22 @@ class ImportValidation:
         logging.info('Reading config from %s', validation_config)
         self.differ_results = pd.read_csv(differ_output)
         print(self.differ_results)
+        # Load the stats summary report
+        try:
+            self.stats_summary_df = pd.read_csv(stats_summary)
+            logging.info('Loaded stats summary from %s', stats_summary)
+        except FileNotFoundError:
+            logging.error('Stats summary file not found: %s', stats_summary)
+            # Depending on which validations are run, this might be a critical error
+            # For now, we'll allow it to proceed, and validations needing it will fail.
+            self.stats_summary_df = pd.DataFrame() # Empty DataFrame
+
         self.validation_map = {
             Validation.MODIFIED_COUNT: self._modified_count_validation,
             Validation.ADDED_COUNT: self._added_count_validation,
             Validation.DELETED_COUNT: self._deleted_count_validation,
-            Validation.UNMODIFIED_COUNT: self._unmodified_count_validation
+            Validation.UNMODIFIED_COUNT: self._unmodified_count_validation,
+            Validation.MaxDate_Latest: self._max_date_latest_validation, # Added
         }
         self.validation_output = validation_output
         self.validation_result = []
@@ -82,7 +96,83 @@ class ImportValidation:
             self.validation_config = json.load(fd)
 
     def _latest_data_validation(self, config: dict):
-        logging.info('Not yet implemented')
+        logging.info('Not yet implemented (This is a placeholder')
+
+    def _max_date_latest_validation(self, config: dict):
+        logging.info('Running MaxDate_Latest validation.')
+        if self.stats_summary_df.empty:
+            # Raise AssertionError for consistency
+            raise AssertionError('Stats summary file was not loaded or is empty.')
+
+        errors = []
+        expected_latest_date_str = str(config.get('expectedLatestDate', 'current_year'))
+        current_year = pd.Timestamp.now().year
+        target_year = current_year
+
+        if expected_latest_date_str.startswith('current_year - '):
+            try:
+                offset = int(expected_latest_date_str.split(' - ')[1])
+                target_year = current_year - offset
+            except (IndexError, ValueError) as e:                
+                errors.append(f"Invalid format for expectedLatestDate: {expected_latest_date_str}. Error: {e}")
+        elif expected_latest_date_str == 'current_year':
+            target_year = current_year
+        else:
+            try:
+                target_year = int(expected_latest_date_str)
+            except ValueError as e:
+                errors.append(f"Invalid year in expectedLatestDate: {expected_latest_date_str}. Error: {e}")
+
+        # If expectedLatestDate parsing itself failed, raise immediately
+        if errors:
+            error_message = 'MaxDate_Latest configuration error: ' + '; '.join(errors)
+            logging.error(error_message)
+            raise AssertionError(error_message)
+
+        if 'MaxDate' not in self.stats_summary_df.columns or 'StatVar' not in self.stats_summary_df.columns:
+            errors.append("Required columns ('MaxDate', 'StatVar') not found in stats summary.")
+        else:
+            for index, row in self.stats_summary_df.iterrows():
+                stat_var = row['StatVar']
+                max_date_str = str(row['MaxDate'])
+                
+                variables_to_check_config = config.get('variableMeasured', ['*'])
+                should_check_stat_var = False
+                if '*' in variables_to_check_config:
+                    should_check_stat_var = True
+                else:
+                    for pattern_or_dcid in variables_to_check_config:
+                        pattern_str = str(pattern_or_dcid)
+                        if pattern_str == stat_var: # Exact match
+                            should_check_stat_var = True
+                            break
+                        try:
+                            if re.fullmatch(pattern_str, stat_var):
+                                should_check_stat_var = True
+                                break
+                        except re.error:
+                            pass 
+
+                if not should_check_stat_var:
+                    continue
+
+                try:
+                    max_date_year = int(max_date_str.split('-')[0])
+                    if max_date_year != target_year:
+                        errors.append(
+                            f"StatVar '{stat_var}': MaxDate year {max_date_year} does not match expected year {target_year}."
+                        )
+                except ValueError:
+                    errors.append(
+                        f"StatVar '{stat_var}': Could not parse year from MaxDate '{max_date_str}'."
+                    )
+        
+        if errors:
+            error_message = 'MaxDate_Latest validation failed: ' + '; '.join(errors)
+            logging.error(error_message)
+            raise AssertionError(error_message)
+        
+        logging.info('MaxDate_Latest validation passed.')
 
     # Checks if the number of deleted data points are below a threshold.
     def _deleted_count_validation(self, config: dict):
@@ -113,25 +203,25 @@ class ImportValidation:
         #    raise AssertionError(f'Validation failed: {config["validation"]}')
 
     def _run_validation(self, config) -> ValidationResult:
+        validation_name = config['validation']
         try:
-            self.validation_map[Validation[config['validation']]](config)
-            logging.info('Validation passed: %s', config['validation'])
-            return ValidationResult('PASSED', config['validation'], '')
+            self.validation_map[Validation[validation_name]](config)
+            logging.info('Validation passed: %s', validation_name)
+            return ValidationResult('PASSED', validation_name, '')
         except AssertionError as exc:
-            logging.error(repr(exc))
-            return ValidationResult('FAILED', config['validation'], repr(exc))
+            logging.error(str(exc))
+            return ValidationResult('FAILED', validation_name, str(exc))
 
     def run_validations(self) -> bool:
         # Returns false if any validation fails.
         status = True
         with open(self.validation_output, mode='w',
-                  encoding='utf-8') as output_file:
-            output_file.write('test,status,message\n')
+                  encoding='utf-8', newline='') as output_file:
+            csv_writer = csv.writer(output_file)
+            csv_writer.writerow(['test', 'status', 'message']) # Write header
             for config in self.validation_config:
                 result = self._run_validation(config)
-                # TODO: use CSV writer libs
-                output_file.write(
-                    f'{result.name},{result.status},{result.message}\n')
+                csv_writer.writerow([result.name, result.status, result.message]) # Write data row
                 self.validation_result.append(result)
                 if result.status == 'FAILED':
                     status = False

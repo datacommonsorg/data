@@ -1,0 +1,10 @@
+StatVar,NumPlaces,NumObservations,MinValue,MaxValue,NumObservationsDates,MinDate,MaxDate,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Person_Total_Pass_2024,1,1,0,1,1,2024,2024,M,P,[],P1Y
+Count_Person_Total_Fail_2023,1,1,0,1,1,2023,2023,M,P,[],P1Y
+Count_Person_Regex_Pass_2024,1,1,0,1,1,2024,2024,M,P,[],P1Y
+Count_Person_Regex_Fail_2023,1,1,0,1,1,2023,2023,M,P,[],P1Y
+Count_Thing_Exact_Pass_2022,1,1,0,1,1,2022,2022,M,T,[],P1Y
+Count_Thing_Exact_Fail_2021,1,1,0,1,1,2021,2021,M,T,[],P1Y
+Invalid_Date_StatVar,1,1,0,1,1,2020,BAD_DATE,M,X,[],P1Y
+Current_Year_StatVar_Pass_2025,1,1,0,1,1,2025,2025,M,CY,[],P1Y
+Current_Year_StatVar_Fail_2024,1,1,0,1,1,2024,2024,M,CY,[],P1Y
