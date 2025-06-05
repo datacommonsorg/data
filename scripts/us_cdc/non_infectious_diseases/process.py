@@ -78,12 +78,12 @@ filename = "NationalOutbreakPublicDataTool.xlsx"
 sheet_name = "Outbreak Data"
 base_path = "./data"
 schema_map_path = f"{base_path}/col_map_exc_food.json"
-input_directory = f"{base_path}/input_files"  
-output_directory = f"{base_path}/output"  
+input_directory = f"{base_path}/input_files"
+output_directory = f"{base_path}/output"
 sheet_name = "Outbreak Data"
 os.makedirs(input_directory, exist_ok=True)
 os.makedirs(output_directory, exist_ok=True)
-input_path = os.path.join(input_directory,filename)
+input_path = os.path.join(input_directory, filename)
 
 
 def download_data_from_api(column_mapping=None):
