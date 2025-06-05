@@ -128,7 +128,7 @@ def download_file(url: str, output_folder: str, unzip: bool, headers: dict = Non
 
         # --- Output folder validation: Ensure it's not an empty string ---
         if not output_folder or not output_folder.strip(): # .strip() handles strings with only spaces
-            logging.error(f"Invalid output_folder specified: '{output_folder}'. "
+            logging.fatal(f"Invalid output_folder specified: '{output_folder}'. "
                           "Output path cannot be empty or consist only of whitespace.")
             return False
         # --- End Output folder validation ---
