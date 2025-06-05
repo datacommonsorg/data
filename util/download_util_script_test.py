@@ -1,10 +1,10 @@
-import unittest
 import os
-import requests_mock
+import shutil
+import unittest
+import zipfile
 from absl import flags
 from absl.testing import flagsaver
-import zipfile
-import shutil
+import requests_mock
 import download_util_script
 
 FLAGS = flags.FLAGS

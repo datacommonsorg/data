@@ -25,12 +25,6 @@ from retry import retry
 from urllib.parse import urlparse
 import zipfile
 
-MODULE_DIR = os.path.dirname(os.path.dirname(__file__))
-DATA_DIR = os.path.join(MODULE_DIR, '..')
-
-sys.path.append(MODULE_DIR)
-sys.path.append(os.path.join(DATA_DIR, 'data/util'))
-
 FLAGS = flags.FLAGS
 flags.DEFINE_string('url', None, 'URL of the file to download')
 # --- CHANGE THIS LINE ---
@@ -129,8 +123,15 @@ def download_file(url: str, output_folder: str, unzip: bool, headers: dict = Non
         if not parsed_url.scheme or not parsed_url.netloc:
             logging.error(f"Invalid URL format or missing scheme for '{url}'. "
                           "Please ensure URL starts with 'http://' or 'https://'.")
-            return False # Return False for invalid URL
+            return False
         # --- End URL scheme validation ---
+
+        # --- Output folder validation: Ensure it's not an empty string ---
+        if not output_folder or not output_folder.strip(): # .strip() handles strings with only spaces
+            logging.error(f"Invalid output_folder specified: '{output_folder}'. "
+                          "Output path cannot be empty or consist only of whitespace.")
+            return False
+        # --- End Output folder validation ---
 
         file_name = os.path.basename(parsed_url.path)
         if not file_name:
@@ -198,7 +199,7 @@ def download_file(url: str, output_folder: str, unzip: bool, headers: dict = Non
 
     # Catch any other unexpected Python errors
     except Exception as e:
-        logging.error(f"An unexpected error occurred for URL '{url}': {e}")
+        logging.fatal(f"An unexpected error occurred for URL '{url}': {e}")
         if file_path and os.path.exists(file_path):
             os.remove(file_path)
         return False
