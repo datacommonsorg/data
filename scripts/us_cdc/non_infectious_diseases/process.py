@@ -84,8 +84,6 @@ sheet_name = "Outbreak Data"
 os.makedirs(input_directory, exist_ok=True)
 os.makedirs(output_directory, exist_ok=True)
 input_path = os.path.join(input_directory, filename)
-
-
 def download_data_from_api(column_mapping=None):
     try:
         logging.info('Downloading starts')

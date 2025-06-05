@@ -20,6 +20,7 @@ There are some notes and caveats with this dataset.
 	> The other columns add more classification of the etiology outbreak which can be added to the script at a later time -- since it requires new schema
 4. This import also imports statistics only for a single etiology -- since it is unclear how to interpret the statistics with multiple Etiologies
 5. The columns `Info on Hospitalisations` and `Info on Deaths` are not used in this import.
+6. "Note on US-Level Statistics: The US-level statistics presented in the output are an aggregation of the data collected from individual US states and territories. This means the national totals for illnesses, hospitalizations, and deaths are calculated by summing the corresponding figures from each state and territory."
 
 ### Automation Refresh
 The process.py has a parameter 'mode' with values 'download' and 'process'
