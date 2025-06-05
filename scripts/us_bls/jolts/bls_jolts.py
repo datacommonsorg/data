@@ -244,7 +244,7 @@ def generate_cleaned_dataframe(_INPUT_FILES):
         df.loc[:, 'statistical_variable'] = schema_name
         df.loc[:, 'job_change_event'] = job_change_event
         df.loc[:, 'population_type'] = population_type
-        jolts_df = jolts_df._append(df)
+        jolts_df = pd.concat([jolts_df, df], ignore_index=True)
 
     # Drop non-monthly data and throw away slice.
     jolts_df = jolts_df.query("period != 'M13'").copy()
@@ -419,7 +419,7 @@ def main(_):
         # Check if the required CSV files are downloaded before processing
         if not os.path.exists(
                 os.path.join(_INPUT_FILES, "jolts_input_jt_series.csv")):
-            logging.error(
+            logging.fatal(
                 "Required CSV files are missing. Please download the data first."
             )
             return
