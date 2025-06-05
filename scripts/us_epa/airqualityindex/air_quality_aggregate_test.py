@@ -16,20 +16,24 @@ Unit tests for air_quality_aggregate.py
 
 Usage: python3 -m unittest discover -v -s ../ -p "air_quality_aggregate_test.py"
 '''
-import unittest, csv, os, sys, tempfile,zipfile,io
+import unittest, csv, os, sys, tempfile, zipfile, io
 from absl import app
 from absl import flags
 from absl import logging
+
 _FLAGS = flags.FLAGS
 
 module_dir_ = os.path.dirname(__file__)
 
 sys.path.append(module_dir_)
 
-from air_quality_aggregate import create_csv, write_csv, write_tmcf,process
+from air_quality_aggregate import create_csv, write_csv, write_tmcf, process
+
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 class TestCriteriaGasesTest(unittest.TestCase):
-    
+
     @classmethod
     def setUpClass(cls):
         from absl import flags
@@ -90,7 +94,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
                     expected_str: str = expected.read()
                     self.assertEqual(test_str, expected_str)
             os.remove(test_tmcf)
-    
+
     @classmethod
     def setUpClass(cls):
         #from absl import flags
@@ -98,7 +102,8 @@ class TestCriteriaGasesTest(unittest.TestCase):
             flags.FLAGS(["air_quality_aggregate_test.py"])
 
     def test_process_generates_correct_output(self):
-        with tempfile.TemporaryDirectory() as tmp_input_dir, tempfile.TemporaryDirectory() as tmp_output_dir:
+        with tempfile.TemporaryDirectory(
+        ) as tmp_input_dir, tempfile.TemporaryDirectory() as tmp_output_dir:
             # Update FLAGS
             _FLAGS.input_file_path = tmp_input_dir
             _FLAGS.output_file_path = tmp_output_dir
@@ -123,7 +128,9 @@ class TestCriteriaGasesTest(unittest.TestCase):
             csv_bytes = csv_content.getvalue().encode('utf-8')
 
             # Create ZIP files for county and cbsa
-            for prefix in ['daily_aqi_by_county_2020', 'daily_aqi_by_cbsa_2020']:
+            for prefix in [
+                    'daily_aqi_by_county_2020', 'daily_aqi_by_cbsa_2020'
+            ]:
                 zip_path = os.path.join(tmp_input_dir, f"{prefix}.zip")
                 with zipfile.ZipFile(zip_path, 'w') as zipf:
                     zipf.writestr(f"{prefix}.csv", csv_bytes)
@@ -132,19 +139,25 @@ class TestCriteriaGasesTest(unittest.TestCase):
             process(tmp_input_dir)
 
             # Check if the output files were created
-            expected_csv_path = os.path.join(MODULE_DIR, tmp_output_dir, 'EPA_AQI.csv')
-            expected_tmcf_path = os.path.join(MODULE_DIR, tmp_output_dir, 'EPA_AQI.tmcf')
+            expected_csv_path = os.path.join(MODULE_DIR, tmp_output_dir,
+                                             'EPA_AQI.csv')
+            expected_tmcf_path = os.path.join(MODULE_DIR, tmp_output_dir,
+                                              'EPA_AQI.tmcf')
 
-            self.assertTrue(os.path.isfile(expected_csv_path), "CSV output file not created")
-            self.assertTrue(os.path.isfile(expected_tmcf_path), "TMCF file not created")
+            self.assertTrue(os.path.isfile(expected_csv_path),
+                            "CSV output file not created")
+            self.assertTrue(os.path.isfile(expected_tmcf_path),
+                            "TMCF file not created")
 
             # Validate CSV content
             with open(expected_csv_path, 'r') as f:
                 lines = f.readlines()
-                self.assertGreaterEqual(len(lines), 2)  # At least header + 1 data row
+                self.assertGreaterEqual(len(lines),
+                                        2)  # At least header + 1 data row
                 self.assertIn("dcid:geoId/06075", lines[1])
                 self.assertIn("dcs:Ozone", lines[1])
                 self.assertIn("dcid:epa/060750001", lines[1])
+
 
 if __name__ == '__main__':
     unittest.main()
