@@ -21,9 +21,7 @@ set -e
 #   done;
 # }
 
-date=2025-01-02
 config=spi_9m_polygon
-set -x
 
 
 # Run download script
@@ -40,7 +38,7 @@ echo "Creating a directory for the sharded files"
 mkdir -p output_files/shard
 
 echo "Sharding pcc_spi_pearson_09.csv based on year and writing them to the shard folder."
-bash /data/tools/pd_csv.sh -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 -sort time "df['year']=df['time'].str.slice(0,4)" -shard year
+bash ../../../tools/pd_csv.sh -i output_files/gpcc_spi_pearson_09.csv -o output_files/shard/gpcc_spi_pearson_09 -sort time "df['year']=df['time'].str.slice(0,4)" -shard year
 
 
 # Convert into events
@@ -53,27 +51,30 @@ for yr in $years; do
   --output_path=output_files/events_${config}/drought_${config}_${yr}_\
   --pprof_port=$((8180 + $yr )) \
   --place_cache_file=grid_1_contains.csv \
-  2>&1 | tee tmp/events-$config-$yr.log &
+#   2>&1 | tee tmp/events-$config-$yr.log &
   # sleep_while_active 10
 done
 wait
 
-#bash scripts to merge multiple csv files into one file
-
-input_folders=("data/scripts/noaa/gpcc_spi/output_files/events_spi_9m_polygon/events" "data/scripts/noaa/gpcc_spi/output_files/events_spi_9m_polygon/event_svobs" "data/scripts/noaa/gpcc_spi/output_files/events_spi_9m_polygon/place_svobs")
-output_file_name=("drought_spi_9m_polygon_events" "drought_spi_9m_polygon_svobs"  "drought_spi_9m_polygon_place_svobs")
+# bash scripts to merge multiple csv files into one file
+input_folders=("output_files/events_spi_9m_polygon/events" "output_files/events_spi_9m_polygon/event_svobs" "output_files/events_spi_9m_polygon/place_svobs")
+output_file_name=("drought_spi_9m_polygon_events" "drought_spi_9m_polygon_svobs" "drought_spi_9m_polygon_place_svobs")
 index=0
+echo "input_folders ${input_folders[@]} - output_file_name ${output_file_name[@]}"
 for fld in "${input_folders[@]}"; do
 	csv_files=($(find "$fld" -type f -name "*.csv"))
+	echo "csv_files ${csv_files[@]}"
 	output_file="${fld}/${output_file_name[$index]}"
+	echo "output_file $output_file"
 	head -n 1 "${csv_files[0]}" > "$output_file"
-	echo "$index"
+	echo "index -----> $index"
 	for file in "${csv_files[@]}"; do
 		tail -n +2 "$file" >> "$output_file"
-		echo "Processed $file to $output_file file"
+		echo "Processed_concatenate $file to $output_file file"
 	done
-	((index++))
+	index=$((index+1))
+	echo "index after increment $index"
 	mv $output_file "${output_file}.csv"
-	
+	echo "Done processing $output_file"
 done
 

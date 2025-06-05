@@ -1,5 +1,5 @@
 {
-    "2019": {
+    "2023": {
         "Estimate!!Total population!!Total population": {
             "Node": "dcid:Count_Person",
             "measuredProperty": "dcs:count",
@@ -1720,21 +1720,21 @@
             "employmentStatus": "dcs:BLS_InLaborForce",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:Count_Person",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
             "populationType": "dcs:Person",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:MarginOfError_Count_Person",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:Count_Person_Male_WithEarnings",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1743,7 +1743,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:MarginOfError_Count_Person_Male_WithEarnings",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1752,7 +1752,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:Count_Person_Female_WithEarnings",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1761,7 +1761,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:MarginOfError_Count_Person_Female_WithEarnings",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -1770,7 +1770,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
+        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
             "Node": "dcid:Mean_Earnings_Person_Male",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -1780,7 +1780,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
+        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
             "Node": "dcid:Mean_Earnings_Person_Female",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -1790,7 +1790,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
+        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
             "Node": "dcid:Median_Earnings_Person_Male",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -1800,7 +1800,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
+        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
             "Node": "dcid:Median_Earnings_Person_Female",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -1810,7 +1810,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Estimate!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:Count_Person_WithFoodStampsInThePast12Months",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -1818,7 +1818,7 @@
             "benefitsStatus": "dcs:WithFoodStampsInThePast12Months",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Margin of Error!!Total population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:MarginOfError_Count_Person_WithFoodStampsInThePast12Months",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -3737,7 +3737,7 @@
             "employmentStatus": "dcs:BLS_InLaborForce",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:Count_Person_ResidesInGroupQuarters",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -3745,7 +3745,7 @@
             "residenceType": "dcs:GroupQuarters",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:MarginOfError_Count_Person_ResidesInGroupQuarters",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -3753,7 +3753,7 @@
             "residenceType": "dcs:GroupQuarters",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:Count_Person_Male_WithEarnings_ResidesInGroupQuarters",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -3763,7 +3763,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:MarginOfError_Count_Person_Male_WithEarnings_ResidesInGroupQuarters",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -3773,7 +3773,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:Count_Person_Female_WithEarnings_ResidesInGroupQuarters",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -3783,7 +3783,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:MarginOfError_Count_Person_Female_WithEarnings_ResidesInGroupQuarters",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -3793,7 +3793,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
+        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
             "Node": "dcid:Mean_Earnings_Person_Male_ResidesInGroupQuarters",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -3804,7 +3804,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
+        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
             "Node": "dcid:Mean_Earnings_Person_Female_ResidesInGroupQuarters",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -3815,7 +3815,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
+        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
             "Node": "dcid:Median_Earnings_Person_Male_ResidesInGroupQuarters",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -3826,7 +3826,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
+        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
             "Node": "dcid:Median_Earnings_Person_Female_ResidesInGroupQuarters",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -3837,7 +3837,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Estimate!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:Count_Person_WithFoodStampsInThePast12Months_ResidesInGroupQuarters",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -3846,7 +3846,7 @@
             "benefitsStatus": "dcs:WithFoodStampsInThePast12Months",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Margin of Error!!Total group quarters population!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:MarginOfError_Count_Person_WithFoodStampsInThePast12Months_ResidesInGroupQuarters",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -5766,7 +5766,7 @@
             "employmentStatus": "dcs:BLS_InLaborForce",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:Count_Person_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -5774,7 +5774,7 @@
             "residenceType": "dcs:AdultCorrectionalFacilities",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:MarginOfError_Count_Person_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -5782,7 +5782,7 @@
             "residenceType": "dcs:AdultCorrectionalFacilities",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:Count_Person_Male_WithEarnings_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -5792,7 +5792,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:MarginOfError_Count_Person_Male_WithEarnings_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -5802,7 +5802,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:Count_Person_Female_WithEarnings_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -5812,7 +5812,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:MarginOfError_Count_Person_Female_WithEarnings_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -5822,7 +5822,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
+        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
             "Node": "dcid:Mean_Earnings_Person_Male_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -5833,7 +5833,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
+        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
             "Node": "dcid:Mean_Earnings_Person_Female_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -5844,7 +5844,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
+        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
             "Node": "dcid:Median_Earnings_Person_Male_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -5855,7 +5855,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
+        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
             "Node": "dcid:Median_Earnings_Person_Female_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -5866,7 +5866,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Estimate!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:Count_Person_WithFoodStampsInThePast12Months_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -5875,7 +5875,7 @@
             "benefitsStatus": "dcs:WithFoodStampsInThePast12Months",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Margin of Error!!Adult correctional facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:MarginOfError_Count_Person_WithFoodStampsInThePast12Months_ResidesInAdultCorrectionalFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -7795,7 +7795,7 @@
             "employmentStatus": "dcs:BLS_InLaborForce",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:Count_Person_ResidesInNursingFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -7803,7 +7803,7 @@
             "residenceType": "dcs:NursingFacilities",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:MarginOfError_Count_Person_ResidesInNursingFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -7811,7 +7811,7 @@
             "residenceType": "dcs:NursingFacilities",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:Count_Person_Male_WithEarnings_ResidesInNursingFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -7821,7 +7821,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:MarginOfError_Count_Person_Male_WithEarnings_ResidesInNursingFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -7831,7 +7831,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:Count_Person_Female_WithEarnings_ResidesInNursingFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -7841,7 +7841,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:MarginOfError_Count_Person_Female_WithEarnings_ResidesInNursingFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -7851,7 +7851,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
+        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
             "Node": "dcid:Mean_Earnings_Person_Male_ResidesInNursingFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -7862,7 +7862,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
+        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
             "Node": "dcid:Mean_Earnings_Person_Female_ResidesInNursingFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -7873,7 +7873,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
+        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
             "Node": "dcid:Median_Earnings_Person_Male_ResidesInNursingFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -7884,7 +7884,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
+        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
             "Node": "dcid:Median_Earnings_Person_Female_ResidesInNursingFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -7895,7 +7895,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Estimate!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:Count_Person_WithFoodStampsInThePast12Months_ResidesInNursingFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -7904,7 +7904,7 @@
             "benefitsStatus": "dcs:WithFoodStampsInThePast12Months",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Margin of Error!!Nursing facilities/skilled nursing facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:MarginOfError_Count_Person_WithFoodStampsInThePast12Months_ResidesInNursingFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -9824,7 +9824,7 @@
             "employmentStatus": "dcs:BLS_InLaborForce",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:Count_Person_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -9832,7 +9832,7 @@
             "residenceType": "dcs:JuvenileFacilities",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:MarginOfError_Count_Person_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -9840,7 +9840,7 @@
             "residenceType": "dcs:JuvenileFacilities",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:Count_Person_Male_WithEarnings_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -9850,7 +9850,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:MarginOfError_Count_Person_Male_WithEarnings_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -9860,7 +9860,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:Count_Person_Female_WithEarnings_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -9870,7 +9870,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:MarginOfError_Count_Person_Female_WithEarnings_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -9880,7 +9880,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
+        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
             "Node": "dcid:Mean_Earnings_Person_Male_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -9891,7 +9891,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
+        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
             "Node": "dcid:Mean_Earnings_Person_Female_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -9902,7 +9902,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
+        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
             "Node": "dcid:Median_Earnings_Person_Male_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -9913,7 +9913,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
+        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
             "Node": "dcid:Median_Earnings_Person_Female_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -9924,7 +9924,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Estimate!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:Count_Person_WithFoodStampsInThePast12Months_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -9933,7 +9933,7 @@
             "benefitsStatus": "dcs:WithFoodStampsInThePast12Months",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Margin of Error!!Juvenile Facilities!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:MarginOfError_Count_Person_WithFoodStampsInThePast12Months_ResidesInJuvenileFacilities",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -11853,7 +11853,7 @@
             "employmentStatus": "dcs:BLS_InLaborForce",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:Count_Person_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -11861,7 +11861,7 @@
             "residenceType": "dcs:CollegeOrUniversityStudentHousing",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:MarginOfError_Count_Person_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -11869,7 +11869,7 @@
             "residenceType": "dcs:CollegeOrUniversityStudentHousing",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:Count_Person_Male_WithEarnings_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -11879,7 +11879,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:MarginOfError_Count_Person_Male_WithEarnings_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -11889,7 +11889,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:Count_Person_Female_WithEarnings_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -11899,7 +11899,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:MarginOfError_Count_Person_Female_WithEarnings_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -11909,7 +11909,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
+        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
             "Node": "dcid:Mean_Earnings_Person_Male_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -11920,7 +11920,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
+        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
             "Node": "dcid:Mean_Earnings_Person_Female_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -11931,7 +11931,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
+        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
             "Node": "dcid:Median_Earnings_Person_Male_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -11942,7 +11942,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
+        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
             "Node": "dcid:Median_Earnings_Person_Female_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -11953,7 +11953,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Estimate!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:Count_Person_WithFoodStampsInThePast12Months_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -11962,7 +11962,7 @@
             "benefitsStatus": "dcs:WithFoodStampsInThePast12Months",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Margin of Error!!College/university housing!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:MarginOfError_Count_Person_WithFoodStampsInThePast12Months_ResidesInCollegeOrUniversityStudentHousing",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -13882,7 +13882,7 @@
             "employmentStatus": "dcs:BLS_InLaborForce",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:Count_Person_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -13890,7 +13890,7 @@
             "residenceType": "dcs:MilitaryQuartersOrMilitaryShips",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
+        "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals": {
             "Node": "dcid:MarginOfError_Count_Person_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -13898,7 +13898,7 @@
             "residenceType": "dcs:MilitaryQuartersOrMilitaryShips",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:Count_Person_Male_WithEarnings_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -13908,7 +13908,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
+        "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Male": {
             "Node": "dcid:MarginOfError_Count_Person_Male_WithEarnings_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -13918,7 +13918,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:Count_Person_Female_WithEarnings_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -13928,7 +13928,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
+        "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With earnings:!!Female": {
             "Node": "dcid:MarginOfError_Count_Person_Female_WithEarnings_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
@@ -13938,7 +13938,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
+        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Male": {
             "Node": "dcid:Mean_Earnings_Person_Male_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -13949,7 +13949,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
+        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Mean earnings (dollars):!!Female": {
             "Node": "dcid:Mean_Earnings_Person_Female_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:meanValue",
@@ -13960,7 +13960,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
+        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Male": {
             "Node": "dcid:Median_Earnings_Person_Male_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -13971,7 +13971,7 @@
             "gender": "dcs:Male",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
+        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!Median earnings (dollars):!!Female": {
             "Node": "dcid:Median_Earnings_Person_Female_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:earnings",
             "statType": "dcs:medianValue",
@@ -13982,7 +13982,7 @@
             "gender": "dcs:Female",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Estimate!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:Count_Person_WithFoodStampsInThePast12Months_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:count",
             "statType": "dcs:measuredValue",
@@ -13991,13 +13991,20 @@
             "benefitsStatus": "dcs:WithFoodStampsInThePast12Months",
             "typeOf": "dcs:StatisticalVariable"
         },
-        "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2019 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
+        "Margin of Error!!Military quarters/military ships!!INCOME AND BENEFITS IN THE PAST 12 MONTHS (IN 2023 INFLATION-ADJUSTED DOLLARS)!!Individuals!!With Food Stamp/SNAP benefits": {
             "Node": "dcid:MarginOfError_Count_Person_WithFoodStampsInThePast12Months_ResidesInMilitaryQuartersOrMilitaryShips",
             "measuredProperty": "dcs:count",
             "statType": "dcs:marginOfError",
             "populationType": "dcs:Person",
             "residenceType": "dcs:MilitaryQuartersOrMilitaryShips",
             "benefitsStatus": "dcs:WithFoodStampsInThePast12Months",
+            "typeOf": "dcs:StatisticalVariable"
+        },
+        "": {
+            "Node": "dcid:Count_Person",
+            "measuredProperty": "dcs:count",
+            "statType": "dcs:measuredValue",
+            "populationType": "dcs:Person",
             "typeOf": "dcs:StatisticalVariable"
         }
     }
