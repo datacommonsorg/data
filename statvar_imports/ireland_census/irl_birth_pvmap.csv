@@ -1,0 +1,6 @@
+mapped_rows,1,,,,,
+mapped_columns,7,,,,,
+Year,observationDate,{Number},,,,
+Births Registered,measuredProperty,count,populationType,BirthEvent,observationAbout,country/IRL
+VALUE,value,{Number},,,,
+Births Outside Marriage Registered as a Percentage of Total Births Registered,#ignore,ignore,,,,

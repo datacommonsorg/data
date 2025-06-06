@@ -1,0 +1,62 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Ireland_Census",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://data.cso.ie/",
+      "provenance_description": "Ireland Demographics, Health and Economy data from Central Statistics Office(CSO) by country, county and city",
+      "scripts": ["download_script.py", "preprocess.py", "run.sh"] ,
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/irl_birth_output.tmcf",
+          "cleaned_csv": "output_files/irl_birth_output.csv"
+        },
+        {
+          "template_mcf": "output_files/irl_death_output.tmcf",
+          "cleaned_csv": "output_files/irl_death_output.csv"
+        },
+        {
+          "template_mcf": "output_files/irl_external_cause_of_death_output.tmcf",
+          "cleaned_csv": "output_files/irl_external_cause_of_death_output.csv"
+        },
+        {
+          "template_mcf": "output_files/irl_life_expectancy_output.tmcf",
+          "cleaned_csv": "output_files/irl_life_expectancy_output.csv"
+        },
+        {
+          "template_mcf": "output_files/irl_suicide_output.tmcf",
+          "cleaned_csv": "output_files/irl_suicide_output.csv"
+        },
+        {
+          "template_mcf": "output_files/irl_aa1_aa2_suicide_output.tmcf",
+          "cleaned_csv": "output_files/irl_aa1_aa2_suicide_output.csv"
+        },
+        {
+          "template_mcf": "output_files/irl_population_by_age_gender_output.tmcf",
+          "cleaned_csv": "output_files/irl_population_by_age_gender_output.csv"
+        },
+        {
+          "template_mcf": "output_files/irl_population_by_religion_output.tmcf",
+          "cleaned_csv": "output_files/irl_population_by_religion_output.csv"
+        },
+        {
+          "template_mcf": "output_files/irl_population_at_each_census_output.tmcf",
+          "cleaned_csv": "output_files/irl_population_at_each_census_output.csv"
+        },
+        {
+          "template_mcf": "output_files/irl_population_by_gender_output.tmcf",
+          "cleaned_csv": "output_files/irl_population_by_gender_output.csv"
+        },
+        {
+          "template_mcf": "output_files/irl_aa1_aa2_employment_output.tmcf",
+          "cleaned_csv": "output_files/irl_aa1_aa2_employment_output.csv"
+        }
+      ],
+      "cron_schedule": "0 05 * * 5"
+    }
+  ]
+}
+
