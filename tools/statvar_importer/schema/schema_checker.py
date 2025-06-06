@@ -322,8 +322,15 @@ def check_self_reference_nodes(nodes: dict,
         counters = Counters()
 
     errors = []
-    ignore_props = config.get('check_self_reference_ignore_property',
-                              ['Node', 'dcid', 'name', 'description'])
+    ignore_props = config.get(
+        'check_self_reference_ignore_property',
+        [
+            'Node',
+            'dcid',
+            'name',
+            'description',
+            'measuredProperty',  # Ignore schemaless statvars
+        ])
     for dcid, pvs in nodes.items():
         dcid = strip_namespace(dcid)
         if dcid == 'Class':
