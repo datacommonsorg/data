@@ -15,19 +15,19 @@
         "import_inputs": [
           {
             "template_mcf": "PM25CensusTractPollution.tmcf",
-            "cleaned_csv": "output/PM2.5CensusTract_0.csv"
+            "cleaned_csv": "gcs_output/PM2.5CensusTract_0.csv"
           },
           {
             "template_mcf": "PM25CensusTractPollution.tmcf",
-            "cleaned_csv": "output/PM2.5CensusTract_1.csv"
+            "cleaned_csv": "gcs_output/PM2.5CensusTract_1.csv"
           },
           {
             "template_mcf": "PM25CensusTractPollution.tmcf",
-            "cleaned_csv": "output/PM2.5CensusTract_2.csv"
+            "cleaned_csv": "gcs_output/PM2.5CensusTract_2.csv"
           },
           {
             "template_mcf": "PM25CensusTractPollution.tmcf",
-            "cleaned_csv": "output/PM2.5CensusTract_3.csv"
+            "cleaned_csv": "gcs_output/PM2.5CensusTract_3.csv"
           }
 
         ],
@@ -48,19 +48,19 @@
         "import_inputs": [
           {
             "template_mcf": "OzoneCensusTractPollution.tmcf",
-            "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_0.csv"
+            "cleaned_csv": "gcs_output/Census_Tract_Level_Ozone_Concentrations_0.csv"
           },
           {
             "template_mcf": "OzoneCensusTractPollution.tmcf",
-            "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_1.csv"
+            "cleaned_csv": "gcs_output/Census_Tract_Level_Ozone_Concentrations_1.csv"
           },
           {
             "template_mcf": "OzoneCensusTractPollution.tmcf",
-            "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_2.csv"
+            "cleaned_csv": "gcs_output/Census_Tract_Level_Ozone_Concentrations_2.csv"
           },
           {
             "template_mcf": "OzoneCensusTractPollution.tmcf",
-            "cleaned_csv": "output/Census_Tract_Level_Ozone_Concentrations_3.csv"
+            "cleaned_csv": "gcs_output/Census_Tract_Level_Ozone_Concentrations_3.csv"
           }
           
         ],
@@ -79,7 +79,7 @@
         "import_inputs": [
           {
             "template_mcf": "PM25CountyPollution.tmcf",
-            "cleaned_csv": "output/PM25county.csv"
+            "cleaned_csv": "gcs_output/PM25county.csv"
           }
           
         ],
@@ -98,7 +98,7 @@
         "import_inputs": [
           {
             "template_mcf": "OzoneCountyPollution.tmcf",
-            "cleaned_csv": "output/OzoneCounty.csv"
+            "cleaned_csv": "gcs_output/OzoneCounty.csv"
           }
           
         ],
