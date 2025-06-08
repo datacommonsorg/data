@@ -103,6 +103,9 @@
         "Brucella": {
             "etiology": "Brucella"
         },
+        "Brucella other": {
+            "etiology": "BrucellaOther"
+        },
         "Brucella unknown": {
             "etiology": "BrucellaUnknown"
         },
@@ -480,6 +483,9 @@
         },
         "Salmonella unknown": {
             "etiology": "SalmonellaUnknown"
+        },
+        "Salmonella bongori": {
+            "etiology": "SalmonellaBongori"
         },
         "Sapovirus": {
             "etiology": "Sapovirus"
