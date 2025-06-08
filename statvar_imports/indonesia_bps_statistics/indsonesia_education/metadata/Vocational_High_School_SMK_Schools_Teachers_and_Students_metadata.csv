@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/3/TVU5MFYwMVlaMFJ4ZW5obWJGZHNVMjFpVUhoMlp6MDkjMw==/number-of-schools--teachers--and-pupils-in-vocational-high-schools-under-the-ministry-of-education--culture--research--and-technology-by-province.html?year=2022
+description,"Number of Vocational High School (SMK) Schools, Teachers and Students under the Ministry of Education and Culture by Province"
+#place_type,country/IDN
+#places_within,
+start_date,2017
+end_date,2022
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1mFE6HOx2xx1JB5SsP0m6BNZ2pgGCE7K_wkA7cK3EM-0/edit?resourcekey=0-KmYb8Sk1giSx_LHXJ_pkiw#gid=1517919887
+mapped_rows,1
+mapped_columns,1
+pv_map,https://docs.google.com/spreadsheets/d/1mFE6HOx2xx1JB5SsP0m6BNZ2pgGCE7K_wkA7cK3EM-0/edit?resourcekey=0-KmYb8Sk1giSx_LHXJ_pkiw#gid=443029754
