@@ -32,7 +32,7 @@ def retry_method(url, headers=None):
 
 def download_and_convert_excel_to_csv():
     logging.info("Starting download and conversion of Excel files...")
-    KEYWORDS = ["adm1", "adm2"]
+    KEYWORDS = ["adm0", "adm1", "adm2"]
     try:
         for url in Mexico_Census_URL:
             response = retry_method(url)
