@@ -41,8 +41,10 @@ def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
                 json_file.write('{}')
     except FileNotFoundError:
         logging.fatal(f"Error: Input XML file not found at '{input_xml_path}'")
+        sys.exit(1)
     except Exception as e:
         logging.fatal(f"An error occurred during conversion: {e}")
+        sys.exit(1)
 
 
 """calling this script from a bash script where we are passing 2 parameter"""
