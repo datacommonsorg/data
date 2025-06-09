@@ -1,0 +1,9 @@
+observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod
+dcid:country/KEN,2016,dcid:Count_BirthEvent_LiveBirth,968671,,,P1Y
+dcid:country/KEN,2017,dcid:Count_BirthEvent_LiveBirth,865698,,,P1Y
+dcid:country/KEN,2018,dcid:Count_BirthEvent_LiveBirth,1078631,,,P1Y
+dcid:country/KEN,2019,dcid:Count_BirthEvent_LiveBirth,1127261,,,P1Y
+dcid:country/KEN,2020,dcid:Count_BirthEvent_LiveBirth,1143987,,,P1Y
+dcid:country/KEN,2016,dcid:Count_MaternalMortalityEvent,1276,,,P1Y
+dcid:country/KEN,2017,dcid:Count_MaternalMortalityEvent,1045,,,P1Y
+dcid:country/KEN,2018,dcid:Count_MaternalMortalityEvent,1032,,,P1Y

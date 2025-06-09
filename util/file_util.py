@@ -677,7 +677,7 @@ def file_write_csv_dict(py_dict: dict,
         value_column_name = 'value'
         columns.append(value_column_name)
     # Use the first column for the key.
-    if key_column_name is '':
+    if key_column_name == '':
         key_column_name = columns[0]
 
     # Get the output filename

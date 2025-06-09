@@ -4,5 +4,6 @@ variableMeasured: C:eurostat_population_tobacco_consumption->SV
 measurementMethod: C:eurostat_population_tobacco_consumption->Measurement_Method
 observationAbout: C:eurostat_population_tobacco_consumption->geo
 observationDate: C:eurostat_population_tobacco_consumption->time
+unit: Percent
 scalingFactor: 100
 value: C:eurostat_population_tobacco_consumption->observation

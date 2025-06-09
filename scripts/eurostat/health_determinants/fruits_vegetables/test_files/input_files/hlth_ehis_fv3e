@@ -1,0 +1,5 @@
+freq,unit,n_portion,isced11,sex,age,geo\TIME_PERIOD	2014 	2019 
+A,PC,0,ED0-2,F,TOTAL,AT	23.6 	29.1 
+A,PC,0,ED0-2,F,TOTAL,BE	14.1 	17.1 
+A,PC,0,ED0-2,F,TOTAL,BG	68.6 	54.2 
+A,PC,0,ED0-2,F,TOTAL,CY	30.0 	32.7

@@ -16,6 +16,13 @@ python3 -m venv .env
 . .env/bin/activate
 pip3 install --disable-pip-version-check -q -r requirements.txt
 
+# Setup files to run import executor locally
+mkdir -p /tmp/import-tool
+if [[ ! -f '/tmp/import-tool/import-tool.jar' ]]; then
+    wget "https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar" \
+      -O /tmp/import-tool/import-tool.jar
+fi
+
 python3 -m local_executor "$@"
 
 deactivate
