@@ -1,4 +1,4 @@
-{
+					{
     "import_specifications": [
       {
         "import_name": "FBIHateCrimePublications",
@@ -28,6 +28,10 @@
             "cleaned_csv": "table14/table14_output.csv"
           }
         ],
+        "resource_limits": {
+            "cpu": "8",
+            "memory": "32G"
+          },
         "cron_schedule": "0 10 21 * *"
       }
     ]
