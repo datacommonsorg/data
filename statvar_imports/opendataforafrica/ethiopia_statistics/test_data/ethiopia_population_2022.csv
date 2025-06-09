@@ -1,0 +1,13 @@
+observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
+country/ETH,2022,105025989,dcid:Count_Person,,
+wikidataId/Q200127,2022,5738996,dcid:Count_Person,,
+wikidataId/Q193494,2022,2033002,dcid:Count_Person,,
+wikidataId/Q203009,2022,22876991,dcid:Count_Person,,
+country/ETH,2022,52648991,dcid:Count_Person_Male,,
+wikidataId/Q200127,2022,2834000,dcid:Count_Person_Male,,
+wikidataId/Q193494,2022,1105000,dcid:Count_Person_Male,,
+wikidataId/Q203009,2022,11462994,dcid:Count_Person_Male,,
+country/ETH,2022,52376998,dcid:Count_Person_Female,,
+wikidataId/Q200127,2022,2904996,dcid:Count_Person_Female,,
+wikidataId/Q193494,2022,928002,dcid:Count_Person_Female,,
+wikidataId/Q203009,2022,11413997,dcid:Count_Person_Female,,

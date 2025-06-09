@@ -19,7 +19,21 @@ ARG build_type=cloud
 
 # build base image with all the dependencies installed
 FROM python:3.12.8 as base
-RUN apt-get update && apt-get install -y jq
+RUN apt-get update && apt-get install -y jq \
+gnupg \
+apt-transport-https \
+ca-certificates \
+libglib2.0-0 \
+libnss3 \
+libgconf-2-4 \
+libatk1.0-0 \
+libgtk-3-0 \
+libx11-6 \
+libasound2 \
+fonts-liberation \
+xdg-utils \
+chromium \
+chromium-driver
 ENV JAVA_HOME=/usr/local/openjdk-17
 COPY --from=openjdk:17-slim $JAVA_HOME $JAVA_HOME
 ENV PATH="${JAVA_HOME}/bin:${PATH}"
