@@ -1,0 +1,9 @@
+Node: E:-fwjfdnc->E0
+observationAbout: C:-fwjfdnc->observationAbout
+observationDate: C:-fwjfdnc->observationDate
+variableMeasured: C:-fwjfdnc->variableMeasured
+value: C:-fwjfdnc->value
+unit: C:-fwjfdnc->unit
+scalingFactor: C:-fwjfdnc->scalingFactor
+observationPeriod: C:-fwjfdnc->observationPeriod
+typeOf: dcs:StatVarObservation

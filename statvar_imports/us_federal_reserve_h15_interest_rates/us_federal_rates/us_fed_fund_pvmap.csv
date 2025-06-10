@@ -1,0 +1,5 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Time Period,observationDate,{Data},populationType,FinancialInstrument,instrumentTerm,[1 Year],observationAbout,country/USA,measuredProperty,interestRate,unit,PercentPerAnnum
+Federal funds effective rate,value,{Number},instrumentType,FederalFund,,,,,,,,
+"Average majority prime rate charged by banks   on short-term loans to business,   quoted on an investment basis",value,{Number},measuredProperty,primeRate,instrumentType,BankLoan,statType,meanValue,,,,
+The rate charged for primary credit under   amendment to the Board's Regulation A,value,{Number},instrumentType,PrimaryCredit,,,,,,,,
