@@ -286,10 +286,10 @@ _PREPEND_APPEND_REPLACE_MAP = {
         'prepend': 'Lender',
     },
     'fromCurrency': {
-        'prepend': 'FromCurrency',
+        'prepend': 'FromCurrency_',
     },
     'toCurrency': {
-        'prepend': 'ToCurrency',
+        'prepend': 'ToCurrency_',
     },
 }
 
