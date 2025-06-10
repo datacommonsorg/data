@@ -48,7 +48,6 @@ def convert_xml_to_json(input_xml_path: str, output_json_path: str) -> None:
 
 
 if __name__ == "__main__":
-
     """calling this script from a bash script where we are passing 2 parameter"""
     if len(sys.argv) > 0:
         input_xml_file = sys.argv[1]
