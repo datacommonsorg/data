@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+set -xe
 COUNTRY=""
 DATASETS=()
 SELECTED_DATASETS=()
@@ -47,8 +47,6 @@ function download_and_convert_dataset() {
       --header 'Accept-Encoding: gzip, deflate, br, zstd' \
       --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
       --output "$WORKING_DIR/${dataset}.xml" \
-      --connect-timeout 60 \
-      --max-time 120 \
       --compressed; then
       echo "Download completed for $dataset"
       local json_output_file="$WORKING_DIR/${dataset}.json"
