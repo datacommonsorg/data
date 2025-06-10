@@ -6,7 +6,7 @@ from absl import flags
 from absl.testing import flagsaver
 import requests_mock
 import download_util_script
-import datetime # Import to generate Last-Modified header timestamps
+import datetime  # Import to generate Last-Modified header timestamps
 
 FLAGS = flags.FLAGS
 
@@ -29,17 +29,25 @@ class DownloadFileTest(unittest.TestCase):
     def test_download_txt_file(self, mock):
         download_url = "http://example.com/test.txt"
         file_content = b"This is a test file."
-        
+
         # 1. Mock the HEAD request that download_file makes for staleness check
-        mock.head(download_url, status_code=200, headers={'Last-Modified': datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT')})
+        mock.head(download_url,
+                  status_code=200,
+                  headers={
+                      'Last-Modified':
+                          datetime.datetime.now().strftime(
+                              '%a, %d %b %Y %H:%M:%S GMT')
+                  })
         # 2. Mock the GET request for the actual file download
         mock.get(download_url, content=file_content)
 
         # Call the function under test
-        result = download_util_script.download_file(download_url, self.temp_dir, False)
+        result = download_util_script.download_file(download_url, self.temp_dir,
+                                                    False)
 
         # Assertions
-        self.assertTrue(result, "download_file should return True on successful download.")
+        self.assertTrue(
+            result, "download_file should return True on successful download.")
         file_path = os.path.join(self.temp_dir, "test.txt")
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, "rb") as f:
@@ -51,13 +59,21 @@ class DownloadFileTest(unittest.TestCase):
         file_content = b"This is a test file without extension."
 
         # 1. Mock the HEAD request
-        mock.head(download_url, status_code=200, headers={'Last-Modified': datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT')})
+        mock.head(download_url,
+                  status_code=200,
+                  headers={
+                      'Last-Modified':
+                          datetime.datetime.now().strftime(
+                              '%a, %d %b %Y %H:%M:%S GMT')
+                  })
         # 2. Mock the GET request
         mock.get(download_url, content=file_content)
 
-        result = download_util_script.download_file(download_url, self.temp_dir, False)
+        result = download_util_script.download_file(download_url, self.temp_dir,
+                                                    False)
 
-        self.assertTrue(result, "download_file should return True on successful download.")
+        self.assertTrue(
+            result, "download_file should return True on successful download.")
         # The script is expected to append .xlsx for files without extensions when not unzipping
         file_path = os.path.join(self.temp_dir, "test.xlsx")
         self.assertTrue(os.path.exists(file_path))
@@ -69,10 +85,13 @@ class DownloadFileTest(unittest.TestCase):
         # This test case verifies URL format validation, which happens *before* network requests.
         # Thus, no HEAD/GET mocks are strictly necessary as the script should fail early.
         download_url = "invalid_url"
-        
-        result = download_util_script.download_file(download_url, self.temp_dir, False)
-        
-        self.assertFalse(result, "download_file should return False for an invalid URL format.")
+
+        result = download_util_script.download_file(download_url, self.temp_dir,
+                                                    False)
+
+        self.assertFalse(
+            result,
+            "download_file should return False for an invalid URL format.")
         # Ensure no files were created in the output directory
         self.assertFalse(os.listdir(self.temp_dir))
 
@@ -83,9 +102,11 @@ class DownloadFileTest(unittest.TestCase):
         mock.head(download_url, status_code=404)
         mock.get(download_url, status_code=404)
 
-        result = download_util_script.download_file(download_url, self.temp_dir, False)
+        result = download_util_script.download_file(download_url, self.temp_dir,
+                                                    False)
 
-        self.assertFalse(result, "download_file should return False on download failure.")
+        self.assertFalse(
+            result, "download_file should return False on download failure.")
         # Ensure no files (even partially downloaded ones) were left behind
         self.assertFalse(os.listdir(self.temp_dir))
 
