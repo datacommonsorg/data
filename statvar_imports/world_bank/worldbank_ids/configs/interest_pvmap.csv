@@ -1,6 +1,7 @@
 key,prop,value,p1,v1,p2,v2,p3,v3,p4,v4,,
-year,observationDate,{Data},measuredProperty,amountInterestRepayment,debtType,LongTermExternalDebt,unit,USDollar,Year,{Data},,
-value,value,{Number},#Eval,"measurementMethod=""WorldBankProjection"" if Year>""2022-01-01"" else """"",,,,,,,,
+YEARMOD,observationDate,{Data},measuredProperty,amountInterestRepayment,debtType,LongTermExternalDebt,unit,USDollar,Year,{Data},observationPeriod,P1Y
+value,value,{Number}
+Measure,measurementMethod,{Data}
 ids_interest_payments,measuredProperty,amountInterestRepayment,,,,,,,,,,
 Long term external debt interest payments,debtType,LongTermExternalDebt,,,,,,,,,,
 country,observationAbout,{Data},populationType,Debt,name,"""{NamePrefix} external debt pricipal repayment {CreditorTerm} {CounterpartName}.""",,,,,,

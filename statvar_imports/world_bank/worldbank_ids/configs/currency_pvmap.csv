@@ -1,6 +1,7 @@
 key,prop,value,p1,v1,,,,,,
-year,observationDate,{Data},measuredProperty,amount,unit,Percent,measurementDenominator,-currency,populationType,Debt
-value,value,{Number},#Eval,"measurementMethod=""WorldBankProjection"" if Year>""2022-01-01"" else """"",,,,,,
+YEARMOD,observationDate,{Data},measuredProperty,amount,unit,Percent,measurementDenominator,-currency,populationType,Debt,Year,{Data},observationPeriod,P1Y
+value,value,{Number}
+Measure,measurementMethod,{Data}
 units,unit,Percent,,,,,,,,
 Currency composition of debt,measuredProperty,amount,measurementDenominator,-currency,,,,,,
 entity_code,observationAbout,country/{Data},populationType,Debt,,,,,,

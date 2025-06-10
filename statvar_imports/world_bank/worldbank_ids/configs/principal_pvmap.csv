@@ -1,6 +1,7 @@
 key,prop,value,p1,v1,,,,,,,,,,
-year,observationDate,{Data},unit,USDollar,debtType,LongTermExternalDebt,measuredProperty,amountPrincipalRepayment,name,"""{NamePrefix} external debt pricipal repayment {CreditorTerm} {CounterpartName}.""",observationPeriod,P1Y,Year,{Data}
-value,value,{Number},#Eval,"measurementMethod=""WorldBankProjection"" if Year>""2022-01-01"" else """"",,,,,,,,,,
+YEARMOD,observationDate,{Data},unit,USDollar,debtType,LongTermExternalDebt,measuredProperty,amountPrincipalRepayment,name,"""{NamePrefix} external debt pricipal repayment {CreditorTerm} {CounterpartName}.""",observationPeriod,P1Y,Year,{Data}
+value,value,{Number}
+Measure,measurementMethod,{Data}
 units,unit,USDollar,,,,,,,,,,,,
 Long term external debt principal repayments,debtType,LongTermExternalDebt,measuredProperty,amountPrincipalRepayment,name,"""{NamePrefix} external debt pricipal repayment {CreditorTerm} {CounterpartName}.""",,,,,,,,
 indicator_code,measuredProperty,amountPrincipalRepayment,,,,,,,,,,,,

@@ -5,9 +5,9 @@ African Export-Import Bank,lendingEntity,African_Export_Import_Bank
 Algeria,lendingEntity,country/DZA
 Angola,lendingEntity,country/AGO
 Arab African International Bank,lendingEntity,Arab_African_International_Bank
-Arab Bank for Economic Dev. in Africa (BADEA),lendingEntity,Arab_Bank_For_Economic_Dev_In_Africa
-Arab Fund for Economic & Social Development,lendingEntity,Arab_Fund_For_Economic_Social_Development
-Arab Fund for Tech. Assist. to African Countries,lendingEntity,Arab_Fund_For_Tech_Assist_To_African_Countries
+Arab Bank for Economic Dev. in Africa (BADEA),lendingEntity,Arab_Bank_for_Economic_Dev_in_Africa
+Arab Fund for Economic & Social Development,lendingEntity,Arab_Fund_for_Economic_Social_Development
+Arab Fund for Tech. Assist. to African Countries,lendingEntity,Arab_Fund_for_Tech_Assist_to_African_Countries
 Arab League,lendingEntity,Arab_League
 Arab Monetary Fund,lendingEntity,Arab_Monetary_Fund
 Arab Towns Organization (ATO),lendingEntity,Arab_Towns_Organization
@@ -21,14 +21,14 @@ Azerbaijan,lendingEntity,country/AZE
 Bahamas,lendingEntity,country/BHS
 Bahrain,lendingEntity,country/BHR
 Bangladesh,lendingEntity,country/BGD
-Bank for International Settlements (BIS),lendingEntity,Bank_For_International_Settlements
+Bank for International Settlements (BIS),lendingEntity,Bank_for_International_Settlements
 Barbados,lendingEntity,country/BRB
 Belarus,lendingEntity,country/BLR
 Belgium,lendingEntity,country/BEL
 Belize,lendingEntity,country/BLZ
 Bermuda,lendingEntity,country/BMU
 Benin,lendingEntity,country/BEN
-Bolivarian Alliance for the Americas (ALBA),lendingEntity,Bolivarian_Alliance_For_The_Americas
+Bolivarian Alliance for the Americas (ALBA),lendingEntity,Bolivarian_Alliance_for_the_Americas
 Bolivia,lendingEntity,country/BOL
 Bondholders,lendingEntity,Bondholders
 Bosnia-Herzegovina,lendingEntity,country/BIH
@@ -43,30 +43,30 @@ Canada,lendingEntity,country/CAN
 Caribbean Community (CARICOM),lendingEntity,Caribbean_Community
 Caribbean Dev. Bank,lendingEntity,Caribbean_Dev_Bank
 Cayman Islands,lendingEntity,country/CYM
-Central American Bank for Econ. Integ. (CABEI),lendingEntity,Central_American_Bank_For_Econ_Integ
-Central American Bank for Econ. Integration (BCIE),lendingEntity,Central_American_Bank_For_Econ_Integration
-Central Bank of West African States (BCEAO),lendingEntity,Central_Bank_Of_West_African_States
+Central American Bank for Econ. Integ. (CABEI),lendingEntity,Central_American_Bank_for_Econ_Integ
+Central American Bank for Econ. Integration (BCIE),lendingEntity,Central_American_Bank_for_Econ_Integration
+Central Bank of West African States (BCEAO),lendingEntity,Central_Bank_of_West_African_States
 Chad,lendingEntity,country/TCD
 Chile,lendingEntity,country/CHL
 China,lendingEntity,country/CHN
 Colombia,lendingEntity,country/COL
 "Congo, Dem. Rep.",lendingEntity,country/COD
 "Congo, Rep.",lendingEntity,country/COG
-Corporacion Andina de Fomento,lendingEntity,Corporacion_Andina_De_Fomento
+Corporacion Andina de Fomento,lendingEntity,Corporacion_Andina_de_Fomento
 Costa Rica,lendingEntity,country/CRI
 "Cote D`Ivoire, Republic Of",lendingEntity,country/CIV
-Council of Europe,lendingEntity,Council_Of_Europe
+Council of Europe,lendingEntity,Council_of_Europe
 Croatia,lendingEntity,country/HRV
 Cuba,lendingEntity,country/CUB
 Cyprus,lendingEntity,country/CYP
 Czechia,lendingEntity,country/CZE
 Denmark,lendingEntity,country/DNK
-Dev. Bank of the Central African States (BDEAC),lendingEntity,Dev_Bank_Of_The_Central_African_States
+Dev. Bank of the Central African States (BDEAC),lendingEntity,Dev_Bank_of_the_Central_African_States
 East African Community,lendingEntity,East_African_Community
 Eastern & Southern African Trade & Dev. Bank (TDB),lendingEntity,Eastern_Southern_African_Trade_Dev_Bank
-ECO Trade and Dev. Bank,lendingEntity,ECO_Trade_And_Dev_Bank
-Econ. Comm. of the Great Lakes Countries (ECGLC),lendingEntity,Econ_Comm_Of_The_Great_Lakes_Countries
-Economic Community of West African States (ECOWAS),lendingEntity,Economic_Community_Of_West_African_States
+ECO Trade and Dev. Bank,lendingEntity,ECO_Trade_and_Dev_Bank
+Econ. Comm. of the Great Lakes Countries (ECGLC),lendingEntity,Econ_Comm_of_the_Great_Lakes_Countries
+Economic Community of West African States (ECOWAS),lendingEntity,Economic_Community_of_West_African_States
 Ecuador,lendingEntity,country/ECU
 Egypt,lendingEntity,country/EGY
 El Salvador,lendingEntity,country/SLV
@@ -75,8 +75,8 @@ Equatorial Guinea,lendingEntity,country/GNQ
 Eswatini,lendingEntity,country/SWZ
 Eurasian Development Bank,lendingEntity,Eurasian_Development_Bank
 EUROFIMA,lendingEntity,EUROFIMA
-European Bank for Reconstruction and Dev. (EBRD),lendingEntity,European_Bank_For_Reconstruction_And_Dev
-European Coal and Steel Community (ECSC),lendingEntity,European_Coal_And_Steel_Community
+European Bank for Reconstruction and Dev. (EBRD),lendingEntity,European_Bank_for_Reconstruction_and_Dev
+European Coal and Steel Community (ECSC),lendingEntity,European_Coal_and_Steel_Community
 European Development Fund (EDF),lendingEntity,European_Development_Fund
 European Economic Community (EEC),lendingEntity,European_Economic_Community
 European Investment Bank,lendingEntity,European_Investment_Bank
@@ -84,7 +84,7 @@ European Relief Fund,lendingEntity,European_Relief_Fund
 European Social Fund (ESF),lendingEntity,European_Social_Fund
 European Union,lendingEntity,European_Union
 Finland,lendingEntity,country/FIN
-Fondo Latinoamericano de Reservas (FLAR),lendingEntity,Fondo_Latinoamericano_De_Reservas
+Fondo Latinoamericano de Reservas (FLAR),lendingEntity,Fondo_Latinoamericano_de_Reservas
 France,lendingEntity,country/FRA
 Gabon,lendingEntity,country/GAB
 "Gambia, The",lendingEntity,country/GMB
@@ -104,17 +104,17 @@ Iceland,lendingEntity,country/ISL
 India,lendingEntity,country/IND
 Indonesia,lendingEntity,country/IDN
 Inter-American Dev. Bank,lendingEntity,Inter_American_Dev_Bank
-International Bank for Economic Cooperation (IBEC),lendingEntity,International_Bank_For_Economic_Cooperation
+International Bank for Economic Cooperation (IBEC),lendingEntity,International_Bank_for_Economic_Cooperation
 International Coffee Organization (ICO),lendingEntity,International_Coffee_Organization
 International Finance Corporation,lendingEntity,International_Finance_Corporation
-International Fund for Agricultural Dev.,lendingEntity,International_Fund_For_Agricultural_Dev
+International Fund for Agricultural Dev.,lendingEntity,International_Fund_for_Agricultural_Dev
 International Investment Bank (IIB),lendingEntity,International_Investment_Bank
 "Iran, Islamic Republic Of",lendingEntity,country/IRN
 International Monetary Fund,lendingEntity,International_Monetary_Fund
 Iraq,lendingEntity,country/IRQ
 Ireland,lendingEntity,country/IRL
 Islamic Dev. Bank,lendingEntity,Islamic_Dev_Bank
-Islamic Solidarity Fund for Dev. (ISFD),lendingEntity,Islamic_Solidarity_Fund_For_Dev
+Islamic Solidarity Fund for Dev. (ISFD),lendingEntity,Islamic_Solidarity_Fund_for_Dev
 Israel,lendingEntity,country/ISR
 Italy,lendingEntity,country/ITA
 Jamaica,lendingEntity,country/JAM
@@ -126,7 +126,7 @@ Kenya,lendingEntity,country/KEN
 "Korea, Republic of",lendingEntity,country/KOR
 Kuwait,lendingEntity,country/KWT
 Kyrgyz Republic,lendingEntity,country/KGZ
-Latin Amer. Conf. of Saving & Credit Coop. (COLAC),lendingEntity,Latin_Amer_Conf_Of_Saving_Credit_Coop
+Latin Amer. Conf. of Saving & Credit Coop. (COLAC),lendingEntity,Latin_Amer_Conf_of_Saving_Credit_Coop
 Latin American Agribusiness Dev. Corp. (LAAD),lendingEntity,Latin_American_Agribusiness_Dev_Corp
 Lebanon,lendingEntity,country/LBN
 Liberia,lendingEntity,country/LBR
@@ -146,6 +146,7 @@ Multiple Lenders,lendingEntity,Multiple_Lenders
 Namibia,lendingEntity,country/NAM
 Neth. Antilles,lendingEntity,Neth_Antilles
 Netherlands,lendingEntity,country/NLD
+New Development Bank (NDB),lendingEntity,New_Development_Bank
 New Zealand,lendingEntity,country/NZL
 Nicaragua,lendingEntity,country/NIC
 Niger,lendingEntity,country/NER
@@ -157,8 +158,8 @@ North Macedonia,lendingEntity,country/MKD
 North Korea,lendingEntity,country/PRK
 Norway,lendingEntity,country/NOR
 Oman,lendingEntity,country/OMN
-OPEC Fund for International Dev.,lendingEntity,OPEC_Fund_For_International_Dev
-Org. of Arab Petroleum Exporting Countries (OAPEC),lendingEntity,Org_Of_Arab_Petroleum_Exporting_Countries
+OPEC Fund for International Dev.,lendingEntity,OPEC_Fund_for_International_Dev
+Org. of Arab Petroleum Exporting Countries (OAPEC),lendingEntity,Org_of_Arab_Petroleum_Exporting_Countries
 Other Multiple Lenders,lendingEntity,Other_Multiple_Lenders
 Pakistan,lendingEntity,country/PAK
 Panama,lendingEntity,country/PAN
@@ -200,9 +201,9 @@ Ukraine,lendingEntity,country/UKR
 UN-Children's Fund (UNICEF),lendingEntity,UN_Children_Fund
 UN-Development Programme (UNDP),lendingEntity,UN_Development_Programme
 UN-General Assembly (UNGA),lendingEntity,UN_General_Assembly
-UN-High Commissioner for Refugees (UNHCR),lendingEntity,UN_High_Commissioner_For_Refugees
+UN-High Commissioner for Refugees (UNHCR),lendingEntity,UN_High_Commissioner_for_Refugees
 UN-Population Fund (UNFPA),lendingEntity,UN_Population_Fund
-UN-Regular Programme of Technical Coop. (RPTC),lendingEntity,UN_Regular_Programme_Of_Technical_Coop
+UN-Regular Programme of Technical Coop. (RPTC),lendingEntity,UN_Regular_Programme_of_Technical_Coop
 UN-World Food Programme (WFP),lendingEntity,UN_World_Food_Programme
 United Arab Emirates,lendingEntity,country/ARE
 United Kingdom,lendingEntity,country/GBR
