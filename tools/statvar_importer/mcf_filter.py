@@ -94,6 +94,21 @@ def drop_mcf_nodes(
             if has_diff:
                 logging.warning(
                     f'Diff in ignored Node: {dcid}, diff:\n{diff_str}\n')
+                diff_props = added.union(deleted).union(modified)
+                typeof = strip_namespace(pvs.get('typeOf', ''))
+                if typeof == 'StatisticalVariable':
+                    # Statvars should not have diffs in constraint props
+                    sv_diff_props = diff_props.difference(
+                        config.get('statvar_dcid_ignore_properties', [
+                            'name', 'description', 'descriptionUrl',
+                            'alternameName', 'memberOf', 'nameWithLanguage'
+                        ]))
+                    if sv_diff_props:
+                        logging.error(
+                            f'Statvar {dcid} has conflicting props: {sv_diff_props}: new: {pvs}, old: {ignore_pvs}'
+                        )
+                        counters.add_counter(f'error-statvar-conflict', 1, dcid)
+                        continue
                 if config.get('output_nodes_with_additions',
                               False) and (deleted or modified):
                     output_nodes[dcid] = pvs
@@ -158,8 +173,8 @@ def filter_mcf_file(
     # Load nodes from MCF files.
     if not counters:
         counters = Counters()
-    input_nodes = load_mcf_nodes(input_mcf_files)
-    ignore_nodes = load_mcf_nodes(ignore_mcf_files)
+    input_nodes = load_mcf_nodes(input_mcf_files, counters=counters)
+    ignore_nodes = load_mcf_nodes(ignore_mcf_files, counters=counters)
     counters.add_counter('input-nodes', len(input_nodes))
     counters.add_counter('ignore-nodes-loaded', len(input_nodes))
 
