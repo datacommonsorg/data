@@ -6,7 +6,7 @@
                 "support@datacommons.org"
             ],
             "provenance_url": "https://rwanda.opendataforafrica.org/",
-            "provenance_description": "",
+            "provenance_description": "Rwanda Census: Demographics, Economy, Education",
             "scripts": [
                 "../../../scripts/opendataafrica/download_folder/download.sh 'rwanda' 'edvtatd,eoefmac,hivlaeg,kbadgkf,kwekfdd,mnoirpd,shdirje,uymcezb,vafqyfg,ztaoyl,qavhudd' 'gcs_output/input_files'",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/edvtatd.csv --pv_map=edvtatd_pv_map.csv --config_file=edvtatd_metadata.csv --output_path=gcs_output/output/edvtatd --statvar_dcid_remap_csv=edvtatd_statvar_remap.csv",
@@ -18,7 +18,7 @@
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/shdirje.csv --pv_map=shdirje_pv_map.csv --config_file=shdirje_metadata.csv --output_path=gcs_output/output/shdirje",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/uymcezb.csv --pv_map=uymcezb_pv_map.csv --config_file=uymcezb_metadata.csv --output_path=gcs_output/output/uymcezb",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/vafqyfg.csv --pv_map=vafqyfg_pv_map.csv --config_file=vafqyfg_metadata.csv --output_path=gcs_output/output/vafqyfg",
-                "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/ztaoyl.csv --pv_map=ztaoyl_pv_map.csv --config_file=ztaoyl_metadata.csv --output_path=gcs_output/output/RWA-ztaoyl",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/ztaoyl.csv --pv_map=ztaoyl_pv_map.csv --config_file=ztaoyl_metadata.csv --output_path=gcs_output/output/ztaoyl",
                 "qavhudd_process.py",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/qavhudd_modified.csv --pv_map=qavhudd_pv_map.csv --config_file=qavhudd_metadata.csv --places_resolved_csv=places_resolved_csv.csv --output_path=gcs_output/output/qavhudd"
                 
@@ -66,7 +66,7 @@
                 }
             ],
             "source_files": [
-                "input_files/*.*"
+                "gcs_output/input_files/*"
             ],
             "cron_schedule": "30 05 * * 1"
         }
