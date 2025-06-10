@@ -19,7 +19,7 @@
 
 #### How to run:
 
-`python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/uae_bayanat/uae_population/input/uae_populationbyemiratesnationalityandgender.xlsx' --pv_map='../statvar_imports/uae_bayanat/uae_population/uae_population_pvmap.csv'  --places_resolved_csv='../statvar_imports/uae_bayanat/uae_population/uae_population_places_resolved_csv.csv' --config_file='../statvar_imports/uae_bayanat/uae_population/uae_population_metadata.csv' --output_path=../statvar_imports/uae_bayanat/uae_population/output/uae_population_output`
+`python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=../../statvar_imports/uae_bayanat/uae_population/input/uae_populationbyemiratesnationalityandgender.xlsx --pv_map=../../statvar_imports/uae_bayanat/uae_population/uae_population_pvmap.csv --places_resolved_csv=../../statvar_imports/uae_bayanat/uae_population/uae_population_places_resolved_csv.csv --config_file=../../statvar_imports/uae_bayanat/uae_population/uae_population_metadata.csv --output_path=../../statvar_imports/uae_bayanat/uae_population/output/uae_population_output`
 
 
 
