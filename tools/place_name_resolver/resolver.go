@@ -7,14 +7,14 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"googlemaps.github.io/maps"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 	"sync"
 	"time"
+
+	"googlemaps.github.io/maps"
 )
 
 var (
@@ -27,14 +27,12 @@ var (
 
 const (
 	// Query limit: 50 qps
-	batchSize = 50
-	dcAPI = "https://api.datacommons.org/v1/recon/resolve/id"
+	batchSize   = 50
+	dcAPI       = "https://api.datacommons.org/v1/recon/resolve/id"
 	dcBatchSize = 500
 )
 
-//
 // PlaceId2Dcid Reader.
-//
 type ResolveApi interface {
 	Resolve(req *resolveReq) (*resolveResp, error)
 }
@@ -50,8 +48,13 @@ func (r *RealResolveApi) Resolve(req *resolveReq) (*resolveResp, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer jResp.Body.Close()
-	jBytes, err := ioutil.ReadAll(jResp.Body)
+	defer func() {
+		err := jResp.Body.Close()
+		if err != nil {
+			log.Printf("ERROR: failed to close response body: %v", err)
+		}
+	}()
+	jBytes, err := io.ReadAll(jResp.Body)
 	if err != nil {
 		return nil, err
 	}
@@ -63,9 +66,7 @@ func (r *RealResolveApi) Resolve(req *resolveReq) (*resolveResp, error) {
 	return &resp, nil
 }
 
-//
 // Maps API Client.
-//
 type MapsClient interface {
 	Geocode(r *maps.GeocodingRequest) ([]maps.GeocodingResult, error)
 }
@@ -78,9 +79,7 @@ func (r *RealMapsClient) Geocode(req *maps.GeocodingRequest) ([]maps.GeocodingRe
 	return r.Client.Geocode(context.Background(), req)
 }
 
-//
 // Data Structure representing the CSV.
-//
 type tableInfo struct {
 	// CSV header.
 	header []string
@@ -168,16 +167,16 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 
 			// Validate.
 			if tinfo.nameIdx < 0 {
-				return nil, fmt.Errorf("CSV does not have a 'name' column!")
+				return nil, fmt.Errorf("csv does not have a 'name' column")
 			}
 			if tinfo.cipIdx >= 0 && tinfo.nidIdx < 0 {
-				return nil, fmt.Errorf("When 'containedInPLace' is provided, 'Node' must be provided to allow for references!")
+				return nil, fmt.Errorf("when 'containedInPlace' is provided, 'Node' must be provided to allow for references")
 			}
 			isHeader = false
 			continue
 		}
 		if numCols != len(row) {
-			return nil, fmt.Errorf("Not a rectangular CSV! Row %d has only %d columns!", dataRowNum+1, len(row))
+			return nil, fmt.Errorf("not a rectangular CSV! Row %d has only %d columns", dataRowNum+1, len(row))
 		}
 		if tinfo.nidIdx >= 0 && row[tinfo.nidIdx] != "" {
 			tinfo.node2row[row[tinfo.nidIdx]] = dataRowNum
@@ -293,7 +292,7 @@ func mapPlaceIDsToDCIDs(rApi ResolveApi, tinfo *tableInfo) error {
 		for _, ent := range resp.Entities {
 			for _, idx := range placeID2Idx[ent.InId] {
 				l := len(tinfo.rows[idx])
-				if (len(placeID2Idx[ent.InId]) > 1) {
+				if len(placeID2Idx[ent.InId]) > 1 {
 					tinfo.rows[idx][l-2] = ""
 					tinfo.rows[idx][l-1] = fmt.Sprintf("Duplicate dcid %s", ent.OutIds[0])
 				} else {

@@ -10,29 +10,6 @@ educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSeco
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_AtLeastOneHourPerDay_ExposureToTobaccoSmoke_In_Count_Person_SemiUrban_Female
-name: "Percentage At Least One Hour Per Day, Exposure To Tobacco Smoke Among Semi Urban, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_SemiUrban_Female
-activityFrequency: dcs:AtLeastOneHourPerDay
-gender: dcs:Female
-healthBehavior: dcs:ExposureToTobaccoSmoke
-placeOfResidenceClassification: dcs:SemiUrban
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOneHourPerDay_ExposureToTobaccoSmoke_In_Count_Person_Urban
-name: "Percentage At Least One Hour Per Day, Exposure To Tobacco Smoke Among Urban Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Urban
-activityFrequency: dcs:AtLeastOneHourPerDay
-healthBehavior: dcs:ExposureToTobaccoSmoke
-placeOfResidenceClassification: dcs:Urban
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_AtLeastOneHourPerDay_ExposureToTobaccoSmoke_In_Count_Person_Urban_Female
 name: "Percentage At Least One Hour Per Day, Exposure To Tobacco Smoke Among Urban, Female Population"
 typeOf: dcs:StatisticalVariable
@@ -42,31 +19,6 @@ activityFrequency: dcs:AtLeastOneHourPerDay
 gender: dcs:Female
 healthBehavior: dcs:ExposureToTobaccoSmoke
 placeOfResidenceClassification: dcs:Urban
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_AtLeastOneHourPerDay_ExposureToTobaccoSmoke_In_Count_Person_Urban_Male
-name: "Percentage At Least One Hour Per Day, Exposure To Tobacco Smoke Among Urban, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Urban_Male
-activityFrequency: dcs:AtLeastOneHourPerDay
-gender: dcs:Male
-healthBehavior: dcs:ExposureToTobaccoSmoke
-placeOfResidenceClassification: dcs:Urban
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_20OrMoreCigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_Female
-name: "Percentage Daily, 20 Or More Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-tobaccoUsageType: dcs:Cigarettes
-consumptionQuantity: [20 - Cigarettes]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -98,61 +50,6 @@ consumptionQuantity: [20 - Cigarettes]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_Daily_20OrMoreCigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_SemiUrban_Female
-name: "Percentage Daily, 20 Or More Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Semi Urban, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_SemiUrban_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-placeOfResidenceClassification: dcs:SemiUrban
-tobaccoUsageType: dcs:Cigarettes
-consumptionQuantity: [20 - Cigarettes]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_20OrMoreCigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
-name: "Percentage Daily, 20 Or More Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
-tobaccoUsageType: dcs:Cigarettes
-consumptionQuantity: [20 - Cigarettes]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_20OrMoreCigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage Daily, 20 Or More Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-tobaccoUsageType: dcs:Cigarettes
-consumptionQuantity: [20 - Cigarettes]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_20OrMoreCigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_Urban
-name: "Percentage Daily, 20 Or More Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Urban Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Urban
-activityFrequency: dcs:Daily
-healthBehavior: dcs:TobaccoSmoking
-placeOfResidenceClassification: dcs:Urban
-tobaccoUsageType: dcs:Cigarettes
-consumptionQuantity: [20 - Cigarettes]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_Daily_20OrMoreCigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_Urban_Female
 name: "Percentage Daily, 20 Or More Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Urban, Female Population"
 typeOf: dcs:StatisticalVariable
@@ -167,87 +64,6 @@ consumptionQuantity: [20 - Cigarettes]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_Daily_20OrMoreCigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_Urban_Male
-name: "Percentage Daily, 20 Or More Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Urban, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Urban_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-placeOfResidenceClassification: dcs:Urban
-tobaccoUsageType: dcs:Cigarettes
-consumptionQuantity: [20 - Cigarettes]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_LessThan20CigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_Female
-name: "Percentage Daily, Less Than 20 Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-tobaccoUsageType: dcs:Cigarettes
-consumptionQuantity: [- 20 Cigarettes]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_LessThan20CigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage Daily, Less Than 20 Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-tobaccoUsageType: dcs:Cigarettes
-consumptionQuantity: [- 20 Cigarettes]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_LessThan20CigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
-name: "Percentage Daily, Less Than 20 Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
-tobaccoUsageType: dcs:Cigarettes
-consumptionQuantity: [- 20 Cigarettes]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_LessThan20CigarettesPerDay_TobaccoSmoking_Cigarettes_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage Daily, Less Than 20 Cigarettes Per Day, Tobacco Smoking, Cigarettes Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-tobaccoUsageType: dcs:Cigarettes
-consumptionQuantity: [- 20 Cigarettes]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Female
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Female_IncomeOf0To20Percentile
 name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Female, Income Of 0 To 20 Percentile Population"
 typeOf: dcs:StatisticalVariable
@@ -257,58 +73,6 @@ activityFrequency: dcs:Daily
 gender: dcs:Female
 healthBehavior: dcs:TobaccoSmoking
 income: [0 20 Percentile]
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Female_IncomeOf20To40Percentile
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Female, Income Of 20 To 40 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_IncomeOf20To40Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-income: [20 40 Percentile]
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Female_IncomeOf40To60Percentile
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Female, Income Of 40 To 60 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_IncomeOf40To60Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-income: [40 60 Percentile]
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Female_IncomeOf60To80Percentile
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Female, Income Of 60 To 80 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_IncomeOf60To80Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-income: [60 80 Percentile]
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Female_IncomeOf80To100Percentile
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Female, Income Of 80 To 100 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-income: [80 100 Percentile]
 tobaccoUsageType: dcs:Cigarettes
 statType: dcs:measuredValue
 measuredProperty: dcs:count
@@ -326,160 +90,6 @@ tobaccoUsageType: dcs:Cigarettes
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Male
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Male_IncomeOf0To20Percentile
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Male, Income Of 0 To 20 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_IncomeOf0To20Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-income: [0 20 Percentile]
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Male_IncomeOf20To40Percentile
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Male, Income Of 20 To 40 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_IncomeOf20To40Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-income: [20 40 Percentile]
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Male_IncomeOf40To60Percentile
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Male, Income Of 40 To 60 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_IncomeOf40To60Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-income: [40 60 Percentile]
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Male_IncomeOf60To80Percentile
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Male, Income Of 60 To 80 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_IncomeOf60To80Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-income: [60 80 Percentile]
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_Male_IncomeOf80To100Percentile
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Male, Income Of 80 To 100 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male_IncomeOf80To100Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-income: [80 100 Percentile]
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Tertiary Education Stage One Or Tertiary Education Stage Two, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Male
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Tertiary Education Stage One Or Tertiary Education Stage Two, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_TertiaryEducationStageOneOrTertiaryEducationStageTwo_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:TertiaryEducationStageOne__TertiaryEducationStageTwo
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_Cigarettes_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage Daily, Tobacco Smoking, Cigarettes Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-tobaccoUsageType: dcs:Cigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_ECigarettes_In_Count_Person_Female
-name: "Percentage Daily, Tobacco Smoking, E Cigarettes Among Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_Daily_TobaccoSmoking_ECigarettes_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
 name: "Percentage Daily, Tobacco Smoking, E Cigarettes Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
 typeOf: dcs:StatisticalVariable
@@ -490,95 +100,6 @@ gender: dcs:Female
 healthBehavior: dcs:TobaccoSmoking
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
 tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_ECigarettes_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage Daily, Tobacco Smoking, E Cigarettes Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_ECigarettes_In_Count_Person_Male
-name: "Percentage Daily, Tobacco Smoking, E Cigarettes Among Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_ECigarettes_In_Count_Person_TertiaryEducation_Female
-name: "Percentage Daily, Tobacco Smoking, E Cigarettes Among Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:TertiaryEducation
-tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_ECigarettes_In_Count_Person_TertiaryEducation_Male
-name: "Percentage Daily, Tobacco Smoking, E Cigarettes Among Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:TertiaryEducation
-tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_ECigarettes_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage Daily, Tobacco Smoking, E Cigarettes Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_ECigarettes_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage Daily, Tobacco Smoking, E Cigarettes Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_From1To5Years_TobaccoProducts_In_Count_Person_Female
-name: "Percentage Daily, Tobacco Smoking, From 1 To 5 Years Among Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-activityDuration: [Years 1 5]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -595,94 +116,6 @@ activityDuration: [Years 1 5]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_Daily_TobaccoSmoking_From1To5Years_TobaccoProducts_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-name: "Percentage Daily, Tobacco Smoking, From 1 To 5 Years Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-activityDuration: [Years 1 5]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_From1To5Years_TobaccoProducts_In_Count_Person_Male
-name: "Percentage Daily, Tobacco Smoking, From 1 To 5 Years Among Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-activityDuration: [Years 1 5]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_From1To5Years_TobaccoProducts_In_Count_Person_TertiaryEducation_Female
-name: "Percentage Daily, Tobacco Smoking, From 1 To 5 Years Among Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:TertiaryEducation
-activityDuration: [Years 1 5]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_From1To5Years_TobaccoProducts_In_Count_Person_TertiaryEducation_Male
-name: "Percentage Daily, Tobacco Smoking, From 1 To 5 Years Among Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_TertiaryEducation_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:TertiaryEducation
-activityDuration: [Years 1 5]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_From1To5Years_TobaccoProducts_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage Daily, Tobacco Smoking, From 1 To 5 Years Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-activityDuration: [Years 1 5]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_Daily_TobaccoSmoking_From1To5Years_TobaccoProducts_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-name: "Percentage Daily, Tobacco Smoking, From 1 To 5 Years Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Male
-activityFrequency: dcs:Daily
-gender: dcs:Male
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-activityDuration: [Years 1 5]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_FormerSmoker_Daily_TobaccoProducts_In_Count_Person_Female
-name: "Percentage Former Smoker, Daily Among Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:FormerSmoker
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_FormerSmoker_Daily_TobaccoProducts_In_Count_Person_Female_IncomeOf0To20Percentile
 name: "Percentage Former Smoker, Daily Among Female, Income Of 0 To 20 Percentile Population"
 typeOf: dcs:StatisticalVariable
@@ -692,54 +125,6 @@ activityFrequency: dcs:Daily
 gender: dcs:Female
 healthBehavior: dcs:FormerSmoker
 income: [0 20 Percentile]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_FormerSmoker_Daily_TobaccoProducts_In_Count_Person_Female_IncomeOf20To40Percentile
-name: "Percentage Former Smoker, Daily Among Female, Income Of 20 To 40 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_IncomeOf20To40Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:FormerSmoker
-income: [20 40 Percentile]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_FormerSmoker_Daily_TobaccoProducts_In_Count_Person_Female_IncomeOf40To60Percentile
-name: "Percentage Former Smoker, Daily Among Female, Income Of 40 To 60 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_IncomeOf40To60Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:FormerSmoker
-income: [40 60 Percentile]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_FormerSmoker_Daily_TobaccoProducts_In_Count_Person_Female_IncomeOf60To80Percentile
-name: "Percentage Former Smoker, Daily Among Female, Income Of 60 To 80 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_IncomeOf60To80Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:FormerSmoker
-income: [60 80 Percentile]
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_FormerSmoker_Daily_TobaccoProducts_In_Count_Person_Female_IncomeOf80To100Percentile
-name: "Percentage Former Smoker, Daily Among Female, Income Of 80 To 100 Percentile Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_IncomeOf80To100Percentile
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:FormerSmoker
-income: [80 100 Percentile]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -755,82 +140,14 @@ educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSeco
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_FormerSmoker_Daily_TobaccoProducts_In_Count_Person_TertiaryEducation_Female
-name: "Percentage Former Smoker, Daily Among Tertiary Education, Female Population"
+Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_Female_ForeignBornWithinEU27
+name: "Percentage Non Smoker Among Female, Foreign Born Within EU27 Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:FormerSmoker
-educationalAttainment: dcs:TertiaryEducation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_FormerSmoker_Daily_TobaccoProducts_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage Former Smoker, Daily Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-activityFrequency: dcs:Daily
-gender: dcs:Female
-healthBehavior: dcs:FormerSmoker
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_CitizenOutsideEU28_Female
-name: "Percentage Non Smoker Among Citizen Outside EU28, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_CitizenOutsideEU28_Female
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU27
 gender: dcs:Female
 healthBehavior: dcs:NonSmoker
-citizenship: dcs:CitizenOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_Citizen_Female
-name: "Percentage Non Smoker Among Citizen, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Citizen_Female
-gender: dcs:Female
-healthBehavior: dcs:NonSmoker
-citizenship: dcs:Citizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_Female_ForeignBorn
-name: "Percentage Non Smoker Among Female, Foreign Born Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_ForeignBorn
-gender: dcs:Female
-healthBehavior: dcs:NonSmoker
-nativity: dcs:ForeignBorn
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_Female_ForeignBornOutsideEU28
-name: "Percentage Non Smoker Among Female, Foreign Born Outside EU28 Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_ForeignBornOutsideEU28
-gender: dcs:Female
-healthBehavior: dcs:NonSmoker
-nativity: dcs:ForeignBornOutsideEU28
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_Female_ForeignBornWithinEU28
-name: "Percentage Non Smoker Among Female, Foreign Born Within EU28 Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU28
-gender: dcs:Female
-healthBehavior: dcs:NonSmoker
-nativity: dcs:ForeignBornWithinEU28
+nativity: dcs:ForeignBornWithinEU27
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -845,17 +162,6 @@ income: [0 20 Percentile]
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_Female_Native
-name: "Percentage Non Smoker Among Female, Native Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female_Native
-gender: dcs:Female
-healthBehavior: dcs:NonSmoker
-nativity: dcs:Native
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
 Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
 name: "Percentage Non Smoker Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
 typeOf: dcs:StatisticalVariable
@@ -864,81 +170,6 @@ measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducat
 gender: dcs:Female
 healthBehavior: dcs:NonSmoker
 educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_NotACitizen_Female
-name: "Percentage Non Smoker Among Not A Citizen, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_NotACitizen_Female
-gender: dcs:Female
-healthBehavior: dcs:NonSmoker
-citizenship: dcs:NotACitizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_Rural_Female
-name: "Percentage Non Smoker Among Rural, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Rural_Female
-gender: dcs:Female
-healthBehavior: dcs:NonSmoker
-placeOfResidenceClassification: dcs:Rural
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_Rural_Male
-name: "Percentage Non Smoker Among Rural, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Rural_Male
-gender: dcs:Male
-healthBehavior: dcs:NonSmoker
-placeOfResidenceClassification: dcs:Rural
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_SemiUrban
-name: "Percentage Non Smoker Among Semi Urban Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_SemiUrban
-healthBehavior: dcs:NonSmoker
-placeOfResidenceClassification: dcs:SemiUrban
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_SemiUrban_Female
-name: "Percentage Non Smoker Among Semi Urban, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_SemiUrban_Female
-gender: dcs:Female
-healthBehavior: dcs:NonSmoker
-placeOfResidenceClassification: dcs:SemiUrban
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_SemiUrban_Male
-name: "Percentage Non Smoker Among Semi Urban, Male Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_SemiUrban_Male
-gender: dcs:Male
-healthBehavior: dcs:NonSmoker
-placeOfResidenceClassification: dcs:SemiUrban
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_Urban
-name: "Percentage Non Smoker Among Urban Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Urban
-healthBehavior: dcs:NonSmoker
-placeOfResidenceClassification: dcs:Urban
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
@@ -953,71 +184,13 @@ placeOfResidenceClassification: dcs:Urban
 statType: dcs:measuredValue
 measuredProperty: dcs:count
 
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_Urban_Male
-name: "Percentage Non Smoker Among Urban, Male Population"
+Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_WithinEU27AndNotACitizen_Female
+name: "Percentage Non Smoker Among Within EU27 And Not A Citizen, Female Population"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Urban_Male
-gender: dcs:Male
-healthBehavior: dcs:NonSmoker
-placeOfResidenceClassification: dcs:Urban
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_NonSmoker_TobaccoProducts_In_Count_Person_WithinEU28AndNotACitizen_Female
-name: "Percentage Non Smoker Among Within EU28 And Not A Citizen, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_WithinEU28AndNotACitizen_Female
+measurementDenominator: dcs:Count_Person_WithinEU27AndNotACitizen_Female
 gender: dcs:Female
 healthBehavior: dcs:NonSmoker
-citizenship: dcs:WithinEU28AndNotACitizen
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_TobaccoSmoking_NeverUsed_ECigarettes_In_Count_Person_Female
-name: "Percentage Tobacco Smoking, E Cigarettes Among Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_Female
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_TobaccoSmoking_NeverUsed_ECigarettes_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-name: "Percentage Tobacco Smoking, E Cigarettes Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
-tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_TobaccoSmoking_NeverUsed_ECigarettes_In_Count_Person_TertiaryEducation_Female
-name: "Percentage Tobacco Smoking, E Cigarettes Among Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_TertiaryEducation_Female
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:TertiaryEducation
-tobaccoUsageType: dcs:ECigarettes
-statType: dcs:measuredValue
-measuredProperty: dcs:count
-
-Node: dcid:Percent_TobaccoSmoking_NeverUsed_ECigarettes_In_Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-name: "Percentage Tobacco Smoking, E Cigarettes Among Upper Secondary Education Or Post Secondary Non Tertiary Education, Female Population"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Person
-measurementDenominator: dcs:Count_Person_UpperSecondaryEducationOrPostSecondaryNonTertiaryEducation_Female
-gender: dcs:Female
-healthBehavior: dcs:TobaccoSmoking
-educationalAttainment: dcs:UpperSecondaryEducation__PostSecondaryNonTertiaryEducation
-tobaccoUsageType: dcs:ECigarettes
+citizenship: dcs:WithinEU27AndNotACitizen
 statType: dcs:measuredValue
 measuredProperty: dcs:count

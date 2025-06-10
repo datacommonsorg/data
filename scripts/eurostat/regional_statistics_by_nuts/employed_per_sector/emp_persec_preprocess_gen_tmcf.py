@@ -148,7 +148,7 @@ def preprocess(df, cleaned_csv):
     """
     try:
         logging.info(f'Processing file: {cleaned_csv}')
-        df = df.replace(np.NaN, '', regex=True)
+        df = df.replace(np.nan, '', regex=True)
 
         with open(cleaned_csv, 'w', newline='') as f_out:
             writer = csv.DictWriter(f_out,

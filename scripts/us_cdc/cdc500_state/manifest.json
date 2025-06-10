@@ -14,7 +14,8 @@
                     "cleaned_csv": "CDC500State_Output/CDC500State_Output.csv"
                 }
             ],
-            "cron_schedule": "0 1 * * 1"
+            "cron_schedule": "0 1 * * 1",
+            "user_script_timeout": 4500
         }
     ]
 }

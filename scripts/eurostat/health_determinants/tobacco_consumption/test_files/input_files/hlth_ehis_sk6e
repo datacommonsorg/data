@@ -1,0 +1,5 @@
+freq,unit,frequenc,sex,age,isced11,geo\TIME_PERIOD	2019 
+A,PC,DAY,F,TOTAL,ED0-2,AT	0.2 
+A,PC,DAY,F,TOTAL,ED0-2,BE	0.8 
+A,PC,DAY,F,TOTAL,ED0-2,BG	0.1 
+A,PC,DAY,F,TOTAL,ED0-2,CY	0

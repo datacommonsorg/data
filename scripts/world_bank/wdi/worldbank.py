@@ -161,10 +161,6 @@ RESOLUTION_TO_EXISTING_DCID = {
         'Amount_EconomicActivity_ExpenditureActivity_EducationExpenditure_Government_AsFractionOf_Amount_EconomicActivity_ExpenditureActivity_Government',
     'dcs:WorldBank/SE_XPD_TOTL_GD_ZS':
         'Amount_EconomicActivity_ExpenditureActivity_EducationExpenditure_Government_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
-    'dcs:WorldBank/MS_MIL_XPND_CD':
-        'Amount_EconomicActivity_ExpenditureActivity_MilitaryExpenditure_Government',
-    'dcs:WorldBank/MS_MIL_XPND_GD_ZS':
-        'Amount_EconomicActivity_ExpenditureActivity_MilitaryExpenditure_Government_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
     'dcs:WorldBank/CM_MKT_LCAP_GD_ZS':
         'Amount_Stock_AsFractionOf_Amount_EconomicActivity_GrossDomesticProduction_Nominal',
     'dcs:WorldBank/CM_MKT_LCAP_CD':
