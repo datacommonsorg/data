@@ -38,37 +38,35 @@ function extract_key_families() {
 
 function download_and_convert_dataset() {
   local dataset="$1" # Pass dataset as an argument
-  curl -s --location "http://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx/data/${dataset}" \
+  if curl -s --location "http://${COUNTRY}.opendataforafrica.org/api/1.0/sdmx/data/${dataset}" \
     --header 'Accept: text/html,application/xhtml+xml,application/xml' \
     --header 'Accept-Encoding: gzip, deflate, br, zstd' \
     --header 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36' \
     --output "$WORKING_DIR/${dataset}.xml" \
-    --compressed
-  
-  if [ $? -ne 0 ]; then
-    echo "Error: Failed to download dataset $dataset"
-    return 1
-  fi
-
-  local json_output_file="$WORKING_DIR/${dataset}.json"
-  local csv_output_file="$WORKING_DIR/${dataset}.csv"
-    
-  local xml_to_json_script_path="../../../util/xml_to_json.py"
-  local json_to_csv_script_path="../../../scripts/opendataafrica/download_folder/json_to_csv.py"
-
-  if python3 "$xml_to_json_script_path" "$WORKING_DIR/${dataset}.xml" "$json_output_file"; then
-    if python3 "$json_to_csv_script_path" "$json_output_file" "$csv_output_file"; then
-      rm -f "$WORKING_DIR/${dataset}.xml"
-      rm -f "$WORKING_DIR/${dataset}.json"
-      return 0
+    --compressed; then
+    echo "Download completed for $dataset"
+    local json_output_file="$WORKING_DIR/${dataset}.json"
+    local csv_output_file="$WORKING_DIR/${dataset}.csv"
+      
+    local xml_to_json_script_path="../../../util/xml_to_json.py"
+    local json_to_csv_script_path="../../../scripts/opendataafrica/download_folder/json_to_csv.py"
+    if python3 "$xml_to_json_script_path" "$WORKING_DIR/${dataset}.xml" "$json_output_file"; then
+      echo "XML conversion completed for $dataset"
+      if python3 "$json_to_csv_script_path" "$json_output_file" "$csv_output_file"; then
+        echo "Json conversion completed for $dataset"
+      else
+        echo "Error: JSON conversion failed for dataset: $dataset."
+        exit 1
+      fi
     else
-      echo "Error: Failed to convert JSON files to CSV files for dataset $dataset."
-      return 1
+      echo "Error: XML conversion failed for dataset: $dataset."
+      exit 1
     fi
   else
-    echo "Error: Failed to convert ${dataset}.xml to ${dataset}.json for dataset $dataset."
-    return 1
+    echo "Error: curl download failed for dataset: $dataset."
+    exit 1
   fi
+
 }
 
 function download_datasets_for_country() {
