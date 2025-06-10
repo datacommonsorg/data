@@ -432,8 +432,9 @@ class GenerateColMapBase:
         # check if all values that are not quantity ranges are prefixed
         for k, v in stat_var.items():
             # if value is not a bracketed quantity range
-            if v[0] == '[' and v[-1] == ']':
-                continue
+            if v:
+                if v[0] == '[' and v[-1] == ']':
+                    continue
             # do not prefix units or scalingFactors
             if k in ['unit', 'units', 'scalingFactor']:
                 continue

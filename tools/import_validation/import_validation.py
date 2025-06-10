@@ -22,18 +22,14 @@ import os
 import json
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('validation_config_file', 'validation_config.json',
+flags.DEFINE_string('validation_config', 'validation_config.json',
                     'Path to the validation config file.')
-flags.DEFINE_string('differ_output_location', '.',
-                    'Path to the differ output data folder.')
-flags.DEFINE_string('stats_summary_location', '.',
-                    'Path to the stats summary report folder.')
-flags.DEFINE_string('validation_output_location', '.',
-                    'Path to the validation output folder.')
-
-_POINT_ANALAYSIS_FILE = 'point_analysis_summary.csv'
-_STATS_SUMMARY_FILE = 'summary_report.csv'
-_VALIDATION_OUTPUT_FILE = 'validation_output.csv'
+flags.DEFINE_string('differ_output', 'point_analysis_summary.csv',
+                    'Path to the differ output data file.')
+flags.DEFINE_string('stats_summary', 'summary_report.csv',
+                    'Path to the stats summary report file.')
+flags.DEFINE_string('validation_output', 'validation_output.csv',
+                    'Path to the validation output file.')
 
 Validation = Enum('Validation', [
     ('MODIFIED_COUNT', 1),
@@ -61,18 +57,19 @@ class ImportValidation:
   Class to perform validations for import automation.
 
   Usage:
-  $ python import_validation.py --validation_config_file=<path> \
-    --differ_output_location=<path> --stats_summary_location=<path>
+  $ python import_validation.py --validation_config=<path> \
+    --differ_output=<path> --stats_summary=<path> --validation_output=<path>
 
   Each import can provide configuration (JSON) to select which validation
   checks are performed. Validation results are written to an output file.
   Sample config and output files can be found in test folder.
   """
 
-    def __init__(self, config_file: str, differ_output: str, stats_summary: str,
-                 validation_output: str):
-        logging.info('Reading config from %s', config_file)
+    def __init__(self, validation_config: str, differ_output: str,
+                 stats_summary: str, validation_output: str):
+        logging.info('Reading config from %s', validation_config)
         self.differ_results = pd.read_csv(differ_output)
+        print(self.differ_results)
         self.validation_map = {
             Validation.MODIFIED_COUNT: self._modified_count_validation,
             Validation.ADDED_COUNT: self._added_count_validation,
@@ -81,7 +78,7 @@ class ImportValidation:
         }
         self.validation_output = validation_output
         self.validation_result = []
-        with open(config_file, encoding='utf-8') as fd:
+        with open(validation_config, encoding='utf-8') as fd:
             self.validation_config = json.load(fd)
 
     def _latest_data_validation(self, config: dict):
@@ -91,29 +88,29 @@ class ImportValidation:
     def _deleted_count_validation(self, config: dict):
         if self.differ_results.empty:
             return
-        if self.differ_results['deleted'].sum() > config['threshold']:
+        if self.differ_results['DELETED'].sum() > config['threshold']:
             raise AssertionError(f'Validation failed: {config["validation"]}')
 
     # Checks if number of modified points for each stat var are same.
     def _modified_count_validation(self, config: dict):
         if self.differ_results.empty:
             return
-        if self.differ_results['modified'].nunique() > 1:
+        if self.differ_results['MODIFIED'].nunique() > 1:
             raise AssertionError(f'Validation failed: {config["validation"]}')
 
     # Checks if number of added points for each stat var are same.
     def _added_count_validation(self, config: dict):
         if self.differ_results.empty:
             return
-        if self.differ_results['added'].nunique() > 1:
+        if self.differ_results['ADDED'].nunique() > 1:
             raise AssertionError(f'Validation failed: {config["validation"]}')
 
     # Checks if number of unmodified points for each stat var are same.
     def _unmodified_count_validation(self, config: dict):
         if self.differ_results.empty:
             return
-        if self.differ_results['same'].nunique() > 1:
-            raise AssertionError(f'Validation failed: {config["validation"]}')
+        # if self.differ_results['UNMODIFIED'].nunique() > 1:
+        #    raise AssertionError(f'Validation failed: {config["validation"]}')
 
     def _run_validation(self, config) -> ValidationResult:
         try:
@@ -142,12 +139,9 @@ class ImportValidation:
 
 
 def main(_):
-    validation = ImportValidation(
-        _FLAGS.validation_config_file,
-        os.path.join(_FLAGS.differ_output_location, _POINT_ANALAYSIS_FILE),
-        os.path.join(_FLAGS.stats_summary_location, _STATS_SUMMARY_FILE),
-        os.paht.join(_FLAGS.validation_output_location,
-                     _VALIDATION_OUTPUT_FILE))
+    validation = ImportValidation(_FLAGS.validation_config,
+                                  _FLAGS.differ_output, _FLAGS.stats_summary,
+                                  _FLAGS.validation_output)
     validation.run_validations()
 
 

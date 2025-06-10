@@ -1,0 +1,26 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/test_data/ethiopia-Ethiopia_Demographics_data.csv --pv_map=/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/ethiopia-Ethiopia_Demographics_pvmap.csv --config=/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/ethiopia-Ethiopia_Demographics_metadata.csv --output_path=/usr/local/google/home/kuru/ethiopiaPR/data/statvar_imports/opendataAfrica/ethiopia_statistics/ethiopia_demographics" on 2025-04-07 07:31:44.694751
+
+Node: dcid:Count_Person_Female_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+gender: dcid:Female
+
+Node: dcid:Count_Person_Male_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+gender: dcid:Male
+
+Node: dcid:Count_Person_Urban_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+placeOfResidenceClassification: dcid:Urban
+
