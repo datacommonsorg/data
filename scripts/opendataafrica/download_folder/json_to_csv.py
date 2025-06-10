@@ -109,6 +109,7 @@ def process_json_files(input_json_file, output_csv_file):
         logging.fatal(
             f"An unexpected error occurred: in the file '{input_json_file}' {e}"
         )
+        sys.exit(1)
 
 
 # The below code will be used to call the script from bash script
