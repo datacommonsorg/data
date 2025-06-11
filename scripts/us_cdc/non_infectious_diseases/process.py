@@ -107,7 +107,7 @@ def download_data_from_api(column_mapping=None):
                 )
                 return
         else:
-            logging.error(
+            logging.fatal(
                 f"Error fetching total record count: Received status code {count_response.status_code}"
             )
             return
