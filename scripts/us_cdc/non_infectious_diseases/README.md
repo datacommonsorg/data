@@ -35,7 +35,7 @@ when the file 'process.py' is ran with the flag --mode=process, it will process 
 i.e. python3 process.py mode=process
 
 Total downloading + processing time: ~ 1 minute
-Cron Schedule: 12:00 AM (1,15 day of month)
+Cron Schedule: 02:00 AM (day-of-month 15)
 
 when the file 'process .py' is ran without any flag, it will download and process the files and keep it in the respective directories as mentioned above.
 i.e. python3 process.py
