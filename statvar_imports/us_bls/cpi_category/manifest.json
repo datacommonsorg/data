@@ -1,0 +1,27 @@
+					{
+    "import_specifications": [
+      {
+        "import_name": "BLS_CPI_Category",
+        "curator_emails": [],
+        "provenance_url": "https://www.bls.gov/cpi/tables/supplemental-files/",
+        "provenance_description": "Consumer Price Index by Category",
+        "scripts": ["cpi_category_download.py",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/input_data/cpi-w/*' --pv_map='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/cpi_w_pvmap.csv' --config_file='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/cpi_w_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/output/cpi_w/cpi_w'",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/input_data/c-cpi-u/*' --pv_map='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/c_cpi_u_pvmap.csv' --config_file='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/c_cpi_u_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/output/c_cpi_u/c_cpi_u'",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/input_data/cpi-u/*' --pv_map='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/cpi_u_pvmap.csv' --config_file='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/cpi_u_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='/usr/local/google/home/bipina/data/statvar_imports/us_bls/cpi_category/output/cpi_u/cpi_u'"
+        ],
+        "import_inputs": [
+          {
+            "template_mcf": "output/cpi_u/cpi_u.tmcf",
+            "cleaned_csv": "output/*/*.csv"
+          }
+        ],
+        "resource_limits": {
+            "cpu": "8",
+            "memory": "32G"
+          },
+        "cron_schedule": "0 10 21 * *"
+      }
+    ]
+  }
+  
