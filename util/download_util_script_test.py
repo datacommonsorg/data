@@ -1,12 +1,15 @@
 import os
 import shutil
 import unittest
+from unittest import mock
 import zipfile
 from absl import flags
 from absl.testing import flagsaver
-import requests_mock
+import requests
+from requests.exceptions import HTTPError
+import datetime
+
 import download_util_script
-import datetime  # Import to generate Last-Modified header timestamps
 
 FLAGS = flags.FLAGS
 
@@ -16,8 +19,6 @@ class DownloadFileTest(unittest.TestCase):
     def setUp(self):
         self.temp_dir = "test_output"
         os.makedirs(self.temp_dir, exist_ok=True)
-        # It's good practice to explicitly reset flags for each test,
-        # but flagsaver handles this well between tests.
         self.saved_flag_values = flagsaver.save_flag_values()
 
     def tearDown(self):
@@ -25,21 +26,28 @@ class DownloadFileTest(unittest.TestCase):
             shutil.rmtree(self.temp_dir)
         flagsaver.restore_flag_values(self.saved_flag_values)
 
-    @requests_mock.Mocker()
-    def test_download_txt_file(self, mock):
+    @mock.patch('requests.head')
+    @mock.patch('requests.get')
+    def test_download_txt_file(self, mock_get, mock_head):
         download_url = "http://example.com/test.txt"
         file_content = b"This is a test file."
 
-        # 1. Mock the HEAD request that download_file makes for staleness check
-        mock.head(download_url,
-                  status_code=200,
-                  headers={
-                      'Last-Modified':
-                          datetime.datetime.now().strftime(
-                              '%a, %d %b %Y %H:%M:%S GMT')
-                  })
-        # 2. Mock the GET request for the actual file download
-        mock.get(download_url, content=file_content)
+        # Configure mock for requests.head()
+        mock_head_response = mock.MagicMock()
+        mock_head_response.status_code = 200
+        mock_head_response.headers = {
+            'Last-Modified':
+                datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT')
+        }
+        mock_head_response.raise_for_status.return_value = None
+        mock_head.return_value = mock_head_response
+
+        # Configure mock for requests.get()
+        mock_get_response = mock.MagicMock()
+        mock_get_response.status_code = 200
+        mock_get_response.iter_content.return_value = [file_content]
+        mock_get_response.raise_for_status.return_value = None
+        mock_get.return_value = mock_get_response
 
         # Call the function under test
         result = download_util_script.download_file(download_url, self.temp_dir,
@@ -48,42 +56,66 @@ class DownloadFileTest(unittest.TestCase):
         # Assertions
         self.assertTrue(
             result, "download_file should return True on successful download.")
+        mock_head.assert_called_once_with(download_url,
+                                          headers=None,
+                                          allow_redirects=True,
+                                          timeout=10)
+        mock_get.assert_called_once_with(download_url,
+                                         headers=None,
+                                         stream=True,
+                                         timeout=30)
+
         file_path = os.path.join(self.temp_dir, "test.txt")
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, "rb") as f:
             self.assertEqual(f.read(), file_content)
 
-    @requests_mock.Mocker()
-    def test_download_file_without_extension(self, mock):
+    @mock.patch('requests.head')
+    @mock.patch('requests.get')
+    def test_download_file_without_extension(self, mock_get, mock_head):
         download_url = "http://example.com/test"
         file_content = b"This is a test file without extension."
 
-        # 1. Mock the HEAD request
-        mock.head(download_url,
-                  status_code=200,
-                  headers={
-                      'Last-Modified':
-                          datetime.datetime.now().strftime(
-                              '%a, %d %b %Y %H:%M:%S GMT')
-                  })
-        # 2. Mock the GET request
-        mock.get(download_url, content=file_content)
+        # Configure mock for requests.head()
+        mock_head_response = mock.MagicMock()
+        mock_head_response.status_code = 200
+        mock_head_response.headers = {
+            'Last-Modified':
+                datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT')
+        }
+        mock_head_response.raise_for_status.return_value = None
+        mock_head.return_value = mock_head_response
+
+        # Configure mock for requests.get()
+        mock_get_response = mock.MagicMock()
+        mock_get_response.status_code = 200
+        mock_get_response.iter_content.return_value = [file_content]
+        mock_get_response.raise_for_status.return_value = None
+        mock_get.return_value = mock_get_response
 
         result = download_util_script.download_file(download_url, self.temp_dir,
                                                     False)
 
         self.assertTrue(
             result, "download_file should return True on successful download.")
-        # The script is expected to append .xlsx for files without extensions when not unzipping
-        file_path = os.path.join(self.temp_dir, "test.xlsx")
+        mock_head.assert_called_once_with(download_url,
+                                          headers=None,
+                                          allow_redirects=True,
+                                          timeout=10)
+        mock_get.assert_called_once_with(download_url,
+                                         headers=None,
+                                         stream=True,
+                                         timeout=30)
+
+        file_path = os.path.join(self.temp_dir,
+                                 "test.xlsx")  # Script appends .xlsx
         self.assertTrue(os.path.exists(file_path))
         with open(file_path, "rb") as f:
             self.assertEqual(f.read(), file_content)
 
-    @requests_mock.Mocker()
-    def test_download_invalid_url(self, mock):
-        # This test case verifies URL format validation, which happens *before* network requests.
-        # Thus, no HEAD/GET mocks are strictly necessary as the script should fail early.
+    @mock.patch('requests.head')
+    @mock.patch('requests.get')
+    def test_download_invalid_url(self, mock_get, mock_head):
         download_url = "invalid_url"
 
         result = download_util_script.download_file(download_url, self.temp_dir,
@@ -92,30 +124,98 @@ class DownloadFileTest(unittest.TestCase):
         self.assertFalse(
             result,
             "download_file should return False for an invalid URL format.")
+        # Assert that neither head nor get were called as validation should occur first
+        mock_head.assert_not_called()
+        mock_get.assert_not_called()
         # Ensure no files were created in the output directory
         self.assertFalse(os.listdir(self.temp_dir))
 
-    @requests_mock.Mocker()
-    def test_download_failure(self, mock):
+    @mock.patch('requests.head')
+    @mock.patch('requests.get')
+    def test_download_failure(self, mock_get, mock_head):
         download_url = "http://example.com/error"
-        # Mock both HEAD and GET to return a failure status code (e.g., 404 Not Found)
-        mock.head(download_url, status_code=404)
-        mock.get(download_url, status_code=404)
 
-        result = download_util_script.download_file(download_url, self.temp_dir,
-                                                    False)
+        # Configure mock for requests.head() to simulate failure
+        mock_head_response = mock.MagicMock()
+        mock_head_response.status_code = 404
+        mock_head_response.raise_for_status.side_effect = HTTPError(
+            "404 Client Error: Not Found for url: " + download_url)
+        mock_head.return_value = mock_head_response
+
+        # Configure mock for requests.get() to simulate failure
+        mock_get_response = mock.MagicMock()
+        mock_get_response.status_code = 404
+        mock_get_response.raise_for_status.side_effect = HTTPError(
+            "404 Client Error: Not Found for url: " + download_url)
+        mock_get.return_value = mock_get_response
+
+        # Pass tries=1 to download_file to disable retries for this test case
+        result = download_util_script.download_file(download_url,
+                                                    self.temp_dir,
+                                                    False,
+                                                    tries=1)
 
         self.assertFalse(
             result, "download_file should return False on download failure.")
+        # Assert that both head and get were attempted
+        mock_head.assert_called_once_with(download_url,
+                                          headers=None,
+                                          allow_redirects=True,
+                                          timeout=10)
+        # requests.get should now only be called once because tries=1
+        mock_get.assert_called_once_with(download_url,
+                                         headers=None,
+                                         stream=True,
+                                         timeout=30)
         # Ensure no files (even partially downloaded ones) were left behind
         self.assertFalse(os.listdir(self.temp_dir))
 
-    def _create_test_zip_file(self):
-        test_zip_file = os.path.join(self.temp_dir, "test_file.zip")
-        with zipfile.ZipFile(test_zip_file, "w") as zf:
+    @mock.patch('requests.head')
+    @mock.patch('requests.get')
+    def test_download_and_unzip_file(self, mock_get, mock_head):
+        download_url = "http://example.com/test.zip"
+        # Create a dummy zip file in memory
+        zip_content = self._create_test_zip_file_content()
+
+        mock_head_response = mock.MagicMock()
+        mock_head_response.status_code = 200
+        mock_head_response.headers = {
+            'Last-Modified':
+                datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT')
+        }
+        mock_head_response.raise_for_status.return_value = None
+        mock_head.return_value = mock_head_response
+
+        mock_get_response = mock.MagicMock()
+        mock_get_response.status_code = 200
+        mock_get_response.iter_content.return_value = [zip_content]
+        mock_get_response.raise_for_status.return_value = None
+        mock_get.return_value = mock_get_response
+
+        result = download_util_script.download_file(download_url, self.temp_dir,
+                                                    True)
+
+        self.assertTrue(
+            result,
+            "download_file should return True on successful download and unzip."
+        )
+        self.assertTrue(os.path.exists(os.path.join(
+            self.temp_dir, "test.zip")))  # The downloaded zip
+        self.assertTrue(
+            os.path.exists(os.path.join(self.temp_dir,
+                                        "test_file.txt")))  # The unzipped file
+        with open(os.path.join(self.temp_dir, "test_file.txt"), "r") as f:
+            self.assertEqual(f.read(), "test content")
+
+    def _create_test_zip_file_content(self):
+        # Create a in-memory zip file
+        # Using BytesIO to simulate file in memory without writing to disk
+        from io import BytesIO
+        zip_buffer = BytesIO()
+        with zipfile.ZipFile(zip_buffer, "w", zipfile.ZIP_DEFLATED,
+                             False) as zf:
             zf.writestr("test_file.txt", "test content")
-        with open(test_zip_file, "rb") as f:
-            return f.read()
+        return zip_buffer.getvalue()
 
 
 if __name__ == '__main__':
