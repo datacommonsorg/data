@@ -1,0 +1,8 @@
+Node: E:central_bank_policy_rate->E0
+observationAbout: C:central_bank_policy_rate->observationAbout
+observationDate: C:central_bank_policy_rate->observationDate
+variableMeasured: C:central_bank_policy_rate->variableMeasured
+value: C:central_bank_policy_rate->value
+unit: C:central_bank_policy_rate->unit
+observationPeriod: C:central_bank_policy_rate->observationPeriod
+typeOf: dcs:StatVarObservation
