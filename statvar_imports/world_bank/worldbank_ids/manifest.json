@@ -2,7 +2,9 @@
     "import_specifications": [
         {
             "import_name": "WorldBank_IDS",
-            "curator_emails": [],
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
             "provenance_url": "https://databank.worldbank.org/source/international-debt-statistics",
             "provenance_description": "World Bank principal, currency composition, interest and disbursed and outstanding of debt for different countries.",
             "scripts": [
@@ -11,6 +13,9 @@
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/interest_input.csv --pv_map=configs/interest_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/interest/interest_output --existing_schema_mcf=Schema_entity.mcf --config_file=common_metadata.csv",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/disbursed_input.csv --pv_map=configs/disbursed_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/disbursed/disbursed_output --existing_schema_mcf=Schema_entity.mcf --config_file=common_metadata.csv",
                 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/principal_input.csv --pv_map=configs/principal_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/principal/principal_output --existing_schema_mcf=Schema_entity.mcf --config_file=common_metadata.csv"
+            ],
+            "source_files": [
+                "input_files/*"
             ],
             "import_inputs": [
                 {

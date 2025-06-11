@@ -23,8 +23,12 @@ url - `https://databank.worldbank.org/source/international-debt-statistics`
 
 ### How to run:
 
-`python3 statvar/stat_var_processor.py --input_data=statvar_imports/worldbank_ids/test_data/sample_input/<input_file> --pv_map='statvar_imports/worldbank_ids/test_data/sample_input/<input_pvmap>.csv,country:statvar_imports/worldbank_ids/observationAbout.csv,counterpart_area:statvar_imports/worldbank_ids/InputlendingEntity.csv' --output_path=statvar_imports/worldbank_ids/test_data/sample_output/<output_filename> --existing_schema_mcf=statvar_imports/worldbank_ids/Schema_entity.mcf --config=statvar_imports/worldbank_ids/common_metadata.csv`
+`python3 donwload.py`
 
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/currency_input.csv --pv_map=configs/currency_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/currency/currency --existing_schema_mcf=Schema_entity.mcf --config_file=common_metadata.csv`
 
-#### Example
-`python3 statvar/stat_var_processor.py --input_data=statvar_imports/worldbank_ids/test_data/sample_input/disbursed_input.csv --pv_map='statvar_imports/worldbank_ids/test_data/sample_input/disbursed_input.csv,country:statvar_imports/worldbank_ids/observationAbout.csv,counterpart_area:statvar_imports/worldbank_ids/InputlendingEntity.csv' --output_path=statvar_imports/worldbank_ids/test_data/sample_output/Disbursed_Outstanding --existing_schema_mcf=statvar_imports/worldbank_ids/Schema_entity.mcf --config=statvar_imports/worldbank_ids/common_metadata.csv`
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/interest_input.csv --pv_map=configs/interest_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/interest/interest_output --existing_schema_mcf=Schema_entity.mcf --config_file=common_metadata.csv`
+
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/disbursed_input.csv --pv_map=configs/disbursed_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/disbursed/disbursed_output --existing_schema_mcf=Schema_entity.mcf --config_file=common_metadata.csv`
+
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/principal_input.csv --pv_map=configs/principal_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/principal/principal_output --existing_schema_mcf=Schema_entity.mcf --config_file=common_metadata.csv`

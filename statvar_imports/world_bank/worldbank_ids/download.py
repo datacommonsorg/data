@@ -15,12 +15,15 @@
 import os
 import sys
 import numpy as np
-from absl import logging
+from absl import logging, flags, app
 # Import the required function after installing the package
 from bblocks import WorldBankData, DebtIDS
 from time import time
 from datetime import datetime
 
+FLAGS = flags.FLAGS
+flags.DEFINE_integer('start_year', 1970, 'The starting year for data download.')
+flags.DEFINE_integer('end_year', datetime.now().year + 6, 'The ending year for data download (current year + offset).')
 start_time = time()
 DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                   "input_files")
@@ -32,8 +35,6 @@ else:
     logging.info("Folder already exists-> %s\n", DEFAULT_INPUT_PATH)
 
 # create a list of indicators under each dataset.
-
-# interest = ["DT.INT.BLAT.CD"]
 interest = [
     "DT.INT.BLAT.CD",
     "DT.INT.BLTC.CD",
@@ -53,7 +54,6 @@ interest = [
     "DT.INT.PROP.CD",
 ]
 
-# principal = ["DT.AMT.DLXF.CD"]
 principal = [
     "DT.AMT.DLXF.CD",
     "DT.AMT.DPPG.CD",
@@ -73,7 +73,6 @@ principal = [
     "DT.AMT.PNGB.CD",
 ]
 
-# disbursed = ["DT.DOD.DLXF.CD"]
 disbursed = [
     "DT.DOD.DLXF.CD",
     "DT.DOD.DPPG.CD","DT.DOD.PNGC.CD","DT.DOD.OFFT.CD","DT.DOD.MLAT.CD",
@@ -82,7 +81,6 @@ disbursed = [
     "DT.DOD.PROP.CD","DT.DOD.DPNG.CD","DT.DOD.PNGB.CD",
 ]
 
-# currency = ["DT.CUR.DMAK.ZS"]
 currency = [
     "DT.CUR.DMAK.ZS", "DT.CUR.EURO.ZS", "DT.CUR.FFRC.ZS", "DT.CUR.JYEN.ZS",
     "DT.CUR.USDL.ZS", "DT.CUR.SDRW.ZS", "DT.CUR.OTHC.ZS", "DT.CUR.UKPS.ZS",
@@ -90,36 +88,34 @@ currency = [
 ]
 
 indicator_list = [interest, currency, principal, disbursed]
-# indicator_list = [ disbursed]
 indicator_listname = ["interest", "currency", "principal", "disbursed"]
-# indicator_listname = ["disbursed"]
-start_year = 1970
-# end_year = datetime.date.today().year + 6
-end_year = datetime.now().year + 6
 
-# Itterating each list to download the respective data.
-for idx, indicator in enumerate(indicator_list):
-    # Creating an IDS object
-    debt_id = DebtIDS()
-    # Load the indicators.
-    logging.info("Loaded data for%s", indicator)
-    debt_id.load_data(indicators=indicator,
-                      start_year=start_year,
-                      end_year=end_year)
+def main(_):
+    # Itterating each list to download the respective data.
+    for idx, indicator in enumerate(indicator_list):
+        # Creating an IDS object
+        debt_id = DebtIDS()
+        # Load the indicators.
+        logging.info("Loaded data for%s", indicator)
+        debt_id.load_data(indicators=indicator,
+                        start_year=FLAGS.start_year,
+                        end_year=FLAGS.end_year)
 
-    # Get the data as a DataFrame
-    df = debt_id.get_data()
-    # Extracting only the year part for data.
-    df["YEARMOD"]=df["year"].dt.year
-    # Creating a column for measurementMethod.
-    passyear = datetime.now().year-2
-    df["Measure"]=np.where(df["YEARMOD"]>passyear,
-                           "WorldBankProjection",'')
-    print(passyear)
-    # Writing the data to  a local file.s
-    logging.info("Writing data to%s",
-                 f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv\n")
-    df.to_csv(f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv",
-              index=False)
-elapsed_time = round((time() - start_time) / 60, 2)
-logging.info(f"Script completed in {elapsed_time} mins")
+        # Get the data as a DataFrame
+        df = debt_id.get_data()
+        # Extracting only the year part for data.
+        df["YEARMOD"]=df["year"].dt.year
+        # Creating a column for measurementMethod.
+        passyear = datetime.now().year-2
+        df["Measure"]=np.where(df["YEARMOD"]>passyear,
+                            "WorldBankProjection",'')
+        # Writing the data to  a local file.s
+        logging.info("Writing data to%s",
+                    f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv\n")
+        df.to_csv(f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv",
+                index=False)
+    elapsed_time = round((time() - start_time) / 60, 2)
+    logging.info(f"Script completed in {elapsed_time} mins")
+
+if __name__ == '__main__':
+    app.run(main)
