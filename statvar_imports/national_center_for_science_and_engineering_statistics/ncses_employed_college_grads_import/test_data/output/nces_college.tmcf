@@ -1,0 +1,10 @@
+Node: E:nces_college->E0
+observationAbout: C:nces_college->observationAbout
+observationDate: C:nces_college->observationDate
+value: C:nces_college->value
+variableMeasured: C:nces_college->variableMeasured
+unit: C:nces_college->unit
+scalingFactor: C:nces_college->scalingFactor
+measurementMethod: C:nces_college->measurementMethod
+observationPeriod: C:nces_college->observationPeriod
+typeOf: dcs:StatVarObservation
