@@ -9,6 +9,7 @@ import pandas as pd
 import zipfile
 from retry import retry
 
+# Set logging level
 logging.set_verbosity(logging.INFO)
 
 # URL templates
@@ -35,30 +36,31 @@ SHEET_NAMES_TO_CSV_FILENAMES = {
 
 
 class Downloader:
-    """
-    Handles downloading, extracting, and processing data files from EPA GHGRP.
-
-    Attributes:
-        save_path (str): Directory to save downloaded and processed files.
-        url_year (int): Most recent year used to construct download URLs.
-    """
+    """Downloader class to fetch, extract, and process EPA emission data and crosswalk files."""
 
     def __init__(self, save_path, url_year):
+        """
+        Initialize Downloader instance.
+
+        Args:
+            save_path (str): Path to save downloaded and processed files.
+            url_year (int): Maximum year to attempt downloads.
+        """
         self.years = list(range(2010, url_year - 1))
         self.current_year = None
-        self.files = []  # list of (year, filename) of all extracted files
+        self.files = []
         self.save_path = save_path
-
         os.makedirs(self.save_path, exist_ok=True)
 
     def _check_url(self, url):
-        """Check if the URL is valid and accessible.
+        """
+        Check if a given URL is valid.
 
         Args:
-            url (str): URL to be validated.
+            url (str): URL to check.
 
         Returns:
-            bool: True if URL is valid, False otherwise.
+            bool: True if URL is reachable, False otherwise.
         """
         try:
             response = requests.head(url)
@@ -70,14 +72,15 @@ class Downloader:
             return False
 
     def _generate_and_validate(self, template, **kwargs):
-        """Generate a URL using a template and validate it.
+        """
+        Generate and validate a URL from a template.
 
         Args:
-            template (str): URL template.
-            **kwargs: Parameters to format the template.
+            template (str): URL template with placeholders.
+            **kwargs: Values to substitute in the template.
 
         Returns:
-            str or None: Validated URL or None if invalid.
+            str or None: Valid URL if found, else None.
         """
         try:
             url = template.format(**kwargs)
@@ -87,20 +90,24 @@ class Downloader:
             logging.info(f"URL not valid: {url}")
             return None
         except Exception as e:
-            logging.fatal(
-                f"Error occurred while generating and validating the URL: {e}")
+            logging.fatal(f"Error occurred while generating and validating the URL: {e}")
 
     @retry(tries=3, delay=2, backoff=2, exceptions=(requests.RequestException,))
     def download_data(self, year, year_minus_1):
-        """Download and extract the ZIP archive for a given year.
+        """
+        Download and extract the ZIP data file for a given year.
 
         Args:
-            year (int): Current year.
-            year_minus_1 (int): Previous year used in URL construction.
+            year (int): Year for which to download data.
+            year_minus_1 (int): Year used in the URL format.
+
+        Returns:
+            bool: True if download and extraction are successful, False otherwise.
         """
-        uri = self._generate_and_validate(download_url,
-                                          year=year,
-                                          year_minus_1=year_minus_1)
+        uri = self._generate_and_validate(download_url, year=year, year_minus_1=year_minus_1)
+        if not uri:
+            logging.warning(f"Skipping download for {year} due to missing URL.")
+            return False
         logging.info(f'Downloading data from {uri}')
         try:
             r = requests.get(uri)
@@ -108,20 +115,21 @@ class Downloader:
             z = zipfile.ZipFile(io.BytesIO(r.content))
             for file in z.namelist():
                 if not file.endswith('/'):
-                    target_path = os.path.join(self.save_path,
-                                               os.path.basename(file))
-                    with z.open(file) as source, open(target_path,
-                                                      'wb') as target:
+                    target_path = os.path.join(self.save_path, os.path.basename(file))
+                    with z.open(file) as source, open(target_path, 'wb') as target:
                         target.write(source.read())
             logging.info(f"Successfully downloaded data for year: {year}")
+            return True
         except Exception as e:
             logging.fatal(f"Failed to download or extract data for {year}: {e}")
+            return False
 
     def extract_all_years(self):
-        """Extract data from all year Excel files and write selected sheets to CSV.
+        """
+        Extract and save data from downloaded Excel files for all years.
 
         Returns:
-            list: A list of tuples containing (year, csv_path).
+            list: List of (year, csv_path) tuples for processed files.
         """
         try:
             headers = {sheet: {} for sheet in SHEET_NAMES_TO_CSV_FILENAMES}
@@ -130,24 +138,21 @@ class Downloader:
                 self.current_year = current_year
                 self._extract_data(headers)
             for sheet, csv_name in SHEET_NAMES_TO_CSV_FILENAMES.items():
-                headers_df = pd.DataFrame.from_dict(headers[sheet],
-                                                    orient='index')
-                headers_df.transpose().to_csv(os.path.join(
-                    self.save_path, f'cols_{csv_name}'),
-                                              index=None)
+                headers_df = pd.DataFrame.from_dict(headers[sheet], orient='index')
+                headers_df.transpose().to_csv(os.path.join(self.save_path, f'cols_{csv_name}'), index=None)
             return self.files
         except Exception as e:
-            logging.fatal(
-                f"Error occurred while extracting the years from the file: {e}")
+            logging.fatal(f"Error occurred while extracting the years from the file: {e}")
 
     def save_all_crosswalks(self, filepath):
-        """Generate and save crosswalk mapping of GHGRP Facility ID to ORIS codes.
+        """
+        Generate and save merged crosswalk files for all years.
 
         Args:
-            filepath (str): Filepath to save the final crosswalk CSV.
+            filepath (str): Output path for the merged crosswalk CSV.
 
         Returns:
-            pd.DataFrame: Combined and cleaned crosswalk DataFrame.
+            pd.DataFrame: Combined crosswalk DataFrame.
         """
         logging.info('Saving all ID crosswalks')
         try:
@@ -155,8 +160,7 @@ class Downloader:
             for current_year in self.years:
                 crosswalks.append(self._gen_crosswalk())
             all_crosswalks_df = pd.concat(crosswalks, join='outer')
-            all_crosswalks_df = all_crosswalks_df.sort_values(
-                by=[GHGRP_ID_COL, 'FRS Id', 'ORIS CODE'])
+            all_crosswalks_df = all_crosswalks_df.sort_values(by=[GHGRP_ID_COL, 'FRS Id', 'ORIS CODE'])
             all_crosswalks_df = all_crosswalks_df.drop_duplicates()
             all_crosswalks_df.to_csv(filepath, header=True, index=None)
             return all_crosswalks_df
@@ -164,36 +168,34 @@ class Downloader:
             logging.fatal(f"Error occurred while saving all crosswalks: {e}")
 
     def _csv_path(self, csv_filename, year=None):
-        """Constructs full CSV path for a given year and filename.
+        """
+        Construct the path to save a CSV file for a given year.
 
         Args:
-            csv_filename (str): CSV file name.
-            year (int, optional): Year to use. Defaults to current year.
+            csv_filename (str): Name of the CSV file.
+            year (int, optional): Year to include in the filename.
 
         Returns:
-            str: Full path to the CSV file.
+            str: Full path for the CSV file.
         """
         if not year:
             year = self.current_year
         return os.path.join(self.save_path, f'{year}_{csv_filename}')
 
     def _extract_data(self, headers):
-        """Extract relevant sheets from Excel and save to CSV for current year.
+        """
+        Extract data from Excel sheets and save them as CSV.
 
         Args:
-            headers (dict): Dictionary to store sheet headers by year.
+            headers (dict): Dictionary to store column headers per sheet and year.
         """
         try:
-            summary_filename = os.path.join(
-                self.save_path,
-                YEAR_DATA_FILENAME.format(year=self.current_year))
-
+            summary_filename = os.path.join(self.save_path, YEAR_DATA_FILENAME.format(year=self.current_year))
             xl = pd.ExcelFile(summary_filename, engine='openpyxl')
-            logging.info(
-                f"Available sheets in {summary_filename}: {xl.sheet_names}")
+            logging.info(f"Available sheets in {summary_filename}: {xl.sheet_names}")
             check_list = []
             for sheet in xl.sheet_names:
-                csv_filename = self._get_csv_filename(sheet)
+                csv_filename = self.__get_csv_filename(sheet)
                 check_list.append(csv_filename)
                 if not csv_filename:
                     logging.info(f'Skipping sheet: {sheet}')
@@ -201,60 +203,44 @@ class Downloader:
                 summary_file = xl.parse(sheet, header=HEADER_ROW, dtype=str)
                 csv_path = self._csv_path(csv_filename)
                 summary_file.to_csv(csv_path, index=None, header=True)
-                headers.setdefault(sheet,
-                                   {})[self.current_year] = summary_file.columns
+                headers.setdefault(sheet, {})[self.current_year] = summary_file.columns
                 self.files.append((self.current_year, csv_path))
             if "direct_emitters.csv" not in check_list:
-                logging.fatal(
-                    f"'direct_emitters.csv' not found in the sheets for {self.current_year}. Aborting!")
+                logging.fatal(f"'direct_emitters.csv' not found in the sheets for {self.current_year}. Aborting!")
         except Exception as e:
-            logging.fatal(
-                f"Error occurred while processing the sheet names: {e}")
+            logging.fatal(f"Error occurred while processing the sheet names: {e}")
 
     def _gen_crosswalk(self):
-        """Generate a crosswalk DataFrame mapping GHGRP Facility IDs to ORIS codes.
-
-        Downloads and merges crosswalk Excel with GHGRP data files for the current year.
+        """
+        Generate a crosswalk DataFrame for the current year.
 
         Returns:
-            pd.DataFrame: Crosswalk DataFrame containing Facility Id, FRS Id, and ORIS codes.
+            pd.DataFrame: Crosswalk mapping GHGRP ID to ORIS codes.
         """
         ssl._create_default_https_context = ssl._create_unverified_context
         try:
-            oris_df = pd.read_excel(self._generate_and_validate(
-                crosswalk_url, yr=self.current_year),
-                'ORIS Crosswalk',
-                header=0,
-                dtype=str,
-                usecols=CROSSWALK_COLS_TO_KEEP,
-                engine='openpyxl')
+            oris_df = pd.read_excel(self._generate_and_validate(crosswalk_url, yr=self.current_year),
+                                    'ORIS Crosswalk', header=0, dtype=str,
+                                    usecols=CROSSWALK_COLS_TO_KEEP, engine='openpyxl')
         except Exception:
             logging.warning(f"Using fallback CROSSWALK_URI for 2022")
-            oris_df = pd.read_excel(self._generate_and_validate(crosswalk_url,
-                                                               yr=2022),
-                                    'ORIS Crosswalk',
-                                    header=0,
-                                    dtype=str,
-                                    usecols=CROSSWALK_COLS_TO_KEEP,
-                                    engine='openpyxl')
-
+            oris_df = pd.read_excel(self._generate_and_validate(crosswalk_url, yr=2022),
+                                    'ORIS Crosswalk', header=0, dtype=str,
+                                    usecols=CROSSWALK_COLS_TO_KEEP, engine='openpyxl')
         oris_df = oris_df.rename(columns={'GHGRP Facility ID': GHGRP_ID_COL})
         all_facilities_df = pd.DataFrame()
         for sheet, csv_filename in SHEET_NAMES_TO_CSV_FILENAMES.items():
             csv_path = self._csv_path(csv_filename)
             if not os.path.exists(csv_path):
                 continue
-            df = pd.read_csv(csv_path,
-                             usecols=[GHGRP_ID_COL, 'FRS Id'],
-                             dtype=str)
-            all_facilities_df = pd.concat([all_facilities_df, df],
-                                          ignore_index=True)
-        all_facilities_df = all_facilities_df.join(
-            oris_df.set_index(GHGRP_ID_COL), on=GHGRP_ID_COL, how='left')
+            df = pd.read_csv(csv_path, usecols=[GHGRP_ID_COL, 'FRS Id'], dtype=str)
+            all_facilities_df = pd.concat([all_facilities_df, df], ignore_index=True)
+        all_facilities_df = all_facilities_df.join(oris_df.set_index(GHGRP_ID_COL), on=GHGRP_ID_COL, how='left')
         return all_facilities_df
 
-    def _get_csv_filename(self, sheet_name):
-        """Map Excel sheet name to corresponding CSV filename.
+    def __get_csv_filename(self, sheet_name):
+        """
+        Map Excel sheet name to corresponding CSV filename.
 
         Args:
             sheet_name (str): Sheet name from Excel file.
@@ -267,8 +253,7 @@ class Downloader:
                 return 'direct_emitters.csv'
             return SHEET_NAMES_TO_CSV_FILENAMES.get(sheet_name)
         except Exception as e:
-            logging.fatal(
-                f"Error occurred while mapping the sheet Direct Emitters: {e}")
+            logging.fatal(f"Error occurred while mapping the sheet Direct Emitters: {e}")
 
 
 if __name__ == '__main__':
@@ -280,10 +265,11 @@ if __name__ == '__main__':
             if year <= datetime.now().year:
                 logging.info(f"Downloading data for year: {year}")
                 try:
-                    downloader.download_data(year, year - 1)
+                    success = downloader.download_data(year, year - 1)
+                    if success:
+                        break
                 except Exception as e:
-                    logging.fatal(
-                        f"Failed to download data for year {year}. Error: {e}")
+                    logging.fatal(f"Failed to download data for year {year}. Error: {e}")
 
     except Exception as e:
         logging.fatal(f"An unexpected error occurred: {e}")
