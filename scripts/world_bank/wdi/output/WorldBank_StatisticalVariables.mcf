@@ -560,31 +560,6 @@ expenditureType: dcs:EducationExpenditure
 expensor: dcs:Government
 
 
-Node: dcid:WorldBank/MS_MIL_XPND_CD
-name: "Military expenditure (current USD)"
-description: "Military expenditures data from SIPRI are derived from the NATO definition, which includes all current and capital expenditures on the armed forces, including peacekeeping forces; defense ministries and other government agencies engaged in defense projects; paramilitary forces, if these are judged to be trained and equipped for military operations; and military space activities. Such expenditures include military and civil personnel, including retirement pensions of military personnel and social services for personnel; operation and maintenance; procurement; military research and development; and military aid (in the military expenditures of the donor country). Excluded are civil defense and current expenditures for previous military activities, such as for veterans' benefits, demobilization, conversion, and destruction of weapons. This definition cannot be applied for all countries, however, since that would require much more detailed information than is available about what is included in military budgets and off-budget military expenditure items. (For example, military budgets might or might not cover civil defense, reserves and auxiliary forces, police and paramilitary forces, dual-purpose forces such as military and civilian police, military grants in kind, pensions for military personnel, and social security contributions paid by one part of government to another). Stockholm International Peace Research Institute (SIPRI), Yearbook: Armaments, Disarmament and International Security."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:EconomicActivity
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-activitySource: dcs:ExpenditureActivity
-expenditureType: dcs:MilitaryExpenditure
-expensor: dcs:Government
-
-
-Node: dcid:WorldBank/MS_MIL_XPND_GD_ZS
-name: "Military expenditure (% of GDP)"
-description: "Military expenditures data from SIPRI are derived from the NATO definition, which includes all current and capital expenditures on the armed forces, including peacekeeping forces; defense ministries and other government agencies engaged in defense projects; paramilitary forces, if these are judged to be trained and equipped for military operations; and military space activities. Such expenditures include military and civil personnel, including retirement pensions of military personnel and social services for personnel; operation and maintenance; procurement; military research and development; and military aid (in the military expenditures of the donor country). Excluded are civil defense and current expenditures for previous military activities, such as for veterans' benefits, demobilization, conversion, and destruction of weapons. This definition cannot be applied for all countries, however, since that would require much more detailed information than is available about what is included in military budgets and off-budget military expenditure items. (For example, military budgets might or might not cover civil defense, reserves and auxiliary forces, police and paramilitary forces, dual-purpose forces such as military and civilian police, military grants in kind, pensions for military personnel, and social security contributions paid by one part of government to another.) Stockholm International Peace Research Institute (SIPRI), Yearbook: Armaments, Disarmament and International Security."
-typeOf: dcs:StatisticalVariable
-populationType: dcs:EconomicActivity
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-measurementDenominator: dcs:Amount_EconomicActivity_GrossDomesticProduction_Nominal
-activitySource: dcs:ExpenditureActivity
-expenditureType: dcs:MilitaryExpenditure
-expensor: dcs:Government
-
-
 Node: dcid:WorldBank/CM_MKT_LCAP_GD_ZS
 name: "Market capitalization of listed domestic companies (% of GDP)"
 description: "Market capitalization (also known as market value) is the share price times the number of shares outstanding (including their several classes) for listed domestic companies. Investment funds, unit trusts, and companies whose only business goal is to hold shares of other listed companies are excluded. Data are end of year values. World Federation of Exchanges database."
