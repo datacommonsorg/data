@@ -1,0 +1,16 @@
+parameter,value
+url,https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.php
+description,School Sports Aid - by gender
+#place_type,
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,Auxílio Esporte Escolar - por sexo
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1YC2It6ZbmNl1x5ylmQ2SGVNW-pUXHIEtdJuWNQcv544/edit?gid=0#gid=0
+output_columns,"observationAbout,observationDate,value,variableMeasured,scalingFactor,observationPeriod,measurementQualifier,unit"
+#header_rows,1
+schemaless,1
+number_decimal,","
+number_separator,""" """
