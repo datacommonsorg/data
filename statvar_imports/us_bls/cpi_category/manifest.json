@@ -16,6 +16,9 @@
             "cleaned_csv": "output/*/*.csv"
           }
         ],
+        "source_files": [
+          "input_data/*/*"
+        ],
         "resource_limits": {
             "cpu": "8",
             "memory": "32G"
