@@ -53,7 +53,7 @@ if __name__=="__main__":
     if all_data:
         df = pd.DataFrame(all_data, columns=['srcStateName', 'srcYear', 'GENDER', 'Life Expectancy', 'YearCode', 'Year'])
         os.makedirs(config.input_files, exist_ok=True)  
-        input_filename = os.path.join(config.input_files, 'India_LifeExpectancy.csv')
+        input_filename = os.path.join(config.input_files, 'India_LifeExpectancy_input.csv')
         df.to_csv(input_filename, index=False)
         logger.info("Data saved to India_LifeExpectancy_input.csv")
     else:

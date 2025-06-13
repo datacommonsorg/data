@@ -16,4 +16,4 @@
 
 `python3 donwload_script.py`
 
-`python3 stat_var_processor.py --input_data=../../statvar_imports/india_ndap/ndap/input_files/India_LifeExpectancy.csv --pv_map=../../statvar_imports/india_ndap/ndap/pv_map.csv --config_file=../../statvar_imports/india_ndap/ndap/metadata.csv  --output_path=../../statvar_imports/india_ndap/ndap/output/Life_expectancy"`
+`python3 stat_var_processor.py --input_data=../../statvar_imports/india_ndap/ndap/input_files/India_LifeExpectancy_input.csv --pv_map=../../statvar_imports/india_ndap/ndap/India_LifeExpectancy_pvmap.csv --config_file=../../statvar_imports/india_ndap/ndap/India_LifeExpectancy_metadata.csv  --output_path=../../statvar_imports/india_ndap/ndap/output/Life_expectancy`
