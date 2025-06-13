@@ -1,0 +1,9 @@
+test,status,message
+MaxDate_Latest,FAILED,MaxDate_Latest validation failed: StatVar 'Count_Person_Total_Fail_2023': MaxDate year 2023 does not match expected year 2024.; StatVar 'Count_Person_Regex_Fail_2023': MaxDate year 2023 does not match expected year 2024.; StatVar 'Count_Thing_Exact_Pass_2022': MaxDate year 2022 does not match expected year 2024.; StatVar 'Count_Thing_Exact_Fail_2021': MaxDate year 2021 does not match expected year 2024.; StatVar 'Invalid_Date_StatVar': Could not parse year from MaxDate 'BAD_DATE'.; StatVar 'Current_Year_StatVar_Pass_2025': MaxDate year 2025 does not match expected year 2024.
+MaxDate_Latest,FAILED,MaxDate_Latest validation failed: StatVar 'Count_Person_Regex_Fail_2023': MaxDate year 2023 does not match expected year 2024.
+MaxDate_Latest,FAILED,MaxDate_Latest validation failed: StatVar 'Count_Thing_Exact_Fail_2021': MaxDate year 2021 does not match expected year 2022.
+MaxDate_Latest,FAILED,MaxDate_Latest validation failed: StatVar 'Invalid_Date_StatVar': Could not parse year from MaxDate 'BAD_DATE'.
+MaxDate_Latest,PASSED,
+MaxDate_Latest,PASSED,
+MaxDate_Latest,PASSED,
+MaxDate_Latest,PASSED,
