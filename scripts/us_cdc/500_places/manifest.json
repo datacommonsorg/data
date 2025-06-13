@@ -8,22 +8,23 @@
             "scripts": [
                 "download_bulk.py","parse_cdc_places.py"
             ],
+            "source_files": ["gcs_output/input_files/*.csv"],
             "import_inputs": [
                 {
                     "template_mcf": "cdc_places.tmcf",
-                    "cleaned_csv": "cleaned_csv/County.csv"
+                    "cleaned_csv": "gcs_output/cleaned_csv/County.csv"
                 },
                 {
                     "template_mcf": "cdc_places.tmcf",
-                    "cleaned_csv": "cleaned_csv/City.csv"
+                    "cleaned_csv": "gcs_output/cleaned_csv/City.csv"
                 },
                 {
                     "template_mcf": "cdc_places.tmcf",
-                    "cleaned_csv": "cleaned_csv/ZipCode.csv"
+                    "cleaned_csv": "gcs_output/cleaned_csv/ZipCode.csv"
                 },
                 {
                     "template_mcf": "cdc_places.tmcf",
-                    "cleaned_csv": "cleaned_csv/CensusTract.csv"
+                    "cleaned_csv": "gcs_output/cleaned_csv/CensusTract.csv"
                 }
             ],
             "cron_schedule": "0 4 * * 5",
