@@ -1,0 +1,10 @@
+Node: dcid:computerUsageLocation
+typeOf: dcs:Property
+name: "computerUsageLocation"
+domainIncludes: dcid:Household
+
+Node: dcid:householderAge
+typeOf: dcs:Property
+name: "householderAge"
+rangeIncludes: dcid:QuantityRange
+
