@@ -15,14 +15,16 @@
 
 ### How to run:
 
-`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='<input_file>.csv' --pv_map='data/statvar_imports/statistics_new_zealand/new_zealand_census/<filename of pvmap.csv> --places_resolved_csv='data/statvar_imports/statistics_new_zealand/new_zealand_census/<filename of places_resolved_csv.csv>' --config_file='data/statvar_imports/statistics_new_zealand/new_zealand_census/<filename of metadata.csv>' --output_path='data/statvar_imports/statistics_new_zealand/new_zealand_census/<output_folder_name>/<filename>`
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='<input_file>.csv' --pv_map='data/statvar_imports/statistics_new_zealand/new_zealand_census/<filename of pvmap.csv> --places_resolved_csv='data/statvar_imports/statistics_new_zealand/new_zealand_census/<filename of places_resolved_csv.csv>' --config_file='data/statvar_imports/statistics_new_zealand/new_zealand_census/<filename of metadata.csv>' --output_path='data/statvar_imports/statistics_new_zealand/new_zealand_census/<output_folder_name>/<filename>`
 
 #### Example
 #### Download : 
 `python3 download_script.py`
 Notes: Files will be downloaded inside "input_files" folder.
 #### Processing
+Execute the script inside the folder "data/statvar_imports/statistics_new_zealand/new_zealand_census"
+
 National:
-`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='data/statvar_imports/statistics_new_zealand/new_zealand_census/input_files/Summary-figures-for-the-NZ-population-1991-2023.xlsx' --pv_map='data/statvar_imports/statistics_new_zealand/new_zealand_census/national_pvmap.csv' --config_file='data/statvar_imports/statistics_new_zealand/new_zealand_census/national_metadata.csv' --output_path='data/statvar_imports/statistics_new_zealand/new_zealand_census/output_files/nzl_national_output`
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data='input_files/Summary-figures-for-the-NZ-population-1991-2023.xlsx' --pv_map='national_pvmap.csv' --config_file='national_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output_files/nzl_national_output`
 Subnational:
-`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='data/statvar_imports/statistics_new_zealand/new_zealand_census/input_files/snpe-at30june21-population-table.csv' --pv_map='data/statvar_imports/statistics_new_zealand/new_zealand_census/subnational_pvmap.csv' --config_file='data/statvar_imports/statistics_new_zealand/new_zealand_census/subnational_metadata.csv' --places_resolved_csv='data/statvar_imports/statistics_new_zealand/new_zealand_census/subnational_places_resolved_csv.csv' --output_path='data/statvar_imports/statistics_new_zealand/new_zealand_census/output_files/nzl_subnational_output`
+`python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data='input_files/snpe-at30june21-population-table.csv' --pv_map='subnational_pvmap.csv' --config_file='subnational_metadata.csv' --places_resolved_csv='subnational_places_resolved_csv.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output_files/nzl_subnational_output`
