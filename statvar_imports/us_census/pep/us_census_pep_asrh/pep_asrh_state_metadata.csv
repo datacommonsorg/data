@@ -1,0 +1,6 @@
+parameter,value
+multi_value_properties,age
+mapped_rows,1
+mapped_columns,10
+header_rows,1
+output_columns,"observationAbout,observationDate,value,variableMeasured,measurementMethod"
