@@ -1,0 +1,7 @@
+Node: E:southafrica_budget_output->E0
+observationAbout: C:southafrica_budget_output->observationAbout
+observationDate: C:southafrica_budget_output->observationDate
+value: C:southafrica_budget_output->value
+variableMeasured: C:southafrica_budget_output->variableMeasured
+typeOf: dcs:StatVarObservation
+unit: ZAR
