@@ -1,0 +1,101 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Cotedivoire_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://cotedivoire.opendataforafrica.org/",
+            "provenance_description": "",
+            "scripts": [
+                "../../../scripts/opendataafrica/download_folder/download.sh 'cotedivoire' 'ojtbus, saxmnv, akfhutb, bdwcmfd, hxhgsjf, hznvdtd, jgwlmgg, jynwpug, qdanpdb, rimffwf, wayfqyd, wwamxhe, yukugyf, yxrzxug, kcnetge, CIEI2010R'",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ojtbus.csv --pv_map =ojtbus_pvmap.csv --config_file=ojtbus_metadata.csv --output_path=output/ojtbus.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/saxmnv.csv --pv_map =saxmnv_pvmap.csv --config_file=saxmnv_metadata.csv --output_path=output/saxmnv.csv --places_resolved_csv=remap_saxmnv.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/akfhutb.csv --pv_map =akfhutb_pvmap.csv --config_file=akfhutb_metadata.csv --output_path=output/akfhutb.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/bdwcmfd.csv --pv_map =bdwcmfd_pvmap.csv --config_file=bdwcmfd_metadata.csv --output_path=output/bdwcmfd.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/hxhgsjf.csv --pv_map =hxhgsjf_pvmap.csv --config_file=hxhgsjf_metadata.csv --output_path=output/hxhgsjf.csv --places_resolved_csv=remap_hxhgsjf.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/hznvdtd.csv --pv_map =hznvdtd_pvmap.csv --config_file=hznvdtd_metadata.csv --output_path=output/hznvdtd.csv --places_resolved_csv=remap_hznvdtd.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/jgwlmgg.csv --pv_map =jgwlmgg_pvmap.csv --config_file=jgwlmgg_metadata.csv --output_path=output/jgwlmgg.csv --places_resolved_csv=remap_jgwlmgg.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/jynwpug.csv --pv_map =jynwpug_pvmap.csv --config_file=jynwpug_metadata.csv --output_path=output/jynwpug.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/qdanpdb.csv --pv_map =qdanpdb_pvmap.csv --config_file=qdanpdb_metadata.csv --output_path=output/qdanpdb.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/rimffwf.csv --pv_map =rimffwf_pvmap.csv --config_file=rimffwf_metadata.csv --output_path=output/rimffwf.csv --places_resolved_csv=remap_rimffwf.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wayfqyd.csv --pv_map =wayfqyd_pvmap.csv --config_file=wayfqyd_metadata.csv --output_path=output/wayfqyd.csv --places_resolved_csv=remap_wayfqyd.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wwamxhe.csv --pv_map =wwamxhe_pvmap.csv --config_file=wwamxhe_metadata.csv --output_path=output/wwamxhe.csv --places_resolved_csv=remap_wwamxhe.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/yukugyf.csv --pv_map =yukugyf_pvmap.csv --config_file=yukugyf_metadata.csv --output_path=output/yukugyf.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/yxrzxug.csv --pv_map =yxrzxug_pvmap.csv --config_file=yxrzxug_metadata.csv --output_path=output/yxrzxug.csv --places_resolved_csv=remap_yxrzxug.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/kcnetge.csv --pv_map =kcnetge_pvmap.csv --config_file=kcnetge_metadata.csv --output_path=output/kcnetge.csv --places_resolved_csv=remap_kcnetge.csv",
+"../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/CIEI2010R.csv --pv_map =CIEI2010R_pvmap.csv --config_file=CIEI2010R_metadata.csv --output_path=output/CIEI2010R.csv"
+            ],
+            "import_inputs": [
+                {
+"template_mcf": "output/ojtbus.tmcf",
+"cleaned_csv": "output/ojtbus.csv"
+},
+{
+"template_mcf": "output/saxmnv.tmcf",
+"cleaned_csv": "output/saxmnv.csv"
+},
+{
+"template_mcf": "output/akfhutb.tmcf",
+"cleaned_csv": "output/akfhutb.csv"
+},
+{
+"template_mcf": "output/bdwcmfd.tmcf",
+"cleaned_csv": "output/bdwcmfd.csv"
+},
+{
+"template_mcf": "output/hxhgsjf.tmcf",
+"cleaned_csv": "output/hxhgsjf.csv"
+},
+{
+"template_mcf": "output/hznvdtd.tmcf",
+"cleaned_csv": "output/hznvdtd.csv"
+},
+{
+"template_mcf": "output/jgwlmgg.tmcf",
+"cleaned_csv": "output/jgwlmgg.csv"
+},
+{
+"template_mcf": "output/jynwpug.tmcf",
+"cleaned_csv": "output/jynwpug.csv"
+},
+{
+"template_mcf": "output/qdanpdb.tmcf",
+"cleaned_csv": "output/qdanpdb.csv"
+},
+{
+"template_mcf": "output/rimffwf.tmcf",
+"cleaned_csv": "output/rimffwf.csv"
+},
+{
+"template_mcf": "output/wayfqyd.tmcf",
+"cleaned_csv": "output/wayfqyd.csv"
+},
+{
+"template_mcf": "output/wwamxhe.tmcf",
+"cleaned_csv": "output/wwamxhe.csv"
+},
+{
+"template_mcf": "output/yukugyf.tmcf",
+"cleaned_csv": "output/yukugyf.csv"
+},
+{
+"template_mcf": "output/yxrzxug.tmcf",
+"cleaned_csv": "output/yxrzxug.csv"
+},
+{
+"template_mcf": "output/kcnetge.tmcf",
+"cleaned_csv": "output/kcnetge.csv"
+},
+{
+"template_mcf": "output/CIEI2010R.tmcf",
+"cleaned_csv": "output/CIEI2010R.csv"
+}
+            ],
+            "source_files": [
+                "input_files/*.csv"
+            ],
+            "cron_schedule": "30 05 * * 1"
+        }
+    ]
+}
