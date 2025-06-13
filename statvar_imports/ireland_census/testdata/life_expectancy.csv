@@ -1,0 +1,9 @@
+﻿STATISTIC,Statistic Label,C02076V02508,Age,C02199V02655,Sex,TLIST(A1),Year,UNIT,VALUE
+VSA30,Period Life Expectancy at Various Ages,0,Birth,1,Male,1871,1871,Years,49.6
+VSA30,Period Life Expectancy at Various Ages,0,Birth,1,Male,1882,1882,Years,49.4
+VSA30,Period Life Expectancy at Various Ages,0,Birth,1,Male,1891,1891,Years,49.1
+VSA30,Period Life Expectancy at Various Ages,0,Birth,1,Male,1901,1901,Years,49.3
+VSA30,Period Life Expectancy at Various Ages,0,Birth,1,Male,1991,1991,Years,72.3
+VSA30,Period Life Expectancy at Various Ages,0,Birth,1,Male,1996,1996,Years,73
+VSA30,Period Life Expectancy at Various Ages,0,Birth,2,Female,1882,1882,Years,49.9
+VSA30,Period Life Expectancy at Various Ages,0,Birth,2,Female,1891,1891,Years,49.2
