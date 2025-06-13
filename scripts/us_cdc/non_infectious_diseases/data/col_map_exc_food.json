@@ -1,3 +1,4 @@
+
 {
     "Primary Mode": {
         "Person-to-person": {
@@ -12,11 +13,17 @@
         "Animal Contact": {
             "transmissionMode": "AnimalContactTransmission"
         },
+        "Animal contact": {
+            "transmissionMode": "AnimalContactTransmission"
+        },
         "Water": {
             "transmissionMode": "WaterborneTransmission"
         },
         "Environmental contamination other than food/water": {
             "transmissionMode": "EnvironmentalContaminationTransmissionExceptFoodOrWater"
+        },
+        "Indeterminate/unknown": {
+        "transmissionMode": "IndeterminateOrOtherOrUnknownTramissionMode"
         }
     },
     "Etiology Status": {
@@ -94,6 +101,9 @@
         "Blastocystis hominis": {
             "etiology": "BlastocystisHominisEtiology"
         },
+        "Blastomyces gilchristii": {
+            "etiology": "BlastomycesGilchristiiEtiology"
+        },
         "Bromate": {
             "etiology": "Bromate"
         },
@@ -105,6 +115,9 @@
         },
         "Brucella unknown": {
             "etiology": "BrucellaUnknown"
+        },
+        "Brucella other": {
+            "etiology": "BrucellaOther"
         },
         "Campylobacter": {
             "etiology": "CampylobacterEtiology"
@@ -231,6 +244,12 @@
         },
         "Enterovirus Coxsackievirus A": {
             "etiology": "EnterovirusCoxsackievirusAEtiology"
+        },
+        "Enterovirus unknown": {
+            "etiology": "EnterovirusUnknownEtiology"
+        },
+        "Escherichia coli, Unknown": {
+            "etiology": "EColiUnknownEtiology"
         },
         "Escherichia": {
             "etiology": "EscherichiaEtiology"
@@ -474,6 +493,9 @@
         },
         "Salmonella enterica": {
             "etiology": "SalmonellaEntericaEtiology"
+        },
+        "Salmonella bongori": {
+            "etiology": "SalmonellaBongori"
         },
         "Salmonella other": {
             "etiology": "SalmonellaOther"

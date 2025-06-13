@@ -1,0 +1,19 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "CDC_NORS_NonInfectious",
+            "curator_emails": ["support@datacommons.org"],
+            "provenance_url": "https://wwwn.cdc.gov/norsdashboard/",
+            "provenance_description": "Reports of foodborne, waterborne disease outbreaks and disease outbreaks spread by contact with environmental sources, infected people or animals, and other means. StatVars are created for the count of disease outbreaks making aggregations by transmission modes, etiology and etiology status only. Current import has statvars with at most one etiology.",
+            "scripts": ["process.py"],
+            "source_files": ["data/input_files/*"],
+            "import_inputs": [{
+                "template_mcf": "data/output/NORS_NonInfectious_Disease.tmcf",
+                "cleaned_csv": "data/output/NORS_NonInfectious_Disease.csv"
+            }],
+        "cron_schedule": "0 2 15 * *"
+        }
+    ]
+}
+
+
