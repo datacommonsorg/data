@@ -7,8 +7,8 @@
       "provenance_description": "Population census and health statistics for New Zealand at country, district and city level",
       "scripts": [
         "download_script.py", 
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Summary-figures-for-the-NZ-population-1991-2023.xlsx --pv_map=national_pvmap.csv --config_file=national_metadata.csv --output_path=output_files/nzl_national_output", 
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/snpe-at30june21-population-table.csv --pv_map=subnational_pvmap.csv --config_file=subnational_metadata.csv --places_resolved_csv=subnational_places_resolved_csv.csv --output_path=output_files/nzl_subnational_output"],
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Summary-figures-for-the-NZ-population-1991-2023.xlsx --pv_map=national_pvmap.csv --config_file=national_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/nzl_national_output", 
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/snpe-at30june21-population-table.csv --pv_map=subnational_pvmap.csv --config_file=subnational_metadata.csv --places_resolved_csv=subnational_places_resolved_csv.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/nzl_subnational_output"],
       "source_files": [
         "input_files/*"
       ],
