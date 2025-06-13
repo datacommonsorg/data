@@ -15,7 +15,9 @@
 This Python Script is for National Level Data 2010-2019.
 '''
 import os
+import requests
 import pandas as pd
+from io import BytesIO
 from common_functions import input_url
 
 
@@ -31,12 +33,20 @@ def national2010(url_file: str, output_folder: str):
     df_final = pd.DataFrame()
     for sheet in _sheets:
         df_sheet = pd.DataFrame()
-        df = pd.read_excel(_urls, sheet, skiprows=4, header=0)
-        #Writing raw data to csv
-        df.to_csv(os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "raw_data",
-            'raw_data_national_2010_2019_' + str(sheet) + '.csv'),
-                  index=False)
+        resp = requests.get(_urls)
+
+    if resp.status_code == 200:
+        # Load Excel content from memory
+        with BytesIO(resp.content) as data:
+            for sheet in _sheets:
+                # Read each sheet, skipping the first 4 rows
+                df = pd.read_excel(data, sheet_name=sheet, skiprows=4, header=0)
+                out_path = os.path.join(
+                    os.path.dirname(os.path.abspath(__file__)), "raw_data",
+                    f'raw_data_national_2010_2019_{sheet}.csv')
+                os.makedirs(os.path.dirname(out_path), exist_ok=True)
+                # Save to CSV
+                df.to_csv(out_path, index=False)
         # Dropping extra columns
         df = df.drop(['Census', 'Estimates Base'], axis=1)
         # Deleting the row with garbage information , 0 denotes the row
