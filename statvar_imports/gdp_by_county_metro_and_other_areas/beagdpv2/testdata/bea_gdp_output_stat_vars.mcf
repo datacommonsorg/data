@@ -1,0 +1,11 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/sudhisha/Git_works/beagdp/data/statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/testdata/CAGDP9__ALL_AREAS_2001_2023.csv --pv_map=/usr/local/google/home/sudhisha/Git_works/beagdp/data/statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/pv_map.py --places_resolved_csv=/usr/local/google/home/sudhisha/Git_works/beagdp/data/statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/place_mapping.csv --config_file=/usr/local/google/home/sudhisha/Git_works/beagdp/data/statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/bea_metadata.py --statvar_dcid_remap_csv=/usr/local/google/home/sudhisha/Git_works/beagdp/data/statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/bea_statvar_remap.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=/usr/local/google/home/sudhisha/Git_works/beagdp/data/statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/testdata/bea_gdp_output" on 2025-04-25 07:59:21.114289
+
+Node: dcid:Amount_EconomicActivity_GrossDomesticProduction_RealValue
+typeOf: dcid:StatisticalVariable
+name: "Real gross domestic product by economic activity"
+populationType: dcid:EconomicActivity
+measuredProperty: dcid:amount
+measurementQualifier: dcid:RealValue
+statType: dcid:measuredValue
+activitySource: dcid:GrossDomesticProduction
+
