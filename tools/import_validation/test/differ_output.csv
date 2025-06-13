@@ -1,5 +1,5 @@
-variableMeasured,added,deleted,modified,same,total
-dcid:var1,1,0,0,3,4
-dcid:var2,1,0,0,2,4
-dcid:var3,1,0,0,3,4
-dcid:var4,1,0,0,3,4
+variableMeasured,ADDED,DELETED,MODIFIED
+dcid:var1,1,0,2
+dcid:var2,1,0,2
+dcid:var3,1,0,1
+dcid:var4,1,0,2

@@ -1,0 +1,8 @@
+"key","prop","val","p1","v1","p2","v2","p3","v3"
+"STATUS:S1","populationType","Person","registrationStatus","Registered","statType","measuredValue","assessmentType","KenyaCertificatePrimaryEducation"
+"STATUS:S2","populationType","Person","candidatesStatus","CandidatePresent","statType","measuredValue","assessmentType","KenyaCertificatePrimaryEducation"
+"SEX:M","gender","Male","measuredProperty","count",,,,
+"SEX:F","gender","Female","measuredProperty","count",,,,
+"TIME_PERIOD","observationDate","{Number}",,,,,,
+"OBS_VALUE","value","{Number}","observationAbout","country/KEN",,,,
+"FREQ","observationPeriod","P1Y",,,,,,
