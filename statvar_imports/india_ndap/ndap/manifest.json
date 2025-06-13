@@ -17,6 +17,9 @@
                     "cleaned_csv": "output/Life_expectancy.csv"
                 }
             ],
+            "source_files": [
+                "input_files/India_LifeExpectancy_input.csv"
+            ],
             "cron_schedule": "00 11 1,15 * *"
         }
     ]
