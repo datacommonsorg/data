@@ -9,7 +9,7 @@
         "provenance_description": "Revenue and expenditure budget of South Africa at metropolitan municipality level for different economic sectors.",
         "scripts": [
           "download.py"
-          "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*/*.csv --pv_map=southafrica_budget_pvmap.csv --config_file=southafrica_budget_metadata.csv --output_path=output/southafrica_budget",
+          "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*/*.csv --pv_map=southafrica_budget_pvmap.csv --config_file=southafrica_budget_metadata.csv --output_path=output/southafrica_budget",
         ],
         "source_files": [
          "input_file/*/*.csv"
