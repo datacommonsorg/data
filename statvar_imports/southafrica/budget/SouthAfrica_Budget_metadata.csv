@@ -1,0 +1,12 @@
+parameter,value
+url,https://github.com/dsfsi/data-commons-data/tree/master/data/budget%20data/csv
+description,South Africa Budget
+#place_type,State
+#places_within,country/ZAF
+start_date,2018
+end_date,2023
+release_frequency,Yearly
+process,
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured"
+header_rows,1
