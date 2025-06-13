@@ -9,9 +9,9 @@
       "source_files": ["input_files/*"],
       "import_inputs": [
         {
-                    "template_mcf": "BLSJolts.tmcf",
-                    "cleaned_csv": "ouput_files/BLSJolts_StatisticalVariables.csv",
-                    "node_mcf": "ouput_files/BLSJolts_StatisticalVariables.mcf"
+            "template_mcf": "BLSJolts.tmcf",
+            "cleaned_csv": "output_files/BLSJolts_StatisticalVariables.csv",
+            "node_mcf": "output_files/BLSJolts_StatisticalVariables.mcf"
         }
       ],
       "cron_schedule": "0 01 15 * *"
