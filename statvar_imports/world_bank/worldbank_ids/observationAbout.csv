@@ -1,0 +1,139 @@
+place_name,prop,dcid
+Afghanistan,observationAbout,country/AFG
+Albania,observationAbout,country/ALB
+Algeria,observationAbout,country/DZA
+Angola,observationAbout,country/AGO
+Argentina,observationAbout,country/ARG
+Armenia,observationAbout,country/ARM
+Azerbaijan,observationAbout,country/AZE
+Bangladesh,observationAbout,country/BGD
+Belarus,observationAbout,country/BLR
+Belize,observationAbout,country/BLZ
+Benin,observationAbout,country/BEN
+Bhutan,observationAbout,country/BTN
+Bolivia,observationAbout,country/BOL
+Bosnia and Herzegovina,observationAbout,country/BIH
+Botswana,observationAbout,country/BWA
+Brazil,observationAbout,country/BRA
+Bulgaria,observationAbout,country/BGR
+Burkina Faso,observationAbout,country/BFA
+Burundi,observationAbout,country/BDI
+Cabo Verde,observationAbout,country/CPV
+Cambodia,observationAbout,country/KHM
+Cameroon,observationAbout,country/CMR
+Central African Republic,observationAbout,country/CAF
+Chad,observationAbout,country/TCD
+China,observationAbout,country/CHN
+Colombia,observationAbout,country/COL
+Comoros,observationAbout,country/COM
+"Congo, Dem. Rep.",observationAbout,country/COD
+"Congo, Rep.",observationAbout,country/COG
+Costa Rica,observationAbout,country/CRI
+Cote d'Ivoire,observationAbout,country/CIV
+Djibouti,observationAbout,country/DJI
+Dominica,observationAbout,country/DMA
+Dominican Republic,observationAbout,country/DOM
+East Asia & Pacific (excluding high income),observationAbout,dcid:EastAsiaAndPacificExcludingHighIncome
+Ecuador,observationAbout,country/ECU
+"Egypt, Arab Rep.",observationAbout,country/EGY
+El Salvador,observationAbout,country/SLV
+Eritrea,observationAbout,country/ERI
+Eswatini,observationAbout,country/SWZ
+Ethiopia,observationAbout,country/ETH
+Europe & Central Asia (excluding high income),observationAbout,dcid:EuropeAndCentralAsiaExcludingHighIncome
+Fiji,observationAbout,country/FJI
+Gabon,observationAbout,country/GAB
+"Gambia, The",observationAbout,country/GMB
+Georgia,observationAbout,country/GEO
+Ghana,observationAbout,country/GHA
+Grenada,observationAbout,country/GRD
+Guatemala,observationAbout,country/GTM
+Guinea,observationAbout,country/GIN
+Guinea-Bissau,observationAbout,country/GNB
+Guyana,observationAbout,country/GUY
+Haiti,observationAbout,country/HTI
+Honduras,observationAbout,country/HND
+IDA only,observationAbout,dcid:InternationalDevelopmentAssociation
+IDA total,observationAbout,dcid:InternationalDevelopmentAssociationTotal
+India,observationAbout,country/IND
+Indonesia,observationAbout,country/IDN
+"Iran, Islamic Rep.",observationAbout,country/IRN
+Iraq,observationAbout,country/IRQ
+Jamaica,observationAbout,country/JAM
+Jordan,observationAbout,country/JOR
+Kazakhstan,observationAbout,country/KAZ
+Kenya,observationAbout,country/KEN
+Kosovo,observationAbout,country/XKX
+Kyrgyz Republic,observationAbout,country/KGZ
+Lao PDR,observationAbout,country/LAO
+Latin America & Caribbean (excluding high income),observationAbout,dcid:LatinAmericaAndCaribbeanExcludingHighIncome
+Least developed countries: UN classification,observationAbout,dcid:undata-geo/G00404000
+Lebanon,observationAbout,country/LBN
+Lesotho,observationAbout,country/LSO
+Liberia,observationAbout,country/LBR
+Low & middle income,observationAbout,dcid:undata-geo/G00100200
+Low income,observationAbout,dcid:undata-geo/G00100600
+Lower middle income,observationAbout,dcid:undata-geo/G00100500
+Madagascar,observationAbout,country/MDG
+Malawi,observationAbout,country/MWI
+Maldives,observationAbout,country/MDV
+Mali,observationAbout,country/MLI
+Mauritania,observationAbout,country/MRT
+Mauritius,observationAbout,country/MUS
+Mexico,observationAbout,country/MEX
+Middle East & North Africa (excluding high income),observationAbout,dcid:MiddleEastAndNorthAfricaExcludingHighIncome
+Middle income,observationAbout,dcid:MiddleIncomeCountries
+Moldova,observationAbout,country/MDA
+Mongolia,observationAbout,country/MNG
+Montenegro,observationAbout,country/MNE
+Morocco,observationAbout,country/MAR
+Mozambique,observationAbout,country/MOZ
+Myanmar,observationAbout,country/MMR
+Nepal,observationAbout,country/NPL
+Nicaragua,observationAbout,country/NIC
+Niger,observationAbout,country/NER
+Nigeria,observationAbout,country/NGA
+North Macedonia,observationAbout,country/MKD
+Pakistan,observationAbout,country/PAK
+Papua New Guinea,observationAbout,country/PNG
+Paraguay,observationAbout,country/PRY
+Peru,observationAbout,country/PER
+Philippines,observationAbout,country/PHL
+Russian Federation,observationAbout,country/RUS
+Rwanda,observationAbout,country/RWA
+Samoa,observationAbout,country/WSM
+Sao Tome and Principe,observationAbout,country/STP
+Senegal,observationAbout,country/SEN
+Serbia,observationAbout,country/SRB
+Sierra Leone,observationAbout,country/SLE
+Solomon Islands,observationAbout,country/SLB
+Somalia,observationAbout,country/SOM
+South Africa,observationAbout,country/ZAF
+South Asia,observationAbout,dcid:SouthAsia
+Sri Lanka,observationAbout,country/LKA
+St. Lucia,observationAbout,country/LCA
+St. Vincent and the Grenadines,observationAbout,country/VCT
+Sub-Saharan Africa (excluding high income),observationAbout,dcid:SubSaharanAfricaExcludingHighIncome
+Sudan,observationAbout,country/SDN
+Suriname,observationAbout,country/SUR
+Syrian Arab Republic,observationAbout,country/SYR
+Tajikistan,observationAbout,country/TJK
+Tanzania,observationAbout,country/TZA
+Thailand,observationAbout,country/THA
+Timor-Leste,observationAbout,country/TLS
+Togo,observationAbout,country/TGO
+Tonga,observationAbout,country/TON
+Tunisia,observationAbout,country/TUN
+Turkiye,observationAbout,country/TUR
+Turkmenistan,observationAbout,country/TKM
+Uganda,observationAbout,country/UGA
+Ukraine,observationAbout,country/UKR
+Upper middle income,observationAbout,dcid:undata-geo/G00100400
+Uzbekistan,observationAbout,country/UZB
+Vanuatu,observationAbout,country/VUT
+Vietnam,observationAbout,country/VNM
+Viet Nam,observationAbout,country/VNM
+"Yemen, Rep.",observationAbout,country/YEM
+Zambia,observationAbout,country/ZMB
+Zimbabwe,observationAbout,country/ZWE
+Upper middle income,observationAbout,dcid:undata-geo/G00100400

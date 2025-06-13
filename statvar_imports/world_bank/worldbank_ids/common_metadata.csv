@@ -1,0 +1,4 @@
+key,value
+output_columns,"observationDate, observationAbout, variableMeasured,value,unit,measurementMethod,observationPeriod"
+header_rows,1
+#input_rows,1000
