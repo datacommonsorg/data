@@ -1,0 +1,8 @@
+parameter,value
+url,https://www.stats.govt.nz/large-datasets/csv-files-for-download/
+description,Subnational population estimates: At 30 June 2021
+start_date,2018
+end_date,2021
+release_frequency,1 year
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod"
