@@ -12,7 +12,7 @@ Earlier code : https://source.corp.google.com/piper///depot/google3/datacommons/
 Current execution : Using statvarProcessor ( 2001-2023 data).
 
 
-Check for any addiitonal NAICS to be mapped from source and update the pv_map.py
+Check for any additional NAICS to be mapped from source and update the pv_map.py
 Also any new place mappings has to be updated in the place_mappings.json with corresponding dcid
 Used the statvar_remap to map the dcid generated in the format of existing dcid ( The existing statvar has measurement qualifier in the end of statvar whereas the script generates dcid has it in the beginning) 
 
