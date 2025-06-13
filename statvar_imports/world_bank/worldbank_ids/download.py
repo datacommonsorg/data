@@ -100,20 +100,27 @@ def main(_):
         debt_id.load_data(indicators=indicator,
                         start_year=FLAGS.start_year,
                         end_year=FLAGS.end_year)
-
         # Get the data as a DataFrame
         df = debt_id.get_data()
-        # Extracting only the year part for data.
-        df["YEARMOD"]=df["year"].dt.year
-        # Creating a column for measurementMethod.
-        passyear = datetime.now().year-2
-        df["Measure"]=np.where(df["YEARMOD"]>passyear,
-                            "WorldBankProjection",'')
+        try:
+            # Extracting only the year part for data.
+            df["YEARMOD"]=df["year"].dt.year
+            # Creating a column for measurementMethod.
+            current_year = datetime.now().year
+            passyear = current_year-2
+            df["Measure"]=np.where(df["YEARMOD"]>passyear,
+                                "WorldBankProjection",'')
+        except Exception as e:
+            logging.fatal("Unable to generate new columns as the source specified columns do not exist%s", 
+                           e)
+            sys.exit(1)
+
         # Writing the data to  a local file.s
         logging.info("Writing data to%s",
                     f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv\n")
         df.to_csv(f"{DEFAULT_INPUT_PATH}/{indicator_listname[idx]}_input.csv",
                 index=False)
+
     elapsed_time = round((time() - start_time) / 60, 2)
     logging.info(f"Script completed in {elapsed_time} mins")
 
