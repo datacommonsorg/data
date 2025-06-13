@@ -16,8 +16,8 @@
 import unittest
 from unittest.mock import patch, MagicMock
 import os
-from download import (Downloader, get_csv_filename, _DIRECT_EMITTERS_SHEET,
-                      SHEET_NAMES_TO_CSV_FILENAMES)
+from .download import (Downloader, get_csv_filename, _DIRECT_EMITTERS_SHEET,
+                       SHEET_NAMES_TO_CSV_FILENAMES)
 
 
 class TestDownloader(unittest.TestCase):
