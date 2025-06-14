@@ -344,7 +344,8 @@ class StatVarsMap:
                 schemaless_props.append(prop)
         return schemaless_props
 
-    def _construct_new_statvar_dcid(self, pvs: dict, dcid_ignore_props: list) -> str:
+    def _construct_new_statvar_dcid(self, pvs: dict,
+                                    dcid_ignore_props: list) -> str:
         """Constructs a new StatVar DCID string from property-values.
 
         This method is called when a DCID is not provided by other means (e.g.,
@@ -365,8 +366,7 @@ class StatVarsMap:
         """
         dcid_terms = []
         props = list(pvs.keys())
-        dcid_ignore_values = self._config.get('statvar_dcid_ignore_values',
-                                                [])
+        dcid_ignore_values = self._config.get('statvar_dcid_ignore_values', [])
         for p in self._config.get('default_statvar_pvs', {}).keys():
             if p in props and p not in dcid_ignore_props:
                 props.remove(p)
@@ -376,8 +376,7 @@ class StatVarsMap:
         dcid_suffixes = []
         if 'measurementDenominator' in props:
             dcid_suffixes.append('AsAFractionOf')
-            dcid_suffixes.append(
-                strip_namespace(pvs['measurementDenominator']))
+            dcid_suffixes.append(strip_namespace(pvs['measurementDenominator']))
             props.remove('measurementDenominator')
         for p in sorted(props, key=str.casefold):
             if p not in dcid_ignore_props:
@@ -391,7 +390,6 @@ class StatVarsMap:
         dcid = re.sub(r'[^A-Za-z_0-9/_-]+', '_', '_'.join(dcid_terms))
         dcid = re.sub(r'_$', '', dcid)
         return dcid
-
 
     def generate_statvar_dcid(self, pvs: dict) -> str:
         """Return the dcid for the statvar.
@@ -448,7 +446,6 @@ class StatVarsMap:
         logging.level_debug() and logging.log(
             2, f'Generated dcid {dcid} for {pvs}')
         return dcid
-
 
     def remove_undefined_properties(
         self,
