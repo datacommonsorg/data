@@ -9,7 +9,7 @@
       "./../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/table_50_*.xlsx --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=table50_female_pvmap.csv --config_file=metadata.csv --output_path='output_files/nces_female_output",
       "./../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/table_40_*.xlsx --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=table40_male_pvmap.csv --config_file=metadata.csv --output_path='output_files/nces_male_output"],
       "source_files": [
-        "input_data/*.xlsx"
+        "input_files/*.xlsx"
       ],
       "import_inputs": [
         {
