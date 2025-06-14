@@ -25,6 +25,7 @@
 from absl import flags
 from pathlib import Path
 from absl import logging
+from google.cloud import storage
 import absl
 import csv
 import numpy as np
@@ -470,11 +471,11 @@ def main(_FLAGS):
     #     csv_reader = csv.DictReader(file)
     #     for row in csv_reader:
     #         TAX_ID_DCID_MAPPING[int(row['tax_id'])] = row['dcid']
-    from google.cloud import storage
     storage_client = storage.Client()
     bucket_name = 'datcom-prod-imports'
     bucket = storage_client.bucket(bucket_name)
-    blob_name = 'scripts/biomedical/NCBI_tax_id_dcid_mapping/tax_id_dcid_mapping.txt'
+    path_parts = tax_id_dcid_mapping.split('/')
+    blob_name = '/'.join(path_parts[3:])
     blob = bucket.blob(blob_name)
 
     # Download the file contents as a string.
