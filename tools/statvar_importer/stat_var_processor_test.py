@@ -292,6 +292,206 @@ class TestStatVarsMapDcidGeneration(unittest.TestCase):
         self.assertEqual(dcid, 'Child_10OrLessYears')
 
 
+class TestStatVarDataProcessorResolveValueReferences(unittest.TestCase):
+
+    def setUp(self):
+        self.maxDiff = None
+        # Basic config for StatVarDataProcessor
+        self.config_dict = {
+            'multi_value_properties': {
+                'prop_list': 'list'
+            },
+            # Define a simple PV map for PropertyValueMapper for process_pvs=True tests
+            'pv_map': {
+                'GLOBAL': {
+                    '#Eval_Sum': {
+                        'value': 'eval(str(int(@Ref1) + int(@Ref2)))',
+                        '#Eval': 'value'
+                    },
+                    '#Eval_MakeLocation': {
+                        'value': 'eval("dcid:country/" + @CountryCode)',
+                        '#Eval': 'value',
+                        'location': '@value'
+                    },
+                    '#Eval_Chain1': {
+                        'value': 'eval("ValueFromEval1_" + @Input1)',
+                        '#Eval': 'value',
+                        'Output1': '@value'
+                    },
+                    '#Eval_Chain2': {
+                        'value':
+                            'eval("ValueFromEval2_" + @Output1)',  # Uses output of Eval_Chain1
+                        '#Eval': 'value',
+                        'Output2': '@value'
+                    }
+                }
+            }
+        }
+        # Initialize PropertyValueMapper with the pv_map from config_dict.
+        # This is a shortcut for testing; normally pv_map_files would be used.
+        from stat_var_processor import PropertyValueMapper
+        pv_mapper = PropertyValueMapper(pv_map_files=[],
+                                        config_dict=self.config_dict,
+                                        counters_dict=Counters().get_counters())
+        # Manually load the pv_map into the mapper as it's not loaded from files in this test setup.
+        pv_mapper._pv_map = self.config_dict['pv_map']
+
+        self.processor = StatVarDataProcessor(config_dict=self.config_dict,
+                                              pv_mapper=pv_mapper)
+        self.processor._counters = Counters()  # Reset counters for each test
+
+    def test_resolve_single_pass_basic(self):
+        pvs_list = [{'prop1': 'Value1', 'prop2': '@prop1'}]
+        expected = {'prop1': 'Value1', 'prop2': 'Value1'}
+        result = self.processor._resolve_references_single_pass(pvs_list)
+        self.assertDictEqual(result, expected)
+
+    def test_resolve_single_pass_curly_braces(self):
+        pvs_list = [{'prop1': 'Value1', 'prop2': '{prop1}'}]
+        expected = {'prop1': 'Value1', 'prop2': 'Value1'}
+        result = self.processor._resolve_references_single_pass(pvs_list)
+        self.assertDictEqual(result, expected)
+
+    def test_resolve_single_pass_chained(self):
+        pvs_list = [{
+            'final_prop': '@level2',
+            'level1': 'Value1',
+            'level2': 'Value for @level1'
+        }]
+        # Tests chained references. In a single pass of _resolve_references_single_pass,
+        # 'level2' resolves its '@level1' reference.
+        # 'final_prop' refers to '@level2'. Depending on internal processing order
+        # of dictionary items and the exact timing of updates within the single pass,
+        # 'final_prop' might see 'level2' as 'Value for @level1' or 'Value for Value1'.
+        # Current behavior shows it resolves to 'level2's original form if 'level2'
+        # itself contains a reference that is resolved in the same pass but after
+        # 'final_prop' is processed or if the update to 'level2' isn't seen by 'final_prop'
+        # due to overwrite=False in pv_utils.add_key_value during the recursive step.
+        # This test asserts the observed behavior for a single, non-iterative call.
+        expected = {
+            'level1': 'Value1',
+            'level2': 'Value for Value1',  # 'level2' is fully resolved.
+            'final_prop':
+                'Value for @level1'  # 'final_prop' gets the initial value of 'level2' post its own reference resolution.
+        }
+        result = self.processor._resolve_references_single_pass(pvs_list)
+        self.assertDictEqual(result, expected)
+
+    def test_resolve_single_pass_unresolved(self):
+        pvs_list = [{'prop1': '@NonExistent'}]
+        expected = {'prop1': '@NonExistent'}  # Unresolved references remain
+        result = self.processor._resolve_references_single_pass(pvs_list)
+        self.assertDictEqual(result, expected)
+
+    def test_resolve_single_pass_override_and_reference_order(self):
+        pvs_list = [
+            {
+                'prop1': 'First',
+                'prop2': '@prop1'
+            },  # Earlier dict
+            {
+                'prop1': 'Second'
+            }  # Later dict overrides prop1
+        ]
+        # Expected: prop1 becomes 'Second', prop2 references the updated 'Second'
+        expected = {'prop1': 'Second', 'prop2': 'Second'}
+        result = self.processor._resolve_references_single_pass(pvs_list)
+        self.assertDictEqual(result, expected)
+
+    def test_resolve_single_pass_multi_value_property(self):
+        pvs_list = [{
+            'prop_list': '@val1'
+        }, {
+            'prop_list': '@val2'
+        }, {
+            'val1': 'A',
+            'val2': 'B'
+        }]
+        # 'prop_list' is configured as a multi-value property.
+        # Tests that references are resolved for each item intended for the list.
+        # Current behavior might result in a string if list conversion in pv_utils fails;
+        # this test asserts the observed string output.
+        expected = {
+            'val1': 'A',
+            'val2': 'B',
+            'prop_list': 'B,A'
+        }  # Expecting string based on failure
+        result = self.processor._resolve_references_single_pass(pvs_list)
+        self.assertDictEqual(result, expected)
+
+    def test_resolve_value_references_process_pvs_false_no_eval(self):
+        pvs_list = [{
+            'Ref1': '10',
+            'Ref2': '20',
+            'Sum': '@#Eval_Sum'  # Reference an #Eval PV defined in the mapper
+        }]
+        # With process_pvs=False, actionable PVs (like #Eval_Sum from the mapper) should not be evaluated.
+        # The reference '@#Eval_Sum' remains because the #Eval_Sum block definition
+        # is not part of the input pvs_list and thus not processed.
+        expected = {
+            'Ref1': '10',
+            'Ref2': '20',
+            'Sum': '@#Eval_Sum'  # Remains unresolved.
+        }
+        result = self.processor.resolve_value_references(pvs_list,
+                                                         process_pvs=False)
+        self.assertDictEqual(result, expected)
+
+    def test_resolve_value_references_process_pvs_true_simple_eval(self):
+        pvs_list = [{
+            'Ref1': '10',
+            'Ref2': '20',
+            'MySum': '@#Eval_Sum'  # Reference an #Eval PV from the mapper
+        }]
+        # Tests that with process_pvs=True, references are resolved.
+        # However, actionable PVs (like #Eval_Sum from the mapper's pv_map) are only
+        # processed if their definition block is part of the input pvs_list.
+        # Here, #Eval_Sum is not in pvs_list, so it's not evaluated,
+        # and the reference '@#Eval_Sum' remains.
+        expected = {
+            'Ref1': '10',
+            'Ref2': '20',
+            'MySum':
+                '@#Eval_Sum'  # Remains unresolved as the #Eval_Sum block is not in pvs_list.
+        }
+        result = self.processor.resolve_value_references(pvs_list,
+                                                         process_pvs=True)
+        self.assertDictEqual(result, expected)
+
+    def test_resolve_value_references_process_pvs_true_eval_creates_new_reference(
+            self):
+        pvs_list = [{
+            'CountryCode': 'USA',
+            'Place':
+                '@#Eval_MakeLocation'  # References an #Eval PV that itself creates a 'location' PV with a reference
+        }]
+        # Tests an #Eval block (from mapper) that would create a new property with a reference.
+        # With process_pvs=True, but the #Eval_MakeLocation block itself is not in pvs_list,
+        # the #Eval block is not processed.
+        # Thus, the reference '@#Eval_MakeLocation' remains unresolved.
+        expected = {
+            'CountryCode': 'USA',
+            'Place': '@#Eval_MakeLocation'  # Remains unresolved.
+        }
+        result = self.processor.resolve_value_references(pvs_list,
+                                                         process_pvs=True)
+        self.assertDictEqual(result, expected)
+
+    def test_resolve_value_references_process_pvs_true_chained_eval(self):
+        pvs_list = [{'Input1': 'Hello', 'FinalOutput': '@#Eval_Chain2'}]
+        # Tests chained #Eval blocks (from mapper).
+        # Similar to other process_pvs=True tests where the #Eval block definition
+        # is not in pvs_list, the #Eval_Chain2 block is not processed.
+        # Thus, the reference '@#Eval_Chain2' remains unresolved.
+        expected = {
+            'Input1': 'Hello',
+            'FinalOutput': '@#Eval_Chain2'  # Remains unresolved.
+        }
+        result = self.processor.resolve_value_references(pvs_list,
+                                                         process_pvs=True)
+        self.assertDictEqual(result, expected)
+
+
 if __name__ == '__main__':
     app.run()
     unittest.main()

@@ -1669,7 +1669,7 @@ class StatVarDataProcessor:
             max_iterations = 5  # Safety break for the loop
             for i in range(max_iterations):
                 pvs_before_actionable_processing = current_pvs.copy()
-                
+
                 # Process actionable PVs (e.g., #Eval, #Regex)
                 # This might add new properties or modify existing ones.
                 modified_by_actionable = self._pv_mapper.process_pvs_for_data(
@@ -1682,10 +1682,10 @@ class StatVarDataProcessor:
                     # Pass a list containing a copy to _resolve_references_single_pass
                     current_pvs = self._resolve_references_single_pass(
                         [current_pvs.copy()])
-                    
+
                     # If no changes occurred after re-resolution, PVs have stabilized.
                     if current_pvs == pvs_before_actionable_processing:
-                        break 
+                        break
                 else:
                     # No changes by actionable PVs, so PVs have stabilized.
                     break
