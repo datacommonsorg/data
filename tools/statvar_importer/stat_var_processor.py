@@ -35,6 +35,7 @@ import datetime
 import glob
 import itertools
 import multiprocessing
+import copy
 import os
 import re
 import sys
@@ -1648,7 +1649,69 @@ class StatVarDataProcessor:
     def resolve_value_references(self,
                                  pvs_list: list,
                                  process_pvs: bool = False) -> dict:
-        """Return a single dict merging a list of dicts and resolving any references."""
+        """Return a single dict merging a list of dicts and resolving any references.
+
+        This method orchestrates the resolution of string-based @variable or
+        {variable} style references and, if process_pvs is True, iteratively
+        processes actionable PVs (like #Eval, #Regex) and re-resolves references
+        until the PV dictionary stabilizes.
+
+        Args:
+            pvs_list: A list of dictionaries, where each dictionary contains
+                      property-value pairs.
+            process_pvs: If True, actionable PVs (like #Eval) will be processed,
+                         and reference resolution will be re-run iteratively until
+                         the PV set stabilizes.
+
+        Returns:
+            A single dictionary with merged and fully resolved property-value pairs.
+        """
+        current_pvs = self._resolve_references_single_pass(pvs_list)
+
+        if process_pvs:
+            max_iterations = 5  # Safety break for the loop
+            for i in range(max_iterations):
+                pvs_before_actionable_processing = current_pvs.copy()
+                
+                # Process actionable PVs (e.g., #Eval, #Regex)
+                # This might add new properties or modify existing ones.
+                modified_by_actionable = self._pv_mapper.process_pvs_for_data(
+                    key=None, pvs=current_pvs)
+
+                if modified_by_actionable:
+                    # If actionable PVs made changes, new references might have been
+                    # introduced or existing ones might now be resolvable.
+                    # Re-run the string reference resolution pass.
+                    # Pass a list containing a copy to _resolve_references_single_pass
+                    current_pvs = self._resolve_references_single_pass(
+                        [current_pvs.copy()])
+                    
+                    # If no changes occurred after re-resolution, PVs have stabilized.
+                    if current_pvs == pvs_before_actionable_processing:
+                        break 
+                else:
+                    # No changes by actionable PVs, so PVs have stabilized.
+                    break
+                if i == max_iterations - 1:
+                    logging.warning(
+                        f"Reference resolution loop reached max iterations for {pvs_list}"
+                    )
+        return current_pvs
+
+    def _resolve_references_single_pass(self, pvs_list: list) -> dict:
+        """Performs a single pass of resolving @variable or {variable} style references.
+
+        Merges a list of PV dictionaries and resolves internal string references.
+        This method can be called recursively if inter-dependent references are found.
+        It does not handle actionable PVs (like #Eval, #Regex).
+
+        Args:
+            pvs_list: A list of dictionaries, where each dictionary contains
+                      property-value pairs. The list is processed in reverse order.
+
+        Returns:
+            A single dictionary with merged and resolved property-value pairs.
+        """
         # Merge all PVs resolving references from last to first.
         if not pvs_list:
             return {}
@@ -1721,12 +1784,7 @@ class StatVarDataProcessor:
             for ref in resolvable_refs:
                 resolve_pvs_list.append(unresolved_refs[ref])
             resolve_pvs_list.append(pvs)
-            pvs = self.resolve_value_references(resolve_pvs_list,
-                                                process_pvs=False)
-        if process_pvs:
-            if self._pv_mapper.process_pvs_for_data(key=None, pvs=pvs):
-                # PVs were processed. Resolve any references again.
-                return self.resolve_value_references([pvs], process_pvs=False)
+            pvs = self._resolve_references_single_pass(resolve_pvs_list)
         return pvs
 
     def process_data_files(self, filenames: list, output_path: str):
