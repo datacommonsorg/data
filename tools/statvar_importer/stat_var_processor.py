@@ -94,7 +94,7 @@ from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
 
-from utils import _capitalize_first_char
+from utils import _capitalize_first_char, _str_from_number, _pvs_has_any_prop
 
 
 class StatVarsMap:
@@ -2659,31 +2659,6 @@ def _is_place_dcid(place: str) -> bool:
                 if c != '/' and c != ':' and c != '_':
                     return False
         return '/' in place
-    return False
-
-
-def _str_from_number(number: Union[int, float],
-                     precision_digits: int = None) -> str:
-    """Returns the number converted to string.
-
-  Ints and floats with 0 decimal parts get int strings. Floats get precision
-  digits.
-  """
-    # Check if number is an integer or float without any decimals.
-    if int(number) == number:
-        number_int = int(number)
-        return f'{number_int}'
-    # Return float rounded to precision digits.
-    if precision_digits:
-        number = round(number, precision_digits)
-    return f'{number}'
-
-
-def _pvs_has_any_prop(pvs: dict, columns: list = None) -> bool:
-    if pvs and columns:
-        for prop, value in pvs.items():
-            if value and prop in columns:
-                return True
     return False
 
 
