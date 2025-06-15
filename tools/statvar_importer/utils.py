@@ -16,7 +16,10 @@
 This module provides helper functions used across the StatVar import process.
 """
 
+import os
 from typing import Union, Optional, Dict, List
+
+import file_util
 
 
 def _capitalize_first_char(string: str) -> str:
@@ -284,3 +287,48 @@ def _get_observation_date_format(date_str: str, obs_period: str = '') -> str:
         date_format += '-%d'
 
     return date_format
+
+
+def _get_filename_for_url(url: str, path: str) -> str:
+    """Generates a safe local filename from a URL, ensuring uniqueness in the given path.
+
+    It extracts the filename from the last segment of the URL path, removing query
+    parameters and fragments. If a file with the generated name already exists in the
+    specified path, it appends a unique numerical suffix (e.g., "-1", "-2").
+
+    Args:
+        url: The URL to derive the filename from.
+        path: The directory path where the file will be saved, used to check for
+              existing files to ensure uniqueness.
+
+    Returns:
+        A unique, safe filename string to be used locally.
+
+    Examples:
+        >>> # Example: Basic case, no existing file
+        >>> # with patch('utils.file_util.file_get_matching', return_value=[]):
+        >>> #     _get_filename_for_url("http://example.com/data/my_file.csv", "/tmp")
+        >>> # os.path.join("/tmp", "my_file.csv")
+
+        >>> # Example: File exists, should append -1
+        >>> # with patch('utils.file_util.file_get_matching', return_value=[os.path.join("/tmp", "my_file.csv")])
+        >>> #     _get_filename_for_url("http://example.com/data/my_file.csv", "/tmp")
+        >>> # os.path.join("/tmp", "my_file-1.csv")
+
+        >>> # Example: URL with query parameters
+        >>> # with patch('utils.file_util.file_get_matching', return_value=[]):
+        >>> #     _get_filename_for_url("http://example.com/data/report.pdf?v=2#page3", "/docs")
+        >>> # os.path.join("/docs", "report.pdf")
+    """
+    # Remove URL arguments separated by '?' or '#'
+    url_path = url.split('?', maxsplit=1)[0].split('#', maxsplit=1)[0]
+    # Get the last component URL as the filename
+    filename = url_path[url_path.rfind('/') + 1:]
+    filename, ext = os.path.splitext(filename)
+    existing_files = file_util.file_get_matching(os.path.join(path, '*'))
+    count = 0
+    file = os.path.join(path, filename + ext)
+    while file in existing_files:
+        count += 1
+        file = os.path.join(path, f'{filename}-{count}{ext}')
+    return file

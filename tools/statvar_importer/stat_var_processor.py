@@ -96,7 +96,7 @@ _FLAGS = flags.FLAGS
 
 from utils import (_capitalize_first_char, _str_from_number, _pvs_has_any_prop,
                    _is_place_dcid, _get_observation_period_for_date,
-                   _get_observation_date_format)
+                   _get_observation_date_format, _get_filename_for_url)
 
 from statvars_map import StatVarsMap
 
@@ -1435,25 +1435,6 @@ class StatVarDataProcessor:
         if self._config.get('generate_tmcf', True):
             outputs.append(output_path + '.tmcf')
         return outputs
-
-
-def _get_filename_for_url(url: str, path: str) -> str:
-    """Returns the filename to be used for the URL to be downloaded.
-
-    If there is an existing file of the name, adds a unique suffix.
-    """
-    # Remove URL arguments separated by '?' or '#'
-    url_path = url.split('?', maxsplit=1)[0].split('#', maxsplit=1)[0]
-    # Get the last component URL as the filename
-    filename = url_path[url_path.rfind('/') + 1:]
-    filename, ext = os.path.splitext(filename)
-    existing_files = file_util.file_get_matching(os.path.join(path, '*'))
-    count = 0
-    file = os.path.join(path, filename + ext)
-    while file in existing_files:
-        count += 1
-        file = os.path.join(path, f'{filename}-{count}{ext}')
-    return file
 
 
 def download_csv_from_url(urls: list, download_files: list) -> list:

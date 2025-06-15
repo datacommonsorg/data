@@ -13,9 +13,12 @@
 # limitations under the License.
 
 import unittest
+import os
+from unittest.mock import patch
+
 from utils import (_capitalize_first_char, _str_from_number, _pvs_has_any_prop,
                    _is_place_dcid, _get_observation_period_for_date,
-                   _get_observation_date_format)
+                   _get_observation_date_format, _get_filename_for_url)
 
 
 class UtilsTest(unittest.TestCase):
@@ -104,6 +107,63 @@ class UtilsTest(unittest.TestCase):
                          "%Y")  # Relies on hyphens
         self.assertEqual(_get_observation_date_format("2023-01-15-extra"),
                          "%Y-%m-%d")
+
+    @patch('utils.file_util.file_get_matching')
+    def test_get_filename_for_url(self, mock_file_get_matching):
+        # Test case 1: No existing files
+        mock_file_get_matching.return_value = []
+        self.assertEqual(
+            _get_filename_for_url("http://example.com/data.csv", "/tmp"),
+            os.path.join("/tmp", "data.csv"))
+
+        # Test case 2: URL with query parameters and fragment
+        mock_file_get_matching.return_value = []
+        self.assertEqual(
+            _get_filename_for_url("http://example.com/data.tar.gz?param=1#frag",
+                                  "/tmp"), os.path.join("/tmp", "data.tar.gz"))
+
+        # Test case 3: Filename exists, expect suffix -1
+        mock_file_get_matching.return_value = [os.path.join("/tmp", "data.csv")]
+        self.assertEqual(
+            _get_filename_for_url("http://example.com/data.csv", "/tmp"),
+            os.path.join("/tmp", "data-1.csv"))
+
+        # Test case 4: Filename and filename-1 exist, expect suffix -2
+        mock_file_get_matching.return_value = [
+            os.path.join("/tmp", "data.csv"),
+            os.path.join("/tmp", "data-1.csv")
+        ]
+        self.assertEqual(
+            _get_filename_for_url("http://example.com/data.csv", "/tmp"),
+            os.path.join("/tmp", "data-2.csv"))
+
+        # Test case 5: URL with no extension
+        mock_file_get_matching.return_value = []
+        self.assertEqual(
+            _get_filename_for_url("http://example.com/datafile", "/tmp"),
+            os.path.join("/tmp", "datafile"))
+
+        # Test case 6: URL with no extension, and it exists
+        mock_file_get_matching.return_value = [os.path.join("/tmp", "datafile")]
+        self.assertEqual(
+            _get_filename_for_url("http://example.com/datafile", "/tmp"),
+            os.path.join("/tmp", "datafile-1"))
+
+        # Test case 7: URL with multiple dots in filename
+        mock_file_get_matching.return_value = []
+        self.assertEqual(
+            _get_filename_for_url("http://example.com/archive.data.csv",
+                                  "/tmp"),
+            os.path.join("/tmp", "archive.data.csv"))
+
+        # Test case 8: URL with multiple dots, and it exists
+        mock_file_get_matching.return_value = [
+            os.path.join("/tmp", "archive.data.csv")
+        ]
+        self.assertEqual(
+            _get_filename_for_url("http://example.com/archive.data.csv",
+                                  "/tmp"),
+            os.path.join("/tmp", "archive.data-1.csv"))
 
 
 if __name__ == '__main__':
