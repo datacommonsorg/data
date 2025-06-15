@@ -94,7 +94,7 @@ from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
 
-from utils import _capitalize_first_char, _str_from_number, _pvs_has_any_prop
+from utils import _capitalize_first_char, _str_from_number, _pvs_has_any_prop, _is_place_dcid
 
 from statvars_map import StatVarsMap
 
@@ -1433,20 +1433,6 @@ class StatVarDataProcessor:
         if self._config.get('generate_tmcf', True):
             outputs.append(output_path + '.tmcf')
         return outputs
-
-
-def _is_place_dcid(place: str) -> bool:
-    """Returns True if the input string is a dcid without extra characters."""
-    if place and isinstance(place, str):
-        # Check if all characters are alpha or digits.
-        if place.startswith('dcid:') or place.startswith('dcs:'):
-            return True
-        for c in place:
-            if not c.isalnum():
-                if c != '/' and c != ':' and c != '_':
-                    return False
-        return '/' in place
-    return False
 
 
 def _get_observation_period_for_date(date_str: str,

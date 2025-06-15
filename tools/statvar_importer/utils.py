@@ -119,3 +119,86 @@ def _pvs_has_any_prop(pvs: Optional[Dict[str, any]],
             if value and prop in columns:
                 return True
     return False
+
+
+def _is_place_dcid(place: str) -> bool:
+    """Returns True if the place string is a valid DCID pattern.
+
+    Examples:
+        >>> _is_place_dcid("dcid:country/USA")
+        True
+        >>> _is_place_dcid("dcs:country/USA")
+        True
+        >>> _is_place_dcid("country/USA")
+        True
+        >>> _is_place_dcid("geoId/06")
+        True
+        >>> _is_place_dcid("dc/g/Establishment_School")
+        True
+        >>> _is_place_dcid("dcid:Person") 
+        True
+        >>> _is_place_dcid("countryUSA")
+        False
+        >>> _is_place_dcid("dcid:country/USA extra") 
+        False
+        >>> _is_place_dcid("dcid:!@#")
+        False
+        >>> _is_place_dcid("")
+        False
+        >>> _is_place_dcid(None)
+        False
+        >>> _is_place_dcid("dcid:")
+        False
+        >>> _is_place_dcid("dcs:")
+        False
+        >>> _is_place_dcid("country/")
+        False
+        >>> _is_place_dcid("/USA")
+        False
+        >>> _is_place_dcid("dcid//USA") # Double slash
+        False
+        >>> _is_place_dcid("dcid:country//USA") # Double slash after prefix
+        False
+    """
+    if not place or not isinstance(place, str):
+        return False
+
+    original_place_str = place
+    has_prefix = False
+
+    if place.startswith('dcid:'):
+        place_to_check = place[5:]
+        has_prefix = True
+    elif place.startswith('dcs:'):
+        place_to_check = place[4:]
+        has_prefix = True
+    else:
+        place_to_check = place
+
+    if not place_to_check:  # Handles "dcid:", "dcs:", or empty string if it was initially empty
+        return False
+
+    # Core validation for the part after prefix (or the whole string if no prefix)
+    if place_to_check.startswith('/') or place_to_check.endswith('/'):
+        return False
+    if '//' in place_to_check:  # Check for consecutive slashes
+        return False
+
+    contains_slash_internally = False
+    for char_code in [ord(c) for c in place_to_check]:
+        is_alnum = ((char_code >= ord('a') and char_code <= ord('z')) or
+                    (char_code >= ord('A') and char_code <= ord('Z')) or
+                    (char_code >= ord('0') and char_code <= ord('9')))
+        is_allowed_symbol = (char_code == ord('_') or char_code == ord('/'))
+
+        if not (is_alnum or is_allowed_symbol):
+            return False  # Invalid character
+        if char_code == ord('/'):
+            contains_slash_internally = True
+
+    if not has_prefix:
+        # For non-prefixed DCIDs, an internal slash is mandatory
+        return contains_slash_internally
+
+    # For prefixed DCIDs, all checks on place_to_check have passed
+    return True

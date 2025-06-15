@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import unittest
-from utils import _capitalize_first_char, _str_from_number, _pvs_has_any_prop
+from utils import _capitalize_first_char, _str_from_number, _pvs_has_any_prop, _is_place_dcid
 
 
 class UtilsTest(unittest.TestCase):
@@ -64,6 +64,22 @@ class UtilsTest(unittest.TestCase):
         self.assertFalse(_pvs_has_any_prop({"prop1": "val1"}, []))
         self.assertFalse(_pvs_has_any_prop({"prop1": "val1"}, None))
         self.assertFalse(_pvs_has_any_prop(None, ["prop1"]))
+
+    def test_is_place_dcid(self):
+        self.assertTrue(_is_place_dcid("dcid:country/USA"))
+        self.assertTrue(_is_place_dcid("dcs:country/USA"))
+        self.assertTrue(_is_place_dcid("country/USA"))
+        self.assertTrue(_is_place_dcid("geoId/06"))
+        self.assertTrue(_is_place_dcid("dc/g/Establishment_School"))
+        self.assertFalse(_is_place_dcid("countryUSA"))
+        self.assertFalse(_is_place_dcid("dcid:country/USA extra"))
+        self.assertFalse(_is_place_dcid("dcid:!@#"))
+        self.assertFalse(_is_place_dcid(""))
+        self.assertFalse(_is_place_dcid(None))
+        self.assertFalse(_is_place_dcid("dcid:"))
+        self.assertFalse(_is_place_dcid("dcs:"))
+        self.assertFalse(_is_place_dcid("country/"))  # Needs a part after slash
+        self.assertFalse(_is_place_dcid("/USA"))  # Needs a part before slash
 
 
 if __name__ == '__main__':
