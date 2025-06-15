@@ -13,7 +13,9 @@
 # limitations under the License.
 
 import unittest
-from utils import _capitalize_first_char, _str_from_number, _pvs_has_any_prop, _is_place_dcid
+from utils import (_capitalize_first_char, _str_from_number, _pvs_has_any_prop,
+                   _is_place_dcid, _get_observation_period_for_date,
+                   _get_observation_date_format)
 
 
 class UtilsTest(unittest.TestCase):
@@ -80,6 +82,28 @@ class UtilsTest(unittest.TestCase):
         self.assertFalse(_is_place_dcid("dcs:"))
         self.assertFalse(_is_place_dcid("country/"))  # Needs a part after slash
         self.assertFalse(_is_place_dcid("/USA"))  # Needs a part before slash
+
+    def test_get_observation_period_for_date(self):
+        self.assertEqual(_get_observation_period_for_date("2023"), "P1Y")
+        self.assertEqual(_get_observation_period_for_date("2023-01"), "P1M")
+        self.assertEqual(_get_observation_period_for_date("2023-01-15"), "P1D")
+        self.assertEqual(
+            _get_observation_period_for_date("2023/01/15", "P1D"),
+            "P1Y")  # default (counts hyphens only, so 0 hyphens -> P1Y)
+        self.assertEqual(_get_observation_period_for_date(
+            "invalid-date", "PXY"), "P1M")  # Contains one hyphen
+        self.assertEqual(
+            _get_observation_period_for_date("2023-01-15-extra", "P1D"),
+            "P1D")  # default
+
+    def test_get_observation_date_format(self):
+        self.assertEqual(_get_observation_date_format("2023"), "%Y")
+        self.assertEqual(_get_observation_date_format("2023-01"), "%Y-%m")
+        self.assertEqual(_get_observation_date_format("2023-01-15"), "%Y-%m-%d")
+        self.assertEqual(_get_observation_date_format("2023/01/15"),
+                         "%Y")  # Relies on hyphens
+        self.assertEqual(_get_observation_date_format("2023-01-15-extra"),
+                         "%Y-%m-%d")
 
 
 if __name__ == '__main__':

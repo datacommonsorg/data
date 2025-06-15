@@ -94,7 +94,9 @@ from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
 
-from utils import _capitalize_first_char, _str_from_number, _pvs_has_any_prop, _is_place_dcid
+from utils import (_capitalize_first_char, _str_from_number, _pvs_has_any_prop,
+                   _is_place_dcid, _get_observation_period_for_date,
+                   _get_observation_date_format)
 
 from statvars_map import StatVarsMap
 
@@ -1433,33 +1435,6 @@ class StatVarDataProcessor:
         if self._config.get('generate_tmcf', True):
             outputs.append(output_path + '.tmcf')
         return outputs
-
-
-def _get_observation_period_for_date(date_str: str,
-                                     default_period: str = '') -> str:
-    '''Returns the observation period for date string.'''
-    date_parts = date_str.count('-')
-    if date_parts == 0:
-        return 'P1Y'
-    if date_parts == 1:
-        return 'P1M'
-    if date_parts == 2:
-        return 'P1D'
-    return default_period
-
-
-def _get_observation_date_format(date_str: str, obs_period: str = '') -> str:
-    '''Returns the date format for the given date and observation periodn.'''
-    # Get the date format based on number of tokens in date string.
-    date_format = '%Y'
-    date_tokens = date_str.split('-')
-    num_tokens = len(date_tokens)
-    if num_tokens > 1:
-        date_format += '-%m'
-    if num_tokens > 2:
-        date_format += '-%d'
-
-    return date_format
 
 
 def _get_filename_for_url(url: str, path: str) -> str:

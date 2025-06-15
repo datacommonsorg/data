@@ -202,3 +202,85 @@ def _is_place_dcid(place: str) -> bool:
 
     # For prefixed DCIDs, all checks on place_to_check have passed
     return True
+
+
+def _get_observation_period_for_date(date_str: str,
+                                     default_period: str = '') -> str:
+    """Determines the observation period (e.g., P1Y, P1M, P1D) based on the date string format.
+
+    It counts the number of hyphens ('-') in the date string to infer the period:
+    - 0 hyphens: Assumes yearly (P1Y), e.g., "2023".
+    - 1 hyphen: Assumes monthly (P1M), e.g., "2023-01".
+    - 2 hyphens: Assumes daily (P1D), e.g., "2023-01-15".
+    If the hyphen count is not 0, 1, or 2, the `default_period` is returned.
+    Note: This function does not validate the actual date components.
+
+    Args:
+        date_str: The date string to analyze.
+        default_period: The default period to return if the hyphen count
+                        does not match yearly, monthly, or daily patterns.
+
+    Returns:
+        The determined observation period string ('P1Y', 'P1M', 'P1D') or the `default_period`.
+
+    Examples:
+        >>> _get_observation_period_for_date("2023")
+        'P1Y'
+        >>> _get_observation_period_for_date("2023-05")
+        'P1M'
+        >>> _get_observation_period_for_date("2023-05-10")
+        'P1D'
+        >>> _get_observation_period_for_date("2023/05/10", "P1D") # No hyphens
+        'P1Y'
+        >>> _get_observation_period_for_date("invalid-date-string", "PXY") # Two hyphens
+        'P1D'
+        >>> _get_observation_period_for_date("invalid", "PXY") # Zero hyphens
+        'P1Y'
+    """
+    date_parts = date_str.count('-')
+    if date_parts == 0:  # YYYY
+        return 'P1Y'
+    if date_parts == 1:  # YYYY-MM
+        return 'P1M'
+    if date_parts == 2:  # YYYY-MM-DD
+        return 'P1D'
+    return default_period
+
+
+def _get_observation_date_format(date_str: str, obs_period: str = '') -> str:
+    """Determines a Python strftime date format string based on the structure of the date_str.
+
+    This function infers the format by counting the number of hyphens ('-')
+    separating parts of the date string:
+    - "YYYY" (0 hyphens) -> "%Y"
+    - "YYYY-MM" (1 hyphen) -> "%Y-%m"
+    - "YYYY-MM-DD" (2 hyphens) -> "%Y-%m-%d"
+    The `obs_period` argument is not currently used in the logic.
+
+    Args:
+        date_str: The date string (e.g., "2023", "2023-01", "2023-01-15").
+        obs_period: The observation period (currently unused).
+
+    Returns:
+        A Python strftime format string.
+
+    Examples:
+        >>> _get_observation_date_format("2023")
+        '%Y'
+        >>> _get_observation_date_format("2023-07")
+        '%Y-%m'
+        >>> _get_observation_date_format("2023-07-15")
+        '%Y-%m-%d'
+        >>> _get_observation_date_format("2023/07/15") # Relies on hyphens
+        '%Y'
+    """
+    # Get the date format based on number of tokens in date string.
+    date_format = '%Y'
+    date_tokens = date_str.split('-')
+    num_tokens = len(date_tokens)
+    if num_tokens > 1:
+        date_format += '-%m'
+    if num_tokens > 2:
+        date_format += '-%d'
+
+    return date_format
