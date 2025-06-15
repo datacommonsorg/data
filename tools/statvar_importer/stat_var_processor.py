@@ -94,13 +94,7 @@ from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
 
-
-# Local utility functions
-def _capitalize_first_char(string: str) -> str:
-    """Returns a string with the first letter capitalized."""
-    if not string or not isinstance(string, str):
-        return string
-    return string[0].upper() + string[1:]
+from utils import _capitalize_first_char
 
 
 class StatVarsMap:
