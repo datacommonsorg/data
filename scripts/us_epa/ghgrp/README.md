@@ -13,9 +13,16 @@ were included in the import from [EPA GHG facility import](../facility/README.md
 
 1. To download crosswalks, tables and regenerate the TMCF/CSV/MCF, run:
 
-      ```
-      ./gen_data.sh
-      ```
+    [download:]
+        '''
+        python3 download.py
+        ```
+        
+    [process:]
+        ```
+        python3 process.py
+        ``` 
+            
 
 2. To run unit tests:
 
@@ -27,6 +34,11 @@ were included in the import from [EPA GHG facility import](../facility/README.md
       cd ../../../
       ./run_tests.sh -p scripts/us_epa/ghgrp
       ```
+      
+    To test Downloader class:
+        ```
+        python3 download_test.py
+        ```
 
 3. To validate the import, run the [dc-import](https://github.com/datacommonsorg/import#using-import-tool) tool as:
 
