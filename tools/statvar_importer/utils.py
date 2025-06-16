@@ -311,20 +311,10 @@ def _get_filename_for_url(url: str, path: str) -> str:
         A unique, safe filename string to be used locally.
 
     Examples:
-        >>> # Example: Basic case, no existing file
-        >>> # with patch('utils.file_util.file_get_matching', return_value=[]):
-        >>> #     _get_filename_for_url("http://example.com/data/my_file.csv", "/tmp")
-        >>> # os.path.join("/tmp", "my_file.csv")
-
-        >>> # Example: File exists, should append -1
-        >>> # with patch('utils.file_util.file_get_matching', return_value=[os.path.join("/tmp", "my_file.csv")])
-        >>> #     _get_filename_for_url("http://example.com/data/my_file.csv", "/tmp")
-        >>> # os.path.join("/tmp", "my_file-1.csv")
-
-        >>> # Example: URL with query parameters
-        >>> # with patch('utils.file_util.file_get_matching', return_value=[]):
-        >>> #     _get_filename_for_url("http://example.com/data/report.pdf?v=2#page3", "/docs")
-        >>> # os.path.join("/docs", "report.pdf")
+        >>> _get_filename_for_url("http://example.com/data/my_file.csv", "/tmp")
+        '/tmp/my_file.csv'
+        >>> _get_filename_for_url("http://example.com/data/report.pdf?v=2#page3", "/docs")
+        '/docs/report.pdf'
     """
     # Remove URL arguments separated by '?' or '#'
     url_path = url.split('?', maxsplit=1)[0].split('#', maxsplit=1)[0]
@@ -363,16 +353,11 @@ def download_csv_from_url(urls: Union[str, List[str]],
         Returns an empty list if any download fails or if inputs are invalid.
 
     Examples:
-        >>> # Downloading a single file with an auto-generated name
-        >>> # with patch('utils.download_file_from_url', return_value='/tmp/data.csv'):
-        >>> #     download_csv_from_url("http://example.com/data.csv")
-        >>> # ['/tmp/data.csv']
-
-        >>> # Downloading multiple files with specified names
-        >>> # with patch('utils.download_file_from_url', side_effect=['/tmp/d1.csv', '/tmp/d2.csv']):
-        >>> #     download_csv_from_url(["http://e.com/d1.csv", "http://e.com/d2.csv"],
-        >>> #                         ['/tmp/d1.csv', '/tmp/d2.csv'])
-        >>> # ['/tmp/d1.csv', '/tmp/d2.csv']
+        >>> download_csv_from_url("http://example.com/data.csv")
+        ['./data.csv']
+        >>> download_csv_from_url(["http://example.com/data1.csv", "http://example.com/data2.csv"],
+        ...                       ['/tmp/d1.csv', '/tmp/d2.csv'])
+        ['/tmp/d1.csv', '/tmp/d2.csv']
     """
     data_files = []
     if not isinstance(urls, list):
@@ -426,15 +411,8 @@ def shard_csv_data(
         A list of file paths for the generated shard files.
 
     Examples:
-        >>> # Sharding a file by a specific column
-        >>> # with patch('utils.pd.read_csv') as mock_read, \
-        >>> #      patch('utils.pd.DataFrame.to_csv') as mock_to_csv, \
-        >>> #      patch('utils.file_util.file_is_local', return_value=True), \
-        >>> #      patch('utils.os.path.exists', return_value=False):
-        >>> #     df = pd.DataFrame({'country': ['USA', 'USA', 'CAN'], 'data': [1, 2, 3]})
-        >>> #     mock_read.return_value = df
-        >>> #     shard_csv_data(['my_data.csv'], column='country')
-        >>> # This would create two shard files, one for 'USA' and one for 'CAN'.
+        >>> shard_csv_data(['my_data.csv'], column='country')
+        ['my_data-country-00000-of-00002.csv', 'my_data-country-00001-of-00002.csv']
     """
     logging.info(
         f'Loading data files: {files} for sharding by column: {column}...')
@@ -500,21 +478,10 @@ def convert_xls_to_csv(filenames: List[str],
         non-Excel files from the input.
 
     Examples:
-        >>> # Convert all sheets from an Excel file
-        >>> # with patch('utils.pd.ExcelFile') as mock_excel, \
-        >>> #      patch('utils.pd.read_excel'), \
-        >>> #      patch('utils.pd.DataFrame.to_csv'):
-        >>> #     mock_excel.return_value.sheet_names = ['Sheet1', 'Sheet2']
-        >>> #     convert_xls_to_csv(['my_data.xlsx'])
-        >>> # This would produce 'my_data_Sheet1.csv' and 'my_data_Sheet2.csv'.
-
-        >>> # Convert only a specific sheet
-        >>> # with patch('utils.pd.ExcelFile') as mock_excel, \
-        >>> #      patch('utils.pd.read_excel'), \
-        >>> #      patch('utils.pd.DataFrame.to_csv'):
-        >>> #     mock_excel.return_value.sheet_names = ['Sheet1', 'Sheet2']
-        >>> #     convert_xls_to_csv(['my_data.xlsx'], sheets=['Sheet1'])
-        >>> # This would produce only 'my_data_Sheet1.csv'.
+        >>> convert_xls_to_csv(['my_data.xlsx'])
+        ['my_data_Sheet1.csv', 'my_data_Sheet2.csv']
+        >>> convert_xls_to_csv(['my_data.xlsx'], sheets=['Sheet1'])
+        ['my_data_Sheet1.csv']
     """
     csv_files = []
     for file in filenames:
