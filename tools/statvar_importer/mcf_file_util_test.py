@@ -92,6 +92,67 @@ class TestStripNamespace(unittest.TestCase):
         self.assertEqual(mcf_file_util.strip_namespace('dcid:'), '')
 
 
+class TestStripValue(unittest.TestCase):
+
+    def test_strip_value_no_quotes(self):
+        self.assertEqual(mcf_file_util.strip_value('  my value  '), 'my value')
+
+    def test_strip_value_with_quotes(self):
+        self.assertEqual(mcf_file_util.strip_value('"  quoted value  "'),
+                         '"quoted value"')
+
+    def test_strip_value_no_extra_space(self):
+        self.assertEqual(mcf_file_util.strip_value('no extra space'),
+                         'no extra space')
+
+    def test_strip_value_integer(self):
+        self.assertEqual(mcf_file_util.strip_value(123), 123)
+
+    def test_strip_value_empty_string(self):
+        self.assertEqual(mcf_file_util.strip_value(''), '')
+
+    def test_strip_value_only_spaces(self):
+        self.assertEqual(mcf_file_util.strip_value('   '), '')
+
+    def test_strip_value_none(self):
+        self.assertIsNone(mcf_file_util.strip_value(None))
+
+    def test_strip_value_quoted_with_only_spaces(self):
+        self.assertEqual(mcf_file_util.strip_value('"   "'), '""')
+
+    def test_strip_value_empty_quoted_string(self):
+        self.assertEqual(mcf_file_util.strip_value('""'), '""')
+
+    def test_strip_value_quoted_no_internal_spaces(self):
+        self.assertEqual(mcf_file_util.strip_value('"no_internal_space"'),
+                         '"no_internal_space"')
+
+
+class TestGetPVFromLine(unittest.TestCase):
+
+    def test_get_pv_from_line_simple(self):
+        self.assertEqual(mcf_file_util.get_pv_from_line('name: "My Node"'),
+                         ('name', '"My Node"'))
+
+    def test_get_pv_from_line_with_spaces(self):
+        self.assertEqual(mcf_file_util.get_pv_from_line('  typeOf : StatVar  '),
+                         ('typeOf', 'StatVar'))
+
+    def test_get_pv_from_line_no_colon(self):
+        self.assertEqual(mcf_file_util.get_pv_from_line('description'),
+                         ('', 'description'))
+
+    def test_get_pv_from_line_empty_property(self):
+        self.assertEqual(mcf_file_util.get_pv_from_line(': a value'),
+                         ('', 'a value'))
+
+    def test_get_pv_from_line_empty_value(self):
+        self.assertEqual(mcf_file_util.get_pv_from_line('prop:'), ('prop', ''))
+
+    def test_get_pv_from_line_empty_line(self):
+        self.assertEqual(mcf_file_util.get_pv_from_line(''), ('', ''))
+
+
 class TestMCFFileUtil(unittest.TestCase):
 
     def setUp(self):

@@ -184,36 +184,61 @@ def strip_namespace(value: str) -> str:
 
 
 def strip_value(value: str) -> str:
-    """Returns the string value with leading/trailing space stripped
-    even if the value is enclosed in double quotes.
+    """Strips leading/trailing whitespace from a string value, handling quoted strings.
 
-  Args:
-    value: string to be cleaned as text or qithin double quotes.
+    This function removes whitespace from the beginning and end of a string.
+    If the string is enclosed in double quotes, it strips whitespace from within
+    the quotes, preserving the quotes themselves.
 
-  Returns:
-    string without extra leading and trailing spaces.
-  """
+    Args:
+        value: The string to be stripped.
+
+    Returns:
+        The stripped string.
+
+    Examples:
+        >>> strip_value('  my value  ')
+        'my value'
+        >>> strip_value('"  quoted value  "')
+        '"quoted value"'
+        >>> strip_value('no extra space')
+        'no extra space'
+        >>> strip_value(123)
+        123
+    """
     if value and isinstance(value, str):
         value = value.strip()
         if value and value[0] == '"' and value[-1] == '"':
             value_str = value[1:-1]
-            value_str.strip()
+            value_str = value_str.strip()
             value = '"' + value_str + '"'
     return value
 
 
 def get_pv_from_line(line: str) -> (str, str):
-    """Returns a tuple of (property, value) from the line.
+    """Parses a line of text to extract a property and a value.
 
-  Args:
-    line: a string form an input file of the form <prop>:<value>.
+    This function splits a line at the first colon (':') to separate the
+    property from the value. It strips leading/trailing whitespace from both
+    the property and the value. If no colon is found, the entire line is
+    treated as the value, and the property is returned as an empty string.
 
-  Returns:
-    tuple: (property: str, value: str)
-    removing leading/trailing whitespaces from the propety and value.
-    quoted values will have the quote preserved.
-    In case of a missing ':', the line is returned as value with empty property.
-  """
+    Args:
+        line: The input string, typically in a 'property: value' format.
+
+    Returns:
+        A tuple containing the property (string) and the value (string).
+
+    Examples:
+        >>> get_pv_from_line('name: "My Node"')
+        ('name', '"My Node"')
+        >>> get_pv_from_line('  typeOf : StatVar  ')
+        ('typeOf', 'StatVar')
+        >>> get_pv_from_line('description')
+        ('', 'description')
+        >>> get_pv_from_line(': a value')
+        ('', 'a value')
+    """
     pos = line.find(':')
     if pos < 0:
         return ('', line)
