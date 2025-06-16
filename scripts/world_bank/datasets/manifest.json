@@ -1,0 +1,28 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "WorldBankDatasets",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://databank.worldbank.org/source/world-development-indicators",
+      "provenance_description": "The WorldBankDatasets contains data about multiple databases like World development Indicators,Jobs,Education Statistics",
+      "scripts": ["download.py","process.py"],
+      "cleanup_gcs_volume_mount": false,
+      "source_files": ["gcs_output/input_files/*.csv"],
+      "import_inputs": [
+        {
+          "template_mcf": "wb.tmcf",
+          "cleaned_csv": "gcs_output/output/transformed_data_for_all_final.csv"
+        },
+        {
+          "template_mcf": "wb.tmcf",
+          "cleaned_csv": "gcs_output/output/bq-results-20250423.csv"
+        }
+       ],
+       "resource_limits": {
+        "cpu": "8",
+        "memory": "32G"
+      },
+      "cron_schedule": "0 9 5,25 * *"
+    }
+  ]
+}
