@@ -1,6 +1,24 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""This script converts financial incentive data from textproto format to CSV format."""
+import csv
+
 from absl import app
 from absl import flags
-import csv
+from google.protobuf import text_format
+
+import sustainable_financial_incentives_pb2
 
 FLAGS = flags.FLAGS
 
@@ -9,12 +27,14 @@ flags.DEFINE_string('textproto_path', 'testdata/sample_incentives.textproto',
 flags.DEFINE_string('csv_path', 'output.csv',
                     'Local path to write the CSV file.')
 
-from google.protobuf import text_format
-import sustainable_financial_incentives_pb2
 
+def convert_textproto_to_csv(textproto_path: str, csv_path: str) -> None:
+    """Converts a textproto file to a CSV file with a flattened, dot-notation header.
 
-def convert_textproto_to_csv(textproto_path, csv_path):
-    """Converts a textproto file to a CSV file."""
+    Args:
+        textproto_path: The local path to the input textproto file.
+        csv_path: The local path to write the output CSV file to.
+    """
     with open(textproto_path, 'r', encoding='utf-8') as f:
         incentive_summaries = text_format.Parse(
             f.read(),
@@ -72,6 +92,7 @@ def convert_textproto_to_csv(textproto_path, csv_path):
 
 def main(argv):
     """Converts a textproto file to a CSV file."""
+    del argv  # Unused
     print(f'Converting {FLAGS.textproto_path} to {FLAGS.csv_path}...')
     convert_textproto_to_csv(FLAGS.textproto_path, FLAGS.csv_path)
     print('Conversion complete.')
