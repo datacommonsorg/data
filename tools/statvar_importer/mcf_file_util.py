@@ -247,26 +247,91 @@ def get_pv_from_line(line: str) -> (str, str):
     return (prop, value)
 
 
+def _merge_pv_values(existing_value: Union[str, list], new_value: str,
+                     strip_namespaces: bool, normalize: bool) -> str:
+    """Merges a new value with an existing property value.
+
+    If the new value is the same as the existing one, the existing value is
+    returned. Otherwise, the new value is added to the existing value, creating a
+    comma-separated list if necessary.
+
+    Args:
+        existing_value: The current value of the property.
+        new_value: The new value to be added.
+        strip_namespaces: If True, namespace prefixes are removed from the values.
+        normalize: If True, the merged list is normalized.
+
+    Returns:
+        The merged value.
+    """
+    if new_value is None or new_value == existing_value:
+        return existing_value
+
+    # If new value or existing value is a list, need to dedup and merge
+    if (isinstance(existing_value, list) or ',' in str(existing_value) or
+            isinstance(new_value, list) or ',' in str(new_value)):
+        # Merge the lists
+        unique_values = []
+        for v in get_value_list(str(existing_value)):
+            if v not in unique_values:
+                unique_values.append(v)
+        for v in get_value_list(str(new_value)):
+            if v not in unique_values:
+                unique_values.append(v)
+
+        if '"' in str(existing_value) or '"' in str(new_value):
+            unique_values = [
+                get_quoted_value(v, is_quoted=True) for v in unique_values
+            ]
+        if strip_namespaces:
+            unique_values = [strip_namespace(v) for v in unique_values]
+        if normalize:
+            return normalize_list(','.join(sorted(unique_values)))
+        return ",".join(unique_values)
+    else:
+        # Existing and new values are not list, so can be appended.
+        return f'{existing_value},{new_value}'
+
+
 def add_pv_to_node(
     prop: str,
-    value: str,
+    value: Union[str, list],
     node: dict,
     append_value: bool = True,
     strip_namespaces: bool = False,
     normalize: bool = True,
 ) -> dict:
-    """Add a property:value to the node dictionary.
+    """Adds a property-value (PV) pair to a node dictionary.
 
-     If the property exists, the value is added to the existing property with a
-     comma.
-  Args:
-    prop: Property string
-    value: Value string
-    node: dictionary to which the property is to be added.
+    This function manages the addition of a PV to a node, with options for how
+    to handle existing properties. It can append new values to a comma-separated
+    list, replace existing values, and optionally normalize values by stripping
+    whitespace and handling namespaces.
 
-  Returns:
-    dictionary of property values.
-  """
+    Args:
+        prop: The property of the PV pair (e.g., "typeOf", "name").
+        value: The value of the PV pair. Can be a single value or a list of values.
+        node: The dictionary representing the node to which the PV will be added.
+        append_value: If True, new values are appended to existing values, creating
+            a comma-separated list if necessary. If False, the existing value is
+            replaced.
+        strip_namespaces: If True, namespace prefixes (e.g., "dcid:") are
+            removed from the value before processing.
+        normalize: If True, the value is normalized (e.g., whitespace stripped,
+            lists sorted).
+
+    Returns:
+        The updated node dictionary.
+
+    Examples:
+        >>> node = {'name': 'Person'}
+        >>> add_pv_to_node('name', 'Human', node)
+        {'name': 'Human,Person'}
+        >>> add_pv_to_node('name', 'Human', node, append_value=False)
+        {'name': 'Human'}
+        >>> add_pv_to_node('typeOf', 'dcid:Class', {}, strip_namespaces=True)
+        {'typeOf': 'Class'}
+    """
     if node is None:
         node = {}
     if value and isinstance(value, str):
@@ -292,32 +357,14 @@ def add_pv_to_node(
     #    return node
     existing_value = node.get(prop)
     if existing_value is not None and prop != 'Node' and prop != 'dcid':
-        # Property already exists. Add value to a list if not present.
-        if value is not None and value != existing_value:
-            if append_value:
-                # If new value or existing value is a list, need to dedup and merge
-                if (isinstance(existing_value, list) or ',' in existing_value or
-                        isinstance(value, list) or ',' in value):
-                    # Merge the lists
-                    unique_values = set()
-                    unique_values.update(get_value_list(existing_value))
-                    unique_values.update(get_value_list(value))
-                    if '"' in existing_value or '"' in value:
-                        unique_values = [
-                            get_quoted_value(v, is_quoted=True)
-                            for v in unique_values
-                        ]
-                    if strip_namespaces:
-                        unique_values = [
-                            strip_namespace(v) for v in unique_values
-                        ]
-                    node[prop] = ",".join(sorted(unique_values))
-                else:
-                    # Existing and new values are not list, so can be appended.
-                    node[prop] = f'{node[prop]},{value}'
-            else:
-                # Replace with new value
-                node[prop] = value
+        if append_value:
+            if isinstance(existing_value, list):
+                existing_value = ','.join(existing_value)
+            node[prop] = _merge_pv_values(existing_value, value,
+                                          strip_namespaces, normalize)
+        else:
+            # Replace with new value
+            node[prop] = value
     else:
         # Add a new property:value
         node[prop] = value

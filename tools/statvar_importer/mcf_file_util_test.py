@@ -390,3 +390,34 @@ class TestAddPVToNode(unittest.TestCase):
                                      node,
                                      normalize=False)
         self.assertEqual(node, {"prop1": '"value , 1","value2","value3"'})
+
+    def test_add_pv_to_node_append_list_with_normalization(self):
+        node = {"prop1": "value2,value1"}
+        mcf_file_util.add_pv_to_node("prop1", "value3", node, normalize=True)
+        self.assertEqual(node, {"prop1": "dcid:value1,dcid:value2,dcid:value3"})
+
+    def test_add_pv_to_node_append_list_without_normalization(self):
+        node = {"prop1": "value2,value1"}
+        mcf_file_util.add_pv_to_node("prop1", "value3", node, normalize=False)
+        self.assertEqual(node, {"prop1": "value2,value1,value3"})
+
+    def test_add_pv_to_node_replace_list_with_new_value(self):
+        node = {"prop1": "value1,value2"}
+        mcf_file_util.add_pv_to_node("prop1",
+                                     "value3",
+                                     node,
+                                     append_value=False,
+                                     normalize=False)
+        self.assertEqual(node, {"prop1": "value3"})
+
+    def test_add_pv_to_node_append_list_to_single_value(self):
+        node = {"prop1": "value1"}
+        mcf_file_util.add_pv_to_node("prop1", ["value2", "value3"],
+                                     node,
+                                     normalize=False)
+        self.assertEqual(node, {"prop1": "value1,value2,value3"})
+
+    def test_add_pv_to_node_append_single_value_to_list(self):
+        node = {"prop1": ["value1", "value2"]}
+        mcf_file_util.add_pv_to_node("prop1", "value3", node, normalize=False)
+        self.assertEqual(node, {"prop1": "value1,value2,value3"})
