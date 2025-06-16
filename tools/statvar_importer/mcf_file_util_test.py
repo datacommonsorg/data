@@ -33,30 +33,70 @@ from mcf_diff import diff_mcf_files, diff_mcf_nodes
 _module_dir_ = os.path.dirname(__file__)
 
 
+class TestAddNamespace(unittest.TestCase):
+
+    def test_add_namespace_to_simple_string(self):
+        self.assertEqual(mcf_file_util.add_namespace('Count_Person'),
+                         'dcid:Count_Person')
+
+    def test_add_namespace_with_existing_dcs_prefix(self):
+        self.assertEqual(mcf_file_util.add_namespace('dcs:Count_Person'),
+                         'dcs:Count_Person')
+
+    def test_add_namespace_to_quoted_string(self):
+        self.assertEqual(mcf_file_util.add_namespace('"abc 123"'), '"abc 123"')
+
+    def test_add_namespace_to_integer(self):
+        self.assertEqual(mcf_file_util.add_namespace(10), 10)
+
+    def test_add_namespace_to_list(self):
+        self.assertEqual(
+            mcf_file_util.add_namespace(['Count_Person', 'dcs:Count_Animal']),
+            'dcid:Count_Person,dcs:Count_Animal')
+
+    def test_add_namespace_to_empty_string(self):
+        self.assertEqual(mcf_file_util.add_namespace(''), '')
+
+    def test_add_namespace_to_none(self):
+        self.assertEqual(mcf_file_util.add_namespace(None), None)
+
+
+class TestStripNamespace(unittest.TestCase):
+
+    def test_strip_namespace_no_prefix(self):
+        self.assertEqual(mcf_file_util.strip_namespace('Count_Person'),
+                         'Count_Person')
+
+    def test_strip_namespace_dcs_prefix(self):
+        self.assertEqual(mcf_file_util.strip_namespace('dcs:Count_Person'),
+                         'Count_Person')
+
+    def test_strip_namespace_dcid_prefix(self):
+        self.assertEqual(mcf_file_util.strip_namespace('dcid:Count_Person'),
+                         'Count_Person')
+
+    def test_strip_namespace_quoted_string(self):
+        self.assertEqual(mcf_file_util.strip_namespace('"abc:123"'),
+                         '"abc:123"')
+
+    def test_strip_namespace_integer(self):
+        self.assertEqual(mcf_file_util.strip_namespace(10), 10)
+
+    def test_strip_namespace_empty_string(self):
+        self.assertEqual(mcf_file_util.strip_namespace(''), '')
+
+    def test_strip_namespace_none(self):
+        self.assertIsNone(mcf_file_util.strip_namespace(None))
+
+    def test_strip_namespace_only_prefix(self):
+        self.assertEqual(mcf_file_util.strip_namespace('dcid:'), '')
+
+
 class TestMCFFileUtil(unittest.TestCase):
 
     def setUp(self):
         # logging.set_verbosity(2)
         self.maxDiff = None
-
-    def test_strip_namespace(self):
-        self.assertEqual(mcf_file_util.strip_namespace('Count_Person'),
-                         'Count_Person')
-        self.assertEqual(mcf_file_util.strip_namespace('dcs:Count_Person'),
-                         'Count_Person')
-        self.assertEqual(mcf_file_util.strip_namespace('dcid:Count_Person'),
-                         'Count_Person')
-        self.assertEqual(mcf_file_util.strip_namespace('"abc:123"'),
-                         '"abc:123"')
-        self.assertEqual(mcf_file_util.strip_namespace(10), 10)
-
-    def test_add_namespace(self):
-        self.assertEqual(mcf_file_util.add_namespace('Count_Person'),
-                         'dcid:Count_Person')
-        self.assertEqual(mcf_file_util.add_namespace('dcs:Count_Person'),
-                         'dcs:Count_Person')
-        self.assertEqual(mcf_file_util.add_namespace('"abc 123"'), '"abc 123"')
-        self.assertEqual(mcf_file_util.add_namespace(10), 10)
 
     def test_normalize_mcf_node(self):
         mcf_dict = {
@@ -174,6 +214,7 @@ class TestMCFFileUtil(unittest.TestCase):
 
 
 class TestAddPVToNode(unittest.TestCase):
+    """Test class for add_pv_to_node."""
 
     def test_add_pv_to_node_new_property(self):
         node = {}

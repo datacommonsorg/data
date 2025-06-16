@@ -86,20 +86,43 @@ _DEFAULT_NODE_PVS = OrderedDict({
 })
 
 
-def add_namespace(value: str, namespace: str = 'dcid') -> str:
-    """Returns the value with a namespace prefix for references.
+def add_namespace(value: Union[str, list], namespace: str = 'dcid') -> str:
+    """Adds a namespace prefix to a string value, commonly used for DCIDs.
 
-  Args:
-    value: string to which namespace is to be added.
+    This function checks if a value is a string and does not already have a
+    namespace prefix (e.g., 'dcid:', 'dcs:'). If it's a simple string without a
+    colon, it prepends the specified namespace. It can also handle comma-separated
+    string values, applying the namespace to each part. It avoids adding a
+    namespace to quoted strings or values that are not strings.
 
-  Returns:
-    value with the namespace prefix if the value is not a quoted string
-    and doesn't have a namespace already.
-    O/w return the value as is.
+    Args:
+        value: The string or list of strings to which the namespace will be added.
+        namespace: The namespace prefix to add, defaulting to 'dcid'.
 
-  Any sequence of letters followed by a ':' is treated as a namespace.
-  Quoted strings are assumed to start with '"' and won't get a namespace.
-  """
+    Returns:
+        The value with the namespace prefix. If the value already has a
+        namespace, is a quoted string, or is not a string, it is returned
+        unchanged. For lists, returns a comma-separated string with namespaces
+        added to each element.
+
+    Examples:
+        >>> add_namespace('Count_Person')
+        'dcid:Count_Person'
+        >>> add_namespace('dcs:Count_Person')
+        'dcs:Count_Person'
+        >>> add_namespace('"My Name"')
+        '"My Name"'
+        >>> add_namespace(['Person', 'Animal'])
+        'dcid:Person,dcid:Animal'
+        >>> add_namespace('name,place')
+        'dcid:name,dcid:place'
+        >>> add_namespace(123)
+        123
+        >>> add_namespace(None)
+        None
+        >>> add_namespace('')
+        ''
+    """
     if isinstance(value, list):
         value_list = [add_namespace(v) for v in value]
         return ','.join(value_list)
@@ -119,17 +142,32 @@ def add_namespace(value: str, namespace: str = 'dcid') -> str:
 
 
 def strip_namespace(value: str) -> str:
-    """Returns the value without the namespace prefix.
+    """Removes a namespace prefix (e.g., 'dcid:', 'dcs:') from a string value.
 
-  Args:
-    value: string from which the namespace prefix is to be removed.
+    This function checks for a namespace, defined as a sequence of letters
+    followed by a colon, at the beginning of the string. If found, it returns
+    the string without this prefix. It is designed to ignore quoted strings,
+    leaving them unchanged.
 
-  Returns:
-    value without the namespace prefix if there was a namespace
+    Args:
+        value: The string from which to strip the namespace.
 
-  Any sequence of letters before the first ':' is treated as a namespace.
-  Quoted strings are assumed to start with '"' and won't be filtered.
-  """
+    Returns:
+        The string without the namespace prefix, or the original string if no
+        namespace is found or if it's a quoted string.
+
+    Examples:
+        >>> strip_namespace('dcid:Count_Person')
+        'Count_Person'
+        >>> strip_namespace('dcs:Person')
+        'Person'
+        >>> strip_namespace('Count_Person')
+        'Count_Person'
+        >>> strip_namespace('"dcid:ignore"')
+        '"dcid:ignore"'
+        >>> strip_namespace(123)
+        123
+    """
     if value and isinstance(value, str):
         if '"' in value:
             # Do not modify quoted strings.
