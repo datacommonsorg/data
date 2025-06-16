@@ -275,7 +275,7 @@ function run_import_executor {
   mkdir -p $OUTPUT_DIR
 
   # Setup local files
-  if [[ ! -f '/tmp/import-tool/import-tool.jar' ]]; then
+  if [[ ! -f "$TMP_DIR/import-tool/import-tool.jar" ]]; then
     mkdir -p $TMP_DIR/import-tool
     run_cmd wget "https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar" \
       -O $TMP_DIR/import-tool/import-tool.jar
@@ -291,7 +291,6 @@ function run_import_executor {
 
   echo_log "Completed local run for import $IMPORT_DIR:$IMPORT_NAME"
   echo_log "Output files in $OUTPUT_DIR"
-  get_latest_gcs_import_output
 }
 
 # Run an import locally through docker
