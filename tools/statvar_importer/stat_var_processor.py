@@ -1448,7 +1448,25 @@ def parallel_process(
     counters: dict = None,
     parallelism: int = 0,
 ) -> bool:
-    """Process files in parallel, calling process() for each input file."""
+    """Processes multiple input files in parallel to generate StatVars and SVObs.
+
+    This function distributes the processing of input files across multiple
+    processes to speed up the generation of StatVars and StatVarObservations.
+    Each file is processed independently, and the resulting MCF and TMCF files
+    are merged at the end.
+
+    Args:
+        data_processor_class: The class for processing the data.
+        input_data: A list of input data files.
+        output_path: The base path for the output files.
+        config: A dictionary of configuration parameters.
+        pv_map_files: A list of property-value map files.
+        counters: An optional dictionary for tracking statistics.
+        parallelism: The number of parallel processes to use.
+
+    Returns:
+        True if the parallel processing is successful.
+    """
     if not parallelism:
         parallelism = os.cpu_count()
     logging.info(
@@ -1515,10 +1533,31 @@ def process(
     counters: dict = None,
     parallelism: int = 0,
 ) -> bool:
-    """Process all input_data files to extract StatVars and StatvarObs.
+    """Initializes and runs the StatVar and StatVarObservation processing pipeline.
 
-  Emit the StatVars and StataVarObs into output mcf and csv files.
-  """
+    This function orchestrates the entire data processing workflow for generating
+    StatVars and StatVarObservations. It handles configuration setup, prepares
+    the input data by downloading, converting, or sharding it as needed, and
+    then executes the main processing logic either sequentially or in parallel.
+
+    Args:
+        data_processor_class: The class responsible for processing the data,
+                              typically a subclass of `StatVarDataProcessor`.
+        input_data: A list of input data files or URLs containing the statistical
+                    data to be processed.
+        output_path: The base path for the generated MCF, CSV, and TMCF files.
+        config: Path to the configuration file that defines the processing rules.
+        pv_map_files: A list of property-value map files used for mapping data
+                      columns to schema properties.
+        counters: An optional dictionary for tracking processing statistics,
+                  such as the number of StatVars and SVObs generated.
+        parallelism: The number of parallel processes to use. If 0 or 1,
+                     processing is sequential.
+
+    Returns:
+        True if processing completes successfully, False if any errors are
+        encountered.
+    """
     config = config_flags.init_config_from_flags(config)
     config_dict = config.get_configs()
     if input_data:
