@@ -1,0 +1,11 @@
+parameter,value
+url,https://fenixservices.fao.org/faostat/static/bulkdownloads/Exchange_rate_E_All_Data_(Normalized).zip
+description,"The exchange rate of currency broken down by country, currency standardization type, and currency (using ISO 4217 Currency Code)."
+start_date,1970
+end_date,2024
+release_frequency,1years
+output_columns,"observationAbout, observationDate, value, variableMeasured,observationPeriod,unit"
+mapped_rows,1
+mapped_columns,11
+word_delimiter,""""""
+header_rows,1
