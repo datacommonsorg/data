@@ -3,6 +3,6 @@ observationAbout: C:southafrica_budget->observationAbout
 observationDate: C:southafrica_budget->observationDate
 value: C:southafrica_budget->value
 variableMeasured: C:southafrica_budget->variableMeasured
-observationPeriod: C:southafrica_budget->observationPeriod
-typeOf: dcs:StatVarObservation
 unit: ZAR
+typeOf: dcs:StatVarObservation
+observationPeriod: P1Y
