@@ -25,6 +25,6 @@ The config and pvmap files for other geo-levels are available in the same folder
 
 #### Example
 #### Processing
-`python3 ../../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/county/*.csv --pv_map=pep_asrh_county_pvmap.csv --config=pep_asrh_county_metadata.csv --output_path=output/county/pep_asrh`
+`python3 stat_var_processor.py --input_data=input_files/county/*.csv --pv_map=pep_asrh_county_pvmap.csv --config=pep_asrh_county_metadata.csv --output_path=output/county/pep_asrh`
 
 

@@ -76,7 +76,7 @@ def add_future_urls():
           else:
             logging.warning(f"Url not found: {url_to_check} with status code: {check_url.status_code}")
         except requests.exceptions.RequestException as e:
-          logging.error(f"URL is not accessible {value} due to {e}")
+          logging.fatal(f"URL is not accessible {value} due to {e}")
 
 
 def download_files():
@@ -93,7 +93,7 @@ def download_files():
       try:
         response = requests.get(url, verify=False)
       except requests.exceptions.RequestException as e:
-        logging.error(f"Error downloading {url}: {e}")
+        logging.fatal(f"Error downloading {url}: {e}")
         continue
       if not (os.path.exists(download_folder)):
         os.makedirs(download_folder)

@@ -4,7 +4,7 @@
       "import_name": "USCensusPEP_AgeSexRaceHispanicOrigin",
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.census.gov/en.html",
-      "provenance_description": "",
+      "provenance_description": "US Census PEP by Age, Sex, Race and Hispanic Origin",
       "scripts": ["pep_asrh_download_script.py",
       "../../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/county/* --pv_map=pep_asrh_county_pvmap.csv --config_file=pep_asrh_county_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/county/pep_asrh_county",
       "../../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/national/* --pv_map=pep_asrh_national_pvmap.csv --config_file=pep_asrh_national_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/national/pep_asrh_national",
