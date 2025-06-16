@@ -54,7 +54,12 @@ or
 
 The below script will download the data.
 
-`python3 download.py`
+`python3 download.py --config_path=epa_us_air_pollutant_emission_trends_national_and_state/config.json`
+
+Note: The url contains a format of year and date that can't be predicted and changed dynamically. Hence the latest url has to be hardcoded in the config.json file and kept in the gcp bucket. The bucket is hard coded in the code (i.e. datcom-csv)
+
+Please provide the config.json in the following gcs path: 
+datcom-csv/epa_us_air_pollutant_emission_trends_national_and_state/config.json
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
 
