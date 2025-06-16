@@ -358,6 +358,8 @@ def download_csv_from_url(urls: Union[str, List[str]],
         >>> download_csv_from_url(["http://example.com/data1.csv", "http://example.com/data2.csv"],
         ...                       ['/tmp/d1.csv', '/tmp/d2.csv'])
         ['/tmp/d1.csv', '/tmp/d2.csv']
+        >>> download_csv_from_url([])
+        []
     """
     data_files = []
     if not isinstance(urls, list):
@@ -413,9 +415,13 @@ def shard_csv_data(
     Examples:
         >>> shard_csv_data(['my_data.csv'], column='country')
         ['my_data-country-00000-of-00002.csv', 'my_data-country-00001-of-00002.csv']
+        >>> shard_csv_data([], column='country')
+        []
     """
     logging.info(
         f'Loading data files: {files} for sharding by column: {column}...')
+    if not files:
+        return []
     dfs = []
     for file in files:
         dfs.append(
@@ -482,6 +488,8 @@ def convert_xls_to_csv(filenames: List[str],
         ['my_data_Sheet1.csv', 'my_data_Sheet2.csv']
         >>> convert_xls_to_csv(['my_data.xlsx'], sheets=['Sheet1'])
         ['my_data_Sheet1.csv']
+        >>> convert_xls_to_csv([])
+        []
     """
     csv_files = []
     for file in filenames:

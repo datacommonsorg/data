@@ -319,6 +319,10 @@ class TestDownloadCsvFromUrl(unittest.TestCase):
                                       ['/tmp/my_data.csv'])
         self.assertEqual(files, [])
 
+    def test_empty_urls(self):
+        files = download_csv_from_url([], [])
+        self.assertEqual(files, [])
+
 
 class TestShardCsvData(unittest.TestCase):
 
@@ -340,6 +344,10 @@ class TestShardCsvData(unittest.TestCase):
         self.assertEqual(len(files), 3)
         self.assertEqual(mock_to_csv.call_count, 3)
 
+    def test_empty_files(self):
+        files = shard_csv_data([], 'col1')
+        self.assertEqual(files, [])
+
 
 class TestConvertXlsToCsv(unittest.TestCase):
 
@@ -360,6 +368,10 @@ class TestConvertXlsToCsv(unittest.TestCase):
         files = convert_xls_to_csv(['test.csv'], [])
         self.assertEqual(files, ['test.csv'])
         mock_excel_file.assert_not_called()
+
+    def test_empty_files(self):
+        files = convert_xls_to_csv([], [])
+        self.assertEqual(files, [])
 
 
 class TestPrepareInputData(unittest.TestCase):
