@@ -17,8 +17,8 @@ Date: 8/30/2021
 Description: Utility to download all CDC 500 PLACES data.
 URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
 
-Files are stored in raw_data.
-
+Files are stored in input_files.
+gcs_output folder is the mount storage
 Run this script from this directory:
 python3 download_bulk.py
 """
@@ -34,7 +34,9 @@ from absl import flags
 from absl import app
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
+_GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+_UTIL_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_UTIL_DIR, '../../../util/'))
 import file_util
 
 _FLAGS = flags.FLAGS
@@ -75,7 +77,8 @@ def download_file(release_year, url: str, save_path: str):
 
 def main(_):
     """Main function to download the files."""
-    data_dir = os.path.join(os.getcwd(), 'raw_data')
+
+    data_dir = os.path.join(_GCS_OUTPUT_DIR, 'input_files')
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
     logging.set_verbosity(2)
@@ -89,19 +92,4 @@ def main(_):
 
 if __name__ == '__main__':
     logging.set_verbosity(2)
-    logging.info("checking for mount storage")
-    try:
-        if os.path.isdir("gcs_output"):
-
-            logging.info("mount path found")
-            os.mkdir('/gcs_output/input_files')
-            logging.info("directory created")
-            with open("/gcs_output/input_files/text.txt", 'w') as file:
-                file.write("this is for testing mount path")
-            logging.info("file created")
-        else:
-            logging.info("not exist")
-
-    except:
-        logging.fetal("mount path not found")
     app.run(main)
