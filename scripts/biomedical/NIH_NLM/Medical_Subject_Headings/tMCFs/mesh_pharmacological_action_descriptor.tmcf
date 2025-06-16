@@ -10,4 +10,3 @@ dcid: C:mesh_pharmacological_action_descriptor->dcid
 name: C:mesh_pharmacological_action_descriptor->RecordName
 identifier: C:mesh_pharmacological_action_descriptor->RecordUI
 mechanismOfAction: E:mesh_pharmacological_action_descriptor->E1
-	
