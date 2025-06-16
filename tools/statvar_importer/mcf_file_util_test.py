@@ -153,6 +153,62 @@ class TestGetPVFromLine(unittest.TestCase):
         self.assertEqual(mcf_file_util.get_pv_from_line(''), ('', ''))
 
 
+class TestAddCommentToNode(unittest.TestCase):
+
+    def test_add_comment_to_empty_node(self):
+        node = {}
+        mcf_file_util.add_comment_to_node('# My comment', node)
+        self.assertEqual(node, {'# comment1': '# My comment'})
+
+    def test_add_multiple_comments(self):
+        node = {}
+        mcf_file_util.add_comment_to_node('# Comment 1', node)
+        mcf_file_util.add_comment_to_node('# Comment 2', node)
+        self.assertEqual(node, {
+            '# comment1': '# Comment 1',
+            '# comment2': '# Comment 2'
+        })
+
+    def test_add_duplicate_comment(self):
+        node = {}
+        mcf_file_util.add_comment_to_node('# My comment', node)
+        mcf_file_util.add_comment_to_node('# My comment', node)
+        self.assertEqual(node, {'# comment1': '# My comment'})
+
+    def test_add_comment_to_node_with_other_properties(self):
+        node = {'name': 'Test'}
+        mcf_file_util.add_comment_to_node('# My comment', node)
+        self.assertEqual(node, {'name': 'Test', '# comment1': '# My comment'})
+
+
+class TestGetNodeDcid(unittest.TestCase):
+
+    def test_get_node_dcid_from_node_property(self):
+        self.assertEqual(mcf_file_util.get_node_dcid({'Node': 'dcid:State'}),
+                         'State')
+
+    def test_get_node_dcid_from_dcid_property(self):
+        self.assertEqual(mcf_file_util.get_node_dcid({'dcid': 'dcid:Country'}),
+                         'Country')
+
+    def test_get_node_dcid_prefers_dcid_property(self):
+        self.assertEqual(
+            mcf_file_util.get_node_dcid({
+                'Node': 'dcid:City',
+                'dcid': 'dcid:Town'
+            }), 'Town')
+
+    def test_get_node_dcid_no_dcid(self):
+        self.assertEqual(mcf_file_util.get_node_dcid({'name': 'My Node'}), '')
+
+    def test_get_node_dcid_empty_dict(self):
+        self.assertEqual(mcf_file_util.get_node_dcid({}), '')
+
+    def test_get_node_dcid_with_quotes(self):
+        self.assertEqual(mcf_file_util.get_node_dcid({'Node': '"dcid:State"'}),
+                         'State')
+
+
 class TestMCFFileUtil(unittest.TestCase):
 
     def setUp(self):

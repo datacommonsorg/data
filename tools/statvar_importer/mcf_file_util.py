@@ -372,18 +372,29 @@ def add_pv_to_node(
 
 
 def add_comment_to_node(comment: str, node: dict) -> dict:
-    """Add a comment to the node. The comments are preserved in the order read.
+    """Adds a comment to a node dictionary, avoiding duplicates.
 
-  Args:
-    comment: a comment string
-    node: dictionary to whcih comment is to be added as a key.
+    This function adds a comment string to a node. To preserve the order of
+    comments as they are read, each comment is stored with a unique, indexed
+    key (e.g., '# comment1', '# comment2'). It checks for existing comments
+    to avoid adding the same comment multiple times.
 
-  Returns:
-    dictionary with the comment added.
+    Args:
+        comment: The comment string to add.
+        node: The node dictionary to which the comment will be added.
 
-  Comments are added as a property with a '#' prefix and index suffix,
-  for example, '# comment1', '# comment2'.
-  """
+    Returns:
+        The updated node dictionary with the new comment.
+
+    Examples:
+        >>> node = {}
+        >>> add_comment_to_node('# This is a comment', node)
+        {'# comment1': '# This is a comment'}
+        >>> add_comment_to_node('# Another comment', node)
+        {'# comment1': '# This is a comment', '# comment2': '# Another comment'}
+        >>> add_comment_to_node('# This is a comment', node)
+        {'# comment1': '# This is a comment', '# comment2': '# Another comment'}
+    """
     # Count the existing comments in the node.
     num_comments = 0
     for c, v in node.items():
@@ -400,17 +411,31 @@ def add_comment_to_node(comment: str, node: dict) -> dict:
 
 
 def get_node_dcid(pvs: dict) -> str:
-    """Returns the dcid of the node without the namespace prefix.
+    """Extracts the DCID from a node's property-value dictionary.
 
-  Args:
-    pvs: dictionary of property:value for the node.
+    This function retrieves the Data Commons ID (DCID) of a node by checking
+    for the 'dcid' property first, and then falling back to the 'Node' property.
+    It also strips any namespace prefixes (like 'dcid:') and surrounding quotes
+    from the resulting DCID.
 
-  Returns:
-    nodes dcid if one is set.
-  dcid is taken from the following properties in order:
-    'dcid'
-    'Node'
-  """
+    Args:
+        pvs: A dictionary of property-values for the node.
+
+    Returns:
+        The cleaned DCID string, or an empty string if no DCID can be found.
+
+    Examples:
+        >>> get_node_dcid({'Node': 'dcid:State'})
+        'State'
+        >>> get_node_dcid({'dcid': 'dcid:Country'})
+        'Country'
+        >>> get_node_dcid({'Node': 'dcid:City', 'dcid': 'dcid:Town'})
+        'Town'
+        >>> get_node_dcid({'name': 'My Node'})
+        ''
+        >>> get_node_dcid({})
+        ''
+    """
     if not pvs:
         return ''
     dcid = pvs.get('Node', '')
