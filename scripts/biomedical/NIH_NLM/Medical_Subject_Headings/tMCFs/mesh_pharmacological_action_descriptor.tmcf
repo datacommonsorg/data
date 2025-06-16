@@ -6,7 +6,6 @@ identifier: C:mesh_pharmacological_action_descriptor->DescriptorUI
 
 Node: E:mesh_pharmacological_action_descriptor->E2
 typeOf: dcs:MeSHDescriptor
-typeOf: schema:Drug
 dcid: C:mesh_pharmacological_action_descriptor->dcid
 name: C:mesh_pharmacological_action_descriptor->RecordName
 identifier: C:mesh_pharmacological_action_descriptor->RecordUI
