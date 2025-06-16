@@ -5,7 +5,10 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.census.gov/en.html",
       "provenance_description": "",
-      "scripts": ["pep_asrh_download_script.py","../../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/county/* --pv_map=pep_asrh_county_pvmap.csv --config_file=pep_asrh_county_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/county/pep_asrh_county","../../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/national/* --pv_map=pep_asrh_national_pvmap.csv --config_file=pep_asrh_national_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/national/pep_asrh_national","../../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/state/* --pv_map=pep_asrh_state_pvmap.csv --config_file=pep_asrh_state_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/state/pep_asrh_state"],
+      "scripts": ["pep_asrh_download_script.py",
+      "../../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/county/* --pv_map=pep_asrh_county_pvmap.csv --config_file=pep_asrh_county_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/county/pep_asrh_county",
+      "../../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/national/* --pv_map=pep_asrh_national_pvmap.csv --config_file=pep_asrh_national_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/national/pep_asrh_national",
+      "../../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/state/* --pv_map=pep_asrh_state_pvmap.csv --config_file=pep_asrh_state_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/state/pep_asrh_state"],
       "import_inputs": [
         {
           "template_mcf": "output/county/pep_asrh_county.tmcf",
@@ -23,6 +26,11 @@
       "source_files": [
           "input_files/*/*"
       ],
+       "resource_limits": {
+           "cpu": "8",
+           "memory": "32G"
+       },
+      "user_script_timeout": 18000,
       "cron_schedule": "0 05 * * 1"
     }
   ]
