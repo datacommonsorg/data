@@ -30,10 +30,37 @@ from mcf_file_util import get_value_list, add_pv_to_node, strip_namespace
 
 
 def is_valid_property(prop: str, schemaless: bool = False) -> bool:
-    """Returns True if the property begins with a letter, lowercase.
+    """Checks if a property is valid according to Data Commons standards.
 
-  If schemaless is true, property can begin with uppercase as well.
-  """
+    A valid property must:
+    - Start with a letter.
+    - Be in lowerCamelCase.
+
+    If `schemaless` is True, the lowerCamelCase check is skipped, allowing
+    properties that start with an uppercase letter.
+
+    Args:
+        prop: The property string to validate.
+        schemaless: If True, allows properties that are not in lowerCamelCase.
+                    Defaults to False.
+
+    Returns:
+        True if the property is valid, False otherwise.
+
+    Examples:
+        >>> is_valid_property("measuredProperty")
+        True
+        >>> is_valid_property("populationType")
+        True
+        >>> is_valid_property("Observation")  # Starts with an uppercase letter
+        False
+        >>> is_valid_property("Observation", schemaless=True)
+        True
+        >>> is_valid_property("_invalid")  # Does not start with a letter
+        False
+        >>> is_valid_property(None)
+        False
+    """
     if prop and isinstance(prop, str) and prop[0].isalpha():
         if schemaless or prop[0].islower():
             return True
@@ -41,7 +68,31 @@ def is_valid_property(prop: str, schemaless: bool = False) -> bool:
 
 
 def is_valid_value(value: str) -> bool:
-    """Returns True if the value is valid without any references."""
+    """Checks if a given value is valid and does not contain unresolved references.
+
+    A valid value must not be None, an empty string, or contain unresolved
+    '{...}' or '@...' references.
+
+    Args:
+        value: The value to validate.
+
+    Returns:
+        True if the value is valid, False otherwise.
+
+    Examples:
+        >>> is_valid_value("someValue")
+        True
+        >>> is_valid_value(123)
+        True
+        >>> is_valid_value(None)
+        False
+        >>> is_valid_value("")
+        False
+        >>> is_valid_value('"{unresolved}"')
+        False
+        >>> is_valid_value('@unresolved')
+        False
+    """
     if value is None:
         return False
     if isinstance(value, str):
@@ -58,16 +109,42 @@ def is_valid_value(value: str) -> bool:
 
 
 def is_schema_node(value: str) -> bool:
-    """Returns True if the value is a schema node reference."""
+    """Checks if a value is a valid reference to a schema node.
+
+    A valid schema node reference must:
+    - Be a non-empty string.
+    - Start with a letter or a '['.
+    - Contain only alphanumeric characters, underscores, slashes, or brackets.
+
+    Args:
+        value: The value to check.
+
+    Returns:
+        True if the value is a valid schema node reference, False otherwise.
+
+    Examples:
+        >>> is_schema_node("schema:Person")
+        True
+        >>> is_schema_node("dcid:country/USA")
+        True
+        >>> is_schema_node("[1 2 3]")
+        True
+        >>> is_schema_node("invalid-node")
+        False
+        >>> is_schema_node(123)
+        False
+    """
     if not value or not isinstance(value, str):
         return False
-    if not value[0].isalpha() and value[0] != '[':
+    if value.startswith('[') and value.endswith(']'):
+        return True
+    if not value[0].isalpha():
         # Numbers or quoted strings are not schema nodes.
         return False
     # Check if string has any non alpha or non numeric codes
     non_alnum_chars = [
         c for c in strip_namespace(value)
-        if not c.isalnum() and c not in ['_', '/', '[', ']', '.']
+        if not c.isalnum() and c not in ['_', '/', '.']
     ]
     if non_alnum_chars:
         return False
@@ -75,7 +152,31 @@ def is_schema_node(value: str) -> bool:
 
 
 def has_namespace(value: str) -> bool:
-    """Returns True if the value has a namespace of letters followed by ':'."""
+    """Checks if a value has a Data Commons namespace prefix.
+
+    A namespace prefix consists of one or more letters followed by a colon,
+    for example, "dcid:", "schema:", or "dcs:".
+
+    Args:
+        value: The string value to check.
+
+    Returns:
+        True if the value has a valid namespace prefix, False otherwise.
+
+    Examples:
+        >>> has_namespace("dcid:country/USA")
+        True
+        >>> has_namespace("schema:Person")
+        True
+        >>> has_namespace("country/USA")
+        False
+        >>> has_namespace("dcid:")
+        True
+        >>> has_namespace(":no_namespace")
+        False
+        >>> has_namespace(None)
+        False
+    """
     if not value or not isinstance(value, str):
         return False
     len_value = len(value)
@@ -84,7 +185,7 @@ def has_namespace(value: str) -> bool:
         if not value[pos].isalpha():
             break
         pos += 1
-    if pos < len_value and value[pos] == ':':
+    if pos > 0 and pos < len_value and value[pos] == ':':
         return True
     return False
 
