@@ -1,3 +1,24 @@
+ # Copyright 2025 Google LLC
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+ # you may not use this file except in compliance with the License.
+ # You may obtain a copy of the License at
+ #
+ #      http://www.apache.org/licenses/LICENSE-2.0
+ #
+ # Unless required by applicable law or agreed to in writing, software
+ # distributed under the License is distributed on an "AS IS" BASIS,
+ # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
+ 
+ 
+''' This script helps to download the input data for BLS_CPI_Category import. The source is https://www.bls.gov/cpi/tables/supplemental-files/. It covers cpi-u, cpi-w and c-cpi-u datasets. 
+For c-cpi-u we are downloading alternative files because each file contains 2 month data. Same for cpi-u and cpi-w we are downloading the January month file of all years.
+'''
+
+
 import requests
 import os
 import zipfile
