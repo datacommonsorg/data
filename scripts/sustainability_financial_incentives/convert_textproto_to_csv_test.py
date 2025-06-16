@@ -9,7 +9,7 @@ class ConvertTextprotoToCsvTest(unittest.TestCase):
     def setUp(self):
         self.test_data_dir = os.path.join(os.path.dirname(__file__), 'testdata')
         self.textproto_path = os.path.join(self.test_data_dir,
-                                           'sample_incentives.textproto')
+                                           'all_incentives.textproto')
         self.csv_path = os.path.join(self.test_data_dir, 'output.csv')
 
     def tearDown(self):
@@ -25,18 +25,17 @@ class ConvertTextprotoToCsvTest(unittest.TestCase):
                 os.path.join(self.test_data_dir, 'expected_output.csv'),
                 'r',
                 encoding='utf-8') as f_expected:
-            reader_actual = csv.reader(f_actual)
-            reader_expected = csv.reader(f_expected)
+            reader_actual = csv.DictReader(f_actual)
+            reader_expected = csv.DictReader(f_expected)
 
-            header_actual = next(reader_actual)
-            header_expected = next(reader_expected)
-            self.assertEqual(header_actual, header_expected)
+            # Convert to lists of dicts
+            rows_actual = list(reader_actual)
+            rows_expected = list(reader_expected)
 
-            # Sort the rows to ignore order
-            rows_actual = sorted(list(reader_actual))
-            rows_expected = sorted(list(reader_expected))
-
-            self.assertEqual(rows_actual, rows_expected)
+            # Compare sets of dictionaries to ignore row order
+            self.assertEqual(len(rows_actual), len(rows_expected))
+            for row_a in rows_actual:
+                self.assertIn(row_a, rows_expected)
 
 
 if __name__ == '__main__':

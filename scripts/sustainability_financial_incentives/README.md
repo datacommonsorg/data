@@ -18,16 +18,16 @@ If the schema of the input textproto files changes, you will need to update the 
 
 ## Running the Script
 
-To convert a textproto file to CSV, run the script from the `scripts/sustainability_financial_incentives` directory with the following command, providing the path to your input textproto file and the desired output CSV path:
+To convert a textproto file to CSV, run the script from the `scripts/sustainability_financial_incentives` directory with the following command. You can use flags to specify the input and output paths:
 
 ```bash
-python convert_textproto_to_csv.py <path_to_input.textproto> <path_to_output.csv>
+python convert_textproto_to_csv.py --textproto_path=<path_to_input.textproto> --csv_path=<path_to_output.csv>
 ```
 
 **Example:**
 
 ```bash
-python convert_textproto_to_csv.py testdata/sample_incentives.textproto output.csv
+python convert_textproto_to_csv.py --textproto_path=testdata/all_incentives.textproto --csv_path=output.csv
 ```
 
 ## Running the Tests
