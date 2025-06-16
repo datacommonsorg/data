@@ -15,10 +15,12 @@
 import unittest
 import os
 from unittest.mock import patch
+import pandas as pd
 
 from utils import (_capitalize_first_char, _str_from_number, _pvs_has_any_prop,
                    _is_place_dcid, _get_observation_period_for_date,
-                   _get_observation_date_format, _get_filename_for_url)
+                   _get_observation_date_format, _get_filename_for_url,
+                   download_csv_from_url, shard_csv_data, convert_xls_to_csv)
 
 
 class TestCapitalizeFirstChar(unittest.TestCase):
@@ -271,6 +273,92 @@ class TestGetFilenameForUrl(unittest.TestCase):
             _get_filename_for_url("http://example.com/archive.data.csv",
                                   "/tmp"),
             os.path.join("/tmp", "archive.data-1.csv"))
+
+
+class TestDownloadCsvFromUrl(unittest.TestCase):
+
+    @patch('utils.download_file_from_url')
+    @patch('utils._get_filename_for_url')
+    def test_single_url(self, mock_get_filename, mock_download):
+        mock_get_filename.return_value = '/tmp/data.csv'
+        mock_download.return_value = '/tmp/data.csv'
+        files = download_csv_from_url('http://example.com/data.csv', [])
+        self.assertEqual(files, ['/tmp/data.csv'])
+        mock_get_filename.assert_called_once_with('http://example.com/data.csv',
+                                                  './')
+        mock_download.assert_called_once_with(url='http://example.com/data.csv',
+                                              output_file='/tmp/data.csv',
+                                              overwrite=False)
+
+    @patch('utils.download_file_from_url')
+    def test_single_url_with_filename(self, mock_download):
+        mock_download.return_value = '/tmp/my_data.csv'
+        files = download_csv_from_url('http://example.com/data.csv',
+                                      ['/tmp/my_data.csv'])
+        self.assertEqual(files, ['/tmp/my_data.csv'])
+        mock_download.assert_called_once_with(url='http://example.com/data.csv',
+                                              output_file='/tmp/my_data.csv',
+                                              overwrite=False)
+
+    @patch('utils.download_file_from_url')
+    @patch('utils._get_filename_for_url')
+    def test_multiple_urls(self, mock_get_filename, mock_download):
+        mock_get_filename.side_effect = ['/tmp/data1.csv', '/tmp/data2.csv']
+        mock_download.side_effect = ['/tmp/data1.csv', '/tmp/data2.csv']
+        urls = ['http://example.com/data1.csv', 'http://example.com/data2.csv']
+        files = download_csv_from_url(urls, [])
+        self.assertEqual(files, ['/tmp/data1.csv', '/tmp/data2.csv'])
+        self.assertEqual(mock_get_filename.call_count, 2)
+        self.assertEqual(mock_download.call_count, 2)
+
+    @patch('utils.download_file_from_url')
+    def test_download_fails(self, mock_download):
+        mock_download.return_value = None
+        files = download_csv_from_url('http://example.com/data.csv',
+                                      ['/tmp/my_data.csv'])
+        self.assertEqual(files, [])
+
+
+class TestShardCsvData(unittest.TestCase):
+
+    @patch('utils.file_util.FileIO')
+    @patch('utils.pd.read_csv')
+    @patch('utils.pd.DataFrame.to_csv')
+    @patch('utils.file_util.file_is_local')
+    @patch('utils.os.path.exists')
+    def test_shard_csv_data(self, mock_exists, mock_is_local, mock_to_csv,
+                            mock_read_csv, mock_file_io):
+        mock_exists.return_value = False
+        mock_is_local.return_value = True
+        df = pd.DataFrame({
+            'col1': ['a', 'b', 'c'],
+            'col2': [1, 2, 3],
+        })
+        mock_read_csv.return_value = df
+        files = shard_csv_data(['test.csv'], 'col1')
+        self.assertEqual(len(files), 3)
+        self.assertEqual(mock_to_csv.call_count, 3)
+
+
+class TestConvertXlsToCsv(unittest.TestCase):
+
+    @patch('utils.pd.ExcelFile')
+    @patch('utils.pd.read_excel')
+    @patch('utils.pd.DataFrame.to_csv')
+    def test_convert_xls_to_csv(self, mock_to_csv, mock_read_excel,
+                                mock_excel_file):
+        mock_excel_file.return_value.sheet_names = ['sheet1', 'sheet2']
+        df = pd.DataFrame({'col1': ['a', 'b', 'c'], 'col2': [1, 2, 3]})
+        mock_read_excel.return_value = df
+        files = convert_xls_to_csv(['test.xlsx'], [])
+        self.assertEqual(len(files), 2)
+        self.assertEqual(mock_to_csv.call_count, 2)
+
+    @patch('utils.pd.ExcelFile')
+    def test_convert_xls_to_csv_no_xls(self, mock_excel_file):
+        files = convert_xls_to_csv(['test.csv'], [])
+        self.assertEqual(files, ['test.csv'])
+        mock_excel_file.assert_not_called()
 
 
 if __name__ == '__main__':

@@ -96,7 +96,8 @@ _FLAGS = flags.FLAGS
 
 from utils import (_capitalize_first_char, _str_from_number, _pvs_has_any_prop,
                    _is_place_dcid, _get_observation_period_for_date,
-                   _get_observation_date_format, _get_filename_for_url)
+                   _get_observation_date_format, _get_filename_for_url,
+                   download_csv_from_url, shard_csv_data, convert_xls_to_csv)
 
 from statvars_map import StatVarsMap
 
@@ -1435,111 +1436,6 @@ class StatVarDataProcessor:
         if self._config.get('generate_tmcf', True):
             outputs.append(output_path + '.tmcf')
         return outputs
-
-
-def download_csv_from_url(urls: list, download_files: list) -> list:
-    """Download data from the URL into the given file.
-
-  Returns a list of files downloaded.
-  """
-    data_files = []
-    if not isinstance(urls, list):
-        urls = [urls]
-    if download_files and not isinstance(download_files, list):
-        download_files = [download_files]
-    if download_files:
-        data_path = os.path.dirname(download_files[0])
-    else:
-        data_path = './'
-    for index in range(len(urls)):
-        url = urls[index]
-        if download_files and index < len(download_files):
-            filename = download_files[index]
-        else:
-            filename = _get_filename_for_url(url, data_path)
-        logging.info(f'Downloading {url} into {filename}')
-        output_file = download_file_from_url(url=url,
-                                             output_file=filename,
-                                             overwrite=False)
-        if output_file:
-            data_files.append(output_file)
-    logging.info(f'Downloaded {urls} into {data_files}.')
-    return data_files
-
-
-def shard_csv_data(
-    files: list,
-    column: str = None,
-    prefix_len: int = sys.maxsize,
-    keep_existing_files: bool = True,
-) -> list:
-    """Shard CSV file by unique values in column.
-
-  Returns the list of output files.
-  """
-    logging.info(
-        f'Loading data files: {files} for sharding by column: {column}...')
-    dfs = []
-    for file in files:
-        dfs.append(
-            pd.read_csv(file_util.FileIO(file), dtype=str, na_filter=False))
-    df = pd.concat(dfs)
-    if not column:
-        # Pick the first column.
-        column = list(df.columns)[0]
-    # Convert nan to empty string so sharding doesn't drop any rows.
-    # df[column] = df[column].fillna('')
-    # Get unique shard prefix values from column.
-    shards = list(
-        sorted(set([str(x)[:prefix_len] for x in df[column].unique()])))
-    if file_util.file_is_local(file):
-        (file_prefix, file_ext) = os.path.splitext(file)
-    else:
-        fd, file_prefix = tempfile.mkstemp()
-        file_ext = '.csv'
-    column_suffix = re.sub(r'[^A-Za-z0-9_-]', '-', column)
-    output_path = f'{file_prefix}-{column_suffix}'
-    logging.info(f'Sharding {files} into {len(shards)} shards by column'
-                 f' {column}:{shards} into {output_path}-*.csv.')
-    output_files = []
-    num_shards = len(shards)
-    for shard_index in range(num_shards):
-        shard_value = shards[shard_index]
-        output_file = f'{output_path}-{shard_index:05d}-of-{num_shards:05d}.csv'
-        logging.info(
-            f'Sharding by {column}:{shard_value} into {output_file}...')
-        if not os.path.exists(output_file) or not keep_existing_files:
-            if shard_value:
-                df[df[column].str.startswith(shard_value)].to_csv(output_file,
-                                                                  index=False)
-            else:
-                df[df[column] == ''].to_csv(output_file, index=False)
-        output_files.append(output_file)
-    return output_files
-
-
-def convert_xls_to_csv(filenames: list, sheets: list) -> list:
-    """Returns a list of csv files extracted from the sheets within the xls."""
-    csv_files = []
-    for file in filenames:
-        filename, ext = os.path.splitext(file)
-        logging.info(f'Converting {filename}{ext} into csv for {sheets}')
-        if '.xls' in ext:
-            # Convert the xls file into csv file per sheet.
-            xls = pd.ExcelFile(file)
-            for sheet in xls.sheet_names:
-                # Read each sheet as a Pandas DataFrame and save it as csv
-                if not sheets or sheet in sheets:
-                    df = pd.read_excel(xls, sheet_name=sheet, dtype=str)
-                    csv_filename = re.sub('[^A-Za-z0-9_.-]+', '_',
-                                          f'{filename}_{sheet}.csv')
-                    df.to_csv(csv_filename, index=False)
-                    logging.info(
-                        f'Converted {file}:{sheet} into csv {csv_filename}')
-                    csv_files.append(csv_filename)
-        else:
-            csv_files.append(file)
-    return csv_files
 
 
 def prepare_input_data(config: dict) -> bool:

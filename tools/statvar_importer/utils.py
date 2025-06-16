@@ -17,9 +17,15 @@ This module provides helper functions used across the StatVar import process.
 """
 
 import os
+import logging
+import re
+import sys
+import tempfile
 from typing import Union, Optional, Dict, List
 
+import pandas as pd
 import file_util
+from util.download_util import download_file_from_url
 
 
 def _capitalize_first_char(string: str) -> str:
@@ -332,3 +338,201 @@ def _get_filename_for_url(url: str, path: str) -> str:
         count += 1
         file = os.path.join(path, f'{filename}-{count}{ext}')
     return file
+
+
+def download_csv_from_url(urls: Union[str, List[str]],
+                          download_files: Optional[Union[str,
+                                                         List[str]]] = None,
+                          overwrite: bool = False) -> List[str]:
+    """Downloads data from one or more URLs and saves it to specified files.
+
+    If `download_files` are provided, they are used as the destination paths for
+    the corresponding URLs. If not, filenames are automatically generated based
+    on the URL.
+
+    Args:
+        urls: A single URL string or a list of URL strings to download from.
+        download_files: A single destination file path or a list of paths.
+                        If provided, the number of files must match the number of URLs.
+                        If None, filenames are generated automatically.
+        overwrite: If True, existing files will be overwritten.
+                   Defaults to False.
+
+    Returns:
+        A list of file paths for the successfully downloaded files.
+        Returns an empty list if any download fails or if inputs are invalid.
+
+    Examples:
+        >>> # Downloading a single file with an auto-generated name
+        >>> # with patch('utils.download_file_from_url', return_value='/tmp/data.csv'):
+        >>> #     download_csv_from_url("http://example.com/data.csv")
+        >>> # ['/tmp/data.csv']
+
+        >>> # Downloading multiple files with specified names
+        >>> # with patch('utils.download_file_from_url', side_effect=['/tmp/d1.csv', '/tmp/d2.csv']):
+        >>> #     download_csv_from_url(["http://e.com/d1.csv", "http://e.com/d2.csv"],
+        >>> #                         ['/tmp/d1.csv', '/tmp/d2.csv'])
+        >>> # ['/tmp/d1.csv', '/tmp/d2.csv']
+    """
+    data_files = []
+    if not isinstance(urls, list):
+        urls = [urls]
+    if download_files and not isinstance(download_files, list):
+        download_files = [download_files]
+    if download_files:
+        data_path = os.path.dirname(download_files[0])
+    else:
+        data_path = './'
+    for index in range(len(urls)):
+        url = urls[index]
+        if download_files and index < len(download_files):
+            filename = download_files[index]
+        else:
+            filename = _get_filename_for_url(url, data_path)
+        logging.info(f'Downloading {url} into {filename}')
+        output_file = download_file_from_url(url=url,
+                                             output_file=filename,
+                                             overwrite=False)
+        if output_file:
+            data_files.append(output_file)
+    logging.info(f'Downloaded {urls} into {data_files}.')
+    return data_files
+
+
+def shard_csv_data(
+    files: List[str],
+    column: Optional[str] = None,
+    prefix_len: int = sys.maxsize,
+    keep_existing_files: bool = True,
+) -> List[str]:
+    """Shards one or more CSV files into multiple smaller CSV files based on the unique values in a specified column.
+
+    This function reads one or more CSVs, concatenates them, and then splits the
+    resulting DataFrame into new CSV files. Each new file contains all rows that
+    share the same unique value (or a common prefix of that value) in the
+    specified `column`.
+
+    If no `column` is specified, the first column of the DataFrame is used for sharding.
+
+    Args:
+        files: A list of paths to the input CSV files.
+        column: The name of the column to shard by. If None, the first column is used.
+        prefix_len: The number of characters of the column value to use for grouping.
+                    Defaults to the full length of the value.
+        keep_existing_files: If True, existing shard files will not be overwritten.
+                             Defaults to True.
+
+    Returns:
+        A list of file paths for the generated shard files.
+
+    Examples:
+        >>> # Sharding a file by a specific column
+        >>> # with patch('utils.pd.read_csv') as mock_read, \
+        >>> #      patch('utils.pd.DataFrame.to_csv') as mock_to_csv, \
+        >>> #      patch('utils.file_util.file_is_local', return_value=True), \
+        >>> #      patch('utils.os.path.exists', return_value=False):
+        >>> #     df = pd.DataFrame({'country': ['USA', 'USA', 'CAN'], 'data': [1, 2, 3]})
+        >>> #     mock_read.return_value = df
+        >>> #     shard_csv_data(['my_data.csv'], column='country')
+        >>> # This would create two shard files, one for 'USA' and one for 'CAN'.
+    """
+    logging.info(
+        f'Loading data files: {files} for sharding by column: {column}...')
+    dfs = []
+    for file in files:
+        dfs.append(
+            pd.read_csv(file_util.FileIO(file), dtype=str, na_filter=False))
+    df = pd.concat(dfs)
+    if not column:
+        # Pick the first column.
+        column = list(df.columns)[0]
+    # Convert nan to empty string so sharding doesn't drop any rows.
+    # df[column] = df[column].fillna('')
+    # Get unique shard prefix values from column.
+    shards = list(
+        sorted(set([str(x)[:prefix_len] for x in df[column].unique()])))
+    if file_util.file_is_local(file):
+        (file_prefix, file_ext) = os.path.splitext(file)
+    else:
+        fd, file_prefix = tempfile.mkstemp()
+        file_ext = '.csv'
+    column_suffix = re.sub(r'[^A-Za-z0-9_-]', '-', column)
+    output_path = f'{file_prefix}-{column_suffix}'
+    logging.info(f'Sharding {files} into {len(shards)} shards by column'
+                 f' {column}:{shards} into {output_path}-*.csv.')
+    output_files = []
+    num_shards = len(shards)
+    for shard_index in range(num_shards):
+        shard_value = shards[shard_index]
+        output_file = f'{output_path}-{shard_index:05d}-of-{num_shards:05d}.csv'
+        logging.info(
+            f'Sharding by {column}:{shard_value} into {output_file}...')
+        if not os.path.exists(output_file) or not keep_existing_files:
+            if shard_value:
+                df[df[column].str.startswith(shard_value)].to_csv(output_file,
+                                                                  index=False)
+            else:
+                df[df[column] == ''].to_csv(output_file, index=False)
+        output_files.append(output_file)
+    return output_files
+
+
+def convert_xls_to_csv(filenames: List[str],
+                       sheets: Optional[List[str]] = None) -> List[str]:
+    """Converts specified sheets from Excel files (.xls, .xlsx) into CSV files.
+
+    For each file in `filenames`, if it has an Excel extension, this function
+    iterates through its sheets. If `sheets` is specified, only the sheets
+    named in the list are converted. If `sheets` is None, all sheets in the
+    Excel file are converted.
+
+    Each converted sheet is saved as a new CSV file with a name derived from the
+    original Excel file and the sheet name. Non-Excel files in the `filenames`
+    list are passed through unchanged.
+
+    Args:
+        filenames: A list of file paths, which can include Excel and other file types.
+        sheets: An optional list of sheet names to convert. If None, all sheets
+                in the Excel files are converted.
+
+    Returns:
+        A list of file paths, including the newly created CSV files and any
+        non-Excel files from the input.
+
+    Examples:
+        >>> # Convert all sheets from an Excel file
+        >>> # with patch('utils.pd.ExcelFile') as mock_excel, \
+        >>> #      patch('utils.pd.read_excel'), \
+        >>> #      patch('utils.pd.DataFrame.to_csv'):
+        >>> #     mock_excel.return_value.sheet_names = ['Sheet1', 'Sheet2']
+        >>> #     convert_xls_to_csv(['my_data.xlsx'])
+        >>> # This would produce 'my_data_Sheet1.csv' and 'my_data_Sheet2.csv'.
+
+        >>> # Convert only a specific sheet
+        >>> # with patch('utils.pd.ExcelFile') as mock_excel, \
+        >>> #      patch('utils.pd.read_excel'), \
+        >>> #      patch('utils.pd.DataFrame.to_csv'):
+        >>> #     mock_excel.return_value.sheet_names = ['Sheet1', 'Sheet2']
+        >>> #     convert_xls_to_csv(['my_data.xlsx'], sheets=['Sheet1'])
+        >>> # This would produce only 'my_data_Sheet1.csv'.
+    """
+    csv_files = []
+    for file in filenames:
+        filename, ext = os.path.splitext(file)
+        logging.info(f'Converting {filename}{ext} into csv for {sheets}')
+        if '.xls' in ext:
+            # Convert the xls file into csv file per sheet.
+            xls = pd.ExcelFile(file)
+            for sheet in xls.sheet_names:
+                # Read each sheet as a Pandas DataFrame and save it as csv
+                if not sheets or sheet in sheets:
+                    df = pd.read_excel(xls, sheet_name=sheet, dtype=str)
+                    csv_filename = re.sub('[^A-Za-z0-9_.-]+', '_',
+                                          f'{filename}_{sheet}.csv')
+                    df.to_csv(csv_filename, index=False)
+                    logging.info(
+                        f'Converted {file}:{sheet} into csv {csv_filename}')
+                    csv_files.append(csv_filename)
+        else:
+            csv_files.append(file)
+    return csv_files
