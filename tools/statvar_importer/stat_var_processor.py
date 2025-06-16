@@ -97,7 +97,8 @@ _FLAGS = flags.FLAGS
 from utils import (_capitalize_first_char, _str_from_number, _pvs_has_any_prop,
                    _is_place_dcid, _get_observation_period_for_date,
                    _get_observation_date_format, _get_filename_for_url,
-                   download_csv_from_url, shard_csv_data, convert_xls_to_csv)
+                   download_csv_from_url, shard_csv_data, convert_xls_to_csv,
+                   prepare_input_data)
 
 from statvars_map import StatVarsMap
 
@@ -1436,29 +1437,6 @@ class StatVarDataProcessor:
         if self._config.get('generate_tmcf', True):
             outputs.append(output_path + '.tmcf')
         return outputs
-
-
-def prepare_input_data(config: dict) -> bool:
-    """Prepare the input data, download and shard if needed."""
-    input_data = config.get('input_data', '')
-    input_files = file_util.file_get_matching(input_data)
-    if not input_files:
-        # Download input data from the URL.
-        data_url = config.get('data_url', '')
-        if not data_url:
-            raise RuntimeError(f'Provide data with --data_url or --input_data.')
-            return False
-        input_files = download_csv_from_url(data_url, input_data)
-    input_files = convert_xls_to_csv(input_files, config.get('input_xls', []))
-    shard_column = config.get('shard_input_by_column', '')
-    if config.get('parallelism', 0) > 0 and shard_column:
-        return shard_csv_data(
-            input_files,
-            shard_column,
-            config.get('shard_prefix_length', sys.maxsize),
-            True,
-        )
-    return input_files
 
 
 def parallel_process(

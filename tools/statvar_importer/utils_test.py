@@ -20,7 +20,8 @@ import pandas as pd
 from utils import (_capitalize_first_char, _str_from_number, _pvs_has_any_prop,
                    _is_place_dcid, _get_observation_period_for_date,
                    _get_observation_date_format, _get_filename_for_url,
-                   download_csv_from_url, shard_csv_data, convert_xls_to_csv)
+                   download_csv_from_url, shard_csv_data, convert_xls_to_csv,
+                   prepare_input_data)
 
 
 class TestCapitalizeFirstChar(unittest.TestCase):
@@ -359,6 +360,66 @@ class TestConvertXlsToCsv(unittest.TestCase):
         files = convert_xls_to_csv(['test.csv'], [])
         self.assertEqual(files, ['test.csv'])
         mock_excel_file.assert_not_called()
+
+
+class TestPrepareInputData(unittest.TestCase):
+
+    @patch('utils.file_util.file_get_matching')
+    @patch('utils.download_csv_from_url')
+    @patch('utils.convert_xls_to_csv')
+    @patch('utils.shard_csv_data')
+    def test_local_csv_found(self, mock_shard, mock_convert, mock_download,
+                             mock_get_matching):
+        mock_get_matching.return_value = ['test.csv']
+        mock_convert.return_value = ['test.csv']
+        config = {'input_data': 'test.csv'}
+        files = prepare_input_data(config)
+        self.assertEqual(files, ['test.csv'])
+        mock_download.assert_not_called()
+        mock_convert.assert_called_once_with(['test.csv'], [])
+        mock_shard.assert_not_called()
+
+    @patch('utils.file_util.file_get_matching', return_value=[])
+    @patch('utils.download_csv_from_url')
+    @patch('utils.convert_xls_to_csv')
+    @patch('utils.shard_csv_data')
+    def test_download_and_convert(self, mock_shard, mock_convert, mock_download,
+                                  mock_get_matching):
+        mock_download.return_value = ['downloaded.xlsx']
+        mock_convert.return_value = ['converted.csv']
+        config = {
+            'data_url': 'http://example.com/data.xlsx',
+            'input_xls': ['Sheet1']
+        }
+        files = prepare_input_data(config)
+        self.assertEqual(files, ['converted.csv'])
+        mock_download.assert_called_once()
+        mock_convert.assert_called_once_with(['downloaded.xlsx'], ['Sheet1'])
+        mock_shard.assert_not_called()
+
+    @patch('utils.file_util.file_get_matching')
+    @patch('utils.download_csv_from_url')
+    @patch('utils.convert_xls_to_csv')
+    @patch('utils.shard_csv_data')
+    def test_sharding_enabled(self, mock_shard, mock_convert, mock_download,
+                              mock_get_matching):
+        mock_get_matching.return_value = ['test.csv']
+        mock_convert.return_value = ['test.csv']
+        mock_shard.return_value = ['shard1.csv', 'shard2.csv']
+        config = {
+            'input_data': 'test.csv',
+            'shard_input_by_column': 'country',
+            'parallelism': 2
+        }
+        files = prepare_input_data(config)
+        self.assertEqual(files, ['shard1.csv', 'shard2.csv'])
+        mock_download.assert_not_called()
+        mock_convert.assert_called_once()
+        mock_shard.assert_called_once()
+
+    def test_no_input_data(self):
+        with self.assertRaises(RuntimeError):
+            prepare_input_data({})
 
 
 if __name__ == '__main__':

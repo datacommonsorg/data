@@ -503,3 +503,79 @@ def convert_xls_to_csv(filenames: List[str],
         else:
             csv_files.append(file)
     return csv_files
+
+
+def prepare_input_data(config: Dict) -> List[str]:
+    """Prepares input data for processing by downloading, converting, and sharding files as needed.
+
+    This function orchestrates the initial data preparation steps based on the provided
+    configuration dictionary. The steps are:
+    1.  If `input_data` is not found locally, it attempts to download from `data_url`.
+    2.  Converts any Excel files (`.xls`, `.xlsx`) to CSV format.
+    3.  If `parallelism` is enabled and a `shard_input_by_column` is specified,
+        it shards the CSV files into smaller chunks.
+
+    Args:
+        config: A dictionary containing configuration parameters, such as:
+                - `input_data` (str): Path to the input data file(s).
+                - `data_url` (str): URL to download data from if `input_data` is not found.
+                - `input_xls` (list): A list of sheets to convert from Excel files.
+                - `shard_input_by_column` (str): The column to shard by.
+                - `parallelism` (int): The number of parallel processes to use.
+
+    Returns:
+        A list of file paths for the prepared data files.
+
+    Raises:
+        RuntimeError: If no input data is found locally and no `data_url` is provided.
+
+    Examples:
+        >>> # Basic case: local CSV file is found and returned.
+        >>> config = {'input_data': 'my_data.csv'}
+        >>> prepare_input_data(config)
+        ['my_data.csv']
+
+        >>> # Download case: local file not found, download from URL.
+        >>> config = {'data_url': 'http://example.com/data.csv'}
+        >>> prepare_input_data(config)
+        ['./data.csv']
+
+        >>> # XLS conversion: local .xlsx file is converted to CSV.
+        >>> config = {'input_data': 'my_data.xlsx', 'input_xls': ['Sheet1']}
+        >>> prepare_input_data(config)
+        ['my_data_Sheet1.csv']
+
+        >>> # Sharding case: CSV is sharded by a column.
+        >>> config = {
+        ...     'input_data': 'my_data.csv',
+        ...     'shard_input_by_column': 'country',
+        ...     'parallelism': 2
+        ... }
+        >>> prepare_input_data(config)
+        ['my_data-country-00000-of-00002.csv', 'my_data-country-00001-of-00002.csv']
+
+        >>> # Negative case: no input data or URL.
+        >>> config = {}
+        >>> prepare_input_data(config)
+        Traceback (most recent call last):
+            ...
+        RuntimeError: Provide data with --data_url or --input_data.
+    """
+    input_data = config.get('input_data', '')
+    input_files = file_util.file_get_matching(input_data)
+    if not input_files:
+        # Download input data from the URL.
+        data_url = config.get('data_url', '')
+        if not data_url:
+            raise RuntimeError(f'Provide data with --data_url or --input_data.')
+        input_files = download_csv_from_url(data_url, input_data)
+    input_files = convert_xls_to_csv(input_files, config.get('input_xls', []))
+    shard_column = config.get('shard_input_by_column', '')
+    if config.get('parallelism', 0) > 0 and shard_column:
+        return shard_csv_data(
+            input_files,
+            shard_column,
+            config.get('shard_prefix_length', sys.maxsize),
+            True,
+        )
+    return input_files
