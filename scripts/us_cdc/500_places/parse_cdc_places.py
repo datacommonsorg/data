@@ -41,11 +41,10 @@ _FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'config_path', 'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
     'Path to config file')
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'raw_data')
+_MODULE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           'gcs_output')
+_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'input_files')
 _OUTPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'cleaned_csv')
-if not os.path.exists(_OUTPUT_FILE_PATH):
-    os.mkdir(_OUTPUT_FILE_PATH)
 
 
 def read_config_file_from_gcs(file_path):
@@ -236,7 +235,8 @@ def clean_county_data(data):
     """
     Args:
         data: pandas dataframe with county-level data to be cleaned
-    Returns:
+    Returns:if not os.path.exists(_OUTPUT_FILE_PATH):
+    os.mkdir(_OUTPUT_FILE_PATH)
         a dataframe with cleaned county-level data
     """
     try:
@@ -360,6 +360,10 @@ def clean_cdc_places_data(input_file, file_type, sep, release_year):
 def main(_):
     """Main function to generate the cleaned csv file."""
     logging.set_verbosity(2)
+    #Creating output directory if not present
+    if not os.path.exists(_OUTPUT_FILE_PATH):
+        os.mkdir(_OUTPUT_FILE_PATH)
+        logging.info(f"created output directory: {_OUTPUT_FILE_PATH}")
     CONFIG_FILE = read_config_file_from_gcs(_FLAGS.config_path)
     sep = ","
     for file_type in ["County", "City", "ZipCode", "CensusTract"]:
@@ -398,4 +402,5 @@ def main(_):
 
 
 if __name__ == "__main__":
+
     app.run(main)
