@@ -302,27 +302,20 @@ class Downloader:
 
 
 if __name__ == '__main__':
-
     try:
         url_year = datetime.now().year
         downloader = Downloader('tmp_data', url_year)
 
         for year in range(url_year, 2020, -1):
             if year <= datetime.now().year:
-                logging.info(f"Starting download attempt for year: {year}")
+                logging.info(f"Downloading data for year: {year}")
                 try:
                     success = downloader.download_data(year, year - 1)
-
-                    # Try to extract or infer the URL if it's accessible
-                    url = downloader.get_url(year, year - 1) if hasattr(downloader, 'get_url') else 'URL not available'
-
                     if success:
-                        logging.info(f"Successfully downloaded data for year {year} from {url}")
                         break
-                    else:
-                        logging.warning(f"Download failed for year {year} from {url}, continuing with earlier year...")
                 except Exception as e:
-                    logging.fatal(f"Exception during download for year {year}. Error: {e}")
-    except Exception as e:
-        logging.fatal(f"Unexpected error occurred during setup or iteration. Error: {e}")
+                    logging.fatal(
+                        f"Failed to download data for year {year}. Error: {e}")
 
+    except Exception as e:
+        logging.fatal(f"An unexpected error occurred: {e}")
