@@ -16,6 +16,7 @@ geopy
 google-generativeai
 matplotlib
 netCDF4
+protobuf
 rasterio
 rdp
 s2sphere
