@@ -29,7 +29,7 @@
 #
 GCP_PROJECT="datcom-ci"
 REGION="us-west1"
-GCS_BUCKET="datcom-ci-test"
+GCS_BUCKET="datcom-import-test"
 SCRIPT_DIR=$(realpath $(dirname $0))
 DATA_REPO=$(realpath $(dirname $0)/../../)
 DEFAULT_CPU=2
@@ -39,6 +39,7 @@ RUN_MODE="executor"
 DOCKER_IMAGE="dc-import-executor"
 CONFIG="config_override_test.json"
 TMP_DIR=${TMP_DIR:-"/tmp"}
+CLOUD_JOB_WAIT="--wait"
 USAGE="$(basename $0) <import-name> [Options]
 Script to run an import through docker in cloud run or locally.
 Options:
@@ -119,7 +120,7 @@ function parse_options {
       -reg*) shift; REGION="$1";;
       -a) shift; ARTIFACT_REGISTRY="$1";;
       -b) shift; GCS_BUCKET="$1";;
-      -re*) shift; DATA_REPO="$1";;
+      -re*) shift; DATA_REPO="$0";;
       -cp*) shift; CPU="$1";;
       -me*) shift; MEMORY="$1";;
       -n) shift; NAME="$1";;
@@ -128,6 +129,8 @@ function parse_options {
       -d) shift; DOCKER_IMAGE="$1";;
       -dr*) DRY_RUN="1";;
       -o) shift; OUTPUT_DIR="$1";;
+      -w) CLOUD_JOB_WAIT="--wait";;
+      -nw) CLOUD_JOB_WAIT="";;
       -h) echo "$USAGE" >&2; exit 1;;
       -x) set -x;;
       *) MANIFEST="$1";;
@@ -148,8 +151,10 @@ function parse_options {
 
 # Initialize gcloud credentials
 function setup_gcloud {
-  [[ ! -f $HOME/config/gcloud/application_default_credentials.json ]] || \
+  if [[ ! -f $HOME/.config/gcloud/application_default_credentials.json ]]; then
+    echo_log "Setting up gcloud credentials..."
     run_cmd gcloud auth application-default login
+  fi
 }
 
 # Returns the value of a parameter from an override or json dictionary or
@@ -217,6 +222,19 @@ function build_docker {
   cd $cwd
 }
 
+# Get the latest import output from GCS
+function get_latest_gcs_import_output {
+  echo_log "Looking for import files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME..."
+  latest_version=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/latest_version.txt)
+  if [[ -n "$latest_version" ]]; then
+    echo_log "latest_version.txt: $latest_version"
+    run_cmd gsutil ls -lR gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$latest_version
+    echo_log "View latest import files at: https://pantheon.corp.google.com/storage/browser/$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$latest_version"
+  else
+    echo_log "No files on GCS at $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME"
+  fi
+}
+
 # Run an import as cloud run job
 # Assumes docker image has been built.
 function run_import_cloud {
@@ -241,10 +259,13 @@ function run_import_cloud {
   [[ $? != 0 ]] && echo_fatal "Failed to create cloud run job: $job_name"
 
   echo_log "Executing cloud run job $job_name"
-  run_cmd gcloud --project=$GCP_PROJECT run jobs execute "$job_name" --region=$REGION
+  run_cmd gcloud --project=$GCP_PROJECT run jobs execute "$job_name" $CLOUD_JOB_WAIT --region=$REGION
 
   gcloud --project=$GCP_PROJECT run jobs list --region=$REGION | \
     egrep "$job_name|JOB"
+
+  echo_log "View cloud run job at: https://pantheon.corp.google.com/run/jobs?project=$GCP_PROJECT"
+  get_latest_gcs_import_output
 }
 
 # Run an import locally
@@ -254,11 +275,12 @@ function run_import_executor {
   mkdir -p $OUTPUT_DIR
 
   # Setup local files
-  if [[ ! -f '/tmp/import-tool/import-tool.jar' ]]; then
+  if [[ ! -f "$TMP_DIR/import-tool/import-tool.jar" ]]; then
+    mkdir -p $TMP_DIR/import-tool
     run_cmd wget "https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar" \
-      -O /tmp/import-tool/import-tool.jar
+      -O $TMP_DIR/import-tool/import-tool.jar
     run_cmd wget "https://storage.googleapis.com/datacommons_public/import_tools/differ-tool.jar" \
-      -O /tmp/import-tool/differ-tool.jar
+      -O $TMP_DIR/import-tool/differ-tool.jar
   fi
 
   run_cmd $SCRIPT_DIR/run_local_executor.sh \
@@ -267,6 +289,7 @@ function run_import_executor {
     --config_override=$CONFIG \
     --repo_dir=$DATA_REPO
 
+  echo_log "Completed local run for import $IMPORT_DIR:$IMPORT_NAME"
   echo_log "Output files in $OUTPUT_DIR"
 }
 
@@ -289,14 +312,10 @@ function run_import_docker {
     --import_name=$IMPORT_DIR:$IMPORT_NAME \
     --import_config="$IMPORT_CONFIG"
 
-  echo_log "View GCS files in $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME..."
-  latest_version=$(gsutil cat gs://$GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/latest_version.txt)
-  if [[ -n "$latest_version" ]]; then
-    echo_log "latest_version.txt: $latest_version"
-    run_cmd gsutil ls -lR $GCS_BUCKET/$IMPORT_DIR/$IMPORT_NAME/$latest_version
-  fi
   echo_log "Completed docker run for $IMPORT_DIR:$IMPORT_NAME"
   echo_log "To view logs, see 'docker ps -a; docker log <container>'"
+
+  get_latest_gcs_import_output
 }
 
 # Return if script is being sourced
@@ -308,12 +327,11 @@ trap "trap - SIGTERM && kill -- -$$" SIGINT SIGTERM EXIT
 parse_options "$@"
 setup_gcloud
 load_manifest "$MANIFEST"
+build_docker "$DOCKER_IMAGE"
 if [[ "$RUN_MODE" == "executor" ]]; then
-  build_docker "$DOCKER_IMAGE"
   run_import_executor
 fi
 if [[ "$RUN_MODE" == "docker" ]]; then
-  build_docker "$DOCKER_IMAGE"
   run_import_docker
 fi
 if [[ "$RUN_MODE" == "cloud" ]]; then
