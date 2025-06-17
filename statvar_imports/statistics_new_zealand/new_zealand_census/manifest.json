@@ -1,0 +1,29 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "New_Zealand_Census",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.stats.govt.nz/large-datasets/csv-files-for-download/",
+      "provenance_description": "Population census and health statistics for New Zealand at country, district and city level",
+      "scripts": [
+        "download_script.py", 
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/Summary-figures-for-the-NZ-population-1991-2023.xlsx --pv_map=national_pvmap.csv --config_file=national_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/nzl_national_output", 
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/snpe-at30june21-population-table.csv --pv_map=subnational_pvmap.csv --config_file=subnational_metadata.csv --places_resolved_csv=subnational_places_resolved_csv.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/nzl_subnational_output"],
+      "source_files": [
+        "input_files/*"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/nzl_national_output.tmcf",
+          "cleaned_csv": "output_files/nzl_national_output.csv"
+        },
+        {
+          "template_mcf": "output_files/nzl_subnational_output.tmcf",
+          "cleaned_csv": "output_files/nzl_subnational_output.csv"
+        }
+      ],
+      "cron_schedule": "0 06 * * 2"
+    }
+  ]
+}
+

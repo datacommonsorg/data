@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "BIS_CentralBankPolicyRate",
+        "curator_emails": [
+          "support@datacommons.org"
+        ],
+        "provenance_url": "https://data.bis.org/topics/CBPOL/data",
+        "provenance_description": "Bank for International Settlements (2025), Central bank policy rates, BIS WS_CBPOL 1.0 (data set)",
+        "scripts": [
+          "../../../util/download_util_script.py --download_url=https://data.bis.org/static/bulk/WS_CBPOL_csv_flat.zip --output_folder=input_file/ --unzip=True",
+          "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_file/*.csv --pv_map=central_bank_policy_rate_pvmap.csv --config_file=central_bank_policy_rate_metadata.csv --places_resolved_csv=central_bank_policy_rate_places_resolved_csv.csv --output_path=output/central_bank_policy_rate"
+        ],
+        "source_files": [
+         "input_file/*"
+      ],
+        "import_inputs": [
+          {
+            "template_mcf": "output/central_bank_policy_rate.tmcf",
+            "cleaned_csv": "output/central_bank_policy_rate.csv"
+          }
+        ],
+        "cron_schedule": "0 05 * * 6"
+      }
+    ]
+  }

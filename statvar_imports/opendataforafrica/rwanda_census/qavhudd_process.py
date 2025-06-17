@@ -24,7 +24,7 @@ import pandas as pd
 import numpy as np
 
 # Reading the input file to make changes.
-df_input = pd.read_csv("input_files/qavhudd.csv")
+df_input = pd.read_csv("gcs_output/input_files/qavhudd.csv")
 
 #  Creating columns to keep all the places to be mapped under one column
 df_input["TMP_PLC"] = np.where((df_input["ID_DISTRICTS"]=="D"),
@@ -43,5 +43,5 @@ df_input=df_input[["PROVINCE","ID_PROVINCE","REGIONID_PROVINCE",
                    "TIME_PERIOD","OBS_VALUE"]]
 
 # Writing to output
-df_input.to_csv("input_files/qavhudd_modified.csv",
+df_input.to_csv("gcs_output/input_files/qavhudd_modified.csv",
                 index=False)

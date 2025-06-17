@@ -22,10 +22,6 @@ import urllib.request
 from google.cloud import storage  # For GCS integration
 from absl import flags, app, logging  # Use absl for flag handling
 
-# Configure logging to show messages in the terminal
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
-
 # Define flags
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('config_path', '',
