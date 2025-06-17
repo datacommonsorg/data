@@ -6,6 +6,12 @@ key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
 2017,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2017,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
 2019,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2019,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
 2021,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2021,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2022,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2022,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2023,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2023,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2024,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2024,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2025,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2025,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2026,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2026,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2027,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2027,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
 Male,gender,Male,race,"""""",ethnicity,"""""",,,,,,,,
 Female,gender,Female,race,"""""",ethnicity,"""""",,,,,,,,
 Both sexes,gender,"""""",race,"""""",ethnicity,"""""",,,,,,,,
