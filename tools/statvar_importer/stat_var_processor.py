@@ -66,6 +66,9 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
 import eval_functions
+from utils import (_capitalize_first_char, _get_observation_date_format,
+                   _get_observation_period_for_date, _pvs_has_any_prop,
+                   _str_from_number, prepare_input_data)
 import file_util
 import config_flags
 import data_annotator
@@ -93,14 +96,6 @@ from download_util import download_file_from_url
 from statvar_dcid_generator import get_statvar_dcid
 
 _FLAGS = flags.FLAGS
-
-
-# Local utility functions
-def _capitalize_first_char(string: str) -> str:
-    """Returns a string with the first letter capitalized."""
-    if not string or not isinstance(string, str):
-        return string
-    return string[0].upper() + string[1:]
 
 
 class StatVarsMap:
@@ -2646,205 +2641,6 @@ def _is_place_dcid(place: str) -> bool:
                     return False
         return '/' in place
     return False
-
-
-def _str_from_number(number: Union[int, float],
-                     precision_digits: int = None) -> str:
-    """Returns the number converted to string.
-
-  Ints and floats with 0 decimal parts get int strings. Floats get precision
-  digits.
-  """
-    # Check if number is an integer or float without any decimals.
-    if int(number) == number:
-        number_int = int(number)
-        return f'{number_int}'
-    # Return float rounded to precision digits.
-    if precision_digits:
-        number = round(number, precision_digits)
-    return f'{number}'
-
-
-def _pvs_has_any_prop(pvs: dict, columns: list = None) -> bool:
-    if pvs and columns:
-        for prop, value in pvs.items():
-            if value and prop in columns:
-                return True
-    return False
-
-
-def _get_observation_period_for_date(date_str: str,
-                                     default_period: str = '') -> str:
-    '''Returns the observation period for date string.'''
-    date_parts = date_str.count('-')
-    if date_parts == 0:
-        return 'P1Y'
-    if date_parts == 1:
-        return 'P1M'
-    if date_parts == 2:
-        return 'P1D'
-    return default_period
-
-
-def _get_observation_date_format(date_str: str, obs_period: str = '') -> str:
-    '''Returns the date format for the given date and observation periodn.'''
-    # Get the date format based on number of tokens in date string.
-    date_format = '%Y'
-    date_tokens = date_str.split('-')
-    num_tokens = len(date_tokens)
-    if num_tokens > 1:
-        date_format += '-%m'
-    if num_tokens > 2:
-        date_format += '-%d'
-
-    return date_format
-
-
-def _get_filename_for_url(url: str, path: str) -> str:
-    """Returns the filename to be used for the URL to be downloaded.
-
-    If there is an existing file of the name, adds a unique suffix.
-    """
-    # Remove URL arguments separated by '?' or '#'
-    url_path = url.split('?', maxsplit=1)[0].split('#', maxsplit=1)[0]
-    # Get the last component URL as the filename
-    filename = url_path[url_path.rfind('/') + 1:]
-    filename, ext = os.path.splitext(filename)
-    existing_files = file_util.file_get_matching(os.path.join(path, '*'))
-    count = 0
-    file = os.path.join(path, filename + ext)
-    while file in existing_files:
-        count += 1
-        file = os.path.join(path, f'{filename}-{count}{ext}')
-    return file
-
-
-def download_csv_from_url(urls: list, download_files: list) -> list:
-    """Download data from the URL into the given file.
-
-  Returns a list of files downloaded.
-  """
-    data_files = []
-    if not isinstance(urls, list):
-        urls = [urls]
-    if download_files and not isinstance(download_files, list):
-        download_files = [download_files]
-    if download_files:
-        data_path = os.path.dirname(download_files[0])
-    else:
-        data_path = './'
-    for index in range(len(urls)):
-        url = urls[index]
-        if download_files and index < len(download_files):
-            filename = download_files[index]
-        else:
-            filename = _get_filename_for_url(url, data_path)
-        logging.info(f'Downloading {url} into {filename}')
-        output_file = download_file_from_url(url=url,
-                                             output_file=filename,
-                                             overwrite=False)
-        if output_file:
-            data_files.append(output_file)
-    logging.info(f'Downloaded {urls} into {data_files}.')
-    return data_files
-
-
-def shard_csv_data(
-    files: list,
-    column: str = None,
-    prefix_len: int = sys.maxsize,
-    keep_existing_files: bool = True,
-) -> list:
-    """Shard CSV file by unique values in column.
-
-  Returns the list of output files.
-  """
-    logging.info(
-        f'Loading data files: {files} for sharding by column: {column}...')
-    dfs = []
-    for file in files:
-        dfs.append(
-            pd.read_csv(file_util.FileIO(file), dtype=str, na_filter=False))
-    df = pd.concat(dfs)
-    if not column:
-        # Pick the first column.
-        column = list(df.columns)[0]
-    # Convert nan to empty string so sharding doesn't drop any rows.
-    # df[column] = df[column].fillna('')
-    # Get unique shard prefix values from column.
-    shards = list(
-        sorted(set([str(x)[:prefix_len] for x in df[column].unique()])))
-    if file_util.file_is_local(file):
-        (file_prefix, file_ext) = os.path.splitext(file)
-    else:
-        fd, file_prefix = tempfile.mkstemp()
-        file_ext = '.csv'
-    column_suffix = re.sub(r'[^A-Za-z0-9_-]', '-', column)
-    output_path = f'{file_prefix}-{column_suffix}'
-    logging.info(f'Sharding {files} into {len(shards)} shards by column'
-                 f' {column}:{shards} into {output_path}-*.csv.')
-    output_files = []
-    num_shards = len(shards)
-    for shard_index in range(num_shards):
-        shard_value = shards[shard_index]
-        output_file = f'{output_path}-{shard_index:05d}-of-{num_shards:05d}.csv'
-        logging.info(
-            f'Sharding by {column}:{shard_value} into {output_file}...')
-        if not os.path.exists(output_file) or not keep_existing_files:
-            if shard_value:
-                df[df[column].str.startswith(shard_value)].to_csv(output_file,
-                                                                  index=False)
-            else:
-                df[df[column] == ''].to_csv(output_file, index=False)
-        output_files.append(output_file)
-    return output_files
-
-
-def convert_xls_to_csv(filenames: list, sheets: list) -> list:
-    """Returns a list of csv files extracted from the sheets within the xls."""
-    csv_files = []
-    for file in filenames:
-        filename, ext = os.path.splitext(file)
-        logging.info(f'Converting {filename}{ext} into csv for {sheets}')
-        if '.xls' in ext:
-            # Convert the xls file into csv file per sheet.
-            xls = pd.ExcelFile(file)
-            for sheet in xls.sheet_names:
-                # Read each sheet as a Pandas DataFrame and save it as csv
-                if not sheets or sheet in sheets:
-                    df = pd.read_excel(xls, sheet_name=sheet, dtype=str)
-                    csv_filename = re.sub('[^A-Za-z0-9_.-]+', '_',
-                                          f'{filename}_{sheet}.csv')
-                    df.to_csv(csv_filename, index=False)
-                    logging.info(
-                        f'Converted {file}:{sheet} into csv {csv_filename}')
-                    csv_files.append(csv_filename)
-        else:
-            csv_files.append(file)
-    return csv_files
-
-
-def prepare_input_data(config: dict) -> bool:
-    """Prepare the input data, download and shard if needed."""
-    input_data = config.get('input_data', '')
-    input_files = file_util.file_get_matching(input_data)
-    if not input_files:
-        # Download input data from the URL.
-        data_url = config.get('data_url', '')
-        if not data_url:
-            raise RuntimeError(f'Provide data with --data_url or --input_data.')
-            return False
-        input_files = download_csv_from_url(data_url, input_data)
-    input_files = convert_xls_to_csv(input_files, config.get('input_xls', []))
-    shard_column = config.get('shard_input_by_column', '')
-    if config.get('parallelism', 0) > 0 and shard_column:
-        return shard_csv_data(
-            input_files,
-            shard_column,
-            config.get('shard_prefix_length', sys.maxsize),
-            True,
-        )
-    return input_files
 
 
 def parallel_process(
