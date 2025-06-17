@@ -1,10 +1,8 @@
 import sys
-import requests
 import pandas as pd
 import config
 import os
 from absl import logging, app
-from retry import retry
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/')) 
@@ -17,6 +15,7 @@ def main(_):
     for page_num in range(1, 3):  
         api_url = f"{config.url}&pageno={page_num}"
         response = _retry_method(api_url, None,  3, 5,2)
+
         response_data = response.json()
 
         if response_data:
