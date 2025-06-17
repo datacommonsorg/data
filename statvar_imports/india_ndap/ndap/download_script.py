@@ -25,7 +25,7 @@ def main(_):
                 a = a=i['StateName'],i['Year'].split(",")[-1].strip(),i['GENDER'],i['I7375_4']['TotalPopulationWeight'],i['Year'].split(",")[-1].strip(),i['Year']
                 all_data.append(a)
         else:
-            logging.info(f"Failed to retrieve data from page {page_num}. Stopping.")
+            logging.fatal(f"Failed to retrieve data from page {page_num}. Stopping.")
             break  
 
     if all_data:
