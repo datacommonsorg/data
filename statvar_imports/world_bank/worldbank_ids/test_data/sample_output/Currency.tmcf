@@ -1,0 +1,8 @@
+Node: E:Currency->E0
+observationDate: C:Currency->observationDate
+observationAbout: C:Currency->observationAbout
+value: C:Currency->value
+variableMeasured: C:Currency->variableMeasured
+unit: C:Currency->unit
+measurementMethod: C:Currency->measurementMethod
+typeOf: dcs:StatVarObservation

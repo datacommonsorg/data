@@ -1,0 +1,84 @@
+syntax = "proto2";
+
+package protos;
+
+message IncentiveSummary {
+  optional ExtractionConfig extraction_config = 1;
+  optional Incentive incentive = 2;
+  optional GroundingInfo grounding_info = 3;
+}
+
+message ExtractionConfig {
+  optional string url = 1;
+  optional Locale locale = 2;
+  optional IncentiveCategory incentive_category = 3;
+}
+
+message Locale {
+  optional string language = 1;
+  optional string country_iso = 2;
+  optional string admin_area_1 = 3;
+}
+
+enum IncentiveCategory {
+  INCENTIVE_CATEGORY_UNSPECIFIED = 0;
+  INCENTIVE_CATEGORY_SOLAR = 1;
+  INCENTIVE_CATEGORY_HEAT_PUMP = 2;
+}
+
+message Incentive {
+  optional PurchaseType purchase_type = 1;
+  optional RedemptionType redemption_type = 2;
+  optional Money maximum_amount = 3;
+  optional string name = 4;
+  optional string provider_name = 5;
+  optional float percentage_of_costs_covered = 6;
+  optional PerUnitAmount per_unit_amount = 7;
+  optional TaxWaiverType tax_waiver_type = 8;
+}
+
+enum PurchaseType {
+  PURCHASE_TYPE_UNSPECIFIED = 0;
+  PURCHASE_TYPE_INSTALLATION = 1;
+  PURCHASE_TYPE_CONSUMPTION = 2;
+}
+
+enum RedemptionType {
+  REDEMPTION_TYPE_UNSPECIFIED = 0;
+  REDEMPTION_TYPE_REBATE_OR_SUBSIDY = 1;
+  REDEMPTION_TYPE_LOAN = 2;
+  REDEMPTION_TYPE_TAX_WAIVER = 3;
+  REDEMPTION_TYPE_TAX_CREDIT = 4;
+  REDEMPTION_TYPE_TAX_DEDUCTION = 5;
+}
+
+message Money {
+  optional string currency_code = 1;
+  optional int64 units = 2;
+  optional int32 nanos = 3;
+}
+
+message PerUnitAmount {
+  optional Money amount = 1;
+  optional CreditUnits unit = 2;
+}
+
+enum CreditUnits {
+  CREDIT_UNITS_UNSPECIFIED = 0;
+  CREDIT_UNITS_KILOWATT_HOURS = 1;
+  CREDIT_UNITS_KILOWATTS = 2;
+  CREDIT_UNITS_WATTS = 3;
+}
+
+enum TaxWaiverType {
+  TAX_WAIVER_TYPE_UNSPECIFIED = 0;
+  TAX_WAIVER_TYPE_PARTIAL_REDUCTION = 1;
+  TAX_WAIVER_TYPE_SALES = 2;
+  TAX_WAIVER_TYPE_PROPERTY = 3;
+}
+
+message GroundingInfo {}
+
+message IncentiveSummaries {
+  repeated IncentiveSummary incentive_summaries = 1;
+}

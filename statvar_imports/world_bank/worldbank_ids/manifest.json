@@ -1,0 +1,41 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "WorldBank_IDS",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://databank.worldbank.org/source/international-debt-statistics",
+            "provenance_description": "World Bank principal, currency composition, interest and disbursed and outstanding of debt for different countries.",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/currency_input.csv --pv_map=configs/currency_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/currency/currency --config_file=common_metadata.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/interest_input.csv --pv_map=configs/interest_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/interest/interest_output --config_file=common_metadata.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/disbursed_input.csv --pv_map=configs/disbursed_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/disbursed/disbursed_output --config_file=common_metadata.csv",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/principal_input.csv --pv_map=configs/principal_pvmap.csv,country:observationAbout.csv,counterpart_area:InputlendingEntity.csv --output_path=output/principal/principal_output --config_file=common_metadata.csv"
+            ],
+            "source_files": [
+                "input_files/*"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/currency/currency.tmcf",
+                    "cleaned_csv": "output/currency/currency.csv"
+                },
+                {
+                    "template_mcf": "output/interest/interest_output.tmcf",
+                    "cleaned_csv": "output/interest/interest_output.csv"
+                },
+                {
+                    "template_mcf": "output/principal/principal_output.tmcf",
+                    "cleaned_csv": "output/principal/principal_output.csv"
+                },
+                {
+                    "template_mcf": "output/disbursed/disbursed_output.tmcf",
+                    "cleaned_csv": "output/disbursed/disbursed_output.csv"
+                }
+            ],
+            "cron_schedule": "00 11 1,15 * *"
+        }
+    ]
+}
