@@ -51,6 +51,7 @@ def download_with_retry(url):
     Raises:
         requests.exceptions.RequestException: If the request fails after all retry attempts.
     """
+    # Log the attempt to access the URL
     logging.info(f"Trying to access url : {url}")
     response=requests.get(url)
     response.raise_for_status()
@@ -68,16 +69,22 @@ def extract_all_table_data(url):
               and each row is a list of cell strings. Returns None if no tables are found.
     """
     try:
+        # Download the page content with retries
         response = download_with_retry(url)
+        # Raise an exception for bad status codes
         response.raise_for_status()
+        # Parse the HTML content using BeautifulSoup
         soup = BeautifulSoup(response.content, 'html.parser')
         with open(file_path, 'w') as file:
             file.write(str(soup))
 
+        # Find all table elements in the parsed HTML
         all_tables = soup.find_all('table')
-
+        # Check if any tables were found
         if all_tables:
+            # Initialize a list to hold all table data
             table_data = []
+            # Iterate over each found table
             for index, table in enumerate(all_tables):
                 rows = table.find_all('tr')
                 table_rows = []
@@ -87,6 +94,7 @@ def extract_all_table_data(url):
                     table_rows.append(row_data)
                 table_data.append(table_rows)
 
+            # Write the extracted table data to a CSV file
             with open(file_path2, 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile)
                 for index, table in enumerate(table_data):
@@ -104,9 +112,12 @@ def main():
     """
     Main function for data extraction, processing, and saving.
     """
+    # Log the start of the process
     logging.info("Process starts")
+    # Extract all tables from the specified URL
     all_tables_data = extract_all_table_data(url)
 
+    # Check if table data was successfully extracted
     if all_tables_data:
         all_dfs = []
         for index, table in enumerate(all_tables_data):
@@ -119,5 +130,6 @@ def main():
         transposed_df = df.transpose()
         transposed_df.to_csv('input_files/final_data.csv', header=False)
 if __name__ == "__main__" : 
+    # Set the logging verbosity to display info-level messages
     logging.set_verbosity(1)
     main()
