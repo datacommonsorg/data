@@ -56,8 +56,7 @@ def download_csv():
         logging.info(f"All files downloaded to {INPUT_DIR}")
 
     except Exception as e:
-        logging.fatal(f"Failed to download IrelandCensus data: {e}")
-        return None
+        logging.fatal(f"Failed to download Ireland Census data: {e}")
 
 
 def main(argv):
