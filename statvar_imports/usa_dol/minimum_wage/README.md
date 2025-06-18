@@ -12,6 +12,7 @@
 
 
 #### Download : 
+
 `python3 usa_dol_wages_download_script.py`
 
 - Run the download script: python3 usa_dol_wages_download_script.py. Upon completion, you'll find two   new directories: source_files, which holds the original downloaded content, and input_files, which contains the cleaned and finalized data. The input_files folder should be considered as your primary input

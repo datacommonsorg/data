@@ -24,6 +24,7 @@ from absl import logging
 from bs4 import BeautifulSoup
 from retry import retry
 
+# URL of the data source
 url = "https://www.dol.gov/agencies/whd/state/minimum-wage/history"
 source_folder = "source_files" # For raw downloaded files.
 input_folder = "input_files"   # For processed, final output files.
@@ -100,6 +101,9 @@ def extract_all_table_data(url):
         logging.fatal(f"Error fetching URL: {e}")
 
 def main():
+    """
+    Main function for data extraction, processing, and saving.
+    """
     logging.info("Process starts")
     all_tables_data = extract_all_table_data(url)
 
