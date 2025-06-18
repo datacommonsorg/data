@@ -7,5 +7,5 @@ Sex,measuredProperty,count,populationType,Person
 Male,gender,Male,,
 Female,gender,Female,,
 VALUE,value,+AHs-Number+AH0-,,
-Actual change since previous census,+ACM-ignore,ignore,,
-Percentage change since previous census,+ACM-ignore,ignore,,
+Actual change since previous census,+ACM-ignore,Not_required_for_the_dataset,,
+Percentage change since previous census,+ACM-ignore,Not_required_for_the_dataset,,

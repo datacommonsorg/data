@@ -41,24 +41,104 @@ or
 
 Execute the script inside the folder "data/statvar_importer/ireland_census/"
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/births.csv --pv_map=irl_birth_pvmap.csv --config_file=irl_birth_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/irl_birth_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py 
+--input_data=input_files/births.csv 
+--pv_map=irl_birth_pvmap.csv
+--config_file=irl_birth_metadata.csv
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--output_path=output_files/irl_birth_output
+```
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/deaths.csv --pv_map=irl_deaths_pvmap.csv --config_file=irl_deaths_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/irl_death_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py 
+--input_data=input_files/deaths.csv 
+--pv_map=irl_deaths_pvmap.csv 
+--config_file=irl_deaths_metadata.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--output_path=output_files/irl_death_output
+```
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/deaths_from_external_causes.csv --pv_map=irl_causeofdeath_pvmap.csv --config_file=irl_causeofdeath_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=places_resolver.csv --output_path=output_files/irl_external_cause_of_death_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py 
+--input_data=input_files/deaths_from_external_causes.csv 
+--pv_map=irl_causeofdeath_pvmap.csv 
+--config_file=irl_causeofdeath_metadata.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--places_resolved_csv=places_resolver.csv 
+--output_path=output_files/irl_external_cause_of_death_output
+```
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/life_expectancy.csv --pv_map=irl_lifeexpectancy_pvmap.csv --config_file=irl_lifeexpectancy_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/irl_life_expectancy_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py 
+--input_data=input_files/life_expectancy.csv 
+--pv_map=irl_lifeexpectancy_pvmap.csv 
+--config_file=irl_lifeexpectancy_metadata.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf -
+-output_path=output_files/irl_life_expectancy_output
+```
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/suicides.csv --pv_map=irl_suicide_pvmap.csv --config_file=irl_suicide_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/irl_suicide_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py 
+--input_data=input_files/suicides.csv 
+--pv_map=irl_suicide_pvmap.csv 
+--config_file=irl_suicide_metadata.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--output_path=output_files/irl_suicide_output
+```
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/suicides_with_aa1_aa2.csv --pv_map=irl_aa1_aa2_suicide_pvmap.csv --config_file=irl_aa1_aa2_suicide_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=places_resolver.csv --output_path=output_files/irl_aa1_aa2_suicide_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py 
+--input_data=input_files/suicides_with_aa1_aa2.csv 
+--pv_map=irl_aa1_aa2_suicide_pvmap.csv 
+--config_file=irl_aa1_aa2_suicide_metadata.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--places_resolved_csv=places_resolver.csv 
+--output_path=output_files/irl_aa1_aa2_suicide_output
+```
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/population_by_age_gender.csv --pv_map=irl_population_by_age_gender_pvmap.csv --config_file=irl_population_by_age_gender_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/irl_population_by_age_gender_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py 
+--input_data=input_files/population_by_age_gender.csv 
+--pv_map=irl_population_by_age_gender_pvmap.csv 
+--config_file=irl_population_by_age_gender_metadata.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--output_path=output_files/irl_population_by_age_gender_output
+```
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/population_by_religion.csv --pv_map=irl_population_by_religion_pvmap.csv --config_file=irl_population_by_religion_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=places_resolver_religion.csv --output_path=output_files/irl_population_by_religion_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py
+ --input_data=input_files/population_by_religion.csv 
+ --pv_map=irl_population_by_religion_pvmap.csv 
+--config_file=irl_population_by_religion_metadata.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=places_resolver_religion.csv 
+--output_path=output_files/irl_population_by_religion_output
+```
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/population_at_each_census.csv --pv_map=irl_population_at_each_census_pvmap.csv --config_file=irl_population_at_each_census_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=places_resolver_each_census.csv --output_path=output_files/irl_population_at_each_census_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py 
+--input_data=input_files/population_at_each_census.csv 
+--pv_map=irl_population_at_each_census_pvmap.csv 
+--config_file=irl_population_at_each_census_metadata.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=places_resolver_each_census.csv 
+--output_path=output_files/irl_population_at_each_census_output
+```
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/population_by_gender.csv --pv_map=irl_population_by_gender_pvmap.csv --config_file=irl_population_by_gender_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=places_resolver_gender.csv --output_path=output_files/irl_population_by_gender_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py 
+--input_data=input_files/population_by_gender.csv 
+--pv_map=irl_population_by_gender_pvmap.csv 
+--config_file=irl_population_by_gender_metadata.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=places_resolver_gender.csv 
+--output_path=output_files/irl_population_by_gender_output
+```
 
-`python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/population_by_employment.csv --pv_map=irl_aa1_aa2_employment_pvmap.csv --config_file=irl_aa1_aa2_employment_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=places_resolver.csv --output_path=output_files/irl_aa1_aa2_employment_output`
+```
+python3 ../../tools/statvar_importer/stat_var_processor.py 
+--input_data=input_files/population_by_employment.csv 
+--pv_map=irl_aa1_aa2_employment_pvmap.csv 
+--config_file=irl_aa1_aa2_employment_metadata.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--places_resolved_csv=places_resolver.csv 
+--output_path=output_files/irl_aa1_aa2_employment_output
+```
