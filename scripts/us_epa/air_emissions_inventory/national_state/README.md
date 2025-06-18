@@ -54,21 +54,26 @@ or
 
 The below script will download the data.
 
-`python3 download.py --config_path=us_epa/config.json`
+`python3 download.py --config_path=unresolved_mcf/us_epa/config.json`
 
-Note: The url contains a format of year and date that can't be predicted and changed dynamically. Hence the latest url has to be hardcoded in the config.json file and kept in the gcp bucket. The bucket is hard coded in the code (i.e. unresolved_mcf)
+Note on Configuration Management for Data Source URLs
 
-Please provide the config.json in the following gcs path: 
-unresolved_mcf/us_epa/config.json
+To ensure consistent access to the most current data, a dedicated configuration file, config.json, will be maintained within our Google Cloud Storage (GCS) environment. This approach addresses the challenge posed by source URLs that contain dynamic and unpredictable year and date components, precluding their programmatic generation.
 
-Sample content of the config.json:
+Content Structure:
+The config.json file will adhere to a JSON array format, with each object in the array defining a download_path attribute. This attribute will contain the fully qualified URL for the latest available National and State-level data files.
+
+Example config.json Content:
+
+JSON
 
 [
-{"download_path":"https://www.epa.gov/system/files/other-files/2025-04/national_tier1_caps_21feb2025.xlsx"},
-{"download_path":"https://www.epa.gov/system/files/other-files/2025-04/state_tier1_21feb2005_ktons.xlsx"}
+  {"download_path": "https://www.epa.gov/system/files/other-files/2025-04/national_tier1_caps_21feb2025.xlsx"},
+  {"download_path": "https://www.epa.gov/system/files/other-files/2025-04/state_tier1_21feb2005_ktons.xlsx"}
 ]
 
-The config.json file basicall contains the current urls of national and state data to be downloaded.
+Maintenance:
+This configuration mechanism requires manual updates to the config.json file whenever the source URLs for the National or State data undergo revision, thereby ensuring the application always references the latest datasets.
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
 
