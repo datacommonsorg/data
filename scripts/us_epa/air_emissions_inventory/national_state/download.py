@@ -28,7 +28,7 @@ flags.DEFINE_string('config_path', '',
                     'Path to the configuration file in the GCS bucket.')
 
 # Hardcoded GCS bucket name
-GCS_BUCKET_NAME = "datcom-csv"
+GCS_BUCKET_NAME = "unresolved_mcf"
 
 # Download path for files
 _DOWNLOAD_PATH = os.path.join(os.path.dirname(__file__), 'input_files')
