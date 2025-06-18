@@ -63,6 +63,8 @@ To ensure consistent access to the most current data, a dedicated configuration 
 Content Structure:
 The config.json file will adhere to a JSON array format, with each object in the array defining a download_path attribute. This attribute will contain the fully qualified URL for the latest available National and State-level data files.
 
+The config_path parameter designates a Google Cloud Storage (GCS) location. It should be provided as the bucket and object path (e.g., my-bucket/path/to/config.json), without the gs:// prefix. The system will automatically prepend the gs:// scheme internally when accessing the resource."
+
 Example config.json Content:
 
 JSON
