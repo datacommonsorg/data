@@ -1,0 +1,8 @@
+Node: E:Interest->E0
+observationDate: C:Interest->observationDate
+observationAbout: C:Interest->observationAbout
+value: C:Interest->value
+measurementMethod: C:Interest->measurementMethod
+variableMeasured: C:Interest->variableMeasured
+unit: USDollar
+typeOf: dcs:StatVarObservation
