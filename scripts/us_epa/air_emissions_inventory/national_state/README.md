@@ -54,12 +54,21 @@ or
 
 The below script will download the data.
 
-`python3 download.py --config_path=s_epa/config.json`
+`python3 download.py --config_path=us_epa/config.json`
 
 Note: The url contains a format of year and date that can't be predicted and changed dynamically. Hence the latest url has to be hardcoded in the config.json file and kept in the gcp bucket. The bucket is hard coded in the code (i.e. unresolved_mcf)
 
 Please provide the config.json in the following gcs path: 
-datcom-csv/epa_us_air_pollutant_emission_trends_national_and_state/config.json
+unresolved_mcf/us_epa/config.json
+
+Sample content of the config.json:
+
+[
+{"download_path":"https://www.epa.gov/system/files/other-files/2025-04/national_tier1_caps_21feb2025.xlsx"},
+{"download_path":"https://www.epa.gov/system/files/other-files/2025-04/state_tier1_21feb2005_ktons.xlsx"}
+]
+
+The config.json file basicall contains the current urls of national and state data to be downloaded.
 
 The below script will clean the data, Also generate final csv, mcf and tmcf files.
 
