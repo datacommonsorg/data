@@ -151,6 +151,27 @@ you import modules and run tests, as below.
 
     - `dc-data-py-test`
 
+###### Running a Specific Test File
+
+To run a specific test file, you may need to set the `PYTHONPATH` environment variable to help Python locate the required modules.
+
+First, ensure your virtual environment is active:
+```bash
+# source .env/bin/activate
+```
+
+Then, run the test. A common practice is to add the project root (`.`) to the `PYTHONPATH`. You may also need to add other directories that contain modules imported directly by name (e.g. `import my_module` instead of `from my_package import my_module`).
+
+The general command structure is:
+```bash
+PYTHONPATH=path1:path2:... python3 -m unittest -v path/to/your/test_file.py
+```
+
+For example, to run a test within `tools/statvar_importer`, you would run the following command:
+```bash
+PYTHONPATH=. python3 -m unittest -v tools/statvar_importer/mcf_filter_test.py
+```
+
 ##### Guidelines
 
 *   Any additional package required must be specified in the `requirements_all.txt`
