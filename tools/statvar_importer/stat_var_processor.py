@@ -66,7 +66,8 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
 import eval_functions
-from utils import (_capitalize_first_char, _get_observation_date_format,
+from utils import (_capitalize_first_char, _is_place_dcid,
+                   _get_observation_date_format,
                    _get_observation_period_for_date, _pvs_has_any_prop,
                    _str_from_number, prepare_input_data)
 import file_util
@@ -2627,20 +2628,6 @@ class StatVarDataProcessor:
         if self._config.get('generate_tmcf', True):
             outputs.append(output_path + '.tmcf')
         return outputs
-
-
-def _is_place_dcid(place: str) -> bool:
-    """Returns True if the input string is a dcid without extra characters."""
-    if place and isinstance(place, str):
-        # Check if all characters are alpha or digits.
-        if place.startswith('dcid:') or place.startswith('dcs:'):
-            return True
-        for c in place:
-            if not c.isalnum():
-                if c != '/' and c != ':' and c != '_':
-                    return False
-        return '/' in place
-    return False
 
 
 def parallel_process(
