@@ -1,16 +1,34 @@
-import sys
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 20 ('License');
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#           https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an 'AS IS' BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# How to run the script to process  the files:
+# python3 download_and_process.py 
 import os
-import subprocess
+import sys
 import pandas as pd
+from absl import app 
 from absl import logging
 
-# Get the directory of the current script
-current_script_dir = os.path.dirname(os.path.abspath(__file__))
-util_dir_unnormalized = os.path.join(current_script_dir, '..', '..', 'util')
-resolved_util_dir = os.path.abspath(util_dir_unnormalized)
 
-sys.path.append(resolved_util_dir)
+_CODEDIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, _CODEDIR)
+sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
+
+from download_util_script import download_file
+
 logging.set_verbosity(logging.INFO)
+
 
 download_configs = [{
     "url":
@@ -24,14 +42,6 @@ download_configs = [{
         "ncses_employed_female.csv"
 }]
 
-# Construct the full path to the download_util_script.py
-download_script_path = os.path.join(resolved_util_dir,
-                                    'download_util_script.py')
-
-# Ensure the download script exists before proceeding
-if not os.path.exists(download_script_path):
-    logging.fatal(f"Error: Download script not found at {download_script_path}")
-    sys.exit(1)
 
 # data cleaning function
 
@@ -100,8 +110,6 @@ def process_and_modify_data_cascading(file_path):
             if last_known_header is not None:
                 # Prepend the last known header to the current cell value
                 df.iloc[i, 0] = f"{last_known_header}:{current_cell_value}"
-
-    # --- ADDED LOGIC: Remove the 'Not Hispanic or Latino' row ---
     row_to_remove = "Not Hispanic or Latino"
     original_rows_count = len(df)
 
@@ -120,7 +128,7 @@ def process_and_modify_data_cascading(file_path):
     return df_filtered
 
 
-if __name__ == "__main__":
+def main(argv):
     processed_files = []
     for config in download_configs:
         url = config["url"]
@@ -132,33 +140,24 @@ if __name__ == "__main__":
         file_name_from_url = url.split('/')[-1]
         downloaded_file_path = os.path.join("temp_downloads",
                                             file_name_from_url)
-
-        # Define the command for the current URL
-        command = [
-            sys.executable,  # Use the current Python interpreter
-            download_script_path,
-            f"--download_url={url}",  # Pass the current URL
-            f"--output_folder=temp_downloads"
-        ]
-
-        logging.info(f"Running command: {' '.join(command)}")
         try:
-            # Execute the download script
-            result = subprocess.run(command,
-                                    capture_output=True,
-                                    text=True,
-                                    check=True)
-            logging.info(result.stdout)
-            if result.stderr:
-                logging.info("Download script errors:")
-                logging.info(result.stderr)
 
-            logging.info(
-                f"--- Download of {file_name_from_url} completed. Processing... ---"
-            )
+            download_successful = download_file(
+            url=url,
+            output_folder="temp_downloads", 
+            unzip=False, 
+            headers=None, 
+            tries=3,     
+            delay=5,      
+            backoff=2     
+        )
 
-            # Process the downloaded file
-            # Use the desired_output_csv_name directly here
+            if download_successful:
+                logging.info(f"--- Download of '{file_name_from_url}' completed. Processing... ---")
+            else:
+                logging.error(f"--- Download or processing of '{file_name_from_url}' failed. See logs above. ---")
+        
+
             output_full_path = os.path.join(
                 os.path.dirname(os.path.abspath(__file__)),
                 desired_output_csv_name)
@@ -181,11 +180,6 @@ if __name__ == "__main__":
                 logging.error(
                     f"\nNo data processed or loaded for {file_name_from_url}. Output CSV not created."
                 )
-
-        except subprocess.CalledProcessError as e:
-            logging.error(f"Error executing download script for {url}: {e}")
-            # print(f"Stdout: {e.stdout}")
-            # print(f"Stderr: {e.stderr}")
         except FileNotFoundError:
             logging.fatal(
                 f"Error: Python interpreter or download script not found. Check your paths."
@@ -200,6 +194,9 @@ if __name__ == "__main__":
             "\n--- All requested files processed. Check the following CSVs: ---"
         )
         for f in processed_files:
-            print(f"- {f}")
+            logging.info(f"- {f}")
     else:
         logging.error("\n--- No files were successfully processed. ---")
+
+if __name__ == '__main__':
+    app.run(main)
