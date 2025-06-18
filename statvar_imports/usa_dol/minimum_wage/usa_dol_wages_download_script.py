@@ -1,3 +1,21 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+'''
+This script downloads historical minimum wage data from the U.S. Department of Labor website.
+'''
+# Import necessary libraries
 import os
 import csv
 import requests
@@ -7,8 +25,8 @@ from bs4 import BeautifulSoup
 from retry import retry
 
 url = "https://www.dol.gov/agencies/whd/state/minimum-wage/history"
-source_folder = "source_files"
-input_folder = "input_files"
+source_folder = "source_files" # For raw downloaded files.
+input_folder = "input_files"   # For processed, final output files.
 os.makedirs(source_folder, exist_ok=True)
 os.makedirs(input_folder, exist_ok=True)
 file_path = os.path.join(source_folder, "raw_data.html")
@@ -16,12 +34,38 @@ file_path2 = os.path.join(source_folder, "raw_data.csv")
 
 @retry(tries=5,delay=3,backoff=5)
 def download_with_retry(url):
+    """
+    Downloads content from a given URL with a retry mechanism.
+
+    This function attempts to make an HTTP GET request to the specified URL. If the
+    request fails with a status code indicating an error (e.g., 404, 500),
+    it will retry the request up to 5 times with an increasing delay.
+
+    Args:
+        url (str): The URL to download content from.
+
+    Returns:
+        requests.Response: The response object from the successful HTTP request.
+    
+    Raises:
+        requests.exceptions.RequestException: If the request fails after all retry attempts.
+    """
     logging.info(f"Trying to access url : {url}")
     response=requests.get(url)
     response.raise_for_status()
     return response 
 
 def extract_all_table_data(url):
+    """
+    Extracts all tables from a given URL, saves the raw HTML and CSV, and returns the data.
+
+    Args:
+        url (str): The URL of the web page to scrape.
+
+    Returns:
+        list: A list of tables. Each table is represented as a list of rows,
+              and each row is a list of cell strings. Returns None if no tables are found.
+    """
     try:
         response = download_with_retry(url)
         response.raise_for_status()
