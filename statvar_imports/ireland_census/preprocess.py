@@ -34,7 +34,6 @@ def preprocess():
 
     except Exception as e:
         logging.fatal(f"Failed to preprocess the file: {e}")
-        return None
 
 
 def main(argv):

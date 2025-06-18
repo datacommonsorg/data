@@ -1,20 +1,29 @@
 # Ireland_Census
+This import includes Ireland Demographics, Health and Economy data from Central Statistics Office(CSO) by country, county and city levels.
 
 - source urls: 
-`https://data.cso.ie/table/FY002`, `https://data.cso.ie/table/VSD30`, `https://data.cso.ie/table/VSD31`, `https://data.cso.ie/table/VSA30`, `https://data.cso.ie/table/VSA09`, `https://data.cso.ie/table/VSD24`, `https://data.cso.ie/table/VSA03`, `https://data.cso.ie/table/FY003B`, `https://data.cso.ie/table/FY001`, `https://data.cso.ie/table/FY031`, `https://data.cso.ie/table/CNA22`
+    - `https://data.cso.ie/table/FY002`
+    - `https://data.cso.ie/table/VSD30` 
+    - `https://data.cso.ie/table/VSD31` 
+    - `https://data.cso.ie/table/VSA30` 
+    - `https://data.cso.ie/table/VSA09`
+    - `https://data.cso.ie/table/VSD24` 
+    - `https://data.cso.ie/table/VSA03` 
+    - `https://data.cso.ie/table/FY003B` 
+    - `https://data.cso.ie/table/FY001` 
+    - `https://data.cso.ie/table/FY031` 
+    - `https://data.cso.ie/table/CNA22`
 
-- how to download data: Download script (download_script.py).
-    To download the data, you'll need to use the provided download script, download_script.py. This script will automatically create an "input_files" folder where you should place the file to be processed. The script also requires a configuration file (config.py) to function correctly. We should run 'preprocess.py' script for removing duplicates data related suicides files. In suicides.csv input file contains state level data between the year 1950 and 2021 and the another input file 'suicides_with_aa1_aa2.csv' is having data from the year 2008 to latest which is creating duplicates. By executing the preprocess.py , we are removing the data from 2008 to 2021 and keeping the data from 2022 to the latest in the 'suicides_with_aa1_aa2.csv' and also keeping the suicides.csv file as it is after downloading for avoiding the conflicts.
+- how to download data: Download script (`download_script.py`).
+    To download the data, you'll need to use the provided download script, `download_script.py`. This script will automatically create an "input_files" folder where you should place the file to be processed. 
+    The script also requires a configuration file (`config.py`) to function correctly. We should run `preprocess.py` script for removing duplicates data related suicides files. In `suicides.csv` input file contains state level data between the year 1950 and 2021 and the another input file `suicides_with_aa1_aa2.csv` is having data from the year 2008 to latest which is creating duplicates. 
+    By executing the `preprocess.py` , we are removing the data from 2008 to 2021 and keeping the data from 2022 to the latest in the `suicides_with_aa1_aa2.csv` and also keeping the `suicides.csv` file as it is after downloading for avoiding the conflicts.
 
 - type of place: Demographics, Administrative Area 1 and Administrative area 2 level.
 
 - statvars: Demographics and Subnational.
 
 - place_resolution: Places resolved to wikidataId in place_resolver sheet separately.
-
-### How to run:
-
-`python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='<input_file>.csv' --pv_map='data/statvar_imports/ireland_census/<filename of pvmap.csv> --places_resolved_csv='data/statvar_imports/ireland_census/<filename of places_resolved_csv.csv>' --config_file='data/statvar_imports/ireland_census/<filename of metadata.csv>' --output_path='data/statvar_imports/ireland_census/<output_folder_name>/<filename>`
 
 #### To Download the files, run: 
 
@@ -29,6 +38,8 @@ Notes: Files will be downloaded inside "input_files" folder.
 `sh run.sh`
 
 or
+
+Execute the script inside the folder "data/statvar_importer/ireland_census/"
 
 `python3 ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/births.csv --pv_map=irl_birth_pvmap.csv --config_file=irl_birth_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/irl_birth_output`
 
