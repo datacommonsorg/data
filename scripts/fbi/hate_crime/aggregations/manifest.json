@@ -2,7 +2,7 @@
     "import_specifications": [
       {
         "import_name": "FBIHateCrime",
-        "curator_emails": [],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
         "provenance_description": "US Hate Crime Statistics",
         "scripts": ["../preprocess_aggregations.py"],
