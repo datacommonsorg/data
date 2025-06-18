@@ -2,7 +2,7 @@
     "import_specifications": [
       {
         "import_name": "FBIHateCrimePublications",
-        "curator_emails": [],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
         "provenance_description": "US Hate Crime Statistics",
         "scripts": ["table1/preprocess.py","table2/preprocess.py","table3/preprocess.py","table4/preprocess.py","table5/preprocess.py","table6/preprocess.py","table7/preprocess.py","table8/preprocess.py","table9/preprocess.py","table10/preprocess.py","table11/preprocess.py","table12/preprocess.py","table13/preprocess.py","table14/preprocess.py","run.sh"],
