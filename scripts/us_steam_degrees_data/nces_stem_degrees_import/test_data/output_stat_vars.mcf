@@ -1,5 +1,3 @@
-# Auto generated using command: "/usr/local/google/home/rbhande/Downloads/data/statvar_imports/us_steam_degrees_data/nces_stem_degrees_import/../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --statvar_dcid_remap_csv=dcid_remap.csv --output_path=test_data/output" on 2025-04-21 07:34:08.045823
-
 Node: dcid:Count_Person_BachelorOfScienceOrTechnologyOrEngineeringOrMathematics_EducationalAttainment9ThTo12ThGradeNoDiploma_AmericanIndianOrAlaskaNativeAlone_AsAFractionOf_Count_Person_EducationalAttainment9ThTo12ThGradeNoDiploma
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person
