@@ -1,0 +1,13 @@
+key,p1,v1,p2,v2,p3,v3
+mapped+AF8-rows,1,,,,,
+mapped+AF8-columns,9,,,,,
+CensusYear,observationDate,+AHs-Number+AH0-,,,,
+Sex,measuredProperty,count,populationType,Person,observationAbout,country/IRL
+Male,gender,Male,,,,
+Female,gender,Female,,,,
+VALUE,value,+AHs-Number+AH0-,,,,
+0 +AC0- 14 years,age,+AFs-0 14 Years+AF0-,,,,
+15 +AC0- 24 years,age,+AFs-15 24 Years+AF0-,,,,
+25 +AC0- 44 years,age,+AFs-25 44 Years+AF0-,,,,
+45 +AC0- 64 years,age,+AFs-45 64 Years+AF0-,,,,
+65 years and over,age,+AFs-65 +AC0- Years+AF0-,,,,

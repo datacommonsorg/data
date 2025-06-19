@@ -1,0 +1,8 @@
+Node: E:irl_aa1_aa2_employment_output->E0
+observationAbout: C:irl_aa1_aa2_employment_output->observationAbout
+observationDate: C:irl_aa1_aa2_employment_output->observationDate
+value: C:irl_aa1_aa2_employment_output->value
+variableMeasured: C:irl_aa1_aa2_employment_output->variableMeasured
+unit: C:irl_aa1_aa2_employment_output->unit
+scalingFactor: C:irl_aa1_aa2_employment_output->scalingFactor
+typeOf: dcs:StatVarObservation
