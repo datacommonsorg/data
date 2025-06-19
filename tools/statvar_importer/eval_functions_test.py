@@ -121,3 +121,7 @@ class TestStrToCamelCase(unittest.TestCase):
     def test_str_to_camel_case_idempotent(self):
         self.assertEqual('AlreadyCamel',
                          eval_functions.str_to_camel_case('AlreadyCamel'))
+
+
+if __name__ == '__main__':
+    unittest.main()
