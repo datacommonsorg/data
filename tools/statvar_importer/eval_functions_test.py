@@ -56,6 +56,15 @@ class TestEvaluateStatement(unittest.TestCase):
         self.assertEqual(('name', None),
                          eval_functions.evaluate_statement('name=1+Data'))
 
+    def test_evaluate_statement_with_syntax_error(self):
+        self.assertEqual(('var', None),
+                         eval_functions.evaluate_statement('var=1+'))
+
+    def test_evaluate_statement_with_eval_globals(self):
+        self.assertEqual(
+            ('date', '2022-01-01'),
+            eval_functions.evaluate_statement('date=format_date(Data)',
+                                              {'Data': '2022, Jan 1st'}))
 
 
 class TestFormatDate(unittest.TestCase):
@@ -65,21 +74,18 @@ class TestFormatDate(unittest.TestCase):
                          eval_functions.format_date('Jan 31, 2023'))
 
     def test_format_date_with_custom_format(self):
-        self.assertEqual(
-            '2022-01',
-            eval_functions.format_date('2022, Jan 1st', '%Y-%m'))
+        self.assertEqual('2022-01',
+                         eval_functions.format_date('2022, Jan 1st', '%Y-%m'))
 
     def test_format_date_with_datetime(self):
-        self.assertEqual(
-            '2022-12-31',
-            eval_functions.format_date('Dec 31st, 2022, 10:00am'))
+        self.assertEqual('2022-12-31',
+                         eval_functions.format_date('Dec 31st, 2022, 10:00am'))
 
     def test_format_date_with_invalid_date(self):
         self.assertEqual('', eval_functions.format_date('Not A Date'))
 
     def test_format_date_with_empty_string(self):
         self.assertEqual('', eval_functions.format_date(''))
-
 
 
 class TestStrToCamelCase(unittest.TestCase):
@@ -93,8 +99,9 @@ class TestStrToCamelCase(unittest.TestCase):
                          eval_functions.str_to_camel_case('1.0 my DCID'))
 
     def test_str_to_camel_case_with_parentheses_and_dots(self):
-        self.assertEqual('SnakeCaseString',
-                         eval_functions.str_to_camel_case('snake(case.) string'))
+        self.assertEqual(
+            'SnakeCaseString',
+            eval_functions.str_to_camel_case('snake(case.) string'))
 
     def test_str_to_camel_case_with_custom_regex(self):
         self.assertEqual(
@@ -108,5 +115,9 @@ class TestStrToCamelCase(unittest.TestCase):
     def test_str_to_camel_case_with_non_string_input(self):
         self.assertEqual('123', eval_functions.str_to_camel_case(123))
 
+    def test_str_to_camel_case_with_special_characters(self):
+        self.assertEqual('', eval_functions.str_to_camel_case('@#$%^&*'))
 
-
+    def test_str_to_camel_case_idempotent(self):
+        self.assertEqual('AlreadyCamel',
+                         eval_functions.str_to_camel_case('AlreadyCamel'))

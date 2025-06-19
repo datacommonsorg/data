@@ -11,20 +11,32 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Utility functions for eval statements with PropertyValueMapper.
+"""A collection of utility functions for dynamically evaluating expressions.
 
-The functions can be invoked within '#Eval' in the pv_map.py.
-For Example, for format values in 'DateTime' column into ISO-8601 format:
+This module provides a set of functions that can be used within `eval()`
+statements, primarily for data transformation tasks in a property-value
+mapping context. It offers a safe and convenient way to perform common
+operations like date formatting and string manipulation.
+
+The core function is `evaluate_statement`, which serves as a secure wrapper
+around Python's built-in `eval()`. This function is designed to execute simple
+expressions, optionally assigning the result to a variable.
+
+The module also includes helper functions for common data transformations:
+- `format_date`: Parses and formats date strings.
+- `str_to_camel_case`: Converts strings to CamelCase.
+
+These utilities can be invoked within a configuration that uses `#Eval` directives
+for data processing. For example, to format a 'DateTime' column into ISO-8601
+format, you could use:
+
 'DateTime': {
-  '#Eval': 'observationDate=format_date("{Data}")',
- }
+  '#Eval': 'observationDate = format_date("{Data}")',
+}
 """
 
-import datetime
 from datetime import datetime
-import os
 import re
-import sys
 
 from absl import logging
 import dateutil
@@ -35,19 +47,29 @@ from dateutil.relativedelta import relativedelta
 
 
 def format_date(date_str: str, format_str: str = '%Y-%m-%d') -> str:
-    """Parse the date string and return formated date string.
+    """Parses a date string and returns it in a specified format.
 
-  Args:
-    date_str: Input date string to be parsed.
-    format_str: output format for date
+    This function uses `dateutil.parser.parse` to convert a date string into a
+    datetime object, which is then formatted into a string.
 
-  Returns:
-    date formatted by the format_str.
-    In case of parse error, returns the original date_str.
-  Raises
-    NameError in case of any exceptions in parsing.
-    This will cause any Eval using it to fail.
-  """
+    Args:
+        date_str: The input date string to be parsed (e.g., 'Jan 31, 2023',
+          '2022/01/31').
+        format_str: The desired output format for the date, using standard
+          strftime codes (e.g., '%Y-%m-%d', '%B %d, %Y').
+
+    Returns:
+        The date formatted as a string according to `format_str`. If parsing
+        fails (e.g., for an invalid date string), it returns an empty string.
+
+    Examples:
+        >>> format_date('Jan 31, 2023')
+        '2023-01-31'
+        >>> format_date('2022, Jan 1st', '%Y-%m')
+        '2022-01'
+        >>> format_date('Not a valid date')
+        ''
+    """
     try:
         return dateutil.parser.parse(date_str).strftime(format_str)
     except dateutil.parser._parser.ParserError:
@@ -56,17 +78,26 @@ def format_date(date_str: str, format_str: str = '%Y-%m-%d') -> str:
 
 def str_to_camel_case(input_string: str,
                       strip_re: str = r'[^A-Za-z_0-9]') -> str:
-    """Returns the string in CamelCase without spaces and special characters.
+    """Converts a string to CamelCase, removing specified characters.
 
-  Example: "Abc-def(HG-123)" -> "AbcDefHG".
+    This function cleans a string by removing characters that match the
+    `strip_re` pattern, then converts the remaining parts into CamelCase.
 
-  Args:
-    input_string: string to be converted to CamelCase
-    strip_chars: regular expression of characters to be removed.
+    Args:
+        input_string: The string to be converted.
+        strip_re: A regular expression of characters to be removed. The
+          default pattern removes any character that is not a letter, number, or
+          underscore.
 
-  Returns:
-    string with non-alpha characters removed and remaining words capitalized.
-  """
+    Returns:
+        A string in CamelCase.
+
+    Examples:
+        >>> str_to_camel_case("Abc-def(HG)")
+        'AbcDefHg'
+        >>> str_to_camel_case("my_variable_name", r"[^A-Za-z]")
+        'MyVariableName'
+    """
     if not str:
         return ''
     if not isinstance(input_string, str):
@@ -79,16 +110,30 @@ def str_to_camel_case(input_string: str,
         [w[0].upper() + w[1:] for w in clean_str.split(' ') if len(w) > 0])
 
 
+# A dictionary of functions and modules that are safe to use in `eval()`.
+# This dictionary acts as a safelist, defining the execution environment for
+# the `evaluate_statement` function. By controlling the available globals,
+# we can prevent the execution of arbitrary or unsafe code.
 EVAL_GLOBALS = {
-    # Date time functions
+    # Date time functions:
+    # - `dateutil.parser.parse`: For flexible date string parsing.
+    # - `format_date`: Custom function to format dates.
+    # - `datetime`: The datetime class from the datetime module.
+    # - `datetime.strptime`: For parsing dates with a specific format.
+    # - `relativedelta`: For date calculations.
     'dateutil_parser_parse': dateutil.parser.parse,
     'format_date': format_date,
     'datetime': datetime,
     'datetime_strptime': datetime.strptime,
     'relativedelta': relativedelta,
-    # String functions
+
+    # String functions:
+    # - `str_to_camel_case`: Custom function for string case conversion.
     'str_to_camel_case': str_to_camel_case,
-    # Regex functions
+
+    # Regex functions:
+    # - `re`: The 're' module for regular expression operations.
+    # - `re.sub`: The 'sub' function for string substitution.
     're': re,
     're_sub': re.sub,
 }
@@ -97,20 +142,44 @@ EVAL_GLOBALS = {
 def evaluate_statement(eval_str: str,
                        variables: dict = {},
                        functions: dict = EVAL_GLOBALS) -> (str, str):
-    """Returns the tuple: (variable, result) after evaluating statement in eval.
+    """Evaluates a Python expression and returns the result.
 
-   Args:
-     eval_str: string with statement to be evaluated of the form:
-       'variable=statement' if the variable is not specified, an empty string is
-       retured as variable.
-      variables: dictionary of variables and values to be used in statement.
-      functions: dictionary of global functoins that can be invoked within
-        statement.
+    This function is a safe wrapper around Python's `eval()` built-in. It
+    is designed to execute simple expressions, often used for data
+    transformations. The expression can optionally assign a value to a
+    variable.
 
-  Returns:
-      tuple of the (variable , result) after evaluating the statement.
-      in case of exception during eval, None is returned as result
-  """
+    Args:
+        eval_str: The string containing the expression to be evaluated, in the
+          format 'variable = statement' or just 'statement'.
+        variables: A dictionary of variables and their values that are
+          accessible within the `eval()` context.
+        functions: A dictionary of functions that are accessible within the
+          `eval()` context. Defaults to `EVAL_GLOBALS`.
+
+    Returns:
+        A tuple containing the variable name and the result of the evaluation.
+        - If `eval_str` includes a variable assignment, the tuple will be
+          (`variable_name`, `result`).
+        - If `eval_str` is a simple statement, the tuple will be
+          ('', `result`).
+        - If the evaluation raises a `SyntaxError`, `NameError`, `ValueError`,
+          or `TypeError`, the result will be `None`.
+
+    Examples:
+        >>> # Simple arithmetic
+        >>> evaluate_statement('num = 1 + x', {'x': 2})
+        ('num', 3)
+        >>> # Using a function from EVAL_GLOBALS
+        >>> evaluate_statement('date = format_date(data)', {'data': '2022, Jan 1st'})
+        ('date', '2022-01-01')
+        >>> # Statement without a variable
+        >>> evaluate_statement('2 * 2')
+        ('', 4)
+        >>> # Invalid expression
+        >>> evaluate_statement('name = 1 + "2"')
+        ('name', None)
+    """
     variable = ''
     statement = eval_str
     if '=' in eval_str:
