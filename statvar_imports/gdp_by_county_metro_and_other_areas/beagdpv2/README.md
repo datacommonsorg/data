@@ -26,25 +26,34 @@ Note : The downloaded file will be saved as "input_files/CAGDP9__ALL_AREAS_2001_
 
 ###How to run:
 
-`python3 ../../../tools/statvar-importer/stat_var_processor.py --input_data=input_files/CAGDP9__ALL_AREAS_*.csv --pv_map=<filename_of_pvmap> --places_resolved_csv=place_mapping.csv --config_file=<filename_of_metadata> --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/bea_gdp_output`
+```
+python3 stat_var_processor.py 
+--input_data=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/input_files/CAGDP9__ALL_AREAS_*.csv -
+-pv_map=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/<filename_of_pvmap> 
+--places_resolved_csv=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/place_mapping.csv 
+--config_file=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/<filename_of_metadata> 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
+--output_path=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/output_files/bea_gdp_output
+```
 
-`If the Statistical Variable (SV) requires remapping, include the flag --statvar_dcid_remap_csv in above command.
---statvar_dcid_remap_csv=bea_statvar_remap.csv`
+If the Statistical Variable (SV) requires remapping, include the flag --statvar_dcid_remap_csv in above command.
+`--statvar_dcid_remap_csv=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/bea_statvar_remap.csv`
 
 ###Example
 
 To Process the files, Run:
 
-Execute the script inside the folder "/data/statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/"
+Execute the script inside the folder "/data/tools/statvar-importer/"
 
 ```
-python3 ../../../tools/statvar-importer/stat_var_processor.py 
---input_data=input_files/CAGDP9__ALL_AREAS_*.csv 
---pv_map=pv_map.py --places_resolved_csv=place_mapping.csv 
---config_file=bea_metadata.py 
---statvar_dcid_remap_csv=bea_statvar_remap.csv 
+python3 stat_var_processor.py 
+--input_data=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/input_files/CAGDP9__ALL_AREAS_*.csv 
+--pv_map=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/pv_map.py 
+--places_resolved_csv=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/place_mapping.csv 
+--config_file=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/bea_metadata.py 
+--statvar_dcid_remap_csv=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/bea_statvar_remap.csv 
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---output_path=output_files/bea_gdp_output
+--output_path=../../statvar_imports/gdp_by_county_metro_and_other_areas/beagdpv2/output_files/bea_gdp_output
 ```
 
 
