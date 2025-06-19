@@ -25,8 +25,14 @@ class Validator:
 
     def validate_max_date_latest(self,
                                  stats_df: pd.DataFrame) -> ValidationResult:
-        """
-    Checks that the MaxDate in the stats summary is from the current year.
+        """Checks that the MaxDate in the stats summary is from the current year.
+
+    Args:
+      stats_df: A DataFrame containing the summary statistics, expected to have
+        a 'MaxDate' column.
+
+    Returns:
+      A ValidationResult object.
     """
         if stats_df.empty:
             return ValidationResult('PASSED', 'MAX_DATE_LATEST')
@@ -48,7 +54,17 @@ class Validator:
 
     def validate_deleted_count(self, differ_df: pd.DataFrame,
                                config: dict) -> ValidationResult:
-        """Checks if the total number of deleted points is within a threshold."""
+        """Checks if the total number of deleted points is within a threshold.
+
+    Args:
+      differ_df: A DataFrame containing the differ output, expected to have a
+        'DELETED' column.
+      config: A dictionary containing the validation configuration, which may
+        have a 'threshold' key.
+
+    Returns:
+      A ValidationResult object.
+    """
         if differ_df.empty:
             return ValidationResult('PASSED', 'DELETED_COUNT')
         threshold = config.get('threshold', 0)
@@ -67,7 +83,15 @@ class Validator:
 
     def validate_modified_count(self,
                                 differ_df: pd.DataFrame) -> ValidationResult:
-        """Checks if the number of modified points is the same for all StatVars."""
+        """Checks if the number of modified points is the same for all StatVars.
+
+    Args:
+      differ_df: A DataFrame containing the differ output, expected to have a
+        'MODIFIED' column.
+
+    Returns:
+      A ValidationResult object.
+    """
         if differ_df.empty:
             return ValidationResult('PASSED', 'MODIFIED_COUNT')
         unique_counts = differ_df['MODIFIED'].nunique()
@@ -81,7 +105,15 @@ class Validator:
         return ValidationResult('PASSED', 'MODIFIED_COUNT')
 
     def validate_added_count(self, differ_df: pd.DataFrame) -> ValidationResult:
-        """Checks if the number of added points is the same for all StatVars."""
+        """Checks if the number of added points is the same for all StatVars.
+
+    Args:
+      differ_df: A DataFrame containing the differ output, expected to have an
+        'ADDED' column.
+
+    Returns:
+      A ValidationResult object.
+    """
         if differ_df.empty:
             return ValidationResult('PASSED', 'ADDED_COUNT')
         unique_counts = differ_df['ADDED'].nunique()
@@ -96,14 +128,31 @@ class Validator:
 
     def validate_unmodified_count(self,
                                   differ_df: pd.DataFrame) -> ValidationResult:
-        """Checks if the number of unmodified points is the same for all StatVars."""
+        """Checks if the number of unmodified points is the same for all StatVars.
+
+    Note: The logic for this validation is currently disabled.
+
+    Args:
+      differ_df: A DataFrame containing the differ output.
+
+    Returns:
+      A ValidationResult object, which is always PASSED.
+    """
         # The logic for this validation is currently disabled.
         # This method is a placeholder to ensure the validation "passes".
         return ValidationResult('PASSED', 'UNMODIFIED_COUNT')
 
     def validate_num_places_consistent(
         self, stats_df: pd.DataFrame) -> ValidationResult:
-        """Checks if the number of places is the same for all StatVars."""
+        """Checks if the number of places is the same for all StatVars.
+
+    Args:
+      stats_df: A DataFrame containing the summary statistics, expected to have
+        a 'NumPlaces' column.
+
+    Returns:
+      A ValidationResult object.
+    """
         if stats_df.empty:
             return ValidationResult('PASSED', 'NUM_PLACES_CONSISTENT')
         unique_counts = stats_df['NumPlaces'].nunique()
@@ -118,7 +167,19 @@ class Validator:
 
     def validate_num_places_count(self, stats_df: pd.DataFrame,
                                   config: dict) -> ValidationResult:
-        """Checks if the number of places for each StatVar is within a defined range."""
+        """Checks if the number of places for each StatVar is within a defined range.
+
+    The range can be specified using 'minimum', 'maximum', or an exact 'value'
+    in the config.
+
+    Args:
+      stats_df: A DataFrame containing the summary statistics, expected to have
+        'NumPlaces' and 'StatVar' columns.
+      config: A dictionary containing the validation configuration.
+
+    Returns:
+      A ValidationResult object.
+    """
         if stats_df.empty:
             return ValidationResult('PASSED', 'NUM_PLACES_COUNT')
 
