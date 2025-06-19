@@ -47,10 +47,6 @@ MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 def retry_method(url):
     return requests.get(url)
 
-
-CSV_URLS = frozendict.frozendict(
-    {"daily_aqi": "https://aqs.epa.gov/aqsweb/airdata/"})
-
 POLLUTANTS = {
     'Ozone': 'Ozone',
     'SO2': 'SulfurDioxide',
@@ -61,20 +57,6 @@ POLLUTANTS = {
 }
 
 CSV_COLUMNS = ['Date', 'Place', 'AQI', 'Pollutant', 'Site']
-
-# Template MCF for StatVarObservation
-TEMPLATE_MCF = '''
-Node: E:EPA_AQI->E0
-typeOf: dcs:StatVarObservation
-variableMeasured: dcs:AirQualityIndex_AirPollutant
-observationDate: C:EPA_AQI->Date
-observationAbout: C:EPA_AQI->Place
-observationPeriod: "P1D"
-value: C:EPA_AQI->AQI
-definingPollutant: C:EPA_AQI->Pollutant
-definingAirQualitySite: C:EPA_AQI->Site
-'''
-
 
 def get_place(observation):
     if 'State Code' and 'County Code' in observation:
@@ -122,27 +104,28 @@ def write_csv(csv_file_path, reader):
             writer.writerow(new_row)
 
 
-def download_url(_INPUT_FILE_PATH):
+def download_url(_INPUT_FILE_PATH,start_year,end_year,CSV_URLS):
+    
     """
-    Downloads daily Air Quality Index (AQI) data from the EPA AirData website
-    for a specified range of years and saves the zip files locally.
+    Downloads daily Air Quality Index (AQI) data zip files from the EPA AirData
+    website for a specified range of years and saves them locally.
 
-    It iterates through years from 'aggregate_start_year' to 'aggregate_end_year'
-    (defined in absl flags) and attempts to download two types of files for each
-    year: 'daily_aqi_by_county' and 'daily_aqi_by_cbsa'.
-
-    Each download attempt includes retries (configured by the @retry decorator
-    on `retry_method`) and checks the HTTP response status code to ensure data
-    availability. Fatal logging messages are issued if no data is found or
-    if a 404 Not Found error occurs.
-
+    It iterates through years from `start_year` (inclusive) to `end_year` (exclusive).
+    For each year, it constructs file names for both county-level and CBSA-level
+    AQI data (e.g., 'daily_aqi_by_county_YYYY.zip', 'daily_aqi_by_cbsa_YYYY.zip').
     Args:
         _INPUT_FILE_PATH (str): The local directory path where the downloaded
                                  zip files will be saved.
+        start_year (int): The starting year (inclusive) from which to download data.
+        end_year (int): The ending year (exclusive) up to which to download data.
+                        Data for `end_year - 1` will be the last year downloaded.
+        CSV_URLS (frozendict.frozendict): A frozendict where keys are series names
+                                          (e.g., "daily_aqi") and values are the
+                                          base URLs for the EPA AirData files.
+                                          This dictionary is expected to provide
+                                          the root URL to which file names are appended.
     """
-
-    start_year = _FLAGS.aggregate_start_year
-    end_year = _FLAGS.aggregate_end_year
+    
     for year in range(start_year, int(end_year)):
         logging.info(f'year: {year}')
         file_names = [
@@ -184,34 +167,29 @@ def download_url(_INPUT_FILE_PATH):
                         f.write(response.content)
 
 
-def process(_INPUT_FILE_PATH):
+def process(_INPUT_FILE_PATH,start_year,end_year):
+    
     """
-    Processes the downloaded EPA AirData zip files, extracts the relevant CSV
-    data, transforms it, and writes it to a consolidated output CSV file.
-    It also generates a template MCF file for the data.
+    Processes downloaded EPA AirData zip files, extracts, transforms, and
+    consolidates the data into a single output CSV file.
 
-    The method iterates through each year from 'aggregate_start_year' to
-    'aggregate_end_year' (defined in absl flags). For each year, it attempts
-    to process two types of files: 'daily_aqi_by_county' and 'daily_aqi_by_cbsa'.
-
-    It expects these files to be present as zipped archives in the
-    `_INPUT_FILE_PATH` directory. Each zip file is opened, and the contained
-    CSV file is read. Data rows are then transformed (e.g., 'Place' DCID generation,
-    'Pollutant' DCID mapping) and appended to a single output CSV file named
-    'EPA_AQI.csv'.
-
-    Error handling is included to catch issues like missing zip files or
-    missing CSV files within a zip archive, logging fatal errors accordingly.
+    This method iterates through a specified range of years, from `start_year`
+    up to (but not including) `end_year`. For each year, it expects to find
+    two zipped files in the `_INPUT_FILE_PATH` directory:
+    'daily_aqi_by_county_{year}.zip' and 'daily_aqi_by_cbsa_{year}.zip'.
 
     Args:
         _INPUT_FILE_PATH (str): The local directory path where the downloaded
-                                 zip files are located.
+                                 zip files (e.g., 'daily_aqi_by_county_2020.zip')
+                                 are stored.
+        start_year (int): The starting year (inclusive) from which to begin
+                          processing data.
+        end_year (int): The ending year (exclusive) for which to process data.
+                        Processing will stop at `end_year - 1`.
     """
     output_file_name = f'EPA_AQI.csv'
     #Creating the output csv file beofre
     create_csv(output_file_name)
-    start_year = _FLAGS.aggregate_start_year
-    end_year = _FLAGS.aggregate_end_year
     for year in range(start_year, int(end_year)):
         logging.info(f'year: {year}')
         file_names = [
@@ -247,23 +225,26 @@ def process(_INPUT_FILE_PATH):
                     f"Error while processing input files {e} {output_file_name}{output_file_name}"
                 )
 
-
 def main(_):
     mode = _FLAGS.mode
     input_file_path = os.path.join(MODULE_DIR, _FLAGS.input_file_path)
     output_file_path = os.path.join(MODULE_DIR, _FLAGS.output_file_path)
     Path(output_file_path).mkdir(parents=True, exist_ok=True)
     Path(input_file_path).mkdir(parents=True, exist_ok=True)
-
+    start_year = _FLAGS.aggregate_start_year
+    end_year = _FLAGS.aggregate_end_year
+    CSV_URLS = frozendict.frozendict(
+    {"daily_aqi": "https://aqs.epa.gov/aqsweb/airdata/"})
+    
     if mode == "" or mode == "download":
         logging.info(f'inside mode {mode}')
         #downloading zip file for 'daily_aqi_by_county'
         logging.info(f'downloading zipped files')
-        download_url(input_file_path)
+        download_url(input_file_path,start_year,end_year,CSV_URLS)
 
     if mode == "" or mode == "process":
         logging.info(f'inside mode {mode}')
-        process(input_file_path)
+        process(input_file_path,start_year,end_year)
 
 
 if __name__ == '__main__':

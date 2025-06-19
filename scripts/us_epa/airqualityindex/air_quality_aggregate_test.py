@@ -124,7 +124,7 @@ class TestCriteriaGasesTest(unittest.TestCase):
                     zipf.writestr(f"{prefix}.csv", csv_bytes)
 
             # Run the process method
-            process(tmp_input_dir)
+            process(tmp_input_dir,2020,2021)
 
             # Check if the output files were created
             expected_csv_path = os.path.join(MODULE_DIR, tmp_output_dir,
