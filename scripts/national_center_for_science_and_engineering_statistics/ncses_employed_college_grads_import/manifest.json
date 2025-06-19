@@ -9,15 +9,15 @@
         "provenance_description": "NCSES is the U.S. agency that collects and reports data on science, engineering, and technology",
         "scripts": [
           "../../../util/download_util_script.py --download_url=https://ncses.nsf.gov/pubs/nsf23306/assets/data-tables/tables/nsf23306-tab006-002.xlsx --output_folder=source_files",
-          "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/ncses_employed.xlsx --pv_map=pv_map.csv --config_file=metadata.csv --output_path=test_data/output"
+          "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/ncses_employed.xlsx --pv_map=pv_map.csv --config_file=metadata.csv --output_path=output/ncses_output"
         ],
         "source_files": [
          "source_files/*.xlsx"
       ],
         "import_inputs": [
           {
-            "template_mcf": "test_data/output.tmcf",
-            "cleaned_csv": "test_data/output.csv"
+            "template_mcf": "output/ncses_output.tmcf",
+            "cleaned_csv": "output/ncses_output.csv"
           }
         ],
         "cron_schedule": "0 07 4,18 * *"

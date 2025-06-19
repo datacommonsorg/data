@@ -3,4 +3,3 @@ places_within,country/USA
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
 url,https://ncsesdata.nsf.gov/explorer/datatables?term=race&exactMatch=no&page=1&filterSuperTopic=Demographics&filterTopic=Sex&datatablespage=2
 comments,"Table nsf23306-tab006-002 (no direct link available),  Changed  Black to BlackOrAfricanAmericanAlone and added employmentStatus	: Employed"
-pv_map,https://docs.google.com/spreadsheets/d/1uo1u0Yin8ehUWNuF50I6G9RIuRopoE0Q1ZIrNVjy0EA/edit?resourcekey=0-43_L05fq2DB9ZN006jc4HQ&gid=787228135#gid=787228135
