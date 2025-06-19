@@ -101,5 +101,22 @@ class TestUnmodifiedCountValidation(unittest.TestCase):
         self.assertEqual(result.status, 'PASSED')
 
 
+class TestNumPlacesConsistentValidation(unittest.TestCase):
+    '''Test Class for the NUM_PLACES_CONSISTENT validation rule.'''
+
+    def setUp(self):
+        self.validator = import_validation.Validator()
+
+    def test_num_places_consistent_fails_on_inconsistent_counts(self):
+        test_df = pd.DataFrame({'NumPlaces': [1, 2]})  # Inconsistent
+        result = self.validator.validate_num_places_consistent(test_df)
+        self.assertEqual(result.status, 'FAILED')
+
+    def test_num_places_consistent_passes_on_consistent_counts(self):
+        test_df = pd.DataFrame({'NumPlaces': [2, 2]})  # Consistent
+        result = self.validator.validate_num_places_consistent(test_df)
+        self.assertEqual(result.status, 'PASSED')
+
+
 if __name__ == '__main__':
     unittest.main()

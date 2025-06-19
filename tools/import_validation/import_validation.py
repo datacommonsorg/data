@@ -38,6 +38,7 @@ Validation = Enum('Validation', [
     ('DELETED_COUNT', 4),
     ('LATEST_DATA', 5),
     ('MAX_DATE_LATEST', 6),
+    ('NUM_PLACES_CONSISTENT', 7),
 ])
 
 
@@ -107,6 +108,16 @@ class Validator:
         # This method is a placeholder to ensure the validation "passes".
         return ValidationResult('PASSED', 'UNMODIFIED_COUNT')
 
+    def validate_num_places_consistent(
+        self, stats_df: pd.DataFrame) -> ValidationResult:
+        if stats_df.empty:
+            return ValidationResult('PASSED', 'NUM_PLACES_CONSISTENT')
+        if stats_df['NumPlaces'].nunique() > 1:
+            return ValidationResult(
+                'FAILED', 'NUM_PLACES_CONSISTENT',
+                f"AssertionError('Validation failed: NUM_PLACES_CONSISTENT')")
+        return ValidationResult('PASSED', 'NUM_PLACES_CONSISTENT')
+
 
 class ValidationRunner:
     """
@@ -148,6 +159,9 @@ class ValidationRunner:
             elif validation_name == 'UNMODIFIED_COUNT':
                 result = self.validator.validate_unmodified_count(
                     self.differ_df)
+            elif validation_name == 'NUM_PLACES_CONSISTENT':
+                result = self.validator.validate_num_places_consistent(
+                    self.stats_df)
 
             if result:
                 self.validation_results.append(result)
