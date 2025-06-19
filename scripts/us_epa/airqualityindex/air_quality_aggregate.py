@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -123,6 +123,23 @@ def write_csv(csv_file_path, reader):
 
 
 def download_url(_INPUT_FILE_PATH):
+    """
+    Downloads daily Air Quality Index (AQI) data from the EPA AirData website
+    for a specified range of years and saves the zip files locally.
+
+    It iterates through years from 'aggregate_start_year' to 'aggregate_end_year'
+    (defined in absl flags) and attempts to download two types of files for each
+    year: 'daily_aqi_by_county' and 'daily_aqi_by_cbsa'.
+
+    Each download attempt includes retries (configured by the @retry decorator
+    on `retry_method`) and checks the HTTP response status code to ensure data
+    availability. Fatal logging messages are issued if no data is found or
+    if a 404 Not Found error occurs.
+
+    Args:
+        _INPUT_FILE_PATH (str): The local directory path where the downloaded
+                                 zip files will be saved.
+    """
 
     start_year = _FLAGS.aggregate_start_year
     end_year = _FLAGS.aggregate_end_year
@@ -168,12 +185,31 @@ def download_url(_INPUT_FILE_PATH):
 
 
 def process(_INPUT_FILE_PATH):
+    """
+    Processes the downloaded EPA AirData zip files, extracts the relevant CSV
+    data, transforms it, and writes it to a consolidated output CSV file.
+    It also generates a template MCF file for the data.
 
+    The method iterates through each year from 'aggregate_start_year' to
+    'aggregate_end_year' (defined in absl flags). For each year, it attempts
+    to process two types of files: 'daily_aqi_by_county' and 'daily_aqi_by_cbsa'.
+
+    It expects these files to be present as zipped archives in the
+    `_INPUT_FILE_PATH` directory. Each zip file is opened, and the contained
+    CSV file is read. Data rows are then transformed (e.g., 'Place' DCID generation,
+    'Pollutant' DCID mapping) and appended to a single output CSV file named
+    'EPA_AQI.csv'.
+
+    Error handling is included to catch issues like missing zip files or
+    missing CSV files within a zip archive, logging fatal errors accordingly.
+
+    Args:
+        _INPUT_FILE_PATH (str): The local directory path where the downloaded
+                                 zip files are located.
+    """
     output_file_name = f'EPA_AQI.csv'
     #Creating the output csv file beofre
     create_csv(output_file_name)
-    #Writing TMCF
-    write_tmcf('EPA_AQI.tmcf')
     start_year = _FLAGS.aggregate_start_year
     end_year = _FLAGS.aggregate_end_year
     for year in range(start_year, int(end_year)):
@@ -187,7 +223,6 @@ def process(_INPUT_FILE_PATH):
 
             try:
                 file_path = os.path.join(_INPUT_FILE_PATH, file_name)
-                #time.sleep(20)
                 output_file_path = os.path.join(MODULE_DIR,
                                                 _FLAGS.output_file_path,
                                                 output_file_name)

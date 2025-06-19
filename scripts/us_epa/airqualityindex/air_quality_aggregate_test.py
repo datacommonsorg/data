@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -146,8 +146,6 @@ class TestCriteriaGasesTest(unittest.TestCase):
 
             self.assertTrue(os.path.isfile(expected_csv_path),
                             "CSV output file not created")
-            self.assertTrue(os.path.isfile(expected_tmcf_path),
-                            "TMCF file not created")
 
             # Validate CSV content
             with open(expected_csv_path, 'r') as f:
