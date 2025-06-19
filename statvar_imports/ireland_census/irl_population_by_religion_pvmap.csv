@@ -1,0 +1,17 @@
+key,p1,v1,p2,v2,p3,v3
+mapped+AF8-rows,1,,,,,
+mapped+AF8-columns,9,,,,,
+County,observationAbout,+AHs-Data+AH0-,,,,
+Census Year,observationDate,+AHs-Number+AH0-,measuredProperty,count,populationType,Person
+VALUE,value,+AHs-Number+AH0-,,,,
+Roman Catholic,religion,RomanCatholicism,,,,
+Church of Ireland (incl. Protestant),religion,ChurchOfIrelandIncludingProtestant,,,,
+Presbyterian,religion,Presbyterian,,,,
++ACI-Methodist, Wesleyan+ACI-,religion,WesleyanMethodist,,,,
+Jewish,religion,Judaism,,,,
+Other stated religion (nec),religion,Ireland+AF8-OtherStatedReligion,,,,
+No religion,religion,Irreligion,,,,
+Not stated,religion,ReligionNotStated,,,,
+All religions,+ACM-ignore,Not_required_for_the_dataset,,,,
+Percentage change since previous census,+ACM-ignore,Not_required_for_the_dataset,,,,
+Actual change since previous census,+ACM-ignore,Not_required_for_the_dataset,,,,
