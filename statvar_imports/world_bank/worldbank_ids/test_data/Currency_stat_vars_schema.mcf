@@ -1,0 +1,426 @@
+Node: dcid:Austria
+typeOf: dcid:Country
+name: "Austria"
+isProvisional: dcs:True
+
+Node: dcid:MeasurementDenominatorEnum
+typeOf: schema:Class
+subClassOf: dcs:Enumeration
+name: "MeasurementDenominatorEnum"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderAustria
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Austria"
+isProvisional: dcs:True
+
+Node: dcid:Canada
+typeOf: dcid:Country
+name: "Canada"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderCanada
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Canada"
+isProvisional: dcs:True
+
+Node: dcid:Denmark
+typeOf: dcid:Country
+name: "Denmark"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderDenmark
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Denmark"
+isProvisional: dcs:True
+
+Node: dcid:European Investment Bank
+typeOf: dcid:Country
+name: "European  Investment  Bank"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderEuropean_Investment_Bank
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender European_ Investment_ Bank"
+isProvisional: dcs:True
+
+Node: dcid:France
+typeOf: dcid:Country
+name: "France"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderFrance
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender France"
+isProvisional: dcs:True
+
+Node: dcid:lendingEntity
+typeOf: dcs:Property
+name: "lendingEntity"
+rangeIncludes: dcid:Text
+
+Node: dcid:Amount_Debt_Lender_Fed._Rep._of_
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender_ Fed._ Rep._of_"
+isProvisional: dcs:True
+
+Node: dcid:Hong Kong
+typeOf: dcid:Country
+name: "Hong  Kong"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderHong_Kong
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Hong_ Kong"
+isProvisional: dcs:True
+
+Node: dcid:Italy
+typeOf: dcid:Country
+name: "Italy"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderItaly
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Italy"
+isProvisional: dcs:True
+
+Node: dcid:Japan
+typeOf: dcid:Country
+name: "Japan"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderJapan
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Japan"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_Lender_D.P.R._of_
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender_ D. P. R._of_"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_Lender_Republic_of_
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender_ Republic_of_"
+isProvisional: dcs:True
+
+Node: dcid:Multiple Lenders
+typeOf: dcid:Country
+name: "Multiple  Lenders"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderMultiple_Lenders
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Multiple_ Lenders"
+isProvisional: dcs:True
+
+Node: dcid:Netherlands
+typeOf: dcid:Country
+name: "Netherlands"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderNetherlands
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Netherlands"
+isProvisional: dcs:True
+
+Node: dcid:Nordic Investment Bank
+typeOf: dcid:Country
+name: "Nordic  Investment  Bank"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderNordic_Investment_Bank
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Nordic_ Investment_ Bank"
+isProvisional: dcs:True
+
+Node: dcid:Singapore
+typeOf: dcid:Country
+name: "Singapore"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderSingapore
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Singapore"
+isProvisional: dcs:True
+
+Node: dcid:Sweden
+typeOf: dcid:Country
+name: "Sweden"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderSweden
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Sweden"
+isProvisional: dcs:True
+
+Node: dcid:Tunisia
+typeOf: dcid:Country
+name: "Tunisia"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderTunisia
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Tunisia"
+isProvisional: dcs:True
+
+Node: dcid:United Kingdom
+typeOf: dcid:Country
+name: "United  Kingdom"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderUnited_Kingdom
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender United_ Kingdom"
+isProvisional: dcs:True
+
+Node: dcid:United States
+typeOf: dcid:Country
+name: "United  States"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderUnited_States
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender United_ States"
+isProvisional: dcs:True
+
+Node: dcid:Bahrain
+typeOf: dcid:Country
+name: "Bahrain"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderBahrain
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Bahrain"
+isProvisional: dcs:True
+
+Node: dcid:Council of Europe
+typeOf: dcid:Country
+name: "Council of  Europe"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderCouncil_of_Europe
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Council_of_ Europe"
+isProvisional: dcs:True
+
+Node: dcid:Czechia
+typeOf: dcid:Country
+name: "Czechia"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderCzechia
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Czechia"
+isProvisional: dcs:True
+
+Node: dcid:European Bank for Reconstruction and Dev. (EBRD)
+typeOf: dcid:Country
+name: "European  Bank for  Reconstruction and  Dev. ( EBRD)"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderEuropean_Bank_for_Reconstruction_and_Dev._EBRD_
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender European_ Bank_for_ Reconstruction_and_ Dev._ EBRD_"
+isProvisional: dcs:True
+
+Node: dcid:European Development Fund (EDF)
+typeOf: dcid:Country
+name: "European  Development  Fund ( EDF)"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderEuropean_Development_Fund_EDF_
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender European_ Development_ Fund_ EDF_"
+isProvisional: dcs:True
+
+Node: dcid:Finland
+typeOf: dcid:Country
+name: "Finland"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderFinland
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Finland"
+isProvisional: dcs:True
+
+Node: dcid:Luxembourg
+typeOf: dcid:Country
+name: "Luxembourg"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderLuxembourg
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Luxembourg"
+isProvisional: dcs:True
+
+Node: dcid:Nordic Development Fund
+typeOf: dcid:Country
+name: "Nordic  Development  Fund"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderNordic_Development_Fund
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Nordic_ Development_ Fund"
+isProvisional: dcs:True
+
+Node: dcid:Norway
+typeOf: dcid:Country
+name: "Norway"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderNorway
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Norway"
+isProvisional: dcs:True
+
+Node: dcid:Poland
+typeOf: dcid:Country
+name: "Poland"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderPoland
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Poland"
+isProvisional: dcs:True
+
+Node: dcid:Portugal
+typeOf: dcid:Country
+name: "Portugal"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderPortugal
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Portugal"
+isProvisional: dcs:True
+
+Node: dcid:Saudi Arabia
+typeOf: dcid:Country
+name: "Saudi  Arabia"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderSaudi_Arabia
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Saudi_ Arabia"
+isProvisional: dcs:True
+
+Node: dcid:Spain
+typeOf: dcid:Country
+name: "Spain"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderSpain
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Spain"
+isProvisional: dcs:True
+
+Node: dcid:Switzerland
+typeOf: dcid:Country
+name: "Switzerland"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderSwitzerland
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Switzerland"
+isProvisional: dcs:True
+
+Node: dcid:African Dev. Bank
+typeOf: dcid:Country
+name: "African  Dev.  Bank"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderAfrican_Dev._Bank
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender African_ Dev._ Bank"
+isProvisional: dcs:True
+
+Node: dcid:Algeria
+typeOf: dcid:Country
+name: "Algeria"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderAlgeria
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Algeria"
+isProvisional: dcs:True
+
+Node: dcid:Bahamas
+typeOf: dcid:Country
+name: "Bahamas"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderBahamas
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Bahamas"
+isProvisional: dcs:True
+
+Node: dcid:Belgium
+typeOf: dcid:Country
+name: "Belgium"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderBelgium
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Belgium"
+isProvisional: dcs:True
+
+Node: dcid:Caribbean Dev. Bank
+typeOf: dcid:Country
+name: "Caribbean  Dev.  Bank"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderCaribbean_Dev._Bank
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Caribbean_ Dev._ Bank"
+isProvisional: dcs:True
+
+Node: dcid:Central American Bank for Econ. Integration (BCIE)
+typeOf: dcid:Country
+name: "Central  American  Bank for  Econ.  Integration ( BCIE)"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderCentral_American_Bank_for_Econ._Integration_BCIE_
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Central_ American_ Bank_for_ Econ._ Integration_ BCIE_"
+isProvisional: dcs:True
+
+Node: dcid:Cuba
+typeOf: dcid:Country
+name: "Cuba"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderCuba
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Cuba"
+isProvisional: dcs:True
+
+Node: dcid:Dev. Bank of the Central African States (BDEAC)
+typeOf: dcid:Country
+name: "Dev.  Bank of the  Central  African  States ( BDEAC)"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderDev._Bank_of_the_Central_African_States_BDEAC_
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender Dev._ Bank_of_the_ Central_ African_ States_ BDEAC_"
+isProvisional: dcs:True
+
+Node: dcid:East African Community
+typeOf: dcid:Country
+name: "East  African  Community"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderEast_African_Community
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender East_ African_ Community"
+isProvisional: dcs:True
+
+Node: dcid:European Economic Community (EEC)
+typeOf: dcid:Country
+name: "European  Economic  Community ( EEC)"
+isProvisional: dcs:True
+
+Node: dcid:Amount_Debt_LenderEuropean_Economic_Community_EEC_
+typeOf: dcid:MeasurementDenominatorEnum
+name: "Amount_ Debt_ Lender European_ Economic_ Community_ EEC_"
+isProvisional: dcs:True
+
