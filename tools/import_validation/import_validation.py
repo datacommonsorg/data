@@ -34,6 +34,7 @@ import os
 import json
 
 from .validator import Validator
+from .util import filter_dataframe
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('validation_config', 'validation_config.json',
@@ -101,6 +102,10 @@ class ValidationRunner:
 
             validation_func, df_key = self.validation_dispatch[validation_name]
             df = self.dataframes[df_key]
+
+            # Apply filters if they are defined in the config
+            if 'variableMeasured' in config:
+                df = filter_dataframe(df, config['variableMeasured'])
 
             # Pass config to the validation function if it's needed
             if validation_name in ['DELETED_COUNT', 'NUM_PLACES_COUNT']:
