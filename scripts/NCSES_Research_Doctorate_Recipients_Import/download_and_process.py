@@ -13,13 +13,12 @@
 # limitations under the License.
 
 # How to run the script to process  the files:
-# python3 download_and_process.py 
+# python3 download_and_process.py
 import os
 import sys
 import pandas as pd
-from absl import app 
+from absl import app
 from absl import logging
-
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
@@ -28,7 +27,6 @@ sys.path.insert(1, os.path.join(_CODEDIR, '../../util/'))
 from download_util_script import download_file
 
 logging.set_verbosity(logging.INFO)
-
 
 download_configs = [{
     "url":
@@ -41,7 +39,6 @@ download_configs = [{
     "output_csv_name":
         "ncses_employed_female.csv"
 }]
-
 
 # data cleaning function
 
@@ -60,7 +57,7 @@ def process_and_modify_data_cascading(file_path):
                           the 'Not Hispanic or Latino' row removed.
                           Returns an empty DataFrame if an error occurs.
     """
-    # Define the list of top-level header keywords
+    # list of top-level header keywords
     header_keywords = [
         'Male doctorate recipients', 'Female doctorate recipients',
         'Hispanic or Latino', 'Not Hispanic or Latino',
@@ -69,9 +66,8 @@ def process_and_modify_data_cascading(file_path):
         'Other race or race not reported', 'Ethnicity not reported'
     ]
 
-    df = pd.DataFrame()  # Initialize an empty DataFrame
+    df = pd.DataFrame()
     try:
-        # Determine file type and read accordingly
         if file_path.endswith('.csv'):
             df = pd.read_csv(file_path, header=None)
             logging.info(f"Successfully loaded CSV file: {file_path}")
@@ -85,16 +81,14 @@ def process_and_modify_data_cascading(file_path):
             return df
 
     except FileNotFoundError:
-        logging.fatal(
-            f"Error: The file '{file_path}' was not found. Please ensure it's in the same directory as the script."
-        )
+        logging.fatal(f"Error: The file '{file_path}' was not found")
         return df
     except Exception as e:
         logging.fatal(f"An error occurred while reading the file: {e}")
 
         return df
 
-    # Variable to keep track of the last encountered top-level header
+    # variable to keep track of the last encountered top-level header
     last_known_header = None
 
     # Apply cascading logic
@@ -103,17 +97,14 @@ def process_and_modify_data_cascading(file_path):
 
         # Check if the current cell value is one of the defined top-level headers
         if current_cell_value in header_keywords:
-            # If it is a top-level header, update our 'last_known_header'
+            # If it is a top-level header, updatating  'last_known_header'
             last_known_header = current_cell_value
         else:
             # If it's not a top-level header, and we have a last known header
             if last_known_header is not None:
-                # Prepend the last known header to the current cell value
                 df.iloc[i, 0] = f"{last_known_header}:{current_cell_value}"
     row_to_remove = "Not Hispanic or Latino"
     original_rows_count = len(df)
-
-    # Filter out the row where the first column (index 0) exactly matches 'row_to_remove'
     df_filtered = df[df.iloc[:, 0].astype(str).str.strip() != row_to_remove]
     removed_rows_count = original_rows_count - len(df_filtered)
 
@@ -134,29 +125,26 @@ def main(argv):
         url = config["url"]
         desired_output_csv_name = config["output_csv_name"]
 
-        logging.info(f"\n--- Attempting to download: {url} ---")
+        logging.info(f"Attempting to download: {url}")
 
-        # Extract filename from URL to know what to expect after download
         file_name_from_url = url.split('/')[-1]
         downloaded_file_path = os.path.join("temp_downloads",
                                             file_name_from_url)
         try:
 
-            download_successful = download_file(
-            url=url,
-            output_folder="temp_downloads", 
-            unzip=False, 
-            headers=None, 
-            tries=3,     
-            delay=5,      
-            backoff=2     
-        )
+            download_successful = download_file(url=url,
+                                                output_folder="temp_downloads",
+                                                unzip=False,
+                                                headers=None,
+                                                tries=3,
+                                                delay=5,
+                                                backoff=2)
 
             if download_successful:
-                logging.info(f"--- Download of '{file_name_from_url}' completed. Processing... ---")
+                logging.info(f"Download of '{file_name_from_url}' completed.")
             else:
-                logging.error(f"--- Download or processing of '{file_name_from_url}' failed. See logs above. ---")
-        
+                logging.error(
+                    f"Download or processing of '{file_name_from_url}' failed")
 
             output_full_path = os.path.join(
                 os.path.dirname(os.path.abspath(__file__)),
@@ -169,16 +157,16 @@ def main(argv):
                 try:
                     modified_df.to_csv(output_full_path, index=False)
                     logging.info(
-                        f"\nSuccessfully created new CSV file: {output_full_path}"
+                        f"Successfully created new CSV file: {output_full_path}"
                     )
                     processed_files.append(desired_output_csv_name)
                 except Exception as e:
                     logging.error(
-                        f"\nAn error occurred while creating the output CSV file for {file_name_from_url}: {e}"
+                        f"An error occurred while creating the output CSV file for {file_name_from_url}: {e}"
                     )
             else:
                 logging.error(
-                    f"\nNo data processed or loaded for {file_name_from_url}. Output CSV not created."
+                    f"No data processed or loaded for {file_name_from_url}. Output CSV not created."
                 )
         except FileNotFoundError:
             logging.fatal(
@@ -190,13 +178,10 @@ def main(argv):
             )
 
     if processed_files:
-        logging.info(
-            "\n--- All requested files processed. Check the following CSVs: ---"
-        )
-        for f in processed_files:
-            logging.info(f"- {f}")
+        logging.info("All requested files processed")
     else:
-        logging.error("\n--- No files were successfully processed. ---")
+        logging.error("No files were successfully processed. ---")
+
 
 if __name__ == '__main__':
     app.run(main)
