@@ -16,14 +16,14 @@ import pandas as pd
 import unittest
 from datetime import datetime
 
-from tools.import_validation import import_validation
+from tools.import_validation.validator import Validator
 
 
 class TestMaxDateLatestValidation(unittest.TestCase):
     '''Test Class for the MAX_DATE_LATEST validation rule.'''
 
     def setUp(self):
-        self.validator = import_validation.Validator()
+        self.validator = Validator()
 
     def test_max_date_latest_fails_on_old_date(self):
         old_year = datetime.now().year - 2
@@ -44,7 +44,7 @@ class TestDeletedCountValidation(unittest.TestCase):
     '''Test Class for the DELETED_COUNT validation rule.'''
 
     def setUp(self):
-        self.validator = import_validation.Validator()
+        self.validator = Validator()
 
     def test_deleted_count_fails_when_over_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
@@ -65,7 +65,7 @@ class TestModifiedCountValidation(unittest.TestCase):
     '''Test Class for the MODIFIED_COUNT validation rule.'''
 
     def setUp(self):
-        self.validator = import_validation.Validator()
+        self.validator = Validator()
 
     def test_modified_count_fails_on_inconsistent_counts(self):
         test_df = pd.DataFrame({'MODIFIED': [1, 2]})  # Inconsistent
@@ -83,7 +83,7 @@ class TestAddedCountValidation(unittest.TestCase):
     '''Test Class for the ADDED_COUNT validation rule.'''
 
     def setUp(self):
-        self.validator = import_validation.Validator()
+        self.validator = Validator()
 
     def test_added_count_fails_on_inconsistent_counts(self):
         test_df = pd.DataFrame({'ADDED': [1, 2]})  # Inconsistent
@@ -101,7 +101,7 @@ class TestUnmodifiedCountValidation(unittest.TestCase):
     '''Test Class for the UNMODIFIED_COUNT validation rule.'''
 
     def setUp(self):
-        self.validator = import_validation.Validator()
+        self.validator = Validator()
 
     def test_unmodified_count_is_always_successful(self):
         test_df = pd.DataFrame({'UNMODIFIED': [1, 2]})  # Inconsistent
@@ -113,7 +113,7 @@ class TestNumPlacesConsistentValidation(unittest.TestCase):
     '''Test Class for the NUM_PLACES_CONSISTENT validation rule.'''
 
     def setUp(self):
-        self.validator = import_validation.Validator()
+        self.validator = Validator()
 
     def test_num_places_consistent_fails_on_inconsistent_counts(self):
         test_df = pd.DataFrame({'NumPlaces': [1, 2]})  # Inconsistent
@@ -131,7 +131,7 @@ class TestNumPlacesCountValidation(unittest.TestCase):
     '''Test Class for the NUM_PLACES_COUNT validation rule.'''
 
     def setUp(self):
-        self.validator = import_validation.Validator()
+        self.validator = Validator()
 
     def test_num_places_count_fails_below_minimum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [5]})

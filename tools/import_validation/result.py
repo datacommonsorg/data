@@ -11,3 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""Module for the ValidationResult data class."""
+
+
+class ValidationResult:
+    """Describes the result of the validaiton of an import."""
+
+    def __init__(self, status, name, message='', details=None):
+        self.status = status
+        self.name = name
+        self.message = message  # A human-readable summary
+        self.details = details if details is not None else {}  # A machine-readable dictionary
