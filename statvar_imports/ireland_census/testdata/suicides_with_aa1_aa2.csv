@@ -1,0 +1,7 @@
+﻿STATISTIC,STATISTIC Label,TLIST(A1),Year,C03171V03833,Area of Residence,C02199V02655,Sex,UNIT,VALUE
+VSD30,Suicides,2008,2008,-,State,-,Both sexes,Number,506
+VSD30,Suicides,2008,2008,-,State,1,Male,Number,386
+VSD30,Suicides,2008,2008,-,State,2,Female,Number,120
+VSD30,Suicides,2008,2008,A,Leinster,-,Both sexes,Number,250
+VSD30,Suicides,2008,2008,A,Leinster,1,Male,Number,182
+VSD30,Suicides,2008,2008,A,Leinster,2,Female,Number,68

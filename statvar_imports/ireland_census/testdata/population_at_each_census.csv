@@ -1,0 +1,7 @@
+﻿STATISTIC,Statistic Label,TLIST(A1),CensusYear,C02779V03348,County,C02199V02655,Sex,UNIT,VALUE
+FY001C01,Population at Each Census,1841,1841,-,State,-,Both sexes,Number,6528799
+FY001C01,Population at Each Census,1841,1841,-,State,1,Male,Number,3222485
+FY001C01,Population at Each Census,1841,1841,-,State,2,Female,Number,3306314
+FY001C01,Population at Each Census,1841,1841,1,Carlow,-,Both sexes,Number,86228
+FY001C01,Population at Each Census,1841,1841,1,Carlow,1,Male,Number,42428
+FY001C01,Population at Each Census,1841,1841,1,Carlow,2,Female,Number,43800
