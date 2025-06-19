@@ -143,7 +143,7 @@ class Validator:
         return ValidationResult('PASSED', 'UNMODIFIED_COUNT')
 
     def validate_num_places_consistent(
-            self, stats_df: pd.DataFrame) -> ValidationResult:
+        self, stats_df: pd.DataFrame) -> ValidationResult:
         """Checks if the number of places is the same for all StatVars.
 
     Args:
@@ -228,3 +228,83 @@ class Validator:
                     })
 
         return ValidationResult('PASSED', 'NUM_PLACES_COUNT')
+
+    def validate_min_value_check(self, stats_df: pd.DataFrame,
+                                 config: dict) -> ValidationResult:
+        """Checks if the MinValue for each StatVar is not below a defined minimum.
+
+    Args:
+      stats_df: A DataFrame containing the summary statistics, expected to have
+        'MinValue' and 'StatVar' columns.
+      config: A dictionary containing the validation configuration, which must
+        have a 'minimum' key.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if stats_df.empty:
+            return ValidationResult('PASSED', 'MIN_VALUE_CHECK')
+
+        min_val = config.get('minimum')
+        if min_val is None:
+            return ValidationResult(
+                'FAILED',
+                'MIN_VALUE_CHECK',
+                message="Configuration error: 'minimum' not specified.")
+
+        for _, row in stats_df.iterrows():
+            min_value = row['MinValue']
+            stat_var = row.get('StatVar', 'Unknown')
+
+            if min_value < min_val:
+                return ValidationResult(
+                    'FAILED',
+                    'MIN_VALUE_CHECK',
+                    message=
+                    f"StatVar '{stat_var}' has a minimum value of {min_value}, which is below the required minimum of {min_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_min_value': min_value,
+                        'minimum': min_val
+                    })
+        return ValidationResult('PASSED', 'MIN_VALUE_CHECK')
+
+    def validate_max_value_check(self, stats_df: pd.DataFrame,
+                                 config: dict) -> ValidationResult:
+        """Checks if the MaxValue for each StatVar is not above a defined maximum.
+
+    Args:
+      stats_df: A DataFrame containing the summary statistics, expected to have
+        'MaxValue' and 'StatVar' columns.
+      config: A dictionary containing the validation configuration, which must
+        have a 'maximum' key.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if stats_df.empty:
+            return ValidationResult('PASSED', 'MAX_VALUE_CHECK')
+
+        max_val = config.get('maximum')
+        if max_val is None:
+            return ValidationResult(
+                'FAILED',
+                'MAX_VALUE_CHECK',
+                message="Configuration error: 'maximum' not specified.")
+
+        for _, row in stats_df.iterrows():
+            max_value = row['MaxValue']
+            stat_var = row.get('StatVar', 'Unknown')
+
+            if max_value > max_val:
+                return ValidationResult(
+                    'FAILED',
+                    'MAX_VALUE_CHECK',
+                    message=
+                    f"StatVar '{stat_var}' has a maximum value of {max_value}, which is above the allowed maximum of {max_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_max_value': max_value,
+                        'maximum': max_val
+                    })
+        return ValidationResult('PASSED', 'MAX_VALUE_CHECK')

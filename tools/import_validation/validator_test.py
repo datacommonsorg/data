@@ -127,6 +127,46 @@ class TestNumPlacesConsistentValidation(unittest.TestCase):
         self.assertEqual(result.status, 'PASSED')
 
 
+class TestMinValueCheckValidation(unittest.TestCase):
+    '''Test Class for the MIN_VALUE_CHECK validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_min_value_check_fails_below_minimum(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1'], 'MinValue': [5]})
+        config = {'minimum': 10}
+        result = self.validator.validate_min_value_check(test_df, config)
+        self.assertEqual(result.status, 'FAILED')
+        self.assertEqual(result.details['actual_min_value'], 5)
+
+    def test_min_value_check_passes_at_minimum(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1'], 'MinValue': [10]})
+        config = {'minimum': 10}
+        result = self.validator.validate_min_value_check(test_df, config)
+        self.assertEqual(result.status, 'PASSED')
+
+
+class TestMaxValueCheckValidation(unittest.TestCase):
+    '''Test Class for the MAX_VALUE_CHECK validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_max_value_check_fails_above_maximum(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1'], 'MaxValue': [15]})
+        config = {'maximum': 10}
+        result = self.validator.validate_max_value_check(test_df, config)
+        self.assertEqual(result.status, 'FAILED')
+        self.assertEqual(result.details['actual_max_value'], 15)
+
+    def test_max_value_check_passes_at_maximum(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1'], 'MaxValue': [10]})
+        config = {'maximum': 10}
+        result = self.validator.validate_max_value_check(test_df, config)
+        self.assertEqual(result.status, 'PASSED')
+
+
 class TestNumPlacesCountValidation(unittest.TestCase):
     '''Test Class for the NUM_PLACES_COUNT validation rule.'''
 

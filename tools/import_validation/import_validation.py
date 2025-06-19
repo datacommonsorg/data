@@ -86,6 +86,10 @@ class ValidationRunner:
                 (self.validator.validate_num_places_consistent, 'stats'),
             'NUM_PLACES_COUNT':
                 (self.validator.validate_num_places_count, 'stats'),
+            'MIN_VALUE_CHECK':
+                (self.validator.validate_min_value_check, 'stats'),
+            'MAX_VALUE_CHECK':
+                (self.validator.validate_max_value_check, 'stats'),
         }
 
     def run_validations(self) -> bool:
@@ -107,7 +111,10 @@ class ValidationRunner:
                 df = filter_dataframe(df, config['variableMeasured'])
 
             # Pass config to the validation function if it's needed
-            if validation_name in ['DELETED_COUNT', 'NUM_PLACES_COUNT']:
+            if validation_name in [
+                    'DELETED_COUNT', 'NUM_PLACES_COUNT', 'MIN_VALUE_CHECK',
+                    'MAX_VALUE_CHECK'
+            ]:
                 result = validation_func(df, config)
             else:
                 result = validation_func(df)
