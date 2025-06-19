@@ -32,10 +32,12 @@ class TestValidation(unittest.TestCase):
         result_file = os.path.join(module_dir, 'test', 'test_output.csv')
         config_file = os.path.join(module_dir, 'test', 'test_config.json')
         differ_output = os.path.join(module_dir, 'test', 'differ_output.csv')
+        stats_summary = os.path.join(module_dir, 'test', 'stats_summary.csv')
         validation_output = os.path.join(module_dir, 'validation_output.csv')
 
         validation = import_validation.ImportValidation(config_file,
-                                                        differ_output, '',
+                                                        differ_output,
+                                                        stats_summary,
                                                         validation_output)
         validation.run_validations()
 

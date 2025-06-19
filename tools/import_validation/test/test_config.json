@@ -8,5 +8,11 @@
     },
     {
         "validation": "ADDED_COUNT"
+    },
+    {
+        "validation": "UNMODIFIED_COUNT"
+    },
+    {
+        "validation": "MAX_DATE_LATEST"
     }
 ]

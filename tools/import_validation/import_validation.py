@@ -31,13 +31,16 @@ flags.DEFINE_string('stats_summary', 'summary_report.csv',
 flags.DEFINE_string('validation_output', 'validation_output.csv',
                     'Path to the validation output file.')
 
-Validation = Enum('Validation', [
-    ('MODIFIED_COUNT', 1),
-    ('UNMODIFIED_COUNT', 2),
-    ('ADDED_COUNT', 3),
-    ('DELETED_COUNT', 4),
-    ('LATEST_DATA', 5),
-])
+Validation = Enum(
+    'Validation',
+    [
+        ('MODIFIED_COUNT', 1),
+        ('UNMODIFIED_COUNT', 2),
+        ('ADDED_COUNT', 3),
+        ('DELETED_COUNT', 4),
+        ('LATEST_DATA', 5),
+        ('MAX_DATE_LATEST', 6),
+    ])
 
 
 class ValidationResult:
@@ -68,18 +71,30 @@ class ImportValidation:
     def __init__(self, validation_config: str, differ_output: str,
                  stats_summary: str, validation_output: str):
         logging.info('Reading config from %s', validation_config)
-        self.differ_results = pd.read_csv(differ_output)
-        print(self.differ_results)
+        if os.path.exists(differ_output):
+            self.differ_results = pd.read_csv(differ_output)
+        if os.path.exists(stats_summary):
+            self.stats_summary = pd.read_csv(stats_summary)
         self.validation_map = {
             Validation.MODIFIED_COUNT: self._modified_count_validation,
             Validation.ADDED_COUNT: self._added_count_validation,
             Validation.DELETED_COUNT: self._deleted_count_validation,
-            Validation.UNMODIFIED_COUNT: self._unmodified_count_validation
+            Validation.UNMODIFIED_COUNT: self._unmodified_count_validation,
+            Validation.MAX_DATE_LATEST: self._max_date_latest_validation,
         }
         self.validation_output = validation_output
         self.validation_result = []
         with open(validation_config, encoding='utf-8') as fd:
             self.validation_config = json.load(fd)
+
+    def _max_date_latest_validation(self, config: dict):
+        if self.stats_summary.empty:
+            return
+        self.stats_summary['MaxDate'] = pd.to_datetime(
+            self.stats_summary['MaxDate'])
+        max_date_year = self.stats_summary['MaxDate'].dt.year.max()
+        if max_date_year < pd.to_datetime('today').year:
+            raise AssertionError(f'Validation failed: {config["validation"]}')
 
     def _latest_data_validation(self, config: dict):
         logging.info('Not yet implemented')
@@ -102,7 +117,7 @@ class ImportValidation:
     def _added_count_validation(self, config: dict):
         if self.differ_results.empty:
             return
-        if self.differ_results['ADDED'].nunique() > 1:
+        if self.differ_results['ADDED'].nunique() != 1:
             raise AssertionError(f'Validation failed: {config["validation"]}')
 
     # Checks if number of unmodified points for each stat var are same.
