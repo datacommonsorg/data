@@ -1,9 +1,9 @@
+mapped_rows,1,,,,,,,
+mapped_columns,7,,,,,,,
 key,p1,v1,p2,v2,p3,v3,p4,v4
-mapped+AF8-rows,1,,,,,,,
-mapped+AF8-columns,7,,,,,,,
-Year,observationDate,+AHs-Number+AH0-,,,,,,
+Year,observationDate,{Number},,,,,,
 Suicides (Number),measuredProperty,count,populationType,MortalityEvent,causeOfDeath,Suicide,observationAbout,country/IRL
-VALUE,value,+AHs-Number+AH0-,,,,,,
+VALUE,value,{Number},,,,,,
 Male,gender,Male,,,,,,
 Female,gender,Female,,,,,,
-+ACI-Suicides (Rate per 100,000 Pop.)+ACI-,+ACM-ignore,ignore,,,,,,
+"Suicides (Rate per 100,000 Pop.)",#ignore,Not_required_for_the_dataset,,,,,,
