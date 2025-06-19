@@ -45,7 +45,6 @@ def download_file():
     
     except Exception as e:
         logging.fatal(f"Failed to download file: {e}")
-        return None
     
 #Function to extract and process the CSV file from ZIP
 def extract_and_process(zip_path):
@@ -75,4 +74,4 @@ def main(argv):
 
 if __name__ == "__main__":  
     app.run(main)
-    
+

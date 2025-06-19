@@ -253,6 +253,5 @@
         "#ignore" : "Ignore missing NAICS",
         #'naics': 'dcs:NAICS/',		**** Not mapped
     }
-
 }
 
