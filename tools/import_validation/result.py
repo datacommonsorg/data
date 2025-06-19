@@ -21,4 +21,5 @@ class ValidationResult:
         self.status = status
         self.name = name
         self.message = message  # A human-readable summary
-        self.details = details if details is not None else {}  # A machine-readable dictionary
+        self.details = details if details is not None else {
+        }  # A machine-readable dictionary

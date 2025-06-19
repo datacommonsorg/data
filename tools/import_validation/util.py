@@ -17,8 +17,7 @@ import pandas as pd
 import re
 
 
-def filter_dataframe(df: pd.DataFrame,
-                     filter_config: list) -> pd.DataFrame:
+def filter_dataframe(df: pd.DataFrame, filter_config: list) -> pd.DataFrame:
     """Filters a DataFrame based on a configuration.
 
     The filter configuration is a list that can contain:
@@ -49,8 +48,7 @@ def filter_dataframe(df: pd.DataFrame,
                 matching_indices.update(df[matches].index)
             except re.error:
                 # Treat as a literal string if regex is invalid
-                matching_indices.update(
-                    df[df['StatVar'] == f].index)
+                matching_indices.update(df[df['StatVar'] == f].index)
 
         elif isinstance(f, dict):
             # Handle dictionary-based property matching
@@ -61,7 +59,8 @@ def filter_dataframe(df: pd.DataFrame,
             for prop, value in f.items():
                 if value == '*':
                     # Match if the property exists
-                    prop_conditions.append(df['StatVar'].str.contains(f"{prop}="))
+                    prop_conditions.append(
+                        df['StatVar'].str.contains(f"{prop}="))
                 else:
                     # Match the exact property:value pair
                     prop_conditions.append(

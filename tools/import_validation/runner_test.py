@@ -48,8 +48,10 @@ class TestValidationRunner(unittest.TestCase):
         # 2. Create test files
         with open(self.config_path, 'w') as f:
             json.dump([{'validation': 'MAX_DATE_LATEST'}], f)
-        pd.DataFrame({'StatVar': ['sv1'], 'MaxDate': ['2024-01-01']}).to_csv(
-            self.stats_path, index=False)
+        pd.DataFrame({
+            'StatVar': ['sv1'],
+            'MaxDate': ['2024-01-01']
+        }).to_csv(self.stats_path, index=False)
 
         # 3. Run the runner
         runner = ValidationRunner(
@@ -67,13 +69,14 @@ class TestValidationRunner(unittest.TestCase):
     @patch('tools.import_validation.import_validation.filter_dataframe')
     @patch('tools.import_validation.import_validation.Validator')
     def test_runner_applies_filters_correctly(self, MockValidator,
-                                             mock_filter_dataframe):
+                                              mock_filter_dataframe):
         # 1. Setup mocks
         mock_validator_instance = MockValidator.return_value
         mock_validator_instance.validate_num_places_consistent.return_value = ValidationResult(
             'PASSED', 'NUM_PLACES_CONSISTENT')
         # Make the mock filter function return a specific dummy dataframe
-        mock_filter_dataframe.return_value = pd.DataFrame({'StatVar': ['filtered_sv']})
+        mock_filter_dataframe.return_value = pd.DataFrame(
+            {'StatVar': ['filtered_sv']})
 
         # 2. Create test files
         config = [{
@@ -89,11 +92,10 @@ class TestValidationRunner(unittest.TestCase):
         original_df.to_csv(self.stats_path, index=False)
 
         # 3. Run the runner
-        runner = ValidationRunner(
-            validation_config=self.config_path,
-            stats_summary=self.stats_path,
-            differ_output=self.differ_path,
-            validation_output=self.output_path)
+        runner = ValidationRunner(validation_config=self.config_path,
+                                  stats_summary=self.stats_path,
+                                  differ_output=self.differ_path,
+                                  validation_output=self.output_path)
         runner.run_validations()
 
         # 4. Assert that the filter function was called correctly
@@ -113,15 +115,16 @@ class TestValidationRunner(unittest.TestCase):
         # 2. Create test files
         with open(self.config_path, 'w') as f:
             json.dump([{'validation': 'MAX_DATE_LATEST'}], f)
-        pd.DataFrame({'StatVar': ['sv1'], 'MaxDate': ['2024-01-01']}).to_csv(
-            self.stats_path, index=False)
+        pd.DataFrame({
+            'StatVar': ['sv1'],
+            'MaxDate': ['2024-01-01']
+        }).to_csv(self.stats_path, index=False)
 
         # 3. Run the runner
-        runner = ValidationRunner(
-            validation_config=self.config_path,
-            stats_summary=self.stats_path,
-            differ_output=self.differ_path,
-            validation_output=self.output_path)
+        runner = ValidationRunner(validation_config=self.config_path,
+                                  stats_summary=self.stats_path,
+                                  differ_output=self.differ_path,
+                                  validation_output=self.output_path)
         overall_status = runner.run_validations()
 
         # 4. Assert that the overall status is False
@@ -131,11 +134,10 @@ class TestValidationRunner(unittest.TestCase):
     def test_runner_writes_correct_output(self, MockValidator):
         # 1. Setup the mock to return a specific result
         mock_validator_instance = MockValidator.return_value
-        expected_result = ValidationResult(
-            'FAILED',
-            'DELETED_COUNT',
-            message='Too many deletions',
-            details={'deleted_count': 100})
+        expected_result = ValidationResult('FAILED',
+                                           'DELETED_COUNT',
+                                           message='Too many deletions',
+                                           details={'deleted_count': 100})
         mock_validator_instance.validate_deleted_count.return_value = expected_result
 
         # 2. Create test files
@@ -144,11 +146,10 @@ class TestValidationRunner(unittest.TestCase):
         pd.DataFrame({'DELETED': [100]}).to_csv(self.differ_path, index=False)
 
         # 3. Run the runner
-        runner = ValidationRunner(
-            validation_config=self.config_path,
-            stats_summary=self.stats_path,
-            differ_output=self.differ_path,
-            validation_output=self.output_path)
+        runner = ValidationRunner(validation_config=self.config_path,
+                                  stats_summary=self.stats_path,
+                                  differ_output=self.differ_path,
+                                  validation_output=self.output_path)
         runner.run_validations()
 
         # 4. Read the output file and assert its contents
@@ -157,8 +158,7 @@ class TestValidationRunner(unittest.TestCase):
         self.assertEqual(output_df.iloc[0]['test'], 'DELETED_COUNT')
         self.assertEqual(output_df.iloc[0]['status'], 'FAILED')
         self.assertEqual(output_df.iloc[0]['message'], 'Too many deletions')
-        self.assertEqual(output_df.iloc[0]['details'],
-                         '{"deleted_count": 100}')
+        self.assertEqual(output_df.iloc[0]['details'], '{"deleted_count": 100}')
 
     @patch('tools.import_validation.import_validation.logging')
     @patch('tools.import_validation.import_validation.Validator')
@@ -169,11 +169,10 @@ class TestValidationRunner(unittest.TestCase):
             json.dump([{'validation': 'FAKE_VALIDATION'}], f)
 
         # 2. Run the runner
-        runner = ValidationRunner(
-            validation_config=self.config_path,
-            stats_summary=self.stats_path,
-            differ_output=self.differ_path,
-            validation_output=self.output_path)
+        runner = ValidationRunner(validation_config=self.config_path,
+                                  stats_summary=self.stats_path,
+                                  differ_output=self.differ_path,
+                                  validation_output=self.output_path)
         runner.run_validations()
 
         # 3. Assert that a warning was logged

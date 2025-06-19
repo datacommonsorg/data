@@ -23,8 +23,8 @@ class TestFilterDataFrame(unittest.TestCase):
     def setUp(self):
         self.test_df = pd.DataFrame({
             'StatVar': [
-                'Count_Person_Male', 'Count_Person_Female',
-                'Count_Person_U18', 'Amount_Money_Debt_Government'
+                'Count_Person_Male', 'Count_Person_Female', 'Count_Person_U18',
+                'Amount_Money_Debt_Government'
             ]
         })
 
@@ -42,10 +42,7 @@ class TestFilterDataFrame(unittest.TestCase):
     def test_filter_with_dictionary(self):
         # This is a simplified test. A more robust implementation would
         # require a more sophisticated mock of the DCID structure.
-        config = [{
-            'populationType': 'Person',
-            'gender': 'Male'
-        }]
+        config = [{'populationType': 'Person', 'gender': 'Male'}]
         # Our current implementation uses string matching, so this will fail.
         # This highlights the need for a more robust DCID parsing implementation.
         # For now, we expect this to return 0 results.
@@ -53,10 +50,7 @@ class TestFilterDataFrame(unittest.TestCase):
         self.assertEqual(len(filtered_df), 0)
 
     def test_filter_with_wildcard_dictionary(self):
-        config = [{
-            'populationType': 'Person',
-            'age': '*'
-        }]
+        config = [{'populationType': 'Person', 'age': '*'}]
         # This will also fail with the current simplified implementation.
         filtered_df = filter_dataframe(self.test_df, config)
         self.assertEqual(len(filtered_df), 0)

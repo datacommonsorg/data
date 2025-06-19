@@ -143,7 +143,7 @@ class Validator:
         return ValidationResult('PASSED', 'UNMODIFIED_COUNT')
 
     def validate_num_places_consistent(
-        self, stats_df: pd.DataFrame) -> ValidationResult:
+            self, stats_df: pd.DataFrame) -> ValidationResult:
         """Checks if the number of places is the same for all StatVars.
 
     Args:
