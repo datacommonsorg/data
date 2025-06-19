@@ -1,0 +1,8 @@
+Node: E:irl_external_cause_of_death_output->E0
+observationAbout: C:irl_external_cause_of_death_output->observationAbout
+observationDate: C:irl_external_cause_of_death_output->observationDate
+value: C:irl_external_cause_of_death_output->value
+variableMeasured: C:irl_external_cause_of_death_output->variableMeasured
+unit: C:irl_external_cause_of_death_output->unit
+scalingFactor: C:irl_external_cause_of_death_output->scalingFactor
+typeOf: dcs:StatVarObservation

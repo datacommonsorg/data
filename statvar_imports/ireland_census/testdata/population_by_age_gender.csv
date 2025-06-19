@@ -1,0 +1,7 @@
+﻿STATISTIC,Statistic Label,TLIST(A1),CensusYear,C02076V03371,Age Group,C02199V02655,Sex,UNIT,VALUE
+FY002C01,Population at Each Census,1926,1926,-,All ages,-,Both sexes,Number,2971992
+FY002C01,Population at Each Census,1926,1926,-,All ages,1,Male,Number,1506889
+FY002C01,Population at Each Census,1926,1926,-,All ages,2,Female,Number,1465103
+FY002C01,Population at Each Census,1926,1926,215,0 - 14 years,-,Both sexes,Number,867879
+FY002C01,Population at Each Census,1926,1926,215,0 - 14 years,1,Male,Number,441751
+FY002C01,Population at Each Census,1926,1926,215,0 - 14 years,2,Female,Number,426128

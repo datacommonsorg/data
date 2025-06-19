@@ -1,0 +1,18 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4
+mapped+AF8-rows,1,,,,,,,
+mapped+AF8-columns,9,,,,,,,
+Year,observationDate,+AHs-Number+AH0-,,,,,,
+Male,gender,Male,,,,,,
+Female,gender,Female,,,,,,
+Age,measuredProperty,lifeExpectancy,populationType,Person,unit,Year,observationAbout,country/IRL
+5 years,age,+AFs-5 Years+AF0-,,,,,,
+10 years,age,+AFs-10 Years+AF0-,,,,,,
+15 years,age,+AFs-15 Years+AF0-,,,,,,
+20 years,age,+AFs-20 Years+AF0-,,,,,,
+25 years,age,+AFs-25 Years+AF0-,,,,,,
+35 years,age,+AFs-35 Years+AF0-,,,,,,
+45 years,age,+AFs-45 Years+AF0-,,,,,,
+55 years,age,+AFs-55 Years+AF0-,,,,,,
+65 years,age,+AFs-65 Years+AF0-,,,,,,
+75 years,age,+AFs-75 Years+AF0-,,,,,,
+VALUE,value,+AHs-Number+AH0-,,,,,,
