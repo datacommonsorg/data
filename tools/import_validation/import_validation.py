@@ -52,6 +52,7 @@ Validation = Enum('Validation', [
     ('LATEST_DATA', 5),
     ('MAX_DATE_LATEST', 6),
     ('NUM_PLACES_CONSISTENT', 7),
+    ('NUM_PLACES_COUNT', 8),
 ])
 
 
@@ -163,6 +164,58 @@ class Validator:
                 details={'unique_counts': list(stats_df['NumPlaces'].unique())})
         return ValidationResult('PASSED', 'NUM_PLACES_CONSISTENT')
 
+    def validate_num_places_count(self, stats_df: pd.DataFrame,
+                                  config: dict) -> ValidationResult:
+        """Checks if the number of places for each StatVar is within a defined range."""
+        if stats_df.empty:
+            return ValidationResult('PASSED', 'NUM_PLACES_COUNT')
+
+        min_val = config.get('minimum')
+        max_val = config.get('maximum')
+        exact_val = config.get('value')
+
+        for _, row in stats_df.iterrows():
+            num_places = row['NumPlaces']
+            stat_var = row.get(
+                'StatVar', 'Unknown'
+            ) # Assuming StatVar column exists for better error messages
+
+            if exact_val is not None and num_places != exact_val:
+                return ValidationResult(
+                    'FAILED',
+                    'NUM_PLACES_COUNT',
+                    message=
+                    f"StatVar '{stat_var}' has {num_places} places, but expected exactly {exact_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_count': num_places,
+                        'expected_count': exact_val
+                    })
+            if min_val is not None and num_places < min_val:
+                return ValidationResult(
+                    'FAILED',
+                    'NUM_PLACES_COUNT',
+                    message=
+                    f"StatVar '{stat_var}' has {num_places} places, which is below the minimum of {min_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_count': num_places,
+                        'minimum': min_val
+                    })
+            if max_val is not None and num_places > max_val:
+                return ValidationResult(
+                    'FAILED',
+                    'NUM_PLACES_COUNT',
+                    message=
+                    f"StatVar '{stat_var}' has {num_places} places, which is above the maximum of {max_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_count': num_places,
+                        'maximum': max_val
+                    })
+
+        return ValidationResult('PASSED', 'NUM_PLACES_COUNT')
+
 
 class ValidationRunner:
     """
@@ -207,6 +260,9 @@ class ValidationRunner:
             elif validation_name == 'NUM_PLACES_CONSISTENT':
                 result = self.validator.validate_num_places_consistent(
                     self.stats_df)
+            elif validation_name == 'NUM_PLACES_COUNT':
+                result = self.validator.validate_num_places_count(
+                    self.stats_df, config)
 
             if result:
                 self.validation_results.append(result)

@@ -125,5 +125,45 @@ class TestNumPlacesConsistentValidation(unittest.TestCase):
         self.assertEqual(result.status, 'PASSED')
 
 
+class TestNumPlacesCountValidation(unittest.TestCase):
+    '''Test Class for the NUM_PLACES_COUNT validation rule.'''
+
+    def setUp(self):
+        self.validator = import_validation.Validator()
+
+    def test_num_places_count_fails_below_minimum(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [5]})
+        config = {'minimum': 10}
+        result = self.validator.validate_num_places_count(test_df, config)
+        self.assertEqual(result.status, 'FAILED')
+        self.assertEqual(result.details['actual_count'], 5)
+
+    def test_num_places_count_fails_above_maximum(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [15]})
+        config = {'maximum': 10}
+        result = self.validator.validate_num_places_count(test_df, config)
+        self.assertEqual(result.status, 'FAILED')
+        self.assertEqual(result.details['actual_count'], 15)
+
+    def test_num_places_count_fails_on_exact_mismatch(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [10]})
+        config = {'value': 11}
+        result = self.validator.validate_num_places_count(test_df, config)
+        self.assertEqual(result.status, 'FAILED')
+        self.assertEqual(result.details['actual_count'], 10)
+
+    def test_num_places_count_passes_within_range(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [10]})
+        config = {'minimum': 5, 'maximum': 15}
+        result = self.validator.validate_num_places_count(test_df, config)
+        self.assertEqual(result.status, 'PASSED')
+
+    def test_num_places_count_passes_on_exact_match(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [10]})
+        config = {'value': 10}
+        result = self.validator.validate_num_places_count(test_df, config)
+        self.assertEqual(result.status, 'PASSED')
+
+
 if __name__ == '__main__':
     unittest.main()
