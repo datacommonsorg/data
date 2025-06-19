@@ -1,11 +1,11 @@
+mapped_rows,1,,,
+mapped_columns,9,,,
 key,p1,v1,p2,v2
-mapped+AF8-rows,1,,,
-mapped+AF8-columns,9,,,
-County and City,observationAbout,+AHs-Data+AH0-,,
-CensusYear,observationDate,+AHs-Number+AH0-,,
+County and City,observationAbout,{Data},,
+CensusYear,observationDate,{Number},,
 Sex,measuredProperty,count,populationType,Person
 Male,gender,Male,,
 Female,gender,Female,,
-VALUE,value,+AHs-Number+AH0-,,
-Actual change since previous census,+ACM-ignore,Not_required_for_the_dataset,,
-Percentage change since previous census,+ACM-ignore,Not_required_for_the_dataset,,
+VALUE,value,{Number},,
+Actual change since previous census,#ignore,Not_required_for_the_dataset,,
+Percentage change since previous census,#ignore,Not_required_for_the_dataset,,
