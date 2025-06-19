@@ -32,9 +32,11 @@ from absl import logging
 import pandas as pd
 import os
 import json
+import sys
 
 from .validator import Validator
 from .util import filter_dataframe
+from .result import ValidationResult, ValidationStatus
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('validation_config', 'validation_config.json',
@@ -96,7 +98,7 @@ class ValidationRunner:
         """
     Runs all validations specified in the config and returns the overall status.
     """
-        status = True
+        overall_status = True
         for config in self.validation_config:
             validation_name = config['validation']
             if validation_name not in self.validation_dispatch:
@@ -120,14 +122,17 @@ class ValidationRunner:
                 result = validation_func(df)
 
             self.validation_results.append(result)
-            if result.status == 'FAILED':
-                status = False
-                logging.error(result.message)
+            if result.status != ValidationStatus.PASSED:
+                overall_status = False
+                if result.status == ValidationStatus.FAILED:
+                    logging.error(result.message)
+                else:
+                    logging.warning(result.message)
             else:
                 logging.info('Validation passed: %s', result.name)
 
         self._write_results_to_file()
-        return status
+        return overall_status
 
     def _write_results_to_file(self):
         with open(self.validation_output, mode='w',
@@ -137,14 +142,15 @@ class ValidationRunner:
                 details_str = json.dumps(
                     result.details) if result.details else ''
                 output_file.write(
-                    f'{result.name},{result.status},{result.message},{details_str}\n'
+                    f'{result.name},{result.status.value},{result.message},{details_str}\n'
                 )
 
 
 def main(_):
     runner = ValidationRunner(_FLAGS.validation_config, _FLAGS.differ_output,
                               _FLAGS.stats_summary, _FLAGS.validation_output)
-    runner.run_validations()
+    if not runner.run_validations():
+        sys.exit(1)
 
 
 if __name__ == '__main__':

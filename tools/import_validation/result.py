@@ -13,11 +13,25 @@
 # limitations under the License.
 """Module for the ValidationResult data class."""
 
+from enum import Enum
+
+
+class ValidationStatus(Enum):
+    """Represents the outcome of a validation check."""
+    PASSED = "PASSED"
+    FAILED = "FAILED"
+    CONFIG_ERROR = "CONFIG_ERROR"  # For bad configuration
+    DATA_ERROR = "DATA_ERROR"  # For missing columns
+
 
 class ValidationResult:
     """Describes the result of the validaiton of an import."""
 
-    def __init__(self, status, name, message='', details=None):
+    def __init__(self,
+                 status: ValidationStatus,
+                 name: str,
+                 message: str = '',
+                 details: dict = None):
         self.status = status
         self.name = name
         self.message = message  # A human-readable summary

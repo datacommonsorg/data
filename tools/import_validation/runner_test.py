@@ -21,7 +21,7 @@ import json
 import tempfile
 
 from tools.import_validation.import_validation import ValidationRunner
-from tools.import_validation.result import ValidationResult
+from tools.import_validation.result import ValidationResult, ValidationStatus
 
 
 class TestValidationRunner(unittest.TestCase):
@@ -43,7 +43,7 @@ class TestValidationRunner(unittest.TestCase):
         # 1. Setup the mock
         mock_validator_instance = MockValidator.return_value
         mock_validator_instance.validate_max_date_latest.return_value = ValidationResult(
-            'PASSED', 'MAX_DATE_LATEST')
+            ValidationStatus.PASSED, 'MAX_DATE_LATEST')
 
         # 2. Create test files
         with open(self.config_path, 'w') as f:
@@ -73,7 +73,7 @@ class TestValidationRunner(unittest.TestCase):
         # 1. Setup mocks
         mock_validator_instance = MockValidator.return_value
         mock_validator_instance.validate_num_places_consistent.return_value = ValidationResult(
-            'PASSED', 'NUM_PLACES_CONSISTENT')
+            ValidationStatus.PASSED, 'NUM_PLACES_CONSISTENT')
         # Make the mock filter function return a specific dummy dataframe
         mock_filter_dataframe.return_value = pd.DataFrame(
             {'StatVar': ['filtered_sv']})
@@ -110,7 +110,7 @@ class TestValidationRunner(unittest.TestCase):
         # 1. Setup the mock to return a FAILED result
         mock_validator_instance = MockValidator.return_value
         mock_validator_instance.validate_max_date_latest.return_value = ValidationResult(
-            'FAILED', 'MAX_DATE_LATEST', 'It failed')
+            ValidationStatus.FAILED, 'MAX_DATE_LATEST', 'It failed')
 
         # 2. Create test files
         with open(self.config_path, 'w') as f:
@@ -134,7 +134,7 @@ class TestValidationRunner(unittest.TestCase):
     def test_runner_writes_correct_output(self, MockValidator):
         # 1. Setup the mock to return a specific result
         mock_validator_instance = MockValidator.return_value
-        expected_result = ValidationResult('FAILED',
+        expected_result = ValidationResult(ValidationStatus.FAILED,
                                            'DELETED_COUNT',
                                            message='Too many deletions',
                                            details={'deleted_count': 100})
