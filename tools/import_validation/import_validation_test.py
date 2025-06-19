@@ -30,6 +30,8 @@ class TestMaxDateLatestValidation(unittest.TestCase):
         test_df = pd.DataFrame({'MaxDate': [f'{old_year}-01-01']})
         result = self.validator.validate_max_date_latest(test_df)
         self.assertEqual(result.status, 'FAILED')
+        self.assertIn('Latest date found was', result.message)
+        self.assertEqual(result.details['latest_date_found'], old_year)
 
     def test_max_date_latest_passes_on_current_date(self):
         current_year = datetime.now().year
@@ -48,6 +50,8 @@ class TestDeletedCountValidation(unittest.TestCase):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
         result = self.validator.validate_deleted_count(test_df, threshold=1)
         self.assertEqual(result.status, 'FAILED')
+        self.assertEqual(result.details['deleted_count'], 2)
+        self.assertEqual(result.details['threshold'], 1)
 
     def test_deleted_count_passes_when_at_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
@@ -65,6 +69,7 @@ class TestModifiedCountValidation(unittest.TestCase):
         test_df = pd.DataFrame({'MODIFIED': [1, 2]})  # Inconsistent
         result = self.validator.validate_modified_count(test_df)
         self.assertEqual(result.status, 'FAILED')
+        self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
 
     def test_modified_count_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'MODIFIED': [2, 2]})  # Consistent
@@ -82,6 +87,7 @@ class TestAddedCountValidation(unittest.TestCase):
         test_df = pd.DataFrame({'ADDED': [1, 2]})  # Inconsistent
         result = self.validator.validate_added_count(test_df)
         self.assertEqual(result.status, 'FAILED')
+        self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
 
     def test_added_count_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'ADDED': [1, 1]})  # Consistent
@@ -111,6 +117,7 @@ class TestNumPlacesConsistentValidation(unittest.TestCase):
         test_df = pd.DataFrame({'NumPlaces': [1, 2]})  # Inconsistent
         result = self.validator.validate_num_places_consistent(test_df)
         self.assertEqual(result.status, 'FAILED')
+        self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
 
     def test_num_places_consistent_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'NumPlaces': [2, 2]})  # Consistent

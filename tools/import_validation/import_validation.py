@@ -45,10 +45,11 @@ Validation = Enum('Validation', [
 class ValidationResult:
     """Describes the result of the validaiton of an import."""
 
-    def __init__(self, status, name, message=''):
+    def __init__(self, status, name, message='', details=None):
         self.status = status
         self.name = name
-        self.message = message
+        self.message = message # A human-readable summary
+        self.details = details if details is not None else {} # A machine-readable dictionary
 
 
 class Validator:
@@ -67,39 +68,61 @@ class Validator:
 
         stats_df['MaxDate'] = pd.to_datetime(stats_df['MaxDate'])
         max_date_year = stats_df['MaxDate'].dt.year.max()
-        if max_date_year < pd.to_datetime('today').year:
+        current_year = pd.to_datetime('today').year
+        if max_date_year < current_year:
             return ValidationResult(
-                'FAILED', 'MAX_DATE_LATEST',
-                f"AssertionError('Validation failed: MAX_DATE_LATEST')")
+                'FAILED',
+                'MAX_DATE_LATEST',
+                message=
+                f"Latest date found was {max_date_year}, expected {current_year}.",
+                details={
+                    'latest_date_found': int(max_date_year),
+                    'expected_latest_date': int(current_year)
+                })
         return ValidationResult('PASSED', 'MAX_DATE_LATEST')
 
     def validate_deleted_count(self, differ_df: pd.DataFrame,
                                threshold: int) -> ValidationResult:
         if differ_df.empty:
             return ValidationResult('PASSED', 'DELETED_COUNT')
-        if differ_df['DELETED'].sum() > threshold:
+        deleted_count = differ_df['DELETED'].sum()
+        if deleted_count > threshold:
             return ValidationResult(
-                'FAILED', 'DELETED_COUNT',
-                f"AssertionError('Validation failed: DELETED_COUNT')")
+                'FAILED',
+                'DELETED_COUNT',
+                message=
+                f"Found {deleted_count} deleted points, which is over the threshold of {threshold}.",
+                details={
+                    'deleted_count': int(deleted_count),
+                    'threshold': threshold
+                })
         return ValidationResult('PASSED', 'DELETED_COUNT')
 
     def validate_modified_count(self,
                                 differ_df: pd.DataFrame) -> ValidationResult:
         if differ_df.empty:
             return ValidationResult('PASSED', 'MODIFIED_COUNT')
-        if differ_df['MODIFIED'].nunique() > 1:
+        unique_counts = differ_df['MODIFIED'].nunique()
+        if unique_counts > 1:
             return ValidationResult(
-                'FAILED', 'MODIFIED_COUNT',
-                f"AssertionError('Validation failed: MODIFIED_COUNT')")
+                'FAILED',
+                'MODIFIED_COUNT',
+                message=
+                f"Found {unique_counts} unique modified counts where 1 was expected.",
+                details={'unique_counts': list(differ_df['MODIFIED'].unique())})
         return ValidationResult('PASSED', 'MODIFIED_COUNT')
 
     def validate_added_count(self, differ_df: pd.DataFrame) -> ValidationResult:
         if differ_df.empty:
             return ValidationResult('PASSED', 'ADDED_COUNT')
-        if differ_df['ADDED'].nunique() != 1:
+        unique_counts = differ_df['ADDED'].nunique()
+        if unique_counts != 1:
             return ValidationResult(
-                'FAILED', 'ADDED_COUNT',
-                f"AssertionError('Validation failed: ADDED_COUNT')")
+                'FAILED',
+                'ADDED_COUNT',
+                message=
+                f"Found {unique_counts} unique added counts where 1 was expected.",
+                details={'unique_counts': list(differ_df['ADDED'].unique())})
         return ValidationResult('PASSED', 'ADDED_COUNT')
 
     def validate_unmodified_count(self,
@@ -112,10 +135,14 @@ class Validator:
         self, stats_df: pd.DataFrame) -> ValidationResult:
         if stats_df.empty:
             return ValidationResult('PASSED', 'NUM_PLACES_CONSISTENT')
-        if stats_df['NumPlaces'].nunique() > 1:
+        unique_counts = stats_df['NumPlaces'].nunique()
+        if unique_counts > 1:
             return ValidationResult(
-                'FAILED', 'NUM_PLACES_CONSISTENT',
-                f"AssertionError('Validation failed: NUM_PLACES_CONSISTENT')")
+                'FAILED',
+                'NUM_PLACES_CONSISTENT',
+                message=
+                f"Found {unique_counts} unique place counts where 1 was expected.",
+                details={'unique_counts': list(stats_df['NumPlaces'].unique())})
         return ValidationResult('PASSED', 'NUM_PLACES_CONSISTENT')
 
 
@@ -177,10 +204,13 @@ class ValidationRunner:
     def _write_results_to_file(self):
         with open(self.validation_output, mode='w',
                   encoding='utf-8') as output_file:
-            output_file.write('test,status,message\n')
+            output_file.write('test,status,message,details\n')
             for result in self.validation_results:
+                details_str = json.dumps(
+                    result.details) if result.details else ''
                 output_file.write(
-                    f'{result.name},{result.status},{result.message}\n')
+                    f'{result.name},{result.status},{result.message},{details_str}\n'
+                )
 
 
 def main(_):
