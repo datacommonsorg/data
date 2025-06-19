@@ -48,14 +48,16 @@ class TestDeletedCountValidation(unittest.TestCase):
 
     def test_deleted_count_fails_when_over_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
-        result = self.validator.validate_deleted_count(test_df, threshold=1)
+        config = {'threshold': 1}
+        result = self.validator.validate_deleted_count(test_df, config)
         self.assertEqual(result.status, 'FAILED')
         self.assertEqual(result.details['deleted_count'], 2)
         self.assertEqual(result.details['threshold'], 1)
 
     def test_deleted_count_passes_when_at_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
-        result = self.validator.validate_deleted_count(test_df, threshold=2)
+        config = {'threshold': 2}
+        result = self.validator.validate_deleted_count(test_df, config)
         self.assertEqual(result.status, 'PASSED')
 
 

@@ -96,10 +96,11 @@ class Validator:
         return ValidationResult('PASSED', 'MAX_DATE_LATEST')
 
     def validate_deleted_count(self, differ_df: pd.DataFrame,
-                               threshold: int) -> ValidationResult:
+                               config: dict) -> ValidationResult:
         """Checks if the total number of deleted points is within a threshold."""
         if differ_df.empty:
             return ValidationResult('PASSED', 'DELETED_COUNT')
+        threshold = config.get('threshold', 0)
         deleted_count = differ_df['DELETED'].sum()
         if deleted_count > threshold:
             return ValidationResult(
@@ -232,10 +233,32 @@ class ValidationRunner:
         with open(validation_config, encoding='utf-8') as f:
             self.validation_config = json.load(f)
 
-        self.differ_df = pd.read_csv(differ_output) if os.path.exists(
-            differ_output) else pd.DataFrame()
-        self.stats_df = pd.read_csv(stats_summary) if os.path.exists(
-            stats_summary) else pd.DataFrame()
+        self.dataframes = {
+            'stats':
+                pd.read_csv(stats_summary)
+                if os.path.exists(stats_summary) else pd.DataFrame(),
+            'differ':
+                pd.read_csv(differ_output)
+                if os.path.exists(differ_output) else pd.DataFrame()
+        }
+
+        # This dispatch map links a validation name to its function and the
+        # dataframe it requires.
+        self.validation_dispatch = {
+            'MAX_DATE_LATEST':
+                (self.validator.validate_max_date_latest, 'stats'),
+            'DELETED_COUNT':
+                (self.validator.validate_deleted_count, 'differ'),
+            'MODIFIED_COUNT':
+                (self.validator.validate_modified_count, 'differ'),
+            'ADDED_COUNT': (self.validator.validate_added_count, 'differ'),
+            'UNMODIFIED_COUNT':
+                (self.validator.validate_unmodified_count, 'differ'),
+            'NUM_PLACES_CONSISTENT':
+                (self.validator.validate_num_places_consistent, 'stats'),
+            'NUM_PLACES_COUNT':
+                (self.validator.validate_num_places_count, 'stats'),
+        }
 
     def run_validations(self) -> bool:
         """
@@ -244,33 +267,25 @@ class ValidationRunner:
         status = True
         for config in self.validation_config:
             validation_name = config['validation']
-            result = None
-            if validation_name == 'MAX_DATE_LATEST':
-                result = self.validator.validate_max_date_latest(self.stats_df)
-            elif validation_name == 'DELETED_COUNT':
-                result = self.validator.validate_deleted_count(
-                    self.differ_df, config.get('threshold', 0))
-            elif validation_name == 'MODIFIED_COUNT':
-                result = self.validator.validate_modified_count(self.differ_df)
-            elif validation_name == 'ADDED_COUNT':
-                result = self.validator.validate_added_count(self.differ_df)
-            elif validation_name == 'UNMODIFIED_COUNT':
-                result = self.validator.validate_unmodified_count(
-                    self.differ_df)
-            elif validation_name == 'NUM_PLACES_CONSISTENT':
-                result = self.validator.validate_num_places_consistent(
-                    self.stats_df)
-            elif validation_name == 'NUM_PLACES_COUNT':
-                result = self.validator.validate_num_places_count(
-                    self.stats_df, config)
+            if validation_name not in self.validation_dispatch:
+                logging.warning('Unknown validation: %s', validation_name)
+                continue
 
-            if result:
-                self.validation_results.append(result)
-                if result.status == 'FAILED':
-                    status = False
-                    logging.error(result.message)
-                else:
-                    logging.info('Validation passed: %s', result.name)
+            validation_func, df_key = self.validation_dispatch[validation_name]
+            df = self.dataframes[df_key]
+
+            # Pass config to the validation function if it's needed
+            if validation_name in ['DELETED_COUNT', 'NUM_PLACES_COUNT']:
+                result = validation_func(df, config)
+            else:
+                result = validation_func(df)
+
+            self.validation_results.append(result)
+            if result.status == 'FAILED':
+                status = False
+                logging.error(result.message)
+            else:
+                logging.info('Validation passed: %s', result.name)
 
         self._write_results_to_file()
         return status
