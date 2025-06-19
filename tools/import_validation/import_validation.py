@@ -31,133 +31,148 @@ flags.DEFINE_string('stats_summary', 'summary_report.csv',
 flags.DEFINE_string('validation_output', 'validation_output.csv',
                     'Path to the validation output file.')
 
-Validation = Enum(
-    'Validation',
-    [
-        ('MODIFIED_COUNT', 1),
-        ('UNMODIFIED_COUNT', 2),
-        ('ADDED_COUNT', 3),
-        ('DELETED_COUNT', 4),
-        ('LATEST_DATA', 5),
-        ('MAX_DATE_LATEST', 6),
-    ])
+Validation = Enum('Validation', [
+    ('MODIFIED_COUNT', 1),
+    ('UNMODIFIED_COUNT', 2),
+    ('ADDED_COUNT', 3),
+    ('DELETED_COUNT', 4),
+    ('LATEST_DATA', 5),
+    ('MAX_DATE_LATEST', 6),
+])
 
 
 class ValidationResult:
     """Describes the result of the validaiton of an import."""
 
-    def __init__(self, status, name, message):
-        # Status of the execution: PASSED OR FAILED
+    def __init__(self, status, name, message=''):
         self.status = status
-        # Name of the validaiton executed
         self.name = name
-        # Description of the result/error message
         self.message = message
 
 
-class ImportValidation:
+class Validator:
     """
-  Class to perform validations for import automation.
+  Contains the core logic for all validation rules.
+  This class is stateless and does not interact with the filesystem.
+  """
 
-  Usage:
-  $ python import_validation.py --validation_config=<path> \
-    --differ_output=<path> --stats_summary=<path> --validation_output=<path>
+    def validate_max_date_latest(self,
+                                 stats_df: pd.DataFrame) -> ValidationResult:
+        """
+    Checks that the MaxDate in the stats summary is from the current year.
+    """
+        if stats_df.empty:
+            return ValidationResult('PASSED', 'MAX_DATE_LATEST')
 
-  Each import can provide configuration (JSON) to select which validation
-  checks are performed. Validation results are written to an output file.
-  Sample config and output files can be found in test folder.
+        stats_df['MaxDate'] = pd.to_datetime(stats_df['MaxDate'])
+        max_date_year = stats_df['MaxDate'].dt.year.max()
+        if max_date_year < pd.to_datetime('today').year:
+            return ValidationResult(
+                'FAILED', 'MAX_DATE_LATEST',
+                f"AssertionError('Validation failed: MAX_DATE_LATEST')")
+        return ValidationResult('PASSED', 'MAX_DATE_LATEST')
+
+    def validate_deleted_count(self, differ_df: pd.DataFrame,
+                               threshold: int) -> ValidationResult:
+        if differ_df.empty:
+            return ValidationResult('PASSED', 'DELETED_COUNT')
+        if differ_df['DELETED'].sum() > threshold:
+            return ValidationResult(
+                'FAILED', 'DELETED_COUNT',
+                f"AssertionError('Validation failed: DELETED_COUNT')")
+        return ValidationResult('PASSED', 'DELETED_COUNT')
+
+    def validate_modified_count(self,
+                                differ_df: pd.DataFrame) -> ValidationResult:
+        if differ_df.empty:
+            return ValidationResult('PASSED', 'MODIFIED_COUNT')
+        if differ_df['MODIFIED'].nunique() > 1:
+            return ValidationResult(
+                'FAILED', 'MODIFIED_COUNT',
+                f"AssertionError('Validation failed: MODIFIED_COUNT')")
+        return ValidationResult('PASSED', 'MODIFIED_COUNT')
+
+    def validate_added_count(self, differ_df: pd.DataFrame) -> ValidationResult:
+        if differ_df.empty:
+            return ValidationResult('PASSED', 'ADDED_COUNT')
+        if differ_df['ADDED'].nunique() != 1:
+            return ValidationResult(
+                'FAILED', 'ADDED_COUNT',
+                f"AssertionError('Validation failed: ADDED_COUNT')")
+        return ValidationResult('PASSED', 'ADDED_COUNT')
+
+    def validate_unmodified_count(self,
+                                  differ_df: pd.DataFrame) -> ValidationResult:
+        # The logic for this validation is currently disabled.
+        # This method is a placeholder to ensure the validation "passes".
+        return ValidationResult('PASSED', 'UNMODIFIED_COUNT')
+
+
+class ValidationRunner:
+    """
+  Orchestrates the validation process.
+  Handles file I/O, configuration, and invoking the Validator.
   """
 
     def __init__(self, validation_config: str, differ_output: str,
                  stats_summary: str, validation_output: str):
-        logging.info('Reading config from %s', validation_config)
-        if os.path.exists(differ_output):
-            self.differ_results = pd.read_csv(differ_output)
-        if os.path.exists(stats_summary):
-            self.stats_summary = pd.read_csv(stats_summary)
-        self.validation_map = {
-            Validation.MODIFIED_COUNT: self._modified_count_validation,
-            Validation.ADDED_COUNT: self._added_count_validation,
-            Validation.DELETED_COUNT: self._deleted_count_validation,
-            Validation.UNMODIFIED_COUNT: self._unmodified_count_validation,
-            Validation.MAX_DATE_LATEST: self._max_date_latest_validation,
-        }
         self.validation_output = validation_output
-        self.validation_result = []
-        with open(validation_config, encoding='utf-8') as fd:
-            self.validation_config = json.load(fd)
+        self.validator = Validator()
+        self.validation_results = []
 
-    def _max_date_latest_validation(self, config: dict):
-        if self.stats_summary.empty:
-            return
-        self.stats_summary['MaxDate'] = pd.to_datetime(
-            self.stats_summary['MaxDate'])
-        max_date_year = self.stats_summary['MaxDate'].dt.year.max()
-        if max_date_year < pd.to_datetime('today').year:
-            raise AssertionError(f'Validation failed: {config["validation"]}')
+        with open(validation_config, encoding='utf-8') as f:
+            self.validation_config = json.load(f)
 
-    def _latest_data_validation(self, config: dict):
-        logging.info('Not yet implemented')
-
-    # Checks if the number of deleted data points are below a threshold.
-    def _deleted_count_validation(self, config: dict):
-        if self.differ_results.empty:
-            return
-        if self.differ_results['DELETED'].sum() > config['threshold']:
-            raise AssertionError(f'Validation failed: {config["validation"]}')
-
-    # Checks if number of modified points for each stat var are same.
-    def _modified_count_validation(self, config: dict):
-        if self.differ_results.empty:
-            return
-        if self.differ_results['MODIFIED'].nunique() > 1:
-            raise AssertionError(f'Validation failed: {config["validation"]}')
-
-    # Checks if number of added points for each stat var are same.
-    def _added_count_validation(self, config: dict):
-        if self.differ_results.empty:
-            return
-        if self.differ_results['ADDED'].nunique() != 1:
-            raise AssertionError(f'Validation failed: {config["validation"]}')
-
-    # Checks if number of unmodified points for each stat var are same.
-    def _unmodified_count_validation(self, config: dict):
-        if self.differ_results.empty:
-            return
-        # if self.differ_results['UNMODIFIED'].nunique() > 1:
-        #    raise AssertionError(f'Validation failed: {config["validation"]}')
-
-    def _run_validation(self, config) -> ValidationResult:
-        try:
-            self.validation_map[Validation[config['validation']]](config)
-            logging.info('Validation passed: %s', config['validation'])
-            return ValidationResult('PASSED', config['validation'], '')
-        except AssertionError as exc:
-            logging.error(repr(exc))
-            return ValidationResult('FAILED', config['validation'], repr(exc))
+        self.differ_df = pd.read_csv(differ_output) if os.path.exists(
+            differ_output) else pd.DataFrame()
+        self.stats_df = pd.read_csv(stats_summary) if os.path.exists(
+            stats_summary) else pd.DataFrame()
 
     def run_validations(self) -> bool:
-        # Returns false if any validation fails.
+        """
+    Runs all validations specified in the config and returns the overall status.
+    """
         status = True
+        for config in self.validation_config:
+            validation_name = config['validation']
+            result = None
+            if validation_name == 'MAX_DATE_LATEST':
+                result = self.validator.validate_max_date_latest(self.stats_df)
+            elif validation_name == 'DELETED_COUNT':
+                result = self.validator.validate_deleted_count(
+                    self.differ_df, config.get('threshold', 0))
+            elif validation_name == 'MODIFIED_COUNT':
+                result = self.validator.validate_modified_count(self.differ_df)
+            elif validation_name == 'ADDED_COUNT':
+                result = self.validator.validate_added_count(self.differ_df)
+            elif validation_name == 'UNMODIFIED_COUNT':
+                result = self.validator.validate_unmodified_count(
+                    self.differ_df)
+
+            if result:
+                self.validation_results.append(result)
+                if result.status == 'FAILED':
+                    status = False
+                    logging.error(result.message)
+                else:
+                    logging.info('Validation passed: %s', result.name)
+
+        self._write_results_to_file()
+        return status
+
+    def _write_results_to_file(self):
         with open(self.validation_output, mode='w',
                   encoding='utf-8') as output_file:
             output_file.write('test,status,message\n')
-            for config in self.validation_config:
-                result = self._run_validation(config)
-                # TODO: use CSV writer libs
+            for result in self.validation_results:
                 output_file.write(
                     f'{result.name},{result.status},{result.message}\n')
-                self.validation_result.append(result)
-                if result.status == 'FAILED':
-                    status = False
-        return status
 
 
 def main(_):
-    validation = ImportValidation(_FLAGS.validation_config,
-                                  _FLAGS.differ_output, _FLAGS.stats_summary,
-                                  _FLAGS.validation_output)
-    validation.run_validations()
+    runner = ValidationRunner(_FLAGS.validation_config, _FLAGS.differ_output,
+                              _FLAGS.stats_summary, _FLAGS.validation_output)
+    runner.run_validations()
 
 
 if __name__ == '__main__':
