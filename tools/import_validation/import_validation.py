@@ -11,7 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-""" Class to perform validations for import automation."""
+"""Runs a series of validations on a data import.
+
+This script provides a framework for running validation checks on data imports.
+It is designed to be used as part of an automated import pipeline.
+
+The script separates the validation logic from the execution runner:
+- The `Validator` class contains the pure, stateless logic for each individual
+  validation rule. It operates directly on pandas DataFrames.
+- The `ValidationRunner` class handles the orchestration, including file I/O,
+  reading configuration, and invoking the appropriate methods in the Validator.
+
+The script is configured via a JSON file that specifies which validations to
+run.
+"""
 
 from absl import app
 from absl import flags
@@ -83,6 +96,7 @@ class Validator:
 
     def validate_deleted_count(self, differ_df: pd.DataFrame,
                                threshold: int) -> ValidationResult:
+        """Checks if the total number of deleted points is within a threshold."""
         if differ_df.empty:
             return ValidationResult('PASSED', 'DELETED_COUNT')
         deleted_count = differ_df['DELETED'].sum()
@@ -100,6 +114,7 @@ class Validator:
 
     def validate_modified_count(self,
                                 differ_df: pd.DataFrame) -> ValidationResult:
+        """Checks if the number of modified points is the same for all StatVars."""
         if differ_df.empty:
             return ValidationResult('PASSED', 'MODIFIED_COUNT')
         unique_counts = differ_df['MODIFIED'].nunique()
@@ -113,6 +128,7 @@ class Validator:
         return ValidationResult('PASSED', 'MODIFIED_COUNT')
 
     def validate_added_count(self, differ_df: pd.DataFrame) -> ValidationResult:
+        """Checks if the number of added points is the same for all StatVars."""
         if differ_df.empty:
             return ValidationResult('PASSED', 'ADDED_COUNT')
         unique_counts = differ_df['ADDED'].nunique()
@@ -127,12 +143,14 @@ class Validator:
 
     def validate_unmodified_count(self,
                                   differ_df: pd.DataFrame) -> ValidationResult:
+        """Checks if the number of unmodified points is the same for all StatVars."""
         # The logic for this validation is currently disabled.
         # This method is a placeholder to ensure the validation "passes".
         return ValidationResult('PASSED', 'UNMODIFIED_COUNT')
 
     def validate_num_places_consistent(
         self, stats_df: pd.DataFrame) -> ValidationResult:
+        """Checks if the number of places is the same for all StatVars."""
         if stats_df.empty:
             return ValidationResult('PASSED', 'NUM_PLACES_CONSISTENT')
         unique_counts = stats_df['NumPlaces'].nunique()
