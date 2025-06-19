@@ -46,7 +46,7 @@ def download(urls, inputdir):
                     logging.warning(f"Skipping download for {url}. Received non-200 status code: {response.status_code}")
                 count+=1
             except Exception as e:
-                logging.error(f"Error occured while downloading the data: {e}")      
+                logging.fatal(f"Error occured while downloading the data: {e}")      
     logging.info("Download process finished.") 
 
 def main(_):
@@ -61,3 +61,4 @@ def main(_):
 
 if __name__ == "__main__":
    app.run(main)
+
