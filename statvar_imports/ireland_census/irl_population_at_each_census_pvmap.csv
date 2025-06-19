@@ -1,9 +1,9 @@
+mapped_rows,1,,,
+mapped_columns,9,,,
 key,p1,v1,p2,v2
-mapped+AF8-rows,1,,,
-mapped+AF8-columns,9,,,
-County,observationAbout,+AHs-Data+AH0-,,
-CensusYear,observationDate,+AHs-Number+AH0-,,
+County,observationAbout,{Data},,
+CensusYear,observationDate,{Number},,
 Sex,measuredProperty,count,populationType,Person
 Male,gender,Male,,
 Female,gender,Female,,
-VALUE,value,+AHs-Number+AH0-,,
+VALUE,value,{Number},,
