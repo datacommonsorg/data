@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4
+mapped+AF8-rows,1,,,,,,,
+mapped+AF8-columns,7,,,,,,,
+Year,observationDate,+AHs-Number+AH0-,,,,,,
+Deaths,measuredProperty,count,populationType,MortalityEvent,observationAbout,country/IRL,,
+Male Deaths,measuredProperty,count,populationType,MortalityEvent,gender,Male,observationAbout,country/IRL
+Female Deaths,measuredProperty,count,populationType,MortalityEvent,gender,Female,observationAbout,country/IRL
+VALUE,value,+AHs-Number+AH0-,,,,,,
+,,,,,,,,
++ACI-Death Rate per 1,000 population+ACI-,+ACM-ignore,Not_required_for_the_dataset,,,,,,
++ACI-Male Deaths per 1,000 population+ACI-,+ACM-ignore,Not_required_for_the_dataset,,,,,,
++ACI-Female Deaths per 1,000 population+ACI-,+ACM-ignore,Not_required_for_the_dataset,,,,,,

@@ -1,0 +1,13 @@
+key,p1,v1,p2,v2
+mapped+AF8-rows,1,,,
+mapped+AF8-columns,9,,,
+Year,observationDate,+AHs-Number+AH0-,,
+Area of Residence,observationAbout,+AHs-Data+AH0-,,
+ICD 10 Diagnostic Group,populationType,MortalityEvent,measuredProperty,count
+V01+AC0-X59 Accidents,causeOfDeath,Accidents(UnintentionalInjuries),,
+V01+AC0-Y98 External causes of death,causeOfDeath,ExternalCausesOfDeath,,
+X60+AC0-X84 Intentional self+AC0-harm,causeOfDeath,IntentionalSelf+AC0-Harm(Suicide),,
+X85+AC0-Y09 Assault,causeOfDeath,Assault(Homicide),,
+Y10+AC0-Y34 Events of undetermined intent,causeOfDeath,EventsOfUndeterminedIntent,,
+Y35+AC0-Y98 Other external causes,causeOfDeath,OtherExternalCausesOfDeath,,
+VALUE,value,+AHs-Number+AH0-,,

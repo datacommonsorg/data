@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+cd $(dirname $0)
 python3 -m venv .env
 . .env/bin/activate
 pip3 install --disable-pip-version-check -q -r requirements.txt

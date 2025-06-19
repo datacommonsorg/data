@@ -1,0 +1,4 @@
+statvar,dcid
+Count_MortalityEvent,Count_Death
+Count_MortalityEvent_0To1Years,Count_Death_0To1Years
+Median_MothersAge_BirthEvent,MedianMothersAge_BirthEvent
