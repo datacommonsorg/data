@@ -27,7 +27,7 @@ module_dir_ = os.path.dirname(__file__)
 
 sys.path.append(module_dir_)
 
-from air_quality_aggregate import create_csv, write_csv, write_tmcf, process
+from air_quality_aggregate import create_csv, write_csv, process
 
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -82,18 +82,6 @@ class TestCriteriaGasesTest(unittest.TestCase):
                         expected_str: str = expected.read()
                         self.assertEqual(test_str, expected_str)
                 os.remove(test_csv)
-
-    def test_write_tmcf(self):
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            test_tmcf = os.path.join(tmp_dir, 'test_tmcf.tmcf')
-            write_tmcf(test_tmcf)
-            expected_tmcf = os.path.join(module_dir_, 'EPA_AQI.tmcf')
-            with open(test_tmcf, 'r') as test:
-                test_str: str = test.read()
-                with open(expected_tmcf, 'r') as expected:
-                    expected_str: str = expected.read()
-                    self.assertEqual(test_str, expected_str)
-            os.remove(test_tmcf)
 
     @classmethod
     def setUpClass(cls):

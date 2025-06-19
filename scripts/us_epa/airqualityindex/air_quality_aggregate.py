@@ -248,15 +248,6 @@ def process(_INPUT_FILE_PATH):
                 )
 
 
-def write_tmcf(tmcf_file_name):
-    logging.info(f'Inside write_tmcf value of {tmcf_file_name}')
-    output_file_path = os.path.join(MODULE_DIR, _FLAGS.output_file_path)
-    tmcf_file_path = os.path.join(output_file_path, tmcf_file_name)
-    logging.info(f'file_path {tmcf_file_name}')
-    with open(tmcf_file_path, 'w') as f_out:
-        f_out.write(TEMPLATE_MCF)
-
-
 def main(_):
     mode = _FLAGS.mode
     input_file_path = os.path.join(MODULE_DIR, _FLAGS.input_file_path)
