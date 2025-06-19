@@ -61,7 +61,7 @@ def main(_):
             except KeyError as e:
                 logging.fatal(f"Missing expected key '{e}' in the API response.")
                 break 
-
+            # Considering the table id I7375_4 which is specific to the import.
             for i in keys:
                 a = a=i['StateName'],i['Year'].split(",")[-1].strip(),i['GENDER'],i['I7375_4']['TotalPopulationWeight'],i['Year'].split(",")[-1].strip(),i['Year']
                 all_data.append(a)
