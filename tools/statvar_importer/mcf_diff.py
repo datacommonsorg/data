@@ -351,14 +351,14 @@ def diff_mcf_files(file1: str,
     if counters is None:
         counters = Counters()
     nodes1 = filter_mcf_nodes(
-        nodes=load_mcf_nodes(file1),
+        nodes=load_mcf_nodes(file1, counters=counters),
         allow_dcids=config.get('compare_dcids', None),
         allow_nodes_with_pv=config.get('compare_nodes_with_pv', None),
         ignore_nodes_with_pv=config.get('ignore_nodes_with_pv', None),
     )
     counters.add_counter(f'input-nodes-in-mcf1:{file1}', len(nodes1))
     nodes2 = filter_mcf_nodes(
-        nodes=load_mcf_nodes(file2),
+        nodes=load_mcf_nodes(file2, counters=counters),
         allow_dcids=config.get('compare_dcids', None),
         allow_nodes_with_pv=config.get('compare_nodes_with_pv', None),
         ignore_nodes_with_pv=config.get('ignore_nodes_with_pv', None),
