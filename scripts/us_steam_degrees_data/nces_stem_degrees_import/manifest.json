@@ -9,15 +9,15 @@
         "provenance_description": "NCES STEM Degrees Dataset",
         "scripts": [
           "../../../util/download_util_script.py --download_url=https://nces.ed.gov/programs/digest/d24/tables/xls/tabn318.45.xlsx --output_folder=source_files",
-          "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --statvar_dcid_remap_csv=dcid_remap.csv --output_path=output/nces_steam"
+          "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --statvar_dcid_remap_csv=dcid_remap.csv --output_path=output/nces_steam_degree"
         ],
         "source_files": [
          "source_files/*.xlsx"
       ],
         "import_inputs": [
           {
-            "template_mcf": "output/nces_steam.tmcf",
-            "cleaned_csv": "output/nces_steam.csv"
+            "template_mcf": "output/nces_steam_degree.tmcf",
+            "cleaned_csv": "output/nces_steam_degree.csv"
           }
         ],
         "cron_schedule": "0 05 4,18 * *"
