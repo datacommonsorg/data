@@ -156,7 +156,8 @@ class ValidationRunner:
                 details_str = json.dumps(
                     result.details) if result.details else ''
                 writer.writerow([
-                    result.name, result.status.value, result.message, details_str
+                    result.name, result.status.value, result.message,
+                    details_str
                 ])
 
 

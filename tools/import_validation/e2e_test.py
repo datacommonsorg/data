@@ -20,6 +20,7 @@ import tempfile
 import subprocess
 import pandas as pd
 
+
 class TestImportValidationE2E(unittest.TestCase):
 
     def setUp(self):
@@ -52,10 +53,13 @@ class TestImportValidationE2E(unittest.TestCase):
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
             f'--validation_output={self.output_path}'
-        ], capture_output=True, text=True)
+        ],
+                                capture_output=True,
+                                text=True)
 
         # 3. Assert success
-        self.assertEqual(result.returncode, 0, f"Script failed with stderr: {result.stderr}")
+        self.assertEqual(result.returncode, 0,
+                         f"Script failed with stderr: {result.stderr}")
         output_df = pd.read_csv(self.output_path)
         self.assertEqual(len(output_df), 1)
         self.assertEqual(output_df.iloc[0]['status'], 'PASSED')
@@ -77,12 +81,15 @@ class TestImportValidationE2E(unittest.TestCase):
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
             f'--validation_output={self.output_path}'
-        ], capture_output=True, text=True)
+        ],
+                                capture_output=True,
+                                text=True)
 
         # 3. Assert failure
-        self.assertEqual(result.returncode, 1, "Script should have failed but didn't")
+        self.assertEqual(result.returncode, 1,
+                         "Script should have failed but didn't")
         self.assertIn("Found 2 unique place counts where 1 was expected.",
-                        result.stderr)
+                      result.stderr)
 
     def test_e2e_missing_flag_fails(self):
         """Tests that the script fails when a required flag is missing."""
@@ -100,7 +107,8 @@ class TestImportValidationE2E(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0,
                             "Script should have failed due to missing flag")
         self.assertIn("Flag --stats_summary must have a value other than None",
-                        result.stderr)
+                      result.stderr)
+
 
 if __name__ == '__main__':
     unittest.main()
