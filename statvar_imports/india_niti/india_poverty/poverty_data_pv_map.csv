@@ -1,0 +1,9 @@
+key,prop,value,prop2,value2,prop3,value3,,,,,,
+No. States,observationAbout,{Data},unit,Percent,observationDate,2005,populationType,Person,povertyStatus,BelowPovertyLevelInThePast12Months,measurementDenominator,PerCapita
+No. Persons (Lakh),value,{Number},#Multiply,100000,,,,,,,,
+Rural,placeOfResidenceClassification,Rural,,,,,,,,,,
+Urban,placeOfResidenceClassification,Urban,,,,,,,,,,
+Combined,placeOfResidenceClassification,"""""",value,{Number},unit,Percent,,,,,,
+SC,value,{Number},socialCategory,ScheduledCaste,,,,,,,,
+OBC,value,{Number},socialCategory,OtherBackwardClass,,,,,,,,
+All,value,{Number},,,,,,,,,,
