@@ -1,0 +1,50 @@
+[
+    {
+        "validation": "MaxDate_Latest",
+        "description": "Test 1: All StatVars, expects 2024 (current_year - 1)",
+        "variableMeasured": ["*"],
+        "expectedLatestDate": "current_year - 1"
+    },
+    {
+        "validation": "MaxDate_Latest",
+        "description": "Test 2: Regex 'Count_Person_Regex_.*', expects 2024 (current_year - 1)",
+        "variableMeasured": ["Count_Person_Regex_.*"],
+        "expectedLatestDate": "current_year - 1"
+    },
+    {
+        "validation": "MaxDate_Latest",
+        "description": "Test 3: Exact DCIDs, expects 2022",
+        "variableMeasured": ["Count_Thing_Exact_Pass_2022", "Count_Thing_Exact_Fail_2021"],
+        "expectedLatestDate": "2022"
+    },
+    {
+        "validation": "MaxDate_Latest",
+        "description": "Test 4: Invalid Date StatVar, expects 2025 (current_year)",
+        "variableMeasured": ["Invalid_Date_StatVar"],
+        "expectedLatestDate": "current_year"
+    },
+    {
+        "validation": "MaxDate_Latest",
+        "description": "Test 5: Current Year Pass, expects 2025 (current_year)",
+        "variableMeasured": ["Current_Year_StatVar_Pass_2025"],
+        "expectedLatestDate": "current_year"
+    },
+    {
+        "validation": "MaxDate_Latest",
+        "description": "Test 6: All Pass Scenario, expects 2024 (current_year - 1)",
+        "variableMeasured": ["Count_Person_Total_Pass_2024", "Count_Person_Regex_Pass_2024", "Current_Year_StatVar_Fail_2024"],
+        "expectedLatestDate": "current_year - 1"
+    },
+    {
+        "validation": "MaxDate_Latest",
+        "description": "Test 7: Empty variableMeasured (should check none), expects 2024",
+        "variableMeasured": [],
+        "expectedLatestDate": "current_year - 1"
+    },
+    {
+        "validation": "MaxDate_Latest",
+        "description": "Test 8: Invalid Regex pattern (should check none), expects 2024",
+        "variableMeasured": ["Count_Person_[*"], 
+        "expectedLatestDate": "current_year - 1"
+    }
+]
