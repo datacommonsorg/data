@@ -20,6 +20,11 @@ is processed as is.
 import pandas as pd
 import os
 import logging
+import requests
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
 
@@ -39,12 +44,11 @@ def process_county_2020_2029(url: str) -> pd.DataFrame:
     _MODULE_DIR = os.path.dirname(__file__)
     parent_dir = os.path.dirname(_MODULE_DIR)
     _INPUT_FILE_PATH = os.path.join(parent_dir, 'output_files/intermediate')
-
+    file_path = os.path.join(_CODEDIR + "/../input_files/" +
+                             'county_result_2020_2029.csv')
+    file_path = get_api_response(file_path, url, 0)
+    df = pd.read_csv(file_path, engine='python', encoding='ISO-8859-1')
     # reading the csv input file
-    df = pd.read_csv(url, encoding='ISO-8859-1', low_memory=False)
-    df.to_csv(_CODEDIR + "/../input_files/" + 'county_result_2020_2029.csv',
-              index=False)
-
     # years having 1 and 2 value are not requried as estimate is for April Month
     # agegrp is only required as it gives total of all ages
     df = df.query("AGEGRP == 0 & YEAR not in [1]")
