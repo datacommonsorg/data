@@ -192,6 +192,75 @@ class Validator:
         return ValidationResult(ValidationStatus.PASSED,
                                 'NUM_PLACES_CONSISTENT')
 
+    def _validate_range(self, df: pd.DataFrame, column_name: str, config: dict,
+                        validation_name: str) -> ValidationResult:
+        """Helper function to check if values in a column are within a defined range.
+
+    Args:
+        df: The DataFrame to validate.
+        column_name: The name of the column to check.
+        config: A dictionary containing the validation configuration, which may
+          have 'minimum', 'maximum', or 'value' keys.
+        validation_name: The name of the validation rule.
+
+    Returns:
+        A ValidationResult object.
+    """
+        if column_name not in df.columns:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                validation_name,
+                message=
+                f"Input data is missing required column: '{column_name}'.")
+        if df.empty:
+            return ValidationResult(ValidationStatus.PASSED, validation_name)
+
+        min_val = config.get('minimum')
+        max_val = config.get('maximum')
+        exact_val = config.get('value')
+
+        for _, row in df.iterrows():
+            value = row[column_name]
+            stat_var = row.get(
+                'StatVar', 'Unknown'
+            )  # Assuming StatVar column exists for better error messages
+
+            if exact_val is not None and value != exact_val:
+                return ValidationResult(
+                    ValidationStatus.FAILED,
+                    validation_name,
+                    message=
+                    f"StatVar '{stat_var}' has {value} for {column_name}, but expected exactly {exact_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_count': value,
+                        'expected_count': exact_val
+                    })
+            if min_val is not None and value < min_val:
+                return ValidationResult(
+                    ValidationStatus.FAILED,
+                    validation_name,
+                    message=
+                    f"StatVar '{stat_var}' has {value} for {column_name}, which is below the minimum of {min_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_count': value,
+                        'minimum': min_val
+                    })
+            if max_val is not None and value > max_val:
+                return ValidationResult(
+                    ValidationStatus.FAILED,
+                    validation_name,
+                    message=
+                    f"StatVar '{stat_var}' has {value} for {column_name}, which is above the maximum of {max_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_count': value,
+                        'maximum': max_val
+                    })
+
+        return ValidationResult(ValidationStatus.PASSED, validation_name)
+
     def validate_num_places_count(self, stats_df: pd.DataFrame,
                                   config: dict) -> ValidationResult:
         """Checks if the number of places for each StatVar is within a defined range.
@@ -207,59 +276,8 @@ class Validator:
     Returns:
       A ValidationResult object.
     """
-        if 'NumPlaces' not in stats_df.columns:
-            return ValidationResult(
-                ValidationStatus.DATA_ERROR,
-                'NUM_PLACES_COUNT',
-                message="Input data is missing required column: 'NumPlaces'.")
-        if stats_df.empty:
-            return ValidationResult(ValidationStatus.PASSED, 'NUM_PLACES_COUNT')
-
-        min_val = config.get('minimum')
-        max_val = config.get('maximum')
-        exact_val = config.get('value')
-
-        for _, row in stats_df.iterrows():
-            num_places = row['NumPlaces']
-            stat_var = row.get(
-                'StatVar', 'Unknown'
-            )  # Assuming StatVar column exists for better error messages
-
-            if exact_val is not None and num_places != exact_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    'NUM_PLACES_COUNT',
-                    message=
-                    f"StatVar '{stat_var}' has {num_places} places, but expected exactly {exact_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_count': num_places,
-                        'expected_count': exact_val
-                    })
-            if min_val is not None and num_places < min_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    'NUM_PLACES_COUNT',
-                    message=
-                    f"StatVar '{stat_var}' has {num_places} places, which is below the minimum of {min_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_count': num_places,
-                        'minimum': min_val
-                    })
-            if max_val is not None and num_places > max_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    'NUM_PLACES_COUNT',
-                    message=
-                    f"StatVar '{stat_var}' has {num_places} places, which is above the maximum of {max_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_count': num_places,
-                        'maximum': max_val
-                    })
-
-        return ValidationResult(ValidationStatus.PASSED, 'NUM_PLACES_COUNT')
+        return self._validate_range(stats_df, 'NumPlaces', config,
+                                    'NUM_PLACES_COUNT')
 
     def validate_min_value_check(self, stats_df: pd.DataFrame,
                                  config: dict) -> ValidationResult:
@@ -349,62 +367,8 @@ class Validator:
     Returns:
       A ValidationResult object.
     """
-        if 'NumObservations' not in stats_df.columns:
-            return ValidationResult(
-                ValidationStatus.DATA_ERROR,
-                'NUM_OBSERVATIONS_CHECK',
-                message=
-                "Input data is missing required column: 'NumObservations'.")
-        if stats_df.empty:
-            return ValidationResult(ValidationStatus.PASSED,
+        return self._validate_range(stats_df, 'NumObservations', config,
                                     'NUM_OBSERVATIONS_CHECK')
-
-        min_val = config.get('minimum')
-        max_val = config.get('maximum')
-        exact_val = config.get('value')
-
-        for _, row in stats_df.iterrows():
-            num_observations = row['NumObservations']
-            stat_var = row.get(
-                'StatVar',
-                'Unknown')  # Assuming StatVar column exists for better error messages
-
-            if exact_val is not None and num_observations != exact_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    'NUM_OBSERVATIONS_CHECK',
-                    message=
-                    f"StatVar '{stat_var}' has {num_observations} observations, but expected exactly {exact_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_count': num_observations,
-                        'expected_count': exact_val
-                    })
-            if min_val is not None and num_observations < min_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    'NUM_OBSERVATIONS_CHECK',
-                    message=
-                    f"StatVar '{stat_var}' has {num_observations} observations, which is below the minimum of {min_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_count': num_observations,
-                        'minimum': min_val
-                    })
-            if max_val is not None and num_observations > max_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    'NUM_OBSERVATIONS_CHECK',
-                    message=
-                    f"StatVar '{stat_var}' has {num_observations} observations, which is above the maximum of {max_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_count': num_observations,
-                        'maximum': max_val
-                    })
-
-        return ValidationResult(ValidationStatus.PASSED,
-                                'NUM_OBSERVATIONS_CHECK')
 
     def validate_max_value_check(self, stats_df: pd.DataFrame,
                                  config: dict) -> ValidationResult:
