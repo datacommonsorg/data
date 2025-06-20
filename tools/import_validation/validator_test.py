@@ -240,6 +240,33 @@ class TestMinValueCheckValidation(unittest.TestCase):
         self.assertIn('missing required column', result.message)
 
 
+class TestMaxDateConsistentValidation(unittest.TestCase):
+    '''Test Class for the MAX_DATE_CONSISTENT validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_max_date_consistent_fails_on_inconsistent_dates(self):
+        test_df = pd.DataFrame({'MaxDate': ['2024-01-01',
+                                            '2024-01-02']})  # Inconsistent
+        result = self.validator.validate_max_date_consistent(test_df)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(sorted(result.details['unique_dates']),
+                         ['2024-01-01', '2024-01-02'])
+
+    def test_max_date_consistent_passes_on_consistent_dates(self):
+        test_df = pd.DataFrame({'MaxDate': ['2024-01-01',
+                                            '2024-01-01']})  # Consistent
+        result = self.validator.validate_max_date_consistent(test_df)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_max_date_consistent_fails_on_missing_column(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MaxDate'
+        result = self.validator.validate_max_date_consistent(test_df)
+        self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
+        self.assertIn('missing required column', result.message)
+
+
 class TestMaxValueCheckValidation(unittest.TestCase):
     '''Test Class for the MAX_VALUE_CHECK validation rule.'''
 

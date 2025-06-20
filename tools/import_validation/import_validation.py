@@ -78,6 +78,8 @@ class ValidationRunner:
         self.validation_dispatch = {
             'MAX_DATE_LATEST':
                 (self.validator.validate_max_date_latest, 'stats'),
+            'MAX_DATE_CONSISTENT':
+                (self.validator.validate_max_date_consistent, 'stats'),
             'DELETED_COUNT': (self.validator.validate_deleted_count, 'differ'),
             'MODIFIED_COUNT':
                 (self.validator.validate_modified_count, 'differ'),

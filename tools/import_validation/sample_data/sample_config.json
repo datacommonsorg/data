@@ -3,6 +3,9 @@
         "validation": "MAX_DATE_LATEST"
     },
     {
+        "validation": "MAX_DATE_CONSISTENT"
+    },
+    {
         "validation": "DELETED_COUNT",
         "threshold": 5
     },

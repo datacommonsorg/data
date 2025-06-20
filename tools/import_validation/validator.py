@@ -305,6 +305,35 @@ class Validator:
                     })
         return ValidationResult(ValidationStatus.PASSED, 'MIN_VALUE_CHECK')
 
+    def validate_max_date_consistent(
+            self, stats_df: pd.DataFrame) -> ValidationResult:
+        """Checks if the MaxDate is the same for all StatVars.
+
+    Args:
+      stats_df: A DataFrame containing the summary statistics, expected to have
+        a 'MaxDate' column.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if 'MaxDate' not in stats_df.columns:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'MAX_DATE_CONSISTENT',
+                message="Input data is missing required column: 'MaxDate'.")
+        if stats_df.empty:
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'MAX_DATE_CONSISTENT')
+        unique_dates = stats_df['MaxDate'].nunique()
+        if unique_dates > 1:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'MAX_DATE_CONSISTENT',
+                message=
+                f"Found {unique_dates} unique MaxDates where 1 was expected.",
+                details={'unique_dates': list(stats_df['MaxDate'].unique())})
+        return ValidationResult(ValidationStatus.PASSED, 'MAX_DATE_CONSISTENT')
+
     def validate_max_value_check(self, stats_df: pd.DataFrame,
                                  config: dict) -> ValidationResult:
         """Checks if the MaxValue for each StatVar is not above a defined maximum.
