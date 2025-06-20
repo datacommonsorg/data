@@ -47,6 +47,7 @@ MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 def retry_method(url):
     return requests.get(url)
 
+
 POLLUTANTS = {
     'Ozone': 'Ozone',
     'SO2': 'SulfurDioxide',
@@ -57,6 +58,7 @@ POLLUTANTS = {
 }
 
 CSV_COLUMNS = ['Date', 'Place', 'AQI', 'Pollutant', 'Site']
+
 
 def get_place(observation):
     if 'State Code' and 'County Code' in observation:
@@ -104,8 +106,7 @@ def write_csv(csv_file_path, reader):
             writer.writerow(new_row)
 
 
-def download_url(_INPUT_FILE_PATH,start_year,end_year,CSV_URLS):
-    
+def download_url(_INPUT_FILE_PATH, start_year, end_year, CSV_URLS):
     """
     Downloads daily Air Quality Index (AQI) data zip files from the EPA AirData
     website for a specified range of years and saves them locally.
@@ -125,7 +126,7 @@ def download_url(_INPUT_FILE_PATH,start_year,end_year,CSV_URLS):
                                           This dictionary is expected to provide
                                           the root URL to which file names are appended.
     """
-    
+
     for year in range(start_year, int(end_year)):
         logging.info(f'year: {year}')
         file_names = [
@@ -167,8 +168,7 @@ def download_url(_INPUT_FILE_PATH,start_year,end_year,CSV_URLS):
                         f.write(response.content)
 
 
-def process(_INPUT_FILE_PATH,start_year,end_year):
-    
+def process(_INPUT_FILE_PATH, start_year, end_year):
     """
     Processes downloaded EPA AirData zip files, extracts, transforms, and
     consolidates the data into a single output CSV file.
@@ -225,6 +225,7 @@ def process(_INPUT_FILE_PATH,start_year,end_year):
                     f"Error while processing input files {e} {output_file_name}{output_file_name}"
                 )
 
+
 def main(_):
     mode = _FLAGS.mode
     input_file_path = os.path.join(MODULE_DIR, _FLAGS.input_file_path)
@@ -234,17 +235,17 @@ def main(_):
     start_year = _FLAGS.aggregate_start_year
     end_year = _FLAGS.aggregate_end_year
     CSV_URLS = frozendict.frozendict(
-    {"daily_aqi": "https://aqs.epa.gov/aqsweb/airdata/"})
-    
+        {"daily_aqi": "https://aqs.epa.gov/aqsweb/airdata/"})
+
     if mode == "" or mode == "download":
         logging.info(f'inside mode {mode}')
         #downloading zip file for 'daily_aqi_by_county'
         logging.info(f'downloading zipped files')
-        download_url(input_file_path,start_year,end_year,CSV_URLS)
+        download_url(input_file_path, start_year, end_year, CSV_URLS)
 
     if mode == "" or mode == "process":
         logging.info(f'inside mode {mode}')
-        process(input_file_path,start_year,end_year)
+        process(input_file_path, start_year, end_year)
 
 
 if __name__ == '__main__':
