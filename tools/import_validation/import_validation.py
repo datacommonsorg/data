@@ -42,12 +42,15 @@ from .result import ValidationResult, ValidationStatus
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('validation_config', 'validation_config.json',
                     'Path to the validation config file.')
-flags.DEFINE_string('differ_output', 'point_analysis_summary.csv',
+flags.DEFINE_string('differ_output', None,
                     'Path to the differ output data file.')
-flags.DEFINE_string('stats_summary', 'summary_report.csv',
+flags.DEFINE_string('stats_summary', None,
                     'Path to the stats summary report file.')
-flags.DEFINE_string('validation_output', 'validation_output.csv',
+flags.DEFINE_string('validation_output', None,
                     'Path to the validation output file.')
+flags.mark_flag_as_required('differ_output')
+flags.mark_flag_as_required('stats_summary')
+flags.mark_flag_as_required('validation_output')
 
 
 class ValidationRunner:
