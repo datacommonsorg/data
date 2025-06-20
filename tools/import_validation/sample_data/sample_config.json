@@ -1,0 +1,26 @@
+[
+    {
+        "validation": "MAX_DATE_LATEST"
+    },
+    {
+        "validation": "DELETED_COUNT",
+        "threshold": 5
+    },
+    {
+        "validation": "NUM_PLACES_CONSISTENT",
+        "variableMeasured": [
+            "Count_Person_.*"
+        ]
+    },
+    {
+        "validation": "MIN_VALUE_CHECK",
+        "minimum": 0
+    },
+    {
+        "validation": "MAX_VALUE_CHECK",
+        "maximum": 100,
+        "variableMeasured": [
+            ".*Percent.*"
+        ]
+    }
+]

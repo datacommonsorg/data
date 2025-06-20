@@ -1,0 +1,6 @@
+test,status,message,details
+MAX_DATE_LATEST,FAILED,Latest date found was 2023, expected 2025.,{"latest_date_found": 2023, "expected_latest_date": 2025}
+DELETED_COUNT,PASSED,,
+NUM_PLACES_CONSISTENT,PASSED,,
+MIN_VALUE_CHECK,PASSED,,
+MAX_VALUE_CHECK,PASSED,,
