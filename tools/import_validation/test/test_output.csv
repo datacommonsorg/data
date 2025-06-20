@@ -1,6 +1,0 @@
-test,status,message
-DELETED_COUNT,PASSED,
-MODIFIED_COUNT,FAILED,AssertionError('Validation failed: MODIFIED_COUNT')
-ADDED_COUNT,PASSED,
-UNMODIFIED_COUNT,PASSED,
-MAX_DATE_LATEST,FAILED,AssertionError('Validation failed: MAX_DATE_LATEST')
