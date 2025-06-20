@@ -11,138 +11,161 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-""" Class to perform validations for import automation."""
+"""Runs a series of validations on a data import.
+
+This script provides a framework for running validation checks on data imports.
+It is designed to be used as part of an automated import pipeline.
+
+The script separates the validation logic from the execution runner:
+- The `Validator` class contains the pure, stateless logic for each individual
+  validation rule. It operates directly on pandas DataFrames.
+- The `ValidationRunner` class handles the orchestration, including file I/O,
+  reading configuration, and invoking the appropriate methods in the Validator.
+
+The script is configured via a JSON file that specifies which validations to
+run.
+"""
 
 from absl import app
 from absl import flags
 from absl import logging
-from enum import Enum
 import pandas as pd
-import os
+import csv
 import json
+import os
+import sys
+
+from .validator import Validator
+from .util import filter_dataframe
+from .result import ValidationResult, ValidationStatus
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('validation_config', 'validation_config.json',
                     'Path to the validation config file.')
-flags.DEFINE_string('differ_output', 'point_analysis_summary.csv',
+flags.DEFINE_string('differ_output', None,
                     'Path to the differ output data file.')
-flags.DEFINE_string('stats_summary', 'summary_report.csv',
+flags.DEFINE_string('stats_summary', None,
                     'Path to the stats summary report file.')
-flags.DEFINE_string('validation_output', 'validation_output.csv',
+flags.DEFINE_string('validation_output', None,
                     'Path to the validation output file.')
-
-Validation = Enum('Validation', [
-    ('MODIFIED_COUNT', 1),
-    ('UNMODIFIED_COUNT', 2),
-    ('ADDED_COUNT', 3),
-    ('DELETED_COUNT', 4),
-    ('LATEST_DATA', 5),
-])
+flags.mark_flag_as_required('differ_output')
+flags.mark_flag_as_required('stats_summary')
+flags.mark_flag_as_required('validation_output')
 
 
-class ValidationResult:
-    """Describes the result of the validaiton of an import."""
-
-    def __init__(self, status, name, message):
-        # Status of the execution: PASSED OR FAILED
-        self.status = status
-        # Name of the validaiton executed
-        self.name = name
-        # Description of the result/error message
-        self.message = message
-
-
-class ImportValidation:
+class ValidationRunner:
     """
-  Class to perform validations for import automation.
-
-  Usage:
-  $ python import_validation.py --validation_config=<path> \
-    --differ_output=<path> --stats_summary=<path> --validation_output=<path>
-
-  Each import can provide configuration (JSON) to select which validation
-  checks are performed. Validation results are written to an output file.
-  Sample config and output files can be found in test folder.
+  Orchestrates the validation process.
+  Handles file I/O, configuration, and invoking the Validator.
   """
 
     def __init__(self, validation_config: str, differ_output: str,
                  stats_summary: str, validation_output: str):
-        logging.info('Reading config from %s', validation_config)
-        self.differ_results = pd.read_csv(differ_output)
-        print(self.differ_results)
-        self.validation_map = {
-            Validation.MODIFIED_COUNT: self._modified_count_validation,
-            Validation.ADDED_COUNT: self._added_count_validation,
-            Validation.DELETED_COUNT: self._deleted_count_validation,
-            Validation.UNMODIFIED_COUNT: self._unmodified_count_validation
-        }
         self.validation_output = validation_output
-        self.validation_result = []
-        with open(validation_config, encoding='utf-8') as fd:
-            self.validation_config = json.load(fd)
+        self.validator = Validator()
+        self.validation_results = []
 
-    def _latest_data_validation(self, config: dict):
-        logging.info('Not yet implemented')
+        with open(validation_config, encoding='utf-8') as f:
+            self.validation_config = json.load(f)
 
-    # Checks if the number of deleted data points are below a threshold.
-    def _deleted_count_validation(self, config: dict):
-        if self.differ_results.empty:
-            return
-        if self.differ_results['DELETED'].sum() > config['threshold']:
-            raise AssertionError(f'Validation failed: {config["validation"]}')
+        self.dataframes = {
+            'stats':
+                pd.read_csv(stats_summary)
+                if os.path.exists(stats_summary) else pd.DataFrame(),
+            'differ':
+                pd.read_csv(differ_output)
+                if os.path.exists(differ_output) else pd.DataFrame()
+        }
 
-    # Checks if number of modified points for each stat var are same.
-    def _modified_count_validation(self, config: dict):
-        if self.differ_results.empty:
-            return
-        if self.differ_results['MODIFIED'].nunique() > 1:
-            raise AssertionError(f'Validation failed: {config["validation"]}')
-
-    # Checks if number of added points for each stat var are same.
-    def _added_count_validation(self, config: dict):
-        if self.differ_results.empty:
-            return
-        if self.differ_results['ADDED'].nunique() > 1:
-            raise AssertionError(f'Validation failed: {config["validation"]}')
-
-    # Checks if number of unmodified points for each stat var are same.
-    def _unmodified_count_validation(self, config: dict):
-        if self.differ_results.empty:
-            return
-        # if self.differ_results['UNMODIFIED'].nunique() > 1:
-        #    raise AssertionError(f'Validation failed: {config["validation"]}')
-
-    def _run_validation(self, config) -> ValidationResult:
-        try:
-            self.validation_map[Validation[config['validation']]](config)
-            logging.info('Validation passed: %s', config['validation'])
-            return ValidationResult('PASSED', config['validation'], '')
-        except AssertionError as exc:
-            logging.error(repr(exc))
-            return ValidationResult('FAILED', config['validation'], repr(exc))
+        # This dispatch map links a validation name to its function and the
+        # dataframe it requires.
+        self.validation_dispatch = {
+            'MAX_DATE_LATEST':
+                (self.validator.validate_max_date_latest, 'stats'),
+            'MAX_DATE_CONSISTENT':
+                (self.validator.validate_max_date_consistent, 'stats'),
+            'DELETED_COUNT': (self.validator.validate_deleted_count, 'differ'),
+            'MODIFIED_COUNT':
+                (self.validator.validate_modified_count, 'differ'),
+            'ADDED_COUNT': (self.validator.validate_added_count, 'differ'),
+            'UNMODIFIED_COUNT':
+                (self.validator.validate_unmodified_count, 'differ'),
+            'NUM_PLACES_CONSISTENT':
+                (self.validator.validate_num_places_consistent, 'stats'),
+            'NUM_PLACES_COUNT':
+                (self.validator.validate_num_places_count, 'stats'),
+            'NUM_OBSERVATIONS_CHECK':
+                (self.validator.validate_num_observations_check, 'stats'),
+            'UNIT_CONSISTENCY_CHECK':
+                (self.validator.validate_unit_consistency, 'stats'),
+            'MIN_VALUE_CHECK':
+                (self.validator.validate_min_value_check, 'stats'),
+            'MAX_VALUE_CHECK':
+                (self.validator.validate_max_value_check, 'stats'),
+        }
 
     def run_validations(self) -> bool:
-        # Returns false if any validation fails.
-        status = True
-        with open(self.validation_output, mode='w',
-                  encoding='utf-8') as output_file:
-            output_file.write('test,status,message\n')
-            for config in self.validation_config:
-                result = self._run_validation(config)
-                # TODO: use CSV writer libs
-                output_file.write(
-                    f'{result.name},{result.status},{result.message}\n')
-                self.validation_result.append(result)
-                if result.status == 'FAILED':
-                    status = False
-        return status
+        """
+    Runs all validations specified in the config and returns the overall status.
+    """
+        overall_status = True
+        for config in self.validation_config:
+            validation_name = config['validation']
+            if validation_name not in self.validation_dispatch:
+                logging.warning('Unknown validation: %s', validation_name)
+                continue
+
+            validation_func, df_key = self.validation_dispatch[validation_name]
+            df = self.dataframes[df_key]
+
+            # Apply filters if they are defined in the config
+            if 'variableMeasured' in config:
+                df = filter_dataframe(df, config['variableMeasured'])
+
+            # Pass config to the validation function if it's needed
+            if validation_name in [
+                    'DELETED_COUNT', 'NUM_PLACES_COUNT',
+                    'NUM_OBSERVATIONS_CHECK', 'MIN_VALUE_CHECK',
+                    'MAX_VALUE_CHECK'
+            ]:
+                result = validation_func(df, config)
+            else:
+                result = validation_func(df)
+
+            self.validation_results.append(result)
+            if result.status != ValidationStatus.PASSED:
+                overall_status = False
+                if result.status == ValidationStatus.FAILED:
+                    logging.error(result.message)
+                else:
+                    logging.warning(result.message)
+            else:
+                logging.info('Validation passed: %s', result.name)
+
+        self._write_results_to_file()
+        return overall_status
+
+    def _write_results_to_file(self):
+        with open(self.validation_output,
+                  mode='w',
+                  encoding='utf-8',
+                  newline='') as output_file:
+            writer = csv.writer(output_file)
+            writer.writerow(['test', 'status', 'message', 'details'])
+            for result in self.validation_results:
+                details_str = json.dumps(
+                    result.details) if result.details else ''
+                writer.writerow([
+                    result.name, result.status.value, result.message,
+                    details_str
+                ])
 
 
 def main(_):
-    validation = ImportValidation(_FLAGS.validation_config,
-                                  _FLAGS.differ_output, _FLAGS.stats_summary,
-                                  _FLAGS.validation_output)
-    validation.run_validations()
+    runner = ValidationRunner(_FLAGS.validation_config, _FLAGS.differ_output,
+                              _FLAGS.stats_summary, _FLAGS.validation_output)
+    if not runner.run_validations():
+        sys.exit(1)
 
 
 if __name__ == '__main__':
