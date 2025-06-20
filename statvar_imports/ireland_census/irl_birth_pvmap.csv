@@ -1,7 +1,7 @@
-keyp1v1p2v2p3v3
-mapped+AF8-rows1
-mapped+AF8-columns,7
-YearobservationDate+AHs-Number+AH0-
-Births RegisteredmeasuredPropertycountpopulationTypeBirthEventobservationAboutcountry/IRL
-VALUEvalue+AHs-Number+AH0-
-Births Outside Marriage Registered as a Percentage of Total Births Registered+ACM-ignoreignore
+mapped_rows,1
+mapped_columns,7
+key,p1,v1,p2,v2,p3,v3
+Year,observationDate,{Number}
+Births Registered,measuredProperty,count,populationType,BirthEvent,observationAbout,country/IRL
+VALUE,value,{Number}
+Births Outside Marriage Registered as a Percentage of Total Births Registered,#ignore,Not_required_for_the_dataset

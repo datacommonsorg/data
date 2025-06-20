@@ -24,6 +24,7 @@ enum IncentiveCategory {
   INCENTIVE_CATEGORY_UNSPECIFIED = 0;
   INCENTIVE_CATEGORY_SOLAR = 1;
   INCENTIVE_CATEGORY_HEAT_PUMP = 2;
+  INCENTIVE_CATEGORY_ELECTRIC_VEHICLE = 3;
 }
 
 message Incentive {
@@ -35,6 +36,7 @@ message Incentive {
   optional float percentage_of_costs_covered = 6;
   optional PerUnitAmount per_unit_amount = 7;
   optional TaxWaiverType tax_waiver_type = 8;
+  optional EquipmentType equipment_type = 9;
 }
 
 enum PurchaseType {
@@ -50,6 +52,18 @@ enum RedemptionType {
   REDEMPTION_TYPE_TAX_WAIVER = 3;
   REDEMPTION_TYPE_TAX_CREDIT = 4;
   REDEMPTION_TYPE_TAX_DEDUCTION = 5;
+  REDEMPTION_TYPE_ACCESS_PRIVILEGE = 6;
+  REDEMPTION_TYPE_PARKING_PRIVILEGE = 7;
+}
+
+enum EquipmentType {
+  EQUIPMENT_TYPE_UNSPECIFIED = 0;
+  EQUIPMENT_TYPE_HOME_ENERGY_APPLIANCE_HEATING = 1;
+  EQUIPMENT_TYPE_HOME_ENERGY_APPLIANCE_COOLING = 2;
+  EQUIPMENT_TYPE_HOME_ENERGY_APPLIANCE_WATER_HEATING = 3;
+  EQUIPMENT_TYPE_HOME_ENERGY_APPLIANCE_INSULATION = 4;
+  EQUIPMENT_TYPE_ELECTRIC_VEHICLE = 5;
+  EQUIPMENT_TYPE_ELECTRIC_VEHICLE_CHARGER = 6;
 }
 
 message Money {

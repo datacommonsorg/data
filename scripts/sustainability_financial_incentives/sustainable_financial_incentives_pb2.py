@@ -11,7 +11,7 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(
-    b'\n&sustainable_financial_incentives.proto\x12\x06protos\"\x9c\x01\n\x10IncentiveSummary\x12\x33\n\x11\x65xtraction_config\x18\x01 \x01(\x0b\x32\x18.protos.ExtractionConfig\x12$\n\tincentive\x18\x02 \x01(\x0b\x32\x11.protos.Incentive\x12-\n\x0egrounding_info\x18\x03 \x01(\x0b\x32\x15.protos.GroundingInfo\"v\n\x10\x45xtractionConfig\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x1e\n\x06locale\x18\x02 \x01(\x0b\x32\x0e.protos.Locale\x12\x35\n\x12incentive_category\x18\x03 \x01(\x0e\x32\x19.protos.IncentiveCategory\"E\n\x06Locale\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x13\n\x0b\x63ountry_iso\x18\x02 \x01(\t\x12\x14\n\x0c\x61\x64min_area_1\x18\x03 \x01(\t\"\xba\x02\n\tIncentive\x12+\n\rpurchase_type\x18\x01 \x01(\x0e\x32\x14.protos.PurchaseType\x12/\n\x0fredemption_type\x18\x02 \x01(\x0e\x32\x16.protos.RedemptionType\x12%\n\x0emaximum_amount\x18\x03 \x01(\x0b\x32\r.protos.Money\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x15\n\rprovider_name\x18\x05 \x01(\t\x12#\n\x1bpercentage_of_costs_covered\x18\x06 \x01(\x02\x12.\n\x0fper_unit_amount\x18\x07 \x01(\x0b\x32\x15.protos.PerUnitAmount\x12.\n\x0ftax_waiver_type\x18\x08 \x01(\x0e\x32\x15.protos.TaxWaiverType\"<\n\x05Money\x12\x15\n\rcurrency_code\x18\x01 \x01(\t\x12\r\n\x05units\x18\x02 \x01(\x03\x12\r\n\x05nanos\x18\x03 \x01(\x05\"Q\n\rPerUnitAmount\x12\x1d\n\x06\x61mount\x18\x01 \x01(\x0b\x32\r.protos.Money\x12!\n\x04unit\x18\x02 \x01(\x0e\x32\x13.protos.CreditUnits\"\x0f\n\rGroundingInfo\"K\n\x12IncentiveSummaries\x12\x35\n\x13incentive_summaries\x18\x01 \x03(\x0b\x32\x18.protos.IncentiveSummary*w\n\x11IncentiveCategory\x12\"\n\x1eINCENTIVE_CATEGORY_UNSPECIFIED\x10\x00\x12\x1c\n\x18INCENTIVE_CATEGORY_SOLAR\x10\x01\x12 \n\x1cINCENTIVE_CATEGORY_HEAT_PUMP\x10\x02*l\n\x0cPurchaseType\x12\x1d\n\x19PURCHASE_TYPE_UNSPECIFIED\x10\x00\x12\x1e\n\x1aPURCHASE_TYPE_INSTALLATION\x10\x01\x12\x1d\n\x19PURCHASE_TYPE_CONSUMPTION\x10\x02*\xd5\x01\n\x0eRedemptionType\x12\x1f\n\x1bREDEMPTION_TYPE_UNSPECIFIED\x10\x00\x12%\n!REDEMPTION_TYPE_REBATE_OR_SUBSIDY\x10\x01\x12\x18\n\x14REDEMPTION_TYPE_LOAN\x10\x02\x12\x1e\n\x1aREDEMPTION_TYPE_TAX_WAIVER\x10\x03\x12\x1e\n\x1aREDEMPTION_TYPE_TAX_CREDIT\x10\x04\x12!\n\x1dREDEMPTION_TYPE_TAX_DEDUCTION\x10\x05*\x80\x01\n\x0b\x43reditUnits\x12\x1c\n\x18\x43REDIT_UNITS_UNSPECIFIED\x10\x00\x12\x1f\n\x1b\x43REDIT_UNITS_KILOWATT_HOURS\x10\x01\x12\x1a\n\x16\x43REDIT_UNITS_KILOWATTS\x10\x02\x12\x16\n\x12\x43REDIT_UNITS_WATTS\x10\x03*\x90\x01\n\rTaxWaiverType\x12\x1f\n\x1bTAX_WAIVER_TYPE_UNSPECIFIED\x10\x00\x12%\n!TAX_WAIVER_TYPE_PARTIAL_REDUCTION\x10\x01\x12\x19\n\x15TAX_WAIVER_TYPE_SALES\x10\x02\x12\x1c\n\x18TAX_WAIVER_TYPE_PROPERTY\x10\x03'
+    b'\n&sustainable_financial_incentives.proto\x12\x06protos\"\x9c\x01\n\x10IncentiveSummary\x12\x33\n\x11\x65xtraction_config\x18\x01 \x01(\x0b\x32\x18.protos.ExtractionConfig\x12$\n\tincentive\x18\x02 \x01(\x0b\x32\x11.protos.Incentive\x12-\n\x0egrounding_info\x18\x03 \x01(\x0b\x32\x15.protos.GroundingInfo\"v\n\x10\x45xtractionConfig\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x1e\n\x06locale\x18\x02 \x01(\x0b\x32\x0e.protos.Locale\x12\x35\n\x12incentive_category\x18\x03 \x01(\x0e\x32\x19.protos.IncentiveCategory\"E\n\x06Locale\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x13\n\x0b\x63ountry_iso\x18\x02 \x01(\t\x12\x14\n\x0c\x61\x64min_area_1\x18\x03 \x01(\t\"\xe9\x02\n\tIncentive\x12+\n\rpurchase_type\x18\x01 \x01(\x0e\x32\x14.protos.PurchaseType\x12/\n\x0fredemption_type\x18\x02 \x01(\x0e\x32\x16.protos.RedemptionType\x12%\n\x0emaximum_amount\x18\x03 \x01(\x0b\x32\r.protos.Money\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x15\n\rprovider_name\x18\x05 \x01(\t\x12#\n\x1bpercentage_of_costs_covered\x18\x06 \x01(\x02\x12.\n\x0fper_unit_amount\x18\x07 \x01(\x0b\x32\x15.protos.PerUnitAmount\x12.\n\x0ftax_waiver_type\x18\x08 \x01(\x0e\x32\x15.protos.TaxWaiverType\x12-\n\x0e\x65quipment_type\x18\t \x01(\x0e\x32\x15.protos.EquipmentType\"<\n\x05Money\x12\x15\n\rcurrency_code\x18\x01 \x01(\t\x12\r\n\x05units\x18\x02 \x01(\x03\x12\r\n\x05nanos\x18\x03 \x01(\x05\"Q\n\rPerUnitAmount\x12\x1d\n\x06\x61mount\x18\x01 \x01(\x0b\x32\r.protos.Money\x12!\n\x04unit\x18\x02 \x01(\x0e\x32\x13.protos.CreditUnits\"\x0f\n\rGroundingInfo\"K\n\x12IncentiveSummaries\x12\x35\n\x13incentive_summaries\x18\x01 \x03(\x0b\x32\x18.protos.IncentiveSummary*\xa0\x01\n\x11IncentiveCategory\x12\"\n\x1eINCENTIVE_CATEGORY_UNSPECIFIED\x10\x00\x12\x1c\n\x18INCENTIVE_CATEGORY_SOLAR\x10\x01\x12 \n\x1cINCENTIVE_CATEGORY_HEAT_PUMP\x10\x02\x12\'\n#INCENTIVE_CATEGORY_ELECTRIC_VEHICLE\x10\x03*l\n\x0cPurchaseType\x12\x1d\n\x19PURCHASE_TYPE_UNSPECIFIED\x10\x00\x12\x1e\n\x1aPURCHASE_TYPE_INSTALLATION\x10\x01\x12\x1d\n\x19PURCHASE_TYPE_CONSUMPTION\x10\x02*\xa2\x02\n\x0eRedemptionType\x12\x1f\n\x1bREDEMPTION_TYPE_UNSPECIFIED\x10\x00\x12%\n!REDEMPTION_TYPE_REBATE_OR_SUBSIDY\x10\x01\x12\x18\n\x14REDEMPTION_TYPE_LOAN\x10\x02\x12\x1e\n\x1aREDEMPTION_TYPE_TAX_WAIVER\x10\x03\x12\x1e\n\x1aREDEMPTION_TYPE_TAX_CREDIT\x10\x04\x12!\n\x1dREDEMPTION_TYPE_TAX_DEDUCTION\x10\x05\x12$\n REDEMPTION_TYPE_ACCESS_PRIVILEGE\x10\x06\x12%\n!REDEMPTION_TYPE_PARKING_PRIVILEGE\x10\x07*\xd2\x02\n\rEquipmentType\x12\x1e\n\x1a\x45QUIPMENT_TYPE_UNSPECIFIED\x10\x00\x12\x30\n,EQUIPMENT_TYPE_HOME_ENERGY_APPLIANCE_HEATING\x10\x01\x12\x30\n,EQUIPMENT_TYPE_HOME_ENERGY_APPLIANCE_COOLING\x10\x02\x12\x36\n2EQUIPMENT_TYPE_HOME_ENERGY_APPLIANCE_WATER_HEATING\x10\x03\x12\x33\n/EQUIPMENT_TYPE_HOME_ENERGY_APPLIANCE_INSULATION\x10\x04\x12#\n\x1f\x45QUIPMENT_TYPE_ELECTRIC_VEHICLE\x10\x05\x12+\n\'EQUIPMENT_TYPE_ELECTRIC_VEHICLE_CHARGER\x10\x06*\x80\x01\n\x0b\x43reditUnits\x12\x1c\n\x18\x43REDIT_UNITS_UNSPECIFIED\x10\x00\x12\x1f\n\x1b\x43REDIT_UNITS_KILOWATT_HOURS\x10\x01\x12\x1a\n\x16\x43REDIT_UNITS_KILOWATTS\x10\x02\x12\x16\n\x12\x43REDIT_UNITS_WATTS\x10\x03*\x90\x01\n\rTaxWaiverType\x12\x1f\n\x1bTAX_WAIVER_TYPE_UNSPECIFIED\x10\x00\x12%\n!TAX_WAIVER_TYPE_PARTIAL_REDUCTION\x10\x01\x12\x19\n\x15TAX_WAIVER_TYPE_SALES\x10\x02\x12\x1c\n\x18TAX_WAIVER_TYPE_PROPERTY\x10\x03'
 )
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
@@ -21,16 +21,18 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR,
 if _descriptor._USE_C_DESCRIPTORS == False:
 
     DESCRIPTOR._options = None
-    _INCENTIVECATEGORY._serialized_start = 956
-    _INCENTIVECATEGORY._serialized_end = 1075
-    _PURCHASETYPE._serialized_start = 1077
-    _PURCHASETYPE._serialized_end = 1185
-    _REDEMPTIONTYPE._serialized_start = 1188
-    _REDEMPTIONTYPE._serialized_end = 1401
-    _CREDITUNITS._serialized_start = 1404
-    _CREDITUNITS._serialized_end = 1532
-    _TAXWAIVERTYPE._serialized_start = 1535
-    _TAXWAIVERTYPE._serialized_end = 1679
+    _INCENTIVECATEGORY._serialized_start = 1004
+    _INCENTIVECATEGORY._serialized_end = 1164
+    _PURCHASETYPE._serialized_start = 1166
+    _PURCHASETYPE._serialized_end = 1274
+    _REDEMPTIONTYPE._serialized_start = 1277
+    _REDEMPTIONTYPE._serialized_end = 1567
+    _EQUIPMENTTYPE._serialized_start = 1570
+    _EQUIPMENTTYPE._serialized_end = 1908
+    _CREDITUNITS._serialized_start = 1911
+    _CREDITUNITS._serialized_end = 2039
+    _TAXWAIVERTYPE._serialized_start = 2042
+    _TAXWAIVERTYPE._serialized_end = 2186
     _INCENTIVESUMMARY._serialized_start = 51
     _INCENTIVESUMMARY._serialized_end = 207
     _EXTRACTIONCONFIG._serialized_start = 209
@@ -38,13 +40,13 @@ if _descriptor._USE_C_DESCRIPTORS == False:
     _LOCALE._serialized_start = 329
     _LOCALE._serialized_end = 398
     _INCENTIVE._serialized_start = 401
-    _INCENTIVE._serialized_end = 715
-    _MONEY._serialized_start = 717
-    _MONEY._serialized_end = 777
-    _PERUNITAMOUNT._serialized_start = 779
-    _PERUNITAMOUNT._serialized_end = 860
-    _GROUNDINGINFO._serialized_start = 862
-    _GROUNDINGINFO._serialized_end = 877
-    _INCENTIVESUMMARIES._serialized_start = 879
-    _INCENTIVESUMMARIES._serialized_end = 954
+    _INCENTIVE._serialized_end = 762
+    _MONEY._serialized_start = 764
+    _MONEY._serialized_end = 824
+    _PERUNITAMOUNT._serialized_start = 826
+    _PERUNITAMOUNT._serialized_end = 907
+    _GROUNDINGINFO._serialized_start = 909
+    _GROUNDINGINFO._serialized_end = 924
+    _INCENTIVESUMMARIES._serialized_start = 926
+    _INCENTIVESUMMARIES._serialized_end = 1001
 # @@protoc_insertion_point(module_scope)
