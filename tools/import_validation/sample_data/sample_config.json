@@ -29,5 +29,8 @@
     {
         "validation": "NUM_OBSERVATIONS_CHECK",
         "minimum": 1
+    },
+    {
+        "validation": "UNIT_CONSISTENCY_CHECK"
     }
 ]

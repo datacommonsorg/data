@@ -370,6 +370,36 @@ class Validator:
         return self._validate_range(stats_df, 'NumObservations', config,
                                     'NUM_OBSERVATIONS_CHECK')
 
+    def validate_unit_consistency(self,
+                                  stats_df: pd.DataFrame) -> ValidationResult:
+        """Checks if the unit is the same for all StatVars.
+
+    Args:
+      stats_df: A DataFrame containing the summary statistics, expected to have
+        a 'Units' column.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if 'Units' not in stats_df.columns:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'UNIT_CONSISTENCY_CHECK',
+                message="Input data is missing required column: 'Units'.")
+        if stats_df.empty:
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'UNIT_CONSISTENCY_CHECK')
+        unique_units = stats_df['Units'].nunique()
+        if unique_units > 1:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'UNIT_CONSISTENCY_CHECK',
+                message=
+                f"Found {unique_units} unique units where 1 was expected.",
+                details={'unique_units': list(stats_df['Units'].unique())})
+        return ValidationResult(ValidationStatus.PASSED,
+                                'UNIT_CONSISTENCY_CHECK')
+
     def validate_max_value_check(self, stats_df: pd.DataFrame,
                                  config: dict) -> ValidationResult:
         """Checks if the MaxValue for each StatVar is not above a defined maximum.

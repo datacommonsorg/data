@@ -369,6 +369,36 @@ class TestNumObservationsCheckValidation(unittest.TestCase):
         self.assertIn('missing required column', result.message)
 
 
+class TestUnitConsistencyValidation(unittest.TestCase):
+    '''Test Class for the UNIT_CONSISTENCY_CHECK validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+
+    def test_unit_consistency_fails_on_inconsistent_units(self):
+        test_df = pd.DataFrame({'Units': ['USD', 'Percent']})  # Inconsistent
+        result = self.validator.validate_unit_consistency(test_df)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(sorted(result.details['unique_units']),
+                         ['Percent', 'USD'])
+
+    def test_unit_consistency_passes_on_consistent_units(self):
+        test_df = pd.DataFrame({'Units': ['USD', 'USD']})  # Consistent
+        result = self.validator.validate_unit_consistency(test_df)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_unit_consistency_passes_on_empty_dataframe(self):
+        test_df = pd.DataFrame({'Units': []})
+        result = self.validator.validate_unit_consistency(test_df)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_unit_consistency_fails_on_missing_column(self):
+        test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'Units'
+        result = self.validator.validate_unit_consistency(test_df)
+        self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
+        self.assertIn('missing required column', result.message)
+
+
 class TestMaxValueCheckValidation(unittest.TestCase):
     '''Test Class for the MAX_VALUE_CHECK validation rule.'''
 

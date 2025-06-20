@@ -74,6 +74,7 @@ The following validations are currently supported:
 | `NUM_PLACES_CONSISTENT`   | Checks that the number of places is the same for all StatVars.           | `stats_summary`   | None                                                   |
 | `NUM_PLACES_COUNT`        | Checks that the number of places is within a defined range.              | `stats_summary`   | `minimum`, `maximum`, or `value` (integer)             |
 | `NUM_OBSERVATIONS_CHECK`  | Checks that the number of observations is within a defined range.        | `stats_summary`   | `minimum`, `maximum`, or `value` (integer)             |
+| `UNIT_CONSISTENCY_CHECK`  | Checks that the unit is the same for all StatVars.                       | `stats_summary`   | None                                                   |
 | `MIN_VALUE_CHECK`         | Checks that the minimum value is not below a defined minimum.            | `stats_summary`   | `minimum` (integer or float)                           |
 | `MAX_VALUE_CHECK`         | Checks that the maximum value is not above a defined maximum.            | `stats_summary`   | `maximum` (integer or float)                           |
 
