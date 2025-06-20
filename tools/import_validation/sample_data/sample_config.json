@@ -25,5 +25,9 @@
         "variableMeasured": [
             ".*Percent.*"
         ]
+    },
+    {
+        "validation": "NUM_OBSERVATIONS_CHECK",
+        "minimum": 1
     }
 ]

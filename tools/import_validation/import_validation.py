@@ -90,6 +90,8 @@ class ValidationRunner:
                 (self.validator.validate_num_places_consistent, 'stats'),
             'NUM_PLACES_COUNT':
                 (self.validator.validate_num_places_count, 'stats'),
+            'NUM_OBSERVATIONS_CHECK':
+                (self.validator.validate_num_observations_check, 'stats'),
             'MIN_VALUE_CHECK':
                 (self.validator.validate_min_value_check, 'stats'),
             'MAX_VALUE_CHECK':

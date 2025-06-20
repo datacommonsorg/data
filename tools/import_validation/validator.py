@@ -334,6 +334,78 @@ class Validator:
                 details={'unique_dates': list(stats_df['MaxDate'].unique())})
         return ValidationResult(ValidationStatus.PASSED, 'MAX_DATE_CONSISTENT')
 
+    def validate_num_observations_check(self, stats_df: pd.DataFrame,
+                                        config: dict) -> ValidationResult:
+        """Checks if the number of observations for each StatVar is within a defined range.
+
+    The range can be specified using 'minimum', 'maximum', or an exact 'value'
+    in the config.
+
+    Args:
+      stats_df: A DataFrame containing the summary statistics, expected to have
+        'NumObservations' and 'StatVar' columns.
+      config: A dictionary containing the validation configuration.
+
+    Returns:
+      A ValidationResult object.
+    """
+        if 'NumObservations' not in stats_df.columns:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'NUM_OBSERVATIONS_CHECK',
+                message=
+                "Input data is missing required column: 'NumObservations'.")
+        if stats_df.empty:
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'NUM_OBSERVATIONS_CHECK')
+
+        min_val = config.get('minimum')
+        max_val = config.get('maximum')
+        exact_val = config.get('value')
+
+        for _, row in stats_df.iterrows():
+            num_observations = row['NumObservations']
+            stat_var = row.get(
+                'StatVar',
+                'Unknown')  # Assuming StatVar column exists for better error messages
+
+            if exact_val is not None and num_observations != exact_val:
+                return ValidationResult(
+                    ValidationStatus.FAILED,
+                    'NUM_OBSERVATIONS_CHECK',
+                    message=
+                    f"StatVar '{stat_var}' has {num_observations} observations, but expected exactly {exact_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_count': num_observations,
+                        'expected_count': exact_val
+                    })
+            if min_val is not None and num_observations < min_val:
+                return ValidationResult(
+                    ValidationStatus.FAILED,
+                    'NUM_OBSERVATIONS_CHECK',
+                    message=
+                    f"StatVar '{stat_var}' has {num_observations} observations, which is below the minimum of {min_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_count': num_observations,
+                        'minimum': min_val
+                    })
+            if max_val is not None and num_observations > max_val:
+                return ValidationResult(
+                    ValidationStatus.FAILED,
+                    'NUM_OBSERVATIONS_CHECK',
+                    message=
+                    f"StatVar '{stat_var}' has {num_observations} observations, which is above the maximum of {max_val}.",
+                    details={
+                        'stat_var': stat_var,
+                        'actual_count': num_observations,
+                        'maximum': max_val
+                    })
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'NUM_OBSERVATIONS_CHECK')
+
     def validate_max_value_check(self, stats_df: pd.DataFrame,
                                  config: dict) -> ValidationResult:
         """Checks if the MaxValue for each StatVar is not above a defined maximum.
