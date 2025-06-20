@@ -1,0 +1,85 @@
+incentive_summaries {
+  extraction_config {
+    url: "https://example.com/incentive1"
+    locale {
+      language: "en"
+      country_iso: "US"
+      admin_area_1: "California"
+    }
+    incentive_category: INCENTIVE_CATEGORY_SOLAR
+  }
+  incentive {
+    purchase_type: PURCHASE_TYPE_INSTALLATION
+    redemption_type: REDEMPTION_TYPE_REBATE_OR_SUBSIDY
+    maximum_amount {
+      currency_code: "USD"
+      units: 1000
+    }
+    name: "Solar Rebate"
+    provider_name: "State of California"
+  }
+}
+incentive_summaries {
+  extraction_config {
+    url: "https://example.com/incentive2"
+    locale {
+      language: "en"
+      country_iso: "US"
+      admin_area_1: "New York"
+    }
+    incentive_category: INCENTIVE_CATEGORY_HEAT_PUMP
+  }
+  incentive {
+    purchase_type: PURCHASE_TYPE_INSTALLATION
+    redemption_type: REDEMPTION_TYPE_TAX_CREDIT
+    percentage_of_costs_covered: 0.3
+    name: "Heat Pump Tax Credit"
+    provider_name: "State of New York"
+  }
+}
+incentive_summaries {
+  extraction_config {
+    url: "https://example.com/incentive3"
+    locale {
+      language: "fr"
+      country_iso: "CA"
+      admin_area_1: "Quebec"
+    }
+    incentive_category: INCENTIVE_CATEGORY_SOLAR
+  }
+  incentive {
+    purchase_type: PURCHASE_TYPE_CONSUMPTION
+    redemption_type: REDEMPTION_TYPE_TAX_WAIVER
+    per_unit_amount {
+      amount {
+        currency_code: "CAD"
+        units: 50
+      }
+      unit: CREDIT_UNITS_KILOWATT_HOURS
+    }
+    tax_waiver_type: TAX_WAIVER_TYPE_SALES
+    name: "Solar Consumption Tax Waiver"
+    provider_name: "Government of Quebec"
+  }
+}
+incentive_summaries {
+  extraction_config {
+    url: "https://example.com/incentive4"
+    locale {
+      language: "de"
+      country_iso: "DE"
+      admin_area_1: "Bavaria"
+    }
+    incentive_category: INCENTIVE_CATEGORY_HEAT_PUMP
+  }
+  incentive {
+    purchase_type: PURCHASE_TYPE_INSTALLATION
+    redemption_type: REDEMPTION_TYPE_LOAN
+    maximum_amount {
+      currency_code: "EUR"
+      units: 5000
+    }
+    name: "Heat Pump Loan"
+    provider_name: "Bavarian Government"
+  }
+}

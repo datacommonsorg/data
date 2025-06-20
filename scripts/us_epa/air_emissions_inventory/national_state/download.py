@@ -28,7 +28,7 @@ flags.DEFINE_string('config_path', '',
                     'Path to the configuration file in the GCS bucket.')
 
 # Hardcoded GCS bucket name
-GCS_BUCKET_NAME = "datcom-csv"
+GCS_BUCKET_NAME = "unresolved_mcf"
 
 # Download path for files
 _DOWNLOAD_PATH = os.path.join(os.path.dirname(__file__), 'input_files')
@@ -54,30 +54,50 @@ def check_url_status(url: str) -> bool:
         return False
 
 
-def read_config_from_gcs(config_path: str) -> list:
+def parse_gcs_path(full_path: str) -> tuple:
+    """
+    Splits a full GCS path into the bucket name and object path.
+
+    Args:
+        full_path (str): GCS path in the form 'bucket_name/path/to/file'.
+
+    Returns:
+        tuple: (bucket_name, object_path)
+    """
+    if '/' not in full_path:
+        raise ValueError(f"Invalid GCS path format: {full_path}")
+    bucket_name, object_path = full_path.split('/', 1)
+    return bucket_name, object_path
+
+
+def read_config_from_gcs(bucket_name: str, config_path: str) -> list:
     """
     Reads a configuration file from GCS and parses the download URLs.
 
     Args:
-        config_path (str): The path to the configuration file in the bucket.
+        bucket_name (str): GCS bucket name.
+        config_path (str): Path to the config file inside the bucket.
 
     Returns:
-        list: A list of URLs to download.
+        list: A list of download URLs.
     """
     try:
         client = storage.Client()
-        bucket = client.get_bucket(GCS_BUCKET_NAME)
+        bucket = client.get_bucket(bucket_name)
         blob = bucket.blob(config_path)
         config_data = json.loads(blob.download_as_text())
         logging.info(f"Successfully read configuration from GCS: {config_path}")
 
-        # Extract URLs from the config structure
         urls = [
             entry["download_path"]
             for entry in config_data
             if "download_path" in entry
         ]
         return urls
+    except Exception as e:
+        logging.fatal(
+            f"Failed to read configuration file from GCS. Details: {e}")
+        return []
     except Exception as e:
         logging.fatal(
             f"Failed to read configuration file from GCS. Details: {e}")
@@ -116,15 +136,21 @@ def download_files(urls: list) -> None:
 
 def main(argv):
     # Get the config path from the flags
-    config_path = _FLAGS.config_path
+    config_path_flag = _FLAGS.config_path
 
-    if not config_path:
+    if not config_path_flag:
         logging.fatal(
             "Please provide the --config_path flag with a valid GCS path.")
         return
 
+    try:
+        bucket_name, config_path = parse_gcs_path(config_path_flag)
+    except ValueError as e:
+        logging.fatal(f"Invalid GCS path: {e}")
+        return
+
     # Read URLs from the GCS-hosted config file
-    urls = read_config_from_gcs(config_path)
+    urls = read_config_from_gcs(bucket_name, config_path)
 
     # Proceed to download files
     if urls:
