@@ -1,0 +1,10 @@
+Node: dcid:9ThTo12ThGradeNoDiploma
+typeOf: dcid:SDG_EducationLevEnum
+name: "9 Th To 12 Th Grade No Diploma"
+isProvisional: dcs:True
+
+Node: dcid:Science__Technology__Engineering__Mathematics
+typeOf: dcid:EducationalMajorEnum
+name: "Science__ Technology__ Engineering__ Mathematics"
+isProvisional: dcs:True
+
