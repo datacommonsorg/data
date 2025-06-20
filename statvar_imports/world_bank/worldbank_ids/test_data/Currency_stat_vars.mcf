@@ -1,0 +1,389 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/chharish/ONE_ORG/data/scripts/world_bank/worldbank_ids/input_files/currency_input.csv --pv_map=/usr/local/google/home/chharish/ONE_ORG/data/statvar_imports/worldbank_ids/configs/currency_pvmap.csv,country:/usr/local/google/home/chharish/ONE_ORG/data/statvar_imports/worldbank_ids/InputlendingEntity.csv --output_path=/usr/local/google/home/chharish/ONE_ORG/data/statvar_imports/worldbank_ids/test_data/Currency --existing_statvar_mcf=/usr/local/google/home/chharish/ONE_ORG/data/statvar_imports/worldbank_ids/Schema_entity.mcf --config=/usr/local/google/home/chharish/ONE_ORG/data/statvar_imports/worldbank_ids/common_metadata.csv" on 2025-04-02 12:32:31.542650
+
+Node: dcid:Amount_Debt_DEM_LenderAfrican_Dev._Bank_AsAFractionOf_Amount_Debt_LenderAfrican_Dev._Bank
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderAfrican_Dev._Bank
+currency: dcid:DEM
+lendingEntity: "African Dev. Bank"
+
+Node: dcid:Amount_Debt_DEM_LenderAlgeria_AsAFractionOf_Amount_Debt_LenderAlgeria
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderAlgeria
+currency: dcid:DEM
+lendingEntity: dcid:Algeria
+
+Node: dcid:Amount_Debt_DEM_LenderAustria_AsAFractionOf_Amount_Debt_LenderAustria
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderAustria
+currency: dcid:DEM
+lendingEntity: dcid:Austria
+
+Node: dcid:Amount_Debt_DEM_LenderBahamas_AsAFractionOf_Amount_Debt_LenderBahamas
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderBahamas
+currency: dcid:DEM
+lendingEntity: dcid:Bahamas
+
+Node: dcid:Amount_Debt_DEM_LenderBahrain_AsAFractionOf_Amount_Debt_LenderBahrain
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderBahrain
+currency: dcid:DEM
+lendingEntity: dcid:Bahrain
+
+Node: dcid:Amount_Debt_DEM_LenderBelgium_AsAFractionOf_Amount_Debt_LenderBelgium
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderBelgium
+currency: dcid:DEM
+lendingEntity: dcid:Belgium
+
+Node: dcid:Amount_Debt_DEM_LenderCanada_AsAFractionOf_Amount_Debt_LenderCanada
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderCanada
+currency: dcid:DEM
+lendingEntity: dcid:Canada
+
+Node: dcid:Amount_Debt_DEM_LenderCaribbean_Dev._Bank_AsAFractionOf_Amount_Debt_LenderCaribbean_Dev._Bank
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderCaribbean_Dev._Bank
+currency: dcid:DEM
+lendingEntity: "Caribbean Dev. Bank"
+
+Node: dcid:Amount_Debt_DEM_LenderCentral_American_Bank_for_Econ._Integration_BCIE__AsAFractionOf_Amount_Debt_LenderCentral_American_Bank_for_Econ._Integration_BCIE_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderCentral_American_Bank_for_Econ._Integration_BCIE_
+currency: dcid:DEM
+lendingEntity: "Central American Bank for Econ. Integration (BCIE)"
+
+Node: dcid:Amount_Debt_DEM_LenderCouncil_of_Europe_AsAFractionOf_Amount_Debt_LenderCouncil_of_Europe
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderCouncil_of_Europe
+currency: dcid:DEM
+lendingEntity: "Council of Europe"
+
+Node: dcid:Amount_Debt_DEM_LenderCuba_AsAFractionOf_Amount_Debt_LenderCuba
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderCuba
+currency: dcid:DEM
+lendingEntity: dcid:Cuba
+
+Node: dcid:Amount_Debt_DEM_LenderCzechia_AsAFractionOf_Amount_Debt_LenderCzechia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderCzechia
+currency: dcid:DEM
+lendingEntity: dcid:Czechia
+
+Node: dcid:Amount_Debt_DEM_LenderDenmark_AsAFractionOf_Amount_Debt_LenderDenmark
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderDenmark
+currency: dcid:DEM
+lendingEntity: dcid:Denmark
+
+Node: dcid:Amount_Debt_DEM_LenderDev._Bank_of_the_Central_African_States_BDEAC__AsAFractionOf_Amount_Debt_LenderDev._Bank_of_the_Central_African_States_BDEAC_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderDev._Bank_of_the_Central_African_States_BDEAC_
+currency: dcid:DEM
+lendingEntity: "Dev. Bank of the Central African States (BDEAC)"
+
+Node: dcid:Amount_Debt_DEM_LenderEast_African_Community_AsAFractionOf_Amount_Debt_LenderEast_African_Community
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderEast_African_Community
+currency: dcid:DEM
+lendingEntity: "East African Community"
+
+Node: dcid:Amount_Debt_DEM_LenderEuropean_Bank_for_Reconstruction_and_Dev._EBRD__AsAFractionOf_Amount_Debt_LenderEuropean_Bank_for_Reconstruction_and_Dev._EBRD_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderEuropean_Bank_for_Reconstruction_and_Dev._EBRD_
+currency: dcid:DEM
+lendingEntity: "European Bank for Reconstruction and Dev. (EBRD)"
+
+Node: dcid:Amount_Debt_DEM_LenderEuropean_Development_Fund_EDF__AsAFractionOf_Amount_Debt_LenderEuropean_Development_Fund_EDF_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderEuropean_Development_Fund_EDF_
+currency: dcid:DEM
+lendingEntity: "European Development Fund (EDF)"
+
+Node: dcid:Amount_Debt_DEM_LenderEuropean_Economic_Community_EEC__AsAFractionOf_Amount_Debt_LenderEuropean_Economic_Community_EEC_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderEuropean_Economic_Community_EEC_
+currency: dcid:DEM
+lendingEntity: "European Economic Community (EEC)"
+
+Node: dcid:Amount_Debt_DEM_LenderEuropean_Investment_Bank_AsAFractionOf_Amount_Debt_LenderEuropean_Investment_Bank
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderEuropean_Investment_Bank
+currency: dcid:DEM
+lendingEntity: "European Investment Bank"
+
+Node: dcid:Amount_Debt_DEM_LenderFinland_AsAFractionOf_Amount_Debt_LenderFinland
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderFinland
+currency: dcid:DEM
+lendingEntity: dcid:Finland
+
+Node: dcid:Amount_Debt_DEM_LenderFrance_AsAFractionOf_Amount_Debt_LenderFrance
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderFrance
+currency: dcid:DEM
+lendingEntity: dcid:France
+
+Node: dcid:Amount_Debt_DEM_LenderHong_Kong_AsAFractionOf_Amount_Debt_LenderHong_Kong
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderHong_Kong
+currency: dcid:DEM
+lendingEntity: "Hong Kong"
+
+Node: dcid:Amount_Debt_DEM_LenderItaly_AsAFractionOf_Amount_Debt_LenderItaly
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderItaly
+currency: dcid:DEM
+lendingEntity: dcid:Italy
+
+Node: dcid:Amount_Debt_DEM_LenderJapan_AsAFractionOf_Amount_Debt_LenderJapan
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderJapan
+currency: dcid:DEM
+lendingEntity: dcid:Japan
+
+Node: dcid:Amount_Debt_DEM_LenderLuxembourg_AsAFractionOf_Amount_Debt_LenderLuxembourg
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderLuxembourg
+currency: dcid:DEM
+lendingEntity: dcid:Luxembourg
+
+Node: dcid:Amount_Debt_DEM_LenderMultiple_Lenders_AsAFractionOf_Amount_Debt_LenderMultiple_Lenders
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderMultiple_Lenders
+currency: dcid:DEM
+lendingEntity: "Multiple Lenders"
+
+Node: dcid:Amount_Debt_DEM_LenderNetherlands_AsAFractionOf_Amount_Debt_LenderNetherlands
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderNetherlands
+currency: dcid:DEM
+lendingEntity: dcid:Netherlands
+
+Node: dcid:Amount_Debt_DEM_LenderNordic_Development_Fund_AsAFractionOf_Amount_Debt_LenderNordic_Development_Fund
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderNordic_Development_Fund
+currency: dcid:DEM
+lendingEntity: "Nordic Development Fund"
+
+Node: dcid:Amount_Debt_DEM_LenderNordic_Investment_Bank_AsAFractionOf_Amount_Debt_LenderNordic_Investment_Bank
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderNordic_Investment_Bank
+currency: dcid:DEM
+lendingEntity: "Nordic Investment Bank"
+
+Node: dcid:Amount_Debt_DEM_LenderNorway_AsAFractionOf_Amount_Debt_LenderNorway
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderNorway
+currency: dcid:DEM
+lendingEntity: dcid:Norway
+
+Node: dcid:Amount_Debt_DEM_LenderPoland_AsAFractionOf_Amount_Debt_LenderPoland
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderPoland
+currency: dcid:DEM
+lendingEntity: dcid:Poland
+
+Node: dcid:Amount_Debt_DEM_LenderPortugal_AsAFractionOf_Amount_Debt_LenderPortugal
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderPortugal
+currency: dcid:DEM
+lendingEntity: dcid:Portugal
+
+Node: dcid:Amount_Debt_DEM_LenderSaudi_Arabia_AsAFractionOf_Amount_Debt_LenderSaudi_Arabia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderSaudi_Arabia
+currency: dcid:DEM
+lendingEntity: "Saudi Arabia"
+
+Node: dcid:Amount_Debt_DEM_LenderSingapore_AsAFractionOf_Amount_Debt_LenderSingapore
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderSingapore
+currency: dcid:DEM
+lendingEntity: dcid:Singapore
+
+Node: dcid:Amount_Debt_DEM_LenderSpain_AsAFractionOf_Amount_Debt_LenderSpain
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderSpain
+currency: dcid:DEM
+lendingEntity: dcid:Spain
+
+Node: dcid:Amount_Debt_DEM_LenderSweden_AsAFractionOf_Amount_Debt_LenderSweden
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderSweden
+currency: dcid:DEM
+lendingEntity: dcid:Sweden
+
+Node: dcid:Amount_Debt_DEM_LenderSwitzerland_AsAFractionOf_Amount_Debt_LenderSwitzerland
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderSwitzerland
+currency: dcid:DEM
+lendingEntity: dcid:Switzerland
+
+Node: dcid:Amount_Debt_DEM_LenderTunisia_AsAFractionOf_Amount_Debt_LenderTunisia
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderTunisia
+currency: dcid:DEM
+lendingEntity: dcid:Tunisia
+
+Node: dcid:Amount_Debt_DEM_LenderUnited_Kingdom_AsAFractionOf_Amount_Debt_LenderUnited_Kingdom
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderUnited_Kingdom
+currency: dcid:DEM
+lendingEntity: "United Kingdom"
+
+Node: dcid:Amount_Debt_DEM_LenderUnited_States_AsAFractionOf_Amount_Debt_LenderUnited_States
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_LenderUnited_States
+currency: dcid:DEM
+lendingEntity: "United States"
+
+Node: dcid:Amount_Debt_DEM_Lender_D.P.R._of__AsAFractionOf_Amount_Debt_Lender_D.P.R._of_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_Lender_D.P.R._of_
+currency: dcid:DEM
+lendingEntity: "D.P.R. of"
+
+Node: dcid:Amount_Debt_DEM_Lender_Fed._Rep._of__AsAFractionOf_Amount_Debt_Lender_Fed._Rep._of_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_Lender_Fed._Rep._of_
+currency: dcid:DEM
+lendingEntity: "Fed. Rep. of"
+
+Node: dcid:Amount_Debt_DEM_Lender_Republic_of__AsAFractionOf_Amount_Debt_Lender_Republic_of_
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Debt
+measuredProperty: dcid:amount
+statType: dcid:measuredValue
+measurementDenominator: dcid:Amount_Debt_Lender_Republic_of_
+currency: dcid:DEM
+lendingEntity: "Republic of"
+
