@@ -134,10 +134,11 @@ class TestValidationRunner(unittest.TestCase):
     def test_runner_writes_correct_output(self, MockValidator):
         # 1. Setup the mock to return a specific result
         mock_validator_instance = MockValidator.return_value
-        expected_result = ValidationResult(ValidationStatus.FAILED,
-                                           'DELETED_COUNT',
-                                           message='Too many deletions',
-                                           details={'deleted_count': 100})
+        expected_result = ValidationResult(
+            ValidationStatus.FAILED,
+            'DELETED_COUNT',
+            message='Too many deletions, found 100',
+            details={'deleted_count': 100})
         mock_validator_instance.validate_deleted_count.return_value = expected_result
 
         # 2. Create test files
@@ -157,7 +158,8 @@ class TestValidationRunner(unittest.TestCase):
         self.assertEqual(len(output_df), 1)
         self.assertEqual(output_df.iloc[0]['test'], 'DELETED_COUNT')
         self.assertEqual(output_df.iloc[0]['status'], 'FAILED')
-        self.assertEqual(output_df.iloc[0]['message'], 'Too many deletions')
+        self.assertEqual(output_df.iloc[0]['message'],
+                         'Too many deletions, found 100')
         self.assertEqual(output_df.iloc[0]['details'], '{"deleted_count": 100}')
 
     @patch('tools.import_validation.import_validation.logging')

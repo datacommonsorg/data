@@ -30,8 +30,9 @@ from absl import app
 from absl import flags
 from absl import logging
 import pandas as pd
-import os
+import csv
 import json
+import os
 import sys
 
 from .validator import Validator
@@ -118,7 +119,8 @@ class ValidationRunner:
 
             # Pass config to the validation function if it's needed
             if validation_name in [
-                    'DELETED_COUNT', 'NUM_PLACES_COUNT', 'MIN_VALUE_CHECK',
+                    'DELETED_COUNT', 'NUM_PLACES_COUNT',
+                    'NUM_OBSERVATIONS_CHECK', 'MIN_VALUE_CHECK',
                     'MAX_VALUE_CHECK'
             ]:
                 result = validation_func(df, config)
@@ -139,15 +141,18 @@ class ValidationRunner:
         return overall_status
 
     def _write_results_to_file(self):
-        with open(self.validation_output, mode='w',
-                  encoding='utf-8') as output_file:
-            output_file.write('test,status,message,details\n')
+        with open(self.validation_output,
+                  mode='w',
+                  encoding='utf-8',
+                  newline='') as output_file:
+            writer = csv.writer(output_file)
+            writer.writerow(['test', 'status', 'message', 'details'])
             for result in self.validation_results:
                 details_str = json.dumps(
                     result.details) if result.details else ''
-                output_file.write(
-                    f'{result.name},{result.status.value},{result.message},{details_str}\n'
-                )
+                writer.writerow([
+                    result.name, result.status.value, result.message, details_str
+                ])
 
 
 def main(_):
