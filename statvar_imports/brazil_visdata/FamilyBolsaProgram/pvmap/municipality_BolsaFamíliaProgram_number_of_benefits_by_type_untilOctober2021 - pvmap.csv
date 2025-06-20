@@ -1,0 +1,8 @@
+,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Referência,observationDate,{Data},observationAbout,country/BRA,populationType,Person,benefitProgram,Brazil_BolsaFamilyProgram,observationPeriod,P1M,,,,
+Total de Benefícios Básicos,value,{Number},benefitType,BasicBenefit,,,name,"""Total Basic Benefits""",alternateName,"""Total de Benefícios Básicos@pt""",,,,
+Total de Benefícios Variáveis,value,{Number},benefitType,VariableBenefit,,,name,"""Total Variable Benefits""",alternateName,"""Total de Benefícios Variáveis@pt""",,,,
+Total de Benefícios Variáveis vinculados ao Jovem (BVJ),value,{Number},benefitType,VariableBenefit,beneficiaryType,YoungPeople,name,"""Total Variable Benefits linked to Young People""",alternateName,"""Total de Benefícios Variáveis vinculados ao Jovem @pt""",,,,
+Total de Benefícios Variáveis vinculados à Nutriz (BVN),value,{Number},benefitType,VariableBenefit,beneficiaryType,Nurse,name,"""Total Variable Benefits linked to the Nurse""",alternateName,"""Total de Benefícios Variáveis vinculados à Nutriz @pt""",,,,
+Total de Benefícios Variáveis vinculados à Gestante (BVG),value,{Number},benefitType,VariableBenefit,beneficiaryType,PregnantWomen,name,"""Total Variable Benefits linked to Pregnant Women""",alternateName,"""Total de Benefícios Variáveis vinculados à Gestante @pt""",,,,
+Total de Benefícios para Superação da Extrema Pobreza (BSP),value,{Number},benefitsStatus,Benefited,povertyStatus,ExtremePoverty,name,"""Total Benefits for Overcoming Extreme Poverty""",alternateName,"""Total de Benefícios para Superação da Extrema Pobreza @pt""",,,,
