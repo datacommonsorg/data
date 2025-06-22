@@ -12,15 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os, requests, config
+import os, config, sys
 from absl import logging, app
-from retry import retry
 
-@retry(tries=3, delay=5, backoff=2)
-def retry_method(url, headers=None):
-    response = requests.get(url, headers=headers, timeout=10, stream=True)
-    response.raise_for_status()
-    return response
+script_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(script_dir, '../../../util'))
+
+from download_util_script import _retry_method
 
 def download(urls, inputdir):
     if not os.path.exists(inputdir):        
@@ -31,7 +29,7 @@ def download(urls, inputdir):
     for url in urls:
         for i in range(13,32):
             try:
-                response = retry_method(url.format(i))
+                response = _retry_method(url.format(i), headers=None, tries=3, delay=5, backoff=2)
                 gender_code = None
                 if "40" in url:
                     gender_code = 40
@@ -46,12 +44,11 @@ def download(urls, inputdir):
                     logging.warning(f"Skipping download for {url}. Received non-200 status code: {response.status_code}")
                 count+=1
             except Exception as e:
-                logging.fatal(f"Error occured while downloading the data: {e}")      
+                logging.error(f"Error occured while downloading the data: {e}")      
     logging.info("Download process finished.") 
 
 def main(_):
     nces_urls = config.urls
-    script_dir = os.path.dirname(os.path.abspath(__file__))
     input_dir = os.path.join(script_dir, "input_files")
 
     try:
