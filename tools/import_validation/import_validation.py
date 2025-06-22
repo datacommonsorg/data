@@ -122,15 +122,8 @@ class ValidationRunner:
             if 'variableMeasured' in config:
                 df = filter_dataframe(df, config['variableMeasured'])
 
-            # Pass config to the validation function if it's needed
-            if validation_name in [
-                    'DELETED_COUNT', 'NUM_PLACES_COUNT',
-                    'NUM_OBSERVATIONS_CHECK', 'MIN_VALUE_CHECK',
-                    'MAX_VALUE_CHECK'
-            ]:
-                result = validation_func(df, config)
-            else:
-                result = validation_func(df)
+            # Pass config to the validation function
+            result = validation_func(df, config)
 
             if 'name' in config:
                 result.name = config['name']

@@ -29,7 +29,7 @@ class TestMaxDateLatestValidation(unittest.TestCase):
     def test_max_date_latest_fails_on_old_date(self):
         old_year = datetime.now().year - 2
         test_df = pd.DataFrame({'MaxDate': [f'{old_year}-01-01']})
-        result = self.validator.validate_max_date_latest(test_df)
+        result = self.validator.validate_max_date_latest(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertIn('Latest date found was', result.message)
         self.assertEqual(result.details['latest_date_found'], old_year)
@@ -37,17 +37,17 @@ class TestMaxDateLatestValidation(unittest.TestCase):
     def test_max_date_latest_passes_on_current_date(self):
         current_year = datetime.now().year
         test_df = pd.DataFrame({'MaxDate': [f'{current_year}-01-01']})
-        result = self.validator.validate_max_date_latest(test_df)
+        result = self.validator.validate_max_date_latest(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_max_date_latest_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'MaxDate': []})
-        result = self.validator.validate_max_date_latest(test_df)
+        result = self.validator.validate_max_date_latest(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_max_date_latest_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MaxDate'
-        result = self.validator.validate_max_date_latest(test_df)
+        result = self.validator.validate_max_date_latest(test_df, {})
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -94,23 +94,23 @@ class TestModifiedCountValidation(unittest.TestCase):
 
     def test_modified_count_fails_on_inconsistent_counts(self):
         test_df = pd.DataFrame({'MODIFIED': [1, 2]})  # Inconsistent
-        result = self.validator.validate_modified_count(test_df)
+        result = self.validator.validate_modified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
 
     def test_modified_count_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'MODIFIED': [2, 2]})  # Consistent
-        result = self.validator.validate_modified_count(test_df)
+        result = self.validator.validate_modified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_modified_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'MODIFIED': []})
-        result = self.validator.validate_modified_count(test_df)
+        result = self.validator.validate_modified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_modified_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MODIFIED'
-        result = self.validator.validate_modified_count(test_df)
+        result = self.validator.validate_modified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -123,23 +123,23 @@ class TestAddedCountValidation(unittest.TestCase):
 
     def test_added_count_fails_on_inconsistent_counts(self):
         test_df = pd.DataFrame({'ADDED': [1, 2]})  # Inconsistent
-        result = self.validator.validate_added_count(test_df)
+        result = self.validator.validate_added_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
 
     def test_added_count_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'ADDED': [1, 1]})  # Consistent
-        result = self.validator.validate_added_count(test_df)
+        result = self.validator.validate_added_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_added_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'ADDED': []})
-        result = self.validator.validate_added_count(test_df)
+        result = self.validator.validate_added_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_added_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'ADDED'
-        result = self.validator.validate_added_count(test_df)
+        result = self.validator.validate_added_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -152,12 +152,12 @@ class TestUnmodifiedCountValidation(unittest.TestCase):
 
     def test_unmodified_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'UNMODIFIED': []})
-        result = self.validator.validate_unmodified_count(test_df)
+        result = self.validator.validate_unmodified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_unmodified_count_is_always_successful(self):
         test_df = pd.DataFrame({'UNMODIFIED': [1, 2]})  # Inconsistent
-        result = self.validator.validate_unmodified_count(test_df)
+        result = self.validator.validate_unmodified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
 
@@ -169,23 +169,23 @@ class TestNumPlacesConsistentValidation(unittest.TestCase):
 
     def test_num_places_consistent_fails_on_inconsistent_counts(self):
         test_df = pd.DataFrame({'NumPlaces': [1, 2]})  # Inconsistent
-        result = self.validator.validate_num_places_consistent(test_df)
+        result = self.validator.validate_num_places_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
 
     def test_num_places_consistent_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'NumPlaces': [2, 2]})  # Consistent
-        result = self.validator.validate_num_places_consistent(test_df)
+        result = self.validator.validate_num_places_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_num_places_consistent_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'NumPlaces': []})
-        result = self.validator.validate_num_places_consistent(test_df)
+        result = self.validator.validate_num_places_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_num_places_consistent_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'NumPlaces'
-        result = self.validator.validate_num_places_consistent(test_df)
+        result = self.validator.validate_num_places_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -292,7 +292,7 @@ class TestMaxDateConsistentValidation(unittest.TestCase):
     def test_max_date_consistent_fails_on_inconsistent_dates(self):
         test_df = pd.DataFrame({'MaxDate': ['2024-01-01',
                                             '2024-01-02']})  # Inconsistent
-        result = self.validator.validate_max_date_consistent(test_df)
+        result = self.validator.validate_max_date_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(sorted(result.details['unique_dates']),
                          ['2024-01-01', '2024-01-02'])
@@ -300,17 +300,17 @@ class TestMaxDateConsistentValidation(unittest.TestCase):
     def test_max_date_consistent_passes_on_consistent_dates(self):
         test_df = pd.DataFrame({'MaxDate': ['2024-01-01',
                                             '2024-01-01']})  # Consistent
-        result = self.validator.validate_max_date_consistent(test_df)
+        result = self.validator.validate_max_date_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_max_date_consistent_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'MaxDate': []})
-        result = self.validator.validate_max_date_consistent(test_df)
+        result = self.validator.validate_max_date_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_max_date_consistent_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MaxDate'
-        result = self.validator.validate_max_date_consistent(test_df)
+        result = self.validator.validate_max_date_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -377,24 +377,24 @@ class TestUnitConsistencyValidation(unittest.TestCase):
 
     def test_unit_consistency_fails_on_inconsistent_units(self):
         test_df = pd.DataFrame({'Units': ['USD', 'Percent']})  # Inconsistent
-        result = self.validator.validate_unit_consistency(test_df)
+        result = self.validator.validate_unit_consistency(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(sorted(result.details['unique_units']),
                          ['Percent', 'USD'])
 
     def test_unit_consistency_passes_on_consistent_units(self):
         test_df = pd.DataFrame({'Units': ['USD', 'USD']})  # Consistent
-        result = self.validator.validate_unit_consistency(test_df)
+        result = self.validator.validate_unit_consistency(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_unit_consistency_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'Units': []})
-        result = self.validator.validate_unit_consistency(test_df)
+        result = self.validator.validate_unit_consistency(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
 
     def test_unit_consistency_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'Units'
-        result = self.validator.validate_unit_consistency(test_df)
+        result = self.validator.validate_unit_consistency(test_df, {})
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 

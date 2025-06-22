@@ -23,13 +23,14 @@ class Validator:
   This class is stateless and does not interact with the filesystem.
   """
 
-    def validate_max_date_latest(self,
-                                 stats_df: pd.DataFrame) -> ValidationResult:
+    def validate_max_date_latest(self, stats_df: pd.DataFrame,
+                                 config: dict) -> ValidationResult:
         """Checks that the MaxDate in the stats summary is from the current year.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         a 'MaxDate' column.
+      config: A dictionary containing the validation configuration.
 
     Returns:
       A ValidationResult object.
@@ -91,13 +92,14 @@ class Validator:
                 })
         return ValidationResult(ValidationStatus.PASSED, 'DELETED_COUNT')
 
-    def validate_modified_count(self,
-                                differ_df: pd.DataFrame) -> ValidationResult:
+    def validate_modified_count(self, differ_df: pd.DataFrame,
+                                config: dict) -> ValidationResult:
         """Checks if the number of modified points is the same for all StatVars.
 
     Args:
       differ_df: A DataFrame containing the differ output, expected to have a
         'MODIFIED' column.
+      config: A dictionary containing the validation configuration.
 
     Returns:
       A ValidationResult object.
@@ -119,12 +121,14 @@ class Validator:
                 details={'unique_counts': list(differ_df['MODIFIED'].unique())})
         return ValidationResult(ValidationStatus.PASSED, 'MODIFIED_COUNT')
 
-    def validate_added_count(self, differ_df: pd.DataFrame) -> ValidationResult:
+    def validate_added_count(self, differ_df: pd.DataFrame,
+                             config: dict) -> ValidationResult:
         """Checks if the number of added points is the same for all StatVars.
 
     Args:
       differ_df: A DataFrame containing the differ output, expected to have an
         'ADDED' column.
+      config: A dictionary containing the validation configuration.
 
     Returns:
       A ValidationResult object.
@@ -146,14 +150,15 @@ class Validator:
                 details={'unique_counts': list(differ_df['ADDED'].unique())})
         return ValidationResult(ValidationStatus.PASSED, 'ADDED_COUNT')
 
-    def validate_unmodified_count(self,
-                                  differ_df: pd.DataFrame) -> ValidationResult:
+    def validate_unmodified_count(self, differ_df: pd.DataFrame,
+                                  config: dict) -> ValidationResult:
         """Checks if the number of unmodified points is the same for all StatVars.
 
     Note: The logic for this validation is currently disabled.
 
     Args:
       differ_df: A DataFrame containing the differ output.
+      config: A dictionary containing the validation configuration.
 
     Returns:
       A ValidationResult object, which is always PASSED.
@@ -162,13 +167,14 @@ class Validator:
         # This method is a placeholder to ensure the validation "passes".
         return ValidationResult(ValidationStatus.PASSED, 'UNMODIFIED_COUNT')
 
-    def validate_num_places_consistent(
-            self, stats_df: pd.DataFrame) -> ValidationResult:
+    def validate_num_places_consistent(self, stats_df: pd.DataFrame,
+                                       config: dict) -> ValidationResult:
         """Checks if the number of places is the same for all StatVars.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         a 'NumPlaces' column.
+      config: A dictionary containing the validation configuration.
 
     Returns:
       A ValidationResult object.
@@ -323,13 +329,14 @@ class Validator:
                     })
         return ValidationResult(ValidationStatus.PASSED, 'MIN_VALUE_CHECK')
 
-    def validate_max_date_consistent(
-            self, stats_df: pd.DataFrame) -> ValidationResult:
+    def validate_max_date_consistent(self, stats_df: pd.DataFrame,
+                                     config: dict) -> ValidationResult:
         """Checks if the MaxDate is the same for all StatVars.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         a 'MaxDate' column.
+      config: A dictionary containing the validation configuration.
 
     Returns:
       A ValidationResult object.
@@ -370,13 +377,14 @@ class Validator:
         return self._validate_range(stats_df, 'NumObservations', config,
                                     'NUM_OBSERVATIONS_CHECK')
 
-    def validate_unit_consistency(self,
-                                  stats_df: pd.DataFrame) -> ValidationResult:
+    def validate_unit_consistency(self, stats_df: pd.DataFrame,
+                                  config: dict) -> ValidationResult:
         """Checks if the unit is the same for all StatVars.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         a 'Units' column.
+      config: A dictionary containing the validation configuration.
 
     Returns:
       A ValidationResult object.
