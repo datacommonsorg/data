@@ -43,17 +43,19 @@ The behavior of the validation framework is controlled by a JSON configuration f
         "threshold": 0
     },
     {
-        "validation": "MIN_VALUE_CHECK",
-        "minimum": 0,
+        "validation": "MAX_VALUE_CHECK",
+        "name": "Check for values over 100 in Percent StatVars",
+        "maximum": 100,
         "variableMeasured": [
-            "Count_Person"
+            ".*Percent.*"
         ]
     },
     {
         "validation": "MAX_VALUE_CHECK",
-        "maximum": 100,
+        "name": "Check for values over 1000 in Count_Person",
+        "maximum": 1000,
         "variableMeasured": [
-            ".*Percent.*"
+            "Count_Person"
         ]
     }
 ]

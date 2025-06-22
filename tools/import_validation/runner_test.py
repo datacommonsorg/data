@@ -162,6 +162,36 @@ class TestValidationRunner(unittest.TestCase):
                          'Too many deletions, found 100')
         self.assertEqual(output_df.iloc[0]['details'], '{"deleted_count": 100}')
 
+    @patch('tools.import_validation.import_validation.Validator')
+    def test_runner_uses_custom_name(self, MockValidator):
+        # 1. Setup the mock
+        mock_validator_instance = MockValidator.return_value
+        mock_validator_instance.validate_max_date_latest.return_value = ValidationResult(
+            ValidationStatus.PASSED, 'MAX_DATE_LATEST')
+
+        # 2. Create test files with a custom name
+        with open(self.config_path, 'w') as f:
+            json.dump([{
+                'validation': 'MAX_DATE_LATEST',
+                'name': 'My Custom Test Name'
+            }], f)
+        pd.DataFrame({
+            'StatVar': ['sv1'],
+            'MaxDate': ['2025-01-01']
+        }).to_csv(self.stats_path, index=False)
+
+        # 3. Run the runner
+        runner = ValidationRunner(validation_config=self.config_path,
+                                  stats_summary=self.stats_path,
+                                  differ_output=self.differ_path,
+                                  validation_output=self.output_path)
+        runner.run_validations()
+
+        # 4. Assert that the output contains the custom name
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['test'], 'My Custom Test Name')
+
     @patch('tools.import_validation.import_validation.logging')
     @patch('tools.import_validation.import_validation.Validator')
     def test_runner_handles_unknown_validation(self, MockValidator,

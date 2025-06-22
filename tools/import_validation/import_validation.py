@@ -132,6 +132,9 @@ class ValidationRunner:
             else:
                 result = validation_func(df)
 
+            if 'name' in config:
+                result.name = config['name']
+
             self.validation_results.append(result)
             if result.status != ValidationStatus.PASSED:
                 overall_status = False
