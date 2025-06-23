@@ -15,8 +15,8 @@
 import os
 import unittest
 import pandas as pd
-from .preprocess_data import preprocess_df
-from .import_data import save_csv
+from preprocess_data import preprocess_df
+from import_data import save_csv
 
 
 class TestPreprocess(unittest.TestCase):
