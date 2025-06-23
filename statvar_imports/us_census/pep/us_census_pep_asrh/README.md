@@ -1,4 +1,5 @@
 # USCensusPEP_AgeSexRaceHispanicOrigin Import
+The script helps to downloads USCensusPEP_AgeSexRaceHispanicOrigin input data, ranging from the year 2020 up to the latest release. All downloaded files are then placed into the input_files folder
 
 - source: https://www.census.gov/
 
