@@ -12,43 +12,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import requests
+import os, sys
 from absl import app, logging
 from pathlib import Path
-from retry import retry
 import config
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.append(os.path.join(script_dir, '../../../util'))
+
+from download_util_script import download_file
 
 Commerce_NTIA_URL = config.Commerce_NTIA_URL
 
-INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
+INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
-@retry(tries=3, delay=5, backoff=2)
-def retry_method(url, headers=None):
-    response = requests.get(url, headers=headers, timeout=10)
-    response.raise_for_status()
-    return response
-
-#Function to download the Commerce_NTIA_ file
-def download_Commerce_NTIA():
-    logging.info("Starting download...")
-    input_file = os.path.join(INPUT_DIR, "ntia-analyze-table.csv")
-    
-    try:
-        response = retry_method(Commerce_NTIA_URL)
-        with open(input_file, "wb") as f:
-            f.write(response.content)
-            
-        logging.info(f"Commerce_NTIA file saved to {input_file}")
-        return  input_file
-    
-    except requests.exceptions.RequestException as e:
-        logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
-        return None
-
 def main(argv):
-    download_Commerce_NTIA()
+    try:
+        download_file(url=Commerce_NTIA_URL,
+                  output_folder=INPUT_DIR,
+                  unzip=False,
+                  headers= None,
+                  tries= 3,
+                  delay= 5,
+                  backoff= 2)
+    except Exception as e:
+        logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
+
 
 if __name__ == "__main__":
     app.run(main)
