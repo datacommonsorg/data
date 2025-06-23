@@ -12,11 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
+import os, sys
 import pandas as pd
 from absl import app, logging
+from pathlib import Path
+import config
 
-INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.append(os.path.join(script_dir, '../../../util'))
+
+from download_util_script import download_file
+
+Commerce_NTIA_URL = config.Commerce_NTIA_URL
+
+INPUT_DIR = os.path.join(script_dir, "input_files")
+Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
+
 
 COMMON_COLUMNS = ["dataset", "variable", "description", "universe"]
 AGE_COLUMNS = ["age314Count", "age1524Count", "age2544Count", "age4564Count", "age65pCount"]
@@ -66,6 +78,16 @@ def preprocess_data():
         return None
 
 def main(argv):
+    try:
+        download_file(url=Commerce_NTIA_URL,
+                  output_folder=INPUT_DIR,
+                  unzip=False,
+                  headers= None,
+                  tries= 3,
+                  delay= 5,
+                  backoff= 2)
+    except Exception as e:
+        logging.fatal(f"Failed to download Commerce_NTIA file: {e}")
     preprocess_data()
 
 if __name__ == "__main__":

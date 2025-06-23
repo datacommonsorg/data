@@ -5,8 +5,8 @@
 - NTIA programs and policymaking focus largely on expanding broadband Internet access and adoption in America, expanding the use of spectrum by all users.
 
 - how to download data: 
-    Download script (`ntia_download.py`).
-    To download the data, you'll need to run the provided download script, `ntia_download.py`. This script will automatically create an "input_files" folder where you should place the file to be processed. After that run `preprocess.py` for preprocessing the data. In this script, we are creating two more columns in the input files such as 'universeAgeResol', 'variableAgeResol'. This columns are created based on the universe and variable columns in the existing data.
+    To download and process the data, you'll need to run the provided preprocess script, `preprocess.py`. This script will automatically create an "input_files" folder where you should place the file to be processed.
+    By using this script, we are creating two more columns in the input files such as 'universeAgeResol', 'variableAgeResol'. This columns are created based on the universe and variable columns in the existing data.
 
 - type of place: Demographics.
 
@@ -23,15 +23,12 @@ python3 stat_var_processor.py
 
 #### Download the data: 
 
-For download the source data, run:
-`python3 ntia_download.py`
-
-Notes: Files will be downloaded inside "input_files" folder (input_files/ntia-analyze-table.csv).
-
-To preprocess the downloaded data:, run:
+For download and preprocess the source data, run:
 `python3 preprocess.py`
 
-Note: This preprocess script will split the downloaded input file into two files based on the age. (input_files/ntia-data.csv, input_files/ntia-data-age-only.csv) 
+Notes: 
+Files will be downloaded inside "input_files" folder (input_files/ntia-analyze-table.csv).
+This preprocess script will split the downloaded input file into two files based on the age. (input_files/ntia-data.csv, input_files/ntia-data-age-only.csv) 
 
 #### Process the data:
 
