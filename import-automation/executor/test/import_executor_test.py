@@ -33,6 +33,11 @@ class ImportExecutorTest(unittest.TestCase):
             '2020_07_15T12_07_17_365264_07_00',
             import_executor._clean_time('2020-07-15T12:07:17.365264-07:00'))
 
+    def test_clean_date(self):
+        self.assertEqual(
+            '2020-07-15',
+            import_executor._clean_date('2020-07-15T12:07:17.365264+00:00'))
+
     def test_run_with_timeout(self):
         self.assertRaises(subprocess.TimeoutExpired,
                           import_executor._run_with_timeout, ['sleep', '5'],
@@ -62,8 +67,7 @@ class ImportExecutorTest(unittest.TestCase):
         def raise_exception():
             raise Exception
 
-        result = import_executor.run_and_handle_exception(
-            'run', raise_exception)
+        result = import_executor.run_and_handle_exception(raise_exception)
         self.assertEqual('failed', result.status)
         self.assertEqual([], result.imports_executed)
         self.assertIn('Exception', result.message)

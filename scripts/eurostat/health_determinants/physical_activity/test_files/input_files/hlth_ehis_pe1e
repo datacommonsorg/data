@@ -1,0 +1,5 @@
+freq,unit,levels,isced11,sex,age,geo\TIME_PERIOD	2014 	2019 
+A,PC,HVY,ED0-2,F,TOTAL,AT	2.4 	3.6 
+A,PC,HVY,ED0-2,F,TOTAL,BE	: 	3.9 
+A,PC,HVY,ED0-2,F,TOTAL,BG	2.9 	1.6 
+A,PC,HVY,ED0-2,F,TOTAL,CY	2.0 	2.1

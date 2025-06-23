@@ -1,28 +1,27 @@
 {
   "import_specifications": [
     {
-      "import_name": "USBLS_CPIAllItemsAverage",
-      "curator_emails": ["shijunjie@google.com"],
+      "import_name": "BLS_CPI",
+      "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.bls.gov/cpi/",
-      "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index",
+      "provenance_description": "U.S. Bureau of Labor Statistics Consumer Price Index.BLS publishes three main types of CPIs: CPI-U, CPI-W, and C-CPI-U. CPI-U stands for CPI for All Urban Consumers. CPI-W stands for CPI for Urban Wage Earners and Clerical Workers. The two are both unchained and use the same basket of goods and prices. The difference is their population group. C-CPI-U stands for Chained CPI for All Urban Consumers. It is the chained version of CPI-U. Each of the three can have seasonally adjusted and unadjusted series.",
       "scripts": ["generate_csv.py"],
       "import_inputs": [
         {
-          "template_mcf": "c_cpi_u_1999_2020.tmcf",
-          "cleaned_csv": "c_cpi_u_1999_2020.csv",
-          "node_mcf": "c_cpi_u_1999_2020.mcf"
+          "template_mcf": "cpi_u.tmcf",
+          "cleaned_csv": "output/cpi_u.csv"
         },
         {
-          "template_mcf": "cpi_u_1913_2020.tmcf",
-          "cleaned_csv": "cpi_u_1913_2020.csv"
+           "template_mcf": "cpi_w.tmcf",
+           "cleaned_csv": "output/cpi_w.csv"
         },
         {
-          "template_mcf": "cpi_w_1913_2020.tmcf",
-          "cleaned_csv": "cpi_w_1913_2020.csv",
-          "node_mcf": "cpi_w_1913_2020.mcf"
+           "template_mcf": "c_cpi_u.tmcf",
+		       "cleaned_csv": "output/c_cpi_u.csv"
         }
       ],
-      "cron_schedule": "15 17 15 * *"
+      "cron_schedule": "0 3 2,16 * *"
     }
   ]
 }
+

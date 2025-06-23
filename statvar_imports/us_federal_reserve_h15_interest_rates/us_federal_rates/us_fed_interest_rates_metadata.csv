@@ -1,0 +1,15 @@
+parameter,value
+url,https://www.federalreserve.gov/datadownload/Output.aspx?rel=H15&series=c3ec77dedd37c9aa112f71c9eba34b50&from=1970-01-01&to=2024-03-22&filetype=csv&label=include&layout=seriescolumn&type=package
+description,Interest Rate
+#place_type,Country
+#places_within,
+start_date,1970-01-02
+end_date,2024-03-20
+release_frequency,Weekly
+process,
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+drop_statvars_without_svobs,0
+header_rows,6
+#input_rows,10
+debug,0

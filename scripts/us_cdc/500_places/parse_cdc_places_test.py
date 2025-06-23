@@ -26,10 +26,12 @@ from .parse_cdc_places import clean_cdc_places_data
 
 TEST_CASE_FILES = [
     # Pairs of input CSV and expected CSV files.
-    ('sample_county.csv', 'sample_county_expected.csv', ','),
-    ('sample_city.csv', 'sample_city_expected.csv', ','),
-    ('sample_census_tract.csv', 'sample_census_tract_expected.csv', ','),
-    ('sample_zip_code.csv', 'sample_zip_code_expected.csv', ','),
+    ('sample_county.csv', 'sample_county_expected.csv', ',', 'County', 000),
+    ('sample_city.csv', 'sample_city_expected.csv', ',', 'City', 000),
+    ('sample_census_tract.csv', 'sample_census_tract_expected.csv', ',',
+     'CensusTract', 000),
+    ('sample_zip_code.csv', 'sample_zip_code_expected.csv', ',', 'ZipCode',
+     000),
 ]
 
 
@@ -43,13 +45,14 @@ class TestParseCDCPlaces(unittest.TestCase):
         Tests the clean_cdc_places_data function.
         """
         test_dir = os.path.join(os.path.dirname(__file__), 'test_data')
-        for input_file, expected_output, sep in TEST_CASE_FILES:
+        for input_file, expected_output, sep, file_type, release_year in TEST_CASE_FILES:
             print('\n')
             print('Input File: ' + input_file)
             test_csv = os.path.join(test_dir, input_file)
             output_csv = os.path.join(test_dir,
                                       (input_file[:-4] + '_output.csv'))
-            clean_cdc_places_data(test_csv, output_csv, sep=sep)
+            df = clean_cdc_places_data(test_csv, file_type, sep, release_year)
+            df.to_csv(output_csv)
             expected_csv = os.path.join(test_dir, expected_output)
         with open(output_csv, 'r') as test:
             test_str: str = test.read()

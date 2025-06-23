@@ -1,6 +1,6 @@
 {
     "configs":{
-        "executor_type": "GKE",
+        "executor_type": "CLOUD_RUN",
         "user_script_args": [],
         "user_script_env": {},
         "user_script_timeout": 3600

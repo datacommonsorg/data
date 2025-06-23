@@ -1,0 +1,8 @@
+key,,,,,,
+BIS:WS_CBPOL(1.0): Central bank policy rates,measuredProperty,interestRate,populationType,FinancialInstrument,instrumentType,CountryCentralBankPolicyRate
+M: Monthly,measurementQualifier,Monthly,observationPeriod,P1M,,
+D: Daily,measurementQualifier,Daily,observationPeriod,P1D,,
+REF_AREA:Reference area,observationAbout,{Data},,,,
+TIME_PERIOD:Time period or range,observationDate,{Data},,,,
+OBS_VALUE:Observation Value,value,{Number},,,,
+368: Per cent per year,unit,PercentPerAnnum,,,,

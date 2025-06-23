@@ -4,6 +4,7 @@ Contains the recurring functions of other files
 import json
 import os
 import pandas as pd
+import re
 
 
 def input_url(file_name: str, key_name: str):
@@ -93,7 +94,10 @@ def gender_based_grouping(df: pd.DataFrame):
     df['SVs'] = df['SVs'].str.replace\
         ('_NativeHawaiianAndOtherPacificIslanderAlone', '')
     df['SVs'] = df['SVs'].str.replace('_TwoOrMoreRaces', '')
-    df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey'
+    df = df.groupby(['Year', 'geo_ID', 'SVs',
+                     'Measurement_Method']).sum().reset_index()
+
     return df
 
 
@@ -103,5 +107,15 @@ def race_based_grouping(df: pd.DataFrame):
     """
     df['SVs'] = df['SVs'].str.replace('_Male', '')
     df['SVs'] = df['SVs'].str.replace('_Female', '')
-    df = df.groupby(['Year', 'geo_ID', 'SVs']).sum().reset_index()
+    df['Measurement_Method'] = 'dcAggregate/CensusPEPSurvey'
+    df = df.groupby(['Year', 'geo_ID', 'SVs',
+                     'Measurement_Method']).sum().reset_index()
     return df
+
+
+def extract_year(year_str):
+    match = re.search(r'\d{4}', year_str)
+    if match:
+        return match.group()
+    else:
+        return None
