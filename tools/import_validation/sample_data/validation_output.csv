@@ -1,9 +1,9 @@
-test,status,message,details
-MAX_DATE_LATEST,FAILED,"Latest date found was 2023, expected 2025.","{""latest_date_found"": 2023, ""expected_latest_date"": 2025}"
-MAX_DATE_CONSISTENT,PASSED,,
-DELETED_COUNT,PASSED,,
-NUM_PLACES_CONSISTENT,PASSED,,
-MIN_VALUE_CHECK,PASSED,,
-MAX_VALUE_CHECK,PASSED,,
-NUM_OBSERVATIONS_CHECK,PASSED,,
-Check that all units are consistent,PASSED,,
+ValidationName,Status,Message,Details,RowsProcessed,RowsSucceeded,RowsFailed
+MAX_DATE_LATEST,FAILED,"Latest date found was 2023, expected 2025.","{""latest_date_found"": 2023, ""expected_latest_date"": 2025}",3,0,3
+MAX_DATE_CONSISTENT,PASSED,,,3,3,0
+DELETED_COUNT,PASSED,,,3,3,0
+NUM_PLACES_CONSISTENT,PASSED,,,2,2,0
+MIN_VALUE_CHECK,PASSED,,,3,3,0
+MAX_VALUE_CHECK,PASSED,,,0,0,0
+NUM_OBSERVATIONS_CHECK,PASSED,,,3,3,0
+Check that all units are consistent,PASSED,,,3,3,0

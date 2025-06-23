@@ -91,9 +91,12 @@ All validations can be applied to a subset of StatVars by adding a `variableMeas
 
 ## Output
 
-The framework generates a CSV file (`validation_output.csv` by default) with the results of each validation. The file contains the following columns:
+The framework generates a CSV file (`validation_output.csv` by default) with the results of each validation, orchestrated by the `ReportGenerator` class. The file contains the following columns:
 
-- `test`: The name of the validation that was run.
-- `status`: The result of the validation (`PASSED`, `FAILED`, `CONFIG_ERROR`, or `DATA_ERROR`).
-- `message`: A human-readable message describing the outcome.
-- `details`: A JSON string containing detailed context, especially on failures.
+- `ValidationName`: The name of the validation that was run.
+- `Status`: The result of the validation (`PASSED`, `FAILED`, `CONFIG_ERROR`, or `DATA_ERROR`).
+- `Message`: A human-readable message describing the outcome.
+- `Details`: A JSON string containing detailed context, especially on failures.
+- `RowsProcessed`: The total number of rows evaluated for the validation.
+- `RowsSucceeded`: The number of rows that passed the validation.
+- `RowsFailed`: The number of rows that failed the validation.

@@ -35,6 +35,7 @@ import json
 import os
 import sys
 
+from .report_generator import ReportGenerator
 from .validator import Validator
 from .util import filter_dataframe
 from .result import ValidationResult, ValidationStatus
@@ -142,31 +143,10 @@ class ValidationRunner:
             else:
                 logging.info('Validation passed: %s', result.name)
 
-        self._write_results_to_file()
-        return overall_status, self.validation_results
+        report_generator = ReportGenerator(self.validation_results)
+        report_generator.generate_detailed_report(self.validation_output)
 
-    def _write_results_to_file(self):
-        with open(self.validation_output,
-                  mode='w',
-                  encoding='utf-8',
-                  newline='') as output_file:
-            writer = csv.writer(output_file)
-            writer.writerow([
-                'test', 'status', 'message', 'details', 'rows_processed',
-                'rows_succeeded', 'rows_failed'
-            ])
-            for result in self.validation_results:
-                details_str = json.dumps(
-                    result.details) if result.details else ''
-                writer.writerow([
-                    result.name,
-                    result.status.value,
-                    result.message,
-                    details_str,
-                    result.rows_processed,
-                    result.rows_succeeded,
-                    result.rows_failed,
-                ])
+        return overall_status, self.validation_results
 
 
 def main(_):

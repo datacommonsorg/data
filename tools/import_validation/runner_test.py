@@ -159,14 +159,14 @@ class TestValidationRunner(unittest.TestCase):
         # 4. Read the output file and assert its contents
         output_df = pd.read_csv(self.output_path)
         self.assertEqual(len(output_df), 1)
-        self.assertEqual(output_df.iloc[0]['test'], 'DELETED_COUNT')
-        self.assertEqual(output_df.iloc[0]['status'], 'FAILED')
-        self.assertEqual(output_df.iloc[0]['message'],
+        self.assertEqual(output_df.iloc[0]['ValidationName'], 'DELETED_COUNT')
+        self.assertEqual(output_df.iloc[0]['Status'], 'FAILED')
+        self.assertEqual(output_df.iloc[0]['Message'],
                          'Too many deletions, found 100')
-        self.assertEqual(output_df.iloc[0]['details'], '{"deleted_count": 100}')
-        self.assertEqual(output_df.iloc[0]['rows_processed'], 1)
-        self.assertEqual(output_df.iloc[0]['rows_succeeded'], 0)
-        self.assertEqual(output_df.iloc[0]['rows_failed'], 1)
+        self.assertEqual(output_df.iloc[0]['Details'], '{"deleted_count": 100}')
+        self.assertEqual(output_df.iloc[0]['RowsProcessed'], 1)
+        self.assertEqual(output_df.iloc[0]['RowsSucceeded'], 0)
+        self.assertEqual(output_df.iloc[0]['RowsFailed'], 1)
 
     @patch('tools.import_validation.import_validation.Validator')
     def test_runner_uses_custom_name(self, MockValidator):
@@ -196,7 +196,8 @@ class TestValidationRunner(unittest.TestCase):
         # 4. Assert that the output contains the custom name
         output_df = pd.read_csv(self.output_path)
         self.assertEqual(len(output_df), 1)
-        self.assertEqual(output_df.iloc[0]['test'], 'My Custom Test Name')
+        self.assertEqual(output_df.iloc[0]['ValidationName'],
+                         'My Custom Test Name')
 
     @patch('tools.import_validation.import_validation.logging')
     @patch('tools.import_validation.import_validation.Validator')

@@ -73,7 +73,7 @@ class TestImportValidationE2E(unittest.TestCase):
                          f"Script failed with stderr: {result.stderr}")
         output_df = pd.read_csv(self.output_path)
         self.assertEqual(len(output_df), 1)
-        self.assertEqual(output_df.iloc[0]['status'], 'PASSED')
+        self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
 
     def test_e2e_failed_run(self):
         """Tests a failed end-to-end run of the script."""
