@@ -70,8 +70,8 @@ class TestDeletedCountValidation(unittest.TestCase):
 
     def test_deleted_count_fails_when_over_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
-        config = {'threshold': 1}
-        result = self.validator.validate_deleted_count(test_df, config)
+        params = {'threshold': 1}
+        result = self.validator.validate_deleted_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.details['deleted_count'], 2)
         self.assertEqual(result.details['threshold'], 1)
@@ -81,8 +81,8 @@ class TestDeletedCountValidation(unittest.TestCase):
 
     def test_deleted_count_passes_when_at_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
-        config = {'threshold': 2}
-        result = self.validator.validate_deleted_count(test_df, config)
+        params = {'threshold': 2}
+        result = self.validator.validate_deleted_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 2)
         self.assertEqual(result.rows_succeeded, 2)
@@ -90,8 +90,8 @@ class TestDeletedCountValidation(unittest.TestCase):
 
     def test_deleted_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'DELETED': []})
-        config = {'threshold': 0}
-        result = self.validator.validate_deleted_count(test_df, config)
+        params = {'threshold': 0}
+        result = self.validator.validate_deleted_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 0)
         self.assertEqual(result.rows_succeeded, 0)
@@ -99,8 +99,8 @@ class TestDeletedCountValidation(unittest.TestCase):
 
     def test_deleted_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'DELETED'
-        config = {'threshold': 1}
-        result = self.validator.validate_deleted_count(test_df, config)
+        params = {'threshold': 1}
+        result = self.validator.validate_deleted_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -250,8 +250,8 @@ class TestNumPlacesCountValidation(unittest.TestCase):
 
     def test_num_places_count_fails_below_minimum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [5]})
-        config = {'minimum': 10}
-        result = self.validator.validate_num_places_count(test_df, config)
+        params = {'minimum': 10}
+        result = self.validator.validate_num_places_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 0)
@@ -260,8 +260,8 @@ class TestNumPlacesCountValidation(unittest.TestCase):
 
     def test_num_places_count_fails_above_maximum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [15]})
-        config = {'maximum': 10}
-        result = self.validator.validate_num_places_count(test_df, config)
+        params = {'maximum': 10}
+        result = self.validator.validate_num_places_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 0)
@@ -270,8 +270,8 @@ class TestNumPlacesCountValidation(unittest.TestCase):
 
     def test_num_places_count_fails_on_exact_mismatch(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [10]})
-        config = {'value': 11}
-        result = self.validator.validate_num_places_count(test_df, config)
+        params = {'value': 11}
+        result = self.validator.validate_num_places_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 0)
@@ -280,8 +280,8 @@ class TestNumPlacesCountValidation(unittest.TestCase):
 
     def test_num_places_count_passes_within_range(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [10]})
-        config = {'minimum': 5, 'maximum': 15}
-        result = self.validator.validate_num_places_count(test_df, config)
+        params = {'minimum': 5, 'maximum': 15}
+        result = self.validator.validate_num_places_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 1)
@@ -289,8 +289,8 @@ class TestNumPlacesCountValidation(unittest.TestCase):
 
     def test_num_places_count_passes_on_exact_match(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [10]})
-        config = {'value': 10}
-        result = self.validator.validate_num_places_count(test_df, config)
+        params = {'value': 10}
+        result = self.validator.validate_num_places_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 1)
@@ -298,8 +298,8 @@ class TestNumPlacesCountValidation(unittest.TestCase):
 
     def test_num_places_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'StatVar': [], 'NumPlaces': []})
-        config = {'minimum': 1}
-        result = self.validator.validate_num_places_count(test_df, config)
+        params = {'minimum': 1}
+        result = self.validator.validate_num_places_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 0)
         self.assertEqual(result.rows_succeeded, 0)
@@ -307,8 +307,8 @@ class TestNumPlacesCountValidation(unittest.TestCase):
 
     def test_num_places_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'NumPlaces'
-        config = {'value': 10}
-        result = self.validator.validate_num_places_count(test_df, config)
+        params = {'value': 10}
+        result = self.validator.validate_num_places_count(test_df, params)
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -321,8 +321,8 @@ class TestMinValueCheckValidation(unittest.TestCase):
 
     def test_min_value_check_fails_below_minimum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'MinValue': [5]})
-        config = {'minimum': 10}
-        result = self.validator.validate_min_value_check(test_df, config)
+        params = {'minimum': 10}
+        result = self.validator.validate_min_value_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 0)
@@ -332,8 +332,8 @@ class TestMinValueCheckValidation(unittest.TestCase):
 
     def test_min_value_check_passes_at_minimum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'MinValue': [10]})
-        config = {'minimum': 10}
-        result = self.validator.validate_min_value_check(test_df, config)
+        params = {'minimum': 10}
+        result = self.validator.validate_min_value_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 1)
@@ -341,8 +341,8 @@ class TestMinValueCheckValidation(unittest.TestCase):
 
     def test_min_value_check_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'StatVar': [], 'MinValue': []})
-        config = {'minimum': 1}
-        result = self.validator.validate_min_value_check(test_df, config)
+        params = {'minimum': 1}
+        result = self.validator.validate_min_value_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 0)
         self.assertEqual(result.rows_succeeded, 0)
@@ -350,15 +350,15 @@ class TestMinValueCheckValidation(unittest.TestCase):
 
     def test_min_value_check_fails_on_missing_config(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'MinValue': [10]})
-        config = {}  # Missing 'minimum'
-        result = self.validator.validate_min_value_check(test_df, config)
+        params = {}  # Missing 'minimum'
+        result = self.validator.validate_min_value_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
         self.assertIn('Configuration error', result.message)
 
     def test_min_value_check_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MinValue'
-        config = {'minimum': 10}
-        result = self.validator.validate_min_value_check(test_df, config)
+        params = {'minimum': 10}
+        result = self.validator.validate_min_value_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -412,8 +412,8 @@ class TestNumObservationsCheckValidation(unittest.TestCase):
 
     def test_num_observations_check_fails_below_minimum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumObservations': [5]})
-        config = {'minimum': 10}
-        result = self.validator.validate_num_observations_check(test_df, config)
+        params = {'minimum': 10}
+        result = self.validator.validate_num_observations_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 0)
@@ -422,8 +422,8 @@ class TestNumObservationsCheckValidation(unittest.TestCase):
 
     def test_num_observations_check_fails_above_maximum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumObservations': [15]})
-        config = {'maximum': 10}
-        result = self.validator.validate_num_observations_check(test_df, config)
+        params = {'maximum': 10}
+        result = self.validator.validate_num_observations_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 0)
@@ -432,8 +432,8 @@ class TestNumObservationsCheckValidation(unittest.TestCase):
 
     def test_num_observations_check_fails_on_exact_mismatch(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumObservations': [10]})
-        config = {'value': 11}
-        result = self.validator.validate_num_observations_check(test_df, config)
+        params = {'value': 11}
+        result = self.validator.validate_num_observations_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 0)
@@ -442,8 +442,8 @@ class TestNumObservationsCheckValidation(unittest.TestCase):
 
     def test_num_observations_check_passes_within_range(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumObservations': [10]})
-        config = {'minimum': 5, 'maximum': 15}
-        result = self.validator.validate_num_observations_check(test_df, config)
+        params = {'minimum': 5, 'maximum': 15}
+        result = self.validator.validate_num_observations_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 1)
@@ -451,8 +451,8 @@ class TestNumObservationsCheckValidation(unittest.TestCase):
 
     def test_num_observations_check_passes_on_exact_match(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumObservations': [10]})
-        config = {'value': 10}
-        result = self.validator.validate_num_observations_check(test_df, config)
+        params = {'value': 10}
+        result = self.validator.validate_num_observations_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 1)
@@ -460,8 +460,8 @@ class TestNumObservationsCheckValidation(unittest.TestCase):
 
     def test_num_observations_check_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'StatVar': [], 'NumObservations': []})
-        config = {'minimum': 1}
-        result = self.validator.validate_num_observations_check(test_df, config)
+        params = {'minimum': 1}
+        result = self.validator.validate_num_observations_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 0)
         self.assertEqual(result.rows_succeeded, 0)
@@ -470,8 +470,8 @@ class TestNumObservationsCheckValidation(unittest.TestCase):
     def test_num_observations_check_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']
                                })  # Missing 'NumObservations'
-        config = {'value': 10}
-        result = self.validator.validate_num_observations_check(test_df, config)
+        params = {'value': 10}
+        result = self.validator.validate_num_observations_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 
@@ -523,8 +523,8 @@ class TestMaxValueCheckValidation(unittest.TestCase):
 
     def test_max_value_check_fails_above_maximum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'MaxValue': [15]})
-        config = {'maximum': 10}
-        result = self.validator.validate_max_value_check(test_df, config)
+        params = {'maximum': 10}
+        result = self.validator.validate_max_value_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 0)
@@ -534,8 +534,8 @@ class TestMaxValueCheckValidation(unittest.TestCase):
 
     def test_max_value_check_passes_at_maximum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'MaxValue': [10]})
-        config = {'maximum': 10}
-        result = self.validator.validate_max_value_check(test_df, config)
+        params = {'maximum': 10}
+        result = self.validator.validate_max_value_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 1)
         self.assertEqual(result.rows_succeeded, 1)
@@ -543,8 +543,8 @@ class TestMaxValueCheckValidation(unittest.TestCase):
 
     def test_max_value_check_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'StatVar': [], 'MaxValue': []})
-        config = {'maximum': 1}
-        result = self.validator.validate_max_value_check(test_df, config)
+        params = {'maximum': 1}
+        result = self.validator.validate_max_value_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.PASSED)
         self.assertEqual(result.rows_processed, 0)
         self.assertEqual(result.rows_succeeded, 0)
@@ -552,15 +552,15 @@ class TestMaxValueCheckValidation(unittest.TestCase):
 
     def test_max_value_check_fails_on_missing_config(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'MaxValue': [10]})
-        config = {}  # Missing 'maximum'
-        result = self.validator.validate_max_value_check(test_df, config)
+        params = {}  # Missing 'maximum'
+        result = self.validator.validate_max_value_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
         self.assertIn('Configuration error', result.message)
 
     def test_max_value_check_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MaxValue'
-        config = {'maximum': 10}
-        result = self.validator.validate_max_value_check(test_df, config)
+        params = {'maximum': 10}
+        result = self.validator.validate_max_value_check(test_df, params)
         self.assertEqual(result.status, ValidationStatus.DATA_ERROR)
         self.assertIn('missing required column', result.message)
 

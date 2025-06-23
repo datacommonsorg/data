@@ -1,15 +1,43 @@
-[
-    {
-        "validation": "DELETED_COUNT",
-        "threshold": 1
-    },
-    {
-        "validation": "MODIFIED_COUNT"
-    },
-    {
-        "validation": "ADDED_COUNT"
-    },
-    {
-        "validation": "UNMODIFIED_COUNT"
-    }
-]
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_count",
+            "description": "Checks that the number of deleted points is within the threshold.",
+            "validator": "DELETED_COUNT",
+            "scope": {
+                "data_source": "differ"
+            },
+            "params": {
+                "threshold": 1
+            }
+        },
+        {
+            "rule_id": "check_modified_count",
+            "description": "Checks that the number of modified points is consistent.",
+            "validator": "MODIFIED_COUNT",
+            "scope": {
+                "data_source": "differ"
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_added_count",
+            "description": "Checks that the number of added points is consistent.",
+            "validator": "ADDED_COUNT",
+            "scope": {
+                "data_source": "differ"
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_unmodified_count",
+            "description": "Checks that the number of unmodified points is consistent.",
+            "validator": "UNMODIFIED_COUNT",
+            "scope": {
+                "data_source": "differ"
+            },
+            "params": {}
+        }
+    ]
+}

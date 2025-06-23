@@ -24,13 +24,13 @@ class Validator:
   """
 
     def validate_max_date_latest(self, stats_df: pd.DataFrame,
-                                 config: dict) -> ValidationResult:
+                                 params: dict) -> ValidationResult:
         """Checks that the MaxDate in the stats summary is from the current year.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         a 'MaxDate' column.
-      config: A dictionary containing the validation configuration.
+      params: A dictionary containing the validation parameters.
 
     Returns:
       A ValidationResult object.
@@ -73,13 +73,13 @@ class Validator:
                                 rows_failed=0)
 
     def validate_deleted_count(self, differ_df: pd.DataFrame,
-                               config: dict) -> ValidationResult:
+                               params: dict) -> ValidationResult:
         """Checks if the total number of deleted points is within a threshold.
 
     Args:
       differ_df: A DataFrame containing the differ output, expected to have a
         'DELETED' column.
-      config: A dictionary containing the validation configuration, which may
+      params: A dictionary containing the validation parameters, which may
         have a 'threshold' key.
 
     Returns:
@@ -99,7 +99,7 @@ class Validator:
                                     rows_succeeded=0,
                                     rows_failed=0)
 
-        threshold = config.get('threshold', 0)
+        threshold = params.get('threshold', 0)
         deleted_count = differ_df['DELETED'].sum()
 
         if deleted_count > threshold:
@@ -122,13 +122,13 @@ class Validator:
                                 rows_failed=0)
 
     def validate_modified_count(self, differ_df: pd.DataFrame,
-                                config: dict) -> ValidationResult:
+                                params: dict) -> ValidationResult:
         """Checks if the number of modified points is the same for all StatVars.
 
     Args:
       differ_df: A DataFrame containing the differ output, expected to have a
         'MODIFIED' column.
-      config: A dictionary containing the validation configuration.
+      params: A dictionary containing the validation parameters.
 
     Returns:
       A ValidationResult object.
@@ -166,13 +166,13 @@ class Validator:
                                 rows_failed=0)
 
     def validate_added_count(self, differ_df: pd.DataFrame,
-                             config: dict) -> ValidationResult:
+                             params: dict) -> ValidationResult:
         """Checks if the number of added points is the same for all StatVars.
 
     Args:
       differ_df: A DataFrame containing the differ output, expected to have an
         'ADDED' column.
-      config: A dictionary containing the validation configuration.
+      params: A dictionary containing the validation parameters.
 
     Returns:
       A ValidationResult object.
@@ -210,14 +210,14 @@ class Validator:
                                 rows_failed=0)
 
     def validate_unmodified_count(self, differ_df: pd.DataFrame,
-                                  config: dict) -> ValidationResult:
+                                  params: dict) -> ValidationResult:
         """Checks if the number of unmodified points is the same for all StatVars.
 
     Note: The logic for this validation is currently disabled.
 
     Args:
       differ_df: A DataFrame containing the differ output.
-      config: A dictionary containing the validation configuration.
+      params: A dictionary containing the validation parameters.
 
     Returns:
       A ValidationResult object, which is always PASSED.
@@ -231,13 +231,13 @@ class Validator:
                                 rows_failed=0)
 
     def validate_num_places_consistent(self, stats_df: pd.DataFrame,
-                                       config: dict) -> ValidationResult:
+                                       params: dict) -> ValidationResult:
         """Checks if the number of places is the same for all StatVars.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         a 'NumPlaces' column.
-      config: A dictionary containing the validation configuration.
+      params: A dictionary containing the validation parameters.
 
     Returns:
       A ValidationResult object.
@@ -275,16 +275,16 @@ class Validator:
                                 rows_failed=0)
 
     def validate_num_places_count(self, stats_df: pd.DataFrame,
-                                  config: dict) -> ValidationResult:
+                                  params: dict) -> ValidationResult:
         """Checks if the number of places for each StatVar is within a defined range.
 
     The range can be specified using 'minimum', 'maximum', or an exact 'value'
-    in the config.
+    in the params.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         'NumPlaces' and 'StatVar' columns.
-      config: A dictionary containing the validation configuration.
+      params: A dictionary containing the validation parameters.
 
     Returns:
       A ValidationResult object.
@@ -301,9 +301,9 @@ class Validator:
                                     rows_succeeded=0,
                                     rows_failed=0)
 
-        min_val = config.get('minimum')
-        max_val = config.get('maximum')
-        exact_val = config.get('value')
+        min_val = params.get('minimum')
+        max_val = params.get('maximum')
+        exact_val = params.get('value')
 
         rows_processed = len(stats_df)
         rows_failed = 0
@@ -362,19 +362,19 @@ class Validator:
                                 rows_failed=rows_failed)
 
     def validate_min_value_check(self, stats_df: pd.DataFrame,
-                                 config: dict) -> ValidationResult:
+                                 params: dict) -> ValidationResult:
         """Checks if the MinValue for each StatVar is not below a defined minimum.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         'MinValue' and 'StatVar' columns.
-      config: A dictionary containing the validation configuration, which must
+      params: A dictionary containing the validation parameters, which must
         have a 'minimum' key.
 
     Returns:
       A ValidationResult object.
     """
-        if 'minimum' not in config:
+        if 'minimum' not in params:
             return ValidationResult(
                 ValidationStatus.CONFIG_ERROR,
                 'MIN_VALUE_CHECK',
@@ -391,7 +391,7 @@ class Validator:
                                     rows_succeeded=0,
                                     rows_failed=0)
 
-        min_val = config['minimum']
+        min_val = params['minimum']
         rows_processed = len(stats_df)
         rows_failed = 0
         failed_rows_details = []
@@ -428,13 +428,13 @@ class Validator:
                                 rows_failed=rows_failed)
 
     def validate_max_date_consistent(self, stats_df: pd.DataFrame,
-                                     config: dict) -> ValidationResult:
+                                     params: dict) -> ValidationResult:
         """Checks if the MaxDate is the same for all StatVars.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         a 'MaxDate' column.
-      config: A dictionary containing the validation configuration.
+      params: A dictionary containing the validation parameters.
 
     Returns:
       A ValidationResult object.
@@ -472,16 +472,16 @@ class Validator:
                                 rows_failed=0)
 
     def validate_num_observations_check(self, stats_df: pd.DataFrame,
-                                        config: dict) -> ValidationResult:
+                                        params: dict) -> ValidationResult:
         """Checks if the number of observations for each StatVar is within a defined range.
 
     The range can be specified using 'minimum', 'maximum', or an exact 'value'
-    in the config.
+    in the params.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         'NumObservations' and 'StatVar' columns.
-      config: A dictionary containing the validation configuration.
+      params: A dictionary containing the validation parameters.
 
     Returns:
       A ValidationResult object.
@@ -499,9 +499,9 @@ class Validator:
                                     rows_succeeded=0,
                                     rows_failed=0)
 
-        min_val = config.get('minimum')
-        max_val = config.get('maximum')
-        exact_val = config.get('value')
+        min_val = params.get('minimum')
+        max_val = params.get('maximum')
+        exact_val = params.get('value')
 
         rows_processed = len(stats_df)
         rows_failed = 0
@@ -560,13 +560,13 @@ class Validator:
                                 rows_failed=rows_failed)
 
     def validate_unit_consistency(self, stats_df: pd.DataFrame,
-                                  config: dict) -> ValidationResult:
+                                  params: dict) -> ValidationResult:
         """Checks if the unit is the same for all StatVars.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         a 'Units' column.
-      config: A dictionary containing the validation configuration.
+      params: A dictionary containing the validation parameters.
 
     Returns:
       A ValidationResult object.
@@ -604,19 +604,19 @@ class Validator:
                                 rows_failed=0)
 
     def validate_max_value_check(self, stats_df: pd.DataFrame,
-                                 config: dict) -> ValidationResult:
+                                 params: dict) -> ValidationResult:
         """Checks if the MaxValue for each StatVar is not above a defined maximum.
 
     Args:
       stats_df: A DataFrame containing the summary statistics, expected to have
         'MaxValue' and 'StatVar' columns.
-      config: A dictionary containing the validation configuration, which must
+      params: A dictionary containing the validation parameters, which must
         have a 'maximum' key.
 
     Returns:
       A ValidationResult object.
     """
-        if 'maximum' not in config:
+        if 'maximum' not in params:
             return ValidationResult(
                 ValidationStatus.CONFIG_ERROR,
                 'MAX_VALUE_CHECK',
@@ -633,7 +633,7 @@ class Validator:
                                     rows_succeeded=0,
                                     rows_failed=0)
 
-        max_val = config['maximum']
+        max_val = params['maximum']
         rows_processed = len(stats_df)
         rows_failed = 0
         failed_rows_details = []
