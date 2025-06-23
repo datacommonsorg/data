@@ -61,10 +61,7 @@ class ValidationRunner:
                 stats_summary, differ_output)
             sys.exit(1)
 
-        self.dataframes = {
-            'stats': pd.DataFrame(),
-            'differ': pd.DataFrame()
-        }
+        self.dataframes = {'stats': pd.DataFrame(), 'differ': pd.DataFrame()}
 
         if stats_exists:
             self.dataframes['stats'] = pd.read_csv(stats_summary)

@@ -206,8 +206,8 @@ class TestValidationRunner(unittest.TestCase):
         self.assertEqual(output_df.iloc[0]['Status'], 'FAILED')
         self.assertEqual(output_df.iloc[0]['Message'],
                          'Too many deletions, found 100')
-        self.assertEqual(
-            json.loads(output_df.iloc[0]['Details']), {'deleted_count': 100})
+        self.assertEqual(json.loads(output_df.iloc[0]['Details']),
+                         {'deleted_count': 100})
         self.assertEqual(output_df.iloc[0]['RowsProcessed'], 1)
         self.assertEqual(output_df.iloc[0]['RowsSucceeded'], 0)
         self.assertEqual(output_df.iloc[0]['RowsFailed'], 1)
@@ -264,8 +264,7 @@ class TestValidationRunner(unittest.TestCase):
                         'params': {}
                     }]
                 }, f)
-        pd.DataFrame({'StatVar': ['sv1']}).to_csv(self.stats_path,
-                                                  index=False)
+        pd.DataFrame({'StatVar': ['sv1']}).to_csv(self.stats_path, index=False)
 
         runner = ValidationRunner(validation_config_path=self.config_path,
                                   stats_summary=self.stats_path,
