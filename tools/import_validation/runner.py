@@ -13,6 +13,7 @@
 # limitations under the License.
 """Module for the ValidationRunner class."""
 
+import os
 from absl import app
 from absl import flags
 from absl import logging
@@ -50,10 +51,35 @@ class ValidationRunner:
         self.validation_output = validation_output
         self.validator = Validator()
         self.validation_results = []
+
+        stats_exists = os.path.exists(stats_summary)
+        differ_exists = os.path.exists(differ_output)
+
+        if not stats_exists and not differ_exists:
+            logging.error(
+                "Fatal: Neither stats_summary (%s) nor differ_output (%s) file found. Aborting.",
+                stats_summary, differ_output)
+            sys.exit(1)
+
         self.dataframes = {
-            'stats': pd.read_csv(stats_summary),
-            'differ': pd.read_csv(differ_output)
+            'stats': pd.DataFrame(),
+            'differ': pd.DataFrame()
         }
+
+        if stats_exists:
+            self.dataframes['stats'] = pd.read_csv(stats_summary)
+        else:
+            logging.warning(
+                "Warning: stats_summary file not found at %s. Proceeding without it.",
+                stats_summary)
+
+        if differ_exists:
+            self.dataframes['differ'] = pd.read_csv(differ_output)
+        else:
+            logging.warning(
+                "Warning: differ_output file not found at %s. Proceeding without it.",
+                differ_output)
+
         self.validation_dispatch = {
             'MAX_DATE_LATEST':
                 (self.validator.validate_max_date_latest, 'stats'),
