@@ -24,7 +24,6 @@ from absl import app
 from absl import flags
 from absl import logging
 
-
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils, geo_id_resolver
@@ -36,7 +35,8 @@ from name_to_alpha2 import USSTATE_MAP_SPACE
 import file_util
 
 flags.DEFINE_string(
-    'config_file', 'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
+    'config_file',
+    'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
     'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
@@ -170,7 +170,7 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
         _YEARWISE_CONFIG = json.load(f)
     year_config = _YEARWISE_CONFIG['table_config']['13']
     if year_config:
-        if isinstance(year_config,list):
+        if isinstance(year_config, list):
             df.columns = year_config
         else:
             for year_range_str, columns in year_config.items():
@@ -178,7 +178,10 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
                 if year in year_range:
                     df.columns = columns
     #Dropping unwanted columns, need to drop population,agency unit from 2020 data and population column from other year data
-    df.drop(['population','agency unit'], axis=1, inplace=True,errors='ignore')
+    df.drop(['population', 'agency unit'],
+            axis=1,
+            inplace=True,
+            errors='ignore')
     df['state'] = df['state'].fillna(method='ffill')
     df['agency type'] = df['agency type'].fillna(method='ffill')
 

@@ -31,7 +31,8 @@ import utils
 import file_util
 
 flags.DEFINE_string(
-    'config_file', 'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
+    'config_file',
+    'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
     'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
@@ -109,9 +110,9 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
     year_config = _YEARWISE_CONFIG['table_config']['10']
-    
+
     if year_config:
-        if isinstance(year_config,list):
+        if isinstance(year_config, list):
             df.columns = year_config
         else:
             for year_range_str, columns in year_config.items():
