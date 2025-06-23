@@ -18,7 +18,7 @@ from absl import app
 from absl import logging
 import requests
 from retry import retry
-import ssl  # Import the ssl module
+import ssl
 
 
 input_path = os.path.join(
@@ -35,7 +35,6 @@ _URLS_TO_SCAN = {
         "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/asrh/sc-est{YEAR}-alldata6.csv"
     ),
 }
-_FILES_TO_DOWNLOAD = None
 
 
 @retry(
@@ -45,11 +44,10 @@ _FILES_TO_DOWNLOAD = None
     exceptions=(requests.RequestException, Exception),
 )
 def add_future_urls():
-  global _FILES_TO_DOWNLOAD
   # Initialize the list to store files to download
-  _FILES_TO_DOWNLOAD = {}
+  files_to_download = {} 
   for key, value in _URLS_TO_SCAN.items():
-    _FILES_TO_DOWNLOAD[key] = []
+    files_to_download[key] = []
     for future_year in range(2030, 2022, -1):  # From 2030 to 2023
       YEAR = future_year
       if (
@@ -68,7 +66,7 @@ def add_future_urls():
                 url_to_check, allow_redirects=True, verify=False
             )
             if check_url.status_code == 200:
-              _FILES_TO_DOWNLOAD[key].append(url_to_check)
+              files_to_download[key].append(url_to_check)
               logging.info(f"Adding {url_to_check}")
             else:
               logging.warning(f"Url not found: {url_to_check} with status code: {check_url.status_code}")
@@ -85,17 +83,16 @@ def add_future_urls():
               url_to_check, allow_redirects=True, verify=False
           )
           if check_url.status_code == 200:
-            _FILES_TO_DOWNLOAD[key].append(url_to_check)
+            files_to_download[key].append(url_to_check)
             logging.info(f"Adding {url_to_check}")
           else:
             logging.warning(f"Url not found: {url_to_check} with status code: {check_url.status_code}")
         except requests.exceptions.RequestException as e:
           logging.fatal(f"URL is not accessible {value} due to {e}")
+  return files_to_download # Return the populated dictionary
 
-
-def download_files():
-  global _FILES_TO_DOWNLOAD, input_path
-  for key, value in _FILES_TO_DOWNLOAD.items():
+def download_files(files_to_download_dict):
+  for key, value in files_to_download_dict.items():
     # Local path to save the downloaded file
     for url in value:
       output_file_name = url.split("/")[-1]
@@ -147,9 +144,9 @@ def main(_):
 
   # add_future_urls
   logging.info("Generating future URLs")
-  add_future_urls()
+  download_urls = add_future_urls()
   logging.info("Starting download")
-  download_files()
+  download_files(download_urls) # Pass the dictionary as an argument
 
 
 if __name__ == "__main__":
