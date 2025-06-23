@@ -63,18 +63,18 @@ class ValidationRunner:
 
         self.dataframes = {'stats': pd.DataFrame(), 'differ': pd.DataFrame()}
 
-        if stats_exists:
+        if stats_exists and os.path.getsize(stats_summary) > 0:
             self.dataframes['stats'] = pd.read_csv(stats_summary)
         else:
             logging.warning(
-                "Warning: stats_summary file not found at %s. Proceeding without it.",
+                "Warning: stats_summary file not found or is empty at %s. Proceeding without it.",
                 stats_summary)
 
-        if differ_exists:
+        if differ_exists and os.path.getsize(differ_output) > 0:
             self.dataframes['differ'] = pd.read_csv(differ_output)
         else:
             logging.warning(
-                "Warning: differ_output file not found at %s. Proceeding without it.",
+                "Warning: differ_output file not found or is empty at %s. Proceeding without it.",
                 differ_output)
 
         self.validation_dispatch = {
