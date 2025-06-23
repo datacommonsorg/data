@@ -12,42 +12,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os, shutil, requests
+import os, shutil
 import zipfile
 from absl import app, logging
 from pathlib import Path
-from retry import retry
-import config
+import config, sys
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
 
 BEA_ZIP_URL = config.BEA_ZIP_URL
 
-INPUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files")
+INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
 
-@retry(tries=3, delay=5, backoff=2)
-def retry_method(url, headers=None):
-    response = requests.get(url, headers=headers, timeout=10)
-    response.raise_for_status()
-    return response
+sys.path.append(os.path.join(script_dir, '../../../util'))
 
-#Function to download and save the ZIP file
-def download_file():
-    logging.info("Starting download...")
-    zip_path = os.path.join(INPUT_DIR, "CAGDP9.zip")
-    
-    try:
-        response = retry_method(BEA_ZIP_URL)
-        with open(zip_path, "wb") as f:
-            f.write(response.content)
-            
-        logging.info(f"Downloaded file saved to {zip_path}")
-        return  zip_path
-    
-    except Exception as e:
-        logging.fatal(f"Failed to download file: {e}")
+from download_util_script import download_file
     
 #Function to extract and process the CSV file from ZIP
-def extract_and_process(zip_path):
+def extract_and_process():
+    zip_path = os.path.join(INPUT_DIR, "CAGDP9.zip")
     logging.info("Extracting ZIP file...")
     
     try:
@@ -68,9 +52,15 @@ def extract_and_process(zip_path):
         logging.fatal(f"Failed to extract the file: {e}")
 
 def main(argv):
-    zip_path = download_file()
-    if zip_path:
-        extract_and_process(zip_path)
+    download_file(url=BEA_ZIP_URL,
+                  output_folder=INPUT_DIR,
+                  unzip=False,
+                  headers= None,
+                  tries= 3,
+                  delay= 5,
+                  backoff= 2)
+    
+    extract_and_process()
 
 if __name__ == "__main__":  
     app.run(main)
