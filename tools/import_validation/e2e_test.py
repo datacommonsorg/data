@@ -50,7 +50,17 @@ class TestImportValidationE2E(unittest.TestCase):
         """Tests a successful end-to-end run of the script."""
         # 1. Create sample data that should pass validation
         with open(self.config_path, 'w') as f:
-            json.dump([{"validation": "NUM_PLACES_CONSISTENT"}], f)
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "num_places_consistent",
+                        "validator": "NUM_PLACES_CONSISTENT",
+                        "scope": {
+                            "data_source": "stats"
+                        },
+                        "params": {}
+                    }]
+                }, f)
         pd.DataFrame({
             'StatVar': ['sv1', 'sv2'],
             'NumPlaces': [10, 10]  # Consistent
@@ -58,7 +68,7 @@ class TestImportValidationE2E(unittest.TestCase):
 
         # 2. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.import_validation',
+            'python3', '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -79,7 +89,17 @@ class TestImportValidationE2E(unittest.TestCase):
         """Tests a failed end-to-end run of the script."""
         # 1. Create sample data that should fail validation
         with open(self.config_path, 'w') as f:
-            json.dump([{"validation": "NUM_PLACES_CONSISTENT"}], f)
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "num_places_consistent",
+                        "validator": "NUM_PLACES_CONSISTENT",
+                        "scope": {
+                            "data_source": "stats"
+                        },
+                        "params": {}
+                    }]
+                }, f)
         pd.DataFrame({
             'StatVar': ['sv1', 'sv2'],
             'NumPlaces': [10, 20]  # Inconsistent
@@ -87,7 +107,7 @@ class TestImportValidationE2E(unittest.TestCase):
 
         # 2. Run the script
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.import_validation',
+            'python3', '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--stats_summary={self.stats_path}',
             f'--differ_output={self.differ_path}',
@@ -107,7 +127,7 @@ class TestImportValidationE2E(unittest.TestCase):
         """Tests that the script fails when a required flag is missing."""
         # Run the script without the required --stats_summary flag
         result = subprocess.run([
-            'python3', '-m', 'tools.import_validation.import_validation',
+            'python3', '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
             f'--differ_output={self.differ_path}',
             f'--validation_output={self.output_path}'

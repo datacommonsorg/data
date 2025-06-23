@@ -76,53 +76,54 @@ class TestValidationRunner(unittest.TestCase):
         # Ensure other methods were NOT called
         mock_validator_instance.validate_deleted_count.assert_not_called()
 
-    # @patch('tools.import_validation.runner.filter_dataframe')
-    # @patch('tools.import_validation.runner.Validator')
-    # def test_runner_applies_filters_correctly(self, MockValidator,
-    #                                           mock_filter_dataframe):
-    #     # 1. Setup mocks
-    #     mock_validator_instance = MockValidator.return_value
-    #     mock_validator_instance.validate_num_places_consistent.return_value = ValidationResult(
-    #         ValidationStatus.PASSED, 'NUM_PLACES_CONSISTENT')
-    #     # Make the mock filter function return a specific dummy dataframe
-    #     mock_filter_dataframe.return_value = pd.DataFrame(
-    #         {'StatVar': ['filtered_sv']})
+    @unittest.skip("Variable filtering not yet implemented in new runner.")
+    @patch('tools.import_validation.runner.filter_dataframe')
+    @patch('tools.import_validation.runner.Validator')
+    def test_runner_applies_filters_correctly(self, MockValidator,
+                                              mock_filter_dataframe):
+        # 1. Setup mocks
+        mock_validator_instance = MockValidator.return_value
+        mock_validator_instance.validate_num_places_consistent.return_value = ValidationResult(
+            ValidationStatus.PASSED, 'NUM_PLACES_CONSISTENT')
+        # Make the mock filter function return a specific dummy dataframe
+        mock_filter_dataframe.return_value = pd.DataFrame(
+            {'StatVar': ['filtered_sv']})
 
-    #     # 2. Create test files
-    #     config = {
-    #         'rules': [{
-    #             'rule_id': 'test_places_consistent',
-    #             'validator': 'NUM_PLACES_CONSISTENT',
-    #             'scope': {
-    #                 'data_source': 'stats',
-    #                 'variables': {
-    #                     'dcids': ['Count_Person_Male']
-    #                 }
-    #             },
-    #             'params': {}
-    #         }]
-    #     }
-    #     with open(self.config_path, 'w') as f:
-    #         json.dump(config, f)
-    #     original_df = pd.DataFrame({
-    #         'StatVar': ['sv1', 'sv2'],
-    #         'NumPlaces': [10, 20]
-    #     })
-    #     original_df.to_csv(self.stats_path, index=False)
+        # 2. Create test files
+        config = {
+            'rules': [{
+                'rule_id': 'test_places_consistent',
+                'validator': 'NUM_PLACES_CONSISTENT',
+                'scope': {
+                    'data_source': 'stats',
+                    'variables': {
+                        'dcids': ['Count_Person_Male']
+                    }
+                },
+                'params': {}
+            }]
+        }
+        with open(self.config_path, 'w') as f:
+            json.dump(config, f)
+        original_df = pd.DataFrame({
+            'StatVar': ['sv1', 'sv2'],
+            'NumPlaces': [10, 20]
+        })
+        original_df.to_csv(self.stats_path, index=False)
 
-    #     # 3. Run the runner
-    #     runner = ValidationRunner(validation_config_path=self.config_path,
-    #                               stats_summary=self.stats_path,
-    #                               differ_output=self.differ_path,
-    #                               validation_output=self.output_path)
-    #     runner.run_validations()
+        # 3. Run the runner
+        runner = ValidationRunner(validation_config_path=self.config_path,
+                                  stats_summary=self.stats_path,
+                                  differ_output=self.differ_path,
+                                  validation_output=self.output_path)
+        runner.run_validations()
 
-    #     # 4. Assert that the filter function was called correctly
-    #     mock_filter_dataframe.assert_called_once()
-    #     # Check that the validator was called with the *filtered* dataframe
-    #     call_args, _ = mock_validator_instance.validate_num_places_consistent.call_args
-    #     filtered_df_arg = call_args[0]
-    #     self.assertEqual(filtered_df_arg.iloc[0]['StatVar'], 'filtered_sv')
+        # 4. Assert that the filter function was called correctly
+        mock_filter_dataframe.assert_called_once()
+        # Check that the validator was called with the *filtered* dataframe
+        call_args, _ = mock_validator_instance.validate_num_places_consistent.call_args
+        filtered_df_arg = call_args[0]
+        self.assertEqual(filtered_df_arg.iloc[0]['StatVar'], 'filtered_sv')
 
     @patch('tools.import_validation.runner.Validator')
     def test_runner_handles_failed_validation(self, MockValidator):
