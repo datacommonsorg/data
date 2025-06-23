@@ -11,7 +11,7 @@ Author: chejennifer
 
 ### Download URL
 
-data is available for download from https://www.icpsr.umich.edu/web/NACJD/studies/37639.
+data is available for download from https://www.icpsr.umich.edu/web/NACJD/studies/38871.
 
 ### Overview
 1. Jurisdiction by various factors and combinations of factors including: location, gender, race, correctional facility type, sentencing lengths
@@ -41,8 +41,9 @@ Admission and Discharge
 ## Import Procedure
 
 >To import BJS National Prison Statistics data:
-1. download the data from https://www.icpsr.umich.edu/web/NACJD/studies/37639
-2. run the following command with the option -i followed by the path to the tsv data file that was downloaded:
+1. download the data from https://www.icpsr.umich.edu/web/NACJD/studies/38871
+2. upload the data file at location gs://unresolved_mcf/usnpa_input_files/
+2. run the following command with the option -i followed by the name of the tsv data file that was downloaded and uploaded to unresolved bucket:
 ```
 python3 import_data.py
 ```
