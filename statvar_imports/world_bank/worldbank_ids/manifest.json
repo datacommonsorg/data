@@ -35,7 +35,7 @@
                     "cleaned_csv": "output/disbursed/disbursed_output.csv"
                 }
             ],
-            "cron_schedule": "00 11 1,15 * *"
+            "cron_schedule": "0 4 7,23 * *"
         }
     ]
 }
