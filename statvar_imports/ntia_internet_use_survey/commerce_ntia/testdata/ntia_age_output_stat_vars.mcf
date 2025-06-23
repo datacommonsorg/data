@@ -1,5 +1,3 @@
-# Auto generated using command: "../../data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/sudhisha/Git_works/NTIA/data/statvar_imports/ntia_internet_use_survey/Commerce_NTIA/testdata/ntia-data-age-only.csv --pv_map=/usr/local/google/home/sudhisha/Git_works/NTIA/data/statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_age_pvmap.csv --config_file=/usr/local/google/home/sudhisha/Git_works/NTIA/data/statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=/usr/local/google/home/sudhisha/Git_works/NTIA/data/statvar_imports/ntia_internet_use_survey/Commerce_NTIA/testdata/ntia_age_output" on 2025-04-28 11:33:10.727878
-
 Node: dcid:Count_Household_ComputerUsageAtHome_HasComputer_HouseholderAge15To24Years_NonInstitutionalized
 typeOf: dcid:StatisticalVariable
 name: "Anyone in Household Uses a Desktop","age between 15 and 24 years","dcid:Laptop","or Tablet at Home"

@@ -1,5 +1,3 @@
-# Auto generated using command: "../../data/tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/sudhisha/Git_works/NTIA/data/statvar_imports/ntia_internet_use_survey/Commerce_NTIA/testdata/ntia-data.csv --pv_map=/usr/local/google/home/sudhisha/Git_works/NTIA/data/statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_pvmap.csv --config_file=/usr/local/google/home/sudhisha/Git_works/NTIA/data/statvar_imports/ntia_internet_use_survey/Commerce_NTIA/ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=/usr/local/google/home/sudhisha/Git_works/NTIA/data/statvar_imports/ntia_internet_use_survey/Commerce_NTIA/testdata/ntia_output" on 2025-04-28 11:06:51.536874
-
 Node: dcid:Count_Person_3OrMoreYears_Civilian
 typeOf: dcid:StatisticalVariable
 name: "Not Active-Duty Military","Person Aged 3 and above"
