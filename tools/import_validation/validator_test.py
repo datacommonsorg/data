@@ -28,22 +28,32 @@ class TestMaxDateLatestValidation(unittest.TestCase):
 
     def test_max_date_latest_fails_on_old_date(self):
         old_year = datetime.now().year - 2
-        test_df = pd.DataFrame({'MaxDate': [f'{old_year}-01-01']})
+        test_df = pd.DataFrame(
+            {'MaxDate': [f'{old_year}-01-01', f'{old_year-1}-01-01']})
         result = self.validator.validate_max_date_latest(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertIn('Latest date found was', result.message)
         self.assertEqual(result.details['latest_date_found'], old_year)
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 2)
 
     def test_max_date_latest_passes_on_current_date(self):
         current_year = datetime.now().year
         test_df = pd.DataFrame({'MaxDate': [f'{current_year}-01-01']})
         result = self.validator.validate_max_date_latest(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 1)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_max_date_latest_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'MaxDate': []})
         result = self.validator.validate_max_date_latest(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_max_date_latest_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MaxDate'
@@ -65,18 +75,27 @@ class TestDeletedCountValidation(unittest.TestCase):
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(result.details['deleted_count'], 2)
         self.assertEqual(result.details['threshold'], 1)
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 2)
 
     def test_deleted_count_passes_when_at_threshold(self):
         test_df = pd.DataFrame({'DELETED': [1, 1]})  # Total deleted = 2
         config = {'threshold': 2}
         result = self.validator.validate_deleted_count(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 2)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_deleted_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'DELETED': []})
         config = {'threshold': 0}
         result = self.validator.validate_deleted_count(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_deleted_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'DELETED'
@@ -97,16 +116,25 @@ class TestModifiedCountValidation(unittest.TestCase):
         result = self.validator.validate_modified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 2)
 
     def test_modified_count_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'MODIFIED': [2, 2]})  # Consistent
         result = self.validator.validate_modified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 2)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_modified_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'MODIFIED': []})
         result = self.validator.validate_modified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_modified_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MODIFIED'
@@ -126,16 +154,25 @@ class TestAddedCountValidation(unittest.TestCase):
         result = self.validator.validate_added_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 2)
 
     def test_added_count_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'ADDED': [1, 1]})  # Consistent
         result = self.validator.validate_added_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 2)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_added_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'ADDED': []})
         result = self.validator.validate_added_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_added_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'ADDED'
@@ -154,11 +191,17 @@ class TestUnmodifiedCountValidation(unittest.TestCase):
         test_df = pd.DataFrame({'UNMODIFIED': []})
         result = self.validator.validate_unmodified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_unmodified_count_is_always_successful(self):
         test_df = pd.DataFrame({'UNMODIFIED': [1, 2]})  # Inconsistent
         result = self.validator.validate_unmodified_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
 
 class TestNumPlacesConsistentValidation(unittest.TestCase):
@@ -172,16 +215,25 @@ class TestNumPlacesConsistentValidation(unittest.TestCase):
         result = self.validator.validate_num_places_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 2)
 
     def test_num_places_consistent_passes_on_consistent_counts(self):
         test_df = pd.DataFrame({'NumPlaces': [2, 2]})  # Consistent
         result = self.validator.validate_num_places_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 2)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_num_places_consistent_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'NumPlaces': []})
         result = self.validator.validate_num_places_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_num_places_consistent_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'NumPlaces'
@@ -201,39 +253,57 @@ class TestNumPlacesCountValidation(unittest.TestCase):
         config = {'minimum': 10}
         result = self.validator.validate_num_places_count(test_df, config)
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(result.details['actual_count'], 5)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 1)
+        self.assertEqual(result.details['failed_rows'][0]['actual_value'], 5)
 
     def test_num_places_count_fails_above_maximum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [15]})
         config = {'maximum': 10}
         result = self.validator.validate_num_places_count(test_df, config)
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(result.details['actual_count'], 15)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 1)
+        self.assertEqual(result.details['failed_rows'][0]['actual_value'], 15)
 
     def test_num_places_count_fails_on_exact_mismatch(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [10]})
         config = {'value': 11}
         result = self.validator.validate_num_places_count(test_df, config)
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(result.details['actual_count'], 10)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 1)
+        self.assertEqual(result.details['failed_rows'][0]['actual_value'], 10)
 
     def test_num_places_count_passes_within_range(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [10]})
         config = {'minimum': 5, 'maximum': 15}
         result = self.validator.validate_num_places_count(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 1)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_num_places_count_passes_on_exact_match(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumPlaces': [10]})
         config = {'value': 10}
         result = self.validator.validate_num_places_count(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 1)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_num_places_count_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'StatVar': [], 'NumPlaces': []})
         config = {'minimum': 1}
         result = self.validator.validate_num_places_count(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_num_places_count_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'NumPlaces'
@@ -254,19 +324,29 @@ class TestMinValueCheckValidation(unittest.TestCase):
         config = {'minimum': 10}
         result = self.validator.validate_min_value_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(result.details['actual_min_value'], 5)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 1)
+        self.assertEqual(result.details['failed_rows'][0]['actual_min_value'],
+                         5)
 
     def test_min_value_check_passes_at_minimum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'MinValue': [10]})
         config = {'minimum': 10}
         result = self.validator.validate_min_value_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 1)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_min_value_check_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'StatVar': [], 'MinValue': []})
         config = {'minimum': 1}
         result = self.validator.validate_min_value_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_min_value_check_fails_on_missing_config(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'MinValue': [10]})
@@ -296,17 +376,26 @@ class TestMaxDateConsistentValidation(unittest.TestCase):
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(sorted(result.details['unique_dates']),
                          ['2024-01-01', '2024-01-02'])
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 2)
 
     def test_max_date_consistent_passes_on_consistent_dates(self):
         test_df = pd.DataFrame({'MaxDate': ['2024-01-01',
                                             '2024-01-01']})  # Consistent
         result = self.validator.validate_max_date_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 2)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_max_date_consistent_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'MaxDate': []})
         result = self.validator.validate_max_date_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_max_date_consistent_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'MaxDate'
@@ -326,39 +415,57 @@ class TestNumObservationsCheckValidation(unittest.TestCase):
         config = {'minimum': 10}
         result = self.validator.validate_num_observations_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(result.details['actual_count'], 5)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 1)
+        self.assertEqual(result.details['failed_rows'][0]['actual_value'], 5)
 
     def test_num_observations_check_fails_above_maximum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumObservations': [15]})
         config = {'maximum': 10}
         result = self.validator.validate_num_observations_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(result.details['actual_count'], 15)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 1)
+        self.assertEqual(result.details['failed_rows'][0]['actual_value'], 15)
 
     def test_num_observations_check_fails_on_exact_mismatch(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumObservations': [10]})
         config = {'value': 11}
         result = self.validator.validate_num_observations_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(result.details['actual_count'], 10)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 1)
+        self.assertEqual(result.details['failed_rows'][0]['actual_value'], 10)
 
     def test_num_observations_check_passes_within_range(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumObservations': [10]})
         config = {'minimum': 5, 'maximum': 15}
         result = self.validator.validate_num_observations_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 1)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_num_observations_check_passes_on_exact_match(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'NumObservations': [10]})
         config = {'value': 10}
         result = self.validator.validate_num_observations_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 1)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_num_observations_check_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'StatVar': [], 'NumObservations': []})
         config = {'minimum': 1}
         result = self.validator.validate_num_observations_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_num_observations_check_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']
@@ -381,16 +488,25 @@ class TestUnitConsistencyValidation(unittest.TestCase):
         self.assertEqual(result.status, ValidationStatus.FAILED)
         self.assertEqual(sorted(result.details['unique_units']),
                          ['Percent', 'USD'])
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 2)
 
     def test_unit_consistency_passes_on_consistent_units(self):
         test_df = pd.DataFrame({'Units': ['USD', 'USD']})  # Consistent
         result = self.validator.validate_unit_consistency(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 2)
+        self.assertEqual(result.rows_succeeded, 2)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_unit_consistency_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'Units': []})
         result = self.validator.validate_unit_consistency(test_df, {})
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_unit_consistency_fails_on_missing_column(self):
         test_df = pd.DataFrame({'StatVar': ['sv1']})  # Missing 'Units'
@@ -410,19 +526,29 @@ class TestMaxValueCheckValidation(unittest.TestCase):
         config = {'maximum': 10}
         result = self.validator.validate_max_value_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(result.details['actual_max_value'], 15)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 1)
+        self.assertEqual(result.details['failed_rows'][0]['actual_max_value'],
+                         15)
 
     def test_max_value_check_passes_at_maximum(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'MaxValue': [10]})
         config = {'maximum': 10}
         result = self.validator.validate_max_value_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 1)
+        self.assertEqual(result.rows_succeeded, 1)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_max_value_check_passes_on_empty_dataframe(self):
         test_df = pd.DataFrame({'StatVar': [], 'MaxValue': []})
         config = {'maximum': 1}
         result = self.validator.validate_max_value_check(test_df, config)
         self.assertEqual(result.status, ValidationStatus.PASSED)
+        self.assertEqual(result.rows_processed, 0)
+        self.assertEqual(result.rows_succeeded, 0)
+        self.assertEqual(result.rows_failed, 0)
 
     def test_max_value_check_fails_on_missing_config(self):
         test_df = pd.DataFrame({'StatVar': ['sv1'], 'MaxValue': [10]})

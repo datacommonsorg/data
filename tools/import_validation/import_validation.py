@@ -104,9 +104,13 @@ class ValidationRunner:
                 (self.validator.validate_max_value_check, 'stats'),
         }
 
-    def run_validations(self) -> bool:
-        """
-    Runs all validations specified in the config and returns the overall status.
+    def run_validations(self) -> tuple[bool, list[ValidationResult]]:
+        """Runs all validations specified in the config.
+
+    Returns:
+        A tuple containing:
+        - A boolean representing the overall status (True if all passed).
+        - A list of ValidationResult objects.
     """
         overall_status = True
         for config in self.validation_config:
@@ -139,7 +143,7 @@ class ValidationRunner:
                 logging.info('Validation passed: %s', result.name)
 
         self._write_results_to_file()
-        return overall_status
+        return overall_status, self.validation_results
 
     def _write_results_to_file(self):
         with open(self.validation_output,
@@ -147,20 +151,29 @@ class ValidationRunner:
                   encoding='utf-8',
                   newline='') as output_file:
             writer = csv.writer(output_file)
-            writer.writerow(['test', 'status', 'message', 'details'])
+            writer.writerow([
+                'test', 'status', 'message', 'details', 'rows_processed',
+                'rows_succeeded', 'rows_failed'
+            ])
             for result in self.validation_results:
                 details_str = json.dumps(
                     result.details) if result.details else ''
                 writer.writerow([
-                    result.name, result.status.value, result.message,
-                    details_str
+                    result.name,
+                    result.status.value,
+                    result.message,
+                    details_str,
+                    result.rows_processed,
+                    result.rows_succeeded,
+                    result.rows_failed,
                 ])
 
 
 def main(_):
     runner = ValidationRunner(_FLAGS.validation_config, _FLAGS.differ_output,
                               _FLAGS.stats_summary, _FLAGS.validation_output)
-    if not runner.run_validations():
+    overall_status, _ = runner.run_validations()
+    if not overall_status:
         sys.exit(1)
 
 

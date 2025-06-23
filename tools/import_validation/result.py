@@ -31,9 +31,14 @@ class ValidationResult:
                  status: ValidationStatus,
                  name: str,
                  message: str = '',
-                 details: dict = None):
+                 details: dict = None,
+                 rows_processed: int = 0,
+                 rows_succeeded: int = 0,
+                 rows_failed: int = 0):
         self.status = status
         self.name = name
         self.message = message  # A human-readable summary
-        self.details = details if details is not None else {
-        }  # A machine-readable dictionary
+        self.details = details if details is not None else {}
+        self.rows_processed = rows_processed
+        self.rows_succeeded = rows_succeeded
+        self.rows_failed = rows_failed

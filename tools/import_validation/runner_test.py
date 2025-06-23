@@ -125,7 +125,7 @@ class TestValidationRunner(unittest.TestCase):
                                   stats_summary=self.stats_path,
                                   differ_output=self.differ_path,
                                   validation_output=self.output_path)
-        overall_status = runner.run_validations()
+        overall_status, _ = runner.run_validations()
 
         # 4. Assert that the overall status is False
         self.assertFalse(overall_status)
@@ -138,7 +138,10 @@ class TestValidationRunner(unittest.TestCase):
             ValidationStatus.FAILED,
             'DELETED_COUNT',
             message='Too many deletions, found 100',
-            details={'deleted_count': 100})
+            details={'deleted_count': 100},
+            rows_processed=1,
+            rows_succeeded=0,
+            rows_failed=1)
         mock_validator_instance.validate_deleted_count.return_value = expected_result
 
         # 2. Create test files
@@ -161,6 +164,9 @@ class TestValidationRunner(unittest.TestCase):
         self.assertEqual(output_df.iloc[0]['message'],
                          'Too many deletions, found 100')
         self.assertEqual(output_df.iloc[0]['details'], '{"deleted_count": 100}')
+        self.assertEqual(output_df.iloc[0]['rows_processed'], 1)
+        self.assertEqual(output_df.iloc[0]['rows_succeeded'], 0)
+        self.assertEqual(output_df.iloc[0]['rows_failed'], 1)
 
     @patch('tools.import_validation.import_validation.Validator')
     def test_runner_uses_custom_name(self, MockValidator):

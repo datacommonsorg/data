@@ -40,12 +40,19 @@ class Validator:
                 ValidationStatus.DATA_ERROR,
                 'MAX_DATE_LATEST',
                 message="Input data is missing required column: 'MaxDate'.")
+
+        rows_processed = len(stats_df)
         if stats_df.empty:
-            return ValidationResult(ValidationStatus.PASSED, 'MAX_DATE_LATEST')
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'MAX_DATE_LATEST',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
 
         stats_df['MaxDate'] = pd.to_datetime(stats_df['MaxDate'])
         max_date_year = stats_df['MaxDate'].dt.year.max()
         current_year = pd.to_datetime('today').year
+
         if max_date_year < current_year:
             return ValidationResult(
                 ValidationStatus.FAILED,
@@ -55,8 +62,15 @@ class Validator:
                 details={
                     'latest_date_found': int(max_date_year),
                     'expected_latest_date': int(current_year)
-                })
-        return ValidationResult(ValidationStatus.PASSED, 'MAX_DATE_LATEST')
+                },
+                rows_processed=rows_processed,
+                rows_succeeded=0,
+                rows_failed=rows_processed)
+        return ValidationResult(ValidationStatus.PASSED,
+                                'MAX_DATE_LATEST',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_processed,
+                                rows_failed=0)
 
     def validate_deleted_count(self, differ_df: pd.DataFrame,
                                config: dict) -> ValidationResult:
@@ -76,10 +90,18 @@ class Validator:
                 ValidationStatus.DATA_ERROR,
                 'DELETED_COUNT',
                 message="Input data is missing required column: 'DELETED'.")
+
+        rows_processed = len(differ_df)
         if differ_df.empty:
-            return ValidationResult(ValidationStatus.PASSED, 'DELETED_COUNT')
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'DELETED_COUNT',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
+
         threshold = config.get('threshold', 0)
         deleted_count = differ_df['DELETED'].sum()
+
         if deleted_count > threshold:
             return ValidationResult(
                 ValidationStatus.FAILED,
@@ -89,8 +111,15 @@ class Validator:
                 details={
                     'deleted_count': int(deleted_count),
                     'threshold': threshold
-                })
-        return ValidationResult(ValidationStatus.PASSED, 'DELETED_COUNT')
+                },
+                rows_processed=rows_processed,
+                rows_succeeded=0,
+                rows_failed=rows_processed)
+        return ValidationResult(ValidationStatus.PASSED,
+                                'DELETED_COUNT',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_processed,
+                                rows_failed=0)
 
     def validate_modified_count(self, differ_df: pd.DataFrame,
                                 config: dict) -> ValidationResult:
@@ -109,17 +138,32 @@ class Validator:
                 ValidationStatus.DATA_ERROR,
                 'MODIFIED_COUNT',
                 message="Input data is missing required column: 'MODIFIED'.")
+
+        rows_processed = len(differ_df)
         if differ_df.empty:
-            return ValidationResult(ValidationStatus.PASSED, 'MODIFIED_COUNT')
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'MODIFIED_COUNT',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
+
         unique_counts = differ_df['MODIFIED'].nunique()
+
         if unique_counts > 1:
             return ValidationResult(
                 ValidationStatus.FAILED,
                 'MODIFIED_COUNT',
                 message=
                 f"Found {unique_counts} unique modified counts where 1 was expected.",
-                details={'unique_counts': list(differ_df['MODIFIED'].unique())})
-        return ValidationResult(ValidationStatus.PASSED, 'MODIFIED_COUNT')
+                details={'unique_counts': list(differ_df['MODIFIED'].unique())},
+                rows_processed=rows_processed,
+                rows_succeeded=0,
+                rows_failed=rows_processed)
+        return ValidationResult(ValidationStatus.PASSED,
+                                'MODIFIED_COUNT',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_processed,
+                                rows_failed=0)
 
     def validate_added_count(self, differ_df: pd.DataFrame,
                              config: dict) -> ValidationResult:
@@ -138,17 +182,32 @@ class Validator:
                 ValidationStatus.DATA_ERROR,
                 'ADDED_COUNT',
                 message="Input data is missing required column: 'ADDED'.")
+
+        rows_processed = len(differ_df)
         if differ_df.empty:
-            return ValidationResult(ValidationStatus.PASSED, 'ADDED_COUNT')
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'ADDED_COUNT',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
+
         unique_counts = differ_df['ADDED'].nunique()
+
         if unique_counts != 1:
             return ValidationResult(
                 ValidationStatus.FAILED,
                 'ADDED_COUNT',
                 message=
                 f"Found {unique_counts} unique added counts where 1 was expected.",
-                details={'unique_counts': list(differ_df['ADDED'].unique())})
-        return ValidationResult(ValidationStatus.PASSED, 'ADDED_COUNT')
+                details={'unique_counts': list(differ_df['ADDED'].unique())},
+                rows_processed=rows_processed,
+                rows_succeeded=0,
+                rows_failed=rows_processed)
+        return ValidationResult(ValidationStatus.PASSED,
+                                'ADDED_COUNT',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_processed,
+                                rows_failed=0)
 
     def validate_unmodified_count(self, differ_df: pd.DataFrame,
                                   config: dict) -> ValidationResult:
@@ -165,7 +224,11 @@ class Validator:
     """
         # The logic for this validation is currently disabled.
         # This method is a placeholder to ensure the validation "passes".
-        return ValidationResult(ValidationStatus.PASSED, 'UNMODIFIED_COUNT')
+        return ValidationResult(ValidationStatus.PASSED,
+                                'UNMODIFIED_COUNT',
+                                rows_processed=0,
+                                rows_succeeded=0,
+                                rows_failed=0)
 
     def validate_num_places_consistent(self, stats_df: pd.DataFrame,
                                        config: dict) -> ValidationResult:
@@ -184,88 +247,32 @@ class Validator:
                 ValidationStatus.DATA_ERROR,
                 'NUM_PLACES_CONSISTENT',
                 message="Input data is missing required column: 'NumPlaces'.")
+
+        rows_processed = len(stats_df)
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
-                                    'NUM_PLACES_CONSISTENT')
+                                    'NUM_PLACES_CONSISTENT',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
+
         unique_counts = stats_df['NumPlaces'].nunique()
+
         if unique_counts > 1:
             return ValidationResult(
                 ValidationStatus.FAILED,
                 'NUM_PLACES_CONSISTENT',
                 message=
                 f"Found {unique_counts} unique place counts where 1 was expected.",
-                details={'unique_counts': list(stats_df['NumPlaces'].unique())})
+                details={'unique_counts': list(stats_df['NumPlaces'].unique())},
+                rows_processed=rows_processed,
+                rows_succeeded=0,
+                rows_failed=rows_processed)
         return ValidationResult(ValidationStatus.PASSED,
-                                'NUM_PLACES_CONSISTENT')
-
-    def _validate_range(self, df: pd.DataFrame, column_name: str, config: dict,
-                        validation_name: str) -> ValidationResult:
-        """Helper function to check if values in a column are within a defined range.
-
-    Args:
-        df: The DataFrame to validate.
-        column_name: The name of the column to check.
-        config: A dictionary containing the validation configuration, which may
-          have 'minimum', 'maximum', or 'value' keys.
-        validation_name: The name of the validation rule.
-
-    Returns:
-        A ValidationResult object.
-    """
-        if column_name not in df.columns:
-            return ValidationResult(
-                ValidationStatus.DATA_ERROR,
-                validation_name,
-                message=
-                f"Input data is missing required column: '{column_name}'.")
-        if df.empty:
-            return ValidationResult(ValidationStatus.PASSED, validation_name)
-
-        min_val = config.get('minimum')
-        max_val = config.get('maximum')
-        exact_val = config.get('value')
-
-        for _, row in df.iterrows():
-            value = row[column_name]
-            stat_var = row.get(
-                'StatVar', 'Unknown'
-            )  # Assuming StatVar column exists for better error messages
-
-            if exact_val is not None and value != exact_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    validation_name,
-                    message=
-                    f"StatVar '{stat_var}' has {value} for {column_name}, but expected exactly {exact_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_count': value,
-                        'expected_count': exact_val
-                    })
-            if min_val is not None and value < min_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    validation_name,
-                    message=
-                    f"StatVar '{stat_var}' has {value} for {column_name}, which is below the minimum of {min_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_count': value,
-                        'minimum': min_val
-                    })
-            if max_val is not None and value > max_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    validation_name,
-                    message=
-                    f"StatVar '{stat_var}' has {value} for {column_name}, which is above the maximum of {max_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_count': value,
-                        'maximum': max_val
-                    })
-
-        return ValidationResult(ValidationStatus.PASSED, validation_name)
+                                'NUM_PLACES_CONSISTENT',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_processed,
+                                rows_failed=0)
 
     def validate_num_places_count(self, stats_df: pd.DataFrame,
                                   config: dict) -> ValidationResult:
@@ -282,8 +289,77 @@ class Validator:
     Returns:
       A ValidationResult object.
     """
-        return self._validate_range(stats_df, 'NumPlaces', config,
-                                    'NUM_PLACES_COUNT')
+        if 'NumPlaces' not in stats_df.columns:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'NUM_PLACES_COUNT',
+                message="Input data is missing required column: 'NumPlaces'.")
+        if stats_df.empty:
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'NUM_PLACES_COUNT',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
+
+        min_val = config.get('minimum')
+        max_val = config.get('maximum')
+        exact_val = config.get('value')
+
+        rows_processed = len(stats_df)
+        rows_failed = 0
+        failed_rows_details = []
+
+        for _, row in stats_df.iterrows():
+            value = row['NumPlaces']
+            stat_var = row.get('StatVar', 'Unknown')
+            failed = False
+
+            if exact_val is not None and value != exact_val:
+                failed = True
+                failed_rows_details.append({
+                    'stat_var': stat_var,
+                    'actual_value': value,
+                    'expected_value': exact_val,
+                    'reason': f"Expected exactly {exact_val}"
+                })
+            elif min_val is not None and value < min_val:
+                failed = True
+                failed_rows_details.append({
+                    'stat_var': stat_var,
+                    'actual_value': value,
+                    'minimum': min_val,
+                    'reason': f"Below minimum of {min_val}"
+                })
+            elif max_val is not None and value > max_val:
+                failed = True
+                failed_rows_details.append({
+                    'stat_var': stat_var,
+                    'actual_value': value,
+                    'maximum': max_val,
+                    'reason': f"Above maximum of {max_val}"
+                })
+
+            if failed:
+                rows_failed += 1
+
+        rows_succeeded = rows_processed - rows_failed
+
+        if rows_failed > 0:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'NUM_PLACES_COUNT',
+                message=
+                f"{rows_failed} out of {rows_processed} rows failed the range check.",
+                details={'failed_rows': failed_rows_details},
+                rows_processed=rows_processed,
+                rows_succeeded=rows_succeeded,
+                rows_failed=rows_failed)
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'NUM_PLACES_COUNT',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_succeeded,
+                                rows_failed=rows_failed)
 
     def validate_min_value_check(self, stats_df: pd.DataFrame,
                                  config: dict) -> ValidationResult:
@@ -309,25 +385,47 @@ class Validator:
                 'MIN_VALUE_CHECK',
                 message="Input data is missing required column: 'MinValue'.")
         if stats_df.empty:
-            return ValidationResult(ValidationStatus.PASSED, 'MIN_VALUE_CHECK')
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'MIN_VALUE_CHECK',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
 
         min_val = config['minimum']
+        rows_processed = len(stats_df)
+        rows_failed = 0
+        failed_rows_details = []
+
         for _, row in stats_df.iterrows():
             min_value = row['MinValue']
             stat_var = row.get('StatVar', 'Unknown')
 
             if min_value < min_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    'MIN_VALUE_CHECK',
-                    message=
-                    f"StatVar '{stat_var}' has a minimum value of {min_value}, which is below the required minimum of {min_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_min_value': min_value,
-                        'minimum': min_val
-                    })
-        return ValidationResult(ValidationStatus.PASSED, 'MIN_VALUE_CHECK')
+                rows_failed += 1
+                failed_rows_details.append({
+                    'stat_var': stat_var,
+                    'actual_min_value': min_value,
+                    'minimum': min_val
+                })
+
+        rows_succeeded = rows_processed - rows_failed
+
+        if rows_failed > 0:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'MIN_VALUE_CHECK',
+                message=
+                f"{rows_failed} out of {rows_processed} StatVars failed the minimum value check.",
+                details={'failed_rows': failed_rows_details},
+                rows_processed=rows_processed,
+                rows_succeeded=rows_succeeded,
+                rows_failed=rows_failed)
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'MIN_VALUE_CHECK',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_succeeded,
+                                rows_failed=rows_failed)
 
     def validate_max_date_consistent(self, stats_df: pd.DataFrame,
                                      config: dict) -> ValidationResult:
@@ -346,18 +444,32 @@ class Validator:
                 ValidationStatus.DATA_ERROR,
                 'MAX_DATE_CONSISTENT',
                 message="Input data is missing required column: 'MaxDate'.")
+
+        rows_processed = len(stats_df)
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
-                                    'MAX_DATE_CONSISTENT')
+                                    'MAX_DATE_CONSISTENT',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
+
         unique_dates = stats_df['MaxDate'].nunique()
+
         if unique_dates > 1:
             return ValidationResult(
                 ValidationStatus.FAILED,
                 'MAX_DATE_CONSISTENT',
                 message=
                 f"Found {unique_dates} unique MaxDates where 1 was expected.",
-                details={'unique_dates': list(stats_df['MaxDate'].unique())})
-        return ValidationResult(ValidationStatus.PASSED, 'MAX_DATE_CONSISTENT')
+                details={'unique_dates': list(stats_df['MaxDate'].unique())},
+                rows_processed=rows_processed,
+                rows_succeeded=0,
+                rows_failed=rows_processed)
+        return ValidationResult(ValidationStatus.PASSED,
+                                'MAX_DATE_CONSISTENT',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_processed,
+                                rows_failed=0)
 
     def validate_num_observations_check(self, stats_df: pd.DataFrame,
                                         config: dict) -> ValidationResult:
@@ -374,8 +486,78 @@ class Validator:
     Returns:
       A ValidationResult object.
     """
-        return self._validate_range(stats_df, 'NumObservations', config,
-                                    'NUM_OBSERVATIONS_CHECK')
+        if 'NumObservations' not in stats_df.columns:
+            return ValidationResult(
+                ValidationStatus.DATA_ERROR,
+                'NUM_OBSERVATIONS_CHECK',
+                message=
+                "Input data is missing required column: 'NumObservations'.")
+        if stats_df.empty:
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'NUM_OBSERVATIONS_CHECK',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
+
+        min_val = config.get('minimum')
+        max_val = config.get('maximum')
+        exact_val = config.get('value')
+
+        rows_processed = len(stats_df)
+        rows_failed = 0
+        failed_rows_details = []
+
+        for _, row in stats_df.iterrows():
+            value = row['NumObservations']
+            stat_var = row.get('StatVar', 'Unknown')
+            failed = False
+
+            if exact_val is not None and value != exact_val:
+                failed = True
+                failed_rows_details.append({
+                    'stat_var': stat_var,
+                    'actual_value': value,
+                    'expected_value': exact_val,
+                    'reason': f"Expected exactly {exact_val}"
+                })
+            elif min_val is not None and value < min_val:
+                failed = True
+                failed_rows_details.append({
+                    'stat_var': stat_var,
+                    'actual_value': value,
+                    'minimum': min_val,
+                    'reason': f"Below minimum of {min_val}"
+                })
+            elif max_val is not None and value > max_val:
+                failed = True
+                failed_rows_details.append({
+                    'stat_var': stat_var,
+                    'actual_value': value,
+                    'maximum': max_val,
+                    'reason': f"Above maximum of {max_val}"
+                })
+
+            if failed:
+                rows_failed += 1
+
+        rows_succeeded = rows_processed - rows_failed
+
+        if rows_failed > 0:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'NUM_OBSERVATIONS_CHECK',
+                message=
+                f"{rows_failed} out of {rows_processed} rows failed the range check.",
+                details={'failed_rows': failed_rows_details},
+                rows_processed=rows_processed,
+                rows_succeeded=rows_succeeded,
+                rows_failed=rows_failed)
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'NUM_OBSERVATIONS_CHECK',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_succeeded,
+                                rows_failed=rows_failed)
 
     def validate_unit_consistency(self, stats_df: pd.DataFrame,
                                   config: dict) -> ValidationResult:
@@ -394,19 +576,32 @@ class Validator:
                 ValidationStatus.DATA_ERROR,
                 'UNIT_CONSISTENCY_CHECK',
                 message="Input data is missing required column: 'Units'.")
+
+        rows_processed = len(stats_df)
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
-                                    'UNIT_CONSISTENCY_CHECK')
+                                    'UNIT_CONSISTENCY_CHECK',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
+
         unique_units = stats_df['Units'].nunique()
+
         if unique_units > 1:
             return ValidationResult(
                 ValidationStatus.FAILED,
                 'UNIT_CONSISTENCY_CHECK',
                 message=
                 f"Found {unique_units} unique units where 1 was expected.",
-                details={'unique_units': list(stats_df['Units'].unique())})
+                details={'unique_units': list(stats_df['Units'].unique())},
+                rows_processed=rows_processed,
+                rows_succeeded=0,
+                rows_failed=rows_processed)
         return ValidationResult(ValidationStatus.PASSED,
-                                'UNIT_CONSISTENCY_CHECK')
+                                'UNIT_CONSISTENCY_CHECK',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_processed,
+                                rows_failed=0)
 
     def validate_max_value_check(self, stats_df: pd.DataFrame,
                                  config: dict) -> ValidationResult:
@@ -432,22 +627,44 @@ class Validator:
                 'MAX_VALUE_CHECK',
                 message="Input data is missing required column: 'MaxValue'.")
         if stats_df.empty:
-            return ValidationResult(ValidationStatus.PASSED, 'MAX_VALUE_CHECK')
+            return ValidationResult(ValidationStatus.PASSED,
+                                    'MAX_VALUE_CHECK',
+                                    rows_processed=0,
+                                    rows_succeeded=0,
+                                    rows_failed=0)
 
         max_val = config['maximum']
+        rows_processed = len(stats_df)
+        rows_failed = 0
+        failed_rows_details = []
+
         for _, row in stats_df.iterrows():
             max_value = row['MaxValue']
             stat_var = row.get('StatVar', 'Unknown')
 
             if max_value > max_val:
-                return ValidationResult(
-                    ValidationStatus.FAILED,
-                    'MAX_VALUE_CHECK',
-                    message=
-                    f"StatVar '{stat_var}' has a maximum value of {max_value}, which is above the allowed maximum of {max_val}.",
-                    details={
-                        'stat_var': stat_var,
-                        'actual_max_value': max_value,
-                        'maximum': max_val
-                    })
-        return ValidationResult(ValidationStatus.PASSED, 'MAX_VALUE_CHECK')
+                rows_failed += 1
+                failed_rows_details.append({
+                    'stat_var': stat_var,
+                    'actual_max_value': max_value,
+                    'maximum': max_val
+                })
+
+        rows_succeeded = rows_processed - rows_failed
+
+        if rows_failed > 0:
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'MAX_VALUE_CHECK',
+                message=
+                f"{rows_failed} out of {rows_processed} StatVars failed the maximum value check.",
+                details={'failed_rows': failed_rows_details},
+                rows_processed=rows_processed,
+                rows_succeeded=rows_succeeded,
+                rows_failed=rows_failed)
+
+        return ValidationResult(ValidationStatus.PASSED,
+                                'MAX_VALUE_CHECK',
+                                rows_processed=rows_processed,
+                                rows_succeeded=rows_succeeded,
+                                rows_failed=rows_failed)
