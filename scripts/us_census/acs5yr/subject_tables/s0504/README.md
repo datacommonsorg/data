@@ -1,8 +1,8 @@
-US census ACS5YR S0101 Subject Table import
-This subject table gives the population count on health insurance coverage constrained by age, sex, race, nativity, disability, household income, … among others.
-
-Years: 2010-2023 Geo : All geographic levels from country to census tracts in the US.
+US census ACS5YR S0504 Subject Table import
+This subject table gives the Selected Characteristics of the Foreign-Born Population by Region of Birth: Africa, Northern America, and Oceania
+Years: 2010-2023 Geo : All geographic levels upto country in the US.
 
 Notes:
 
 Skipping percentages and retaining only corresponding counts.
+
