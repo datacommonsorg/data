@@ -1,3 +1,4 @@
+
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +21,7 @@ from unittest import mock
 import subprocess
 import tempfile
 import os
+import json
 
 from app.executor import import_executor
 from app import configs
@@ -93,6 +95,35 @@ class ImportExecutorTest(unittest.TestCase):
                         config=config)
                     absolute_import_dir = os.path.join(repo_dir, 'absolute_dir')
                     os.makedirs(absolute_import_dir)
+                    importer._import_one(
+                        repo_dir=repo_dir,
+                        relative_import_dir='relative_dir',
+                        absolute_import_dir=absolute_import_dir,
+                        import_spec={'import_name': 'import_name',
+                                     'curator_emails': [],
+                                     'scripts': ['script.py']})
+            self.assertEqual('failed', context.exception.result.status)
+            self.assertIn('error message', context.exception.result.message)
+
+    def test_import_one_integration_failure(self):
+        """Tests that _import_one catches exceptions and returns a failed status."""
+        with tempfile.TemporaryDirectory() as repo_dir:
+            with self.assertRaises(import_executor.ExecutionError) as context:
+                config = configs.ExecutorConfig()
+                config.venv_create_timeout = 20
+                config.user_script_timeout = 20
+                with tempfile.TemporaryDirectory() as mnt_dir:
+                    config.gcs_volume_mount_dir = mnt_dir
+                    importer = import_executor.ImportExecutor(
+                        uploader=mock.MagicMock(),
+                        github=mock.MagicMock(),
+                        config=config)
+                    absolute_import_dir = os.path.join(repo_dir, 'absolute_dir')
+                    os.makedirs(absolute_import_dir)
+                    with open(os.path.join(absolute_import_dir, 'script.py'), 'w') as f:
+                        f.write('import sys\n')
+                        f.write('sys.stderr.write("error message")\n')
+                        f.write('exit(1)\n')
                     importer._import_one(
                         repo_dir=repo_dir,
                         relative_import_dir='relative_dir',
