@@ -1,5 +1,0 @@
-parameter,value
-header_rows,1
-mapped_rows,1
-mapped_columns,5
-output_columns,"observationDate,observationAbout,value,observationPeriod"

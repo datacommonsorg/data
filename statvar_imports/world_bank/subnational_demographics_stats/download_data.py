@@ -129,16 +129,16 @@ def unzip_inputfile(inputdir):
         
         for filename in os.listdir(inputdir):
             if "_Data" in filename and str(filename).endswith(".csv"):
-                os.rename(os.path.join(inputdir, filename), os.path.join(inputdir, "subnational_input.csv"))
+                os.rename(os.path.join(inputdir, filename), os.path.join(inputdir, "wb_subnational_input.csv"))
 
     except Exception as e:
         logging.fatal(f"An error occurred while unzipping the file: {e}")
 
 def preprocess(inputdir):
     try:
-        df = pd.read_csv(os.path.join(inputdir, "subnational_input.csv"), encoding='latin1')
+        df = pd.read_csv(os.path.join(inputdir, "wb_subnational_input.csv"), encoding='latin1')
         df['Country Name'] = df["Country Name"].str.replace(",","-")
-        df.to_csv(os.path.join(inputdir, "subnational_input.csv"), index=False, encoding='utf-8')
+        df.to_csv(os.path.join(inputdir, "wb_subnational_input.csv"), index=False, encoding='utf-8')
     except Exception as e:
         logging.fatal(f"An error occurred while preprocessing the file: {e}")
     
