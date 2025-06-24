@@ -1,4 +1,3 @@
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -91,9 +90,15 @@ class ExecutionError(Exception):
 
     def __init__(self,
                  message: str,
+                 import_name: str = '',
+                 step: str = '',
+                 original_exception: Exception = None,
                  imports_executed: List[str] = None,
                  status: str = 'failed'):
         super().__init__(message)
+        self.import_name = import_name
+        self.step = step
+        self.original_exception = original_exception
         self.result = ExecutionResult(status, imports_executed or [], message)
 
 
@@ -996,9 +1001,9 @@ def _construct_process_message(message: str,
                f'[Subprocess command]: {command}\n'
                f'[Subprocess return code]: {process.returncode}')
     if process.stdout:
-        message += f'\n[Subprocess stdout]:\n{process.stdout.decode("utf-8")}'
+        message += f'\n[Subprocess stdout]:\n{process.stdout}'
     if process.stderr:
-        message += f'\n[Subprocess stderr]:\n{process.stderr.decode("utf-8")}'
+        message += f'\n[Subprocess stderr]:\n{process.stderr}'
     return message
 
 
