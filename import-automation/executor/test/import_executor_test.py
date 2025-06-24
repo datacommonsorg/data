@@ -19,9 +19,10 @@ import unittest
 from unittest import mock
 import subprocess
 import tempfile
+import os
 
 from app.executor import import_executor
-
+from app import configs
 
 class ImportExecutorTest(unittest.TestCase):
 
@@ -73,31 +74,31 @@ class ImportExecutorTest(unittest.TestCase):
         self.assertIn('Exception', result.message)
         self.assertIn('Traceback', result.message)
 
-    def test_construct_process_message(self):
-        process = subprocess.run('printf "out" & >&2 printf "err" & exit 1',
-                                 shell=True,
-                                 text=True,
-                                 capture_output=True)
-        message = import_executor._construct_process_message('message', process)
-        expected = (
-            'message\n'
-            '[Subprocess command]: printf "out" & >&2 printf "err" & exit 1\n'
-            '[Subprocess return code]: 1\n'
-            '[Subprocess stdout]:\n'
-            'out\n'
-            '[Subprocess stderr]:\n'
-            'err')
-        self.assertEqual(expected, message)
+    @mock.patch('app.executor.import_executor._run_user_script')
+    def test_import_one_failure(self, mock_run_user_script):
+        """Tests that _import_one catches exceptions and returns a failed status."""
+        mock_run_user_script.return_value = subprocess.CompletedProcess(
+            args=[''], returncode=1, stdout=b'', stderr=b'error message')
 
-    def test_construct_process_message_no_output(self):
-        """Tests that _construct_process_message does not append
-        empty stdout and stderr to the message."""
-        process = subprocess.run('exit 0',
-                                 shell=True,
-                                 text=True,
-                                 capture_output=True)
-        message = import_executor._construct_process_message('message', process)
-        expected = ('message\n'
-                    '[Subprocess command]: exit 0\n'
-                    '[Subprocess return code]: 0')
-        self.assertEqual(expected, message)
+        with tempfile.TemporaryDirectory() as repo_dir:
+            with self.assertRaises(import_executor.ExecutionError) as context:
+                config = configs.ExecutorConfig()
+                config.venv_create_timeout = 20
+                config.user_script_timeout = 20
+                with tempfile.TemporaryDirectory() as mnt_dir:
+                    config.gcs_volume_mount_dir = mnt_dir
+                    importer = import_executor.ImportExecutor(
+                        uploader=mock.MagicMock(),
+                        github=mock.MagicMock(),
+                        config=config)
+                    absolute_import_dir = os.path.join(repo_dir, 'absolute_dir')
+                    os.makedirs(absolute_import_dir)
+                    importer._import_one(
+                        repo_dir=repo_dir,
+                        relative_import_dir='relative_dir',
+                        absolute_import_dir=absolute_import_dir,
+                        import_spec={'import_name': 'import_name',
+                                     'curator_emails': [],
+                                     'scripts': ['script.py']})
+            self.assertEqual('failed', context.exception.result.status)
+            self.assertIn('error message', context.exception.result.message)

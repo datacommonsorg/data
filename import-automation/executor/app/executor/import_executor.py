@@ -1,3 +1,4 @@
+
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -88,9 +89,12 @@ class ExecutionError(Exception):
       result: ExecutionResult object describing the result of the execution.
   """
 
-    def __init__(self, execution_result: ExecutionResult):
-        super().__init__()
-        self.result = execution_result
+    def __init__(self,
+                 message: str,
+                 imports_executed: List[str] = None,
+                 status: str = 'failed'):
+        super().__init__(message)
+        self.result = ExecutionResult(status, imports_executed or [], message)
 
 
 class ImportExecutor:
@@ -508,7 +512,12 @@ class ImportExecutor:
                     env=script_env,
                 )
                 _log_process(process=process)
-                process.check_returncode()
+                try:
+                    process.check_returncode()
+                except subprocess.CalledProcessError as exc:
+                    raise ExecutionError(
+                        _construct_process_message('User script failed',
+                                                   exc)) from exc
 
     def _import_one_helper(
         self,
@@ -987,9 +996,9 @@ def _construct_process_message(message: str,
                f'[Subprocess command]: {command}\n'
                f'[Subprocess return code]: {process.returncode}')
     if process.stdout:
-        message += f'\n[Subprocess stdout]:\n{process.stdout}'
+        message += f'\n[Subprocess stdout]:\n{process.stdout.decode("utf-8")}'
     if process.stderr:
-        message += f'\n[Subprocess stderr]:\n{process.stderr}'
+        message += f'\n[Subprocess stderr]:\n{process.stderr.decode("utf-8")}'
     return message
 
 
