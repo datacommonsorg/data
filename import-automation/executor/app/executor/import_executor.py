@@ -1,4 +1,3 @@
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -51,6 +50,7 @@ from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
 from app.service import import_service
+from app.import_tracker import ImportTracker, ImportStatus
 from google.cloud import storage
 
 # Email address for status messages.
@@ -311,6 +311,10 @@ class ImportExecutor:
         import_name = import_spec['import_name']
         absolute_import_name = import_target.get_absolute_import_name(
             relative_import_dir, import_name)
+        tracker = ImportTracker(import_name=absolute_import_name,
+                                status=ImportStatus.STARTED)
+        logging.info(tracker.to_json())
+
         curator_emails = import_spec['curator_emails']
         dc_email_aliases = [_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR]
         time_start = time.time()
@@ -324,8 +328,14 @@ class ImportExecutor:
             time_taken = '{0:.2f}'.format(time.time() - time_start)
             logging.info(f'Import Automation Success - {import_name}')
             logging.info(f'Script execution time taken = {time_taken}s')
+            tracker.status = ImportStatus.SUCCESS
+            tracker.message = f'Import completed in {time_taken}s'
+            logging.info(tracker.to_json())
 
         except Exception as exc:
+            tracker.status = ImportStatus.FAILURE
+            tracker.message = str(exc)
+            logging.error(tracker.to_json())
             if self.notifier and not self.config.disable_email_notifications:
                 msg = f'Failed Import: {import_name} ({absolute_import_name})\n\n'
                 msg += f'{_SEE_LOGS_MESSAGE}\n\n'
@@ -996,9 +1006,9 @@ def _construct_process_message(message: str,
                f'[Subprocess command]: {command}\n'
                f'[Subprocess return code]: {process.returncode}')
     if process.stdout:
-        message += f'\n[Subprocess stdout]:\n{process.stdout.decode("utf-8")}'
+        message += f'\n[Subprocess stdout]:\n{process.stdout}'
     if process.stderr:
-        message += f'\n[Subprocess stderr]:\n{process.stderr.decode("utf-8")}'
+        message += f'\n[Subprocess stderr]:\n{process.stderr}'
     return message
 
 
