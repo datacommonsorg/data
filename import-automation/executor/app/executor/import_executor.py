@@ -1,3 +1,4 @@
+
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -218,17 +219,12 @@ class ImportExecutor:
             for spec in manifest['import_specifications']:
                 import_name_in_spec = spec['import_name']
                 if import_name in ('all', import_name_in_spec):
-                    try:
-                        self._import_one(
-                            repo_dir=repo_dir,
-                            relative_import_dir=import_dir,
-                            absolute_import_dir=absolute_import_dir,
-                            import_spec=spec,
-                        )
-                    except Exception:
-                        raise ExecutionError(
-                            ExecutionResult('failed', executed_imports,
-                                            traceback.format_exc()))
+                    self._import_one(
+                        repo_dir=repo_dir,
+                        relative_import_dir=import_dir,
+                        absolute_import_dir=absolute_import_dir,
+                        import_spec=spec,
+                    )
                     executed_imports.append(
                         import_target.get_absolute_import_name(
                             import_dir, import_name_in_spec))
@@ -277,19 +273,12 @@ class ImportExecutor:
 
             executed_imports = []
             for relative_dir, spec in imports_to_execute:
-                try:
-                    self._import_one(
-                        repo_dir=repo_dir,
-                        relative_import_dir=relative_dir,
-                        absolute_import_dir=os.path.join(
-                            repo_dir, relative_dir),
-                        import_spec=spec,
-                    )
-
-                except Exception:
-                    raise ExecutionError(
-                        ExecutionResult('failed', executed_imports,
-                                        traceback.format_exc()))
+                self._import_one(
+                    repo_dir=repo_dir,
+                    relative_import_dir=relative_dir,
+                    absolute_import_dir=os.path.join(repo_dir, relative_dir),
+                    import_spec=spec,
+                )
                 absolute_name = import_target.get_absolute_import_name(
                     relative_dir, spec['import_name'])
                 executed_imports.append(absolute_name)
@@ -331,17 +320,22 @@ class ImportExecutor:
             logging.info(f'Script execution time taken = {time_taken}s')
 
         except Exception as exc:
-            if self.notifier and not self.config.disable_email_notifications:
-                msg = f'Failed Import: {import_name} ({absolute_import_name})\n\n'
-                msg += f'{_SEE_LOGS_MESSAGE}\n\n'
-                msg += f'Stack Trace: \n'
-                msg += f'{exc}'
-                self.notifier.send(
-                    subject=f'Import Automation Failure - {import_name}',
-                    body=msg,
-                    receiver_addresses=dc_email_aliases + curator_emails,
-                )
-            raise exc
+            if isinstance(exc, ExecutionError):
+                # The exception is already an ExecutionError, so just re-raise it.
+                raise exc
+
+            # The exception is not an ExecutionError, so wrap it in an
+            # ExecutionError with a more informative message.
+            message = (
+                f'An unexpected error occurred while running import: '
+                f'{absolute_import_name}\n'
+                f'Step: {traceback.extract_tb(exc.__traceback__)[-1].name}\n'
+                f'Error: {exc}')
+            raise ExecutionError(
+                message=message,
+                import_name=absolute_import_name,
+                step=traceback.extract_tb(exc.__traceback__)[-1].name,
+                original_exception=exc) from exc
 
     def _get_latest_version(self, import_dir: str) -> str:
         """
