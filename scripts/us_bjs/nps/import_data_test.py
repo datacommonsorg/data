@@ -19,8 +19,8 @@ import sys
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../nps'))
-import import_data
-import preprocess_data
+from .import_data import save_csv
+from .preprocess_data import preprocess_df
 
 
 class TestPreprocess(unittest.TestCase):
@@ -32,8 +32,7 @@ class TestPreprocess(unittest.TestCase):
         expected_path = os.path.join(module_dir, "test/expected_data.csv")
 
         input_df = pd.read_csv(input_path, delimiter='\t')
-        import_data.save_csv(preprocess_data.preprocess_df(input_df),
-                             output_path)
+        save_csv(preprocess_df(input_df), output_path)
 
         # Get the content from the processed file.
         with open(output_path + ".csv", 'r+') as actual_f:
