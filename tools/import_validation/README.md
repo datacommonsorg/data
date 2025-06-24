@@ -8,12 +8,12 @@ The framework is designed to be a flexible and extensible tool for ensuring the 
 
 ## Running the Framework
 
-The main entry point for the framework is `import_validation.py`. It is a command-line tool that takes a configuration file and the paths to the summary data files as input.
+The main entry point for the framework is `runner.py`. It is a command-line tool that takes a configuration file and the paths to the summary data files as input.
 
 ### Usage
 
 ```bash
-python3 -m tools.import_validation.import_validation \
+python3 -m tools.import_validation.runner \
     --validation_config=<path_to_your_config.json> \
     --stats_summary=<path_to_your_stats_summary.csv> \
     --differ_output=<path_to_your_differ_output.csv> \
@@ -29,71 +29,116 @@ The script will exit with a status code of `1` if any validation fails, and `0` 
 
 ## Configuration
 
-The behavior of the validation framework is controlled by a JSON configuration file. This file contains a list of validation objects, where each object defines a specific check to be performed.
+The behavior of the validation framework is controlled by a JSON configuration file. This file uses a structured schema to define a series of validation rules.
+
+### Top-Level Structure
+
+The configuration is a JSON object with two main sections:
+
+- `schema_version`: The version of the configuration schema (e.g., "1.0").
+- `rules`: A list of validation rule objects to be executed.
+
+```json
+{
+    "schema_version": "1.0",
+    "rules": [
+        // Your validation rules go here
+    ]
+}
+```
+
+### Rule Definition
+
+Each object in the `rules` list defines a single validation check with the following keys:
+
+- `rule_id`: A unique, human-readable identifier for the rule.
+- `validator`: The name of the validator to execute (see the table below for supported validators).
+- `scope`: An object that defines the data to be validated.
+- `params`: A dictionary of parameters to pass to the validator.
+
+### Scoping and Filtering
+
+The `scope` object specifies which data to run the validation on. It has two main parts:
+
+- `data_source`: The key for the data source to use (`"stats"` or `"differ"`).
+- `variables`: An optional filter to select a subset of StatVars from the data source.
+
+The `variables` object can contain any of the following keys:
+
+- `dcids`: A list of exact StatVar DCIDs to select.
+- `regex`: A list of regular expressions to match against StatVar DCIDs.
+- `contains_all`: A list of substrings that must all be present in the StatVar DCID.
+
+**Note:** When multiple filter types are provided (`dcids`, `regex`, `contains_all`), the results are combined with a logical OR (union).
 
 ### Example Configuration
 
+Here is an example of a complete configuration file:
+
 ```json
-[
-    {
-        "validation": "MAX_DATE_LATEST"
-    },
-    {
-        "validation": "DELETED_COUNT",
-        "threshold": 0
-    },
-    {
-        "validation": "MAX_VALUE_CHECK",
-        "name": "Check for values over 100 in Percent StatVars",
-        "maximum": 100,
-        "variableMeasured": [
-            ".*Percent.*"
-        ]
-    },
-    {
-        "validation": "MAX_VALUE_CHECK",
-        "name": "Check for values over 1000 in Count_Person",
-        "maximum": 1000,
-        "variableMeasured": [
-            "Count_Person"
-        ]
-    }
-]
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_latest_date_for_all",
+            "validator": "MAX_DATE_LATEST",
+            "scope": {
+                "data_source": "stats"
+            },
+            "params": {}
+        },
+        {
+            "rule_id": "check_deleted_points_threshold",
+            "validator": "DELETED_COUNT",
+            "scope": {
+                "data_source": "differ"
+            },
+            "params": {
+                "threshold": 10
+            }
+        },
+        {
+            "rule_id": "check_percent_max_value",
+            "validator": "MAX_VALUE_CHECK",
+            "scope": {
+                "data_source": "stats",
+                "variables": {
+                    "contains_all": ["Percent"]
+                }
+            },
+            "params": {
+                "maximum": 100
+            }
+        }
+    ]
+}
 ```
+
 
 ### Supported Validations
 
 The following validations are currently supported:
 
-| Validation Name           | Description                                                              | Required Data     | Configuration Parameters                               |
+| Validator Name            | Description                                                              | Required Data     | `params` Configuration                                 |
 | ------------------------- | ------------------------------------------------------------------------ | ----------------- | ------------------------------------------------------ |
-| `MAX_DATE_LATEST`         | Checks that the latest date in the data is from the current year.        | `stats_summary`   | None                                                   |
-| `MAX_DATE_CONSISTENT`     | Checks that the latest date is the same for all StatVars.                | `stats_summary`   | None                                                   |
-| `DELETED_COUNT`           | Checks that the total number of deleted points is within a threshold.    | `differ_output`   | `threshold` (integer, defaults to 0)                   |
-| `MODIFIED_COUNT`          | Checks that the number of modified points is the same for all StatVars.  | `differ_output`   | None                                                   |
-| `ADDED_COUNT`             | Checks that the number of added points is the same for all StatVars.     | `differ_output`   | None                                                   |
-| `UNMODIFIED_COUNT`        | Checks that the number of unmodified points is the same for all StatVars. | `differ_output`   | None                                                   |
-| `NUM_PLACES_CONSISTENT`   | Checks that the number of places is the same for all StatVars.           | `stats_summary`   | None                                                   |
-| `NUM_PLACES_COUNT`        | Checks that the number of places is within a defined range.              | `stats_summary`   | `minimum`, `maximum`, or `value` (integer)             |
-| `NUM_OBSERVATIONS_CHECK`  | Checks that the number of observations is within a defined range.        | `stats_summary`   | `minimum`, `maximum`, or `value` (integer)             |
-| `UNIT_CONSISTENCY_CHECK`  | Checks that the unit is the same for all StatVars.                       | `stats_summary`   | None                                                   |
-| `MIN_VALUE_CHECK`         | Checks that the minimum value is not below a defined minimum.            | `stats_summary`   | `minimum` (integer or float)                           |
-| `MAX_VALUE_CHECK`         | Checks that the maximum value is not above a defined maximum.            | `stats_summary`   | `maximum` (integer or float)                           |
-
-### Filtering by StatVar
-
-All validations can be applied to a subset of StatVars by adding a `variableMeasured` key to the validation object. This key takes a list of strings, which can be:
-
-- **An exact StatVar DCID:** e.g., `"Count_Person"`
-- **A regular expression:** e.g., `".*Percent.*"` to match all StatVars containing the word "Percent".
-
-**Note:** Filtering by property-value dictionaries is not yet fully supported.
+| `MAX_DATE_LATEST`         | Checks that the latest date in the data is from the current year.        | `stats`           | None                                                   |
+| `MAX_DATE_CONSISTENT`     | Checks that the latest date is the same for all StatVars.                | `stats`           | None                                                   |
+| `DELETED_COUNT`           | Checks that the total number of deleted points is within a threshold.    | `differ`          | `threshold` (integer, defaults to 0)                   |
+| `MODIFIED_COUNT`          | Checks that the number of modified points is the same for all StatVars.  | `differ`          | None                                                   |
+| `ADDED_COUNT`             | Checks that the number of added points is the same for all StatVars.     | `differ`          | None                                                   |
+| `UNMODIFIED_COUNT`        | Checks that the number of unmodified points is the same for all StatVars. | `differ`          | None                                                   |
+| `NUM_PLACES_CONSISTENT`   | Checks that the number of places is the same for all StatVars.           | `stats`           | None                                                   |
+| `NUM_PLACES_COUNT`        | Checks that the number of places is within a defined range.              | `stats`           | `minimum`, `maximum`, or `value` (integer)             |
+| `NUM_OBSERVATIONS_CHECK`  | Checks that the number of observations is within a defined range.        | `stats`           | `minimum`, `maximum`, or `value` (integer)             |
+| `UNIT_CONSISTENCY_CHECK`  | Checks that the unit is the same for all StatVars.                       | `stats`           | None                                                   |
+| `MIN_VALUE_CHECK`         | Checks that the minimum value is not below a defined minimum.            | `stats`           | `minimum` (integer or float)                           |
+| `MAX_VALUE_CHECK`         | Checks that the maximum value is not above a defined maximum.            | `stats`           | `maximum` (integer or float)                           |
 
 ## Output
 
-The framework generates a CSV file (`validation_output.csv` by default) with the results of each validation, orchestrated by the `ReportGenerator` class. The file contains the following columns:
+The framework generates a CSV file (specified by the `--validation_output` flag) with the results of each validation, orchestrated by the `ReportGenerator` class. The file contains the following columns:
 
-- `ValidationName`: The name of the validation that was run.
+- `RuleID`: The unique ID of the rule that was run.
 - `Status`: The result of the validation (`PASSED`, `FAILED`, `CONFIG_ERROR`, or `DATA_ERROR`).
 - `Message`: A human-readable message describing the outcome.
 - `Details`: A JSON string containing detailed context, especially on failures.
