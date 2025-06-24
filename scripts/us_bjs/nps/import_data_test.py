@@ -29,7 +29,8 @@ class TestPreprocess(unittest.TestCase):
         expected_path = os.path.join(module_dir, "test/expected_data.csv")
 
         input_df = pd.read_csv(input_path, delimiter='\t')
-        import_data.save_csv(preprocess_data.preprocess_df(input_df), output_path)
+        import_data.save_csv(preprocess_data.preprocess_df(input_df),
+                             output_path)
 
         # Get the content from the processed file.
         with open(output_path + ".csv", 'r+') as actual_f:
