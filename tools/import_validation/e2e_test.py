@@ -142,6 +142,50 @@ class TestImportValidationE2E(unittest.TestCase):
         self.assertIn("Flag --stats_summary must have a value other than None",
                       result.stderr)
 
+    def test_e2e_variables_filtering(self):
+        """Tests that the runner correctly applies the 'variables' filter."""
+        # 1. Create a config that filters for a specific StatVar
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "num_places_consistent_filtered",
+                        "validator": "NUM_PLACES_CONSISTENT",
+                        "scope": {
+                            "data_source": "stats",
+                            "variables": {
+                                "dcids": ["sv1", "sv2"]
+                            }
+                        },
+                        "params": {}
+                    }]
+                }, f)
+        # 2. Create data where the filtered StatVars pass, but the unfiltered
+        #    ones would fail.
+        pd.DataFrame({
+            'StatVar': ['sv1', 'sv2', 'sv3', 'sv4'],
+            'NumPlaces': [10, 10, 20, 30]  # Consistent for sv1/sv2
+        }).to_csv(self.stats_path, index=False)
+
+        # 3. Run the script
+        result = subprocess.run([
+            'python3', '-m', 'tools.import_validation.runner',
+            f'--validation_config={self.config_path}',
+            f'--stats_summary={self.stats_path}',
+            f'--differ_output={self.differ_path}',
+            f'--validation_output={self.output_path}'
+        ],
+                                capture_output=True,
+                                text=True,
+                                cwd=self.project_root)
+
+        # 4. Assert success, because the failing StatVars were filtered out
+        self.assertEqual(result.returncode, 0,
+                         f"Script failed with stderr: {result.stderr}")
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -18,7 +18,7 @@ import re
 
 
 def filter_dataframe(df: pd.DataFrame,
-                     statvar_dcids: list[str] = None,
+                     dcids: list[str] = None,
                      regex_patterns: list[str] = None,
                      contains_all: list[str] = None) -> pd.DataFrame:
     """Filters a DataFrame based on a set of explicit, disjunctive criteria.
@@ -29,7 +29,7 @@ def filter_dataframe(df: pd.DataFrame,
 
     Args:
         df: The DataFrame to filter. It must contain a 'StatVar' column.
-        statvar_dcids: A list of exact StatVar DCIDs to match.
+        dcids: A list of exact StatVar DCIDs to match.
         regex_patterns: A list of regex patterns to match against the 'StatVar'
           column.
         contains_all: A list of substrings that must ALL be present in the
@@ -51,8 +51,8 @@ def filter_dataframe(df: pd.DataFrame,
 
         **Single Filter Examples:**
 
-        >>> # 1. Filter by a specific DCID
-        >>> filter_dataframe(df, statvar_dcids=['Count_Person_Male'])
+        >>> # 1. Filter by a specific StatVar DCID
+        >>> filter_dataframe(df, dcids=['Count_Person_Male'])
                       StatVar
         0  Count_Person_Male
 
@@ -69,24 +69,24 @@ def filter_dataframe(df: pd.DataFrame,
 
         **Multiple Filter Example (Union):**
 
-        >>> # 4. Filter by DCID OR regex (union of results)
+        >>> # 4. Filter by StatVar DCID OR regex (union of results)
         >>> filter_dataframe(
         ...     df,
-        ...     statvar_dcids=['Count_Person_Male'],
+        ...     dcids=['Count_Person_Male'],
         ...     regex_patterns=['^Amount_.*']
         ... )
                                StatVar
         0           Count_Person_Male
         3      Amount_Debt_Government
     """
-    if not statvar_dcids and not regex_patterns and not contains_all:
+    if not dcids and not regex_patterns and not contains_all:
         return df
 
     # This will hold the indices of all rows that match at least one filter
     matching_indices = set()
 
-    if statvar_dcids:
-        matching_indices.update(df[df['StatVar'].isin(statvar_dcids)].index)
+    if dcids:
+        matching_indices.update(df[df['StatVar'].isin(dcids)].index)
 
     if regex_patterns:
         for pattern in regex_patterns:

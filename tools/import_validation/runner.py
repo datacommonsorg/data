@@ -129,11 +129,12 @@ class ValidationRunner:
             df = self.dataframes[scope['data_source']]
 
             if 'variables' in scope:
-                df = filter_dataframe(df, scope['variables'])
-
-            # TODO: Implement groupBy
-            # if 'groupBy' in scope:
-            #     ...
+                variables_config = scope['variables']
+                df = filter_dataframe(
+                    df,
+                    dcids=variables_config.get('dcids'),
+                    regex_patterns=variables_config.get('regex'),
+                    contains_all=variables_config.get('contains_all'))
 
             result = validation_func(df, rule['params'])
             result.name = rule['rule_id']

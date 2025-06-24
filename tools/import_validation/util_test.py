@@ -28,7 +28,7 @@ class TestFilterDataFrame(unittest.TestCase):
                 'Count_Person_AgeU18'
             ]
         })
-        filtered_df = filter_dataframe(df, statvar_dcids=['Count_Person_Male'])
+        filtered_df = filter_dataframe(df, dcids=['Count_Person_Male'])
         self.assertEqual(len(filtered_df), 1)
         self.assertEqual(filtered_df.iloc[0]['StatVar'], 'Count_Person_Male')
 
@@ -94,7 +94,7 @@ class TestFilterDataFrame(unittest.TestCase):
             ]
         })
         filtered_df = filter_dataframe(df,
-                                       statvar_dcids=['Amount_Debt_Government'],
+                                       dcids=['Amount_Debt_Government'],
                                        regex_patterns=['Count_Person_Male'])
         self.assertEqual(len(filtered_df), 2)
         self.assertIn('Count_Person_Male', filtered_df['StatVar'].values)
@@ -103,7 +103,7 @@ class TestFilterDataFrame(unittest.TestCase):
     def test_filter_with_non_matching_dcid(self):
         """Tests that a non-matching DCID returns an empty DataFrame."""
         df = pd.DataFrame({'StatVar': ['Count_Person_Male']})
-        filtered_df = filter_dataframe(df, statvar_dcids=['Non_Existent_DCID'])
+        filtered_df = filter_dataframe(df, dcids=['Non_Existent_DCID'])
         self.assertTrue(filtered_df.empty)
 
     def test_filter_with_non_matching_regex(self):
