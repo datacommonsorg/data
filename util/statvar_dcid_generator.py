@@ -285,6 +285,12 @@ _PREPEND_APPEND_REPLACE_MAP = {
     'lendingEntity': {
         'prepend': 'Lender',
     },
+    'fromCurrency': {
+        'prepend': 'FromCurrency_',
+    },
+    'toCurrency': {
+        'prepend': 'ToCurrency_',
+    },
     'internetUsageLocation': {
         'prepend': 'InternetUsageAt',
     },
