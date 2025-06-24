@@ -2,18 +2,19 @@
   "import_specifications": [
     {
       "import_name": "USCensusPEP_Sex",
-      "curator_emails": ["support@datacommons.org"],
+      "curator_emails": ["kuru@google.com"],
       "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
       "provenance_description": "US Census Population Estimates Program (PEP).",
-      "scripts": ["process.py"],
-      "source_files": ["input_files/*"],
+      "scripts": ["process.py --config_path=unresolved_mcf/us_census/pep/population_estimate_by_sex/skip_url.json"],
+      "source_files": ["gcs_output/us_pep_sex_source_files/*"],
       "import_inputs": [
         {
           "template_mcf": "output/population_estimate_sex.tmcf",
           "cleaned_csv": "output/population_estimate_sex.csv"
         }
       ],
-      "cron_schedule": "0 03 * * 1"
+      "cron_schedule": "0 03 * * 1",
+      "cleanup_gcs_volume_mount": false
     }
   ]
 }

@@ -1,0 +1,17 @@
+mapped_rows,1,,,,,
+mapped_columns,9,,,,,
+key,p1,v1,p2,v2,p3,v3
+County,observationAbout,{Data},,,,
+Census Year,observationDate,{Number},measuredProperty,count,populationType,Person
+VALUE,value,{Number},,,,
+Roman Catholic,religion,RomanCatholicism,,,,
+"Church of Ireland (incl. Protestant)",religion,ChurchOfIrelandIncludingProtestant,,,,
+Presbyterian,religion,Presbyterian,,,,
+"Methodist, Wesleyan",religion,WesleyanMethodist,,,,
+Jewish,religion,Judaism,,,,
+"Other stated religion (nec)",religion,Ireland_OtherStatedReligion,,,,
+No religion,religion,Irreligion,,,,
+Not stated,religion,ReligionNotStated,,,,
+All religions,#ignore,Not_required_for_the_dataset,,,,
+Percentage change since previous census,#ignore,Not_required_for_the_dataset,,,,
+Actual change since previous census,#ignore,Not_required_for_the_dataset,,,,

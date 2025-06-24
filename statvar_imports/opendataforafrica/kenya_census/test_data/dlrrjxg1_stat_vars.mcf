@@ -1,0 +1,188 @@
+Node: dcid:Count_MortalityEvent
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
+Node: dcid:Count_MortalityEvent_15To24Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 24 Years]
+
+Node: dcid:Count_MortalityEvent_15To24Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 24 Years]
+gender: dcid:Female
+
+Node: dcid:Count_MortalityEvent_15To24Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 24 Years]
+gender: dcid:Male
+
+Node: dcid:Count_MortalityEvent_1To4Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [1 4 Years]
+
+Node: dcid:Count_MortalityEvent_1To4Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [1 4 Years]
+gender: dcid:Female
+
+Node: dcid:Count_MortalityEvent_1To4Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [1 4 Years]
+gender: dcid:Male
+
+Node: dcid:Count_MortalityEvent_25To34Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 34 Years]
+
+Node: dcid:Count_MortalityEvent_25To34Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 34 Years]
+gender: dcid:Female
+
+Node: dcid:Count_MortalityEvent_25To34Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 34 Years]
+gender: dcid:Male
+
+Node: dcid:Count_MortalityEvent_35To44Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 44 Years]
+
+Node: dcid:Count_MortalityEvent_35To44Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 44 Years]
+gender: dcid:Female
+
+Node: dcid:Count_MortalityEvent_35To44Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [35 44 Years]
+gender: dcid:Male
+
+Node: dcid:Count_MortalityEvent_45To54Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 54 Years]
+
+Node: dcid:Count_MortalityEvent_45To54Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 54 Years]
+gender: dcid:Female
+
+Node: dcid:Count_MortalityEvent_45To54Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 54 Years]
+gender: dcid:Male
+
+Node: dcid:Count_MortalityEvent_5To14Years
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 14 Years]
+
+Node: dcid:Count_MortalityEvent_5To14Years_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 14 Years]
+gender: dcid:Female
+
+Node: dcid:Count_MortalityEvent_5To14Years_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [5 14 Years]
+gender: dcid:Male
+
+Node: dcid:Count_MortalityEvent_AgeNotStated
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:USC_AgeNotStated
+
+Node: dcid:Count_MortalityEvent_AgeNotStated_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:USC_AgeNotStated
+gender: dcid:Female
+
+Node: dcid:Count_MortalityEvent_AgeNotStated_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:USC_AgeNotStated
+gender: dcid:Male
+
+Node: dcid:Count_MortalityEvent_Female
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+
+Node: dcid:Count_MortalityEvent_Male
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+
+Node: dcid:Count_MortalityEvent_Years0To1
+typeOf: dcid:StatisticalVariable
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: dcid:Years0To1
+

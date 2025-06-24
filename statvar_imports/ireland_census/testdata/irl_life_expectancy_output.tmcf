@@ -1,0 +1,8 @@
+Node: E:irl_life_expectancy_output->E0
+observationAbout: C:irl_life_expectancy_output->observationAbout
+observationDate: C:irl_life_expectancy_output->observationDate
+value: C:irl_life_expectancy_output->value
+variableMeasured: C:irl_life_expectancy_output->variableMeasured
+unit: C:irl_life_expectancy_output->unit
+scalingFactor: C:irl_life_expectancy_output->scalingFactor
+typeOf: dcs:StatVarObservation

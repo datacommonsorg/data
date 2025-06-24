@@ -22,6 +22,7 @@ import json
 import logging
 import os
 import shutil
+import shlex
 import sys
 import subprocess
 import tempfile
@@ -338,7 +339,6 @@ class ImportExecutor:
         Find previous import data in GCS.
         Returns:
           GCS path for the latest import data.
-
         """
         bucket = storage.Client(self.config.gcs_project_id).bucket(
             self.config.storage_prod_bucket_name)
@@ -346,8 +346,7 @@ class ImportExecutor:
             f'{import_dir}/{self.config.storage_version_filename}')
         if not blob or not blob.download_as_text():
             logging.error(
-                f'Not able to find latest_version.txt in {import_dir}, skipping validation.'
-            )
+                f'Not able to find latest_version.txt in {import_dir}.')
             return ''
         latest_version = blob.download_as_text()
         return f'gs://{bucket.name}/{import_dir}/{latest_version}'
@@ -368,19 +367,22 @@ class ImportExecutor:
         logging.info(f'Validation config file: {config_file_path}')
 
         import_dir = f'{relative_import_dir}/{import_spec["import_name"]}'
+
         latest_version = self._get_latest_version(import_dir)
         logging.info(f'Latest version: {latest_version}')
+        differ_job_name = 'differ'
 
         # Trigger validations for each tmcf/csv under import_inputs.
         import_inputs = import_spec.get('import_inputs', [])
         for import_input in import_inputs:
             try:
                 template_mcf = import_input['template_mcf']
-                cleaned_csv = import_input['cleaned_csv']
+                cleaned_csv = glob.glob(
+                    os.path.join(absolute_import_dir,
+                                 import_input['cleaned_csv']))
             except KeyError:
                 logging.error(
-                    'Skipping validation due to missing template mcf or CSV path missing from import input.'
-                )
+                    'Skipping validation due to missing import input spec.')
                 continue
             import_prefix = template_mcf.split('.')[0]
             validation_output_path = os.path.join(absolute_import_dir,
@@ -396,9 +398,12 @@ class ImportExecutor:
             # Run dc import tool to generate resolved mcf.
             logging.info('Generating resolved mcf...')
             import_tool_args = [
-                f'-o={validation_output_path}', 'genmcf', template_mcf,
-                cleaned_csv
+                f'-o={validation_output_path}',
+                'genmcf',
+                template_mcf,
             ]
+            if cleaned_csv:
+                import_tool_args.extend(cleaned_csv)
             process = _run_user_script(
                 interpreter_path='java',
                 script_path='-jar ' + self.config.import_tool_path,
@@ -411,13 +416,19 @@ class ImportExecutor:
             process.check_returncode()
             logging.info('Generated resolved mcf in %s', validation_output_path)
 
-            if self.config.invoke_import_validation:
-                # Invoke differ and validation scripts.
-                if latest_version:
-                    logging.info('Invoking differ tool...')
-                    differ = ImportDiffer(current_data_path, previous_data_path,
-                                          validation_output_path)
-                    differ.run_differ()
+            # Invoke differ and validation scripts.
+            if latest_version and len(
+                    file_util.file_get_matching(previous_data_path)) > 0:
+                logging.info('Invoking differ tool...')
+                differ = ImportDiffer(current_data=current_data_path,
+                                      previous_data=previous_data_path,
+                                      output_location=validation_output_path,
+                                      differ_tool=self.config.differ_tool_path,
+                                      project_id=self.config.gcp_project_id,
+                                      job_name=differ_job_name,
+                                      file_format='mcf',
+                                      runner_mode='native')
+                differ.run_differ()
 
                 logging.info('Invoking validation script...')
                 validation = ImportValidation(config_file_path, differ_output,
@@ -427,21 +438,24 @@ class ImportExecutor:
                 if validation_status:
                     validation_status = status
             else:
-                logging.info('Skipping import validations.')
+                logging.error(
+                    'Skipping validation due to missing latest mcf file')
+        else:
+            logging.info('Skipping import validations as per import config.')
 
-            if not self.config.skip_gcs_upload:
-                # Upload output to GCS.
-                gcs_output = f'{import_dir}/{version}/{import_prefix}/validation'
-                logging.info(
-                    f'Uploading validation output to GCS path: {gcs_output}')
-                for filename in os.listdir(validation_output_path):
-                    filepath = os.path.join(validation_output_path, filename)
-                    if os.path.isfile(filepath):
-                        dest = f'{gcs_output}/{filename}'
-                        self.uploader.upload_file(
-                            src=filepath,
-                            dest=dest,
-                        )
+        if not self.config.skip_gcs_upload:
+            # Upload output to GCS.
+            gcs_output = f'{import_dir}/{version}/{import_prefix}/validation'
+            logging.info(
+                f'Uploading validation output to GCS path: {gcs_output}')
+            for filename in os.listdir(validation_output_path):
+                filepath = os.path.join(validation_output_path, filename)
+                if os.path.isfile(filepath):
+                    dest = f'{gcs_output}/{filename}'
+                    self.uploader.upload_file(
+                        src=filepath,
+                        dest=dest,
+                    )
         return validation_status
 
     def _create_mount_point(self, gcs_volume_mount_dir: str,
@@ -482,13 +496,16 @@ class ImportExecutor:
                 # Run import script locally.
                 script_interpreter = _get_script_interpreter(
                     script_path, interpreter_path)
+                script_env = os.environ.copy()
+                if self.config.user_script_env:
+                    script_env.update(self.config.user_script_env)
                 process = _run_user_script(
                     interpreter_path=script_interpreter,
                     script_path=script_path,
                     timeout=self.config.user_script_timeout,
                     args=self.config.user_script_args,
                     cwd=absolute_import_dir,
-                    env=self.config.user_script_env,
+                    env=script_env,
                 )
                 _log_process(process=process)
                 process.check_returncode()
@@ -533,15 +550,17 @@ class ImportExecutor:
                                     interpreter_path=interpreter_path,
                                     process=process)
 
-            logging.info("Invoking import validations")
-            validation_status = self._invoke_import_validation(
-                repo_dir=repo_dir,
-                relative_import_dir=relative_import_dir,
-                absolute_import_dir=absolute_import_dir,
-                import_spec=import_spec,
-                version=version)
-            logging.info(
-                f'Validations completed with status: {validation_status}')
+            validation_status = True
+            if self.config.invoke_import_validation:
+                logging.info("Invoking import validations")
+                validation_status = self._invoke_import_validation(
+                    repo_dir=repo_dir,
+                    relative_import_dir=relative_import_dir,
+                    absolute_import_dir=absolute_import_dir,
+                    import_spec=import_spec,
+                    version=version)
+                logging.info(
+                    f'Validations completed with status: {validation_status}')
 
         if self.config.skip_gcs_upload:
             logging.info("Skipping GCS upload")
@@ -854,6 +873,8 @@ def _create_venv(requirements_path: Iterable[str], venv_dir: str,
         script.flush()
 
         process = _run_with_timeout(['bash', script.name], timeout)
+        os.environ['PATH'] = os.path.join(venv_dir,
+                                          'bin') + ':' + os.environ.get('PATH')
         return os.path.join(venv_dir, 'bin/python3'), process
 
 
@@ -916,7 +937,7 @@ def _run_user_script(
     script_args = []
     if interpreter_path:
         script_args.append(interpreter_path)
-    script_args.extend(script_path.split(' '))
+    script_args.extend(shlex.split(script_path))
     if args:
         script_args.extend(args)
     return _run_with_timeout_async(script_args, timeout, cwd, env, name)

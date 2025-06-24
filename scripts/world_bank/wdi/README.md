@@ -138,12 +138,12 @@ python3 worldbank.py
 
 If you want to perform "only process", run the below command:
 ```bash
-python3 preprocess.py --mode=process
+python3 worldbank.py --mode=process
 ```
 
 If you want to perform "only download", run the below command:
 ```bash
-python3 preprocess.py --mode=download
+python3 worldbank.py --mode=download
 ```
 
 We highly recommend the use of the import validation tool for this import which

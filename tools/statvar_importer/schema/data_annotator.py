@@ -70,7 +70,7 @@ from llm_pvmap_generator import LLM_PVMapGenerator, get_llm_config_from_flags
 import config_flags
 
 # Regex
-_NUMBER_REGEX = r'^[0-9,\.]+\s*[$%]?'
+_NUMBER_REGEX = r'^[+0-9,\.$%-]+\s*$'
 
 # Default data annotation config
 # Includes annotators for place, date and value.
@@ -95,7 +95,7 @@ _DEFAULT_ANNOTATION_CONFIG = [
         'data_type': 'VALUE',
         'wordlist': 'count,total,amount,number,value,cost,price,ratio,index',
         'wordlist_file': '',
-        'regex': [r'^[0-9,\.]+\s*[$%]?'],
+        'regex': [_NUMBER_REGEX],
         'annotations': ['value={Number}',],
     },
     # Place
