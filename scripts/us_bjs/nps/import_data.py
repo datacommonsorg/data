@@ -1,9 +1,13 @@
 import pandas as pd
-from preprocess_data import preprocess_df
-from nps_statvar_writer import write_sv
 from absl import flags
 from absl import app
 import os, sys
+
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../nps'))
+
+import preprocess_data
+import nps_statvar_writer
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 input_files = os.path.join(_MODULE_DIR, 'input_files')
@@ -86,11 +90,11 @@ def main(args):
     INPUT_FILE_PATH = os.path.join(input_files, FLAGS.input_file)
     get_input_file()
     df = pd.read_csv(INPUT_FILE_PATH, delimiter='\t')
-    processed_df = preprocess_df(df)
+    processed_df = preprocess_data.preprocess_df(df)
     save_csv(processed_df, FILENAME)
     generate_tmcf(processed_df)
     f = open("nps_statvars.mcf", "w+")
-    write_sv(f)
+    nps_statvar_writer.write_sv(f)
 
 
 if __name__ == '__main__':
