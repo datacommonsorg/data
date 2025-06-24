@@ -16,7 +16,10 @@ import os
 import unittest
 import pandas as pd
 import preprocess_data
+import sys
 
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../nps'))
 import import_data
 
 
