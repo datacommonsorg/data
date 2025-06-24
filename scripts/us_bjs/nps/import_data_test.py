@@ -22,6 +22,7 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../nps'))
 import import_data
 import preprocess_data
 
+
 class TestPreprocess(unittest.TestCase):
 
     def test_preprocess(self):
