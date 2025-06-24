@@ -20,46 +20,101 @@ from tools.import_validation.util import filter_dataframe
 
 class TestFilterDataFrame(unittest.TestCase):
 
-    def setUp(self):
-        self.test_df = pd.DataFrame({
+    def test_filter_with_dcids(self):
+        """Tests filtering by a list of exact StatVar DCIDs."""
+        df = pd.DataFrame({
             'StatVar': [
-                'Count_Person_Male', 'Count_Person_Female', 'Count_Person_U18',
-                'Amount_Money_Debt_Government'
+                'Count_Person_Male', 'Count_Person_Female',
+                'Count_Person_AgeU18'
             ]
         })
-
-    def test_filter_with_exact_string(self):
-        config = ['Count_Person_Male']
-        filtered_df = filter_dataframe(self.test_df, config)
+        filtered_df = filter_dataframe(df, statvar_dcids=['Count_Person_Male'])
         self.assertEqual(len(filtered_df), 1)
         self.assertEqual(filtered_df.iloc[0]['StatVar'], 'Count_Person_Male')
 
     def test_filter_with_regex(self):
-        config = ['Count_Person_.*']
-        filtered_df = filter_dataframe(self.test_df, config)
-        self.assertEqual(len(filtered_df), 3)
-
-    def test_filter_with_dictionary(self):
-        # This is a simplified test. A more robust implementation would
-        # require a more sophisticated mock of the DCID structure.
-        config = [{'populationType': 'Person', 'gender': 'Male'}]
-        # Our current implementation uses string matching, so this will fail.
-        # This highlights the need for a more robust DCID parsing implementation.
-        # For now, we expect this to return 0 results.
-        filtered_df = filter_dataframe(self.test_df, config)
-        self.assertEqual(len(filtered_df), 0)
-
-    def test_filter_with_wildcard_dictionary(self):
-        config = [{'populationType': 'Person', 'age': '*'}]
-        # This will also fail with the current simplified implementation.
-        filtered_df = filter_dataframe(self.test_df, config)
-        self.assertEqual(len(filtered_df), 0)
-
-    def test_no_filter(self):
-        filtered_df = filter_dataframe(self.test_df, [])
-        self.assertEqual(len(filtered_df), 4)
-
-    def test_multiple_filters(self):
-        config = ['Count_Person_Male', 'Count_Person_Female']
-        filtered_df = filter_dataframe(self.test_df, config)
+        """Tests filtering by a regex pattern."""
+        df = pd.DataFrame({
+            'StatVar': [
+                'Count_Person_Male', 'Count_Person_Female',
+                'Amount_Debt_Government'
+            ]
+        })
+        filtered_df = filter_dataframe(df, regex_patterns=['Count_Person_.*'])
         self.assertEqual(len(filtered_df), 2)
+
+    def test_filter_with_single_substring_match(self):
+        """Tests filtering by a single matching substring."""
+        df = pd.DataFrame(
+            {'StatVar': ['Count_Person_gender_Male', 'Count_Person_Female']})
+        filtered_df = filter_dataframe(df, contains_all=['gender_Male'])
+        self.assertEqual(len(filtered_df), 1)
+        self.assertEqual(filtered_df.iloc[0]['StatVar'],
+                         'Count_Person_gender_Male')
+
+    def test_filter_with_multiple_substrings_match(self):
+        """Tests that all substrings must match for a row to be included."""
+        df = pd.DataFrame({
+            'StatVar': [
+                'Count_Person_gender_Male_age_U18', 'Count_Person_gender_Male'
+            ]
+        })
+        filtered_df = filter_dataframe(df,
+                                       contains_all=['gender_Male', 'age_U18'])
+        self.assertEqual(len(filtered_df), 1)
+        self.assertEqual(filtered_df.iloc[0]['StatVar'],
+                         'Count_Person_gender_Male_age_U18')
+
+    def test_filter_with_substring_existence(self):
+        """Tests filtering for the existence of a substring."""
+        df = pd.DataFrame({
+            'StatVar': [
+                'Count_Person_gender_Male', 'Count_Person_age_U18',
+                'Amount_Debt'
+            ]
+        })
+        filtered_df = filter_dataframe(df, contains_all=['gender'])
+        self.assertEqual(len(filtered_df), 1)
+        self.assertEqual(filtered_df.iloc[0]['StatVar'],
+                         'Count_Person_gender_Male')
+
+    def test_no_filters(self):
+        """Tests that providing no filters returns the original DataFrame."""
+        df = pd.DataFrame(
+            {'StatVar': ['Count_Person_Male', 'Count_Person_Female']})
+        filtered_df = filter_dataframe(df)
+        self.assertEqual(len(filtered_df), 2)
+
+    def test_multiple_filter_types_are_unioned(self):
+        """Tests that results from different filter types are combined (union)."""
+        df = pd.DataFrame({
+            'StatVar': [
+                'Count_Person_Male', 'Count_Person_Female',
+                'Amount_Debt_Government'
+            ]
+        })
+        filtered_df = filter_dataframe(df,
+                                       statvar_dcids=['Amount_Debt_Government'],
+                                       regex_patterns=['Count_Person_Male'])
+        self.assertEqual(len(filtered_df), 2)
+        self.assertIn('Count_Person_Male', filtered_df['StatVar'].values)
+        self.assertIn('Amount_Debt_Government', filtered_df['StatVar'].values)
+
+    def test_filter_with_non_matching_dcid(self):
+        """Tests that a non-matching DCID returns an empty DataFrame."""
+        df = pd.DataFrame({'StatVar': ['Count_Person_Male']})
+        filtered_df = filter_dataframe(df, statvar_dcids=['Non_Existent_DCID'])
+        self.assertTrue(filtered_df.empty)
+
+    def test_filter_with_non_matching_regex(self):
+        """Tests that a non-matching regex returns an empty DataFrame."""
+        df = pd.DataFrame({'StatVar': ['Count_Person_Male']})
+        filtered_df = filter_dataframe(df, regex_patterns=['Non_Existent_.*'])
+        self.assertTrue(filtered_df.empty)
+
+    def test_filter_with_non_matching_substring(self):
+        """Tests that a non-matching substring returns an empty DataFrame."""
+        df = pd.DataFrame({'StatVar': ['Count_Person_gender_Male']})
+        filtered_df = filter_dataframe(df,
+                                       contains_all=['non_existent_substring'])
+        self.assertTrue(filtered_df.empty)

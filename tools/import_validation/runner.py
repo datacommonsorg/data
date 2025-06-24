@@ -128,9 +128,10 @@ class ValidationRunner:
 
             df = self.dataframes[scope['data_source']]
 
-            # TODO: Implement variable filtering and groupBy
-            # if 'variables' in scope:
-            #     ...
+            if 'variables' in scope:
+                df = filter_dataframe(df, scope['variables'])
+
+            # TODO: Implement groupBy
             # if 'groupBy' in scope:
             #     ...
 

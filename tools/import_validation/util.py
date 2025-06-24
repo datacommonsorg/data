@@ -17,58 +17,94 @@ import pandas as pd
 import re
 
 
-def filter_dataframe(df: pd.DataFrame, filter_config: list) -> pd.DataFrame:
-    """Filters a DataFrame based on a configuration.
+def filter_dataframe(df: pd.DataFrame,
+                     statvar_dcids: list[str] = None,
+                     regex_patterns: list[str] = None,
+                     contains_all: list[str] = None) -> pd.DataFrame:
+    """Filters a DataFrame based on a set of explicit, disjunctive criteria.
 
-    The filter configuration is a list that can contain:
-    - Strings: Exact match on the 'StatVar' column.
-    - Regex patterns: For partial or pattern matching on the 'StatVar' column.
-    - Dictionaries: For matching specific property:value pairs in the StatVar DCID.
+    This function selects rows from a DataFrame where the 'StatVar' column
+    matches AT LEAST ONE of the provided filtering conditions. The results of
+    applying each filter are combined using a logical OR (union).
 
     Args:
-        df: The DataFrame to filter.
-        filter_config: The configuration defining the filters to apply.
+        df: The DataFrame to filter. It must contain a 'StatVar' column.
+        statvar_dcids: A list of exact StatVar DCIDs to match.
+        regex_patterns: A list of regex patterns to match against the 'StatVar'
+          column.
+        contains_all: A list of substrings that must ALL be present in the
+          'StatVar' DCID for it to be considered a match.
 
     Returns:
-        A new DataFrame containing only the rows that match the filter criteria.
+        A new DataFrame containing only the rows that match at least one of
+        the filter criteria.
+
+    Examples:
+        >>> df = pd.DataFrame({
+        ...     'StatVar': [
+        ...         'Count_Person_Male',
+        ...         'Count_Person_Female',
+        ...         'Count_Person_U18_Female',
+        ...         'Amount_Debt_Government'
+        ...     ]
+        ... })
+
+        **Single Filter Examples:**
+
+        >>> # 1. Filter by a specific DCID
+        >>> filter_dataframe(df, statvar_dcids=['Count_Person_Male'])
+                      StatVar
+        0  Count_Person_Male
+
+        >>> # 2. Filter by a regex pattern
+        >>> filter_dataframe(df, regex_patterns=['^Amount_.*'])
+                               StatVar
+        3  Amount_Debt_Government
+
+        >>> # 3. Filter by substrings (all must be present)
+        >>> filter_dataframe(df, contains_all=['Person', 'Female'])
+                           StatVar
+        1      Count_Person_Female
+        2  Count_Person_U18_Female
+
+        **Multiple Filter Example (Union):**
+
+        >>> # 4. Filter by DCID OR regex (union of results)
+        >>> filter_dataframe(
+        ...     df,
+        ...     statvar_dcids=['Count_Person_Male'],
+        ...     regex_patterns=['^Amount_.*']
+        ... )
+                               StatVar
+        0           Count_Person_Male
+        3      Amount_Debt_Government
     """
-    if not filter_config:
+    if not statvar_dcids and not regex_patterns and not contains_all:
         return df
 
     # This will hold the indices of all rows that match at least one filter
     matching_indices = set()
 
-    for f in filter_config:
-        if isinstance(f, str):
-            # Handle both exact matches and regex patterns
+    if statvar_dcids:
+        matching_indices.update(df[df['StatVar'].isin(statvar_dcids)].index)
+
+    if regex_patterns:
+        for pattern in regex_patterns:
             try:
-                # Attempt to treat as regex
-                regex = re.compile(f)
+                regex = re.compile(pattern)
                 matches = df['StatVar'].str.match(regex, na=False)
                 matching_indices.update(df[matches].index)
             except re.error:
-                # Treat as a literal string if regex is invalid
-                matching_indices.update(df[df['StatVar'] == f].index)
+                # If it's not a valid regex, it won't match anything.
+                # We could log a warning here if needed.
+                pass
 
-        elif isinstance(f, dict):
-            # Handle dictionary-based property matching
-            # This is a simplified version. A more robust implementation might
-            # parse the DCID into its component parts. For now, we'll use
-            # string matching on the StatVar DCID.
-            prop_conditions = []
-            for prop, value in f.items():
-                if value == '*':
-                    # Match if the property exists
-                    prop_conditions.append(
-                        df['StatVar'].str.contains(f"{prop}="))
-                else:
-                    # Match the exact property:value pair
-                    prop_conditions.append(
-                        df['StatVar'].str.contains(f"{prop}={value}"))
+    if contains_all:
+        # Start with a mask of all True and progressively filter it
+        combined_condition = pd.Series(True, index=df.index)
+        for substring in contains_all:
+            combined_condition &= df['StatVar'].str.contains(substring,
+                                                             case=False)
+        matching_indices.update(df[combined_condition].index)
 
-            if prop_conditions:
-                combined_condition = pd.concat(prop_conditions,
-                                               axis=1).all(axis=1)
-                matching_indices.update(df[combined_condition].index)
-
-    return df.loc[list(matching_indices)]
+    return df.loc[sorted(list(matching_indices))]

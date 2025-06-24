@@ -76,7 +76,6 @@ class TestValidationRunner(unittest.TestCase):
         # Ensure other methods were NOT called
         mock_validator_instance.validate_deleted_count.assert_not_called()
 
-    @unittest.skip("Variable filtering not yet implemented in new runner.")
     @patch('tools.import_validation.runner.filter_dataframe')
     @patch('tools.import_validation.runner.Validator')
     def test_runner_applies_filters_correctly(self, MockValidator,
