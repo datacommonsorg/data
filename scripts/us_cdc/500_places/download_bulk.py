@@ -17,29 +17,46 @@ Date: 8/30/2021
 Description: Utility to download all CDC 500 PLACES data.
 URL: https://chronicdata.cdc.gov/browse?category=500+Cities+%26+Places
 
-Files are stored in raw_data.
-
+Files are stored in input_files.
+gcs_output folder is the mount storage
 Run this script from this directory:
 python3 download_bulk.py
 """
 
 import os
-
 import requests
+import json
+import sys
 
-DATA_URLS = {
-    "county_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/swc5-untb/rows.csv?accessType=DOWNLOAD",
-    "city_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/eav7-hnsx/rows.csv?accessType=DOWNLOAD",
-    "censustract_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/cwsq-ngmh/rows.csv?accessType=DOWNLOAD",
-    "zipcode_raw_data.csv":
-        "https://chronicdata.cdc.gov/api/views/qnzd-25i4/rows.csv?accessType=DOWNLOAD"
-}
+from absl import logging
+from retry import retry
+from absl import flags
+from absl import app
+
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+_UTIL_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_UTIL_DIR, '../../../util/'))
+import file_util
+
+_FLAGS = flags.FLAGS
+flags.DEFINE_string(
+    'config_path', 'gs://unresolved_mcf/cdc/cdc500places/download_config.json',
+    'Path to config file')
 
 
-def download_file(url: str, save_path: str):
+def read_config_file_from_gcs(file_path):
+    with file_util.FileIO(file_path, 'r') as f:
+        CONFIG_FILE = json.load(f)
+    return CONFIG_FILE
+
+
+@retry(tries=3, delay=5, backoff=5)
+def retry_method(url):
+    return requests.get(url)
+
+
+def download_file(release_year, url: str, save_path: str):
     """
     Args:
         url: url to the file to be downloaded
@@ -47,22 +64,32 @@ def download_file(url: str, save_path: str):
     Returns:
         a downloaded csv file in the specified file path
     """
-    print(f'Downloading {url} to {save_path}')
-    request = requests.get(url, stream=True)
+    logging.info(
+        f'Downloading {url} for the year {release_year} to {save_path}')
+    response = retry_method(url)
+    if response.status_code != 200:
+        logging.fatal(
+            f'Failed to retrieve {url} for the year {release_year} to {save_path}'
+        )
     with open(save_path, 'wb') as file:
-        file.write(request.content)
+        file.write(response.content)
 
 
-def main():
+def main(_):
     """Main function to download the files."""
-    data_dir = os.path.join(os.getcwd(), 'raw_data')
+
+    data_dir = os.path.join(_GCS_OUTPUT_DIR, 'input_files')
     if not os.path.exists(data_dir):
         os.makedirs(data_dir)
-    for dataset_name, url in DATA_URLS.items():
-        print(dataset_name)
-        save_path = os.path.join(data_dir, dataset_name)
-        download_file(url, save_path)
+    logging.set_verbosity(2)
+    _CONFIG_FILE = read_config_file_from_gcs(_FLAGS.config_path)
+    for item in _CONFIG_FILE:
+        release_year = item["release_year"]
+        for url_dict in item["parameter"]:
+            save_path = os.path.join(data_dir, url_dict['FILE_NAME'])
+            download_file(release_year, url_dict['URL'], save_path)
 
 
 if __name__ == '__main__':
-    main()
+    logging.set_verbosity(2)
+    app.run(main)

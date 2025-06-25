@@ -1,0 +1,6 @@
+Node: E:ethiopia_population_all_year->E0
+observationDate: C:ethiopia_population_all_year->observationDate
+observationAbout: C:ethiopia_population_all_year->observationAbout
+value: C:ethiopia_population_all_year->value
+variableMeasured: C:ethiopia_population_all_year->variableMeasured
+typeOf: dcs:StatVarObservation

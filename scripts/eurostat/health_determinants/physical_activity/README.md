@@ -25,8 +25,8 @@ The population is categorized by various set of combinations as below:
         
 
 ### Download URL
-The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/health/data/database -> 	Health -> Health determinants (hlth_det).
-The actual URLs are listed in input_files.py.
+The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/main/data/database -> Data navigation tree -> Detailed datasets -> Population and social conditions -> Health -> Health determinants (hlth_det).
+The actual URLs are listed in import_download_details.py
 
 
 #### API Output
@@ -45,8 +45,6 @@ These are the attributes that we will use
 | Degree of Activity Limitation   				|  							|
 
 
-
-
 #### Cleaned Data
 Cleaned data will be inside [output/eurostat_population_physicalactivity.csv] as a CSV file with the following columns.
 
@@ -55,7 +53,6 @@ Cleaned data will be inside [output/eurostat_population_physicalactivity.csv] as
 - SV
 - Measurement_Method
 - observation
-
 
 
 #### MCFs and Template MCFs
@@ -69,14 +66,18 @@ Run the test cases
 `/bin/python3 -m unittest scripts/eurostat/health_determinants/physical_activity/process_test.py`
 
 
-
-
 ### Import Procedure
 
-The below script will download the data and extract it.
+The below script will download the data, clean the data, Also generate final csv, mcf and tmcf files.
 
-`/bin/python3 scripts/eurostat/health_determinants/physical_activity/download_input_files.py`
+`python scripts/eurostat/health_determinants/physical_activity/process.py`
 
-The below script will clean the data, Also generate final csv, mcf and tmcf files.
+To download data for this import, run:
 
-`/bin/python3 scripts/eurostat/health_determinants/physical_activity/process.py`
+`python scripts/eurostat/health_determinants/physical_activity/process.py --mode=download`
+
+To process the downloaded data, run:
+
+`python scripts/eurostat/health_determinants/physical_activity/process.py --mode=process`
+
+Downloaded Files are created inside 'input_files' directory.

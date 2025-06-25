@@ -1,0 +1,13 @@
+parameter,value
+url,https://www.ntia.gov/other-publication/2022/digital-nation-data-explorer#sel=homeEverOnline&demo=scChldHome&pc=count&disp=both
+description,National Telecommunication and Information administration Internet Use Survey
+#place_type,"Country,AdministrativeArea1"
+start_date,1994
+end_date,2023
+release_frequency,1years
+process,
+comments,"In the data sheet, moved universe column to the Left of description,places resolved manually in pvmap."
+output_columns,"observationAbout, observationDate, value, variableMeasured"
+#input_rows,25
+#input_columns,15
+header_rows,1

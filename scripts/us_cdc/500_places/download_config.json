@@ -1,0 +1,77 @@
+[
+    {
+        "release_year": 2022,
+        "parameter": [
+            {
+                "URL": "https://data.cdc.gov/api/views/duw2-7jbt/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "County",
+                "FILE_NAME": "county_raw_data_2022.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/epbn-9bv3/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "City",
+                "FILE_NAME": "city_raw_data_2022.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/nw2y-v4gm/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "CensusTract",
+                "FILE_NAME": "censustract_raw_data_2022.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/gd4x-jyhw/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "ZipCode",
+                "FILE_NAME": "zipcode_raw_data_2022.csv"
+            }
+        ]
+    },
+    {
+        "release_year": 2023,
+        "parameter": [
+            {
+                "URL": "https://data.cdc.gov/api/views/h3ej-a9ec/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "County",
+                "FILE_NAME": "county_raw_data_2023.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/krqc-563j/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "City",
+                "FILE_NAME": "city_raw_data_2023.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/em5e-5hvn/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "CensusTract",
+                "FILE_NAME": "censustract_raw_data_2023.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/9umn-c3jf/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "ZipCode",
+                "FILE_NAME": "zipcode_raw_data_2023.csv"
+            }
+        ]
+    },
+    {
+        "release_year": 2024,
+        "parameter": [
+            {
+                "URL": "https://data.cdc.gov/api/views/swc5-untb/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "County",
+                "FILE_NAME": "county_raw_data_2024.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/eav7-hnsx/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "City",
+                "FILE_NAME": "city_raw_data_2024.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/cwsq-ngmh/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "CensusTract",
+                "FILE_NAME": "censustract_raw_data_2024.csv"
+            },
+            {
+                "URL": "https://data.cdc.gov/api/views/qnzd-25i4/rows.csv?accessType=DOWNLOAD",
+                "FILE_TYPE": "ZipCode",
+                "FILE_NAME": "zipcode_raw_data_2024.csv"
+            }
+        ]
+    }
+]

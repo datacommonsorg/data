@@ -4,5 +4,6 @@ variableMeasured: C:eurostat_population_bmi->SV
 measurementMethod: C:eurostat_population_bmi->Measurement_Method
 observationAbout: C:eurostat_population_bmi->geo
 observationDate: C:eurostat_population_bmi->time
+unit: Percent
 scalingFactor: 100
 value: C:eurostat_population_bmi->observation

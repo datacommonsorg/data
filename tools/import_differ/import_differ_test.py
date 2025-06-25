@@ -17,9 +17,8 @@ import pandas as pd
 import unittest
 
 from pandas.testing import assert_frame_equal
-from import_differ import ImportDiffer
-
-import differ_utils
+from tools.import_differ import import_differ
+from tools.import_differ import differ_utils
 
 module_dir = os.path.dirname(__file__)
 
@@ -31,24 +30,24 @@ class TestImportDiffer(unittest.TestCase):
   '''
 
     def test_diff_analysis(self):
-        groupby_columns = 'variableMeasured,observationAbout,observationDate'
-        value_columns = 'value'
         current_data = os.path.join(module_dir, 'test', 'current.mcf')
         previous_data = os.path.join(module_dir, 'test', 'previous.mcf')
-        output_location = os.path.join(module_dir, 'test')
-
-        differ = ImportDiffer(current_data, previous_data, output_location,
-                              groupby_columns, value_columns)
-        current = differ_utils.load_mcf_file(current_data)
-        previous = differ_utils.load_mcf_file(previous_data)
-
-        in_data = differ.process_data(previous, current)
-        summary, result = differ.point_analysis(in_data)
-        result = pd.read_csv(os.path.join(module_dir, 'test', 'result1.csv'))
+        output_location = os.path.join(module_dir)
+        self.differ = import_differ.ImportDiffer(current_data, previous_data,
+                                                 output_location, 'differ.jar',
+                                                 'project-1', 'test', 'mcf',
+                                                 'native')
+        current_df = differ_utils.load_mcf_file(self.differ.current_data)
+        previous_df = differ_utils.load_mcf_file(self.differ.previous_data)
+        diff = self.differ.generate_diff(previous_df, current_df)
+        summary, result = self.differ.point_analysis(diff)
+        result = pd.read_csv(
+            os.path.join(module_dir, 'test', 'point_analysis_summary.csv'))
         assert_frame_equal(summary, result)
 
-        summary, result = differ.series_analysis(in_data)
-        result = pd.read_csv(os.path.join(module_dir, 'test', 'result2.csv'))
+        summary, result = self.differ.series_analysis(diff)
+        result = pd.read_csv(
+            os.path.join(module_dir, 'test', 'series_analysis_summary.csv'))
         assert_frame_equal(summary, result)
 
 
