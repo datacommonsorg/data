@@ -15,3 +15,4 @@ Doctoral or equivalent level,educationalAttainment,DoctorateDegree,name,"""Fract
 Y25T64,age,[25 64 Years],Age,25 to 64 years,,,,,,,,
 Y25T34,age,[25 34 Years],Age,25 to 34 years,,,,,,,,
 OBS_VALUE,value,{Number},,,,,,,,,,
+STATISTICAL_OPERATION:SE,#ignore,Not available in the historical data,,,,,,,,,,

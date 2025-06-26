@@ -12,4 +12,3 @@ Path to data - URL - Regions and Cities - Regional Statistics - Regional Educati
 output_columns,"observationAbout,observationDate,variableMeasured,value"
 header_rows,1
 word_delimiter,""""""
-existing_statvar_mcf,""""""
