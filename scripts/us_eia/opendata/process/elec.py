@@ -226,7 +226,7 @@ _UNIT_MAP = {
     'CONS_EG': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
     'CONS_EG_BTU': ('MMBtu', '', 1000000),
     'COST': (_PLACEHOLDER_FUEL_UNIT, '', 1),
-    'COST_BTU': ('USDollarPerMMBtu', '', 1),
+    'COST_BTU': ('USDollarPerMillionBtu', '', 1),
     'CUSTOMERS': ('', '', 1),
     'GEN': ('GigawattHour', '', 1),
     'PRICE': ('USCentPerKilowattHour', '', 1),

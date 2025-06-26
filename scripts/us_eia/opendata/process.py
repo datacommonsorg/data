@@ -1,4 +1,4 @@
-# Copyright 2024 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ from absl import flags
 from absl import app
 from absl import logging
 
-from .process import common, coal, elec, intl, ng, nuclear, pet, seds, total
+from process import common, coal, elec, intl, ng, nuclear, pet, seds, total
 
 MANIFEST_URL = "https://api.eia.gov/bulk/manifest.txt"
 
