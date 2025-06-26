@@ -260,21 +260,22 @@ func TestMain(t *testing.T) {
 		{"input_basic.csv", "expected_output_basic.csv", "actual_output_basic.csv", getMockGeocodesBasic()},
 		{"input_containment.csv", "expected_output_containment.csv", "actual_output_containment.csv", getMockGeocodesContainment()},
 	}
-	for _, t := range table {
-		err := resolvePlacesByName("testdata/"+t.in, "testdata/"+t.got, false, &MockResolveApi{}, t.mapCli)
+	for _, tt := range table {
+		resolver := NewResolver(&MockResolveApi{}, tt.mapCli)
+		err := resolver.resolvePlacesByName("testdata/"+tt.in, "testdata/"+tt.got, false)
 		if err != nil {
-			log.Fatal(err)
+			t.Fatalf("resolvePlacesByName() failed with error %v", err)
 		}
-		want, err := ioutil.ReadFile("testdata/" + t.want)
+		want, err := ioutil.ReadFile("testdata/" + tt.want)
 		if err != nil {
-			log.Fatal(err)
+			t.Fatalf("ReadFile() failed with error %v", err)
 		}
-		got, err := ioutil.ReadFile("testdata/" + t.got)
+		got, err := ioutil.ReadFile("testdata/" + tt.got)
 		if err != nil {
-			log.Fatal(err)
+			t.Fatalf("ReadFile() failed with error %v", err)
 		}
 		if string(want) != string(got) {
-			log.Fatalf("For input %s:: got: %s, want: %s", t.in, string(got), string(want))
+			t.Fatalf("For input %s:: got: %s, want: %s", tt.in, string(got), string(want))
 		}
 	}
 }

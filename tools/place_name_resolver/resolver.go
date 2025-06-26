@@ -371,17 +371,29 @@ func writeOutput(outCsvPath string, tinfo *tableInfo) error {
 	return nil
 }
 
-func resolvePlacesByName(inCsvPath, outCsvPath string, generatePlaceID bool, rApi ResolveApi, mapCli MapsClient) error {
+type Resolver struct {
+	rApi   ResolveApi
+	mapCli MapsClient
+}
+
+func NewResolver(rApi ResolveApi, mapCli MapsClient) *Resolver {
+	return &Resolver{
+		rApi:   rApi,
+		mapCli: mapCli,
+	}
+}
+
+func (r *Resolver) resolvePlacesByName(inCsvPath, outCsvPath string, generatePlaceID bool) error {
 	tinfo, err := buildTableInfo(inCsvPath)
 	if err != nil {
 		return err
 	}
-	err = geocodePlaces(mapCli, tinfo)
+	err = geocodePlaces(r.mapCli, tinfo)
 	if err != nil {
 		return err
 	}
 	if !generatePlaceID {
-		err = mapPlaceIDsToDCIDs(rApi, tinfo)
+		err = mapPlaceIDsToDCIDs(r.rApi, tinfo)
 		if err != nil {
 			return err
 		}
@@ -398,7 +410,8 @@ func main() {
 		log.Fatalf("Maps API init failed: %v", err)
 	}
 
-	err = resolvePlacesByName(*inCsvPath, *outCsvPath, *generatePlaceID, &RealResolveApi{}, &RealMapsClient{Client: mapCli})
+	resolver := NewResolver(&RealResolveApi{}, &RealMapsClient{Client: mapCli})
+	err = resolver.resolvePlacesByName(*inCsvPath, *outCsvPath, *generatePlaceID)
 	if err != nil {
 		log.Fatalf("resolvePlacesByName failed: %v", err)
 	}
