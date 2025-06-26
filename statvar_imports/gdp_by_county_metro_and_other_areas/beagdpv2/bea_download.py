@@ -16,11 +16,11 @@ import os, shutil
 import zipfile
 from absl import app, logging
 from pathlib import Path
-import config, sys
+import bea_config, sys
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-BEA_ZIP_URL = config.BEA_ZIP_URL
+BEA_ZIP_URL = bea_config.BEA_ZIP_URL
 
 INPUT_DIR = os.path.join(script_dir, "input_files")
 Path(INPUT_DIR).mkdir(parents=True, exist_ok=True)
