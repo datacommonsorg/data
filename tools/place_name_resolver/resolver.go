@@ -12,8 +12,6 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"sync"
-	"time"
 
 	"googlemaps.github.io/maps"
 )
@@ -32,6 +30,21 @@ const (
 	dcAPI       = "https://api.datacommons.org/v1/recon/resolve/id"
 	dcBatchSize = 500
 )
+
+type resolveReq struct {
+	InProp  string   `json:"inProp"`
+	OutProp string   `json:"outProp"`
+	Ids     []string `json:"ids"`
+}
+
+type resolveRespEntity struct {
+	InId   string   `json:"inId"`
+	OutIds []string `json:"outIds"`
+}
+
+type resolveResp struct {
+	Entities []resolveRespEntity `json:"entities"`
+}
 
 // PlaceId2Dcid Reader.
 type ResolveApi interface {
@@ -211,59 +224,58 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 	return tinfo, nil
 }
 
-func geocodeOneRow(idx int, tinfo *tableInfo, mapCli MapsClient, wg *sync.WaitGroup) {
-	defer wg.Done()
-	extName := tinfo.extNames[idx]
-	req := &maps.GeocodingRequest{
-		Address:  extName,
-		Language: "en",
-	}
-	results, err := mapCli.Geocode(req)
-	if err != nil {
-		tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Geocoding failure for %s: %v", extName, err))
-		return
-	}
-	if len(results) == 0 {
-		tinfo.rows[idx] = append(tinfo.rows[idx], "", fmt.Sprintf("Empty geocoding result for %s", extName))
-		return
-	}
-	// TODO: Deal with place-type checks and multiple results.
-	for _, result := range results[:1] {
-		tinfo.rows[idx] = append(tinfo.rows[idx], result.PlaceID, "")
-	}
-}
-
-type resolveReq struct {
-	InProp  string   `json:"inProp"`
-	OutProp string   `json:"outProp"`
-	Ids     []string `json:"ids"`
-}
-
-type resolveRespEntity struct {
-	InId   string   `json:"inId"`
-	OutIds []string `json:"outIds"`
-}
-
-type resolveResp struct {
-	Entities []resolveRespEntity `json:"entities"`
-}
-
 func geocodePlaces(mapCli MapsClient, tinfo *tableInfo) error {
-	for i := 0; i < len(tinfo.rows); i += batchSize {
-		var wg sync.WaitGroup
-		jMax := i + batchSize
-		if jMax > len(tinfo.rows) {
-			jMax = len(tinfo.rows)
-		}
-		for j := i; j < jMax; j++ {
-			wg.Add(1)
-			go geocodeOneRow(j, tinfo, mapCli, &wg)
-		}
-		wg.Wait()
-		// Make sure we are under the 50 QPS limit set by Google Maps API.
-		time.Sleep(1 * time.Second)
-		log.Printf("Processed %d rows, %d left.", jMax, len(tinfo.rows)-jMax)
+	numRows := len(tinfo.rows)
+	jobs := make(chan int, numRows)
+	results := make(chan error, numRows)
+
+	// Start workers
+	numWorkers := batchSize
+	for w := 0; w < numWorkers; w++ {
+		go func(w int, jobs <-chan int, results chan<- error) {
+			for j := range jobs {
+				extName := tinfo.extNames[j]
+				req := &maps.GeocodingRequest{
+					Address:  extName,
+					Language: "en",
+				}
+				resp, err := mapCli.Geocode(req)
+				if err != nil {
+					tinfo.rows[j] = append(tinfo.rows[j], "", fmt.Sprintf("Geocoding failure for %s: %v", extName, err))
+					results <- nil
+					continue
+				}
+				if len(resp) == 0 {
+					tinfo.rows[j] = append(tinfo.rows[j], "", fmt.Sprintf("Empty geocoding result for %s", extName))
+					results <- nil
+					continue
+				}
+				// TODO: Deal with place-type checks and multiple results.
+				for _, result := range resp[:1] {
+					tinfo.rows[j] = append(tinfo.rows[j], result.PlaceID, "")
+				}
+				results <- nil
+			}
+		}(w, jobs, results)
 	}
+
+	// Add jobs
+	for j := 0; j < numRows; j++ {
+		jobs <- j
+	}
+	close(jobs)
+
+	// Wait for all jobs to finish
+	for i := 0; i < numRows; i++ {
+		err := <-results
+		if err != nil {
+			return err
+		}
+		if (i+1)%batchSize == 0 {
+			log.Printf("Processed %d rows, %d left.", i+1, numRows-(i+1))
+		}
+	}
+	log.Printf("Processed all %d rows.", numRows)
 	return nil
 }
 

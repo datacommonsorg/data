@@ -4,6 +4,7 @@ import (
 	"googlemaps.github.io/maps"
 	"io/ioutil"
 	"log"
+	"strings"
 	"testing"
 )
 
@@ -187,6 +188,40 @@ func TestAppendContainedInPlaceNames(t *testing.T) {
 				t.Errorf("appendContainedInPlaceNames() = %v, want %v", got, test.expected)
 			}
 		})
+	}
+}
+
+func TestGeocodePlaces(t *testing.T) {
+	tinfo := &tableInfo{
+		rows: [][]string{
+			{"n1", "Mumbai", "n2"},
+			{"n2", "Maharashtra", "n3"},
+			{"n3", "India", ""},
+		},
+		extNames: []string{
+			"Mumbai, Maharashtra, India",
+			"Maharashtra, India",
+			"India",
+		},
+		node2row: map[string]int{"n1": 0, "n2": 1, "n3": 2},
+		nidIdx:   0,
+		nameIdx:  1,
+		cipIdx:   2,
+	}
+	mapCli := getMockGeocodesContainment()
+	err := geocodePlaces(mapCli, tinfo)
+	if err != nil {
+		t.Errorf("geocodePlaces() failed with error %v", err)
+	}
+	expectedRows := [][]string{
+		{"n1", "Mumbai", "n2", "ChIJwe1EZjDG5zsRaYxkjY_tpF0", ""},
+		{"n2", "Maharashtra", "n3", "ChIJ-dacnB7EzzsRtk_gS5IiLxs", ""},
+		{"n3", "India", "", "ChIJkbeSa_BfYzARphNChaFPjNc", ""},
+	}
+	for i, row := range tinfo.rows {
+		if strings.Join(row, ",") != strings.Join(expectedRows[i], ",") {
+			t.Errorf("row %d differs: got %v, want %v", i, row, expectedRows[i])
+		}
 	}
 }
 
