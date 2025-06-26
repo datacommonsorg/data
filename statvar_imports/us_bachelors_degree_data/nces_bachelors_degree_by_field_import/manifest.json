@@ -8,10 +8,10 @@
       "scripts": [
         "download_data.py", 
         "preprocess.py",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/table_50_*.xlsx --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=table50_female_pvmap.csv --config_file=metadata.csv --output_path=output_files/nces_female_output",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/table_40_*.xlsx --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=table40_male_pvmap.csv --config_file=metadata.csv --output_path=output_files/nces_male_output",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files_latest/table_50_*.xlsx --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=table50_female_pvmap.csv --config_file=metadata_latest.csv --output_path=output_files/nces_female_output_latest",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files_latest/table_40_*.xlsx --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=table40_male_pvmap.csv --config_file=metadata_latest.csv --output_path=output_files/nces_male_output_latest"
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/table_50_*.xlsx --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=nces_female_pvmap.csv --config_file=nces_metadata.csv --output_path=output_files/nces_female_output",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/table_40_*.xlsx --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=nces_male_pvmap.csv --config_file=nces_metadata.csv --output_path=output_files/nces_male_output",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files_latest/table_50_*.xlsx --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=nces_female_pvmap.csv --config_file=nces_metadata_latest.csv --output_path=output_files/nces_female_output_latest",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files_latest/table_40_*.xlsx --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=nces_male_pvmap.csv --config_file=nces_metadata_latest.csv --output_path=output_files/nces_male_output_latest"
       ],
       "source_files": [
         "input_files/*.xlsx",

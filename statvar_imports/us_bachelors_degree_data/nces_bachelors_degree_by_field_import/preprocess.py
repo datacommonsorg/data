@@ -12,26 +12,58 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os, shutil
+import os, shutil, re
 from absl import logging, app
 
-def move_latest_files(inputdir, inputdir_latest):
-    if not os.path.exists(inputdir_latest):        
-        os.makedirs(inputdir_latest, exist_ok=True)
-        logging.info(f"Created download directory: {inputdir_latest}")
-    max_digit_male,max_digit_female = -1,-1
-    for filename in os.listdir(inputdir):
-        filename_last_digit = int(filename.split(".")[0].split("_")[-1])
-        if "40" in filename and filename_last_digit > max_digit_male:
-            max_digit_male = filename_last_digit
-        elif "50" in filename and filename_last_digit > max_digit_female:
-            max_digit_female = filename_last_digit
-    for filename in os.listdir(inputdir):
-        if str(max_digit_male) in filename or str(max_digit_female) in filename:
-            src_filepath = os.path.join(inputdir, filename)
-            dest_filepath = os.path.join(inputdir_latest, filename)
-            shutil.move(src_filepath, dest_filepath)
-            logging.info(f"Successfully moved the latest file {filename} from {inputdir} to {inputdir_latest}.")
+def move_latest_files(input_dir, latest_dir):
+    """
+    Identifies the latest male and female data files, and moves them to a
+    separate directory for processing.
+    """
+    os.makedirs(latest_dir, exist_ok=True)
+    logging.info(f"Created or found latest files directory: {latest_dir}")
+
+    # Use a regex for robust parsing of filenames like 'table_40_13.xlsx'
+    file_pattern = re.compile(r"table_(?P<gender_code>40|50)_(?P<num>\d+)\.xlsx")
+
+    male_files = []
+    female_files = []
+
+    #Categorize all files in a single pass
+    for filename in os.listdir(input_dir):
+        match = file_pattern.match(filename)
+        if not match:
+            logging.warning(f"Skipping file with unexpected name: {filename}")
+            continue
+
+        data = match.groupdict()
+        file_info = {
+            "path": os.path.join(input_dir, filename),
+            "num": int(data["num"]),
+            "filename": filename
+        }
+
+        if data["gender_code"] == "40":
+            male_files.append(file_info)
+        else: # gender_code == "50"
+            female_files.append(file_info)
+
+    #Sort the lists to find the latest file easily
+    male_files.sort(key=lambda f: f["num"])
+    female_files.sort(key=lambda f: f["num"])
+
+    #Move the latest file for each gender, if they exist
+    if male_files:
+        latest_male = male_files[-1]
+        dest_path = os.path.join(latest_dir, latest_male["filename"])
+        shutil.move(latest_male["path"], dest_path)
+        logging.info(f"Moved latest male file: {latest_male['filename']}")
+
+    if female_files:
+        latest_female = female_files[-1]
+        dest_path = os.path.join(latest_dir, latest_female["filename"])
+        shutil.move(latest_female["path"], dest_path)
+        logging.info(f"Moved latest female file: {latest_female['filename']}")
 
 def main(_):
     script_dir = os.path.dirname(os.path.abspath(__file__))
