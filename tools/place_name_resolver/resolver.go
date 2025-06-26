@@ -280,71 +280,77 @@ func geocodePlaces(mapCli MapsClient, tinfo *tableInfo) error {
 }
 
 func mapPlaceIDsToDCIDs(rApi ResolveApi, tinfo *tableInfo) error {
-	// Batch the calls and collect responses.
-	placeID2Idx := map[string][]int{}
-	responses := []*resolveResp{}
-	for i := 0; i < len(tinfo.rows); i += dcBatchSize {
+	placeID2Idx := buildPlaceIDMap(tinfo)
+	batches := createResolveBatches(placeID2Idx)
+
+	resolvedPlaceIDs := make(map[string]string)
+	for _, batch := range batches {
 		req := &resolveReq{
 			InProp:  "placeId",
 			OutProp: "dcid",
+			Ids:     batch,
 		}
-
-		limit := i + dcBatchSize
-		if limit > len(tinfo.rows) {
-			limit = len(tinfo.rows)
-		}
-		for j := i; j < limit; j++ {
-			r := tinfo.rows[j]
-			if len(r) < 2 {
-				continue
-			}
-			placeID := r[len(r)-2]
-			if v, ok := placeID2Idx[placeID]; ok {
-				placeID2Idx[placeID] = append(v, j)
-			} else {
-				placeID2Idx[placeID] = []int{j}
-			}
-			req.Ids = append(req.Ids, placeID)
-		}
-
 		resp, err := rApi.Resolve(req)
 		if err != nil {
 			return err
 		}
-
-		responses = append(responses, resp)
-	}
-
-	// Replace all resolved placeIDs with DCIDs
-	for _, resp := range responses {
 		for _, ent := range resp.Entities {
-			for _, idx := range placeID2Idx[ent.InId] {
-				l := len(tinfo.rows[idx])
-				if len(placeID2Idx[ent.InId]) > 1 {
-					tinfo.rows[idx][l-2] = ""
-					tinfo.rows[idx][l-1] = fmt.Sprintf("Duplicate dcid %s", ent.OutIds[0])
-				} else {
-					tinfo.rows[idx][l-2] = ent.OutIds[0]
-				}
+			if len(ent.OutIds) > 0 {
+				resolvedPlaceIDs[ent.InId] = ent.OutIds[0]
 			}
-			placeID2Idx[ent.InId] = nil
 		}
 	}
 
-	// Mark errors in unresolved entries.
-	for placeID, idxArr := range placeID2Idx {
-		if idxArr == nil {
-			// Resolved entry
+	updateTableWithDCIDs(tinfo, placeID2Idx, resolvedPlaceIDs)
+	return nil
+}
+
+func buildPlaceIDMap(tinfo *tableInfo) map[string][]int {
+	placeID2Idx := make(map[string][]int)
+	for i, r := range tinfo.rows {
+		if len(r) < 2 {
 			continue
 		}
-		for _, idx := range idxArr {
-			// Set error.
-			l := len(tinfo.rows[idx])
-			tinfo.rows[idx][l-2] = ""
-			tinfo.rows[idx][l-1] = fmt.Sprintf("Missing dcid for placeId %s", placeID)
+		placeID := r[len(r)-2]
+		if placeID != "" {
+			placeID2Idx[placeID] = append(placeID2Idx[placeID], i)
 		}
 	}
-	return nil
+	return placeID2Idx
+}
+
+func createResolveBatches(placeID2Idx map[string][]int) [][]string {
+	var batches [][]string
+	var batch []string
+	for placeID := range placeID2Idx {
+		batch = append(batch, placeID)
+		if len(batch) == dcBatchSize {
+			batches = append(batches, batch)
+			batch = nil
+		}
+	}
+	if len(batch) > 0 {
+		batches = append(batches, batch)
+	}
+	return batches
+}
+
+func updateTableWithDCIDs(tinfo *tableInfo, placeID2Idx map[string][]int, resolvedPlaceIDs map[string]string) {
+	for placeID, indices := range placeID2Idx {
+		dcid, ok := resolvedPlaceIDs[placeID]
+		for _, idx := range indices {
+			l := len(tinfo.rows[idx])
+			if !ok {
+				tinfo.rows[idx][l-2] = ""
+				tinfo.rows[idx][l-1] = fmt.Sprintf("Missing dcid for placeId %s", placeID)
+			} else if len(indices) > 1 {
+				tinfo.rows[idx][l-2] = ""
+				tinfo.rows[idx][l-1] = fmt.Sprintf("Duplicate dcid %s", dcid)
+			} else {
+				tinfo.rows[idx][l-2] = dcid
+			}
+		}
+	}
 }
 
 func writeOutput(outCsvPath string, tinfo *tableInfo) error {

@@ -225,6 +225,31 @@ func TestGeocodePlaces(t *testing.T) {
 	}
 }
 
+func TestMapPlaceIDsToDCIDs(t *testing.T) {
+	tinfo := &tableInfo{
+		rows: [][]string{
+			{"n1", "Mumbai", "n2", "ChIJwe1EZjDG5zsRaYxkjY_tpF0", ""},
+			{"n2", "Maharashtra", "n3", "ChIJ-dacnB7EzzsRtk_gS5IiLxs", ""},
+			{"n3", "India", "", "ChIJkbeSa_BfYzARphNChaFPjNc", ""},
+		},
+	}
+	rApi := &MockResolveApi{}
+	err := mapPlaceIDsToDCIDs(rApi, tinfo)
+	if err != nil {
+		t.Errorf("mapPlaceIDsToDCIDs() failed with error %v", err)
+	}
+	expectedRows := [][]string{
+		{"n1", "Mumbai", "n2", "wikidataId/Q1156", ""},
+		{"n2", "Maharashtra", "n3", "", "Missing dcid for placeId ChIJ-dacnB7EzzsRtk_gS5IiLxs"},
+		{"n3", "India", "", "country/IND", ""},
+	}
+	for i, row := range tinfo.rows {
+		if strings.Join(row, ",") != strings.Join(expectedRows[i], ",") {
+			t.Errorf("row %d differs: got %v, want %v", i, row, expectedRows[i])
+		}
+	}
+}
+
 func TestMain(t *testing.T) {
 	table := []struct {
 		in     string
