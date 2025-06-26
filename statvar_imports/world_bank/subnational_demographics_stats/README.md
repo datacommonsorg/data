@@ -13,9 +13,9 @@
 python3 ../../../tools/statvar_importer/stat_var_processor.py 
 --input_data=input_files/<input_file_name>.csv 
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---pv_map=pvmap.csv 
---config_file=metadata.csv 
---places_resolved_csv=place_resolution.csv 
+--pv_map=wb_subnational_pvmap.csv 
+--config_file=wb_subnational_metadata.csv 
+--places_resolved_csv=wb_subnational_place_resolution.csv 
 --output_path=output_files/<output_file_name>
 ```
 
@@ -36,8 +36,9 @@ Execute the script inside the folder `/data/tools/statvar_importer/`
 python3 ../../../tools/statvar_importer/stat_var_processor.py 
 --input_data=input_files/wb_subnational_input.csv 
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf 
---pv_map=pvmap.csv 
---config_file=metadata.csv 
---places_resolved_csv=place_resolution.csv 
+--pv_map=wb_subnational_pvmap.csv 
+--config_file=wb_subnational_metadata.csv 
+--places_resolved_csv=wb_subnational_place_resolution.csv 
 --output_path=output_files/wb_subnational_output
 ```
+
