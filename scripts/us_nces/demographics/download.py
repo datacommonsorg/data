@@ -1,0 +1,352 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+import functools
+import io
+import json
+import os
+import shutil
+import sys
+import time
+import zipfile
+from absl import app
+from absl import flags
+from absl import logging
+from bs4 import BeautifulSoup
+import requests
+import fetch_ncid
+from download_config import COLUMNS_SELECTOR_URL
+from download_config import COLUMNS_SELECTOR
+from download_config import COLUMNS_TO_DOWNLOAD_WITH_SINGLE_API_CALL
+from download_config import COMPRESS_FILE_URL
+from download_config import COMPRESS_FILE
+from download_config import DOWNLOAD_URL
+from download_config import HEADERS
+from download_config import MAX_RETRIES
+from download_config import NCES_DOWNLOAD_URL
+from download_config import RETRY_SLEEP_SECS
+from download_config import YEAR_PAYLOAD, YEAR_URL
+from download_files_details import DEFAULT_COLUMNS_SELECTED
+from download_files_details import DISTRICT_COLUMNS
+from download_files_details import KEY_COLUMNS_DISTRICT
+from download_files_details import KEY_COLUMNS_PRIVATE
+from download_files_details import KEY_COLUMNS_PUBLIC
+from download_files_details import PRIVATE_COLUMNS
+from download_files_details import PUBLIC_COLUMNS
+
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
+_GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+import file_util
+
+_FLAGS = flags.FLAGS
+
+flags.DEFINE_enum("import_name", None,
+                  ["PublicSchool", "PrivateSchool", "District"],
+                  "Import name for which input files to be downloaded")
+flags.DEFINE_list("years_to_download", None,
+                  "Years for which file has to be downloaded")
+flags.mark_flag_as_required("import_name")
+flags.DEFINE_string(
+    'config_file',
+    'gs://datcom-import-test/scripts/us_nces/demographics/us_nces_demographics_school_id_list.json',
+    'Path to config file')
+
+
+# function to get the folder structure  path for GCS output
+def gcs_output_path(import_name: str, year: str) -> str:
+    """
+    This function si to create the folders structure  within _GCS_OUTPUT_DIR
+    where files for a given import_name and year should be stored.
+
+    """
+    base_path_for_import = ""
+    if import_name == "PrivateSchool":
+        base_path_for_import = os.path.join(_GCS_OUTPUT_DIR, "private_school",
+                                            "input_files")
+    elif import_name == "District":
+        base_path_for_import = os.path.join(_GCS_OUTPUT_DIR, "school_district",
+                                            "input_files")
+    elif import_name == "PublicSchool":
+        base_path_for_import = os.path.join(_GCS_OUTPUT_DIR, "public_school",
+                                            "input_files")
+    else:
+        logging.warning(
+            f"Unknown _FLAGS.import_name: {import_name}. Using top-level directory for year."
+        )
+        base_path_for_import = _GCS_OUTPUT_DIR
+
+    return os.path.join(base_path_for_import, year)
+
+
+def _call_export_csv_api(school: str, year: str, columns: list) -> str:
+    COLUMNS_SELECTOR["lColumnsSelected"] = DEFAULT_COLUMNS_SELECTED + columns
+    COLUMNS_SELECTOR["sLevel"] = school
+    COLUMNS_SELECTOR["lYearsSelected"] = [year]
+    json_value = COLUMNS_SELECTOR
+    response = requests.post(url=COLUMNS_SELECTOR_URL,
+                             json=COLUMNS_SELECTOR,
+                             headers=HEADERS)
+    if response.status_code == 200:
+        src_file_name = json.loads(response.text)['d']
+        logging.info(
+            f"CSV export successful for {school} - {year} - {src_file_name}")
+        return src_file_name
+    else:
+        logging.error(
+            f"CSV export failed with status code: {response.status_code}")
+        return None
+
+
+def retry(f):
+    """Wrap a function so that the function is retried automatically."""
+
+    @functools.wraps(f)
+    def wrapped(*args, **kwargs):
+        attempt = 1
+        while attempt <= MAX_RETRIES:
+            try:
+                return f(*args, **kwargs)
+            except Exception as e:
+                attempt += 1
+                if attempt <= MAX_RETRIES:
+                    logging.warning(
+                        f'Retrying in {RETRY_SLEEP_SECS} seconds: attempt {attempt} of {MAX_RETRIES}. Error: {e}'
+                    )
+                    time.sleep(RETRY_SLEEP_SECS)
+                else:
+                    logging.fatal(
+                        f'Execution failed after {MAX_RETRIES} retries for {args}. Last error: {e}'
+                    )
+                    raise
+
+    return wrapped
+
+
+def _call_compress_api(file_name: str) -> str:
+    COMPRESS_FILE["sFileName"] = file_name
+    response = requests.post(url=COMPRESS_FILE_URL,
+                             json=COMPRESS_FILE,
+                             headers=HEADERS)
+    if response.status_code == 200:
+        compressed_src_file = json.loads(response.text)['d'][0]
+        logging.info(f"File compression successful: {compressed_src_file}")
+        return compressed_src_file
+    else:
+        logging.error(
+            f"File compression failed with status code: {response.status_code}")
+        return None
+
+
+def _call_download_api(compressed_src_file: str, year: str) -> int:
+    """
+    Calls the download API to download a compressed file, extracts it to the
+    original specified locations (now with year subfolders), and then copies
+    these extracted files to the corresponding year-specific subfolders within
+    the local _GCS_OUTPUT_DIR.
+
+    Args:
+        compressed_src_file: The identifier of the compressed file to download.
+        year: The year associated with the file.
+
+    Returns:
+        0 if successful, 1 otherwise.
+    """
+    res = requests.get(url=DOWNLOAD_URL.format(
+        compressed_src_file=compressed_src_file))
+
+    if res.status_code == 200:
+        logging.info(f"API success for downloading file for year {year}")
+
+        base_extract_parent_dir = ""
+        if _FLAGS.import_name == "PrivateSchool":
+            base_extract_parent_dir = "private_school/input_files"
+        elif _FLAGS.import_name == "District":
+            base_extract_parent_dir = "school_district/input_files"
+        elif _FLAGS.import_name == "PublicSchool":
+            base_extract_parent_dir = "public_school/input_files"
+        else:
+            logging.warning(
+                f"Unknown _FLAGS.import_name: {_FLAGS.import_name}. Extracting to current directory."
+            )
+            base_extract_parent_dir = ""
+        base_extract_path_original = os.path.join(base_extract_parent_dir, year)
+        gcs_output_subfolder = gcs_output_path(_FLAGS.import_name, year)
+
+        # checking the  target extraction paths existance
+        os.makedirs(base_extract_path_original, exist_ok=True)
+        os.makedirs(gcs_output_subfolder, exist_ok=True)
+
+        try:
+            with zipfile.ZipFile(io.BytesIO(res.content)) as zipfileout:
+                # extracting to the original location
+                zipfileout.extractall(base_extract_path_original)
+                logging.info(
+                    f"Files extracted to original location: {os.path.abspath(base_extract_path_original)}"
+                )
+
+                #  copy the files to _GCS_OUTPUT_DIR subfolder
+                for file_info in zipfileout.infolist():
+                    if not file_info.is_dir():
+                        extracted_file_path = os.path.join(
+                            base_extract_path_original, file_info.filename)
+                        target_gcs_output_path = os.path.join(
+                            gcs_output_subfolder, file_info.filename)
+                        shutil.copy2(extracted_file_path,
+                                     target_gcs_output_path)
+                        logging.info(
+                            f"Copied {file_info.filename} to {os.path.abspath(target_gcs_output_path)}"
+                        )
+            return 0
+
+        except zipfile.BadZipFile:
+            logging.error(
+                f"Downloaded file for year {year} is not a valid zip file.")
+            return 1
+        except Exception as e:
+            logging.error(
+                f"An unexpected error occurred during file extraction or copying: {e}"
+            )
+            return 1
+    else:
+        logging.error(
+            f"Download failed with status code: {res.status_code} for year {year}"
+        )
+        return 1
+
+
+def get_year_list(school):
+    YEAR_PAYLOAD["sLevel"] = school
+    response = requests.post(YEAR_URL,
+                             headers=HEADERS,
+                             data=json.dumps(YEAR_PAYLOAD))
+    years_to_download = []
+    if response.status_code == 200:
+        data = response.json()
+        html_content = f"""{data}"""
+        soup = BeautifulSoup(html_content, 'html.parser')
+        for input_tag in soup.find_all('input', {'type': 'checkbox'}):
+            year = input_tag['value']
+            years_to_download.append(year)
+    else:
+        logging.fatal(
+            f"Failed to retrieve years with status code: {response.status_code}"
+        )
+    if school == "PublicSchool" or school == "District":
+        years_to_download = [y for y in years_to_download if int(y) >= 2010]
+    return years_to_download
+
+
+def main(_):
+    logging.info(f'Loading config: {_FLAGS.config_file}')
+
+    logging.info(f"Downloading files for import {_FLAGS.import_name}")
+    school = _FLAGS.import_name
+
+    if _FLAGS.years_to_download:
+        years_to_process = _FLAGS.years_to_download
+    else:
+        years_to_process = get_year_list(school)
+
+    if school == "PublicSchool":
+        primary_key = KEY_COLUMNS_PUBLIC
+        column_names = PUBLIC_COLUMNS
+    elif school == "PrivateSchool":
+        primary_key = KEY_COLUMNS_PRIVATE
+        column_names = PRIVATE_COLUMNS
+    elif school == "District":
+        primary_key = KEY_COLUMNS_DISTRICT
+        column_names = DISTRICT_COLUMNS
+
+    data = {}
+    try:
+        with file_util.FileIO(_FLAGS.config_file, 'r') as f:
+            data = json.load(f)
+    except Exception as e:
+        logging.warning(
+            f"Could not load config file, starting with empty data: {e}")
+        data = {school: {}}
+
+    if school not in data:
+        data[school] = {}
+
+    for year in years_to_process:
+        # logic to check the gcs_folders stored data
+        expected_gcs_output_dir_for_year = gcs_output_path(school, year)
+
+        if os.path.exists(expected_gcs_output_dir_for_year) and os.listdir(
+                expected_gcs_output_dir_for_year):
+            logging.info(
+                f"Files for {school} - {year} already exist in {os.path.abspath(expected_gcs_output_dir_for_year)}. Skipping download."
+            )
+            continue
+
+        logging.info(f"Processing download for {school} - {year}")
+        if year in data[school]:
+            id_list = data[school][year]
+        else:
+            id_list = fetch_ncid.fetch_school_ncid(school, year, column_names,
+                                                   NCES_DOWNLOAD_URL)
+            data[school][year] = id_list
+            with file_util.FileIO(_FLAGS.config_file, 'w') as f:
+                json.dump(data, f, indent=4)
+
+        index_columns_selected = 0
+        COLUMNS_TO_DOWNLOAD = id_list
+        total_columns_to_download = len(COLUMNS_TO_DOWNLOAD)
+        while index_columns_selected < total_columns_to_download:
+            start_idx = index_columns_selected
+            remaining_columns_to_select = total_columns_to_download - index_columns_selected
+            end_idx = index_columns_selected + min(
+                remaining_columns_to_select,
+                COLUMNS_TO_DOWNLOAD_WITH_SINGLE_API_CALL)
+            curr_columns_selected = COLUMNS_TO_DOWNLOAD[start_idx:end_idx]
+            if primary_key[0] not in curr_columns_selected:
+                curr_columns_selected.append(primary_key[0])
+            index_columns_selected += min(
+                remaining_columns_to_select,
+                COLUMNS_TO_DOWNLOAD_WITH_SINGLE_API_CALL)
+
+            logging.info(
+                f"{school} - {year} - {index_columns_selected} columns out of {total_columns_to_download}"
+            )
+
+            try:
+                nces_elsi_file_download(school, year, curr_columns_selected)
+            except Exception as e:
+                logging.fatal(
+                    f"An error occurred during download for {school} - {year}: {e}"
+                )
+                break
+        logging.info(f"Download complete for year {year}")
+
+
+@retry
+def nces_elsi_file_download(school, year, curr_columns_selected):
+    file_name = _call_export_csv_api(school, year, curr_columns_selected)
+    if file_name is None:
+        raise Exception(f"Export to CSV failed for {school} - {year}")
+    else:
+        logging.info(f"Compressing output CSV: {file_name}")
+        compressed_file_path = _call_compress_api(file_name)
+        if compressed_file_path is None:
+            raise Exception(f"Compress file failed for {file_name}")
+        else:
+            logging.info(f"Downloading the compressed file for {year}")
+            download_ret = _call_download_api(compressed_file_path, year)
+            if download_ret != 0:
+                raise Exception(f"Download failed for {file_name}")
+
+
+if __name__ == "__main__":
+    app.run(main)
