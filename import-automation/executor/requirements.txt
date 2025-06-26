@@ -52,3 +52,4 @@ xlsxwriter
 zipp
 netCDF4
 xmltodict
+sodapy

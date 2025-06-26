@@ -1,0 +1,9 @@
+Node: E:nzl_national_output->E0
+observationAbout: C:nzl_national_output->observationAbout
+observationDate: C:nzl_national_output->observationDate
+value: C:nzl_national_output->value
+variableMeasured: C:nzl_national_output->variableMeasured
+unit: C:nzl_national_output->unit
+scalingFactor: C:nzl_national_output->scalingFactor
+measurementMethod: C:nzl_national_output->measurementMethod
+typeOf: dcs:StatVarObservation
