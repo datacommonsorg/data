@@ -66,6 +66,7 @@ To generate CSV, TMCF and stat-var MCF for a supported dataset:
 ```bash
 python3 process.py --dataset=INTL --mode=process
         python3 process.py --dataset=ELEC --mode=process
+        python3 process.py --dataset=COAL --mode=process
         python3 process.py --dataset=PET --mode=process
         python3 process.py --dataset=NG --mode=process
         python3 process.py --dataset=SEDS --mode=process
