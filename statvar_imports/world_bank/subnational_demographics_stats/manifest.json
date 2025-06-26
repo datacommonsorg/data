@@ -7,7 +7,7 @@
       "provenance_description": "Sub-national Demographic data - Worldbank Population for Country and States.",
       "scripts": [
       "download_data.py", 
-      "python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wb_subnational_input.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=pvmap.csv --config_file=metadata.csv --places_resolved_csv=place_resolution.csv --output_path=output_files/wb_subnational_output"
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/wb_subnational_input.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=pvmap.csv --config_file=metadata.csv --places_resolved_csv=place_resolution.csv --output_path=output_files/wb_subnational_output"
     ],
       "source_files": [
         "input_files/P_Data_Extract_From_Subnational_Population.zip"
