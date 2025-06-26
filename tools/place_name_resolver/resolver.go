@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"sync"
 	"time"
 
@@ -101,34 +102,49 @@ type tableInfo struct {
 	nameIdx int
 }
 
-func appendContainedInPlaceNames(name string, row []string, tinfo *tableInfo) (string, error) {
-	if tinfo.cipIdx < 0 {
-		return name, nil
+func appendContainedInPlaceNames(row []string, tinfo *tableInfo) (string, error) {
+	var parts []string
+	currRow := row
+	visitedNodes := make(map[string]bool)
+
+	for {
+		name := currRow[tinfo.nameIdx]
+		parts = append(parts, name)
+
+		if tinfo.cipIdx < 0 {
+			break
+		}
+
+		cipRef := currRow[tinfo.cipIdx]
+		if cipRef == "" {
+			break
+		}
+
+		nodeId := currRow[tinfo.nidIdx]
+		if nodeId != "" {
+			if _, ok := visitedNodes[nodeId]; ok {
+				return "", fmt.Errorf("circular dependency detected for node %s", nodeId)
+			}
+			visitedNodes[nodeId] = true
+		}
+
+		if nodeId == cipRef {
+			break
+		}
+
+		idx, ok := tinfo.node2row[cipRef]
+		if !ok {
+			log.Printf("ERROR: Unresolved 'containedInPlace' ref %s in Node %s, skipping.", cipRef, nodeId)
+			break
+		}
+		if idx >= len(tinfo.rows) {
+			return "", fmt.Errorf("out of range %d vs. %d", idx, len(tinfo.rows))
+		}
+
+		currRow = tinfo.rows[idx]
 	}
 
-	cipRef := row[tinfo.cipIdx]
-	if cipRef == "" {
-		return name, nil
-	}
-
-	nodeId := row[tinfo.nidIdx]
-	if nodeId == cipRef {
-		return name, nil
-	}
-
-	idx, ok := tinfo.node2row[cipRef]
-	if !ok {
-		log.Printf("ERROR: Unresolved 'containedInPlace' ref %s in Node %s, skipping.", cipRef, nodeId)
-		return name, nil
-	}
-	if idx >= len(tinfo.rows) {
-		log.Fatalf("Out of range %d vs. %d", idx, len(tinfo.rows))
-		return "", fmt.Errorf("Out of range %d vs. %d", idx, len(tinfo.rows))
-	}
-
-	cipRow := tinfo.rows[idx]
-	cipName := cipRow[tinfo.nameIdx]
-	return appendContainedInPlaceNames(name+", "+cipName, cipRow, tinfo)
+	return strings.Join(parts, ", "), nil
 }
 
 func buildTableInfo(inCsvPath string) (*tableInfo, error) {
@@ -186,7 +202,7 @@ func buildTableInfo(inCsvPath string) (*tableInfo, error) {
 	}
 
 	for _, row := range tinfo.rows {
-		extName, err := appendContainedInPlaceNames(row[tinfo.nameIdx], row, tinfo)
+		extName, err := appendContainedInPlaceNames(row, tinfo)
 		if err != nil {
 			return nil, err
 		}

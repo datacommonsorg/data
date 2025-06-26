@@ -81,6 +81,115 @@ func getMockGeocodesContainment() *MockMapsClient {
 	}
 }
 
+func TestAppendContainedInPlaceNames(t *testing.T) {
+	table := []struct {
+		name      string
+		row       []string
+		tinfo     *tableInfo
+		expected  string
+		shouldErr bool
+	}{
+		{
+			"Simple containment",
+			[]string{"n1", "Mumbai", "n2"},
+			&tableInfo{
+				rows: [][]string{
+					{"n1", "Mumbai", "n2"},
+					{"n2", "Maharashtra", "n3"},
+					{"n3", "India", ""},
+				},
+				node2row: map[string]int{"n1": 0, "n2": 1, "n3": 2},
+				nidIdx:   0,
+				nameIdx:  1,
+				cipIdx:   2,
+			},
+			"Mumbai, Maharashtra, India",
+			false,
+		},
+		{
+			"No containment",
+			[]string{"n1", "India", ""},
+			&tableInfo{
+				rows:     [][]string{{"n1", "India", ""}},
+				node2row: map[string]int{"n1": 0},
+				nidIdx:   0,
+				nameIdx:  1,
+				cipIdx:   2,
+			},
+			"India",
+			false,
+		},
+		{
+			"Unresolved containment ref",
+			[]string{"n1", "Mumbai", "n4"}, // n4 does not exist
+			&tableInfo{
+				rows: [][]string{
+					{"n1", "Mumbai", "n4"},
+					{"n2", "Maharashtra", "n3"},
+				},
+				node2row: map[string]int{"n1": 0, "n2": 1},
+				nidIdx:   0,
+				nameIdx:  1,
+				cipIdx:   2,
+			},
+			"Mumbai", // Should just return the name, and log an error.
+			false,
+		},
+		{
+			"Self containment ref",
+			[]string{"n1", "Mumbai", "n1"},
+			&tableInfo{
+				rows:     [][]string{{"n1", "Mumbai", "n1"}},
+				node2row: map[string]int{"n1": 0},
+				nidIdx:   0,
+				nameIdx:  1,
+				cipIdx:   2,
+			},
+			"Mumbai",
+			false,
+		},
+		{
+			"Circular dependency",
+			[]string{"n1", "A", "n2"},
+			&tableInfo{
+				rows: [][]string{
+					{"n1", "A", "n2"},
+					{"n2", "B", "n1"},
+				},
+				node2row: map[string]int{"n1": 0, "n2": 1},
+				nidIdx:   0,
+				nameIdx:  1,
+				cipIdx:   2,
+			},
+			"",
+			true,
+		},
+	}
+
+	for _, test := range table {
+		t.Run(test.name, func(t *testing.T) {
+			// The function under test can call log.Fatalf which will exit the test runner.
+			// This is not ideal, but for now we will live with it.
+			// A proper fix would be to refactor the code to not call log.Fatalf.
+			defer func() {
+				if r := recover(); r != nil {
+					if !test.shouldErr {
+						t.Errorf("appendContainedInPlaceNames() panicked unexpectedly: %v", r)
+					}
+				}
+			}()
+			got, err := appendContainedInPlaceNames(test.row, test.tinfo)
+			if (err != nil) != test.shouldErr {
+				t.Errorf("appendContainedInPlaceNames() error = %v, wantErr %v", err, test.shouldErr)
+				return
+			}
+			if got != test.expected {
+				t.Errorf("appendContainedInPlaceNames() = %v, want %v", got, test.expected)
+			}
+		})
+	}
+}
+
 func TestMain(t *testing.T) {
 	table := []struct {
 		in     string
