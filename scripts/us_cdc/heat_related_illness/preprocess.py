@@ -32,7 +32,7 @@ import pandas as pd
 
 _CONFIG = None
 
-input_path = "./source_data/combined_csv_files/"
+input_path = "./input_files/"
 config_path = "./config.json"
 output_path = "./state"
 

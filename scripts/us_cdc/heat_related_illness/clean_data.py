@@ -18,7 +18,6 @@ import csv
 from bs4 import BeautifulSoup
 import pandas as pd
 from absl import app, logging
-import requests
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -27,10 +26,12 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 
 input_html_files = "./source_data/html_files/"
 input_csv_files = "./source_data/csv_files"
-combined_input_csv = "./source_data/combined_csv_files/"
+combined_input_csv = "./input_files/"
 
 
 def download_dynamic_page(url, filename):
@@ -40,7 +41,15 @@ def download_dynamic_page(url, filename):
     url: The url for download the html files.
     filename: The filename for saving the downloaded file.
   """
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    chrome_options = ChromeOptions()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--disable-gpu")
+    service = ChromeService(ChromeDriverManager().install())
+    driver = webdriver.Chrome(service=service, options=chrome_options)
+    # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     driver.get(url)
     WebDriverWait(driver, 30).until(
         EC.presence_of_element_located((By.XPATH, "//*[@id='page-start']")))

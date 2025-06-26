@@ -2,10 +2,13 @@
   "import_specifications": [
     {
       "import_name": "EPHHeatRelatedIllness",
-      "curator_emails": [],
+      "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://ephtracking.cdc.gov/qrlist/35",
       "provenance_description": "EPH Heat Related Illness",
       "scripts": ["clean_data.py", "preprocess.py"],
+      "source_files": [
+        "input_files/*.csv"
+      ],
       "import_inputs": [
         {
           "template_mcf": "state/output.tmcf",
