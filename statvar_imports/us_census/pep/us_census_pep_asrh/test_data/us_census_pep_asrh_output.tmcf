@@ -1,0 +1,7 @@
+Node: E:us_census_pep_asrh_output->E0
+observationAbout: C:us_census_pep_asrh_output->observationAbout
+observationDate: C:us_census_pep_asrh_output->observationDate
+value: C:us_census_pep_asrh_output->value
+variableMeasured: C:us_census_pep_asrh_output->variableMeasured
+measurementMethod: C:us_census_pep_asrh_output->measurementMethod
+typeOf: dcs:StatVarObservation
