@@ -1,0 +1,23 @@
+key,prop,value,p1,v1,,
+0 - 4,age,[0 4 Years],measuredProperty,count,populationType,Person
+5 - 9,age,[5 9 Years],measuredProperty,count,populationType,Person
+10-14,age,[10 14 Years],measuredProperty,count,populationType,Person
+15 - 19,age,[15 19 Years],measuredProperty,count,populationType,Person
+20 - 24,age,[20 24 Years],measuredProperty,count,populationType,Person
+25 - 29,age,[25 29 Years],measuredProperty,count,populationType,Person
+30 - 34,age,[30 34 Years],measuredProperty,count,populationType,Person
+35 - 39,age,[35 39 Years],measuredProperty,count,populationType,Person
+40 - 44,age,[40 44 Years],measuredProperty,count,populationType,Person
+45 - 49,age,[45 49 Years],measuredProperty,count,populationType,Person
+50 - 54,age,[50 54 Years],measuredProperty,count,populationType,Person
+55 - 59,age,[55 59 Years],measuredProperty,count,populationType,Person
+60 - 64,age,[60 64 Years],measuredProperty,count,populationType,Person
+65 - 69,age,[65 69 Years],measuredProperty,count,populationType,Person
+70 - 74,age,[70 74 Years],measuredProperty,count,populationType,Person
+75 - 79,age,[75 79 Years],measuredProperty,count,populationType,Person
+80 ou plus,age,[80 - Years],measuredProperty,count,populationType,Person
+Total,#ignore,ignored as dup in other sheet,,,,
+TIME_PERIOD,observationDate,{Number},,,,
+OBS_VALUE,value,{Number},,,,
+ID_INDICATOR,observationAbout,country/CIV,,,,
+FREQ:A,observationPeriod,P1Y,,,,
