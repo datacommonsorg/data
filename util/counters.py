@@ -123,6 +123,15 @@ class Counters():
 
         Returns:
           This Counters object.
+        
+        Usage:
+            >>> counters = Counters()
+            >>> counters.add_counter('my_counter', 10)
+            >>> counters.get_counter('my_counter')
+            10
+            >>> counters.add_counter('my_counter', -5)
+            >>> counters.get_counter('my_counter')
+            5
         '''
         name = self._get_counter_name(counter_name)
         self._counters[name] = self._counters.get(name, 0) + value
@@ -143,6 +152,19 @@ class Counters():
 
         Returns:
           This Counters object.
+
+        Usage:
+            >>> counters = Counters()
+            >>> counters.add_counters({'a': 1, 'b': 2})
+            >>> counters.get_counter('a')
+            1
+            >>> counters.get_counter('b')
+            2
+            >>> counters.add_counters({'a': 3, 'c': 4})
+            >>> counters.get_counter('a')
+            4
+            >>> counters.get_counter('c')
+            4
         '''
         if counters_dict:
             for counter, value in counters_dict.items():
@@ -159,6 +181,15 @@ class Counters():
 
         Returns:
           This Counters object.
+
+        Usage:
+            >>> counters = Counters()
+            >>> counters.set_counter('my_counter', 100)
+            >>> counters.get_counter('my_counter')
+            100
+            >>> counters.set_counter('my_counter', 200)
+            >>> counters.get_counter('my_counter')
+            200
         '''
         self._counters[self._get_counter_name(name)] = value
         if debug_context:
@@ -166,7 +197,15 @@ class Counters():
         return self
 
     def get_counters(self) -> dict:
-        '''Return the dictionary of all counter names and their values.'''
+        '''Return the dictionary of all counter names and their values.
+        
+        Usage:
+            >>> counters = Counters()
+            >>> counters.add_counter('a', 1)
+            >>> counters.add_counter('b', 2)
+            >>> sorted(counters.get_counters().items())
+            [('a', 1), ('b', 2), ('process-mem', ...), ('process-mem-rss', ...), ('process-time-sys-secs', ...), ('process-time-user-secs', ...), ('process_elapsed_time', ...), ('processed', 0), ('start_time', ...)]
+        '''
         return self._counters
 
     def get_counter(self, name: str) -> int:
@@ -177,6 +216,14 @@ class Counters():
 
         Returns:
           The value of the counter if it exists, otherwise 0.
+
+        Usage:
+            >>> counters = Counters()
+            >>> counters.set_counter('my_counter', 10)
+            >>> counters.get_counter('my_counter')
+            10
+            >>> counters.get_counter('non_existent_counter')
+            0
         '''
         return self._counters.get(self._get_counter_name(name), 0)
 
@@ -190,6 +237,18 @@ class Counters():
 
         Returns:
           This Counters object.
+
+        Usage:
+            >>> counters = Counters()
+            >>> counters.min_counter('min_val', 10)
+            >>> counters.get_counter('min_val')
+            10
+            >>> counters.min_counter('min_val', 5)
+            >>> counters.get_counter('min_val')
+            5
+            >>> counters.min_counter('min_val', 15)
+            >>> counters.get_counter('min_val')
+            5
         '''
         if value <= self._counters.get(self._get_counter_name(name), value):
             self.set_counter(name, value, debug_context)
@@ -205,13 +264,44 @@ class Counters():
 
         Returns:
           This Counters object.
+
+        Usage:
+            >>> counters = Counters()
+            >>> counters.max_counter('max_val', 10)
+            >>> counters.get_counter('max_val')
+            10
+            >>> counters.max_counter('max_val', 5)
+            >>> counters.get_counter('max_val')
+            10
+            >>> counters.max_counter('max_val', 15)
+            >>> counters.get_counter('max_val')
+            15
         '''
         if value >= self._counters.get(self._get_counter_name(name), value):
             self.set_counter(name, value, debug_context)
         return self
 
     def get_counters_string(self) -> str:
-        '''Returns a formatted string of counter names and values, sorted by name.'''
+        '''Returns a formatted string of counter names and values, sorted by name.
+        
+        Usage:
+            >>> counters = Counters()
+            >>> counters.add_counter('c1', 1)
+            >>> counters.set_counter('c2', 2.3)
+            >>> counters.set_counter('c3', 'v3')
+            >>> print(counters.get_counters_string())
+            Counters:
+                                                    c1 =          1
+                                                    c2 =       2.30
+                                                    c3 = v3
+                                           process-mem = ...
+                                       process-mem-rss = ...
+                                 process-time-sys-secs = ...
+                                process-time-user-secs = ...
+                                  process_elapsed_time = ...
+                                             processed =          0
+                                            start_time = ...
+        '''
         lines = ['Counters:']
         for c in sorted(self._counters.keys()):
             v = self._counters[c]
@@ -253,6 +343,15 @@ class Counters():
         '''Sets the prefix for counter names.
 
         It also resets the start_time and processing rate counters.
+        
+        Usage:
+            >>> counters = Counters()
+            >>> counters.set_prefix('p1_')
+            >>> counters.add_counter('c1')
+            >>> counters.get_counter('c1')
+            1
+            >>> 'p1_c1' in counters.get_counters()
+            True
         '''
         self._update_periodic_counters()
         self._prefix = prefix
@@ -260,7 +359,16 @@ class Counters():
         logging.info(self.get_counters_string())
 
     def get_prefix(self) -> str:
-        '''Returns the counter prefix.'''
+        '''Returns the counter prefix.
+        
+        Usage:
+            >>> counters = Counters()
+            >>> counters.get_prefix()
+            ''
+            >>> counters.set_prefix('p1_')
+            >>> counters.get_prefix()
+            'p1_'
+        '''
         return self._prefix
 
     # Internal functions
