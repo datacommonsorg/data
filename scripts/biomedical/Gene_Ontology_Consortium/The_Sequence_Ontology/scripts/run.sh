@@ -26,4 +26,4 @@ identifiers. It also includes links to corresponding MeSHDescriptor nodes.
 mkdir -p CSV
 
 # extract the node information for the sequence
-python3 scripts/format_the_sequence_ontology.py input/so.json CSV/the_sequence_ontology.csv
+python3 The_Sequence_Ontology/scripts/format_the_sequence_ontology.py input/so.json CSV/the_sequence_ontology.csv
