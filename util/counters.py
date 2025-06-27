@@ -31,6 +31,7 @@ from typing import NamedTuple
 
 # Options for counters
 class CounterOptions(NamedTuple):
+    '''A set of options for configuring Counters behavior.'''
     # Enable debug counters with additional suffixes.
     debug: bool = False
     # Emit counters once every 30 secs.
@@ -46,25 +47,29 @@ class CounterOptions(NamedTuple):
 
 
 class Counters():
-    '''Dictionary of named counters.
+    '''A dictionary of named counters for tracking metrics.
+
+    This class provides a flexible way to handle various types of counters,
+    including min/max values, debug counters, and periodic metrics like
+    processing rate, memory usage, and CPU time.
 
     Example usage:
       counters = Counters(prefix='my_process')
       ...
       counters.add_counter('input_rows')
-         .add_counter('output_rows', 10)
+      counters.add_counter('output_rows', 10)
       counters.add_counter('processed', 1)
 
       # Min/Max counters
-      counters.min_counter('min_area', some_area)
-      counters.max_counter('max_temp', some_temp)
+      counters.min_counter('min_area', 12.34)
+      counters.max_counter('max_temp', 36.5)
 
       # Print counters on STDERR
       counters.print_counters()
-      #   my_process_input_rows = 1
-      #  my_process_output_rows = 10
-      #     my_process_max_temp = 36.5
-      #     my_process_min_area = 12.34
+      #       my_process_input_rows =          1
+      #      my_process_output_rows =         10
+      #         my_process_max_temp =      36.50
+      #         my_process_min_area =      12.34
 
     Note: This object is not thread-safe.
     '''
@@ -73,20 +78,15 @@ class Counters():
                  counters_dict: dict = None,
                  prefix: str = '',
                  options: CounterOptions = None):
-        '''Initialize the counters.
+        '''Initializes the Counters object.
 
         Args:
-          counters_dict: dictionary of pre-existing counters to updated.
-            Note that it updates existing reference to counters.
-          prefix: A string prefix to be added to every counter name.
-          options: A CounterOptions object with the following parameters:
-            debug: If true, enables debug counters with additional suffixes.
-            show_every_n_sec: How often to print counters to stderr.
-            process_stage: Name of the counter for the processing stage.
-            processed_counter: Name of the counter for records processed.
-              Used for computing processing rate.
-            total_counter: Name of the counter for total inputs.
-              Used for computing remaining time.
+            counters_dict: An optional dictionary of pre-existing counters.
+              If provided, the Counters object will operate on this dictionary
+              directly, allowing multiple Counters instances to share state.
+              If not provided, a new dictionary is created.
+            prefix: A string prefix to be added to every counter name.
+            options: A CounterOptions object for configuring behavior.
         '''
         if counters_dict is None:
             self._counters = {}
@@ -284,6 +284,9 @@ class Counters():
     def get_counters_string(self) -> str:
         '''Returns a formatted string of counter names and values, sorted by name.
         
+        The output is a multi-line string where each line is formatted as:
+        <counter_name> = <value>
+        
         Usage:
             >>> counters = Counters()
             >>> counters.add_counter('c1', 1)
@@ -316,11 +319,8 @@ class Counters():
     def print_counters(self, file=sys.stderr):
         '''Prints the counter values to the specified file.
 
-        If a file is specified, the counters are written to the file.
-        Otherwise, they are printed to stderr.
-
         Args:
-            file: The file handle to write the counters string to.
+            file: The file handle to write the counters string to. Defaults to stderr.
         '''
         self._update_periodic_counters()
         print(self.get_counters_string(), file=file)
