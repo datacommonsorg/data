@@ -1,0 +1,8 @@
+Node: E:wb_subnational_output->E0
+observationDate: C:wb_subnational_output->observationDate
+observationAbout: C:wb_subnational_output->observationAbout
+value: C:wb_subnational_output->value
+observationPeriod: C:wb_subnational_output->observationPeriod
+measurementMethod: C:wb_subnational_output->measurementMethod
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Count_Person
