@@ -11,7 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''Class for dictionary of named counters.'''
+'''Class for dictionary of named counters.
+
+It also supports the following:
+- Min/Max counters: to track min/max values of a metric.
+- Debug counters: to track metrics with more detailed context.
+- Periodic counters: to track processing rate, memory, CPU usage.
+- Rate counters: to track processing rate and estimated time to completion.
+'''
 
 import os
 import psutil
@@ -71,8 +78,15 @@ class Counters():
         Args:
           counters_dict: dictionary of pre-existing counters to updated.
             Note that it updates existing reference to counters.
-          debug: Enable or disable debug context counters.
-          options: Dictionary with parameter:values.
+          prefix: A string prefix to be added to every counter name.
+          options: A CounterOptions object with the following parameters:
+            debug: If true, enables debug counters with additional suffixes.
+            show_every_n_sec: How often to print counters to stderr.
+            process_stage: Name of the counter for the processing stage.
+            processed_counter: Name of the counter for records processed.
+              Used for computing processing rate.
+            total_counter: Name of the counter for total inputs.
+              Used for computing remaining time.
         '''
         if counters_dict is None:
             self._counters = {}
@@ -90,7 +104,7 @@ class Counters():
         self._next_counter_print_time = 0
 
     def __del__(self):
-        '''Log the counters.'''
+        '''Log the counters when the object is deleted.'''
         self._update_periodic_counters()
         logging.info(self.get_counters_string())
 
@@ -98,16 +112,17 @@ class Counters():
                     counter_name: str,
                     value: int = 1,
                     debug_context: str = None):
-        '''Increment a named counter and degun counter by the given value.
-        Also displays counters periodically based on option 'show_every_n_sec'.
+        '''Increment a named counter and debug counter by the given value.
+
+        It also displays counters periodically based on 'show_every_n_sec' option.
 
         Args:
-            name: Name of the counter to update
-            value: value to be added to the counter
-            debug_context: optional suffix for the debug counter.
+            counter_name: Name of the counter to update.
+            value: Value to be added to the counter.
+            debug_context: Optional suffix for the debug counter.
 
         Returns:
-          this Counters object
+          This Counters object.
         '''
         name = self._get_counter_name(counter_name)
         self._counters[name] = self._counters.get(name, 0) + value
@@ -124,10 +139,10 @@ class Counters():
         '''Add all counters from the given dict.
 
         Args:
-          counters_dict: dictionary of counter values.
+          counters_dict: A dictionary of counter names and their values.
 
         Returns:
-          this Counters object
+          This Counters object.
         '''
         if counters_dict:
             for counter, value in counters_dict.items():
@@ -135,15 +150,15 @@ class Counters():
         return self
 
     def set_counter(self, name: str, value: int, debug_context: str = None):
-        '''Set the value of a counter overwriting any previous value.
+        '''Set the value of a counter, overwriting any previous value.
 
         Args:
           name: Name of the counter to set.
-          value: counter value to set it to.
-          debug_context: Debug context for the counter.
+          value: The value to set the counter to.
+          debug_context: Optional suffix for the debug counter.
 
         Returns:
-          this Counters object
+          This Counters object.
         '''
         self._counters[self._get_counter_name(name)] = value
         if debug_context:
@@ -151,50 +166,52 @@ class Counters():
         return self
 
     def get_counters(self) -> dict:
-        '''Return the dictionary of all counter:values.'''
+        '''Return the dictionary of all counter names and their values.'''
         return self._counters
 
     def get_counter(self, name: str) -> int:
         '''Return the value of a named counter.
 
         Args:
-          name: Name of the counter to lookup.
+          name: Name of the counter to look up.
 
         Returns:
-          value if the counter if it exists, 0 otherwise.
+          The value of the counter if it exists, otherwise 0.
         '''
         return self._counters.get(self._get_counter_name(name), 0)
 
     def min_counter(self, name: str, value: int, debug_context: str = None):
-        '''Sets the named counter to the minimum of value.
+        '''Sets the named counter to the minimum of its current value and the given value.
 
         Args:
-          name: name of the counter
-          value: new value to consider for minimum.
-          debug_context: Debug context suffix for the counter.
+          name: Name of the counter.
+          value: The new value to consider for the minimum.
+          debug_context: Optional suffix for the debug counter.
+
         Returns:
-          this counter object
+          This Counters object.
         '''
         if value <= self._counters.get(self._get_counter_name(name), value):
             self.set_counter(name, value, debug_context)
         return self
 
     def max_counter(self, name: str, value: int, debug_context: str = None):
-        '''Sets the named counter to the maximum of values passed in.
+        '''Sets the named counter to the maximum of its current value and the given value.
 
         Args:
-          name: name of the counter
-          value: new value to consider for maximum.
-          debug_context: Debug context suffix for the counter.
+          name: Name of the counter.
+          value: The new value to consider for the maximum.
+          debug_context: Optional suffix for the debug counter.
+
         Returns:
-          this counter object
+          This Counters object.
         '''
         if value >= self._counters.get(self._get_counter_name(name), value):
             self.set_counter(name, value, debug_context)
         return self
 
     def get_counters_string(self) -> str:
-        '''Returns a formatted string of counter and values sorted by name.'''
+        '''Returns a formatted string of counter names and values, sorted by name.'''
         lines = ['Counters:']
         for c in sorted(self._counters.keys()):
             v = self._counters[c]
@@ -207,20 +224,19 @@ class Counters():
         return '\n'.join(lines)
 
     def print_counters(self, file=sys.stderr):
-        '''Print the counter values.
-        If a file is specified, emits the counters to the file.
-        If no file is specified, displays on error console.
+        '''Prints the counter values to the specified file.
+
+        If a file is specified, the counters are written to the file.
+        Otherwise, they are printed to stderr.
 
         Args:
-            file: file handle to emit counters string.
+            file: The file handle to write the counters string to.
         '''
         self._update_periodic_counters()
         print(self.get_counters_string(), file=file)
 
     def print_counters_periodically(self):
-        '''Display the counters periodically by time or by number of calls
-        based on the option 'show_counters_every_sec' or 'show_counters_every_n'.
-        '''
+        '''Prints the counters periodically based on the 'show_every_n_sec' option.'''
         interval = self._options.show_every_n_sec
         if interval > 0:
             curr_time = time.perf_counter()
@@ -229,13 +245,15 @@ class Counters():
                 self.print_counters()
 
     def reset_start_time(self):
-        '''Reset process start time for rate counters.'''
+        '''Resets the start time for rate counters.'''
         self.set_counter('start_time', time.perf_counter())
         self.set_counter(self._options.processed_counter, 0)
 
     def set_prefix(self, prefix: str):
-        '''Set the prefix for the counter names.
-        Also resets the start_time and processing rate counters.'''
+        '''Sets the prefix for counter names.
+
+        It also resets the start_time and processing rate counters.
+        '''
         self._update_periodic_counters()
         self._prefix = prefix
         self.reset_start_time()
@@ -246,15 +264,15 @@ class Counters():
         return self._prefix
 
     # Internal functions
-    def _get_counter_name(self, name: str, debug_context: str = None):
-        '''Returns the name of the counter with debug context.'''
+    def _get_counter_name(self, name: str, debug_context: str = None) -> str:
+        '''Returns the name of the counter with the prefix and debug context.'''
         name = f'{self._prefix}{name}'
         if debug_context:
             name = name + f'_{debug_context}'
         return name
 
     def _update_periodic_counters(self):
-        '''Update periodic counters.'''
+        '''Updates periodic counters such as processing rate and process counters.'''
         self._update_processing_rate()
         self._update_process_counters()
 
