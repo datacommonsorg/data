@@ -72,7 +72,8 @@ class TestCounters(unittest.TestCase):
         self.assertEqual(11, counters.get_counter('inputs_file2'))
 
     def test_debug_counters_are_not_created_when_debug_is_false(self):
-        counters = Counters(prefix='test4_', options=CounterOptions(debug=False))
+        counters = Counters(prefix='test4_',
+                            options=CounterOptions(debug=False))
         counters.add_counter('inputs', 10, 'test-case-3')
         self.assertEqual(10, counters.get_counter('inputs'))
         self.assertEqual(0, counters.get_counter('inputs_test-case-3'))
@@ -99,8 +100,8 @@ class TestCounters(unittest.TestCase):
         self.assertIn('p1_c1', counters.get_counters())
 
     def test_processing_rate(self):
-        counters = Counters(options=CounterOptions(total_counter='total',
-                                                  processed_counter='processed'))
+        counters = Counters(options=CounterOptions(
+            total_counter='total', processed_counter='processed'))
         counters.add_counter('total', 100)
         counters.add_counter('processed', 10)
         time.sleep(1)
@@ -147,6 +148,7 @@ class TestCounters(unittest.TestCase):
         self.assertEqual(10, counters.get_counter('max_val'))
         counters.max_counter('max_val', 15)
         self.assertEqual(15, counters.get_counter('max_val'))
+
 
 if __name__ == '__main__':
     unittest.main()
