@@ -1,0 +1,9 @@
+Node: E:output-India:_Poverty3->E0
+observationAbout: C:output-India:_Poverty3->observationAbout
+observationDate: C:output-India:_Poverty3->observationDate
+value: C:output-India:_Poverty3->value
+variableMeasured: C:output-India:_Poverty3->variableMeasured
+unit: C:output-India:_Poverty3->unit
+scalingFactor: C:output-India:_Poverty3->scalingFactor
+measurementMethod: C:output-India:_Poverty3->measurementMethod
+typeOf: dcs:StatVarObservation

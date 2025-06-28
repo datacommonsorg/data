@@ -1,0 +1,3 @@
+config,value
+places_within,country/IND
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod"
