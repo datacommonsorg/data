@@ -1,0 +1,20 @@
+parameter,value
+url,https://nepszamlalas2022.ksh.hu/en/database/#/table/WBS006/N4IgFgpghgJiBcBtEAVAkgWQKIH0AKWASmgPIAiAjBSADQgByW2OAylgBq2pECqAMjhRY-6PACYQAXToBnAJYwICZEML8cAcSwkAzFwDSWAGo4AglpwAhNC30mjeutdv290kDIgBjAC5yA9gB2yu4AZnIANj4QAE4yCKAA1nKBcPAgGFAADlwQgT4xchDxSCq8AkIiaOK0SSlpICwQPlwAblARAK7FyiAAEjxSAL7SKpi4BMTkVLUgyakIjc1tHd0lyGIADDN0W2ISkiOHQ0A===
+description,Completed education of the population aged 15 and older by county and settlement type for 2011 and  2022. 
+process,"To download data:
+Click on the url -> Dimensions drag them to columns,rows or sections"", -> In columns drag ""Census year"" and ""Types of settlement"", ""Sex"", and In rows drag  ""county, region"" and  ""Age group "", ""Highest level of education completed"" -> accordingly it creates table  -> click download."
+#place_type,"Country,AdministrativeArea1,AdministrativeArea2"
+#places_within,country/HUN
+start_date,2011
+end_date,2022
+release_frequency,10
+comments,
+output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor"
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1fd8Xy_Z7EWvvTZJEc6e-CfcgaHgmqAuR6cBzs4utpS4/edit#gid=1681256908
+mapped_rows,4
+mapped_columns,3
+header_rows,4
+#input_rows,10
+pv_map,https://docs.google.com/spreadsheets/d/1fd8Xy_Z7EWvvTZJEc6e-CfcgaHgmqAuR6cBzs4utpS4/edit#gid=147119097
+#debug,1
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/16HzV3wgsMCNkM6YStdzhEqxbyP2H_-QGkSBePX2LQs0/edit?resourcekey=0-2WCpsbyY_qHEdvQvHRMlPg#gid=0
