@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "NCSES_Employed_College_Grads_Import",
+        "curator_emails": [
+          "support@datacommons.org"
+        ],
+        "provenance_url": "https://ncsesdata.nsf.gov/explorer/datatables?term=race&exactMatch=no&page=1&filterSuperTopic=Demographics&filterTopic=Sex&datatablespage=2",
+        "provenance_description": "NCSES is the U.S. agency that collects and reports data on science, engineering, and technology",
+        "scripts": [
+          "../../../util/download_util_script.py --download_url=https://ncses.nsf.gov/pubs/nsf23306/assets/data-tables/tables/nsf23306-tab006-002.xlsx --output_folder=source_files",
+          "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=pv_map.csv --config_file=metadata.csv --output_path=output/nces_college"
+        ],
+        "source_files": [
+         "source_files/*.xlsx"
+      ],
+        "import_inputs": [
+          {
+            "template_mcf": "output/nces_college.tmcf",
+            "cleaned_csv": "output/nces_college.csv"
+          }
+        ],
+        "cron_schedule": "0 07 4,18 * *"
+      }
+    ]
+  }

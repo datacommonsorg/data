@@ -1,0 +1,5 @@
+param,value
+places_within,country/USA
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
+url,https://ncsesdata.nsf.gov/explorer/datatables?term=race&exactMatch=no&page=1&filterSuperTopic=Demographics&filterTopic=Sex&datatablespage=2
+comments,"Table nsf23306-tab006-002 (no direct link available),  Changed  Black to BlackOrAfricanAmericanAlone and added employmentStatus	: Employed"
