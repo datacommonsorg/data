@@ -1,0 +1,538 @@
+# Auto generated using command: "process_spreadsheet.py --input_data=/usr/local/google/home/spateriya/ghana_pr/data/statvar_imports/country/ghana_census/test_data/sample_input/Ghana_health.csv --pv_map=/usr/local/google/home/spateriya/ghana_pr/data/statvar_imports/country/ghana_census/pvmap/Ghana_health_pvmap.csv --places_resolved_csv=/usr/local/google/home/spateriya/ghana_pr/data/statvar_imports/country/ghana_census/Ghana_place _resolver.csv --output_path=/usr/local/google/home/spateriya/ghana_pr/data/statvar_imports/country/ghana_census/test_data/sample_output/ghana_health" on 2024-09-29 15:34:40.077042
+
+Node: dcid:Count_Child_1Years_Female_VaccineAdministered_Measles_AsAFractionOf_Count_Child_1Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Proportion of female infants aged 12 months who have been vaccinated against measles"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_1Years_Female
+age: [1 Years]
+gender: dcid:Female
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:Measles
+
+Node: dcid:Count_Child_1Years_Male_VaccineAdministered_Measles_AsAFractionOf_Count_Child_1Years_Male
+typeOf: dcid:StatisticalVariable
+name: "Percentage of one-year-old boys who have received the measles vaccine"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_1Years_Male
+age: [1 Years]
+gender: dcid:Male
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:Measles
+
+Node: dcid:Count_Child_1Years_Rural_VaccineAdministered_Measles_AsAFractionOf_Count_Child_1Years_Rural
+typeOf: dcid:StatisticalVariable
+name: "Percentage of 1-year-old children in rural areas who have received the measles vaccine"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_1Years_Rural
+age: [1 Years]
+placeOfResidenceClassification: dcid:Rural
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:Measles
+
+Node: dcid:Count_Child_1Years_Urban_VaccineAdministered_Measles_AsAFractionOf_Count_Child_1Years_Urban
+typeOf: dcid:StatisticalVariable
+name: "Percentage of 1-year-old children in urban areas who have received the measles vaccine"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_1Years_Urban
+age: [1 Years]
+placeOfResidenceClassification: dcid:Urban
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:Measles
+
+Node: dcid:Count_Child_1Years_VaccineAdministered_Measles_AsAFractionOf_Count_Child_1Years
+typeOf: dcid:StatisticalVariable
+name: "Percentage of 1-year-old children who have received the measles vaccine"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_1Years
+age: [1 Years]
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:Measles
+
+Node: dcid:Count_Child_5OrLessYears_Female_ReceivedAntiMalarialDrug_ConditionFever_AsAFractionOf_Count_Child_5OrLessYears_Female
+typeOf: dcid:StatisticalVariable
+name: "Percentage of girls under 5 with fever who receive appropriate antimalarial medication"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_5OrLessYears_Female
+age: [- 5 Years]
+gender: dcid:Female
+healthPrevention: dcid:AntiMalarialDrug
+medicalCondition: dcid:Fever
+
+Node: dcid:Count_Child_5OrLessYears_Female_Underweight_AsAFractionOf_Count_Child_5OrLessYears_Female
+typeOf: dcid:StatisticalVariable
+name: "Percentage of female children under five years old who are underweight"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_5OrLessYears_Female
+age: [- 5 Years]
+gender: dcid:Female
+healthBehavior: dcid:Underweight
+
+Node: dcid:Count_Child_5OrLessYears_Male_ReceivedAntiMalarialDrug_ConditionFever_AsAFractionOf_Count_Child_5OrLessYears_Male
+typeOf: dcid:StatisticalVariable
+name: "Percentage of boys under 5 with fever who receive appropriate antimalarial medication"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_5OrLessYears_Male
+age: [- 5 Years]
+gender: dcid:Male
+healthPrevention: dcid:AntiMalarialDrug
+medicalCondition: dcid:Fever
+
+Node: dcid:Count_Child_5OrLessYears_Male_Underweight_AsAFractionOf_Count_Child_5OrLessYears_Male
+typeOf: dcid:StatisticalVariable
+name: "Percentage of male children under five years old who are underweight"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_5OrLessYears_Male
+age: [- 5 Years]
+gender: dcid:Male
+healthBehavior: dcid:Underweight
+
+Node: dcid:Count_Child_5OrLessYears_ReceivedAntiMalarialDrug_ConditionFever_AsAFractionOf_Count_Child_5OrLessYears
+typeOf: dcid:StatisticalVariable
+name: "Percentage of children under 5 with fever who receive appropriate antimalarial medication"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_5OrLessYears
+age: [- 5 Years]
+healthPrevention: dcid:AntiMalarialDrug
+medicalCondition: dcid:Fever
+
+Node: dcid:Count_Child_5OrLessYears_ReceivedAntiMalarialDrug_ConditionFever_Rural_AsAFractionOf_Count_Child_5OrLessYears_Rural
+typeOf: dcid:StatisticalVariable
+name: "Percentage of young children with fever in rural areas who receive appropriate antimalarial medication"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_5OrLessYears_Rural
+age: [- 5 Years]
+healthPrevention: dcid:AntiMalarialDrug
+medicalCondition: dcid:Fever
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Child_5OrLessYears_ReceivedAntiMalarialDrug_ConditionFever_Urban_AsAFractionOf_Count_Child_5OrLessYears_Urban
+typeOf: dcid:StatisticalVariable
+name: "Percentage of young children with fever in urban areas who receive appropriate antimalarial medication"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_5OrLessYears_Urban
+age: [- 5 Years]
+healthPrevention: dcid:AntiMalarialDrug
+medicalCondition: dcid:Fever
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Child_5OrLessYears_Underweight_AsAFractionOf_Count_Child
+typeOf: dcid:StatisticalVariable
+name: "Percentage of children under five years old who are underweight"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child
+age: [- 5 Years]
+healthBehavior: dcid:Underweight
+
+Node: dcid:Count_Child_5OrLessYears_Underweight_AsAFractionOf_Count_Child_5OrLessYears
+typeOf: dcid:StatisticalVariable
+name: "Percentage of children under five years old who are underweight"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_5OrLessYears
+age: [- 5 Years]
+healthBehavior: dcid:Underweight
+
+Node: dcid:Count_Child_5OrLessYears_Underweight_Rural_AsAFractionOf_Count_Child_5OrLessYears_Rural
+typeOf: dcid:StatisticalVariable
+name: "Percentage of children under five years old who are underweight in rural areas"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_5OrLessYears_Rural
+age: [- 5 Years]
+healthBehavior: dcid:Underweight
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Child_5OrLessYears_Underweight_Urban_AsAFractionOf_Count_Child_5OrLessYears_Urban
+typeOf: dcid:StatisticalVariable
+name: "Percentage of undernourished children under five in cities"
+populationType: dcid:Child
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Child_5OrLessYears_Urban
+age: [- 5 Years]
+healthBehavior: dcid:Underweight
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MortalityEvent_5OrLessYears_AsAFractionOf_Count_BirthEvent_5OrLessYears_LiveBirth
+typeOf: dcid:StatisticalVariable
+name: "Number of children who die before their fifth birthday per 1000 live births"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_5OrLessYears_LiveBirth
+age: [- 5 Years]
+
+Node: dcid:Count_MortalityEvent_5OrLessYears_Female_AsAFractionOf_Count_BirthEvent_5OrLessYears_Female_LiveBirth
+typeOf: dcid:StatisticalVariable
+name: "Number of female children who die before their fifth birthday per 1000 live female births"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_5OrLessYears_Female_LiveBirth
+age: [- 5 Years]
+gender: dcid:Female
+
+Node: dcid:Count_MortalityEvent_5OrLessYears_Rural_AsAFractionOf_Count_BirthEvent_5OrLessYears_LiveBirth_Rural
+typeOf: dcid:StatisticalVariable
+name: "Number of children under five who die per 1000 live births in rural areas"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_5OrLessYears_LiveBirth_Rural
+age: [- 5 Years]
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MortalityEvent_Infant_AsAFractionOf_Count_BirthEvent_LiveBirth
+typeOf: dcid:StatisticalVariable
+name: "Number of total infants who die within the first year of life per 1000 female infants born alive"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_LiveBirth
+ageGroupClassification: dcid:Infant
+
+Node: dcid:Count_MortalityEvent_Infant_Female_AsAFractionOf_Count_BirthEvent_LiveBirth
+typeOf: dcid:StatisticalVariable
+name: "Number of female infants who die within the first year of life per 1000 female infants born alive"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_LiveBirth
+ageGroupClassification: dcid:Infant
+gender: dcid:Female
+
+Node: dcid:Count_MortalityEvent_Infant_Male_AsAFractionOf_Count_BirthEvent_LiveBirth
+typeOf: dcid:StatisticalVariable
+name: "Number of male infants who die before their first birthday per 1000 live male births"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_LiveBirth
+ageGroupClassification: dcid:Infant
+gender: dcid:Male
+
+Node: dcid:Count_MortalityEvent_Infant_Rural_AsAFractionOf_Count_BirthEvent_LiveBirth
+typeOf: dcid:StatisticalVariable
+name: "Number of rural infants who die within the first year of life per 1000 female infants born alive"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_LiveBirth
+ageGroupClassification: dcid:Infant
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_MortalityEvent_Infant_Urban_AsAFractionOf_Count_BirthEvent_Infant_LiveBirth_Urban
+typeOf: dcid:StatisticalVariable
+name: "Number of infants who die before their first birthday per 1000 live births in urban areas"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_Infant_LiveBirth_Urban
+ageGroupClassification: dcid:Infant
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_MortalityEvent_Urban_AsAFractionOf_Count_BirthEvent_LiveBirth_Urban
+typeOf: dcid:StatisticalVariable
+name: "Number of children under five who die in urban areas per 1000 live births"
+populationType: dcid:MortalityEvent
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_BirthEvent_LiveBirth_Urban
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_15To24Years_Female_ComprehensiveCorrectKnowledgeOfHIVAIDS_AsAFractionOf_Count_Person_15To24Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Percentage of young women aged 15-24 with comprehensive and correct information about HIV/AIDS"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To24Years_Female
+age: [15 24 Years]
+gender: dcid:Female
+healthDiseasePrevention: dcid:ComprehensiveCorrectKnowledgeOfHIV/AIDS
+
+Node: dcid:Count_Person_15To24Years_Male_ComprehensiveCorrectKnowledgeOfHIVAIDS_AsAFractionOf_Count_Person_15To24Years_Male
+typeOf: dcid:StatisticalVariable
+name: "Percentage of young men aged 15-24 with comprehensive and correct information about HIV/AIDS"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To24Years_Male
+age: [15 24 Years]
+gender: dcid:Male
+healthDiseasePrevention: dcid:ComprehensiveCorrectKnowledgeOfHIV/AIDS
+
+Node: dcid:Count_Person_15To24Years_UsageCondom_Female_HighRiskIntercourse_AsAFractionOf_Count_Person_15To24Years_Female_HighRiskIntercourse
+typeOf: dcid:StatisticalVariable
+name: "Percentage of young women aged 15-24 who used a condom during their most recent sexual encounter"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To24Years_Female_HighRiskIntercourse
+age: [15 24 Years]
+birthControlMethod: dcid:UsageCondom
+gender: dcid:Female
+lastIntercourseType: dcid:HighRiskIntercourse
+
+Node: dcid:Count_Person_15To24Years_UsageCondom_Female_HighRiskIntercourse_Rural_AsAFractionOf_Count_Person_15To24Years_Female_HighRiskIntercourse_Rural
+typeOf: dcid:StatisticalVariable
+name: "Percentage of sexually active rural females aged 15-24 who reported using a condom during their last sexual encounter"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To24Years_Female_HighRiskIntercourse_Rural
+age: [15 24 Years]
+birthControlMethod: dcid:UsageCondom
+gender: dcid:Female
+lastIntercourseType: dcid:HighRiskIntercourse
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_15To24Years_UsageCondom_Female_HighRiskIntercourse_Urban_AsAFractionOf_Count_Person_15To24Years_Female_HighRiskIntercourse_Urban
+typeOf: dcid:StatisticalVariable
+name: "Percentage of sexually active urban females aged 15-24 who reported using a condom during their last sexual encounter"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To24Years_Female_HighRiskIntercourse_Urban
+age: [15 24 Years]
+birthControlMethod: dcid:UsageCondom
+gender: dcid:Female
+lastIntercourseType: dcid:HighRiskIntercourse
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_15To24Years_UsageCondom_Male_HighRiskIntercourse_AsAFractionOf_Count_Person_15To24Years_Male_HighRiskIntercourse
+typeOf: dcid:StatisticalVariable
+name: "Percentage of sexually active male teenagers and young adults aged 15-24 who reported using a condom during their last sexual encounter"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To24Years_Male_HighRiskIntercourse
+age: [15 24 Years]
+birthControlMethod: dcid:UsageCondom
+gender: dcid:Male
+lastIntercourseType: dcid:HighRiskIntercourse
+
+Node: dcid:Count_Person_15To24Years_UsageCondom_Male_HighRiskIntercourse_Rural_AsAFractionOf_Count_Person_15To24Years_Male_HighRiskIntercourse_Rural
+typeOf: dcid:StatisticalVariable
+name: "Percentage of sexually active rural males aged 15-24 who reported using a condom during their last sexual encounter"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To24Years_Male_HighRiskIntercourse_Rural
+age: [15 24 Years]
+birthControlMethod: dcid:UsageCondom
+gender: dcid:Male
+lastIntercourseType: dcid:HighRiskIntercourse
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_15To24Years_UsageCondom_Male_HighRiskIntercourse_Urban_AsAFractionOf_Count_Person_15To24Years_Male_HighRiskIntercourse_Urban
+typeOf: dcid:StatisticalVariable
+name: "Percentage of sexually active urban males aged 15-24 who reported using a condom during their last sexual encounter"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To24Years_Male_HighRiskIntercourse_Urban
+age: [15 24 Years]
+birthControlMethod: dcid:UsageCondom
+gender: dcid:Male
+lastIntercourseType: dcid:HighRiskIntercourse
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_15To49Years_Atleast1AntenatalCareVisit_Female_AsAFractionOf_Count_Person_15To49Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Percentage of women aged 15-49 who received at least one prenatal check-up"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Years_Female
+age: [15 49 Years]
+antenatalStatus: dcid:Atleast1AntenatalCareVisit
+gender: dcid:Female
+
+Node: dcid:Count_Person_15To49Years_ContraceptivePrevalence_Female_Married_AsAFractionOf_Count_Person_15To49Years_Female_Married
+typeOf: dcid:StatisticalVariable
+name: "Percentage of married women aged 15-49 who are using a contraceptive method"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Years_Female_Married
+age: [15 49 Years]
+birthControlMethod: dcid:ContraceptivePrevalence
+gender: dcid:Female
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_ContraceptivePrevalence_Female_Married_Rural_AsAFractionOf_Count_Person_15To49Years_Female_Married_Rural
+typeOf: dcid:StatisticalVariable
+name: "Percentage of married women aged 15-49 in rural areas who are using a contraceptive method"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Years_Female_Married_Rural
+age: [15 49 Years]
+birthControlMethod: dcid:ContraceptivePrevalence
+gender: dcid:Female
+maritalStatus: dcid:Married
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_15To49Years_ContraceptivePrevalence_Female_Married_Urban_AsAFractionOf_Count_Person_15To49Years_Female_Married_Urban
+typeOf: dcid:StatisticalVariable
+name: "Percentage of married women aged 15-49 in urban areas who are using a contraceptive method"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Years_Female_Married_Urban
+age: [15 49 Years]
+birthControlMethod: dcid:ContraceptivePrevalence
+gender: dcid:Female
+maritalStatus: dcid:Married
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_15To49Years_ContraceptivePrevalence_Male_Married_AsAFractionOf_Count_Person_15To49Years_Male_Married
+typeOf: dcid:StatisticalVariable
+name: "Percentage of married men aged 15-49 who are using a contraceptive method"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Years_Male_Married
+age: [15 49 Years]
+birthControlMethod: dcid:ContraceptivePrevalence
+gender: dcid:Male
+maritalStatus: dcid:Married
+
+Node: dcid:Count_Person_15To49Years_ContraceptivePrevalence_Male_Married_Rural_AsAFractionOf_Count_Person_15To49Years_Male_Married_Rural
+typeOf: dcid:StatisticalVariable
+name: "Percentage of married men aged 15-49 in rural areas who are using a contraceptive method"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Years_Male_Married_Rural
+age: [15 49 Years]
+birthControlMethod: dcid:ContraceptivePrevalence
+gender: dcid:Male
+maritalStatus: dcid:Married
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_15To49Years_ContraceptivePrevalence_Male_Married_Urban_AsAFractionOf_Count_Person_15To49Years_Male_Married_Urban
+typeOf: dcid:StatisticalVariable
+name: "Percentage of married men aged 15-49 in urban areas who are using a contraceptive method"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15To49Years_Male_Married_Urban
+age: [15 49 Years]
+birthControlMethod: dcid:ContraceptivePrevalence
+gender: dcid:Male
+maritalStatus: dcid:Married
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_15Years_PrevalenceOfHiv_AsAFractionOf_Count_Person_15Years
+typeOf: dcid:StatisticalVariable
+name: "Percentage of 15-year-olds infected with HIV"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_15Years
+age: [15 Years]
+healthRiskFactors: dcid:PrevalenceOfHiv
+
+Node: dcid:Count_Person_20To24Years_Female_PrevalenceOfHiv_AsAFractionOf_Count_Person_20To24Years_Female
+typeOf: dcid:StatisticalVariable
+name: "HIV prevalence among the population aged 15 Female 20-24 yr Percent"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_20To24Years_Female
+age: [20 24 Years]
+gender: dcid:Female
+healthRiskFactors: dcid:PrevalenceOfHiv
+
+Node: dcid:Count_Person_ConditionTuberculosis_PatientRecovered_DirectlyObservedTherapy_AsAFractionOf_Count_Person_ConditionTuberculosis
+typeOf: dcid:StatisticalVariable
+name: "Percentage of TB cases diagnosed and treated successfully under DOTS"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_ConditionTuberculosis
+medicalCondition: dcid:Tuberculosis
+medicalStatus: dcid:PatientRecovered
+treatmentTechnique: dcid:DirectlyObservedTherapy
+
+Node: dcid:Count_Person_UnmetFamilyPlanning_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Percentage of women who desire to delay or prevent pregnancy but are not using effective contraception"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+familyPlanningType: dcid:UnmetFamilyPlanning
+
+Node: dcid:Count_Person_UnmetFamilyPlanning_Rural_AsAFractionOf_Count_Person_Rural
+typeOf: dcid:StatisticalVariable
+name: "Family planning need in rural areas"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Rural
+familyPlanningType: dcid:UnmetFamilyPlanning
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_UnmetFamilyPlanning_Urban_AsAFractionOf_Count_Person_Urban
+typeOf: dcid:StatisticalVariable
+name: "Percentage of urban residents desiring family planning but lacking access to contraceptives"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person_Urban
+familyPlanningType: dcid:UnmetFamilyPlanning
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_VaccineAdministered_Measles_AsAFractionOf_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Percentage of the total population vaccinated against measles"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_Person
+vaccineStatus: dcid:VaccineAdministered
+vaccineType: dcid:Measles
+
+Node: dcid:Count_PregnantWomen_15To19Years_Female_PrevalenceOfHiv_AsAFractionOf_Count_PregnantWomen_15To19Years_Female
+typeOf: dcid:StatisticalVariable
+name: "Percentage of pregnant girls and young women aged 15-19 infected with HIV"
+populationType: dcid:PregnantWomen
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:Count_PregnantWomen_15To19Years_Female
+age: [15 19 Years]
+gender: dcid:Female
+healthRiskFactors: dcid:PrevalenceOfHiv
+
