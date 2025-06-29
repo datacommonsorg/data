@@ -32,7 +32,7 @@ class EPHHeatRelatedIllness(unittest.TestCase):
             input_path = os.path.join(_SCRIPT_PATH, 'testdata', 'cleaned_data')
 
             subprocess.call([
-                'python', preprocess_path, f'--input_path={input_path}',
+                'python3', preprocess_path, f'--input_path={input_path}',
                 f'--config_path={config_path}', f'--output_path={tmp_dir}'
             ])
 
