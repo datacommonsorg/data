@@ -1,0 +1,8 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6
+Referência,observationDate,{Data},benefitProgram,Brazil_BolsaFamilyProgram,observationPeriod,P1Y,,,,,,,,
+Código,observationAbout,{Data},,,,,,,,,,,,
+Total de recursos Online,value,{Number},populationType,Resource,benefitsStatus,Online,registrationStatus,Registered,name,"""Total Resources Online""",alternateName,"""Total de recursos Online@pt""",,
+Total de recursos cadastrados avaliados,value,{Number},populationType,Resource,benefitsStatus,Evaluated,registrationStatus,Registered,name,"""Total registered resources evaluated""",alternateName,"""Total de recursos cadastrados avaliados@pt""",,
+Total de recursos cadastrados avaliados deferidos,value,{Number},populationType,Resource,benefitsStatus,GrantedAndEvaluated,registrationStatus,Registered,name,"""Total registered resources evaluated and granted""",alternateName,"""Total de recursos cadastrados avaliados deferidos@pt""",,
+Total de recursos cadastrados avaliados indeferidos,value,{Number},populationType,Resource,benefitsStatus,RejectedAndEvaluated,registrationStatus,Registered,name,"""Total registered resources evaluated and rejected""",alternateName,"""Total de recursos cadastrados avaliados indeferidos@pt""",,
+Total de recursos cadastrados não avaliados,value,{Number},populationType,Resource,benefitsStatus,NotEvaluated,registrationStatus,Registered,name,"""Total registered resources not evaluated""",alternateName,"""Total de recursos cadastrados não avaliados@pt""",,
