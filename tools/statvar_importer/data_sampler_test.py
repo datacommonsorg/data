@@ -82,7 +82,12 @@ class DataSamplerTest(unittest.TestCase):
 
     def test_different_delimiter(self):
         """Tests that the sampler works with a different delimiter."""
-        input_file = os.path.join(_TEST_DIR, 'sample_input_semicolon.csv')
+        input_file = os.path.join(self._tmp_dir, 'sample_input_semicolon.csv')
+        with open(input_file, 'w') as f:
+            f.write('a;b;c\n')
+            f.write('1;2;3\n')
+            f.write('4;5;6\n')
+            f.write('7;8;9\n')
         output_file = os.path.join(self._tmp_dir, 'sample_output_semicolon.csv')
         config = {'input_delimiter': ';'}
         data_sampler.sample_csv_file(input_file, output_file, config)
