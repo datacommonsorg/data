@@ -1,6 +1,6 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,p8,v8,p9,v9
 Total,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,,,,,,
-Year,observationDate,{Number},observationAbout,country/USA,,,,,,,,,,,,,,
+Year,observationDate,{Number},observationAbout,country/USA,observationPeriod,P1Y,,,,,,,,,,,,
 White,race,WhiteAlone,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,,,,
 Black,race,Black,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,,,,
 Hispanic,race,HispanicOrLatino,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,educationalAttainment,BachelorsDegree,gender,Male,,,,
