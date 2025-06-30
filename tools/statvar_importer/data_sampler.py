@@ -337,27 +337,44 @@ class DataSampler:
 
 def sample_csv_file(input_file: str,
                     output_file: str = '',
-                    config: dict = {}) -> str:
-    """Returns the output file name into which a sample of rows from input_file is written.
+                    config: dict = None) -> str:
+    """Samples a CSV file and returns the path to the sampled file.
+
+    This function provides a convenient way to sample a CSV file with a single
+    function call. It creates a DataSampler instance and uses it to perform the
+    sampling.
 
     Args:
-      input_file: input file pattern to be loaded.
-      output_file: (optional) output file into whcih sampled rows are written.
-        If empty, creates a file with suffix '-sample.csv'
-      config: dictionary of parameters for sampling including:
-        sampler_output_rows: maximum number of output rows.
-        sampler_rate: number between 0 to 1 for sampling rate if
-          sampler_output_rows is not set.
-        header_rows: number of headers rows from input copied over to output.
-        sampler_column_regex: regex to select unique cell values
-        sampler_rows_per_key: number of rows with duplcate values for a key.
+        input_file: The path to the input CSV file.
+        output_file: The path to the output CSV file. If not provided, a
+          temporary file will be created.
+        config: A dictionary of configuration parameters for sampling.
+
+    Returns:
+        The path to the output file with the sampled rows.
+
+    Usage:
+        config = {
+            'sampler_output_rows': 50,
+            'sampler_rate': 0.1,
+        }
+        sample_csv_file('input.csv', 'output.csv', config)
     """
+    if config is None:
+        config = {}
     data_sampler = DataSampler(config_dict=config)
     return data_sampler.sample_csv_file(input_file, output_file)
 
 
 def get_default_config() -> dict:
-    """Returns a dictionary of config parameter values from flags."""
+    """Returns a dictionary of default configuration parameter values.
+
+    This function retrieves the default values of the configuration parameters
+    from the command-line flags.
+
+    Returns:
+        A dictionary of default configuration parameter values.
+    """
     # Use default values of flags for tests
     if not _FLAGS.is_parsed():
         _FLAGS.mark_as_parsed()
