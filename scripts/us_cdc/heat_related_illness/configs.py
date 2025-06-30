@@ -1,4 +1,4 @@
-urls_list = [
+URLS_CONFIG = [
     "https://ephtracking.cdc.gov/qr/370/1/ALL/ALL/1/{year}/0?apiToken=637DD2EF-507F-4938-8380-54A179C3132A",
     "https://ephtracking.cdc.gov/qr/431/1/ALL/ALL/1/{year}/0?apiToken=637DD2EF-507F-4938-8380-54A179C3132A",
     "https://ephtracking.cdc.gov/qr/431/3/ALL/ALL/1/{year}/0?AgeBandId=1,2,3,4,5&apiToken=637DD2EF-507F-4938-8380-54A179C3132A",
@@ -9,3 +9,6 @@ urls_list = [
     "https://ephtracking.cdc.gov/qr/438/4/ALL/ALL/1/{year}/0?GenderId=1,2&apiToken=637DD2EF-507F-4938-8380-54A179C3132A",
     "https://ephtracking.cdc.gov/qr/438/37/ALL/ALL/1/{year}/0?AgeBandId=1,2,3,4,5&GenderId=1,2&apiToken=637DD2EF-507F-4938-8380-54A179C3132A"
 ]
+INPUT_HTML_FILES = "./source_data/html_files/"
+INPUT_CSV_FILES = "./source_data/csv_files"
+COMBINED_INPUT_CSV_FILE = "./input_files/"

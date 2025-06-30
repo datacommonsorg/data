@@ -29,10 +29,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
-input_html_files = "./source_data/html_files/"
-input_csv_files = "./source_data/csv_files"
-combined_input_csv = "./input_files/"
-
 
 def download_dynamic_page(url, filename):
     """
@@ -113,21 +109,25 @@ def combine_csvs_by_string(directory, string_list):
     for string, df_list in dataframes.items():
         if df_list:
             merged_df = pd.concat(df_list, ignore_index=True)
-            output_file = os.path.join(combined_input_csv, string + '.csv')
+            output_file = os.path.join(configs.COMBINED_INPUT_CSV_FILE,
+                                       string + '.csv')
             merged_df.to_csv(output_file, index=False)
             logging.info(
                 f"Successfully merged CSVs for '{string}' to {output_file}")
 
 
 def main(_):
-    paths = [combined_input_csv, input_html_files, input_csv_files]
+    paths = [
+        configs.COMBINED_INPUT_CSV_FILE, configs.INPUT_HTML_FILES,
+        configs.INPUT_CSV_FILES
+    ]
     for path in paths:
         try:
             os.makedirs(path)
         except FileExistsError:
             pass  # Directory already exists
 
-    urls_list = configs.urls_list
+    urls_list = configs.URLS_CONFIG
 
     current_year = datetime.now().year
     try:
@@ -157,11 +157,12 @@ def main(_):
 
                 download_dynamic_page(base_url, filename)
 
-            for file_name in os.listdir(input_html_files):
+            for file_name in os.listdir(configs.INPUT_HTML_FILES):
                 if file_name.endswith('.html'):  # If file is a html file
-                    file_path = os.path.join(input_html_files, file_name)
+                    file_path = os.path.join(configs.INPUT_HTML_FILES,
+                                             file_name)
                     with open(file_path, 'r', encoding='utf-8') as f:
-                        cleaned_csv_path = os.path.join(input_csv_files,
+                        cleaned_csv_path = os.path.join(configs.INPUT_CSV_FILES,
                                                         file_name[:-5] + '.csv')
                         table_to_csv(f.read(), cleaned_csv_path)
 
@@ -172,7 +173,7 @@ def main(_):
                 "edVsits_age_gender"
             ]
 
-            combine_csvs_by_string(input_csv_files, string_to_match)
+            combine_csvs_by_string(configs.INPUT_CSV_FILES, string_to_match)
 
     except Exception as e:
         logging.fatal(f"Download Error:{e}")
