@@ -5,6 +5,8 @@ This directory imports [Heat and Heat-related Illness](https://ephtracking.cdc.g
 ## Cleaning source data
 The source data is available from the EPH [website](https://ephtracking.cdc.gov/qrlist/35). Currently, this import brings in data related to [Heat-related Emergency Department Visits](https://ephtracking.cdc.gov/qrd/438), [Heat-Related Mortality](https://ephtracking.cdc.gov/qrd/370), and [Heat-related Hospitalizations](https://ephtracking.cdc.gov/qrd/431).
 
+All the source urls are added in the `configs.py` file.
+
 To download and clean the source data, run:
 
 `python clean_data.py`
