@@ -36,6 +36,7 @@ from download_config import *
 
 _DOWNLOAD_PATH = os.path.join(os.path.dirname((__file__)), 'input_files')
 
+
 def check_url_accessibility(url, timeout=10):
     """
     Checks if a URL is accessible by making a HEAD request.
@@ -44,7 +45,8 @@ def check_url_accessibility(url, timeout=10):
     try:
         # Use a HEAD request to avoid downloading the entire file just for a check
         response = requests.head(url, timeout=timeout)
-        response.raise_for_status() # Raise an HTTPError for bad responses (4xx or 5xx)
+        response.raise_for_status(
+        )  # Raise an HTTPError for bad responses (4xx or 5xx)
         return True
     except requests.exceptions.RequestException as e:
         logging.fatal(f"FATAL: URL check failed for '{url}': {e}")
