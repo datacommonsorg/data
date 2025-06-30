@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
 # limitations under the License.
 """Script to process EPH Heat Stress data."""
 
-import os
+import os, configs
 import sys
 import json
 import csv
@@ -32,27 +32,15 @@ import pandas as pd
 
 _CONFIG = None
 
-input_path = "./input_files/"
-config_path = "./config.json"
-output_path = "./state"
-
 # Columns in cleaned CSV
 _OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
 
 
 def generate_tmcf():
-    _TMCF_TEMPLATE = ("Node: E:EPHHeatIllness->E0\n"
-                      "typeOf: dcs:StatVarObservation\n"
-                      "measurementMethod: C:EPHHeatIllness->measurementMethod\n"
-                      "observationAbout: C:EPHHeatIllness->Geo\n"
-                      "observationDate: C:EPHHeatIllness->Year\n"
-                      "variableMeasured: C:EPHHeatIllness->StatVar\n"
-                      "observationPeriod: P5M\n"
-                      "value: C:EPHHeatIllness->Quantity\n")
-
     # Writing Genereated TMCF to local path.
-    with open(output_path + "/output.tmcf", 'w+', encoding='utf-8') as f_out:
-        f_out.write(_TMCF_TEMPLATE.rstrip('\n'))
+    with open(configs.OUTPUT_PATH + "/output.tmcf", 'w+',
+              encoding='utf-8') as f_out:
+        f_out.write(configs._TMCF_TEMPLATE.rstrip('\n'))
 
 
 def state_resolver(state: str) -> str:
@@ -141,7 +129,7 @@ def write_to_mcf(sv_list: list, mcf_path: str):
 
 def aggregate():
     """Method to aggregate EPH Heat Illness data from state level data."""
-    df = pd.read_csv(output_path + "/cleaned.csv",
+    df = pd.read_csv(configs.OUTPUT_PATH + "/cleaned.csv",
                      dtype={'Quantity': 'float64'})
 
     # Aggregating all stat vars
@@ -152,12 +140,12 @@ def aggregate():
                             as_index=False).agg({'Quantity': 'sum'})
     country_df['Geo'] = "country/USA"
     country_df['measurementMethod'] = "dcs:DataCommonsAggregate"
-    country_df.to_csv(output_path + "/country_output.csv", index=False)
+    country_df.to_csv(configs.OUTPUT_PATH + "/country_output.csv", index=False)
 
 
 def process(cleaned_csv_path, output_mcf_path, input_path):
     global _CONFIG
-    with open(config_path, 'r', encoding='utf-8') as config_f:
+    with open(configs.CONFIG_PATH, 'r', encoding='utf-8') as config_f:
         _CONFIG = json.load(config_f)
 
     with open(cleaned_csv_path, 'w', encoding='utf-8') as cleaned_f:
@@ -177,23 +165,24 @@ def process(cleaned_csv_path, output_mcf_path, input_path):
         write_to_mcf(statvar_list, output_mcf_path)
 
 
-def main(argv):
+def main(_):
     try:
-        os.makedirs(output_path, exist_ok=True)
-        cleaned_csv_path = os.path.join(output_path, 'cleaned.csv')
-        output_mcf_path = os.path.join(output_path, 'output.mcf')
+        os.makedirs(configs.OUTPUT_PATH, exist_ok=True)
+        cleaned_csv_path = os.path.join(configs.OUTPUT_PATH, 'cleaned.csv')
+        output_mcf_path = os.path.join(configs.OUTPUT_PATH, 'output.mcf')
         try:
-            os.listdir(input_path)
+            os.listdir(configs.COMBINED_INPUT_CSV_FILE)
         except:
             logging.fatal(
                 "\n\nData not found!!!!!! Please run the script clean_data.py to download source data\n"
             )
-        process(cleaned_csv_path, output_mcf_path, input_path)
+        process(cleaned_csv_path, output_mcf_path,
+                configs.COMBINED_INPUT_CSV_FILE)
         generate_tmcf()
         aggregate()
         logging.info("Processing completed!")
     except Exception as e:
-        logging.fatal(f"Encountered some issue with process - {e}")
+        logging.fatal(f"Encountered issue with process - {e}")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -29,6 +29,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
+current_year = datetime.now().year
+
 
 def download_dynamic_page(url, filename):
     """
@@ -38,29 +40,55 @@ def download_dynamic_page(url, filename):
     filename: The filename for saving the downloaded file.
   """
     chrome_options = ChromeOptions()
+
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument("--disable-gpu")
-    service = ChromeService(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service, options=chrome_options)
-    # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    driver.get(url)
-    WebDriverWait(driver, 30).until(
-        EC.presence_of_element_located((By.XPATH, "//*[@id='page-start']")))
-    time.sleep(5)
-    no_data_element = driver.find_elements(
-        By.XPATH, "//h2[text()='Data does not exist for the above criteria.']")
-    if no_data_element:
-        logging.info(f"No data found for {url}")
-        return
-    html_content = driver.page_source
-    with open(filename, 'w', encoding='utf-8') as f:
-        f.write(html_content)
 
-    driver.quit()
-    return True
+    service = ChromeService(ChromeDriverManager().install())
+
+    driver_log_path = os.path.join(os.getcwd(), "chromedriver.log")
+
+    service = ChromeService(ChromeDriverManager().install(),
+                            log_path=driver_log_path)
+
+    logging.info(
+        f"ChromeDriver internal logs will be written to: {driver_log_path}")
+
+    try:
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+
+        driver.get(url)
+
+        WebDriverWait(driver, 30).until(
+            EC.presence_of_element_located((By.XPATH, "//*[@id='page-start']")))
+
+        time.sleep(5)
+
+        no_data_element = driver.find_elements(
+            By.XPATH,
+            "//h2[text()='Data does not exist for the above criteria.']")
+
+        if no_data_element:
+            logging.info(f"No data found for url: {url}")
+            return False
+
+        html_content = driver.page_source
+
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(html_content)
+
+        return True
+
+    except Exception as e:
+        logging.fatal(
+            f"Error found while downloading the data for the url {url}")
+
+    finally:
+        driver.quit()
+        logging.info("Web driver closed.")
 
 
 def table_to_csv(html, csv_path: str):
@@ -81,7 +109,7 @@ def table_to_csv(html, csv_path: str):
                           for row in table.select("tr + tr")])
 
 
-def combine_csvs_by_string(directory, string_list):
+def combine_csv_files(directory, string_list):
     """
   Combines multiple CSV files within a directory into a single CSV file 
   based on a string present in their filenames.
@@ -116,6 +144,51 @@ def combine_csvs_by_string(directory, string_list):
                 f"Successfully merged CSVs for '{string}' to {output_file}")
 
 
+def download_all_data(url):
+    try:
+        for year in range(2000, current_year + 1):
+            base_url = url.format(year=year)
+            if "370" in url:
+                filename = f"./source_data/html_files/deaths_{year}.html"
+            elif "431/1" in url:
+                filename = f"./source_data/html_files/hospitalizations_{year}.html"
+            elif "431/3/" in url:
+                filename = f"./source_data/html_files/hospitalization_age_{year}.html"
+            elif "431/4" in url:
+                filename = f"./source_data/html_files/hospitalizatin_gender_{year}.html"
+            elif "431/37" in url:
+                filename = f"./source_data/html_files/hospitlizations_age_gender_{year}.html"
+            elif "438/1" in url:
+                filename = f"./source_data/html_files/edVisits_{year}.html"
+            elif "438/3/" in url:
+                filename = f"./source_data/html_files/edVisit_age_{year}.html"
+            elif "438/4" in url:
+                filename = f"./source_data/html_files/edVists_gender_{year}.html"
+            elif "438/37" in url:
+                filename = f"./source_data/html_files/edVsits_age_gender_{year}.html"
+            else:
+                logging.info("No Urls found!")
+
+            download_dynamic_page(base_url, filename)
+    except Exception as e:
+        logging.fatal(f"Download Error for the url {url}: {e}")
+
+
+def convert_html_to_csv():
+    try:
+        for file_name in os.listdir(configs.INPUT_HTML_FILES):
+            if file_name.endswith('.html'):  # If file is a html file
+                file_path = os.path.join(configs.INPUT_HTML_FILES, file_name)
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    cleaned_csv_path = os.path.join(configs.INPUT_CSV_FILES,
+                                                    file_name[:-5] + '.csv')
+                    table_to_csv(f.read(), cleaned_csv_path)
+    except Exception as e:
+        logging.fatal(
+            f"Error occured while converting the html file {file_name} to csv file: {e}"
+        )
+
+
 def main(_):
     paths = [
         configs.COMBINED_INPUT_CSV_FILE, configs.INPUT_HTML_FILES,
@@ -127,56 +200,16 @@ def main(_):
         except FileExistsError:
             pass  # Directory already exists
 
-    urls_list = configs.URLS_CONFIG
+    URL_LIST = configs.URLS_CONFIG
 
-    current_year = datetime.now().year
-    try:
-        for url in urls_list:
-            for year in range(2000, current_year + 1):
-                base_url = url.format(year=year)
-                if "370" in url:
-                    filename = f"./source_data/html_files/deaths_{year}.html"
-                elif "431/1" in url:
-                    filename = f"./source_data/html_files/hospitalizations_{year}.html"
-                elif "431/3/" in url:
-                    filename = f"./source_data/html_files/hospitalization_age_{year}.html"
-                elif "431/4" in url:
-                    filename = f"./source_data/html_files/hospitalizatin_gender_{year}.html"
-                elif "431/37" in url:
-                    filename = f"./source_data/html_files/hospitlizations_age_gender_{year}.html"
-                elif "438/1" in url:
-                    filename = f"./source_data/html_files/edVisits_{year}.html"
-                elif "438/3/" in url:
-                    filename = f"./source_data/html_files/edVisit_age_{year}.html"
-                elif "438/4" in url:
-                    filename = f"./source_data/html_files/edVists_gender_{year}.html"
-                elif "438/37" in url:
-                    filename = f"./source_data/html_files/edVsits_age_gender_{year}.html"
-                else:
-                    logging.info("No Urls found!")
+    for url in URL_LIST:
+        try:
+            download_all_data(url)
+            convert_html_to_csv()
+            combine_csv_files(configs.INPUT_CSV_FILES, configs.STRING_TO_MATCH)
 
-                download_dynamic_page(base_url, filename)
-
-            for file_name in os.listdir(configs.INPUT_HTML_FILES):
-                if file_name.endswith('.html'):  # If file is a html file
-                    file_path = os.path.join(configs.INPUT_HTML_FILES,
-                                             file_name)
-                    with open(file_path, 'r', encoding='utf-8') as f:
-                        cleaned_csv_path = os.path.join(configs.INPUT_CSV_FILES,
-                                                        file_name[:-5] + '.csv')
-                        table_to_csv(f.read(), cleaned_csv_path)
-
-            string_to_match = [
-                "deaths", "hospitalizations", "hospitalization_age",
-                "hospitalizatin_gender", "hospitlizations_age_gender",
-                "edVisits", "edVisit_age", "edVists_gender",
-                "edVsits_age_gender"
-            ]
-
-            combine_csvs_by_string(configs.INPUT_CSV_FILES, string_to_match)
-
-    except Exception as e:
-        logging.fatal(f"Download Error:{e}")
+        except Exception as e:
+            logging.fatal(f"Script terminated due to the exception: {e}")
 
 
 if __name__ == "__main__":
