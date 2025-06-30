@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "IndiaNSS_HealthAilments",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://ndap.niti.gov.in/dataset/7300",
+            "provenance_description": "Life expectancy of a person in India based on gender at state level.",
+            "scripts": [
+                "download_script.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data='input_files/india_nss_health.csv' --pvmap='pv_map.csv' --config_file=metadata.csv  --output_path=output/india_nss_healthailments"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "input_files/sample_output/health_nss.tmcf",
+                    "cleaned_csv": "'input_files/sample_output/health_nss.csv'"
+                }
+            ],
+            "source_files": [
+                "test_data/sample_input/india_nss_health.csv"
+            ],
+            "cron_schedule": "0 0 1 1 *"
+        }
+    ]
+}
