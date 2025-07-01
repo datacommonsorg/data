@@ -1,0 +1,16 @@
+key,prop,value,p2,v2,,,,
+year,Year,{Number},variableMeasured,Count_FireEvent,,,,
+place,observationAbout,{Data},observationAbout,country/BRA,,,,
+Janeiro,observationDate,{Year}-01,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Fevereiro,observationDate,{Year}-02,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Março,observationDate,{Year}-03,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Abril,observationDate,{Year}-04,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Maio,observationDate,{Year}-05,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Junho,observationDate,{Year}-06,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Julho,observationDate,{Year}-07,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Agosto,observationDate,{Year}-08,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Setembro,observationDate,{Year}-09,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Outubro,observationDate,{Year}-10,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Novembro,observationDate,{Year}-11,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Dezembro,observationDate,{Year}-12,observationPeriod,P1M,value,{Number},#Aggregate,sum
+Total,observationDate,{Year},observationPeriod,P1Y,value,{Number},#Aggregate,sum
