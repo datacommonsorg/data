@@ -48,12 +48,12 @@ def get_gso_urls():
     Returns a list of GSO PX-Web URLs to download data from.
     """
     urls = [
-             "https://www.gso.gov.vn/en/px-web/?pxid=E0234&theme=Population%20and%20Employment",
-             "https://www.gso.gov.vn/en/px-web/?pxid=E0225&theme=Population%20and%20Employment",
-             "https://www.gso.gov.vn/en/px-web/?pxid=E0203-07&theme=Population%20and%20Employment",
-             "https://www.gso.gov.vn/en/px-web/?pxid=E0245&theme=Population%20and%20Employment",
+             "https://www.nso.gov.vn/en/px-web/?pxid=E0234&theme=Population%20and%20Employment",
+             "https://www.nso.gov.vn/en/px-web/?pxid=E0225&theme=Population%20and%20Employment",
+             "https://www.nso.gov.vn/en/px-web/?pxid=E0203-07&theme=Population%20and%20Employment",
+             "https://www.nso.gov.vn/en/px-web/?pxid=E0245&theme=Population%20and%20Employment",
              "https://www.nso.gov.vn/en/px-web/?pxid=E0237&theme=Population%20and%20Employment",
-             "https://www.gso.gov.vn/en/px-web/?pxid=E0263&theme=Population%20and%20Employment",
+             "https://www.nso.gov.vn/en/px-web/?pxid=E0263&theme=Population%20and%20Employment",
              "https://www.nso.gov.vn/en/px-web/?pxid=E1302&theme=Education",
              "https://www.nso.gov.vn/en/px-web/?pxid=E1306&theme=Education",
              "https://www.nso.gov.vn/en/px-web/?pxid=E1305&theme=Education",
