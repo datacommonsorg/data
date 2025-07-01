@@ -41,24 +41,34 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-flags.DEFINE_string('sampler_input', '', 'CSV file to be sample')
-flags.DEFINE_string('sampler_output', '', 'Output file for CSV.')
-flags.DEFINE_integer('sampler_output_rows', 100,
-                     'Maximum number of output rows.')
-flags.DEFINE_integer('sampler_header_rows', 1,
-                     'Number of header rows to be copied to output.')
-flags.DEFINE_integer('sampler_rows_per_key', 5,
-                     'Number of rows per unique value.')
-flags.DEFINE_float('sampler_rate', -1, 'Number of rows per unique value.')
-flags.DEFINE_string('sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
-                    'Regex to select unique column values.')
-flags.DEFINE_string('sampler_unique_columns', '',
-                    'List of columns to look for unique values.')
-flags.DEFINE_string('sampler_input_delimiter', ',', 'delimiter for input data')
+flags.DEFINE_string('sampler_input', '',
+                    'The path to the input CSV file to be sampled.')
+flags.DEFINE_string('sampler_output', '',
+                    'The path to the output file for the sampled CSV data.')
+flags.DEFINE_integer(
+    'sampler_output_rows', 100,
+    'The maximum number of rows to include in the sampled output.')
+flags.DEFINE_integer(
+    'sampler_header_rows', 1,
+    'The number of header rows to be copied directly to the output file.')
+flags.DEFINE_integer(
+    'sampler_rows_per_key', 5,
+    'The maximum number of rows to select for each unique value found.')
+flags.DEFINE_float(
+    'sampler_rate', -1,
+    'The sampling rate for random row selection (e.g., 0.1 for 10%).')
+flags.DEFINE_string(
+    'sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
+    'A regular expression used to identify and select unique column values.')
+flags.DEFINE_string(
+    'sampler_unique_columns', '',
+    'A comma-separated list of column names to use for selecting unique rows.')
+flags.DEFINE_string('sampler_input_delimiter', ',',
+                    'The delimiter used in the input CSV file.')
 flags.DEFINE_string('sampler_input_encoding', 'UTF8',
-                    'delimiter for input data')
+                    'The encoding of the input CSV file.')
 flags.DEFINE_string('sampler_output_delimiter', None,
-                    'delimiter for output data')
+                    'The delimiter to use in the output CSV file.')
 
 _FLAGS = flags.FLAGS
 
@@ -348,15 +358,39 @@ def sample_csv_file(input_file: str,
         input_file: The path to the input CSV file.
         output_file: The path to the output CSV file. If not provided, a
           temporary file will be created.
-        config: A dictionary of configuration parameters for sampling.
+        config: A dictionary of configuration parameters for sampling. The
+          supported parameters are:
+          - sampler_output_rows: The maximum number of rows to include in the
+            sample.
+          - sampler_rate: The sampling rate to use for random selection.
+          - header_rows: The number of header rows to copy from the input file.
+          - sampler_rows_per_key: The number of rows to select for each unique
+            key.
+          - sampler_column_regex: A regular expression to filter column values.
+          - sampler_unique_columns: A comma-separated list of column names to
+            use for selecting unique rows.
+          - input_delimiter: The delimiter used in the input file.
+          - output_delimiter: The delimiter to use in the output file.
+          - input_encoding: The encoding of the input file.
 
     Returns:
         The path to the output file with the sampled rows.
 
     Usage:
+        # Basic usage with default settings
+        sample_csv_file('input.csv', 'output.csv')
+
+        # Sample with a specific number of output rows and a sampling rate
         config = {
             'sampler_output_rows': 50,
             'sampler_rate': 0.1,
+        }
+        sample_csv_file('input.csv', 'output.csv', config)
+
+        # Sample a file with a semicolon delimiter and two header rows
+        config = {
+            'input_delimiter': ';',
+            'header_rows': 2,
         }
         sample_csv_file('input.csv', 'output.csv', config)
     """
