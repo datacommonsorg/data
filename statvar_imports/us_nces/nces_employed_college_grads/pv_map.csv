@@ -1,36 +1,40 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7
-2003,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2003,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2010,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2010,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2013,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2013,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2015,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2015,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2017,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2017,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2019,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2019,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2021,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2021,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2022,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2022,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2023,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2023,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2024,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2024,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2025,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2025,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2026,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2026,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-2027,populationType,Person,measuredProperty,count,value,@Number,observationAbout,country/USA,observationDate,2027,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
-Male,gender,Male,race,"""""",ethnicity,"""""",,,,,,,,
-Female,gender,Female,race,"""""",ethnicity,"""""",,,,,,,,
-Both sexes,gender,"""""",race,"""""",ethnicity,"""""",,,,,,,,
-White,race,WhiteAlone,ethnicity,"""""",,,,,,,,,,
-Black or African American,race,BlackOrAfricanAmericanAlone,ethnicity,"""""",,,,,,,,,,
-Hispanic or Latino,ethnicity,HispanicOrLatino,race,"""""",,,,,,,,,,
-Asian,race,Asian,ethnicity,"""""",,,,,,,,,,
-American Indian or Alaska Native,race,AmericanIndianOrAlaskaNative,ethnicity,"""""",,,,,,,,,,
-Native Hawaiian or Other Pacific Islander,race,OtherPacificIslander,ethnicity,"""""",,,,,,,,,,
-More than one race,race,TwoOrMoreRaces,ethnicity,"""""",,,,,,,,,,
-"Biological, agricultural, and other life scientists",occupation,SOCv2018/19-1000,,,,,,,,,,,,
-Computer and mathematical scientists,occupation,SOCv2018/15-0000,,,,,,,,,,,,
-Physical and related scientists,occupation,SOCv2018/19-2000,,,,,,,,,,,,
-Social and related scientists,occupation,SOCv2018/19-3000,,,,,,,,,,,,
-Engineers,occupation,SOCv2018/17-2000,,,,,,,,,,,,
-All S&E occupations,occupation,ScienceAndEngineering,,,,,,,,,,,,
-All S&E-related occupations,occupation,ScienceAndEngineeringRelated,,,,,,,,,,,,
+2003,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2003,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2010,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2010,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2013,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2013,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2015,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2015,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2017,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2017,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2019,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2019,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2021,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2021,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2022,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2022,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2023,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2023,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2024,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2024,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2025,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2025,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2026,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2026,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2027,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2027,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2028,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2028,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2029,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2029,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
+2030,populationType,Person,measuredProperty,count,value,+AEA-Number,observationAbout,country/USA,observationDate,2030,educationalAttainment,BachelorsDegreeOrHigher,employmentStatus,Employed
 ,,,,,,,,,,,,,,
-All Non-S&E occupations,occupation,NonScienceAndEngineering,,,,,,,,,,,,
-D,value,0,#ignore,suppressed,,,,,,,,,,
-S,value,0,#ignore,suppressed,,,,,,,,,,
-*,value,0,#ignore,suppressed,,,,,,,,,,
+Male,gender,Male,race,+ACI-+ACIAIgAiACI-+ACI-,ethnicity,+ACI-+ACIAIgAiACI-+ACI-,,,,,,,,
+Female,gender,Female,race,+ACI-+ACIAIgAiACI-+ACI-,ethnicity,+ACI-+ACIAIgAiACI-+ACI-,,,,,,,,
+Both sexes,gender,+ACI-+ACIAIgAiACI-+ACI-,race,+ACI-+ACIAIgAiACI-+ACI-,ethnicity,+ACI-+ACIAIgAiACI-+ACI-,,,,,,,,
+White,race,WhiteAlone,ethnicity,+ACI-+ACIAIgAiACI-+ACI-,,,,,,,,,,
+Black or African American,race,BlackOrAfricanAmericanAlone,ethnicity,+ACI-+ACIAIgAiACI-+ACI-,,,,,,,,,,
+Hispanic or Latino,ethnicity,HispanicOrLatino,race,+ACI-+ACIAIgAiACI-+ACI-,,,,,,,,,,
+Asian,race,Asian,ethnicity,+ACI-+ACIAIgAiACI-+ACI-,,,,,,,,,,
+American Indian or Alaska Native,race,AmericanIndianOrAlaskaNative,ethnicity,+ACI-+ACIAIgAiACI-+ACI-,,,,,,,,,,
+Native Hawaiian or Other Pacific Islander,race,OtherPacificIslander,ethnicity,+ACI-+ACIAIgAiACI-+ACI-,,,,,,,,,,
+More than one race,race,TwoOrMoreRaces,ethnicity,+ACI-+ACIAIgAiACI-+ACI-,,,,,,,,,,
++ACI-Biological, agricultural, and other life scientists+ACI-,occupation,SOCv2018/19+AC0-1000,,,,,,,,,,,,
+Computer and mathematical scientists,occupation,SOCv2018/15+AC0-0000,,,,,,,,,,,,
+Physical and related scientists,occupation,SOCv2018/19+AC0-2000,,,,,,,,,,,,
+Social and related scientists,occupation,SOCv2018/19+AC0-3000,,,,,,,,,,,,
+Engineers,occupation,SOCv2018/17+AC0-2000,,,,,,,,,,,,
+All S+ACY-E occupations,occupation,ScienceAndEngineering,,,,,,,,,,,,
+All S+ACY-E+AC0-related occupations,occupation,ScienceAndEngineeringRelated,,,,,,,,,,,,
+,,,,,,,,,,,,,,
+All Non+AC0-S+ACY-E occupations,occupation,NonScienceAndEngineering,,,,,,,,,,,,
+D,value,0,+ACM-ignore,suppressed,,,,,,,,,,
+S,value,0,+ACM-ignore,suppressed,,,,,,,,,,
++ACo-,value,0,+ACM-ignore,suppressed,,,,,,,,,,
