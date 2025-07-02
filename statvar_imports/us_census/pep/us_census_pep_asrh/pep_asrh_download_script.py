@@ -31,18 +31,22 @@ flags.DEFINE_string(
     "Directory to store downloaded files.",
 )
 flags.DEFINE_integer("start_year", 2030, "Starting year for data search (inclusive).")
-flags.DEFINE_integer("end_year", 2022, "Ending year for data search (exclusive). The search will go up to `end_year + 1`.")
+flags.DEFINE_integer(
+    "url_path_base_year",
+    2020,
+    "Base year for the URL path structure (e.g., '2020' in '.../2020-{YEAR}/...').")
 
 _URLS_TO_SCAN = {
     "national": (
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/national/asrh/nc-est{YEAR}-alldata-r-file{i}.csv"
+        "https://www2.census.gov/programs-surveys/popest/datasets/{URL_PATH_BASE_YEAR}-{YEAR}/national/asrh/nc-est{YEAR}-alldata-r-file{i}.csv"
     ),
     "county": (
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
+        "https://www2.census.gov/programs-surveys/popest/datasets/{URL_PATH_BASE_YEAR}-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
     ),
     "state": (
-        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/state/asrh/sc-est{YEAR}-alldata6.csv"
+        "https://www2.census.gov/programs-surveys/popest/datasets/{URL_PATH_BASE_YEAR}-{YEAR}/state/asrh/sc-est{YEAR}-alldata6.csv"
     ),
+
 }
 
 def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict):
@@ -71,7 +75,7 @@ def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict):
     backoff=2,
     exceptions=(requests.RequestException, Exception),
 )
-def add_future_urls(start_year: int, end_year: int):
+def add_future_urls(start_year: int, end_year: int,url_path_base_year: int):
   # Initialize the list to store files to download
     files_to_download = {}
     for key, value in _URLS_TO_SCAN.items():
@@ -85,10 +89,10 @@ def add_future_urls(start_year: int, end_year: int):
                 for i in range(1, 11):
                     # Ensure i is always 2 digits (01, 02, ..., 10)
                     formatted_i = f"{i:02}"
-                    url_to_check = value.format(YEAR=YEAR, i=formatted_i)
+                    url_to_check = value.format(YEAR=YEAR, i=formatted_i, URL_PATH_BASE_YEAR=url_path_base_year)
                     _check_and_add_url(url_to_check, key, files_to_download)
             else:
-                url_to_check = value.format(YEAR=YEAR)
+                url_to_check = value.format(YEAR=YEAR, URL_PATH_BASE_YEAR=url_path_base_year)
                 _check_and_add_url(url_to_check, key, files_to_download)
     return files_to_download  # Return the populated dictionary
 
@@ -126,7 +130,7 @@ def main(_):
   Arg : None
   Return : None
   """
-
+  end_year = 2022
   # Clearing the download folder is it already exists
   try:
         if os.path.exists(FLAGS.input_path):
@@ -144,7 +148,7 @@ def main(_):
 
   # Add future URLs 
   logging.info(f"Generating URLs from {FLAGS.start_year} down to {FLAGS.end_year + 1}")
-  download_urls = add_future_urls(FLAGS.start_year, FLAGS.end_year)
+  download_urls = add_future_urls(FLAGS.start_year,end_year,FLAGS.url_path_base_year)
     
   # Start download
   logging.info("Starting download of identified files")
