@@ -3,5 +3,5 @@ multi_value_properties,age
 mapped_rows,1
 mapped_columns,10
 header_rows,1
-statvar_dcid_remap_csv,pep_asrh_county_remap.csv
+statvar_dcid_remap_csv,pep_arsh_remap.csv
 output_columns,"observationAbout,observationDate,value,variableMeasured,measurementMethod"
