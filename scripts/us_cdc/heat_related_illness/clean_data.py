@@ -63,13 +63,12 @@ def download_dynamic_page(url, filename):
         driver.get(url)
 
         WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.XPATH, "//*[@id='page-start']")))
+            EC.presence_of_element_located((By.XPATH, configs.PAGE_START)))
 
         time.sleep(5)
 
-        no_data_element = driver.find_elements(
-            By.XPATH,
-            "//h2[text()='Data does not exist for the above criteria.']")
+        no_data_element = driver.find_elements(By.XPATH,
+                                               configs.NO_DATA_ELEMENT)
 
         if no_data_element:
             logging.info(f"No data found for url: {url}")
