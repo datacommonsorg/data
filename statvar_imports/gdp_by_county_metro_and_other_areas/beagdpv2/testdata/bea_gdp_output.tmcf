@@ -1,0 +1,8 @@
+Node: E:bea_gdp_output->E0
+observationAbout: C:bea_gdp_output->observationAbout
+observationDate: C:bea_gdp_output->observationDate
+value: C:bea_gdp_output->value
+variableMeasured: C:bea_gdp_output->variableMeasured
+unit: C:bea_gdp_output->unit
+typeOf: dcs:StatVarObservation
+observationPeriod: P1Y
