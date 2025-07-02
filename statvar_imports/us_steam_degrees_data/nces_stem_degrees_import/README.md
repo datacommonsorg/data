@@ -14,7 +14,7 @@ place_resolution: Places resolved to wikidataId in metadata sheet itself.
 
 Command to download using the download util.
 
-python3 download_util_script.py --download_url="https://nces.ed.gov/programs/digest/d24/tables/xls/tabn318.45.xlsx" --output_folder="source_files" --unzip=False
+python3 ../../../util/download_util_script.py --download_url="https://nces.ed.gov/programs/digest/d24/tables/xls/tabn318.45.xlsx" --output_folder="source_files" --unzip=False
 
 
 #### Processing the data:
