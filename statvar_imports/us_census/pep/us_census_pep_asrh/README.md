@@ -4,7 +4,13 @@ The script helps to downloads USCensusPEP_AgeSexRaceHispanicOrigin input data, r
 - source: https://www.census.gov/
 
 ### Download
-- How to download data: We have the download script pep_asrh_download_script.py to download the data from source website and keep csv files inside the input_files folder.
+- How to download data: We have the download script pep_asrh_download_script.py to download the data from source website and keep csv files inside the input_files folder. The script can take the start year, end year and the output folder path as arguments, example given below :
+- `python3 pep_asrh_download_script.py --start_year=2030 --url_path_base_year=2020 --input_path=input_files`
+
+  Here input_path : Directory to store downloaded files (default value is input_files).
+  start_year : Starting year for data search (inclusive, default value is 2030).
+  url_path_base_year : Base year for the URL path structure (e.g., '2020' in '.../2020-{YEAR}/...').
+    
 ### How to run:
 `python3 pep_asrh_download_script.py
 
