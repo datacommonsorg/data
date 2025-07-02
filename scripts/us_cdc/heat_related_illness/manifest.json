@@ -11,12 +11,12 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "state/output.tmcf",
-          "cleaned_csv": "state/cleaned.csv"
+          "template_mcf": "output_files/output.tmcf",
+          "cleaned_csv": "output_files/cleaned.csv"
         },
         {
-          "template_mcf": "state/output.tmcf",
-          "cleaned_csv": "state/country_output.csv"
+          "template_mcf": "output_files/output.tmcf",
+          "cleaned_csv": "output_files/country_output.csv"
         }
       ],
       "cron_schedule": "0 3 3 * *"
