@@ -1,7 +1,6 @@
-Node: E:zurich-Copy_of_bev_4031_wiki->E0
-observationAbout: C:zurich-Copy_of_bev_4031_wiki->observationAbout
-observationDate: C:zurich-Copy_of_bev_4031_wiki->observationDate
-value: C:zurich-Copy_of_bev_4031_wiki->value
-variableMeasured: C:zurich-Copy_of_bev_4031_wiki->variableMeasured
-unit: C:zurich-Copy_of_bev_4031_wiki->unit
+Node: E:bev_4031_wiki_output->E0
+observationDate: C:bev_4031_wiki_output->observationDate
+observationAbout: C:bev_4031_wiki_output->observationAbout
+value: C:bev_4031_wiki_output->value
 typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Count_BirthEvent
