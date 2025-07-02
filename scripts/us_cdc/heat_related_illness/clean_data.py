@@ -14,7 +14,7 @@
 """A script to download EPH Tracking data."""
 
 import os, configs
-import csv
+import csv, re
 from bs4 import BeautifulSoup
 import pandas as pd
 from absl import app, logging
@@ -49,15 +49,13 @@ def download_dynamic_page(url, filename):
     chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument("--disable-gpu")
 
-    # service = ChromeService(ChromeDriverManager().install())
+    driver_log_path = os.path.join(os.getcwd(), "chromedriver.log")
 
-    # driver_log_path = os.path.join(os.getcwd(), "chromedriver.log")
+    service = ChromeService(ChromeDriverManager().install(),
+                            log_path=driver_log_path)
 
-    # service = ChromeService(ChromeDriverManager().install(), log_path=driver_log_path)
-
-    service = ChromeService(ChromeDriverManager().install())
-
-    # logging.info(f"ChromeDriver internal logs will be written to: {driver_log_path}")
+    logging.info(
+        f"ChromeDriver internal logs will be written to: {driver_log_path}")
 
     try:
         driver = webdriver.Chrome(service=service, options=chrome_options)
@@ -111,39 +109,51 @@ def table_to_csv(html, csv_path: str):
                           for row in table.select("tr + tr")])
 
 
-def combine_csv_files(directory, string_list):
+def combine_csv_files(directory, category_string):
     """
-  Combines multiple CSV files within a directory into a single CSV file 
-  based on a string present in their filenames.
+    Combines multiple CSV files within a directory into a single CSV file 
+    based on a string present in their filenames.
 
-  Args:
-    directory: The path to the directory containing the CSV files.
-    string_list: The list of strings that must be present in the filenames.
-  """
-    dataframes = {}  # Dictionary to store DataFrames for each string
+    Args:
+        directory: The path to the directory containing the CSV files.
+        category_string: A string that must be present in the filenames.
+    """
+    dataframes_to_combine = []
+
+    pattern = re.compile(rf"^{re.escape(category_string)}(_\d{{4}})?\.csv$")
+
+    logging.info(
+        f"Looking for CSV files matching category '{category_string}' pattern in '{directory}'..."
+    )
+    logging.debug(f"Matching pattern used: {pattern.pattern}")
 
     for filename in os.listdir(directory):
-        if filename.endswith(".csv"):
-            for string in string_list:
-                if string in filename:
-                    filepath = os.path.join(directory, filename)
-                    try:
-                        df = pd.read_csv(filepath)
-                        if string not in dataframes:
-                            dataframes[string] = []
-                        dataframes[string].append(df)
-                    except Exception as e:
-                        logging.info(f"Error reading {filename}: {e}")
-                    break  # Move to the next filename after a match
+        if pattern.match(filename):
+            filepath = os.path.join(directory, filename)
+            try:
+                df = pd.read_csv(filepath)
+                dataframes_to_combine.append(df)
+                logging.info(f"  - Added '{filename}' for combining.")
+            except Exception as e:
+                logging.error(f"Error reading CSV file '{filename}': {e}")
 
-    for string, df_list in dataframes.items():
-        if df_list:
-            merged_df = pd.concat(df_list, ignore_index=True)
-            output_file = os.path.join(configs.COMBINED_INPUT_CSV_FILE,
-                                       string + '.csv')
-            merged_df.to_csv(output_file, index=False)
-            logging.info(
-                f"Successfully merged CSVs for '{string}' to {output_file}")
+    if dataframes_to_combine:
+        merged_df = pd.concat(dataframes_to_combine, ignore_index=True)
+
+        output_dir = configs.COMBINED_INPUT_CSV_FILE
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir, exist_ok=True)
+            logging.info(f"Created output directory: {output_dir}")
+
+        output_file = os.path.join(output_dir, category_string + '.csv')
+        merged_df.to_csv(output_file, index=False)
+        logging.info(
+            f"Successfully merged CSVs for category '{category_string}' to '{output_file}'. Total files combined: {len(dataframes_to_combine)}"
+        )
+    else:
+        logging.warning(
+            f"No CSV files found matching category '{category_string}' in '{directory}' to combine."
+        )
 
 
 def download_all_data(url, filename):
@@ -190,10 +200,10 @@ def main(_):
         try:
             url = urls["url_template"]
             file_name = urls["filename"]
+            string_to_match = urls["STRING_TO_MATCH"]
             download_all_data(url, file_name)
             convert_html_to_csv()
-            combine_csv_files(configs.INPUT_CSV_FILES, configs.STRING_TO_MATCH)
-
+            combine_csv_files(configs.INPUT_CSV_FILES, string_to_match)
         except Exception as e:
             logging.fatal(f"Fatal error: The script has terminated due to: {e}")
 
