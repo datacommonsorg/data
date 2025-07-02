@@ -147,7 +147,7 @@ def main(_):
 
 
   # Add future URLs 
-  logging.info(f"Generating URLs from {FLAGS.start_year} down to {FLAGS.end_year + 1}")
+  logging.info(f"Generating URLs from {FLAGS.start_year} down to {FLAGS.url_path_base_year + 1}")
   download_urls = add_future_urls(FLAGS.start_year,end_year,FLAGS.url_path_base_year)
     
   # Start download
