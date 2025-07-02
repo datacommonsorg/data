@@ -1,0 +1,6 @@
+dataset,variable,description,universe,age314Count,age1524Count,age2544Count,age4564Count,age65pCount,universeAgeResol,variableAgeResol
+Nov 1994,isHouseholder,Household Reference Person in Universe: Non-Institutional,,,5573616,43123860,29830455,21180087,,
+Nov 1994,computerAtHome,"Anyone in Household Uses a Desktop, Laptop, or Tablet at Home",isHouseholder,,1021876,13039306,8525086,1622202,,
+Oct 1997,computerAtHome,"Anyone in Household Uses a Desktop, Laptop, or Tablet at Home",isHouseholder,,1594328,19680204,13716027,2789026,,
+Dec 1998,isPerson,Person in Universe: Ages 3+ Not Active-Duty Military,,48287009,37477648,82833709,57582133,32272407,,CivilPerson
+Dec 1998,workInternetUser,Uses the Internet at Work,isAdult,,1798778,14741701,7969110,271065,Adult,
