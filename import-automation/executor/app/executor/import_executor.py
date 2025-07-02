@@ -34,14 +34,13 @@ REPO_DIR = os.path.dirname(
     os.path.dirname(
         os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
-sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_differ'))
-sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_validation'))
+sys.path.append(os.path.join(REPO_DIR, 'tools'))
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
 import file_util
 
-from import_differ import ImportDiffer
-from import_validation import ImportValidation
+from import_differ.import_differ import ImportDiffer
+from import_validation.import_validation import ValidationRunner
 from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
@@ -431,7 +430,7 @@ class ImportExecutor:
                 differ.run_differ()
 
                 logging.info('Invoking validation script...')
-                validation = ImportValidation(config_file_path, differ_output,
+                validation = ValidationRunner(config_file_path, differ_output,
                                               summary_stats,
                                               validation_output_file)
                 status = validation.run_validations()

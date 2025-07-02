@@ -1,0 +1,9 @@
+ValidationName,Status,Message,Details,RowsProcessed,RowsSucceeded,RowsFailed
+check_max_date_latest,FAILED,"Latest date found was 2023, expected 2025.","{""latest_date_found"": 2023, ""expected_latest_date"": 2025}",3,0,3
+check_max_date_consistent,PASSED,,,3,3,0
+check_deleted_count,PASSED,,,3,3,0
+check_num_places_consistent,PASSED,,,3,3,0
+check_min_value,PASSED,,,3,3,0
+check_max_value_for_percent,PASSED,,,3,3,0
+check_num_observations,PASSED,,,3,3,0
+check_unit_consistency,PASSED,,,3,3,0
