@@ -41,13 +41,13 @@ def download(inputdir):
                     logging.warning(f"Skipping download for {url}. Received non-200 status code: {response.status_code}")
                 count+=1
             except Exception as e:
-                logging.error(f"Error occured while downloading the data: {e}")      
-    logging.info("Download process finished.") 
+                logging.error(f"Error occured while downloading the data: {e}")
 
 def main(_):
     input_dir = os.path.join(SCRIPT_DIR, "input_files")
     try:
         download(input_dir)
+        logging.info("Download process finished.")
     except Exception as e:
         logging.fatal(f"A critical error prevented the download process from  completing: {e}")
 
