@@ -32,11 +32,8 @@ from retry import retry
 
 current_year = datetime.now().year
 
-@retry(
-    tries=3,
-    delay=1000, 
-    backoff=2
-)
+
+@retry(tries=3, delay=1000, backoff=2)
 def download_dynamic_page(url, filename):
     """
   Downloads HTML pages.
@@ -52,14 +49,16 @@ def download_dynamic_page(url, filename):
     chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument("--disable-gpu")
 
+    # service = ChromeService(ChromeDriverManager().install())
+
+    # driver_log_path = os.path.join(os.getcwd(), "chromedriver.log")
+
+    # service = ChromeService(ChromeDriverManager().install(), log_path=driver_log_path)
+
     service = ChromeService(ChromeDriverManager().install())
 
-    driver_log_path = os.path.join(os.getcwd(), "chromedriver.log")
+    # logging.info(f"ChromeDriver internal logs will be written to: {driver_log_path}")
 
-    service = ChromeService(ChromeDriverManager().install(), log_path=driver_log_path)
-
-    logging.info(f"ChromeDriver internal logs will be written to: {driver_log_path}")
-    
     try:
         driver = webdriver.Chrome(service=service, options=chrome_options)
 
@@ -67,28 +66,32 @@ def download_dynamic_page(url, filename):
 
         WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.XPATH, "//*[@id='page-start']")))
-        
+
         time.sleep(5)
 
-        no_data_element = driver.find_elements(By.XPATH, "//h2[text()='Data does not exist for the above criteria.']")
+        no_data_element = driver.find_elements(
+            By.XPATH,
+            "//h2[text()='Data does not exist for the above criteria.']")
 
         if no_data_element:
             logging.info(f"No data found for url: {url}")
             return False
-        
+
         html_content = driver.page_source
 
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(html_content)
-        
+
         return True
-    
+
     except Exception as e:
-        logging.fatal(f"Error found while downloading the data for the url {url}")
-    
+        logging.fatal(
+            f"Error found while downloading the data for the url {url}")
+
     finally:
         driver.quit()
         logging.info("Web driver closed.")
+
 
 def table_to_csv(html, csv_path: str):
     """
@@ -136,39 +139,24 @@ def combine_csv_files(directory, string_list):
     for string, df_list in dataframes.items():
         if df_list:
             merged_df = pd.concat(df_list, ignore_index=True)
-            output_file = os.path.join(configs.COMBINED_INPUT_CSV_FILE, string + '.csv')
+            output_file = os.path.join(configs.COMBINED_INPUT_CSV_FILE,
+                                       string + '.csv')
             merged_df.to_csv(output_file, index=False)
             logging.info(
                 f"Successfully merged CSVs for '{string}' to {output_file}")
 
-def download_all_data(url):
+
+def download_all_data(url, filename):
     try:
         for year in range(2000, current_year + 1):
-            base_url = url.format(year=year)
-            if "370" in url:
-                filename = f"./source_data/html_files/deaths_{year}.html"
-            elif "431/1" in url:
-                filename = f"./source_data/html_files/hospitalizations_{year}.html"
-            elif "431/3/" in url:
-                filename = f"./source_data/html_files/hospitalization_age_{year}.html"
-            elif "431/4" in url:
-                filename = f"./source_data/html_files/hospitalizatin_gender_{year}.html"
-            elif "431/37" in url:
-                filename = f"./source_data/html_files/hospitlizations_age_gender_{year}.html"
-            elif "438/1" in url:
-                filename = f"./source_data/html_files/edVisits_{year}.html"
-            elif "438/3/" in url:
-                filename = f"./source_data/html_files/edVisit_age_{year}.html"
-            elif "438/4" in url:
-                filename = f"./source_data/html_files/edVists_gender_{year}.html"
-            elif "438/37" in url:
-                filename = f"./source_data/html_files/edVsits_age_gender_{year}.html"
-            else:
-                logging.info("No Urls found!")
-
-            download_dynamic_page(base_url, filename)
+            base_url = url.format(year)
+            file_name = filename.format(year)
+            logging.info(f"Base url: {base_url}")
+            logging.info(f"File name: {file_name}")
+            download_dynamic_page(base_url, file_name)
     except Exception as e:
         logging.fatal(f"Download Error for the url {url}: {e}")
+
 
 def convert_html_to_csv():
     try:
@@ -176,13 +164,20 @@ def convert_html_to_csv():
             if file_name.endswith('.html'):  # If file is a html file
                 file_path = os.path.join(configs.INPUT_HTML_FILES, file_name)
                 with open(file_path, 'r', encoding='utf-8') as f:
-                    cleaned_csv_path = os.path.join(configs.INPUT_CSV_FILES, file_name[:-5] + '.csv')
+                    cleaned_csv_path = os.path.join(configs.INPUT_CSV_FILES,
+                                                    file_name[:-5] + '.csv')
                     table_to_csv(f.read(), cleaned_csv_path)
     except Exception as e:
-        logging.fatal(f"Error occured while converting the html file {file_name} to csv file: {e}")
+        logging.fatal(
+            f"Error occured while converting the html file {file_name} to csv file: {e}"
+        )
+
 
 def main(_):
-    paths = [configs.COMBINED_INPUT_CSV_FILE, configs.INPUT_HTML_FILES, configs.INPUT_CSV_FILES]
+    paths = [
+        configs.COMBINED_INPUT_CSV_FILE, configs.INPUT_HTML_FILES,
+        configs.INPUT_CSV_FILES
+    ]
     for path in paths:
         try:
             os.makedirs(path)
@@ -190,15 +185,17 @@ def main(_):
             pass  # Directory already exists
 
     URL_LIST = configs.URLS_CONFIG
-    
-    for url in URL_LIST:
+
+    for urls in URL_LIST:
         try:
-            download_all_data(url)
+            url = urls["url_template"]
+            file_name = urls["filename"]
+            download_all_data(url, file_name)
             convert_html_to_csv()
             combine_csv_files(configs.INPUT_CSV_FILES, configs.STRING_TO_MATCH)
-            
+
         except Exception as e:
-            logging.fatal(f"Script terminated due to the exception: {e}")
+            logging.fatal(f"Fatal error: The script has terminated due to: {e}")
 
 
 if __name__ == "__main__":
