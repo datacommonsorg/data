@@ -53,3 +53,4 @@ zipp
 netCDF4
 xmltodict
 sodapy
+certifi==2025.1.31
