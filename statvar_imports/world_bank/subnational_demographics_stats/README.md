@@ -1,8 +1,9 @@
 # Subnational_Demographics_Stats
 
-- source:  `https://databank.worldbank.org/source/subnational-population`
+Sub-national Demographic data - Worldbank Population for Country and States.
+The data presented on this page originates from The World Bank Group. It is made available through their DataBank platform, which provides access to a wide range of global data.
 
-- Sub-national Demographic data - Worldbank Population for Country and States.
+- source:  `https://databank.worldbank.org/source/subnational-population`
 
 - how to download data: 
     To download the data, you'll need to run the download script, `download_data.py`. This script will automatically create an "input_files" folder where you should place the file to be processed.
