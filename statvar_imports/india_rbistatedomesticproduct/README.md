@@ -12,11 +12,12 @@ years: 2004 to 2024.
 place_resolution: Places resolved to wikidataId in metadata sheet itself.
 
 How to run:
-python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='<input_file>.xlsx' --pv_map='statvar_imports/uae_Population/UAE_Population/<filename>_pvmap.csv,observationAbout:statvar_imports/uae_Population/UAE_Population/UAEPopulation_places_resolved_csv.csv' --config='statvar_imports/uae_Population/UAE_Population/UAEPopulationByEmiratesNationality_metadata.csv' --output_path=<filepath/filename>
+python3 stat_var_processor.py  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/india_rbistatedomesticproduct/test_data/<filename>.xlsx' --pv_map=".../../statvar_imports/india_rbistatedomesticproduct/<filename>_pvmap.csv" --output_path='.../../statvar_imports/india_rbistatedomesticproduct/test_data/<filename>' --config=".../../statvar_imports/india_rbistatedomesticproduct/<filename>_metadata.csv"
+
 
 Example
 Download :
 python3 rbi_sdp_download.py
 
-Processing
-python3 stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data='data/statvar_imports/uae_population/test_data/uae_population_input.xlsx' --pv_map='data/statvar_imports/uae_population/uae_popolation_pvmap.csv' --config='data/statvar_imports/uae_population/uae_popolation_metadata.csv' --output_path=data/statvar_imports/uae_population/test_data/output
+
+python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/india_rbistatedomesticproduct/test_data/state_domestic_input.xlsx' --pv_map="../../statvar_imports/india_rbistatedomesticproduct/state_domestic_product_pv_map.csv" --output_path='../../statvar_imports/india_rbistatedomesticproduct/test_data/sample_output' --config=".../../statvar_imports/india_rbistatedomesticproduct/state_domestic_product_metadata.csv"
