@@ -15,7 +15,6 @@
 
 import os
 import unittest
-import tempfile
 from preprocess import process
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -45,7 +44,7 @@ class EPHHeatRelatedIllness(unittest.TestCase):
             self.actual_mcf_result = f_result.read()
 
     def test_csv(self):
-        expected_csv_path = os.path.join(self.exp_path, 'expected.csv')
+        expected_csv_path = os.path.join(self.exp_path, 'expected_output.csv')
 
         with open(expected_csv_path, 'r', encoding='utf-8') as f_expected:
             expected_result = f_expected.read()

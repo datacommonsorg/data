@@ -84,3 +84,5 @@ TMCF_TEMPLATE = ("Node: E:EPHHeatIllness->E0\n"
 
 PAGE_START = "//*[@id='page-start']"
 NO_DATA_ELEMENT = "//h2[contains(text(), 'Data') and contains(text(), 'not exist') and contains(text(), 'criteria')]"
+
+OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')

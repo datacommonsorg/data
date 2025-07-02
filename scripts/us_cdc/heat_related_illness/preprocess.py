@@ -32,15 +32,12 @@ import pandas as pd
 
 _CONFIG = None
 
-# Columns in cleaned CSV
-_OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
-
 
 def generate_tmcf():
     # Writing Genereated TMCF to local path.
     with open(configs.OUTPUT_PATH + "/output.tmcf", 'w+',
               encoding='utf-8') as f_out:
-        f_out.write(configs._TMCF_TEMPLATE.rstrip('\n'))
+        f_out.write(configs.TMCF_TEMPLATE.rstrip('\n'))
 
 
 def state_resolver(state: str) -> str:
@@ -149,7 +146,7 @@ def process(cleaned_csv_path, output_mcf_path, input_path):
         _CONFIG = json.load(config_f)
 
     with open(cleaned_csv_path, 'w', encoding='utf-8') as cleaned_f:
-        f_writer = csv.DictWriter(cleaned_f, fieldnames=_OUTPUT_COLUMNS)
+        f_writer = csv.DictWriter(cleaned_f, fieldnames=configs.OUTPUT_COLUMNS)
         f_writer.writeheader()
         statvar_list = []
         for file_name in os.listdir(input_path):
