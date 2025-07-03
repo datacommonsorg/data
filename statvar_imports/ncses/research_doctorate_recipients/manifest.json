@@ -1,0 +1,30 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "NCSES_Research_Doctorate_Recipients_Import",
+      "curator_emails": [],
+      "provenance_url": "https://ncses.nsf.gov/pubs/nsf23300/data-tables",
+      "provenance_description": "research doctorate recipients, by ethnicity, race, and citizenship status",
+      "scripts": [
+        "download_and_process.py",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=ncses_employed_female.csv --pv_map=ncses_employed_female_pvmap.csv --config_file=ncses_employed_common_metadata.csv --output_path=output_files/female_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=ncses_employed_male.csv --pv_map=ncses_employed_male_pvmap.csv --config_file=ncses_employed_common_metadata.csv --output_path=output_files/male_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"        
+    ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/female_output.tmcf",
+          "cleaned_csv": "output_files/female_output.csv"
+        },
+        {
+           "template_mcf": "output_files/male_output.tmcf",
+           "cleaned_csv": "output_files/male_output.csv"
+        }
+      ],
+
+     
+      "cron_schedule": "15 22 10 1,7 *",
+      "source_files": ["temp_downloads/*"]
+    }
+  ]
+}
+
