@@ -1,29 +1,32 @@
-# Importing BJS National Prisoner Statistics Into Data Commons
+1. # Import Overview
 
-Author: chejennifer
+BJS is the primary statistical agency of the Department of Justice. It is one of the thirteen principal federal statistical agencies throughout the Executive Branch, agencies whose activities are predominantly focused on the collection, compilation, processing, or analysis of information for statistical purposes.
 
-## Table of Contents
+The mission of BJS is to collect, analyze, publish, and disseminate information on crime, criminal offenders, victims of crime, and the operation of justice systems at all levels of government. BJS also provides financial and technical support to state, local, and tribal governments to improve both their statistical capabilities and the quality and utility of their criminal history records. 
 
-1. [About the Dataset](#about-the-dataset)
-1. [Import Procedure](#import-procedure)
-
-## About the Dataset
-
-### Download URL
-
-data is available for download from https://www.icpsr.umich.edu/web/NACJD/studies/38871.
-
-### Overview
-1. Jurisdiction by various factors and combinations of factors including: location, gender, race, correctional facility type, sentencing lengths
-2. Custody by various factors and combinations of factors including: citizenship, correctional facility type, sentencing lengths
+Jurisdiction by various factors and combinations of factors including: location, gender, race, correctional facility type, sentencing lengths
+Custody by various factors and combinations of factors including: citizenship, correctional facility type, sentencing lengths
 Admission and Discharge
-3. Admission and Discharge
 
-### Notes and Caveats
-1. There is discontinuity in the years of collection and there are some fields in the data with missing values due to various reasons.
-1. There are many pages of notes on the values of collections from different states. The information in these notes have not been included in the data. 
-1. NPS collection items have several major changes over the years and there are items that were added, deleted, modified, or deleted and added back later.
 
+## Source URL: "https://www.icpsr.umich.edu/web/NACJD/studies/38871"
+## Import Type: Manual upload
+## Source Data Availability: Yearly
+
+
+2. # PreProcessing Steps:
+No Preprocessing required.
+
+3. # Autorefresh Type:
+## Semi-Autorefresh: 
+download the data from https://www.icpsr.umich.edu/web/NACJD/studies/38871
+upload the data file at location gs://unresolved_mcf/us_bjs/nps/semiautomation_files
+
+4. # Script Execution Details
+run the following command with the option -i followed by the name of the tsv data file that was downloaded and uploaded to unresolved bucket:
+```
+python3 import_data.py
+```
 
 #### Cleaned Data
 - [national_prison_stats.csv](national_prison_stats.csv).
@@ -38,12 +41,5 @@ Admission and Discharge
 - [import_data.py](import_data.py): BJS National Prison Statistics import script.
 
 
-## Import Procedure
 
->To import BJS National Prison Statistics data:
-1. download the data from https://www.icpsr.umich.edu/web/NACJD/studies/38871
-2. upload the data file at location gs://unresolved_mcf/usnpa_input_files/
-2. run the following command with the option -i followed by the name of the tsv data file that was downloaded and uploaded to unresolved bucket:
-```
-python3 import_data.py
-```
+

@@ -20,10 +20,9 @@ flags.DEFINE_string('input_file',
                     '38871-0001-Data.tsv',
                     'file path to tsv file with import data',
                     short_name='i')
-flags.DEFINE_string(
-    "gs_path",
-    "gs://datcom-import-test/scripts/us_bjs/nps/semiautomation_files/",
-    "input file path")
+flags.DEFINE_string("gs_path",
+                    "gs://unresolved_mcf/us_bjs/nps/semiautomation_files/",
+                    "input file path")
 
 AGGREGATE_COLUMNS = [
     "dc/lnp5g90fwpct8", "dc/03l0q0wyqrk39", "dc/hxsdmw575en24",
