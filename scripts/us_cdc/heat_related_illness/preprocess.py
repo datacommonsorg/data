@@ -76,9 +76,9 @@ def _process_file(file_name: str, csv_reader: csv.DictReader,
             age_group = row['Age Group']
             row_statvar.update(_CONFIG['pvs']['Age Group'][age_group])
 
-        if 'Gender' in row:
-            gender = row['Gender']
-            row_statvar.update(_CONFIG['pvs']['Gender'][gender])
+        if 'Sex' in row:
+            sex = row['Sex']
+            row_statvar.update(_CONFIG['pvs']['Sex'][sex])
 
         row_statvar['Node'] = get_statvar_dcid(row_statvar)
 
