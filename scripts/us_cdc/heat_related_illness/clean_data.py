@@ -42,7 +42,8 @@ def download_dynamic_page(url, filename):
     filename: The filename for saving the downloaded file.
   """
     chrome_options = ChromeOptions()
-
+    prefs = {"safebrowsing.enabled": True}
+    chrome_options.add_experimental_option("prefs", prefs)
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
@@ -51,8 +52,7 @@ def download_dynamic_page(url, filename):
 
     driver_log_path = os.path.join(os.getcwd(), "chromedriver.log")
 
-    service = ChromeService(ChromeDriverManager().install(),
-                            log_path=driver_log_path)
+    service = ChromeService(log_path=driver_log_path)
 
     logging.info(
         f"ChromeDriver internal logs will be written to: {driver_log_path}")
