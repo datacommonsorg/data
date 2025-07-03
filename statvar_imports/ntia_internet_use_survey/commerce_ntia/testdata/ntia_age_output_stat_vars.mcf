@@ -1,0 +1,89 @@
+Node: dcid:Count_Household_ComputerUsageAtHome_HasComputer_HouseholderAge15To24Years_NonInstitutionalized
+typeOf: dcid:StatisticalVariable
+name: "Anyone in Household Uses a Desktop","age between 15 and 24 years","dcid:Laptop","or Tablet at Home"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+computerUsageLocation: dcid:Home
+hasComputer: dcid:True
+householderAge: [15 24 Years]
+institutionalization: dcid:USC_NonInstitutionalized
+
+Node: dcid:Count_Household_ComputerUsageAtHome_HasComputer_HouseholderAge25To44Years_NonInstitutionalized
+typeOf: dcid:StatisticalVariable
+name: "Anyone in Household Uses a Desktop","age between 25 and 44 years","dcid:Laptop","or Tablet at Home"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+computerUsageLocation: dcid:Home
+hasComputer: dcid:True
+householderAge: [25 44 Years]
+institutionalization: dcid:USC_NonInstitutionalized
+
+Node: dcid:Count_Household_ComputerUsageAtHome_HasComputer_HouseholderAge45To64Years_NonInstitutionalized
+typeOf: dcid:StatisticalVariable
+name: "Anyone in Household Uses a Desktop","age between 45 and 64 years","dcid:Laptop","or Tablet at Home"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+computerUsageLocation: dcid:Home
+hasComputer: dcid:True
+householderAge: [45 64 Years]
+institutionalization: dcid:USC_NonInstitutionalized
+
+Node: dcid:Count_Household_ComputerUsageAtHome_HasComputer_HouseholderAge65OrMoreYears_NonInstitutionalized
+typeOf: dcid:StatisticalVariable
+name: "Anyone in Household Uses a Desktop","age 65 years and above","dcid:Laptop","or Tablet at Home"
+populationType: dcid:Household
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+computerUsageLocation: dcid:Home
+hasComputer: dcid:True
+householderAge: [65 - Years]
+institutionalization: dcid:USC_NonInstitutionalized
+
+Node: dcid:Count_Person_15To24Years_Civilian
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","age between 15 and 24 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [15 24 Years]
+armedForcesStatus: dcid:Civilian
+
+Node: dcid:Count_Person_25To44Years_Civilian
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","age between 25 and 44 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [25 44 Years]
+armedForcesStatus: dcid:Civilian
+
+Node: dcid:Count_Person_3To14Years_Civilian
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","age between 3 and 14 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [3 14 Years]
+armedForcesStatus: dcid:Civilian
+
+Node: dcid:Count_Person_45To64Years_Civilian
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","age between 45 and 64 years"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [45 64 Years]
+armedForcesStatus: dcid:Civilian
+
+Node: dcid:Count_Person_65OrMoreYears_Civilian
+typeOf: dcid:StatisticalVariable
+name: "Not Active-Duty Military","Person Aged 3 and above","age 65 years and above"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+age: [65 - Years]
+armedForcesStatus: dcid:Civilian
+
