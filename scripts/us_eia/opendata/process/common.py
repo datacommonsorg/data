@@ -24,10 +24,8 @@ from sys import path
 # For import util.alpha2_to_dcid
 # Setup path for import from data/util
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(_SCRIPT_DIR)
-_DATA_DIR = _SCRIPT_DIR.split('/data/')[0]
-sys.path.append(os.path.join(_DATA_DIR, 'data/util'))
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../util/'))
 import alpha2_to_dcid as alpha2_to_dcid
 import name_to_alpha2 as name_to_alpha2
 
