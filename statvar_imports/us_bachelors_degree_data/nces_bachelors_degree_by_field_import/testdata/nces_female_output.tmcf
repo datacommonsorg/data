@@ -1,0 +1,7 @@
+Node: E:nces_female_output->E0
+observationAbout: C:nces_female_output->observationAbout
+observationDate: C:nces_female_output->observationDate
+value: C:nces_female_output->value
+variableMeasured: C:nces_female_output->variableMeasured
+observationPeriod: C:nces_female_output->observationPeriod
+typeOf: dcs:StatVarObservation

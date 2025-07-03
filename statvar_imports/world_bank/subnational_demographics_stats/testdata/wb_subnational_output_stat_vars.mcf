@@ -1,0 +1,7 @@
+Node: dcid:Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Total Population"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+
