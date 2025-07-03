@@ -24,6 +24,9 @@ from absl import logging
 module_dir_ = os.path.dirname(__file__)
 sys.path.insert(0, module_dir_)
 from main import *
+
+module_dir_ = os.path.dirname(module_dir_)
+
 # module_dir_ is the path to where this test is running from.
 
 _TEST_CASES = [
@@ -53,9 +56,9 @@ class TestProcess(unittest.TestCase):
             with tempfile.TemporaryDirectory() as tmp_dir:
                 logging.info(f"Processing {dataset}")
                 in_file = os.path.join(module_dir_, 'test_data',
-                                       f'{test_fname}.txt')
+                                       f'{test_fname}_input.txt')
 
-                exp_csv = f'{test_fname}.csv'
+                exp_csv = f'{test_fname}_output.csv'
                 exp_mcf = f'{test_fname}.mcf'
                 exp_svg_mcf = f'{test_fname}.svg.mcf'
                 exp_tmcf = f'{test_fname}.tmcf'

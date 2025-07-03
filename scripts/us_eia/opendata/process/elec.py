@@ -13,9 +13,8 @@
 # limitations under the License.
 """EIA Electricity Dataset specific functions."""
 
-import logging
 import re
-
+from absl import logging
 from . import common
 
 
