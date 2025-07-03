@@ -1,0 +1,2 @@
+{"series_id":"TOTAL.LUACPUS.A","name":"Lubricants Consumed by the Transportation Sector, Annual","units":"Thousand Barrels per Day","f":"A","start":"1949","end":"2020","last_updated":"2021-04-26T13:51:38-04:00","data":[["2020",52.852],["2019",59.325]]}
+{"series_id":"TOTAL.COFMUCL.A","name":"Average Free on Board Cost of Crude Oil Imports From Colombia, Annual","units":"Dollars per Barrel","f":"A","start":"1973","end":"2020","last_updated":"2021-04-26T13:51:38-04:00","data":[["2020",36.03],["2019",60.61]]}
