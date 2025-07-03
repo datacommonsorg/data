@@ -1894,10 +1894,13 @@ class StatVarDataProcessor:
         keys.append(f'Cell:{row_index}:{col_index+1}')
         keys.append(f'Column:{col_index+1}')
         keys.append(f'Row:{row_index}')
-        for k in keys:
+        for key in keys:
             pv_list = self._pv_mapper.get_all_pvs_for_value(
-                value, self.get_last_column_header_key(col_index))
+                key, self.get_last_column_header_key(col_index))
             if pv_list:
+                logging.level_debug() and logging.debug(
+                    f'Got PVs for row:{row_index}:{col_index+1}:"{key}": {pv_list}'
+                )
                 return pv_list
         return None
 
@@ -2084,22 +2087,22 @@ class StatVarDataProcessor:
                     if (value is not None and
                             prop not in self._internal_reference_keys and
                             not self.get_reference_names(value)):
-                        pv_utils.add_key_value(
-                            prop,
-                            value,
-                            row_pvs,
-                            self._config.get('multi_value_properties', {}),
-                            normalize=False
-                        )
+                        pv_utils.add_key_value(prop,
+                                               value,
+                                               row_pvs,
+                                               self._config.get(
+                                                   'multi_value_properties',
+                                                   {}),
+                                               normalize=False)
                 for prop, value in row_col_pvs.get(col_index, {}).items():
                     if value is not None and prop not in self._internal_reference_keys:
-                        pv_utils.add_key_value(
-                            prop,
-                            value,
-                            row_pvs,
-                            self._config.get('multi_value_properties', {}),
-                            normalize=False
-                        )
+                        pv_utils.add_key_value(prop,
+                                               value,
+                                               row_pvs,
+                                               self._config.get(
+                                                   'multi_value_properties',
+                                                   {}),
+                                               normalize=False)
         if config_flags.get_value_type(row_pvs.get('#IgnoreRow'), False):
             logging.level_debug() and logging.log(
                 2, f'Ignoring row: {row} in {self._file_context}')
