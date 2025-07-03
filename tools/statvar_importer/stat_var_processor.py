@@ -2089,6 +2089,7 @@ class StatVarDataProcessor:
                             value,
                             row_pvs,
                             self._config.get('multi_value_properties', {}),
+                            normalize=False
                         )
                 for prop, value in row_col_pvs.get(col_index, {}).items():
                     if value is not None and prop not in self._internal_reference_keys:
@@ -2097,6 +2098,7 @@ class StatVarDataProcessor:
                             value,
                             row_pvs,
                             self._config.get('multi_value_properties', {}),
+                            normalize=False
                         )
         if config_flags.get_value_type(row_pvs.get('#IgnoreRow'), False):
             logging.level_debug() and logging.log(
