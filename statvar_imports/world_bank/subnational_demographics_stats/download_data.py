@@ -16,7 +16,6 @@ import os
 import time, config, zipfile
 from absl import logging, app
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -54,13 +53,12 @@ def download_worldbank(url, download_dir):
         "download.default_directory": download_dir,
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
+        "safebrowsing.enabled": True
     }
 
     chrome_options.add_experimental_option("prefs", prefs)
-    service = ChromeService(ChromeDriverManager().install())
-
+    driver = webdriver.Chrome(options=chrome_options)
     try:
-        driver = webdriver.Chrome(service=service, options=chrome_options)
         logging.info(f"Navigating to URL: {url}")
         driver.get(url)
 
