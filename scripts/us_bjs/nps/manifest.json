@@ -1,0 +1,24 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "USNationalPrisonerStatistics",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.bjs.gov/index.cfm?ty=dcdetail&iid=269",
+      "provenance_description": "Data Refresh for US National Prisoner Statistics and Crime StatVarAgg Import",
+      "scripts": ["import_data.py"],
+      "cleanup_gcs_volume_mount": false,
+      "source_files": ["input_files/*.tsv"],
+      "import_inputs": [
+        {
+          "template_mcf": "national_prison_stats.tmcf",
+          "cleaned_csv": "national_prison_stats.csv"
+        }
+       ],
+       "resource_limits": {
+        "cpu": "4",
+        "memory": "16G"
+      },
+      "cron_schedule": "0 9 5,25 * *"
+    }
+  ]
+}
