@@ -47,7 +47,8 @@ Specifically, the state-level `output_files/cleaned.csv` output file serve as an
     value: C:EPHHeatIllness->Quantity
 ```
 
-`country_output.csv`: Final output file at country level, generated after aggregating the state-level data from `output_files/cleaned.csv`.
+`country_output.csv`: Final output file at country level, generated after aggregating the state-level data from `output_files/cleaned.csv`. Input of this file is `cleaned.csv`.
+
 
 To generate `cleaned.csv`, `output.mcf`, `output.tmcf` and `country_output.csv`run:
 
@@ -60,7 +61,7 @@ python preprocess.py
 - Data for heat related deaths is heavily suppressed.
 - State level data is aggregated to get the country level data.
 
-## Trouble shooting section
+## Troubleshooting section
 
 This section provides guidance on common issues you might encounter while running the script and how to resolve them.
 ```

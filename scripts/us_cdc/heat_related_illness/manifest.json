@@ -6,8 +6,8 @@
       "provenance_url": "https://ephtracking.cdc.gov/qrlist/35",
       "provenance_description": "Heat-related illness, mortality, and emergency department visits data from the US CDC's Environmental Public Health Tracking Network.",
       "scripts": [
-	"clean_data.py", 
-	"preprocess.py"
+        "clean_data.py",
+        "preprocess.py"
       ],
       "source_files": [
         "input_files/*.csv"
@@ -22,6 +22,8 @@
           "cleaned_csv": "output_files/country_output.csv"
         }
       ],
+      "user_script_timeout": 259200,
+      "resource_limits": {"cpu": "4", "memory": "16G"},
       "cron_schedule": "0 3 3 * *"
     }
   ]

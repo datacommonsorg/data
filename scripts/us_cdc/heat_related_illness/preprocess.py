@@ -13,12 +13,12 @@
 # limitations under the License.
 """Script to process EPH Heat Stress data."""
 
-import os, configs
+import os
 import sys
 import json
 import csv
 import copy
-
+import pandas as pd
 from absl import app, logging
 
 # Allows the following module imports to work when running as a script
@@ -28,7 +28,9 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '..', '..', '..', 'util'))
 from statvar_dcid_generator import get_statvar_dcid
 from name_to_alpha2 import USSTATE_MAP_SPACE
 from alpha2_to_dcid import USSTATE_MAP
-import pandas as pd
+from statvar_remap import STATVAR_REMAP_DICT
+
+import configs
 
 _CONFIG = None
 
@@ -81,6 +83,9 @@ def _process_file(file_name: str, csv_reader: csv.DictReader,
             row_statvar.update(_CONFIG['pvs']['Sex'][sex])
 
         row_statvar['Node'] = get_statvar_dcid(row_statvar)
+        for key in STATVAR_REMAP_DICT:
+            if str(row_statvar['Node']) == str(key):
+                row_statvar['Node'] = STATVAR_REMAP_DICT[key]
 
         processed_dict = {
             'Year': year_with_month,
@@ -88,6 +93,13 @@ def _process_file(file_name: str, csv_reader: csv.DictReader,
             'Quantity': quantity,
             'Geo': geo_dcid,
         }
+        """
+        Country data is derived by aggregating state-level data. 
+        Therefore, country SVs are assigned the measurementMethod 'dcs:DataCommonsAggregate', 
+        as state-level data does not possess a measurementMethod. 
+        Given that both state and country data share a common TMCF file, 
+        we are explicitly setting the measurementMethod to an empty value at state level.
+        """
         processed_dict['measurementMethod'] = ""
         csv_writer.writerow(processed_dict)
         statvars.append(row_statvar)
@@ -157,8 +169,10 @@ def process(cleaned_csv_path, output_mcf_path, input_path):
                                               delimiter=',',
                                               quotechar='"')
                     statvars = _process_file(file_name, f_reader, f_writer)
+
                     if statvars:
                         statvar_list.extend(statvars)
+
         write_to_mcf(statvar_list, output_mcf_path)
 
 
@@ -170,7 +184,7 @@ def main(_):
         try:
             os.listdir(configs.COMBINED_INPUT_CSV_FILE)
         except:
-            logging.fatal(
+            logging.error(
                 "\n\nData not found!!!!!! Please run the script clean_data.py to download source data\n"
             )
         process(cleaned_csv_path, output_mcf_path,

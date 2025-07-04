@@ -22,7 +22,7 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 class EPHHeatRelatedIllness(unittest.TestCase):
 
-    def __init__(self, methodName: str = ...) -> None:
+    def __init__(self, methodName: str = "") -> None:
         super().__init__(methodName)
         self.exp_path = os.path.join(_SCRIPT_PATH, 'testdata', 'expected_files')
         self.act_path = os.path.join(_SCRIPT_PATH, 'testdata', 'actual_files')
