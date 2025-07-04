@@ -24,7 +24,8 @@ from absl import logging
 from google.cloud import storage
 flags.DEFINE_string(
         'config_file_path',
-        'gs://datcom-import-test/statvar_imports/india_ndap/indiaNSS_healthailments/download_config.json',
+#       'gs://datcom-import-test/statvar_imports/india_ndap/indiaNSS_healthailments/download_config.json',
+        'gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json',
         'Input directory where config files downloaded.')
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -63,17 +64,15 @@ def main(_):
                 break 
             # Considering the table id I7375_4 which is specific to the import.
             for i in keys:
-                a = (i['StateName'], i['TRU'],i['D7300_3'],i['D7300_4'],i['D7300_5'],i['I7300_6']['TotalPopulationWeight'],i['I7300_7']['avg'],i['I7300_8']['avg'],i['Year'].split(",")[-1].strip() + str(int(i['Year'].split(",")[-1].strip()) + 1),i['Year'].split(",")[-1].strip(), i['Year'])
+                a = (i['StateName'], i['TRU'],i['D7300_3'],i['D7300_4'],i['D7300_5'],i['I7300_6']['TotalPopulationWeight'],i['I7300_7']['avg'],i['I7300_8']['avg'],i['Year'].split(",")[-1].strip(), str(int(i['Year'].split(",")[-1].strip()) + 1),i['Year'].split(",")[-1].strip(), i['Year'])
                 all_data.append(a)
             page_num += 1 
         else:
             logging.error(f"failed to retrieve data from page {page_num}")
             break
     if all_data:
-        df = pd.DataFrame(all_data, columns=['srcStateName','TRU','GENDER', 'Broad ailment category','Age group','Ailments reported for each Broad caliment category per 100000 persons during last 15 days by different age groups','Estimated number of ailments under broad ailment category', 'Sample number of ailments under broad ailment category', 'srcYear', 'YearCode', 'Year'])
-        os.makedirs(input_files, exist_ok=True)
-        input_filename = os.path.join(input_files, 'IndiaNSS_HealthAilments.csv')
-        df.to_csv(input_filename, index=False)
+        df = pd.DataFrame(all_data, columns=['srcStateName','TRU','GENDER', 'Broad ailment category','Age group','Ailments reported for each Broad caliment category per 100000 persons during last 15 days by different age groups','Estimated number of ailments under broad ailment category', 'Sample number of ailments under broad ailment category', 'srcYear','futureYear', 'YearCode', 'Year'])
+        df.to_csv("IndiaNSS_HealthAilments.csv", index=False)
         logging.info("Data saved to ndiaNSS_HealthAilments.csv")
     else:
         logging.info("No data was retrieved from the API.")

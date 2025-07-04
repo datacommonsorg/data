@@ -1,57 +1,99 @@
+
 # India NSS Health Ailments
 
-This project processes and imports health ailment data from the National Sample Survey (NSS) in India. The dataset provides information on various health-related variables for individuals across different regions in India.
+## 1. Import Overview
 
-## Source link : https://ndap.niti.gov.in/dataset/7300
+This project processes and imports health ailment data from the **National Sample Survey (NSS)** conducted in India. The dataset provides health-related variables for individuals across Indian states and UTs, sourced from structured surveys.
 
-## How to Run
+* **Source URL**: [https://ndap.niti.gov.in/dataset/7300](https://ndap.niti.gov.in/dataset/7300)
+* **Import Type**: Manual file-based import (CSV)
+* **Source Data Availability**: Released by NDAP (NITI Aayog) based on periodic NSS survey rounds. Not updated on a regular cadence.
+* **Release Frequency**: Ad-hoc (typically once every 5 years); updated manually by team when a new round is published
+* **Notes**: The dataset includes metrics on various ailments as reported during NSS rounds. Each row represents health-related observations per ailment per state per year.
 
-### Prerequisites
+---
 
-1. Install required dependencies:
+## 2. Preprocessing Steps
 
-   * Python 3
-   * Java (for linting process)
-   * Ensure the necessary Python libraries are installed.
+Before ingestion, the following preprocessing is done:
 
-### Steps to Process Data
+* **Input files**:
 
-1. **Run the StatVar Processor**:
+  * `india_nss_health.csv`: Raw input data
+  * `pvmap.csv`: Property-value mapping
+  * `place_resolved.csv`: Geo resolution data for Indian states/UTs
+  * `metadata.csv`: StatVar metadata (used by `stat_var_processor.py`)
+* **Transformation pipeline**:
 
-   * The script `stat_var_processor.py` is used to process the data and generate the required output.
+  * Columns are cleaned and standardized to match StatVar expectations.
+  * StatVars are generated using `stat_var_processor.py`.
+  * Output is written to `health_nss.csv` and corresponding `health_nss.tmcf`.
+* **Data Quality Checks**:
 
-   ```bash
-   python3 stat_var_processor.py --input_data='/usr/local/google/home/kvishalll/nss_india_health_aliment/data/statvar_imports/india_ndap/indiaNSS_healthailments/input_files/india_nss_health.csv'  --pv_map='/usr/local/google/home/kvishalll/nss_india_health_aliment/data/statvar_imports/india_ndap/indiaNSS_healthailments/input_files/pvmap.csv'  --places_resolved_csv='/usr/local/google/home/kvishalll/nss_india_health_aliment/data/statvar_imports/india_ndap/indiaNSS_healthailments/input_files/place_resolved.csv'  --config_file='/usr/local/google/home/kvishalll/nss_india_health_aliment/data/statvar_imports/india_ndap/indiaNSS_healthailments/input_files/metadata.csv'  --output_path='/usr/local/google/home/kvishalll/nss_india_health_aliment/data/statvar_imports/india_ndap/indiaNSS_healthailments/input_files/health_nss' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
-   ```
+  * Linting is performed using the DataCommons import tool JAR
+  * Known warnings:
 
-   This will process the input data (`india_nss_health.csv`) with the mapping and configuration files, generating the output in the specified `output_path`.
+    * Missing values in `unit` and `scalingFactor` columns for rows 2–31. These must be validated and fixed manually.
 
-2. **Run the Linting Process**:
+---
 
-   * Use Java to run the `datacommons-import-tool` for linting the processed file.
+## 3. Autorefresh Type
 
-   ```bash
-   java -jar '/usr/local/google/home/kvishalll/Downloads/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar' lint '/usr/local/google/home/kvishalll/nss_india_health_aliment/data/statvar_imports/india_ndap/indiaNSS_healthailments/input_files/health_nss.csv' '/usr/local/google/home/kvishalll/nss_india_health_aliment/data/statvar_imports/india_ndap/indiaNSS_healthailments/input_files/health_nss.tmcf'
-   ```
-   
-3. **Scripts python3 download_script.py**
+**Autorefresh**
 
-   This will run the linting process on the generated CSV file to check for any data issues.
+* **Steps**:
 
-Here’s a more detailed explanation without including the solution or next steps:
+  1. Monitor [NDAP Dataset 7300](https://ndap.niti.gov.in/dataset/7300) for new survey releases
+  2. Manually download the latest data
+  3. Preprocess using `stat_var_processor.py` with updated CSV and mapping files
+  4. Run linting and validation
+  5. Upload final files to:
 
-Report Json warnings : 
+     * `gs://datcom-imports/india_ndap/NDAP_NSS_Health/latest/`
+  6. Trigger `schedule_update_import.sh` manually for test/prod ingestion
+* **Note**: This pipeline is not fully automated due to manual file retrieval and preprocessing needs.
 
-## Data Quality Warning: Empty Values in `unit` and `scalingFactor` Columns
+---
 
-### Issue:
+## 4. Script Execution Details
 
-While processing the **`health_nss.csv`** file, several warnings were generated indicating that there are **empty values** (`''`) in the `unit` and `scalingFactor` columns. These warnings were found in rows 2 through 31 of the dataset.
+### Script 1: `stat_var_processor.py`
 
-Each warning message specifically points out that the columns `unit` and `scalingFactor` contain empty values in certain rows, which means that the data for those columns is missing. These empty values can be problematic for accurate data processing, as they may lead to incomplete calculations or analysis, especially when the `unit` or `scalingFactor` values are essential for further computations.
+**Usage**:
 
-The warnings provide specific details on where the empty values occur within the dataset:
+```bash
+python3 stat_var_processor.py \
+  --input_data='/path/to/india_nss_health.csv' \
+  --pv_map='/path/to/pvmap.csv' \
+  --places_resolved_csv='/path/to/place_resolved.csv' \
+  --config_file='/path/to/metadata.csv' \
+  --output_path='/path/to/output/health_nss' \
+  --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
+```
 
-* **Column `unit`** and **column `scalingFactor`** are the two affected columns.
-* The **empty values** occur across several rows, starting from line 2 up to line 31, meaning multiple rows are missing values in these columns.
+**Purpose**: Generates StatVar MCF and cleaned observation CSV (`health_nss.csv`, `health_nss.tmcf`)
+
+---
+
+### Script 2: Java Linting Tool
+
+**Usage**:
+
+```bash
+java -jar '/path/to/datacommons-import-tool.jar' lint \
+  '/path/to/health_nss.csv' \
+  '/path/to/health_nss.tmcf'
+```
+
+**Purpose**: Validates final CSV+TMCF for formatting and semantic consistency before ingestion
+
+---
+
+### Script 3: `download_script.py` (if used)
+
+**Usage**:
+
+```bash
+python3 download_script.py
+```
 

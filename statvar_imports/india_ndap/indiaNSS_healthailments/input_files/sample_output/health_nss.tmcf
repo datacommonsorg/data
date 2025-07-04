@@ -1,8 +1,0 @@
-Node: E:health_nss->E0
-observationAbout: C:health_nss->observationAbout
-observationDate: C:health_nss->observationDate
-value: C:health_nss->value
-variableMeasured: C:health_nss->variableMeasured
-unit: C:health_nss->unit
-scalingFactor: C:health_nss->scalingFactor
-typeOf: dcs:StatVarObservation
