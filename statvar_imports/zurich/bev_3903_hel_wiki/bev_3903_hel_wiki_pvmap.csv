@@ -1,0 +1,8 @@
+key,prop,val,p1,v1
+Zeit,observationDate,{Number},,
+pop,value,{Number},populationType,Person
+wikiID,observationAbout,wikidataId/{Data},,
+Schweizer*in,nativity,Native,,
+Ausländer*in,nativity,ForeignBorn,,
+Foreign,nativity,ForeignBorn,,
+Swiss,nativity,Native,,

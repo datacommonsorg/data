@@ -1,7 +1,7 @@
-Node: E:zurich-Copy_of_bev_4031_sex_wiki->E0
-observationAbout: C:zurich-Copy_of_bev_4031_sex_wiki->observationAbout
-observationDate: C:zurich-Copy_of_bev_4031_sex_wiki->observationDate
-value: C:zurich-Copy_of_bev_4031_sex_wiki->value
-variableMeasured: C:zurich-Copy_of_bev_4031_sex_wiki->variableMeasured
-unit: C:zurich-Copy_of_bev_4031_sex_wiki->unit
+Node: E:bev_4031_sex_wiki_output->E0
+observationAbout: C:bev_4031_sex_wiki_output->observationAbout
+observationDate: C:bev_4031_sex_wiki_output->observationDate
+value: C:bev_4031_sex_wiki_output->value
+variableMeasured: C:bev_4031_sex_wiki_output->variableMeasured
+unit: C:bev_4031_sex_wiki_output->unit
 typeOf: dcs:StatVarObservation
