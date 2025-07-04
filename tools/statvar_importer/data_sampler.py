@@ -57,6 +57,8 @@ flags.DEFINE_integer(
 flags.DEFINE_float(
     'sampler_rate', -1,
     'The sampling rate for random row selection (e.g., 0.1 for 10%).')
+# TODO: Rename to sampler_cell_value_regex to better reflect its purpose.
+# See: https://github.com/datacommonsorg/data/pull/1445#discussion_r2180147075
 flags.DEFINE_string(
     'sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
     'A regular expression used to identify and select unique column values.')

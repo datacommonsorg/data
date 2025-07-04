@@ -140,17 +140,21 @@ class DataSamplerTest(unittest.TestCase):
             # we expect 2 rows for each state, plus the header.
             self.assertLessEqual(len(lines), 3 * 2 + 1)
 
-    @unittest.skip("TODO: Implement column regex in DataSampler.")
-    def test_column_regex(self):
-        """Tests that the sampler respects the sampler_column_regex config."""
-        config = {'sampler_column_regex': r'^State_1$'}
+    @unittest.skip("TODO: Implement cell value regex filtering in DataSampler.")
+    def test_cell_value_regex(self):
+        """Tests that sampler_column_regex filters based on cell values."""
+        # This test checks if the sampler correctly uses the regex to identify
+        # and select rows based on the content of their cells.
+        config = {
+            'sampler_column_regex': r'^\d{4}$'
+        }  # Regex for a 4-digit year
         data_sampler.sample_csv_file(self.input_file, self.output_file, config)
         with open(self.output_file) as f:
             lines = f.readlines()
-            # The regex only matches 'State_1', so we expect only rows with that
-            # value to be sampled.
+            # This would select the header and the one row in the test data that
+            # contains a year-like value.
             self.assertEqual(len(lines), 2)
-            self.assertIn('State_1', lines[1])
+            self.assertIn('2011', lines[1])
 
     def test_non_existent_input_file(self):
         """Tests that the sampler handles a non-existent input file."""
