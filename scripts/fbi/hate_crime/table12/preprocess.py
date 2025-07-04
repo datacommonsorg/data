@@ -133,7 +133,9 @@ def main(argv):
     config = _YEARWISE_CONFIG['year_config']
     tmp_dir = '.'
     if table_num not in config:
-        logging.fatal(f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present.")
+        logging.fatal(
+            f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present."
+        )
 
     with tempfile.TemporaryDirectory() as tmp_dir:
         for year, config in config[table_num].items():
@@ -151,7 +153,8 @@ def main(argv):
         with open(config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
 
-        cleaned_csv_path = os.path.join(_FLAGS.output_dir, f'table{table_num}_output.csv')
+        cleaned_csv_path = os.path.join(_FLAGS.output_dir,
+                                        f'table{table_num}_output.csv')
         statvars = utils.create_csv_mcf(csv_files, cleaned_csv_path, config,
                                         _OUTPUT_COLUMNS, _write_output_csv)
         if _FLAGS.gen_statvar_mcf:

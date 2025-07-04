@@ -108,7 +108,8 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
     return statvars
 
 
-def _clean_dataframe(df: pd.DataFrame, year: str, table_num: str) -> pd.DataFrame:
+def _clean_dataframe(df: pd.DataFrame, year: str,
+                     table_num: str) -> pd.DataFrame:
     """Clean the column names and offense type values in a dataframe."""
     config = _YEARWISE_CONFIG['table_config']
     year_config = config[table_num]
@@ -155,7 +156,9 @@ def main(argv):
         _YEARWISE_CONFIG = json.load(f)
     config = _YEARWISE_CONFIG['year_config']
     if table_num not in config:
-        logging.fatal(f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present.")
+        logging.fatal(
+            f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present."
+        )
     with tempfile.TemporaryDirectory() as tmp_dir:
         for year, config in config[table_num].items():
             xls_file_path = config["path"]

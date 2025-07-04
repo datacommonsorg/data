@@ -128,7 +128,9 @@ def main(argv):
         _YEARWISE_CONFIG = json.load(f)
     config = _YEARWISE_CONFIG['year_config']
     if table_num not in config:
-        logging.fatal(f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present.")
+        logging.fatal(
+            f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present."
+        )
     tmp_dir = '.'
     with tempfile.TemporaryDirectory() as tmp_dir:
         for year, config in config[table_num].items():
