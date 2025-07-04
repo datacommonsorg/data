@@ -35,11 +35,8 @@ import configs
 
 current_year = datetime.now().year
 
-@retry(
-    tries=3,
-    delay=1000, 
-    backoff=2
-)
+
+@retry(tries=3, delay=1000, backoff=2)
 def download_dynamic_page(url, filename):
     """
   Downloads HTML pages.
@@ -60,8 +57,9 @@ def download_dynamic_page(url, filename):
 
     service = ChromeService(log_path=driver_log_path)
 
-    logging.info(f"ChromeDriver internal logs will be written to: {driver_log_path}")
-    
+    logging.info(
+        f"ChromeDriver internal logs will be written to: {driver_log_path}")
+
     try:
         driver = webdriver.Chrome(service=service, options=chrome_options)
 
@@ -69,28 +67,31 @@ def download_dynamic_page(url, filename):
 
         WebDriverWait(driver, 30).until(
             EC.presence_of_element_located((By.XPATH, configs.PAGE_START)))
-        
+
         time.sleep(5)
 
-        no_data_element = driver.find_elements(By.XPATH, configs.NO_DATA_ELEMENT)
-        
+        no_data_element = driver.find_elements(By.XPATH,
+                                               configs.NO_DATA_ELEMENT)
+
         if no_data_element:
             logging.info(f"No data found for url: {url}")
             return False
-        
+
         html_content = driver.page_source
 
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(html_content)
-        
+
         return True
-    
+
     except Exception as e:
-        logging.fatal(f"Error found while downloading the data for the url {url}")
-    
+        logging.fatal(
+            f"Error found while downloading the data for the url {url}")
+
     finally:
         driver.quit()
         logging.info("Web driver closed.")
+
 
 def table_to_csv(html, csv_path: str):
     """
@@ -109,6 +110,7 @@ def table_to_csv(html, csv_path: str):
                            for td in row.find_all("td")]
                           for row in table.select("tr + tr")])
 
+
 def combine_csv_files(directory, category_string):
     """
     Combines multiple CSV files within a directory into a single CSV file 
@@ -122,7 +124,9 @@ def combine_csv_files(directory, category_string):
 
     pattern = re.compile(rf"^{re.escape(category_string)}(_\d{{4}})?\.csv$")
 
-    logging.info(f"Looking for CSV files matching category '{category_string}' pattern in '{directory}'...")
+    logging.info(
+        f"Looking for CSV files matching category '{category_string}' pattern in '{directory}'..."
+    )
     logging.debug(f"Matching pattern used: {pattern.pattern}")
 
     for filename in os.listdir(directory):
@@ -137,7 +141,7 @@ def combine_csv_files(directory, category_string):
 
     if dataframes_to_combine:
         merged_df = pd.concat(dataframes_to_combine, ignore_index=True)
-        
+
         output_dir = configs.COMBINED_INPUT_CSV_FILE
         if not os.path.exists(output_dir):
             os.makedirs(output_dir, exist_ok=True)
@@ -145,9 +149,14 @@ def combine_csv_files(directory, category_string):
 
         output_file = os.path.join(output_dir, category_string + '.csv')
         merged_df.to_csv(output_file, index=False)
-        logging.info(f"Successfully merged CSVs for category '{category_string}' to '{output_file}'. Total files combined: {len(dataframes_to_combine)}")
+        logging.info(
+            f"Successfully merged CSVs for category '{category_string}' to '{output_file}'. Total files combined: {len(dataframes_to_combine)}"
+        )
     else:
-        logging.warning(f"No CSV files found matching category '{category_string}' in '{directory}' to combine.")
+        logging.warning(
+            f"No CSV files found matching category '{category_string}' in '{directory}' to combine."
+        )
+
 
 def download_all_data(url, filename):
     try:
@@ -161,19 +170,27 @@ def download_all_data(url, filename):
     except Exception as e:
         logging.error(f"Download Error for the url {url}: {e}")
 
+
 def convert_html_to_csv():
     try:
         for file_name in os.listdir(configs.INPUT_HTML_FILES):
             if file_name.endswith('.html'):  # If file is a html file
                 file_path = os.path.join(configs.INPUT_HTML_FILES, file_name)
                 with open(file_path, 'r', encoding='utf-8') as f:
-                    cleaned_csv_path = os.path.join(configs.INPUT_CSV_FILES, file_name[:-5] + '.csv')
+                    cleaned_csv_path = os.path.join(configs.INPUT_CSV_FILES,
+                                                    file_name[:-5] + '.csv')
                     table_to_csv(f.read(), cleaned_csv_path)
     except Exception as e:
-        logging.fatal(f"Error occured while converting the html file {file_name} to csv file: {e}")
+        logging.fatal(
+            f"Error occured while converting the html file {file_name} to csv file: {e}"
+        )
+
 
 def main(_):
-    paths = [configs.COMBINED_INPUT_CSV_FILE, configs.INPUT_HTML_FILES, configs.INPUT_CSV_FILES]
+    paths = [
+        configs.COMBINED_INPUT_CSV_FILE, configs.INPUT_HTML_FILES,
+        configs.INPUT_CSV_FILES
+    ]
     for path in paths:
         try:
             os.makedirs(path)
@@ -181,17 +198,19 @@ def main(_):
             pass  # Directory already exists
 
     URL_LIST = configs.URLS_CONFIG
-    
+
     for urls in URL_LIST:
+        url = urls["url_template"]
+        file_name = urls["filename"]
+        string_to_match = urls["STRING_TO_MATCH"]
         try:
-            url = urls["url_template"]
-            file_name = urls["filename"]
-            string_to_match = urls["STRING_TO_MATCH"]
             download_all_data(url, file_name)
             convert_html_to_csv()
-            combine_csv_files(configs.INPUT_CSV_FILES, string_to_match)            
+            combine_csv_files(configs.INPUT_CSV_FILES, string_to_match)
         except Exception as e:
-            logging.fatal(f"Fatal error: The script has terminated due to an exception: {e}; Context: Url: {urls["url_template"]}; Filename: {urls["filename"]}")
+            logging.fatal(
+                f"Fatal error: The script has terminated due to an exception: {e}; context: Url: {url}; Filename: {file_name}"
+            )
 
 
 if __name__ == "__main__":
