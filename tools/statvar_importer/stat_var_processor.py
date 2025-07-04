@@ -66,10 +66,9 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
 import eval_functions
-from utils import (_capitalize_first_char, _is_place_dcid,
-                   _get_observation_date_format,
-                   _get_observation_period_for_date, _pvs_has_any_prop,
-                   _str_from_number, prepare_input_data)
+from utils import (capitalize_first_char, is_place_dcid,
+                   get_observation_date_format, get_observation_period_for_date,
+                   pvs_has_any_prop, str_from_number, prepare_input_data)
 import file_util
 import config_flags
 import data_annotator
@@ -277,11 +276,11 @@ class StatVarsMap:
     Otherwise the term is constructed from the value.
     """
         if not value:
-            return _capitalize_first_char(prop)
+            return capitalize_first_char(prop)
 
         if not isinstance(value, str):
             # For numeric values use the property and value.
-            return _capitalize_first_char(
+            return capitalize_first_char(
                 re.sub(r'[^A-Za-z0-9_/]', '_',
                        f'{prop}_{value}').replace('__', '_'))
         prefix = ''
@@ -293,7 +292,7 @@ class StatVarsMap:
                         prop, schemaless=True):
                 prop = prop.removeprefix('# ')
                 if prop != value:
-                    prefix = _capitalize_first_char(f'{prop}_')
+                    prefix = capitalize_first_char(f'{prop}_')
         if value[0] == '[':
             # Generate term for quantity range with start and optional end, unit.
             quantity_pat = (
@@ -322,7 +321,7 @@ class StatVarsMap:
                         value_term = f'{start}To{end}'
                     value_term += unit
                     return prefix + value_term
-        return prefix + _capitalize_first_char(value)
+        return prefix + capitalize_first_char(value)
 
     def _get_schemaless_statvar_props(self, pvs: dict) -> list:
         """Returns a list of schemaless properties from the dictionary of property:values.
@@ -891,7 +890,7 @@ class StatVarsMap:
             return False
         # Check if the StatVar exists.
         statvar_dcid = strip_namespace(pvs.get('variableMeasured', ''))
-        if not statvar_dcid and not _pvs_has_any_prop(
+        if not statvar_dcid and not pvs_has_any_prop(
                 pvs, self._config.get('output_columns')):
             logging.error(f'Missing statvar_dcid for SVObs {pvs}')
             return False
@@ -1145,7 +1144,7 @@ class StatVarsMap:
             formatted_value = value
             numeric_value = get_numeric_value(value)
             if numeric_value:
-                formatted_value = _str_from_number(
+                formatted_value = str_from_number(
                     numeric_value,
                     precision_digits=self._config.get('output_precision_digits',
                                                       5),
@@ -2471,7 +2470,7 @@ class StatVarDataProcessor:
             self._counters.add_counter(f'warning-svobs-missing-place', 1,
                                        pvs.get('variableMeasured', ''))
             return False
-        if _is_place_dcid(place):
+        if is_place_dcid(place):
             # Place is a resolved dcid or a place property.
             return True
 
@@ -2483,7 +2482,7 @@ class StatVarDataProcessor:
             self._pv_mapper.get_all_pvs_for_value(place, 'observationAbout'))
         if place_pvs:
             place_dcid = place_pvs.get('observationAbout', '')
-        if not _is_place_dcid(place_dcid):
+        if not is_place_dcid(place_dcid):
             # Place is not resolved yet. Try resolving through Maps API.
             if self._config.get('resolve_places', False):
                 resolved_place = self._place_resolver.resolve_name({
@@ -2508,7 +2507,7 @@ class StatVarDataProcessor:
                     f' {resolved_place}')
                 if resolved_dcid:
                     place_dcid = add_namespace(resolved_dcid)
-        if _is_place_dcid(place_dcid):
+        if is_place_dcid(place_dcid):
             pvs['observationAbout'] = place_dcid
             logging.level_debug() and logging.debug(
                 f'Resolved place {place} to {place_dcid}')
@@ -2530,8 +2529,7 @@ class StatVarDataProcessor:
         output_date_format = self._config.get('observation_date_format', '')
         obs_period = pvs.get('observationPeriod')
         if not output_date_format:
-            output_date_format = _get_observation_date_format(
-                date_normalized, obs_period)
+            output_date_format = get_observation_date_format(date_normalized)
         # Check if date is already formatted as expected
         try:
             resolved_date = datetime.datetime.strptime(
@@ -2573,8 +2571,8 @@ class StatVarDataProcessor:
 
         # Set the observation period based on date, if empty
         if obs_period == '':
-            period = _get_observation_period_for_date(resolved_date,
-                                                      pvs['observationPeriod'])
+            period = get_observation_period_for_date(resolved_date,
+                                                     pvs['observationPeriod'])
             if period:
                 pvs['observationPeriod'] = period
                 logging.level_debug() and logging.debug(

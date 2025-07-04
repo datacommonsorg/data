@@ -28,7 +28,7 @@ import file_util
 from util.download_util import download_file_from_url
 
 
-def _capitalize_first_char(string: str) -> str:
+def capitalize_first_char(string: str) -> str:
     """Capitalizes the first character of a string.
 
     If the input is not a string, or is an empty string, it's returned as is.
@@ -41,15 +41,15 @@ def _capitalize_first_char(string: str) -> str:
         if it cannot be capitalized.
 
     Examples:
-        >>> _capitalize_first_char("hello")
+        >>> capitalize_first_char("hello")
         'Hello'
-        >>> _capitalize_first_char("World")
+        >>> capitalize_first_char("World")
         'World'
-        >>> _capitalize_first_char("")
+        >>> capitalize_first_char("")
         ''
-        >>> _capitalize_first_char("1st")
+        >>> capitalize_first_char("1st")
         '1st'
-        >>> _capitalize_first_char(None)
+        >>> capitalize_first_char(None)
 
     """
     if not string or not isinstance(string, str):
@@ -57,8 +57,8 @@ def _capitalize_first_char(string: str) -> str:
     return string[0].upper() + string[1:]
 
 
-def _str_from_number(number: Union[int, float],
-                     precision_digits: Optional[int] = None) -> str:
+def str_from_number(number: Union[int, float],
+                    precision_digits: Optional[int] = None) -> str:
     """Converts a number (int or float) to its string representation.
 
     Integers and floats that are whole numbers (e.g., 10.0) are returned as
@@ -73,15 +73,15 @@ def _str_from_number(number: Union[int, float],
         The string representation of the number.
 
     Examples:
-        >>> _str_from_number(123)
+        >>> str_from_number(123)
         '123'
-        >>> _str_from_number(123.0)
+        >>> str_from_number(123.0)
         '123'
-        >>> _str_from_number(123.456)
+        >>> str_from_number(123.456)
         '123.456'
-        >>> _str_from_number(123.456, precision_digits=2)
+        >>> str_from_number(123.456, precision_digits=2)
         '123.46'
-        >>> _str_from_number(123.451, precision_digits=2)
+        >>> str_from_number(123.451, precision_digits=2)
         '123.45'
     """
     # Check if number is an integer or float without any decimals.
@@ -94,8 +94,8 @@ def _str_from_number(number: Union[int, float],
     return f'{number}'
 
 
-def _pvs_has_any_prop(pvs: Optional[Dict[str, any]],
-                      columns: Optional[List[str]] = None) -> bool:
+def pvs_has_any_prop(pvs: Optional[Dict[str, any]],
+                     columns: Optional[List[str]] = None) -> bool:
     """Checks if a dictionary of Property-Values (PVs) contains any of the specified columns (properties).
 
     This function iterates through the provided PVs dictionary and checks if any of its
@@ -110,17 +110,17 @@ def _pvs_has_any_prop(pvs: Optional[Dict[str, any]],
         False otherwise.
 
     Examples:
-        >>> _pvs_has_any_prop({'name': 'Test', 'age': 30}, ['age', 'city'])
+        >>> pvs_has_any_prop({'name': 'Test', 'age': 30}, ['age', 'city'])
         True
-        >>> _pvs_has_any_prop({'name': 'Test', 'age': None}, ['age'])
+        >>> pvs_has_any_prop({'name': 'Test', 'age': None}, ['age'])
         False
-        >>> _pvs_has_any_prop({'name': 'Test'}, ['city'])
+        >>> pvs_has_any_prop({'name': 'Test'}, ['city'])
         False
-        >>> _pvs_has_any_prop({}, ['name'])
+        >>> pvs_has_any_prop({}, ['name'])
         False
-        >>> _pvs_has_any_prop(None, ['name'])
+        >>> pvs_has_any_prop(None, ['name'])
         False
-        >>> _pvs_has_any_prop({'name': 'Test'}, None)
+        >>> pvs_has_any_prop({'name': 'Test'}, None)
         False
     """
     if pvs and columns:
@@ -130,43 +130,43 @@ def _pvs_has_any_prop(pvs: Optional[Dict[str, any]],
     return False
 
 
-def _is_place_dcid(place: str) -> bool:
+def is_place_dcid(place: str) -> bool:
     """Returns True if the place string is a valid DCID pattern.
 
     Examples:
-        >>> _is_place_dcid("dcid:country/USA")
+        >>> is_place_dcid("dcid:country/USA")
         True
-        >>> _is_place_dcid("dcs:country/USA")
+        >>> is_place_dcid("dcs:country/USA")
         True
-        >>> _is_place_dcid("country/USA")
+        >>> is_place_dcid("country/USA")
         True
-        >>> _is_place_dcid("geoId/06")
+        >>> is_place_dcid("geoId/06")
         True
-        >>> _is_place_dcid("dc/g/Establishment_School")
+        >>> is_place_dcid("dc/g/Establishment_School")
         True
-        >>> _is_place_dcid("dcid:Person") 
+        >>> is_place_dcid("dcid:Person") 
         True
-        >>> _is_place_dcid("countryUSA")
+        >>> is_place_dcid("countryUSA")
         False
-        >>> _is_place_dcid("dcid:country/USA extra") 
+        >>> is_place_dcid("dcid:country/USA extra") 
         False
-        >>> _is_place_dcid("dcid:!@#")
+        >>> is_place_dcid("dcid:!@#")
         False
-        >>> _is_place_dcid("")
+        >>> is_place_dcid("")
         False
-        >>> _is_place_dcid(None)
+        >>> is_place_dcid(None)
         False
-        >>> _is_place_dcid("dcid:")
+        >>> is_place_dcid("dcid:")
         False
-        >>> _is_place_dcid("dcs:")
+        >>> is_place_dcid("dcs:")
         False
-        >>> _is_place_dcid("country/")
+        >>> is_place_dcid("country/")
         False
-        >>> _is_place_dcid("/USA")
+        >>> is_place_dcid("/USA")
         False
-        >>> _is_place_dcid("dcid//USA") # Double slash
+        >>> is_place_dcid("dcid//USA") # Double slash
         False
-        >>> _is_place_dcid("dcid:country//USA") # Double slash after prefix
+        >>> is_place_dcid("dcid:country//USA") # Double slash after prefix
         False
     """
     if not place or not isinstance(place, str):
@@ -194,15 +194,10 @@ def _is_place_dcid(place: str) -> bool:
         return False
 
     contains_slash_internally = False
-    for char_code in [ord(c) for c in place_to_check]:
-        is_alnum = ((char_code >= ord('a') and char_code <= ord('z')) or
-                    (char_code >= ord('A') and char_code <= ord('Z')) or
-                    (char_code >= ord('0') and char_code <= ord('9')))
-        is_allowed_symbol = (char_code == ord('_') or char_code == ord('/'))
-
-        if not (is_alnum or is_allowed_symbol):
+    for c in place_to_check:
+        if not c.isalnum() and c not in ['_', '/']:
             return False  # Invalid character
-        if char_code == ord('/'):
+        if c == '/':
             contains_slash_internally = True
 
     if not has_prefix:
@@ -213,8 +208,8 @@ def _is_place_dcid(place: str) -> bool:
     return True
 
 
-def _get_observation_period_for_date(date_str: str,
-                                     default_period: str = '') -> str:
+def get_observation_period_for_date(date_str: str,
+                                    default_period: str = '') -> str:
     """Determines the observation period (e.g., P1Y, P1M, P1D) based on the date string format.
 
     It counts the number of hyphens ('-') in the date string to infer the period:
@@ -233,17 +228,17 @@ def _get_observation_period_for_date(date_str: str,
         The determined observation period string ('P1Y', 'P1M', 'P1D') or the `default_period`.
 
     Examples:
-        >>> _get_observation_period_for_date("2023")
+        >>> get_observation_period_for_date("2023")
         'P1Y'
-        >>> _get_observation_period_for_date("2023-05")
+        >>> get_observation_period_for_date("2023-05")
         'P1M'
-        >>> _get_observation_period_for_date("2023-05-10")
+        >>> get_observation_period_for_date("2023-05-10")
         'P1D'
-        >>> _get_observation_period_for_date("2023/05/10", "P1D") # No hyphens
+        >>> get_observation_period_for_date("2023/05/10", "P1D") # No hyphens
         'P1Y'
-        >>> _get_observation_period_for_date("invalid-date-string", "PXY") # Two hyphens
+        >>> get_observation_period_for_date("invalid-date-string", "PXY") # Two hyphens
         'P1D'
-        >>> _get_observation_period_for_date("invalid", "PXY") # Zero hyphens
+        >>> get_observation_period_for_date("invalid", "PXY") # Zero hyphens
         'P1Y'
     """
     date_parts = date_str.count('-')
@@ -256,7 +251,7 @@ def _get_observation_period_for_date(date_str: str,
     return default_period
 
 
-def _get_observation_date_format(date_str: str, obs_period: str = '') -> str:
+def get_observation_date_format(date_str: str) -> str:
     """Determines a Python strftime date format string based on the structure of the date_str.
 
     This function infers the format by counting the number of hyphens ('-')
@@ -264,23 +259,21 @@ def _get_observation_date_format(date_str: str, obs_period: str = '') -> str:
     - "YYYY" (0 hyphens) -> "%Y"
     - "YYYY-MM" (1 hyphen) -> "%Y-%m"
     - "YYYY-MM-DD" (2 hyphens) -> "%Y-%m-%d"
-    The `obs_period` argument is not currently used in the logic.
 
     Args:
         date_str: The date string (e.g., "2023", "2023-01", "2023-01-15").
-        obs_period: The observation period (currently unused).
 
     Returns:
         A Python strftime format string.
 
     Examples:
-        >>> _get_observation_date_format("2023")
+        >>> get_observation_date_format("2023")
         '%Y'
-        >>> _get_observation_date_format("2023-07")
+        >>> get_observation_date_format("2023-07")
         '%Y-%m'
-        >>> _get_observation_date_format("2023-07-15")
+        >>> get_observation_date_format("2023-07-15")
         '%Y-%m-%d'
-        >>> _get_observation_date_format("2023/07/15") # Relies on hyphens
+        >>> get_observation_date_format("2023/07/15") # Relies on hyphens
         '%Y'
     """
     # Get the date format based on number of tokens in date string.
@@ -295,7 +288,7 @@ def _get_observation_date_format(date_str: str, obs_period: str = '') -> str:
     return date_format
 
 
-def _get_filename_for_url(url: str, path: str) -> str:
+def get_filename_for_url(url: str, path: str) -> str:
     """Generates a safe local filename from a URL, ensuring uniqueness in the given path.
 
     It extracts the filename from the last segment of the URL path, removing query
@@ -311,9 +304,9 @@ def _get_filename_for_url(url: str, path: str) -> str:
         A unique, safe filename string to be used locally.
 
     Examples:
-        >>> _get_filename_for_url("http://example.com/data/my_file.csv", "/tmp")
+        >>> get_filename_for_url("http://example.com/data/my_file.csv", "/tmp")
         '/tmp/my_file.csv'
-        >>> _get_filename_for_url("http://example.com/data/report.pdf?v=2#page3", "/docs")
+        >>> get_filename_for_url("http://example.com/data/report.pdf?v=2#page3", "/docs")
         '/docs/report.pdf'
     """
     # Remove URL arguments separated by '?' or '#'
@@ -375,7 +368,7 @@ def download_csv_from_url(urls: Union[str, List[str]],
         if download_files and index < len(download_files):
             filename = download_files[index]
         else:
-            filename = _get_filename_for_url(url, data_path)
+            filename = get_filename_for_url(url, data_path)
         logging.info(f'Downloading {url} into {filename}')
         output_file = download_file_from_url(url=url,
                                              output_file=filename,
