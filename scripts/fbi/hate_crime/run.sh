@@ -1,4 +1,9 @@
-#Running the process scripts for all the publication tables
+# This script combines all processed output csv files from the folders table1 to table 10 and a makes a single CSV
+# named 't1tot10_combined' within the 'tables1-10' directory.
+# It also copies the '.tmcf' file from 'table1' to 'tables1-10', treating it as
+# the primary TMCF for this unified logical table.
+# This is necessary because 'table1' through 'table10' represent a single table in the manifest.
+
 set -e
 echo "Starting the combining"
 

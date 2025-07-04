@@ -155,6 +155,8 @@ def main(argv):
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         config = json.load(f)
     _YEARWISE_CONFIG = config['year_config']
+    if '2' not in config:
+        logging.fatal(f"Error: Key 2 not found in the config. Please ensure the configuration for section 2 is present.")
     with tempfile.TemporaryDirectory() as tmp_dir:
         for year, config in _YEARWISE_CONFIG['2'].items():
             xls_file_path = config['path']

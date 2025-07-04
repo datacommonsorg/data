@@ -52,10 +52,6 @@ _OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity')
 # A config that maps the year to corresponding xls file with args to be used
 # with pandas.read_excel()
 
-# with file_util.FileIO(_FLAGS.config_file, 'r') as f:
-#     config = json.load(f)
-# _YEARWISE_CONFIG = config['year_config']
-
 
 def _write_row(year: int, statvar_dcid: str, quantity: str,
                writer: csv.DictWriter):
@@ -136,6 +132,8 @@ def main(argv):
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         config = json.load(f)
     _YEARWISE_CONFIG = config['year_config']
+    if table_num not in config:
+        logging.fatal(f"Error: Key 1 not found in the config. Please ensure the configuration for section 1 is present.")
     with tempfile.TemporaryDirectory() as tmp_dir:
         for year, config in _YEARWISE_CONFIG['1'].items():
             xls_file_path = config['path']

@@ -30,22 +30,38 @@ Also now the aggregation script reads the configs and input csv from GCS bucket.
 ### Examples
 python3 preprocess_aggregation.py --input=gs://unresolved_mcf/fbi/hate_crime/20250107/hate_crime.csv --config=gs://unresolved_mcf/fbi/hate_crime/20250107/config.json
 
+This will process the file in the given input GCP bucket path and writes the output into 'aggregations' folder.
+
+
 ### Publication Table :
 Each table has respective processing script in the corresponding folders. The script is expecting the input data in a GCS buckt. Download and upload the data and upload to respective folders in "unresolved_mcf/fbi/hate_crime/20250107/". There is a config file which contains the links to the input data and expected columns.
+
+There is separate script available in each table folders. Each of them processes the input files from GCS bucket and processes it, then created the resolved csv, tmcf and mcf files inside respective table folders.
+
+Process : 
+* First download the new available data from https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/downloads
+* Go to the GCP bucket gs://unresolved_mcf/fbi/hate_crime/20250107/ and create a folder for the new year and upload the table files there
+* Then please run the scripts to process the input data and get the output in table folders
 
 ### Examples
 python3 preprocess.py --config_file=gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json
 
+### run.sh to combine the csv's in table1 to table10
+We have a run.sh script which is helping to combine the output csv's from folders table1 to table10 and makes a single CSV named 't1tot10_combined.csv within the 'tables1-10' directory. It also copies the '.tmcf' file from 'table1' to 'tables1-10', treating it as the primary TMCF for this unified logical table. This is necessary because 'table1' through 'table10' represent a single table in the manifest.
+
+### Example : 
+```sh run.sh```
 
 ## Aggregations from master file
 
-`preprocess_aggregations.py` creates aggregations from master file with each individual incident recorded. The script outputs individual files for each type of aggregation to ease debugging and a combined `aggregation.csv` file under `aggregations` folder with all the final observations.
+`preprocess_aggregations.py` creates aggregations from master file with each individual incident recorded. The script outputs individual files for each type of aggregation to ease debugging and a combined `aggregation.csv` file under `aggregations` folder with all the final observations. If the input file is stored in a different GCP location we can give the path by using the flag 'input_file'
+
+
 
 To create aggregations
 ```bash
-python preprocess_aggregations_test.py
+python preprocess_aggregations.py --input_file=gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/input_files/hate_crime.csv
 ```
-
 
 ### Changes required for final mcf file
 

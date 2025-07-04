@@ -105,11 +105,11 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
     return statvars
 
 
-def _clean_dataframe(df: pd.DataFrame, year: str):
+def _clean_dataframe(df: pd.DataFrame, year: str, table_num):
     """Clean the column names and offense type values in a dataframe."""
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
-    year_config = _YEARWISE_CONFIG['table_config']['10']
+    year_config = _YEARWISE_CONFIG['table_config'][table_num]
 
     if year_config:
         if isinstance(year_config, list):
@@ -128,17 +128,20 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
 def main(argv):
     global _YEARWISE_CONFIG
     csv_files = []
+    table_num = '10'
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         _YEARWISE_CONFIG = json.load(f)
     config = _YEARWISE_CONFIG['year_config']
+    if table_num not in config:
+        logging.fatal(f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present.")
     tmp_dir = '.'
     with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in config['10'].items():
+        for year, config in config[table_num].items():
             xls_file_path = config['path']
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
             logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])
-            read_file = _clean_dataframe(read_file, year)
+            read_file = _clean_dataframe(read_file, year, table_num)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, header=True, index=False)
             csv_files.append(csv_file_path)

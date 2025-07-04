@@ -26,7 +26,7 @@ from absl import app
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
-    'input',
+    'input_file',
     'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/input_files/hate_crime.csv',
     'Input csv file from https://cde.ucr.cjis.gov/LATEST/webapp/#')
 flags.DEFINE_string(
@@ -1748,12 +1748,15 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
                                         'hate_crime.csv'),
                  output_path=os.path.join(_SCRIPT_PATH, 'aggregations')):
     global _SCRIPT_PATH, _INPUT_COLUMNS, _AGGREGATIONS
-    # input_csv = os.path.expanduser(input_csv)
     output_path = os.path.expanduser(output_path)
-    logging.info(f'Processing input: {_FLAGS.input}')
-    with file_util.FileIO(_FLAGS.input, 'r') as input_f:
-        df = pd.read_csv(input_f)
+    logging.info(f'Processing input: {_FLAGS.input_file}')
+    #with file_util.FileIO(_FLAGS.input_file, 'r') as input_f:
+    df = pd.read_csv(_FLAGS.input_file)
+    print(df)
     df.columns = df.columns.str.upper()
+    missing_cols = set(_INPUT_COLUMNS) - set(df.columns)
+    if missing_cols:
+        raise ValueError(f"Missing required columns: {missing_cols}")
     df = df[_INPUT_COLUMNS]
     logging.info(f'Loading config: {_FLAGS.config_file}')
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
