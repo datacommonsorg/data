@@ -21,8 +21,6 @@ import requests
 from retry import retry
 import ssl
 
-
-	
 # Define command-line flags
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
@@ -138,16 +136,20 @@ def main(_):
             # shutil.rmtree followed by os.makedirs is a cleaner way to clear and recreate
             # an entire directory tree.
             shutil.rmtree(FLAGS.input_path)
-  except Exception as e:
-        logging.error(f"Error in clearing folder {FLAGS.input_path}: {e}")
+  except OSError as e: # Catch specific OSError for file system operations
+      error_message = f"Critical Error: Failed to clear folder {FLAGS.input_path}: {e}. Please ensure the directory is not in use or has proper permissions."
+      logging.fatal(error_message)
+      # Re-raise the exception to stop execution
+      raise RuntimeError(error_message) from e 
 
   # Ensure the base input_path exists after clearing
+  # This os.makedirs will only run if rmtree succeeded or if input_path didn't exist	
   os.makedirs(FLAGS.input_path, exist_ok=True)
   logging.info(f"Ensured fresh base download directory: {FLAGS.input_path}")
 
 
   # Add future URLs 
-  logging.info(f"Generating URLs from {FLAGS.start_year} down to {FLAGS.url_path_base_year + 1}")
+  logging.info(f"Generating URLs from {FLAGS.start_year} down to {end_year + 1}")
   download_urls = add_future_urls(FLAGS.start_year,end_year,FLAGS.url_path_base_year)
     
   # Start download
