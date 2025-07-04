@@ -1,0 +1,55 @@
+Node: dcid:Area_LandCover_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:LandCover
+measuredProperty: dcid:area
+statType: dcid:measuredValue
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Female_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Female_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Female
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Male_Rural
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Male_Urban
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+gender: dcid:Male
+placeOfResidenceClassification: dcid:Urban
+
+Node: dcid:Count_Person_Rural_PerArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:area
+placeOfResidenceClassification: dcid:Rural
+
+Node: dcid:Count_Person_Urban_PerArea
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+measurementDenominator: dcid:area
+placeOfResidenceClassification: dcid:Urban
+

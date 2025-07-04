@@ -16,14 +16,8 @@ The population is categorized by various set of combinations as below:
         
 
 ### Download URL
-Input files are available for download from url: https://ec.europa.eu/eurostat/web/health/data/database -> Health -> Health determinants (hlth_det).
-
-### Import Procedure
-The below script will download the data and extract it.
-
-`python scripts/eurostat/health_determinants/common/download_eurostat_input_files.py --import_name social_environment`
-
-Files are created inside 'input_files' directory.
+The data in tsv.gz formats are downloadable from https://ec.europa.eu/eurostat/web/main/data/database -> Data navigation tree -> Detailed datasets -> Population and social conditions -> Health -> Health determinants (hlth_det).
+The actual URLs are listed in import_download_details.py
 
 
 #### Output
@@ -39,11 +33,6 @@ Statistical variables for alcohol consumption are based on below properties avai
 | Country of Birth                  		| The nativity of the population.                   			|
 | Country of Citizenship                	| The citizenship of the population.                			|
 | Level of Activity Limitation               	| Different Activity.                                                   |
-
-
-Below script will generate cleansed observation file (csv), mcf and tmcf files.
-
-`python scripts/eurostat/health_determinants/social_environment/process.py`
 
 
 #### Cleaned Observation File
@@ -67,3 +56,20 @@ MCF and tMCF files are presisted in below mentioned path.
 Run the test cases
 
 `python3 -m unittest discover -v -s scripts/eurostat/health_determinants/social_environment/ -p process_test.py`
+
+
+### Import Procedure
+
+The below script will download the data, clean the data, Also generate final csv, mcf and tmcf files.
+
+`python scripts/eurostat/health_determinants/social_environment/process.py`
+
+To download data for this import, run:
+
+`python scripts/eurostat/health_determinants/social_environment/process.py --mode=download`
+
+To process the downloaded data, run:
+
+`python scripts/eurostat/health_determinants/social_environment/process.py --mode=process`
+
+Downloaded Files are created inside 'input_files' directory.

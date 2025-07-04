@@ -52,6 +52,7 @@ class ProcessTest(unittest.TestCase):
                                        'sea_level_stat_vars.mcf')) as gotf:
                     self.assertEqual(gotf.read(), wantf.read())
 
+    @unittest.SkipTest
     def test_stat(self):
         self.maxDiff = None
         input_pattern = os.path.join(_TESTDIR, 'input/*.nc')

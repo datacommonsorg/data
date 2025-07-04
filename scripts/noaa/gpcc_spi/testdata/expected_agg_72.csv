@@ -1,0 +1,13 @@
+place,time,variable,period,spi,observationPeriod
+geoId/non_existent_place,1987-12,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",0.95260533,P72M
+geoId/non_existent_place,1988-01,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",0.9875746340000002,P72M
+geoId/non_existent_place,1988-02,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",0.873086648,P72M
+geoId/non_existent_place,1988-03,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",1.088288168,P72M
+geoId/non_existent_place,1988-04,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",1.02077278,P72M
+geoId/non_existent_place,1988-05,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",0.98175812,P72M
+geoId/non_existent_place,1988-06,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",0.8738662540000001,P72M
+geoId/non_existent_place,1988-07,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",0.83545384,P72M
+geoId/non_existent_place,1988-08,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",0.8871909680000001,P72M
+geoId/non_existent_place,1988-09,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",0.84324538,P72M
+geoId/non_existent_place,1988-10,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",0.6926482,P72M
+geoId/non_existent_place,1988-11,dcs:StandardizedPrecipitationIndex_Atmosphere_72MonthPeriod,"[72 dcs:Monthly]",0.61129908,P72M

@@ -20,7 +20,7 @@
     },
     "pvs": {
         "statType": {
-            "Margin of Error": "marginOfError"   
+            "Margin of Error": "marginOfError"
         },
         "age": {
             "Population 16 to 64 years": "[16 64 Years]"
@@ -43,8 +43,8 @@
         },
         "usualHoursWorked": {
             "Usually worked 35 or more hours per week": "[35 - Hour]",
-	        "Usually worked 15 to 34 hours per week": "[15 34 Hour]",
-	        "Usually worked 1 to 14 hours per week": "[1 14 Hour]"
+            "Usually worked 15 to 34 hours per week": "[15 34 Hour]",
+            "Usually worked 1 to 14 hours per week": "[1 14 Hour]"
         },
         "workStatus": {
             "WEEKS WORKED": "WorkedInThePast12Months",
@@ -52,11 +52,11 @@
             "Mean usual hours worked for workers": "WorkedInThePast12Months",
             "Median age of workers 16 to 64 years": "WorkedInThePast12Months",
             "Workers 16 to 64 years who worked full-time, year-round": "USC_FullTimeYearRoundWorker",
-	        "Did not work": "DidNotWork"
+            "Did not work": "DidNotWork"
         },
         "gender": {
             "Male": "Male",
-            "Female": "Female", 
+            "Female": "Female",
             "Male MOE": "Male",
             "Female MOE": "Female"
         }
@@ -64,34 +64,39 @@
     "enumSpecializations": {},
     "inferredSpec": {},
     "universePVs": [
-    {
-        "populationType": "Person",		
-        "constraintProperties": ["workStatus"],
-        "dependentPVs": 
         {
-            "age": "[16 64 Years]"
-        }
-    },
-    {
-        "populationType": "Person",
-        "constraintProperties": ["workPeriod"],
-        "dependentPVs": 
+            "populationType": "Person",
+            "constraintProperties": [
+                "workStatus"
+            ],
+            "dependentPVs": {
+                "age": "[16 64 Years]"
+            }
+        },
         {
-            "workStatus": "WorkedInThePast12Months",
-            "age": "[16 64 Years]"
-        }
-    },
-    {
-        "populationType": "Person",
-        "constraintProperties": ["usualHoursWorked"],
-        "dependentPVs": 
+            "populationType": "Person",
+            "constraintProperties": [
+                "workPeriod"
+            ],
+            "dependentPVs": {
+                "workStatus": "WorkedInThePast12Months",
+                "age": "[16 64 Years]"
+            }
+        },
         {
-            "workStatus": "WorkedInThePast12Months",
-            "age": "[16 64 Years]"
+            "populationType": "Person",
+            "constraintProperties": [
+                "usualHoursWorked"
+            ],
+            "dependentPVs": {
+                "workStatus": "WorkedInThePast12Months",
+                "age": "[16 64 Years]"
+            }
         }
-    }],
+    ],
     "ignoreColumns": [
         "id",
+        "Geography",
         "Geographic Area Name",
         "Percent",
         "Percent Male",
@@ -101,7 +106,7 @@
         "Percent Female MOE",
         "Percent Total",
         "PERCENT IMPUTED",
-     	"Estimate!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
+        "Estimate!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
         "Margin of Error!!Total!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
         "Estimate!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
         "Margin of Error!!Female!!Population 16 to 64 years!!USUAL HOURS WORKED!!Did not work",
@@ -133,7 +138,15 @@
         "Male!!Margin of Error!!Mean usual hours worked for workers",
         "Margin of Error!!Female!!Population 16 to 64 years!!Mean usual hours worked for workers",
         "Margin of Error!!Female MOE!!Population 16 to 64 years!!Mean usual hours worked for workers",
-        "Female!!Margin of Error!!Mean usual hours worked for workers"
+        "Female!!Margin of Error!!Mean usual hours worked for workers",
+        "Annotation of Margin of Error",
+        "Annotation of Estimate",
+        "Annotation of Total",
+        "Annotation of Percent Total",
+        "Annotation of Male",
+        "Annotation of Female",
+        "Annotation of Percent Male",
+        "Annotation of Percent Female"
     ],
     "denominators": {
         "Total!!Estimate!!Population 16 to 64 years": [
@@ -168,7 +181,7 @@
             "Total!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!50 to 52 weeks",
             "Total!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!50 to 52 weeks"
         ],
-        "Male!!Estimate!!Population 16 to 64 years":[
+        "Male!!Estimate!!Population 16 to 64 years": [
             "Male!!Estimate!!WEEKS WORKED!!Worked 50 to 52 weeks",
             "Male!!Margin of Error!!WEEKS WORKED!!Worked 50 to 52 weeks",
             "Male!!Estimate!!WEEKS WORKED!!Worked 40 to 49 weeks",
@@ -200,7 +213,7 @@
             "Male!!Estimate!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!50 to 52 weeks",
             "Male!!Margin of Error!!USUAL HOURS WORKED!!Usually worked 1 to 14 hours per week!!50 to 52 weeks"
         ],
-        "Female!!Estimate!!Population 16 to 64 years":[
+        "Female!!Estimate!!Population 16 to 64 years": [
             "Female!!Estimate!!WEEKS WORKED!!Worked 50 to 52 weeks",
             "Female!!Margin of Error!!WEEKS WORKED!!Worked 50 to 52 weeks",
             "Female!!Estimate!!WEEKS WORKED!!Worked 40 to 49 weeks",
@@ -234,5 +247,3 @@
         ]
     }
 }
-
-
