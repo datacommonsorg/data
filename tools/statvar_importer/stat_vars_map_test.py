@@ -227,5 +227,18 @@ class TestStatVarsMap(unittest.TestCase):
             "dcid:CapitalizedProperty_Value_Count_Person_StatisticalVariable")
 
 
+    def test_drop_statvars_without_svobs(self):
+        """Test that statvars without observations are dropped."""
+        stat_vars_map = StatVarsMap()
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        stat_vars_map.add_statvar("test_statvar", statvar_pvs)
+        stat_vars_map.drop_statvars_without_svobs()
+        self.assertNotIn("test_statvar", stat_vars_map._statvars_map)
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
