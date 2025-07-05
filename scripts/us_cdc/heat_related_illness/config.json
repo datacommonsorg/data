@@ -90,9 +90,9 @@
             "35 TO 64": { "age": "[35 64 Years]" },
             ">= 65": { "age": "[65 - Years]" }
         },
-        "Gender": {
-            "Male": { "gender": "Male" },
-            "Female": { "gender": "Female" }
+        "Sex": {
+            "Male": { "sex": "Male" },
+            "Female": { "sex": "Female" }
         }
     }
 }
