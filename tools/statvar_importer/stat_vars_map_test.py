@@ -426,5 +426,51 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertEqual(set(columns), {"observationDate", "value"})
 
 
+    def test_remove_undefined_properties(self):
+        """Test that undefined properties are removed correctly."""
+        stat_vars_map = StatVarsMap()
+        stat_vars_map._dc_api_ids_cache = {
+            "typeOf": True,
+            "populationType": True,
+            "measuredProperty": True,
+        }
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "undefinedProperty": "value",
+        }
+        pv_map = {"Test": {"test_statvar": pvs}}
+        stat_vars_map.remove_undefined_properties(pv_map)
+        self.assertIn("typeOf", pvs)
+        self.assertIn("populationType", pvs)
+        self.assertIn("measuredProperty", pvs)
+        self.assertNotIn("undefinedProperty", pvs)
+
+    def test_remove_undefined_properties_with_comment(self):
+        """Test that undefined properties are commented out correctly."""
+        stat_vars_map = StatVarsMap()
+        stat_vars_map._dc_api_ids_cache = {
+            "typeOf": True,
+            "populationType": True,
+            "measuredProperty": True,
+        }
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "undefinedProperty": "value",
+        }
+        pv_map = {"Test": {"test_statvar": pvs}}
+        stat_vars_map.remove_undefined_properties(
+            pv_map, comment_removed_props=True)
+        self.assertIn("typeOf", pvs)
+        self.assertIn("populationType", pvs)
+        self.assertIn("measuredProperty", pvs)
+        self.assertNotIn("undefinedProperty", pvs)
+        self.assertIn("# undefinedProperty: ", pvs)
+        self.assertEqual(pvs["# undefinedProperty: "], "value")
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
