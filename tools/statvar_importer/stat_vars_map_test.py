@@ -121,5 +121,37 @@ class TestStatVarsMap(unittest.TestCase):
         )
 
 
+    def test_aggregate_value(self):
+        """Test that duplicate statvar observations are aggregated correctly."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"aggregate_duplicate_svobs": "sum"})
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        stat_vars_map.add_statvar("test_statvar", statvar_pvs)
+        svobs_pvs1 = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        stat_vars_map.add_statvar_obs(svobs_pvs1)
+        svobs_pvs2 = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "200",
+        }
+        stat_vars_map.add_statvar_obs(svobs_pvs2)
+        key = list(stat_vars_map._statvar_obs_map.keys())[0]
+        self.assertEqual(stat_vars_map._statvar_obs_map[key]["value"], 300)
+        self.assertEqual(
+            stat_vars_map._statvar_obs_map[key]["measurementMethod"],
+            "dcs:DataCommonsAggregate",
+        )
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
