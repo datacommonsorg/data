@@ -130,8 +130,9 @@ class SchemaResolver:
     def load_schema_mcf(self, schema_mcf_files: list):
         """Load nodes from schema MCF files and add to the index."""
         mcf_nodes = load_mcf_nodes(schema_mcf_files, {})
-        for dcid, node in mcf_nodes.items():
-            self.add_node(node)
+        if mcf_nodes:
+            for dcid, node in mcf_nodes.items():
+                self.add_node(node)
         logging.info(
             f'Loaded {len(self._schema_nodes)} schema MCF nodes: {schema_mcf_files}'
         )
@@ -272,7 +273,7 @@ def resolve_nodes(
     output_nodes = {}
     logging.info(f'Resolving nodes from {input_mcf}')
     for input_file in file_util.file_get_matching(input_mcf):
-        input_nodes = load_mcf_nodes(input_file)
+        input_nodes = load_mcf_nodes(input_file, {})
         logging.info(f'Resolving {len(input_nodes)} nodes from input_file')
         resolved_nodes = {}
         unresolved_nodes = {}
