@@ -122,7 +122,8 @@ if 'compare_nodes_with_pv' not in flags.FLAGS:
         ' list.',
     )
 if 'show_diff_nodes_only' not in flags.FLAGS:
-    flags.DEFINE_bool('show_diff_nodes_only', True, 'Output nodes with diff only.')
+    flags.DEFINE_bool('show_diff_nodes_only', True,
+                      'Output nodes with diff only.')
 
 _FLAGS = flags.FLAGS
 # _FLAGS(sys.argv)  # Allow invocation without app.run()

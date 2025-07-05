@@ -42,22 +42,34 @@ from config_map import ConfigMap
 from counters import Counters
 from mcf_file_util import get_numeric_value
 
-flags.DEFINE_string('filter_data_input', '',
-                    'input CSV file with statvar observations')
-flags.DEFINE_string('filter_data_output', '', 'output CSV file')
-flags.DEFINE_float('filter_data_max_change_ratio', None,
-                   'Maximum change alowed between successive values.')
-flags.DEFINE_float('filter_data_max_yearly_change_ratio', None,
-                   'Maximum change alowed between successive years.')
-flags.DEFINE_float('filter_data_min_value', None, 'Minumum value allowed')
-flags.DEFINE_float('filter_data_max_value', None, 'Maximum value allowed')
-flags.DEFINE_list('data_series_value_properties', ['value'],
-                  'Properties with the value to be checked')
-flags.DEFINE_list(
-    'data_series_date_properties', ['observationDate'],
-    'Properties that can be used to sort values within a series such as date')
-flags.DEFINE_bool('filter_data_keep_recent', True,
-                  'Keep the most recent value for a time series.')
+# TODO: Move the flags to the main function and pass them as arguments to the
+# library functions.
+if 'filter_data_input' not in flags.FLAGS:
+    flags.DEFINE_string('filter_data_input', '',
+                        'input CSV file with statvar observations')
+if 'filter_data_output' not in flags.FLAGS:
+    flags.DEFINE_string('filter_data_output', '', 'output CSV file')
+if 'filter_data_max_change_ratio' not in flags.FLAGS:
+    flags.DEFINE_float('filter_data_max_change_ratio', None,
+                       'Maximum change alowed between successive values.')
+if 'filter_data_max_yearly_change_ratio' not in flags.FLAGS:
+    flags.DEFINE_float('filter_data_max_yearly_change_ratio', None,
+                       'Maximum change alowed between successive years.')
+if 'filter_data_min_value' not in flags.FLAGS:
+    flags.DEFINE_float('filter_data_min_value', None, 'Minumum value allowed')
+if 'filter_data_max_value' not in flags.FLAGS:
+    flags.DEFINE_float('filter_data_max_value', None, 'Maximum value allowed')
+if 'data_series_value_properties' not in flags.FLAGS:
+    flags.DEFINE_list('data_series_value_properties', ['value'],
+                      'Properties with the value to be checked')
+if 'data_series_date_properties' not in flags.FLAGS:
+    flags.DEFINE_list(
+        'data_series_date_properties', ['observationDate'],
+        'Properties that can be used to sort values within a series such as date'
+    )
+if 'filter_data_keep_recent' not in flags.FLAGS:
+    flags.DEFINE_bool('filter_data_keep_recent', True,
+                      'Keep the most recent value for a time series.')
 
 _FLAGS = flags.FLAGS
 

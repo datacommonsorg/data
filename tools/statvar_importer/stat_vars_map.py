@@ -15,9 +15,7 @@ from tools.statvar_importer.schema.schema_checker import sanity_check_nodes
 from tools.statvar_importer.schema.schema_generator import generate_schema_nodes
 import file_util
 
-
 from absl import logging
-
 
 import csv
 import datetime
@@ -324,7 +322,8 @@ class StatVarsMap:
             if 'measurementDenominator' in props:
                 dcid_suffixes.append('AsAFractionOf')
                 dcid_suffixes.append(
-                    mcf_file_util.strip_namespace(pvs['measurementDenominator']))
+                    mcf_file_util.strip_namespace(
+                        pvs['measurementDenominator']))
                 props.remove('measurementDenominator')
             for p in sorted(props, key=str.casefold):
                 if p not in dcid_ignore_props:
@@ -339,7 +338,8 @@ class StatVarsMap:
             dcid = re.sub(r'_$', '', dcid)
 
         # Check if the dcid is remapped.
-        remap_dcid = self._statvar_dcid_remap.get(mcf_file_util.strip_namespace(dcid), '')
+        remap_dcid = self._statvar_dcid_remap.get(
+            mcf_file_util.strip_namespace(dcid), '')
         if remap_dcid:
             logging.level_debug() and logging.log(
                 2, f'Remapped {dcid} to {remap_dcid} for {pvs}')
@@ -509,7 +509,8 @@ class StatVarsMap:
     """
         pvs = self.get_valid_pvs(statvar_pvs)
         if not statvar_dcid:
-            statvar_dcid = mcf_file_util.strip_namespace(self.generate_statvar_dcid(pvs))
+            statvar_dcid = mcf_file_util.strip_namespace(
+                self.generate_statvar_dcid(pvs))
         pvs['Node'] = mcf_file_util.add_namespace(statvar_dcid)
         is_schemaless = False
         if self._config.get('schemaless', False):
@@ -594,9 +595,10 @@ class StatVarsMap:
     Returns:
       True if aggregation was successful.
     """
-        current_value = mcf_file_util.get_numeric_value(current_pvs.get(
-            aggregate_property, 0))
-        new_value = mcf_file_util.get_numeric_value(new_pvs.get(aggregate_property, 0))
+        current_value = mcf_file_util.get_numeric_value(
+            current_pvs.get(aggregate_property, 0))
+        new_value = mcf_file_util.get_numeric_value(
+            new_pvs.get(aggregate_property, 0))
         if current_value is None or new_value is None:
             logging.error(
                 f'Invalid values to aggregate in {current_pvs}, {new_pvs}')
@@ -638,7 +640,8 @@ class StatVarsMap:
                 current_pvs[merged_pvs_prop] = []
             current_pvs[merged_pvs_prop].append(new_pvs)
         # Set measurement method
-        mmethod = mcf_file_util.strip_namespace(current_pvs.get('measurementMethod', ''))
+        mmethod = mcf_file_util.strip_namespace(
+            current_pvs.get('measurementMethod', ''))
         if not mmethod:
             current_pvs['measurementMethod'] = 'dcs:DataCommonsAggregate'
         elif not mmethod.startswith(
@@ -678,7 +681,8 @@ class StatVarsMap:
             existing_svobs[dup_svobs_key] = []
         # Add the duplicate SVObs to the original SVObs.
         existing_svobs[dup_svobs_key].append(svobs)
-        statvar_dcid = mcf_file_util.strip_namespace(svobs.get('variableMeasured', None))
+        statvar_dcid = mcf_file_util.strip_namespace(
+            svobs.get('variableMeasured', None))
         if not statvar_dcid:
             logging.error(f'Missing Statvar dcid for duplicate svobs {svobs}')
             self._counters.add_counter(
@@ -817,7 +821,8 @@ class StatVarsMap:
             logging.error(f'Invalid SVObs: {pvs}')
             return False
         # Check if the StatVar exists.
-        statvar_dcid = mcf_file_util.strip_namespace(pvs.get('variableMeasured', ''))
+        statvar_dcid = mcf_file_util.strip_namespace(
+            pvs.get('variableMeasured', ''))
         if not statvar_dcid and not pvs_has_any_prop(
                 pvs, self._config.get('output_columns')):
             logging.error(f'Missing statvar_dcid for SVObs {pvs}')
@@ -839,7 +844,8 @@ class StatVarsMap:
         # Get statvars with observations
         statvars_with_obs = set()
         for svobs_key, pvs in self._statvar_obs_map.items():
-            statvar_dcid = mcf_file_util.strip_namespace(pvs.get('variableMeasured', None))
+            statvar_dcid = mcf_file_util.strip_namespace(
+                pvs.get('variableMeasured', None))
             if statvar_dcid:
                 statvars_with_obs.add(statvar_dcid)
         # Get any references to other statvars from stavtars with obs.
@@ -991,8 +997,8 @@ class StatVarsMap:
                     f'Generating new schema for {len(new_schema_nodes)} nodes into'
                     f' {schema_mcf_file}')
                 mcf_file_util.write_mcf_nodes([new_schema_nodes],
-                                filename=schema_mcf_file,
-                                mode='w')
+                                              filename=schema_mcf_file,
+                                              mode='w')
                 new_schema_errors = sanity_check_nodes(new_schema_nodes,
                                                        config=self._config,
                                                        counters=self._counters)

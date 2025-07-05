@@ -38,14 +38,19 @@ import datacommons as dc
 
 _FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    'ignore_mcf',
-    '',
-    'Comma separated list of MCF files with nodes to be dropped from output',
-)
-flags.DEFINE_list('ignore_dcids', [], 'List of dcids to be ignored')
-flags.DEFINE_bool('ignore_existing_nodes', True,
-                  'Drop nodes that are defined in DC API.')
+# TODO: Move the flags to the main function and pass them as arguments to the
+# library functions.
+if 'ignore_mcf' not in flags.FLAGS:
+    flags.DEFINE_string(
+        'ignore_mcf',
+        '',
+        'Comma separated list of MCF files with nodes to be dropped from output',
+    )
+if 'ignore_dcids' not in flags.FLAGS:
+    flags.DEFINE_list('ignore_dcids', [], 'List of dcids to be ignored')
+if 'ignore_existing_nodes' not in flags.FLAGS:
+    flags.DEFINE_bool('ignore_existing_nodes', True,
+                      'Drop nodes that are defined in DC API.')
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)

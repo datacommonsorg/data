@@ -68,9 +68,8 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
 import eval_functions
-from utils import (is_place_dcid,
-                   get_observation_date_format, get_observation_period_for_date,
-                   prepare_input_data)
+from utils import (is_place_dcid, get_observation_date_format,
+                   get_observation_period_for_date, prepare_input_data)
 import file_util
 import config_flags
 import data_annotator

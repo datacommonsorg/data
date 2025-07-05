@@ -122,7 +122,6 @@ class TestStatVarsMap(unittest.TestCase):
             "observationAbout=dcs:country/USA;observationDate=2023;variableMeasured=dcs:test_statvar"
         )
 
-
     def test_aggregate_value(self):
         """Test that duplicate statvar observations are aggregated correctly."""
         stat_vars_map = StatVarsMap(
@@ -154,8 +153,9 @@ class TestStatVarsMap(unittest.TestCase):
             "dcs:DataCommonsAggregate",
         )
 
-
-    @unittest.skip("TODO: Fix this test. The write_statvars_mcf method does not write to the file.")
+    @unittest.skip(
+        "TODO: Fix this test. The write_statvars_mcf method does not write to the file."
+    )
     def test_write_statvars_mcf(self):
         """Test that statvars are written to an MCF file correctly."""
         stat_vars_map = StatVarsMap()
@@ -176,7 +176,6 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertIn("measuredProperty: dcs:count", content)
         os.remove(tmpfile.name)
 
-
     def test_add_default_pvs(self):
         """Test that default property-values are added correctly."""
         stat_vars_map = StatVarsMap()
@@ -185,7 +184,6 @@ class TestStatVarsMap(unittest.TestCase):
         pvs = stat_vars_map.add_default_pvs(default_pvs, pvs)
         self.assertIn("typeOf", pvs)
         self.assertEqual(pvs["typeOf"], "dcs:StatisticalVariable")
-
 
     def test_get_valid_pvs(self):
         """Test that valid property-values are returned correctly."""
@@ -201,7 +199,6 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertIn("populationType", valid_pvs)
         self.assertIn("measuredProperty", valid_pvs)
         self.assertNotIn("InvalidProperty", valid_pvs)
-
 
     def test_convert_to_schemaless_statvar(self):
         """Test that a statvar is converted to schemaless correctly."""
@@ -226,7 +223,6 @@ class TestStatVarsMap(unittest.TestCase):
             pvs["measuredProperty"],
             "dcid:CapitalizedProperty_Value_Count_Person_StatisticalVariable")
 
-
     def test_drop_statvars_without_svobs(self):
         """Test that statvars without observations are dropped."""
         stat_vars_map = StatVarsMap()
@@ -238,7 +234,6 @@ class TestStatVarsMap(unittest.TestCase):
         stat_vars_map.add_statvar("test_statvar", statvar_pvs)
         stat_vars_map.drop_statvars_without_svobs()
         self.assertNotIn("test_statvar", stat_vars_map._statvars_map)
-
 
     def test_is_valid_statvar(self):
         """Test that a valid statvar is correctly identified."""
@@ -270,7 +265,6 @@ class TestStatVarsMap(unittest.TestCase):
             "measuredProperty": "dcs:count",
         }
         self.assertFalse(stat_vars_map.is_valid_statvar(pvs))
-
 
     def test_is_valid_svobs(self):
         """Test that a valid statvar observation is correctly identified."""
@@ -311,7 +305,6 @@ class TestStatVarsMap(unittest.TestCase):
         }
         self.assertFalse(stat_vars_map.is_valid_svobs(pvs))
 
-
     def test_is_valid_pvs(self):
         """Test that a valid set of property-values is correctly identified."""
         stat_vars_map = StatVarsMap()
@@ -345,7 +338,6 @@ class TestStatVarsMap(unittest.TestCase):
         }
         self.assertFalse(stat_vars_map.is_valid_pvs(pvs))
 
-
     def test_get_constant_and_multi_value_svobs_pvs(self):
         """Test that constant and multi-value SVObs PVs are correctly identified."""
         stat_vars_map = StatVarsMap()
@@ -373,7 +365,6 @@ class TestStatVarsMap(unittest.TestCase):
             })
         self.assertEqual(set(multi_value_pvs), {"observationDate", "value"})
 
-
     def test_format_svobs(self):
         """Test that SVObs values are formatted correctly for CSV output."""
         stat_vars_map = StatVarsMap()
@@ -384,7 +375,6 @@ class TestStatVarsMap(unittest.TestCase):
         formatted_pvs = stat_vars_map.format_svobs(pvs)
         self.assertEqual(formatted_pvs["value"], "100")
         self.assertEqual(formatted_pvs["name"], '"Test Name"')
-
 
     def test_get_statvar_obs_columns(self):
         """Test that the correct columns for statvar observations are returned."""
@@ -425,7 +415,6 @@ class TestStatVarsMap(unittest.TestCase):
         columns = stat_vars_map.get_statvar_obs_columns()
         self.assertEqual(set(columns), {"observationDate", "value"})
 
-
     def test_remove_undefined_properties(self):
         """Test that undefined properties are removed correctly."""
         stat_vars_map = StatVarsMap()
@@ -462,15 +451,14 @@ class TestStatVarsMap(unittest.TestCase):
             "undefinedProperty": "value",
         }
         pv_map = {"Test": {"test_statvar": pvs}}
-        stat_vars_map.remove_undefined_properties(
-            pv_map, comment_removed_props=True)
+        stat_vars_map.remove_undefined_properties(pv_map,
+                                                  comment_removed_props=True)
         self.assertIn("typeOf", pvs)
         self.assertIn("populationType", pvs)
         self.assertIn("measuredProperty", pvs)
         self.assertNotIn("undefinedProperty", pvs)
         self.assertIn("# undefinedProperty: ", pvs)
         self.assertEqual(pvs["# undefinedProperty: "], "value")
-
 
     def test_set_statvar_dup_svobs(self):
         """Test that a statvar is correctly flagged for duplicate SVObs."""

@@ -52,10 +52,16 @@ sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
                  'util'))
 
-flags.DEFINE_string('input_nodes', '',
-                    'MCF file with nodes to generate schema for.')
-flags.DEFINE_string('schema_mcf', '', 'MCF file with nodes for existing schema')
-flags.DEFINE_string('generated_mcf', '', 'MCF file for new schema nodes.')
+# TODO: Move the flags to the main function and pass them as arguments to the
+# library functions.
+if 'input_nodes' not in flags.FLAGS:
+    flags.DEFINE_string('input_nodes', '',
+                        'MCF file with nodes to generate schema for.')
+if 'schema_mcf' not in flags.FLAGS:
+    flags.DEFINE_string('schema_mcf', '',
+                        'MCF file with nodes for existing schema')
+if 'generated_mcf' not in flags.FLAGS:
+    flags.DEFINE_string('generated_mcf', '', 'MCF file for new schema nodes.')
 
 _FLAGS = flags.FLAGS
 
