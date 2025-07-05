@@ -177,5 +177,15 @@ class TestStatVarsMap(unittest.TestCase):
         os.remove(tmpfile.name)
 
 
+    def test_add_default_pvs(self):
+        """Test that default property-values are added correctly."""
+        stat_vars_map = StatVarsMap()
+        default_pvs = {"typeOf": "dcs:StatisticalVariable"}
+        pvs = {"populationType": "dcs:Person"}
+        pvs = stat_vars_map.add_default_pvs(default_pvs, pvs)
+        self.assertIn("typeOf", pvs)
+        self.assertEqual(pvs["typeOf"], "dcs:StatisticalVariable")
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
