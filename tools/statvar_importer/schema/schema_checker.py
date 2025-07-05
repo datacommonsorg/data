@@ -302,6 +302,56 @@ def _get_nodes_from_file(filename: str, nodes: dict = None) -> dict:
     return nodes
 
 
+def check_self_reference_nodes(nodes: dict,
+                               config: dict = None,
+                               counters: Counters = None) -> dict:
+    """Check if nodes have self reference to themselves.
+
+    Args:
+      nodes: dictionary of nodes to be checked keyed by dcid
+      config: configuration for sanity checks.
+      counters: Counters to be updated
+
+    Returns:
+      dictionary of nodes with errors:
+        <file>: { 'dcid': <dcid>, 'property': <prop>, 'error': <error message> }
+    """
+    if not config:
+        config = ConfigMap()
+    if counters is None:
+        counters = Counters()
+
+    errors = []
+    ignore_props = config.get(
+        'check_self_reference_ignore_property',
+        [
+            'Node',
+            'dcid',
+            'name',
+            'description',
+            'measuredProperty',  # Ignore schemaless statvars
+        ])
+    for dcid, pvs in nodes.items():
+        dcid = strip_namespace(dcid)
+        if dcid == 'Class':
+            continue
+        for prop in pvs.keys():
+            if prop.startswith('#') or prop in ignore_props:
+                continue
+            values = set([strip_namespace(v) for v in pvs[prop].split(',')])
+            if dcid in values:
+                counters.add_counter(f'error-self-reference-{prop}', 1, dcid)
+                errors.append({
+                    'dcid':
+                        dcid,
+                    'property':
+                        prop,
+                    'error':
+                        f'Self reference to itself for {dcid}:{prop}:{values}'
+                })
+    return errors
+
+
 def sanity_check_nodes(
     nodes: dict,
     context: dict = None,
@@ -343,11 +393,17 @@ def sanity_check_nodes(
     # Spell check all nodes
     errors = {}
     spell_errors = []
-    if config.get('spell_check', True):
+    if config.get('check_spell', True):
         spell_errors = spell_check_nodes(nodes, config, counters,
                                          mcf_spell_checker)
         context['check'] = 'SPELL'
         _add_list_to_dict(spell_errors, context, errors)
+
+    # Self reference errors
+    if config.get('check_self_reference', True):
+        self_ref_errors = check_self_reference_nodes(nodes, config, counters)
+        context['check'] = 'SelfReference'
+        _add_list_to_dict(self_ref_errors, context, errors)
 
     # Check URLs from all nodes in the file
     url_errors = []

@@ -1259,7 +1259,7 @@ class StatVarsMap:
     def _load_existing_statvars(self, mcf_file: list) -> dict:
         fp_nodes = {}
         if mcf_file:
-            statvar_nodes = load_mcf_nodes(mcf_file)
+            statvar_nodes = load_mcf_nodes(mcf_file, counters=self._counters)
             fp_nodes = fingerprint_mcf_nodes(
                 statvar_nodes,
                 self._config.get('statvar_fingerprint_ignore_props', []),
@@ -2668,7 +2668,7 @@ def parallel_process(
 
     # Merge statvar mcf files into a single mcf output.
     mcf_files = f'{output_path}-*-of-*.mcf'
-    statvar_nodes = load_mcf_nodes(mcf_files)
+    statvar_nodes = load_mcf_nodes(mcf_files, counters=counters)
     output_mcf_file = f'{output_path}.mcf'
     commandline = ' '.join(sys.argv)
     header = (f'# Auto generated using command: "{commandline}" on'
