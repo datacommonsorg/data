@@ -69,5 +69,17 @@ class TestStatVarsMap(unittest.TestCase):
             stat_vars_map._statvar_obs_map)
 
 
+    def test_generate_statvar_dcid(self):
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "gender": "dcs:Male",
+        }
+        dcid = stat_vars_map.generate_statvar_dcid(pvs)
+        self.assertEqual(dcid, "Count_Person_Male")
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
