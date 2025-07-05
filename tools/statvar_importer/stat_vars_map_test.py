@@ -203,5 +203,29 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertNotIn("InvalidProperty", valid_pvs)
 
 
+    def test_convert_to_schemaless_statvar(self):
+        """Test that a statvar is converted to schemaless correctly."""
+        stat_vars_map = StatVarsMap(config_dict={"schemaless": True})
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "CapitalizedProperty": "value",
+        }
+        stat_vars_map.convert_to_schemaless_statvar(pvs)
+        # The schemaless conversion logic performs the following transformations:
+        # 1. Capitalized properties are commented out.
+        # 2. The `measuredProperty` is set to the generated dcid of the
+        #    statvar.
+        # 3. The dcid is generated from the property-values, with the values
+        #    capitalized.
+        self.assertNotIn("CapitalizedProperty", pvs)
+        self.assertIn("# CapitalizedProperty: ", pvs)
+        self.assertEqual(pvs["# CapitalizedProperty: "], "value")
+        self.assertEqual(
+            pvs["measuredProperty"],
+            "dcid:CapitalizedProperty_Value_Count_Person_StatisticalVariable")
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
