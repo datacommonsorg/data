@@ -346,5 +346,33 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertFalse(stat_vars_map.is_valid_pvs(pvs))
 
 
+    def test_get_constant_and_multi_value_svobs_pvs(self):
+        """Test that constant and multi-value SVObs PVs are correctly identified."""
+        stat_vars_map = StatVarsMap()
+        stat_vars_map.add_statvar_obs({
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+            "typeOf": "dcs:StatVarObservation",
+        })
+        stat_vars_map.add_statvar_obs({
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2024",
+            "value": "200",
+            "typeOf": "dcs:StatVarObservation",
+        })
+        constant_pvs = stat_vars_map.get_constant_svobs_pvs()
+        multi_value_pvs = stat_vars_map.get_multi_value_svobs_pvs()
+        self.assertEqual(
+            constant_pvs, {
+                "variableMeasured": "dcs:test_statvar",
+                "observationAbout": "dcs:country/USA",
+                "typeOf": "dcs:StatVarObservation",
+            })
+        self.assertEqual(set(multi_value_pvs), {"observationDate", "value"})
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
