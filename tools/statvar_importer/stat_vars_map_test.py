@@ -272,5 +272,45 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertFalse(stat_vars_map.is_valid_statvar(pvs))
 
 
+    def test_is_valid_svobs(self):
+        """Test that a valid statvar observation is correctly identified."""
+        stat_vars_map = StatVarsMap()
+        stat_vars_map.add_statvar(
+            "test_statvar", {
+                "typeOf": "dcs:StatisticalVariable",
+                "populationType": "dcs:Person",
+                "measuredProperty": "dcs:count",
+            })
+        pvs = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        self.assertTrue(stat_vars_map.is_valid_svobs(pvs))
+
+    def test_is_valid_svobs_with_error(self):
+        """Test that a statvar observation with an error is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+            "#Error": "Test error",
+        }
+        self.assertFalse(stat_vars_map.is_valid_svobs(pvs))
+
+    def test_is_valid_svobs_with_missing_variable_measured(self):
+        """Test that a statvar observation with a missing variableMeasured is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        self.assertFalse(stat_vars_map.is_valid_svobs(pvs))
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
