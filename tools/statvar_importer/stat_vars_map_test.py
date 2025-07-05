@@ -93,5 +93,17 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertEqual(dcid, "Count_Person_18To24Years")
 
 
+    def test_drop_invalid_statvars(self):
+        stat_vars_map = StatVarsMap(
+            config_dict={"required_statvar_properties": ["populationType"]})
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "measuredProperty": "dcs:count",
+        }
+        stat_vars_map.add_statvar("test_statvar", statvar_pvs)
+        stat_vars_map.drop_invalid_statvars()
+        self.assertNotIn("test_statvar", stat_vars_map._statvars_map)
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
