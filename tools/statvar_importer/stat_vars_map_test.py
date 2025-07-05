@@ -386,5 +386,45 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertEqual(formatted_pvs["name"], '"Test Name"')
 
 
+    def test_get_statvar_obs_columns(self):
+        """Test that the correct columns for statvar observations are returned."""
+        stat_vars_map = StatVarsMap()
+        stat_vars_map.add_statvar_obs({
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        })
+        columns = stat_vars_map.get_statvar_obs_columns()
+        self.assertEqual(
+            set(columns),
+            {
+                "variableMeasured",
+                "observationAbout",
+                "observationDate",
+                "value",
+            },
+        )
+
+    def test_get_statvar_obs_columns_with_skip_constant(self):
+        """Test that constant columns are skipped when the config is set."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"skip_constant_csv_columns": True})
+        stat_vars_map.add_statvar_obs({
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        })
+        stat_vars_map.add_statvar_obs({
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2024",
+            "value": "200",
+        })
+        columns = stat_vars_map.get_statvar_obs_columns()
+        self.assertEqual(set(columns), {"observationDate", "value"})
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
