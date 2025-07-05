@@ -240,5 +240,37 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertNotIn("test_statvar", stat_vars_map._statvars_map)
 
 
+    def test_is_valid_statvar(self):
+        """Test that a valid statvar is correctly identified."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        self.assertTrue(stat_vars_map.is_valid_statvar(pvs))
+
+    def test_is_valid_statvar_with_error(self):
+        """Test that a statvar with an error is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "#Error": "Test error",
+        }
+        self.assertFalse(stat_vars_map.is_valid_statvar(pvs))
+
+    def test_is_valid_statvar_with_missing_required_property(self):
+        """Test that a statvar with a missing required property is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"required_statvar_properties": ["populationType"]})
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "measuredProperty": "dcs:count",
+        }
+        self.assertFalse(stat_vars_map.is_valid_statvar(pvs))
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
