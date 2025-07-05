@@ -81,5 +81,17 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertEqual(dcid, "Count_Person_Male")
 
 
+    def test_generate_statvar_dcid_with_quantity_range(self):
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "age": "[18 24 Years]",
+        }
+        dcid = stat_vars_map.generate_statvar_dcid(pvs)
+        self.assertEqual(dcid, "Count_Person_18To24Years")
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
