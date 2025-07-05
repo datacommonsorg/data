@@ -187,5 +187,21 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertEqual(pvs["typeOf"], "dcs:StatisticalVariable")
 
 
+    def test_get_valid_pvs(self):
+        """Test that valid property-values are returned correctly."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "InvalidProperty": "invalid",
+        }
+        valid_pvs = stat_vars_map.get_valid_pvs(pvs)
+        self.assertIn("typeOf", valid_pvs)
+        self.assertIn("populationType", valid_pvs)
+        self.assertIn("measuredProperty", valid_pvs)
+        self.assertNotIn("InvalidProperty", valid_pvs)
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
