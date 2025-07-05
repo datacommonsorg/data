@@ -119,48 +119,34 @@ class TestPvsHasAnyProp(unittest.TestCase):
 class TestIsPlaceDcid(unittest.TestCase):
 
     def test_dcid_prefix(self):
+        # Assumes valid if it has a dcid: prefix.
         self.assertTrue(is_place_dcid("dcid:country/USA"))
 
     def test_dcs_prefix(self):
+        # Assumes valid if it has a dcs: prefix.
         self.assertTrue(is_place_dcid("dcs:country/USA"))
 
-    def test_no_prefix(self):
+    def test_no_prefix_valid(self):
+        # Valid non-prefixed DCID.
         self.assertTrue(is_place_dcid("country/USA"))
 
-    def test_geoid_prefix(self):
-        self.assertTrue(is_place_dcid("geoId/06"))
-
-    def test_dc_g_prefix(self):
-        self.assertTrue(is_place_dcid("dc/g/Establishment_School"))
-
     def test_no_slash(self):
+        # Invalid non-prefixed DCID (no slash).
         self.assertFalse(is_place_dcid("countryUSA"))
 
-    def test_extra_text(self):
-        self.assertFalse(is_place_dcid("dcid:country/USA extra"))
+    def test_special_chars_with_prefix(self):
+        # Assumes valid because of prefix (heuristic).
+        self.assertTrue(is_place_dcid("dcid:!@#"))
 
-    def test_special_chars(self):
-        self.assertFalse(is_place_dcid("dcid:!@#"))
+    def test_special_chars_no_prefix(self):
+        # Invalid non-prefixed DCID (special chars).
+        self.assertFalse(is_place_dcid("country/USA!"))
 
     def test_empty_string(self):
         self.assertFalse(is_place_dcid(""))
 
     def test_none(self):
         self.assertFalse(is_place_dcid(None))
-
-    def test_dcid_only(self):
-        self.assertFalse(is_place_dcid("dcid:"))
-
-    def test_dcs_only(self):
-        self.assertFalse(is_place_dcid("dcs:"))
-
-    def test_trailing_slash(self):
-        # Needs a part after slash
-        self.assertFalse(is_place_dcid("country/"))
-
-    def test_leading_slash(self):
-        # Needs a part before slash
-        self.assertFalse(is_place_dcid("/USA"))
 
 
 class TestGetObservationPeriodForDate(unittest.TestCase):

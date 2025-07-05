@@ -131,7 +131,25 @@ def pvs_has_any_prop(pvs: Optional[Dict[str, any]],
 
 
 def is_place_dcid(place: str) -> bool:
-    """Returns True if the place string is a valid DCID pattern.
+    """Heuristically checks if a string is a Data Commons ID (DCID).
+
+    This function serves as a fast, local workaround to avoid making slow,
+    sequential API calls to validate DCIDs during data processing. It is
+    intended to quickly identify strings that are already resolved DCIDs,
+    thus skipping unnecessary place resolution steps.
+
+    The heuristic works as follows:
+    1.  If the string starts with a `dcid:` or `dcs:` prefix, it is
+        assumed to be a valid DCID. This assumption is based on the
+        convention that these prefixes are typically present in configured
+        PV maps for already-resolved places.
+    2.  If no prefix is present, the function performs a basic structural
+        check. It verifies that the string contains a '/' and consists only
+        of alphanumeric characters, underscores, and slashes.
+
+    Note: This check is not exhaustive and may not cover all valid DCID
+    formats. Its primary purpose is to optimize the import process by
+    reducing external API calls.
 
     Examples:
         >>> is_place_dcid("dcid:country/USA")
@@ -140,71 +158,24 @@ def is_place_dcid(place: str) -> bool:
         True
         >>> is_place_dcid("country/USA")
         True
-        >>> is_place_dcid("geoId/06")
+        >>> is_place_dcid("dcid:!@#") # Assumed valid due to prefix
         True
-        >>> is_place_dcid("dc/g/Establishment_School")
-        True
-        >>> is_place_dcid("dcid:Person") 
-        True
-        >>> is_place_dcid("countryUSA")
+        >>> is_place_dcid("countryUSA") # Fails due to missing slash
         False
-        >>> is_place_dcid("dcid:country/USA extra") 
-        False
-        >>> is_place_dcid("dcid:!@#")
-        False
-        >>> is_place_dcid("")
-        False
-        >>> is_place_dcid(None)
-        False
-        >>> is_place_dcid("dcid:")
-        False
-        >>> is_place_dcid("dcs:")
-        False
-        >>> is_place_dcid("country/")
-        False
-        >>> is_place_dcid("/USA")
-        False
-        >>> is_place_dcid("dcid//USA") # Double slash
-        False
-        >>> is_place_dcid("dcid:country//USA") # Double slash after prefix
+        >>> is_place_dcid("country/USA!") # Fails due to invalid character
         False
     """
     if not place or not isinstance(place, str):
         return False
+    if place.startswith('dcid:') or place.startswith('dcs:'):
+        return True
 
-    original_place_str = place
-    has_prefix = False
-
-    if place.startswith('dcid:'):
-        place_to_check = place[5:]
-        has_prefix = True
-    elif place.startswith('dcs:'):
-        place_to_check = place[4:]
-        has_prefix = True
-    else:
-        place_to_check = place
-
-    if not place_to_check:  # Handles "dcid:", "dcs:", or empty string if it was initially empty
+    # For non-prefixed DCIDs, check for a slash and valid characters.
+    if '/' not in place:
         return False
-
-    # Core validation for the part after prefix (or the whole string if no prefix)
-    if place_to_check.startswith('/') or place_to_check.endswith('/'):
-        return False
-    if '//' in place_to_check:  # Check for consecutive slashes
-        return False
-
-    contains_slash_internally = False
-    for c in place_to_check:
+    for c in place:
         if not c.isalnum() and c not in ['_', '/']:
-            return False  # Invalid character
-        if c == '/':
-            contains_slash_internally = True
-
-    if not has_prefix:
-        # For non-prefixed DCIDs, an internal slash is mandatory
-        return contains_slash_internally
-
-    # For prefixed DCIDs, all checks on place_to_check have passed
+            return False
     return True
 
 
