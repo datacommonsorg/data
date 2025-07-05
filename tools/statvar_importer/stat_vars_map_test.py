@@ -312,5 +312,39 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertFalse(stat_vars_map.is_valid_svobs(pvs))
 
 
+    def test_is_valid_pvs(self):
+        """Test that a valid set of property-values is correctly identified."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        self.assertTrue(stat_vars_map.is_valid_pvs(pvs))
+
+    def test_is_valid_pvs_with_error(self):
+        """Test that a set of property-values with an error is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "#Error": "Test error",
+        }
+        self.assertFalse(stat_vars_map.is_valid_pvs(pvs))
+
+    def test_is_valid_pvs_with_duplicate_statvar(self):
+        """Test that a set of property-values with a duplicate statvar is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"duplicate_statvars_key": "#ErrorDuplicate"})
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "#ErrorDuplicate": "test_statvar",
+        }
+        self.assertFalse(stat_vars_map.is_valid_pvs(pvs))
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
