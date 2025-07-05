@@ -472,5 +472,28 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertEqual(pvs["# undefinedProperty: "], "value")
 
 
+    def test_set_statvar_dup_svobs(self):
+        """Test that a statvar is correctly flagged for duplicate SVObs."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"duplicate_svobs_key": "#ErrorDuplicateSVObs"})
+        stat_vars_map.add_statvar(
+            "test_statvar", {
+                "typeOf": "dcs:StatisticalVariable",
+                "populationType": "dcs:Person",
+                "measuredProperty": "dcs:count",
+            })
+        svobs_pvs = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        stat_vars_map.add_statvar_obs(svobs_pvs)
+        svobs_key = stat_vars_map.get_svobs_key(svobs_pvs)
+        stat_vars_map.set_statvar_dup_svobs(svobs_key, svobs_pvs)
+        self.assertIn("#ErrorDuplicateSVObs",
+                      stat_vars_map._statvars_map["test_statvar"])
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
