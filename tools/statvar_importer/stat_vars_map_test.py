@@ -32,11 +32,12 @@ from stat_vars_map import StatVarsMap
 class TestStatVarsMap(unittest.TestCase):
 
     def test_create_stat_vars_map(self):
+        """Test that the StatVarsMap class can be instantiated."""
         stat_vars_map = StatVarsMap()
         self.assertIsNotNone(stat_vars_map)
 
-
     def test_add_statvar(self):
+        """Test that a statvar can be added to the map."""
         stat_vars_map = StatVarsMap()
         statvar_pvs = {
             "typeOf": "dcs:StatisticalVariable",
@@ -46,8 +47,8 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertTrue(stat_vars_map.add_statvar("test_statvar", statvar_pvs))
         self.assertIn("test_statvar", stat_vars_map._statvars_map)
 
-
     def test_add_statvar_obs(self):
+        """Test that a statvar observation can be added to the map."""
         stat_vars_map = StatVarsMap()
         statvar_pvs = {
             "typeOf": "dcs:StatisticalVariable",
@@ -68,8 +69,8 @@ class TestStatVarsMap(unittest.TestCase):
             "observationAbout=dcs:country/USA;observationDate=2023;variableMeasured=dcs:test_statvar",
             stat_vars_map._statvar_obs_map)
 
-
     def test_generate_statvar_dcid(self):
+        """Test that a dcid can be generated for a statvar."""
         stat_vars_map = StatVarsMap()
         pvs = {
             "typeOf": "dcs:StatisticalVariable",
@@ -80,8 +81,8 @@ class TestStatVarsMap(unittest.TestCase):
         dcid = stat_vars_map.generate_statvar_dcid(pvs)
         self.assertEqual(dcid, "Count_Person_Male")
 
-
     def test_generate_statvar_dcid_with_quantity_range(self):
+        """Test that a dcid can be generated for a statvar with a quantity range."""
         stat_vars_map = StatVarsMap()
         pvs = {
             "typeOf": "dcs:StatisticalVariable",
@@ -92,8 +93,8 @@ class TestStatVarsMap(unittest.TestCase):
         dcid = stat_vars_map.generate_statvar_dcid(pvs)
         self.assertEqual(dcid, "Count_Person_18To24Years")
 
-
     def test_drop_invalid_statvars(self):
+        """Test that invalid statvars are dropped."""
         stat_vars_map = StatVarsMap(
             config_dict={"required_statvar_properties": ["populationType"]})
         statvar_pvs = {
@@ -103,6 +104,21 @@ class TestStatVarsMap(unittest.TestCase):
         stat_vars_map.add_statvar("test_statvar", statvar_pvs)
         stat_vars_map.drop_invalid_statvars()
         self.assertNotIn("test_statvar", stat_vars_map._statvars_map)
+
+    def test_get_svobs_key(self):
+        """Test that the key for a statvar observation is generated correctly."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        key = stat_vars_map.get_svobs_key(pvs)
+        self.assertEqual(
+            key,
+            "observationAbout=dcs:country/USA;observationDate=2023;variableMeasured=dcs:test_statvar"
+        )
 
 
 if __name__ == "__main__":
