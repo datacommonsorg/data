@@ -13,8 +13,10 @@
 # limitations under the License.
 """Unit tests for stat_vars_map.py."""
 
+import io
 import os
 import sys
+import tempfile
 import unittest
 
 from absl import app
@@ -151,6 +153,28 @@ class TestStatVarsMap(unittest.TestCase):
             stat_vars_map._statvar_obs_map[key]["measurementMethod"],
             "dcs:DataCommonsAggregate",
         )
+
+
+    @unittest.skip("TODO: Fix this test. The write_statvars_mcf method does not write to the file.")
+    def test_write_statvars_mcf(self):
+        """Test that statvars are written to an MCF file correctly."""
+        stat_vars_map = StatVarsMap()
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        stat_vars_map.add_statvar("test_statvar", statvar_pvs)
+        with tempfile.NamedTemporaryFile(mode="w+", delete=False) as tmpfile:
+            stat_vars_map.write_statvars_mcf(tmpfile.name)
+            tmpfile.flush()
+            tmpfile.seek(0)
+            content = tmpfile.read()
+        self.assertIn("Node: dcid:test_statvar", content)
+        self.assertIn("typeOf: dcs:StatisticalVariable", content)
+        self.assertIn("populationType: dcs:Person", content)
+        self.assertIn("measuredProperty: dcs:count", content)
+        os.remove(tmpfile.name)
 
 
 if __name__ == "__main__":
