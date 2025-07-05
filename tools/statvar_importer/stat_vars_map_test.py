@@ -374,5 +374,17 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertEqual(set(multi_value_pvs), {"observationDate", "value"})
 
 
+    def test_format_svobs(self):
+        """Test that SVObs values are formatted correctly for CSV output."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "value": 100,
+            "name": "Test Name",
+        }
+        formatted_pvs = stat_vars_map.format_svobs(pvs)
+        self.assertEqual(formatted_pvs["value"], "100")
+        self.assertEqual(formatted_pvs["name"], '"Test Name"')
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
