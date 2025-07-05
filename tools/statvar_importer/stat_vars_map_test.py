@@ -36,5 +36,38 @@ class TestStatVarsMap(unittest.TestCase):
         self.assertIsNotNone(stat_vars_map)
 
 
+    def test_add_statvar(self):
+        stat_vars_map = StatVarsMap()
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        self.assertTrue(stat_vars_map.add_statvar("test_statvar", statvar_pvs))
+        self.assertIn("test_statvar", stat_vars_map._statvars_map)
+
+
+    def test_add_statvar_obs(self):
+        stat_vars_map = StatVarsMap()
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        stat_vars_map.add_statvar("test_statvar", statvar_pvs)
+        svobs_pvs = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        self.assertTrue(stat_vars_map.add_statvar_obs(svobs_pvs))
+        # The key is a semicolon-separated string of property-value pairs,
+        # sorted alphabetically by property.
+        self.assertIn(
+            "observationAbout=dcs:country/USA;observationDate=2023;variableMeasured=dcs:test_statvar",
+            stat_vars_map._statvar_obs_map)
+
+
 if __name__ == "__main__":
     app.run(unittest.main)
