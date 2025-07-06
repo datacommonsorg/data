@@ -1,0 +1,7 @@
+param,value
+mapped_rows,5
+mapped_columns,1
+#input_rows,10
+header_rows,5
+output_columns,"observationAbout,observationDate,variableMeasured,value,#input"
+#debug,1
