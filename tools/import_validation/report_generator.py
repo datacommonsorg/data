@@ -40,8 +40,8 @@ class ReportGenerator:
                 "RowsProcessed", "RowsSucceeded", "RowsFailed"
             ])
             for result in self.results:
-                details_str = json.dumps(
-                    result.details) if result.details else ''
+                details_str = json.dumps(result.details,
+                                         default=str) if result.details else ''
                 writer.writerow([
                     result.name,
                     result.status.value,

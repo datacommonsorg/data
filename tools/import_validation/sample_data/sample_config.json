@@ -72,6 +72,15 @@
             }
         },
         {
+            "rule_id": "check_max_value_for_percent_sql",
+            "description": "Checks that the maximum value for percentage StatVars is not above 100 using SQL.",
+            "validator": "SQL_VALIDATOR",
+            "params": {
+                "query": "SELECT * FROM stats WHERE Units = 'Percent'",
+                "condition": "MaxValue <= 100"
+            }
+        },
+        {
             "rule_id": "check_num_observations",
             "description": "Checks that there is at least one observation for each StatVar.",
             "validator": "NUM_OBSERVATIONS_CHECK",
