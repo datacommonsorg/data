@@ -369,7 +369,7 @@ def check_nodes_can_merge(node1: dict, node2: dict) -> bool:
         # 1. Constraint properties should not be added/modified
         # 2. Constraint properties should have a single value
         if typeof1 and typeof2 and typeof1 != typeof2:
-            logging.error(f'Cannot merge {dcid1} of type: {type1}, {type2}')
+            logging.error(f'Cannot merge {dcid1} of type: {typeof1}, {typeof2}')
             return False
 
         cprops1 = get_non_name_props(node1)
