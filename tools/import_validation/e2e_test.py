@@ -31,15 +31,12 @@ class TestImportValidationE2E(unittest.TestCase):
         self.differ_path = os.path.join(self.test_dir.name, 'differ.csv')
         self.output_path = os.path.join(self.test_dir.name, 'output.csv')
 
-        # Find the project root by looking for the .git directory
-        current_path = os.path.abspath(os.path.dirname(__file__))
-        while not os.path.isdir(os.path.join(current_path, '.github')):
-            parent_path = os.path.dirname(current_path)
-            if parent_path == current_path:  # Reached the filesystem root
-                raise FileNotFoundError(
-                    "Could not find project root (.git directory).")
-            current_path = parent_path
-        self.project_root = current_path
+        # Find the project root using the canonical git command
+        result = subprocess.run(['git', 'rev-parse', '--show-toplevel'],
+                                capture_output=True,
+                                text=True,
+                                check=True)
+        self.project_root = result.stdout.strip()
 
         # Create an empty differ output file, as it is required
         pd.DataFrame({'DELETED': []}).to_csv(self.differ_path, index=False)
