@@ -101,7 +101,8 @@ def drop_mcf_nodes(
                     output_nodes[dcid] = pvs
                     counters.add_counter(f'input-nodes-with-additions', 1)
                 else:
-                    counters.add_counter(f'error-input-ignore-node-diff', 1, dcid)
+                    counters.add_counter(f'error-input-ignore-node-diff', 1,
+                                         dcid)
             else:
                 logging.debug(f'Ignored Node: {dcid},\n{pvs}\n')
                 counters.add_counter(f'input-nodes-ignored', 1)
