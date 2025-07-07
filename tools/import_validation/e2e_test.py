@@ -15,6 +15,7 @@
 
 import unittest
 import os
+import sys
 import json
 import tempfile
 import subprocess
@@ -32,7 +33,7 @@ class TestImportValidationE2E(unittest.TestCase):
 
         # Find the project root by looking for the .git directory
         current_path = os.path.abspath(os.path.dirname(__file__))
-        while not os.path.isdir(os.path.join(current_path, '.git')):
+        while not os.path.isdir(os.path.join(current_path, '.github')):
             parent_path = os.path.dirname(current_path)
             if parent_path == current_path:  # Reached the filesystem root
                 raise FileNotFoundError(
@@ -185,6 +186,47 @@ class TestImportValidationE2E(unittest.TestCase):
         output_df = pd.read_csv(self.output_path)
         self.assertEqual(len(output_df), 1)
         self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
+
+    def test_e2e_sql_validator_fails(self):
+        """Tests that the SQL_VALIDATOR works in an end-to-end run."""
+        # 1. Create a config using the SQL_VALIDATOR
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "sql_max_value_check",
+                        "validator": "SQL_VALIDATOR",
+                        "params": {
+                            "query": "SELECT StatVar, MaxValue FROM stats",
+                            "condition": "MaxValue <= 100"
+                        }
+                    }]
+                }, f)
+        # 2. Create data that will fail the SQL condition
+        pd.DataFrame({
+            'StatVar': ['sv1', 'sv2'],
+            'MaxValue': [99, 101]
+        }).to_csv(self.stats_path, index=False)
+
+        # 3. Run the script
+        result = subprocess.run([
+            'python3', '-m', 'tools.import_validation.runner',
+            f'--validation_config={self.config_path}',
+            f'--stats_summary={self.stats_path}',
+            f'--differ_output={self.differ_path}',
+            f'--validation_output={self.output_path}'
+        ],
+                                capture_output=True,
+                                text=True,
+                                cwd=self.project_root)
+
+        # 4. Assert failure and check the output
+        self.assertEqual(result.returncode, 1,
+                         "Script should have failed but didn't")
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['Status'], 'FAILED')
+        self.assertIn('sv2', output_df.iloc[0]['Details'])
 
 
 if __name__ == '__main__':

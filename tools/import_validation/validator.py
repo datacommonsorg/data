@@ -13,6 +13,7 @@
 # limitations under the License.
 """Module for the Validator class."""
 
+import duckdb
 import pandas as pd
 from .result import ValidationResult, ValidationStatus
 
@@ -22,6 +23,57 @@ class Validator:
   Contains the core logic for all validation rules.
   This class is stateless and does not interact with the filesystem.
   """
+
+    def validate_sql(self, stats_df: pd.DataFrame, differ_df: pd.DataFrame,
+                     params: dict) -> ValidationResult:
+        """Runs a SQL query to validate the data.
+
+    Args:
+        stats_df: A DataFrame containing the summary statistics.
+        differ_df: A DataFrame containing the differ output.
+        params: A dictionary containing the validation parameters, which must
+          have 'query' and 'condition' keys.
+
+    Returns:
+        A ValidationResult object.
+    """
+        if 'query' not in params or 'condition' not in params:
+            return ValidationResult(
+                ValidationStatus.CONFIG_ERROR,
+                'SQL_VALIDATOR',
+                message=
+                "Configuration error: 'query' and 'condition' must be specified for SQL_VALIDATOR."
+            )
+
+        try:
+            con = duckdb.connect(database=':memory:', read_only=False)
+            con.register('stats', stats_df)
+            con.register('differ', differ_df)
+
+            final_query = f"""
+            WITH data_to_validate AS (
+                {params['query']}
+            )
+            SELECT *
+            FROM data_to_validate
+            WHERE NOT ({params['condition']})
+            """
+            failing_df = con.execute(final_query).fetchdf()
+
+            if failing_df.empty:
+                return ValidationResult(ValidationStatus.PASSED,
+                                        'SQL_VALIDATOR')
+
+            return ValidationResult(
+                ValidationStatus.FAILED,
+                'SQL_VALIDATOR',
+                message=f"{len(failing_df)} rows failed the SQL validation.",
+                details={'failing_rows': failing_df.to_dict('records')})
+
+        except duckdb.Error as e:
+            return ValidationResult(ValidationStatus.CONFIG_ERROR,
+                                    'SQL_VALIDATOR',
+                                    message=f"SQL Error: {e}")
 
     def validate_max_date_latest(self, stats_df: pd.DataFrame,
                                  params: dict) -> ValidationResult:

@@ -78,6 +78,7 @@ class ValidationRunner:
                 differ_output)
 
         self.validation_dispatch = {
+            'SQL_VALIDATOR': (self.validator.validate_sql, 'sql'),
             'MAX_DATE_LATEST':
                 (self.validator.validate_max_date_latest, 'stats'),
             'MAX_DATE_CONSISTENT':
@@ -120,23 +121,30 @@ class ValidationRunner:
                 logging.warning('Unknown validator: %s', validator_name)
                 continue
 
-            validation_func, _ = self.validation_dispatch[validator_name]
+            validation_func, data_source = self.validation_dispatch[
+                validator_name]
 
-            scope = rule['scope']
-            if isinstance(scope, str):
-                scope = self.config.get_scope(scope)
+            if validator_name == 'SQL_VALIDATOR':
+                result = validation_func(self.dataframes['stats'],
+                                         self.dataframes['differ'],
+                                         rule['params'])
+            else:
+                scope = rule['scope']
+                if isinstance(scope, str):
+                    scope = self.config.get_scope(scope)
 
-            df = self.dataframes[scope['data_source']]
+                df = self.dataframes[scope['data_source']]
 
-            if 'variables' in scope:
-                variables_config = scope['variables']
-                df = filter_dataframe(
-                    df,
-                    dcids=variables_config.get('dcids'),
-                    regex_patterns=variables_config.get('regex'),
-                    contains_all=variables_config.get('contains_all'))
+                if 'variables' in scope:
+                    variables_config = scope['variables']
+                    df = filter_dataframe(
+                        df,
+                        dcids=variables_config.get('dcids'),
+                        regex_patterns=variables_config.get('regex'),
+                        contains_all=variables_config.get('contains_all'))
 
-            result = validation_func(df, rule['params'])
+                result = validation_func(df, rule['params'])
+
             result.name = rule['rule_id']
 
             self.validation_results.append(result)

@@ -565,5 +565,91 @@ class TestMaxValueCheckValidation(unittest.TestCase):
         self.assertIn('missing required column', result.message)
 
 
+class TestSQLValidator(unittest.TestCase):
+    '''Test Class for the SQL_VALIDATOR validation rule.'''
+
+    def setUp(self):
+        self.validator = Validator()
+        self.stats_df = pd.DataFrame({
+            'StatVar': ['sv1', 'sv2', 'sv3'],
+            'MaxValue': [100, 101, 99],
+            'NumPlaces': [10, 10, 20]
+        })
+        self.differ_df = pd.DataFrame({
+            'StatVar': ['sv1', 'sv2', 'sv3'],
+            'ADDED': [5, 0, 5]
+        })
+
+    def test_sql_validator_passes(self):
+        params = {
+            'query': 'SELECT StatVar, MaxValue FROM stats',
+            'condition': 'MaxValue <= 101'
+        }
+        result = self.validator.validate_sql(self.stats_df, self.differ_df,
+                                             params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_sql_validator_fails(self):
+        params = {
+            'query': 'SELECT StatVar, MaxValue FROM stats',
+            'condition': 'MaxValue <= 100'
+        }
+        result = self.validator.validate_sql(self.stats_df, self.differ_df,
+                                             params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(len(result.details['failing_rows']), 1)
+        self.assertEqual(result.details['failing_rows'][0]['StatVar'], 'sv2')
+
+    def test_sql_validator_aggregation_passes(self):
+        params = {
+            'query':
+                'SELECT NumPlaces, COUNT(StatVar) as sv_count FROM stats GROUP BY NumPlaces',
+            'condition':
+                'sv_count >= 1'
+        }
+        result = self.validator.validate_sql(self.stats_df, self.differ_df,
+                                             params)
+        self.assertEqual(result.status, ValidationStatus.PASSED)
+
+    def test_sql_validator_aggregation_fails(self):
+        params = {
+            'query':
+                'SELECT NumPlaces, COUNT(StatVar) as sv_count FROM stats GROUP BY NumPlaces',
+            'condition':
+                'sv_count > 1'
+        }
+        result = self.validator.validate_sql(self.stats_df, self.differ_df,
+                                             params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(len(result.details['failing_rows']), 1)
+        self.assertEqual(result.details['failing_rows'][0]['NumPlaces'], 20)
+
+    def test_sql_validator_join_fails(self):
+        params = {
+            'query':
+                'SELECT s.StatVar as statvar, s.MaxValue as max_val, d.ADDED as added_val FROM stats s JOIN differ d ON s.StatVar = d.StatVar',
+            'condition':
+                "statvar = 'sv1'"
+        }
+        result = self.validator.validate_sql(self.stats_df, self.differ_df,
+                                             params)
+        self.assertEqual(result.status, ValidationStatus.FAILED)
+        self.assertEqual(len(result.details['failing_rows']), 2)
+
+    def test_sql_validator_invalid_sql(self):
+        params = {'query': 'SELEC * FROM stats', 'condition': 'MaxValue <= 100'}
+        result = self.validator.validate_sql(self.stats_df, self.differ_df,
+                                             params)
+        self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
+        self.assertIn('SQL Error', result.message)
+
+    def test_sql_validator_missing_params(self):
+        params = {'query': 'SELECT * FROM stats'}
+        result = self.validator.validate_sql(self.stats_df, self.differ_df,
+                                             params)
+        self.assertEqual(result.status, ValidationStatus.CONFIG_ERROR)
+        self.assertIn('must be specified', result.message)
+
+
 if __name__ == '__main__':
     unittest.main()

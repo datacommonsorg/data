@@ -24,3 +24,4 @@ s2sphere
 sentence-transformers
 tabula-py
 yapf
+duckdb
