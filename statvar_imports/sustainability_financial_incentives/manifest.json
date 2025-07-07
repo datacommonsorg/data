@@ -1,0 +1,27 @@
+{
+  "import_name": "sustainability_financial_incentives",
+  "curator_emails": [],
+  "provenance_url": "https://storage.googleapis.com/datacommons_public/source_csv/sustainability_financial_incentives/",
+  "provenance_description": "Sustainability Financial Incentives data from Google Cloud Storage",
+  "scripts": [
+    {
+      "name": "download_and_convert.py",
+      "description": "Downloads latest financial incentives data from GCS and converts to CSV",
+      "url": "download_and_convert.py"
+    },
+    {
+      "name": "convert_textproto_to_csv.py", 
+      "description": "Converts textproto financial incentive data to CSV format",
+      "url": "convert_textproto_to_csv.py"
+    }
+  ],
+  "data_download_url": "https://storage.googleapis.com/datacommons_public/source_csv/sustainability_financial_incentives/",
+  "data_file_path": "input_folder/financial_incentives_prod_data.json",
+  "import_inputs": [
+    {
+      "name": "financial_incentives_prod_data.json",
+      "description": "Financial incentives production data in JSON format",
+      "url": "https://storage.googleapis.com/datacommons_public/source_csv/sustainability_financial_incentives/"
+    }
+  ]
+}

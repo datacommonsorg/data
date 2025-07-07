@@ -1,39 +1,58 @@
-# Textproto to CSV Conversion Script
+# Sustainability Financial Incentives Data Import
 
-This script converts financial incentive data from textproto format to CSV format.
+This directory contains tools and processes for importing sustainability financial incentives data into the Data Commons platform.
 
-## Updating the Schema
+## Prerequisites
 
-If the schema of the input textproto files changes, you will need to update the protobuf definition file (`sustainable_financial_incentives.proto`) and regenerate the Python code.
+1. **Google Cloud Authentication**: Ensure you have proper GCS access credentials configured
+2. **Python Dependencies**: Install required packages:
+   ```bash
+   pip install -r requirements_all.txt
+   ```
 
-1. **Update the `.proto` file:**
-    Modify `sustainable_financial_incentives.proto` to reflect the new schema. This may involve adding or changing fields and enums.
+## Data Download and Conversion
 
-2. **Regenerate the Python code:**
-    Run the following command from the `scripts/sustainability_financial_incentives` directory to regenerate the `sustainable_financial_incentives_pb2.py` file:
+The `download_and_convert.py` script downloads the latest sustainability financial incentives data from Google Cloud Storage and converts it from JSON to CSV format for Data Commons ingestion.
 
-    ```bash
-    protoc -I=. --python_out=. sustainable_financial_incentives.proto
-    ```
+### Overview
 
-## Running the Script
+The script performs the following operations:
+1. **Discovers the latest data**: Finds the most recent dated folder (YYYY_MM_DD format) in the GCS bucket
+2. **Downloads JSON data**: Retrieves the financial incentives JSON file from GCS
+3. **Converts to CSV**: Transforms the JSON data to CSV format using the Data Commons json_to_csv utility
 
-To convert a textproto file to CSV, run the script from the `scripts/sustainability_financial_incentives` directory with the following command. You can use flags to specify the input and output paths:
+### Usage
 
+**Basic usage:**
 ```bash
-python convert_textproto_to_csv.py --textproto_path=<path_to_input.textproto> --csv_path=<path_to_output.csv>
+python download_and_convert.py
 ```
 
-**Example:**
-
+**With custom output file:**
 ```bash
-python convert_textproto_to_csv.py --textproto_path=testdata/all_incentives.textproto --csv_path=output.csv
+python download_and_convert.py --output_csv=latest_incentives.csv
 ```
 
-## Running the Tests
 
-To run the unit tests for this script, execute the following command from the `scripts/sustainability_financial_incentives` directory:
+### Output
 
+The script generates:
+- **JSON file**: Downloaded to the input folder
+- **CSV file**: Converted data ready for Data Commons ingestion
+- **Detailed logs**: Processing status and file locations
+
+## Testing
+
+Run the unit tests:
 ```bash
-python -m unittest convert_textproto_to_csv_test.py
+python -m unittest download_and_convert_test.py
 ```
+
+## Troubleshooting
+
+**Common Issues:**
+- **Authentication errors**: Ensure GCS credentials are properly configured
+- **Permission errors**: Check read permissions on the GCS bucket
+- **File not found**: Verify the JSON filename exists in the latest dated folder
+
+All log messages include full file paths to help with troubleshooting.

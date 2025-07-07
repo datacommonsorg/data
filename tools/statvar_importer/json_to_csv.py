@@ -104,6 +104,7 @@ def file_json_to_csv(
     csv_output: str = '',
     output_columns: list = None,
     exclude_columns: list = None,
+    set_key_column: bool = True,
 ) -> str:
     """Returns the CSV file generated from the json file."""
     input_files = file_util.file_get_matching(json_file)
@@ -134,7 +135,7 @@ def file_json_to_csv(
     logging.info(
         f'Writing {len(csv_rows)} rows from {input_files} into {csv_output}')
     columns = file_util.file_write_csv_dict(csv_rows, csv_output,
-                                            output_columns)
+                                            output_columns, key_column_name='key' if set_key_column else None)
     counters.set_counter('output-columns', len(columns))
     return csv_output
 

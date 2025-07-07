@@ -23,6 +23,9 @@ PYTHON_FOLDERS="util/ scripts/ import-automation/executor tools/"
 PYTHON_REQUIREMENTS_INSTALLED=false
 
 function setup_python {
+  if [[ "${SKIP_PYTHON_SETUP:-false}" == "true" ]]; then
+    return
+  fi
   python3 -m venv .env
   source .env/bin/activate
   if [[ "$PYTHON_REQUIREMENTS_INSTALLED" = false ]]
