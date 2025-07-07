@@ -106,7 +106,7 @@ class DownloadAndConvertTest(unittest.TestCase):
 
     def test_convert_json_to_csv(self):
         """Test converting JSON to CSV and compare with expected output."""
-        expected_csv_path = os.path.join(self.test_data_dir, 'expected_output.csv')
+        expected_csv_path = os.path.join(self.test_data_dir, 'expected_financial_incentives_prod_data.csv')
         
         result = download_and_convert.convert_json_to_csv(self.test_json_path, self.test_csv_path)
         
