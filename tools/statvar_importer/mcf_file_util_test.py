@@ -205,8 +205,20 @@ class TestMCFFileUtil(unittest.TestCase):
             })
 
         # Statvar nodes with new properties cannot be merged.
+        node1['typeOf'] = 'dcs:StatisticalVariable'
+        node2['typeOf'] = 'dcid:StatisticalVariable'
+        self.assertFalse(mcf_file_util.check_nodes_can_merge(node1, node2))
+
+        # Statvar nodes with new values for existing properties cannot be merged.
         node1['typeOf'] = 'StatisticalVariable'
-        node2['typeOf'] = 'StatisticalVariable'
+        node3 = dict(node1)
+        node3['prop1'] = 'dcid:NewValue'
+        self.assertFalse(mcf_file_util.check_nodes_can_merge(node1, node2))
+
+        # Statvar nodes can't be merged with non-Statvar node
+        node1['typeOf'] = 'StatisticalVariable'
+        node3 = dict(node1)
+        node3['typeOf'] = 'dcid:TestNode'
         self.assertFalse(mcf_file_util.check_nodes_can_merge(node1, node2))
 
         # Statvar nodes with names can be merged

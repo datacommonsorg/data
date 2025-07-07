@@ -362,12 +362,12 @@ def check_nodes_can_merge(node1: dict, node2: dict) -> bool:
         return False
 
     typeof1 = strip_namespace(node1.get('typeOf', ''))
-    typeof2 = strip_namespace(node1.get('typeOf', ''))
+    typeof2 = strip_namespace(node2.get('typeOf', ''))
 
     if typeof1 == 'StatisticalVariable' or typeof2 == 'StatisticalVariable':
         # Additional checks for statistical variable
         # 1. Constraint properties should not be added/modified
-        # 2. Constraing properties should have a single value
+        # 2. Constraint properties should have a single value
         if typeof1 and typeof2 and typeof1 != typeof2:
             logging.error(f'Cannot merge {dcid1} of type: {type1}, {type2}')
             return False
@@ -381,7 +381,7 @@ def check_nodes_can_merge(node1: dict, node2: dict) -> bool:
             return False
         for prop in cprops1:
             val1 = normalize_value(node1.get(prop, ''))
-            val2 = normalize_value(node1.get(prop, ''))
+            val2 = normalize_value(node2.get(prop, ''))
             if ',' in val1 or ',' in val2:
                 logging.error(
                     f'Statvar {dcid1} has multiple values for {prop}: {node1}, {node2}'
