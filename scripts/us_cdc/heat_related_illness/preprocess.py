@@ -37,14 +37,9 @@ _OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
 with open("./config.json", 'r', encoding='utf-8') as config_f:
     _CONFIG = json.load(config_f)
 
-flags.DEFINE_string(
-    'config_file_path',
-    'gs://datcom-import-test/scripts/us_cdc/heat_related_illness/EPHHeatRelatedIllness/configs.py',
-    'Input directory where config files downloaded.')
-
 
 def generate_tmcf():
-    # Writing Genereated TMCF to local path.
+    # Writing Generated TMCF to local path.
     configs = reads_config_file()
     with open(_CONFIG.get("OUTPUT_PATH") + "/output.tmcf",
               'w+',
