@@ -19,7 +19,7 @@ import json
 import csv
 import copy
 import pandas as pd
-from absl import app, logging
+from absl import app, logging, flags
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -29,17 +29,27 @@ from statvar_dcid_generator import get_statvar_dcid
 from name_to_alpha2 import USSTATE_MAP_SPACE
 from alpha2_to_dcid import USSTATE_MAP
 from statvar_remap import STATVAR_REMAP_DICT
-
-import configs
+from clean_data import reads_config_file
 
 _CONFIG = None
+_OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity', 'Geo', 'measurementMethod')
+
+with open("./config.json", 'r', encoding='utf-8') as config_f:
+    _CONFIG = json.load(config_f)
+
+flags.DEFINE_string(
+    'config_file_path',
+    'gs://datcom-import-test/scripts/us_cdc/heat_related_illness/EPHHeatRelatedIllness/configs.py',
+    'Input directory where config files downloaded.')
 
 
 def generate_tmcf():
     # Writing Genereated TMCF to local path.
-    with open(configs.OUTPUT_PATH + "/output.tmcf", 'w+',
+    configs = reads_config_file()
+    with open(_CONFIG.get("OUTPUT_PATH") + "/output.tmcf",
+              'w+',
               encoding='utf-8') as f_out:
-        f_out.write(configs.TMCF_TEMPLATE.rstrip('\n'))
+        f_out.write(configs['TMCF_TEMPLATE'].rstrip('\n'))
 
 
 def state_resolver(state: str) -> str:
@@ -138,7 +148,7 @@ def write_to_mcf(sv_list: list, mcf_path: str):
 
 def aggregate():
     """Method to aggregate EPH Heat Illness data from state level data."""
-    df = pd.read_csv(configs.OUTPUT_PATH + "/cleaned.csv",
+    df = pd.read_csv(_CONFIG.get('OUTPUT_PATH') + "/cleaned.csv",
                      dtype={'Quantity': 'float64'})
 
     # Aggregating all stat vars
@@ -149,16 +159,13 @@ def aggregate():
                             as_index=False).agg({'Quantity': 'sum'})
     country_df['Geo'] = "country/USA"
     country_df['measurementMethod'] = "dcs:DataCommonsAggregate"
-    country_df.to_csv(configs.OUTPUT_PATH + "/country_output.csv", index=False)
+    country_df.to_csv(_CONFIG.get('OUTPUT_PATH') + "/country_output.csv",
+                      index=False)
 
 
 def process(cleaned_csv_path, output_mcf_path, input_path):
-    global _CONFIG
-    with open(configs.CONFIG_PATH, 'r', encoding='utf-8') as config_f:
-        _CONFIG = json.load(config_f)
-
     with open(cleaned_csv_path, 'w', encoding='utf-8') as cleaned_f:
-        f_writer = csv.DictWriter(cleaned_f, fieldnames=configs.OUTPUT_COLUMNS)
+        f_writer = csv.DictWriter(cleaned_f, fieldnames=_OUTPUT_COLUMNS)
         f_writer.writeheader()
         statvar_list = []
         for file_name in os.listdir(input_path):
@@ -178,17 +185,18 @@ def process(cleaned_csv_path, output_mcf_path, input_path):
 
 def main(_):
     try:
-        os.makedirs(configs.OUTPUT_PATH, exist_ok=True)
-        cleaned_csv_path = os.path.join(configs.OUTPUT_PATH, 'cleaned.csv')
-        output_mcf_path = os.path.join(configs.OUTPUT_PATH, 'output.mcf')
+        os.makedirs(_CONFIG.get('OUTPUT_PATH'), exist_ok=True)
+        cleaned_csv_path = os.path.join(_CONFIG.get('OUTPUT_PATH'),
+                                        'cleaned.csv')
+        output_mcf_path = os.path.join(_CONFIG.get('OUTPUT_PATH'), 'output.mcf')
         try:
-            os.listdir(configs.COMBINED_INPUT_CSV_FILE)
+            os.listdir(_CONFIG.get('COMBINED_INPUT_CSV_FILE'))
         except:
             logging.error(
                 "\n\nData not found!!!!!! Please run the script clean_data.py to download source data\n"
             )
         process(cleaned_csv_path, output_mcf_path,
-                configs.COMBINED_INPUT_CSV_FILE)
+                _CONFIG.get('COMBINED_INPUT_CSV_FILE'))
         generate_tmcf()
         aggregate()
         logging.info("Processing completed!")

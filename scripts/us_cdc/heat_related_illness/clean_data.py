@@ -17,21 +17,28 @@ import os
 import csv
 from bs4 import BeautifulSoup
 import pandas as pd
-from absl import app, logging
+from absl import app, logging, flags
 from datetime import datetime
 import time
 from retry import retry
 import re
-
+import json
+from google.cloud import storage
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 
-import configs
+_CONFIG = None
+with open("./config.json", 'r', encoding='utf-8') as config_f:
+    _CONFIG = json.load(config_f)
+
+flags.DEFINE_string(
+    'config_file_path',
+    'gs://datcom-import-test/scripts/us_cdc/heat_related_illness/EPHHeatRelatedIllness/configs.py',
+    'Input directory where config files downloaded.')
 
 current_year = datetime.now().year
 
@@ -66,12 +73,13 @@ def download_dynamic_page(url, filename):
         driver.get(url)
 
         WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.XPATH, configs.PAGE_START)))
+            EC.presence_of_element_located(
+                (By.XPATH, _CONFIG.get('PAGE_START'))))
 
         time.sleep(5)
 
         no_data_element = driver.find_elements(By.XPATH,
-                                               configs.NO_DATA_ELEMENT)
+                                               _CONFIG.get('NO_DATA_ELEMENT'))
 
         if no_data_element:
             logging.info(f"No data found for url: {url}")
@@ -142,7 +150,7 @@ def combine_csv_files(directory, category_string):
     if dataframes_to_combine:
         merged_df = pd.concat(dataframes_to_combine, ignore_index=True)
 
-        output_dir = configs.COMBINED_INPUT_CSV_FILE
+        output_dir = _CONFIG.get('COMBINED_INPUT_CSV_FILE')
         if not os.path.exists(output_dir):
             os.makedirs(output_dir, exist_ok=True)
             logging.info(f"Created output directory: {output_dir}")
@@ -173,12 +181,13 @@ def download_all_data(url, filename):
 
 def convert_html_to_csv():
     try:
-        for file_name in os.listdir(configs.INPUT_HTML_FILES):
+        for file_name in os.listdir(_CONFIG.get('INPUT_HTML_FILES')):
             if file_name.endswith('.html'):  # If file is a html file
-                file_path = os.path.join(configs.INPUT_HTML_FILES, file_name)
+                file_path = os.path.join(_CONFIG.get('INPUT_HTML_FILES'),
+                                         file_name)
                 with open(file_path, 'r', encoding='utf-8') as f:
-                    cleaned_csv_path = os.path.join(configs.INPUT_CSV_FILES,
-                                                    file_name[:-5] + '.csv')
+                    cleaned_csv_path = os.path.join(
+                        _CONFIG.get('INPUT_CSV_FILES'), file_name[:-5] + '.csv')
                     table_to_csv(f.read(), cleaned_csv_path)
     except Exception as e:
         logging.fatal(
@@ -186,10 +195,28 @@ def convert_html_to_csv():
         )
 
 
+def reads_config_file():
+    _FLAGS = flags.FLAGS
+    config_file_path = _FLAGS.config_file_path
+    try:
+        storage_client = storage.Client()
+        bucket_name = config_file_path.split('/')[2]
+        bucket = storage_client.bucket(bucket_name)
+        blob_name = '/'.join(config_file_path.split('/')[3:])
+        blob = bucket.blob(blob_name)
+        file_contents = blob.download_as_text()
+        local_vars = {}
+        exec(file_contents, {}, local_vars)
+        return local_vars
+    except Exception as e:
+        logging.fatal(f"Cannot extract url and related configs: {e}")
+
+
 def main(_):
     paths = [
-        configs.COMBINED_INPUT_CSV_FILE, configs.INPUT_HTML_FILES,
-        configs.INPUT_CSV_FILES
+        _CONFIG.get('COMBINED_INPUT_CSV_FILE'),
+        _CONFIG.get('INPUT_HTML_FILES'),
+        _CONFIG.get('INPUT_CSV_FILES')
     ]
     for path in paths:
         try:
@@ -197,7 +224,8 @@ def main(_):
         except FileExistsError:
             pass  # Directory already exists
 
-    URL_LIST = configs.URLS_CONFIG
+    configs = reads_config_file()
+    URL_LIST = configs['URLS_CONFIG']
 
     for urls in URL_LIST:
         url = urls["url_template"]
@@ -206,10 +234,10 @@ def main(_):
         try:
             download_all_data(url, file_name)
             convert_html_to_csv()
-            combine_csv_files(configs.INPUT_CSV_FILES, string_to_match)
+            combine_csv_files(_CONFIG.get('INPUT_CSV_FILES'), string_to_match)
         except Exception as e:
             logging.fatal(
-                f"Fatal error: The script has terminated due to an exception: {e}; context: Url: {url}; Filename: {file_name}"
+                f"Fatal error: The script has terminated due to an exception: {e}; Context: Url: {url}; Filename: {file_name}"
             )
 
 
