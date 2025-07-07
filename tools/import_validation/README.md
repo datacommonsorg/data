@@ -114,6 +114,30 @@ Here is an example of a complete configuration file:
 }
 ```
 
+### Advanced Validation with `SQL_VALIDATOR`
+
+For complex validation scenarios that require aggregations, joins, or multi-column filtering, the framework provides the powerful `SQL_VALIDATOR`. This allows you to define a custom validation using a SQL query.
+
+The validator uses two parameters:
+- `query`: A standard SQL `SELECT` statement that defines the precise dataset to be validated. The `stats_summary` data is available as the `stats` table, and the `differ_output` is available as the `differ` table.
+- `condition`: A SQL boolean expression that must evaluate to `TRUE` for every row returned by the `query`.
+
+The framework executes the `query` and then finds all rows from the result that do **not** meet the `condition`. If any such rows are found, the validation fails, and the failing rows are included in the output report.
+
+#### SQL Validator Example
+
+**Rule:** "For all StatVars that are percentages, the `MaxValue` must be less than or equal to 100."
+
+```json
+{
+    "rule_id": "check_max_value_for_percent_svs_sql",
+    "validator": "SQL_VALIDATOR",
+    "params": {
+        "query": "SELECT StatVar, MaxValue, Units FROM stats WHERE Units = 'Percent'",
+        "condition": "MaxValue <= 100"
+    }
+}
+```
 
 ### Supported Validations
 
@@ -121,6 +145,7 @@ The following validations are currently supported:
 
 | Validator Name            | Description                                                              | Required Data     | `params` Configuration                                 |
 | ------------------------- | ------------------------------------------------------------------------ | ----------------- | ------------------------------------------------------ |
+| `SQL_VALIDATOR`           | Runs a user-defined SQL query to perform complex validations.            | `stats`, `differ` | `query` (string), `condition` (string)                 |
 | `MAX_DATE_LATEST`         | Checks that the latest date in the data is from the current year.        | `stats`           | None                                                   |
 | `MAX_DATE_CONSISTENT`     | Checks that the latest date is the same for all StatVars.                | `stats`           | None                                                   |
 | `DELETED_COUNT`           | Checks that the total number of deleted points is within a threshold.    | `differ`          | `threshold` (integer, defaults to 0)                   |
