@@ -9,7 +9,7 @@
       "provenance_description": "Population number of company workplace employees dataset",
       "scripts": [
         "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/wir_2552_wiki.csv --output_folder=input_files",
-        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/wir_2552_wiki.csv --pv_map=wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=wir_2552_wiki/wir_2552_wiki_metadata.csv --output_path=wir_2552_wiki/output/zurich_population-wir_2552_wiki"
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/wir_2552_wiki.csv --pv_map=wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=wir_2552_wiki/wir_2552_wiki_metadata.csv --output_path=output/zurich_population-wir_2552_wiki"
       ],
       "input_files": [
         "input_files/wir_2552_wiki.csv"
@@ -31,7 +31,7 @@
       "provenance_description": "Population by age Dataset",
       "scripts": [
         "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_age10_wiki.csv --output_folder=input_files",
-        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/bev_3903_age10_wiki.csv --pv_map=bev_3903_age10_wiki/bev_3903_age10_wiki_pvmap.csv --config_file=bev_3903_age10_wiki/bev_3903_age10_wiki_metadata.csv --output_path=bev_3903_age10_wikioutput/zurich_population-bev_3903_age10_wiki"
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=input_files/bev_3903_age10_wiki.csv --pv_map=bev_3903_age10_wiki/bev_3903_age10_wiki_pvmap.csv --config_file=bev_3903_age10_wiki/bev_3903_age10_wiki_metadata.csv --output_path=bev_3903_age10_wiki/output/zurich_population-bev_3903_age10_wiki"
       ],
       "input_files": [
         "input_files/bev_3903_age10_wiki.csv"
