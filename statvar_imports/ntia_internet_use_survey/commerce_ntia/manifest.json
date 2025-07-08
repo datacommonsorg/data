@@ -1,0 +1,29 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Commerce_NTIA",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.ntia.gov/sites/default/files/data_central_downloads/datasets/ntia-analyze-table.csv",
+      "provenance_description": "NTIA programs and policymaking focus largely on expanding broadband Internet access and adoption in America, expanding the use of spectrum by all users.",
+      "scripts": [ 
+      "preprocess.py", 
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ntia-data.csv --pv_map=ntia_pvmap.csv --config_file=ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/ntia_output", 
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/ntia-data-age-only.csv --pv_map=ntia_age_pvmap.csv --config_file=ntia_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_files/ntia_age_output"
+      ],
+      "source_files": [
+        "input_files/ntia-analyze-table.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/ntia_output.tmcf",
+          "cleaned_csv": "output_files/ntia_output.csv"
+        },
+        {
+          "template_mcf": "output_files/ntia_age_output.tmcf",
+          "cleaned_csv": "output_files/ntia_age_output.csv"
+        }
+      ],
+      "cron_schedule": "0 06 * * 5"
+    }
+  ]
+}
