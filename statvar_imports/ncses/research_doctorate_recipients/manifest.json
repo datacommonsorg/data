@@ -2,7 +2,7 @@
   "import_specifications": [
     {
       "import_name": "NCSES_Research_Doctorate_Recipients_Import",
-      "curator_emails": [],
+      "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://ncses.nsf.gov/pubs/nsf23300/data-tables",
       "provenance_description": "research doctorate recipients, by ethnicity, race, and citizenship status",
       "scripts": [
