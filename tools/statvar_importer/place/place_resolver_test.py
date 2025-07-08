@@ -248,5 +248,13 @@ class GetMapsPlaceIdTest(unittest.TestCase):
         self.assertEqual(result['lat'], 37.4224082)
         self.assertEqual(result['lng'], -122.0840496)
 
+    @patch('place_resolver.request_url')
+    def test_get_maps_placeid_no_results(self, mock_request):
+        """Tests that no results are returned for a place that does not exist."""
+        resolver = PlaceResolver(maps_api_key='test_key')
+        mock_request.return_value = {'results': []}
+        result = resolver.get_maps_placeid('PlaceThatDoesNotExist')
+        self.assertIsNone(result)
+
 if __name__ == '__main__':
     unittest.main()

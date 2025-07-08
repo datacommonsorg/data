@@ -662,6 +662,8 @@ class PlaceResolver:
                 self._counters.add_counter('maps-api-textsearch-results', 1)
             else:
                 self._set_failed_cache_value(place_key, result)
+        if not result:
+            return None
         return result
 
     def resolve_name_wiki_search(self, places: dict) -> dict:
