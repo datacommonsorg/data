@@ -15,7 +15,7 @@
 import os
 import sys
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, call
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
@@ -163,6 +163,55 @@ class ResolveLatLngTest(unittest.TestCase):
         self.assertEqual(len(resolved_places), 2)
         self.assertEqual(resolved_places['loc1']['placeDcids'], ['dc/geoId/0649670'])
         self.assertEqual(resolved_places['loc2']['placeDcids'], ['dc/geoId/0677000'])
+
+class LookupNamesTest(unittest.TestCase):
+
+    @patch('place_resolver.PlaceNameMatcher.lookup')
+    def test_lookup_names_single(self, mock_lookup):
+        """Tests looking up a single place name."""
+        resolver = PlaceResolver()
+        places = {
+            'p1': {
+                'place_name': 'Mountain View'
+            }
+        }
+        mock_lookup.return_value = [('Mountain View, CA', 'dc/geoId/0649670')]
+        resolved_places = resolver.lookup_names(places)
+        self.assertEqual(len(resolved_places), 1)
+        self.assertEqual(resolved_places['p1']['dcid'], 'dc/geoId/0649670')
+        self.assertEqual(resolved_places['p1']['place-name'], 'Mountain View, CA')
+
+    @patch('place_resolver.PlaceNameMatcher.lookup')
+    def test_lookup_names_multiple(self, mock_lookup):
+        """Tests looking up multiple place names."""
+        resolver = PlaceResolver()
+        places = {
+            'p1': {
+                'place_name': 'Mountain View'
+            },
+            'p2': {
+                'place_name': 'Sunnyvale'
+            }
+        }
+        
+        mock_lookup.side_effect = [
+            [('Mountain View, CA', 'dc/geoId/0649670')],
+            [('Sunnyvale, CA', 'dc/geoId/0677000')]
+        ]
+        
+        resolved_places = resolver.lookup_names(places)
+        self.assertEqual(len(resolved_places), 2)
+        self.assertEqual(resolved_places['p1']['dcid'], 'dc/geoId/0649670')
+        self.assertEqual(resolved_places['p1']['place-name'], 'Mountain View, CA')
+        self.assertEqual(resolved_places['p2']['dcid'], 'dc/geoId/0677000')
+        self.assertEqual(resolved_places['p2']['place-name'], 'Sunnyvale, CA')
+        
+        # Verify that the mock was called with the correct arguments.
+        calls = [
+            call('Mountain View', 10, {}),
+            call('Sunnyvale', 10, {})
+        ]
+        mock_lookup.assert_has_calls(calls)
 
 if __name__ == '__main__':
     unittest.main()
