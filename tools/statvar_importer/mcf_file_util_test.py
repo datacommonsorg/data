@@ -123,15 +123,18 @@ class TestMCFFileUtil(unittest.TestCase):
                 self.assertTrue(expected_prop in node)
             self.assertEqual(mcf_file_util.strip_namespace(dcid), node['Node'])
 
-        # Verify loading node with additional property adds to existing node.
+        # Verify loading node with additional property added to existing node.
         dcid = list(mcf_nodes.keys())[0]
-        old_node = dict(mcf_nodes[dcid])
+        old_node = mcf_nodes[dcid]
+        # Change node type to non-StatVar to allow addition of property
+        old_node['typeOf'] = 'dcid:TestNode'
         new_node = {'Node': old_node['Node']}
         # Copy some properties
         for prop in list(old_node.keys())[len(old_node) - 2:]:
             new_node[prop] = old_node[prop]
         # Add a new property
         new_node['newProperty'] = 'dcid:NewValue'
+        new_node['typeOf'] = 'dcid:TestNode'
         expected_node = dict(old_node)
         expected_node.update(new_node)
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -141,6 +144,7 @@ class TestMCFFileUtil(unittest.TestCase):
                     dcid: new_node
                 }],
                 filename=new_node_file,
+                default_pvs={},
                 header='# Node with new property',
             )
 
@@ -171,6 +175,62 @@ class TestMCFFileUtil(unittest.TestCase):
             ))
         self.assertEqual(None, mcf_file_util.get_numeric_value('not number'))
         self.assertEqual(None, mcf_file_util.get_numeric_value('10e5'))
+
+    def test_check_nodes_can_merge(self):
+        node1 = {
+            'Node': 'dcs:TestNode1',
+            'typeOf': 'dcs:TestNode',
+            'prop1': 'dcs:Value1',
+            'prop2': 'dcid:Value2',
+        }
+        node2 = {
+            'Node': 'dcs:TestNode1',
+            'typeOf': 'dcs:TestNode',
+            'prop1': 'dcs:Value1',
+            'prop3': 'dcid:Value3',
+        }
+
+        nodes = {}
+        mcf_file_util.add_mcf_node(node1, nodes)
+        # Nodes with additional property can be merged.
+        self.assertTrue(mcf_file_util.check_nodes_can_merge(node1, node2))
+        self.assertTrue(mcf_file_util.add_mcf_node(node2, nodes))
+        self.assertEqual(
+            nodes['dcid:TestNode1'], {
+                'Node': 'dcs:TestNode1',
+                'prop1': 'dcs:Value1',
+                'prop2': 'dcid:Value2',
+                'prop3': 'dcid:Value3',
+                'typeOf': 'dcs:TestNode'
+            })
+
+        # Statvar nodes with new properties cannot be merged.
+        node1['typeOf'] = 'dcs:StatisticalVariable'
+        node2['typeOf'] = 'dcid:StatisticalVariable'
+        self.assertFalse(mcf_file_util.check_nodes_can_merge(node1, node2))
+
+        # Statvar nodes with new values for existing properties cannot be merged.
+        node1['typeOf'] = 'StatisticalVariable'
+        node3 = dict(node1)
+        node3['prop1'] = 'dcid:NewValue'
+        self.assertFalse(mcf_file_util.check_nodes_can_merge(node1, node2))
+
+        # Statvar nodes can't be merged with non-Statvar node
+        node1['typeOf'] = 'StatisticalVariable'
+        node3 = dict(node1)
+        node3['typeOf'] = 'dcid:TestNode'
+        self.assertFalse(mcf_file_util.check_nodes_can_merge(node1, node2))
+
+        # Statvar nodes with names can be merged
+        node3 = {
+            'Node': 'dcid:TestNode1',
+            'typeOf': 'dcid:StatisticalVariable',
+            'prop1': 'dcs:Value1',
+            'prop2': 'dcid:Value2',
+            'name': 'test node with name',
+            'description': 'TestNode with addiotnal name can be merged.'
+        }
+        self.assertTrue(mcf_file_util.check_nodes_can_merge(node1, node3))
 
 
 class TestAddPVToNode(unittest.TestCase):
