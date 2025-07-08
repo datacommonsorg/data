@@ -127,6 +127,14 @@ class USAirEmissionTrends:
                     df.rename(columns=replacement_point_17, inplace=True)
                 df['emissions type code'] = ''
             df['year'] = '2017'
+        elif '2020' in file_path:
+            if 'Event' in file_path:
+                df['pollutant type(s)'] = 'nan'
+            elif 'point' in file_path:
+                if 'unknown' in file_path:
+                    df.rename(columns=replacement_20, inplace=True)
+                df['emissions type code'] = ''
+            df['year'] = '2020'
         elif 'tribes' in file_path:
             df.rename(columns=replacement_tribes, inplace=True)
             df = self._data_standardize(df, 'fips code')
@@ -272,6 +280,8 @@ class USAirEmissionTrends:
             self.final_df['observation'] / 2000, self.final_df['observation'])
         self.final_df = self.final_df.groupby(
             ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
+        self.final_df['unit'] = "Ton"
+        self.final_df = self.final_df.drop(columns=['scc_name'])
         logging.info("Data processing complete.")
 
     def generate_tmcf(self) -> None:

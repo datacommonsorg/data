@@ -21,6 +21,14 @@ replacement_08_11 = {
     'emissions_type_code': 'emissions type code'
 }
 
+replacement_20 = {
+    'state_and_county_fips_code': 'fips code',
+    'pollutant_cd': 'pollutant code',
+    'uom': 'emissions uom',
+    'total_emissions': 'total emissions',
+    'emissions_type_code': 'emissions type code'
+}
+
 # dropping unwanted values for the year 2008 and 2011
 drop_08_11 = [
     'tribal_name', 'st_usps_cd', 'county_name', 'data_category_cd',

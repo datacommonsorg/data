@@ -13,7 +13,7 @@
           "cleaned_csv": "output/national_emissions.csv"
         }
       ],
-      "cron_schedule": "0 0 5,20 * *"
+      "cron_schedule": "30 2 10 * *"
     }
   ]
 }
