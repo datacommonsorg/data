@@ -2,7 +2,6 @@
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
-# You may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #         https://www.apache.org/licenses/LICENSE-2.0
@@ -133,6 +132,37 @@ class ResolveLatLngTest(unittest.TestCase):
         resolved_places = resolver.resolve_latlng(places)
         self.assertEqual(len(resolved_places), 1)
         self.assertEqual(resolved_places['loc1']['placeDcids'], ['dc/geoId/0649670'])
+
+    @patch('place_resolver.dc_api_batched_wrapper')
+    def test_resolve_latlng_multiple(self, mock_dc_api):
+        """Tests resolving multiple lat/lngs to dcids."""
+        resolver = PlaceResolver()
+        places = {
+            'loc1': {
+                'latitude': 37.42,
+                'longitude': -122.08
+            },
+            'loc2': {
+                'latitude': 37.35,
+                'longitude': -122.03
+            }
+        }
+        mock_dc_api.return_value = {
+            '37.420000,-122.080000': {
+                'latitude': 37.42,
+                'longitude': -122.08,
+                'placeDcids': ['dc/geoId/0649670']
+            },
+            '37.350000,-122.030000': {
+                'latitude': 37.35,
+                'longitude': -122.03,
+                'placeDcids': ['dc/geoId/0677000']
+            }
+        }
+        resolved_places = resolver.resolve_latlng(places)
+        self.assertEqual(len(resolved_places), 2)
+        self.assertEqual(resolved_places['loc1']['placeDcids'], ['dc/geoId/0649670'])
+        self.assertEqual(resolved_places['loc2']['placeDcids'], ['dc/geoId/0677000'])
 
 if __name__ == '__main__':
     unittest.main()
