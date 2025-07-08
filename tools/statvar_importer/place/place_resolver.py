@@ -604,7 +604,7 @@ class PlaceResolver:
                                                    1)
             # Cache the response
             self._set_cache_value(place_key, result)
-            return [result]
+            return result
 
         return None
 
@@ -654,8 +654,8 @@ class PlaceResolver:
                     if 'geometry' in map_result:
                         if 'location' in map_result['geometry']:
                             loc = map_result['geometry']['location']
-                            _add_to_dict('latitude', loc.get('lat', ''), result)
-                            _add_to_dict('longitude', loc.get('lng', ''),
+                            _add_to_dict('lat', loc.get('lat', ''), result)
+                            _add_to_dict('lng', loc.get('lng', ''),
                                          result)
             if result:
                 self._set_cache_value(place_key, result)

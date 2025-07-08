@@ -226,5 +226,27 @@ class LookupNamesTest(unittest.TestCase):
         resolved_places = resolver.lookup_names(places)
         self.assertEqual(len(resolved_places), 0)
 
+class GetMapsPlaceIdTest(unittest.TestCase):
+
+    @patch('place_resolver.request_url')
+    def test_get_maps_placeid_single(self, mock_request):
+        """Tests getting a single place id from the Maps API."""
+        resolver = PlaceResolver(maps_api_key='test_key')
+        mock_request.return_value = {
+            'results': [{
+                'place_id': 'ChIJ2eUge_W7j4ARb_3Yc41SgLg',
+                'geometry': {
+                    'location': {
+                        'lat': 37.4224082,
+                        'lng': -122.0840496
+                    }
+                }
+            }]
+        }
+        result = resolver.get_maps_placeid('Mountain View')
+        self.assertEqual(result['placeId'], 'ChIJ2eUge_W7j4ARb_3Yc41SgLg')
+        self.assertEqual(result['lat'], 37.4224082)
+        self.assertEqual(result['lng'], -122.0840496)
+
 if __name__ == '__main__':
     unittest.main()
