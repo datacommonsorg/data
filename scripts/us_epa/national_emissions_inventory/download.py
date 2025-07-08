@@ -36,6 +36,7 @@ from download_config import *
 
 _DOWNLOAD_PATH = os.path.join(os.path.dirname((__file__)), 'input_files')
 
+
 def check_url_accessibility(url, timeout=10):
     """
     Checks if a URL is accessible by making a HEAD request.
@@ -113,7 +114,8 @@ def download_files(url_folder_map):
                 zip_path = download_file_with_retry(url)
                 extract_dir = os.path.join(_DOWNLOAD_PATH, folder)
                 os.makedirs(extract_dir, exist_ok=True)
-                logging.info(f"Extracting {zip_path} to {extract_dir} using 7z...")
+                logging.info(
+                    f"Extracting {zip_path} to {extract_dir} using 7z...")
                 subprocess.run(["7z", "x", zip_path, f"-o{extract_dir}"])
             except Exception as e:
                 logging.error(f"Skipping processing of {url} due to error: {e}")
