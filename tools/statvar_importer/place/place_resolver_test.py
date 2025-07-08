@@ -213,5 +213,18 @@ class LookupNamesTest(unittest.TestCase):
         ]
         mock_lookup.assert_has_calls(calls)
 
+    @patch('place_resolver.PlaceNameMatcher.lookup')
+    def test_lookup_names_no_results(self, mock_lookup):
+        """Tests that no results are returned for a place that does not exist."""
+        resolver = PlaceResolver()
+        places = {
+            'p1': {
+                'place_name': 'PlaceThatDoesNotExist'
+            }
+        }
+        mock_lookup.return_value = []
+        resolved_places = resolver.lookup_names(places)
+        self.assertEqual(len(resolved_places), 0)
+
 if __name__ == '__main__':
     unittest.main()
