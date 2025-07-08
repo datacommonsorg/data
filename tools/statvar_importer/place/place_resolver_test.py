@@ -254,7 +254,15 @@ class GetMapsPlaceIdTest(unittest.TestCase):
         resolver = PlaceResolver(maps_api_key='test_key')
         mock_request.return_value = {'results': []}
         result = resolver.get_maps_placeid('PlaceThatDoesNotExist')
-        self.assertIsNone(result)
+        self.assertEqual(result, {})
+
+    @patch('place_resolver.request_url')
+    def test_get_maps_placeid_no_key(self, mock_request):
+        """Tests that the Maps API is not called if no API key is provided."""
+        resolver = PlaceResolver()
+        result = resolver.get_maps_placeid('Mountain View')
+        self.assertEqual(result, {})
+        mock_request.assert_not_called()
 
 if __name__ == '__main__':
     unittest.main()

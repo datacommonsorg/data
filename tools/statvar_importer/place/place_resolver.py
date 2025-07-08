@@ -571,6 +571,7 @@ class PlaceResolver:
         if not self._maps_api_key:
             logging.error(
                 f'No maps key. Please set --maps_api_key for place lookup.')
+            return {}
         params = {
             'key': self._maps_api_key,
             'address': f'{name}',
@@ -606,7 +607,7 @@ class PlaceResolver:
             self._set_cache_value(place_key, result)
             return result
 
-        return None
+        return {}
 
     def lookup_maps_placeid(
         self,
@@ -626,6 +627,7 @@ class PlaceResolver:
         if not self._maps_api_key:
             logging.error(
                 f'No maps key. Please set --maps_api_key for place lookup.')
+            return {}
         query_tokens = [name]
         if admin_area:
             query_tokens.append(admin_area)
@@ -662,8 +664,6 @@ class PlaceResolver:
                 self._counters.add_counter('maps-api-textsearch-results', 1)
             else:
                 self._set_failed_cache_value(place_key, result)
-        if not result:
-            return None
         return result
 
     def resolve_name_wiki_search(self, places: dict) -> dict:
