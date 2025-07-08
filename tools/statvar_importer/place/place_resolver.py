@@ -411,8 +411,8 @@ class PlaceResolver:
         results = {}
         resolve_places = []
         coords_to_key = {}
-        latitude_key = config.get('place_latitude_column', 'latitude')
-        longitude_key = config.get('place_longitude_column', 'longitude')
+        latitude_key = self._config.get('place_latitude_column', 'latitude')
+        longitude_key = self._config.get('place_longitude_column', 'longitude')
         for key, place in places.items():
             results[key] = dict(place)
             lat = place.get(latitude_key, '')

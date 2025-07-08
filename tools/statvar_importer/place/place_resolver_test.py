@@ -2,6 +2,7 @@
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
+# You may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #         https://www.apache.org/licenses/LICENSE-2.0
@@ -109,6 +110,29 @@ class ResolveNameDcApiTest(unittest.TestCase):
         resolved_places = resolver.resolve_name_dc_api(places)
         self.assertEqual(len(resolved_places), 0)
         mock_dc_api.assert_not_called()
+
+class ResolveLatLngTest(unittest.TestCase):
+
+    @patch('place_resolver.dc_api_batched_wrapper')
+    def test_resolve_latlng_single(self, mock_dc_api):
+        """Tests resolving a single lat/lng to a dcid."""
+        resolver = PlaceResolver()
+        places = {
+            'loc1': {
+                'latitude': 37.42,
+                'longitude': -122.08
+            }
+        }
+        mock_dc_api.return_value = {
+            '37.420000,-122.080000': {
+                'latitude': 37.42,
+                'longitude': -122.08,
+                'placeDcids': ['dc/geoId/0649670']
+            }
+        }
+        resolved_places = resolver.resolve_latlng(places)
+        self.assertEqual(len(resolved_places), 1)
+        self.assertEqual(resolved_places['loc1']['placeDcids'], ['dc/geoId/0649670'])
 
 if __name__ == '__main__':
     unittest.main()
