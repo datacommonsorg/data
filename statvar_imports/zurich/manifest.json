@@ -8,11 +8,11 @@
       "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/wir_2552_wiki.csv",
       "provenance_description": "Population number of company workplace employees dataset",
       "scripts": [
-        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/wir_2552_wiki.csv --output_folder=source_files",
-        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=wir_2552_wiki/source_files/wir_2552_wiki.csv --pv_map=wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=wir_2552_wiki/wir_2552_wiki_metadata.csv --output_path=wir_2552_wiki/output/zurich_population-wir_2552_wiki"
+        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/wir_2552_wiki.csv --output_folder=input_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=wir_2552_wiki/input_files/wir_2552_wiki.csv --pv_map=wir_2552_wiki/wir_2552_wiki_pvmap.csv --config_file=wir_2552_wiki/wir_2552_wiki_metadata.csv --output_path=wir_2552_wiki/output/zurich_population-wir_2552_wiki"
       ],
-      "source_files": [
-        "source_files/wir_2552_wiki.csv"
+      "input_files": [
+        "input_files/wir_2552_wiki.csv"
       ],
       "import_inputs": [
         {
@@ -20,7 +20,7 @@
           "cleaned_csv": "output/zurich_population-wir_2552_wiki.csv"
         }
       ],
-      "cron_schedule": "0 05 4,18 * *"
+      "cron_schedule": "0 2 29 * *"
     },
     {
       "import_name": "Zurich_Population_By_Age",
@@ -30,11 +30,11 @@
       "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_age10_wiki.csv",
       "provenance_description": "Population by age Dataset",
       "scripts": [
-        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_age10_wiki.csv --output_folder=source_files",
-        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_age10_wiki/source_files/bev_3903_age10_wiki.csv --pv_map=bev_3903_age10_wiki/bev_3903_age10_wiki_pvmap.csv --config_file=bev_3903_age10_wiki/bev_3903_age10_wiki_metadata.csv --output_path=bev_3903_age10_wikioutput/zurich_population-bev_3903_age10_wiki"
+        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_age10_wiki.csv --output_folder=input_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_age10_wiki/input_files/bev_3903_age10_wiki.csv --pv_map=bev_3903_age10_wiki/bev_3903_age10_wiki_pvmap.csv --config_file=bev_3903_age10_wiki/bev_3903_age10_wiki_metadata.csv --output_path=bev_3903_age10_wikioutput/zurich_population-bev_3903_age10_wiki"
       ],
-      "source_files": [
-        "source_files/bev_3903_age10_wiki.csv"
+      "input_files": [
+        "input_files/bev_3903_age10_wiki.csv"
       ],
       "import_inputs": [
         {
@@ -42,7 +42,7 @@
           "cleaned_csv": "output/zurich_population-bev_3903_age10_wiki.csv"
         }
       ],
-      "cron_schedule": "0 05 4,18 * *"
+      "cron_schedule": "0 6 29 * *"
     },
     {
       "import_name": "Zurich_Population",
@@ -52,11 +52,11 @@
       "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3240_wiki.csv",
       "provenance_description": "Population dataset",
       "scripts": [
-        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3240_wiki.csv --output_folder=source_files",
-        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3240_wiki/source_files/bev_3240_wiki.csv --pv_map=bev_3240_wiki/bev_3240_wiki_pvmap.csv --config_file=bev_3240_wiki/bev_3240_wiki_metadata.csv --output_path=bev_3240_wiki/output/zurich_population_bev_3240_wiki"
+        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3240_wiki.csv --output_folder=input_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3240_wiki/input_files/bev_3240_wiki.csv --pv_map=bev_3240_wiki/bev_3240_wiki_pvmap.csv --config_file=bev_3240_wiki/bev_3240_wiki_metadata.csv --output_path=bev_3240_wiki/output/zurich_population_bev_3240_wiki"
       ],
-      "source_files": [
-        "source_files/bev_3240_wiki.csv"
+      "input_files": [
+        "input_files/bev_3240_wiki.csv"
       ],
       "import_inputs": [
         {
@@ -64,7 +64,7 @@
           "cleaned_csv": "output/zurich_population_bev_3240_wiki.csv"
         }
       ],
-      "cron_schedule": "0 05 4,18 * *"
+      "cron_schedule": "30 11 29 * *"
     },
     {
       "import_name": "Zurich_Population_Number_Of_Birth_By_Origin",
@@ -74,11 +74,11 @@
       "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_hel_wiki.csv",
       "provenance_description": "Population number of birth by origin",
       "scripts": [
-        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_hel_wiki.csv --output_folder=source_files",
-        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_hel_wiki/source_files/bev_4031_hel_wiki.csv --pv_map=bev_4031_hel_wiki/bev_4031_hel_wiki_pvmap.csv --config_file=bev_4031_hel_wiki/bev_4031_hel_wiki_metadata.csv --output_path=bev_4031_hel_wiki/output/zurich_bev_4031_hel_wiki"
+        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_hel_wiki.csv --output_folder=input_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_hel_wiki/input_files/bev_4031_hel_wiki.csv --pv_map=bev_4031_hel_wiki/bev_4031_hel_wiki_pvmap.csv --config_file=bev_4031_hel_wiki/bev_4031_hel_wiki_metadata.csv --output_path=bev_4031_hel_wiki/output/zurich_bev_4031_hel_wiki"
       ],
-      "source_files": [
-        "source_files/bev_4031_hel_wiki.csv"
+      "input_files": [
+        "input_files/bev_4031_hel_wiki.csv"
       ],
       "import_inputs": [
         {
@@ -86,7 +86,7 @@
           "cleaned_csv": "output/zurich_bev_4031_hel_wiki.csv"
         }
       ],
-      "cron_schedule": "0 05 4,18 * *"
+      "cron_schedule": "45 15 29 * *"
     },
     {
       "import_name": "Zurich_Population_Number_Of_Birth",
@@ -96,11 +96,11 @@
       "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_wiki.csv",
       "provenance_description": "Population number of birth dataset",
       "scripts": [
-        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_wiki.csv --output_folder=source_files",
-        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_wiki/source_files/bev_4031_wiki.csv --pv_map=bev_4031_wiki_pvmap.csv --config_file=bev_4031_wiki/bev_4031_wiki_metadata.csv --output_path=bev_4031_wiki/output/zurich_bev_4031_wiki"
+        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_wiki.csv --output_folder=input_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_wiki/input_files/bev_4031_wiki.csv --pv_map=bev_4031_wiki_pvmap.csv --config_file=bev_4031_wiki/bev_4031_wiki_metadata.csv --output_path=bev_4031_wiki/output/zurich_bev_4031_wiki"
       ],
-      "source_files": [
-        "source_files/bev_4031_wiki.csv"
+      "input_files": [
+        "input_files/bev_4031_wiki.csv"
       ],
       "import_inputs": [
         {
@@ -108,7 +108,7 @@
           "cleaned_csv": "output/zurich_bev_4031_wiki.csv"
         }
       ],
-      "cron_schedule": "0 05 4,18 * *"
+      "cron_schedule": "0 20 29 * *"
     },
     {
       "import_name": "Zurich_Population_By_Origin",
@@ -118,12 +118,12 @@
       "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_hel_wiki.csv",
       "provenance_description": "Zurich population by origin dataset",
       "scripts": [
-        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_hel_wiki.csv --output_folder=source_files",
+        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_hel_wiki.csv --output_folder=input_files",
         "bev_3903_hel_wiki/convert_to_utf8.py",
-        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_hel_wiki/source_files/bev_3903_hel_wiki_utf8.csv --pv_map=bev_3903_hel_wiki/bev_3903_hel_wiki_pvmap.csv --config_file=bev_3903_hel_wiki/bev_3903_hel_wiki_metadata.csv --output_path=bev_3903_hel_wiki/output/zurich_population-bev_3903_hel_wiki"
+        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_hel_wiki/input_files/bev_3903_hel_wiki_utf8.csv --pv_map=bev_3903_hel_wiki/bev_3903_hel_wiki_pvmap.csv --config_file=bev_3903_hel_wiki/bev_3903_hel_wiki_metadata.csv --output_path=bev_3903_hel_wiki/output/zurich_population-bev_3903_hel_wiki"
       ],
-      "source_files": [
-        "source_files/bev_3903_hel_wiki.csv"
+      "input_files": [
+        "input_files/bev_3903_hel_wiki.csv"
       ],
       "import_inputs": [
         {
@@ -131,7 +131,7 @@
           "cleaned_csv": "output/zurich_population-bev_3903_hel_wiki.csv"
         }
       ],
-      "cron_schedule": "0 05 4,18 * *"
+      "cron_schedule": "15 1 29 * *"
     },
     {
       "import_name": "Zurich_Population_Number_Of_Birth_By_Sex",
@@ -141,11 +141,11 @@
       "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_sex_wiki.csv",
       "provenance_description": "Population number of birth by sex",
       "scripts": [
-        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_sex_wiki.csv --output_folder=source_files",
-        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_sex_wiki/source_files/bev_4031_sex_wiki.csv --pv_map=bev_4031_sex_wiki/bev_4031_sex_wiki_pvmap.csv --config_file=bev_4031_sex_wiki/bev_4031_sex_wiki_metadata.csv --output_path=bev_4031_sex_wiki/output/zurich_bev_4031_sex_wiki"
+        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_sex_wiki.csv --output_folder=input_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_sex_wiki/input_files/bev_4031_sex_wiki.csv --pv_map=bev_4031_sex_wiki/bev_4031_sex_wiki_pvmap.csv --config_file=bev_4031_sex_wiki/bev_4031_sex_wiki_metadata.csv --output_path=bev_4031_sex_wiki/output/zurich_bev_4031_sex_wiki"
       ],
-      "source_files": [
-        "source_files/bev_4031_sex_wiki.csv"
+      "input_files": [
+        "input_files/bev_4031_sex_wiki.csv"
       ],
       "import_inputs": [
         {
@@ -153,7 +153,7 @@
           "cleaned_csv": "output/zurich_bev_4031_sex_wiki.csv"
         }
       ],
-      "cron_schedule": "0 05 4,18 * *"
+      "cron_schedule": "07 19 29 * *"
     },
     {
       "import_name": "Zurich_Population_By_Sex",
@@ -163,11 +163,11 @@
       "provenance_url": "https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_sex_wiki.csv",
       "provenance_description": "Population by sex dataset",
       "scripts": [
-        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_sex_wiki.csv --output_folder=source_files",
-        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_sex_wiki/source_files/bev_3903_sex_wiki.csv --pv_map=bev_3903_sex_wiki/bev_3903_sex_wiki_pvmap.csv --config_file=bev_3903_sex_wiki/bev_3903_sex_wiki_metadata.csv --output_path=bev_3903_sex_wiki/output/zurich_population-bev_3903_sex_wiki"
+        "../../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_sex_wiki.csv --output_folder=input_files",
+        "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_sex_wiki/input_files/bev_3903_sex_wiki.csv --pv_map=bev_3903_sex_wiki/bev_3903_sex_wiki_pvmap.csv --config_file=bev_3903_sex_wiki/bev_3903_sex_wiki_metadata.csv --output_path=bev_3903_sex_wiki/output/zurich_population-bev_3903_sex_wiki"
       ],
-      "source_files": [
-        "source_files/bev_3903_sex_wiki.csv"
+      "input_files": [
+        "input_files/bev_3903_sex_wiki.csv"
       ],
       "import_inputs": [
         {
@@ -175,7 +175,7 @@
           "cleaned_csv": "output/zurich_population-bev_3903_sex_wiki.csv"
         }
       ],
-      "cron_schedule": "0 05 4,18 * *"
+      "cron_schedule": "55 10 29 * *"
     }
   ]
 }
