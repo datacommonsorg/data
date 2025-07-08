@@ -26,9 +26,10 @@ sys.path.append(
 
 from place_resolver import PlaceResolver
 
-class PlaceResolverTest(unittest.TestCase):
-
+class GetLookupNameTest(unittest.TestCase):
+    
     def test_get_lookup_name(self):
+        """Tests that the lookup name is correctly formed from place name and country."""
         resolver = PlaceResolver()
         place = {
             'place_name': 'Mountain View',
@@ -37,6 +38,7 @@ class PlaceResolverTest(unittest.TestCase):
         self.assertEqual(resolver._get_lookup_name('key', place), 'Mountain View USA')
 
     def test_get_lookup_name_country_in_name(self):
+        """Tests that the country is not appended if it's already in the place name."""
         resolver = PlaceResolver()
         place = {
             'place_name': 'Mountain View, USA',
@@ -45,14 +47,18 @@ class PlaceResolverTest(unittest.TestCase):
         self.assertEqual(resolver._get_lookup_name('key', place), 'Mountain View, USA')
 
     def test_get_lookup_name_use_key(self):
+        """Tests that the key is used as the place name if 'place_name' is not present."""
         resolver = PlaceResolver()
         place = {
             'country': 'USA'
         }
         self.assertEqual(resolver._get_lookup_name('Mountain View', place), 'Mountain View USA')
 
+class ResolveNameDcApiTest(unittest.TestCase):
+
     @patch('place_resolver.PlaceResolver.resolve_name_dc_api_batch')
     def test_resolve_name_dc_api(self, mock_dc_api):
+        """Tests that the DC API is called and returns the correct dcids."""
         resolver = PlaceResolver(config_dict={'dc_api_key': 'test_key'})
         places = {
             'p1': {
@@ -73,6 +79,7 @@ class PlaceResolverTest(unittest.TestCase):
 
     @patch('place_resolver.PlaceResolver.resolve_name_dc_api_batch')
     def test_resolve_name_dc_api_no_results(self, mock_dc_api):
+        """Tests that the DC API handles cases where no results are found for a place."""
         resolver = PlaceResolver(config_dict={'dc_api_key': 'test_key'})
         places = {
             'p1': {
@@ -92,6 +99,7 @@ class PlaceResolverTest(unittest.TestCase):
 
     @patch('place_resolver.PlaceResolver.resolve_name_dc_api_batch')
     def test_resolve_name_dc_api_no_key(self, mock_dc_api):
+        """Tests that the DC API is not called if no API key is provided."""
         resolver = PlaceResolver()
         places = {
             'p1': {
