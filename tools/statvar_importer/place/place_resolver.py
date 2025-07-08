@@ -203,8 +203,8 @@ class PlaceResolver:
         dcid: the data commons id for the place, if found
         placeId: the Google Maps place-id, if found.
          in case maps returns multiple places, the first one is used.
-        lat: approximate latitude for the place
-        lng: approximate longitude for the place
+        latitude: approximate latitude for the place
+        longitude: approximate longitude for the place
     """
         logging.debug(f'Resolving places: {places}...')
         results = {}
@@ -551,7 +551,7 @@ class PlaceResolver:
         there could be multiple places with the same name.
 
     Returns:
-      dictionary with attributes such as placeId, latitude, longitude.
+      dictionary with attributes such as placeId, latitude, and longitude.
     """
         if not name:
             logging.debug(f'Unable to resolve maps place with empty name')
@@ -599,7 +599,10 @@ class PlaceResolver:
                     # Get the lat/lng location
                     if 'geometry' in first_result:
                         if 'location' in first_result['geometry']:
-                            result.update(first_result['geometry']['location'])
+                            loc = first_result['geometry']['location']
+                            _add_to_dict('latitude', loc.get('lat', ''), result)
+                            _add_to_dict('longitude', loc.get('lng', ''),
+                                         result)
                     if result:
                         self._counters.add_counter('maps-api-geocode-results',
                                                    1)
@@ -615,8 +618,10 @@ class PlaceResolver:
         country: str = None,
         admin_area: str = '',
         place_types: list = [],
-    ) -> list:
-        """Returns the maps place ids for the given name using the Place API."""
+    ) -> dict:
+        """Returns a dictionary with attributes for a place such as placeId,
+    latitude, and longitude using the Maps Place API.
+    """
         # Check if the place is in the maps cache.
         place_key = self._get_cache_key([name, country, admin_area])
         cached_place = self._get_cache_value(place_key, 'placeId')
@@ -656,8 +661,9 @@ class PlaceResolver:
                     if 'geometry' in map_result:
                         if 'location' in map_result['geometry']:
                             loc = map_result['geometry']['location']
-                            _add_to_dict('lat', loc.get('lat', ''), result)
-                            _add_to_dict('lng', loc.get('lng', ''), result)
+                            _add_to_dict('latitude', loc.get('lat', ''), result)
+                            _add_to_dict('longitude', loc.get('lng', ''),
+                                         result)
             if result:
                 self._set_cache_value(place_key, result)
                 self._counters.add_counter('maps-api-textsearch-results', 1)
