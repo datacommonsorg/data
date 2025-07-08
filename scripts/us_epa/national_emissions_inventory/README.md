@@ -16,6 +16,16 @@ The EPA's National Emissions Inventory (NEI) data, found at https://www.epa.gov/
 ### Release Frequency:
 EPA NEI data updates every three years
 
+### Autorefresh Type 
+    Fully Autorefresh 
+
+### Script Execution Details
+The below script will download the data.
+`python3 download.py`
+
+The below script will clean the data, Also generate final csv, mcf and tmcf files.
+`python3 process.py`
+
 ### API Output
 These are the attributes that we will use
 | Attribute      				| Description                                               |
@@ -47,13 +57,4 @@ Run the test cases
 
 `run_tests.sh -p scripts/us_epa/national_emissions_inventory`
 
-### Autorefresh Type 
-    Fully Autorefresh 
 
-### Script Execution Details
-
-The below script will download the data.
-`python3 download.py`
-
-The below script will clean the data, Also generate final csv, mcf and tmcf files.
-`python3 process.py`
