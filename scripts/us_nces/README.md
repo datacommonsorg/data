@@ -1,10 +1,62 @@
 # US: National Center for Education Statistics
-
-## About the Dataset
+## Import Overview:
 This dataset has Population Estimates for the National Center for Education Statistics in US for 
 - Private School - 1997-2019
 - School District - 2010-2023
 - Public Schools - 2010-2023
+
+## Source URL:
+  https://nces.ed.gov/ccd/elsi/tableGenerator.aspx 
+
+## Import Type:
+   Using a Selenium script to download data.
+
+## Source Data Availability: P1Y 
+  
+## Autorefresh Type: Semi-Autorefresh 
+  - `/bin/python3 download.py --import_name={"PrivateSchool"(or)"District"(or)"PublicSchool"} --years_to_download= "{select the available years       mentioned under each school type}"`
+
+   For Example:  `/bin/python3 download.py --import_name="PublicSchool" --years_to_download="2023"`.
+    - The input_files folder containing all the files will be present in: 
+    `scripts/us_nces/demographics/public_school/input_files`
+
+ Note: Give one year at a time for District and Public Schools as there are large number of column values.
+ 
+### upload the files manually to GCP bucket for processing using gsutil command.
+    Ex private :
+        gsutil cp -r /scripts/us_nces/demographics/private_school/input_files gs://unresolved_mcf/us_nces/demographics/private_school/semi_automation_input_files/
+    Ex public :
+        gsutil cp -r /scripts/us_nces/demographics/private_school/input_files gs://unresolved_mcf/us_nces/demographics/public_school/semi_automation_input_files/
+    Ex district:
+        gsutil cp -r /scripts/us_nces/demographics/school_district/input_files gs://unresolved_mcf/us_nces/demographics/school_district/semi_automation_input_files/
+
+### Note:
+    The manual part of this process is downloading and uploading the input files to the GCP bucket. Once uploaded, a processing script automatically handles and processes the data directly from the bucket.
+
+### Script Execution Details
+    public    :  python3 private_school/process.py
+    private   :  python3 public_school/process.py
+    district  :  python3 school_district/process.py
+
+
+#### Cleaned Data
+    import_name consists of the school name being used 
+    - "private_school"
+    - "school_district"
+    - "public_school"
+
+Cleaned data will be saved as a CSV file within the following paths.
+- private_school -> [private_school/output_files/us_nces_demographics_private_school.csv]
+- district_school -> [school_district/output_files/us_nces_demographics_district_school.csv]
+- public_school -> [public_school/output_files/us_nces_demographics_public_school.csv]
+
+The Columns for the csv files are as follows
+- school_state_code 
+- year
+- sv_name
+- observation
+- scaling_factor
+- unit
 
 ## The NCES import script operates as follows:
 If it's the beginning of a new year:
@@ -68,8 +120,6 @@ The attributes used for the import are as follows
 | School Grade  	        	| The Number of Students categorised under School Grade. 		|
 | Full-Time Equivalent 			| The Count of Teachers Available.						        |
 
-
-
 ### Import Procedure
 
 #### Downloading the input files using scripts.
@@ -100,36 +150,6 @@ The attributes used for the import are as follows
 
     ##### download.py script
      - The download.py script is the main script. It considers the import_name and year to be downloaded. It downloads, extracts and places the input csv in "input_files" folder under the desired school directory.
-
-
-### Command to Download input file
-  - `/bin/python3 download.py --import_name={"PrivateSchool"(or)"District"(or)"PublicSchool"} --years_to_download= "{select the available years mentioned under each school type}"`
-
-    For Example:  `/bin/python3 download.py --import_name="PublicSchool" --years_to_download="2023"`.
-    - The input_files folder containing all the files will be present in: 
-    `scripts/us_nces/demographics/public_school/input_files`
- - Note: Give one year at a time for District and Public Schools as there are large number of column values.
- 
-
-#### Cleaned Data
-import_name consists of the school name being used 
-- "private_school"
-- "district_school"
-- "public_school"
-
-Cleaned data will be saved as a CSV file within the following paths.
-- private_school -> [private_school/output_files/us_nces_demographics_private_school.csv]
-- district_school -> [school_district/output_files/us_nces_demographics_district_school.csv]
-- public_school -> [public_school/output_files/us_nces_demographics_public_school.csv]
-
-The Columns for the csv files are as follows
-- school_state_code 
-- year
-- sv_name
-- observation
-- scaling_factor
-- unit
-
 
 #### MCFs and Template MCFs
 - private_school -> [private_school/output_files/us_nces_demographics_private_school.mcf]
