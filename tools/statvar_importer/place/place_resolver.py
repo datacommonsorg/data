@@ -657,8 +657,7 @@ class PlaceResolver:
                         if 'location' in map_result['geometry']:
                             loc = map_result['geometry']['location']
                             _add_to_dict('lat', loc.get('lat', ''), result)
-                            _add_to_dict('lng', loc.get('lng', ''),
-                                         result)
+                            _add_to_dict('lng', loc.get('lng', ''), result)
             if result:
                 self._set_cache_value(place_key, result)
                 self._counters.add_counter('maps-api-textsearch-results', 1)

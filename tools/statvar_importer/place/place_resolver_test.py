@@ -26,33 +26,30 @@ sys.path.append(
 
 from place_resolver import PlaceResolver
 
+
 class GetLookupNameTest(unittest.TestCase):
-    
+
     def test_get_lookup_name(self):
         """Tests that the lookup name is correctly formed from place name and country."""
         resolver = PlaceResolver()
-        place = {
-            'place_name': 'Mountain View',
-            'country': 'USA'
-        }
-        self.assertEqual(resolver._get_lookup_name('key', place), 'Mountain View USA')
+        place = {'place_name': 'Mountain View', 'country': 'USA'}
+        self.assertEqual(resolver._get_lookup_name('key', place),
+                         'Mountain View USA')
 
     def test_get_lookup_name_country_in_name(self):
         """Tests that the country is not appended if it's already in the place name."""
         resolver = PlaceResolver()
-        place = {
-            'place_name': 'Mountain View, USA',
-            'country': 'USA'
-        }
-        self.assertEqual(resolver._get_lookup_name('key', place), 'Mountain View, USA')
+        place = {'place_name': 'Mountain View, USA', 'country': 'USA'}
+        self.assertEqual(resolver._get_lookup_name('key', place),
+                         'Mountain View, USA')
 
     def test_get_lookup_name_use_key(self):
         """Tests that the key is used as the place name if 'place_name' is not present."""
         resolver = PlaceResolver()
-        place = {
-            'country': 'USA'
-        }
-        self.assertEqual(resolver._get_lookup_name('Mountain View', place), 'Mountain View USA')
+        place = {'country': 'USA'}
+        self.assertEqual(resolver._get_lookup_name('Mountain View', place),
+                         'Mountain View USA')
+
 
 class ResolveNameDcApiTest(unittest.TestCase):
 
@@ -110,18 +107,14 @@ class ResolveNameDcApiTest(unittest.TestCase):
         self.assertEqual(len(resolved_places), 0)
         mock_dc_api.assert_not_called()
 
+
 class ResolveLatLngTest(unittest.TestCase):
 
     @patch('place_resolver.dc_api_batched_wrapper')
     def test_resolve_latlng_single(self, mock_dc_api):
         """Tests resolving a single lat/lng to a dcid."""
         resolver = PlaceResolver()
-        places = {
-            'loc1': {
-                'latitude': 37.42,
-                'longitude': -122.08
-            }
-        }
+        places = {'loc1': {'latitude': 37.42, 'longitude': -122.08}}
         mock_dc_api.return_value = {
             '37.420000,-122.080000': {
                 'latitude': 37.42,
@@ -131,7 +124,8 @@ class ResolveLatLngTest(unittest.TestCase):
         }
         resolved_places = resolver.resolve_latlng(places)
         self.assertEqual(len(resolved_places), 1)
-        self.assertEqual(resolved_places['loc1']['placeDcids'], ['dc/geoId/0649670'])
+        self.assertEqual(resolved_places['loc1']['placeDcids'],
+                         ['dc/geoId/0649670'])
 
     @patch('place_resolver.dc_api_batched_wrapper')
     def test_resolve_latlng_multiple(self, mock_dc_api):
@@ -161,8 +155,11 @@ class ResolveLatLngTest(unittest.TestCase):
         }
         resolved_places = resolver.resolve_latlng(places)
         self.assertEqual(len(resolved_places), 2)
-        self.assertEqual(resolved_places['loc1']['placeDcids'], ['dc/geoId/0649670'])
-        self.assertEqual(resolved_places['loc2']['placeDcids'], ['dc/geoId/0677000'])
+        self.assertEqual(resolved_places['loc1']['placeDcids'],
+                         ['dc/geoId/0649670'])
+        self.assertEqual(resolved_places['loc2']['placeDcids'],
+                         ['dc/geoId/0677000'])
+
 
 class LookupNamesTest(unittest.TestCase):
 
@@ -170,16 +167,13 @@ class LookupNamesTest(unittest.TestCase):
     def test_lookup_names_single(self, mock_lookup):
         """Tests looking up a single place name."""
         resolver = PlaceResolver()
-        places = {
-            'p1': {
-                'place_name': 'Mountain View'
-            }
-        }
+        places = {'p1': {'place_name': 'Mountain View'}}
         mock_lookup.return_value = [('Mountain View, CA', 'dc/geoId/0649670')]
         resolved_places = resolver.lookup_names(places)
         self.assertEqual(len(resolved_places), 1)
         self.assertEqual(resolved_places['p1']['dcid'], 'dc/geoId/0649670')
-        self.assertEqual(resolved_places['p1']['place-name'], 'Mountain View, CA')
+        self.assertEqual(resolved_places['p1']['place-name'],
+                         'Mountain View, CA')
 
     @patch('place_resolver.PlaceNameMatcher.lookup')
     def test_lookup_names_multiple(self, mock_lookup):
@@ -193,38 +187,31 @@ class LookupNamesTest(unittest.TestCase):
                 'place_name': 'Sunnyvale'
             }
         }
-        
-        mock_lookup.side_effect = [
-            [('Mountain View, CA', 'dc/geoId/0649670')],
-            [('Sunnyvale, CA', 'dc/geoId/0677000')]
-        ]
-        
+
+        mock_lookup.side_effect = [[('Mountain View, CA', 'dc/geoId/0649670')],
+                                   [('Sunnyvale, CA', 'dc/geoId/0677000')]]
+
         resolved_places = resolver.lookup_names(places)
         self.assertEqual(len(resolved_places), 2)
         self.assertEqual(resolved_places['p1']['dcid'], 'dc/geoId/0649670')
-        self.assertEqual(resolved_places['p1']['place-name'], 'Mountain View, CA')
+        self.assertEqual(resolved_places['p1']['place-name'],
+                         'Mountain View, CA')
         self.assertEqual(resolved_places['p2']['dcid'], 'dc/geoId/0677000')
         self.assertEqual(resolved_places['p2']['place-name'], 'Sunnyvale, CA')
-        
+
         # Verify that the mock was called with the correct arguments.
-        calls = [
-            call('Mountain View', 10, {}),
-            call('Sunnyvale', 10, {})
-        ]
+        calls = [call('Mountain View', 10, {}), call('Sunnyvale', 10, {})]
         mock_lookup.assert_has_calls(calls)
 
     @patch('place_resolver.PlaceNameMatcher.lookup')
     def test_lookup_names_no_results(self, mock_lookup):
         """Tests that no results are returned for a place that does not exist."""
         resolver = PlaceResolver()
-        places = {
-            'p1': {
-                'place_name': 'PlaceThatDoesNotExist'
-            }
-        }
+        places = {'p1': {'place_name': 'PlaceThatDoesNotExist'}}
         mock_lookup.return_value = []
         resolved_places = resolver.lookup_names(places)
         self.assertEqual(len(resolved_places), 0)
+
 
 class GetMapsPlaceIdTest(unittest.TestCase):
 
@@ -263,6 +250,7 @@ class GetMapsPlaceIdTest(unittest.TestCase):
         result = resolver.get_maps_placeid('Mountain View')
         self.assertEqual(result, {})
         mock_request.assert_not_called()
+
 
 if __name__ == '__main__':
     unittest.main()
