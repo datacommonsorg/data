@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the 'License');
 # you may not use this file except in compliance with the License.
@@ -50,6 +50,57 @@ class PlaceResolverTest(unittest.TestCase):
             'country': 'USA'
         }
         self.assertEqual(resolver._get_lookup_name('Mountain View', place), 'Mountain View USA')
+
+    @patch('place_resolver.PlaceResolver.resolve_name_dc_api_batch')
+    def test_resolve_name_dc_api(self, mock_dc_api):
+        resolver = PlaceResolver(config_dict={'dc_api_key': 'test_key'})
+        places = {
+            'p1': {
+                'place_name': 'Mountain View'
+            },
+            'p2': {
+                'place_name': 'Sunnyvale'
+            },
+        }
+        mock_dc_api.return_value = {
+            'Mountain View': ['dc/geoId/0649670'],
+            'Sunnyvale': ['dc/geoId/0677000'],
+        }
+        resolved_places = resolver.resolve_name_dc_api(places)
+        self.assertEqual(len(resolved_places), 2)
+        self.assertEqual(resolved_places['p1']['dcid'], 'dc/geoId/0649670')
+        self.assertEqual(resolved_places['p2']['dcid'], 'dc/geoId/0677000')
+
+    @patch('place_resolver.PlaceResolver.resolve_name_dc_api_batch')
+    def test_resolve_name_dc_api_no_results(self, mock_dc_api):
+        resolver = PlaceResolver(config_dict={'dc_api_key': 'test_key'})
+        places = {
+            'p1': {
+                'place_name': 'Mountain View'
+            },
+            'p2': {
+                'place_name': 'PlaceThatDoesNotExist'
+            },
+        }
+        mock_dc_api.return_value = {
+            'Mountain View': ['dc/geoId/0649670'],
+        }
+        resolved_places = resolver.resolve_name_dc_api(places)
+        self.assertEqual(len(resolved_places), 1)
+        self.assertEqual(resolved_places['p1']['dcid'], 'dc/geoId/0649670')
+        self.assertFalse('p2' in resolved_places)
+
+    @patch('place_resolver.PlaceResolver.resolve_name_dc_api_batch')
+    def test_resolve_name_dc_api_no_key(self, mock_dc_api):
+        resolver = PlaceResolver()
+        places = {
+            'p1': {
+                'place_name': 'Mountain View'
+            },
+        }
+        resolved_places = resolver.resolve_name_dc_api(places)
+        self.assertEqual(len(resolved_places), 0)
+        mock_dc_api.assert_not_called()
 
 if __name__ == '__main__':
     unittest.main()
