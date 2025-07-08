@@ -1,27 +1,40 @@
-import tools.statvar_importer.property_value_utils as pv_utils
-from tools.statvar_importer.filter_data_outliers import filter_data_svobs
-from tools.statvar_importer.mcf_diff import diff_mcf_node_pvs, fingerprint_mcf_nodes
-from tools.statvar_importer import mcf_file_util
-from tools.statvar_importer.mcf_filter import drop_existing_mcf_nodes
-from tools.statvar_importer.utils import capitalize_first_char, pvs_has_any_prop, str_from_number
-from config_map import ConfigMap
-from counters import Counters, CounterOptions
-from tools.statvar_importer.schema.schema_resolver import SchemaResolver
-from dc_api_wrapper import dc_api_is_defined_dcid
-from statvar_dcid_generator import get_statvar_dcid
-from name_to_alpha2 import USSTATE_MAP
-from tools.statvar_importer.schema.schema_generator import generate_statvar_name
-from tools.statvar_importer.schema.schema_checker import sanity_check_nodes
-from tools.statvar_importer.schema.schema_generator import generate_schema_nodes
-import file_util
-
-from absl import logging
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the 'License');
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an 'AS IS' BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import csv
 import datetime
 import os
 import re
 import sys
+
+from absl import logging
+
+from config_map import ConfigMap
+from counters import Counters, CounterOptions
+from dc_api_wrapper import dc_api_is_defined_dcid
+import file_util
+from name_to_alpha2 import USSTATE_MAP
+from statvar_dcid_generator import get_statvar_dcid
+import tools.statvar_importer.property_value_utils as pv_utils
+from tools.statvar_importer import mcf_file_util
+from tools.statvar_importer.filter_data_outliers import filter_data_svobs
+from tools.statvar_importer.mcf_diff import diff_mcf_node_pvs, fingerprint_mcf_nodes
+from tools.statvar_importer.mcf_filter import drop_existing_mcf_nodes
+from tools.statvar_importer.schema.schema_checker import sanity_check_nodes
+from tools.statvar_importer.schema.schema_generator import generate_schema_nodes, generate_statvar_name
+from tools.statvar_importer.schema.schema_resolver import SchemaResolver
+from tools.statvar_importer.utils import capitalize_first_char, pvs_has_any_prop, str_from_number
 
 
 class StatVarsMap:
