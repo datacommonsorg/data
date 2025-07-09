@@ -14,6 +14,7 @@
 
 import os
 import io
+import re
 from absl import app
 from absl import flags
 from absl import logging
@@ -36,7 +37,7 @@ flags.DEFINE_string(
         'gcs_folder_path',
         'gs://unresolved_mcf/CensusCountyBusinessPattern',
         'Input directory where config files downloaded.')
-flags.DEFINE_string('year', '2022', 'YYYY to generate stats for.')
+# flags.DEFINE_string('year', '2021', 'YYYY to generate stats for.')
 flags.DEFINE_bool('test', False, 'Run in test mode.')
 
 
@@ -74,13 +75,21 @@ def main(argv):
 
           # Use io.StringIO to treat the string content as a file-like object           
           input_file_obj = io.StringIO(gcs_file_content)
-          # --- Conditional Processing Logic ---
+          year_match = re.search(r'(\d{2})(?:co|msa|totals|detail)\.txt$', filename.lower())
+          # processing_year = FLAGS.year
+          if year_match:
+              two_digit_year = year_match.group(1)
+              processing_year = '20' + two_digit_year
+    
+          else:
+                logging.warning(f"Could not extract 2-digit year from filename '{filename}'")
+
           if 'msa' in filename.lower() and filename.lower().endswith('.txt'): # Explicitly check for .txt extension
             logging.info('Detected CBPMSA .txt file: %s. Initiating CBP MSA processing.', filename)
             processor = CBPMSAProcessor(
                 input_file_obj=input_file_obj,
                 output_dir=FLAGS.output_dir,
-                year=FLAGS.year,
+                year=processing_year,
                 is_test_run=FLAGS.test
             )
             processor.process_cbp_data()
@@ -90,7 +99,7 @@ def main(argv):
             processor = CBPCOProcessor(
                 input_file_obj=input_file_obj,
                 output_dir=FLAGS.output_dir,
-                year=FLAGS.year,
+                year=processing_year,
                 is_test_run=FLAGS.test
             )
             processor.process_co_data()
@@ -100,7 +109,7 @@ def main(argv):
                 processor = ZBPTotalsProcessor(
                     input_file_obj=input_file_obj,
                     output_dir=FLAGS.output_dir,
-                    year=FLAGS.year,
+                    year=processing_year,
                     is_test_run=FLAGS.test
                 )
                 processor.process_zbp_data()
@@ -111,7 +120,7 @@ def main(argv):
                 processor = ZBPDetailProcessor(
                     input_file_obj=input_file_obj,
                     output_dir=FLAGS.output_dir,
-                    year=FLAGS.year,
+                    year=processing_year,
                     is_test_run=FLAGS.test
                 )
                 processor.process_zbp_detail_data()
