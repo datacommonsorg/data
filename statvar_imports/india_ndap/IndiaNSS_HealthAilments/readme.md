@@ -27,7 +27,7 @@ Before ingestion, the following preprocessing is done:
 
   * Columns are cleaned and standardized to match StatVar expectations.
   * StatVars are generated using `stat_var_processor.py`.
-  * Output is written to `health_nss.csv` and corresponding `health_nss.tmcf`.
+  * Output is written to `IndiaNSS_HealthAilments.csv` and corresponding `IndiaNSS_HealthAilments.tmcf`.
 * **Data Quality Checks**:
 
   * Linting is performed using the DataCommons import tool JAR
@@ -50,7 +50,7 @@ Before ingestion, the following preprocessing is done:
   5. Upload final files to:
 
      * `gs://datcom-imports/india_ndap/NDAP_NSS_Health/latest/`
-  6. Trigger `schedule_update_import.sh` manually for test/prod ingestion
+  6. Trigger `run_import.sh` manually for test/prod ingestion
 * **Note**: This pipeline is not fully automated due to manual file retrieval and preprocessing needs.
 
 ---
@@ -71,7 +71,7 @@ python3 stat_var_processor.py \
   --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
-**Purpose**: Generates StatVar MCF and cleaned observation CSV (`health_nss.csv`, `health_nss.tmcf`)
+**Purpose**: Generates StatVar MCF and cleaned observation CSV (`IndiaNSS_HealthAilments.csv`, `IndiaNSS_HealthAilments.tmcf`)
 
 ---
 
@@ -81,8 +81,8 @@ python3 stat_var_processor.py \
 
 ```bash
 java -jar '/path/to/datacommons-import-tool.jar' lint \
-  '/path/to/health_nss.csv' \
-  '/path/to/health_nss.tmcf'
+  '/path/to/IndiaNSS_HealthAilments.csv' \
+  '/path/to/IndiaNSS_HealthAilments.tmcf'
 ```
 
 **Purpose**: Validates final CSV+TMCF for formatting and semantic consistency before ingestion
