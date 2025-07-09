@@ -183,6 +183,12 @@ class PlaceResolver:
         """Save cached results into files."""
         self._save_cache()
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._save_cache()
+
     def resolve_name(self,
                      places: dict,
                      place_types: list = [],
@@ -203,8 +209,8 @@ class PlaceResolver:
         dcid: the data commons id for the place, if found
         placeId: the Google Maps place-id, if found.
          in case maps returns multiple places, the first one is used.
-        lat: approximate latitude for the place
-        lng: approximate longitude for the place
+        latitude: approximate latitude for the place
+        longitude: approximate longitude for the place
     """
         logging.debug(f'Resolving places: {places}...')
         results = {}
@@ -411,8 +417,8 @@ class PlaceResolver:
         results = {}
         resolve_places = []
         coords_to_key = {}
-        latitude_key = config.get('place_latitude_column', 'latitude')
-        longitude_key = config.get('place_longitude_column', 'longitude')
+        latitude_key = self._config.get('place_latitude_column', 'latitude')
+        longitude_key = self._config.get('place_longitude_column', 'longitude')
         for key, place in places.items():
             results[key] = dict(place)
             lat = place.get(latitude_key, '')
@@ -551,7 +557,7 @@ class PlaceResolver:
         there could be multiple places with the same name.
 
     Returns:
-      dictionary with attributes such as placeId, latitude, longitude.
+      dictionary with attributes such as placeId, latitude, and longitude.
     """
         if not name:
             logging.debug(f'Unable to resolve maps place with empty name')
@@ -571,6 +577,7 @@ class PlaceResolver:
         if not self._maps_api_key:
             logging.error(
                 f'No maps key. Please set --maps_api_key for place lookup.')
+            return {}
         params = {
             'key': self._maps_api_key,
             'address': f'{name}',
@@ -598,15 +605,18 @@ class PlaceResolver:
                     # Get the lat/lng location
                     if 'geometry' in first_result:
                         if 'location' in first_result['geometry']:
-                            result.update(first_result['geometry']['location'])
+                            loc = first_result['geometry']['location']
+                            _add_to_dict('latitude', loc.get('lat', ''), result)
+                            _add_to_dict('longitude', loc.get('lng', ''),
+                                         result)
                     if result:
                         self._counters.add_counter('maps-api-geocode-results',
                                                    1)
             # Cache the response
             self._set_cache_value(place_key, result)
-            return [result]
+            return result
 
-        return None
+        return {}
 
     def lookup_maps_placeid(
         self,
@@ -614,8 +624,10 @@ class PlaceResolver:
         country: str = None,
         admin_area: str = '',
         place_types: list = [],
-    ) -> list:
-        """Returns the maps place ids for the given name using the Place API."""
+    ) -> dict:
+        """Returns a dictionary with attributes for a place such as placeId,
+    latitude, and longitude using the Maps Place API.
+    """
         # Check if the place is in the maps cache.
         place_key = self._get_cache_key([name, country, admin_area])
         cached_place = self._get_cache_value(place_key, 'placeId')
@@ -626,6 +638,7 @@ class PlaceResolver:
         if not self._maps_api_key:
             logging.error(
                 f'No maps key. Please set --maps_api_key for place lookup.')
+            return {}
         query_tokens = [name]
         if admin_area:
             query_tokens.append(admin_area)
