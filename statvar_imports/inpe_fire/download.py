@@ -117,7 +117,7 @@ def merge_csv_files(input_directory, output_filepath, downloaded_states_list):
 
 # --- Main Download Logic ---
 if __name__ == "__main__":
-    logging.info("Starting CSV download script with pre-formatted state names.")
+    logging.info("Starting CSV download script.")
 
     # Create download directory if it doesn't exist
     if not os.path.exists(DOWNLOAD_DIR):
