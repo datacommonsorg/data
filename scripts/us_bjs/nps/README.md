@@ -19,7 +19,14 @@ No Preprocessing required.
 
 3. # Autorefresh Type:
 ## Semi-Autorefresh: 
+We can't put this import on a full auto-refresh schedule. The process requires a manual file download because the source uploads the data to a webpage without a static link, making it impossible to automate the download step.
+
+First go to the source link where we can find the data: https://www.icpsr.umich.edu/web/pages/NACJD/
+Search for 'National Prisoner Statistics, [United States]' in the page's search bar and press Enter
+From the results, locate the file with the most recent year in its range (e.g., 1978-2022)
+Click on the file it will redirect to the page like given below (file name should look like National Prisoner Statistics, [United States], 1978-2022 (ICPSR 38871) years and code may vary).
 download the data from https://www.icpsr.umich.edu/web/NACJD/studies/38871
+Click the download dropdown and select delimited. You'll be redirected to a login page; after successfully logging in, the data will download automatically.
 upload the data file at location gs://unresolved_mcf/us_bjs/nps/semiautomation_files
 
 4. # Script Execution Details

@@ -1,5 +1,5 @@
 import pandas as pd
-from absl import flags
+from absl import flags, logging
 from absl import app
 import os, sys
 
@@ -87,13 +87,37 @@ def get_input_file():
 
 def main(args):
     INPUT_FILE_PATH = os.path.join(input_files, FLAGS.input_file)
-    get_input_file()
-    df = pd.read_csv(INPUT_FILE_PATH, delimiter='\t')
-    processed_df = preprocess_data.preprocess_df(df)
-    save_csv(processed_df, FILENAME)
-    generate_tmcf(processed_df)
-    f = open("nps_statvars.mcf", "w+")
-    nps_statvar_writer.write_sv(f)
+    try:
+        get_input_file()
+    except Exception as e:
+        logging.info(f"Error getting input file: {e}")
+    try:
+        df = pd.read_csv(INPUT_FILE_PATH, delimiter='\t')
+        logging.info("input file read successfully.")
+    except FileNotFoundError:
+        logging.fatal(f"Not able to find the input file at {INPUT_FILE_PATH}")
+    except pd.errors.EmptyDataError:
+        logging.fatal(
+            f"Error: Input file '{INPUT_FILE_PATH}' is empty. No data to process."
+        )
+    except Exception as e:
+        logging.fatal(
+            f"An unexpected error occurred while reading the input file: {e}")
+
+    try:
+        processed_df = preprocess_data.preprocess_df(df)
+        save_csv(processed_df, FILENAME)
+        generate_tmcf(processed_df)
+    except IOError as e:
+        logging.info(f"error during saving processed csv")
+    except Exception as e:
+        logging.fatal(f"error during data processing: {e}")
+
+    try:
+        with open("nps_statvars.mcf", "w+") as f:
+            nps_statvar_writer.write_sv(f)
+    except Exception as e:
+        logging.info(f"Error writing statvar file 'nps_statvars.mcf': {e}")
 
 
 if __name__ == '__main__':
