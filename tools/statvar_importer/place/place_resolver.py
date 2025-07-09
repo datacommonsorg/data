@@ -183,6 +183,12 @@ class PlaceResolver:
         """Save cached results into files."""
         self._save_cache()
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self._save_cache()
+
     def resolve_name(self,
                      places: dict,
                      place_types: list = [],

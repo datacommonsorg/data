@@ -14,6 +14,8 @@
 
 import os
 import sys
+import tempfile
+import csv
 import unittest
 from unittest.mock import patch, call
 
@@ -73,6 +75,40 @@ class ResolveNameDcApiTest(unittest.TestCase):
         self.assertEqual(len(resolved_places), 2)
         self.assertEqual(resolved_places['p1']['dcid'], 'geoId/0649670')
         self.assertEqual(resolved_places['p2']['dcid'], 'geoId/0677000')
+
+    @patch('place_resolver.PlaceResolver.resolve_name_dc_api_batch')
+    def test_resolve_name_dc_api_writes_to_cache(self, mock_dc_api):
+        """Tests that the resolved places are written to a cache file."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            cache_file = os.path.join(temp_dir, 'cache.csv')
+            places = {
+                'p1': {
+                    'place_name': 'Mountain View'
+                },
+                'p2': {
+                    'place_name': 'Sunnyvale'
+                },
+            }
+            mock_dc_api.return_value = {
+                'Mountain View': ['geoId/0649670'],
+                'Sunnyvale': ['geoId/0677000'],
+            }
+
+            with PlaceResolver(config_dict={
+                    'dc_api_key': 'test_key',
+                    'places_resolved_csv': cache_file
+            }) as resolver:
+                resolver.resolve_name_dc_api(places)
+
+            # Check that the cache file was written to correctly.
+            with open(cache_file, 'r') as f:
+                reader = csv.DictReader(f)
+                # Extract only the relevant columns into a list of lists.
+                actual_rows = [
+                    [row['place_name'], row['dcid']] for row in reader
+                ]
+                self.assertIn(['Mountain View', 'geoId/0649670'], actual_rows)
+                self.assertIn(['Sunnyvale', 'geoId/0677000'], actual_rows)
 
     @patch('place_resolver.PlaceResolver.resolve_name_dc_api_batch')
     def test_resolve_name_dc_api_no_results(self, mock_dc_api):
