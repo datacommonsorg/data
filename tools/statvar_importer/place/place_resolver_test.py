@@ -199,6 +199,7 @@ class ResolveLatLngTest(unittest.TestCase):
 
 class LookupNamesTest(unittest.TestCase):
 
+    # TODO: Fix this test to not mock PlaceNameMatcher.
     @patch('place_resolver.PlaceNameMatcher.lookup')
     def test_lookup_names_single(self, mock_lookup):
         """Tests looking up a single place name."""
@@ -211,6 +212,7 @@ class LookupNamesTest(unittest.TestCase):
         self.assertEqual(resolved_places['p1']['place-name'],
                          'Mountain View, CA')
 
+    # TODO: Fix this test to not mock PlaceNameMatcher.
     @patch('place_resolver.PlaceNameMatcher.lookup')
     def test_lookup_names_multiple(self, mock_lookup):
         """Tests looking up multiple place names."""
@@ -239,6 +241,7 @@ class LookupNamesTest(unittest.TestCase):
         calls = [call('Mountain View', 10, {}), call('Sunnyvale', 10, {})]
         mock_lookup.assert_has_calls(calls)
 
+    # TODO: Fix this test to not mock PlaceNameMatcher.
     @patch('place_resolver.PlaceNameMatcher.lookup')
     def test_lookup_names_no_results(self, mock_lookup):
         """Tests that no results are returned for a place that does not exist."""
