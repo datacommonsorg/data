@@ -229,6 +229,61 @@ class GetValueListTest(unittest.TestCase):
         self.assertCountEqual([1], _get_value_list(1))
 
 
+class IsDirtyTest(unittest.TestCase):
+
+    def test_initial_state(self):
+        """Tests that the cache is not dirty after initialization."""
+        pv_cache = PropertyValueCache()
+        self.assertFalse(pv_cache.is_dirty())
+
+    def test_dirty_after_add(self):
+        """Tests that the cache is dirty after adding a new entry."""
+        pv_cache = PropertyValueCache()
+        pv_cache.add({'name': 'India', 'dcid': 'country/IND'})
+        self.assertTrue(pv_cache.is_dirty())
+
+    def test_not_dirty_after_save(self):
+        """Tests that the cache is not dirty after saving."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            file_path = os.path.join(temp_dir, 'test.csv')
+            pv_cache = PropertyValueCache(file_path)
+            pv_cache.add({'name': 'India', 'dcid': 'country/IND'})
+            pv_cache.save_cache_file()
+            self.assertFalse(pv_cache.is_dirty())
+
+    def test_dirty_after_update(self):
+        """Tests that the cache is dirty after updating an entry."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            file_path = os.path.join(temp_dir, 'test.csv')
+            pv_cache = PropertyValueCache(file_path)
+            pv_cache.add({'name': 'India', 'dcid': 'country/IND'})
+            pv_cache.save_cache_file()
+            self.assertFalse(pv_cache.is_dirty())
+            pv_cache.add({'name': 'India', 'typeOf': 'Country'})
+            self.assertTrue(pv_cache.is_dirty())
+
+
+class DunderDelTest(unittest.TestCase):
+
+    def test_del(self):
+        """Tests that the cache is saved when the object is deleted."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            file_path = os.path.join(temp_dir, 'test.csv')
+            pv_cache = PropertyValueCache(file_path)
+            pv_cache.add({'name': 'India', 'dcid': 'country/IND'})
+            del pv_cache
+            with open(file_path, 'r') as f:
+                self.assertIn('country/IND', f.read())
+
+    def test_del_not_dirty(self):
+        """Tests that the cache is not saved if it is not dirty."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            file_path = os.path.join(temp_dir, 'test.csv')
+            pv_cache = PropertyValueCache(file_path)
+            del pv_cache
+            self.assertFalse(os.path.exists(file_path))
+
+
 class PropertyValueCacheFileTest(unittest.TestCase):
 
     def test_save_cache_file(self):
