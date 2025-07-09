@@ -341,23 +341,30 @@ class PropertyValueCache:
             [c for c in normalized_key if c.isalnum() or c == ' '])
         return normalized_key
 
-    def get_lookup_key(self, value: str, prop: str = '') -> str:
+    def get_lookup_key(self, value: Union[str, list], prop: str = '') -> str:
         """Returns key for lookup, normalizing if needed.
 
         Args:
-          value: string value to be looked up in the index.
-             The value is notmalized if needed.
+          value: String or list of strings to be looked up in the index.
+            If a list is provided, only the first element is used.
+            The value is normalized if needed.
           prop: (optional) property for the value.
 
         Returns:
-          string to be looked up in the property index
-          which is value normalized if needed.
+          String to be looked up in the property index,
+          which is the value normalized if needed.
         """
+        if not isinstance(value, (str, list)):
+            logging.warning(
+                f'Unexpected type for lookup value: {type(value).__name__}.'
+                ' Coercing to string.')
         if isinstance(value, list):
+            if not value:
+                return ''
             value = value[0]
         if self._normalize_key:
             return self.normalize_string(value)
-        return value
+        return str(value)
 
     def _add_props(self, key_props: list = [], props: list = []):
         # Add any new key property.

@@ -284,6 +284,41 @@ class DunderDelTest(unittest.TestCase):
             self.assertFalse(os.path.exists(file_path))
 
 
+class GetLookupKeyTest(unittest.TestCase):
+
+    def test_normalization_enabled(self):
+        """Tests that the key is normalized when normalization is enabled."""
+        pv_cache = PropertyValueCache(normalize_key=True)
+        self.assertEqual('abcdef', pv_cache.get_lookup_key('Abc-Def'))
+
+    def test_normalization_disabled(self):
+        """Tests that the key is not normalized when normalization is disabled."""
+        pv_cache = PropertyValueCache(normalize_key=False)
+        self.assertEqual('Abc-Def', pv_cache.get_lookup_key('Abc-Def'))
+
+    def test_list_input(self):
+        """Tests that the first element is used when the input is a list."""
+        pv_cache = PropertyValueCache()
+        self.assertEqual('abc', pv_cache.get_lookup_key(['Abc', 'Def']))
+
+    def test_empty_list_input(self):
+        """Tests that an empty string is returned for an empty list."""
+        pv_cache = PropertyValueCache()
+        self.assertEqual('', pv_cache.get_lookup_key([]))
+
+    def test_unsupported_type(self):
+        """Tests that a warning is logged for an unsupported type."""
+        pv_cache = PropertyValueCache()
+        with self.assertLogs(level='WARNING') as log:
+            self.assertEqual('123', pv_cache.get_lookup_key(123))
+            self.assertIn('Unexpected type', log.output[0])
+
+    def test_empty_string_input(self):
+        """Tests that an empty string is returned for an empty string."""
+        pv_cache = PropertyValueCache()
+        self.assertEqual('', pv_cache.get_lookup_key(''))
+
+
 class PropertyValueCacheFileTest(unittest.TestCase):
 
     def test_save_cache_file(self):
