@@ -21,6 +21,7 @@ import csv
 import os
 import sys
 import unicodedata
+from typing import Any, Union
 
 from absl import app
 from absl import flags
@@ -432,8 +433,14 @@ def flatten_dict(pvs: dict, props: list) -> list:
     return pvs_list
 
 
-def _get_value_list(values: str) -> list:
-    """Returns a list of unique values from a comma separated string."""
+def _get_value_list(values: Union[str, list, set, Any]) -> list:
+    """Returns a list of unique values from a string, list, set, or other types.
+
+    - If the input is a string, it is split by commas.
+    - If the input is a list or set, it is used directly.
+    - Other types are converted to a single-element list.
+    - Duplicate values are removed.
+    """
     if not values:
         return []
     values_list = []
