@@ -24,7 +24,7 @@ from absl import logging
 from google.cloud import storage
 flags.DEFINE_string(
         'config_file_path',
-        'gs://datcom-import-test/statvar_imports/india_ndap/IndiaNSS_HealthAilments/IndiaNSS_HealthAilments/download_config.json',
+        'gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json',
         'Input directory where config files downloaded.')
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
