@@ -1,0 +1,206 @@
+INDICATOR,ID_INDICATOR,NOM_INDICATOR,REGION_INDICATOR,SDMX-CODE_INDICATOR,RGION_INDICATOR,REGION,ID_REGION,FREQ,TIME_PERIOD,OBS_VALUE
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2007,1467
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2009,1781
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2010,1786
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2011,1593
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2012,1626
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2013,1753
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2015,2069
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2016,6627
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2017,2372
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2018,2479
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2019,2705
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2020,3411
+SANTE1,SANTE1,Nombre de formations sanitaires/établissements de santé par type/taille de capacité,,,CI,CI,CI,A,2021,3437
+SANTE2,SANTE2,Nombre de Centres Hospitaliers Universitaires,,,CI,CI,CI,A,2013,4
+SANTE2,SANTE2,Nombre de Centres Hospitaliers Universitaires,,,CI,CI,CI,A,2015,4
+SANTE2,SANTE2,Nombre de Centres Hospitaliers Universitaires,,,CI,CI,CI,A,2016,4
+SANTE2,SANTE2,Nombre de Centres Hospitaliers Universitaires,,,CI,CI,CI,A,2017,4
+SANTE2,SANTE2,Nombre de Centres Hospitaliers Universitaires,,,CI,CI,CI,A,2018,5
+SANTE2,SANTE2,Nombre de Centres Hospitaliers Universitaires,,,CI,CI,CI,A,2020,5
+SANTE2,SANTE2,Nombre de Centres Hospitaliers Universitaires,,,CI,CI,CI,A,2021,5
+SANTE3,SANTE3,Nombre de Centres Hospitaliers Régionaux,,,CI,CI,CI,A,2013,17
+SANTE3,SANTE3,Nombre de Centres Hospitaliers Régionaux,,,CI,CI,CI,A,2015,17
+SANTE3,SANTE3,Nombre de Centres Hospitaliers Régionaux,,,CI,CI,CI,A,2016,17
+SANTE3,SANTE3,Nombre de Centres Hospitaliers Régionaux,,,CI,CI,CI,A,2017,17
+SANTE3,SANTE3,Nombre de Centres Hospitaliers Régionaux,,,CI,CI,CI,A,2018,17
+SANTE3,SANTE3,Nombre de Centres Hospitaliers Régionaux,,,CI,CI,CI,A,2019,17
+SANTE3,SANTE3,Nombre de Centres Hospitaliers Régionaux,,,CI,CI,CI,A,2020,19
+SANTE3,SANTE3,Nombre de Centres Hospitaliers Régionaux,,,CI,CI,CI,A,2021,20
+SANTE4,SANTE4,Nombre d'Institut Nationaux d'Hygienne Publique,,,CI,CI,CI,A,2020,32
+SANTE4,SANTE4,Nombre d'Institut Nationaux d'Hygienne Publique,,,CI,CI,CI,A,2021,31
+SANTE5,SANTE5,Nombre d'Hopitaux Généraux,,,CI,CI,CI,A,2013,84
+SANTE5,SANTE5,Nombre d'Hopitaux Généraux,,,CI,CI,CI,A,2015,84
+SANTE5,SANTE5,Nombre d'Hopitaux Généraux,,,CI,CI,CI,A,2016,123
+SANTE5,SANTE5,Nombre d'Hopitaux Généraux,,,CI,CI,CI,A,2017,103
+SANTE5,SANTE5,Nombre d'Hopitaux Généraux,,,CI,CI,CI,A,2018,101
+SANTE5,SANTE5,Nombre d'Hopitaux Généraux,,,CI,CI,CI,A,2019,134
+SANTE5,SANTE5,Nombre d'Hopitaux Généraux,,,CI,CI,CI,A,2020,112
+SANTE5,SANTE5,Nombre d'Hopitaux Généraux,,,CI,CI,CI,A,2021,114
+SANTE6,SANTE6,Nombre de Centre de Santé Urbains Communautaires,,,CI,CI,CI,A,2020,30
+SANTE6,SANTE6,Nombre de Centre de Santé Urbains Communautaires,,,CI,CI,CI,A,2021,37
+SANTE7,SANTE7,Nombre de Pharmacie Publique,,,CI,CI,CI,A,2013,308
+SANTE7,SANTE7,Nombre de Pharmacie Publique,,,CI,CI,CI,A,2015,370
+SANTE7,SANTE7,Nombre de Pharmacie Publique,,,CI,CI,CI,A,2016,458
+SANTE7,SANTE7,Nombre de Pharmacie Publique,,,CI,CI,CI,A,2017,458
+SANTE7,SANTE7,Nombre de Pharmacie Publique,,,CI,CI,CI,A,2018,557
+SANTE7,SANTE7,Nombre de Pharmacie Publique,,,CI,CI,CI,A,2020,520
+SANTE7,SANTE7,Nombre de Pharmacie Publique,,,CI,CI,CI,A,2021,453
+SANTE8,SANTE8,Nombre d'officine de Pharmacies privées,,,CI,CI,CI,A,2013,574
+SANTE8,SANTE8,Nombre d'officine de Pharmacies privées,,,CI,CI,CI,A,2015,631
+SANTE8,SANTE8,Nombre d'officine de Pharmacies privées,,,CI,CI,CI,A,2016,509
+SANTE8,SANTE8,Nombre d'officine de Pharmacies privées,,,CI,CI,CI,A,2017,843
+SANTE8,SANTE8,Nombre d'officine de Pharmacies privées,,,CI,CI,CI,A,2018,726
+SANTE8,SANTE8,Nombre d'officine de Pharmacies privées,,,CI,CI,CI,A,2020,959
+SANTE8,SANTE8,Nombre d'officine de Pharmacies privées,,,CI,CI,CI,A,2021,892
+SANTE9,SANTE9,Nombre de Service de Maternité,,,CI,CI,CI,A,2013,943
+SANTE9,SANTE9,Nombre de Service de Maternité,,,CI,CI,CI,A,2015,1137
+SANTE9,SANTE9,Nombre de Service de Maternité,,,CI,CI,CI,A,2016,1347
+SANTE9,SANTE9,Nombre de Service de Maternité,,,CI,CI,CI,A,2017,1477
+SANTE9,SANTE9,Nombre de Service de Maternité,,,CI,CI,CI,A,2018,1521
+SANTE9,SANTE9,Nombre de Service de Maternité,,,CI,CI,CI,A,2020,1543
+SANTE9,SANTE9,Nombre de Service de Maternité,,,CI,CI,CI,A,2021,1733
+SANTE10,SANTE10,Nombre de Centres Médicaux d'Entreprises,,,CI,CI,CI,A,2020,54
+SANTE10,SANTE10,Nombre de Centres Médicaux d'Entreprises,,,CI,CI,CI,A,2021,80
+SANTE11,SANTE11,Nombre de Polycliniques,,,CI,CI,CI,A,2020,17
+SANTE11,SANTE11,Nombre de Polycliniques,,,CI,CI,CI,A,2021,20
+SANTE12,SANTE12,Nombre de Cliniques,,,CI,CI,CI,A,2020,269
+SANTE12,SANTE12,Nombre de Cliniques,,,CI,CI,CI,A,2021,423
+SANTE13,SANTE13,Nombre de lits,,,CI,CI,CI,A,2013,4385
+SANTE13,SANTE13,Nombre de lits,,,CI,CI,CI,A,2015,8389
+SANTE13,SANTE13,Nombre de lits,,,CI,CI,CI,A,2016,6652
+SANTE13,SANTE13,Nombre de lits,,,CI,CI,CI,A,2017,6944
+SANTE13,SANTE13,Nombre de lits,,,CI,CI,CI,A,2018,6732
+SANTE13,SANTE13,Nombre de lits,,,CI,CI,CI,A,2019,7182
+SANTE13,SANTE13,Nombre de lits,,,CI,CI,CI,A,2020,6797
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2007,1135
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2008,1244
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2009,1328
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2010,1391
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2011,1468
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2012,1608
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2013,2412
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2015,3215
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2016,3540
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2017,3886
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2018,4045
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2019,4191
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2020,4435
+SANTE14,SANTE14,Nombre de medecins,,,CI,CI,CI,A,2021,4951
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2007,2852
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2008,2955
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2009,3039
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2010,3162
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2011,3494
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2012,2084
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2013,5939
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2015,7989
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2016,10038
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2017,10745
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2018,11644
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2019,12146
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2020,12994
+SANTE15,SANTE15,Nombre d'infirmiers,,,CI,CI,CI,A,2021,12728
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2007,1320
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2008,1429
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2009,1618
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2010,1713
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2011,1932
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2012,2020
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2013,3317
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2015,2814
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2016,4011
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2017,4452
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2018,5511
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2019,6047
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2020,6744
+SANTE16,SANTE16,Nombre de sages femmes,,,CI,CI,CI,A,2021,7134
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2007,168
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2008,198
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2009,198
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2015,1511
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2016,2541
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2017,2816
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2018,3173
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2020,3734
+SANTE17,SANTE17,Nombre de techniciens de laboratoires,,,CI,CI,CI,A,2021,4069
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2007,230
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2008,257
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2009,317
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2015,456
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2016,730
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2017,823
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2018,931
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2019,945
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2020,1029
+SANTE18,SANTE18,Nombre de pharmaciens,,,CI,CI,CI,A,2021,976
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2000,98.558
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2001,74.044
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2002,82.979
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2003,76.662
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2004,85.682
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2005,71.443
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2006,79.109
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2007,84.296
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2008,95.475
+SANTE19,SANTE19,Dépenses publiques de santé,,,CI,CI,CI,A,2009,110.462
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2000,74
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2001,72
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2002,66
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2003,61
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2004,51
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2005,61
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2006,77
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2007,94
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2008,91
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2009,95
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2010,90
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2011,73
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2012,98
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2013,90
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2015,78.89
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2016,94.6
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2017,92.45
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2018,92
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2019,90.8
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2020,84.5
+SANTE20,SANTE20,Taux de vaccination (BCG),,,CI,CI,CI,A,2021,86
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2000,83.6
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2001,80.4
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2002,78.84
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2003,72.31
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2004,76.65
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2005,72.29
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2006,76.08
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2007,76.8
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2008,84.16
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2009,89.46
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2010,94.55
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2011,116
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2012,120
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2013,302.61
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2015,155.49
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2016,154.58
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2017,164.11
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2018,189.86
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2019,229.84
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2020,173.43
+SANTE21,SANTE21,Incidence des maladies (Paludisme),,,CI,CI,CI,A,2021,493.65
+SANTE23,SANTE23,Nombre de mères ayant fourni au mois un soin prénatal (%),,,CI,CI,CI,A,2012,535958
+SANTE23,SANTE23,Nombre de mères ayant fourni au mois un soin prénatal (%),,,CI,CI,CI,A,2015,833281
+SANTE23,SANTE23,Nombre de mères ayant fourni au mois un soin prénatal (%),,,CI,CI,CI,A,2016,861781
+SANTE23,SANTE23,Nombre de mères ayant fourni au mois un soin prénatal (%),,,CI,CI,CI,A,2017,864792
+SANTE23,SANTE23,Nombre de mères ayant fourni au mois un soin prénatal (%),,,CI,CI,CI,A,2018,916967
+SANTE23,SANTE23,Nombre de mères ayant fourni au mois un soin prénatal (%),,,CI,CI,CI,A,2019,902762
+SANTE23,SANTE23,Nombre de mères ayant fourni au mois un soin prénatal (%),,,CI,CI,CI,A,2020,928160
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2000,35
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2001,37.71
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2002,40.78
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2003,41.3
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2004,42.73
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2005,57
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2006,60.03
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2007,63.74
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2008,62.9
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2009,63.2
+SANTE24,SANTE24,Pourcentage d'accouchemnts assistés par du personnel de santé,,,CI,CI,CI,A,2021,75.2

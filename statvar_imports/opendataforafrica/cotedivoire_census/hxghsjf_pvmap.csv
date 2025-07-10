@@ -1,0 +1,11 @@
+key,prop,val,p1,v1,p2,v2,p3,v3,p4,v4
+OBS_VALUE,value,{Number},,,,,,,,
+ID_REGION,observationAbout,{Data},,,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,,,
+KN.S2,gender,Male,populationType,Person,measuredProperty,count,,,,
+KN.S3,gender,Female,populationType,Person,measuredProperty,count,,,,
+KN.S4,populationType,Person,measuredProperty,count,,,,,,
+KN.S5,populationType,Person,gender,Male,measurementDenominator,Count_Person_Female,measuredProperty,count,unit,Percent
+KN.S7,populationType,Household,measuredProperty,count,,,,,,
+KN.S8,statType,meanValue,measuredProperty,householdSize,populationType,Household,,,,
