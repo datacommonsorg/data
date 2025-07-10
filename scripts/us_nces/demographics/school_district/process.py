@@ -26,6 +26,7 @@ import sys
 from absl import flags
 from absl import app
 from absl import logging
+
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, MODULE_DIR + '/../..')
 from common.us_education import USEducation
@@ -40,6 +41,7 @@ flags.DEFINE_string(
     'gcs_input_file_path',
     'gs://unresolved_mcf/us_nces/demographics/school_district/semi_automation_input_files',
     'Path to gcs bucket')
+
 
 class NCESDistrictSchool(USEducation):
     """
@@ -57,6 +59,7 @@ class NCESDistrictSchool(USEducation):
     _exclude_list = EXCLUDE_LIST
     _school_id = DROP_BY_VALUE
     _renaming_columns = RENAMING_DISTRICT_COLUMNS
+
 
 def main(_):
     try:
@@ -122,6 +125,7 @@ def main(_):
 
     except Exception as e:
         logging.fatal(f"Error While Running District School Process: {e} ")
+
 
 if __name__ == "__main__":
     app.run(main)

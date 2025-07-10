@@ -47,6 +47,7 @@ flags.DEFINE_string(
     'gs://unresolved_mcf/us_nces/demographics/private_school/semi_automation_input_files',
     'Path to gcs bucket')
 
+
 class NCESPrivateSchool(USEducation):
     """
     This Class has requried methods to generate Cleaned CSV,
@@ -152,6 +153,7 @@ def main(_):
         logging.info("Main Method Completed For Private School District ")
     except Exception as e:
         logging.fatal(f"Error While Running Private School Process: {e} ")
+
 
 if __name__ == "__main__":
     app.run(main)
