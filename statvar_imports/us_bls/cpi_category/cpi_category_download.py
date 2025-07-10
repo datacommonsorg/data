@@ -248,7 +248,7 @@ def unzip_all_excel_files(zip_file_path: str, temp_extract_base_path: str, final
             except Exception as e:
                 logging.error(f"Error removing ZIP file {zip_file_path}: {e}")
             
-  return success # Return the success status
+    return success # Return the success status
 
 def list_and_log_files_alphabetically(folder_path: str):
     """
