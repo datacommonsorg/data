@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""End-to-end tests for the Import Validation framework."""
+"""Unit tests for the Import Validation framework."""
 
 import unittest
 import os
@@ -22,7 +22,7 @@ import subprocess
 import pandas as pd
 
 
-class TestImportValidationE2E(unittest.TestCase):
+class ImportValidationTest(unittest.TestCase):
 
     def setUp(self):
         self.test_dir = tempfile.TemporaryDirectory()

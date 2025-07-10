@@ -20,7 +20,7 @@ from absl import logging
 import pandas as pd
 import sys
 
-from .config import Config
+from .validation_config import ValidationConfig
 from .report_generator import ReportGenerator
 from .validator import Validator
 from .util import filter_dataframe
@@ -47,7 +47,7 @@ class ValidationRunner:
 
     def __init__(self, validation_config_path: str, differ_output: str,
                  stats_summary: str, validation_output: str):
-        self.config = Config(validation_config_path)
+        self.config = ValidationConfig(validation_config_path)
         self.validation_output = validation_output
         self.validator = Validator()
         self.validation_results = []

@@ -11,13 +11,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Module for the Config class."""
+"""This module defines the Config class, which is responsible for loading and
+parsing the main validation configuration file.
+
+The configuration file is expected to be in JSON format and defines the set of
+validation rules to be executed, along with any shared definitions for data
+scopes or variable sets.
+"""
 
 import json
 from typing import Any, Dict, List
 
 
-class Config:
+class ValidationConfig:
     """
     A class to handle the loading and parsing of the validation configuration.
     """
