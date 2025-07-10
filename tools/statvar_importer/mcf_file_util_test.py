@@ -348,3 +348,8 @@ class TestAddPVToNode(unittest.TestCase):
                                      node,
                                      normalize=False)
         self.assertEqual(node, {"prop1": '"value , 1","value2","value3"'})
+
+    def test_add_pv_node_mixed_types(self):
+        node = {"prop1": 'value1'}
+        mcf_file_util.add_pv_to_node("prop1", 10, node, normalize=False)
+        self.assertEqual(node, {"prop1": 'value1,10'})
