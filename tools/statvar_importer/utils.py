@@ -24,8 +24,17 @@ import tempfile
 from typing import Union, Optional, Dict, List
 
 import pandas as pd
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(_SCRIPT_DIR)
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
+
 import file_util
-from util.download_util import download_file_from_url
+
+from download_util import download_file_from_url
 
 
 def capitalize_first_char(string: str) -> str:
