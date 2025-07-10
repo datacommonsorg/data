@@ -1,16 +1,16 @@
- # Copyright 2025 Google LLC
- #
- # Licensed under the Apache License, Version 2.0 (the "License");
- # you may not use this file except in compliance with the License.
- # You may obtain a copy of the License at
- #
- #      http://www.apache.org/licenses/LICENSE-2.0
- #
- # Unless required by applicable law or agreed to in writing, software
- # distributed under the License is distributed on an "AS IS" BASIS,
- # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- # See the License for the specific language governing permissions and
- # limitations under the License.
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
  
  
  
@@ -64,7 +64,7 @@ def download_file(url: str, save_path: str):
 
     try:
         logging.info(f"Attempting to download: {url}")
-        response = requests.get(url, stream=True, headers=headers, timeout=10)
+        response = requests.get(url, stream=True, headers=headers, timeout=50)
         response.raise_for_status() # Raise an HTTPError for bad responses (4xx or 5xx)
 
         # Ensure the directory for save_path exists
@@ -118,7 +118,7 @@ def get_year_month_from_filename(filename: str) -> tuple[int, int] | None:
     return None
 
 def unzip_all_excel_files(zip_file_path: str, temp_extract_base_path: str, final_destination_base_path: str,
-                          cpi_u_w_rules: dict[str, list[int]], c_cpi_u_rules: dict[str, int]):
+                          cpi_u_w_rules: dict[str, list[int]], c_cpi_u_rules: dict[str, int])-> bool:
     """
     Unzips a specified ZIP file to a temporary directory.
     It then moves identified CPI Excel files into their respective category subfolders,
@@ -131,16 +131,18 @@ def unzip_all_excel_files(zip_file_path: str, temp_extract_base_path: str, final
                               Only files matching these rules are moved.
         c_cpi_u_rules (dict): Rules for c-cpi-u (e.g., {'start_year': 2021}).
                               Only files matching these rules (even months >= start_year) are moved.
+    Returns:
+        bool: True if the unzipping and processing was successful, False otherwise.
     """
     if not os.path.exists(zip_file_path):
         logging.error(f"Error: ZIP file not found at {zip_file_path}")
-        return
+        return False # Indicate failure
 
     zip_basename = os.path.basename(zip_file_path).replace('.zip', '')
     temp_extract_dir = os.path.join(temp_extract_base_path, f"{zip_basename}_unzipped_temp")
     os.makedirs(temp_extract_dir, exist_ok=True)
     logging.info(f"Created temporary extraction directory: {temp_extract_dir}")
-
+    success = False # Initialize success flag, assumes failure until proven otherwise
     try:
         with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
             logging.info(f"Contents of {os.path.basename(zip_file_path)}: {zip_ref.namelist()}")
@@ -216,13 +218,19 @@ def unzip_all_excel_files(zip_file_path: str, temp_extract_base_path: str, final
                 # else:
                 #     logging.debug(f"Skipping non-Excel file: {file_name} from zip.")
 
-        if not found_cpi_files:
-            logging.info(f"No *relevant* CPI Excel files found in {os.path.basename(zip_file_path)} based on specified rules.")
+        if found_cpi_files:
+            logging.info(f"Successfully processed relevant CPI Excel files from {os.path.basename(zip_file_path)}.")
+            success = True
+        else:
+            logging.info(f"No *relevant* CPI Excel files found or processed from {os.path.basename(zip_file_path)} based on specified rules.")
+            success = False # Explicitly set to false if no relevant files processed
 
     except zipfile.BadZipFile:
         logging.error(f"Error: {os.path.basename(zip_file_path)} is not a valid ZIP file.")
+        success = False # Explicitly set to False on bad zip
     except Exception as e:
         logging.error(f"An unexpected error occurred while unzipping/moving {os.path.basename(zip_file_path)}: {e}")
+        success = False # Explicitly set to False for other unexpected errors
     finally:
         if os.path.exists(temp_extract_dir):
             try:
@@ -230,14 +238,17 @@ def unzip_all_excel_files(zip_file_path: str, temp_extract_base_path: str, final
                 logging.info(f"Removed temporary extraction directory: {temp_extract_dir}")
             except Exception as e:
                 logging.error(f"Error removing temporary directory {temp_extract_dir}: {e}")
-
-        if os.path.exists(zip_file_path):
+             
+        # Only remove the ZIP file if the overall unzipping and moving was successful.
+        # If it failed, keeping the ZIP might be useful for debugging.
+        if success and os.path.exists(zip_file_path):
             try:
                 os.remove(zip_file_path)
+                logging.info(f"Removed original ZIP file: {os.path.basename(zip_file_path)}")
             except Exception as e:
                 logging.error(f"Error removing ZIP file {zip_file_path}: {e}")
-            logging.info(f"Removed original ZIP file: {os.path.basename(zip_file_path)}")
-
+            
+  return success # Return the success status
 
 def list_and_log_files_alphabetically(folder_path: str):
     """
@@ -400,9 +411,13 @@ def main():
             logging.error(f"Download of {zip_url} failed after multiple retries: {e}")
 
         if download_successful:
-            unzip_all_excel_files(zip_file_path, output_base_folder, output_base_folder,
+            unzip_successful =unzip_all_excel_files(zip_file_path, output_base_folder, output_base_folder,
                                   cpi_u_w_rules=cpi_u_w_filter_rules,
                                   c_cpi_u_rules=c_cpi_u_filter_rules)
+            if not unzip_successful:
+                logging.fatal(f"CRITICAL ERROR: Unzipping or processing of {filename} failed. Cannot proceed.")
+            else:
+                logging.info(f"Successfully processed ZIP for Year {year}.")
 
     logging.info("\n--- Listing files in respective folders after all downloads/extractions ---")
     logging.info("Files in 'cpi-u' folder:")
