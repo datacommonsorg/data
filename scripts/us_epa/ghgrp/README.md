@@ -1,64 +1,118 @@
-# Import for EPA's GHGRP data
+### US EPA GHGRP Import
+This directory contains scripts and configurations to download, preprocess, and import data from the U.S. Environmental Protection Agency's Greenhouse Gas Reporting Program (GHGRP).
 
-This directory contains scripts to download and import the US EPA's Greenhouse
-Gas Reporting Program data from
-https://www.epa.gov/sites/default/files/2020-11/2019_data_summary_spreadsheets.zip
+GHGRP collects greenhouse gas emissions data from large facilities in the U.S., including power plants, oil & gas systems, and other industrial sources. This import prepares standardized observations and metadata for integration into the Data Commons knowledge graph.
 
-## Resolution
+### 1. Source Information
+***Base Data URL Template:***
+`https://www.epa.gov/system/files/other-files/{year}-10/{year_minus_1}_data_summary_spreadsheets.zip`
 
-We use the provided "crosswalk" between facilities and EIA, and assume that reporting facilities
-were included in the import from [EPA GHG facility import](../facility/README.md)
+***Crosswalk File URL:***
+`https://www.epa.gov/system/files/documents/{yr}-04/ghgrp_oris_power_plant_crosswalk_12_13_21.xlsx`
 
-## Generating and Validating Artifacts
+**Source Data Type: Excel (.xlsx) files, per year**
 
-1. To download crosswalks, tables and regenerate the TMCF/CSV/MCF, run:
+***Release Frequency:*** Annual (typically in October for the previous calendar year)
 
-    [download:]
-        '''
-        python3 download.py
-        ```
-        
-    [process:]
-        ```
-        python3 process.py
-        ``` 
-            
+`Download Coverage:`
+Currently supports years 2010–latest
 
-2. To run unit tests:
+### 2. Directory Structure and File Outputs
+`Input Files` (after running download.py)
+Stored in: `tmp_data/`
 
-      ```
-      python3 -m unittest discover -v -s ../ -p "*_test.py"
-      ```
-      or
-      ```
-      cd ../../../
-      ./run_tests.sh -p scripts/us_epa/ghgrp
-      ```
-      
-    To test Downloader class:
-        ```
-        python3 download_test.py
-        ```
+**Yearly GHGRP Excel files:**
 
-3. To validate the import, run the [dc-import](https://github.com/datacommonsorg/import#using-import-tool) tool as:
+ghgp_data_2010.xlsx
+ghgp_data_2011.xlsx
+...
+ghgp_data_2023.xlsx
 
-    ```
-    dc-import lint import_data/*
-    ```
+**Extracted facility-specific CSVs from sheets:**
 
-    This produced the following report:
+2015_oil_and_gas.csv
+2016_direct_emitters.csv
+2017_gathering_and_boosting.csv
+...
 
-    ```
-      {
-        "counterSet": {
-          "counters": {
-            "Existence_NumChecks": "4362098",
-            "Existence_NumDcCalls": "29",
-            "NumNodeSuccesses": "396460",
-            "NumPVSuccesses": "3171680",
-            "NumRowSuccesses": "396460"
-          }
-        }
-      }
-    ```
+**Crosswalk file:**
 
+`crosswalks.csv`
+
+`Output Files `(after running process.py)
+Stored in: `import_data/`
+
+**Observational data:**
+
+all_data.csv
+observations.tmcf
+
+**Metadata and schema files:**
+
+gas_node.mcf
+gas_sv.mcf
+sources_node.mcf
+sources_sv.mcf
+schema.mcf
+
+### 3. Running the Pipeline
+**Step 1: Download Data and Extract Sheets**
+Run the following to download Excel files and extract relevant sheets into CSVs:
+
+`python3 download.py`
+
+**Step 2: Process Extracted Files into Import Artifacts**
+
+`python3 process.py`
+
+### 4. Testing
+Run Unit Tests
+From repo root:
+
+`python3 -m unittest discover -v -s ../ -p "*_test.py"`
+
+Or via the test runner:
+
+`cd ../../../`
+`./run_tests.sh -p scripts/us_epa/ghgrp`
+
+To test the Downloader class in isolation:
+
+`python3 download_test.py`
+
+### 5. Validation
+
+**Lint the generated files using the Data Commons Import Tool:**
+
+dc-import lint import_data/*
+Sample Lint Report Output
+
+{
+  "counterSet": {
+    "counters": {
+      "Existence_NumChecks": "4362098",
+      "Existence_NumDcCalls": "29",
+      "NumNodeSuccesses": "396460",
+      "NumPVSuccesses": "3171680",
+      "NumRowSuccesses": "396460"
+    }
+  }
+}
+
+### 6. Update Cadence & Refresh Process
+Frequency: Yearly (manual refresh when new data is published by EPA)
+
+Autorefresh: Not fully automated due to manual URL structure and file checking
+
+Steps to Refresh:
+
+Update the download script logic for the new year
+
+Run download.py and process.py
+
+Validate outputs with dc-import lint
+
+Upload artifacts to GCS and ingest into Data Commons
+
+### 7. Notes
+This import assumes EPA facilities are already linked via the facility crosswalk (see: Facility README).
