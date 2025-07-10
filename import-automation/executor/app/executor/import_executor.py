@@ -353,11 +353,13 @@ class ImportExecutor:
 
     def _get_import_input_files(self, import_input, absolute_import_dir):
         input_files = []
+        import_prefix = ''
         template_mcf = []
         if pattern := import_input.get('template_mcf'):
             template_mcf = glob.glob(os.path.join(absolute_import_dir, pattern))
-            import_prefix = os.path.splitext(os.path.basename(
-                template_mcf[0]))[0]
+            if template_mcf:
+                import_prefix = os.path.splitext(
+                    os.path.basename(template_mcf[0]))[0]
             input_files.extend(template_mcf)
 
         cleaned_csv = []
@@ -369,7 +371,7 @@ class ImportExecutor:
         if pattern := import_input.get('node_mcf'):
             node_mcf = glob.glob(os.path.join(absolute_import_dir, pattern))
             input_files.extend(node_mcf)
-            if not import_prefix:
+            if not import_prefix and node_mcf:
                 import_prefix = os.path.splitext(os.path.basename(
                     node_mcf[0]))[0]
         return input_files, import_prefix
@@ -381,10 +383,11 @@ class ImportExecutor:
         Invokes DC import tool to generate resolved mcf.
         """
         import_inputs = import_spec.get('import_inputs', [])
+        import_prefix_list = []
         for import_input in import_inputs:
-
             input_files, import_prefix = self._get_import_input_files(
                 import_input, absolute_import_dir)
+            import_prefix_list.append(import_prefix)
             if not import_prefix:
                 logging.error(
                     'Skipping genmcf due to missing import input spec.')
@@ -422,10 +425,12 @@ class ImportExecutor:
                             src=filepath,
                             dest=dest,
                         )
+        return import_prefix_list
 
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
                                   absolute_import_dir: str, import_spec: dict,
-                                  version: str) -> bool:
+                                  version: str,
+                                  import_prefix_list: list) -> bool:
         """ 
         Performs validations on import data.
         """
@@ -445,15 +450,17 @@ class ImportExecutor:
 
         # Trigger validations for each tmcf/csv under import_inputs.
         import_inputs = import_spec.get('import_inputs', [])
+        i = 0
         for import_input in import_inputs:
-
-            import_files, import_prefix = self._get_import_input_files(
-                import_input, absolute_import_dir)
+            import_prefix = import_prefix_list[i]
+            i += 1
+            if not import_prefix:
+                logging.error('Skipping validation due to missing import spec.')
+                continue
 
             validation_output_path = os.path.join(absolute_import_dir,
                                                   import_prefix, 'validation')
-            current_data_path = os.path.join(absolute_import_dir, import_prefix,
-                                             'validation', '*.mcf')
+            current_data_path = os.path.join(validation_output_path, '*.mcf')
             previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
             summary_stats = os.path.join(validation_output_path,
                                          'summary_report.csv')
@@ -620,7 +627,7 @@ class ImportExecutor:
 
             if self.config.invoke_import_tool:
                 logging.info("Invoking import tool genmcf")
-                self._invoke_import_tool(
+                import_prefix_list = self._invoke_import_tool(
                     absolute_import_dir=absolute_import_dir,
                     relative_import_dir=relative_import_dir,
                     version=version,
@@ -634,7 +641,8 @@ class ImportExecutor:
                     relative_import_dir=relative_import_dir,
                     absolute_import_dir=absolute_import_dir,
                     import_spec=import_spec,
-                    version=version)
+                    version=version,
+                    import_prefix_list=import_prefix_list)
                 logging.info(
                     f'Validations completed with status: {validation_status}')
             else:
