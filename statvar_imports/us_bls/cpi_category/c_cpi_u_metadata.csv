@@ -2,4 +2,4 @@ parameter,value
 mapped_rows,5
 mapped_columns,2
 header_rows,5
-output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod,#input"

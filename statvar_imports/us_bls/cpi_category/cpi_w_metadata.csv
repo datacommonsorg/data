@@ -4,3 +4,4 @@ mapped_columns,2
 header_rows,5
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
 aggregate_duplicate_svobs,last
+input_rows,16
