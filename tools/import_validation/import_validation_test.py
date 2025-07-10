@@ -39,10 +39,39 @@ class TestValidation(unittest.TestCase):
                                                         validation_output)
         validation.run_validations()
 
-        expected = pd.read_csv(result_file)
-        actual = pd.read_csv(os.path.join(module_dir, 'validation_output.csv'))
+        expected = pd.read_csv(result_file, keep_default_na=False)
+        actual = pd.read_csv(os.path.join(module_dir, 'validation_output.csv'), keep_default_na=False)
         assert_frame_equal(actual, expected)
 
+    def test_max_date_latest_validation(self):
+        result_file = os.path.join(module_dir, 'test', 'expected_max_date_output.csv')
+        config_file = os.path.join(module_dir, 'test', 'test_max_date_config.json')
+        stats_summary_file = os.path.join(module_dir, 'test', 'stats_summary_max_date_test.csv')
+        # differ_output is not used by MaxDate_Latest, so pass a dummy or empty path
+        dummy_differ_output = os.path.join(module_dir, 'test', 'differ_output.csv') # Or simply ''
+        validation_output_file = os.path.join(module_dir, 'test_max_date_validation_output.csv')
+
+        validation = import_validation.ImportValidation(
+            validation_config=config_file,
+            differ_output=dummy_differ_output, # Not used by this specific validation
+            stats_summary=stats_summary_file,
+            validation_output=validation_output_file)
+        validation.run_validations()
+
+        expected_df = pd.read_csv(result_file, keep_default_na=False)
+        actual_df = pd.read_csv(validation_output_file, keep_default_na=False)
+        
+        # Sort by 'test' description column to ensure consistent row order for comparison if needed,
+        # though the order should be deterministic from the config file.
+        # expected_df = expected_df.sort_values(by='test').reset_index(drop=True)
+        # actual_df = actual_df.sort_values(by='test').reset_index(drop=True)
+
+        try:
+            assert_frame_equal(actual_df, expected_df)
+        except AssertionError as e:
+            print("Actual DataFrame that caused test failure:")
+            print(actual_df.to_csv(index=False))
+            raise e
 
 if __name__ == '__main__':
     unittest.main()
