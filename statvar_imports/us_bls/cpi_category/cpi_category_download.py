@@ -283,7 +283,7 @@ def main():
 
     # Get current date to determine the latest available data.
     # Keeping the fixed date for consistent testing based on prompt's context (June 10, 2025).
-    today = datetime.date(2025, 6, 10)
+    today = datetime.date.today()
     current_year = today.year
     current_month = today.month
 
