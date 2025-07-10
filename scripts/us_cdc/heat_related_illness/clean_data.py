@@ -38,7 +38,7 @@ with open("./config.json", 'r', encoding='utf-8') as config_f:
 flags.DEFINE_string(
     'config_file_path',
     'gs://datcom-import-test/scripts/us_cdc/heat_related_illness/EPHHeatRelatedIllness/configs.py',
-    'Input directory where config files downloaded.')
+    'Config file path')
 
 current_year = datetime.now().year
 
