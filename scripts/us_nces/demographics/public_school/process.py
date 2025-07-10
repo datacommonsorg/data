@@ -42,7 +42,6 @@ flags.DEFINE_string(
     'gs://unresolved_mcf/us_nces/demographics/public_school/semi_automation_input_files',
     'Path to gcs bucket')
 
-
 class NCESPublicSchool(USEducation):
     """
     This Class has requried methods to generate Cleaned CSV,
@@ -59,10 +58,6 @@ class NCESPublicSchool(USEducation):
     _exclude_list = EXCLUDE_LIST
     _school_id = DROP_BY_VALUE
     _renaming_columns = RENAMING_PUBLIC_COLUMNS
-
-
-# pylint:enable=too-few-public-methods
-
 
 def main(_):
     try:
@@ -137,7 +132,6 @@ def main(_):
 
     except Exception as e:
         logging.fatal(f"Error While Running Public School Process: {e} ")
-
-
+        
 if __name__ == "__main__":
     app.run(main)

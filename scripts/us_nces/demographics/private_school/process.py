@@ -47,7 +47,6 @@ flags.DEFINE_string(
     'gs://unresolved_mcf/us_nces/demographics/private_school/semi_automation_input_files',
     'Path to gcs bucket')
 
-
 class NCESPrivateSchool(USEducation):
     """
     This Class has requried methods to generate Cleaned CSV,
@@ -76,7 +75,6 @@ class NCESPrivateSchool(USEducation):
 
 
 def main(_):
-
     try:
         logging.info("Main Method Starts For Private School ")
 
@@ -152,24 +150,8 @@ def main(_):
         loader.generate_mcf()
         loader.generate_tmcf()
         logging.info("Main Method Completed For Private School District ")
-        # try:
-        #     "data cleaning process "
-        #     if os.path.exists(gcs_base_path):
-        #         logging.info(f"Deleting input directory: {gcs_base_path}")
-
-        #         shutil.rmtree(gcs_base_path)
-        #         logging.info("Input directory deleted successfully.")
-        #     else:
-        #         logging.warning(
-        #             f"Input directory not found, skipping deletion: {gcs_base_path}"
-        #         )
-        # except OSError as e:
-        #     logging.error(
-        #         f"Error deleting input directory {gcs_base_path}: {e}")
-
     except Exception as e:
         logging.fatal(f"Error While Running Private School Process: {e} ")
-
 
 if __name__ == "__main__":
     app.run(main)

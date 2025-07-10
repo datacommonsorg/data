@@ -21,8 +21,8 @@ MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)
 from process import NCESPrivateSchool
 
-TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "datasets")
-EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "expected_files")
+TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "sample_input")
+EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "sample_output")
 
 
 class TestProcess(unittest.TestCase):
