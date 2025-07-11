@@ -12,19 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json, os, requests, sys
-from pathlib import Path
+import json
+import os
+import requests
+import sys
 from absl import app, logging, flags
 from retry import retry
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('input_file_path', 'input_files', 'Input files path')
 flags.DEFINE_string(
-    'config_file', 'gs://unresolved_mcf/cdc/environmental/import_configs.json',
+    'config_file',
+    'gs://unresolved_mcf/cdc/environmental/StandardizedPrecipitationEvapotranspirationIndex/latest/import_configs.json',
     'Config file path')
 
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-_INPUT_FILE_PATH = None
 sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
 import file_util
 
@@ -40,57 +41,46 @@ def download_files(importname, configs):
         response.raise_for_status()
         if response.status_code == 200:
             if not response.content:
-                logging.fatal(
-                    f"No data available for URL: {url}. Aborting download.")
+                logging.fatal(f"No data available for URL: {url}")
                 return
-            filename = os.path.join(_INPUT_FILE_PATH, input_file_name)
-            with file_util.FileIO(filename, 'wb') as f:
+            with file_util.FileIO(input_file_name, 'wb') as f:
                 f.write(response.content)
         else:
             logging.error(
-                f"Failed to download file from URL: {url}. Status code: {response.status_code}"
-            )
+                f"Failed to download file. Status code: {response.status_code}")
 
     try:
         for config in configs:
             if config["import_name"] == importname:
-                files = config["files"]
-                for file_info in files:
-                    url_new = file_info["url"]
-                    logging.info(f"URL from config file {url_new}")
+                for file_info in config["files"]:
+                    url = file_info["url"]
                     input_file_name = file_info["input_file_name"]
-                    logging.info(f"Input File Name {input_file_name}")
+                    logging.info(f"Downloading to file: {input_file_name}")
 
-                    get_record_count = requests.get(
-                        url_new.replace('.csv', record_count_query))
-                    if get_record_count.status_code == 200:
+                    count_response = requests.get(
+                        url.replace('.csv', record_count_query))
+                    if count_response.status_code == 200:
                         record_count = json.loads(
-                            get_record_count.text
-                        )[0]['COLUMN_ALIAS_GUARD__count']
-                        logging.info(
-                            f"Numbers of records found for the URL {url_new} is {record_count}"
-                        )
-                        url_new = f"{url_new}?$limit={record_count}&$offset=0"
-                        download_with_retry(url_new, input_file_name)
-                        logging.info(
-                            "Successfully downloaded the source data...!!!!")
+                            count_response.text)[0]['COLUMN_ALIAS_GUARD__count']
+                        full_url = f"{url}?$limit={record_count}&$offset=0"
+                        download_with_retry(full_url, input_file_name)
+                        logging.info(f"Finished downloading: {input_file_name}")
                     else:
                         logging.error(
-                            f"Failed to download files, Status code: {get_record_count.status_code}"
+                            f"Failed to get record count. Status code: {count_response.status_code}"
                         )
 
     except Exception as e:
-        logging.fatal(f"Error downloading URL {url_new} - {e}")
+        logging.fatal(f"Error during download: {e}")
 
 
 def main(_):
-    """Main function to download the csv files."""
-    global _INPUT_FILE_PATH
-    _INPUT_FILE_PATH = os.path.join(_FLAGS.input_file_path)
-    _INPUT_FILE_PATH = os.path.join(_MODULE_DIR, _FLAGS.input_file_path)
-    Path(_INPUT_FILE_PATH).mkdir(parents=True, exist_ok=True)
+    if len(sys.argv) < 2:
+        logging.fatal("Import name must be provided as a command line argument")
+        return
+
     importname = sys.argv[1]
-    logging.info(f'Loading config: {_FLAGS.config_file}')
+    logging.info(f"Reading config file: {_FLAGS.config_file}")
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
         config = json.load(f)
     download_files(importname, config)
