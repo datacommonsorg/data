@@ -37,7 +37,7 @@ _CONFIG_OVERRIDE_FILE: str = 'config_override.json'
 _FLAGS = flags.FLAGS
 
 flags.DEFINE_string('mode', '', 'Options: update or schedule.')
-flags.DEFINE_string('gke_project_id', '',
+flags.DEFINE_string('gcp_project_id', '',
                     'GCP Project where import executor runs.')
 flags.DEFINE_string('config_project_id', 'datcom-204919',
                     'GCS Project for the config file.')
@@ -86,15 +86,17 @@ def _get_import_spec(repo_dir: str, absolute_import_path: str,
     )
 
 
-def _override_configs(filename: str,
+def _override_configs(override_fp: str, manifest_fp: str,
                       config: configs.ExecutorConfig) -> configs.ExecutorConfig:
+    # Read configs from the manifest file.
+    d = json.load(open(manifest_fp))
+    new_config = dataclasses.replace(config, **d["config_override"])
     # Read configs from the local file.
-    d = json.load(open(filename))
-
+    d = json.load(open(override_fp))
     # Update config with any fields and values provided in the local file.
     # In case of any errors, the line below will raise an Exception which will
     # report the problem which shoud be fixed in the local config json file.
-    return dataclasses.replace(config, **d["configs"])
+    return dataclasses.replace(new_config, **d["configs"])
 
 
 def _get_cloud_config(filename: str) -> Dict:
@@ -243,8 +245,8 @@ def main(_):
     mode = _FLAGS.mode
     absolute_import_path = _FLAGS.absolute_import_path
 
-    if not _FLAGS.gke_project_id:
-        raise Exception("Flag: gke_project_id must be provided.")
+    if not _FLAGS.gcp_project_id:
+        raise Exception("Flag: gcp_project_id must be provided.")
 
     if not mode or (mode not in ['update', 'schedule']):
         raise Exception('Flag: mode must be set to \'update\' or \'schedule\'')
@@ -260,7 +262,7 @@ def main(_):
     repo_dir = cwd.split("data")[0] + "data"
     logging.info(f'{mode} called with the following:')
     logging.info(f'Config Project ID: {_FLAGS.config_project_id}')
-    logging.info(f'GKE (Import Executor) Project ID: {_FLAGS.gke_project_id}')
+    logging.info(f'GCP Project ID: {_FLAGS.gcp_project_id}')
     logging.info(f'Import: {absolute_import_path}')
     logging.info(f'Repo root directory: {repo_dir}')
 
@@ -271,12 +273,16 @@ def main(_):
     cfg = configs.ExecutorConfig(**config_dict['configs'])
 
     # Update the GCP project id to use with the configs.
-    cfg.gcp_project_id = _FLAGS.gke_project_id
+    cfg.gcp_project_id = _FLAGS.gcp_project_id
 
+    manifest_fp = os.path.join(repo_dir,
+                               absolute_import_path.split(":")[0],
+                               cfg.manifest_filename)
     logging.info(
-        f'Updating any config fields from local file: {_FLAGS.config_override}.'
-    )
-    cfg = _override_configs(_FLAGS.config_override, cfg)
+        f'Updating any config fields from local file: {_FLAGS.config_override} \
+        and manifest_file {manifest_fp}.')
+
+    cfg = _override_configs(_FLAGS.config_override, manifest_fp, cfg)
 
     logging.info('Reading Cloud scheduler configs from GCS.')
     scheduler_config_dict = _get_cloud_config(_FLAGS.scheduler_config_filename)

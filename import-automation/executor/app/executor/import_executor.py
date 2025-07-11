@@ -935,12 +935,13 @@ def _create_venv(requirements_path: Iterable[str], venv_dir: str,
       Same exceptions as subprocess.run.
   """
     with tempfile.NamedTemporaryFile(mode='w', suffix='.sh') as script:
-        script.write(f'python3 -m venv --system-site-packages {venv_dir}\n')
+        script.write(
+            f'python3 -m venv --system-site-packages {venv_dir} > /dev/null\n')
         script.write(f'. {venv_dir}/bin/activate\n')
         for path in requirements_path:
             if os.path.exists(path):
                 script.write(
-                    f'python3 -m pip install --no-cache-dir --requirement {path}\n'
+                    f'python3 -m pip install --no-cache-dir --requirement {path} > /dev/null\n'
                 )
         script.flush()
 
