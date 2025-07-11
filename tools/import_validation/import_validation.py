@@ -73,7 +73,7 @@ class ImportValidation:
             self.differ_results = pd.read_csv(differ_output)
             print('Differ results\n:', self.differ_results)
         else:
-            logging.info(f'No differ resuults loaded')
+            logging.info(f'No differ results loaded')
             self.differ_results = pd.DataFrame()
 
         self.validation_map = {
