@@ -20,17 +20,20 @@ import sys
 
 from absl import app
 from absl import logging
-from property_value_cache import PropertyValueCache, flatten_dict
 
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPT_DIR)
 sys.path.append(os.path.dirname(_SCRIPT_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))))
 sys.path.append(
-    os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
+    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(_SCRIPT_DIR))),
+                 'util'))
 
 import download_util
 import file_util
+
+from property_value_cache import PropertyValueCache, flatten_dict
 from wiki_place_resolver import WikiPlaceResolver
 
 _TEST_DIR = os.path.join(_SCRIPT_DIR, "test_data")
