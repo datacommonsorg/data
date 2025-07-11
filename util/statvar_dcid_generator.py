@@ -350,6 +350,9 @@ _PREPEND_APPEND_REPLACE_MAP = {
     'toCurrency': {
         'prepend': 'ToCurrency_',
     },
+    'internetUsageLocation': {
+        'prepend': 'InternetUsageAt',
+    }
 }
 
 # This is a list of boolean properties
