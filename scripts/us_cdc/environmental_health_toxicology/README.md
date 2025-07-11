@@ -9,7 +9,7 @@ This repository manages the ingestion of the **Standardized Precipitation Evapot
 
 ---
 
-## 📊 Dataset Summary
+## Dataset Summary
 
 - **Source:** CDC - National Environmental Public Health Tracking Network  
 - **URL:** [CDC SPEI Dataset](https://data.cdc.gov/resource/6nbv-ifib.csv)
@@ -20,7 +20,7 @@ This repository manages the ingestion of the **Standardized Precipitation Evapot
 
 ---
 
-## 🔁 Import Pipeline Stages
+## Import Pipeline Stages
 
 1. **Download**
    - Utilizes `requests` to fetch data via CDC API endpoint.
@@ -37,7 +37,7 @@ This repository manages the ingestion of the **Standardized Precipitation Evapot
 
 4. **Linting**
    - The import is linted using `datacommons-import-tool`.
-   - ⚠️ **Current Issue:** `lint` reports a failure related to missing or invalid year range in the dataset. This is under investigation and similar to a previously known issue.
+   - **Current Issue:** `lint` reports a failure related to missing or invalid year range in the dataset. This is under investigation and similar to a previously known issue.
 
 5. **Cloud Deployment**
    - Uses `run_import.sh` to deploy to Cloud Run with Docker support.
@@ -47,7 +47,7 @@ This repository manages the ingestion of the **Standardized Precipitation Evapot
 
 ---
 
-## 🧪 Testing
+## Testing
 
 To run parsing locally:
 
