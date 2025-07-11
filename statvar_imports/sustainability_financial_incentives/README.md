@@ -37,7 +37,7 @@ python download_and_convert.py --output_csv=latest_incentives.csv
 ### Output
 
 The script generates:
-- **JSON file**: Downloaded to the input folder
+- **JSON file**: Downloaded to the input_files directory
 - **CSV file**: Converted data ready for Data Commons ingestion
 - **Detailed logs**: Processing status and file locations
 

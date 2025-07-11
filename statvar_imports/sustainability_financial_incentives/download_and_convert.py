@@ -36,8 +36,8 @@ flags.DEFINE_string('gcs_bucket', 'datacommons_public',
                     'GCS bucket name containing the data')
 flags.DEFINE_string('gcs_base_path', 'source_csv/sustainability_financial_incentives',
                     'Base path in GCS bucket')
-flags.DEFINE_string('input_folder', 'input_folder',
-                    'Local folder to store downloaded files')
+flags.DEFINE_string('input_files', 'input_files',
+                    'Local directory to store downloaded files')
 flags.DEFINE_string('output_csv', 'financial_incentives_data.csv',
                     'Output CSV file name')
 flags.DEFINE_string('json_filename', 'financial_incentives_prod_data.json',
@@ -195,18 +195,19 @@ def main(argv):
     
     # Construct GCS path and local path
     gcs_file_path = f"{FLAGS.gcs_base_path}/{latest_folder}/{FLAGS.json_filename}"
-    local_json_path = os.path.join(FLAGS.input_folder, FLAGS.json_filename)
+    local_json_path = os.path.join(FLAGS.input_files, FLAGS.json_filename)
     
     # Download the JSON file
     if not download_json_file(FLAGS.gcs_bucket, gcs_file_path, local_json_path):
         logging.fatal(f"Failed to download JSON file from {gcs_file_path} to {os.path.abspath(local_json_path)}")
     
     # Convert JSON to CSV
-    if not convert_json_to_csv(local_json_path, FLAGS.output_csv):
-        logging.fatal(f"Failed to convert JSON to CSV from {os.path.abspath(local_json_path)} to {os.path.abspath(FLAGS.output_csv)}")
+    csv_output_path = os.path.join(FLAGS.input_files, FLAGS.output_csv)
+    if not convert_json_to_csv(local_json_path, csv_output_path):
+        logging.fatal(f"Failed to convert JSON to CSV from {os.path.abspath(local_json_path)} to {os.path.abspath(csv_output_path)}")
     
     logging.info(f"Successfully processed data from {latest_folder}")
-    logging.info(f"Output CSV file: {os.path.abspath(FLAGS.output_csv)}")
+    logging.info(f"Output CSV file: {os.path.abspath(csv_output_path)}")
     return 0
 
 
