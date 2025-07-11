@@ -133,8 +133,7 @@ def create_or_update_import_schedule(absolute_import_name: str,
         json_encoded_config = json.dumps(config.get_data_refresh_config())
         args = [
             f'--import_name={absolute_import_name}',
-            f'--import_config={json_encoded_config}',
-            '--enable_cloud_logging'
+            f'--import_config={json_encoded_config}', '--enable_cloud_logging'
         ]
         env_vars = {}
         job = cloud_run.create_or_update_cloud_run_job(
