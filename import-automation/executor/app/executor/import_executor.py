@@ -485,6 +485,7 @@ class ImportExecutor:
             else:
                 logging.error(
                     'Skipping differ tool due to missing latest mcf file')
+                differ_output = ''
 
             logging.info('Invoking validation script...')
             validation = ImportValidation(config_file_path, differ_output,
@@ -526,9 +527,7 @@ class ImportExecutor:
                            process: subprocess.CompletedProcess) -> None:
         script_paths = import_spec.get('scripts')
         import_name = import_spec['import_name']
-        if not (mount_path := self.config.gcs_volume_mount_dir):
-            mount_path = os.path.join(self.config.local_repo_dir, 'mnt')
-        self._create_mount_point(mount_path,
+        self._create_mount_point(self.config.gcs_volume_mount_dir,
                                  self.config.cleanup_gcs_volume_mount,
                                  absolute_import_dir, import_name)
         for path in script_paths:
