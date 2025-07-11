@@ -7,18 +7,12 @@ from pathlib import Path
 from absl import app
 from absl import flags
 from datetime import datetime
-from google.cloud import storage
-
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
-import file_util
-from io import StringIO
 from absl import logging
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output_path',
-                    'gs://unresolved_mcf/us_fema/national_risk_index/latest/',
-                    'The local path to download the files')
+                    'output',
+                    'The local path to save the output files')
 
 INPUT_TO_OUTPUT_PATHS = {
     "source_data/NRI_Table_Counties.csv": "nri_counties_table.csv",
@@ -86,14 +80,6 @@ def rename_file(file_path, nri_ver):
     return new_file_path
 
 
-def rename_gcs_file_path(gcs_path, nri_vers):
-    file_name_with_ext = gcs_path.split("/")[-1]
-    file_name, ext = file_name_with_ext.rsplit(".", 1)
-    new_file_name_with_ext = f"{file_name}_{nri_vers}.{ext}"
-    new_gcs_path = gcs_path.replace(file_name_with_ext, new_file_name_with_ext)
-    return new_gcs_path
-
-
 def process_csv(input_path, output_path, csv_structure_f, out_put_file_name):
     try:
         data_table = pd.read_csv(input_path)
@@ -105,6 +91,7 @@ def process_csv(input_path, output_path, csv_structure_f, out_put_file_name):
 
         # the column structure should be the same between the county and tract tables
         # so we normalize it with the list of fields "csv_structure"
+        os.makedirs(output_path, exist_ok=True)
         with open(csv_structure_f, "r") as json_file:
             csv_structure = json.load(json_file)
         normalized_table = data_table[csv_structure]
@@ -116,9 +103,8 @@ def process_csv(input_path, output_path, csv_structure_f, out_put_file_name):
         # geoID in the field "DCID_GeoID"
         normalized_table.insert(0, "DCID_GeoID",
                                 data_table.apply(fips_to_geoid, axis=1))
-        new_output_path = rename_gcs_file_path(output_path, nri_month_year)
-        normalized_table.to_csv(out_put_file_name)
-        file_util.file_copy(out_put_file_name, new_output_path)
+        full_output_file_path = os.path.join(output_path, out_put_file_name)
+        normalized_table.to_csv(full_output_file_path)
         new_input_file = rename_file(input_path, nri_month_year)
         os.rename(input_path, new_input_file)
     except FileNotFoundError as e:
@@ -131,9 +117,7 @@ def main(argv):
 
     for input_path in INPUT_TO_OUTPUT_PATHS:
         out_put_file_name = INPUT_TO_OUTPUT_PATHS[input_path]
-        output_path_new = FLAGS.output_path.rstrip(
-            "/") + "/" + out_put_file_name
-        process_csv(input_path, output_path_new, "output/csv_columns.json",
+        process_csv(input_path, FLAGS.output_path, "output/csv_columns.json",
                     str(out_put_file_name))
 
 
