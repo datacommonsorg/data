@@ -21,5 +21,8 @@
             "resource_limits": {"cpu": "1", "memory": "4G"},
             "user_script_timeout": 1800
         }
-    ]
+    ],
+    "config_override":{
+        "ignore_validation_status": false
+   }
 }
