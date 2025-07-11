@@ -1,0 +1,10 @@
+# Auto generated using command: "/usr/local/google/home/sudhisha/bls_jolts_june5/data/statvar_imports/database_on_indian_economy/india_rbi_state_statistics/../../../tools/statvar_importer/stat_var_processor.py --input_data=/usr/local/google/home/sudhisha/bls_jolts_june5/data/statvar_imports/database_on_indian_economy/india_rbi_state_statistics/testdata/agriculture_input.xlsx --pv_map=/usr/local/google/home/sudhisha/bls_jolts_june5/data/statvar_imports/database_on_indian_economy/india_rbi_state_statistics/agriculture_pvmap.csv --config_file=/usr/local/google/home/sudhisha/bls_jolts_june5/data/statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_metadata.csv --places_resolved_csv=/usr/local/google/home/sudhisha/bls_jolts_june5/data/statvar_imports/database_on_indian_economy/india_rbi_state_statistics/rbi_places_resolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=/usr/local/google/home/sudhisha/bls_jolts_june5/data/statvar_imports/database_on_indian_economy/india_rbi_state_statistics/testdata/agriculture_output" on 2025-07-11 06:33:23.423479
+
+Node: dcid:Area_FarmInventory_CoarseCereal
+typeOf: dcid:StatisticalVariable
+name: "Area used for food grains"
+populationType: dcid:FarmInventory
+measuredProperty: dcid:area
+statType: dcid:measuredValue
+farmInventoryType: dcid:CoarseCereal
+
