@@ -526,9 +526,7 @@ class ImportExecutor:
                            process: subprocess.CompletedProcess) -> None:
         script_paths = import_spec.get('scripts')
         import_name = import_spec['import_name']
-        if not (mount_path := self.config.gcs_volume_mount_dir):
-            mount_path = os.path.join(self.config.local_repo_dir, 'mnt')
-        self._create_mount_point(mount_path,
+        self._create_mount_point(self.config.gcs_volume_mount_dir,
                                  self.config.cleanup_gcs_volume_mount,
                                  absolute_import_dir, import_name)
         for path in script_paths:
