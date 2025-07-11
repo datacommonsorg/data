@@ -1,0 +1,8 @@
+Node: E:infrastructure_output->E0
+observationAbout: C:infrastructure_output->observationAbout
+observationDate: C:infrastructure_output->observationDate
+variableMeasured: C:infrastructure_output->variableMeasured
+value: C:infrastructure_output->value
+unit: C:infrastructure_output->unit
+observationPeriod: C:infrastructure_output->observationPeriod
+typeOf: dcs:StatVarObservation

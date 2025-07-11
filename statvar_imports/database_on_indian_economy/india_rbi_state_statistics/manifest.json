@@ -1,0 +1,95 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "India_RBI_State_Statistics",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.rbi.org.in/Scripts/AnnualPublications.aspx?head=Handbook%20of%20Statistics%20on%20Indian%20States",
+      "provenance_description": "Handbook of statistics on Indian states from Reserve Bank of India.",
+      "scripts": [ 
+        "rbi_download.py",
+        "run.sh"
+      ],
+      "source_files": [
+        "input_files/agriculture/*.xlsx",
+        "input_files/environment/*.xlsx",
+        "input_files/infrastructure/*.xlsx",
+        "input_files/price_and_wages/*.xlsx"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/agriculture/agriculture_output.tmcf",
+          "cleaned_csv": "output_files/agriculture/agriculture_output.csv"
+        },
+        {
+          "template_mcf": "output_files/environment/state_wise_expenditure_on_relief_on_natural_calamities_output.tmcf",
+          "cleaned_csv": "output_files/environment/state_wise_expenditure_on_relief_on_natural_calamities_output.csv"
+        },
+        {
+          "template_mcf": "output_files/environment/state_wise_forest_cover_output.tmcf",
+          "cleaned_csv": "output_files/environment/state_wise_forest_cover_output.csv"
+        },
+        {
+          "template_mcf": "output_files/environment/state_wise_sdg_score_output.tmcf",
+          "cleaned_csv": "output_files/environment/state_wise_sdg_score_output.csv"
+        },
+        {
+          "template_mcf": "output_files/environment/state_wise_tree_cover_output.tmcf",
+          "cleaned_csv": "output_files/environment/state_wise_tree_cover_output.csv"
+        },
+        {
+          "template_mcf": "output_files/environment/sub_division_wise_annual_rainfall_output.tmcf",
+          "cleaned_csv": "output_files/environment/sub_division_wise_annual_rainfall_output.csv"
+        },
+        {
+          "template_mcf": "output_files/price_and_wages/price_and_wages_output.tmcf",
+          "cleaned_csv": "output_files/price_and_wages/price_and_wages_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_availability_of_power_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_availability_of_power_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_electricity_transmission_distribution_losses_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_electricity_transmission_distribution_losses_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_installed_capacity_of_power_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_installed_capacity_of_power_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_length_of_national_highways_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_length_of_national_highways_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_length_of_roads_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_length_of_roads_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_length_of_state_highways_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_length_of_state_highways_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_per_capita_availability_of_power_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_per_capita_availability_of_power_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_power_requirement_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_power_requirement_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_railway_route_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_railway_route_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_road_constructed_under_pmgsy_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_road_constructed_under_pmgsy_output.csv"
+        },
+        {
+          "template_mcf": "output_files/infrastructure/state_wise_telephones_per_100_population_output.tmcf",
+          "cleaned_csv": "output_files/infrastructure/state_wise_telephones_per_100_population_output.csv"
+        }
+      ],
+      "cron_schedule": "0 10 * * 1"
+    }
+  ]
+}
