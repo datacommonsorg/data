@@ -19,7 +19,7 @@ precipitation data downloaded from the CDC.
 URL: https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology
 @input_file   filepath to the original csv that needs to be cleaned
 @output_file  filepath to the csv to which the cleaned data is written
-python3 parse_precipitation_index.py input_files output_files
+python3 parse_precipitation_index.py input_file output_file
 '''
 
 import sys
@@ -50,13 +50,7 @@ def clean_precipitation_data(file_path, output_file):
             "spei": "StandardizedPrecipitation" + "EvapotranspirationIndex"
         },
                     inplace=True)
-
-        #import pdb;pdb.set_trace()
-        # if len(data["fips"]) == 4:
-        #     data["fips"] = "0" + data["fips"].astype(str)
-
-        data["fips"] = data["fips"].astype(str)
-        data["fips"] = data["fips"].str.zfill(5)
+        data["fips"] = "0" + data["fips"].astype(str)
         data = pd.melt(
             data,
             id_vars=['state', 'county', 'fips', 'year', 'month', 'date'],
@@ -80,10 +74,7 @@ def clean_precipitation_data(file_path, output_file):
     else:
         data.rename(columns={"spi": "StandardizedPrecipitationIndex"},
                     inplace=True)
-        # Use zfill to pad 'countyfips' to 5 digits with leading zeros if shorter.
-        # This is the most robust way to handle FIPS codes for all cases.
-        data["countyfips"] = data["countyfips"].astype(str).str.zfill(
-            FIPS_TARGET_LENGTH)
+        data["countyfips"] = "0" + data["countyfips"].astype(str)
         data = pd.melt(
             data,
             id_vars=['year', 'month', 'date', 'statefips', 'countyfips'],

@@ -1,78 +1,170 @@
----
+## Importing CDC Air Quality and Precipitation Index Data
+Author: Padma Gundapaneni @padma-g
 
-```markdown
-# Standardized Precipitation Evapotranspiration Index (SPEI) - CDC Import
+## Table of Contents
+1. [About the Dataset](#about-the-dataset)
+    1. [Download URL](#download-url)
+    2. [Overview](#overview)
+    3. [Notes and Caveats](#notes-and-caveats)
+    4. [License](#license)
+    5. [Dataset Documentation and Relevant Links](#dataset-documentation-and-relevant-links)
+2. [About the Import](#about-the-import)
+    1. [Artifacts](#artifacts)
+    2. [Import Procedure](#import-procedure)
 
-## Overview
+## About the Dataset
 
-This repository manages the ingestion of the **Standardized Precipitation Evapotranspiration Index (SPEI)** dataset from the [Centers for Disease Control and Prevention (CDC)](https://data.cdc.gov). The goal is to structure this dataset for inclusion in the [Data Commons Knowledge Graph](https://datacommons.org), enabling better accessibility and analysis of environmental health data.
+### Download URL
+The air quality data can be downloaded from [the CDC website](https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology&sortBy=last_modified&page=1).
 
----
+The precipitation index data can be downloaded from the following links:
+* [Palmer Drought Severity Index](https://data.cdc.gov/Environmental-Health-Toxicology/Palmer-Drought-Severity-Index-1895-2016/en5r-5ds4)
+* [Standardized Precipitation Evapotranspiration Index](https://data.cdc.gov/Environmental-Health-Toxicology/Standardized-Precipitation-Evapotranspiration-Inde/6nbv-ifib)
+* [Standardized Precipitation Index](https://data.cdc.gov/Environmental-Health-Toxicology/Standardized-Precipitation-Index-1895-2016/xbk2-5i4e)
 
-## Dataset Summary
+All the downloaded data is in .csv format. 
 
-- **Source:** CDC - National Environmental Public Health Tracking Network  
-- **URL:** [CDC SPEI Dataset](https://data.cdc.gov/resource/6nbv-ifib.csv)
-- **Refresh Status:** Static dataset with auto-refresh framework prepared.
-- **Variable:** Standardized Precipitation Evapotranspiration Index (SPEI)
-- **Geography:** County-level (USA)
-- **Time Coverage:** Varies by county, primary issue with year ranges being addressed.
+### Overview
+The air quality data comes from the CDC and the EPA. The datasets contain "modeled predictions of PM2.5 and ozone levels from the EPA's Downscaler model". According to the CDC, "these data are used by the CDC's National Environmental Public Health Tracking Network to generate air quality measures."
 
----
+The precipitation index data comes from the CDC and the Cooperative Institute for Climate and Satellites. The datasets contain "monthly Standardized Precipitation Evapotranspiration Index (SPEI) data from 1895-2016 provided by the Cooperative Institute for Climate and Satellites - North Carolina". According to the CDC, "these data are used by the CDC's National Environmental Public Health Tracking Network to generate drought measures."
 
-## Import Pipeline Stages
+In this effort, we imported the census tract-level and county-level PM2.5 and ozone level data for the years 2001-2016. We also imported at the county level the Palmer Drought Severity Index (PDSI) for years 1895-2016, the Standardized Precipitation Evapotranspiration Index (SPEI) for years 1895-2016, and the Standardized Precipitation Index (SPI) for years 1895-2016.
 
-1. **Download**
-   - Utilizes `requests` to fetch data via CDC API endpoint.
-   - Input file saved as: `CDC_StandardizedPrecipitationEvapotranspirationIndex_input.csv`
+Among the air quality datasets, census tract-level datasets contain estimates of the mean predicted concentration and associated standard error, while county-level datasets contain estimates of the mean predicted concentration, the median predicted concentration, the maximum predicted concentration, and the population-weighted predicted concentration.
 
-2. **Parsing**
-   - `parse_precipitation_index.py` processes the raw input.
-   - Output file: `CDC_StandardizedPrecipitationEvapotranspirationIndex_output.csv`
-   - Handles normalization, year formatting, and identifier resolution.
+The precipitation index datasets contain precipitation index data for a given year, month, and county.
 
-3. **TMCF Mapping**
-   - Template MCF defined in `StandardizedPrecipitationEvapotranspirationIndex.tmcf`
-   - Maps fields to DC schema (e.g., `observationDate`, `observationAbout`, `value`)
+### Notes and Caveats
 
-4. **Linting**
-   - The import is linted using `datacommons-import-tool`.
-   - **Current Issue:** `lint` reports a failure related to missing or invalid year range in the dataset. This is under investigation and similar to a previously known issue.
+None.
 
-5. **Cloud Deployment**
-   - Uses `run_import.sh` to deploy to Cloud Run with Docker support.
-   - Cloud project: `datcom prod imports`
-   - Docker artifact registry: `us-central1-docker.pkg.dev/datcom prod imports/...`
-   - Validation skipping supported via `INVOKE_IMPORT_VALIDATION=false`
+### License
+The data is made available for public-use by the [CDC](https://www.cdc.gov/nchs/data_access/ftp_data.htm). Users of CDC National Center for Health Statistics Data must comply with the CDC's [data use agreement](https://www.cdc.gov/nchs/data_access/restrictions.htm).
 
----
+### Dataset Documentation and Relevant Links
+These data were collected as part of the [CDC National Environment Public Health Tracking Network](https://ephtracking.cdc.gov/). The documentation for the air quality datasets is accessible [here](https://www.cdc.gov/nceh/tracking/topics/AirQuality.htm). The documentation for the drought data sets is accessible [here](https://www.cdc.gov/nceh/tracking/topics/Drought.htm).
 
-## Testing
+## About the Import
 
-To run parsing locally:
+### Artifacts
+
+#### Scripts
+[`parse_air_quality.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py)
+
+[`parse_precipitation_index.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_precipitation_index.py)
+
+#### Test Scripts
+[`parse_air_quality_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_air_quality_test.py)
+
+[`parse_precipitation_index_test.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/parse_precipitation_index_test.py)
+
+#### Test Files
+[`small_Ozone_County.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Ozone_County.csv)
+
+[`small_Ozone_County_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Ozone_County_expected.csv)
+
+[`small_Palmer.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Palmer.csv)
+
+[`small_Palmer_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Palmer_expected.csv)
+
+#### tMCFs
+[`OzoneCensusTractPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/OzoneCensusTractPollution.tmcf)
+
+[`OzoneCountyPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/OzoneCountyPollution.tmcf)
+
+[`PalmerDroughtSeverityIndex.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/PalmerDroughtSeverityIndex.tmcf)
+
+[`PM25CensusTractPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/PM25CensusTractPollution.tmcf)
+
+[`PM25CountyPollution.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/PM25CountyPollution.tmcf)
+
+[`StandardizedPrecipitationEvapotranspirationIndex.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationEvapotranspirationIndex.tmcf)
+
+[`StandardizedPrecipitationIndex.tmcf`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/StandardizedPrecipitationIndex.tmcf)
+
+### Import Procedure
+
+#### Processing Steps
+
+To clean the air quality data files, run:
+
+1. Import name: CDC_PM25CensusTract
+ 
+ To download the air quality data files, run:
+```
+    python3 download_files.py CDC_PM25CensusTract
+```
+   Command to process the file
+   ===========================
+```
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_PM25CensusTract
+```
+2. Import name: CDC_OzoneCensusTract
+
+    To download the air quality data files, run:
+```
+    python3 download_files.py CDC_OzoneCensusTract
+```
+   Command to process the file
+   ===========================
+```
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_OzoneCensusTract
+```
+3. Import name: CDC_PM25County
+
+    To download the air quality data files, run:
+```
+    python3 download_files.py CDC_PM25County
+```
+   Command to process the file
+   ===========================
+```
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_PM25County
+```
+4. Import name: CDC_OzoneCounty
+
+    To download the air quality data files, run:
+```
+    python3 download_files.py CDC_OzoneCounty
+```
+   Command to process the file
+   ===========================
+```bash
+   $ python3 scripts/us_cdc/environmental_health_toxicology/parse_air_quality.py CDC_OzoneCounty
+```
+### Note:
+=========
+=> "import_configs.json" file is uploaded on the GCP which includes the configurations of the import such as source urls, input and output filenames.
+    GCP location: "unresolved_mcf/cdc/environmental/import_configs.json"
+    download_files.py and parse_air_quality.py scripts reads this config file for download and process the files respectively.
+    Future urls should be include in this config file for processing the upcoming data.
+=> Downloaded files are available in "input_files" directory.
+=> Output files are generated on "output" directory.
+#### Testing
+
+##### Test Air Quality Data Cleaning Script
+
+To test the air quality data cleaning script, run:
 
 ```bash
-python3 parse_precipitation_index.py \
-  CDC_StandardizedPrecipitationEvapotranspirationIndex_input.csv \
-  output/CDC_StandardizedPrecipitationEvapotranspirationIndex_output.csv
-````
+$ python3 parse_air_quality_test.py
+```
+##### Test Precipitation Index Data Cleaning Script
 
-To deploy import job (with validation disabled):
+To test the precipitation index data cleaning script, run:
 
 ```bash
-./run_import.sh \
-  -p datcom-infosys-dev \
-  -d dc-test-executor-$USER \
-  -cloud \
-  -e "INVOKE_IMPORT_VALIDATION=false" \
-  -a us-central1-docker.pkg.dev/datcom-infosys-dev/datcom-infosys-dev-artifacts \
-  ../../scripts/us_cdc/environmental/manifest.json
+$ python3 parse_precipitation_index_test.py
 ```
 
+The expected output of this test can be found in [`small_Palmer_expected.csv`](https://github.com/datacommonsorg/data/blob/master/scripts/us_cdc/environmental_health_toxicology/test_data/small_Palmer_expected.csv).
 
-## References
+#### Processing Steps
 
-* [CDC Dataset Portal](https://data.cdc.gov)
+To clean the precipitation index data files, run: 
 
----
+```bash
+$ python3 parse_precipitation_index.py input_file_name output_file_name
+```
 
