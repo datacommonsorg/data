@@ -17,6 +17,12 @@ Downloads and converts BLS CPI raw csv files to csv files of two columns:
 
 Usage: python3 generate_csv.py
 '''
+# FIX: Monkey-patch for Python 3.10+ where collections.Mapping was moved to collections.abc
+import collections
+import collections.abc
+collections.Mapping = collections.abc.Mapping
+# END FIX
+
 import io
 import requests
 import frozendict
