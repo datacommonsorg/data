@@ -1,0 +1,6 @@
+Node: E:bev_4031_wiki_output->E0
+observationDate: C:bev_4031_wiki_output->observationDate
+observationAbout: C:bev_4031_wiki_output->observationAbout
+value: C:bev_4031_wiki_output->value
+typeOf: dcs:StatVarObservation
+variableMeasured: dcid:Count_BirthEvent
