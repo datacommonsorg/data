@@ -17,6 +17,10 @@ This Python Script is for County Level Data 2010-2020.
 import os
 import numpy as np
 import pandas as pd
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 from common_functions import input_url, replace_agegrp
 
 
@@ -26,11 +30,12 @@ def county2010(url_file: str, output_folder: str):
     cleans it and create a cleaned csv.
     '''
     _url = input_url(url_file, "2010-20")
-    df = pd.read_csv(_url, encoding='ISO-8859-1', low_memory=False)
+    filename = 'raw_data_county_2010_2020.csv'
+    file_path = get_api_response(filename, _url, 1)
+    df = pd.read_csv(file_path, engine='python', encoding='ISO-8859-1')
     #Writing raw data to csv
-    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                           "raw_data", 'raw_data_county_2010_2020.csv'),
-              index=False)
+    df.to_csv(file_path, index=False)
+
     # Filter by agegrp = 0.
     df = df.query("YEAR not in [1, 2, 13, 14]")
     df = df.query("AGEGRP != 0")
