@@ -1,0 +1,10 @@
+Node: dcid:educationalAttainment
+typeOf: dcs:Property
+name: "educationalAttainment"
+rangeIncludes: dcid:SchoolGradeLevelEnum,dcid:USC_EducationalAttainmentEnum
+
+Node: dcid:occupationalCategory
+typeOf: dcs:Property
+name: "occupationalCategory"
+domainIncludes: dcid:Person
+

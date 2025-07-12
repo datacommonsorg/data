@@ -1,0 +1,28 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "NCSES_Median_Annual_Salary_Import",
+      "curator_emails": [],
+      "provenance_url": "https://ncses.nsf.gov/surveys/national-survey-college-graduates/2023#data",
+      "provenance_description": "Median salary of full-time employed college graduates, by sex, major occupation, age, ethnicity, race, disability status, and citizenship status",
+      "scripts": [
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data='nsf25322-tab004-001-data.csv' --pv_map='nsf25322-tab004-001-pvmap.csv' --config_file='nsf25322-tab004-001-metadata.csv' --output_path='output_files/nsf25322_output_4_1' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data='nsf25322-tab004-002-data.csv' --pv_map='nsf25322-tab004-002-pvmap.csv' --config_file='nsf25322-tab004-002-metadata.csv' --output_path='output_files/nsf25322_output_4_2' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"        
+    ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/nsf25322_output_4_1.tmcf",
+          "cleaned_csv": "output_files/nsf25322_output_4_1.csv"
+        },
+        {
+           "template_mcf": "output_files/nsf25322_output_4_2.tmcf",
+           "cleaned_csv": "output_files/nsf25322_output_4_2.csv"
+        }
+      ],
+
+     
+      "cron_schedule": "15 22 10 1,7 *"
+      
+    }
+  ]
+}
