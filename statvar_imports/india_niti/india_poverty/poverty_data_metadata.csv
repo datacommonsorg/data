@@ -1,0 +1,6 @@
+config,value
+places_within,country/IND
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod"
+header_rows ,1
+mapped_rows ,2
+mapped_columns ,3
