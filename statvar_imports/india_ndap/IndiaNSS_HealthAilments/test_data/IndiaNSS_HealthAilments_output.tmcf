@@ -1,0 +1,8 @@
+Node: E:IndiaNSS_HealthAilments_output->E0
+observationAbout: C:IndiaNSS_HealthAilments_output->observationAbout
+observationDate: C:IndiaNSS_HealthAilments_output->observationDate
+value: C:IndiaNSS_HealthAilments_output->value
+variableMeasured: C:IndiaNSS_HealthAilments_output->variableMeasured
+unit: C:IndiaNSS_HealthAilments_output->unit
+scalingFactor: C:IndiaNSS_HealthAilments_output->scalingFactor
+typeOf: dcs:StatVarObservation
