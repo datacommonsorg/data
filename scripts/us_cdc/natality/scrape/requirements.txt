@@ -1,0 +1,3 @@
+# Installing selenium to download the raw data from website
+
+selenium==4.17.2
