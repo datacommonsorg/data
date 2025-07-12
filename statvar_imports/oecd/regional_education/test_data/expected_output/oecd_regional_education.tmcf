@@ -1,0 +1,7 @@
+Node: E:oecd_regional_education->E0
+observationAbout: C:oecd_regional_education->observationAbout
+observationDate: C:oecd_regional_education->observationDate
+variableMeasured: C:oecd_regional_education->variableMeasured
+value: C:oecd_regional_education->value
+typeOf: dcs:StatVarObservation
+unit: Percent
