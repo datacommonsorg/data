@@ -1,0 +1,8 @@
+Node: E:pep_asrh_state_output->E0
+observationAbout: C:pep_asrh_state_output->observationAbout
+observationDate: C:pep_asrh_state_output->observationDate
+value: C:pep_asrh_state_output->value
+variableMeasured: C:pep_asrh_state_output->variableMeasured
+measurementMethod: C:pep_asrh_state_output->measurementMethod
+typeOf: dcs:StatVarObservation
+#Aggregate: sum
