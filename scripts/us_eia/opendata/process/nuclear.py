@@ -13,7 +13,7 @@
 # limitations under the License.
 """EIA Nuclear Status Dataset specific functions."""
 
-import logging
+from absl import logging
 import re
 
 from . import common
@@ -30,6 +30,7 @@ def extract_place_statvar(series_id, counters):
     """
     m = re.match(r"^NUC_STATUS\.([^.]+)\.([^.]+)\.(D)$", series_id)
     if m:
+        counters.add_counter('info_nuclear_record_count', 1)
         measure = m.group(1)
         place = m.group(2)
         if not place == 'US':
@@ -102,7 +103,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
 
     Returns schema-ful stat-var ID if schema was generated, None otherwise.
     """
-    counters['generate_statvar_schema'] += 1
+    counters.add_counter('generate_statvar_schema', 1)
 
     # NUC_STATUS.{Measure}.{Period}
     m = re.match(r"^NUC_STATUS\.([^.]+)\.(D)$", raw_sv)
@@ -110,21 +111,21 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         measure = m.group(1)
         period = m.group(2)
     else:
-        counters['error_unparsable_raw_statvar'] += 1
+        counters.add_counter('error_unparsable_raw_statvar', 1)
         return None
-    counters[f'measure-{measure}'] += 1
+    counters.add_counter(f'measure-{measure}', 1)
 
     # Get popType and mprop based on measure.
     measure_pvs = _SV_MAP.get(measure, None)
     if not measure_pvs:
-        counters[f'error_missing_measure-{measure}'] += 1
+        counters.add_counter(f'error_missing_measure-{measure}', 1)
         return None
 
     sv_id = measure_pvs[0]
     sv_pvs = measure_pvs[1:]
 
     if measure not in _UNIT_MAP:
-        counters[f'error_missing_unit-{measure}'] += 1
+        counters.add_counter(f'error_missing_unit-{measure}', 1)
         return None
     (unit, sfactor) = _UNIT_MAP[measure]
 

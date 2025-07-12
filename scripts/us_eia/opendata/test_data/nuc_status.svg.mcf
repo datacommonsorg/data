@@ -1,0 +1,9 @@
+Node: dcid:eia/g/Root
+typeOf: dcs:StatVarGroup
+name: "Other Data (eia.gov)"
+specializationOf: dcid:dc/g/Energy
+
+Node: dcid:eia/g/NUC_STATUS.2889994
+typeOf: dcs:StatVarGroup
+name: "Nuclear Outages"
+specializationOf: dcid:eia/g/Root
