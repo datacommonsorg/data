@@ -45,6 +45,7 @@ def clean_precipitation_data(file_path, output_file):
     data = pd.DataFrame(pd.read_csv(file_path))
     data["month"] = data["month"].map("{:02}".format)
     data["date"] = data["year"].astype(str) + "-" + data["month"].astype(str)
+    FIPS_TARGET_LENGTH = 5
     if "Evapotranspiration" in file_path:
         data.rename(columns={
             "spei": "StandardizedPrecipitation" + "EvapotranspirationIndex"
