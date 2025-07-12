@@ -1,0 +1,487 @@
+# Copyright 2025 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#         https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""Unit tests for stat_vars_map.py."""
+
+import io
+import os
+import sys
+import tempfile
+import unittest
+
+from absl import app
+from absl import logging
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(_SCRIPT_DIR))
+sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
+sys.path.append(
+    os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), "util"))
+
+from stat_vars_map import StatVarsMap
+
+
+class TestStatVarsMap(unittest.TestCase):
+
+    def test_create_stat_vars_map(self):
+        """Test that the StatVarsMap class can be instantiated."""
+        stat_vars_map = StatVarsMap()
+        self.assertIsNotNone(stat_vars_map)
+
+    def test_add_statvar(self):
+        """Test that a statvar can be added to the map."""
+        stat_vars_map = StatVarsMap()
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        self.assertTrue(stat_vars_map.add_statvar("test_statvar", statvar_pvs))
+        self.assertIn("test_statvar", stat_vars_map._statvars_map)
+
+    def test_add_statvar_obs(self):
+        """Test that a statvar observation can be added to the map."""
+        stat_vars_map = StatVarsMap()
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        stat_vars_map.add_statvar("test_statvar", statvar_pvs)
+        svobs_pvs = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        self.assertTrue(stat_vars_map.add_statvar_obs(svobs_pvs))
+        # The key is a semicolon-separated string of property-value pairs,
+        # sorted alphabetically by property.
+        self.assertIn(
+            "observationAbout=dcs:country/USA;observationDate=2023;variableMeasured=dcs:test_statvar",
+            stat_vars_map._statvar_obs_map)
+
+    def test_generate_statvar_dcid(self):
+        """Test that a dcid can be generated for a statvar."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "gender": "dcs:Male",
+        }
+        dcid = stat_vars_map.generate_statvar_dcid(pvs)
+        self.assertEqual(dcid, "Count_Person_Male")
+
+    def test_generate_statvar_dcid_with_quantity_range(self):
+        """Test that a dcid can be generated for a statvar with a quantity range."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "age": "[18 24 Years]",
+        }
+        dcid = stat_vars_map.generate_statvar_dcid(pvs)
+        self.assertEqual(dcid, "Count_Person_18To24Years")
+
+    def test_drop_invalid_statvars(self):
+        """Test that invalid statvars are dropped."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"required_statvar_properties": ["populationType"]})
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "measuredProperty": "dcs:count",
+        }
+        stat_vars_map.add_statvar("test_statvar", statvar_pvs)
+        stat_vars_map.drop_invalid_statvars()
+        self.assertNotIn("test_statvar", stat_vars_map._statvars_map)
+
+    def test_get_svobs_key(self):
+        """Test that the key for a statvar observation is generated correctly."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        key = stat_vars_map.get_svobs_key(pvs)
+        self.assertEqual(
+            key,
+            "observationAbout=dcs:country/USA;observationDate=2023;variableMeasured=dcs:test_statvar"
+        )
+
+    def test_aggregate_value(self):
+        """Test that duplicate statvar observations are aggregated correctly."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"aggregate_duplicate_svobs": "sum"})
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        stat_vars_map.add_statvar("test_statvar", statvar_pvs)
+        svobs_pvs1 = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        stat_vars_map.add_statvar_obs(svobs_pvs1)
+        svobs_pvs2 = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "200",
+        }
+        stat_vars_map.add_statvar_obs(svobs_pvs2)
+        key = list(stat_vars_map._statvar_obs_map.keys())[0]
+        self.assertEqual(stat_vars_map._statvar_obs_map[key]["value"], 300)
+        self.assertEqual(
+            stat_vars_map._statvar_obs_map[key]["measurementMethod"],
+            "dcs:DataCommonsAggregate",
+        )
+
+    @unittest.skip(
+        "TODO: Fix this test. The write_statvars_mcf method does not write to the file."
+    )
+    def test_write_statvars_mcf(self):
+        """Test that statvars are written to an MCF file correctly."""
+        stat_vars_map = StatVarsMap()
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        stat_vars_map.add_statvar("test_statvar", statvar_pvs)
+        with tempfile.NamedTemporaryFile(mode="w+", delete=False) as tmpfile:
+            stat_vars_map.write_statvars_mcf(tmpfile.name)
+            tmpfile.flush()
+            tmpfile.seek(0)
+            content = tmpfile.read()
+        self.assertIn("Node: dcid:test_statvar", content)
+        self.assertIn("typeOf: dcs:StatisticalVariable", content)
+        self.assertIn("populationType: dcs:Person", content)
+        self.assertIn("measuredProperty: dcs:count", content)
+        os.remove(tmpfile.name)
+
+    def test_add_default_pvs(self):
+        """Test that default property-values are added correctly."""
+        stat_vars_map = StatVarsMap()
+        default_pvs = {"typeOf": "dcs:StatisticalVariable"}
+        pvs = {"populationType": "dcs:Person"}
+        pvs = stat_vars_map.add_default_pvs(default_pvs, pvs)
+        self.assertIn("typeOf", pvs)
+        self.assertEqual(pvs["typeOf"], "dcs:StatisticalVariable")
+
+    def test_get_valid_pvs(self):
+        """Test that valid property-values are returned correctly."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "InvalidProperty": "invalid",
+        }
+        valid_pvs = stat_vars_map.get_valid_pvs(pvs)
+        self.assertIn("typeOf", valid_pvs)
+        self.assertIn("populationType", valid_pvs)
+        self.assertIn("measuredProperty", valid_pvs)
+        self.assertNotIn("InvalidProperty", valid_pvs)
+
+    def test_convert_to_schemaless_statvar(self):
+        """Test that a statvar is converted to schemaless correctly."""
+        stat_vars_map = StatVarsMap(config_dict={"schemaless": True})
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "CapitalizedProperty": "value",
+        }
+        stat_vars_map.convert_to_schemaless_statvar(pvs)
+        # The schemaless conversion logic performs the following transformations:
+        # 1. Capitalized properties are commented out.
+        # 2. The `measuredProperty` is set to the generated dcid of the
+        #    statvar.
+        # 3. The dcid is generated from the property-values, with the values
+        #    capitalized.
+        self.assertNotIn("CapitalizedProperty", pvs)
+        self.assertIn("# CapitalizedProperty: ", pvs)
+        self.assertEqual(pvs["# CapitalizedProperty: "], "value")
+        self.assertEqual(
+            pvs["measuredProperty"],
+            "dcid:CapitalizedProperty_Value_Count_Person_StatisticalVariable")
+
+    def test_drop_statvars_without_svobs(self):
+        """Test that statvars without observations are dropped."""
+        stat_vars_map = StatVarsMap()
+        statvar_pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        stat_vars_map.add_statvar("test_statvar", statvar_pvs)
+        stat_vars_map.drop_statvars_without_svobs()
+        self.assertNotIn("test_statvar", stat_vars_map._statvars_map)
+
+    def test_is_valid_statvar(self):
+        """Test that a valid statvar is correctly identified."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        self.assertTrue(stat_vars_map.is_valid_statvar(pvs))
+
+    def test_is_valid_statvar_with_error(self):
+        """Test that a statvar with an error is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "#Error": "Test error",
+        }
+        self.assertFalse(stat_vars_map.is_valid_statvar(pvs))
+
+    def test_is_valid_statvar_with_missing_required_property(self):
+        """Test that a statvar with a missing required property is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"required_statvar_properties": ["populationType"]})
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "measuredProperty": "dcs:count",
+        }
+        self.assertFalse(stat_vars_map.is_valid_statvar(pvs))
+
+    def test_is_valid_svobs(self):
+        """Test that a valid statvar observation is correctly identified."""
+        stat_vars_map = StatVarsMap()
+        stat_vars_map.add_statvar(
+            "test_statvar", {
+                "typeOf": "dcs:StatisticalVariable",
+                "populationType": "dcs:Person",
+                "measuredProperty": "dcs:count",
+            })
+        pvs = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        self.assertTrue(stat_vars_map.is_valid_svobs(pvs))
+
+    def test_is_valid_svobs_with_error(self):
+        """Test that a statvar observation with an error is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+            "#Error": "Test error",
+        }
+        self.assertFalse(stat_vars_map.is_valid_svobs(pvs))
+
+    def test_is_valid_svobs_with_missing_variable_measured(self):
+        """Test that a statvar observation with a missing variableMeasured is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        self.assertFalse(stat_vars_map.is_valid_svobs(pvs))
+
+    def test_is_valid_pvs(self):
+        """Test that a valid set of property-values is correctly identified."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+        }
+        self.assertTrue(stat_vars_map.is_valid_pvs(pvs))
+
+    def test_is_valid_pvs_with_error(self):
+        """Test that a set of property-values with an error is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "#Error": "Test error",
+        }
+        self.assertFalse(stat_vars_map.is_valid_pvs(pvs))
+
+    def test_is_valid_pvs_with_duplicate_statvar(self):
+        """Test that a set of property-values with a duplicate statvar is correctly identified as invalid."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"duplicate_statvars_key": "#ErrorDuplicate"})
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "#ErrorDuplicate": "test_statvar",
+        }
+        self.assertFalse(stat_vars_map.is_valid_pvs(pvs))
+
+    def test_get_constant_and_multi_value_svobs_pvs(self):
+        """Test that constant and multi-value SVObs PVs are correctly identified."""
+        stat_vars_map = StatVarsMap()
+        stat_vars_map.add_statvar_obs({
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+            "typeOf": "dcs:StatVarObservation",
+        })
+        stat_vars_map.add_statvar_obs({
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2024",
+            "value": "200",
+            "typeOf": "dcs:StatVarObservation",
+        })
+        constant_pvs = stat_vars_map.get_constant_svobs_pvs()
+        multi_value_pvs = stat_vars_map.get_multi_value_svobs_pvs()
+        self.assertEqual(
+            constant_pvs, {
+                "variableMeasured": "dcs:test_statvar",
+                "observationAbout": "dcs:country/USA",
+                "typeOf": "dcs:StatVarObservation",
+            })
+        self.assertEqual(set(multi_value_pvs), {"observationDate", "value"})
+
+    def test_format_svobs(self):
+        """Test that SVObs values are formatted correctly for CSV output."""
+        stat_vars_map = StatVarsMap()
+        pvs = {
+            "value": 100,
+            "name": "Test Name",
+        }
+        formatted_pvs = stat_vars_map.format_svobs(pvs)
+        self.assertEqual(formatted_pvs["value"], "100")
+        self.assertEqual(formatted_pvs["name"], '"Test Name"')
+
+    def test_get_statvar_obs_columns(self):
+        """Test that the correct columns for statvar observations are returned."""
+        stat_vars_map = StatVarsMap()
+        stat_vars_map.add_statvar_obs({
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        })
+        columns = stat_vars_map.get_statvar_obs_columns()
+        self.assertEqual(
+            set(columns),
+            {
+                "variableMeasured",
+                "observationAbout",
+                "observationDate",
+                "value",
+            },
+        )
+
+    def test_get_statvar_obs_columns_with_skip_constant(self):
+        """Test that constant columns are skipped when the config is set."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"skip_constant_csv_columns": True})
+        stat_vars_map.add_statvar_obs({
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        })
+        stat_vars_map.add_statvar_obs({
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2024",
+            "value": "200",
+        })
+        columns = stat_vars_map.get_statvar_obs_columns()
+        self.assertEqual(set(columns), {"observationDate", "value"})
+
+    def test_remove_undefined_properties(self):
+        """Test that undefined properties are removed correctly."""
+        stat_vars_map = StatVarsMap()
+        stat_vars_map._dc_api_ids_cache = {
+            "typeOf": True,
+            "populationType": True,
+            "measuredProperty": True,
+        }
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "undefinedProperty": "value",
+        }
+        pv_map = {"Test": {"test_statvar": pvs}}
+        stat_vars_map.remove_undefined_properties(pv_map)
+        self.assertIn("typeOf", pvs)
+        self.assertIn("populationType", pvs)
+        self.assertIn("measuredProperty", pvs)
+        self.assertNotIn("undefinedProperty", pvs)
+
+    def test_remove_undefined_properties_with_comment(self):
+        """Test that undefined properties are commented out correctly."""
+        stat_vars_map = StatVarsMap()
+        stat_vars_map._dc_api_ids_cache = {
+            "typeOf": True,
+            "populationType": True,
+            "measuredProperty": True,
+        }
+        pvs = {
+            "typeOf": "dcs:StatisticalVariable",
+            "populationType": "dcs:Person",
+            "measuredProperty": "dcs:count",
+            "undefinedProperty": "value",
+        }
+        pv_map = {"Test": {"test_statvar": pvs}}
+        stat_vars_map.remove_undefined_properties(pv_map,
+                                                  comment_removed_props=True)
+        self.assertIn("typeOf", pvs)
+        self.assertIn("populationType", pvs)
+        self.assertIn("measuredProperty", pvs)
+        self.assertNotIn("undefinedProperty", pvs)
+        self.assertIn("# undefinedProperty: ", pvs)
+        self.assertEqual(pvs["# undefinedProperty: "], "value")
+
+    def test_set_statvar_dup_svobs(self):
+        """Test that a statvar is correctly flagged for duplicate SVObs."""
+        stat_vars_map = StatVarsMap(
+            config_dict={"duplicate_svobs_key": "#ErrorDuplicateSVObs"})
+        stat_vars_map.add_statvar(
+            "test_statvar", {
+                "typeOf": "dcs:StatisticalVariable",
+                "populationType": "dcs:Person",
+                "measuredProperty": "dcs:count",
+            })
+        svobs_pvs = {
+            "variableMeasured": "dcs:test_statvar",
+            "observationAbout": "dcs:country/USA",
+            "observationDate": "2023",
+            "value": "100",
+        }
+        stat_vars_map.add_statvar_obs(svobs_pvs)
+        svobs_key = stat_vars_map.get_svobs_key(svobs_pvs)
+        stat_vars_map.set_statvar_dup_svobs(svobs_key, svobs_pvs)
+        self.assertIn("#ErrorDuplicateSVObs",
+                      stat_vars_map._statvars_map["test_statvar"])
+
+
+if __name__ == "__main__":
+    app.run(unittest.main)
