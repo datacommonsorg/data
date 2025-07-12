@@ -1,0 +1,2 @@
+url='https://loadqa.ndapapi.com/v1/openapi?API_Key=gAAAAABnsuLRDjZI7msoWaUxNMpdWjKI0ARFXp3noJLZzlMcY9htEr5BgbxEVMDdH-bTJYd7FqHXyBSwuoJ9fH1NGxKZ6Zh5hseRnlgYyCounJktbBNaDdAgqMXM4-X3AFbQA7bmN3ofTOLr6By132Vs5WQ2Rg8cHb3JsB7o3lJZJrsho2A9iw4eXhbCJteacJl6ZNZbnOo2&ind=I7300_6,I7300_7,I7300_8&dim=Country,StateName,StateCode,Year,TRU,D7300_3,D7300_4,D7300_5'
+input_file='source_files/IndiaNSS_HealthAilments.xlsx'
