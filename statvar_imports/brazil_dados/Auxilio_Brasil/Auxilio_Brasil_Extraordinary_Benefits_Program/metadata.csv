@@ -1,0 +1,17 @@
+parameter,value
+url,https://dados.gov.br/dados/organizacoes/visualizar/ministerio-do-desenvolvimento-e-assistencia-social-familia-e-combate-a-fome
+description,Brazil Pact againt hunger Open Data MDS
+#place_type,Country
+#places_within,
+start_date,2021
+end_date,2023
+release_frequency,1Month
+process,
+comments,
+output_columns,"observationAbout, observationDate,observationPeriod, value, variableMeasured, unit,measurementQualifier"
+mapped_rows,1
+mapped_columns,3
+header_rows,1
+#input_rows,20
+#drop_statvars_without_svobs,0
+#debug,1
