@@ -1,0 +1,1807 @@
+TIER,STATE,STATE_FIPS,COUNTY,COUNTY_FIPS,POLLUTANT,POLLUTANT TYPE,EMISSIONS,UNIT OF MEASURE
+Miscellaneous,AK,2,Yukon-Koyukuk,290,Carbon Monoxide,CAP,4347394.922,TON
+Miscellaneous,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,1019073.815,TON
+Natural Resources,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,514211.1,TON
+Miscellaneous,AK,2,Yukon-Koyukuk,290,PM10 Primary (Filt + Cond),CAP,422015.9757,TON
+Miscellaneous,AK,2,Yukon-Koyukuk,290,PM2.5 Primary (Filt + Cond),CAP,356965.79,TON
+Natural Resources,AK,2,Bethel,50,Volatile Organic Compounds,CAP,131079.1,TON
+Natural Resources,AK,2,North Slope,185,Volatile Organic Compounds,CAP,114671.7,TON
+Natural Resources,AK,2,Lake and Peninsula,164,Volatile Organic Compounds,CAP,107346.5,TON
+Natural Resources,AK,2,Yukon-Koyukuk,290,Carbon Monoxide,CAP,106695.9,TON
+Natural Resources,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,74703.9,TON
+Natural Resources,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,71833.45,TON
+Miscellaneous,AK,2,Yukon-Koyukuk,290,Ammonia,CAP,70892.10247,TON
+Natural Resources,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,65574.42,TON
+Miscellaneous,AK,2,Bethel,50,Carbon Monoxide,CAP,65322.60816,TON
+Natural Resources,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,65141.25,TON
+Natural Resources,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,64571.96,TON
+Natural Resources,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,63007.89,TON
+Natural Resources,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,60692.02,TON
+Natural Resources,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,56098.09,TON
+Fuel Comb. Other,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,48268.73226,TON
+Fuel Comb. Other,AK,2,Matanuska-Susitna,170,Carbon Monoxide,CAP,45648.78779,TON
+Miscellaneous,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,42897.23176,TON
+Natural Resources,AK,2,Kusilvak,158,Volatile Organic Compounds,CAP,42338.97,TON
+Natural Resources,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,41736.12,TON
+Natural Resources,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,40400.21,TON
+Natural Resources,AK,2,Denali,68,Volatile Organic Compounds,CAP,39788.6,TON
+Natural Resources,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,38736.81,TON
+Natural Resources,AK,2,Nome,180,Volatile Organic Compounds,CAP,38607.3,TON
+Natural Resources,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,37940.68,TON
+Fuel Comb. Other,AK,2,Kodiak Island,150,Carbon Monoxide,CAP,37658.55901,TON
+Miscellaneous,AK,2,Yukon-Koyukuk,290,Nitrogen Oxides,CAP,35642.442,TON
+Miscellaneous,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,32928.85401,TON
+Natural Resources,AK,2,North Slope,185,Carbon Monoxide,CAP,31280.05,TON
+Fuel Comb. Industrial,AK,2,North Slope,185,Nitrogen Oxides,CAP,31268.68047,TON
+Natural Resources,AK,2,Bethel,50,Carbon Monoxide,CAP,28724.67,TON
+Miscellaneous,AK,2,Yukon-Koyukuk,290,Sulfur Dioxide,CAP,25430.54286,TON
+Natural Resources,AK,2,Sitka,220,Volatile Organic Compounds,CAP,25125.02,TON
+Natural Resources,AK,2,Lake and Peninsula,164,Carbon Monoxide,CAP,25052.99,TON
+Fuel Comb. Other,AK,2,Anchorage,20,Carbon Monoxide,CAP,23874.73279,TON
+Fuel Comb. Other,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,23441.09162,TON
+Natural Resources,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,23125.68,TON
+Highway Vehicles,AK,2,Anchorage,20,Carbon Monoxide,CAP,22312.87862,TON
+Natural Resources,AK,2,Wrangell,275,Volatile Organic Compounds,CAP,21280.71,TON
+Natural Resources,AK,2,Prince of Wales-Hyder,198,Carbon Monoxide,CAP,19961.36,TON
+Natural Resources,AK,2,Yukon-Koyukuk,290,Nitrogen Oxides,CAP,18420.42,TON
+Natural Resources,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,18273.7,TON
+Off-Highway,AK,2,Anchorage,20,Carbon Monoxide,CAP,16914.61951,TON
+Miscellaneous,AK,2,Nome,180,Carbon Monoxide,CAP,16797.77045,TON
+Natural Resources,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,16416.04,TON
+Miscellaneous,AK,2,Bethel,50,Volatile Organic Compounds,CAP,15337.90312,TON
+Natural Resources,AK,2,Matanuska-Susitna,170,Carbon Monoxide,CAP,15048.04,TON
+Natural Resources,AK,2,Kodiak Island,150,Carbon Monoxide,CAP,14791.91,TON
+Natural Resources,AK,2,Northwest Arctic,188,Carbon Monoxide,CAP,14646.78,TON
+Natural Resources,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,14614.88,TON
+Natural Resources,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,13488.7,TON
+Natural Resources,AK,2,Dillingham,70,Carbon Monoxide,CAP,13194.6,TON
+Fuel Comb. Other,AK,2,Juneau,110,Carbon Monoxide,CAP,13095.04445,TON
+Highway Vehicles,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,11338.92767,TON
+Natural Resources,AK,2,Hoonah-Angoon,105,Carbon Monoxide,CAP,10384.72,TON
+Natural Resources,AK,2,Ketchikan Gateway,130,Carbon Monoxide,CAP,10142.17,TON
+Miscellaneous,AK,2,Kenai Peninsula,122,PM10 Primary (Filt + Cond),CAP,10122.29851,TON
+Miscellaneous,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,10101.97225,TON
+Highway Vehicles,AK,2,Matanuska-Susitna,170,Carbon Monoxide,CAP,10028.51047,TON
+Natural Resources,AK,2,Juneau,110,Volatile Organic Compounds,CAP,9814.618,TON
+Natural Resources,AK,2,Aleutians East,13,Carbon Monoxide,CAP,9622.608,TON
+Natural Resources,AK,2,Nome,180,Carbon Monoxide,CAP,9456.025,TON
+Natural Resources,AK,2,Kusilvak,158,Carbon Monoxide,CAP,9234.651,TON
+Highway Vehicles,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,8951.690011,TON
+Natural Resources,AK,2,Denali,68,Carbon Monoxide,CAP,8918.86,TON
+Fuel Comb. Other,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,8478.649272,TON
+Fuel Comb. Other,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,8461.420903,TON
+Natural Resources,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,8232.003,TON
+Fuel Comb. Other,AK,2,Matanuska-Susitna,170,PM10 Primary (Filt + Cond),CAP,8177.393776,TON
+Fuel Comb. Other,AK,2,Matanuska-Susitna,170,PM2.5 Primary (Filt + Cond),CAP,8176.465726,TON
+Miscellaneous,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,7806.006043,TON
+Natural Resources,AK,2,Haines,100,Volatile Organic Compounds,CAP,7804.28,TON
+Miscellaneous,AK,2,Dillingham,70,Carbon Monoxide,CAP,7786.972332,TON
+Miscellaneous,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,7618.071924,TON
+Fuel Comb. Other,AK,2,Yukon-Koyukuk,290,Carbon Monoxide,CAP,7432.698,TON
+Miscellaneous,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,6951.413527,TON
+Natural Resources,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,6941.894,TON
+Fuel Comb. Other,AK,2,Kodiak Island,150,PM10 Primary (Filt + Cond),CAP,6921.617748,TON
+Fuel Comb. Other,AK,2,Kodiak Island,150,PM2.5 Primary (Filt + Cond),CAP,6920.478771,TON
+Miscellaneous,AK,2,Bethel,50,PM10 Primary (Filt + Cond),CAP,6794.514072,TON
+Natural Resources,AK,2,Sitka,220,Carbon Monoxide,CAP,6622.537,TON
+Fuel Comb. Elec. Util.,AK,2,Northwest Arctic,188,Nitrogen Oxides,CAP,6025.5818,TON
+Fuel Comb. Other,AK,2,Ketchikan Gateway,130,Carbon Monoxide,CAP,5982.519444,TON
+Natural Resources,AK,2,Yakutat,282,Carbon Monoxide,CAP,5699.57,TON
+Natural Resources,AK,2,Wrangell,275,Carbon Monoxide,CAP,5643.021,TON
+Miscellaneous,AK,2,Bethel,50,PM2.5 Primary (Filt + Cond),CAP,5470.754988,TON
+Natural Resources,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,5465.378,TON
+Miscellaneous,AK,2,Anchorage,20,PM10 Primary (Filt + Cond),CAP,5030.198418,TON
+Miscellaneous,AK,2,Denali,68,Carbon Monoxide,CAP,4895.596475,TON
+Natural Resources,AK,2,Petersburg,195,Carbon Monoxide,CAP,4803.995,TON
+Fuel Comb. Industrial,AK,2,North Slope,185,Carbon Monoxide,CAP,4665.449997,TON
+Fuel Comb. Industrial,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,4423.985851,TON
+Fuel Comb. Elec. Util.,AK,2,North Slope,185,Nitrogen Oxides,CAP,4373.1385,TON
+Miscellaneous,AK,2,Southeast Fairbanks,240,PM10 Primary (Filt + Cond),CAP,4181.381215,TON
+Fuel Comb. Other,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,4103.214904,TON
+Miscellaneous,AK,2,Nome,180,Volatile Organic Compounds,CAP,3959.119633,TON
+Miscellaneous,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,3911.992425,TON
+Off-Highway,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,3903.663148,TON
+Natural Resources,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,3773.127,TON
+Fuel Comb. Other,AK,2,Nome,180,Carbon Monoxide,CAP,3759.438386,TON
+Fuel Comb. Other,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,3679.912605,TON
+Fuel Comb. Other,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,3613.248647,TON
+Miscellaneous,AK,2,Nome,180,PM10 Primary (Filt + Cond),CAP,3574.075071,TON
+Off-Highway,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,3425.830661,TON
+Natural Resources,AK,2,Bethel,50,Nitrogen Oxides,CAP,3417.128,TON
+Off-Highway,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,3384.467012,TON
+Natural Resources,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,3338.622,TON
+Highway Vehicles,AK,2,Anchorage,20,Nitrogen Oxides,CAP,3262.434608,TON
+Miscellaneous,AK,2,Matanuska-Susitna,170,PM10 Primary (Filt + Cond),CAP,3172.335854,TON
+Off-Highway,AK,2,Anchorage,20,Nitrogen Oxides,CAP,3164.186009,TON
+Off-Highway,AK,2,Matanuska-Susitna,170,Carbon Monoxide,CAP,3073.463922,TON
+Miscellaneous,AK,2,Southeast Fairbanks,240,PM2.5 Primary (Filt + Cond),CAP,3011.779011,TON
+Natural Resources,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,2895.004,TON
+Natural Resources,AK,2,North Slope,185,Nitrogen Oxides,CAP,2738.838,TON
+Fuel Comb. Other,AK,2,Anchorage,20,PM10 Primary (Filt + Cond),CAP,2738.211289,TON
+Fuel Comb. Other,AK,2,Anchorage,20,PM2.5 Primary (Filt + Cond),CAP,2728.972262,TON
+Fuel Comb. Other,AK,2,Bethel,50,Carbon Monoxide,CAP,2707.583415,TON
+Highway Vehicles,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,2637.573013,TON
+Fuel Comb. Other,AK,2,Kusilvak,158,Carbon Monoxide,CAP,2533.583674,TON
+Natural Resources,AK,2,Juneau,110,Carbon Monoxide,CAP,2510,TON
+Highway Vehicles,AK,2,Juneau,110,Carbon Monoxide,CAP,2445.854268,TON
+Fuel Comb. Other,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,2361.909652,TON
+Fuel Comb. Other,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,2361.421345,TON
+Natural Resources,AK,2,Northwest Arctic,188,Nitrogen Oxides,CAP,2251.656,TON
+Solvent Utilization,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,2164.68832,TON
+Natural Resources,AK,2,Haines,100,Carbon Monoxide,CAP,1995.045,TON
+Fuel Comb. Elec. Util.,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,1963.3837,TON
+Miscellaneous,AK,2,Northwest Arctic,188,Carbon Monoxide,CAP,1955.581063,TON
+Off-Highway,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,1904.870564,TON
+Fuel Comb. Other,AK,2,Kenai Peninsula,122,PM10 Primary (Filt + Cond),CAP,1881.838222,TON
+Fuel Comb. Other,AK,2,Kenai Peninsula,122,PM2.5 Primary (Filt + Cond),CAP,1881.114466,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,1836.0211,TON
+Miscellaneous,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,1832.055393,TON
+Miscellaneous,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,1796.230968,TON
+Highway Vehicles,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,1764.146646,TON
+Highway Vehicles,AK,2,Matanuska-Susitna,170,Nitrogen Oxides,CAP,1751.336063,TON
+Highway Vehicles,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,1741.93935,TON
+Natural Resources,AK,2,Nome,180,Nitrogen Oxides,CAP,1739.265,TON
+Highway Vehicles,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,1720.467893,TON
+Miscellaneous,AK,2,Nome,180,PM2.5 Primary (Filt + Cond),CAP,1719.643876,TON
+Off-Highway,AK,2,Hoonah-Angoon,105,Nitrogen Oxides,CAP,1668.520189,TON
+Natural Resources,AK,2,Aleutians West,16,Carbon Monoxide,CAP,1640.494,TON
+Off-Highway,AK,2,Juneau,110,Carbon Monoxide,CAP,1632.337173,TON
+Natural Resources,AK,2,Kusilvak,158,Nitrogen Oxides,CAP,1625.319,TON
+Fuel Comb. Industrial,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,1604.160242,TON
+Miscellaneous,AK,2,Kenai Peninsula,122,PM2.5 Primary (Filt + Cond),CAP,1603.802075,TON
+Miscellaneous,AK,2,Valdez-Cordova,261,PM10 Primary (Filt + Cond),CAP,1602.167465,TON
+Fuel Comb. Other,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,1602.139726,TON
+Off-Highway,AK,2,Juneau,110,Nitrogen Oxides,CAP,1586.946636,TON
+Off-Highway,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,1585.515994,TON
+Fuel Comb. Other,AK,2,North Slope,185,Carbon Monoxide,CAP,1585.113668,TON
+Natural Resources,AK,2,Lake and Peninsula,164,Nitrogen Oxides,CAP,1548.551,TON
+Fuel Comb. Other,AK,2,Lake and Peninsula,164,Nitrogen Oxides,CAP,1517.424762,TON
+Natural Resources,AK,2,Matanuska-Susitna,170,Nitrogen Oxides,CAP,1500.073,TON
+Fuel Comb. Elec. Util.,AK,2,North Slope,185,Carbon Monoxide,CAP,1477.8925,TON
+Fuel Comb. Other,AK,2,Anchorage,20,Nitrogen Oxides,CAP,1475.138573,TON
+Fuel Comb. Other,AK,2,Petersburg,195,Carbon Monoxide,CAP,1471.973593,TON
+Off-Highway,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,1444.738037,TON
+Fuel Comb. Other,AK,2,Kodiak Island,150,Nitrogen Oxides,CAP,1438.378668,TON
+Fuel Comb. Other,AK,2,Matanuska-Susitna,170,Nitrogen Oxides,CAP,1438.328823,TON
+Fuel Comb. Other,AK,2,Northwest Arctic,188,Carbon Monoxide,CAP,1437.629745,TON
+Fuel Comb. Other,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,1424.219824,TON
+Fuel Comb. Other,AK,2,Prince of Wales-Hyder,198,Carbon Monoxide,CAP,1421.683896,TON
+Off-Highway,AK,2,Ketchikan Gateway,130,Nitrogen Oxides,CAP,1389.676376,TON
+Highway Vehicles,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,1360.827296,TON
+Fuel Comb. Other,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,1360.731511,TON
+Off-Highway,AK,2,Bethel,50,Carbon Monoxide,CAP,1360.28424,TON
+Miscellaneous,AK,2,Anchorage,20,Carbon Monoxide,CAP,1353.413989,TON
+Fuel Comb. Other,AK,2,Yukon-Koyukuk,290,PM10 Primary (Filt + Cond),CAP,1328.789319,TON
+Fuel Comb. Other,AK,2,Yukon-Koyukuk,290,PM2.5 Primary (Filt + Cond),CAP,1328.704274,TON
+Highway Vehicles,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,1282.035327,TON
+Natural Resources,AK,2,Denali,68,Nitrogen Oxides,CAP,1263.722,TON
+Natural Resources,AK,2,Anchorage,20,Carbon Monoxide,CAP,1258.762,TON
+Petroleum & Related Industries,AK,2,North Slope,185,Carbon Monoxide,CAP,1244.38157,TON
+Off-Highway,AK,2,Ketchikan Gateway,130,Carbon Monoxide,CAP,1236.922665,TON
+Miscellaneous,AK,2,Kusilvak,158,PM10 Primary (Filt + Cond),CAP,1210.956993,TON
+Off-Highway,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,1207.379952,TON
+Off-Highway,AK,2,Kodiak Island,150,Carbon Monoxide,CAP,1206.000635,TON
+Miscellaneous,AK,2,Dillingham,70,PM10 Primary (Filt + Cond),CAP,1195.363636,TON
+Highway Vehicles,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,1195.323828,TON
+Highway Vehicles,AK,2,Yukon-Koyukuk,290,Carbon Monoxide,CAP,1186.314787,TON
+Fuel Comb. Elec. Util.,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,1186.1467,TON
+Highway Vehicles,AK,2,Ketchikan Gateway,130,Carbon Monoxide,CAP,1173.595228,TON
+Off-Highway,AK,2,Lake and Peninsula,164,Carbon Monoxide,CAP,1166.569598,TON
+Natural Resources,AK,2,Dillingham,70,Nitrogen Oxides,CAP,1161.533,TON
+Miscellaneous,AK,2,Denali,68,Volatile Organic Compounds,CAP,1151.796315,TON
+Off-Highway,AK,2,Prince of Wales-Hyder,198,Nitrogen Oxides,CAP,1143.542303,TON
+Off-Highway,AK,2,Aleutians West,16,Sulfur Dioxide,CAP,1122.038217,TON
+Fuel Comb. Elec. Util.,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,1106.9659,TON
+Natural Resources,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,1087.965,TON
+Miscellaneous,AK,2,Bethel,50,Ammonia,CAP,1066.993015,TON
+Fuel Comb. Other,AK,2,Ketchikan Gateway,130,PM10 Primary (Filt + Cond),CAP,1054.834205,TON
+Fuel Comb. Other,AK,2,Ketchikan Gateway,130,PM2.5 Primary (Filt + Cond),CAP,1054.611566,TON
+Off-Highway,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,1053.481458,TON
+Fuel Comb. Other,AK,2,Denali,68,Carbon Monoxide,CAP,1048.223473,TON
+Highway Vehicles,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,1029.82903,TON
+Natural Resources,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,1023.252,TON
+Fuel Comb. Industrial,AK,2,North Slope,185,Sulfur Dioxide,CAP,1022.374008,TON
+Off-Highway,AK,2,Yukon-Koyukuk,290,Carbon Monoxide,CAP,1019.468584,TON
+Off-Highway,AK,2,North Slope,185,Carbon Monoxide,CAP,987.0340891,TON
+Petroleum & Related Industries,AK,2,North Slope,185,Volatile Organic Compounds,CAP,942.0794089,TON
+Highway Vehicles,AK,2,Kodiak Island,150,Carbon Monoxide,CAP,869.6169077,TON
+Fuel Comb. Industrial,AK,2,North Slope,185,PM10 Primary (Filt + Cond),CAP,831.0332907,TON
+Off-Highway,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,821.1203432,TON
+Fuel Comb. Other,AK,2,Yukon-Koyukuk,290,Nitrogen Oxides,CAP,820.0658698,TON
+Off-Highway,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,816.3444537,TON
+Off-Highway,AK,2,Kodiak Island,150,Nitrogen Oxides,CAP,806.3674789,TON
+Highway Vehicles,AK,2,Denali,68,Carbon Monoxide,CAP,803.5771922,TON
+Natural Resources,AK,2,Bristol Bay,60,Carbon Monoxide,CAP,775.8427,TON
+Storage & Transport,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,770.5598253,TON
+Miscellaneous,AK,2,Fairbanks North Star,90,Ammonia,CAP,768.5828067,TON
+Fuel Comb. Other,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,767.1760371,TON
+Miscellaneous,AK,2,Northwest Arctic,188,PM10 Primary (Filt + Cond),CAP,761.922308,TON
+Off-Highway,AK,2,Nome,180,Carbon Monoxide,CAP,751.4610499,TON
+Natural Resources,AK,2,Skagway,230,Volatile Organic Compounds,CAP,748.7956,TON
+Off-Highway,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,748.5488889,TON
+Natural Resources,AK,2,Aleutians East,13,Nitrogen Oxides,CAP,742.2151,TON
+Fuel Comb. Other,AK,2,Valdez-Cordova,261,PM10 Primary (Filt + Cond),CAP,733.6266897,TON
+Fuel Comb. Other,AK,2,Valdez-Cordova,261,PM2.5 Primary (Filt + Cond),CAP,733.5000534,TON
+Fuel Comb. Industrial,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,732.7789619,TON
+Fuel Comb. Industrial,AK,2,North Slope,185,Volatile Organic Compounds,CAP,730.8971715,TON
+Fuel Comb. Other,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,729.0477652,TON
+Off-Highway,AK,2,Dillingham,70,Carbon Monoxide,CAP,717.0696873,TON
+Miscellaneous,AK,2,Denali,68,PM10 Primary (Filt + Cond),CAP,712.0665095,TON
+Off-Highway,AK,2,Sitka,220,Nitrogen Oxides,CAP,711.9322764,TON
+Solvent Utilization,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,703.7305058,TON
+Miscellaneous,AK,2,Dillingham,70,PM2.5 Primary (Filt + Cond),CAP,699.8166945,TON
+Fuel Comb. Other,AK,2,Haines,100,Carbon Monoxide,CAP,697.48898,TON
+Petroleum & Related Industries,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,686.2485404,TON
+Solvent Utilization,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,684.2945896,TON
+Off-Highway,AK,2,Sitka,220,Carbon Monoxide,CAP,683.7502474,TON
+Miscellaneous,AK,2,Aleutians West,16,PM10 Primary (Filt + Cond),CAP,682.9212009,TON
+Off-Highway,AK,2,Northwest Arctic,188,Carbon Monoxide,CAP,680.2480527,TON
+Fuel Comb. Industrial,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,660.8406752,TON
+Fuel Comb. Elec. Util.,AK,2,Bethel,50,Nitrogen Oxides,CAP,660.43,TON
+Fuel Comb. Other,AK,2,North Slope,185,PM10 Primary (Filt + Cond),CAP,656.998654,TON
+Fuel Comb. Other,AK,2,Southeast Fairbanks,240,PM10 Primary (Filt + Cond),CAP,648.9750749,TON
+Fuel Comb. Other,AK,2,Southeast Fairbanks,240,PM2.5 Primary (Filt + Cond),CAP,648.9206098,TON
+Highway Vehicles,AK,2,Sitka,220,Carbon Monoxide,CAP,640.2319588,TON
+Off-Highway,AK,2,Haines,100,Nitrogen Oxides,CAP,639.7611753,TON
+Miscellaneous,AK,2,Anchorage,20,PM2.5 Primary (Filt + Cond),CAP,630.1096314,TON
+Highway Vehicles,AK,2,Prince of Wales-Hyder,198,Carbon Monoxide,CAP,627.9819632,TON
+Miscellaneous,AK,2,Bethel,50,Nitrogen Oxides,CAP,627.3094274,TON
+Off-Highway,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,612.6408865,TON
+Storage & Transport,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,612.1168275,TON
+Fuel Comb. Other,AK,2,Wrangell,275,Carbon Monoxide,CAP,611.1440671,TON
+Miscellaneous,AK,2,Prince of Wales-Hyder,198,PM10 Primary (Filt + Cond),CAP,609.2835228,TON
+Off-Highway,AK,2,Petersburg,195,Nitrogen Oxides,CAP,604.2596876,TON
+Highway Vehicles,AK,2,Nome,180,Carbon Monoxide,CAP,588.4747048,TON
+Fuel Comb. Other,AK,2,Bethel,50,PM10 Primary (Filt + Cond),CAP,582.7061098,TON
+Miscellaneous,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,582.0766412,TON
+Highway Vehicles,AK,2,Bethel,50,Carbon Monoxide,CAP,562.6945328,TON
+Fuel Comb. Elec. Util.,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,553.747,TON
+Miscellaneous,AK,2,Southeast Fairbanks,240,Ammonia,CAP,543.0349461,TON
+Off-Highway,AK,2,Kusilvak,158,Carbon Monoxide,CAP,536.8950037,TON
+Off-Highway,AK,2,Yakutat,282,Nitrogen Oxides,CAP,520.1650134,TON
+Fuel Comb. Other,AK,2,Northwest Arctic,188,PM10 Primary (Filt + Cond),CAP,518.0740126,TON
+Fuel Comb. Other,AK,2,Sitka,220,Carbon Monoxide,CAP,508.4590349,TON
+Fuel Comb. Elec. Util.,AK,2,Denali,68,Carbon Monoxide,CAP,504.6908,TON
+Miscellaneous,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,499.8848274,TON
+Fuel Comb. Elec. Util.,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,495.4941,TON
+Natural Resources,AK,2,Kodiak Island,150,Nitrogen Oxides,CAP,494.0707,TON
+Fuel Comb. Elec. Util.,AK,2,Nome,180,Nitrogen Oxides,CAP,492.53,TON
+Fuel Comb. Industrial,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,485.7197582,TON
+Miscellaneous,AK,2,Petersburg,195,PM10 Primary (Filt + Cond),CAP,485.1931897,TON
+Natural Resources,AK,2,Hoonah-Angoon,105,Nitrogen Oxides,CAP,484.5841,TON
+Fuel Comb. Other,AK,2,Lake and Peninsula,164,Carbon Monoxide,CAP,484.1650785,TON
+Fuel Comb. Other,AK,2,Bethel,50,PM2.5 Primary (Filt + Cond),CAP,481.5504736,TON
+Fuel Comb. Other,AK,2,Hoonah-Angoon,105,Carbon Monoxide,CAP,481.3555289,TON
+Off-Highway,AK,2,Wrangell,275,Carbon Monoxide,CAP,476.1244233,TON
+Miscellaneous,AK,2,North Slope,185,PM10 Primary (Filt + Cond),CAP,475.9054199,TON
+Fuel Comb. Elec. Util.,AK,2,Anchorage,20,Nitrogen Oxides,CAP,472.7403,TON
+Storage & Transport,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,470.6829682,TON
+Fuel Comb. Elec. Util.,AK,2,Northwest Arctic,188,Carbon Monoxide,CAP,468.896,TON
+Miscellaneous,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,462.2229408,TON
+Off-Highway,AK,2,Aleutians West,16,Carbon Monoxide,CAP,458.7963807,TON
+Fuel Comb. Other,AK,2,Nome,180,PM10 Primary (Filt + Cond),CAP,452.7187115,TON
+Fuel Comb. Other,AK,2,Nome,180,PM2.5 Primary (Filt + Cond),CAP,452.6157772,TON
+Fuel Comb. Elec. Util.,AK,2,Anchorage,20,Carbon Monoxide,CAP,442.9482,TON
+Miscellaneous,AK,2,Denali,68,PM2.5 Primary (Filt + Cond),CAP,436.1995892,TON
+Fuel Comb. Elec. Util.,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,418.3672,TON
+Fuel Comb. Elec. Util.,AK,2,Valdez-Cordova,261,PM10 Primary (Filt + Cond),CAP,417.471,TON
+Off-Highway,AK,2,Juneau,110,Volatile Organic Compounds,CAP,417.1569349,TON
+Fuel Comb. Elec. Util.,AK,2,Bristol Bay,60,Nitrogen Oxides,CAP,411.366,TON
+Miscellaneous,AK,2,Bethel,50,Sulfur Dioxide,CAP,410.1728284,TON
+Off-Highway,AK,2,Bristol Bay,60,Carbon Monoxide,CAP,405.3986511,TON
+Highway Vehicles,AK,2,Dillingham,70,Carbon Monoxide,CAP,403.3927634,TON
+Highway Vehicles,AK,2,Juneau,110,Nitrogen Oxides,CAP,397.7734352,TON
+Off-Highway,AK,2,Hoonah-Angoon,105,Carbon Monoxide,CAP,395.9728751,TON
+Solvent Utilization,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,395.1552033,TON
+Highway Vehicles,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,392.6862339,TON
+Fuel Comb. Industrial,AK,2,Anchorage,20,Nitrogen Oxides,CAP,384.399433,TON
+Petroleum & Related Industries,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,384.0560027,TON
+Natural Resources,AK,2,Ketchikan Gateway,130,Nitrogen Oxides,CAP,379.5809,TON
+Off-Highway,AK,2,Petersburg,195,Carbon Monoxide,CAP,367.5566505,TON
+Off-Highway,AK,2,Yakutat,282,Carbon Monoxide,CAP,364.0888103,TON
+Miscellaneous,AK,2,Aleutians East,13,PM10 Primary (Filt + Cond),CAP,362.664493,TON
+Petroleum & Related Industries,AK,2,North Slope,185,Nitrogen Oxides,CAP,354.615627,TON
+Off-Highway,AK,2,Prince of Wales-Hyder,198,Carbon Monoxide,CAP,353.5345539,TON
+Fuel Comb. Industrial,AK,2,Yukon-Koyukuk,290,Nitrogen Oxides,CAP,353.3712954,TON
+Off-Highway,AK,2,Skagway,230,Nitrogen Oxides,CAP,352.3628818,TON
+Off-Highway,AK,2,Matanuska-Susitna,170,Nitrogen Oxides,CAP,332.3686643,TON
+Fuel Comb. Industrial,AK,2,Matanuska-Susitna,170,Nitrogen Oxides,CAP,331.7628348,TON
+Petroleum & Related Industries,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,329.8061033,TON
+Miscellaneous,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,325.7559496,TON
+Fuel Comb. Other,AK,2,Juneau,110,Nitrogen Oxides,CAP,325.4290333,TON
+Miscellaneous,AK,2,Matanuska-Susitna,170,PM2.5 Primary (Filt + Cond),CAP,325.1093838,TON
+Fuel Comb. Industrial,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,324.0782698,TON
+Off-Highway,AK,2,Wrangell,275,Nitrogen Oxides,CAP,318.6093513,TON
+Highway Vehicles,AK,2,Juneau,110,Volatile Organic Compounds,CAP,317.6486264,TON
+Fuel Comb. Other,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,316.4853315,TON
+Fuel Comb. Other,AK,2,Anchorage,20,Ammonia,CAP,315.9602784,TON
+Fuel Comb. Elec. Util.,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,314.0148,TON
+Fuel Comb. Elec. Util.,AK,2,Valdez-Cordova,261,PM2.5 Primary (Filt + Cond),CAP,313.8731437,TON
+Off-Highway,AK,2,Bethel,50,Volatile Organic Compounds,CAP,308.6882279,TON
+Fuel Comb. Other,AK,2,Kusilvak,158,PM10 Primary (Filt + Cond),CAP,303.6391639,TON
+Fuel Comb. Other,AK,2,Kusilvak,158,PM2.5 Primary (Filt + Cond),CAP,303.6046929,TON
+Off-Highway,AK,2,Skagway,230,Carbon Monoxide,CAP,302.1563238,TON
+Miscellaneous,AK,2,Kodiak Island,150,PM10 Primary (Filt + Cond),CAP,301.3346252,TON
+Highway Vehicles,AK,2,Haines,100,Carbon Monoxide,CAP,300.8241441,TON
+Fuel Comb. Elec. Util.,AK,2,Denali,68,Sulfur Dioxide,CAP,296.409,TON
+Miscellaneous,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,296.2575205,TON
+Highway Vehicles,AK,2,Petersburg,195,Carbon Monoxide,CAP,291.8304996,TON
+Off-Highway,AK,2,Aleutians East,13,Carbon Monoxide,CAP,289.8455793,TON
+Fuel Comb. Other,AK,2,North Slope,185,PM2.5 Primary (Filt + Cond),CAP,289.2985134,TON
+Miscellaneous,AK,2,Southeast Fairbanks,240,Sulfur Dioxide,CAP,288.0596471,TON
+Highway Vehicles,AK,2,Anchorage,20,PM10 Primary (Filt + Cond),CAP,283.8098529,TON
+Natural Resources,AK,2,Sitka,220,Nitrogen Oxides,CAP,281.6086,TON
+Off-Highway,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,280.2294567,TON
+Highway Vehicles,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,277.9543524,TON
+Off-Highway,AK,2,Denali,68,Carbon Monoxide,CAP,276.688917,TON
+Miscellaneous,AK,2,Nome,180,Ammonia,CAP,275.4253531,TON
+Off-Highway,AK,2,Haines,100,Carbon Monoxide,CAP,272.6577376,TON
+Highway Vehicles,AK,2,Yukon-Koyukuk,290,Nitrogen Oxides,CAP,272.4684084,TON
+Fuel Comb. Other,AK,2,Skagway,230,Carbon Monoxide,CAP,271.2058429,TON
+Fuel Comb. Elec. Util.,AK,2,Multiple (portable facilities),777,Nitrogen Oxides,CAP,269.42,TON
+Highway Vehicles,AK,2,North Slope,185,Carbon Monoxide,CAP,265.2279803,TON
+Fuel Comb. Other,AK,2,Petersburg,195,PM10 Primary (Filt + Cond),CAP,263.7470439,TON
+Fuel Comb. Other,AK,2,Petersburg,195,PM2.5 Primary (Filt + Cond),CAP,263.7115987,TON
+Off-Highway,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,263.6545797,TON
+Off-Highway,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,259.9095457,TON
+Off-Highway,AK,2,Anchorage,20,PM10 Primary (Filt + Cond),CAP,259.4731501,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians East,13,Nitrogen Oxides,CAP,257.602,TON
+Fuel Comb. Industrial,AK,2,Kenai Peninsula,122,PM10 Primary (Filt + Cond),CAP,255.6121299,TON
+Fuel Comb. Other,AK,2,Sitka,220,Nitrogen Oxides,CAP,255.5802973,TON
+Fuel Comb. Elec. Util.,AK,2,Dillingham,70,Nitrogen Oxides,CAP,252.4539,TON
+Natural Resources,AK,2,Prince of Wales-Hyder,198,Nitrogen Oxides,CAP,250.7502,TON
+Fuel Comb. Other,AK,2,Yakutat,282,Nitrogen Oxides,CAP,248.5416893,TON
+Fuel Comb. Other,AK,2,Prince of Wales-Hyder,198,PM10 Primary (Filt + Cond),CAP,246.5004673,TON
+Fuel Comb. Other,AK,2,Prince of Wales-Hyder,198,PM2.5 Primary (Filt + Cond),CAP,246.4571594,TON
+Fuel Comb. Industrial,AK,2,Kenai Peninsula,122,PM2.5 Primary (Filt + Cond),CAP,245.3917944,TON
+Natural Resources,AK,2,Yakutat,282,Nitrogen Oxides,CAP,242.5109,TON
+Off-Highway,AK,2,Anchorage,20,PM2.5 Primary (Filt + Cond),CAP,242.4238777,TON
+Highway Vehicles,AK,2,Bristol Bay,60,Carbon Monoxide,CAP,241.5975418,TON
+Fuel Comb. Other,AK,2,Northwest Arctic,188,PM2.5 Primary (Filt + Cond),CAP,239.9597808,TON
+Fuel Comb. Other,AK,2,Aleutians East,13,Nitrogen Oxides,CAP,237.5962652,TON
+Natural Resources,AK,2,Wrangell,275,Nitrogen Oxides,CAP,235.6394,TON
+Natural Resources,AK,2,Juneau,110,Nitrogen Oxides,CAP,234.5789,TON
+Fuel Comb. Elec. Util.,AK,2,Denali,68,Nitrogen Oxides,CAP,234.1737,TON
+Off-Highway,AK,2,Lake and Peninsula,164,Volatile Organic Compounds,CAP,231.9522503,TON
+Miscellaneous,AK,2,Northwest Arctic,188,PM2.5 Primary (Filt + Cond),CAP,227.5221609,TON
+Fuel Comb. Industrial,AK,2,Juneau,110,Nitrogen Oxides,CAP,227.3087599,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians East,13,Carbon Monoxide,CAP,226.8348,TON
+Solvent Utilization,AK,2,Juneau,110,Volatile Organic Compounds,CAP,226.0430402,TON
+Highway Vehicles,AK,2,Northwest Arctic,188,Carbon Monoxide,CAP,225.3959178,TON
+Fuel Comb. Industrial,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,219.3098761,TON
+Fuel Comb. Other,AK,2,Dillingham,70,Carbon Monoxide,CAP,217.2567609,TON
+Off-Highway,AK,2,Aleutians East,13,Nitrogen Oxides,CAP,215.095457,TON
+Fuel Comb. Elec. Util.,AK,2,Yukon-Koyukuk,290,Nitrogen Oxides,CAP,215.071,TON
+Miscellaneous,AK,2,Nome,180,Nitrogen Oxides,CAP,214.9043393,TON
+Off-Highway,AK,2,North Slope,185,Nitrogen Oxides,CAP,211.789287,TON
+Fuel Comb. Industrial,AK,2,Kodiak Island,150,Nitrogen Oxides,CAP,211.1253751,TON
+Storage & Transport,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,208.9283806,TON
+Highway Vehicles,AK,2,Aleutians West,16,Carbon Monoxide,CAP,208.0537074,TON
+Fuel Comb. Other,AK,2,Yakutat,282,Carbon Monoxide,CAP,206.4901346,TON
+Off-Highway,AK,2,Anchorage,20,Sulfur Dioxide,CAP,205.8243669,TON
+Natural Resources,AK,2,Skagway,230,Carbon Monoxide,CAP,200.6938,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians West,16,Carbon Monoxide,CAP,200.4102,TON
+Off-Highway,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,199.9359208,TON
+Off-Highway,AK,2,North Slope,185,Volatile Organic Compounds,CAP,197.7151586,TON
+Natural Resources,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,192.1866,TON
+Highway Vehicles,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,190.2010207,TON
+Fuel Comb. Other,AK,2,Denali,68,PM10 Primary (Filt + Cond),CAP,187.4373623,TON
+Fuel Comb. Other,AK,2,Denali,68,PM2.5 Primary (Filt + Cond),CAP,187.4014605,TON
+Highway Vehicles,AK,2,Wrangell,275,Carbon Monoxide,CAP,185.0871155,TON
+Fuel Comb. Industrial,AK,2,Matanuska-Susitna,170,Carbon Monoxide,CAP,184.2443341,TON
+Highway Vehicles,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,183.1950681,TON
+Highway Vehicles,AK,2,Ketchikan Gateway,130,Nitrogen Oxides,CAP,182.7562443,TON
+Natural Resources,AK,2,Haines,100,Nitrogen Oxides,CAP,182.7015,TON
+Miscellaneous,AK,2,Kusilvak,158,PM2.5 Primary (Filt + Cond),CAP,181.2411671,TON
+Highway Vehicles,AK,2,Denali,68,Nitrogen Oxides,CAP,180.8235997,TON
+Fuel Comb. Elec. Util.,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,180.029,TON
+Storage & Transport,AK,2,North Slope,185,Volatile Organic Compounds,CAP,178.8635415,TON
+Natural Resources,AK,2,Petersburg,195,Nitrogen Oxides,CAP,177.8405,TON
+Fuel Comb. Other,AK,2,Juneau,110,Volatile Organic Compounds,CAP,177.340264,TON
+Storage & Transport,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,176.3928613,TON
+Off-Highway,AK,2,Nome,180,Volatile Organic Compounds,CAP,174.6335096,TON
+Highway Vehicles,AK,2,Hoonah-Angoon,105,Carbon Monoxide,CAP,169.8434549,TON
+Fuel Comb. Industrial,AK,2,Aleutians West,16,Carbon Monoxide,CAP,167.9977888,TON
+Fuel Comb. Other,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,167.0764314,TON
+Off-Highway,AK,2,Aleutians West,16,PM10 Primary (Filt + Cond),CAP,166.8726277,TON
+Off-Highway,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,165.6363829,TON
+Off-Highway,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,164.6359134,TON
+Off-Highway,AK,2,Dillingham,70,Nitrogen Oxides,CAP,164.2978468,TON
+Fuel Comb. Industrial,AK,2,Kodiak Island,150,Carbon Monoxide,CAP,163.2329993,TON
+Miscellaneous,AK,2,Valdez-Cordova,261,PM2.5 Primary (Filt + Cond),CAP,162.9985826,TON
+Highway Vehicles,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,162.0752626,TON
+Fuel Comb. Industrial,AK,2,North Slope,185,PM2.5 Primary (Filt + Cond),CAP,158.9277138,TON
+Fuel Comb. Other,AK,2,Bethel,50,Nitrogen Oxides,CAP,157.4060355,TON
+Highway Vehicles,AK,2,Anchorage,20,PM2.5 Primary (Filt + Cond),CAP,157.043891,TON
+Fuel Comb. Elec. Util.,AK,2,North Slope,185,Sulfur Dioxide,CAP,155.8383,TON
+Off-Highway,AK,2,Lake and Peninsula,164,Nitrogen Oxides,CAP,155.8351411,TON
+Miscellaneous,AK,2,North Slope,185,Carbon Monoxide,CAP,154.2395707,TON
+Off-Highway,AK,2,Aleutians West,16,PM2.5 Primary (Filt + Cond),CAP,153.8263176,TON
+Fuel Comb. Industrial,AK,2,Bethel,50,Nitrogen Oxides,CAP,151.7713945,TON
+Fuel Comb. Elec. Util.,AK,2,North Slope,185,PM10 Primary (Filt + Cond),CAP,150.9511,TON
+Highway Vehicles,AK,2,Skagway,230,Carbon Monoxide,CAP,150.4164437,TON
+Off-Highway,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,149.9240336,TON
+Off-Highway,AK,2,Bethel,50,Nitrogen Oxides,CAP,149.2307244,TON
+Other Industrial Processes,AK,2,Bristol Bay,60,Nitrogen Oxides,CAP,149.0061474,TON
+Off-Highway,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,148.575202,TON
+Off-Highway,AK,2,Sitka,220,Volatile Organic Compounds,CAP,147.7108558,TON
+Fuel Comb. Elec. Util.,AK,2,Northwest Arctic,188,PM2.5 Primary (Filt + Cond),CAP,147.5633,TON
+Miscellaneous,AK,2,Bristol Bay,60,PM10 Primary (Filt + Cond),CAP,146.4432617,TON
+Fuel Comb. Other,AK,2,Ketchikan Gateway,130,Nitrogen Oxides,CAP,145.6456032,TON
+Fuel Comb. Elec. Util.,AK,2,Northwest Arctic,188,PM10 Primary (Filt + Cond),CAP,145.6137,TON
+Miscellaneous,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,145.3364446,TON
+Miscellaneous,AK,2,Kenai Peninsula,122,Ammonia,CAP,144.2160823,TON
+Other Industrial Processes,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,144.0357336,TON
+Fuel Comb. Industrial,AK,2,Kenai Peninsula,122,Sulfur Dioxide,CAP,142.8853008,TON
+Highway Vehicles,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,142.4980636,TON
+Fuel Comb. Other,AK,2,Matanuska-Susitna,170,Sulfur Dioxide,CAP,140.9431091,TON
+Highway Vehicles,AK,2,Lake and Peninsula,164,Carbon Monoxide,CAP,136.5782085,TON
+Off-Highway,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,135.0382821,TON
+Fuel Comb. Industrial,AK,2,Aleutians East,13,Nitrogen Oxides,CAP,133.2649448,TON
+Fuel Comb. Industrial,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,133.0217709,TON
+Fuel Comb. Industrial,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,131.9452578,TON
+Fuel Comb. Industrial,AK,2,Northwest Arctic,188,Nitrogen Oxides,CAP,127.8572043,TON
+Miscellaneous,AK,2,Dillingham,70,Ammonia,CAP,127.4558261,TON
+Highway Vehicles,AK,2,Kodiak Island,150,Nitrogen Oxides,CAP,126.5542455,TON
+Off-Highway,AK,2,Kodiak Island,150,Sulfur Dioxide,CAP,126.1816322,TON
+Off-Highway,AK,2,Kusilvak,158,Volatile Organic Compounds,CAP,125.5362439,TON
+Highway Vehicles,AK,2,Aleutians East,13,Carbon Monoxide,CAP,125.3528695,TON
+Highway Vehicles,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,124.9463364,TON
+Miscellaneous,AK,2,Wrangell,275,PM10 Primary (Filt + Cond),CAP,124.4539698,TON
+Highway Vehicles,AK,2,Matanuska-Susitna,170,PM10 Primary (Filt + Cond),CAP,124.2705485,TON
+Fuel Comb. Industrial,AK,2,Anchorage,20,Carbon Monoxide,CAP,123.6650431,TON
+Waste Disposal & Recycling,AK,2,Dillingham,70,Carbon Monoxide,CAP,123,TON
+Off-Highway,AK,2,Yukon-Koyukuk,290,Nitrogen Oxides,CAP,122.2859079,TON
+Miscellaneous,AK,2,Nome,180,Sulfur Dioxide,CAP,121.8641658,TON
+Fuel Comb. Elec. Util.,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,120.6773,TON
+Natural Resources,AK,2,Anchorage,20,Nitrogen Oxides,CAP,120.6703,TON
+Fuel Comb. Other,AK,2,Haines,100,PM10 Primary (Filt + Cond),CAP,119.9504103,TON
+Fuel Comb. Other,AK,2,Haines,100,PM2.5 Primary (Filt + Cond),CAP,119.9241979,TON
+Fuel Comb. Elec. Util.,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,118.9194,TON
+Other Industrial Processes,AK,2,Anchorage,20,PM10 Primary (Filt + Cond),CAP,118.412778,TON
+Fuel Comb. Industrial,AK,2,Juneau,110,Carbon Monoxide,CAP,117.7895149,TON
+Fuel Comb. Other,AK,2,Anchorage,20,Sulfur Dioxide,CAP,117.3078789,TON
+Other Industrial Processes,AK,2,Anchorage,20,Carbon Monoxide,CAP,117.270308,TON
+Fuel Comb. Elec. Util.,AK,2,Yukon-Koyukuk,290,Carbon Monoxide,CAP,116.66,TON
+Off-Highway,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,116.4290091,TON
+Fuel Comb. Other,AK,2,Kodiak Island,150,Sulfur Dioxide,CAP,115.8161105,TON
+Fuel Comb. Elec. Util.,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,114.719,TON
+Miscellaneous,AK,2,Haines,100,PM10 Primary (Filt + Cond),CAP,114.6369181,TON
+Highway Vehicles,AK,2,Prince of Wales-Hyder,198,Nitrogen Oxides,CAP,113.1962841,TON
+Highway Vehicles,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,112.2287594,TON
+Fuel Comb. Industrial,AK,2,Kusilvak,158,Nitrogen Oxides,CAP,110.4056913,TON
+Solvent Utilization,AK,2,Bethel,50,Volatile Organic Compounds,CAP,110.0080459,TON
+Off-Highway,AK,2,Wrangell,275,Volatile Organic Compounds,CAP,109.5442258,TON
+Solvent Utilization,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,109.484134,TON
+Fuel Comb. Industrial,AK,2,Aleutians East,13,Carbon Monoxide,CAP,109.3179562,TON
+Highway Vehicles,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,108.0109527,TON
+Fuel Comb. Industrial,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,107.2553325,TON
+Off-Highway,AK,2,Dillingham,70,Sulfur Dioxide,CAP,106.8209284,TON
+Petroleum & Related Industries,AK,2,North Slope,185,PM10 Primary (Filt + Cond),CAP,105.7150323,TON
+Fuel Comb. Other,AK,2,Wrangell,275,PM10 Primary (Filt + Cond),CAP,104.773045,TON
+Fuel Comb. Other,AK,2,Wrangell,275,PM2.5 Primary (Filt + Cond),CAP,104.7403472,TON
+Highway Vehicles,AK,2,Kenai Peninsula,122,PM10 Primary (Filt + Cond),CAP,104.0811684,TON
+Miscellaneous,AK,2,Aleutians West,16,PM2.5 Primary (Filt + Cond),CAP,104.0603787,TON
+Fuel Comb. Other,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,102.2789843,TON
+Miscellaneous,AK,2,Matanuska-Susitna,170,Carbon Monoxide,CAP,102.0511524,TON
+Fuel Comb. Other,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,101.9425866,TON
+Off-Highway,AK,2,Nome,180,Nitrogen Oxides,CAP,100.7524131,TON
+Fuel Comb. Industrial,AK,2,Yukon-Koyukuk,290,Carbon Monoxide,CAP,98.34507534,TON
+Highway Vehicles,AK,2,Sitka,220,Nitrogen Oxides,CAP,97.3019962,TON
+Highway Vehicles,AK,2,Nome,180,Nitrogen Oxides,CAP,96.78094287,TON
+Other Industrial Processes,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,96.27428823,TON
+Fuel Comb. Other,AK,2,Fairbanks North Star,90,Ammonia,CAP,95.9880521,TON
+Off-Highway,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,95.71835546,TON
+Highway Vehicles,AK,2,Sitka,220,Volatile Organic Compounds,CAP,95.27558932,TON
+Highway Vehicles,AK,2,Yakutat,282,Carbon Monoxide,CAP,94.73258268,TON
+Miscellaneous,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,94.49164114,TON
+Other Industrial Processes,AK,2,Anchorage,20,PM2.5 Primary (Filt + Cond),CAP,94.11332,TON
+Fuel Comb. Other,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,94.02403279,TON
+Off-Highway,AK,2,Bristol Bay,60,Nitrogen Oxides,CAP,93.71206368,TON
+Off-Highway,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,92.08341963,TON
+Miscellaneous,AK,2,Matanuska-Susitna,170,Nitrogen Oxides,CAP,92.06179949,TON
+Solvent Utilization,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,90.46399767,TON
+Fuel Comb. Industrial,AK,2,Nome,180,Nitrogen Oxides,CAP,90.22250605,TON
+Fuel Comb. Elec. Util.,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,88.138,TON
+Miscellaneous,AK,2,Dillingham,70,Nitrogen Oxides,CAP,87.87413169,TON
+Fuel Comb. Elec. Util.,AK,2,Yakutat,282,Nitrogen Oxides,CAP,87.68,TON
+Fuel Comb. Other,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,86.67766524,TON
+Petroleum & Related Industries,AK,2,North Slope,185,Sulfur Dioxide,CAP,85.37680366,TON
+Off-Highway,AK,2,Northwest Arctic,188,Nitrogen Oxides,CAP,84.43686432,TON
+Fuel Comb. Other,AK,2,Hoonah-Angoon,105,PM10 Primary (Filt + Cond),CAP,83.15063395,TON
+Fuel Comb. Other,AK,2,Hoonah-Angoon,105,PM2.5 Primary (Filt + Cond),CAP,83.13951779,TON
+Fuel Comb. Industrial,AK,2,Petersburg,195,Nitrogen Oxides,CAP,82.34434083,TON
+Highway Vehicles,AK,2,Bethel,50,Volatile Organic Compounds,CAP,82.10874385,TON
+Off-Highway,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,81.22842808,TON
+Fuel Comb. Other,AK,2,Kenai Peninsula,122,Ammonia,CAP,80.30266961,TON
+Miscellaneous,AK,2,Denali,68,Ammonia,CAP,80.13348913,TON
+Fuel Comb. Other,AK,2,Kenai Peninsula,122,Sulfur Dioxide,CAP,79.72796393,TON
+Storage & Transport,AK,2,Kusilvak,158,Volatile Organic Compounds,CAP,79.3420612,TON
+Other Industrial Processes,AK,2,Haines,100,Nitrogen Oxides,CAP,79.01964401,TON
+Fuel Comb. Other,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,78.56651919,TON
+Off-Highway,AK,2,Kenai Peninsula,122,PM10 Primary (Filt + Cond),CAP,78.53745149,TON
+Off-Highway,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,78.27679127,TON
+Highway Vehicles,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,77.44827563,TON
+Off-Highway,AK,2,Haines,100,Volatile Organic Compounds,CAP,77.40122088,TON
+Highway Vehicles,AK,2,Bethel,50,Nitrogen Oxides,CAP,76.88327704,TON
+Off-Highway,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,76.71601582,TON
+Miscellaneous,AK,2,Hoonah-Angoon,105,PM10 Primary (Filt + Cond),CAP,76.70731887,TON
+Highway Vehicles,AK,2,Matanuska-Susitna,170,PM2.5 Primary (Filt + Cond),CAP,74.43908423,TON
+Fuel Comb. Other,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,73.74588851,TON
+Off-Highway,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,73.44812441,TON
+Highway Vehicles,AK,2,Denali,68,Volatile Organic Compounds,CAP,73.39446002,TON
+Off-Highway,AK,2,Kenai Peninsula,122,PM2.5 Primary (Filt + Cond),CAP,73.3505332,TON
+Highway Vehicles,AK,2,Nome,180,Volatile Organic Compounds,CAP,73.27704612,TON
+Waste Disposal & Recycling,AK,2,Anchorage,20,PM2.5 Primary (Filt + Cond),CAP,73.2,TON
+Waste Disposal & Recycling,AK,2,Anchorage,20,PM10 Primary (Filt + Cond),CAP,73.2,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,73.1963,TON
+Storage & Transport,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,72.98834439,TON
+Fuel Comb. Other,AK,2,Sitka,220,Volatile Organic Compounds,CAP,72.96697904,TON
+Fuel Comb. Other,AK,2,Matanuska-Susitna,170,Ammonia,CAP,72.87059417,TON
+Fuel Comb. Other,AK,2,Bristol Bay,60,Carbon Monoxide,CAP,72.26582852,TON
+Fuel Comb. Elec. Util.,AK,2,Hoonah-Angoon,105,Nitrogen Oxides,CAP,71.71,TON
+Highway Vehicles,AK,2,Kenai Peninsula,122,PM2.5 Primary (Filt + Cond),CAP,71.32260971,TON
+Off-Highway,AK,2,Skagway,230,Volatile Organic Compounds,CAP,70.0195403,TON
+Fuel Comb. Other,AK,2,Aleutians East,13,Carbon Monoxide,CAP,69.45332864,TON
+Other Industrial Processes,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,69.28353669,TON
+Off-Highway,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,69.00654849,TON
+Fuel Comb. Other,AK,2,North Slope,185,Nitrogen Oxides,CAP,68.88900244,TON
+Fuel Comb. Industrial,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,68.42711383,TON
+Fuel Comb. Elec. Util.,AK,2,Anchorage,20,PM10 Primary (Filt + Cond),CAP,67.6552,TON
+Off-Highway,AK,2,Denali,68,Nitrogen Oxides,CAP,66.7403948,TON
+Fuel Comb. Elec. Util.,AK,2,Ketchikan Gateway,130,Nitrogen Oxides,CAP,66.5363,TON
+Miscellaneous,AK,2,Lake and Peninsula,164,PM10 Primary (Filt + Cond),CAP,66.46737333,TON
+Fuel Comb. Other,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,65.87416509,TON
+Fuel Comb. Elec. Util.,AK,2,North Slope,185,Volatile Organic Compounds,CAP,65.3217,TON
+Storage & Transport,AK,2,Juneau,110,Volatile Organic Compounds,CAP,65.1667346,TON
+Highway Vehicles,AK,2,Anchorage,20,Ammonia,CAP,65.05822005,TON
+Fuel Comb. Industrial,AK,2,Bristol Bay,60,Nitrogen Oxides,CAP,64.58877593,TON
+Fuel Comb. Industrial,AK,2,Dillingham,70,Nitrogen Oxides,CAP,64.36197072,TON
+Highway Vehicles,AK,2,Dillingham,70,Nitrogen Oxides,CAP,63.5408796,TON
+Off-Highway,AK,2,Denali,68,Volatile Organic Compounds,CAP,63.43553277,TON
+Fuel Comb. Industrial,AK,2,Hoonah-Angoon,105,Nitrogen Oxides,CAP,63.07126048,TON
+Solvent Utilization,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,62.32201727,TON
+Fuel Comb. Elec. Util.,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,62.2584,TON
+Fuel Comb. Elec. Util.,AK,2,Multiple (portable facilities),777,Carbon Monoxide,CAP,62.078,TON
+Miscellaneous,AK,2,North Slope,185,PM2.5 Primary (Filt + Cond),CAP,61.62862783,TON
+Miscellaneous,AK,2,Prince of Wales-Hyder,198,PM2.5 Primary (Filt + Cond),CAP,61.60498751,TON
+Fuel Comb. Other,AK,2,Sitka,220,PM10 Primary (Filt + Cond),CAP,61.55281361,TON
+Fuel Comb. Other,AK,2,Sitka,220,PM2.5 Primary (Filt + Cond),CAP,61.43483861,TON
+Solvent Utilization,AK,2,Sitka,220,Volatile Organic Compounds,CAP,61.01448628,TON
+Storage & Transport,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,60.97737284,TON
+Solvent Utilization,AK,2,Nome,180,Volatile Organic Compounds,CAP,59.94794851,TON
+Solvent Utilization,AK,2,North Slope,185,Volatile Organic Compounds,CAP,59.29670634,TON
+Fuel Comb. Elec. Util.,AK,2,Valdez-Cordova,261,Sulfur Dioxide,CAP,59.0895,TON
+Fuel Comb. Industrial,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,59.07414754,TON
+Fuel Comb. Industrial,AK,2,Sitka,220,Nitrogen Oxides,CAP,58.95352901,TON
+Fuel Comb. Industrial,AK,2,Prince of Wales-Hyder,198,Nitrogen Oxides,CAP,58.41247088,TON
+Fuel Comb. Elec. Util.,AK,2,North Slope,185,PM2.5 Primary (Filt + Cond),CAP,58.28428967,TON
+Fuel Comb. Industrial,AK,2,Northwest Arctic,188,Carbon Monoxide,CAP,58.11503237,TON
+Metals Processing,AK,2,Southeast Fairbanks,240,PM2.5 Primary (Filt + Cond),CAP,57.8962,TON
+Off-Highway,AK,2,Juneau,110,Sulfur Dioxide,CAP,57.51241404,TON
+Fuel Comb. Other,AK,2,Bethel,50,Volatile Organic Compounds,CAP,57.07363391,TON
+Other Industrial Processes,AK,2,Kodiak Island,150,Nitrogen Oxides,CAP,57.07039707,TON
+Fuel Comb. Industrial,AK,2,Ketchikan Gateway,130,Nitrogen Oxides,CAP,56.9583879,TON
+Off-Highway,AK,2,Hoonah-Angoon,105,Sulfur Dioxide,CAP,56.8343348,TON
+Fuel Comb. Other,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,56.36819758,TON
+Storage & Transport,AK,2,Anchorage,20,Carbon Monoxide,CAP,56.003,TON
+Miscellaneous,AK,2,Aleutians East,13,PM2.5 Primary (Filt + Cond),CAP,55.28369475,TON
+Miscellaneous,AK,2,Denali,68,Nitrogen Oxides,CAP,55.24486823,TON
+Miscellaneous,AK,2,Kenai Peninsula,122,Sulfur Dioxide,CAP,54.37150456,TON
+Fuel Comb. Elec. Util.,AK,2,Anchorage,20,PM2.5 Primary (Filt + Cond),CAP,54.1675,TON
+Off-Highway,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,53.9998811,TON
+Miscellaneous,AK,2,Anchorage,20,Ammonia,CAP,53.91372333,TON
+Off-Highway,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,53.47854647,TON
+Fuel Comb. Other,AK,2,Nome,180,Nitrogen Oxides,CAP,53.1823023,TON
+Highway Vehicles,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,52.91720854,TON
+Miscellaneous,AK,2,Dillingham,70,Sulfur Dioxide,CAP,52.90047002,TON
+Storage & Transport,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,51.85866457,TON
+Highway Vehicles,AK,2,Kusilvak,158,Carbon Monoxide,CAP,51.70334658,TON
+Off-Highway,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,50.19820402,TON
+Storage & Transport,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,50.14549515,TON
+Metals Processing,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,50.1334,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians West,16,PM10 Primary (Filt + Cond),CAP,50.0806,TON
+Solvent Utilization,AK,2,Kusilvak,158,Volatile Organic Compounds,CAP,49.95937076,TON
+Miscellaneous,AK,2,Petersburg,195,PM2.5 Primary (Filt + Cond),CAP,49.09375265,TON
+Fuel Comb. Elec. Util.,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,48.5387,TON
+Other Industrial Processes,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,48.3549129,TON
+Fuel Comb. Elec. Util.,AK,2,Bristol Bay,60,Carbon Monoxide,CAP,48.231,TON
+Highway Vehicles,AK,2,Haines,100,Nitrogen Oxides,CAP,48.19004783,TON
+Miscellaneous,AK,2,Ketchikan Gateway,130,PM10 Primary (Filt + Cond),CAP,47.64260445,TON
+Fuel Comb. Other,AK,2,Skagway,230,PM10 Primary (Filt + Cond),CAP,47.43878306,TON
+Fuel Comb. Other,AK,2,Skagway,230,PM2.5 Primary (Filt + Cond),CAP,47.42445136,TON
+Fuel Comb. Industrial,AK,2,Anchorage,20,PM10 Primary (Filt + Cond),CAP,47.291653,TON
+Off-Highway,AK,2,Bristol Bay,60,Sulfur Dioxide,CAP,47.07202146,TON
+Solvent Utilization,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,46.83162781,TON
+Miscellaneous,AK,2,Yakutat,282,PM10 Primary (Filt + Cond),CAP,46.69442771,TON
+Off-Highway,AK,2,Valdez-Cordova,261,PM10 Primary (Filt + Cond),CAP,46.659681,TON
+Petroleum & Related Industries,AK,2,Kenai Peninsula,122,Sulfur Dioxide,CAP,46.51462082,TON
+Fuel Comb. Elec. Util.,AK,2,Dillingham,70,Carbon Monoxide,CAP,46.2863,TON
+Off-Highway,AK,2,Matanuska-Susitna,170,PM10 Primary (Filt + Cond),CAP,46.09184204,TON
+Off-Highway,AK,2,Kenai Peninsula,122,Sulfur Dioxide,CAP,45.91480173,TON
+Fuel Comb. Other,AK,2,Kusilvak,158,Volatile Organic Compounds,CAP,45.73729774,TON
+Off-Highway,AK,2,Kusilvak,158,Nitrogen Oxides,CAP,45.71053863,TON
+Highway Vehicles,AK,2,Petersburg,195,Nitrogen Oxides,CAP,45.58222555,TON
+Off-Highway,AK,2,Kodiak Island,150,PM10 Primary (Filt + Cond),CAP,45.14416523,TON
+Off-Highway,AK,2,Lake and Peninsula,164,Sulfur Dioxide,CAP,45.09713027,TON
+Highway Vehicles,AK,2,Haines,100,Volatile Organic Compounds,CAP,44.2394336,TON
+Off-Highway,AK,2,Valdez-Cordova,261,PM2.5 Primary (Filt + Cond),CAP,44.09063653,TON
+Fuel Comb. Other,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,43.89945466,TON
+Solvent Utilization,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,43.83581631,TON
+Petroleum & Related Industries,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,43.3263,TON
+Fuel Comb. Industrial,AK,2,Yukon-Koyukuk,290,Sulfur Dioxide,CAP,43.20955624,TON
+Other Industrial Processes,AK,2,Dillingham,70,Nitrogen Oxides,CAP,43.02459394,TON
+Solvent Utilization,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,43.00911458,TON
+Fuel Comb. Elec. Util.,AK,2,Multiple (portable facilities),777,Sulfur Dioxide,CAP,42.6611,TON
+Off-Highway,AK,2,Kodiak Island,150,PM2.5 Primary (Filt + Cond),CAP,42.59345251,TON
+Highway Vehicles,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,42.58511572,TON
+Miscellaneous,AK,2,Sitka,220,PM10 Primary (Filt + Cond),CAP,42.42566111,TON
+Waste Disposal & Recycling,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,42.225435,TON
+Fuel Comb. Other,AK,2,Prince of Wales-Hyder,198,Nitrogen Oxides,CAP,42.22454714,TON
+Fuel Comb. Industrial,AK,2,Anchorage,20,PM2.5 Primary (Filt + Cond),CAP,41.9522509,TON
+Fuel Comb. Other,AK,2,Lake and Peninsula,164,PM10 Primary (Filt + Cond),CAP,41.87306753,TON
+Off-Highway,AK,2,Ketchikan Gateway,130,Sulfur Dioxide,CAP,41.86772907,TON
+Fuel Comb. Industrial,AK,2,Bethel,50,Carbon Monoxide,CAP,41.56399913,TON
+Fuel Comb. Industrial,AK,2,Ketchikan Gateway,130,Carbon Monoxide,CAP,41.52715735,TON
+Metals Processing,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,41.136,TON
+Off-Highway,AK,2,Matanuska-Susitna,170,PM2.5 Primary (Filt + Cond),CAP,41.09774292,TON
+Fuel Comb. Other,AK,2,Lake and Peninsula,164,PM2.5 Primary (Filt + Cond),CAP,40.85813754,TON
+Off-Highway,AK,2,Ketchikan Gateway,130,PM10 Primary (Filt + Cond),CAP,40.81440923,TON
+Highway Vehicles,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,40.636144,TON
+Miscellaneous,AK,2,Skagway,230,PM10 Primary (Filt + Cond),CAP,40.53673255,TON
+Solvent Utilization,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,40.50543432,TON
+Fuel Comb. Other,AK,2,Juneau,110,Sulfur Dioxide,CAP,40.33243904,TON
+Other Industrial Processes,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,40.1373506,TON
+Fuel Comb. Industrial,AK,2,Anchorage,20,Ammonia,CAP,39.6965546,TON
+Other Industrial Processes,AK,2,Denali,68,Sulfur Dioxide,CAP,39,TON
+Fuel Comb. Industrial,AK,2,Sitka,220,Carbon Monoxide,CAP,38.56319899,TON
+Storage & Transport,AK,2,Bethel,50,Volatile Organic Compounds,CAP,38.55368556,TON
+Fuel Comb. Other,AK,2,Haines,100,Volatile Organic Compounds,CAP,38.45615815,TON
+Fuel Comb. Elec. Util.,AK,2,Yukon-Koyukuk,290,Sulfur Dioxide,CAP,38.1543,TON
+Off-Highway,AK,2,Ketchikan Gateway,130,PM2.5 Primary (Filt + Cond),CAP,38.08542565,TON
+Fuel Comb. Other,AK,2,Aleutians West,16,Carbon Monoxide,CAP,37.56526954,TON
+Miscellaneous,AK,2,North Slope,185,Volatile Organic Compounds,CAP,37.06319197,TON
+Off-Highway,AK,2,Aleutians East,13,Sulfur Dioxide,CAP,36.74865324,TON
+Other Industrial Processes,AK,2,Bristol Bay,60,Carbon Monoxide,CAP,36.50618143,TON
+Fuel Comb. Other,AK,2,Kusilvak,158,Nitrogen Oxides,CAP,36.08877648,TON
+Other Industrial Processes,AK,2,Aleutians East,13,Nitrogen Oxides,CAP,35.93368772,TON
+Other Industrial Processes,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,35.88044829,TON
+Highway Vehicles,AK,2,North Slope,185,Volatile Organic Compounds,CAP,35.80099148,TON
+Fuel Comb. Other,AK,2,Petersburg,195,Nitrogen Oxides,CAP,35.19855917,TON
+Other Industrial Processes,AK,2,Denali,68,Nitrogen Oxides,CAP,35.01115105,TON
+Fuel Comb. Other,AK,2,Northwest Arctic,188,Nitrogen Oxides,CAP,34.91275721,TON
+Other Industrial Processes,AK,2,Matanuska-Susitna,170,Carbon Monoxide,CAP,34.7702206,TON
+Miscellaneous,AK,2,Anchorage,20,Nitrogen Oxides,CAP,34.51612863,TON
+Highway Vehicles,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,34.47735545,TON
+Off-Highway,AK,2,Prince of Wales-Hyder,198,Sulfur Dioxide,CAP,34.47090126,TON
+Highway Vehicles,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,34.44232004,TON
+Fuel Comb. Elec. Util.,AK,2,Kodiak Island,150,Nitrogen Oxides,CAP,34.01,TON
+Fuel Comb. Other,AK,2,Yukon-Koyukuk,290,Sulfur Dioxide,CAP,33.84920542,TON
+Storage & Transport,AK,2,Sitka,220,Volatile Organic Compounds,CAP,33.72479822,TON
+Storage & Transport,AK,2,Nome,180,Volatile Organic Compounds,CAP,33.27164828,TON
+Miscellaneous,AK,2,Denali,68,Sulfur Dioxide,CAP,33.25757129,TON
+Highway Vehicles,AK,2,Bristol Bay,60,Nitrogen Oxides,CAP,33.21759574,TON
+Fuel Comb. Industrial,AK,2,Multiple (portable facilities),777,Nitrogen Oxides,CAP,33.0927,TON
+Other Industrial Processes,AK,2,Kenai Peninsula,122,PM10 Primary (Filt + Cond),CAP,33.0865535,TON
+Fuel Comb. Other,AK,2,Nome,180,Volatile Organic Compounds,CAP,32.86514756,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians West,16,PM2.5 Primary (Filt + Cond),CAP,32.7391,TON
+Highway Vehicles,AK,2,North Slope,185,Nitrogen Oxides,CAP,32.58245432,TON
+Off-Highway,AK,2,Hoonah-Angoon,105,PM10 Primary (Filt + Cond),CAP,32.5529921,TON
+Solvent Utilization,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,32.31026914,TON
+Miscellaneous,AK,2,Northwest Arctic,188,Ammonia,CAP,32.16310513,TON
+Fuel Comb. Elec. Util.,AK,2,Kenai Peninsula,122,PM10 Primary (Filt + Cond),CAP,31.7861,TON
+Petroleum & Related Industries,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,31.2699,TON
+Fuel Comb. Industrial,AK,2,Petersburg,195,Carbon Monoxide,CAP,31.16932808,TON
+Miscellaneous,AK,2,Kodiak Island,150,PM2.5 Primary (Filt + Cond),CAP,31.07059899,TON
+Metals Processing,AK,2,Southeast Fairbanks,240,PM10 Primary (Filt + Cond),CAP,31.0679,TON
+Storage & Transport,AK,2,Northwest Arctic,188,PM2.5 Primary (Filt + Cond),CAP,31.0488,TON
+Storage & Transport,AK,2,Northwest Arctic,188,PM10 Primary (Filt + Cond),CAP,31.0488,TON
+Solvent Utilization,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,30.97653717,TON
+Fuel Comb. Industrial,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,30.80391538,TON
+Off-Highway,AK,2,Hoonah-Angoon,105,PM2.5 Primary (Filt + Cond),CAP,30.31961358,TON
+Other Industrial Processes,AK,2,Denali,68,PM10 Primary (Filt + Cond),CAP,30.19045334,TON
+Fuel Comb. Industrial,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,30.07686034,TON
+Highway Vehicles,AK,2,Fairbanks North Star,90,Ammonia,CAP,29.99728621,TON
+Highway Vehicles,AK,2,Matanuska-Susitna,170,Ammonia,CAP,29.91131125,TON
+Miscellaneous,AK,2,Northwest Arctic,188,Nitrogen Oxides,CAP,29.70082843,TON
+Fuel Comb. Elec. Util.,AK,2,Anchorage,20,Ammonia,CAP,29.5698,TON
+Fuel Comb. Industrial,AK,2,Anchorage,20,Sulfur Dioxide,CAP,29.2404979,TON
+Highway Vehicles,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,28.93903823,TON
+Fuel Comb. Other,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,28.86229182,TON
+Fuel Comb. Industrial,AK,2,Kusilvak,158,Carbon Monoxide,CAP,28.85128228,TON
+Storage & Transport,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,28.6795278,TON
+Fuel Comb. Elec. Util.,AK,2,Nome,180,Carbon Monoxide,CAP,28.52,TON
+Fuel Comb. Other,AK,2,Yakutat,282,PM10 Primary (Filt + Cond),CAP,28.50849752,TON
+Fuel Comb. Other,AK,2,Yakutat,282,PM2.5 Primary (Filt + Cond),CAP,28.50057574,TON
+Other Industrial Processes,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,28.04421438,TON
+Other Industrial Processes,AK,2,Kodiak Island,150,Sulfur Dioxide,CAP,28,TON
+Other Industrial Processes,AK,2,Aleutians West,16,Carbon Monoxide,CAP,27.85642533,TON
+Storage & Transport,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,27.849573,TON
+Highway Vehicles,AK,2,Wrangell,275,Volatile Organic Compounds,CAP,27.7509848,TON
+Highway Vehicles,AK,2,Hoonah-Angoon,105,Nitrogen Oxides,CAP,27.66123496,TON
+Highway Vehicles,AK,2,Wrangell,275,Nitrogen Oxides,CAP,27.6226956,TON
+Other Industrial Processes,AK,2,Matanuska-Susitna,170,PM10 Primary (Filt + Cond),CAP,26.9439801,TON
+Fuel Comb. Elec. Util.,AK,2,Bethel,50,Carbon Monoxide,CAP,26.83,TON
+Other Industrial Processes,AK,2,Denali,68,Carbon Monoxide,CAP,26.74814593,TON
+Off-Highway,AK,2,Dillingham,70,PM10 Primary (Filt + Cond),CAP,26.73128934,TON
+Fuel Comb. Other,AK,2,Wrangell,275,Volatile Organic Compounds,CAP,26.57522555,TON
+Highway Vehicles,AK,2,Kenai Peninsula,122,Ammonia,CAP,26.31851077,TON
+Fuel Comb. Elec. Util.,AK,2,Multiple (portable facilities),777,Volatile Organic Compounds,CAP,26.0974,TON
+Miscellaneous,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,26.00587599,TON
+Highway Vehicles,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,25.94409027,TON
+Natural Resources,AK,2,Skagway,230,Nitrogen Oxides,CAP,25.69035,TON
+Other Industrial Processes,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,25.5685682,TON
+Fuel Comb. Industrial,AK,2,Nome,180,Carbon Monoxide,CAP,25.39756263,TON
+Fuel Comb. Other,AK,2,Dillingham,70,PM10 Primary (Filt + Cond),CAP,25.21721151,TON
+Off-Highway,AK,2,Haines,100,Sulfur Dioxide,CAP,25.18561809,TON
+Fuel Comb. Other,AK,2,Dillingham,70,PM2.5 Primary (Filt + Cond),CAP,25.16256859,TON
+Other Industrial Processes,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,25.077452,TON
+Fuel Comb. Industrial,AK,2,Bristol Bay,60,Carbon Monoxide,CAP,25.03587631,TON
+Highway Vehicles,AK,2,Northwest Arctic,188,Nitrogen Oxides,CAP,24.94845787,TON
+Off-Highway,AK,2,Valdez-Cordova,261,Sulfur Dioxide,CAP,24.93187885,TON
+Off-Highway,AK,2,Dillingham,70,PM2.5 Primary (Filt + Cond),CAP,24.37243188,TON
+Fuel Comb. Industrial,AK,2,Prince of Wales-Hyder,198,Carbon Monoxide,CAP,24.32207117,TON
+Other Industrial Processes,AK,2,Prince of Wales-Hyder,198,PM10 Primary (Filt + Cond),CAP,24.3216159,TON
+Fuel Comb. Elec. Util.,AK,2,Petersburg,195,Nitrogen Oxides,CAP,24.2701,TON
+Highway Vehicles,AK,2,Valdez-Cordova,261,PM10 Primary (Filt + Cond),CAP,24.1894268,TON
+Off-Highway,AK,2,Prince of Wales-Hyder,198,PM10 Primary (Filt + Cond),CAP,24.11555365,TON
+Other Industrial Processes,AK,2,Prince of Wales-Hyder,198,Nitrogen Oxides,CAP,24.03506659,TON
+Highway Vehicles,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,23.93855014,TON
+Fuel Comb. Other,AK,2,Denali,68,Nitrogen Oxides,CAP,23.66502863,TON
+Petroleum & Related Industries,AK,2,Multiple (portable facilities),777,Carbon Monoxide,CAP,23.5545,TON
+Natural Resources,AK,2,Bristol Bay,60,Nitrogen Oxides,CAP,23.19425,TON
+Waste Disposal & Recycling,AK,2,Dillingham,70,PM2.5 Primary (Filt + Cond),CAP,23,TON
+Waste Disposal & Recycling,AK,2,Dillingham,70,PM10 Primary (Filt + Cond),CAP,23,TON
+Waste Disposal & Recycling,AK,2,Juneau,110,Volatile Organic Compounds,CAP,22.87166,TON
+Petroleum & Related Industries,AK,2,Kenai Peninsula,122,PM10 Primary (Filt + Cond),CAP,22.54850271,TON
+Off-Highway,AK,2,Prince of Wales-Hyder,198,PM2.5 Primary (Filt + Cond),CAP,22.54687475,TON
+Waste Disposal & Recycling,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,22.42551,TON
+Waste Disposal & Recycling,AK,2,Haines,100,Volatile Organic Compounds,CAP,22.34551,TON
+Waste Disposal & Recycling,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,22.34551,TON
+Metals Processing,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,22.2067,TON
+Other Industrial Processes,AK,2,Haines,100,Carbon Monoxide,CAP,22.15884513,TON
+Storage & Transport,AK,2,Lake and Peninsula,164,Volatile Organic Compounds,CAP,22.08629007,TON
+Fuel Comb. Industrial,AK,2,Wrangell,275,Nitrogen Oxides,CAP,21.86191101,TON
+Miscellaneous,AK,2,Bristol Bay,60,PM2.5 Primary (Filt + Cond),CAP,21.80214784,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,21.7558,TON
+Highway Vehicles,AK,2,Lake and Peninsula,164,Nitrogen Oxides,CAP,21.68995458,TON
+Petroleum & Related Industries,AK,2,Kenai Peninsula,122,PM2.5 Primary (Filt + Cond),CAP,21.66620271,TON
+Fuel Comb. Industrial,AK,2,Yukon-Koyukuk,290,PM10 Primary (Filt + Cond),CAP,21.6290256,TON
+Highway Vehicles,AK,2,Skagway,230,Volatile Organic Compounds,CAP,21.52909004,TON
+Off-Highway,AK,2,Bethel,50,PM10 Primary (Filt + Cond),CAP,21.46366509,TON
+Other Industrial Processes,AK,2,Matanuska-Susitna,170,PM2.5 Primary (Filt + Cond),CAP,21.2950479,TON
+Off-Highway,AK,2,Sitka,220,PM10 Primary (Filt + Cond),CAP,21.21669264,TON
+Fuel Comb. Industrial,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,20.73973047,TON
+Fuel Comb. Elec. Util.,AK,2,Bethel,50,PM10 Primary (Filt + Cond),CAP,20.64,TON
+Off-Highway,AK,2,Sitka,220,Sulfur Dioxide,CAP,20.45614128,TON
+Off-Highway,AK,2,Bethel,50,PM2.5 Primary (Filt + Cond),CAP,20.37220631,TON
+Solvent Utilization,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,20.36510564,TON
+Solvent Utilization,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,20.32554408,TON
+Other Industrial Processes,AK,2,Kodiak Island,150,Carbon Monoxide,CAP,20.19419119,TON
+Fuel Comb. Elec. Util.,AK,2,Ketchikan Gateway,130,Carbon Monoxide,CAP,20.1578,TON
+Highway Vehicles,AK,2,Yukon-Koyukuk,290,PM10 Primary (Filt + Cond),CAP,20.15118617,TON
+Highway Vehicles,AK,2,Skagway,230,Nitrogen Oxides,CAP,20.1055149,TON
+Highway Vehicles,AK,2,Aleutians East,13,Nitrogen Oxides,CAP,20.00891993,TON
+Off-Highway,AK,2,Sitka,220,PM2.5 Primary (Filt + Cond),CAP,19.82572851,TON
+Fuel Comb. Elec. Util.,AK,2,Nome,180,Volatile Organic Compounds,CAP,19.62,TON
+Fuel Comb. Other,AK,2,Denali,68,Volatile Organic Compounds,CAP,19.60374126,TON
+Other Industrial Processes,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,19.5852999,TON
+Fuel Comb. Industrial,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,19.37195113,TON
+Highway Vehicles,AK,2,Southeast Fairbanks,240,PM10 Primary (Filt + Cond),CAP,19.11657384,TON
+Fuel Comb. Other,AK,2,Haines,100,Nitrogen Oxides,CAP,19.04714584,TON
+Fuel Comb. Industrial,AK,2,Denali,68,Nitrogen Oxides,CAP,18.69961659,TON
+Other Industrial Processes,AK,2,Kenai Peninsula,122,PM2.5 Primary (Filt + Cond),CAP,18.6371951,TON
+Fuel Comb. Industrial,AK,2,Dillingham,70,Carbon Monoxide,CAP,18.58090457,TON
+Fuel Comb. Elec. Util.,AK,2,Bethel,50,Volatile Organic Compounds,CAP,18.58,TON
+Fuel Comb. Elec. Util.,AK,2,Prince of Wales-Hyder,198,Nitrogen Oxides,CAP,18.5711,TON
+Petroleum & Related Industries,AK,2,Multiple (portable facilities),777,PM10 Primary (Filt + Cond),CAP,18.5427,TON
+Petroleum & Related Industries,AK,2,Multiple (portable facilities),777,PM2.5 Primary (Filt + Cond),CAP,18.5427,TON
+Fuel Comb. Other,AK,2,Ketchikan Gateway,130,Sulfur Dioxide,CAP,18.53851044,TON
+Fuel Comb. Other,AK,2,Wrangell,275,Nitrogen Oxides,CAP,18.18460065,TON
+Highway Vehicles,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,17.88871319,TON
+Petroleum & Related Industries,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,17.7714,TON
+Miscellaneous,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,17.66628437,TON
+Off-Highway,AK,2,Petersburg,195,PM10 Primary (Filt + Cond),CAP,17.6191983,TON
+Other Industrial Processes,AK,2,Anchorage,20,Nitrogen Oxides,CAP,17.576224,TON
+Highway Vehicles,AK,2,Valdez-Cordova,261,PM2.5 Primary (Filt + Cond),CAP,17.469709,TON
+Fuel Comb. Industrial,AK,2,Hoonah-Angoon,105,Carbon Monoxide,CAP,17.43052819,TON
+Other Industrial Processes,AK,2,Yukon-Koyukuk,290,Carbon Monoxide,CAP,17.419559,TON
+Off-Highway,AK,2,Yakutat,282,Sulfur Dioxide,CAP,17.36213771,TON
+Fuel Comb. Industrial,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,17.14088794,TON
+Fuel Comb. Industrial,AK,2,Yukon-Koyukuk,290,PM2.5 Primary (Filt + Cond),CAP,17.05993304,TON
+Other Industrial Processes,AK,2,Kusilvak,158,Nitrogen Oxides,CAP,17.03293579,TON
+Solvent Utilization,AK,2,Wrangell,275,Volatile Organic Compounds,CAP,16.94244223,TON
+Highway Vehicles,AK,2,Lake and Peninsula,164,Volatile Organic Compounds,CAP,16.86117083,TON
+Highway Vehicles,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,16.82537069,TON
+Off-Highway,AK,2,Petersburg,195,Sulfur Dioxide,CAP,16.76870384,TON
+Fuel Comb. Industrial,AK,2,Kenai Peninsula,122,Ammonia,CAP,16.71452071,TON
+Solvent Utilization,AK,2,Haines,100,Volatile Organic Compounds,CAP,16.62111664,TON
+Off-Highway,AK,2,Bethel,50,Sulfur Dioxide,CAP,16.49716089,TON
+Off-Highway,AK,2,Petersburg,195,PM2.5 Primary (Filt + Cond),CAP,16.46995509,TON
+Highway Vehicles,AK,2,Yakutat,282,Nitrogen Oxides,CAP,16.40373309,TON
+Fuel Comb. Other,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,16.34138577,TON
+Fuel Comb. Elec. Util.,AK,2,Anchorage,20,Sulfur Dioxide,CAP,16.0444,TON
+Fuel Comb. Elec. Util.,AK,2,Kenai Peninsula,122,Sulfur Dioxide,CAP,15.9799,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians East,13,PM10 Primary (Filt + Cond),CAP,15.8107,TON
+Fuel Comb. Other,AK,2,Lake and Peninsula,164,Volatile Organic Compounds,CAP,15.79136594,TON
+Other Industrial Processes,AK,2,Haines,100,PM10 Primary (Filt + Cond),CAP,15.73394714,TON
+Miscellaneous,AK,2,Northwest Arctic,188,Sulfur Dioxide,CAP,15.6205427,TON
+Storage & Transport,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,15.42664312,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians West,16,Sulfur Dioxide,CAP,15.3892,TON
+Off-Highway,AK,2,Lake and Peninsula,164,PM10 Primary (Filt + Cond),CAP,15.35163879,TON
+Other Industrial Processes,AK,2,Skagway,230,PM10 Primary (Filt + Cond),CAP,15.14534569,TON
+Fuel Comb. Other,AK,2,Dillingham,70,Nitrogen Oxides,CAP,15.13015088,TON
+Other Industrial Processes,AK,2,Sitka,220,Nitrogen Oxides,CAP,15.05437407,TON
+Off-Highway,AK,2,North Slope,185,PM10 Primary (Filt + Cond),CAP,14.60083795,TON
+Off-Highway,AK,2,Southeast Fairbanks,240,Sulfur Dioxide,CAP,14.58857746,TON
+Off-Highway,AK,2,Skagway,230,Sulfur Dioxide,CAP,14.58647973,TON
+Off-Highway,AK,2,Southeast Fairbanks,240,PM10 Primary (Filt + Cond),CAP,14.53993718,TON
+Miscellaneous,AK,2,Anchorage,20,Sulfur Dioxide,CAP,14.50850431,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians East,13,PM2.5 Primary (Filt + Cond),CAP,14.5021,TON
+Fuel Comb. Other,AK,2,Hoonah-Angoon,105,Nitrogen Oxides,CAP,14.34767948,TON
+Highway Vehicles,AK,2,Yukon-Koyukuk,290,PM2.5 Primary (Filt + Cond),CAP,14.11559617,TON
+Off-Highway,AK,2,Lake and Peninsula,164,PM2.5 Primary (Filt + Cond),CAP,13.97305822,TON
+Highway Vehicles,AK,2,Ketchikan Gateway,130,PM10 Primary (Filt + Cond),CAP,13.76919613,TON
+Fuel Comb. Industrial,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,13.73327218,TON
+Fuel Comb. Industrial,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,13.71273839,TON
+Off-Highway,AK,2,Yukon-Koyukuk,290,PM10 Primary (Filt + Cond),CAP,13.70895082,TON
+Off-Highway,AK,2,Bristol Bay,60,PM10 Primary (Filt + Cond),CAP,13.70691506,TON
+Off-Highway,AK,2,Southeast Fairbanks,240,PM2.5 Primary (Filt + Cond),CAP,13.68801783,TON
+Off-Highway,AK,2,Haines,100,PM10 Primary (Filt + Cond),CAP,13.66170656,TON
+Fuel Comb. Elec. Util.,AK,2,Kenai Peninsula,122,PM2.5 Primary (Filt + Cond),CAP,13.6254,TON
+Highway Vehicles,AK,2,Southeast Fairbanks,240,PM2.5 Primary (Filt + Cond),CAP,13.39180146,TON
+Off-Highway,AK,2,North Slope,185,PM2.5 Primary (Filt + Cond),CAP,13.3673499,TON
+Storage & Transport,AK,2,Anchorage,20,Nitrogen Oxides,CAP,13.001,TON
+Off-Highway,AK,2,Yakutat,282,PM10 Primary (Filt + Cond),CAP,13.00043905,TON
+Solvent Utilization,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,12.99375144,TON
+Off-Highway,AK,2,North Slope,185,Sulfur Dioxide,CAP,12.94347649,TON
+Fuel Comb. Elec. Util.,AK,2,Skagway,230,Nitrogen Oxides,CAP,12.9167,TON
+Fuel Comb. Other,AK,2,Valdez-Cordova,261,Sulfur Dioxide,CAP,12.90078306,TON
+Storage & Transport,AK,2,Skagway,230,Volatile Organic Compounds,CAP,12.80441178,TON
+Off-Highway,AK,2,Nome,180,Sulfur Dioxide,CAP,12.77120913,TON
+Other Industrial Processes,AK,2,Juneau,110,Carbon Monoxide,CAP,12.761007,TON
+Waste Disposal & Recycling,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,12.76085,TON
+Highway Vehicles,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,12.73492079,TON
+Off-Highway,AK,2,Bristol Bay,60,PM2.5 Primary (Filt + Cond),CAP,12.60894348,TON
+Off-Highway,AK,2,Haines,100,PM2.5 Primary (Filt + Cond),CAP,12.59861611,TON
+Miscellaneous,AK,2,Wrangell,275,PM2.5 Primary (Filt + Cond),CAP,12.5843744,TON
+Off-Highway,AK,2,Yukon-Koyukuk,290,PM2.5 Primary (Filt + Cond),CAP,12.50862778,TON
+Other Industrial Processes,AK,2,Dillingham,70,Carbon Monoxide,CAP,12.49422357,TON
+Other Industrial Processes,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,12.4794542,TON
+Solvent Utilization,AK,2,Denali,68,Volatile Organic Compounds,CAP,12.45207287,TON
+Fuel Comb. Industrial,AK,2,Denali,68,Carbon Monoxide,CAP,12.42382429,TON
+Highway Vehicles,AK,2,Denali,68,PM10 Primary (Filt + Cond),CAP,12.27320406,TON
+Other Industrial Processes,AK,2,Aleutians East,13,Carbon Monoxide,CAP,12.127605,TON
+Off-Highway,AK,2,Yakutat,282,PM2.5 Primary (Filt + Cond),CAP,12.02403981,TON
+Off-Highway,AK,2,Aleutians East,13,PM10 Primary (Filt + Cond),CAP,11.77072386,TON
+Miscellaneous,AK,2,Haines,100,PM2.5 Primary (Filt + Cond),CAP,11.61419983,TON
+Fuel Comb. Elec. Util.,AK,2,Bethel,50,PM2.5 Primary (Filt + Cond),CAP,11.49,TON
+Fuel Comb. Other,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,11.48582155,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians West,16,Ammonia,CAP,11.2799,TON
+Fuel Comb. Other,AK,2,Southeast Fairbanks,240,Sulfur Dioxide,CAP,11.2425416,TON
+Fuel Comb. Other,AK,2,Juneau,110,Ammonia,CAP,11.13589106,TON
+Highway Vehicles,AK,2,Anchorage,20,Sulfur Dioxide,CAP,11.13208374,TON
+Off-Highway,AK,2,Aleutians East,13,PM2.5 Primary (Filt + Cond),CAP,11.09368105,TON
+Storage & Transport,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,11.0797478,TON
+Fuel Comb. Industrial,AK,2,Juneau,110,Volatile Organic Compounds,CAP,11.06736952,TON
+Other Industrial Processes,AK,2,Hoonah-Angoon,105,Nitrogen Oxides,CAP,11.01427666,TON
+Storage & Transport,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,10.9223719,TON
+Other Industrial Processes,AK,2,Ketchikan Gateway,130,PM10 Primary (Filt + Cond),CAP,10.7217325,TON
+Off-Highway,AK,2,Northwest Arctic,188,PM10 Primary (Filt + Cond),CAP,10.59961171,TON
+Metals Processing,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,10.456,TON
+Fuel Comb. Industrial,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,10.36334699,TON
+Highway Vehicles,AK,2,Kusilvak,158,Nitrogen Oxides,CAP,10.3506407,TON
+Fuel Comb. Industrial,AK,2,Valdez-Cordova,261,PM10 Primary (Filt + Cond),CAP,10.26145327,TON
+Off-Highway,AK,2,Skagway,230,PM10 Primary (Filt + Cond),CAP,10.24557762,TON
+Fuel Comb. Industrial,AK,2,Skagway,230,Nitrogen Oxides,CAP,9.9928851,TON
+Other Industrial Processes,AK,2,Ketchikan Gateway,130,PM2.5 Primary (Filt + Cond),CAP,9.9534318,TON
+Storage & Transport,AK,2,Haines,100,Volatile Organic Compounds,CAP,9.912532894,TON
+Storage & Transport,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,9.899355145,TON
+Solvent Utilization,AK,2,Lake and Peninsula,164,Volatile Organic Compounds,CAP,9.838819899,TON
+Off-Highway,AK,2,Wrangell,275,PM10 Primary (Filt + Cond),CAP,9.827426226,TON
+Off-Highway,AK,2,Northwest Arctic,188,PM2.5 Primary (Filt + Cond),CAP,9.705065881,TON
+Fuel Comb. Industrial,AK,2,Wrangell,275,Carbon Monoxide,CAP,9.668175555,TON
+Off-Highway,AK,2,Wrangell,275,Sulfur Dioxide,CAP,9.518254301,TON
+Off-Highway,AK,2,Skagway,230,PM2.5 Primary (Filt + Cond),CAP,9.510647574,TON
+Highway Vehicles,AK,2,Denali,68,PM2.5 Primary (Filt + Cond),CAP,9.468789758,TON
+Storage & Transport,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,9.243250572,TON
+Other Industrial Processes,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,9.15333164,TON
+Off-Highway,AK,2,Wrangell,275,PM2.5 Primary (Filt + Cond),CAP,9.139999686,TON
+Fuel Comb. Elec. Util.,AK,2,Kenai Peninsula,122,Ammonia,CAP,9.1308,TON
+Other Industrial Processes,AK,2,Ketchikan Gateway,130,Nitrogen Oxides,CAP,9.0797983,TON
+Highway Vehicles,AK,2,Kodiak Island,150,PM10 Primary (Filt + Cond),CAP,9.074713877,TON
+Other Industrial Processes,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,9.02885437,TON
+Off-Highway,AK,2,Nome,180,PM10 Primary (Filt + Cond),CAP,9.020891442,TON
+Fuel Comb. Other,AK,2,Ketchikan Gateway,130,Ammonia,CAP,9.001952468,TON
+Waste Disposal & Recycling,AK,2,Dillingham,70,Nitrogen Oxides,CAP,9,TON
+Fuel Comb. Other,AK,2,Skagway,230,Nitrogen Oxides,CAP,8.785083926,TON
+Other Industrial Processes,AK,2,Southeast Fairbanks,240,PM10 Primary (Filt + Cond),CAP,8.762442525,TON
+Fuel Comb. Industrial,AK,2,Fairbanks North Star,90,Ammonia,CAP,8.712382769,TON
+Storage & Transport,AK,2,Wrangell,275,Volatile Organic Compounds,CAP,8.618962555,TON
+Other Industrial Processes,AK,2,Bristol Bay,60,PM10 Primary (Filt + Cond),CAP,8.61016192,TON
+Off-Highway,AK,2,Nome,180,PM2.5 Primary (Filt + Cond),CAP,8.422868624,TON
+Fuel Comb. Other,AK,2,Bristol Bay,60,PM10 Primary (Filt + Cond),CAP,8.415425791,TON
+Fuel Comb. Other,AK,2,Bristol Bay,60,PM2.5 Primary (Filt + Cond),CAP,8.402172584,TON
+Fuel Comb. Other,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,8.3776226,TON
+Fuel Comb. Industrial,AK,2,Multiple (portable facilities),777,Sulfur Dioxide,CAP,8.3368,TON
+Fuel Comb. Industrial,AK,2,Aleutians West,16,PM10 Primary (Filt + Cond),CAP,8.1871584,TON
+Other Industrial Processes,AK,2,Bristol Bay,60,PM2.5 Primary (Filt + Cond),CAP,8.15485867,TON
+Other Industrial Processes,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,8.089240402,TON
+Fuel Comb. Elec. Util.,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,8.047,TON
+Other Industrial Processes,AK,2,Kodiak Island,150,PM10 Primary (Filt + Cond),CAP,7.99959963,TON
+Waste Disposal & Recycling,AK,2,North Slope,185,Carbon Monoxide,CAP,7.8843,TON
+Highway Vehicles,AK,2,Nome,180,PM10 Primary (Filt + Cond),CAP,7.85368037,TON
+Fuel Comb. Industrial,AK,2,Multiple (portable facilities),777,Carbon Monoxide,CAP,7.8514,TON
+Fuel Comb. Other,AK,2,Bethel,50,Sulfur Dioxide,CAP,7.804463675,TON
+Miscellaneous,AK,2,Hoonah-Angoon,105,PM2.5 Primary (Filt + Cond),CAP,7.761034371,TON
+Fuel Comb. Other,AK,2,Skagway,230,Volatile Organic Compounds,CAP,7.76008733,TON
+Fuel Comb. Industrial,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,7.734782264,TON
+Fuel Comb. Other,AK,2,Nome,180,Sulfur Dioxide,CAP,7.563181384,TON
+Other Industrial Processes,AK,2,Kodiak Island,150,PM2.5 Primary (Filt + Cond),CAP,7.41507952,TON
+Fuel Comb. Industrial,AK,2,Aleutians West,16,PM2.5 Primary (Filt + Cond),CAP,7.37106931,TON
+Highway Vehicles,AK,2,Ketchikan Gateway,130,PM2.5 Primary (Filt + Cond),CAP,7.322335506,TON
+Other Industrial Processes,AK,2,Ketchikan Gateway,130,Carbon Monoxide,CAP,7.3151012,TON
+Waste Disposal & Recycling,AK,2,Aleutians East,13,Nitrogen Oxides,CAP,7.17,TON
+Fuel Comb. Industrial,AK,2,Haines,100,Nitrogen Oxides,CAP,7.13915905,TON
+Solvent Utilization,AK,2,Skagway,230,Volatile Organic Compounds,CAP,7.110407237,TON
+Fuel Comb. Industrial,AK,2,Valdez-Cordova,261,PM2.5 Primary (Filt + Cond),CAP,7.067489127,TON
+Petroleum & Related Industries,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,7.0652,TON
+Miscellaneous,AK,2,Matanuska-Susitna,170,Sulfur Dioxide,CAP,7.037727783,TON
+Fuel Comb. Industrial,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,6.993943345,TON
+Fuel Comb. Industrial,AK,2,Matanuska-Susitna,170,PM10 Primary (Filt + Cond),CAP,6.9831445,TON
+Other Industrial Processes,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,6.90040142,TON
+Fuel Comb. Other,AK,2,Aleutians East,13,PM10 Primary (Filt + Cond),CAP,6.862993245,TON
+Fuel Comb. Other,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,6.823904153,TON
+Highway Vehicles,AK,2,Juneau,110,Ammonia,CAP,6.788397087,TON
+Storage & Transport,AK,2,Denali,68,Volatile Organic Compounds,CAP,6.783320357,TON
+Other Industrial Processes,AK,2,Aleutians West,16,PM10 Primary (Filt + Cond),CAP,6.77934094,TON
+Fuel Comb. Industrial,AK,2,Southeast Fairbanks,240,Sulfur Dioxide,CAP,6.77193202,TON
+Fuel Comb. Industrial,AK,2,Bethel,50,Volatile Organic Compounds,CAP,6.752202618,TON
+Highway Vehicles,AK,2,Sitka,220,PM10 Primary (Filt + Cond),CAP,6.738101036,TON
+Miscellaneous,AK,2,Lake and Peninsula,164,PM2.5 Primary (Filt + Cond),CAP,6.711193813,TON
+Other Industrial Processes,AK,2,Prince of Wales-Hyder,198,Carbon Monoxide,CAP,6.695735,TON
+Fuel Comb. Industrial,AK,2,Matanuska-Susitna,170,Ammonia,CAP,6.679820253,TON
+Petroleum & Related Industries,AK,2,North Slope,185,PM2.5 Primary (Filt + Cond),CAP,6.61233229,TON
+Other Industrial Processes,AK,2,Matanuska-Susitna,170,Nitrogen Oxides,CAP,6.5451456,TON
+Fuel Comb. Elec. Util.,AK,2,Petersburg,195,Carbon Monoxide,CAP,6.4467,TON
+Off-Highway,AK,2,Yukon-Koyukuk,290,Sulfur Dioxide,CAP,6.410728635,TON
+Other Industrial Processes,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,6.3722628,TON
+Fuel Comb. Elec. Util.,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,6.3444,TON
+Fuel Comb. Industrial,AK,2,Aleutians West,16,Ammonia,CAP,6.286545426,TON
+Off-Highway,AK,2,Northwest Arctic,188,Sulfur Dioxide,CAP,6.21238604,TON
+Fuel Comb. Other,AK,2,North Slope,185,Sulfur Dioxide,CAP,6.212188217,TON
+Storage & Transport,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,6.202662311,TON
+Fuel Comb. Industrial,AK,2,Lake and Peninsula,164,Nitrogen Oxides,CAP,6.14956564,TON
+Other Industrial Processes,AK,2,Sitka,220,Carbon Monoxide,CAP,6.08677785,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians East,13,Ammonia,CAP,6.0653,TON
+Highway Vehicles,AK,2,Bethel,50,PM10 Primary (Filt + Cond),CAP,6.035840062,TON
+Fuel Comb. Industrial,AK,2,Kodiak Island,150,PM10 Primary (Filt + Cond),CAP,6.0161392,TON
+Fuel Comb. Industrial,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,6.0155009,TON
+Highway Vehicles,AK,2,Prince of Wales-Hyder,198,PM10 Primary (Filt + Cond),CAP,6.014288241,TON
+Fuel Comb. Elec. Util.,AK,2,Northwest Arctic,188,Ammonia,CAP,5.98,TON
+Fuel Comb. Industrial,AK,2,Matanuska-Susitna,170,PM2.5 Primary (Filt + Cond),CAP,5.96697636,TON
+Fuel Comb. Other,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,5.936762359,TON
+Fuel Comb. Industrial,AK,2,Kodiak Island,150,Ammonia,CAP,5.93499992,TON
+Fuel Comb. Other,AK,2,Aleutians West,16,PM10 Primary (Filt + Cond),CAP,5.913050851,TON
+Solvent Utilization,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,5.899626133,TON
+Fuel Comb. Industrial,AK,2,Bethel,50,PM10 Primary (Filt + Cond),CAP,5.81386202,TON
+Other Industrial Processes,AK,2,Kusilvak,158,Carbon Monoxide,CAP,5.80160353,TON
+Fuel Comb. Elec. Util.,AK,2,Sitka,220,Nitrogen Oxides,CAP,5.79,TON
+Waste Disposal & Recycling,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,5.758747,TON
+Fuel Comb. Other,AK,2,Aleutians West,16,PM2.5 Primary (Filt + Cond),CAP,5.748720399,TON
+Fuel Comb. Industrial,AK,2,Skagway,230,Carbon Monoxide,CAP,5.649860897,TON
+Highway Vehicles,AK,2,Valdez-Cordova,261,Ammonia,CAP,5.62854574,TON
+Fuel Comb. Other,AK,2,Aleutians East,13,PM2.5 Primary (Filt + Cond),CAP,5.622466532,TON
+Fuel Comb. Elec. Util.,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,5.599,TON
+Fuel Comb. Industrial,AK,2,Nome,180,Volatile Organic Compounds,CAP,5.588267938,TON
+Fuel Comb. Other,AK,2,Kusilvak,158,Sulfur Dioxide,CAP,5.516106747,TON
+Other Industrial Processes,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,5.51256167,TON
+Petroleum & Related Industries,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,5.4047823,TON
+Fuel Comb. Elec. Util.,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,5.3505,TON
+Fuel Comb. Other,AK,2,Kodiak Island,150,Ammonia,CAP,5.338756176,TON
+Fuel Comb. Elec. Util.,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,5.2846,TON
+Fuel Comb. Industrial,AK,2,Haines,100,Carbon Monoxide,CAP,5.265750697,TON
+Highway Vehicles,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,5.260851757,TON
+Highway Vehicles,AK,2,Kusilvak,158,Volatile Organic Compounds,CAP,5.234817859,TON
+Fuel Comb. Elec. Util.,AK,2,Haines,100,Nitrogen Oxides,CAP,5.2244,TON
+Highway Vehicles,AK,2,Nome,180,PM2.5 Primary (Filt + Cond),CAP,5.214818452,TON
+Storage & Transport,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,5.18726,TON
+Fuel Comb. Industrial,AK,2,Northwest Arctic,188,PM10 Primary (Filt + Cond),CAP,5.1734404,TON
+Petroleum & Related Industries,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,5.1365,TON
+Fuel Comb. Industrial,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,5.108878249,TON
+Waste Disposal & Recycling,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,5.0198,TON
+Petroleum & Related Industries,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,5.017,TON
+Fuel Comb. Other,AK,2,Prince of Wales-Hyder,198,Sulfur Dioxide,CAP,5.003038595,TON
+Miscellaneous,AK,2,Wrangell,275,Nitrogen Oxides,CAP,5.00187219,TON
+Other Industrial Processes,AK,2,Southeast Fairbanks,240,Sulfur Dioxide,CAP,5,TON
+Other Industrial Processes,AK,2,Bristol Bay,60,Sulfur Dioxide,CAP,5,TON
+Other Industrial Processes,AK,2,Denali,68,PM2.5 Primary (Filt + Cond),CAP,4.99499196,TON
+Highway Vehicles,AK,2,Kodiak Island,150,PM2.5 Primary (Filt + Cond),CAP,4.971731686,TON
+Fuel Comb. Elec. Util.,AK,2,Yukon-Koyukuk,290,PM10 Primary (Filt + Cond),CAP,4.9165,TON
+Miscellaneous,AK,2,Sitka,220,PM2.5 Primary (Filt + Cond),CAP,4.900714934,TON
+Fuel Comb. Industrial,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,4.89397652,TON
+Fuel Comb. Elec. Util.,AK,2,Yukon-Koyukuk,290,PM2.5 Primary (Filt + Cond),CAP,4.818,TON
+Miscellaneous,AK,2,Ketchikan Gateway,130,PM2.5 Primary (Filt + Cond),CAP,4.775274842,TON
+Fuel Comb. Other,AK,2,Northwest Arctic,188,Sulfur Dioxide,CAP,4.769875722,TON
+Fuel Comb. Industrial,AK,2,Lake and Peninsula,164,Carbon Monoxide,CAP,4.763771725,TON
+Miscellaneous,AK,2,Yakutat,282,PM2.5 Primary (Filt + Cond),CAP,4.719034251,TON
+Fuel Comb. Elec. Util.,AK,2,Hoonah-Angoon,105,Carbon Monoxide,CAP,4.71,TON
+Off-Highway,AK,2,Kusilvak,158,PM10 Primary (Filt + Cond),CAP,4.701301671,TON
+Highway Vehicles,AK,2,Matanuska-Susitna,170,Sulfur Dioxide,CAP,4.654012092,TON
+Fuel Comb. Industrial,AK,2,Nome,180,PM10 Primary (Filt + Cond),CAP,4.56980065,TON
+Fuel Comb. Other,AK,2,Yukon-Koyukuk,290,Ammonia,CAP,4.564856305,TON
+Other Industrial Processes,AK,2,Aleutians East,13,PM10 Primary (Filt + Cond),CAP,4.544938,TON
+Fuel Comb. Other,AK,2,Multiple (portable facilities),777,Nitrogen Oxides,CAP,4.53,TON
+Fuel Comb. Other,AK,2,Petersburg,195,Sulfur Dioxide,CAP,4.516399662,TON
+Miscellaneous,AK,2,North Slope,185,Nitrogen Oxides,CAP,4.514960417,TON
+Storage & Transport,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,4.5047,TON
+Other Industrial Processes,AK,2,Haines,100,PM2.5 Primary (Filt + Cond),CAP,4.50394135,TON
+Other Industrial Processes,AK,2,Yukon-Koyukuk,290,Nitrogen Oxides,CAP,4.49638643,TON
+Fuel Comb. Other,AK,2,Sitka,220,Ammonia,CAP,4.494376773,TON
+Fuel Comb. Other,AK,2,Southeast Fairbanks,240,Ammonia,CAP,4.428372441,TON
+Off-Highway,AK,2,Kusilvak,158,PM2.5 Primary (Filt + Cond),CAP,4.426977101,TON
+Waste Disposal & Recycling,AK,2,Northwest Arctic,188,Carbon Monoxide,CAP,4.4216,TON
+Other Industrial Processes,AK,2,Bethel,50,Carbon Monoxide,CAP,4.41535609,TON
+Fuel Comb. Elec. Util.,AK,2,Dillingham,70,PM10 Primary (Filt + Cond),CAP,4.3976,TON
+Fuel Comb. Other,AK,2,Bethel,50,Ammonia,CAP,4.373184217,TON
+Fuel Comb. Industrial,AK,2,Kodiak Island,150,PM2.5 Primary (Filt + Cond),CAP,4.27357694,TON
+Highway Vehicles,AK,2,Bethel,50,PM2.5 Primary (Filt + Cond),CAP,4.246547543,TON
+Fuel Comb. Other,AK,2,Valdez-Cordova,261,Ammonia,CAP,4.246182133,TON
+Other Industrial Processes,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,4.24096835,TON
+Fuel Comb. Elec. Util.,AK,2,Bristol Bay,60,PM10 Primary (Filt + Cond),CAP,4.222,TON
+Fuel Comb. Elec. Util.,AK,2,Bristol Bay,60,PM2.5 Primary (Filt + Cond),CAP,4.213,TON
+Other Industrial Processes,AK,2,Valdez-Cordova,261,PM10 Primary (Filt + Cond),CAP,4.20906273,TON
+Fuel Comb. Industrial,AK,2,Kusilvak,158,PM10 Primary (Filt + Cond),CAP,4.183322305,TON
+Fuel Comb. Industrial,AK,2,Kusilvak,158,Volatile Organic Compounds,CAP,4.177683995,TON
+Highway Vehicles,AK,2,Dillingham,70,PM10 Primary (Filt + Cond),CAP,4.177596514,TON
+Other Industrial Processes,AK,2,Aleutians West,16,PM2.5 Primary (Filt + Cond),CAP,4.12354685,TON
+Waste Disposal & Recycling,AK,2,Anchorage,20,Ammonia,CAP,4.1163525,TON
+Highway Vehicles,AK,2,Southeast Fairbanks,240,Ammonia,CAP,4.113254285,TON
+Off-Highway,AK,2,Denali,68,PM10 Primary (Filt + Cond),CAP,4.112326265,TON
+Miscellaneous,AK,2,Skagway,230,PM2.5 Primary (Filt + Cond),CAP,4.101632428,TON
+Highway Vehicles,AK,2,Yukon-Koyukuk,290,Ammonia,CAP,4.093945763,TON
+Highway Vehicles,AK,2,North Slope,185,PM10 Primary (Filt + Cond),CAP,4.080942948,TON
+Fuel Comb. Industrial,AK,2,Aleutians East,13,Ammonia,CAP,4.049086957,TON
+Fuel Comb. Industrial,AK,2,Juneau,110,Ammonia,CAP,4.029145314,TON
+Fuel Comb. Elec. Util.,AK,2,Dillingham,70,PM2.5 Primary (Filt + Cond),CAP,4.0038,TON
+Fuel Comb. Other,AK,2,Northwest Arctic,188,Ammonia,CAP,3.954052027,TON
+Fuel Comb. Other,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,3.946938906,TON
+Fuel Comb. Industrial,AK,2,Matanuska-Susitna,170,Sulfur Dioxide,CAP,3.9162581,TON
+Other Industrial Processes,AK,2,Prince of Wales-Hyder,198,PM2.5 Primary (Filt + Cond),CAP,3.8574342,TON
+Fuel Comb. Elec. Util.,AK,2,Multiple (portable facilities),777,PM10 Primary (Filt + Cond),CAP,3.8555,TON
+Off-Highway,AK,2,Matanuska-Susitna,170,Sulfur Dioxide,CAP,3.850162792,TON
+Off-Highway,AK,2,Denali,68,PM2.5 Primary (Filt + Cond),CAP,3.84741023,TON
+Waste Disposal & Recycling,AK,2,North Slope,185,Nitrogen Oxides,CAP,3.8259,TON
+Fuel Comb. Industrial,AK,2,Southeast Fairbanks,240,PM10 Primary (Filt + Cond),CAP,3.78396564,TON
+Waste Disposal & Recycling,AK,2,Northwest Arctic,188,PM2.5 Primary (Filt + Cond),CAP,3.7588,TON
+Waste Disposal & Recycling,AK,2,Northwest Arctic,188,PM10 Primary (Filt + Cond),CAP,3.7588,TON
+Highway Vehicles,AK,2,Kenai Peninsula,122,Sulfur Dioxide,CAP,3.729316092,TON
+Solvent Utilization,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,3.726559235,TON
+Highway Vehicles,AK,2,Prince of Wales-Hyder,198,PM2.5 Primary (Filt + Cond),CAP,3.651401498,TON
+Waste Disposal & Recycling,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,3.640089,TON
+Fuel Comb. Industrial,AK,2,Northwest Arctic,188,Sulfur Dioxide,CAP,3.62743072,TON
+Highway Vehicles,AK,2,Sitka,220,PM2.5 Primary (Filt + Cond),CAP,3.624589552,TON
+Fuel Comb. Elec. Util.,AK,2,Yakutat,282,Carbon Monoxide,CAP,3.55,TON
+Waste Disposal & Recycling,AK,2,North Slope,185,PM10 Primary (Filt + Cond),CAP,3.5393,TON
+Fuel Comb. Industrial,AK,2,Valdez-Cordova,261,Sulfur Dioxide,CAP,3.53797448,TON
+Storage & Transport,AK,2,Denali,68,PM10 Primary (Filt + Cond),CAP,3.5105,TON
+Fuel Comb. Industrial,AK,2,Petersburg,195,PM10 Primary (Filt + Cond),CAP,3.50548431,TON
+Waste Disposal & Recycling,AK,2,Kenai Peninsula,122,PM2.5 Primary (Filt + Cond),CAP,3.4849,TON
+Waste Disposal & Recycling,AK,2,Kenai Peninsula,122,PM10 Primary (Filt + Cond),CAP,3.4849,TON
+Fuel Comb. Industrial,AK,2,Bethel,50,PM2.5 Primary (Filt + Cond),CAP,3.467032593,TON
+Fuel Comb. Elec. Util.,AK,2,Juneau,110,Nitrogen Oxides,CAP,3.464,TON
+Highway Vehicles,AK,2,Northwest Arctic,188,PM10 Primary (Filt + Cond),CAP,3.397937144,TON
+Fuel Comb. Industrial,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,3.389471155,TON
+Waste Disposal & Recycling,AK,2,Aleutians East,13,Carbon Monoxide,CAP,3.3545,TON
+Storage & Transport,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,3.348262696,TON
+Fuel Comb. Industrial,AK,2,Dillingham,70,PM10 Primary (Filt + Cond),CAP,3.32947429,TON
+Fuel Comb. Industrial,AK,2,Nome,180,Sulfur Dioxide,CAP,3.324363011,TON
+Fuel Comb. Other,AK,2,Denali,68,Sulfur Dioxide,CAP,3.305318768,TON
+Other Industrial Processes,AK,2,Kenai Peninsula,122,Volatile Organic Compounds,CAP,3.28517471,TON
+Waste Disposal & Recycling,AK,2,Juneau,110,Ammonia,CAP,3.262649,TON
+Other Industrial Processes,AK,2,Aleutians East,13,Sulfur Dioxide,CAP,3.2104,TON
+Fuel Comb. Other,AK,2,Prince of Wales-Hyder,198,Ammonia,CAP,3.179257204,TON
+Fuel Comb. Other,AK,2,Bristol Bay,60,Nitrogen Oxides,CAP,3.162619578,TON
+Other Industrial Processes,AK,2,Skagway,230,PM2.5 Primary (Filt + Cond),CAP,3.16020696,TON
+Waste Disposal & Recycling,AK,2,Valdez-Cordova,261,Ammonia,CAP,3.158038,TON
+Waste Disposal & Recycling,AK,2,Southeast Fairbanks,240,Ammonia,CAP,3.158038,TON
+Waste Disposal & Recycling,AK,2,Haines,100,Ammonia,CAP,3.158038,TON
+Fuel Comb. Industrial,AK,2,Northwest Arctic,188,PM2.5 Primary (Filt + Cond),CAP,3.13515336,TON
+Other Industrial Processes,AK,2,Hoonah-Angoon,105,PM10 Primary (Filt + Cond),CAP,3.1309394,TON
+Waste Disposal & Recycling,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,3.1243,TON
+Off-Highway,AK,2,Anchorage,20,Ammonia,CAP,3.101526883,TON
+Waste Disposal & Recycling,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,3.0955,TON
+Storage & Transport,AK,2,Denali,68,PM2.5 Primary (Filt + Cond),CAP,3.0727,TON
+Fuel Comb. Industrial,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,3.069791081,TON
+Highway Vehicles,AK,2,Dillingham,70,PM2.5 Primary (Filt + Cond),CAP,3.002955933,TON
+Fuel Comb. Industrial,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,3.000685437,TON
+Off-Highway,AK,2,Aleutians West,16,Ammonia,CAP,2.935461051,TON
+Off-Highway,AK,2,Kusilvak,158,Sulfur Dioxide,CAP,2.925521817,TON
+Petroleum & Related Industries,AK,2,Multiple (portable facilities),777,Nitrogen Oxides,CAP,2.9165,TON
+Fuel Comb. Elec. Util.,AK,2,Multiple (portable facilities),777,PM2.5 Primary (Filt + Cond),CAP,2.857151852,TON
+Petroleum & Related Industries,AK,2,Multiple (portable facilities),777,Volatile Organic Compounds,CAP,2.8478,TON
+Fuel Comb. Elec. Util.,AK,2,Northwest Arctic,188,Sulfur Dioxide,CAP,2.8053,TON
+Other Industrial Processes,AK,2,Skagway,230,Carbon Monoxide,CAP,2.79069605,TON
+Fuel Comb. Other,AK,2,Kusilvak,158,Ammonia,CAP,2.739190277,TON
+Fuel Comb. Elec. Util.,AK,2,Yakutat,282,PM10 Primary (Filt + Cond),CAP,2.73,TON
+Highway Vehicles,AK,2,Ketchikan Gateway,130,Ammonia,CAP,2.703653291,TON
+Fuel Comb. Industrial,AK,2,Nome,180,PM2.5 Primary (Filt + Cond),CAP,2.698352946,TON
+Other Industrial Processes,AK,2,Hoonah-Angoon,105,Carbon Monoxide,CAP,2.6903843,TON
+Fuel Comb. Other,AK,2,Dillingham,70,Ammonia,CAP,2.592917598,TON
+Miscellaneous,AK,2,North Slope,185,Ammonia,CAP,2.586835133,TON
+Other Industrial Processes,AK,2,Sitka,220,PM10 Primary (Filt + Cond),CAP,2.58082448,TON
+Highway Vehicles,AK,2,Haines,100,PM10 Primary (Filt + Cond),CAP,2.572928615,TON
+Fuel Comb. Other,AK,2,Haines,100,Sulfur Dioxide,CAP,2.558597836,TON
+Waste Disposal & Recycling,AK,2,North Slope,185,Sulfur Dioxide,CAP,2.5539,TON
+Fuel Comb. Other,AK,2,North Slope,185,Ammonia,CAP,2.549994096,TON
+Fuel Comb. Other,AK,2,Nome,180,Ammonia,CAP,2.545397143,TON
+Highway Vehicles,AK,2,North Slope,185,PM2.5 Primary (Filt + Cond),CAP,2.527264795,TON
+Highway Vehicles,AK,2,Denali,68,Ammonia,CAP,2.514236214,TON
+Fuel Comb. Industrial,AK,2,North Slope,185,Ammonia,CAP,2.494901593,TON
+Fuel Comb. Industrial,AK,2,Prince of Wales-Hyder,198,PM10 Primary (Filt + Cond),CAP,2.49346283,TON
+Other Industrial Processes,AK,2,Nome,180,Carbon Monoxide,CAP,2.483573,TON
+Highway Vehicles,AK,2,Aleutians West,16,PM10 Primary (Filt + Cond),CAP,2.476192578,TON
+Waste Disposal & Recycling,AK,2,North Slope,185,Volatile Organic Compounds,CAP,2.4732,TON
+Fuel Comb. Elec. Util.,AK,2,Nome,180,PM10 Primary (Filt + Cond),CAP,2.47,TON
+Fuel Comb. Industrial,AK,2,Bethel,50,Sulfur Dioxide,CAP,2.464716206,TON
+Fuel Comb. Elec. Util.,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,2.46,TON
+Fuel Comb. Industrial,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,2.456340674,TON
+Fuel Comb. Industrial,AK,2,Juneau,110,Sulfur Dioxide,CAP,2.45225294,TON
+Fuel Comb. Industrial,AK,2,Aleutians East,13,PM10 Primary (Filt + Cond),CAP,2.45023026,TON
+Fuel Comb. Other,AK,2,North Slope,185,Volatile Organic Compounds,CAP,2.445822048,TON
+Fuel Comb. Industrial,AK,2,Sitka,220,Volatile Organic Compounds,CAP,2.439395566,TON
+Fuel Comb. Industrial,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,2.413671462,TON
+Fuel Comb. Elec. Util.,AK,2,Nome,180,PM2.5 Primary (Filt + Cond),CAP,2.39,TON
+Fuel Comb. Industrial,AK,2,Aleutians West,16,Sulfur Dioxide,CAP,2.38780151,TON
+Highway Vehicles,AK,2,Bristol Bay,60,PM10 Primary (Filt + Cond),CAP,2.376264718,TON
+Other Industrial Processes,AK,2,Sitka,220,PM2.5 Primary (Filt + Cond),CAP,2.35878147,TON
+Fuel Comb. Industrial,AK,2,Kusilvak,158,PM2.5 Primary (Filt + Cond),CAP,2.347645329,TON
+Other Industrial Processes,AK,2,Valdez-Cordova,261,PM2.5 Primary (Filt + Cond),CAP,2.30726702,TON
+Highway Vehicles,AK,2,Petersburg,195,PM10 Primary (Filt + Cond),CAP,2.295061795,TON
+Fuel Comb. Industrial,AK,2,Petersburg,195,Sulfur Dioxide,CAP,2.278285611,TON
+Petroleum & Related Industries,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,2.262479,TON
+Other Industrial Processes,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,2.20049069,TON
+Fuel Comb. Industrial,AK,2,Bristol Bay,60,PM10 Primary (Filt + Cond),CAP,2.18804072,TON
+Fuel Comb. Industrial,AK,2,Dillingham,70,Sulfur Dioxide,CAP,2.186760392,TON
+Fuel Comb. Industrial,AK,2,Kodiak Island,150,Sulfur Dioxide,CAP,2.18597244,TON
+Other Industrial Processes,AK,2,Juneau,110,Nitrogen Oxides,CAP,2.1782882,TON
+Other Industrial Processes,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,2.172978462,TON
+Waste Disposal & Recycling,AK,2,Aleutians East,13,Sulfur Dioxide,CAP,2.1399,TON
+Fuel Comb. Elec. Util.,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,2.1348,TON
+Other Industrial Processes,AK,2,Haines,100,Volatile Organic Compounds,CAP,2.125024412,TON
+Fuel Comb. Industrial,AK,2,Yakutat,282,Nitrogen Oxides,CAP,2.115969144,TON
+Fuel Comb. Industrial,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,2.110892207,TON
+Fuel Comb. Industrial,AK,2,Kusilvak,158,Sulfur Dioxide,CAP,2.104544232,TON
+Fuel Comb. Industrial,AK,2,Hoonah-Angoon,105,PM10 Primary (Filt + Cond),CAP,2.076346686,TON
+Fuel Comb. Other,AK,2,Haines,100,Ammonia,CAP,2.051599881,TON
+Fuel Comb. Industrial,AK,2,Petersburg,195,PM2.5 Primary (Filt + Cond),CAP,2.045472032,TON
+Other Industrial Processes,AK,2,Aleutians East,13,PM2.5 Primary (Filt + Cond),CAP,2.0444856,TON
+Fuel Comb. Industrial,AK,2,Southeast Fairbanks,240,PM2.5 Primary (Filt + Cond),CAP,2.03570134,TON
+Other Industrial Processes,AK,2,Bethel,50,PM10 Primary (Filt + Cond),CAP,2.01516985,TON
+Other Industrial Processes,AK,2,Skagway,230,Nitrogen Oxides,CAP,2.00689272,TON
+Fuel Comb. Other,AK,2,Aleutians West,16,Sulfur Dioxide,CAP,1.964569295,TON
+Other Industrial Processes,AK,2,Dillingham,70,PM10 Primary (Filt + Cond),CAP,1.94698425,TON
+Fuel Comb. Industrial,AK,2,Dillingham,70,PM2.5 Primary (Filt + Cond),CAP,1.925997884,TON
+Waste Disposal & Recycling,AK,2,North Slope,185,PM2.5 Primary (Filt + Cond),CAP,1.8993,TON
+Miscellaneous,AK,2,North Slope,185,Sulfur Dioxide,CAP,1.896525442,TON
+Fuel Comb. Industrial,AK,2,Aleutians East,13,PM2.5 Primary (Filt + Cond),CAP,1.8915446,TON
+Highway Vehicles,AK,2,Kodiak Island,150,Ammonia,CAP,1.886713698,TON
+Fuel Comb. Industrial,AK,2,Multiple (portable facilities),777,PM10 Primary (Filt + Cond),CAP,1.8772,TON
+Highway Vehicles,AK,2,Haines,100,PM2.5 Primary (Filt + Cond),CAP,1.875404675,TON
+Storage & Transport,AK,2,Anchorage,20,PM2.5 Primary (Filt + Cond),CAP,1.86,TON
+Storage & Transport,AK,2,Anchorage,20,PM10 Primary (Filt + Cond),CAP,1.86,TON
+Other Industrial Processes,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,1.859840467,TON
+Other Industrial Processes,AK,2,Kusilvak,158,PM10 Primary (Filt + Cond),CAP,1.85585374,TON
+Fuel Comb. Other,AK,2,Aleutians East,13,Ammonia,CAP,1.855420135,TON
+Fuel Comb. Industrial,AK,2,Ketchikan Gateway,130,PM10 Primary (Filt + Cond),CAP,1.8469868,TON
+Waste Disposal & Recycling,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,1.84,TON
+Highway Vehicles,AK,2,Northwest Arctic,188,PM2.5 Primary (Filt + Cond),CAP,1.833243844,TON
+Other Industrial Processes,AK,2,Dillingham,70,PM2.5 Primary (Filt + Cond),CAP,1.80362173,TON
+Other Industrial Processes,AK,2,Southeast Fairbanks,240,PM2.5 Primary (Filt + Cond),CAP,1.798865655,TON
+Waste Disposal & Recycling,AK,2,Aleutians East,13,PM10 Primary (Filt + Cond),CAP,1.7962,TON
+Highway Vehicles,AK,2,Prince of Wales-Hyder,198,Ammonia,CAP,1.792209142,TON
+Other Industrial Processes,AK,2,Bethel,50,PM2.5 Primary (Filt + Cond),CAP,1.77510075,TON
+Fuel Comb. Elec. Util.,AK,2,Juneau,110,Carbon Monoxide,CAP,1.762,TON
+Highway Vehicles,AK,2,Bristol Bay,60,PM2.5 Primary (Filt + Cond),CAP,1.761855352,TON
+Fuel Comb. Elec. Util.,AK,2,Kodiak Island,150,Carbon Monoxide,CAP,1.76,TON
+Fuel Comb. Industrial,AK,2,Multiple (portable facilities),777,PM2.5 Primary (Filt + Cond),CAP,1.718,TON
+Other Industrial Processes,AK,2,Kusilvak,158,PM2.5 Primary (Filt + Cond),CAP,1.70152025,TON
+Other Industrial Processes,AK,2,North Slope,185,Carbon Monoxide,CAP,1.672145,TON
+Metals Processing,AK,2,Northwest Arctic,188,PM2.5 Primary (Filt + Cond),CAP,1.6484,TON
+Metals Processing,AK,2,Northwest Arctic,188,PM10 Primary (Filt + Cond),CAP,1.6484,TON
+Fuel Comb. Industrial,AK,2,Ketchikan Gateway,130,Ammonia,CAP,1.647584667,TON
+Waste Disposal & Recycling,AK,2,Northwest Arctic,188,Nitrogen Oxides,CAP,1.6447,TON
+Waste Disposal & Recycling,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,1.6447,TON
+Other Industrial Processes,AK,2,Juneau,110,Volatile Organic Compounds,CAP,1.627784073,TON
+Fuel Comb. Elec. Util.,AK,2,Bethel,50,Sulfur Dioxide,CAP,1.61,TON
+Fuel Comb. Other,AK,2,Petersburg,195,Ammonia,CAP,1.607833838,TON
+Fuel Comb. Industrial,AK,2,Ketchikan Gateway,130,PM2.5 Primary (Filt + Cond),CAP,1.59231505,TON
+Petroleum & Related Industries,AK,2,Anchorage,20,Volatile Organic Compounds,CAP,1.56,TON
+Fuel Comb. Industrial,AK,2,Yakutat,282,Carbon Monoxide,CAP,1.556376236,TON
+Highway Vehicles,AK,2,Nome,180,Ammonia,CAP,1.539903612,TON
+Fuel Comb. Industrial,AK,2,Northwest Arctic,188,Ammonia,CAP,1.531039128,TON
+Highway Vehicles,AK,2,Petersburg,195,PM2.5 Primary (Filt + Cond),CAP,1.52630228,TON
+Other Industrial Processes,AK,2,Northwest Arctic,188,Carbon Monoxide,CAP,1.51329,TON
+Highway Vehicles,AK,2,Aleutians West,16,PM2.5 Primary (Filt + Cond),CAP,1.503329856,TON
+Fuel Comb. Industrial,AK,2,Prince of Wales-Hyder,198,PM2.5 Primary (Filt + Cond),CAP,1.501775963,TON
+Fuel Comb. Other,AK,2,Wrangell,275,Sulfur Dioxide,CAP,1.466087281,TON
+Fuel Comb. Other,AK,2,Wrangell,275,Ammonia,CAP,1.453600068,TON
+Miscellaneous,AK,2,Juneau,110,Ammonia,CAP,1.449536173,TON
+Highway Vehicles,AK,2,Lake and Peninsula,164,PM10 Primary (Filt + Cond),CAP,1.437881778,TON
+Fuel Comb. Elec. Util.,AK,2,Yakutat,282,PM2.5 Primary (Filt + Cond),CAP,1.43,TON
+Highway Vehicles,AK,2,Hoonah-Angoon,105,PM10 Primary (Filt + Cond),CAP,1.404910961,TON
+Fuel Comb. Elec. Util.,AK,2,Ketchikan Gateway,130,PM10 Primary (Filt + Cond),CAP,1.3962,TON
+Waste Disposal & Recycling,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,1.3887,TON
+Highway Vehicles,AK,2,Sitka,220,Ammonia,CAP,1.38844256,TON
+Other Industrial Processes,AK,2,Petersburg,195,Carbon Monoxide,CAP,1.38020315,TON
+Waste Disposal & Recycling,AK,2,Northwest Arctic,188,Sulfur Dioxide,CAP,1.3707,TON
+Fuel Comb. Industrial,AK,2,Sitka,220,Ammonia,CAP,1.345598892,TON
+Highway Vehicles,AK,2,Wrangell,275,PM10 Primary (Filt + Cond),CAP,1.327523597,TON
+Fuel Comb. Industrial,AK,2,Aleutians East,13,Sulfur Dioxide,CAP,1.32282928,TON
+Other Industrial Processes,AK,2,Sitka,220,Volatile Organic Compounds,CAP,1.319934119,TON
+Fuel Comb. Industrial,AK,2,Prince of Wales-Hyder,198,Sulfur Dioxide,CAP,1.272986659,TON
+Other Industrial Processes,AK,2,Petersburg,195,PM10 Primary (Filt + Cond),CAP,1.25715258,TON
+Fuel Comb. Industrial,AK,2,Sitka,220,PM10 Primary (Filt + Cond),CAP,1.25135602,TON
+Highway Vehicles,AK,2,Skagway,230,PM10 Primary (Filt + Cond),CAP,1.249122609,TON
+Fuel Comb. Industrial,AK,2,Bristol Bay,60,PM2.5 Primary (Filt + Cond),CAP,1.244467792,TON
+Highway Vehicles,AK,2,Aleutians East,13,PM10 Primary (Filt + Cond),CAP,1.2295694,TON
+Fuel Comb. Other,AK,2,Hoonah-Angoon,105,Sulfur Dioxide,CAP,1.204203605,TON
+Other Industrial Processes,AK,2,Skagway,230,Volatile Organic Compounds,CAP,1.194045309,TON
+Other Industrial Processes,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,1.182386979,TON
+Highway Vehicles,AK,2,Juneau,110,Sulfur Dioxide,CAP,1.161148405,TON
+Other Industrial Processes,AK,2,Kusilvak,158,Volatile Organic Compounds,CAP,1.160265342,TON
+Fuel Comb. Industrial,AK,2,Hoonah-Angoon,105,PM2.5 Primary (Filt + Cond),CAP,1.157029064,TON
+Metals Processing,AK,2,Fairbanks North Star,90,Ammonia,CAP,1.15,TON
+Other Industrial Processes,AK,2,Petersburg,195,PM2.5 Primary (Filt + Cond),CAP,1.14970167,TON
+Other Industrial Processes,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,1.133478306,TON
+Fuel Comb. Other,AK,2,Multiple (portable facilities),777,Carbon Monoxide,CAP,1.13,TON
+Fuel Comb. Other,AK,2,Skagway,230,Sulfur Dioxide,CAP,1.113427642,TON
+Fuel Comb. Elec. Util.,AK,2,Ketchikan Gateway,130,PM2.5 Primary (Filt + Cond),CAP,1.098083641,TON
+Waste Disposal & Recycling,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,1.09,TON
+Fuel Comb. Other,AK,2,Denali,68,Ammonia,CAP,1.061607619,TON
+Highway Vehicles,AK,2,Bethel,50,Ammonia,CAP,1.056244883,TON
+Fuel Comb. Industrial,AK,2,Sitka,220,PM2.5 Primary (Filt + Cond),CAP,1.05163294,TON
+Other Industrial Processes,AK,2,North Slope,185,Nitrogen Oxides,CAP,1.03457877,TON
+Fuel Comb. Elec. Util.,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,1.0335,TON
+Fuel Comb. Industrial,AK,2,Ketchikan Gateway,130,Sulfur Dioxide,CAP,1.03265909,TON
+Off-Highway,AK,2,Kenai Peninsula,122,Ammonia,CAP,1.030497838,TON
+Miscellaneous,AK,2,Wrangell,275,Carbon Monoxide,CAP,1.001549641,TON
+Other Industrial Processes,AK,2,Kusilvak,158,Sulfur Dioxide,CAP,1,TON
+Other Industrial Processes,AK,2,Ketchikan Gateway,130,Sulfur Dioxide,CAP,1,TON
+Other Industrial Processes,AK,2,Sitka,220,Sulfur Dioxide,CAP,1,TON
+Waste Disposal & Recycling,AK,2,Dillingham,70,Sulfur Dioxide,CAP,1,TON
+Fuel Comb. Other,AK,2,Hoonah-Angoon,105,Ammonia,CAP,0.990686738,TON
+Fuel Comb. Elec. Util.,AK,2,Kodiak Island,150,PM10 Primary (Filt + Cond),CAP,0.96,TON
+Fuel Comb. Industrial,AK,2,Southeast Fairbanks,240,Ammonia,CAP,0.959769662,TON
+Highway Vehicles,AK,2,Lake and Peninsula,164,PM2.5 Primary (Filt + Cond),CAP,0.938720434,TON
+Fuel Comb. Elec. Util.,AK,2,Kodiak Island,150,PM2.5 Primary (Filt + Cond),CAP,0.938266318,TON
+Highway Vehicles,AK,2,Skagway,230,PM2.5 Primary (Filt + Cond),CAP,0.929962352,TON
+Highway Vehicles,AK,2,Hoonah-Angoon,105,PM2.5 Primary (Filt + Cond),CAP,0.928411708,TON
+Fuel Comb. Elec. Util.,AK,2,Denali,68,PM10 Primary (Filt + Cond),CAP,0.9231,TON
+Fuel Comb. Other,AK,2,Sitka,220,Sulfur Dioxide,CAP,0.898632725,TON
+Metals Processing,AK,2,Southeast Fairbanks,240,Volatile Organic Compounds,CAP,0.8949,TON
+Fuel Comb. Elec. Util.,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,0.88,TON
+Fuel Comb. Industrial,AK,2,Multiple (portable facilities),777,Volatile Organic Compounds,CAP,0.8789,TON
+Highway Vehicles,AK,2,Kusilvak,158,PM10 Primary (Filt + Cond),CAP,0.871291191,TON
+Highway Vehicles,AK,2,Wrangell,275,PM2.5 Primary (Filt + Cond),CAP,0.860156261,TON
+Fuel Comb. Elec. Util.,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,0.86,TON
+Highway Vehicles,AK,2,Dillingham,70,Ammonia,CAP,0.851565283,TON
+Highway Vehicles,AK,2,Yakutat,282,PM10 Primary (Filt + Cond),CAP,0.837548694,TON
+Highway Vehicles,AK,2,Valdez-Cordova,261,Sulfur Dioxide,CAP,0.830869044,TON
+Fuel Comb. Other,AK,2,Aleutians West,16,Ammonia,CAP,0.812624831,TON
+Fuel Comb. Elec. Util.,AK,2,Denali,68,PM2.5 Primary (Filt + Cond),CAP,0.8111,TON
+Fuel Comb. Industrial,AK,2,Denali,68,Volatile Organic Compounds,CAP,0.80124761,TON
+Other Industrial Processes,AK,2,Wrangell,275,Carbon Monoxide,CAP,0.7765545,TON
+Off-Highway,AK,2,Valdez-Cordova,261,Ammonia,CAP,0.770547518,TON
+Fuel Comb. Elec. Util.,AK,2,Petersburg,195,PM10 Primary (Filt + Cond),CAP,0.7584,TON
+Fuel Comb. Industrial,AK,2,Valdez-Cordova,261,Ammonia,CAP,0.757532712,TON
+Highway Vehicles,AK,2,North Slope,185,Ammonia,CAP,0.753812442,TON
+Off-Highway,AK,2,Juneau,110,Ammonia,CAP,0.74428701,TON
+Highway Vehicles,AK,2,Aleutians East,13,PM2.5 Primary (Filt + Cond),CAP,0.715493098,TON
+Fuel Comb. Elec. Util.,AK,2,Prince of Wales-Hyder,198,Carbon Monoxide,CAP,0.701,TON
+Fuel Comb. Elec. Util.,AK,2,Sitka,220,Carbon Monoxide,CAP,0.7,TON
+Fuel Comb. Industrial,AK,2,Sitka,220,Sulfur Dioxide,CAP,0.69384146,TON
+Fuel Comb. Other,AK,2,Bristol Bay,60,Ammonia,CAP,0.692574796,TON
+Fuel Comb. Elec. Util.,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,0.6826,TON
+Off-Highway,AK,2,Kodiak Island,150,Ammonia,CAP,0.666548066,TON
+Highway Vehicles,AK,2,Aleutians West,16,Ammonia,CAP,0.663646811,TON
+Off-Highway,AK,2,Fairbanks North Star,90,Ammonia,CAP,0.652587321,TON
+Off-Highway,AK,2,Ketchikan Gateway,130,Ammonia,CAP,0.635025738,TON
+Waste Disposal & Recycling,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,0.63,TON
+Fuel Comb. Industrial,AK,2,Petersburg,195,Ammonia,CAP,0.622315202,TON
+Highway Vehicles,AK,2,Northwest Arctic,188,Ammonia,CAP,0.61377332,TON
+Highway Vehicles,AK,2,Southeast Fairbanks,240,Sulfur Dioxide,CAP,0.605998901,TON
+Highway Vehicles,AK,2,Yukon-Koyukuk,290,Sulfur Dioxide,CAP,0.596205216,TON
+Fuel Comb. Industrial,AK,2,Denali,68,PM10 Primary (Filt + Cond),CAP,0.59376603,TON
+Waste Disposal & Recycling,AK,2,Kenai Peninsula,122,Sulfur Dioxide,CAP,0.5919,TON
+Off-Highway,AK,2,Hoonah-Angoon,105,Ammonia,CAP,0.581044331,TON
+Highway Vehicles,AK,2,Petersburg,195,Ammonia,CAP,0.559620141,TON
+Fuel Comb. Industrial,AK,2,Prince of Wales-Hyder,198,Ammonia,CAP,0.55532828,TON
+Other Industrial Processes,AK,2,Hoonah-Angoon,105,PM2.5 Primary (Filt + Cond),CAP,0.5548091,TON
+Fuel Comb. Other,AK,2,Skagway,230,Ammonia,CAP,0.551962079,TON
+Highway Vehicles,AK,2,Yakutat,282,PM2.5 Primary (Filt + Cond),CAP,0.541814652,TON
+Waste Disposal & Recycling,AK,2,Aleutians East,13,Ammonia,CAP,0.529,TON
+Highway Vehicles,AK,2,Haines,100,Ammonia,CAP,0.523107937,TON
+Highway Vehicles,AK,2,Kusilvak,158,PM2.5 Primary (Filt + Cond),CAP,0.512771197,TON
+Fuel Comb. Other,AK,2,Dillingham,70,Sulfur Dioxide,CAP,0.50716756,TON
+Waste Disposal & Recycling,AK,2,Matanuska-Susitna,170,Volatile Organic Compounds,CAP,0.500225,TON
+Waste Disposal & Recycling,AK,2,Valdez-Cordova,261,Sulfur Dioxide,CAP,0.5,TON
+Fuel Comb. Other,AK,2,Multiple (portable facilities),777,Sulfur Dioxide,CAP,0.5,TON
+Off-Highway,AK,2,Matanuska-Susitna,170,Ammonia,CAP,0.494488619,TON
+Waste Disposal & Recycling,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,0.4855,TON
+Waste Disposal & Recycling,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,0.4852,TON
+Fuel Comb. Elec. Util.,AK,2,Hoonah-Angoon,105,PM10 Primary (Filt + Cond),CAP,0.48,TON
+Other Industrial Processes,AK,2,Nome,180,PM10 Primary (Filt + Cond),CAP,0.4710386,TON
+Waste Disposal & Recycling,AK,2,Aleutians East,13,PM2.5 Primary (Filt + Cond),CAP,0.4685,TON
+Highway Vehicles,AK,2,Ketchikan Gateway,130,Sulfur Dioxide,CAP,0.44037236,TON
+Other Industrial Processes,AK,2,Yukon-Koyukuk,290,Sulfur Dioxide,CAP,0.43,TON
+Fuel Comb. Industrial,AK,2,Wrangell,275,Volatile Organic Compounds,CAP,0.423127961,TON
+Fuel Comb. Elec. Util.,AK,2,Petersburg,195,PM2.5 Primary (Filt + Cond),CAP,0.4217,TON
+Petroleum & Related Industries,AK,2,Multiple (portable facilities),777,Sulfur Dioxide,CAP,0.4202,TON
+Waste Disposal & Recycling,AK,2,Bethel,50,Volatile Organic Compounds,CAP,0.42,TON
+Off-Highway,AK,2,Prince of Wales-Hyder,198,Ammonia,CAP,0.415482727,TON
+Other Industrial Processes,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,0.410177685,TON
+Other Industrial Processes,AK,2,Bethel,50,Volatile Organic Compounds,CAP,0.404033496,TON
+Fuel Comb. Industrial,AK,2,Denali,68,Ammonia,CAP,0.393732314,TON
+Fuel Comb. Elec. Util.,AK,2,Aleutians East,13,Sulfur Dioxide,CAP,0.3912,TON
+Off-Highway,AK,2,Denali,68,Sulfur Dioxide,CAP,0.386236141,TON
+Fuel Comb. Industrial,AK,2,Haines,100,Volatile Organic Compounds,CAP,0.385331475,TON
+Other Industrial Processes,AK,2,Aleutians East,13,Ammonia,CAP,0.3823,TON
+Other Industrial Processes,AK,2,Nome,180,PM2.5 Primary (Filt + Cond),CAP,0.3770381,TON
+Fuel Comb. Other,AK,2,Yakutat,282,Ammonia,CAP,0.376450743,TON
+Other Industrial Processes,AK,2,Lake and Peninsula,164,Carbon Monoxide,CAP,0.3727788,TON
+Highway Vehicles,AK,2,Denali,68,Sulfur Dioxide,CAP,0.350717939,TON
+Waste Disposal & Recycling,AK,2,Bethel,50,Sulfur Dioxide,CAP,0.35,TON
+Highway Vehicles,AK,2,Hoonah-Angoon,105,Ammonia,CAP,0.343056998,TON
+Fuel Comb. Industrial,AK,2,Bethel,50,Ammonia,CAP,0.343003686,TON
+Highway Vehicles,AK,2,Bristol Bay,60,Ammonia,CAP,0.339145559,TON
+Highway Vehicles,AK,2,Wrangell,275,Ammonia,CAP,0.338734827,TON
+Fuel Comb. Industrial,AK,2,Lake and Peninsula,164,Volatile Organic Compounds,CAP,0.334035597,TON
+Other Industrial Processes,AK,2,Yukon-Koyukuk,290,PM10 Primary (Filt + Cond),CAP,0.3337209,TON
+Fuel Comb. Industrial,AK,2,Skagway,230,Volatile Organic Compounds,CAP,0.3255942,TON
+Off-Highway,AK,2,Sitka,220,Ammonia,CAP,0.322929976,TON
+Fuel Comb. Elec. Util.,AK,2,Skagway,230,Carbon Monoxide,CAP,0.3214,TON
+Other Industrial Processes,AK,2,North Slope,185,PM10 Primary (Filt + Cond),CAP,0.3171418,TON
+Off-Highway,AK,2,Dillingham,70,Ammonia,CAP,0.316208751,TON
+Highway Vehicles,AK,2,Kodiak Island,150,Sulfur Dioxide,CAP,0.314329739,TON
+Fuel Comb. Elec. Util.,AK,2,Southeast Fairbanks,240,PM10 Primary (Filt + Cond),CAP,0.3119,TON
+Highway Vehicles,AK,2,Aleutians East,13,Ammonia,CAP,0.304849825,TON
+Solvent Utilization,AK,2,Aleutians West,16,PM2.5 Primary (Filt + Cond),CAP,0.29,TON
+Solvent Utilization,AK,2,Aleutians West,16,PM10 Primary (Filt + Cond),CAP,0.29,TON
+Other Industrial Processes,AK,2,Northwest Arctic,188,PM10 Primary (Filt + Cond),CAP,0.2870131,TON
+Highway Vehicles,AK,2,Lake and Peninsula,164,Ammonia,CAP,0.284590996,TON
+Waste Disposal & Recycling,AK,2,Bethel,50,Carbon Monoxide,CAP,0.28,TON
+Waste Disposal & Recycling,AK,2,Bethel,50,Nitrogen Oxides,CAP,0.28,TON
+Fuel Comb. Industrial,AK,2,Nome,180,Ammonia,CAP,0.279455833,TON
+Fuel Comb. Industrial,AK,2,Denali,68,PM2.5 Primary (Filt + Cond),CAP,0.275995201,TON
+Other Industrial Processes,AK,2,Yukon-Koyukuk,290,PM2.5 Primary (Filt + Cond),CAP,0.2671235,TON
+Fuel Comb. Other,AK,2,Lake and Peninsula,164,Ammonia,CAP,0.26561879,TON
+Fuel Comb. Industrial,AK,2,Wrangell,275,PM10 Primary (Filt + Cond),CAP,0.26229614,TON
+Off-Highway,AK,2,Petersburg,195,Ammonia,CAP,0.256962855,TON
+Off-Highway,AK,2,Lake and Peninsula,164,Ammonia,CAP,0.256959716,TON
+Other Industrial Processes,AK,2,North Slope,185,PM2.5 Primary (Filt + Cond),CAP,0.2538529,TON
+Fuel Comb. Other,AK,2,Multiple (portable facilities),777,PM10 Primary (Filt + Cond),CAP,0.25,TON
+Fuel Comb. Elec. Util.,AK,2,Denali,68,Volatile Organic Compounds,CAP,0.2498,TON
+Fuel Comb. Industrial,AK,2,Denali,68,Sulfur Dioxide,CAP,0.242447262,TON
+Highway Vehicles,AK,2,Prince of Wales-Hyder,198,Sulfur Dioxide,CAP,0.233633874,TON
+Highway Vehicles,AK,2,Nome,180,Sulfur Dioxide,CAP,0.232870972,TON
+Fuel Comb. Other,AK,2,Aleutians East,13,Sulfur Dioxide,CAP,0.232306179,TON
+Fuel Comb. Industrial,AK,2,Bristol Bay,60,Ammonia,CAP,0.232246494,TON
+Waste Disposal & Recycling,AK,2,Yukon-Koyukuk,290,Carbon Monoxide,CAP,0.23,TON
+Other Industrial Processes,AK,2,Northwest Arctic,188,PM2.5 Primary (Filt + Cond),CAP,0.2297367,TON
+Off-Highway,AK,2,Haines,100,Ammonia,CAP,0.229415371,TON
+Fuel Comb. Elec. Util.,AK,2,Sitka,220,Volatile Organic Compounds,CAP,0.228,TON
+Fuel Comb. Industrial,AK,2,Wrangell,275,PM2.5 Primary (Filt + Cond),CAP,0.227098675,TON
+Other Industrial Processes,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,0.226366599,TON
+Fuel Comb. Industrial,AK,2,Wrangell,275,Ammonia,CAP,0.22580017,TON
+Fuel Comb. Industrial,AK,2,Haines,100,PM10 Primary (Filt + Cond),CAP,0.22449333,TON
+Highway Vehicles,AK,2,Skagway,230,Ammonia,CAP,0.22287345,TON
+Highway Vehicles,AK,2,Yakutat,282,Ammonia,CAP,0.21518587,TON
+Fuel Comb. Other,AK,2,Multiple (portable facilities),777,PM2.5 Primary (Filt + Cond),CAP,0.21493054,TON
+Fuel Comb. Elec. Util.,AK,2,Yakutat,282,Sulfur Dioxide,CAP,0.2107,TON
+Highway Vehicles,AK,2,Sitka,220,Sulfur Dioxide,CAP,0.210572099,TON
+Waste Disposal & Recycling,AK,2,Southeast Fairbanks,240,PM10 Primary (Filt + Cond),CAP,0.21,TON
+Fuel Comb. Industrial,AK,2,Haines,100,Ammonia,CAP,0.208045447,TON
+Other Industrial Processes,AK,2,Yakutat,282,Carbon Monoxide,CAP,0.2028098,TON
+Off-Highway,AK,2,Yakutat,282,Ammonia,CAP,0.201358542,TON
+Miscellaneous,AK,2,Aleutians East,13,Ammonia,CAP,0.198153563,TON
+Miscellaneous,AK,2,Aleutians West,16,Ammonia,CAP,0.198153563,TON
+Fuel Comb. Industrial,AK,2,Dillingham,70,Ammonia,CAP,0.193044983,TON
+Fuel Comb. Industrial,AK,2,Haines,100,PM2.5 Primary (Filt + Cond),CAP,0.192616009,TON
+Fuel Comb. Elec. Util.,AK,2,Nome,180,Sulfur Dioxide,CAP,0.19,TON
+Highway Vehicles,AK,2,Kusilvak,158,Ammonia,CAP,0.18545878,TON
+Fuel Comb. Industrial,AK,2,Lake and Peninsula,164,Ammonia,CAP,0.184976367,TON
+Off-Highway,AK,2,Aleutians East,13,Ammonia,CAP,0.182080991,TON
+Fuel Comb. Industrial,AK,2,Skagway,230,Ammonia,CAP,0.180452389,TON
+Off-Highway,AK,2,Bethel,50,Ammonia,CAP,0.180365701,TON
+Metals Processing,AK,2,Yukon-Koyukuk,290,PM10 Primary (Filt + Cond),CAP,0.18,TON
+Metals Processing,AK,2,Yukon-Koyukuk,290,PM2.5 Primary (Filt + Cond),CAP,0.18,TON
+Highway Vehicles,AK,2,Bethel,50,Sulfur Dioxide,CAP,0.173054599,TON
+Other Industrial Processes,AK,2,Multiple (portable facilities),777,PM10 Primary (Filt + Cond),CAP,0.17,TON
+Fuel Comb. Elec. Util.,AK,2,Sitka,220,PM10 Primary (Filt + Cond),CAP,0.1691,TON
+Fuel Comb. Other,AK,2,Bristol Bay,60,Sulfur Dioxide,CAP,0.168157957,TON
+Fuel Comb. Industrial,AK,2,Lake and Peninsula,164,PM10 Primary (Filt + Cond),CAP,0.16707773,TON
+Off-Highway,AK,2,Bristol Bay,60,Ammonia,CAP,0.165742518,TON
+Off-Highway,AK,2,Wrangell,275,Ammonia,CAP,0.164979515,TON
+Other Industrial Processes,AK,2,Multiple (portable facilities),777,PM2.5 Primary (Filt + Cond),CAP,0.1637416,TON
+Fuel Comb. Industrial,AK,2,Skagway,230,PM10 Primary (Filt + Cond),CAP,0.16195993,TON
+Waste Disposal & Recycling,AK,2,Yukon-Koyukuk,290,PM2.5 Primary (Filt + Cond),CAP,0.16,TON
+Waste Disposal & Recycling,AK,2,Yukon-Koyukuk,290,PM10 Primary (Filt + Cond),CAP,0.16,TON
+Highway Vehicles,AK,2,North Slope,185,Sulfur Dioxide,CAP,0.157609627,TON
+Petroleum & Related Industries,AK,2,Matanuska-Susitna,170,Nitrogen Oxides,CAP,0.1566475,TON
+Fuel Comb. Elec. Util.,AK,2,Southeast Fairbanks,240,Sulfur Dioxide,CAP,0.1552,TON
+Other Industrial Processes,AK,2,Wrangell,275,PM10 Primary (Filt + Cond),CAP,0.1472826,TON
+Fuel Comb. Industrial,AK,2,Wrangell,275,Sulfur Dioxide,CAP,0.146857787,TON
+Off-Highway,AK,2,Skagway,230,Ammonia,CAP,0.141412719,TON
+Waste Disposal & Recycling,AK,2,Bethel,50,PM10 Primary (Filt + Cond),CAP,0.14,TON
+Fuel Comb. Industrial,AK,2,Lake and Peninsula,164,PM2.5 Primary (Filt + Cond),CAP,0.139781268,TON
+Other Industrial Processes,AK,2,Nome,180,Volatile Organic Compounds,CAP,0.1361685,TON
+Fuel Comb. Industrial,AK,2,Skagway,230,PM2.5 Primary (Filt + Cond),CAP,0.135364241,TON
+Fuel Comb. Elec. Util.,AK,2,Haines,100,Carbon Monoxide,CAP,0.1322,TON
+Highway Vehicles,AK,2,Northwest Arctic,188,Sulfur Dioxide,CAP,0.127858359,TON
+Fuel Comb. Industrial,AK,2,Haines,100,Sulfur Dioxide,CAP,0.125318394,TON
+Off-Highway,AK,2,North Slope,185,Ammonia,CAP,0.120693406,TON
+Storage & Transport,AK,2,Anchorage,20,Sulfur Dioxide,CAP,0.119,TON
+Other Industrial Processes,AK,2,Wrangell,275,PM2.5 Primary (Filt + Cond),CAP,0.1178909,TON
+Miscellaneous,AK,2,Juneau,110,Volatile Organic Compounds,CAP,0.117526496,TON
+Fuel Comb. Industrial,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,0.114167786,TON
+Fuel Comb. Elec. Util.,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,0.114,TON
+Off-Highway,AK,2,Yukon-Koyukuk,290,Ammonia,CAP,0.112934659,TON
+Highway Vehicles,AK,2,Dillingham,70,Sulfur Dioxide,CAP,0.107140132,TON
+Petroleum & Related Industries,AK,2,Valdez-Cordova,261,Sulfur Dioxide,CAP,0.106166,TON
+Fuel Comb. Other,AK,2,Yakutat,282,Sulfur Dioxide,CAP,0.104091162,TON
+Fuel Comb. Industrial,AK,2,Bristol Bay,60,Sulfur Dioxide,CAP,0.103503739,TON
+Other Industrial Processes,AK,2,Denali,68,Volatile Organic Compounds,CAP,0.102506742,TON
+Fuel Comb. Elec. Util.,AK,2,Dillingham,70,Sulfur Dioxide,CAP,0.1009,TON
+Off-Highway,AK,2,Nome,180,Ammonia,CAP,0.100112918,TON
+Waste Disposal & Recycling,AK,2,Matanuska-Susitna,170,Ammonia,CAP,0.0994565,TON
+Other Industrial Processes,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,0.09647249,TON
+Fuel Comb. Elec. Util.,AK,2,Bristol Bay,60,Sulfur Dioxide,CAP,0.096,TON
+Other Industrial Processes,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,0.09297317,TON
+Waste Disposal & Recycling,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,0.092775,TON
+Fuel Comb. Industrial,AK,2,Lake and Peninsula,164,Sulfur Dioxide,CAP,0.092505485,TON
+Other Industrial Processes,AK,2,North Slope,185,Volatile Organic Compounds,CAP,0.09167978,TON
+Fuel Comb. Industrial,AK,2,Yukon-Koyukuk,290,Ammonia,CAP,0.09053172,TON
+Petroleum & Related Industries,AK,2,Matanuska-Susitna,170,Carbon Monoxide,CAP,0.08986369,TON
+Fuel Comb. Industrial,AK,2,Skagway,230,Sulfur Dioxide,CAP,0.089643065,TON
+Highway Vehicles,AK,2,Aleutians West,16,Sulfur Dioxide,CAP,0.088343905,TON
+Fuel Comb. Elec. Util.,AK,2,Juneau,110,Volatile Organic Compounds,CAP,0.086,TON
+Other Industrial Processes,AK,2,Northwest Arctic,188,Volatile Organic Compounds,CAP,0.08297015,TON
+Fuel Comb. Industrial,AK,2,Kusilvak,158,Ammonia,CAP,0.082523773,TON
+Off-Highway,AK,2,Northwest Arctic,188,Ammonia,CAP,0.081417134,TON
+Other Industrial Processes,AK,2,Bethel,50,Nitrogen Oxides,CAP,0.0806808,TON
+Highway Vehicles,AK,2,Petersburg,195,Sulfur Dioxide,CAP,0.07810323,TON
+Fuel Comb. Elec. Util.,AK,2,Southeast Fairbanks,240,PM2.5 Primary (Filt + Cond),CAP,0.07667516,TON
+Other Industrial Processes,AK,2,Lake and Peninsula,164,PM10 Primary (Filt + Cond),CAP,0.07070184,TON
+Highway Vehicles,AK,2,Haines,100,Sulfur Dioxide,CAP,0.070585104,TON
+Waste Disposal & Recycling,AK,2,Yukon-Koyukuk,290,Nitrogen Oxides,CAP,0.07,TON
+Waste Disposal & Recycling,AK,2,Yukon-Koyukuk,290,Volatile Organic Compounds,CAP,0.07,TON
+Solvent Utilization,AK,2,Anchorage,20,PM10 Primary (Filt + Cond),CAP,0.07,TON
+Waste Disposal & Recycling,AK,2,Fairbanks North Star,90,Volatile Organic Compounds,CAP,0.06785,TON
+Off-Highway,AK,2,Kusilvak,158,Ammonia,CAP,0.067194222,TON
+Fuel Comb. Industrial,AK,2,Yakutat,282,PM10 Primary (Filt + Cond),CAP,0.067037585,TON
+Fuel Comb. Industrial,AK,2,Yakutat,282,Ammonia,CAP,0.061552678,TON
+Waste Disposal & Recycling,AK,2,Valdez-Cordova,261,PM10 Primary (Filt + Cond),CAP,0.06,TON
+Waste Disposal & Recycling,AK,2,Valdez-Cordova,261,PM2.5 Primary (Filt + Cond),CAP,0.06,TON
+Storage & Transport,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,0.0591,TON
+Storage & Transport,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,0.0591,TON
+Fuel Comb. Industrial,AK,2,Hoonah-Angoon,105,Ammonia,CAP,0.057899187,TON
+Fuel Comb. Industrial,AK,2,Yakutat,282,PM2.5 Primary (Filt + Cond),CAP,0.057586399,TON
+Other Industrial Processes,AK,2,Lake and Peninsula,164,PM2.5 Primary (Filt + Cond),CAP,0.05659257,TON
+Waste Disposal & Recycling,AK,2,Yukon-Koyukuk,290,Sulfur Dioxide,CAP,0.056,TON
+Fuel Comb. Other,AK,2,Lake and Peninsula,164,Sulfur Dioxide,CAP,0.05218944,TON
+Other Industrial Processes,AK,2,Nome,180,Nitrogen Oxides,CAP,0.05135852,TON
+Off-Highway,AK,2,Denali,68,Ammonia,CAP,0.050635513,TON
+Waste Disposal & Recycling,AK,2,Kenai Peninsula,122,Ammonia,CAP,0.050531,TON
+Fuel Comb. Other,AK,2,Multiple (portable facilities),777,Volatile Organic Compounds,CAP,0.05,TON
+Highway Vehicles,AK,2,Bristol Bay,60,Sulfur Dioxide,CAP,0.048905177,TON
+Highway Vehicles,AK,2,Wrangell,275,Sulfur Dioxide,CAP,0.047333212,TON
+Petroleum & Related Industries,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,0.04580181,TON
+Off-Highway,AK,2,Southeast Fairbanks,240,Ammonia,CAP,0.045776807,TON
+Highway Vehicles,AK,2,Hoonah-Angoon,105,Sulfur Dioxide,CAP,0.044993574,TON
+Fuel Comb. Elec. Util.,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,0.044248733,TON
+Fuel Comb. Industrial,AK,2,Hoonah-Angoon,105,Sulfur Dioxide,CAP,0.042943782,TON
+Fuel Comb. Elec. Util.,AK,2,Sitka,220,Sulfur Dioxide,CAP,0.0427,TON
+Other Industrial Processes,AK,2,Wrangell,275,Volatile Organic Compounds,CAP,0.04257666,TON
+Highway Vehicles,AK,2,Aleutians East,13,Sulfur Dioxide,CAP,0.042496439,TON
+Waste Disposal & Recycling,AK,2,Dillingham,70,Volatile Organic Compounds,CAP,0.04165,TON
+Fuel Comb. Elec. Util.,AK,2,Hoonah-Angoon,105,Sulfur Dioxide,CAP,0.04,TON
+Highway Vehicles,AK,2,Lake and Peninsula,164,Sulfur Dioxide,CAP,0.03889023,TON
+Other Industrial Processes,AK,2,Yakutat,282,PM10 Primary (Filt + Cond),CAP,0.03846525,TON
+Other Industrial Processes,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,0.03785215,TON
+Fuel Comb. Industrial,AK,2,Yakutat,282,Sulfur Dioxide,CAP,0.037436734,TON
+Other Industrial Processes,AK,2,Aleutians West,16,Ammonia,CAP,0.0374,TON
+Highway Vehicles,AK,2,Skagway,230,Sulfur Dioxide,CAP,0.034392627,TON
+Other Industrial Processes,AK,2,Northwest Arctic,188,Nitrogen Oxides,CAP,0.03129376,TON
+Other Industrial Processes,AK,2,Yakutat,282,PM2.5 Primary (Filt + Cond),CAP,0.03078911,TON
+Highway Vehicles,AK,2,Kusilvak,158,Sulfur Dioxide,CAP,0.028956442,TON
+Highway Vehicles,AK,2,Yakutat,282,Sulfur Dioxide,CAP,0.027941871,TON
+Other Industrial Processes,AK,2,Aleutians West,16,Sulfur Dioxide,CAP,0.0229,TON
+Other Industrial Processes,AK,2,Lake and Peninsula,164,Volatile Organic Compounds,CAP,0.02043859,TON
+Waste Disposal & Recycling,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,0.02,TON
+Fuel Comb. Elec. Util.,AK,2,Ketchikan Gateway,130,Sulfur Dioxide,CAP,0.0197,TON
+Other Industrial Processes,AK,2,Petersburg,195,Nitrogen Oxides,CAP,0.01908331,TON
+Miscellaneous,AK,2,Juneau,110,Nitrogen Oxides,CAP,0.018616886,TON
+Miscellaneous,AK,2,Aleutians West,16,Volatile Organic Compounds,CAP,0.016211741,TON
+Miscellaneous,AK,2,Aleutians East,13,Volatile Organic Compounds,CAP,0.016062481,TON
+Other Industrial Processes,AK,2,Wrangell,275,Nitrogen Oxides,CAP,0.01605859,TON
+Waste Disposal & Recycling,AK,2,Aleutians West,16,Ammonia,CAP,0.0154635,TON
+Miscellaneous,AK,2,Juneau,110,Carbon Monoxide,CAP,0.015409481,TON
+Fuel Comb. Elec. Util.,AK,2,Petersburg,195,Sulfur Dioxide,CAP,0.0115,TON
+Miscellaneous,AK,2,Juneau,110,Sulfur Dioxide,CAP,0.01136537,TON
+Other Industrial Processes,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,0.01111959,TON
+Fuel Comb. Elec. Util.,AK,2,Prince of Wales-Hyder,198,Sulfur Dioxide,CAP,0.0106,TON
+Miscellaneous,AK,2,Ketchikan Gateway,130,Nitrogen Oxides,CAP,0.010434638,TON
+Petroleum & Related Industries,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,0.008665207,TON
+Miscellaneous,AK,2,Ketchikan Gateway,130,Carbon Monoxide,CAP,0.008636913,TON
+Waste Disposal & Recycling,AK,2,Fairbanks North Star,90,Ammonia,CAP,0.008619,TON
+Miscellaneous,AK,2,Skagway,230,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Prince of Wales-Hyder,198,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Haines,100,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Lake and Peninsula,164,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Wrangell,275,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Ketchikan Gateway,130,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Sitka,220,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Bristol Bay,60,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Yakutat,282,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Kodiak Island,150,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Valdez-Cordova,261,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Kusilvak,158,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Matanuska-Susitna,170,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Petersburg,195,Ammonia,CAP,0.008569133,TON
+Miscellaneous,AK,2,Hoonah-Angoon,105,Ammonia,CAP,0.008569133,TON
+Waste Disposal & Recycling,AK,2,Dillingham,70,Ammonia,CAP,0.008281,TON
+Other Industrial Processes,AK,2,Lake and Peninsula,164,Nitrogen Oxides,CAP,0.0077088,TON
+Fuel Comb. Elec. Util.,AK,2,Prince of Wales-Hyder,198,PM10 Primary (Filt + Cond),CAP,0.0069,TON
+Miscellaneous,AK,2,Ketchikan Gateway,130,Sulfur Dioxide,CAP,0.006370212,TON
+Fuel Comb. Elec. Util.,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,0.0062,TON
+Miscellaneous,AK,2,Kusilvak,158,Nitrogen Oxides,CAP,0.006091117,TON
+Waste Disposal & Recycling,AK,2,Aleutians West,16,Carbon Monoxide,CAP,0.006,TON
+Fuel Comb. Elec. Util.,AK,2,Skagway,230,Sulfur Dioxide,CAP,0.0056,TON
+Miscellaneous,AK,2,Kodiak Island,150,Nitrogen Oxides,CAP,0.005567232,TON
+Miscellaneous,AK,2,Kusilvak,158,Carbon Monoxide,CAP,0.005041711,TON
+Waste Disposal & Recycling,AK,2,Aleutians West,16,PM10 Primary (Filt + Cond),CAP,0.005,TON
+Miscellaneous,AK,2,Kodiak Island,150,Carbon Monoxide,CAP,0.004608083,TON
+Miscellaneous,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,0.004279823,TON
+Other Industrial Processes,AK,2,Yakutat,282,Nitrogen Oxides,CAP,0.004193963,TON
+Miscellaneous,AK,2,Prince of Wales-Hyder,198,Nitrogen Oxides,CAP,0.00409266,TON
+Miscellaneous,AK,2,Sitka,220,Nitrogen Oxides,CAP,0.003977048,TON
+Petroleum & Related Industries,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,0.0038,TON
+Petroleum & Related Industries,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,0.0038,TON
+Miscellaneous,AK,2,Kusilvak,158,Sulfur Dioxide,CAP,0.003718547,TON
+Fuel Comb. Elec. Util.,AK,2,Skagway,230,PM10 Primary (Filt + Cond),CAP,0.0036,TON
+Miscellaneous,AK,2,Aleutians West,16,Carbon Monoxide,CAP,0.003542476,TON
+Miscellaneous,AK,2,Kodiak Island,150,Sulfur Dioxide,CAP,0.003398722,TON
+Miscellaneous,AK,2,Prince of Wales-Hyder,198,Carbon Monoxide,CAP,0.003387557,TON
+Fuel Comb. Elec. Util.,AK,2,Skagway,230,Volatile Organic Compounds,CAP,0.0033,TON
+Miscellaneous,AK,2,Sitka,220,Carbon Monoxide,CAP,0.003291864,TON
+Miscellaneous,AK,2,Aleutians West,16,Sulfur Dioxide,CAP,0.002612776,TON
+Miscellaneous,AK,2,Aleutians East,13,Nitrogen Oxides,CAP,0.00250269,TON
+Miscellaneous,AK,2,Prince of Wales-Hyder,198,Sulfur Dioxide,CAP,0.002498516,TON
+Miscellaneous,AK,2,Petersburg,195,Nitrogen Oxides,CAP,0.002436595,TON
+Miscellaneous,AK,2,Sitka,220,Sulfur Dioxide,CAP,0.002427936,TON
+Miscellaneous,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,0.002326025,TON
+Fuel Comb. Elec. Util.,AK,2,Haines,100,Sulfur Dioxide,CAP,0.0023,TON
+Miscellaneous,AK,2,Aleutians East,13,Carbon Monoxide,CAP,0.002071515,TON
+Miscellaneous,AK,2,Petersburg,195,Carbon Monoxide,CAP,0.002016808,TON
+Miscellaneous,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,0.001925287,TON
+Miscellaneous,AK,2,Haines,100,Nitrogen Oxides,CAP,0.001875904,TON
+Petroleum & Related Industries,AK,2,Matanuska-Susitna,170,PM2.5 Primary (Filt + Cond),CAP,0.001847053,TON
+Petroleum & Related Industries,AK,2,Matanuska-Susitna,170,PM10 Primary (Filt + Cond),CAP,0.001847053,TON
+Metals Processing,AK,2,Southeast Fairbanks,240,Sulfur Dioxide,CAP,0.0016,TON
+Miscellaneous,AK,2,Hoonah-Angoon,105,Nitrogen Oxides,CAP,0.001592959,TON
+Miscellaneous,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,0.001561923,TON
+Miscellaneous,AK,2,Haines,100,Carbon Monoxide,CAP,0.001552714,TON
+Miscellaneous,AK,2,Aleutians East,13,Sulfur Dioxide,CAP,0.001527859,TON
+Miscellaneous,AK,2,Petersburg,195,Sulfur Dioxide,CAP,0.00148751,TON
+Miscellaneous,AK,2,Valdez-Cordova,261,Sulfur Dioxide,CAP,0.001420008,TON
+Chemical & Allied Product Mfg,AK,2,Denali,68,PM10 Primary (Filt + Cond),CAP,0.0014,TON
+Chemical & Allied Product Mfg,AK,2,Denali,68,PM2.5 Primary (Filt + Cond),CAP,0.0014,TON
+Miscellaneous,AK,2,Hoonah-Angoon,105,Carbon Monoxide,CAP,0.001318516,TON
+Fuel Comb. Elec. Util.,AK,2,Haines,100,Volatile Organic Compounds,CAP,0.0013,TON
+Fuel Comb. Elec. Util.,AK,2,Haines,100,PM10 Primary (Filt + Cond),CAP,0.0013,TON
+Miscellaneous,AK,2,Lake and Peninsula,164,Nitrogen Oxides,CAP,0.001203074,TON
+Miscellaneous,AK,2,Kusilvak,158,Volatile Organic Compounds,CAP,0.001197116,TON
+Miscellaneous,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,0.001153116,TON
+Miscellaneous,AK,2,Haines,100,Sulfur Dioxide,CAP,0.001145215,TON
+Miscellaneous,AK,2,Wrangell,275,Sulfur Dioxide,CAP,0.001142948,TON
+Miscellaneous,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,0.001029268,TON
+Miscellaneous,AK,2,Sitka,220,Volatile Organic Compounds,CAP,0.001019558,TON
+Miscellaneous,AK,2,Lake and Peninsula,164,Carbon Monoxide,CAP,0.000995803,TON
+Miscellaneous,AK,2,Hoonah-Angoon,105,Sulfur Dioxide,CAP,0.00097248,TON
+Storage & Transport,AK,2,Southeast Fairbanks,240,PM10 Primary (Filt + Cond),CAP,0.0009,TON
+Miscellaneous,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,0.000890177,TON
+Miscellaneous,AK,2,Valdez-Cordova,261,Volatile Organic Compounds,CAP,0.000880891,TON
+Miscellaneous,AK,2,Skagway,230,Nitrogen Oxides,CAP,0.000859232,TON
+Miscellaneous,AK,2,Haines,100,Volatile Organic Compounds,CAP,0.000843085,TON
+Miscellaneous,AK,2,Wrangell,275,Volatile Organic Compounds,CAP,0.000842774,TON
+Miscellaneous,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,0.000819321,TON
+Miscellaneous,AK,2,Lake and Peninsula,164,Volatile Organic Compounds,CAP,0.000786575,TON
+Miscellaneous,AK,2,Skagway,230,Volatile Organic Compounds,CAP,0.000757696,TON
+Miscellaneous,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,0.000739608,TON
+Miscellaneous,AK,2,Lake and Peninsula,164,Sulfur Dioxide,CAP,0.000734461,TON
+Miscellaneous,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,0.000723266,TON
+Miscellaneous,AK,2,Skagway,230,Carbon Monoxide,CAP,0.0007112,TON
+Miscellaneous,AK,2,Bristol Bay,60,Nitrogen Oxides,CAP,0.000643867,TON
+Miscellaneous,AK,2,Bristol Bay,60,Carbon Monoxide,CAP,0.000532939,TON
+Miscellaneous,AK,2,Skagway,230,Sulfur Dioxide,CAP,0.00052455,TON
+Miscellaneous,AK,2,Yakutat,282,Nitrogen Oxides,CAP,0.000449296,TON
+Miscellaneous,AK,2,Bristol Bay,60,Sulfur Dioxide,CAP,0.000393072,TON
+Miscellaneous,AK,2,Yakutat,282,Carbon Monoxide,CAP,0.000371889,TON
+Miscellaneous,AK,2,Yakutat,282,Sulfur Dioxide,CAP,0.000274289,TON
+Petroleum & Related Industries,AK,2,Matanuska-Susitna,170,Sulfur Dioxide,CAP,0.000108747,TON
+Petroleum & Related Industries,AK,2,Juneau,110,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Prince of Wales-Hyder,198,Volatile Organic Compounds,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Bristol Bay,60,Volatile Organic Compounds,CAP,0,TON
+Storage & Transport,AK,2,Kenai Peninsula,122,PM10 Primary (Filt + Cond),CAP,0,TON
+Waste Disposal & Recycling,AK,2,Aleutians West,16,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Storage & Transport,AK,2,Kenai Peninsula,122,Sulfur Dioxide,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Ketchikan Gateway,130,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Bristol Bay,60,PM10 Primary (Filt + Cond),CAP,0,TON
+Storage & Transport,AK,2,Aleutians West,16,Sulfur Dioxide,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Hoonah-Angoon,105,Volatile Organic Compounds,CAP,0,TON
+Storage & Transport,AK,2,Northwest Arctic,188,Ammonia,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Ketchikan Gateway,130,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Valdez-Cordova,261,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Yukon-Koyukuk,290,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Hoonah-Angoon,105,Ammonia,CAP,0,TON
+Metals Processing,AK,2,Southeast Fairbanks,240,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Yakutat,282,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Hoonah-Angoon,105,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Nome,180,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Yukon-Koyukuk,290,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Juneau,110,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Juneau,110,Nitrogen Oxides,CAP,0,TON
+Storage & Transport,AK,2,Northwest Arctic,188,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Juneau,110,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,0,TON
+Storage & Transport,AK,2,Southeast Fairbanks,240,Nitrogen Oxides,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Kodiak Island,150,Sulfur Dioxide,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Wrangell,275,Ammonia,CAP,0,TON
+Solvent Utilization,AK,2,Anchorage,20,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Wrangell,275,Volatile Organic Compounds,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Bethel,50,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Bethel,50,Nitrogen Oxides,CAP,0,TON
+Solvent Utilization,AK,2,Fairbanks North Star,90,Nitrogen Oxides,CAP,0,TON
+Storage & Transport,AK,2,Kenai Peninsula,122,Carbon Monoxide,CAP,0,TON
+Solvent Utilization,AK,2,Fairbanks North Star,90,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Storage & Transport,AK,2,Bristol Bay,60,Nitrogen Oxides,CAP,0,TON
+Storage & Transport,AK,2,Bethel,50,PM10 Primary (Filt + Cond),CAP,0,TON
+Waste Disposal & Recycling,AK,2,Bethel,50,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Multiple (portable facilities),777,Ammonia,CAP,0,TON
+Petroleum & Related Industries,AK,2,Juneau,110,Volatile Organic Compounds,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Yukon-Koyukuk,290,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Juneau,110,Nitrogen Oxides,CAP,0,TON
+Storage & Transport,AK,2,Yukon-Koyukuk,290,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Southeast Fairbanks,240,Sulfur Dioxide,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Ketchikan Gateway,130,Volatile Organic Compounds,CAP,0,TON
+Storage & Transport,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,0,TON
+Fuel Comb. Other,AK,2,Multiple (portable facilities),777,Ammonia,CAP,0,TON
+Metals Processing,AK,2,Juneau,110,Nitrogen Oxides,CAP,0,TON
+Storage & Transport,AK,2,Valdez-Cordova,261,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Other Industrial Processes,AK,2,Skagway,230,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,Yukon-Koyukuk,290,Nitrogen Oxides,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Southeast Fairbanks,240,Sulfur Dioxide,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Denali,68,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,North Slope,185,PM10 Primary (Filt + Cond),CAP,0,TON
+Other Industrial Processes,AK,2,Southeast Fairbanks,240,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Bristol Bay,60,Ammonia,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,North Slope,185,Ammonia,CAP,0,TON
+Other Industrial Processes,AK,2,Multiple (portable facilities),777,Carbon Monoxide,CAP,0,TON
+Solvent Utilization,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,0,TON
+Solvent Utilization,AK,2,Fairbanks North Star,90,PM10 Primary (Filt + Cond),CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Valdez-Cordova,261,Ammonia,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Southeast Fairbanks,240,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Juneau,110,Sulfur Dioxide,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Prince of Wales-Hyder,198,Ammonia,CAP,0,TON
+Other Industrial Processes,AK,2,Prince of Wales-Hyder,198,Sulfur Dioxide,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Kodiak Island,150,Volatile Organic Compounds,CAP,0,TON
+Solvent Utilization,AK,2,Anchorage,20,Sulfur Dioxide,CAP,0,TON
+Other Industrial Processes,AK,2,Multiple (portable facilities),777,Volatile Organic Compounds,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,0,TON
+Storage & Transport,AK,2,Bethel,50,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Juneau,110,Sulfur Dioxide,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Skagway,230,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Lake and Peninsula,164,Volatile Organic Compounds,CAP,0,TON
+Storage & Transport,AK,2,Yukon-Koyukuk,290,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,Aleutians West,16,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Denali,68,Carbon Monoxide,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Prince of Wales-Hyder,198,Ammonia,CAP,0,TON
+Other Industrial Processes,AK,2,Matanuska-Susitna,170,Sulfur Dioxide,CAP,0,TON
+Other Industrial Processes,AK,2,Juneau,110,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,Valdez-Cordova,261,PM10 Primary (Filt + Cond),CAP,0,TON
+Waste Disposal & Recycling,AK,2,Lake and Peninsula,164,Ammonia,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Prince of Wales-Hyder,198,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Storage & Transport,AK,2,North Slope,185,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Southeast Fairbanks,240,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Bethel,50,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Kenai Peninsula,122,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Storage & Transport,AK,2,North Slope,185,Carbon Monoxide,CAP,0,TON
+Metals Processing,AK,2,Juneau,110,Volatile Organic Compounds,CAP,0,TON
+Metals Processing,AK,2,Juneau,110,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Bethel,50,Sulfur Dioxide,CAP,0,TON
+Solvent Utilization,AK,2,Fairbanks North Star,90,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Denali,68,Ammonia,CAP,0,TON
+Other Industrial Processes,AK,2,Hoonah-Angoon,105,Sulfur Dioxide,CAP,0,TON
+Other Industrial Processes,AK,2,Multiple (portable facilities),777,Nitrogen Oxides,CAP,0,TON
+Petroleum & Related Industries,AK,2,Kenai Peninsula,122,Ammonia,CAP,0,TON
+Solvent Utilization,AK,2,Aleutians West,16,Sulfur Dioxide,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Northwest Arctic,188,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Bristol Bay,60,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Waste Disposal & Recycling,AK,2,Petersburg,195,Volatile Organic Compounds,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Sitka,220,Ammonia,CAP,0,TON
+Petroleum & Related Industries,AK,2,Juneau,110,Nitrogen Oxides,CAP,0,TON
+Other Industrial Processes,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,Bristol Bay,60,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Bristol Bay,60,Ammonia,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Skagway,230,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Waste Disposal & Recycling,AK,2,Denali,68,Volatile Organic Compounds,CAP,0,TON
+Other Industrial Processes,AK,2,Anchorage,20,Sulfur Dioxide,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Bristol Bay,60,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Yakutat,282,Volatile Organic Compounds,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Juneau,110,PM10 Primary (Filt + Cond),CAP,0,TON
+Metals Processing,AK,2,Juneau,110,Ammonia,CAP,0,TON
+Solvent Utilization,AK,2,Anchorage,20,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Valdez-Cordova,261,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,Aleutians West,16,Nitrogen Oxides,CAP,0,TON
+Waste Disposal & Recycling,AK,2,North Slope,185,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Skagway,230,Volatile Organic Compounds,CAP,0,TON
+Solvent Utilization,AK,2,Anchorage,20,Nitrogen Oxides,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Sitka,220,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Storage & Transport,AK,2,Valdez-Cordova,261,Nitrogen Oxides,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Juneau,110,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Petersburg,195,Ammonia,CAP,0,TON
+Solvent Utilization,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Valdez-Cordova,261,Ammonia,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Nome,180,Ammonia,CAP,0,TON
+Other Industrial Processes,AK,2,Multiple (portable facilities),777,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Juneau,110,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,Kenai Peninsula,122,Nitrogen Oxides,CAP,0,TON
+Petroleum & Related Industries,AK,2,Juneau,110,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,Northwest Arctic,188,Nitrogen Oxides,CAP,0,TON
+Storage & Transport,AK,2,Yukon-Koyukuk,290,PM10 Primary (Filt + Cond),CAP,0,TON
+Petroleum & Related Industries,AK,2,Fairbanks North Star,90,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Nome,180,Volatile Organic Compounds,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Skagway,230,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Denali,68,Nitrogen Oxides,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Kusilvak,158,Ammonia,CAP,0,TON
+Other Industrial Processes,AK,2,Valdez-Cordova,261,Sulfur Dioxide,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Haines,100,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Haines,100,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Fairbanks North Star,90,Ammonia,CAP,0,TON
+Other Industrial Processes,AK,2,Fairbanks North Star,90,Ammonia,CAP,0,TON
+Other Industrial Processes,AK,2,Multiple (portable facilities),777,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,Aleutians West,16,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Kodiak Island,150,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Sitka,220,Volatile Organic Compounds,CAP,0,TON
+Storage & Transport,AK,2,Anchorage,20,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Aleutians West,16,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Storage & Transport,AK,2,Aleutians West,16,PM10 Primary (Filt + Cond),CAP,0,TON
+Waste Disposal & Recycling,AK,2,Juneau,110,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Petroleum & Related Industries,AK,2,Multiple (portable facilities),777,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Bristol Bay,60,Sulfur Dioxide,CAP,0,TON
+Metals Processing,AK,2,Juneau,110,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,Southeast Fairbanks,240,Ammonia,CAP,0,TON
+Other Industrial Processes,AK,2,Kenai Peninsula,122,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,Denali,68,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,North Slope,185,Nitrogen Oxides,CAP,0,TON
+Storage & Transport,AK,2,Fairbanks North Star,90,Carbon Monoxide,CAP,0,TON
+Other Industrial Processes,AK,2,Dillingham,70,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,North Slope,185,Sulfur Dioxide,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Kusilvak,158,Volatile Organic Compounds,CAP,0,TON
+Petroleum & Related Industries,AK,2,Juneau,110,Carbon Monoxide,CAP,0,TON
+Storage & Transport,AK,2,Kenai Peninsula,122,Ammonia,CAP,0,TON
+Solvent Utilization,AK,2,Aleutians West,16,Carbon Monoxide,CAP,0,TON
+Solvent Utilization,AK,2,Fairbanks North Star,90,Sulfur Dioxide,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Fairbanks North Star,90,Ammonia,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Denali,68,Ammonia,CAP,0,TON
+Other Industrial Processes,AK,2,Haines,100,Sulfur Dioxide,CAP,0,TON
+Storage & Transport,AK,2,North Slope,185,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Solvent Utilization,AK,2,Aleutians West,16,Ammonia,CAP,0,TON
+Storage & Transport,AK,2,Juneau,110,Carbon Monoxide,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Sitka,220,Ammonia,CAP,0,TON
+Fuel Comb. Industrial,AK,2,Multiple (portable facilities),777,Ammonia,CAP,0,TON
+Fuel Comb. Elec. Util.,AK,2,Hoonah-Angoon,105,PM2.5 Primary (Filt + Cond),CAP,0,TON
+Storage & Transport,AK,2,Northwest Arctic,188,Sulfur Dioxide,CAP,0,TON
+Petroleum & Related Industries,AK,2,North Slope,185,Ammonia,CAP,0,TON
+Waste Disposal & Recycling,AK,2,Aleutians West,16,Sulfur Dioxide,CAP,0,TON
