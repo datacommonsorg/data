@@ -16,6 +16,7 @@
 import unittest
 import os
 import csv
+import tempfile
 
 from absl import app
 from absl import logging
@@ -132,53 +133,56 @@ class PropertyValueCacheTest(unittest.TestCase):
 
     def test_save_to_file_successfully(self):
         """Tests that the cache is saved to a file successfully."""
-        file_path = 'test_save_cache.csv'
-        pv_cache = PropertyValueCache(file_path)
+        with tempfile.TemporaryDirectory() as temp_dir:
+            file_path = os.path.join(temp_dir, 'test_save_cache.csv')
+            pv_cache = PropertyValueCache(file_path)
 
-        # Add an entry and assert that the cache is dirty
-        pv_cache.add({'dcid': 'geoId/01', 'name': 'Alabama', 'typeOf': 'State'})
-        self.assertTrue(pv_cache.is_dirty())
+            # Add an entry and assert that the cache is dirty
+            pv_cache.add({
+                'dcid': 'geoId/01',
+                'name': 'Alabama',
+                'typeOf': 'State'
+            })
+            self.assertTrue(pv_cache.is_dirty())
 
-        # Save the cache and assert that it is no longer dirty
-        pv_cache.save_cache_file()
-        self.assertFalse(pv_cache.is_dirty())
+            # Save the cache and assert that it is no longer dirty
+            pv_cache.save_cache_file()
+            self.assertFalse(pv_cache.is_dirty())
 
-        # Load the cache from the file and assert that it has the correct entry
-        new_pv_cache = PropertyValueCache(file_path)
-        reloaded_entry = new_pv_cache.get_entry('geoId/01')
-        self.assertEqual(reloaded_entry['dcid'], 'geoId/01')
-        self.assertEqual(reloaded_entry['name'], 'Alabama')
-        self.assertEqual(reloaded_entry['typeOf'], 'State')
-
-        # Clean up the temporary file
-        os.remove(file_path)
+            # Load the cache from the file and assert that it has the correct entry
+            new_pv_cache = PropertyValueCache(file_path)
+            reloaded_entry = new_pv_cache.get_entry('geoId/01')
+            self.assertEqual(reloaded_entry['dcid'], 'geoId/01')
+            self.assertEqual(reloaded_entry['name'], 'Alabama')
+            self.assertEqual(reloaded_entry['typeOf'], 'State')
 
     def test_load_from_file_successfully(self):
         """Tests that the cache is loaded from a file successfully."""
-        # Create a temporary CSV file
-        file_path = 'test_cache.csv'
-        with open(file_path, 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(['dcid', 'name', 'typeOf'])
-            writer.writerow(['geoId/01', 'Alabama', 'State'])
-            writer.writerow(['geoId/02', 'Alaska', 'State'])
+        with tempfile.TemporaryDirectory() as temp_dir:
+            # Create a temporary CSV file
+            file_path = os.path.join(temp_dir, 'test_cache.csv')
+            with open(file_path, 'w', newline='') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(['dcid', 'name', 'typeOf'])
+                writer.writerow(['geoId/01', 'Alabama', 'State'])
+                writer.writerow(['geoId/02', 'Alaska', 'State'])
 
-        # Load the cache from the file
-        pv_cache = PropertyValueCache(file_path)
+            # Load the cache from the file
+            pv_cache = PropertyValueCache(file_path)
 
-        # Assert that the cache has the correct number of entries
-        self.assertEqual(pv_cache.num_entries(), 2)
+            # Assert that the cache has the correct number of entries
+            self.assertEqual(pv_cache.num_entries(), 2)
 
-        # Assert that an entry can be retrieved correctly
-        expected_entry = {
-            'dcid': 'geoId/01',
-            'name': 'Alabama',
-            'typeOf': 'State'
-        }
-        self.assertEqual(pv_cache.get_entry('geoId/01'), expected_entry)
-
-        # Clean up the temporary file
-        os.remove(file_path)
+            # Assert that an entry can be retrieved correctly
+            expected_entry = {
+                'dcid': 'geoId/01',
+                'name': 'Alabama',
+                'typeOf': 'State'
+            }
+            reloaded_entry = pv_cache.get_entry('geoId/01')
+            self.assertEqual(reloaded_entry['dcid'], expected_entry['dcid'])
+            self.assertEqual(reloaded_entry['name'], expected_entry['name'])
+            self.assertEqual(reloaded_entry['typeOf'], expected_entry['typeOf'])
 
     def test_flatten_dict_by_single_property(self):
         """Tests flattening a dictionary by a single multi-valued property."""
@@ -245,6 +249,70 @@ class PropertyValueCacheTest(unittest.TestCase):
             },
         ]
         self.assertCountEqual(expected, flatten_dict(pvs, ['name', 'typeOf']))
+
+
+class KeyNormalizationTest(unittest.TestCase):
+
+    def test_lookup_with_normalization_enabled(self):
+        """Tests that lookups are case-insensitive with normalization enabled."""
+        pv_cache = PropertyValueCache(normalize_key=True)
+        entry = {'name': 'California', 'dcid': 'geoId/06'}
+        pv_cache.add(entry)
+        self.assertEqual(entry, pv_cache.get_entry('california'))
+
+    def test_lookup_with_normalization_disabled(self):
+        """Tests that lookups are case-sensitive with normalization disabled."""
+        pv_cache = PropertyValueCache(normalize_key=False)
+        entry = {'name': 'California', 'dcid': 'geoId/06'}
+        pv_cache.add(entry)
+        self.assertEqual({}, pv_cache.get_entry('california'))
+        self.assertEqual(entry, pv_cache.get_entry('California'))
+
+
+class ListValuedPropertiesTest(unittest.TestCase):
+
+    def test_add_and_get_list_valued_property(self):
+        """Tests that a property with a list of values is added and retrieved correctly."""
+        pv_cache = PropertyValueCache()
+        entry = {
+            'dcid': 'geoId/06',
+            'name': 'California',
+            'containedInPlace': ['country/USA', 'northamerica/USA']
+        }
+        pv_cache.add(entry)
+        retrieved_entry = pv_cache.get_entry('geoId/06')
+        self.assertEqual(entry, retrieved_entry)
+
+
+class SharedCacheTest(unittest.TestCase):
+
+    def test_shared_cache_reflects_changes(self):
+        """Tests that changes made to a shared cache file are reflected when reloaded."""
+        with tempfile.TemporaryDirectory() as temp_dir:
+            cache_file = os.path.join(temp_dir, 'shared_cache.csv')
+
+            # Create the first cache instance and add an entry.
+            cache1 = PropertyValueCache(cache_file)
+            entry1 = {'name': 'California', 'dcid': 'geoId/06'}
+            cache1.add(entry1)
+            cache1.save_cache_file()
+
+            # Create a second cache instance pointing to the same file.
+            cache2 = PropertyValueCache(cache_file)
+            reloaded_entry1 = cache2.get_entry('California')
+            self.assertEqual(entry1['name'], reloaded_entry1['name'])
+            self.assertEqual(entry1['dcid'], reloaded_entry1['dcid'])
+
+            # Add a new entry to the second cache instance.
+            entry2 = {'name': 'Nevada', 'dcid': 'geoId/32'}
+            cache2.add(entry2)
+            cache2.save_cache_file()
+
+            # Reload the first cache instance and verify that it sees the new entry.
+            cache1.load_cache_file(cache_file)
+            reloaded_entry2 = cache1.get_entry('Nevada')
+            self.assertEqual(entry2['name'], reloaded_entry2['name'])
+            self.assertEqual(entry2['dcid'], reloaded_entry2['dcid'])
 
 
 class NormalizeStringTest(unittest.TestCase):
