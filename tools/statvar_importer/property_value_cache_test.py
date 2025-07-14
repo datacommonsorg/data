@@ -93,6 +93,31 @@ class PropertyValueCacheTest(unittest.TestCase):
         self.assertEqual(initial_num_entries, final_num_entries)
         self.assertEqual(initial_entry, final_entry)
 
+    def test_get_entry_without_prop_success(self):
+        """Tests successful entry lookup by value without a specific property."""
+        pv_cache = PropertyValueCache()
+        entry = {
+            'dcid': 'geoId/06',
+            'name': 'California',
+            'placeId': 'ChIJPV4oX_65j4ARVW8IJ6IJUYs'
+        }
+        pv_cache.add(entry)
+
+        # Lookup by a value that exists in one of the key properties
+        self.assertEqual(entry, pv_cache.get_entry('geoId/06'))
+        self.assertEqual(entry, pv_cache.get_entry('California'))
+        self.assertEqual(entry,
+                         pv_cache.get_entry('ChIJPV4oX_65j4ARVW8IJ6IJUYs'))
+
+    def test_get_entry_without_prop_failure(self):
+        """Tests failed entry lookup for a non-existent value."""
+        pv_cache = PropertyValueCache()
+        entry = {'dcid': 'geoId/06', 'name': 'California'}
+        pv_cache.add(entry)
+
+        # Lookup by a value that does not exist
+        self.assertEqual({}, pv_cache.get_entry('non-existent-value'))
+
     def test_flatten_dict(self):
         pvs = {
             'name': ['California', 'CA'],
