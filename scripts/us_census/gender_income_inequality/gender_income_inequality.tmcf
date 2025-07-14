@@ -1,0 +1,14 @@
+Node: E:gender_income_inequality->E1
+typeOf: schema:Observation
+observedNode: E:gender_income_inequality->E2
+measurementMethod: dcs:dcAggregate/CensusACS5yrSurvey
+observationDate: C:gender_income_inequality->observation_date
+measuredProperty: dcs:genderIncomeInequality
+measuredValue: C:gender_income_inequality->gender_income_inequality
+
+Node: E:gender_income_inequality->E2
+typeOf: schema:StatisticalPopulation
+populationType: schema:Person
+location: C:gender_income_inequality->place_id
+age: dcid:Years15Onwards
+incomeStatus: dcs:WithIncome
