@@ -715,7 +715,7 @@ class StatVarsMap:
             current_pvs['measurementMethod'] = 'dcs:DataCommonsAggregate'
         elif not mmethod.startswith(
                 'dcAggregate/'
-        ) and mmethod != 'DataCommonsAggregate' and aggregation_type != 'last':
+        ) and mmethod != 'DataCommonsAggregate' and aggregation_type != 'last' and aggregation_type != 'first':
             current_pvs['measurementMethod'] = f'dcs:dcAggregate/{mmethod}'
         dup_svobs_key = self._config.get('duplicate_svobs_key')
         if dup_svobs_key in current_pvs:
