@@ -14,6 +14,7 @@
 """Utility functions for logging."""
 
 import json
+import google.cloud.logging
 
 
 def log_struct(level: str, message: str, labels: dict):
@@ -61,3 +62,17 @@ def log_metric(log_type: str, level: str, message: str, metric_labels: dict):
               maintain consistency in the labels used to guarantee correct population of log labels.
     """
     log_struct(level, message, {"log_type": log_type, **metric_labels})
+
+
+def configure_cloud_logging():
+    """Configure Google Cloud Logging handler for structured logging with proper severity.
+    
+    Handles both standard Python logging and absl logging since absl uses Python's 
+    logging system internally. Maps log levels to GCP severity (INFO→INFO, ERROR→ERROR).
+    
+    Note: Prefer calling this after app.run() begins so that absl's logging handlers 
+    are already set up. Both handlers will coexist - ABSLHandler for console output 
+    and CloudLoggingHandler for structured logs with proper severity.
+    """
+    client = google.cloud.logging.Client()
+    client.setup_logging()
