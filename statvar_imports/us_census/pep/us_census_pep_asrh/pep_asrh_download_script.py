@@ -25,7 +25,7 @@ import ssl
 FLAGS = flags.FLAGS
 flags.DEFINE_string(
     "input_path",
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "input_files"),
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "gcs_output/input_files"),
     "Directory to store downloaded files.",
 )
 flags.DEFINE_integer("start_year", 2030, "Starting year for data search (inclusive).")
