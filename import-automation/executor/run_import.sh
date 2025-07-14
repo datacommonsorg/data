@@ -254,7 +254,7 @@ function run_import_cloud {
     --add-volume-mount volume=datcom-volume,mount-path=/mnt \
     --region=$REGION \
     --image $DOCKER_REMOTE:latest \
-    --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$config" \
+    --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$config|--enable_cloud_logging" \
     --cpu=$CPU --memory=$MEMORY --task-timeout=$TIMEOUT --max-retries=1
   [[ $? != 0 ]] && echo_fatal "Failed to create cloud run job: $job_name"
 
