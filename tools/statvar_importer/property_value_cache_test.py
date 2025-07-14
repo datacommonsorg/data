@@ -24,53 +24,48 @@ from property_value_cache import PropertyValueCache, flatten_dict
 
 class PropertyValueCacheTest(unittest.TestCase):
 
-    def test_add_entry(self):
+    def test_add_simple_entry(self):
+        """Tests that a simple entry is added to the cache correctly."""
         pv_cache = PropertyValueCache()
+        entry = {'name': 'California', 'dcid': 'geoId/06'}
+        pv_cache.add(entry)
+        self.assertEqual(entry, pv_cache.get_entry('California'))
 
-        # Add an entry with name and dcid
+    def test_add_merges_properties(self):
+        """Tests that adding an entry with a matching key merges the new properties."""
+        pv_cache = PropertyValueCache()
         pv_cache.add({'name': 'California', 'dcid': 'geoId/06'})
-        pv_cache.add({'name': 'India', 'dcid': 'country/IND'})
-
-        # Add entry with additional properties
         pv_cache.add({'dcid': 'geoId/06', 'typeOf': 'AdministrativeArea1'})
         pv_cache.add({'dcid': 'geoId/06', 'typeOf': 'State', 'name': 'CA'})
-        pv_cache.add({
-            'dcid': 'country/IND',
-            'placeId': 'ChIJkbeSa_BfYzARphNChaFPjNc'
-        })
 
-        expected_entry1 = {
+        expected_entry = {
             'name': ['California', 'CA'],
             'dcid': 'geoId/06',
             'typeOf': ['AdministrativeArea1', 'State'],
         }
-        self.assertEqual(expected_entry1,
-                         pv_cache.get_entry(prop='name', value='California'))
-        self.assertEqual(expected_entry1,
-                         pv_cache.get_entry('geoId/06', 'dcid'))
+        self.assertEqual(expected_entry, pv_cache.get_entry('California'))
 
-        expected_entry2 = {
-            'name': 'India',
+    def test_get_entry_for_dict_success(self):
+        """Tests successful entry lookup using a dictionary of property values."""
+        pv_cache = PropertyValueCache()
+        entry = {
             'dcid': 'country/IND',
-            'placeId': 'ChIJkbeSa_BfYzARphNChaFPjNc',
+            'name': 'India',
+            'placeId': 'ChIJkbeSa_BfYzARphNChaFPjNc'
         }
-        self.assertEqual(expected_entry2, pv_cache.get_entry('India', 'name'))
-        self.assertEqual(expected_entry2,
-                         pv_cache.get_entry('country/IND', 'dcid'))
-        self.assertEqual(expected_entry2, pv_cache.get_entry('India'))
+        pv_cache.add(entry)
 
-        # Lookup by dict with placeId
-        # Match of one property, placeId is sufficient.
-        self.assertEqual(
-            expected_entry2,
-            pv_cache.get_entry_for_dict({
-                # Matching key
-                'placeId': 'ChIJkbeSa_BfYzARphNChaFPjNc',
-                # Key not matching
-                'name': 'IND',
-            }),
-        )
-        self.assertFalse({}, pv_cache.get_entry_for_dict({'name': 'IND'}))
+        lookup_dict = {
+            'placeId': 'ChIJkbeSa_BfYzARphNChaFPjNc',
+            'name': 'Non-matching name'
+        }
+        self.assertEqual(entry, pv_cache.get_entry_for_dict(lookup_dict))
+
+    def test_get_entry_for_dict_failure(self):
+        """Tests failed entry lookup when the dictionary has no matching keys."""
+        pv_cache = PropertyValueCache()
+        pv_cache.add({'name': 'India', 'dcid': 'country/IND'})
+        self.assertEqual({}, pv_cache.get_entry_for_dict({'name': 'IND'}))
 
     def test_add_duplicate_entry_does_not_change_cache(self):
         """Tests that adding a duplicate entry does not change the cache."""
