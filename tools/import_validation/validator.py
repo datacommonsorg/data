@@ -206,7 +206,9 @@ class Validator:
                 ValidationStatus.FAILED,
                 'MODIFIED_COUNT',
                 message=
-                f"Found {unique_counts} unique modified counts where 1 was expected.",
+                ("The number of modified data points was not consistent across all StatVars. "
+                 f"Expected every StatVar to have the same number of modified points, but found {unique_counts} "
+                 f"different counts: {list(differ_df['MODIFIED'].unique())}"),
                 details={'unique_counts': list(differ_df['MODIFIED'].unique())},
                 rows_processed=rows_processed,
                 rows_succeeded=0,
