@@ -1,33 +1,50 @@
-# BLS_CPI_Category Import
+# BLS CPI Category Data Importer
 
-- source: https://www.bls.gov/cpi/tables/supplemental-files/
+This document outlines the process for downloading and importing Consumer Price Index (CPI) data from the Bureau of Labor Statistics (BLS).
 
-- How to download data: We have the download script cpi_category_download.py to download the data from source website and keep csv files inside the input_data folder.
-### How to run download script:
-`python3 cpi_category_download.py`
+- **Source**: [BLS Supplemental Files](https://www.bls.gov/cpi/tables/supplemental-files/)
+- **Place Type**: Country
+- **Statvars**: Economy
+- **Years**: 2011 to latest available data
 
-- type of place: Country.
+## Usage
 
-- statvars: Economy
+The process involves two main steps: downloading the source data and then processing it to generate the final output.
 
-- years: 2011 till latest available data
+### 1. Download Data
 
+A Python script is provided to download the necessary data files from the BLS website. The script organizes the files into the `input_data` directory.
 
-### How to run:
-To process from current import folder
+**Command:**
+```bash
+python3 cpi_category_download.py
+```
+### 2. Process Data
 
-`../../../tools/statvar_importer/stat_var_processor.py --input_data='input_data/filename' --pv_map=<pvmap_file> --config_file=<metadata_file> --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=<file_path/filename>`
+After downloading the data, use the `stat_var_processor.py` script to process the files and generate the final statistical variables.
 
-
+**Generic Command:**
+```bash
+../../../tools/statvar_importer/stat_var_processor.py \
+    --input_data='input_data/<folder_name>/*' \
+    --pv_map='<pvmap_file>.csv' \
+    --config_file='<metadata_file>.csv' \
+    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_path='output/<folder_name>/<output_filename>'
+```
 #### Example
 
-To process from current import folder
+This example shows how to process the `cpi-w` data. To process data for `cpi-u` and `c-cpi-u`, simply update the input folder, pvmap file, config file, and output path accordingly.
 
-`../../../tools/statvar_importer/stat_var_processor.py --input_data='input_data/cpi-w/*' --pv_map='cpi_w_pvmap.csv' --config_file='cpi_w_metadata.csv' --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path='output/cpi_w/cpi_w'`
+**Command for `cpi-w`:**
+```bash
+../../../tools/statvar_importer/stat_var_processor.py \
+    --input_data='input_data/cpi-w/*' \
+    --pv_map='cpi_w_pvmap.csv' \
+    --config_file='cpi_w_metadata.csv' \
+    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
+    --output_path='output/cpi_w/cpi_w'
+```
+## TODO
 
-In the same way please change the input folder and the pvmap, config files which are available in the cpi_category folder to generate output for cpi_u and c_cpi_u.
-
-#### Download
-Running from current import folder
-`python3 cpi_category_download.py`
-
+- **Unit Testing**: Create a comprehensive unit test for the `cpi_category_download.py` script to ensure its reliability and correctness. The current download logic is complex and would benefit from a robust test suite. This will be addressed in a future update, we are keeping the bug : b/422887606 open for further tracking.
