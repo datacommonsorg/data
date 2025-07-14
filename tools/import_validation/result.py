@@ -32,6 +32,7 @@ class ValidationResult:
                  name: str,
                  message: str = '',
                  details: dict = None,
+                 validation_params: dict = None,
                  rows_processed: int = 0,
                  rows_succeeded: int = 0,
                  rows_failed: int = 0):
@@ -39,6 +40,7 @@ class ValidationResult:
         self.name = name
         self.message = message  # A human-readable summary
         self.details = details if details is not None else {}
+        self.validation_params = validation_params if validation_params is not None else {}
         self.rows_processed = rows_processed
         self.rows_succeeded = rows_succeeded
         self.rows_failed = rows_failed

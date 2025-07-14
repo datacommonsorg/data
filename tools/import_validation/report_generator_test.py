@@ -42,6 +42,7 @@ class TestReportGenerator(unittest.TestCase):
             ValidationResult(ValidationStatus.FAILED,
                              'Test 2',
                              'Something failed', {'details': 'here'},
+                             validation_params={'threshold': 42},
                              rows_processed=5,
                              rows_succeeded=0,
                              rows_failed=5)
@@ -62,6 +63,9 @@ class TestReportGenerator(unittest.TestCase):
         self.assertEqual(output_df.iloc[1]['Status'], 'FAILED')
         self.assertEqual(output_df.iloc[1]['Message'], 'Something failed')
         self.assertEqual(output_df.iloc[1]['Details'], '{"details": "here"}')
+        self.assertIn('ValidationParams', output_df.columns)
+        self.assertEqual(output_df.iloc[1]['ValidationParams'],
+                         '{"threshold": 42}')
         self.assertEqual(output_df.iloc[1]['RowsProcessed'], 5)
         self.assertEqual(output_df.iloc[1]['RowsSucceeded'], 0)
         self.assertEqual(output_df.iloc[1]['RowsFailed'], 5)

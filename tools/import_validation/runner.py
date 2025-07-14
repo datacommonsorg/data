@@ -146,6 +146,7 @@ class ValidationRunner:
                 result = validation_func(df, rule['params'])
 
             result.name = rule['rule_id']
+            result.validation_params = rule.get('params', {})
 
             self.validation_results.append(result)
             if result.status != ValidationStatus.PASSED:

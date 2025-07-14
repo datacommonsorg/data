@@ -37,16 +37,21 @@ class ReportGenerator:
             writer = csv.writer(f)
             writer.writerow([
                 "ValidationName", "Status", "Message", "Details",
-                "RowsProcessed", "RowsSucceeded", "RowsFailed"
+                "ValidationParams", "RowsProcessed", "RowsSucceeded",
+                "RowsFailed"
             ])
             for result in self.results:
                 details_str = json.dumps(result.details,
                                          default=str) if result.details else ''
+                params_str = json.dumps(
+                    result.validation_params,
+                    default=str) if result.validation_params else ''
                 writer.writerow([
                     result.name,
                     result.status.value,
                     result.message,
                     details_str,
+                    params_str,
                     result.rows_processed,
                     result.rows_succeeded,
                     result.rows_failed,
