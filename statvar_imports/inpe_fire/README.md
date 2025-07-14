@@ -23,17 +23,12 @@ download.py handles preprocessing. Merge the files from all states to generate a
 
 If processing from current import folder :
 
-`python3  download.py`../../tools/statvar_importer/stat_var_processor.py --input_data=<input_file>.csv --pv_map=<pv_map>.csv --config=<metadata>.csv --output_path=<filepath/filename>`
-
-
-
-If processing from statvar_importer folder :
-
-`python3 ../tools/statvar_importer/stat_var_processor.py --input_data=<input_files>.csv --pv_map=<pvmap>.csv --config_file=<metadata>.csv -output_path=<filepath/filename>`
+ "download.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input.csv --pv_map=pvmap.csv --places_resolved_csv=places_resolved.csv'    --config_file=metadata.csv'   --output_path=output_inpe"
 
 #### Fully Autorefresh: 
 
-Trigger `run_import.sh` manually for test/prod ingestion
+Trigger `data/import-automation/executor/run_import.sh` manually for test/prod ingestion 
 
 
 
