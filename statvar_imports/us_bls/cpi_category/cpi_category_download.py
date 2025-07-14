@@ -61,7 +61,8 @@ def download_file(url: str, save_path: str):
         'Referer': 'https://www.bls.gov/cpi/',
         'DNT': '1'
     }
-
+    # Initialize a flag to indicate if a timeout occurred
+    timeout_flag = False
     try:
         logging.info(f"Attempting to download: {url}")
         response = requests.get(url, stream=True, headers=headers, timeout=50)
@@ -75,6 +76,10 @@ def download_file(url: str, save_path: str):
                 file.write(chunk)
         logging.info(f"Successfully downloaded: {os.path.basename(save_path)} to {os.path.dirname(save_path)}")
         return True
+    except requests.exceptions.Timeout:
+        logging.error(f"Timeout occurred while downloading {url} after 50 seconds.")
+        timeout_flag = True # Set the flag
+        raise # Re-raise to trigger the @retry mechanism
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 404:
             # For 404s, log as info and return False without retrying, as the file doesn't exist.
