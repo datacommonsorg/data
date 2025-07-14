@@ -70,6 +70,29 @@ class PropertyValueCacheTest(unittest.TestCase):
         )
         self.assertFalse({}, pv_cache.get_entry_for_dict({'name': 'IND'}))
 
+    def test_add_duplicate_entry_does_not_change_cache(self):
+        """Tests that adding a duplicate entry does not change the cache."""
+        pv_cache = PropertyValueCache()
+        entry = {'name': 'California', 'dcid': 'geoId/06'}
+
+        # Add the entry for the first time
+        pv_cache.add(entry)
+
+        # Get the initial state
+        initial_entry = pv_cache.get_entry('geoId/06')
+        initial_num_entries = pv_cache.num_entries()
+
+        # Add the same entry again
+        pv_cache.add(entry)
+
+        # Get the final state
+        final_entry = pv_cache.get_entry('geoId/06')
+        final_num_entries = pv_cache.num_entries()
+
+        # Assert that the state has not changed
+        self.assertEqual(initial_num_entries, final_num_entries)
+        self.assertEqual(initial_entry, final_entry)
+
     def test_flatten_dict(self):
         pvs = {
             'name': ['California', 'CA'],
