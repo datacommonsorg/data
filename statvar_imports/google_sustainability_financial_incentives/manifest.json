@@ -11,13 +11,13 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "output/financial_incentives_final.tmcf",
-          "cleaned_csv": "output/financial_incentives_output.csv"
+          "template_mcf": "financial_incentives_final.tmcf",
+          "cleaned_csv": "output/financial_incentives.csv"
         }
       ],
       "source_files": [
           "input_files/financial_incentives_data.csv",
-          "input_files/financial_incentives_prod_data.json",
+          "input_files/financial_incentives_prod_data.json"
       ],
       "user_script_timeout" : 3600,
       "cron_schedule": "0 06 * * 3",
