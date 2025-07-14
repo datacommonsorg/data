@@ -76,17 +76,15 @@ Usage:
 
 **General Usage:**
 
+(Processing from current import folder data/statvar_imports/oecd/regional_education):
+
 ```Bash
 
-python3 stat_var_processor.py --input_data=<input_file>.csv --pv_map=<pv_map>.csv --config=<metadata>.csv --places_resolved_csv=<filepath/filename> --output_path=<filepath/filename>
-Example (Processing from current import folder data/statvar_imports/oecd/regional_education):
-
-Bash
-
 python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input/oecd_regional_education_data.csv --pv_map=oecd_regional_education_pvmap.csv --config_file=oecd_regional_education_metadata.csv --output_path=output/oecd_regional_education
-Example (Processing from statvar_importer folder data/tools/statvar_importer):
+```
+(Processing from statvar_importer folder data/tools/statvar_importer):
 
-Bash
+```Bash
 
 python3 stat_var_processor.py --input_data=input/oecd_regional_education_data.csv --pv_map=oecd_regional_education_pvmap.csv --config_file=oecd_regional_education_metadata.csv --output_path=output/oecd_regional_education
 Purpose: Generates StatVar MCF, cleans observation CSV, TMCF.
