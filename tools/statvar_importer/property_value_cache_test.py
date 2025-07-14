@@ -14,6 +14,8 @@
 """Unit tests for property_value_cache.py."""
 
 import unittest
+import os
+import csv
 
 from absl import app
 from absl import logging
@@ -118,6 +120,71 @@ class PropertyValueCacheTest(unittest.TestCase):
         # Lookup by a value that does not exist
         self.assertEqual({}, pv_cache.get_entry('non-existent-value'))
 
+    @unittest.skip(
+        "TODO: The cache currently merges entries with conflicting key property values instead of overwriting them. The desired behavior needs to be determined."
+    )
+    def test_conflicting_key_property_value_overwrites_existing(self):
+        """Tests that adding an entry with a conflicting key property value overwrites the existing entry."""
+        pv_cache = PropertyValueCache()
+        entry1 = {'name': 'Conflict', 'dcid': 'dcid/1'}
+        entry2 = {'name': 'Conflict', 'dcid': 'dcid/2'}
+
+        pv_cache.add(entry1)
+        self.assertEqual(pv_cache.get_entry('Conflict'), entry1)
+
+        pv_cache.add(entry2)
+        self.assertEqual(pv_cache.get_entry('Conflict'), entry2)
+
+    def test_save_to_file_successfully(self):
+        """Tests that the cache is saved to a file successfully."""
+        file_path = 'test_save_cache.csv'
+        pv_cache = PropertyValueCache(file_path)
+
+        # Add an entry and assert that the cache is dirty
+        pv_cache.add({'dcid': 'geoId/01', 'name': 'Alabama', 'typeOf': 'State'})
+        self.assertTrue(pv_cache.is_dirty())
+
+        # Save the cache and assert that it is no longer dirty
+        pv_cache.save_cache_file()
+        self.assertFalse(pv_cache.is_dirty())
+
+        # Load the cache from the file and assert that it has the correct entry
+        new_pv_cache = PropertyValueCache(file_path)
+        reloaded_entry = new_pv_cache.get_entry('geoId/01')
+        self.assertEqual(reloaded_entry['dcid'], 'geoId/01')
+        self.assertEqual(reloaded_entry['name'], 'Alabama')
+        self.assertEqual(reloaded_entry['typeOf'], 'State')
+
+        # Clean up the temporary file
+        os.remove(file_path)
+
+    def test_load_from_file_successfully(self):
+        """Tests that the cache is loaded from a file successfully."""
+        # Create a temporary CSV file
+        file_path = 'test_cache.csv'
+        with open(file_path, 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(['dcid', 'name', 'typeOf'])
+            writer.writerow(['geoId/01', 'Alabama', 'State'])
+            writer.writerow(['geoId/02', 'Alaska', 'State'])
+
+        # Load the cache from the file
+        pv_cache = PropertyValueCache(file_path)
+
+        # Assert that the cache has the correct number of entries
+        self.assertEqual(pv_cache.num_entries(), 2)
+
+        # Assert that an entry can be retrieved correctly
+        expected_entry = {
+            'dcid': 'geoId/01',
+            'name': 'Alabama',
+            'typeOf': 'State'
+        }
+        self.assertEqual(pv_cache.get_entry('geoId/01'), expected_entry)
+
+        # Clean up the temporary file
+        os.remove(file_path)
+
     def test_flatten_dict(self):
         pvs = {
             'name': ['California', 'CA'],
@@ -198,3 +265,7 @@ class NormalizeStringTest(unittest.TestCase):
     def test_handles_non_string_input(self):
         """Tests that normalization handles non-string input."""
         self.assertEqual(self.pv_cache.normalize_string(123), "123")
+
+
+if __name__ == '__main__':
+    app.run(unittest.main)
