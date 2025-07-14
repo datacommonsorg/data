@@ -20,6 +20,7 @@ import pandas as pd
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(SCRIPT_DIR, '../../../util'))
+INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
 
 from download_util_script import _retry_method
 
@@ -50,8 +51,8 @@ def download_files(URL_CONFIG):
             config_url = config.get("url")
             category_name = config.get("category")
             file_name = config.get("filename")
-            file_path = os.path.join(SCRIPT_DIR, "input_files", category_name, file_name)
-            os.makedirs(os.path.join(SCRIPT_DIR, "input_files", category_name), exist_ok=True)
+            file_path = os.path.join(INPUT_DIR, category_name, file_name)
+            os.makedirs(os.path.join(INPUT_DIR, category_name), exist_ok=True)
             file_response = _retry_method(config_url, headers=None, tries=3, delay=5, backoff=2)
             if file_response:
                 with open(file_path, 'wb') as f:
@@ -82,7 +83,7 @@ def preprocess_files(directory_path):
             all_sheets_data = pd.read_excel(file_path, sheet_name=None, header=None)
             with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
                 for sheet_name, df in all_sheets_data.items():
-                    df_cleaned = df.applymap(lambda x: str(x).replace('*', '').strip())
+                    df_cleaned = df.map(lambda x: str(x).replace('*', '').strip())
                     df_cleaned.to_excel(writer, sheet_name=sheet_name, index=False, header=False)
 
         except Exception as e:
@@ -98,7 +99,7 @@ def main(_):
     logging.info("Download process Completed successfully")
     directories = ['agriculture', 'environment', 'infrastructure', 'price_and_wages']
     for directory in directories:
-        preprocess_files(os.path.join(SCRIPT_DIR, "input_files", directory))
+        preprocess_files(os.path.join(INPUT_DIR, directory))
     logging.info("Pre-process Completed successfully")
 
 
