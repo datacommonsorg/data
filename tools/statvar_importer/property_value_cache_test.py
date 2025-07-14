@@ -148,3 +148,28 @@ class PropertyValueCacheTest(unittest.TestCase):
             ],
             name_type_pvs,
         )
+
+
+class NormalizeStringTest(unittest.TestCase):
+
+    def setUp(self):
+        self.pv_cache = PropertyValueCache()
+
+    def test_handles_case_and_whitespace(self):
+        """Tests that normalization handles case and whitespace."""
+        self.assertEqual(self.pv_cache.normalize_string("  LoWeR  CaSe  "),
+                         "lower case")
+
+    def test_removes_punctuation(self):
+        """Tests that normalization removes punctuation."""
+        self.assertEqual(self.pv_cache.normalize_string("With, Punctuation!"),
+                         "with punctuation")
+
+    def test_handles_diacritics(self):
+        """Tests that normalization handles diacritics."""
+        self.assertEqual(self.pv_cache.normalize_string("Åland Islands"),
+                         "aland islands")
+
+    def test_handles_non_string_input(self):
+        """Tests that normalization handles non-string input."""
+        self.assertEqual(self.pv_cache.normalize_string(123), "123")
