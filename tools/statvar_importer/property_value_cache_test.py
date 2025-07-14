@@ -180,61 +180,71 @@ class PropertyValueCacheTest(unittest.TestCase):
         # Clean up the temporary file
         os.remove(file_path)
 
-    def test_flatten_dict(self):
+    def test_flatten_dict_by_single_property(self):
+        """Tests flattening a dictionary by a single multi-valued property."""
         pvs = {
             'name': ['California', 'CA'],
             'dcid': 'geoId/06',
             'typeOf': ['AdministrativeArea1', 'State'],
         }
-        flattened_pvs = flatten_dict(pvs, ['name'])
-        self.assertEqual(
-            [
-                {
-                    'name': 'California',
-                    'dcid': 'geoId/06',
-                    'typeOf': 'AdministrativeArea1,State',
-                },
-                {
-                    'name': 'CA',
-                    'dcid': 'geoId/06',
-                    'typeOf': 'AdministrativeArea1,State',
-                },
-            ],
-            flattened_pvs,
-        )
-        # expected pvs have lists joined with ','
-        merged_pvs = {}
-        for p, v in pvs.items():
-            if isinstance(v, list):
-                v = ','.join(v)
-            merged_pvs[p] = v
-        self.assertEqual([merged_pvs], flatten_dict(pvs, ['dcid']))
-        name_type_pvs = flatten_dict(pvs, ['name', 'typeOf'])
-        self.assertEqual(
-            [
-                {
-                    'name': 'California',
-                    'dcid': 'geoId/06',
-                    'typeOf': 'AdministrativeArea1',
-                },
-                {
-                    'name': 'CA',
-                    'dcid': 'geoId/06',
-                    'typeOf': 'AdministrativeArea1'
-                },
-                {
-                    'name': 'California',
-                    'dcid': 'geoId/06',
-                    'typeOf': 'State'
-                },
-                {
-                    'name': 'CA',
-                    'dcid': 'geoId/06',
-                    'typeOf': 'State'
-                },
-            ],
-            name_type_pvs,
-        )
+        expected = [
+            {
+                'name': 'California',
+                'dcid': 'geoId/06',
+                'typeOf': 'AdministrativeArea1,State',
+            },
+            {
+                'name': 'CA',
+                'dcid': 'geoId/06',
+                'typeOf': 'AdministrativeArea1,State',
+            },
+        ]
+        self.assertEqual(expected, flatten_dict(pvs, ['name']))
+
+    def test_flatten_dict_by_single_value_property(self):
+        """Tests flattening a dictionary by a single-valued property."""
+        pvs = {
+            'name': ['California', 'CA'],
+            'dcid': 'geoId/06',
+            'typeOf': ['AdministrativeArea1', 'State'],
+        }
+        expected = [{
+            'name': 'California,CA',
+            'dcid': 'geoId/06',
+            'typeOf': 'AdministrativeArea1,State',
+        }]
+        self.assertEqual(expected, flatten_dict(pvs, ['dcid']))
+
+    def test_flatten_dict_by_multiple_properties(self):
+        """Tests flattening a dictionary by multiple multi-valued properties."""
+        pvs = {
+            'name': ['California', 'CA'],
+            'dcid': 'geoId/06',
+            'typeOf': ['AdministrativeArea1', 'State'],
+        }
+        expected = [
+            {
+                'name': 'California',
+                'dcid': 'geoId/06',
+                'typeOf': 'AdministrativeArea1',
+            },
+            {
+                'name': 'CA',
+                'dcid': 'geoId/06',
+                'typeOf': 'AdministrativeArea1'
+            },
+            {
+                'name': 'California',
+                'dcid': 'geoId/06',
+                'typeOf': 'State'
+            },
+            {
+                'name': 'CA',
+                'dcid': 'geoId/06',
+                'typeOf': 'State'
+            },
+        ]
+        self.assertCountEqual(expected, flatten_dict(pvs, ['name', 'typeOf']))
 
 
 class NormalizeStringTest(unittest.TestCase):
