@@ -1,11 +1,9 @@
 import requests
 import os
 import time
-import logging
+from absl import logging 
 import csv 
 
-# Configure logging for better output
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Base URL for the CSV files
 BASE_URL = "https://terrabrasilis.dpi.inpe.br/queimadas/situacao-atual/media/estado/csv_estatisticas/historico_estado_"
