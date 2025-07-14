@@ -284,6 +284,35 @@ class ListValuedPropertiesTest(unittest.TestCase):
         self.assertEqual(entry, retrieved_entry)
 
 
+class CustomKeyPropertiesTest(unittest.TestCase):
+
+    def test_lookup_succeeds_with_custom_keys(self):
+        """Tests that lookups succeed with a custom set of key properties."""
+        pv_cache = PropertyValueCache(key_props=['custom_id', 'name'])
+        entry = {'name': 'California', 'custom_id': 'CA', 'dcid': 'geoId/06'}
+        pv_cache.add(entry)
+        self.assertEqual(entry, pv_cache.get_entry('California'))
+        self.assertEqual(entry, pv_cache.get_entry('CA'))
+
+    def test_lookup_fails_for_non_key_property(self):
+        """Tests that lookups fail for a property not in the custom key list."""
+        pv_cache = PropertyValueCache(key_props=['custom_id', 'name'])
+        entry = {'name': 'California', 'custom_id': 'CA', 'dcid': 'geoId/06'}
+        pv_cache.add(entry)
+        self.assertEqual({}, pv_cache.get_entry('geoId/06'))
+
+
+class NegativeCachingTest(unittest.TestCase):
+
+    def test_cache_stores_entries_with_empty_values(self):
+        """Tests that the cache can store and retrieve entries with empty values."""
+        pv_cache = PropertyValueCache()
+        entry = {'name': 'KnownFailure', 'dcid': ''}
+        pv_cache.add(entry)
+        retrieved_entry = pv_cache.get_entry('KnownFailure')
+        self.assertEqual(entry, retrieved_entry)
+
+
 class SharedCacheTest(unittest.TestCase):
 
     def test_shared_cache_reflects_changes(self):
