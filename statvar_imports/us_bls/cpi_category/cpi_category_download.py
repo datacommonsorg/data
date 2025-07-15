@@ -27,6 +27,7 @@ import shutil
 from retry import retry
 from absl import logging
 import datetime
+import argparse 
 
 logging.set_verbosity(logging.INFO)
 
@@ -43,7 +44,7 @@ def generate_zip_url(year: int) -> str:
     return f"https://www.bls.gov/cpi/tables/supplemental-files/archive-{year}.zip"
 
 @retry(tries=3, delay=5, backoff=2)
-def download_file(url: str, save_path: str):
+def download_file(url: str, save_path: str ,timeout: int = 60):
     """
     Downloads a file from a given URL and saves it to a specified path.
     Includes common HTTP headers to mimic a web browser.
@@ -61,11 +62,9 @@ def download_file(url: str, save_path: str):
         'Referer': 'https://www.bls.gov/cpi/',
         'DNT': '1'
     }
-    # Initialize a flag to indicate if a timeout occurred
-    timeout_flag = False
     try:
-        logging.info(f"Attempting to download: {url}")
-        response = requests.get(url, stream=True, headers=headers, timeout=50)
+        logging.info(f"Attempting to download: {url} with timeout {timeout} seconds.")
+        response = requests.get(url, stream=True, headers=headers, timeout=timeout)
         response.raise_for_status() # Raise an HTTPError for bad responses (4xx or 5xx)
 
         # Ensure the directory for save_path exists
@@ -76,10 +75,7 @@ def download_file(url: str, save_path: str):
                 file.write(chunk)
         logging.info(f"Successfully downloaded: {os.path.basename(save_path)} to {os.path.dirname(save_path)}")
         return True
-    except requests.exceptions.Timeout:
-        logging.error(f"Timeout occurred while downloading {url} after 50 seconds.")
-        timeout_flag = True # Set the flag
-        raise # Re-raise to trigger the @retry mechanism
+
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 404:
             # For 404s, log as info and return False without retrying, as the file doesn't exist.
@@ -275,6 +271,11 @@ def main():
     Main function to orchestrate downloading, unzipping, and cleaning up CPI data
     based on specific category and month/year requirements.
     """
+
+    parser = argparse.ArgumentParser(description="Download BLS CPI data.")
+    parser.add_argument("--timeout", type=int, default=60,
+                        help="Timeout for file downloads in seconds (default: 60)")
+    args = parser.parse_args() 
     output_base_folder = "input_data"
 
     cpi_u_folder = os.path.join(output_base_folder, "cpi-u")
@@ -311,7 +312,7 @@ def main():
                 file_save_path = os.path.join(c_cpi_u_folder, filename)
 
                 try:
-                    if not download_file(url, file_save_path):
+                    if not download_file(url, file_save_path,timeout=args.timeout):
                         continue
                 except Exception as e:
                     logging.error(f"Download of c-cpi-u file {url} failed after multiple retries: {e}")
@@ -337,7 +338,7 @@ def main():
                 file_save_path = os.path.join(cpi_w_folder, filename)
 
             try:
-                if not download_file(url, file_save_path):
+                if not download_file(url, file_save_path,timeout=args.timeout):
                     continue
             except Exception as e:
                 logging.error(f"Download of {category_prefix} January file {url} failed after multiple retries: {e}")
@@ -355,7 +356,7 @@ def main():
 
         file_save_path_jan = os.path.join(cpi_u_folder if category_prefix == "cpi-u" else cpi_w_folder, filename_jan)
         try:
-            if download_file(url_jan, file_save_path_jan):
+            if download_file(url_jan, file_save_path_jan,timeout=args.timeout):
                 logging.info(f"Downloaded January {current_year} {category_prefix} file: {filename_jan}")
                 # If January is found, update latest_current_year_month_cpi_uw in case it's the only month out so far
                 latest_current_year_month_cpi_uw = max(latest_current_year_month_cpi_uw, month_jan)
@@ -379,7 +380,7 @@ def main():
             try:
                 # download_file will return True if downloaded or if file already existed but HTTP status was 200,
                 # or False if 404. We want to stop at the first existing/downloadable file.
-                if download_file(url_latest, file_save_path_latest):
+                if download_file(url_latest, file_save_path_latest,timeout=args.timeout):
                     logging.info(f"Found and downloaded/confirmed latest {category_prefix} file for {current_year}: {filename_latest}")
                     # Update overall latest_current_year_month_cpi_uw
                     latest_current_year_month_cpi_uw = max(latest_current_year_month_cpi_uw, month_iter)
@@ -411,7 +412,7 @@ def main():
 
         download_successful = False
         try:
-            download_successful = download_file(zip_url, zip_file_path)
+            download_successful = download_file(zip_url, zip_file_path,timeout=args.timeout)
         except Exception as e:
             logging.error(f"Download of {zip_url} failed after multiple retries: {e}")
 
