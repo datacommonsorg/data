@@ -1,0 +1,31 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Commerce_EDA",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.census.gov/retail/",
+      "provenance_description": "Commerce - EDA has led the federal economic development agenda by promoting innovation and competitiveness, preparing American regions for growth and success in the worldwide economy.",
+      "scripts": ["download.py","process.py","../../tools/statvar_importer/stat_var_processor.py --input_data=input_file/Investment1.csv --pv_map=Investmentpvmap.csv --config_file=Investmentmetadata.csv --output_path=output/Investment_output",
+      "../../tools/statvar_importer/stat_var_processor.py --input_data=input_file/EstimatedOutcome.csv --pv_map=Estimatedpvmap.csv --config_file=Estimatedmetadata.csv --output_path=output/Estimated_output",
+    "../../tools/statvar_importer/stat_var_processor.py --input_data=input_file/Poverty.csv --pv_map=Povertypvmap.csv --config_file=Povertymetadata.csv --output_path=output/Poverty_output"  ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/Investment_output.tmcf",
+          "cleaned_csv": "output/Investment_output.csv"
+        },
+        {
+          "template_mcf": "output/Estimated_output.tmcf",
+          "cleaned_csv": "output/Estimated_output.csv"
+        },
+        {
+          "template_mcf": "output/Poverty_output.tmcf",
+          "cleaned_csv": "output/Poverty_output.csv"
+        }
+      ],
+      "source_file":[
+          "input_file/*"
+      ],
+      "cron_schedule": "30 05 * * 1"
+    }
+  ]
+}
