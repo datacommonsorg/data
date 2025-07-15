@@ -79,18 +79,18 @@ def download_file(url: str, save_path: str ,timeout: int = 60):
     except requests.exceptions.HTTPError as e:
         if e.response.status_code == 404:
             # For 404s, log as info and return False without retrying, as the file doesn't exist.
-            logging.info(f"Skipping {url} (404 Not Found - file expected to be unavailable): {e}")
+            logging.fatal(f"Skipping {url} (404 Not Found - file expected to be unavailable): {e}")
             return False
         else:
             # For other HTTP errors, re-raise to trigger retry.
-            logging.error(f"Error downloading {url}: {e}")
+            logging.fatal(f"Error downloading {url}: {e}")
             raise
     except requests.exceptions.RequestException as e:
         # For network errors, re-raise to trigger retry.
-        logging.error(f"Network error downloading {url}: {e}")
+        logging.fatal(f"Network error downloading {url}: {e}")
         raise
     except IOError as e:
-        logging.error(f"Error saving file {save_path}: {e}")
+        logging.fatal(f"Error saving file {save_path}: {e}")
         return False # This is a local file system error, no need to retry download from URL
 
 def get_cpi_category_from_filename(filename: str) -> str:
