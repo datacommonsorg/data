@@ -36,6 +36,8 @@ _QUANTITY_REGEX_1 = re.compile(
     r'\[(?P<value>-|-?\d+(\.\d+)?) (?P<quantity>[A-Za-z_/\d]+)\]')
 _QUANTITY_REGEX_2 = re.compile(
     r'\[(?P<quantity>[A-Za-z_/\d]+) (?P<value>-|-?\d+(\.\d+)?)\]')
+_QUANTITY_REGEX_3 = re.compile(
+    r'\[(dcs:)(?P<quantity>[A-Za-z_/\d]+) (?P<value>-|-?\d+(\.\d+)?)\]')
 
 # Regex to match the quantity range notations -
 # [lower_limit upper_limit quantity], [quantity lower_limit upper_limit]
@@ -657,13 +659,16 @@ def _process_constraint_property(prop: str, value: str) -> str:
         match2 = _QUANTITY_RANGE_REGEX_2.match(value)
 
         if match1 or match2:  # Quantity Range
+
             m_dict = match1.groupdict() if match1 else match2.groupdict()
             name = _generate_quantity_range_name(m_dict)
         else:
             match1 = _QUANTITY_REGEX_1.match(value)
             match2 = _QUANTITY_REGEX_2.match(value)
-            if match1 or match2:  # Quantity
-                m_dict = match1.groupdict() if match1 else match2.groupdict()
+            match3 = _QUANTITY_REGEX_3.match(value)
+            if match1 or match2 or match3:  # Quantity
+                m_dict = match1.groupdict() if match1 else (
+                    match2.groupdict() if match2 else match3.groupdict())
                 name = _generate_quantity_name(m_dict)
             else:
                 name = _capitalize_process(value)
