@@ -25,7 +25,12 @@ from absl import flags
 from absl import app
 from absl import logging
 from retry import retry
+# FIX: Monkey-patch for Python 3.10+ where collections.Mapping was moved to collections.abc
+import collections
+import collections.abc
 
+collections.Mapping = collections.abc.Mapping
+# END FIX
 import os
 from pathlib import Path
 '''Defining the retry_method which will accepts below parameters
