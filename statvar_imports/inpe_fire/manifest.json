@@ -21,7 +21,8 @@
             "source_files": [
                 "input.csv"
             ],
-            "cron_schedule": "00 11 1,15 * *"
+            "cron_schedule": "00 11 1,15 * *",
+            "cleanup_gcs_volume_mount": false
         }
     ]
 }
