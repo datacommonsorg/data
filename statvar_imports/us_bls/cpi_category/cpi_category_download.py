@@ -227,6 +227,7 @@ def unzip_all_excel_files(zip_file_path: str, temp_extract_base_path: str, final
             success = False # Explicitly set to false if no relevant files processed
 
     except zipfile.BadZipFile:
+        #TODO b/431970934 : Log the exception as well
         logging.error(f"Error: {os.path.basename(zip_file_path)} is not a valid ZIP file.")
         success = False # Explicitly set to False on bad zip
     except Exception as e:
