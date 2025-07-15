@@ -401,7 +401,7 @@ class ImportExecutor:
             import_tool_args.extend(input_files)
             process = _run_user_script(
                 interpreter_path='java',
-                script_path='-jar ' + self.config.import_tool_path,
+                script_path='-jar -Xmx16g ' + self.config.import_tool_path,
                 timeout=self.config.user_script_timeout,
                 args=import_tool_args,
                 cwd=absolute_import_dir,
@@ -935,13 +935,12 @@ def _create_venv(requirements_path: Iterable[str], venv_dir: str,
       Same exceptions as subprocess.run.
   """
     with tempfile.NamedTemporaryFile(mode='w', suffix='.sh') as script:
-        script.write(
-            f'python3 -m venv --system-site-packages {venv_dir} > /dev/null\n')
+        script.write(f'python3 -m venv --system-site-packages {venv_dir}\n')
         script.write(f'. {venv_dir}/bin/activate\n')
         for path in requirements_path:
             if os.path.exists(path):
                 script.write(
-                    f'python3 -m pip install --no-cache-dir --requirement {path} > /dev/null\n'
+                    f'python3 -m pip install --no-cache-dir --quiet --requirement {path}\n'
                 )
         script.flush()
 

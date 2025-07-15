@@ -52,13 +52,13 @@ AUTO_IMPORT_JOB_STATUS_LOG_TYPE = "auto-import-job-status"
 
 def _override_configs(absolute_import_name: str,
                       config: configs.ExecutorConfig) -> configs.ExecutorConfig:
-    import_dir, import_name = absolute_import_name.split(':')
+    import_dir, import_name = absolute_import_name.split(':', 1)
     manifest_path = os.path.join(config.local_repo_dir, import_dir,
                                  config.manifest_filename)
     logging.info('%s: Overriding config from manifest %s', absolute_import_name,
                  manifest_path)
     d = json.load(open(manifest_path))
-    return dataclasses.replace(config, **d["config_override"])
+    return dataclasses.update(config, **d.get("config_override", {}))
 
 
 def run_import_job(absolute_import_name: str, import_config: str):
