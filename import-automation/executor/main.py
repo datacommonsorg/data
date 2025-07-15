@@ -33,11 +33,14 @@ REPO_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
-from log_util import log_metric
+from log_util import log_metric, configure_cloud_logging
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('import_name', '', 'Absoluate import name.')
 flags.DEFINE_string('import_config', '', 'Import executor configuration.')
+flags.DEFINE_boolean(
+    'enable_cloud_logging', False,
+    'Enable Google Cloud Logging for proper severity levels in GCP.')
 
 CLOUD_RUN_JOB_NAME = os.getenv("CLOUD_RUN_JOB")
 
@@ -84,6 +87,9 @@ def scheduled_updates(absolute_import_name: str, import_config: str):
 
 
 def main(_):
+    if FLAGS.enable_cloud_logging:
+        configure_cloud_logging()
+        logging.info("Google Cloud Logging configured.")
     return scheduled_updates(FLAGS.import_name, FLAGS.import_config)
 
 
