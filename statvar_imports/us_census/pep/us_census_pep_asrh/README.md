@@ -51,3 +51,4 @@ python3 stat_var_processor.py \
 -   **Make Shard Count Configurable**: The file shard count is currently hardcoded (e.g., as 11). This should be converted to a configurable parameter to accommodate potential changes in the source data structure.
 -   **Dynamic End Year**: The end year for the download should be made configurable or derived automatically from the current date rather than being hardcoded. This would make the script more robust over time.
 -   **Remove Statvar Remapping**: The script currently uses `pep_asrh_remap.csv` to remap statvar DCIDs. This step should be removed once the underlying schema cleanup is complete.
+-   **Remove Statvar Remapping**: The variable "YEAR" is used in captial letter need to make it small letter

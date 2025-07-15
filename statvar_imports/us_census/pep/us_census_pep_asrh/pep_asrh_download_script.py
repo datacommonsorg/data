@@ -86,6 +86,7 @@ def add_future_urls(start_year: int, end_year: int,url_path_base_year: int):
         # to be the most recent version, preventing us from downloading superseded datasets.
         # This pattern is a standard convention in other PEP import scripts.
         for current_year in range(start_year, end_year, -1):
+            #TODO b/431970934 : The variable "YEAR" is used in captial letter need to make it small letter
             YEAR = current_year
             if (
                 "{i}" in value
