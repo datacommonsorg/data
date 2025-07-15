@@ -53,7 +53,7 @@ def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict):
     """
     logging.info(f"checking url: {url_to_check}")
     try:
-        # TODO: Provide a custom certificate bundle instead of disabling verification.
+        # TODO b/431970934 : Provide a custom certificate bundle instead of disabling verification.
         check_url = requests.head(
             url_to_check, allow_redirects=True, verify=False
         )
@@ -79,11 +79,18 @@ def add_future_urls(start_year: int, end_year: int,url_path_base_year: int):
     for key, value in _URLS_TO_SCAN.items():
         files_to_download[key] = []
         # Loop from start_year down to end_year + 1
+        # : This loop iterates backward from a potential future year down to a known baseline.
+        # This approach is intentional and crucial for finding the latest available data release.
+        # The source URL is structured with the end-year of the data series (e.g., '.../2020-2024/').
+        # By starting high and decrementing, the first valid URL we encounter is guaranteed
+        # to be the most recent version, preventing us from downloading superseded datasets.
+        # This pattern is a standard convention in other PEP import scripts.
         for current_year in range(start_year, end_year, -1):
             YEAR = current_year
             if (
                 "{i}" in value
             ):  # This URL contains the {i} variable, so we loop through i from 01 to 10
+                #TODO b/431970934 : The file shard count is currently hardcoded (e.g., as 11). This should be converted to a configurable parameter to accommodate potential changes in the source data structure.
                 for i in range(1, 11):
                     # Ensure i is always 2 digits (01, 02, ..., 10)
                     formatted_i = f"{i:02}"
@@ -103,11 +110,9 @@ def download_files(files_to_download_dict:dict, download_base_path: str):
     for url in value:
       output_file_name = url.split("/")[-1]
       output_file_path = os.path.join(download_folder, output_file_name)
-
       # Send GET request
-      # TODO: Provide a custom certificate bundle instead of disabling verification.
       try:
-        response = requests.get(url, verify=False)
+        response = requests.get(url, verify="/etc/ssl/certs/ca-certificates.crt")
       except requests.exceptions.RequestException as e:
         logging.fatal(f"Error downloading {url}: {e}")
         continue
@@ -128,7 +133,11 @@ def main(_):
   Arg : None
   Return : None
   """
+  #TODO b/431970934 : The end year for the download should be made configurable or derived automatically from the current date rather than being hardcoded. This would make the script more robust over time.
   end_year = 2022
+  #Checking if the end year is greater than 2030
+  if FLAGS.start_year > 2030:
+      logging.fatal(f"The requested year {FLAGS.start_year} is outside the supported range. This script currently supports years up to 2030. To process data for later years, the scripts internal limit must be updated.")
   # Clearing the download folder is it already exists
   try:
         if os.path.exists(FLAGS.input_path):
