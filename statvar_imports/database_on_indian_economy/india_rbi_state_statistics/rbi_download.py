@@ -14,7 +14,7 @@
 
 import os
 from absl import app, logging, flags
-import sys
+import sys, numpy as np
 from google.cloud import storage
 import pandas as pd
 
@@ -78,16 +78,31 @@ def preprocess_files(directory_path):
     for file_name in xlsx_files:
         file_path = os.path.join(directory_path, file_name)
         logging.info(f"Processing file: {file_path}")
-
         try:
             all_sheets_data = pd.read_excel(file_path, sheet_name=None, header=None)
             with pd.ExcelWriter(file_path, engine='openpyxl') as writer:
                 for sheet_name, df in all_sheets_data.items():
-                    df_cleaned = df.map(lambda x: str(x).replace('*', '').strip())
-                    df_cleaned.to_excel(writer, sheet_name=sheet_name, index=False, header=False)
+                    df = df.map(lambda x: str(x).replace('*', '').replace('@', '').strip())
+                    mask = df.eq('State/Union Territory').any(axis=1)
+                    state_positions = df[mask] == 'State/Union Territory'
+                    
+                    def safe_to_numeric(val):
+                        val_str = str(val)
+                        if val_str.isdigit():
+                            return int(val_str)
+                        try:
+                            float_val = float(val_str)
+                            return float_val
+                        except ValueError:
+                            return val
+                    
+                    df_num = df[mask].applymap(safe_to_numeric)
+                    converted = df_num.mask(state_positions, 'State/Union Territory')
+                    df.loc[mask, :] = converted
+                    df.to_excel(writer, sheet_name=sheet_name, index=False, header=False)
 
         except Exception as e:
-            logging.error(f"Error processing {file_name}: {e}")
+            logging.fatal(f"Error processing {file_name}: {e}")
 
     logging.info("All specified XLSX files have been processed.")
 
