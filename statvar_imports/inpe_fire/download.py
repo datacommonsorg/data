@@ -1,9 +1,23 @@
-import requests
 import os
 import time
+import sys
 from absl import logging 
 import csv 
 import shutil
+from pathlib import Path # Good for creating directories
+
+# Get the directory of the current script (download.py)
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Define input directory 
+INPUT_DIR = os.path.join(script_dir, "input_files")
+Path(INPUT_DIR).mkdir(parents=True, exist_ok=True) 
+TEMP_DOWNLOADS_DIR = os.path.join(script_dir, "temp_downloads")
+Path(TEMP_DOWNLOADS_DIR).mkdir(parents=True, exist_ok=True)
+parent_of_parent_dir = os.path.join(script_dir, '..', '..')
+sys.path.append(parent_of_parent_dir)
+
+from util.download_util_script import download_file
 
 
 # Base URL for the CSV files
@@ -155,74 +169,55 @@ if __name__ == "__main__":
 
     for state_in_list in STATE_NAMES:
         full_url = f"{BASE_URL}{state_in_list}.csv"
-        file_name_to_save = f"{state_in_list}.csv"
-        temp_file_path = os.path.join(TEMP_DOWNLOAD_DIR, file_name_to_save)
-        persistent_file_path = os.path.join(_GCS_OUTPUT_PERSISTENT_PATH, file_name_to_save)
+        # The file name as it will be saved in *persistent* storage
+        file_name_for_persistent_storage = f"{state_in_list}.csv"
 
-        logging.info(f"Attempting to download: {file_name_to_save} from {full_url}")
+        # The file name as it's *actually downloaded* by download_file
+        # as "historico_estado_*.csv"
+        actual_temp_file_name = f"historico_estado_{state_in_list}.csv"
 
-        # Check if file already exists in persistent storage
-        if file_name_to_save in downloaded_files_in_persistent_storage:
-            logging.info(f"File {file_name_to_save} already exists in persistent storage. Skipping download.")
+        temp_file_path = os.path.join(TEMP_DOWNLOAD_DIR, actual_temp_file_name)
+        persistent_file_path = os.path.join(_GCS_OUTPUT_PERSISTENT_PATH, file_name_for_persistent_storage)
+
+        logging.info(f"Attempting to download: {full_url}")
+
+        # Check if file already exists in persistent storage (using its persistent name)
+        if file_name_for_persistent_storage in downloaded_files_in_persistent_storage:
+            logging.info(f"File {file_name_for_persistent_storage} already exists in persistent storage. Skipping download.")
             successful_downloads.append(state_in_list)
             continue # Skip to next state
 
-        # --- Resumable download logic (local temporary file) ---
-        headers = {}
-        current_size = 0
-
-        if os.path.exists(temp_file_path):
-            current_size = os.path.getsize(temp_file_path)
-            if current_size > 0:
-                headers['Range'] = f'bytes={current_size}-'
-                logging.info(f"Resuming download of {file_name_to_save} from byte {current_size} to temp location.")
-            else:
-                logging.info(f"Existing empty temp file {file_name_to_save}, restarting download.")
-                # If file exists but is empty, don't use Range header, effectively restart
-                # Optionally delete it first: os.remove(temp_file_path)
-        else:
-            logging.info(f"Starting new download for {file_name_to_save} to temp location.")
-
-
+        # Use the download_file utility function
         try:
-            with requests.get(full_url, headers=headers, stream=True, timeout=30) as response:
-                response.raise_for_status()
+            # download_file will attempt to download the file to TEMP_DOWNLOAD_DIR
+            # It saves it with the full original name from the URL, e.g., historico_estado_acre.csv
+            download_success = download_file(
+                url=full_url,
+                output_folder=TEMP_DOWNLOAD_DIR,
+                unzip=False, # Assuming it's not a zip file
+                headers=None,
+                tries=3,
+                delay=5,
+                backoff=2
+            )
 
-                # Handle cases where server doesn't support Range requests (status 200 without Range header)
-                if response.status_code == 200 and 'Range' not in headers and current_size > 0:
-                    logging.warning(f"Server did not honor Range request for {file_name_to_save}, re-downloading full file.")
-                    current_size = 0 # Reset current size to overwrite existing partial file
+            if download_success:
+                logging.info(f"Successfully downloaded {actual_temp_file_name} to temporary location using download_file.")
+                # Now, copy the *actually saved* temporary file to the *expected persistent* name
+                shutil.copy(temp_file_path, persistent_file_path)
+                logging.info(f"Copied {actual_temp_file_name} from temporary location to persistent storage as {file_name_for_persistent_storage}.")
+                successful_downloads.append(state_in_list)
 
-                mode = 'wb' if current_size == 0 else 'ab'
-                with open(temp_file_path, mode) as f:
-                    for chunk in response.iter_content(chunk_size=8192):
-                        if chunk:
-                            f.write(chunk)
+                # Clean up the temporary file after successful "upload"
+                os.remove(temp_file_path) # Remove the file using its *actual* name
+                logging.debug(f"Removed temporary file: {temp_file_path}")
+            else:
+                logging.error(f"Failed to download {actual_temp_file_name} after multiple tries using download_file.")
+                failed_downloads.append(f"{state_in_list} (Download failed via download_file)")
 
-            # After successful download to temp, "upload" to _GCS_OUTPUT_PERSISTENT_PATH
-            shutil.copy(temp_file_path, persistent_file_path)
-            logging.info(f"Successfully downloaded {file_name_to_save} to temporary location and moved to persistent storage.")
-            successful_downloads.append(state_in_list)
-
-            # Clean up the temporary file after successful "upload"
-            os.remove(temp_file_path)
-            logging.debug(f"Removed temporary file: {temp_file_path}")
-
-        except requests.exceptions.HTTPError as errh:
-            logging.error(f"HTTP Error for {file_name_to_save}: {errh} (URL: {full_url})")
-            failed_downloads.append(f"{state_in_list} (HTTP Error: {errh})")
-        except requests.exceptions.ConnectionError as errc:
-            logging.error(f"Error Connecting for {file_name_to_save}: {errc}")
-            failed_downloads.append(f"{state_in_list} (Connection Error: {errc})")
-        except requests.exceptions.Timeout as errt:
-            logging.error(f"Timeout Error for {file_name_to_save}: {errt}")
-            failed_downloads.append(f"{state_in_list} (Timeout Error: {errt})")
-        except requests.exceptions.RequestException as err:
-            logging.error(f"An unexpected error occurred for {file_name_to_save}: {err}")
-            failed_downloads.append(f"{state_in_list} (General Error: {err})")
         except Exception as e:
-            logging.error(f"An error occurred during file copy for {file_name_to_save}: {e}")
-            failed_downloads.append(f"{state_in_list} (File Copy Error: {e})")
+            logging.error(f"An unexpected error occurred during download or file copy for {actual_temp_file_name}: {e}")
+            failed_downloads.append(f"{state_in_list} (General Error: {e})")
 
         time.sleep(0.1)
 
