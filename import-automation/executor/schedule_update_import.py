@@ -90,13 +90,13 @@ def _override_configs(override_fp: str, manifest_fp: str,
                       config: configs.ExecutorConfig) -> configs.ExecutorConfig:
     # Read configs from the manifest file.
     d = json.load(open(manifest_fp))
-    new_config = dataclasses.update(config, **d.get("config_override", {}))
+    new_config = dataclasses.replace(config, **d.get("config_override", {}))
     # Read configs from the local file.
     d = json.load(open(override_fp))
     # Update config with any fields and values provided in the local file.
     # In case of any errors, the line below will raise an Exception which will
     # report the problem which shoud be fixed in the local config json file.
-    return dataclasses.update(new_config, **d["configs"])
+    return dataclasses.replace(new_config, **d["configs"])
 
 
 def _get_cloud_config(filename: str) -> Dict:
