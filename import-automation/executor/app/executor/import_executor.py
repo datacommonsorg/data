@@ -485,6 +485,7 @@ class ImportExecutor:
             else:
                 logging.error(
                     'Skipping differ tool due to missing latest mcf file')
+                differ_output = ''
 
             logging.info('Invoking validation script...')
             validation = ImportValidation(config_file_path, differ_output,
