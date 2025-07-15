@@ -1,0 +1,12 @@
+key,prop,val,p1,v1,,,,,,
+TIME_PERIOD,observationDate,{Number},,,,,,,,
+OBS_VALUE,value,{Number},observationAbout,country/EGY,,,,,,
+FREQ:A,observationPeriod,P1Y,,,,,,,,
+NAMEARAB_INDICATORS:معدل الخصوبة الكلى,measuredProperty,fertilityRate,populationType,Person,gender,Female,name,"""fertility rate""",alternateName,"""معدل الخصوبة الكلى@ar"""
+15-19,#ignore,ignore because values are incorrect from source ,,,,,,,,
+20-24,#ignore,ignore because values are incorrect from source ,,,,,,,,
+25-29,#ignore,ignore because values are incorrect from source ,,,,,,,,
+30-34,#ignore,ignore because values are incorrect from source ,,,,,,,,
+35-39,#ignore,ignore because values are incorrect from source ,,,,,,,,
+40-44,#ignore,ignore because values are incorrect from source ,,,,,,,,
+45-49,#ignore,ignore because values are incorrect from source ,,,,,,,,
