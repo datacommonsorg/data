@@ -1,7 +1,7 @@
 # Standardized Precipitation Evapotranspiration Index (SPEI) - CDC Import
 
 ## Automation and Import Pipeline
-The data ingestion process is fully automated using a serverless architecture on Google Cloud.
+The data ingestion process is fully (Auto Refresh) automated using a serverless architecture on Google Cloud.
 
 ## Overview
 This repository manages the automated ingestion of the **Standardized Precipitation Evapotranspiration Index (SPEI)** dataset from the [Centers for Disease Control and Prevention (CDC)](https://data.cdc.gov). The pipeline is designed for full, unattended auto-refreshes to ensure the data is consistently updated for the [Data Commons Knowledge Graph](https://datacommons.org).
