@@ -4,18 +4,10 @@ from urllib.parse import urlparse, urljoin
 import openpyxl
 import csv
 import sys
-import logging
+from absl import logging
 import shutil
 from bs4 import BeautifulSoup
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(sys.stdout)
-    ]
-)
 
 # Common HTTP headers to mimic a browser
 COMMON_BROWSER_HEADERS = {
