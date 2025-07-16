@@ -53,7 +53,7 @@ def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict):
     """
     logging.info(f"checking url: {url_to_check}")
     try:
-        # TODO b/431970934 : Provide a custom certificate bundle instead of disabling verification.
+        # TODO b/432163402 : Provide a custom certificate bundle instead of disabling verification.
         check_url = requests.head(
             url_to_check, allow_redirects=True, verify=False
         )
@@ -86,12 +86,12 @@ def add_future_urls(start_year: int, end_year: int,url_path_base_year: int):
         # to be the most recent version, preventing us from downloading superseded datasets.
         # This pattern is a standard convention in other PEP import scripts.
         for current_year in range(start_year, end_year, -1):
-            #TODO b/431970934 : The variable "YEAR" is used in captial letter need to make it small letter
+            #TODO b/432163402 : The variable "YEAR" is used in captial letter need to make it small letter
             YEAR = current_year
             if (
                 "{i}" in value
             ):  # This URL contains the {i} variable, so we loop through i from 01 to 10
-                #TODO b/431970934 : The file shard count is currently hardcoded (e.g., as 11). This should be converted to a configurable parameter to accommodate potential changes in the source data structure.
+                #TODO b/432163402 : The file shard count is currently hardcoded (e.g., as 11). This should be converted to a configurable parameter to accommodate potential changes in the source data structure.
                 for i in range(1, 11):
                     # Ensure i is always 2 digits (01, 02, ..., 10)
                     formatted_i = f"{i:02}"
@@ -134,7 +134,7 @@ def main(_):
   Arg : None
   Return : None
   """
-  #TODO b/431970934 : The end year for the download should be made configurable or derived automatically from the current date rather than being hardcoded. This would make the script more robust over time.
+  #TODO b/432163402 : The end year for the download should be made configurable or derived automatically from the current date rather than being hardcoded. This would make the script more robust over time.
   end_year = 2022
   #Checking if the end year is greater than 2030
   if FLAGS.start_year > 2030:
