@@ -93,7 +93,6 @@ def clean_precipitation_data(file_path, output_file):
             value_name='Value')
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
     data.to_csv(output_file, index=False)
-    print("Finished cleaning file!")
 
 
 if __name__ == "__main__":
