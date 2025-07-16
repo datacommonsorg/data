@@ -28,6 +28,7 @@ from app.executor import import_executor
 from app.service import file_uploader
 from app.service import github_api
 from app.service import email_notifier
+import dataclasses
 
 REPO_DIR = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -49,7 +50,18 @@ CLOUD_RUN_JOB_NAME = os.getenv("CLOUD_RUN_JOB")
 AUTO_IMPORT_JOB_STATUS_LOG_TYPE = "auto-import-job-status"
 
 
-def scheduled_updates(absolute_import_name: str, import_config: str):
+def _override_configs(absolute_import_name: str,
+                      config: configs.ExecutorConfig) -> configs.ExecutorConfig:
+    import_dir, import_name = absolute_import_name.split(':', 1)
+    manifest_path = os.path.join(config.local_repo_dir, import_dir,
+                                 config.manifest_filename)
+    logging.info('%s: Overriding config from manifest %s', absolute_import_name,
+                 manifest_path)
+    d = json.load(open(manifest_path))
+    return dataclasses.replace(config, **d.get("config_override", {}))
+
+
+def run_import_job(absolute_import_name: str, import_config: str):
     """
     Invokes import update workflow.
     """
@@ -57,6 +69,7 @@ def scheduled_updates(absolute_import_name: str, import_config: str):
     logging.info(absolute_import_name)
     cfg = json.loads(import_config)
     config = configs.ExecutorConfig(**cfg)
+    config = _override_configs(absolute_import_name, config)
     executor = import_executor.ImportExecutor(
         uploader=file_uploader.GCSFileUploader(
             project_id=config.gcs_project_id,
@@ -70,6 +83,7 @@ def scheduled_updates(absolute_import_name: str, import_config: str):
         notifier=email_notifier.EmailNotifier(config.email_account,
                                               config.email_token),
         local_repo_dir=config.local_repo_dir)
+    logging.info(config)
     result = executor.execute_imports_on_update(absolute_import_name)
     logging.info(result)
     elapsed_time_secs = int(time.time() - start_time)
@@ -90,7 +104,7 @@ def main(_):
     if FLAGS.enable_cloud_logging:
         configure_cloud_logging()
         logging.info("Google Cloud Logging configured.")
-    return scheduled_updates(FLAGS.import_name, FLAGS.import_config)
+    return run_import_job(FLAGS.import_name, FLAGS.import_config)
 
 
 if __name__ == '__main__':
