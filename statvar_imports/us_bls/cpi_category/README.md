@@ -45,7 +45,7 @@ This example shows how to process the `cpi-w` data. To process data for `cpi-u` 
     --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
     --output_path='output/cpi_w/cpi_w'
 ```
-## TODO
+## TODO : b/431970934
 
 - **Unit Testing**: Create a comprehensive unit test for the `cpi_category_download.py` script to ensure its reliability and correctness. The current download logic is complex and would benefit from a robust test suite. This will be addressed in a future update, we are keeping the bug : b/422887606 open for further tracking.
 - **Exception logging**: Log the exception in download script in #231 of download script for better debugging
