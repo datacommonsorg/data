@@ -11,160 +11,258 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""
+This script downloads data files as specified in a JSON configuration file.
 
+It is designed to be a robust and production-ready tool for data ingestion
+pipelines. It supports downloading CSV and ZIP files, handling file renames,
+and provides clear logging for all its actions.
+
+Key Features:
+- Reads download configurations from a JSON file.
+- Accepts command-line arguments for specifying the import name, config file
+  path, and a dry-run mode.
+- Uses a utility script (`download_util_script.py`) for the actual download
+  process.
+- Logs all major actions, including download start, success, failure, and
+  file renaming.
+- Exits with a non-zero status code on error to signal failure in automated
+  workflows.
+- Supports a dry-run mode to preview actions without downloading files.
+
+Example Usage:
+  python3 download_script.py CDC_StandardizedPrecipitationIndex \
+    --config_file=import_configs.json
+
+  python3 download_script.py CDC_OzoneCounty \
+    --config_file=import_configs.json --dry_run
+"""
+
+import argparse
 import json
+import logging
 import os
-import requests
 import sys
-from absl import app, logging, flags
-from urllib.parse import urlparse
+import urllib.parse
+import importlib.util
 
-_FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'config_file',
-    'gs://unresolved_mcf/cdc/environmental/StandardizedPrecipitationEvapotranspirationIndex/latest/import_configs.json',
-    'Config file path')
+def _load_download_utility():
+    """Dynamically loads the download_util_script module."""
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # First, check for the utility script in the same directory
+    util_path = os.path.join(script_dir, "download_util_script.py")
 
-_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Append parent directory to sys.path to find utility modules like file_util and download_util_script.
-sys.path.append(os.path.join(_MODULE_DIR, '../../../util/'))
+    if not os.path.exists(util_path):
+        # If not found, check in the original relative path structure
+        util_path = os.path.abspath(os.path.join(script_dir, '..', '..', '..', 'util', 'download_util_script.py'))
 
-# Import the necessary utility modules
-import file_util
-import download_util_script as download_util
+    if not os.path.exists(util_path):
+        print(
+            "Error: The 'download_util_script.py' utility could not be found in the expected locations.",
+            file=sys.stderr)
+        sys.exit(1)
 
-# Query string for retrieving record count from Socrata-like APIs
-record_count_query = '?$query=select%20count(*)%20as%20COLUMN_ALIAS_GUARD__count'
+    spec = importlib.util.spec_from_file_location("download_util_script", util_path)
+    if spec and spec.loader:
+        download_util = importlib.util.module_from_spec(spec)
+        sys.modules["download_util_script"] = download_util
+        spec.loader.exec_module(download_util)
+        return download_util
+    else:
+        print(
+            f"Error: Could not load the 'download_util_script.py' utility from path: {util_path}",
+            file=sys.stderr)
+        sys.exit(1)
+
+download_util = _load_download_utility()
 
 
-def download_files(importname, configs):
+def _configure_logging():
+    """Configures the logging format and level."""
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] - %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+    )
+
+
+def _get_inferred_filename(url: str, is_zip: bool) -> str:
     """
-    Downloads files based on the provided configuration, using the download utility.
+    Infers the filename from a URL, mimicking the logic in download_util_script.
 
     Args:
-        importname: The specific import name to process from the configurations.
-        configs: A list of dictionaries containing file download configurations.
+        url: The URL to infer the filename from.
+        is_zip: A boolean indicating if the file is expected to be a zip archive.
+
+    Returns:
+        The inferred filename.
     """
+    parsed_url = urllib.parse.urlparse(url)
+    inferred_filename = os.path.basename(parsed_url.path)
+
+    if not inferred_filename:
+        return "downloaded_file"
+
+    # The utility script appends '.xlsx' if there's no extension and it's not a zip.
+    if "." not in inferred_filename and not is_zip:
+        inferred_filename += ".xlsx"
+
+    return inferred_filename
+
+
+def process_downloads(import_name: str, config_file: str,
+                      dry_run: bool) -> bool:
+    """
+    Processes the download for a given import name based on the config file.
+
+    Args:
+        import_name: The name of the import configuration to process.
+        config_file: The path to the JSON configuration file.
+        dry_run: If True, prints actions without downloading files.
+
+    Returns:
+        True if all downloads and operations succeed, False otherwise.
+    """
+    # Socrata query to get the total row count.
+    record_count_query = "?$query=select%20count(*)%20as%20count"
+    logging.info(f"Starting download process for import: '{import_name}'")
+
     try:
-        for config in configs:
-            # Find the relevant configuration by import_name
-            if config["import_name"] == importname:
-                for file_info in config["files"]:
-                    url = file_info["url"]
-                    # `target_full_path` is the desired local path including filename
-                    target_full_path = file_info["input_file_name"]
-                    target_dir = os.path.dirname(target_full_path)
+        with open(config_file, "r") as f:
+            configs = json.load(f)
+    except (IOError, json.JSONDecodeError) as e:
+        logging.error(f"Failed to read or parse config file '{config_file}': {e}")
+        return False
 
-                    # Fix: If target_dir is empty, it means the file should be saved in the current directory.
-                    # Set it to '.' to explicitly refer to the current directory, avoiding empty path issues.
-                    if not target_dir:
-                        target_dir = '.'
+    import_config = next(
+        (c for c in configs if c.get("import_name") == import_name), None)
 
-                    target_filename = os.path.basename(target_full_path)
+    if not import_config:
+        logging.error(
+            f"Import name '{import_name}' not found in config file '{config_file}'."
+        )
+        return False
 
-                    logging.info(
-                        f"Preparing to download file for config '{importname}' to: {target_full_path}"
-                    )
+    all_success = True
+    for file_info in import_config.get("files", []):
+        url = file_info.get("url")
+        target_filename = file_info.get("input_file_name")
 
-                    # Ensure the target directory exists before attempting to download
-                    os.makedirs(target_dir, exist_ok=True)
+        if not url or not target_filename:
+            logging.warning(
+                f"Skipping file config due to missing 'url' or 'input_file_name': {file_info}"
+            )
+            all_success = False
+            continue
 
-                    # Step 1: Get the record count to construct the full URL (specific to this data source)
-                    count_url = url.replace('.csv', record_count_query)
-                    full_url = url  # Default to original URL if count retrieval fails
+        target_dir = os.path.dirname(target_filename) or "."
+        is_zip = url.lower().endswith(".zip")
+        full_url = url
 
-                    try:
-                        count_response = requests.get(count_url)
-                        count_response.raise_for_status(
-                        )  # Raise an exception for HTTP errors (4xx or 5xx)
-                        record_count = json.loads(
-                            count_response.text)[0]['COLUMN_ALIAS_GUARD__count']
+        # For CSV files from data.cdc.gov, attempt to get the full dataset
+        if ".csv" in url and "data.cdc.gov" in url:
+            count_url = url.replace(".csv", record_count_query)
+            try:
+                logging.info(f"Attempting to get record count from: {count_url}")
+                with urllib.request.urlopen(count_url, timeout=30) as response:
+                    if response.status == 200:
+                        count_data = json.loads(response.read().decode("utf-8"))
+                        record_count = int(count_data[0]["count"])
                         full_url = f"{url}?$limit={record_count}&$offset=0"
                         logging.info(
-                            f"Generated full download URL with record count ({record_count}): {full_url}"
+                            f"Successfully retrieved record count: {record_count}. Full URL: {full_url}"
                         )
-                    except (requests.exceptions.RequestException,
-                            json.JSONDecodeError) as e:
-                        logging.error(
-                            f"Failed to get record count from '{count_url}'. Proceeding with original URL. Error: {e}"
-                        )
-                    except Exception as e:
-                        logging.error(
-                            f"An unexpected error occurred during record count retrieval for '{count_url}'. Error: {e}"
-                        )
-                        # If any other error, fallback to original URL.
-
-                    success = download_util.download_file(
-                        url=full_url,
-                        output_folder=target_dir,
-                        unzip=
-                        False  # Assuming these are CSVs, not zip files based on the context
-                    )
-
-                    if success:
-                        parsed_download_url = urlparse(full_url)
-                        inferred_filename = os.path.basename(
-                            parsed_download_url.path)
-
-                        # Account for download_util's specific logic for appending .xlsx
-                        # if no extension is present and it's not a zip file.
-                        if '.' not in inferred_filename and not False:  # `unzip` is False here
-                            inferred_filename += '.xlsx'
-
-                        # Construct the actual path where download_util saved the file
-                        actual_downloaded_file_path = os.path.join(
-                            target_dir, inferred_filename)
-
-                        # If the inferred filename differs from the desired target_filename, rename the file.
-                        if inferred_filename != target_filename:
-                            logging.info(
-                                f"Renaming downloaded file from '{actual_downloaded_file_path}' to '{target_full_path}' to match configuration."
-                            )
-                            if os.path.exists(actual_downloaded_file_path):
-                                os.rename(actual_downloaded_file_path,
-                                          target_full_path)
-                                logging.info(
-                                    f"Successfully downloaded and renamed to: {target_full_path}"
-                                )
-                            else:
-                                logging.error(
-                                    f"Error: Expected downloaded file at '{actual_downloaded_file_path}' not found for renaming. Original target was '{target_full_path}'."
-                                )
-                        else:
-                            logging.info(
-                                f"Finished downloading to: {target_full_path}")
                     else:
-                        logging.error(
-                            f"Download utility reported a failure for URL: {full_url}. Target: {target_full_path}"
+                        logging.warning(
+                            f"Failed to get record count (HTTP {response.status}). Proceeding with base URL."
                         )
+            except Exception as e:
+                logging.warning(
+                    f"Could not get record count. Proceeding with base URL. Error: {e}"
+                )
 
-    except Exception as e:
-        logging.fatal(
-            f"An unhandled error occurred during the overall download process: {e}"
-        )
+        logging.info(f"Processing file from URL: {full_url}")
+        logging.info(f"Target local file: {target_filename}")
+
+        if dry_run:
+            print(f"[DRY RUN] Would download from '{full_url}' to '{target_filename}'")
+            inferred_filename = _get_inferred_filename(url, is_zip)
+            if inferred_filename != os.path.basename(target_filename):
+                print(
+                    f"[DRY RUN] Would rename '{inferred_filename}' to '{os.path.basename(target_filename)}'"
+                )
+            continue
+
+        os.makedirs(target_dir, exist_ok=True)
+
+        success = download_util.download_file(url=full_url,
+                                              output_folder=target_dir,
+                                              unzip=is_zip)
+
+        if not success:
+            logging.error(f"Download failed for URL: {full_url}")
+            all_success = False
+            continue
+
+        logging.info(f"Successfully downloaded content from: {full_url}")
+
+        # Use the original base URL to infer the filename, as the full URL has query params
+        inferred_filename = _get_inferred_filename(url, is_zip)
+        downloaded_path = os.path.join(target_dir, inferred_filename)
+        target_path = os.path.join(target_dir, os.path.basename(target_filename))
+
+        if downloaded_path != target_path:
+            logging.info(
+                f"Renaming downloaded file from '{inferred_filename}' to '{os.path.basename(target_filename)}'"
+            )
+            try:
+                os.rename(downloaded_path, target_path)
+                logging.info(f"Successfully renamed file to: {target_path}")
+            except OSError as e:
+                logging.error(
+                    f"Failed to rename '{downloaded_path}' to '{target_path}': {e}"
+                )
+                all_success = False
+
+    return all_success
 
 
-def main(_):
+def main():
     """
-    Main entry point for the download script.
-    Parses command-line arguments and initiates the download process.
+    Main function to parse arguments and initiate the download process.
     """
-    if len(sys.argv) < 2:
-        logging.fatal("Import name must be provided as a command line argument")
-        sys.exit(1)  # Exit with an error code
+    _configure_logging()
 
-    importname = sys.argv[1]
-    logging.info(f"Reading configuration file from: {_FLAGS.config_file}")
+    parser = argparse.ArgumentParser(
+        description="Download data files based on a JSON configuration.",
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
+    parser.add_argument(
+        "import_name",
+        help="The name of the import configuration to process from the config file.",
+    )
+    parser.add_argument(
+        "--config_file",
+        default="import_configs.json",
+        help="Path to the JSON configuration file (default: import_configs.json).",
+    )
+    parser.add_argument(
+        "--dry_run",
+        action="store_true",
+        help="If set, prints the actions that would be taken without downloading files.",
+    )
 
-    try:
-        with file_util.FileIO(_FLAGS.config_file, 'r') as f:
-            config = json.load(f)
-        download_files(importname, config)
-    except Exception as e:
-        logging.fatal(
-            f"Failed to load or parse config file '{_FLAGS.config_file}': {e}")
+    args = parser.parse_args()
+
+    if args.dry_run:
+        logging.info("--- Starting DRY RUN mode ---")
+
+    if not process_downloads(args.import_name, args.config_file, args.dry_run):
+        logging.error("The download process encountered errors.")
         sys.exit(1)
+
+    logging.info("Download process completed successfully.")
 
 
 if __name__ == "__main__":
-    app.run(main)
+    main()
