@@ -10,8 +10,7 @@ from datetime import datetime
 from absl import logging
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_path',
-                    'output',
+flags.DEFINE_string('output_path', 'output',
                     'The local path to save the output files')
 
 INPUT_TO_OUTPUT_PATHS = {
@@ -84,7 +83,6 @@ def process_csv(input_path, output_path, csv_structure_f, out_put_file_name):
     try:
         data_table = pd.read_csv(input_path)
         nri_ver = data_table["NRI_VER"].iloc[1]
-
         # TODO: interpret empty values. semantics of empty values is described in
         # Table 2 of the Technical Documentation available at:
         # https://www.fema.gov/sites/default/files/documents/fema_national-risk-index_technical-documentation.pdf
