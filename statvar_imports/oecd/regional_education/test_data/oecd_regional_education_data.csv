@@ -1,1051 +1,469 @@
 AGE,SEX,Education level,TIME_PERIOD,UNIT_MULT,REF_AREA,OBS_VALUE
-Y25T64,_T,Master’s or equivalent level,2006,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2007,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2008,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2009,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2010,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2011,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2012,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2013,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2014,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2015,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2016,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2017,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2018,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2019,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2021,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2022,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2005,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2020,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2023,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2024,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2000,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2001,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2002,0,USA,0.2
 Y25T64,_T,Master’s or equivalent level,2003,0,USA,0.2
-Y25T64,_T,Master’s or equivalent level,2004,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2006,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2007,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2008,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2009,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2010,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2011,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2012,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2013,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2014,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2015,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2016,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2017,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2018,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2019,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2021,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2022,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2005,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2020,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2023,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2024,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2000,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2001,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2002,0,USA,0.2
 Y25T64,_T,Short-cycle tertiary education,2003,0,USA,0.2
-Y25T64,_T,Short-cycle tertiary education,2004,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2006,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2007,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2008,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2009,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2010,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2011,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2012,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2013,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2014,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2015,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2016,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2017,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2018,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2019,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2021,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2022,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2005,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2020,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2023,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2024,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2000,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2001,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2002,0,USA,0.2
 Y25T64,_T,"Pre-primary, primary and lower secondary education",2003,0,USA,0.2
-Y25T64,_T,"Pre-primary, primary and lower secondary education",2004,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2006,0,USA,0.2
 Y25T64,_T,Bachelor’s or equivalent level,2007,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2008,0,USA,0.2
 Y25T64,_T,Bachelor’s or equivalent level,2009,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2010,0,USA,0.2
 Y25T64,_T,Bachelor’s or equivalent level,2011,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2012,0,USA,0.2
 Y25T64,_T,Bachelor’s or equivalent level,2013,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2014,0,USA,0.2
 Y25T64,_T,Bachelor’s or equivalent level,2015,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2016,0,USA,0.2
 Y25T64,_T,Bachelor’s or equivalent level,2017,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2018,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2019,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2021,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2022,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2005,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2020,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2023,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2024,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2000,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2001,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2002,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2003,0,USA,0.2
-Y25T64,_T,Bachelor’s or equivalent level,2004,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2006,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2007,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2008,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2009,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2010,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2011,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2012,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2013,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2014,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2015,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2016,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2017,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2018,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2019,0,USA,0.2
 Y25T64,_T,Doctoral or equivalent level,2021,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2022,0,USA,0.2
 Y25T64,_T,Doctoral or equivalent level,2005,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2020,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2023,0,USA,0.2
 Y25T64,_T,Doctoral or equivalent level,2024,0,USA,0.2
 Y25T64,_T,Doctoral or equivalent level,2000,0,USA,0.2
 Y25T64,_T,Doctoral or equivalent level,2001,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2002,0,USA,0.2
 Y25T64,_T,Doctoral or equivalent level,2003,0,USA,0.2
-Y25T64,_T,Doctoral or equivalent level,2004,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2006,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2007,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2008,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2009,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2010,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2011,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2012,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2013,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2014,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2015,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2016,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2017,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2018,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2019,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2021,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2022,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2005,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2020,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2023,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2024,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2000,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2001,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2002,0,USA,0.2
 Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2003,0,USA,0.2
-Y25T64,_T,Upper secondary and post-secondary non-tertiary all programmes,2004,0,USA,0.2
-Y25T64,_T,Tertiary education,2006,0,USA,0.2
 Y25T64,_T,Tertiary education,2007,0,USA,0.2
-Y25T64,_T,Tertiary education,2008,0,USA,0.2
 Y25T64,_T,Tertiary education,2009,0,USA,0.2
-Y25T64,_T,Tertiary education,2010,0,USA,0.2
 Y25T64,_T,Tertiary education,2011,0,USA,0.2
-Y25T64,_T,Tertiary education,2012,0,USA,0.2
 Y25T64,_T,Tertiary education,2013,0,USA,0.2
-Y25T64,_T,Tertiary education,2014,0,USA,0.2
 Y25T64,_T,Tertiary education,2015,0,USA,0.2
-Y25T64,_T,Tertiary education,2016,0,USA,0.2
 Y25T64,_T,Tertiary education,2017,0,USA,0.2
-Y25T64,_T,Tertiary education,2018,0,USA,0.2
 Y25T64,_T,Tertiary education,2019,0,USA,0.2
 Y25T64,_T,Tertiary education,2021,0,USA,0.2
-Y25T64,_T,Tertiary education,2022,0,USA,0.2
-Y25T64,_T,Tertiary education,2005,0,USA,0.2
-Y25T64,_T,Tertiary education,2020,0,USA,0.2
-Y25T64,_T,Tertiary education,2023,0,USA,0.2
-Y25T64,_T,Tertiary education,2024,0,USA,0.2
-Y25T64,_T,Tertiary education,2000,0,USA,0.2
-Y25T64,_T,Tertiary education,2001,0,USA,0.2
-Y25T64,_T,Tertiary education,2002,0,USA,0.2
-Y25T64,_T,Tertiary education,2003,0,USA,0.2
-Y25T64,_T,Tertiary education,2004,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2006,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2007,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2008,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2009,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2010,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2011,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2012,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2013,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2014,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2015,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2016,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2017,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2018,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2019,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2021,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2022,0,USA,0.2
 Y25T64,F,Master’s or equivalent level,2005,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2020,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2023,0,USA,0.2
 Y25T64,F,Master’s or equivalent level,2024,0,USA,0.2
 Y25T64,F,Master’s or equivalent level,2000,0,USA,0.2
 Y25T64,F,Master’s or equivalent level,2001,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2002,0,USA,0.2
 Y25T64,F,Master’s or equivalent level,2003,0,USA,0.2
-Y25T64,F,Master’s or equivalent level,2004,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2006,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2007,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2008,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2009,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2010,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2011,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2012,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2013,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2014,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2015,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2016,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2017,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2018,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2019,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2021,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2022,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2005,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2020,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2023,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2024,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2000,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2001,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2002,0,USA,0.2
 Y25T64,F,Short-cycle tertiary education,2003,0,USA,0.2
-Y25T64,F,Short-cycle tertiary education,2004,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2006,0,USA,0.2
 Y25T64,F,"Pre-primary, primary and lower secondary education",2007,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2008,0,USA,0.2
 Y25T64,F,"Pre-primary, primary and lower secondary education",2009,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2010,0,USA,0.2
 Y25T64,F,"Pre-primary, primary and lower secondary education",2011,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2012,0,USA,0.2
 Y25T64,F,"Pre-primary, primary and lower secondary education",2013,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2014,0,USA,0.2
 Y25T64,F,"Pre-primary, primary and lower secondary education",2015,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2016,0,USA,0.2
 Y25T64,F,"Pre-primary, primary and lower secondary education",2017,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2018,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2019,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2021,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2022,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2005,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2020,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2023,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2024,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2000,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2001,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2002,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2003,0,USA,0.2
-Y25T64,F,"Pre-primary, primary and lower secondary education",2004,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2006,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2007,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2008,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2009,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2010,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2011,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2012,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2013,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2014,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2015,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2016,0,USA,0.2
 Y25T64,F,Bachelor’s or equivalent level,2017,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2018,0,USA,0.2
 Y25T64,F,Bachelor’s or equivalent level,2019,0,USA,0.2
 Y25T64,F,Bachelor’s or equivalent level,2021,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2022,0,USA,0.2
 Y25T64,F,Bachelor’s or equivalent level,2005,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2020,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2023,0,USA,0.2
 Y25T64,F,Bachelor’s or equivalent level,2024,0,USA,0.2
 Y25T64,F,Bachelor’s or equivalent level,2000,0,USA,0.2
 Y25T64,F,Bachelor’s or equivalent level,2001,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2002,0,USA,0.2
 Y25T64,F,Bachelor’s or equivalent level,2003,0,USA,0.2
-Y25T64,F,Bachelor’s or equivalent level,2004,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2006,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2007,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2008,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2009,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2010,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2011,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2012,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2013,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2014,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2015,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2016,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2017,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2018,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2019,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2021,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2022,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2005,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2020,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2023,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2024,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2000,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2001,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2002,0,USA,0.2
 Y25T64,F,Doctoral or equivalent level,2003,0,USA,0.2
-Y25T64,F,Doctoral or equivalent level,2004,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2006,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2007,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2008,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2009,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2010,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2011,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2012,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2013,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2014,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2015,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2016,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2017,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2018,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2019,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2021,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2022,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2005,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2020,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2023,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2024,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2000,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2001,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2002,0,USA,0.2
 Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2003,0,USA,0.2
-Y25T64,F,Upper secondary and post-secondary non-tertiary all programmes,2004,0,USA,0.2
-Y25T64,F,Tertiary education,2006,0,USA,0.2
 Y25T64,F,Tertiary education,2007,0,USA,0.2
-Y25T64,F,Tertiary education,2008,0,USA,0.2
 Y25T64,F,Tertiary education,2009,0,USA,0.2
-Y25T64,F,Tertiary education,2010,0,USA,0.2
 Y25T64,F,Tertiary education,2011,0,USA,0.2
-Y25T64,F,Tertiary education,2012,0,USA,0.2
 Y25T64,F,Tertiary education,2013,0,USA,0.2
-Y25T64,F,Tertiary education,2014,0,USA,0.2
 Y25T64,F,Tertiary education,2015,0,USA,0.2
-Y25T64,F,Tertiary education,2016,0,USA,0.2
 Y25T64,F,Tertiary education,2017,0,USA,0.2
-Y25T64,F,Tertiary education,2018,0,USA,0.2
 Y25T64,F,Tertiary education,2019,0,USA,0.2
 Y25T64,F,Tertiary education,2021,0,USA,0.2
-Y25T64,F,Tertiary education,2022,0,USA,0.2
 Y25T64,F,Tertiary education,2005,0,USA,0.2
-Y25T64,F,Tertiary education,2020,0,USA,0.2
-Y25T64,F,Tertiary education,2023,0,USA,0.2
 Y25T64,F,Tertiary education,2024,0,USA,0.2
 Y25T64,F,Tertiary education,2000,0,USA,0.2
 Y25T64,F,Tertiary education,2001,0,USA,0.2
-Y25T64,F,Tertiary education,2002,0,USA,0.2
 Y25T64,F,Tertiary education,2003,0,USA,0.2
-Y25T64,F,Tertiary education,2004,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2006,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2007,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2008,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2009,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2010,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2011,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2012,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2013,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2014,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2015,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2016,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2017,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2018,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2019,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2021,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2022,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2005,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2020,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2023,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2024,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2000,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2001,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2002,0,USA,0.2
 Y25T64,M,Master’s or equivalent level,2003,0,USA,0.2
-Y25T64,M,Master’s or equivalent level,2004,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2006,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2007,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2008,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2009,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2010,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2011,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2012,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2013,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2014,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2015,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2016,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2017,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2018,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2019,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2021,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2022,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2005,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2020,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2023,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2024,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2000,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2001,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2002,0,USA,0.2
 Y25T64,M,Short-cycle tertiary education,2003,0,USA,0.2
-Y25T64,M,Short-cycle tertiary education,2004,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2006,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2007,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2008,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2009,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2010,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2011,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2012,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2013,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2014,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2015,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2016,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2017,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2018,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2019,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2021,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2022,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2005,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2020,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2023,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2024,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2000,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2001,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2002,0,USA,0.2
 Y25T64,M,"Pre-primary, primary and lower secondary education",2003,0,USA,0.2
-Y25T64,M,"Pre-primary, primary and lower secondary education",2004,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2006,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2007,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2008,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2009,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2010,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2011,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2012,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2013,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2014,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2015,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2016,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2017,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2018,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2019,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2021,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2022,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2005,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2020,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2023,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2024,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2000,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2001,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2002,0,USA,0.2
 Y25T64,M,Bachelor’s or equivalent level,2003,0,USA,0.2
-Y25T64,M,Bachelor’s or equivalent level,2004,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2006,0,USA,0.2
 Y25T64,M,Doctoral or equivalent level,2007,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2008,0,USA,0.2
 Y25T64,M,Doctoral or equivalent level,2009,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2010,0,USA,0.2
 Y25T64,M,Doctoral or equivalent level,2011,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2012,0,USA,0.2
 Y25T64,M,Doctoral or equivalent level,2013,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2014,0,USA,0.2
 Y25T64,M,Doctoral or equivalent level,2015,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2016,0,USA,0.2
 Y25T64,M,Doctoral or equivalent level,2017,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2018,0,USA,0.2
 Y25T64,M,Doctoral or equivalent level,2019,0,USA,0.2
 Y25T64,M,Doctoral or equivalent level,2021,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2022,0,USA,0.2
 Y25T64,M,Doctoral or equivalent level,2005,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2020,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2023,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2024,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2000,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2001,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2002,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2003,0,USA,0.2
-Y25T64,M,Doctoral or equivalent level,2004,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2006,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2007,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2008,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2009,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2010,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2011,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2012,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2013,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2014,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2015,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2016,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2017,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2018,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2019,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2021,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2022,0,USA,0.2
 Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2005,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2020,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2023,0,USA,0.2
 Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2024,0,USA,0.2
 Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2000,0,USA,0.2
 Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2001,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2002,0,USA,0.2
 Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2003,0,USA,0.2
-Y25T64,M,Upper secondary and post-secondary non-tertiary all programmes,2004,0,USA,0.2
-Y25T64,M,Tertiary education,2006,0,USA,0.2
 Y25T64,M,Tertiary education,2007,0,USA,0.2
-Y25T64,M,Tertiary education,2008,0,USA,0.2
 Y25T64,M,Tertiary education,2009,0,USA,0.2
-Y25T64,M,Tertiary education,2010,0,USA,0.2
 Y25T64,M,Tertiary education,2011,0,USA,0.2
-Y25T64,M,Tertiary education,2012,0,USA,0.2
 Y25T64,M,Tertiary education,2013,0,USA,0.2
-Y25T64,M,Tertiary education,2014,0,USA,0.2
 Y25T64,M,Tertiary education,2015,0,USA,0.2
-Y25T64,M,Tertiary education,2016,0,USA,0.2
 Y25T64,M,Tertiary education,2017,0,USA,0.2
-Y25T64,M,Tertiary education,2018,0,USA,0.2
 Y25T64,M,Tertiary education,2019,0,USA,0.2
 Y25T64,M,Tertiary education,2021,0,USA,0.2
-Y25T64,M,Tertiary education,2022,0,USA,0.2
-Y25T64,M,Tertiary education,2005,0,USA,0.2
-Y25T64,M,Tertiary education,2020,0,USA,0.2
-Y25T64,M,Tertiary education,2023,0,USA,0.2
-Y25T64,M,Tertiary education,2024,0,USA,0.2
-Y25T64,M,Tertiary education,2000,0,USA,0.2
-Y25T64,M,Tertiary education,2001,0,USA,0.2
-Y25T64,M,Tertiary education,2002,0,USA,0.2
-Y25T64,M,Tertiary education,2003,0,USA,0.2
-Y25T64,M,Tertiary education,2004,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2006,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2007,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2008,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2009,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2010,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2011,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2012,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2013,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2014,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2015,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2016,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2017,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2018,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2019,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2021,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2022,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2005,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2020,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2023,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2024,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2000,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2001,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2002,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2003,0,USA,0.2
-Y25T34,_T,Master’s or equivalent level,2004,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2006,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2007,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2008,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2009,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2010,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2011,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2012,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2013,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2014,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2015,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2016,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2017,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2018,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2019,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2021,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2022,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2005,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2020,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2023,0,USA,0.2
 Y25T34,_T,Short-cycle tertiary education,2024,0,USA,0.2
 Y25T34,_T,Short-cycle tertiary education,2000,0,USA,0.2
 Y25T34,_T,Short-cycle tertiary education,2001,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2002,0,USA,0.2
 Y25T34,_T,Short-cycle tertiary education,2003,0,USA,0.2
-Y25T34,_T,Short-cycle tertiary education,2004,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2006,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2007,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2008,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2009,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2010,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2011,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2012,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2013,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2014,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2015,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2016,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2017,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2018,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2019,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2021,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2022,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2005,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2020,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2023,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2024,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2000,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2001,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2002,0,USA,0.2
 Y25T34,_T,"Pre-primary, primary and lower secondary education",2003,0,USA,0.2
-Y25T34,_T,"Pre-primary, primary and lower secondary education",2004,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2006,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2007,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2008,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2009,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2010,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2011,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2012,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2013,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2014,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2015,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2016,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2017,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2018,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2019,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2021,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2022,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2005,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2020,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2023,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2024,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2000,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2001,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2002,0,USA,0.2
 Y25T34,_T,Bachelor’s or equivalent level,2003,0,USA,0.2
-Y25T34,_T,Bachelor’s or equivalent level,2004,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2006,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2007,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2008,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2009,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2010,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2011,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2012,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2013,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2014,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2015,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2016,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2017,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2018,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2019,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2021,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2022,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2005,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2020,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2023,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2024,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2000,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2001,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2002,0,USA,0.2
 Y25T34,_T,Doctoral or equivalent level,2003,0,USA,0.2
-Y25T34,_T,Doctoral or equivalent level,2004,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2006,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2007,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2008,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2009,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2010,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2011,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2012,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2013,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2014,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2015,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2016,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2017,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2018,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2019,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2021,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2022,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2005,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2020,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2023,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2024,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2000,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2001,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2002,0,USA,0.2
 Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2003,0,USA,0.2
-Y25T34,_T,Upper secondary and post-secondary non-tertiary all programmes,2004,0,USA,0.2
-Y25T34,_T,Tertiary education,2006,0,USA,0.2
 Y25T34,_T,Tertiary education,2007,0,USA,0.2
-Y25T34,_T,Tertiary education,2008,0,USA,0.2
 Y25T34,_T,Tertiary education,2009,0,USA,0.2
-Y25T34,_T,Tertiary education,2010,0,USA,0.2
 Y25T34,_T,Tertiary education,2011,0,USA,0.2
-Y25T34,_T,Tertiary education,2012,0,USA,0.2
 Y25T34,_T,Tertiary education,2013,0,USA,0.2
-Y25T34,_T,Tertiary education,2014,0,USA,0.2
 Y25T34,_T,Tertiary education,2015,0,USA,0.2
-Y25T34,_T,Tertiary education,2016,0,USA,0.2
 Y25T34,_T,Tertiary education,2017,0,USA,0.2
-Y25T34,_T,Tertiary education,2018,0,USA,0.2
 Y25T34,_T,Tertiary education,2019,0,USA,0.2
 Y25T34,_T,Tertiary education,2021,0,USA,0.2
-Y25T34,_T,Tertiary education,2022,0,USA,0.2
 Y25T34,_T,Tertiary education,2005,0,USA,0.2
-Y25T34,_T,Tertiary education,2020,0,USA,0.2
-Y25T34,_T,Tertiary education,2023,0,USA,0.2
 Y25T34,_T,Tertiary education,2024,0,USA,0.2
 Y25T34,_T,Tertiary education,2000,0,USA,0.2
 Y25T34,_T,Tertiary education,2001,0,USA,0.2
-Y25T34,_T,Tertiary education,2002,0,USA,0.2
 Y25T34,_T,Tertiary education,2003,0,USA,0.2
-Y25T34,_T,Tertiary education,2004,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2006,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2007,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2008,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2009,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2010,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2011,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2012,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2013,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2014,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2015,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2016,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2017,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2018,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2019,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2021,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2022,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2005,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2020,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2023,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2024,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2000,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2001,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2002,0,USA,0.2
 Y25T34,F,Master’s or equivalent level,2003,0,USA,0.2
-Y25T34,F,Master’s or equivalent level,2004,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2006,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2007,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2008,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2009,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2010,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2011,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2012,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2013,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2014,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2015,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2016,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2017,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2018,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2019,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2021,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2022,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2005,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2020,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2023,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2024,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2000,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2001,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2002,0,USA,0.2
 Y25T34,F,Short-cycle tertiary education,2003,0,USA,0.2
-Y25T34,F,Short-cycle tertiary education,2004,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2006,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2007,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2008,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2009,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2010,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2011,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2012,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2013,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2014,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2015,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2016,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2017,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2018,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2019,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2021,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2022,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2005,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2020,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2023,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2024,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2000,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2001,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2002,0,USA,0.2
 Y25T34,F,"Pre-primary, primary and lower secondary education",2003,0,USA,0.2
-Y25T34,F,"Pre-primary, primary and lower secondary education",2004,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2006,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2007,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2008,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2009,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2010,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2011,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2012,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2013,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2014,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2015,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2016,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2017,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2018,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2019,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2021,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2022,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2005,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2020,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2023,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2024,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2000,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2001,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2002,0,USA,0.2
 Y25T34,F,Bachelor’s or equivalent level,2003,0,USA,0.2
-Y25T34,F,Bachelor’s or equivalent level,2004,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2006,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2007,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2008,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2009,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2010,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2011,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2012,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2013,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2014,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2015,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2016,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2017,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2018,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2019,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2021,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2022,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2005,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2020,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2023,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2024,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2000,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2001,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2002,0,USA,0.2
 Y25T34,F,Doctoral or equivalent level,2003,0,USA,0.2
-Y25T34,F,Doctoral or equivalent level,2004,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2006,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2007,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2008,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2009,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2010,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2011,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2012,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2013,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2014,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2015,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2016,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2017,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2018,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2019,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2021,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2022,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2005,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2020,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2023,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2024,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2000,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2001,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2002,0,USA,0.2
 Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2003,0,USA,0.2
-Y25T34,F,Upper secondary and post-secondary non-tertiary all programmes,2004,0,USA,0.2
-Y25T34,F,Tertiary education,2006,0,USA,0.2
 Y25T34,F,Tertiary education,2007,0,USA,0.2
-Y25T34,F,Tertiary education,2008,0,USA,0.2
 Y25T34,F,Tertiary education,2009,0,USA,0.2
-Y25T34,F,Tertiary education,2010,0,USA,0.2
 Y25T34,F,Tertiary education,2011,0,USA,0.2
-Y25T34,F,Tertiary education,2012,0,USA,0.2
 Y25T34,F,Tertiary education,2013,0,USA,0.2
-Y25T34,F,Tertiary education,2014,0,USA,0.2
 Y25T34,F,Tertiary education,2015,0,USA,0.2
-Y25T34,F,Tertiary education,2016,0,USA,0.2
 Y25T34,F,Tertiary education,2017,0,USA,0.2
-Y25T34,F,Tertiary education,2018,0,USA,0.2
 Y25T34,F,Tertiary education,2019,0,USA,0.2
 Y25T34,F,Tertiary education,2021,0,USA,0.2
-Y25T34,F,Tertiary education,2022,0,USA,0.2
 Y25T34,F,Tertiary education,2005,0,USA,0.2
-Y25T34,F,Tertiary education,2020,0,USA,0.2
-Y25T34,F,Tertiary education,2023,0,USA,0.2
 Y25T34,F,Tertiary education,2024,0,USA,0.2
 Y25T34,F,Tertiary education,2000,0,USA,0.2
 Y25T34,F,Tertiary education,2001,0,USA,0.2
-Y25T34,F,Tertiary education,2002,0,USA,0.2
 Y25T34,F,Tertiary education,2003,0,USA,0.2
-Y25T34,F,Tertiary education,2004,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2006,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2007,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2008,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2009,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2010,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2011,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2012,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2013,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2014,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2015,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2016,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2017,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2018,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2019,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2021,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2022,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2005,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2020,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2023,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2024,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2000,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2001,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2002,0,USA,0.2
 Y25T34,M,Master’s or equivalent level,2003,0,USA,0.2
-Y25T34,M,Master’s or equivalent level,2004,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2006,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2007,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2008,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2009,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2010,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2011,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2012,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2013,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2014,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2015,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2016,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2017,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2018,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2019,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2021,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2022,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2005,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2020,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2023,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2024,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2000,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2001,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2002,0,USA,0.2
 Y25T34,M,Short-cycle tertiary education,2003,0,USA,0.2
-Y25T34,M,Short-cycle tertiary education,2004,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2006,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2007,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2008,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2009,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2010,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2011,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2012,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2013,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2014,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2015,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2016,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2017,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2018,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2019,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2021,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2022,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2005,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2020,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2023,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2024,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2000,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2001,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2002,0,USA,0.2
 Y25T34,M,"Pre-primary, primary and lower secondary education",2003,0,USA,0.2
-Y25T34,M,"Pre-primary, primary and lower secondary education",2004,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2006,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2007,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2008,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2009,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2010,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2011,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2012,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2013,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2014,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2015,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2016,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2017,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2018,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2019,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2021,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2022,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2005,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2020,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2023,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2024,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2000,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2001,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2002,0,USA,0.2
 Y25T34,M,Bachelor’s or equivalent level,2003,0,USA,0.2
-Y25T34,M,Bachelor’s or equivalent level,2004,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2006,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2007,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2008,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2009,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2010,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2011,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2012,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2013,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2014,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2015,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2016,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2017,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2018,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2019,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2021,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2022,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2005,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2020,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2023,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2024,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2000,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2001,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2002,0,USA,0.2
 Y25T34,M,Doctoral or equivalent level,2003,0,USA,0.2
-Y25T34,M,Doctoral or equivalent level,2004,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2006,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2007,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2008,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2009,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2010,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2011,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2012,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2013,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2014,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2015,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2016,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2017,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2018,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2019,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2021,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2022,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2005,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2020,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2023,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2024,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2000,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2001,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2002,0,USA,0.2
 Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2003,0,USA,0.2
-Y25T34,M,Upper secondary and post-secondary non-tertiary all programmes,2004,0,USA,0.2
-Y25T34,M,Tertiary education,2006,0,USA,0.2
 Y25T34,M,Tertiary education,2007,0,USA,0.2
-Y25T34,M,Tertiary education,2008,0,USA,0.2
 Y25T34,M,Tertiary education,2009,0,USA,0.2
-Y25T34,M,Tertiary education,2010,0,USA,0.2
 Y25T34,M,Tertiary education,2011,0,USA,0.2
-Y25T34,M,Tertiary education,2012,0,USA,0.2
 Y25T34,M,Tertiary education,2013,0,USA,0.2
-Y25T34,M,Tertiary education,2014,0,USA,0.2
 Y25T34,M,Tertiary education,2015,0,USA,0.2
-Y25T34,M,Tertiary education,2016,0,USA,0.2
 Y25T34,M,Tertiary education,2017,0,USA,0.2
-Y25T34,M,Tertiary education,2018,0,USA,0.2
 Y25T34,M,Tertiary education,2019,0,USA,0.2
 Y25T34,M,Tertiary education,2021,0,USA,0.2
-Y25T34,M,Tertiary education,2022,0,USA,0.2
 Y25T34,M,Tertiary education,2005,0,USA,0.2
-Y25T34,M,Tertiary education,2020,0,USA,0.2
-Y25T34,M,Tertiary education,2023,0,USA,0.2
 Y25T34,M,Tertiary education,2024,0,USA,0.2
 Y25T34,M,Tertiary education,2000,0,USA,0.2
 Y25T34,M,Tertiary education,2001,0,USA,0.2
-Y25T34,M,Tertiary education,2002,0,USA,0.2
 Y25T34,M,Tertiary education,2003,0,USA,0.2
-Y25T34,M,Tertiary education,2004,0,USA,0.2
