@@ -48,8 +48,8 @@ class TestCovidMobility(unittest.TestCase):
         """
 
         with tempfile.TemporaryDirectory() as tmp_dir:
-            input_path = os.path.join(dir_path, "data.csv")
-            expected_path = os.path.join(dir_path, "expected.csv")
+            input_path = os.path.join(dir_path, "data_input.csv")
+            expected_path = os.path.join(dir_path, "expected_output.csv")
             output_path = os.path.join(tmp_dir, "output.csv")
 
             if not os.path.exists(input_path):
