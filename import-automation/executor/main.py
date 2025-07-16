@@ -58,7 +58,7 @@ def _override_configs(absolute_import_name: str,
     logging.info('%s: Overriding config from manifest %s', absolute_import_name,
                  manifest_path)
     d = json.load(open(manifest_path))
-    return dataclasses.update(config, **d.get("config_override", {}))
+    return dataclasses.replace(config, **d.get("config_override", {}))
 
 
 def run_import_job(absolute_import_name: str, import_config: str):
