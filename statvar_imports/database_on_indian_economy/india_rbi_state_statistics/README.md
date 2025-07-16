@@ -10,9 +10,17 @@ This import pipeline processes various socio-economic and agricultural statistic
 
 ## Configuration
 
-The `rbi_download.py` script relies on a configuration file named `configs.py` to fetch the URLs, filenames, and categories for the data to be downloaded. This configuration file is centrally located at:
+The `rbi_download.py` script relies on a configuration file named `configs.py` to fetch the URLs, filenames, and categories for the data to be downloaded. 
 
-`gs://datcom-import-test/statvar_imports/database_on_indian_economy/india_rbi_state_statistics/configs.py`
+Sample data of the config file:
+URLS_CONFIG=[
+    {
+        "url": "https://rbidocs.rbi.org.in/rdocs/Publications/DOCs/58T_xxxxxxxxxxxxx.XLSX",
+        "category": "agriculture",
+        "filename": "state_wise_pattern_of_land_use_gross_sown_area.xlsx"
+    },
+    ...
+    ]
 
 This approach makes the import process semi-automatic: if the download URLs change in future RBI releases (which commonly happens due to shifting table numbers or publication structures), only this configuration file needs to be updated, rather than modifying the Python script itself.
 

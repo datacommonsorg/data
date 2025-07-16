@@ -26,7 +26,7 @@ from download_util_script import _retry_method
 
 flags.DEFINE_string(
     'config_file_path',
-    'gs://datcom-import-test/statvar_imports/database_on_indian_economy/india_rbi_state_statistics/configs.py',
+    'gs://unresolved_mcf/india_rbi/state_statistics/configs.py',
     'Config file path')
 
 def reads_config_file():
