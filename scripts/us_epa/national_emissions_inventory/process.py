@@ -23,7 +23,8 @@ from absl import app, flags, logging
 import pandas as pd
 import numpy as np
 
-sys.path.insert(1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
+sys.path.insert(
+    1, os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../'))
 
 from util.statvar_dcid_generator import get_statvar_dcid
 
@@ -32,8 +33,8 @@ sys.path.insert(1, os.path.dirname(os.path.abspath(__file__)))
 from config import *
 
 FLAGS = flags.FLAGS
-default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'gcs_output',
-                                  "input_files")
+default_input_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  'gcs_output', "input_files")
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 
 _MCF_TEMPLATE = ("Node: dcid:{statvar}\n"
@@ -65,18 +66,20 @@ class USAirEmissionTrends:
     MCF and TMCF Files.
     """
 
-    def __init__(self, input_files: list, csv_file_path: str, mcf_file_path: str,
-                 tmcf_file_path: str) -> None:
+    def __init__(self, input_files: list, csv_file_path: str,
+                 mcf_file_path: str, tmcf_file_path: str) -> None:
         self._input_files = input_files
         self._cleaned_csv_file_path = csv_file_path
         self._mcf_file_path = mcf_file_path
         self._tmcf_file_path = tmcf_file_path
-        self.final_df = pd.DataFrame(
-            columns=['geo_Id', 'year', 'SV', 'observation', 'unit', 'Measurement_Method'])
+        self.final_df = pd.DataFrame(columns=[
+            'geo_Id', 'year', 'SV', 'observation', 'unit', 'Measurement_Method'
+        ])
         self.final_mcf_template = ""
         logging.info("USAirEmissionTrends instance initialized.")
 
-    def _data_standardize(self, df: pd.DataFrame, column_name: str) -> pd.DataFrame:
+    def _data_standardize(self, df: pd.DataFrame,
+                          column_name: str) -> pd.DataFrame:
         """
         Replaces values of a single column into true values
         from metadata and returns the DF.
@@ -90,7 +93,8 @@ class USAirEmissionTrends:
         logging.info(f"Column '{column_name}' standardization complete")
         return df
 
-    def _regularize_columns(self, df: pd.DataFrame, file_path: str) -> pd.DataFrame:
+    def _regularize_columns(self, df: pd.DataFrame,
+                            file_path: str) -> pd.DataFrame:
         """
         Reads the file for national emissions data and regularizes the files into a 
         single structure so that it can be processed at once. This includes dropping
@@ -155,7 +159,9 @@ class USAirEmissionTrends:
             df (pd.DataFrame): provides the cleaned df as output
         """
         try:
-            logging.info(f"Processing national emissions file: '{os.path.basename(file_path)}'.")
+            logging.info(
+                f"Processing national emissions file: '{os.path.basename(file_path)}'."
+            )
             df = pd.read_csv(file_path, header=0, low_memory=False)
 
             pd.set_option('display.max_columns', 14)
@@ -165,8 +171,8 @@ class USAirEmissionTrends:
 
             # Convert geo_Id to numeric and filter based on range
             df['geo_Id'] = pd.to_numeric(
-                df['geo_Id'],
-                errors='coerce')  # Convert to numeric, invalid parsing will be set as NaN
+                df['geo_Id'], errors='coerce'
+            )  # Convert to numeric, invalid parsing will be set as NaN
             df = df[df['geo_Id'] <= TRIBAL_GEOCODE_START_RANGE]
             #
             # Remove if Tribal Details are needed
@@ -179,18 +185,21 @@ class USAirEmissionTrends:
             # Remove if Tribal Details are needed
             #
             df['scc'] = df['scc'].astype(str)
-            df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2], df['scc'].str[0])
+            df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
+                                 df['scc'].str[0])
             df['geo_Id'] = 'geoId/' + df['geo_Id']
             df.rename(columns=replacement_17, inplace=True)
             df_pollutants = df[df['pollutant code'].isin(pollutants)]
-            df_pollutants = self._data_standardize(df_pollutants, 'pollutant code')
+            df_pollutants = self._data_standardize(df_pollutants,
+                                                   'pollutant code')
             df['pollutant code'] = ''
             df = pd.concat([df, df_pollutants])
             df = self._data_standardize(df, 'unit')
             df['scc_name'] = df['scc'].astype(str)
             df = df.replace({'scc_name': replace_source_metadata})
             df['scc_name'] = df['scc_name'].str.replace(' ', '')
-            df['SV'] = ('Annual_Amount_Emissions_' + df['pollutant code'].astype(str) + '_SCC_' +
+            df['SV'] = ('Annual_Amount_Emissions_' +
+                        df['pollutant code'].astype(str) + '_SCC_' +
                         df['scc'].astype(str)) + '_' + df['scc_name']
 
             df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
@@ -211,7 +220,9 @@ class USAirEmissionTrends:
         Returns:
             None
         """
-        logging.info("Generating MCF properties based on unique Statistical Variables (SVs).")
+        logging.info(
+            "Generating MCF properties based on unique Statistical Variables (SVs)."
+        )
         sv_list = self.final_df["SV"].to_list()
         sv_list = list(set(sv_list))
         sv_list.sort()
@@ -223,8 +234,8 @@ class USAirEmissionTrends:
             scc_name = scc_name + " (" + sv_property[-2] + ")"
             pollutant_start = 3 if sv_property[3] != 'SCC' else None
             if sv_property[3] in [
-                    'Exhaust', 'Evaporation', 'Refueling', 'BName', 'TName', 'Cruise',
-                    'Maneuvering', 'ReducedSpeedZone', 'Hotelling'
+                    'Exhaust', 'Evaporation', 'Refueling', 'BName', 'TName',
+                    'Cruise', 'Maneuvering', 'ReducedSpeedZone', 'Hotelling'
             ]:
                 code = "emissionTypeCode: dcs:" + sv_property[3]
                 scc_name = scc_name + ", " + sv_property[3]
@@ -237,11 +248,12 @@ class USAirEmissionTrends:
                     pollutant = pollutant + i + '_'
                 pollutant_value = '\nemittedThing: dcs:' + pollutant.rstrip('_')
                 pollutant_name = replace_metadata[pollutant.rstrip('_')] + ", "
-            self.final_mcf_template += _MCF_TEMPLATE.format(statvar=sv,
-                                                            scc=source,
-                                                            pollutant=pollutant_value,
-                                                            statvar_name=pollutant_name + scc_name,
-                                                            emission_type=code) + "\n"
+            self.final_mcf_template += _MCF_TEMPLATE.format(
+                statvar=sv,
+                scc=source,
+                pollutant=pollutant_value,
+                statvar_name=pollutant_name + scc_name,
+                emission_type=code) + "\n"
         logging.info("MCF properties generation complete.")
 
     def _process(self):
@@ -262,11 +274,11 @@ class USAirEmissionTrends:
             by=['geo_Id', 'year', 'SV', 'Measurement_Method', 'observation'])
         self.final_df['observation'].replace('', np.nan, inplace=True)
         self.final_df.dropna(subset=['observation'], inplace=True)
-        self.final_df['observation'] = np.where(self.final_df['unit'] == 'Pound',
-                                                self.final_df['observation'] / 2000,
-                                                self.final_df['observation'])
-        self.final_df = self.final_df.groupby(['geo_Id', 'year', 'Measurement_Method',
-                                               'SV']).sum().reset_index()
+        self.final_df['observation'] = np.where(
+            self.final_df['unit'] == 'Pound',
+            self.final_df['observation'] / 2000, self.final_df['observation'])
+        self.final_df = self.final_df.groupby(
+            ['geo_Id', 'year', 'Measurement_Method', 'SV']).sum().reset_index()
         self.final_df['unit'] = "Ton"
         self.final_df = self.final_df.drop(columns=['scc_name'])
         logging.info("Data processing complete.")
@@ -310,7 +322,8 @@ class USAirEmissionTrends:
         Returns:
             None
         """
-        logging.info(f"Generating cleaned CSV file: '{self._cleaned_csv_file_path}'.")
+        logging.info(
+            f"Generating cleaned CSV file: '{self._cleaned_csv_file_path}'.")
         # Creating Output Directory
         output_path = os.path.dirname(self._cleaned_csv_file_path)
         if not os.path.exists(output_path):
@@ -335,17 +348,19 @@ def main(_):
     except:
         logging.fatal("Run the download script first.\n")
         sys.exit(1)
-    output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gcs_output",
-                                    "output")
+    output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                    "gcs_output", "output")
     # Defining Output Files
-    logging.info(f"input_path {input_path} and output_file_path {output_file_path}")
+    logging.info(
+        f"input_path {input_path} and output_file_path {output_file_path}")
     csv_name = "national_emissions.csv"
     mcf_name = "national_emissions.mcf"
     tmcf_name = "national_emissions.tmcf"
     cleaned_csv_path = os.path.join(output_file_path, csv_name)
     mcf_path = os.path.join(output_file_path, mcf_name)
     tmcf_path = os.path.join(output_file_path, tmcf_name)
-    loader = USAirEmissionTrends(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
+    loader = USAirEmissionTrends(ip_files, cleaned_csv_path, mcf_path,
+                                 tmcf_path)
     loader.generate_csv()
     loader.generate_mcf()
     loader.generate_tmcf()

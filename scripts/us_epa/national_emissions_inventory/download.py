@@ -34,7 +34,8 @@ sys.path.insert(1, _COMMON_PATH)
 
 from download_config import *
 
-_DOWNLOAD_PATH = os.path.join(os.path.dirname((__file__)), 'gcs_output', 'input_files')
+_DOWNLOAD_PATH = os.path.join(os.path.dirname((__file__)), 'gcs_output',
+                              'input_files')
 path_to_company_cert = "/etc/ssl/certs/ca-certificates.crt"
 
 # def check_url_accessibility(url, timeout=10):
@@ -98,20 +99,26 @@ def download_files(url_folder_map):
     for urls, folders in url_folder_map.items():
         if len(urls) != len(folders):
             logging.fatal(
-                "Configuration Error: The number of URLs and folder names in a mapping must match.")
+                "Configuration Error: The number of URLs and folder names in a mapping must match."
+            )
             logging.fatal(f"URLs: {urls}, Folders: {folders}")
-            raise SystemExit("The number of urls and folder must match. Exiting.")
+            raise SystemExit(
+                "The number of urls and folder must match. Exiting.")
 
         for url, folder in zip(urls, folders):
             try:
                 logging.info(f"Processing URL: {url} for folder: {folder}")
                 downloaded_file_path = download_file_with_retry(url)
                 if downloaded_file_path:
-                    logging.info(f"URL {url} downloaded to {downloaded_file_path}")
+                    logging.info(
+                        f"URL {url} downloaded to {downloaded_file_path}")
                     extract_dir = os.path.join(_DOWNLOAD_PATH, folder)
                     os.makedirs(extract_dir, exist_ok=True)
-                    logging.info(f"Extracting {downloaded_file_path} to {extract_dir} using 7z...")
-                    subprocess.run(["7z", "x", downloaded_file_path, f"-o{extract_dir}"])
+                    logging.info(
+                        f"Extracting {downloaded_file_path} to {extract_dir} using 7z..."
+                    )
+                    subprocess.run(
+                        ["7z", "x", downloaded_file_path, f"-o{extract_dir}"])
                 else:
                     logging.fatal(f"Error downloading {url} due to error: {e}")
             except Exception as e:
@@ -134,7 +141,9 @@ def main():
     logging.set_verbosity(1)
     logging.info(f"Script execution started.")
     logging.info(f'Download path is set to {_DOWNLOAD_PATH}')
-    download_files(url_folder_map)  # url_folder_map is accessible because it's a global variable
+    download_files(
+        url_folder_map
+    )  # url_folder_map is accessible because it's a global variable
     logging.info(f"Script execution finished.")
 
 
