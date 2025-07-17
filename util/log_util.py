@@ -76,9 +76,10 @@ def configure_cloud_logging():
     absl_handler = absl_logging.get_absl_handler()
     if absl_handler in logging.root.handlers:
         logging.root.handlers.remove(absl_handler)
-        logging.info("ABSL handler found and removed to prevent log duplication")
+        logging.info(
+            "ABSL handler found and removed to prevent log duplication")
     else:
         logging.info("ABSL handler not found in root handlers")
-    
+
     client = google.cloud.logging.Client()
     client.setup_logging()

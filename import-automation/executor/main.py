@@ -105,7 +105,7 @@ def main(_):
     running_on_cloudrun_result = running_on_cloudrun()
     if running_on_cloudrun_result:
         logging.info("Running under Cloud Run detected.")
-    
+
     if FLAGS.enable_cloud_logging or running_on_cloudrun_result:
         configure_cloud_logging()
         logging.info("Google Cloud Logging configured.")
