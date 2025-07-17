@@ -1,0 +1,154 @@
+epa region code,state,fips state code,tribal name,fips code,county,data category,emissions type code,scc,sector,aetc,reporting period,emissions operating type,pollutant code,pollutant desc,pollutant type(s),total emissions,emissions uom,data set
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021209,Industrial Processes - Oil & Gas Production,,A,R,SO2,Sulfur Dioxide,CAP,0.328248,TON,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2104008100,Fuel Comb - Residential - Wood,,A,R,SO2,Sulfur Dioxide,CAP,0.267842,TON,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021109,Industrial Processes - Oil & Gas Production,,A,R,107028,Acrolein,HAP,19861.2,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2501060051,Gas Stations,,A,R,VOC,Volatile Organic Compounds,CAP,6.02,TON,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021300,Industrial Processes - Oil & Gas Production,,A,R,1330207,Xylenes (Mixed Isomers),HAP,143.2,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021309,Industrial Processes - Oil & Gas Production,,A,R,VOC,Volatile Organic Compounds,CAP,68.58255,TON,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021209,Industrial Processes - Oil & Gas Production,,A,R,1330207,Xylenes (Mixed Isomers),HAP,176.8,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021602,Industrial Processes - Oil & Gas Production,,A,R,VOC,Volatile Organic Compounds,CAP,42.89882,TON,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021400,Industrial Processes - Oil & Gas Production,,A,R,VOC,Volatile Organic Compounds,CAP,19.4261,TON,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310023603,Industrial Processes - Oil & Gas Production,,A,R,VOC,Volatile Organic Compounds,CAP,0.082399,TON,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2102010000,"Fuel Comb - Industrial Boilers, ICEs - Other",,A,R,VOC,Volatile Organic Compounds,CAP,0.035219,TON,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021309,Industrial Processes - Oil & Gas Production,,A,R,108883,Toluene,HAP,2585.748,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2104008100,Fuel Comb - Residential - Wood,,A,R,108883,Toluene,HAP,977.62,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310030300,Industrial Processes - Oil & Gas Production,,A,R,71432,Benzene,HAP,790.9128,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2104006000,Fuel Comb - Residential - Natural Gas,,A,R,PM-CON,PM Condensible,CAP,0.007859,TON,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021109,Industrial Processes - Oil & Gas Production,,A,R,110543,Hexane,HAP,1136.16,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021100,Industrial Processes - Oil & Gas Production,,A,R,110543,Hexane,HAP,19027.58,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021209,Industrial Processes - Oil & Gas Production,,A,R,50000,Formaldehyde,HAP,50737.14,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310023603,Industrial Processes - Oil & Gas Production,,A,R,100414,Ethyl Benzene,HAP,0.10558,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310030300,Industrial Processes - Oil & Gas Production,,A,R,100414,Ethyl Benzene,HAP,72.9596,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021109,Industrial Processes - Oil & Gas Production,,A,R,67561,Methanol,HAP,6330.8,LB,2020NEI
+8,,,Southern Ute Indian Tribe,88750,,NP,,2310021209,Industrial Processes - Oil & Gas Production,,A,R,67561,Methanol,HAP,2783.6,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102006000,"Fuel Comb - Industrial Boilers, ICEs - Natural Gas",,A,R,SO2,Sulfur Dioxide,CAP,0.01794618,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801500262,Fires - Agricultural Field Burning,,A,R,SO2,Sulfur Dioxide,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801500150,Fires - Agricultural Field Burning,,A,R,SO2,Sulfur Dioxide,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801500171,Fires - Agricultural Field Burning,,A,R,SO2,Sulfur Dioxide,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103005000,Fuel Comb - Comm/Institutional - Oil,,A,R,SO2,Sulfur Dioxide,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103006000,Fuel Comb - Comm/Institutional - Natural Gas,,A,R,SO2,Sulfur Dioxide,CAP,0.01371976,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104002000,Fuel Comb - Residential - Other,,A,R,SO2,Sulfur Dioxide,CAP,0.05513993,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008230,Fuel Comb - Residential - Wood,,A,R,SO2,Sulfur Dioxide,CAP,0.00151935,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008620,Fuel Comb - Residential - Wood,,A,R,SO2,Sulfur Dioxide,CAP,0.03451287,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008530,Fuel Comb - Residential - Wood,,A,R,SO2,Sulfur Dioxide,CAP,0.0007096243,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2610030000,Waste Disposal,,A,R,SO2,Sulfur Dioxide,CAP,0.03092573,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2610000500,Waste Disposal,,A,R,SO2,Sulfur Dioxide,CAP,0.002189145,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102005000,"Fuel Comb - Industrial Boilers, ICEs - Oil",,A,R,SO2,Sulfur Dioxide,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2415000000,Solvent - Degreasing,,A,R,131113,Dimethyl Phthalate,HAP,0.02402608,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2302002200,Commercial Cooking,,A,R,108952,Phenol,HAP,2.587744,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2805007100,Agriculture - Livestock Waste,,A,R,108952,Phenol,HAP,0.019298418,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104001000,Fuel Comb - Residential - Other,,A,R,108952,Phenol,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008330,Fuel Comb - Residential - Wood,,A,R,108952,Phenol,HAP,40.65336,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401200000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,107211,Ethylene Glycol,HAP,6.370576,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401015000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,107211,Ethylene Glycol,HAP,0.04373224,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401040000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,107211,Ethylene Glycol,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401030000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,107211,Ethylene Glycol,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401065000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,107211,Ethylene Glycol,HAP,3.083938,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401080000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,107211,Ethylene Glycol,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104002000,Fuel Comb - Residential - Other,,A,R,7664393,Hydrogen Fluoride,HAP,0.5336122,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104002000,Fuel Comb - Residential - Other,,A,R,107028,Acrolein,HAP,0.0010316504,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2610030000,Waste Disposal,,A,R,107028,Acrolein,HAP,2.785312,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102004002,"Fuel Comb - Industrial Boilers, ICEs - Oil",,A,R,107028,Acrolein,HAP,0.0518564,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104004000,Fuel Comb - Residential - Oil,,A,R,56553,Benz[a]Anthracene,HAP,0.00004222282,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104004000,Fuel Comb - Residential - Oil,,A,R,7440020,Nickel,HAP,0.004367878,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104011000,Fuel Comb - Residential - Oil,,A,R,208968,Acenaphthylene,HAP,0.000003026984,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2302003200,Commercial Cooking,,A,R,56553,Benz[a]Anthracene,HAP,0.002057016,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2302003200,Commercial Cooking,,A,R,208968,Acenaphthylene,HAP,0.09833282,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2302002200,Commercial Cooking,,A,R,1330207,Xylenes (Mixed Isomers),HAP,6.893152,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2302003100,Commercial Cooking,,A,R,129000,Pyrene,HAP,0.2703104,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102006000,"Fuel Comb - Industrial Boilers, ICEs - Natural Gas",,A,R,VOC,Volatile Organic Compounds,CAP,0.1645067,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104006000,Fuel Comb - Residential - Natural Gas,,A,R,129000,Pyrene,HAP,0.000433851,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2285002006,Mobile - Locomotives,,A,R,7440020,Nickel,HAP,14.717538,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2285002006,Mobile - Locomotives,,A,R,1330207,Xylenes (Mixed Isomers),HAP,96.93054,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2505040120,Industrial Processes - Storage and Transfer,,A,R,VOC,Volatile Organic Compounds,CAP,7.827315,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801600420,Fires - Agricultural Field Burning,,A,R,1330207,Xylenes (Mixed Isomers),HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801600410,Fires - Agricultural Field Burning,,A,R,VOC,Volatile Organic Compounds,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801600500,Fires - Agricultural Field Burning,,A,R,1330207,Xylenes (Mixed Isomers),HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801600500,Fires - Agricultural Field Burning,,A,R,VOC,Volatile Organic Compounds,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801600320,Fires - Agricultural Field Burning,,A,R,1330207,Xylenes (Mixed Isomers),HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801600320,Fires - Agricultural Field Burning,,A,R,VOC,Volatile Organic Compounds,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2805035000,Agriculture - Livestock Waste,,A,R,108907,Chlorobenzene,HAP,0.06550014,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2805009100,Agriculture - Livestock Waste,,A,R,VOC,Volatile Organic Compounds,CAP,0.0002988146,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2805040000,Agriculture - Livestock Waste,,A,R,1330207,Xylenes (Mixed Isomers),HAP,0.202557,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103005000,Fuel Comb - Comm/Institutional - Oil,,A,R,208968,Acenaphthylene,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103011000,Fuel Comb - Comm/Institutional - Oil,,A,R,208968,Acenaphthylene,HAP,0.000000008736678,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103008000,Fuel Comb - Comm/Institutional - Biomass,,A,R,VOC,Volatile Organic Compounds,CAP,0.0484164,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104002000,Fuel Comb - Residential - Other,,A,R,129000,Pyrene,HAP,0.000001173947,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104007000,Fuel Comb - Residential - Other,,A,R,129000,Pyrene,HAP,0.00017104656,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104001000,Fuel Comb - Residential - Other,,A,R,127184,Tetrachloroethylene,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104001000,Fuel Comb - Residential - Other,,A,R,56553,Benz[a]Anthracene,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2460030999,Solvent - Consumer & Commercial Solvent Use,,A,R,VOC,Volatile Organic Compounds,CAP,0.06557654,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2460500000,Solvent - Consumer & Commercial Solvent Use,,A,R,VOC,Volatile Organic Compounds,CAP,0.7373351,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401090000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,1330207,Xylenes (Mixed Isomers),HAP,143.51282,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401030000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,VOC,Volatile Organic Compounds,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401030000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,1330207,Xylenes (Mixed Isomers),HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401008000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,VOC,Volatile Organic Compounds,CAP,6.320733,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401060000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,1330207,Xylenes (Mixed Isomers),HAP,1.459541,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401065000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,1330207,Xylenes (Mixed Isomers),HAP,19.531608,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102008000,"Fuel Comb - Industrial Boilers, ICEs - Biomass",,A,R,VOC,Volatile Organic Compounds,CAP,0.6037472,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008210,Fuel Comb - Residential - Wood,,A,R,208968,Acenaphthylene,HAP,0.8057336,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008220,Fuel Comb - Residential - Wood,,A,R,56553,Benz[a]Anthracene,HAP,0.006374376,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008310,Fuel Comb - Residential - Wood,,A,R,129000,Pyrene,HAP,0.7570213,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008330,Fuel Comb - Residential - Wood,,A,R,VOC,Volatile Organic Compounds,CAP,0.532304,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008610,Fuel Comb - Residential - Wood,,A,R,VOC,Volatile Organic Compounds,CAP,1.793575,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008620,Fuel Comb - Residential - Wood,,A,R,VOC,Volatile Organic Compounds,CAP,1.145895,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008630,Fuel Comb - Residential - Wood,,A,R,129000,Pyrene,HAP,0.0004419814,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008530,Fuel Comb - Residential - Wood,,A,R,129000,Pyrene,HAP,0.001325944,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104009000,Fuel Comb - Residential - Wood,,A,R,VOC,Volatile Organic Compounds,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2630020000,Waste Disposal,,A,R,1330207,Xylenes (Mixed Isomers),HAP,10.50465,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2610000100,Waste Disposal,,A,R,VOC,Volatile Organic Compounds,CAP,0.08364581,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2501011014,Miscellaneous Non-Industrial NEC,,A,R,VOC,Volatile Organic Compounds,CAP,0.01187565,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2501011011,Miscellaneous Non-Industrial NEC,,A,R,1330207,Xylenes (Mixed Isomers),HAP,15.657856,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2501012012,Miscellaneous Non-Industrial NEC,,A,R,1330207,Xylenes (Mixed Isomers),HAP,5.849228,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2501011012,Miscellaneous Non-Industrial NEC,,A,R,VOC,Volatile Organic Compounds,CAP,1.220349,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2810060100,Miscellaneous Non-Industrial NEC,,A,R,129000,Pyrene,HAP,0.000004224164,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2810060200,Miscellaneous Non-Industrial NEC,,A,R,VOC,Volatile Organic Compounds,CAP,0.00002908101,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102004002,"Fuel Comb - Industrial Boilers, ICEs - Oil",,A,R,7440439,Cadmium,HAP,0.360918,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102004001,"Fuel Comb - Industrial Boilers, ICEs - Oil",,A,R,56553,Benz[a]Anthracene,HAP,0.00004984106,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103002000,Fuel Comb - Comm/Institutional - Coal,,A,R,VOC,Volatile Organic Compounds,CAP,0,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103002000,Fuel Comb - Comm/Institutional - Coal,,A,R,75252,Bromoform,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2501050120,Bulk Gasoline Terminals,,A,R,VOC,Volatile Organic Compounds,CAP,19.53439,TON,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2501060201,Gas Stations,,A,R,108883,Toluene,HAP,69.32569,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2501060052,Gas Stations,,A,R,108883,Toluene,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2501060053,Gas Stations,,A,R,91203,Naphthalene,HAP,0.02126596,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102006000,"Fuel Comb - Industrial Boilers, ICEs - Natural Gas",,A,R,91203,Naphthalene,HAP,0.0383151,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2285002006,Mobile - Locomotives,,A,R,53703,"Dibenzo(a,h)Anthracene",HAP,0.003499574,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,75003,Ethyl Chloride,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,91203,Naphthalene,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801600500,Fires - Agricultural Field Burning,,A,R,108883,Toluene,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801600300,Fires - Agricultural Field Burning,,A,R,106990,"1,3-Butadiene",HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801600430,Fires - Agricultural Field Burning,,A,R,106990,"1,3-Butadiene",HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801500141,Fires - Agricultural Field Burning,,A,R,106990,"1,3-Butadiene",HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2801500150,Fires - Agricultural Field Burning,,A,R,108883,Toluene,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2805010100,Agriculture - Livestock Waste,,A,R,75003,Ethyl Chloride,HAP,0.0016263348,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2805009100,Agriculture - Livestock Waste,,A,R,75150,Carbon Disulfide,HAP,0.00204007,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2805002000,Agriculture - Livestock Waste,,A,R,108883,Toluene,HAP,122.75214,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2805007100,Agriculture - Livestock Waste,,A,R,75150,Carbon Disulfide,HAP,0.02793192,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103004001,Fuel Comb - Comm/Institutional - Oil,,A,R,85018,Phenanthrene,HAP,0.000009389582,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103004002,Fuel Comb - Comm/Institutional - Oil,,A,R,106990,"1,3-Butadiene",HAP,0.0003464564,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103004002,Fuel Comb - Comm/Institutional - Oil,,A,R,53703,"Dibenzo(a,h)Anthracene",HAP,0.000002219066,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103011000,Fuel Comb - Comm/Institutional - Oil,,A,R,85018,Phenanthrene,HAP,0.0000003640282,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103011000,Fuel Comb - Comm/Institutional - Oil,,A,R,91203,Naphthalene,HAP,0.00004050642,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104002000,Fuel Comb - Residential - Other,,A,R,67663,Chloroform,HAP,0.0002098874,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104002000,Fuel Comb - Residential - Other,,A,R,108054,Vinyl Acetate,HAP,0.00002703636,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104001000,Fuel Comb - Residential - Other,,A,R,75092,Methylene Chloride,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2460030999,Solvent - Consumer & Commercial Solvent Use,,A,R,75092,Methylene Chloride,HAP,0.03657182,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2460400000,Solvent - Consumer & Commercial Solvent Use,,A,R,75092,Methylene Chloride,HAP,0.0424705,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2461021000,Solvent - Consumer & Commercial Solvent Use,,A,R,91203,Naphthalene,HAP,85.40856,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401090000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,171,Glycol Ethers,HAP,20.38384,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401025000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,108883,Toluene,HAP,4.583218,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401060000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,108883,Toluene,HAP,0.5657228,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401065000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,171,Glycol Ethers,HAP,9.471116,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102008000,"Fuel Comb - Industrial Boilers, ICEs - Biomass",,A,R,108883,Toluene,HAP,13.876808,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008210,Fuel Comb - Residential - Wood,,A,R,106990,"1,3-Butadiene",HAP,5.068325,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008210,Fuel Comb - Residential - Wood,,A,R,91203,Naphthalene,HAP,9.833416,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008310,Fuel Comb - Residential - Wood,,A,R,106990,"1,3-Butadiene",HAP,47.36443,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104008610,Fuel Comb - Residential - Wood,,A,R,106990,"1,3-Butadiene",HAP,30.52691,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2104009000,Fuel Comb - Residential - Wood,,A,R,85018,Phenanthrene,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2610030000,Waste Disposal,,A,R,85018,Phenanthrene,HAP,0.5570622,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2610030000,Waste Disposal,,A,R,207089,Benzo[k]Fluoranthene,HAP,0.07002482,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102005000,"Fuel Comb - Industrial Boilers, ICEs - Oil",,A,R,85018,Phenanthrene,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102011000,"Fuel Comb - Industrial Boilers, ICEs - Oil",,A,R,53703,"Dibenzo(a,h)Anthracene",HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2102004001,"Fuel Comb - Industrial Boilers, ICEs - Oil",,A,R,53703,"Dibenzo(a,h)Anthracene",HAP,0.00002062388,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2103002000,Fuel Comb - Comm/Institutional - Coal,,A,R,85018,Phenanthrene,HAP,0,LB,2020NEI
+10,,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,88180,,NP,,2401001000,Solvent - Non-Industrial Surface Coating,,A,R,101688,"4,4-Methylenediphenyl Diisocyanate",HAP,0.14038862,LB,2020NEI
