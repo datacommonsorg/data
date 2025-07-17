@@ -1938,10 +1938,10 @@ class StatVarDataProcessor:
                 for prop in col_header_props:
                     # Use any property=value in the header tag or
                     # get the value from the column PVs
-                    value = col_pvs.get(prop, '')
+                    value = col_pvs.get(prop, None)
                     if '=' in prop:
                         prop, value = prop.split('=', 1)
-                    if value:
+                    if value is not None:
                         col_header_pvs[prop] = value
                 if col_header_pvs:
                     col_headers[col_index] = col_header_pvs
