@@ -6,7 +6,7 @@
       "provenance_url": "https://data.cdc.gov/resource/6nbv-ifib",
       "provenance_description": "Environmental Health Toxicology - Standardized Precipitation Evapotranspiration Index",
       "scripts": [
-        "download_script.py CDC_StandardizedPrecipitationEvapotranspirationIndex",
+        "download_script.py --import_name=CDC_StandardizedPrecipitationEvapotranspirationIndex",
         "parse_precipitation_index.py CDC_StandardizedPrecipitationEvapotranspirationIndex_input.csv output/CDC_StandardizedPrecipitationEvapotranspirationIndex_output.csv"
       ],
       "import_inputs": [
