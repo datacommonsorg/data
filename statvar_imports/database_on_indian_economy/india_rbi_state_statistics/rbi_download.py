@@ -14,7 +14,7 @@
 
 import os
 from absl import app, logging, flags
-import sys, numpy as np
+import sys
 from google.cloud import storage
 import pandas as pd
 
