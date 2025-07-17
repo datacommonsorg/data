@@ -31,20 +31,31 @@ Key Features:
 - Supports a dry-run mode to preview actions without downloading files.
 
 Example Usage:
-  python3 download_script.py CDC_StandardizedPrecipitationIndex \
+  python3 download_script.py --import_name=CDC_StandardizedPrecipitationIndex \
     --config_file=import_configs.json
 
-  python3 download_script.py CDC_OzoneCounty \
+  python3 download_script.py --import_name=CDC_OzoneCounty \
     --config_file=import_configs.json --dry_run
 """
 
-import argparse
 import json
-import logging
 import os
-import sys
 import urllib.parse
 import importlib.util
+from absl import app, flags, logging
+
+FLAGS = flags.FLAGS
+
+flags.DEFINE_string("import_name", None,
+                    "The name of the import configuration to process.")
+flags.DEFINE_string("config_file", "import_configs.json",
+                    "Path to the JSON configuration file.")
+flags.DEFINE_boolean(
+    "dry_run", False,
+    "If true, prints the actions that would be taken without downloading files."
+)
+flags.mark_flag_as_required("import_name")
+
 
 def _load_download_utility():
     """Dynamically loads the download_util_script module."""
@@ -54,36 +65,28 @@ def _load_download_utility():
 
     if not os.path.exists(util_path):
         # If not found, check in the original relative path structure
-        util_path = os.path.abspath(os.path.join(script_dir, '..', '..', '..', 'util', 'download_util_script.py'))
+        util_path = os.path.abspath(
+            os.path.join(script_dir, '..', '..', '..', 'util',
+                         'download_util_script.py'))
 
     if not os.path.exists(util_path):
-        print(
-            "Error: The 'download_util_script.py' utility could not be found in the expected locations.",
-            file=sys.stderr)
-        sys.exit(1)
+        logging.fatal(
+            "The 'download_util_script.py' utility could not be found in the expected locations."
+        )
 
-    spec = importlib.util.spec_from_file_location("download_util_script", util_path)
+    spec = importlib.util.spec_from_file_location("download_util_script",
+                                                  util_path)
     if spec and spec.loader:
         download_util = importlib.util.module_from_spec(spec)
-        sys.modules["download_util_script"] = download_util
         spec.loader.exec_module(download_util)
         return download_util
     else:
-        print(
-            f"Error: Could not load the 'download_util_script.py' utility from path: {util_path}",
-            file=sys.stderr)
-        sys.exit(1)
+        logging.fatal(
+            f"Could not load the 'download_util_script.py' utility from path: {util_path}"
+        )
+
 
 download_util = _load_download_utility()
-
-
-def _configure_logging():
-    """Configures the logging format and level."""
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] - %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
-    )
 
 
 def _get_inferred_filename(url: str, is_zip: bool) -> str:
@@ -185,10 +188,12 @@ def process_downloads(import_name: str, config_file: str,
         logging.info(f"Target local file: {target_filename}")
 
         if dry_run:
-            print(f"[DRY RUN] Would download from '{full_url}' to '{target_filename}'")
+            logging.info(
+                f"[DRY RUN] Would download from '{full_url}' to '{target_filename}'"
+            )
             inferred_filename = _get_inferred_filename(url, is_zip)
             if inferred_filename != os.path.basename(target_filename):
-                print(
+                logging.info(
                     f"[DRY RUN] Would rename '{inferred_filename}' to '{os.path.basename(target_filename)}'"
                 )
             continue
@@ -209,7 +214,8 @@ def process_downloads(import_name: str, config_file: str,
         # Use the original base URL to infer the filename, as the full URL has query params
         inferred_filename = _get_inferred_filename(url, is_zip)
         downloaded_path = os.path.join(target_dir, inferred_filename)
-        target_path = os.path.join(target_dir, os.path.basename(target_filename))
+        target_path = os.path.join(target_dir,
+                                   os.path.basename(target_filename))
 
         if downloaded_path != target_path:
             logging.info(
@@ -227,42 +233,22 @@ def process_downloads(import_name: str, config_file: str,
     return all_success
 
 
-def main():
+def main(argv):
     """
     Main function to parse arguments and initiate the download process.
     """
-    _configure_logging()
+    if len(argv) > 1:
+        raise app.UsageError("Too many command-line arguments.")
 
-    parser = argparse.ArgumentParser(
-        description="Download data files based on a JSON configuration.",
-        formatter_class=argparse.RawTextHelpFormatter,
-    )
-    parser.add_argument(
-        "import_name",
-        help="The name of the import configuration to process from the config file.",
-    )
-    parser.add_argument(
-        "--config_file",
-        default="import_configs.json",
-        help="Path to the JSON configuration file (default: import_configs.json).",
-    )
-    parser.add_argument(
-        "--dry_run",
-        action="store_true",
-        help="If set, prints the actions that would be taken without downloading files.",
-    )
-
-    args = parser.parse_args()
-
-    if args.dry_run:
+    if FLAGS.dry_run:
         logging.info("--- Starting DRY RUN mode ---")
 
-    if not process_downloads(args.import_name, args.config_file, args.dry_run):
-        logging.error("The download process encountered errors.")
-        sys.exit(1)
+    if not process_downloads(FLAGS.import_name, FLAGS.config_file,
+                             FLAGS.dry_run):
+        logging.fatal("The download process encountered errors.")
 
     logging.info("Download process completed successfully.")
 
 
 if __name__ == "__main__":
-    main()
+    app.run(main)

@@ -7,7 +7,7 @@
       "provenance_url": "https://data.cdc.gov/resource/xbk2-5i4e",
       "provenance_description": "Environmental Health Toxicology - Standardized Precipitation Index",
       "scripts": [
-        "download_script.py CDC_StandardizedPrecipitationIndex",
+        "download_script.py --import_name=CDC_StandardizedPrecipitationIndex",
         "parse_precipitation_index.py CDC_StandardizedPrecipitationIndex_input.csv output/CDC_StandardizedPrecipitationIndex_output.csv"
       ],
       "import_inputs": [
