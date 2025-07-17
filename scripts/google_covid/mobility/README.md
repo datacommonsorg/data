@@ -9,16 +9,10 @@ Author: @edumorlom
 1. [Import Artifacts](#import-artifacts)
 1. [Generating Artifacts](#generating-artifacts)
 
-## About the Dataset
-
-### Download URL
-
-The CSV file is available for download from https://www.google.com/covid19/mobility/
-
-### Overview
+###  Import Overview
 
 This dataset shows how visits and length of stay at different places has changed compared to a baseline every day, with the earliest data starting February 15th, 2020.
-The baseline is the median value that corresponds to the day of the week during the 5-week period from January 3rd to February 6th, 2020.
+The baseline is the median value that corresponds to the day of the week during the 5-week period from January 3rd to October 15th, 2022.
 
 This data set is divided into six headline stats:
 
@@ -43,43 +37,33 @@ This is further broken down into Area/State/County.
 Date
 Type of Place
 
+### Source URL
+
+The CSV file is available for download from https://www.google.com/covid19/mobility/
+
+### Import Type: API
+
+### Release Frequency: P1D
+
+###  Autorefresh Type: Fully Autorefresh:
 ## Import Artifacts
 
 ### Raw Data
 - `data.csv` gets downloaded.
 
+### Script Execution Details
+``` bash
+python3 covidmobility.py
+```
+To run the unit tests for covidmobility.py run:
+```bash
+python3 -m unittest covidmobility_test.py
+```
+
 ### Cleaned CSV
 - `covid_mobility.csv` gets generated.
-
-### Notes
-The geoIds of the U.S Counties was generated using the County's real FIPS code from:
-https://www.nrcs.usda.gov/wps/portal/nrcs/detail/national/home/?cid=nrcs143_013697
-
-For example, Miami-Dade County would be geoId/12086 because Miami-Dade's FIPS code is 12086.
-The USDA website above lists only the unique part of the name, that is "Miami-Dade" instead of "Miami-Dade County".
-
-The words ["County", "Parish", "Borough"] were appended to all names except those that were Cities, Parishes or Boroughs.
-
-Some counties have two different keys that map to the same value/geoId, though.
-For example:
-
-{
-    "De Kalb County": "geoId/17037",
-    "DeKalb County": "geoId/17037"
-}
-
-The reason for this is because the Google Mobility dataset uses an alternative name to refer to the same region.
-Any modifications to the names were duplicated.
 
 ## Generating Cleaned CSV
 To generate the output MCF `covid_mobility.csv`, run
 
-``` bash
-python3 covidmobility.py
-```
 
-To run the unit tests for covidmobility.py run:
-
-```bash
-python3 -m unittest covidmobility_test.py
-```
