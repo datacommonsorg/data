@@ -188,7 +188,7 @@ class PropertyValueMapper:
                             #pvs[prop] = value
                             normalize = True
                             if '#' in prop or '=' in value:
-                                # Value is a formula. e value as a string.
+                                # Value is a formula. Set value as a string.
                                 normalize = False
                             pv_utils.add_key_value(prop,
                                                    value,
@@ -224,6 +224,7 @@ class PropertyValueMapper:
                     v,
                     pvs_dict,
                     self._config.get('multi_value_properties', {}),
+                    normalize=False
                 )
             # Track the max number of words in any of the keys.
             # This is used when splitting input-string for lookups.
