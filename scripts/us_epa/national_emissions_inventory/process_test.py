@@ -40,10 +40,7 @@ class TestProcess(unittest.TestCase):
     Comparing the data with the expected files.
     """
     _TEST_DATA_FILES = os.listdir(TEST_DATASET_DIR)
-    _IP_DATA = [
-        os.path.join(TEST_DATASET_DIR, file_name)
-        for file_name in _TEST_DATA_FILES
-    ]
+    _IP_DATA = [os.path.join(TEST_DATASET_DIR, file_name) for file_name in _TEST_DATA_FILES]
 
     def __init__(self, methodName: str = ...) -> None:
         super().__init__(methodName)
@@ -53,8 +50,8 @@ class TestProcess(unittest.TestCase):
             mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
             tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
 
-            base = USAirEmissionTrends(self._IP_DATA, cleaned_csv_file_path,
-                                       mcf_file_path, tmcf_file_path)
+            base = USAirEmissionTrends(self._IP_DATA, cleaned_csv_file_path, mcf_file_path,
+                                       tmcf_file_path)
             base.generate_csv()
             base.generate_mcf()
             base.generate_tmcf()
@@ -73,39 +70,30 @@ class TestProcess(unittest.TestCase):
         This method is required to test between output generated
         preprocess script and excepted output files like MCF File
         """
-        expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                              "national_emissions.mcf")
+        expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR, "national_emissions.mcf")
 
-        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                               "national_emissions.tmcf")
+        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR, "national_emissions.tmcf")
 
-        with open(expected_mcf_file_path,
-                  encoding="UTF-8") as expected_mcf_file:
+        with open(expected_mcf_file_path, encoding="UTF-8") as expected_mcf_file:
             expected_mcf_data = expected_mcf_file.read()
 
-        with open(expected_tmcf_file_path,
-                  encoding="UTF-8") as expected_tmcf_file:
+        with open(expected_tmcf_file_path, encoding="UTF-8") as expected_tmcf_file:
             expected_tmcf_data = expected_tmcf_file.read()
 
-        self.assertEqual(expected_mcf_data.strip(),
-                         self.actual_mcf_data.strip())
-        self.assertEqual(expected_tmcf_data.strip(),
-                         self.actual_tmcf_data.strip())
+        self.assertEqual(expected_mcf_data.strip(), self.actual_mcf_data.strip())
+        self.assertEqual(expected_tmcf_data.strip(), self.actual_tmcf_data.strip())
 
     def test_observation_data(self):
         """
         This method is required to test between output generated
         preprocess script and excepted output files like CSV
         """
-        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                              "national_emissions.csv")
+        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR, "national_emissions.csv")
 
-        with open(expected_csv_file_path,
-                  encoding="utf-8") as expected_csv_file:
+        with open(expected_csv_file_path, encoding="utf-8") as expected_csv_file:
             expected_csv_data = expected_csv_file.read()
 
-        self.assertEqual(expected_csv_data.strip(),
-                         self.actual_csv_data.strip())
+        self.assertEqual(expected_csv_data.strip(), self.actual_csv_data.strip())
 
 
 if __name__ == '__main__':
