@@ -219,13 +219,12 @@ class PropertyValueMapper:
                 pvs_input = {namespace: pvs_input}
             for p, v in pvs_input.items():
                 num_keys_added += 1
-                pv_utils.add_key_value(
-                    p,
-                    v,
-                    pvs_dict,
-                    self._config.get('multi_value_properties', {}),
-                    normalize=False
-                )
+                pv_utils.add_key_value(p,
+                                       v,
+                                       pvs_dict,
+                                       self._config.get(
+                                           'multi_value_properties', {}),
+                                       normalize=False)
             # Track the max number of words in any of the keys.
             # This is used when splitting input-string for lookups.
             num_words_key = len(pv_utils.get_words(key, word_delimiter))
