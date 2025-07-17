@@ -5,7 +5,7 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
       "provenance_description": "US nces school data for district",
-      "scripts": ["process.py"],
+      "scripts": ["mkdir -p gcs_output/school_district/input_files","gsutil -m cp -r gs://unresolved_mcf/us_nces/demographics/school_district/semi_automation_input_files/* gcs_output/school_district/input_files/","process.py"],
       "source_files": ["input_files/*"],
       "import_inputs": [
         {

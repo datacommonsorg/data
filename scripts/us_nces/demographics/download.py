@@ -59,9 +59,8 @@ flags.DEFINE_list("years_to_download", None,
 flags.mark_flag_as_required("import_name")
 flags.DEFINE_string(
     'config_file',
-    'gs://datcom-import-test/scripts/us_nces/demographics/us_nces_demographics_school_id_list.json',
+    'gs://datcom-prod-imports/scripts/us_nces/demographics/school_id_list.json',
     'Path to config file')
-
 
 # function to get the folder structure  path for GCS output
 def gcs_output_path(import_name: str, year: str) -> str:
