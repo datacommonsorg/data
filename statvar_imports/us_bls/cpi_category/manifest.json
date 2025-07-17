@@ -2,7 +2,7 @@
     "import_specifications": [
       {
         "import_name": "BLS_CPI_Category",
-        "curator_emails": [],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://www.bls.gov/cpi/tables/supplemental-files/",
         "provenance_description": "Consumer Price Index by Category",
         "scripts": ["cpi_category_download.py",
