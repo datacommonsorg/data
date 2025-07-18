@@ -1,0 +1,6 @@
+Facility Id,FRS Id,Facility Name,Basin,Reported City,Reported State,Reported Zip Code,Reported Address,Reported County,Reported Latitude,Reported Longitude,Primary NAICS Code,Industry Type (subparts),Total reported emissions from Gathering & Boosting,CO2 emissions (non-biogenic) ,Methane (CH4) emissions ,Nitrous Oxide (N2O) emissions 
+1012507,110070082329,220 Gulf Coast Basin,"220 - Gulf Coast Basin (LA, TX)",Houston,TX,77002,"811 Louisiana, Suite 2100",HARRIS COUNTY,29.75993,-95.366413,211111,W-GB,44304.292,16724.9,27570.75,8.642
+1012156,110071161819,260 - East Texas Basin Gathering/Boosting,260 - East Texas Basin,Houston,TX,77079,737 Eldridge Parkway,HARRIS COUNTY,29.77455,-95.61949,211111,W-GB,46921.114,35166.1,11734.75,20.264
+1012155,110071161818,345 - Arkoma Basin Gathering/Boosting,345 - Arkoma Basin,Houston,TX,77079,737 Eldridge Parkway,HARRIS COUNTY,29.77455,-95.61949,211111,W-GB,78994.21,65490.2,13468.25,35.76
+1012472,110070082329,345 Arkoma Basin,345 - Arkoma Basin,Houston,TX,77002,"811 Louisiana, Suite 2100",HARRIS COUNTY,29.75993,-95.366413,211111,W-GB,55733.472,51896.2,3810.75,26.522
+1012466,110070082329,350 South Oklahoma Folded Belt,350 - South Oklahoma Folded Belt,Houston,TX,77002,"811 Louisiana, Suite 2100",HARRIS COUNTY,29.75993,-95.366413,211111,W-GB,177420.494,57531.8,119858,30.694
