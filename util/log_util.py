@@ -14,7 +14,9 @@
 """Utility functions for logging."""
 
 import json
+import logging
 import google.cloud.logging
+from absl import logging as absl_logging
 
 
 def log_struct(level: str, message: str, labels: dict):
@@ -67,12 +69,17 @@ def log_metric(log_type: str, level: str, message: str, metric_labels: dict):
 def configure_cloud_logging():
     """Configure Google Cloud Logging handler for structured logging with proper severity.
     
-    Handles both standard Python logging and absl logging since absl uses Python's 
-    logging system internally. Maps log levels to GCP severity (INFO→INFO, ERROR→ERROR).
-    
-    Note: Prefer calling this after app.run() begins so that absl's logging handlers 
-    are already set up. Both handlers will coexist - ABSLHandler for console output 
-    and CloudLoggingHandler for structured logs with proper severity.
+    Removes ABSL handler if present to prevent log duplication between stderr and Cloud Logging.
+    This ensures logs appear only in Cloud Logging with proper severity levels.
     """
+    # Remove ABSL handler if present to prevent duplication
+    absl_handler = absl_logging.get_absl_handler()
+    if absl_handler in logging.root.handlers:
+        logging.root.handlers.remove(absl_handler)
+        logging.info(
+            "ABSL handler found and removed to prevent log duplication")
+    else:
+        logging.info("ABSL handler not found in root handlers")
+
     client = google.cloud.logging.Client()
     client.setup_logging()
