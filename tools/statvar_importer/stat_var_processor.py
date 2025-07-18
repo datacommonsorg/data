@@ -66,6 +66,8 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
 import eval_functions
+from log_util import configure_cloud_logging
+from cloudrun_util import running_on_cloudrun
 from utils import (capitalize_first_char, is_place_dcid,
                    get_observation_date_format, get_observation_period_for_date,
                    pvs_has_any_prop, str_from_number, prepare_input_data)
@@ -2786,6 +2788,14 @@ def process(
 
 
 def main(_):
+    # Configure cloud logging if running on CloudRun
+    if running_on_cloudrun():
+        logging.info("Running under Cloud Run detected.")
+        configure_cloud_logging()
+        logging.info("Google Cloud Logging configured.")
+    else:
+        logging.info("Not running under Cloud Run")
+
     # uncomment to run pprof
     # start_pprof_server(port=8123)
 
