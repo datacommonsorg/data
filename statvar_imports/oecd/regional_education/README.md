@@ -88,19 +88,6 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py --input_data=input
 
 python3 stat_var_processor.py --input_data=input/oecd_regional_education_data.csv --pv_map=oecd_regional_education_pvmap.csv --config_file=oecd_regional_education_metadata.csv --output_path=output/oecd_regional_education
 Purpose: Generates StatVar MCF, cleans observation CSV, TMCF.
+
 ```
-
-***Script 3:*** Java Linting Tool
-
-**Usage**:
-
-```bash
-java -jar '/path/to/datacommons-import-tool.jar' lint \
-  '/path/to/IndiaNSS_HealthAilments.csv' \
-  '/path/to/IndiaNSS_HealthAilments.tmcf'
-```
-
-**Purpose**: Validates final CSV+TMCF for formatting and semantic consistency before ingestion
-
----
 
