@@ -111,14 +111,14 @@ def process_downloads(import_name: str, config_file: str,
         with open(config_file, "r") as f:
             configs = json.load(f)
     except (IOError, json.JSONDecodeError) as e:
-        logging.error(f"Failed to read or parse config file '{config_file}': {e}")
+        logging.fatal(f"Failed to read or parse config file '{config_file}': {e}")
         return False
 
     import_config = next(
         (c for c in configs if c.get("import_name") == import_name), None)
 
     if not import_config:
-        logging.error(
+        logging.fatal(
             f"Import name '{import_name}' not found in config file '{config_file}'."
         )
         return False
@@ -128,7 +128,7 @@ def process_downloads(import_name: str, config_file: str,
         target_filename = file_info.get("input_file_name")
 
         if not url or not target_filename:
-            logging.warning(
+            logging.fatal(
                 f"Skipping file config due to missing 'url' or 'input_file_name': {file_info}"
             )
             return False
@@ -151,11 +151,11 @@ def process_downloads(import_name: str, config_file: str,
                             f"Successfully retrieved record count: {record_count}. Full URL: {full_url}"
                         )
                     else:
-                        logging.warning(
+                        logging.fatal(
                             f"Failed to get record count (HTTP {response.status}). Proceeding with base URL."
                         )
             except Exception as e:
-                logging.warning(
+                logging.fatal(
                     f"Could not get record count. Proceeding with base URL. Error: {e}"
                 )
 
@@ -180,7 +180,7 @@ def process_downloads(import_name: str, config_file: str,
                                               unzip=is_zip)
 
         if not success:
-            logging.error(f"Download failed for URL: {full_url}")
+            logging.fatal(f"Download failed for URL: {full_url}")
             return False
 
         logging.info(f"Successfully downloaded content from: {full_url}")
