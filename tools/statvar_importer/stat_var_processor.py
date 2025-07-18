@@ -1677,8 +1677,10 @@ class StatVarDataProcessor:
                         prop,
                         value,
                         pvs,
-                        self._config.get('multi_value_properties', {}),
+                        multi_value_keys=self._config.get(
+                            'multi_value_properties', {}),
                         overwrite=False,
+                        normalize=False,
                     )
                     logging.level_debug() and logging.log(
                         2, f'Adding {value} for {prop}:{pvs.get(prop)}')
@@ -1938,10 +1940,10 @@ class StatVarDataProcessor:
                 for prop in col_header_props:
                     # Use any property=value in the header tag or
                     # get the value from the column PVs
-                    value = col_pvs.get(prop, '')
+                    value = col_pvs.get(prop, None)
                     if '=' in prop:
                         prop, value = prop.split('=', 1)
-                    if value:
+                    if value is not None:
                         col_header_pvs[prop] = value
                 if col_header_pvs:
                     col_headers[col_index] = col_header_pvs
@@ -2085,22 +2087,22 @@ class StatVarDataProcessor:
                     if (value is not None and
                             prop not in self._internal_reference_keys and
                             not self.get_reference_names(value)):
-                        pv_utils.add_key_value(prop,
-                                               value,
-                                               row_pvs,
-                                               self._config.get(
-                                                   'multi_value_properties',
-                                                   {}),
-                                               normalize=False)
+                        pv_utils.add_key_value(
+                            prop,
+                            value,
+                            row_pvs,
+                            multi_value_keys=self._config.get(
+                                'multi_value_properties', {}),
+                            normalize=False)
                 for prop, value in row_col_pvs.get(col_index, {}).items():
                     if value is not None and prop not in self._internal_reference_keys:
-                        pv_utils.add_key_value(prop,
-                                               value,
-                                               row_pvs,
-                                               self._config.get(
-                                                   'multi_value_properties',
-                                                   {}),
-                                               normalize=False)
+                        pv_utils.add_key_value(
+                            prop,
+                            value,
+                            row_pvs,
+                            multi_value_keys=self._config.get(
+                                'multi_value_properties', {}),
+                            normalize=False)
         if config_flags.get_value_type(row_pvs.get('#IgnoreRow'), False):
             logging.level_debug() and logging.log(
                 2, f'Ignoring row: {row} in {self._file_context}')
