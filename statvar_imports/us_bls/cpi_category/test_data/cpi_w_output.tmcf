@@ -1,0 +1,10 @@
+Node: E:cpi_w_output->E0
+observationAbout: C:cpi_w_output->observationAbout
+observationDate: C:cpi_w_output->observationDate
+value: C:cpi_w_output->value
+variableMeasured: C:cpi_w_output->variableMeasured
+unit: C:cpi_w_output->unit
+scalingFactor: C:cpi_w_output->scalingFactor
+measurementMethod: C:cpi_w_output->measurementMethod
+observationPeriod: C:cpi_w_output->observationPeriod
+typeOf: dcs:StatVarObservation
