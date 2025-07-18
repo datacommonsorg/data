@@ -1,0 +1,11 @@
+Node: E:BLSJolts->E0
+typeOf: Country
+dcid: country/USA
+
+Node: E:BLSJolts->E1
+typeOf: dcs:StatVarObservation
+variableMeasured: C:BLSJolts->StatisticalVariable
+observationDate: C:BLSJolts->Date
+observationPeriod: P1M
+observationAbout: E:BLSJolts->E0
+value: C:BLSJolts->Value
