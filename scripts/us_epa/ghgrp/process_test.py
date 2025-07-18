@@ -27,8 +27,8 @@ from us_epa.ghgrp import process
 from us_epa.util import crosswalk as cw
 
 _CODEDIR = os.path.dirname(os.path.realpath(__file__))
-_RAW_DATA_DIR = os.path.join(_CODEDIR, 'test_data', 'input')
-_EXPECTED_DIR = os.path.join(_CODEDIR, 'test_data', 'expected')
+_RAW_DATA_DIR = os.path.join(_CODEDIR, 'test_data')
+_EXPECTED_DIR = os.path.join(_CODEDIR, 'test_data')
 
 _CROSSWALK_PATH = os.path.join(_RAW_DATA_DIR, 'crosswalks.csv')
 
