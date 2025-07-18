@@ -151,7 +151,6 @@ The following validations are currently supported:
 | `DELETED_COUNT`           | Checks that the total number of deleted points is within a threshold.    | `differ`          | `threshold` (integer, defaults to 0)                   |
 | `MODIFIED_COUNT`          | Checks that the number of modified points is the same for all StatVars.  | `differ`          | None                                                   |
 | `ADDED_COUNT`             | Checks that the number of added points is the same for all StatVars.     | `differ`          | None                                                   |
-| `UNMODIFIED_COUNT`        | Checks that the number of unmodified points is the same for all StatVars. | `differ`          | None                                                   |
 | `NUM_PLACES_CONSISTENT`   | Checks that the number of places is the same for all StatVars.           | `stats`           | None                                                   |
 | `NUM_PLACES_COUNT`        | Checks that the number of places is within a defined range.              | `stats`           | `minimum`, `maximum`, or `value` (integer)             |
 | `NUM_OBSERVATIONS_CHECK`  | Checks that the number of observations is within a defined range.        | `stats`           | `minimum`, `maximum`, or `value` (integer)             |

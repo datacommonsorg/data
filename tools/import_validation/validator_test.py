@@ -181,29 +181,6 @@ class TestAddedCountValidation(unittest.TestCase):
         self.assertIn('missing required column', result.message)
 
 
-class TestUnmodifiedCountValidation(unittest.TestCase):
-    '''Test Class for the UNMODIFIED_COUNT validation rule.'''
-
-    def setUp(self):
-        self.validator = Validator()
-
-    def test_unmodified_count_passes_on_empty_dataframe(self):
-        test_df = pd.DataFrame({'UNMODIFIED': []})
-        result = self.validator.validate_unmodified_count(test_df, {})
-        self.assertEqual(result.status, ValidationStatus.PASSED)
-        self.assertEqual(result.rows_processed, 0)
-        self.assertEqual(result.rows_succeeded, 0)
-        self.assertEqual(result.rows_failed, 0)
-
-    def test_unmodified_count_is_always_successful(self):
-        test_df = pd.DataFrame({'UNMODIFIED': [1, 2]})  # Inconsistent
-        result = self.validator.validate_unmodified_count(test_df, {})
-        self.assertEqual(result.status, ValidationStatus.PASSED)
-        self.assertEqual(result.rows_processed, 0)
-        self.assertEqual(result.rows_succeeded, 0)
-        self.assertEqual(result.rows_failed, 0)
-
-
 class TestNumPlacesConsistentValidation(unittest.TestCase):
     '''Test Class for the NUM_PLACES_CONSISTENT validation rule.'''
 

@@ -87,8 +87,6 @@ class ValidationRunner:
             'MODIFIED_COUNT':
                 (self.validator.validate_modified_count, 'differ'),
             'ADDED_COUNT': (self.validator.validate_added_count, 'differ'),
-            'UNMODIFIED_COUNT':
-                (self.validator.validate_unmodified_count, 'differ'),
             'NUM_PLACES_CONSISTENT':
                 (self.validator.validate_num_places_consistent, 'stats'),
             'NUM_PLACES_COUNT':

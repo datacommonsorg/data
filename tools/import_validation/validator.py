@@ -263,27 +263,6 @@ class Validator:
                                 rows_succeeded=rows_processed,
                                 rows_failed=0)
 
-    def validate_unmodified_count(self, differ_df: pd.DataFrame,
-                                  params: dict) -> ValidationResult:
-        """Checks if the number of unmodified points is the same for all StatVars.
-
-    Note: The logic for this validation is currently disabled.
-
-    Args:
-      differ_df: A DataFrame containing the differ output.
-      params: A dictionary containing the validation parameters.
-
-    Returns:
-      A ValidationResult object, which is always PASSED.
-    """
-        # The logic for this validation is currently disabled.
-        # This method is a placeholder to ensure the validation "passes".
-        return ValidationResult(ValidationStatus.PASSED,
-                                'UNMODIFIED_COUNT',
-                                rows_processed=0,
-                                rows_succeeded=0,
-                                rows_failed=0)
-
     def validate_num_places_consistent(self, stats_df: pd.DataFrame,
                                        params: dict) -> ValidationResult:
         """Checks if the number of places is the same for all StatVars.
