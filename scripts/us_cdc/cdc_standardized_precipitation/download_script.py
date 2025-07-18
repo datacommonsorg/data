@@ -40,9 +40,18 @@ Example Usage:
 
 import json
 import os
+import sys
 import urllib.parse
-import importlib.util
+import urllib.request
 from absl import app, flags, logging
+
+# Add the project root to the Python path for robust module imports
+script_dir = os.path.dirname(os.path.abspath(__file__))
+base_dir = os.path.abspath(os.path.join(script_dir, '..', '..', '..'))
+if base_dir not in sys.path:
+    sys.path.append(base_dir)
+
+from util import download_util_script as download_util
 
 FLAGS = flags.FLAGS
 
@@ -55,33 +64,6 @@ flags.DEFINE_boolean(
     "If true, prints the actions that would be taken without downloading files."
 )
 flags.mark_flag_as_required("import_name")
-
-
-def _load_download_utility():
-    """Dynamically loads the download_util_script module."""
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    # Path to the root of the data import scripts
-    base_dir = os.path.abspath(os.path.join(script_dir, '..', '..', '..'))
-    util_path = os.path.join(base_dir, 'util/', 'download_util_script.py')
-
-    if not os.path.exists(util_path):
-        logging.fatal(
-            f"The 'download_util_script.py' utility could not be found at the expected path: {util_path}"
-        )
-
-    spec = importlib.util.spec_from_file_location("download_util_script",
-                                                  util_path)
-    if spec and spec.loader:
-        download_util = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(download_util)
-        return download_util
-    else:
-        logging.fatal(
-            f"Could not load the 'download_util_script.py' utility from path: {util_path}"
-        )
-
-
-download_util = _load_download_utility()
 
 
 def _get_inferred_filename(url: str, is_zip: bool) -> str:
@@ -141,7 +123,6 @@ def process_downloads(import_name: str, config_file: str,
         )
         return False
 
-    all_success = True
     for file_info in import_config.get("files", []):
         url = file_info.get("url")
         target_filename = file_info.get("input_file_name")
@@ -150,8 +131,7 @@ def process_downloads(import_name: str, config_file: str,
             logging.warning(
                 f"Skipping file config due to missing 'url' or 'input_file_name': {file_info}"
             )
-            all_success = False
-            continue
+            return False
 
         target_dir = os.path.dirname(target_filename) or "."
         is_zip = url.lower().endswith(".zip")
@@ -201,8 +181,7 @@ def process_downloads(import_name: str, config_file: str,
 
         if not success:
             logging.error(f"Download failed for URL: {full_url}")
-            all_success = False
-            continue
+            return False
 
         logging.info(f"Successfully downloaded content from: {full_url}")
 
@@ -220,12 +199,12 @@ def process_downloads(import_name: str, config_file: str,
                 os.rename(downloaded_path, target_path)
                 logging.info(f"Successfully renamed file to: {target_path}")
             except OSError as e:
-                logging.error(
+                logging.fatal(
                     f"Failed to rename '{downloaded_path}' to '{target_path}': {e}"
                 )
-                all_success = False
+                return False
 
-    return all_success
+    return True
 
 
 def main(argv):
@@ -241,8 +220,8 @@ def main(argv):
     if not process_downloads(FLAGS.import_name, FLAGS.config_file,
                              FLAGS.dry_run):
         logging.fatal("The download process encountered errors.")
-
-    logging.info("Download process completed successfully.")
+    else:
+        logging.info("Download process completed successfully.")
 
 
 if __name__ == "__main__":
