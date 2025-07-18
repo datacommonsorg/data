@@ -1,7 +1,6 @@
 import sys
 import os
-
-# Allows module imports to work when running as a script
+import shutil
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
@@ -38,8 +37,9 @@ def check_function_on_file_gives_golden(fn, inp_f, inp_csv_f, golden_f):
     """
     Given a function fn that takes in:
     - input file location `inp_f`
-    - output file location (not passed in as an argument to this function)
-    - input CSV file location `inp_csv_f`
+    - output file location (second arg to process_csv, here a dummy)
+    - input CSV structure file location `inp_csv_f`
+    - local output file location (fourth arg to process_csv where pandas.to_csv writes)
 
     Calls the function with those inputs.
 
@@ -48,11 +48,14 @@ def check_function_on_file_gives_golden(fn, inp_f, inp_csv_f, golden_f):
     Returns True if the check passes, False otherwise.
     """
     with tempfile.TemporaryDirectory() as tmp_dir:
-        test_csv_file = os.path.join(module_dir_, inp_f)
+    
+        temp_input_file = os.path.join(tmp_dir, os.path.basename(inp_f))
+        shutil.copy(os.path.join(module_dir_, inp_f), temp_input_file)
+        test_csv_file = temp_input_file 
         result_csv_file = os.path.join(tmp_dir, "temp_test_output.tmp")
         expected_csv_file = os.path.join(module_dir_, golden_f)
-        fn(test_csv_file, result_csv_file, inp_csv_f)
-
+        output_path=" test_data/nri_counties_table.csv"
+        fn(test_csv_file, output_path, inp_csv_f, result_csv_file)
         with open(result_csv_file, "r") as result_f:
             result_str: str = result_f.read()
             with open(expected_csv_file, "r") as expect_f:
