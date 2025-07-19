@@ -1,0 +1,12 @@
+parameter,value
+url,https://www.eda.gov/sites/default/files/2023-04/EDA-Investments-FY12-to-FY21.xlsx
+description,Table 2. Number of EDA investments and estimated outcomes by Applicant State: FY 2012-2021
+#place_type,AdministrativeArea1
+#places_within,country/USA
+start_date,2021
+end_date,2021
+release_frequency,Yearly
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,measurementMethod"
+header_rows,2

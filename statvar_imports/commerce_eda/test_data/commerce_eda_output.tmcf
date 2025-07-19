@@ -1,0 +1,9 @@
+Node: E:commerce_eda_output->E0
+observationAbout: C:commerce_eda_output->observationAbout
+observationDate: C:commerce_eda_output->observationDate
+variableMeasured: C:commerce_eda_output->variableMeasured
+value: C:commerce_eda_output->value
+unit: C:commerce_eda_output->unit
+scalingFactor: C:commerce_eda_output->scalingFactor
+measurementMethod: C:commerce_eda_output->measurementMethod
+typeOf: dcs:StatVarObservation
