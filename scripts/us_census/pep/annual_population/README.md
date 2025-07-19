@@ -36,17 +36,16 @@ Run the test cases
 
 ### Import Procedure
 
-The below script will download the data, generate csv, mcf and tmcf files.
+Note:
+The json file has to be included with the urls (only from year 1990 - 2020) that has a fake html content that escapes 200 ok status check failure. If not provided, the url with the fake 200 ok status will be logged and the process of download gets terminated. For the future years, the fake 200 ok status url will be logged without terminating the process of download and search for the next depreciated year.
 
-`python3 scripts/us_census/pep/annual_population/preprocess.py`
+Ways to process (with modes)
+when the file 'preprocess.py' is ran with the flag --mode=download, it will only download the files and put it in the input_files directory. i.e. python3 process.py mode=download --config_path=
 
-To download data, run:
+For example: --config_path=unresolved_mcf/us_census/pep/annual_population/skip_url.json
 
-`python3 scripts/us_census/pep/annual_population/preprocess.py` --mode=download
+when the file 'prprocess.py' is ran with the flag --mode=process, it will process the downloaded files and put it in the output directory. i.e. python3 process.py mode=process
 
-To process data, run:
+Note: process mode doesn't need a config_path flag
 
-`python3 scripts/us_census/pep/annual_population/preprocess.py` --mode=process
-
-Downloaded files will be inside 'scripts/us_census/pep/annual_population/input_files' directory and output will be generated on 'scripts/us_census/pep/annual_population/output_files' directory.
-
+when the file 'preprocess .py' is ran without any flag, it will download and process the files and keep it in the respective directories as mentioned above. i.e. python3 process.py --config_path=
