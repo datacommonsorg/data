@@ -90,9 +90,22 @@
             "35 TO 64": { "age": "[35 64 Years]" },
             ">= 65": { "age": "[65 - Years]" }
         },
-        "Gender": {
-            "Male": { "gender": "Male" },
-            "Female": { "gender": "Female" }
+        "Sex": {
+            "Male": { "sex": "Male" },
+            "Female": { "sex": "Female" }
         }
-    }
+    },
+
+    "INPUT_HTML_FILES": "./source_data/html_files/",
+
+    "INPUT_CSV_FILES": "./source_data/csv_files",
+
+    "COMBINED_INPUT_CSV_FILE": "./input_files/",
+
+    "OUTPUT_PATH": "./output_files",
+
+    "PAGE_START": "//*[@id='page-start']",
+
+    "NO_DATA_ELEMENT": "//h2[contains(text(), 'Data') and contains(text(), 'not exist') and contains(text(), 'criteria')]"
+
 }
