@@ -1,0 +1,1039 @@
+place_name,dcid,region,country
+AUS,country/AUS,Australia,Australia
+AU1,wikidataId/Q3224,New South Wales,Australia
+AU2,wikidataId/Q36687,Victoria,Australia
+AU3,wikidataId/Q36074,Queensland,Australia
+AU4,wikidataId/Q35715,South Australia,Australia
+AU5,wikidataId/Q3206,Western Australia,Australia
+AU6,wikidataId/Q34366,Tasmania,Australia
+AU7,wikidataId/Q3235,Northern Territory,Australia
+AU8,wikidataId/Q3114,Canberra region (ACT),Australia
+AU101,,Capital Region,Australia
+AU103,,Central West,Australia
+AU104,wikidataId/Q604283,Coffs Harbour - Grafton,Australia
+AU105,,Far West and Orana,Australia
+AU106,,Hunter Valley Exc Newcastle,Australia
+AU107,,Illawarra,Australia
+AU108,,Mid North Coast,Australia
+AU109,wikidataId/Q1641083,Murray,Australia
+AU110,,New England and North West,Australia
+AU111,wikidataId/Q820325,Newcastle and Lake Macquarie,Australia
+AU112,wikidataId/Q606344,Richmond - Tweed,Australia
+AU113,,Riverina,Australia
+AU114,,Southern Highlands and Shoalhaven,Australia
+AU1GS,wikidataId/Q3130,Sydney,Australia
+AU201,wikidataId/Q17856,Ballarat,Australia
+AU202,wikidataId/Q497793,Bendigo,Australia
+AU203,wikidataId/Q231765,Geelong,Australia
+AU204,wikidataId/Q1637032,Hume,Australia
+AU205,,Latrobe - Gippsland,Australia
+AU215,,North West,Australia
+AU216,wikidataId/Q473188,Shepparton,Australia
+AU217,wikidataId/Q705867,Warrnambool and South West,Australia
+AU2GM,wikidataId/Q3141,Melbourne,Australia
+AU306,wikidataId/Q189133,Cairns,Australia
+AU307,,Darling Downs - Maranoa,Australia
+AU308,wikidataId/Q5123686,Fitzroy,Australia
+AU309,wikidataId/Q140075,Gold Coast,Australia
+AU312,wikidataId/Q3559122,Mackay,Australia
+AU315,wikidataId/Q182262,Queensland - Outback,Australia
+AU316,undata-geo/C02700020,Sunshine Coast,Australia
+AU317,wikidataId/Q478302,Toowoomba,Australia
+AU318,wikidataId/Q190021,Townsville,Australia
+AU319,,Wide Bay,Australia
+AU3GB,wikidataId/Q34932,Brisbane,Australia
+AU405,,Barossa - Yorke - Mid North,Australia
+AU406,,South Australia - Outback,Australia
+AU407,,South Australia - South East,Australia
+AU4GA,wikidataId/Q5112,Adelaide,Australia
+AU501,wikidataId/Q256711,Bunbury,Australia
+AU508,,Western Australia - Outback,Australia
+AU509,wikidataId/Q1850966,Western Australia - Wheat Belt,Australia
+AU5GP,wikidataId/Q3183,Perth,Australia
+AU601,wikidataId/Q40191,Hobart,Australia
+AU602,,Launceston and North East,Australia
+AU603,,South East,Australia
+AU604,,West and North West,Australia
+AU701,wikidataId/Q2081765,Darwin,Australia
+AU702,,Northern Territory - Outback,Australia
+AU801,wikidataId/Q3258,Australian Capital Territory,Australia
+AUT,country/AUT,Austria,Austria
+AT11,nuts/AT11,Burgenland,Austria
+AT12,nuts/AT12,Lower Austria,Austria
+AT13,nuts/AT13,Vienna,Austria
+AT21,nuts/AT21,Carinthia,Austria
+AT22,nuts/AT22,Styria,Austria
+AT31,nuts/AT31,Upper Austria,Austria
+AT32,nuts/AT32,Salzburg,Austria
+AT33,nuts/AT33,Tyrol,Austria
+AT34,nuts/AT34,Vorarlberg,Austria
+BEL,country/BEL,Belgium,Belgium
+BE1,nuts/BE1,Brussels Capital Region,Belgium
+BE2,nuts/BE2,Flemish Region,Belgium
+BE3,nuts/BE3,Walloon Region,Belgium
+BE31,nuts/BE31,Walloon Brabant,Belgium
+BE22,nuts/BE22,Limburg (BE),Belgium
+BE34,nuts/BE34,Luxembourg (BE),Belgium
+BE24,nuts/BE24,Flemish Brabant,Belgium
+BE25,nuts/BE25,West Flanders,Belgium
+BE33,nuts/BE33,Liège,Belgium
+BE10,nuts/BE10,Brussels-Capital Region,Belgium
+BE23,nuts/BE23,East Flanders,Belgium
+BE32,nuts/BE32,Hainaut,Belgium
+BE21,nuts/BE21,Antwerp,Belgium
+BE35,nuts/BE35,Namur,Belgium
+BRA,country/BRA,Brazil,Brazil
+BR01,wikidataId/Q40780,Acre,Brazil
+BR02,wikidataId/Q40130,Amapá,Brazil
+BR03,wikidataId/Q40040,Amazonas,Brazil
+BR04,wikidataId/Q39517,Pará,Brazil
+BR05,wikidataId/Q43235,Rondônia,Brazil
+BR06,wikidataId/Q42508,Roraima,Brazil
+BR07,wikidataId/Q43695,Tocantins,Brazil
+BR08,wikidataId/Q40885,Alagoas,Brazil
+BR09,wikidataId/Q40430,Bahia,Brazil
+BR10,wikidataId/Q40123,Ceará,Brazil
+BR11,wikidataId/Q42362,Maranhão,Brazil
+BR12,wikidataId/Q38088,Paraíba,Brazil
+BR13,wikidataId/Q40942,Pernambuco,Brazil
+BR14,wikidataId/Q42722,Piauí,Brazil
+BR15,wikidataId/Q43255,Rio Grande do Norte,Brazil
+BR16,wikidataId/Q43783,Sergipe,Brazil
+BR17,wikidataId/Q43233,Espírito Santo,Brazil
+BR18,wikidataId/Q39109,Minas Gerais,Brazil
+BR19,wikidataId/Q41428,Rio de Janeiro,Brazil
+BR20,wikidataId/Q175,São Paulo,Brazil
+BR21,wikidataId/Q15499,Paraná,Brazil
+BR22,wikidataId/Q40030,Rio Grande do Sul,Brazil
+BR23,wikidataId/Q41115,Santa Catarina,Brazil
+BR24,wikidataId/Q119158,Distrito Federal (BR),Brazil
+BR25,wikidataId/Q41587,Goiás,Brazil
+BR26,wikidataId/Q42824,Mato Grosso,Brazil
+BR27,wikidataId/Q43319,Mato Grosso do Sul,Brazil
+BGR,country/BGR,Bulgaria,Bulgaria
+BG31,nuts/BG31,North West,Bulgaria
+BG32,nuts/BG32,North Central,Bulgaria
+BG33,nuts/BG33,North East,Bulgaria
+BG34,nuts/BG34,South East,Bulgaria
+BG41,nuts/BG41,South West,Bulgaria
+BG42,nuts/BG42,South Central,Bulgaria
+CAN,country/CAN,Canada,Canada
+CA10,wikidataId/Q2003,Newfoundland and Labrador,Canada
+CA11, wikidataId/Q1979,Prince Edward Island,Canada
+CA12,wikidataId/Q1952,Nova Scotia,Canada
+CA13,wikidataId/Q1965,New Brunswick,Canada
+CA24,wikidataId/Q176,Quebec,Canada
+CA35,wikidataId/Q1904,Ontario,Canada
+CA46,wikidataId/Q1948,Manitoba,Canada
+CA47,wikidataId/Q1989,Saskatchewan,Canada
+CA48,wikidataId/Q1951,Alberta,Canada
+CA59,wikidataId/Q1974,British Columbia,Canada
+CA60,wikidataId/Q2009,Yukon,Canada
+CA61,wikidataId/Q2007,Northwest Territories,Canada
+CA62,wikidataId/Q2023,Nunavut,Canada
+CHL,country/CHL,Chile,Chile
+CL01,wikidataId/Q2114,Tarapacá,Chile
+CL02,wikidataId/Q2118,Antofagasta,Chile
+CL03,wikidataId/Q2120,Atacama,Chile
+CL04,wikidataId/Q2121,Coquimbo,Chile
+CL05,wikidataId/Q219458,Valparaíso,Chile
+CL06,wikidataId/Q2133,O'Higgins,Chile
+CL07,wikidataId/Q2166,Maule,Chile
+CL08,wikidataId/Q2170,Biobío (Región),Chile
+CL09,wikidataId/Q2176,Araucanía,Chile
+CL10,wikidataId/Q2178,Los Lagos,Chile
+CL11,wikidataId/Q2181,Aysén,Chile
+CL12,wikidataId/Q2189,Magallanes and Chilean Antarctica,Chile
+CL13,wikidataId/Q2131,Santiago Metropolitan Region,Chile
+CL14,wikidataId/Q2177,Los Ríos,Chile
+CL15,wikidataId/Q2109,Arica y Parinacota,Chile
+CO05,wikidataId/Q123304,Antioquia,Colombia
+CO08,wikidataId/Q230882,Atlántico,Colombia
+CO11,wikidataId/Q2841,Bogotá Capital District,Colombia
+CO13,wikidataId/Q230597,Bolívar,Colombia
+CO15,wikidataId/Q121233,Boyacá,Colombia
+CO17,wikidataId/Q230607,Caldas,Colombia
+CO18,wikidataId/Q13985,Caquetá,Colombia
+CO19,wikidataId/Q230602,Cauca,Colombia
+CO20,wikidataId/Q234916,Cesar,Colombia
+CO23,wikidataId/Q234912,Córdoba (CO),Colombia
+CO25,wikidataId/Q232564,Cundinamarca,Colombia
+CO27,wikidataId/Q230584,Chocó,Colombia
+CO41,wikidataId/Q234920,Huila,Colombia
+CO44,wikidataId/Q272747,La Guajira,Colombia
+CO47,wikidataId/Q199910,Magdalena,Colombia
+CO50,wikidataId/Q238629,Meta,Colombia
+CO52,wikidataId/Q230217,Nariño,Colombia
+CO54,wikidataId/Q233058,Norte de Santander,Colombia
+CO63,wikidataId/Q13995,Quindío,Colombia
+CO66,wikidataId/Q13993,Risaralda,Colombia
+CO68,wikidataId/Q235166,Santander,Colombia
+CO70,wikidataId/Q235188,Sucre,Colombia
+CO73,wikidataId/Q234501,Tolima,Colombia
+CO76,wikidataId/Q13990,Valle del Cauca,Colombia
+COL,country/COL,Colombia,Colombia
+CR03,,Central Pacific,Costa Rica
+CR02,,Chorotega,Costa Rica
+CR04,,Brunca,Costa Rica
+CR01,,Central,Costa Rica
+CR05,,Huetar Caribbean,Costa Rica
+CR06,,North Huetar,Costa Rica
+CR020,,Chorotega,Costa Rica
+CRI,country/CRI,Costa Rica,Costa Rica
+CR040,,Brunca,Costa Rica
+CR010,,Central,Costa Rica
+CR060,,North Huetar,Costa Rica
+CR030,,Central Pacific,Costa Rica
+CR050,,Huetar Caribbean,Costa Rica
+HRV,country/HRV,Croatia,Croatia
+HR03,nuts/HR03,Adriatic Croatia,Croatia
+HR04,nuts/HR04,Continental Croatia,Croatia
+HR05,wikidataId/Q1435,City of Zagreb,Croatia
+HR06,,Northern Croatia,Croatia
+HR02,nuts/HR02,Pannonian Croatia,Croatia
+CZE,country/CZE,Czechia,Czechia
+CZ01,nuts/CZ01,Prague,Czechia
+CZ02,nuts/CZ020,Central Bohemian Region,Czechia
+CZ03,nuts/CZ03,Southwest,Czechia
+CZ04,nuts/CZ04,Northwest,Czechia
+CZ05,nuts/CZ05,Northeast,Czechia
+CZ06,nuts/CZ06,Southeast,Czechia
+CZ07,nuts/CZ08,Central Moravia,Czechia
+CZ08,nuts/CZ080,Moravia-Silesia,Czechia
+DNK,country/DNK,Denmark,Denmark
+DK01,wikidataId/Q1748,Copenhagen region,Denmark
+DK02,nuts/DK02,Zealand,Denmark
+DK03,nuts/DK03,Southern Denmark,Denmark
+DK04,nuts/DK04,Central Jutland,Denmark
+DK05,nuts/DK05,Northern Jutland,Denmark
+EST,country/EST,Estonia,Estonia
+EE00,,Estonia,Estonia
+EE001,nuts/EE001,North Estonia,Estonia
+EE004,nuts/EE004,West Estonia,Estonia
+EE006,nuts/EE006,Central Estonia,Estonia
+EE007,nuts/EE007,Northeast Estonia,Estonia
+EE008,nuts/EE008,Southern Estonia,Estonia
+EE009,,Central Estonia,Estonia
+EE00A,,Northeast Estonia,Estonia
+FIN,country/FIN,Finland,Finland
+FI19,nuts/FI19,Western Finland,Finland
+FI1B,nuts/FI1B,Helsinki-Uusimaa,Finland
+FI1C,nuts/FI1C,Southern Finland,Finland
+FI1D,nuts/FI1D,Eastern and Northern Finland,Finland
+FI20,nuts/FI2,Åland,Finland
+FRA,country/FRA,France,France
+FR1,nuts/FR1,Île-de-France,France
+FRB,nuts/FRB,Centre - Val de Loire,France
+FRC,nuts/FRC,Bourgogne-Franche-Comté,France
+FRD,nuts/FRD,Normandy,France
+FRE,nuts/FRE,Hauts-de-France,France
+FRF,nuts/FRF,Grand Est,France
+FRG,nuts/FRG,Pays de la Loire,France
+FRH,nuts/FR52,Brittany,France
+FRI,nuts/FRI,Nouvelle-Aquitaine,France
+FRJ,nuts/FRJ,Occitanie,France
+FRK,nuts/FRK,Auvergne-Rhône-Alpes,France
+FRL,nuts/FRL,Provence-Alpes-Côte d’Azur,France
+FRM,nuts/FRM,Corsica,France
+FRY1,country/GLP,Guadeloupe,France
+FRY2,country/MTQ,Martinique,France
+FRY3,country/GUF,French Guiana,France
+FRY4,country/REU,La Réunion,France
+FR10,nuts/FR10,Île-de-France,France
+FRY5,country/MYT,Mayotte,France
+DEU,country/DEU,Germany,Germany
+DE1,nuts/DE1,Baden-Württemberg,Germany
+DE2,nuts/DE2,Bavaria,Germany
+DE3,nuts/DE3,Berlin,Germany
+DE4,nuts/DE4,Brandenburg,Germany
+DE5,nuts/DE5,Bremen,Germany
+DE6,nuts/DE6,Hamburg,Germany
+DE7,nuts/DE7,Hesse,Germany
+DE8,nuts/DE8,Mecklenburg-Vorpommern,Germany
+DE9,nuts/DE9,Lower Saxony,Germany
+DEA,nuts/DEA,North Rhine-Westphalia,Germany
+DEB,nuts/DEB,Rhineland-Palatinate,Germany
+DEC,nuts/DEC,Saarland,Germany
+DED,nuts/DED,Saxony,Germany
+DEE,nuts/DEE0,Saxony-Anhalt,Germany
+DEF,nuts/DEF,Schleswig-Holstein,Germany
+DEG,nuts/DEG,Thuringia,Germany
+DE93,nuts/DE93,Lüneburg,Germany
+DE14,nuts/DE14,Tübingen,Germany
+DEA4,nuts/DEA4,Detmold,Germany
+DE26,nuts/DE26,Unterfranken,Germany
+DE23,nuts/DE23,Oberpfalz,Germany
+DEA5,nuts/DEA5,Arnsberg,Germany
+DEA1,nuts/DEA1,Dusseldorf,Germany
+DE50,nuts/DE50,Bremen,Germany
+DE30,nuts/DE30,Berlin,Germany
+DE72,nuts/DE72,Gießen,Germany
+DE12,nuts/DE12,Karlsruhe,Germany
+DE11,nuts/DE11,Stuttgart,Germany
+DEG0,nuts/DEG0,Thuringia,Germany
+DEB2,nuts/DEB2,Trier,Germany
+DED5,nuts/DED5,Leipzig,Germany
+DE91,nuts/DE91,Brunswick,Germany
+DE60,nuts/DE60,Hamburg,Germany
+DE21,nuts/DE21,Upper Bavaria,Germany
+DE73,nuts/DE73,Kassel,Germany
+DE27,nuts/DE27,Swabia,Germany
+DEA2,nuts/DEA2,Cologne,Germany
+DE80,nuts/DE80,Mecklenburg-Vorpommern,Germany
+DE92,nuts/DE92,Hanover,Germany
+DEB3,nuts/DEB3,Rheinhessen-Pfalz,Germany
+DEE0,nuts/DEE,Sachsen-Anhalt,Germany
+DEF0,nuts/DEF0,Schleswig-Holstein,Germany
+DED2,nuts/DED2,Dresden,Germany
+DE40,nuts/DE40,Brandenburg,Germany
+DED4,nuts/DED4,Chemnitz,Germany
+DE25,nuts/DE25,Mittelfranken,Germany
+DE24,nuts/DE24,Oberfranken,Germany
+DEA3,nuts/DEA3,Münster,Germany
+DE71,nuts/DE71,Darmstadt,Germany
+DEB1,nuts/DEB1,Koblenz,Germany
+DEC0,nuts/DEC0,Saarland,Germany
+DE22,nuts/DE22,Lower Bavaria,Germany
+DE13,nuts/DE13,Freiburg,Germany
+DE94,nuts/DE94,Weser-Ems,Germany
+GRC,country/GRC,Greece,Greece
+EL30,nuts/EL30,Attica,Greece
+EL41,nuts/EL41,North Aegean,Greece
+EL42,nuts/EL42,South Aegean,Greece
+EL43,nuts/EL43,Crete,Greece
+EL51,nuts/EL51,"Eastern Macedonia, Thrace",Greece
+EL52,nuts/EL52,Central Macedonia,Greece
+EL53,nuts/EL53,Western Macedonia,Greece
+EL54,nuts/EL54,Epirus,Greece
+EL61,nuts/EL61,Thessaly,Greece
+EL62,nuts/EL62,Ionian Islands,Greece
+EL63,nuts/EL63,Western Greece,Greece
+EL64,nuts/EL64,Central Greece,Greece
+EL65,nuts/EL65,Peloponnese,Greece
+HUN,country/HUN,Hungary,Hungary
+HU10,nuts/HU10,Central Hungary (nuts2013),Hungary
+HU21,nuts/HU21,Central Transdanubia,Hungary
+HU22,nuts/HU22,Western Transdanubia,Hungary
+HU23,nuts/HU23,Southern Transdanubia,Hungary
+HU31,nuts/HU31,Northern Hungary,Hungary
+HU32,nuts/HU32,Northern Great Plain,Hungary
+HU33,nuts/HU33,Southern Great Plain,Hungary
+HU11,nuts/HU11,Budapest,Hungary
+HU12,nuts/HU12,Pest,Hungary
+ISL,country/ISL,Iceland,Iceland
+IRL,country/IRL,Ireland,Ireland
+IE01,IE01,"Border, Midland and Western",Ireland
+IE02,IE02,Southern and Eastern,Ireland
+IE05,IE05,Southern,Ireland
+IE06,IE06,Eastern and Midland,Ireland
+IE04,IE04,Northern and Western,Ireland
+IE051,IE051,Mid-West,Ireland
+IE061,IE061,Dublin,Ireland
+IE063,IE063,Midlands,Ireland
+IE062,IE062,Mid-East,Ireland
+IE052,IE052,South-East (IE),Ireland
+IE042,IE042,West,Ireland
+IE053,IE053,South-West (IE),Ireland
+IE041,IE041,Border,Ireland
+ISR,country/ISR,Israel,Israel
+IL01,nuts/IL01,Jerusalem District,Israel
+IL02,nuts/IL02,Northern District,Israel
+IL03,nuts/IL03,Haifa District,Israel
+IL04,nuts/IL04,Central District,Israel
+IL05,nuts/IL05,Tel Aviv District,Israel
+IL06,nuts/IL06,Southern District,Israel
+IL07,nuts/IL07,Judea and Samaria,Israel
+IL050,wikidataId/Q192811,Tel Aviv District,Israel
+IL040,wikidataId/Q188785,Central District,Israel
+IL060,wikidataId/Q188781,Southern District,Israel
+IL030,wikidataId/Q185845,Haifa District,Israel
+IL020,wikidataId/Q189942,Northern District,Israel
+IL010,wikidataId/Q192232,Jerusalem District,Israel
+ITA,country/ITA,Italy,Italy
+ITC1,nuts/ITC1,Piedmont,Italy
+ITC2,nuts/ITC2,Aosta Valley,Italy
+ITC3,nuts/ITC3,Liguria,Italy
+ITC4,nuts/ITC4,Lombardy,Italy
+ITF1,nuts/ITF1,Abruzzo,Italy
+ITF2,nuts/ITF2,Molise,Italy
+ITF3,nuts/ITF3,Campania,Italy
+ITF4,nuts/ITF4,Apulia,Italy
+ITF5,nuts/ITF5,Basilicata,Italy
+ITF6,nuts/ITF6,Calabria,Italy
+ITG1,nuts/ITG1,Sicily,Italy
+ITG2,nuts/ITG2,Sardinia,Italy
+ITH1,nuts/ITH1,Province of Bolzano-Bozen,Italy
+ITH2,nuts/ITH2,Province of Trento,Italy
+ITH3,nuts/ITH3,Veneto,Italy
+ITH4,nuts/ITH4,Friuli-Venezia Giulia,Italy
+ITH5,nuts/ITH5,Emilia-Romagna,Italy
+ITI1,nuts/ITI1,Tuscany,Italy
+ITI2,nuts/ITI2,Umbria,Italy
+ITI3,nuts/ITI3,Marche,Italy
+ITI4,nuts/ITI4,Lazio,Italy
+JPA,wikidataId/Q1037393,Hokkaido,Japan
+JPB,wikidataId/Q1194394,Tohoku,Japan
+JPC,,"Northern-Kanto, Koshin",Japan
+JPD,,Southern-Kanto,Japan
+JPE,,Hokuriku,Japan
+JPF,,Toukai,Japan
+JPG,,Kansai region,Japan
+JPH,,Chugoku,Japan
+JPI,wikidataId/Q838666,Shikoku,Japan
+JPJ,wikidataId/Q188806,"Kyushu, Okinawa",Japan
+KR01,,Seoul Capital Area,Korea
+KR02,,Gyeongnam Region,Korea
+KR03,,Gyeongbuk Region,Korea
+KR04,,Jeolla Region,Korea
+KR05,,Chungcheong Region,Korea
+KR06,wikidataId/Q41071,Gangwon Region,Korea
+KR07,wikidataId/Q42142,Jeju,Korea
+KR011,wikidataId/Q8684,Seoul,Korea
+KR012,wikidataId/Q20934,Incheon,Korea
+KR013,wikidataId/Q20937,Gyeonggi-do,Korea
+KR021,wikidataId/Q16520,Busan,Korea
+KR022,wikidataId/Q41278,Ulsan,Korea
+KR023,,Gyeongsangnam-do,Korea
+KR031,wikidataId/Q20927,Daegu,Korea
+KR032,,Gyeongsangbuk-do,Korea
+KR041,wikidataId/Q41283,Gwangju,Korea
+KR042,,Jeollabuk-do,Korea
+KR043,,Jeollanam-do,Korea
+KR051,wikidataId/Q20921,Daejeon,Korea
+KR052,,Chungcheongbuk-do,Korea
+KR053,,Chungcheongnam-do,Korea
+KR054,wikidataId/Q20929,Sejong,Korea
+KR061,,Gangwon-do,Korea
+KR071,wikidataId/Q41164,Jeju-do,Korea
+KOR,country/KOR,Korea,Korea
+LVA,country/LVA,Latvia,Latvia
+LV00,,Latvia,Latvia
+LV003,nuts/LV003,Kurzeme,Latvia
+LV005,nuts/LV005,Latgale,Latvia
+LV006,nuts/LV006,Riga,Latvia
+LV007,nuts/LV007,Pieriga,Latvia
+LV008,nuts/LV008,Vidzeme,Latvia
+LV009,nuts/LV009,Zemgale,Latvia
+LTU,country/LTU,Lithuania,Lithuania
+LT00,nuts/LT0,Lithuania (nuts2013),Lithuania
+LT027,nuts/LT027,Taurage county,Lithuania
+LT021,nuts/LT021,Alytus county,Lithuania
+LT011,nuts/LT011,Vilnius county,Lithuania
+LT028,nuts/LT028,Telšiai county,Lithuania
+LT023,nuts/LT023,Klaipeda county,Lithuania
+LT022,nuts/LT022,Kaunas county,Lithuania
+LT026,nuts/LT026,Šiauliai county,Lithuania
+LT029,nuts/LT029,Utena county,Lithuania
+LT025,nuts/LT025,Panevežys county,Lithuania
+LT024,nuts/LT024,Marijampole county,Lithuania
+LT01,nuts/LT01,Vilnius Region,Lithuania
+LT02,nuts/LT02,Central and Western Lithuania,Lithuania
+LUX,country/LUX,Luxembourg,Luxembourg
+LU00,,Luxembourg,Luxembourg
+MEX,country/MEX,Mexico,Mexico
+ME01,wikidataId/Q79952,Aguascalientes,Mexico
+ME02,wikidataId/Q58731,Baja California,Mexico
+ME03,wikidataId/Q46508,Baja California Sur,Mexico
+ME04,wikidataId/Q80908,Campeche,Mexico
+ME05,wikidataId/Q53079,Coahuila,Mexico
+ME06,wikidataId/Q61309,Colima,Mexico
+ME07,wikidataId/Q60123,Chiapas,Mexico
+ME08,wikidataId/Q655,Chihuahua,Mexico
+ME09,wikidataId/Q1489,Mexico City,Mexico
+ME10,wikidataId/Q79918,Durango,Mexico
+ME11,wikidataId/Q46475,Guanajuato,Mexico
+ME12,wikidataId/Q60158,Guerrero,Mexico
+ME13,wikidataId/Q80903,Hidalgo,Mexico
+ME14,wikidataId/Q13160,Jalisco,Mexico
+ME15,,Mexico,Mexico
+ME16,wikidataId/Q79861,Michoacan,Mexico
+ME17,wikidataId/Q66117,Morelos,Mexico
+ME18,wikidataId/Q79920,Nayarit,Mexico
+ME19,wikidataId/Q15282,Nuevo Leon,Mexico
+ME20,wikidataId/Q34110,Oaxaca,Mexico
+ME21,wikidataId/Q79923,Puebla,Mexico
+ME22,wikidataId/Q79754,Queretaro,Mexico
+ME23,wikidataId/Q80245,Quintana Roo,Mexico
+ME24,wikidataId/Q78980,San Luis Potosi,Mexico
+ME25,wikidataId/Q80252,Sinaloa,Mexico
+ME26,wikidataId/Q46422,Sonora,Mexico
+ME27,wikidataId/Q80914,Tabasco,Mexico
+ME28,wikidataId/Q80007,Tamaulipas,Mexico
+ME29,wikidataId/Q82681,Tlaxcala,Mexico
+ME30,wikidataId/Q60130,Veracruz,Mexico
+ME31,wikidataId/Q60176,Yucatan,Mexico
+ME32,wikidataId/Q80269,Zacatecas,Mexico
+ME10R4,,"Durango, R4",Mexico
+ME08R12,,"Chihuahua, R12",Mexico
+ME26R5,,"Sonora, R5",Mexico
+ME15R8,,"Mexico, R8",Mexico
+ME26R4,,"Sonora, R4",Mexico
+ME21R5,,"Puebla, R5",Mexico
+ME13R4,,"Hidalgo, R4",Mexico
+ME02R4,,"Baja California, R4",Mexico
+ME19R7,,"Nuevo Leon, R7",Mexico
+ME26R9,,"Sonora, R9",Mexico
+ME28R2,,"Tamaulipas, R2",Mexico
+ME27R4,,"Tabasco, R4",Mexico
+ME02R3,,"Baja California, R3",Mexico
+ME26R2,,"Sonora, R2",Mexico
+ME30R1,,"Veracruz, R1",Mexico
+ME16R3,,"Michoacan, R3",Mexico
+ME20R1,,"Oaxaca, R1",Mexico
+ME07R9,,"Chiapas, R9",Mexico
+ME13R12,,"Hidalgo, R12",Mexico
+ME08R11,,"Chihuahua, R11",Mexico
+ME21R1,,"Puebla, R1",Mexico
+ME07R6,,"Chiapas, R6",Mexico
+ME26R3,,"Sonora, R3",Mexico
+ME31R7,,"Yucatan, R7",Mexico
+ME30R2,,"Veracruz, R2",Mexico
+ME06R1,,"Colima, R1",Mexico
+ME10R5,,"Durango, R5",Mexico
+ME19R5,,"Nuevo Leon, R5",Mexico
+ME07R7,,"Chiapas, R7",Mexico
+ME32R7,,"Zacatecas, R7",Mexico
+ME08R13,,"Chihuahua, R13",Mexico
+ME12R2,,"Guerrero, R2",Mexico
+ME32R4,,"Zacatecas, R4",Mexico
+ME15R2,,"Mexico, R2",Mexico
+ME31R6,,"Yucatan, R6",Mexico
+ME12R7,,"Guerrero, R7",Mexico
+ME20R5,,"Oaxaca, R5",Mexico
+ME05R1,,"Coahuila, R1",Mexico
+ME04R2,,"Campeche, R2",Mexico
+ME08R2,,"Chihuahua, R2",Mexico
+ME22R1,,"Queretaro, R1",Mexico
+ME13R2,,"Hidalgo, R2",Mexico
+ME29R8,,"Tlaxcala, R8",Mexico
+ME08R3,,"Chihuahua, R3",Mexico
+ME05R4,,"Coahuila, R4",Mexico
+ME31R1,,"Yucatan, R1",Mexico
+ME21R2,,"Puebla, R2",Mexico
+ME12R4,,"Guerrero, R4",Mexico
+ME14R8,,"Jalisco, R8",Mexico
+ME16R2,,"Michoacan, R2",Mexico
+ME12R5,,"Guerrero, R5",Mexico
+ME32R2,,"Zacatecas, R2",Mexico
+ME23R4,,"Quintana Roo, R4",Mexico
+ME13R3,,"Hidalgo, R3",Mexico
+ME21R4,,"Puebla, R4",Mexico
+ME08R1,,"Chihuahua, R1",Mexico
+ME12R3,,"Guerrero, R3",Mexico
+ME20R8,,"Oaxaca, R8",Mexico
+ME24R4,,"San Luis Potosi, R4",Mexico
+ME05R3,,"Coahuila, R3",Mexico
+ME13R13,,"Hidalgo, R13",Mexico
+ME29R3,,"Tlaxcala, R3",Mexico
+ME10R2,,"Durango, R2",Mexico
+ME11R2,,"Guanajuato, R2",Mexico
+ME27R1,,"Tabasco, R1",Mexico
+ME14R10,,"Jalisco, R10",Mexico
+ME07R8,,"Chiapas, R8",Mexico
+ME14R5,,"Jalisco, R5",Mexico
+ME24R3,,"San Luis Potosi, R3",Mexico
+ME22R2,,"Queretaro, R2",Mexico
+ME24R1,,"San Luis Potosi, R1",Mexico
+ME25R2,,"Sinaloa, R2",Mexico
+ME03R2,,"Baja California Sur, R2",Mexico
+ME22R5,,"Queretaro, R5",Mexico
+ME25R4,,"Sinaloa, R4",Mexico
+ME04R3,,"Campeche, R3",Mexico
+ME12R6,,"Guerrero, R6",Mexico
+ME08R9,,"Chihuahua, R9",Mexico
+ME21R6,,"Puebla, R6",Mexico
+ME26R11,,"Sonora, R11",Mexico
+ME12R1,,"Guerrero, R1",Mexico
+ME29R5,,"Tlaxcala, R5",Mexico
+ME13R8,,"Hidalgo, R8",Mexico
+ME20R2,,"Oaxaca, R2",Mexico
+ME32R8,,"Zacatecas, R8",Mexico
+ME15R7,,"Mexico, R7",Mexico
+ME19R6,,"Nuevo Leon, R6",Mexico
+ME07R4,,"Chiapas, R4",Mexico
+ME04R4,,"Campeche, R4",Mexico
+ME10R1,,"Durango, R1",Mexico
+ME02R1,,"Baja California, R1",Mexico
+ME31R4,,"Yucatan, R4",Mexico
+ME20R4,,"Oaxaca, R4",Mexico
+ME15R4,,"Mexico, R4",Mexico
+ME04R1,,"Campeche, R1",Mexico
+ME13R1,,"Hidalgo, R1",Mexico
+ME19R2,,"Nuevo Leon, R2",Mexico
+ME20R3,,"Oaxaca, R3",Mexico
+ME08R4,,"Chihuahua, R4",Mexico
+ME16R6,,"Michoacan, R6",Mexico
+ME15R1,,"Mexico, R1",Mexico
+ME20R6,,"Oaxaca, R6",Mexico
+ME28R1,,"Tamaulipas, R1",Mexico
+ME16R4,,"Michoacan, R4",Mexico
+ME26R7,,"Sonora, R7",Mexico
+ME25R1,,"Sinaloa, R1",Mexico
+ME26R6,,"Sonora, R6",Mexico
+ME06R3,,"Colima, R3",Mexico
+ME11R1,,"Guanajuato, R1",Mexico
+ME32R1,,"Zacatecas, R1",Mexico
+ME31R8,,"Yucatan, R8",Mexico
+ME13R11,,"Hidalgo, R11",Mexico
+ME26R8,,"Sonora, R8",Mexico
+ME16R5,,"Michoacan, R5",Mexico
+ME13R10,,"Hidalgo, R10",Mexico
+ME10R9,,"Durango, R9",Mexico
+ME27R3,,"Tabasco, R3",Mexico
+ME32R5,,"Zacatecas, R5",Mexico
+ME20R7,,"Oaxaca, R7",Mexico
+ME14R9,,"Jalisco, R9",Mexico
+ME13R6,,"Hidalgo, R6",Mexico
+ME11R3,,"Guanajuato, R3",Mexico
+ME08R10,,"Chihuahua, R10",Mexico
+ME32R6,,"Zacatecas, R6",Mexico
+ME17R2,,"Morelos, R2",Mexico
+ME29R6,,"Tlaxcala, R6",Mexico
+ME31R5,,"Yucatan, R5",Mexico
+ME29R7,,"Tlaxcala, R7",Mexico
+ME21R3,,"Puebla, R3",Mexico
+ME15R5,,"Mexico, R5",Mexico
+ME23R3,,"Quintana Roo, R3",Mexico
+ME08R8,,"Chihuahua, R8",Mexico
+ME16R1,,"Michoacan, R1",Mexico
+ME17R1,,"Morelos, R1",Mexico
+ME15R3,,"Mexico, R3",Mexico
+ME03R1,,"Baja California Sur, R1",Mexico
+ME15R6,,"Mexico, R6",Mexico
+ME08R7,,"Chihuahua, R7",Mexico
+ME27R2,,"Tabasco, R2",Mexico
+ME24R2,,"San Luis Potosi, R2",Mexico
+ME32R3,,"Zacatecas, R3",Mexico
+ME25R3,,"Sinaloa, R3",Mexico
+ME08R6,,"Chihuahua, R6",Mexico
+ME18R5,,"Nayarit, R5",Mexico
+ME11R4,,"Guanajuato, R4",Mexico
+ME31R3,,"Yucatan, R3",Mexico
+ME07R3,,"Chiapas, R3",Mexico
+ME26R12,,"Sonora, R12",Mexico
+ME05R6,,"Coahuila, R6",Mexico
+ME07R5,,"Chiapas, R5",Mexico
+ME19R3,,"Nuevo Leon, R3",Mexico
+ME29R9,,"Tlaxcala, R9",Mexico
+ME14R2,,"Jalisco, R2",Mexico
+ME13R7,,"Hidalgo, R7",Mexico
+ME32R9,,"Zacatecas, R9",Mexico
+ME23R2,,"Quintana Roo, R2",Mexico
+ME10R6,,"Durango, R6",Mexico
+ME14R7,,"Jalisco, R7",Mexico
+ME19R1,,"Nuevo Leon, R1",Mexico
+ME22R4,,"Queretaro, R4",Mexico
+ME17R6,,"Morelos, R6",Mexico
+ME19R4,,"Nuevo Leon, R4",Mexico
+ME17R3,,"Morelos, R3",Mexico
+ME09R1,,"Distrito Federal (MX), R1",Mexico
+ME05R2,,"Coahuila, R2",Mexico
+ME22R3,,"Queretaro, R3",Mexico
+ME17R7,,"Morelos, R7",Mexico
+ME17R4,,"Morelos, R4",Mexico
+ME25R5,,"Sinaloa, R5",Mexico
+ME21R7,,"Puebla, R7",Mexico
+ME31R2,,"Yucatan, R2",Mexico
+ME05R5,,"Coahuila, R5",Mexico
+ME14R6,,"Jalisco, R6",Mexico
+ME07R2,,"Chiapas, R2",Mexico
+ME29R4,,"Tlaxcala, R4",Mexico
+ME09R2,,"Distrito Federal (MX), R2",Mexico
+ME02R2,,"Baja California, R2",Mexico
+ME26R1,,"Sonora, R1",Mexico
+ME17R5,,"Morelos, R5",Mexico
+ME30R3,,"Veracruz, R3",Mexico
+ME26R10,,"Sonora, R10",Mexico
+ME14R3,,"Jalisco, R3",Mexico
+ME30R7,,"Veracruz, R7",Mexico
+ME14R1,,"Jalisco, R1",Mexico
+ME10R3,,"Durango, R3",Mexico
+ME06R2,,"Colima, R2",Mexico
+ME14R4,,"Jalisco, R4",Mexico
+ME13R9,,"Hidalgo, R9",Mexico
+ME08R5,,"Chihuahua, R5",Mexico
+ME01R1,,"Aguacalientes, R1",Mexico
+ME01R2,,"Aguacalientes, R2",Mexico
+ME03R3,,"Baja California Sur, R3",Mexico
+ME03R4,,"Baja California Sur, R4",Mexico
+ME07R1,,"Chiapas, R1",Mexico
+ME10R7,,"Durango, R7",Mexico
+ME10R8,,"Durango, R8",Mexico
+ME13R5,,"Hidalgo, R5",Mexico
+ME18R1,,"Nayarit, R1",Mexico
+ME18R2,,"Nayarit, R2",Mexico
+ME18R3,,"Nayarit, R3",Mexico
+ME18R4,,"Nayarit, R4",Mexico
+ME23R1,,"Quintana Roo, R1",Mexico
+ME28R3,,"Tamaulipas, R3",Mexico
+ME28R4,,"Tamaulipas, R4",Mexico
+ME29R1,,"Tlaxcala, R1",Mexico
+ME29R2,,"Tlaxcala, R2",Mexico
+ME30R4,,"Veracruz, R4",Mexico
+ME30R5,,"Veracruz, R5",Mexico
+ME30R6,,"Veracruz, R6",Mexico
+NLD,country/NLD,Netherlands,Netherlands
+NL11,nuts/NL11,Groningen,Netherlands
+NL12,nuts/NL12,Friesland,Netherlands
+NL13,nuts/NL13,Drenthe,Netherlands
+NL21,nuts/NL21,Overijssel,Netherlands
+NL22,nuts/NL22,Gelderland,Netherlands
+NL23,nuts/NL23,Flevoland,Netherlands
+NL31,nuts/NL31,Utrecht,Netherlands
+NL32,nuts/NL32,North Holland,Netherlands
+NL33,nuts/NL33,South Holland,Netherlands
+NL34,nuts/NL34,Zeeland,Netherlands
+NL41,nuts/NL41,North Brabant,Netherlands
+NL42,nuts/NL42,Limburg,Netherlands
+NZ23,wikidataId/Q657004,Canterbury,New Zealand
+NZ19,wikidataId/Q856010,Wellington,New Zealand
+NZ25,wikidataId/Q864971,Southland,New Zealand
+NZ12,wikidataId/Q726917,Auckland,New Zealand
+NZ24,wikidataId/Q692912,Otago,New Zealand
+NZ11,wikidataId/Q59596,Northland,New Zealand
+NZ15,wikidataId/Q140246,Gisborne,New Zealand
+NZ14,wikidataId/Q2192924,Bay of Plenty,New Zealand
+NZ17,wikidataId/Q140207,Taranaki,New Zealand
+NZ21,wikidataId/Q666142,Tasman-Nelson-Marlborough,New Zealand
+NZ13,wikidataId/Q139918,Waikato,New Zealand
+NZ18,wikidataId/Q139907,Manawatu-Wanganui,New Zealand
+NZL,country/NZL,New Zealand,New Zealand
+MKD,country/MKD,Macedonia (the former Yugoslav Republic of),North Macedonia
+MK00,nuts/MK00,Poranesnata Jugoslovenska Republika Makedonija,North Macedonia
+NOR,country/NOR,Norway,Norway
+NO01,nuts/NO01,Oslo and Akershus,Norway
+NO02,nuts/NO02,Innlandet,Norway
+NO03,nuts/NO03,South-Eastern Norway,Norway
+NO04,nuts/NO04,Agder and Rogaland,Norway
+NO05,nuts/NO05,Western Norway,Norway
+NO06,nuts/NO06,Trøndelag,Norway
+NO07,nuts/NO07,Northern Norway,Norway
+NO0A,,Western Norway,Norway
+NO09,nuts/NO09,Agder and Sør-Østlandet,Norway
+NO08,nuts/NO08,Oslo and Viken,Norway
+POL,country/POL,Poland,Poland
+PL12,,Mazovia (nuts2013),Poland
+PL21,nuts/PL21,Lesser Poland,Poland
+PL22,nuts/PL22,Silesia,Poland
+PL41,nuts/PL41,Greater Poland,Poland
+PL42,nuts/PL42,West Pomerania,Poland
+PL43,nuts/PL43,Lubusz,Poland
+PL51,nuts/PL51,Lower Silesia,Poland
+PL52,nuts/PL52,Opole region,Poland
+PL61,nuts/PL61,Kuyavian-Pomerania,Poland
+PL62,nuts/PL62,Warmian-Masuria,Poland
+PL63,nuts/PL63,Pomerania,Poland
+PL91,nuts/PL91,Warsaw,Poland
+PL92,nuts/PL92,Mazowiecki region,Poland
+PL71,nuts/PL71,Lodzkie,Poland
+PL82,nuts/PL82,Podkarpacia,Poland
+PL81,nuts/PL81,Lublin Province,Poland
+PL84,nuts/PL84,Podlaskie,Poland
+PL72,nuts/PL72,Swietokrzyskie,Poland
+PRT,country/PRT,Portugal,Portugal
+PT11,nuts/PT11,North (PT),Portugal
+PT15,nuts/PT15,Algarve,Portugal
+PT16,nuts/PT16,Central Portugal,Portugal
+PT17,nuts/PT17,Metropolitan area of Lisbon,Portugal
+PT18,nuts/PT18,Alentejo,Portugal
+PT20,nuts/PT20,Autonomous Region of the Azores,Portugal
+PT30,nuts/PT30,Autonomous Region of Madeira,Portugal
+ROU,country/ROU,Romania,Romania
+RO11,nuts/RO11,North West,Romania
+RO12,nuts/RO12,Center,Romania
+RO21,nuts/RO21,North East,Romania
+RO22,nuts/RO22,South East,Romania
+RO31,nuts/RO31,South - Muntenia,Romania
+RO32,nuts/RO32,Bucharest - Ilfov,Romania
+RO41,nuts/RO41,South West Oltenia,Romania
+RO42,nuts/RO42,West,Romania
+RUS,country/RUS,Russia,Russia
+RU01,wikidataId/Q3329,Belgorod Oblast,Russia
+RU02,wikidataId/Q2810,Bryansk Oblast,Russia
+RU03,wikidataId/Q2702,Vladimir Oblast,Russia
+RU04,wikidataId/Q3447,Voronezh Oblast,Russia
+RU05,wikidataId/Q2654,Ivanovo Oblast,Russia
+RU06,wikidataId/Q2842,Kaluga Oblast,Russia
+RU07,wikidataId/Q2596,Kostroma Oblast,Russia
+RU08,wikidataId/Q3178,Kursk Oblast,Russia
+RU09,wikidataId/Q3510,Lipetsk Oblast,Russia
+RU10,wikidataId/Q1697,Moscow Oblast,Russia
+RU11,wikidataId/Q3129,Oryol Oblast,Russia
+RU12,wikidataId/Q2753,Ryazan Oblast,Russia
+RU13,wikidataId/Q2347,Smolensk Oblast,Russia
+RU14,wikidataId/Q3550,Tambov Oblast,Russia
+RU15,wikidataId/Q2292,Tver Oblast,Russia
+RU16,wikidataId/Q2792,Tula Oblast,Russia
+RU17,wikidataId/Q2448,Yaroslavl Oblast,Russia
+RU18,wikidataId/Q649,City of Moscow,Russia
+RU19,wikidataId/Q1914,Republic of Karelia,Russia
+RU20,wikidataId/Q2073,Komi republic,Russia
+RU21,wikidataId/Q1875,Arkhangelsk Oblast,Russia
+RU22,wikidataId/Q2164,Nenets Autonomous Okrug,Russia
+RU23,wikidataId/Q2015,Vologda Oblast,Russia
+RU24,wikidataId/Q1749,Kaliningrad Oblast,Russia
+RU25,wikidataId/Q2191,Leningrad Oblast,Russia
+RU26,wikidataId/Q1759,Murmansk Oblast,Russia
+RU27,wikidataId/Q2240,Novgorod Oblast,Russia
+RU28,wikidataId/Q2218,Pskov Oblast,Russia
+RU29,wikidataId/Q656,Federal City of Saint Petersburg,Russia
+RU30,wikidataId/Q3734,Republic of Adygea,Russia
+RU31,wikidataId/Q3953,Republic of Kalmykia,Russia
+RU32,wikidataId/Q3680,Krasnodar Krai,Russia
+RU33,wikidataId/Q3941,Astrakhan Oblast,Russia
+RU34,wikidataId/Q3819,Volgograd Oblast,Russia
+RU35,wikidataId/Q3573,Rostov Oblast,Russia
+RU36,wikidataId/Q5118,Republic of Dagestan,Russia
+RU37,wikidataId/Q5219,Republic of Ingushetia,Russia
+RU38,wikidataId/Q5267,Kabardino-Balkar Republic,Russia
+RU39,wikidataId/Q5328,Karachay-Cherkhess Republic,Russia
+RU40,wikidataId/Q5237,Republic of North Ossetia-Alania,Russia
+RU41,wikidataId/Q5187,Chechen Republic,Russia
+RU42,wikidataId/Q5207,Stavropol Krai,Russia
+RU43,wikidataId/Q5710,Republic of Bashkorstostan,Russia
+RU44,wikidataId/Q5446,Mari El Republic,Russia
+RU45,wikidataId/Q5340,Republic of Mordovia,Russia
+RU46,wikidataId/Q5481,Republic of Tatarstan,Russia
+RU47,wikidataId/Q5422,Udmurt Republic,Russia
+RU48,wikidataId/Q5466,Chuvash Republic,Russia
+RU49,wikidataId/Q5400,Perm Krai,Russia
+RU50,wikidataId/Q5387,Kirov Oblast,Russia
+RU51,wikidataId/Q2246,Nizhny Novgorod Oblast,Russia
+RU52,wikidataId/Q5338,Orenburg Oblast,Russia
+RU53,wikidataId/Q5545,Penza Oblast,Russia
+RU54,wikidataId/Q1727,Samara Oblast,Russia
+RU55,wikidataId/Q5334,Saratov Oblast,Russia
+RU56,wikidataId/Q5634,Ulianov Oblast,Russia
+RU57,wikidataId/Q5741,Kurgan Oblast,Russia
+RU58,wikidataId/Q5462,Sverdlovsk Oblast,Russia
+RU59,wikidataId/Q5824,Tyumen Oblast,Russia
+RU60,wikidataId/Q6320,Khanty-Mansi Autonomous Okrug - Yugra,Russia
+RU61,wikidataId/Q6407,Yamalo-Nenets Autonomous Okrug,Russia
+RU62,wikidataId/Q5714,Chelyabinsk Oblast,Russia
+RU63,wikidataId/Q5971,Republic of Altai,Russia
+RU64,wikidataId/Q6809,Buryat Republic,Russia
+RU65,wikidataId/Q960,Tyva Republic,Russia
+RU66,wikidataId/Q6543,Republic of Khakassia,Russia
+RU67,wikidataId/Q5942,Altai Krai,Russia
+RU68,wikidataId/Q6838,Zabaykalsky Krai,Russia
+RU69,wikidataId/Q6563,Krasnoyarsk Krai,Russia
+RU70,wikidataId/Q6585,Irkutsk Oblast,Russia
+RU71,wikidataId/Q6076,Kemerovo oblast,Russia
+RU72,wikidataId/Q5851,Novosibirsk Oblast,Russia
+RU73,wikidataId/Q5835,Omsk Oblast,Russia
+RU74,wikidataId/Q5884,Tomsk Oblast,Russia
+RU75,wikidataId/Q6605,Sakha Republic (Yakutia),Russia
+RU76,wikidataId/Q7948,Kamchatka Krai,Russia
+RU77,wikidataId/Q4341,Primorsky Krai,Russia
+RU78,wikidataId/Q7788,Khabarovsk Krai,Russia
+RU79,wikidataId/Q6886,Amur Oblast,Russia
+RU80,wikidataId/Q7971,Magadan Oblast,Russia
+RU81,wikidataId/Q7797,Sakhalin Oblast,Russia
+RU82,wikidataId/Q7730,Jewish Autonomous Oblast,Russia
+RU83,wikidataId/Q7984,Chukotka Autonomous Okrug,Russia
+SVK,country/SVK,Slovak Republic,Slovak Republic
+SK01,nuts/SK01,Bratislava Region,Slovak Republic
+SK02,nuts/SK02,West Slovakia,Slovak Republic
+SK03,nuts/SK03,Central Slovakia,Slovak Republic
+SK04,nuts/SK04,East Slovakia,Slovak Republic
+SVN,country/SVN,Slovenia,Slovenia
+SI03,nuts/SI03,Eastern Slovenia,Slovenia
+SI04,nuts/SI04,Western Slovenia,Slovenia
+ESP,country/ESP,Spain,Spain
+ES11,nuts/ES11,Galicia,Spain
+ES12,nuts/ES12,Asturias,Spain
+ES13,nuts/ES13,Cantabria,Spain
+ES21,nuts/ES21,Basque Country,Spain
+ES22,nuts/ES22,Navarra,Spain
+ES23,nuts/ES23,La Rioja,Spain
+ES24,nuts/ES24,Aragon,Spain
+ES30,nuts/ES30,Madrid,Spain
+ES41,nuts/ES41,Castile and León,Spain
+ES42,nuts/ES42,Castile-La Mancha,Spain
+ES43,nuts/ES43,Extremadura,Spain
+ES51,nuts/ES51,Catalonia,Spain
+ES52,nuts/ES52,Valencia,Spain
+ES53,nuts/ES53,Balearic Islands,Spain
+ES61,nuts/ES61,Andalusia,Spain
+ES62,nuts/ES62,Murcia,Spain
+ES63,nuts/ES63,Ceuta,Spain
+ES64,nuts/ES64,Melilla,Spain
+ES70,nuts/ES70,Canary Islands,Spain
+SE11,nuts/SE11,Stockholm,Sweden
+SE12,nuts/SE12,East Middle Sweden,Sweden
+SE21,nuts/SE21,Småland with Islands,Sweden
+SE22,nuts/SE22,South Sweden,Sweden
+SE23,nuts/SE23,West Sweden,Sweden
+SE31,nuts/SE31,North Middle Sweden,Sweden
+SE32,nuts/SE32,Central Norrland,Sweden
+SE33,nuts/SE33,Upper Norrland,Sweden
+SWE,country/SWE,Sweden,Sweden
+CHE,country/CHE,Switzerland,Switzerland
+CH01,nuts/CH01,Lake Geneva Region,Switzerland
+CH02,nuts/CH02,Espace Mittelland,Switzerland
+CH03,nuts/CH03,Northwestern Switzerland,Switzerland
+CH04,nuts/CH04,Zurich,Switzerland
+CH05,nuts/CH05,Eastern Switzerland,Switzerland
+CH06,nuts/CH06,Central Switzerland,Switzerland
+CH07,nuts/CH07,Ticino,Switzerland
+CH011,nuts/CH011,Vaud,Switzerland
+CH012,nuts/CH012,Valais,Switzerland
+CH013,nuts/CH013,Genève,Switzerland
+CH021,nuts/CH021,Bern,Switzerland
+CH022,nuts/CH022,Fribourg (CH),Switzerland
+CH023,nuts/CH023,Solothurn,Switzerland
+CH024,nuts/CH024,Neuchâtel,Switzerland
+CH025,nuts/CH025,Jura (CH),Switzerland
+CH031,nuts/CH031,Basel-Stadt,Switzerland
+CH032,nuts/CH032,Basel-Landschaft,Switzerland
+CH033,nuts/CH033,Aargau,Switzerland
+CH040,nuts/CH040,Zürich,Switzerland
+CH051,nuts/CH051,Glarus,Switzerland
+CH052,nuts/CH052,Schaffhausen,Switzerland
+CH053,nuts/CH053,Appenzell Ausserrhoden,Switzerland
+CH054,nuts/CH054,Appenzell Innerrhoden,Switzerland
+CH055,nuts/CH055,St. Gallen,Switzerland
+CH056,nuts/CH056,Graubünden,Switzerland
+CH057,nuts/CH057,Thurgau,Switzerland
+CH061,nuts/CH061,Lucerne,Switzerland
+CH062,nuts/CH062,Uri,Switzerland
+CH063,nuts/CH063,Schwyz,Switzerland
+CH064,nuts/CH064,Obwalden,Switzerland
+CH065,nuts/CH065,Nidwalden,Switzerland
+CH066,nuts/CH066,Zug,Switzerland
+CH070,nuts/CH070,Ticino,Switzerland
+TUR,country/TUR,Türkiye,Türkiye
+TR10,nuts/TR10,Istanbul,Türkiye
+TR21,nuts/TR21,Thrace,Türkiye
+TR22,nuts/TR22,Southern Marmara - West,Türkiye
+TR31,nuts/TR31,Izmir,Türkiye
+TR32,nuts/TR32,Southern Aegean,Türkiye
+TR33,nuts/TR33,Northern Aegean,Türkiye
+TR41,nuts/TR41,Eastern Marmara - South,Türkiye
+TR42,nuts/TR42,Eastern Marmara - North,Türkiye
+TR51,nuts/TR51,Ankara,Türkiye
+TR52,nuts/TR52,Central Anatolia - West and South,Türkiye
+TR61,nuts/TR61,Mediterranean region - West,Türkiye
+TR62,nuts/TR62,Mediterranean region - Middle,Türkiye
+TR63,nuts/TR63,Mediterranean region - East,Türkiye
+TR71,nuts/TR71,Central Anatolia - Middle,Türkiye
+TR72,nuts/TR72,Central Anatolia - East,Türkiye
+TR81,nuts/TR81,Western Black Sea - West,Türkiye
+TR82,nuts/TR82,Western Black Sea - Middle and East,Türkiye
+TR83,nuts/TR83,Middle Black Sea,Türkiye
+TR90,nuts/TR90,Eastern Black Sea,Türkiye
+TRA1,nuts/TRA1,Northeastern Anatolia - West,Türkiye
+TRA2,nuts/TRA2,Northeastern Anatolia - East,Türkiye
+TRB1,nuts/TRB1,Eastern Anatolia - West,Türkiye
+TRB2,nuts/TRB2,Eastern Anatolia - East,Türkiye
+TRC1,nuts/TRC1,Southeastern Anatolia - West,Türkiye
+TRC2,nuts/TRC2,Southeastern Anatolia - Middle,Türkiye
+TRC3,nuts/TRC3,Southeastern Anatolia - East,Türkiye
+GBR,country/GBR,United Kingdom,United Kingdom
+UKC,nuts/UKC,North East England,United Kingdom
+UKD,nuts/UKD,North West England,United Kingdom
+UKE,nuts/UKE,Yorkshire and The Humber,United Kingdom
+UKF,nuts/UKF,East Midlands,United Kingdom
+UKG,nuts/UKG,West Midlands,United Kingdom
+UKH,nuts/UKH,East of England,United Kingdom
+UKI,nuts/UKI,Greater London,United Kingdom
+UKJ,nuts/UKJ,South East England,United Kingdom
+UKK,nuts/UKK,South West England,United Kingdom
+UKL,nuts/UKL,Wales,United Kingdom
+UKM,nuts/UKM,Scotland,United Kingdom
+UKN,nuts/UKN,Northern Ireland,United Kingdom
+UKI7,nuts/UKI7,Outer London - West and North West,United Kingdom
+UKG2,nuts/UKG2,Shropshire and Staffordshire,United Kingdom
+UKI3,nuts/UKI3,Inner London - West,United Kingdom
+UKF3,nuts/UKF3,Lincolnshire,United Kingdom
+UKK1,nuts/UKK1,Gloucestershire Wiltshire and Bristol/Bath Area,United Kingdom
+UKM6,nuts/UKM6,Highlands And Islands,United Kingdom
+UKD4,nuts/UKD4,Lancashire,United Kingdom
+UKG3,nuts/UKG3,West Midlands,United Kingdom
+UKM9,nuts/UKM9,Southern Scotland  (NUTS2016),United Kingdom
+UKF2,nuts/UKF2,"Leicestershire, Rutland and Northamptonshire",United Kingdom
+UKM8,nuts/UKM8,West Central Scotland  (NUTS2016),United Kingdom
+UKM7,nuts/UKM7,Eastern Scotland (NUTS2016),United Kingdom
+UKE2,nuts/UKE2,North Yorkshire,United Kingdom
+UKJ2,nuts/UKJ2,Surrey East And West Sussex,United Kingdom
+UKM2,nuts/UKM2,Eastern Scotland (nuts2013),United Kingdom
+UKM3,nuts/UKM3,South Western Scotland (nuts2013),United Kingdom
+UKH2,nuts/UKH2,Bedfordshire and Hertfordshire,United Kingdom
+UKK2,nuts/UKK2,Dorset And Somerset,United Kingdom
+UKL1,nuts/UKL1,West Wales And The Valleys,United Kingdom
+UKK3,nuts/UKK3,Cornwall And Isles Of Scilly,United Kingdom
+UKF1,nuts/UKF1,Derbyshire And Nottinghamshire,United Kingdom
+UKD6,nuts/UKD6,Cheshire,United Kingdom
+UKJ3,nuts/UKJ3,Hampshire And Isle Of Wight,United Kingdom
+UKE1,nuts/UKE1,East Yorkshire And Northern Lincolnshire,United Kingdom
+UKL2,nuts/UKL2,East Wales,United Kingdom
+UKJ4,nuts/UKJ4,Kent,United Kingdom
+UKC2,nuts/UKC2,Northumberland and Tyne And Wear,United Kingdom
+UKI6,nuts/UKI6,Outer London - South,United Kingdom
+UKD1,nuts/UKD1,Cumbria,United Kingdom
+UKE3,nuts/UKE3,South Yorkshire,United Kingdom
+UKE4,nuts/UKE4,West Yorkshire,United Kingdom
+UKI4,nuts/UKI4,Inner London - East,United Kingdom
+UKM5,nuts/UKM5,North Eastern Scotland,United Kingdom
+UKK4,nuts/UKK4,Devon,United Kingdom
+UKI5,nuts/UKI5,Outer London,United Kingdom
+UKG1,nuts/UKG1,"Herefordshire, Worcestershire and Warwickshire",United Kingdom
+UKH1,nuts/UKH1,East Anglia,United Kingdom
+UKC1,nuts/UKC1,Tees Valley and Durham,United Kingdom
+UKD3,nuts/UKD3,Greater Manchester,United Kingdom
+UKH3,nuts/UKH3,Essex,United Kingdom
+UKN0,nuts/UKN0,Northern Ireland,United Kingdom
+UKD7,nuts/UKD7,Merseyside,United Kingdom
+UKJ1,nuts/UKJ1,Berkshire Buckinghamshire and Oxfordshire,United Kingdom
+USA,country/USA,United States,United States
+US01,geoId/01,Alabama,United States
+US02,geoId/02,Alaska,United States
+US04,geoId/04,Arizona,United States
+US05,geoId/05,Arkansas,United States
+US06,geoId/06,California,United States
+US08,geoId/08,Colorado,United States
+US09,geoId/09,Connecticut,United States
+US10,geoId/10,Delaware,United States
+US11,geoId/11,District of Columbia,United States
+US12,geoId/12,Florida,United States
+US13,geoId/13,Georgia,United States
+US15,geoId/15,Hawaii,United States
+US16,geoId/16,Idaho,United States
+US17,geoId/17,Illinois,United States
+US18,geoId/18,Indiana,United States
+US19,geoId/19,Iowa,United States
+US20,geoId/20,Kansas,United States
+US21,geoId/21,Kentucky,United States
+US22,geoId/22,Louisiana,United States
+US23,geoId/23,Maine,United States
+US24,geoId/24,Maryland,United States
+US25,geoId/25,Massachusetts,United States
+US26,geoId/26,Michigan,United States
+US27,geoId/27,Minnesota,United States
+US28,geoId/28,Mississippi,United States
+US29,geoId/29,Missouri,United States
+US30,geoId/30,Montana,United States
+US31,geoId/31,Nebraska,United States
+US32,geoId/32,Nevada,United States
+US33,geoId/33,New Hampshire,United States
+US34,geoId/34,New Jersey,United States
+US35,geoId/35,New Mexico,United States
+US36,geoId/36,New York,United States
+US37,geoId/37,North Carolina,United States
+US38,geoId/38,North Dakota,United States
+US39,geoId/39,Ohio,United States
+US40,geoId/40,Oklahoma,United States
+US41,geoId/41,Oregon,United States
+US42,geoId/42,Pennsylvania,United States
+US44,geoId/44,Rhode Island,United States
+US45,geoId/45,South Carolina,United States
+US46,geoId/46,South Dakota,United States
+US47,geoId/47,Tennessee,United States
+US48,geoId/48,Texas,United States
+US49,geoId/49,Utah,United States
+US50,geoId/50,Vermont,United States
+US51,geoId/51,Virginia,United States
+US53,geoId/53,Washington,United States
+US54,geoId/54,West Virginia,United States
+US55,geoId/55,Wisconsin,United States
+US56,geoId/56,Wyoming,United States
