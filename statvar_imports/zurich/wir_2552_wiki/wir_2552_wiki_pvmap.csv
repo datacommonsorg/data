@@ -1,0 +1,10 @@
+key,prop,val,p1,v1,,,,
+Zeit,observationDate,{Number},,,,,,
+employees,value,{Number},populationType,Person,employmentStatus,Employed,,
+companies,value,{Number},populationType,Company,,,,
+employees_f,value,{Number},populationType,Person,employmentStatus,Employed,gender,Female
+employees_m,value,{Number},populationType,Person,employmentStatus,Employed,gender,Male
+fte,value,{Number},populationType,Person,employmentStatus,FullTimeEmployee,,
+fte_f,value,{Number},populationType,Person,employmentStatus,FullTimeEmployee,gender,Female
+fte_m,value,{Number},populationType,Person,employmentStatus,FullTimeEmployee,gender,Male
+wikiId,observationAbout,wikidataId/{Data},,,,,,
