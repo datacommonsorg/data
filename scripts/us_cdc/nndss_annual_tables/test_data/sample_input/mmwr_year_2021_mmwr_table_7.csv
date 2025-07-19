@@ -1,0 +1,175 @@
+Disease,Hispanic or Latino,Hispanic or Latino,Non-Hispanic/Latino,Non-Hispanic/Latino,Ethnicity not stated,Total
+Disease,No.,Rate,No.,Rate,No.,No.
+Anthrax,—,—,—,—,—,—
+Arboviral diseases,,,,,,
+Chikungunya virus disease,3,0.00,18,0.01,14,35
+Eastern equine encephalitis virus disease,,,,,,
+Neuroinvasive,S,S,S,S,S,5
+Non-neuroinvasive,—,—,—,—,—,—
+Jamestown Canyon virus disease,,,,,,
+Neuroinvasive,S,S,S,S,S,21
+Non-neuroinvasive,S,S,S,S,S,11
+La Crosse virus disease,,,,,,
+Neuroinvasive,1,0.00,31,0.01,7,39
+Non-neuroinvasive,S,S,S,S,S,1
+Powassan virus disease,,,,,,
+Neuroinvasive,S,S,S,S,S,24
+Non-neuroinvasive,S,S,S,S,S,1
+St. Louis encephalitis virus disease,,,,,,
+Neuroinvasive,S,S,S,S,S,11
+Non-neuroinvasive,S,S,S,S,S,6
+West Nile virus disease,,,,,,
+Neuroinvasive,198,0.32,1501,0.56,308,2007
+Non-neuroinvasive,42,0.07,594,0.22,263,899
+Western equine encephalitis virus disease,,,,,,
+Neuroinvasive,—,—,—,—,—,—
+Non-neuroinvasive,—,—,—,—,—,—
+Babesiosis,,,,,,
+Total,169,0.31,1584,0.69,921,2674
+Confirmed,159,0.29,1427,0.62,843,2429
+Probable,10,0.02,157,0.07,78,245
+Botulism,,,,,,
+Total,43,0.07,146,0.05,47,236
+Foodborne,S,S,S,S,S,20
+Infant,29,2.99,110,3.98,32,171
+Other (wound & unspecified),13,0.02,22,0.01,10,45
+Brucellosis,45,0.07,46,0.02,23,114
+Campylobacteriosis,9172,14.96,36581,13.64,17656,63409
+"Candida auris  , clinical  §",59,0.15,419,0.19,130,608
+Carbapenemase-producing carbapenem-resistant Enterobacteriaceae,166,0.30,1295,0.53,867,2328
+Chancroid,S,S,S,S,S,3
+Chlamydia trachomatis  infection,217522,358.60,766630,291.75,629688,1613840
+Cholera,S,S,S,S,S,5
+Coccidioidomycosis,3417,13.06,7520,6.59,9264,20201
+Coronavirus Disease 2019 (COVID-19),,,,,,
+Total,5762044,9397.77,20907285,7796.24,9427165,36096494
+Confirmed,4913090,8013.15,16586604,6185.08,7576574,29076268
+Probable  ¶,848954,1384.63,4320681,1611.16,1850591,7020226
+Cryptosporidiosis,,,,,,
+Total,975,1.59,6004,2.24,2176,9155
+Confirmed,787,1.28,4610,1.72,1794,7191
+Probable,188,0.31,1394,0.52,382,1964
+Cyclosporiasis,308,0.53,1506,0.61,610,2424
+Dengue virus infections  **,,,,,,
+Dengue,79,0.13,72,0.03,31,182
+Dengue-like illness,S,S,S,S,S,7
+Severe dengue,S,S,S,S,S,4
+Diphtheria,—,—,—,—,—,—
+Ehrlichiosis and Anaplasmosis,,,,,,
+Anaplasma phagocytophilum  infection,84,0.14,4371,1.69,2274,6729
+Ehrlichia chaffeensis  infection,36,0.06,1024,0.40,277,1337
+Ehrlichia ewingii  infection,S,S,S,S,S,19
+Undetermined ehrlichiosis/anaplasmosis,1,0.00,64,0.02,12,77
+Giardiasis,1018,2.24,6326,2.91,4299,11643
+Gonorrhea,85429,140.84,403435,153.53,210721,699585
+"Haemophilus influenzae,  invasive disease",,,,,,
+"All ages, all serotypes",243,0.40,2269,0.85,530,3042
+Age <5 years,,,,,,
+Serotype b,3,0.06,20,0.14,4,27
+Non-b serotype,15,0.30,101,0.71,21,137
+Nontypeable,17,0.34,50,0.35,27,94
+Unknown serotype,26,0.04,125,0.05,21,172
+Hansen's disease,3,0.01,36,0.01,18,57
+"Hantavirus infection, non-hantavirus pulmonary syndrome  ††",S,S,S,S,S,2
+Hantavirus pulmonary syndrome,S,S,S,S,S,14
+Hemolytic uremic syndrome post-diarrheal,31,0.05,239,0.09,32,302
+"Hepatitis, Viral Disease  §§",,,,,,
+Hepatitis A,410,0.67,4417,1.65,899,5726
+Hepatitis B,,,,,,
+Acute,223,0.37,1538,0.58,283,2044
+Perinatal infection,S,S,S,S,S,17
+Hepatitis C,,,,,,
+Acute,610,1.04,4297,1.65,1121,6028
+Confirmed,549,0.94,3550,1.36,924,5023
+Probable,61,0.10,747,0.29,197,1005
+Perinatal infection,16,0.68,129,1.69,55,200
+Human immunodeficiency virus diagnoses,8787,14.33,22482,8.38,—,31269
+Influenza-associated pediatric mortality,S,S,S,S,S,6
+Invasive pneumococcal disease  ¶¶,,,,,,
+All ages,1059,2.65,8693,4.22,2346,12098
+Confirmed,1031,2.58,8503,4.13,2298,11832
+Probable,28,0.07,190,0.09,48,266
+Age <5 years,105,0.24,553,0.25,112,770
+Confirmed,100,2.81,532,4.45,107,739
+Probable,5,0.14,21,0.18,5,31
+Legionellosis  ***,576,0.94,6506,2.43,1360,8442
+Leptospirosis,6,0.01,39,0.02,24,69
+Listeriosis  †††,,,,,,
+Total,149,0.24,685,0.26,143,977
+Confirmed,144,0.23,662,0.25,135,941
+Probable,5,0.01,23,0.01,8,36
+Lyme disease,,,,,,
+Total,541,0.88,14465,5.42,9604,24610
+Confirmed,355,0.58,9331,3.50,6525,16211
+Probable,186,0.30,5134,1.92,3079,8399
+Malaria,30,0.05,1072,0.40,401,1503
+Measles  §§§,,,,,,
+Total,—,—,43,0.02,5,48
+Indigenous,—,—,27,0.01,2,29
+Imported,—,—,16,0.01,3,19
+Meningococcal disease,,,,,,
+All serogroups,39,0.06,145,0.05,24,208
+Serogroups ACWY,21,0.03,54,0.02,8,83
+Serogroup B,5,0.01,26,0.01,1,32
+Other serogroups,1,0.00,9,0.00,6,16
+Unknown serogroup,12,0.02,56,0.02,9,77
+Mumps,29,0.05,105,0.04,55,189
+Novel Influenza A virus infections,S,S,S,S,S,16
+Pertussis,254,0.41,1328,0.50,534,2116
+Plague  ¶¶¶,S,S,S,S,S,4
+"Poliomyelitis, paralytic",—,—,—,—,—,—
+"Poliovirus infection, nonparalytic",—,—,—,—,—,—
+Psittacosis,S,S,S,S,S,4
+Q fever,,,,,,
+Total,41,0.07,120,0.04,31,192
+Acute,38,0.06,101,0.04,26,165
+Chronic,3,0.00,19,0.01,5,27
+Rabies,,,,,,
+Human,S,S,S,S,S,5
+Rubella,S,S,S,S,S,7
+"Rubella, congenital syndrome",—,—,—,—,—,—
+Salmonella  Paratyphi infection  ****,8,0.01,42,0.02,14,64
+Salmonella  Typhi infection  ††††,45,0.07,145,0.05,44,234
+Salmonellosis (excluding  S.  Typhi infection and  S.  Paratyphi infection)  §§§§,8027,13.09,28226,10.53,12996,49249
+Severe acute respiratory syndrome-associated coronavirus disease,—,—,—,—,—,—
+Shiga toxin-producing  Escherichia coli  (STEC),2582,4.21,8361,3.12,3000,13943
+Shigellosis,2571,4.19,5115,1.91,2313,9999
+Smallpox,—,—,—,—,—,—
+Spotted fever rickettsiosis,,,,,,
+Total,34,0.06,922,0.35,301,1257
+Confirmed,3,0.00,31,0.01,9,43
+Probable,31,0.05,891,0.33,292,1214
+Streptococcal toxic shock syndrome,15,0.06,110,0.06,20,145
+Syphilis,,,,,,
+"Total, all stages  ¶¶¶¶",43279,71.35,112122,42.67,18966,174367
+Congenital  *****,846,95.44,1871,66.22,103,2820
+Primary and secondary,10705,17.65,36736,13.98,5593,53034
+Tetanus,2,0.00,24,0.01,2,28
+Toxic shock syndrome (other than Streptococcal),S,S,S,S,S,15
+Trichinellosis,S,S,S,S,S,2
+Tuberculosis,2410,3.93,5458,2.04,14,7882
+Tularemia,5,0.01,119,0.04,38,162
+Vancomycin-intermediate  Staphylococcus aureus,5,0.01,57,0.03,11,73
+Vancomycin-resistant  Staphylococcus aureus  †††††,S,S,S,S,S,5
+Varicella morbidity,600,1.06,2040,0.90,856,3496
+Varicella mortality,U,U,U,U,U,U
+Vibriosis,,,,,,
+Total,339,0.56,1849,0.70,665,2853
+Confirmed,182,0.30,1017,0.39,357,1556
+Probable,157,0.26,832,0.32,308,1297
+Viral hemorrhagic fevers,,,,,,
+Crimean-Congo hemorrhagic fever virus,—,—,—,—,—,—
+Ebola virus,—,—,—,—,—,—
+Guanarito virus,—,—,—,—,—,—
+Junin virus,—,—,—,—,—,—
+Lassa virus,—,—,—,—,—,—
+Lujo virus,—,—,—,—,—,—
+Machupo virus,—,—,—,—,—,—
+Marburg virus,—,—,—,—,—,—
+Sabia virus,—,—,—,—,—,—
+Yellow fever,S,S,S,S,S,1
+Zika virus,,,,,,
+"Zika virus disease, congenital  §§§§§",S,S,S,S,S,1
+"Zika virus disease, non-congenital",S,S,S,S,S,2
+"Zika virus infection, congenital  §§§§§",—,—,—,—,—,—
+"Zika virus infection, non-congenital",—,—,—,—,—,—
