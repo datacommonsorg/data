@@ -1,0 +1,8 @@
+Node: E:FoodDistributionAct_FoodBasketByPartners->E0
+observationAbout: C:FoodDistributionAct_FoodBasketByPartners->observationAbout
+observationDate: C:FoodDistributionAct_FoodBasketByPartners->observationDate
+value: C:FoodDistributionAct_FoodBasketByPartners->value
+variableMeasured: C:FoodDistributionAct_FoodBasketByPartners->variableMeasured
+unit: C:FoodDistributionAct_FoodBasketByPartners->unit
+scalingFactor: C:FoodDistributionAct_FoodBasketByPartners->scalingFactor
+typeOf: dcs:StatVarObservation
