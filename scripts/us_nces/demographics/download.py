@@ -62,31 +62,6 @@ flags.DEFINE_string(
     'gs://datcom-prod-imports/scripts/us_nces/demographics/school_id_list.json',
     'Path to config file')
 
-# function to get the folder structure  path for GCS output
-def gcs_output_path(import_name: str, year: str) -> str:
-    """
-    This function si to create the folders structure  within _GCS_OUTPUT_DIR
-    where files for a given import_name and year should be stored.
-
-    """
-    base_path_for_import = ""
-    if import_name == "PrivateSchool":
-        base_path_for_import = os.path.join(_GCS_OUTPUT_DIR, "private_school",
-                                            "input_files")
-    elif import_name == "District":
-        base_path_for_import = os.path.join(_GCS_OUTPUT_DIR, "school_district",
-                                            "input_files")
-    elif import_name == "PublicSchool":
-        base_path_for_import = os.path.join(_GCS_OUTPUT_DIR, "public_school",
-                                            "input_files")
-    else:
-        logging.warning(
-            f"Unknown _FLAGS.import_name: {import_name}. Using top-level directory for year."
-        )
-        base_path_for_import = _GCS_OUTPUT_DIR
-
-    return os.path.join(base_path_for_import, year)
-
 
 def _call_export_csv_api(school: str, year: str, columns: list) -> str:
     COLUMNS_SELECTOR["lColumnsSelected"] = DEFAULT_COLUMNS_SELECTED + columns
@@ -178,13 +153,9 @@ def _call_download_api(compressed_src_file: str, year: str) -> int:
             logging.warning(
                 f"Unknown _FLAGS.import_name: {_FLAGS.import_name}. Extracting to current directory."
             )
-            base_extract_parent_dir = ""
         base_extract_path_original = os.path.join(base_extract_parent_dir, year)
-        gcs_output_subfolder = gcs_output_path(_FLAGS.import_name, year)
-
         # checking the  target extraction paths existance
         os.makedirs(base_extract_path_original, exist_ok=True)
-        os.makedirs(gcs_output_subfolder, exist_ok=True)
 
         try:
             with zipfile.ZipFile(io.BytesIO(res.content)) as zipfileout:
@@ -193,19 +164,6 @@ def _call_download_api(compressed_src_file: str, year: str) -> int:
                 logging.info(
                     f"Files extracted to original location: {os.path.abspath(base_extract_path_original)}"
                 )
-
-                #  copy the files to _GCS_OUTPUT_DIR subfolder
-                for file_info in zipfileout.infolist():
-                    if not file_info.is_dir():
-                        extracted_file_path = os.path.join(
-                            base_extract_path_original, file_info.filename)
-                        target_gcs_output_path = os.path.join(
-                            gcs_output_subfolder, file_info.filename)
-                        shutil.copy2(extracted_file_path,
-                                     target_gcs_output_path)
-                        logging.info(
-                            f"Copied {file_info.filename} to {os.path.abspath(target_gcs_output_path)}"
-                        )
             return 0
 
         except zipfile.BadZipFile:
@@ -280,16 +238,6 @@ def main(_):
         data[school] = {}
 
     for year in years_to_process:
-        # logic to check the gcs_folders stored data
-        expected_gcs_output_dir_for_year = gcs_output_path(school, year)
-
-        if os.path.exists(expected_gcs_output_dir_for_year) and os.listdir(
-                expected_gcs_output_dir_for_year):
-            logging.info(
-                f"Files for {school} - {year} already exist in {os.path.abspath(expected_gcs_output_dir_for_year)}. Skipping download."
-            )
-            continue
-
         logging.info(f"Processing download for {school} - {year}")
         if year in data[school]:
             id_list = data[school][year]

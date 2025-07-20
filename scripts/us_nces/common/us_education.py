@@ -133,76 +133,17 @@ class USEducation:
     def set_tmcf_place_path(self, tmcf_file_place: str) -> None:
         self._tmcf_file_place = tmcf_file_place
 
-    # @log_method_execution
-    # def input_file_to_df(self, f_path: str) -> pd.DataFrame:
-    #     """Convert a file path to a dataframe."""
-    #     with open(f_path, "r", encoding="UTF-8") as file:
-    #         lines = file.readlines()
-    #         # first six lines is data description and source we skip those
-    #         #assert all(lines[i] == '\n' for i in [1, 3, 5])
-    #         # last seven lines is data legend and totals we skip those
-    #         #assert lines[-5].startswith('Data Source')
-    #         f_content = io.StringIO('\n'.join(lines[6:-5]))
-    #         return pd.read_csv(f_content)
-    # @log_method_execution # Keep your decorator
+    @log_method_execution
     def input_file_to_df(self, f_path: str) -> pd.DataFrame:
-        """
-        Convert a GCS file URI to a dataframe, skipping header/footer lines.
-        f_path is expected to be a GCS URI (gs://bucket/path/to/file.csv)
-        """
-        logging.info(f"Attempting to read file from GCS: {f_path}")
-
-        try:
-            # Parse the GCS URI to get bucket name and blob name
-            # Example f_path: 'gs://unresolved_mcf/us_nces/demographics/private_school/semi_automation_input_files/1997/ELSI_csv_export_...'
-            if not f_path.startswith("gs://"):
-                raise ValueError(
-                    "File path must be a GCS URI starting with 'gs://'")
-
-            # Split the URI into bucket_name and blob_name
-            uri_parts = f_path[5:].split('/', 1)  # [5:] to remove "gs://"
-            bucket_name = uri_parts[0]
-            blob_name = uri_parts[1]
-
-            bucket = self.storage_client.bucket(bucket_name)
-            blob = bucket.blob(blob_name)
-
-            # Download the file content as bytes
-            file_content_bytes = blob.download_as_bytes()
-
-            # Decode bytes to a string (assuming UTF-8 for CSVs)
-            file_content_string = file_content_bytes.decode("UTF-8")
-
-            # Split the content into lines
-            lines = file_content_string.splitlines()
-
-            # Apply your existing logic to skip header/footer lines
+        """Convert a file path to a dataframe."""
+        with open(f_path, "r", encoding="UTF-8") as file:
+            lines = file.readlines()
             # first six lines is data description and source we skip those
+            #assert all(lines[i] == '\n' for i in [1, 3, 5])
             # last seven lines is data legend and totals we skip those
-            # Adjusting `lines[6:-5]` if your actual file structure has changed.
-            # From your comment: "first six lines is data description and source we skip those" (lines 0-5)
-            # "last seven lines is data legend and totals we skip those" (lines -7 to -1)
-            # So, lines[6:-7] if you want to exclude the last 7.
-            # Your original code was lines[6:-5] - let's stick to that.
-
-            if len(lines) < 11:  # 6 (header) + 5 (footer) = 11 lines minimum
-                logging.warning(
-                    f"File {f_path} has fewer than 11 lines, skipping line-trimming might be problematic."
-                )
-                f_content_to_parse = io.StringIO(
-                    file_content_string)  # Use full content if too short
-            else:
-                f_content_to_parse = io.StringIO('\n'.join(lines[6:-5]))
-
-            df = pd.read_csv(f_content_to_parse)
-            logging.info(
-                f"Successfully converted {f_path} to DataFrame with shape {df.shape}."
-            )
-            return df
-
-        except Exception as e:
-            logging.error(f"Failed to convert {f_path} to DataFrame: {e}")
-            raise  # Re-raise the exception to propagate the error
+            #assert lines[-5].startswith('Data Source')
+            f_content = io.StringIO('\n'.join(lines[6:-5]))
+            return pd.read_csv(f_content)
 
     @log_method_execution
     def _extract_year_from_headers(self, headers: list) -> str:

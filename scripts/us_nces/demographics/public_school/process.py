@@ -31,16 +31,6 @@ MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, MODULE_DIR + '/../..')
 from common.us_education import USEducation
 from config import *
-from google.cloud import storage
-from urllib.parse import urlparse
-
-_FLAGS = flags.FLAGS
-flags.DEFINE_string('project_id', 'datcom-204919',
-                    'The Google Cloud project ID.')
-flags.DEFINE_string(
-    'gcs_input_file_path',
-    'gs://unresolved_mcf/us_nces/demographics/public_school/semi_automation_input_files',
-    'Path to gcs bucket')
 
 
 class NCESPublicSchool(USEducation):
@@ -61,60 +51,35 @@ class NCESPublicSchool(USEducation):
     _renaming_columns = RENAMING_PUBLIC_COLUMNS
 
 
-def main(_):
+if __name__ == '__main__':
     try:
+        logging.set_verbosity(1)
         logging.info("Main Method Starts For Public School District ")
-        # Get the full GCS URI from the flag
-        full_gcs_uri = _FLAGS.gcs_input_file_path
-
-        # Use urlparse to extract bucket_name and gcs_base_path (path within the bucket)
-        parsed_uri = urlparse(full_gcs_uri)
-        bucket_name = parsed_uri.netloc
-        gcs_base_path = parsed_uri.path.lstrip('/')
-        # Now you can use these derived variables
-        storage_client = storage.Client(project=_FLAGS.project_id)
-        # The 'bucket' object is typically not needed for list_blobs if you pass bucket_name
-        # bucket = storage_client.bucket(bucket_name)
-
+        gcs_output_dir_local = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "gcs_output")
+        input_path_base = os.path.join(gcs_output_dir_local, "input_files")
+        os.makedirs(input_path_base, exist_ok=True)
         input_files_to_process = []
-        year_prefixes = set()
-        blobs_and_prefixes = storage_client.list_blobs(bucket_name,
-                                                       prefix=gcs_base_path +
-                                                       '/',
-                                                       delimiter='/')
-
-        for page in blobs_and_prefixes.pages:
-            if page.prefixes:  # Check if there are any prefixes (year folders) on this page
-                for prefix in page.prefixes:
-                    year_prefixes.add(prefix)
-
-        # If no year folders (prefixes) were found under gcs_base_path, it means the "base directory" is empty or doesn't have expected subfolders.
-        if year_prefixes:
-            for year_prefix in sorted(list(year_prefixes)):
-                logging.info(
-                    f"Checking GCP path: gs://{bucket_name}/{year_prefix}")
-                files_in_year_folder = storage_client.list_blobs(
-                    bucket_name, prefix=year_prefix)
-                for blob in files_in_year_folder:
-                    if blob.name.endswith('.csv') and blob.name != year_prefix:
-                        full_gcs_file_path = f"gs://{bucket_name}/{blob.name}"
-                        input_files_to_process.append(full_gcs_file_path)
-                        logging.info(f"Found file: {full_gcs_file_path}")
-        else:
-            logging.warning(
-                f"No year subfolders found in gs://{bucket_name}/{gcs_base_path}. "
-                "Please ensure files are correctly placed in the GCP bucket.")
+        if os.path.exists(input_path_base):
+            for year_folder_name in sorted(os.listdir(input_path_base)):
+                year_folder_path = os.path.join(input_path_base,
+                                                year_folder_name)
+                if os.path.isdir(year_folder_path):
+                    for file_name in sorted(os.listdir(year_folder_path)):
+                        full_file_path = os.path.join(year_folder_path,
+                                                      file_name)
+                        input_files_to_process.append(full_file_path)
 
         if not input_files_to_process:
             logging.warning(
-                f"No CSV files found in gs://{bucket_name}/{gcs_base_path} or its year subfolders. "
-                "Please ensure files are correctly placed in the GCP bucket.")
-        # Defining Output Files
-        output_file_path = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "output_files")
+                f"No CSV files found in {input_path_base} or its year subfolders. Please ensure download_input_files.py has been run and placed files correctly."
+            )
+        output_file_path = os.path.join(gcs_output_dir_local, "output_files")
+        os.makedirs(output_file_path, exist_ok=True)
 
-        output_file_path_place = os.path.join(
-            os.path.dirname(os.path.abspath(__file__)), "output_place")
+        output_file_path_place = os.path.join(gcs_output_dir_local,
+                                              "output_place")
+        os.makedirs(output_file_path_place, exist_ok=True)
 
         cleaned_csv_path = os.path.join(output_file_path, CSV_FILE_NAME)
         mcf_path = os.path.join(output_file_path, MCF_FILE_NAME)
@@ -134,7 +99,3 @@ def main(_):
 
     except Exception as e:
         logging.fatal(f"Error While Running Public School Process: {e} ")
-
-
-if __name__ == "__main__":
-    app.run(main)

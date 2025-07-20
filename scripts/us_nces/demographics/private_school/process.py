@@ -36,18 +36,6 @@ MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(1, MODULE_DIR + '/../..')
 from common.us_education import USEducation
 from config import *
-# from google.cloud import storage
-# from urllib.parse import urlparse
-
-# _FLAGS = flags.FLAGS
-# flags.DEFINE_string('project_id', 'datcom-204919',
-#                     'The Google Cloud project ID.')
-# flags.DEFINE_string(
-#     'gcs_input_file_path',
-#     'gs://unresolved_mcf/us_nces/demographics/private_school/semi_automation_input_files',
-#     'Path to gcs bucket')
-
-
 
 
 class NCESPrivateSchool(USEducation):
@@ -79,15 +67,12 @@ class NCESPrivateSchool(USEducation):
 
 if __name__ == '__main__':
     try:
+        logging.set_verbosity(1)
         logging.info("Main Method Starts For Private School District ")
-
-        gcs_output_dir_local = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gcs_output")
+        gcs_output_dir_local = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "gcs_output")
         input_path_base = os.path.join(gcs_output_dir_local, "input_files")
         os.makedirs(input_path_base, exist_ok=True)
-
-
-        
-        # logic to collect all CSV files from year subfolders
         input_files_to_process = []
         if os.path.exists(input_path_base):
             for year_folder_name in sorted(os.listdir(input_path_base)):
@@ -101,11 +86,13 @@ if __name__ == '__main__':
 
         if not input_files_to_process:
             logging.warning(
-                f"No CSV files found in {input_path_base} or its year subfolders. Please ensure download_input_files.py has been run and placed files correctly.")
+                f"No CSV files found in {input_path_base} or its year subfolders. Please ensure download_input_files.py has been run and placed files correctly."
+            )
         output_file_path = os.path.join(gcs_output_dir_local, "output_files")
         os.makedirs(output_file_path, exist_ok=True)
-        
-        output_file_path_place = os.path.join(gcs_output_dir_local, "output_place")
+
+        output_file_path_place = os.path.join(gcs_output_dir_local,
+                                              "output_place")
         os.makedirs(output_file_path_place, exist_ok=True)
 
         cleaned_csv_path = os.path.join(output_file_path, CSV_FILE_NAME)
@@ -116,7 +103,6 @@ if __name__ == '__main__':
                                            CSV_DUPLICATE_NAME)
         tmcf_path_place = os.path.join(output_file_path_place, TMCF_FILE_PLACE)
 
-        # Pass the list of actual CSV file paths
         loader = NCESPrivateSchool(input_files_to_process, cleaned_csv_path,
                                    mcf_path, tmcf_path, cleaned_csv_place,
                                    duplicate_csv_place, tmcf_path_place)
@@ -127,4 +113,3 @@ if __name__ == '__main__':
         logging.info("Main Method Completed For Private School District ")
     except Exception as e:
         logging.fatal(f"Error While Running Private School Process: {e} ")
-

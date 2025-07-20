@@ -31,7 +31,7 @@ This dataset has Population Estimates for the National Center for Education Stat
         gsutil cp -r /scripts/us_nces/demographics/school_district/input_files gs://unresolved_mcf/us_nces/demographics/school_district/semi_automation_input_files/
 
 ### Note:
-    The manual part of this process is downloading and uploading the input files to the GCP bucket. Once uploaded, a processing script automatically handles and processes the data directly from the bucket.
+    The only manual part here is after downloading the input files and then uploading them to gcp buclet. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_output/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_output/output_files
 
 ### Script Execution Details
     public    :  python3 private_school/process.py
@@ -62,7 +62,7 @@ The Columns for the csv files are as follows
 If it's the beginning of a new year:
 -The script downloads the latest data using Selenium.
 Otherwise:
--The script retrieves school IDs for Private, Public, and District schools from a local JSON file located at gs://unresolved_mcf/us_nces/demographics/school_id_list.json.
+-The script retrieves school IDs for Private, Public, and District schools from a local JSON file located at gs://datcom-prod-imports/scripts/us_nces/demographics/school_id_list.json.
 
 The population is categorized on various attributes and their combinations:
         
@@ -148,20 +148,20 @@ The attributes used for the import are as follows
         - right click on the desired column checkbox and choose inspect 
         - from the elements on the right hand side, check the number assigned to "value" and add confirm the column under that list which corresponds to value.
 
-    ##### download.py script
+    #### download.py script
      - The download.py script is the main script. It considers the import_name and year to be downloaded. It downloads, extracts and places the input csv in "input_files" folder under the desired school directory.
 
 #### MCFs and Template MCFs
-- private_school -> [private_school/output_files/us_nces_demographics_private_school.mcf]
-                    [private_school/output_files/us_nces_demographics_private_school.tmcf]
+- private_school -> [private_school/gcs_output/output_files/us_nces_demographics_private_school.mcf]
+                    [private_school/gcs_output/output_files/us_nces_demographics_private_school.tmcf]
 
 
-- district_school -> [school_district/output_files/us_nces_demographics_district_school.mcf],
-                     [school_district/output_files/us_nces_demographics_district_school.tmcf]
+- district_school -> [school_district/gcs_output/output_files/us_nces_demographics_district_school.mcf],
+                     [school_district/gcs_output/output_files/us_nces_demographics_district_school.tmcf]
 
 
-- public_school ->  [public_school/output_files/us_nces_demographics_public_school.mcf],
-                    [public_school/output_files/us_nces_demographics_public_school.tmcf]
+- public_school ->  [public_school/gcs_output/output_files/us_nces_demographics_public_school.mcf],
+                    [public_school/gcs_output/output_files/us_nces_demographics_public_school.tmcf]
 
 
 #### Cleaned Place
@@ -172,25 +172,25 @@ The attributes used for the import are as follows
 
 Cleaned data will be inside as a CSV file with the following paths.
 - private_school:
-[private_school/output_place/us_nces_demographics_private_place.csv]
+[private_school/gcs_output/output_place/us_nces_demographics_private_place.csv]
 - district_school:
-[school_district/output_place/us_nces_demographics_district_place.csv]
+[school_district/gcs_output/output_place/us_nces_demographics_district_place.csv]
 - public_school:
-[public_school/output_place/us_nces_demographics_public_place.csv]
+[public_school/gcs_output/output_place/us_nces_demographics_public_place.csv]
 
 If there are Duplicate School IDs present in School Place, they will be saved inside the same output path as that of csv and tmcf file.
-- [scripts/us_nces/demographics/private_school/output_place/dulicate_id_us_nces_demographics_private_place.csv]
-- [scripts/us_nces/demographics/school_district/output_place/dulicate_id_us_nces_demographics_district_place.csv]
-- [scripts/us_nces/demographics/public_school/output_place/dulicate_id_us_nces_demographics_public_place.csv]
+- [scripts/us_nces/demographics/private_school/gcs_output/output_place/dulicate_id_us_nces_demographics_private_place.csv]
+- [scripts/us_nces/demographics/school_district/gcs_output/output_place/dulicate_id_us_nces_demographics_district_place.csv]
+- [scripts/us_nces/demographics/public_school/gcs_output/output_place/dulicate_id_us_nces_demographics_public_place.csv]
 
 
 #### Template MCFs Place
 - private_school:
-[private_school/output_place/us_nces_demographics_private_place.tmcf]
+[private_school/gcs_output/output_place/us_nces_demographics_private_place.tmcf]
 - district_school:
-[school_district/output_place/us_nces_demographics_district_place.tmcf]
+[school_district/gcs_output/output_place/us_nces_demographics_district_place.tmcf]
 - public_school:
-[public_school/output_place/us_nces_demographics_public_place.tmcf]
+[public_school/gcs_output/output_place/us_nces_demographics_public_place.tmcf]
 
 ### Running Tests
 
