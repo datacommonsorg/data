@@ -1,0 +1,34 @@
+Node: dcid:WHO/AIR_1
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/AIR_1
+statType: dcs:measuredValue
+
+Node: dcid:WHO/AIR_7_IschaemicHeartDisease
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/AIR_7
+statType: dcs:measuredValue
+causeOfDeathAndDisability: dcs:IschaemicHeartDisease
+
+Node: dcid:WHO/AIR_7_Female_Stroke
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/AIR_7
+statType: dcs:measuredValue
+gender: schema:Female
+causeOfDeathAndDisability: dcs:Stroke
+
+Node: dcid:WHO/AIR_43_TracheaBronchusLungCancers
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/AIR_43
+statType: dcs:measuredValue
+causeOfDeathAndDisability: dcs:TracheaBronchusLungCancers
+
+Node: dcid:WHO/AIR_43_IschaemicHeartDisease
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Thing
+measuredProperty: dcs:who/AIR_43
+statType: dcs:measuredValue
+causeOfDeathAndDisability: dcs:IschaemicHeartDisease
