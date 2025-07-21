@@ -37,7 +37,7 @@ with open("./config.json", 'r', encoding='utf-8') as config_f:
 
 flags.DEFINE_string(
     'config_file_path',
-    'gs://datcom-import-test/scripts/us_cdc/heat_related_illness/EPHHeatRelatedIllness/configs.py',
+    'gs://unresolved_mcf/cdc/environmental_public_health/heat_stress/latest/configs.py',
     'Config file path')
 
 current_year = datetime.now().year
@@ -190,7 +190,7 @@ def convert_html_to_csv():
                         _CONFIG.get('INPUT_CSV_FILES'), file_name[:-5] + '.csv')
                     table_to_csv(f.read(), cleaned_csv_path)
     except Exception as e:
-        logging.fatal(
+        logging.error(
             f"Error occured while converting the html file {file_name} to csv file: {e}"
         )
 
