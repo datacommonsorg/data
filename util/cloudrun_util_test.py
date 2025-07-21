@@ -40,3 +40,13 @@ class CloudRunUtilTest(unittest.TestCase):
         """Test that running_on_cloudrun returns False when K_SERVICE is empty."""
         with mock.patch.dict(os.environ, {'K_SERVICE': ''}):
             self.assertFalse(cloudrun_util.running_on_cloudrun())
+
+    def test_running_on_cloudrun_when_cloud_run_job_is_set(self):
+        """Test that running_on_cloudrun returns True when CLOUD_RUN_JOB is set."""
+        with mock.patch.dict(os.environ, {'CLOUD_RUN_JOB': 'my-job'}):
+            self.assertTrue(cloudrun_util.running_on_cloudrun())
+
+    def test_running_on_cloudrun_with_empty_cloud_run_job_value(self):
+        """Test that running_on_cloudrun returns False when CLOUD_RUN_JOB is empty."""
+        with mock.patch.dict(os.environ, {'CLOUD_RUN_JOB': ''}):
+            self.assertFalse(cloudrun_util.running_on_cloudrun())
