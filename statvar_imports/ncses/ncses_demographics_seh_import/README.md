@@ -10,9 +10,9 @@ This import pipeline processes Demographic characteristics of graduate students,
 
 ## Configuration
 
-The `seh_download.py` script relies on a configuration file named `configs.py` to fetch the URLs, filenames, and categories for the data to be downloaded. 
+The seh_download.py script is responsible for fetching URLs from the  website, downloading the designated ZIP file, unzipping its contents, extracting the required XLSX file into the input_files folder, and storing the original downloaded ZIP file in a source_files folder.
 
-This approach makes the import process semi-automatic: if the download URLs change in future NCSES releases, only this configuration file needs to be updated, rather than modifying the Python script itself.
+This approach makes the import process fully automatic: if the download URLs change in future NCSES releases, no manual interaction is required; the download script will take care of it.
 
 ## Data Acquisition
 
