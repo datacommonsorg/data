@@ -11,7 +11,7 @@
       ],
       "source_files": [
         "input_files/*.xlsx",
-        "source_files/data-tables-tables-excels.zip"
+        "source_files/*.zip"
       ],
       "import_inputs": [
         {
