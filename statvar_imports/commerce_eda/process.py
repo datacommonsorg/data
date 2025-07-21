@@ -14,9 +14,10 @@
 
 import pandas as pd
 import os
-import subprocess
+import sys
 from decimal import Decimal, InvalidOperation
 from absl import logging
+from absl import app 
 
 # --- GCS Configuration ---
 GCS_BUCKET_NAME = "unresolved_mcf"
@@ -27,9 +28,24 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Define the local working directory for both input and output files
 LOCAL_WORKING_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
 
-# Path to the file_util.py script
-# This path assumes file_util.py is at 'data/util/file_util.py'.
-FILE_UTIL_SCRIPT_PATH = os.path.join(os.path.dirname(os.path.dirname(_MODULE_DIR)), 'util', 'file_util.py')
+PROJECT_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', '..'))
+sys.path.insert(0, PROJECT_ROOT)
+
+# Add the 'data/util' directory to sys.path.
+# This is crucial because file_util.py expects to find aggregation_util.py
+# as a direct module import ('from aggregation_util import ...'),
+# and both are located within 'data/util/'.
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'data', 'util'))
+
+
+# Now, directly import file_util.
+# This assumes file_util.py is located at data/util/file_util.py relative to PROJECT_ROOT.
+try:
+    from data.util import file_util
+except ImportError as e:
+    logging.fatal(f"Failed to import file_util: {e}. Please ensure data/util/file_util.py exists and is accessible, and that the project root and data/util are correctly set in sys.path.", exc_info=True)
+  
+
 
 us_states = {
     "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California",
@@ -58,34 +74,24 @@ def download_files_via_file_util(
     files_to_download: list,
     gcs_bucket: str,
     gcs_prefix: str,
-    local_target_dir: str,
-    file_util_script: str
+    local_target_dir: str
 ):
     """
-    Downloads specified files from GCS to a local directory using an external file utility script.
+    Downloads specified files from GCS to a local directory by directly calling
+    methods from the imported file_util module.
     """
-    logging.info("--- Starting GCS File Transfers using file_util.py ---")
+    logging.info("--- Starting GCS File Transfers using file_util module ---")
     for file_name in files_to_download:
         gcs_source_path = f"gs://{gcs_bucket}/{gcs_prefix}/{file_name}"
         local_destination_path = os.path.join(local_target_dir, file_name)
         
         try:
-            subprocess.run(
-                ['python', file_util_script, 'cp', gcs_source_path, local_destination_path],
-                check=True,
-                capture_output=True,
-                text=True
-            )
-            logging.info(f"Copied '{gcs_source_path}' to '{local_destination_path}' using file_util.py")
-        except subprocess.CalledProcessError as e:
-            logging.error(f"Error copying '{gcs_source_path}' to '{local_destination_path}':")
-            logging.error(f"  Command: {e.cmd}")
-            logging.error(f"  Return Code: {e.returncode}")
-            logging.error(f"  Stdout: {e.stdout}")
-            logging.error(f"  Stderr: {e.stderr}")
-            raise # Re-raise to be caught by the main function's try-except
-        except FileNotFoundError:
-            logging.error(f"Error: file_util.py script not found at {file_util_script}. Please ensure it exists and the path is correct.")
+            # CORRECTED: Call file_util.file_copy instead of file_util.copy_file
+            file_util.file_copy(gcs_source_path, local_destination_path)
+            logging.info(f"Copied '{gcs_source_path}' to '{local_destination_path}' using file_util module")
+        except Exception as e:
+            # Catch any exception that file_util.file_copy might raise
+            logging.error(f"Error copying '{gcs_source_path}' to '{local_destination_path}': {e}")
             raise # Re-raise to be caught by the main function's try-except
     logging.info("--- GCS File Transfers Complete ---\n")
 
@@ -170,8 +176,9 @@ def process_investment_csv(input_csv_filepath: str, output_csv_filepath: str, st
         logging.error(f"Error saving processed CSV to {output_csv_filepath}: {e}")
         raise
 
-def main():
+def main(argv): # main function accepts argv as required by absl.app.run
     """Main function to orchestrate the data processing workflow."""
+    del argv # Unused argument, required by absl.app.run
     try:
         setup_local_directories(LOCAL_WORKING_DIR)
 
@@ -180,8 +187,7 @@ def main():
             files_to_download,
             GCS_BUCKET_NAME,
             GCS_INPUT_PREFIX,
-            LOCAL_WORKING_DIR,
-            FILE_UTIL_SCRIPT_PATH
+            LOCAL_WORKING_DIR
         )
 
         input_filepath = os.path.join(LOCAL_WORKING_DIR, "Investment.csv")
@@ -192,8 +198,8 @@ def main():
         logging.info(f"All specified input files have been transferred to and processed from the '{LOCAL_WORKING_DIR}' directory.")
     except Exception as main_e:
         logging.fatal(f"An unrecoverable error occurred during execution: {main_e}", exc_info=True)
-    
+       
 
 if __name__ == "__main__":
     
-    main()
+    app.run(main) # Use absl.app.run
