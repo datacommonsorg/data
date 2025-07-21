@@ -38,7 +38,8 @@ def download_xlsx_from_table(url):
         response = requests.get(url, timeout=10)
         response.raise_for_status()  
     except requests.exceptions.RequestException as e:
-        logging.error(f"Error fetching the page: {e}")
+        #used loggings.warning to prevent its overall execution
+        logging.warning(f"Error fetching the page: {e}")
         return False 
 
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -78,6 +79,10 @@ def download_xlsx_from_table(url):
         download_response.raise_for_status()
         filename = desired_zip_filename 
         zip_filepath = os.path.join(filename)
+        source_files_dir = os.path.join( "source_files")
+        os.makedirs(source_files_dir, exist_ok=True) 
+        filename = desired_zip_filename 
+        zip_filepath = os.path.join(source_files_dir, filename) 
 
         with open(zip_filepath, 'wb') as f:
             for chunk in download_response.iter_content(chunk_size=8192):
@@ -119,13 +124,11 @@ def download_xlsx_from_table(url):
     except requests.exceptions.RequestException as e:
         logging.error(f"Error downloading the file: {e}")
         return True # Page was fetched successfully, but download failed.
-    finally:
-        os.remove(zip_filepath)
-        logging.info(f"Successfully removed the downloaded ZIP file: {zip_filepath}")
          
     return True 
 
 def main(argv):
+    "In the UI data is available from 2021 only."
     start_year = 2021
     base_url = "https://ncses.nsf.gov/surveys/graduate-students-postdoctorates-s-e/{year}#data"
 
@@ -133,7 +136,7 @@ def main(argv):
         target_url = base_url.format(year=start_year)
         logging.info(f"Attempting to process data for year: {start_year}")
         if not download_xlsx_from_table(target_url):
-            logging.info(f"No data available or error fetching URL for year {start_year}")
+            logging.warning(f"No data available or error fetching URL for year {start_year}")
             break
         
         start_year += 1

@@ -10,7 +10,8 @@
         "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.xlsx  --pv_map=seh_pv_map.csv --config_file=seh_metadata.csv --output_path=output_files/seh_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --statvar_dcid_remap_csv=seh_statvar_remap.csv"
       ],
       "source_files": [
-        "input_files/*.xlsx"
+        "input_files/*.xlsx",
+        "source_files/data-tables-tables-excels.zip"
       ],
       "import_inputs": [
         {
