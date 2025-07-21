@@ -23,7 +23,7 @@ python3 -m tools.import_validation.runner \
 - `--validation_config`: Path to the JSON file that defines which validations to run.
 - `--stats_summary`: Path to the CSV file containing summary statistics of the import (e.g., `summary_report.csv`).
 - `--differ_output`: Path to the CSV file containing the output of a differ tool (e.g., `point_analysis_summary.csv`).
-- `--validation_output`: Path where the output report of the validation will be saved.
+- `--validation_output`: Path where the output report of the validation will be saved. The file extension (`.csv` or `.json`) determines the output format.
 
 The script will exit with a status code of `1` if any validation fails, and `0` on success.
 
@@ -160,12 +160,24 @@ The following validations are currently supported:
 
 ## Output
 
-The framework generates a CSV file (specified by the `--validation_output` flag) with the results of each validation, orchestrated by the `ReportGenerator` class. The file contains the following columns:
+The framework generates a report file (specified by the `--validation_output` flag) with the results of each validation. The format of the report is determined by the file extension (`.csv` or `.json`).
 
-- `RuleID`: The unique ID of the rule that was run.
+### CSV Output
+
+If the output path ends with `.csv`, the file will contain the following columns:
+
+- `ValidationName`: The unique ID of the rule that was run.
 - `Status`: The result of the validation (`PASSED`, `FAILED`, `CONFIG_ERROR`, or `DATA_ERROR`).
 - `Message`: A human-readable message describing the outcome.
-- `Details`: A JSON string containing detailed context, especially on failures.
-- `RowsProcessed`: The total number of rows evaluated for the validation.
-- `RowsSucceeded`: The number of rows that passed the validation.
-- `RowsFailed`: The number of rows that failed the validation.
+- `Details`: A JSON string containing detailed context, especially on failures. This can include information such as the number of rows processed, succeeded, and failed.
+- `ValidationParams`: A JSON string of the parameters that were passed to the validator.
+
+### JSON Output
+
+If the output path ends with `.json`, the file will be a JSON array where each object represents a validation result with the following keys:
+
+- `validation_name`: The unique ID of the rule that was run.
+- `status`: The result of the validation.
+- `message`: A human-readable message describing the outcome.
+- `details`: An object containing detailed context, including row counts.
+- `validation_params`: An object containing the parameters that were passed to the validator.
