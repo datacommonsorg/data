@@ -56,8 +56,32 @@ class UtilTest(unittest.TestCase):
     def test_format_variable_description(self):
         self.assertEqual(
             util.format_variable_description(
-                'Food waste (Tonnes) [Food Waste Sector = Households]',
-                'Food waste (Tonnes)'), 'Food waste [Households]')
+                'Employed population below international poverty line, by sex and age (%) [Age = 15 to 24 years old]',
+                'Employed population below international poverty line, by sex and age (%)'
+            ),
+            'Employed population below international poverty line [15 to 24 years old]'
+        )
+        self.assertEqual(
+            util.format_variable_description(
+                'Number of chairs of permanent committees, by age sex and focus of the committee, Joint Committees [Age = under 46 years old | Sex = Female | Parliamentary committees = Gender Equality]',
+                'Number of chairs of permanent committees, by age sex and focus of the committee, Joint Committees'
+            ),
+            'Number of chairs of permanent committees, Joint Committees [under 46 years old, Female, Parliamentary committees = Gender Equality]'
+        )
+        self.assertEqual(
+            util.format_variable_description(
+                'Proportion of population achieving at least a fixed level of proficiency in functional skills, by sex, age and type of skill (%) [Age = 16 to 65 years old | Sex = Female | Type of skill = Literacy]',
+                'Proportion of population achieving at least a fixed level of proficiency in functional skills, by sex, age and type of skill (%)'
+            ),
+            'Proportion of population achieving at least a fixed level of proficiency in functional skills [16 to 65 years old, Female, Literacy]'
+        )
+        self.assertEqual(
+            util.format_variable_description(
+                'Adjusted gender parity index for achieving at least a fixed level of proficiency in functional skills, by numeracy/literacy skills (ratio) [Age = 16 to 65 years old | Type of skill = Literacy]',
+                'Adjusted gender parity index for achieving at least a fixed level of proficiency in functional skills, by numeracy/literacy skills (ratio)'
+            ),
+            'Adjusted gender parity index for achieving at least a fixed level of proficiency in functional skills [16 to 65 years old, Literacy]'
+        )
 
     def test_format_variable_code(self):
         self.assertEqual(

@@ -20,11 +20,12 @@ import sys
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
-from process import EuroStatTobaccoConsumption
+from tobacco_consumption.process import EuroStatTobaccoConsumption
 from common.unitest_common_methods import CommonTestClass
 # pylint: enable=wrong-import-position
 
 
 class TobaccoConsumptionTest(CommonTestClass.CommonTestCases):
     _import_class = EuroStatTobaccoConsumption
+    _import_name = "tobacco_consumption"
     _test_module_directory = os.path.dirname(__file__)

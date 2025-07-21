@@ -1,0 +1,17 @@
+# Requirements for Python code in this directory.
+bigquery
+dataclasses
+datacommons
+earthengine-api
+geojson
+geopy
+google-cloud-logging
+lxml
+openpyxl
+rasterio
+requests
+requests_cache
+retry
+s2sphere
+shapely
+urllib3

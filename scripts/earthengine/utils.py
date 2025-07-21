@@ -14,26 +14,26 @@
 """Utility functions"""
 
 import csv
-import datacommons as dc
 import datetime
+from datetime import date
+from datetime import datetime
 import glob
 import os
 import pickle
 import re
-import s2sphere
 import sys
 import tempfile
-
-from absl import logging
-from datetime import date
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
-from geopy import distance
-from s2sphere import LatLng, Cell, CellId
-from shapely.geometry import Polygon
 from typing import Union
 
-_SCRIPTS_DIR = os.path.dirname(__file__)
+from absl import logging
+import datacommons as dc
+from dateutil.relativedelta import relativedelta
+from geopy import distance
+import s2sphere
+from s2sphere import Cell, CellId, LatLng
+from shapely.geometry import Polygon
+
+_SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(_SCRIPTS_DIR)
 sys.path.append(os.path.dirname(_SCRIPTS_DIR))
 sys.path.append(os.path.dirname(os.path.dirname(_SCRIPTS_DIR)))
@@ -43,25 +43,26 @@ sys.path.append(
 from config_map import ConfigMap, read_py_dict_from_file, write_py_dict_to_file
 from dc_api_wrapper import dc_api_wrapper
 
+# Constants
+_MAX_LATITUDE = 90.0
+_MAX_LONGITUDE = 180.0
+_DC_API_ROOT = 'http://autopush.api.datacommons.org'
+
 # Utilities for dicts.
 
 
 def dict_filter_values(pvs: dict, config: dict = {}) -> bool:
-    '''Returns true if the property values are allowed by the config.
+    """Returns true if the property values are allowed by the config.
+
      removes the properties not allowed by the config from the dict.
   Args:
     pvs: dictionary with property values to be filtered.
-    config: dictionary with a per property filter settings:
-      {
-        <prop> : {
-          'min': <min_value>',
-          'max': <max_value>',
-          'regex': <regex pattern>',
-        },
-      }
+    config: dictionary with a per property filter settings: { <prop> : { 'min':
+      <min_value>', 'max': <max_value>', 'regex': <regex pattern>', }, }
+
   Returns:
     True if the key:values in pvs meet all config criteria.
-  '''
+  """
     props = list(pvs.keys())
     is_allowed = True
     for p in props:
@@ -79,8 +80,16 @@ def dict_filter_values(pvs: dict, config: dict = {}) -> bool:
                     if value > prop_config['max']:
                         allow_value = False
                 if 'regex' in prop_config:
+                    if not isinstance(value, str):
+                        value = str(value)
                     matches = re.search(prop_config['regex'], value)
                     if not matches:
+                        allow_value = False
+                if 'ignore' in prop_config:
+                    if not isinstance(value, str):
+                        value = str(value)
+                    matches = re.search(prop_config['ignore'], value)
+                    if matches:
                         allow_value = False
         if not allow_value:
             pvs.pop(p)
@@ -92,22 +101,22 @@ def dict_filter_values(pvs: dict, config: dict = {}) -> bool:
 
 
 def is_s2_cell_id(dcid: str) -> bool:
-    '''Returns true if the dcid is an s2 cell id.'''
+    """Returns true if the dcid is an s2 cell id."""
     return strip_namespace(dcid).startswith('s2CellId/')
 
 
 def s2_cell_from_latlng(lat: float, lng: float, level: int) -> CellId:
-    '''Returns an S2 CellId object of level for the given location lat/lng.
+    """Returns an S2 CellId object of level for the given location lat/lng.
 
-    Args:
-      lat: Latitude in degrees
-      lng: Longitude in degrees
-      level: desired S2 level for cell id.
-        Should be <30, the max s2 level supported.
+  Args:
+    lat: Latitude in degrees
+    lng: Longitude in degrees
+    level: desired S2 level for cell id. Should be <30, the max s2 level
+      supported.
 
-    Returns:
-      CellId object oof the desired level that contains the lat/lng point.
-    '''
+  Returns:
+    CellId object oof the desired level that contains the lat/lng point.
+  """
     assert level >= 0 and level <= 30
     ll = s2sphere.LatLng.from_degrees(lat, lng)
     cell = s2sphere.CellId.from_lat_lng(ll)
@@ -117,21 +126,21 @@ def s2_cell_from_latlng(lat: float, lng: float, level: int) -> CellId:
 
 
 def s2_cell_to_hex_str(s2cell_id: Union[int, CellId]) -> str:
-    '''Returns the s2 cell id in hex.'''
+    """Returns the s2 cell id in hex."""
     if isinstance(s2cell_id, CellId):
         s2cell_id = s2cell_id.id()
     return f'{s2cell_id:#018x}'
 
 
 def s2_cell_to_dcid(s2cell_id: Union[int, CellId]) -> str:
-    '''Returns the dcid for the s2 cell of the form s2CellId/0x1234.'''
+    """Returns the dcid for the s2 cell of the form s2CellId/0x1234."""
     if isinstance(s2cell_id, CellId):
         s2cell_id = s2cell_id.id()
     return 'dcid:s2CellId/' + s2_cell_to_hex_str(s2cell_id)
 
 
 def s2_cell_from_dcid(s2_dcid: Union[str, int, CellId]) -> CellId:
-    '''Returns the s2 CellId object for the s2 cell.'''
+    """Returns the s2 CellId object for the s2 cell."""
     if isinstance(s2_dcid, str):
         return s2sphere.CellId(int(s2_dcid[s2_dcid.find('/') + 1:], 16))
     if isinstance(s2_dcid, int):
@@ -142,12 +151,12 @@ def s2_cell_from_dcid(s2_dcid: Union[str, int, CellId]) -> CellId:
 
 
 def s2_cell_latlng_dcid(lat: float, lng: float, level: int) -> str:
-    '''Returns dcid of the s2 cell of given level containing the point lat/lng.'''
+    """Returns dcid of the s2 cell of given level containing the point lat/lng."""
     return s2_cell_to_dcid(s2_cell_from_latlng(lat, lng, level).id())
 
 
 def s2_cells_distance(cell_id1: int, cell_id2: int) -> float:
-    '''Returns the distance between the centroid of two S2 cells in kilometers.'''
+    """Returns the distance between the centroid of two S2 cells in kilometers."""
     p1 = CellId(cell_id1).to_lat_lng()
     p2 = CellId(cell_id2).to_lat_lng()
     return distance.distance((p1.lat().degrees, p1.lng().degrees),
@@ -155,26 +164,27 @@ def s2_cells_distance(cell_id1: int, cell_id2: int) -> float:
 
 
 def s2_cell_area(cell_id: s2sphere.CellId) -> float:
-    '''Returns the area of the S2 cell in sqkm
+    """Returns the area of the S2 cell in sqkm
 
-     Converts the are of the S2 cell into sqkm using a fixed radius of 6371 km.
+  Converts the are of the S2 cell into sqkm using a fixed radius of 6371 km.
 
-     Args:
-       cell_id: S2 CellId
+  Args:
+    cell_id: S2 CellId
 
-     Returns:
-       Area of the cell in sq km.
-     '''
+  Returns:
+    Area of the cell in sq km.
+  """
     _EARTH_RADIUS = 6371  # Radius of Earth in Km.
     s2_cell = s2_cell_from_dcid(cell_id)
     return s2sphere.Cell(s2_cell).exact_area() * _EARTH_RADIUS * _EARTH_RADIUS
 
 
 def s2_cell_get_neighbor_ids(s2_cell_id: str) -> list:
-    '''Returns a list of neighbouring cell dcids for a given s2 cell dcid.
-    An interior cell will have 8 neighbours: 3 above, 1 left, 1 right and 3 below.
-    A cell near the edge may have a subset of these.
-    '''
+    """Returns a list of neighbouring cell dcids for a given s2 cell dcid.
+
+  An interior cell will have 8 neighbours: 3 above, 1 left, 1 right and 3 below.
+  A cell near the edge may have a subset of these.
+  """
     s2_cell = s2_cell_from_dcid(s2_cell_id)
     return [
         s2_cell_to_dcid(cell)
@@ -183,7 +193,7 @@ def s2_cell_get_neighbor_ids(s2_cell_id: str) -> list:
 
 
 def s2_cell_to_polygon(s2_cell_id: str) -> Polygon:
-    '''Returns the polygon with 4 vertices for an s2 cell.'''
+    """Returns the polygon with 4 vertices for an s2 cell."""
     s2_cell = Cell(s2_cell_from_dcid(s2_cell_id))
     if not s2_cell:
         return None
@@ -200,14 +210,17 @@ def s2_cell_to_polygon(s2_cell_id: str) -> Polygon:
 
 def latlng_cell_area(lat: float, lng: float, height: float,
                      width: float) -> float:
-    '''Returns the area of the rectangular region in sqkm.
-    Args:
-      lat: latitude of a corner in degrees
-      lng: Longitude of a corner in degrees
-      width: width in degrees
-      height: height in degrees
-    Returns:
-      area in square kilometers.'''
+    """Returns the area of the rectangular region in sqkm.
+
+  Args:
+    lat: latitude of a corner in degrees
+    lng: Longitude of a corner in degrees
+    width: width in degrees
+    height: height in degrees
+
+  Returns:
+    area in square kilometers.
+  """
     try:
         bottom_left = (lat, lng)
         top_left = (min(90, lat + height), lng)
@@ -224,33 +237,41 @@ def latlng_cell_area(lat: float, lng: float, height: float,
 
 
 def is_grid_id(dcid: str) -> bool:
-    '''Returns true if the dcid is a grid id.'''
+    """Returns true if the dcid is a grid id."""
     return strip_namespace(dcid).startswith('grid_')
 
 
 def is_ipcc_id(dcid: str) -> bool:
-    '''Returns true if the dcid is an ipcc grid id.'''
+    """Returns true if the dcid is an ipcc grid id."""
     return strip_namespace(dcid).startswith('ipcc_')
 
 
-def grid_id_from_lat_lng(degrees: float,
-                         lat: float,
-                         lng: float,
-                         prefix: str = 'grid_',
-                         suffix: str = '') -> str:
-    '''Returns the dcid for grid of given degrees for the lat/lng.'''
+def grid_id_from_lat_lng(
+    degrees: float,
+    lat: float,
+    lng: float,
+    prefix: str = 'grid_',
+    suffix: str = '',
+    lat_offset: float = 0,
+    lng_offset: float = 0,
+) -> str:
+    """Returns the dcid for grid of given degrees for the lat/lng."""
     # Get lat/lng rounded to the grid degrees
     degree_str = str_from_number(degrees)
     if prefix == 'ipcc_':
+        # Get the dcid prefix with the grid degree,
+        # such as ipcc_50 for 0.5 deg grids.
         degree_str = str_from_number(int(degrees * 100))
-    lat_str = str_from_number(lat, 2)
-    lng_str = str_from_number(lng, 2)
+    lat_rounded = int(lat / degrees) * degrees + lat_offset
+    lng_rounded = int(lng / degrees) * degrees + lng_offset
+    lat_str = str_from_number(number=lat_rounded, precision_digits=2)
+    lng_str = str_from_number(number=lng_rounded, precision_digits=2)
     return f'dcid:{prefix}{degree_str}/{lat_str}_{lng_str}{suffix}'
 
 
 def grid_id_to_deg_lat_lng(
         grid_id: str, default_deg: float = 1) -> (float, float, float, str):
-    '''Returns a tuple of degree, latitude longitude, suffix for the grid id.'''
+    """Returns a tuple of degree, latitude longitude, suffix for the grid id."""
     grid = strip_namespace(grid_id)
     deg, lat_lng = grid.split('/', 1)
     if deg is not None:
@@ -265,57 +286,75 @@ def grid_id_to_deg_lat_lng(
         latlngs = lat_lng.split('_')
         lat = float(latlngs[0])
         lng = float(latlngs[1])
+        lat_offset = lat - int(lat / deg) * deg
+        lng_offset = lng - int(lng / deg) * deg
         suffix = ''
         if len(latlngs) > 2 and latlngs[2]:
             suffix = '_' + latlngs[2]
-        return (deg, lat, lng, suffix)
+        return (deg, lat, lng, lat_offset, lng_offset, suffix)
 
 
 def grid_get_neighbor_ids(grid_id: str) -> list:
-    '''Returns all the 8 neighbour ids of the grid.'''
+    """Returns all the 8 neighbour ids of the grid."""
     grid_id = strip_namespace(grid_id)
     prefix = grid_id[:grid_id.find('_') + 1]
-    deg, lat, lng, suffix = grid_id_to_deg_lat_lng(grid_id)
+    deg, lat, lng, lat_deg_offset, lng_deg_offset, suffix = (
+        grid_id_to_deg_lat_lng(grid_id))
     neighbours = []
     for lat_offset in [-1, 0, 1]:
         for lng_offset in [-1, 0, 1]:
             if lat_offset != 0 or lng_offset != 0:
                 neighbour_lat = lat + lat_offset * deg
                 neighbour_lng = lng + lng_offset * deg
-                if abs(neighbour_lat) < 90.0 and abs(neighbour_lng) < 180:
+                if abs(neighbour_lat) < _MAX_LATITUDE and abs(
+                        neighbour_lng) < _MAX_LONGITUDE:
                     neighbours.append(
-                        grid_id_from_lat_lng(deg, neighbour_lat, neighbour_lng,
-                                             prefix, suffix))
+                        grid_id_from_lat_lng(
+                            deg,
+                            neighbour_lat,
+                            neighbour_lng,
+                            prefix,
+                            suffix,
+                            lat_deg_offset,
+                            lng_deg_offset,
+                        ))
     return neighbours
 
 
 def grid_ids_distance(grid1: str, grid2: str) -> float:
-    '''Returns the distance between grid points.'''
-    deg1, lat1, lng1, suffix1 = grid_id_to_deg_lat_lng(grid1)
-    deg2, lat2, lng2, suffix2 = grid_id_to_deg_lat_lng(grid2)
+    """Returns the distance between grid points."""
+    deg1, lat1, lng1, lat1_offset, lng1_offset, suffix1 = grid_id_to_deg_lat_lng(
+        grid1)
+    deg2, lat2, lng2, lat2_offset, lng2_offset, suffix2 = grid_id_to_deg_lat_lng(
+        grid2)
     return distance.distance((lat1, lng1), (lat2, lng2)).km
 
 
 def grid_area(grid: str) -> float:
-    '''Returns the area for the grid.'''
-    deg, lat, lng, suffix = grid_id_to_deg_lat_lng(grid)
+    """Returns the area for the grid."""
+    deg, lat, lng, lat_offset, lng_offset, suffix = grid_id_to_deg_lat_lng(grid)
     return latlng_cell_area(lat, lng, deg, deg)
 
 
 def grid_to_polygon(grid: str) -> Polygon:
-    '''Returns the rectangular polygon for the grid.
-    Assumes the lat/lng from the dcid is the center.'''
-    deg, lat, lng, suffix = grid_id_to_deg_lat_lng(grid)
+    """Returns the rectangular polygon for the grid.
+
+  Assumes the lat/lng from the dcid is the center.
+  """
+    deg, lat, lng, lat_offset, lng_offset, suffix = grid_id_to_deg_lat_lng(grid)
     bottom_left_lat = max(lat - deg / 2, -90)
     bottom_left_lng = max(lng - deg / 2, -180)
-    return Polygon.from_bounds(bottom_left_lng, bottom_left_lat,
-                               min(bottom_left_lng + deg, 180),
-                               min(bottom_left_lat + deg, 90))
+    return Polygon.from_bounds(
+        bottom_left_lng,
+        bottom_left_lat,
+        min(bottom_left_lng + deg, 180),
+        min(bottom_left_lat + deg, 90),
+    )
 
 
 def place_id_to_lat_lng(placeid: str,
                         dc_api_lookup: bool = True) -> (float, float):
-    '''Returns the lat/lng degrees for the place.'''
+    """Returns the lat/lng degrees for the place."""
     lat = None
     lng = None
     if is_s2_cell_id(placeid):
@@ -323,7 +362,8 @@ def place_id_to_lat_lng(placeid: str,
         point = s2_cell.to_lat_lng()
         return (point.lat().degrees, point.lng().degrees)
     if is_grid_id(placeid) or is_ipcc_id(placeid):
-        deg, lat, lng, suffix = grid_id_to_deg_lat_lng(placeid)
+        deg, lat, lng, lat_offset, lng_offset, suffix = grid_id_to_deg_lat_lng(
+            placeid)
     elif dc_api_lookup:
         # Get the lat/lng from the DC API
         latlng = []
@@ -337,7 +377,8 @@ def place_id_to_lat_lng(placeid: str,
                     'prop': prop,
                 },
                 use_cache=True,
-                api_root='http://autopush.api.datacommons.org')
+                api_root=_DC_API_ROOT,
+            )
             if not resp or placeid not in resp:
                 return (0, 0)
             values = resp[placeid]
@@ -350,14 +391,14 @@ def place_id_to_lat_lng(placeid: str,
 
 
 def place_distance(place1: str, place2: str) -> float:
-    '''Returns the distance between two places.'''
+    """Returns the distance between two places."""
     lat1, lng1 = place_id_to_lat_lng(place1)
     lat2, lng2 = place_id_to_lat_lng(place2)
     return distance.distance((lat1, lng1), (lat2, lng2)).km
 
 
 def place_area(place: str) -> float:
-    '''Returns the area for the place in sqkm.'''
+    """Returns the area for the place in sqkm."""
     if is_s2_cell_id(place):
         s2_cell = s2_cell_from_dcid(place)
         return s2_cell_area(s2_cell)
@@ -368,7 +409,7 @@ def place_area(place: str) -> float:
 
 
 def place_to_polygon(place_id: str) -> Polygon:
-    '''Returns the polygon for the place.'''
+    """Returns the polygon for the place."""
     if is_s2_cell_id(place_id):
         return s2_cell_to_polygon(place_id)
     if is_grid_id(place_id) or is_ipcc_id(place_id):
@@ -380,18 +421,18 @@ def place_to_polygon(place_id: str) -> Polygon:
 
 
 def strip_namespace(dcid: str) -> str:
-    '''Returns the id without the namespace prefix.'''
+    """Returns the id without the namespace prefix."""
     return dcid[dcid.find(':') + 1:]
 
 
 def add_namespace(dcid: str, prefix: str = 'dcid:') -> str:
-    '''Returns the dcid with the namespace set to prefix.'''
+    """Returns the dcid with the namespace set to prefix."""
     return f'{prefix}{strip_namespace(dcid)}'
 
 
 def str_get_numeric_value(
         value: Union[str, list, int, float]) -> Union[int, float, None]:
-    '''Returns the numeric value from input string or None.'''
+    """Returns the numeric value from input string or None."""
     if isinstance(value, list):
         value = value[0]
     if isinstance(value, int) or isinstance(value, float):
@@ -422,9 +463,11 @@ def str_get_numeric_value(
 
 def str_from_number(number: Union[int, float],
                     precision_digits: int = None) -> str:
-    '''Returns the number converted to string.
-    Ints and floats with 0 decimal parts get int strings.
-    Floats get precision digits.'''
+    """Returns the number converted to string.
+
+  Ints and floats with 0 decimal parts get int strings. Floats get precision
+  digits.
+  """
     # Check if number is an integer or float without any decimals.
     if int(number) == number:
         number_int = int(number)
@@ -445,21 +488,23 @@ def str_format_float(data: float, precision_digits: int = 6):
 
 
 def date_today(date_format: str = '%Y-%m-%d') -> str:
-    '''Returns today's date in the given format.'''
+    """Returns today's date in the given format."""
     return date.today().strftime(date_format)
 
 
 def date_yesterday(date_format: str = '%Y-%m-%d') -> str:
-    '''Returns today's date in the given format.'''
+    """Returns yesterday's date in the given format."""
     return date_advance_by_period(date_today(date_format), '-1d', date_format)
 
 
 def date_parse_time_period(time_period: str) -> (int, str):
-    '''Parse time period into a tuple of (number, unit),
-    for eg: for 'P1M' returns (1, month).
-    Time period is assumed to be of the form: P<Nunmber><Duration>
-    where duration is a letter: D: days, M; months, Y: years.
-    .'''
+    """Parse time period into a tuple of (number, unit),
+
+  for eg: for 'P1M' returns (1, month).
+  Time period is assumed to be of the form: P<Nunmber><Duration>
+  where duration is a letter: D: days, M; months, Y: years.
+  .
+  """
     # Extract the number and duration letter from the time period.
     re_pat = r'P?(?P<delta>[+-]?[0-9]+)(?P<unit>[A-Z])'
     m = re.search(re_pat, time_period.upper())
@@ -477,7 +522,7 @@ def date_parse_time_period(time_period: str) -> (int, str):
 def date_advance_by_period(date_str: str,
                            time_period: str,
                            date_format: str = '%Y-%m-%d') -> str:
-    '''Returns the date string advanced by the time period.'''
+    """Returns the date string advanced by the time period."""
     if not date_str:
         return ''
     dt = datetime.strptime(date_str, date_format)
@@ -491,10 +536,11 @@ def date_advance_by_period(date_str: str,
 
 
 def date_format_by_time_period(date_str: str, time_period: str) -> str:
-    '''Returns date in the format of the time_period: P<N><L>
-      If the last letter in the time_period is Y, returns date in YYYY,
-      for 'M', returns date as YYYY-MM, for D returns date as YYYY-MM-DD.
-    '''
+    """Returns date in the format of the time_period: P<N><L>
+
+  If the last letter in the time_period is Y, returns date in YYYY,
+  for 'M', returns date as YYYY-MM, for D returns date as YYYY-MM-DD.
+  """
     if not time_period:
         return date_str
     (delta, unit) = date_parse_time_period(time_period)

@@ -63,7 +63,7 @@ class ProcessEventsTest(unittest.TestCase):
                           expected_file: str,
                           actual_file: str,
                           ignore_columns: list = []):
-        '''Compare CSV files with statvar obsevration data.'''
+        '''Compare CSV files with statvar observation data.'''
         # Sort files by columns.
         df_expected = pd.read_csv(expected_file)
         df_actual = pd.read_csv(actual_file)
@@ -98,21 +98,26 @@ class ProcessEventsTest(unittest.TestCase):
                 output_path=output_prefix,
                 config=self._config)
             # Verify generated events.
-            for file in [
-                    'events.csv',
-                    'events.tmcf',
-                    'svobs.csv',
-                    'svobs.tmcf',
-                    'place_svobs.csv',
-                    'place_svobs.tmcf',
-            ]:
-                if file.endswith('.csv'):
-                    # compare csv output without geoJson that is not deterministic
-                    self.compare_csv_files(test_prefix + file,
-                                           output_prefix + file,
-                                           ['geoJsonCoordinatesDP1'])
-                else:
-                    self.compare_files(test_prefix + file, output_prefix + file)
+            self.compare_csv_files(
+                os.path.join(tmp_dir, 'events_test_events.csv'),
+                os.path.join(_TESTDIR, test_prefix + 'events.csv'))
+            self.compare_files(
+                os.path.join(tmp_dir, 'events_test_events.tmcf'),
+                os.path.join(_TESTDIR, test_prefix + 'events.tmcf'))
+            self.compare_csv_files(
+                os.path.join(tmp_dir, 'event_svobs', 'events_test_svobs.csv'),
+                os.path.join(_TESTDIR, test_prefix + 'svobs.csv'))
+            self.compare_files(
+                os.path.join(tmp_dir, 'event_svobs', 'events_test_svobs.tmcf'),
+                os.path.join(_TESTDIR, test_prefix + 'svobs.tmcf'))
+            self.compare_csv_files(
+                os.path.join(tmp_dir, 'place_svobs',
+                             'events_test_place_svobs.csv'),
+                os.path.join(_TESTDIR, test_prefix + 'place_svobs.csv'))
+            self.compare_files(
+                os.path.join(tmp_dir, 'place_svobs',
+                             'events_test_place_svobs.tmcf'),
+                os.path.join(_TESTDIR, test_prefix + 'place_svobs.tmcf'))
 
     def test_process_event_data(self):
         '''Verify events can be added by date.'''

@@ -1,0 +1,8 @@
+Node: E:us_fed_fund_output->E0
+observationAbout: C:us_fed_fund_output->observationAbout
+observationDate: C:us_fed_fund_output->observationDate
+value: C:us_fed_fund_output->value
+variableMeasured: C:us_fed_fund_output->variableMeasured
+unit: C:us_fed_fund_output->unit
+scalingFactor: C:us_fed_fund_output->scalingFactor
+typeOf: dcs:StatVarObservation

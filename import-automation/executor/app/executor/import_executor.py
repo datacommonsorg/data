@@ -17,30 +17,54 @@ based on manifests.
 """
 
 import dataclasses
+import glob
 import json
 import logging
 import os
+import shutil
+import shlex
+import sys
 import subprocess
 import tempfile
 import time
 import traceback
 from typing import Callable, Dict, Iterable, List, Optional, Tuple
 
+REPO_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.dirname(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_differ'))
+sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_validation'))
+sys.path.append(os.path.join(REPO_DIR, 'util'))
+
+import file_util
+
+from import_differ import ImportDiffer
+from import_validation import ImportValidation
 from app import configs
 from app import utils
+from app.executor import cloud_run_simple_import
 from app.executor import import_target
-from app.service import dashboard_api
 from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
 from app.service import import_service
+from google.cloud import storage
 
-_SYSTEM_RUN_INIT_FAILED_MESSAGE = (
-    'Failed to initialize the system run with the import progress dashboard')
+# Email address for status messages.
+_DEBUG_EMAIL_ADDR = 'datacommons-debug+imports@google.com'
+_ALERT_EMAIL_ADDR = 'datacommons-test-alerts+imports@google.com'
 
-_SEE_DASHBOARD_MESSAGE = (
-    'See dashboard for logs: '
-    'https://dashboard-frontend-dot-datcom-data.uc.r.appspot.com/')
+_SEE_LOGS_MESSAGE = (
+    'Please find logs in the Logs Explorer of the GCP project associated with'
+    ' Import Automation.')
+
+_IMPORT_METADATA_MCF_TEMPLATE = """
+Node: dcid:dc/base/{import_name}
+typeOf: dcid:Provenance
+lastDataRefreshDate: "{last_data_refresh_date}"
+"""
 
 
 @dataclasses.dataclass
@@ -79,12 +103,14 @@ class ImportExecutor:
         some place.
       github: GitHubRepoAPI object for communicating with GitHUB API.
       config: ExecutorConfig object containing configurations for the execution.
-      dashboard: DashboardAPI object for communicating with the import progress
-        dashboard. If not provided, the executor will not communicate with the
-        dashboard.
       notifier: EmailNotifier object for sending notificaiton emails.
       importer: ImportServiceClient object for invoking the Data Commons
         importer.
+      local_repo_dir: (Only applies to Updates) The full path to the GitHub
+        repository on local. If provided, the local_repo_dir is used for Update
+        related operations instead of cloning a fresh version (latest master
+        branch) of the repo on GitHub. The path shoud be provided to the root
+        directory of the repo, e.g. `<base_path_on_disk>/data`.
   """
 
     def __init__(
@@ -92,59 +118,29 @@ class ImportExecutor:
         uploader: file_uploader.FileUploader,
         github: github_api.GitHubRepoAPI,
         config: configs.ExecutorConfig,
-        dashboard: dashboard_api.DashboardAPI = None,
         notifier: email_notifier.EmailNotifier = None,
-        importer: 'import_service.ImportServiceClient' = None,
+        importer: import_service.ImportServiceClient = None,
+        local_repo_dir: str = '',
     ):
         self.uploader = uploader
         self.github = github
         self.config = config
-        self.dashboard = dashboard
         self.notifier = notifier
         self.importer = importer
+        self.local_repo_dir: str = local_repo_dir
 
-    def execute_imports_on_commit(
-        self,
-        commit_sha: str,
-        repo_name: str = None,
-        branch_name: str = None,
-        pr_number: str = None,
-    ) -> ExecutionResult:
+    def execute_imports_on_commit(self, commit_sha: str) -> ExecutionResult:
         """Executes imports upon a GitHub commit.
-
-    repo_name, branch_name, and pr_number are used only for logging to
-    the import progress dashboard.
 
     Args:
         commit_sha: ID of the commit as a string.
-        repo_name: Name of the repository the commit is for as a string.
-        branch_name: Name of the branch the commit is for as a string.
-        pr_number: If the commit is a part of a pull request, the number of the
-          pull request as an int.
 
     Returns:
         ExecutionResult object describing the results of the imports.
     """
-        run_id = None
-        try:
-            if self.dashboard:
-                run_id = _init_run_helper(
-                    dashboard=self.dashboard,
-                    commit_sha=commit_sha,
-                    repo_name=repo_name,
-                    branch_name=branch_name,
-                    pr_number=pr_number,
-                )['run_id']
-        except Exception:
-            logging.exception(_SYSTEM_RUN_INIT_FAILED_MESSAGE)
-            return _create_system_run_init_failed_result(traceback.format_exc())
-
         return run_and_handle_exception(
-            run_id,
-            self.dashboard,
             self._execute_imports_on_commit_helper,
             commit_sha,
-            run_id,
         )
 
     def execute_imports_on_update(self,
@@ -160,32 +156,17 @@ class ImportExecutor:
     Returns:
         ExecutionResult object describing the results of the imports.
     """
-        run_id = None
-        try:
-            if self.dashboard:
-                run_id = _init_run_helper(self.dashboard)['run_id']
-        except Exception:
-            logging.exception(_SYSTEM_RUN_INIT_FAILED_MESSAGE)
-            return _create_system_run_init_failed_result(traceback.format_exc())
-
         return run_and_handle_exception(
-            run_id,
-            self.dashboard,
             self._execute_imports_on_update_helper,
             absolute_import_name,
-            run_id,
         )
 
     def _execute_imports_on_update_helper(
-            self,
-            absolute_import_name: str,
-            run_id: str = None) -> ExecutionResult:
+            self, absolute_import_name: str) -> ExecutionResult:
         """Helper for execute_imports_on_update.
 
     Args:
         absolute_import_name: See execute_imports_on_update.
-        run_id: ID of the system run as a string. This is only used to
-          communicate with the import progress dashboard.
 
     Returns:
         ExecutionResult object describing the results of the executions.
@@ -195,14 +176,23 @@ class ImportExecutor:
     """
         logging.info('%s: BEGIN', absolute_import_name)
         with tempfile.TemporaryDirectory() as tmpdir:
-            logging.info('%s: downloading repo', absolute_import_name)
-            repo_dir = self.github.download_repo(
-                tmpdir, timeout=self.config.repo_download_timeout)
-            logging.info('%s: downloaded repo %s', absolute_import_name,
-                         repo_dir)
-            if self.dashboard:
-                self.dashboard.info(f'Downloaded repo: {repo_dir}',
-                                    run_id=run_id)
+            repo_dir = ''
+            if self.local_repo_dir:
+                # Do not clone/download from GitHub. Instead, use the
+                # provided local path to the repo's root directory.
+                logging.info(
+                    '%s: using local repo at: %s',
+                    absolute_import_name,
+                    self.local_repo_dir,
+                )
+                repo_dir = self.local_repo_dir
+            else:
+                # Clone/download from GitHub.
+                logging.info('%s: downloading repo', absolute_import_name)
+                repo_dir = self.github.download_repo(
+                    tmpdir, timeout=self.config.repo_download_timeout)
+                logging.info('%s: downloaded repo %s', absolute_import_name,
+                             repo_dir)
 
             executed_imports = []
 
@@ -225,7 +215,6 @@ class ImportExecutor:
                             relative_import_dir=import_dir,
                             absolute_import_dir=absolute_import_dir,
                             import_spec=spec,
-                            run_id=run_id,
                         )
                     except Exception:
                         raise ExecutionError(
@@ -238,15 +227,13 @@ class ImportExecutor:
         logging.info('%s: END', absolute_import_name)
         return ExecutionResult('succeeded', executed_imports, 'No issues')
 
-    def _execute_imports_on_commit_helper(self,
-                                          commit_sha: str,
-                                          run_id: str = None
-                                         ) -> ExecutionResult:
+    def _execute_imports_on_commit_helper(
+        self,
+        commit_sha: str,
+    ) -> ExecutionResult:
         """Helper for execute_imports_on_commit.
 
     Args: See execute_imports_on_commit.
-        run_id: ID of the system run as a string. This is only used to
-        communicate with the import progress dashboard.
 
     Returns:
         ExecutionResult object describing the results of the executions.
@@ -270,9 +257,7 @@ class ImportExecutor:
         with tempfile.TemporaryDirectory() as tmpdir:
             repo_dir = self.github.download_repo(
                 tmpdir, commit_sha, self.config.repo_download_timeout)
-            if self.dashboard:
-                self.dashboard.info(f'Downloaded repo: {repo_dir}',
-                                    run_id=run_id)
+            logging.info(f'Downloaded repo: {repo_dir}')
 
             imports_to_execute = import_target.find_imports_to_execute(
                 targets=targets,
@@ -290,7 +275,6 @@ class ImportExecutor:
                         absolute_import_dir=os.path.join(
                             repo_dir, relative_dir),
                         import_spec=spec,
-                        run_id=run_id,
                     )
 
                 except Exception:
@@ -301,13 +285,6 @@ class ImportExecutor:
                     relative_dir, spec['import_name'])
                 executed_imports.append(absolute_name)
 
-            if self.dashboard:
-                self.dashboard.update_run(
-                    {
-                        'status': 'succeeded',
-                        'time_completed': utils.utctime()
-                    }, run_id)
-
             return ExecutionResult('succeeded', executed_imports, 'No issues')
 
     def _import_one(
@@ -316,7 +293,6 @@ class ImportExecutor:
         relative_import_dir: str,
         absolute_import_dir: str,
         import_spec: dict,
-        run_id: str = None,
     ) -> None:
         """Executes an import.
 
@@ -327,56 +303,273 @@ class ImportExecutor:
         absolute_import_dir: Absolute path to the directory containing the
           manifest as a string.
         import_spec: Specification of the import as a dict.
-        run_id: ID of the system run that executes the import. This is only used
-          to communicate with the import progress dashboard.
     """
         import_name = import_spec['import_name']
         absolute_import_name = import_target.get_absolute_import_name(
             relative_import_dir, import_name)
         curator_emails = import_spec['curator_emails']
-        attempt_id = None
-        if self.dashboard:
-            attempt = _init_attempt_helper(
-                dashboard=self.dashboard,
-                run_id=run_id,
-                import_name=import_name,
-                absolute_import_name=absolute_import_name,
-                provenance_url=import_spec['provenance_url'],
-                provenance_description=import_spec['provenance_description'],
-            )
-            attempt_id = attempt['attempt_id']
+        dc_email_aliases = [_ALERT_EMAIL_ADDR, _DEBUG_EMAIL_ADDR]
+        time_start = time.time()
         try:
             self._import_one_helper(
                 repo_dir=repo_dir,
                 relative_import_dir=relative_import_dir,
                 absolute_import_dir=absolute_import_dir,
                 import_spec=import_spec,
-                run_id=run_id,
-                attempt_id=attempt_id,
             )
-            if self.notifier:
-                self.notifier.send(
-                    subject=
-                    f'Import Automation - {absolute_import_name} - Succeeded',
-                    body=_SEE_DASHBOARD_MESSAGE,
-                    receiver_addresses=curator_emails,
-                )
+            time_taken = '{0:.2f}'.format(time.time() - time_start)
+            logging.info(f'Import Automation Success - {import_name}')
+            logging.info(f'Script execution time taken = {time_taken}s')
 
         except Exception as exc:
-            if self.dashboard:
-                _mark_import_attempt_failed(
-                    attempt_id=attempt_id,
-                    message=traceback.format_exc(),
-                    dashboard=self.dashboard,
-                )
-            if self.notifier:
+            if self.notifier and not self.config.disable_email_notifications:
+                msg = f'Failed Import: {import_name} ({absolute_import_name})\n\n'
+                msg += f'{_SEE_LOGS_MESSAGE}\n\n'
+                msg += f'Stack Trace: \n'
+                msg += f'{exc}'
                 self.notifier.send(
-                    subject=
-                    f'Import Automation - {absolute_import_name} - Failed',
-                    body=_SEE_DASHBOARD_MESSAGE,
-                    receiver_addresses=curator_emails,
+                    subject=f'Import Automation Failure - {import_name}',
+                    body=msg,
+                    receiver_addresses=dc_email_aliases + curator_emails,
                 )
             raise exc
+
+    def _get_latest_version(self, import_dir: str) -> str:
+        """
+        Find previous import data in GCS.
+        Returns:
+          GCS path for the latest import data.
+        """
+        bucket = storage.Client(self.config.gcs_project_id).bucket(
+            self.config.storage_prod_bucket_name)
+        blob = bucket.get_blob(
+            f'{import_dir}/{self.config.storage_version_filename}')
+        if not blob or not blob.download_as_text():
+            logging.error(
+                f'Not able to find latest_version.txt in {import_dir}.')
+            return ''
+        latest_version = blob.download_as_text()
+        return f'gs://{bucket.name}/{import_dir}/{latest_version}'
+
+    def _get_import_input_files(self, import_input, absolute_import_dir):
+        input_files = []
+        import_prefix = ''
+        template_mcf = []
+        if pattern := import_input.get('template_mcf'):
+            template_mcf = glob.glob(os.path.join(absolute_import_dir, pattern))
+            if template_mcf:
+                import_prefix = os.path.splitext(
+                    os.path.basename(template_mcf[0]))[0]
+            input_files.extend(template_mcf)
+
+        cleaned_csv = []
+        if pattern := import_input.get('cleaned_csv'):
+            cleaned_csv = glob.glob(os.path.join(absolute_import_dir, pattern))
+            input_files.extend(cleaned_csv)
+
+        node_mcf = []
+        if pattern := import_input.get('node_mcf'):
+            node_mcf = glob.glob(os.path.join(absolute_import_dir, pattern))
+            input_files.extend(node_mcf)
+            if not import_prefix and node_mcf:
+                import_prefix = os.path.splitext(os.path.basename(
+                    node_mcf[0]))[0]
+        return input_files, import_prefix
+
+    def _invoke_import_tool(self, absolute_import_dir: str,
+                            relative_import_dir: str, version: str,
+                            import_spec: dict):
+        """ 
+        Invokes DC import tool to generate resolved mcf.
+        """
+        import_inputs = import_spec.get('import_inputs', [])
+        import_prefix_list = []
+        for import_input in import_inputs:
+            input_files, import_prefix = self._get_import_input_files(
+                import_input, absolute_import_dir)
+            import_prefix_list.append(import_prefix)
+            if not import_prefix:
+                logging.error(
+                    'Skipping genmcf due to missing import input spec.')
+                continue
+            output_path = os.path.join(absolute_import_dir, import_prefix,
+                                       'validation')
+
+            # Run dc import tool to generate resolved mcf.
+            logging.info(f'Generating resolved mcf for {import_prefix}')
+            import_tool_args = [f'-o={output_path}', 'genmcf']
+            import_tool_args.extend(input_files)
+            process = _run_user_script(
+                interpreter_path='java',
+                script_path='-jar -Xmx16g ' + self.config.import_tool_path,
+                timeout=self.config.user_script_timeout,
+                args=import_tool_args,
+                cwd=absolute_import_dir,
+                env=os.environ.copy(),
+            )
+            _log_process(process=process)
+            process.check_returncode()
+            logging.info(
+                f'Generated resolved mcf for {import_prefix} in {output_path}.')
+
+            if not self.config.skip_gcs_upload:
+                # Upload output to GCS.
+                gcs_output = f'{relative_import_dir}/{version}/{import_prefix}/validation'
+                logging.info(
+                    f'Uploading genmcf output to GCS path: {gcs_output}')
+                for filename in os.listdir(output_path):
+                    filepath = os.path.join(output_path, filename)
+                    if os.path.isfile(filepath):
+                        dest = f'{gcs_output}/{filename}'
+                        self.uploader.upload_file(
+                            src=filepath,
+                            dest=dest,
+                        )
+        return import_prefix_list
+
+    def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
+                                  absolute_import_dir: str, import_spec: dict,
+                                  version: str,
+                                  import_prefix_list: list) -> bool:
+        """ 
+        Performs validations on import data.
+        """
+        validation_status = True
+        config_file = import_spec.get('validation_config_file', '')
+        if config_file:
+            config_file_path = os.path.join(absolute_import_dir, config_file)
+        else:
+            config_file_path = os.path.join(repo_dir,
+                                            self.config.validation_config_file)
+        logging.info(f'Validation config file: {config_file_path}')
+
+        import_dir = f'{relative_import_dir}/{import_spec["import_name"]}'
+        latest_version = self._get_latest_version(import_dir)
+        logging.info(f'Latest version: {latest_version}')
+        differ_job_name = 'differ'
+
+        # Trigger validations for each tmcf/csv under import_inputs.
+        import_inputs = import_spec.get('import_inputs', [])
+        i = 0
+        for import_input in import_inputs:
+            import_prefix = import_prefix_list[i]
+            i += 1
+            if not import_prefix:
+                logging.error('Skipping validation due to missing import spec.')
+                continue
+
+            validation_output_path = os.path.join(absolute_import_dir,
+                                                  import_prefix, 'validation')
+            current_data_path = os.path.join(validation_output_path, '*.mcf')
+            previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
+            summary_stats = os.path.join(validation_output_path,
+                                         'summary_report.csv')
+            validation_output_file = os.path.join(validation_output_path,
+                                                  'validation_output.csv')
+            differ_output = os.path.join(validation_output_path,
+                                         'point_analysis_summary.csv')
+
+            # Invoke differ and validation scripts.
+            if self.config.invoke_differ_tool and latest_version and len(
+                    file_util.file_get_matching(previous_data_path)) > 0:
+                logging.info('Invoking differ tool...')
+                differ = ImportDiffer(current_data=current_data_path,
+                                      previous_data=previous_data_path,
+                                      output_location=validation_output_path,
+                                      differ_tool='',
+                                      project_id=self.config.gcp_project_id,
+                                      job_name=differ_job_name,
+                                      file_format='mcf',
+                                      runner_mode='native')
+                differ.run_differ()
+            else:
+                logging.error(
+                    'Skipping differ tool due to missing latest mcf file')
+                differ_output = ''
+
+            logging.info('Invoking validation script...')
+            validation = ImportValidation(config_file_path, differ_output,
+                                          summary_stats, validation_output_file)
+            status = validation.run_validations()
+            if validation_status:
+                validation_status = status
+
+            if not self.config.skip_gcs_upload:
+                # Upload output to GCS.
+                gcs_output = f'{import_dir}/{version}/{import_prefix}/validation'
+                logging.info(
+                    f'Uploading validation output to GCS path: {gcs_output}')
+                for filename in os.listdir(validation_output_path):
+                    filepath = os.path.join(validation_output_path, filename)
+                    if os.path.isfile(filepath):
+                        dest = f'{gcs_output}/{filename}'
+                        self.uploader.upload_file(
+                            src=filepath,
+                            dest=dest,
+                        )
+        return validation_status
+
+    def _create_mount_point(self, gcs_volume_mount_dir: str,
+                            cleanup_gcs_volume_mount: bool,
+                            absolute_import_dir: str, import_name: str) -> None:
+        mount_path = os.path.join(gcs_volume_mount_dir, import_name)
+        out_path = os.path.join(absolute_import_dir, 'gcs_output')
+        logging.info(f'Mount path: {mount_path}, Out path: {out_path}')
+        if cleanup_gcs_volume_mount and os.path.exists(mount_path):
+            shutil.rmtree(mount_path)
+        if os.path.lexists(out_path):
+            os.unlink(out_path)
+        os.makedirs(mount_path, exist_ok=True)
+        os.symlink(mount_path, out_path, target_is_directory=True)
+
+    def _invoke_import_job(self, absolute_import_dir: str, import_spec: dict,
+                           version: str, interpreter_path: str,
+                           process: subprocess.CompletedProcess) -> None:
+        script_paths = import_spec.get('scripts')
+        import_name = import_spec['import_name']
+        self._create_mount_point(self.config.gcs_volume_mount_dir,
+                                 self.config.cleanup_gcs_volume_mount,
+                                 absolute_import_dir, import_name)
+        for path in script_paths:
+            script_path = os.path.join(absolute_import_dir, path)
+            simple_job = cloud_run_simple_import.get_simple_import_job_id(
+                import_spec, script_path)
+            if simple_job:
+                # Running simple import as cloud run job.
+                cloud_run_simple_import.cloud_run_simple_import_job(
+                    import_spec=import_spec,
+                    config_file=script_path,
+                    env=self.config.user_script_env,
+                    version=version,
+                    image=import_spec.get('image'),
+                )
+            else:
+                # Run import script locally.
+                script_interpreter = _get_script_interpreter(
+                    script_path, interpreter_path)
+                script_env = os.environ.copy()
+                if self.config.user_script_env:
+                    script_env.update(self.config.user_script_env)
+                process = _run_user_script(
+                    interpreter_path=script_interpreter,
+                    script_path=script_path,
+                    timeout=self.config.user_script_timeout,
+                    args=self.config.user_script_args,
+                    cwd=absolute_import_dir,
+                    env=script_env,
+                )
+                _log_process(process=process)
+                process.check_returncode()
+
+    def _update_latest_version(self, version, output_dir, import_spec):
+        logging.info(f'Updating import latest version {version}')
+        self.uploader.upload_string(
+            version,
+            os.path.join(output_dir, self.config.storage_version_filename))
+        self.uploader.upload_string(
+            self._import_metadata_mcf_helper(import_spec),
+            os.path.join(output_dir, self.config.import_metadata_mcf_filename))
+        logging.info(f'Updated import latest version {version}')
 
     def _import_one_helper(
         self,
@@ -384,80 +577,86 @@ class ImportExecutor:
         relative_import_dir: str,
         absolute_import_dir: str,
         import_spec: dict,
-        run_id: str = None,
-        attempt_id: str = None,
     ) -> None:
         """Helper for _import_one.
 
     Args: See _import_one.
-        attempt_id: ID of the import attempt executed by the system run with the
-        run_id, as a string. This is only used to communicate with the import
-        progress dashboard.
     """
+        import_name = import_spec['import_name']
         urls = import_spec.get('data_download_url')
         if urls:
             for url in urls:
                 utils.download_file(url, absolute_import_dir,
                                     self.config.file_download_timeout)
-                if self.dashboard:
-                    self.dashboard.info(f'Downloaded: {url}',
-                                        attempt_id=attempt_id,
-                                        run_id=run_id)
 
+        output_dir = f'{relative_import_dir}/{import_name}'
+        if version := self.config.import_version_override:
+            logging.info(f'Import version override {version}')
+            self._update_latest_version(version, output_dir, import_spec)
+            return
+
+        version = _clean_time(utils.pacific_time())
         with tempfile.TemporaryDirectory() as tmpdir:
             requirements_path = os.path.join(absolute_import_dir,
                                              self.config.requirements_filename)
             central_requirements_path = os.path.join(
-                repo_dir, self.config.requirements_filename)
+                repo_dir, 'import-automation', 'executor',
+                self.config.requirements_filename)
             interpreter_path, process = _create_venv(
                 (central_requirements_path, requirements_path),
                 tmpdir,
                 timeout=self.config.venv_create_timeout,
             )
 
-            _log_process(
-                process=process,
-                dashboard=self.dashboard,
-                attempt_id=attempt_id,
-                run_id=run_id,
-            )
+            _log_process(process=process)
             process.check_returncode()
 
-            script_paths = import_spec.get('scripts')
-            for path in script_paths:
-                process = _run_user_script(
-                    interpreter_path=interpreter_path,
-                    script_path=os.path.join(absolute_import_dir, path),
-                    timeout=self.config.user_script_timeout,
-                    args=self.config.user_script_args,
-                    cwd=absolute_import_dir,
-                    env=self.config.user_script_env,
-                )
-                _log_process(
-                    process=process,
-                    dashboard=self.dashboard,
-                    attempt_id=attempt_id,
-                    run_id=run_id,
-                )
-                process.check_returncode()
+            self._invoke_import_job(absolute_import_dir=absolute_import_dir,
+                                    import_spec=import_spec,
+                                    version=version,
+                                    interpreter_path=interpreter_path,
+                                    process=process)
 
-        inputs = self._upload_import_inputs(
-            import_dir=absolute_import_dir,
-            output_dir=f'{relative_import_dir}/{import_spec["import_name"]}',
-            import_inputs=import_spec.get('import_inputs', []),
-            attempt_id=attempt_id,
-        )
+            if not self.config.skip_gcs_upload:
+                inputs = self._upload_import_inputs(
+                    import_dir=absolute_import_dir,
+                    output_dir=f'{relative_import_dir}/{import_name}',
+                    version=version,
+                    import_spec=import_spec)
+
+            if self.config.invoke_import_tool:
+                logging.info("Invoking import tool genmcf")
+                import_prefix_list = self._invoke_import_tool(
+                    absolute_import_dir=absolute_import_dir,
+                    relative_import_dir=relative_import_dir,
+                    version=version,
+                    import_spec=import_spec)
+
+            validation_status = True
+            if self.config.invoke_import_validation:
+                logging.info("Invoking import validations")
+                validation_status = self._invoke_import_validation(
+                    repo_dir=repo_dir,
+                    relative_import_dir=relative_import_dir,
+                    absolute_import_dir=absolute_import_dir,
+                    import_spec=import_spec,
+                    version=version,
+                    import_prefix_list=import_prefix_list)
+                logging.info(
+                    f'Validations completed with status: {validation_status}')
+            else:
+                logging.info(
+                    'Skipping import validations as per import config.')
+
+            if self.config.ignore_validation_status or validation_status:
+                self._update_latest_version(version, output_dir, import_spec)
+            else:
+                logging.error(
+                    "Skipping latest version update due to validation failure.")
 
         if self.importer:
             self.importer.delete_previous_output(relative_import_dir,
                                                  import_spec)
-
-            if self.dashboard:
-                self.dashboard.info(
-                    f'Submitting job to delete the previous import',
-                    attempt_id=attempt_id,
-                    run_id=run_id,
-                )
             try:
                 self.importer.delete_import(
                     relative_import_dir,
@@ -469,15 +668,7 @@ class ImportExecutor:
                 # If this is the first time executing this import,
                 # there will be no previous import
                 logging.warning(str(exc))
-            if self.dashboard:
-                self.dashboard.info(f'Deleted previous import',
-                                    attempt_id=attempt_id,
-                                    run_id=run_id)
-                self.dashboard.info(
-                    f'Submitting job to perform the import',
-                    attempt_id=attempt_id,
-                    run_id=run_id,
-                )
+
             self.importer.smart_import(
                 relative_import_dir,
                 inputs,
@@ -485,25 +676,13 @@ class ImportExecutor:
                 block=True,
                 timeout=self.config.importer_import_timeout,
             )
-            if self.dashboard:
-                self.dashboard.info(f'Import succeeded',
-                                    attempt_id=attempt_id,
-                                    run_id=run_id)
+        if not validation_status:
+            raise RuntimeError(
+                'Import job failed due to data validation failure.')
 
-        if self.dashboard:
-            self.dashboard.update_attempt(
-                {
-                    'status': 'succeeded',
-                    'time_completed': utils.utctime()
-                }, attempt_id)
-
-    def _upload_import_inputs(
-        self,
-        import_dir: str,
-        output_dir: str,
-        import_inputs: List[Dict[str, str]],
-        attempt_id: str = None,
-    ) -> 'import_service.ImportInputs':
+    def _upload_import_inputs(self, import_dir: str, output_dir: str,
+                              version: str,
+                              import_spec: dict) -> import_service.ImportInputs:
         """Uploads the generated import data files.
 
     Data files are uploaded to <output_dir>/<version>/, where <version> is a
@@ -514,53 +693,71 @@ class ImportExecutor:
         import_dir: Absolute path to the directory with the manifest, as a
           string.
         output_dir: Path to the output directory, as a string.
-        import_inputs: List of import inputs each as a dict mapping import types
-          to relative paths within the repository. This is parsed from the
-          'import_inputs' field in the manifest.
-        attempt_id: ID of the import attempt executed by the system run with the
-          run_id, as a string. This is only used to communicate with the import
-          progress dashboard.
+        import_inputs: Specification of the import as a dict.
 
     Returns:
         ImportInputs object containing the paths to the uploaded inputs.
     """
         uploaded = import_service.ImportInputs()
-        version = _clean_time(utils.pacific_time())
+        import_inputs = import_spec.get('import_inputs', [])
         for import_input in import_inputs:
             for input_type in self.config.import_input_types:
                 path = import_input.get(input_type)
-                if path:
-                    dest = f'{output_dir}/{version}/{os.path.basename(path)}'
-                    self._upload_file_helper(
-                        src=os.path.join(import_dir, path),
-                        dest=dest,
-                        attempt_id=attempt_id,
-                    )
-                    setattr(uploaded, input_type, dest)
-        self.uploader.upload_string(
-            version,
-            os.path.join(output_dir, self.config.storage_version_filename))
+                if not path:
+                    continue
+                for file in file_util.file_get_matching(
+                        os.path.join(import_dir, path)):
+                    if file:
+                        dest = f'{output_dir}/{version}/{os.path.basename(file)}'
+                        self._upload_file_helper(
+                            src=file,
+                            dest=dest,
+                        )
+                uploaded_dest = f'{output_dir}/{version}/{os.path.basename(path)}'
+                setattr(uploaded, input_type, uploaded_dest)
+
+        # Upload any files downloaded from source
+        source_files = [
+            os.path.join(import_dir, file)
+            for file in import_spec.get('source_files', [])
+        ]
+        source_files = file_util.file_get_matching(source_files)
+        for file in source_files:
+            dest = f'{output_dir}/{version}/source_files/{os.path.basename(file)}'
+            self._upload_file_helper(
+                src=file,
+                dest=dest,
+            )
+
         return uploaded
 
-    def _upload_file_helper(self,
-                            src: str,
-                            dest: str,
-                            attempt_id: str = None) -> None:
+    def _upload_file_helper(self, src: str, dest: str) -> None:
         """Uploads a file from src to dest.
 
     Args:
         src: Path to the file to upload, as a string.
         dest: Path to where the file is to be uploaded to, as a string.
-        attempt_id: ID of the import attempt executed by the system run with the
-          run_id, as a string. This is only used to communicate with the import
-          progress dashboard.
     """
-        if self.dashboard:
-            with open(src) as file:
-                self.dashboard.info(
-                    f'Uploaded {src}: {file.readline().strip()}',
-                    attempt_id=attempt_id)
         self.uploader.upload_file(src, dest)
+
+    def _import_metadata_mcf_helper(self, import_spec: dict) -> str:
+        """Generates import_metadata_mcf node for import.
+
+        Args:
+            import_spec: Specification of the import as a dict.
+
+        Returns:
+            import_metadata_mcf node.
+        """
+        node = _IMPORT_METADATA_MCF_TEMPLATE.format_map({
+            "import_name": import_spec.get('import_name'),
+            "last_data_refresh_date": _clean_date(utils.utctime())
+        })
+        next_data_refresh_date = utils.next_utc_date(
+            import_spec.get('cron_schedule'))
+        if next_data_refresh_date:
+            node += f'nextDataRefreshDate: "{next_data_refresh_date}"\n'
+        return node
 
 
 def parse_manifest(path: str) -> dict:
@@ -581,19 +778,12 @@ def parse_manifest(path: str) -> dict:
 
 
 def run_and_handle_exception(
-    run_id: Optional[str],
-    dashboard: Optional[dashboard_api.DashboardAPI],
     exec_func: Callable,
     *args,
 ) -> ExecutionResult:
     """Runs a method that executes imports and handles its exceptions.
 
-  run_id and dashboard are for logging to the import progress dashboard.
-  They can be None to not perform such logging.
-
   Args:
-      run_id: ID of the system run as a string.
-      dashboard: DashboardAPI for logging to the import progress dashboard.
       exec_func: The method to execute.
       args: List of arguments sent to exec_func.
 
@@ -605,21 +795,18 @@ def run_and_handle_exception(
     except ExecutionError as exc:
         logging.exception('ExecutionError was thrown')
         result = exc.result
-        if dashboard:
-            _mark_system_run_failed(run_id, str(result), dashboard)
         return result
     except Exception:
         logging.exception('An unexpected exception was thrown')
         message = traceback.format_exc()
-        if dashboard:
-            _mark_system_run_failed(run_id, message, dashboard)
         return ExecutionResult('failed', [], message)
 
 
 def _run_with_timeout_async(args: List[str],
                             timeout: float,
                             cwd: str = None,
-                            env: dict = None) -> subprocess.CompletedProcess:
+                            env: dict = None,
+                            name: str = None) -> subprocess.CompletedProcess:
     """Runs a command in a subprocess asynchronously and emits the stdout/stderr.
 
   Args:
@@ -634,9 +821,8 @@ def _run_with_timeout_async(args: List[str],
       Same exceptions as subprocess.run.
   """
     try:
-        logging.info(
-            f'Launching async command: {args} with timeout {timeout} in {cwd}, env: {env}'
-        )
+        logging.info(f'Launching async command for {name}: {args} '
+                     f'with timeout {timeout} in {cwd}, env: {env}')
         start_time = time.time()
         stdout = []
         stderr = []
@@ -649,19 +835,21 @@ def _run_with_timeout_async(args: List[str],
         )
 
         # Log output continuously until the command completes.
-        for line in process.stdout:
-            stdout.append(line)
-            logging.info(f'Process stdout: {line}')
         for line in process.stderr:
             stderr.append(line)
-            logging.info(f'Process stderr: {line}')
+            logging.info(f'Process stderr:{name}: {line}')
+        for line in process.stdout:
+            stdout.append(line)
+            logging.info(f'Process stdout:{name}: {line}')
 
+        # Wait in case script has closed stderr/stdout early.
+        process.wait()
         end_time = time.time()
 
         return_code = process.returncode
-        end_msg = (
-            f'Completed script: "{args}", Return code: {return_code}, time:'
-            f' {end_time - start_time:.3f} secs.\n')
+        end_msg = (f'Completed script:{name}: "{args}", '
+                   f'Return code: {return_code}, '
+                   f'time: {end_time - start_time:.3f} secs.\n')
         logging.info(end_msg)
         return subprocess.CompletedProcess(
             args=args,
@@ -672,8 +860,8 @@ def _run_with_timeout_async(args: List[str],
     except Exception as e:
         message = traceback.format_exc()
         logging.exception(
-            f'An unexpected exception was thrown: {e} when running {args}:'
-            f' {message}')
+            f'An unexpected exception was thrown: {e} when running {name}:'
+            f'{args}: {message}')
         return subprocess.CompletedProcess(
             args=args,
             returncode=1,
@@ -719,7 +907,7 @@ def _run_with_timeout(args: List[str],
         logging.exception(
             f'An unexpected exception was thrown: {e} when running {args}:'
             f' {message}')
-        return None
+        raise e
 
 
 def _create_venv(requirements_path: Iterable[str], venv_dir: str,
@@ -752,12 +940,41 @@ def _create_venv(requirements_path: Iterable[str], venv_dir: str,
         for path in requirements_path:
             if os.path.exists(path):
                 script.write(
-                    f'python3 -m pip install --no-cache-dir --requirement {path}\n'
+                    f'python3 -m pip install --no-cache-dir --quiet --requirement {path}\n'
                 )
         script.flush()
 
         process = _run_with_timeout(['bash', script.name], timeout)
+        os.environ['PATH'] = os.path.join(venv_dir,
+                                          'bin') + ':' + os.environ.get('PATH')
         return os.path.join(venv_dir, 'bin/python3'), process
+
+
+def _get_script_interpreter(script: str, py_interpreter: str) -> str:
+    """Returns the interpreter for the script.
+
+    Args:
+        script: user script to be executed
+        py_interpreter: Path to python within virtual environment
+
+    Returns:
+        interpreter for user script, such as python for .py, bash for .sh
+        Returns None if the script has no extension.
+    """
+    if not script:
+        return None
+
+    base, ext = os.path.splitext(script.split(' ')[0])
+    match ext:
+        case '.py':
+            return py_interpreter
+        case '.sh':
+            return 'bash'
+        case _:
+            logging.info(f'Unknown extension for script: {script}.')
+            return None
+
+    return py_interpreter
 
 
 def _run_user_script(
@@ -767,6 +984,7 @@ def _run_user_script(
     args: list = None,
     cwd: str = None,
     env: dict = None,
+    name: str = None,
 ) -> subprocess.CompletedProcess:
     """Runs a user Python script.
 
@@ -779,6 +997,7 @@ def _run_user_script(
         the command line.
       cwd: Current working directory of the process as a string.
       env: Dict of environment variables for the user script run.
+      name: Name of the script.
 
   Returns:
       subprocess.CompletedProcess object used to run the script.
@@ -787,101 +1006,13 @@ def _run_user_script(
       subprocess.TimeoutExpired: The user script did not finish
           within timeout.
   """
-    script_args = [interpreter_path]
-    script_args.extend(script_path.split(' '))
+    script_args = []
+    if interpreter_path:
+        script_args.append(interpreter_path)
+    script_args.extend(shlex.split(script_path))
     if args:
         script_args.extend(args)
-    return _run_with_timeout_async(script_args, timeout, cwd, env)
-
-
-def _init_run_helper(
-    dashboard: dashboard_api.DashboardAPI,
-    commit_sha: str = None,
-    repo_name: str = None,
-    branch_name: str = None,
-    pr_number: str = None,
-) -> Dict:
-    """Initializes a system run with the import progress dashboard."""
-    run = {}
-    if commit_sha:
-        run['commit_sha'] = commit_sha
-    if repo_name:
-        run['repo_name'] = repo_name
-    if branch_name:
-        run['branch_name'] = branch_name
-    if pr_number:
-        run['pr_number'] = pr_number
-    return dashboard.init_run(run)
-
-
-def _init_attempt_helper(
-    dashboard: dashboard_api.DashboardAPI,
-    run_id: str,
-    import_name: str,
-    absolute_import_name: str,
-    provenance_url: str,
-    provenance_description: str,
-) -> Dict:
-    """Initializes an import attempt with the import progress dashboard."""
-    return dashboard.init_attempt({
-        'run_id': run_id,
-        'import_name': import_name,
-        'absolute_import_name': absolute_import_name,
-        'provenance_url': provenance_url,
-        'provenance_description': provenance_description,
-    })
-
-
-def _mark_system_run_failed(run_id: str, message: str,
-                            dashboard: dashboard_api.DashboardAPI) -> Dict:
-    """Communicates with the import progress dashboard that a system run
-
-  has failed.
-
-  Args:
-      run_id: ID of the system run.
-      message: An additional message to log to the dashboard with level
-        critical.
-      dashboard: DashboardAPI object for the communicaiton.
-
-  Returns:
-      Updated system run returned from the dashboard.
-  """
-    dashboard.critical(message, run_id=run_id)
-    return dashboard.update_run(
-        {
-            'status': 'failed',
-            'time_completed': utils.utctime()
-        }, run_id=run_id)
-
-
-def _mark_import_attempt_failed(attempt_id: str, message: str,
-                                dashboard: dashboard_api.DashboardAPI) -> Dict:
-    """Communicates with the import progress dashboard that an import attempt
-
-  has failed.
-
-  Args:
-      attempt_id: ID of the import attempt.
-      message: An additional message to log to the dashboard with level
-        critical.
-      dashboard: DashboardAPI object for the communicaiton.
-
-  Returns:
-      Updated import attempt returned from the dashboard.
-  """
-    dashboard.critical(message, attempt_id=attempt_id)
-    return dashboard.update_attempt(
-        {
-            'status': 'failed',
-            'time_completed': utils.utctime()
-        }, attempt_id)
-
-
-def _create_system_run_init_failed_result(trace):
-    """Creates an ExecutionResult indicating failures."""
-    return ExecutionResult('failed', [],
-                           f'{_SYSTEM_RUN_INIT_FAILED_MESSAGE}\n{trace}')
+    return _run_with_timeout_async(script_args, timeout, cwd, env, name)
 
 
 def _clean_time(
@@ -898,6 +1029,18 @@ def _clean_time(
     for char in chars_to_replace:
         time = time.replace(char, '_')
     return time
+
+
+def _clean_date(time: str) -> str:
+    """Converts ISO8601 time string to YYYY-MM-DD format.
+
+    Args:
+        time: Time string in ISO8601 format.
+
+    Returns:
+        YYYY-MM-DD date.
+    """
+    return time[:10]
 
 
 def _construct_process_message(message: str,
@@ -922,33 +1065,15 @@ def _construct_process_message(message: str,
     return message
 
 
-def _log_process(
-    process: subprocess.CompletedProcess,
-    dashboard: dashboard_api.DashboardAPI = None,
-    attempt_id: str = None,
-    run_id: str = None,
-) -> None:
+def _log_process(process: subprocess.CompletedProcess,) -> None:
     """Logs the result of a subprocess.
-
-  dashboard, attempt_id, and run_id are only for logging to the import
-  progress dashboard. They can be None to not perform such logging.
 
   Args:
       process: subprocess.CompletedProcess object whose arguments, return code,
         stdout, and stderr are to be logged.
-      dashboard: DashboardAPI object to communicate with the import progress
-        dashboard.
-      attempt_id: ID of the import attempt as a string.
-      run_id: ID of the system run as a string.
   """
     message = 'Subprocess succeeded'
     if process.returncode:
         message = 'Subprocess failed'
     message = _construct_process_message(message, process)
-    if process.returncode:
-        if dashboard:
-            dashboard.critical(message, attempt_id=attempt_id, run_id=run_id)
-    else:
-        logging.info(message)
-        if dashboard:
-            dashboard.info(message, attempt_id=attempt_id, run_id=run_id)
+    logging.info(message)

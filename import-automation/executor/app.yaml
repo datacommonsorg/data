@@ -1,5 +1,5 @@
 runtime: python37
-entrypoint: gunicorn --timeout 1800 -b :$PORT app.main:FLASK_APP
+entrypoint: gunicorn --timeout 0 -b :$PORT app.main:FLASK_APP
 env_variables:
     EXECUTOR_PRODUCTION: "True"
     TMPDIR: "/tmp"

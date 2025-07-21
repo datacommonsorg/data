@@ -20,11 +20,12 @@ import sys
 _COMMON_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(1, _COMMON_PATH)
 # pylint: disable=wrong-import-position
-from process import EuroStatPhysicalActivity
+from physical_activity.process import EuroStatPhysicalActivity
 from common.unitest_common_methods import CommonTestClass
 # pylint: enable=wrong-import-position
 
 
 class PhysicalActivityTest(CommonTestClass.CommonTestCases):
     _import_class = EuroStatPhysicalActivity
+    _import_name = "physical_activity"
     _test_module_directory = os.path.dirname(__file__)

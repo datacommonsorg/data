@@ -28,13 +28,13 @@ spec:
   rules:
     - http:
         paths:
-        - path: /*
-          pathType: ImplementationSpecific
-          backend:
-            service:
-              name: import-automation-executor-service
-              port:
-                number: 8080
+          - path: /*
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: import-automation-executor-service
+                port:
+                  number: 8080
 ---
 apiVersion: cloud.google.com/v1
 kind: BackendConfig
@@ -43,7 +43,7 @@ metadata:
   namespace: import-automation
 spec:
   # Note that this timeout must account for the entire duration of preprocess scripts.
-  timeoutSec: 600
+  timeoutSec: 1800
   connectionDraining:
     drainingTimeoutSec: 600
   healthCheck:
@@ -51,10 +51,11 @@ spec:
     port: 8080
     type: HTTP
     requestPath: /healthz
-  iap:
-    enabled: true
-    oauthclientCredentials:
-      secretName: import-automation-iap-secret
+  # TODO: re-enable this once the deployments work e2e.
+  # iap:
+  #   enabled: true
+  #   oauthclientCredentials:
+  #     secretName: import-automation-iap-secret
 ---
 apiVersion: v1
 kind: Service
@@ -79,10 +80,10 @@ metadata:
   name: import-executor-app
   namespace: import-automation
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app:  import-automation-executor-app
+      app: import-automation-executor-app
   template:
     metadata:
       labels:
@@ -128,4 +129,3 @@ spec:
               path: /healthz
               port: 8080
       serviceAccountName: import-automation-ksa
-

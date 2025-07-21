@@ -1,11 +1,11 @@
-
 Node: E:Eurostats_NUTS3_FRate_Age->E0
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:FertilityRate_Person_Female
+variableMeasured: dcs:MeanMothersAge_BirthEvent
 observationAbout: C:Eurostats_NUTS3_FRate_Age->GeoId
 observationDate: C:Eurostats_NUTS3_FRate_Age->Date
-value: C:Eurostats_NUTS3_FRate_Age->FertilityRate_Person_Female
+value: C:Eurostats_NUTS3_FRate_Age->MeanMothersAge_BirthEvent
 measurementMethod: dcs:EurostatRegionalStatistics
+unit:Year
 
 Node: E:Eurostats_NUTS3_FRate_Age->E1
 typeOf: dcs:StatVarObservation
@@ -14,11 +14,12 @@ observationAbout: C:Eurostats_NUTS3_FRate_Age->GeoId
 observationDate: C:Eurostats_NUTS3_FRate_Age->Date
 value: C:Eurostats_NUTS3_FRate_Age->MedianMothersAge_BirthEvent
 measurementMethod: dcs:EurostatRegionalStatistics
+unit:Year
 
 Node: E:Eurostats_NUTS3_FRate_Age->E2
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:MeanMothersAge_BirthEvent
+variableMeasured: dcs:FertilityRate_Person_Female
 observationAbout: C:Eurostats_NUTS3_FRate_Age->GeoId
 observationDate: C:Eurostats_NUTS3_FRate_Age->Date
-value: C:Eurostats_NUTS3_FRate_Age->MeanMothersAge_BirthEvent
+value: C:Eurostats_NUTS3_FRate_Age->FertilityRate_Person_Female
 measurementMethod: dcs:EurostatRegionalStatistics

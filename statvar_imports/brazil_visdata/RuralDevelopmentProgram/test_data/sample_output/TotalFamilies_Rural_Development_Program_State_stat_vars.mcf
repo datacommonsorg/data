@@ -1,0 +1,11 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/VISDATA/RuralDevelopmentProgram/test_data/sample_input/TotalFamilies_Rural_Development_Program_State_data.csv --pv_map=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/VISDATA/RuralDevelopmentProgram/test_data/sample_input/TotalFamilies_Rural_Development_Program_State_pvmap.csv --config=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/VISDATA/RuralDevelopmentProgram/test_data/sample_input/TotalFamilies_Rural_Development_Program_State_metadata.csv --output_path=/usr/local/google/home/chharish/VISDATA/data/statvar_imports/VISDATA/RuralDevelopmentProgram/test_data/sample_output/TotalFamilies_Rural_Development_Program_State" on 2024-06-05 09:10:11.561599
+
+Node: dcid:CumulativeCount_Household_BrazilRuralDevelopmentProgram
+typeOf: dcid:StatisticalVariable
+name: "Total number of families benefiting from the Rural Development Program (Accumulated)"
+populationType: dcid:Household
+measuredProperty: dcid:cumulativeCount
+statType: dcid:measuredValue
+alternateName: "Nº total de famílias beneficiárias do Programa Fomento Rural (Acumulado)"
+benefitProgram: dcid:Brazil_RuralDevelopmentProgram
+

@@ -1,0 +1,18 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "EurostatData_Education_Attainment",
+            "curator_emails": ["spateriya@google.com"],
+            "provenance_url":"https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/edat_lfse_04/?format=TSV&compressed=true",
+            "provenance_description": "Regional Statistics by NUTS Classification.",
+            "scripts": ["education_attainment_preprocess_gen_tmcf.py"],
+            "import_inputs": [{
+                "template_mcf": "Eurostats_NUTS2_Edat.tmcf",
+                "cleaned_csv": "Eurostats_NUTS2_Edat.csv"
+            }],
+        "cron_schedule": "30 02 * * 2"
+        }
+    ]
+}
+
+

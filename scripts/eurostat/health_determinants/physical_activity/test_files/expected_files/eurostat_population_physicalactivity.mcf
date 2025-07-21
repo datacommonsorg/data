@@ -1,0 +1,214 @@
+Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Female_IncomeOf0To20Percentile
+name: "Percentage 0 Minutes, Health Enhancing Physical Activity Among Female, Income Of 0 To 20 Percentile Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+income: [0 20 Percentile]
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+activityDuration: [Minute 0]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage 0 Minutes, Health Enhancing Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+activityDuration: [Minute 0]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_0Minutes_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
+name: "Percentage 0 Minutes, Health Enhancing Physical Activity Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+activityDuration: [Minute 0]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_0Minutes_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_Normalweight
+name: "Percentage 0 Minutes, Non Work Related Physical Activity Among Female, Normalweight Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_Normalweight
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity__Normalweight
+activityDuration: [Minute 0]
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Female_IncomeOf0To20Percentile
+name: "Percentage Aerobic Sports, Non Work Related Physical Activity Among Female, Income Of 0 To 20 Percentile Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+income: [0 20 Percentile]
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:AerobicSports
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Aerobic Sports, Non Work Related Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:AerobicSports
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AerobicSports_NonWorkRelatedPhysicalActivity_In_Count_Person_Urban_Female
+name: "Percentage Aerobic Sports, Non Work Related Physical Activity Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:NonWorkRelatedPhysicalActivity
+exerciseType: dcs:AerobicSports
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Female_ForeignBornWithinEU27
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Female, Foreign Born Within EU27 Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ForeignBornWithinEU27
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+gender: dcs:Female
+nativity: dcs:ForeignBornWithinEU27
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Female_IncomeOf0To20Percentile
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Female, Income Of 0 To 20 Percentile Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+income: [0 20 Percentile]
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Female_ModerateActivityLimitation
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Female, Moderate Activity Limitation Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_ModerateActivityLimitation
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+gender: dcs:Female
+globalActivityLimitationindicator: dcs:ModerateActivityLimitation
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_Urban_Female
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+placeOfResidenceClassification: dcs:Urban
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_Aerobic_HealthEnhancingPhysicalActivity_In_Count_Person_WithinEU27AndNotACitizen_Female
+name: "Percentage Aerobic, Health Enhancing Physical Activity Among Within EU27 And Not A Citizen, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_WithinEU27AndNotACitizen_Female
+healthBehavior: dcs:HealthEnhancingPhysicalActivity
+exerciseType: dcs:Aerobic
+gender: dcs:Female
+citizenship: dcs:WithinEU27AndNotACitizen
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_AtLeast30MinutesPerDay_WalkingOrCycling_PhysicalActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage At Least 30 Minutes Per Day, Walking Or Cycling, Physical Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcs:PhysicalActivity
+exerciseType: dcs:Walking__Cycling
+gender: dcs:Female
+activityFrequency: dcs:AtLeast30MinutesPerDay
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_PhysicalActivity_In_Count_Person_Female
+name: "Percentage Less Than Primary Education Or Primary Education Or Lower Secondary Education, Physical Activity Among Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcs:PhysicalActivity
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Female_IncomeOf0To20Percentile
+name: "Percentage Work Related Physical Activity, Heavy Activity Among Female, Income Of 0 To 20 Percentile Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Female_IncomeOf0To20Percentile
+income: [0 20 Percentile]
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+physicalActivityEffortLevel: dcs:HeavyActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+name: "Percentage Work Related Physical Activity, Heavy Activity Among Less Than Primary Education Or Primary Education Or Lower Secondary Education, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_LessThanPrimaryEducationOrPrimaryEducationOrLowerSecondaryEducation_Female
+educationalAttainment: dcs:LessThanPrimaryEducation__PrimaryEducation__LowerSecondaryEducation
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+physicalActivityEffortLevel: dcs:HeavyActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count
+
+Node: dcid:Percent_WorkRelatedPhysicalActivity_HeavyActivity_In_Count_Person_Urban_Female
+name: "Percentage Work Related Physical Activity, Heavy Activity Among Urban, Female Population"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Person
+measurementDenominator: dcs:Count_Person_Urban_Female
+healthBehavior: dcs:WorkRelatedPhysicalActivity
+placeOfResidenceClassification: dcs:Urban
+physicalActivityEffortLevel: dcs:HeavyActivityLevel
+gender: dcs:Female
+statType: dcs:measuredValue
+measuredProperty: dcs:count

@@ -1,6 +1,0 @@
-runtime: python37
-entrypoint: gunicorn -b :$PORT server.app.main:FLASK_APP
-env_variables:
-    DASHBOARD_FRONTEND_PRODUCTION: "True"
-    DASHBOARD_OAUTH_CLIENT_ID: "TODO"
-service: dashboard-frontend

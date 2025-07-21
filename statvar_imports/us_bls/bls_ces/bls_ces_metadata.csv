@@ -1,0 +1,10 @@
+parameter,value
+url,https://data.bls.gov/pdq/SurveyOutputServlet
+description,"Employment, Hours, and Earnings from the Current Employment Statistics survey (National)"
+#place_type,Country
+#places_within,country/USA
+start_date,2015
+process,"Go to https://www.bls.gov/webapps/legacy/cesbtab1.htm and select all the industries check boxes and click on ""Retrieve Data"". In the new page click on ""More Formatting Options"" and in the ""Select view of the data"" field select ""Multi series view"" and click on ""Retrieve Data"", now there will be an option to download the file in xlsx"
+output_columns,"observationAbout,observationDate,value,variableMeasured,observationPeriod,measurementMethod,unit"
+mapped_rows,1
+mapped_columns,3

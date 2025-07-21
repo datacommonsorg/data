@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ def process_state_1980_1990(url: str) -> pd.DataFrame:
                        delim_whitespace=True,
                        engine='python',
                        names=_cols)
-
+    df.to_csv(_CODEDIR + "/../input_files/" + "state_result_1980_1990.csv")
     # adding all the ages to get total value
     df['Total'] = df[COLUMNS_TO_SUM].sum(axis=1)
 

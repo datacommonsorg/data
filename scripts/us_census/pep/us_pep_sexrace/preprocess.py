@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2024 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,29 +22,49 @@ import os
 import json
 from absl import app
 from absl import flags
+import requests
+import shutil
+import time
+from datetime import datetime as dt
+from absl import logging
+from absl import flags
+import pandas as pd
+
+_FLAGS = flags.FLAGS
+
+flags.DEFINE_string('mode', '', 'Options: download or process')
+
 from national.national_1900_1970 import process_national_1900_1970
 from national.national_1980_1990 import process_national_1980_1990
 from national.national_1990_2000 import process_national_1990_2000
 from national.national_2000_2010 import process_national_2000_2010
 from national.national_2010_2020 import process_national_2010_2020
+from national.national_2020_2022 import process_national_2020_2022
+from national.national_2020_2029 import process_national_2020_2029
 from state.state_1970_1979 import process_state_1970_1979
 from state.state_1980_1990 import process_state_1980_1990
 from state.state_1990_2000 import process_state_1990_2000
 from state.state_2000_2010 import process_state_2000_2010
 from state.state_2010_2020 import process_state_2010_2020
+from state.state_2020_2022 import process_state_2020_2022
+from state.state_2020_2029 import process_state_2020_2029
 from county.county_1970_1979 import process_county_1970_1979
 from county.county_1980_1989 import process_county_1980_1989
 from county.county_1990_2000 import process_county_1990_2000
 from county.county_2000_2009 import process_county_2000_2009
 from county.county_2010_2020 import process_county_2010_2020
+from county.county_2020_2022 import process_county_2020_2022
+from county.county_2020_2029 import process_county_2020_2029
 from postprocess import create_single_csv, generate_mcf, generate_tmcf
-from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE
+from common import Outputfiles, _OUTPUTFINAL, _OUTPUTINTERMEDIATE, __INPUTFILES
 
 FLAGS = flags.FLAGS
 default_input_path = os.path.dirname(
     os.path.abspath(__file__)) + os.sep + "config_files"
 flags.DEFINE_string("input_path", default_input_path, "Import Data File's List")
 _MODULE_DIR = os.path.dirname(__file__)
+_INPUT_FILE_PATH = os.path.join(_MODULE_DIR, 'output_files/intermediate')
+_FILES_TO_DOWNLOAD = None
 
 
 def _get_urls(json_file_path, key, test):
@@ -72,6 +92,95 @@ def _get_urls(json_file_path, key, test):
     return urls
 
 
+def add_future_year_urls():
+    global _FILES_TO_DOWNLOAD
+    with open(os.path.join(_MODULE_DIR, 'input_url.json'), 'r') as inpit_file:
+        _FILES_TO_DOWNLOAD = json.load(inpit_file)
+    urls_to_scan = [
+        "https://www2.census.gov/programs-surveys/popest/datasets/2020-{YEAR}/counties/asrh/cc-est{YEAR}-alldata.csv"
+    ]
+    # This method will generate URLs for the years 2024 to 2029
+    for future_year in range(2024, 2030):
+        if dt.now().year > future_year:
+            YEAR = future_year
+            for url in urls_to_scan:
+                url_to_check = url.format(YEAR=YEAR)
+                try:
+                    check_url = requests.head(url_to_check)
+                    if check_url.status_code == 200:
+                        _FILES_TO_DOWNLOAD.append(
+                            {"download_path": url_to_check})
+
+                except:
+                    logging.error(f"URL is not accessable {url_to_check}")
+
+
+def downloadFiles(config_files: list, test=False):
+    #This method is use to download the file from URL
+    '''
+    arguments
+        config_files: List of config file
+        test=False
+    '''
+    flag = None
+    os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTFINAL))
+    os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE))
+    os.system("mkdir -p " + os.path.join(_MODULE_DIR, __INPUTFILES))
+    try:
+        for config_file in config_files:
+            files = _get_urls(config_file, "urls", test)
+            if "national_1980_1990.json" in config_file:
+                process_national_1980_1990(files)
+            elif "national_1900_1970.json" in config_file:
+                process_national_1900_1970(files)
+            elif "national_1990_2000.json" in config_file:
+                process_national_1990_2000(files)
+            elif "national_2000_2010.json" in config_file:
+                process_national_2000_2010(files)
+            elif "national_2010_2020.json" in config_file:
+                process_national_2010_2020(files)
+            #Added for data refresh from 2020-2023
+            elif "national_2020_2022.json" in config_file:
+                process_national_2020_2022(files)
+            elif "state_1970_1979.json" in config_file:
+                process_state_1970_1979(files)
+            elif "state_1980_1990.json" in config_file:
+                process_state_1980_1990(files)
+            elif "state_1990_2000.json" in config_file:
+                process_state_1990_2000(files)
+            elif "state_2000_2010.json" in config_file:
+                process_state_2000_2010(files)
+            elif "state_2010_2020.json" in config_file:
+                process_state_2010_2020(files)
+            #Added for 2020-2023 part of data refresh
+            elif "state_2020_2022.json" in config_file:
+                process_state_2020_2022(files)
+            elif "county_1970_1979.json" in config_file:
+                process_county_1970_1979(files)
+            elif "county_1980_1989.json" in config_file:
+                process_county_1980_1989(files)
+            elif "county_1990_2000.json" in config_file:
+                process_county_1990_2000(files)
+            elif "county_2000_2009.json" in config_file:
+                process_county_2000_2009(files)
+            elif "county_2010_2020.json" in config_file:
+                process_county_2010_2020(files)
+            #added for 2020-2022 data refresh
+            elif "county_2020_2022.json" in config_file:
+                process_county_2020_2022(files)
+
+        global _FILES_TO_DOWNLOAD
+        for file in _FILES_TO_DOWNLOAD:
+            file_name_to_save = None
+            url = file['download_path']
+            #Calling 2023 onwards methods
+            process_national_2020_2029(url)
+            process_county_2020_2029(url)
+            process_state_2020_2029(url)
+    except Exception as e:
+        logging.fatal(f"There is an error while downloading the files {e}")
+
+
 def process(config_files: list, test=False):
     """
     This method calls the required methods
@@ -79,48 +188,23 @@ def process(config_files: list, test=False):
 
     Args:
         config_files (List) : list of json files containing dataset url.
+        test=False
 
     Returns:
         None.
     """
-    flag = None
 
-    os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTFINAL))
-    os.system("mkdir -p " + os.path.join(_MODULE_DIR, _OUTPUTINTERMEDIATE))
+    input_files = []
+    # Walk through the directory and its subdirectories
+    for root, dirs, files in os.walk(_INPUT_FILE_PATH):
+        for file in sorted(files):  # Sort the files alphabetically
+            file_path = os.path.join(root, file)
+            input_files.append(file_path)
+    # Now `input_files` contains paths to all the files in `_INPUT_FILE_PATH` and its subdirectories
 
-    for config_file in config_files:
-        files = _get_urls(config_file, "urls", test)
-        if "national_1980_1990.json" in config_file:
-            process_national_1980_1990(files)
-        elif "national_1900_1970.json" in config_file:
-            process_national_1900_1970(files)
-        elif "national_1990_2000.json" in config_file:
-            process_national_1990_2000(files)
-        elif "national_2000_2010.json" in config_file:
-            process_national_2000_2010(files)
-        elif "national_2010_2020.json" in config_file:
-            process_national_2010_2020(files)
-        elif "state_1970_1979.json" in config_file:
-            process_state_1970_1979(files)
-        elif "state_1980_1990.json" in config_file:
-            process_state_1980_1990(files)
-        elif "state_1990_2000.json" in config_file:
-            process_state_1990_2000(files)
-        elif "state_2000_2010.json" in config_file:
-            process_state_2000_2010(files)
-        elif "state_2010_2020.json" in config_file:
-            process_state_2010_2020(files)
-        elif "county_1970_1979.json" in config_file:
-            process_county_1970_1979(files)
-        elif "county_1980_1989.json" in config_file:
-            process_county_1980_1989(files)
-        elif "county_1990_2000.json" in config_file:
-            process_county_1990_2000(files)
-        elif "county_2000_2009.json" in config_file:
-            process_county_2000_2009(files)
-        elif "county_2010_2020.json" in config_file:
-            process_county_2010_2020(files)
-
+    processed_count = 0
+    processed_count = len(input_files)
+    logging.info(f"No of files to be processed {processed_count}")
     # list of national output files before year 2000
     national_before_2000 = [
         "nationals_result_1900_1959.csv", "nationals_result_1960_1979.csv",
@@ -137,12 +221,15 @@ def process(config_files: list, test=False):
     # list of state and county output files before after 2000
     state_county_after_2000 = [
         "state_result_2000_2010.csv", "state_result_2010_2020.csv",
-        "county_result_2000_2009.csv", "county_result_2010_2020.csv"
+        "county_result_2000_2009.csv", "county_result_2010_2020.csv",
+        "state_result_2020_2022.csv", "state_result_2020_2029.csv",
+        "county_result_2020_2022.csv", "county_result_2020_2029.csv"
     ]
 
     # list of national output files after year 2000
     national_after_2000 = [
-        "nationals_result_2000_2010.csv", "nationals_result_2010_2020.csv"
+        "nationals_result_2000_2010.csv", "nationals_result_2010_2020.csv",
+        "nationals_result_2020_2022.csv", "nationals_result_2020_2029.csv"
     ]
 
     output_files_names = {
@@ -151,23 +238,31 @@ def process(config_files: list, test=False):
         Outputfiles.StateCountyAfter2000.value: state_county_after_2000,
         Outputfiles.NationalAfter2000.value: national_after_2000
     }
-    column_names = create_single_csv(output_files_names)
-
-    for flag, columns in column_names.items():
-        generate_mcf(columns, flag)
-        generate_tmcf(columns, flag)
+    try:
+        column_names = create_single_csv(output_files_names)
+        for flag, columns in column_names.items():
+            generate_mcf(columns, flag)
+            generate_tmcf(columns, flag)
+    except Exception as e:
+        logging.fatal(f"Error while generating csv,mcf and tmcf files{e}")
 
 
 def main(_):
+    mode = _FLAGS.mode
     """
     Creating and processing input files
     """
     input_path = FLAGS.input_path
-
     ip_files = os.listdir(input_path)
     ip_files = [input_path + os.sep + file for file in ip_files]
 
-    process(ip_files)
+    if mode == "" or mode == "download":
+        # download & process
+        add_future_year_urls()
+        downloadFiles(ip_files)
+
+    if mode == "" or mode == "process":
+        process(ip_files)
 
 
 if __name__ == "__main__":

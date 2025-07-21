@@ -15,14 +15,8 @@
 # limitations under the License.
 set -e
 
-PROJECT_ID=$1
-
-if [[ $PROJECT_ID == "" ]]; then
-  PROJECT_ID=datcom-ci
-fi
-
 gcloud builds submit . \
   --async \
-  --project=$PROJECT_ID \
+  --project=datcom-ci \
   --config=gke/cloudbuild.push_image.yaml \
-  --substitutions=_TAG="prod",_PROJECT_ID=$PROJECT_ID
+  --substitutions=_TAG=$(git rev-parse --short=7 HEAD)

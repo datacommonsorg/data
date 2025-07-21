@@ -1,0 +1,8 @@
+Node: E:mexico_output_aa1->E0
+observationAbout: C:mexico_output_aa1->observationAbout
+observationDate: C:mexico_output_aa1->observationDate
+value: C:mexico_output_aa1->value
+variableMeasured: C:mexico_output_aa1->variableMeasured
+unit: C:mexico_output_aa1->unit
+scalingFactor: C:mexico_output_aa1->scalingFactor
+typeOf: dcs:StatVarObservation

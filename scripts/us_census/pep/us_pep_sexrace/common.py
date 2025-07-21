@@ -1,6 +1,7 @@
 import enum
 
 _OUTPUTFINAL = "output_files/final/"
+__INPUTFILES = "input_files/"
 
 _OUTPUTINTERMEDIATE = "output_files/intermediate/"
 
