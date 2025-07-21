@@ -20,6 +20,6 @@ def running_on_cloudrun() -> bool:
     """Check if running on Cloud Run.
     
     Returns:
-        bool: True if running on Cloud Run services, False otherwise.
+        bool: True if running on Cloud Run services or jobs, False otherwise.
     """
-    return bool(os.getenv('K_SERVICE'))
+    return bool(os.getenv('K_SERVICE')) or bool(os.getenv('CLOUD_RUN_JOB'))
