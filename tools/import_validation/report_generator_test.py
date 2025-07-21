@@ -32,7 +32,7 @@ class TestReportGenerator(unittest.TestCase):
     def tearDown(self):
         self.test_dir.cleanup()
 
-    def test_generate_detailed_report(self):
+    def test_generate_csv_report(self):
         # 1. Create some sample validation results
         results = [
             ValidationResult(ValidationStatus.PASSED,
@@ -55,11 +55,12 @@ class TestReportGenerator(unittest.TestCase):
 
         # 2. Generate the report
         report_generator = ReportGenerator(results)
-        report_generator.generate_detailed_report(self.output_path)
+        csv_output_path = os.path.join(self.test_dir.name, 'output.csv')
+        report_generator.generate_report(csv_output_path)
 
         # 3. Read the output file and verify its contents
-        self.assertTrue(os.path.exists(self.output_path))
-        output_df = pd.read_csv(self.output_path)
+        self.assertTrue(os.path.exists(csv_output_path))
+        output_df = pd.read_csv(csv_output_path)
 
         self.assertEqual(len(output_df), 2)
         self.assertEqual(output_df.iloc[0]['ValidationName'], 'Test 1')
@@ -77,6 +78,46 @@ class TestReportGenerator(unittest.TestCase):
         self.assertIn('ValidationParams', output_df.columns)
         self.assertEqual(output_df.iloc[1]['ValidationParams'],
                          '{"threshold": 42}')
+
+    def test_generate_json_report(self):
+        # 1. Create some sample validation results
+        results = [
+            ValidationResult(ValidationStatus.PASSED,
+                             'Test 1',
+                             details={
+                                 'rows_processed': 10,
+                                 'rows_succeeded': 10,
+                                 'rows_failed': 0
+                             }),
+            ValidationResult(ValidationStatus.FAILED,
+                             'Test 2',
+                             'Something failed',
+                             details={
+                                 'rows_processed': 5,
+                                 'rows_succeeded': 0,
+                                 'rows_failed': 5
+                             },
+                             validation_params={'threshold': 42})
+        ]
+
+        # 2. Generate the report
+        report_generator = ReportGenerator(results)
+        json_output_path = os.path.join(self.test_dir.name, 'output.json')
+        report_generator.generate_report(json_output_path)
+
+        # 3. Read the output file and verify its contents
+        self.assertTrue(os.path.exists(json_output_path))
+        with open(json_output_path, 'r') as f:
+            report_data = json.load(f)
+
+        self.assertEqual(len(report_data), 2)
+        self.assertEqual(report_data[0]['validation_name'], 'Test 1')
+        self.assertEqual(report_data[0]['status'], 'PASSED')
+        self.assertEqual(report_data[1]['validation_name'], 'Test 2')
+        self.assertEqual(report_data[1]['status'], 'FAILED')
+        self.assertEqual(report_data[1]['message'], 'Something failed')
+        self.assertEqual(report_data[1]['details']['rows_processed'], 5)
+        self.assertEqual(report_data[1]['validation_params']['threshold'], 42)
 
     def test_generate_summary_report_placeholder(self):
         report_generator = ReportGenerator([])

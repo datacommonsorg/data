@@ -157,7 +157,7 @@ class ValidationRunner:
                 logging.info('Validation passed: %s', result.name)
 
         report_generator = ReportGenerator(self.validation_results)
-        report_generator.generate_detailed_report(self.validation_output)
+        report_generator.generate_report(self.validation_output)
 
         return overall_status, self.validation_results
 

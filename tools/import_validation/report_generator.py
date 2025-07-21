@@ -24,15 +24,33 @@ class ReportGenerator:
     def __init__(self, results: list[ValidationResult]):
         self.results = results
 
-    def generate_detailed_report(self, output_path: str):
+    def generate_report(self, output_path: str):
+        """Writes the validation results to a file.
+
+    The output format is determined by the file extension of the output_path.
+    Supported formats are .csv and .json.
+
+    Args:
+        output_path: The path to the output file.
+    """
+        if not self.results:
+            return
+
+        if output_path.endswith('.csv'):
+            self._generate_csv_report(output_path)
+        elif output_path.endswith('.json'):
+            self._generate_json_report(output_path)
+        else:
+            raise ValueError(
+                f"Unsupported file format for output path: {output_path}. "
+                "Supported formats are .csv and .json.")
+
+    def _generate_csv_report(self, output_path: str):
         """Writes the detailed validation results to a CSV file.
 
     Args:
         output_path: The path to the output CSV file.
     """
-        if not self.results:
-            return
-
         with open(output_path, 'w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             writer.writerow([
@@ -52,6 +70,25 @@ class ReportGenerator:
                     details_str,
                     params_str,
                 ])
+
+    def _generate_json_report(self, output_path: str):
+        """Writes the detailed validation results to a JSON file.
+
+    Args:
+        output_path: The path to the output JSON file.
+    """
+        report_data = []
+        for result in self.results:
+            report_data.append({
+                'validation_name': result.name,
+                'status': result.status.value,
+                'message': result.message,
+                'details': result.details,
+                'validation_params': result.validation_params,
+            })
+
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(report_data, f, indent=2, default=str)
 
     def generate_summary_report(self) -> str:
         """Generates a human-readable summary report string."""
