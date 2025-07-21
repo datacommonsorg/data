@@ -66,6 +66,8 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
 import eval_functions
+from log_util import configure_cloud_logging
+from cloudrun_util import running_on_cloudrun
 from utils import (capitalize_first_char, is_place_dcid,
                    get_observation_date_format, get_observation_period_for_date,
                    pvs_has_any_prop, str_from_number, prepare_input_data)
@@ -1675,8 +1677,10 @@ class StatVarDataProcessor:
                         prop,
                         value,
                         pvs,
-                        self._config.get('multi_value_properties', {}),
+                        multi_value_keys=self._config.get(
+                            'multi_value_properties', {}),
                         overwrite=False,
+                        normalize=False,
                     )
                     logging.level_debug() and logging.log(
                         2, f'Adding {value} for {prop}:{pvs.get(prop)}')
@@ -1936,10 +1940,10 @@ class StatVarDataProcessor:
                 for prop in col_header_props:
                     # Use any property=value in the header tag or
                     # get the value from the column PVs
-                    value = col_pvs.get(prop, '')
+                    value = col_pvs.get(prop, None)
                     if '=' in prop:
                         prop, value = prop.split('=', 1)
-                    if value:
+                    if value is not None:
                         col_header_pvs[prop] = value
                 if col_header_pvs:
                     col_headers[col_index] = col_header_pvs
@@ -2083,22 +2087,22 @@ class StatVarDataProcessor:
                     if (value is not None and
                             prop not in self._internal_reference_keys and
                             not self.get_reference_names(value)):
-                        pv_utils.add_key_value(prop,
-                                               value,
-                                               row_pvs,
-                                               self._config.get(
-                                                   'multi_value_properties',
-                                                   {}),
-                                               normalize=False)
+                        pv_utils.add_key_value(
+                            prop,
+                            value,
+                            row_pvs,
+                            multi_value_keys=self._config.get(
+                                'multi_value_properties', {}),
+                            normalize=False)
                 for prop, value in row_col_pvs.get(col_index, {}).items():
                     if value is not None and prop not in self._internal_reference_keys:
-                        pv_utils.add_key_value(prop,
-                                               value,
-                                               row_pvs,
-                                               self._config.get(
-                                                   'multi_value_properties',
-                                                   {}),
-                                               normalize=False)
+                        pv_utils.add_key_value(
+                            prop,
+                            value,
+                            row_pvs,
+                            multi_value_keys=self._config.get(
+                                'multi_value_properties', {}),
+                            normalize=False)
         if config_flags.get_value_type(row_pvs.get('#IgnoreRow'), False):
             logging.level_debug() and logging.log(
                 2, f'Ignoring row: {row} in {self._file_context}')
@@ -2786,6 +2790,14 @@ def process(
 
 
 def main(_):
+    # Configure cloud logging if running on CloudRun
+    if running_on_cloudrun():
+        logging.info("Running under Cloud Run detected.")
+        configure_cloud_logging()
+        logging.info("Google Cloud Logging configured.")
+    else:
+        logging.info("Not running under Cloud Run")
+
     # uncomment to run pprof
     # start_pprof_server(port=8123)
 
