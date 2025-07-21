@@ -1,47 +1,61 @@
 import pandas as pd
 import os
-from google.cloud import storage
-from decimal import Decimal, InvalidOperation 
+import subprocess 
+from decimal import Decimal, InvalidOperation
+from absl import logging 
 
-# --- GCS Configuration and File Copy Logic ---
-
+# --- GCS Configuration ---
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_INPUT_PREFIX = "us_eda/latest/input_files"
 
-# Get the directory of the current script (download.py)
+# Get the directory of the current script (e.g., if this is 'main.py')
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Files will be downloaded into this base GCS output directory
-_GCS_OUTPUT_BASE_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+# Define the local working directory for both input and output files
+LOCAL_WORKING_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
 
+# Path to the file_util.py script
+# Adjusting the path to go up two directories from _MODULE_DIR
+FILE_UTIL_SCRIPT_PATH = os.path.join(os.path.dirname(os.path.dirname(_MODULE_DIR)), 'util', 'file_util.py')
 
-def download_blob_from_gcs(bucket_name, source_blob_name, destination_file_name):
-    """Downloads a blob from a GCS bucket."""
-    try:
-        storage_client = storage.Client()
-        bucket = storage_client.bucket(bucket_name)
-        blob = bucket.blob(source_blob_name)
-        blob.download_to_filename(destination_file_name)
-        print(f"Downloaded '{source_blob_name}' from GCS to '{destination_file_name}'")
-    except Exception as e:
-        print(f"Error downloading '{source_blob_name}': {e}")
-        # Re-raise the exception to stop execution if a critical file cannot be downloaded
-        raise
+# Ensure the local working directory exists
+os.makedirs(LOCAL_WORKING_DIR, exist_ok=True)
+logging.info(f"Created/Ensured local working directory: {LOCAL_WORKING_DIR}")
 
-# Files to copy from GCS to local input_files directory
+# Files to copy from GCS to the local working directory
 files_to_download = ["EstimatedOutcome.csv", "Poverty.csv", "Investment.csv"]
 
-print("--- Starting GCS File Downloads ---")
+logging.info("--- Starting GCS File Transfers using file_util.py ---")
 for file_name in files_to_download:
-    gcs_source_path = f"{GCS_INPUT_PREFIX}/{file_name}"
-    local_destination_path = os.path.join(_GCS_OUTPUT_BASE_DIR , file_name)
-    download_blob_from_gcs(GCS_BUCKET_NAME, gcs_source_path, local_destination_path)
-print("--- GCS File Downloads Complete ---\n")
+    gcs_source_path = f"gs://{GCS_BUCKET_NAME}/{GCS_INPUT_PREFIX}/{file_name}"
+    local_destination_path = os.path.join(LOCAL_WORKING_DIR, file_name)
+    
+    try:
+        # Execute the file_util.py script to copy the file
+        subprocess.run(
+            ['python', FILE_UTIL_SCRIPT_PATH, 'cp', gcs_source_path, local_destination_path],
+            check=True, # Raise an exception for non-zero exit codes
+            capture_output=True, # Capture stdout/stderr for logging
+            text=True # Decode stdout/stderr as text
+        )
+        logging.info(f"Copied '{gcs_source_path}' to '{local_destination_path}' using file_util.py")
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Error copying '{gcs_source_path}' to '{local_destination_path}':")
+        logging.error(f"  Command: {e.cmd}")
+        logging.error(f"  Return Code: {e.returncode}")
+        logging.error(f"  Stdout: {e.stdout}")
+        logging.error(f"  Stderr: {e.stderr}")
+        exit(1) # Exit if file copying fails
+    except FileNotFoundError:
+        logging.error(f"Error: file_util.py script not found at {FILE_UTIL_SCRIPT_PATH}. Please ensure it exists and the path is correct.")
+        exit(1) # Exit if file_util.py is missing
 
-# --- CSV Processing Logic (Modified to use local paths) ---
+logging.info("--- GCS File Transfers Complete ---\n")
 
-# Update input_filepath and output_filepath to point to the local directory
-input_filepath = os.path.join(_GCS_OUTPUT_BASE_DIR , "Investment.csv")
-output_filepath = os.path.join(_GCS_OUTPUT_BASE_DIR , "Investment1.csv")
+# --- CSV Processing Logic ---
+
+# Input and output file paths within the local working directory
+input_filepath = os.path.join(LOCAL_WORKING_DIR, "Investment.csv")
+output_filepath = os.path.join(LOCAL_WORKING_DIR, "Investment1.csv")
 
 us_states = {
     "Alabama", "Alaska", "American Samoa", "Arizona", "Arkansas", "California",
@@ -58,17 +72,23 @@ us_states = {
 }
 
 # Read CSV without header and skipping first row (if it's a header row)
-
 try:
     df = pd.read_csv(input_filepath, header=None, skiprows=1, dtype=str)
 except FileNotFoundError:
-    print(f"Error: Input file not found at {input_filepath}. Please ensure it was downloaded successfully.")
-    exit() # Exit if the file to process isn't there
+    logging.error(f"Error: Input file not found at {input_filepath}. Please ensure it was transferred successfully.")
+    exit(1) # Exit if the file to process isn't there
+
+# --- DEBUGGING STEP (for initial data state) ---
+logging.info(f"--- DataFrame Info for '{os.path.basename(input_filepath)}' After Initial Read (Debugging) ---")
+df.info()
+logging.info(f"\nFirst 5 rows of raw DataFrame from '{os.path.basename(input_filepath)}' (Debugging):")
+logging.info(df.head())
+logging.info("---------------------------------------------------\n")
 
 output_data = []
 current_state = None
 
-print("--- Starting CSV Data Processing ---")
+logging.info("--- Starting CSV Data Processing ---")
 for index, row in df.iterrows():
     original_col_a = str(row[0]).strip() if pd.notna(row[0]) else ""
 
@@ -100,49 +120,42 @@ for index, row in df.iterrows():
             if isinstance(val_str, str):
                 if ',' in val_str:
                     val_str = val_str.replace(",", "")
-                if '$' in val_str: # Added this condition to remove dollar signs
+                if '$' in val_str:
                     val_str = val_str.replace("$", "")
 
-            val_to_append = val_str 
+            val_to_append = val_str # Default to the cleaned string
             try:
                 # Attempt to create a Decimal object from the string
                 decimal_val = Decimal(val_str)
                 
                 # Check if the decimal value is numerically equivalent to a whole number.
-                # E.g., Decimal('129') and Decimal('129.0') will both satisfy this.
                 if decimal_val == decimal_val.to_integral_value():
-                    # If it's a whole number, convert to int then back to string to remove '.0'
-                    # This ensures "129.0" becomes "129", and "129" remains "129".
                     val_to_append = str(int(decimal_val))
                 else:
-                    # If it's not a whole number (e.g., "128.8"), keep its exact string representation
-                    # using str(decimal_val) which is often more precise than the original val_str if val_str was from a float.
                     val_to_append = str(decimal_val) 
             except InvalidOperation:
-                # If val_str cannot be converted to a Decimal (e.g., "text", empty string, or garbage)
-                # Then keep its original string value (which is now comma-free and dollar-sign-free).
+                # If val_str cannot be converted to a Decimal, keep its string value
                 val_to_append = val_str
             except Exception as e:
-                # Catch any other unexpected errors during conversion, for debugging
-                print(f"Warning: Unexpected error processing value '{val_str}' with Decimal: {e}")
+                logging.warning(f"Unexpected error processing value '{val_str}' with Decimal: {e}")
                 val_to_append = val_str # Fallback to original string
 
             output_row.append(val_to_append)
 
     output_data.append(output_row)
-print("--- CSV Data Processing Complete ---\n")
+logging.info("--- CSV Data Processing Complete ---\n")
 
+# Define column names temporarily (won’t be saved in final CSV)
 output_column_names = ["State", "Category"] + [f"Original_Col_{i}" for i in range(1, df.shape[1])]
 
 # Create DataFrame
 output_df = pd.DataFrame(output_data, columns=output_column_names)
 
 # Replace all string 'nan' or NaN values with None before saving
-# This applies a lambda function to each element to ensure consistency.
 output_df = output_df.applymap(lambda x: None if x is None or (isinstance(x, str) and x.lower() == "nan") else x)
 
 # Save CSV without header so 'Place' stays as first row.
 output_df.to_csv(output_filepath, index=False, header=False, float_format='%.0f')
 
-print(f"✅ Successfully processed '{input_filepath}' and saved to '{output_filepath}' (empty cells preserved, commas and dollar signs removed, numeric precision maintained).")
-print(f"All specified files have been downloaded to the '{_GCS_OUTPUT_BASE_DIR }' directory.")
+logging.info(f"✅ Successfully processed '{input_filepath}' and saved to '{output_filepath}' (empty cells preserved, commas and dollar signs removed, numeric precision maintained).")
+logging.info(f"All specified input files have been transferred to and processed from the '{LOCAL_WORKING_DIR}' directory.")
