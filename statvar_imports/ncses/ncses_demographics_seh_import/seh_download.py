@@ -128,7 +128,7 @@ def download_xlsx_from_table(url):
     return True 
 
 def main(argv):
-    "In the UI data is available from 2021 only."
+    # In the UI data is available from 2021 only.
     start_year = 2021
     base_url = "https://ncses.nsf.gov/surveys/graduate-students-postdoctorates-s-e/{year}#data"
 
