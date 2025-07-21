@@ -37,8 +37,7 @@ class ReportGenerator:
             writer = csv.writer(f)
             writer.writerow([
                 "ValidationName", "Status", "Message", "Details",
-                "ValidationParams", "RowsProcessed", "RowsSucceeded",
-                "RowsFailed"
+                "ValidationParams"
             ])
             for result in self.results:
                 details_str = json.dumps(result.details,
@@ -52,9 +51,6 @@ class ReportGenerator:
                     result.message,
                     details_str,
                     params_str,
-                    result.rows_processed,
-                    result.rows_succeeded,
-                    result.rows_failed,
                 ])
 
     def generate_summary_report(self) -> str:

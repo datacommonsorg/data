@@ -17,6 +17,7 @@ import unittest
 import os
 import tempfile
 import pandas as pd
+import json
 
 from tools.import_validation.report_generator import ReportGenerator
 from tools.import_validation.result import ValidationResult, ValidationStatus
@@ -36,16 +37,20 @@ class TestReportGenerator(unittest.TestCase):
         results = [
             ValidationResult(ValidationStatus.PASSED,
                              'Test 1',
-                             rows_processed=10,
-                             rows_succeeded=10,
-                             rows_failed=0),
+                             details={
+                                 'rows_processed': 10,
+                                 'rows_succeeded': 10,
+                                 'rows_failed': 0
+                             }),
             ValidationResult(ValidationStatus.FAILED,
                              'Test 2',
-                             'Something failed', {'details': 'here'},
-                             validation_params={'threshold': 42},
-                             rows_processed=5,
-                             rows_succeeded=0,
-                             rows_failed=5)
+                             'Something failed',
+                             details={
+                                 'rows_processed': 5,
+                                 'rows_succeeded': 0,
+                                 'rows_failed': 5
+                             },
+                             validation_params={'threshold': 42})
         ]
 
         # 2. Generate the report
@@ -62,13 +67,16 @@ class TestReportGenerator(unittest.TestCase):
         self.assertEqual(output_df.iloc[1]['ValidationName'], 'Test 2')
         self.assertEqual(output_df.iloc[1]['Status'], 'FAILED')
         self.assertEqual(output_df.iloc[1]['Message'], 'Something failed')
-        self.assertEqual(output_df.iloc[1]['Details'], '{"details": "here"}')
+
+        # Verify the details of the second result
+        details = json.loads(output_df.iloc[1]['Details'])
+        self.assertEqual(details['rows_processed'], 5)
+        self.assertEqual(details['rows_succeeded'], 0)
+        self.assertEqual(details['rows_failed'], 5)
+
         self.assertIn('ValidationParams', output_df.columns)
         self.assertEqual(output_df.iloc[1]['ValidationParams'],
                          '{"threshold": 42}')
-        self.assertEqual(output_df.iloc[1]['RowsProcessed'], 5)
-        self.assertEqual(output_df.iloc[1]['RowsSucceeded'], 0)
-        self.assertEqual(output_df.iloc[1]['RowsFailed'], 5)
 
     def test_generate_summary_report_placeholder(self):
         report_generator = ReportGenerator([])

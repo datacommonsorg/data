@@ -97,9 +97,11 @@ class Validator:
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'MAX_DATE_LATEST',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         stats_df['MaxDate'] = pd.to_datetime(stats_df['MaxDate'])
         max_date_year = stats_df['MaxDate'].dt.year.max()
@@ -113,16 +115,18 @@ class Validator:
                 f"Latest date found was {max_date_year}, expected {current_year}.",
                 details={
                     'latest_date_found': int(max_date_year),
-                    'expected_latest_date': int(current_year)
-                },
-                rows_processed=rows_processed,
-                rows_succeeded=0,
-                rows_failed=rows_processed)
+                    'expected_latest_date': int(current_year),
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': 0,
+                    'rows_failed': rows_processed
+                })
         return ValidationResult(ValidationStatus.PASSED,
                                 'MAX_DATE_LATEST',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_processed,
-                                rows_failed=0)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_processed,
+                                    'rows_failed': 0
+                                })
 
     def validate_deleted_count(self, differ_df: pd.DataFrame,
                                params: dict) -> ValidationResult:
@@ -147,9 +151,11 @@ class Validator:
         if differ_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'DELETED_COUNT',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         threshold = params.get('threshold', 0)
         deleted_count = differ_df['DELETED'].sum()
@@ -162,16 +168,18 @@ class Validator:
                 f"Found {deleted_count} deleted points, which is over the threshold of {threshold}.",
                 details={
                     'deleted_count': int(deleted_count),
-                    'threshold': threshold
-                },
-                rows_processed=rows_processed,
-                rows_succeeded=0,
-                rows_failed=rows_processed)
+                    'threshold': threshold,
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': 0,
+                    'rows_failed': rows_processed
+                })
         return ValidationResult(ValidationStatus.PASSED,
                                 'DELETED_COUNT',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_processed,
-                                rows_failed=0)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_processed,
+                                    'rows_failed': 0
+                                })
 
     def validate_modified_count(self, differ_df: pd.DataFrame,
                                 params: dict) -> ValidationResult:
@@ -195,9 +203,11 @@ class Validator:
         if differ_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'MODIFIED_COUNT',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         unique_counts = differ_df['MODIFIED'].nunique()
 
@@ -209,16 +219,18 @@ class Validator:
                 "The number of modified data points is not consistent across all StatVars",
                 details={
                     'distinct_statvar_count': differ_df['StatVar'].nunique(),
-                    'distinct_modified_counts': unique_counts
-                },
-                rows_processed=rows_processed,
-                rows_succeeded=0,
-                rows_failed=rows_processed)
+                    'distinct_modified_counts': unique_counts,
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': 0,
+                    'rows_failed': rows_processed
+                })
         return ValidationResult(ValidationStatus.PASSED,
                                 'MODIFIED_COUNT',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_processed,
-                                rows_failed=0)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_processed,
+                                    'rows_failed': 0
+                                })
 
     def validate_added_count(self, differ_df: pd.DataFrame,
                              params: dict) -> ValidationResult:
@@ -242,9 +254,11 @@ class Validator:
         if differ_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'ADDED_COUNT',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         unique_counts = differ_df['ADDED'].nunique()
 
@@ -256,16 +270,18 @@ class Validator:
                 "The number of added data points is not consistent across all StatVars.",
                 details={
                     'distinct_statvar_count': differ_df['StatVar'].nunique(),
-                    'distinct_added_counts': unique_counts
-                },
-                rows_processed=rows_processed,
-                rows_succeeded=0,
-                rows_failed=rows_processed)
+                    'distinct_added_counts': unique_counts,
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': 0,
+                    'rows_failed': rows_processed
+                })
         return ValidationResult(ValidationStatus.PASSED,
                                 'ADDED_COUNT',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_processed,
-                                rows_failed=0)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_processed,
+                                    'rows_failed': 0
+                                })
 
     def validate_num_places_consistent(self, stats_df: pd.DataFrame,
                                        params: dict) -> ValidationResult:
@@ -289,9 +305,11 @@ class Validator:
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'NUM_PLACES_CONSISTENT',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         unique_counts = stats_df['NumPlaces'].nunique()
 
@@ -301,15 +319,19 @@ class Validator:
                 'NUM_PLACES_CONSISTENT',
                 message=
                 f"Found {unique_counts} unique place counts where 1 was expected.",
-                details={'unique_counts': list(stats_df['NumPlaces'].unique())},
-                rows_processed=rows_processed,
-                rows_succeeded=0,
-                rows_failed=rows_processed)
+                details={
+                    'unique_counts': list(stats_df['NumPlaces'].unique()),
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': 0,
+                    'rows_failed': rows_processed
+                })
         return ValidationResult(ValidationStatus.PASSED,
                                 'NUM_PLACES_CONSISTENT',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_processed,
-                                rows_failed=0)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_processed,
+                                    'rows_failed': 0
+                                })
 
     def validate_num_places_count(self, stats_df: pd.DataFrame,
                                   params: dict) -> ValidationResult:
@@ -334,9 +356,11 @@ class Validator:
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'NUM_PLACES_COUNT',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         min_val = params.get('minimum')
         max_val = params.get('maximum')
@@ -387,16 +411,20 @@ class Validator:
                 'NUM_PLACES_COUNT',
                 message=
                 f"{rows_failed} out of {rows_processed} rows failed the range check.",
-                details={'failed_rows': failed_rows_details},
-                rows_processed=rows_processed,
-                rows_succeeded=rows_succeeded,
-                rows_failed=rows_failed)
+                details={
+                    'failed_rows': failed_rows_details,
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': rows_succeeded,
+                    'rows_failed': rows_failed
+                })
 
         return ValidationResult(ValidationStatus.PASSED,
                                 'NUM_PLACES_COUNT',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_succeeded,
-                                rows_failed=rows_failed)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_succeeded,
+                                    'rows_failed': rows_failed
+                                })
 
     def validate_min_value_check(self, stats_df: pd.DataFrame,
                                  params: dict) -> ValidationResult:
@@ -424,9 +452,11 @@ class Validator:
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'MIN_VALUE_CHECK',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         min_val = params['minimum']
         rows_processed = len(stats_df)
@@ -453,16 +483,20 @@ class Validator:
                 'MIN_VALUE_CHECK',
                 message=
                 f"{rows_failed} out of {rows_processed} StatVars failed the minimum value check.",
-                details={'failed_rows': failed_rows_details},
-                rows_processed=rows_processed,
-                rows_succeeded=rows_succeeded,
-                rows_failed=rows_failed)
+                details={
+                    'failed_rows': failed_rows_details,
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': rows_succeeded,
+                    'rows_failed': rows_failed
+                })
 
         return ValidationResult(ValidationStatus.PASSED,
                                 'MIN_VALUE_CHECK',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_succeeded,
-                                rows_failed=rows_failed)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_succeeded,
+                                    'rows_failed': rows_failed
+                                })
 
     def validate_max_date_consistent(self, stats_df: pd.DataFrame,
                                      params: dict) -> ValidationResult:
@@ -486,9 +520,11 @@ class Validator:
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'MAX_DATE_CONSISTENT',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         unique_dates = stats_df['MaxDate'].nunique()
 
@@ -498,15 +534,19 @@ class Validator:
                 'MAX_DATE_CONSISTENT',
                 message=
                 f"Found {unique_dates} unique MaxDates where 1 was expected.",
-                details={'unique_dates': list(stats_df['MaxDate'].unique())},
-                rows_processed=rows_processed,
-                rows_succeeded=0,
-                rows_failed=rows_processed)
+                details={
+                    'unique_dates': list(stats_df['MaxDate'].unique()),
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': 0,
+                    'rows_failed': rows_processed
+                })
         return ValidationResult(ValidationStatus.PASSED,
                                 'MAX_DATE_CONSISTENT',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_processed,
-                                rows_failed=0)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_processed,
+                                    'rows_failed': 0
+                                })
 
     def validate_num_observations_check(self, stats_df: pd.DataFrame,
                                         params: dict) -> ValidationResult:
@@ -532,9 +572,11 @@ class Validator:
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'NUM_OBSERVATIONS_CHECK',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         min_val = params.get('minimum')
         max_val = params.get('maximum')
@@ -585,16 +627,20 @@ class Validator:
                 'NUM_OBSERVATIONS_CHECK',
                 message=
                 f"{rows_failed} out of {rows_processed} rows failed the range check.",
-                details={'failed_rows': failed_rows_details},
-                rows_processed=rows_processed,
-                rows_succeeded=rows_succeeded,
-                rows_failed=rows_failed)
+                details={
+                    'failed_rows': failed_rows_details,
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': rows_succeeded,
+                    'rows_failed': rows_failed
+                })
 
         return ValidationResult(ValidationStatus.PASSED,
                                 'NUM_OBSERVATIONS_CHECK',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_succeeded,
-                                rows_failed=rows_failed)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_succeeded,
+                                    'rows_failed': rows_failed
+                                })
 
     def validate_unit_consistency(self, stats_df: pd.DataFrame,
                                   params: dict) -> ValidationResult:
@@ -618,9 +664,11 @@ class Validator:
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'UNIT_CONSISTENCY_CHECK',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         unique_units = stats_df['Units'].nunique()
 
@@ -630,15 +678,19 @@ class Validator:
                 'UNIT_CONSISTENCY_CHECK',
                 message=
                 f"Found {unique_units} unique units where 1 was expected.",
-                details={'unique_units': list(stats_df['Units'].unique())},
-                rows_processed=rows_processed,
-                rows_succeeded=0,
-                rows_failed=rows_processed)
+                details={
+                    'unique_units': list(stats_df['Units'].unique()),
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': 0,
+                    'rows_failed': rows_processed
+                })
         return ValidationResult(ValidationStatus.PASSED,
                                 'UNIT_CONSISTENCY_CHECK',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_processed,
-                                rows_failed=0)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_processed,
+                                    'rows_failed': 0
+                                })
 
     def validate_max_value_check(self, stats_df: pd.DataFrame,
                                  params: dict) -> ValidationResult:
@@ -666,9 +718,11 @@ class Validator:
         if stats_df.empty:
             return ValidationResult(ValidationStatus.PASSED,
                                     'MAX_VALUE_CHECK',
-                                    rows_processed=0,
-                                    rows_succeeded=0,
-                                    rows_failed=0)
+                                    details={
+                                        'rows_processed': 0,
+                                        'rows_succeeded': 0,
+                                        'rows_failed': 0
+                                    })
 
         max_val = params['maximum']
         rows_processed = len(stats_df)
@@ -695,13 +749,17 @@ class Validator:
                 'MAX_VALUE_CHECK',
                 message=
                 f"{rows_failed} out of {rows_processed} StatVars failed the maximum value check.",
-                details={'failed_rows': failed_rows_details},
-                rows_processed=rows_processed,
-                rows_succeeded=rows_succeeded,
-                rows_failed=rows_failed)
+                details={
+                    'failed_rows': failed_rows_details,
+                    'rows_processed': rows_processed,
+                    'rows_succeeded': rows_succeeded,
+                    'rows_failed': rows_failed
+                })
 
         return ValidationResult(ValidationStatus.PASSED,
                                 'MAX_VALUE_CHECK',
-                                rows_processed=rows_processed,
-                                rows_succeeded=rows_succeeded,
-                                rows_failed=rows_failed)
+                                details={
+                                    'rows_processed': rows_processed,
+                                    'rows_succeeded': rows_succeeded,
+                                    'rows_failed': rows_failed
+                                })

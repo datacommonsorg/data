@@ -167,10 +167,12 @@ class TestValidationRunner(unittest.TestCase):
             ValidationStatus.FAILED,
             'DELETED_COUNT',
             message='Too many deletions, found 100',
-            details={'deleted_count': 100},
-            rows_processed=1,
-            rows_succeeded=0,
-            rows_failed=1)
+            details={
+                'deleted_count': 100,
+                'rows_processed': 1,
+                'rows_succeeded': 0,
+                'rows_failed': 1
+            })
         mock_validator_instance.validate_deleted_count.return_value = expected_result
 
         # 2. Create test files
@@ -205,11 +207,11 @@ class TestValidationRunner(unittest.TestCase):
         self.assertEqual(output_df.iloc[0]['Status'], 'FAILED')
         self.assertEqual(output_df.iloc[0]['Message'],
                          'Too many deletions, found 100')
-        self.assertEqual(json.loads(output_df.iloc[0]['Details']),
-                         {'deleted_count': 100})
-        self.assertEqual(output_df.iloc[0]['RowsProcessed'], 1)
-        self.assertEqual(output_df.iloc[0]['RowsSucceeded'], 0)
-        self.assertEqual(output_df.iloc[0]['RowsFailed'], 1)
+        details = json.loads(output_df.iloc[0]['Details'])
+        self.assertEqual(details['deleted_count'], 100)
+        self.assertEqual(details['rows_processed'], 1)
+        self.assertEqual(details['rows_succeeded'], 0)
+        self.assertEqual(details['rows_failed'], 1)
 
     @patch('tools.import_validation.runner.Validator')
     def test_runner_uses_custom_name(self, MockValidator):
