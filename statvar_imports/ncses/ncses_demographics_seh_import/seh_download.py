@@ -1,70 +1,141 @@
 # Copyright 2025 Google LLC
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 20 ('License');
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    https://www.apache.org/licenses/LICENSE-2.0
+#           https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an 'AS IS' BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# How to run the script to download the files:
+# python3 seh_download.py
+import requests
+from bs4 import BeautifulSoup
 import os
-from absl import app, logging, flags
-import sys
-from google.cloud import storage
+import zipfile
+import re 
+from absl import app
+from absl import logging
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(SCRIPT_DIR, '../../../util'))
-INPUT_DIR = os.path.join(SCRIPT_DIR, "input_files")
+def download_xlsx_from_table(url):
+    """
+    Downloads a specific ZIP file from a given URL, identified by its filename.
+    After extraction, deletes the original ZIP file and keeps only a specific XLSX file.
 
-from download_util_script import download_file
+    Args:
+        url (str): The URL of the web page to scrape.
 
-flags.DEFINE_string(
-    'config_file_path',
-    'gs://unresolved_mcf/country/ncses/ncses_demographics_seh/latest/configs.py',
-    'Config file path')
-
-def reads_config_file():
-    _FLAGS = flags.FLAGS
-    config_file_path = _FLAGS.config_file_path
+    Returns:
+        bool: True if the URL was fetched successfully, False otherwise.
+    """
+    logging.info(f"Fetching URL: {url}")
     try:
-        storage_client = storage.Client()
-        bucket_name = config_file_path.split('/')[2]
-        bucket = storage_client.bucket(bucket_name)
-        blob_name = '/'.join(config_file_path.split('/')[3:])
-        blob = bucket.blob(blob_name)
-        file_contents = blob.download_as_text()
-        local_vars = {}
-        exec(file_contents, {}, local_vars)
-        return local_vars
-    except Exception as e:
-        logging.fatal(f"Cannot extract url and related configs: {e}")
+        response = requests.get(url, timeout=10)
+        response.raise_for_status()  
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error fetching the page: {e}")
+        return False 
 
-def download_files(URL_CONFIGS):
+    soup = BeautifulSoup(response.text, 'html.parser')
+    desired_zip_filename = 'data-tables-tables-excels.zip'
+    required_data = 'tab002-001.xlsx' 
+    download_link = None
+    all_zip_links_found_on_page = []
+
+    # Iterate over all a tags to find the required static ZIP link
+    for link in soup.find_all('a', href=True):
+        href = link.get('href')
+        # check the required filename
+        if href and desired_zip_filename.lower() in href.lower(): 
+            if href.lower().endswith('.zip'):
+                all_zip_links_found_on_page.append(link)
+                if os.path.basename(href).lower() == desired_zip_filename.lower():
+                    download_link = link
+                    break 
+
+    if not download_link and len(all_zip_links_found_on_page) == 1:
+        download_link = all_zip_links_found_on_page[0]
+        logging.info(f"Found a single ZIP link containing '{desired_zip_filename}' in its href: {download_link.get('href')}")
+
+
+    xlsx_url = download_link.get('href')
+    # If the URL is relative, make it absolute
+    if not xlsx_url.startswith('http'):
+        xlsx_url = requests.compat.urljoin(url, xlsx_url)
+
+    logging.info(f"Found target ZIP file URL: {xlsx_url}")
+
+    logging.info(f"Downloading ZIP file from: {xlsx_url}")
+    zip_filepath = None 
+
     try:
-        for config_url in URL_CONFIGS:
-            download_file(url=config_url,
-                  output_folder=INPUT_DIR,
-                  unzip=False,
-                  headers= None,
-                  tries= 3,
-                  delay= 5,
-                  backoff= 2)
-            
-    except Exception as e:
-        logging.fatal(f"Download error: {str(e)}")
+        download_response = requests.get(xlsx_url, stream=True, timeout=30)
+        download_response.raise_for_status()
+        filename = desired_zip_filename 
+        zip_filepath = os.path.join(filename)
 
+        with open(zip_filepath, 'wb') as f:
+            for chunk in download_response.iter_content(chunk_size=8192):
+                f.write(chunk)
+        logging.info(f"Successfully downloaded: {zip_filepath}")
 
-def main(_):
-    configs = reads_config_file()
-    SEH_URL = configs['URLS_CONFIG']
-    download_files(SEH_URL)
-    logging.info("Download process Completed successfully")
+        # unzipping the zip file 
+        if zipfile.is_zipfile(zip_filepath):
+            logging.info(f"Unzipping {zip_filepath}...")
+            extract_path = os.path.join("input_files") 
+            os.makedirs(extract_path, exist_ok=True)
+            with zipfile.ZipFile(zip_filepath, 'r') as zip_ref:
+                zip_ref.extractall(extract_path)
+            logging.info(f"Extracted to: {extract_path}")
 
+            # file ertraction logic
+            logging.info(f"Processing extracted files in: {extract_path}")
+            extracted_files = os.listdir(extract_path)
+            found_target_xlsx = False
+            for f in extracted_files:
+                full_file_path = os.path.join(extract_path, f)
+                # Check if it's a file and an XLSX, and if it contains the desired fragment
+                if os.path.isfile(full_file_path) and f.lower().endswith('.xlsx'):
+                    if required_data.lower() in f.lower():
+                        logging.info(f"Keeping target XLSX file: {full_file_path}")
+                        found_target_xlsx = True
+                    else:
+                        # removing unnecessary xlsx files
+                        os.remove(full_file_path)
+                        logging.info(f"Removed non-target XLSX file: {full_file_path}")
+                       
+                elif os.path.isfile(full_file_path): # Remove other non-XLSX file like pdfs
+                    os.remove(full_file_path)
+                    logging.info(f"Removed non-XLSX file: {full_file_path}")
+                    
+        else:
+            logging.info("Downloaded file is not a valid ZIP archive (or could not be identified as such).")
 
-if __name__ == "__main__":  
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Error downloading the file: {e}")
+        return True # Page was fetched successfully, but download failed.
+    finally:
+        os.remove(zip_filepath)
+        logging.info(f"Successfully removed the downloaded ZIP file: {zip_filepath}")
+         
+    return True 
+
+def main(argv):
+    start_year = 2021
+    base_url = "https://ncses.nsf.gov/surveys/graduate-students-postdoctorates-s-e/{year}#data"
+
+    while True:
+        target_url = base_url.format(year=start_year)
+        logging.info(f"Attempting to process data for year: {start_year}")
+        if not download_xlsx_from_table(target_url):
+            logging.info(f"No data available or error fetching URL for year {start_year}")
+            break
+        
+        start_year += 1
+if __name__=="__main__":
     app.run(main)
