@@ -154,10 +154,14 @@ class TestAddedCountValidation(unittest.TestCase):
         self.validator = Validator()
 
     def test_added_count_fails_on_inconsistent_counts(self):
-        test_df = pd.DataFrame({'ADDED': [1, 2]})  # Inconsistent
+        test_df = pd.DataFrame({
+            'StatVar': ['sv1', 'sv2'],
+            'ADDED': [1, 2]
+        })  # Inconsistent
         result = self.validator.validate_added_count(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
+        self.assertEqual(result.details['distinct_statvar_count'], 2)
+        self.assertEqual(result.details['distinct_added_counts'], 2)
         self.assertEqual(result.rows_processed, 2)
         self.assertEqual(result.rows_succeeded, 0)
         self.assertEqual(result.rows_failed, 2)

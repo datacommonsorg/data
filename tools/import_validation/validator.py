@@ -248,13 +248,16 @@ class Validator:
 
         unique_counts = differ_df['ADDED'].nunique()
 
-        if unique_counts != 1:
+        if unique_counts > 1:
             return ValidationResult(
                 ValidationStatus.FAILED,
                 'ADDED_COUNT',
                 message=
-                f"Found {unique_counts} unique added counts where 1 was expected.",
-                details={'unique_counts': list(differ_df['ADDED'].unique())},
+                "The number of added data points is not consistent across all StatVars.",
+                details={
+                    'distinct_statvar_count': differ_df['StatVar'].nunique(),
+                    'distinct_added_counts': unique_counts
+                },
                 rows_processed=rows_processed,
                 rows_succeeded=0,
                 rows_failed=rows_processed)
