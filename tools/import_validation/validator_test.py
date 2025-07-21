@@ -196,10 +196,17 @@ class TestNumPlacesConsistentValidation(unittest.TestCase):
         self.validator = Validator()
 
     def test_num_places_consistent_fails_on_inconsistent_counts(self):
-        test_df = pd.DataFrame({'NumPlaces': [1, 2]})  # Inconsistent
+        test_df = pd.DataFrame({
+            'StatVar': ['sv1', 'sv2'],
+            'NumPlaces': [1, 2]
+        })  # Inconsistent
         result = self.validator.validate_num_places_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(sorted(result.details['unique_counts']), [1, 2])
+        self.assertEqual(
+            result.message,
+            "The number of places is not consistent across all StatVars.")
+        self.assertEqual(result.details['distinct_statvar_count'], 2)
+        self.assertEqual(result.details['distinct_place_counts'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
@@ -355,12 +362,16 @@ class TestMaxDateConsistentValidation(unittest.TestCase):
         self.validator = Validator()
 
     def test_max_date_consistent_fails_on_inconsistent_dates(self):
-        test_df = pd.DataFrame({'MaxDate': ['2024-01-01',
-                                            '2024-01-02']})  # Inconsistent
+        test_df = pd.DataFrame({
+            'StatVar': ['sv1', 'sv2'],
+            'MaxDate': ['2024-01-01', '2024-01-02']
+        })  # Inconsistent
         result = self.validator.validate_max_date_consistent(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(sorted(result.details['unique_dates']),
-                         ['2024-01-01', '2024-01-02'])
+        self.assertEqual(result.message,
+                         "The MaxDate is not consistent across all StatVars.")
+        self.assertEqual(result.details['distinct_statvar_count'], 2)
+        self.assertEqual(result.details['distinct_max_date_counts'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)
@@ -468,11 +479,16 @@ class TestUnitConsistencyValidation(unittest.TestCase):
         self.validator = Validator()
 
     def test_unit_consistency_fails_on_inconsistent_units(self):
-        test_df = pd.DataFrame({'Units': ['USD', 'Percent']})  # Inconsistent
+        test_df = pd.DataFrame({
+            'StatVar': ['sv1', 'sv2'],
+            'Units': ['USD', 'Percent']
+        })  # Inconsistent
         result = self.validator.validate_unit_consistency(test_df, {})
         self.assertEqual(result.status, ValidationStatus.FAILED)
-        self.assertEqual(sorted(result.details['unique_units']),
-                         ['Percent', 'USD'])
+        self.assertEqual(result.message,
+                         "The unit is not consistent across all StatVars.")
+        self.assertEqual(result.details['distinct_statvar_count'], 2)
+        self.assertEqual(result.details['distinct_unit_counts'], 2)
         self.assertEqual(result.details['rows_processed'], 2)
         self.assertEqual(result.details['rows_succeeded'], 0)
         self.assertEqual(result.details['rows_failed'], 2)

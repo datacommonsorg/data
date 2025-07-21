@@ -118,8 +118,9 @@ class ImportValidationTest(unittest.TestCase):
         # 3. Assert failure
         self.assertEqual(result.returncode, 1,
                          "Script should have failed but didn't")
-        self.assertIn("Found 2 unique place counts where 1 was expected.",
-                      result.stderr)
+        self.assertIn(
+            "The number of places is not consistent across all StatVars.",
+            result.stderr)
 
     def test_e2e_missing_flag_fails(self):
         """Tests that the script fails when a required flag is missing."""

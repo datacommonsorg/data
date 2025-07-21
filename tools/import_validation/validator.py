@@ -318,9 +318,10 @@ class Validator:
                 ValidationStatus.FAILED,
                 'NUM_PLACES_CONSISTENT',
                 message=
-                f"Found {unique_counts} unique place counts where 1 was expected.",
+                "The number of places is not consistent across all StatVars.",
                 details={
-                    'unique_counts': list(stats_df['NumPlaces'].unique()),
+                    'distinct_statvar_count': stats_df['StatVar'].nunique(),
+                    'distinct_place_counts': unique_counts,
                     'rows_processed': rows_processed,
                     'rows_succeeded': 0,
                     'rows_failed': rows_processed
@@ -532,10 +533,10 @@ class Validator:
             return ValidationResult(
                 ValidationStatus.FAILED,
                 'MAX_DATE_CONSISTENT',
-                message=
-                f"Found {unique_dates} unique MaxDates where 1 was expected.",
+                message="The MaxDate is not consistent across all StatVars.",
                 details={
-                    'unique_dates': list(stats_df['MaxDate'].unique()),
+                    'distinct_statvar_count': stats_df['StatVar'].nunique(),
+                    'distinct_max_date_counts': unique_dates,
                     'rows_processed': rows_processed,
                     'rows_succeeded': 0,
                     'rows_failed': rows_processed
@@ -676,10 +677,10 @@ class Validator:
             return ValidationResult(
                 ValidationStatus.FAILED,
                 'UNIT_CONSISTENCY_CHECK',
-                message=
-                f"Found {unique_units} unique units where 1 was expected.",
+                message="The unit is not consistent across all StatVars.",
                 details={
-                    'unique_units': list(stats_df['Units'].unique()),
+                    'distinct_statvar_count': stats_df['StatVar'].nunique(),
+                    'distinct_unit_counts': unique_units,
                     'rows_processed': rows_processed,
                     'rows_succeeded': 0,
                     'rows_failed': rows_processed
