@@ -22,8 +22,6 @@ import re
 from absl import app
 from absl import logging
 
-# Global variable to hold the current year being processed
-_CURRENT_PROCESSING_YEAR = None # Defined here
 
 def download_xlsx_from_table(url):
     """
@@ -37,7 +35,7 @@ def download_xlsx_from_table(url):
     Returns:
         bool: True if the URL was fetched successfully, False otherwise.
     """
-    global _CURRENT_PROCESSING_YEAR # Declare intent to use the global variable
+    global CURRENT_PROCESSING_YEAR 
 
     logging.info(f"Fetching URL: {url}")
     try:
@@ -68,7 +66,7 @@ def download_xlsx_from_table(url):
     if not download_link and len(all_zip_links_found_on_page) == 1:
         download_link = all_zip_links_found_on_page[0]
         logging.info(f"Found a single ZIP link containing '{desired_zip_filename}' in its href: {download_link.get('href')}")
-    elif not download_link: # Added for robustness if no link is found
+    elif not download_link: 
         logging.warning(f"No suitable download link found for {desired_zip_filename} on {url}")
         return False
 
@@ -88,7 +86,7 @@ def download_xlsx_from_table(url):
         download_response.raise_for_status()
         source_files_zip_base_dir = "source_files"
         os.makedirs(source_files_zip_base_dir, exist_ok=True)
-        unique_zip_filename = f"{_CURRENT_PROCESSING_YEAR}_{desired_zip_filename}"
+        unique_zip_filename = f"{CURRENT_PROCESSING_YEAR}_{desired_zip_filename}"
         zip_filepath = os.path.join(source_files_zip_base_dir, unique_zip_filename)
         with open(zip_filepath, 'wb') as f:
             for chunk in download_response.iter_content(chunk_size=8192):
@@ -98,7 +96,6 @@ def download_xlsx_from_table(url):
         # unzipping the zip file
         if zipfile.is_zipfile(zip_filepath):
             logging.info(f"Unzipping {zip_filepath}...")
-            # --- KEEPING ORIGINAL input_files STRUCTURE (overwrites tab002-001.xlsx each time) ---
             extract_path = os.path.join("input_files")
             os.makedirs(extract_path, exist_ok=True)
             with zipfile.ZipFile(zip_filepath, 'r') as zip_ref:
@@ -134,7 +131,7 @@ def download_xlsx_from_table(url):
     return True
 
 def main(argv):
-    global _CURRENT_PROCESSING_YEAR
+    global CURRENT_PROCESSING_YEAR
     # In the UI data is available from 2021 only.
     start_year = 2021
     base_url = "https://ncses.nsf.gov/surveys/graduate-students-postdoctorates-s-e/{year}#data"
@@ -142,7 +139,7 @@ def main(argv):
     while True:
         target_url = base_url.format(year=start_year)
         logging.info(f"Attempting to process data for year: {start_year}")
-        _CURRENT_PROCESSING_YEAR = start_year
+        CURRENT_PROCESSING_YEAR = start_year
 
         if not download_xlsx_from_table(target_url):
             logging.warning(f"No data available or error fetching URL for year {start_year}. Exiting")
