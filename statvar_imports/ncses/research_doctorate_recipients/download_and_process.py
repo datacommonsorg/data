@@ -143,7 +143,7 @@ def main(argv):
             if download_successful:
                 logging.info(f"Download of '{file_name_from_url}' completed.")
             else:
-                logging.error(
+                logging.fatal(
                     f"Download or processing of '{file_name_from_url}' failed")
 
             output_full_path = os.path.join(

@@ -1,4 +1,4 @@
-# NCSES Research Doctorate Recipients Import
+# NCSES Research Doctorate Recipients Import Autorefresh
 
 - source: https://ncses.nsf.gov/pubs/nsf23300/data-tables
 
@@ -11,6 +11,8 @@
 - years: 2011 to 2021
 
 - place_resolution:Places are resolved based on name.
+
+`- NOTE: The data has not been updated since 2021. Added future years in pvmap just incase the data gets updated.`
 
 ### How to run:
 
