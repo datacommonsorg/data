@@ -14,6 +14,7 @@
 import sys
 import os
 import shutil
+
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
@@ -61,13 +62,13 @@ def check_function_on_file_gives_golden(fn, inp_f, inp_csv_f, golden_f):
     Returns True if the check passes, False otherwise.
     """
     with tempfile.TemporaryDirectory() as tmp_dir:
-    
+
         temp_input_file = os.path.join(tmp_dir, os.path.basename(inp_f))
         shutil.copy(os.path.join(module_dir_, inp_f), temp_input_file)
-        test_csv_file = temp_input_file 
+        test_csv_file = temp_input_file
         result_csv_file = os.path.join(tmp_dir, "temp_test_output.tmp")
         expected_csv_file = os.path.join(module_dir_, golden_f)
-        output_path=" test_data/nri_counties_table.csv"
+        output_path = " test_data/nri_counties_table.csv"
         fn(test_csv_file, output_path, inp_csv_f, result_csv_file)
         with open(result_csv_file, "r") as result_f:
             result_str: str = result_f.read()
