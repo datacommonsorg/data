@@ -3,7 +3,7 @@
         {
             "import_name": "USCensus_GenderIncomeInequality",
             "curator_emails": [
-                "vishg@google.com"
+                "support@datacommons.org"
             ],
             "provenance_url": "https://data.census.gov/",
             "provenance_description": "U.S. Census Bureau Data",
