@@ -3,7 +3,7 @@
 2. Import Overview
 Zurich population data at Province and City Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/wir_2552_wiki.csv)
-Import Type: Manual upload
+Import Type: Fully Autorefresh
 Source Data Availability: 2011 to 2022
 Release Frequency: P1Y
 
@@ -25,7 +25,7 @@ Fully Autorefresh:"0 2 29 * * " (Runs at 2:00 AM on the 29th day of every month)
 2. Import Overview
 Zurich population data at Province and City Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_age10_wiki.csv)
-Import Type: Manual upload
+Import Type: Fully Autorefresh
 Source Data Availability: 1993 to 2023
 Release Frequency: P1Y
 
@@ -47,7 +47,7 @@ Fully Autorefresh:" 0 6 29 * * " (Runs at 6:00 AM on the 29th of every month).
 2. Import Overview
 Zurich population data at Province and City Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3240_wiki.csv)
-Import Type: Manual upload
+Import Type: Fully Autorefresh
 Source Data Availability: 1941 to 2023
 Release Frequency: P1Y
 
@@ -69,7 +69,7 @@ Fully Autorefresh:" 30 11 29 * * " (Runs at 11:30 AM on the 29th of every month)
 2. Import Overview
 Zurich population data at Province and City Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_hel_wiki.csv)
-Import Type: Manual upload
+Import Type: Fully Autorefresh
 Source Data Availability: 1998 to 2023
 Release Frequency: P1Y
 
@@ -91,7 +91,7 @@ Fully Autorefresh:" 45 15 29 * * " (Runs at 3:45 PM on the 29th of every month).
 2. Import Overview
 Zurich population data at Province and City Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_wiki.csv)
-Import Type: Manual upload
+Import Type: Fully Autorefresh
 Source Data Availability: 1998 to 2023
 Release Frequency: P1Y
 
@@ -113,7 +113,7 @@ Fully Autorefresh:" 0 20 29 * * " (Runs at 8:00 PM on the 29th of every month).
 2. Import Overview
 Zurich population data at Province and City Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_hel_wiki.csv)
-Import Type: Manual upload
+Import Type: Fully Autorefresh
 Source Data Availability: 1993 to 2023
 Release Frequency: P1Y
 
@@ -136,7 +136,7 @@ Fully Autorefresh:" 15 1 29 * * " (Runs at 1:15 AM on the 29th of every month).
 2. Import Overview
 Zurich population data at Province and City Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_sex_wiki.csv)
-Import Type: Manual upload
+Import Type: Fully Autorefresh
 Source Data Availability: 1993 to 2023
 Release Frequency: P1Y
 
@@ -158,7 +158,7 @@ Fully Autorefresh:" 07 19 29 * * " (Runs at 7:07 PM on the 29th of every month).
 2. Import Overview
 Zurich population data at Province and City Level.
 Source URL: [Zurich country website](https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_sex_wiki.csv)
-Import Type: Manual upload
+Import Type: Fully Autorefresh
 Source Data Availability: 1993 to 2023
 Release Frequency: P1Y
 
