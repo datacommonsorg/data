@@ -10,17 +10,14 @@ flags.DEFINE_string("out_file", "gender_income_inequality.csv",
                     "CSV output file name.")
 
 
-def calculate_and_save_gender_inequality_locally():
+def calculate_gender_income_inequality() -> pd.DataFrame:
     """
-    Runs a BigQuery query to calculate gender income inequality and saves the
-    results to a local CSV file.
+    Runs a BigQuery query to calculate gender income inequality and returns the
+    results as a dataframe.
     """
     client = bigquery.Client()
 
     # --- Configuration ---
-    # Define a local file path for the output
-    output_filename = _FLAGS.out_file
-
     # --- BigQuery SQL Query ---
     query = """
     WITH PivotedIncome AS (
@@ -58,19 +55,24 @@ def calculate_and_save_gender_inequality_locally():
     logging.info("Submitting BigQuery query to fetch data...")
     # Execute the query and wait for the job to complete.
     query_job = client.query(query)
-
     logging.info(f"Job {query_job.job_id} is running. Waiting for results...")
-
     # Fetch results and convert to a Pandas DataFrame.
     results_df = query_job.to_dataframe()
-
-    # Write the DataFrame to a local CSV file.
-    results_df.to_csv(output_filename, index=False)
-    logging.info(f"Success! Data written to local file: {output_filename}")
+    logging.info(f"Finished fetching data from BigQuery.")
+    return results_df
 
 
 def main(_):
-    calculate_and_save_gender_inequality_locally()
+    # Define a local file path for the output
+    output_filename = _FLAGS.out_file
+    logging.info(f"Fetching data from BigQuery...")
+    results_df = calculate_gender_income_inequality()
+    if not results_df.empty:
+        # Write the DataFrame to a local CSV file.
+        results_df.to_csv(output_filename, index=False)
+        logging.info(f"Data written to local file: {output_filename}")
+    else:
+        logging.error(f"Received empty datafrom from BQ.")
 
 
 if __name__ == "__main__":
