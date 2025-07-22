@@ -60,12 +60,15 @@ def _check_and_add_url(url_to_check: str, key: str, files_to_download: dict):
         if check_url.status_code == 200:
             files_to_download[key].append(url_to_check)
             logging.info(f"Adding {url_to_check}")
+            return True            
         else:
             logging.warning(
                 f"Url not found: {url_to_check} with status code: {check_url.status_code}"
             )
+            return False
     except requests.exceptions.RequestException as e:
         logging.fatal(f"URL is not accessible {url_to_check} due to {e}")
+        return False
         
 @retry(
     tries=3,
@@ -78,6 +81,7 @@ def add_future_urls(start_year: int, end_year: int,url_path_base_year: int):
     files_to_download = {}
     for key, value in _URLS_TO_SCAN.items():
         files_to_download[key] = []
+        found_url_for_key = False
         # Loop from start_year down to end_year + 1
         # : This loop iterates backward from a potential future year down to a known baseline.
         # This approach is intentional and crucial for finding the latest available data release.
@@ -86,6 +90,8 @@ def add_future_urls(start_year: int, end_year: int,url_path_base_year: int):
         # to be the most recent version, preventing us from downloading superseded datasets.
         # This pattern is a standard convention in other PEP import scripts.
         for current_year in range(start_year, end_year, -1):
+            if found_url_for_key:
+                break
             #TODO b/432163402 : The variable "YEAR" is used in captial letter need to make it small letter
             YEAR = current_year
             if (
@@ -96,10 +102,12 @@ def add_future_urls(start_year: int, end_year: int,url_path_base_year: int):
                     # Ensure i is always 2 digits (01, 02, ..., 10)
                     formatted_i = f"{i:02}"
                     url_to_check = value.format(YEAR=YEAR, i=formatted_i, URL_PATH_BASE_YEAR=url_path_base_year)
-                    _check_and_add_url(url_to_check, key, files_to_download)
+                    if _check_and_add_url(url_to_check, key, files_to_download):
+                        found_url_for_key = True
             else:
                 url_to_check = value.format(YEAR=YEAR, URL_PATH_BASE_YEAR=url_path_base_year)
-                _check_and_add_url(url_to_check, key, files_to_download)
+                if _check_and_add_url(url_to_check, key, files_to_download):
+                    break
     return files_to_download  # Return the populated dictionary
 
 def download_files(files_to_download_dict:dict, download_base_path: str):
@@ -169,3 +177,4 @@ def main(_):
 
 if __name__ == "__main__":
   app.run(main)
+  

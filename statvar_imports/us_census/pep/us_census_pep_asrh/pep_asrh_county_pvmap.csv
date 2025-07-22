@@ -1,6 +1,6 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
-STATE,#Format,DataVar={Number:02d},,,,,,,,
-COUNTY,#Format,State={Number:03d},observationAbout,geoId/{DataVar}{State},populationType,Person,measurementMethod,CensusPEPSurvey_Race2000Onwards,,
+STATE,#Format,DataVar={Data:0>2},,,,,,,,
+COUNTY,#Format,State={Data:0>2},observationAbout,geoId/{DataVar}{State},populationType,Person,measurementMethod,CensusPEPSurvey_Race2000Onwards,,
 TOT_POP,,,,,,,value,{Number},,
 TOT_MALE,gender,Male,,,,,value,{Number},,
 TOT_FEMALE,gender,Female,,,,,value,{Number},,
