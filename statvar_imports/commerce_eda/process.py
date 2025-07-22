@@ -67,8 +67,7 @@ def setup_local_directories(directory_path: str):
         os.makedirs(directory_path, exist_ok=True)
         logging.info(f"Created/Ensured local working directory: {directory_path}")
     except OSError as e:
-        logging.error(f"Error creating directory {directory_path}: {e}")
-        raise
+        logging.fatal(f"Error creating directory {directory_path}: {e}")
 
 def download_files_via_file_util(
     files_to_download: list,
@@ -89,9 +88,8 @@ def download_files_via_file_util(
             file_util.file_copy(gcs_source_path, local_destination_path)
             logging.info(f"Copied '{gcs_source_path}' to '{local_destination_path}' using file_util module")
         except Exception as e:
-            # Catch any exception that file_util.file_copy might raise
-            logging.error(f"Error copying '{gcs_source_path}' to '{local_destination_path}': {e}")
-            raise # Re-raise to be caught by the main function's try-except
+            
+            logging.fatal(f"Error copying '{gcs_source_path}' to '{local_destination_path}': {e}")
     logging.info("--- GCS File Transfers Complete ---\n")
 
 def process_investment_csv(input_csv_filepath: str, output_csv_filepath: str, states_set: set):
@@ -102,13 +100,12 @@ def process_investment_csv(input_csv_filepath: str, output_csv_filepath: str, st
         df = pd.read_csv(input_csv_filepath, header=None, skiprows=1, dtype=str)
     except FileNotFoundError:
         logging.fatal(f"Error: Input file not found at {input_csv_filepath}. Please ensure it was transferred successfully.")
-        raise
     except pd.errors.EmptyDataError:
-        logging.error(f"Error: Input file {input_csv_filepath} is empty.")
-        raise
+        logging.fatal(f"Error: Input file {input_csv_filepath} is empty.")
+        
     except Exception as e:
-        logging.error(f"Error reading CSV file {input_csv_filepath}: {e}")
-        raise
+        logging.fatal(f"Error reading CSV file {input_csv_filepath}: {e}")
+       
 
     output_data = []
     current_state = None
@@ -172,8 +169,8 @@ def process_investment_csv(input_csv_filepath: str, output_csv_filepath: str, st
         output_df.to_csv(output_csv_filepath, index=False, header=False, float_format='%.0f')
         logging.info(f"✅ Successfully processed '{input_csv_filepath}' and saved to '{output_csv_filepath}' (empty cells preserved, commas and dollar signs removed, numeric precision maintained).")
     except Exception as e:
-        logging.error(f"Error saving processed CSV to {output_csv_filepath}: {e}")
-        raise
+        logging.fatal(f"Error saving processed CSV to {output_csv_filepath}: {e}")
+
 
 def main(argv): # main function accepts argv as required by absl.app.run
     """Main function to orchestrate the data processing workflow."""
