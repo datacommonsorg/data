@@ -10,7 +10,7 @@ from datetime import datetime
 from absl import logging
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_path', 'output',
+flags.DEFINE_string('process_output_path', 'output',
                     'The local path to save the output files')
 
 INPUT_TO_OUTPUT_PATHS = {
@@ -115,8 +115,8 @@ def main(argv):
 
     for input_path in INPUT_TO_OUTPUT_PATHS:
         out_put_file_name = INPUT_TO_OUTPUT_PATHS[input_path]
-        process_csv(input_path, FLAGS.output_path, "output/csv_columns.json",
-                    str(out_put_file_name))
+        process_csv(input_path, FLAGS.process_output_path,
+                    "output/csv_columns.json", str(out_put_file_name))
 
 
 if __name__ == "__main__":
