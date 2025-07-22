@@ -1,0 +1,22 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "NCES_HBCU_Enrollment_Import",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://nces.ed.gov/programs/digest/d23/tables/dt23_313.30.asp",
+      "provenance_description": "TStatistics on degree-granting historically Black colleges and universities, by control and level of institution",
+      "scripts": ["download_script.py", 
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/* --pv_map=nces_hbcu_pvmap.csv --config_file=nces_hbcu_metadata.csv --output_path=output_files/nces_hbcu_output_tabn313.30"],
+      "source_files": [
+        "input_files/*"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/nces_hbcu_output_tabn313.30.tmcf",
+          "cleaned_csv": "output_files/nces_hbcu_output_tabn313.30.csv"
+        }
+      ],
+      "cron_schedule": "0 07 * * 5"
+    }
+  ]
+}

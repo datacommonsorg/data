@@ -95,7 +95,7 @@ def create_or_update_import_schedule(absolute_import_name: str,
     if not schedule:
         raise KeyError(
             f'cron_schedule not found in manifest for {absolute_import_name}')
-    resources = {"cpu": "2", "memory": "4G"}  # default resources.
+    resources = {"cpu": "2", "memory": "8G"}  # default resources.
     if 'resource_limits' in import_spec:
         resources.update(import_spec['resource_limits'])
     timeout = config.user_script_timeout
@@ -133,12 +133,13 @@ def create_or_update_import_schedule(absolute_import_name: str,
         json_encoded_config = json.dumps(config.get_data_refresh_config())
         args = [
             f'--import_name={absolute_import_name}',
-            f'--import_config={json_encoded_config}'
+            f'--import_config={json_encoded_config}', '--enable_cloud_logging'
         ]
         env_vars = {}
         job = cloud_run.create_or_update_cloud_run_job(
             config.gcp_project_id, config.scheduler_location, job_name,
-            docker_image, env_vars, args, resources, timeout)
+            docker_image, config.gcs_bucket_volume_mount, env_vars, args,
+            resources, timeout)
         job_id = job.name.rsplit('/', 1)[1]
         if not job:
             logging.error(

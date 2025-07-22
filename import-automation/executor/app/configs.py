@@ -107,18 +107,36 @@ class ExecutorConfig:
     requirements_filename: str = 'requirements.txt'
     # ID of the location where Cloud Scheduler is hosted.
     scheduler_location: str = 'us-central1'
+    # Name of the GCS bucket for volume mount.
+    gcs_bucket_volume_mount: str = 'datcom-volume-mount'
+    # Location of the GCS bucket volume mount.
+    gcs_volume_mount_dir: str = '/mnt'
+    # Clean up GCS volume mount dir.
+    cleanup_gcs_volume_mount: bool = True
     # Location of the local git data repo.
     local_repo_dir: str = '/data'
+    # Location of the import tool jar.
+    import_tool_path: str = '/import-tool.jar'
+    # Location of the differ tool jar.
+    differ_tool_path: str = '/differ-tool.jar'
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 3600
     # Arguments for the user script
     user_script_args: List[str] = ()
     # Environment variables for the user script
     user_script_env: dict = None
+    # Invoke import tool genmcf.
+    invoke_import_tool: bool = True
+    # Invoke differ tool.
+    invoke_differ_tool: bool = True
     # Invoke validations before upload.
-    invoke_import_validation: bool = False
-    # Import validation config file.
+    invoke_import_validation: bool = True
+    # Ignore validation status during import.
+    ignore_validation_status: bool = True
+    # Import validation config file path (relative to data repo).
     validation_config_file: str = 'tools/import_validation/validation_config.json'
+    # Latest import version (overwrite)
+    import_version_override: str = ''
     # Maximum time venv creation can take in seconds.
     venv_create_timeout: float = 3600
     # Maximum time downloading a file can take in seconds.
@@ -129,8 +147,8 @@ class ExecutorConfig:
     email_account: str = ''
     # The corresponding password, app password, or access token.
     email_token: str = ''
-    # Disable email alert notifications.
-    disable_email_notifications: bool = False
+    # Email alerts are disabled by default. Cloud Run jobs use GCP alerting.
+    disable_email_notifications: bool = True
     # Skip uploading the data to GCS (for local testing).
     skip_gcs_upload: bool = False
     # Maximum time a blocking call to the importer to

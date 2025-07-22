@@ -1,0 +1,8 @@
+"key","p1","v1","p2","v2","p3","v3","p4","v4"
+"SEX:F","gender","Female","measuredProperty","count",,,,
+"SEX:M","gender","Male","measuredProperty","count",,,,
+"MEASURE:N","populationType","BirthEvent",,,,,,
+"MEASURE:P","populationType","BirthEvent","unit","Percent ","measurementDenominator","Count_Person","scalingFactor",100
+"TIME_PERIOD","observationDate","{Number}",,,,,,
+"OBS_VALUE","value","{Number}","observationAbout","country/KEN",,,,
+"FREQ","observationPeriod","P1Y",,,,,,

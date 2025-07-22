@@ -9,13 +9,15 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', '${_DOCKER_IMAGE}:${COMMIT_SHA}', '-t', '${_DOCKER_IMAGE}:latest', '.']
     dir: 'import-automation/executor'
+    env: ['DOCKER_BUILDKIT=1']
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', '${_DOCKER_IMAGE}', '--all-tags']
 
   # Install dependencies
-  - name: python:3.12.8
+  - id: python_install
+    name: python:3.12.8
     entrypoint: pip
     args: ['install', '-r', 'requirements.txt', '--user']
     dir: 'import-automation/executor'
@@ -25,6 +27,8 @@ steps:
     entrypoint: python
     args: ['verify_import.py']
     dir: 'import-automation/executor'
+    waitFor:
+    - python_install
 
   # Run unit tests
   - name: 'python:3.12.8'
@@ -33,6 +37,8 @@ steps:
       - |
         ./run_tests.sh -a
     entrypoint: bash
+    waitFor:
+    - python_install
   
   # Tag image as stable and push
   - name: 'gcr.io/cloud-builders/docker'

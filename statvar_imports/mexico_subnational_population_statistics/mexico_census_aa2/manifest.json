@@ -1,0 +1,30 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "MexicoCensus_AA2",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://data.humdata.org/dataset/cod-ps-mex",
+      "provenance_description": "Mexican Demographics data from The Humanitarian Data Exchange(HDX) at Municipal Level.",
+      "scripts": ["mexico_download.py", "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/mex_admpop_adm0_*.csv --pv_map=mexico_pvmap_adm0.csv --config_file=mexico_metadata.csv --places_resolved_csv=mexico_places.csv --output_path=output_files/mexico_output_aa0", "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/mex_admpop_adm1_*.csv --pv_map=mexico_pvmap_aa1.csv --config_file=mexico_metadata.csv --places_resolved_csv=mexico_places.csv --output_path=output_files/mexico_output_aa1", "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/mex_admpop_adm2_*.csv --pv_map=mexico_pvmap_aa2.csv --config_file=mexico_metadata.csv --places_resolved_csv=mexico_places.csv --output_path=output_files/mexico_output_aa2"],
+      "source_files": [
+        "input_files/mex_admpop_adm*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/mexico_output_aa0.tmcf",
+          "cleaned_csv": "output_files/mexico_output_aa0.csv"
+        },
+        {
+          "template_mcf": "output_files/mexico_output_aa1.tmcf",
+          "cleaned_csv": "output_files/mexico_output_aa1.csv"
+        },
+        {
+          "template_mcf": "output_files/mexico_output_aa2.tmcf",
+          "cleaned_csv": "output_files/mexico_output_aa2.csv"
+        }
+      ],
+      "cron_schedule": "0 07 * * 3"
+    }
+  ]
+}
+

@@ -1,0 +1,6 @@
+Node: E:sample_schemaless_output->E0
+observationDate: C:sample_schemaless_output->observationDate
+observationAbout: C:sample_schemaless_output->observationAbout
+value: C:sample_schemaless_output->value
+variableMeasured: C:sample_schemaless_output->variableMeasured
+typeOf: dcs:StatVarObservation
