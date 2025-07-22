@@ -11,3 +11,4 @@ comments,
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit"
 header_rows,1
 #input_rows,10
+#Import_Name,Zurich_Population_Number_Of_Birth
