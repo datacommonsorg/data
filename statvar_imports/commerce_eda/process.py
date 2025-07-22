@@ -86,7 +86,6 @@ def download_files_via_file_util(
         local_destination_path = os.path.join(local_target_dir, file_name)
         
         try:
-            # CORRECTED: Call file_util.file_copy instead of file_util.copy_file
             file_util.file_copy(gcs_source_path, local_destination_path)
             logging.info(f"Copied '{gcs_source_path}' to '{local_destination_path}' using file_util module")
         except Exception as e:
