@@ -97,8 +97,9 @@ def download_dynamic_page(url, filename):
             f"Error found while downloading the data for the url {url}")
 
     finally:
-        driver.quit()
-        logging.info("Web driver closed.")
+        if driver is not None:
+            driver.quit()
+            logging.info("Web driver closed.")
 
 
 def table_to_csv(html, csv_path: str):
@@ -198,18 +199,15 @@ def convert_html_to_csv():
 def reads_config_file():
     _FLAGS = flags.FLAGS
     config_file_path = _FLAGS.config_file_path
-    try:
-        storage_client = storage.Client()
-        bucket_name = config_file_path.split('/')[2]
-        bucket = storage_client.bucket(bucket_name)
-        blob_name = '/'.join(config_file_path.split('/')[3:])
-        blob = bucket.blob(blob_name)
-        file_contents = blob.download_as_text()
-        local_vars = {}
-        exec(file_contents, {}, local_vars)
-        return local_vars
-    except Exception as e:
-        logging.fatal(f"Cannot extract url and related configs: {e}")
+    storage_client = storage.Client()
+    bucket_name = config_file_path.split('/')[2]
+    bucket = storage_client.bucket(bucket_name)
+    blob_name = '/'.join(config_file_path.split('/')[3:])
+    blob = bucket.blob(blob_name)
+    file_contents = blob.download_as_text()
+    local_vars = {}
+    exec(file_contents, {}, local_vars)
+    return local_vars
 
 
 def main(_):
@@ -237,7 +235,7 @@ def main(_):
             combine_csv_files(_CONFIG.get('INPUT_CSV_FILES'), string_to_match)
         except Exception as e:
             logging.fatal(
-                f"Fatal error: The script has terminated due to an exception: {e}; Context: Url: {url}; Filename: {file_name}"
+                f"Fatal error: Context: Url: {url}; Filename: {file_name}; Exception: {e}"
             )
 
 
