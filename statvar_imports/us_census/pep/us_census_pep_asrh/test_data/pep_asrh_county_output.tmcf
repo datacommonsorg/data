@@ -1,0 +1,7 @@
+Node: E:pep_asrh_county_output.csv->E0
+observationAbout: C:pep_asrh_county_output.csv->observationAbout
+observationDate: C:pep_asrh_county_output.csv->observationDate
+value: C:pep_asrh_county_output.csv->value
+variableMeasured: C:pep_asrh_county_output.csv->variableMeasured
+measurementMethod: C:pep_asrh_county_output.csv->measurementMethod
+typeOf: dcs:StatVarObservation

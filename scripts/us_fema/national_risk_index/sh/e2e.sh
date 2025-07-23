@@ -1,6 +1,5 @@
 #!/bin/bash
-
-sh/download_data.sh
+set -e
 
 # Process the data
 python3 generate_schema_and_tmcf.py

@@ -17,8 +17,8 @@ region=us-west1
 artifact_registry=gcr.io/datcom-ci
 mount_bucket=datcom-ci-test
 data_repo=$(realpath $(dirname $0)/../../)
-cpus=2
-memory=4Gi
+cpus=8
+memory=32Gi
 timeout=30m
 
 echo "Building docker image $1"
