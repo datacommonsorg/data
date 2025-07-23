@@ -60,12 +60,8 @@ def download_dynamic_page(url, filename):
     chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument("--disable-gpu")
 
-    driver_log_path = os.path.join(os.getcwd(), "chromedriver.log")
-
-    service = ChromeService(log_path=driver_log_path)
-
-    logging.info(
-        f"ChromeDriver internal logs will be written to: {driver_log_path}")
+    #Attaching the chromelog in the main log file using sys.stderr
+    service = ChromeService(log_path=sys.stderr)
 
     try:
         driver = webdriver.Chrome(service=service, options=chrome_options)

@@ -9,9 +9,11 @@ All the source urls are added in the `configs.py` file.
 
 To download and clean the source data, run:
 
-`python clean_data.py`
+```bash
+python clean_data.py
+```
 
-Note:
+###Note:
 
 The `clean_data.py` script downloads HTML files from the source URL and converts them into CSV files. These multiple CSV files are then combined into a single CSV file for each of the following categories: hospitalizations, hospitalizations_age, hospitalizations_gender, hospitalizations_age_by_gender, edVisits, edVisits_age, edVisits_gender, edVisits_age_by_gender, and deaths.
 The final CSV input files are available in the `input_files/` directory.
@@ -60,33 +62,3 @@ python preprocess.py
 - Suppressed data points are skipped.
 - Data for heat related deaths is heavily suppressed.
 - State level data is aggregated to get the country level data.
-
-## Troubleshooting section
-
-This section provides guidance on common issues you might encounter while running the script and how to resolve them.
-```
-1. ChromeDriver Issues:
-
-If you experience problems related to ChromeDriver (e.g., browser not launching, "session not created" errors, or unexpected crashes), consider the following:
-
-Ensure Chrome Browser is Updated: ChromeDriver versions are tightly coupled with Chrome browser versions. An outdated Chrome browser often leads to incompatibility issues with the latest ChromeDriver.
-
-How to update Chrome: Open Chrome, go to Settings (three dots menu) > About Chrome. Chrome will automatically check for and install updates.
-
-Check ChromeDriver Version: Although webdriver_manager automatically downloads the correct ChromeDriver, sometimes manual intervention or verification is helpful. Ensure the downloaded ChromeDriver version is compatible with your installed Chrome browser version.
-
-Permissions: Verify that the ChromeDriver executable has the necessary execution permissions in its downloaded location.
-
-System Resources: Ensure your system has sufficient RAM and CPU resources, especially when running Chrome in headless mode.
-```
-
-```
-2. "No Data" Messages:
-
-If the script logs "No data found for url: [URL]" messages, this indicates that the web page displayed a message explicitly stating that no data exists for the given criteria (e.g., year, category).
-
-Verify Source Data: Manually visit the URL in a browser to confirm if data is indeed missing for that specific query.
-
-Check URL Parameters: Ensure the URL being constructed (base_url in download_all_data) correctly reflects the criteria you expect.
-```
-
