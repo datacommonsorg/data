@@ -2,23 +2,23 @@ key,prop,value,,,,,,,,,,
 State/Union Territory,observationAbout,{Data},,,,,,,,,,
 State/Union Territory/Zone,observationAbout,{Data},,,,,,,,,,
 Thousand Hectares,unit,Hectare,#Multiply,1000,,,,,,,,
-NET IRRIGATED AREA,populationType,LandCover,measuredProperty,area,landCoverType,IrrigatedLand,statType,netValue,,,name,"""Net irrigated area"""
-TABLE 58: STATE-WISE PATTERN OF LAND USE - GROSS SOWN AREA,populationType,LandCover,measuredProperty,area,landCoverType,Cropland,statType,grossValue,,,name,"""Gross sown area"""
-TABLE 59: STATE-WISE PATTERN OF LAND USE - NET SOWN AREA        ,populationType,LandCover,measuredProperty,area,landCoverType,Cropland,statType,netValue,,,name,"""Net sown area"""
-TABLE 60: STATE-WISE PATTERN OF LAND USE - GROSS IRRIGATED AREA,populationType,LandCover,measuredProperty,area,landCoverType,IrrigatedLand,statType,grossValue,,,name,"""Gross irrigated area"""
-TABLE 61: STATE-WISE PATTERN OF LAND USE - NET IRRIGATED AREA,populationType,LandCover,measuredProperty,area,landCoverType,IrrigatedLand,statType,netValue,,,name,"""Net irrigated area"""
-TABLE 62: STATE-WISE PATTERN OF LAND USE - CROPPING INTENSITY#,populationType,LandCover,measuredProperty,area,landCoverType,Cropland,statType,grossValue,measurementDenominator,",+statType=grossValue",name,"""Cropping intensity"""
-TABLE 62: STATE-WISE PATTERN OF LAND USE - CROPPING INTENSITY,populationType,LandCover,measuredProperty,area,landCoverType,Cropland,statType,grossValue,measurementDenominator,",+statType=grossValue",name,"""Cropping intensity"""
-TABLE 63: STATE-WISE PRODUCTION OF FOODGRAINS - RICE,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Rice,,,,,name,"""Production of Rice"""
+NET IRRIGATED AREA,populationType,LandCover,measuredProperty,area,landCoverType,IrrigatedLand,measurementQualifier,NetValue,,,name,"""Net irrigated area"""
+TABLE 58: STATE-WISE PATTERN OF LAND USE - GROSS SOWN AREA,populationType,LandCover,measuredProperty,area,landCoverType,Cropland,measurementQualifier,GrossValue,,,name,"""Gross sown area"""
+TABLE 59: STATE-WISE PATTERN OF LAND USE - NET SOWN AREA        ,populationType,LandCover,measuredProperty,area,landCoverType,Cropland,measurementQualifier,NetValue,,,name,"""Net sown area"""
+TABLE 60: STATE-WISE PATTERN OF LAND USE - GROSS IRRIGATED AREA,populationType,LandCover,measuredProperty,area,landCoverType,IrrigatedLand,measurementQualifier,GrossValue,,,name,"""Gross irrigated area"""
+TABLE 61: STATE-WISE PATTERN OF LAND USE - NET IRRIGATED AREA,populationType,LandCover,measuredProperty,area,landCoverType,IrrigatedLand,measurementQualifier,NetValue,,,name,"""Net irrigated area"""
+TABLE 62: STATE-WISE PATTERN OF LAND USE - CROPPING INTENSITY#,populationType,LandCover,measuredProperty,area,landCoverType,Cropland,measurementQualifier,GrossValue,measurementDenominator,",+measurementQualifier=NetValue",name,"""Cropping intensity"""
+TABLE 62: STATE-WISE PATTERN OF LAND USE - CROPPING INTENSITY,populationType,LandCover,measuredProperty,area,landCoverType,Cropland,measurementQualifier,GrossValue,measurementDenominator,",+measurementQualifier=NetValue",name,"""Cropping intensity"""
+TABLE 63: STATE-WISE PRODUCTION OF FOODGRAINS - RICE,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Rice,measurementQualifier,Annual,,,name,"""Production of Rice"""
 Thousand Tonnes,unit,MetricTon,#Multiply,1000,,,,,,,,
-TABLE 64: STATE-WISE PRODUCTION OF FOODGRAINS - WHEAT,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Wheat,,,,,name,"""Production of Wheat"""
-TABLE 65: STATE-WISE PRODUCTION OF FOODGRAINS - COARSE CEREALS,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,CoarseCereal,,,,,name,"""Production of Coarse Cereals"""
-TABLE 66: STATE-WISE PRODUCTION OF FOODGRAINS - PULSES,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Pulses,,,,,name,"""Production of pulses"""
-TABLE 67: STATE-WISE PRODUCTION OF TOTAL FOODGRAINS,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,FoodGrain,,,,,name,"""Produciton of food grains"""
-TABLE 68: STATE-WISE PRODUCTION OF NON-FOODGRAINS - OILSEEDS,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Oilseeds,,,,,name,"""Production of oilseeds"""
-TABLE 69: STATE-WISE PRODUCTION OF NON-FOODGRAINS - COTTON (LINTT),populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Cotton,,,,,name,"""Production of cotton"""
-TABLE 70: STATE-WISE PRODUCTION OF NON-FOODGRAINS - SUGARCANE,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Sugarcane,,,,,name,"""Production of sugarcane"""
-TABLE 71: STATE-WISE PRODUCTION OF NON-FOODGRAINS - RAW JUTE & MESTA,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Jute__Mesta,,,,,name,"""Production of jute and mesta"""
+TABLE 64: STATE-WISE PRODUCTION OF FOODGRAINS - WHEAT,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Wheat,measurementQualifier,Annual,,,name,"""Production of Wheat"""
+TABLE 65: STATE-WISE PRODUCTION OF FOODGRAINS - COARSE CEREALS,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,CoarseCereal,measurementQualifier,Annual,,,name,"""Production of Coarse Cereals"""
+TABLE 66: STATE-WISE PRODUCTION OF FOODGRAINS - PULSES,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Pulses,measurementQualifier,Annual,,,name,"""Production of pulses"""
+TABLE 67: STATE-WISE PRODUCTION OF TOTAL FOODGRAINS,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,FoodGrain,measurementQualifier,Annual,,,name,"""Produciton of food grains"""
+TABLE 68: STATE-WISE PRODUCTION OF NON-FOODGRAINS - OILSEEDS,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Oilseeds,measurementQualifier,Annual,,,name,"""Production of oilseeds"""
+TABLE 69: STATE-WISE PRODUCTION OF NON-FOODGRAINS - COTTON (LINTT),populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Cotton,measurementQualifier,Annual,,,name,"""Production of cotton"""
+TABLE 70: STATE-WISE PRODUCTION OF NON-FOODGRAINS - SUGARCANE,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Sugarcane,measurementQualifier,Annual,,,name,"""Production of sugarcane"""
+TABLE 71: STATE-WISE PRODUCTION OF NON-FOODGRAINS - RAW JUTE & MESTA,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Jute__Mesta,measurementQualifier,Annual,,,name,"""Production of jute and mesta"""
 TABLE 72: STATE-WISE AREA OF FOODGRAINS - RICE         ,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Rice,,,,,name,"""Area used for rice cultivation"""
 TABLE 73: STATE-WISE AREA OF FOODGRAINS - WHEAT         ,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Wheat,,,,,name,"""Area used for Wheat"""
 TABLE 74: STATE-WISE AREA OF FOODGRAINS - COARSE CEREALS         ,populationType,FarmInventory,measuredProperty,area,farmInventoryType,CoarseCereal,,,,,name,"""Area used for food grains"""
@@ -26,8 +26,8 @@ TABLE 75: STATE-WISE AREA OF FOODGRAINS - PULSES         ,populationType,FarmInv
 TABLE 76: STATE-WISE AREA OF TOTAL FOODGRAINS         ,populationType,FarmInventory,measuredProperty,area,farmInventoryType,FoodGrain,,,,,name,"""Area used for food grains"""
 TABLE 77: STATE-WISE AREA OF TOTAL FRUITS         ,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Fruits,,,,,name,"""Area used for fruits"""
 TABLE 78: STATE-WISE AREA OF TOTAL VEGETABLES         ,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Vegetables,,,,,name,"""Area for vegetable cultivation"""
-TABLE 79: STATE-WISE PRODUCTION OF TOTAL FRUITS         ,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Fruits,,,,,name,"""Production of fruits"""
-TABLE 80: STATE-WISE PRODUCTION OF TOTAL VEGETABLES         ,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Vegetables,,,,,name,"""Production of vegetables"""
+TABLE 79: STATE-WISE PRODUCTION OF TOTAL FRUITS         ,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Fruits,measurementQualifier,Annual,,,name,"""Production of fruits"""
+TABLE 80: STATE-WISE PRODUCTION OF TOTAL VEGETABLES         ,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Vegetables,measurementQualifier,Annual,,,name,"""Production of vegetables"""
 TABLE 81: STATE-WISE AREA OF NON-FOODGRAINS - OILSEEDS         ,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Oilseeds,,,,,name,"""Area used for oilseeds"""
 TABLE 82: STATE-WISE AREA OF NON-FOODGRAINS - COTTON (LINTT)         ,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Cotton,,,,,name,"""Area for cotton cultivation"""
 TABLE 83: STATE-WISE AREA OF NON-FOODGRAINS - SUGARCANE         ,populationType,FarmInventory,measuredProperty,area,farmInventoryType,Sugarcane,,,,,name,"""Area for sugarcane cultivation"""
@@ -48,9 +48,9 @@ TABLE 96: STATE-WISE MILK PRODUCTION         ,populationType,FarmInventory,measu
 (Lakh Nos.)									,#Multiply,100000,,,,,,,,,,
 TABLE 97: STATE-WISE EGG PRODUCTION         ,populationType,FarmInventory,measuredProperty,yield,farmInventoryType,Eggs,,,,,name,"""Egg production"""
 TABLE 101: STATE-WISE STORAGE CAPACITY OF FOODGRAINS          ,populationType,FarmInventory,measuredProperty,storageCapacity,farmInventoryType,FoodGrain,,,,,name,"""Storage capacity for foodgrains"""
-TABLE 98: STATE-WISE FISH PRODUCTION,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Fish,,,,,name,"""Fish production"""
+TABLE 98: STATE-WISE FISH PRODUCTION,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Fish,measurementQualifier,Annual,,,name,"""Fish production"""
 (Lakh Tonnes),#Multiply,100000,unit,MetricTon,,,,,,,,
-TABLE 99: STATE-WISE WOOL PRODUCTION         ,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Wool,,,,,name,"""Wool production"""
+TABLE 99: STATE-WISE WOOL PRODUCTION         ,populationType,FarmInventory,measuredProperty,amount,farmInventoryType,Wool,measurementQualifier,Annual,,,name,"""Wool production"""
 (Thousand Kgs),#Multiply,1000,unit,Kilogram,,,,,,,,
 2004-05,value,{Number},observationDate,2005-03,observationPeriod,P1Y,,,,,,
 2005-06,value,{Number},observationDate,2006-03,observationPeriod,P1Y,,,,,,
