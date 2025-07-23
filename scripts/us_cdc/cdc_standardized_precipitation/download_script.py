@@ -138,7 +138,8 @@ def process_downloads(import_name: str, config_file: str,
         full_url = url
 
         # For CSV files from data.cdc.gov, attempt to get the full dataset
-        if ".csv" in url and "data.cdc.gov" in url:
+        parsed_url = urllib.parse.urlparse(url)
+        if parsed_url.path.endswith(".csv") and parsed_url.netloc == "data.cdc.gov":
             count_url = url.replace(".csv", record_count_query)
             try:
                 logging.info(f"Attempting to get record count from: {count_url}")
