@@ -10,6 +10,10 @@ Each dataset available as a Zip-file of JSONL content. See [here](https://www.ei
 
 To ease analysis of the datasets, see [`generate_jsonl_for_bq.py`](generate_jsonl_for_bq.py) for instructions to convert and import the data into BigQuery.
 
+### EIA International Import (`--dataset=INTL`)
+
+As part of the latest refresh, data quality for the EIA International import has been significantly enhanced. This includes unit standardization and the implementation of filtering mechanisms within `common.py` to resolve identified data discrepancies. A comprehensive explanation of these specific issues and their resolution is documented in the **"EIA_combined_8_imports_doc_Data_Commons_Import"** file (found under 'Import Docs and Schemas' in Drive), within the `EIA_International` tab.
+
 ### License
 
 This dataset is available for public use, license is available at https://www.eia.gov/about/copyrights_reuse.php
