@@ -6,7 +6,7 @@ This directory contains scripts to import FBI Hate Crime Data into Data Commons.
 
 ---
 
-## 1. FBI Hate Crime Publications Import (`FBIHatecrimePublications`)
+## 1. FBI Hate Crime Publications Import (`FBIHatecrimePublications` - Semi Autorefresh)
 
 This process imports data from specific tables published annually by the FBI.
 
@@ -55,7 +55,7 @@ sh run.sh
 
 ---
 
-## 2. FBI Hate Crime Aggregations Import (`FBIHateCrime`)
+## 2. FBI Hate Crime Aggregations Import (`FBIHateCrime` - Full Autorefresh)
 
 This process generates a wide range of statistical aggregations from a single, master CSV file containing individual hate crime incidents.
 
