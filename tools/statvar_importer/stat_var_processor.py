@@ -66,6 +66,8 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
 import eval_functions
+from log_util import configure_cloud_logging
+from cloudrun_util import running_on_cloudrun
 from utils import (capitalize_first_char, is_place_dcid,
                    get_observation_date_format, get_observation_period_for_date,
                    pvs_has_any_prop, str_from_number, prepare_input_data)
@@ -714,7 +716,8 @@ class StatVarsMap:
         if not mmethod:
             current_pvs['measurementMethod'] = 'dcs:DataCommonsAggregate'
         elif not mmethod.startswith(
-                'dcAggregate/') and mmethod != 'DataCommonsAggregate':
+                'dcAggregate/'
+        ) and mmethod != 'DataCommonsAggregate' and aggregation_type != 'last' and aggregation_type != 'first':
             current_pvs['measurementMethod'] = f'dcs:dcAggregate/{mmethod}'
         dup_svobs_key = self._config.get('duplicate_svobs_key')
         if dup_svobs_key in current_pvs:
@@ -1674,8 +1677,10 @@ class StatVarDataProcessor:
                         prop,
                         value,
                         pvs,
-                        self._config.get('multi_value_properties', {}),
+                        multi_value_keys=self._config.get(
+                            'multi_value_properties', {}),
                         overwrite=False,
+                        normalize=False,
                     )
                     logging.level_debug() and logging.log(
                         2, f'Adding {value} for {prop}:{pvs.get(prop)}')
@@ -1876,6 +1881,29 @@ class StatVarDataProcessor:
             return False
         return True
 
+    def get_pvs_for_cell(self, value: str, row_index: int,
+                         col_index: int) -> list:
+        """Returns a list of PVs for the cell.
+        If the value has pvs mapped, that is used.
+        Else, lookup PVs by row and colmn index."""
+
+        # Create a list of keys to be looked up in pvmap in order
+        # starting with the cell value followed by cell index.
+        # If any key resturns a pvmap, use that.
+        keys = [value]
+        keys.append(f'Cell:{row_index}:{col_index+1}')
+        keys.append(f'Column:{col_index+1}')
+        keys.append(f'Row:{row_index}')
+        for key in keys:
+            pv_list = self._pv_mapper.get_all_pvs_for_value(
+                key, self.get_last_column_header_key(col_index))
+            if pv_list:
+                logging.level_debug() and logging.debug(
+                    f'Got PVs for row:{row_index}:{col_index+1}:"{key}": {pv_list}'
+                )
+                return pv_list
+        return None
+
     def process_row_header_pvs(
         self,
         row: list,
@@ -1912,10 +1940,10 @@ class StatVarDataProcessor:
                 for prop in col_header_props:
                     # Use any property=value in the header tag or
                     # get the value from the column PVs
-                    value = col_pvs.get(prop, '')
+                    value = col_pvs.get(prop, None)
                     if '=' in prop:
                         prop, value = prop.split('=', 1)
-                    if value:
+                    if value is not None:
                         col_header_pvs[prop] = value
                 if col_header_pvs:
                     col_headers[col_index] = col_header_pvs
@@ -1964,8 +1992,8 @@ class StatVarDataProcessor:
                     2,
                     f'Getting PVs for column:{row_index}:{col_index}:{col_value}'
                 )
-                pvs_list = self._pv_mapper.get_all_pvs_for_value(
-                    col_value, self.get_last_column_header_key(col_index))
+                pvs_list = self.get_pvs_for_cell(col_value, row_index,
+                                                 col_index)
                 # if pvs_list:
                 #    pvs_list.append(
                 #        {self._config.get('data_key', '@Data'): col_value})
@@ -2063,16 +2091,18 @@ class StatVarDataProcessor:
                             prop,
                             value,
                             row_pvs,
-                            self._config.get('multi_value_properties', {}),
-                        )
+                            multi_value_keys=self._config.get(
+                                'multi_value_properties', {}),
+                            normalize=False)
                 for prop, value in row_col_pvs.get(col_index, {}).items():
                     if value is not None and prop not in self._internal_reference_keys:
                         pv_utils.add_key_value(
                             prop,
                             value,
                             row_pvs,
-                            self._config.get('multi_value_properties', {}),
-                        )
+                            multi_value_keys=self._config.get(
+                                'multi_value_properties', {}),
+                            normalize=False)
         if config_flags.get_value_type(row_pvs.get('#IgnoreRow'), False):
             logging.level_debug() and logging.log(
                 2, f'Ignoring row: {row} in {self._file_context}')
@@ -2760,6 +2790,14 @@ def process(
 
 
 def main(_):
+    # Configure cloud logging if running on CloudRun
+    if running_on_cloudrun():
+        logging.info("Running under Cloud Run detected.")
+        configure_cloud_logging()
+        logging.info("Google Cloud Logging configured.")
+    else:
+        logging.info("Not running under Cloud Run")
+
     # uncomment to run pprof
     # start_pprof_server(port=8123)
 
