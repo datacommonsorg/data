@@ -100,10 +100,8 @@ def _process_file(file_name: str, csv_reader: csv.DictReader,
         }
         """
         Country data is derived by aggregating state-level data. 
-        Therefore, country SVs are assigned the measurementMethod 'dcs:DataCommonsAggregate', 
-        as state-level data does not possess a measurementMethod. 
-        Given that both state and country data share a common TMCF file, 
-        we are explicitly setting the measurementMethod to an empty value at state level.
+        State data is coming from the source, hence setting the measurementMethod value as empty.
+        Therefore, country SVs are assigned the measurementMethod 'dcs:DataCommonsAggregate'.
         """
         processed_dict['measurementMethod'] = ""
         csv_writer.writerow(processed_dict)
