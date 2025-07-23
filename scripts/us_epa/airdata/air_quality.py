@@ -31,6 +31,20 @@ flags.DEFINE_integer('data_end_year', os.getenv('END_YEAR',
                                                 datetime.now().year),
                      'Process data upto this year.')
 
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
+if not os.path.exists(_GCS_OUTPUT_DIR):
+    os.makedirs(_GCS_OUTPUT_DIR)
+
+_OUTPUT_FILE_PATH = os.path.join(_GCS_OUTPUT_DIR,'output')
+_INPUT_FILE_PATH = os.path.join(_GCS_OUTPUT_DIR,'input_files') 
+
+if not os.path.exists(_OUTPUT_FILE_PATH):
+    os.makedirs(_OUTPUT_FILE_PATH,exist_ok=True)
+    
+if not os.path.exists(_INPUT_FILE_PATH):
+    os.makedirs(_INPUT_FILE_PATH,exist_ok=True)
+
 # AQS parameter codes: https://aqs.epa.gov/aqsweb/documents/codetables/parameters.html
 POLLUTANTS = {
     '44201': 'Ozone',
@@ -43,53 +57,9 @@ POLLUTANTS = {
 
 CSV_COLUMNS = [
     'Date', 'Site_Number', 'Site_Name', 'Site_Location', 'County', 'Units',
-    'Method', 'POC', 'Mean', 'Max', 'AQI', 'Mean_SV', 'Max_SV', 'AQI_SV'
+    'Method', 'POC', 'Mean', 'Max', 'AQI', 'Mean_SV', 'Max_SV', 'AQI_SV', 'Address'
 ]
 
-# Template MCF for StatVarObservation
-TEMPLATE_MCF = '''
-Node: E:EPA_AirQuality->E1
-typeOf: dcs:StatVarObservation
-variableMeasured: C:EPA_AirQuality->Mean_SV
-measurementMethod: C:EPA_AirQuality->Method
-observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_AirQuality->E0
-observationPeriod: "P1D"
-value: C:EPA_AirQuality->Mean
-unit: C:EPA_AirQuality->Units
-airQualitySiteMonitor: C:EPA_AirQuality->POC
-
-Node: E:EPA_AirQuality->E2
-typeOf: dcs:StatVarObservation
-variableMeasured: C:EPA_AirQuality->Max_SV
-measurementMethod: C:EPA_AirQuality->Method
-observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_AirQuality->E0
-observationPeriod: "P1D"
-value: C:EPA_AirQuality->Max
-unit: C:EPA_AirQuality->Units
-airQualitySiteMonitor: C:EPA_AirQuality->POC
-
-Node: E:EPA_AirQuality->E3
-typeOf: dcs:StatVarObservation
-variableMeasured: C:EPA_AirQuality->AQI_SV
-measurementMethod: C:EPA_AirQuality->Method
-observationDate: C:EPA_AirQuality->Date
-observationAbout: E:EPA_AirQuality->E0
-observationPeriod: "P1D"
-value: C:EPA_AirQuality->AQI
-airQualitySiteMonitor: C:EPA_AirQuality->POC
-'''
-
-# Template MCF for Air Quality Site
-TEMPLATE_MCF_AIR_QUALITY_SITE = '''
-Node: E:EPA_AirQuality->E0
-typeOf: dcs:AirQualitySite
-dcid: C:EPA_AirQuality->Site_Number
-name: C:EPA_AirQuality->Site_Name
-location: C:EPA_AirQuality->Site_Location
-containedInPlace: C:EPA_AirQuality->County
-'''
 
 
 # Convert to CamelCase (splitting on spaces)
@@ -97,6 +67,10 @@ containedInPlace: C:EPA_AirQuality->County
 def get_camel_case(s):
     if s == '' or s == ' - ':
         return ''
+    elif s == "Micrograms/cubic meter (25 C)" :
+        return "MicrogramsPerCubicMeter_25C"
+    elif s == "Micrograms/cubic meter (LC)":
+        return "MicrogramsPerCubicMeter_lc"
     parts = s.lower().split()
     result = ''
     for i in range(len(parts)):
@@ -184,15 +158,10 @@ def write_csv(csv_file_path, reader):
                     f'dcs:Max_Concentration_AirPollutant_{suffix}',
                 'AQI_SV':
                     f'dcs:AirQualityIndex_AirPollutant_{suffix}',
+                'Address':
+                    observation['Address']
             }
             writer.writerow(new_row)
-
-
-def write_tmcf(tmcf_file_path):
-    with open(tmcf_file_path, 'w') as f_out:
-        f_out.write(TEMPLATE_MCF_AIR_QUALITY_SITE)
-        f_out.write(TEMPLATE_MCF)
-
 
 def main(_):
     start_year = _FLAGS.data_start_year
@@ -200,19 +169,31 @@ def main(_):
     if end_year >= datetime.now().year:
         end_year = datetime.now().year - 1
     logging.info(f'Processing from {start_year} upto {end_year}')
-    create_csv('EPA_AirQuality.csv')
-    for pollutant in POLLUTANTS:
-        for year in range(start_year, int(end_year) + 1):
+    
+    
+    for year in range(start_year, int(end_year) + 1):
+        file = f'EPA_AirQuality{year}.csv'
+        output_file = os.path.join(_OUTPUT_FILE_PATH,file)
+
+        create_csv(output_file)
+        for pollutant in POLLUTANTS:
             filename = f'daily_{pollutant}_{year}'
-            print(filename)
+            local_zip_filepath = os.path.join(_INPUT_FILE_PATH,filename)
+            logging.info(f"downloading and processing the file {filename}")
             response = requests.get(
                 f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
+            logging.info(f'https://aqs.epa.gov/aqsweb/airdata/{filename}.zip')
+
+            # Save the downloaded zip file locally
+            with open(f'{local_zip_filepath}.zip', 'wb') as local_file:
+                for chunk in response.iter_content(chunk_size=8192):
+                    local_file.write(chunk)
+            logging.info(f"Successfully downloaded and saved: {local_zip_filepath}")
+
             with zipfile.ZipFile(io.BytesIO(response.content)) as zf:
                 with zf.open(f'{filename}.csv', 'r') as infile:
                     reader = csv.DictReader(io.TextIOWrapper(infile, 'utf-8'))
-                    write_csv('EPA_AirQuality.csv', reader)
-    write_tmcf('EPA_AirQuality.tmcf')
-
+                    write_csv(output_file, reader)
 
 if __name__ == '__main__':
     app.run(main)
