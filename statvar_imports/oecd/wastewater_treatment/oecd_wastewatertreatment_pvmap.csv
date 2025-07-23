@@ -1,6 +1,6 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,,
 REF_AREA,observationAbout,{Data},populationType,Person,unit,Percent,scalingFactor,100,,,,,,
-Total wastewater treatment,wasteTreatmentType,WasteWaterTreatment,measuredProperty,count,measurementDenominator,-treatmentType,name,"""Percentage of population connected to the total wastewater treatment""",,,,,,
+Total wastewater treatment,wasteTreatmentType,WasteWaterTreatment,measuredProperty,count,measurementDenominator,-wasteTreatmentType,name,"""Percentage of population connected to the total wastewater treatment""",,,,,,
 Independent treatment,waterTreatmentSystem,WasteWaterIndependentlyTreated,measuredProperty,count,measurementDenominator,-waterTreatmentSystem,name,"""Percentage of population connected to the Independent treatment""",,,,,,
 Total public sewerage,waterTreatmentSystem,PublicSewerage,measuredProperty,count,measurementDenominator,-waterTreatmentSystem,name,"""Percentage of population connected to the total public sewerage""",,,,,,
 Public sewerage without treatment,waterTreatmentSystem,PublicSewerage,waterTreatmentStatus,WasteWaterNotTreated,waterTreatmentType,PublicSewerageWithoutTreatment,measuredProperty,count,measurementDenominator,"-waterTreatmentType, -waterTreatmentStatus",name,"""Percentage of population connected to the public sewerage without treatment""",,
