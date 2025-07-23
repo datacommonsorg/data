@@ -44,7 +44,7 @@ class ImportValidationTest(unittest.TestCase):
     def tearDown(self):
         self.test_dir.cleanup()
 
-    def test_e2e_successful_run(self):
+    def test_successful_run(self):
         """Tests a successful end-to-end run of the script."""
         # 1. Create sample data that should pass validation
         with open(self.config_path, 'w') as f:
@@ -83,7 +83,7 @@ class ImportValidationTest(unittest.TestCase):
         self.assertEqual(len(output_df), 1)
         self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
 
-    def test_e2e_failed_run(self):
+    def test_failed_run(self):
         """Tests a failed end-to-end run of the script."""
         # 1. Create sample data that should fail validation
         with open(self.config_path, 'w') as f:
@@ -122,7 +122,7 @@ class ImportValidationTest(unittest.TestCase):
             "The number of places is not consistent across all StatVars.",
             result.stderr)
 
-    def test_e2e_missing_flag_fails(self):
+    def test_missing_flag_fails(self):
         """Tests that the script fails when a required flag is missing."""
         # Run the script without the required --stats_summary flag
         result = subprocess.run([
@@ -141,7 +141,7 @@ class ImportValidationTest(unittest.TestCase):
         self.assertIn("Flag --stats_summary must have a value other than None",
                       result.stderr)
 
-    def test_e2e_variables_filtering(self):
+    def test_variables_filtering(self):
         """Tests that the runner correctly applies the 'variables' filter."""
         # 1. Create a config that filters for a specific StatVar
         with open(self.config_path, 'w') as f:
@@ -185,7 +185,7 @@ class ImportValidationTest(unittest.TestCase):
         self.assertEqual(len(output_df), 1)
         self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
 
-    def test_e2e_sql_validator_fails(self):
+    def test_sql_validator_fails(self):
         """Tests that the SQL_VALIDATOR works in an end-to-end run."""
         # 1. Create a config using the SQL_VALIDATOR
         with open(self.config_path, 'w') as f:
