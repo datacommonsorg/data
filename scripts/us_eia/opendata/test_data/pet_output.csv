@@ -1,6 +1,6 @@
 place,stat_var,date,value,unit,scaling_factor,eia_series_id,measurementMethod
-dcid:geoId/08,dcid:eia/PET.KDLVIS_1.A,2019,40989000.0,USGallon,,PET.KDLVISSCO1.A,
-dcid:geoId/08,dcid:eia/PET.KDLVIS_1.A,2018,37954000.0,USGallon,,PET.KDLVISSCO1.A,
+dcid:geoId/08,dcid:eia/PET.KDLVIS_1.A,2019,40989,ThousandGallons,,PET.KDLVISSCO1.A,
+dcid:geoId/08,dcid:eia/PET.KDLVIS_1.A,2018,37954,ThousandGallons,,PET.KDLVISSCO1.A,
 dcid:geoId/22,dcid:eia/PET.RCRR06_1.A,2019,3,MillionsBarrels,,PET.RCRR06SLA_1.A,
 dcid:geoId/22,dcid:eia/PET.RCRR06_1.A,2018,6,MillionsBarrels,,PET.RCRR06SLA_1.A,
 dcid:geoId/22,dcid:eia/PET.RCRR06_1.A,2017,29,MillionsBarrels,,PET.RCRR06SLA_1.A,
