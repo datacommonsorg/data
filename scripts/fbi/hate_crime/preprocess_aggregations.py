@@ -24,21 +24,21 @@ from absl import flags
 from absl import logging
 from absl import app
 
+# Allows the following module imports to work when running as a script
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
+import file_util
+from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
     'input_file',
-    'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/input_files/hate_crime.csv',
-    'Input csv file from https://cde.ucr.cjis.gov/LATEST/webapp/#')
+    '../hate_crime_data/hate_crime.csv',
+    'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#')
 flags.DEFINE_string(
     'config_file',
     'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/config.json',
     'Input config file')
-# Allows the following module imports to work when running as a script
-_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 
-import file_util
-from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
 
 _CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
 
@@ -1751,9 +1751,10 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
     output_path = os.path.expanduser(output_path)
     logging.info(f'Processing input: {_FLAGS.input_file}')
     #with file_util.FileIO(_FLAGS.input_file, 'r') as input_f:
+    print(f"Loading input file into df : {_FLAGS.input_file}")
     df = pd.read_csv(_FLAGS.input_file)
-    print(df)
     df.columns = df.columns.str.upper()
+    print(df.columns)
     missing_cols = set(_INPUT_COLUMNS) - set(df.columns)
     if missing_cols:
         raise ValueError(f"Missing required columns: {missing_cols}")

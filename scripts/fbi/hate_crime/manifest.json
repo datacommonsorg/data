@@ -5,7 +5,7 @@
         "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
         "provenance_description": "US Hate Crime Statistics",
-        "scripts": ["table1/preprocess.py","table2/preprocess.py","table3/preprocess.py","table4/preprocess.py","table5/preprocess.py","table6/preprocess.py","table7/preprocess.py","table8/preprocess.py","table9/preprocess.py","table10/preprocess.py","table11/preprocess.py","table12/preprocess.py","table13/preprocess.py","table14/preprocess.py","run.sh"],
+        "scripts": ["download_fbi_publication_data.py","table1/preprocess.py","table2/preprocess.py","table3/preprocess.py","table4/preprocess.py","table5/preprocess.py","table6/preprocess.py","table7/preprocess.py","table8/preprocess.py","table9/preprocess.py","table10/preprocess.py","table11/preprocess.py","table12/preprocess.py","table13/preprocess.py","table14/preprocess.py","run.sh"],
         "import_inputs": [
           {
             "template_mcf": "tables1-10/t1tot10.tmcf",

@@ -32,7 +32,7 @@ import file_util
 
 flags.DEFINE_string(
     'config_file',
-    'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
+    os.path.join(_SCRIPT_PATH, '../table_config.json'),
     'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
@@ -152,16 +152,18 @@ def _clean_dataframe(df: pd.DataFrame, year: str) -> pd.DataFrame:
 
 def main(argv):
     csv_files = []
+    table_num = '2'
     with file_util.FileIO(_FLAGS.config_file, 'r') as f:
-        config = json.load(f)
-    _YEARWISE_CONFIG = config['year_config']
-    if '2' not in config:
+        _YEARWISE_CONFIG = json.load(f)
+    config = _YEARWISE_CONFIG['year_config']
+    if table_num not in config:
         logging.fatal(
-            f"Error: Key 2 not found in the config. Please ensure the configuration for section 2 is present."
+            f"Error: Key 2 not found in the config. Please ensure the configuration for section {table_num} is present."
         )
     with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in _YEARWISE_CONFIG['2'].items():
+        for year, config in config[table_num].items():
             xls_file_path = config['path']
+            xls_file_path = os.path.join(_SCRIPT_PATH, '../',xls_file_path)
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
             logging.info(f"Processing: {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])

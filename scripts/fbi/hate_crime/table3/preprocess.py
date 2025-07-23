@@ -32,7 +32,7 @@ import file_util
 
 flags.DEFINE_string(
     'config_file',
-    'gs://unresolved_mcf/fbi/hate_crime/20250107/table_config.json',
+    os.path.join(_SCRIPT_PATH, '../table_config.json'),
     'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
@@ -162,6 +162,7 @@ def main(argv):
     with tempfile.TemporaryDirectory() as tmp_dir:
         for year, config in config[table_num].items():
             xls_file_path = config["path"]
+            xls_file_path = os.path.join(_SCRIPT_PATH, '../',xls_file_path)
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
             logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])
