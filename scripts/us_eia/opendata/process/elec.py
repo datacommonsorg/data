@@ -1,16 +1,3 @@
-# Copyright 2021 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 """EIA Electricity Dataset specific functions."""
 
 import re
@@ -108,7 +95,7 @@ _FUEL_TYPE = {
     'OTH': 'Other',
     'PC': 'PetroleumCoke',
     'PEL': 'PetroleumLiquids',
-    'SPV': 'UtilityScalePhotovoltaic',
+    'SPV': 'UtilityScaleSolarPhotovoltaic',
     'STH': 'UtilityScaleThermal',
     'SUB': 'SubbituminousCoal',
     'SUN': 'UtilityScaleSolar',
@@ -222,7 +209,10 @@ _PLACEHOLDER_FUEL_UNIT = '_XYZ_'
 # The value is a pair of (unit, scalingFactor, multiplier) for each measure.
 _UNIT_MAP = {
     'ASH_CONTENT': ('', '100', 1),
+    # Raw unit is "thousand tons", so multiply by 1000 to get "tons"
     'CONS_EG': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
+    # Raw unit for aggregated series is "million MMBtu", so multiply by 1,000,000 to get "MMBtu".
+    # NOTE: This will incorrectly scale plant-level data which is already in MMBtu.
     'CONS_EG_BTU': ('MMBtu', '', 1000000),
     'COST': (_PLACEHOLDER_FUEL_UNIT, '', 1),
     'COST_BTU': ('USDollarPerMillionBtu', '', 1),
@@ -231,6 +221,7 @@ _UNIT_MAP = {
     'PRICE': ('USCentPerKilowattHour', '', 1),
     'RECEIPTS': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
     'RECEIPTS_BTU': ('Btu', '', 1000000000),
+    # Raw unit is "million dollars", so multiply by 1,000,000 to get "USDollar"
     'REV': ('USDollar', '', 1000000),
     'SALES': ('GigawattHour', '', 1),
     'STOCKS': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
