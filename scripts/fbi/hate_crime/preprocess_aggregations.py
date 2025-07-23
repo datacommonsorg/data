@@ -29,16 +29,16 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 import file_util
 from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
+
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
-    'input_file',
-    '../hate_crime_data/hate_crime.csv',
-    'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#')
+    'input_file', '../hate_crime_data/hate_crime.csv',
+    'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#'
+)
 flags.DEFINE_string(
     'config_file',
     'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/config.json',
     'Input config file')
-
 
 _CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
 

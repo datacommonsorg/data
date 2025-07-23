@@ -34,10 +34,9 @@ from name_to_alpha2 import USSTATE_MAP_SPACE
 import utils
 import file_util
 
-flags.DEFINE_string(
-    'config_file',
-    os.path.join(_SCRIPT_PATH, '../table_config.json'),
-    'Input config file')
+flags.DEFINE_string('config_file',
+                    os.path.join(_SCRIPT_PATH, '../table_config.json'),
+                    'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
     'MCF. Default behaviour is to write the artifacts in the current working'
@@ -146,7 +145,7 @@ def main(argv):
     with tempfile.TemporaryDirectory() as tmp_dir:
         for year, config in config[table_num].items():
             xls_file_path = config['path']
-            xls_file_path = os.path.join(_SCRIPT_PATH, '../',xls_file_path)
+            xls_file_path = os.path.join(_SCRIPT_PATH, '../', xls_file_path)
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
             logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])
