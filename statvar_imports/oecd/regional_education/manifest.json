@@ -1,0 +1,26 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "OECDRegionalEducation",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://stats.oecd.org/Index.aspx?DataSetCode=REGION_EDUCAT",
+      "provenance_description": "dataset contains commodity price and its index value for monthly and annual",
+      "scripts": ["../../../util/download_util_script.py --download_url='https://sdmx.oecd.org/public/rest/data/OECD.CFE.EDS,DSD_REG_EDU@DF_ATTAIN,/A.........?dimensionAtObservation=AllDimensions&format=csvfilewithlabels' --output_folder=gcs_output", "preprocess.py",
+      "../../../tools/statvar_importer/stat_var_processor.py --input_data=input/oecd_regional_education_data.csv --pv_map=oecd_regional_education_pvmap.csv --config_file=oecd_regional_education_metadata.csv --places_resolved_csv=oecd_regional_education_places_resolved.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/oecd_regional_education"
+    ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/oecd_regional_education.tmcf",
+          "cleaned_csv": "output/oecd_regional_education.csv"
+        }
+      ],
+      "cron_schedule": "0 10 1,15 * *",
+      "source_files": ["gcs_output/*.csv"],
+      "resource_limits": {
+        "cpu": "8",
+        "memory": "32G"
+      },
+      "timeout": 7200
+    }
+  ]
+}
