@@ -135,7 +135,7 @@ def process_downloads(import_name: str, config_file: str,
 
         target_dir = os.path.dirname(target_filename) or "."
         is_zip = url.lower().endswith(".zip")
-        full_url = url
+        ful_url = url
 
         # For CSV files from data.cdc.gov, attempt to get the full dataset
         parsed_url = urllib.parse.urlparse(url)
