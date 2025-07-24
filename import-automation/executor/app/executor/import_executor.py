@@ -392,8 +392,8 @@ class ImportExecutor:
                 logging.error(
                     'Skipping genmcf due to missing import input spec.')
                 continue
-            output_path = os.path.join(absolute_import_dir, import_prefix,
-                                       'validation')
+            output_path = os.path.join(absolute_import_dir, 'gcs_output',
+                                       import_prefix, 'validation')
 
             # Run dc import tool to generate resolved mcf.
             logging.info(f'Generating resolved mcf for {import_prefix}')
@@ -459,7 +459,8 @@ class ImportExecutor:
                 continue
 
             validation_output_path = os.path.join(absolute_import_dir,
-                                                  import_prefix, 'validation')
+                                                  'gcs_output', import_prefix,
+                                                  'validation')
             current_data_path = os.path.join(validation_output_path, '*.mcf')
             previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
             summary_stats = os.path.join(validation_output_path,
