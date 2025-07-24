@@ -1,0 +1,67 @@
+{
+  "incentiveSummaries": [
+    {
+      "extractionConfig": {
+        "url": "https://www.dewa.gov.ae/en/consumer/solar-community/shams-dubai",
+        "locale": {
+          "language": "en",
+          "countryIso": "AE"
+        },
+        "incentiveCategory": "INCENTIVE_CATEGORY_SOLAR"
+      },
+      "incentive": {
+        "purchaseType": "PURCHASE_TYPE_CONSUMPTION",
+        "redemptionType": "REDEMPTION_TYPE_REBATE_OR_SUBSIDY",
+        "name": "DEWA Shams Dubai",
+        "providerName": "Dubai Electricity and Water Authority"
+      },
+      "groundingInfo": {}
+    },
+    {
+      "extractionConfig": {
+        "url": "https://chbp.com.au/the-cheaper-home-batteries-program-policy-paper/",
+        "locale": {
+          "language": "en",
+          "countryIso": "AU"
+        },
+        "incentiveCategory": "INCENTIVE_CATEGORY_SOLAR"
+      },
+      "incentive": {
+        "purchaseType": "PURCHASE_TYPE_INSTALLATION",
+        "redemptionType": "REDEMPTION_TYPE_REBATE_OR_SUBSIDY",
+        "perUnitAmount": {
+          "amount": {
+            "currencyCode": "AUD",
+            "units": "9",
+            "nanos": 300000000
+          },
+          "unit": "CREDIT_UNITS_KILOWATT_HOURS"
+        },
+        "name": "Cheaper Home Batteries Program",
+        "providerName": "Australian Government",
+        "percentageOfCostsCovered": 0.3
+      },
+      "groundingInfo": {}
+    },
+    {
+      "extractionConfig": {
+        "url": "https://portalfazenda.cuiaba.mt.gov.br/test",
+        "locale": {
+          "language": "pt",
+          "countryIso": "BR",
+          "adminArea1": "Mato Grosso"
+        },
+        "incentiveCategory": "INCENTIVE_CATEGORY_SOLAR"
+      },
+      "incentive": {
+        "purchaseType": "PURCHASE_TYPE_INSTALLATION",
+        "redemptionType": "REDEMPTION_TYPE_TAX_WAIVER",
+        "name": "Programa IPTU Sustentável",
+        "providerName": "Câmara Municipal de Cuiabá",
+        "percentageOfCostsCovered": 0.25,
+        "taxWaiverType": "TAX_WAIVER_TYPE_PARTIAL_REDUCTION"
+      },
+      "groundingInfo": {}
+    }
+  ]
+}
