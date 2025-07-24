@@ -45,7 +45,7 @@ import download
 FLAGS = flags.FLAGS
 flags.DEFINE_list('csv_data_files', [],
                   'csv files from UNData Energy datasets to process')
-flags.DEFINE_string('output_path', 'tmp_data_dir/un_energy_output',
+flags.DEFINE_string('output_path', 'output_data/un_energy_output',
                     'Data set name used as file name for mcf and tmcf')
 flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
 flags.DEFINE_integer('debug_lines', 100000, 'Print error logs every N lines')
@@ -515,6 +515,7 @@ def process(in_paths: list,
     sv_map = defaultdict(lambda: 0)
     row_map = defaultdict(lambda: 0)
     sv_obs = {}
+    os.makedirs(out_path, exist_ok=True)
     csv_file_path = out_path + '.csv'
     start_ts = time.perf_counter()
     counters['time_start'] = start_ts

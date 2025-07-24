@@ -5,11 +5,11 @@
             "curator_emails": ["support@datacommons.org"],
             "provenance_url": "https://unstats.un.org/unsd/energystats/data/",
             "provenance_description": "UN_energy",
-            "scripts": ["download.py --download_data_dir=tmp_data_dir/un_energy","process.py --csv_data_files=tmp_data_dir/un_energy_all.csv --output_path=tmp_raw_data/un_energy_output"],
-            "source_files": ["tmp_data_dir/un_energy_all.csv"],
+            "scripts": ["sh ./run.sh "],
+            "source_files": ["input_data/un_energy_all.csv"],
             "import_inputs": [{
-                "template_mcf": "tmp_raw_data/un_energy_output.tmcf",
-                "cleaned_csv": "tmp_raw_data/un_energy_output.csv"
+                "template_mcf": "output_data/un_energy_output.tmcf",
+                "cleaned_csv": "output_data/un_energy_output.csv"
             }
             ],
         "cron_schedule": "0 4 1,15 * *"
