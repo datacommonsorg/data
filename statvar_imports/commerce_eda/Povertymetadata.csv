@@ -1,0 +1,12 @@
+parameter,value
+url, https://www.eda.gov/sites/default/files/2023-03/EDA_FY23_PPCs.xlsx
+description,Table. FY2023 Persistent Poverty County Status - as of Data Year 2021
+#place_type,AdministrativeArea1
+#places_within,country/USA
+start_date,1990
+end_date,2021
+release_frequency,Yearly
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,measurementMethod"
+header_rows,3
