@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ from urllib.error import ContentTooShortError
 import sys
 import ssl
 from absl import logging
+from download_config import DOWNLOAD_CONFIG
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -37,21 +38,6 @@ from download_config import *
 _DOWNLOAD_PATH = os.path.join(os.path.dirname((__file__)), 'gcs_output',
                               'input_files')
 path_to_company_cert = "/etc/ssl/certs/ca-certificates.crt"
-
-# def check_url_accessibility(url, timeout=10):
-#     """
-#     Checks if a URL is accessible by making a HEAD request.
-#     Returns True if accessible (status 200 OK) and False otherwise.
-#     """
-#     try:
-#         # Use a HEAD request to avoid downloading the entire file just for a check
-#         response = requests.head(url, timeout=timeout)
-#         response.raise_for_status()  # Raise an HTTPError for bad responses (4xx or 5xx)
-#         return True
-#     except requests.exceptions.RequestException as e:
-#         logging.fatal(f"FATAL: URL check failed for '{url}': {e}")
-#         return False
-
 
 @retry(tries=3, delay=5, backoff=20)
 def download_file_with_retry(url):
@@ -88,48 +74,47 @@ def download_file_with_retry(url):
         logging.fatal(f"Failed to download {url} due to {e}")
         sys.exit(1)
 
-
-def download_files(url_folder_map):
+def download_files(download_config):
     global _DOWNLOAD_PATH
     logging.info(f"Ensuring download directory '{_DOWNLOAD_PATH}' exists.")
     os.makedirs(_DOWNLOAD_PATH, exist_ok=True)
-    # if not os.path.exists(_DOWNLOAD_PATH):
-    #     os.mkdir(_DOWNLOAD_PATH)
-    # os.chdir(_DOWNLOAD_PATH)
-    for urls, folders in url_folder_map.items():
-        if len(urls) != len(folders):
-            logging.fatal(
-                "Configuration Error: The number of URLs and folder names in a mapping must match."
+    
+    for item in download_config:
+        url = item.get("url")
+        folder = item.get("folder")
+        if not url or not folder:
+            logging.warning(f"Skipping invalid config item: {item}")
+            continue
+        
+        try:
+            logging.info(f"Processing URL: {url} for folder: {folder}")
+            downloaded_file_path = download_file_with_retry(url)
+            logging.info(
+                f"URL {url} downloaded to {downloaded_file_path}")
+            extract_dir = os.path.join(_DOWNLOAD_PATH, folder)
+            os.makedirs(extract_dir, exist_ok=True)
+            logging.info(
+                f"Extracting {downloaded_file_path} to {extract_dir} using 7z..."
             )
-            logging.fatal(f"URLs: {urls}, Folders: {folders}")
-            raise SystemExit(
-                "The number of urls and folder must match. Exiting.")
+            subprocess.run(
+                ["7z", "x", downloaded_file_path, f"-o{extract_dir}"])
+            logging.info(f"Extraction of {downloaded_file_path} complete.")
 
-        for url, folder in zip(urls, folders):
-            try:
-                logging.info(f"Processing URL: {url} for folder: {folder}")
-                downloaded_file_path = download_file_with_retry(url)
-                if downloaded_file_path:
-                    logging.info(
-                        f"URL {url} downloaded to {downloaded_file_path}")
-                    extract_dir = os.path.join(_DOWNLOAD_PATH, folder)
-                    os.makedirs(extract_dir, exist_ok=True)
-                    logging.info(
-                        f"Extracting {downloaded_file_path} to {extract_dir} using 7z..."
-                    )
-                    subprocess.run(
-                        ["7z", "x", downloaded_file_path, f"-o{extract_dir}"])
-                else:
-                    logging.fatal(f"Error downloading {url} due to error: {e}")
-            except Exception as e:
-                logging.fatal(f"Error downloading {url} due to error: {e}")
-
-    #remove meta data files
+            # Remove the downloaded ZIP file
+            logging.info(f"Removing downloaded file: {downloaded_file_path}")
+            os.remove(downloaded_file_path)
+        except Exception as e:
+            logging.fatal(f"Error processing {url} due to error: {e}")
+    # Remove meta data files
+    logging.info("Removing unnecessary metadata files...")
     for root, _, files in os.walk(_DOWNLOAD_PATH):
         for file in files:
             if file.endswith('.txt') or file.endswith('.pdf') or file.endswith(
                     '.xlsx') or 'tribes' in file:
-                os.remove(os.path.join(root, file))
+                file_path = os.path.join(root, file)
+                logging.info(f"Removing metadata file: {file_path}")
+                os.remove(file_path)
+    logging.info("Unnecessary metadata files removal complete.")
 
 
 # --- Your main function ---
@@ -142,8 +127,8 @@ def main():
     logging.info(f"Script execution started.")
     logging.info(f'Download path is set to {_DOWNLOAD_PATH}')
     download_files(
-        url_folder_map
-    )  # url_folder_map is accessible because it's a global variable
+        DOWNLOAD_CONFIG
+    )
     logging.info(f"Script execution finished.")
 
 

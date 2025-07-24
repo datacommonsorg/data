@@ -149,67 +149,93 @@ class USAirEmissionTrends:
         logging.info(f"Columns regularized to expected schema.")
         return df
 
-    def _national_emissions(self, file_path: str) -> pd.DataFrame:
+    def _process_single_file(self, file_path: str) -> pd.DataFrame:
         """
-        Reads the file for national emissions data and cleans it for concatenation
-        in Final CSV.
+        Reads and performs initial processing of a single national emissions data file.
+
         Args:
-            file_path (str): path to excel file as the input
+            file_path (str): Path to the CSV file.
+
         Returns:
-            df (pd.DataFrame): provides the cleaned df as output
+            pd.DataFrame: DataFrame with initial data processing.
         """
         try:
             logging.info(
                 f"Processing national emissions file: '{os.path.basename(file_path)}'."
             )
             df = pd.read_csv(file_path, header=0, low_memory=False)
-
             pd.set_option('display.max_columns', 14)
             df = self._regularize_columns(df, file_path)
-            df['pollutant code'] = df['pollutant code'].astype(str)
-            df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
-
-            # Convert geo_Id to numeric and filter based on range
-            df['geo_Id'] = pd.to_numeric(
-                df['geo_Id'], errors='coerce'
-            )  # Convert to numeric, invalid parsing will be set as NaN
-            df = df[df['geo_Id'] <= TRIBAL_GEOCODE_START_RANGE]
-            #
-            # Remove if Tribal Details are needed
-            #
-            df['geo_Id'] = df['geo_Id'].astype(float).astype(int)
-            df = df.drop(df[df.geo_Id > TRIBAL_GEOCODE_START_RANGE].index)
-            df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
-            df['geo_Id'] = df['geo_Id'].astype(str)
-            #
-            # Remove if Tribal Details are needed
-            #
-            df['scc'] = df['scc'].astype(str)
-            df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
-                                 df['scc'].str[0])
-            df['geo_Id'] = 'geoId/' + df['geo_Id']
-            df.rename(columns=replacement_17, inplace=True)
-            df_pollutants = df[df['pollutant code'].isin(pollutants)]
-            df_pollutants = self._data_standardize(df_pollutants,
-                                                   'pollutant code')
-            df['pollutant code'] = ''
-            df = pd.concat([df, df_pollutants])
-            df = self._data_standardize(df, 'unit')
-            df['scc_name'] = df['scc'].astype(str)
-            df = df.replace({'scc_name': replace_source_metadata})
-            df['scc_name'] = df['scc_name'].str.replace(' ', '')
-            df['SV'] = ('Annual_Amount_Emissions_' +
-                        df['pollutant code'].astype(str) + '_SCC_' +
-                        df['scc'].astype(str)) + '_' + df['scc_name']
-
-            df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
-            df['SV'] = df['SV'].str.replace('_nan', '').str.replace('__', '_')
-            df = df.drop(columns=drop_df)
-            df = df.drop(df[df['observation'] == '.'].index)
-            df['observation'] = df['observation'].astype(float)
             return df
         except Exception as e:
-            logging.error(f"Error: File '{file_path}' not found.", e)
+            logging.error(f"Error processing file '{file_path}': {e}")
+            return pd.DataFrame()
+
+    def _add_geo_id(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Adds and cleans the 'geo_Id' column.
+
+        Args:
+            df (pd.DataFrame): DataFrame containing 'fips code'.
+
+        Returns:
+            pd.DataFrame: DataFrame with the processed 'geo_Id' column.
+        """
+        df['pollutant code'] = df['pollutant code'].astype(str)
+        df['geo_Id'] = ([f'{x:05}' for x in df['fips code']])
+        df['geo_Id'] = pd.to_numeric(df['geo_Id'], errors='coerce')
+        df = df[df['geo_Id'] <= TRIBAL_GEOCODE_START_RANGE]
+        df['geo_Id'] = df['geo_Id'].astype(float).astype(int)
+        df = df.drop(df[df.geo_Id > TRIBAL_GEOCODE_START_RANGE].index)
+        df['geo_Id'] = ([f'{x:05}' for x in df['geo_Id']])
+        df['geo_Id'] = df['geo_Id'].astype(str)
+        df['geo_Id'] = 'geoId/' + df['geo_Id']
+        df.rename(columns=replacement_17, inplace=True)
+        return df
+
+    def _create_statistical_variables(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Creates the statistical variable ('SV') column.
+
+        Args:
+            df (pd.DataFrame): DataFrame containing pollutant code, scc, and scc_name.
+
+        Returns:
+            pd.DataFrame: DataFrame with the 'SV' column.
+        """
+        df['scc'] = df['scc'].astype(str)
+        df['scc'] = np.where(df['scc'].str.len() == 10, df['scc'].str[0:2],
+                             df['scc'].str[0])
+        df_pollutants = df[df['pollutant code'].isin(pollutants)]
+        df_pollutants = self._data_standardize(df_pollutants,
+                                                'pollutant code')
+        df['pollutant code'] = ''
+        df = pd.concat([df, df_pollutants])
+        df = self._data_standardize(df, 'unit')
+        df['scc_name'] = df['scc'].astype(str)
+        df = df.replace({'scc_name': replace_source_metadata})
+        df['scc_name'] = df['scc_name'].str.replace(' ', '')
+        df['SV'] = ('Annual_Amount_Emissions_' +
+                   df['pollutant code'].astype(str) + '_SCC_' +
+                   df['scc'].astype(str)) + '_' + df['scc_name']
+        df['Measurement_Method'] = 'dcAggregate/EPA_NationalEmissionInventory'
+        df['SV'] = df['SV'].str.replace('_nan', '').str.replace('__', '_')
+        return df
+
+    def _clean_final_df(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Performs final cleaning of the DataFrame.
+
+        Args:
+            df (pd.DataFrame): DataFrame to be cleaned.
+
+        Returns:
+            pd.DataFrame: Cleaned DataFrame.
+        """
+        df = df.drop(columns=drop_df)
+        df = df.drop(df[df['observation'] == '.'].index)
+        df['observation'] = df['observation'].astype(float)
+        return df
 
     def _mcf_property_generator(self) -> None:
         """
@@ -267,7 +293,11 @@ class USAirEmissionTrends:
         """
         logging.info("Starting data processing across all input files.")
         for file_path in self._input_files:
-            df = self._national_emissions(file_path)
+            df = self._process_single_file(file_path)
+            if not df.empty:
+                df_with_geo_id = self._add_geo_id(df)
+                df_with_sv = self._create_statistical_variables(df_with_geo_id)
+                self.final_df = pd.concat([self.final_df, self._clean_final_df(df_with_sv)])
             self.final_df = pd.concat([self.final_df, df])
 
         self.final_df = self.final_df.sort_values(
@@ -364,7 +394,6 @@ def main(_):
     loader.generate_csv()
     loader.generate_mcf()
     loader.generate_tmcf()
-
 
 if __name__ == "__main__":
     app.run(main)

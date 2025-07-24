@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -7,22 +7,65 @@
 #      http://www.apache.org/licenses/LICENSE-2.0
 #
 
-url_folder_map = {
-    ("https://gaftp.epa.gov/air/nei/2020/data_summaries/2020neiMar_nonpoint.zip", "https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiApr_nonpoint.zip", "https://gaftp.epa.gov/air/nei/2014/data_summaries/2014v2/2014neiv2_nonpoint.zip", "https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_nonpoint.zip", "https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_nonpoint.zip"):
-        ('2020neiMar_nonpoint', '2017neiApr_nonpoint', '2014neiv2_nonpoint',
-         '2011neiv2_nonpoint', '2008neiv3_nonpoint'),
-    ("https://gaftp.epa.gov/air/nei/2020/data_summaries/2020nei_nonroad_byregion.zip", "https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiApr_nonroad_byregions.zip", "https://gaftp.epa.gov/air/nei/2014/data_summaries/2014v2/2014neiv2_nonroad_byregions.zip", "https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_nonroad_byregions.zip", "https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_nonroad_byregions.zip"):
-        ('2020nei_nonroad_byregion', '2017neiApr_nonroad_byregions',
-         '2014neiv2_nonroad_byregions', '2011neiv2_nonroad_byregions',
-         '2008neiv3_nonroad_byregions'),
-    ("https://gaftp.epa.gov/air/nei/2020/data_summaries/2020nei_onroad_byregion.zip", "https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiApr_onroad_byregions.zip", "https://gaftp.epa.gov/air/nei/2014/data_summaries/2014v2/2014neiv2_onroad_byregions.zip", "https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_onroad_byregions.zip", "https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_onroad_byregions.zip"):
-        ('2020nei_onroad_byregion', '2017neiApr_onroad_byregions',
-         '2014neiv2_onroad_byregions', '2011neiv2_onroad_byregions',
-         '2008neiv3_onroad_byregions'),
-    ("https://gaftp.epa.gov/air/nei/2020/data_summaries/2020nei_facility_process_byregions.zip", "https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiJan_facility_process_byregions.zip", "https://gaftp.epa.gov/air/nei/2014/data_summaries/2014v2/2014neiv2_facility_process_byregions.zip", "https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_facility_process_byregions.zip", "https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_facility_process_byregions.zip"):
-        ('2020nei_facility_process_byregions',
-         '2017neiJan_facility_process_byregions',
-         '2014neiv2_facility_process_byregions',
-         '2011neiv2_facility_process_byregions',
-         '2008neiv3_facility_process_byregions')
-}
+DOWNLOAD_CONFIG = [
+    {"url":  "https://gaftp.epa.gov/air/nei/2020/data_summaries/2020neiMar_nonpoint.zip",
+    "folder": "2020neiMar_nonpoint"},
+
+    {"url":  "https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiApr_nonpoint.zip",
+    "folder": "2017neiApr_nonpoint"},
+
+    {"url":  "https://gaftp.epa.gov/air/nei/2014/data_summaries/2014v2/2014neiv2_nonpoint.zip",
+    "folder": "2014neiv2_nonpoint"},
+
+    {"url":  "https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_nonpoint.zip",
+    "folder": "2011neiv2_nonpoint"},
+
+    {"url":  "https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_nonpoint.zip",
+    "folder": "2008neiv3_nonpoint"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2020/data_summaries/2020nei_nonroad_byregion.zip",
+    "folder": "2020nei_nonroad_byregion"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiApr_nonroad_byregions.zip",
+    "folder": "2017neiApr_nonroad_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2014/data_summaries/2014v2/2014neiv2_nonroad_byregions.zip",
+    "folder": "2014neiv2_nonroad_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_nonroad_byregions.zip",
+    "folder": "2011neiv2_nonroad_byregions"},
+
+    {"url" : "https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_nonroad_byregions.zip",
+    "folder": "2008neiv3_nonroad_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2020/data_summaries/2020nei_onroad_byregion.zip",
+    "folder": "2020nei_onroad_byregion"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiApr_onroad_byregions.zip",
+    "folder": "2017neiApr_onroad_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2014/data_summaries/2014v2/2014neiv2_onroad_byregions.zip",
+    "folder": "2014neiv2_onroad_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_onroad_byregions.zip",
+    "folder": "2011neiv2_onroad_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_onroad_byregions.zip",
+    "folder": "2008neiv3_onroad_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2020/data_summaries/2020nei_facility_process_byregions.zip",
+    "folder": "2020nei_facility_process_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2017/data_summaries/2017v1/2017neiJan_facility_process_byregions.zip",
+    "folder": "2017neiJan_facility_process_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2014/data_summaries/2014v2/2014neiv2_facility_process_byregions.zip",
+    "folder": "2014neiv2_facility_process_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2011/data_summaries/2011v2/2011neiv2_facility_process_byregions.zip",
+    "folder": "2011neiv2_facility_process_byregions"},
+
+    {"url":"https://gaftp.epa.gov/air/nei/2008/data_summaries/2008neiv3_facility_process_byregions.zip",
+    "folder": "2008neiv3_facility_process_byregions"}
+
+    ]

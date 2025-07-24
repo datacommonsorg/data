@@ -113,6 +113,11 @@ pollutants = [
     "7782492", "7782505", "7783064", "8007452", "16065831", "18540299", "CH4",
     "CO", "CO2", "N2O", "NH3", "NOX", "PM10-PRI", "PM25-PRI", "SO2", "VOC"
 ]
+
+# The mappings in `replace_metadata` are derived from the 'pollutant code'
+# and 'pollutant_cd' columns in the source data files. They were compiled
+# by combining the unique values from all years of the NEI data from 2008-2020.
+# Source data can be found at: https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei
 replace_metadata = {
     "R":
         "Refueling",
@@ -1496,6 +1501,8 @@ replace_metadata = {
         'Pound'
 }
 
+# The mappings in `replace_source_metadata` are derived from the 'scc'
+# Source data can be found at: https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei
 replace_source_metadata = {
     "1": "External Combustion",
     "2": "Internal Combustion Engines",
