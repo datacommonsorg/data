@@ -17,6 +17,11 @@ Each publication table (e.g., Table 1, Table 14) has a corresponding directory (
 
 #### Configuration & Maintenance
 Given that the headers in the downloaded source files change annually, a `table_config.json` file is required. This configuration file contains the specific headers to be processed for each year. Annually, it is necessary to review the newly downloaded source files, confirm their headers, and update the `table_config.json` accordingly, making this a semi-autorefresh import.
+#### Semi Autorefresh Steps : 
+1) Go to the latest downloaded input file inside 'hate_crime_publication_data'
+2) Confirm if the headers in the latest file are same as configured in the 'table_config.json' file
+3) If the header is same as the latest available one in the json, just add the year into the same config dictionary
+4) If the headers are new, create a new key-valye pair for year:{headers} in the same dictionary and run the process scripts
 
 #### Combining Tables 1-10
 A shell script, `run.sh`, is provided to combine the cleaned CSV outputs from `table1/` through `table10/` into a single file: `tables1-10/t1tot10_combined.csv`. It also copies the TMCF file from `table1/` to serve as the template for the combined data, as these tables represent a single logical dataset in the manifest.
