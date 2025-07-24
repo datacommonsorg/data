@@ -21,6 +21,23 @@ This dataset is available for public use, license is available at https://www.ei
 
 - Run the [processor](process/README.md)
 
+## Autorefresh Type - Fully Autorefresh
+    EIA_Coal: "0 14 5,20 * *" (Runs at 2:00 PM on the 5th and 20th day of every month)
+
+    EIA_Electricity: "0 7 5,20 * *" (Runs at 7:00 AM on the 5th and 20th day of every month)
+
+    EIA_NaturalGas: "0 8 5,20 * *" (Runs at 8:00 AM on the 5th and 20th day of every month)
+
+    EIA_NuclearOutages: "0 9 5,20 * *" (Runs at 9:00 AM on the 5th and 20th day of every month)
+
+    EIA_Petroleum: "0 10 5,20 * *" (Runs at 10:00 AM on the 5th and 20th day of every month)
+
+    EIA_International: "0 11 5,20 * *" (Runs at 11:00 AM on the 5th and 20th day of every month)
+
+    EIA_SEDS: "0 12 5,20 * *" (Runs at 12:00 PM on the 5th and 20th day of every month)
+
+    EIA_TotalEnergy: "0 13 5,20 * *" (Runs at 1:00 PM on the 5th and 20th day of every month)
+
 ### Downloading and Processing Data
 
 

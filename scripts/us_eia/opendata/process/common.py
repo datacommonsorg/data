@@ -170,6 +170,7 @@ def _unitConvert(unit, value):
 
 
 def _check_unit_range(unit, value):
+    #TODO add this unit filter info into the counter
     return value > UNIT_RANGE_FILTER[unit]['max']
 
 
@@ -428,7 +429,6 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                 # check unit range
 
                 if dc_unit in UNIT_RANGE_FILTER:
-                    logging.info(f"{dc_unit} {v}")
                     is_unit_out_of_range = _check_unit_range(dc_unit, v)
                     if is_unit_out_of_range:
                         continue
