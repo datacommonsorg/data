@@ -19,11 +19,11 @@ def rename_target_file(base_path='.'):
             print(f"Checking file: {filename}")  # Optional debug print
             if pattern.match(filename):
                 old_path = os.path.join(target_folder, filename)
-                new_path = os.path.join(target_folder, 'oecd_regional_data.csv')
+                new_path = os.path.join(target_folder, 'oecd_regional_education_data.csv')
 
                 try:
                     os.rename(old_path, new_path)
-                    print(f"Renamed '{filename}' to 'oecd_regional_data.csv'")
+                    print(f"Renamed '{filename}' to 'oecd_regional_education_data.csv'")
                     renamed = True
                 except PermissionError:
                     print(f"Permission denied while renaming '{filename}'.")
