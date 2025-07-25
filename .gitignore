@@ -17,3 +17,5 @@ pyvenv.cfg
 # Ignore updates to the local configs json file.
 import-automation/executor/config_override.json
 .gemini
+*.sqlite
+
