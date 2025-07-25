@@ -1,0 +1,7 @@
+Node: E:gender_income_inequality->E0
+typeOf: dcs:StatVarObservation
+observationDate: C:gender_income_inequality->observation_date
+observationAbout: C:gender_income_inequality->place_id
+measurementMethod: dcs:dcAggregate/CensusACS5yrSurvey
+value: C:gender_income_inequality->gender_income_inequality
+variableMeasured: dcs:GenderIncomeInequality_Person_15OrMoreYears_WithIncome
