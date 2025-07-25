@@ -1,21 +1,7 @@
-# Copyright 2021 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 """EIA Electricity Dataset specific functions."""
 
-import logging
 import re
-
+from absl import logging
 from . import common
 
 
@@ -30,13 +16,17 @@ def extract_place_statvar(series_id, counters):
     """
 
     if series_id.startswith('ELEC.PLANT.'):
-        counters['error_unimplemented_plant_series'] += 1
+        counters.add_counter('error_unimplemented_plant_series', 1)
         return (None, None, None)
 
     # ELEC.{MEASURE}.{FUEL_TYPE}-{PLACE}-{PRODUCER_SECTOR}.{PERIOD}
+    #m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
+    #            series_id)
     m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^-]+)-([^.]+)\.([AQM])$",
                  series_id)
+
     if m:
+        counters.add_counter('info_elec_record_count', 1)
         measure = m.group(1)
         fuel_type = m.group(2)
         place = m.group(3)
@@ -47,7 +37,7 @@ def extract_place_statvar(series_id, counters):
         # ELEC.{MEASURE}.{PLACE}-{CONSUMER_SECTOR}.{PERIOD}
         m = re.match(r"^ELEC\.([^.]+)\.([^-]+)-([^.]+)\.([AQM])$", series_id)
         if not m:
-            counters['error_unparsable_series'] += 1
+            counters.add_counter('error_unparsable_series', 1)
             return (None, None)
 
         measure = m.group(1)
@@ -105,7 +95,7 @@ _FUEL_TYPE = {
     'OTH': 'Other',
     'PC': 'PetroleumCoke',
     'PEL': 'PetroleumLiquids',
-    'SPV': 'UtilityScalePhotovoltaic',
+    'SPV': 'UtilityScaleSolarPhotovoltaic',
     'STH': 'UtilityScaleThermal',
     'SUB': 'SubbituminousCoal',
     'SUN': 'UtilityScaleSolar',
@@ -219,15 +209,19 @@ _PLACEHOLDER_FUEL_UNIT = '_XYZ_'
 # The value is a pair of (unit, scalingFactor, multiplier) for each measure.
 _UNIT_MAP = {
     'ASH_CONTENT': ('', '100', 1),
+    # Raw unit is "thousand tons", so multiply by 1000 to get "tons"
     'CONS_EG': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
+    # Raw unit for aggregated series is "million MMBtu", so multiply by 1,000,000 to get "MMBtu".
+    # NOTE: This will incorrectly scale plant-level data which is already in MMBtu.
     'CONS_EG_BTU': ('MMBtu', '', 1000000),
     'COST': (_PLACEHOLDER_FUEL_UNIT, '', 1),
-    'COST_BTU': ('MMBtu', '', 1),
+    'COST_BTU': ('USDollarPerMillionBtu', '', 1),
     'CUSTOMERS': ('', '', 1),
     'GEN': ('GigawattHour', '', 1),
     'PRICE': ('USCentPerKilowattHour', '', 1),
     'RECEIPTS': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
     'RECEIPTS_BTU': ('Btu', '', 1000000000),
+    # Raw unit is "million dollars", so multiply by 1,000,000 to get "USDollar"
     'REV': ('USDollar', '', 1000000),
     'SALES': ('GigawattHour', '', 1),
     'STOCKS': (_PLACEHOLDER_FUEL_UNIT, '', 1000),
@@ -274,7 +268,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         # ELEC.{MEASURE}.{CONSUMER_SECTOR}.{PERIOD}
         m = re.match(r"^ELEC\.([^.]+)\.([^.]+)\.([AQM])$", raw_sv)
         if not m:
-            counters['error_unparsable_raw_statvar'] += 1
+            counters.add_counter('error_unparsable_raw_statvar', 1)
             return None
         measure = m.group(1)
         consuming_sector = m.group(2)
@@ -285,7 +279,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
     # Get popType and mprop based on measure.
     measure_pvs = _MEASURE_MAP.get(measure, None)
     if not measure_pvs:
-        counters['error_missing_measure'] += 1
+        counters.add_counter('error_missing_measure', 1)
         return None
 
     sv_id_parts = [common.PERIOD_MAP[period], measure_pvs[0]]
@@ -300,7 +294,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
         if not es:
             logging.error('Missing energy source: %s from %s', fuel_type,
                           raw_sv)
-            counters['error_missing_fuel_type'] += 1
+            counters.add_counter('error_missing_fuel_type', 1)
             return None
         if es != 'ALL':
             sv_id_parts.append(es)
@@ -312,7 +306,7 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
     if producing_sector:
         ps = _PRODUCING_SECTOR.get(producing_sector, None)
         if not ps:
-            counters['error_missing_producing_sector'] += 1
+            counters.add_counter('error_missing_producing_sector', 1)
             return None
         if ps != 'ALL':
             sv_id_parts.append(ps)
@@ -324,20 +318,20 @@ def generate_statvar_schema(raw_sv, rows, sv_map, counters):
     if consuming_sector:
         cs = _CONSUMING_SECTOR.get(consuming_sector, None)
         if not cs:
-            counters['error_missing_consuming_sector'] += 1
+            counters.add_counter('error_missing_consuming_sector', 1)
             return None
         if cs != 'ALL':
             sv_id_parts.append(cs)
             sv_pvs.append(f'consumingSector: dcs:{cs}')
 
     if measure not in _UNIT_MAP:
-        counters['error_missing_unit'] += 1
+        counters.add_counter('error_missing_unit', 1)
         return None
     (unit, sfactor, multiplier) = _UNIT_MAP[measure]
 
     if unit == _PLACEHOLDER_FUEL_UNIT:
         if not fuel_type:
-            counters['error_missing_unit_fuel_type'] += 1
+            counters.add_counter('error_missing_unit_fuel_type', 1)
             return None
         unit = _get_fuel_unit(fuel_type)
         if measure == 'COST':

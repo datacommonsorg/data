@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Converts a single dataset into 2 jsonl's: one each for series and category data.
+
+To ease analysis of the datasets, see [`generate_jsonl_for_bq.py`](generate_jsonl_for_bq.py) for instructions to convert and import the data into BigQuery.
 
 These jsonl's can then be imported to bq using the associated schema bq_schema_*.json
 
@@ -40,10 +42,9 @@ import sys
 IN_DATA_PATH = 'tmp_raw_data'
 OUT_DATA_PATH = 'tmp_bq_import'
 DATASETS = [
-    'AEO.2014', 'AEO.2015', 'AEO.2016', 'AEO.2017', 'AEO.2018', 'AEO.2019',
-    'AEO.2020', 'AEO.2021', 'COAL', 'EBA', 'ELEC', 'EMISS', 'IEO.2017',
-    'IEO.2019', 'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS', 'SEDS',
-    'STEO', 'TOTAL'
+    'AEO.2020', 'AEO.2021', 'AEO.2022', 'AEO.2023', 'AEO.IEO2', 'COAL', 'EBA',
+    'ELEC', 'EMISS', 'IEO', 'INTL', 'NG', 'NUC_STATUS', 'PET', 'PET_IMPORTS',
+    'SEDS', 'STEO', 'TOTAL'
 ]
 
 
@@ -77,17 +78,18 @@ def process_dataset(dataset, in_file_path, out_file_path):
         with open(out_file_path + '.series.jsonl', 'w+') as series_fp:
             with open(out_file_path + '.categories.jsonl', 'w+') as category_fp:
                 for line in data_fp:
-                    data = json.loads(line)
-                    series_id = data.get('series_id', None)
-                    if series_id:
-                        jsonl = extract_series_to_jsonl(line, dataset)
-                        series_fp.write(json.dumps(jsonl))
-                        series_fp.write('\n')
-                    category_id = data.get('category_id', None)
-                    if category_id:
-                        jsonl = extract_category_to_jsonl(line, dataset)
-                        category_fp.write(json.dumps(jsonl))
-                        category_fp.write('\n')
+                    if line.startswith('{'):
+                        data = json.loads(line)
+                        series_id = data.get('series_id', None)
+                        if series_id:
+                            jsonl = extract_series_to_jsonl(line, dataset)
+                            series_fp.write(json.dumps(jsonl))
+                            series_fp.write('\n')
+                        category_id = data.get('category_id', None)
+                        if category_id:
+                            jsonl = extract_category_to_jsonl(line, dataset)
+                            category_fp.write(json.dumps(jsonl))
+                            category_fp.write('\n')
 
 
 def process_single(subdir, file):
@@ -103,15 +105,12 @@ def process_all():
         for file in sorted(files):
             if not file.endswith('.txt'):
                 continue
-            print(f'Processing {subdir}/{file}')
             process_single(subdir, file)
 
 
 if __name__ == '__main__':
     args = sys.argv[1:]
     if len(args) == 0:
-        print('Processing all files')
         process_all()
     else:
-        print(f'Processing {args[0]}/{args[1]}')
         process_single(args[0], args[1])
