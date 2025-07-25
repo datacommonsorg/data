@@ -21,13 +21,18 @@ import pandas as pd
 
 from absl import app
 from absl import flags
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '..'))  # for utils
 
 import utils
+import file_util
 
+flags.DEFINE_string('config_file',
+                    os.path.join(_SCRIPT_PATH, '../table_config.json'),
+                    'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
     'MCF. Default behaviour is to write the artifacts in the current working'
@@ -44,144 +49,7 @@ _OUTPUT_COLUMNS = ('Year', 'StatVar', 'Quantity')
 
 # A config that maps the year to corresponding xls file with args to be used
 # with pandas.read_excel()
-_YEARWISE_CONFIG = {
-    '2020': {
-        'type': 'xls',
-        'path': '../source_data/2020/table_9.xlsx',
-        'args': {
-            'header': 4,
-            'skipfooter': 4
-        }
-    },
-    '2019': {
-        'type': 'xls',
-        'path': '../source_data/2019/table_9.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 6
-        }
-    },
-    '2018': {
-        'type': 'xls',
-        'path': '../source_data/2018/table_9.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 6
-        }
-    },
-    '2017': {
-        'type': 'xls',
-        'path': '../source_data/2017/table_9.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 6
-        }
-    },
-    '2016': {
-        'type': 'xls',
-        'path': '../source_data/2016/table_9.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 6
-        }
-    },
-    '2015': {
-        'type': 'xls',
-        'path': '../source_data/2015/table_9.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 6
-        }
-    },
-    '2014': {
-        'type': 'xls',
-        'path': '../source_data/2014/table_9.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 6
-        }
-    },
-    '2013': {
-        'type': 'xls',
-        'path': '../source_data/2013/table_9.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 6
-        }
-    },
-    '2012': {
-        'type': 'xls',
-        'path': '../source_data/2012/table_9.xls',
-        'args': {
-            'header': 2,
-            'skipfooter': 2
-        }
-    },
-    '2011': {
-        'type': 'xls',
-        'path': '../source_data/2011/table_9.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 2
-        }
-    },
-    '2010': {
-        'type': 'xls',
-        'path': '../source_data/2010/table_9.xls',
-        'args': {
-            'header': 1,
-            'skipfooter': 2
-        }
-    },
-    '2009': {
-        'type': 'xls',
-        'path': '../source_data/2009/table_9.xls',
-        'args': {
-            'header': 1,
-            'skipfooter': 2
-        }
-    },
-    '2008': {
-        'type': 'xls',
-        'path': '../source_data/2008/table_9.xls',
-        'args': {
-            'header': 1,
-            'skipfooter': 2
-        }
-    },
-    '2007': {
-        'type': 'xls',
-        'path': '../source_data/2007/table_9.xls',
-        'args': {
-            'header': 1,
-            'skipfooter': 2
-        }
-    },
-    '2006': {
-        'type': 'xls',
-        'path': '../source_data/2006/table_9.xls',
-        'args': {
-            'header': 1,
-            'skipfooter': 2
-        }
-    },
-    '2005': {
-        'type': 'xls',
-        'path': '../source_data/2005/table_9.xls',
-        'args': {
-            'header': 1,
-            'skipfooter': 2
-        }
-    },
-    '2004': {
-        'type': 'xls',
-        'path': '../source_data/2004/table_9.xls',
-        'args': {
-            'header': 1,
-            'skipfooter': 2
-        }
-    }
-}
+_YEARWISE_CONFIG = None
 
 
 def _write_row(year: int, statvar_dcid: str, quantity: str,
@@ -233,25 +101,44 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
     return statvars
 
 
-def _clean_dataframe(df: pd.DataFrame, year: str):
+def _clean_dataframe(df: pd.DataFrame, year: str, table_num: str):
     """Clean the column names and offense type values in a dataframe."""
-    df.columns = ['r/e/a', 'total']
+    year_config = _YEARWISE_CONFIG['table_config'][table_num]
+
+    if year_config:
+        if isinstance(year_config, list):
+            df.columns = year_config
+        else:
+            for year_range_str, columns in year_config.items():
+                year_range = year_range_str.split(",")
+                if year in year_range:
+                    df.columns = columns
+
     df['r/e/a'] = df['r/e/a'].replace(r'\s+', ' ', regex=True)
     df['r/e/a'] = df['r/e/a'].str.strip()
     return df
 
 
 def main(argv):
+    global _YEARWISE_CONFIG
     csv_files = []
+    table_num = '9'
+    with file_util.FileIO(_FLAGS.config_file, 'r') as f:
+        _YEARWISE_CONFIG = json.load(f)
+    config = _YEARWISE_CONFIG['year_config']
+    if table_num not in config:
+        logging.fatal(
+            f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present."
+        )
+    tmp_dir = '.'
     with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in _YEARWISE_CONFIG.items():
-            xls_file_path = os.path.join(_SCRIPT_PATH, config['path'])
+        for year, config in config[table_num].items():
+            xls_file_path = config['path']
+            xls_file_path = os.path.join(_SCRIPT_PATH, '../', xls_file_path)
             csv_file_path = os.path.join(tmp_dir, year + '.csv')
-
-            read_file = pd.read_excel(xls_file_path,
-                                      **config['args'],
-                                      usecols=[0, 1])
-            read_file = _clean_dataframe(read_file, year)
+            logging.info(f"Processing : {xls_file_path}")
+            read_file = pd.read_excel(xls_file_path, **config['args'])
+            read_file = _clean_dataframe(read_file, year, table_num)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, header=True, index=False)
             csv_files.append(csv_file_path)

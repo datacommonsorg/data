@@ -1,0 +1,726 @@
+{
+    "table_config": {
+        "3": [
+            "offense type",
+            "total offenses",
+            "white",
+            "black or african american",
+            "american indian or alaska native",
+            "asian",
+            "native hawaiian or other pacific islander",
+            "multiple races",
+            "unknown race",
+            "hispanic or latino",
+            "not hispanic or latino",
+            "group of multiple ethnicities",
+            "unknown ethnicity",
+            "unknown offender"
+        ],
+        "4": {
+            "2020,2021": [
+                "bias motivation",
+                "total offenses",
+                "murder",
+                "rape",
+                "aggravated assault",
+                "simple assault",
+                "intimidation",
+                "other crimes against person",
+                "robbery",
+                "burglary",
+                "larceny theft",
+                "motor vehicle theft",
+                "arson",
+                "vandalism",
+                "other crimes against property",
+                "crimes against society"
+            ],
+            "2022,2023": [
+                "bias motivation",
+                "total offenses",
+                "murder",
+                "rape",
+                "aggravated assault",
+                "simple assault",
+                "intimidation",
+                "trafficking",
+                "other crimes against person",
+                "robbery",
+                "burglary",
+                "larceny theft",
+                "motor vehicle theft",
+                "arson",
+                "vandalism",
+                "other crimes against property",
+                "crimes against society"
+            ]
+        },
+        "5": [
+            "bias motivation",
+            "total offenses",
+            "white",
+            "black or african american",
+            "american indian or alaska native",
+            "asian",
+            "native hawaiian or other pacific islander",
+            "multiple races",
+            "unknown race",
+            "hispanic or latino",
+            "not hispanic or latino",
+            "group of multiple ethnicities",
+            "unknown ethnicity",
+            "unknown offender"
+        ],
+        "6": ["offense type",
+              "total offenses",
+              "individual",
+              "business",
+              "government",
+              "religious organization",
+              "society",
+              "other/unknown/multiple"
+            ],
+        "7": {
+            "2020,2021":[
+                "bias motivation", "total victims", "adult victims",
+            "juvenile victims", "murder", "rape", "aggravated assault",
+            "simple assault", "intimidation", "other crimes against person",
+            "robbery", "burglary", "larceny theft", "motor vehicle theft",
+            "arson", "vandalism", "other crimes against property",
+            "crimes against society"
+            ],
+            "2022,2023":[
+                "bias motivation", "total victims", "adult victims",
+            "juvenile victims", "murder", "rape", "aggravated assault",
+            "simple assault", "intimidation", "trafficking",
+            "other crimes against person", "robbery", "burglary",
+            "larceny theft", "motor vehicle theft", "arson", "vandalism",
+            "other crimes against property", "crimes against society"
+            ]
+        },
+        "8": [
+        "bias motivation", "total incidents", "individual", "business",
+        "government", "religious organization", "society",
+        "other/unknown/multiple"
+        ],
+        "9": [
+            "r/e/a", "total"
+        ],
+        "10": [
+            "location",
+            "total",
+            "r/e/a",
+            "religion",
+            "sexual orientation",
+            "disability",
+            "gender",
+            "gender identity",
+            "multiple"
+        ],
+        "11": {
+            "2020,2021": [
+                "state",
+                "total offenses",
+                "murder",
+                "rape",
+                "aggravated assault",
+                "simple assault",
+                "intimidation",
+                "other crimes against person",
+                "robbery",
+                "burglary",
+                "larceny theft",
+                "motor vehicle theft",
+                "arson",
+                "vandalism",
+                "other crimes against property",
+                "crimes against society"
+            ],
+            "2022,2023": [
+                "state",
+                "total offenses",
+                "murder",
+                "rape",
+                "aggravated assault",
+                "simple assault",
+                "intimidation",
+                "trafficking",
+                "other crimes against person",
+                "robbery",
+                "burglary",
+                "larceny theft",
+                "motor vehicle theft",
+                "arson",
+                "vandalism",
+                "other crimes against property",
+                "crimes against society"
+            ]
+        },
+        "12": [
+            "state", "agencies", "pop covered", "agencies submitting reports",
+            "incidents"
+        ],
+        "13": {
+            "2020": [
+                "state",
+                "agency type",
+                "agency",
+                "agency unit",
+                "r/e/a",
+                "religion",
+                "sexual orientation",
+                "disability",
+                "gender",
+                "gender identity",
+                "1st quarter",
+                "2nd quarter",
+                "3rd quarter",
+                "4th quarter",
+                "population"
+            ],
+            "2021,2022,2023": [
+                "state",
+                "agency type",
+                "agency",
+                "r/e/a",
+                "religion",
+                "sexual orientation",
+                "disability",
+                "gender",
+                "gender identity",
+                "1st quarter",
+                "2nd quarter",
+                "3rd quarter",
+                "4th quarter",
+                "population"
+            ]
+        },
+        "14": {
+            "2020": [
+                "state",
+                "agency type",
+                "agency",
+                "agency unit",
+                "1st quarter",
+                "2nd quarter",
+                "3rd quarter",
+                "4th quarter",
+                "population"
+            ],
+            "2021,2022,2023": [
+                "state",
+                "agency type",
+                "agency",
+                "1st quarter",
+                "2nd quarter",
+                "3rd quarter",
+                "4th quarter",
+                "population"
+            ]
+        }
+    },
+    "year_config": {
+        "1": {
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_1_Incidents_Offenses_Victims_and_Known_Offenders_by_Bias_Motivation_2023.xlsx",
+                "args": {
+                    "header": 3,
+                    "skipfooter": 4
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_1_Incidents_Offenses_Victims_and_Known_Offenders_by_Bias_Motivation_2022.xlsx",
+                "args": {
+                    "header": 3,
+                    "skipfooter": 4
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_1_Incidents_Offenses_Victims_and_Known_Offenders_by_Bias_Motivation_2021.xls",
+                "args": {
+                    "header": 3,
+                    "skipfooter": 3
+                }
+            },
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_1_Incidents_Offenses_Victims_and_Known_Offenders_by_Bias_Motivation_2020.xlsx",
+                "args": {
+                    "header": 4,
+                    "skipfooter": 3
+                }
+            }
+        },
+        "2": {
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_2_Incidents_Offenses_Victims_and_Known_Offenders_by_Offense_Type_2023.xlsx",
+                "args": {
+                    "header": 3,
+                    "skipfooter": 4
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_2_Incidents_Offenses_Victims_and_Known_Offenders_by_Offense_Type_2022.xlsx",
+                "args": {
+                    "header": 3,
+                    "skipfooter": 4
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_2_Incidents_Offenses_Victims_and_Known_Offenders_by_Offense_Type_2021.xls",
+                "args": {
+                    "header": 3,
+                    "skipfooter": 4
+                }
+            },
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_2_Incidents_Offenses_Victims_and_Known_Offenders_by_Offense_Type_2020.xlsx",
+                "args": {
+                    "header": 4,
+                    "skipfooter": 5
+                }
+            }
+        },
+        "3": {
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_3_Offenses_Known_Offenders_Race_and_Ethnicity_by_Offense_Type_2023.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_3_Offenses_Known_Offenders_Race_and_Ethnicity_by_Offense_Type_2022.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_3_Offenses_Known_Offenders_Race_and_Ethnicity_by_Offense_Type_2021.xls",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
+            },
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_3_Offenses_Known_Offenders_Race_and_Ethnicity_by_Offense_Type_2020.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 3,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
+            }
+        },
+        "4": {
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_4_Offenses_Offense_Type_by_Bias_Motivation_2023.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 3
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_4_Offenses_Offense_Type_by_Bias_Motivation_2022.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 3
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_4_Offenses_Offense_Type_by_Bias_Motivation_2021.xls",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2
+                }
+            },
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_4_Offenses_Offense_Type_by_Bias_Motivation_2020.xlsx",
+                "args": {
+                    "header": 6,
+                    "skipfooter": 3
+                }
+            }
+        },
+        "5": {
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_5_Offenses_Known_Offenders_Race_and_Ethnicity_by_Bias_Motivation_2023.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 3,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_5_Offenses_Known_Offenders_Race_and_Ethnicity_by_Bias_Motivation_2022.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 3,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_5_Offenses_Known_Offenders_Race_and_Ethnicity_by_Bias_Motivation_2021.xls",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
+            },
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_5_Offenses_Known_Offenders_Race_and_Ethnicity_by_Bias_Motivation_2020.xlsx",
+                "args": {
+                    "header": 6,
+                    "skipfooter": 2,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                }
+            }
+        },
+        "6": {
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_6_Offenses_Victim_Type_by_Offense_Type_2020.xlsx",
+                "args": {
+                    "header": 6,
+                    "skipfooter": 2
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_6_Offenses_Victim_Type_by_Offense_Type_2021.xls",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_6_Offenses_Victim_Type_by_Offense_Type_2022.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2
+                }
+            },
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_6_Offenses_Victim_Type_by_Offense_Type_2023.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2
+                }
+            }
+        },
+        "7": {
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_7_Victims_Offense_Type_by_Bias_Motivation_2020.xlsx",
+                "args": {
+                    "header": 6,
+                    "skipfooter": 6
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_7_Victims_Offense_Type_by_Bias_Motivation_2021.xls",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 7
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_7_Victims_Offense_Type_by_Bias_Motivation_2022.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 7
+                }
+            },
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_7_Victims_Offense_Type_by_Bias_Motivation_2023.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 7
+                }
+            }
+        },
+        "8": {
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_8_Incidents_Victim_Type_by_Bias_Motivation_2020.xlsx",
+                "args": {
+                    "header": 6,
+                    "skipfooter": 2,
+                    "usecols":[0, 1, 2, 3, 4, 5, 6, 7]
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_8_Incidents_Victim_Type_by_Bias_Motivation_2021.xls",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols":[0, 1, 2, 3, 4, 5, 6, 7]
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_8_Incidents_Victim_Type_by_Bias_Motivation_2022.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols":[0, 1, 2, 3, 4, 5, 6, 7]
+                }
+            },
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_8_Incidents_Victim_Type_by_Bias_Motivation_2023.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols":[0, 1, 2, 3, 4, 5, 6, 7]
+                }
+            }
+        },
+        "9": {
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_9_Known_Offenders_Known_Offenders_Race_Ethnicity_and_Age_2020.xlsx",
+                "args": {
+                    "header": 4,
+                    "skipfooter": 4,
+                    "usecols": [0, 1]
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_9_Known_Offenders_Known_Offenders_Race_Ethnicity_and_Age_2021.xls",
+                "args": {
+                    "header": 3,
+                    "skipfooter": 6,
+                    "usecols": [0, 1]
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_9_Known_Offenders_Known_Offenders_Race_Ethnicity_and_Age_2022.xlsx",
+                "args": {
+                    "header": 3,
+                    "skipfooter": 6,
+                    "usecols": [0, 1]
+                }
+            },
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_9_Known_Offenders_Known_Offenders_Race_Ethnicity_and_Age_2023.xlsx",
+                "args": {
+                    "header": 3,
+                    "skipfooter":6,
+                    "usecols": [0, 1]
+                }
+            }
+        },
+        "10": {
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_10_Incidents_Bias_Motivation_by_Location_2020.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_10_Incidents_Bias_Motivation_by_Location_2021.xls",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                }
+            },
+            "2022": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_10_Incidents_Bias_Motivation_by_Location_2022.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                }
+            },
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_10_Incidents_Bias_Motivation_by_Location_2023.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 2,
+                    "usecols": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                }
+            }
+        },
+        "11": {
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_11_Offenses_Offense_Type_by_Participating_State_and_Federal_2020.xlsx",
+                "args": {
+                    "header": 6,
+                    "skipfooter": 6
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_11_Offenses_Offense_Type_by_Participating_State_and Federal_2021.xls",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 11
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_11_Offenses_Offense_Type_by_Participating_State_Territory_and Federal_2022.xlsx",
+                
+                "args": {
+                    "header": 5,
+                    "skipfooter": 11
+                }
+            },
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_11_Offenses_Offense_Type_by_Participating_State_and Federal_2023.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter" : 11
+                }
+            }
+        },
+        "12": {
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_12_Agency_Hate_Crime_Reporting_by_State_and_Federal_2020.xlsx",
+                "args": {
+                    "header": 3,
+                    "skipfooter": 32,
+                    "usecols": [0, 1, 2, 3, 4]
+                }
+            },
+            "2021": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_12_Agency_Hate_Crime_Reporting_by_State_and_Federal_2021.xls",
+                "args": {
+                    "header": 2,
+                    "skipfooter": 44,
+                    "usecols": [0, 1, 2, 3, 4]
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_12_Agency_Hate_Crime_Reporting_by_State_Territory_and_Federal_2022.xlsx",
+                "args": {
+                    "header": 2,
+                    "skipfooter": 47,
+                    "usecols": [0, 1, 2, 3, 4]
+                }
+            },
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_12_Agency_Hate_Crime_Reporting_by_State_and_Federal_2023.xlsx",
+                "args": {
+                    "header": 2,
+                    "skipfooter" : 60,
+                    "usecols": [0, 1, 2, 3, 4]
+                }
+            }
+        },
+        "13": {
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_13_Hate_Crime_Incidents_per_Bias_Motivation_and_Quarter_by_State_Federal_and_Agency_2020.xlsx",
+                "args": {
+                    "header": 6,
+                    "skipfooter": 3
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_13_Hate_Crime_Incidents_per_Bias_Motivation_and_Quarter_by_State_Federal_and_Agency_2021.xls",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 3
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_13_Hate_Crime_Incidents_per_Bias_Motivation_and_Quarter_by_State_Territory_Federal_and_Agency_2022.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 4
+                }
+            },
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_13_Hate_Crime_Incidents_per_Bias_Motivation_and_Quarter_by_State_Federal_and_Agency_2023.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 3
+                }
+            }
+        },
+        "14": {
+            "2020": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2020_data/Table_14_Hate_Crime_Zero_Data_Submitted_per_Quarter_by_State_Federal_and_Agency_2020.xlsx",
+                "args": {
+                    "header": 6,
+                    "skipfooter": 3
+                }
+            },
+            "2021": {
+                "type": "xls",
+                "path": "hate_crime_publication_data/hate_crime_publication_2021_data/Table_14_Hate_Crime_Zero_Data_Submitted_per_Quarter_by_State_Federal_and_Agency_2021.xls",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 3
+                }
+            },
+            "2022": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2022_data/Table_14_Hate_Crime_Zero_Data_Submitted_per_Quarter_by_State_Federal_and_Agency_2022.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 3
+                }
+            },
+            "2023": {
+                "type": "xlsx",
+                "path": "hate_crime_publication_data/hate_crime_publication_2023_data/Table_14_Hate_Crime_Zero_Data_Submitted_per_Quarter_by_State_Federal_and_Agency_2023.xlsx",
+                "args": {
+                    "header": 5,
+                    "skipfooter": 3
+                }
+            }
+        }
+    }
+}
+

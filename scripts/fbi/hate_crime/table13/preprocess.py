@@ -22,6 +22,7 @@ import pandas as pd
 
 from absl import app
 from absl import flags
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -31,7 +32,11 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../util/'))  # state map
 import geo_id_resolver
 import utils
 from name_to_alpha2 import USSTATE_MAP_SPACE
+import file_util
 
+flags.DEFINE_string('config_file',
+                    os.path.join(_SCRIPT_PATH, '../table_config.json'),
+                    'Input config file')
 flags.DEFINE_string(
     'output_dir', _SCRIPT_PATH, 'Directory path to write the cleaned CSV and'
     'MCF. Default behaviour is to write the artifacts in the current working'
@@ -49,151 +54,6 @@ _YEAR_INDEX = 0
 # Columns in final cleaned CSV
 _OUTPUT_COLUMNS = ('Year', 'Geo', 'StatVar', 'ObsDate', 'ObsPeriod', 'Quantity')
 _UNRESOLVED_GEOS = set()
-
-# A config that maps the year to corresponding xls file with args to be used
-# with pandas.read_excel().
-_YEARWISE_CONFIG = {
-    '2020': {
-        'type': 'xls',
-        'path': '../source_data/2020/table_13.xlsx',
-        'args': {
-            'header': 6,
-            'skipfooter': 3
-        }
-    },
-    '2019': {
-        'type': 'xls',
-        'path': '../source_data/2019/table_13.xls',
-        'args': {
-            'header': 5,
-            'skipfooter': 3
-        }
-    },
-    '2018': {
-        'type': 'xls',
-        'path': '../source_data/2018/table_13.xls',
-        'args': {
-            'header': 5,
-            'skipfooter': 4
-        }
-    },
-    '2017': {
-        'type': 'xls',
-        'path': '../source_data/2017/table_13.xls',
-        'args': {
-            'header': 5,
-            'skipfooter': 3
-        }
-    },
-    '2016': {
-        'type': 'xls',
-        'path': '../source_data/2016/table_13.xls',
-        'args': {
-            'header': 5,
-            'skipfooter': 3
-        }
-    },
-    '2015': {
-        'type': 'xls',
-        'path': '../source_data/2015/table_13.xls',
-        'args': {
-            'header': 5,
-            'skipfooter': 3
-        }
-    },
-    '2014': {
-        'type': 'xls',
-        'path': '../source_data/2014/table_13.xls',
-        'args': {
-            'header': 5,
-            'skipfooter': 3,
-            'usecols': list(range(0, 15))
-        }
-    },
-    '2013': {
-        'type': 'xls',
-        'path': '../source_data/2013/table_13.xls',
-        'args': {
-            'header': 5,
-            'skipfooter': 4,
-            'usecols': list(range(0, 15))
-        }
-    },
-    '2012': {
-        'type': 'xls',
-        'path': '../source_data/2012/table_13.xls',
-        'args': {
-            'header': 5,
-            'skipfooter': 4,
-            'usecols': list(range(0, 13))
-        }
-    },
-    '2011': {
-        'type': 'xls',
-        'path': '../source_data/2011/table_13.xls',
-        'args': {
-            'header': 4,
-            'skipfooter': 4
-        }
-    },
-    '2010': {
-        'type': 'xls',
-        'path': '../source_data/2010/table_13.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 4
-        }
-    },
-    '2009': {
-        'type': 'xls',
-        'path': '../source_data/2009/table_13.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 4
-        }
-    },
-    '2008': {
-        'type': 'xls',
-        'path': '../source_data/2008/table_13.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 3
-        }
-    },
-    '2007': {
-        'type': 'xls',
-        'path': '../source_data/2007/table_13.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 4
-        }
-    },
-    '2006': {
-        'type': 'xls',
-        'path': '../source_data/2006/table_13.xls',
-        'args': {
-            'header': 2,
-            'skipfooter': 2
-        }
-    },
-    '2005': {
-        'type': 'xls',
-        'path': '../source_data/2005/table_13.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 1
-        }
-    },
-    '2004': {
-        'type': 'xls',
-        'path': '../source_data/2004/table_13.xls',
-        'args': {
-            'header': 3,
-            'skipfooter': 1,
-            'usecols': list(range(0, 7))
-        }
-    }
-}
 
 
 def _write_row(year: int, geo: str, statvar_dcid: str, obs_date: str,
@@ -303,92 +163,22 @@ def _write_output_csv(reader: csv.DictReader, writer: csv.DictWriter,
     return statvars
 
 
-def _clean_dataframe(df: pd.DataFrame, year: str):
+def _clean_dataframe(df: pd.DataFrame, year: str, table_num: str):
     """Clean the column names and offense type values in a dataframe."""
-    if year in ['2020']:
-        df.columns = [
-            'state', 'agency type', 'agency', 'agency unit', 'r/e/a',
-            'religion', 'sexual orientation', 'disability', 'gender',
-            'gender identity', '1st quarter', '2nd quarter', '3rd quarter',
-            '4th quarter', 'population'
-        ]
-
-        df.drop(['agency unit', 'population'], axis=1, inplace=True)
-
-    elif year in ['2019', '2018', '2017', '2016', '2015']:
-        df.columns = [
-            'state', 'agency type', 'agency', 'r/e/a', 'religion',
-            'sexual orientation', 'disability', 'gender', 'gender identity',
-            '1st quarter', '2nd quarter', '3rd quarter', '4th quarter',
-            'population'
-        ]
-
-        df.drop(['population'], axis=1, inplace=True)
-
-    elif year in ['2014', '2013']:
-        df.columns = [
-            'state', 'agency type', 'agency', 'race', 'religion',
-            'sexual orientation', 'ethnicity', 'disability', 'gender',
-            'gender identity', '1st quarter', '2nd quarter', '3rd quarter',
-            '4th quarter', 'population'
-        ]
-
-        df.drop(['population'], axis=1, inplace=True)
-
-    elif year in ['2012', '2011', '2010', '2009', '2008', '2007']:
-        df.columns = [
-            'state', 'agency type', 'agency', 'race', 'religion',
-            'sexual orientation', 'ethnicity', 'disability', '1st quarter',
-            '2nd quarter', '3rd quarter', '4th quarter', 'population'
-        ]
-
-        df.drop(['population'], axis=1, inplace=True)
-
-    elif year in ['2006']:
-        df.columns = [
-            'state', 'agency type', 'agency', 'quarters reported', 'race',
-            'religion', 'sexual orientation', 'ethnicity', 'disability',
-            'population'
-        ]
-
-        df.drop(['quarters reported', 'population'], axis=1, inplace=True)
-
-    else:  # 2005, 2004
-        df.columns = [
-            'agency', 'quarters reported', 'race', 'religion',
-            'sexual orientation', 'ethnicity', 'disability'
-        ]
-        df['agency'] = df['agency'].str.strip()
-
-        # Assigning states
-        agencies = list(df['agency'])
-        states = list()
-        agency_type_list = list()
-        possible_agency_types = ('Cities', 'Metropolitan Counties',
-                                 'Universities and Colleges',
-                                 'Nonmetropolitan Counties',
-                                 'State Police Agencies')
-
-        # The agency column has state names in uppercase
-        for agency in agencies:
-            if agency.isupper():  # state
-                curr_state = agency
-                curr_agency_type = 'Cities'
-            if agency in possible_agency_types:
-                curr_agency_type = agency
-            agency_type_list.append(curr_agency_type)
-            states.append(curr_state)
-
-        df['state'] = states
-        df['agency type'] = agency_type_list
-
-        # Removing aggregated total counts of cities
-        df = df[df['agency'] != 'Cities']
-
-        # Retaining only cities and states
-        df = df[df['agency type'] == 'Cities']
-        df.drop(['quarters reported'], axis=1, inplace=True)
-
+    year_config = _YEARWISE_CONFIG['table_config'][table_num]
+    if year_config:
+        if isinstance(year_config, list):
+            df.columns = year_config
+        else:
+            for year_range_str, columns in year_config.items():
+                year_range = year_range_str.split(",")
+                if year in year_range:
+                    df.columns = columns
+    #Dropping unwanted columns, need to drop population,agency unit from 2020 data and population column from other year data
+    df.drop(['population', 'agency unit'],
+            axis=1,
+            inplace=True,
+            errors='ignore')
     df['state'] = df['state'].fillna(method='ffill')
     df['agency type'] = df['agency type'].fillna(method='ffill')
 
@@ -415,14 +205,27 @@ def _clean_dataframe(df: pd.DataFrame, year: str):
 
 
 def main(argv):
+    global _YEARWISE_CONFIG
     csv_files = []
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        for year, config in _YEARWISE_CONFIG.items():
-            xls_file_path = os.path.join(_SCRIPT_PATH, config['path'])
-            csv_file_path = os.path.join(tmp_dir, year + '.csv')
+    table_num = '13'
+    #loading config from GCS location
+    with file_util.FileIO(_FLAGS.config_file, 'r') as f:
+        _YEARWISE_CONFIG = json.load(f)
+    config = _YEARWISE_CONFIG['year_config']
+    tmp_dir = '.'
+    if table_num not in config:
+        logging.fatal(
+            f"Error: Key {table_num} not found in the config. Please ensure the configuration for section {table_num} is present."
+        )
 
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        for year, config in config[table_num].items():
+            xls_file_path = config['path']
+            xls_file_path = os.path.join(_SCRIPT_PATH, '../', xls_file_path)
+            csv_file_path = os.path.join(tmp_dir, year + '.csv')
+            logging.info(f"Processing : {xls_file_path}")
             read_file = pd.read_excel(xls_file_path, **config['args'])
-            read_file = _clean_dataframe(read_file, year)
+            read_file = _clean_dataframe(read_file, year, table_num)
             read_file.insert(_YEAR_INDEX, 'Year', year)
             read_file.to_csv(csv_file_path, header=True, index=False)
             csv_files.append(csv_file_path)
@@ -431,7 +234,8 @@ def main(argv):
         with open(config_path, 'r', encoding='utf-8') as f:
             config = json.load(f)
 
-        cleaned_csv_path = os.path.join(_FLAGS.output_dir, 'cleaned.csv')
+        cleaned_csv_path = os.path.join(_FLAGS.output_dir,
+                                        f'table{table_num}_output.csv')
         statvars = utils.create_csv_mcf(csv_files, cleaned_csv_path, config,
                                         _OUTPUT_COLUMNS, _write_output_csv)
         if _FLAGS.gen_statvar_mcf:
