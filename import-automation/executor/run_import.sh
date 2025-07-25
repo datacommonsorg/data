@@ -28,7 +28,7 @@
 # ./run_import.sh ../../scripts/us_fed/treasury_constant_maturity_rates/manifest.json
 #
 GCP_PROJECT="datcom-ci"
-REGION="us-central"
+REGION="us-central1"
 GCS_BUCKET="datcom-import-test"
 SCRIPT_DIR=$(realpath $(dirname $0))
 DATA_REPO=$(realpath $(dirname $0)/../../)
