@@ -1,0 +1,7 @@
+param,value
+mapped_rows,4
+mapped_columns,1
+start_date,2011
+end_date,2021
+input_rows,41
+output_columns,"observationAbout,observationDate,value,variableMeasured"
