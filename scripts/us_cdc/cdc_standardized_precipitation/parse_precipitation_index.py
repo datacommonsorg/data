@@ -1,4 +1,4 @@
-# Copyright 2025 Google LLC
+# Copyright 2021 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
 # limitations under the License.
 '''
 Author: Padma Gundapaneni @padma-g
+Updated by author: Vishal K
 Date: 7/28/21
 Description: This script cleans up a csv file on county level
 precipitation data downloaded from the CDC.
@@ -24,7 +25,10 @@ python3 parse_precipitation_index.py input_files output_files
 
 import sys
 import pandas as pd
+from absl import logging
 import os  # Import the os module for path operations
+
+logging.set_verbosity(logging.INFO)
 
 
 def main():
@@ -42,14 +46,14 @@ def clean_precipitation_data(file_path, output_file):
     Returns:
         a cleaned csv file
     """
-    print("Cleaning file...")
+    logging.info("Cleaning file...")
 
     # Extract the directory from the output_file path
     output_dir = os.path.dirname(output_file)
     # If the directory is not empty, create it if it doesn't exist
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
-        print(f"Ensured output directory '{output_dir}' exists.")
+        logging.info(f"Ensured output directory '{output_dir}' exists.")
 
     data = pd.DataFrame(pd.read_csv(file_path))
     data["month"] = data["month"].map("{:02}".format)
@@ -98,7 +102,7 @@ def clean_precipitation_data(file_path, output_file):
             value_name='Value')
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
     data.to_csv(output_file, index=False)
-    print("Finished cleaning file!")
+    logging.info("Finished cleaning file!")
 
 
 if __name__ == "__main__":

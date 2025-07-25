@@ -36,7 +36,6 @@ class TestParsePrecipitationData(unittest.TestCase):
         """
         Tests the clean_precipitation_data function.
         """
-        print(module_dir_)
         test_csv = os.path.join(module_dir_, 'test_data/small_Palmer.csv')
         output_csv = os.path.join(module_dir_,
                                   'test_data/small_Palmer_output.csv')
