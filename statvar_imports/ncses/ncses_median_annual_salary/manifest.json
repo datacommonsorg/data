@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NCSES_Median_Annual_Salary_Import",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://ncses.nsf.gov/pubs/nsf23306#section13069",
+            "provenance_description": "Median salary of full-time employed college graduates, by sex, major occupation, age, ethnicity, race, disability status, and citizenship status",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/nsf*.xlsx --pv_map=config/median_annual_salary_pvmap.csv --config_file=median_annual_salary_metadata.csv --output_path=output/ncses_median_annual_salary"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/ncses_median_annual_salary.tmcf",
+                    "cleaned_csv": "output/ncses_median_annual_salary.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*"
+            ],
+            "cron_schedule": "30 05 13,27 * *"
+        }
+    ]
+}
