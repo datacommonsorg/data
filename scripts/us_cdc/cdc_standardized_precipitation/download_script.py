@@ -111,7 +111,8 @@ def process_downloads(import_name: str, config_file: str,
         with open(config_file, "r") as f:
             configs = json.load(f)
     except (IOError, json.JSONDecodeError) as e:
-        logging.fatal(f"Failed to read or parse config file '{config_file}': {e}")
+        logging.fatal(
+            f"Failed to read or parse config file '{config_file}': {e}")
         return False
 
     import_config = next(
@@ -136,13 +137,15 @@ def process_downloads(import_name: str, config_file: str,
         target_dir = os.path.dirname(target_filename) or "."
         is_zip = url.lower().endswith(".zip")
         full_url = url
-      
+
         # For CSV files from data.cdc.gov, attempt to get the full dataset
         parsed_url = urllib.parse.urlparse(url)
-        if parsed_url.path.endswith(".csv") and parsed_url.hostname == "data.cdc.gov":
+        if parsed_url.path.endswith(
+                ".csv") and parsed_url.hostname == "data.cdc.gov":
             count_url = url.replace(".csv", record_count_query)
             try:
-                logging.info(f"Attempting to get record count from: {count_url}")
+                logging.info(
+                    f"Attempting to get record count from: {count_url}")
                 with urllib.request.urlopen(count_url, timeout=30) as response:
                     if response.status == 200:
                         count_data = json.loads(response.read().decode("utf-8"))

@@ -24,7 +24,7 @@ python3 parse_precipitation_index.py input_files output_files
 
 import sys
 import pandas as pd
-import os # Import the os module for path operations
+import os  # Import the os module for path operations
 
 
 def main():
