@@ -1,0 +1,138 @@
+[
+  {
+    "validation_name": "check_max_date_latest",
+    "status": "FAILED",
+    "message": "Latest date found was 2023, expected 2025.",
+    "details": {
+      "latest_date_found": 2023,
+      "expected_latest_date": 2025,
+      "rows_processed": 4,
+      "rows_succeeded": 0,
+      "rows_failed": 4
+    },
+    "validation_params": {}
+  },
+  {
+    "validation_name": "check_max_date_consistent",
+    "status": "PASSED",
+    "message": "",
+    "details": {
+      "rows_processed": 4,
+      "rows_succeeded": 4,
+      "rows_failed": 0
+    },
+    "validation_params": {}
+  },
+  {
+    "validation_name": "check_deleted_count",
+    "status": "PASSED",
+    "message": "",
+    "details": {
+      "rows_processed": 3,
+      "rows_succeeded": 3,
+      "rows_failed": 0
+    },
+    "validation_params": {
+      "threshold": 5
+    }
+  },
+  {
+    "validation_name": "check_num_places_consistent",
+    "status": "PASSED",
+    "message": "",
+    "details": {
+      "rows_processed": 2,
+      "rows_succeeded": 2,
+      "rows_failed": 0
+    },
+    "validation_params": {}
+  },
+  {
+    "validation_name": "check_min_value",
+    "status": "PASSED",
+    "message": "",
+    "details": {
+      "rows_processed": 4,
+      "rows_succeeded": 4,
+      "rows_failed": 0
+    },
+    "validation_params": {
+      "minimum": 0
+    }
+  },
+  {
+    "validation_name": "check_max_value_for_percent",
+    "status": "FAILED",
+    "message": "1 out of 1 StatVars failed the maximum value check.",
+    "details": {
+      "failed_rows": [
+        {
+          "stat_var": "UnemploymentRate_Person_Percent",
+          "actual_max_value": 105,
+          "maximum": 100
+        }
+      ],
+      "rows_processed": 1,
+      "rows_succeeded": 0,
+      "rows_failed": 1
+    },
+    "validation_params": {
+      "maximum": 100
+    }
+  },
+  {
+    "validation_name": "check_max_value_for_percent_sql",
+    "status": "FAILED",
+    "message": "1 rows failed the SQL validation.",
+    "details": {
+      "failing_rows": [
+        {
+          "StatVar": "UnemploymentRate_Person_Percent",
+          "NumPlaces": 1,
+          "NumObservations": 1,
+          "MinValue": 5,
+          "MaxValue": 105,
+          "NumObservationsDates": 1,
+          "MinDate": "2023-01-01",
+          "MaxDate": "2023-01-01 00:00:00",
+          "MeasurementMethods": "[]",
+          "Units": "Percent",
+          "ScalingFactors": "[]",
+          "observationPeriods": "[]"
+        }
+      ]
+    },
+    "validation_params": {
+      "query": "SELECT * FROM stats WHERE Units = 'Percent'",
+      "condition": "MaxValue <= 100"
+    }
+  },
+  {
+    "validation_name": "check_num_observations",
+    "status": "PASSED",
+    "message": "",
+    "details": {
+      "rows_processed": 4,
+      "rows_succeeded": 4,
+      "rows_failed": 0
+    },
+    "validation_params": {
+      "minimum": 1
+    }
+  },
+  {
+    "validation_name": "check_unit_consistency",
+    "status": "FAILED",
+    "message": "Found 2 unique units where 1 was expected.",
+    "details": {
+      "unique_units": [
+        "[]",
+        "Percent"
+      ],
+      "rows_processed": 4,
+      "rows_succeeded": 0,
+      "rows_failed": 4
+    },
+    "validation_params": {}
+  }
+]

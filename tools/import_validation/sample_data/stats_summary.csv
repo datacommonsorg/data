@@ -1,0 +1,5 @@
+StatVar,NumPlaces,NumObservations,MinValue,MaxValue,NumObservationsDates,MinDate,MaxDate,MeasurementMethods,Units,ScalingFactors,observationPeriods
+Count_Person,1,1,100,100,1,2023-01-01,2023-01-01,[],[],[],[]
+Count_Person_Male,1,1,50,50,1,2023-01-01,2023-01-01,[],[],[],[]
+Count_Person_Female,1,1,50,50,1,2023-01-01,2023-01-01,[],[],[],[]
+UnemploymentRate_Person_Percent,1,1,5,105,1,2023-01-01,2023-01-01,[],Percent,[],[]
