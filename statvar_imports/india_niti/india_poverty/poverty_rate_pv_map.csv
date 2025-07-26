@@ -1,0 +1,11 @@
+key,prop,value,prop2,value2,prop3,value3,,
+Place,observationAbout,{Data},unit,Percent,,,,
+Year,observationDate,{Number},populationType,Person,povertyStatus,BelowPovertyLevelInThePast12Months,,
+No. Persons (Lakh),value,{Number},#Multiply,100000,,,,
+Percentage,value,{Number},measurementDenominator,Count_Person,unit,Percent,scalingFactor,100
+Rural,placeOfResidenceClassification,Rural,,,,,,
+Urban,placeOfResidenceClassification,Urban,,,,,,
+Combined,placeOfResidenceClassification,"""""",value,{Number},unit,Percent,,
+SC,value,{Number},socialCategory,ScheduledCaste,,,,
+OBC,value,{Number},socialCategory,OtherBackwardClass,,,,
+All,value,{Number},,,,,,

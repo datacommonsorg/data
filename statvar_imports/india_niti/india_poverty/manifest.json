@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "IndiaPoverty",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://socialjustice.gov.in/common/76672",
+            "provenance_description": "India Poverty rate calculation for all States in India in terms to urban, rural and social category",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=test_data/sample_input/poverty_data.csv --pv_map=poverty_rate_pv_map.csv --config_file=poverty_rate_metadata.csv --output_path=test_data/sample_output"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "test_data/sample_output/poverty_rate.tmcf",
+                    "cleaned_csv": "test_data/sample_output/poverty_data.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/poverty_data.csv"
+            ],
+            "cron_schedule": "30 09 * * 5"
+        }
+    ]
+}
