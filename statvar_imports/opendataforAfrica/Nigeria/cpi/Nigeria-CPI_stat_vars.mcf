@@ -1,0 +1,755 @@
+# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/bipina/Nigeria/data/statvar_imports/opendata/cpi/Nigeria_CPI_data.csv --pv_map=https://docs.google.com/spreadsheets/d/1m_nzYFSHJbe8SbsaMp_ynhsA876t9mkhQLTdAUNbud4/edit?resourcekey=0-1NSQLrTGVdOjpbhIn4-pOg&gid=508087657#gid=508087657 --config=/usr/local/google/home/bipina/Nigeria/data/statvar_imports/opendata/cpi/Nigeria_CPI_metadata.csv --existing_statvar_mcf=stat_vars.mcf --output_path=/usr/local/google/home/bipina/Nigeria/data/statvar_imports/opendata/cpi/Nigeria-CPI" on 2024-06-27 07:01:08.061283
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Accommodation
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Accommodation services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Accommodation
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_AlcoholicBeveragesOrTobaccoOrNarcotics
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Alcoholic Beverage, Tobacco and Narcotics"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:AlcoholicBeverages__Tobacco__Narcotics
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_AllItems
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of All Items"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:AllItems
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_AllItemsExceptFarmProductAndEnergy
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of All Items less Farm Produce and Energy"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:AllItemsExceptFarmProductAndEnergy
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_AllItemsExceptFarmProducts
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of All Items less Farm Produce"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:AllItemsExceptFarmProducts
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_AppliancesOrArticleOrPersonalCareProducts
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Appliances, articles and products for personal care"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Appliances__Article__PersonalCareProducts
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Bicycles
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Bicycles"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Bicycles
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_BookOrStationaries
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Books & Stationeries"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Book__Stationaries
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_BreadOrCereals
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Bread and Cereals"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Bread__Cereals
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_CarpetsAndFloorCoverings
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Carpets and other floor coverings"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:CarpetsAndFloorCoverings
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_CateringServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Catering services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:CateringServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_ClothingAccessories
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Clothing materials, other articles of clothing and clothing accessories"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:ClothingAccessories
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_ClothingOrFootwear
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Clothing and Footwear"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Clothing__Footwear
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_CoffeeOrTeaOrCocoa
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Coffee, tea and cocoa"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Coffee__Tea__Cocoa
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Communication
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Communication"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Communication
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_DentalServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Dental services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:DentalServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_DomesticServicesOrHouseholdServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Domestic services and household services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:DomesticServices__HouseholdServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_DwellingRelatedServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Miscellaneous services relating to the dwelling"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:DwellingRelatedServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Education
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Education"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Education
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Electricity
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Electricity"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Electricity
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Fish
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Fish"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Fish
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Food
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Food"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Food
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_FoodOrNonAlcoholicBeverages
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Food And Non Alcoholic Beverages"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Food__NonAlcoholicBeverages
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_FoodProducts
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Food products"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:FoodProducts
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Fruit
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Fruit"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Fruit
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_FuelOrLubricant_PersonalTransportEquipment
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Fuels and lubricants for personal transport equipment"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Fuel__Lubricant
+usedFor: dcid:PersonalTransportEquipment
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_FurnitureOrFurnishings
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Furniture and furnishings"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Furniture__Furnishings
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_GamesOfChances
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Games of chance"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:GamesOfChances
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Garments
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Garments"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Garments
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Gas
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Gas"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Gas
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_GlasswareOrTablewareOrHouseholdUtensils
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Glassware, tableware and household utensils"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Glassware__Tableware__HouseholdUtensils
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_HaircutsAndOtherPersonalCareServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Hairdressing salons and personal grooming establishments"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:HaircutsAndOtherPersonalCareServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Health
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Health"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Health
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_HospitalServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Hospital services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:HospitalServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_HouseholdEquipmentOrFurnishings
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Furnishings & Household Equipment Maintenance"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:HouseholdEquipment__Furnishings
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_HouseholdTextiles
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Household textiles"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:HouseholdTextiles
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_HousingRentals
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Actual and imputed rentals for housing"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:HousingRentals
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_ImportedFood
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Imported Food"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:ImportedFood
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Insurance
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Insurance"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Insurance
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_JewelryAndWatches
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Jewellery, clocks and watches"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:JewelryAndWatches
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_LaundryAndDryCleaningServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Cleaning, repair and hire of clothing"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:LaundryAndDryCleaningServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_LiquidFuel
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Liquid Fuel"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:LiquidFuel
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_MaintenanceAndRepair_PersonalTransportEquipment
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Maintenance and repair of personal transport equipment"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:MaintenanceAndRepair
+usedFor: dcid:PersonalTransportEquipment
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Meat
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Meat"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Meat
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_MedicalCareServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Medical Services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:MedicalCareServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_MilkOrCheeseOrEggs
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Milk, cheese and eggs"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Milk__Cheese__Eggs
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_MiscellaneousGoodsAndServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Miscellaneous Goods and Services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:MiscellaneousGoodsAndServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_MotorVehiclePartsAndEquipment
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Vehicle Spare Parts"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:MotorVehiclePartsAndEquipment
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Motorcars
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Motor cars"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Motorcars
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Motorcycles
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Motor cycles"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Motorcycles
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_MusicInstrumentsAndAccessories
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Musical Instrument"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:MusicInstrumentsAndAccessories
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_NGAOtherServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Other services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:NGA_OtherServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_NGAOtherServices_PersonalTransportEquipment
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Other services in respect of personal transport equipment"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:NGA_OtherServices
+usedFor: dcid:PersonalTransportEquipment
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Narcotics
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Narcotics"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Narcotics
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_NonDurableHouseholdGoods
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Non-durable household goods"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:NonDurableHouseholdGoods
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_OilOrFats
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Oils and fats"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Oil__Fats
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_ParamedicalServices
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Paramedical services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:ParamedicalServices
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_PassengerTransport_ByAir
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Passenger transport by air"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:PassengerTransport
+modeOfTransportation: dcid:ByAir
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_PassengerTransport_ByRoad
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Passenger transport by road"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:PassengerTransport
+modeOfTransportation: dcid:ByRoad
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_PassengerTransport_BySeaOrInlandWaterway
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Passenger transport by sea and inland waterway"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:PassengerTransport
+modeOfTransportation: dcid:BySea__InlandWaterway
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Pharmaceutical
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Pharmaceutical products"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Pharmaceutical
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_PhotographicDevelopment
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Photographic Development"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:PhotographicDevelopment
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Postage
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Postal services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Postage
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_PotatoesOrYam
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Potatoes,Yam & Other Tubers"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Potatoes__Yam
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_RecreationAndCulture
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Recreation and Culture"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:RecreationAndCulture
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_RecreationalAndSportsProducts
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Recreational and sporting services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:RecreationalAndSportsProducts
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_RepairAndHireOfFootwear
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Repair & hire of Footwear"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:RepairAndHireOfFootwear
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_RepairOfFurniture
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Repair of Furniture"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:RepairOfFurniture
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_RepairOfHouseholdAppliances
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Repair of household appliances"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:RepairOfHouseholdAppliances
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_RestaurantOrHotel
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Restaurant & Hotels"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Restaurant__Hotel
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_ShoesAndOtherFootwear
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Shoes and other footwear"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:ShoesAndOtherFootwear
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_SoftDrinks
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Soft Drinks"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:SoftDrinks
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_SolidFuel
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Solid Fuels"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:SolidFuel
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Spirits
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Spirits"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Spirits
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_TelephoneAndTelefaxEquipment
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Telephone and telefax equipment"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:TelephoneAndTelefaxEquipment
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_TelephoneAndTelefaxService
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Telephone and telefax services"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:TelephoneAndTelefaxService
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Tobacco
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Tobacco"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Tobacco
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_TransportSector
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Transport"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:TransportSector
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Vegetable
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Vegetables"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Vegetable
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_VideoAndAudioProductsOrPhotographicEquipment
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Audio-visual, photographic and information processing equipment"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:VideoAndAudioProducts__PhotographicEquipment
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_WaterOrElectricityOrGasOrOtherFuels
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Housing Water, Electricity, Gas and Other Fuel"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Water__Electricity__Gas__OtherFuels
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_WaterSupply
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Water supply"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:WaterSupply
+
+Node: dcid:ConsumerPriceIndex_ConsumerGoodsAndServices_UrbanConsumer_Wine
+typeOf: dcid:StatisticalVariable
+name: "Consumer price index of Wine"
+populationType: dcid:ConsumerGoodsAndServices
+measuredProperty: dcid:consumerPriceIndex
+statType: dcid:measuredValue
+consumer: dcid:UrbanConsumer
+consumerGoodsCategory: dcid:Wine
+
