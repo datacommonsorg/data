@@ -16,6 +16,11 @@ This Python Script is for State Level Data 1970-1979.
 '''
 import os
 import pandas as pd
+import requests
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 from common_functions import (input_url, gender_based_grouping,
                               race_based_grouping)
 
@@ -27,11 +32,14 @@ def state1970(url_file: str, output_folder: str):
       '''
 
     _url = input_url(url_file, "1970-79")
-    df = pd.read_csv(_url, skiprows=5, encoding='ISO-8859-1')
+    file_name = 'raw_data_state_1970_1979.csv'
+    file_path = get_api_response(file_name, _url, 1)
+    df = pd.read_csv(file_path,
+                     engine='python',
+                     skiprows=5,
+                     encoding='ISO-8859-1')
     #Writing raw data to csv
-    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                           "raw_data", 'raw_data_state_1970_1979.csv'),
-              index=False)
+    df.to_csv(file_path, index=False)
 
     df.insert(1, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['FIPS State Code'].map(str)).str.zfill(2)
