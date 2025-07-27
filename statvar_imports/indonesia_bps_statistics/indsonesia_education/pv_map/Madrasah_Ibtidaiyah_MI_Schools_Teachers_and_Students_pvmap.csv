@@ -1,0 +1,12 @@
+key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
+Provinsi,observationAbout,{Data},,,measuredProperty,count,schoolManagement,UnderMinistryOfReligion,,
+Jumlah Sekolah MI (Negeri),populationType,School,levelOfSchool,MadrasahIbtidaiyah,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Sekolah MI (Negeri)@id"""
+Jumlah Sekolah MI (Swasta),populationType,School,levelOfSchool,MadrasahIbtidaiyah,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah MI (Swasta)@id"""
+Jumlah Sekolah MI (Negeri+Swasta),populationType,School,levelOfSchool,MadrasahIbtidaiyah,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Sekolah MI (Negeri+Swasta)@id"""
+Jumlah Guru MI (Negeri),populationType,Teacher,levelOfSchool,MadrasahIbtidaiyah,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Guru MI (Negeri)@id"""
+Jumlah Guru MI (Swasta),populationType,Teacher,levelOfSchool,MadrasahIbtidaiyah,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru MI (Swasta)@id"""
+Jumlah Guru MI (Negeri+Swasta),populationType,Teacher,levelOfSchool,MadrasahIbtidaiyah,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Guru MI (Negeri+Swasta)@id"""
+Jumlah Murid MI (Negeri),populationType,Student,levelOfSchool,MadrasahIbtidaiyah,establishmentOwnership,LocalGovernmentOwned,value,{Number},alternateName,"""Jumlah Murid MI (Negeri)@id"""
+Jumlah Murid MI (Swasta),populationType,Student,levelOfSchool,MadrasahIbtidaiyah,establishmentOwnership,PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid MI (Swasta)@id"""
+Jumlah Murid MI (Negeri+Swasta),populationType,Student,levelOfSchool,MadrasahIbtidaiyah,establishmentOwnership,LocalGovernmentOwned__PrivatelyOwned,value,{Number},alternateName,"""Jumlah Murid MI (Negeri+Swasta)@id"""
+observationDate,observationDate,{Data},,,,,,,,
