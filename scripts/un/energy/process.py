@@ -101,7 +101,6 @@ def _print_counters(counters, steps=None):
         if 'inputs_processed' in counters:
             start_ts = counters['time_start']
             end_ts = time.perf_counter()
-            
 
 
 def _add_error_counter(counter_name: str, error_msg: str, counters):
@@ -440,7 +439,7 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
     sv_pv = {}
     sv_id = generate_stat_var(data_row, sv_pv, counters)
     sv_id = rename_the_mapping_value(sv_id, new_mapping_names)
-   
+
     if not sv_id:
         return
     data_row['StatVar'] = sv_id
@@ -476,7 +475,6 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
     counters['output_csv_rows'] += 1
 
 
-
 def rename_the_mapping_value(sv_id, mapping_names):
     # Renaming the mapping value.
     if sv_id is not None:
@@ -487,7 +485,7 @@ def rename_the_mapping_value(sv_id, mapping_names):
             return new_sv_id
         else:
             return sv_id
-    
+
 
 def process(in_paths: list,
             out_path: str,
@@ -559,7 +557,8 @@ def process(in_paths: list,
     _print_counters(counters)
     _print_counters(sv_map)
     logging.info(
-        f'Processing rate: {counters["inputs_processed"] / (end_ts - start_ts):.2f} rows/sec')
+        f'Processing rate: {counters["inputs_processed"] / (end_ts - start_ts):.2f} rows/sec'
+    )
     return counters
 
 
@@ -573,7 +572,8 @@ def main(_):
         process(csv_data_files, FLAGS.output_path, FLAGS.debug_lines,
                 FLAGS.copy_input_columns)
     else:
-        logging.error(f'Please specify files to process with --csv_data_files=<,>')
+        logging.error(
+            f'Please specify files to process with --csv_data_files=<,>')
 
 
 if __name__ == '__main__':

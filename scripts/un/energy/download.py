@@ -69,7 +69,7 @@ def download_zip_file(url: str, output_dir: str) -> list:
     r = requests.get(url, stream=True)
     if r.status_code != 200:
         logging.info(f'Failed to download {url}, response code: ',
-              r.status_code)
+                     r.status_code)
         return False
     z = zipfile.ZipFile(io.BytesIO(r.content))
     z.extractall(output_dir)
@@ -106,8 +106,9 @@ def download_energy_dataset(
     output_files = []
     supported_datasets = get_all_energy_source_codes()
     if energy_dataset not in supported_datasets:
-        logging.info(f'Dataset "{energy_dataset}" not in list of supported codes:' +
-              str(supported_datasets))
+        logging.info(
+            f'Dataset "{energy_dataset}" not in list of supported codes:' +
+            str(supported_datasets))
         return output_files
     # Download data in batches of years as the download has a limit of 100k rows.
     years_list = list(range(start_year, years_per_batch + 1))
@@ -122,7 +123,9 @@ def download_energy_dataset(
         end_year = year_batch[-1]
         years_str = ','.join(year_batch)
         output = f'{output_path}-{energy_dataset}-{start_year}-{end_year}'
-        logging.info(f'Downloading UNData energy dataset: {energy_dataset} from {start_year} to {end_year}')
+        logging.info(
+            f'Downloading UNData energy dataset: {energy_dataset} from {start_year} to {end_year}'
+        )
         download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
                                             years=years_str)
         downloaded_files = download_zip_file(download_url, output)
