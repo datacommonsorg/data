@@ -32,12 +32,12 @@ from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
-    'input_file', os.path.join(_SCRIPT_PATH, 'aggregations/hate_crime_data/hate_crime.csv'),
-    'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#')
-flags.DEFINE_string(
-    'config_file',
-    os.path.join(_SCRIPT_PATH, 'config.json'),
-    'Input config file')
+    'input_file',
+    os.path.join(_SCRIPT_PATH, 'aggregations/hate_crime_data/hate_crime.csv'),
+    'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#'
+)
+flags.DEFINE_string('config_file', os.path.join(_SCRIPT_PATH, 'config.json'),
+                    'Input config file')
 
 _CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
 
