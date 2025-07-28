@@ -1,8 +1,9 @@
 import os
 import re
+from absl import logging
 
 def rename_target_file(base_path='.'):
-    folder_name = 'source_files'
+    folder_name = 'input'
     target_folder = os.path.join(base_path, folder_name)
     
     # Define the new fixed filename
@@ -12,12 +13,13 @@ def rename_target_file(base_path='.'):
     try:
         # Check if the folder exists
         if not os.path.isdir(target_folder):
+            logging.fatal(f"Folder '{folder_name}' not found in '{base_path}'")
             raise FileNotFoundError(f"Folder '{folder_name}' not found in '{base_path}'")
 
         files_in_folder = os.listdir(target_folder)
         
         if not files_in_folder:
-            print(f"Folder '{folder_name}' is empty. No file to rename.")
+            logging.info(f"Folder '{folder_name}' is empty. No file to rename.")
             return
 
         renamed = False
@@ -29,35 +31,37 @@ def rename_target_file(base_path='.'):
             
             # Skip if the file is already named as the target
             if filename == new_fixed_filename:
-                print(f"File '{new_fixed_filename}' already exists and is correctly named. No action needed.")
+                logging.info(f"File '{new_fixed_filename}' already exists and is correctly named. No action needed.")
                 renamed = True # Consider it "renamed" for the purpose of avoiding "No matching file"
                 break
 
-            print(f"Attempting to rename '{filename}' to '{new_fixed_filename}'...")
+            logging.info(f"Attempting to rename '{filename}' to '{new_fixed_filename}'...")
             try:
                 os.rename(old_path, new_path)
-                print(f"Successfully renamed '{filename}' to '{new_fixed_filename}'")
+                logging.info(f"Successfully renamed '{filename}' to '{new_fixed_filename}'")
                 renamed = True
             except PermissionError:
-                print(f"Permission denied while renaming '{filename}'. Check file permissions.")
+                logging.fatal(f"Permission denied while renaming '{filename}'. Check file permissions.")
             except FileExistsError:
-                print(f"Cannot rename '{filename}': A file named '{new_fixed_filename}' already exists in the target folder.")
+                logging.fatal(f"Cannot rename '{filename}': A file named '{new_fixed_filename}' already exists in the target folder.")
             except OSError as e:
-                print(f"OS error while renaming '{filename}': {e}")
+                logging.fatal(f"OS error while renaming '{filename}': {e}")
             break  # Rename only the first file found and exit the loop
 
         if not renamed and not files_in_folder: # This condition handles case where folder is empty, already handled above
-            print("No files found to rename in the folder.")
+            logging.info("No files found to rename in the folder.")
         elif not renamed:
-            print(f"Could not rename any file in '{folder_name}'. Check for existing target file or permissions.")
+            logging.fatal(f"Could not rename any file in '{folder_name}'. Check for existing target file or permissions.")
 
 
     except FileNotFoundError as e:
-        print(f"Error: {e}")
+        logging.fatal(f"Error: {e}")
     except PermissionError as e:
-        print(f"Permission error: {e}")
+        logging.fatal(f"Permission error: {e}")
     except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        logging.fatal(f"An unexpected error occurred: {e}")
 
 # Run it
-rename_target_file()
+if __name__ == '__main__':
+    # logging.basicConfig(level=logging.INFO) 
+    rename_target_file()
