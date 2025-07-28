@@ -27,6 +27,8 @@ from asyncio.log import logger
 import os
 import sys
 import json
+import subprocess
+import warnings
 
 import pandas as pd
 import numpy as np
@@ -49,11 +51,26 @@ from statvar_dcid_generator import get_statvar_dcid
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
-_DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   "input_files")
+_DEFAULT_INPUT_PATH = os.path.dirname(os.path.abspath(__file__))
+_GCS_OUTPUT_PATH = 'gs://unresolved_mcf/us_bts/latch/latest/gcs_output/output_files/'
 
 flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
                     "Import Data File's List")
+
+
+def _upload_to_gcs(file_path: str):
+    """Uploads a file to the GCS output path."""
+    try:
+        subprocess.run([
+            'gsutil', '-o', 'GSUtil:parallel_composite_upload_threshold=150M',
+            'cp', file_path, _GCS_OUTPUT_PATH
+        ],
+                       check=True,
+                       capture_output=True,
+                       text=True)
+        logger.info(f"Successfully uploaded {file_path} to {_GCS_OUTPUT_PATH}")
+    except (subprocess.CalledProcessError, FileNotFoundError) as e:
+        logger.error(f"Failed to upload {file_path} to GCS: {e}")
 
 
 def _promote_measurement_method(data_df: pd.DataFrame) -> pd.DataFrame:
@@ -100,6 +117,8 @@ def _column_operations(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
     """
     dtype_conv = conf.get("dtype_conv", {})
     for col, dtype in dtype_conv.items():
+        if col == 'urban_group':
+            data_df[col] = data_df[col].fillna(0)
         data_df[col] = data_df[col].astype(dtype)
 
     cols_mapper = conf.get("col_values_mapper", {})
@@ -208,10 +227,9 @@ def _process_household_transportation(input_file: str,
     # Adding Leading Zeros for Fips Code in the geoid column.
     # Before padding STATE = 9009990000
     # After padding STATE = 09009990000
-    data_df["geoid"] = data_df["geoid"].astype("str").str.pad(
-        width=PADDING["width"],
-        side=PADDING["side"],
-        fillchar=PADDING["fillchar"])
+    data_df["geoid"] = data_df["geoid"].astype("str").str.pad(width=PADDING,
+                                                              side="left",
+                                                              fillchar="0")
 
     data_df["location"] = "geoId/" + data_df["geoid"]
     data_df["year"] = file_conf["year"]
@@ -281,9 +299,12 @@ def _generate_prop(data_df: pd.DataFrame):
         unique_rows = _apply_regex(unique_rows, conf, curr_value_column)
         unique_rows[curr_value_column] = unique_rows[curr_value_column].apply(
             conf["update_value"])
-        unique_rows[curr_value_column] = unique_rows[[
-            "curr_prop", curr_value_column
-        ]].apply(conf["pv_format"], axis=1)
+
+        unique_rows[curr_value_column] = [
+            conf["pv_format"]((x[0], x[1]))
+            for x in unique_rows[["curr_prop", curr_value_column]].itertuples(
+                index=False)
+        ]
 
         curr_val_mapper = dict(
             zip(unique_rows[column], unique_rows[curr_value_column]))
@@ -349,7 +370,9 @@ def _generate_stat_var_and_mcf(data_df: pd.DataFrame):
     unique_props = data_df.drop_duplicates(subset=["all_prop"]).reset_index(
         drop=True)
 
-    unique_props = unique_props.replace('', np.nan)
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", FutureWarning)
+        unique_props = unique_props.replace('', np.nan)
 
     stat_var_with_dcs, stat_var_without_dcs = _generate_stat_vars(
         unique_props, prop_cols)
@@ -359,7 +382,6 @@ def _generate_stat_var_and_mcf(data_df: pd.DataFrame):
     data_df["sv"] = data_df["all_prop"].map(stat_var_without_dcs)
     data_df["mcf"] = data_df["all_prop"].map(mcf_mapper)
 
-    data_df = data_df.drop(columns=["all_prop"]).reset_index(drop=True)
     data_df = data_df.drop(columns=prop_cols).reset_index(drop=True)
 
     return data_df
@@ -377,8 +399,6 @@ def _write_to_mcf_file(data_df: pd.DataFrame, mcf_file_path: str):
         drop=True)
 
     mcf_ = unique_nodes_df.sort_values(by=["prop_Node"])["mcf"].tolist()
-    if URBAN_RURAL_MCF_NODE:
-        mcf_.append(URBAN_RURAL_MCF_NODE)
 
     mcf_ = "\n\n".join(mcf_)
 
@@ -393,6 +413,7 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
     1. Create stat-vars
     2. Create mcf file
     3. Create tmcf file
+    4. Splits the output into multiple csv files.
 
     Args:
         data_df (pd.DataFrame): _description_
@@ -409,7 +430,23 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
 
     data_df = _promote_measurement_method(data_df)
     data_df = data_df.sort_values(by=["year", "location", "sv"])
-    data_df[FINAL_DATA_COLS].to_csv(cleaned_csv_file_path, index=False)
+
+    base_path, ext = os.path.splitext(cleaned_csv_file_path)
+    rows_per_file = 4000000
+    file_counter = 1
+    generated_files = []
+
+    for i in range(0, len(data_df), rows_per_file):
+        chunk = data_df.iloc[i:i + rows_per_file]
+
+        part_file_path = f"{base_path}_part{file_counter}{ext}"
+
+        chunk[FINAL_DATA_COLS].to_csv(part_file_path, index=False)
+
+        generated_files.append(part_file_path)
+        file_counter += 1
+
+    return generated_files
 
 
 def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
@@ -420,32 +457,44 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     """
     final_df = pd.DataFrame()
 
-    for file_path in input_files:
+    input_files.sort()
 
-        if "latch_2017-b" in file_path:
+    for file_path in input_files:
+        conf = None
+        if "usbts_tract_household_transportation_2017_input.csv" in file_path:
             conf = CONF_2017_FILE
-        elif "NHTS_2009_transfer" in file_path:
+        elif "usbts_tract_household_transportation_2009_input.csv" in file_path:
             conf = CONF_2009_FILE
 
-        data_df = _process_household_transportation(file_path, conf)
-        data_df = data_df.dropna(subset=["observation"])
-        final_df = pd.concat([final_df, data_df])
+        if conf:
+            data_df = _process_household_transportation(file_path, conf)
+            data_df = data_df.dropna(subset=["observation"])
+            final_df = pd.concat([final_df, data_df])
 
-    _post_process(final_df, cleaned_csv_file_path, mcf_file_path,
-                  tmcf_file_path)
+    generated_csvs = []
+    if not final_df.empty:
+        generated_csvs = _post_process(final_df, cleaned_csv_file_path,
+                                       mcf_file_path, tmcf_file_path)
+    return generated_csvs
 
 
 def main(_):
 
     input_path = _FLAGS.input_path
     try:
-        ip_files = os.listdir(input_path)
+        ip_files = [
+            f for f in os.listdir(input_path) if f.endswith('_input.csv')
+        ]
+        if not ip_files:
+            raise FileNotFoundError
     except FileNotFoundError:
-        logger.error("Run the download.py script first.")
+        logger.error(
+            "Input files not found in the specified input_path. Run the download.py script first."
+        )
         sys.exit(1)
     ip_files = [os.path.join(input_path, file) for file in ip_files]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                    "output_files")
+                                    "output")
     # Creating Output Directory
     if not os.path.exists(output_file_path):
         os.mkdir(output_file_path)
@@ -456,7 +505,13 @@ def main(_):
     mcf_path = os.path.join(output_file_path, "us_transportation_household.mcf")
     tmcf_path = os.path.join(output_file_path,
                              "us_transportation_household.tmcf")
-    process(ip_files, cleaned_csv_path, mcf_path, tmcf_path)
+    generated_csv_files = process(ip_files, cleaned_csv_path, mcf_path,
+                                  tmcf_path)
+
+    for csv_file in generated_csv_files:
+        _upload_to_gcs(csv_file)
+    _upload_to_gcs(mcf_path)
+    _upload_to_gcs(tmcf_path)
 
 
 if __name__ == "__main__":
