@@ -1,0 +1,8 @@
+Node: E:environment_output->E0
+observationAbout: C:environment_output->observationAbout
+observationDate: C:environment_output->observationDate
+variableMeasured: C:environment_output->variableMeasured
+value: C:environment_output->value
+unit: C:environment_output->unit
+observationPeriod: C:environment_output->observationPeriod
+typeOf: dcs:StatVarObservation
