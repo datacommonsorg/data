@@ -1,7 +1,7 @@
 {
   "import_specifications": [
     {
-      "import_name": "OECDRegionalEducation",
+      "import_name": "OECD_Waste_Water_Treatment",
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://stats.oecd.org/Index.aspx?DataSetCode=REGION_EDUCAT",
       "provenance_description": "dataset contains commodity price and its index value for monthly and annual",
