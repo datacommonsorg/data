@@ -102,13 +102,15 @@ Sample Lint Report Output
 ### 6. Update Cadence & Refresh Process
 Frequency: Yearly (manual refresh when new data is published by EPA)
 
-Autorefresh: Not fully automated due to manual URL structure and file checking
+Autorefresh: Full automated
 
 Steps to Refresh:
 
-Update the download script logic for the new year
-
 Run download.py and process.py
+
+`python3 download.py`
+
+`python3 process.py`
 
 Validate outputs with dc-import lint
 
