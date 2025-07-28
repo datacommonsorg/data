@@ -89,7 +89,7 @@ def download_dynamic_page(url, filename):
         return True
 
     except Exception as e:
-        logging.fatal(
+        logging.error(
             f"Error found while downloading the data for the url {url}")
 
     finally:
