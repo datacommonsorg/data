@@ -1,0 +1,8 @@
+Node: E:agriculture_output->E0
+observationAbout: C:agriculture_output->observationAbout
+observationDate: C:agriculture_output->observationDate
+variableMeasured: C:agriculture_output->variableMeasured
+value: C:agriculture_output->value
+unit: C:agriculture_output->unit
+observationPeriod: C:agriculture_output->observationPeriod
+typeOf: dcs:StatVarObservation

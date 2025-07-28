@@ -1,0 +1,14 @@
+parameter,value
+url,https://stats.oecd.org/Index.aspx?DataSetCode=REGION_DEMOGR#
+description,Educational Attainment for regions and cities
+#place_type,
+#places_within,"country, AA1,AA2"
+start_date,1998
+end_date,2022
+release_frequency,Yearly
+process,
+comments,"The source for education data is from 1993 to 2022, unable to selet all the required years to process. 
+Path to data - URL - Regions and Cities - Regional Statistics - Regional Education - Educational Attainment"
+output_columns,"observationAbout,observationDate,variableMeasured,value"
+header_rows,1
+word_delimiter,""""""
