@@ -29,11 +29,8 @@ Before ingestion, the following preprocessing is done:
   * StatVars are generated using `stat_var_processor.py`.
   * Output is written to `IndiaNSS_HealthAilments.csv` and corresponding `IndiaNSS_HealthAilments.tmcf`.
 * **Data Quality Checks**:
-
-  * Linting is performed using the DataCommons import tool JAR
-  * Known warnings:
-
-    * Missing values in `unit` and `scalingFactor` columns for rows 2–31. These must be validated and fixed manually.
+  * Linting is performed using the DataCommons import tool JAR.
+  * The `stat_var_processor.py` script handles the necessary scaling of values. The original data is provided as a value per 100,000 persons, and the script converts this to a fraction.
 
 ---
 
