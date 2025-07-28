@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,12 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Author: Padma Gundapaneni @padma-g
-Date: 7/28/21
 Description: This script contains unit tests for the parse_precipitation_index.py script.
-@input_file   filepath to the original csv that needs to be cleaned
-@output_file  filepath to the csv to which the cleaned data is written
-python3 parse_precipitation_index_test.py input_file output_file
 '''
 
 import unittest
@@ -32,23 +27,51 @@ class TestParsePrecipitationData(unittest.TestCase):
     Tests the functions in parse_precipitation_index.py.
     """
 
-    def test_clean_precipitation_data(self):
+    def _test_data_cleaning(self, input_path, expected_path):
         """
-        Tests the clean_precipitation_data function.
+        Helper function to test data cleaning for a given input and expected output.
         """
-        test_csv = os.path.join(module_dir_, 'test_data/small_Palmer.csv')
-        output_csv = os.path.join(module_dir_,
-                                  'test_data/small_Palmer_output.csv')
-        clean_precipitation_data(test_csv, output_csv)
+        # Using a temporary file in the same directory as the test script for simplicity
+        output_csv_path = os.path.join(module_dir_, 'test_output.csv')
 
-        expected_csv = os.path.join(module_dir_,
-                                    'test_data/small_Palmer_expected.csv')
-        with open(output_csv, 'r') as test:
-            test_str: str = test.read()
-            with open(expected_csv, 'r') as expected:
-                expected_str: str = expected.read()
-                self.assertEqual(test_str, expected_str)
-        os.remove(output_csv)
+        clean_precipitation_data(input_path, output_csv_path)
+
+        with open(output_csv_path, 'r') as test_file:
+            test_lines = [line.strip() for line in test_file.readlines()]
+        with open(expected_path, 'r') as expected_file:
+            expected_lines = [
+                line.strip() for line in expected_file.readlines()
+            ]
+
+        self.assertEqual(test_lines, expected_lines)
+
+        os.remove(output_csv_path)
+
+    def test_clean_precipitation_data_index(self):
+        """
+        Tests the clean_precipitation_data function for StandardizedPrecipitationIndex.
+        """
+        input_csv = os.path.join(
+            module_dir_,
+            'index/test_data/CDC_StandardizedPrecipitationIndex_input.csv')
+        expected_csv = os.path.join(
+            module_dir_,
+            'index/test_data/CDC_StandardizedPrecipitationIndex_output.csv')
+        self._test_data_cleaning(input_csv, expected_csv)
+
+    def test_clean_precipitation_data_evapotranspiration(self):
+        """
+        Tests the clean_precipitation_data function for StandardizedPrecipitationEvapotranspirationIndex.
+        """
+        input_csv = os.path.join(
+            module_dir_,
+            'evapotranspiration_index/test_data/CDC_StandardizedPrecipitationEvapotranspirationIndex_input.csv'
+        )
+        expected_csv = os.path.join(
+            module_dir_,
+            'evapotranspiration_index/test_data/CDC_StandardizedPrecipitationEvapotranspirationIndex_output.csv'
+        )
+        self._test_data_cleaning(input_csv, expected_csv)
 
 
 if __name__ == '__main__':

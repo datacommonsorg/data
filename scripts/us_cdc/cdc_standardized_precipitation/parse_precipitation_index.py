@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,9 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 '''
-Author: Padma Gundapaneni @padma-g
-Updated by author: Vishal K
-Date: 7/28/21
 Description: This script cleans up a csv file on county level
 precipitation data downloaded from the CDC.
 URL: https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology

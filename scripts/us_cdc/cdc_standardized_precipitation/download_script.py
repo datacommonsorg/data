@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,8 +34,8 @@ Example Usage:
   python3 download_script.py --import_name=CDC_StandardizedPrecipitationIndex \
     --config_file=import_configs.json
 
-  python3 download_script.py --import_name=CDC_OzoneCounty \
-    --config_file=import_configs.json --dry_run
+  python3 download_script.py --import_name=CDC_StandardizedPrecipitationEvapotranspirationIndex \
+    --config_file=import_configs.json
 """
 
 import json
