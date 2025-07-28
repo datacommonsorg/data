@@ -11,12 +11,12 @@
         "process.py --dataset=COAL"
       ],
       "source_files": [
-        "tmp_raw_data/COAL/COAL.txt"
+        "gcs_output/COAL/COAL.txt"
       ],
       "import_inputs": [
         {
-          "template_mcf": "tmp_raw_data/COAL/COAL.tmcf",
-          "cleaned_csv": "tmp_raw_data/COAL/COAL.csv"
+          "template_mcf": "gcs_output/COAL/COAL.tmcf",
+          "cleaned_csv": "gcs_output/COAL/COAL.csv"
         }
       ],
       "cron_schedule": "0 14 5,20 * *"
@@ -32,12 +32,12 @@
         "process.py --dataset=ELEC"
       ],
       "source_files": [
-        "tmp_raw_data/ELEC/ELEC.txt"
+        "gcs_output/ELEC/ELEC.txt"
       ],
       "import_inputs": [
         {
-          "template_mcf": "tmp_raw_data/ELEC/ELEC.tmcf",
-          "cleaned_csv": "tmp_raw_data/ELEC/ELEC.csv"
+          "template_mcf": "gcs_output/ELEC/ELEC.tmcf",
+          "cleaned_csv": "gcs_output/ELEC/ELEC.csv"
         }
       ],
       "cron_schedule": "0 7 5,20 * *"
@@ -53,12 +53,12 @@
         "process.py --dataset=NG"
       ],
       "source_files": [
-        "tmp_raw_data/NG/NG.txt"
+        "gcs_output/NG/NG.txt"
       ],
       "import_inputs": [
         {
-          "template_mcf": "tmp_raw_data/NG/NG.tmcf",
-          "cleaned_csv": "tmp_raw_data/NG/NG.csv"
+          "template_mcf": "gcs_output/NG/NG.tmcf",
+          "cleaned_csv": "gcs_output/NG/NG.csv"
         }
       ],
       "cron_schedule": "0 8 5,20 * *"
@@ -74,12 +74,12 @@
         "process.py --dataset=NUC_STATUS"
       ],
       "source_files": [
-        "tmp_raw_data/NUC_STATUS/NUC_STATUS.txt"
+        "gcs_output/NUC_STATUS/NUC_STATUS.txt"
       ],
       "import_inputs": [
         {
-          "template_mcf": "tmp_raw_data/NUC_STATUS/NUC_STATUS.tmcf",
-          "cleaned_csv": "tmp_raw_data/NUC_STATUS/NUC_STATUS.csv"
+          "template_mcf": "gcs_output/NUC_STATUS/NUC_STATUS.tmcf",
+          "cleaned_csv": "gcs_output/NUC_STATUS/NUC_STATUS.csv"
         }
       ],
       "cron_schedule": "0 9 5,20 * *"
@@ -95,12 +95,12 @@
         "process.py --dataset=PET"
       ],
       "source_files": [
-        "tmp_raw_data/PET/PET.txt"
+        "gcs_output/PET/PET.txt"
       ],
       "import_inputs": [
         {
-          "template_mcf": "tmp_raw_data/PET/PET.tmcf",
-          "cleaned_csv": "tmp_raw_data/PET/PET.csv"
+          "template_mcf": "gcs_output/PET/PET.tmcf",
+          "cleaned_csv": "gcs_output/PET/PET.csv"
         }
       ],
       "cron_schedule": "0 10 5,20 * *"
@@ -116,12 +116,12 @@
         "process.py --dataset=INTL"
       ],
       "source_files": [
-        "tmp_raw_data/INTL/INTL.txt"
+        "gcs_output/INTL/INTL.txt"
       ],
       "import_inputs": [
         {
-          "template_mcf": "tmp_raw_data/INTL/INTL.tmcf",
-          "cleaned_csv": "tmp_raw_data/INTL/INTL.csv"
+          "template_mcf": "gcs_output/INTL/INTL.tmcf",
+          "cleaned_csv": "gcs_output/INTL/INTL.csv"
         }
       ],
       "cron_schedule": "0 11 5,20 * * *"
@@ -137,12 +137,12 @@
         "process.py --dataset=SEDS"
       ],
       "source_files": [
-        "tmp_raw_data/SEDS/SEDS.txt"
+        "gcs_output/SEDS/SEDS.txt"
       ],
       "import_inputs": [
         {
-          "template_mcf": "tmp_raw_data/SEDS/SEDS.tmcf",
-          "cleaned_csv": "tmp_raw_data/SEDS/SEDS.csv"
+          "template_mcf": "gcs_output/SEDS/SEDS.tmcf",
+          "cleaned_csv": "gcs_output/SEDS/SEDS.csv"
         }
       ],
       "cron_schedule": "0 12 5,20 * *"
@@ -158,12 +158,12 @@
         "process.py --dataset=TOTAL"
       ],
       "source_files": [
-        "tmp_raw_data/TOTAL/TOTAL.txt"
+        "gcs_output/TOTAL/TOTAL.txt"
       ],
       "import_inputs": [
         {
-          "template_mcf": "tmp_raw_data/TOTAL/TOTAL.tmcf",
-          "cleaned_csv": "tmp_raw_data/TOTAL/TOTAL.csv"
+          "template_mcf": "gcs_output/TOTAL/TOTAL.tmcf",
+          "cleaned_csv": "gcs_output/TOTAL/TOTAL.csv"
         }
       ],
       "cron_schedule": "0 13 5,20 * *"

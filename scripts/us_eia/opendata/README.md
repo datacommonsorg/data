@@ -12,7 +12,7 @@ To ease analysis of the datasets, see [`generate_jsonl_for_bq.py`](generate_json
 
 ### EIA International Import (`--dataset=INTL`)
 
-As part of the latest refresh, data quality for the EIA International import has been significantly enhanced. This includes unit standardization and the implementation of filtering mechanisms within `common.py` to resolve identified data discrepancies. A comprehensive explanation of these specific issues and their resolution is documented in the **"EIA_combined_8_imports_doc_Data_Commons_Import"** file (found under 'Import Docs and Schemas' in Drive), within the `EIA_International` tab.
+As part of the latest refresh, data quality for the EIA International import has been significantly enhanced. This includes unit standardization and the implementation of filtering mechanisms within `common.py` to resolve identified data discrepancies. A comprehensive explanation of these specific issues and their resolution is documented in the "EIA_combined_8_imports_doc_Data_Commons_Import" file, within the `EIA_International` tab.
 
 ### License
 
@@ -40,42 +40,43 @@ This dataset is available for public use, license is available at https://www.ei
 
 ### Downloading and Processing Data
 
+The `process.py` script manages the download and processing of EIA datasets.
 
-    If you want to perform "only download", run the below command:
+To perform only download:
 
-        python3 process.py --dataset=INTL --mode=download
-        python3 process.py --dataset=ELEC --mode=download
-        python3 process.py --dataset=COAL --mode=download
-        python3 process.py --dataset=PET --mode=download
-        python3 process.py --dataset=NG --mode=download
-        python3 process.py --dataset=SEDS --mode=download
-        python3 process.py --dataset=NUC_STATUS --mode=download
-        python3 process.py --dataset=TOTAL --mode=download
+```bash
+python3 process.py --dataset=ELEC --mode=download
 
+To perform only process:
+(Running this command generates input files, CSV, MCF, TMCF, and SVG.MCF files.)
 
+Bash
 
-   If you want to perform "only process", run the below command:
+python3 process.py --dataset=ELEC --mode=process
 
-   Running this command generates input_fles and csv, mcf, tmcf, svg.mcf files.
+To download and process the data together:
 
-        python3 process.py --dataset=INTL --mode=process
-        python3 process.py --dataset=ELEC --mode=process
-        python3 process.py --dataset=COAL --mode=process
-        python3 process.py --dataset=PET --mode=process
-        python3 process.py --dataset=NG --mode=process
-        python3 process.py --dataset=SEDS --mode=process
-        python3 process.py --dataset=NUC_STATUS --mode=process
-        python3 process.py --dataset=TOTAL --mode=process
-        
-    To Download and process the data together, run the below command:
-    ```bash
-    python3 process.py --dataset=TOTAL
-    python3 process.py --dataset=INTL
-    python3 process.py --dataset=ELEC
-    python3 process.py --dataset=COAL
-    python3 process.py --dataset=NG
-    python3 process.py --dataset=PET
-    python3 process.py --dataset=SEDS
-    python3 process.py --dataset=NUC_STATUS
+Bash
 
-    ```
+python3 process.py --dataset=ELEC
+
+General Usage:
+
+You can use the following general command, replacing the placeholders for other datasets and modes:
+
+Bash
+
+python3 process.py --dataset=<DATASET_NAME> --mode=<MODE>
+Where:
+
+<DATASET_NAME>: Replace this with the specific dataset you want.
+
+Choose from: INTL, ELEC, COAL, PET, NG, SEDS, NUC_STATUS, or TOTAL.
+
+<MODE>: This tells the script what action to perform.
+
+--mode=download: Only downloads the raw data.
+
+--mode=process: Only processes the data.
+
+Skip --mode entirely: If you omit this parameter (as shown in the "Download and process together" example), the script will automatically download AND process the data for you.

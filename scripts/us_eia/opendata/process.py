@@ -34,9 +34,10 @@ from absl import logging
 from process import common, coal, elec, intl, ng, nuclear, pet, seds, total
 
 MANIFEST_URL = "https://api.eia.gov/bulk/manifest.txt"
-
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_GCS_OUTPUT_DIR = os.path.join(_MODULE_DIR, 'gcs_output')
 FLAGS = flags.FLAGS
-flags.DEFINE_string('data_dir', 'tmp_raw_data', 'Data dir to download into')
+flags.DEFINE_string('data_dir', _GCS_OUTPUT_DIR, 'Data dir to download into')
 flags.DEFINE_string('dataset', '',
                     'Datasets to download. Everything, if empty.')
 flags.DEFINE_string('mode', '', 'Options: download or process')

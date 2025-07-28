@@ -486,3 +486,5 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
         out_fp.write(_TMCF_STRING)
 
     logging.info(f"FINAL COUNTERS ")
+
+    logging.info(f"{counters}")
