@@ -14,7 +14,7 @@
           }
         ],
         "source_files": [
-            "../hate_crime_data/*"
+            "hate_crime_data/*"
         ],
         "resource_limits": {
             "cpu": "8",

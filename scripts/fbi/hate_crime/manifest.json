@@ -28,6 +28,9 @@
             "cleaned_csv": "table14/table14_output.csv"
           }
         ],
+        "source_files": [
+            "hate_crime_publication_data/*/*"
+        ],
         "resource_limits": {
             "cpu": "8",
             "memory": "32G"
