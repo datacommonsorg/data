@@ -68,8 +68,14 @@ class ImportValidation:
     def __init__(self, validation_config: str, differ_output: str,
                  stats_summary: str, validation_output: str):
         logging.info('Reading config from %s', validation_config)
-        self.differ_results = pd.read_csv(differ_output)
-        print(self.differ_results)
+        if differ_output:
+            logging.info(f'Loading differ results from {differ_output}')
+            self.differ_results = pd.read_csv(differ_output)
+            print('Differ results\n:', self.differ_results)
+        else:
+            logging.info(f'No differ results loaded')
+            self.differ_results = pd.DataFrame()
+
         self.validation_map = {
             Validation.MODIFIED_COUNT: self._modified_count_validation,
             Validation.ADDED_COUNT: self._added_count_validation,
