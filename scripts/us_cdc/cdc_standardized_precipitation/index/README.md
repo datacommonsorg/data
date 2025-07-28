@@ -24,6 +24,12 @@ This repository manages the automated ingestion of the **Standardized Precipitat
 
 This end-to-end automation ensures a reliable and hands-off approach to maintaining the dataset's freshness and accuracy.
 
+## Data Download
+To download the data:
+```bash
+python3 download_script.py --import_name=CDC_StandardizedPrecipitationIndex \
+    --config_file=import_configs.json
+```
 ## Testing
 To run the parsing logic locally for development or testing:
 ```bash
@@ -31,10 +37,6 @@ python3 parse_precipitation_index.py \
   CDC_StandardizedPrecipitationIndex_input.csv \
   output/CDC_StandardizedPrecipitationIndex_output.csv
 
-python3 parse_precipitation_index.py \
-  CDC_StandardizedPrecipitationEvapotranspirationIndex_input.csv \
-  output/CDC_StandardizedPrecipitationEvapotranspirationIndex_output.csv
-```
 
 To manually trigger a cloud deployment of the import job:
 ```bash

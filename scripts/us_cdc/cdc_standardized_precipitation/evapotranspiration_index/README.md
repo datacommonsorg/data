@@ -23,7 +23,12 @@ This repository manages the automated ingestion of the **Standardized Precipitat
 6.  **Validation and Import**: The `datacommons-import-tool` lints the processed files and imports the final data into the Data Commons Knowledge Graph. The entire process is managed by the `run_import.sh` script.
 
 This end-to-end automation ensures a reliable and hands-off approach to maintaining the dataset's freshness and accuracy.
-
+## Data Download
+To download the data:
+```bash
+python3 download_script.py --import_name=CDC_StandardizedPrecipitationEvapotranspirationIndex \
+    --config_file=import_configs.json
+```
 ## Testing
 To run the parsing logic locally for development or testing:
 ```bash
