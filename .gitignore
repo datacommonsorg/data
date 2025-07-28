@@ -18,4 +18,5 @@ pyvenv.cfg
 import-automation/executor/config_override.json
 .gemini
 *.sqlite
+*_prompt.txt
 
