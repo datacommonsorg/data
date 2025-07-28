@@ -15,8 +15,12 @@
 import os
 import unittest
 import pandas as pd
-from .preprocess_data import preprocess_df
+import sys
+
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../nps'))
 from .import_data import save_csv
+from .preprocess_data import preprocess_df
 
 
 class TestPreprocess(unittest.TestCase):
