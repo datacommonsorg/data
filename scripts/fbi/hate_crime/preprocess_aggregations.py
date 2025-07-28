@@ -32,12 +32,11 @@ from statvar_dcid_generator import get_statvar_dcid, _PREPEND_APPEND_REPLACE_MAP
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string(
-    'input_file', '../hate_crime_data/hate_crime.csv',
-    'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#'
-)
+    'input_file', os.path.join(_SCRIPT_PATH, 'aggregations/hate_crime_data/hate_crime.csv'),
+    'Input csv file path which is downloaded from https://cde.ucr.cjis.gov/LATEST/webapp/#')
 flags.DEFINE_string(
     'config_file',
-    'gs://unresolved_mcf/fbi/hate_crime/aggregated/20250114/config.json',
+    os.path.join(_SCRIPT_PATH, 'config.json'),
     'Input config file')
 
 _CACHE_DIR = os.path.join(_SCRIPT_PATH, 'cache')
@@ -1754,15 +1753,13 @@ def process_main(input_csv=os.path.join(_SCRIPT_PATH, 'source_data',
     print(f"Loading input file into df : {_FLAGS.input_file}")
     df = pd.read_csv(_FLAGS.input_file)
     df.columns = df.columns.str.upper()
-    print(df.columns)
     missing_cols = set(_INPUT_COLUMNS) - set(df.columns)
     if missing_cols:
         raise ValueError(f"Missing required columns: {missing_cols}")
     df = df[_INPUT_COLUMNS]
     logging.info(f'Loading config: {_FLAGS.config_file}')
-    with file_util.FileIO(_FLAGS.config_file, 'r') as f:
+    with open(_FLAGS.config_file, 'r', encoding='utf-8') as f:
         config = json.load(f)
-
     config_old = copy.deepcopy(config)
     config_old['_COMMON_']['isHateCrime'] = 'True'
     config_old['BIAS_CATEGORY']['TransgenderOrGenderNonConforming'] = {

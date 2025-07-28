@@ -5,7 +5,8 @@
         "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://cde.ucr.cjis.gov/LATEST/webapp/",
         "provenance_description": "US Hate Crime Statistics",
-        "scripts": ["../preprocess_aggregations.py"],
+        "scripts": ["../download_fbi_hate_crime_data.py",
+        "../preprocess_aggregations.py"],
         "import_inputs": [
           {
             "template_mcf": "../aggregations.tmcf",
