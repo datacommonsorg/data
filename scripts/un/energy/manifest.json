@@ -5,7 +5,7 @@
             "curator_emails": ["support@datacommons.org"],
             "provenance_url": "https://unstats.un.org/unsd/energystats/data/",
             "provenance_description": "UN_energy",
-            "scripts": ["sh ./run.sh "],
+            "scripts": ["run.sh "],
             "source_files": ["input_data/un_energy_all.csv"],
             "import_inputs": [{
                 "template_mcf": "output_data/un_energy_output.tmcf",

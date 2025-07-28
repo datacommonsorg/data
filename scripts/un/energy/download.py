@@ -40,7 +40,7 @@ FLAGS = flags.FLAGS
 flags.DEFINE_string('download_data_dir', 'input_data/un_energy',
                     'Data dir to download into')
 flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
-flags.DEFINE_integer('start_year', 1990,
+flags.DEFINE_integer('start_year', 2020,
                      'Data set downloaded from the start year.')
 flags.DEFINE_integer('end_year',
                      datetime.datetime.now().year,
