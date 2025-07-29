@@ -1,6 +1,16 @@
-[
-    {
-        "validation": "DELETED_COUNT",
-        "threshold": 0
-    }
-]
+{
+    "schema_version": "1.0",
+    "rules": [
+        {
+            "rule_id": "check_deleted_count",
+            "description": "Checks that the number of deleted points is within the threshold.",
+            "validator": "DELETED_COUNT",
+            "scope": {
+                "data_source": "differ"
+            },
+            "params": {
+                "threshold": 0
+            }
+        }
+    ]
+}
