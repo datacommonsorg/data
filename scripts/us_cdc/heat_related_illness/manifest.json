@@ -22,8 +22,7 @@
           "cleaned_csv": "output_files/country_output.csv"
         }
       ],
-      "user_script_timeout": 1440,
-      "resource_limits": {"cpu": "4", "memory": "16G"},
+      "user_script_timeout": "1440m",
       "cron_schedule": "0 3 3 * *"
     }
   ]
