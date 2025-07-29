@@ -11,99 +11,159 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+"""This script downloads data for India NSS Health Ailments.
 
-# How to run the script to download the files:
-# python3 download_script.py
+This script downloads data from the NDAP API, processes it, and saves it as a
+CSV file.
+
+How to run the script:
+python3 download_script.py
+"""
 
 import json
 import os
-import pandas as pd
 import sys
+from typing import List, Tuple
+
+import pandas as pd
 from absl import app
 from absl import flags
 from absl import logging
 from google.cloud import storage
 
+# pylint: disable=g-bad-import-order
+from download_util_script import _retry_method
+
+_FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
     'config_file_path',
     'gs://unresolved_mcf/india_ndap/NDAP_NSS_Health/latest/download_config.json',
-    'Input directory where config files downloaded.')
+    'Input directory where config files are downloaded.')
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
-from download_util_script import _retry_method
+
+_OUTPUT_COLUMNS = [
+    'srcStateName',
+    'TRU',
+    'GENDER',
+    'Broad ailment category',
+    'Age group',
+    ('Ailments reported for each Broad caliment category per 100000 persons'
+     ' during last 15 days by different age groups'),
+    'Estimated number of ailments under broad ailment category',
+    'Sample number of ailments under broad ailment category',
+    'srcYear',
+    'future year',
+    'YearCode',
+    'Year',
+]
 
 
-def download_data(config_file_path):
-    """Download and return raw JSON data from paginated API using config file."""
-    all_data = []
+def _get_config_from_gcs(
+    config_file_path: str) -> Tuple[str, str] | Tuple[None, None]:
+  """Downloads and parses the config file from Google Cloud Storage.
 
-    storage_client = storage.Client()
-    bucket_name = config_file_path.split('/')[2]
-    blob_name = '/'.join(config_file_path.split('/')[3:])
-    file_contents = storage_client.bucket(bucket_name).blob(blob_name).download_as_text()
+  Args:
+    config_file_path: The GCS path to the config file.
+
+  Returns:
+    A tuple containing the URL and input files path, or (None, None) on error.
+  """
+  storage_client = storage.Client()
+  bucket_name, blob_name = config_file_path.split('/', 3)[2:]
+  try:
+    file_contents = storage_client.bucket(bucket_name).blob(
+        blob_name).download_as_text()
+    file_config = json.loads(file_contents)
+    return file_config.get('url'), file_config.get('input_files')
+  except (json.JSONDecodeError, ValueError) as e:
+    logging.fatal('Cannot extract URL and input files path from %s: %s',
+                  config_file_path, e)
+    return None, None
+
+
+def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
+  """Downloads and returns raw JSON data from a paginated API.
+
+  Args:
+    config_file_path: The GCS path to the config file.
+
+  Returns:
+    A tuple containing the downloaded data as a list of tuples and the output
+    directory.
+  """
+  url, output_dir = _get_config_from_gcs(config_file_path)
+  if not url:
+    return [], ''
+
+  all_data = []
+  page_num = 1
+  while True:
+    api_url = f'{url}&pageno={page_num}'
+    response = _retry_method(api_url, None, 3, 5, 2)
+    if not response:
+      logging.error('Failed to retrieve data from page %d', page_num)
+      break
 
     try:
-        file_config = json.loads(file_contents)
-        url = file_config.get('url')
-        input_files = file_config.get('input_files')
+      response_data = response.json()
     except json.JSONDecodeError:
-        logging.fatal("Cannot extract url and input files path.")
-        return [], ""
+      logging.error('Failed to parse JSON from page %d', page_num)
+      break
 
-    page_num = 1
-    while True:
-        api_url = f"{url}&pageno={page_num}"
-        response = _retry_method(api_url, None, 3, 5, 2)
-        response_data = response.json()
+    if response_data and 'Data' in response_data and response_data['Data']:
+      for item in response_data['Data']:
+        year = item['Year'].split(',')[-1].strip()
+        row = (
+            item['StateName'],
+            item['TRU'],
+            item['D7300_3'],
+            item['D7300_4'],
+            item['D7300_5'],
+            item['I7300_6']['TotalPopulationWeight'],
+            item['I7300_7']['avg'],
+            item['I7300_8']['avg'],
+            year,
+            str(int(year) + 1),
+            year,
+            item['Year'],
+        )
+        all_data.append(row)
+      page_num += 1
+    else:
+      logging.info('No more data found on page %d.', page_num)
+      break
 
-        if response_data and 'Data' in response_data and len(response_data['Data']) > 0:
-            for i in response_data['Data']:
-                a = (
-                    i['StateName'], i['TRU'], i['D7300_3'], i['D7300_4'], i['D7300_5'],
-                    i['I7300_6']['TotalPopulationWeight'], i['I7300_7']['avg'], i['I7300_8']['avg'],
-                    i['Year'].split(",")[-1].strip(),
-                    str(int(i['Year'].split(",")[-1].strip()) + 1),
-                    i['Year'].split(",")[-1].strip(),
-                    i['Year']
-                )
-                all_data.append(a)
-            page_num += 1
-        else:
-            logging.error(f"Failed to retrieve data from page {page_num}")
-            break
-
-    return all_data, input_files
-
-
-def preprocess_and_save(data, output_dir):
-    """Convert data to DataFrame and save as CSV."""
-    if not data:
-        logging.info("No data was retrieved from the API.")
-        return
-
-    df = pd.DataFrame(data, columns=[
-        'srcStateName', 'TRU', 'GENDER', 'Broad ailment category', 'Age group',
-        'Ailments reported for each Broad caliment category per 100000 persons during last 15 days by different age groups',
-        'Estimated number of ailments under broad ailment category',
-        'Sample number of ailments under broad ailment category',
-        'srcYear', 'future year', 'YearCode', 'Year'
-    ])
-
-    os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, 'IndiaNSS_HealthAilments.csv')
-    df.to_csv(output_path, index=False)
-    logging.info("Data saved to IndiaNSS_HealthAilments_input.csv")
+  return all_data, output_dir
 
 
-def main(_):
-    _FLAGS = flags.FLAGS
-    config_file_path = _FLAGS.config_file_path
-    raw_data, output_dir = download_data(config_file_path)
+def preprocess_and_save(data: List[Tuple], output_dir: str) -> None:
+  """Converts data to a DataFrame and saves it as a CSV file.
+
+  Args:
+    data: The data to be processed, as a list of tuples.
+    output_dir: The directory where the output CSV will be saved.
+  """
+  if not data:
+    logging.info('No data was retrieved from the API.')
+    return
+
+  df = pd.DataFrame(data, columns=_OUTPUT_COLUMNS)
+
+  os.makedirs(output_dir, exist_ok=True)
+  output_path = os.path.join(output_dir, 'IndiaNSS_HealthAilments.csv')
+  df.to_csv(output_path, index=False)
+  logging.info('Data saved to %s', output_path)
+
+
+def main(_) -> None:
+  """Main function to download, process, and save the data."""
+  raw_data, output_dir = download_data(_FLAGS.config_file_path)
+  if raw_data and output_dir:
     preprocess_and_save(raw_data, output_dir)
 
 
-if __name__ == "__main__":
-    app.run(main)
-
+if __name__ == '__main__':
+  app.run(main)

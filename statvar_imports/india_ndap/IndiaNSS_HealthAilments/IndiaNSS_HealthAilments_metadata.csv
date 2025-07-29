@@ -1,6 +1,6 @@
 parameter,value
 url,https://ndap.niti.gov.in/dataset/7314?tab=data
-description,"Health ailment data from the National Sample Survey (NSS) 75th round (2017-18), providing key indicators on health-related variables for individuals across various states and UTs in India."
+description,2018 average medical expenditure and non medical expenditure
 #place_type,"Country, State"
 #places_within,country/IND
 start_date,2017

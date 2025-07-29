@@ -1,33 +1,33 @@
-key,p1,v1,p2,v2
-srcStateName,observationAbout,{Data}
-futureYear,observationDate,{Number}
-Urban,placeOfResidenceClassification,Urban
-Rural,placeOfResidenceClassification,Rural
+key,p1,v1,p2,v2,,,,,,,,
+srcStateName,observationAbout,{Data},,,,,,,,,,
+futureYear,observationDate,{Number},,,,,,,,,,
+Urban,placeOfResidenceClassification,Urban,,,,,,,,,,
+Rural,placeOfResidenceClassification,Rural,,,,,,,,,,
 Ailments reported for each Broad caliment category per 100000 persons during last 15 days by different age groups,measuredProperty,count,populationType,MedicalConditionIncident,measurementDenominator,Count_Person,value,{Number},statType,measuredValue,#Multiply,0.00001
-Male,gender,Male
-Female,gender,Female
-Blood diseases,medicalCondition,BloodDisease
-Cancers,medicalCondition,Cancer
-Cardio-vascular,medicalCondition,CardiovascularDisease
-Ear,medicalCondition,EarCondition
-"Endocrine, metabolic",medicalCondition,EndocrineMetabolicCondition
-Eye,medicalCondition,EyeCondition
-Gastro-intestinal,medicalCondition,GastroIntestinalCondition
-Genito-Urinary,medicalCondition,GenitoUrinaryCondition
-Infection,medicalCondition,Infection
-Injuries,medicalCondition,Injury
-Musculo-skeletal,medicalCondition,MusculoSkeletalCondition
-Obstetric,medicalCondition,ObstetricCondition
-Other,medicalCondition,NSSHealthOtherCondition
-Pshychiatric & Neurological,medicalCondition,PsychiatricNeurologicalCondition
-Respiratory,medicalCondition,RespiratoryDisease
-Skin,medicalCondition,SkinDisease
-
-0-4,age,[0 4 Years]
-15-29,age,[15 29 Years]
-30-44,age,[30 44 Years]
-45-59,age,[45 59 Years]
-5-14,age,[5 14 Years]
-60+,age,[60 - Years]
-60-69,age,[60 69 Years]
-70+,age,[70 - Years]
+Male,gender,Male,,,,,,,,,,
+Female,gender,Female,,,,,,,,,,
+Blood diseases,medicalCondition,BloodDisease,,,,,,,,,,
+Cancers,medicalCondition,Cancer,,,,,,,,,,
+Cardio-vascular,medicalCondition,CardiovascularDisease,,,,,,,,,,
+Ear,medicalCondition,EarCondition,,,,,,,,,,
+"Endocrine, metabolic",medicalCondition,EndocrineMetabolicCondition,,,,,,,,,,
+Eye,medicalCondition,EyeCondition,,,,,,,,,,
+Gastro-intestinal,medicalCondition,GastroIntestinalCondition,,,,,,,,,,
+Genito-Urinary,medicalCondition,GenitoUrinaryCondition,,,,,,,,,,
+Infection,medicalCondition,Infection,,,,,,,,,,
+Injuries,medicalCondition,Injury,,,,,,,,,,
+Musculo-skeletal,medicalCondition,MusculoSkeletalCondition,,,,,,,,,,
+Obstetric,medicalCondition,ObstetricCondition,,,,,,,,,,
+Other,medicalCondition,NSSHealthOtherCondition,,,,,,,,,,
+Pshychiatric & Neurological,medicalCondition,PsychiatricNeurologicalCondition,,,,,,,,,,
+Respiratory,medicalCondition,RespiratoryDisease,,,,,,,,,,
+Skin,medicalCondition,SkinDisease,,,,,,,,,,
+,,,,,,,,,,,,
+0-4,age,[0 4 Years],,,,,,,,,,
+15-29,age,[15 29 Years],,,,,,,,,,
+30-44,age,[30 44 Years],,,,,,,,,,
+45-59,age,[45 59 Years],,,,,,,,,,
+5-14,age,[5 14 Years],,,,,,,,,,
+60+,age,[60 - Years],,,,,,,,,,
+60-69,age,[60 69 Years],,,,,,,,,,
+70+,age,[70 - Years],,,,,,,,,,
