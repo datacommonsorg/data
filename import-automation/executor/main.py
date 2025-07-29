@@ -35,6 +35,7 @@ REPO_DIR = os.path.dirname(
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
 from log_util import log_metric, configure_cloud_logging
+from cloudrun_util import running_on_cloudrun
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('import_name', '', 'Absoluate import name.')
@@ -101,7 +102,13 @@ def run_import_job(absolute_import_name: str, import_config: str):
 
 
 def main(_):
-    if FLAGS.enable_cloud_logging:
+    running_on_cloudrun_result = running_on_cloudrun()
+    if running_on_cloudrun_result:
+        logging.info("Running under Cloud Run detected.")
+    else:
+        logging.info("Not running under Cloud Run")
+
+    if FLAGS.enable_cloud_logging or running_on_cloudrun_result:
         configure_cloud_logging()
         logging.info("Google Cloud Logging configured.")
     return run_import_job(FLAGS.import_name, FLAGS.import_config)

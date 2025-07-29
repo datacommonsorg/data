@@ -28,12 +28,12 @@
 # ./run_import.sh ../../scripts/us_fed/treasury_constant_maturity_rates/manifest.json
 #
 GCP_PROJECT="datcom-ci"
-REGION="us-west1"
+REGION="us-central1"
 GCS_BUCKET="datcom-import-test"
 SCRIPT_DIR=$(realpath $(dirname $0))
 DATA_REPO=$(realpath $(dirname $0)/../../)
-DEFAULT_CPU=2
-DEFAULT_MEMORY=4Gi
+DEFAULT_CPU=8
+DEFAULT_MEMORY=32Gi
 DEFAULT_TIMEOUT=30m
 RUN_MODE="executor"
 DOCKER_IMAGE="dc-import-executor"
