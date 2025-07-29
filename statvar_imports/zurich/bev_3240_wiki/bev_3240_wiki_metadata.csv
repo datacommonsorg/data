@@ -1,0 +1,14 @@
+parameter,value
+url,https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3240_wiki.csv
+description,
+place_type,Country
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit"
+header_rows,1
+#input_rows,10
+#Import_Name,Zurich_Population

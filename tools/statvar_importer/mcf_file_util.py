@@ -218,6 +218,10 @@ def add_pv_to_node(
   """
     if node is None:
         node = {}
+    if value is None:
+        return node
+    if isinstance(value, int) or isinstance(value, float):
+        value = str(value)
     if value and isinstance(value, str):
         if strip_namespaces:
             value = strip_namespace(value)
