@@ -232,5 +232,6 @@ def _get_region_dcid(sub_region_2: str, sub_region_1: str,
     except Exception as e:
         logging.fatal(f"Error while retrieving DCID {e}.")
 
+
 if __name__ == '__main__':
     covid_mobility()
