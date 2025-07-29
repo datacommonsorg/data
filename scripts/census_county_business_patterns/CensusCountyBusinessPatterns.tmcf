@@ -1,0 +1,8 @@
+Node: E:output_cbp->E0
+observationAbout: C:output_cbp->observationAbout
+observationDate: C:output_cbp->observationDate
+variableMeasured: C:output_cbp->variableMeasured
+value: C:output_cbp->value
+unit: C:output_cbp->unit
+measurementMethod: dcs:CensusCBPSurvey
+typeOf: dcs:StatVarObservation

@@ -18,36 +18,37 @@ from absl import logging
 
 import write_mcf
 
+
 class ZBPTotalsProcessor:
-  """
+    """
   This class reads ZBP data from a file-like object, transforms it, and
   outputs it into CSV and MCF formats.
   """
 
-  def __init__(self, input_file_obj, output_dir, year, is_test_run):
-    """Initializing  the ZBPProcessor class
+    def __init__(self, input_file_obj, output_dir, year, is_test_run):
+        """Initializing  the ZBPProcessor class
     Args:
       input_file_obj: A file-like object containing the ZBP data (files from gcs path).
       output_dir: The local directory path where output CSV and MCF files will be saved.
       year: The four-digit year (e.g., '2022') for which data is being processed.
 
     """
-    self.input_file_obj = input_file_obj
-    self.output_dir = output_dir
-    self.year = year
-    self.is_test_run = is_test_run
-    
-    #  class attributes.
-    self.zip_col = 'zip'
-    self.naics_col = 'naics' 
-    self.ap_col = 'ap'   
-    self.est_col = 'est'
-    self.emp_col = 'emp'
-    self.ap_nf_col = 'ap_nf' 
-    self.emp_nf_col = 'emp_nf' 
+        self.input_file_obj = input_file_obj
+        self.output_dir = output_dir
+        self.year = year
+        self.is_test_run = is_test_run
 
-  def _lookup_col(self, row, col):
-    """Looks up a column in a row, handling potential case differences.
+        #  class attributes.
+        self.zip_col = 'zip'
+        self.naics_col = 'naics'
+        self.ap_col = 'ap'
+        self.est_col = 'est'
+        self.emp_col = 'emp'
+        self.ap_nf_col = 'ap_nf'
+        self.emp_nf_col = 'emp_nf'
+
+    def _lookup_col(self, row, col):
+        """Looks up a column in a row, handling potential case differences.
 
     Args:
       row: A dictionary representing a row from the CSV.
@@ -58,75 +59,87 @@ class ZBPTotalsProcessor:
     Raises:
       KeyError: If the column is not found in either its original or uppercase form.
     """
-    try:
-      return row[col]
-    except KeyError:
-      return row[col.upper()]
-
-  def process_zbp_data(self):
-    """Reads, transforms, and writes ZBP data to CSV and MCF files.
-    """
-    yyyy = self.year
-    csv_filename = f'zbp_{yyyy}_totals.csv'
-    csv_path = os.path.join(self.output_dir, csv_filename)
-
-    mcf_output_filename = f'zbp_{yyyy}_total.mcf'
-    mcf_output_path = os.path.join(self.output_dir, mcf_output_filename)
-
-    if not os.path.exists(self.output_dir):
-      os.makedirs(self.output_dir, exist_ok=True)
-
-    logging.info('Writing CSV output to: %s', csv_path)
-    logging.info('Writing MCF output to: %s', mcf_output_path)
-
-    # Opening  all output files
-    with open(csv_path, 'w', newline='') as csv_f, \
-         open(mcf_output_path, 'w') as mcf_f:
-
-      csv_writer = csv.writer(csv_f) 
-      rows = csv.DictReader(self.input_file_obj)
-
-      # Write the header row for the CSV output file.
-      csv_writer.writerow(['geoId', 'year', 'NAICS', 'Establishments',
-                           'Employees', 'Employee Noise Flag', 'Annual Payroll',
-                           'AP Noise Flag'])
-
-      count_rows = 0
-      count_pops = 0
-      count_obs = 0
-
-      for r in rows:
-        logging.debug('Processing row: %s', r)
         try:
-          
-          read_zip = self._lookup_col(r, self.zip_col)
-          read_annual_payroll = int(self._lookup_col(r, self.ap_col)) * 1000 
-          read_ap_nf = self._lookup_col(r, self.ap_nf_col)
-          read_est = self._lookup_col(r, self.est_col)
-          read_emp = self._lookup_col(r, self.emp_col)
-          read_emp_nf = self._lookup_col(r, self.emp_nf_col)
-          count_rows += 1
-          geoid = f'zip/{read_zip}'
-          if self.is_test_run:
-            if geoid != 'zip/00501': 
-              continue # Skip to the next row if it's not the test geoId.
-          naics = None 
-          
-          # Write the data in the CSV File
-          csv_writer.writerow(
-              [geoid, yyyy, naics, read_est, read_emp, read_emp_nf, read_annual_payroll, read_ap_nf])
-          # Generate MCF data
-          pop_est, obs_est, pop_emp, obs_emp, obs_payroll = write_mcf.mcf_for(
-              geoid, yyyy, naics, est=read_est, emp=read_emp, ap=read_annual_payroll)
-          # Write the generated MCF population and observation data.
-          pops, obs = write_mcf.write_mcf_pop_obs(
-              pop_est, obs_est, read_emp_nf, pop_emp, obs_emp, read_ap_nf, obs_payroll, mcf_f)
-          
-          count_pops += pops
-          count_obs += obs
-        except Exception as ex:
-          logging.error('An unexpected error occurred while processing row: %s. Error: %s', r, ex)
+            return row[col]
+        except KeyError:
+            return row[col.upper()]
 
-    logging.info('Finished processing. Wrote %d population nodes and %d observations from %d rows.', 
-                 count_pops, count_obs, count_rows)
+    def process_zbp_data(self):
+        """Reads, transforms, and writes ZBP data to CSV and MCF files.
+    """
+        yyyy = self.year
+        csv_filename = f'zbp_{yyyy}_totals.csv'
+        csv_path = os.path.join(self.output_dir, csv_filename)
 
+        mcf_output_filename = f'zbp_{yyyy}_total.mcf'
+        mcf_output_path = os.path.join(self.output_dir, mcf_output_filename)
+
+        if not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir, exist_ok=True)
+
+        logging.info('Writing CSV output to: %s', csv_path)
+        logging.info('Writing MCF output to: %s', mcf_output_path)
+
+        # Opening  all output files
+        with open(csv_path, 'w', newline='') as csv_f, \
+             open(mcf_output_path, 'w') as mcf_f:
+
+            csv_writer = csv.writer(csv_f)
+            rows = csv.DictReader(self.input_file_obj)
+
+            # Write the header row for the CSV output file.
+            csv_writer.writerow([
+                'geoId', 'year', 'NAICS', 'Establishments', 'Employees',
+                'Employee Noise Flag', 'Annual Payroll', 'AP Noise Flag'
+            ])
+
+            count_rows = 0
+            count_pops = 0
+            count_obs = 0
+
+            for r in rows:
+                logging.debug('Processing row: %s', r)
+                try:
+
+                    read_zip = self._lookup_col(r, self.zip_col)
+                    read_annual_payroll = int(self._lookup_col(
+                        r, self.ap_col)) * 1000
+                    read_ap_nf = self._lookup_col(r, self.ap_nf_col)
+                    read_est = self._lookup_col(r, self.est_col)
+                    read_emp = self._lookup_col(r, self.emp_col)
+                    read_emp_nf = self._lookup_col(r, self.emp_nf_col)
+                    count_rows += 1
+                    geoid = f'zip/{read_zip}'
+                    if self.is_test_run:
+                        if geoid != 'zip/00501':
+                            continue  # Skip to the next row if it's not the test geoId.
+                    naics = None
+
+                    # Write the data in the CSV File
+                    csv_writer.writerow([
+                        geoid, yyyy, naics, read_est, read_emp, read_emp_nf,
+                        read_annual_payroll, read_ap_nf
+                    ])
+                    # Generate MCF data
+                    pop_est, obs_est, pop_emp, obs_emp, obs_payroll = write_mcf.mcf_for(
+                        geoid,
+                        yyyy,
+                        naics,
+                        est=read_est,
+                        emp=read_emp,
+                        ap=read_annual_payroll)
+                    # Write the generated MCF population and observation data.
+                    pops, obs = write_mcf.write_mcf_pop_obs(
+                        pop_est, obs_est, read_emp_nf, pop_emp, obs_emp,
+                        read_ap_nf, obs_payroll, mcf_f)
+
+                    count_pops += pops
+                    count_obs += obs
+                except Exception as ex:
+                    logging.error(
+                        'An unexpected error occurred while processing row: %s. Error: %s',
+                        r, ex)
+
+        logging.info(
+            'Finished processing. Wrote %d population nodes and %d observations from %d rows.',
+            count_pops, count_obs, count_rows)
