@@ -1,0 +1,30 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EPHHeatRelatedIllness",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://ephtracking.cdc.gov/qrlist/35",
+      "provenance_description": "Heat-related illness, mortality, and emergency department visits data from the US CDC's Environmental Public Health Tracking Network.",
+      "scripts": [
+        "clean_data.py",
+        "preprocess.py"
+      ],
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/output.tmcf",
+          "cleaned_csv": "output_files/cleaned.csv"
+        },
+        {
+          "template_mcf": "output_files/output.tmcf",
+          "cleaned_csv": "output_files/country_output.csv"
+        }
+      ],
+      "user_script_timeout": "1440m",
+      "cron_schedule": "0 3 3 * *"
+    }
+  ]
+}
+
