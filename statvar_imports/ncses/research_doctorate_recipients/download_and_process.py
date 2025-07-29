@@ -28,7 +28,7 @@ from download_util_script import download_file
 
 logging.set_verbosity(logging.INFO)
 
-download_configs = [{
+DOWNLOAD_CONFIGS = [{
     "url":
         "https://ncses.nsf.gov/pubs/nsf23300/assets/data-tables/tables/nsf23300-tab001-009.xlsx",
     "output_csv_name":
@@ -58,7 +58,7 @@ def process_and_modify_data_cascading(file_path):
                           Returns an empty DataFrame if an error occurs.
     """
     # list of top-level header keywords
-    header_keywords = [
+    HEADER_KEYWORDS = [
         'Male doctorate recipients', 'Female doctorate recipients',
         'Hispanic or Latino', 'Not Hispanic or Latino',
         'American Indian or Alaska Native', 'Asian',
@@ -82,9 +82,11 @@ def process_and_modify_data_cascading(file_path):
 
     except FileNotFoundError:
         logging.fatal(f"Error: The file '{file_path}' was not found")
+        sys.exit(1)
         return df
     except Exception as e:
         logging.fatal(f"An error occurred while reading the file: {e}")
+        sys.exit(1)
 
         return df
 
@@ -96,40 +98,25 @@ def process_and_modify_data_cascading(file_path):
         current_cell_value = str(df.iloc[i, 0]).strip()
 
         # Check if the current cell value is one of the defined top-level headers
-        if current_cell_value in header_keywords:
+        if current_cell_value in HEADER_KEYWORDS:
             # If it is a top-level header, updatating  'last_known_header'
             last_known_header = current_cell_value
         else:
             # If it's not a top-level header, and we have a last known header
             if last_known_header is not None:
                 df.iloc[i, 0] = f"{last_known_header}:{current_cell_value}"
-    row_to_remove = "Not Hispanic or Latino"
-    original_rows_count = len(df)
-    df_filtered = df[df.iloc[:, 0].astype(str).str.strip() != row_to_remove]
-    removed_rows_count = original_rows_count - len(df_filtered)
-
-    if removed_rows_count > 0:
-        logging.info(
-            f"Successfully removed {removed_rows_count} row(s) matching '{row_to_remove}'."
-        )
-    else:
-        logging.info(
-            f"No rows matching '{row_to_remove}' found to remove in this file.")
-
-    return df_filtered
+    
+    return df
 
 
 def main(argv):
-    processed_files = []
-    for config in download_configs:
+    for config in DOWNLOAD_CONFIGS:
         url = config["url"]
         desired_output_csv_name = config["output_csv_name"]
 
         logging.info(f"Attempting to download: {url}")
 
         file_name_from_url = url.split('/')[-1]
-        downloaded_file_path = os.path.join("input_files",
-                                            file_name_from_url)
         try:
 
             download_successful = download_file(url=url,
@@ -145,19 +132,19 @@ def main(argv):
             else:
                 logging.fatal(
                     f"Download or processing of '{file_name_from_url}' failed")
+                sys.exit(1)
 
-            output_full_path = os.path.join(
-                os.path.dirname(os.path.abspath(__file__)),
-                desired_output_csv_name)
 
         except FileNotFoundError:
             logging.fatal(
                 f"Error: Python interpreter or download script not found. Check your paths."
             )
+            sys.exit(1)
         except Exception as e:
             logging.fatal(
                 f"An unexpected error occurred during the download/processing loop: {e}"
             )
+            sys.exit(1)
 
 
 if __name__ == '__main__':
