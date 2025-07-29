@@ -232,24 +232,5 @@ def _get_region_dcid(sub_region_2: str, sub_region_1: str,
     except Exception as e:
         logging.fatal(f"Error while retrieving DCID {e}.")
 
-
-def convert_to_ascii(string: str) -> str:
-    """Given a string, omit any non-ascii characters.
-    The knowledge graph only supports ascii.
-
-    Args:
-        string (str): the string to convert.
-
-    Returns:
-        str: the same string, without any non-ascii characters.
-        "ñàlom" would be converted to "lom".
-    """
-
-    # Get rid of non-ascii characters.
-    # KG only supports ascii characters.
-    string_ascii: list = [i if ord(i) < 128 else '' for i in string]
-    return ''.join(string_ascii)
-
-
 if __name__ == '__main__':
     covid_mobility()
