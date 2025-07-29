@@ -65,6 +65,7 @@ def main(_):
                 break 
             
             for i in keys:
+                # Here the reference for D7375_3: Time Period of the Value, D7375_4: Gender, I7375_5: Observation Value
                 a = a=i['Country'],i['StateName'],i['Year'],i['D7375_3'],i['D7375_4'],i['I7375_5']['TotalPopulationWeight']
                 all_data.append(a)
             page_num += 1 
