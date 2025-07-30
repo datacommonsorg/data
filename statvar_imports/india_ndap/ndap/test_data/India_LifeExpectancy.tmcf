@@ -5,3 +5,4 @@ value: C:India_LifeExpectancy->value
 variableMeasured: C:India_LifeExpectancy->variableMeasured
 unit: C:India_LifeExpectancy->unit
 typeOf: dcs:StatVarObservation
+observationPeriod: P4Y
