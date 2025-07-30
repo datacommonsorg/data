@@ -39,7 +39,7 @@ def download_xlsx_from_ncses_table(url):
 
     logging.info(f"Fetching URL: {url}")
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=30)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         #used loggings.warning to prevent its overall execution
@@ -122,10 +122,10 @@ def download_xlsx_from_ncses_table(url):
                     os.remove(full_file_path)
                     logging.info(f"Removed non-XLSX file: {full_file_path}")
         else:
-            logging.info("Downloaded file is not a valid ZIP archive (or could not be identified as such).")
+            logging.fatall("Downloaded file is not a valid ZIP archive (or could not be identified as such).")
 
     except Exception as e: 
-        logging.error(f"An unexpected error occurred during file processing: {e}")
+        logging.fatal(f"An unexpected error occurred during file processing: {e}")
         return False # Return False to indicate failure for this year
 
     return True
@@ -154,7 +154,7 @@ def main(argv):
 
      
         if failure >= failure_threshold:
-            logging.info(f"Reached {failure_threshold} consecutive years with no data.Exiting.")
+            logging.fatal(f"Reached {failure_threshold} consecutive years with no data.Exiting.")
             break 
         #getting data on every 2 years
         start_year += 2

@@ -14,7 +14,7 @@ Native Hawaiian or Other Pacific Islander,race,NativeHawaiianOrOtherPacificIslan
 White,race,WhiteAlone,value,{Number},,,,,,,,
 More than one race,race,TwoOrMoreRaces,value,{Number},#MergedCell,0,,,,,,
 ,,,,,,,,,,,,
-"Sex, occupation, and age",observationAbout,country/USA,educationalAttainment,CollegeGraduate,employmentStatus,Employed,populationType,Person,measuredProperty,earnings,statType,medianValue
+"Sex, occupation, and age",observationAbout,country/USA,educationalAttainment,CollegeGraduate,employmentStatus,Employed,populationType,Person,measuredProperty,earnings,statType,medianValue,unit,USDollar
 Both sexes,gender,"""""",#Header,gender,,,,,,,,
 29 and younger,age,[- 29 Years],,,,,,,,,,
 30–39,age,[30 39 Years],,,,,,,,,,

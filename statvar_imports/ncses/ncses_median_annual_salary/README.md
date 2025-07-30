@@ -15,3 +15,8 @@
     - download.py - downloads the data from source and stores it in input_files as a `.xlsx` fileformat
     - statvar_processor.py - Using a statvar script to process the data.
     - Using common pvmap and metadata for the import.
+
+### How to run
+ `python3 download.py`
+
+ `python3 "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/nsf*.xlsx --pv_map=median_annual_salary_pvmap.csv --config_file=median_annual_salary_metadata.csv --output_path=output/ncses_median_annual_salary"`
