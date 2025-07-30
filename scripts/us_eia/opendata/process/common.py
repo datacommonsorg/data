@@ -12,19 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Process EIA datasets to produce TMCF and CSV."""
-
+import os
+import sys
 import csv
 import json
-import logging
+from absl import logging
 import re
 from collections import defaultdict
 from sys import path
 
 # For import util.alpha2_to_dcid
-path.insert(1, '../../../../')
-import util.alpha2_to_dcid as alpha2_to_dcid
-import util.name_to_alpha2 as name_to_alpha2
+# Setup path for import from data/util
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../../util/'))
+import alpha2_to_dcid as alpha2_to_dcid
+import name_to_alpha2 as name_to_alpha2
 
+import file_util
+from counters import Counters
 from . import category
 
 PERIOD_MAP = {
@@ -34,9 +40,43 @@ PERIOD_MAP = {
     'Q': 'Quarterly',
 }
 
+MMETHOD_MAPPING_DICT = {
+    # input source unit wise mapping to measurmentMethod
+    # '2017=1.00000': 'BaseYear2017',
+}
+
+UNIT_MAPPING_DICT = {
+    # input source unit : DC unit
+    'Days': 'Day',
+    '$/ShortTon': 'USDollarPerShortTon',
+    'NumberOfDays': 'Day',
+    'Dollars': 'USDollar',
+    'MillionBarrels': 'MillionsBarrels',
+    '1000MetricTons': 'ThousandMetricTons',
+    'Terajoules': 'Terajoule',
+    'DollarsPerMillionBtu': 'USDollarPerMillionBtu',
+    'DollarsPerGallon': 'USDollarPerGallon',
+    'Kilowatthours': 'KilowattHour',
+    'Barrels': 'Barrel',
+    'DollarsPerBarrel': 'USDollarPerBarrel',
+    'Thousand': "",
+    'Index1982-1984=100': 'IndexPointBasePeriod1982_1984Equals100',
+    '2017=1.00000': 'BaseYear2017',
+    'CentsPerKilowatthour,IncludingTaxes': 'CentsPerKilowatthour',
+    'DollarsPerMillionBtu,IncludingTaxes': 'DollarsPerGallonIncludingTaxes'
+}
+
+UNIT_RANGE_FILTER = {
+    "ThousandBtuPerUsdAtPurchasingPowerParities": {
+        "min": 0,
+        "max": 250
+    }
+}
+
+UNIT_CONVERT_DICT = {'ThousandsOfRegisteredVehicles': 1000}
 _COLUMNS = [
     'place', 'stat_var', 'date', 'value', 'unit', 'scaling_factor',
-    'eia_series_id'
+    'eia_series_id', 'measurementMethod'
 ]
 
 _TMCF_STRING = """
@@ -49,6 +89,7 @@ value: C:EIATable->value
 unit: C:EIATable->unit
 scalingFactor: C:EIATable->scaling_factor
 eiaSeriesId: C:EIATable->eia_series_id
+measurementMethod: C:EIATable->measurementMethod
 """
 
 _DATE_RE = re.compile('[0-9WMQ]')
@@ -82,11 +123,13 @@ def _parse_date(d):
         m_or_q = d[4:]
 
         if m_or_q.startswith('Q'):
+            #print("withQ",yr + '-' + _QUARTER_MAP[m_or_q])
             # Quarterly
             if m_or_q in _QUARTER_MAP:
                 return yr + '-' + _QUARTER_MAP[m_or_q]
         else:
             # Monthly
+            #print("withOutQ",yr + '-' + m_or_q)
             return yr + '-' + m_or_q
 
     if len(d) == 8:
@@ -106,15 +149,33 @@ def _sv_dcid(raw_sv):
     return 'eia/' + raw_sv
 
 
+def _check_unit_with_mapping(in_str):
+    if in_str in UNIT_MAPPING_DICT:
+        in_str = UNIT_MAPPING_DICT[in_str]
+    return in_str
+
+
+def _check_mMethod_with_mapping(in_str):
+    if in_str in MMETHOD_MAPPING_DICT:
+        in_str = MMETHOD_MAPPING_DICT[in_str]
+    else:
+        in_str = ""
+    return in_str
+
+
+def _unitConvert(unit, value):
+    if unit in UNIT_CONVERT_DICT:
+        value = float(value) * UNIT_CONVERT_DICT[unit]
+    return value
+
+
+def _check_unit_range(unit, value):
+    #TODO add this unit filter info into the counter
+    return value > UNIT_RANGE_FILTER[unit]['max']
+
+
 def _enumify(in_str):
     return in_str.title().replace(' ', '')
-
-
-def _print_counters(counters):
-    print('\nSTATS:')
-    for k in sorted(counters):
-        print(f"\t{k} = {counters[k]}")
-    print('')
 
 
 def _find_dc_place(raw_place, is_us_place, counters):
@@ -147,7 +208,7 @@ def _find_dc_place(raw_place, is_us_place, counters):
                 return 'Earth'
 
     # logging.error('ERROR: unsupported place %s %r', raw_place, is_us_place)
-    counters[f'error_unsupported_places_{raw_place}'] += 1
+    counters.add_counter(f'error_unsupported_places_{raw_place}', 1)
     return None
 
 
@@ -216,28 +277,31 @@ def _maybe_parse_name(name, raw_place, is_us_place, counters):
 
     # If we didn't find the name for the place, likely the name doesn't include
     # the place (e.g., TOTAL).
-    counters['info_unmodified_names'] += 1
+    counters.add_counter('info_unmodified_names', 1)
     return cleanup_name(name)
 
 
 def _generate_sv_nodes(dataset, sv_map, sv_name_map, sv_membership_map,
                        sv_schemaful2raw, svg_info):
     nodes = []
-    for sv, mcf in sv_map.items():
-        raw_sv = sv_schemaful2raw[sv] if sv in sv_schemaful2raw else sv
+    try:
+        for sv, mcf in sv_map.items():
+            raw_sv = sv_schemaful2raw[sv] if sv in sv_schemaful2raw else sv
 
-        pvs = [mcf]
-        if raw_sv in sv_name_map:
-            pvs.append(f'name: "{sv_name_map[raw_sv]}"')
+            pvs = [mcf]
+            if raw_sv in sv_name_map:
+                pvs.append(f'name: "{sv_name_map[raw_sv]}"')
 
-        if dataset == 'NUC_STATUS':
-            pvs.append(f'memberOf: dcid:{category.NUC_STATUS_ROOT}')
-        if raw_sv in sv_membership_map:
-            for svg in sorted(sv_membership_map[raw_sv]):
-                if svg in svg_info:
-                    pvs.append(f'memberOf: dcid:{svg}')
+            if dataset == 'NUC_STATUS':
+                pvs.append(f'memberOf: dcid:{category.NUC_STATUS_ROOT}')
+            if raw_sv in sv_membership_map:
+                for svg in sorted(sv_membership_map[raw_sv]):
+                    if svg in svg_info:
+                        pvs.append(f'memberOf: dcid:{svg}')
 
-        nodes.append('\n'.join(pvs))
+            nodes.append('\n'.join(pvs))
+    except Exception as e:
+        logging.fatal(f"error while generating the SV nodes,{sv_name_map} -{e}")
 
     return nodes
 
@@ -286,16 +350,21 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
     counters = defaultdict(lambda: 0)
     sv_map = {}
     sv_name_map = {}
-    with open(in_json) as in_fp, open(out_csv, 'w', newline='') as csv_fp:
+    counters = Counters()
+    counters.add_counter('total', file_util.file_estimate_num_rows(in_json))
+    with file_util.FileIO(in_json) as in_fp, open(out_csv, 'w',
+                                                  newline='') as csv_fp:
+        #with open(in_json) as in_fp, open(out_csv, 'w', newline='') as csv_fp:
         csvwriter = csv.DictWriter(csv_fp, fieldnames=_COLUMNS)
         csvwriter.writeheader()
 
         for line in in_fp:
-            counters['info_lines_processed'] += 1
-            if counters['info_lines_processed'] % 100000 == 99999:
-                _print_counters(counters)
+            counters.add_counter('processed', 1)
 
+            if not line.startswith('{'):
+                continue
             data = json.loads(line)
+            #logging.info(f"Loaded data: {data}")
 
             # Preliminary checks
             series_id = data.get('series_id', None)
@@ -303,28 +372,30 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                 category.process_category(dataset, data,
                                           extract_place_statvar_fn, svg_info,
                                           sv_membership_map, counters)
-                counters['info_categories_processed'] += 1
+
                 continue
 
             time_series = data.get('data', None)
             if not time_series:
-                counters['error_missing_time_series'] += 1
+                counters.add_counter('error_missing_time_series', 1)
                 continue
 
             # Extract raw place and stat-var from series_id.
             (raw_place, raw_sv,
              is_us_place) = extract_place_statvar_fn(series_id, counters)
             if not raw_place or not raw_sv:
-                counters['error_extract_place_sv'] += 1
+                counters.add_counter('error_extract_place_sv', 1)
                 continue
 
             # Map raw place to DC place
             dc_place = _find_dc_place(raw_place, is_us_place, counters)
             if not dc_place:
-                counters['error_place_mapping'] += 1
+                counters.add_counter('error_place_mapping', 1)
                 continue
 
             raw_unit = _enumify(data.get('units', ''))
+            dc_unit = _check_unit_with_mapping(raw_unit)
+            m_method = _check_mMethod_with_mapping(raw_unit)
 
             if raw_sv not in sv_name_map:
                 name = _maybe_parse_name(data.get('name', ''), raw_place,
@@ -352,26 +423,34 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                     # TODO: Handle some these better.
                     _ = float(v)
                 except Exception:
-                    counters['error_non_numeric_values'] += 1
+                    counters.add_counter('error_non_numeric_values', 1)
                     continue
+
+                # check unit range
+
+                if dc_unit in UNIT_RANGE_FILTER:
+                    is_unit_out_of_range = _check_unit_range(dc_unit, v)
+                    if is_unit_out_of_range:
+                        continue
 
                 dt = _parse_date(k)
                 if not dt:
                     logging.error('ERROR: failed to parse date "%s"', k)
-                    counters['error_date_parsing'] += 1
+                    counters.add_counter('error_date_parsing', 1)
                     continue
 
                 rows.append({
                     'place': f"dcid:{dc_place}",
                     'stat_var': f"dcid:{_sv_dcid(raw_sv)}",
                     'date': dt,
-                    'value': v,
+                    'value': _unitConvert(raw_unit, v),
                     'eia_series_id': series_id,
-                    'unit': raw_unit,
+                    'unit': dc_unit,
+                    'measurementMethod': m_method
                 })
 
             if not rows:
-                counters['error_empty_series'] += 1
+                counters.add_counter('error_empty_series', 1)
                 continue
 
             schema_sv = None
@@ -380,14 +459,13 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
                                                        counters)
             if schema_sv:
                 sv_schemaful2raw[schema_sv] = raw_sv
-                counters['info_schemaful_series'] += 1
+                counters.add_counter('info_schemaful_series', 1)
             else:
-                counters['info_schemaless_series'] += 1
+                counters.add_counter('info_schemaless_series', 1)
                 _generate_default_statvar(raw_sv, sv_map)
 
             csvwriter.writerows(rows)
-            counters['info_rows_output'] += len(rows)
-
+            counters.add_counter('info_rows_output', len(rows))
     category.trim_area_categories(svg_info, counters)
 
     with open(out_sv_mcf, 'w') as out_fp:
@@ -406,6 +484,3 @@ def process(dataset, dataset_name, in_json, out_csv, out_sv_mcf, out_svg_mcf,
 
     with open(out_tmcf, 'w') as out_fp:
         out_fp.write(_TMCF_STRING)
-
-    print('=== FINAL COUNTERS ===')
-    _print_counters(counters)
