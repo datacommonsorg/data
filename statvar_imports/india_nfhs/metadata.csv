@@ -1,0 +1,5 @@
+config,value
+header_rows,1
+debug,0
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
+drop_statvars_without_svobs,0
