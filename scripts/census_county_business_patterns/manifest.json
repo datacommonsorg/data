@@ -1,0 +1,33 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "censuCensusCountyBusinessPatterns",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.census.gov/programs-surveys/cbp.html",
+      "provenance_description": "County Business Patterns (CBP) is an annual series that provides subnational economic data for establishments with paid employees by industry and employment size.",
+      "scripts": ["main.py",
+                  "../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/*.csv --pv_map=censuscountybusinesspatterns_pvmap.csv --config_file=censuscountybusinesspatterns_metadata.csv --output_path=gcs_output/output_files/output_cbp"
+          ],
+      "cleanup_gcs_volume_mount": false,
+      "source_files": ["gcs_output/input_files/*"],
+      "import_inputs": [
+        {
+          "template_mcf": "CensusCountyBusinessPatterns.tmcf",
+          "cleaned_csv": "gcs_output/output_files/output_cbp.csv"
+        }
+      ],
+      "resource_limits": {
+        "cpu": "8",
+        "memory": "32G"
+      },
+      "timeout":144000,
+      "cron_schedule": "15 22 10 1,7 *"
+    }
+  ],
+  "config_override":{
+      "invoke_import_tool": false,
+      "invoke_import_validation": false,
+      "ignore_validation_status": true
+   }
+
+}
