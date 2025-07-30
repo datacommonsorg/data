@@ -3,6 +3,8 @@
 - source: `https://ndap.niti.gov.in/dataset/7375`, 
 
 - how to download data: The files can be downloaded using `python3 scripts/world_bank/worldbank_ids/download.py`.
+                        The config is stored in GCS bucket as the source URL is an API with key.
+                        This approach enhances safety by preventing sensitive information from being directly exposed 
 
 - type of place: State.
 
