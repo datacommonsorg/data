@@ -1,2 +1,0 @@
-url='https://loadqa.ndapapi.com/v1/openapi?API_Key=gAAAAABnrzyB1tiwHrggYMoK81fqeUFDhVWacu2CFsVRzMJ4A23xSK4Ov6JLZYHpVi3fQK2ikFB65Xo56PpgeISlZB0OEYfPltYSRIYRfPqb27TNDZd_AK-gdnEIbkyqVuaZCkO9RQYh44TG2mGZwaRC3Yo16s8Ks8-FXtTf2RsV5c-L243hAfGRI984Bed6UTUJMWmDe4Fh&ind=I7375_4&dim=Country,StateName,StateCode,Year,GENDER' 
-input_files='input_files/'
