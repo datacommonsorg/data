@@ -51,7 +51,8 @@ from statvar_dcid_generator import get_statvar_dcid
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
-_DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),'gcs_output/input_files')
+_DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   'gcs_output/input_files')
 _GCS_OUTPUT_PATH = 'gcs_output/output_files/'
 
 flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,

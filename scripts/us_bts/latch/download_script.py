@@ -30,11 +30,11 @@ _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 _GCS_OUTPUT_DIR = os.path.join(_SCRIPT_PATH, 'gcs_output')
 
-from download_util_script import _retry_method,download_file
+from download_util_script import _retry_method, download_file
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('output_dir',os.path.join(_GCS_OUTPUT_DIR,"input_files"),
-                     'Output directory to download files to.')
+flags.DEFINE_string('output_dir', os.path.join(_GCS_OUTPUT_DIR, "input_files"),
+                    'Output directory to download files to.')
 _GCS_URLS_CONFIG_FILE = 'gs://unresolved_mcf/us_bts/latch/latest/import_configs.json'
 _SOCRATA_PAGINATION_LIMIT = 50000
 
@@ -55,7 +55,7 @@ def _download_and_decompress_gz(url: str, output_path: str) -> bool:
                 for chunk in uncompressed:
                     f.write(chunk)
         return True
-   
+
     except Exception as e:
         logging.error(
             f"An unexpected error occurred during GZ download/decompress for {url}: {e}",
@@ -68,7 +68,7 @@ def _download_paginated_socrata_file(
         output_path: str,
         pagination_limit: int = _SOCRATA_PAGINATION_LIMIT) -> bool:
     """Downloads a file with Socrata API pagination logic using internal retry helper."""
-   
+
     offset = 0
     is_header_written = False
 
@@ -84,7 +84,7 @@ def _download_paginated_socrata_file(
         while True:
             separator = '&' if '?' in url else '?'
             paginated_url = f"{url}{separator}$limit={pagination_limit}&$offset={offset}"
-            response = _retry_method(paginated_url,None,3,5,2)
+            response = _retry_method(paginated_url, None, 3, 5, 2)
 
             if response.content.strip() == b'[]':
                 break
@@ -113,7 +113,7 @@ def _download_paginated_socrata_file(
 
         # logging.info(f"Paginated download for {url} finished.")
         return True
- 
+
     except Exception as e:
         logging.error(
             f"An unexpected error occurred during Socrata pagination for {url}: {e}",
@@ -125,10 +125,10 @@ def create_download_configs() -> List[Dict]:
     """Reads the URL config JSON from GCS and generates the download configurations."""
     try:
         result = subprocess.run(['gsutil', 'cat', _GCS_URLS_CONFIG_FILE],
-                                 capture_output=True,
-                                 text=True,
-                                 check=True,
-                                 encoding='UTF-8')
+                                capture_output=True,
+                                text=True,
+                                check=True,
+                                encoding='UTF-8')
         urls_config = json.loads(result.stdout)
         logging.info(
             f"Successfully loaded download configurations from {_GCS_URLS_CONFIG_FILE}"
@@ -166,7 +166,6 @@ def download_all_files_from_config(download_dir: str) -> None:
 
     download_configs = create_download_configs()
 
-
     if not download_configs:
         logging.warning(
             "No download configurations found. Exiting download process.")
@@ -192,7 +191,8 @@ def download_all_files_from_config(download_dir: str) -> None:
                                                       output_path=output_path)
 
             elif file_name_lower.endswith('.zip'):
-                success = download_file(url,
+                success = download_file(
+                    url,
                     output_folder=download_dir,
                     unzip=True,  # Instruct util to unzip
                 )
