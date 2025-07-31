@@ -32,7 +32,7 @@ from absl import logging
 from google.cloud import storage
 
 # pylint: disable=g-bad-import-order
-from download_util_script import _retry_method
+
 
 _FLAGS = flags.FLAGS
 
@@ -43,7 +43,8 @@ flags.DEFINE_string(
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
-
+import file_util
+from download_util_script import _retry_method
 _OUTPUT_COLUMNS = [
     'srcStateName',
     'TRU',
@@ -61,29 +62,6 @@ _OUTPUT_COLUMNS = [
 ]
 
 
-def _get_config_from_gcs(
-    config_file_path: str) -> Tuple[str, str] | Tuple[None, None]:
-  """Downloads and parses the config file from Google Cloud Storage.
-
-  Args:
-    config_file_path: The GCS path to the config file.
-
-  Returns:
-    A tuple containing the URL and input files path, or (None, None) on error.
-  """
-  storage_client = storage.Client()
-  bucket_name, blob_name = config_file_path.split('/', 3)[2:]
-  try:
-    file_contents = storage_client.bucket(bucket_name).blob(
-        blob_name).download_as_text()
-    file_config = json.loads(file_contents)
-    return file_config.get('url'), file_config.get('input_files')
-  except (json.JSONDecodeError, ValueError) as e:
-    logging.fatal('Cannot extract URL and input files path from %s: %s',
-                  config_file_path, e)
-    return None, None
-
-
 def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
   """Downloads and returns raw JSON data from a paginated API.
 
@@ -94,7 +72,9 @@ def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
     A tuple containing the downloaded data as a list of tuples and the output
     directory.
   """
-  url, output_dir = _get_config_from_gcs(config_file_path)
+  file_config = file_util.file_load_py_dict(config_file_path)
+  url = file_config.get('url')
+  output_dir = file_config.get('input_files')
   if not url:
     return [], ''
 
@@ -104,7 +84,7 @@ def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
     api_url = f'{url}&pageno={page_num}'
     response = _retry_method(api_url, None, 3, 5, 2)
     if not response:
-      logging.error('Failed to retrieve data from page %d', page_num)
+      logging.fatal('Failed to retrieve data from page %d', page_num)
       break
 
     try:
