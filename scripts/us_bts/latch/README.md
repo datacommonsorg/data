@@ -12,22 +12,13 @@ The scripts perform the following actions:
 
 This import is considered semi-automated due to the nature of the data source. The URLs for the LATCH dataset are not predictable and may change when new data is released. As a result, the `import_configs.json` file may need to be manually updated to point to the latest data files.
 
-## Prerequisites
+## Autorefresh Information
 
-- Python 3.x
-- The following Python libraries are required:
-  - `pandas`
-  - `numpy`
-  - `requests`
-  - `absl-py`
+This import is considered semi-automated because the data source URLs are not stable and require manual updates for new releases. To refresh the data, you will need to:
 
-## Setup
-
-1.  **Install Dependencies:**
-    Install the required Python libraries using pip:
-    ```bash
-    pip install -r requirements.txt
-    ```
+1.  **Check for New Data:** Visit the [BTS LATCH dataset website](https://www.bts.gov/latch-local-area-transportation-characteristics-households-data) to check for new data releases.
+2.  **Update Configuration:** If new data is available, update the `import_configs.json` file with the new URLs and corresponding year information.
+3.  **Run Scripts:** Execute the download and processing scripts as outlined below.
 
 ## Running the Scripts
 
