@@ -75,4 +75,4 @@ To verify the functionality of the processing script, run the `process_test.py` 
 ```bash
 python3 process_test.py
 ```
-This will run tests against the data in the `test_data` directory and ensure the output is as expected.
+This will run tests against the data in the `output` directory and ensure the output is as expected.
