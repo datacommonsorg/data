@@ -51,8 +51,8 @@ from statvar_dcid_generator import get_statvar_dcid
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
-_DEFAULT_INPUT_PATH = os.path.dirname(os.path.abspath(__file__))
-_GCS_OUTPUT_PATH = 'gs://unresolved_mcf/us_bts/latch/latest/gcs_output/output_files/'
+_DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),'gcs_output/input_files')
+_GCS_OUTPUT_PATH = 'gcs_output/output_files/'
 
 flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
                     "Import Data File's List")
@@ -227,9 +227,7 @@ def _process_household_transportation(input_file: str,
     # Adding Leading Zeros for Fips Code in the geoid column.
     # Before padding STATE = 9009990000
     # After padding STATE = 09009990000
-    data_df["geoid"] = data_df["geoid"].astype("str").str.pad(width=PADDING,
-                                                              side="left",
-                                                              fillchar="0")
+    data_df["geoid"] = data_df["geoid"].astype("str").str.pad(**PADDING)
 
     data_df["location"] = "geoId/" + data_df["geoid"]
     data_df["year"] = file_conf["year"]

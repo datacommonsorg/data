@@ -135,6 +135,7 @@ URBAN = {1: "Urban", 2: "SemiUrban", 3: "Rural"}
 
 RENAME_COLUMNS = {
     "geocode": "geoid",
+    "pden_group_ua": "urban_group",
     "est_pmiles": "pmiles",
     "est_pmiles2007_11": "pmiles",
     "est_ptrp": "ptrp",
@@ -148,8 +149,8 @@ RENAME_COLUMNS = {
 PADDING = {"width": 11, "side": "left", "fillchar": "0"}
 
 CONF_2009_FILE = {
-    "input_file_delimiter": "\t",
-    "basic_cols": ["geoid", "urban_group"],
+    "input_file_delimiter": ",",
+    "basic_cols": ["geoid", "pden_group_ua"],
     "pop_cols": [
         "est_pmiles2007_11", "est_ptrp2007_11", "est_vmiles2007_11",
         "est_vtrp2007_11"
