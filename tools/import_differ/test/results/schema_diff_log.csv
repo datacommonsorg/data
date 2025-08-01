@@ -1,0 +1,8 @@
+Node,_value_combined_x,_value_combined_y,diff_type
+dcid:InterestRate_TreasuryBill_1Month,"""InterestRate_TreasuryBill_1Month""_dcs:StatisticalVariable_dcs:interestRate_dcs:TreasuryBill_[1 Month]_dcs:measuredValue",,DELETED
+dcid:InterestRate_TreasuryBill_1Year,"""InterestRate_TreasuryBill_01Year""_dcs:StatisticalVariable_dcs:interestRate_dcs:TreasuryBill_[1 Year]_dcs:measuredValue","""InterestRate_TreasuryBill_1Year""_dcs:StatisticalVariable_dcs:interestRate_dcs:TreasuryBill_[1 Year]_dcs:measuredValue",MODIFIED
+dcid:InterestRate_TreasuryBill_3Month,"""InterestRate_TreasuryBill_3Month""_dcs:StatisticalVariable_dcs:interestRate_dcs:TreasuryBill_[3 Month]_dcs:measuredValue",,DELETED
+dcid:InterestRate_TreasuryNote_2Year,"""InterestRate_TreasuryNote_02Year""_dcs:StatisticalVariable_dcs:interestRate_dcs:TreasuryNote_[2 Year]_dcs:measuredValue","""InterestRate_TreasuryNote_2Year""_dcs:StatisticalVariable_dcs:interestRate_dcs:TreasuryNote_[2 Year]_dcs:measuredValue",MODIFIED
+dcid:InterestRate_TreasuryNote_3Year,,"""InterestRate_TreasuryNote_3Year""_dcs:StatisticalVariable_dcs:interestRate_dcs:TreasuryNote_[3 Year]_dcs:measuredValue",ADDED
+dcid:InterestRate_TreasuryNote_5Year,,"""InterestRate_TreasuryNote_5Year""_dcs:StatisticalVariable_dcs:interestRate_dcs:TreasuryNote_[5 Year]_dcs:measuredValue",ADDED
+dcid:InterestRate_TreasuryNote_7Year,,"""InterestRate_TreasuryNote_7Year""_dcs:StatisticalVariable_dcs:interestRate_dcs:TreasuryNote_[7 Year]_dcs:measuredValue",ADDED
