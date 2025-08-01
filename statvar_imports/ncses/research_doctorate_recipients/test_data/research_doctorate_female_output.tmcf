@@ -1,0 +1,6 @@
+Node: E:research_doctorate_female->E0
+observationAbout: C:research_doctorate_female->observationAbout
+observationDate: C:research_doctorate_female->observationDate
+value: C:research_doctorate_female->value
+variableMeasured: C:research_doctorate_female->variableMeasured
+typeOf: dcs:StatVarObservation
