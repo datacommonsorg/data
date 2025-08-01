@@ -1,18 +1,35 @@
 {
   "import_specifications": [
     {
-      "import_name": "EPACriteriaAirPollutants",
-      "curator_emails": ["shamimansari@google.com"],
+      "import_name": "  ",
+      "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.epa.gov/outdoor-air-quality-data",
       "provenance_description": "Air quality data collected from outdoor monitors on the county, CBSA, and site monitor level.",
       "scripts": ["air_quality.py"],
+      "cleanup_gcs_volume_mount": false,
+      "source_files": ["gcs_output/input_files/*"],
       "import_inputs": [
         {
           "template_mcf": "EPA_AirQuality.tmcf",
-          "cleaned_csv": "EPA_AirQuality.csv"
+          "cleaned_csv": "gcs_output/output/EPA_AirQuality*.csv"
+        },
+        {
+          "template_mcf": "EPA_AirQuality_stations.tmcf",
+          "cleaned_csv": "gcs_output/output/EPA_AirQuality*.csv"
         }
       ],
+      "resource_limits": {
+        "cpu": "8",
+        "memory": "32G"
+      },
+      "timeout":144000,
       "cron_schedule": "15 22 10 1,7 *"
     }
-  ]
+  ],
+  "config_override":{
+      "invoke_import_tool": false,
+      "invoke_import_validation": false,
+      "ignore_validation_status": true
+   }
+
 }
