@@ -11,9 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''
+"""
 Description: This script contains unit tests for the parse_precipitation_index.py script.
-'''
+"""
 
 import unittest
 import os

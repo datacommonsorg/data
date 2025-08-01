@@ -18,5 +18,15 @@
         "output_file_name": "CDC_StandardizedPrecipitationIndex_output.csv"
       }
     ]
+  },
+  {
+    "import_name": "CDC_PalmerDroughtSeverityIndex",
+    "files": [
+      {
+        "url": "https://data.cdc.gov/resource/en5r-5ds4.csv",
+        "input_file_name": "CDC_PalmerDroughtSeverityIndex_input.csv",
+        "output_file_name": "CDC_PalmerDroughtSeverityIndex_output.csv"
+      }
+    ]
   }
 ]

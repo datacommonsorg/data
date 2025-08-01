@@ -45,7 +45,7 @@ To manually trigger a cloud deployment of the import job:
   -d <instance-name> \
   -cloud \
   -a <artifact-registry-path> \
-  ../../scripts/us_cdc/environmental/manifest.json
+  scripts/us_cdc/cdc_standardized_precipitation/index/manifest.json
 ```
 
 ## References
