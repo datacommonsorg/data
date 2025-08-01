@@ -73,6 +73,19 @@ class TestParsePrecipitationData(unittest.TestCase):
         )
         self._test_data_cleaning(input_csv, expected_csv)
 
+    def test_clean_precipitation_data_palmer(self):
+        """
+        Tests the clean_precipitation_data function for PalmerDroughtSeverityIndex.
+        """
+        input_csv = os.path.join(
+            module_dir_,
+            'palmer_drought/test_data/CDC_PalmerDroughtSeverityIndex_input.csv')
+        expected_csv = os.path.join(
+            module_dir_,
+            'palmer_drought/test_data/CDC_PalmerDroughtSeverityIndex_output.csv'
+        )
+        self._test_data_cleaning(input_csv, expected_csv)
+
 
 if __name__ == '__main__':
     unittest.main()

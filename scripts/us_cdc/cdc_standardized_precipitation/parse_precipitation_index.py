@@ -23,7 +23,7 @@ python3 parse_precipitation_index.py input_files output_files
 import sys
 import pandas as pd
 from absl import logging
-import os  
+import os
 
 logging.set_verbosity(logging.INFO)
 
@@ -63,7 +63,7 @@ def clean_precipitation_data(file_path, output_file):
                     inplace=True)
 
         data["fips"] = data["fips"].astype(str)
-        data["fips"] = data["fips"].str.zfill(FIPS_TARGET_LENGTH)
+        data["fips"] = data["fips"].str.zfill(5)
         data = pd.melt(
             data,
             id_vars=['state', 'county', 'fips', 'year', 'month', 'date'],
@@ -76,8 +76,7 @@ def clean_precipitation_data(file_path, output_file):
     elif "Palmer" in file_path:
         data.rename(columns={"pdsi": "PalmerDroughtSeverityIndex"},
                     inplace=True)
-        data["countyfips"] = data["countyfips"].astype(str).str.zfill(
-            FIPS_TARGET_LENGTH)
+        data["countyfips"] = "0" + data["countyfips"].astype(str)
         data = pd.melt(
             data,
             id_vars=['year', 'month', 'date', 'statefips', 'countyfips'],
