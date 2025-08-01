@@ -1,93 +1,102 @@
 # Importing FBI Hate Crime Data
 
-This directory imports [FBI Hate Crime Data](https://ucr.fbi.gov/hate-crime) into Data Commons. It includes data at US, state and city level.
+This directory contains scripts to import FBI Hate Crime Data into Data Commons. It supports two main import processes:
+1.  **FBIHatecrimePublications**: Processes individual data tables from the FBI's annual Hate Crime Statistics publications. This is a semi-autorefresh import.
+2.  **FBIHateCrime**: Generates detailed aggregations from a master hate crime incident file.
 
-## Generating Artifacts:
-To generate `cleaned.csv`, `output.mcf` for a publication. run:
+---
+
+## 1. FBI Hate Crime Publications Import (`FBIHatecrimePublications` - Semi Autorefresh)
+
+This process imports data from specific tables published annually by the FBI.
+
+### Details
+
+#### Implementation
+Each publication table (e.g., Table 1, Table 14) has a corresponding directory (`table1/`, `table14/`) containing a `preprocess.py` script. These scripts read the source data from the local `hate_crime_publication_data` directory, process it, and generate cleaned CSV, TMCF, and MCF files within their respective directories.
+
+#### Configuration & Maintenance
+Given that the headers in the downloaded source files change annually, a `table_config.json` file is required. This configuration file contains the specific headers to be processed for each year. Annually, it is necessary to review the newly downloaded source files, confirm their headers, and update the `table_config.json` accordingly, making this a semi-autorefresh import.
+#### Semi Autorefresh Steps : 
+1) Go to the latest downloaded input file inside 'hate_crime_publication_data'
+2) Confirm if the headers in the latest file are same as configured in the 'table_config.json' file
+3) If the header is same as the latest available one in the json, just add the year into the same config dictionary
+4) If the headers are new, create a new key-valye pair for year:{headers} in the same dictionary and run the process scripts
+
+#### Combining Tables 1-10
+A shell script, `run.sh`, is provided to combine the cleaned CSV outputs from `table1/` through `table10/` into a single file: `tables1-10/t1tot10_combined.csv`. It also copies the TMCF file from `table1/` to serve as the template for the combined data, as these tables represent a single logical dataset in the manifest.
+
+#### Data Caveats
+- The output MCF generated from these files is not used due to the change in populationType from 'CriminalIncidents' to 'HateCrimeIncidents' and removal of the 'isHateCrime' property in the statvar definitions. The definitions for the statvars come from the hate crime aggregation scripts.
+- New Jersey is missing data for the year 2012 in publications 11 and 12.
+- Data for a few locations of crime (publication 10) are missing for certain years.
+
+### Steps
+
+#### Step 1: Download Raw Data
+Run the script to download the latest hate crime publication tables. This script will create a `hate_crime_publication_data` directory and place the downloaded files inside.
 
 ```bash
-cd table<publication number>
+python3 download_fbi_publication_data.py
+```
+
+#### Step 2: Preprocess Publication Tables
+For each publication table you want to import, run its preprocessing script.
+
+```bash
+# Navigate to the table's directory
+cd table<publication_number>
+
+# Run the preprocessing script
 python3 preprocess.py
 ```
 
-### Data Caveats:
-- New Jersey is missing data for year 2012 in publications 11 and 12
-- Data for a few locations of crime (publication 10) are missing for certain years
-- The output MCF generated from these files is not used due to the change in populationType from 'CriminalIncidents' to 'HateCrimeIncidents' and removal of the 'isHateCrime' property in the statvar definitions. The definitions for the statvars come from the hate crime aggregation scripts.
+#### Step 3: Combine Tables 1-10
+After preprocessing tables 1 through 10, run the combination script from the `hate_crime` directory:
 
-## Download Publication Tables
-The `download_publication_data.py` script helps download xls files from the [UCR base url for hate crime](https://ucr.fbi.gov/hate-crime). 
-
-The script works using `requests` and `BeautifulSoup` to find the download links.
-
-### Notes
-- Currently the script is not able to download data for 2004 and Table 13, 14 for 2005
-- By default the extension of saved file is `.xls`. This might cause a problem is extenstions are changed in future
-- The script tries to find a link to `Access Tables` at one stage. The first instance of it is used if multiple links are found
-- Data for 2020 can be downloaded from the [crime data explorer](https://crime-data-explorer.app.cloud.gov/pages/downloads) website
-- The scripts expect the data to be in hate_crime/source_data directory.
-
-### Examples
-To download data from 2005 to 2019
 ```bash
-python3 download_publication_data.py
+sh run.sh
 ```
 
-To download data for subset of years
+---
+
+## 2. FBI Hate Crime Aggregations Import (`FBIHateCrime` - Full Autorefresh)
+
+This process generates a wide range of statistical aggregations from a single, master CSV file containing individual hate crime incidents.
+
+### Details
+
+#### Implementation
+The `preprocess_aggregations.py` script reads the master `hate_crime.csv` file from the local `hate_crime_data/` directory. It processes this file to create numerous aggregations based on different facets like bias motivation, location, offender demographics, etc.
+
+The script outputs individual CSV files for each aggregation to ease debugging, along with a final combined `aggregation.csv` file. All outputs are placed in the `aggregations/` directory.
+
+#### Final MCF Modifications
+The output MCF file requires manual changes to align with the final StatVar definitions:
+- Drop the `isHateCrime` property.
+- Change `populationType` to `HateCrimeIncidents`.
+- Convert `biasMotivation: dcs:TransgenderOrGenderNonConforming` to `biasMotivation: dcs:gender` and add `targetedGender: dcs:TransgenderOrGenderNonConforming`.
+- Add the `offenderType` property with values from `KnownOffender`, `KnownOffenderRace`, `KnownOffenderEthnicity`, or `KnownOffenderAge` where applicable.
+
+### Steps
+
+#### Step 1: Download Master Data File
+Run the script to download the master hate crime data file. This will download and place the `hate_crime.csv` file into the `hate_crime_data/` directory.
+
 ```bash
-python3 download_publication_data.py --start_year=2010 --end_year=2015
+python3 download_fbi_hate_crime_data.py
 ```
 
-To download data from 2005 to 2019 at a different location and force download rather than using `cache`
+#### Step 2: Run Aggregation Script
+To generate all aggregations from the master file:
+
 ```bash
-python3 download_publication_data.py --store_path=./publications --force_fetch
+python3 preprocess_aggregations.py
 ```
 
-## Aggregations from master file
+---
 
-`preprocess_aggregations.py` creates aggregations from master file with each individual incident recorded. The script outputs individual files for each type of aggregation to ease debugging and a combined `aggregation.csv` file under `aggregations` folder with all the final observations.
+## Future Improvements & TODOs : b/433653837
 
-To create aggregations
-```bash
-python preprocess_aggregations_test.py
-```
-
-
-### Changes required for final mcf file
-
-The output mcf file is produced such that the DCIDs are present. In order to get the final version of the stat vars following changes need to be made:
-- drop `isHateCrime` property
-- change `populationType` to be `HateCrimeIncidents`
-- `biasMotivation: dcs:TransgenderOrGenderNonConforming` to `biasMotivation: dcs:gender` and `targetedGender: dcs:TransgenderOrGenderNonConforming`
-- add `offenderType` property with value from `KnownOffender`, `KnownOffenderRace`, `KnownOffenderEthnicity`, `KnownOffenderAge` where applicable.
-
-
-## Download Publication Tables
-
-The `download_publication_data.py` script helps download xls files from the [UCR base url for hate crime](https://ucr.fbi.gov/hate-crime). 
-
-The script works using `requests` and `BeautifulSoup` to find the download links.
-
-### Notes
-
-- Currently the script is not able to download data for 2004 and Table 13, 14 for 2005
-- By default the extension of saved file is `.xls`. This might cause a problem is extenstions are changed in future.
-- The script tries to find a link to `Access Tables` at one stage. The first instance of it is used if multiple links are found.
-- It is a good idea to check the size or content type(pandas load) of data for a sanity check. If some error was encountered, HTML data might be stored in the file making it unusable with xls applications.
-
-## Examples
-
-To download data from 2005 to 2019
-```bash
-python3 download_publication_data.py
-```
-
-To download data for subset of years
-```bash
-python3 download_publication_data.py --start_year=2010 --end_year=2015
-```
-
-To download data from 2005 to 2019 at a different location and force download rather than using `cache`
-```bash
-python3 download_publication_data.py --store_path=./publications --force_fetch
-```
+* Automate MCF modifications : Current output MCF requires manual modifications to use it further, need to make the script do these manaul changes.
+* Test script creation : Create test script for preprocess_aggregation.py

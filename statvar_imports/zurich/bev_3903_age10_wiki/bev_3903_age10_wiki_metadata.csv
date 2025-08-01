@@ -1,0 +1,14 @@
+parameter,value
+url,https://www.stadt-zuerich.ch/portal/de/index.html
+description,
+place_type,Country
+#places_within,
+start_date,
+end_date,
+release_frequency,
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod"
+header_rows,1
+#input_rows,10
+#Import_Name,Zurich_Population_By_Age
