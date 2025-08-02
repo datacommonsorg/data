@@ -53,6 +53,8 @@ def clean_precipitation_data(file_path, output_file):
         logging.info(f"Ensured output directory '{output_dir}' exists.")
 
     data = pd.DataFrame(pd.read_csv(file_path))
+    if 'pdsi' in data.columns:
+        data['year'] = data['year'].str.replace(r'\\t', '', regex=True).str.replace(r'""', '"', regex=True)
     data["month"] = data["month"].map("{:02}".format)
     data["date"] = data["year"].astype(str) + "-" + data["month"].astype(str)
     FIPS_TARGET_LENGTH = 5
@@ -63,7 +65,7 @@ def clean_precipitation_data(file_path, output_file):
                     inplace=True)
 
         data["fips"] = data["fips"].astype(str)
-        data["fips"] = data["fips"].str.zfill(5)
+        data["fips"] = data["fips"].str.zfill(FIPS_TARGET_LENGTH)
         data = pd.melt(
             data,
             id_vars=['state', 'county', 'fips', 'year', 'month', 'date'],
@@ -75,14 +77,14 @@ def clean_precipitation_data(file_path, output_file):
         data["dcid"] = "geoId/" + data["fips"].astype(str)
     elif "pdsi" in data.columns:
         data.rename(
-            columns={"pdsi": "PalmerDroughtSeverityIndex_Atmosphere"},
+            columns={"pdsi": "PalmerDroughtSeverityIndex"},
             inplace=True)
         data["countyfips"] = data["countyfips"].astype(str).str.zfill(
             FIPS_TARGET_LENGTH)
         data = pd.melt(
             data,
             id_vars=['year', 'month', 'date', 'statefips', 'countyfips'],
-            value_vars=["PalmerDroughtSeverityIndex_Atmosphere"],
+            value_vars=["PalmerDroughtSeverityIndex"],
             var_name='StatisticalVariable',
             value_name='Value')
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
