@@ -1,0 +1,32 @@
+[  
+  {
+    "import_name": "CDC_StandardizedPrecipitationEvapotranspirationIndex",
+    "files": [
+      {
+        "url": "https://data.cdc.gov/resource/6nbv-ifib.csv",
+        "input_file_name": "CDC_StandardizedPrecipitationEvapotranspirationIndex_input.csv",
+        "output_file_name": "CDC_StandardizedPrecipitationEvapotranspirationIndex_output.csv"
+      }
+    ]
+  },
+  {
+    "import_name": "CDC_StandardizedPrecipitationIndex",
+    "files": [
+      {
+        "url": "https://data.cdc.gov/resource/xbk2-5i4e.csv",
+        "input_file_name": "CDC_StandardizedPrecipitationIndex_input.csv",
+        "output_file_name": "CDC_StandardizedPrecipitationIndex_output.csv"
+      }
+    ]
+  },
+  {
+    "import_name": "CDC_PalmerDroughtSeverityIndex",
+    "files": [
+      {
+        "url": "https://data.cdc.gov/resource/en5r-5ds4.csv",
+        "input_file_name": "CDC_PalmerDroughtSeverityIndex_input.csv",
+        "output_file_name": "CDC_PalmerDroughtSeverityIndex_output.csv"
+      }
+    ]
+  }
+]
