@@ -54,7 +54,8 @@ def clean_precipitation_data(file_path, output_file):
 
     data = pd.DataFrame(pd.read_csv(file_path))
     if 'pdsi' in data.columns:
-        data['year'] = data['year'].str.replace(r'\\t', '', regex=True).str.replace(r'""', '"', regex=True)
+        data['year'] = data['year'].astype(str).str.replace(
+            r'\\t', '', regex=True).str.replace(r'""', '"', regex=True)
     data["month"] = data["month"].map("{:02}".format)
     data["date"] = data["year"].astype(str) + "-" + data["month"].astype(str)
     FIPS_TARGET_LENGTH = 5
@@ -76,9 +77,8 @@ def clean_precipitation_data(file_path, output_file):
             value_name='Value')
         data["dcid"] = "geoId/" + data["fips"].astype(str)
     elif "pdsi" in data.columns:
-        data.rename(
-            columns={"pdsi": "PalmerDroughtSeverityIndex"},
-            inplace=True)
+        data.rename(columns={"pdsi": "PalmerDroughtSeverityIndex"},
+                    inplace=True)
         data["countyfips"] = data["countyfips"].astype(str).str.zfill(
             FIPS_TARGET_LENGTH)
         data = pd.melt(
