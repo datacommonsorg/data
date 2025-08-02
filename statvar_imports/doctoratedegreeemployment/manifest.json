@@ -1,0 +1,25 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "NCSES_DoctorateDegreeEmployment",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://ncses.nsf.gov/pubs/nsf19304/assets/data/tables/wmpd19-sr-tab09-026.xlsx",
+      "provenance_description": "Science,engineering and health doctorate holders employed in universities and 4-year colleges by broad occupation,sex,race,ethnicity and tenure status",
+       "scripts": [
+    "./add_year.py",
+    "../../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/wmpd19-sr-tab09-026.csv --pv_map=pv_map.csv --config_file=metadata.csv --output_path=output/doctoratedegreeemployment"
+  ],
+      "import_inputs": [
+        {
+          "template_mcf": "output/doctoratedegreeemployment.tmcf",
+          "cleaned_csv": "output/doctoratedegreeemployment.csv"
+        }
+      ],
+      "source_files": [
+        "source_files/*.csv"
+      ],
+      "cron_schedule": "30 05 * * 1"
+    }
+  ]
+}
+
