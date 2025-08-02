@@ -56,7 +56,7 @@ def clean_precipitation_data(file_path, output_file):
     data["month"] = data["month"].map("{:02}".format)
     data["date"] = data["year"].astype(str) + "-" + data["month"].astype(str)
     FIPS_TARGET_LENGTH = 5
-    if "Evapotranspiration" in file_path:
+    if "spei" in data.columns:
         data.rename(columns={
             "spei": "StandardizedPrecipitation" + "EvapotranspirationIndex"
         },
@@ -73,14 +73,16 @@ def clean_precipitation_data(file_path, output_file):
             var_name='StatisticalVariable',
             value_name='Value')
         data["dcid"] = "geoId/" + data["fips"].astype(str)
-    elif "Palmer" in file_path:
-        data.rename(columns={"pdsi": "PalmerDroughtSeverityIndex"},
-                    inplace=True)
-        data["countyfips"] = "0" + data["countyfips"].astype(str)
+    elif "pdsi" in data.columns:
+        data.rename(
+            columns={"pdsi": "PalmerDroughtSeverityIndex_Atmosphere"},
+            inplace=True)
+        data["countyfips"] = data["countyfips"].astype(str).str.zfill(
+            FIPS_TARGET_LENGTH)
         data = pd.melt(
             data,
             id_vars=['year', 'month', 'date', 'statefips', 'countyfips'],
-            value_vars=["PalmerDroughtSeverityIndex"],
+            value_vars=["PalmerDroughtSeverityIndex_Atmosphere"],
             var_name='StatisticalVariable',
             value_name='Value')
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
