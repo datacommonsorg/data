@@ -1,6 +1,6 @@
 Node: E:CDC_PalmerDroughtSeverityIndex->E1
 typeOf: dcs:StatVarObservation
-variableMeasured: dcs:PalmerDroughtSeverityIndex_Atmosphere
+variableMeasured: dcs:PalmerDroughtSeverityIndex
 measurementMethod: dcs:CDC_PalmerDroughtSeverityIndex
 observationAbout: C:CDC_PalmerDroughtSeverityIndex->dcid
 observationDate: C:CDC_PalmerDroughtSeverityIndex->date
