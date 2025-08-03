@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "IndiaNSS_HealthAilments",
+        "curator_emails": [
+          ""
+        ],
+        "provenance_url": "https://ndap.niti.gov.in/dataset/7300",
+        "provenance_description": "NDAP Dataset",
+        "scripts": [
+          "download_script.py",
+          "../../tools/statvar_importer/stat_var_processor.py --input_data=source_files/*.xlsx --pv_map=pvmap.csv --config_file=metadata.csv --places_resolved_csv=place_resolved.csv --output_path=test_data/output"
+        ],
+        "source_files": [
+         "source_files/*.xlsx"
+      ],
+        "import_inputs": [
+          {
+            "template_mcf": "test_data/output.tmcf",
+            "cleaned_csv": "test_data/output.csv"
+          }
+        ],
+        "cron_schedule": "0 07 4,18 * *"
+      }
+    ]
+  }
