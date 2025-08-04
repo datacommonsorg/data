@@ -19,6 +19,7 @@ from absl import flags
 from absl import logging
 import pandas as pd
 import sys
+from typing import Tuple
 
 from .validation_config import ValidationConfig
 from .report_generator import ReportGenerator
@@ -49,47 +50,9 @@ class ValidationRunner:
         self.validation_output = validation_output
         self.validator = Validator()
         self.validation_results = []
-
-        # Determine required data sources from the config
-        stats_required = False
-        differ_required = False
-        for rule in self.config.rules:
-            if not rule.get('enabled', True):
-                continue
-            if 'scope' in rule and 'data_source' in rule['scope']:
-                if rule['scope']['data_source'] == 'stats':
-                    stats_required = True
-                elif rule['scope']['data_source'] == 'differ':
-                    differ_required = True
-
-        # Check if required files are provided
-        if stats_required and (not stats_summary or
-                               not os.path.exists(stats_summary)):
-            raise ValueError(
-                f"A validation rule requires the 'stats' data source, but the --stats_summary file was not provided or does not exist. Path: {stats_summary}"
-            )
-
-        if differ_required and (not differ_output or
-                                not os.path.exists(differ_output)):
-            raise ValueError(
-                f"A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. Path: {differ_output}"
-            )
-
-        # Load dataframes
         self.dataframes = {'stats': pd.DataFrame(), 'differ': pd.DataFrame()}
-        if stats_summary and os.path.exists(stats_summary) and os.path.getsize(
-                stats_summary) > 0:
-            self.dataframes['stats'] = pd.read_csv(stats_summary)
-        elif stats_summary and os.path.exists(stats_summary):
-            logging.warning("stats_summary file exists but is empty: %s",
-                            stats_summary)
 
-        if differ_output and os.path.exists(differ_output) and os.path.getsize(
-                differ_output) > 0:
-            self.dataframes['differ'] = pd.read_csv(differ_output)
-        elif differ_output and os.path.exists(differ_output):
-            logging.warning("differ_output file exists but is empty: %s",
-                            differ_output)
+        self._initialize_data_sources(stats_summary, differ_output)
 
         self.validation_dispatch = {
             'SQL_VALIDATOR': (self.validator.validate_sql, 'sql'),
@@ -114,6 +77,54 @@ class ValidationRunner:
             'MAX_VALUE_CHECK':
                 (self.validator.validate_max_value_check, 'stats'),
         }
+
+    def _initialize_data_sources(self, stats_summary: str, differ_output: str):
+        """
+    Checks for and loads the required data sources based on the config.
+    """
+        stats_required, differ_required = self._determine_required_sources()
+
+        if stats_required and (not stats_summary or
+                               not os.path.exists(stats_summary)):
+            raise ValueError(
+                f"A validation rule requires the 'stats' data source, but the --stats_summary file was not provided or does not exist. Path: {stats_summary}"
+            )
+
+        if differ_required and (not differ_output or
+                                not os.path.exists(differ_output)):
+            raise ValueError(
+                f"A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. Path: {differ_output}"
+            )
+
+        if stats_summary and os.path.exists(stats_summary) and os.path.getsize(
+                stats_summary) > 0:
+            self.dataframes['stats'] = pd.read_csv(stats_summary)
+        elif stats_summary and os.path.exists(stats_summary):
+            logging.warning("stats_summary file exists but is empty: %s",
+                            stats_summary)
+
+        if differ_output and os.path.exists(differ_output) and os.path.getsize(
+                differ_output) > 0:
+            self.dataframes['differ'] = pd.read_csv(differ_output)
+        elif differ_output and os.path.exists(differ_output):
+            logging.warning("differ_output file exists but is empty: %s",
+                            differ_output)
+
+    def _determine_required_sources(self) -> Tuple[bool, bool]:
+        """
+    Parses the validation config to determine which data sources are required.
+    """
+        stats_required = False
+        differ_required = False
+        for rule in self.config.rules:
+            if not rule.get('enabled', True):
+                continue
+            if 'scope' in rule and 'data_source' in rule['scope']:
+                if rule['scope']['data_source'] == 'stats':
+                    stats_required = True
+                elif rule['scope']['data_source'] == 'differ':
+                    differ_required = True
+        return stats_required, differ_required
 
     def run_validations(self) -> tuple[bool, list[ValidationResult]]:
         """Runs all validations specified in the config.
