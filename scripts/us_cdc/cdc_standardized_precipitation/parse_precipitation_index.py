@@ -11,14 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-'''
+"""
 Description: This script cleans up a csv file on county level
 precipitation data downloaded from the CDC.
 URL: https://data.cdc.gov/browse?category=Environmental+Health+%26+Toxicology
 @input_file     filepath to the original csv that needs to be cleaned
 @output_file    filepath to the csv to which the cleaned data is written
 python3 parse_precipitation_index.py input_files output_files
-'''
+"""
 
 import sys
 import pandas as pd
