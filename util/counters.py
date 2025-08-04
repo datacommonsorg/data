@@ -57,7 +57,7 @@ class Counters():
       counters = Counters(prefix='my_process')
       ...
       counters.add_counter('input_rows')
-      counters.add_counter('output_rows', 10)
+         .add_counter('output_rows', 10)
       counters.add_counter('processed', 1)
 
       # Min/Max counters
