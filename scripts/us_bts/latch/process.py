@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,16 +23,14 @@ Folder information
 input_files - downloaded files (from US census website) are placed here
 output_files - output files (mcf, tmcf and csv are written here)
 """
-from asyncio.log import logger
+import json
 import os
 import sys
-import json
-import subprocess
 import warnings
 
-import pandas as pd
+from absl import app, flags, logging
 import numpy as np
-from absl import app, flags
+import pandas as pd
 
 _CODEDIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(1, _CODEDIR)
@@ -48,12 +46,14 @@ sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
 
 # pylint: disable=import-error
 from statvar_dcid_generator import get_statvar_dcid
+import file_util
 # pylint: enable=import-error
 # pylint: enable=wrong-import-position
 _FLAGS = flags.FLAGS
 _DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    'gcs_output/input_files')
-_GCS_OUTPUT_PATH = 'gcs_output/output_files/'
+_GCS_BUCKET = os.environ.get('GCS_BUCKET', 'datacommons-imports')
+_GCS_OUTPUT_PATH = f'gs://{_GCS_BUCKET}/us_bts/latch'
 
 flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
                     "Import Data File's List")
@@ -61,17 +61,12 @@ flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
 
 def _upload_to_gcs(file_path: str):
     """Uploads a file to the GCS output path."""
+    gcs_file_path = os.path.join(_GCS_OUTPUT_PATH, os.path.basename(file_path))
     try:
-        subprocess.run([
-            'gsutil', '-o', 'GSUtil:parallel_composite_upload_threshold=150M',
-            'cp', file_path, _GCS_OUTPUT_PATH
-        ],
-                       check=True,
-                       capture_output=True,
-                       text=True)
-        logger.info(f"Successfully uploaded {file_path} to {_GCS_OUTPUT_PATH}")
-    except (subprocess.CalledProcessError, FileNotFoundError) as e:
-        logger.error(f"Failed to upload {file_path} to GCS: {e}")
+        file_util.file_copy(file_path, gcs_file_path)
+        logging.info(f"Successfully uploaded {file_path} to {gcs_file_path}")
+    except Exception as e:
+        logging.fatal(f"Failed to upload {file_path} to GCS: {e}")
 
 
 def _promote_measurement_method(data_df: pd.DataFrame) -> pd.DataFrame:
@@ -487,23 +482,21 @@ def main(_):
         if not ip_files:
             raise FileNotFoundError
     except FileNotFoundError:
-        logger.error(
+        logging.fatal(
             "Input files not found in the specified input_path. Run the download.py script first."
         )
-        sys.exit(1)
     ip_files = [os.path.join(input_path, file) for file in ip_files]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output")
-    # Creating Output Directory
-    if not os.path.exists(output_file_path):
-        os.mkdir(output_file_path)
     # Defining Output Files
-
     cleaned_csv_path = os.path.join(output_file_path,
                                     "us_transportation_household.csv")
     mcf_path = os.path.join(output_file_path, "us_transportation_household.mcf")
     tmcf_path = os.path.join(output_file_path,
                              "us_transportation_household.tmcf")
+
+    # Creating Output Directory
+    file_util.file_makedirs(cleaned_csv_path)
     generated_csv_files = process(ip_files, cleaned_csv_path, mcf_path,
                                   tmcf_path)
 
