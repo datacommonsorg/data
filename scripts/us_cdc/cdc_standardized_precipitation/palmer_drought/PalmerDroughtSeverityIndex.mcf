@@ -1,0 +1,11 @@
+Node: dcs:PalmerDroughtSeverityIndex
+typeOf: dcs:StatisticalVariable
+name: "Palmer Drought Severity Index"
+populationType: dcs:Place
+statType: dcs:measuredValue
+measuredProperty: dcs:palmerDroughtSeverityIndex
+
+Node: dcs:CDC_PalmerDroughtSeverityIndex
+typeOf: dcs:MeasurementMethod
+name: "CDC Palmer Drought Severity Index"
+description: "The Palmer Drought Severity Index (PDSI) is a measure of drought based on precipitation and temperature data."
