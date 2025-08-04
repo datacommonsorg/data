@@ -85,7 +85,6 @@ def download_data(config_file_path: str) -> Tuple[List[Tuple], str]:
     response = _retry_method(api_url, None, 3, 5, 2)
     if not response:
       logging.fatal('Failed to retrieve data from page %d', page_num)
-      break
 
     try:
       response_data = response.json()
