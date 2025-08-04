@@ -41,24 +41,36 @@ sys.path.append(os.path.dirname(os.path.dirname(_SCRIPT_DIR)))
 sys.path.append(
     os.path.join(os.path.dirname(os.path.dirname(_SCRIPT_DIR)), 'util'))
 
-flags.DEFINE_string('sampler_input', '', 'CSV file to be sample')
-flags.DEFINE_string('sampler_output', '', 'Output file for CSV.')
-flags.DEFINE_integer('sampler_output_rows', 100,
-                     'Maximum number of output rows.')
-flags.DEFINE_integer('sampler_header_rows', 1,
-                     'Number of header rows to be copied to output.')
-flags.DEFINE_integer('sampler_rows_per_key', 5,
-                     'Number of rows per unique value.')
-flags.DEFINE_float('sampler_rate', -1, 'Number of rows per unique value.')
-flags.DEFINE_string('sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
-                    'Regex to select unique column values.')
-flags.DEFINE_string('sampler_unique_columns', '',
-                    'List of columns to look for unique values.')
-flags.DEFINE_string('sampler_input_delimiter', ',', 'delimiter for input data')
+flags.DEFINE_string('sampler_input', '',
+                    'The path to the input CSV file to be sampled.')
+flags.DEFINE_string('sampler_output', '',
+                    'The path to the output file for the sampled CSV data.')
+flags.DEFINE_integer(
+    'sampler_output_rows', 100,
+    'The maximum number of rows to include in the sampled output.')
+flags.DEFINE_integer(
+    'sampler_header_rows', 1,
+    'The number of header rows to be copied directly to the output file.')
+flags.DEFINE_integer(
+    'sampler_rows_per_key', 5,
+    'The maximum number of rows to select for each unique value found.')
+flags.DEFINE_float(
+    'sampler_rate', -1,
+    'The sampling rate for random row selection (e.g., 0.1 for 10%).')
+# TODO: Rename to sampler_cell_value_regex to better reflect its purpose.
+# See: https://github.com/datacommonsorg/data/pull/1445#discussion_r2180147075
+flags.DEFINE_string(
+    'sampler_column_regex', r'^[0-9]{4}$|[a-zA-Z-]',
+    'A regular expression used to identify and select unique column values.')
+flags.DEFINE_string(
+    'sampler_unique_columns', '',
+    'A comma-separated list of column names to use for selecting unique rows.')
+flags.DEFINE_string('sampler_input_delimiter', ',',
+                    'The delimiter used in the input CSV file.')
 flags.DEFINE_string('sampler_input_encoding', 'UTF8',
-                    'delimiter for input data')
+                    'The encoding of the input CSV file.')
 flags.DEFINE_string('sampler_output_delimiter', None,
-                    'delimiter for output data')
+                    'The delimiter to use in the output CSV file.')
 
 _FLAGS = flags.FLAGS
 
@@ -72,22 +84,48 @@ from config_map import ConfigMap
 
 # Class to sample a data file.
 class DataSampler:
+    """A class for sampling data from a file.
+
+    This class provides functionality to sample rows from a CSV file based on
+    various criteria such as unique values in columns, sampling rate, and maximum
+    number of rows.
+
+    Attributes:
+        _config: A ConfigMap object containing the configuration parameters.
+        _counters: A Counters object for tracking various statistics during the
+          sampling process.
+        _column_counts: A dictionary to store the count of unique values per
+          column.
+        _column_headers: A dictionary to store the headers of the columns.
+        _column_regex: A compiled regular expression to filter column values.
+        _selected_rows: The number of rows selected so far.
+    """
 
     def __init__(
         self,
         config_dict: dict = None,
-        counters: dict = None,
+        counters: Counters = None,
     ):
+        """Initializes the DataSampler object.
+
+        Args:
+            config_dict: A dictionary of configuration parameters.
+            counters: A Counters object for tracking statistics.
+        """
         self._config = ConfigMap(config_dict=get_default_config())
         if config_dict:
             self._config.add_configs(config_dict)
-        self._counters = counters
-        if counters is None:
-            self._counters = Counters()
+        self._counters = counters if counters is not None else Counters()
         self.reset()
 
-    def reset(self):
-        """Reset state for unique column values."""
+    def reset(self) -> None:
+        """Resets the state of the DataSampler.
+
+        This method resets the internal state of the DataSampler, including the
+        counts of unique column values and the number of selected rows. This is
+        useful when you want to reuse the same DataSampler instance for sampling
+        multiple files.
+        """
         # Dictionary of unique values: count per column
         self._column_counts = {}
         # Dictionary of column index: list of header strings
@@ -98,21 +136,26 @@ class DataSampler:
             self._column_regex = re.compile(regex)
         self._selected_rows = 0
 
-    def __del__(self):
+    def __del__(self) -> None:
+        """Logs the column headers and counts upon object deletion."""
         logging.log(2, f'Sampler column headers: {self._column_headers}')
         logging.log(2, f'sampler column counts: {self._column_counts}')
 
     def _get_column_count(self, column_index: int, value: str) -> int:
-        """Returns the existing number of rows for column value.
-        Count is only returned for values matching sampler_column_regex.
+        """Returns the existing number of rows for a given column value.
+
+        This method checks if the value in a specific column should be tracked and
+        returns the number of times this value has been seen before for that
+        column.
 
         Args:
-          column_index: index of the column value in the current row.
-          value: string value of the column in oclumn_index
+            column_index: The index of the column in the current row.
+            value: The string value of the column at the given index.
 
         Returns:
-          number of times this value has been seen before for the column.
-          sys.maxsize if column value doesn't match sampler_column_regex
+            The number of times the value has been seen before for the column.
+            Returns sys.maxsize if the column value does not match the
+            sampler_column_regex.
         """
         # Check if column value is to be tracked.
         if self._column_regex:
@@ -125,8 +168,16 @@ class DataSampler:
             return 0
         return col_values.get(value, 0)
 
-    def _add_column_header(self, column_index: int, value: str):
-        """Adds the first value for column as header."""
+    def _add_column_header(self, column_index: int, value: str) -> str:
+        """Adds the first non-empty value of a column as its header.
+
+        Args:
+            column_index: The index of the column.
+            value: The value to be considered for the header.
+
+        Returns:
+            The header of the column.
+        """
         cur_header = self._column_headers.get(column_index, '')
         if not cur_header and value:
             # This is the first value for the column. Set as header.
@@ -134,8 +185,15 @@ class DataSampler:
             return value
         return cur_header
 
-    def _add_row_counts(self, row: list):
-        """Update column counts for a selected row."""
+    def _add_row_counts(self, row: list[str]) -> None:
+        """Updates the column counts for a selected row.
+
+        This method iterates through the columns of a selected row and updates the
+        counts of the unique values in each column.
+
+        Args:
+            row: The row that has been selected for the sample.
+        """
         # Update counts for each column value in the row.
         for index in range(len(row)):
             value = row[index]
@@ -154,8 +212,21 @@ class DataSampler:
         self._selected_rows += 1
         return
 
-    def select_row(self, row: list, sample_rate: float = -1) -> bool:
-        """Returns True if row can be added ot the sample output."""
+    def select_row(self, row: list[str], sample_rate: float = -1) -> bool:
+        """Determines whether a row should be added to the sample output.
+
+        This method applies a set of rules to decide if a row should be
+        selected. A row is selected if it contains a new unique value in any
+        column, or if it is randomly selected based on the sampling rate.
+
+        Args:
+            row: The row to be considered for selection.
+            sample_rate: The sampling rate to use for random selection. If not
+              provided, the configured sampling rate is used.
+
+        Returns:
+            True if the row should be selected, False otherwise.
+        """
         max_rows = self._config.get('sampler_output_rows')
         if max_rows > 0 and self._selected_rows >= max_rows:
             # Too many rows already selected. Drop it.
@@ -184,22 +255,22 @@ class DataSampler:
         return False
 
     def sample_csv_file(self, input_file: str, output_file: str = '') -> str:
-        """Emits a sample of rows from input_file into the output.
+        """Emits a sample of rows from an input file into an output file.
+
+        This method reads a CSV file, selects a sample of rows based on the
+        configured criteria, and writes the selected rows to an output file.
 
         Args:
-          input_file: CSV file to be processed.
-          output_file: CSV file to be generated with smapled rows.
-          config: dictionary of config parameters:
-             output_rows: Maximum output rows to be generated.
-             header_rows: Header rows to be copied to the output as is.
-             rows_per_key: Maximum rows per unique value.
-             unique_columns: List of columns to select unique keys.
-               It can be column numbers or column headers.
-               For a combination of columns, use '+', such as 1+2.
-          counters: dictionary of counters to be updated.
+            input_file: The path to the input CSV file.
+            output_file: The path to the output CSV file. If not provided, a
+              temporary file will be created.
 
         Returns:
-          output file with the sampled rows.
+            The path to the output file with the sampled rows.
+
+        Usage:
+            sampler = DataSampler()
+            sampler.sample_csv_file('input.csv', 'output.csv')
         """
         max_rows = self._config.get('sampler_output_rows')
         sample_rate = self._config.get('sampler_rate')
@@ -278,27 +349,68 @@ class DataSampler:
 
 def sample_csv_file(input_file: str,
                     output_file: str = '',
-                    config: dict = {}) -> str:
-    """Returns the output file name into which a sample of rows from input_file is written.
+                    config: dict = None) -> str:
+    """Samples a CSV file and returns the path to the sampled file.
+
+    This function provides a convenient way to sample a CSV file with a single
+    function call. It creates a DataSampler instance and uses it to perform the
+    sampling.
 
     Args:
-      input_file: input file pattern to be loaded.
-      output_file: (optional) output file into whcih sampled rows are written.
-        If empty, creates a file with suffix '-sample.csv'
-      config: dictionary of parameters for sampling including:
-        sampler_output_rows: maximum number of output rows.
-        sampler_rate: number between 0 to 1 for sampling rate if
-          sampler_output_rows is not set.
-        header_rows: number of headers rows from input copied over to output.
-        sampler_column_regex: regex to select unique cell values
-        sampler_rows_per_key: number of rows with duplcate values for a key.
+        input_file: The path to the input CSV file.
+        output_file: The path to the output CSV file. If not provided, a
+          temporary file will be created.
+        config: A dictionary of configuration parameters for sampling. The
+          supported parameters are:
+          - sampler_output_rows: The maximum number of rows to include in the
+            sample.
+          - sampler_rate: The sampling rate to use for random selection.
+          - header_rows: The number of header rows to copy from the input file.
+          - sampler_rows_per_key: The number of rows to select for each unique
+            key.
+          - sampler_column_regex: A regular expression to filter column values.
+          - sampler_unique_columns: A comma-separated list of column names to
+            use for selecting unique rows.
+          - input_delimiter: The delimiter used in the input file.
+          - output_delimiter: The delimiter to use in the output file.
+          - input_encoding: The encoding of the input file.
+
+    Returns:
+        The path to the output file with the sampled rows.
+
+    Usage:
+        # Basic usage with default settings
+        sample_csv_file('input.csv', 'output.csv')
+
+        # Sample with a specific number of output rows and a sampling rate
+        config = {
+            'sampler_output_rows': 50,
+            'sampler_rate': 0.1,
+        }
+        sample_csv_file('input.csv', 'output.csv', config)
+
+        # Sample a file with a semicolon delimiter and two header rows
+        config = {
+            'input_delimiter': ';',
+            'header_rows': 2,
+        }
+        sample_csv_file('input.csv', 'output.csv', config)
     """
+    if config is None:
+        config = {}
     data_sampler = DataSampler(config_dict=config)
     return data_sampler.sample_csv_file(input_file, output_file)
 
 
 def get_default_config() -> dict:
-    """Returns a dictionary of config parameter values from flags."""
+    """Returns a dictionary of default configuration parameter values.
+
+    This function retrieves the default values of the configuration parameters
+    from the command-line flags.
+
+    Returns:
+        A dictionary of default configuration parameter values.
+    """
     # Use default values of flags for tests
     if not _FLAGS.is_parsed():
         _FLAGS.mark_as_parsed()

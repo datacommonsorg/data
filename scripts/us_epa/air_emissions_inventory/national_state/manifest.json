@@ -5,7 +5,7 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.epa.gov/air-emissions-inventories/air-pollutant-emissions-trends-data",
       "provenance_description": "US Environment Protection Agency (EPA) Air Pollutant Emissions Trends Data.",
-      "scripts": ["download.py --config_path=epa_us_air_pollutant_emission_trends_national_and_state/config.json","process.py"],
+      "scripts": ["download.py --config_path=unresolved_mcf/us_epa/config.json","process.py"],
       "import_inputs": [
         {
           "template_mcf": "output/airpollution_emission_trends_tier1.tmcf",

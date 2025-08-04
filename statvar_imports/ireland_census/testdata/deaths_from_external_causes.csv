@@ -1,0 +1,8 @@
+﻿STATISTIC,STATISTIC Label,TLIST(A1),Year,C03171V03833,Area of Residence,C02478V03901,ICD 10 Diagnostic Group,UNIT,VALUE
+VSD24,Deaths from External Causes,2007,2007,-,State,V01X59,V01-X59 Accidents,Number,1089
+VSD24,Deaths from External Causes,2007,2007,-,State,V01Y98,V01-Y98 External causes of death,Number,1759
+VSD24,Deaths from External Causes,2007,2007,-,State,X60X84,X60-X84 Intentional self-harm,Number,458
+VSD24,Deaths from External Causes,2007,2007,-,State,X85Y09,X85-Y09 Assault,Number,49
+VSD24,Deaths from External Causes,2007,2007,-,State,Y10Y34,Y10-Y34 Events of undetermined intent,Number,119
+VSD24,Deaths from External Causes,2007,2007,-,State,Y35Y98,Y35-Y98 Other external causes,Number,44
+VSD24,Deaths from External Causes,2007,2007,A,Leinster,V01X59,V01-X59 Accidents,Number,546

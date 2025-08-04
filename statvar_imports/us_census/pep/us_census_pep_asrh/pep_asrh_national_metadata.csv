@@ -1,0 +1,6 @@
+parameter,value
+mapped_rows,1
+mapped_columns,4
+header_rows,1
+statvar_dcid_remap_csv,pep_arsh_dcid_remap.csv
+output_columns,"observationAbout,observationDate,value,variableMeasured,measurementMethod"

@@ -1,0 +1,5 @@
+param,value
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
+url,https://nces.ed.gov/ipeds/Search?query=percentage%20of%20STEM%20higher%20degree%20holders%20are%20Black%20women&query2=percentage%20of%20STEM%20higher%20degree%20holders%20are%20Black%20women&resultType=all&page=1&sortBy=date_desc&overlayDigestTableId=202325
+drop_statvars_without_svobs,0
+ignore_rows,"[1,5]"

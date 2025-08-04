@@ -1,0 +1,4 @@
+key,prop,val,p1,v1
+StichtagDatJahr,observationDate,{Number},,
+AnzBestWir,value,{Number},populationType,Person
+wikiId,observationAbout,wikidataId/{Data},,

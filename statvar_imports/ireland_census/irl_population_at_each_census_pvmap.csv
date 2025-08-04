@@ -1,0 +1,9 @@
+mapped_rows,1,,,
+mapped_columns,9,,,
+key,p1,v1,p2,v2
+County,observationAbout,{Data},,
+CensusYear,observationDate,{Number},,
+Sex,measuredProperty,count,populationType,Person
+Male,gender,Male,,
+Female,gender,Female,,
+VALUE,value,{Number},,
