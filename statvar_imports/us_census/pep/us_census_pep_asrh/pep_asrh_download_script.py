@@ -14,6 +14,7 @@
 
 import os
 import shutil
+import sys
 from absl import app
 from absl import logging
 from absl import flags
@@ -124,7 +125,7 @@ def download_files(files_to_download_dict:dict, download_base_path: str):
         response = requests.get(url, verify="/etc/ssl/certs/ca-certificates.crt")
       except requests.exceptions.RequestException as e:
         logging.fatal(f"Error downloading {url}: {e}")
-        continue
+    
       
       # Save the file content
       with open(output_file_path, "wb") as f:
@@ -173,6 +174,12 @@ def main(_):
   # Start download
   logging.info("Starting download of identified files")
   download_files(download_urls, FLAGS.input_path) # Pass the dictionary as an argument
+  expected_count = 12
+  actual_count = sum(len(files) for r, d, files in os.walk(FLAGS.input_path)) 
+  if actual_count != expected_count:
+     logging.fatal(f"Fatal: Existing because of count mismatch. Expected {expected_count}, but found {actual_count} files in '{FLAGS.input_path}'.")
+     sys.exit(1)
+  logging.info(f"Success: Downloaded {actual_count} files as expected.")
 
 
 if __name__ == "__main__":
