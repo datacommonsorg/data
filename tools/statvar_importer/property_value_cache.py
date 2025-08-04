@@ -320,6 +320,10 @@ class PropertyValueCache:
         """Returns True if the cache has been modified since the last write."""
         return self._is_modified
 
+    def num_entries(self) -> int:
+        """Returns the number of entries in the cache."""
+        return len(self._entries)
+
     def normalize_string(self, key: str) -> str:
         """Returns a normalized string for lookup.
         The key has special characters removed and converted to lower case.

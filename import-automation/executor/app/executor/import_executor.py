@@ -352,27 +352,26 @@ class ImportExecutor:
 
     def _get_import_input_files(self, import_input, absolute_import_dir):
         input_files = []
+        errors = []
+        # Get import files in the order template_mcf, node_mcf and cleaned_csv
+        for file_type in sorted(import_input.keys(), reverse=True):
+            pattern = import_input[file_type]
+            if pattern:
+                files = glob.glob(os.path.join(absolute_import_dir, pattern))
+                if not files and not glob.has_magic(pattern):
+                    errors.append(
+                        f'No matching files for {file_type}:{pattern}')
+                else:
+                    input_files.extend(sorted(files))
         import_prefix = ''
-        template_mcf = []
-        if pattern := import_input.get('template_mcf'):
-            template_mcf = glob.glob(os.path.join(absolute_import_dir, pattern))
-            if template_mcf:
-                import_prefix = os.path.splitext(
-                    os.path.basename(template_mcf[0]))[0]
-            input_files.extend(template_mcf)
-
-        cleaned_csv = []
-        if pattern := import_input.get('cleaned_csv'):
-            cleaned_csv = glob.glob(os.path.join(absolute_import_dir, pattern))
-            input_files.extend(cleaned_csv)
-
-        node_mcf = []
-        if pattern := import_input.get('node_mcf'):
-            node_mcf = glob.glob(os.path.join(absolute_import_dir, pattern))
-            input_files.extend(node_mcf)
-            if not import_prefix and node_mcf:
-                import_prefix = os.path.splitext(os.path.basename(
-                    node_mcf[0]))[0]
+        if input_files:
+            import_prefix = os.path.splitext(os.path.basename(
+                input_files[0]))[0]
+        if errors:
+            logging.fatal(
+                f'Missing import files in {absolute_import_dir}: {errors}')
+            raise RuntimeError(
+                'Import job failed due to missing user script output files.')
         return input_files, import_prefix
 
     def _invoke_import_tool(self, absolute_import_dir: str,

@@ -17,17 +17,17 @@ import os
 import sys
 import tempfile
 import unittest
+from absl import logging
 
-# Allows the following module imports to work when running as a script
+# Allows the following module imports to work when running as a script.
 # relative to scripts/
-sys.path.append(
-    os.path.dirname(
-        os.path.dirname(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
-from us_eia.opendata.process import coal, common, elec, intl, ng, nuclear, pet, seds, total
+module_dir_ = os.path.dirname(__file__)
+sys.path.insert(0, module_dir_)
+from main import *
+
+module_dir_ = os.path.dirname(module_dir_)
 
 # module_dir_ is the path to where this test is running from.
-module_dir_ = os.path.dirname(__file__)
 
 _TEST_CASES = [
     # dataset-code, dataset-name, test-case-filename,
@@ -54,11 +54,11 @@ class TestProcess(unittest.TestCase):
         for (dataset, dataset_name, test_fname, extract_fn,
              schema_fn) in _TEST_CASES:
             with tempfile.TemporaryDirectory() as tmp_dir:
-                print('Processing', dataset)
+                logging.info(f"Processing {dataset}")
                 in_file = os.path.join(module_dir_, 'test_data',
-                                       f'{test_fname}.txt')
+                                       f'{test_fname}_input.txt')
 
-                exp_csv = f'{test_fname}.csv'
+                exp_csv = f'{test_fname}_output.csv'
                 exp_mcf = f'{test_fname}.mcf'
                 exp_svg_mcf = f'{test_fname}.svg.mcf'
                 exp_tmcf = f'{test_fname}.tmcf'
@@ -111,4 +111,5 @@ class TestProcess(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    logging.set_verbosity(logging.DEBUG)
     unittest.main()
