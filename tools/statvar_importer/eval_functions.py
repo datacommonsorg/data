@@ -187,7 +187,7 @@ def evaluate_statement(eval_str: str,
     variable = variable.strip()
     try:
         result = eval(statement, functions, variables)
-    except (SyntaxError, NameError, ValueError, TypeError) as e:
+    except Exception as e:
         logging.debug(
             f'Failed to evaluate: {variable}={statement}, {e} in {variables}')
         result = None

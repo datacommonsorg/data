@@ -66,6 +66,17 @@ class TestEvaluateStatement(unittest.TestCase):
             eval_functions.evaluate_statement('date=format_date(Data)',
                                               {'Data': '2022, Jan 1st'}))
 
+    def test_evaluate_statement_with_spaces_around_equals(self):
+        self.assertEqual(
+            ('num', 3),
+            eval_functions.evaluate_statement('num = 1 + Number',
+                                              {'Number': 2}))
+
+    def test_evaluate_statement_with_index_error(self):
+        self.assertEqual(
+            ('val', None),
+            eval_functions.evaluate_statement('val = "abc"[5]', {}))
+
 
 class TestFormatDate(unittest.TestCase):
 
