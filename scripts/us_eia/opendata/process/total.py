@@ -22,6 +22,7 @@ def extract_place_statvar(series_id, counters):
     # them for now.
     m = re.match(r"^(TOTAL\..*)US\.([A-Z])$", series_id)
     if m:
+        counters.add_counter('info_total_record_count', 1)
         sv_part1 = m.group(1)
         sv_part2 = m.group(2)
         sv_id = f'{sv_part1}.{sv_part2}'

@@ -18,6 +18,7 @@ geopy
 google-api-python-client
 google-auth
 google-cloud-bigquery
+google-cloud-bigquery-storage
 google-cloud-datastore
 google-cloud-run
 google-cloud-storage
@@ -53,3 +54,5 @@ zipp
 netCDF4
 xmltodict
 sodapy
+certifi==2025.1.31
+

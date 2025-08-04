@@ -1,14 +1,28 @@
 import pandas as pd
-from .preprocess_data import preprocess_df
-from .nps_statvar_writer import write_sv
-from absl import flags
+from absl import flags, logging
 from absl import app
+import os, sys
+
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_SCRIPT_PATH, '../nps'))
+
+import preprocess_data
+import nps_statvar_writer
+
+_MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+input_files = os.path.join(_MODULE_DIR, 'input_files')
+_UTIL_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(_UTIL_DIR, '../../../util/'))
+import file_util
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('input_file',
-                    'NPS_1978-2021_Data.tsv',
+                    '38871-0001-Data.tsv',
                     'file path to tsv file with import data',
                     short_name='i')
+flags.DEFINE_string("gs_path",
+                    "gs://unresolved_mcf/us_bjs/nps/semiautomation_files/",
+                    "input file path")
 
 AGGREGATE_COLUMNS = [
     "dc/lnp5g90fwpct8", "dc/03l0q0wyqrk39", "dc/hxsdmw575en24",
@@ -65,13 +79,45 @@ def save_csv(df, filename):
     df.to_csv(filename + '.csv', index=False)
 
 
+def get_input_file():
+    os.makedirs(input_files, exist_ok=True)
+    file_util.file_copy(f'{FLAGS.gs_path}{FLAGS.input_file}',
+                        f'{input_files}/{FLAGS.input_file}')
+
+
 def main(args):
-    df = pd.read_csv(FLAGS.input_file, delimiter='\t')
-    processed_df = preprocess_df(df)
-    save_csv(processed_df, FILENAME)
-    generate_tmcf(processed_df)
-    f = open("nps_statvars.mcf", "w+")
-    write_sv(f)
+    INPUT_FILE_PATH = os.path.join(input_files, FLAGS.input_file)
+    try:
+        get_input_file()
+    except Exception as e:
+        logging.info(f"Error getting input file: {e}")
+    try:
+        df = pd.read_csv(INPUT_FILE_PATH, delimiter='\t')
+        logging.info("input file read successfully.")
+    except FileNotFoundError:
+        logging.fatal(f"Not able to find the input file at {INPUT_FILE_PATH}")
+    except pd.errors.EmptyDataError:
+        logging.fatal(
+            f"Error: Input file '{INPUT_FILE_PATH}' is empty. No data to process."
+        )
+    except Exception as e:
+        logging.fatal(
+            f"An unexpected error occurred while reading the input file: {e}")
+
+    try:
+        processed_df = preprocess_data.preprocess_df(df)
+        save_csv(processed_df, FILENAME)
+        generate_tmcf(processed_df)
+    except IOError as e:
+        logging.info(f"error during saving processed csv")
+    except Exception as e:
+        logging.fatal(f"error during data processing: {e}")
+
+    try:
+        with open("nps_statvars.mcf", "w+") as f:
+            nps_statvar_writer.write_sv(f)
+    except Exception as e:
+        logging.info(f"Error writing statvar file 'nps_statvars.mcf': {e}")
 
 
 if __name__ == '__main__':
