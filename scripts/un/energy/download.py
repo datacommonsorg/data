@@ -35,6 +35,10 @@ from absl import logging
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
+_CODEDIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, _CODEDIR)
+sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
+from download_util_script import download_file
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('download_data_dir', 'input_data/un_energy',
@@ -53,30 +57,6 @@ flags.DEFINE_integer('years_per_batch', 10,
 #   energy_code: two-letter code for the energy source
 #   years: comma separated list of years
 _DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr:{years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
-
-
-def download_zip_file(url: str, output_dir: str) -> list:
-    """Download a zip file from the url and save the extracted file.
-
-    Args:
-      url: string with URL and parameters to download.
-      save_path: Output file name into which uncompressed contents are saved.
-
-    Returns:
-      A list of files downloaded and unzipped.
-    """
-    logging.info(f'Downloading {url} to {output_dir}/')
-    r = requests.get(url, stream=True)
-    if r.status_code != 200:
-        logging.info(f'Failed to download {url}, response code: ',
-                     r.status_code)
-        return False
-    z = zipfile.ZipFile(io.BytesIO(r.content))
-    z.extractall(output_dir)
-    output_files = []
-    for f in os.listdir(output_dir):
-        output_files.append(os.path.join(output_dir, f))
-    return output_files
 
 
 def download_energy_dataset(
@@ -128,10 +108,24 @@ def download_energy_dataset(
         )
         download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
                                             years=years_str)
-        downloaded_files = download_zip_file(download_url, output)
-        if len(downloaded_files) == 0:
-            errors += 1
-        output_files.extend(downloaded_files)
+        download_successful = download_file(url=download_url,
+                                            output_folder=output,
+                                            unzip=True,
+                                            headers=None,
+                                            tries=3,
+                                            delay=5,
+                                            backoff=2)
+        if download_successful:
+            logging.info(f"Download of '{download_url}' completed.")
+            output_files = []
+            for f in os.listdir(output):
+                output_files.append(os.path.join(output, f))
+                if len(output_files) == 0:
+                    errors += 1
+                output_files.extend(output_files)
+        else:
+            logging.fatal(f"Download or processing of '{download_url}' failed")
+            sys.exit(1)
     return output_files
 
 
