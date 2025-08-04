@@ -1,0 +1,31 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "FARS_CrashData",
+        "curator_emails": [
+          "support@datacommons.org"
+        ],
+        "provenance_url": "https://www.nhtsa.gov/file-downloads?p=nhtsa/downloads/FARS/",
+        "provenance_description": "Data on fatal motor vehicle crashes in the US.",
+        "scripts": [
+          "download_script.py",
+          "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=fars_crash_pvmap.csv --config_file=fars_crash_metadata.csv --output_path=output/fars_crash"
+        ],
+        "source_files": [
+         "input_files/*"
+      ],
+        "import_inputs": [
+          {
+            "template_mcf": "output/fars_crash.tmcf",
+            "cleaned_csv": "output/fars_crash.csv"
+          }
+        ],
+        "cron_schedule": "0 05 * * 9",
+         "resource_limits": {
+                "cpu": "8",
+                "memory": "32G"
+            },
+            "user_script_timeout": 43200
+      }
+    ]
+  }
