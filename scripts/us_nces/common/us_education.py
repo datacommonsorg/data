@@ -991,6 +991,8 @@ class USEducation:
                         "school_state_code", "year", "sv_name", "observation",
                         "scaling_factor", "unit"
                     ]]
+                    df_final["year"] = pd.to_numeric(df_final["year"])
+                    df_final["year"] = df_final["year"] + 1
                     # Dropping Duplicates and writing to a file
                     df_final.drop_duplicates(inplace=True)
                     df_final.to_csv(self._cleaned_csv_file_path,
