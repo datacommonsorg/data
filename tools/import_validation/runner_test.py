@@ -275,3 +275,27 @@ class TestValidationRunner(unittest.TestCase):
 
         mock_logging.warning.assert_called_with('Unknown validator: %s',
                                                 'FAKE_VALIDATION')
+
+    def test_init_raises_error_if_required_file_is_missing(self):
+        """Tests that the constructor raises a ValueError if a required file is missing."""
+        # 1. Create a config that requires the 'stats' data source
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    'rules': [{
+                        'rule_id': 'test_rule',
+                        'validator': 'MAX_DATE_LATEST',
+                        'scope': {
+                            'data_source': 'stats'
+                        }
+                    }]
+                }, f)
+
+        # 2. Assert that calling the constructor without the stats_summary path raises an error
+        with self.assertRaises(ValueError) as context:
+            ValidationRunner(
+                validation_config_path=self.config_path,
+                stats_summary=None,  # Missing
+                differ_output=self.differ_path,
+                validation_output=self.output_path)
+        self.assertIn("'stats' data source", str(context.exception))

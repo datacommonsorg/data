@@ -35,8 +35,6 @@ flags.DEFINE_string('stats_summary', None,
                     'Path to the stats summary report file.')
 flags.DEFINE_string('validation_output', None,
                     'Path to the validation output file.')
-flags.mark_flag_as_required('differ_output')
-flags.mark_flag_as_required('stats_summary')
 flags.mark_flag_as_required('validation_output')
 
 
@@ -52,30 +50,46 @@ class ValidationRunner:
         self.validator = Validator()
         self.validation_results = []
 
-        stats_exists = os.path.exists(stats_summary)
-        differ_exists = os.path.exists(differ_output)
+        # Determine required data sources from the config
+        stats_required = False
+        differ_required = False
+        for rule in self.config.rules:
+            if not rule.get('enabled', True):
+                continue
+            if 'scope' in rule and 'data_source' in rule['scope']:
+                if rule['scope']['data_source'] == 'stats':
+                    stats_required = True
+                elif rule['scope']['data_source'] == 'differ':
+                    differ_required = True
 
-        if not stats_exists and not differ_exists:
-            logging.error(
-                "Fatal: Neither stats_summary (%s) nor differ_output (%s) file found. Aborting.",
-                stats_summary, differ_output)
-            sys.exit(1)
+        # Check if required files are provided
+        if stats_required and (not stats_summary or
+                               not os.path.exists(stats_summary)):
+            raise ValueError(
+                f"A validation rule requires the 'stats' data source, but the --stats_summary file was not provided or does not exist. Path: {stats_summary}"
+            )
 
+        if differ_required and (not differ_output or
+                                not os.path.exists(differ_output)):
+            raise ValueError(
+                f"A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. Path: {differ_output}"
+            )
+
+        # Load dataframes
         self.dataframes = {'stats': pd.DataFrame(), 'differ': pd.DataFrame()}
-
-        if stats_exists and os.path.getsize(stats_summary) > 0:
+        if stats_summary and os.path.exists(stats_summary) and os.path.getsize(
+                stats_summary) > 0:
             self.dataframes['stats'] = pd.read_csv(stats_summary)
-        else:
-            logging.warning(
-                "Warning: stats_summary file not found or is empty at %s. Proceeding without it.",
-                stats_summary)
+        elif stats_summary and os.path.exists(stats_summary):
+            logging.warning("stats_summary file exists but is empty: %s",
+                            stats_summary)
 
-        if differ_exists and os.path.getsize(differ_output) > 0:
+        if differ_output and os.path.exists(differ_output) and os.path.getsize(
+                differ_output) > 0:
             self.dataframes['differ'] = pd.read_csv(differ_output)
-        else:
-            logging.warning(
-                "Warning: differ_output file not found or is empty at %s. Proceeding without it.",
-                differ_output)
+        elif differ_output and os.path.exists(differ_output):
+            logging.warning("differ_output file exists but is empty: %s",
+                            differ_output)
 
         self.validation_dispatch = {
             'SQL_VALIDATOR': (self.validator.validate_sql, 'sql'),
@@ -119,7 +133,7 @@ class ValidationRunner:
                 logging.warning('Unknown validator: %s', validator_name)
                 continue
 
-            validation_func, data_source = self.validation_dispatch[
+            validation_func, data_source_key = self.validation_dispatch[
                 validator_name]
 
             if validator_name == 'SQL_VALIDATOR':
@@ -131,7 +145,8 @@ class ValidationRunner:
                 if isinstance(scope, str):
                     scope = self.config.get_scope(scope)
 
-                df = self.dataframes[scope['data_source']]
+                data_source = scope['data_source']
+                df = self.dataframes[data_source]
 
                 if 'variables' in scope:
                     variables_config = scope['variables']
@@ -163,10 +178,15 @@ class ValidationRunner:
 
 
 def main(_):
-    runner = ValidationRunner(_FLAGS.validation_config, _FLAGS.differ_output,
-                              _FLAGS.stats_summary, _FLAGS.validation_output)
-    overall_status, _ = runner.run_validations()
-    if not overall_status:
+    try:
+        runner = ValidationRunner(_FLAGS.validation_config,
+                                  _FLAGS.differ_output, _FLAGS.stats_summary,
+                                  _FLAGS.validation_output)
+        overall_status, _ = runner.run_validations()
+        if not overall_status:
+            sys.exit(1)
+    except ValueError as e:
+        logging.error(e)
         sys.exit(1)
 
 

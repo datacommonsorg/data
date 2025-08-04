@@ -488,11 +488,16 @@ class ImportExecutor:
                     'Skipping differ tool due to missing latest mcf file')
 
             logging.info('Invoking validation script...')
-            validation = ValidationRunner(config_file_path, differ_output_file,
-                                          summary_stats, validation_output_file)
-            overall_status, _ = validation.run_validations()
-            if validation_status:
-                validation_status = overall_status
+            try:
+                validation = ValidationRunner(config_file_path,
+                                              differ_output_file, summary_stats,
+                                              validation_output_file)
+                overall_status, _ = validation.run_validations()
+                if validation_status:
+                    validation_status = overall_status
+            except ValueError as e:
+                logging.error('ValidationRunner failed: %s', e)
+                validation_status = False
 
             if not self.config.skip_gcs_upload:
                 # Upload output to GCS.

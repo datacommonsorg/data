@@ -45,7 +45,7 @@ class ImportValidationTest(unittest.TestCase):
         self.test_dir.cleanup()
 
     def test_successful_run(self):
-        """Tests a successful end-to-end run of the script."""
+        """Tests a successful run of the script."""
         # 1. Create sample data that should pass validation
         with open(self.config_path, 'w') as f:
             json.dump(
@@ -84,7 +84,7 @@ class ImportValidationTest(unittest.TestCase):
         self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
 
     def test_failed_run(self):
-        """Tests a failed end-to-end run of the script."""
+        """Tests a failed run of the script."""
         # 1. Create sample data that should fail validation
         with open(self.config_path, 'w') as f:
             json.dump(
@@ -122,9 +122,22 @@ class ImportValidationTest(unittest.TestCase):
             "The number of places is not consistent across all StatVars.",
             result.stderr)
 
-    def test_missing_flag_fails(self):
-        """Tests that the script fails when a required flag is missing."""
-        # Run the script without the required --stats_summary flag
+    def test_missing_required_file_fails(self):
+        """Tests that the script fails when a required data file is missing."""
+        # 1. Create a config that requires the 'stats' data source
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "num_places_consistent",
+                        "validator": "NUM_PLACES_CONSISTENT",
+                        "scope": {
+                            "data_source": "stats"
+                        }
+                    }]
+                }, f)
+
+        # 2. Run the script without the required --stats_summary flag
         result = subprocess.run([
             'python3', '-m', 'tools.import_validation.runner',
             f'--validation_config={self.config_path}',
@@ -135,10 +148,10 @@ class ImportValidationTest(unittest.TestCase):
                                 text=True,
                                 cwd=self.project_root)
 
-        # Assert that the script exits with an error
+        # 3. Assert that the script exits with an error
         self.assertNotEqual(result.returncode, 0,
-                            "Script should have failed due to missing flag")
-        self.assertIn("Flag --stats_summary must have a value other than None",
+                            "Script should have failed due to missing file")
+        self.assertIn("A validation rule requires the 'stats' data source",
                       result.stderr)
 
     def test_variables_filtering(self):
@@ -186,7 +199,7 @@ class ImportValidationTest(unittest.TestCase):
         self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
 
     def test_sql_validator_fails(self):
-        """Tests that the SQL_VALIDATOR works in an end-to-end run."""
+        """Tests that the SQL_VALIDATOR works in a run."""
         # 1. Create a config using the SQL_VALIDATOR
         with open(self.config_path, 'w') as f:
             json.dump(
