@@ -52,21 +52,20 @@ import file_util
 _FLAGS = flags.FLAGS
 _DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    'gcs_output/input_files')
-_GCS_BUCKET = os.environ.get('GCS_BUCKET', 'datacommons-imports')
-_GCS_OUTPUT_PATH = f'gs://{_GCS_BUCKET}/us_bts/latch'
-
+_DEFAULT_OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   'gcs_output/output_files')
 flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
                     "Import Data File's List")
 
 
 def _upload_to_gcs(file_path: str):
     """Uploads a file to the GCS output path."""
-    gcs_file_path = os.path.join(_GCS_OUTPUT_PATH, os.path.basename(file_path))
+    gcs_file_path = os.path.join(_DEFAULT_OUTPUT_PATH, os.path.basename(file_path))
     try:
         file_util.file_copy(file_path, gcs_file_path)
         logging.info(f"Successfully uploaded {file_path} to {gcs_file_path}")
     except Exception as e:
-        logging.fatal(f"Failed to upload {file_path} to GCS: {e}")
+        logging.error(f"Failed to upload {file_path} to GCS: {e}")
 
 
 def _promote_measurement_method(data_df: pd.DataFrame) -> pd.DataFrame:
