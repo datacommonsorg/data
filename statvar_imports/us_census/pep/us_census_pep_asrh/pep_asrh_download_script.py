@@ -174,12 +174,13 @@ def main(_):
   # Start download
   logging.info("Starting download of identified files")
   download_files(download_urls, FLAGS.input_path) # Pass the dictionary as an argument
+  # We are expecting 12 files: 10 files from the national level, 1 file from the state level, and 1 file from the county level. Expected count = 12.
   expected_count = 12
   actual_count = sum(len(files) for r, d, files in os.walk(FLAGS.input_path)) 
   if actual_count != expected_count:
      logging.fatal(f"Fatal: Existing because of count mismatch. Expected {expected_count}, but found {actual_count} files in '{FLAGS.input_path}'.")
      sys.exit(1)
-  logging.info(f"Success: Downloaded {actual_count} files as expected.")
+  logging.info(f"Success: Downloaded {actual_count} files as expected")
 
 
 if __name__ == "__main__":
