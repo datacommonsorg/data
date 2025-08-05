@@ -83,7 +83,6 @@ def download_energy_dataset(
     Returns:
       A list of output files downloaded.
     """
-    output_files = []
     supported_datasets = get_all_energy_source_codes()
     if energy_dataset not in supported_datasets:
         logging.info(
@@ -125,7 +124,6 @@ def download_energy_dataset(
                 output_files.extend(output_files)
         else:
             logging.fatal(f"Download or processing of '{download_url}' failed")
-            sys.exit(1)
     return output_files
 
 

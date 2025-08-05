@@ -1,3 +1,6 @@
+"""
+Renaming all the word "Liquefied" to "Liquified" as source has data with "Liquified".``
+"""
 new_mapping_names = {
     "Annual_Consumption_Fuel_OtherSector_LiquefiedPetroleumGas":
         "Annual_Consumption_Fuel_OtherSector_LiquifiedPetroleumGas",

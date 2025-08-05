@@ -448,7 +448,6 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
         # New stat var generated. Output PVs to the statvar mcf file.
         _add_stat_var_description(data_row, sv_pv)
         stat_var_mcf = _get_stat_var_mcf(sv_id, sv_pv)
-        # _print_debug(2, 'Generating stat var node: ', stat_var_mcf)
         f_out_mcf.write('\n\n')
         f_out_mcf.write(stat_var_mcf)
         counters['output_stat_vars'] += 1
