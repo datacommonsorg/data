@@ -20,6 +20,11 @@ import os
 import sys
 import time
 
+REPO_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(REPO_DIR)
+sys.path.append(os.path.join(REPO_DIR, 'util'))
+
 from absl import flags
 from absl import app
 
@@ -29,10 +34,6 @@ from app.service import file_uploader
 from app.service import github_api
 from app.service import email_notifier
 import dataclasses
-
-REPO_DIR = os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.append(os.path.join(REPO_DIR, 'util'))
 
 from log_util import log_metric, configure_cloud_logging
 from cloudrun_util import running_on_cloudrun
