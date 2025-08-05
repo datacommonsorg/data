@@ -10,7 +10,6 @@
 absl-py
 chembl-webresource-client
 deepdiff
-duckdb
 earthengine-api
 flask_restful
 geopandas
