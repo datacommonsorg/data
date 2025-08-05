@@ -1,0 +1,31 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "Singapore_Census",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://tablebuilder.singstat.gov.sg/",
+            "provenance_description": "Population Census and Health Statistics for Singapore based on gender, age and ethnicity.",
+            "scripts": [
+                "../../tools/statvar_importer/stat_var_processor.py  --input_data=input_files/DeathByCause_T3.csv --pv_map=configs/deathbycause_pvmap.csv --config_file=configs/deathbycause_metadata.csv --output_path=output_path/DeathByCause --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../tools/statvar_importer/stat_var_processor.py  --input_data=input_files/Death_DeathRate_T5.csv --pv_map=configs/death_deathrates_pvmap.csv --config_file=configs/death_deathrates_metadata.csv --output_path=output_path/Death_DeathRate --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../tools/statvar_importer/stat_var_processor.py  --input_data=input_files/Life_Expectancy_T6.csv --pv_map=configs/life_expectancy_by_sex_pvmap.csv --config_file=configs/life_expectancy_by_sex_metadata.csv --output_path=output_path/LifeExpectancy --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../tools/statvar_importer/stat_var_processor.py  --input_data=input_files/Mortality_T2.csv --pv_map=configs/mortality_by_ethnicty_sex_pvmap.csv --config_file=configs/mortality_by_ethnicty_sex_metadata.csv --output_path=output_path/Mortality --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../tools/statvar_importer/stat_var_processor.py  --input_data=input_files/Population_T1.csv --pv_map=configs/Population_pvmap.csv --config_file=configs/Population_metadata.csv --output_path=output_path/Population --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../tools/statvar_importer/stat_var_processor.py  --input_data=input_files/Pop_Resident_age_T4.csv --pv_map=configs/Pop_Resident_age_pvmap.csv --config_file=configs/Pop_Resident_age_metadata.csv --output_path=output_path/Pop_Resident --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
+                "../../tools/statvar_importer/stat_var_processor.py  --input_data=input_files/Pop_Citizen_age_T5.csv --pv_map=configs/Pop_Citizen_age_pvmap.csv --config_file=configs/Pop_Citizen_age_metadata.csv --output_path=output_path/Pop_Citizen --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output_path/DeathByCause.tmcf",
+                    "cleaned_csv": "output_path/*.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*"
+            ],
+            "cron_schedule": "30 05 14,28 * *"
+        }
+    ]
+}

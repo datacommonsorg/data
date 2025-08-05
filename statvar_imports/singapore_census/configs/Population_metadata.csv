@@ -1,0 +1,14 @@
+parameter,value
+url,https://tablebuilder.singstat.gov.sg/statistical-tables/downloadMultiple/zX5lZdqFrk-29wjZN4FFXw
+description,"Population of residents with repect to gender and age group, national"
+#place_type,Country
+#places_within,country/SGP
+start_date,1950
+end_date,2022
+release_frequency,1years
+process,
+comments,"In the data sheet, added ""country/SGP"" as country id manually under observationAbout"
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
+drop_statvars_without_svobs,0
+mapped_column,1
+header_rows,10
