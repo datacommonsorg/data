@@ -57,7 +57,7 @@ def _download_and_decompress_gz(url: str, output_path: str) -> bool:
         return True
 
     except Exception as e:
-        logging.error(
+        logging.fatal(
             f"An unexpected error occurred during GZ download/decompress for {url}: {e}",
             exc_info=True)
         return False
@@ -115,7 +115,7 @@ def _download_paginated_socrata_file(
         return True
 
     except Exception as e:
-        logging.error(
+        logging.fatal(
             f"An unexpected error occurred during Socrata pagination for {url}: {e}",
             exc_info=True)
         return False
@@ -134,17 +134,17 @@ def create_download_configs() -> List[Dict]:
             f"Successfully loaded download configurations from {_GCS_URLS_CONFIG_FILE}"
         )
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
-        logging.error(
+        logging.fatal(
             f"Failed to read GCS config file '{_GCS_URLS_CONFIG_FILE}': {e}. Ensure 'gsutil' is in your PATH and the file exists."
         )
         return []
     except json.JSONDecodeError as e:
-        logging.error(
+        logging.fatal(
             f"Failed to parse JSON from GCS config file '{_GCS_URLS_CONFIG_FILE}': {e}"
         )
         return []
     except Exception as e:
-        logging.error(
+        logging.fatal(
             f"An unexpected error occurred while creating download configs: {e}"
         )
         return []
@@ -175,7 +175,7 @@ def download_all_files_from_config(download_dir: str) -> None:
         url = config.get('url')
         file_name = config.get('input_file_name')
         if not url or not file_name:
-            logging.error(f"Skipping malformed config entry: {config}")
+            logging.fatal(f"Skipping malformed config entry: {config}")
             continue
 
         output_path = os.path.join(download_dir, file_name)
@@ -213,7 +213,7 @@ def download_all_files_from_config(download_dir: str) -> None:
                 )
 
         except Exception as e:
-            logging.error(
+            logging.fatal(
                 f"An unhandled error occurred while processing {url}: {e}",
                 exc_info=True)
 
