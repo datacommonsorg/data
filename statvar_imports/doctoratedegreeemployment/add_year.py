@@ -67,7 +67,7 @@ def main(argv):
         save_to_csv(df, OUTPUT_CSV)
     except Exception as e:
         logging.fatal(f"A error occurred: {e}", exc_info=True)
-        raise RuntimeError(f"Script execution failed due to a error: {e}") from e
+        raise RuntimeError(f"Script execution failed due to a error: {e}")
 
 if __name__ == "__main__":
     app.run(main)
