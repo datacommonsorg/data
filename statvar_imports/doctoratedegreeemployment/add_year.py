@@ -66,7 +66,8 @@ def main(argv):
         df = process_excel(file_stream, year)
         save_to_csv(df, OUTPUT_CSV)
     except Exception as e:
-        logging.error(f"An error occurred: {e}", exc_info=True)
+        logging.fatal(f"A error occurred: {e}", exc_info=True)
+        raise RuntimeError(f"Script execution failed due to a error: {e}") from e
 
 if __name__ == "__main__":
     app.run(main)
