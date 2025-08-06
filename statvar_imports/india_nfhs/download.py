@@ -149,8 +149,6 @@ def fetch_api_data(api_url):
                 logging.fatal(f"Downloaded file not found in temporary directory for {api_url}.")
                 raise RuntimeError('Import job failed due to Downloaded file not found in temporary directory.')
 
-                return None
-
         with open(filepath, 'r') as f:
             try:
                 data = json.load(f)
