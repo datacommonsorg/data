@@ -25,7 +25,6 @@ python3 ../cpi_category/cpi_category_download.py --output_folder=../us_cpi/input
 
 After downloading the data, use the `stat_var_processor.py` script to process the files and generate the final statistical variables.
 
-**Generic Command:**
 ```bash
 ../../../tools/statvar_importer/stat_var_processor.py \
     --input_data='input_data/<folder_name>/*' \
