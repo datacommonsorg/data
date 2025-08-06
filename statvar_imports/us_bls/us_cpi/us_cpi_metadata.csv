@@ -2,8 +2,6 @@ parameter,value
 url,https://www.bls.gov/cpi/tables/supplemental-files/
 description,"Consumer Price Index for All Urban Consumers and Clerical workers(CPI-U and CPI-W): U.S. city average, by expenditure category."
 start_date,2011
-process,"In the data sheet, added ""country/USA"" as country id manually under observationAbout and created new row (4) by combining rows 2 and 3 and removed the new lines to map"
-comments,
 output_columns,"observationAbout,observationDate,value,variableMeasured"
 mapped_rows,6
 mapped_columns,3
