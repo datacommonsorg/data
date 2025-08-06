@@ -119,6 +119,8 @@ class ExecutorConfig:
     import_tool_path: str = '/import-tool.jar'
     # Location of the differ tool jar.
     differ_tool_path: str = '/differ-tool.jar'
+    # Cloud workflow id.
+    cloud_workflow_id: str = 'import-automation-workflow'
     # Maximum time a user script can run for in seconds.
     user_script_timeout: float = 3600
     # Arguments for the user script
@@ -158,7 +160,7 @@ class ExecutorConfig:
     # delete an import can take in seconds.
     importer_delete_timeout: float = 10 * 60
     # Executor type depends on where the executor runs
-    # Suppports one of: "GKE", "GAE", "CLOUD_RUN"
+    # Suppports one of: "GKE", "GAE", "CLOUD_RUN", "CLOUD_BATCH"
     executor_type: str = 'CLOUD_RUN'
 
     def get_data_refresh_config(self):
