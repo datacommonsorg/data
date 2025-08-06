@@ -8,5 +8,6 @@ Primary treatment,waterTreatmentSystem,PublicSewerage,waterTreatmentStatus,Waste
 Secondary treatment,waterTreatmentSystem,PublicSewerage,waterTreatmentStatus,WasteWaterTreated,waterTreatmentType,WasteWaterTreatmentPlant,waterTreatmentLevel,SecondaryTreatment,measurementDenominator,"-waterTreatmentType,-waterTreatmentStatus,-waterTreatmentLevel",name,"""Percentage of population connected to the total secondary treatment"""
 Tertiary treatment,waterTreatmentSystem,PublicSewerage,waterTreatmentStatus,WasteWaterTreated,waterTreatmentType,WasteWaterTreatmentPlant,waterTreatmentLevel,TertiaryTreatment,measurementDenominator,"-waterTreatmentType,-waterTreatmentStatus,-waterTreatmentLevel",name,"""Percentage of population connected to the tertiary treatment"""
 Unspecified (other) treatment,waterTreatmentSystem,PublicSewerage,waterTreatmentStatus,WasteWaterTreated,waterTreatmentType,WasteWaterTreatmentPlant,waterTreatmentLevel,UnspecifiedTreatment,measurementDenominator,"-waterTreatmentType,-waterTreatmentStatus,-waterTreatmentLevel",name,"""Percentage of population connected to the Unspecified (other) treatment"""
+Total wastewater treatment,#ignore,ignore,,,,,,,,,,
 TIME_PERIOD,observationDate,{Number},,,,,,,,,,
 OBS_VALUE,value,{Number},,,,,,,,,,

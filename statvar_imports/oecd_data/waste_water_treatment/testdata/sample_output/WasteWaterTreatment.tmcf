@@ -1,8 +1,0 @@
-Node: E:WasteWaterTreatment->E0
-observationAbout: C:WasteWaterTreatment->observationAbout
-observationDate: C:WasteWaterTreatment->observationDate
-value: C:WasteWaterTreatment->value
-variableMeasured: C:WasteWaterTreatment->variableMeasured
-unit: C:WasteWaterTreatment->unit
-scalingFactor: C:WasteWaterTreatment->scalingFactor
-typeOf: dcs:StatVarObservation
