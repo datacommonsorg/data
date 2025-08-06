@@ -25,6 +25,9 @@ from absl import app
 from absl import logging
 import download_config
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+GCS_OUTPUT_DIR = os.path.join(_SCRIPT_PATH, 'gcs_output')
+if not os.path.exists(GCS_OUTPUT_DIR):
+            os.makedirs(GCS_OUTPUT_DIR)
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/')) 
 from download_util_script import _retry_method
 
@@ -34,6 +37,7 @@ def download_and_extract_data(url, input_folder, year):
     try:
         response = _retry_method(url, None, 3, 5, 2)
         filename = os.path.basename(url)
+        input_folder = os.path.join(GCS_OUTPUT_DIR, input_folder)
         filepath = os.path.join(input_folder, filename)
 
         if not os.path.exists(input_folder):
@@ -71,10 +75,11 @@ def download_and_extract_data(url, input_folder, year):
                     else:
                         logging.info(f"Zip file {filename} is empty.")
 
-                os.remove(filepath)
 
             except Exception as e:
-                logging.exception(f"An error occurred during extraction from {filename}: {e}")
+                logging.fatal(f"An error occurred during extraction from {filename}: {e}")
+                raise RuntimeError(
+                    'Failed to extract files from zip. Check logs for details.') from e
     except requests.exceptions.HTTPError as e:
 
         if e.response.status_code == 404:

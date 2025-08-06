@@ -9,15 +9,15 @@
         "provenance_description": "Data on fatal motor vehicle crashes in the US.",
         "scripts": [
           "download_script.py",
-          "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=fars_crash_pvmap.csv --config_file=fars_crash_metadata.csv --output_path=output/fars_crash"
+          "run.sh"
         ],
         "source_files": [
-         "input_files/*"
+         "gcs_output/input_files/*"
       ],
         "import_inputs": [
           {
-            "template_mcf": "output/fars_crash.tmcf",
-            "cleaned_csv": "output/fars_crash.csv"
+            "template_mcf": "gcs_output/output/fars_crash.tmcf",
+            "cleaned_csv": "gcs_output/output/fars_crash.csv"
           }
         ],
         "cron_schedule": "0 05 * * 9",
