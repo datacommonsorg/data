@@ -34,14 +34,13 @@ REPO_DIR = os.path.dirname(
     os.path.dirname(
         os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
-sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_differ'))
-sys.path.append(os.path.join(REPO_DIR, 'tools', 'import_validation'))
+sys.path.append(os.path.join(REPO_DIR, 'tools'))
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
 import file_util
 
-from import_differ import ImportDiffer
-from import_validation import ImportValidation
+from import_differ.import_differ import ImportDiffer
+from tools.import_validation.runner import ValidationRunner
 from app import configs
 from app import utils
 from app.executor import cloud_run_simple_import
@@ -469,6 +468,7 @@ class ImportExecutor:
                                          'point_analysis_summary.csv')
 
             # Invoke differ and validation scripts.
+            differ_output_file = ''
             if self.config.invoke_differ_tool and latest_version and len(
                     file_util.file_get_matching(previous_data_path)) > 0:
                 logging.info('Invoking differ tool...')
@@ -481,17 +481,22 @@ class ImportExecutor:
                                       file_format='mcf',
                                       runner_mode='native')
                 differ.run_differ()
+                differ_output_file = differ_output
             else:
                 logging.error(
                     'Skipping differ tool due to missing latest mcf file')
-                differ_output = ''
 
             logging.info('Invoking validation script...')
-            validation = ImportValidation(config_file_path, differ_output,
-                                          summary_stats, validation_output_file)
-            status = validation.run_validations()
-            if validation_status:
-                validation_status = status
+            try:
+                validation = ValidationRunner(config_file_path,
+                                              differ_output_file, summary_stats,
+                                              validation_output_file)
+                overall_status, _ = validation.run_validations()
+                if validation_status:
+                    validation_status = overall_status
+            except ValueError as e:
+                logging.error('ValidationRunner failed: %s', e)
+                validation_status = False
 
             if not self.config.skip_gcs_upload:
                 # Upload output to GCS.
