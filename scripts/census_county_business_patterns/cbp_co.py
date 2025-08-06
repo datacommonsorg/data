@@ -72,8 +72,7 @@ class CBPCOProcessor:
         logging.info('Writing MCF output to: %s', mcf_output_path)
 
         # Open all output files
-        with open(csv_path, 'w', newline='') as csv_f, \
-             open(mcf_output_path, 'w') as mcf_f:
+        with open(csv_path, 'w', newline='') as csv_f:
 
             csv_writer = csv.writer(csv_f)
             rows = csv.DictReader(self.input_file_obj)
@@ -84,8 +83,8 @@ class CBPCOProcessor:
                 'Employee Noise Flag', 'Annual Payroll', 'AP Noise Flag'
             ])
 
-            count_pops = 0
-            count_obs = 0
+            # count_pops = 0
+            # count_obs = 0
 
             for r in rows:
                 logging.debug('Processing row: %s', r)
@@ -116,21 +115,21 @@ class CBPCOProcessor:
                     ])
 
                     # Generate MCF  data using the write_mcf module.
-                    pop_est, obs_est, pop_emp, obs_emp, obs_payroll = write_mcf.mcf_for(
-                        geoid, yyyy, naics, est=est, emp=emp, ap=annual_payroll)
+                    # pop_est, obs_est, pop_emp, obs_emp, obs_payroll = write_mcf.mcf_for(
+                    #     geoid, yyyy, naics, est=est, emp=emp, ap=annual_payroll)
 
-                    # Write the generated MCF population and observation data.
-                    pops, obs = write_mcf.write_mcf_pop_obs(
-                        pop_est, obs_est, emp_nf, pop_emp, obs_emp, ap_nf,
-                        obs_payroll, mcf_f)
+                    # # Write the generated MCF population and observation data.
+                    # pops, obs = write_mcf.write_mcf_pop_obs(
+                    #     pop_est, obs_est, emp_nf, pop_emp, obs_emp, ap_nf,
+                    #     obs_payroll, mcf_f)
 
-                    count_pops += pops
-                    count_obs += obs
+                    # count_pops += pops
+                    # count_obs += obs
                 except Exception as ex:
                     logging.error(
                         'An unexpected error occurred while processing row: %s. Error: %s',
                         r, ex)
 
-        logging.info(
-            'Finished processing. Wrote %d population nodes and %d observations.',
-            count_pops, count_obs)
+        # logging.info(
+        #     'Finished processing. Wrote %d population nodes and %d observations.',
+        #     count_pops, count_obs)

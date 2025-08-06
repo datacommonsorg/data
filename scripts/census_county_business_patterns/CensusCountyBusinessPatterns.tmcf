@@ -4,5 +4,5 @@ observationDate: C:output_cbp->observationDate
 variableMeasured: C:output_cbp->variableMeasured
 value: C:output_cbp->value
 unit: C:output_cbp->unit
-measurementMethod: dcs:CensusCBPSurvey
+measurementMethod: C:output_cbp->measurementMethod
 typeOf: dcs:StatVarObservation

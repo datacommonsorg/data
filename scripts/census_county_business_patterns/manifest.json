@@ -6,14 +6,14 @@
       "provenance_url": "https://www.census.gov/programs-surveys/cbp.html",
       "provenance_description": "County Business Patterns (CBP) is an annual series that provides subnational economic data for establishments with paid employees by industry and employment size.",
       "scripts": ["main.py",
-                  "../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/input_files/*.csv --pv_map=censuscountybusinesspatterns_pvmap.csv --config_file=censuscountybusinesspatterns_metadata.csv --output_path=gcs_output/output_files/output_cbp"
+                  "shard_input_csv.sh"
           ],
       "cleanup_gcs_volume_mount": false,
       "source_files": ["gcs_output/input_files/*"],
       "import_inputs": [
         {
           "template_mcf": "CensusCountyBusinessPatterns.tmcf",
-          "cleaned_csv": "gcs_output/output_files/output_cbp.csv"
+          "cleaned_csv": "gcs_output/output/*.csv"
         }
       ],
       "resource_limits": {

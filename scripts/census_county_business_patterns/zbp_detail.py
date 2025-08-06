@@ -61,15 +61,14 @@ class ZBPDetailProcessor:
         csv_filename = f'zbp_{yyyy}_detail.csv'
         csv_path = os.path.join(self.output_dir, csv_filename)
 
-        mcf_output_filename = f'zbp_{yyyy}_detail.mcf'
-        mcf_output_path = os.path.join(self.output_dir, mcf_output_filename)
+        # mcf_output_filename = f'zbp_{yyyy}_detail.mcf'
+        # mcf_output_path = os.path.join(self.output_dir, mcf_output_filename)
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir, exist_ok=True)
 
         logging.info('Writing CSV output to: %s', csv_path)
-        logging.info('Writing MCF output to: %s', mcf_output_path)
-        with open(csv_path, 'w', newline='') as csv_f, \
-             open(mcf_output_path, 'w') as mcf_f:
+        # logging.info('Writing MCF output to: %s', mcf_output_path)
+        with open(csv_path, 'w', newline='') as csv_f:
 
             csv_writer = csv.writer(csv_f)
             rows = csv.DictReader(self.input_file_obj)
@@ -81,8 +80,8 @@ class ZBPDetailProcessor:
             ])
 
             count_rows = 0
-            count_pops = 0
-            count_obs = 0
+            # count_pops = 0
+            # count_obs = 0
             count_zipcodes = 0
             for r in rows:
                 logging.debug('Processing row: %s', r)
@@ -111,21 +110,21 @@ class ZBPDetailProcessor:
                     ])
 
                     # Generate MCF file
-                    pop_est, obs_est, pop_emp, obs_emp, obs_payroll = write_mcf.mcf_for(
-                        geoid,
-                        yyyy,
-                        naics,
-                        est=read_est,
-                        emp=emp,
-                        ap=annual_payroll)
+                    # pop_est, obs_est, pop_emp, obs_emp, obs_payroll = write_mcf.mcf_for(
+                    #     geoid,
+                    #     yyyy,
+                    #     naics,
+                    #     est=read_est,
+                    #     emp=emp,
+                    #     ap=annual_payroll)
 
                     # Write the generated MCF population and observation data.
-                    pops, obs = write_mcf.write_mcf_pop_obs(
-                        pop_est, obs_est, emp_nf, pop_emp, obs_emp, ap_nf,
-                        obs_payroll, mcf_f)
+                    # pops, obs = write_mcf.write_mcf_pop_obs(
+                    #     pop_est, obs_est, emp_nf, pop_emp, obs_emp, ap_nf,
+                    #     obs_payroll, mcf_f)
 
-                    count_pops += pops
-                    count_obs += obs
+                    # count_pops += pops
+                    # count_obs += obs
                     count_rows += 1  # Total rows processed
 
                 except Exception as ex:
@@ -133,6 +132,5 @@ class ZBPDetailProcessor:
                         'An unexpected error occurred while processing row: %s. Error: %s',
                         r, ex)
 
-        logging.info(
-            'Finished processing. %d zipcodes, Wrote %d population nodes and %d observations from %d rows.',
-            count_zipcodes, count_pops, count_obs, count_rows)
+        logging.info('Finished processing. %d zipcodes,from %d rows.',
+                     count_zipcodes, count_rows)
