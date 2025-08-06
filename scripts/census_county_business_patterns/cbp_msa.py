@@ -48,17 +48,10 @@ class CBPMSAProcessor:
         self.AP_NF_COL = 'ap_nf'
         self.EMP_NF_COL = 'emp_nf'
 
-        # Construct CSV file name andMCF FIle name
+        # Construct CSV file FIle name
         self.csv_output_filename = f'cbp_{self.year}_msa.csv'
         self.csv_output_path = os.path.join(self.output_dir,
                                             self.csv_output_filename)
-        self.mcf_output_filename = f'cbp_{self.year}_msa.mcf'
-        self.mcf_output_path = os.path.join(self.output_dir,
-                                            self.mcf_output_filename)
-
-        # Initialize counters for populations and observations
-        # self.count_pops = 0
-        # self.count_obs = 0
 
     def _lookup_col(self, row, col):
         """Looks up a column in a row, handling potential case differences.
@@ -85,7 +78,6 @@ class CBPMSAProcessor:
     """
         logging.info('Starting CBP data processing for year: %s', self.year)
         logging.info('Writing CSV to local: %s', self.csv_output_path)
-        # logging.info('Writing MCF to local: %s', self.mcf_output_path)
         # Ensure output directory exists
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir, exist_ok=True)
@@ -125,24 +117,7 @@ class CBPMSAProcessor:
                         annual_payroll, ap_nf
                     ])
 
-                    # Generate and write MCF data
-                    # pop_est, obs_est, pop_emp, obs_emp, obs_payroll = write_mcf.mcf_for(
-                    #     geoid,
-                    #     self.year,
-                    #     naics,
-                    #     est=est,
-                    #     emp=emp,
-                    #     ap=annual_payroll)
-
-                    # pops, obs = write_mcf.write_mcf_pop_obs(
-                    #     pop_est, obs_est, emp_nf, pop_emp, obs_emp, ap_nf,
-                    #     obs_payroll, mcf_f)
-                    # self.count_pops += pops
-                    # self.count_obs += obs
-
             logging.info('CBP data processing complete for year %s.', self.year)
-            # logging.info('Wrote %d pops, %d obs', self.count_pops,
-            #              self.count_obs)
 
         except Exception as e:
             logging.error('An unexpected error occurred during processing: %s',

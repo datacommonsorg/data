@@ -60,9 +60,6 @@ class ZBPDetailProcessor:
 
         csv_filename = f'zbp_{yyyy}_detail.csv'
         csv_path = os.path.join(self.output_dir, csv_filename)
-
-        # mcf_output_filename = f'zbp_{yyyy}_detail.mcf'
-        # mcf_output_path = os.path.join(self.output_dir, mcf_output_filename)
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir, exist_ok=True)
 
@@ -80,8 +77,6 @@ class ZBPDetailProcessor:
             ])
 
             count_rows = 0
-            # count_pops = 0
-            # count_obs = 0
             count_zipcodes = 0
             for r in rows:
                 logging.debug('Processing row: %s', r)
@@ -108,23 +103,6 @@ class ZBPDetailProcessor:
                         geoid, yyyy, naics, read_est, emp, emp_nf,
                         annual_payroll, ap_nf
                     ])
-
-                    # Generate MCF file
-                    # pop_est, obs_est, pop_emp, obs_emp, obs_payroll = write_mcf.mcf_for(
-                    #     geoid,
-                    #     yyyy,
-                    #     naics,
-                    #     est=read_est,
-                    #     emp=emp,
-                    #     ap=annual_payroll)
-
-                    # Write the generated MCF population and observation data.
-                    # pops, obs = write_mcf.write_mcf_pop_obs(
-                    #     pop_est, obs_est, emp_nf, pop_emp, obs_emp, ap_nf,
-                    #     obs_payroll, mcf_f)
-
-                    # count_pops += pops
-                    # count_obs += obs
                     count_rows += 1  # Total rows processed
 
                 except Exception as ex:

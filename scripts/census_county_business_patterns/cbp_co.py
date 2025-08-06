@@ -63,13 +63,10 @@ class CBPCOProcessor:
         csv_filename = f'cbp_{yyyy}_co.csv'
         csv_path = os.path.join(self.output_dir, csv_filename)
 
-        mcf_output_filename = f'cbp_{yyyy}_co.mcf'
-        mcf_output_path = os.path.join(self.output_dir, mcf_output_filename)
         if not os.path.exists(self.output_dir):
             os.makedirs(self.output_dir, exist_ok=True)
 
         logging.info('Writing CSV output to: %s', csv_path)
-        logging.info('Writing MCF output to: %s', mcf_output_path)
 
         # Open all output files
         with open(csv_path, 'w', newline='') as csv_f:
@@ -82,9 +79,6 @@ class CBPCOProcessor:
                 'geoId', 'year', 'NAICS', 'Establishments', 'Employees',
                 'Employee Noise Flag', 'Annual Payroll', 'AP Noise Flag'
             ])
-
-            # count_pops = 0
-            # count_obs = 0
 
             for r in rows:
                 logging.debug('Processing row: %s', r)
@@ -113,23 +107,7 @@ class CBPCOProcessor:
                         geoid, yyyy, naics, est, emp, emp_nf, annual_payroll,
                         ap_nf
                     ])
-
-                    # Generate MCF  data using the write_mcf module.
-                    # pop_est, obs_est, pop_emp, obs_emp, obs_payroll = write_mcf.mcf_for(
-                    #     geoid, yyyy, naics, est=est, emp=emp, ap=annual_payroll)
-
-                    # # Write the generated MCF population and observation data.
-                    # pops, obs = write_mcf.write_mcf_pop_obs(
-                    #     pop_est, obs_est, emp_nf, pop_emp, obs_emp, ap_nf,
-                    #     obs_payroll, mcf_f)
-
-                    # count_pops += pops
-                    # count_obs += obs
                 except Exception as ex:
                     logging.error(
                         'An unexpected error occurred while processing row: %s. Error: %s',
                         r, ex)
-
-        # logging.info(
-        #     'Finished processing. Wrote %d population nodes and %d observations.',
-        #     count_pops, count_obs)

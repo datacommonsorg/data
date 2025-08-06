@@ -114,7 +114,7 @@ for file in "$SHARD_DIR"/*_shard_*.csv; do
             --pv_map="censuscountybusinesspatterns_pvmap.csv" \
             --config_file="censuscountybusinesspatterns_metadata.csv" \
             --output_path="$OUTPUT_FINAL_DIR/output_${prefix}" \
-            --output_counters="$DEBUG_DIR/counters_${prefix}" \
+            # --output_counters="$DEBUG_DIR/counters_${prefix}" \ # uncomment this line to debug the script like to get the details like memory utlization etc.
             # Add any other required arguments for statvar_processpr.py here \
             # Run in background
         
