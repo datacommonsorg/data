@@ -16,6 +16,8 @@ The process involves two main steps: downloading the source data and then proces
 A Python script is provided to download the necessary data files from the BLS website. The script organizes the files into the `input_data` directory, we have to give the output folder using the --output_folder flag . The script is loacated at /statvar_imports/us_bls/cpi_category/cpi_category_download.py
 
 **Command:**
+From the statvar_imports/us_bls/us_cpi directory, run the following
+         command:
 ```bash
 python3 ../cpi_category/cpi_category_download.py --output_folder=../us_cpi/input_data
 ```
