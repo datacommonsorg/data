@@ -68,7 +68,7 @@ try:
     from data.util import file_util
 except ImportError as e:
     logging.fatal(f"Failed to import file_util: {e}. Please ensure data/util/file_util.py exists and is accessible, and that the project root and data/util are correctly set in sys.path.", exc_info=True)
-
+    raise RuntimeError('Import job failed due to Failed to import file_util')
 
 def load_api_keys():
     """
@@ -92,13 +92,16 @@ def load_api_keys():
             return json.load(f)
     except FileNotFoundError:
         logging.fatal(f"API keys file not found: {local_filepath}. Please create this file with your keys.")
+        raise RuntimeError('Import job failed due to API keys file not found')
         
     except json.JSONDecodeError as json_err:
         logging.fatal(f"Error decoding JSON from {local_filepath}: {json_err}. Please check the file's format.")
+        raise RuntimeError('Import job failed due to Error decoding JSON')
      
     except Exception as e:
         # A specific error for GCS transfer failure.
         logging.fatal(f"An unexpected error occurred while loading API keys from GCS: {e}")
+        raise RuntimeError('Import job failed due to An unexpected error occurred while loading API keys')
       
     finally:
         # Clean up the temporary directory
@@ -131,6 +134,7 @@ def fetch_api_data(api_url):
 
         if not download_success:
             logging.fatal(f"Failed to retrieve data from {api_url} after retries.")
+            raise RuntimeError('Import job failed due to Failed to retrieve data')
             return None
         
         parsed_url = urlparse(api_url)
@@ -143,6 +147,8 @@ def fetch_api_data(api_url):
                 filepath = os.path.join(temp_dir, files_in_temp[0])
             else:
                 logging.fatal(f"Downloaded file not found in temporary directory for {api_url}.")
+                raise RuntimeError('Import job failed due to Downloaded file not found in temporary directory.')
+
                 return None
 
         with open(filepath, 'r') as f:
@@ -291,6 +297,7 @@ def process_ndap_api(api_url, output_dir, output_filename=None):
 
         if data is None:
             logging.fatal(f" Failed to retrieve valid data for page {current_page}, stopping pagination.")
+            raise RuntimeError('Import job failed due to Failed to retrieve valid data for page .')
             break
 
         page_raw_records = data.get("Data", [])
@@ -317,6 +324,7 @@ def process_ndap_api(api_url, output_dir, output_filename=None):
 
     if not all_fetched_records:
         logging.fatal(f" No data was fetched across all pages for URL: {api_url}. This API call might be problematic.")
+        raise RuntimeError('Import job failed due to no data was fetched across all pages .')
         return
 
     column_name_mapping = extract_metadata_mapping(metadata_headers if metadata_headers else {})
