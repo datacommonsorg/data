@@ -1,4 +1,4 @@
-# BLS CPI Category Data Importer
+# US CPI Data Importer
 
 This document outlines the process for downloading and importing Consumer Price Index (CPI) data from the Bureau of Labor Statistics (BLS).
 
