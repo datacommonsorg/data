@@ -82,16 +82,14 @@ def main(_):
             blob = bucket.blob(blob_name)
             configs = json.loads(blob.download_as_string())
         except Exception as e:
-            logging.error(f"Failed to read config from GCS: {e}")
-            sys.exit(1)
+            logging.fatal(f"Failed to read config from GCS: {e}")
     else:
         logging.info(f"Reading config from local path: {config_path}")
         try:
             with open(config_path, 'r') as f:
                 configs = json.load(f)
         except FileNotFoundError:
-            logging.error(f"Config file not found at local path: {config_path}")
-            sys.exit(1)
+            logging.fatal(f"Config file not found at local path: {config_path}")
 
     BASE_URL = configs['CensusSAHIE']['source_url']
     OUTPUT_DIRECTORY = "input_files"
@@ -100,6 +98,7 @@ def main(_):
     os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)
     logging.info(f"Base output directory '{OUTPUT_DIRECTORY}' ensured to exist.")
 
+    failed_downloads = []
     try:
         for year in range(START_YEAR, CURRENT_YEAR + 1):
             year_url = BASE_URL.format(year=year)
@@ -112,8 +111,8 @@ def main(_):
             )
 
             if not success:
-                logging.warning(f"Failed to download or process data for year {year}. Stopping further downloads.")
-                break
+                logging.warning(f"Failed to download or process data for year {year}.")
+                failed_downloads.append(year)
             else:
                 logging.info(f"Successfully processed data for year {year}.")
                 # After unzipping, find the CSV and clean it
@@ -130,7 +129,10 @@ def main(_):
                 file_to_remove = os.path.join(OUTPUT_DIRECTORY, item)
                 os.remove(file_to_remove)
                 logging.info(f"Removed zip file: {file_to_remove}")
-               
+        
+        if failed_downloads:
+            logging.fatal(f"Failed to download data for the following years: {failed_downloads}")
+
         logging.info("Final cleanup complete")
 
 if __name__ == '__main__':

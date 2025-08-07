@@ -10,17 +10,12 @@
       "provenance_description": "The Small Area Health Insurance Estimates (SAHIE) program provides the only up-to-date, state-based estimates of health insurance coverage for all counties in the United States.",
       "scripts": [
         "download_script.py --config_file_path=import_configs.json",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/census_sahie_2018.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/census_sahie_2019.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/census_sahie_2020.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/census_sahie_2021.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/census_sahie_2022.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf",
-        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/census_sahie_2023.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
-      ],
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+        ],
       "import_inputs": [
         {
           "template_mcf": "output/census_sahie_output_2018.tmcf",
-          "cleaned_csv": "output/census_sahie_output_2018.csv"
+          "cleaned_csv": "output/*.csv"
         },
         {
           "template_mcf": "output/census_sahie_output_2019.tmcf",
@@ -44,13 +39,8 @@
         }
       ],
       "source_files": [
-        "input_files/census_sahie_2018.csv",
-        "input_files/census_sahie_2019.csv",
-        "input_files/census_sahie_2020.csv",
-        "input_files/census_sahie_2021.csv",
-        "input_files/census_sahie_2022.csv",
-        "input_files/census_sahie_2023.csv"
-      ],
+        "input_files/*.csv",
+        ],
       "cron_schedule": "0 0 15 12 *"
     }
   ]
