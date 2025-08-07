@@ -80,7 +80,7 @@ python3 ${PROCESSOR_PATH} \
   --input_data='input_files/census_sahie_2023.csv' \
   --pv_map='census_sahie_pv_map.csv' \
   --config_file='census_sahie_metadata.csv' \
-  --output_dir='output/'
+  --output_path='output/'
 ```
 
 ### Validation Tool
