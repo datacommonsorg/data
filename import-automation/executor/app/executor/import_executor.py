@@ -34,6 +34,7 @@ REPO_DIR = os.path.dirname(
     os.path.dirname(
         os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+sys.path.append(REPO_DIR)
 sys.path.append(os.path.join(REPO_DIR, 'tools'))
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
@@ -751,7 +752,7 @@ class ImportExecutor:
         if errors:
             logging.fatal(f'Missing user_script outputs: {errors}')
             raise RuntimeError(
-                'Import job failed due to missing output files {errors}')
+                f'Import job failed due to missing output files {errors}')
         return uploaded
 
     def _upload_file_helper(self, src: str, dest: str) -> None:
