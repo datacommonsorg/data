@@ -18,6 +18,15 @@ which are a small subset of the available EJSCREEN variables.
 
 ## Usage
 
+To add a new year of data, you must update the config.json file.
+
+1. Update Core Configuration
+First, add the new year to the YEARS array. Next, specify the exact column names for that year in the CSV_COLUMNS_BY_YEAR object. You also need to provide the filename for the uncompressed CSV in FILENAMES and the name of the compressed file in ZIP_FILENAMES. Finally, if the new year's data is located in a different web directory, update the URL_SUFFIX accordingly.
+
+2. Handle Column Renaming
+If the column names in the new year's file do not match the standardized schema (e.g., ID is used instead of ID_New), you must add the year to the RENAME_COLUMNS_YEARS array. Then, create a mapping in the RENAME_COLUMNS_BY_YEAR object, which instructs the script on how to rename the raw column headers to the standardized names. This step is crucial for maintaining data consistency across all years.
+
+
 To generate `ejscreen_airpollutants.csv` and `ejscreen.tmcf` run the following:  
 
 #Downloading and Processing Data

@@ -1,4 +1,5 @@
 {
+   "#comment": "To add a new year (e.g., 2025), extend the YEARS list and provide corresponding values in each of the subsequent sections (CSV_COLUMNS_BY_YEAR, ZIP_FILENAMES, FILENAMES, URL_SUFFIX, and RENAME_COLUMNS_YEARS if applicable).",
   "YEARS": [ "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"],
   "NORM_CSV_COLUMNS": ["ID", "DSLPM", "CANCER", "RESP", "OZONE", "PM25"],
   "NORM_CSV_COLUMNS1": ["ID", "DSLPM", "OZONE", "PM25"],
