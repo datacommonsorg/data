@@ -25,14 +25,6 @@ python3 ../cpi_category/cpi_category_download.py --output_folder=../us_cpi/input
 
 After downloading the data, use the `stat_var_processor.py` script to process the files and generate the final statistical variables.
 
-```bash
-python3 ../../../tools/statvar_importer/stat_var_processor.py \
-    --input_data='input_data/<folder_name>/*' \
-    --pv_map='<pvmap_file>.csv' \
-    --config_file='<metadata_file>.csv' \
-    --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
-    --output_path='output/<folder_name>/<output_filename>'
-```
 #### Example
 
 This example shows how to process the `cpi-w` data. To process data for `cpi-u`, simply update the input folder to get the output respectively(pvmap and metadata are the same for both).
