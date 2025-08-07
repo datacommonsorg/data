@@ -1,3 +1,17 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import re
 import time
@@ -53,7 +67,7 @@ def wait_for_downloads(timeout=30):
             return True
         if time.time() - start_time > timeout:
             logging.fatal("Timeout waiting for downloads to complete. Exiting script.")
-            return False
+            raise RuntimeError("Timeout waiting for downloads.") # Added raise
         time.sleep(1)
 
 def rename_and_move_downloaded_file(place_name, panel_index):
@@ -88,7 +102,7 @@ def rename_and_move_downloaded_file(place_name, panel_index):
         logging.info(f"Moved and renamed file from '{os.path.basename(latest_file)}' to '{new_filepath}'")
     except Exception as e:
         logging.fatal(f"Failed to rename and move file for {place_name} (Panel {panel_index}): {e}. Exiting script.")
-        sys.exit(1)
+        raise RuntimeError(f"File operation failed: {e}") # Added raise
 
 
 def download_panel(driver, panel_index, place_name):
@@ -118,10 +132,10 @@ def download_panel(driver, panel_index, place_name):
 
     except (TimeoutException, NoSuchElementException) as e:
         logging.fatal(f"  ✖ Selenium element error during download from {panel_id} for {place_name}: {e}. Exiting script.")
-        sys.exit(1)
+        raise RuntimeError(f"Selenium element error: {e}") # Added raise
     except Exception as e:
         logging.fatal(f"  ✖ Critical download failure from {panel_id} for {place_name}: {e}. Exiting script.")
-        sys.exit(1)
+        raise RuntimeError(f"Critical download failure: {e}") # Added raise
 
 
 def get_url_slug(place_name):
@@ -165,10 +179,10 @@ def main(argv):
             wait_for_downloads()
         except (TimeoutException, NoSuchElementException) as e:
             logging.fatal(f"  ✖ Selenium element error processing 'Brasil' page. Exiting. Error: {e}")
-            sys.exit(1)
+            raise RuntimeError(f"Selenium error for 'Brasil' page: {e}") # Added raise
         except Exception as e:
             logging.fatal(f"  ✖ Critical failure processing 'Brasil' page. Exiting. Error: {e}")
-            sys.exit(1)
+            raise RuntimeError(f"Critical processing failure for 'Brasil' page: {e}") # Added raise
 
         for place_name in options_text:
             if not place_name:
@@ -195,10 +209,10 @@ def main(argv):
 
             except (TimeoutException, NoSuchElementException) as e:
                 logging.fatal(f"  ✖ Selenium element error selecting or downloading for {place_name}. Exiting. Error: {e}")
-                sys.exit(1)
+                raise RuntimeError(f"Selenium error for {place_name}: {e}") # Added raise
             except Exception as e:
                 logging.fatal(f"  ✖ Critical failure selecting or downloading for {place_name}. Exiting. Error: {e}")
-                sys.exit(1)
+                raise RuntimeError(f"Critical processing failure for {place_name}: {e}") # Added raise
 
     finally:
         driver.quit()
