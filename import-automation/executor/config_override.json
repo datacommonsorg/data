@@ -1,6 +1,6 @@
 {
     "configs":{
-        "executor_type": "CLOUD_BATCH",
+        "executor_type": "CLOUD_RUN",
         "user_script_args": [],
         "user_script_env": {}
    }
