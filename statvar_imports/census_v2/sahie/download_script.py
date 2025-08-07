@@ -90,6 +90,7 @@ def main(_):
                 configs = json.load(f)
         except FileNotFoundError:
             logging.fatal(f"Config file not found at local path: {config_path}")
+            return
 
     BASE_URL = configs['CensusSAHIE']['source_url']
     OUTPUT_DIRECTORY = "input_files"
