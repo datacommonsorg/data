@@ -6,6 +6,16 @@ import glob
 from absl import app, logging, flags
 from pathlib import Path
 
+# Import specific Selenium exceptions
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait, Select
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+
 # --- Configuration ---
 BASE_URL = "https://sidra.ibge.gov.br/home/pnadct/"
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -19,13 +29,6 @@ PANEL_FOLDER_MAP = {
     4: "Mass_Income"
 }
 
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait, Select
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
 
 def setup_driver():
     """Configures and returns a Selenium WebDriver."""
@@ -57,7 +60,7 @@ def rename_and_move_downloaded_file(place_name, panel_index):
     """Renames the most recently downloaded file and moves it to the correct subfolder."""
     try:
         time.sleep(1) # Give a moment for the file system to update
-        
+
         # Get the destination folder name from the map
         folder_name = PANEL_FOLDER_MAP.get(panel_index)
         if not folder_name:
@@ -77,6 +80,7 @@ def rename_and_move_downloaded_file(place_name, panel_index):
         
         # Construct the destination path including the subfolder
         destination_dir = os.path.join(DOWNLOAD_DIR, folder_name)
+        Path(destination_dir).mkdir(parents=True, exist_ok=True) # Ensure subfolder exists
         new_filepath = os.path.join(destination_dir, new_filename)
 
         # Move and rename the file
@@ -109,9 +113,12 @@ def download_panel(driver, panel_index, place_name):
         export_option.click()
         
         logging.info(f"  ✓ Downloading XLSX from panel {panel_id} for {place_name}")
-        time.sleep(2)
+        time.sleep(2) # Give a moment for the download to initiate
         rename_and_move_downloaded_file(place_name, panel_index)
 
+    except (TimeoutException, NoSuchElementException) as e:
+        logging.fatal(f"  ✖ Selenium element error during download from {panel_id} for {place_name}: {e}. Exiting script.")
+        sys.exit(1)
     except Exception as e:
         logging.fatal(f"  ✖ Critical download failure from {panel_id} for {place_name}: {e}. Exiting script.")
         sys.exit(1)
@@ -156,6 +163,9 @@ def main(argv):
             for panel_index in range(1, 5):
                 download_panel(driver, panel_index, 'Brasil')
             wait_for_downloads()
+        except (TimeoutException, NoSuchElementException) as e:
+            logging.fatal(f"  ✖ Selenium element error processing 'Brasil' page. Exiting. Error: {e}")
+            sys.exit(1)
         except Exception as e:
             logging.fatal(f"  ✖ Critical failure processing 'Brasil' page. Exiting. Error: {e}")
             sys.exit(1)
@@ -176,13 +186,16 @@ def main(argv):
                 
                 place_slug = get_url_slug(place_name)
                 WebDriverWait(driver, 20).until(EC.url_contains(place_slug))
-                time.sleep(5)
+                time.sleep(5) # Give page time to load after selection
 
                 for panel_index in range(1, 5):
                     download_panel(driver, panel_index, place_name)
                 
                 wait_for_downloads()
 
+            except (TimeoutException, NoSuchElementException) as e:
+                logging.fatal(f"  ✖ Selenium element error selecting or downloading for {place_name}. Exiting. Error: {e}")
+                sys.exit(1)
             except Exception as e:
                 logging.fatal(f"  ✖ Critical failure selecting or downloading for {place_name}. Exiting. Error: {e}")
                 sys.exit(1)
