@@ -96,6 +96,7 @@ def download_energy_dataset(
         years_list[i:i + years_per_batch]
         for i in range(0, len(years_list), years_per_batch)
     ]
+    output_files = []
     errors = 0
     for year_batch in batch_years:
         start_year = year_batch[0]
@@ -116,12 +117,10 @@ def download_energy_dataset(
                                             backoff=2)
         if download_successful:
             logging.info(f"Download of '{download_url}' completed.")
-            output_files = []
             for f in os.listdir(output):
                 output_files.append(os.path.join(output, f))
                 if len(output_files) == 0:
                     errors += 1
-                output_files.extend(output_files)
         else:
             logging.fatal(f"Download or processing of '{download_url}' failed")
     return output_files

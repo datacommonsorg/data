@@ -475,7 +475,25 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
 
 
 def rename_the_mapping_value(sv_id, mapping_names):
-    # Renaming the mapping value.
+    """
+    Renames a value in an ID string based on a provided mapping.
+
+    This function takes an ID string, splits it at the first colon, and then
+    uses the second part (the key) to look up a new value in a dictionary.
+    If a corresponding value is found in the `mapping_names` dictionary,
+    it replaces the original key in the ID string with the new value.
+    If the key is not found in the dictionary, the original key is kept.
+
+    Args:
+        sv_id: The ID string to be processed. It is expected to be in the format
+               "prefix:key" (e.g., "dc/topic:Agriculture").
+        mapping_names: A dictionary containing the mapping from old keys to new
+                       values (e.g., {"Agriculture": "Farming"}).
+
+    Returns:
+        The modified ID string with the value renamed, or None if the input
+        `sv_id` is None.
+    """
     if sv_id is None:
         return None
     key_to_check = sv_id.split(":", 1)[1]
@@ -538,7 +556,6 @@ def process(in_paths: list,
                         data_row['_Row'] = line
                         _process_row(data_row, sv_map, row_map, sv_obs,
                                      csv_writer, f_out_mcf, counters)
-                        # _print_counters(counters, counters['debug_lines'])
                 logging.info(f'Processed {line} rows from data file: {in_file}')
             f_out_mcf.write('\n')
 
