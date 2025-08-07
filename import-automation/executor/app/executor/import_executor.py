@@ -653,7 +653,13 @@ class ImportExecutor:
                     'Skipping import validations as per import config.')
 
             if self.config.ignore_validation_status or validation_status:
-                self._update_latest_version(version, output_dir, import_spec)
+                if not self.config.skip_gcs_upload:
+                    self._update_latest_version(version, output_dir,
+                                                import_spec)
+                else:
+                    logging.warning(
+                        "Skipping latest version update due to skip_gcs_upload."
+                    )
             else:
                 logging.error(
                     "Skipping latest version update due to validation failure.")
