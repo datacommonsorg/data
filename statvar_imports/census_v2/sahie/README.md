@@ -1,63 +1,55 @@
 # US Census Small Area Health Insurance Estimates (SAHIE)
 
-## 1. Overview
+## 1. Import Overview
 
-This directory contains the scripts and configuration for importing the Small Area Health Insurance Estimates (SAHIE) data from the US Census Bureau. This dataset provides annual state- and county-level estimates of health insurance coverage, disaggregated by demographic characteristics such as age, race, sex, and income.
+This project processes and imports the Small Area Health Insurance Estimates (SAHIE) data from the US Census Bureau. The dataset provides annual state- and county-level estimates of health insurance coverage, disaggregated by demographic characteristics such as age, race, sex, and income.
 
-- **Source**: [US Census SAHIE Program](https://www.census.gov/programs-surveys/sahie.html)
-- **Import Type**: Fully Automated
-- **Frequency**: Annual
+* **Source URL**: [https://www.census.gov/programs-surveys/sahie.html](https://www.census.gov/programs-surveys/sahie.html)
+* **Import Type**: Fully Automated
+* **Source Data Availability**: Annual releases from the US Census Bureau.
+* **Release Frequency**: Annual
+* **Notes**: This dataset provides annual state- and county-level estimates of health insurance coverage. Each row represents a specific demographic breakdown for a given county or state.
 
-## 2. File Descriptions
+---
 
--   `download_script.py`: Downloads the latest annual SAHIE data from the Census Bureau website.
--   `stat_var_processor.py`: A general-purpose script that processes the raw data to generate cleaned CSV and MCF files.
--   `census_sahie_metadata.csv`: Configuration file used by `stat_var_processor.py` to define processing rules.
--   `census_sahie_pv_map.csv`: Maps input data columns to Data Commons properties and values.
--   `import_configs.json`: Contains import-level configurations, including the source URL for the data.
--   `input_files/`: Directory where the raw downloaded CSV files are stored (e.g., `census_sahie_2023.csv`).
--   `output/`: Directory where the processed, cleaned data and generated MCF files are stored.
+## 2. Preprocessing Steps
 
-## 3. Dependencies
+Before ingestion, the following preprocessing is done:
 
-The Python scripts require the following libraries. You can install them using pip:
+* **Input files**:
+  * `download_script.py`: Downloads and preprocesses the raw data.
+  * `import_configs.json`: Contains the source URL for the data.
+  * `census_sahie_metadata.csv`: Configuration for the `stat_var_processor.py`.
+  * `census_sahie_pv_map.csv`: Property-value mapping for the StatVar processor.
 
-```bash
-pip install absl-py google-cloud-storage python-dateutil pandas requests
-```
+* **Transformation pipeline**:
+  * `download_script.py` downloads the annual data releases, unzips them, and cleans the CSV headers.
+  * The script then calls `stat_var_processor.py` for each cleaned CSV file.
+  * `stat_var_processor.py` uses the metadata and pv_map files to generate the final cleaned CSVs and MCF files in the `output/` directory.
 
-It is recommended to create a `requirements.txt` file with these dependencies for easier environment setup.
+* **Data Quality Checks**:
+  * Linting is performed using the DataCommons import tool JAR.
+  * There are no known warnings or errors.
 
-## 4. Preprocessing and Transformation
+---
 
-The import process involves the following steps:
+## 3. Autorefresh Type
 
-1.  **Data Download**: The `download_script.py` fetches the latest annual data releases from the Census Bureau website and stores them as `input_files/census_sahie_YYYY.csv`.
-2.  **Data Processing**: The `stat_var_processor.py` script processes each raw CSV file. It uses `census_sahie_pv_map.csv` for property mapping and `census_sahie_metadata.csv` for configuration. The script generates the following for each year:
-    -   `output/census_sahie_output_YYYY.csv`: Cleaned data file.
-    -   `output/census_sahie_output_YYYY.tmcf`: Template MCF for the cleaned data.
-    -   `output/census_sahie_output_YYYY_stat_vars.mcf`: Statistical variable definitions.
-    -   `output/census_sahie_output_YYYY_stat_vars_schema.mcf`: Schema for the statistical variables.
-3.  **Data Validation**: The generated files are linted using the Data Commons import tool to ensure they meet schema and quality standards.
+**Autorefresh**
 
-## 5. Automated Refresh
+* **Steps**:
+  1. A Cloud Scheduler job, defined in `manifest.json`, triggers the `download_script.py` annually in mid-December.
+  2. The script automatically downloads the latest data, preprocesses it, and calls the processing script.
+  3. The final, validated output files are uploaded to a GCS bucket for ingestion into the Data Commons Knowledge Graph.
+* **Note**: This pipeline is fully automated and requires no manual intervention for periodic refreshes.
 
-This import is configured for automatic annual updates:
+---
 
--   A Cloud Scheduler job, defined in `manifest.json`, triggers the pipeline annually in mid-December.
--   The scripts run automatically to download and process the new data.
--   The validated output files are uploaded to a GCS bucket for ingestion into the Data Commons Knowledge Graph.
+## 4. Script Execution Details
 
-This pipeline is fully automated and requires no manual intervention for periodic refreshes.
-
-## 6. Script Execution
-
-### Download Script
-
-Downloads the latest SAHIE data into the `input_files/` directory.
+### Script 1: `download_script.py` (Orchestrator)
 
 **Usage**:
-
 ```bash
 # Run with default configuration from GCS
 python3 download_script.py
@@ -65,32 +57,32 @@ python3 download_script.py
 # Run with a specific configuration file for local testing
 python3 download_script.py --config_file_path=import_configs.json
 ```
+**Purpose**: Downloads, cleans, and orchestrates the processing of all yearly data files.
 
-### Processing Script
+---
 
-Processes a single year of SAHIE data to generate cleaned CSV and MCF files. The `stat_var_processor.py` is a general tool and is located in a parent directory.
 
-**Usage Example (for 2023 data)**:
+### Script 2: `stat_var_processor.py` (Called by `download_script.py`)
 
+**Usage Example (for a single file)**:
 ```bash
-# The processor script is located in a parent directory
-PROCESSOR_PATH="../../../tools/statvar_importer/stat_var_processor.py"
-
-python3 ${PROCESSOR_PATH} \
+python3 ../../../tools/statvar_importer/stat_var_processor.py \
   --input_data='input_files/census_sahie_2023.csv' \
   --pv_map='census_sahie_pv_map.csv' \
   --config_file='census_sahie_metadata.csv' \
   --output_path='output/'
 ```
+**Purpose**: Generates StatVar MCF and cleaned observation CSVs.
 
-### Validation Tool
+---
 
-Lints the generated output files to check for errors before import.
+
+### Script 3: Java Linting Tool
 
 **Usage**:
-
 ```bash
-# Lint all generated files in the output directory
-# Replace /path/to/datacommons-import-tool.jar with the actual path
-java -jar /path/to/datacommons-import-tool.jar lint -d 'output/'
+java -jar '/path/to/datacommons-import-tool.jar' lint -d 'output/'
+```
+**Purpose**: Validates all generated files in the `output/` directory for formatting and semantic consistency before ingestion.
+
 ```

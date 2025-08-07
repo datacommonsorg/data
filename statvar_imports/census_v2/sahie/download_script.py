@@ -83,6 +83,7 @@ def main(_):
             configs = json.loads(blob.download_as_string())
         except Exception as e:
             logging.fatal(f"Failed to read config from GCS: {e}")
+            raise RuntimeError(e)
     else:
         logging.info(f"Reading config from local path: {config_path}")
         try:
@@ -90,7 +91,7 @@ def main(_):
                 configs = json.load(f)
         except FileNotFoundError:
             logging.fatal(f"Config file not found at local path: {config_path}")
-            return
+            raise RuntimeError(f"Config file not found at local path: {config_path}")
 
     BASE_URL = configs['CensusSAHIE']['source_url']
     OUTPUT_DIRECTORY = "input_files"
@@ -123,7 +124,9 @@ def main(_):
                     clean_csv_file(unzipped_csv_path)
                 else:
                     logging.warning(f"Could not find expected CSV file to clean: {unzipped_csv_path}")
-
+    except Exception as e:
+        logging.fatal(e)
+        raise RuntimeError(e)
     finally:
         for item in os.listdir(OUTPUT_DIRECTORY):
             if item.endswith(".zip"):
@@ -133,6 +136,7 @@ def main(_):
         
         if failed_downloads:
             logging.fatal(f"Failed to download data for the following years: {failed_downloads}")
+            raise RuntimeError(f"Failed to download data for the following years: {failed_downloads}")
 
         logging.info("Final cleanup complete")
 
