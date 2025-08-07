@@ -692,6 +692,7 @@ class ImportExecutor:
     Data files are uploaded to <output_dir>/<version>/, where <version> is a
     time string and is written to <output_dir>/<storage_version_filename>
     after the uploads are complete.
+    IRaises a RuntimeError exception if the script output files are not found.
 
     Args:
         import_dir: Absolute path to the directory with the manifest, as a
@@ -704,22 +705,30 @@ class ImportExecutor:
     """
         uploaded = import_service.ImportInputs()
         import_inputs = import_spec.get('import_inputs', [])
+        errors = []
         for import_input in import_inputs:
             for input_type in self.config.import_input_types:
                 path = import_input.get(input_type)
                 if not path:
                     continue
-                for file in file_util.file_get_matching(
-                        os.path.join(import_dir, path)):
-                    if file:
-                        dest = f'{output_dir}/{version}/{os.path.basename(file)}'
-                        self._upload_file_helper(
-                            src=file,
-                            dest=dest,
-                        )
-                uploaded_dest = f'{output_dir}/{version}/{os.path.basename(path)}'
-                setattr(uploaded, input_type, uploaded_dest)
-
+                import_file_path = os.path.join(import_dir, path)
+                import_files = file_util.file_get_matching(import_file_path)
+                if import_files:
+                    for file in import_files:
+                        if file:
+                            dest = f'{output_dir}/{version}/{os.path.basename(file)}'
+                            self._upload_file_helper(
+                                src=file,
+                                dest=dest,
+                            )
+                    uploaded_dest = f'{output_dir}/{version}/{os.path.basename(path)}'
+                    setattr(uploaded, input_type, uploaded_dest)
+                elif not glob.has_magic(path):
+                    errors.append(
+                        f'Missing file {input_type}:{import_file_path}')
+                else:
+                    logging.warning(
+                        f'Missing output file: {input_type}:{import_file_path}')
         # Upload any files downloaded from source
         source_files = [
             os.path.join(import_dir, file)
@@ -733,6 +742,10 @@ class ImportExecutor:
                 dest=dest,
             )
 
+        if errors:
+            logging.fatal(f'Missing user_script outputs: {errors}')
+            raise RuntimeError(
+                'Import job failed due to missing output files {errors}')
         return uploaded
 
     def _upload_file_helper(self, src: str, dest: str) -> None:
