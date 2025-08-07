@@ -75,31 +75,34 @@ class ValidationRunner:
     """
         stats_required, differ_required = self._determine_required_sources()
 
+        # Handle stats file
         if stats_required and (not stats_summary or
                                not os.path.exists(stats_summary)):
-            raise ValueError(
-                f"A validation rule requires the 'stats' data source, but the --stats_summary file was not provided or does not exist. Path: {stats_summary}"
-            )
-
-        if differ_required and (not differ_output or
-                                not os.path.exists(differ_output)):
-            raise ValueError(
-                f"A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. Path: {differ_output}"
-            )
-
-        if stats_summary and os.path.exists(stats_summary) and os.path.getsize(
-                stats_summary) > 0:
-            self.dataframes['stats'] = pd.read_csv(stats_summary)
+            logging.warning(
+                "A validation rule requires the 'stats' data source, but the --stats_summary file was not provided or does not exist. Path: %s",
+                stats_summary)
         elif stats_summary and os.path.exists(stats_summary):
-            logging.warning("stats_summary file exists but is empty: %s",
-                            stats_summary)
+            if os.path.getsize(stats_summary) > 0:
+                self.dataframes['stats'] = pd.read_csv(stats_summary)
+            else:
+                logging.warning("stats_summary file exists but is empty: %s",
+                                stats_summary)
 
-        if differ_output and os.path.exists(differ_output) and os.path.getsize(
-                differ_output) > 0:
-            self.dataframes['differ'] = pd.read_csv(differ_output)
-        elif differ_output and os.path.exists(differ_output):
-            logging.warning("differ_output file exists but is empty: %s",
-                            differ_output)
+        # Handle differ file
+        if differ_required:
+            if not differ_output or not os.path.exists(differ_output):
+                logging.warning(
+                    "A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. This may be due to a first time import. Path: %s",
+                    differ_output)
+                self.dataframes['differ'] = pd.DataFrame(
+                    columns=['DELETED', 'ADDED', 'MODIFIED', 'STAT_VAR'])
+            elif os.path.getsize(differ_output) > 0:
+                self.dataframes['differ'] = pd.read_csv(differ_output)
+            else:  # File exists but is empty
+                logging.warning("differ_output file exists but is empty: %s",
+                                differ_output)
+                self.dataframes['differ'] = pd.DataFrame(
+                    columns=['DELETED', 'ADDED', 'MODIFIED', 'STAT_VAR'])
 
     def _determine_required_sources(self) -> Tuple[bool, bool]:
         """
