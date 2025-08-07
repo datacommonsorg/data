@@ -698,7 +698,7 @@ class ImportExecutor:
     Data files are uploaded to <output_dir>/<version>/, where <version> is a
     time string and is written to <output_dir>/<storage_version_filename>
     after the uploads are complete.
-    IRaises a RuntimeError exception if the script output files are not found.
+    Raises a RuntimeError exception if the script output files are not found.
 
     Args:
         import_dir: Absolute path to the directory with the manifest, as a
