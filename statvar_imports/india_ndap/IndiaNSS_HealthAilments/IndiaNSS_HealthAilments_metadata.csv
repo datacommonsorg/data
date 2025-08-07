@@ -1,6 +1,6 @@
 parameter,value
-url,https://ndap.niti.gov.in/dataset/7314?tab=data
-description,2018 average medical expenditure and non medical expenditure
+url,https://ndap.niti.gov.in/dataset/7300
+description,"Statistics on health ailments in India, sourced from the National Sample Survey (NSS). This dataset includes metrics on various ailments reported across different demographics and states."
 #place_type,"Country, State"
 #places_within,country/IND
 start_date,2017
@@ -13,5 +13,4 @@ mapped_rows,1
 mapped_columns,5
 header_rows,1
 drop_statvars_without_svobs,0
-#places_resolved_csv,https://docs.google.com/spreadsheets/d/1PhulWztRK8xbARAGPEoaIRe7ZbFq-KT_HX9RQ9BZBak/edit?gid=1018588371#gid=1018588371
 #input_rows,25

@@ -3,7 +3,7 @@ srcStateName,observationAbout,{Data},,,,,,,,,,
 futureYear,observationDate,{Number},,,,,,,,,,
 Urban,placeOfResidenceClassification,Urban,,,,,,,,,,
 Rural,placeOfResidenceClassification,Rural,,,,,,,,,,
-Ailments reported for each Broad caliment category per 100000 persons during last 15 days by different age groups,measuredProperty,count,populationType,MedicalConditionIncident,measurementDenominator,Count_Person,value,{Number},statType,measuredValue,#Multiply,0.00001
+Ailments reported for each Broad ailment category per 100000 persons during last 15 days by different age groups,measuredProperty,count,populationType,MedicalConditionIncident,measurementDenominator,Count_Person,value,{Number},statType,measuredValue,#Multiply,0.00001
 Male,gender,Male,,,,,,,,,,
 Female,gender,Female,,,,,,,,,,
 Blood diseases,medicalCondition,BloodDisease,,,,,,,,,,

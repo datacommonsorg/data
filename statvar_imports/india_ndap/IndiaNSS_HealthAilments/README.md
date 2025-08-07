@@ -96,4 +96,7 @@ java -jar '/path/to/datacommons-import-tool.jar' lint \
 ```bash
 python3 download_script.py
 ```
+**Output**: `IndiaNSS_HealthAilments.csv`
+
+**Purpose**: Downloads the raw data from the NDAP API and saves it as `IndiaNSS_HealthAilments.csv`.
 

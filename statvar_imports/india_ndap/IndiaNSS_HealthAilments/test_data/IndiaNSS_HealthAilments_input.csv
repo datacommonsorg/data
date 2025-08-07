@@ -1,4 +1,4 @@
-srcStateName,TRU,GENDER,Broad ailment category,Age group,Ailments reported for each Broad caliment category per 100000 persons during last 15 days by different age groups,Estimated number of ailments under broad ailment category,Sample number of ailments under broad ailment category,srcYear,futureYear,YearCode,Year
+srcStateName,TRU,GENDER,Broad ailment category,Age group,Ailments reported for each Broad ailment category per 100000 persons during last 15 days by different age groups,Estimated number of ailments under broad ailment category,Sample number of ailments under broad ailment category,srcYear,futureYear,YearCode,Year
 Punjab,Rural,Female,Ear,60+,48,6,2,2017,2018,2017,"Agriculture Year (Jul - Jun), 2017"
 Jammu And Kashmir,Rural,Female,Blood diseases,0-4,0,0,0,2017,2018,2017,"Agriculture Year (Jul - Jun), 2017"
 Jammu And Kashmir,Rural,Female,Blood diseases,15-29,0,0,0,2017,2018,2017,"Agriculture Year (Jul - Jun), 2017"

@@ -25,14 +25,11 @@ import os
 import sys
 from typing import List, Tuple
 
-import pandas as pd
 from absl import app
 from absl import flags
 from absl import logging
+import pandas as pd
 from google.cloud import storage
-
-# pylint: disable=g-bad-import-order
-
 
 _FLAGS = flags.FLAGS
 
@@ -43,20 +40,20 @@ flags.DEFINE_string(
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
-import file_util
 from download_util_script import _retry_method
+import file_util
 _OUTPUT_COLUMNS = [
     'srcStateName',
     'TRU',
     'GENDER',
     'Broad ailment category',
     'Age group',
-    ('Ailments reported for each Broad caliment category per 100000 persons'
+    ('Ailments reported for each Broad ailment category per 100000 persons'
      ' during last 15 days by different age groups'),
     'Estimated number of ailments under broad ailment category',
     'Sample number of ailments under broad ailment category',
     'srcYear',
-    'future year',
+    'futureYear',
     'YearCode',
     'Year',
 ]
