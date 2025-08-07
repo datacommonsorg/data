@@ -1,5 +1,0 @@
-{
-  "CensusSAHIE": {
-    "source_url": "https://www2.census.gov/programs-surveys/sahie/datasets/time-series/estimates-acs/sahie-{year}-csv.zip"
-  }
-}
