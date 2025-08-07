@@ -3,7 +3,7 @@
 
 ## 1. Import Overview
 
-This project processes and imports health ailment data from the **National Sample Survey (NSS)** conducted in India. The dataset provides health-related variables for individuals across Indian states and UTs, sourced from structured surveys.
+This project processes and imports health ailment data from the **National Sample Survey (NSS) Report No. 556 on Health in India**. The dataset provides a profile of ailments, healthcare facility usage, and expenditures based on a survey.
 
 * **Source URL**: [https://ndap.niti.gov.in/dataset/7300](https://ndap.niti.gov.in/dataset/7300)
 * **Import Type**: Manual file-based import (CSV)

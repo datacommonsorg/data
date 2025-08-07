@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""This script downloads data for India NSS Health Ailments.
+"""This script downloads data for India NSS Health Ailments from NSS Report No. 556.
 
 This script downloads data from the NDAP API, processes it, and saves it as a
 CSV file.
@@ -136,9 +136,9 @@ def preprocess_and_save(data: List[Tuple], output_dir: str) -> None:
 
 def main(_) -> None:
   """Main function to download, process, and save the data."""
-  raw_data, output_dir = download_data(_FLAGS.config_file_path)
-  if raw_data and output_dir:
-    preprocess_and_save(raw_data, output_dir)
+  raw_data, _ = download_data(_FLAGS.config_file_path)
+  if raw_data:
+    preprocess_and_save(raw_data, _SCRIPT_PATH)
 
 
 if __name__ == '__main__':

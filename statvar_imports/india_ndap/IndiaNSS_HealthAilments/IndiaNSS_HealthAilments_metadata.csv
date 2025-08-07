@@ -1,6 +1,6 @@
 parameter,value
 url,https://ndap.niti.gov.in/dataset/7300
-description,"Statistics on health ailments in India, sourced from the National Sample Survey (NSS). This dataset includes metrics on various ailments reported across different demographics and states."
+description,"A quantitative dataset from the NSS Report No. 556 on Health in India, providing a profile of ailments, healthcare facility usage, and expenditures based on a survey"
 #place_type,"Country, State"
 #places_within,country/IND
 start_date,2017

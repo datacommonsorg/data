@@ -6,7 +6,7 @@
         "support@datacommons.org"
       ],
       "provenance_url": "https://ndap.niti.gov.in/dataset/7300",
-      "provenance_description": "Statistics on health ailments in India, sourced from the National Sample Survey (NSS). This dataset includes metrics on various ailments reported across different demographics and states.",
+      "provenance_description": "A quantitative dataset from the NSS Report No. 556 on Health in India, providing a profile of ailments, healthcare facility usage, and expenditures based on a survey",
       "scripts": [
         "download_script.py",
         "../../../tools/statvar_importer/stat_var_processor.py --input_data=IndiaNSS_HealthAilments.csv --pv_map=IndiaNSS_HealthAilments_pvmap.csv --places_resolved_csv=IndiaNSS_HealthAilments_place_resolved.csv --config_file=IndiaNSS_HealthAilments_metadata.csv  --output_path=output/IndiaNSS_HealthAilments_output"
