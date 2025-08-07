@@ -9,6 +9,7 @@ croniter
 dataclasses
 datacommons
 db-dtypes
+duckdb
 frozendict
 fsspec
 func-timeout
@@ -55,4 +56,3 @@ netCDF4
 xmltodict
 sodapy
 certifi==2025.1.31
-

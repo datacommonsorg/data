@@ -1,0 +1,11 @@
+observationAbout,variableMeasured,observationDate,value
+dcid:geoId/12086,dcid:Covid19MobilityTrend_GroceryStoreAndPharmacy,2020-02-26,-2
+dcid:geoId/12086,dcid:Covid19MobilityTrend_Park,2020-02-26,-15
+dcid:geoId/12086,dcid:Covid19MobilityTrend_TransportHub,2020-02-26,1
+dcid:geoId/12086,dcid:Covid19MobilityTrend_Workplace,2020-02-26,2
+dcid:geoId/12086,dcid:Covid19MobilityTrend_Residence,2020-02-26,0
+dcid:geoId/12086,dcid:Covid19MobilityTrend_LocalBusiness,2020-02-27,4
+dcid:geoId/12086,dcid:Covid19MobilityTrend_GroceryStoreAndPharmacy,2020-02-27,5
+dcid:geoId/12086,dcid:Covid19MobilityTrend_TransportHub,2020-02-27,-1
+dcid:geoId/12086,dcid:Covid19MobilityTrend_Workplace,2020-02-27,2
+dcid:geoId/12086,dcid:Covid19MobilityTrend_Residence,2020-02-27,0
