@@ -113,8 +113,9 @@ def main(_):
             )
 
             if not success:
-                logging.warning(f"Failed to download or process data for year {year}.")
+                logging.warning(f"Failed to download or process data for year {year}. Stopping further downloads.")
                 failed_downloads.append(year)
+                break
             else:
                 logging.info(f"Successfully processed data for year {year}.")
                 # After unzipping, find the CSV and clean it
@@ -136,7 +137,7 @@ def main(_):
         
         if failed_downloads:
             logging.fatal(f"Failed to download data for the following years: {failed_downloads}")
-            raise RuntimeError(f"Failed to download data for the following years: {failed_downloads}")
+            sys.exit(1)
 
         logging.info("Final cleanup complete")
 

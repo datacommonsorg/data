@@ -19,7 +19,7 @@
         }
       ],
       "source_files": [
-        "input_files/*.csv",
+        "input_files/*.csv"
         ],
       "cron_schedule": "0 0 15 12 *"
     }
