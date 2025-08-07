@@ -16,26 +16,6 @@
         {
           "template_mcf": "output/census_sahie_output_2018.tmcf",
           "cleaned_csv": "output/*.csv"
-        },
-        {
-          "template_mcf": "output/census_sahie_output_2019.tmcf",
-          "cleaned_csv": "output/census_sahie_output_2019.csv"
-        },
-        {
-          "template_mcf": "output/census_sahie_output_2020.tmcf",
-          "cleaned_csv": "output/census_sahie_output_2020.csv"
-        },
-        {
-          "template_mcf": "output/census_sahie_output_2021.tmcf",
-          "cleaned_csv": "output/census_sahie_output_2021.csv"
-        },
-        {
-          "template_mcf": "output/census_sahie_output_2022.tmcf",
-          "cleaned_csv": "output/census_sahie_output_2022.csv"
-        },
-        {
-          "template_mcf": "output/census_sahie_output_2023.tmcf",
-          "cleaned_csv": "output/census_sahie_output_2023.csv"
         }
       ],
       "source_files": [
