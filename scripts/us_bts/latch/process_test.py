@@ -26,9 +26,7 @@ sys.path.insert(0, _MODULE_DIR)
 from process import process
 # pylint: enable=wrong-import-position
 
-_TEST_DATASET_DIR = os.path.join(_MODULE_DIR, "test_data", "datasets")
-_EXPECTED_FILES_DIR = os.path.join(_MODULE_DIR, "test_data", "expected_files")
-
+_TEST_DATA_DIR = os.path.join(_MODULE_DIR, "test_data")
 
 class TestProcess(unittest.TestCase):
     """
@@ -36,32 +34,41 @@ class TestProcess(unittest.TestCase):
     It will generate and test CSV, MCF and TMCF files for given test input files
     and comapre it with expected results.
     """
-    TEST_DATA_FILES = os.listdir(_TEST_DATASET_DIR)
-    IP_DATA = [
-        os.path.join(_TEST_DATASET_DIR, file_name)
-        for file_name in TEST_DATA_FILES
-    ]
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
+    def setUp(self):
+        """
+        This method is called before every test.
+        """
+        self.ip_data = [
+            os.path.join(_TEST_DATA_DIR, file_name)
+            for file_name in os.listdir(_TEST_DATA_DIR)
+            if file_name.endswith("_input.csv")
+        ]
+        self.tmp_dir = tempfile.TemporaryDirectory()
+        self.cleaned_csv_file_path = os.path.join(self.tmp_dir.name,
+                                                  "data_part1.csv")
+        self.mcf_file_path = os.path.join(self.tmp_dir.name,
+                                          "test_census.mcf")
+        self.tmcf_file_path = os.path.join(self.tmp_dir.name,
+                                           "test_census.tmcf")
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
+        process(self.ip_data, os.path.join(self.tmp_dir.name, "data.csv"),
+                self.mcf_file_path, self.tmcf_file_path)
 
-            self.cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            self.mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            self.tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+        with open(self.mcf_file_path, encoding="UTF-8") as mcf_file:
+            self._actual_mcf_data = mcf_file.read()
 
-            process(self.IP_DATA, self.cleaned_csv_file_path,
-                    self.mcf_file_path, self.tmcf_file_path)
+        with open(self.tmcf_file_path, encoding="UTF-8") as tmcf_file:
+            self._actual_tmcf_data = tmcf_file.read()
 
-            with open(self.mcf_file_path, encoding="UTF-8") as mcf_file:
-                self._actual_mcf_data = mcf_file.read()
+        with open(self.cleaned_csv_file_path, encoding="UTF-8") as csv_file:
+            self._actual_csv_data = csv_file.read()
 
-            with open(self.tmcf_file_path, encoding="UTF-8") as tmcf_file:
-                self._actual_tmcf_data = tmcf_file.read()
-
-            with open(self.cleaned_csv_file_path, encoding="UTF-8") as csv_file:
-                self._actual_csv_data = csv_file.read()
+    def tearDown(self):
+        """
+        This method is called after every test.
+        """
+        self.tmp_dir.cleanup()
 
     def test_csv_mcf_tmcf_files(self):
         """
@@ -69,13 +76,13 @@ class TestProcess(unittest.TestCase):
         against expected results.
         """
         expected_csv_file_path = os.path.join(
-            _EXPECTED_FILES_DIR, "us_transportation_household.csv")
+            _TEST_DATA_DIR, "us_transportation_household_output.csv")
 
         expected_mcf_file_path = os.path.join(
-            _EXPECTED_FILES_DIR, "us_transportation_household.mcf")
+            _TEST_DATA_DIR, "us_transportation_household.mcf")
 
         expected_tmcf_file_path = os.path.join(
-            _EXPECTED_FILES_DIR, "us_transportation_household.tmcf")
+            _TEST_DATA_DIR, "us_transportation_household.tmcf")
 
         with open(expected_csv_file_path,
                   encoding="UTF-8") as expected_csv_file:

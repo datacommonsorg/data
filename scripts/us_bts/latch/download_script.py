@@ -42,7 +42,7 @@ _SOCRATA_PAGINATION_LIMIT = 50000
 def _download_and_decompress_gz(url: str, output_path: str) -> bool:
     """Downloads and decompresses a GZ file using internal retry helper."""
     try:
-        print(url)
+        logging.info(f"Downloading from URL: {url}")
         response = _retry_method(url, None, 3, 5, 2)
 
         with gzip.GzipFile(fileobj=response.raw) as uncompressed:
@@ -105,13 +105,10 @@ def _download_paginated_socrata_file(
                 num_lines_received -= 1
 
             if num_lines_received < pagination_limit:
-                # logging.info(f"Less than limit ({pagination_limit}) lines received ({num_lines_received}), pagination complete for {url}.")
                 break
 
             offset += pagination_limit
-            # logging.info(f"Downloaded {num_lines_received} lines from {url}. Next offset: {offset}")
 
-        # logging.info(f"Paginated download for {url} finished.")
         return True
 
     except Exception as e:
@@ -121,26 +118,26 @@ def _download_paginated_socrata_file(
         return False
 
 
-def create_download_configs() -> List[Dict]:
+def create_download_configs(gcs_urls_config_file: str) -> List[Dict]:
     """Reads the URL config JSON from GCS and generates the download configurations."""
     try:
-        result = subprocess.run(['gsutil', 'cat', _GCS_URLS_CONFIG_FILE],
+        result = subprocess.run(['gsutil', 'cat', gcs_urls_config_file],
                                 capture_output=True,
                                 text=True,
                                 check=True,
                                 encoding='UTF-8')
         urls_config = json.loads(result.stdout)
         logging.info(
-            f"Successfully loaded download configurations from {_GCS_URLS_CONFIG_FILE}"
+            f"Successfully loaded download configurations from {gcs_urls_config_file}"
         )
     except (subprocess.CalledProcessError, FileNotFoundError) as e:
         logging.fatal(
-            f"Failed to read GCS config file '{_GCS_URLS_CONFIG_FILE}': {e}. Ensure 'gsutil' is in your PATH and the file exists."
+            f"Failed to read GCS config file '{gcs_urls_config_file}': {e}. Ensure 'gsutil' is in your PATH and the file exists."
         )
         return []
     except json.JSONDecodeError as e:
         logging.fatal(
-            f"Failed to parse JSON from GCS config file '{_GCS_URLS_CONFIG_FILE}': {e}"
+            f"Failed to parse JSON from GCS config file '{gcs_urls_config_file}': {e}"
         )
         return []
     except Exception as e:
@@ -155,16 +152,15 @@ def create_download_configs() -> List[Dict]:
     ]
 
 
-def download_all_files_from_config(download_dir: str) -> None:
+def download_all_files_from_config(download_dir: str,
+                                   gcs_urls_config_file: str) -> None:
     """
     Downloads files into the specified directory based on configurations,
     dispatching to appropriate download functions.
     """
-    # UNCOMMENTED: Ensure the output directory exists before attempting to write files.
     os.makedirs(download_dir, exist_ok=True)
-    # logging.info(f"Ensured output directory exists: {download_dir}")
 
-    download_configs = create_download_configs()
+    download_configs = create_download_configs(gcs_urls_config_file)
 
     if not download_configs:
         logging.warning(
@@ -179,7 +175,6 @@ def download_all_files_from_config(download_dir: str) -> None:
             continue
 
         output_path = os.path.join(download_dir, file_name)
-        # logging.info(f"Processing URL: {url} (expected output: {output_path})")
 
         success = False
         try:
@@ -225,7 +220,7 @@ def main(_) -> None:
         logging.fatal("--output_dir is required. Exiting.")
         sys.exit(1)
 
-    download_all_files_from_config(FLAGS.output_dir)
+    download_all_files_from_config(FLAGS.output_dir, _GCS_URLS_CONFIG_FILE)
     logging.info("Download script completed.")
 
 

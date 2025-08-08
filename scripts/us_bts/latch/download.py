@@ -23,7 +23,8 @@ import zipfile
 import requests
 
 
-def download_file(input_urls: list, download_directory: str) -> None:
+def download_and_extract_files(input_urls: list,
+                                 download_directory: str) -> None:
     """
     Function to Download and Unzip the file provided in url.
 
@@ -34,8 +35,7 @@ def download_file(input_urls: list, download_directory: str) -> None:
     # This extracts the filename from the complete URL,
     # also removes the .gz extension.
     path = os.path.join(download_directory, 'input_files')
-    if not os.path.exists(path):
-        os.mkdir(path)
+    os.makedirs(path, exist_ok=True)
 
     for download_file_url in input_urls:
         # Example, file_name_with_compression_ext: NHTS_2009_transfer_AL.zip

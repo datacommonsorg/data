@@ -3,7 +3,9 @@
   "import_specifications": [
     {
       "import_name": "USBTS_Tract_Household_Transportation",
-      "curator_emails": ["support@datacommons.org"],
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
       "provenance_url": "https://data.bts.gov/resource/va72-z8hz",
       "provenance_description": "US BTS Tract Household Transportation",
       "scripts": [
@@ -29,10 +31,16 @@
         }
       ],
       "source_files": [
-          "gcs_output/input_files/usbts_tract_household_transportation_2017_input.csv",
-          "gcs_output/input_files/usbts_tract_household_transportation_2009_input.csv"
-          ],
+        "gcs_output/input_files/usbts_tract_household_transportation_2017_input.csv",
+        "gcs_output/input_files/usbts_tract_household_transportation_2009_input.csv"
+      ],
       "cron_schedule": "0 1 6 * *"
+    }
+  ],
+  "import_inputs": [
+    {
+      "template_mcf": "gcs_output/output_files/us_transportation_household.tmcf",
+      "cleaned_csv": "gcs_output/output_files/us_transportation_household_part1.csv"
     }
   ]
 }
