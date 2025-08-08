@@ -64,22 +64,47 @@ flags.DEFINE_string(
 
 
 def _call_export_csv_api(school: str, year: str, columns: list) -> str:
+    """
+    Calls the CSV export API to generate a CSV file.
+
+    Args:
+        school: The school name.
+        year: The year.
+        columns: A list of columns to be included in the CSV.
+
+    Returns:
+        The source file name of the exported CSV.
+
+    Raises:
+        requests.exceptions.HTTPError: If the API call returns a non-200 status code.
+        KeyError: If the JSON response is not in the expected format.
+    """
     COLUMNS_SELECTOR["lColumnsSelected"] = DEFAULT_COLUMNS_SELECTED + columns
     COLUMNS_SELECTOR["sLevel"] = school
     COLUMNS_SELECTOR["lYearsSelected"] = [year]
-    json_value = COLUMNS_SELECTOR
-    response = requests.post(url=COLUMNS_SELECTOR_URL,
-                             json=COLUMNS_SELECTOR,
-                             headers=HEADERS)
-    if response.status_code == 200:
-        src_file_name = json.loads(response.text)['d']
+    
+    try:
+        response = requests.post(
+            url=COLUMNS_SELECTOR_URL,
+            json=COLUMNS_SELECTOR,
+            headers=HEADERS
+        )
+        # This will raise an HTTPError for 4xx or 5xx status codes
+        response.raise_for_status()
+
+        src_file_name = response.json()['d']
         logging.info(
             f"CSV export successful for {school} - {year} - {src_file_name}")
         return src_file_name
-    else:
-        logging.error(
-            f"CSV export failed with status code: {response.status_code}")
-        return None
+
+    except requests.exceptions.RequestException as e:
+        logging.error(f"CSV export API call failed for {school}-{year}: {e}")
+        raise RuntimeError(f"CSV export API call failed for {school}-{year}") from e
+
+    except (json.JSONDecodeError, KeyError) as e:
+        logging.error(f"Failed to parse CSV export API response for {school}-{year}: {e}")
+        logging.debug(f"Response content: {response.text}")
+        raise RuntimeError(f"Unexpected response from CSV export API for {school}-{year}") from e
 
 
 def retry(f):
@@ -108,18 +133,42 @@ def retry(f):
 
 
 def _call_compress_api(file_name: str) -> str:
+    """
+    Calls the compression API to compress a file.
+
+    Args:
+        file_name: The name of the file to be compressed.
+
+    Returns:
+        The source file name of the compressed file.
+
+    Raises:
+        requests.exceptions.HTTPError: If the API call returns a non-200 status code.
+        KeyError: If the JSON response is not in the expected format.
+    """
     COMPRESS_FILE["sFileName"] = file_name
-    response = requests.post(url=COMPRESS_FILE_URL,
-                             json=COMPRESS_FILE,
-                             headers=HEADERS)
-    if response.status_code == 200:
-        compressed_src_file = json.loads(response.text)['d'][0]
+    
+    try:
+        response = requests.post(
+            url=COMPRESS_FILE_URL,
+            json=COMPRESS_FILE,
+            headers=HEADERS
+        )
+        # This will raise an HTTPError for 4xx or 5xx status codes
+        response.raise_for_status()
+
+        compressed_src_file = response.json()['d'][0]
         logging.info(f"File compression successful: {compressed_src_file}")
         return compressed_src_file
-    else:
-        logging.error(
-            f"File compression failed with status code: {response.status_code}")
-        return None
+
+    except requests.exceptions.RequestException as e:
+        logging.error(f"File compression API call failed for '{file_name}': {e}")
+        raise RuntimeError(f"File compression API call failed for '{file_name}'") from e
+    
+    except (json.JSONDecodeError, KeyError) as e:
+        logging.error(f"Failed to parse compression API response for '{file_name}': {e}")
+        logging.debug(f"Response content: {response.text}")
+        raise RuntimeError(f"Unexpected response from compression API for '{file_name}'") from e
 
 
 def _call_download_api(compressed_src_file: str, year: str) -> int:

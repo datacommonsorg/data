@@ -26,12 +26,12 @@ This dataset has Population Estimates for the National Center for Education Stat
     Ex private :
         gsutil cp -r /scripts/us_nces/demographics/private_school/input_files gs://unresolved_mcf/us_nces/demographics/private_school/semi_automation_input_files/
     Ex public :
-        gsutil cp -r /scripts/us_nces/demographics/private_school/input_files gs://unresolved_mcf/us_nces/demographics/public_school/semi_automation_input_files/
-    Ex district:
+        gsutil cp -r /scripts/us_nces/demographics/public_school/input_files gs://unresolved_mcf/us_nces/demographics/public_school/semi_automation_input_files/
+    Ex district :
         gsutil cp -r /scripts/us_nces/demographics/school_district/input_files gs://unresolved_mcf/us_nces/demographics/school_district/semi_automation_input_files/
 
 ### Note:
-    The only manual part here is after downloading the input files and then uploading them to gcp buclet. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_output/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_output/output_files
+    The only manual part here is after downloading the input files and then uploading them to gcp bucket. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_output/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_output/output_files
 
 ### Script Execution Details
     public    :  python3 private_school/process.py
@@ -170,13 +170,23 @@ The attributes used for the import are as follows
 - "district_school"
 - "public_school"
 
+
+#### Follow these steps to generate and add new schools 
 Cleaned data will be inside as a CSV file with the following paths.
+step 1 :
 - private_school:
 [private_school/gcs_output/output_place/us_nces_demographics_private_place.csv]
 - district_school:
 [school_district/gcs_output/output_place/us_nces_demographics_district_place.csv]
 - public_school:
 [public_school/gcs_output/output_place/us_nces_demographics_public_place.csv]
+
+step 2 : Use the command-line tool to do genmcf using the CSV and TMCF files.
+
+`java -jar '/usr/local/google/home/spateriya/Downloads/datacommons-import-tool-0.1-alpha.1-jar-with-dependencies.jar' genmcf -r FULL <place csv path> <place tmcf path>`
+
+step 3 : Update the file path in the textproto files for NCES_PrivateSchool, NCES_PublicSchool, and NCES_SchoolDistrict.
+
 
 If there are Duplicate School IDs present in School Place, they will be saved inside the same output path as that of csv and tmcf file.
 - [scripts/us_nces/demographics/private_school/gcs_output/output_place/dulicate_id_us_nces_demographics_private_place.csv]
@@ -196,7 +206,7 @@ If there are Duplicate School IDs present in School Place, they will be saved in
 
 Run the test cases
 
-- `/bin/python3 -m unittest scripts/us_nces/demographics/private_school/process_test.py`
-- `/bin/python3 -m unittest scripts/us_nces/demographics/school_district/process_test.py`
-- `/bin/python3 -m unittest scripts/us_nces/demographics/public_school/process_test.py`
+- `python3 -m unittest scripts/us_nces/demographics/private_school/process_test.py`
+- `python3 -m unittest scripts/us_nces/demographics/school_district/process_test.py`
+- `python3 -m unittest scripts/us_nces/demographics/public_school/process_test.py`
 
