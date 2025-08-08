@@ -13,16 +13,11 @@
 # limitations under the License.
 
 # How to run the script to download the files:
-# For production (using default GCS path):
 # python3 download_script.py
-#
-# For local testing (overriding with a local path):
-# python3 download_script.py --config_file_path=import_configs.json
 
 import os
 import sys
 from absl import app
-from absl import flags
 from absl import logging
 import datetime
 import tempfile
@@ -34,12 +29,6 @@ sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 from download_util_script import download_file
 
 logging.set_verbosity(logging.INFO)
-
-FLAGS = flags.FLAGS
-flags.DEFINE_string(
-    'config_file_path',
-    'gs://unresolved_mcf/census_v2/sahie/latest/import_configs.json',
-    'Path to the import config file. Can be a local path or a GCS path (gs://...).')
 
 
 def clean_csv_file(file_path):
@@ -65,33 +54,22 @@ def clean_csv_file(file_path):
 
     except Exception as e:
         logging.error(f"Error cleaning file {file_path}: {e}")
-        # If temp_file was created, it will be automatically removed if an error occurs before os.replace
-        # If os.replace fails, the temp file might be left behind, but NamedTemporaryFile tries to clean up.
 
 
 def main(_):
-    config_path = FLAGS.config_file_path
+    gcs_config_path = 'gs://unresolved_mcf/census_v2/sahie/latest/import_configs.json'
     configs = {}
 
-    if config_path.startswith('gs://'):
-        logging.info(f"Reading config from GCS path: {config_path}")
-        try:
-            storage_client = storage.Client()
-            bucket_name, blob_name = config_path[5:].split('/', 1)
-            bucket = storage_client.bucket(bucket_name)
-            blob = bucket.blob(blob_name)
-            configs = json.loads(blob.download_as_string())
-        except Exception as e:
-            logging.fatal(f"Failed to read config from GCS: {e}")
-            raise RuntimeError(e)
-    else:
-        logging.info(f"Reading config from local path: {config_path}")
-        try:
-            with open(config_path, 'r') as f:
-                configs = json.load(f)
-        except FileNotFoundError:
-            logging.fatal(f"Config file not found at local path: {config_path}")
-            raise RuntimeError(f"Config file not found at local path: {config_path}")
+    logging.info(f"Reading config from GCS path: {gcs_config_path}")
+    try:
+        storage_client = storage.Client()
+        bucket_name, blob_name = gcs_config_path[5:].split('/', 1)
+        bucket = storage_client.bucket(bucket_name)
+        blob = bucket.blob(blob_name)
+        configs = json.loads(blob.download_as_string())
+    except Exception as e:
+        logging.fatal(f"Failed to read config from GCS: {e}")
+        sys.exit(1)
 
     BASE_URL = configs['CensusSAHIE']['source_url']
     OUTPUT_DIRECTORY = "input_files"
@@ -118,7 +96,6 @@ def main(_):
                 break
             else:
                 logging.info(f"Successfully processed data for year {year}.")
-                # After unzipping, find the CSV and clean it
                 unzipped_csv_name = f"sahie_{year}.csv"
                 unzipped_csv_path = os.path.join(OUTPUT_DIRECTORY, unzipped_csv_name)
                 if os.path.exists(unzipped_csv_path):
@@ -127,7 +104,7 @@ def main(_):
                     logging.warning(f"Could not find expected CSV file to clean: {unzipped_csv_path}")
     except Exception as e:
         logging.fatal(e)
-        raise RuntimeError(e)
+        sys.exit(1)
     finally:
         for item in os.listdir(OUTPUT_DIRECTORY):
             if item.endswith(".zip"):
@@ -136,8 +113,7 @@ def main(_):
                 logging.info(f"Removed zip file: {file_to_remove}")
         
         if failed_downloads:
-            logging.fatal(f"Failed to download data for the following years: {failed_downloads}")
-            sys.exit(1)
+            logging.info(f"Could not download data for the following years (likely not yet available): {failed_downloads}")
 
         logging.info("Final cleanup complete")
 

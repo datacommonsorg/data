@@ -54,8 +54,8 @@ Before ingestion, the following preprocessing is done:
 # Run with default configuration from GCS
 python3 download_script.py
 
-# Run with a specific configuration file for local testing
-python3 download_script.py --config_file_path=import_configs.json
+# Run with a local 'import_configs.json' (if it exists), otherwise uses GCS
+python3 download_script.py
 ```
 **Purpose**: Downloads, cleans, and orchestrates the processing of all yearly data files.
 

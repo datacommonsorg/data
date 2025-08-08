@@ -1,5 +1,4 @@
 {
-  "import_name": "CensusSAHIE",
   "import_specifications": [
     {
       "import_name": "CensusSAHIE",
@@ -9,12 +8,12 @@
       "provenance_url": "https://www.census.gov/programs-surveys/sahie.html",
       "provenance_description": "The Small Area Health Insurance Estimates (SAHIE) program provides the only up-to-date, state-based estimates of health insurance coverage for all counties in the United States.",
       "scripts": [
-        "download_script.py --config_file_path=import_configs.json",
+        "download_script.py",
         "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/*.csv --pv_map=census_sahie_pv_map.csv --config_file=census_sahie_metadata.csv --output_path=output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
         ],
       "import_inputs": [
         {
-          "template_mcf": "output/census_sahie_output_2018.tmcf",
+          "template_mcf": "output/*.tmcf",
           "cleaned_csv": "output/*.csv"
         }
       ],
