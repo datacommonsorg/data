@@ -82,13 +82,11 @@ def _call_export_csv_api(school: str, year: str, columns: list) -> str:
     COLUMNS_SELECTOR["lColumnsSelected"] = DEFAULT_COLUMNS_SELECTED + columns
     COLUMNS_SELECTOR["sLevel"] = school
     COLUMNS_SELECTOR["lYearsSelected"] = [year]
-    
+
     try:
-        response = requests.post(
-            url=COLUMNS_SELECTOR_URL,
-            json=COLUMNS_SELECTOR,
-            headers=HEADERS
-        )
+        response = requests.post(url=COLUMNS_SELECTOR_URL,
+                                 json=COLUMNS_SELECTOR,
+                                 headers=HEADERS)
         # This will raise an HTTPError for 4xx or 5xx status codes
         response.raise_for_status()
 
@@ -99,12 +97,16 @@ def _call_export_csv_api(school: str, year: str, columns: list) -> str:
 
     except requests.exceptions.RequestException as e:
         logging.error(f"CSV export API call failed for {school}-{year}: {e}")
-        raise RuntimeError(f"CSV export API call failed for {school}-{year}") from e
+        raise RuntimeError(
+            f"CSV export API call failed for {school}-{year}") from e
 
     except (json.JSONDecodeError, KeyError) as e:
-        logging.error(f"Failed to parse CSV export API response for {school}-{year}: {e}")
+        logging.error(
+            f"Failed to parse CSV export API response for {school}-{year}: {e}")
         logging.debug(f"Response content: {response.text}")
-        raise RuntimeError(f"Unexpected response from CSV export API for {school}-{year}") from e
+        raise RuntimeError(
+            f"Unexpected response from CSV export API for {school}-{year}"
+        ) from e
 
 
 def retry(f):
@@ -147,13 +149,11 @@ def _call_compress_api(file_name: str) -> str:
         KeyError: If the JSON response is not in the expected format.
     """
     COMPRESS_FILE["sFileName"] = file_name
-    
+
     try:
-        response = requests.post(
-            url=COMPRESS_FILE_URL,
-            json=COMPRESS_FILE,
-            headers=HEADERS
-        )
+        response = requests.post(url=COMPRESS_FILE_URL,
+                                 json=COMPRESS_FILE,
+                                 headers=HEADERS)
         # This will raise an HTTPError for 4xx or 5xx status codes
         response.raise_for_status()
 
@@ -162,13 +162,18 @@ def _call_compress_api(file_name: str) -> str:
         return compressed_src_file
 
     except requests.exceptions.RequestException as e:
-        logging.error(f"File compression API call failed for '{file_name}': {e}")
-        raise RuntimeError(f"File compression API call failed for '{file_name}'") from e
-    
+        logging.error(
+            f"File compression API call failed for '{file_name}': {e}")
+        raise RuntimeError(
+            f"File compression API call failed for '{file_name}'") from e
+
     except (json.JSONDecodeError, KeyError) as e:
-        logging.error(f"Failed to parse compression API response for '{file_name}': {e}")
+        logging.error(
+            f"Failed to parse compression API response for '{file_name}': {e}")
         logging.debug(f"Response content: {response.text}")
-        raise RuntimeError(f"Unexpected response from compression API for '{file_name}'") from e
+        raise RuntimeError(
+            f"Unexpected response from compression API for '{file_name}'"
+        ) from e
 
 
 def _call_download_api(compressed_src_file: str, year: str) -> int:
