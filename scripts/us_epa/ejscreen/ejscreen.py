@@ -75,8 +75,10 @@ def download_file(url, year, input_folder, zip_filename=None):
             logging.fatal(
                 f"Failed to download file for {year}. HTTP Status Code: {response.status_code} URL : {url}"
             )
+            raise RuntimeError(f"Failed to download file for {year}. HTTP Status Code: {response.status_code} URL : {url}")
     except Exception as e:
         logging.fatal(f"Failed to download file for {year} after {url} .")
+        raise RuntimeError(f"Failed to download file for {year} after {url} .")
 
 
 # Data processing function
@@ -147,6 +149,7 @@ def main(_):
 
                 except Exception as e:
                     logging.fatal(f"Error processing data for year {year}: {e}")
+                    raise RuntimeError(f"Error processing data for year {year}: {e}")
                     continue
 
         # Process files if the mode is 'process' or if no mode is specified
@@ -187,7 +190,9 @@ def main(_):
 
                 except Exception as e:
                     logging.fatal(f"Error processing data for year {year}: {e}")
+                    raise RuntimeError(f"Error processing data for year {year}: {e}")
                     continue
+            
 
             # Write the combined data and template
             logging.info("Writing data to CSV")
@@ -200,6 +205,7 @@ def main(_):
 
     except Exception as e:
         logging.fatal(f"Unexpected error in the main process: {e}")
+        raise RuntimeError(f"Unexpected error in the main process: {e}")
 
 
 if __name__ == '__main__':

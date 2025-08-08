@@ -1,4 +1,3 @@
-
 # Importing EPA EJSCREEN data
 
 This directory imports data from the [EPA's EJSCREEN](https://www.epa.gov/ejscreen) - a mapping and screening tool developed by the EPA to highlight areas facing environmental justice (EJ) issues. EJSCREEN combines Census demographic data and environmental data from EPA sources. Data is organized by FIPS code and is given on the Census block level. These scripts generate the following files:

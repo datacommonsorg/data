@@ -2,12 +2,15 @@
     "import_specifications": [
         {
             "import_name": "EPA_EJSCREEN",
-            "curator_emails": [],
+            "curator_emails": ["support@datacommons.org"],
             "provenance_url": "https://gaftp.epa.gov/EJSCREEN/",
             "provenance_description": "The Census Bureau's Ejscreen data",
             "scripts": [
                 "ejscreen.py"
             ],
+            "source_files": [
+         "input_folder/*.csv"
+         ],
             "import_inputs": [
                 {
                     "template_mcf": "ejscreen.tmcf",
