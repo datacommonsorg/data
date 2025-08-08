@@ -28,15 +28,6 @@ from .util import filter_dataframe
 from .result import ValidationResult, ValidationStatus
 
 _FLAGS = flags.FLAGS
-flags.DEFINE_string('validation_config', 'validation_config.json',
-                    'Path to the validation config file.')
-flags.DEFINE_string('differ_output', None,
-                    'Path to the differ output data file.')
-flags.DEFINE_string('stats_summary', None,
-                    'Path to the stats summary report file.')
-flags.DEFINE_string('validation_output', None,
-                    'Path to the validation output file.')
-flags.mark_flag_as_required('validation_output')
 
 
 class ValidationRunner:
@@ -202,4 +193,13 @@ def main(_):
 
 
 if __name__ == '__main__':
+    flags.DEFINE_string('validation_config', 'validation_config.json',
+                        'Path to the validation config file.')
+    flags.DEFINE_string('differ_output', None,
+                        'Path to the differ output data file.')
+    flags.DEFINE_string('stats_summary', None,
+                        'Path to the stats summary report file.')
+    flags.DEFINE_string('validation_output', None,
+                        'Path to the validation output file.')
+    flags.mark_flag_as_required('validation_output')
     app.run(main)
