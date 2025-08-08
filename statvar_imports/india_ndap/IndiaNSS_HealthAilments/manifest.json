@@ -13,14 +13,20 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "output/IndiaNSS_HealthAilments.tmcf",
-          "cleaned_csv": "output/IndiaNSS_HealthAilments.csv"
+          "template_mcf": "output/IndiaNSS_HealthAilments_output.tmcf",
+          "cleaned_csv": "output/IndiaNSS_HealthAilments_output.csv"
         }
       ],
       "source_files": [
         "IndiaNSS_HealthAilments.csv"
       ],
-      "cron_schedule": "0 0 1 1 *"
+      "cron_schedule": "0 0 1 1 *",
+      "resources": {
+        "limits": {
+          "cpu": "4",
+          "memory": "8Gi"
+        }
+      }
     }
   ]
 }
