@@ -53,14 +53,16 @@ _FLAGS = flags.FLAGS
 _DEFAULT_INPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                    'gcs_output/input_files')
 _DEFAULT_OUTPUT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                   'gcs_output/output_files')
+                                    'gcs_output/output_files')
 flags.DEFINE_string("input_path", _DEFAULT_INPUT_PATH,
                     "Import Data File's List")
+_ROWS_PER_FILE = 4000000
 
 
 def _upload_to_gcs(file_path: str):
     """Uploads a file to the GCS output path."""
-    gcs_file_path = os.path.join(_DEFAULT_OUTPUT_PATH, os.path.basename(file_path))
+    gcs_file_path = os.path.join(_DEFAULT_OUTPUT_PATH,
+                                 os.path.basename(file_path))
     try:
         file_util.file_copy(file_path, gcs_file_path)
         logging.info(f"Successfully uploaded {file_path} to {gcs_file_path}")
@@ -79,6 +81,7 @@ def _promote_measurement_method(data_df: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame: DataFrame
     """
+    logging.info("Promoting measurement method.")
     acs_survey_df = data_df[data_df["measurement_method"] ==
                             ACS_SRUVEY_MEASUREMENT_METHOD].reset_index(
                                 drop=True)
@@ -110,6 +113,7 @@ def _column_operations(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
     Returns:
         pd.DataFrame: _description_
     """
+    logging.info("Performing column operations.")
     dtype_conv = conf.get("dtype_conv", {})
     for col, dtype in dtype_conv.items():
         if col == 'urban_group':
@@ -143,7 +147,7 @@ def _filter_dropna(data_df: pd.DataFrame, conf: dict):
 
 
 def _apply_filters(data_df, file_conf):
-
+    logging.info("Applying filters.")
     # Removing null values from urban_group column
     filters = file_conf.get("filters", False)
 
@@ -165,6 +169,7 @@ def _additional_process_2017(data_df: pd.DataFrame, conf: dict) -> pd.DataFrame:
     Returns:
         pd.DataFrame: Output DataFrame
     """
+    logging.info("Performing additional processing for 2017 data.")
     mm_cols = conf.get("cols_for_measurement_method", [])
     if mm_cols != []:
         data_df['measurement_method'] = DEFAULT_MEASUREMENT_METHOD + \
@@ -185,6 +190,7 @@ def _process_household_transportation(input_file: str,
     Returns:
         pd.DataFrame: Cleaned DataFrame
     """
+    logging.info(f"Processing file: {input_file}")
     data_df = pd.read_csv(filepath_or_buffer=input_file,
                           sep=file_conf["input_file_delimiter"])
 
@@ -238,6 +244,7 @@ def _generate_tmcf(tmcf_file_path: str) -> None:
     Args:
         tmcf_file_path (str): Output TMCF File Path
     """
+    logging.info(f"Generating TMCF file: {tmcf_file_path}")
     with open(tmcf_file_path, 'w+', encoding='utf-8') as f_out:
         f_out.write(TMCF_TEMPLATE.rstrip('\n'))
 
@@ -275,6 +282,7 @@ def _generate_prop(data_df: pd.DataFrame):
     Returns:
         _type_: _description_
     """
+    logging.info("Generating property columns.")
     for prop_, val_, format_ in DF_DEFAULT_MCF_PROP:
         data_df["prop_" + prop_] = format_((prop_, val_))
 
@@ -317,6 +325,7 @@ def _generate_stat_vars(data_df: pd.DataFrame, prop_cols: str) -> pd.DataFrame:
     Returns:
         pd.DataFrame: DataFrame including statvar column
     """
+    logging.info("Generating statvars.")
     data_df['prop_Node'] = '{' + \
                                 data_df[prop_cols].apply(
                                 lambda x: ','.join(x.dropna().astype(str)),
@@ -334,7 +343,7 @@ def _generate_stat_vars(data_df: pd.DataFrame, prop_cols: str) -> pd.DataFrame:
 
 
 def _generate_mcf(data_df: pd.DataFrame, prop_cols: list) -> pd.DataFrame:
-
+    logging.info("Generating MCF data.")
     data_df['mcf'] = data_df['prop_Node'] + \
                 '\n' + \
                 data_df[prop_cols].apply(
@@ -355,13 +364,13 @@ def _generate_stat_var_and_mcf(data_df: pd.DataFrame):
     Returns:
         _type_: _description_
     """
+    logging.info("Generating stat vars and MCF.")
     prop_cols = ["prop_" + col for col in SV_PROP_ORDER]
 
     data_df["all_prop"] = ""
     for col in prop_cols:
         data_df["all_prop"] += '_' + data_df[col]
-    unique_props = data_df.drop_duplicates(subset=["all_prop"]).reset_index(
-        drop=True)
+    unique_props = data_df.drop_duplicates(subset=["all_prop"])
 
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", FutureWarning)
@@ -387,9 +396,9 @@ def _write_to_mcf_file(data_df: pd.DataFrame, mcf_file_path: str):
         data_df (pd.DataFrame): Input DataFrame
         mcf_file_path (str): MCF file
     """
-
-    unique_nodes_df = data_df.drop_duplicates(subset=["prop_Node"]).reset_index(
-        drop=True)
+    logging.info(f"Writing MCF file: {mcf_file_path}")
+    unique_nodes_df = data_df.drop_duplicates(
+        subset=["prop_Node"]).reset_index(drop=True)
 
     mcf_ = unique_nodes_df.sort_values(by=["prop_Node"])["mcf"].tolist()
 
@@ -414,7 +423,7 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
         mcf_file_path (str): _description_
         tmcf_file_path (str): _description_
     """
-
+    logging.info("Starting post-processing.")
     data_df = _generate_prop(data_df)
     data_df = _generate_stat_var_and_mcf(data_df)
     _write_to_mcf_file(data_df, mcf_file_path)
@@ -425,12 +434,12 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
     data_df = data_df.sort_values(by=["year", "location", "sv"])
 
     base_path, ext = os.path.splitext(cleaned_csv_file_path)
-    rows_per_file = 4000000
     file_counter = 1
     generated_files = []
 
-    for i in range(0, len(data_df), rows_per_file):
-        chunk = data_df.iloc[i:i + rows_per_file]
+    logging.info(f"Splitting output into chunks of {_ROWS_PER_FILE} rows.")
+    for i in range(0, len(data_df), _ROWS_PER_FILE):
+        chunk = data_df.iloc[i:i + _ROWS_PER_FILE]
 
         part_file_path = f"{base_path}_part{file_counter}{ext}"
 
@@ -438,7 +447,7 @@ def _post_process(data_df: pd.DataFrame, cleaned_csv_file_path: str,
 
         generated_files.append(part_file_path)
         file_counter += 1
-
+    logging.info(f"Generated {len(generated_files)} CSV files.")
     return generated_files
 
 
@@ -466,9 +475,40 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
 
     generated_csvs = []
     if not final_df.empty:
+        logging.info("Starting post-processing of the final dataframe.")
         generated_csvs = _post_process(final_df, cleaned_csv_file_path,
-                                       mcf_file_path, tmcf_file_path)
+                                       mcf_file_path,
+                                       tmcf_file_path)
+    else:
+        logging.warning("Final dataframe is empty. No output files generated.")
     return generated_csvs
+
+
+def _update_manifest(generated_csv_files: list):
+    """
+    Updates the manifest.json file with the generated CSV files.
+
+    Args:
+        generated_csv_files (list): A list of paths to the generated CSV files.
+    """
+    logging.info("Updating manifest.json")
+    manifest_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                 "manifest.json")
+    with open(manifest_path, 'r+', encoding='utf-8') as f:
+        manifest = json.load(f)
+        import_inputs = []
+        for csv_file in generated_csv_files:
+            import_inputs.append({
+                "template_mcf":
+                    "gcs_output/output_files/us_transportation_household.tmcf",
+                "cleaned_csv":
+                    f"gcs_output/output_files/{os.path.basename(csv_file)}"
+            })
+        manifest["import_inputs"] = import_inputs
+        f.seek(0)
+        json.dump(manifest, f, indent=2)
+        f.truncate()
+    logging.info("Successfully updated manifest.json")
 
 
 def main(_):
@@ -484,6 +524,7 @@ def main(_):
         logging.fatal(
             "Input files not found in the specified input_path. Run the download.py script first."
         )
+        sys.exit(1)
     ip_files = [os.path.join(input_path, file) for file in ip_files]
     output_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                     "output")
@@ -503,7 +544,9 @@ def main(_):
         _upload_to_gcs(csv_file)
     _upload_to_gcs(mcf_path)
     _upload_to_gcs(tmcf_path)
+    _update_manifest(generated_csv_files)
 
 
 if __name__ == "__main__":
     app.run(main)
+
