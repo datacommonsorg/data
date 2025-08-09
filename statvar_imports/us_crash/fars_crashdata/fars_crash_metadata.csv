@@ -1,0 +1,5 @@
+key,parameter
+multi_value_properties,"observationDate, observationAbout, observationPeriod"
+header_rows,1
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit, observationPeriod"
+word_delimiter,
