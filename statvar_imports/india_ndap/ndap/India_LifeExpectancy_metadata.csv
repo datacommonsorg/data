@@ -1,0 +1,8 @@
+config,value
+provenance_url,https://ndap.niti.gov.in/dataset/7375
+header_rows,1
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,observationPeriod"
+#places_within,country/IND
+#place_types,"AdministrativeArea,AdministrativeArea1,AdministrativeArea2,State"
+#debug,1
+#input_rows,100

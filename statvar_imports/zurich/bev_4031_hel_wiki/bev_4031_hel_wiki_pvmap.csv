@@ -1,0 +1,6 @@
+key,prop,val,p1,v1
+Zeit,observationDate,{Number},,
+bir,value,{Number},populationType,BirthEvent
+wikiID,observationAbout,wikidataId/{Data},,
+Foreign,nativity,ForeignBorn,,
+Swiss,nativity,Native,,
