@@ -1,0 +1,9 @@
+# Auto generated using command: "stat_var_processor.py --existing_statvar_mcf=stat_vars.mcf --input_data=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_crime/test_data/sample_input/Crime_According_To_Police_Territorial_Jurisdiction_2000_2022.xlsx --pv_map=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_crime/pv_map/Crime_According_To_Police_Territorial_Jurisdiction_2000_2022_pvmap.csv --places_resolved_csv=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_place_resolved.csv --config= /usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_crime/metadata/Crime_According_To_Police_Territorial_Jurisdiction_2000_2022_metadata.csv --output_path=/usr/local/google/home/spateriya/DC_june6/data/statvar_imports/indonesia_bps_statistics/indonesia_census/indonesia_crime/test_data/sample_output/idn_crime" on 2024-06-11 06:22:53.346740
+
+Node: dcid:Count_CriminalActivities
+typeOf: dcid:StatisticalVariable
+populationType: dcid:CriminalActivities
+measuredProperty: dcid:count
+statType: dcid:measuredValue
+alternateName: "Crime According To Police Territorial Jurisdiction@id"
+
