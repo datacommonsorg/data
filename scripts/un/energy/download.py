@@ -19,7 +19,7 @@ Run this script in this folder:
 python3 download.py
 """
 
-from un.energy.un_energy_codes import get_all_energy_source_codes
+from un_energy_codes import get_all_energy_source_codes
 import datetime
 import io
 import os
@@ -29,17 +29,22 @@ import zipfile
 
 from absl import app
 from absl import flags
+from absl import logging
 
 # Allows the following module imports to work when running as a script
 sys.path.append(
     os.path.dirname(os.path.dirname(os.path.dirname(
         os.path.abspath(__file__)))))
+_CODEDIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(1, _CODEDIR)
+sys.path.insert(1, os.path.join(_CODEDIR, '../../../util/'))
+from download_util_script import download_file
 
 FLAGS = flags.FLAGS
-flags.DEFINE_string('download_data_dir', 'tmp_data_dir/un_energy',
+flags.DEFINE_string('download_data_dir', 'input_data/un_energy',
                     'Data dir to download into')
 flags.DEFINE_list('datasets', [], 'Datasets to download. Everything, if empty.')
-flags.DEFINE_integer('start_year', 1990,
+flags.DEFINE_integer('start_year', 2020,
                      'Data set downloaded from the start year.')
 flags.DEFINE_integer('end_year',
                      datetime.datetime.now().year,
@@ -52,31 +57,6 @@ flags.DEFINE_integer('years_per_batch', 10,
 #   energy_code: two-letter code for the energy source
 #   years: comma separated list of years
 _DOWNLOAD_URL = 'https://data.un.org/Handlers/DownloadHandler.ashx?DataFilter=cmID:{energy_code};yr:{years}&DataMartId=EDATA&Format=csv&c=0,1,2,3,4,5,6,7,8&s=_crEngNameOrderBy:asc,_enID:asc,yr:desc'
-
-
-def download_zip_file(url: str, output_dir: str) -> list:
-    """Download a zip file from the url and save the extracted file.
-
-    Args:
-      url: string with URL and parameters to download.
-      save_path: Output file name into which uncompressed contents are saved.
-
-    Returns:
-      A list of files downloaded and unzipped.
-    """
-    print(f'Downloading {url} to {output_dir}/', flush=True)
-    r = requests.get(url, stream=True)
-    if r.status_code != 200:
-        print(f'Failed to download {url}, response code: ',
-              r.status_code,
-              flush=True)
-        return False
-    z = zipfile.ZipFile(io.BytesIO(r.content))
-    z.extractall(output_dir)
-    output_files = []
-    for f in os.listdir(output_dir):
-        output_files.append(os.path.join(output_dir, f))
-    return output_files
 
 
 def download_energy_dataset(
@@ -103,12 +83,11 @@ def download_energy_dataset(
     Returns:
       A list of output files downloaded.
     """
-    output_files = []
     supported_datasets = get_all_energy_source_codes()
     if energy_dataset not in supported_datasets:
-        print(f'Dataset "{energy_dataset}" not in list of supported codes:' +
-              str(supported_datasets),
-              flush=True)
+        logging.info(
+            f'Dataset "{energy_dataset}" not in list of supported codes:' +
+            str(supported_datasets))
         return output_files
     # Download data in batches of years as the download has a limit of 100k rows.
     years_list = list(range(start_year, years_per_batch + 1))
@@ -117,21 +96,30 @@ def download_energy_dataset(
         years_list[i:i + years_per_batch]
         for i in range(0, len(years_list), years_per_batch)
     ]
-    errors = 0
+    output_files = []
     for year_batch in batch_years:
         start_year = year_batch[0]
         end_year = year_batch[-1]
         years_str = ','.join(year_batch)
         output = f'{output_path}-{energy_dataset}-{start_year}-{end_year}'
-        print('Downloading UNData energy dataset: ',
-              f'{energy_dataset} from {start_year} to {end_year}',
-              flush=True)
+        logging.info(
+            f'Downloading UNData energy dataset: {energy_dataset} from {start_year} to {end_year}'
+        )
         download_url = _DOWNLOAD_URL.format(energy_code=energy_dataset,
                                             years=years_str)
-        downloaded_files = download_zip_file(download_url, output)
-        if len(downloaded_files) == 0:
-            errors += 1
-        output_files.extend(downloaded_files)
+        download_successful = download_file(url=download_url,
+                                            output_folder=output,
+                                            unzip=True,
+                                            headers=None,
+                                            tries=3,
+                                            delay=5,
+                                            backoff=2)
+        if download_successful:
+            logging.info(f"Download of '{download_url}' completed.")
+            for f in os.listdir(output):
+                output_files.append(os.path.join(output, f))
+        else:
+            logging.fatal(f"Download or processing of '{download_url}' failed")
     return output_files
 
 
@@ -149,10 +137,8 @@ def download_un_energy_dataset() -> list:
                                                    FLAGS.end_year,
                                                    FLAGS.years_per_batch,
                                                    FLAGS.download_data_dir)
-        if len(downloaded_files) == 0:
-            errors += 1
         output_files.extend(downloaded_files)
-    print(f'Downloaded the following files: {output_files}', flush=True)
+    logging.info(f'Downloaded the following files: {output_files}')
     return output_files
 
 

@@ -29,6 +29,7 @@ import time
 
 from absl import app
 from absl import flags
+from absl import logging
 from collections import defaultdict
 
 # Allows the following module imports to work when running as a script
@@ -37,13 +38,14 @@ module_dir_ = os.path.dirname(__file__)
 sys.path.append(os.path.join(module_dir_))
 
 from country_codes import get_country_dcid
+from rename_mapping import new_mapping_names
 import un_energy_codes
 import download
 
 FLAGS = flags.FLAGS
 flags.DEFINE_list('csv_data_files', [],
                   'csv files from UNData Energy datasets to process')
-flags.DEFINE_string('output_path', 'tmp_data_dir/un_energy_output',
+flags.DEFINE_string('output_path', 'output_data/un_energy_output',
                     'Data set name used as file name for mcf and tmcf')
 flags.DEFINE_integer('debug_level', 0, 'Data dir to download into')
 flags.DEFINE_integer('debug_lines', 100000, 'Print error logs every N lines')
@@ -89,24 +91,16 @@ measurementMethod: C:UNEnergy->Estimate
 
 def _print_debug(debug_level: int, *args):
     if debug_level <= 1:
-        print("[", datetime.datetime.now(), "] ", *args, file=sys.stderr)
+        logging.info("[", datetime.datetime.now(), "] ", *args, file=sys.stderr)
 
 
 def _print_counters(counters, steps=None):
     row_key = 'inputs_processed'
     if steps is None or row_key not in counters or counters[
             row_key] % steps == 0:
-        print('\nSTATS:')
-        for k in sorted(counters):
-            print(f"\t{k} = {counters[k]}")
         if 'inputs_processed' in counters:
             start_ts = counters['time_start']
             end_ts = time.perf_counter()
-            print(
-                'Processing rate: {:.2f}'.format(counters['inputs_processed'] /
-                                                 (end_ts - start_ts)),
-                'rows/sec')
-        print('', flush=True)
 
 
 def _add_error_counter(counter_name: str, error_msg: str, counters):
@@ -116,7 +110,7 @@ def _add_error_counter(counter_name: str, error_msg: str, counters):
         if 'debug_lines' in counters:
             debug_lines = counters['debug_lines']
         if counters[counter_name] % debug_lines == 0:
-            print("ERROR: ", counter_name, ": ", error_msg)
+            logging.error(f"ERROR: , {counter_name}:{error_msg}")
         counters[counter_name] += 1
 
 
@@ -444,6 +438,8 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
     # Generate a StatVar for the row using the fuel and transaction code values.
     sv_pv = {}
     sv_id = generate_stat_var(data_row, sv_pv, counters)
+    sv_id = rename_the_mapping_value(sv_id, new_mapping_names)
+
     if not sv_id:
         return
     data_row['StatVar'] = sv_id
@@ -452,7 +448,6 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
         # New stat var generated. Output PVs to the statvar mcf file.
         _add_stat_var_description(data_row, sv_pv)
         stat_var_mcf = _get_stat_var_mcf(sv_id, sv_pv)
-        _print_debug(2, 'Generating stat var node: ', stat_var_mcf)
         f_out_mcf.write('\n\n')
         f_out_mcf.write(stat_var_mcf)
         counters['output_stat_vars'] += 1
@@ -477,6 +472,33 @@ def _process_row(data_row: dict, sv_map: dict, row_map: dict, sv_obs: dict,
     for prop in sv_pv:
         counters[f'outputs_with_property_{prop}'] += 1
     counters['output_csv_rows'] += 1
+
+
+def rename_the_mapping_value(sv_id, mapping_names):
+    """
+    Renames a value in an ID string based on a provided mapping.
+
+    This function takes an ID string, splits it at the first colon, and then
+    uses the second part (the key) to look up a new value in a dictionary.
+    If a corresponding value is found in the `mapping_names` dictionary,
+    it replaces the original key in the ID string with the new value.
+    If the key is not found in the dictionary, the original key is kept.
+
+    Args:
+        sv_id: The ID string to be processed. It is expected to be in the format
+               "prefix:key" (e.g., "dc/topic:Agriculture").
+        mapping_names: A dictionary containing the mapping from old keys to new
+                       values (e.g., {"Agriculture": "Farming"}).
+
+    Returns:
+        The modified ID string with the value renamed, or None if the input
+        `sv_id` is None.
+    """
+    if sv_id is None:
+        return None
+    key_to_check = sv_id.split(":", 1)[1]
+    return sv_id.replace(key_to_check,
+                         mapping_names.get(key_to_check, key_to_check))
 
 
 def process(in_paths: list,
@@ -505,6 +527,7 @@ def process(in_paths: list,
     sv_map = defaultdict(lambda: 0)
     row_map = defaultdict(lambda: 0)
     sv_obs = {}
+    os.makedirs(out_path, exist_ok=True)
     csv_file_path = out_path + '.csv'
     start_ts = time.perf_counter()
     counters['time_start'] = start_ts
@@ -522,7 +545,7 @@ def process(in_paths: list,
         with open(mcf_file_path, 'w+', newline='') as f_out_mcf:
             # Process each CSV input file, one row at a time.
             for in_file in in_paths:
-                print(f'Processing data file: {in_file}')
+                logging.info(f'Processing data file: {in_file}')
                 with open(in_file) as csvfile:
                     counters['input_files'] += 1
                     line = 0
@@ -533,8 +556,7 @@ def process(in_paths: list,
                         data_row['_Row'] = line
                         _process_row(data_row, sv_map, row_map, sv_obs,
                                      csv_writer, f_out_mcf, counters)
-                        _print_counters(counters, counters['debug_lines'])
-                print(f'Processed {line} rows from data file: {in_file}')
+                logging.info(f'Processed {line} rows from data file: {in_file}')
             f_out_mcf.write('\n')
 
     # Generate the tMCF file
@@ -547,25 +569,26 @@ def process(in_paths: list,
     counters['time_total_seconds'] = end_ts - start_ts
     _print_counters(counters)
     _print_counters(sv_map)
-    print(
-        'Processing rate: {:.2f}'.format(counters['inputs_processed'] /
-                                         (end_ts - start_ts)), 'rows/sec')
+    logging.info(
+        f'Processing rate: {counters["inputs_processed"] / (end_ts - start_ts):.2f} rows/sec'
+    )
     return counters
 
 
 def main(_):
     csv_data_files = FLAGS.csv_data_files
     if len(csv_data_files) == 0:
-        print(f'Downloading energy data set files')
+        logging.info(f'Downloading energy data set files')
         csv_data_files = download.download_un_energy_dataset()
 
     if len(csv_data_files) > 0 and FLAGS.output_path != '':
         process(csv_data_files, FLAGS.output_path, FLAGS.debug_lines,
                 FLAGS.copy_input_columns)
     else:
-        print(f'Please specify files to process with --csv_data_files=<,>')
+        logging.error(
+            f'Please specify files to process with --csv_data_files=<,>')
 
 
 if __name__ == '__main__':
-    print('running main')
+    logging.info('running main')
     app.run(main)
