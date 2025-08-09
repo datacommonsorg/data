@@ -16,6 +16,10 @@ This Python Script is for State Level Data 2010-2019.
 '''
 import os
 import pandas as pd
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from api_calls import get_api_response
 from common_functions import input_url, gender_based_grouping
 
 
@@ -25,11 +29,11 @@ def state2010(url_file: str, output_folder: str):
    cleans it and create a cleaned csv.
    '''
     _url = input_url(url_file, "2010-20")
-    df = pd.read_csv(_url, encoding='ISO-8859-1')
+    filename = 'raw_data_state_2010_2019.csv'
+    file_path = get_api_response(filename, _url, 1)
+    df = pd.read_csv(file_path, engine='python', encoding='ISO-8859-1')
     #Writing raw data to csv
-    df.to_csv(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                           "raw_data", 'raw_data_state_2010_2019.csv'),
-              index=False)
+    df.to_csv(file_path, index=False)
     # Filter years 3 - 13.
     df.insert(2, 'geo_ID', 'geoId/', True)
     df['geo_ID'] = 'geoId/' + (df['STATE'].map(str)).str.zfill(2)
