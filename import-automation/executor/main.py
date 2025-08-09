@@ -14,8 +14,9 @@
 """
 Import executor entrypoint.
 """
-import logging
+import dataclasses
 import json
+import logging
 import os
 import sys
 import time
@@ -25,18 +26,16 @@ REPO_DIR = os.path.dirname(
 sys.path.append(REPO_DIR)
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
-from absl import flags
 from absl import app
+from absl import flags
 
 from app import configs
 from app.executor import import_executor
+from app.service import email_notifier
 from app.service import file_uploader
 from app.service import github_api
-from app.service import email_notifier
-import dataclasses
-
-from log_util import log_metric, configure_cloud_logging
 from cloudrun_util import running_on_cloudrun
+from log_util import configure_cloud_logging, log_metric
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('import_name', '', 'Absoluate import name.')
