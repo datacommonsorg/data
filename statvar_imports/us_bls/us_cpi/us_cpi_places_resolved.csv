@@ -1,0 +1,47 @@
+place_name,dcid
+Northeast,usc/NortheastRegion
+Midwest,usc/MidwestRegion
+South,usc/SouthRegion
+West,usc/WestRegion
+New England(4),usc/NewEnglandDivision
+Middle Atlantic(4),usc/MiddleAtlanticDivision
+East North Central(4),usc/EastNorthCentralDivision
+West North Central(4),usc/WestNorthCentralDivision
+South Atlantic(4),usc/SouthAtlanticDivision
+East South Central(4),usc/EastSouthCentralDivision
+West South Central(4),usc/WestSouthCentralDivision
+Mountain(4),usc/MountainDivision
+Pacific(4),usc/PacificDivision
+,
+,
+,
+Atlanta-Sandy Springs-Roswell,geoId/C12060
+Baltimore-Columbia-Towson,geoId/C12580
+,
+Houston-The Woodlands-Sugar Land,geoId/C26420
+Miami-Fort Lauderdale-West Palm Beach,geoId/C33100
+Philadelphia-Camden-Wilmington,geoId/C37980
+Phoenix-Mesa-Scottsdale,geoId/C38060
+San Francisco-Oakland-Hayward,geoId/C41860
+Seattle-Tacoma-Bellevue,geoId/C42660
+St. Louis,geoId/C41180
+Boston-Cambridge-Newton,geoId/C14460
+Dallas-Fort Worth-Arlington,geoId/C19100
+Denver-Aurora-Lakewood,geoId/C19740
+Minneapolis-St.Paul-Bloomington,geoId/C33460
+Riverside-San Bernardino-Ontario,geoId/C40140
+San Diego-Carlsbad,geoId/C41740
+Tampa-St. Petersburg-Clearwater,geoId/C45300
+Washington-Arlington-Alexandria,geoId/C47894
+Northeast urban,usc/NortheastRegion
+Midwest urban,usc/MidwestRegion
+South urban,usc/SouthRegion
+West urban,usc/WestRegion
+Atlanta,geoId/1304000
+Detroit-Warren-Dearborn,geoId/C19820
+,
+,
+,
+Chicago-Naperville-Elgin,geoId/C16980
+Los Angeles-Long Beach-Anaheim,geoId/C31080
+New York-Newark-Jersey City,geoId/C35620
