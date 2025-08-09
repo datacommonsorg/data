@@ -1,0 +1,8 @@
+Node: E:seh_output1->E0
+observationAbout: C:seh_output1->observationAbout
+observationDate: C:seh_output1->observationDate
+value: C:seh_output1->value
+variableMeasured: C:seh_output1->variableMeasured
+unit: C:seh_output1->unit
+scalingFactor: C:seh_output1->scalingFactor
+typeOf: dcs:StatVarObservation
