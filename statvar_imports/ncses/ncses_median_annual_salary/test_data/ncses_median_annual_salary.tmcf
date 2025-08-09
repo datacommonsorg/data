@@ -1,0 +1,6 @@
+Node: E:ncses_median_annual_salary->E0
+observationAbout: C:ncses_median_annual_salary->observationAbout
+observationDate: C:ncses_median_annual_salary->observationDate
+value: C:ncses_median_annual_salary->value
+variableMeasured: C:ncses_median_annual_salary->variableMeasured
+typeOf: dcs:StatVarObservation
