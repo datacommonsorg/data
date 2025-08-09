@@ -1,0 +1,3 @@
+parameter,value
+#places_within,country/USA
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod,#input"
