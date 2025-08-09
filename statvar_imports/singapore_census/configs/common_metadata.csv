@@ -1,0 +1,14 @@
+parameter,value
+url,"https://tablebuilder.singstat.gov.sg/statistical-tables/downloadMultiple/MBXHa1ZavEa27gjZN4FFXw,https://tablebuilder.singstat.gov.sg/statistical-tables/downloadMultiple/zX5lZdqFrk-29wjZN4FFXw"
+description,"Death, Mortality, Population, Life Expectancy"
+#place_type,Country
+#places_within,country/SGP
+start_date,1960
+end_date,2025
+release_frequency,1years
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
+drop_statvars_without_svobs,0
+header_rows,1
+mapped_columns,1
