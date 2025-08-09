@@ -25,7 +25,7 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
@@ -46,18 +46,23 @@ PANEL_FOLDER_MAP = {
 
 def setup_driver():
     """Configures and returns a Selenium WebDriver."""
-    options = Options()
-    options.add_argument("--headless=new")
-    options.add_argument("--window-size=1920,1080")
+    chrome_options = ChromeOptions()
     prefs = {
         "download.default_directory": DOWNLOAD_DIR,
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
         "safeBrowse.enabled": True
     }
-    options.add_experimental_option("prefs", prefs)
+    chrome_options.add_experimental_option("prefs", prefs)
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--disable-gpu")
+    
     logging.info("WebDriver options configured.")
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    return webdriver.Chrome(options=chrome_options)
+
 
 def wait_for_downloads(timeout=30):
     """Waits for all downloads to finish."""
