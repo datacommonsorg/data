@@ -111,8 +111,8 @@ def main(_):
     
     table_id_configs = {
         "M810001": "Population_Indicator.csv",
-        "M810011": "Pop_Resident.csv",
-        "M810671": "Pop_Citizens.csv",
+        "M810011": "Population_Resident.csv",
+        "M810671": "Population_Citizens.csv",
         "M810121": "Mortality.csv",
         "M810481": "Death_DeathRate.csv",
         "M810501": "Life_Expectancy.csv",
