@@ -20,8 +20,8 @@
 
 - To download the input file
 
-    `python3 download_and_process.py`
+    `python3 download_script.py`
 
 - StatVar Script
 
-    `python3 "../../tools/statvar_importer/stat_var_processor.py  --input_data=input_files/DeathByCause_T3.csv --pv_map=configs/deathbycause_pvmap.csv --config_file=configs/deathbycause_metadata.csv --output_path=output_path/DeathByCause --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"`
+    `python3 ../.gcbrun./tools/statvar_importer/stat_var_processor.py  --input_data=input_files/DeathByCause_T3.csv --pv_map=configs/deathbycause_pvmap.csv --config_file=configs/deathbycause_metadata.csv --output_path=output_path/DeathByCause --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf`
