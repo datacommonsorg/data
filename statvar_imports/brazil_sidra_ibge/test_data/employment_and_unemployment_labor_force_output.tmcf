@@ -1,0 +1,9 @@
+Node: E:Employment_And_Unemployment_Labor_Force_output->E0
+observationAbout: C:Employment_And_Unemployment_Labor_Force_output->observationAbout
+observationDate: C:Employment_And_Unemployment_Labor_Force_output->observationDate
+variableMeasured: C:Employment_And_Unemployment_Labor_Force_output->variableMeasured
+value: C:Employment_And_Unemployment_Labor_Force_output->value
+unit: C:Employment_And_Unemployment_Labor_Force_output->unit
+scalingFactor: C:Employment_And_Unemployment_Labor_Force_output->scalingFactor
+observationPeriod: C:Employment_And_Unemployment_Labor_Force_output->observationPeriod
+typeOf: dcs:StatVarObservation
