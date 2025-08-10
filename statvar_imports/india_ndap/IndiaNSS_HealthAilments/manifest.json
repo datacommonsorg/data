@@ -13,8 +13,8 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "output/IndiaNSS_HealthAilments.tmcf",
-          "cleaned_csv": "output/IndiaNSS_HealthAilments.csv"
+          "template_mcf": "output/IndiaNSS_HealthAilments_output.tmcf",
+          "cleaned_csv": "output/IndiaNSS_HealthAilments_output.csv"
         }
       ],
       "source_files": [
