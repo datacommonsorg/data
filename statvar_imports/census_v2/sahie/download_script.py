@@ -15,6 +15,7 @@
 # How to run the script to download the files:
 # python3 download_script.py
 
+import shutil
 import os
 import sys
 from absl import app
@@ -49,7 +50,7 @@ def clean_csv_file(file_path):
                         temp_file.write(line)
 
             # Replace the original file with the cleaned temporary file
-            os.replace(temp_file.name, file_path)
+            shutil.move(temp_file.name, file_path)
             logging.info(f"Successfully cleaned file: {file_path}")
 
     except Exception as e:
