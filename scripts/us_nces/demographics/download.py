@@ -325,7 +325,7 @@ def main(_):
 
             try:
                 nces_elsi_file_download(school, year, curr_columns_selected)
-            except Exception as e:  
+            except Exception as e:
                 logging.fatal(
                     f"An error occurred during download for {school} - {year}: {e}"
                 )
