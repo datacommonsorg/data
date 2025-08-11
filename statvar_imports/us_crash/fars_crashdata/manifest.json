@@ -25,7 +25,7 @@
                 "cpu": "8",
                 "memory": "32G"
             },
-            "user_script_timeout": 43200
+            "user_script_timeout": 86400
       }
     ]
   }

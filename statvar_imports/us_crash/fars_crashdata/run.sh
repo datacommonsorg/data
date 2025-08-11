@@ -6,5 +6,5 @@ for FILE in gcs_output/input_files/ACCIDENT_*.csv; do
         --input_data="$FILE" \
         --pv_map=fars_crash_pvmap.csv \
         --config_file=fars_crash_metadata.csv \
-        --output_path="gcs_output/output/fars_crash_${YEAR}.csv"
+        --output_path="gcs_output/output/fars_crash_${YEAR}"
 done
