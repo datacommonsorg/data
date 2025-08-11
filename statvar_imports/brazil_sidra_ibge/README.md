@@ -23,7 +23,7 @@ This script automatically downloads the source data into a main input_files dire
 
 ### Data Processing
 
-After the files are downloaded, the data is processed in four separate stages using the stat_var_processor.py script. Each stage handles a specific data category. The script uses various command-line arguments to specify the input data, private-variable map, configuration file, and output path for each category.
+After the files are downloaded, the data is processed in four separate stages using the stat_var_processor.py script. Each stage handles a specific data category. The script uses various command-line arguments to specify the input data, pvmap, configuration file, and output path for each category.
 
  * Average Real Income
 
@@ -47,7 +47,7 @@ python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts
 
 Bash
 
-python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/script
+python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/brazil_sidra_ibge/input_files/Employment_And_Unemployment_Labor_Force/*.xlsx' --pv_map='../../statvar_imports/brazil_sidra_ibge/config_files/employment_and_unemployment_labor_force_pvmap.csv' --config_file='../../statvar_imports/brazil_sidra_ibge/config_files/brazil_sidra_metadata.csv' --output_path=../../statvar_imports/brazil_sidra_ibge/output/employment_and_unemployment_labor_force_output
 
 
 ### Automation
