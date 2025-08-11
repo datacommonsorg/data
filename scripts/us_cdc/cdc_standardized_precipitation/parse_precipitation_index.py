@@ -44,14 +44,6 @@ def clean_precipitation_data(file_path, output_file):
         a cleaned csv file
     """
     logging.info("Cleaning file...")
-
-    # Extract the directory from the output_file path
-    output_dir = os.path.dirname(output_file)
-    # If the directory is not empty, create it if it doesn't exist
-    if output_dir:
-        os.makedirs(output_dir, exist_ok=True)
-        logging.info(f"Ensured output directory '{output_dir}' exists.")
-
     data = pd.DataFrame(pd.read_csv(file_path))
     if 'pdsi' in data.columns:
         data['year'] = data['year'].astype(str).str.replace(
