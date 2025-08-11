@@ -48,11 +48,17 @@ Run the unit tests:
 python -m unittest download_and_convert_test.py
 ```
 
+## Import to Data Commons
+
+To generate the StatVar observations from the CSV, run the following command:
+
+```bash
+python  ../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/financial_incentives_data.csv --output_path=output/financial_incentives --config_file=financial_incentives_metadata.csv  --places_resolved_csv=financial_incentives_places_resolved.csv  --pv_map=financial_incentives_pvmap.csv
+```
+
 ## Troubleshooting
 
 **Common Issues:**
 - **Authentication errors**: Ensure GCS credentials are properly configured
 - **Permission errors**: Check read permissions on the GCS bucket
 - **File not found**: Verify the JSON filename exists in the latest dated folder
-
-All log messages include full file paths to help with troubleshooting.
