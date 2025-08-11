@@ -31,7 +31,7 @@
       "provenance_description": "Population by 10 years age categories of Zurich city contains structure and organization of the city administration",
       "scripts": [
         "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_3903_age10_wiki.csv --output_folder=bev_3903_age10_wiki/input_files",
-        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_age10_wiki/input_files/bev_3903_age10_wiki.csv --pv_map=bev_3903_age10_wiki/bev_3903_age10_wiki_pvmap.csv --config_file=bev_3903_age10_wiki/bev_3903_age10_wiki_metadata.csv --output_path=bev_3903_age10_wikioutput/zurich_population_bev_3903_age10_wiki"
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_3903_age10_wiki/input_files/bev_3903_age10_wiki.csv --pv_map=bev_3903_age10_wiki/bev_3903_age10_wiki_pvmap.csv --config_file=bev_3903_age10_wiki/bev_3903_age10_wiki_metadata.csv --output_path=bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki"
       ],
       "source_files": [
         "bev_3903_age10_wiki/input_files/bev_3903_age10_wiki.csv"
@@ -97,7 +97,7 @@
       "provenance_description": "Population of births in Zurich city contains structure and organization of the city administration",
       "scripts": [
         "../../util/download_util_script.py --download_url=https://www.stadt-zuerich.ch/content/dam/web/de/politik-verwaltung/statistik-und-daten/linked-open-data/datacommons/bev_4031_wiki.csv --output_folder=bev_4031_wiki/input_files",
-        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_wiki/input_files/bev_4031_wiki.csv --pv_map=bev_4031_wiki_pvmap.csv --config_file=bev_4031_wiki/bev_4031_wiki_metadata.csv --output_path=bev_4031_wiki/output/zurich_bev_4031_wiki"
+        "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data=bev_4031_wiki/input_files/bev_4031_wiki.csv --pv_map=bev_4031_wiki/bev_4031_wiki_pvmap.csv --config_file=bev_4031_wiki/bev_4031_wiki_metadata.csv --output_path=bev_4031_wiki/output/zurich_bev_4031_wiki"
       ],
       "source_files": [
         "bev_4031_wiki/input_files/bev_4031_wiki.csv"
