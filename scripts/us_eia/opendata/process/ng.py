@@ -61,6 +61,7 @@ def extract_place_statvar(series_id, counters):
     # Pattern #1: NG.N{MEASURE1}{PLACE}{MEASURE2}.{PERIOD}
     m = re.match(r"^(NG\.N[^_]+)([A-Z][A-Z])([0-9]\.[A-Z])$", series_id)
     if m:
+        counters.add_counter('info_ng_record_count', 1)
         sv_part1 = m.group(1)
         sv_part2 = m.group(3)
         sv_id = f'{sv_part1}_{sv_part2}'

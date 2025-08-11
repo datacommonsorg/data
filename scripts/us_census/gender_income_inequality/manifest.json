@@ -1,0 +1,24 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "USCensus_GenderIncomeInequality",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://data.census.gov/",
+            "provenance_description": "U.S. Census Bureau Data",
+            "scripts": [
+                "process.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "gender_income_inequality.tmcf",
+                    "cleaned_csv": "gender_income_inequality.csv"
+                }
+            ],
+            "cron_schedule": "0 03 * * 1",
+            "resource_limits": {"cpu": "2", "memory": "8G"},
+            "user_script_timeout": 1800
+        }
+    ]
+}
