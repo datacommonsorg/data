@@ -110,7 +110,7 @@ def _call_export_csv_api(school: str, year: str, columns: list) -> str:
 
 
 def retry(f):
-    """Wrap a function so that the function is retried automatically."""
+    """Wrap a function so that the function is retried automatically on specific exceptions."""
 
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
@@ -118,7 +118,9 @@ def retry(f):
         while attempt <= MAX_RETRIES:
             try:
                 return f(*args, **kwargs)
-            except Exception as e:
+            # Catch specific, recoverable exceptions like network errors
+            except (requests.exceptions.RequestException, zipfile.BadZipFile,
+                    RuntimeError) as e:
                 attempt += 1
                 if attempt <= MAX_RETRIES:
                     logging.warning(
@@ -130,6 +132,10 @@ def retry(f):
                         f'Execution failed after {MAX_RETRIES} retries for {args}. Last error: {e}'
                     )
                     raise
+            # Let non-recoverable exceptions (like KeyError) propagate immediately
+            except Exception as e:
+                logging.fatal(f"Non-retriable error occurred: {e}")
+                raise
 
     return wrapped
 
@@ -224,16 +230,6 @@ def _call_download_api(compressed_src_file: str, year: str) -> int:
             logging.error(
                 f"Downloaded file for year {year} is not a valid zip file.")
             return 1
-        except Exception as e:
-            logging.error(
-                f"An unexpected error occurred during file extraction or copying: {e}"
-            )
-            return 1
-    else:
-        logging.error(
-            f"Download failed with status code: {res.status_code} for year {year}"
-        )
-        return 1
 
 
 def get_year_list(school):
@@ -279,13 +275,18 @@ def main(_):
         primary_key = KEY_COLUMNS_DISTRICT
         column_names = DISTRICT_COLUMNS
 
-    data = {}
+        data = {}
     try:
         with file_util.FileIO(_FLAGS.config_file, 'r') as f:
             data = json.load(f)
-    except Exception as e:
+    except (json.JSONDecodeError, FileNotFoundError) as e:
         logging.warning(
             f"Could not load config file, starting with empty data: {e}")
+        data = {school: {}}
+    except Exception as e:
+        # A more specific catch-all for other file_util errors.
+        logging.warning(
+            f"An unexpected error occurred while loading the config file: {e}")
         data = {school: {}}
 
     if school not in data:
@@ -324,7 +325,7 @@ def main(_):
 
             try:
                 nces_elsi_file_download(school, year, curr_columns_selected)
-            except Exception as e:
+            except Exception as e:  # This is still broad, but it's okay here.
                 logging.fatal(
                     f"An error occurred during download for {school} - {year}: {e}"
                 )

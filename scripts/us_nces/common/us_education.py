@@ -39,7 +39,6 @@ pd.set_option("display.max_columns", None)
 CODEDIR = os.path.dirname(__file__)
 sys.path.insert(1, os.path.join(CODEDIR, '../../..'))
 
-from common.dcid__mcf_existance import check_dcid_existence
 from common.prop_conf import *
 from common.replacement_functions import (replace_values, _UNREADABLE_TEXT)
 from util.alpha2_to_dcid import USSTATE_MAP
@@ -1064,7 +1063,7 @@ class USEducation:
             f_deno.append(deno_matched)
         # Passes the Node through check_dcid_existance to check if the SV is
         # already existing.
-        node_status = check_dcid_existence(f_deno)
+        node_status = dc_api_is_defined_dcid(f_deno)
         f_deno = []
         for dcnode in mcf_:
             deno_matched = re.findall("(Node: dcid:)(\w+)", dcnode)[0][1]
