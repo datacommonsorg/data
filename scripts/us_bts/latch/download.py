@@ -24,7 +24,7 @@ import requests
 
 
 def download_and_extract_files(input_urls: list,
-                                 download_directory: str) -> None:
+                               download_directory: str) -> None:
     """
     Function to Download and Unzip the file provided in url.
 

@@ -28,6 +28,7 @@ from process import process
 
 _TEST_DATA_DIR = os.path.join(_MODULE_DIR, "test_data")
 
+
 class TestProcess(unittest.TestCase):
     """
     This module is used to test US Tract data processing.
@@ -47,8 +48,7 @@ class TestProcess(unittest.TestCase):
         self.tmp_dir = tempfile.TemporaryDirectory()
         self.cleaned_csv_file_path = os.path.join(self.tmp_dir.name,
                                                   "data_part1.csv")
-        self.mcf_file_path = os.path.join(self.tmp_dir.name,
-                                          "test_census.mcf")
+        self.mcf_file_path = os.path.join(self.tmp_dir.name, "test_census.mcf")
         self.tmcf_file_path = os.path.join(self.tmp_dir.name,
                                            "test_census.tmcf")
 

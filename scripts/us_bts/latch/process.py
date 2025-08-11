@@ -397,8 +397,8 @@ def _write_to_mcf_file(data_df: pd.DataFrame, mcf_file_path: str):
         mcf_file_path (str): MCF file
     """
     logging.info(f"Writing MCF file: {mcf_file_path}")
-    unique_nodes_df = data_df.drop_duplicates(
-        subset=["prop_Node"]).reset_index(drop=True)
+    unique_nodes_df = data_df.drop_duplicates(subset=["prop_Node"]).reset_index(
+        drop=True)
 
     mcf_ = unique_nodes_df.sort_values(by=["prop_Node"])["mcf"].tolist()
 
@@ -477,8 +477,7 @@ def process(input_files: list, cleaned_csv_file_path: str, mcf_file_path: str,
     if not final_df.empty:
         logging.info("Starting post-processing of the final dataframe.")
         generated_csvs = _post_process(final_df, cleaned_csv_file_path,
-                                       mcf_file_path,
-                                       tmcf_file_path)
+                                       mcf_file_path, tmcf_file_path)
     else:
         logging.warning("Final dataframe is empty. No output files generated.")
     return generated_csvs
@@ -549,4 +548,3 @@ def main(_):
 
 if __name__ == "__main__":
     app.run(main)
-
