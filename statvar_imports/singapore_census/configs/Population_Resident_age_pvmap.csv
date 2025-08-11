@@ -1,5 +1,6 @@
 key,,,,,,,,
 Data Series,observationAbout,country/SGP,measuredProperty,dcs:count,populationType,dcs:Person,statType,dcs:measuredValue,residentStatus,Resident
+2028,value,{Number},observationDate,2028,,,,,,
 2027,value,{Number},observationDate,2027,,,,,,
 2026,value,{Number},observationDate,2026,,,,,,
 2025,value,{Number},observationDate,2025,,,,,,
