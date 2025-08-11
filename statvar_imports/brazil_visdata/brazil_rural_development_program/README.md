@@ -10,15 +10,15 @@ The workflow for this data import involves two main steps: downloading the neces
 
 #### Step 1: Download the Data
 
-To download the required data files, use the provided `download_script.py`. This script automatically creates an `input_files` folder and downloads the files into it. A `config.py` file is required for the script to run correctly.
+To get the necessary data files, you'll need to manually download them from the Program to Promote Rural Productive Activities data explorer.
 
-**Run the following command:**
+Go to the website: `https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.php`
 
-```bash
-python3 download_script.py
-```
+Select the "Program to Promote Rural Productive Activities" category.
 
-*Note: All files will be saved in the `input_files` directory.*
+Manually download the required data files.
+
+Place all downloaded files into the `input_files` folder.
 
 -----
 
