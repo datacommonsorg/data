@@ -134,8 +134,11 @@ def file_json_to_csv(
         csv_output = file_util.file_get_name(input_files[-1], file_ext='.csv')
     logging.info(
         f'Writing {len(csv_rows)} rows from {input_files} into {csv_output}')
-    columns = file_util.file_write_csv_dict(csv_rows, csv_output,
-                                            output_columns, key_column_name='key' if set_key_column else None)
+    columns = file_util.file_write_csv_dict(
+        csv_rows,
+        csv_output,
+        output_columns,
+        key_column_name='key' if set_key_column else None)
     counters.set_counter('output-columns', len(columns))
     return csv_output
 
