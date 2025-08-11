@@ -143,7 +143,7 @@ def create_job_request(import_name: str, import_config: dict, import_spec: dict,
     machine_type = get_gce_instance(resources['cpu'], resources['memory'])
 
     resources[
-        "machine"] = machine_type if machine_type is not None else 'n2-highmem-4'
+        "machine"] = machine_type if machine_type is not None else 'n2-standard-8'
 
     resources["cpu"] = resources["cpu"] * 1000
     resources["memory"] = resources["memory"] * 1024
