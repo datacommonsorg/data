@@ -109,7 +109,7 @@ def download_files():
             url_template = filetype['url_template']
             filename = name_template.format(last_two_digits_formatted)
             url = url_template.format(year, last_two_digits_formatted)
-            print("downloading url: ", url)
+            logging.info("downloading url: ", url)
             response = retry_method(url)
             zip_content_stream = io.BytesIO(response.content)
             with zipfile.ZipFile(zip_content_stream, 'r') as zip_ref:
@@ -121,12 +121,12 @@ def download_files():
                         abs_extract_path = os.path.abspath(extract_path)
                         abs_target_dir = os.path.abspath(_LOCAL_OUTPUT_PATH)
                         if not abs_extract_path.startswith(abs_target_dir):
-                            print(
+                            logging.info(
                                 f"    WARNING: Path traversal attempt detected for '{member}'. Skipping."
                             )
                             continue  # Skip this member to prevent security risk
 
-                            print(
+                            logging.info(
                                 f"    Extracting '{member}' to '{extract_path}'"
                             )
                             # Read the file content from the in-memory zip and write it to disk
@@ -134,7 +134,7 @@ def download_files():
                             outfile.write(zip_ref.read(member))
                         extracted_any_txt = True
                     else:
-                        print(
+                        logging.info(
                             f"Skipping non-txt file/folder in zip: '{member}'")
 
 
