@@ -170,6 +170,9 @@
         "intimidation": {
             "crimeType": "Intimidation"
         },
+        "human trafficking": {
+            "crimeType": "HumanTrafficking_CommercialSexActs"
+        },
         "human trafficking, commercial sex acts": {
             "crimeType": "HumanTrafficking_CommercialSexActs"
         },
