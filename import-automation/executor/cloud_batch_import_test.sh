@@ -39,7 +39,7 @@ IMAGE_URI="gcr.io/datcom-ci/dc-import-executor:stable"
 
 NAME_SUFFIX="${IMPORT_NAME##*:}"
 SANITIZED_NAME=$(echo "${NAME_SUFFIX,,}" | tr -s '_' '-')
-JOB_NAME="batch-${SANITIZED_NAME:0:46}-$(date +%s)"
+JOB_NAME="${SANITIZED_NAME:0:46}-$(date +%s)"
 CPU_MILLI=$(($CPU_COUNT * 1000))
 MEMORY_MIB=$(($MEMORY_GIB * 1024))
 
