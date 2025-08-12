@@ -32,6 +32,8 @@ import differ_utils
 
 _SAMPLE_COUNT = 3
 
+_DATAFLOW_TEMPLATE_URL = 'gs://datcom-dataflow/templates/flex/differ.json'
+
 Diff = Enum('Diff', [
     ('ADDED', 1),
     ('DELETED', 2),
@@ -44,7 +46,7 @@ Column = Enum('Column', [
     ('observationDate', 2),
     ('value', 3),
     ('typeOf', 4),
-    ('Node', 5),
+    ('dcid', 5),
     ('diff_type', 6),
     ('diff_size', 7),
     ('observationAbout', 8),
@@ -182,7 +184,7 @@ class ImportDiffer:
         obs_list = []
         schema_list = []
         for node in mcf_nodes:
-            if node.get(Column.typeOf.name) == 'dcid:StatVarObservation':
+            if 'StatVarObservation' in node.get(Column.typeOf.name):
                 values_to_combine = []
                 keys_to_combine = []
                 groupby_keys = [
@@ -206,9 +208,9 @@ class ImportDiffer:
             else:
                 values_to_combine = []
                 keys_to_combine = []
-                groupby_keys = [Column.Node.name]
+                groupby_keys = [Column.dcid.name]
                 value_keys = sorted(node.keys())
-                value_keys.remove(Column.Node.name)
+                value_keys.remove(Column.dcid.name)
                 for key in groupby_keys:
                     keys_to_combine.append(str(node.get(key, "")))
                 for key in value_keys:
@@ -245,13 +247,15 @@ class ImportDiffer:
             Column.observationDate.name, Column.diff_type.name
         ]
         split_data = diff[Column.key_combined.name].str.split(';', expand=True)
-        split_data = split_data.iloc[:, 0:3]
         in_df = split_data.rename(
             columns={
                 0: Column.variableMeasured.name,
                 1: Column.observationAbout.name,
                 2: Column.observationDate.name
             })
+        in_df = in_df.loc[:, [
+            'variableMeasured', 'observationAbout', 'observationDate'
+        ]]
         in_df[Column.diff_type.name] = diff[Column.diff_type.name]
 
         # in_df = diff.loc[:, column_list]
@@ -314,7 +318,7 @@ class ImportDiffer:
         else:
             logging.info('Using mcf file format')
 
-        template = 'gs://vishg-dataflow/templates/flex/differ.json'
+        template = _DATAFLOW_TEMPLATE_URL
         dataflow = build("dataflow", "v1b3")
         request = (dataflow.projects().locations().flexTemplates().launch(
             projectId=project,
@@ -331,11 +335,12 @@ class ImportDiffer:
         job_id = response['job']['id']
         url = f'https://pantheon.corp.google.com/dataflow/jobs/{job_id}?project={project}'
         logging.info('Dataflow job url: %s', url)
-        status = 'JOB_STATE_UNKNONW'
+        status = 'JOB_STATE_UNKNOWN'
         dataflow = build("dataflow", "v1b3")
         request = (dataflow.projects().jobs().list(projectId=project,
                                                    name=job_id))
-        while (status != 'JOB_STATE_DONE' and status != 'JOB_STATE_FAILED'):
+        while (status != 'JOB_STATE_DONE' and status != 'JOB_STATE_FAILED' and
+               status != 'JOB_STATE_CANCELLED'):
             logging.info(
                 f'Waiting for job {self.job_name} to complete. Status:{status}')
             time.sleep(60)

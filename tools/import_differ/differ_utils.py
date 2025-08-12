@@ -97,9 +97,9 @@ def get_gcs_data(uri: str, dest_dir: str) -> str:
     dirname = os.path.dirname(file_pat)
     for blob in bucket.list_blobs(prefix=dirname):
         if fnmatch.fnmatch(blob.name, file_pat):
-            os.makedirs(os.path.join(tmp_dir, os.path.dirname(blob.name)),
-                        exist_ok=True)
-            blob.download_to_filename(os.path.join(dest_dir, blob.name))
+            dest_file = os.path.join(dest_dir, blob.name)
+            os.makedirs(os.path.dirname(dest_file), exist_ok=True)
+            blob.download_to_filename(dest_file)
     return os.path.join(dest_dir, file_pat)
 
 

@@ -1,4 +1,4 @@
-Node: dcid:InterestRate_TreasuryBill_6Month
+dcid: "InterestRate_TreasuryBill_6Month"
 name: "InterestRate_TreasuryBill_6Month"
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:interestRate
@@ -6,7 +6,7 @@ populationType: dcs:TreasuryBill
 maturity: [6 Month]
 statType: dcs:measuredValue
 
-Node: dcid:InterestRate_TreasuryBill_1Year
+dcid: "InterestRate_TreasuryBill_1Year"
 name: "InterestRate_TreasuryBill_1Year"
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:interestRate
@@ -14,7 +14,7 @@ populationType: dcs:TreasuryBill
 maturity: [1 Year]
 statType: dcs:measuredValue
 
-Node: dcid:InterestRate_TreasuryNote_2Year
+dcid: "InterestRate_TreasuryNote_2Year"
 name: "InterestRate_TreasuryNote_2Year"
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:interestRate
@@ -22,7 +22,7 @@ populationType: dcs:TreasuryNote
 maturity: [2 Year]
 statType: dcs:measuredValue
 
-Node: dcid:InterestRate_TreasuryNote_3Year
+dcid: "InterestRate_TreasuryNote_3Year"
 name: "InterestRate_TreasuryNote_3Year"
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:interestRate
@@ -30,7 +30,7 @@ populationType: dcs:TreasuryNote
 maturity: [3 Year]
 statType: dcs:measuredValue
 
-Node: dcid:InterestRate_TreasuryNote_5Year
+dcid: "InterestRate_TreasuryNote_5Year"
 name: "InterestRate_TreasuryNote_5Year"
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:interestRate
@@ -38,7 +38,7 @@ populationType: dcs:TreasuryNote
 maturity: [5 Year]
 statType: dcs:measuredValue
 
-Node: dcid:InterestRate_TreasuryNote_7Year
+dcid: "InterestRate_TreasuryNote_7Year"
 name: "InterestRate_TreasuryNote_7Year"
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:interestRate
@@ -46,7 +46,7 @@ populationType: dcs:TreasuryNote
 maturity: [7 Year]
 statType: dcs:measuredValue
 
-Node: dcid:InterestRate_TreasuryNote_10Year
+dcid: "InterestRate_TreasuryNote_10Year"
 name: "InterestRate_TreasuryNote_10Year"
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:interestRate
@@ -54,7 +54,7 @@ populationType: dcs:TreasuryNote
 maturity: [10 Year]
 statType: dcs:measuredValue
 
-Node: dcid:InterestRate_TreasuryBond_20Year
+dcid: "InterestRate_TreasuryBond_20Year"
 name: "InterestRate_TreasuryBond_20Year"
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:interestRate
@@ -62,7 +62,7 @@ populationType: dcs:TreasuryBond
 maturity: [20 Year]
 statType: dcs:measuredValue
 
-Node: dcid:InterestRate_TreasuryBond_30Year
+dcid: "InterestRate_TreasuryBond_30Year"
 name: "InterestRate_TreasuryBond_30Year"
 typeOf: dcs:StatisticalVariable
 measuredProperty: dcs:interestRate
