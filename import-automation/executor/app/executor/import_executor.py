@@ -410,20 +410,6 @@ class ImportExecutor:
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
-
-            if not self.config.skip_gcs_upload:
-                # Upload output to GCS.
-                gcs_output = f'{relative_import_dir}/{version}/{import_prefix}/validation'
-                logging.info(
-                    f'Uploading genmcf output to GCS path: {gcs_output}')
-                for filename in os.listdir(output_path):
-                    filepath = os.path.join(output_path, filename)
-                    if os.path.isfile(filepath):
-                        dest = f'{gcs_output}/{filename}'
-                        self.uploader.upload_file(
-                            src=filepath,
-                            dest=dest,
-                        )
         return import_prefix_list
 
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
