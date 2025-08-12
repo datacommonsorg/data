@@ -89,10 +89,10 @@ To run an import on cloud run using a local repo:
 To run an import on cloud run with prod docker image:
   ./run_import.sh -cloud <manifest.json>
 
-To run an import on cloud batch usina a locally build docker image:
+To run an import on cloud batch using a locally build docker image:
   ./run_import.sh -d dc-test-executor-$USER -batch <manifest.json>
 
-To run an import on cloud run with prod docker image:
+To run an import on cloud batch with prod docker image:
   ./run_import.sh -batch <manifest.json>
 
 "
@@ -346,7 +346,7 @@ function run_import_batch {
   memory_mib=$(( $(grep -o "[0-9]*" <<< $MEMORY) * 1024 ))
   disk_gib=${DISK:-"$(($memory_mib / 1000 * 5))"}
 
-  batch_config="$TMP_DIR/clous-batch-config-$IMPORT_NAME.json"
+  batch_config="$TMP_DIR/cloud-batch-config-$IMPORT_NAME.json"
   cat > $batch_config  <<EOF
 {
   "taskGroups": [

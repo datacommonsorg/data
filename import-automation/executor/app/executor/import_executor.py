@@ -357,7 +357,7 @@ class ImportExecutor:
         latest_version = self._get_blob_content(
             os.path.join(import_dir, self.config.storage_version_filename))
         if latest_version:
-            return f'gs://{bucket.name}/{import_dir}/{latest_version}'
+            return f'gs://{self.config.storage_prod_bucket_name.name}/{import_dir}/{latest_version}'
         return ''
 
     def _get_import_input_files(self, import_input, absolute_import_dir):
@@ -458,6 +458,9 @@ class ImportExecutor:
             current_data_path = os.path.join(validation_output_path, '*.mcf')
             previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
             # Save the previous version being compared to
+            with open(os.path.join(validation_output_path, 'previous_version.txt'),
+                 'w') as f:
+                f.write(f'{latest_version}\n')
             open(os.path.join(validation_output_path, 'previous_version.txt'),
                  'w').write(f'{latest_version}\n')
             summary_stats = os.path.join(validation_output_path,
