@@ -102,10 +102,6 @@ def clean_precipitation_data(file_path, output_file):
             var_name='StatisticalVariable',
             value_name='Value')
         data["dcid"] = "geoId/" + data["countyfips"].astype(str)
-    # Create the output directory if it doesn't exist
-    output_dir = os.path.dirname(output_file)
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
     data.to_csv(output_file, index=False)
     logging.info("Finished cleaning file!")
 
