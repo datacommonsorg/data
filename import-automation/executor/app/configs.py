@@ -161,7 +161,7 @@ class ExecutorConfig:
     importer_delete_timeout: float = 10 * 60
     # Executor type depends on where the executor runs
     # Suppports one of: "GKE", "GAE", "CLOUD_RUN", "CLOUD_BATCH"
-    executor_type: str = 'CLOUD_RUN'
+    executor_type: str = 'CLOUD_BATCH'
 
     def get_data_refresh_config(self):
         """Returns the config used for Cloud Scheduler data refresh jobs."""
