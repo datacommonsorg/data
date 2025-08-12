@@ -177,23 +177,23 @@ def main(argv):
         select = Select(select_element)
         options_text = [option.text.strip() for option in select.options]
 
-        logging.info("\n▶ Processing: Brasil")
+        logging.info("\n Processing: Brasil")
         try:
             for panel_index in range(1, 5):
                 download_panel(driver, panel_index, 'Brasil')
             wait_for_downloads()
         except (TimeoutException, NoSuchElementException) as e:
-            logging.fatal(f"  ✖ Selenium element error processing 'Brasil' page. Exiting. Error: {e}")
+            logging.fatal(f"  Selenium element error processing 'Brasil' page. Exiting. Error: {e}")
             raise RuntimeError(f"Selenium error for 'Brasil' page: {e}") 
         except Exception as e:
-            logging.fatal(f"  ✖ Critical failure processing 'Brasil' page. Exiting. Error: {e}")
+            logging.fatal(f"  Critical failure processing 'Brasil' page. Exiting. Error: {e}")
             raise RuntimeError(f"Critical processing failure for 'Brasil' page: {e}") 
 
         for place_name in options_text:
             if not place_name:
                 continue
             
-            logging.info(f"\n▶ Processing: {place_name}")
+            logging.info(f"\n Processing: {place_name}")
 
             try:
                 select_element = WebDriverWait(driver, 15).until(
@@ -216,10 +216,10 @@ def main(argv):
                 wait_for_downloads()
 
             except (TimeoutException, NoSuchElementException) as e:
-                logging.fatal(f"  ✖ Selenium element error selecting or downloading for {place_name}. Exiting. Error: {e}")
+                logging.fatal(f"  Selenium element error selecting or downloading for {place_name}. Exiting. Error: {e}")
                 raise RuntimeError(f"Selenium error for {place_name}: {e}") 
             except Exception as e:
-                logging.fatal(f"  ✖ Critical failure selecting or downloading for {place_name}. Exiting. Error: {e}")
+                logging.fatal(f"  Critical failure selecting or downloading for {place_name}. Exiting. Error: {e}")
                 raise RuntimeError(f"Critical processing failure for {place_name}: {e}") 
 
     finally:
