@@ -5,4 +5,3 @@ value: C:cpi_u->value
 variableMeasured: C:cpi_u->variableMeasured
 typeOf: dcs:StatVarObservation
 measurementMethod: BLSUnchained
-#Aggregate: last
