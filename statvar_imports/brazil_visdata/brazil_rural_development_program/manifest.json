@@ -7,7 +7,7 @@
       "provenance_description": "Different population benefiting from Rural Development Program.",
       "scripts": ["run.sh"] ,
       "source_files": [
-        "input_files/*.csv"
+        "gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/*.csv"
       ],
       "import_inputs": [
         {

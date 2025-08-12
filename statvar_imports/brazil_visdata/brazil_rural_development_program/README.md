@@ -46,7 +46,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/Families_RuralDevelopmentProgram_Gender_Brazil.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_Gender_Brazil.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/Families_RuralDevelopmentProgram_Gender_Brazil_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/Families_RuralDevelopmentProgram_Gender_Brazil_output \
@@ -57,7 +57,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/Families_RuralDevelopmentProgram_Gender_Municipality.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_Gender_Municipality.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/Families_RuralDevelopmentProgram_Gender_Municipality_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/Families_RuralDevelopmentProgram_Gender_Municipality_output \
@@ -69,7 +69,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/Families_RuralDevelopmentProgram_Gender_State.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_Gender_State.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/Families_RuralDevelopmentProgram_Gender_State_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/Families_RuralDevelopmentProgram_Gender_State_output \
@@ -81,7 +81,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/Families_RuralDevelopmentProgram_SpecificPopulation_Brazil.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_SpecificPopulation_Brazil.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/Families_RuralDevelopmentProgram_SpecificPopulation_Brazil_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/Families_RuralDevelopmentProgram_SpecificPopulation_Brazil_output \
@@ -92,7 +92,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/Families_RuralDevelopmentProgram_SpecificPopulation_Municipality.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_SpecificPopulation_Municipality.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/Families_RuralDevelopmentProgram_SpecificPopulation_Municipality_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/Families_RuralDevelopmentProgram_SpecificPopulation_Municipality_output \
@@ -104,7 +104,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/Families_RuralDevelopmentProgram_SpecificPopulation_State.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_SpecificPopulation_State.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/Families_RuralDevelopmentProgram_SpecificPopulation_State_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/Families_RuralDevelopmentProgram_SpecificPopulation_State_output \
@@ -116,7 +116,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_output \
@@ -127,7 +127,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly_output \
@@ -138,7 +138,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality_output \
@@ -150,7 +150,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State_output \
@@ -162,7 +162,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_State.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_State.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/FinancialResources_Beneficiary_RuralDevelopmentProgram_State_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_State_output \
@@ -174,7 +174,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality_output \
@@ -186,7 +186,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/TotalFamilies_Rural_Development_Program_Brazil.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/TotalFamilies_Rural_Development_Program_Brazil.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/TotalFamilies_Rural_Development_Program_Brazil_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/TotalFamilies_Rural_Development_Program_Brazil_output \
@@ -197,7 +197,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/TotalFamilies_Rural_Development_Program_Municipality.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/TotalFamilies_Rural_Development_Program_Municipality.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/TotalFamilies_Rural_Development_Program_Municipality_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/TotalFamilies_Rural_Development_Program_Municipality_output \
@@ -209,7 +209,7 @@ Here are the specific commands for each file:
 
     ```bash
     python3 stat_var_processor.py \
-    --input_data=../../statvar_imports/brazil_visdata/brazil_rural_development_program/input_files/TotalFamilies_Rural_Development_Program_State.csv \
+    --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/TotalFamilies_Rural_Development_Program_State.csv \
     --pv_map=../../statvar_imports/brazil_visdata/brazil_rural_development_program/TotalFamilies_Rural_Development_Program_State_pvmap.csv \
     --config_file=../../statvar_imports/brazil_visdata/brazil_rural_development_program/brazil_metadata.csv \
     --output_path=../../statvar_imports/brazil_visdata/brazil_rural_development_program/output_files/TotalFamilies_Rural_Development_Program_State_output \
