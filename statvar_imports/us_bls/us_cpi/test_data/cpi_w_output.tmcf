@@ -4,4 +4,3 @@ observationDate: C:cpi_w->observationDate
 value: C:cpi_w->value
 variableMeasured: C:cpi_w->variableMeasured
 typeOf: dcs:StatVarObservation
-#Aggregate: last
