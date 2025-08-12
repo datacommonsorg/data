@@ -131,15 +131,15 @@ def download_panel(driver, panel_index, place_name):
         )
         export_option.click()
         
-        logging.info(f"  ✓ Downloading XLSX from panel {panel_id} for {place_name}")
+        logging.info(f" Downloading XLSX from panel {panel_id} for {place_name}")
         time.sleep(2) # Give a moment for the download to initiate
         rename_and_move_downloaded_file(place_name, panel_index)
 
     except (TimeoutException, NoSuchElementException) as e:
-        logging.fatal(f"  Selenium element error during download from {panel_id} for {place_name}: {e}. Exiting script.")
+        logging.fatal(f" Selenium element error during download from {panel_id} for {place_name}: {e}. Exiting script.")
         raise RuntimeError(f"Selenium element error: {e}") # Added raise
     except Exception as e:
-        logging.fatal(f"  Critical download failure from {panel_id} for {place_name}: {e}. Exiting script.")
+        logging.fatal(f" Critical download failure from {panel_id} for {place_name}: {e}. Exiting script.")
         raise RuntimeError(f"Critical download failure: {e}") # Added raise
 
 
