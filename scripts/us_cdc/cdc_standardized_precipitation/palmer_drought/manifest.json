@@ -8,7 +8,7 @@
       "provenance_description": "Environmental Health Toxicology - Palmer Drought Severity Index",
       "scripts": [
         "../download_script.py --import_name=CDC_PalmerDroughtSeverityIndex --config_file=../import_configs.json",
-        "../parse_precipitation_index.py ../CDC_PalmerDroughtSeverityIndex_input.csv output/CDC_PalmerDroughtSeverityIndex_output.csv"
+        "../parse_precipitation_index.py CDC_PalmerDroughtSeverityIndex_input.csv output/CDC_PalmerDroughtSeverityIndex_output.csv"
       ],
       "import_inputs": [
         {

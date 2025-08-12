@@ -27,9 +27,7 @@
                     "cleaned_csv": "gcs_output/cleaned_csv/CensusTract.csv"
                 }
             ],
-            "cron_schedule": "0 4 * * 5",
-            "resource_limits": {"cpu": "8", "memory": "34G"}
-
+            "cron_schedule": "0 4 * * 5"
         }
     ]
 }
