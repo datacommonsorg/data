@@ -3,7 +3,7 @@
     {
       "import_name": "Brazil_RuralDevelopmentProgram",
       "curator_emails": ["support@datacommons.org"],
-      "provenance_url": "https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.ph",
+      "provenance_url": "https://aplicacoes.cidadania.gov.br/vis/data3/data-explorer.php",
       "provenance_description": "Different population benefiting from Rural Development Program.",
       "scripts": ["run.sh"] ,
       "source_files": [
