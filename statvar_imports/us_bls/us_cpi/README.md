@@ -13,7 +13,7 @@ The process involves two main steps: downloading the source data and then proces
 
 ### 1. Download Data
 
-A Python script is provided to download the necessary data files from the BLS website. The script organizes the files into the `input_data` directory, we have to give the output folder using the --output_folder flag . The script is loacated at /statvar_imports/us_bls/cpi_category/cpi_category_download.py
+A Python script is provided to download the necessary data files from the BLS website. The script organizes the files into the `input_data` directory, we have to give the output folder using the --output_folder flag . The script is located at /statvar_imports/us_bls/cpi_category/cpi_category_download.py
 
 **Command:**
 From the statvar_imports/us_bls/us_cpi directory, run the following
@@ -24,6 +24,9 @@ python3 ../cpi_category/cpi_category_download.py --output_folder=../us_cpi/input
 ### 2. Process Data
 
 After downloading the data, use the `stat_var_processor.py` script to process the files and generate the final statistical variables.
+
+#### Note : 
+Currently we are taking the consumerGoodsCategory directly from the input data using a #Eval in the pvmap, so if there is a new entry for goods category or any change in the existing goods category it will cause the addition of a new schema.
 
 #### Example
 
@@ -40,6 +43,6 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 ```
 ## TODO : b/436491943
 
-- **Making output general**: As we are taking the consumerGoodsCategory directly from the source file, any change in the source data is creating another series. To resolve this make whole output data generic
+- **Making output general**: As we are taking the consumerGoodsCategory directly from the source file(using #Eval in pvmap), any change in the source data is creating another series. To resolve this make whole output data generic
 - **Merging with BLS_CPI_Category import**: The BLS_CPI_Category import is also importing the same data using different configs present in '/statvar_imports/us_bls/cpi_category/' folder, need to analyze and merge these two if entire sv's are same
 
