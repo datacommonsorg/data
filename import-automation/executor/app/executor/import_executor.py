@@ -461,8 +461,6 @@ class ImportExecutor:
             with open(os.path.join(validation_output_path, 'previous_version.txt'),
                  'w') as f:
                 f.write(f'{latest_version}\n')
-            open(os.path.join(validation_output_path, 'previous_version.txt'),
-                 'w').write(f'{latest_version}\n')
             summary_stats = os.path.join(validation_output_path,
                                          'summary_report.csv')
             validation_output_file = os.path.join(validation_output_path,
