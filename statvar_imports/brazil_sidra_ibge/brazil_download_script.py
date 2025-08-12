@@ -136,10 +136,10 @@ def download_panel(driver, panel_index, place_name):
         rename_and_move_downloaded_file(place_name, panel_index)
 
     except (TimeoutException, NoSuchElementException) as e:
-        logging.fatal(f"  ✖ Selenium element error during download from {panel_id} for {place_name}: {e}. Exiting script.")
+        logging.fatal(f"  Selenium element error during download from {panel_id} for {place_name}: {e}. Exiting script.")
         raise RuntimeError(f"Selenium element error: {e}") # Added raise
     except Exception as e:
-        logging.fatal(f"  ✖ Critical download failure from {panel_id} for {place_name}: {e}. Exiting script.")
+        logging.fatal(f"  Critical download failure from {panel_id} for {place_name}: {e}. Exiting script.")
         raise RuntimeError(f"Critical download failure: {e}") # Added raise
 
 
