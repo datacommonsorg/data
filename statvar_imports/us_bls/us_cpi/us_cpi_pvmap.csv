@@ -55,5 +55,5 @@ Jan.,Month,1,observationDate,{Year}-{Month},,,,,,
 Expenditure category,Category,{Data},populationType,ConsumerGoodsAndServices,measuredProperty,consumerPriceIndex,,,,
 Area,observationAbout,{Data},populationType,ConsumerGoodsAndServices,measuredProperty,consumerPriceIndex,consumer,UrbanConsumer,consumerGoodsCategory,AllItems
 CPI-W,consumer,UrbanWageEarnerAndClericalWorker,,,,,,,,
-CPI-U,consumer,UrbanConsumer,measurementMethod,BLSUnchained,,,,,,
-C-CPI-U,consumer,UrbanConsumer,measurementMethod,BLSChained,,,,,,
+CPI-U,consumer,UrbanConsumer,,,,,,,
+C-CPI-U,consumer,UrbanConsumer,,,,,,,
