@@ -20,7 +20,7 @@
             "cleaned_csv": "gcs_output/output/*.csv"
           }
         ],
-        "cron_schedule": "0 05 * * 9",
+        "cron_schedule": "0 05 * * 2",
          "resource_limits": {
                 "cpu": "8",
                 "memory": "32G"

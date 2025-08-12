@@ -31,7 +31,7 @@ sh run.sh
 ```
 OR
 ```bash
-python3 stat_var_processor.py --input_data=<input_file>.csv --pv_map=<pvmap_file>.csv --config=<metadata_file>.csv --output_path=<output_path>
+python3 stat_var_processor.py --input_data=<input_file>.csv --pv_map=<pvmap_file>.csv --config_file=<metadata_file>.csv --output_path=<output_path>
 ```
 
 **Example:**

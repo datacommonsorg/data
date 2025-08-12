@@ -93,7 +93,7 @@ def main(argv):
         url = download_config.base_url.format(year=year)
         logging.info(f"Attempting to download data for {year} from: {url}")
 
-        expected_output_filepath = os.path.join(download_config.input_folder, f"ACCIDENT_{year}.csv")
+        expected_output_filepath = os.path.join(GCS_OUTPUT_DIR, download_config.input_folder, f"ACCIDENT_{year}.csv")
         if os.path.exists(expected_output_filepath):
             logging.info(f"ACCIDENT_{year}.csv already exists. Skipping download for {year}.")
 
