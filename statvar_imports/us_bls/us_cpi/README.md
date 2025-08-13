@@ -46,3 +46,4 @@ python3 ../../../tools/statvar_importer/stat_var_processor.py \
 - **Making output general**: As we are taking the consumerGoodsCategory directly from the source file(using #Eval in pvmap), any change in the source data is creating another series. To resolve this make whole output data generic
 - **Merging with BLS_CPI_Category import**: The BLS_CPI_Category import is also importing the same data using different configs present in '/statvar_imports/us_bls/cpi_category/' folder, need to analyze and merge these two if entire sv's are same
 
+
