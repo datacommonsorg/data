@@ -68,7 +68,7 @@ FROM
 )
 """
 
-client = bigquery.Client(project='datcom-store')
+client = bigquery.Client()
 try:
     logging.info("Running the query")
     query_job = client.query(query)
