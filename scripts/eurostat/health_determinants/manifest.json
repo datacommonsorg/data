@@ -13,7 +13,7 @@
         }
       ],
       "source_files": ["input_files/*"],
-      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100},
       "cron_schedule": "0 2 2 * *"
     },
       {
@@ -29,7 +29,7 @@
         }
       ],
       "source_files": ["input_files/*"],
-      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100},
       "cron_schedule": "0 7 2 * *"
     },
       {
@@ -45,7 +45,7 @@
         }
       ],
       "source_files": ["input_files/*"],
-      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100},
       "cron_schedule": "0 6 2 * *"
     },
       {
@@ -61,7 +61,7 @@
         }
       ],
       "source_files": ["input_files/*"],
-      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100},
       "cron_schedule": "0 5 2 * *"
     },
     {
@@ -77,7 +77,7 @@
         }
       ],
       "source_files": ["input_files/*"],
-      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100},
       "cron_schedule": "0 4 2 * *"
     },
     {
@@ -93,7 +93,7 @@
         }
       ],
       "source_files": ["input_files/*"],
-      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100},
       "cron_schedule": "0 3 2 * *"
     }
     ]

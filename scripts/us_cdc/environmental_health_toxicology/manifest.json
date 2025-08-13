@@ -83,7 +83,7 @@
           }
           
         ],
-        "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+        "resource_limits": {"cpu": 8, "memory": 100, "disk": 100},
         "cron_schedule": "0 1  4 * *"
       },
       {
