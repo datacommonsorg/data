@@ -66,3 +66,5 @@ Age group:Total,#ignore,skip,,,,,,,,
 2030,observationDate,2030,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
 2031,observationDate,2031,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
 2032,observationDate,2032,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
+
+

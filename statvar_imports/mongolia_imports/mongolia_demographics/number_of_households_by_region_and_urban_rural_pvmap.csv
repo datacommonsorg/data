@@ -1,7 +1,7 @@
 key,p1,v1,p2,v2
 Aimag,observationAbout,{Data},populationType,Household
 ,,,,
-Total ,populationType,Household,measuredProperty,count
+Total,populationType,Household,measuredProperty,count
 Urban,placeOfResidenceClassification,Urban,,
 Rural,placeOfResidenceClassification,Rural,,
 ,,,,
