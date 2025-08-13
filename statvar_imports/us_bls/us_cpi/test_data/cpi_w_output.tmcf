@@ -1,0 +1,6 @@
+Node: E:cpi_w->E0
+observationAbout: C:cpi_w->observationAbout
+observationDate: C:cpi_w->observationDate
+value: C:cpi_w->value
+variableMeasured: C:cpi_w->variableMeasured
+typeOf: dcs:StatVarObservation
