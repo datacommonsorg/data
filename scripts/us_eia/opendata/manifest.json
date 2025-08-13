@@ -40,6 +40,7 @@
           "cleaned_csv": "gcs_output/ELEC/ELEC.csv"
         }
       ],
+      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
       "cron_schedule": "0 7 5,20 * *"
     },
     {
