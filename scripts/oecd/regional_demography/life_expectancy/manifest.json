@@ -16,10 +16,6 @@
           "cleaned_csv": "OECD_life_expectancy_cleaned.csv"
         }
       ],
-      "resource_limits": {
-        "cpu": "4",
-        "memory": "8G"
-      },
       "cron_schedule": "0 8 1,15 * *"
     }
   ]
