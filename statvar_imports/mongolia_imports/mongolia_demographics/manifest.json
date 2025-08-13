@@ -1,0 +1,46 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Mongolia_Demographics",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.1212.mn/en/statcate",
+      "provenance_description": "Data related to the Mongolia's population and households at country level",
+      "scripts": ["run.sh"] ,
+      "source_files": [
+        "input_files/*.xlsx"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/mid_year_total_population_by_region_output.tmcf",
+          "cleaned_csv": "output_files/mid_year_total_population_by_region_output.csv"
+        },
+        {
+          "template_mcf": "output_files/number_of_households_by_region_and_urban_rural_output.tmcf",
+          "cleaned_csv": "output_files/number_of_households_by_region_and_urban_rural_output.csv"
+        },
+        {
+          "template_mcf": "output_files/number_of_households_by_region_output.tmcf",
+          "cleaned_csv": "output_files/number_of_households_by_region_output.csv"
+        },
+        {
+          "template_mcf": "output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output.tmcf",
+          "cleaned_csv": "output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output.csv"
+        },
+        {
+          "template_mcf": "output_files/total_population_by_age_group_and_sex_output.tmcf",
+          "cleaned_csv": "output_files/total_population_by_age_group_and_sex_output.csv"
+        },
+        {
+          "template_mcf": "output_files/total_population_by_region_and_urban_rural_output.tmcf",
+          "cleaned_csv": "output_files/total_population_by_region_and_urban_rural_output.csv"
+        },
+        {
+          "template_mcf": "output_files/total_population_by_sex_and_urban_rural_output.tmcf",
+          "cleaned_csv": "output_files/total_population_by_sex_and_urban_rural_output.csv"
+        }
+      ],
+      "cron_schedule": "0 04 * * 6"
+    }
+  ]
+}
+
