@@ -9,7 +9,7 @@
                 "ejscreen.py"
             ],
             "source_files": [
-         "input_folder/*.csv"
+                "input_folder/*.csv"
          ],
             "import_inputs": [
                 {

@@ -55,7 +55,7 @@ def build_url(year, zip_filename=None):
 @retry(tries=5, delay=5, backoff=5)
 def download_with_retry(url):
     logging.info(f"Downloading URL : {url}")
-    return requests.get(url=url, verify=False)
+    return requests.get(url=url)
 
 
 # Download the file and save it in the input folder
@@ -98,10 +98,35 @@ def write_csv(data, outfilename):
 
 
 def write_tmcf(outfilename):
+    """
+    Writes a list of dictionaries (representing MCF nodes) to a file in MCF format.
+
+    Args:
+        outfilename: The name of the output file.
+    """
+    mcf_content = []
+
     if isinstance(TEMPLATE_MCF, list):
-        template_content = "\n".join(str(item) for item in TEMPLATE_MCF)
+        for node in TEMPLATE_MCF:
+            if isinstance(node, dict):
+                lines = []
+                for key, value in node.items():
+                    # Handle multi-line values by joining them with a newline
+                    if isinstance(value, list):
+                        value_str = "\n".join(f"  {v}" for v in value)
+                        lines.append(f"{key}:\n{value_str}")
+                    else:
+                        lines.append(f"{key}: {value}")
+                mcf_content.append("\n".join(lines))
     else:
-        template_content = str(TEMPLATE_MCF)
+        # Assuming a single dictionary or string for non-list TEMPLATE_MCF
+        if isinstance(TEMPLATE_MCF, dict):
+            lines = [f"{key}: {value}" for key, value in TEMPLATE_MCF.items()]
+            mcf_content.append("\n".join(lines))
+        else:
+            mcf_content.append(str(TEMPLATE_MCF))
+
+    template_content = "\n\n".join(mcf_content)
 
     with open(outfilename, 'w') as f_out:
         f_out.write(template_content)
@@ -149,7 +174,6 @@ def main(_):
 
                 except Exception as e:
                     logging.fatal(f"Error processing data for year {year}: {e}")
-                    raise RuntimeError(f"Error processing data for year {year}: {e}")
                     continue
 
         # Process files if the mode is 'process' or if no mode is specified
@@ -170,8 +194,6 @@ def main(_):
                             with zfile.open(f'{FILENAMES[year]}.csv',
                                             'r') as newfile:
                                 dfs[year] = pd.read_csv(newfile,
-                                                        engine='python',
-                                                        encoding='latin1',
                                                         usecols=columns)
                     else:
                         dfs[year] = pd.read_csv(file_path,
@@ -190,7 +212,6 @@ def main(_):
 
                 except Exception as e:
                     logging.fatal(f"Error processing data for year {year}: {e}")
-                    raise RuntimeError(f"Error processing data for year {year}: {e}")
                     continue
             
 

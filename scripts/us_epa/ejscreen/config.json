@@ -89,8 +89,7 @@
       "value": "C:ejscreen_airpollutants->PM25",
       "unit": "dcs:MicrogramsPerCubicMeter"
     }
-  ]
-  ,
+  ],
   "BASE_URL": "https://gaftp.epa.gov/EJSCREEN",
   "URL_SUFFIX": {
     "2023": "2.22_September_UseMe",

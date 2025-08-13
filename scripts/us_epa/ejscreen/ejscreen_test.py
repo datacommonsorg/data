@@ -51,8 +51,6 @@ class TestEjscreen(unittest.TestCase):
                     expected_str = expected.read()
                     self.assertEqual(test_str, expected_str)
 
-            # Remove temporary test file after assertion
-            os.remove(test_csv)
 
 
 if __name__ == '__main__':
