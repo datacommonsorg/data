@@ -1,12 +1,11 @@
 # Import Differ
 
-This utility generates a diff (point and series analysis) of two versions of the same dataset for import analysis.
+This utility generates a diff of two versions of a dataset for import analysis.
 
 **Usage**
 
 ***Prerequisites***
 - Python/Pandas is installed for native runner mode.
-- Java is installed for local runner mode.
 - gcloud ADC is configured for cloud runner mode.
 
 ```
@@ -18,7 +17,7 @@ python import_differ.py --current_data=<path> --previous_data=<path> --output_lo
 - previous\_data: Path to the previous data (wildcard on local/GCS supported).
 - output\_location: Path to the output data folder (local/GCS).
 - file\_format: Format of the input data (mcf,tfrecord).
-- runner\_mode: Runner mode: native (Python) / local (Dataflow in local mode) / cloud (Dataflow in Cloud).
+- runner\_mode: Runner mode: local (Python) / cloud (Dataflow in Cloud).
 - project\_id: GCP project Id for the dataflow job.
 - job\_name: Name of the differ dataflow job.
 
@@ -35,7 +34,8 @@ Summary output generated is of the form below showing counts of differences for 
 |3|dcid:var4|0|2|0|
 
 Detailed diff output is written to files for further analysis. Sample result files can be found under folder 'test/results'.
-- point\_analysis\_summary.csv: diff summry for point analysis
-- point\_analysis\_results.csv: detailed results for point analysis
-- series\_analysis\_summary.csv: diff summry for series analysis
-- series\_analysis\_results.csv: detailed results for series analysis
+- obs\_diff\_summary.csv: diff summary for observation analysis
+- obs\_diff\_samples.csv: sample diff for observation analysis
+- obs\_diff\_log.csv: diff log for observations
+- schema\_diff\_summary.csv: diff summary for schema analysis
+- schema\_diff\_log.csv: diff log for schema nodes 
