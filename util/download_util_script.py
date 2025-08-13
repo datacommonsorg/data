@@ -226,7 +226,8 @@ def download_file(url: str,
                     logging.info(
                         "Local file is up-to-date (or newer) compared to server. Skipping download."
                     )
-                    if unzip and file_name.endswith('.zip'):
+                    if unzip and (file_name.endswith('.zip') or
+                                  file_name.endswith('.ashx')):
                         # Call unzip_file. Its internal exception handling will propagate.
                         unzip_file(file_path, output_folder)
                         logging.info(
@@ -241,7 +242,8 @@ def download_file(url: str,
                 logging.warning(
                     f"Server did not provide 'Last-Modified' header for '{url}'. Cannot check staleness. "
                     "Skipping download of existing file without clear reason.")
-                if unzip and file_name.endswith('.zip'):
+                if unzip and (file_name.endswith('.zip') or
+                              file_name.endswith('.ashx')):
                     # Call unzip_file. Its internal exception handling will propagate.
                     unzip_file(file_path, output_folder)
                     logging.info("Existing zip file successfully unzipped.")
@@ -258,7 +260,8 @@ def download_file(url: str,
             f"File successfully downloaded to: {file_path} and the url is '{url}'"
         )
 
-        if unzip and file_name.endswith('.zip'):
+        if unzip and (file_name.endswith('.zip') or
+                      file_name.endswith('.ashx')):
             # Call unzip_file. Its internal exception handling will propagate.
             unzip_file(file_path, output_folder)
             logging.info("Downloaded zip file successfully unzipped.")

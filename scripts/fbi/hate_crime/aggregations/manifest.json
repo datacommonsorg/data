@@ -16,10 +16,6 @@
         "source_files": [
             "hate_crime_data/*"
         ],
-        "resource_limits": {
-            "cpu": "8",
-            "memory": "32G"
-          },
 	"timeout": 10800,
         "cron_schedule": "0 10 21 * *"
       }
