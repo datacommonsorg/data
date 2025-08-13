@@ -120,7 +120,7 @@ class ExecutorConfig:
     # Cloud workflow id.
     cloud_workflow_id: str = 'import-automation-workflow'
     # Maximum time a user script can run for in seconds.
-    user_script_timeout: float = 3600
+    user_script_timeout: float = 36000
     # Arguments for the user script
     user_script_args: List[str] = ()
     # Environment variables for the user script
