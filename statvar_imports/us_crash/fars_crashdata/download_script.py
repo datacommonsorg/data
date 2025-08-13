@@ -57,12 +57,8 @@ def download_and_extract_data(url, input_folder, year):
                         for item in zip_ref.infolist():
                             if item.filename.upper().endswith("ACCIDENT.CSV"):
                                 parts = item.filename.split("/")
-                                if len(parts) > 1: 
-                                    output_filename = f"ACCIDENT_{year}.csv"
-                                    output_filepath = os.path.join(input_folder, output_filename)
-                                else:  
-                                    output_filename = f"ACCIDENT_{year}.csv"
-                                    output_filepath = os.path.join(input_folder, output_filename)
+                                output_filename = f"ACCIDENT_{year}.csv"
+                                output_filepath = os.path.join(input_folder, output_filename)
 
                                 with zip_ref.open(item) as source, open(output_filepath, "wb") as target:
                                     shutil.copyfileobj(source, target)
