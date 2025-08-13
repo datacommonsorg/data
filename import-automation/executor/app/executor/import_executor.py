@@ -486,6 +486,7 @@ class ImportExecutor:
                 differ.run_differ()
                 differ_output_file = differ_output
             else:
+                differ_output_file = ''
                 logging.error(
                     'Skipping differ tool due to missing latest mcf file')
 

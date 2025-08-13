@@ -214,8 +214,8 @@ function load_manifest {
 function build_docker {
   if [[ "$DOCKER_IMAGE" == "dc-import-executor" ]] || [[ "$DOCKER_IMAGE" == "prod" ]]; then
     DOCKER_IMAGE="dc-import-executor"
-    echo_log "Reusing latest $ARTIFACT_REGISTRY:$DOCKER_IMAGE"
-    DOCKER_REMOTE="$ARTIFACT_REGISTRY/$DOCKER_IMAGE"
+    DOCKER_REMOTE="gcr.io/datcom-ci/$DOCKER_IMAGE"
+    echo_log "Reusing latest $DOCKER_IMAGE"
     return
   fi
   # Skip docker build if running locally
@@ -357,7 +357,7 @@ function run_import_batch {
             "container": {
               "imageUri": "${DOCKER_REMOTE}:latest",
               "commands": [
-                "--import_name=${IMPORT_NAME}",
+                "--import_name=${IMPORT_DIR}:${IMPORT_NAME}",
                 "--import_config={\"gcs_project_id\": \"${GCP_PROJECT}\", \"storage_prod_bucket_name\": \"${GCS_BUCKET}\"}"
               ]
             }
