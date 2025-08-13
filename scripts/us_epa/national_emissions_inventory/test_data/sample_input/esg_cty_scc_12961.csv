@@ -1,0 +1,100 @@
+epa region code,state,fips state code,tribal name,fips code,county,data category,emissions type code,scc,sector,aetc,reporting period,emissions operating type,pollutant code,pollutant desc,pollutant type(s),total emissions,emissions uom,data set
+10,WA,53,,53055,San Juan,NP,,2630020000,Waste Disposal,,A,R,123911,p-Dioxane,HAP,.002529414,LB,2017NEI_Apr2020
+10,WA,53,,53055,San Juan,NP,,2630020000,Waste Disposal,,A,R,126998,Chloroprene,HAP,.003363132,LB,2017NEI_Apr2020
+10,WA,53,,53055,San Juan,NP,,2630020000,Waste Disposal,,A,R,1330207,Xylenes (Mixed Isomers),HAP,8.450222,LB,2017NEI_Apr2020
+10,WA,53,,53055,San Juan,NP,,2630020000,Waste Disposal,,A,R,1634044,Methyl Tert-Butyl Ether,HAP,.009001322,LB,2017NEI_Apr2020
+10,WA,53,,53055,San Juan,NP,,2630020000,Waste Disposal,,A,R,56235,Carbon Tetrachloride,HAP,.15826502,LB,2017NEI_Apr2020
+10,WA,53,,53055,San Juan,NP,,2630020000,Waste Disposal,,A,R,67663,Chloroform,HAP,.9100238,LB,2017NEI_Apr2020
+10,WA,53,,53055,San Juan,NP,,2630020000,Waste Disposal,,A,R,71556,Methyl Chloroform,HAP,.07955644,LB,2017NEI_Apr2020
+10,WA,53,,53055,San Juan,NP,,2630020000,Waste Disposal,,A,R,78875,Propylene Dichloride,HAP,.0016250426,LB,2017NEI_Apr2020
+10,WA,53,,53055,San Juan,NP,,2630020000,Waste Disposal,,A,R,79469,2-Nitropropane,HAP,.00004126196,LB,2017NEI_Apr2020
+05,WI,55,,55137,Waushara,NP,,2610000500,Waste Disposal,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,4.71350499,TON,2017NEI_Apr2020
+05,WI,55,,55137,Waushara,NP,,2610000500,Waste Disposal,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.042496825,TON,2017NEI_Apr2020
+05,WI,55,,55137,Waushara,NP,,2610000500,Waste Disposal,,A,R,VOC,Volatile Organic Compounds,CAP,7.376559,TON,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,56235,Carbon Tetrachloride,HAP,.15792,LB,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,75058,Acetonitrile,HAP,.048645,LB,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,126998,Chloroprene,HAP,.0033558,LB,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,1319773,Cresol/Cresylic Acid (Mixed Isomers),HAP,.00022701,LB,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,79469,2-Nitropropane,HAP,.000041172,LB,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,87683,Hexachlorobutadiene,HAP,.000102789,LB,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,95534,o-Toluidine,HAP,.00024675,LB,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,107051,Allyl Chloride,HAP,.0027354,LB,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,108054,Vinyl Acetate,HAP,.0108006,LB,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,108883,Toluene,HAP,1.7343,LB,2017NEI_Apr2020
+07,KS,20,,20171,Scott,NP,,2630020000,Waste Disposal,,A,R,121697,"N,N-Dimethylaniline",HAP,.045402,LB,2017NEI_Apr2020
+01,ME,23,,23001,Androscoggin,NP,,2104009000,Fuel Comb - Residential - Wood,,A,R,206440,Fluoranthene,HAP,0,LB,2017NEI_Apr2020
+01,ME,23,,23001,Androscoggin,NP,,2104009000,Fuel Comb - Residential - Wood,,A,R,207089,Benzo[k]Fluoranthene,HAP,0,LB,2017NEI_Apr2020
+01,ME,23,,23001,Androscoggin,NP,,2104009000,Fuel Comb - Residential - Wood,,A,R,91203,Naphthalene,HAP,0,LB,2017NEI_Apr2020
+01,ME,23,,23001,Androscoggin,NP,,2104009000,Fuel Comb - Residential - Wood,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,0,TON,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,NP,,2501012012,Miscellaneous Non-Industrial NEC,,A,R,VOC,Volatile Organic Compounds,CAP,.005155079,TON,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,NP,,2501012012,Miscellaneous Non-Industrial NEC,,A,R,1330207,Xylenes (Mixed Isomers),HAP,.309304,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,NP,,2805035000,Agriculture - Livestock Waste,,A,R,106467,"1,4-Dichlorobenzene",HAP,2.34143,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,NP,,2805035000,Agriculture - Livestock Waste,,A,R,71432,Benzene,HAP,.18011,LB,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,NP,,2805035000,Agriculture - Livestock Waste,,A,R,NH3,Ammonia,CAP,11.25688,TON,2017NEI_Apr2020
+07,KS,20,,20197,Wabaunsee,NP,,2805035000,Agriculture - Livestock Waste,,A,R,108907,Chlorobenzene,HAP,.18011,LB,2017NEI_Apr2020
+07,KS,20,,20127,Morris,NP,,2460800000,Solvent - Consumer & Commercial Solvent Use,,A,R,67561,Methanol,HAP,905.9337,LB,2017NEI_Apr2020
+07,KS,20,,20007,Barber,NP,,2104004000,Fuel Comb - Residential - Oil,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.0000292269878,TON,2017NEI_Apr2020
+07,KS,20,,20007,Barber,NP,,2104004000,Fuel Comb - Residential - Oil,,A,R,7440020,Nickel,HAP,.00002514034,LB,2017NEI_Apr2020
+07,KS,20,,20007,Barber,NP,,2104004000,Fuel Comb - Residential - Oil,,A,R,75070,Acetaldehyde,HAP,.0002935228,LB,2017NEI_Apr2020
+07,KS,20,,20007,Barber,NP,,2104004000,Fuel Comb - Residential - Oil,,A,R,85018,Phenanthrene,HAP,.0000006264204,LB,2017NEI_Apr2020
+07,KS,20,,20007,Barber,NP,,2104004000,Fuel Comb - Residential - Oil,,A,R,PM-CON,PM Condensible,CAP,.00003877841,TON,2017NEI_Apr2020
+07,KS,20,,20007,Barber,NP,,2104004000,Fuel Comb - Residential - Oil,,A,R,208968,Acenaphthylene,HAP,.00000001509375,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,NP,,2302003200,Commercial Cooking,,A,R,86737,Fluorene,HAP,2.382612,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,NP,,2302003200,Commercial Cooking,,A,R,50328,Benzo[a]Pyrene,HAP,.0000959728,LB,2017NEI_Apr2020
+07,KS,20,,20179,Sheridan,NP,,2461850000,Solvent - Consumer & Commercial Solvent Use,,A,R,94757,"2,4-Dichlorophenoxy Acetic Acid",HAP,31403.19,LB,2017NEI_Apr2020
+09,CA,06,,06103,Tehama,NP,,2401040000,Solvent - Industrial Surface Coating & Solvent Use,,A,R,108101,Methyl Isobutyl Ketone,HAP,0,LB,2017NEI_Apr2020
+04,SC,45,,45029,Colleton,NP,,2104004000,Fuel Comb - Residential - Oil,,A,R,VOC,Volatile Organic Compounds,CAP,.006235196,TON,2017NEI_Apr2020
+06,AR,05,,05113,Polk,NP,,2501060201,Gas Stations,,A,R,100414,Ethyl Benzene,HAP,5.156325,LB,2017NEI_Apr2020
+06,AR,05,,05113,Polk,NP,,2501060201,Gas Stations,,A,R,VOC,Volatile Organic Compounds,CAP,4.864458,TON,2017NEI_Apr2020
+05,MN,27,,27021,Cass,NP,,2810060200,Miscellaneous Non-Industrial NEC,,A,R,7440382,Arsenic,HAP,.000001497136,LB,2017NEI_Apr2020
+05,MN,27,,27021,Cass,NP,,2810060200,Miscellaneous Non-Industrial NEC,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,.000002969676,TON,2017NEI_Apr2020
+05,MN,27,,27021,Cass,NP,,2810060200,Miscellaneous Non-Industrial NEC,,A,R,16065831,Chromium III,HAP,.000006995794,LB,2017NEI_Apr2020
+05,MN,27,,27021,Cass,NP,,2810060200,Miscellaneous Non-Industrial NEC,,A,R,7647010,Hydrochloric Acid,HAP,.01055995,LB,2017NEI_Apr2020
+04,GA,13,,13167,Johnson,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,206440,Fluoranthene,HAP,0,LB,2017NEI_Apr2020
+04,GA,13,,13167,Johnson,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,208968,Acenaphthylene,HAP,0,LB,2017NEI_Apr2020
+04,GA,13,,13167,Johnson,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,218019,Chrysene,HAP,0,LB,2017NEI_Apr2020
+04,GA,13,,13167,Johnson,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,50000,Formaldehyde,HAP,0,LB,2017NEI_Apr2020
+04,GA,13,,13167,Johnson,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,75252,Bromoform,HAP,0,LB,2017NEI_Apr2020
+04,GA,13,,13167,Johnson,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,85018,Phenanthrene,HAP,0,LB,2017NEI_Apr2020
+04,GA,13,,13167,Johnson,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,0,TON,2017NEI_Apr2020
+04,GA,13,,13167,Johnson,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,121142,"2,4-Dinitrotoluene",HAP,0,LB,2017NEI_Apr2020
+04,GA,13,,13167,Johnson,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,129000,Pyrene,HAP,0,LB,2017NEI_Apr2020
+04,GA,13,,13167,Johnson,NP,,2102002000,"Fuel Comb - Industrial Boilers, ICEs - Coal",,A,R,16065831,Chromium III,HAP,0,LB,2017NEI_Apr2020
+04,AL,01,,01101,Montgomery,NP,,2851001000,Miscellaneous Non-Industrial NEC,,A,R,7439976,Mercury,HAP,.546404,LB,2017NEI_Apr2020
+03,PA,42,,42003,Allegheny,NP,,2610030000,Waste Disposal,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.15742811,TON,2017NEI_Apr2020
+03,PA,42,,42003,Allegheny,NP,,2610030000,Waste Disposal,,A,R,120821,"1,2,4-Trichlorobenzene",HAP,.5170053,LB,2017NEI_Apr2020
+03,PA,42,,42003,Allegheny,NP,,2610030000,Waste Disposal,,A,R,123386,Propionaldehyde,HAP,580.8555,LB,2017NEI_Apr2020
+03,PA,42,,42003,Allegheny,NP,,2610030000,Waste Disposal,,A,R,218019,Chrysene,HAP,9.306096,LB,2017NEI_Apr2020
+05,IL,17,,17105,Livingston,NP,,2610000400,Waste Disposal,,A,R,OC,Organic Carbon portion of PM2.5-PRI,,.33153149568,TON,2017NEI_Apr2020
+05,IL,17,,17105,Livingston,NP,,2610000400,Waste Disposal,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0029890784,TON,2017NEI_Apr2020
+05,IL,17,,17105,Livingston,NP,,2610000400,Waste Disposal,,A,R,SO2,Sulfur Dioxide,CAP,.09320691,TON,2017NEI_Apr2020
+07,KS,20,,20079,Harvey,NP,,2310021501,Industrial Processes - Oil & Gas Production,,A,R,1330207,Xylenes (Mixed Isomers),HAP,1.2037896,LB,2017NEI_Apr2020
+05,MI,26,,26117,Montcalm,NP,,2310021603,Industrial Processes - Oil & Gas Production,,A,R,CO,Carbon Monoxide,CAP,0,TON,2017NEI_Apr2020
+05,IL,17,,17093,Kendall,NP,,2104008700,Fuel Comb - Residential - Wood,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.0116230448,TON,2017NEI_Apr2020
+05,IL,17,,17093,Kendall,NP,,2104008700,Fuel Comb - Residential - Wood,,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),CAP,6.117392,TON,2017NEI_Apr2020
+05,IL,17,,17093,Kendall,NP,,2104008700,Fuel Comb - Residential - Wood,,A,R,91203,Naphthalene,HAP,137.3821,LB,2017NEI_Apr2020
+05,IL,17,,17093,Kendall,NP,,2104008700,Fuel Comb - Residential - Wood,,A,R,108952,Phenol,HAP,244.6957,LB,2017NEI_Apr2020
+06,TX,48,,48459,Upshur,NP,,2310021202,Industrial Processes - Oil & Gas Production,,A,R,540841,"2,2,4-Trimethylpentane",HAP,.847832,LB,2017NEI_Apr2020
+06,TX,48,,48459,Upshur,NP,,2310021202,Industrial Processes - Oil & Gas Production,,A,R,50000,Formaldehyde,HAP,179.06208,LB,2017NEI_Apr2020
+06,TX,48,,48459,Upshur,NP,,2310021202,Industrial Processes - Oil & Gas Production,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,0,TON,2017NEI_Apr2020
+08,CO,08,,08009,Baca,NP,,2310010700,Industrial Processes - Oil & Gas Production,,A,R,108883,Toluene,HAP,.19059566935672,LB,2017NEI_Apr2020
+08,CO,08,,08009,Baca,NP,,2310010700,Industrial Processes - Oil & Gas Production,,A,R,1330207,Xylenes (Mixed Isomers),HAP,1.36917699580216,LB,2017NEI_Apr2020
+06,TX,48,,48379,Rains,NP,,2310011505,Industrial Processes - Oil & Gas Production,,A,R,VOC,Volatile Organic Compounds,CAP,0,TON,2017NEI_Apr2020
+05,IN,18,,18139,Rush,NP,,2310023202,Industrial Processes - Oil & Gas Production,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,0,TON,2017NEI_Apr2020
+05,IL,17,,17029,Coles,NP,,2501080050,Gas Stations,,A,R,1330207,Xylenes (Mixed Isomers),HAP,87.71532,LB,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,NP,,2810060200,Miscellaneous Non-Industrial NEC,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.00003228721542,TON,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,NP,,2810060200,Miscellaneous Non-Industrial NEC,,A,R,7439921,Lead,CAP/HAP,.0003695158,LB,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,NP,,2810060200,Miscellaneous Non-Industrial NEC,,A,R,PM25-FIL,PM2.5 Filterable,CAP,.00003978708,TON,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,NP,,2810060200,Miscellaneous Non-Industrial NEC,,A,R,7782492,Selenium,HAP,.00001956359,LB,2017NEI_Apr2020
+06,LA,22,,22071,Orleans,NP,,2810060200,Miscellaneous Non-Industrial NEC,,A,R,16065831,Chromium III,HAP,.00009372815,LB,2017NEI_Apr2020
+06,LA,22,,22025,Catahoula,NP,,2801500220,Fires - Agricultural Field Burning,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,.0000297,TON,2017NEI_Apr2020
+06,LA,22,,22029,Concordia,NP,,2801500141,Fires - Agricultural Field Burning,,A,R,100425,Styrene,HAP,43.2,LB,2017NEI_Apr2020
+05,IN,18,,18171,Warren,NP,,2311020000,Dust - Construction Dust,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,0,TON,2017NEI_Apr2020
+05,IN,18,,18171,Warren,NP,,2311020000,Dust - Construction Dust,,A,R,NO3,Nitrate portion of PM2.5-PRI,,.001056584115,TON,2017NEI_Apr2020
+05,IN,18,,18171,Warren,NP,,2311020000,Dust - Construction Dust,,A,R,PM10-PRI,PM10 Primary (Filt + Cond),CAP,28.94751,TON,2017NEI_Apr2020
+04,GA,13,,13043,Candler,NP,,2103007000,Fuel Comb - Comm/Institutional - Other,,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,,.00013622085312,TON,2017NEI_Apr2020
+04,GA,13,,13043,Candler,NP,,2103007000,Fuel Comb - Comm/Institutional - Other,,A,R,EC,Elemental Carbon portion of PM2.5-PRI,,.00002459953584,TON,2017NEI_Apr2020
+04,GA,13,,13043,Candler,NP,,2103007000,Fuel Comb - Comm/Institutional - Other,,A,R,7439921,Lead,CAP/HAP,.0008031878,LB,2017NEI_Apr2020
+04,GA,13,,13043,Candler,NP,,2103007000,Fuel Comb - Comm/Institutional - Other,,A,R,75070,Acetaldehyde,HAP,.00002192701,LB,2017NEI_Apr2020
+04,GA,13,,13043,Candler,NP,,2103007000,Fuel Comb - Comm/Institutional - Other,,A,R,86737,Fluorene,HAP,.000004722742,LB,2017NEI_Apr2020
+04,GA,13,,13027,Brooks,NP,,2805007100,Agriculture - Livestock Waste,,A,R,60355,Acetamide,HAP,67.62713,LB,2017NEI_Apr2020

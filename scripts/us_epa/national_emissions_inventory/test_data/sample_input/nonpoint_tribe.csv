@@ -1,0 +1,300 @@
+state,fips state code,tribal name,data category,emissions type code,scc,reporting period,emissions operating type,pollutant code,pollutant desc,total emissions,emissions uom,data set
+,,"Assiniboine and Sioux Tribes of the Fort Peck Indian Reservation, Montana",NP,,2104007000,A,R,SO4,Sulfate Portion of PM2.5-PRI,0.00252,TON,2014NEIV2
+,,"Assiniboine and Sioux Tribes of the Fort Peck Indian Reservation, Montana",NP,,2801000005,A,R,PM10-FIL,PM10 Filterable,0.54,TON,2014NEIV2
+,,"Assiniboine and Sioux Tribes of the Fort Peck Indian Reservation, Montana",NP,,2285002006,A,R,VOC,Volatile Organic Compounds,75.998,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2501011014,A,R,71432,Benzene,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104011000,A,R,53703,"Dibenzo[a,h]Anthracene",0.00000000153111,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104011000,A,R,110543,Hexane,0.0000686694,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2102008000,A,R,PM10-PRI,PM10 Primary (Filt + Cond),0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103004001,A,R,CO,Carbon Monoxide,0.0000872348,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008330,A,R,56553,Benz[a]Anthracene,0.000444644,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805009100,A,R,75092,Methylene Chloride,0.0000323197093866,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2460200000,A,R,67561,Methanol,39.941,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008230,A,R,71432,Benzene,0.560388,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008320,A,R,92524,Biphenyl,0.0203062114285522,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008320,A,R,108952,Phenol,1.112386,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2801500181,A,R,203338,Benzo(a)Fluoranthene,0.1395056,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008310,A,R,OC,Organic Carbon portion of PM2.5-PRI,0.0453700031,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008310,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",0.00229298,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104009000,A,R,120127,Anthracene,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104009000,A,R,207089,Benzo[k]Fluoranthene,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008610,A,R,108952,Phenol,0.0735354,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805022300,A,R,NH3,Ammonia,0.000583213,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2610030000,A,R,56553,Benz[a]Anthracene,0.0232362,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2610030000,A,R,74908,Hydrogen Cyanide,4.8547,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008220,A,R,41637905,Methylchrysene,0.0000670628,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2501012015,A,R,71432,Benzene,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805019100,A,R,7783064,Hydrogen Sulfide,12.58946,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2810060100,A,R,7782492,Selenium,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103001000,A,R,PM25-FIL,PM2.5 Filterable,0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2102004001,A,R,7439965,Manganese,0.0023449,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2401001000,A,R,106423,p-Xylene,1.842266,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2401001000,A,R,540885,Tert-butyl Acetate,7.89362,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805039100,A,R,VOC,Volatile Organic Compounds,0.000144198,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103005000,A,R,7440417,Beryllium,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103002000,A,R,75150,Carbon Disulfide,0.00001743142,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103002000,A,R,NOX,Nitrogen Oxides,0.000737483,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2102005000,A,R,VOC,Volatile Organic Compounds,0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2102002000,A,R,7782492,Selenium,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2102001000,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2401070000,A,R,67561,Methanol,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104001000,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104001000,A,R,PM10-FIL,PM10 Filterable,0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2801500320,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0.000036815622,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805003100,A,R,PM10-PRI,PM10 Primary (Filt + Cond),0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805008100,A,R,108101,Methyl Isobutyl Ketone,0.005564806342656,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104002000,A,R,75092,Methylene Chloride,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104002000,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104002000,A,R,117817,Bis(2-Ethylhexyl)Phthalate,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2401020000,A,R,75092,Methylene Chloride,0.0418288,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2401080000,A,R,171,Glycol Ethers,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104004000,A,R,120127,Anthracene,0.000000383978,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805030000,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,0.00000519447594,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805023100,A,R,OC,Organic Carbon portion of PM2.5-PRI,0.0001330729542,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805023100,A,R,7783064,Hydrogen Sulfide,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805022200,A,R,1319773,Cresol/Cresylic Acid (Mixed Isomers),0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805021200,A,R,NO3,Nitrate portion of PM2.5-PRI,0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2501011011,A,R,1330207,Xylenes (Mixed Isomers),0.391552,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2501060201,A,R,71432,Benzene,0.623182,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2302002100,A,R,PM10-PRI,PM10 Primary (Filt + Cond),0.459041,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2302002200,A,R,108952,Phenol,5.64722,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2103008000,A,R,206440,Fluoranthene,0.00033047,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2801500390,A,R,195197,Benzo(c)phenanthrene,0.000152221,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2630020000,A,R,107062,Ethylene Dichloride,0.24696,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2610000300,A,R,CO,Carbon Monoxide,0.749774,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2805021200,A,R,7783064,Hydrogen Sulfide,0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2102002000,A,R,206440,Fluoranthene,0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2102002000,A,R,108952,Phenol,0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2102006000,A,R,7440382,Arsenic,0.01091798,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2102007000,A,R,NH3,Ammonia,0.00491015,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2103006000,A,R,7440417,Beryllium,0.00172134,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2801500330,A,R,107028,Acrolein,0.364496,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2805040000,A,R,VOC,Volatile Organic Compounds,0,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2401005000,A,R,121448,Triethylamine,2.92328,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2805039200,A,R,75070,Acetaldehyde,0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2401200000,A,R,111900,Diethylene Glycol Monoethyl Ether,0.758862,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2104001000,A,R,191242,"Benzo[g,h,i,]Perylene",0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2104008220,A,R,7439976,Mercury,0.000895818,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2610000400,A,R,NH3,Ammonia,0.0642664,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2805008100,A,R,PM-CON,PM Condensible,0,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2801500500,A,R,106990,"1,3-Butadiene",2.49174,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2102001000,A,R,PM10-PRI,PM10 Primary (Filt + Cond),0,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2104008320,A,R,191242,"Benzo[g,h,i,]Perylene",0.0684734,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2103002000,A,R,OC,Organic Carbon portion of PM2.5-PRI,0.00079123872,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2103002000,A,R,1634044,Methyl Tert-Butyl Ether,0.000718338,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2103011000,A,R,18540299,Chromium (VI),0.00000638308,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2805030007,A,R,75150,Carbon Disulfide,0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2805023100,A,R,67561,Methanol,0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2805023100,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),0.00381345,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2805001100,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0.3086841,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2805018000,A,R,108883,Toluene,0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2401020000,A,R,100414,Ethyl Benzene,150.2266,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2801500350,A,R,50328,Benzo[a]Pyrene,0.0269028,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2801500261,A,R,PM10-PRI,PM10 Primary (Filt + Cond),253.7,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2401070000,A,R,80626,Methyl Methacrylate,0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2104009000,A,R,OC,Organic Carbon portion of PM2.5-PRI,0,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2501060052,A,R,71432,Benzene,971.418,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2805030008,A,R,7783064,Hydrogen Sulfide,0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2104008230,A,R,120127,Anthracene,0.23115,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2104008400,A,R,NOX,Nitrogen Oxides,0.381226,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2102004002,A,R,191242,"Benzo[g,h,i,]Perylene",0.001161756,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2102004002,A,R,7440439,Cadmium,1.529516,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2104002000,A,R,CO,Carbon Monoxide,0,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2401060000,A,R,100414,Ethyl Benzene,0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2302003200,A,R,208968,Acenaphthylene,0.00057038969064,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2302003200,A,R,206440,Fluoranthene,0.000369982259724,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2103005000,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",0,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2801500170,A,R,56832736,Benzofluoranthenes,126.355,LB,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2801500141,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,2.74441101,TON,2014NEIV2
+,,Nez Perce Tribe of Idaho,NP,,2102005000,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),0,TON,2014NEIV2
+,,"Morongo Band of Cahuilla Mission Indians of the Morongo Reservation, California",NP,,2104006000,A,R,53703,"Dibenzo[a,h]Anthracene",0.000036708,LB,2014NEIV2
+,,"Morongo Band of Cahuilla Mission Indians of the Morongo Reservation, California",NP,,2285002006,A,R,CO,Carbon Monoxide,11.9436,TON,2014NEIV2
+,,"Morongo Band of Cahuilla Mission Indians of the Morongo Reservation, California",NP,,2104008220,A,R,71432,Benzene,2.93571428571426,LB,2014NEIV2
+,,"Morongo Band of Cahuilla Mission Indians of the Morongo Reservation, California",NP,,2104008220,A,R,50328,Benzo[a]Pyrene,0.0074081632653,LB,2014NEIV2
+,,"Morongo Band of Cahuilla Mission Indians of the Morongo Reservation, California",NP,,2610030000,A,R,207089,Benzo[k]Fluoranthene,0.01435,LB,2014NEIV2
+,,"Morongo Band of Cahuilla Mission Indians of the Morongo Reservation, California",NP,,2610030000,A,R,120127,Anthracene,0.02562,LB,2014NEIV2
+,,"Morongo Band of Cahuilla Mission Indians of the Morongo Reservation, California",NP,,2610030000,A,R,NOX,Nitrogen Oxides,0.021,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2102006000,A,R,91576,2-Methylnaphthalene,0.0001374152,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2801500500,A,R,PM10-PRI,PM10 Primary (Filt + Cond),0.00114735,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2801500500,A,R,NO3,Nitrate portion of PM2.5-PRI,0.000003772755,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2102004001,A,R,PM10-FIL,PM10 Filterable,0.00442488,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2103005000,A,R,NH3,Ammonia,0,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2104009000,A,R,91203,Naphthalene,0,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2104008230,A,R,192972,Benzo[e]Pyrene,0.00618658,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2610030000,A,R,129000,Pyrene,0.637232,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2610030000,A,R,56553,Benz[a]Anthracene,0.295528,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2610030000,A,R,53703,"Dibenzo[a,h]Anthracene",0.042614,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2501012013,A,R,91203,Naphthalene,0.00042762,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2104008210,A,R,NH3,Ammonia,0.0662079,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2104008210,A,R,1319773,Cresol/Cresylic Acid (Mixed Isomers),12.46268,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2805009100,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0.000007905894,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2103002000,A,R,7440439,Cadmium,0.00026648,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2104008610,A,R,75070,Acetaldehyde,2.26676,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2104008610,A,R,106990,"1,3-Butadiene",0.0964938,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2501060201,A,R,1330207,Xylenes (Mixed Isomers),8.55922,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2805007300,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),0,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2805025000,A,R,OC,Organic Carbon portion of PM2.5-PRI,0,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2102004002,A,R,18540299,Chromium (VI),0.04673448,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2102004002,A,R,7440417,Beryllium,0.259636,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2801500410,A,R,218019,Chrysene,0.000485614,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2102005000,A,R,VOC,Volatile Organic Compounds,0,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2102005000,A,R,7440439,Cadmium,0,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2102005000,A,R,NOX,Nitrogen Oxides,0,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2805009300,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2103011000,A,R,85018,Phenanthrene,0.0000002257,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2103011000,A,R,PM-CON,PM Condensible,0.0000147175,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2104004000,A,R,191242,"Benzo[g,h,i,]Perylene",0.0000231688,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2302003200,A,R,NO3,Nitrate portion of PM2.5-PRI,0.00029064464,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2103004001,A,R,7440020,Nickel,0.00571092,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2805008100,A,R,VOC,Volatile Organic Compounds,0.00191366,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2805039200,A,R,PM10-FIL,PM10 Filterable,0,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2311020000,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),1.79624,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2102002000,A,R,100414,Ethyl Benzene,0,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2801500330,A,R,74873,Methyl Chloride,0.01466592,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2104001000,A,R,85018,Phenanthrene,0,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2302002200,A,R,123386,Propionaldehyde,4.451,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2103007000,A,R,PM10-PRI,PM10 Primary (Filt + Cond),0.000543144,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2810060200,A,R,7647010,Hydrochloric Acid,0.757514,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2461021000,A,R,91203,Naphthalene,82.3076,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2104006000,A,R,18540299,Chromium (VI),0.003335512,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2805030008,A,R,PM25-FIL,PM2.5 Filterable,0.0000610168,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2102011000,A,R,50000,Formaldehyde,0.0000940888,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2810050000,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0.00110291013,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2401040000,A,R,108101,Methyl Isobutyl Ketone,7.66014,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2102008000,A,R,91587,2-Chloronaphthalene,0.000058478,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2103001000,A,R,85018,Phenanthrene,0,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2104002000,A,R,98862,Acetophenone,0.0000599532,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2801600000,A,R,PM-CON,PM Condensible,0,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2501012014,A,R,91203,Naphthalene,0,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2460500000,A,R,79016,Trichloroethylene,0.547644,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2801500350,A,R,2381217,1-Methylpyrene,0.00944328,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2325000000,A,R,OC,Organic Carbon portion of PM2.5-PRI,0,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2460600000,A,R,79107,Acrylic Acid,0.00001574978,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2805018000,A,R,OC,Organic Carbon portion of PM2.5-PRI,0.0465917991,TON,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2103008000,A,R,95476,o-Xylene,0.01314574,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2103008000,A,R,108952,Phenol,0.0268172,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2630020000,A,R,121697,"N,N-Dimethylaniline",0.0369438,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2810025000,A,R,91576,2-Methylnaphthalene,0.1878792,LB,2014NEIV2
+,,Shoshone-Bannock Tribes of the Fort Hall Reservation of Idaho,NP,,2810025000,A,R,71432,Benzene,19.7893,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2102011000,A,R,129000,Pyrene,0.0000000308054,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805008200,A,R,PM10-PRI,PM10 Primary (Filt + Cond),0,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805009300,A,R,7783064,Hydrogen Sulfide,0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2810060200,A,R,207089,Benzo[k]Fluoranthene,0.000000049292,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2104011000,A,R,191242,"Benzo[g,h,i,]Perylene",0.000000796552,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2104011000,A,R,SO4,Sulfate Portion of PM2.5-PRI,0.0000011134775,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2104002000,A,R,80626,Methyl Methacrylate,0.0000751544,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2460800000,A,R,100414,Ethyl Benzene,9.02612,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2103007000,A,R,129000,Pyrene,0.0000149831,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805007100,A,R,PM10-FIL,PM10 Filterable,0.00564783,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2102005000,A,R,56832736,Benzofluoranthenes,0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805010300,A,R,75150,Carbon Disulfide,0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805010300,A,R,PM25-FIL,PM2.5 Filterable,0,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805010300,A,R,108101,Methyl Isobutyl Ketone,0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805019300,A,R,PM10-FIL,PM10 Filterable,0,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2501011014,A,R,540841,"2,2,4-Trimethylpentane",0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2501011014,A,R,VOC,Volatile Organic Compounds,0,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2102002000,A,R,71432,Benzene,0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805010100,A,R,71432,Benzene,0.00070605841326996,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2102004002,A,R,50328,Benzo[a]Pyrene,0.0001885934,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2102004002,A,R,PM10-FIL,PM10 Filterable,0.05,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2104008330,A,R,120127,Anthracene,0.1751196,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2104008220,A,R,50328,Benzo[a]Pyrene,0.06346,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2104008220,A,R,PM25-FIL,PM2.5 Filterable,0.6,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805019100,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,0,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805021200,A,R,108883,Toluene,0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2104008210,A,R,203338,Benzo(a)Fluoranthene,0.0514152,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2401001000,A,R,108883,Toluene,2031.2,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2401200000,A,R,VOC,Volatile Organic Compounds,0.0208295,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2801500170,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),85.05,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2104008700,A,R,PM10-FIL,PM10 Filterable,0.84,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2104008230,A,R,208968,Acenaphthylene,0.754064,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2103002000,A,R,92524,Biphenyl,0.00001341484,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2104008230,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0.012297483,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2401020000,A,R,98828,Cumene,0.941742,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2801500500,A,R,50000,Formaldehyde,0.0446072,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2801600000,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0.00000737216116,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805008300,A,R,1319773,Cresol/Cresylic Acid (Mixed Isomers),0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805008300,A,R,VOC,Volatile Organic Compounds,0,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2801500320,A,R,56832736,Benzofluoranthenes,0.01527502,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805025000,A,R,75070,Acetaldehyde,0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805023300,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805023300,A,R,108883,Toluene,0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2311020000,A,R,SO4,Sulfate Portion of PM2.5-PRI,0.01721265,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2302002200,A,R,108883,Toluene,17.3301,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2103004001,A,R,56832736,Benzofluoranthenes,0.0000031624,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2103004001,A,R,PM-CON,PM Condensible,0.00137897,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2801500430,A,R,218019,Chrysene,0.0000940138,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2103008000,A,R,CO,Carbon Monoxide,0.238237,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2103008000,A,R,26601649,Hexachlorobiphenyl,0.000000436768,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2401080000,A,R,1330207,Xylenes (Mixed Isomers),2.43886,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2610030000,A,R,NO3,Nitrate portion of PM2.5-PRI,0.01228094,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2610030000,A,R,7647010,Hydrochloric Acid,114.5414,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2810025000,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,0.090168914313,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2810025000,A,R,NOX,Nitrogen Oxides,0.120667,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2810025000,A,R,110543,Hexane,0.921246840713234,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805023100,A,R,1330207,Xylenes (Mixed Isomers),0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2302003100,A,R,83329,Acenaphthene,0.00942096,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2302003100,A,R,86737,Fluorene,0.0450214,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805030007,A,R,OC,Organic Carbon portion of PM2.5-PRI,0.001612361382,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805030007,A,R,67561,Methanol,0,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2805047100,A,R,71432,Benzene,0.1438283,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2302002100,A,R,50000,Formaldehyde,5.4131,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2501060052,A,R,71432,Benzene,382.27,LB,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2801500261,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,73.9566872,TON,2014NEIV2
+,,"Coeur dAlene Tribe of the Coeur dAlene Reservation, Idaho",NP,,2501011011,A,R,71432,Benzene,6.28442,LB,2014NEIV2
+,,"Northern Cheyenne Tribe of the Northern Cheyenne Indian Reservation, Montana",NP,,2294000000,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),16.036,TON,2014NEIV2
+,,"Northern Cheyenne Tribe of the Northern Cheyenne Indian Reservation, Montana",NP,,2103008000,A,R,832699,1-Methylphenanthrene,0.00926856168,LB,2014NEIV2
+,,"Northern Cheyenne Tribe of the Northern Cheyenne Indian Reservation, Montana",NP,,2103007000,A,R,SO4,Sulfate Portion of PM2.5-PRI,0.000943,TON,2014NEIV2
+,,"Northern Cheyenne Tribe of the Northern Cheyenne Indian Reservation, Montana",NP,,2103004000,A,R,208968,Acenaphthylene,0.0000118309859,LB,2014NEIV2
+,,"Northern Cheyenne Tribe of the Northern Cheyenne Indian Reservation, Montana",NP,,2104008310,A,R,50328,Benzo[a]Pyrene,1.30548496732047,LB,2014NEIV2
+,,"Northern Cheyenne Tribe of the Northern Cheyenne Indian Reservation, Montana",NP,,2104008310,A,R,71432,Benzene,1020.17333333333,LB,2014NEIV2
+,,"Northern Cheyenne Tribe of the Northern Cheyenne Indian Reservation, Montana",NP,,2104008310,A,R,PM-CON,PM Condensible,0.4,TON,2014NEIV2
+,,"Northern Cheyenne Tribe of the Northern Cheyenne Indian Reservation, Montana",NP,,2610030000,A,R,106467,"1,4-Dichlorobenzene",0.0359763086540064,LB,2014NEIV2
+,,"Northern Cheyenne Tribe of the Northern Cheyenne Indian Reservation, Montana",NP,,2610000300,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,0.162685402,TON,2014NEIV2
+,,Sac & Fox Nation of Missouri in Kansas and Nebraska,NP,,2610030000,A,R,208968,Acenaphthylene,0.36612,LB,2014NEIV2
+,,Sac & Fox Nation of Missouri in Kansas and Nebraska,NP,,2104007000,A,R,91203,Naphthalene,0.00193196,LB,2014NEIV2
+,,Sac & Fox Nation of Missouri in Kansas and Nebraska,NP,,2104008100,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0.01737612,TON,2014NEIV2
+,,Sac & Fox Nation of Missouri in Kansas and Nebraska,NP,,2104008100,A,R,PM10-FIL,PM10 Filterable,0.29,TON,2014NEIV2
+,,"Assiniboine and Sioux Tribes of the Fort Peck Indian Reservation, Montana",NP,,2104007000,A,R,NO3,Nitrate portion of PM2.5-PRI,0.000682,TON,2014NEIV2
+,,"Assiniboine and Sioux Tribes of the Fort Peck Indian Reservation, Montana",NP,,2801000008,A,R,EC,Elemental Carbon portion of PM2.5-PRI,0.000014,TON,2014NEIV2
+,,"Assiniboine and Sioux Tribes of the Fort Peck Indian Reservation, Montana",NP,,2285002006,A,R,SO4,Sulfate Portion of PM2.5-PRI,0.134516165,TON,2014NEIV2
+,,"Assiniboine and Sioux Tribes of the Fort Peck Indian Reservation, Montana",NP,,2285002006,A,R,1330207,Xylenes (Mixed Isomers),729.58,LB,2014NEIV2
+,,"Assiniboine and Sioux Tribes of the Fort Peck Indian Reservation, Montana",NP,,2104006000,A,R,110543,Hexane,391.673,LB,2014NEIV2
+,,"Assiniboine and Sioux Tribes of the Fort Peck Indian Reservation, Montana",NP,,2104006000,A,R,75070,Acetaldehyde,0.00297019041890584,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2102008000,A,R,107062,Ethylene Dichloride,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2102008000,A,R,56235,Carbon Tetrachloride,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2401045000,A,R,171,Glycol Ethers,0.9781,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103004001,A,R,NOX,Nitrogen Oxides,0.000348939,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103004001,A,R,PM25-FIL,PM2.5 Filterable,0.0000137301,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008330,A,R,NO3,Nitrate portion of PM2.5-PRI,0.000014933468,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805009100,A,R,OC,Organic Carbon portion of PM2.5-PRI,0.00001420706586,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2460200000,A,R,100414,Ethyl Benzene,0.000345706,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008230,A,R,7439976,Mercury,0.000001990448,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2810060200,A,R,18540299,Chromium (VI),0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2620030000,A,R,CO,Carbon Monoxide,0.00339818,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008320,A,R,56553,Benz[a]Anthracene,0.001318052,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008700,A,R,PM10-PRI,PM10 Primary (Filt + Cond),0.0171352,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2801500181,A,R,106990,"1,3-Butadiene",24.6926,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2801500181,A,R,CO,Carbon Monoxide,3.304,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805040000,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,0.000000993306867,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2102011000,A,R,208968,Acenaphthylene,1.549936E-11,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2801500430,A,R,193395,"Indeno[1,2,3-c,d]Pyrene",0.000020445,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104009000,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2401005000,A,R,110543,Hexane,11.4942,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103006000,A,R,71432,Benzene,0.001968038,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2801500420,A,R,207089,Benzo[k]Fluoranthene,0.0001116288,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2610030000,A,R,91203,Naphthalene,0.1820514,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2104008220,A,R,PM25-FIL,PM2.5 Filterable,0.01,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2810060100,A,R,VOC,Volatile Organic Compounds,0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2630020000,A,R,121142,"2,4-Dinitrotoluene",0.0000890942,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2630020000,A,R,87683,Hexachlorobutadiene,0.000001350306,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2805010200,A,R,NH3,Ammonia,0.0000354034,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103005000,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103002000,A,R,7440360,Antimony,0.00000241358,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103002000,A,R,208968,Acenaphthylene,0.000000033522,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103002000,A,R,117817,Bis(2-Ethylhexyl)Phthalate,0.00000978842,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2102006000,A,R,79005,"1,1,2-Trichloroethane",0.00001720654,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2102002000,A,R,PMFINE,Remaining PMFINE portion of PM2.5-PRI,0,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2401030000,A,R,100414,Ethyl Benzene,0,LB,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2103007000,A,R,PM25-PRI,PM2.5 Primary (Filt + Cond),0.0000111507,TON,2014NEIV2
+,,Kootenai Tribe of Idaho,NP,,2801500320,A,R,2381217,1-Methylpyrene,0.000425164,LB,2014NEIV2
