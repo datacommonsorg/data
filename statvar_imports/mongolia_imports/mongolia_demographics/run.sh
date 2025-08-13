@@ -15,7 +15,7 @@ python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --inp
 
 python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=$SCRIPT_PATH/input_files/total_population_by_region_and_urban_rural.xlsx --pv_map=$SCRIPT_PATH/total_population_by_region_and_urban_rural_pvmap.csv --config_file=$SCRIPT_PATH/mongolia_metadata.csv --output_path=$SCRIPT_PATH/output_files/total_population_by_region_and_urban_rural_output --places_resolved_csv=$SCRIPT_PATH/mongolia_place_resolver.csv 
 
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=$SCRIPT_PATH/input_files/total_population_by_sex_and_urban_rural.xlsx --pv_map=$SCRIPT_PATH/total_population_by_sex_and_urban_rural_pvmap.csv --config_file=$SCRIPT_PATH/mongolia_metadata.csv --output_path=$SCRIPT_PATH/output_files/total_population_by_sex_and_urban_rural_output 
+python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=$SCRIPT_PATH/input_files/total_population_by_sex_and_urban_rural.xlsx --pv_map=$SCRIPT_PATH/total_population_by_sex_and_urban_rural_pvmap.csv --config_file=$SCRIPT_PATH/total_population_by_sex_and_urban_rural_metadata.csv --output_path=$SCRIPT_PATH/output_files/total_population_by_sex_and_urban_rural_output 
 
 echo "All processing steps completed successfully."
 exit 0
