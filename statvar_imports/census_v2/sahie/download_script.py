@@ -54,7 +54,8 @@ def clean_csv_file(file_path):
             logging.info(f"Successfully cleaned file: {file_path}")
 
     except Exception as e:
-        logging.error(f"Error cleaning file {file_path}: {e}")
+        logging.fatal(f"Error cleaning file {file_path}: {e}")
+        raise RuntimeError(f"Failed to clean file {file_path}") from e
 
 
 def main(_):
@@ -73,9 +74,13 @@ def main(_):
         sys.exit(1)
 
     BASE_URL = configs['CensusSAHIE']['source_url']
-    OUTPUT_DIRECTORY = "input_files"
+    OUTPUT_DIRECTORY = os.path.join("gcs_output", "input_files")
     START_YEAR = 2018
     CURRENT_YEAR = datetime.datetime.now().year
+
+    # Clean up previous runs and create the output directory
+    if os.path.exists(OUTPUT_DIRECTORY):
+        shutil.rmtree(OUTPUT_DIRECTORY)
     os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)
     logging.info(f"Base output directory '{OUTPUT_DIRECTORY}' ensured to exist.")
 
@@ -104,7 +109,7 @@ def main(_):
                 else:
                     logging.warning(f"Could not find expected CSV file to clean: {unzipped_csv_path}")
     except Exception as e:
-        logging.fatal(e)
+        logging.fatal(f"An unexpected error occurred during the download and processing loop: {e}")
         sys.exit(1)
     finally:
         for item in os.listdir(OUTPUT_DIRECTORY):
