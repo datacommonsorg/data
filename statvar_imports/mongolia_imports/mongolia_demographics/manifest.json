@@ -5,7 +5,7 @@
       "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.1212.mn/en/statcate",
       "provenance_description": "Data related to the Mongolia's population and households at country level",
-      "scripts": ["run.sh"] ,
+      "scripts": ["run.sh"],
       "source_files": [
         "input_files/*.xlsx"
       ],
