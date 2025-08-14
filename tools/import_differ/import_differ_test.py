@@ -30,25 +30,29 @@ class TestImportDiffer(unittest.TestCase):
   '''
 
     def test_diff_analysis(self):
-        current_data = os.path.join(module_dir, 'test', 'current.mcf')
-        previous_data = os.path.join(module_dir, 'test', 'previous.mcf')
+        current_data = os.path.join(module_dir, 'test', 'current', '*.mcf')
+        previous_data = os.path.join(module_dir, 'test', 'previous', '*.mcf')
         output_location = os.path.join(module_dir)
         self.differ = import_differ.ImportDiffer(current_data, previous_data,
-                                                 output_location, 'differ.jar',
-                                                 'project-1', 'test', 'mcf',
-                                                 'native')
-        current_df = differ_utils.load_mcf_file(self.differ.current_data)
-        previous_df = differ_utils.load_mcf_file(self.differ.previous_data)
-        diff = self.differ.generate_diff(previous_df, current_df)
-        summary, result = self.differ.point_analysis(diff)
-        result = pd.read_csv(
-            os.path.join(module_dir, 'test', 'point_analysis_summary.csv'))
-        assert_frame_equal(summary, result)
+                                                 output_location)
+        current_mcf = differ_utils.load_data(self.differ.current_data, '.')
+        previous_mcf = differ_utils.load_data(self.differ.previous_data, '.')
+        current_obs_df, current_schema_df = self.differ.split_data(current_mcf)
+        previous_obs_df, previous_schema_df = self.differ.split_data(
+            previous_mcf)
+        obs_diff = self.differ.generate_diff(previous_obs_df, current_obs_df)
+        summary, _ = self.differ.observation_diff_analysis(obs_diff)
+        expected_summary = pd.read_csv(
+            os.path.join(module_dir, 'test', 'results', 'obs_diff_summary.csv'))
+        assert_frame_equal(summary, expected_summary)
 
-        summary, result = self.differ.series_analysis(diff)
-        result = pd.read_csv(
-            os.path.join(module_dir, 'test', 'series_analysis_summary.csv'))
-        assert_frame_equal(summary, result)
+        schema_diff = self.differ.generate_diff(previous_schema_df,
+                                                current_schema_df)
+        summary = self.differ.schema_diff_analysis(schema_diff)
+        expected_summary = pd.read_csv(
+            os.path.join(module_dir, 'test', 'results',
+                         'schema_diff_summary.csv'))
+        assert_frame_equal(summary, expected_summary)
 
 
 if __name__ == '__main__':
