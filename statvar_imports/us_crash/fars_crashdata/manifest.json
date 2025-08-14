@@ -22,8 +22,8 @@
         ],
         "cron_schedule": "0 05 * * 2",
          "resource_limits": {
-                "cpu": "8",
-                "memory": "32G"
+                "cpu": 8,
+                "memory": 32
             },
             "user_script_timeout": 86400
       }
