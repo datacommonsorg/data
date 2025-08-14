@@ -20,6 +20,8 @@ Manually download the required data files.
 
 Place all downloaded files into the `input_files` folder.
 
+This import will comes under semi automatic auto refresh.
+
 -----
 
 #### Step 2: Process the Files
