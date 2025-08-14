@@ -10,7 +10,6 @@
           "parse_air_quality.py CDC_PM25CensusTract"
         ],
         "source_files": ["input/*.gz"],
-        "user_script_timeout": 259200,
         "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
         "import_inputs": [
           {
@@ -43,7 +42,6 @@
           "parse_air_quality.py CDC_OzoneCensusTract"
         ],
         "source_files": ["input/*.gz"],
-        "user_script_timeout": 259200,
         "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
         "import_inputs": [
           {

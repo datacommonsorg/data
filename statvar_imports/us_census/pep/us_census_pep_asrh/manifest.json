@@ -28,12 +28,7 @@
       "source_files": [
           "gcs_output/input_files/*/*"
       ],
-       "resource_limits": {
-           "cpu": "8",
-           "memory": "32G"
-       },
-      "cron_schedule": "0 05 * * 1",
-      "timeout": 18000
+      "cron_schedule": "0 05 * * 1"
     }
   ],
       "config_override": {

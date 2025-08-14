@@ -89,7 +89,7 @@ def run_import_job(absolute_import_name: str, import_config: str):
     result = executor.execute_imports_on_update(absolute_import_name)
     logging.info(result)
     elapsed_time_secs = int(time.time() - start_time)
-    message = (f"Cloud Run Job [{CLOUD_RUN_JOB_NAME}] completed with status= "
+    message = (f"Import Job [{absolute_import_name}] completed with status= "
                f"[{result.status}] in [{elapsed_time_secs}] seconds.)")
 
     log_metric(AUTO_IMPORT_JOB_STATUS_LOG_TYPE,
