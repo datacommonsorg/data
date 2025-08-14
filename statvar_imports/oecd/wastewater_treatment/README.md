@@ -6,14 +6,11 @@ This project processes and imports wastewater treatment data from the OECD (Orga
 
 Import Type: Script-driven download via download.py (or similar script that places data in source_files).
 
-Source Data Availability: [MISSING: Please specify data availability (e.g., years, frequency, any specific notes on update cadence). Example: "Data is available from YYYY to latest, updated annually."]
+Source Data Availability: Data is available from 1970 to the latest year, including monthly data for each year and the latest month.
 
-Type of Place: [MISSING: Please specify the types of geographical entities covered (e.g., Country, State, City, OECD countries).]
+Type of Place: Country, State, and Administrative Area (OECD countries).
 
-StatVars: [MISSING: Please describe the primary statistical variables related to wastewater treatment (e.g., "volume of treated wastewater", "population connected to treatment facilities").]
-
-Notes:
-[MISSING: Please provide any specific notes about this dataset, its scope, methodology, or any unique characteristics.]
+StatVars: This set of StatVars provides a detailed breakdown of how populations manage their wastewater, including the percentage of people connected to public sewerage and the level of treatment their wastewater receives. It also accounts for the portion of the population that uses independent treatment methods, such as septic tanks.
 
 **2. Preprocessing Steps**
 Before ingestion, the following preprocessing is done:
@@ -45,8 +42,6 @@ Linting is performed using the DataCommons import tool JAR.
 `Full Automation`
 
 ***Steps:***
-
-[MISSING: Please describe the specific steps for full automation. Example: "The import job runs automatically in the cloud every two weeks (e.g., based on a cron schedule 0 10 1,15 * *). It first executes the download script to retrieve the latest data from the OECD SDMX API endpoint. Subsequently, the stat_var_processor.pyprocesses the raw data, and the generated output files are then automatically prepared for ingestion via a dedicated pipeline."]
 
 Note: This pipeline is fully automated.
 
