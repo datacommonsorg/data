@@ -97,7 +97,7 @@ def create_or_update_import_schedule(absolute_import_name: str,
         raise KeyError(
             f'cron_schedule not found in manifest for {absolute_import_name}')
     # Default resources (disk/mem in Gi).
-    resources = {'cpu': 4, 'memory': 32, 'disk': 100}
+    resources = {'cpu': 8, 'memory': 32, 'disk': 100}
     timeout = config.user_script_timeout
     if 'user_script_timeout' in import_spec:
         timeout = import_spec['user_script_timeout']

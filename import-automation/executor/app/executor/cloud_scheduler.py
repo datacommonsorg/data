@@ -56,14 +56,14 @@ def _base_job_request(absolute_import_name, schedule: str):
 
 
 def cloud_batch_job_request(absolute_import_name, schedule,
-                            cloud_run_job_url: str,
+                            cloud_batch_job_url: str,
                             json_encoded_job_body: bytes,
                             cloud_run_service_account: str) -> Dict:
     """Cloud Scheduler request that targets jobs in CLOUD_BATCH."""
     job = _base_job_request(absolute_import_name, schedule)
     job['name'] = absolute_import_name.split(':')[1]
     job['http_target'] = {
-        'uri': f'{cloud_run_job_url}',
+        'uri': f'{cloud_batch_job_url}',
         'http_method': 'POST',
         'headers': {
             'Content-Type': 'application/json',

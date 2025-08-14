@@ -34,6 +34,7 @@ REPO_DIR = os.path.dirname(
     os.path.dirname(
         os.path.dirname(
             os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
+sys.path.append(REPO_DIR)
 sys.path.append(os.path.join(REPO_DIR, 'tools'))
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
@@ -409,20 +410,6 @@ class ImportExecutor:
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
-
-            if not self.config.skip_gcs_upload:
-                # Upload output to GCS.
-                gcs_output = f'{relative_import_dir}/{version}/{import_prefix}/validation'
-                logging.info(
-                    f'Uploading genmcf output to GCS path: {gcs_output}')
-                for filename in os.listdir(output_path):
-                    filepath = os.path.join(output_path, filename)
-                    if os.path.isfile(filepath):
-                        dest = f'{gcs_output}/{filename}'
-                        self.uploader.upload_file(
-                            src=filepath,
-                            dest=dest,
-                        )
         return import_prefix_list
 
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
@@ -465,7 +452,7 @@ class ImportExecutor:
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
             differ_output = os.path.join(validation_output_path,
-                                         'point_analysis_summary.csv')
+                                         'obs_diff_summary.csv')
 
             # Invoke differ and validation scripts.
             differ_output_file = ''
@@ -475,11 +462,10 @@ class ImportExecutor:
                 differ = ImportDiffer(current_data=current_data_path,
                                       previous_data=previous_data_path,
                                       output_location=validation_output_path,
-                                      differ_tool='',
                                       project_id=self.config.gcp_project_id,
                                       job_name=differ_job_name,
                                       file_format='mcf',
-                                      runner_mode='native')
+                                      runner_mode='local')
                 differ.run_differ()
                 differ_output_file = differ_output
             else:
@@ -653,7 +639,13 @@ class ImportExecutor:
                     'Skipping import validations as per import config.')
 
             if self.config.ignore_validation_status or validation_status:
-                self._update_latest_version(version, output_dir, import_spec)
+                if not self.config.skip_gcs_upload:
+                    self._update_latest_version(version, output_dir,
+                                                import_spec)
+                else:
+                    logging.warning(
+                        "Skipping latest version update due to skip_gcs_upload."
+                    )
             else:
                 logging.error(
                     "Skipping latest version update due to validation failure.")
@@ -692,6 +684,7 @@ class ImportExecutor:
     Data files are uploaded to <output_dir>/<version>/, where <version> is a
     time string and is written to <output_dir>/<storage_version_filename>
     after the uploads are complete.
+    Raises a RuntimeError exception if the script output files are not found.
 
     Args:
         import_dir: Absolute path to the directory with the manifest, as a
@@ -704,22 +697,30 @@ class ImportExecutor:
     """
         uploaded = import_service.ImportInputs()
         import_inputs = import_spec.get('import_inputs', [])
+        errors = []
         for import_input in import_inputs:
             for input_type in self.config.import_input_types:
                 path = import_input.get(input_type)
                 if not path:
                     continue
-                for file in file_util.file_get_matching(
-                        os.path.join(import_dir, path)):
-                    if file:
-                        dest = f'{output_dir}/{version}/{os.path.basename(file)}'
-                        self._upload_file_helper(
-                            src=file,
-                            dest=dest,
-                        )
-                uploaded_dest = f'{output_dir}/{version}/{os.path.basename(path)}'
-                setattr(uploaded, input_type, uploaded_dest)
-
+                import_file_path = os.path.join(import_dir, path)
+                import_files = file_util.file_get_matching(import_file_path)
+                if import_files:
+                    for file in import_files:
+                        if file:
+                            dest = f'{output_dir}/{version}/{os.path.basename(file)}'
+                            self._upload_file_helper(
+                                src=file,
+                                dest=dest,
+                            )
+                    uploaded_dest = f'{output_dir}/{version}/{os.path.basename(path)}'
+                    setattr(uploaded, input_type, uploaded_dest)
+                elif not glob.has_magic(path):
+                    errors.append(
+                        f'Missing file {input_type}:{import_file_path}')
+                else:
+                    logging.warning(
+                        f'Missing output file: {input_type}:{import_file_path}')
         # Upload any files downloaded from source
         source_files = [
             os.path.join(import_dir, file)
@@ -733,6 +734,10 @@ class ImportExecutor:
                 dest=dest,
             )
 
+        if errors:
+            logging.fatal(f'Missing user_script outputs: {errors}')
+            raise RuntimeError(
+                f'Import job failed due to missing output files {errors}')
         return uploaded
 
     def _upload_file_helper(self, src: str, dest: str) -> None:
