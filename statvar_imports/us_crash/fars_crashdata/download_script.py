@@ -20,6 +20,7 @@ import requests
 import shutil
 import sys
 import zipfile
+import datetime
 
 from absl import app
 from absl import logging
@@ -84,22 +85,29 @@ def download_and_extract_data(url, input_folder, year):
 
 def main(argv):
 
-    year = download_config.start_year 
-    while True:
+    year = download_config.start_year
+    current_year = datetime.datetime.now().year  
+    while year <= current_year:
         url = download_config.base_url.format(year=year)
         logging.info(f"Attempting to download data for {year} from: {url}")
 
-        expected_output_filepath = os.path.join(GCS_OUTPUT_DIR, download_config.input_folder, f"ACCIDENT_{year}.csv")
+        expected_output_filepath = os.path.join(
+            GCS_OUTPUT_DIR, download_config.input_folder, f"ACCIDENT_{year}.csv")
         if os.path.exists(expected_output_filepath):
-            logging.info(f"ACCIDENT_{year}.csv already exists. Skipping download for {year}.")
+            logging.info(
+                f"ACCIDENT_{year}.csv already exists. Skipping download for {year}."
+            )
 
-        status = download_and_extract_data(url, download_config.input_folder, year)
+        status = download_and_extract_data(url, download_config.input_folder,
+                                           year)
 
         if status == "no_data_at_url":
-            logging.info(f"No data found at URL for year {year}. This indicates the end of available data")
-            break 
+            logging.info(
+                f"No data found at URL for year {year}. This indicates the end of available data"
+            )
+            break
 
-        year += 1 
+        year += 1
 
     logging.info("Download and extraction process complete.")
 
