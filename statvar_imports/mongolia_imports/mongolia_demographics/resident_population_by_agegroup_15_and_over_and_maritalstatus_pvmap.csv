@@ -1,8 +1,4 @@
 key,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5
-Age group:15-19,#ignore,skip,,,,,,,,
-Age group:70+,#ignore,skip,,,,,,,,
-Male,gender,Male,,,,,,,,
-Female,gender,Female,,,,,,,,
 Legally registered/Unregistered married,maritalStatus,NowMarried,,,,,,,,
 Divorced/Separated,maritalStatus,DivorcedOrSeparated,,,,,,,,
 Widowed,maritalStatus,Widowed,,,,,,,,
@@ -14,8 +10,10 @@ Single,maritalStatus,Unmarried,,,,,,,,
 2000,observationDate,2000,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
 2010,observationDate,2010,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
 2015,observationDate,2015,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
-2020,observationDate,2020,value,{Number},observationAbout,country/MNG,populationType,Person,measuredProperty,count
-Age group:Total,age,[15 - Years],,,,,,,,
+,,,,,,,,,,
+Age Group:Population aged 15 and over-Total,age,[15 - Years],,,,,,,,
+Age Group:15-19,#ignore,skip,,,,,,,,
+Age Group:70+,#ignore,skip,,,,,,,,
 ,,,,,,,,,,
 20-29,age,[20 29 Years],,,,,,,,
 30-39,age,[30 39 Years],,,,,,,,

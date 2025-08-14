@@ -7,7 +7,7 @@
       "provenance_description": "Data related to the Mongolia's population and households at country level",
       "scripts": ["run.sh"],
       "source_files": [
-        "input_files/*.xlsx"
+        "input_files/*.csv"
       ],
       "import_inputs": [
         {

@@ -1,6 +1,6 @@
 key,p1,v1,p2,v2,p3,v3
 Aimag,observationAbout,{Data},populationType,Person,measuredProperty,count
-(5) Ulaanbaatar,#ignore,skip,,,,
+,,,,,,
 Total,#ignore,skip,,,,
 1990,observationDate,1990,value,{Number},,
 1991,observationDate,1991,value,{Number},,
