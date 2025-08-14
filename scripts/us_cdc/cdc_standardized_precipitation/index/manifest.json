@@ -8,7 +8,7 @@
       "provenance_description": "Environmental Health Toxicology - Standardized Precipitation Index",
       "scripts": [
         "../download_script.py --import_name=CDC_StandardizedPrecipitationIndex --config_file=../import_configs.json",
-        "../parse_precipitation_index.py CDC_StandardizedPrecipitationIndex_input.csv ../output/CDC_StandardizedPrecipitationIndex_input.csv"
+        "../parse_precipitation_index.py CDC_StandardizedPrecipitationIndex_input.csv output/CDC_StandardizedPrecipitationIndex_output.csv"
       ],
       "import_inputs": [
         {

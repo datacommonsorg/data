@@ -117,8 +117,6 @@ class ExecutorConfig:
     local_repo_dir: str = '/data'
     # Location of the import tool jar.
     import_tool_path: str = '/import-tool.jar'
-    # Location of the differ tool jar.
-    differ_tool_path: str = '/differ-tool.jar'
     # Cloud workflow id.
     cloud_workflow_id: str = 'import-automation-workflow'
     # Maximum time a user script can run for in seconds.
@@ -161,7 +159,7 @@ class ExecutorConfig:
     importer_delete_timeout: float = 10 * 60
     # Executor type depends on where the executor runs
     # Suppports one of: "GKE", "GAE", "CLOUD_RUN", "CLOUD_BATCH"
-    executor_type: str = 'CLOUD_RUN'
+    executor_type: str = 'CLOUD_BATCH'
 
     def get_data_refresh_config(self):
         """Returns the config used for Cloud Scheduler data refresh jobs."""
