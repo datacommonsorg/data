@@ -279,8 +279,6 @@ function run_import_executor {
     mkdir -p $TMP_DIR/import-tool
     run_cmd wget "https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar" \
       -O $TMP_DIR/import-tool/import-tool.jar
-    run_cmd wget "https://storage.googleapis.com/datacommons_public/import_tools/differ-tool.jar" \
-      -O $TMP_DIR/import-tool/differ-tool.jar
   fi
 
   run_cmd $SCRIPT_DIR/run_local_executor.sh \
