@@ -6,7 +6,7 @@
 
 - Import Type: Fully Autorefresh
 
-- Data Availability: 2020 to 2025
+- Data Availability: 2022 to 2025
 
 - Release Frequency: P3M, which means every 3 months (quarterly).
 
