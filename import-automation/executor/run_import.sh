@@ -427,8 +427,8 @@ function get_cloud_batch_config {
           "cpuMilli": "${cpu_milli}",
           "memoryMib": "${memory_mib}"
         },
-        "maxRetryCount": 2,
-        "maxRunDuration": "21600s"
+        "maxRetryCount": 1,
+        "maxRunDuration": "36000s"
       },
       "taskCount": 1,
       "parallelism": 1
