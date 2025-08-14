@@ -42,7 +42,7 @@ Linting is performed using the DataCommons import tool JAR.
 
 
 ### 3. Autorefresh Type
-``Full Automation`
+`Full Automation`
 
 ***Steps:***
 
