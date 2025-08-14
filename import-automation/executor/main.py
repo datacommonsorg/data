@@ -112,6 +112,8 @@ def main(_):
     if FLAGS.enable_cloud_logging or running_on_cloudrun_result:
         configure_cloud_logging()
         logging.info("Google Cloud Logging configured.")
+    logging.info(
+        f"Running import {FLAGS.import_name} with config:{FLAGS.import_config}")
     return run_import_job(FLAGS.import_name, FLAGS.import_config)
 
 
