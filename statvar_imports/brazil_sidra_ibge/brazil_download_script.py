@@ -151,6 +151,19 @@ def get_url_slug(place_name):
     nfkd_form = unicodedata.normalize('NFKD', slug)
     return "".join([c for c in nfkd_form if not unicodedata.combining(c)])
 
+def get_place_select_element(driver):
+    """
+    Waits for and returns the Select object for the place dropdown.
+    """
+    try:
+        select_element = WebDriverWait(driver, 20).until(
+            EC.presence_of_element_located((By.ID, "codigolist-pnadct"))
+        )
+        return Select(select_element)
+    except TimeoutException:
+        logging.fatal("Timeout while waiting for the place selection dropdown. Exiting script.")
+        raise RuntimeError("Could not find the 'codigolist-pnadct' element.")
+
 def main(argv):
     """Main function to orchestrate the scraping and downloading."""
     del argv # Unused.
@@ -166,10 +179,8 @@ def main(argv):
         driver.get(BASE_URL)
         logging.info(f"Navigated to base URL: {BASE_URL}")
 
-        select_element = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located((By.ID, "codigolist-pnadct"))
-        )
-        select = Select(select_element)
+        # Use the new helper function
+        select = get_place_select_element(driver)
         options_text = [option.text.strip() for option in select.options]
 
         logging.info("\n Processing: Brasil")
@@ -191,11 +202,9 @@ def main(argv):
             logging.info(f"\n Processing: {place_name}")
 
             try:
-                select_element = WebDriverWait(driver, 15).until(
-                    EC.presence_of_element_located((By.ID, "codigolist-pnadct"))
-                )
-                select = Select(select_element)
-
+                # Use the new helper function again
+                select = get_place_select_element(driver)
+                
                 select.select_by_visible_text(place_name)
                 
                 place_slug = get_url_slug(place_name)
