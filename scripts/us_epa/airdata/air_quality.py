@@ -80,9 +80,18 @@ def get_camel_case(s):
     return result
 
 
+def get_county(state_code, county_code):
+    return 'dcid:geoId/' + state_code + county_code
+
+
 # Example: Ozone 8-hour 2015 -> Ozone_8hour_2015
 def get_pollutant_standard(s):
     return s.replace(' ', '_').replace('-', '')
+
+
+def remove_double_quotes(address_string):
+    """Removes all double-quote characters from a string."""
+    return address_string.replace('"', '')
 
 
 def create_csv(csv_file_path):
@@ -159,8 +168,11 @@ def write_csv(csv_file_path, reader):
                 'AQI_SV':
                     f'dcs:AirQualityIndex_AirPollutant_{suffix}',
                 'Address':
-                    observation['Address']
+                    remove_double_quotes(observation['Address'])
             }
+            if new_row['County'].startswith('dcid:geoId/80'):
+                print(f"Skipping row with State Code '80': {new_row['County']}")
+                continue  # Move to the next iteration of the for loop
             writer.writerow(new_row)
 
 
