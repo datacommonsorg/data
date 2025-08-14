@@ -276,8 +276,10 @@ def main():
     parser = argparse.ArgumentParser(description="Download BLS CPI data.")
     parser.add_argument("--timeout", type=int, default=60,
                         help="Timeout for file downloads in seconds (default: 60)")
+    parser.add_argument("--output_folder", type=str, default="input_data",
+                        help="The folder where the downloaded files will be stored.")
     args = parser.parse_args() 
-    output_base_folder = "input_data"
+    output_base_folder = args.output_folder
 
     cpi_u_folder = os.path.join(output_base_folder, "cpi-u")
     cpi_w_folder = os.path.join(output_base_folder, "cpi-w")

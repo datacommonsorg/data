@@ -19,13 +19,18 @@ Usage: python3 generate_csv.py
 '''
 import io
 import requests
-import frozendict
 import pandas as pd
 from absl import flags
 from absl import app
 from absl import logging
 from retry import retry
+# FIX: Monkey-patch for Python 3.10+ where collections.Mapping was moved to collections.abc
 
+import collections
+import collections.abc
+
+collections.Mapping = collections.abc.Mapping
+import frozendict
 import os
 from pathlib import Path
 '''Defining the retry_method which will accepts below parameters
