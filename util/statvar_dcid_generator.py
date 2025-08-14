@@ -279,8 +279,6 @@ _NAICS_MAP = {
         'DrinkingPlaces',
     '4523':
         'GeneralMerchandiseStoresWarehouseClubsAndSupercenters',
-    '4523':
-        'GeneralMerchandiseStoresWarehouseClubsAndSupercenters',
     '21112':
         'CrudePetroleumExtraction',
     '211120':
