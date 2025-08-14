@@ -6,7 +6,7 @@ description,Amount of water treated by waste water treatment
 start_date,1970
 end_date,2022
 release_frequency,
-process,"Go to the source url. Click on the download symbol that opens a dropdown. Select ""unfiltered data"" to download the data."
+process,"The data is downloaded automatically from the OECD SDMX API via a script."
 comments,
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor"
 header_rows,1
@@ -15,3 +15,4 @@ mapped_columns,14
 drop_statvars_without_svobs,0
 
 word_delimiter,""""""
+
