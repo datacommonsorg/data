@@ -18,10 +18,6 @@
           "cleaned_csv": "gcs_output/output/bq-results-20250423.csv"
         }
        ],
-       "resource_limits": {
-        "cpu": "8",
-        "memory": "32G"
-      },
       "cron_schedule": "0 9 5,25 * *"
     }
   ]

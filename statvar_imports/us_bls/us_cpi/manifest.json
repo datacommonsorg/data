@@ -1,0 +1,26 @@
+					{
+    "import_specifications": [
+      {
+        "import_name": "US_CPI",
+        "curator_emails": ["support@datacommons.org"],
+        "provenance_url": "https://www.bls.gov/cpi/tables/supplemental-files/",
+        "provenance_description": "Consumer Price Index by Category",
+        "scripts": ["../cpi_category/cpi_category_download.py --output_folder=../us_cpi/input_data",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_data/cpi-u/* --pv_map=us_cpi_pvmap.csv --config_file=us_cpi_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/cpi_u",
+        "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_data/cpi-w/* --pv_map=us_cpi_pvmap.csv --config_file=us_cpi_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output/cpi_w"
+        ],
+        "import_inputs": [
+          {
+            "template_mcf": "output/cpi_w.tmcf",
+            "cleaned_csv": "output/*.csv"
+          }
+        ],
+        "source_files": [
+          "input_data/*/*"
+        ],
+        "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+        "cron_schedule": "0 10 21 * *"
+      }
+    ]
+  }
+  
