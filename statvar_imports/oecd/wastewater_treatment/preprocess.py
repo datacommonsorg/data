@@ -22,14 +22,22 @@ def rename_target_file(base_path='.'):
         files_in_folder = os.listdir(target_folder)
         
         source_filename = None
-        for filename in files_in_folder:
-            if filename.lower().endswith('.csv'):
-                source_filename = filename
-                break
-        
-        if not source_filename:
-            logging.fatal(f"No CSV file found to rename in '{target_folder}'.")
+            csv_files = [
+            f for f in files_in_folder
+            if f.lower().endswith('.csv') and f != new_fixed_filename
+        ]
+
+        if not csv_files:
+            logging.fatal(f"No source CSV file found to rename in '{target_folder}'.")
             return
+
+        if len(csv_files) > 1:
+            logging.fatal(
+                f"Multiple source CSV files found in '{target_folder}': {csv_files}. Aborting to prevent renaming the wrong file."
+            )
+            return
+        
+        source_filename = csv_files[0]
 
         old_path = os.path.join(target_folder, source_filename)
         logging.info(f"Attempting to rename '{source_filename}' to '{new_fixed_filename}'...")
