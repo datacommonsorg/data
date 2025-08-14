@@ -134,7 +134,7 @@ class ExecutorConfig:
     # Invoke validations before upload.
     invoke_import_validation: bool = True
     # Ignore validation status during import.
-    ignore_validation_status: bool = True
+    ignore_validation_status: bool = False
     # Import validation config file path (relative to data repo).
     validation_config_file: str = 'tools/import_validation/validation_config.json'
     # Latest import version (overwrite)
