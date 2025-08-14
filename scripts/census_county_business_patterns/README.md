@@ -22,13 +22,18 @@ fully auto refresh
 
 # Script Execution Details
 First, run `main.py` to download the data.
-
+flags: data_start_year - this is the default flag which refers to the start year.
+       data_end_year - this is the default flag which refers to the current year.
+       output_dir - this is also the default flag which refers to the output directory for processed output from 'main.py' script.
 The `shard_input_csv.sh` script performs the following preprocessing steps:
 1.  Creates directories for shards, debug outputs, and final processed outputs.
 2.  Splits the large input CSV files into smaller shards of 500,000 rows each.
 3.  Processes the generated shards in parallel using the `stat_var_processor.py` script.
 4.  The processing script uses `censuscountybusinesspatterns_pvmap.csv` and `censuscountybusinesspatterns_metadata.csv` for mapping and metadata.
 5.  The final processed outputs are saved in the `gcs_output/output` directory.
+# Commands to run 
+1. python3 main.py
+2. ./shard_input_csv.sh
 
 #### Cleaned Data
 The cleaned data is generated in the `gcs_output/output` directory with filenames like `output_*.csv`.

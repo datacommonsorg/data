@@ -48,9 +48,6 @@ if not os.path.exists(_OUTPUT_DIR):
 
 flags.DEFINE_string('output_dir', _OUTPUT_DIR,
                     'Base directory to place the local output files.')
-flags.DEFINE_string('gcs_folder_path',
-                    'gs://unresolved_mcf/CensusCountyBusinessPatterns',
-                    'Input directory where config files downloaded.')
 # flags.DEFINE_string('year', '2021', 'YYYY to generate stats for.')
 flags.DEFINE_bool('test', False, 'Run in test mode.')
 
