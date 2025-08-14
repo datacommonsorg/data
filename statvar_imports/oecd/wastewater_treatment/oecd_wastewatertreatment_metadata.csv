@@ -13,4 +13,5 @@ header_rows,1
 mapped_rows,1
 mapped_columns,14
 drop_statvars_without_svobs,0
-word_delimeter,""""""
+
+word_delimiter,""""""
