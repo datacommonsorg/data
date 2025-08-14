@@ -410,20 +410,6 @@ class ImportExecutor:
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
-
-            if not self.config.skip_gcs_upload:
-                # Upload output to GCS.
-                gcs_output = f'{relative_import_dir}/{version}/{import_prefix}/validation'
-                logging.info(
-                    f'Uploading genmcf output to GCS path: {gcs_output}')
-                for filename in os.listdir(output_path):
-                    filepath = os.path.join(output_path, filename)
-                    if os.path.isfile(filepath):
-                        dest = f'{gcs_output}/{filename}'
-                        self.uploader.upload_file(
-                            src=filepath,
-                            dest=dest,
-                        )
         return import_prefix_list
 
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
@@ -466,7 +452,7 @@ class ImportExecutor:
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
             differ_output = os.path.join(validation_output_path,
-                                         'point_analysis_summary.csv')
+                                         'obs_diff_summary.csv')
 
             # Invoke differ and validation scripts.
             differ_output_file = ''
@@ -476,11 +462,10 @@ class ImportExecutor:
                 differ = ImportDiffer(current_data=current_data_path,
                                       previous_data=previous_data_path,
                                       output_location=validation_output_path,
-                                      differ_tool='',
                                       project_id=self.config.gcp_project_id,
                                       job_name=differ_job_name,
                                       file_format='mcf',
-                                      runner_mode='native')
+                                      runner_mode='local')
                 differ.run_differ()
                 differ_output_file = differ_output
             else:

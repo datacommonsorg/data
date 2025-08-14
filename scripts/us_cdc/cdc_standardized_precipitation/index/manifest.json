@@ -1,0 +1,23 @@
+{
+  "import_name": "CDC_StandardizedPrecipitationIndex",
+  "import_specifications": [
+    {
+      "import_name": "CDC_StandardizedPrecipitationIndex",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://data.cdc.gov/resource/xbk2-5i4e",
+      "provenance_description": "Environmental Health Toxicology - Standardized Precipitation Index",
+      "scripts": [
+        "../download_script.py --import_name=CDC_StandardizedPrecipitationIndex --config_file=../import_configs.json",
+        "../parse_precipitation_index.py CDC_StandardizedPrecipitationIndex_input.csv output/CDC_StandardizedPrecipitationIndex_output.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "StandardizedPrecipitationIndex.tmcf",
+          "cleaned_csv": "output/CDC_StandardizedPrecipitationIndex_output.csv"
+        }
+      ],
+      "source_files": ["CDC_StandardizedPrecipitationIndex_input.csv"],
+      "cron_schedule": "0 11 1,15 * *"
+    }
+  ]
+}

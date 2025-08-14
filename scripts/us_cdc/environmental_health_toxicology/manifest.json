@@ -10,8 +10,7 @@
           "parse_air_quality.py CDC_PM25CensusTract"
         ],
         "source_files": ["input/*.gz"],
-        "user_script_timeout": 259200,
-        "resource_limits": {"cpu": "8", "memory": "32G"},
+        "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
         "import_inputs": [
           {
             "template_mcf": "PM25CensusTractPollution.tmcf",
@@ -43,8 +42,7 @@
           "parse_air_quality.py CDC_OzoneCensusTract"
         ],
         "source_files": ["input/*.gz"],
-        "user_script_timeout": 259200,
-        "resource_limits": {"cpu": "8", "memory": "32G"},
+        "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
         "import_inputs": [
           {
             "template_mcf": "OzoneCensusTractPollution.tmcf",
@@ -83,6 +81,7 @@
           }
           
         ],
+        "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
         "cron_schedule": "0 1  4 * *"
       },
       {
@@ -102,6 +101,7 @@
           }
           
         ],
+        "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
         "cron_schedule": "0 1  5 * *"
       }
     ]
