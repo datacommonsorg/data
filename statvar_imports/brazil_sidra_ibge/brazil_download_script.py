@@ -15,7 +15,6 @@
 import os
 import re
 import time
-import sys
 import glob
 from absl import app, logging, flags
 from pathlib import Path
@@ -23,12 +22,11 @@ from pathlib import Path
 # Import specific Selenium exceptions
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
+
 
 # --- Configuration ---
 BASE_URL = "https://sidra.ibge.gov.br/home/pnadct/"
