@@ -357,7 +357,7 @@ class ImportExecutor:
         latest_version = self._get_blob_content(
             os.path.join(import_dir, self.config.storage_version_filename))
         if latest_version:
-            return f'gs://{self.config.storage_prod_bucket_name.name}/{import_dir}/{latest_version}'
+            return f'gs://{self.config.storage_prod_bucket_name}/{import_dir}/{latest_version}'
         return ''
 
     def _get_import_input_files(self, import_input, absolute_import_dir):
@@ -490,7 +490,9 @@ class ImportExecutor:
                 logging.error(
                     'Skipping differ tool due to missing latest mcf file')
 
-            logging.info('Invoking validation script...')
+            logging.info(
+                f'Invoking validation script with config: {config_file_path}, differ:{differ_output_file}, summary:{summary_stats}...'
+            )
             try:
                 validation = ValidationRunner(config_file_path,
                                               differ_output_file, summary_stats,

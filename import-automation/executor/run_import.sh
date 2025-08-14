@@ -190,7 +190,7 @@ function get_param_value_json {
 
   # Get value from JSON
   value=$(grep "\"$param\"" <<< "$json" | head -1 | \
-    sed -e "s/.*\"$param\" *: *//;s/\" *//;s/ *\".*$//;s/}.*$//")
+    sed -e "s/.*\"$param\" *: *//;s/\" *//;s/ *\".*$//;s/[},].*$//")
 
   # Return value or default
   echo ${value:-"$default"}
@@ -263,10 +263,14 @@ function get_import_config {
   local options="$1"; shift
   local config_file="$1"; shift
 
+  # Create an import config file based on default configs.
+  # Drop any references to local files for cloud jobs
   config_file=${config_file:-"$TMP_DIR/config-overrides-$IMPORT_NAME.json"}
-  [[ -f "$CONFIG" ]] && cp $CONFIG $config_file
+  ignore_params="/tmp"
+  [[ "$RUN_MODE" == "executor" ]] && ignore_params="NONE"
+  [[ -f "$CONFIG" ]] && grep -v "$ignore_params" $CONFIG > $config_file
 
-  # Get config overrides fomr manifets if any
+  # Get config overrides from manifest if any
   # Assumes this is the last part of the manifest.json
   manifest_overrides=$( echo $MANIFEST | grep config_override | \
     sed -e 's/.*config_override"[: ]*{//;s/}.*$//')
@@ -277,16 +281,33 @@ function get_import_config {
   for c_v in $config_vals; do
     param=$(cut -d: -f1 <<< "$c_v")
     val=$(cut -d: -f2- <<< "$c_v")
+
+    # Check if param is valid and listed in config.py
+    is_param_valid=$(grep "\<$param\>" $SCRIPT_DIR/app/configs.py)
+    [[ -z "$is_param_valid" ]] && echo_fatal "Unknown import config: '$param':$val"
+
+    # Add double quotes for value if not a bool or int
     is_quoted_val=$(egrep -vi "true|false|^[0-9\.]" <<< $val)
     [[ -n "$is_quoted_val" ]] && val=\'$val\'
 
+    # Add the param to import config
     sed -i "s|^ *   }|    , \"$param\": $val\n&|;s/'/\"/g;" $config_file
   done
 
   IMPORT_CONFIG=$(echo $(cat $config_file) | \
-    sed -e 's/.*"configs" *: *//;s/"/\\"/g;s/} *$//')
+    sed -e 's/.*"configs" *: *//;s/"/\\"/g;s/} *$//;s/ //g')
   IMPORT_CONFIG_FILE=$config_file
   echo_log  "Using import config: $IMPORT_CONFIG" 
+}
+
+# Add a unit to the value if it doesn't have it.
+function add_value_unit {
+  local val="$1"; shift
+  local unit="$1"; shift
+
+  has_unit=$(egrep "[^0-9\.]" <<< "$val")
+  [[ -z "$has_unit" ]] && val="${val}${unit}"
+  echo "$val"
 }
 
 # Run an import as cloud run job
@@ -302,16 +323,16 @@ function run_import_cloud {
     run_cmd gcloud --project=$GCP_PROJECT run jobs delete "$job_name" --region=$REGION --quiet
   fi
 
-  config_file=$(get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET")
-  config=$(cat $config_file)
-
+  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd gcloud --project=$GCP_PROJECT run jobs create $job_name \
     --add-volume name=datcom-volume,type=cloud-storage,bucket=$GCS_BUCKET \
     --add-volume-mount volume=datcom-volume,mount-path=/mnt \
     --region=$REGION \
     --image $DOCKER_REMOTE:latest \
-    --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$config|--enable_cloud_logging" \
-    --cpu=$CPU --memory=$MEMORY --task-timeout=$TIMEOUT --max-retries=1
+    --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$IMPORT_CONFIG|--enable_cloud_logging" \
+    --cpu=$CPU --memory=$(add_value_unit $MEMORY "Gi") \
+    --task-timeout=$TIMEOUT --max-retries=1
   [[ $? != 0 ]] && echo_fatal "Failed to create cloud run job: $job_name"
 
   echo_log "Executing cloud run job $job_name"
@@ -337,12 +358,12 @@ function run_import_executor {
       -O $TMP_DIR/import-tool/import-tool.jar
   fi
 
-  config_file=$(get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET")
+  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
 
   run_cmd $SCRIPT_DIR/run_local_executor.sh \
     --import_name=$IMPORT_DIR:$IMPORT_NAME \
     --output_dir=$OUTPUT_DIR \
-    --config_override=$config_file \
+    --config_override=$IMPORT_CONFIG_FILE \
     --repo_dir=$DATA_REPO
 
   echo_log "Completed local run for import $IMPORT_DIR:$IMPORT_NAME"
@@ -362,13 +383,12 @@ function run_import_docker {
 
   # Run the import within docker container
   export GCLOUD_CONFIG_DIR=$HOME/.config/gcloud
-  config_file=$(get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET")
-  # import_config="{\"gcs_project_id\":\"$GCP_PROJECT\",\"storage_prod_bucket_name\":\"$GCS_BUCKET\"}"
-  import_config=$(cat $config_file | sed -e 's/"/\\"/g')
+  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd docker run --mount type=bind,source=$GCLOUD_CONFIG_DIR,target=/root/.config/gcloud \
-    --cpus=$CPU --memory=$MEMORY $img \
+    --cpus=$CPU --memory=$(add_value_unit $MEMORY "G") $img \
     --import_name=$IMPORT_DIR:$IMPORT_NAME \
-    --import_config="$import_config"
+    --import_config="$IMPORT_CONFIG"
 
   echo_log "Completed docker run for $IMPORT_DIR:$IMPORT_NAME"
   echo_log "To view logs, see 'docker ps -a; docker log <container>'"
@@ -452,10 +472,14 @@ function run_import_batch {
     --config=$batch_config
 
   if [ $? -eq 0 ]; then
-    echo "Job submitted successfully!"
+    echo_log "Batch job submitted successfully for import $JOB_NAME"
   else
-    echo "ERROR: Job submission failed!"
+    echo_log "ERROR: Job submission failed for $JOB_NAME"
   fi
+  
+  run_cmd "gcloud --project=$GCP_PROJECT batch jobs describe --location=$REGION $JOB_NAME"
+  echo_log "To view the jobs status, run the command:
+gcloud --project=$GCP_PROJECT batch jobs describe --location=$REGION $JOB_NAME"
 }
 
 # Return if script is being sourced
