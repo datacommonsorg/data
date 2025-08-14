@@ -1,0 +1,4 @@
+variableMeasured,diff_type,observationAbout,observationDate,diff_size
+dcid:InterestRate_TreasuryNote_10Year,ADDED,['dcid:country/USA'],"['""2025-01-31""']",1
+dcid:InterestRate_TreasuryBill_3Month,DELETED,"['dcid:country/USA', 'dcid:country/USA']","['""2025-01-30""', '""2025-01-31""']",2
+dcid:InterestRate_TreasuryBond_20Year,MODIFIED,['dcid:country/USA'],"['""2025-01-30""']",1

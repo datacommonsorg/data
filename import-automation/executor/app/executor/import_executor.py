@@ -467,7 +467,7 @@ class ImportExecutor:
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
             differ_output = os.path.join(validation_output_path,
-                                         'point_analysis_summary.csv')
+                                         'obs_diff_summary.csv')
 
             # Invoke differ and validation scripts.
             differ_output_file = ''
@@ -479,11 +479,10 @@ class ImportExecutor:
                 differ = ImportDiffer(current_data=current_data_path,
                                       previous_data=previous_data_path,
                                       output_location=validation_output_path,
-                                      differ_tool='',
                                       project_id=self.config.gcp_project_id,
                                       job_name=differ_job_name,
                                       file_format='mcf',
-                                      runner_mode='native')
+                                      runner_mode='local')
                 differ.run_differ()
                 differ_output_file = differ_output
             else:
