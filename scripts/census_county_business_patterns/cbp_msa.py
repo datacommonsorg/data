@@ -17,7 +17,6 @@ import os
 import re
 import io
 from absl import logging
-import write_mcf
 
 
 class CBPMSAProcessor:

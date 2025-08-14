@@ -16,8 +16,6 @@ import csv
 import os
 from absl import logging
 
-import write_mcf
-
 
 class ZBPTotalsProcessor:
     """

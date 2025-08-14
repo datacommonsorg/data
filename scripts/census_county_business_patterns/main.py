@@ -109,7 +109,7 @@ def download_files():
             url_template = filetype['url_template']
             filename = name_template.format(last_two_digits_formatted)
             url = url_template.format(year, last_two_digits_formatted)
-            logging.info("downloading url: ", url)
+            logging.info(f"downloading url: {url}")
             response = retry_method(url)
             zip_content_stream = io.BytesIO(response.content)
             with zipfile.ZipFile(zip_content_stream, 'r') as zip_ref:
@@ -126,9 +126,6 @@ def download_files():
                             )
                             continue  # Skip this member to prevent security risk
 
-                            logging.info(
-                                f"    Extracting '{member}' to '{extract_path}'"
-                            )
                             # Read the file content from the in-memory zip and write it to disk
                         with open(extract_path, 'wb') as outfile:
                             outfile.write(zip_ref.read(member))
@@ -146,84 +143,87 @@ def main(argv):
             for filename in files:
                 # We only care about .txt files
                 if filename.lower().endswith('.txt'):
-                    logging.info("processing the file:", filename)
+                    logging.info("processing the file:{filename}")
                     full_local_path = os.path.join(root, filename)
                     found_files = True
                     logging.info(
                         'Found local .txt file: %s. Attempting to process.',
                         filename)
-                with open(full_local_path, 'r', encoding='latin-1') as f:
-                    local_file_content = f.read()
+                    with open(full_local_path, 'r', encoding='latin-1') as f:
+                        local_file_content = f.read()
 
-                # Use io.StringIO to treat the string content as a file-like object
-                # This maintains compatibility with your existing processor classes
-                input_file_obj = io.StringIO(local_file_content)
-                logging.info('Successfully loaded %s into in-memory object.',
-                             filename)
-
-                year_match = re.search(r'(\d{2})(?:co|msa|totals|detail)\.txt$',
-                                       filename.lower())
-                # processing_year = FLAGS.year
-                if year_match:
-                    two_digit_year = year_match.group(1)
-                    processing_year = '20' + two_digit_year
-
-                else:
-                    logging.warning(
-                        f"Could not extract 2-digit year from filename '{filename}'"
-                    )
-
-                if 'msa' in filename.lower() and filename.lower().endswith(
-                        '.txt'):  # Explicitly check for .txt extension
+                    # Use io.StringIO to treat the string content as a file-like object
+                    # This maintains compatibility with your existing processor classes
+                    input_file_obj = io.StringIO(local_file_content)
                     logging.info(
-                        'Detected CBPMSA .txt file: %s. Initiating CBP MSA processing.',
+                        'Successfully loaded %s into in-memory object.',
                         filename)
-                    processor = CBPMSAProcessor(input_file_obj=input_file_obj,
-                                                output_dir=FLAGS.output_dir,
-                                                year=processing_year,
-                                                is_test_run=FLAGS.test)
-                    processor.process_cbp_data()
-                    logging.info("process completed for cbp msa import")
-                elif 'co' in filename.lower() and filename.lower().endswith(
-                        '.txt'):  # Explicitly check for .txt extension
-                    logging.info(
-                        'Detected CBP CO .txt file: %s. Initiating CBP CO processing.',
-                        filename)
-                    processor = CBPCOProcessor(input_file_obj=input_file_obj,
-                                               output_dir=FLAGS.output_dir,
-                                               year=processing_year,
-                                               is_test_run=FLAGS.test)
-                    processor.process_co_data()
-                    logging.info("process completed for co import")
-                elif 'totals' in filename.lower() and filename.lower().endswith(
-                        '.txt'):  # Explicitly check for .txt extension
-                    logging.info(
-                        'Detected ZPB TOTALS .txt file: %s. Initiating ZPB TOTALS processing.',
-                        filename)
-                    processor = ZBPTotalsProcessor(
-                        input_file_obj=input_file_obj,
-                        output_dir=FLAGS.output_dir,
-                        year=processing_year,
-                        is_test_run=FLAGS.test)
-                    processor.process_zbp_data()
-                    logging.info("process completed for zbp  import")
 
-                elif 'detail' in filename.lower() and filename.lower().endswith(
-                        '.txt'):  # Explicitly check for .txt extension
-                    logging.info(
-                        'Detected ZBP DETAILS .txt file: %s. Initiating ZBP DETAILS processing.',
-                        filename)
-                    processor = ZBPDetailProcessor(
-                        input_file_obj=input_file_obj,
-                        output_dir=FLAGS.output_dir,
-                        year=processing_year,
-                        is_test_run=FLAGS.test)
-                    processor.process_zbp_detail_data()
-                    logging.info("process completed for co import")
+                    year_match = re.search(
+                        r'(\d{2})(?:co|msa|totals|detail)\.txt$',
+                        filename.lower())
+                    # processing_year = FLAGS.year
+                    if year_match:
+                        two_digit_year = year_match.group(1)
+                        processing_year = '20' + two_digit_year
 
-                if not found_files:
-                    logging.warning(
-                        "No .txt files found in the specified folder")
+                    else:
+                        logging.warning(
+                            f"Could not extract 2-digit year from filename '{filename}'"
+                        )
+
+                    if 'msa' in filename.lower() and filename.lower().endswith(
+                            '.txt'):  # Explicitly check for .txt extension
+                        logging.info(
+                            'Detected CBPMSA .txt file: %s. Initiating CBP MSA processing.',
+                            filename)
+                        processor = CBPMSAProcessor(
+                            input_file_obj=input_file_obj,
+                            output_dir=FLAGS.output_dir,
+                            year=processing_year,
+                            is_test_run=FLAGS.test)
+                        processor.process_cbp_data()
+                        logging.info("process completed for cbp msa import")
+                    elif 'co' in filename.lower() and filename.lower().endswith(
+                            '.txt'):  # Explicitly check for .txt extension
+                        logging.info(
+                            'Detected CBP CO .txt file: %s. Initiating CBP CO processing.',
+                            filename)
+                        processor = CBPCOProcessor(
+                            input_file_obj=input_file_obj,
+                            output_dir=FLAGS.output_dir,
+                            year=processing_year,
+                            is_test_run=FLAGS.test)
+                        processor.process_co_data()
+                        logging.info("process completed for co import")
+                    elif 'totals' in filename.lower() and filename.lower(
+                    ).endswith('.txt'):  # Explicitly check for .txt extension
+                        logging.info(
+                            'Detected ZPB TOTALS .txt file: %s. Initiating ZPB TOTALS processing.',
+                            filename)
+                        processor = ZBPTotalsProcessor(
+                            input_file_obj=input_file_obj,
+                            output_dir=FLAGS.output_dir,
+                            year=processing_year,
+                            is_test_run=FLAGS.test)
+                        processor.process_zbp_data()
+                        logging.info("process completed for zbp  import")
+
+                    elif 'detail' in filename.lower() and filename.lower(
+                    ).endswith('.txt'):  # Explicitly check for .txt extension
+                        logging.info(
+                            'Detected ZBP DETAILS .txt file: %s. Initiating ZBP DETAILS processing.',
+                            filename)
+                        processor = ZBPDetailProcessor(
+                            input_file_obj=input_file_obj,
+                            output_dir=FLAGS.output_dir,
+                            year=processing_year,
+                            is_test_run=FLAGS.test)
+                        processor.process_zbp_detail_data()
+                        logging.info("process completed for co import")
+
+            if not found_files:
+                logging.warning("No .txt files found in the specified folder")
 
     except Exception as e:
         logging.fatal('An unexpected error occurred during file processing: %s',

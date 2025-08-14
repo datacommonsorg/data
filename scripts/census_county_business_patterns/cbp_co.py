@@ -15,7 +15,6 @@ import csv
 import os
 import re
 from absl import logging
-import write_mcf
 
 
 class CBPCOProcessor:

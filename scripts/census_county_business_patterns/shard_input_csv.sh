@@ -81,7 +81,8 @@ SHARD_ROWS=500000
 # or a location handled by split_csv.sh. Ensure split_csv.sh handles the output naming correctly.
 echo "--- Step 1: Sharding large input CSV files into 100k row chunks ---"
 # Loop over all .csv files in the INPUT_DIR, excluding any files already named as shards
-for source_file in $(ls "$INPUT_DIR"/*.csv | grep -v 'shard'); do
+for source_file in "$INPUT_DIR"/*.csv; do
+    [[ "$source_file" == *"shard"* ]] && continue
     echo "Sharding: $source_file"
     # Execute the split_csv.sh script for each large input file
     # This script is assumed to handle the creation of *_shard_*.csv files.
@@ -113,7 +114,7 @@ for file in "$SHARD_DIR"/*_shard_*.csv; do
             --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf \
             --pv_map="censuscountybusinesspatterns_pvmap.csv" \
             --config_file="censuscountybusinesspatterns_metadata.csv" \
-            --output_path="$OUTPUT_FINAL_DIR/output_${prefix}" \
+            --output_path="$OUTPUT_FINAL_DIR/output_${prefix}" &
             # --output_counters="$DEBUG_DIR/counters_${prefix}" \ # uncomment this line to debug the script like to get the details like memory utlization etc.
             # Add any other required arguments for statvar_processpr.py here \
             # Run in background
