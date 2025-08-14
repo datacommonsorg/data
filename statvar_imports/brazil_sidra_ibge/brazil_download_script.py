@@ -145,14 +145,11 @@ def get_url_slug(place_name):
     """
     Generates a URL slug from the place name, matching the website's pattern.
     """
+    import unicodedata
     slug = place_name.lower().replace(' ', '-')
-    slug = re.sub(r'[áãâ]', 'a', slug)
-    slug = re.sub(r'é', 'e', slug)
-    slug = re.sub(r'[íî]', 'i', slug)
-    slug = re.sub(r'[óôõ]', 'o', slug)
-    slug = re.sub(r'ú', 'u', slug)
-    slug = re.sub(r'ç', 'c', slug)
-    return slug
+    # Normalize unicode characters to their base form
+    nfkd_form = unicodedata.normalize('NFKD', slug)
+    return "".join([c for c in nfkd_form if not unicodedata.combining(c)])
 
 def main(argv):
     """Main function to orchestrate the scraping and downloading."""
