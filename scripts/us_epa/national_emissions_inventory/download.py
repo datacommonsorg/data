@@ -15,7 +15,6 @@
 This Python Script downloads the EPA files, into the input_files folder to be
 made available for further processing.
 """
-
 import os
 import requests
 import subprocess
@@ -142,7 +141,6 @@ def main():
                 logging.error(f"An error occurred for URL {url}: {e}")
 
     logging.info("Script execution finished.")
-
 
 if __name__ == "__main__":
     from urllib.parse import urlparse
