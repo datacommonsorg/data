@@ -18,119 +18,132 @@ made available for further processing.
 
 import os
 import requests
-import certifi
-from retry import retry
-from urllib.parse import urlparse
 import subprocess
-from urllib.error import ContentTooShortError
 import sys
 import ssl
+import json
 from absl import logging
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from download_config import DOWNLOAD_CONFIG
 
+# --- Configuration ---
+MAX_WORKERS = 5  # Number of concurrent downloads
+PROGRESS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             'gcs_output', 'in_progress.json')
+DOWNLOAD_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                             'gcs_output', 'input_files_enhance')
+
+# --- SSL Context ---
 ssl._create_default_https_context = ssl._create_unverified_context
 
-_COMMON_PATH = os.path.abspath(os.path.dirname(__file__))
-sys.path.insert(1, _COMMON_PATH)
 
-from download_config import *
-
-_DOWNLOAD_PATH = os.path.join(os.path.dirname((__file__)), 'gcs_output',
-                              'input_files')
-path_to_company_cert = "/etc/ssl/certs/ca-certificates.crt"
-
-@retry(tries=3, delay=5, backoff=20)
-def download_file_with_retry(url):
-    """
-    Attempts to download a file with retry logic in case of failure.
-    Retries up to 'retries' times with a delay of 'delay' seconds between attempts.
-
-    Args:
-        url (str): The URL to download.
-        retries (int): Number of retry attempts.
-        delay (int): Delay in seconds between retries.
-
-    Returns:
-        str: The path to the downloaded file.
-    """
-    global _DOWNLOAD_PATH, path_to_company_cert
+def load_progress():
+    """Loads the set of downloaded URLs from the progress file."""
+    if not os.path.exists(PROGRESS_FILE):
+        return set()
     try:
-        logging.info(f"Downloading {url}...")
-        logging.info(f"certifi.where() -> {certifi.where()}")
-        parsed_url = urlparse(url)
-        file_name = os.path.basename(parsed_url.path)
-        zip_path = os.path.join(_DOWNLOAD_PATH, file_name)
+        with open(PROGRESS_FILE, 'r') as f:
+            return set(json.load(f))
+    except (IOError, json.JSONDecodeError) as e:
+        logging.error(f"Error loading progress file: {e}")
+        return set()
 
+
+def save_progress(url):
+    """Saves a completed URL to the progress file."""
+    downloaded_urls = load_progress()
+    downloaded_urls.add(url)
+    try:
+        with open(PROGRESS_FILE, 'w') as f:
+            json.dump(list(downloaded_urls), f, indent=4)
+    except IOError as e:
+        logging.error(f"Error saving progress for URL {url}: {e}")
+
+
+def download_and_unzip(config):
+    """
+    Downloads and unzips a single file as defined in the config.
+    """
+    url = config.get("url")
+    folder = config.get("folder")
+
+    if not url or not folder:
+        return f"Skipping invalid config item: {config}"
+
+    try:
+        logging.info(f"Processing URL: {url} for folder: {folder}")
+        file_name = os.path.basename(urlparse(url).path)
+        zip_path = os.path.join(DOWNLOAD_PATH, file_name)
+        extract_dir = os.path.join(DOWNLOAD_PATH, folder)
+
+        os.makedirs(extract_dir, exist_ok=True)
+
+        # Download the file
         response = requests.get(url, verify=False, stream=True)
         response.raise_for_status()
         with open(zip_path, 'wb') as f:
             for chunk in response.iter_content(chunk_size=8192):
                 f.write(chunk)
 
-        logging.info(f"Successfully downloaded {url} to {zip_path} path.")
-        return zip_path
+        logging.info(f"Successfully downloaded {url} to {zip_path}")
 
+        # Unzip the file
+        logging.info(f"Extracting {zip_path} to {extract_dir} using 7z...")
+        subprocess.run(["7z", "x", zip_path, f"-o{extract_dir}"], check=True)
+        logging.info(f"Extraction of {zip_path} complete.")
+
+        # Remove the zip file
+        os.remove(zip_path)
+        logging.info(f"Removed zip file: {zip_path}")
+
+        # Save progress
+        save_progress(url)
+        return f"Successfully processed {url}"
+
+    except requests.exceptions.RequestException as e:
+        return f"Failed to download {url}: {e}"
+    except subprocess.CalledProcessError as e:
+        return f"Failed to extract {zip_path}: {e}"
     except Exception as e:
-        logging.fatal(f"Failed to download {url} due to {e}")
-        sys.exit(1)
-
-def download_files(download_config):
-    global _DOWNLOAD_PATH
-    logging.info(f"Ensuring download directory '{_DOWNLOAD_PATH}' exists.")
-    os.makedirs(_DOWNLOAD_PATH, exist_ok=True)
-    
-    for item in download_config:
-        url = item.get("url")
-        folder = item.get("folder")
-        if not url or not folder:
-            logging.warning(f"Skipping invalid config item: {item}")
-            continue
-        
-        try:
-            logging.info(f"Processing URL: {url} for folder: {folder}")
-            downloaded_file_path = download_file_with_retry(url)
-            logging.info(
-                f"URL {url} downloaded to {downloaded_file_path}")
-            extract_dir = os.path.join(_DOWNLOAD_PATH, folder)
-            os.makedirs(extract_dir, exist_ok=True)
-            logging.info(
-                f"Extracting {downloaded_file_path} to {extract_dir} using 7z..."
-            )
-            subprocess.run(
-                ["7z", "x", downloaded_file_path, f"-o{extract_dir}"])
-            logging.info(f"Extraction of {downloaded_file_path} complete.")
-
-            # Remove the downloaded ZIP file
-            logging.info(f"Removing downloaded file: {downloaded_file_path}")
-            os.remove(downloaded_file_path)
-        except Exception as e:
-            logging.fatal(f"Error processing {url} due to error: {e}")
-    # Remove meta data files
-    logging.info("Removing unnecessary metadata files...")
-    for root, _, files in os.walk(_DOWNLOAD_PATH):
-        for file in files:
-            if file.endswith('.txt') or file.endswith('.pdf') or file.endswith(
-                    '.xlsx') or 'tribes' in file:
-                file_path = os.path.join(root, file)
-                logging.info(f"Removing metadata file: {file_path}")
-                os.remove(file_path)
-    logging.info("Unnecessary metadata files removal complete.")
+        return f"An unexpected error occurred with {url}: {e}"
 
 
-# --- Your main function ---
 def main():
     """
     Main function to orchestrate the file download process.
     """
-    global _DOWNLOAD_PATH
-    logging.set_verbosity(1)
-    logging.info(f"Script execution started.")
-    logging.info(f'Download path is set to {_DOWNLOAD_PATH}')
-    download_files(
-        DOWNLOAD_CONFIG
-    )
-    logging.info(f"Script execution finished.")
+    logging.info("Script execution started.")
+    os.makedirs(DOWNLOAD_PATH, exist_ok=True)
+
+    downloaded_urls = load_progress()
+    urls_to_download = [
+        item for item in DOWNLOAD_CONFIG
+        if item.get("url") not in downloaded_urls
+    ]
+
+    if not urls_to_download:
+        logging.info("All files have been downloaded. Nothing to do.")
+        return
+
+    logging.info(f"Found {len(urls_to_download)} files to download.")
+
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        futures = {
+            executor.submit(download_and_unzip, item): item
+            for item in urls_to_download
+        }
+
+        for future in as_completed(futures):
+            url = futures[future].get('url')
+            try:
+                result = future.result()
+                logging.info(result)
+            except Exception as e:
+                logging.error(f"An error occurred for URL {url}: {e}")
+
+    logging.info("Script execution finished.")
 
 
 if __name__ == "__main__":
+    from urllib.parse import urlparse
     main()

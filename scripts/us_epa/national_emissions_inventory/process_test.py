@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,101 +11,48 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""
-Script to automate the testing for US Air Pollution process script.
-"""
 
-import os
 import unittest
-import sys
+import os
 import tempfile
-# module_dir is the path to where this test is running from.
-MODULE_DIR = os.path.dirname(__file__)
-sys.path.insert(0, MODULE_DIR)
-# pylint: disable=wrong-import-position
-from process import USAirEmissionTrends
-# pylint: enable=wrong-import-position
-
-TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "sample_input")
-EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "sample_output")
-OUTPUT_DATA_DIR = os.path.join(MODULE_DIR, "test_output_data")
+import filecmp
+import shutil
+from .process import *
 
 
-class TestProcess(unittest.TestCase):
-    """
-    TestPreprocess is inherting unittest class
-    properties which further requried for unit testing.
-    The test will be conducted for US Air Pollution Sample Datasets,
-    It will be generating CSV, MCF and TMCF files based on the sample input.
-    Comparing the data with the expected files.
-    """
-    _TEST_DATA_FILES = os.listdir(TEST_DATASET_DIR)
-    _IP_DATA = [
-        os.path.join(TEST_DATASET_DIR, file_name)
-        for file_name in _TEST_DATA_FILES
-    ]
+class ProcessEnhancedTest(unittest.TestCase):
 
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
+    def setUp(self):
+        self.test_data_dir = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), 'test_data')
+        self.temp_dir = tempfile.mkdtemp()
+        self.intermediate_path = tempfile.mkdtemp()
 
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir, "data.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_census.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_census.tmcf")
+    def tearDown(self):
+        shutil.rmtree(self.temp_dir)
 
-            base = USAirEmissionTrends(self._IP_DATA, cleaned_csv_file_path,
-                                       mcf_file_path, tmcf_file_path)
-            base.generate_csv()
-            base.generate_mcf()
-            base.generate_tmcf()
+    def test_script(self):
+        input_path = os.path.join(self.test_data_dir, 'input')
+        expected_path = os.path.join(self.test_data_dir, 'expected')
+        process_files(input_path, self.temp_dir, self.intermediate_path)
 
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
-                self.actual_mcf_data = mcf_file.read()
+        # Compare the output files
+        expected_files = sorted(os.listdir(expected_path))
+        generated_files = sorted(os.listdir(self.temp_dir))
 
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_data = tmcf_file.read()
+        self.assertEqual(len(expected_files), len(generated_files),
+                         "Number of files mismatch")
 
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_data = csv_file.read()
+        for expected_file, generated_file in zip(expected_files,
+                                                 generated_files):
+            expected_file_path = os.path.join(expected_path, expected_file)
+            generated_file_path = os.path.join(self.temp_dir, generated_file)
 
-    def test_mcf_tmcf_files(self):
-        """
-        This method is required to test between output generated
-        preprocess script and excepted output files like MCF File
-        """
-        expected_mcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                              "national_emissions.mcf")
-
-        expected_tmcf_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                               "national_emissions.tmcf")
-
-        with open(expected_mcf_file_path,
-                  encoding="UTF-8") as expected_mcf_file:
-            expected_mcf_data = expected_mcf_file.read()
-
-        with open(expected_tmcf_file_path,
-                  encoding="UTF-8") as expected_tmcf_file:
-            expected_tmcf_data = expected_tmcf_file.read()
-
-        self.assertEqual(expected_mcf_data.strip(),
-                         self.actual_mcf_data.strip())
-        self.assertEqual(expected_tmcf_data.strip(),
-                         self.actual_tmcf_data.strip())
-
-    def test_observation_data(self):
-        """
-        This method is required to test between output generated
-        preprocess script and excepted output files like CSV
-        """
-        expected_csv_file_path = os.path.join(EXPECTED_FILES_DIR,
-                                              "national_emissions.csv")
-
-        with open(expected_csv_file_path,
-                  encoding="utf-8") as expected_csv_file:
-            expected_csv_data = expected_csv_file.read()
-
-        self.assertEqual(expected_csv_data.strip(),
-                         self.actual_csv_data.strip())
+            self.assertTrue(
+                filecmp.cmp(expected_file_path,
+                            generated_file_path,
+                            shallow=False),
+                f"File content mismatch: {expected_file} and {generated_file}")
 
 
 if __name__ == '__main__':

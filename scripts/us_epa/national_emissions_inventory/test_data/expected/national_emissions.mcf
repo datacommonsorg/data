@@ -8,12 +8,72 @@ emittedThing: dcs:Acetaldehyde
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_Acetaldehyde_SCC_22_MobileSources
+name: "Annual Amount Emissions Acetaldehyde, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Acetaldehyde
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Acetaldehyde_SCC_23_IndustrialProcesses
+name: "Annual Amount Emissions Acetaldehyde, IndustrialProcesses (23)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/23
+emittedThing: dcs:Acetaldehyde
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Acetaldehyde_SCC_26_WasteDisposalTreatmentAndRecovery
+name: "Annual Amount Emissions Acetaldehyde, WasteDisposalTreatmentAndRecovery (26)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/26
+emittedThing: dcs:Acetaldehyde
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Acetaldehyde_SCC_28_MiscellaneousAreaSources
+name: "Annual Amount Emissions Acetaldehyde, MiscellaneousAreaSources (28)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/28
+emittedThing: dcs:Acetaldehyde
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_Ammonia_SCC_21_StationarySourceFuelCombustion
 name: "Annual Amount Emissions Ammonia, StationarySourceFuelCombustion (21)"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/21
+emittedThing: dcs:Ammonia
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Ammonia_SCC_22_MobileSources
+name: "Annual Amount Emissions Ammonia, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Ammonia
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Ammonia_SCC_26_WasteDisposalTreatmentAndRecovery
+name: "Annual Amount Emissions Ammonia, WasteDisposalTreatmentAndRecovery (26)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/26
 emittedThing: dcs:Ammonia
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -38,6 +98,26 @@ emittedThing: dcs:Arsenic
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_Arsenic_SCC_22_MobileSources
+name: "Annual Amount Emissions Arsenic, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Arsenic
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Arsenic_SCC_23_IndustrialProcesses
+name: "Annual Amount Emissions Arsenic, IndustrialProcesses (23)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/23
+emittedThing: dcs:Arsenic
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_Arsenic_SCC_28_MiscellaneousAreaSources
 name: "Annual Amount Emissions Arsenic, MiscellaneousAreaSources (28)"
 typeOf: dcs:StatisticalVariable
@@ -58,12 +138,32 @@ emittedThing: dcs:Benzene
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_Benzene_SCC_22_MobileSources
+name: "Annual Amount Emissions Benzene, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Benzene
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_Benzene_SCC_23_IndustrialProcesses
 name: "Annual Amount Emissions Benzene, IndustrialProcesses (23)"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/23
+emittedThing: dcs:Benzene
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Benzene_SCC_24_SolventUtilization
+name: "Annual Amount Emissions Benzene, SolventUtilization (24)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/24
 emittedThing: dcs:Benzene
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -98,6 +198,16 @@ emittedThing: dcs:Cadmium
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_CarbonDioxide_SCC_22_MobileSources
+name: "Annual Amount Emissions Carbon Dioxide, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:CarbonDioxide
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_CarbonMonoxide_SCC_21_StationarySourceFuelCombustion
 name: "Annual Amount Emissions Carbon Monoxide, StationarySourceFuelCombustion (21)"
 typeOf: dcs:StatisticalVariable
@@ -108,12 +218,52 @@ emittedThing: dcs:CarbonMonoxide
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_CarbonMonoxide_SCC_22_MobileSources
+name: "Annual Amount Emissions Carbon Monoxide, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:CarbonMonoxide
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_CarbonMonoxide_SCC_23_IndustrialProcesses
 name: "Annual Amount Emissions Carbon Monoxide, IndustrialProcesses (23)"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/23
+emittedThing: dcs:CarbonMonoxide
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_CarbonMonoxide_SCC_26_WasteDisposalTreatmentAndRecovery
+name: "Annual Amount Emissions Carbon Monoxide, WasteDisposalTreatmentAndRecovery (26)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/26
+emittedThing: dcs:CarbonMonoxide
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_CarbonMonoxide_SCC_27_NaturalSources
+name: "Annual Amount Emissions Carbon Monoxide, NaturalSources (27)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/27
+emittedThing: dcs:CarbonMonoxide
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_CarbonMonoxide_SCC_28_MiscellaneousAreaSources
+name: "Annual Amount Emissions Carbon Monoxide, MiscellaneousAreaSources (28)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/28
 emittedThing: dcs:CarbonMonoxide
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -138,12 +288,22 @@ emittedThing: dcs:Chloroform
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
-Node: dcid:Annual_Amount_Emissions_Chromium_6_SCC_21_StationarySourceFuelCombustion
-name: "Annual Amount Emissions Chromium(6+), StationarySourceFuelCombustion (21)"
+Node: dcid:Annual_Amount_Emissions_Chromium_6_SCC_22_MobileSources
+name: "Annual Amount Emissions Chromium(6+), MobileSources (22)"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
-epaSccCode: dcs:EPA_SCC/21
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Chromium_6
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Chromium_6_SCC_28_MiscellaneousAreaSources
+name: "Annual Amount Emissions Chromium(6+), MiscellaneousAreaSources (28)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/28
 emittedThing: dcs:Chromium_6
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -158,6 +318,16 @@ emittedThing: dcs:Formaldehyde
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_Formaldehyde_SCC_22_MobileSources
+name: "Annual Amount Emissions Formaldehyde, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Formaldehyde
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_Formaldehyde_SCC_23_IndustrialProcesses
 name: "Annual Amount Emissions Formaldehyde, IndustrialProcesses (23)"
 typeOf: dcs:StatisticalVariable
@@ -168,12 +338,32 @@ emittedThing: dcs:Formaldehyde
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
-Node: dcid:Annual_Amount_Emissions_Hexane_SCC_23_IndustrialProcesses
-name: "Annual Amount Emissions Hexane, IndustrialProcesses (23)"
+Node: dcid:Annual_Amount_Emissions_Formaldehyde_SCC_26_WasteDisposalTreatmentAndRecovery
+name: "Annual Amount Emissions Formaldehyde, WasteDisposalTreatmentAndRecovery (26)"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
-epaSccCode: dcs:EPA_SCC/23
+epaSccCode: dcs:EPA_SCC/26
+emittedThing: dcs:Formaldehyde
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Formaldehyde_SCC_27_NaturalSources
+name: "Annual Amount Emissions Formaldehyde, NaturalSources (27)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/27
+emittedThing: dcs:Formaldehyde
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Hexane_SCC_22_MobileSources
+name: "Annual Amount Emissions Hexane, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
 emittedThing: dcs:Hexane
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -184,6 +374,16 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/25
+emittedThing: dcs:Hexane
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Hexane_SCC_28_MiscellaneousAreaSources
+name: "Annual Amount Emissions Hexane, MiscellaneousAreaSources (28)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/28
 emittedThing: dcs:Hexane
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -208,6 +408,46 @@ emittedThing: dcs:Lead
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_Manganese_SCC_21_StationarySourceFuelCombustion
+name: "Annual Amount Emissions Manganese, StationarySourceFuelCombustion (21)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/21
+emittedThing: dcs:Manganese
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Manganese_SCC_22_MobileSources
+name: "Annual Amount Emissions Manganese, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Manganese
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Mercury_SCC_21_StationarySourceFuelCombustion
+name: "Annual Amount Emissions Mercury, StationarySourceFuelCombustion (21)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/21
+emittedThing: dcs:Mercury
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Mercury_SCC_22_MobileSources
+name: "Annual Amount Emissions Mercury, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Mercury
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_Mercury_SCC_28_MiscellaneousAreaSources
 name: "Annual Amount Emissions Mercury, MiscellaneousAreaSources (28)"
 typeOf: dcs:StatisticalVariable
@@ -215,6 +455,16 @@ populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/28
 emittedThing: dcs:Mercury
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Methane_SCC_22_MobileSources
+name: "Annual Amount Emissions Methane, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Methane
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
@@ -238,12 +488,32 @@ emittedThing: dcs:Methanol
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_Methanol_SCC_28_MiscellaneousAreaSources
+name: "Annual Amount Emissions Methanol, MiscellaneousAreaSources (28)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/28
+emittedThing: dcs:Methanol
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_Naphthalene_SCC_21_StationarySourceFuelCombustion
 name: "Annual Amount Emissions Naphthalene, StationarySourceFuelCombustion (21)"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/21
+emittedThing: dcs:Naphthalene
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Naphthalene_SCC_22_MobileSources
+name: "Annual Amount Emissions Naphthalene, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
 emittedThing: dcs:Naphthalene
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -258,6 +528,36 @@ emittedThing: dcs:Naphthalene
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_Naphthalene_SCC_24_SolventUtilization
+name: "Annual Amount Emissions Naphthalene, SolventUtilization (24)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/24
+emittedThing: dcs:Naphthalene
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Naphthalene_SCC_25_StorageAndTransport
+name: "Annual Amount Emissions Naphthalene, StorageAndTransport (25)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/25
+emittedThing: dcs:Naphthalene
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Naphthalene_SCC_28_MiscellaneousAreaSources
+name: "Annual Amount Emissions Naphthalene, MiscellaneousAreaSources (28)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/28
+emittedThing: dcs:Naphthalene
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_Nickel_SCC_21_StationarySourceFuelCombustion
 name: "Annual Amount Emissions Nickel, StationarySourceFuelCombustion (21)"
 typeOf: dcs:StatisticalVariable
@@ -265,6 +565,26 @@ populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/21
 emittedThing: dcs:Nickel
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Nickel_SCC_22_MobileSources
+name: "Annual Amount Emissions Nickel, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Nickel
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_NitrousOxide_SCC_22_MobileSources
+name: "Annual Amount Emissions Nitrous Oxide, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:NitrousOxide
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
@@ -278,12 +598,42 @@ emittedThing: dcs:OxidesOfNitrogen
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_OxidesOfNitrogen_SCC_22_MobileSources
+name: "Annual Amount Emissions Oxides Of Nitrogen, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:OxidesOfNitrogen
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_OxidesOfNitrogen_SCC_23_IndustrialProcesses
 name: "Annual Amount Emissions Oxides Of Nitrogen, IndustrialProcesses (23)"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/23
+emittedThing: dcs:OxidesOfNitrogen
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_OxidesOfNitrogen_SCC_26_WasteDisposalTreatmentAndRecovery
+name: "Annual Amount Emissions Oxides Of Nitrogen, WasteDisposalTreatmentAndRecovery (26)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/26
+emittedThing: dcs:OxidesOfNitrogen
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_OxidesOfNitrogen_SCC_28_MiscellaneousAreaSources
+name: "Annual Amount Emissions Oxides Of Nitrogen, MiscellaneousAreaSources (28)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/28
 emittedThing: dcs:OxidesOfNitrogen
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -318,12 +668,32 @@ emittedThing: dcs:PM10
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_PM10_SCC_22_MobileSources
+name: "Annual Amount Emissions PM10, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:PM10
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_PM10_SCC_23_IndustrialProcesses
 name: "Annual Amount Emissions PM10, IndustrialProcesses (23)"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/23
+emittedThing: dcs:PM10
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_PM10_SCC_26_WasteDisposalTreatmentAndRecovery
+name: "Annual Amount Emissions PM10, WasteDisposalTreatmentAndRecovery (26)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/26
 emittedThing: dcs:PM10
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -344,6 +714,16 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/21
+emittedThing: dcs:PM2.5
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_PM2.5_SCC_22_MobileSources
+name: "Annual Amount Emissions PM2.5, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
 emittedThing: dcs:PM2.5
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -408,6 +788,26 @@ emittedThing: dcs:Pyrene
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_Pyrene_SCC_22_MobileSources
+name: "Annual Amount Emissions Pyrene, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:Pyrene
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Pyrene_SCC_23_IndustrialProcesses
+name: "Annual Amount Emissions Pyrene, IndustrialProcesses (23)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/23
+emittedThing: dcs:Pyrene
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_SCC_21_StationarySourceFuelCombustion
 name: "Annual Amount Emissions StationarySourceFuelCombustion (21)"
 typeOf: dcs:StatisticalVariable
@@ -462,12 +862,31 @@ epaSccCode: dcs:EPA_SCC/26
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_SCC_27_NaturalSources
+name: "Annual Amount Emissions NaturalSources (27)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/27
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_SCC_28_MiscellaneousAreaSources
 name: "Annual Amount Emissions MiscellaneousAreaSources (28)"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/28
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Selenium_SCC_21_StationarySourceFuelCombustion
+name: "Annual Amount Emissions Selenium, StationarySourceFuelCombustion (21)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/21
+emittedThing: dcs:Selenium
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
@@ -481,22 +900,22 @@ emittedThing: dcs:Selenium
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
-Node: dcid:Annual_Amount_Emissions_Sulfane_SCC_24_SolventUtilization
-name: "Annual Amount Emissions Sulfane, SolventUtilization (24)"
-typeOf: dcs:StatisticalVariable
-populationType: dcs:Emissions
-measurementQualifier: dcs:Annual
-epaSccCode: dcs:EPA_SCC/24
-emittedThing: dcs:Sulfane
-statType: dcs:measuredValue
-measuredProperty: dcs:amount
-
 Node: dcid:Annual_Amount_Emissions_SulfurDioxide_SCC_21_StationarySourceFuelCombustion
 name: "Annual Amount Emissions Sulfur Dioxide, StationarySourceFuelCombustion (21)"
 typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/21
+emittedThing: dcs:SulfurDioxide
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_SulfurDioxide_SCC_22_MobileSources
+name: "Annual Amount Emissions Sulfur Dioxide, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
 emittedThing: dcs:SulfurDioxide
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -527,6 +946,16 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/21
+emittedThing: dcs:Toluene
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_Toluene_SCC_22_MobileSources
+name: "Annual Amount Emissions Toluene, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
 emittedThing: dcs:Toluene
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
@@ -581,6 +1010,16 @@ emittedThing: dcs:VolatileOrganicCompound
 statType: dcs:measuredValue
 measuredProperty: dcs:amount
 
+Node: dcid:Annual_Amount_Emissions_VolatileOrganicCompound_SCC_22_MobileSources
+name: "Annual Amount Emissions Volatile Organic Compound, MobileSources (22)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/22
+emittedThing: dcs:VolatileOrganicCompound
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
 Node: dcid:Annual_Amount_Emissions_VolatileOrganicCompound_SCC_23_IndustrialProcesses
 name: "Annual Amount Emissions Volatile Organic Compound, IndustrialProcesses (23)"
 typeOf: dcs:StatisticalVariable
@@ -617,6 +1056,26 @@ typeOf: dcs:StatisticalVariable
 populationType: dcs:Emissions
 measurementQualifier: dcs:Annual
 epaSccCode: dcs:EPA_SCC/26
+emittedThing: dcs:VolatileOrganicCompound
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_VolatileOrganicCompound_SCC_27_NaturalSources
+name: "Annual Amount Emissions Volatile Organic Compound, NaturalSources (27)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/27
+emittedThing: dcs:VolatileOrganicCompound
+statType: dcs:measuredValue
+measuredProperty: dcs:amount
+
+Node: dcid:Annual_Amount_Emissions_VolatileOrganicCompound_SCC_28_MiscellaneousAreaSources
+name: "Annual Amount Emissions Volatile Organic Compound, MiscellaneousAreaSources (28)"
+typeOf: dcs:StatisticalVariable
+populationType: dcs:Emissions
+measurementQualifier: dcs:Annual
+epaSccCode: dcs:EPA_SCC/28
 emittedThing: dcs:VolatileOrganicCompound
 statType: dcs:measuredValue
 measuredProperty: dcs:amount

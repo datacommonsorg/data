@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,14 +14,6 @@
 
 # Replacing values for the year 2008 and 2011
 replacement_08_11 = {
-    'state_and_county_fips_code': 'fips code',
-    'pollutant_cd': 'pollutant code',
-    'uom': 'emissions uom',
-    'total_emissions': 'total emissions',
-    'emissions_type_code': 'emissions type code'
-}
-
-replacement_20 = {
     'state_and_county_fips_code': 'fips code',
     'pollutant_cd': 'pollutant code',
     'uom': 'emissions uom',
@@ -94,6 +86,14 @@ drop_17_event = [
 ]
 replacement_tribes = {'tribal name': 'fips code'}
 
+replacement_20 = {
+    'fips state/county code': 'fips code',
+    'scc': 'scc',
+    'pollutant code': 'pollutant code',
+    'total emissions': 'observation',
+    'uom': 'unit'
+}
+
 drop_tribes = [
     'state', 'fips state code', 'data category', 'reporting period',
     'emissions operating type', 'pollutant desc', 'data set'
@@ -113,11 +113,6 @@ pollutants = [
     "7782492", "7782505", "7783064", "8007452", "16065831", "18540299", "CH4",
     "CO", "CO2", "N2O", "NH3", "NOX", "PM10-PRI", "PM25-PRI", "SO2", "VOC"
 ]
-
-# The mappings in `replace_metadata` are derived from the 'pollutant code'
-# and 'pollutant_cd' columns in the source data files. They were compiled
-# by combining the unique values from all years of the NEI data from 2008-2020.
-# Source data can be found at: https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei
 replace_metadata = {
     "R":
         "Refueling",
@@ -1501,8 +1496,6 @@ replace_metadata = {
         'Pound'
 }
 
-# The mappings in `replace_source_metadata` are derived from the 'scc'
-# Source data can be found at: https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei
 replace_source_metadata = {
     "1": "External Combustion",
     "2": "Internal Combustion Engines",
