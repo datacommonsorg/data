@@ -96,6 +96,8 @@ RENAMING_PRIVATE_COLUMNS = {
         "ZIP4",
     "ANSI/FIPS County Code":
         "County_code",
-    "ANSI/FIPS State Code":"State_code",
-    "State Abbr":"State_Abbr"
+    "ANSI/FIPS State Code":
+        "State_code",
+    "State Abbr":
+        "State_Abbr"
 }

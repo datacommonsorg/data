@@ -80,12 +80,12 @@ def fetch_school_ncid(school, year, column_names, NCES_DOWNLOAD_URL):
             if i.get_attribute('value') == school:
                 i.click()
                 try:
-        # Wait up to 10 seconds UNTIL an element on the next page is visible
-        # Replace 'id_of_element_on_next_page' with an actual ID or locator
+                    # Wait up to 10 seconds UNTIL an element on the next page is visible
+                    # Replace 'id_of_element_on_next_page' with an actual ID or locator
                     wait = WebDriverWait(driver, 10)
                     wait.until(
-                        EC.visibility_of_element_located((By.ID, "id_of_element_on_next_page"))
-                    )
+                        EC.visibility_of_element_located(
+                            (By.ID, "id_of_element_on_next_page")))
                     print("Page has updated successfully.")
                 except TimeoutException:
                     print("Loading the next page took too long!")
