@@ -15,8 +15,6 @@
 
 To run this script, specify a USDA api key as follows:
 
-python3 process.py --usda_api_key=<KEY>
-
 You can request an API key here: https://quickstats.nass.usda.gov/api/
 
 If the key is not specified as above, it falls back to using a key specified
@@ -25,7 +23,6 @@ in a GCS config file. However, that file is available to DC team members only.
 """
 
 import json
-
 import requests
 import sys
 import csv
@@ -40,6 +37,7 @@ from absl import flags
 from absl import logging
 from collections import deque
 import time
+import config
 
 API_BASE = 'https://quickstats.nass.usda.gov/api'
 CSV_COLUMNS = [
@@ -60,12 +58,9 @@ _GCS_PROJECT_ID = "datcom-204919"
 _GCS_BUCKET = "datcom-csv"
 _GCS_FILE_PATH = "usda/agriculture_survey/config.json"
 
-_USDA_API_KEY = 'usda_api_key'
-
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_string('start_year', '2024', 'start_year')
-flags.DEFINE_string(_USDA_API_KEY, None, 'USDA quickstats API key.')
 
 
 def process_survey_data(year, svs, input_dir, out_dir):
@@ -108,7 +103,7 @@ def process_survey_data(year, svs, input_dir, out_dir):
         logging.info(f'End, {year}, =, {end}')
         logging.info(f'Duration, {year}, =, {str(end - start)}')
     except Exception as e:
-        logging.fatal(f"Error while processing the data for year :{e}")
+        logging.error(f"Error while processing the data for year :{e}")
 
 
 def get_parts_dir(input_dir, year):
@@ -187,9 +182,6 @@ def fetch_and_write(county_name, year, svs, input_dir):
             logging.info(
                 f"No data to write for county {county_name}. Skipping file creation."
             )
-        logging.info(
-            f"Writing {len(county_csv_rows)} rows for county {county_name} to file {out_file}"
-        )
     except Exception as e:
         logging.fatal(
             f"Error processing data for county: {county_name}. Error: {e}")
@@ -219,10 +211,12 @@ def get_survey_county_data(year, county, input_dir):
                     response = json.load(f)
             else:
                 logging.error(f"Response file not found: {response_file}")
+                return {'data': []}
         except Exception as e:
             logging.error(
                 f"Error while reading response file: {response_file}. Error: {e}"
             )
+            return {'data': []}
 
     if _FLAGS.mode == "" or _FLAGS.mode == "download":
 
@@ -237,7 +231,7 @@ def get_survey_county_data(year, county, input_dir):
             if response is None:
                 logging.error(
                     f"get_data() returned None. Check logs for details.")
-                print(f"No data found for: {county}")
+                logging.warning(f"No data found for: {county}")
 
                 return {'data': []}
             with open(response_file, 'w') as f:
@@ -280,8 +274,8 @@ def get_data(params):
     while is_rate_limited():
         time_until_reset = RATE_LIMIT_WINDOW - (time.time() - request_times[0])
         logging.info(f"Rate limit hit. Waiting {time_until_reset:.1f} seconds.")
-        # time.sleep(time_until_reset)
-        time.sleep(60)
+        time.sleep(time_until_reset)
+        # time.sleep(60)
 
     logging.info(f"Fetching data from API: {params}")
 
@@ -358,9 +352,7 @@ def to_csv_row(data_row, svs):
         eprint('SKIPPED, Invalid value', f"'{value}'", 'for', name)
         return None
     value = int(value)
-
-    observation_about = f"dcid:geoId/{data_row['state_fips_code']}{county_code}" if \
-      data_row[
+    observation_about = f"dcid:geoId/{data_row['state_fips_code']}{county_code}" if data_row[
         'state_fips_code'] else 'dcid:country/USA'
     sv = svs[name]
 
@@ -377,12 +369,10 @@ def to_csv_rows(api_data, svs):
     csv_rows = []
 
     if api_data and 'data' in api_data:
-
         for data_row in api_data['data']:
             csv_row = to_csv_row(data_row, svs)
             if csv_row:
                 csv_rows.append(csv_row)
-
     return csv_rows
 
 
@@ -406,15 +396,12 @@ def eprint(*args, **kwargs):
 
 
 def get_multiple_years():
-
     start = datetime.datetime.now()
     logging.info(f'Start, {start}')
-
     svs = load_svs()
     start_year = _FLAGS.start_year
     for year in range(int(start_year), datetime.datetime.now().year + 1):
         process_survey_data(year, svs, "input", "output")
-
     end = datetime.datetime.now()
     logging.info(f'End, {end}')
     logging.info(f'Duration, {str(end - start)}')
@@ -429,18 +416,26 @@ def get_cloud_config():
 
 
 def load_usda_api_key():
-    if get_usda_api_key() is None:
-        _FLAGS.set_default(_USDA_API_KEY, get_cloud_config()[_USDA_API_KEY])
+    """
+    Sets the API key to be used.
+    Since we are reading from a config file, this function simply
+    ensures the key is available.
+    """
+    api_key = get_usda_api_key()
+    if not api_key:
+        raise ValueError("USDA API key not found in config file.")
+    return api_key
 
 
 def get_usda_api_key():
-    return _FLAGS.usda_api_key
+    """Reads the USDA API key from the config file."""
+    # This function now correctly returns the key from the config module.
+    return config.API_KEY
 
 
 def main(_):
-
     load_usda_api_key()
-    logging.info(f'USDA API key, {get_usda_api_key()}')
+    logging.info('USDA API key successfully loaded.')
     get_multiple_years()
 
 
