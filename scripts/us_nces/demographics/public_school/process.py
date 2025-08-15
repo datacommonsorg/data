@@ -54,7 +54,7 @@ class NCESPublicSchool(USEducation):
 if __name__ == '__main__':
     try:
         logging.set_verbosity(1)
-        logging.info("Main Method Starts For Public School District ")
+        logging.info("Main Method Starts For Public School")
         gcs_output_dir_local = os.path.join(
             os.path.dirname(os.path.abspath(__file__)), "gcs_output")
         input_path_base = os.path.join(gcs_output_dir_local, "input_files")

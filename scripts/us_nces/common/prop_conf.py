@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """
-Constant value used in processing US Tract are defined here.
+Constant value used in processing US Education data are defined here.
 This module also consists of mapping between various forms of column names
 found in downloaded files and its corresponding SV name.
 While preprocessing files column names are changed to SV names as used in

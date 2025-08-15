@@ -11,8 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""_summary_
-Script to check the property/dcid/nodes existance in datacommons.org.
+"""
+Script to check if properties, DCIDs, or nodes exist in datacommons.org.
 """
 import datacommons
 

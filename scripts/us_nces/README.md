@@ -34,8 +34,8 @@ This dataset has Population Estimates for the National Center for Education Stat
     The only manual part here is after downloading the input files and then uploading them to gcp bucket. Once they're uploaded, Each import requires its own sh command to copy the files from Google Cloud to a local folder called gcs_output/input_files. From there, a script automatically picks up these files to process them. Finally, it generates the output and saves it in gcs_output/output_files
 
 ### Script Execution Details
-    public    :  python3 private_school/process.py
-    private   :  python3 public_school/process.py
+    private    :  python3 private_school/process.py
+    public   :  python3 public_school/process.py
     district  :  python3 school_district/process.py
 
 

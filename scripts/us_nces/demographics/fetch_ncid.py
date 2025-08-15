@@ -17,6 +17,9 @@ import csv
 import copy
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from chromedriver_py import binary_path  # this will get you the path variable for ChromeDriver
 # from absl import logging
 import logging
@@ -76,8 +79,17 @@ def fetch_school_ncid(school, year, column_names, NCES_DOWNLOAD_URL):
         for i in inputs:
             if i.get_attribute('value') == school:
                 i.click()
+                try:
+        # Wait up to 10 seconds UNTIL an element on the next page is visible
+        # Replace 'id_of_element_on_next_page' with an actual ID or locator
+                    wait = WebDriverWait(driver, 10)
+                    wait.until(
+                        EC.visibility_of_element_located((By.ID, "id_of_element_on_next_page"))
+                    )
+                    print("Page has updated successfully.")
+                except TimeoutException:
+                    print("Loading the next page took too long!")
                 break
-        time.sleep(5)  # Wait for 5 seconds to ensure the page updates
 
         # Find and click the checkbox corresponding to the specified year
         logging.info(f"Selecting checkbox for year: {year}")

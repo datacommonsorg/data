@@ -105,8 +105,6 @@ _RELIGIOUS = {
 _SCHOOL_TYPE = {
     "1-Regular Elementary or Secondary":
         "NCES_Regular",
-    "1-Regular Elementary or Secondary":
-        "NCES_Regular",
     "2-Montessori":
         "Montessori",
     "3-Special Program Emphasis":
