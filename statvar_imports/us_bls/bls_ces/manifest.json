@@ -16,11 +16,7 @@
       "source_files": [
           "input_files/raw_data/*"
       ],
-      "cron_schedule": "0 06 * * 1",
-      "resource_limits": {
-                "cpu": "8",
-                "memory": "32G"
-      }
+      "cron_schedule": "0 06 * * 1"
     }
   ]
 }

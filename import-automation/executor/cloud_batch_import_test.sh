@@ -28,18 +28,19 @@
 # Customize these as per requirement
 IMPORT_NAME=$1 # "scripts/us_fed/treasury_constant_maturity_rates:USFed_ConstantMaturityRates_Test"
 
-CPU_COUNT=4
-MEMORY_GIB=8
-DISK_GIB=10
-MACHINE_TYPE="n2-standard-4"
+CPU_COUNT=8
+MEMORY_GIB=32
+DISK_GIB=100
+MACHINE_TYPE="n2-standard-8"
 GCP_PROJECT_ID="datcom-ci"
 GCP_BUCKET_ID="datcom-ci-test"
 GCP_REGION="us-central1"
 IMAGE_URI="gcr.io/datcom-ci/dc-import-executor:stable"
 
+
 NAME_SUFFIX="${IMPORT_NAME##*:}"
 SANITIZED_NAME=$(echo "${NAME_SUFFIX,,}" | tr -s '_' '-')
-JOB_NAME="batch-${SANITIZED_NAME:0:46}-$(date +%s)"
+JOB_NAME="${SANITIZED_NAME:0:46}-$(date +%s)"
 CPU_MILLI=$(($CPU_COUNT * 1000))
 MEMORY_MIB=$(($MEMORY_GIB * 1024))
 
@@ -68,7 +69,8 @@ gcloud batch jobs submit "${JOB_NAME}" \
           "cpuMilli": "${CPU_MILLI}",
           "memoryMib": "${MEMORY_MIB}"
         },
-        "maxRetryCount": 2
+        "maxRetryCount": 1,
+        "maxRunDuration": "36000s"
       },
       "taskCount": 1,
       "parallelism": 1
@@ -84,7 +86,8 @@ gcloud batch jobs submit "${JOB_NAME}" \
             "image": "projects/debian-cloud/global/images/family/debian-12",
             "size_gb": "${DISK_GIB}"
           }
-        }
+        },
+        "installOpsAgent": true
       }
     ]
   },

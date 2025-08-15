@@ -1,0 +1,23 @@
+{
+  "import_name": "CDC_PalmerDroughtSeverityIndex",
+  "import_specifications": [
+    {
+      "import_name": "CDC_PalmerDroughtSeverityIndex",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://data.cdc.gov/resource/en5r-5ds4",
+      "provenance_description": "Environmental Health Toxicology - Palmer Drought Severity Index",
+      "scripts": [
+        "../download_script.py --import_name=CDC_PalmerDroughtSeverityIndex --config_file=../import_configs.json",
+        "../parse_precipitation_index.py CDC_PalmerDroughtSeverityIndex_input.csv output/CDC_PalmerDroughtSeverityIndex_output.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "PalmerDroughtSeverityIndex.tmcf",
+          "cleaned_csv": "output/CDC_PalmerDroughtSeverityIndex_output.csv"
+        }
+      ],
+      "source_files": ["CDC_PalmerDroughtSeverityIndex_input.csv"],
+      "cron_schedule": "0 12 1,15 * *"
+    }
+  ]
+}
