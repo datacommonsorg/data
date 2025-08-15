@@ -88,7 +88,7 @@ def main(_):
         sys.exit(1)
 
     BASE_URL = configs['CensusSAHIE']['source_url']
-    OUTPUT_DIRECTORY = os.path.join(_SCRIPT_PATH, "gcs_output", "input_files")
+    OUTPUT_DIRECTORY = os.path.join(_SCRIPT_PATH, "input_files")
     START_YEAR = 2018
     CURRENT_YEAR = datetime.datetime.now().year
 
