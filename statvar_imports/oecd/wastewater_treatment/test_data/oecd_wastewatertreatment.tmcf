@@ -1,0 +1,8 @@
+Node: E:oecd_wastewatertreatment->E0
+observationAbout: C:oecd_wastewatertreatment->observationAbout
+observationDate: C:oecd_wastewatertreatment->observationDate
+value: C:oecd_wastewatertreatment->value
+variableMeasured: C:oecd_wastewatertreatment->variableMeasured
+unit: C:oecd_wastewatertreatment->unit
+scalingFactor: C:oecd_wastewatertreatment->scalingFactor
+typeOf: dcs:StatVarObservation

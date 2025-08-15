@@ -1,0 +1,9 @@
+STRUCTURE_ID,STRUCTURE_NAME,ACTION,REF_AREA,Reference area,FREQ,Frequency of observation,MEASURE,Measure,UNIT_MEASURE,Unit of measure,TIME_PERIOD,Time period,OBS_VALUE
+OECD.ENV.EPI:DSD_WATER_TREAT@DF_WATER_TREAT(1.0),Wastewater - connection rates to treatment,I,AUT,Austria,A,Annual,OTHERTR,Unspecified (other) treatment,PT_POP,Percentage of population,2023,,0
+OECD.ENV.EPI:DSD_WATER_TREAT@DF_WATER_TREAT(1.0),Wastewater - connection rates to treatment,I,AUT,Austria,A,Annual,PUBNOTR,Public sewerage without treatment,PT_POP,Percentage of population,2023,,0
+OECD.ENV.EPI:DSD_WATER_TREAT@DF_WATER_TREAT(1.0),Wastewater - connection rates to treatment,I,AUT,Austria,A,Annual,INDEPDTR,Independent treatment,PT_POP,Percentage of population,2023,,3.77
+OECD.ENV.EPI:DSD_WATER_TREAT@DF_WATER_TREAT(1.0),Wastewater - connection rates to treatment,I,AUT,Austria,A,Annual,TOTTR,Total wastewater treatment,PT_POP,Percentage of population,2023,,100
+OECD.ENV.EPI:DSD_WATER_TREAT@DF_WATER_TREAT(1.0),Wastewater - connection rates to treatment,I,AUT,Austria,A,Annual,PUBADVTR,Tertiary treatment,PT_POP,Percentage of population,2023,,95.05
+OECD.ENV.EPI:DSD_WATER_TREAT@DF_WATER_TREAT(1.0),Wastewater - connection rates to treatment,I,AUT,Austria,A,Annual,PUBBIOTR,Secondary treatment,PT_POP,Percentage of population,2023,,1.19
+OECD.ENV.EPI:DSD_WATER_TREAT@DF_WATER_TREAT(1.0),Wastewater - connection rates to treatment,I,AUT,Austria,A,Annual,TOTPUBSEW,Total public sewerage,PT_POP,Percentage of population,2023,,96.23
+OECD.ENV.EPI:DSD_WATER_TREAT@DF_WATER_TREAT(1.0),Wastewater - connection rates to treatment,I,AUT,Austria,A,Annual,PUBTOTTR,Public total treatment,PT_POP,Percentage of population,2023,,96.23
