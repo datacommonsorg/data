@@ -30,12 +30,6 @@ import pandas as pd
 from absl import logging
 from google.cloud import storage
 
-# #To remove the futurewarning and DeprecationWarning of the imports
-# warnings.simplefilter(action='ignore', category=FutureWarning)
-# warnings.simplefilter(action='ignore', category=DeprecationWarning)
-# warnings.simplefilter(action='ignore', category=SyntaxWarning)
-# pd.set_option("display.max_columns", None)
-
 CODEDIR = os.path.dirname(__file__)
 sys.path.insert(1, os.path.join(CODEDIR, '../../..'))
 

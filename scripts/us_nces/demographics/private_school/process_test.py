@@ -16,131 +16,127 @@ import os
 import unittest
 import sys
 import tempfile
+import shutil
 
+# Ensure the process module can be imported
 MODULE_DIR = os.path.dirname(__file__)
 sys.path.insert(0, MODULE_DIR)
 from process import NCESPrivateSchool
 
-TEST_DATASET_DIR = os.path.join(MODULE_DIR, "test_data", "sample_input")
-EXPECTED_FILES_DIR = os.path.join(MODULE_DIR, "test_data", "sample_output")
+# Define paths for test data and expected outputs
+TEST_DATA_DIR = os.path.join(MODULE_DIR, "test_data", "sample_input")
+EXPECTED_OUTPUT_DIR = os.path.join(MODULE_DIR, "test_data", "sample_output")
 
 
 class TestProcess(unittest.TestCase):
     """
-    TestPreprocess is inherting unittest class
-    properties which further requried for unit testing.
-    The test will be conducted for EuroStat Physical Activity Sample Datasets,
-    It will be generating CSV, MCF and TMCF files based on the sample input.
-    Comparing the data with the expected files.
+    Tests the NCESPrivateSchool processing script.
+
+    This test runs the processor on sample input data within a temporary
+    directory and compares the generated files against the expected outputs.
     """
-    test_data_files = os.listdir(TEST_DATASET_DIR)
 
-    ip_data = [
-        os.path.join(TEST_DATASET_DIR, file_name)
-        for file_name in test_data_files
-    ]
-
-    def __init__(self, methodName: str = ...) -> None:
-        super().__init__(methodName)
-
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            cleaned_csv_file_path = os.path.join(tmp_dir,
-                                                 "test_private_school.csv")
-            mcf_file_path = os.path.join(tmp_dir, "test_private_school.mcf")
-            tmcf_file_path = os.path.join(tmp_dir, "test_private_school.tmcf")
-            csv_path_place = os.path.join(tmp_dir,
-                                          "test_private_school_place.csv")
-            tmcf_path_place = os.path.join(tmp_dir,
-                                           "test_private_school_place.tmcf")
-            dup_csv_path_place = os.path.join(
-                tmp_dir, "test_private_school_place_dup.csv")
-
-            loader = NCESPrivateSchool(self.ip_data, cleaned_csv_file_path,
-                                       mcf_file_path, tmcf_file_path,
-                                       csv_path_place, dup_csv_path_place,
-                                       tmcf_path_place)
-
-            loader.generate_csv()
-            loader.generate_mcf()
-            loader.generate_tmcf()
-
-            with open(cleaned_csv_file_path, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_data = csv_file.read()
-
-            with open(mcf_file_path, encoding="UTF-8") as mcf_file:
-                self.actual_mcf_data = mcf_file.read()
-
-            with open(tmcf_file_path, encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_data = tmcf_file.read()
-
-            with open(csv_path_place, encoding="utf-8-sig") as csv_file:
-                self.actual_csv_place = csv_file.read()
-                output_file_path = 'data.csv'
-                with open(output_file_path, 'w', encoding='utf-8') as f:
-                    f.write(self.actual_csv_place)
-
-            with open(tmcf_path_place, encoding="UTF-8") as tmcf_file:
-                self.actual_tmcf_place = tmcf_file.read()
-
-    def test_mcf_tmcf_files(self):
+    def setUp(self):
         """
-        This method is required to test between output generated
-        preprocess script and expected output files like MCF File
+        Set up the test environment before each test method runs.
+        This is the correct place to prepare resources, not __init__.
         """
-        expected_mcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "us_nces_demographics_private_school.mcf")
+        # Create a temporary directory to store generated files for one test run
+        self.tmp_dir = tempfile.mkdtemp()
 
-        expected_tmcf_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "us_nces_demographics_private_school.tmcf")
+        # Define paths for all input and output files
+        input_files = [
+            os.path.join(TEST_DATA_DIR, f) for f in os.listdir(TEST_DATA_DIR)
+        ]
+        cleaned_csv_path = os.path.join(self.tmp_dir, "test_private_school.csv")
+        mcf_path = os.path.join(self.tmp_dir, "test_private_school.mcf")
+        tmcf_path = os.path.join(self.tmp_dir, "test_private_school.tmcf")
+        csv_path_place = os.path.join(self.tmp_dir,
+                                      "test_private_school_place.csv")
+        tmcf_path_place = os.path.join(self.tmp_dir,
+                                       "test_private_school_place.tmcf")
+        dup_csv_path_place = os.path.join(self.tmp_dir,
+                                          "test_private_school_place_dup.csv")
 
-        expected_tmcf_place_path = os.path.join(
-            EXPECTED_FILES_DIR, "us_nces_demographics_private_place.tmcf")
+        # Instantiate and run the processor to generate the files
+        loader = NCESPrivateSchool(input_files, cleaned_csv_path, mcf_path,
+                                   tmcf_path, csv_path_place,
+                                   dup_csv_path_place, tmcf_path_place)
+        loader.generate_csv()
+        loader.generate_mcf()
+        loader.generate_tmcf()
 
-        with open(expected_mcf_file_path,
-                  encoding="UTF-8") as expected_mcf_file:
-            expected_mcf_data = expected_mcf_file.read()
+        # Read the contents of the generated files into memory for comparison
+        with open(cleaned_csv_path, "r", encoding="utf-8-sig") as f:
+            self.actual_csv_data = f.read()
+        with open(mcf_path, "r", encoding="UTF-8") as f:
+            self.actual_mcf_data = f.read()
+        with open(tmcf_path, "r", encoding="UTF-8") as f:
+            self.actual_tmcf_data = f.read()
+        with open(csv_path_place, "r", encoding="utf-8-sig") as f:
+            self.actual_csv_place = f.read()
+        with open(tmcf_path_place, "r", encoding="UTF-8") as f:
+            self.actual_tmcf_place = f.read()
 
-        with open(expected_tmcf_file_path,
-                  encoding="UTF-8") as expected_tmcf_file:
-            expected_tmcf_data = expected_tmcf_file.read()
-
-        with open(expected_tmcf_place_path,
-                  encoding="UTF-8") as expected_tmcf_file_place:
-            expected_tmcf_place = expected_tmcf_file_place.read()
-
-        self.assertEqual(expected_mcf_data.strip(),
-                         self.actual_mcf_data.strip())
-        self.assertEqual(expected_tmcf_data.strip(),
-                         self.actual_tmcf_data.strip())
-        self.assertEqual(expected_tmcf_place.strip(),
-                         self.actual_tmcf_place.strip())
-
-    def test_create_csv(self):
+    def tearDown(self):
         """
-        This method is required to test between output generated
-        preprocess script and expected output files like CSV
+        Clean up the test environment after each test method runs.
         """
-        expected_csv_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "us_nces_demographics_private_school.csv")
+        # Reliably remove the temporary directory and all its contents
+        shutil.rmtree(self.tmp_dir)
 
-        expected_csv_data = ""
-        with open(expected_csv_file_path,
-                  encoding="utf-8") as expected_csv_file:
-            expected_csv_data = expected_csv_file.read()
+    def test_csv_files(self):
+        """
+        Tests that the generated CSV files match the expected output.
+        """
+        # Compare the main CSV file
+        with open(os.path.join(EXPECTED_OUTPUT_DIR,
+                               "us_nces_demographics_private_school.csv"),
+                  "r",
+                  encoding="utf-8") as f:
+            expected_csv_data = f.read()
+        self.assertEqual(self.actual_csv_data.strip(),
+                         expected_csv_data.strip())
 
-        self.assertEqual(expected_csv_data.strip(),
-                         self.actual_csv_data.strip())
+        # Compare the place CSV file
+        with open(os.path.join(EXPECTED_OUTPUT_DIR,
+                               "us_nces_demographics_private_place.csv"),
+                  "r",
+                  encoding="utf-8") as f:
+            expected_csv_place = f.read()
+        self.assertEqual(self.actual_csv_place.strip(),
+                         expected_csv_place.strip())
 
-        expected_csv_file_path = os.path.join(
-            EXPECTED_FILES_DIR, "us_nces_demographics_private_place.csv")
+    def test_mcf_and_tmcf_files(self):
+        """
+        Tests that the generated MCF and TMCF files match the expected output.
+        """
+        # Compare MCF file
+        with open(os.path.join(EXPECTED_OUTPUT_DIR,
+                               "us_nces_demographics_private_school.mcf"),
+                  "r",
+                  encoding="UTF-8") as f:
+            expected_mcf_data = f.read()
+        self.assertEqual(self.actual_mcf_data.strip(),
+                         expected_mcf_data.strip())
 
-        expected_csv_data = ""
-        with open(expected_csv_file_path,
-                  encoding="utf-8") as expected_csv_file:
-            expected_csv_place = expected_csv_file.read()
+        # Compare main TMCF file
+        with open(os.path.join(EXPECTED_OUTPUT_DIR,
+                               "us_nces_demographics_private_school.tmcf"),
+                  "r",
+                  encoding="UTF-8") as f:
+            expected_tmcf_data = f.read()
+        self.assertEqual(self.actual_tmcf_data.strip(),
+                         expected_tmcf_data.strip())
 
-        self.assertEqual(expected_csv_place.strip(),
-                         self.actual_csv_place.strip())
+        # Compare place TMCF file
+        with open(os.path.join(EXPECTED_OUTPUT_DIR,
+                               "us_nces_demographics_private_place.tmcf"),
+                  "r",
+                  encoding="UTF-8") as f:
+            expected_tmcf_place = f.read()
+        self.assertEqual(self.actual_tmcf_place.strip(),
+                         expected_tmcf_place.strip())
 
 
 if __name__ == '__main__':
