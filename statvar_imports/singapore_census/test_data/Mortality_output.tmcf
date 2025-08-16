@@ -1,0 +1,10 @@
+Node: E:Mortality_output->E0
+observationAbout: C:Mortality_output->observationAbout
+observationDate: C:Mortality_output->observationDate
+value: C:Mortality_output->value
+variableMeasured: C:Mortality_output->variableMeasured
+unit: C:Mortality_output->unit
+scalingFactor: C:Mortality_output->scalingFactor
+measurementMethod: C:Mortality_output->measurementMethod
+observationPeriod: C:Mortality_output->observationPeriod
+typeOf: dcs:StatVarObservation

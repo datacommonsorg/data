@@ -1,0 +1,9 @@
+# Auto generated using command: "../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --pv_map=configs/Population_Indicator_pvmap.csv --config_file=configs/Population_Indicator_metadata.csv --output_path=test_data/Population_Indicator_output --input_data=test_data/Population_Indicator_input.csv" on 2025-08-08 06:39:11.541987
+
+Node: dcid:GrowthRate_Count_Person
+typeOf: dcid:StatisticalVariable
+name: "Population growth rate"
+populationType: dcid:Person
+measuredProperty: dcid:count
+statType: dcid:growthRate
+
