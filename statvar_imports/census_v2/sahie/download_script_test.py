@@ -62,7 +62,7 @@ class DownloadScriptTest(unittest.TestCase):
     @patch('download_script.datetime')
     @patch('download_script.clean_csv_file')
     def test_main_success(self, mock_clean, mock_datetime, mock_download):
-        mock_datetime.datetime.now.return_value.year = 2020
+        mock_datetime.datetime.now.return_value.year = 2023
 
         def side_effect_download(url, output_folder, **kwargs):
             year = url.split('/')[-1].replace('.zip', '').split('-')[1]
@@ -80,9 +80,9 @@ class DownloadScriptTest(unittest.TestCase):
         finally:
             os.chdir(original_cwd)
 
-        # START_YEAR = 2018, CURRENT_YEAR = 2020. 2018, 2019, 2020. 3 years.
-        self.assertEqual(mock_download.call_count, 3)
-        self.assertEqual(mock_clean.call_count, 3)
+        # START_YEAR = 2018, CURRENT_YEAR = 2023. 2018, 2019, 2020, 2021, 2022, 2023. 6 years.
+        self.assertEqual(mock_download.call_count, 6)
+        self.assertEqual(mock_clean.call_count, 6)
 
     @patch('download_script.download_file', return_value=False)
     @patch('download_script.datetime')
