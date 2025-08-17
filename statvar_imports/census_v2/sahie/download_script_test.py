@@ -41,7 +41,7 @@ class DownloadScriptTest(unittest.TestCase):
             "year,version,statefips,countyfips,geocat\n"
             "2022,1,01,001,County\n"
         )
-        dummy_content_encoded = dummy_content.encode('latin-1')
+        dummy_content_encoded = dummy_content.encode('utf-8')
 
         with tempfile.NamedTemporaryFile(mode='wb', delete=False, dir=self.test_dir.name) as tmp:
             tmp.write(dummy_content_encoded)
@@ -49,7 +49,7 @@ class DownloadScriptTest(unittest.TestCase):
 
         download_script.clean_csv_file(tmp_path)
 
-        with open(tmp_path, 'r', encoding='latin-1') as f:
+        with open(tmp_path, 'r', encoding='utf-8') as f:
             cleaned_content = f.read()
 
         expected_content = (
@@ -58,60 +58,47 @@ class DownloadScriptTest(unittest.TestCase):
         )
         self.assertEqual(cleaned_content, expected_content)
 
-    @patch('download_script.storage.Client')
     @patch('download_script.download_file')
     @patch('download_script.datetime')
     @patch('download_script.clean_csv_file')
-    def test_main_success(self, mock_clean, mock_datetime, mock_download, mock_storage_client):
+    def test_main_success(self, mock_clean, mock_datetime, mock_download):
         mock_datetime.datetime.now.return_value.year = 2020
 
         def side_effect_download(url, output_folder, **kwargs):
-            year = url.split('/')[-1].replace('.zip', '')
-            dummy_csv_path = os.path.join(output_folder, f"sahie_{year}.csv")
+            year = url.split('/')[-1].replace('.zip', '').split('-')[1]
+            dummy_csv_path = os.path.join(output_folder, f"sahie-{year}.csv")
             with open(dummy_csv_path, 'w') as f:
                 f.write("dummy_data")
             return True
         
         mock_download.side_effect = side_effect_download
 
-        mock_blob = MagicMock()
-        config_data = {"CensusSAHIE": {"source_url": "gs://fake-bucket/data/{year}.zip"}}
-        mock_blob.download_as_string.return_value = json.dumps(config_data)
-        mock_bucket = MagicMock()
-        mock_bucket.blob.return_value = mock_blob
-        mock_storage_client.return_value.bucket.return_value = mock_bucket
-
-        with patch('os.getcwd', return_value=self.test_dir.name):
-            os.chdir(self.test_dir.name)
+        original_cwd = os.getcwd()
+        os.chdir(self.test_dir.name)
+        try:
             download_script.main(None)
-            os.chdir(_SCRIPT_PATH)
+        finally:
+            os.chdir(original_cwd)
 
+        # START_YEAR = 2018, CURRENT_YEAR = 2020. 2018, 2019, 2020. 3 years.
         self.assertEqual(mock_download.call_count, 3)
         self.assertEqual(mock_clean.call_count, 3)
 
-    @patch('download_script.storage.Client')
     @patch('download_script.download_file', return_value=False)
     @patch('download_script.datetime')
-    @patch('absl.logging.fatal')
-    def test_main_download_failure(self, mock_logging_fatal, mock_datetime, mock_download, mock_storage_client):
+    @patch('absl.logging.warning')
+    def test_main_download_failure(self, mock_logging_warning, mock_datetime, mock_download):
         mock_datetime.datetime.now.return_value.year = 2020
 
-        mock_blob = MagicMock()
-        config_data = {"CensusSAHIE": {"source_url": "http://fake.url/{year}.zip"}}
-        mock_blob.download_as_string.return_value = json.dumps(config_data)
-        mock_bucket = MagicMock()
-        mock_bucket.blob.return_value = mock_blob
-        mock_storage_client.return_value.bucket.return_value = mock_bucket
-
-        with self.assertRaises(SystemExit) as cm:
-            with patch('os.getcwd', return_value=self.test_dir.name):
-                os.chdir(self.test_dir.name)
-                download_script.main(None)
-                os.chdir(_SCRIPT_PATH)
+        original_cwd = os.getcwd()
+        os.chdir(self.test_dir.name)
+        try:
+            download_script.main(None)
+        finally:
+            os.chdir(original_cwd)
         
-        self.assertEqual(cm.exception.code, 1)
         self.assertEqual(mock_download.call_count, 1)
-        mock_logging_fatal.assert_called_with("Failed to download data for the following years: [2018]")
+        mock_logging_warning.assert_called_with("Failed to download or process data for year 2018. Stopping further downloads.")
 
 if __name__ == '__main__':
     unittest.main()
