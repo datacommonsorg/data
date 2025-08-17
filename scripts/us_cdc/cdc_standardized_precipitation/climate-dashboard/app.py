@@ -1,19 +1,12 @@
-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
-import requests
-import zipfile
-import io
+import subprocess
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 import warnings
-
-# --- Configuration ---
-# This URL points directly to the ZIP file attached to your GitHub Release.
-DATA_URL = "https://github.com/vishalworkdatacommon/climate_dasboard/releases/download/v1.0.0/spi_data.zip"
 
 # --- Page Configuration ---
 st.set_page_config(
@@ -27,19 +20,23 @@ warnings.filterwarnings("ignore")
 
 # --- Data Loading Function ---
 @st.cache_data
-def load_data_from_zip_url(url):
+def load_data():
     """
-    Downloads a ZIP file from a URL, extracts the Parquet file from it in memory,
-    and loads it into a pandas DataFrame.
+    Ensures the Git LFS data is present and then loads the Parquet file.
     """
-    response = requests.get(url)
-    response.raise_for_status()  # This will raise an error if the URL is not found (404)
-    
-    with zipfile.ZipFile(io.BytesIO(response.content)) as z:
-        parquet_file_name = [name for name in z.namelist() if name.endswith('.parquet')][0]
-        with z.open(parquet_file_name) as f:
-            df = pd.read_parquet(f)
-            
+    # This command attempts to force the download of LFS files.
+    try:
+        subprocess.run(["git", "lfs", "pull"], check=True)
+        print("Git LFS pull successful.")
+    except (subprocess.CalledProcessError, FileNotFoundError) as e:
+        st.warning(f"Could not execute git lfs pull. The data file may be missing. Error: {e}")
+
+    file_path = os.path.join(os.path.dirname(__file__), 'spi_data.parquet')
+    if not os.path.exists(file_path):
+        st.error(f"Fatal Error: The data file 'spi_data.parquet' was not found. The application cannot start.")
+        st.stop()
+        
+    df = pd.read_parquet(file_path)
     fips_codes = sorted(df['countyfips'].unique().tolist())
     return df, fips_codes
 
@@ -116,49 +113,46 @@ def plot_forecasting(ts):
 st.title("County-Level Climate Analysis")
 st.markdown("This application provides time-series analysis for the Standardized Precipitation Index (SPI) for any selected US county.")
 
-try:
-    # Load the full dataset and the list of FIPS codes from the public URL
-    full_data, fips_codes = load_data_from_zip_url(DATA_URL)
+# Load the full dataset and the list of FIPS codes
+full_data, fips_codes = load_data()
 
-    # --- Sidebar Controls ---
-    st.sidebar.header("Controls")
-    fips_code_input = st.sidebar.selectbox(
-        "Select County by FIPS Code:",
-        fips_codes,
-        index=fips_codes.index("06037") # Default to Los Angeles County
-    )
+# --- Sidebar Controls ---
+st.sidebar.header("Controls")
+fips_code_input = st.sidebar.selectbox(
+    "Select County by FIPS Code:",
+    fips_codes,
+    index=fips_codes.index("06037") # Default to Los Angeles County
+)
 
-    analysis_choice = st.sidebar.selectbox(
-        "Select Analysis:",
-        ["Trend Analysis", "Anomaly Detection", "Seasonal Decomposition", "Autocorrelation", "Forecasting"]
-    )
+analysis_choice = st.sidebar.selectbox(
+    "Select Analysis:",
+    ["Trend Analysis", "Anomaly Detection", "Seasonal Decomposition", "Autocorrelation", "Forecasting"]
+)
 
-    # --- Main Panel Logic ---
-    st.header(f"{analysis_choice} for County FIPS: {fips_code_input}")
-    county_df = full_data[full_data['countyfips'] == fips_code_input]
-    
-    # Prepare data for plotting
-    county_df['date'] = pd.to_datetime(county_df['date'])
-    county_df = county_df.sort_values('date')
-    county_df.set_index('date', inplace=True)
-    time_series = county_df['Value'].asfreq('MS')
-    
-    # --- Generate and Display the Selected Plot ---
-    plot_function = {
-        "Trend Analysis": plot_trend_analysis,
-        "Anomaly Detection": plot_anomaly_detection,
-        "Seasonal Decomposition": plot_seasonal_decomposition,
-        "Autocorrelation": plot_autocorrelation,
-        "Forecasting": plot_forecasting
-    }[analysis_choice]
-    
-    fig = plot_function(time_series)
-    st.pyplot(fig, use_container_width=True)
+# --- Main Panel Logic ---
+st.header(f"{analysis_choice} for County FIPS: {fips_code_input}")
 
-except Exception as e:
-    st.error(f"An error occurred while loading data from the GitHub Release: {e}")
-    st.info("Please ensure a release with the tag 'v1.0.0' exists and has the 'spi_data.zip' file attached.")
+# Filter the DataFrame in memory for the selected county
+county_df = full_data[full_data['countyfips'] == fips_code_input]
+
+# Prepare data for plotting
+county_df['date'] = pd.to_datetime(county_df['date'])
+county_df = county_df.sort_values('date')
+county_df.set_index('date', inplace=True)
+time_series = county_df['Value'].asfreq('MS')
+
+# --- Generate and Display the Selected Plot ---
+plot_function = {
+    "Trend Analysis": plot_trend_analysis,
+    "Anomaly Detection": plot_anomaly_detection,
+    "Seasonal Decomposition": plot_seasonal_decomposition,
+    "Autocorrelation": plot_autocorrelation,
+    "Forecasting": plot_forecasting
+}[analysis_choice]
+
+fig = plot_function(time_series)
+st.pyplot(fig, use_container_width=True)
 
 # --- Footer ---
 st.markdown("---")
-st.markdown("Data is sourced from a file hosted on the project's GitHub Releases page.")
+st.markdown("This application utilizes data stored within the repository, managed by Git LFS.")
