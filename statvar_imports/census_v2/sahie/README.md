@@ -84,6 +84,18 @@ This command validates the generated files for formatting and semantic consisten
 
 **Usage**:
 ```bash
-java -jar /path/to/datacommons-import-tool.jar lint -d 'output/'
+java -jar /path/to/datacommons-import-tool.jar lint -d 'gcs_output/output_files/'
 ```
 This step ensures that the generated artifacts are ready for ingestion into Data Commons.
+
+---
+
+
+### Step 4: Run Unit Tests
+
+This script runs unit tests for the `download_script.py` to verify its functionality.
+
+**Usage**:
+```bash
+python3 download_script_test.py
+```
