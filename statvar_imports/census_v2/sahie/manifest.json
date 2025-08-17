@@ -21,7 +21,7 @@
         "gcs_output/input_files/*.csv"
         ],
       "cron_schedule": "0 0 15 12 *",
-      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100}
+      "resource_limits": {"cpu": 16, "memory": 128, "disk": 100}
     }
   ]
 }
