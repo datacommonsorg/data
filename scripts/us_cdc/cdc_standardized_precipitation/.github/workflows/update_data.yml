@@ -1,0 +1,52 @@
+
+# This is a GitHub Actions workflow file.
+# It defines a pipeline that will automatically run to update your data.
+
+name: Monthly Data Refresh
+
+# Controls when the action will run.
+# This runs at 05:30 UTC on the 1st day of every month.
+on:
+  schedule:
+    - cron: '30 5 1 * *'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  update-data-and-upload:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out your repository's code
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Step 2: Set up Python
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    # Step 3: Authenticate to Google Cloud
+    # IMPORTANT: This requires you to set up a GitHub Secret.
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v2'
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+    # Step 4: Install Python dependencies
+    - name: Install dependencies
+      run: |
+        pip install pandas pyarrow google-cloud-storage
+
+    # Step 5: Run the data pipeline scripts
+    - name: Download raw data
+      run: python3 download_script.py --import_name=CDC_StandardizedPrecipitationIndex --config_file=import_configs.json
+      working-directory: ./index
+
+    - name: Parse raw data
+      run: python3 parse_precipitation_index.py CDC_StandardizedPrecipitationIndex_input.csv output/CDC_StandardizedPrecipitationIndex_output.csv
+      working-directory: ./index
+
+    - name: Convert to Parquet and Upload to GCS
+      run: python3 convert_and_upload.py
