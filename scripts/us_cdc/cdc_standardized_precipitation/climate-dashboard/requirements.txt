@@ -3,4 +3,3 @@ pandas
 matplotlib
 statsmodels
 pyarrow
-requests
