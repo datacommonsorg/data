@@ -1,8 +1,8 @@
-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
+import subprocess
 from statsmodels.tsa.seasonal import seasonal_decompose
 from statsmodels.tsa.arima.model import ARIMA
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
@@ -10,7 +10,7 @@ import warnings
 
 # --- Page Configuration ---
 st.set_page_config(
-    page_title="National SPI Analysis",
+    page_title="County-Level SPI Analysis",
     page_icon="📊",
     layout="wide",
 )
@@ -22,22 +22,30 @@ warnings.filterwarnings("ignore")
 @st.cache_data
 def load_data():
     """
-    Loads the pre-aggregated national data file from the local repository.
+    Ensures the Git LFS data is present and then loads the Parquet file.
     """
-    # This file will be created in the final step.
-    file_path = os.path.join(os.path.dirname(__file__), 'spi_national_monthly.csv')
-    df = pd.read_csv(file_path)
-    df['date'] = pd.to_datetime(df['date'])
-    df.set_index('date', inplace=True)
-    return df['MeanValue']
+    # This command attempts to force the download of LFS files.
+    try:
+        subprocess.run(["git", "lfs", "pull"], check=True)
+    except Exception as e:
+        st.warning(f"Could not execute git lfs pull. The data file may be missing. Error: {e}")
 
-# --- Analysis Functions ---
+    file_path = os.path.join(os.path.dirname(__file__), 'spi_data.parquet')
+    if not os.path.exists(file_path):
+        st.error(f"Fatal Error: The data file 'spi_data.parquet' was not found. The application cannot start.")
+        st.stop()
+        
+    df = pd.read_parquet(file_path)
+    fips_codes = sorted(df['countyfips'].unique().tolist())
+    return df, fips_codes
+
+# --- Analysis Functions (These remain unchanged) ---
 def plot_trend_analysis(ts):
     fig, ax = plt.subplots(figsize=(15, 7))
     rolling_avg = ts.rolling(window=12).mean()
-    ax.plot(ts.index, ts, label='Monthly Average SPI', color='lightblue', alpha=0.7)
+    ax.plot(ts.index, ts, label='Monthly SPI', color='lightblue', alpha=0.7)
     ax.plot(rolling_avg.index, rolling_avg, label='12-Month Rolling Average', color='navy')
-    ax.set_title('National SPI Trend Analysis')
+    ax.set_title('SPI Trend Analysis')
     ax.set_xlabel('Year')
     ax.set_ylabel('SPI Value')
     ax.grid(True, which='both', linestyle='--')
@@ -54,7 +62,7 @@ def plot_anomaly_detection(ts):
     ax.plot(ts.index, ts, label='Monthly SPI', color='dodgerblue')
     ax.plot(rolling_mean.index, rolling_mean, label='12-Month Rolling Mean', color='orange')
     ax.scatter(anomalies.index, anomalies, color='red', label='Anomaly', s=50, zorder=5)
-    ax.set_title('National SPI Anomaly Detection')
+    ax.set_title('SPI Anomaly Detection')
     ax.set_xlabel('Year')
     ax.set_ylabel('SPI Value')
     ax.legend()
@@ -72,7 +80,7 @@ def plot_seasonal_decomposition(ts):
     ax3.set_ylabel('Seasonal')
     decomposition.resid.plot(ax=ax4, legend=False, color='crimson')
     ax4.set_ylabel('Residual')
-    fig.suptitle('National SPI Time Series Decomposition', fontsize=16)
+    fig.suptitle('SPI Time Series Decomposition', fontsize=16)
     plt.xlabel('Year')
     return fig
 
@@ -93,7 +101,7 @@ def plot_forecasting(ts):
     ax.plot(ts.index, ts, label='Historical Monthly SPI')
     ax.plot(forecast_index, forecast.predicted_mean, label='Forecast', color='red')
     ax.fill_between(forecast_index, forecast.conf_int().iloc[:, 0], forecast.conf_int().iloc[:, 1], color='pink', alpha=0.7, label='95% Confidence Interval')
-    ax.set_title('National SPI Forecast (24-Month Horizon)')
+    ax.set_title('SPI Forecast (24-Month Horizon)')
     ax.set_xlabel('Year')
     ax.set_ylabel('SPI Value')
     ax.legend()
@@ -101,21 +109,36 @@ def plot_forecasting(ts):
     return fig
 
 # --- Main Application UI ---
-st.title("National Climate Analysis")
-st.markdown("This application provides time-series analysis for the national average Standardized Precipitation Index (SPI).")
+st.title("County-Level Climate Analysis")
+st.markdown("This application provides time-series analysis for the Standardized Precipitation Index (SPI) for any selected US county.")
 
-# Load the pre-aggregated dataset
-time_series = load_data()
+# Load the full dataset and the list of FIPS codes
+full_data, fips_codes = load_data()
 
 # --- Sidebar Controls ---
 st.sidebar.header("Controls")
+fips_code_input = st.sidebar.selectbox(
+    "Select County by FIPS Code:",
+    fips_codes,
+    index=fips_codes.index("06037") # Default to Los Angeles County
+)
+
 analysis_choice = st.sidebar.selectbox(
     "Select Analysis:",
     ["Trend Analysis", "Anomaly Detection", "Seasonal Decomposition", "Autocorrelation", "Forecasting"]
 )
 
 # --- Main Panel Logic ---
-st.header(f"National SPI: {analysis_choice}")
+st.header(f"{analysis_choice} for County FIPS: {fips_code_input}")
+
+# Filter the DataFrame in memory for the selected county
+county_df = full_data[full_data['countyfips'] == fips_code_input]
+
+# Prepare data for plotting
+county_df['date'] = pd.to_datetime(county_df['date'])
+county_df = county_df.sort_values('date')
+county_df.set_index('date', inplace=True)
+time_series = county_df['Value'].asfreq('MS')
 
 # --- Generate and Display the Selected Plot ---
 plot_function = {
@@ -131,4 +154,4 @@ st.pyplot(fig, use_container_width=True)
 
 # --- Footer ---
 st.markdown("---")
-st.markdown("This application uses pre-aggregated national data stored within the repository.")
+st.markdown("This application utilizes data stored within the repository, managed by Git LFS.")
