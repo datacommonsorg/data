@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -24,7 +25,6 @@ def load_data():
     """
     Ensures the Git LFS data is present and then loads the Parquet file.
     """
-    # This command attempts to force the download of LFS files.
     try:
         subprocess.run(["git", "lfs", "pull"], check=True)
     except Exception as e:
@@ -39,7 +39,7 @@ def load_data():
     fips_codes = sorted(df['countyfips'].unique().tolist())
     return df, fips_codes
 
-# --- Analysis Functions (These remain unchanged) ---
+# --- Analysis Functions ---
 def plot_trend_analysis(ts):
     fig, ax = plt.subplots(figsize=(15, 7))
     rolling_avg = ts.rolling(window=12).mean()
