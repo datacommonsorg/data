@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -23,13 +24,14 @@ def load_data():
     """
     Loads the pre-aggregated national data file from the local repository.
     """
+    # This file will be created in the final step.
     file_path = os.path.join(os.path.dirname(__file__), 'spi_national_monthly.csv')
     df = pd.read_csv(file_path)
     df['date'] = pd.to_datetime(df['date'])
     df.set_index('date', inplace=True)
     return df['MeanValue']
 
-# --- Analysis Functions (These remain unchanged) ---
+# --- Analysis Functions ---
 def plot_trend_analysis(ts):
     fig, ax = plt.subplots(figsize=(15, 7))
     rolling_avg = ts.rolling(window=12).mean()

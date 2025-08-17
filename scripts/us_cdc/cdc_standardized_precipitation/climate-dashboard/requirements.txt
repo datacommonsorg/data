@@ -2,7 +2,3 @@ streamlit
 pandas
 matplotlib
 statsmodels
-Pillow
-google-cloud-storage
-pyarrow
-gcsfs
