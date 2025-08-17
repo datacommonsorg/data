@@ -9,7 +9,6 @@ release_frequency,1Year
 process,
 comments,
 output_columns,"observationAbout,observationDate,value,variableMeasured,observationPeriod,measurementMethod"
-#places_resolved_csv,https://docs.google.com/spreadsheets/d/1UvsNC1c0MQRp96pDYM9p1RMXwU_zQvrWyRQ8qvcNO7I/edit?resourcekey=0-QY9rGTTnsUriVhhEK7_YTA&gid=0#gid=0
 mapped_rows,1
 mapped_columns,9
 header_rows,1
