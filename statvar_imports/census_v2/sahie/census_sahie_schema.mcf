@@ -1,0 +1,4 @@
+Node: dcid:USCensusPovertyThreshold
+name: "USCensusPovertyThreshold"
+typeOf: dcs:MeasurementMethodEnum
+description: "The USCensusPovertyThreshold is a set of annual income cutoffs used by the U.S. Census Bureau to determine who is considered to be living in poverty."
