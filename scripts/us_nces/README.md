@@ -136,7 +136,7 @@ The attributes used for the import are as follows
      - The download_config.py script has all the configurations required to download the file.
      - It has filter, download url, maximum tries etc. The values are same under all cases.
 
-    ##### download_config.py script
+    ##### download_file_details.py script
      - The download_file_details.py script has values for "default column", "columns to be downloaded" and "key coulmns".
      - Every input file can only accommodate 60 columns. In Public Schools multiple input files will be downloaded. All these input files will have a common column called as "Key Column" which acts as primary key.
      - In the "Public columns to be downloaded" create a list of columns.
