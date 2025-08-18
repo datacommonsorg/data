@@ -1,7 +1,7 @@
 param,value
 mapped_rows,5
 mapped_columns,1
-start_date,2011
+start_date,2017
 end_date,2023
 output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,measurementMethod,observationPeriod"
 header_rows,5

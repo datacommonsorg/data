@@ -1,5 +1,3 @@
-# Auto generated using command: "stat_var_processor.py --input_data=/usr/local/google/home/chharish/NCSES/NCES_median/data/statvar_imports/ncses/ncses_median_annual_salary/test_data/nsf*.xlsx --pv_map=/usr/local/google/home/chharish/NCSES/NCES_median/data/statvar_imports/ncses/ncses_median_annual_salary/median_annual_salary_pvmap.csv --config_file=/usr/local/google/home/chharish/NCSES/NCES_median/data/statvar_imports/ncses/ncses_median_annual_salary/median_annual_salary_metadata.csv --output_path=/usr/local/google/home/chharish/NCSES/NCES_median/data/statvar_imports/ncses/ncses_median_annual_salary/test_data/ncses_median_annual_salary --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_rows=20" on 2025-07-23 19:01:30.738524
-
 Node: dcid:Median_Earnings_Person_29OrLessYears_EducationalAttainmentCollegeGraduate_Employed_NotHispanicOrLatino_AmericanIndianOrAlaskaNativeAlone
 typeOf: dcid:StatisticalVariable
 populationType: dcid:Person

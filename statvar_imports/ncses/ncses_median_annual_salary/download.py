@@ -13,15 +13,19 @@
 # limitations under the License.
 
 # How to run the script to download the files:
-# python3 download_script.py
+# python3 download.py
 import requests
 from bs4 import BeautifulSoup
 import os
 import zipfile
-import re
 from absl import app
 from absl import logging
+from retry import retry
 
+@retry(tries=3, delay=2)
+def download_retry(url):
+    response = requests.get(url, stream=True, timeout=30)
+    return response
 
 def download_xlsx_from_ncses_table(url):
     """
@@ -39,7 +43,7 @@ def download_xlsx_from_ncses_table(url):
 
     logging.info(f"Fetching URL: {url}")
     try:
-        response = requests.get(url, timeout=30)
+        response = download_retry(url)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
         #used loggings.warning to prevent its overall execution
@@ -105,14 +109,12 @@ def download_xlsx_from_ncses_table(url):
             # file extraction logic
             logging.info(f"Processing extracted files in: {extract_path}")
             extracted_files = os.listdir(extract_path)
-            found_target_xlsx = False
             for f in extracted_files:
                 full_file_path = os.path.join(extract_path, f)
                 # Check if it's a file and an XLSX, and if it contains the desired fragment
                 if os.path.isfile(full_file_path) and f.lower().endswith('.xlsx'):
                     if required_data.lower() in f.lower():
                         logging.info(f"Keeping target XLSX file: {full_file_path}")
-                        found_target_xlsx = True
                     else:
                         # removing unnecessary xlsx files
                         os.remove(full_file_path)
@@ -122,9 +124,9 @@ def download_xlsx_from_ncses_table(url):
                     os.remove(full_file_path)
                     logging.info(f"Removed non-XLSX file: {full_file_path}")
         else:
-            logging.fatall("Downloaded file is not a valid ZIP archive (or could not be identified as such).")
+            logging.fatal("Downloaded file is not a valid ZIP archive (or could not be identified as such).")
 
-    except Exception as e: 
+    except (requests.exceptions.RequestException, zipfile.BadZipFile, OSError) as e:  
         logging.fatal(f"An unexpected error occurred during file processing: {e}")
         return False # Return False to indicate failure for this year
 
