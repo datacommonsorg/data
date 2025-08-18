@@ -93,12 +93,12 @@ def main(_):
 
     demographics_tables = [
         {"id": "DT_NSO_0300_002V1", "filename": "mid_year_total_population_by_region.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Aimag", "Код"]}},
-        {"id": "DT_NSO_0300_027V1", "filename": "number_of_households_by_region.csv", "header_mapping": {"keys": ["SCR_ENG"], "cols": ["Location"]}},
-        {"id": "DT_NSO_0300_003V1", "filename": "population_by_sex_and_age_group.csv", "header_mapping": {"keys": ["SCR_ENG1", "SCR_ENG","CODE"], "cols": ["Sex", "Age group"]}},
-        {"id": "DT_NSO_0300_033V1", "filename": "resident_population_by_agegroup_15_and_over_and_maritalstatus.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Aimag", "Код"]}},
-        {"id": "DT_NSO_0300_077V1", "filename": "total_population_by_age_group_and_sex.csv", "header_mapping": {"keys": ["SCR_ENG", "SCR_ENG1", "SCR_ENG2","CODE"], "cols": ["Marital Status", "Age Group", "Gender"]}},
+        {"id": "DT_NSO_0300_033V1", "filename": "number_of_households_by_region.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Aimag", "Код"]}},
+        {"id": "DT_NSO_0300_003V1", "filename": "total_population_by_age_group_and_sex.csv", "header_mapping": {"keys": ["SCR_ENG1", "SCR_ENG","CODE"], "cols": ["Sex", "Age group"]}},
+        {"id": "DT_NSO_0300_027V1", "filename": "total_population_by_sex_and_urban_rural.csv", "header_mapping": {"keys": ["SCR_ENG"], "cols": ["Location"]}},
+        {"id": "DT_NSO_0300_077V1", "filename": "resident_population_by_agegroup_15_and_over_and_maritalstatus.csv", "header_mapping": {"keys": ["SCR_ENG", "SCR_ENG1", "SCR_ENG2","CODE"], "cols": ["Marital Status", "Age Group", "Gender"]}},
         {"id": "DT_NSO_0300_004V1", "filename": "total_population_by_region_and_urban_rural.csv", "header_mapping": {"keys": ["SCR_ENG", "SCR_ENG1", "CODE1","CODE"], "cols": ["Total", "Aimag", "Код"]}},
-        {"id": "DT_NSO_0300_006V1", "filename": "total_population_by_sex_and_urban_rural.csv", "header_mapping": {"keys": ["SCR_ENG", "SCR_ENG1", "CODE"], "cols": ["NUMBER OF HOUSEHOLDS", "Aimag", "Код"]}},
+        {"id": "DT_NSO_0300_006V1", "filename": "number_of_households_by_region_and_urban_rural.csv", "header_mapping": {"keys": ["SCR_ENG", "SCR_ENG1", "CODE"], "cols": ["NUMBER OF HOUSEHOLDS", "Aimag", "Код"]}},
     ]
 
     for table in demographics_tables:
