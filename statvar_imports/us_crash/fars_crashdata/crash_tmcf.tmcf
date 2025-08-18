@@ -1,0 +1,10 @@
+Node: E:crash_tmcf->E0
+observationAbout: C:crash_tmcf->observationAbout
+observationDate: C:crash_tmcf->observationDate
+variableMeasured: C:crash_tmcf->variableMeasured
+value: C:crash_tmcf->value
+unit: C:crash_tmcf->unit
+observationPeriod: C:crash_tmcf->observationPeriod
+#Aggregate: sum
+typeOf: dcs:StatVarObservation
+measurementMethod: DataCommonsAggregate
