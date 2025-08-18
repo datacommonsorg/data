@@ -1,4 +1,4 @@
-# Copyright 2021 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -275,7 +275,6 @@ def get_data(params):
         time_until_reset = RATE_LIMIT_WINDOW - (time.time() - request_times[0])
         logging.info(f"Rate limit hit. Waiting {time_until_reset:.1f} seconds.")
         time.sleep(time_until_reset)
-        # time.sleep(60)
 
     logging.info(f"Fetching data from API: {params}")
 
@@ -352,8 +351,7 @@ def to_csv_row(data_row, svs):
         eprint('SKIPPED, Invalid value', f"'{value}'", 'for', name)
         return None
     value = int(value)
-    observation_about = f"dcid:geoId/{data_row['state_fips_code']}{county_code}" if data_row[
-        'state_fips_code'] else 'dcid:country/USA'
+    observation_about = f"dcid:geoId/{data_row['state_fips_code']}{county_code}" if data_row['state_fips_code'] else 'dcid:country/USA'
     sv = svs[name]
 
     return {

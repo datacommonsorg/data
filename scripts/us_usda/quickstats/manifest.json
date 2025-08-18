@@ -5,7 +5,7 @@
             "curator_emails": ["support@datacommons.org"],
             "provenance_url": "https://quickstats.nass.usda.gov/api/",
             "provenance_description": "The National Agricultural Statistics Service (NASS) offers Quick Stats, an on-line database containing official published aggregate estimates related to U.S. agricultural production.",
-            "scripts": ["process.py" ,"--usda_api_key=BC32BF1C-2FD0-324A-907B-DA467A0491F1"],
+            "scripts": ["process.py"],
             "source_files": ["input/*"],
             "import_inputs": [{
                 "template_mcf": "ag.tmcf",
