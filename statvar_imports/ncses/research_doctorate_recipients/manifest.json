@@ -25,12 +25,7 @@
             "source_files": [
                 "input_files/*"
             ],
-            "cron_schedule": "30 05 12,26 * *",
-            "resource_limits": {
-                "cpu": "8",
-                "memory": "32G"
-            },
-            "user_script_timeout": 3600
+            "cron_schedule": "30 05 12,26 * *"
         }
     ]
 }
