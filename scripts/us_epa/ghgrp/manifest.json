@@ -14,7 +14,6 @@
       ],
       "cron_schedule": "0 10 1,15 * *",
       "source_files": ["tmp_data/*"],
-      "timeout":72000,
       "cleanup_gcs_volume_mount": false
     }
   ]
