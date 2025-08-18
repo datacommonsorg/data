@@ -351,7 +351,8 @@ def to_csv_row(data_row, svs):
         eprint('SKIPPED, Invalid value', f"'{value}'", 'for', name)
         return None
     value = int(value)
-    observation_about = f"dcid:geoId/{data_row['state_fips_code']}{county_code}" if data_row['state_fips_code'] else 'dcid:country/USA'
+    observation_about = f"dcid:geoId/{data_row['state_fips_code']}{county_code}" if data_row[
+        'state_fips_code'] else 'dcid:country/USA'
     sv = svs[name]
 
     return {
