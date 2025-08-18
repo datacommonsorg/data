@@ -87,7 +87,6 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
         logging.error(f"An error occurred while processing {table_id}: {e}\n")
 
 def main(_):
-    
     demographics_dir = "mongolia_demographics/input_files"
     os.makedirs(demographics_dir, exist_ok=True) 
 
@@ -121,18 +120,18 @@ def main(_):
     for table in education_tables:
         filepath = os.path.join(education_dir, table['filename'])
         fetch_and_save_data(table['id'], filepath, table['header_mapping'])
+    
+    # Health Data
     health_dir = "mongolia_health/input_files"
     os.makedirs(health_dir, exist_ok=True) 
 
     health_tables = [
-      
         {"id": "DT_NSO_2100_001V1", "filename": "number_of_abortions_by_region.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Aimag", "Код"]}},
         {"id": "DT_NSO_2100_015V1", "filename": "infant_mortality_per_1000_live_births_by_month_region.csv", "header_mapping": {"keys": ["SCR_ENG","CODE"], "cols": ["Aimag", "Код"]}},
         {"id": "DT_NSO_2100_017V3", "filename": "number_of_mothers_delivered_child_by_month_region.csv", "header_mapping": {"keys": ["SCR_ENG","CODE"], "cols": ["Aimag", "Код"]}},
         {"id": "DT_NSO_2100_018V5", "filename": "live_births_by_month_region.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Aimag", "Код"]}},
         {"id": "DT_NSO_2100_005V1", "filename": "number_of_hospital_beds_by_type.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Aimag", "Код"]}},
-        {"id": "DT_NSO_2100_027V2", "filename": "deaths_by_month_and_region.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Aimag", "Код"]}},
-        
+        {"id": "DT_NSO_2100_027V2", "filename": "deaths_by_month_and_region.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Aimag", "Код"]}}   
     ]
 
     for table in health_tables:

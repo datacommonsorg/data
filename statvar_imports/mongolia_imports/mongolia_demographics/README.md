@@ -13,9 +13,9 @@ The workflow for this data import involves two main steps: downloading the neces
 - **Source:** [Mongolia population and household data](https://www.1212.mn/en/statcate)
 - **Description:** The provided URL links to the official website of the National Statistical Office (NSO) of Mongolia. This specific page presents official statistics and data related to the country's population and households.
 
-To get the necessary data files, you'll need to run download script `download_mongolia.py`.
+To get the necessary data files, you'll need to run download script `common_download_script.py`.
 
-All downloaded files will be located into the `input_files` folder.
+All downloaded files will be located into the `mongolia_demographics/input_files` folder.
 
 -----
 
@@ -46,6 +46,7 @@ python3 stat_var_processor.py
 --config_file=statvar_imports/mongolia_imports/mongolia_demographics/mongolia_metadata.csv
 --output_path=statvar_imports/mongolia_imports/mongolia_demographics/output_files/mid_year_total_population_by_region_output
 --places_resolved_csv=statvar_imports/mongolia_imports/mongolia_demographics/mongolia_place_resolver.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 ```bash
@@ -55,6 +56,7 @@ python3 stat_var_processor.py
 --config_file=statvar_imports/mongolia_imports/mongolia_demographics/mongolia_metadata.csv
 --output_path=statvar_imports/mongolia_imports/mongolia_demographics/output_files/number_of_households_by_region_and_urban_rural_output
 --places_resolved_csv=statvar_imports/mongolia_imports/mongolia_demographics/mongolia_place_resolver.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 ```bash
@@ -64,6 +66,7 @@ python3 stat_var_processor.py
 --config_file=statvar_imports/mongolia_imports/mongolia_demographics/mongolia_metadata.csv
 --output_path=statvar_imports/mongolia_imports/mongolia_demographics/output_files/number_of_households_by_region_output
 --places_resolved_csv=statvar_imports/mongolia_imports/mongolia_demographics/mongolia_place_resolver.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 ```bash
@@ -71,7 +74,8 @@ python3 stat_var_processor.py
 --input_data=statvar_imports/mongolia_imports/mongolia_demographics/input_files/resident_population_by_agegroup_15_and_over_and_maritalstatus.csv
 --pv_map=statvar_imports/mongolia_imports/mongolia_demographics/resident_population_by_agegroup_15_and_over_and_maritalstatus_pvmap.csv
 --config_file=statvar_imports/mongolia_imports/mongolia_demographics/mongolia_metadata.csv
---output_path=statvar_imports/mongolia_imports/mongolia_demographics/output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output 
+--output_path=statvar_imports/mongolia_imports/mongolia_demographics/output_files/resident_population_by_agegroup_15_and_over_and_maritalstatus_output
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 ```bash
@@ -80,6 +84,7 @@ python3 stat_var_processor.py
 --pv_map=statvar_imports/mongolia_imports/mongolia_demographics/total_population_by_age_group_and_sex_pvmap.csv
 --config_file=statvar_imports/mongolia_imports/mongolia_demographics/mongolia_metadata.csv
 --output_path=statvar_imports/mongolia_imports/mongolia_demographics/output_files/total_population_by_age_group_and_sex_output 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 ```bash
@@ -89,6 +94,7 @@ python3 stat_var_processor.py
 --config_file=statvar_imports/mongolia_imports/mongolia_demographics/mongolia_metadata.csv
 --output_path=statvar_imports/mongolia_imports/mongolia_demographics/output_files/total_population_by_region_and_urban_rural_output
 --places_resolved_csv=statvar_imports/mongolia_imports/mongolia_demographics/mongolia_place_resolver.csv 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
 ```bash
@@ -97,5 +103,6 @@ python3 stat_var_processor.py
 --pv_map=statvar_imports/mongolia_imports/mongolia_demographics/total_population_by_sex_and_urban_rural_pvmap.csv
 --config_file=statvar_imports/mongolia_imports/mongolia_demographics/total_population_by_sex_and_urban_rural_metadata.csv
 --output_path=statvar_imports/mongolia_imports/mongolia_demographics/output_files/total_population_by_sex_and_urban_rural_output 
+--existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```
 
