@@ -16,7 +16,6 @@
         "source_files": [
             "hate_crime_data/*"
         ],
-	"timeout": 10800,
         "cron_schedule": "0 10 21 * *"
       }
     ],
@@ -26,4 +25,3 @@
         "invoke_import_validation": false
     }
   }
-  

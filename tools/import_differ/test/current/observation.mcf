@@ -1,0 +1,221 @@
+
+Node: treasury_constant_maturity_rates/E10/115adaef-1547-4f5b-cabb-116d14c7a1ed
+observationDate: "2025-01-30"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryBond_20Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.85
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryBond_20YearobservationDate=2025-01-30value=4.81unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/v9wehq1lfrf55"
+
+Node: treasury_constant_maturity_rates/E1/115adaef-1547-4f5b-cabb-116d14c7a1ed
+observationDate: "2025-01-30"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryBill_1Month
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.37
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryBill_1MonthobservationDate=2025-01-30value=4.37unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/w2bn517f7nhx2"
+
+Node: treasury_constant_maturity_rates/E11/115adaef-1547-4f5b-cabb-116d14c7a1ed
+observationDate: "2025-01-30"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryBond_30Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.76
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryBond_30YearobservationDate=2025-01-30value=4.76unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/9zgnwtmylqkp"
+
+Node: treasury_constant_maturity_rates/E4/115adaef-1547-4f5b-cabb-116d14c7a1ed
+observationDate: "2025-01-30"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryBill_1Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.16
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryBill_1YearobservationDate=2025-01-30value=4.16unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/cntgfrykhwr2f"
+
+Node: treasury_constant_maturity_rates/E3/115adaef-1547-4f5b-cabb-116d14c7a1ed
+observationDate: "2025-01-30"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryBill_6Month
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.27
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryBill_6MonthobservationDate=2025-01-30value=4.27unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/l532egj2ctr1g"
+
+Node: treasury_constant_maturity_rates/E6/115adaef-1547-4f5b-cabb-116d14c7a1ed
+observationDate: "2025-01-30"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryNote_3Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.24
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryNote_3YearobservationDate=2025-01-30value=4.24unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/803ylnm4gzxl6"
+
+Node: treasury_constant_maturity_rates/E5/115adaef-1547-4f5b-cabb-116d14c7a1ed
+observationDate: "2025-01-30"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryNote_2Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.18
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryNote_2YearobservationDate=2025-01-30value=4.18unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/5n2yb9bcyn6b7"
+
+Node: treasury_constant_maturity_rates/E8/115adaef-1547-4f5b-cabb-116d14c7a1ed
+observationDate: "2025-01-30"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryNote_7Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.41
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryNote_7YearobservationDate=2025-01-30value=4.41unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/dxkb102qbndn8"
+
+Node: treasury_constant_maturity_rates/E7/115adaef-1547-4f5b-cabb-116d14c7a1ed
+observationDate: "2025-01-30"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryNote_5Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.31
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryNote_5YearobservationDate=2025-01-30value=4.31unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/c1t9lnb4ecnnh"
+
+Node: treasury_constant_maturity_rates/E9/115adaef-1547-4f5b-cabb-116d14c7a1ed
+observationDate: "2025-01-30"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryNote_10Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.52
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryNote_10YearobservationDate=2025-01-30value=4.52unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/jk9vmk5817yq3"
+
+Node: treasury_constant_maturity_rates/E10/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+observationDate: "2025-01-31"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryBond_20Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.88
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryBond_20YearobservationDate=2025-01-31value=4.88unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/hfvwczb7blx88"
+
+Node: treasury_constant_maturity_rates/E1/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+observationDate: "2025-01-31"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryBill_1Month
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.37
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryBill_1MonthobservationDate=2025-01-31value=4.37unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/m89c94nfqss13"
+
+Node: treasury_constant_maturity_rates/E11/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+observationDate: "2025-01-31"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryBond_30Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.83
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryBond_30YearobservationDate=2025-01-31value=4.83unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/pzpn4l4nxt026"
+
+Node: treasury_constant_maturity_rates/E4/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+observationDate: "2025-01-31"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryBill_1Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.17
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryBill_1YearobservationDate=2025-01-31value=4.17unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/j836cfl7k45x9"
+
+Node: treasury_constant_maturity_rates/E3/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+observationDate: "2025-01-31"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryBill_6Month
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.28
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryBill_6MonthobservationDate=2025-01-31value=4.28unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/c6888e7wy8mdg"
+
+Node: treasury_constant_maturity_rates/E6/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+observationDate: "2025-01-31"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryNote_3Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.27
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryNote_3YearobservationDate=2025-01-31value=4.27unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/ybe28y6bq92wh"
+
+Node: treasury_constant_maturity_rates/E5/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+observationDate: "2025-01-31"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryNote_2Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.22
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryNote_2YearobservationDate=2025-01-31value=4.22unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/btrsyzmwscnt4"
+
+Node: treasury_constant_maturity_rates/E8/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+observationDate: "2025-01-31"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryNote_7Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.47
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryNote_7YearobservationDate=2025-01-31value=4.47unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/k20ld0b17jxr3"
+
+Node: treasury_constant_maturity_rates/E7/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+observationDate: "2025-01-31"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryNote_5Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.36
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryNote_5YearobservationDate=2025-01-31value=4.36unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/q4lzrlbz0t4pg"
+
+Node: treasury_constant_maturity_rates/E9/c0eb81eb-be8c-d11a-9279-a0391c1b01ef
+observationDate: "2025-01-31"
+unit: dcid:Percent
+observationAbout: dcid:country/USA
+variableMeasured: dcid:InterestRate_TreasuryNote_10Year
+measurementMethod: dcid:ConstantMaturityRate
+value: 4.58
+typeOf: dcid:StatVarObservation
+keyString: "observationAbout=country/USAvariableMeasured=InterestRate_TreasuryNote_10YearobservationDate=2025-01-31value=4.58unit=PercentmeasurementMethod=ConstantMaturityRate"
+dcid: "dc/o/312zndw0sve38"
+
