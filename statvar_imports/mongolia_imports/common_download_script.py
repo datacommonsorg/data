@@ -14,6 +14,7 @@
 
 import csv
 import json
+import os
 import requests
 from absl import app
 from absl import logging
@@ -86,7 +87,11 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
         logging.error(f"An error occurred while processing {table_id}: {e}\n")
 
 def main(_):
-    tables_to_process = [
+    
+    demographics_dir = "mongolia_demographics/input_files"
+    os.makedirs(demographics_dir, exist_ok=True) 
+
+    demographics_tables = [
         {"id": "DT_NSO_0300_002V1", "filename": "mid_year_total_population_by_region.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Aimag", "Код"]}},
         {"id": "DT_NSO_0300_027V1", "filename": "number_of_households_by_region.csv", "header_mapping": {"keys": ["SCR_ENG"], "cols": ["Location"]}},
         {"id": "DT_NSO_0300_003V1", "filename": "population_by_sex_and_age_group.csv", "header_mapping": {"keys": ["SCR_ENG1", "SCR_ENG","CODE"], "cols": ["Sex", "Age group"]}},
@@ -94,6 +99,17 @@ def main(_):
         {"id": "DT_NSO_0300_077V1", "filename": "total_population_by_age_group_and_sex.csv", "header_mapping": {"keys": ["SCR_ENG", "SCR_ENG1", "SCR_ENG2","CODE"], "cols": ["Marital Status", "Age Group", "Gender"]}},
         {"id": "DT_NSO_0300_004V1", "filename": "total_population_by_region_and_urban_rural.csv", "header_mapping": {"keys": ["SCR_ENG", "SCR_ENG1", "CODE1","CODE"], "cols": ["Total", "Aimag", "Код"]}},
         {"id": "DT_NSO_0300_006V1", "filename": "total_population_by_sex_and_urban_rural.csv", "header_mapping": {"keys": ["SCR_ENG", "SCR_ENG1", "CODE"], "cols": ["NUMBER OF HOUSEHOLDS", "Aimag", "Код"]}},
+    ]
+
+    for table in demographics_tables:
+        filepath = os.path.join(demographics_dir, table['filename'])
+        fetch_and_save_data(table['id'], filepath, table['header_mapping'])
+
+    # Education Data
+    education_dir = "mongolia_education/input_files"
+    os.makedirs(education_dir, exist_ok=True) 
+
+    education_tables = [
         {"id": "DT_NSO_2001_013V1", "filename": "number_of_students_in_universities_and_colleges_by_region.csv", "header_mapping": {"keys": ["SCR_ENG1", "SCR_ENG", "CODE"], "cols": ["Sex", "Aimag", "Код"]}},
         {"id": "DT_NSO_2001_013V2", "filename": "students_of_universities_and_colleges_by_professional_field.csv", "header_mapping": {"keys": ["SCR_ENG","CODE"], "cols": ["Professional field"]}},
         {"id": "DT_NSO_2001_011V1", "filename": "number_of_kindergartens_by_region.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Aimag", "Код"]}},
@@ -102,8 +118,9 @@ def main(_):
         {"id": "DT_NSO_2001_015V2", "filename": "students_in_teritary_educational_institutions_by_sex_and_educational_degree.csv", "header_mapping": {"keys": ["SCR_ENG", "CODE"], "cols": ["Professional fields"]}}
     ]
 
-    for table in tables_to_process:
-        fetch_and_save_data(table['id'], table['filename'], table['header_mapping'])
+    for table in education_tables:
+        filepath = os.path.join(education_dir, table['filename'])
+        fetch_and_save_data(table['id'], filepath, table['header_mapping'])
 
     logging.info("All tasks completed")
 
