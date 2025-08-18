@@ -1,0 +1,23 @@
+{
+  "import_name": "CDC_StandardizedPrecipitationEvapotranspirationIndex",
+  "import_specifications": [
+    {
+      "import_name": "CDC_StandardizedPrecipitationEvapotranspirationIndex",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://data.cdc.gov/resource/6nbv-ifib",
+      "provenance_description": "Environmental Health Toxicology - Standardized Precipitation Evapotranspiration Index",
+      "scripts": [
+        "../download_script.py --import_name=CDC_StandardizedPrecipitationEvapotranspirationIndex --config_file=../import_configs.json",
+        "../parse_precipitation_index.py CDC_StandardizedPrecipitationEvapotranspirationIndex_input.csv output/CDC_StandardizedPrecipitationEvapotranspirationIndex_output.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "StandardizedPrecipitationEvapotranspirationIndex.tmcf",
+          "cleaned_csv": "output/CDC_StandardizedPrecipitationEvapotranspirationIndex_output.csv"
+        }
+      ],
+      "source_files": ["CDC_StandardizedPrecipitationEvapotranspirationIndex_input.csv"],
+      "cron_schedule": "0 10 1,15 * *"
+    }
+  ]
+}

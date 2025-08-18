@@ -20,6 +20,11 @@ import os
 import sys
 import time
 
+REPO_DIR = os.path.dirname(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(REPO_DIR)
+sys.path.append(os.path.join(REPO_DIR, 'util'))
+
 from absl import flags
 from absl import app
 
@@ -29,10 +34,6 @@ from app.service import file_uploader
 from app.service import github_api
 from app.service import email_notifier
 import dataclasses
-
-REPO_DIR = os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.append(os.path.join(REPO_DIR, 'util'))
 
 from log_util import log_metric, configure_cloud_logging
 from cloudrun_util import running_on_cloudrun
@@ -88,7 +89,7 @@ def run_import_job(absolute_import_name: str, import_config: str):
     result = executor.execute_imports_on_update(absolute_import_name)
     logging.info(result)
     elapsed_time_secs = int(time.time() - start_time)
-    message = (f"Cloud Run Job [{CLOUD_RUN_JOB_NAME}] completed with status= "
+    message = (f"Import Job [{absolute_import_name}] completed with status= "
                f"[{result.status}] in [{elapsed_time_secs}] seconds.)")
 
     log_metric(AUTO_IMPORT_JOB_STATUS_LOG_TYPE,
@@ -111,6 +112,8 @@ def main(_):
     if FLAGS.enable_cloud_logging or running_on_cloudrun_result:
         configure_cloud_logging()
         logging.info("Google Cloud Logging configured.")
+    logging.info(
+        f"Running import {FLAGS.import_name} with config:{FLAGS.import_config}")
     return run_import_job(FLAGS.import_name, FLAGS.import_config)
 
 
