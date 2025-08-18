@@ -26,7 +26,6 @@ from absl import logging
 from absl import app
 from google.cloud import storage
 
-
 script_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.dirname(os.path.dirname(script_dir))
 
@@ -39,13 +38,11 @@ except ImportError:
     logging.error("Could not import download_file. Make sure 'util/download_util_script.py' exists and is in the correct path relative to this script.")
     sys.exit(1)
 
-
 # --- GCS Configuration ---
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_API_KEYS_PREFIX = "ind_nfhs/latest"  
 API_KEYS_FILENAME = "api_keys.json"
 _GCS_OUTPUT_BASE_DIR = "gcs_output"
-
 
 # Get the directory of the current script
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -56,21 +53,16 @@ PROJECT_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', '..'))
 sys.path.insert(0, PROJECT_ROOT)
 
 # Add the 'data/util' directory to sys.path.
-# This is crucial because file_util.py expects to find aggregation_util.py
-# as a direct module import ('from aggregation_util import ...'),
-# and both are located within 'data/util/'.
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'data', 'util'))
 
-
 # Now, directly import file_util.
-# This assumes file_util.py is located at data/util/file_util.py relative to PROJECT_ROOT.
 try:
     from data.util import file_util
 except ImportError as e:
     logging.fatal(f"Failed to import file_util: {e}. Please ensure data/util/file_util.py exists and is accessible, and that the project root and data/util are correctly set in sys.path.", exc_info=True)
     raise RuntimeError('Import job failed due to Failed to import file_util')
 
-def load_api_keys():
+def __load_api_keys():
     """
     Loads API keys from a JSON file using the provided file_util module.
     The file is expected to be located in a GCS bucket and downloaded
@@ -110,8 +102,7 @@ def load_api_keys():
                 os.remove(os.path.join(local_temp_dir, file))
             os.rmdir(local_temp_dir)
 
-
-def fetch_api_data(api_url):
+def __fetch_api_data(api_url):
     """
     Fetches JSON data from the given API URL by downloading it to a temporary
     file, reading the file, and then cleaning up.
@@ -167,8 +158,7 @@ def fetch_api_data(api_url):
                 os.remove(os.path.join(temp_dir, file))
             os.rmdir(temp_dir)
 
-
-def extract_metadata_mapping(headers):
+def __extract_metadata_mapping(headers):
     """
     Extracts display name mappings for both indicators and dimensions from the 'Headers' section.
     Returns a dictionary mapping original IDs to DisplayNames.
@@ -180,8 +170,7 @@ def extract_metadata_mapping(headers):
             mapping[h["ID"]] = h.get("DisplayName", h["ID"])
     return mapping
 
-
-def flatten_data_records(raw_records):
+def __flatten_data_records(raw_records):
     """
     Flattens a list of raw data records into a consistent format suitable for a DataFrame.
     """
@@ -209,8 +198,7 @@ def flatten_data_records(raw_records):
 
     return cleaned_records
 
-
-def hash_page_records(records):
+def __hash_page_records(records):
     """
     Generates an MD5 hash for a list of records.
     """
@@ -221,8 +209,7 @@ def hash_page_records(records):
         m.update(record_string.encode('utf-8'))
     return m.hexdigest()
 
-
-def preprocess_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+def __preprocess_dataframe(df: pd.DataFrame) -> pd.DataFrame:
     """
     Performs preprocessing steps on the DataFrame.
     """
@@ -252,7 +239,7 @@ def preprocess_dataframe(df: pd.DataFrame) -> pd.DataFrame:
         
     return df
 
-def generate_filename(url):
+def __generate_filename(url):
     """
     Generates a filename from the API URL.
     """
@@ -268,8 +255,7 @@ def generate_filename(url):
         hash_object = hashlib.md5(url.encode())
         return f"api_data_{hash_object.hexdigest()}.csv"
 
-
-def process_ndap_api(api_url, output_dir, output_filename=None):
+def __process_ndap_api(api_url, output_dir, output_filename=None):
     """
     Downloads all paginated data from an NDAP API URL, processes it,
     and saves it to a CSV file.
@@ -291,7 +277,7 @@ def process_ndap_api(api_url, output_dir, output_filename=None):
 
     while True:
         paginated_url = f"{base_url_for_pagination}&pageno={current_page}"
-        data = fetch_api_data(paginated_url)
+        data = __fetch_api_data(paginated_url)
 
         if data is None:
             logging.fatal(f" Failed to retrieve valid data for page {current_page}, stopping pagination.")
@@ -303,13 +289,13 @@ def process_ndap_api(api_url, output_dir, output_filename=None):
         if metadata_headers is None:
             metadata_headers = data.get("Headers", {})
 
-        page_processed_records = flatten_data_records(page_raw_records)
+        page_processed_records = __flatten_data_records(page_raw_records)
 
         if not page_processed_records:
             logging.info(f" Page {current_page} returned no processed records after flattening, indicating end of data.")
             break
 
-        current_page_hash = hash_page_records(page_processed_records)
+        current_page_hash = __hash_page_records(page_processed_records)
         if current_page_hash in seen_page_hashes:
             logging.info(f" Page {current_page} has duplicate content. Stopping pagination to avoid infinite loop.")
             break
@@ -325,18 +311,18 @@ def process_ndap_api(api_url, output_dir, output_filename=None):
         raise RuntimeError('Import job failed due to no data was fetched across all pages .')
         return
 
-    column_name_mapping = extract_metadata_mapping(metadata_headers if metadata_headers else {})
+    column_name_mapping = __extract_metadata_mapping(metadata_headers if metadata_headers else {})
     
     df = pd.DataFrame(all_fetched_records)
     
     valid_renames = {old_name: new_name for old_name, new_name in column_name_mapping.items() if old_name in df.columns}
     df.rename(columns=valid_renames, inplace=True)
 
-    df = preprocess_dataframe(df)
+    df = __preprocess_dataframe(df)
 
     os.makedirs(output_dir, exist_ok=True)
     
-    final_output_filename = output_filename if output_filename else generate_filename(api_url)
+    final_output_filename = output_filename if output_filename else __generate_filename(api_url)
     output_filepath = os.path.join(output_dir, final_output_filename)
     
     df.to_csv(output_filepath, index=False, encoding='utf-8')
@@ -347,7 +333,7 @@ def main(argv):
     output_directory = _GCS_OUTPUT_BASE_DIR
 
     # Load API keys using the new function
-    api_keys = load_api_keys()
+    api_keys = __load_api_keys()
 
     api_configs = {
         "NFHS_Survey4.csv": f"https://loadqa.ndapapi.com/v1/openapi?API_Key={api_keys.get('NFHS_Survey4_API_Key')}&ind=I7034_6,I7034_7,I7034_8,I7034_9,I7034_10,I7034_11,I7034_12,I7034_13,I7034_14,I7034_15,I7034_16,I7034_17,I7034_18,I7034_19,I7034_20,I7034_21,I7034_22,I7034_23,I7034_24,I7034_25,I7034_26,I7034_27,I7034_28,I7034_29,I7034_30,I7034_31,I7034_32,I7034_33,I7034_34,I7034_35,I7034_36,I7034_37,I7034_38,I7034_39,I7034_40,I7034_41,I7034_42,I7034_43,I7034_44,I7034_45,I7034_46,I7034_47,I7034_48,I7034_49,I7034_50,I7034_51,I7034_52,I7034_53,I7034_54,I7034_55,I7034_56,I7034_57,I7034_58,I7034_59,I7034_60,I7034_61,I7034_62,I7034_63,I7034_64,I7034_65,I7034_66,I7034_67,I7034_68,I7034_69,I7034_70,I7034_71,I7034_72,I7034_73,I7034_74,I7034_75,I7034_76,I7034_77,I7034_78,I7034_79,I7034_80,I7034_81,I7034_82,I7034_83,I7034_84,I7034_85,I7034_86,I7034_87,I7034_88,I7034_89,I7034_90,I7034_91,I7034_92,I7034_93,I7034_94,I7034_95,I7034_96,I7034_97,I7034_98&dim=Country,StateName,StateCode,DistrictName,DistrictCode,Year,TRU&pageno=1",
@@ -356,8 +342,7 @@ def main(argv):
     }
 
     for filename, url in api_configs.items():
-        process_ndap_api(url, output_directory, output_filename=filename)
-
+        __process_ndap_api(url, output_directory, output_filename=filename)
 
 if __name__ == "__main__":
     app.run(main)
