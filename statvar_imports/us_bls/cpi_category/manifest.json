@@ -1,4 +1,4 @@
-					{
+{
     "import_specifications": [
       {
         "import_name": "BLS_CPI_Category",
@@ -19,12 +19,7 @@
         "source_files": [
           "input_data/*/*"
         ],
-        "resource_limits": {
-            "cpu": "8",
-            "memory": "32G"
-          },
         "cron_schedule": "0 10 21 * *"
       }
     ]
   }
-  
