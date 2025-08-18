@@ -29,25 +29,41 @@ After the files are downloaded, the data is processed in four separate stages us
 
 ```bash
 
+<<<<<<< Updated upstream
     python3  ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/brazil_sidra_ibge/input_files/Average_Real_Income/*.xlsx' --pv_map='../../statvar_imports/brazil_sidra_ibge/config_files/average_real_income_pvmap.csv' --config_file='../../statvar_imports/brazil_sidra_ibge/config_files/brazil_sidra_metadata.csv' --output_path=../../statvar_imports/brazil_sidra_ibge/output/average_real_income_output
+=======
+    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/brazil_sidra_ibge/input_files/Average_Real_Income/*.xlsx' --pv_map='../../statvar_imports/brazil_sidra_ibge/config_files/average_real_income_pvmap.csv,../../statvar_imports/brazil_sidra_ibge/config_files/place_pvmap.csv' --config_file='../../statvar_imports/brazil_sidra_ibge/config_files/brazil_sidra_metadata.csv' --output_path=../../statvar_imports/brazil_sidra_ibge/output/average_real_income_output
+>>>>>>> Stashed changes
 
  * Mass Income
 
 ```bash
 
+<<<<<<< Updated upstream
     python3  ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='input_files/Mass_Income/*.xlsx' --pv_map='config_files/mass_income_pvmap.csv' --config_file='config_files/brazil_sidra_metadata.csv' --output_path='output/mass_income_output'
+=======
+    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/brazil_sidra_ibge/input_files/Mass_Income/*.xlsx' --pv_map='../../statvar_imports/brazil_sidra_ibge/config_files/mass_income_pvmap.csv,../../statvar_imports/brazil_sidra_ibge/config_files/place_pvmap.csv' --config_file='../../statvar_imports/brazil_sidra_ibge/config_files/brazil_sidra_metadata.csv' --output_path=../../statvar_imports/brazil_sidra_ibge/output/mass_income_output
+>>>>>>> Stashed changes
 
  * Population Economic Sector
 
 ```bash
 
+<<<<<<< Updated upstream
     python3  ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='input_files/Population_Economic_sector/*.xlsx' --pv_map='config_files/population_pvmap.csv' --config_file='config_files/brazil_sidra_metadata.csv' --output_path=output/population_economic_sector_output
+=======
+    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/brazil_sidra_ibge/input_files/Population_Economic_sector/*.xlsx' --pv_map='../../statvar_imports/brazil_sidra_ibge/config_files/population_pvmap.csv,../../statvar_imports/brazil_sidra_ibge/config_files/place_pvmap.csv' --config_file='../../statvar_imports/brazil_sidra_ibge/config_files/brazil_sidra_metadata.csv' --output_path=../../statvar_imports/brazil_sidra_ibge/output/population_economic_sector_output
+>>>>>>> Stashed changes
 
  * Employment and Unemployment
 
 ```bash
 
+<<<<<<< Updated upstream
     python3  ../../tools/statvar_importer/stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='input_files/Employment_And_Unemployment_Labor_Force/*.xlsx' --pv_map='config_files/employment_and_unemployment_labor_force_pvmap.csv' --config_file='config_files/brazil_sidra_metadata.csv' --output_path=output/employment_and_unemployment_labor_force_output
+=======
+    python3 stat_var_processor.py --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --input_data='../../statvar_imports/brazil_sidra_ibge/input_files/Employment_And_Unemployment_Labor_Force/*.xlsx' --pv_map='../../statvar_imports/brazil_sidra_ibge/config_files/employment_and_unemployment_labor_force_pvmap.csv,../../statvar_imports/brazil_sidra_ibge/config_files/place_pvmap.csv' --config_file='../../statvar_imports/brazil_sidra_ibge/config_files/brazil_sidra_metadata.csv' --output_path=../../statvar_imports/brazil_sidra_ibge/output/employment_and_unemployment_labor_force_output
+>>>>>>> Stashed changes
 
 
 ### Automation
