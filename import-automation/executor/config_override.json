@@ -1,8 +1,7 @@
 {
     "configs":{
-        "executor_type": "CLOUD_RUN",
+        "executor_type": "CLOUD_BATCH",
         "user_script_args": [],
-        "user_script_env": {},
-        "user_script_timeout": 3600
-   }
- }
+        "user_script_env": {}
+    }
+}
