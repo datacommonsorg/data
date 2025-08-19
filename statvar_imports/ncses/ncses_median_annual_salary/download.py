@@ -153,7 +153,7 @@ def main(argv):
 
      
         if failure >= failure_threshold:
-            logging.fatal(f"Reached {failure_threshold} consecutive years with no data.Exiting.")
+            logging.info(f"Reached {failure_threshold} consecutive years with no data.Exiting.")
             break 
         #getting data on every 2 years
         start_year += 2
