@@ -334,22 +334,31 @@ class ImportExecutor:
                 )
             raise exc
 
+    def _get_blob_content(self, gcs_path: str) -> str:
+        """Returns the file content for the file in GCS path.
+        in the gcs_project_id and storage_prod_bucket_name."""
+        bucket = storage.Client(self.config.gcs_project_id).bucket(
+            self.config.storage_prod_bucket_name)
+        blob = bucket.get_blob(gcs_path)
+        if not blob:
+            logging.error(f'Not able to find GCS file {gcs_path}.')
+            return ''
+        content = blob.download_as_text()
+        if not content:
+            return ''
+        return content
+
     def _get_latest_version(self, import_dir: str) -> str:
         """
         Find previous import data in GCS.
         Returns:
           GCS path for the latest import data.
         """
-        bucket = storage.Client(self.config.gcs_project_id).bucket(
-            self.config.storage_prod_bucket_name)
-        blob = bucket.get_blob(
-            f'{import_dir}/{self.config.storage_version_filename}')
-        if not blob or not blob.download_as_text():
-            logging.error(
-                f'Not able to find latest_version.txt in {import_dir}.')
-            return ''
-        latest_version = blob.download_as_text()
-        return f'gs://{bucket.name}/{import_dir}/{latest_version}'
+        latest_version = self._get_blob_content(
+            os.path.join(import_dir, self.config.storage_version_filename))
+        if latest_version:
+            return f'gs://{self.config.storage_prod_bucket_name}/{import_dir}/{latest_version}'
+        return ''
 
     def _get_import_input_files(self, import_input, absolute_import_dir):
         input_files = []
@@ -357,13 +366,18 @@ class ImportExecutor:
         # Get import files in the order template_mcf, node_mcf and cleaned_csv
         for file_type in sorted(import_input.keys(), reverse=True):
             pattern = import_input[file_type]
-            if pattern:
-                files = glob.glob(os.path.join(absolute_import_dir, pattern))
-                if not files and not glob.has_magic(pattern):
-                    errors.append(
-                        f'No matching files for {file_type}:{pattern}')
-                else:
-                    input_files.extend(sorted(files))
+            patterns = [pattern]
+            if isinstance(pattern, list):
+                patterns = pattern
+            for pattern in patterns:
+                if pattern:
+                    files = glob.glob(os.path.join(absolute_import_dir,
+                                                   pattern))
+                    if not files and not glob.has_magic(pattern):
+                        errors.append(
+                            f'No matching files for {file_type}:{pattern}')
+                    else:
+                        input_files.extend(sorted(files))
         import_prefix = ''
         if input_files:
             import_prefix = os.path.splitext(os.path.basename(
@@ -434,11 +448,7 @@ class ImportExecutor:
         differ_job_name = 'differ'
 
         # Trigger validations for each tmcf/csv under import_inputs.
-        import_inputs = import_spec.get('import_inputs', [])
-        i = 0
-        for import_input in import_inputs:
-            import_prefix = import_prefix_list[i]
-            i += 1
+        for import_prefix in import_prefix_list:
             if not import_prefix:
                 logging.error('Skipping validation due to missing import spec.')
                 continue
@@ -447,33 +457,42 @@ class ImportExecutor:
                                                   import_prefix, 'validation')
             current_data_path = os.path.join(validation_output_path, '*.mcf')
             previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
+            # Save the previous version being compared to
+            with open(
+                    os.path.join(validation_output_path,
+                                 'previous_version.txt'), 'w') as f:
+                f.write(f'{latest_version}\n')
             summary_stats = os.path.join(validation_output_path,
                                          'summary_report.csv')
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
             differ_output = os.path.join(validation_output_path,
-                                         'point_analysis_summary.csv')
+                                         'obs_diff_summary.csv')
 
             # Invoke differ and validation scripts.
             differ_output_file = ''
             if self.config.invoke_differ_tool and latest_version and len(
                     file_util.file_get_matching(previous_data_path)) > 0:
-                logging.info('Invoking differ tool...')
+                logging.info(
+                    f'Invoking differ tool comparing {import_prefix} with {latest_version}...'
+                )
                 differ = ImportDiffer(current_data=current_data_path,
                                       previous_data=previous_data_path,
                                       output_location=validation_output_path,
-                                      differ_tool='',
                                       project_id=self.config.gcp_project_id,
                                       job_name=differ_job_name,
                                       file_format='mcf',
-                                      runner_mode='native')
+                                      runner_mode='local')
                 differ.run_differ()
                 differ_output_file = differ_output
             else:
+                differ_output_file = ''
                 logging.error(
                     'Skipping differ tool due to missing latest mcf file')
 
-            logging.info('Invoking validation script...')
+            logging.info(
+                f'Invoking validation script with config: {config_file_path}, differ:{differ_output_file}, summary:{summary_stats}...'
+            )
             try:
                 validation = ValidationRunner(config_file_path,
                                               differ_output_file, summary_stats,
@@ -560,6 +579,16 @@ class ImportExecutor:
         self.uploader.upload_string(
             self._import_metadata_mcf_helper(import_spec),
             os.path.join(output_dir, self.config.import_metadata_mcf_filename))
+        if self.config.storage_version_history_filename:
+            # Add current version to the history of versions.
+            history_filename = os.path.join(
+                output_dir, self.config.storage_version_history_filename)
+            versions_history = [version]
+            history = self._get_blob_content(history_filename)
+            if history:
+                versions_history.append(history)
+            self.uploader.upload_string('\n'.join(versions_history),
+                                        history_filename)
         logging.info(f'Updated import latest version {version}')
 
     def _import_one_helper(
@@ -650,6 +679,8 @@ class ImportExecutor:
             else:
                 logging.error(
                     "Skipping latest version update due to validation failure.")
+                raise RuntimeError(
+                    'Import job failed due to data validation failure.')
 
         if self.importer:
             self.importer.delete_previous_output(relative_import_dir,
@@ -673,9 +704,6 @@ class ImportExecutor:
                 block=True,
                 timeout=self.config.importer_import_timeout,
             )
-        if not validation_status:
-            raise RuntimeError(
-                'Import job failed due to data validation failure.')
 
     def _upload_import_inputs(self, import_dir: str, output_dir: str,
                               version: str,
@@ -704,24 +732,29 @@ class ImportExecutor:
                 path = import_input.get(input_type)
                 if not path:
                     continue
-                import_file_path = os.path.join(import_dir, path)
-                import_files = file_util.file_get_matching(import_file_path)
-                if import_files:
-                    for file in import_files:
-                        if file:
-                            dest = f'{output_dir}/{version}/{os.path.basename(file)}'
-                            self._upload_file_helper(
-                                src=file,
-                                dest=dest,
-                            )
-                    uploaded_dest = f'{output_dir}/{version}/{os.path.basename(path)}'
-                    setattr(uploaded, input_type, uploaded_dest)
-                elif not glob.has_magic(path):
-                    errors.append(
-                        f'Missing file {input_type}:{import_file_path}')
-                else:
-                    logging.warning(
-                        f'Missing output file: {input_type}:{import_file_path}')
+                paths = [path]
+                if isinstance(path, list):
+                    paths = path
+                for path in paths:
+                    import_file_path = os.path.join(import_dir, path)
+                    import_files = file_util.file_get_matching(import_file_path)
+                    if import_files:
+                        for file in import_files:
+                            if file:
+                                dest = f'{output_dir}/{version}/{os.path.basename(file)}'
+                                self._upload_file_helper(
+                                    src=file,
+                                    dest=dest,
+                                )
+                        uploaded_dest = f'{output_dir}/{version}/{os.path.basename(path)}'
+                        setattr(uploaded, input_type, uploaded_dest)
+                    elif not glob.has_magic(path):
+                        errors.append(
+                            f'Missing file {input_type}:{import_file_path}')
+                    else:
+                        logging.warning(
+                            f'Missing output file: {input_type}:{import_file_path}'
+                        )
         # Upload any files downloaded from source
         source_files = [
             os.path.join(import_dir, file)

@@ -81,11 +81,15 @@ class ValidationRunner:
                 f"A validation rule requires the 'stats' data source, but the --stats_summary file was not provided or does not exist. Path: {stats_summary}"
             )
 
-        if differ_required and (not differ_output or
-                                not os.path.exists(differ_output)):
-            raise ValueError(
-                f"A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. Path: {differ_output}"
-            )
+        if differ_required:
+            if differ_output and not os.path.exists(differ_output):
+                raise ValueError(
+                    f"A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. Path: {differ_output}"
+                )
+            if not differ_output:
+                logging.warning(
+                    f'Validation rules require differ but no differ_output provided.'
+                )
 
         if stats_summary and os.path.exists(stats_summary) and os.path.getsize(
                 stats_summary) > 0:
@@ -149,6 +153,10 @@ class ValidationRunner:
 
                 data_source = scope['data_source']
                 df = self.dataframes[data_source]
+                if df.empty:
+                    logging.warning(
+                        f'Skipping validation {rule} due to empty data')
+                    continue
 
                 if 'variables' in scope:
                     variables_config = scope['variables']
