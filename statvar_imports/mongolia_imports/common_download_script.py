@@ -77,11 +77,11 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
                             row.append(period_values.get(period, ""))
                         csv_writer.writerow(row)
 
-                logging.info(f"Successfully created pivoted CSV file: {csv_filepath}\n")
+                logging.info(f"Successfully created  CSV file: {csv_filepath}\n")
             else:
-                logging.error(f"Error: 'DataList' not found in the response for {table_id}.\n")
+                logging.fatal(f"Error: 'DataList' not found in the response for {table_id}.\n")
         else:
-            logging.error(f"Error: Request for {table_id} failed with status code {response.status_code}\n")
+            logging.fatal(f"Error: Request for {table_id} failed with status code {response.status_code}\n")
 
     except requests.exceptions.RequestException as e:
         logging.error(f"An error occurred while processing {table_id}: {e}\n")
@@ -136,6 +136,20 @@ def main(_):
 
     for table in health_tables:
         filepath = os.path.join(health_dir, table['filename'])
+        fetch_and_save_data(table['id'], filepath, table['header_mapping'])
+    employment_dir = "mongolia_employment/input_files"
+    os.makedirs(employment_dir, exist_ok=True) 
+
+    employment_tables = [
+      
+        {"id": "DT_NSO_0400_002V4", "filename": "registered_unemployment_by_agegroup_gender_region_aimag.csv", "header_mapping": {"keys": ["SCR_MN", "SCR_ENG1","CODE1","SCR_ENG2"], "cols": ["Age", "Aimag","Код","Gender"]}},
+        {"id": "DT_NSO_0400_002V7", "filename": "registered_job_seekers_by_agegroup_gender.csv", "header_mapping": {"keys": ["SCR_ENG2","SCR_ENG","CODE","SCR_ENG1"], "cols": ["Age", "Aimag","Код","Sex"]}},
+        {"id": "DT_NSO_0400_082V6", "filename": "informal_employment.csv", "header_mapping": {"keys": ["SCR_ENG","CODE","SCR_ENG1","SCR_ENG2"], "cols": ["Aimag","Код","Divisions","Gender"]}},
+      
+        ]
+
+    for table in employment_tables:
+        filepath = os.path.join(employment_dir, table['filename'])
         fetch_and_save_data(table['id'], filepath, table['header_mapping'])
 
     logging.info("All tasks completed")
