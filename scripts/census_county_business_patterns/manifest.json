@@ -8,7 +8,6 @@
       "scripts": ["main.py",
                   "shard_input_csv.sh"
           ],
-      "cleanup_gcs_volume_mount": false,
       "source_files": ["gcs_output/input_files/*"],
       "import_inputs": [
         {
@@ -16,18 +15,7 @@
           "cleaned_csv": "gcs_output/output/*.csv"
         }
       ],
-      "resource_limits": {
-        "cpu": "8",
-        "memory": "32G"
-      },
-      "timeout":144000,
       "cron_schedule": "0 9 5,25 * *"
     }
-  ],
-  "config_override":{
-      "invoke_import_tool": false,
-      "invoke_import_validation": false,
-      "ignore_validation_status": true
-   }
-
+  ]
 }
