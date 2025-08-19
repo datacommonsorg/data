@@ -27,7 +27,7 @@ def download_retry(url):
     response = requests.get(url, stream=True, timeout=30)
     return response
 
-def download_xlsx_from_ncses_table(url):
+def download_xlsx_from_ncses_table(url, current_year):
     """
     Downloads a specific ZIP file from a given URL, identified by its filename.
     The ZIP file is stored uniquely in 'source_files'.
@@ -39,7 +39,6 @@ def download_xlsx_from_ncses_table(url):
     Returns:
         bool: True if the URL was fetched successfully, False otherwise.
     """
-    global CURRENT_PROCESSING_YEAR
 
     logging.info(f"Fetching URL: {url}")
     try:
@@ -90,7 +89,7 @@ def download_xlsx_from_ncses_table(url):
         download_response.raise_for_status()
         source_files_zip_base_dir = "source_files"
         os.makedirs(source_files_zip_base_dir, exist_ok=True)
-        unique_zip_filename = f"{CURRENT_PROCESSING_YEAR}_{desired_zip_filename}"
+        unique_zip_filename = f"{current_year}_{desired_zip_filename}"
         zip_filepath = os.path.join(source_files_zip_base_dir, unique_zip_filename)
         with open(zip_filepath, 'wb') as f:
             for chunk in download_response.iter_content(chunk_size=8192):
@@ -133,7 +132,6 @@ def download_xlsx_from_ncses_table(url):
     return True
 
 def main(argv):
-    global CURRENT_PROCESSING_YEAR
     # In the UI data is available from 2021 only.
     start_year = 2021
 
@@ -145,9 +143,8 @@ def main(argv):
     while True: 
         target_url = base_url.format(year=start_year)
         logging.info(f"Attempting to process data for year: {start_year}")
-        CURRENT_PROCESSING_YEAR = start_year
 
-        if download_xlsx_from_ncses_table(target_url):
+        if download_xlsx_from_ncses_table(target_url, start_year):
             logging.info(f"Successfully processed data for year: {start_year}")
             failure = 0 
         else:
