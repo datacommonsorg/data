@@ -550,7 +550,7 @@ def process_companies(input_table_path, existing_facilities_file,
         tableWriter = csv.DictWriter(twfp, _TABLE_CLEAN_CSV_HDR, doublequote=False, escapechar="\\")
         tableWriter.writeheader()
 
-        ownershipWriter = csv.DictWriter(owfp, _OWNERSHIP_CLEAN_CSV_HDR)
+        ownershipWriter = csv.DictWriter(owfp, _OWNERSHIP_CLEAN_CSV_HDR, doublequote=False, escapechar="\\")
         ownershipWriter.writeheader()
 
         existing_facilities_path = os.path.join(
