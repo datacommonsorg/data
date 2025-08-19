@@ -37,7 +37,11 @@ from absl import flags
 from absl import logging
 from collections import deque
 import time
-import config
+
+_SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
+print('1111111', _SCRIPT_PATH)
+sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
+import file_util
 
 API_BASE = 'https://quickstats.nass.usda.gov/api'
 CSV_COLUMNS = [
@@ -54,13 +58,12 @@ SKIPPED_COUNTY_CODES = set([
     '998',  # "OTHER" county code
 ])
 
-_GCS_PROJECT_ID = "datcom-204919"
-_GCS_BUCKET = "datcom-csv"
-_GCS_FILE_PATH = "usda/agriculture_survey/config.json"
-
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')
 flags.DEFINE_string('start_year', '2024', 'start_year')
+flags.DEFINE_string('api_key',
+                    'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
+                    'directory where api key exists')
 
 
 def process_survey_data(year, svs, input_dir, out_dir):
@@ -103,7 +106,8 @@ def process_survey_data(year, svs, input_dir, out_dir):
         logging.info(f'End, {year}, =, {end}')
         logging.info(f'Duration, {year}, =, {str(end - start)}')
     except Exception as e:
-        logging.error(f"Error while processing the data for year :{e}")
+        logging.fatal(f"Error while processing the data for year: {e}")
+        raise RuntimeError(f"Failed to process data for year due to: {e}")
 
 
 def get_parts_dir(input_dir, year):
@@ -210,10 +214,10 @@ def get_survey_county_data(year, county, input_dir):
                 with open(response_file, 'r') as f:
                     response = json.load(f)
             else:
-                logging.error(f"Response file not found: {response_file}")
+                logging.warning(f"Response file not found: {response_file}")
                 return {'data': []}
         except Exception as e:
-            logging.error(
+            logging.warning(
                 f"Error while reading response file: {response_file}. Error: {e}"
             )
             return {'data': []}
@@ -406,14 +410,6 @@ def get_multiple_years():
     logging.info(f'Duration, {str(end - start)}')
 
 
-def get_cloud_config():
-    logging.info(f'Getting cloud config.')
-    storage_client = storage.Client(_GCS_PROJECT_ID)
-    bucket = storage_client.bucket(_GCS_BUCKET)
-    blob = bucket.blob(_GCS_FILE_PATH)
-    return json.loads(blob.download_as_string(client=None))
-
-
 def load_usda_api_key():
     """
     Sets the API key to be used.
@@ -422,14 +418,16 @@ def load_usda_api_key():
     """
     api_key = get_usda_api_key()
     if not api_key:
-        raise ValueError("USDA API key not found in config file.")
+        raise ValueError("USDA API key not found in bucket path.")
     return api_key
 
 
 def get_usda_api_key():
-    """Reads the USDA API key from the config file."""
+    """Reads the USDA API key from the bucket path."""
     # This function now correctly returns the key from the config module.
-    return config.API_KEY
+    file_config = file_util.file_load_py_dict(_FLAGS.api_key)
+    api_key = file_config.get('api_key')
+    return api_key
 
 
 def main(_):
