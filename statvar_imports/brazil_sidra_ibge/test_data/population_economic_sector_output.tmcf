@@ -1,0 +1,9 @@
+Node: E:Population_Economic_sector_output->E0
+observationAbout: C:Population_Economic_sector_output->observationAbout
+observationDate: C:Population_Economic_sector_output->observationDate
+variableMeasured: C:Population_Economic_sector_output->variableMeasured
+value: C:Population_Economic_sector_output->value
+unit: C:Population_Economic_sector_output->unit
+scalingFactor: C:Population_Economic_sector_output->scalingFactor
+observationPeriod: C:Population_Economic_sector_output->observationPeriod
+typeOf: dcs:StatVarObservation
