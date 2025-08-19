@@ -16,6 +16,7 @@
 import csv
 import io
 import unittest
+from absl.testing import absltest
 from process import to_csv_rows, get_survey_county_data, write_csv, load_svs
 
 
@@ -27,7 +28,7 @@ class ProcessTest(unittest.TestCase):
             expected = f.read()
 
         svs = load_svs()
-        api_data = get_survey_county_data(2022, 'ALAMEDA', 'testdata')
+        api_data = get_survey_county_data(2025, 'ABBEVILLE', 'testdata')
         csv_rows = to_csv_rows(api_data, svs)
         out = io.StringIO()
         print(csv_rows)
@@ -36,4 +37,4 @@ class ProcessTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    absltest.main()

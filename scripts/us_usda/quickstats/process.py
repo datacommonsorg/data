@@ -39,7 +39,6 @@ from collections import deque
 import time
 
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
-print('1111111', _SCRIPT_PATH)
 sys.path.append(os.path.join(_SCRIPT_PATH, '../../../util/'))
 import file_util
 
@@ -60,7 +59,7 @@ SKIPPED_COUNTY_CODES = set([
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_string('start_year', '2024', 'start_year')
+flags.DEFINE_string('start_year', '2025', 'start_year')
 flags.DEFINE_string('api_key',
                     'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
                     'directory where api key exists')
