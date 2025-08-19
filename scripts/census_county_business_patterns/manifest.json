@@ -15,6 +15,7 @@
           "cleaned_csv": "gcs_output/output/*.csv"
         }
       ],
+      
       "cron_schedule": "0 9 5,25 * *"
     }
   ]
