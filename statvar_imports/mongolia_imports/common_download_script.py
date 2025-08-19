@@ -79,9 +79,9 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
 
                 logging.info(f"Successfully created  CSV file: {csv_filepath}\n")
             else:
-                logging.fatal(f"Error: 'DataList' not found in the response for {table_id}.\n")
+                logging.warning(f"Error: 'DataList' not found in the response for {table_id}.\n")
         else:
-            logging.fatal(f"Error: Request for {table_id} failed with status code {response.status_code}\n")
+            logging.warning(f"Error: Request for {table_id} failed with status code {response.status_code}\n")
 
     except requests.exceptions.RequestException as e:
         logging.fatal(f"An error occurred while processing {table_id}: {e}\n")
