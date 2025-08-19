@@ -11,12 +11,7 @@
                 "template_mcf": "ag.tmcf",
                 "cleaned_csv": "output/*.csv"
             }],
-        "cron_schedule": "30 3 10 3,6,9,12 *",
-        "resource_limits": {
-        "cpu": "8",
-        "memory": "32G"
-      },
-      "timeout":144000
+        "cron_schedule": "30 3 10 3,6,9,12 *"
         }
     ]
 }
