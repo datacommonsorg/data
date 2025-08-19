@@ -84,7 +84,7 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
             logging.fatal(f"Error: Request for {table_id} failed with status code {response.status_code}\n")
 
     except requests.exceptions.RequestException as e:
-        logging.error(f"An error occurred while processing {table_id}: {e}\n")
+        logging.fatal(f"An error occurred while processing {table_id}: {e}\n")
 
 def main(_):
     demographics_dir = "mongolia_demographics/input_files"
