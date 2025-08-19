@@ -1,14 +1,28 @@
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#       https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+"""A simple script to download existing Facilities in Data Commons."""
+
 import os
 import pathlib
 import pandas as pd
 import json
 import tempfile
 import sys
+import shutil
 
 # Import absl for logging and flags
 from absl import app, flags, logging
-# Import Google Cloud Storage client
-from google.cloud import storage
+
 
 from datacommons_client import DataCommonsClient
 
@@ -18,18 +32,21 @@ logging.set_verbosity(logging.INFO)
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
 
+
 # --- GCS Configuration ---
 GCS_BUCKET_NAME = "unresolved_mcf"
 GCS_API_KEYS_PREFIX = "epa/parent_company/latest"
 API_KEYS_FILENAME = "api_key.json"
-
+# Add the gcs_source_path flag with a default value
+flags.DEFINE_string('gcs_source_path',
+                    f"gs://{GCS_BUCKET_NAME}/{GCS_API_KEYS_PREFIX}/{API_KEYS_FILENAME}",
+                    'Google Cloud Storage path for the API key JSON file.')
+                    
 # Get the directory of the current script
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Define PROJECT_ROOT based on the provided path:
-# /usr/local/google/home/jainme/nfhs/data/scripts/us_epa/parent_company/download_existing_facilities.py
-# PROJECT_ROOT should be /usr/local/google/home/jainme/nfhs/
-# This means going up 4 levels from the current script's directory.
+
 PROJECT_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', '..', '..'))
 
 # Add PROJECT_ROOT to sys.path
@@ -42,8 +59,8 @@ try:
     from data.util import file_util
 except ImportError as e:
     logging.fatal(f"Failed to import file_util: {e}. "
-                  "Please ensure data/util/file_util.py exists and is accessible, "
-                  "and that the project root and data/util are correctly set in sys.path.", exc_info=True)
+                    "Please ensure data/util/file_util.py exists and is accessible, "
+                    "and that the project root and data/util are correctly set in sys.path.", exc_info=True)
     # Added RuntimeError
     raise RuntimeError(f"Initialization failed: {e}")
     sys.exit(1) # Exit if file_util cannot be imported
@@ -60,7 +77,9 @@ def get_api_key_from_gcs():
 
     try:
         logging.info("--- Starting GCS File Transfer for API key ---")
-        gcs_source_path = f"gs://{GCS_BUCKET_NAME}/{GCS_API_KEYS_PREFIX}/{API_KEYS_FILENAME}"
+        
+        # Use the gcs_source_path flag
+        gcs_source_path = FLAGS.gcs_source_path
 
         # Use file_util.file_copy to download the file from GCS
         file_util.file_copy(gcs_source_path, local_filepath)
@@ -74,7 +93,7 @@ def get_api_key_from_gcs():
         api_key = api_keys_data.get("DATACOMMONS_API_KEY")
         if not api_key:
             logging.fatal("DATACOMMONS_API_KEY not found in the loaded api_key.json. "
-                          "Please ensure the key exists and is named correctly within the JSON.")
+                            "Please ensure the key exists and is named correctly within the JSON.")
             # Added RuntimeError
             raise RuntimeError("API key not found in JSON.")
 
@@ -96,9 +115,7 @@ def get_api_key_from_gcs():
         # Clean up the temporary directory
         if os.path.exists(local_temp_dir):
             try:
-                for file in os.listdir(local_temp_dir):
-                    os.remove(os.path.join(local_temp_dir, file))
-                os.rmdir(local_temp_dir)
+                shutil.rmtree(local_temp_dir) # Use shutil for cleaner removal
             except OSError as e:
                 logging.warning(f"Error cleaning up temporary directory {local_temp_dir}: {e}")
     return api_key
@@ -107,11 +124,6 @@ def get_api_key_from_gcs():
 def main(_):
     # Fetch API key from GCS
     api_key = get_api_key_from_gcs()
-    if not api_key:
-        logging.fatal("Failed to retrieve Data Commons API key from GCS. Exiting.")
-        # Added RuntimeError
-        raise RuntimeError("Failed to retrieve API key.")
-        sys.exit(1) # Exit if API key is not available
 
     pathlib.Path(FLAGS.output_path).mkdir(exist_ok=True)
     out_file = os.path.join(FLAGS.output_path, 'existing_facilities.csv')
@@ -139,8 +151,7 @@ def main(_):
     df = pd.DataFrame({"epaGhgrpFacilityId": facility_ids})
     df.to_csv(out_file, index=False)
 
-    logging.info(f"✅ Wrote {len(facility_ids)} facility IDs to: {out_file}")
+    logging.info(f" Wrote {len(facility_ids)} facility IDs to: {out_file}")
 
 if __name__ == '__main__':
     app.run(main)
-

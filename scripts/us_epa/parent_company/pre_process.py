@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#        https://www.apache.org/licenses/LICENSE-2.0
+#       https://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -17,10 +17,10 @@ import os.path
 import pathlib
 import sys
 import csv
-import difflib
-import json
-import pandas as pd
-import re
+import difflib # Still needed for SequenceMatcher
+import json    # Still needed for some internal logic, though not directly in the fix area
+import pandas as pd # Used for pd.read_csv
+import re      # Still needed for regex in _str_matching_replace
 
 from absl import app
 from absl import flags
@@ -53,27 +53,8 @@ _EPA_FACILITY_GHG_ID = "epaGhgrpFacilityId"
 # Mapping which contains the company id duplicates. This is global and is populated by preprocess.
 _DUPLICATE_MAPPING = {}
 
-# New function for camel-casing, preserving 'LLC'
-def clean_and_camel_case(text):
-    """
-    Cleans a string by removing special characters and converts it to CamelCase,
-    preserving 'LLC' in its original case.
-    """
-    # Remove special characters: ()-_., etc.
-    cleaned = re.sub(r'[^\w\s]', '', text)
-    
-    # Split into words
-    words = cleaned.split()
 
-    result = []
-    for word in words:
-        if word.upper() == 'LLC':
-            result.append('LLC')
-        else:
-            result.append(word.capitalize())
-            
-    # Join into single CamelCase string
-    return ''.join(result)
+
 
 def _str(v):
     if not v:
@@ -93,10 +74,10 @@ def _str_matching_replace(s):
 def _add_to_duplicate_mapping(company_id_1, company_id_2, company_id_count):
     # This function operates on the global _DUPLICATE_MAPPING
     if ((company_id_1 in _DUPLICATE_MAPPING and
-              company_id_2 == _DUPLICATE_MAPPING[company_id_1]) or
-              (company_id_2 in _DUPLICATE_MAPPING and
-              company_id_1 == _DUPLICATE_MAPPING[company_id_2])):
-        logging.debug(f"Skipping duplicate mapping already present: {company_id_1} <-> {company_id_2}")
+             company_id_2 == _DUPLICATE_MAPPING[company_id_1]) or
+            (company_id_2 in _DUPLICATE_MAPPING and
+             company_id_1 == _DUPLICATE_MAPPING[company_id_2])):
+        
         return
 
     key = company_id_1
@@ -104,8 +85,8 @@ def _add_to_duplicate_mapping(company_id_1, company_id_2, company_id_count):
     comp_count = company_id_count.get(company_id_2, 0)
 
     if ((company_id_count.get(company_id_1, 0) > comp_count) or
-              ((company_id_count.get(company_id_1, 0) == comp_count) and
-              (len(company_id_1) >= len(company_id_2)))):
+            ((company_id_count.get(company_id_1, 0) == comp_count) and
+             (len(company_id_1) >= len(company_id_2)))):
         key = company_id_2
         val = company_id_1
         comp_count = company_id_count.get(company_id_1, 0)
@@ -117,10 +98,10 @@ def _add_to_duplicate_mapping(company_id_1, company_id_2, company_id_count):
         existing_count = company_id_count.get(existing_company, 0)
 
     if ((comp_count >= existing_count) or
-              ((comp_count == existing_count) and
-              (len(val) >= len(existing_company)))):
+            ((comp_count == existing_count) and
+             (len(val) >= len(existing_company)))):
         _DUPLICATE_MAPPING[key] = val
-        logging.debug(f"Added/Updated duplicate mapping: {key} -> {val}")
+       
 
 
 def _add_static_duplicates(static_mappings, company_id_count):
@@ -152,14 +133,14 @@ def _insert_overlaps(loc_map, company_id_count):
                     m1 = v_i.lower()
                     m2 = v_j.lower()
                     
-                    logging.debug(f"Comparing: '{m1}' vs '{m2}'")
+                    
 
                     seq1 = difflib.SequenceMatcher(a=_str_matching_replace(m1),
-                                                     b=_str_matching_replace(m2))
+                                                   b=_str_matching_replace(m2))
                     seq2 = difflib.SequenceMatcher(a=m1, b=m2)
 
                     diff_score = max(seq1.ratio(), seq2.ratio())
-                    logging.debug(f"Similarity score: {diff_score}")
+                   
                     
                     if (diff_score > 0.8):
                         id_match_found = True
@@ -178,7 +159,7 @@ def _resolve_multiple_indirections():
         path = [k]
         while v_loc in _DUPLICATE_MAPPING:
             if v_loc in path:
-                logging.error(f"❌ Cycle detected in duplicate mapping starting from {k}. Path: {path + [v_loc]}")
+                logging.error(f" Cycle detected in duplicate mapping starting from {k}. Path: {path + [v_loc]}")
                 break
             path.append(v_loc)
             v_loc = _DUPLICATE_MAPPING[v_loc]
@@ -211,7 +192,8 @@ def preprocess(input_table_path, existing_facilities_file):
 
     unique_company_ids = set()
     company_id_count = {}
-    
+    # num_rows_written is no longer tracked here. It's tracked in process_companies.
+
     logging.info("First inserting static mappings...")
     _add_static_duplicates(sc.company_id_mappings, company_id_count)
 
@@ -221,6 +203,7 @@ def preprocess(input_table_path, existing_facilities_file):
         
         logging.info(f"CSV Headers found in '{input_table}': {cr.fieldnames}")
         
+        # Determine the actual key used in the CSV for facility ID
         actual_facility_id_csv_key = None
         if "FACILITY_ID" in cr.fieldnames:
             actual_facility_id_csv_key = "FACILITY_ID"
@@ -228,7 +211,7 @@ def preprocess(input_table_path, existing_facilities_file):
             actual_facility_id_csv_key = "facility_id"
         
         if not actual_facility_id_csv_key:
-            logging.fatal(f"❌ FATAL: Neither 'FACILITY_ID' nor 'facility_id' found in CSV headers. Cannot proceed. Found headers: {cr.fieldnames}")
+            logging.fatal(f" FATAL: Neither 'FACILITY_ID' nor 'facility_id' found in CSV headers. Cannot proceed. Found headers: {cr.fieldnames}")
             sys.exit(1)
         
         logging.info(f"Using CSV header '{actual_facility_id_csv_key}' for Facility ID extraction.")
@@ -237,40 +220,47 @@ def preprocess(input_table_path, existing_facilities_file):
             if i % 500 == 0:
                 logging.info(f"Processing row {i} from input table...")
             
-            facility_id = in_row.get(actual_facility_id_csv_key, '')
-            logging.debug(f"Row {i+1} - Directly extracted facility_id: '{facility_id}'")
+            # --- CRITICAL SIMPLIFICATION: Get facility_id directly using correct CSV key ---
+            # And pass EMPTY table_prefix to fh.v so it uses row.get(col, '')
+            # The 'col' argument to fh.v should be the actual key from the DictReader.
             
-            if not facility_id:
-                logging.fatal(f"❌ FATAL: Mandatory FACILITY_ID is empty in row {i+1}. Skipping. Row content: {in_row}")
+            # Option A: Directly use the value from the in_row dict
+            # This is the simplest if fh.v just needs the value and not
+            # to resolve it using table_prefix internally.
+            facility_id = in_row.get(actual_facility_id_csv_key, '')
+            
+
+            
+            
+            if not facility_id: # Check if the extracted ID is empty/falsy
+                logging.fatal(f" FATAL: Mandatory FACILITY_ID is empty in row {i+1}. Skipping. Row content: {in_row}")
+                # _COUNTERS_COMPANIES["facility_id_extraction_failed"].add(str(in_row)) # Counters are in process_companies
                 continue
             
             ghg_id = _EPA_FACILITY_GHG_ID + "/" + facility_id
 
             if ghg_id not in relevant_facility_ids:
-                logging.debug(f"Skipping row {i+1}: '{ghg_id}' not found in relevant_facility_ids.")
+                
                 continue
 
             company_name = fh.get_name(_TABLE,
                                        in_row,
                                        "PARENT_COMPANY_NAME",
-                                       table_prefix=_TABLE_PREFIX)
+                                       table_prefix=_TABLE_PREFIX) # This should use table_prefix for company_name
             company_name = company_name.replace("\"", "").replace("'", "")
             if not company_name:
-                logging.debug(f"Skipping row {i+1}: 'PARENT_COMPANY_NAME' not found or empty for {ghg_id}.")
-                continue
             
-            # 🆕 Apply camel-case logic here 🆕
-            company_name = clean_and_camel_case(company_name)
-
+                continue
             unique_company_names.add(company_name)
             company_id = fh.name_to_id(company_name)
             
             if not company_id:
-                logging.fatal(f"❌ FATAL: Mandatory company_id is empty (from name_to_id) for row {i+1}. Skipping. Row content: {in_row}")
+                logging.fatal(f" FATAL: Mandatory company_id is empty (from name_to_id) for row {i+1}. Skipping. Row content: {in_row}")
+                # _COUNTERS_COMPANIES["company_id_name_to_id_failed"].add(str(in_row))
                 continue
 
             address = _str(
-                fh.get_address(_TABLE, in_row, table_prefix=_TABLE_PREFIX))
+                fh.get_address(_TABLE, in_row, table_prefix=_TABLE_PREFIX)) # This should use table_prefix for address
 
             if address not in address_map:
                 address_map[address] = set()
@@ -310,8 +300,8 @@ def preprocess(input_table_path, existing_facilities_file):
     output_path = os.path.join(input_table_path, "DuplicateIdMappings.csv")
     with open(output_path, "w") as opth:
         writer = csv.DictWriter(opth, ["Id", "MappedTo", "Occurences"],
-                                 doublequote=False,
-                                 escapechar="\\")
+                                doublequote=False,
+                                escapechar="\\")
         writer.writeheader()
 
         for k, v in dict(sorted(_DUPLICATE_MAPPING.items())).items():
