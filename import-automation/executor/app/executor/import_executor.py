@@ -679,6 +679,8 @@ class ImportExecutor:
             else:
                 logging.error(
                     "Skipping latest version update due to validation failure.")
+                raise RuntimeError(
+                    'Import job failed due to data validation failure.')
 
         if self.importer:
             self.importer.delete_previous_output(relative_import_dir,
@@ -702,9 +704,6 @@ class ImportExecutor:
                 block=True,
                 timeout=self.config.importer_import_timeout,
             )
-        if not validation_status:
-            raise RuntimeError(
-                'Import job failed due to data validation failure.')
 
     def _upload_import_inputs(self, import_dir: str, output_dir: str,
                               version: str,
