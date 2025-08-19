@@ -17,6 +17,8 @@ To get the necessary data files, you'll need to run download script `common_down
 
 All downloaded files will be located into the `mongolia_demographics/input_files` folder.
 
+This import will be fully refreshed in an automated manner.
+
 -----
 
 #### Step 2: Process the Files
