@@ -1,0 +1,31 @@
+key,p1,v1,p2,v2,,,,,,
+Students,measuredProperty,count,statType,measuredValue,,,,,,
+    Education,educationalDegree,EducationMajor,statType,measuredValue,,,,,,
+    Arts and humanities,educationalDegree,HumanityAndArts,statType,measuredValue,,,,,,
+    Arts,educationalDegree,ArtsMajor,statType,measuredValue,,,,,,
+"    Social sciences, journalism and information",educationalDegree,SocialSciencesMajor__CommunicationJournalismAndRelatedMajor,statType,measuredValue,,,,,,
+    Journalism and information,educationalDegree,CommunicationJournalismAndRelatedMajor,statType,measuredValue,,,,,,
+"    Business, administration and law",educationalDegree,BusinessAdministrationAndManagement__LegalProfessionsAndStudiesMajor,statType,measuredValue,,,,,,
+    Law,educationalDegree,LegalProfessionsAndStudiesMajor,statType,measuredValue,,,,,,
+"    Natural sciences, mathematics and statistics",educationalDegree,NaturalSciences__MathAndStatisticsMajor,statType,measuredValue,,,,,,
+    Biological and related sciences,educationalDegree,BiologicalAndBiomedicalSciencesMajor,statType,measuredValue,,,,,,
+        Mathematics and statistics,educationalDegree,MathAndStatisticsMajor,statType,measuredValue,,,,,,
+        Information and Communication Technologies,educationalDegree,InformationAndCommunicationsTechnologiesMajor ,statType,measuredValue,,,,,,
+"        Engineering, manufacturing and construction",educationalDegree,EngineeringMajor__EngineeringManufacturing__ConstructionEngineering,statType,measuredValue,,,,,,
+        Engineering and engineering trades,educationalDegree,EngineeringMajor,statType,measuredValue,,,,,,
+        Architecture and construction,educationalDegree,ArchitectureAndRelatedServicesMajor__ConstructionEngineering,statType,measuredValue,,,,,,
+"        Agriculture, forestry, fisheries and veterinary",educationalDegree,AgriculturalEngineering__ForestryEngineering__Fisheries__Veterinary,statType,measuredValue,,,,,,
+        Agriculture,educationalDegree,AgriculturalEngineering,statType,measuredValue,,,,,,
+        Health and welfare,educationalDegree,HealthWelfare,statType,measuredValue,,,,,,
+        Health,educationalDegree,HealthRelatedMajor,statType,measuredValue,,,,,,
+    Services,educationalDegree,ServicesRelatedMajor,,,,,,,,
+        General basic curriculum,educationalDegree,GeneralBasicCurriculumMajor,,,,,,,,
+2016,observationDate,2016,value,{Number},observationAbout,country/MNG,populationType,Students,measuredProperty,count
+2017,observationDate,2017,value,{Number},observationAbout,country/MNG,populationType,Students,measuredProperty,count
+2018,observationDate,2018,value,{Number},observationAbout,country/MNG,populationType,Students,measuredProperty,count
+2019,observationDate,2019,value,{Number},observationAbout,country/MNG,populationType,Students,measuredProperty,count
+2020,observationDate,2020,value,{Number},observationAbout,country/MNG,populationType,Students,measuredProperty,count
+2021,observationDate,2021,value,{Number},observationAbout,country/MNG,populationType,Students,measuredProperty,count
+2022,observationDate,2022,value,{Number},observationAbout,country/MNG,populationType,Students,measuredProperty,count
+2023,observationDate,2023,value,{Number},observationAbout,country/MNG,populationType,Students,measuredProperty,count
+2024,observationDate,2024,value,{Number},observationAbout,country/MNG,populationType,Students,measuredProperty,count
