@@ -17,6 +17,7 @@
 
 import os
 import sys
+import shutil
 from absl import app
 from absl import logging
 import datetime
@@ -36,13 +37,12 @@ def clean_csv_file(file_path):
     """
     # List of required header columns to identify the start of the CSV data.
     header_parts = ['year', 'version', 'statefips', 'countyfips', 'geocat']
-    lines_to_write = []
-
+    temp_file_path = file_path + ".tmp"
     try:
         logging.info(
             f"Reading {os.path.basename(file_path)} with UTF-8 encoding."
         )
-        with open(file_path, 'r', encoding='utf-8') as infile:
+        with open(file_path, 'r', encoding='utf-8') as infile, open(temp_file_path, 'w', encoding='utf-8') as outfile:
             found_header = False
             for line in infile:
                 # The actual CSV data starts with the header row.
@@ -51,13 +51,9 @@ def clean_csv_file(file_path):
                     found_header = True
 
                 if found_header:
-                    lines_to_write.append(line)
+                    outfile.write(line)
         
-        content_to_write = "".join(lines_to_write)
-
-        # Write the cleaned content back to the original file path using UTF-8
-        with open(file_path, 'w', encoding='utf-8') as outfile:
-            outfile.write(content_to_write)
+        shutil.move(temp_file_path, file_path)
         logging.info(f"Successfully cleaned file: {os.path.basename(file_path)}")
 
     except UnicodeDecodeError as e:
