@@ -547,7 +547,7 @@ def process_companies(input_table_path, existing_facilities_file,
     with \
         open(table_path + "Table.csv", "w", newline='') as twfp, \
         open(ownership_path + "Ownership.csv", "w", newline='') as owfp:
-        tableWriter = csv.DictWriter(twfp, _TABLE_CLEAN_CSV_HDR)
+        tableWriter = csv.DictWriter(twfp, _TABLE_CLEAN_CSV_HDR, doublequote=False, escapechar="\\")
         tableWriter.writeheader()
 
         ownershipWriter = csv.DictWriter(owfp, _OWNERSHIP_CLEAN_CSV_HDR)
