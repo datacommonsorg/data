@@ -8,7 +8,7 @@
       "scripts": ["download.py",
       "../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/NFHS_state.csv --pv_map=nfhsStatepvmap.csv --config_file=metadata.csv --places_resolved_csv=NFHS-Stateplace_resolver.csv --output_path=output/NFHS_output",
       "../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/NFHS_Survey4.csv --pv_map=nfhs4pvmap.csv  --config_file=metadata.csv  --output_path=output/NFHS4_output",
-    "../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/NFHS_Survey5.csv --pv_map=nfhs5pvmap.csv  --config_file=metadata.csv --places_resolved_csv=NFHS-5 - lgdresolve.csv --output_path=output/NHFS5_output"  ],
+    "../../tools/statvar_importer/stat_var_processor.py --input_data=gcs_output/NFHS_Survey5.csv --pv_map=nfhs5pvmap.csv  --config_file=metadata.csv --places_resolved_csv=NFHS-5 - lgdresolve.csv --output_path=output/NFHS5_output"  ],
       "import_inputs": [
         {
           "template_mcf": "output/NFHS_output.tmcf",
