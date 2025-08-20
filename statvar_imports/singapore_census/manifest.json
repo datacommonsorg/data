@@ -19,7 +19,7 @@
             ],
             "import_inputs": [
                 {
-                    "template_mcf": "output_path/DeathByCause.tmcf",
+                    "template_mcf": "common_tmcf.tmcf",
                     "cleaned_csv": "output_path/*.csv"
                 }
             ],
