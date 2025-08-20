@@ -1,0 +1,14 @@
+parameter,value
+url,
+description,
+#place_type,"Country, AdministrativeArea1"
+#places_within,country/BRA
+start_date,2022
+end_date,2025
+release_frequency,Yearly
+word_delimiter,""" """
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod"
+schemaless,1
+header_rows,5
+drop_statvars_without_svobs,0
