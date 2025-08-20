@@ -32,7 +32,7 @@ import differ_utils
 
 _SAMPLE_COUNT = 3
 
-_DATAFLOW_TEMPLATE_URL = 'gs://datcom-dataflow/templates/flex/differ.json'
+_DATAFLOW_TEMPLATE_URL = 'gs://datcom-templates/templates/flex/differ.json'
 
 Diff = Enum('Diff', [
     ('ADDED', 1),
@@ -114,8 +114,7 @@ class ImportDiffer:
 
     def _cleanup_data(self, df: pd.DataFrame):
         for column in [Diff.ADDED, Diff.DELETED, Diff.MODIFIED]:
-            df[column.name] = df[
-                column.name] if column.name in df.columns else 0
+            df[column.name] = df.get(column.name, 0)
             df[column.name] = df[column.name].fillna(0).astype(int)
 
     def _get_samples(self, row):
@@ -139,11 +138,11 @@ class ImportDiffer:
           intermediate diff data for analysis
         """
         if current_df.empty and not previous_df.empty:
-            result = previous_df
+            result = previous_df.copy()
             result[Column.diff_type.name] = Diff.DELETED.name
             return result
         elif previous_df.empty and not current_df.empty:
-            result = current_df
+            result = current_df.copy()
             result[Column.diff_type.name] = Diff.ADDED.name
             return result
         elif previous_df.empty and current_df.empty:
@@ -162,7 +161,9 @@ class ImportDiffer:
           else Diff.DELETED.name if row[Column.diff_type.name] == 'left_only' \
           else Diff.MODIFIED.name if row[Column.value_combined.name + '_x'] != row[Column.value_combined.name + '_y'] \
           else Diff.UNMODIFIED.name, axis=1)
-        result = result[result[Column.diff_type.name] != Diff.UNMODIFIED.name]
+        result.drop(
+            result[result[Column.diff_type.name] == Diff.UNMODIFIED.name].index,
+            inplace=True)
         # result.sort_values(by=[Column.diff_type.name], inplace=True)
         result.reset_index(drop=True, inplace=True)
         if result.empty:
@@ -206,13 +207,16 @@ class ImportDiffer:
                     Column.value_combined.name: value_combined
                 })
             else:
+                node_id_key = str(node.get('Node', ""))
+                node_id_key = str(node.get(Column.dcid.name, ""))
+                if not node_id_key:
+                    logging.error(f'Skipping node as dcid is missing {node}.')
+                    continue
                 values_to_combine = []
-                keys_to_combine = []
-                groupby_keys = [Column.dcid.name]
+                keys_to_combine = [node_id_key]
+                node.pop(Column.dcid.name)
+                node.pop('Node', None)
                 value_keys = sorted(node.keys())
-                value_keys.remove(Column.dcid.name)
-                for key in groupby_keys:
-                    keys_to_combine.append(str(node.get(key, "")))
                 for key in value_keys:
                     values_to_combine.append(key + ":" + str(node.get(key, "")))
                 key_combined = ";".join(keys_to_combine)
@@ -222,7 +226,10 @@ class ImportDiffer:
                     Column.value_combined.name: value_combined
                 })
 
-        return pd.DataFrame(obs_list), pd.DataFrame(schema_list)
+        schema_df = pd.DataFrame(schema_list)
+        schema_df.drop_duplicates(inplace=True)
+        obs_df = pd.DataFrame(obs_list)
+        return obs_df, schema_df
 
     def observation_diff_analysis(
             self, diff: pd.DataFrame) -> (pd.DataFrame, pd.DataFrame):
@@ -242,24 +249,12 @@ class ImportDiffer:
                 Column.diff_size.name
             ])
 
-        column_list = [
-            Column.variableMeasured.name, Column.observationAbout.name,
-            Column.observationDate.name, Column.diff_type.name
-        ]
-        split_data = diff[Column.key_combined.name].str.split(';', expand=True)
-        in_df = split_data.rename(
-            columns={
-                0: Column.variableMeasured.name,
-                1: Column.observationAbout.name,
-                2: Column.observationDate.name
-            })
-        in_df = in_df.loc[:, [
-            'variableMeasured', 'observationAbout', 'observationDate'
-        ]]
-        in_df[Column.diff_type.name] = diff[Column.diff_type.name]
+        split_df = diff[Column.key_combined.name].str.split(';', expand=True)
+        diff[Column.variableMeasured.name] = split_df[0]
+        diff[Column.observationAbout.name] = split_df[1]
+        diff[Column.observationDate.name] = split_df[2]
 
-        # in_df = diff.loc[:, column_list]
-        samples = in_df.groupby(
+        samples = diff.groupby(
             [Column.variableMeasured.name, Column.diff_type.name],
             observed=True,
             as_index=False)[[
@@ -337,8 +332,8 @@ class ImportDiffer:
         logging.info('Dataflow job url: %s', url)
         status = 'JOB_STATE_UNKNOWN'
         dataflow = build("dataflow", "v1b3")
-        request = (dataflow.projects().jobs().list(projectId=project,
-                                                   name=job_id))
+        request = (dataflow.projects().locations().jobs().list(
+            projectId=project, location='us-central1', name=job_id))
         while (status != 'JOB_STATE_DONE' and status != 'JOB_STATE_FAILED' and
                status != 'JOB_STATE_CANCELLED'):
             logging.info(
