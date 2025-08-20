@@ -208,7 +208,7 @@ class ImportDiffer:
                 })
             else:
                 node_id_key = str(node.get('Node', ""))
-                node_id_key = str(node.get(Column.dcid.name, ""))
+                node_id_key = str(node.get(Column.dcid.name, node_id_key))
                 if not node_id_key:
                     logging.error(f'Skipping node as dcid is missing {node}.')
                     continue
