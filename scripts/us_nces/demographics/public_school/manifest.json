@@ -17,12 +17,7 @@
           "cleaned_csv": "gcs_output/output_place/us_nces_demographics_public_place.csv"
                   }
       ],
-      "cron_schedule": "30 3 2 3,6,9,12 *",
-      "resource_limits": {
-        "cpu": "8",
-        "memory": "32G"
-      },
-      "timeout":144000
+      "cron_schedule": "30 3 2 3,6,9,12 *"
     }
   ]
 }
