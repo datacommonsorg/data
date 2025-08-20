@@ -1,0 +1,11 @@
+Node: dcid:Median_Earnings_Person_29OrLessYears_EducationalAttainmentCollegeGraduate_Employed_NotHispanicOrLatino_AmericanIndianOrAlaskaNativeAlone
+typeOf: dcid:StatisticalVariable
+populationType: dcid:Person
+measuredProperty: dcid:earnings
+statType: dcid:medianValue
+age: [- 29 Years]
+educationalAttainment: dcid:CollegeGraduate
+employmentStatus: dcid:Employed
+ethnicity: dcid:NotHispanicOrLatino
+race: dcid:AmericanIndianOrAlaskaNativeAlone
+

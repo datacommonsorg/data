@@ -1,0 +1,9 @@
+Node: E:Mass_Income_output->E0
+observationAbout: C:Mass_Income_output->observationAbout
+observationDate: C:Mass_Income_output->observationDate
+variableMeasured: C:Mass_Income_output->variableMeasured
+value: C:Mass_Income_output->value
+unit: C:Mass_Income_output->unit
+scalingFactor: C:Mass_Income_output->scalingFactor
+observationPeriod: C:Mass_Income_output->observationPeriod
+typeOf: dcs:StatVarObservation
