@@ -85,6 +85,7 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
 
     except requests.exceptions.RequestException as e:
         logging.fatal(f"An error occurred while processing {table_id}: {e}\n")
+        raise RuntimeError("Failed to process API request.")
 
 def main(_):
     demographics_dir = "mongolia_demographics/input_files"
@@ -145,6 +146,8 @@ def main(_):
         {"id": "DT_NSO_0400_002V4", "filename": "registered_unemployment_by_agegroup_gender_region_aimag.csv", "header_mapping": {"keys": ["SCR_MN", "SCR_ENG1","CODE1","SCR_ENG2"], "cols": ["Age", "Aimag","Код","Gender"]}},
         {"id": "DT_NSO_0400_002V7", "filename": "registered_job_seekers_by_agegroup_gender.csv", "header_mapping": {"keys": ["SCR_ENG2","SCR_ENG","CODE","SCR_ENG1"], "cols": ["Age", "Aimag","Код","Sex"]}},
         {"id": "DT_NSO_0400_082V6", "filename": "informal_employment.csv", "header_mapping": {"keys": ["SCR_ENG","CODE","SCR_ENG1","SCR_ENG2"], "cols": ["Aimag","Код","Divisions","Gender"]}},
+        {"id": "DT_NSO_0400_002V8", "filename": "registered_job_seekers_by_education_level.csv", "header_mapping": {"keys": ["SCR_ENG1","SCR_ENG","CODE","SCR_ENG2"], "cols": ["Gender","Aimag","Код","Level of education"]}}
+
       
         ]
 
