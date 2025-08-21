@@ -23,9 +23,9 @@ The import process is divided into two main stages: downloading the raw data and
   * `census_sahie_schema.mcf`: Statistical variable definitions.
 
 * **Transformation pipeline**:
-  1. `download_script.py` downloads the annual data releases for all years from 2018 to the current year. It then unzips the files and cleans the CSV headers, saving the results in the `gcs_output/input_files/` directory.
+  1. `download_script.py` downloads the annual data releases for all years from 2018 to the current year. It then unzips the files and cleans the CSV headers, saving the results in the `input_files/` directory.
   2. After the download is complete, the `stat_var_processor.py` tool is run on all cleaned CSV files.
-  3. The processor uses the `census_sahie_metadata.csv` and `census_sahie_pv_map.csv` files to generate the final `census_sahie.csv` and `census_sahie.tmcf` files, placing them in the `gcs_output/output_files/` directory.
+  3. The processor uses the `census_sahie_metadata.csv` and `census_sahie_pv_map.csv` files to generate the final `census_sahie.csv` and `census_sahie.tmcf` files, placing them in the `output_files/` directory.
 
 * **Data Quality Checks**:
   * Linting is performed on the generated output files using the DataCommons import tool.
@@ -57,7 +57,7 @@ This script downloads all available annual data files, unzips them, and cleans t
 ```bash
 python3 download_script.py
 ```
-The cleaned source files will be located in `gcs_output/input_files/`.
+The cleaned source files will be located in `input_files/`.
 
 ---
 
@@ -69,10 +69,10 @@ This script processes all cleaned input files to generate the final `census_sahi
 **Usage**:
 ```bash
 python3 ../../../tools/statvar_importer/stat_var_processor.py \
-  --input_data='gcs_output/input_files/*.csv' \
+  --input_data='input_files/*.csv' \
   --pv_map='census_sahie_pv_map.csv' \
   --config_file='census_sahie_metadata.csv' \
-  --output_path='gcs_output/output_files/census_sahie'
+  --output_path='output_files/census_sahie'
 ```
 
 ---
@@ -84,7 +84,7 @@ This command validates the generated files for formatting and semantic consisten
 
 **Usage**:
 ```bash
-java -jar /path/to/datacommons-import-tool.jar lint -d 'gcs_output/output_files/'
+java -jar /path/to/datacommons-import-tool.jar lint -d 'output_files/'
 ```
 This step ensures that the generated artifacts are ready for ingestion into Data Commons.
 
