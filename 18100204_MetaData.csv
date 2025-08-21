@@ -1,0 +1,56 @@
+﻿"Cube Title","Product Id","CANSIM Id",URL,"Cube Notes","Archive Status",Frequency,"Start Reference Period","End Reference Period","Total number of dimensions"
+"Electric power selling price index, monthly","18100204","329-0079","https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1810020401",1;2,"CURRENT - a cube available to the public and that is current","Monthly","1981-01-01","2025-06-01","2",
+
+"Dimension ID","Dimension name","Dimension Notes","Dimension Definitions"
+"1","Geography",,""
+"2","Index",,""
+
+"Dimension ID","Member Name","Classification Code","Member ID","Parent Member ID",Terminated,"Member Notes","Member Definitions"
+"1","Atlantic Region","[1]","2","1","",,
+"1","Quebec","[24]","7","1","",,
+"1","Ontario","[35]","8","1","",,
+"1","Prairie Region","[4]","9","1","",,
+"1","British Columbia","[59]","13","1","",,
+"1","Newfoundland and Labrador","[10]","3","2","",,
+"1","Prince Edward Island","[11]","4","2","",,
+"1","Nova Scotia","[12]","5","2","",,
+"1","New Brunswick","[13]","6","2","",,
+"1","Manitoba","[46]","10","9","",,
+"1","Saskatchewan","[47]","11","9","",,
+"1","Alberta","[48]","12","9","",,
+"1","Canada","[11124]","1","","",,
+"2","Electric power selling price over 5000kw","","2","1","",,
+"2","Electric power selling price under 5000kw","","3","1","",,
+"2","Electric power selling price indexes, national total","","1","","",,
+
+Symbol Legend
+Description,Symbol
+"not available for a specific reference period","..",
+"less than the limit of detection","<LOD",
+"value rounded to 0 (zero) where there is a meaningful distinction between true zero and the value that was rounded","0s",
+"data quality: excellent","A",
+"data quality: very good","B",
+"data quality: good","C",
+"data quality: acceptable","D",
+"use with caution","E",
+"too unreliable to be published","F",
+"not applicable","...",
+"preliminary","p",
+"revised","r",
+"suppressed to meet the confidentiality requirements of the Statistics Act","x",
+"terminated","t",
+
+"Survey Code","Survey Name"
+"2325","Electric Power Selling Price Indexes for Non-residential Customers"
+
+"Subject Code","Subject Name"
+"18","Prices and price indexes"
+
+"Note ID",Note
+1,"For data based on the 2009=100 index, please see CANSIM table 329-0073, which is archived."
+2,"On August 12, 2016, the electric power selling price under 5000kw for the Atlantic Region and for Nova Scotia (vectors v107792874 and v107792883) were suppressed for data quality reasons. They will be published with the next release of this table."
+
+"Correction ID","Correction Date","Correction Note"
+"979","2016-08-12","<p>On August 12, 2016, the electric power selling price under 5000kw for the Atlantic Region and for Nova Scotia (vectors v107792874 and v107792883) were suppressed for data quality reasons. They will be published with the next release of this table.<br></p>",
+"3792","2024-03-08","On March 8th, 2024, the data for April 2022 to November 2022 have been corrected for Canada: Electric power (vector v107792869), Canada: Electric power >= 5000 kilowatts (vector v107792870), and British Columbia: Electric power >= 5000 kilowatts (vector v107792906).",
+
