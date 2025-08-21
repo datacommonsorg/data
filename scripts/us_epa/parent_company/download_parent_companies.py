@@ -24,11 +24,9 @@ from absl import app
 from absl import flags
 from absl import logging
 
-
 _SCRIPT_PATH = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(_SCRIPT_PATH, '../..'))
 from us_epa.util import facilities_helper as fh
-
 
 FLAGS = flags.FLAGS
 
@@ -48,23 +46,32 @@ def main(_):
     pathlib.Path(FLAGS.output_path).mkdir(exist_ok=True)
 
     try:
-        fh.download(_API_ROOT, FLAGS.companies_table_name, _MAX_ROWS, FLAGS.output_path)
-        logging.info(f"Successfully completed download for table: {FLAGS.companies_table_name}")
+        fh.download(_API_ROOT, FLAGS.companies_table_name, _MAX_ROWS,
+                    FLAGS.output_path)
+        logging.info(
+            f"Successfully completed download for table: {FLAGS.companies_table_name}"
+        )
 
     except pd.errors.EmptyDataError:
-        logging.info(f"Detected end of data for table '{FLAGS.companies_table_name}'. Pagination completed gracefully.")
+        logging.info(
+            f"Detected end of data for table '{FLAGS.companies_table_name}'. Pagination completed gracefully."
+        )
 
     except requests.exceptions.RequestException as e:
-        logging.fatal(f"Network or HTTP error during download for {FLAGS.companies_table_name}: {e}")
-        raise RuntimeError(f"Network or HTTP error: {e}") # Added RuntimeError
+        logging.fatal(
+            f"Network or HTTP error during download for {FLAGS.companies_table_name}: {e}"
+        )
+        raise RuntimeError(f"Network or HTTP error: {e}")  # Added RuntimeError
         sys.exit(1)
 
     except Exception as e:
-        logging.fatal(f"An unexpected error occurred during download for {FLAGS.companies_table_name}: {e}")
-        raise RuntimeError(f"Unexpected error during download: {e}") # Added RuntimeError
+        logging.fatal(
+            f"An unexpected error occurred during download for {FLAGS.companies_table_name}: {e}"
+        )
+        raise RuntimeError(
+            f"Unexpected error during download: {e}")  # Added RuntimeError
         sys.exit(1)
 
 
 if __name__ == '__main__':
     app.run(main)
-

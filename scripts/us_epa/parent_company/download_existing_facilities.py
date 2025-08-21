@@ -24,7 +24,6 @@ from absl import flags
 from absl import logging
 from datacommons_client import DataCommonsClient
 
-
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
 
@@ -32,8 +31,7 @@ flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
 flags.DEFINE_string(
     'gcs_source_path',
     'gs://unresolved_mcf/epa/parent_company/latest/api_key.json',
-    'Google Cloud Storage path for the API key JSON file.'
-)
+    'Google Cloud Storage path for the API key JSON file.')
 
 # Get the directory of the current script
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -49,6 +47,8 @@ sys.path.insert(0, PROJECT_ROOT)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'data', 'util'))
 
 from data.util import file_util
+
+
 def get_api_key_from_gcs():
     """
     Retrieves the Data Commons API key from a JSON file in a GCS bucket.
@@ -64,8 +64,8 @@ def get_api_key_from_gcs():
     """
     logging.info("--- Starting GCS File Transfer for API key ---")
     local_temp_dir = tempfile.mkdtemp()
-    
-    api_key = None  
+
+    api_key = None
 
     try:
         gcs_source_path = FLAGS.gcs_source_path
@@ -78,22 +78,24 @@ def get_api_key_from_gcs():
         # Load and validate the JSON data
         with open(local_filepath, 'r') as f:
             api_keys_data = json.load(f)
-        
+
         api_key = api_keys_data.get("DATACOMMONS_API_KEY")
         if not api_key:
             logging.fatal("DATACOMMONS_API_KEY not found in the JSON file.")
             raise RuntimeError("API key not found in JSON.")
-        
+
         return api_key
 
     except Exception as e:
         # Log the specific error and re-raise as a RuntimeError
-        logging.fatal(f"An unexpected error occurred during API key retrieval: {e}.")
+        logging.fatal(
+            f"An unexpected error occurred during API key retrieval: {e}.")
         raise RuntimeError("Unexpected error during API key retrieval.") from e
-        
+
     finally:
         shutil.rmtree(local_temp_dir, ignore_errors=True)
         logging.info("Temporary directory cleaned up.")
+
 
 def main(_):
     # Fetch API key from GCS
