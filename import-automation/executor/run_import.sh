@@ -28,16 +28,19 @@
 # ./run_import.sh ../../scripts/us_fed/treasury_constant_maturity_rates/manifest.json
 #
 GCP_PROJECT="datcom-ci"
-REGION="us-west1"
+REGION="us-central1"
 GCS_BUCKET="datcom-import-test"
 SCRIPT_DIR=$(realpath $(dirname $0))
 DATA_REPO=$(realpath $(dirname $0)/../../)
-DEFAULT_CPU=2
-DEFAULT_MEMORY=4Gi
+DEFAULT_CPU=8
+DEFAULT_MEMORY=32Gi
+DEFAULT_DISK=100
 DEFAULT_TIMEOUT=30m
 RUN_MODE="executor"
 DOCKER_IMAGE="dc-import-executor"
+MACHINE_TYPE="n2-standard-8"
 CONFIG="config_override_test.json"
+CONFIG_OVERRIDE=""
 TMP_DIR=${TMP_DIR:-"/tmp"}
 CLOUD_JOB_WAIT="--wait"
 USAGE="$(basename $0) <import-name> [Options]
@@ -55,9 +58,15 @@ Options:
   -b <bucket>  GCS bucket to be mounted in the job. Default:$GCS_BUCKET
   -repo <dir>  Data repo directory. Default:$DATA_REPO
   -cpu <N>       Number of CPUs for the job. Default:$DEFAULT_CPU
-  -mem <M>       Memory. Default:$DEFAULT_MEMORY
+  -mem <M>       Memory in GB. Default:$DEFAULT_MEMORY
+  -machine <typ> Machine type for cloud batch jobs. Default:$MACHINE_TYPE
+                 Refer to https://cloud.google.com/compute/docs/general-purpose-machines#n4_series for more machine types.
+  -disk <G>     Disk in Gb. Default: $DEFAULT_DISK
   -timeout <secs>    Timeout. Default:$DEFAULT_TIMEOUT
   -config <json> JSON file with import executor configs. Default: $CONFIG
+  -cfg <config>=<value> Config values for jobs used as overrides.
+               See the following for supported config options:
+               https://github.com/datacommonsorg/data/blob/master/import-automation/executor/app/configs.py#L32
   -h           Show this help message.
 
 
@@ -76,7 +85,7 @@ To run an import locally within a locally built docker container:
 To run an import locally with prod docker image:
   ./run_import.sh -d prod -docker <manifest.json>
 
-To run an import on cloud using a local repo:
+To run an import on cloud run using a local repo:
   ./run_import.sh -d dc-test-executor-$USER -cloud <manifest.json>
 
   This builds a docker image from the local repo, pushes it to the artifact registry and
@@ -84,6 +93,13 @@ To run an import on cloud using a local repo:
 
 To run an import on cloud run with prod docker image:
   ./run_import.sh -cloud <manifest.json>
+
+To run an import on cloud batch using a locally build docker image:
+  ./run_import.sh -d dc-test-executor-$USER -batch <manifest.json>
+
+To run an import on cloud batch with prod docker image:
+  ./run_import.sh -batch <manifest.json>
+
 "
 
 function echo_log {
@@ -107,6 +123,7 @@ function run_cmd {
   local end_time=$(date +%s)
   [[ "$st" == "0" ]] || echo_fatal "Failed to run command: $cmd"
   echo_log "Completed $cmd, status:$status, time:$(( $end_time - $start_time ))s"
+  return $st
 }
 
 function parse_options {
@@ -117,12 +134,14 @@ function parse_options {
       -e*) RUN_MODE="executor";;
       -cl*) RUN_MODE="cloud";;
       -do*) RUN_MODE="docker";;
+      -ba*) RUN_MODE="batch";;
       -reg*) shift; REGION="$1";;
       -a) shift; ARTIFACT_REGISTRY="$1";;
       -b) shift; GCS_BUCKET="$1";;
       -re*) shift; DATA_REPO="$0";;
       -cp*) shift; CPU="$1";;
       -me*) shift; MEMORY="$1";;
+      -ma*) shift; MACHINE_TYPE="$1";;
       -n) shift; NAME="$1";;
       -i) shift; IMPORT_NAME="$1";;
       -ti*) shift; TIMEOUT="$1";;
@@ -131,6 +150,7 @@ function parse_options {
       -o) shift; OUTPUT_DIR="$1";;
       -w) CLOUD_JOB_WAIT="--wait";;
       -nw) CLOUD_JOB_WAIT="";;
+      -c*) shift; CONFIG_OVERRIDE="$CONFIG_OVERRIDE, $1";;
       -h) echo "$USAGE" >&2; exit 1;;
       -x) set -x;;
       *) MANIFEST="$1";;
@@ -170,7 +190,7 @@ function get_param_value_json {
 
   # Get value from JSON
   value=$(grep "\"$param\"" <<< "$json" | head -1 | \
-    sed -e "s/.*\"$param\" *: *//;s/\" *//;s/ *\".*$//")
+    sed -e "s/.*\"$param\" *: *//;s/\" *//;s/ *\".*$//;s/[},].*$//")
 
   # Return value or default
   echo ${value:-"$default"}
@@ -190,6 +210,7 @@ function load_manifest {
   IMPORT_NAME=$(get_param_value_json "import_name" "$IMPORT_NAME" "$MANIFEST" "")
   CPU=$(get_param_value_json "cpu" "$CPU" "$MANIFEST" "$DEFAULT_CPU")
   MEMORY=$(get_param_value_json "memory" "$MEMORY" "$MANIFEST" "$DEFAULT_MEMORY")
+  DISK=$(get_param_value_json "disk" "$DISK" "$MANIFEST" "$DEFAULT_DISK")
   TIMEOUT=$(get_param_value_json "user_script_timeout" "$TIMEOUT" "$MANIFEST" "$DEFAULT_TIMEOUT")
 
   echo_log "Loaded manifest for $IMPORT_DIR:$IMPORT_NAME"
@@ -199,22 +220,24 @@ function load_manifest {
 function build_docker {
   if [[ "$DOCKER_IMAGE" == "dc-import-executor" ]] || [[ "$DOCKER_IMAGE" == "prod" ]]; then
     DOCKER_IMAGE="dc-import-executor"
-    echo_log "Reusing latest $ARTIFACT_REGISTRY:$DOCKER_IMAGE"
-    DOCKER_REMOTE="$ARTIFACT_REGISTRY/$DOCKER_IMAGE"
+    DOCKER_REMOTE="gcr.io/datcom-ci/$DOCKER_IMAGE"
+    echo_log "Reusing latest $DOCKER_IMAGE"
     return
   fi
+  # Skip docker build if running locally
+  [[ "$RUN_MODE" == "executor" ]] && return
   DOCKER_IMAGE=${DOCKER_IMAGE:-$NAME}
   echo_log "Building docker image $ARTIFACT_REGISTRY:$DOCKER_IMAGE from $DATA_REPO..."
   cwd="$PWD"
   cd $SCRIPT_DIR
   export DOCKER_BUILDKIT=1
   img=$DOCKER_IMAGE
-  [[ "$RUN_MODE" == "cloud" ]] && img="$ARTIFACT_REGISTRY/$DOCKER_IMAGE"
+  [[ "$RUN_MODE" != "docker" ]] && img="$ARTIFACT_REGISTRY/$DOCKER_IMAGE"
   run_cmd docker buildx build --build-context data=$DATA_REPO \
     --build-arg build_type=local -f Dockerfile . \
     -t $img
 
-  if [[ "$RUN_MODE" == "cloud" ]]; then
+  if [[ "$RUN_MODE" != "docker" ]]; then
     echo_log "Pushing docker image $img..."
     run_cmd docker push $img:latest
     DOCKER_REMOTE="$img"
@@ -235,6 +258,58 @@ function get_latest_gcs_import_output {
   fi
 }
 
+# Get the config overrides for import executor
+function get_import_config {
+  local options="$1"; shift
+  local config_file="$1"; shift
+
+  # Create an import config file based on default configs.
+  # Drop any references to local files for cloud jobs
+  config_file=${config_file:-"$TMP_DIR/config-overrides-$IMPORT_NAME.json"}
+  ignore_params="/tmp"
+  [[ "$RUN_MODE" == "executor" ]] && ignore_params="NONE"
+  [[ -f "$CONFIG" ]] && grep -v "$ignore_params" $CONFIG > $config_file
+
+  # Get config overrides from manifest if any
+  # Assumes this is the last part of the manifest.json
+  manifest_overrides=$( echo $MANIFEST | grep config_override | \
+    sed -e 's/.*config_override"[: ]*{//;s/}.*$//')
+
+  # Add all config overrides to the config
+  config_vals=$(echo "$manifest_overrides" "$CONFIG_OVERRIDE" "$options" | \
+                sed -e 's/ *: */:/;s/"//g;s/,//g')
+  for c_v in $config_vals; do
+    param=$(cut -d: -f1 <<< "$c_v")
+    val=$(cut -d: -f2- <<< "$c_v")
+
+    # Check if param is valid and listed in config.py
+    is_param_valid=$(grep "\<$param\>" $SCRIPT_DIR/app/configs.py)
+    [[ -z "$is_param_valid" ]] && echo_fatal "Unknown import config: '$param':$val"
+
+    # Add double quotes for value if not a bool or int
+    is_quoted_val=$(egrep -vi "true|false|^[0-9\.]" <<< $val)
+    [[ -n "$is_quoted_val" ]] && val=\'$val\'
+
+    # Add the param to import config
+    sed -i "s|^ *   }|    , \"$param\": $val\n&|;s/'/\"/g;" $config_file
+  done
+
+  IMPORT_CONFIG=$(echo $(cat $config_file) | \
+    sed -e 's/.*"configs" *: *//;s/"/\\"/g;s/} *$//;s/ //g')
+  IMPORT_CONFIG_FILE=$config_file
+  echo_log  "Using import config: $IMPORT_CONFIG" 
+}
+
+# Add a unit to the value if it doesn't have it.
+function add_value_unit {
+  local val="$1"; shift
+  local unit="$1"; shift
+
+  has_unit=$(egrep "[^0-9\.]" <<< "$val")
+  [[ -z "$has_unit" ]] && val="${val}${unit}"
+  echo "$val"
+}
+
 # Run an import as cloud run job
 # Assumes docker image has been built.
 function run_import_cloud {
@@ -248,14 +323,16 @@ function run_import_cloud {
     run_cmd gcloud --project=$GCP_PROJECT run jobs delete "$job_name" --region=$REGION --quiet
   fi
 
-  config="{\"gcs_project_id\":\"$GCP_PROJECT\",\"storage_prod_bucket_name\":\"$GCS_BUCKET\"}"
+  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd gcloud --project=$GCP_PROJECT run jobs create $job_name \
     --add-volume name=datcom-volume,type=cloud-storage,bucket=$GCS_BUCKET \
     --add-volume-mount volume=datcom-volume,mount-path=/mnt \
     --region=$REGION \
     --image $DOCKER_REMOTE:latest \
-    --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$config|--enable_cloud_logging" \
-    --cpu=$CPU --memory=$MEMORY --task-timeout=$TIMEOUT --max-retries=1
+    --args="^|^--import_name=$IMPORT_DIR:$IMPORT_NAME|--import_config=$IMPORT_CONFIG|--enable_cloud_logging" \
+    --cpu=$CPU --memory=$(add_value_unit $MEMORY "Gi") \
+    --task-timeout=$TIMEOUT --max-retries=1
   [[ $? != 0 ]] && echo_fatal "Failed to create cloud run job: $job_name"
 
   echo_log "Executing cloud run job $job_name"
@@ -279,14 +356,14 @@ function run_import_executor {
     mkdir -p $TMP_DIR/import-tool
     run_cmd wget "https://storage.googleapis.com/datacommons_public/import_tools/import-tool.jar" \
       -O $TMP_DIR/import-tool/import-tool.jar
-    run_cmd wget "https://storage.googleapis.com/datacommons_public/import_tools/differ-tool.jar" \
-      -O $TMP_DIR/import-tool/differ-tool.jar
   fi
+
+  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
 
   run_cmd $SCRIPT_DIR/run_local_executor.sh \
     --import_name=$IMPORT_DIR:$IMPORT_NAME \
     --output_dir=$OUTPUT_DIR \
-    --config_override=$CONFIG \
+    --config_override=$IMPORT_CONFIG_FILE \
     --repo_dir=$DATA_REPO
 
   echo_log "Completed local run for import $IMPORT_DIR:$IMPORT_NAME"
@@ -306,9 +383,10 @@ function run_import_docker {
 
   # Run the import within docker container
   export GCLOUD_CONFIG_DIR=$HOME/.config/gcloud
-  IMPORT_CONFIG="{\"gcs_project_id\":\"$GCP_PROJECT\",\"storage_prod_bucket_name\":\"$GCS_BUCKET\"}"
+  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  IMPORT_CONFIG=${IMPORT_CONFIG//\\/}
   run_cmd docker run --mount type=bind,source=$GCLOUD_CONFIG_DIR,target=/root/.config/gcloud \
-    --cpus=$CPU --memory=$MEMORY $img \
+    --cpus=$CPU --memory=$(add_value_unit $MEMORY "G") $img \
     --import_name=$IMPORT_DIR:$IMPORT_NAME \
     --import_config="$IMPORT_CONFIG"
 
@@ -316,6 +394,92 @@ function run_import_docker {
   echo_log "To view logs, see 'docker ps -a; docker log <container>'"
 
   get_latest_gcs_import_output
+}
+
+
+# Generate the json config for cloud batch job
+function get_cloud_batch_config {
+  local config_file="$1"; shift
+
+  cpu_milli=$(($CPU * 1000))
+  memory_mib=$(( $(grep -o "[0-9]*" <<< $MEMORY) * 1024 ))
+  disk_gib=${DISK:-"$(($memory_mib / 1000 * 5))"}
+
+  config_file=${config_file:-"$TMP_DIR/cloud-batch-config-$IMPORT_NAME.json"}
+  get_import_config "gcs_project_id:$GCP_PROJECT storage_prod_bucket_name:$GCS_BUCKET"
+  cat > $config_file  <<EOF
+{
+  "taskGroups": [
+    {
+      "taskSpec": {
+        "runnables": [
+          {
+            "container": {
+              "imageUri": "${DOCKER_REMOTE}:latest",
+              "commands": [
+                "--import_name=${IMPORT_DIR}:${IMPORT_NAME}",
+                "--import_config=$IMPORT_CONFIG"
+              ]
+            }
+          }
+        ],
+        "computeResource": {
+          "cpuMilli": "${cpu_milli}",
+          "memoryMib": "${memory_mib}"
+        },
+        "maxRetryCount": 1,
+        "maxRunDuration": "36000s"
+      },
+      "taskCount": 1,
+      "parallelism": 1
+    }
+  ],
+  "allocationPolicy": {
+    "instances": [
+      {
+        "policy": {
+          "machineType": "${MACHINE_TYPE}",
+          "provisioningModel": "STANDARD",
+          "bootDisk": {
+            "image": "projects/debian-cloud/global/images/family/debian-12",
+            "size_gb": "${disk_gib}"
+          }
+        },
+        "installOpsAgent": true
+      }
+    ]
+  },
+  "logsPolicy": {
+    "destination": "CLOUD_LOGGING"
+  }
+}
+EOF
+  echo $config_file
+}
+
+# Run an import as a cloud batch job
+function run_import_batch {
+  echo_log "Running import $IMPORT_NAME as a cloud batch job..."
+
+  sanitized_name=$(echo "${IMPORT_NAME,,}" | tr -s '_' '-')
+  JOB_NAME="${sanitized_name}-$USER-$(date +%Y%m%d-%H%M%S)"
+  JOB_NAME="${JOB_NAME:0:60}"
+  batch_config=$(get_cloud_batch_config)
+  echo_log "Using cloud batch config $batch_config: $(cat $batch_config)"
+  run_cmd gcloud batch jobs submit "${JOB_NAME}" \
+    --project "${GCP_PROJECT}" \
+    --location "${REGION}" \
+    --config=$batch_config
+
+  if [ $? -eq 0 ]; then
+    echo_log "Batch job submitted successfully for import $JOB_NAME"
+  else
+    echo_log "ERROR: Job submission failed for $JOB_NAME"
+  fi
+  
+  run_cmd "gcloud --project=$GCP_PROJECT batch jobs describe --location=$REGION $JOB_NAME"
+  echo_log "To view the jobs status, run the command:
+gcloud --project=$GCP_PROJECT batch jobs describe --location=$REGION $JOB_NAME"
 }
 
 # Return if script is being sourced
@@ -336,6 +500,9 @@ if [[ "$RUN_MODE" == "docker" ]]; then
 fi
 if [[ "$RUN_MODE" == "cloud" ]]; then
   run_import_cloud
+fi
+if [[ "$RUN_MODE" == "batch" ]]; then
+  run_import_batch
 fi
 
 END_TS=$(date +%s)

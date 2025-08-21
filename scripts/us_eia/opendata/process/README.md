@@ -54,29 +54,11 @@ takes a raw stat-var and generates a fully defined stat-var for it.
 * **TOTAL:** Total Energy dataset has US country-level data, and only has
   preliminary support, aka (1).
 
-## Run
 
-Download and unzip the data files based on the
-[manifest](https://api.eia.gov/bulk/manifest.txt) by running the
-[`download_bulk.py`](https://github.com/datacommonsorg/data/blob/master/scripts/us_eia/opendata/download_bulk.py)
-script.
 
-To generate CSV, TMCF and stat-var MCF for a supported dataset:
+* Downloading and Processing Data refer README.md (data/scripts/us_eia/opendata/README.md)
 
-```bash
-python3 main.py --data_dir=tmp_raw_data/ELEC --dataset=ELEC
-```
 
-Replace `ELEC` with any of the other dataset codes listed above.
 
-To run tests:
 
-```bash
-python3 -m unittest common_test.py
-```
 
-To download and generate all supported datasets:
-
-```bash
-./generate.sh all
-```

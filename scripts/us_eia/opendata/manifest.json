@@ -1,0 +1,173 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EIA_Coal",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.eia.gov/opendata/qb.php?category=717234",
+      "provenance_description": "Coal dataset has country, state-level level information .",
+      "scripts": [
+        "process.py --dataset=COAL"
+      ],
+      "source_files": [
+        "gcs_output/COAL/COAL.txt"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "gcs_output/COAL/COAL.tmcf",
+          "cleaned_csv": "gcs_output/COAL/COAL.csv"
+        }
+      ],
+      "cron_schedule": "0 14 5,20 * *"
+    },
+    {
+      "import_name": "EIA_Electricity",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+      "provenance_description": "Electricity dataset has country, state-level and plant-level information on electricity generation, consumption, sales etc by energy source and “sectors” (like residential, commercial, etc.).",
+      "scripts": [
+        "process.py --dataset=ELEC"
+      ],
+      "source_files": [
+        "gcs_output/ELEC/ELEC.txt"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "gcs_output/ELEC/ELEC.tmcf",
+          "cleaned_csv": "gcs_output/ELEC/ELEC.csv"
+        }
+      ],
+      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+      "cron_schedule": "0 7 5,20 * *"
+    },
+    {
+      "import_name": "EIA_NaturalGas",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+      "provenance_description": "Natural gas dataset has country and state-level data.",
+      "scripts": [
+        "process.py --dataset=NG"
+      ],
+      "source_files": [
+        "gcs_output/NG/NG.txt"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "gcs_output/NG/NG.tmcf",
+          "cleaned_csv": "gcs_output/NG/NG.csv"
+        }
+      ],
+      "cron_schedule": "0 8 5,20 * *"
+    },
+    {
+      "import_name": "EIA_NuclearOutages",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+      "provenance_description": "Nuclear outage dataset has nuclear-plant and national data about Nuclear energy generation capacity and planned outages.",
+      "scripts": [
+        "process.py --dataset=NUC_STATUS"
+      ],
+      "source_files": [
+        "gcs_output/NUC_STATUS/NUC_STATUS.txt"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "gcs_output/NUC_STATUS/NUC_STATUS.tmcf",
+          "cleaned_csv": "gcs_output/NUC_STATUS/NUC_STATUS.csv"
+        }
+      ],
+      "cron_schedule": "0 9 5,20 * *"
+    },
+    {
+      "import_name": "EIA_Petroleum",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+      "provenance_description": "EIA Petroleum dataset has country and state-level data.",
+      "scripts": [
+        "process.py --dataset=PET"
+      ],
+      "source_files": [
+        "gcs_output/PET/PET.txt"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "gcs_output/PET/PET.tmcf",
+          "cleaned_csv": "gcs_output/PET/PET.csv"
+        }
+      ],
+      "cron_schedule": "0 10 5,20 * *"
+    },
+    {
+      "import_name": "EIA_International",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+      "provenance_description": "EIA International Energy dataset has country, continent and world-level data.",
+      "scripts": [
+        "process.py --dataset=INTL"
+      ],
+      "source_files": [
+        "gcs_output/INTL/INTL.txt"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "gcs_output/INTL/INTL.tmcf",
+          "cleaned_csv": "gcs_output/INTL/INTL.csv"
+        }
+      ],
+      "cron_schedule": "0 11 5,20 * * *"
+    },
+    {
+      "import_name": "EIA_SEDS",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+      "provenance_description": "EIA SEDS International Energy dataset has US country-level and state-level data.",
+      "scripts": [
+        "process.py --dataset=SEDS"
+      ],
+      "source_files": [
+        "gcs_output/SEDS/SEDS.txt"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "gcs_output/SEDS/SEDS.tmcf",
+          "cleaned_csv": "gcs_output/SEDS/SEDS.csv"
+        }
+      ],
+      "cron_schedule": "0 12 5,20 * *"
+    },
+    {
+      "import_name": "EIA_TotalEnergy",
+      "curator_emails": [
+        "support@datacommons.org"
+      ],
+      "provenance_url": "https://www.eia.gov/opendata/v1/qb.php?category=0",
+      "provenance_description": "Total Energy dataset has US country-level data.",
+      "scripts": [
+        "process.py --dataset=TOTAL"
+      ],
+      "source_files": [
+        "gcs_output/TOTAL/TOTAL.txt"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "gcs_output/TOTAL/TOTAL.tmcf",
+          "cleaned_csv": "gcs_output/TOTAL/TOTAL.csv"
+        }
+      ],
+      "cron_schedule": "0 13 5,20 * *"
+    }
+  ]
+}

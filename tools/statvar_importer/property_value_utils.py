@@ -134,7 +134,11 @@ def get_value_as_list(value: str) -> Union[str, list]:
 def pvs_update(new_pvs: dict, pvs: dict, multi_value_keys: set = {}) -> dict:
     """Add the key:value pairs from the new_pvs into the pvs dictionary."""
     for prop, value in new_pvs.items():
-        add_key_value(prop, value, pvs, multi_value_keys)
+        add_key_value(prop,
+                      value,
+                      pvs,
+                      multi_value_keys=multi_value_keys,
+                      normalize=False)
     return pvs
 
 

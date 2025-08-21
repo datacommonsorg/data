@@ -26,7 +26,7 @@ _PROJECT_ID = 'datcom-ci'
 _JOB_ID = 'dc-import-prober'
 _LOCATION = 'us-central1'
 _GCS_BUCKET = 'datcom-ci-test'
-_IMPORT_NAME = 'scripts/us_fed/treasury_constant_maturity_rates:USFed_ConstantMaturityRates'
+_IMPORT_NAME = 'scripts/us_fed/treasury_constant_maturity_rates:USFed_ConstantMaturityRates_Test'
 
 
 def run_test():

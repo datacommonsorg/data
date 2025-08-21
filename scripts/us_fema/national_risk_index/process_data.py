@@ -1,10 +1,21 @@
 import json
+import os
 import pandas as pd
 import numpy as np
+import sys
+from pathlib import Path
+from absl import app
+from absl import flags
+from datetime import datetime
+from absl import logging
+
+FLAGS = flags.FLAGS
+flags.DEFINE_string('process_output_path', 'output',
+                    'The local path to save the output files')
 
 INPUT_TO_OUTPUT_PATHS = {
-    "source_data/NRI_Table_Counties.csv": "output/nri_counties_table.csv",
-    "source_data/NRI_Table_CensusTracts.csv": "output/nri_tracts_table.csv",
+    "source_data/NRI_Table_Counties.csv": "nri_counties_table.csv",
+    "source_data/NRI_Table_CensusTracts.csv": "nri_tracts_table.csv",
 }
 
 
@@ -39,30 +50,74 @@ def fips_to_geoid(row):
     return "geoId/" + str(row[field]).zfill(length)
 
 
-def process_csv(input_path, output_path, csv_structure_f):
-    data_table = pd.read_csv(input_path)
+def convert_month_year(date_str):
+    """
+  Converts a date string in the format "Month Year" to "YYYY_MM".
 
-    # TODO: interpret empty values. semantics of empty values is described in
-    # Table 2 of the Technical Documentation available at:
-    # https://www.fema.gov/sites/default/files/documents/fema_national-risk-index_technical-documentation.pdf
+  Args:
+    date_str: The input date string (e.g., "March 2023").
 
-    # the column structure should be the same between the county and tract tables
-    # so we normalize it with the list of fields "csv_structure"
-    with open(csv_structure_f, "r") as json_file:
-        csv_structure = json.load(json_file)
-    normalized_table = data_table[csv_structure]
+  Returns:
+    The converted date string in the format "YYYY_MM".
+  """
+    try:
+        date_obj = datetime.strptime(date_str,
+                                     '%B %Y')  # Parse the input string
+        year = str(date_obj.year)
+        month = str(date_obj.month).zfill(
+            2)  # Pad single-digit months with zero
+        return f"{year}-{month}"
+    except Exception as e:
+        logging.fatal(f"An error occurred: {e}")
+        sys.exit(1)
 
-    # - after the structure is normalized, add the DCID_GeoID field to the first location
-    # - the TMCF generated in generate_schema_and_tmcf.py expect to find the
-    # geoID in the field "DCID_GeoID"
-    normalized_table.insert(0, "DCID_GeoID",
-                            data_table.apply(fips_to_geoid, axis=1))
 
-    normalized_table.to_csv(output_path)
+def rename_file(file_path, nri_ver):
+    file = Path(file_path)
+    new_file_path = file.stem + "_" + nri_ver + file.suffix  # Modify filename
+    new_file_path = file.with_name(new_file_path)
+    return new_file_path
+
+
+def process_csv(input_path, output_path, csv_structure_f, out_put_file_name):
+    try:
+        data_table = pd.read_csv(input_path)
+        nri_ver = data_table["NRI_VER"].iloc[1]
+        # TODO: interpret empty values. semantics of empty values is described in
+        # Table 2 of the Technical Documentation available at:
+        # https://www.fema.gov/sites/default/files/documents/fema_national-risk-index_technical-documentation.pdf
+
+        # the column structure should be the same between the county and tract tables
+        # so we normalize it with the list of fields "csv_structure"
+        os.makedirs(output_path, exist_ok=True)
+        with open(csv_structure_f, "r") as json_file:
+            csv_structure = json.load(json_file)
+        normalized_table = data_table[csv_structure]
+        nri_month_year = convert_month_year(nri_ver)
+        normalized_table["OBSER_DATE"] = nri_month_year
+
+        # - after the structure is normalized, add the DCID_GeoID field to the first location
+        # - the TMCF generated in generate_schema_and_tmcf.py expect to find the
+        # geoID in the field "DCID_GeoID"
+        normalized_table.insert(0, "DCID_GeoID",
+                                data_table.apply(fips_to_geoid, axis=1))
+        full_output_file_path = os.path.join(output_path, out_put_file_name)
+        normalized_table.to_csv(full_output_file_path)
+        new_input_file = rename_file(input_path, nri_month_year)
+        os.rename(input_path, new_input_file)
+    except FileNotFoundError as e:
+        logging.error(f"FileNotFoundError: {e}")
+    except Exception as e:
+        logging.fatal(f"An unexpected error occurred: {e}")
+
+
+def main(argv):
+
+    for input_path in INPUT_TO_OUTPUT_PATHS:
+        out_put_file_name = INPUT_TO_OUTPUT_PATHS[input_path]
+        process_csv(input_path, FLAGS.process_output_path,
+                    "output/csv_columns.json", str(out_put_file_name))
 
 
 if __name__ == "__main__":
-
-    for input_path in INPUT_TO_OUTPUT_PATHS:
-        output_path = INPUT_TO_OUTPUT_PATHS[input_path]
-        process_csv(input_path, output_path, "output/csv_columns.json")
+    app.run(main)

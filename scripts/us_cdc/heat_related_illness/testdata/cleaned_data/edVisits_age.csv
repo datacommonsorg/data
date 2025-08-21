@@ -1,0 +1,11 @@
+Year,State,Data Value,Age Group
+2010,Alaska,0,0 TO 4
+2011,Alaska,0,5 TO 14
+2012,Alaska,2,15 TO 34
+2013,Alaska,0,35 TO 64
+2014,Alaska,0,>= 65
+2015,Arizona,27,0 TO 4
+2016,Arizona,92,5 TO 14
+2017,Arizona,620,15 TO 34
+2018,Arizona,681,35 TO 64
+2019,Arizona,153,>= 65
