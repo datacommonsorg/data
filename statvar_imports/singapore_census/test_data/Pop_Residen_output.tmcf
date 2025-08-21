@@ -1,0 +1,10 @@
+Node: E:Pop_Residen_output->E0
+observationAbout: C:Pop_Residen_output->observationAbout
+observationDate: C:Pop_Residen_output->observationDate
+value: C:Pop_Residen_output->value
+variableMeasured: C:Pop_Residen_output->variableMeasured
+unit: C:Pop_Residen_output->unit
+scalingFactor: C:Pop_Residen_output->scalingFactor
+measurementMethod: C:Pop_Residen_output->measurementMethod
+observationPeriod: C:Pop_Residen_output->observationPeriod
+typeOf: dcs:StatVarObservation

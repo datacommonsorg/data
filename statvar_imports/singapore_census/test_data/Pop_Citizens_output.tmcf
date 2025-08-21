@@ -1,0 +1,6 @@
+Node: E:Pop_Citizens_output->E0
+observationDate: C:Pop_Citizens_output->observationDate
+value: C:Pop_Citizens_output->value
+variableMeasured: C:Pop_Citizens_output->variableMeasured
+typeOf: dcs:StatVarObservation
+observationAbout: country/SGP
