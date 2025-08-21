@@ -19,107 +19,97 @@ import json
 import tempfile
 import sys
 import shutil
-
-# Import absl for logging and flags
-from absl import app, flags, logging
-
-
+from absl import app
+from absl import flags
+from absl import logging
 from datacommons_client import DataCommonsClient
+try:
+    from data.util import file_util
+except ImportError as e:
+    logging.fatal(
+        f"Failed to import file_util: {e}. "
+        "Please ensure data/util/file_util.py exists and is accessible, "
+        "and that the project root and data/util are correctly set in sys.path.",
+        exc_info=True)
+    raise RuntimeError(f"Initialization failed: {e}")
+    sys.exit(1)  # Exit if file_util cannot be imported
 
-# Configure absl logging
-logging.set_verbosity(logging.INFO)
 
 FLAGS = flags.FLAGS
 flags.DEFINE_string('output_path', 'tmp_data', 'Output directory')
 
-
 # --- GCS Configuration ---
-GCS_BUCKET_NAME = "unresolved_mcf"
-GCS_API_KEYS_PREFIX = "epa/parent_company/latest"
-API_KEYS_FILENAME = "api_key.json"
-# Add the gcs_source_path flag with a default value
-flags.DEFINE_string('gcs_source_path',
-                    f"gs://{GCS_BUCKET_NAME}/{GCS_API_KEYS_PREFIX}/{API_KEYS_FILENAME}",
-                    'Google Cloud Storage path for the API key JSON file.')
-                    
+flags.DEFINE_string(
+    'gcs_source_path',
+    'gs://unresolved_mcf/epa/parent_company/latest/api_key.json',
+    'Google Cloud Storage path for the API key JSON file.'
+)
+
 # Get the directory of the current script
 _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Define PROJECT_ROOT based on the provided path:
 
-PROJECT_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', '..', '..'))
+PROJECT_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', '..',
+                                            '..'))
 
 # Add PROJECT_ROOT to sys.path
 sys.path.insert(0, PROJECT_ROOT)
 # Add the 'data/util' directory to sys.path for file_util import
 sys.path.insert(0, os.path.join(PROJECT_ROOT, 'data', 'util'))
 
-# Now, directly import file_util.
-try:
-    from data.util import file_util
-except ImportError as e:
-    logging.fatal(f"Failed to import file_util: {e}. "
-                    "Please ensure data/util/file_util.py exists and is accessible, "
-                    "and that the project root and data/util are correctly set in sys.path.", exc_info=True)
-    # Added RuntimeError
-    raise RuntimeError(f"Initialization failed: {e}")
-    sys.exit(1) # Exit if file_util cannot be imported
-
 
 def get_api_key_from_gcs():
     """
     Retrieves the Data Commons API key from a JSON file in a GCS bucket.
     The file is downloaded to a temporary local directory before being read.
+    
+    Returns:
+        str: The Data Commons API key if found.
+    
+    Raises:
+        RuntimeError: If the API key file cannot be found, the JSON is
+                      malformed, the key is missing from the JSON, or
+                      an unexpected error occurs.
     """
+    logging.info("--- Starting GCS File Transfer for API key ---")
     local_temp_dir = tempfile.mkdtemp()
-    local_filepath = os.path.join(local_temp_dir, API_KEYS_FILENAME)
-    api_key = None
-
+    
     try:
-        logging.info("--- Starting GCS File Transfer for API key ---")
-        
-        # Use the gcs_source_path flag
         gcs_source_path = FLAGS.gcs_source_path
-
-        # Use file_util.file_copy to download the file from GCS
+        local_filepath = os.path.join(local_temp_dir, API_KEYS_FILENAME)
+        
+        # Download the file from GCS
         file_util.file_copy(gcs_source_path, local_filepath)
-        logging.info(f"Copied '{gcs_source_path}' to '{local_filepath}' using file_util.")
+        logging.info(f"Copied '{gcs_source_path}' to '{local_filepath}'.")
 
-        # Load the JSON file from the local temporary path
+        # Load and validate the JSON data
         with open(local_filepath, 'r') as f:
             api_keys_data = json.load(f)
-
-        # Extract the specific Data Commons API key
+            
         api_key = api_keys_data.get("DATACOMMONS_API_KEY")
         if not api_key:
-            logging.fatal("DATACOMMONS_API_KEY not found in the loaded api_key.json. "
-                            "Please ensure the key exists and is named correctly within the JSON.")
-            # Added RuntimeError
+            logging.fatal("DATACOMMONS_API_KEY not found in the JSON file.")
             raise RuntimeError("API key not found in JSON.")
+            
+        return api_key
 
     except FileNotFoundError as e:
-        logging.fatal(f"API keys file not found locally: {local_filepath}. "
-                      "Ensure it was successfully downloaded from GCS and the GCS path is correct.")
-        # Added RuntimeError
-        raise RuntimeError(f"API key file not found: {e}")
-    except json.JSONDecodeError as json_err:
-        logging.fatal(f"Error decoding JSON from {local_filepath}: {json_err}. "
-                      "Please check the file's JSON format in GCS.")
-        # Added RuntimeError
-        raise RuntimeError(f"JSON decoding error: {json_err}")
+        logging.fatal(f"API key file not found: {e}.")
+        raise RuntimeError("API key file not found.") from e
+        
+    except json.JSONDecodeError as e:
+        logging.fatal(f"Error decoding JSON from file: {e}.")
+        raise RuntimeError("JSON decoding error.") from e
+        
     except Exception as e:
-        logging.fatal(f"An unexpected error occurred while loading API key from GCS: {e}")
-        # Added RuntimeError
-        raise RuntimeError(f"Unexpected error during API key retrieval: {e}")
+        logging.fatal(f"An unexpected error occurred during API key retrieval: {e}.")
+        raise RuntimeError("Unexpected error during API key retrieval.") from e
+        
     finally:
         # Clean up the temporary directory
-        if os.path.exists(local_temp_dir):
-            try:
-                shutil.rmtree(local_temp_dir) # Use shutil for cleaner removal
-            except OSError as e:
-                logging.warning(f"Error cleaning up temporary directory {local_temp_dir}: {e}")
-    return api_key
-
+        shutil.rmtree(local_temp_dir, ignore_errors=True)
+        logging.info("Temporary directory cleaned up.")
 
 def main(_):
     # Fetch API key from GCS
@@ -128,11 +118,9 @@ def main(_):
     pathlib.Path(FLAGS.output_path).mkdir(exist_ok=True)
     out_file = os.path.join(FLAGS.output_path, 'existing_facilities.csv')
 
-    client = DataCommonsClient(api_key=api_key) # Use the fetched API key
-    res = client.node.fetch(
-        node_dcids=["EpaReportingFacility"],
-        expression="<-typeOf"
-    )
+    client = DataCommonsClient(api_key=api_key)  # Use the fetched API key
+    res = client.node.fetch(node_dcids=["EpaReportingFacility"],
+                            expression="<-typeOf")
 
     # Convert to dict for safe traversal
     res_dict = res.to_dict(exclude_none=True)
@@ -152,6 +140,7 @@ def main(_):
     df.to_csv(out_file, index=False)
 
     logging.info(f" Wrote {len(facility_ids)} facility IDs to: {out_file}")
+
 
 if __name__ == '__main__':
     app.run(main)
