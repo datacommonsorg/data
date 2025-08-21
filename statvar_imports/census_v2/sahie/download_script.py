@@ -66,7 +66,7 @@ def clean_csv_file(file_path):
 
 def main(_):
     BASE_URL = "https://www2.census.gov/programs-surveys/sahie/datasets/time-series/estimates-acs/sahie-{year}-csv.zip"
-    OUTPUT_DIRECTORY = "gcs_output/input_files"
+    OUTPUT_DIRECTORY = "input_files"
     START_YEAR = 2018
     CURRENT_YEAR = datetime.datetime.now().year 
     os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)
