@@ -106,7 +106,8 @@ def process_survey_data(year, svs, input_dir, out_dir):
         logging.info(f'Duration, {year}, =, {str(end - start)}')
     except Exception as e:
         logging.fatal(f"Error while processing the data for year: {e}")
-        raise RuntimeError(f"Failed to process data for year due to: {e}") from e
+        raise RuntimeError(
+            f"Failed to process data for year due to: {e}") from e
 
 
 def get_parts_dir(input_dir, year):
@@ -232,10 +233,11 @@ def get_survey_county_data(year, county, input_dir):
         try:
             response = get_data(params)
             if response is None:
-                logging.error(f"get_data() returned None. Check logs for details.")
+                logging.error(
+                    f"get_data() returned None. Check logs for details.")
                 logging.warning(f"No data found for: {county}")
                 return {'data': []}
-            
+
             with open(response_file, 'w') as f:
                 logging.info(f"Writing response to file: {response_file}")
                 json.dump(response, f, indent=2)
@@ -243,12 +245,13 @@ def get_survey_county_data(year, county, input_dir):
             if 'data' not in response:
                 logging.info(f"No api records found for county: {county}")
                 return {'data': []}
-            
+
             # Return the valid response here
             return response
 
         except Exception as e:
-            logging.fatal(f"Error while fetching data for county: {county} - {e}")
+            logging.fatal(
+                f"Error while fetching data for county: {county} - {e}")
             # Return a default value in case of any exception
             return {'data': []}
 
@@ -319,18 +322,22 @@ def get_param_values(param):
     """
     params = {'key': get_usda_api_key(), 'param': param}
     try:
-        response = requests.get(f'{API_BASE}/get_param_values', params=params).json()
-        
+        response = requests.get(f'{API_BASE}/get_param_values',
+                                params=params).json()
+
         # Check if the expected parameter key exists in the response
         if param in response:
             return response[param]
         else:
-            logging.warning(f"Parameter '{param}' not found in API response. Response: {response}")
+            logging.warning(
+                f"Parameter '{param}' not found in API response. Response: {response}"
+            )
             return []
 
     except requests.exceptions.RequestException as e:
         # Handle network-related errors gracefully
-        logging.error(f"Network error while fetching parameter values for '{param}': {e}")
+        logging.error(
+            f"Network error while fetching parameter values for '{param}': {e}")
         return []
     except json.JSONDecodeError as e:
         # Handle cases where the response is not valid JSON
@@ -338,7 +345,8 @@ def get_param_values(param):
         return []
     except Exception as e:
         # Catch any other unexpected exceptions
-        logging.error(f"An unexpected error occurred while fetching '{param}': {e}")
+        logging.error(
+            f"An unexpected error occurred while fetching '{param}': {e}")
         return []
 
 
