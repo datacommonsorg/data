@@ -347,7 +347,7 @@ def main(_):
         stat_var_processor.StatVarDataProcessor,
         input_file=_FLAGS.input_sheet,
         output_path=output_path,
-        config_file=_FLAGS.config,
+        config_file=_FLAGS.config_file,
         pv_map_files=_FLAGS.pv_map,
     )
 
