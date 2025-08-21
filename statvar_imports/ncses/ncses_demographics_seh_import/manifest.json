@@ -5,7 +5,7 @@
             "curator_emails": [
                 "support@datacommons.org"
             ],
-            "provenance_url": "https://ncses.nsf.gov/surveys/graduate-students-postdoctorates-s-e/2023",
+            "provenance_url": "https://ncses.nsf.gov/pubs/nsf25316",
             "provenance_description": "Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health.",
             "scripts": [
                 "download.py",

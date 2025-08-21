@@ -85,7 +85,7 @@ def download_xlsx_from_ncses_table(url, current_year):
     zip_filepath = None
 
     try:
-        download_response = requests.get(xlsx_url, stream=True, timeout=30)
+        download_response = download_retry(xlsx_url)
         download_response.raise_for_status()
         source_files_zip_base_dir = "source_files"
         os.makedirs(source_files_zip_base_dir, exist_ok=True)
@@ -102,26 +102,18 @@ def download_xlsx_from_ncses_table(url, current_year):
             extract_path = os.path.join("input_files")
             os.makedirs(extract_path, exist_ok=True)
             with zipfile.ZipFile(zip_filepath, 'r') as zip_ref:
-                zip_ref.extractall(extract_path)
-            logging.info(f"Extracted to: {extract_path}")
-
-            # file extraction logic
-            logging.info(f"Processing extracted files in: {extract_path}")
-            extracted_files = os.listdir(extract_path)
-            for f in extracted_files:
-                full_file_path = os.path.join(extract_path, f)
-                # Check if it's a file and an XLSX, and if it contains the desired fragment
-                if os.path.isfile(full_file_path) and f.lower().endswith('.xlsx'):
-                    if required_data.lower() in f.lower():
-                        logging.info(f"Keeping target XLSX file: {full_file_path}")
-                    else:
-                        # removing unnecessary xlsx files
-                        os.remove(full_file_path)
-                        logging.info(f"Removed non-target XLSX file: {full_file_path}")
-
-                elif os.path.isfile(full_file_path): # Remove other non-XLSX file like pdfs
-                    os.remove(full_file_path)
-                    logging.info(f"Removed non-XLSX file: {full_file_path}")
+                found_file = False
+                for member in zip_ref.infolist():
+                    if required_data.lower() in os.path.basename(member.filename).lower():
+                        # Extract only the required file to avoid processing unnecessary files.
+                        member.filename = os.path.basename(member.filename)
+                        zip_ref.extract(member, extract_path)
+                        logging.info(f"Extracted '{member.filename}' to '{extract_path}'")
+                        found_file = True
+                        break
+                if not found_file:
+                    logging.warning(f"Required file '{required_data}' not found in {zip_filepath}")
+                    return False
         else:
             logging.fatal("Downloaded file is not a valid ZIP archive (or could not be identified as such).")
 
@@ -155,7 +147,7 @@ def main(argv):
         if failure >= failure_threshold:
             logging.info(f"Reached {failure_threshold} consecutive years with no data.Exiting.")
             break 
-        #getting data on every 2 years
+        #getting data on every year
         start_year += 1
 
 if __name__=="__main__":

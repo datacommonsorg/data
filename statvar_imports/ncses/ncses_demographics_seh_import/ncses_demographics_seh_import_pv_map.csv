@@ -27,22 +27,14 @@ Doctorate-holding nonfaculty researchers,occupation,NonFacultyResearcher,educati
 "Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2021",observationDate,2021,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
 "Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2022",observationDate,2022,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
 "Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2023",observationDate,2023,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2024",observationDate,2024,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2025",observationDate,2025,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2026",observationDate,2026,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2027",observationDate,2027,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2028",observationDate,2028,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2029",observationDate,2029,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
+"Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health: 2030",observationDate,2030,observationAbout,country/USA,populationType,Person,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth
 Number,unit,scalingFactor,statType,measuredValue,value,{Number},,,,,,
 Percent,unit,Percent,scalingFactor,100,measurementDenominator,"-race,-gender,-ethnicity, -citizenship",#MergedCell,FALSE,value,{Number},,
 Percent:100,#ignore,Ignoring 100%,,,,,,,,,,
 "Sex, citizenship, ethnicity, and race",observationAbout,country/USA,,,,,,,,,,
-,,,,,,,,,,,,
-,,,,,,,,,,,,
-2018,observationDate,2018,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2019,observationDate,2019,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2020,observationDate,2020,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2021,observationDate,2021,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2022,observationDate,2022,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2023,observationDate,2023,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2024,observationDate,2024,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2025,observationDate,2025,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2026,observationDate,2026,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2027,observationDate,2027,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2028,observationDate,2028,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2029,observationDate,2029,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
-2030,observationDate,2030,observationAbout,country/USA,measuredProperty,count,statType,measuredValue,educationalDegree,ScienceOrEngineeringOrHealth,,
