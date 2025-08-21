@@ -23,16 +23,11 @@ from absl import app
 from absl import flags
 from absl import logging
 from datacommons_client import DataCommonsClient
-try:
-    from data.util import file_util
-except ImportError as e:
-    logging.fatal(
-        f"Failed to import file_util: {e}. "
-        "Please ensure data/util/file_util.py exists and is accessible, "
-        "and that the project root and data/util are correctly set in sys.path.",
-        exc_info=True)
-    raise RuntimeError(f"Initialization failed: {e}")
-    sys.exit(1)  # Exit if file_util cannot be imported
+# Add PROJECT_ROOT to sys.path
+sys.path.insert(0, PROJECT_ROOT)
+# Add the 'data/util' directory to sys.path for file_util import
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'data', 'util'))
+from data.util import file_util
 
 
 FLAGS = flags.FLAGS
@@ -53,20 +48,15 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', '..',
                                             '..'))
 
-# Add PROJECT_ROOT to sys.path
-sys.path.insert(0, PROJECT_ROOT)
-# Add the 'data/util' directory to sys.path for file_util import
-sys.path.insert(0, os.path.join(PROJECT_ROOT, 'data', 'util'))
-
 
 def get_api_key_from_gcs():
     """
     Retrieves the Data Commons API key from a JSON file in a GCS bucket.
     The file is downloaded to a temporary local directory before being read.
-    
+
     Returns:
         str: The Data Commons API key if found.
-    
+
     Raises:
         RuntimeError: If the API key file cannot be found, the JSON is
                       malformed, the key is missing from the JSON, or
@@ -75,10 +65,12 @@ def get_api_key_from_gcs():
     logging.info("--- Starting GCS File Transfer for API key ---")
     local_temp_dir = tempfile.mkdtemp()
     
+    api_key = None  
+
     try:
         gcs_source_path = FLAGS.gcs_source_path
-        local_filepath = os.path.join(local_temp_dir, API_KEYS_FILENAME)
-        
+        local_filepath = os.path.join(local_temp_dir, 'api_key.json')
+
         # Download the file from GCS
         file_util.file_copy(gcs_source_path, local_filepath)
         logging.info(f"Copied '{gcs_source_path}' to '{local_filepath}'.")
@@ -86,28 +78,20 @@ def get_api_key_from_gcs():
         # Load and validate the JSON data
         with open(local_filepath, 'r') as f:
             api_keys_data = json.load(f)
-            
+        
         api_key = api_keys_data.get("DATACOMMONS_API_KEY")
         if not api_key:
             logging.fatal("DATACOMMONS_API_KEY not found in the JSON file.")
             raise RuntimeError("API key not found in JSON.")
-            
+        
         return api_key
 
-    except FileNotFoundError as e:
-        logging.fatal(f"API key file not found: {e}.")
-        raise RuntimeError("API key file not found.") from e
-        
-    except json.JSONDecodeError as e:
-        logging.fatal(f"Error decoding JSON from file: {e}.")
-        raise RuntimeError("JSON decoding error.") from e
-        
     except Exception as e:
+        # Log the specific error and re-raise as a RuntimeError
         logging.fatal(f"An unexpected error occurred during API key retrieval: {e}.")
         raise RuntimeError("Unexpected error during API key retrieval.") from e
         
     finally:
-        # Clean up the temporary directory
         shutil.rmtree(local_temp_dir, ignore_errors=True)
         logging.info("Temporary directory cleaned up.")
 
