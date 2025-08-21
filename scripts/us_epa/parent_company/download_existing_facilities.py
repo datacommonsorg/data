@@ -23,11 +23,6 @@ from absl import app
 from absl import flags
 from absl import logging
 from datacommons_client import DataCommonsClient
-# Add PROJECT_ROOT to sys.path
-sys.path.insert(0, PROJECT_ROOT)
-# Add the 'data/util' directory to sys.path for file_util import
-sys.path.insert(0, os.path.join(PROJECT_ROOT, 'data', 'util'))
-from data.util import file_util
 
 
 FLAGS = flags.FLAGS
@@ -48,7 +43,12 @@ _MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(_MODULE_DIR, '..', '..', '..',
                                             '..'))
 
+# Add PROJECT_ROOT to sys.path
+sys.path.insert(0, PROJECT_ROOT)
+# Add the 'data/util' directory to sys.path for file_util import
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'data', 'util'))
 
+from data.util import file_util
 def get_api_key_from_gcs():
     """
     Retrieves the Data Commons API key from a JSON file in a GCS bucket.
