@@ -1,0 +1,9 @@
+Node: E:Average_Real_Income_output->E0
+observationAbout: C:Average_Real_Income_output->observationAbout
+observationDate: C:Average_Real_Income_output->observationDate
+variableMeasured: C:Average_Real_Income_output->variableMeasured
+value: C:Average_Real_Income_output->value
+unit: C:Average_Real_Income_output->unit
+scalingFactor: C:Average_Real_Income_output->scalingFactor
+observationPeriod: C:Average_Real_Income_output->observationPeriod
+typeOf: dcs:StatVarObservation
