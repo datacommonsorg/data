@@ -64,43 +64,45 @@ def clean_csv_file(file_path):
         raise RuntimeError(f"Failed to process file {file_path}") from e
 
 
+_BASE_URL = "https://www2.census.gov/programs-surveys/sahie/datasets/time-series/estimates-acs/sahie-{year}-csv.zip"
+_OUTPUT_DIRECTORY = "input_files"
+_START_YEAR = 2018
+_CURRENT_YEAR = datetime.datetime.now().year
+
+
 def main(_):
-    BASE_URL = "https://www2.census.gov/programs-surveys/sahie/datasets/time-series/estimates-acs/sahie-{year}-csv.zip"
-    OUTPUT_DIRECTORY = "input_files"
-    START_YEAR = 2018
-    CURRENT_YEAR = datetime.datetime.now().year 
-    os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)
-    logging.info(f"Base output directory '{OUTPUT_DIRECTORY}' ensured to exist.")
+    os.makedirs(_OUTPUT_DIRECTORY, exist_ok=True)
+    logging.info(f"Base output directory '{_OUTPUT_DIRECTORY}' ensured to exist.")
 
     try:
-        for year in range(START_YEAR, CURRENT_YEAR + 1):
-            year_url = BASE_URL.format(year=year)
-            success = download_file(
-                url=year_url,
-                output_folder=OUTPUT_DIRECTORY, 
-                unzip=True,  
-                tries=5,
-                delay=10
-            )
+        for year in range(_START_YEAR, _CURRENT_YEAR + 1):
+            year_url = _BASE_URL.format(year=year)
+            success = download_file(url=year_url,
+                                    output_folder=_OUTPUT_DIRECTORY,
+                                    unzip=True,
+                                    tries=5,
+                                    delay=10)
 
             if not success:
-                logging.warning(f"Failed to download or process data for year {year}. Stopping further downloads.")
-                
+                logging.warning(
+                    f"Failed to download or process data for year {year}. Stopping further downloads."
+                )
+
                 break
             else:
                 logging.info(f"Successfully processed data for year {year}.")
 
     finally:
         # Clean all CSV files in the output directory
-        for csv_file in glob.glob(os.path.join(OUTPUT_DIRECTORY, "*.csv")):
+        for csv_file in glob.glob(os.path.join(_OUTPUT_DIRECTORY, "*.csv")):
             clean_csv_file(csv_file)
 
-        for item in os.listdir(OUTPUT_DIRECTORY):
+        for item in os.listdir(_OUTPUT_DIRECTORY):
             if item.endswith(".zip"):
-                file_to_remove = os.path.join(OUTPUT_DIRECTORY, item)
+                file_to_remove = os.path.join(_OUTPUT_DIRECTORY, item)
                 os.remove(file_to_remove)
                 logging.info(f"Removed zip file: {file_to_remove}")
-               
+
         logging.info("Final cleanup complete")
 
 if __name__ == '__main__':
