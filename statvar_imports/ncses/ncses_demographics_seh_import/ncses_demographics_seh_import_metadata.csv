@@ -1,0 +1,12 @@
+param	value
+places_within	country/USA
+output_columns	observationAbout,observationDate,value,variableMeasured,unit,scalingFactor
+url	https://ncses.nsf.gov/surveys/graduate-students-postdoctorates-s-e/2021#data
+Comment	See source row heirarchy in https://screenshot.googleplex.com/8yHYcs4YWCSdC5j
+comments	Ignoring Percentage value 100 to remove SV's with same numerator and denominator
+drop_statvars_without_svobs	0
+mapped_rows	6
+mapped_columns	1
+word_delimiter	" "
+#header_rows	6
+#debug	1
