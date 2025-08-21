@@ -90,7 +90,7 @@ def process_survey_data(year, svs, input_dir, out_dir):
             county_names = get_param_values('county_name')
             logging.info(f'# counties =, {len(county_names)}')
 
-            pool_size = max(2, multiprocessing.cpu_count() - 1)
+            pool_size = 2
 
             with multiprocessing.Pool(pool_size) as pool:
                 pool.starmap(
