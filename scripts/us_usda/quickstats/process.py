@@ -59,7 +59,7 @@ SKIPPED_COUNTY_CODES = set([
 
 _FLAGS = flags.FLAGS
 flags.DEFINE_string('mode', '', 'Options: download or process')
-flags.DEFINE_string('start_year', '2025', 'start_year')
+flags.DEFINE_integer('start_year', 2024, 'start_year')
 flags.DEFINE_string('api_key',
                     'gs://unresolved_mcf/us_usda/ag_survey/api_key.json',
                     'directory where api key exists')
@@ -90,7 +90,7 @@ def process_survey_data(year, svs, input_dir, out_dir):
             county_names = get_param_values('county_name')
             logging.info(f'# counties =, {len(county_names)}')
 
-            pool_size = 2  #max(2, multiprocessing.cpu_count() - 1)
+            pool_size = max(2, multiprocessing.cpu_count() - 1)
 
             with multiprocessing.Pool(pool_size) as pool:
                 pool.starmap(
@@ -106,7 +106,7 @@ def process_survey_data(year, svs, input_dir, out_dir):
         logging.info(f'Duration, {year}, =, {str(end - start)}')
     except Exception as e:
         logging.fatal(f"Error while processing the data for year: {e}")
-        raise RuntimeError(f"Failed to process data for year due to: {e}")
+        raise RuntimeError(f"Failed to process data for year due to: {e}") from e
 
 
 def get_parts_dir(input_dir, year):
@@ -232,11 +232,10 @@ def get_survey_county_data(year, county, input_dir):
         try:
             response = get_data(params)
             if response is None:
-                logging.error(
-                    f"get_data() returned None. Check logs for details.")
+                logging.error(f"get_data() returned None. Check logs for details.")
                 logging.warning(f"No data found for: {county}")
-
                 return {'data': []}
+            
             with open(response_file, 'w') as f:
                 logging.info(f"Writing response to file: {response_file}")
                 json.dump(response, f, indent=2)
@@ -244,9 +243,14 @@ def get_survey_county_data(year, county, input_dir):
             if 'data' not in response:
                 logging.info(f"No api records found for county: {county}")
                 return {'data': []}
+            
+            # Return the valid response here
+            return response
+
         except Exception as e:
-            logging.fatal(f"Error while fetching data for county: {county}")
-    return response
+            logging.fatal(f"Error while fetching data for county: {county} - {e}")
+            # Return a default value in case of any exception
+            return {'data': []}
 
 
 MAX_REQUESTS_PER_WINDOW = 2  # Maximum requests per window (1 request)
@@ -315,13 +319,27 @@ def get_param_values(param):
     """
     params = {'key': get_usda_api_key(), 'param': param}
     try:
-        response = requests.get(f'{API_BASE}/get_param_values',
-                                params=params).json()
-        return [] if param not in response else response[param]
+        response = requests.get(f'{API_BASE}/get_param_values', params=params).json()
+        
+        # Check if the expected parameter key exists in the response
+        if param in response:
+            return response[param]
+        else:
+            logging.warning(f"Parameter '{param}' not found in API response. Response: {response}")
+            return []
 
+    except requests.exceptions.RequestException as e:
+        # Handle network-related errors gracefully
+        logging.error(f"Network error while fetching parameter values for '{param}': {e}")
+        return []
+    except json.JSONDecodeError as e:
+        # Handle cases where the response is not valid JSON
+        logging.error(f"JSON decode error for '{param}': {e}")
+        return []
     except Exception as e:
-        logging.error(f"Error while fetching parameter values: {e}")
-    return []
+        # Catch any other unexpected exceptions
+        logging.error(f"An unexpected error occurred while fetching '{param}': {e}")
+        return []
 
 
 '''Converts a quickstats data row to a DC CSV row.
@@ -402,7 +420,7 @@ def get_multiple_years():
     logging.info(f'Start, {start}')
     svs = load_svs()
     start_year = _FLAGS.start_year
-    for year in range(int(start_year), datetime.datetime.now().year + 1):
+    for year in range(start_year, datetime.datetime.now().year + 1):
         process_survey_data(year, svs, "input", "output")
     end = datetime.datetime.now()
     logging.info(f'End, {end}')

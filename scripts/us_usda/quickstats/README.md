@@ -15,9 +15,9 @@ Latest Data: The 2024 & 2025 data will be updated annually.
 
 ### Script Execution Details
 
-### Automation Refresh The process.py has a parameter 'mode' with values 'download' and 'process'
+### Automation Refresh: The process.py has a parameter 'mode' with values 'download' and 'process'
 
-when the file 'process.py' is ran with the flag --mode=download, it will  download and place it in the 'input/parts' & 'input/response' directory. i.e. python3 process.py --mode=download
+when the file 'process.py' is run with the flag --mode=download, it will  download and place it in the 'input/parts' & 'input/response' directory. i.e. python3 process.py --mode=download
 
 when the file 'process.py' is ran with the flag --mode=process, it will process the downloaded files and place it in the 'output' directory. i.e. python3 process.py --mode=process
 
