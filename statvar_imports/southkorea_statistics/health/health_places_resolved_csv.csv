@@ -808,7 +808,7 @@ Gunwi-eup,wikidataId/Q16166856
 Jongno 5·(o·yuk)-ga-dong,wikidataId/Q79979
 Sindang 1(il)-dong,wikidataId/Q27338091
 Sindang 5(o)-dong,wikidataId/Q15311842
-Cheongpa 1(il)-dong,wikidataId/Q11243927.
+Cheongpa 1(il)-dong,wikidataId/Q11243927,
 Cheongpa 2(i)-dong,
 WangsimniDoseon-dong,wikidataId/Q19359967
 Dongseon 1(il)-dong,wikidataId/Q2681384
@@ -1048,4 +1048,5 @@ Duryu 2(i)-dong,
 Samgugyusa-myeon,
 Yeongjong 1(il)-dong,
 Yeongjong 2(i)-dong,
+
 Songhyeon 1.2(il.i)-dong,#ignore
