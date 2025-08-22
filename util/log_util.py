@@ -15,6 +15,7 @@
 
 import json
 import logging
+import os
 import google.cloud.logging
 from absl import logging as absl_logging
 
@@ -83,3 +84,13 @@ def configure_cloud_logging():
 
     client = google.cloud.logging.Client()
     client.setup_logging()
+
+
+def running_on_cloud() -> bool:
+    """Check if running on Cloud.
+    
+    Returns:
+        bool: True if running on Cloud services or jobs, False otherwise.
+    """
+    return bool(os.getenv('K_SERVICE')) or bool(
+        os.getenv('CLOUD_RUN_JOB')) or bool(os.getenv('BATCH_JOB_UID'))
