@@ -117,9 +117,9 @@ def download_xlsx_from_ncses_table(url, current_year):
         else:
             logging.fatal("Downloaded file is not a valid ZIP archive (or could not be identified as such).")
 
-    except (requests.exceptions.RequestException, zipfile.BadZipFile, OSError,RuntimeError) as e:  
+    except (requests.exceptions.RequestException, zipfile.BadZipFile, OSError) as e:  
         logging.fatal(f"An unexpected error occurred during file processing: {e}")
-        return False # Return False to indicate failure for this year
+        raise RuntimeError("Failed to process ZIP file.")
 
     return True
 
