@@ -6,7 +6,7 @@
       "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
       "provenance_description": "US nces school data for private",
       "scripts": ["run.sh" ,"process.py"],
-      "source_files": ["gcs_output/input_files/*"],
+      "source_files": ["gcs_output/input_files/*/*.csv"],
       "import_inputs": [
         {
           "template_mcf": "gcs_output/output_files/us_nces_demographics_private_school.tmcf",
