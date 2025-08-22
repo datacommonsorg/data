@@ -30,7 +30,7 @@ MAX_WORKERS = 5  # Number of concurrent downloads
 PROGRESS_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                              'gcs_output', 'in_progress.json')
 DOWNLOAD_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                             'gcs_output', 'input_files_enhance')
+                             'gcs_output', 'input_files')
 
 # --- SSL Context ---
 ssl._create_default_https_context = ssl._create_unverified_context
