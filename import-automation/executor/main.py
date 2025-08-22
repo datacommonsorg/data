@@ -57,25 +57,17 @@ def _override_configs(absolute_import_name: str,
     logging.info('%s: Overriding config from manifest %s', absolute_import_name,
                  manifest_path)
     d = json.load(open(manifest_path))
+    logging.info('Import manifest:')
+    logging.info(json.dumps(d))
     return dataclasses.replace(config, **d.get("config_override", {}))
-
-
-def _configure_logging():
-    running_on_cloud_result = log_util.running_on_cloud()
-    if running_on_cloud_result:
-        logging.info("Running under Cloud detected.")
-    else:
-        logging.info("Not running under Cloud")
-
-    if _FLAGS.enable_cloud_logging or running_on_cloud_result:
-        log_util.configure_cloud_logging()
-        logging.info("Google Cloud Logging configured.")
 
 
 def run_import_job(absolute_import_name: str, import_config: str):
     """
     Invokes import update workflow.
     """
+    logging.info(
+        f"Running import {absolute_import_name} with config:{import_config}")
     start_time = time.time()
     logging.info(absolute_import_name)
     cfg = json.loads(import_config)
@@ -94,6 +86,7 @@ def run_import_job(absolute_import_name: str, import_config: str):
         notifier=email_notifier.EmailNotifier(config.email_account,
                                               config.email_token),
         local_repo_dir=config.local_repo_dir)
+    logging.info('Import config:')
     logging.info(config)
     result = executor.execute_imports_on_update(absolute_import_name)
     logging.info(result)
@@ -113,10 +106,7 @@ def run_import_job(absolute_import_name: str, import_config: str):
 
 
 def main(_):
-    _configure_logging()
-    logging.info(
-        f"Running import {_FLAGS.import_name} with config:{_FLAGS.import_config}"
-    )
+    log_util.configure_logging(_FLAGS.enable_cloud_logging)
     return run_import_job(_FLAGS.import_name, _FLAGS.import_config)
 
 
