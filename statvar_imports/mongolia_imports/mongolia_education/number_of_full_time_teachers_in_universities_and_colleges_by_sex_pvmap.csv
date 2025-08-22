@@ -1,6 +1,6 @@
 key,p1,v1,p2,v2,,,,,,
 ,,,,,,,,,,
-Number of teacher:Total,populationType,Teacher,measuredProperty,count,,,,,,
+Number of teacher:Total,populationType,Teacher,measuredProperty,count,employmentStatus,FullTimeEmployee,facultyType,UniversityAndCollegeTeacher,,
         Of which: Female,gender,Female,,,,,,,,
 ,,,,,,,,,,
 ,,,,,,,,,,

@@ -1,11 +1,11 @@
 key,p1,v1,p2,v2,,
 ,,,,,,
-Professional fields:Total students,populationType,Student,measuredProperty,count,observationAbout,country/MNG
-        Of which: Female,gender,Female,,,,
-    Bachelor¹,enrollmentLevel,BachelorsDegree,statType,measuredValue,,
-    Master,enrollmentLevel,MastersDegree,statType,measuredValue,,
-    Ph.D,enrollmentLevel,DoctorateDegree,statType,measuredValue,,
-    Upper diploma,enrollmentLevel,UpperDiploma,statType,measuredValue,,
+Professional fields,schoolGradeLevel,TertiaryEducation,populationType,Student,observationAbout,country/MNG
+Of which: Female,gender,Female,schoolGradeLevel,TertiaryEducation,,
+Bachelor¹,enrollmentLevel,BachelorsDegree,schoolGradeLevel,TertiaryEducation,#Header,enrollmentLevel
+Master,enrollmentLevel,MastersDegree,schoolGradeLevel,TertiaryEducation,#Header,enrollmentLevel
+Ph.D,enrollmentLevel,DoctorateDegree,schoolGradeLevel,TertiaryEducation,#Header,enrollmentLevel
+Upper diploma,enrollmentLevel,UpperDiploma,schoolGradeLevel,TertiaryEducation,#Header,enrollmentLevel
 ,,,,,,
 2002,observationDate,2002,value,{Number},,
 2003,observationDate,2003,value,{Number},,
