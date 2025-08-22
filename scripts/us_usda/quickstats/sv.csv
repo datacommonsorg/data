@@ -59,7 +59,7 @@ HOGS - OPERATIONS WITH SALES,dcs:Count_Farm_InventorySold_HogsAndPigs,
 "CHICKENS, BROILERS - SALES, MEASURED IN HEAD",dcs:Count_FarmInventory_Broilers,
 "CORN, GRAIN - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_CornForGrain,
 "CORN, GRAIN - ACRES HARVESTED",dcs:Area_Farm_CornForGrain,dcs:Acre
-"CORN, GRAIN - PRODUCTION, MEASURED IN BU",dcs:Amout_FarmInventory_CornForGrain,dcs:Bushel
+"CORN, GRAIN - PRODUCTION, MEASURED IN BU",dcs:Amount_FarmInventory_CornForGrain,dcs:Bushel
 "CORN, SILAGE - OPERATIONS WITH AREA HARVESTED",dcs:Count_Farm_CornForSilageOrGreenchop,
 "CORN, SILAGE - ACRES HARVESTED",dcs:Area_Farm_CornForSilageOrGreenchop,dcs:Acre
 "CORN, SILAGE - PRODUCTION, MEASURED IN TONS",dcs:Amount_FarmInventory_CornForSilageOrGreenchop,dcs:Ton
