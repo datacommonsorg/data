@@ -117,7 +117,7 @@ def download_xlsx_from_ncses_table(url, current_year):
         else:
             logging.fatal("Downloaded file is not a valid ZIP archive (or could not be identified as such).")
 
-    except (requests.exceptions.RequestException, zipfile.BadZipFile, OSError) as e:  
+    except (requests.exceptions.RequestException, zipfile.BadZipFile, OSError,RuntimeError) as e:  
         logging.fatal(f"An unexpected error occurred during file processing: {e}")
         return False # Return False to indicate failure for this year
 
@@ -128,7 +128,7 @@ def main(argv):
     start_year = 2021
 
     base_url="https://ncses.nsf.gov/surveys/graduate-students-postdoctorates-s-e/{year}#data"
-
+    # checks the url for next 3 years.
     failure = 0
     failure_threshold = 3 
 
