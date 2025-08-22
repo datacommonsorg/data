@@ -868,7 +868,7 @@ Ansim 1(il)-dong,wikidataId/Q27337259
 Ansim 2(i)-dong,wikidataId/Q27337260
 Ansim 3.4(sam.sa)-dong,wikidataId/Q27337261
 Ansim 4(sa)-dong,wikidataId/Q12596392
-Naedang 2?(i톝am)-dong,wikidataId/Q25707071
+Naedang 2?(i?am)-dong,wikidataId/Q25707071
 Bisan 1(il)-dong,wikidataId/Q27337963
 Bisan 2?(i톝am)-dong,wikidataId/Q25707080
 Bisan 4(sa)-dong,wikidataId/Q25707081
@@ -1037,7 +1037,7 @@ Dongin 1.2.4(il.i.sa)-ga-dong,
 Dongin 3(sam)-ga-dong,
 Sinam 1(il)-dong,
 Ansim 3(sam)-dong,
-Nowon 1?(il톓)-dong,
+Nowon 1?(il?)-dong,
 Nowon 3(sam)-dong,
 Daehyeon 1(il)-dong,
 Daehyeon 2(i)-dong,
@@ -1050,3 +1050,4 @@ Yeongjong 1(il)-dong,
 Yeongjong 2(i)-dong,
 
 Songhyeon 1.2(il.i)-dong,#ignore
+
