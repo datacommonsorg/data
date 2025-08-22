@@ -2,36 +2,58 @@
 set -e
 
 SCRIPT_PATH=$(realpath "$(dirname "$0")")
+PROCESSOR_SCRIPT="$SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py"
+INPUT_BASE_PATH="gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files"
+CONFIG_FILE="$SCRIPT_PATH/brazil_metadata.csv"
+EXISTING_MCF="gs://unresolved_mcf/scripts/statvar/stat_vars.mcf"
+PLACES_RESOLVER="$SCRIPT_PATH/brazil_places_resolver.csv"
 
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_Gender_Brazil.csv  --pv_map=$SCRIPT_PATH/Families_RuralDevelopmentProgram_Gender_Brazil_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/Families_RuralDevelopmentProgram_Gender_Brazil_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf || { echo "Error: Processing Families_RuralDevelopmentProgram_Gender_Brazil.csv failed!"; exit 1; }
+process_file() {
+    local basename="$1"
+    local places_resolver_arg=""
+    if [[ "$2" == "with_resolver" ]]; then
+        places_resolver_arg="--places_resolved_csv=$PLACES_RESOLVER"
+    fi
 
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_Gender_Municipality.csv  --pv_map=$SCRIPT_PATH/Families_RuralDevelopmentProgram_Gender_Municipality_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/Families_RuralDevelopmentProgram_Gender_Municipality_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/brazil_places_resolver.csv || { echo "Error: Processing Families_RuralDevelopmentProgram_Gender_Municipality.csv failed!"; exit 1; }
+    echo "Processing ${basename}.csv..."
+    python3 "$PROCESSOR_SCRIPT" \
+        --input_data="$INPUT_BASE_PATH/${basename}.csv" \
+        --pv_map="$SCRIPT_PATH/${basename}_pvmap.csv" \
+        --config_file="$CONFIG_FILE" \
+        --output_path="$SCRIPT_PATH/output_files/${basename}_output" \
+        --existing_statvar_mcf="$EXISTING_MCF" \
+        $places_resolver_arg || { echo "Error: Processing ${basename}.csv failed!"; exit 1; }
+}
 
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_Gender_State.csv  --pv_map=$SCRIPT_PATH/Families_RuralDevelopmentProgram_Gender_State_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/Families_RuralDevelopmentProgram_Gender_State_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/brazil_places_resolver.csv || { echo "Error: Processing Families_RuralDevelopmentProgram_Gender_State.csv failed!"; exit 1; }
+files_no_resolver=(
+    "Families_RuralDevelopmentProgram_Gender_Brazil"
+    "Families_RuralDevelopmentProgram_SpecificPopulation_Brazil"
+    "FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil"
+    "FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly"
+    "TotalFamilies_Rural_Development_Program_Brazil"
+)
 
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_SpecificPopulation_Brazil.csv  --pv_map=$SCRIPT_PATH/Families_RuralDevelopmentProgram_SpecificPopulation_Brazil_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/Families_RuralDevelopmentProgram_SpecificPopulation_Brazil_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf || { echo "Error: Processing Families_RuralDevelopmentProgram_SpecificPopulation_Brazil.csv failed!"; exit 1; }
+files_with_resolver=(
+    "Families_RuralDevelopmentProgram_Gender_Municipality"
+    "Families_RuralDevelopmentProgram_Gender_State"
+    "Families_RuralDevelopmentProgram_SpecificPopulation_Municipality"
+    "Families_RuralDevelopmentProgram_SpecificPopulation_State"
+    "FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality"
+    "FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State"
+    "FinancialResources_Beneficiary_RuralDevelopmentProgram_State"
+    "FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality"
+    "TotalFamilies_Rural_Development_Program_Municipality"
+    "TotalFamilies_Rural_Development_Program_State"
+)
 
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_SpecificPopulation_Municipality.csv  --pv_map=$SCRIPT_PATH/Families_RuralDevelopmentProgram_SpecificPopulation_Municipality_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/Families_RuralDevelopmentProgram_SpecificPopulation_Municipality_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/brazil_places_resolver.csv || { echo "Error: Processing Families_RuralDevelopmentProgram_SpecificPopulation_Municipality.csv failed!"; exit 1; }
+for basename in "${files_no_resolver[@]}"; do
+    process_file "$basename"
+done
 
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/Families_RuralDevelopmentProgram_SpecificPopulation_State.csv  --pv_map=$SCRIPT_PATH/Families_RuralDevelopmentProgram_SpecificPopulation_State_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/Families_RuralDevelopmentProgram_SpecificPopulation_State_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/brazil_places_resolver.csv || { echo "Error: Processing Families_RuralDevelopmentProgram_SpecificPopulation_State.csv failed!"; exit 1; }
-
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil.csv  --pv_map=$SCRIPT_PATH/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf || { echo "Error: Processing FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil.csv failed!"; exit 1; }
-
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly.csv  --pv_map=$SCRIPT_PATH/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf || { echo "Error: Processing FinancialResources_Beneficiary_RuralDevelopmentProgram_brazil_yearly.csv failed!"; exit 1; }
-
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality.csv  --pv_map=$SCRIPT_PATH/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/brazil_places_resolver.csv || { echo "Error: Processing FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_Municipality.csv failed!"; exit 1; }
-
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State.csv  --pv_map=$SCRIPT_PATH/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/brazil_places_resolver.csv || { echo "Error: Processing FinancialResources_Beneficiary_RuralDevelopmentProgram_latest_State.csv failed!"; exit 1; }
-
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_State.csv  --pv_map=$SCRIPT_PATH/FinancialResources_Beneficiary_RuralDevelopmentProgram_State_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_State_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/brazil_places_resolver.csv || { echo "Error: Processing FinancialResources_Beneficiary_RuralDevelopmentProgram_State.csv failed!"; exit 1; }
-
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality.csv  --pv_map=$SCRIPT_PATH/FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/brazil_places_resolver.csv || { echo "Error: Processing FinancialResources_Beneficiary_RuralDevelopmentProgram_yearly_Municipality.csv failed!"; exit 1; }
-
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/TotalFamilies_Rural_Development_Program_Brazil.csv  --pv_map=$SCRIPT_PATH/TotalFamilies_Rural_Development_Program_Brazil_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/TotalFamilies_Rural_Development_Program_Brazil_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf || { echo "Error: Processing TotalFamilies_Rural_Development_Program_Brazil.csv failed!"; exit 1; }
-
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/TotalFamilies_Rural_Development_Program_Municipality.csv  --pv_map=$SCRIPT_PATH/TotalFamilies_Rural_Development_Program_Municipality_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/TotalFamilies_Rural_Development_Program_Municipality_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/brazil_places_resolver.csv || { echo "Error: Processing TotalFamilies_Rural_Development_Program_Municipality.csv failed!"; exit 1; }
-
-python3 $SCRIPT_PATH/../../../tools/statvar_importer/stat_var_processor.py --input_data=gs://unresolved_mcf/country/brazil/VISDATA/Benefits_RuralDevelopmentProgram/latest/input_files/TotalFamilies_Rural_Development_Program_State.csv  --pv_map=$SCRIPT_PATH/TotalFamilies_Rural_Development_Program_State_pvmap.csv --config_file=$SCRIPT_PATH/brazil_metadata.csv --output_path=$SCRIPT_PATH/output_files/TotalFamilies_Rural_Development_Program_State_output --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --places_resolved_csv=$SCRIPT_PATH/brazil_places_resolver.csv || { echo "Error: Processing TotalFamilies_Rural_Development_Program_State.csv failed!"; exit 1; }
+for basename in "${files_with_resolver[@]}"; do
+    process_file "$basename" "with_resolver"
+done
 
 echo "All processing steps completed successfully."
 exit 0
+
