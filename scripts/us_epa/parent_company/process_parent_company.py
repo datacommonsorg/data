@@ -273,7 +273,7 @@ def _resolve_multiple_indirections():
         while v_loc in _DUPLICATE_MAPPING:
             if v_loc in path:
                 logging.error(
-                    f"❌ Cycle detected in duplicate mapping starting from {k}. Path: {path + [v_loc]}"
+                    f"Cycle detected in duplicate mapping starting from {k}. Path: {path + [v_loc]}"
                 )
                 break
             path.append(v_loc)
@@ -413,7 +413,7 @@ def _run_deduplication_preprocessing_steps(input_table_path,
                 CSV_PARENT_CO_ZIP_COL
         ]):
             logging.fatal(
-                f"❌ FATAL: One or more critical CSV columns not found or could not be resolved. "
+                f"FATAL: One or more critical CSV columns not found or could not be resolved. "
                 f"Expected but missing: "
                 f"{'facility_id' if not CSV_FACILITY_ID_COL else ''}, "
                 f"{'parent_company_name' if not CSV_PARENT_COMPANY_NAME_COL else ''}, "
@@ -439,7 +439,7 @@ def _run_deduplication_preprocessing_steps(input_table_path,
             facility_id = in_row.get(CSV_FACILITY_ID_COL, '').strip()
             if not facility_id:
                 logging.warning(
-                    f"⚠️ Skipping preprocessing of row {i+1}: Mandatory FACILITY_ID is empty or blank. Row: {in_row}"
+                    f" Skipping preprocessing of row {i+1}: Mandatory FACILITY_ID is empty or blank. Row: {in_row}"
                 )
                 _COUNTERS_COMPANIES["facility_id_extraction_failed"].add(
                     str(in_row))
@@ -459,7 +459,7 @@ def _run_deduplication_preprocessing_steps(input_table_path,
             company_name = company_name_raw.replace("\"", "").replace("'", "")
             if not company_name:
                 logging.warning(
-                    f"⚠️ Skipping preprocessing of row {i+1}: 'PARENT_COMPANY_NAME' not found or empty for {ghg_id}. Row: {in_row}"
+                    f" Skipping preprocessing of row {i+1}: 'PARENT_COMPANY_NAME' not found or empty for {ghg_id}. Row: {in_row}"
                 )
                 _COUNTERS_COMPANIES["company_name_not_found"].add(ghg_id)
                 continue
@@ -467,7 +467,7 @@ def _run_deduplication_preprocessing_steps(input_table_path,
             company_id = fh.name_to_id(company_name)
             if not company_id:
                 logging.warning(
-                    f"⚠️ Skipping preprocessing of row {i+1}: Mandatory company_id is empty (from name_to_id) for {company_name}. Row: {in_row}"
+                    f" Skipping preprocessing of row {i+1}: Mandatory company_id is empty (from name_to_id) for {company_name}. Row: {in_row}"
                 )
                 _COUNTERS_COMPANIES["company_id_name_to_id_failed"].add(
                     str(in_row))
@@ -566,6 +566,63 @@ def _run_deduplication_preprocessing_steps(input_table_path,
     logging.info("Deduplication preprocessing steps completed.")
 
 
+def _batch_get_counties(zip_codes: set) -> dict:
+    """
+    Gets all county candidates for a set of zip codes in a single batch call.
+    """
+    logging.info(f"Starting batch county lookup for {len(zip_codes)} zip codes...")
+    zip_to_county_map = {}
+    
+    # The API works with DCIDs, so format them as "zip/XXXXX"
+    zip_dcids = ["zip/" + z for z in zip_codes if z]
+    
+    # Fetch geoWithin property for all zips
+    geo_within_data = fh.datacommons.get_property_values(zip_dcids, "geoWithin")
+
+    # Fetch containedInPlace property for all zips as a fallback
+    contained_in_data = fh.datacommons.get_property_values(zip_dcids, "containedInPlace")
+
+    for zip_dcid in zip_dcids:
+        zip_code = zip_dcid.replace("zip/", "")
+        county = ""
+
+        # First, try to find a county from the geoWithin data
+        if zip_dcid in geo_within_data:
+            for place in geo_within_data[zip_dcid]:
+                # Handle cases where place can be a dict or a string
+                type_of_place = ""
+                if isinstance(place, dict):
+                    type_of_place = place.get("typeOf", "")
+                elif isinstance(place, str):
+                    type_of_place = place
+                
+                if "County" in type_of_place:
+                    county = place.get("dcid", "") if isinstance(place, dict) else ""
+                    if county:
+                        break # Found a county, no need to look further
+        
+        # If no county found, try the containedInPlace data
+        if not county and zip_dcid in contained_in_data:
+            for place in contained_in_data[zip_dcid]:
+                type_of_place = ""
+                if isinstance(place, dict):
+                    type_of_place = place.get("typeOf", "")
+                elif isinstance(place, str):
+                    type_of_place = place
+
+                if "County" in type_of_place:
+                    county = place.get("dcid", "") if isinstance(place, dict) else ""
+                    if county:
+                        break # Found a county
+
+        if county:
+            zip_to_county_map[zip_code] = county
+        else:
+            _COUNTERS_COMPANIES["missing_zip"].add(zip_code)
+
+    logging.info(f"Successfully mapped {len(zip_to_county_map)} zip codes to counties.")
+    return zip_to_county_map
+
 def process_companies(input_table_path, existing_facilities_file,
                       output_path_info, output_path_ownership):
     """
@@ -588,10 +645,26 @@ def process_companies(input_table_path, existing_facilities_file,
         )
     else:
         logging.fatal(
-            f"❌ FATAL: DuplicateIdMappings.csv not found at {dupes_filepath}. "
+            f"FATAL: DuplicateIdMappings.csv not found at {dupes_filepath}. "
             f"This file must be generated by the deduplication preprocessing step first. Script cannot proceed."
         )
         sys.exit(1)
+
+    # --- Pre-computation Step: Batch fetch all counties ---
+    input_table_csv_path = os.path.join(input_table_path, _TABLE + ".csv")
+    all_zip_codes = set()
+    with open(input_table_csv_path, "r", newline='') as rfp:
+        cr = csv.DictReader(rfp)
+        zip_col = next((f for f in cr.fieldnames if f.lower() == 'parent_co_zip'), None)
+        if zip_col:
+            for row in cr:
+                zip_code = row.get(zip_col, '').strip()[:5]
+                if zip_code:
+                    all_zip_codes.add(zip_code)
+    
+    zip_to_county_map = _batch_get_counties(all_zip_codes)
+    # --- End Pre-computation Step ---
+
 
     processed_companies = set()
     table_path = os.path.join(output_path_info, _OUT_FILE_PREFIX)
@@ -618,12 +691,10 @@ def process_companies(input_table_path, existing_facilities_file,
         facility_ids_from_existing = set(
             pd.read_csv(existing_facilities_path)[_EPA_FACILITY_GHG_ID].values)
 
-        input_table_csv_path = os.path.join(input_table_path, _TABLE + ".csv")
         rows_written_to_output = 0
 
         logging.info(
-            f"Starting main processing loop for {input_table_csv_path} (generating output CSVs)..."
-        )
+            f"Starting main processing loop for {input_table_csv_path} (generating output CSVs)...")
         with open(input_table_csv_path, "r", newline='') as rfp:
             cr = csv.DictReader(rfp)
 
@@ -651,13 +722,12 @@ def process_companies(input_table_path, existing_facilities_file,
                     CSV_PARENT_CO_STATE_COL, CSV_PARENT_CO_ZIP_COL
             ]):
                 logging.fatal(
-                    f"❌ FATAL: One or more critical CSV columns not found in main processing loop. "
+                    f"FATAL: One or more critical CSV columns not found in main processing loop. "
                     f"Headers: {cr.fieldnames}. Script cannot proceed.")
                 sys.exit(1)
 
             logging.info(
-                f"Using resolved CSV column mappings for processing rows in {input_table_csv_path}."
-            )
+                f"Using resolved CSV column mappings for processing rows in {input_table_csv_path}. ")
 
             for i, in_row in enumerate(cr):
                 if i % 1000 == 0:
@@ -668,8 +738,7 @@ def process_companies(input_table_path, existing_facilities_file,
                 facility_id = in_row.get(CSV_FACILITY_ID_COL, '').strip()
                 if not facility_id:
                     logging.warning(
-                        f"⚠️ Skipping row {i+1} (output generation): Mandatory FACILITY_ID is empty. Row: {in_row}"
-                    )
+                        f" Skipping row {i+1} (output generation): Mandatory FACILITY_ID is empty. Row: {in_row}")
                     _COUNTERS_COMPANIES["facility_id_extraction_failed"].add(
                         str(in_row))
                     continue
@@ -678,8 +747,7 @@ def process_companies(input_table_path, existing_facilities_file,
 
                 if ghg_id not in facility_ids_from_existing:
                     logging.debug(
-                        f"Skipping row {i+1} (output generation): '{ghg_id}' not found in relevant_facility_ids. Row: {in_row}"
-                    )
+                        f"Skipping row {i+1} (output generation): '{ghg_id}' not found in relevant_facility_ids. Row: {in_row}")
                     _COUNTERS_COMPANIES["facility_does_not_exist"].add(ghg_id)
                     continue
 
@@ -689,16 +757,14 @@ def process_companies(input_table_path, existing_facilities_file,
                                                         "").replace("'", "")
                 if not company_name:
                     logging.warning(
-                        f"⚠️ Skipping row {i+1} (output generation): 'PARENT_COMPANY_NAME' not found or empty for {ghg_id}. Row: {in_row}"
-                    )
+                        f" Skipping row {i+1} (output generation): 'PARENT_COMPANY_NAME' not found or empty for {ghg_id}. Row: {in_row}")
                     _COUNTERS_COMPANIES["company_name_not_found"].add(ghg_id)
                     continue
 
                 company_id = fh.name_to_id(company_name)
                 if not company_id:
                     logging.warning(
-                        f"⚠️ Skipping row {i+1} (output generation): Mandatory company_id is empty (from name_to_id) for {company_name}. Row: {in_row}"
-                    )
+                        f" Skipping row {i+1} (output generation): Mandatory company_id is empty (from name_to_id) for {company_name}. Row: {in_row}")
                     _COUNTERS_COMPANIES["company_id_name_to_id_failed"].add(
                         str(in_row))
                     continue
@@ -711,8 +777,7 @@ def process_companies(input_table_path, existing_facilities_file,
                 year = in_row.get(CSV_YEAR_COL, '').strip()
                 if not year:
                     logging.warning(
-                        f"⚠️ Skipping row {i+1} (output generation): 'YEAR' is empty for {ghg_id}. Row: {in_row}"
-                    )
+                        f" Skipping row {i+1} (output generation): 'YEAR' is empty for {ghg_id}. Row: {in_row}")
                     _COUNTERS_COMPANIES["year_does_not_exist"].add(
                         (company_id, ghg_id))
 
@@ -720,8 +785,7 @@ def process_companies(input_table_path, existing_facilities_file,
                                          '').strip()
                 if not percent_own:
                     logging.warning(
-                        f"⚠️ Skipping row {i+1} (output generation): 'PARENT_CO_PERCENT_OWN' is empty for {ghg_id}. Row: {in_row}"
-                    )
+                        f" Skipping row {i+1} (output generation): 'PARENT_CO_PERCENT_OWN' is empty for {ghg_id}. Row: {in_row}")
                     _COUNTERS_COMPANIES["percent_ownership_not_found"].add(
                         (company_id, year))
                     percent_own = 100
@@ -738,18 +802,11 @@ def process_companies(input_table_path, existing_facilities_file,
                 if company_id.lower() not in processed_companies:
                     zip_code_raw = in_row.get(CSV_PARENT_CO_ZIP_COL, '').strip()
                     zip_code = zip_code_raw[:5]
-
+                    
+                    county = zip_to_county_map.get(zip_code, "")
                     zip_for_county = ""
                     if zip_code:
                         zip_for_county = "zip/" + zip_code
-                    else:
-                        logging.warning(
-                            f"⚠️ Missing zip code for company: {company_id}, year: {year}. Row: {in_row}"
-                        )
-                        _COUNTERS_COMPANIES["missing_zip"].add(
-                            (company_id, year))
-
-                    county = _get_county(company_id, zip_for_county, year)
 
                     street_address = in_row.get(
                         CSV_PARENT_CO_STREET_ADDRESS_COL, '').strip()
@@ -772,6 +829,7 @@ def process_companies(input_table_path, existing_facilities_file,
                     }
                     tableWriter.writerow(table_out_row)
                     processed_companies.add(company_id.lower())
+
 
         logging.info(
             f"Main processing loop completed. Produced {rows_written_to_output} rows for output CSVs."
@@ -872,9 +930,25 @@ def generate_svobs_helper(ownership_relationships_filepath, svobs_path_info):
     facilities = list(facilities)
     logging.info(f"Found {len(facilities)} unique facilities for SVObs.")
 
-    statVars = fh.get_all_statvars(_DC_API_URL, facilities)
-    facility_svo_dict = fh.get_all_svobs(facilities, statVars)
-    logging.info(f"# SVs : {len(statVars)}")
+    # Batch process facilities to avoid timeouts
+    batch_size = 500
+    facility_svo_dict = {}
+    
+    for i in range(0, len(facilities), batch_size):
+        batch = facilities[i:i+batch_size]
+        logging.info(f"Processing facility batch {i//batch_size + 1}...")
+        
+        try:
+            statVars = fh.get_all_statvars(_DC_API_URL, batch)
+            svo_batch = fh.get_all_svobs(batch, statVars)
+            facility_svo_dict.update(svo_batch)
+            logging.info(f"  ...batch {i//batch_size + 1} complete.")
+        except Exception as e:
+            logging.error(f"Error processing batch {i//batch_size + 1}: {e}")
+            # Optionally, add a retry mechanism here
+            continue
+
+    logging.info(f"# SVs : (processed in batches)")
     logging.info(f"# Facilities (with SVObs data) : {len(facility_svo_dict)}")
 
     process_svobs(svobs_path_info, facility_company_ownership,

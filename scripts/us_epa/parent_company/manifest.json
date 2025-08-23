@@ -22,7 +22,7 @@
           "tmp_data/V_PARENT_COMPANY_INFO.csv"
       ],
       "cron_schedule": "30 05 * * 1",
-      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100}
+      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100}
     }
   ]
 }
