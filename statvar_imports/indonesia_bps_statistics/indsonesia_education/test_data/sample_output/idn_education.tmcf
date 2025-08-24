@@ -1,0 +1,6 @@
+Node: E:Education_Data_Indonesia->E0
+observationDate: C:Education_Data_Indonesia->observationDate
+observationAbout: C:Education_Data_Indonesia->observationAbout
+value: C:Education_Data_Indonesia->value
+variableMeasured: C:Education_Data_Indonesia->variableMeasured
+typeOf: dcs:StatVarObservation
