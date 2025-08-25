@@ -119,6 +119,8 @@ _FLAGS = flags.FLAGS
 
 def get_diff_config() -> dict:
     """Returns a dictionary of config parameters for MCF diff from flags."""
+    if not _FLAGS.is_parsed():
+      _FLAGS.mark_as_parsed()
     return {
         'ignore_property': _FLAGS.ignore_property,
         'compare_property': _FLAGS.compare_property,
@@ -127,7 +129,7 @@ def get_diff_config() -> dict:
         'compare_dcids': _FLAGS.compare_dcids,
         'compare_nodes_with_pv': _FLAGS.compare_nodes_with_pv,
         'show_diff_nodes_only': _FLAGS.show_diff_nodes_only,
-    }
+      }
 
 
 def diff_mcf_node_pvs(node_1: dict,
