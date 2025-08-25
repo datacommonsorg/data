@@ -1,8 +1,8 @@
-
 import unittest
 import os
 import tempfile
 from file_dict_io import CsvFileDictIO, McfFileDictIO, open_dict_file
+
 
 class TestFileDictIO(unittest.TestCase):
 
@@ -39,10 +39,15 @@ class TestFileDictIO(unittest.TestCase):
     def test_mcf_write_and_read(self):
         mcf_file_path = os.path.join(self.test_dir.name, 'test.mcf')
         headers = ['# Test MCF']
-        data = [
-            {'Node': 'dcid:node1', 'prop1': 'dcid:value1', 'prop2': '"value2"'},
-            {'Node': 'dcid:node2', 'prop1': 'dcid:value3', 'prop2': '"value4"'}
-        ]
+        data = [{
+            'Node': 'dcid:node1',
+            'prop1': 'dcid:value1',
+            'prop2': '"value2"'
+        }, {
+            'Node': 'dcid:node2',
+            'prop1': 'dcid:value3',
+            'prop2': '"value4"'
+        }]
 
         # Write MCF
         writer = McfFileDictIO(mcf_file_path, mode='w', headers=headers)
@@ -77,7 +82,6 @@ class TestFileDictIO(unittest.TestCase):
         for i in range(len(data)):
             self.assertDictEqual(data[i], normalized_read_data[i])
 
-
     def test_open_dict_file(self):
         csv_file_path = os.path.join(self.test_dir.name, 'test.csv')
         mcf_file_path = os.path.join(self.test_dir.name, 'test.mcf')
@@ -89,6 +93,7 @@ class TestFileDictIO(unittest.TestCase):
         mcf_file = open_dict_file(mcf_file_path, 'w')
         self.assertIsInstance(mcf_file, McfFileDictIO)
         mcf_file.close()
+
 
 if __name__ == '__main__':
     unittest.main()

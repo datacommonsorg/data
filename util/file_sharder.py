@@ -123,6 +123,7 @@ def str_to_int_hash(input_string: str) -> int:
     integer_hash = int(sha256_hash[:16], 16)
     return integer_hash
 
+
 class FileSharder:
     """Class to shard files.
 
@@ -399,10 +400,10 @@ class FileSharder:
             # Got a valid input.
             # Check if it can be sampled.
             if write_record:
-              key = self.get_key_for_record(record)
-              if not self.should_sample_key(key):
-                self._counters.add_counter('shard-input-sample-dropped', 1)
-                write_record = False
+                key = self.get_key_for_record(record)
+                if not self.should_sample_key(key):
+                    self._counters.add_counter('shard-input-sample-dropped', 1)
+                    write_record = False
 
             if write_record:
                 # Write it to the corresponding output shard.
@@ -439,16 +440,17 @@ class FileSharder:
         sample_factor = 1
         sample_rate = self._config.get('shard_sample_rate', 1)
         if sample_rate < 1.0:
-          sample_rate_str = f'{sample_rate:.12f}'.strip('0')
-          if '.' in sample_rate_str:
-            sample_factor = pow(10, len(sample_rate_str.split('.')[1]))
-            sample_rate = int(sample_rate * sample_factor)
-          else:
-            logging.fatal(f'invalid rate {sample_rate}')
+            sample_rate_str = f'{sample_rate:.12f}'.strip('0')
+            if '.' in sample_rate_str:
+                sample_factor = pow(10, len(sample_rate_str.split('.')[1]))
+                sample_rate = int(sample_rate * sample_factor)
+            else:
+                logging.fatal(f'invalid rate {sample_rate}')
         self._sample_rate = sample_rate
         self._sample_factor = sample_factor
         if sample_factor > 1:
-          logging.info(f'Sampling {sample_rate} out of {sample_factor} records.')
+            logging.info(
+                f'Sampling {sample_rate} out of {sample_factor} records.')
 
     def should_sample_key(self, key: str) -> bool:
         """Returns True if the key is selected based on the sampling rate."""
