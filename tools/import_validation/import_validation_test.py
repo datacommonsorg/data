@@ -40,6 +40,9 @@ class ImportValidationTest(unittest.TestCase):
 
         # Create an empty differ output file, as it is required
         pd.DataFrame({'DELETED': []}).to_csv(self.differ_path, index=False)
+        # Create a dummy stats file, as it is often required
+        pd.DataFrame({'StatVar': ['sv1'], 'Value': [1]}).to_csv(self.stats_path,
+                                                               index=False)
 
     def tearDown(self):
         self.test_dir.cleanup()
@@ -238,6 +241,93 @@ class ImportValidationTest(unittest.TestCase):
         self.assertEqual(len(output_df), 1)
         self.assertEqual(output_df.iloc[0]['Status'], 'FAILED')
         self.assertIn('sv2', output_df.iloc[0]['Details'])
+
+    def test_empty_differ_file_runs_validation(self):
+        """
+    Tests that a differ file with only headers (empty DataFrame) still runs
+    the validation and fails it if the condition is not met.
+    """
+        # 1. Create a config that checks for deleted count
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "check_deleted_count",
+                        "validator": "DELETED_COUNT",
+                        "scope": {
+                            "data_source": "differ"
+                        },
+                        "params": {
+                            "threshold": -1
+                        }  # Fail if deleted count is not > -1
+                    }]
+                }, f)
+        # 2. Create a differ file with only headers
+        pd.DataFrame({'DELETED': []}).to_csv(self.differ_path, index=False)
+
+        # 3. Run the script
+        result = subprocess.run([
+            'python3', '-m', 'tools.import_validation.runner',
+            f'--validation_config={self.config_path}',
+            f'--stats_summary={self.stats_path}',
+            f'--differ_output={self.differ_path}',
+            f'--validation_output={self.output_path}'
+        ],
+                                capture_output=True,
+                                text=True,
+                                cwd=self.project_root)
+
+        # 4. Assert that the validation PASSED, because the check ran and 0 > -1
+        self.assertEqual(
+            result.returncode, 0,
+            "Script should have passed because the check should have run and passed."
+        )
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
+
+    def test_missing_differ_file_does_not_throw_exception(self):
+        """
+    Tests that a missing differ file does not cause the runner to throw an
+    exception when a differ-based rule is present.
+    """
+        # 1. Create a config that requires the 'differ' data source
+        with open(self.config_path, 'w') as f:
+            json.dump(
+                {
+                    "rules": [{
+                        "rule_id": "check_deleted_count",
+                        "validator": "DELETED_COUNT",
+                        "scope": {
+                            "data_source": "differ"
+                        },
+                        "params": {
+                            "threshold": 10
+                        }
+                    }]
+                }, f)
+
+        # 2. Run the script without the --differ_output flag
+        result = subprocess.run([
+            'python3', '-m', 'tools.import_validation.runner',
+            f'--validation_config={self.config_path}',
+            f'--stats_summary={self.stats_path}',
+            f'--validation_output={self.output_path}'
+        ],
+                                capture_output=True,
+                                text=True,
+                                cwd=self.project_root)
+
+        # 3. Assert that the script does not exit with a fatal error
+        # It should pass because an empty (missing) differ file has 0 deleted
+        # points, which is within the threshold of 10.
+        self.assertEqual(
+            result.returncode, 0,
+            f"Script should not have thrown an exception. Stderr: {result.stderr}"
+        )
+        output_df = pd.read_csv(self.output_path)
+        self.assertEqual(len(output_df), 1)
+        self.assertEqual(output_df.iloc[0]['Status'], 'PASSED')
 
 
 if __name__ == '__main__':
