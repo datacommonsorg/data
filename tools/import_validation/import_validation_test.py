@@ -41,8 +41,10 @@ class ImportValidationTest(unittest.TestCase):
         # Create an empty differ output file, as it is required
         pd.DataFrame({'DELETED': []}).to_csv(self.differ_path, index=False)
         # Create a dummy stats file, as it is often required
-        pd.DataFrame({'StatVar': ['sv1'], 'Value': [1]}).to_csv(self.stats_path,
-                                                               index=False)
+        pd.DataFrame({
+            'StatVar': ['sv1'],
+            'Value': [1]
+        }).to_csv(self.stats_path, index=False)
 
     def tearDown(self):
         self.test_dir.cleanup()
@@ -261,7 +263,8 @@ class ImportValidationTest(unittest.TestCase):
                             "threshold": -1
                         }  # Fail if deleted count is not > -1
                     }]
-                }, f)
+                },
+                f)
         # 2. Create a differ file with only headers
         pd.DataFrame({'DELETED': []}).to_csv(self.differ_path, index=False)
 
