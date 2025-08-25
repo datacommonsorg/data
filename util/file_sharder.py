@@ -163,6 +163,7 @@ class FileSharder:
         self._remaining_input_files = list(self._input_files)
         self._output_path = output_path
         self._shard_key = self._config.get('shard_key', None)
+        self._output_pattern = ''
         # List of output shard filenames
         self._output_files = []
         # Fingerprint of records seen for duplicate checks.
@@ -324,7 +325,7 @@ class FileSharder:
                         f'Failed to get key: {self._shard_key} for record: {record} in file {self._current_fp.filename()}'
                     )
                     key = ''
-            if self._shard_key in record:
+            elif self._shard_key in record:
                 key = record.get(self._shard_key)
         if key is None:
             # Shard by the record fingerprint
