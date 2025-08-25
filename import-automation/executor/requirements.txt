@@ -27,6 +27,7 @@ google-cloud-logging
 google-cloud-scheduler
 gspread
 gunicorn
+legacy-cgi
 lxml
 numpy
 openpyxl
