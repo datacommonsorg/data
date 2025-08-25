@@ -142,6 +142,33 @@ class Validator:
       A ValidationResult object.
     """
         if 'DELETED' not in differ_df.columns:
+            if differ_df.empty:
+                # This handles the case where the differ file was missing and an
+                # empty DataFrame was passed in. An empty DataFrame has 0 deleted
+                # points, which should always pass the threshold check unless the
+                # threshold is negative.
+                deleted_count = 0
+                threshold = params.get('threshold', 0)
+                if deleted_count > threshold:
+                    return ValidationResult(
+                        ValidationStatus.FAILED,
+                        'DELETED_COUNT',
+                        message=
+                        f"Found {deleted_count} deleted points, which is over the threshold of {threshold}.",
+                        details={
+                            'deleted_count': int(deleted_count),
+                            'threshold': threshold,
+                            'rows_processed': 0,
+                            'rows_succeeded': 0,
+                            'rows_failed': 0
+                        })
+                return ValidationResult(ValidationStatus.PASSED,
+                                        'DELETED_COUNT',
+                                        details={
+                                            'rows_processed': 0,
+                                            'rows_succeeded': 0,
+                                            'rows_failed': 0
+                                        })
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,
                 'DELETED_COUNT',
@@ -194,6 +221,14 @@ class Validator:
       A ValidationResult object.
     """
         if 'MODIFIED' not in differ_df.columns:
+            if differ_df.empty:
+                return ValidationResult(ValidationStatus.PASSED,
+                                        'MODIFIED_COUNT',
+                                        details={
+                                            'rows_processed': 0,
+                                            'rows_succeeded': 0,
+                                            'rows_failed': 0
+                                        })
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,
                 'MODIFIED_COUNT',
@@ -245,6 +280,14 @@ class Validator:
       A ValidationResult object.
     """
         if 'ADDED' not in differ_df.columns:
+            if differ_df.empty:
+                return ValidationResult(ValidationStatus.PASSED,
+                                        'ADDED_COUNT',
+                                        details={
+                                            'rows_processed': 0,
+                                            'rows_succeeded': 0,
+                                            'rows_failed': 0
+                                        })
             return ValidationResult(
                 ValidationStatus.DATA_ERROR,
                 'ADDED_COUNT',
