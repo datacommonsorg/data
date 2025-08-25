@@ -138,23 +138,7 @@ def main(_):
     for table in health_tables:
         filepath = os.path.join(health_dir, table['filename'])
         fetch_and_save_data(table['id'], filepath, table['header_mapping'])
-    employment_dir = "mongolia_employment/input_files"
-    os.makedirs(employment_dir, exist_ok=True) 
-
-    employment_tables = [
-      
-        {"id": "DT_NSO_0400_002V4", "filename": "registered_unemployment_by_agegroup_gender_region_aimag.csv", "header_mapping": {"keys": ["SCR_MN", "SCR_ENG1","CODE1","SCR_ENG2"], "cols": ["Age", "Aimag","Код","Gender"]}},
-        {"id": "DT_NSO_0400_002V7", "filename": "registered_job_seekers_by_agegroup_gender.csv", "header_mapping": {"keys": ["SCR_ENG2","SCR_ENG","CODE","SCR_ENG1"], "cols": ["Age", "Aimag","Код","Sex"]}},
-        {"id": "DT_NSO_0400_082V6", "filename": "informal_employment.csv", "header_mapping": {"keys": ["SCR_ENG","CODE","SCR_ENG1","SCR_ENG2"], "cols": ["Aimag","Код","Divisions","Gender"]}},
-        {"id": "DT_NSO_0400_002V8", "filename": "registered_job_seekers_by_education_level.csv", "header_mapping": {"keys": ["SCR_ENG1","SCR_ENG","CODE","SCR_ENG2"], "cols": ["Gender","Aimag","Код","Level of education"]}}
-
-      
-        ]
-
-    for table in employment_tables:
-        filepath = os.path.join(employment_dir, table['filename'])
-        fetch_and_save_data(table['id'], filepath, table['header_mapping'])
-
+    
     logging.info("All tasks completed")
 
 if __name__ == "__main__":
