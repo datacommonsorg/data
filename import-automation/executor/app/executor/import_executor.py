@@ -406,7 +406,7 @@ class ImportExecutor:
                     'Skipping genmcf due to missing import input spec.')
                 continue
             output_path = os.path.join(absolute_import_dir, import_prefix,
-                                       'validation')
+                                       'genmcf')
 
             # Run dc import tool to generate resolved mcf.
             logging.info(f'Generating resolved mcf for {import_prefix}')
@@ -424,6 +424,19 @@ class ImportExecutor:
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
+            if not self.config.skip_gcs_upload:
+                # Upload output to GCS.
+                gcs_output = f'{relative_import_dir}/{import_spec["import_name"]}/{version}/{import_prefix}/validation'
+                logging.info(
+                    f'Uploading genmcf output to GCS path: {gcs_output}')
+                for filename in os.listdir(output_path):
+                    filepath = os.path.join(output_path, filename)
+                    if os.path.isfile(filepath):
+                        dest = f'{gcs_output}/{filename}'
+                        self.uploader.upload_file(
+                            src=filepath,
+                            dest=dest,
+                        )
         return import_prefix_list
 
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
@@ -453,16 +466,13 @@ class ImportExecutor:
                 logging.error('Skipping validation due to missing import spec.')
                 continue
 
+            genmcf_output_path = os.path.join(absolute_import_dir,
+                                              import_prefix, 'genmcf')
             validation_output_path = os.path.join(absolute_import_dir,
                                                   import_prefix, 'validation')
-            current_data_path = os.path.join(validation_output_path, '*.mcf')
+            current_data_path = os.path.join(genmcf_output_path, '*.mcf')
             previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
-            # Save the previous version being compared to
-            with open(
-                    os.path.join(validation_output_path,
-                                 'previous_version.txt'), 'w') as f:
-                f.write(f'{latest_version}\n')
-            summary_stats = os.path.join(validation_output_path,
+            summary_stats = os.path.join(genmcf_output_path,
                                          'summary_report.csv')
             validation_output_file = os.path.join(validation_output_path,
                                                   'validation_output.csv')
@@ -485,6 +495,11 @@ class ImportExecutor:
                                       runner_mode='local')
                 differ.run_differ()
                 differ_output_file = differ_output
+                # Save the previous version being compared to
+                with open(
+                        os.path.join(validation_output_path,
+                                     'previous_version.txt'), 'w') as f:
+                    f.write(f'{latest_version}\n')
             else:
                 differ_output_file = ''
                 logging.error(

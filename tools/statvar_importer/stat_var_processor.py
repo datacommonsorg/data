@@ -66,8 +66,7 @@ sys.path.append(os.path.join(_SCRIPT_DIR, 'place'))
 sys.path.append(os.path.join(_SCRIPT_DIR, 'schema'))
 
 import eval_functions
-from log_util import configure_cloud_logging
-from cloudrun_util import running_on_cloudrun
+from log_util import configure_cloud_logging, running_on_cloud
 from utils import (capitalize_first_char, is_place_dcid,
                    get_observation_date_format, get_observation_period_for_date,
                    pvs_has_any_prop, str_from_number, prepare_input_data)
@@ -1509,7 +1508,7 @@ class StatVarDataProcessor:
             2, f'Getting PVs for filename {normalize_filename}')
         pvs_list = self._pv_mapper.get_all_pvs_for_value(normalize_filename)
         default_pv_string = self._config.get('default_pvs_key', 'DEFAULT_PV')
-        default_pvs = self._pv_mapper.get_all_pvs_for_value(normalize_filename)
+        default_pvs = self._pv_mapper.get_all_pvs_for_value(default_pv_string)
         logging.level_debug() and logging.log(
             2, f'Got default PVs for {default_pv_string}: {default_pvs}')
         if default_pvs:
@@ -2790,13 +2789,13 @@ def process(
 
 
 def main(_):
-    # Configure cloud logging if running on CloudRun
-    if running_on_cloudrun():
-        logging.info("Running under Cloud Run detected.")
+    # Configure cloud logging if running on Cloud
+    if running_on_cloud():
+        logging.info("Running under Cloud detected.")
         configure_cloud_logging()
         logging.info("Google Cloud Logging configured.")
     else:
-        logging.info("Not running under Cloud Run")
+        logging.info("Not running under Cloud")
 
     # uncomment to run pprof
     # start_pprof_server(port=8123)
