@@ -101,6 +101,11 @@ def running_on_cloud() -> bool:
 
 def configure_logging(enable_cloud_logging: bool):
     running_on_cloud_result = running_on_cloud()
-    if enable_cloud_logging or running_on_cloud_result:
-        configure_cloud_logging()
-        logging.info("Google Cloud Logging configured.")
+    if running_on_cloud_result:
+        if enable_cloud_logging:
+            configure_cloud_logging()
+            logging.info("Google Cloud Logging configured.")
+        else:
+            logging.info(f'Not enabling cloud logging')
+    else:
+        logging.info(f'Not running on cloud, using default logging')
