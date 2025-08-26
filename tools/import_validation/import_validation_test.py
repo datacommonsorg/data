@@ -260,8 +260,8 @@ class ImportValidationTest(unittest.TestCase):
                             "data_source": "differ"
                         },
                         "params": {
-                            "threshold": -1
-                        }  # Fail if deleted count is not > -1
+                            "threshold": 0
+                        }  # Fail if deleted count is > 0
                     }]
                 },
                 f)
