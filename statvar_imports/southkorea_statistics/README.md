@@ -36,10 +36,10 @@ The data is processed using the stat_var_processor.py script, which is the same 
 This project is set up for manual or automated refreshes, depending on the dataset's update schedule.
 
 4. Script Execution Details
-Script 1: statvar_processor.py (Data Processing)
+Script 1: stat_var_processor.py (Data Processing)
 Usage:
 
-python3 statvar_processor.py --input_data=input/raw_data.csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output/
+python3 stat_var_processor.py --input_data=input/raw_data.csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output/
 
 **Note: For each import (e.g., demographics, health, education, and employment), be sure to use the corresponding data, pvmap, and metadata files located in their respective folders.**
 
