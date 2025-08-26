@@ -2796,7 +2796,9 @@ def main(_):
             configure_cloud_logging()
             logging.info("Google Cloud Logging configured.")
         else:
-            logging.info("Cloud logging is disabled via the 'enable_cloud_logging' flag.")
+            logging.info(
+                "Cloud logging is disabled via the 'enable_cloud_logging' flag."
+            )
     else:
         logging.info("Not running under Cloud")
 
