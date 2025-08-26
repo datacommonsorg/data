@@ -1508,7 +1508,7 @@ class StatVarDataProcessor:
             2, f'Getting PVs for filename {normalize_filename}')
         pvs_list = self._pv_mapper.get_all_pvs_for_value(normalize_filename)
         default_pv_string = self._config.get('default_pvs_key', 'DEFAULT_PV')
-        default_pvs = self._pv_mapper.get_all_pvs_for_value(normalize_filename)
+        default_pvs = self._pv_mapper.get_all_pvs_for_value(default_pv_string)
         logging.level_debug() and logging.log(
             2, f'Got default PVs for {default_pv_string}: {default_pvs}')
         if default_pvs:
