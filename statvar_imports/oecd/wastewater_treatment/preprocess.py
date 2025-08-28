@@ -22,7 +22,7 @@ def rename_target_file(base_path='.'):
         files_in_folder = os.listdir(target_folder)
         
         source_filename = None
-            csv_files = [
+        csv_files = [
             f for f in files_in_folder
             if f.lower().endswith('.csv') and f != new_fixed_filename
         ]

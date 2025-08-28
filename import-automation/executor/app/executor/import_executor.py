@@ -424,7 +424,7 @@ class ImportExecutor:
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
-            if not self.config.skip_gcs_upload:
+            if os.path.exists(output_path) and not self.config.skip_gcs_upload:
                 # Upload output to GCS.
                 gcs_output = f'{relative_import_dir}/{import_spec["import_name"]}/{version}/{import_prefix}/validation'
                 logging.info(
@@ -495,6 +495,11 @@ class ImportExecutor:
                                       runner_mode='local')
                 differ.run_differ()
                 differ_output_file = differ_output
+                # Save the previous version being compared to
+                with open(
+                        os.path.join(validation_output_path,
+                                     'previous_version.txt'), 'w') as f:
+                    f.write(f'{latest_version}\n')
             else:
                 differ_output_file = ''
                 logging.error(
@@ -514,13 +519,8 @@ class ImportExecutor:
                 logging.error('ValidationRunner failed: %s', e)
                 validation_status = False
 
-            # Save the previous version being compared to
-            with open(
-                    os.path.join(validation_output_path,
-                                 'previous_version.txt'), 'w') as f:
-                f.write(f'{latest_version}\n')
-
-            if not self.config.skip_gcs_upload:
+            if os.path.exists(
+                    validation_output_path) and not self.config.skip_gcs_upload:
                 # Upload output to GCS.
                 gcs_output = f'{import_dir}/{version}/{import_prefix}/validation'
                 logging.info(

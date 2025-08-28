@@ -15,15 +15,15 @@
                     "cleaned_csv": "gcs_output/cleaned_csv/County.csv"
                 },
                 {
-                    "template_mcf": "cdc_places.tmcf",
+                    "template_mcf": "cdc_places_city.tmcf",
                     "cleaned_csv": "gcs_output/cleaned_csv/City.csv"
                 },
                 {
-                    "template_mcf": "cdc_places.tmcf",
+                    "template_mcf": "cdc_places_zipcode.tmcf",
                     "cleaned_csv": "gcs_output/cleaned_csv/ZipCode.csv"
                 },
                 {
-                    "template_mcf": "cdc_places.tmcf",
+                    "template_mcf": "cdc_places_censustract.tmcf",
                     "cleaned_csv": "gcs_output/cleaned_csv/CensusTract.csv"
                 }
             ],
