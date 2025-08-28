@@ -44,6 +44,8 @@ def rename_target_file(base_path='.'):
         try:
             os.rename(old_path, new_path)
             logging.info(f"Successfully renamed '{source_filename}' to '{new_fixed_filename}'")
+            # Log the confirmation
+            logging.info(f"The file is renamed to '{new_fixed_filename}'.")
         except PermissionError:
             logging.fatal(f"Permission denied while renaming '{source_filename}'. Check file permissions.")
         except FileExistsError:
@@ -56,5 +58,5 @@ def rename_target_file(base_path='.'):
 
 # Run it
 if __name__ == '__main__':
-    logging.get_absl_logger().setLevel('INFO')
+    logging.set_verbosity(logging.INFO)
     rename_target_file()
