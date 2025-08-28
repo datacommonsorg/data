@@ -21,9 +21,9 @@
     } 
   ],
   "config_override":{
-        "invoke_import_tool": false,
-        "invoke_differ_tool": false,
-        "invoke_import_validation": false
+    "invoke_import_tool": false,
+    "invoke_differ_tool": false,
+    "invoke_import_validation": false
   }
 }
 
