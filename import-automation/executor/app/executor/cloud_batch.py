@@ -138,7 +138,7 @@ def get_gce_instance(required_cpu: float,
 
 
 def create_job_request(import_name: str, import_config: dict, import_spec: dict,
-                       default_resources: dict) -> str:
+                       default_resources: dict, timeout: int) -> str:
     resources = import_spec.get('resource_limits', default_resources)
     machine_type = get_gce_instance(resources['cpu'], resources['memory'])
 
@@ -154,7 +154,8 @@ def create_job_request(import_name: str, import_config: dict, import_spec: dict,
         "jobName": job_name,
         "importName": import_name,
         "importConfig": import_config_string,
-        "resources": resources
+        "resources": resources,
+        "timeout": timeout
     }
     argument_string = json.dumps(argument_payload)
     final_payload = {
