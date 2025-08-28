@@ -49,12 +49,11 @@ flags.DEFINE_boolean(
 AUTO_IMPORT_JOB_STATUS_LOG_TYPE = "auto-import-job-status"
 
 
-def _override_configs(absolute_import_name: str,
+def _override_configs(import_name: str, import_dir: str,
                       config: configs.ExecutorConfig) -> configs.ExecutorConfig:
-    import_dir, import_name = absolute_import_name.split(':', 1)
     manifest_path = os.path.join(config.local_repo_dir, import_dir,
                                  config.manifest_filename)
-    logging.info('%s: Overriding config from manifest %s', absolute_import_name,
+    logging.info('%s: Overriding config from manifest %s', import_name,
                  manifest_path)
     d = json.load(open(manifest_path))
     logging.info('Import manifest:')
@@ -69,10 +68,10 @@ def run_import_job(absolute_import_name: str, import_config: str):
     logging.info(
         f"Running import {absolute_import_name} with config:{import_config}")
     start_time = time.time()
-    logging.info(absolute_import_name)
+    import_dir, import_name = absolute_import_name.split(':', 1)
     cfg = json.loads(import_config)
     config = configs.ExecutorConfig(**cfg)
-    config = _override_configs(absolute_import_name, config)
+    config = _override_configs(import_name, import_dir, config)
     executor = import_executor.ImportExecutor(
         uploader=file_uploader.GCSFileUploader(
             project_id=config.gcs_project_id,
@@ -89,17 +88,19 @@ def run_import_job(absolute_import_name: str, import_config: str):
     logging.info('Import config:')
     logging.info(config)
     result = executor.execute_imports_on_update(absolute_import_name)
+    logging.info('Import result:')
     logging.info(result)
     elapsed_time_secs = int(time.time() - start_time)
     message = (f"Import Job [{absolute_import_name}] completed with status= "
                f"[{result.status}] in [{elapsed_time_secs}] seconds.)")
 
-    log_util.log_metric(AUTO_IMPORT_JOB_STATUS_LOG_TYPE,
-                        "INFO" if result.status == 'succeeded' else "ERROR",
-                        message, {
-                            "status": result.status,
-                            "latency_secs": elapsed_time_secs,
-                        })
+    log_util.log_metric(
+        AUTO_IMPORT_JOB_STATUS_LOG_TYPE,
+        "INFO" if result.status == 'succeeded' else "ERROR", message, {
+            "status": result.status,
+            "latency_secs": elapsed_time_secs,
+            "import_name": import_name,
+        })
     if result.status == 'failed':
         return 1
     return 0
