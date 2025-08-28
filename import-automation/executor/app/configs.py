@@ -122,7 +122,7 @@ class ExecutorConfig:
     # Cloud workflow id.
     cloud_workflow_id: str = 'import-automation-workflow'
     # Maximum time a user script can run for in seconds.
-    user_script_timeout: float = 36000
+    user_script_timeout: float = 86400
     # Arguments for the user script
     user_script_args: List[str] = ()
     # Environment variables for the user script
@@ -165,17 +165,7 @@ class ExecutorConfig:
 
     def get_data_refresh_config(self):
         """Returns the config used for Cloud Scheduler data refresh jobs."""
-        fields = set([
-            'github_repo_name', 'github_repo_owner_username',
-            'github_auth_username', 'github_auth_access_token',
-            'dashboard_oauth_client_id', 'importer_oauth_client_id',
-            'email_account', 'email_token', 'gcs_project_id',
-            'storage_prod_bucket_name', 'user_script_args', 'user_script_env',
-            'user_script_timeout'
-        ])
-        return {
-            k: v for k, v in dataclasses.asdict(self).items() if k in fields
-        }
+        return {k: v for k, v in dataclasses.asdict(self).items()}
 
 
 def _setup_logging():
