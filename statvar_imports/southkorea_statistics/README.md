@@ -12,7 +12,7 @@ This project imports data from the National Statistical Office of South Korea (K
 
 `Type of Place:` Provinces, cities, and other administrative divisions of South Korea.
 
-`StatVars:` Varies by dataset. This project may include statistics on population, economy, and society.
+`StatVars:` Varies by dataset. This project may include statistics on population, economy, society and education.
 
 2. Preprocessing Steps
 This section will detail the specific preprocessing steps required for the chosen dataset.
@@ -40,6 +40,12 @@ Script 1: stat_var_processor.py (Data Processing)
 Usage:
 
 python3 stat_var_processor.py --input_data=input/raw_data.csv --pv_map=pvmap.csv --config_file=metadata.csv --output_path=output/
+
+## Education Data
+
+For processing education data use the below format (Place resolver is a seperate pvmap as we are using #Header in it, below example shows how to run from the present working directory)
+
+python3 ../../tools/statvar_importer/statvar_processor.py --input_data=education/input_file --pv_map='education/dataset_pvmap.csv,education.places_resolved.csv' --config_file=education/dataset_metadata.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf --output_path=output_directory_path
 
 **Note: For each import (e.g., demographics, health, education, and employment), be sure to use the corresponding data, pvmap, and metadata files located in their respective folders.**
 

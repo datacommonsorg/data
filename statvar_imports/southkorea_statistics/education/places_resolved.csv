@@ -1,0 +1,21 @@
+key,p1,v1,p2,v2
+Seoul,observationAbout,wikidataId/Q8684,#Header,observationAbout
+Busan,observationAbout,wikidataId/Q16520,#Header,observationAbout
+Daegu,observationAbout,wikidataId/Q20927,#Header,observationAbout
+Incheon,observationAbout,wikidataId/Q20934,#Header,observationAbout
+Gwangju,observationAbout,wikidataId/Q41283,#Header,observationAbout
+Daejeon,observationAbout,wikidataId/Q20921,#Header,observationAbout
+Ulsan,observationAbout,wikidataId/Q41278,#Header,observationAbout
+Sejong,observationAbout,wikidataId/Q20929,#Header,observationAbout
+Gyeonggi-do,observationAbout,wikidataId/Q20937,#Header,observationAbout
+Gangwon-State,observationAbout,wikidataId/Q41071,#Header,observationAbout
+Gangwon-do,observationAbout,wikidataId/Q41071,#Header,observationAbout
+Chungcheongbuk-do,observationAbout,wikidataId/Q41066,#Header,observationAbout
+Chungcheongnam-do,observationAbout,wikidataId/Q41070,#Header,observationAbout
+Jeonbuk-State,observationAbout,wikidataId/Q41157,#Header,observationAbout
+Jeollabuk-do,observationAbout,wikidataId/Q41157,#Header,observationAbout
+Jeollanam-do,observationAbout,wikidataId/Q41161,#Header,observationAbout
+Gyeongsangbuk-do,observationAbout,wikidataId/Q41154,#Header,observationAbout
+Gyeongsangnam-do,observationAbout,wikidataId/Q41151,#Header,observationAbout
+Jeju-do,observationAbout,wikidataId/Q41164,#Header,observationAbout
+By province(1),observationAbout,country/KOR,#Header,observationAbout
