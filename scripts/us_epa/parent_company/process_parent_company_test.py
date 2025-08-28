@@ -51,8 +51,10 @@ _EXPECTED_COUNTERS = {
               'epaGhgrpFacilityId/1001829')]),
     'company_ids_replaced':
         set(['ChevronUSAInc', 'RandomCoName']),
-    'facility_id_extraction_failed': set(),
-    'company_id_name_to_id_failed': set(),
+    'facility_id_extraction_failed':
+        set(),
+    'company_id_name_to_id_failed':
+        set(),
 }
 
 # The relationships below are only for years 2016, 2017 and 2018. This means
@@ -84,12 +86,21 @@ _FACILITY_SVO_DICT = {
         'Annual_Emissions_Methane_NonBiogenic': {
             'sourceSeries': [{
                 'val': {
-                    '2010': 312.75, '2016': 997, '2017': 975.5, '2019': 932,
-                    '2018': 966.75, '2013': 1138.5, '2015': 1029.25,
-                    '2014': 1097.75, '2011': 1144.25, '2012': 1100.5
+                    '2010': 312.75,
+                    '2016': 997,
+                    '2017': 975.5,
+                    '2019': 932,
+                    '2018': 966.75,
+                    '2013': 1138.5,
+                    '2015': 1029.25,
+                    '2014': 1097.75,
+                    '2011': 1144.25,
+                    '2012': 1100.5
                 },
-                'measurementMethod': 'EPA_GHGRP', 'observationPeriod': 'P1Y',
-                'importName': 'EPA_GHGRP', 'provenanceDomain': 'epa.gov',
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
                 'unit': 'MetricTonCO2e',
                 'provenanceUrl': 'https://www.epa.gov/ghgreporting'
             }]
@@ -97,12 +108,21 @@ _FACILITY_SVO_DICT = {
         'Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic': {
             'sourceSeries': [{
                 'val': {
-                    '2010': 100, '2016': 100, '2015': 100, '2017': 100,
-                    '2018': 100, '2013': 100, '2012': 100, '2019': 100,
-                    '2014': 100, '2011': 100,
+                    '2010': 100,
+                    '2016': 100,
+                    '2015': 100,
+                    '2017': 100,
+                    '2018': 100,
+                    '2013': 100,
+                    '2012': 100,
+                    '2019': 100,
+                    '2014': 100,
+                    '2011': 100,
                 },
-                'measurementMethod': 'EPA_GHGRP', 'observationPeriod': 'P1Y',
-                'importName': 'EPA_GHGRP', 'provenanceDomain': 'epa.gov',
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
                 'unit': 'MetricTonCO2e',
                 'provenanceUrl': 'https://www.epa.gov/ghgreporting'
             }]
@@ -112,11 +132,18 @@ _FACILITY_SVO_DICT = {
         'Annual_Emissions_Methane_NonBiogenic': {
             'sourceSeries': [{
                 'val': {
-                    '2014': 12, '2013': 12, '2016': 13, '2019': 13.75,
-                    '2018': 14.25, '2015': 12, '2017': 14.5
+                    '2014': 12,
+                    '2013': 12,
+                    '2016': 13,
+                    '2019': 13.75,
+                    '2018': 14.25,
+                    '2015': 12,
+                    '2017': 14.5
                 },
-                'measurementMethod': 'EPA_GHGRP', 'observationPeriod': 'P1Y',
-                'importName': 'EPA_GHGRP', 'provenanceDomain': 'epa.gov',
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
                 'unit': 'MetricTonCO2e',
                 'provenanceUrl': 'https://www.epa.gov/ghgreporting'
             }]
@@ -124,12 +151,21 @@ _FACILITY_SVO_DICT = {
         'Annual_Emissions_GreenhouseGas_NitricAcidProduction_NonBiogenic': {
             'sourceSeries': [{
                 'val': {
-                    '2010': 50, '2016': 50, '2015': 50, '2017': 50,
-                    '2018': 50, '2013': 50, '2012': 50, '2019': 50,
-                    '2014': 50, '2011': 50,
+                    '2010': 50,
+                    '2016': 50,
+                    '2015': 50,
+                    '2017': 50,
+                    '2018': 50,
+                    '2013': 50,
+                    '2012': 50,
+                    '2019': 50,
+                    '2014': 50,
+                    '2011': 50,
                 },
-                'measurementMethod': 'EPA_GHGRP', 'observationPeriod': 'P1Y',
-                'importName': 'EPA_GHGRP', 'provenanceDomain': 'epa.gov',
+                'measurementMethod': 'EPA_GHGRP',
+                'observationPeriod': 'P1Y',
+                'importName': 'EPA_GHGRP',
+                'provenanceDomain': 'epa.gov',
                 'unit': 'MetricTonCO2e',
                 'provenanceUrl': 'https://www.epa.gov/ghgreporting'
             }]
@@ -177,10 +213,10 @@ class ProcessTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             process_parent_company._run_deduplication_preprocessing_steps(
                 _INPUT_DATA_DIR, _EXISTING_FACILITIES_FILENAME)
-            
+
             process_companies(_INPUT_DATA_DIR, _EXISTING_FACILITIES_FILENAME,
                               tmp_dir, tmp_dir)
-                              
+
             self.assertEqual(process_parent_company._COUNTERS_COMPANIES,
                              _EXPECTED_COUNTERS)
             for fname in [
