@@ -37,8 +37,7 @@ _EXPECTED_SVOBS_DIR = _EXPECTED_DIR + "/svobs"
 # We have test-cases to cover all the different mapping scenarios.
 _EXPECTED_COUNTERS = {
     'missing_zip':
-        set([('EpaParentCompany/BROWNAndPROVIDENCEPLANTATIONS', '2020'),
-             ('EpaParentCompany/USGOVERNMENT', '2012')]),
+        set(),
     'percent_ownership_not_found':
         set([('EpaParentCompany/USGOVERNMENT', '2012'),
              ('EpaParentCompany/USGOVERNMENT', '2015')]),
@@ -50,7 +49,7 @@ _EXPECTED_COUNTERS = {
         set([('EpaParentCompany/NationalFuelGasCo',
               'epaGhgrpFacilityId/1001829')]),
     'company_ids_replaced':
-        set(['ChevronUSAInc', 'RandomCoName']),
+        set(),
     'facility_id_extraction_failed':
         set(),
     'company_id_name_to_id_failed':
@@ -182,11 +181,20 @@ def compare_files(t, output_path, expected_path):
             t.assertEqual(got, want)
 
 
-def mock_get_col_name(fieldnames, suffix):
-    for name in fieldnames:
-        if name.lower().endswith(suffix):
-            return name
-    return None
+def mock_batch_get_counties(zip_codes):
+    zip_to_county = {
+        "14221": "geoId/36029",
+        "02912": "geoId/44007",
+        "77099": "geoId/48157",
+        "99501": "geoId/02020",
+        "77079": "geoId/48201",
+        "99503": "geoId/02020",
+    }
+    result = {}
+    for z in zip_codes:
+        if z in zip_to_county:
+            result[z] = zip_to_county[z]
+    return result
 
 
 class ProcessTest(unittest.TestCase):
@@ -205,9 +213,7 @@ class ProcessTest(unittest.TestCase):
         process_parent_company._DUPLICATE_MAPPING.clear()
 
     @patch('parent_company.process_parent_company._batch_get_counties',
-           lambda x: {})
-    @patch('parent_company.process_parent_company._get_col_name',
-           mock_get_col_name)
+           mock_batch_get_counties)
     def test_parent_companies_e2e(self):
         self.maxDiff = None
         with tempfile.TemporaryDirectory() as tmp_dir:

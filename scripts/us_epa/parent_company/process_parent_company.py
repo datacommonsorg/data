@@ -70,7 +70,7 @@ _ADDRESS = "address"
 _CIP = "locatedIn"
 
 # The following are for the StatVarOvbservations.
-_PARENT_COMPANY_DCID = 'dcid'
+_PARENT_COMPANY_DCID = 'parent_company_dcid'
 _SV_MEASURED = "sv_measured"
 _OBSERVATION_PERIOD = "obs_period"
 _SVO_VAL = "value"
