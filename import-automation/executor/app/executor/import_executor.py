@@ -518,7 +518,7 @@ class ImportExecutor:
                                       runner_mode='local')
                 differ.run_differ()
                 log_metric(
-                    AUTO_IMPORT_JOB_STAGE, "INFO"
+                    AUTO_IMPORT_JOB_STAGE, "INFO",
                     f"Import: {import_name}, differ for {import_prefix} {latest_version} vs {version}",
                     {
                         "stage": "DIFFER",
