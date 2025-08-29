@@ -1,6 +1,8 @@
 import os
 from absl import logging
 
+logging.set_verbosity(logging.INFO)
+
 def rename_target_file(base_path='.'):
     folder_name = 'input'
     target_folder = os.path.join(base_path, folder_name)
@@ -21,29 +23,31 @@ def rename_target_file(base_path='.'):
 
         files_in_folder = os.listdir(target_folder)
         
-        source_filename = None
-        csv_files = [
+        # Check for both .csv and .xlsx files
+        files_to_rename = [
             f for f in files_in_folder
-            if f.lower().endswith('.csv') and f != new_fixed_filename
+            if f.lower().endswith(('.csv', '.xlsx')) and f != new_fixed_filename
         ]
 
-        if not csv_files:
-            logging.fatal(f"No source CSV file found to rename in '{target_folder}'.")
+        if not files_to_rename:
+            logging.fatal(f"No source CSV or XLSX file found to rename in '{target_folder}'.")
             return
 
-        if len(csv_files) > 1:
+        if len(files_to_rename) > 1:
             logging.fatal(
-                f"Multiple source CSV files found in '{target_folder}': {csv_files}. Aborting to prevent renaming the wrong file."
+                f"Multiple source CSV/XLSX files found in '{target_folder}': {files_to_rename}. Aborting to prevent renaming the wrong file."
             )
             return
         
-        source_filename = csv_files[0]
+        source_filename = files_to_rename[0]
 
         old_path = os.path.join(target_folder, source_filename)
         logging.info(f"Attempting to rename '{source_filename}' to '{new_fixed_filename}'...")
         try:
             os.rename(old_path, new_path)
             logging.info(f"Successfully renamed '{source_filename}' to '{new_fixed_filename}'")
+            # Log the confirmation
+            logging.info(f"The file is renamed to '{new_fixed_filename}'.")
         except PermissionError:
             logging.fatal(f"Permission denied while renaming '{source_filename}'. Check file permissions.")
         except FileExistsError:
