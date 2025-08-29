@@ -1212,6 +1212,6 @@ def _log_process(process: subprocess.CompletedProcess,
     metrics["status"] = process.returncode
 
     log_metric(
-        AUTO_IMPORT_JOB_STAGE, "INFO" if process.returncode() == 0 else "ERROR",
+        AUTO_IMPORT_JOB_STAGE, "INFO" if process.returncode == 0 else "ERROR",
         f"Import: {import_name}, process: {' '.join(process.args)}, {process_message}",
         metrics)
