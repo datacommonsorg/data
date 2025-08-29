@@ -601,7 +601,7 @@ class ImportExecutor:
         script_index = -1
         for path in script_paths:
             script_index += 1
-            counters.add_counter('user-scripts-run', 1)
+            self.counters.add_counter('user-scripts-run', 1)
             script_path = os.path.join(absolute_import_dir, path)
             simple_job = cloud_run_simple_import.get_simple_import_job_id(
                 import_spec, script_path)
