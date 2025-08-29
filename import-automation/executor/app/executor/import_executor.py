@@ -39,7 +39,10 @@ sys.path.append(os.path.join(REPO_DIR, 'tools'))
 sys.path.append(os.path.join(REPO_DIR, 'util'))
 
 import file_util
+from log_util import log_function_call, log_metric
 
+from counters import Counters
+from timer import Timer
 from import_differ.import_differ import ImportDiffer
 from tools.import_validation.runner import ValidationRunner
 from app import configs
@@ -65,6 +68,8 @@ Node: dcid:dc/base/{import_name}
 typeOf: dcid:Provenance
 lastDataRefreshDate: "{last_data_refresh_date}"
 """
+
+AUTO_IMPORT_JOB_STAGE = "auto-import-job-stage"
 
 
 @dataclasses.dataclass
@@ -128,6 +133,7 @@ class ImportExecutor:
         self.notifier = notifier
         self.importer = importer
         self.local_repo_dir: str = local_repo_dir
+        self.counters = Counters()
 
     def execute_imports_on_commit(self, commit_sha: str) -> ExecutionResult:
         """Executes imports upon a GitHub commit.
@@ -161,6 +167,7 @@ class ImportExecutor:
             absolute_import_name,
         )
 
+    @log_function_call
     def _execute_imports_on_update_helper(
             self, absolute_import_name: str) -> ExecutionResult:
         """Helper for execute_imports_on_update.
@@ -287,6 +294,7 @@ class ImportExecutor:
 
             return ExecutionResult('succeeded', executed_imports, 'No issues')
 
+    @log_function_call
     def _import_one(
         self,
         repo_dir: str,
@@ -389,15 +397,19 @@ class ImportExecutor:
                 'Import job failed due to missing user script output files.')
         return input_files, import_prefix
 
+    @log_function_call
     def _invoke_import_tool(self, absolute_import_dir: str,
                             relative_import_dir: str, version: str,
                             import_spec: dict):
         """ 
         Invokes DC import tool to generate resolved mcf.
         """
+        import_name = import_spec['import_name']
         import_inputs = import_spec.get('import_inputs', [])
         import_prefix_list = []
+        input_index = -1
         for import_input in import_inputs:
+            input_index += 1
             input_files, import_prefix = self._get_import_input_files(
                 import_input, absolute_import_dir)
             import_prefix_list.append(import_prefix)
@@ -412,6 +424,7 @@ class ImportExecutor:
             logging.info(f'Generating resolved mcf for {import_prefix}')
             import_tool_args = [f'-o={output_path}', 'genmcf']
             import_tool_args.extend(input_files)
+            timer = Timer()
             process = _run_user_script(
                 interpreter_path='java',
                 script_path='-jar -Xmx16g ' + self.config.import_tool_path,
@@ -420,7 +433,14 @@ class ImportExecutor:
                 cwd=absolute_import_dir,
                 env=os.environ.copy(),
             )
-            _log_process(process=process)
+            _log_process(process=process,
+                         import_name=import_name,
+                         metrics={
+                             "stage": "GENMCF",
+                             "latency": timer.time(),
+                             "input_index": input_index,
+                             "import_input": import_prefix,
+                         })
             process.check_returncode()
             logging.info(
                 f'Generated resolved mcf for {import_prefix} in {output_path}.')
@@ -439,6 +459,7 @@ class ImportExecutor:
                         )
         return import_prefix_list
 
+    @log_function_call
     def _invoke_import_validation(self, repo_dir: str, relative_import_dir: str,
                                   absolute_import_dir: str, import_spec: dict,
                                   version: str,
@@ -446,6 +467,7 @@ class ImportExecutor:
         """ 
         Performs validations on import data.
         """
+        import_name = import_spec['import_name']
         validation_status = True
         config_file = import_spec.get('validation_config_file', '')
         if config_file:
@@ -486,6 +508,7 @@ class ImportExecutor:
                 logging.info(
                     f'Invoking differ tool comparing {import_prefix} with {latest_version}...'
                 )
+                timer = Timer()
                 differ = ImportDiffer(current_data=current_data_path,
                                       previous_data=previous_data_path,
                                       output_location=validation_output_path,
@@ -494,6 +517,16 @@ class ImportExecutor:
                                       file_format='mcf',
                                       runner_mode='local')
                 differ.run_differ()
+                log_metric(
+                    AUTO_IMPORT_JOB_STAGE, "INFO"
+                    f"Import: {import_name}, differ for {import_prefix} {latest_version} vs {version}",
+                    {
+                        "stage": "DIFFER",
+                        "latency": timer.time(),
+                        "input_index": input_index,
+                        "previous_version": latest_version,
+                        "current_version": version
+                    })
                 differ_output_file = differ_output
                 # Save the previous version being compared to
                 with open(
@@ -508,6 +541,7 @@ class ImportExecutor:
             logging.info(
                 f'Invoking validation script with config: {config_file_path}, differ:{differ_output_file}, summary:{summary_stats}...'
             )
+            timer = Timer()
             try:
                 validation = ValidationRunner(config_file_path,
                                               differ_output_file, summary_stats,
@@ -518,6 +552,13 @@ class ImportExecutor:
             except ValueError as e:
                 logging.error('ValidationRunner failed: %s', e)
                 validation_status = False
+            log_metric(
+                AUTO_IMPORT_JOB_STAGE, "INFO" if validation_status else "ERROR",
+                f"Import: {import_name}, validation: {validation_status}", {
+                    "stage": "VALIDATION",
+                    "latency": timer.time(),
+                    "status": 0 if validation_status else 1,
+                })
 
             if os.path.exists(
                     validation_output_path) and not self.config.skip_gcs_upload:
@@ -548,6 +589,7 @@ class ImportExecutor:
         os.makedirs(mount_path, exist_ok=True)
         os.symlink(mount_path, out_path, target_is_directory=True)
 
+    @log_function_call
     def _invoke_import_job(self, absolute_import_dir: str, import_spec: dict,
                            version: str, interpreter_path: str,
                            process: subprocess.CompletedProcess) -> None:
@@ -556,7 +598,10 @@ class ImportExecutor:
         self._create_mount_point(self.config.gcs_volume_mount_dir,
                                  self.config.cleanup_gcs_volume_mount,
                                  absolute_import_dir, import_name)
+        script_index = -1
         for path in script_paths:
+            script_index += 1
+            counters.add_counter('user-scripts-run', 1)
             script_path = os.path.join(absolute_import_dir, path)
             simple_job = cloud_run_simple_import.get_simple_import_job_id(
                 import_spec, script_path)
@@ -576,6 +621,7 @@ class ImportExecutor:
                 script_env = os.environ.copy()
                 if self.config.user_script_env:
                     script_env.update(self.config.user_script_env)
+                timer = Timer()
                 process = _run_user_script(
                     interpreter_path=script_interpreter,
                     script_path=script_path,
@@ -584,9 +630,17 @@ class ImportExecutor:
                     cwd=absolute_import_dir,
                     env=script_env,
                 )
-                _log_process(process=process)
+                _log_process(process=process,
+                             import_name=import_name,
+                             metrics={
+                                 "stage": "USER_SCRIPT",
+                                 "latency_secs": timer.time(),
+                                 "script_index": script_index,
+                                 "script_path": path,
+                             })
                 process.check_returncode()
 
+    @log_function_call
     def _update_latest_version(self, version, output_dir, import_spec):
         logging.info(f'Updating import latest version {version}')
         self.uploader.upload_string(
@@ -607,6 +661,7 @@ class ImportExecutor:
                                         history_filename)
         logging.info(f'Updated import latest version {version}')
 
+    @log_function_call
     def _import_one_helper(
         self,
         repo_dir: str,
@@ -619,6 +674,7 @@ class ImportExecutor:
     Args: See _import_one.
     """
         import_name = import_spec['import_name']
+        self.counters.add_counter(f'import-{import_name}', 1)
         urls = import_spec.get('data_download_url')
         if urls:
             for url in urls:
@@ -638,13 +694,19 @@ class ImportExecutor:
             central_requirements_path = os.path.join(
                 repo_dir, 'import-automation', 'executor',
                 self.config.requirements_filename)
+            timer = Timer()
             interpreter_path, process = _create_venv(
                 (central_requirements_path, requirements_path),
                 tmpdir,
                 timeout=self.config.venv_create_timeout,
             )
 
-            _log_process(process=process)
+            _log_process(process=process,
+                         import_name=import_name,
+                         metrics={
+                             "stage": "SETUP",
+                             "latency_secs": timer.time(),
+                         })
             process.check_returncode()
 
             self._invoke_import_job(absolute_import_dir=absolute_import_dir,
@@ -721,6 +783,7 @@ class ImportExecutor:
                 timeout=self.config.importer_import_timeout,
             )
 
+    @log_function_call
     def _upload_import_inputs(self, import_dir: str, output_dir: str,
                               version: str,
                               import_spec: dict) -> import_service.ImportInputs:
@@ -799,6 +862,7 @@ class ImportExecutor:
     """
         self.uploader.upload_file(src, dest)
 
+    @log_function_call
     def _import_metadata_mcf_helper(self, import_spec: dict) -> str:
         """Generates import_metadata_mcf node for import.
 
@@ -861,6 +925,7 @@ def run_and_handle_exception(
         return ExecutionResult('failed', [], message)
 
 
+@log_function_call
 def _run_with_timeout_async(args: List[str],
                             timeout: float,
                             cwd: str = None,
@@ -929,6 +994,7 @@ def _run_with_timeout_async(args: List[str],
         )
 
 
+@log_function_call
 def _run_with_timeout(args: List[str],
                       timeout: float,
                       cwd: str = None,
@@ -969,6 +1035,7 @@ def _run_with_timeout(args: List[str],
         raise e
 
 
+@log_function_call
 def _create_venv(requirements_path: Iterable[str], venv_dir: str,
                  timeout: float) -> Tuple[str, subprocess.CompletedProcess]:
     """Creates a Python virtual environment.
@@ -1036,6 +1103,7 @@ def _get_script_interpreter(script: str, py_interpreter: str) -> str:
     return py_interpreter
 
 
+@log_function_call
 def _run_user_script(
     interpreter_path: str,
     script_path: str,
@@ -1124,15 +1192,26 @@ def _construct_process_message(message: str,
     return message
 
 
-def _log_process(process: subprocess.CompletedProcess,) -> None:
+def _log_process(process: subprocess.CompletedProcess,
+                 import_name: str = '',
+                 metrics: dict = {}) -> None:
     """Logs the result of a subprocess.
 
   Args:
       process: subprocess.CompletedProcess object whose arguments, return code,
         stdout, and stderr are to be logged.
   """
-    message = 'Subprocess succeeded'
+    process_message = 'Subprocess succeeded'
     if process.returncode:
         message = 'Subprocess failed'
-    message = _construct_process_message(message, process)
+    message = _construct_process_message(process_message, process)
     logging.info(message)
+
+    if import_name:
+        metrics["import_name"] = import_name
+    metrics["status"] = process.returncode
+
+    log_metric(
+        AUTO_IMPORT_JOB_STAGE, "INFO" if process.returncode() == 0 else "ERROR",
+        f"Import: {import_name}, process: {' '.join(process.args)}, {process_message}",
+        metrics)
