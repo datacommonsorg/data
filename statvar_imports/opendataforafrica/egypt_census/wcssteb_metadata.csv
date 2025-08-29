@@ -1,0 +1,17 @@
+parameter,value
+url,https://egypt.opendataforafrica.org/wcssteb
+description,Pre-university education (2012-2016)
+#place_type,Country
+#places_within,country/EGY
+start_date,2012
+end_date,2016
+release_frequency,P1Y
+process,
+comments,
+output_columns,"observationAbout,observationDate,variableMeasured,value,unit,scalingFactor,observationPeriod"
+header_rows,1
+#drop_statvars_without_svobs,0
+mapped_columns,11
+mapped_rows,1
+statvar_dcid_remap_csv,https://docs.google.com/spreadsheets/d/18HeP0R9-HE3Rdl7utwMI5IuHyFYouZJss_LA3eogG8w/edit?gid=48373355#gid=48373355
+drop_statvars_without_svobs,0
