@@ -635,7 +635,7 @@ class StatVarsMap:
                 logging.ERROR,
                 f'Cannot add duplicate statvars for {statvar_dcid}: old:'
                 f' {self._statvars_map[statvar_dcid]}, new: {pvs}',
-                self_log_every_n)
+                self._log_every_n)
             self._counters.add_counter(f'error-duplicate-statvars', 1,
                                        statvar_dcid)
             return False
