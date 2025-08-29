@@ -25,8 +25,14 @@ import psutil
 import sys
 import time
 
+from absl import flags
 from absl import logging
 from typing import NamedTuple
+
+flags.DEFINE_integer('counters_print_interval', 300,
+                     'Interval in seconds to print counters.')
+
+_FLAGS = flags.FLAGS
 
 
 # Options for counters
@@ -34,8 +40,8 @@ class CounterOptions(NamedTuple):
     '''A set of options for configuring Counters behavior.'''
     # Enable debug counters with additional suffixes.
     debug: bool = False
-    # Emit counters once every 30 secs.
-    show_every_n_sec: int = 30
+    # Emit counters once every 300 secs.
+    show_every_n_sec: int = 300
     # Counter for processing stage
     process_stage: str = 'processing_stage'
     # Counter for records processed
@@ -44,6 +50,19 @@ class CounterOptions(NamedTuple):
     # Counter for total inputs
     # Used for computing remaining time.
     total_counter: str = 'total'
+
+
+def get_default_counter_options() -> CounterOptions:
+    '''Returns the default counters options.'''
+    show_every_n_sec = 300
+    if _FLAGS.is_parsed():
+        show_every_n_sec = _FLAGS.counters_print_interval
+
+    debug = False
+    if logging.get_verbosity() >= logging.DEBUG:
+        debug = True
+
+    return CounterOptions(debug=debug, show_every_n_sec=show_every_n_sec)
 
 
 class Counters():
@@ -96,7 +115,7 @@ class Counters():
         if options:
             self._options = options
         else:
-            self._options = CounterOptions()
+            self._options = get_default_counter_options()
 
         # Internal state
         # Start time for rate counters.
@@ -106,7 +125,7 @@ class Counters():
     def __del__(self):
         '''Log the counters when the object is deleted.'''
         self._update_periodic_counters()
-        logging.info(self.get_counters_string())
+        logging.debug(self.get_counters_string())
 
     def add_counter(self,
                     counter_name: str,
@@ -343,7 +362,7 @@ class Counters():
         '''Sets the prefix for counter names.
 
         It also resets the start_time and processing rate counters.
-        
+
         Usage:
             >>> counters = Counters()
             >>> counters.set_prefix('p1_')

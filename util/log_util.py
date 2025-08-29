@@ -19,6 +19,11 @@ import os
 import sys
 from google.cloud.logging.handlers import StructuredLogHandler
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(SCRIPT_DIR)
+
+from timer import Timer
+
 
 def log_struct(level: str, message: str, labels: dict):
     """Logs a structured message. In GCP Log Explorer, the labels will appear under `jsonPayload`.
@@ -109,3 +114,32 @@ def configure_logging(enable_cloud_logging: bool):
             logging.info(f'Not enabling cloud logging')
     else:
         logging.info(f'Not running on cloud, using default logging')
+
+
+def log_function_call(func):
+    """
+    A decorator to log function entry and exit.
+
+    To log a function, add the @log_function_call before it.
+    Example:
+      @log_function_call
+      def my_function():
+         ...
+    """
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        func_name = func.__name__
+        logger.info(f"Function start: {func_name}")
+        timer = Timer()
+        try:
+            result = func(*args, **kwargs)
+            logger.info(f"Function end: {func_name}, time: {timer.time():.4f}")
+            return result
+        except Exception as e:
+            logger.error(
+                f"Function error: {func_name}: {e}, time: {timer.time():.4f}",
+                exc_info=True)
+            raise  # Re-raise the exception after logging
+
+    return wrapper
