@@ -1,6 +1,8 @@
 import os
 from absl import logging
 
+logging.set_verbosity(logging.INFO)
+
 def rename_target_file(base_path='.'):
     folder_name = 'input'
     target_folder = os.path.join(base_path, folder_name)
@@ -58,5 +60,4 @@ def rename_target_file(base_path='.'):
 
 # Run it
 if __name__ == '__main__':
-    logging.set_verbosity(logging.INFO)
     rename_target_file()
