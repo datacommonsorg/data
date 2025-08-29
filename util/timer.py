@@ -48,7 +48,7 @@ class Timer:
         """Stop the timer."""
         self._end_time = time.perf_counter()
 
-    def time() -> float:
+    def time(self) -> float:
         """Returns the time in seconds since start.
     If the timer has been stopped, returns the interval between start to stop."""
         if self._end_time > self._start_time:
