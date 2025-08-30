@@ -1,0 +1,8 @@
+Node: E:elementary_school_output->E0
+observationAbout: C:elementary_school_output->observationAbout
+observationDate: C:elementary_school_output->observationDate
+value: C:elementary_school_output->value
+variableMeasured: C:elementary_school_output->variableMeasured
+unit: C:elementary_school_output->unit
+scalingFactor: C:elementary_school_output->scalingFactor
+typeOf: dcs:StatVarObservation
