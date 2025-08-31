@@ -1,0 +1,8 @@
+Node: E:hungary-Household_types_by_county_and_settlement_type->E0
+observationAbout: C:hungary-Household_types_by_county_and_settlement_type->observationAbout
+observationDate: C:hungary-Household_types_by_county_and_settlement_type->observationDate
+value: C:hungary-Household_types_by_county_and_settlement_type->value
+variableMeasured: C:hungary-Household_types_by_county_and_settlement_type->variableMeasured
+unit: C:hungary-Household_types_by_county_and_settlement_type->unit
+scalingFactor: C:hungary-Household_types_by_county_and_settlement_type->scalingFactor
+typeOf: dcs:StatVarObservation
