@@ -18,6 +18,7 @@ import logging
 import os
 import sys
 from google.cloud.logging.handlers import StructuredLogHandler
+from functools import wraps
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(SCRIPT_DIR)
@@ -130,15 +131,16 @@ def log_function_call(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         func_name = func.__name__
-        logger.info(f"Function start: {func_name}")
+        logging.info(f"Function start: {func_name}")
         timer = Timer()
         try:
             result = func(*args, **kwargs)
-            logger.info(f"Function end: {func_name}, time: {timer.time():.4f}")
+            logging.info(
+                f"Function end: {func_name}, time: {timer.time():.4f}s")
             return result
         except Exception as e:
-            logger.error(
-                f"Function error: {func_name}: {e}, time: {timer.time():.4f}",
+            logging.error(
+                f"Function error: {func_name}: {e}, time: {timer.time():.4f}s",
                 exc_info=True)
             raise  # Re-raise the exception after logging
 

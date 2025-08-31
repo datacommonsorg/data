@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ class Timer:
         """Stop the timer."""
         self._end_time = time.perf_counter()
 
-    def time() -> float:
+    def time(self) -> float:
         """Returns the time in seconds since start.
     If the timer has been stopped, returns the interval between start to stop."""
         if self._end_time > self._start_time:
