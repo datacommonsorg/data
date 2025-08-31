@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/3/VXlzME1rOWtlbHB4YW1WbU1VWXJNa1JIU0ZjeVp6MDkjMw==/number-of-schools--teachers--and-pupils-in-madrasah-tsanawiyah--mts--under-the-ministry-of-religious-affairs-by-province.html?year=2022
+description,"Number of Schools, Teachers and Students of Madrasah Tsanawiyah (MTs) under the Ministry of Religion by Province"
+#place_type,country/IDN
+#places_within,
+start_date,2018
+end_date,2022
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1y5SHsaXPFnQEG4cdXpTtwv2NVc1c92009sJWlGkIo-M/edit?resourcekey=0-lcZT-pizr3yaz8dGDEhrXw#gid=336054297
+mapped_rows,1
+mapped_columns,1
+pv_map,https://docs.google.com/spreadsheets/d/1y5SHsaXPFnQEG4cdXpTtwv2NVc1c92009sJWlGkIo-M/edit?resourcekey=0-lcZT-pizr3yaz8dGDEhrXw#gid=1792949429

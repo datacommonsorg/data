@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/2/NDU1IzI=/life-expectancy-rate-by-regency-city-and-gender--year-.html
+description,"Life Expectancy Rate By Regency/City and Gender (Year), 2010-2012"
+#place_type,
+#places_within,
+start_date,2010
+end_date,2012
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,3
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1INsGE8wCQo2AaRqwHVtXI6i7L1TscqaWjxlXpKsrfG4/edit?resourcekey=0-T5XnCrEWy_x7egeIEYPwGg#gid=277828326
+pv_map,https://docs.google.com/spreadsheets/d/1INsGE8wCQo2AaRqwHVtXI6i7L1TscqaWjxlXpKsrfG4/edit?resourcekey=0-T5XnCrEWy_x7egeIEYPwGg#gid=465335386
+mapped_rows,3
+mapped_columns,1
