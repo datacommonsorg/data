@@ -1,0 +1,29 @@
+Internet,p1,v1,p2,v2,p3,v3,p4,v4,p5,v5,p6,v6,p7,v7,p8,v8,,
+,,,,,,,,,,,,,,,,,,
+Region,observationAbout,{Data},,,,,,,,,,,,,,,,
+"Adult literacy rates, Female, Percent",populationType,Person,statType,measuredValue,literacyStatus,Literate,gender,Female,unit,Percent,scalingFactor,100,measurementDenominator,Count_Person_Female,,,name,"""The percentage of women who are literate."""
+"Adult literacy rates, Male, Percent",populationType,Person,statType,measuredValue,literacyStatus,Literate,gender,Male,unit,Percent,scalingFactor,100,measurementDenominator,Count_Person_Male,,,name,"""The percentage of men who are literate."""
+"Adult literacy rates, Total, Percent",populationType,Person,statType,measuredValue,literacyStatus,Literate,unit,Percent,scalingFactor,100,,,measurementDenominator,Count_Person,,,name,"""The percentage of adults who are literate"""
+"Net enrolment ratio in primary education, Total, Percent",populationType,Student,statType,measuredValue,enrollmentLevel,PrimaryEducation,schoolEnrollment,EnrolledInSchool,measurementDenominator,",-enrollmentLevel,+populationType=Person,-schoolEnrollment,+age=6To12Years,-name",unit,Percent,scalingFactor,100,,,name,"""percentage of children are enrolled in primary school"""
+"Net enrolment ratio in primary education, Female, Percent",populationType,Student,statType,measuredValue,enrollmentLevel,PrimaryEducation,schoolEnrollment,EnrolledInSchool,gender,Female,measurementDenominator,",-enrollmentLevel,+populationType=Person,-schoolEnrollment,+age=6To12Years,-name",unit,Percent,scalingFactor,100,name,"""percentage of girls are enrolled in primary school"""
+"Net enrolment ratio in primary education, Male, Percent",populationType,Student,statType,measuredValue,enrollmentLevel,PrimaryEducation,schoolEnrollment,EnrolledInSchool,gender,Male,measurementDenominator,",-enrollmentLevel,+populationType=Person,-schoolEnrollment,+age=6To12Years,-name",unit,Percent,scalingFactor,100,name,"""percentage of boys are enrolled in primary school"""
+1993,value,{Number},observationDate,1993,,,,,,,,,,,,,,
+1999,value,{Number},observationDate,1999,,,,,,,,,,,,,,
+2002,value,{Number},observationDate,2002,,,,,,,,,,,,,,
+2003,value,{Number},observationDate,2003,,,,,,,,,,,,,,
+2004,value,{Number},observationDate,2004,,,,,,,,,,,,,,
+2005,value,{Number},observationDate,2005,,,,,,,,,,,,,,
+2006,value,{Number},observationDate,2006,,,,,,,,,,,,,,
+2007,value,{Number},observationDate,2007,,,,,,,,,,,,,,
+2008,value,{Number},observationDate,2008,,,,,,,,,,,,,,
+2009,value,{Number},observationDate,2009,,,,,,,,,,,,,,
+2010,value,{Number},observationDate,2010,,,,,,,,,,,,,,
+"Primary completion rate, Female, Percent",populationType,Person,statType,measuredValue,educationalAttainment,PrimaryEducation,gender,Female,unit,Percent,scalingFactor,100,measurementDenominator,Count_Person_Female,,,name,"""percentage of girls complete primary school"""
+"Primary completion rate, Male, Percent",populationType,Person,statType,measuredValue,educationalAttainment,PrimaryEducation,gender,Male,unit,Percent,scalingFactor,100,measurementDenominator,Count_Person_Male,,,name,"""percentage of boys complete primary school"""
+"Primary completion rate, Total, Percent",populationType,Person,statType,measuredValue,educationalAttainment,PrimaryEducation,unit,Percent,scalingFactor,100,measurementDenominator,Count_Person,,,,,name,"""The proportion of children who complete primary education."""
+"Proportion of pupils starting grade 1 who reach last grade of primary, Female, Percent",populationType,Student,statType,measuredValue,schoolGradeLevel,SchoolGrade6,gender,Female,measurementDenominator,",-schoolGradeLevel,+enrollmentLevel=SchoolGrade1,-name",unit,Percent,scalingFactor,100,,,name,"""percentage of girls who start primary school finish the last grade"""
+"Proportion of pupils starting grade 1 who reach last grade of primary, Male, Percent",populationType,Student,statType,measuredValue,schoolGradeLevel,SchoolGrade6,gender,Male,measurementDenominator,",-schoolGradeLevel,+enrollmentLevel=SchoolGrade1,-name",unit,Percent,scalingFactor,100,,,name,"""percentage of boys who start primary school finish the last grade"""
+"Proportion of pupils starting grade 1 who reach last grade of primary, Total, Percent",populationType,Student,statType,measuredValue,schoolGradeLevel,SchoolGrade6,measurementDenominator,",-schoolGradeLevel,+enrollmentLevel=SchoolGrade1,-name",unit,Percent,scalingFactor,100,,,,,name,"""percentage of children who start primary school finish the last grade"""
+"Proportion of seats held by women in national parliament, Total, Percent",variableMeasured,sdg/SG_GEN_PARL.SEX--F,,,,,,,,,,,,,,,name,"""percentage of national parliament seats are held by women"""
+"Gender parity index in primary education, Total, Ratio",variableMeasured,worldBank/SE_ENR_PRIM_FM_ZS,,,,,,,,,,,,,,,name,"""ratio of boys to girls enrolled in primary school"""
+Index,#ignore,ignore value,,,,,,,,,,,,,,,,
