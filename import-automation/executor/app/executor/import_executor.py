@@ -518,7 +518,7 @@ class ImportExecutor:
                                       runner_mode='local')
                 differ.run_differ()
                 log_metric(
-                    AUTO_IMPORT_JOB_STAGE, "INFO"
+                    AUTO_IMPORT_JOB_STAGE, "INFO",
                     f"Import: {import_name}, differ for {import_prefix} {latest_version} vs {version}",
                     {
                         "stage": "DIFFER",
@@ -601,7 +601,7 @@ class ImportExecutor:
         script_index = -1
         for path in script_paths:
             script_index += 1
-            counters.add_counter('user-scripts-run', 1)
+            self.counters.add_counter('user-scripts-run', 1)
             script_path = os.path.join(absolute_import_dir, path)
             simple_job = cloud_run_simple_import.get_simple_import_job_id(
                 import_spec, script_path)
@@ -1212,6 +1212,6 @@ def _log_process(process: subprocess.CompletedProcess,
     metrics["status"] = process.returncode
 
     log_metric(
-        AUTO_IMPORT_JOB_STAGE, "INFO" if process.returncode() == 0 else "ERROR",
+        AUTO_IMPORT_JOB_STAGE, "INFO" if process.returncode == 0 else "ERROR",
         f"Import: {import_name}, process: {' '.join(process.args)}, {process_message}",
         metrics)
