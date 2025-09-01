@@ -18,6 +18,7 @@ import json
 import os
 import subprocess
 import sys
+from datetime import datetime
 from dataclasses import dataclass
 from typing import List
 
@@ -73,8 +74,7 @@ def generate_prompt(config: ImportConfig) -> str:
                                       config=config)
 
     # Write rendered prompt to .datacommons folder
-    output_dir = os.path.join(os.getcwd(), '.datacommons')
-    os.makedirs(output_dir, exist_ok=True)
+    output_dir = _get_datacommons_dir()
 
     output_file = os.path.join(output_dir, 'generate_pvmap_prompt.txt')
     with open(output_file, 'w') as f:
@@ -98,6 +98,17 @@ def check_gemini_cli_available() -> bool:
         return True
     except subprocess.CalledProcessError:
         return False
+
+
+def _get_datacommons_dir() -> str:
+    """Get the path to .datacommons directory and ensure it exists.
+    
+    Returns:
+        Path to the .datacommons directory.
+    """
+    output_dir = os.path.join(os.getcwd(), '.datacommons')
+    os.makedirs(output_dir, exist_ok=True)
+    return output_dir
 
 
 def run_subprocess(command: str) -> int:
@@ -159,9 +170,16 @@ def generate_pvmap(config: ImportConfig):
             "Gemini CLI is not available. Please install it before running.")
         raise RuntimeError("Gemini CLI not found in PATH")
 
+    # Generate output file path with timestamp
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_dir = _get_datacommons_dir()
+    output_file = os.path.join(output_dir, f'gemini_output_{timestamp}.txt')
+    
     # Execute Gemini CLI with the generated prompt file using cat | gemini
-    gemini_command = f"cat '{prompt_file}' | gemini"
+    # Redirect stderr to stdout (2>&1) and tee to both file and terminal
+    gemini_command = f"cat '{prompt_file}' | gemini 2>&1 | tee '{output_file}'"
     logging.info(f"Launching gemini (cwd: {os.getcwd()}): {gemini_command} ")
+    logging.info(f"Gemini output will be saved to: {output_file}")
 
     exit_code = run_subprocess(gemini_command)
     if exit_code == 0:
