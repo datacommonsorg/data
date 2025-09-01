@@ -6,5 +6,6 @@
   "input_metadata": [
     "path/to/metadata/file1.json",
     "path/to/metadata/file2.yaml"
-  ]
+  ],
+  "is_sdmx_format": false
 }

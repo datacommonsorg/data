@@ -15,14 +15,18 @@
 # limitations under the License.
 
 import json
+import logging
+import os
 import sys
 from dataclasses import dataclass
 from typing import List
 
 from absl import app
 from absl import flags
+from jinja2 import Environment, FileSystemLoader
 
 FLAGS = flags.FLAGS
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 flags.DEFINE_string('import_config', None,
                     'Path to import config JSON file (required)')
@@ -33,6 +37,8 @@ flags.mark_flag_as_required('import_config')
 class ImportConfig:
     input_data: List[str]
     input_metadata: List[str]
+    # JSON boolean values (true/false) are case-sensitive and auto-converted to Python bool
+    is_sdmx_format: bool = False
 
 
 def load_import_config(config_path: str) -> ImportConfig:
@@ -42,20 +48,61 @@ def load_import_config(config_path: str) -> ImportConfig:
     return ImportConfig(**data)
 
 
+def generate_prompt(config: ImportConfig) -> str:
+    """Generate prompt from Jinja2 template using import configuration.
+    
+    Args:
+        config: The import configuration containing data and metadata files.
+        
+    Returns:
+        Path to the generated prompt file.
+    """
+    # Load and render the Jinja2 template
+    template_dir = os.path.join(_SCRIPT_DIR, 'templates')
+    
+    env = Environment(loader=FileSystemLoader(template_dir))
+    template = env.get_template('generate_pvmap_prompt.j2')
+    
+    # Render template with config values
+    rendered_prompt = template.render(input_data=config.input_data,
+                                      input_metadata=config.input_metadata,
+                                      config=config)
+    
+    # Write rendered prompt to .datacommons folder
+    output_dir = os.path.join(os.getcwd(), '.datacommons')
+    os.makedirs(output_dir, exist_ok=True)
+    
+    output_file = os.path.join(output_dir, 'generate_pvmap_prompt.txt')
+    with open(output_file, 'w') as f:
+        f.write(rendered_prompt)
+    
+    logging.info("Generated prompt written to: %s", output_file)
+    return output_file
+
+
 def generate_pvmap(config: ImportConfig):
     """Generate PV map from import configuration."""
-    # TODO: Implement PV map generation logic
-    pass
+    if not config.input_data:
+        raise ValueError(
+            "Import configuration must have at least one input data entry")
+    
+    # Generate the prompt as the first step
+    prompt_file = generate_prompt(config)
+    
+    # TODO: Implement remaining PV map generation logic
 
 
 def main(argv):
     """Main function for PV Map generator."""
+    logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+    
     config = load_import_config(FLAGS.import_config)
-    print(
-        f"Loaded config with {len(config.input_data)} data files and {len(config.input_metadata)} metadata files"
+    logging.info(
+        "Loaded config with %d data files and %d metadata files",
+        len(config.input_data), len(config.input_metadata)
     )
     generate_pvmap(config)
-    print("PV Map generation completed.")
+    logging.info("PV Map generation completed.")
     return 0
 
 
