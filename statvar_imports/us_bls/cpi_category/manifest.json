@@ -19,7 +19,8 @@
         "source_files": [
           "input_data/*/*"
         ],
-        "cron_schedule": "0 10 21 * *"
+        "cron_schedule": "0 10 21 * *",
+        "resource_limits": {"cpu": 8, "memory": 32}
       }
     ]
   }

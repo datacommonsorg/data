@@ -16,12 +16,11 @@
         "source_files": [
             "hate_crime_data/*"
         ],
+        "resource_limits": {
+            "cpu": "8",
+            "memory": "32G"
+          },
         "cron_schedule": "0 10 21 * *"
       }
-    ],
-    "config_override": {
-        "invoke_import_tool": false,
-        "invoke_differ_tool": false,
-        "invoke_import_validation": false
-    }
+    ]
   }

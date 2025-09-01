@@ -20,7 +20,8 @@
       "source_files": [
         "IndiaNSS_HealthAilments.csv"
       ],
-      "cron_schedule": "0 0 1 1 *"
+      "cron_schedule": "0 0 1 1 *",
+      "resource_limits": {"cpu": 4, "memory": 16}
     }
   ]
 }

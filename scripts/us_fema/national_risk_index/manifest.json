@@ -13,7 +13,8 @@
                 }
             ],
             "source_files": ["source_data/*"],
-            "cron_schedule": "0 4 2,16 * *"
+            "cron_schedule": "0 4 2,16 * *",
+            "resource_limits": {"cpu": 8, "memory": 32}
         }
     ]
 }

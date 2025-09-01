@@ -18,7 +18,8 @@
           "cleaned_csv": "output_files/wb_subnational_output.csv"
         }
       ],
-      "cron_schedule": "0 06 * * 6"
+      "cron_schedule": "0 06 * * 6",
+      "resource_limits": {"cpu": 8, "memory": 32}
     }
   ]
 }

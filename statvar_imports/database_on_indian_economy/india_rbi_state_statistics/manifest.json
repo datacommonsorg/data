@@ -89,7 +89,8 @@
           "cleaned_csv": "output_files/infrastructure/state_wise_telephones_per_100_population_output.csv"
         }
       ],
-      "cron_schedule": "0 10 * * 1"
+      "cron_schedule": "0 10 * * 1",
+      "resource_limits": {"cpu": 2, "memory": 8}
     }
   ]
 }
