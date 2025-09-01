@@ -15,7 +15,6 @@
 # limitations under the License.
 
 import json
-import logging
 import os
 import sys
 from dataclasses import dataclass
@@ -23,6 +22,7 @@ from typing import List
 
 from absl import app
 from absl import flags
+from absl import logging
 from jinja2 import Environment, FileSystemLoader
 
 FLAGS = flags.FLAGS
@@ -94,8 +94,6 @@ def generate_pvmap(config: ImportConfig):
 
 def main(argv):
     """Main function for PV Map generator."""
-    logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
-    
     config = load_import_config(FLAGS.import_config)
     logging.info(
         "Loaded config with %d data files and %d metadata files",

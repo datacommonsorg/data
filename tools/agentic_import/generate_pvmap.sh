@@ -25,13 +25,31 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Get the root directory of the data repository
 DATA_REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 
+# Print directory information for debugging
+echo "Current/Original directory: $ORIGINAL_DIR"
+echo "Script directory: $SCRIPT_DIR"
+echo "Data repository root: $DATA_REPO_ROOT"
+
+# Function to validate requirements before processing
+function validate_requirements {
+    # Check if Gemini CLI is installed
+    if ! command -v gemini &> /dev/null; then
+        echo "Error: Gemini CLI is not installed. Please install Gemini CLI before running this script."
+        exit 1
+    fi
+}
+
 # Function to setup Python environment
 function setup_python_environment {    
     cd "$DATA_REPO_ROOT"
     
-    # Always run run_tests.sh -r to setup/update Python environment
-    echo "Setting up Python environment..."
-    ./run_tests.sh -r
+    # Setup Python environment unless SKIP_PYTHON_SETUP is true
+    if [ "$SKIP_PYTHON_SETUP" != "true" ]; then
+        echo "Setting up Python environment..."
+        ./run_tests.sh -r
+    else
+        echo "Skipping Python environment setup (SKIP_PYTHON_SETUP=true)"
+    fi
     
     # Activate the environment
     echo "Activating Python virtual environment..."
@@ -46,6 +64,9 @@ function run_pvmap_generator {
     python3 "$SCRIPT_DIR/pvmap_generator.py" "$@"
 }
 
+
+# Run validations before any processing
+validate_requirements
 setup_python_environment
 mkdir -p "$ORIGINAL_DIR/.datacommons"
 run_pvmap_generator "$@"
