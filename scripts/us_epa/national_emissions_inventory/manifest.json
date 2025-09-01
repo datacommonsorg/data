@@ -6,7 +6,7 @@
       "provenance_url": "https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei",
       "provenance_description": "The import has variables that are directly available from EPA source for National Emissions Inventory on SCC Level 1.",
       "scripts": ["download.py", "process.py"],
-      "source_files": ["gcs_output/input_files/*"],
+      "source_files": ["gcs_output/input_files/*/*.csv"],
       "import_inputs": [
         {
           "template_mcf": "gcs_output/output_files/national_emissions.tmcf",
