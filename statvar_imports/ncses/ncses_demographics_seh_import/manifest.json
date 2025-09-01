@@ -1,0 +1,31 @@
+{
+    "import_specifications": [
+        {
+            "import_name": "NCSES_Demographics_SEH_Import",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://ncses.nsf.gov/pubs/nsf25316",
+            "provenance_description": "Demographic characteristics of graduate students, postdoctoral appointees, and doctorate-holding nonfaculty researchers in science, engineering, and health.",
+            "scripts": [
+                "download.py",
+                "../../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/nsf*.xlsx --pv_map=ncses_demographics_seh_import_pv_map.csv --config_file=ncses_demographics_seh_import_metadata.csv  --statvar_dcid_remap_csv=ncses_demographics_seh_import_remap.csv --output_path=output/ncses_demographics_seh_import --log_level=-1"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "output/ncses_demographics_seh_import.tmcf",
+                    "cleaned_csv": "output/ncses_demographics_seh_import.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/*"
+            ],
+            "cron_schedule": "30 05 12,28 * *",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 32,
+                "disk": 100
+            }
+        }
+    ]
+}
