@@ -22,12 +22,6 @@ PYTHON_FOLDERS="util/ tools/ import-automation/executor scripts/"
 # Flag used signal if Python requirements have already been installed.
 PYTHON_REQUIREMENTS_INSTALLED=false
 
-# Check if uv is available globally
-UV_AVAILABLE=false
-if command -v uv &> /dev/null; then
-  UV_AVAILABLE=true
-fi
-
 function setup_python {
   if [[ "${SKIP_PYTHON_SETUP:-false}" == "true" ]]; then
     return
