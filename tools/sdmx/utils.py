@@ -6,15 +6,17 @@ Currently, it is tailored for OECD endpoints, with plans to extend support to
 other sources in the future.
 """
 
+import logging
 import sdmx
 import pandas as pd
 from requests.exceptions import HTTPError
+from typing import Dict, Any
 
 
-def fetch_and_save_metadata(dataflow_id,
-                            agency_id,
-                            output_path,
-                            client_id="OECD"):
+def fetch_and_save_metadata(dataflow_id: str,
+                            agency_id: str,
+                            output_path: str,
+                            client_id: str = "OECD"):
     """
     Fetches the complete metadata for a dataflow and saves the raw
     SDMX-ML (XML) response to a file.
@@ -25,6 +27,10 @@ def fetch_and_save_metadata(dataflow_id,
         output_path (str): The file path where the raw XML metadata will be saved.
         client_id (str, optional): The sdmx1 client ID to use. Defaults to "OECD".
 
+    Raises:
+        HTTPError: If a network error occurs during the API request.
+        Exception: For other unexpected errors.
+
     Usage:
         fetch_and_save_metadata(
             dataflow_id="DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD",
@@ -34,36 +40,35 @@ def fetch_and_save_metadata(dataflow_id,
     """
     try:
         client = sdmx.Client(client_id)
-        print(f"Fetching raw metadata for dataflow: {dataflow_id}...")
+        logging.info(f"Fetching raw metadata for dataflow: {dataflow_id}...")
 
         flow_msg = client.dataflow(dataflow_id,
                                    agency_id=agency_id,
                                    params={'references': 'all'})
-        print("Successfully received response from the server.")
+        logging.info("Successfully received response from the server.")
 
         raw_xml_content = flow_msg.response.text
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(raw_xml_content)
-        print(f"Successfully saved raw metadata to '{output_path}'")
-        return True
+        logging.info(f"Successfully saved raw metadata to '{output_path}'")
 
     except HTTPError as e:
-        print(f"\nNetwork error: {e}")
+        logging.error(f"\nNetwork error: {e}")
         if e.response:
-            print(f"URL: {e.response.url}")
-            print(f"Response content: {e.response.text[:500]}...")
-        return False
+            logging.error(f"URL: {e.response.url}")
+            logging.error(f"Response content: {e.response.text[:500]}...")
+        raise
     except Exception as e:
-        print(f"\nAn error occurred: {e}")
-        return False
+        logging.error(f"\nAn error occurred: {e}")
+        raise
 
 
-def fetch_and_save_data_as_csv(dataflow_id,
-                               agency_id,
-                               key,
-                               params,
-                               output_path,
-                               client_id="OECD"):
+def fetch_and_save_data_as_csv(dataflow_id: str,
+                               agency_id: str,
+                               key: Dict[str, Any],
+                               params: Dict[str, Any],
+                               output_path: str,
+                               client_id: str = "OECD"):
     """
     Fetches data from an SDMX API, converts it to a tidy pandas DataFrame,
     and saves it as a CSV file.
@@ -75,6 +80,10 @@ def fetch_and_save_data_as_csv(dataflow_id,
         params (dict): A dictionary of query parameters (e.g., startPeriod).
         output_path (str): The file path where the final CSV data will be saved.
         client_id (str, optional): The sdmx1 client ID to use. Defaults to "OECD".
+
+    Raises:
+        HTTPError: If a network error occurs during the API request.
+        Exception: For other unexpected errors.
 
     Usage:
         DATA_KEY = {
@@ -97,27 +106,27 @@ def fetch_and_save_data_as_csv(dataflow_id,
     """
     try:
         client = sdmx.Client(client_id)
-        print(f"\nFetching data as XML for key: {key}")
+        logging.info(f"\nFetching data as XML for key: {key}")
 
         data_msg = client.data(dataflow_id,
                                key=key,
                                params=params,
                                agency_id=agency_id)
-        print("Successfully received XML response from the server.")
+        logging.info("Successfully received XML response from the server.")
 
         data_series = sdmx.to_pandas(data_msg)
         df_tidy = data_series.reset_index()
 
         df_tidy.to_csv(output_path, index=False)
-        print(f"Successfully converted XML data and saved to '{output_path}'")
-        return True
+        logging.info(
+            f"Successfully converted XML data and saved to '{output_path}'")
 
     except HTTPError as e:
-        print(f"\nNetwork error: {e}")
+        logging.error(f"\nNetwork error: {e}")
         if e.response:
-            print(f"URL: {e.response.url}")
-            print(f"Response content: {e.response.text[:500]}...")
-        return False
+            logging.error(f"URL: {e.response.url}")
+            logging.error(f"Response content: {e.response.text[:500]}...")
+        raise
     except Exception as e:
-        print(f"\nAn error occurred: {e}")
-        return False
+        logging.error(f"\nAn error occurred: {e}")
+        raise
