@@ -16,6 +16,7 @@
 
 import json
 import os
+import subprocess
 import sys
 from dataclasses import dataclass
 from typing import List
@@ -31,6 +32,9 @@ _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 flags.DEFINE_string('import_config', None,
                     'Path to import config JSON file (required)')
 flags.mark_flag_as_required('import_config')
+
+flags.DEFINE_boolean('dry_run', False,
+                     'Generate prompt only without calling Gemini CLI')
 
 
 @dataclass
@@ -59,25 +63,78 @@ def generate_prompt(config: ImportConfig) -> str:
     """
     # Load and render the Jinja2 template
     template_dir = os.path.join(_SCRIPT_DIR, 'templates')
-    
+
     env = Environment(loader=FileSystemLoader(template_dir))
     template = env.get_template('generate_pvmap_prompt.j2')
-    
+
     # Render template with config values
     rendered_prompt = template.render(input_data=config.input_data,
                                       input_metadata=config.input_metadata,
                                       config=config)
-    
+
     # Write rendered prompt to .datacommons folder
     output_dir = os.path.join(os.getcwd(), '.datacommons')
     os.makedirs(output_dir, exist_ok=True)
-    
+
     output_file = os.path.join(output_dir, 'generate_pvmap_prompt.txt')
     with open(output_file, 'w') as f:
         f.write(rendered_prompt)
-    
+
     logging.info("Generated prompt written to: %s", output_file)
     return output_file
+
+
+def check_gemini_cli_available() -> bool:
+    """Check if Gemini CLI is available in PATH.
+    
+    Returns:
+        True if gemini command is available, False otherwise
+    """
+    try:
+        subprocess.run(['which', 'gemini'],
+                       check=True,
+                       stdout=subprocess.DEVNULL,
+                       stderr=subprocess.DEVNULL)
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
+def run_subprocess(command: str) -> int:
+    """Run a subprocess command with real-time output streaming.
+    
+    Args:
+        command: Shell command string (e.g., 'cat /path/to/file | gemini')
+        
+    Returns:
+        Process exit code (0 for success, non-zero for failure)
+    """
+    try:
+        process = subprocess.Popen(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,  # Combine stderr with stdout
+            shell=True,  # Using shell to support pipe operations
+            encoding='utf-8',
+            errors='replace',
+            bufsize=1,  # Line buffered
+            universal_newlines=True)
+
+        # Stream output in real-time
+        while True:
+            output = process.stdout.readline()
+            if output == '' and process.poll() is not None:
+                break
+            if output:
+                print(output.rstrip())  # Print without extra newline
+
+        # Wait for process to complete and get return code
+        return_code = process.wait()
+        return return_code
+
+    except Exception as e:
+        logging.error("Error running subprocess: %s", str(e))
+        return 1
 
 
 def generate_pvmap(config: ImportConfig):
@@ -85,20 +142,41 @@ def generate_pvmap(config: ImportConfig):
     if not config.input_data:
         raise ValueError(
             "Import configuration must have at least one input data entry")
-    
+
     # Generate the prompt as the first step
     prompt_file = generate_prompt(config)
-    
-    # TODO: Implement remaining PV map generation logic
+
+    # Check if we're in dry run mode
+    if FLAGS.dry_run:
+        logging.info(
+            "Dry run mode: Prompt file generated at %s. "
+            "Skipping Gemini CLI execution.", prompt_file)
+        return
+
+    # Check if Gemini CLI is available
+    if not check_gemini_cli_available():
+        logging.error(
+            "Gemini CLI is not available. Please install it before running.")
+        raise RuntimeError("Gemini CLI not found in PATH")
+
+    # Execute Gemini CLI with the generated prompt file using cat | gemini
+    gemini_command = f"cat '{prompt_file}' | gemini"
+    logging.info(f"Launching gemini (cwd: {os.getcwd()}): {gemini_command} ")
+
+    exit_code = run_subprocess(gemini_command)
+    if exit_code == 0:
+        logging.info("Gemini CLI completed successfully")
+    else:
+        logging.error("Gemini CLI failed with exit code: %d", exit_code)
+        raise RuntimeError(
+            f"Gemini CLI execution failed with exit code {exit_code}")
 
 
 def main(argv):
     """Main function for PV Map generator."""
     config = load_import_config(FLAGS.import_config)
-    logging.info(
-        "Loaded config with %d data files and %d metadata files",
-        len(config.input_data), len(config.input_metadata)
-    )
+    logging.info("Loaded config with %d data files and %d metadata files",
+                 len(config.input_data), len(config.input_metadata))
     generate_pvmap(config)
     logging.info("PV Map generation completed.")
     return 0
