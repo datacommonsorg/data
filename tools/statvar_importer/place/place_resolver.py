@@ -224,7 +224,13 @@ class PlaceResolver:
         country_key = self._config.get('place_country_column', 'country')
         for key, place in unresolved_places.items():
             place_name = self._get_lookup_name(key, place)
-            maps_result = self._get_cache_value(place_name, 'placeId')
+            # Use composite cache key for consistent lookup/storage
+            place_cache_key = self._get_cache_key([
+                place_name,
+                place.get(country_key, None),
+                place.get('administrative_area', None)
+            ])
+            maps_result = self._get_cache_value(place_cache_key, 'placeId')
             if not maps_result:
                 maps_result = self.get_maps_placeid(
                     name=place_name,
