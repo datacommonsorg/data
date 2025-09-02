@@ -335,14 +335,17 @@ class Counters():
                 lines.append(f'{c:>50s} = {v}')
         return '\n'.join(lines)
 
-    def print_counters(self, file=sys.stderr):
+    def print_counters(self, file=None):
         '''Prints the counter values to the specified file.
 
         Args:
             file: The file handle to write the counters string to. Defaults to stderr.
         '''
         self._update_periodic_counters()
-        logging.info(self.get_counters_string(), file=file)
+        counters_str = self.get_counters_string()
+        logging.info(counters_str)
+        if file:
+            print(counters_str, file=file)
 
     def print_counters_periodically(self):
         '''Prints the counters periodically based on the 'show_every_n_sec' option.'''
