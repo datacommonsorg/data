@@ -75,8 +75,6 @@ def download_and_unzip(config):
         zip_path = os.path.join(DOWNLOAD_PATH, file_name)
         extract_dir = os.path.join(DOWNLOAD_PATH, folder)
 
-        os.makedirs(extract_dir, exist_ok=True)
-
         # Download the file
         response = requests.get(url, verify=False, stream=True)
         response.raise_for_status()
@@ -112,8 +110,6 @@ def main():
     Main function to orchestrate the file download process.
     """
     logging.info("Script execution started.")
-    os.makedirs(DOWNLOAD_PATH, exist_ok=True)
-
     downloaded_urls = load_progress()
     urls_to_download = [
         item for item in DOWNLOAD_CONFIG
