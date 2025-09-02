@@ -342,7 +342,7 @@ class Counters():
             file: The file handle to write the counters string to. Defaults to stderr.
         '''
         self._update_periodic_counters()
-        print(self.get_counters_string(), file=file)
+        logging.info(self.get_counters_string(), file=file)
 
     def print_counters_periodically(self):
         '''Prints the counters periodically based on the 'show_every_n_sec' option.'''
@@ -433,4 +433,3 @@ class Counters():
         cpu_times = process.cpu_times()
         self.set_counter('process-time-user-secs', cpu_times.user)
         self.set_counter('process-time-sys-secs', cpu_times.system)
-

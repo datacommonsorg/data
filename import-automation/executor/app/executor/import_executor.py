@@ -1206,7 +1206,7 @@ def _log_process(process: subprocess.CompletedProcess,
   """
     process_message = 'Subprocess succeeded'
     if process.returncode:
-       process_message = 'Subprocess failed'
+        process_message = 'Subprocess failed'
     message = _construct_process_message(process_message, process)
     logging.info(message)
 
