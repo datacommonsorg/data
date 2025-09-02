@@ -39,7 +39,7 @@ DEFAULT_TIMEOUT=30m
 RUN_MODE="executor"
 DOCKER_IMAGE="dc-import-executor"
 MACHINE_TYPE="n2-standard-8"
-CONFIG="config_override_test.json"
+CONFIG="$SCRIPT_DIR/config_override_test.json"
 CONFIG_OVERRIDE=""
 TMP_DIR=${TMP_DIR:-"/tmp"}
 CLOUD_JOB_WAIT="--wait"
@@ -427,8 +427,6 @@ function get_cloud_batch_config {
           "cpuMilli": "${cpu_milli}",
           "memoryMib": "${memory_mib}"
         },
-        "maxRetryCount": 1,
-        "maxRunDuration": "36000s"
       },
       "taskCount": 1,
       "parallelism": 1

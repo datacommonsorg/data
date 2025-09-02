@@ -1,0 +1,36 @@
+Node: dcid:educationalDegree
+typeOf: dcs:Property
+name: "educationalDegree"
+domainIncludes: dcid:Student,dcid:Person
+
+Node: dcid:educationalProgram
+typeOf: dcs:Property
+name: "educationalProgram"
+domainIncludes: dcid:Student
+rangeIncludes: dcid:SchoolGradeLevelEnum,dcid:USC_EducationalAttainmentEnum
+
+Node: dcid:MastersDegree__DoctorateDegree
+typeOf: dcid:USC_EducationalAttainmentEnum
+name: "Masters Degree__ Doctorate Degree"
+isProvisional: dcs:True
+
+Node: dcid:educationalAttainment
+typeOf: dcs:Property
+name: "educationalAttainment"
+rangeIncludes: dcid:SchoolGradeLevelEnum,dcid:USC_EducationalAttainmentEnum
+
+Node: dcid:citizenship
+typeOf: dcs:Property
+name: "citizenship"
+domainIncludes: dcid:Student
+
+Node: dcid:ethnicity
+typeOf: dcs:Property
+name: "ethnicity"
+domainIncludes: dcid:Student
+
+Node: dcid:race
+typeOf: dcs:Property
+name: "race"
+domainIncludes: dcid:Student
+
