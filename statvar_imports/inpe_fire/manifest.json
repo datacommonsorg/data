@@ -22,7 +22,8 @@
                 "input.csv"
             ],
             "cron_schedule": "00 11 1,15 * *",
-            "cleanup_gcs_volume_mount": false
+            "cleanup_gcs_volume_mount": false,
+            "resource_limits": {"cpu": 8, "memory": 32}
         }
     ]
 }

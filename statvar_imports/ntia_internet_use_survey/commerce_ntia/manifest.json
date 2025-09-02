@@ -23,7 +23,8 @@
           "cleaned_csv": "output_files/ntia_age_output.csv"
         }
       ],
-      "cron_schedule": "0 06 * * 5"
+      "cron_schedule": "0 06 * * 5",
+      "resource_limits": {"cpu": 8, "memory": 32}
     }
   ]
 }

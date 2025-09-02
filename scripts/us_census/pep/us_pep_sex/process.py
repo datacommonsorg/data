@@ -1318,11 +1318,11 @@ def main(_):
     tmcf_name = "population_estimate_sex.tmcf"
     data_file_path = os.path.join(_MODULE_DIR, "output")
     if not (os.path.exists(data_file_path)):
-        os.mkdir(data_file_path)
+        os.makedirs(data_file_path, exist_ok=True)
     if not (os.path.exists(_INPUT_FILE_PATH)):
-        os.mkdir(_INPUT_FILE_PATH)
+        os.makedirs(_INPUT_FILE_PATH, exist_ok=True)
     if not (os.path.exists(_GCS_OUTPUT_PERSISTENT_PATH)):
-        os.mkdir(_GCS_OUTPUT_PERSISTENT_PATH)
+        os.makedirs(_GCS_OUTPUT_PERSISTENT_PATH, exist_ok=True)
 
     cleaned_csv_path = data_file_path + os.sep + csv_name
     mcf_path = data_file_path + os.sep + mcf_name

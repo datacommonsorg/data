@@ -55,7 +55,8 @@
           "cleaned_csv": "output_files/irl_aa1_aa2_employment_output.csv"
         }
       ],
-      "cron_schedule": "0 05 * * 5"
+      "cron_schedule": "0 05 * * 5",
+      "resource_limits": {"cpu": 8, "memory": 32}
     }
   ]
 }
