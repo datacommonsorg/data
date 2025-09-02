@@ -1,4 +1,4 @@
-## Mongolia_Demographics Import
+## Mongolia_Health Import
 
 This import contains Statistical data related to births and deaths in Mongolia.
 
@@ -10,7 +10,7 @@ The workflow for this data import involves two main steps: downloading the neces
 
 #### Step 1: Download the Data
 
-- **Source:** [Mongolia population and household data](https://www.1212.mn/en/statcate)
+- **Source:** [Mongolia health data](https://www.1212.mn/en/statcate)
 - **Description:** The provided URL links to the official website of the National Statistical Office (NSO) of Mongolia. This specific page presents official statistics and data related to births and deaths in Mongolia.
 
 To get the necessary data files, you'll need to run download script `common_download_script.py`.
