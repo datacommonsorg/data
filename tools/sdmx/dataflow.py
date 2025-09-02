@@ -1,5 +1,5 @@
 """
-utils.py
+dataflow.py
 
 This module provides reusable, generalized functions to interact with SDMX APIs.
 Currently, it is tailored for OECD endpoints, with plans to extend support to
@@ -45,21 +45,27 @@ def fetch_and_save_metadata(dataflow_id: str,
         flow_msg = client.dataflow(dataflow_id,
                                    agency_id=agency_id,
                                    params={'references': 'all'})
-        logging.info("Successfully received response from the server.")
+        logging.info(
+            f"Successfully received response from the server: {flow_msg.response.url}"
+        )
 
-        raw_xml_content = flow_msg.response.text
+        raw_metadata_content = flow_msg.response.text
         with open(output_path, "w", encoding="utf-8") as f:
-            f.write(raw_xml_content)
+            f.write(raw_metadata_content)
         logging.info(f"Successfully saved raw metadata to '{output_path}'")
 
     except HTTPError as e:
-        logging.error(f"\nNetwork error: {e}")
+        logging.error(
+            f"Network error while downloading dataflow metadata for {agency_id}/{dataflow_id}: {e}"
+        )
         if e.response:
             logging.error(f"URL: {e.response.url}")
             logging.error(f"Response content: {e.response.text[:500]}...")
         raise
     except Exception as e:
-        logging.error(f"\nAn error occurred: {e}")
+        logging.error(
+            f"An error occurred while processing dataflow metadata for {agency_id}/{dataflow_id}: {e}"
+        )
         raise
 
 
@@ -106,27 +112,33 @@ def fetch_and_save_data_as_csv(dataflow_id: str,
     """
     try:
         client = sdmx.Client(client_id)
-        logging.info(f"\nFetching data as XML for key: {key}")
+        logging.info(f"Fetching data for key: {key}")
 
         data_msg = client.data(dataflow_id,
                                key=key,
                                params=params,
                                agency_id=agency_id)
-        logging.info("Successfully received XML response from the server.")
+        logging.info(
+            f"Successfully received response from the server: {data_msg.response.url}"
+        )
 
         data_series = sdmx.to_pandas(data_msg)
         df_tidy = data_series.reset_index()
 
         df_tidy.to_csv(output_path, index=False)
         logging.info(
-            f"Successfully converted XML data and saved to '{output_path}'")
+            f"Successfully converted to CSV data and saved to '{output_path}'")
 
     except HTTPError as e:
-        logging.error(f"\nNetwork error: {e}")
+        logging.error(
+            f"Network error while downloading data for {agency_id}/{dataflow_id}: {e}"
+        )
         if e.response:
             logging.error(f"URL: {e.response.url}")
             logging.error(f"Response content: {e.response.text[:500]}...")
         raise
     except Exception as e:
-        logging.error(f"\nAn error occurred: {e}")
+        logging.error(
+            f"An error occurred while processing data for {agency_id}/{dataflow_id}: {e}"
+        )
         raise
