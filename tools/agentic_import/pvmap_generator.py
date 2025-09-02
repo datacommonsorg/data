@@ -30,30 +30,30 @@ from jinja2 import Environment, FileSystemLoader
 FLAGS = flags.FLAGS
 _SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-flags.DEFINE_string('import_config', None,
+flags.DEFINE_string('data_config', None,
                     'Path to import config JSON file (required)')
-flags.mark_flag_as_required('import_config')
+flags.mark_flag_as_required('data_config')
 
 flags.DEFINE_boolean('dry_run', False,
                      'Generate prompt only without calling Gemini CLI')
 
 
 @dataclass
-class ImportConfig:
+class DataConfig:
     input_data: List[str]
     input_metadata: List[str]
     # JSON boolean values (true/false) are case-sensitive and auto-converted to Python bool
-    is_sdmx_format: bool = False
+    uses_sdmx_format: bool = False
 
 
-def load_import_config(config_path: str) -> ImportConfig:
+def load_data_config(config_path: str) -> DataConfig:
     """Load import configuration from JSON file."""
     with open(config_path, 'r') as f:
         data = json.load(f)
-    return ImportConfig(**data)
+    return DataConfig(**data)
 
 
-def generate_prompt(config: ImportConfig) -> str:
+def generate_prompt(config: DataConfig) -> str:
     """Generate prompt from Jinja2 template using import configuration.
     
     Args:
@@ -148,7 +148,7 @@ def run_subprocess(command: str) -> int:
         return 1
 
 
-def generate_pvmap(config: ImportConfig):
+def generate_pvmap(config: DataConfig):
     """Generate PV map from import configuration."""
     if not config.input_data:
         raise ValueError(
@@ -192,7 +192,7 @@ def generate_pvmap(config: ImportConfig):
 
 def main(argv):
     """Main function for PV Map generator."""
-    config = load_import_config(FLAGS.import_config)
+    config = load_data_config(FLAGS.data_config)
     logging.info("Loaded config with %d data files and %d metadata files",
                  len(config.input_data), len(config.input_metadata))
     generate_pvmap(config)

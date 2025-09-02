@@ -2,7 +2,7 @@
 
 ## Import Configuration Summary
 
-**Data Format:** {% if config.is_sdmx_format %}SDMX Format{% else %}Non-SDMX Format{% endif %}
+**Data Format:** {% if config.uses_sdmx_format %}SDMX Format{% else %}Non-SDMX Format{% endif %}
 
 ## Input Data Files ({{ input_data|length }} files):
 {% for data_file in input_data %}
@@ -15,7 +15,7 @@
 {% endfor %}
 
 ## Configuration Details:
-- SDMX Format: {{ config.is_sdmx_format }}
+- SDMX Format: {{ config.uses_sdmx_format }}
 - Total Data Files: {{ config.input_data|length }}
 - Total Metadata Files: {{ config.input_metadata|length }}
 
@@ -24,4 +24,4 @@
 - input_metadata: {{ input_metadata }}
 - config.input_data: {{ config.input_data }}
 - config.input_metadata: {{ config.input_metadata }}
-- config.is_sdmx_format: {{ config.is_sdmx_format }}
+- config.uses_sdmx_format: {{ config.uses_sdmx_format }}
