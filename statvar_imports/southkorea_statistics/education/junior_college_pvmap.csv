@@ -16,7 +16,7 @@ Freshman,#ignore,ignore,value,1,,,,,,
 Junior,#ignore,ignore,value,1,,,,,,
 Senior,#ignore,ignore,value,1,,,,,,
 Bachelors degreeconferring intensive course,#ignore,ignore,value,1,,,,,,
-Faculty Members_Total,populationType,Faculty,facultyType,Teacher,collegeOrUniversityLevel,JuniorCollege,,,,
+Faculty Members_Total,populationType,Teacher,collegeOrUniversityLevel,JuniorCollege,,,,,,
 Clerical Staffs_Total,occupationalCategory,ClericalWorker,measuredProperty,count,populationType,Faculty,collegeOrUniversityLevel,JuniorCollege,,
 Entrants_Female,populationType,Student,gender,Female,enrollmentStatus,Enrolled,collegeOrUniversityLevel,JuniorCollege,,
 Graduates_Female,populationType,Student,measuredProperty,count,educationalAttainment,Graduate,gender,Female,collegeOrUniversityLevel,JuniorCollege
@@ -27,7 +27,7 @@ Men's,coeducationStatus,AllMale,collegeOrUniversityLevel,JuniorCollege,,,,,,
 Women's,coeducationStatus,AllFemale,collegeOrUniversityLevel,JuniorCollege,,,,,,
 Co-educarion,coeducationStatus,Coeducational,measuredProperty,count,,,,,,
 Female,gender,Female,collegeOrUniversityLevel,JuniorCollege,value,{Number},,,,
-Faculty Members_Female,populationType,Faculty,measuredProperty,count,gender,Female,collegeOrUniversityLevel,JuniorCollege,facultyType,Teacher
+Faculty Members_Female,populationType,Teacher,measuredProperty,count,gender,Female,collegeOrUniversityLevel,JuniorCollege,,
 Clerical Staffs_Female,populationType,Faculty,measuredProperty,count,occupationalCategory,ClericalWorker,gender,Female,collegeOrUniversityLevel,JuniorCollege
 National,populationType,School,typeOfSchool,NationalSchool,collegeOrUniversityLevel,JuniorCollege,,,,
 Public,populationType,School,typeOfSchool,PublicSchool,collegeOrUniversityLevel,JuniorCollege,,,,

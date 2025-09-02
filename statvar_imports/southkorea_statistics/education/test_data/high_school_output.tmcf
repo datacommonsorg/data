@@ -3,6 +3,4 @@ observationAbout: C:high_school_output->observationAbout
 observationDate: C:high_school_output->observationDate
 value: C:high_school_output->value
 variableMeasured: C:high_school_output->variableMeasured
-unit: C:high_school_output->unit
-scalingFactor: C:high_school_output->scalingFactor
 typeOf: dcs:StatVarObservation

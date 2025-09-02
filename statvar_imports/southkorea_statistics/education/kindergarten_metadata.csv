@@ -8,8 +8,7 @@ start_date,2015
 end_date,2024
 release_frequency,P1Y
 comments,
-output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor,#input"
-#places_resolved_csv,https://docs.google.com/spreadsheets/d/1iqlp0c63jh-Fhp9XPlCxLR_SbrPd4ZVbHf02y8_demM/edit?resourcekey=0-QbICaCBwMFCiPjqvnVdcPA&gid=1875428009#gid=1875428009
+output_columns,"observationAbout, observationDate, value, variableMeasured,#input"
 mapped_rows,3
 mapped_columns,2
 header_rows,3

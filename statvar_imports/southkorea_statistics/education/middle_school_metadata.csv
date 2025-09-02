@@ -8,7 +8,7 @@ start_date,2015
 end_date,2024
 release_frequency,P1Y
 comments,
-output_columns,"observationAbout, observationDate, value, variableMeasured,unit, scalingFactor,#input"
+output_columns,"observationAbout, observationDate, value, variableMeasured,#input"
 mapped_rows,4
 mapped_columns,2
 header_rows,4
