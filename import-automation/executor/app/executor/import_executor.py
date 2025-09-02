@@ -470,6 +470,7 @@ class ImportExecutor:
                                               import_prefix, 'genmcf')
             validation_output_path = os.path.join(absolute_import_dir,
                                                   import_prefix, 'validation')
+            os.makedirs(validation_output_path, exist_ok=True)
             current_data_path = os.path.join(genmcf_output_path, '*.mcf')
             previous_data_path = latest_version + f'/{import_prefix}/validation/*.mcf'
             summary_stats = os.path.join(genmcf_output_path,
