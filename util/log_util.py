@@ -14,9 +14,12 @@
 """Utility functions for logging."""
 
 import json
-import logging
 import os
 import sys
+
+from absl import flags
+from absl import logging
+
 from google.cloud.logging.handlers import StructuredLogHandler
 from functools import wraps
 
@@ -24,6 +27,11 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(SCRIPT_DIR)
 
 from timer import Timer
+
+flags.DEFINE_integer('funcion_call_log_level', logging.INFO,
+                     'Log level for function call logs.')
+
+_FLAGS = flags.FLAGS
 
 
 def log_struct(level: str, message: str, labels: dict):
@@ -131,15 +139,20 @@ def log_function_call(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         func_name = func.__name__
-        logging.info(f"Function start: {func_name}")
+        log_level = logging.INFO
+        if _FLAGS.is_parsed():
+            log_level = _FLAGS.funcion_call_log_level
+        logging.log(log_level, f"Function start: {func_name}")
         timer = Timer()
         try:
             result = func(*args, **kwargs)
-            logging.info(
+            logging.log(
+                log_level,
                 f"Function end: {func_name}, time: {timer.time():.4f}s")
             return result
         except Exception as e:
-            logging.error(
+            logging.log(
+                log_level - 1,
                 f"Function error: {func_name}: {e}, time: {timer.time():.4f}s",
                 exc_info=True)
             raise  # Re-raise the exception after logging

@@ -483,7 +483,9 @@ class ImportExecutor:
         differ_job_name = 'differ'
 
         # Trigger validations for each tmcf/csv under import_inputs.
+        input_index = -1
         for import_prefix in import_prefix_list:
+            input_index += 1
             if not import_prefix:
                 logging.error('Skipping validation due to missing import spec.')
                 continue
@@ -523,6 +525,7 @@ class ImportExecutor:
                     {
                         "stage": "DIFFER",
                         "latency": timer.time(),
+                        "import_input": import_prefix,
                         "input_index": input_index,
                         "previous_version": latest_version,
                         "current_version": version
@@ -1203,7 +1206,7 @@ def _log_process(process: subprocess.CompletedProcess,
   """
     process_message = 'Subprocess succeeded'
     if process.returncode:
-        message = 'Subprocess failed'
+       process_message = 'Subprocess failed'
     message = _construct_process_message(process_message, process)
     logging.info(message)
 
