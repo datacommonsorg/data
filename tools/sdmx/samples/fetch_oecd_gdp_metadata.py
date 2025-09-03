@@ -10,7 +10,8 @@ import sys
 import os
 
 # Add the project root to the Python path to allow importing 'tools'
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
 from tools.sdmx import dataflow
 
@@ -34,8 +35,8 @@ def main():
     # --- 2. Use the Reusable Function ---
     try:
         dataflow.fetch_and_save_metadata(dataflow_id=dataflow_id,
-                                        agency_id=agency_id,
-                                        output_path=output_path)
+                                         agency_id=agency_id,
+                                         output_path=output_path)
         logging.info(
             f"--- Successfully downloaded metadata to {output_path} ---")
     except Exception as e:

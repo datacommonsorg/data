@@ -10,7 +10,8 @@ import sys
 import os
 
 # Add the project root to the Python path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
 from tools.sdmx import dataflow
 
@@ -31,8 +32,8 @@ def main():
     logging.info("--- Step 1: Starting Metadata Download ---")
     try:
         dataflow.fetch_and_save_metadata(dataflow_id=dataflow_id,
-                                        agency_id=agency_id,
-                                        output_path=metadata_output_path)
+                                         agency_id=agency_id,
+                                         output_path=metadata_output_path)
         logging.info(
             f"--- Successfully downloaded metadata to {metadata_output_path} ---"
         )
@@ -53,7 +54,8 @@ def main():
                                             key=data_key,
                                             params=data_params,
                                             output_path=data_output_path)
-        logging.info(f"--- Successfully downloaded data to {data_output_path} ---")
+        logging.info(
+            f"--- Successfully downloaded data to {data_output_path} ---")
     except Exception as e:
         logging.error(f"Failed to download data. Error: {e}")
 
