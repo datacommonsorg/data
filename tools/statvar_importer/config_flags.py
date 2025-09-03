@@ -99,6 +99,7 @@ flags.DEFINE_integer('pprof_port', 0, 'HTTP port for pprof server.')
 flags.DEFINE_bool('debug', False, 'Enable debug messages.')
 flags.DEFINE_integer('log_level', logging.INFO,
                      'Log level messages to be shown.')
+flags.DEFINE_integer('log_every_n', 1, 'Log one in N messages.')
 
 # Flags for place name resolution
 flags.DEFINE_string('dc_api_key', '',
@@ -398,6 +399,8 @@ def get_default_config() -> dict:
             _FLAGS.debug,
         'log_level':
             _FLAGS.log_level,
+        'log_every_n':
+            _FLAGS.log_every_n,
 
         # Settings for PV Map generator
         'generate_pvmap':
