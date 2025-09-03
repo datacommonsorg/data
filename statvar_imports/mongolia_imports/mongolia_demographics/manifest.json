@@ -39,9 +39,7 @@
           "cleaned_csv": "output_files/total_population_by_sex_and_urban_rural_output.csv"
         }
       ],
-      "cron_schedule": "0 04 * * 6",
-      "user_script_timeout": 3600,
-      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100}
+      "cron_schedule": "0 04 * * 6"
     }
   ]
 }

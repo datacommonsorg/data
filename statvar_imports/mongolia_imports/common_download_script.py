@@ -134,7 +134,7 @@ def fetch_and_save_data(table_id, csv_filepath, header_mapping):
         sys.exit(1)
 
 def main(_):
-    demographics_dir = "mongolia_demographics/input_files"
+    demographics_dir = "../mongolia_demographics/input_files"
     os.makedirs(demographics_dir, exist_ok=True) 
 
     for table in DEMOGRAPHICS_TABLES:
@@ -142,7 +142,7 @@ def main(_):
         fetch_and_save_data(table['id'], filepath, table['header_mapping'])
 
     # Education Data
-    education_dir = "mongolia_education/input_files"
+    education_dir = "../mongolia_education/input_files"
     os.makedirs(education_dir, exist_ok=True) 
 
     for table in EDUCATION_TABLES:
@@ -150,7 +150,7 @@ def main(_):
         fetch_and_save_data(table['id'], filepath, table['header_mapping'])
     
     # Health Data
-    health_dir = "mongolia_health/input_files"
+    health_dir = "../mongolia_health/input_files"
     os.makedirs(health_dir, exist_ok=True) 
 
     for table in HEALTH_TABLES:

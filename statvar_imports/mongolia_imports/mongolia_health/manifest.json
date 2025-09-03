@@ -35,9 +35,7 @@
           "cleaned_csv": "output_files/number_of_mothers_delivered_child_by_month_region_output.csv"
         }
       ],
-      "cron_schedule": "0 03 * * 6",
-      "user_script_timeout": 3600,
-      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100}
+      "cron_schedule": "0 03 * * 6"
     }
   ]
 }
