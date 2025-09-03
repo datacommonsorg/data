@@ -2,26 +2,20 @@
 
 ## Import Configuration Summary
 
-**Data Format:** {% if config.uses_sdmx_format %}SDMX Format{% else %}Non-SDMX Format{% endif %}
+**Data Format:** {% if config.data_config.is_sdmx_dataset %}SDMX Format{% else %}Non-SDMX Format{% endif %}
 
-## Input Data Files ({{ input_data|length }} files):
-{% for data_file in input_data %}
+## Input Data Files ({{ config.data_config.input_data|length }} files):
+{% for data_file in config.data_config.input_data %}
 - {{ data_file }}
 {% endfor %}
 
-## Metadata Files ({{ input_metadata|length }} files):
-{% for metadata_file in input_metadata %}
+## Metadata Files ({{ config.data_config.input_metadata|length }} files):
+{% for metadata_file in config.data_config.input_metadata %}
 - {{ metadata_file }}
 {% endfor %}
 
 ## Configuration Details:
-- SDMX Format: {{ config.uses_sdmx_format }}
-- Total Data Files: {{ config.input_data|length }}
-- Total Metadata Files: {{ config.input_metadata|length }}
-
-## All Config Values Available:
-- input_data: {{ input_data }}
-- input_metadata: {{ input_metadata }}
-- config.input_data: {{ config.input_data }}
-- config.input_metadata: {{ config.input_metadata }}
-- config.uses_sdmx_format: {{ config.uses_sdmx_format }}
+- SDMX Dataset: {{ config.data_config.is_sdmx_dataset }}
+- Dry Run: {{ config.dry_run }}
+- Total Data Files: {{ config.data_config.input_data|length }}
+- Total Metadata Files: {{ config.data_config.input_metadata|length }}

@@ -7,5 +7,5 @@
     "path/to/metadata/file1.json",
     "path/to/metadata/file2.yaml"
   ],
-  "uses_sdmx_format": false
+  "is_sdmx_dataset": false
 }

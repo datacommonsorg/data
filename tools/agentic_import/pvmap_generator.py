@@ -43,7 +43,13 @@ class DataConfig:
     input_data: List[str]
     input_metadata: List[str]
     # JSON boolean values (true/false) are case-sensitive and auto-converted to Python bool
-    uses_sdmx_format: bool = False
+    is_sdmx_dataset: bool = False
+
+
+@dataclass
+class Config:
+    data_config: DataConfig
+    dry_run: bool
 
 
 def load_data_config(config_path: str) -> DataConfig:
@@ -53,11 +59,20 @@ def load_data_config(config_path: str) -> DataConfig:
     return DataConfig(**data)
 
 
-def generate_prompt(config: DataConfig) -> str:
+def prepare_config() -> Config:
+    """Prepare comprehensive configuration from flags and data config file."""
+    data_config = load_data_config(FLAGS.data_config)
+    return Config(
+        data_config=data_config,
+        dry_run=FLAGS.dry_run
+    )
+
+
+def generate_prompt(config: Config) -> str:
     """Generate prompt from Jinja2 template using import configuration.
     
     Args:
-        config: The import configuration containing data and metadata files.
+        config: The complete configuration containing data config and flags.
         
     Returns:
         Path to the generated prompt file.
@@ -69,9 +84,7 @@ def generate_prompt(config: DataConfig) -> str:
     template = env.get_template('generate_pvmap_prompt.j2')
 
     # Render template with config values
-    rendered_prompt = template.render(input_data=config.input_data,
-                                      input_metadata=config.input_metadata,
-                                      config=config)
+    rendered_prompt = template.render(config=config)
 
     # Write rendered prompt to .datacommons folder
     output_dir = _get_datacommons_dir()
@@ -148,9 +161,9 @@ def run_subprocess(command: str) -> int:
         return 1
 
 
-def generate_pvmap(config: DataConfig):
+def generate_pvmap(config: Config):
     """Generate PV map from import configuration."""
-    if not config.input_data:
+    if not config.data_config.input_data:
         raise ValueError(
             "Import configuration must have at least one input data entry")
 
@@ -158,7 +171,7 @@ def generate_pvmap(config: DataConfig):
     prompt_file = generate_prompt(config)
 
     # Check if we're in dry run mode
-    if FLAGS.dry_run:
+    if config.dry_run:
         logging.info(
             "Dry run mode: Prompt file generated at %s. "
             "Skipping Gemini CLI execution.", prompt_file)
@@ -192,9 +205,9 @@ def generate_pvmap(config: DataConfig):
 
 def main(argv):
     """Main function for PV Map generator."""
-    config = load_data_config(FLAGS.data_config)
+    config = prepare_config()
     logging.info("Loaded config with %d data files and %d metadata files",
-                 len(config.input_data), len(config.input_metadata))
+                 len(config.data_config.input_data), len(config.data_config.input_metadata))
     generate_pvmap(config)
     logging.info("PV Map generation completed.")
     return 0
