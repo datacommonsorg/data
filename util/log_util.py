@@ -14,11 +14,11 @@
 """Utility functions for logging."""
 
 import json
+import logging
 import os
 import sys
 
 from absl import flags
-from absl import logging
 
 from google.cloud.logging.handlers import StructuredLogHandler
 from functools import wraps
