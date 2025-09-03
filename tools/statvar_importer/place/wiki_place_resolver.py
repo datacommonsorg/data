@@ -153,6 +153,7 @@ class WikiPlaceResolver:
         self._config = ConfigMap(_DEFAULT_CONFIG)
         self._config.update_config(config_dict)
         self._counters = Counters(counters_dict)
+        self._log_every_n = self._config.get('log_every_n', 10)
         # Cache of wiki properties looked up by wikiId
         self._wiki_id_json = {}
         self._wiki_id_names = {}
@@ -197,8 +198,10 @@ class WikiPlaceResolver:
             if not name:
                 name = key
             if not name or not isinstance(name, str):
-                logging.level_debug() and logging.debug(
-                    f'Ignoring place {name} for wiki lookup: {key}:{pvs}')
+                logging.level_debug() and logging.log_every_n(
+                    logging.DEBUG,
+                    f'Ignoring place {name} for wiki lookup: {key}:{pvs}',
+                    self._log_every_n)
                 continue
             name = name.strip('"')
             wiki_id = get_wiki_id_from_pvs(pvs, key)
@@ -211,7 +214,9 @@ class WikiPlaceResolver:
 
         # Get candidate wiki Ids for all names
         wiki_ids = set()
-        logging.debug(f'Looking up wiki ids for {len(lookup_names)} names')
+        logging.log_every_n(
+            logging.DEBUG, f'Looking up wiki ids for {len(lookup_names)} names',
+            self._log_every_n)
         for name in lookup_names.keys():
             place_pvs = places[lookup_names[name]]
             wiki_name_ids = self.search_wiki_name(name)
@@ -225,9 +230,10 @@ class WikiPlaceResolver:
         for key in keys:
             place_pvs = places[key]
             wiki_id = get_wiki_id_from_pvs(place_pvs, key)
-            logging.debug(
-                f'Looking up wiki properties for wiki: {wiki_id} for {place_pvs}'
-            )
+            logging.log_every_n(
+                logging.DEBUG,
+                f'Looking up wiki properties for wiki: {wiki_id} for {place_pvs}',
+                self._log_every_n)
             if wiki_id:
                 wiki_pvs = self.lookup_wiki_properties(wiki_id)
                 _update_node(wiki_pvs, place_pvs)
@@ -271,15 +277,17 @@ class WikiPlaceResolver:
         if not max_results:
             max_results = self._config.get('wiki_search_max_results', 1)
         search_url += urllib.parse.urlencode({'q': name})
-        logging.level_debug() and logging.debug(
-            f'Searching for {max_results} wikis for name "{name}" with {search_url}'
-        )
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
+            f'Searching for {max_results} wikis for name "{name}" with {search_url}',
+            self._log_every_n)
         self._counters.add_counter('wiki-name-searches', 1, name)
         resp = download_util.request_url(search_url,
                                          output='json',
                                          use_cache=True)
-        logging.level_debug() and logging.debug(
-            f'Got wiki search response for {name}: {resp}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Got wiki search response for {name}: {resp}',
+            self._log_every_n)
         if not resp:
             self._counters.add_counter('wiki-name-searches-failures', 1, name)
             return []
@@ -291,9 +299,10 @@ class WikiPlaceResolver:
                 wikidata_id = _get_wiki_id(link)
                 if wikidata_id:
                     result_wiki_ids.append(wikidata_id)
-        logging.level_debug() and logging.debug(
-            f'Got {len(result_wiki_ids)} wiki ids for "{name}": {result_wiki_ids}'
-        )
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
+            f'Got {len(result_wiki_ids)} wiki ids for "{name}": {result_wiki_ids}',
+            self._log_every_n)
         self._counters.add_counter(
             f'wiki-search-results-{len(result_wiki_ids)}', 1, name)
         return result_wiki_ids[:max_results]
@@ -342,17 +351,20 @@ class WikiPlaceResolver:
                                 val_names.append(names[0])
                     if val_names:
                         wiki_pvs[dc_prop + 'Name'] = val_names
-        logging.level_debug() and logging.debug(
-            f'Got wiki properties for {wiki_id}: {props}: {wiki_pvs}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
+            f'Got wiki properties for {wiki_id}: {props}: {wiki_pvs}',
+            self._log_every_n)
         return wiki_pvs
 
     def _get_wiki_search_url(self) -> str:
         """Returns the wiki search URL is config is setup properly. """
         api_key = self._config.get('custom_search_key', '')
         if not api_key:
-            logging.debug(
-                f'custom_search_key not set in config. Unable to look for wikiId'
-            )
+            logging.log_every_n(
+                logging.DEBUG,
+                f'custom_search_key not set in config. Unable to look for wikiId',
+                self._log_every_n)
             return False
         search_url = self._config.get('wiki_search_url')
         search_url = search_url.replace('KEY', api_key)
