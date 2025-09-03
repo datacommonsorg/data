@@ -81,11 +81,11 @@ class ValidationRunner:
                 f"A validation rule requires the 'stats' data source, but the --stats_summary file was not provided or does not exist. Path: {stats_summary}"
             )
 
-        if differ_required and (not differ_output or
-                                not os.path.exists(differ_output)):
-            raise ValueError(
-                f"A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. Path: {differ_output}"
-            )
+        if differ_required:
+            if not differ_output or not os.path.exists(differ_output):
+                logging.warning(
+                    f"A validation rule requires the 'differ' data source, but the --differ_output file was not provided or does not exist. Path: {differ_output}"
+                )
 
         if stats_summary and os.path.exists(stats_summary) and os.path.getsize(
                 stats_summary) > 0:

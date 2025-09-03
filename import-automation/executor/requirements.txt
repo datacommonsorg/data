@@ -27,6 +27,7 @@ google-cloud-logging
 google-cloud-scheduler
 gspread
 gunicorn
+legacy-cgi
 lxml
 numpy
 openpyxl
@@ -45,6 +46,7 @@ requests_cache
 retry
 s2sphere
 selenium
+sdmx1
 shapely
 urllib3
 webdriver_manager

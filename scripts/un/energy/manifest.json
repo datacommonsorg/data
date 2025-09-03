@@ -12,9 +12,7 @@
                 "cleaned_csv": "output_data/un_energy_output.csv"
             }
             ],
-        "cron_schedule": "0 4 1,15 * *",
-        "user_script_timeout": 7200
+        "cron_schedule": "0 4 1,15 * *"
         }
     ]
 }
-

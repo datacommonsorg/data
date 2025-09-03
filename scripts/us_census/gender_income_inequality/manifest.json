@@ -16,9 +16,7 @@
                     "cleaned_csv": "gender_income_inequality.csv"
                 }
             ],
-            "cron_schedule": "0 03 * * 1",
-            "resource_limits": {"cpu": "2", "memory": "8G"},
-            "user_script_timeout": 1800
+            "cron_schedule": "0 03 * * 1"
         }
     ]
 }

@@ -101,6 +101,7 @@ class PropertyValueMapper:
             counters_dict=counters_dict,
             options=CounterOptions(debug=self._config.get('debug', False)),
         )
+        self._log_every_n = self._config.get('log_every_n', 1)
         # Map from a namespace to dictionary of string-> { p:v}
         self._pv_map = OrderedDict({'GLOBAL': {}})
         self._num_pv_map_keys = 0
@@ -112,7 +113,7 @@ class PropertyValueMapper:
                     namespace, filename = filename.split(':', 1)
             self.load_pvs_from_file(filename, namespace)
         logging.level_debug() and logging.debug(
-            f'Loaded PV map {self._pv_map} with max words {self._max_words_in_keys}'
+            f'Loaded PV map with {len(self._pv_map)} keys: {str(self._pv_map)[:300]} with max words {self._max_words_in_keys}'
         )
 
     def load_pvs_from_file(self, filename: str, namespace: str = 'GLOBAL'):
@@ -131,8 +132,10 @@ class PropertyValueMapper:
         if file_util.file_is_csv(filename):
             # Load rows into a dict of prop,value
             # if the first col is a config key, next column is its value
-            logging.info(
-                f'Loading PV maps for {namespace} from csv file: {filename}')
+            logging.log_every_n(
+                logging.INFO,
+                f'Loading PV maps for {namespace} from csv file: {filename}',
+                self._log_every_n)
             with file_util.FileIO(filename) as csvfile:
                 csv_reader = csv.reader(csvfile,
                                         skipinitialspace=True,
@@ -230,8 +233,8 @@ class PropertyValueMapper:
             num_words_key = len(pv_utils.get_words(key, word_delimiter))
             self._max_words_in_keys = max(self._max_words_in_keys,
                                           num_words_key)
-            logging.level_debug() and logging.log(
-                2, f'Setting PVMap[{key}] = {pvs_dict}')
+            logging.level_debug() and logging.log_every_n(
+                2, f'Setting PVMap[{key}] = {pvs_dict}', self._log_every_n)
 
         self._num_pv_map_keys += num_keys_added
         logging.info(
@@ -255,8 +258,8 @@ class PropertyValueMapper:
     Returns:
        True if any property:values were processed and pvs dict was updated.
     """
-        logging.level_debug() and logging.log(
-            2, f'Processing data PVs:{key}:{pvs}')
+        logging.level_debug() and logging.log_every_n(
+            2, f'Processing data PVs:{key}:{pvs}', self._log_every_n)
         data_key = self._config.get('data_key', 'Data')
         data = pvs.get(data_key, key)
         is_modified = False
@@ -272,10 +275,10 @@ class PropertyValueMapper:
             regex_pvs = {}
             for match in re_matches:
                 regex_pvs.update(match.groupdict())
-            logging.level_debug() and logging.log(
+            logging.level_debug() and logging.log_every_n(
                 2,
-                f'Processed regex: {re_pattern} on {key}:{data} to get {regex_pvs}'
-            )
+                f'Processed regex: {re_pattern} on {key}:{data} to get {regex_pvs}',
+                self._log_every_n)
             if regex_pvs:
                 self._counters.add_counter('processed-regex', 1, re_pattern)
                 pv_utils.pvs_update(
@@ -291,18 +294,18 @@ class PropertyValueMapper:
             (format_prop, strf) = _get_variable_expr(format_str, data_key)
             try:
                 format_data = strf.format(**pvs)
-                logging.level_debug() and logging.log(
+                logging.level_debug() and logging.log_every_n(
                     2,
                     f'Processed format {format_prop}={strf} on {key}:{data} to get'
-                    f' {format_data}')
+                    f' {format_data}', self._log_every_n)
             except (KeyError, ValueError) as e:
                 format_data = format_str
                 self._counters.add_counter('error-process-format', 1,
                                            format_str)
-                logging.level_debug() and logging.log(
+                logging.level_debug() and logging.log_every_n(
                     2,
                     f'Failed to format {format_prop}={strf} on {key}:{data} with'
-                    f' {pvs}, {e}')
+                    f' {pvs}, {e}', self._log_every_n)
             if format_prop != data_key and format_data != format_str:
                 pvs[format_prop] = format_data
                 self._counters.add_counter('processed-format', 1, format_str)
@@ -318,10 +321,10 @@ class PropertyValueMapper:
                 pvs,
                 self._config.get('eval_globals', eval_functions.EVAL_GLOBALS),
             )
-            logging.level_debug() and logging.log(
+            logging.level_debug() and logging.log_every_n(
                 2,
-                f'Processed eval {eval_str} with {pvs} to get {eval_prop}:{eval_data}'
-            )
+                f'Processed eval {eval_str} with {pvs} to get {eval_prop}:{eval_data}',
+                self._log_every_n)
             if not eval_prop:
                 eval_prop = data_key
             if eval_data and eval_data != eval_str:
@@ -329,8 +332,9 @@ class PropertyValueMapper:
                 self._counters.add_counter('processed-eval', 1, eval_str)
                 pvs.pop(eval_key)
                 is_modified = True
-        logging.level_debug() and logging.log(
-            2, f'Processed data PVs:{is_modified}:{key}:{pvs}')
+        logging.level_debug() and logging.log_every_n(
+            2, f'Processed data PVs:{is_modified}:{key}:{pvs}',
+            self._log_every_n)
         return is_modified
 
     def get_pvs_for_key(self, key: str, namespace: str = 'GLOBAL') -> dict:
@@ -346,8 +350,8 @@ class PropertyValueMapper:
       dictionary of property:values for the input string.
     """
         pvs = None
-        logging.level_debug() and logging.log(
-            3, f'Search PVs for {namespace}:{key}')
+        logging.level_debug() and logging.log_every_n(
+            3, f'Search PVs for {namespace}:{key}', self._log_every_n)
         if namespace in self._pv_map:
             pvs = self._pv_map[namespace].get(key, None)
         else:
@@ -356,8 +360,8 @@ class PropertyValueMapper:
             pvs = {}
             namespaces = self._config.get('default_pv_maps', ['GLOBAL'])
             for namespace in namespaces:
-                logging.level_debug() and logging.log(
-                    3, f'Search PVs for {namespace}:{key}')
+                logging.level_debug() and logging.log_every_n(
+                    3, f'Search PVs for {namespace}:{key}', self._log_every_n)
                 if namespace in self._pv_map.keys():
                     pv_map = self._pv_map[namespace]
                     if key in pv_map:
@@ -366,19 +370,22 @@ class PropertyValueMapper:
                             pv_map[key], pvs,
                             self._config.get('multi_value_properties', {}))
             if len(dicts_with_key) > 1:
-                logging.warning(
-                    f'Duplicate key {key} in property maps: {dicts_with_key}')
+                logging.log_every_n(
+                    logging.WARNING,
+                    f'Duplicate key {key} in property maps: {dicts_with_key}',
+                    self._log_every_n)
                 self._counters.add_counter(
                     f'warning-multiple-property-key',
                     1,
                     f'{key}:' + ','.join(dicts_with_key),
                 )
         if not pvs:
-            logging.level_debug() and logging.log(
-                3, f'Missing key {key} in property maps')
+            logging.level_debug() and logging.log_every_n(
+                3, f'Missing key {key} in property maps', self._log_every_n)
             self._counters.add_counter(f'warning-missing-property-key', 1, key)
             return pvs
-        logging.level_debug() and logging.debug(f'Got PVs for {key}:{pvs}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Got PVs for {key}:{pvs}', self._log_every_n)
         return pvs
 
     def get_pvs_for_key_variants(self,
@@ -436,9 +443,9 @@ class PropertyValueMapper:
             #  else:
             #    return False
             # except re.error as e:
-            #    logging.error(
+            #    logging.log_every_n(logging.ERROR,
             #        f'Failed re.search({key_pat}, {value}) with exception: {e}'
-            #    )
+            #    , self._log_every_n)
             #    return False
 
         # Simple substring without word boundary checks.
@@ -478,13 +485,14 @@ class PropertyValueMapper:
                 if self._is_key_in_value(key, value):
                     pvs_list.append(pv_map[key])
                     keys_list.append(key)
-                    logging.level_debug() and logging.log(
-                        3, f'Got PVs for {key} in {value}: {pvs_list}')
+                    logging.level_debug() and logging.log_every_n(
+                        3, f'Got PVs for {key} in {value}: {pvs_list}',
+                        self._log_every_n)
                     value = value.replace(key, ' ')
-        logging.level_debug() and logging.log(
+        logging.level_debug() and logging.log_every_n(
             2,
-            f'Returning pvs for substrings of {value} from {keys_list}:{pvs_list}'
-        )
+            f'Returning pvs for substrings of {value} from {keys_list}:{pvs_list}',
+            self._log_every_n)
         return pvs_list
 
     def get_all_pvs_for_value(self,
@@ -502,8 +510,8 @@ class PropertyValueMapper:
     Returns:
       a list of dictionary of property:values.
     """
-        logging.level_debug() and logging.log(
-            1, f'Looking up PVs for {namespace}:{value}')
+        logging.level_debug() and logging.log_every_n(
+            1, f'Looking up PVs for {namespace}:{value}', self._log_every_n)
         pvs = self.get_pvs_for_key_variants(value, namespace)
         if pvs:
             return pvs
@@ -528,8 +536,9 @@ class PropertyValueMapper:
             return self.get_pvs_for_key_substring(value, namespace)
         # Fewer n-grams than number of keys in map.
         # Check if any input n-gram matches a key.
-        logging.level_debug() and logging.log(
-            3, f'Looking up PVs for {max_fragment_words} words in {words}')
+        logging.level_debug() and logging.log_every_n(
+            3, f'Looking up PVs for {max_fragment_words} words in {words}',
+            self._log_every_n)
         for num_words in range(max_fragment_words, 0, -1):
             for start_index in range(0, len(words) - num_words + 1):
                 sub_value = word_joiner.join(words[start_index:start_index +
@@ -542,12 +551,10 @@ class PropertyValueMapper:
                     before_value = word_delimiter.join(words[0:start_index])
                     after_value = word_delimiter.join(words[start_index +
                                                             num_words:])
-                    logging.level_debug() and logging.log(
-                        3,
-                        f'Got PVs for {start_index}:{num_words} in'
+                    logging.level_debug() and logging.log_every_n(
+                        3, f'Got PVs for {start_index}:{num_words} in'
                         f' {words}:{sub_value}:{sub_pvs}, lookup pvs for {before_value},'
-                        f' {after_value}',
-                    )
+                        f' {after_value}', self._log_every_n)
                     before_pvs = self.get_all_pvs_for_value(
                         # before_value, namespace, max_fragment_size=None)
                         before_value,
@@ -565,9 +572,10 @@ class PropertyValueMapper:
                     pvs_list.extend(sub_pvs)
                     if after_pvs:
                         pvs_list.extend(after_pvs)
-                    logging.level_debug() and logging.log(
+                    logging.level_debug() and logging.log_every_n(
                         2, f'Got PVs for fragments {before_value}:{before_pvs},'
-                        f' {sub_value}:{sub_pvs}, {after_value}:{after_pvs}')
+                        f' {sub_value}:{sub_pvs}, {after_value}:{after_pvs}',
+                        self._log_every_n)
                     return pvs_list
         return None
 
