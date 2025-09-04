@@ -2,7 +2,7 @@
     "import_specifications": [{
         "import_name":
         "covid19IndiaMedicalTestsInData",
-        "curator_emails": ["i@thejeshgn.com"],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url":
         "https://github.com/datameet/covid19",
         "provenance_description":
@@ -12,6 +12,7 @@
             "template_mcf": "COVID19_tests_india.tmcf",
             "cleaned_csv": "COVID19_tests_india.csv"
         }],
+        "source_files": ["COVID19_cases_indian_states.csv"],
         "cron_schedule":
         "0 6 * * *"
     }]

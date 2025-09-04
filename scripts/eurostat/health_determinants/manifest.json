@@ -96,5 +96,8 @@
       "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
       "cron_schedule": "0 3 2 * *"
     }
-    ]
+    ],
+    "config_override":{
+        "ignore_validation_status": false
+   }
   }

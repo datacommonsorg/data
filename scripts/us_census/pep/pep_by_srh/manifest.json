@@ -2,7 +2,7 @@
   "import_specifications": [
     {
       "import_name": "USCensusPEP_By_SexRaceHispanicOrigin",
-      "curator_emails": ["koppad@google.com"],
+      "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
       "provenance_description": "U.S. census population estimate by sex race hispanic origin",
       "scripts": ["process.py"],
@@ -16,8 +16,12 @@
           "cleaned_csv": "output_files/population_estimate_by_srh_agg.csv"
         }
       ],
+      "source_files": ["input_files/*"],
       "cron_schedule": "0 06 * * 1"
     }
-  ]
+  ],
+  "config_override":{
+        "ignore_validation_status": false
+   }
 }
 

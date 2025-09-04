@@ -2,7 +2,7 @@
   "import_specifications": [
     {
       "import_name": "EPACriteriaAirPollutants",
-      "curator_emails": ["shamimansari@google.com"],
+      "curator_emails": ["support@datacommons.org"],
       "provenance_url": "https://www.epa.gov/outdoor-air-quality-data",
       "provenance_description": "Air quality data collected from outdoor monitors on the county, CBSA, and site monitor level.",
       "scripts": ["air_quality.py"],
@@ -12,6 +12,7 @@
           "cleaned_csv": "EPA_AirQuality.csv"
         }
       ],
+      "source_files": ["EPA_AirQuality.csv"],
       "cron_schedule": "15 22 10 1,7 *"
     }
   ]
