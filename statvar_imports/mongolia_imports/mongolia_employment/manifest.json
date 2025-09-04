@@ -1,0 +1,42 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "Mongolia_Employment",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.1212.mn/en/statcate",
+      "provenance_description": "Data related to the Mongolia's labour and business at country level",
+      "scripts": ["run.sh"],
+      "source_files": [
+        "input_files/*.csv"
+      ],
+      "import_inputs": [
+        {
+          "template_mcf": "output_files/employment_by_classification_of_economic_activites_region_gender_and_agegroup_output.tmcf",
+          "cleaned_csv": "output_files/employment_by_classification_of_economic_activites_region_gender_and_agegroup_output.csv"
+        },
+        {
+          "template_mcf": "output_files/employment_by_occupation_by_region_gender_and_agegroup_output.tmcf",
+          "cleaned_csv": "output_files/employment_by_occupation_by_region_gender_and_agegroup_output.csv"
+        },
+        {
+          "template_mcf": "output_files/employment_to_population_ratio_by_region_gender_and_agegroup_output.tmcf",
+          "cleaned_csv": "output_files/employment_to_population_ratio_by_region_gender_and_agegroup_output.csv"
+        },
+        {
+          "template_mcf": "output_files/labour_force_by_region_gender_and_agegroup_output.tmcf",
+          "cleaned_csv": "output_files/labour_force_by_region_gender_and_agegroup_output.csv"
+        },
+        {
+          "template_mcf": "output_files/labour_underutilization_by_region_gender_and_agegroup_output.tmcf",
+          "cleaned_csv": "output_files/labour_underutilization_by_region_gender_and_agegroup_output.csv"
+        },
+        {
+          "template_mcf": "output_files/registered_unemployed_by_education_level_region_gender_month_output.tmcf",
+          "cleaned_csv": "output_files/registered_unemployed_by_education_level_region_gender_month_output.csv"
+        }
+      ],
+      "cron_schedule": "0 02 * * 6"
+    }
+  ]
+}
+
