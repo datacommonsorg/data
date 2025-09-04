@@ -35,8 +35,7 @@
           "cleaned_csv": "output_files/graduates_of_universities_and_colleges_by_professional_field_output.csv"
         }
       ],
-      "cron_schedule": "0 04 * * 6",
-      "resource_limits": {"cpu": 8, "memory": 32, "disk": 100}
+      "cron_schedule": "0 04 * * 6"
     }
   ]
 }

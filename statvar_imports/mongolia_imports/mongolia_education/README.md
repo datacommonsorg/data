@@ -1,6 +1,18 @@
 ## Mongolia_Education Import
 
-This import contains statistical data related to Mongolia's education data at the country level.
+This import contains several datasets from the National Statistical Office (NSO) of Mongolia, providing key education statistics at the country level up to the year 2014.
+
+Graduates by Professional Field: Tracks the number of university and college graduates, categorized by their field of study.
+
+Full-Time Teachers by Sex: Counts full-time teachers in universities and colleges, broken down by gender.
+
+Kindergartens by Region: Provides a geographical breakdown of the number of kindergartens across Mongolia.
+
+Students by Region: Details the number of students enrolled in universities and colleges, organized by region.
+
+Tertiary Students by Sex and Degree: Categorizes students in post-secondary institutions by their gender and the type of degree they are pursuing.
+
+Students by Professional Field: Counts the total number of students enrolled in universities and colleges, segmented by their field of study.
 
 -----
 
@@ -36,6 +48,15 @@ sh run.sh
 **Option B: Manually Execute the Processing Script**
 
 You can also run the `stat_var_processor.py` script individually for each file. This script is located in the `data/tools/statvar_importer/` directory.
+
+Here are the specific command template:
+
+python3 stat_var_processor.py
+--input_data=statvar_imports/mongolia_imports/mongolia_education/input_files/<INPUT_FILE_PATH>
+--pv_map=statvar_imports/mongolia_imports/mongolia_education/<PV_MAP_PATH> 
+--config_file=statvar_imports/mongolia_imports/mongolia_education/mongolia_metadata.csv 
+--output_path=statvar_imports/mongolia_imports/mongolia_education/output_files/<OUTPUT_FILE_PATH> 
+--places_resolved_csv=statvar_imports/mongolia_imports/mongolia_education/mongolia_place_resolver.csv --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 
 Here are the specific commands for each file:
 
