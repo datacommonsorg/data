@@ -25,9 +25,14 @@ def main():
     # --- 1. Define Common Parameters ---
     agency_id = "OECD.SDD.NAD"
     dataflow_id = "DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD"
-    metadata_output_path = "oecd_gdp_full_metadata.xml"
-    data_output_path = "oecd_gdp_full_data.csv"
     endpoint = "https://sdmx.oecd.org/public/rest/"
+
+    # Create output directory inside the samples folder
+    output_dir = os.path.join(os.path.dirname(__file__), "output")
+    os.makedirs(output_dir, exist_ok=True)
+    metadata_output_path = os.path.join(output_dir,
+                                        "oecd_gdp_full_metadata.xml")
+    data_output_path = os.path.join(output_dir, "oecd_gdp_full_data.csv")
 
     # --- 2. Fetch Metadata ---
     logging.info("--- Step 1: Starting Metadata Download ---")
@@ -41,8 +46,8 @@ def main():
         )
     except Exception as e:
         logging.error(f"Failed to download metadata. Error: {e}")
-        # Exit if metadata fails, as it's needed for context
-        return
+        # Exit with a non-zero status code to indicate failure.
+        sys.exit(1)
 
     # --- 3. Fetch Full Data Series ---
     logging.info("\n--- Step 2: Starting Full Data Download ---")
@@ -61,6 +66,7 @@ def main():
             f"--- Successfully downloaded data to {data_output_path} ---")
     except Exception as e:
         logging.error(f"Failed to download data. Error: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

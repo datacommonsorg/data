@@ -12,6 +12,24 @@ from requests.exceptions import HTTPError
 from typing import Dict, Any
 
 
+def _get_sdmx_client(agency_id: str, endpoint: str) -> sdmx.Client:
+    """
+    Creates and configures an sdmx.Client for a given agency and endpoint.
+
+    A unique source ID is created for each agency-endpoint combination to avoid
+    caching issues. The source is overridden to ensure the correct endpoint is
+    always used.
+    """
+    source_id = agency_id
+    custom_source = {
+        'id': source_id,
+        'url': endpoint,
+        'name': f'Custom source for {agency_id}'
+    }
+    sdmx.add_source(custom_source, override=True)
+    return sdmx.Client(source_id)
+
+
 def fetch_and_save_metadata(dataflow_id: str, agency_id: str, output_path: str,
                             endpoint: str):
     """
@@ -37,17 +55,7 @@ def fetch_and_save_metadata(dataflow_id: str, agency_id: str, output_path: str,
         )
     """
     try:
-        # Dynamically create a source for the specific agency
-        source_id = agency_id
-        if source_id not in sdmx.list_sources():
-            custom_source = {
-                'id': source_id,
-                'url': endpoint,
-                'name': f'Custom source for {agency_id}'
-            }
-            sdmx.add_source(custom_source)
-
-        client = sdmx.Client(source_id)
+        client = _get_sdmx_client(agency_id, endpoint)
 
         logging.info(f"Fetching raw metadata for dataflow: {dataflow_id}...")
 
@@ -68,7 +76,8 @@ def fetch_and_save_metadata(dataflow_id: str, agency_id: str, output_path: str,
             f"Network error while downloading dataflow metadata for {agency_id}/{dataflow_id}: {e}"
         )
         if e.response:
-            error_filename = f"metadata_error_{dataflow_id}.html"
+            safe_df_id = dataflow_id.replace('@', '_')
+            error_filename = f"metadata_error_{safe_df_id}.html"
             with open(error_filename, "w", encoding="utf-8") as f:
                 f.write(e.response.text)
             logging.error(f"URL: {e.response.url}")
@@ -122,17 +131,7 @@ def fetch_and_save_data_as_csv(dataflow_id: str, agency_id: str,
         )
     """
     try:
-        # Dynamically create a source for the specific agency
-        source_id = agency_id
-        if source_id not in sdmx.list_sources():
-            custom_source = {
-                'id': source_id,
-                'url': endpoint,
-                'name': f'Custom source for {agency_id}'
-            }
-            sdmx.add_source(custom_source)
-
-        client = sdmx.Client(source_id)
+        client = _get_sdmx_client(agency_id, endpoint)
 
         logging.info(f"Fetching data for key: {key}")
 
@@ -156,7 +155,8 @@ def fetch_and_save_data_as_csv(dataflow_id: str, agency_id: str,
             f"Network error while downloading data for {agency_id}/{dataflow_id}: {e}"
         )
         if e.response:
-            error_filename = f"data_error_{dataflow_id}.html"
+            safe_df_id = dataflow_id.replace('@', '_')
+            error_filename = f"data_error_{safe_df_id}.html"
             with open(error_filename, "w", encoding="utf-8") as f:
                 f.write(e.response.text)
             logging.error(f"URL: {e.response.url}")

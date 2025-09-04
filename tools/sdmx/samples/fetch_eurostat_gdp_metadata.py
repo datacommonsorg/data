@@ -25,21 +25,21 @@ def main():
     # --- 1. Define Parameters for the Eurostat GDP Dataset ---
     agency_id = "ESTAT"
     dataflow_id = "TEC00001"
-    output_path = "eurostat_gdp_metadata.xml"
     endpoint = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/"
+
+    # Create output directory inside the samples folder
+    output_dir = os.path.join(os.path.dirname(__file__), "output")
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "eurostat_gdp_metadata.xml")
 
     logging.info(f"--- Fetching Eurostat Metadata: {dataflow_id} ---")
 
     # --- 2. Use the Reusable Function ---
-    try:
-        dataflow.fetch_and_save_metadata(dataflow_id=dataflow_id,
-                                         agency_id=agency_id,
-                                         output_path=output_path,
-                                         endpoint=endpoint)
-        logging.info(
-            f"--- Successfully downloaded metadata to {output_path} ---")
-    except Exception as e:
-        logging.error(f"Failed to download metadata. Error: {e}")
+    dataflow.fetch_and_save_metadata(dataflow_id=dataflow_id,
+                                     agency_id=agency_id,
+                                     output_path=output_path,
+                                     endpoint=endpoint)
+    logging.info(f"--- Successfully downloaded metadata to {output_path} ---")
 
 
 if __name__ == "__main__":

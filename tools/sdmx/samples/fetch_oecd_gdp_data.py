@@ -26,8 +26,12 @@ def main():
     # --- 1. Define Parameters ---
     agency_id = "OECD.SDD.NAD"
     dataflow_id = "DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD"
-    output_path = "oecd_gdp_data_slice.csv"
     endpoint = "https://sdmx.oecd.org/public/rest/"
+
+    # Create output directory inside the samples folder
+    output_dir = os.path.join(os.path.dirname(__file__), "output")
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "oecd_gdp_data_slice.csv")
 
     # Key to select a slice of data (e.g., quarterly data for USA, Canada, Mexico)
     data_key = {
@@ -48,16 +52,13 @@ def main():
     logging.info(f"Data Params: {data_params}")
 
     # --- 2. Use the Reusable Function ---
-    try:
-        dataflow.fetch_and_save_data_as_csv(dataflow_id=dataflow_id,
-                                            agency_id=agency_id,
-                                            key=data_key,
-                                            params=data_params,
-                                            output_path=output_path,
-                                            endpoint=endpoint)
-        logging.info(f"--- Successfully downloaded data to {output_path} ---")
-    except Exception as e:
-        logging.error(f"Failed to download data. Error: {e}")
+    dataflow.fetch_and_save_data_as_csv(dataflow_id=dataflow_id,
+                                        agency_id=agency_id,
+                                        key=data_key,
+                                        params=data_params,
+                                        output_path=output_path,
+                                        endpoint=endpoint)
+    logging.info(f"--- Successfully downloaded data to {output_path} ---")
 
 
 if __name__ == "__main__":
