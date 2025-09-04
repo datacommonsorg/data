@@ -6,7 +6,7 @@
       "provenance_url": "https://nces.ed.gov/ccd/elsi/tableGenerator.aspx",
       "provenance_description": "US nces school data for district",
       "scripts": ["run.sh" ,"process.py"],
-      "source_files": ["gcs_output/input_files/*"],
+      "source_files": ["gcs_output/input_files/*/*.csv"],
       "import_inputs": [
         {
           "template_mcf": "gcs_output/output_files/us_nces_demographics_district_school.tmcf",
@@ -17,14 +17,14 @@
           "cleaned_csv": "gcs_output/output_place/us_nces_demographics_district_place.csv"
                   }
       ],
-      "cron_schedule": "30 3 3 3,6,9,12 *",
-      "resource_limits": {
-        "cpu": "8",
-        "memory": "32G"
-      },
-      "timeout":144000
+      "cron_schedule": "30 3 3 3,6,9,12 *"
     }
-  ]
+  ],
+  "config_override":{
+    "invoke_import_tool": false,
+    "invoke_differ_tool": false,
+    "invoke_import_validation": false
+  }
 }
 
 

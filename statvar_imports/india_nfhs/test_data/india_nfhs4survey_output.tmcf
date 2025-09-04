@@ -1,0 +1,9 @@
+Node: E:india_nfhs4survey_output->E0
+observationAbout: C:india_nfhs4survey_output->observationAbout
+value: C:india_nfhs4survey_output->value
+observationPeriod: C:india_nfhs4survey_output->observationPeriod
+unit: C:india_nfhs4survey_output->unit
+scalingFactor: C:india_nfhs4survey_output->scalingFactor
+variableMeasured: C:india_nfhs4survey_output->variableMeasured
+typeOf: dcs:StatVarObservation
+observationDate: 2015

@@ -1,0 +1,10 @@
+Node: E:Life_Expectancy_output->E0
+observationAbout: C:Life_Expectancy_output->observationAbout
+observationDate: C:Life_Expectancy_output->observationDate
+value: C:Life_Expectancy_output->value
+variableMeasured: C:Life_Expectancy_output->variableMeasured
+unit: C:Life_Expectancy_output->unit
+scalingFactor: C:Life_Expectancy_output->scalingFactor
+measurementMethod: C:Life_Expectancy_output->measurementMethod
+observationPeriod: C:Life_Expectancy_output->observationPeriod
+typeOf: dcs:StatVarObservation
