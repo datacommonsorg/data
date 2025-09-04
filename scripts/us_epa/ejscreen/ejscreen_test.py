@@ -30,9 +30,9 @@ class TestEjscreen(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp_dir:
             # Ensure test data file exists in the expected directory
             test_data_file = os.path.join(module_dir_,
-                                          'test_data/test_data.csv')
+                                          'test_data/test_data_input.csv')
             expected_data_file = os.path.join(
-                module_dir_, 'test_data/test_data_expected.csv')
+                module_dir_, 'test_data/test_data_expected_output.csv')
 
             if not os.path.exists(test_data_file) or not os.path.exists(
                     expected_data_file):
