@@ -13,7 +13,7 @@ import os
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
-from tools.sdmx import dataflow
+from tools.sdmx.dataflow import SdmxClient
 
 # Configure logging
 logging.basicConfig(level=logging.INFO,
@@ -34,13 +34,14 @@ def main():
                                         "oecd_gdp_full_metadata.xml")
     data_output_path = os.path.join(output_dir, "oecd_gdp_full_data.csv")
 
-    # --- 2. Fetch Metadata ---
+    # --- 2. Initialize Client ---
+    client = SdmxClient(endpoint, agency_id)
+
+    # --- 3. Fetch Metadata ---
     logging.info("--- Step 1: Starting Metadata Download ---")
     try:
-        dataflow.fetch_and_save_metadata(dataflow_id=dataflow_id,
-                                         agency_id=agency_id,
-                                         output_path=metadata_output_path,
-                                         endpoint=endpoint)
+        client.fetch_and_save_metadata(dataflow_id=dataflow_id,
+                                       output_path=metadata_output_path)
         logging.info(
             f"--- Successfully downloaded metadata to {metadata_output_path} ---"
         )
@@ -49,19 +50,17 @@ def main():
         # Exit with a non-zero status code to indicate failure.
         sys.exit(1)
 
-    # --- 3. Fetch Full Data Series ---
+    # --- 4. Fetch Full Data Series ---
     logging.info("\n--- Step 2: Starting Full Data Download ---")
     # For the full dataset, we use an empty key and no time parameters
     data_key = {}
     data_params = {}
 
     try:
-        dataflow.fetch_and_save_data_as_csv(dataflow_id=dataflow_id,
-                                            agency_id=agency_id,
-                                            key=data_key,
-                                            params=data_params,
-                                            output_path=data_output_path,
-                                            endpoint=endpoint)
+        client.fetch_and_save_data_as_csv(dataflow_id=dataflow_id,
+                                          key=data_key,
+                                          params=data_params,
+                                          output_path=data_output_path)
         logging.info(
             f"--- Successfully downloaded data to {data_output_path} ---")
     except Exception as e:
