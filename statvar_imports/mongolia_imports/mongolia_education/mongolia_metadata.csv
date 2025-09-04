@@ -1,0 +1,4 @@
+parameter,value
+#places_within,country/MNG
+output_columns,"observationAbout,observationDate,value,variableMeasured"
+url,https://www.1212.mn/en/statcate/table-view/Education%2C%20health/Pre-school%20education/DT_NSO_2001_011V1.px
