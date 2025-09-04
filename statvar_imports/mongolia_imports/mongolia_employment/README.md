@@ -59,10 +59,10 @@ Here are the specific commands for each file:
 
 ```bash
 python3 stat_var_processor.py
---input_data=../../statvar_imports/mongolia_imports/mongolia_employment/input_files/employment_by_classification_of_economic_activites_region_gender_and_agegroup.csv
---pv_map=../../statvar_imports/mongolia_imports/mongolia_employment/employment_by_classification_of_economic_activites_region_gender_and_agegroup_pvmap.csv
+--input_data=../../statvar_imports/mongolia_imports/mongolia_employment/input_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup.csv
+--pv_map=../../statvar_imports/mongolia_imports/mongolia_employment/employment_by_classification_of_economic_activities_region_gender_and_agegroup_pvmap.csv
 --config_file=../../statvar_imports/mongolia_imports/mongolia_employment/metadata.csv
---output_path=../../statvar_imports/mongolia_imports/mongolia_employment/output_files/employment_by_classification_of_economic_activites_region_gender_and_agegroup_output
+--output_path=../../statvar_imports/mongolia_imports/mongolia_employment/output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output
 --places_resolved_csv=../../statvar_imports/mongolia_imports/mongolia_employment/places_resolved.csv 
 --existing_statvar_mcf=gs://unresolved_mcf/scripts/statvar/stat_vars.mcf
 ```

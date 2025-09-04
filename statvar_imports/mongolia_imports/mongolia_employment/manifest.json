@@ -11,8 +11,8 @@
       ],
       "import_inputs": [
         {
-          "template_mcf": "output_files/employment_by_classification_of_economic_activites_region_gender_and_agegroup_output.tmcf",
-          "cleaned_csv": "output_files/employment_by_classification_of_economic_activites_region_gender_and_agegroup_output.csv"
+          "template_mcf": "output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output.tmcf",
+          "cleaned_csv": "output_files/employment_by_classification_of_economic_activities_region_gender_and_agegroup_output.csv"
         },
         {
           "template_mcf": "output_files/employment_by_occupation_by_region_gender_and_agegroup_output.tmcf",
