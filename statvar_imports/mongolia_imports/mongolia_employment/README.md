@@ -29,7 +29,7 @@ The workflow for this data import involves two main steps: Manually downloading 
 - **Description:** The provided URL links to the official website of the National Statistical Office (NSO) of Mongolia. This specific page presents official statistics and data related to the country's labour and business statistics.
 
 To get the necessary data files, you'll need to manually download source files.
-`https://www.1212.mn/en/statcate/table/Labour%2C%20business/Labour`
+<https://www.1212.mn/en/statcate/table/Labour%2C%20business/Labour>
 
 All downloaded files will be located into the `mongolia_employment/input_files` folder.
 
