@@ -2,7 +2,7 @@
     "import_specifications": [{
         "import_name":
         "IndiaPovertyData",
-        "curator_emails": ["i@thejeshgn.com"],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url":
         "https://www.rbi.org.in/scripts/AnnualPublications.aspx?head=Handbook+of+Statistics+on+Indian+Economy",
         "provenance_description":
@@ -12,5 +12,7 @@
             "template_mcf": "BelowPovertyLine_india.tmcf",
             "cleaned_csv": "BelowPovertyLine_india.csv"
         }],
+        "source_files": ["BelowPovertyLine_india.csv"],
+        "cron_schedule" : ""
     }]
 }

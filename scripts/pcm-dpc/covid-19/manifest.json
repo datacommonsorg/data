@@ -3,13 +3,12 @@
         {
             "import_name": "ItalyPCMDPC_COVID19",
             "curator_emails": [
-                "lijuanqian@google.com"
+                "support@datacommons.org"
             ],
             "provenance_url": "https://github.com/pcm-dpc/COVID-19",
             "provenance_description": "Cumulative positive cases of COVID-19 at regional, provincial, and national level in Italy from Italy department of Civil protection.",
             "scripts": [
-                "preprocess.py",
-                "test_template_mcf_names.py"
+                "preprocess.py"
             ],
             "import_inputs": [
                 {
@@ -26,6 +25,7 @@
                     "cleaned_csv": "dpc-covid19-ita-national-trend.csv"
                 }
             ],
+            "source_files": ["ISTAT_code/*"],
             "cron_schedule": "0 18 * * *"
         }
     ]

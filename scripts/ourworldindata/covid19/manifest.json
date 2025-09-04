@@ -3,7 +3,7 @@
         {
             "import_name": "OWID_COVID19",
             "curator_emails": [
-                "hanluc@google.com"
+                "support@datacommons.org"
             ],
             "provenance_url": "https://ourworldindata.org/coronavirus",
             "provenance_description": "Our World In Data maintains COVID-19 dataset, updates daily. It includes data on confirmed cases, deaths, hospitalizations, and testing, as well as other variables of potential interest.",
@@ -16,6 +16,7 @@
                     "cleaned_csv": "OurWorldInData_Covid19.csv"
                 }
             ],
+            "source_files":["OurWorldInData_Covid19.csv"],
             "cron_schedule": "0 2 * * *"
         }
     ]

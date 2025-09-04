@@ -15,7 +15,11 @@
                 }
             ],
             "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+            "source_files": ["CDC500State_Output/CDC500State_Output.csv"],
             "cron_schedule": "0 1 * * 1"
         }
-    ]
+    ],
+    "config_override":{
+        "ignore_validation_status": false
+   }
 }

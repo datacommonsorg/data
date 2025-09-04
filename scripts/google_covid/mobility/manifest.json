@@ -13,9 +13,14 @@
           "cleaned_csv": "covid_mobility.csv"
         }
       ],
-      "cron_schedule": "30 2 10 * *"
+      "cron_schedule": "30 2 10 * *",
+      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100}
+
     }
-  ]
+  ],
+   "config_override":{
+        "ignore_validation_status": false
+   }
 }
 
 

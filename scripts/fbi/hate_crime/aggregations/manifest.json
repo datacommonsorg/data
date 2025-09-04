@@ -18,10 +18,5 @@
         ],
         "cron_schedule": "0 10 21 * *"
       }
-    ],
-    "config_override": {
-        "invoke_import_tool": false,
-        "invoke_differ_tool": false,
-        "invoke_import_validation": false
-    }
+    ]
   }

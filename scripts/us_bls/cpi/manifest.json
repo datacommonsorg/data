@@ -20,6 +20,7 @@
 		       "cleaned_csv": "output/c_cpi_u.csv"
         }
       ],
+      "source_files": ["input_files/*"],
       "cron_schedule": "0 3 2,16 * *"
     }
   ]

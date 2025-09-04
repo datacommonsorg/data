@@ -3,7 +3,7 @@
         {
             "import_name": "USGS_Earthquake",
             "curator_emails": [
-                "alexyfchen@google.com"
+                "support@datacommons.org"
             ],
             "provenance_url": "https://www.usgs.gov/programs/earthquake-hazards/earthquakes",
             "provenance_description": "USGS earthquake data for historical earthquake events globally.",
@@ -16,6 +16,7 @@
                     "cleaned_csv": "earthquake.csv"
                 }
             ],
+            "source_files": ["/tmp/usgs/*.csv"],
             "cron_schedule": "0 */3 * * *"
         }
     ]

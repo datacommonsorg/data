@@ -16,7 +16,11 @@
           "cleaned_csv": "OECD_population_cleaned.csv"
         }
       ],
+      "source_files": ["REGION_DEMOGR_population.csv"],
       "cron_schedule": "0 10 1,15 * *"
     }
-  ]
+  ],
+  "config_override":{
+        "ignore_validation_status": false
+   }
 }

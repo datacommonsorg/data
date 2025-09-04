@@ -16,6 +16,7 @@
           "cleaned_csv": "OECD_pop_density_cleaned.csv"
         }
       ],
+      "source_files": ["REGION_DEMOGR_pop_density.csv"],
       "cron_schedule": "0 9 1,15 * *"
     }
   ]

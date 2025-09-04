@@ -13,7 +13,8 @@
           "cleaned_csv": "gcs_output/output_files/national_emissions.csv"
         }
       ],
-      "cron_schedule": "0 0 1 1-12/3 *"
+      "cron_schedule": "0 0 1 1-12/3 *",
+      "resource_limits": {"cpu": 8, "memory": 100, "disk": 100}
     }
   ]
 }

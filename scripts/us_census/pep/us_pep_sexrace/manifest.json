@@ -2,7 +2,7 @@
     "import_specifications": [
       {
         "import_name": "USCensusPEP_By_Sex_Race",
-        "curator_emails": ["shamimansari@google.com"],
+        "curator_emails": ["support@datacommons.org"],
         "provenance_url": "https://www2.census.gov/programs-surveys/popest/tables",
         "provenance_description": "US Census Population Estimates Program (PEP)",
         "scripts": ["preprocess.py"],
@@ -24,8 +24,12 @@
             "cleaned_csv": "output_files/final/state_county_before_2000.csv"
           }
         ],
+        "source_files": ["input_files/*"],
         "cron_schedule": "0 10 * * 1"
       }
-    ]
+    ],
+    "config_override":{
+        "ignore_validation_status": false
+   }
   }
   

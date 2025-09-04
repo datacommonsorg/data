@@ -12,9 +12,13 @@
           "cleaned_csv": "output/output_all_years.csv"
         }
       ],
+      "source_files":["input_files/*"],
       "cron_schedule": "15 23 * * 7"
     }
-  ]
+  ],
+  "config_override":{
+        "ignore_validation_status": false
+   }
 }
 
 

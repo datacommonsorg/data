@@ -16,7 +16,11 @@
           "cleaned_csv": "OECD_deaths_cleaned.csv"
         }
       ],
+      "source_files": ["REGION_DEMOGR_death_5Y.csv"],
       "cron_schedule": "0 7 1,15 * *"
     }
-  ]
+  ],
+   "config_override":{
+        "ignore_validation_status": false
+   }
 }
