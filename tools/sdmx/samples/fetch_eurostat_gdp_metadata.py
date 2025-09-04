@@ -1,15 +1,15 @@
 """
-fetch_oecd_gdp_metadata.py
+fetch_eurostat_gdp_metadata.py
 
-This script demonstrates how to use the fetch_and_save_metadata utility to
-download the complete metadata for the OECD's Quarterly GDP Growth dataset.
+This script provides a complete example of fetching metadata for a specific
+dataset from Eurostat using the reusable functions in the dataflow module.
 """
 
 import logging
 import sys
 import os
 
-# Add the project root to the Python path to allow importing 'tools'
+# Add the project root to the Python path
 sys.path.append(
     os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
@@ -21,18 +21,14 @@ logging.basicConfig(level=logging.INFO,
 
 
 def main():
-    """Downloads the metadata for the OECD Quarterly GDP Growth dataset."""
-    # --- 1. Define Parameters ---
-    agency_id = "OECD.SDD.NAD"
-    dataflow_id = "DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD"
-    output_path = "oecd_gdp_metadata.xml"
-    endpoint = "https://sdmx.oecd.org/public/rest/"
+    """Downloads the metadata for the Eurostat GDP dataset."""
+    # --- 1. Define Parameters for the Eurostat GDP Dataset ---
+    agency_id = "ESTAT"
+    dataflow_id = "TEC00001"
+    output_path = "eurostat_gdp_metadata.xml"
+    endpoint = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/"
 
-    logging.info("--- Starting Metadata Download ---")
-    logging.info(f"Dataflow ID: {dataflow_id}")
-    logging.info(f"Agency ID: {agency_id}")
-    logging.info(f"Output Path: {output_path}")
-    logging.info(f"Endpoint: {endpoint}")
+    logging.info(f"--- Fetching Eurostat Metadata: {dataflow_id} ---")
 
     # --- 2. Use the Reusable Function ---
     try:

@@ -27,6 +27,7 @@ def main():
     agency_id = "OECD.SDD.NAD"
     dataflow_id = "DSD_NAMAIN1@DF_QNA_EXPENDITURE_GROWTH_OECD"
     output_path = "oecd_gdp_data_slice.csv"
+    endpoint = "https://sdmx.oecd.org/public/rest/"
 
     # Key to select a slice of data (e.g., quarterly data for USA, Canada, Mexico)
     data_key = {
@@ -42,6 +43,7 @@ def main():
     logging.info(f"Dataflow ID: {dataflow_id}")
     logging.info(f"Agency ID: {agency_id}")
     logging.info(f"Output Path: {output_path}")
+    logging.info(f"Endpoint: {endpoint}")
     logging.info(f"Data Key: {data_key}")
     logging.info(f"Data Params: {data_params}")
 
@@ -51,7 +53,8 @@ def main():
                                             agency_id=agency_id,
                                             key=data_key,
                                             params=data_params,
-                                            output_path=output_path)
+                                            output_path=output_path,
+                                            endpoint=endpoint)
         logging.info(f"--- Successfully downloaded data to {output_path} ---")
     except Exception as e:
         logging.error(f"Failed to download data. Error: {e}")

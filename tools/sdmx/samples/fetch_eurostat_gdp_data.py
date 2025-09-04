@@ -26,6 +26,7 @@ def main():
     agency_id = "ESTAT"
     dataflow_id = "TEC00001"
     output_path = "eurostat_gdp_data.csv"
+    endpoint = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/"
 
     # Key to select a slice of data
     data_key = {
@@ -46,7 +47,7 @@ def main():
                                             key=data_key,
                                             params=data_params,
                                             output_path=output_path,
-                                            client_id="ESTAT")
+                                            endpoint=endpoint)
         logging.info(f"--- Successfully downloaded data to {output_path} ---")
     except Exception as e:
         logging.error(f"Failed to download data. Error: {e}")

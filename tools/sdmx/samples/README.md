@@ -12,6 +12,7 @@ This directory contains sample scripts demonstrating how to use the functions in
 
 ### Eurostat
 
+*   `fetch_eurostat_gdp_metadata.py`: Downloads the metadata for the annual GDP dataset from Eurostat.
 *   `fetch_eurostat_gdp_data.py`: Downloads a slice of the annual GDP data for Germany, France, and Italy from Eurostat.
 
 ## Running the Samples
