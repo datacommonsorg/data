@@ -69,8 +69,6 @@ def download_fema_csv(api_url, filename="fema_nfip_claims.csv"):
         api_url (str): The base URL of the API endpoint.
         filename (str): The name of the final merged file.
     """
-    logging.set_verbosity(logging.INFO)
-
     # Define the page size for each API request.
     PAGE_SIZE = 1000
     skip_count = 0
@@ -82,6 +80,7 @@ def download_fema_csv(api_url, filename="fema_nfip_claims.csv"):
     total_records = get_total_records(api_url)
     if total_records is None:
         logging.fatal("Could not get the total record count. Cannot proceed.")
+        raise RuntimeError('Download failed due to could not get the total record count')
         return
 
     try:
