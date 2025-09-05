@@ -28,13 +28,13 @@ if data_dir not in sys.path:
 from util.download_util_script import download_file
 from absl import flags
 
-flags.DEFINE_string(
-    'api_url', 'https://www.fema.gov/api/open/v2/FimaNfipClaims',
-    'The base URL of the API endpoint to download data from.')
-flags.DEFINE_string(
-    'temp_dir', 'temp_fema_data',
-    'The temporary directory to store downloaded chunks.')
+flags.DEFINE_string('api_url',
+                    'https://www.fema.gov/api/open/v2/FimaNfipClaims',
+                    'The base URL of the API endpoint to download data from.')
+flags.DEFINE_string('temp_dir', 'temp_fema_data',
+                    'The temporary directory to store downloaded chunks.')
 FLAGS = flags.FLAGS
+
 
 def get_total_records(api_url):
     """
@@ -65,8 +65,10 @@ def get_total_records(api_url):
         logging.error("Failed to get total record count: %s", e)
         return None
     except (ValueError, KeyError, TypeError) as e:
-        logging.error("Failed to parse the total record count from the response: %s", e)
+        logging.error(
+            "Failed to parse the total record count from the response: %s", e)
         return None
+
 
 def main(argv):
     """
@@ -75,7 +77,6 @@ def main(argv):
     Args:
         argv: List of command line arguments, as provided by absl.
     """
-   
 
     api_url = FLAGS.api_url
     temp_dir = FLAGS.temp_dir
@@ -88,12 +89,13 @@ def main(argv):
     skip_count = 0
     records_downloaded = 0
     final_filepath = filename
-    
+
     # Get the total number of records from the API for a reliable failsafe.
     total_records = get_total_records(api_url)
     if total_records is None:
         logging.fatal("Could not get the total record count. Cannot proceed.")
-        raise RuntimeError('Download failed due to could not get the total record count.')
+        raise RuntimeError(
+            'Download failed due to could not get the total record count.')
         return
 
     try:
@@ -101,35 +103,34 @@ def main(argv):
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
         os.makedirs(temp_dir)
-        
+
         logging.info("Starting download to file: %s", final_filepath)
 
         # The main download loop for pagination
         while records_downloaded < total_records:
             csv_url = f"{api_url}?$format=csv&$skip={skip_count}"
             logging.info("Requesting data from: %s", csv_url)
-            
+
             util_output_filename = "FimaNfipClaims.xlsx"
             util_output_path = os.path.join(temp_dir, util_output_filename)
 
             chunk_filename = f"FimaNfipClaims_{skip_count}.xlsx"
             chunk_filepath = os.path.join(temp_dir, chunk_filename)
-          
-            download_success = download_file(
-                url=csv_url,
-                output_folder=temp_dir,
-                unzip=False,
-                tries=3,
-                delay=5,
-                backoff=2
-            )
-            
+
+            download_success = download_file(url=csv_url,
+                                             output_folder=temp_dir,
+                                             unzip=False,
+                                             tries=3,
+                                             delay=5,
+                                             backoff=2)
+
             if not download_success or not os.path.exists(util_output_path):
-                logging.error("Failed to download chunk or file not found. Exiting.")
+                logging.error(
+                    "Failed to download chunk or file not found. Exiting.")
                 break
 
             os.rename(util_output_path, chunk_filepath)
-            
+
             with open(chunk_filepath, 'rb') as f_chunk:
                 content = f_chunk.read()
 
@@ -145,21 +146,27 @@ def main(argv):
             num_records_in_chunk = len(content.split(b'\n')) - 1
             records_downloaded += num_records_in_chunk
 
-            logging.info("Downloaded %s of %s records.", records_downloaded, total_records)
-            
+            logging.info("Downloaded %s of %s records.", records_downloaded,
+                         total_records)
+
             if num_records_in_chunk < PAGE_SIZE:
-                logging.info("Reached the end of the dataset. All records have been downloaded.")
+                logging.info(
+                    "Reached the end of the dataset. All records have been downloaded."
+                )
                 break
-            
+
             skip_count += PAGE_SIZE
 
-        logging.info("Total download complete. All available records saved to: %s", final_filepath)
+        logging.info(
+            "Total download complete. All available records saved to: %s",
+            final_filepath)
 
     except IOError as e:
         logging.error("An error occurred while writing the file: %s", e)
     finally:
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
+
 
 if __name__ == "__main__":
     app.run(main)
