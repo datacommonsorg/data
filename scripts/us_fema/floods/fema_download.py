@@ -20,7 +20,7 @@ import requests
 from absl import logging
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-data_dir = os.path.dirname(os.path.dirname(script_dir))
+data_dir = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
 if data_dir not in sys.path:
     sys.path.insert(0, data_dir)
 
