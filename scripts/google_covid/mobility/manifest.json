@@ -1,26 +1,33 @@
 {
-  "import_specifications": [
-    {
-      "import_name": "Google_CovidMobility",
-      "curator_emails": ["support@datacommons.org"],
-      "provenance_url": "https://www.google.com/covid19/mobility",
-            "provenance_description": "These Community Mobility Reports aim to provide insights into what has changed in response to policies aimed at combating COVID-19. The reports chart movement trends over time by geography, across different categories of places such as retail and recreation, groceries and pharmacies, parks, transit stations, workplaces, and residential.",
-      "scripts": ["covidmobility.py"],
-      "source_files": ["input/*"],
-      "import_inputs": [
+    "import_specifications": [
         {
-          "template_mcf": "covid_mobility.tmcf",
-          "cleaned_csv": "covid_mobility.csv"
+            "import_name": "Google_CovidMobility",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.google.com/covid19/mobility",
+            "provenance_description": "These Community Mobility Reports aim to provide insights into what has changed in response to policies aimed at combating COVID-19. The reports chart movement trends over time by geography, across different categories of places such as retail and recreation, groceries and pharmacies, parks, transit stations, workplaces, and residential.",
+            "scripts": [
+                "covidmobility.py"
+            ],
+            "source_files": [
+                "input/*"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "covid_mobility.tmcf",
+                    "cleaned_csv": "covid_mobility.csv"
+                }
+            ],
+            "cron_schedule": "30 2 10 * *",
+            "resource_limits": {
+                "cpu": 8,
+                "memory": 64,
+                "disk": 100
+            }
         }
-      ],
-      "cron_schedule": "30 2 10 * *",
-      "resource_limits": {"cpu": 8, "memory": 64, "disk": 100}
-
-    }
-  ],
-   "config_override":{
+    ],
+    "config_override": {
         "ignore_validation_status": false
-   }
+    }
 }
-
-

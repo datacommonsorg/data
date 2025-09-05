@@ -16,7 +16,10 @@
                     "cleaned_csv": "output/WorldBank.csv"
                 }
             ],
-            "source_files": ["WorldBankCountries.csv","schema_csvs/WorldBankIndicators_prod.csv"],
+            "source_files": [
+                "WorldBankCountries.csv",
+                "schema_csvs/WorldBankIndicators_prod.csv"
+            ],
             "cron_schedule": "0 11 * * 2"
         }
     ]

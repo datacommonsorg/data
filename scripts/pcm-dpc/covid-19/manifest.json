@@ -25,7 +25,9 @@
                     "cleaned_csv": "dpc-covid19-ita-national-trend.csv"
                 }
             ],
-            "source_files": ["ISTAT_code/*"],
+            "source_files": [
+                "ISTAT_code/*"
+            ],
             "cron_schedule": "0 18 * * *"
         }
     ]

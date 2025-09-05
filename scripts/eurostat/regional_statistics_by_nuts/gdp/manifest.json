@@ -2,20 +2,28 @@
     "import_specifications": [
         {
             "import_name": "EurostatData_GDP",
-            "curator_emails": ["support@datacommons.org"],
-            "provenance_url":"https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10r_3gdp/?format=TSV&compressed=true",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/nama_10r_3gdp/?format=TSV&compressed=true",
             "provenance_description": "Regional Statistics by NUTS Classification.",
-            "scripts": ["import_data.py"],
-            "import_inputs": [{
-                "template_mcf": "eurostat_gdp.tmcf",
-                "cleaned_csv": "eurostat_gdp.csv"
-            }],
-            "source_files": ["nama_10r_3gdp.tsv.gz","input_files/input_file.tsv"],
+            "scripts": [
+                "import_data.py"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "eurostat_gdp.tmcf",
+                    "cleaned_csv": "eurostat_gdp.csv"
+                }
+            ],
+            "source_files": [
+                "nama_10r_3gdp.tsv.gz",
+                "input_files/input_file.tsv"
+            ],
             "cron_schedule": "30 04 * * 2"
         }
     ],
-    "config_override":{
+    "config_override": {
         "ignore_validation_status": false
-   }
+    }
 }
-

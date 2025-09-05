@@ -16,7 +16,9 @@
                     "cleaned_csv": "OurWorldInData_Covid19.csv"
                 }
             ],
-            "source_files":["OurWorldInData_Covid19.csv"],
+            "source_files": [
+                "OurWorldInData_Covid19.csv"
+            ],
             "cron_schedule": "0 2 * * *"
         }
     ]

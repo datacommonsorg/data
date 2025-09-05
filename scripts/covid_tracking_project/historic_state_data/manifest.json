@@ -18,8 +18,8 @@
                 }
             ],
             "source_files": [
-            "COVIDTracking_States.csv"
-        ],
+                "COVIDTracking_States.csv"
+            ],
             "cron_schedule": "45 3 * * *"
         }
     ]

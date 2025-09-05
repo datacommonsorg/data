@@ -1,26 +1,28 @@
 {
-  "import_specifications": [
-    {
-      "import_name": "Google_SustainabilityFinancialIncentives",
-      "curator_emails": ["support@datacommons.org"],
-      "provenance_url": "https://www.google.com",
-      "provenance_description": "A set of energy and transportation related financial incentives offered by government and utility organizations.",
-      "scripts": [
-        "download_and_convert.py",
-        "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/financial_incentives_data.csv --output_path=output/financial_incentives --config_file=financial_incentives_metadata.csv  --places_resolved_csv=financial_incentives_places_resolved.csv  --pv_map=financial_incentives_pvmap.csv"
-      ],
-      "import_inputs": [
+    "import_specifications": [
         {
-          "template_mcf": "financial_incentives_final.tmcf",
-          "cleaned_csv": "output/financial_incentives.csv"
+            "import_name": "Google_SustainabilityFinancialIncentives",
+            "curator_emails": [
+                "support@datacommons.org"
+            ],
+            "provenance_url": "https://www.google.com",
+            "provenance_description": "A set of energy and transportation related financial incentives offered by government and utility organizations.",
+            "scripts": [
+                "download_and_convert.py",
+                "../../tools/statvar_importer/stat_var_processor.py --input_data=input_files/financial_incentives_data.csv --output_path=output/financial_incentives --config_file=financial_incentives_metadata.csv  --places_resolved_csv=financial_incentives_places_resolved.csv  --pv_map=financial_incentives_pvmap.csv"
+            ],
+            "import_inputs": [
+                {
+                    "template_mcf": "financial_incentives_final.tmcf",
+                    "cleaned_csv": "output/financial_incentives.csv"
+                }
+            ],
+            "source_files": [
+                "input_files/financial_incentives_data.csv",
+                "input_files/financial_incentives_prod_data.json"
+            ],
+            "user_script_timeout": 3600,
+            "cron_schedule": "0 06 * * 3"
         }
-      ],
-      "source_files": [
-          "input_files/financial_incentives_data.csv",
-          "input_files/financial_incentives_prod_data.json"
-      ],
-      "user_script_timeout" : 3600,
-      "cron_schedule": "0 06 * * 3"
-    }
-  ]
+    ]
 }

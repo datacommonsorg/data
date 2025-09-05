@@ -16,7 +16,9 @@
                     "cleaned_csv": "COVIDTracking_US.csv"
                 }
             ],
-            "source_files": ["COVIDTracking_US.csv"],
+            "source_files": [
+                "COVIDTracking_US.csv"
+            ],
             "cron_schedule": "30 3 * * *"
         }
     ]

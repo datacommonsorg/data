@@ -15,7 +15,9 @@
                     "node_mcf": "covid_mobility_output.mcf"
                 }
             ],
-            "source_files": ["data.csv"],
+            "source_files": [
+                "data.csv"
+            ],
             "cron_schedule": "30 11 * * *"
         }
     ]

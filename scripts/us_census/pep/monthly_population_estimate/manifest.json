@@ -10,7 +10,9 @@
             "scripts": [
                 "preprocess.py"
             ],
-            "source_files": ["raw_data/*"],
+            "source_files": [
+                "raw_data/*"
+            ],
             "import_inputs": [
                 {
                     "template_mcf": "output/USA_Population_Count.tmcf",
@@ -20,7 +22,7 @@
             "cron_schedule": "0 7 * * 6"
         }
     ],
-    "config_override":{
+    "config_override": {
         "ignore_validation_status": false
-   }
+    }
 }

@@ -16,7 +16,9 @@
                     "cleaned_csv": "earthquake.csv"
                 }
             ],
-            "source_files": ["/tmp/usgs/*.csv"],
+            "source_files": [
+                "/tmp/usgs/*.csv"
+            ],
             "cron_schedule": "0 */3 * * *"
         }
     ]
