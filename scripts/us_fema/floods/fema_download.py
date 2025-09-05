@@ -134,8 +134,8 @@ def download_fema_csv(api_url, filename="fema_nfip_claims.csv"):
                     f_final.write(content)
                 else:
                     # For subsequent chunks, strip the header before writing.
-                    content_without_header = content.split(b'\n', 1)[1]
-                    f_final.write(content_without_header)
+                    content_parts = content.split(b'\n', 1)
+                    f_final.write(content_parts[1] if len(content_parts) > 1 else b'')
 
             # Check how many records were in the chunk
             num_records_in_chunk = len(content.split(b'\n')) - 1
