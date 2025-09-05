@@ -25,6 +25,14 @@ if data_dir not in sys.path:
     sys.path.insert(0, data_dir)
 
 from util.download_util_script import download_file
+from absl import flags
+
+flags.DEFINE_string(
+    'api_url', 'https://www.fema.gov/api/open/v2/FimaNfipClaims',
+    'The base URL of the API endpoint to download data from.')
+flags.DEFINE_string(
+    'temp_dir', 'temp_fema_data',
+    'The temporary directory to store downloaded chunks.')
 
 def get_total_records(api_url):
     """
@@ -58,7 +66,7 @@ def get_total_records(api_url):
         logging.error("Failed to parse the total record count from the response: %s", e)
         return None
 
-def download_fema_csv(api_url, filename="fema_nfip_claims.csv"):
+def download_fema_csv(api_url, temp_dir, filename="fema_nfip_claims.csv"):
     """
     Downloads a complete CSV file from the FEMA API by handling pagination.
 
@@ -67,20 +75,21 @@ def download_fema_csv(api_url, filename="fema_nfip_claims.csv"):
 
     Args:
         api_url (str): The base URL of the API endpoint.
+        temp_dir (str): The name of the temporary directory.
         filename (str): The name of the final merged file.
     """
+
     # Define the page size for each API request.
     PAGE_SIZE = 1000
     skip_count = 0
     records_downloaded = 0
-    temp_dir = "temp_fema_data"
     final_filepath = filename
     
     # Get the total number of records from the API for a reliable failsafe.
     total_records = get_total_records(api_url)
     if total_records is None:
         logging.fatal("Could not get the total record count. Cannot proceed.")
-        raise RuntimeError('Download failed due to could not get the total record count')
+        raise RuntimeError('Download failed due to could not get the total record count.')
         return
 
     try:
@@ -96,11 +105,9 @@ def download_fema_csv(api_url, filename="fema_nfip_claims.csv"):
             csv_url = f"{api_url}?$format=csv&$skip={skip_count}"
             logging.info("Requesting data from: %s", csv_url)
             
-           
             util_output_filename = "FimaNfipClaims.xlsx"
             util_output_path = os.path.join(temp_dir, util_output_filename)
 
-            # Then, define the unique filename our script will use for processing.
             chunk_filename = f"FimaNfipClaims_{skip_count}.xlsx"
             chunk_filepath = os.path.join(temp_dir, chunk_filename)
           
@@ -113,41 +120,33 @@ def download_fema_csv(api_url, filename="fema_nfip_claims.csv"):
                 backoff=2
             )
             
-            # Check for download success and if the utility's output file exists.
             if not download_success or not os.path.exists(util_output_path):
                 logging.error("Failed to download chunk or file not found. Exiting.")
                 break
 
-            # Rename the downloaded file to a unique name so the utility
-            # downloads a fresh copy on the next iteration.
             os.rename(util_output_path, chunk_filepath)
             
-            # Read the downloaded chunk from its new unique path.
             with open(chunk_filepath, 'rb') as f_chunk:
                 content = f_chunk.read()
 
-            # Append content to the final file, handling the header.
             with open(final_filepath, 'ab') as f_final:
                 if skip_count == 0:
-                    # For the first chunk, write the entire content (including header).
                     f_final.write(content)
                 else:
-                    # For subsequent chunks, strip the header before writing.
-                    content_parts = content.split(b'\n', 1)
-                    f_final.write(content_parts[1] if len(content_parts) > 1 else b'')
+                    split_content = content.split(b'\n', 1)
+                    if len(split_content) > 1:
+                        content_without_header = split_content[1]
+                        f_final.write(content_without_header)
 
-            # Check how many records were in the chunk
             num_records_in_chunk = len(content.split(b'\n')) - 1
             records_downloaded += num_records_in_chunk
 
             logging.info("Downloaded %s of %s records.", records_downloaded, total_records)
             
-            # If the number of records is less than the page size, it's the last page.
             if num_records_in_chunk < PAGE_SIZE:
                 logging.info("Reached the end of the dataset. All records have been downloaded.")
                 break
             
-            # Increment the skip counter for the next request.
             skip_count += PAGE_SIZE
 
         logging.info("Total download complete. All available records saved to: %s", final_filepath)
@@ -155,11 +154,13 @@ def download_fema_csv(api_url, filename="fema_nfip_claims.csv"):
     except IOError as e:
         logging.error("An error occurred while writing the file: %s", e)
     finally:
-        # Clean up the temporary directory.
         if os.path.exists(temp_dir):
             shutil.rmtree(temp_dir)
 
 if __name__ == "__main__":
-    api_url = "https://www.fema.gov/api/open/v2/FimaNfipClaims"
-    download_fema_csv(api_url)
+    
+    download_fema_csv(
+        api_url=FLAGS.api_url,
+        temp_dir=FLAGS.temp_dir
+    )
 
