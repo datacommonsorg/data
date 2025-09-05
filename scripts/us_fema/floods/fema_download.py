@@ -18,6 +18,7 @@ import shutil
 import time
 import requests
 from absl import logging
+from absl import app
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 data_dir = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
@@ -33,6 +34,7 @@ flags.DEFINE_string(
 flags.DEFINE_string(
     'temp_dir', 'temp_fema_data',
     'The temporary directory to store downloaded chunks.')
+FLAGS = flags.FLAGS
 
 def get_total_records(api_url):
     """
@@ -66,18 +68,20 @@ def get_total_records(api_url):
         logging.error("Failed to parse the total record count from the response: %s", e)
         return None
 
-def download_fema_csv(api_url, temp_dir, filename="fema_nfip_claims.csv"):
+def main(argv):
     """
-    Downloads a complete CSV file from the FEMA API by handling pagination.
-
-    This function uses a provided utility to download paginated chunks
-    and merges them into a single file.
+    The main function that handles the data download process.
 
     Args:
-        api_url (str): The base URL of the API endpoint.
-        temp_dir (str): The name of the temporary directory.
-        filename (str): The name of the final merged file.
+        argv: List of command line arguments, as provided by absl.
     """
+   
+
+    api_url = FLAGS.api_url
+    temp_dir = FLAGS.temp_dir
+    filename = "fema_nfip_claims.csv"
+
+    logging.set_verbosity(logging.INFO)
 
     # Define the page size for each API request.
     PAGE_SIZE = 1000
@@ -158,9 +162,4 @@ def download_fema_csv(api_url, temp_dir, filename="fema_nfip_claims.csv"):
             shutil.rmtree(temp_dir)
 
 if __name__ == "__main__":
-    
-    download_fema_csv(
-        api_url=FLAGS.api_url,
-        temp_dir=FLAGS.temp_dir
-    )
-
+    app.run(main)
