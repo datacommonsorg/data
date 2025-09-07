@@ -1,0 +1,10 @@
+Node: E:metabolicCellularCompartment->E1
+typeOf: dcs:Metabolite
+dcid: C:metabolicCellularCompartment->metabolite_dcid
+
+Node: E:metabolicCellularCompartment->E2
+typeOf: dcs:MetabolicCellularCompartment
+dcid: C:metabolicCellularCompartment->metabolic_compartment_dcid
+cellularCompartment: C:metabolicCellularCompartment->compartment
+humaGEMID: C:metabolicCellularCompartment->id
+associatedMetabolite: E:metabolicCellularCompartment->E1
