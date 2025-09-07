@@ -1,0 +1,17 @@
+parameter,value
+url,https://www.bps.go.id/en/statistics-table/3/VUUxWVltazBUblI1VG5veWNIbFliek5uYmtGSVp6MDkjMw==/number-of-schools--teachers--and-pupils-in-madrasah-aliyah--ma--under-the-ministry-of-religious-affairs-by-province.html?year=2022
+description,"Number of Madrasah Aliyah (MA) Schools, Teachers and Students under the Ministry of Religion by Province"
+#place_type,country/IDN
+#places_within,
+start_date,2018
+end_date,2022
+release_frequency,1 year
+process,
+comments,
+output_columns,"observationAbout,observationDate,value,variableMeasured,unit,scalingFactor,#input"
+header_rows,1
+drop_statvars_without_svobs,0
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1zN6soxDIIwIm6i2WXVF2bjNiDMHadvizstBUMrLcCX0/edit?resourcekey=0-IwMphM0JinpKm2iCsL4xdA#gid=542232949
+mapped_rows,1
+mapped_columns,1
+pv_map,https://docs.google.com/spreadsheets/d/1zN6soxDIIwIm6i2WXVF2bjNiDMHadvizstBUMrLcCX0/edit?resourcekey=0-IwMphM0JinpKm2iCsL4xdA#gid=1509328822
