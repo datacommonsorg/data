@@ -1,0 +1,22 @@
+parameter,value
+url,Brazil_pact_against_hunger_PNADCT_table_5434
+description,Brazil_pact_against_hunger_PNADCT_table_5434
+#place_type,Country
+#places_within,
+start_date,2012
+end_date,2024
+release_frequency,1Year
+process,
+comments,
+output_columns,"observationAbout, observationDate, value, unit,scalingFactor, variableMeasured, observationPeriod"
+places_resolved_csv,https://docs.google.com/spreadsheets/d/1CFTHBb6PSyqXS3-0Bd8A9IYLyFNxcPz-CY2iT0HkbkQ/edit?resourcekey=0-OtFOlelsTbPDGc_enfQ2aA&gid=1653931545#gid=1653931545
+mapped_rows,5
+mapped_columns,1
+header_rows,5
+drop_statvars_without_svobs,0
+#debug,1
+,
+,
+pv_map,https://docs.google.com/spreadsheets/d/1R1d5AYtV8krd5To7210UVnxsX2t8l4sNTHOnTwPXgXQ/edit?resourcekey=0-LvDheeW90dxUsHyCerp01Q&gid=646168073#gid=646168073
+#log_level,2
+spell_allow_words,"dcid,dcs"
