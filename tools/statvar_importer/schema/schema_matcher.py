@@ -113,6 +113,7 @@ class SchemaMatcher:
         self._config = ConfigMap(config_dict=get_schema_matcher_config())
         if config:
             self._config.add_configs(config)
+        self._log_every_n = self._config.get('log_every_n', 10)
         self.schema_nodes = load_mcf_nodes(mcf_file, strip_namespaces=True)
         self.schema_nodes = load_mcf_nodes(
             self._config.get('schema_matcher_mcf'),
@@ -135,7 +136,10 @@ class SchemaMatcher:
         props: list = ['dcid', 'name', 'description', 'alternativeName'],
     ):
         """Add the properties from the nodes to the ngram matcher for lookups."""
-        logging.info(f'Adding {props} for {len(nodes)} nodes into matcher.')
+        logging.log_every_n(
+            logging.INFO,
+            f'Adding {props} for {len(nodes)} nodes into matcher.',
+            self._log_every_n)
         self._counters.set_prefix('matcher-load-schema:')
         self._counters.add_counter('total', len(nodes))
         for dcid, node in nodes.items():
@@ -165,27 +169,33 @@ class SchemaMatcher:
         nodes = self._node_matcher.lookup(query,
                                           num_results=self._config.get(
                                               'max_results', 10))
-        logging.level_debug() and logging.debug(
-            f'Got {len(nodes)} nodes from ngram matcher for query: {query}, {nodes}'
-        )
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
+            f'Got {len(nodes)} nodes from ngram matcher for query: {query}, {nodes}',
+            self._log_every_n)
         if self._semantic_matcher is not None:
             semantic_nodes = self._semantic_matcher.lookup(
                 query, num_results=self._config.get('max_results', 10))
-            logging.level_debug() and logging.debug(
-                f'Got {len(semantic_nodes)} nodes from semantic_matcher for query: {query}, {semantic_nodes}'
-            )
+            logging.level_debug() and logging.log_every_n(
+                logging.DEBUG,
+                f'Got {len(semantic_nodes)} nodes from semantic_matcher for query: {query}, {semantic_nodes}',
+                self._log_every_n)
             nodes.extend(semantic_nodes)
         types_set = _get_set(types)
         for key, node in nodes:
             if not isinstance(node, dict):
-                logging.error(f'Skipping non dict result {node} for {query}')
+                logging.log_every_n(
+                    logging.ERROR,
+                    f'Skipping non dict result {node} for {query}',
+                    self._log_every_n)
                 continue
             dcid = _get_dcid(node)
             if not self._node_is_type(dcid, types_set):
                 # Ignore the result as it is not the required type.
-                logging.level_debug() and logging.debug(
-                    f'Ignoring {dcid}: {node} for {query} not of type: {types_set}'
-                )
+                logging.level_debug() and logging.log_every_n(
+                    logging.DEBUG,
+                    f'Ignoring {dcid}: {node} for {query} not of type: {types_set}',
+                    self._log_every_n)
                 continue
             prop = self._node_get_property(dcid)
             statvar = self.schema_nodes.get(dcid)
@@ -203,8 +213,9 @@ class SchemaMatcher:
                         _add_pv(prop, value, prop_as_key, pvs)
             else:
                 _add_pv(prop, dcid, prop_as_key, pvs)
-        logging.level_debug() and logging.debug(
-            f'Got {len(pvs)} pvs for query: {query}, {pvs}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Got {len(pvs)} pvs for query: {query}, {pvs}',
+            self._log_every_n)
         self._counters.add_counter('matcher-lookups', 1)
         if pvs:
             self._counters.add_counter('matcher-results', 1)
@@ -220,8 +231,8 @@ class SchemaMatcher:
                 for r in range_includes:
                     self._node_parent_prop[strip_namespace(
                         r)] = strip_namespace(dcid)
-                    logging.level_debug() and logging.log(
-                        2, f'Setting prop for {r} to {dcid}')
+                    logging.level_debug() and logging.log_every_n(
+                        2, f'Setting prop for {r} to {dcid}', self._log_every_n)
 
     def _node_get_property(self, dcid: str) -> str:
         """Get the property for the node.
@@ -239,12 +250,14 @@ class SchemaMatcher:
         for parent in node_types:
             prop = self._node_parent_prop.get(parent)
             if prop:
-                logging.level_debug() and logging.debug(
+                logging.level_debug() and logging.log_every_n(
+                    logging.DEBUG,
                     f'Got property {prop} for {dcid} type: {parent} for types:'
-                    f' {node_types}')
+                    f' {node_types}', self._log_every_n)
                 return prop
-        logging.level_debug() and logging.debug(
-            f'No property for {dcid}, type: {node_types}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'No property for {dcid}, type: {node_types}',
+            self._log_every_n)
         logging.debug(
             f'{dcid}: typeOf: {self._node_get_property_value(dcid, "typeOf")},'
             f' {self._node_get_types(dcid)}, {self.schema_nodes.get(dcid)},'
@@ -302,8 +315,8 @@ class SchemaMatcher:
                         next_parents.add(p)
             new_parents = next_parents
         self._node_set_property_value(dcid, 'typeOf', parent_types)
-        logging.level_debug() and logging.log(
-            2, f'Got types: {dcid}: {parent_types}')
+        logging.level_debug() and logging.log_every_n(
+            2, f'Got types: {dcid}: {parent_types}', self._log_every_n)
         return parent_types
 
 
@@ -413,6 +426,7 @@ def search_pvs(
     else:
         for index, pvs in output_pvs.items():
             print(f'{pvs}')
+    counters.print_counters()
     return output_pvs
 
 

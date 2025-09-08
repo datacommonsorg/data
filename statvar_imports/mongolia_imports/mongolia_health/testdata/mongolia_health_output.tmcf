@@ -1,0 +1,6 @@
+Node: E:mongolia_health_output->E0
+observationAbout: C:mongolia_health_output->observationAbout
+observationDate: C:mongolia_health_output->observationDate
+value: C:mongolia_health_output->value
+variableMeasured: C:mongolia_health_output->variableMeasured
+typeOf: dcs:StatVarObservation
