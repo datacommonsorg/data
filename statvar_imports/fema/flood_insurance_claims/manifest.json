@@ -1,0 +1,26 @@
+{
+    "import_specifications": [
+      {
+        "import_name": "USFEMA_FloodInsuranceClaims",
+        "curator_emails": [],
+        "provenance_url": "https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2",
+        "provenance_description": "National flood insurance claims data",
+        "scripts": [
+            "fema_download.py",
+            "python3 process.py --input_data='input_file/fema_nfip_claims.csv' --config_file='us_flood_nfip_config.py' --pv_map='us_flood_nfip_pv_map_floodzone.py,ratedFloodZone:us_flood_nfip_floodzone_pv_map.py,observationAbout:us_state_codes.py' --output_path='output/nfip_output'"
+        ],
+        "import_inputs": [
+          {
+            "template_mcf": "output/nfip_output.tmcf",
+            "cleaned_csv": "output/nfip_output.csv"
+          }
+        ],
+        "source_files": [
+          "input_file/fema_nfip_claims.csv"
+        ],
+        "resource_limits": {"cpu": 8, "memory": 64, "disk": 100},
+        "cron_schedule": "0 11 1 * *"
+      }
+    ]
+  }
+  
