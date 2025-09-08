@@ -60,17 +60,17 @@ class Config:
 
 class PVMapGenerator:
     """Generator for PV maps from import configuration."""
-    
+
     def __init__(self, config: Config):
         self.config = config
         self.datacommons_dir = self._initialize_datacommons_dir()
-    
+
     def _initialize_datacommons_dir(self) -> str:
         """Initialize and return the .datacommons directory path."""
         output_dir = os.path.join(os.getcwd(), '.datacommons')
         os.makedirs(output_dir, exist_ok=True)
         return output_dir
-    
+
     def generate(self):
         """Generate PV map from import configuration."""
         # Set environment variables if API keys are provided in config
@@ -78,10 +78,17 @@ class PVMapGenerator:
             os.environ['MAPS_API_KEY'] = self.config.maps_api_key
         if self.config.dc_api_key:
             os.environ['DC_API_KEY'] = self.config.dc_api_key
-        
+
         if not self.config.data_config.input_data:
             raise ValueError(
                 "Import configuration must have at least one input data entry")
+
+        # Validate single CSV file input
+        if len(self.config.data_config.input_data) != 1:
+            raise ValueError(
+                f"Currently only single CSV file is supported. "
+                f"Found {len(self.config.data_config.input_data)} files in input_data."
+            )
 
         # Generate the prompt as the first step
         prompt_file = self._generate_prompt()
@@ -96,17 +103,20 @@ class PVMapGenerator:
         # Check if Gemini CLI is available
         if not self._check_gemini_cli_available():
             logging.error(
-                "Gemini CLI is not available. Please install it before running.")
+                "Gemini CLI is not available. Please install it before running."
+            )
             raise RuntimeError("Gemini CLI not found in PATH")
 
         # Generate output file path with timestamp
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        output_file = os.path.join(self.datacommons_dir, f'gemini_output_{timestamp}.txt')
+        output_file = os.path.join(self.datacommons_dir,
+                                   f'gemini_output_{timestamp}.txt')
 
         # Execute Gemini CLI with the generated prompt file using cat | gemini
         # Redirect stderr to stdout (2>&1) and tee to both file and terminal
         gemini_command = f"cat '{prompt_file}' | gemini 2>&1 | tee '{output_file}'"
-        logging.info(f"Launching gemini (cwd: {os.getcwd()}): {gemini_command} ")
+        logging.info(
+            f"Launching gemini (cwd: {os.getcwd()}): {gemini_command} ")
         logging.info(f"Gemini output will be saved to: {output_file}")
 
         exit_code = self._run_subprocess(gemini_command)
@@ -116,7 +126,7 @@ class PVMapGenerator:
             logging.error("Gemini CLI failed with exit code: %d", exit_code)
             raise RuntimeError(
                 f"Gemini CLI execution failed with exit code {exit_code}")
-    
+
     def _check_gemini_cli_available(self) -> bool:
         """Check if Gemini CLI is available in PATH."""
         try:
@@ -127,7 +137,7 @@ class PVMapGenerator:
             return True
         except subprocess.CalledProcessError:
             return False
-    
+
     def _run_subprocess(self, command: str) -> int:
         """Run a subprocess command with real-time output streaming."""
         try:
@@ -156,7 +166,7 @@ class PVMapGenerator:
         except Exception as e:
             logging.error("Error running subprocess: %s", str(e))
             return 1
-    
+
     def _generate_prompt(self) -> str:
         """Generate prompt from Jinja2 template using import configuration.
         
@@ -169,11 +179,34 @@ class PVMapGenerator:
         env = Environment(loader=FileSystemLoader(template_dir))
         template = env.get_template('generate_pvmap_prompt.j2')
 
-        # Render template with config values
-        rendered_prompt = template.render(config=self.config)
+        # Calculate paths and prepare template variables
+        working_dir = os.getcwd()  # Full path without trailing slash
+        script_dir = os.path.abspath(
+            os.path.join(_SCRIPT_DIR, '..', 'statvar_importer'))
+
+        template_vars = {
+            'working_dir':
+                working_dir,
+            'python_interpreter':
+                sys.executable,
+            'script_dir':
+                script_dir,
+            'input_data':
+                self.config.data_config.input_data[0]
+                if self.config.data_config.input_data else "",
+            'input_metadata':
+                self.config.data_config.input_metadata or
+                [],  # Handle None case, default to empty list for multiple files support
+            'dataset_type':
+                'sdmx' if self.config.data_config.is_sdmx_dataset else 'csv'
+        }
+
+        # Render template with these variables
+        rendered_prompt = template.render(**template_vars)
 
         # Write rendered prompt to .datacommons folder
-        output_file = os.path.join(self.datacommons_dir, 'generate_pvmap_prompt.txt')
+        output_file = os.path.join(self.datacommons_dir,
+                                   'generate_pvmap_prompt.md')
         with open(output_file, 'w') as f:
             f.write(rendered_prompt)
 
@@ -191,14 +224,10 @@ def load_data_config(config_path: str) -> DataConfig:
 def prepare_config() -> Config:
     """Prepare comprehensive configuration from flags and data config file."""
     data_config = load_data_config(FLAGS.data_config)
-    return Config(
-        data_config=data_config,
-        dry_run=FLAGS.dry_run,
-        maps_api_key=FLAGS.maps_api_key,
-        dc_api_key=FLAGS.dc_api_key
-    )
-
-
+    return Config(data_config=data_config,
+                  dry_run=FLAGS.dry_run,
+                  maps_api_key=FLAGS.maps_api_key,
+                  dc_api_key=FLAGS.dc_api_key)
 
 
 def main(argv):
@@ -207,10 +236,10 @@ def main(argv):
     logging.info("Loaded config with %d data files and %d metadata files",
                  len(config.data_config.input_data),
                  len(config.data_config.input_metadata))
-    
+
     generator = PVMapGenerator(config)
     generator.generate()
-    
+
     logging.info("PV Map generation completed.")
     return 0
 

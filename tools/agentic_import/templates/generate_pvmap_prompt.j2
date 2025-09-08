@@ -1224,7 +1224,7 @@ Follow these steps sequentially.
 - Execute the following command to generate the final output:
 ```bash
 {{python_interpreter}} {{script_dir}}/stat_var_processor.py \
---input_data={{working_dir}}/{{input_data}} \
+--input_data={{input_data}} \
 --pv_map={{working_dir}}/pvmap.csv \
 --config_file={{working_dir}}/metadata.csv \
 --output_path={{working_dir}}/output/output
@@ -1242,21 +1242,20 @@ Follow these steps sequentially.
 
 ```json
 {
-  "input_data": [""],
-  "input_metadata":[""],
-  "working_dir":"{{working_dir}}",
-  "outout_dir":"{{working_dir}}/output",
-  <!-- TODO Generate only for sdmx -->
-  "dataset_type":"{{dataset_type}}"
+  "input_data": ["{{input_data}}"],
+  "input_metadata": {{input_metadata | tojson}},
+  "working_dir": "{{working_dir}}",
+  "output_dir": "{{working_dir}}/output",
+  "dataset_type": "{{dataset_type}}"
 }
 ```
 
 # OUTPUT REQUIREMENTS & FINAL INSTRUCTION
 
--   Generate `pvmap.csv` and `metadata.csv`
--   **Adhere to Rules:** Strictly follow all schema rules, property
-    requirements, and formatting guidelines from the knowledge base. Do not
-    invent properties or deviate from the documented standards.
+- Generate `pvmap.csv` and `metadata.csv`
+- **Adhere to Rules:** Strictly follow all schema rules, property requirements, and formatting guidelines from the
+knowledge base.
+- DO NOT deviate from the documented standards.
 
 # ACTION REQUIRED NOW
 

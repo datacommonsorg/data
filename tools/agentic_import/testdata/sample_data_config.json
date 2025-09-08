@@ -1,11 +1,10 @@
 {
   "input_data": [
-    "path/to/data/file1.csv",
-    "path/to/data/file2.csv"
+    "path/to/data/file1.csv"
   ],
   "input_metadata": [
     "path/to/metadata/file1.json",
     "path/to/metadata/file2.yaml"
   ],
-  "is_sdmx_dataset": false
+  "is_sdmx_dataset": true
 }
