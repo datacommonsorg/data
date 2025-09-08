@@ -62,14 +62,39 @@ class PVMapGenerator:
     """Generator for PV maps from import configuration."""
 
     def __init__(self, config: Config):
+        # Define working directory once for consistent path resolution
+        self.working_dir = os.getcwd()
+
+        # Copy config to avoid modifying the original
         self.config = config
+
+        # Convert input_data paths to absolute
+        if self.config.data_config.input_data:
+            self.config.data_config.input_data = [
+                self._validate_and_convert_path(path) for path in self.config.data_config.input_data
+            ]
+
+        # Convert input_metadata paths to absolute
+        if self.config.data_config.input_metadata:
+            self.config.data_config.input_metadata = [
+                self._validate_and_convert_path(path) for path in self.config.data_config.input_metadata
+            ]
+
         self.datacommons_dir = self._initialize_datacommons_dir()
+
+    def _validate_and_convert_path(self, path: str) -> str:
+        """Convert path to absolute and validate it's within working directory."""
+        abs_path = os.path.abspath(path)
+        # Check if path is within working directory using simple string check
+        if not abs_path.startswith(self.working_dir):
+            raise ValueError(f"Path '{path}' is outside working directory")
+        return abs_path
 
     def _initialize_datacommons_dir(self) -> str:
         """Initialize and return the .datacommons directory path."""
-        output_dir = os.path.join(os.getcwd(), '.datacommons')
-        os.makedirs(output_dir, exist_ok=True)
-        return output_dir
+        dc_dir = os.path.join(self.working_dir, '.datacommons')
+        os.makedirs(dc_dir, exist_ok=True)
+        return dc_dir
 
     def generate(self):
         """Generate PV map from import configuration."""
@@ -116,7 +141,7 @@ class PVMapGenerator:
         # Redirect stderr to stdout (2>&1) and tee to both file and terminal
         gemini_command = f"cat '{prompt_file}' | gemini 2>&1 | tee '{output_file}'"
         logging.info(
-            f"Launching gemini (cwd: {os.getcwd()}): {gemini_command} ")
+            f"Launching gemini (cwd: {self.working_dir}): {gemini_command} ")
         logging.info(f"Gemini output will be saved to: {output_file}")
 
         exit_code = self._run_subprocess(gemini_command)
@@ -180,7 +205,7 @@ class PVMapGenerator:
         template = env.get_template('generate_pvmap_prompt.j2')
 
         # Calculate paths and prepare template variables
-        working_dir = os.getcwd()  # Full path without trailing slash
+        working_dir = self.working_dir  # Use defined working directory
         script_dir = os.path.abspath(
             os.path.join(_SCRIPT_DIR, '..', 'statvar_importer'))
 
