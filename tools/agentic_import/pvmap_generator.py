@@ -37,6 +37,10 @@ flags.mark_flag_as_required('data_config')
 flags.DEFINE_boolean('dry_run', False,
                      'Generate prompt only without calling Gemini CLI')
 
+flags.DEFINE_string('maps_api_key', None, 'Google Maps API key (optional)')
+
+flags.DEFINE_string('dc_api_key', None, 'Data Commons API key (optional)')
+
 
 @dataclass
 class DataConfig:
@@ -49,7 +53,9 @@ class DataConfig:
 @dataclass
 class Config:
     data_config: DataConfig
-    dry_run: bool
+    dry_run: bool = False
+    maps_api_key: str = None
+    dc_api_key: str = None
 
 
 def load_data_config(config_path: str) -> DataConfig:
@@ -64,7 +70,9 @@ def prepare_config() -> Config:
     data_config = load_data_config(FLAGS.data_config)
     return Config(
         data_config=data_config,
-        dry_run=FLAGS.dry_run
+        dry_run=FLAGS.dry_run,
+        maps_api_key=FLAGS.maps_api_key,
+        dc_api_key=FLAGS.dc_api_key
     )
 
 
@@ -163,6 +171,12 @@ def run_subprocess(command: str) -> int:
 
 def generate_pvmap(config: Config):
     """Generate PV map from import configuration."""
+    # Set environment variables if API keys are provided in config
+    if config.maps_api_key:
+        os.environ['MAPS_API_KEY'] = config.maps_api_key
+    if config.dc_api_key:
+        os.environ['DC_API_KEY'] = config.dc_api_key
+    
     if not config.data_config.input_data:
         raise ValueError(
             "Import configuration must have at least one input data entry")
@@ -187,7 +201,7 @@ def generate_pvmap(config: Config):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_dir = _get_datacommons_dir()
     output_file = os.path.join(output_dir, f'gemini_output_{timestamp}.txt')
-    
+
     # Execute Gemini CLI with the generated prompt file using cat | gemini
     # Redirect stderr to stdout (2>&1) and tee to both file and terminal
     gemini_command = f"cat '{prompt_file}' | gemini 2>&1 | tee '{output_file}'"
@@ -207,7 +221,8 @@ def main(argv):
     """Main function for PV Map generator."""
     config = prepare_config()
     logging.info("Loaded config with %d data files and %d metadata files",
-                 len(config.data_config.input_data), len(config.data_config.input_metadata))
+                 len(config.data_config.input_data),
+                 len(config.data_config.input_metadata))
     generate_pvmap(config)
     logging.info("PV Map generation completed.")
     return 0
