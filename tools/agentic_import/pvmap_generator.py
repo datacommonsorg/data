@@ -71,13 +71,15 @@ class PVMapGenerator:
         # Convert input_data paths to absolute
         if self.config.data_config.input_data:
             self.config.data_config.input_data = [
-                self._validate_and_convert_path(path) for path in self.config.data_config.input_data
+                self._validate_and_convert_path(path)
+                for path in self.config.data_config.input_data
             ]
 
         # Convert input_metadata paths to absolute
         if self.config.data_config.input_metadata:
             self.config.data_config.input_metadata = [
-                self._validate_and_convert_path(path) for path in self.config.data_config.input_metadata
+                self._validate_and_convert_path(path)
+                for path in self.config.data_config.input_metadata
             ]
 
         self.datacommons_dir = self._initialize_datacommons_dir()
@@ -135,7 +137,7 @@ class PVMapGenerator:
         # Generate output file path with timestamp
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         output_file = os.path.join(self.datacommons_dir,
-                                   f'gemini_output_{timestamp}.txt')
+                                   f'gemini_cli_{timestamp}.log')
 
         # Execute Gemini CLI with the generated prompt file using cat | gemini
         # Redirect stderr to stdout (2>&1) and tee to both file and terminal

@@ -1227,7 +1227,7 @@ Follow these steps sequentially.
 --input_data={{input_data}} \
 --pv_map={{working_dir}}/pvmap.csv \
 --config_file={{working_dir}}/metadata.csv \
---output_path={{working_dir}}/output/output
+--output_path={{working_dir}}/output/output 2>&1 | tee {{working_dir}}/.datacommons/statavar_processor_$(date +%Y%m%d_%H%M%S).log 
 ```
 <!-- TODO read maps_api_key and dc_api_key from environment variable in statvar processor. can be taken as input in main script and set in env var-->
 **6. Validate the Output**
