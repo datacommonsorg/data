@@ -98,6 +98,7 @@ class PropertyValueCache:
         """
         self._filename = filename
         self._normalize_key = normalize_key
+        self._log_every_n = 10
 
         # List of properties that can be used as keys.
         # Each values for the keys are assumed to be unique across entries.
@@ -170,7 +171,9 @@ class PropertyValueCache:
           dict entry that contains the prop:value if it exists.
         """
         if isinstance(value, list):
-            logging.error(f'Cannot lookup {value} for {prop}')
+            logging.log_every_n(logging.ERROR,
+                                f'Cannot lookup {value} for {prop}',
+                                self._log_every_n)
             return {}
         key = self.get_lookup_key(prop=prop, value=value)
         if not prop or prop not in self._key_props:
@@ -238,8 +241,8 @@ class PropertyValueCache:
                 for value in values:
                     self._add_prop_key_entry(prop, value, entry)
         self._is_modified = True
-        logging.level_debug() and logging.log(
-            2, f'Added cache entry {cached_entry}')
+        logging.level_debug() and logging.log_every_n(
+            2, f'Added cache entry {cached_entry}', self._log_every_n)
         return cached_entry
 
     def update_entry(self, src: dict, dst: dict):
@@ -272,7 +275,8 @@ class PropertyValueCache:
                 # Add the new prop:value to dst dict
                 dst[prop] = values
                 self._is_modified = True
-        logging.level_debug() and logging.debug(f'Merged {src} into {dst}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Merged {src} into {dst}', self._log_every_n)
         return dst
 
     def save_cache_file(self):
@@ -295,9 +299,13 @@ class PropertyValueCache:
         if not filename:
             return
 
-        logging.info(f'Writing {len(self._entries)} cache entries with columns'
-                     f' {self._props} into file {filename}')
-        logging.debug(f'Writing cache entries: {self._entries}')
+        logging.log_every_n(
+            logging.INFO,
+            f'Writing {len(self._entries)} cache entries with columns'
+            f' {self._props} into file {filename}', self._log_every_n)
+        logging.log_every_n(logging.DEBUG,
+                            f'Writing cache entries: {self._entries}',
+                            self._log_every_n)
         with file_util.FileIO(filename, mode='w') as cache_file:
             csv_writer = csv.DictWriter(
                 cache_file,
@@ -388,12 +396,16 @@ class PropertyValueCache:
         key = self.get_lookup_key(prop=prop, value=value)
         prop_index = self._prop_index.get(prop)
         if prop_index is None:
-            logging.error(f'Invalid key prop {prop}:{key} for {entry}')
+            logging.log_every_n(logging.ERROR,
+                                f'Invalid key prop {prop}:{key} for {entry}',
+                                self._log_every_n)
             return False
         existing_entry = prop_index.get(key)
         if existing_entry and existing_entry.get(prop) != value:
-            logging.error(
-                f'Conflicting {prop}:{key} old:{existing_entry} new:{entry}')
+            logging.log_every_n(
+                logging.ERROR,
+                f'Conflicting {prop}:{key} old:{existing_entry} new:{entry}',
+                self._log_every_n)
         prop_index[key] = entry
         return True
 

@@ -140,6 +140,7 @@ class DataTypeAnnotator:
         if counters is None:
             self._counters = Counters()
 
+        self._log_every_n = self._config.get('log_every_n', 10)
         self._data_type = data_type
         # PVs to be returned on a match for the type.
         self._data_pvs = set()
@@ -169,8 +170,9 @@ class DataTypeAnnotator:
 
     def add_data_pvs(self, pvs: dict):
         """Add data PVs to be returned on a match."""
-        logging.level_debug() and logging.debug(
-            f'Adding PVs for {self._data_type}: {pvs}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG, f'Adding PVs for {self._data_type}: {pvs}',
+            self._log_every_n)
         self._data_pvs.update(pvs)
 
     def add_regex_list(self, regex_list: str):
@@ -178,8 +180,10 @@ class DataTypeAnnotator:
         for regex in regex_list:
             if regex:
                 self._regex_list.append(re.compile(regex))
-        logging.level_debug() and logging.debug(
-            f'Added regex for {self._data_type}: {self._regex_list}')
+        logging.level_debug() and logging.log_every_n(
+            logging.DEBUG,
+            f'Added regex for {self._data_type}: {self._regex_list}',
+            self._log_every_n)
 
     def add_match_words(self, words: str):
         """Add a list of words to match on."""
@@ -201,10 +205,10 @@ class DataTypeAnnotator:
         self._counters.add_counter(f'{self._data_type}-lookups', 1)
         if matches:
             self._counters.add_counter(f'{self._data_type}-matches', 1)
-            logging.level_debug() and logging.log(
+            logging.level_debug() and logging.log_every_n(
                 2,
-                f'Got {len(matches)} {self._data_type} matches for {value} {matches}'
-            )
+                f'Got {len(matches)} {self._data_type} matches for {value} {matches}',
+                self._log_every_n)
             return self._data_pvs
         return {}
 
@@ -622,6 +626,7 @@ def generate_pvmap(data_file: str,
         f'Generating pvmap for {data_file} with config: {config.get_configs()}')
     da = DataAnnotator(config.get_configs(), counters)
     pvmap = da.annotate_file(data_file, pv_map_output)
+    counters.print_counters()
     return pvmap
 
 
