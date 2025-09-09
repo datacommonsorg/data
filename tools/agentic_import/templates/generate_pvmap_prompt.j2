@@ -1555,6 +1555,21 @@ Follow these steps sequentially.
 - Create the `pvmap.csv` file, mapping the source data columns to DataCommons properties based on your findings.
 - Create the `metadata.csv` file and define the necessary `statvar_processor` configuration parameters within it.
 
+{% if dataset_type == 'sdmx' -%}
+
+### SDMX PV Map Validation Checklist
+
+Before proceeding to run the processor, validate your SDMX PV map against this checklist:
+
+- [ ] **All dimension codes are mapped** - Check `<structure:Constraints>` if present, otherwise verify all used codes from data
+- [ ] **Time period format is consistent with frequency** - YYYY (annual), YYYY-MM (monthly/quarterly end), YYYY-MM-DD (daily)
+- [ ] **Unit measures are DC-compatible** - Use USDollar not USD, Percent not PERCENT, Euro not EUR
+- [ ] **Missing value codes are handled** - Map M, NA, ":", "-" to `#ignore`
+- [ ] **Scaling factors are correctly applied** - UNIT_MULT mapped to `scalingFactor` (3→1000, 6→1000000, 9→1000000000)
+- [ ] **Each dimension combination produces unique StatVars** - No duplicate place/date/variable combinations
+
+{%- endif %}
+
 **5. Run the Processor**
 
 - Execute the following command to generate the final output:
@@ -1566,8 +1581,6 @@ Follow these steps sequentially.
 --config_file={{working_dir}}/metadata.csv \
 --output_path={{working_dir}}/output/output 2>&1 | tee {{working_dir}}/.datacommons/statavar_processor_$(date +%Y%m%d_%H%M%S).log
 ```
-
-<!-- TODO read maps_api_key and dc_api_key from environment variable in statvar processor. can be taken as input in main script and set in env var-->
 
 **6. Validate the Output**
 
