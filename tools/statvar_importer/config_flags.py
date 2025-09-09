@@ -307,9 +307,9 @@ def get_default_config() -> dict:
             30,
         # Settings for place name resolution
         'dc_api_key':
-            _FLAGS.dc_api_key,
+            _FLAGS.dc_api_key or os.environ.get('DC_API_KEY', ''),
         'maps_api_key':
-            _FLAGS.maps_api_key,
+            _FLAGS.maps_api_key or os.environ.get('MAPS_API_KEY', ''),
         'resolve_places':
             False,
         'places_csv':
