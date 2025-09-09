@@ -1,0 +1,22 @@
+{
+  "import_specifications": [
+    {
+      "import_name": "EPA_AirPollutantEmission_Level1",
+      "curator_emails": ["support@datacommons.org"],
+      "provenance_url": "https://www.epa.gov/air-emissions-inventories/national-emissions-inventory-nei",
+      "provenance_description": "The import has variables that are directly available from EPA source for National Emissions Inventory on SCC Level 1.",
+      "scripts": ["download.py", "process.py"],
+      "source_files": ["gcs_output/input_files/*/*.csv"],
+      "import_inputs": [
+        {
+          "template_mcf": "gcs_output/output_files/national_emissions.tmcf",
+          "cleaned_csv": "gcs_output/output_files/national_emissions.csv"
+        }
+      ],
+      "cron_schedule": "0 0 1 1-12/3 *",
+      "resource_limits": {"cpu": 8, "memory": 100, "disk": 100}
+    }
+  ]
+}
+
+
