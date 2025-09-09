@@ -25,8 +25,5 @@
             ],
             "cron_schedule": "0 06 * * 1"
         }
-    ],
-    "config_override": {
-        "ignore_validation_status": false
-    }
+    ]
 }

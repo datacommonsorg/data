@@ -156,8 +156,5 @@
             },
             "cron_schedule": "0 3 2 * *"
         }
-    ],
-    "config_override": {
-        "ignore_validation_status": false
-    }
+    ]
 }

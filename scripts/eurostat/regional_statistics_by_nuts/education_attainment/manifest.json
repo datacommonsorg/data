@@ -3,7 +3,7 @@
         {
             "import_name": "EurostatData_Education_Attainment",
             "curator_emails": [
-                "spateriya@google.com"
+                "support@datacommons.org"
             ],
             "provenance_url": "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/edat_lfse_04/?format=TSV&compressed=true",
             "provenance_description": "Regional Statistics by NUTS Classification.",
@@ -22,8 +22,5 @@
             ],
             "cron_schedule": "30 02 * * 2"
         }
-    ],
-    "config_override": {
-        "ignore_validation_status": false
-    }
+    ]
 }

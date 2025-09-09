@@ -21,8 +21,5 @@
             ],
             "cron_schedule": "15 23 * * 7"
         }
-    ],
-    "config_override": {
-        "ignore_validation_status": false
-    }
+    ]
 }

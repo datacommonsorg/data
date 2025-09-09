@@ -26,8 +26,5 @@
                 "disk": 100
             }
         }
-    ],
-    "config_override": {
-        "ignore_validation_status": false
-    }
+    ]
 }

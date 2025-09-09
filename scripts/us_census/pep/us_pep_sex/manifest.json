@@ -22,8 +22,5 @@
             "cron_schedule": "0 03 * * 1",
             "cleanup_gcs_volume_mount": false
         }
-    ],
-    "config_override": {
-        "ignore_validation_status": false
-    }
+    ]
 }
