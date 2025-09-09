@@ -1217,7 +1217,6 @@ Jammu And Kashmir 1999 Male 1999 Calendar Year (Jan \- Dec), 1999
 ## SDMX-Specific Guidelines
 
 When working with SDMX datasets, follow these additional guidelines:
-<!-- TODO : add details about how to identify and use metadata for sdmx -->
 
 ### SDMX Structure Overview
 **SDMX Structure Analysis**: The input metadata will contain SDMX structure definitions including:
@@ -1225,6 +1224,77 @@ When working with SDMX datasets, follow these additional guidelines:
 - **Dimensions**: Used to categorize observations (e.g., TIME_PERIOD, REF_AREA, FREQ)
 - **Attributes**: Provide additional context about observations
 - **Measures**: The actual statistical values being observed
+
+### SDMX Metadata Elements for Context Building
+
+#### Key Metadata Fields
+SDMX metadata provides rich semantic information through `<common:name>` and `<common:description>` elements that appear at multiple levels:
+
+**1. Dataflow Level**
+```xml
+<structure:Dataflow id="WS_CBPOL">
+  <common:name xml:lang="en">Central Bank Policy Rates</common:name>
+  <common:description xml:lang="en">Policy interest rates set by central banks</common:description>
+</structure:Dataflow>
+```
+
+**2. Codelist Level**
+```xml
+<structure:Codelist id="CL_FREQ">
+  <common:name xml:lang="en">Frequency</common:name>
+  <structure:Code id="M">
+    <common:name xml:lang="en">Monthly</common:name>
+    <common:description xml:lang="en">Monthly observations</common:description>
+  </structure:Code>
+</structure:Codelist>
+```
+
+**3. Concept Scheme Level**
+```xml
+<structure:ConceptScheme id="CS_COMMON">
+  <structure:Concept id="FREQ">
+    <common:name xml:lang="en">Frequency of observation</common:name>
+    <common:description xml:lang="en">The time interval at which data is collected</common:description>
+  </structure:Concept>
+</structure:ConceptScheme>
+```
+
+**Note**: Multiple languages may be present (xml:lang="en", xml:lang="fr", etc.). Prioritize English when available.
+
+#### How Metadata Links to Data Structure
+
+**Dimension-to-Concept Linkage**:
+- Dimensions reference concepts via `<structure:ConceptIdentity>`
+- Each dimension inherits semantic meaning from its concept's name/description
+- Codelists provide valid values with their own names/descriptions
+
+**Example**:
+```xml
+<structure:Dimension id="REF_AREA">
+  <structure:ConceptIdentity>
+    <Ref id="REF_AREA"/>  <!-- Links to concept -->
+  </structure:ConceptIdentity>
+  <structure:LocalRepresentation>
+    <structure:Enumeration>
+      <Ref id="CL_AREA"/>  <!-- Links to codelist -->
+    </structure:Enumeration>
+  </structure:LocalRepresentation>
+</structure:Dimension>
+```
+
+#### Additional Metadata Elements
+
+- **`<structure:TextFormat>`**: Specifies data type (e.g., String, Decimal)
+- **`<structure:Enumeration>`**: References codelists for valid values
+- **`<structure:ConceptIdentity>`**: Links dimensions/attributes to concepts
+
+#### Using Metadata for Semantic Mapping
+
+Combine names and descriptions to understand the semantic meaning:
+- Dataflow name → helps identify the dataset's purpose
+- Dimension concept names → understand what each dimension represents
+- Code names/descriptions → map to appropriate Data Commons properties
+- Attribute descriptions → determine if observation-level or statistical variable property
 
 ### Core SDMX Mappings
 
@@ -1333,30 +1403,48 @@ QOQ,statType,growthRate,comparisonPeriod,P3M
 AVG,statType,meanValue
 ```
 
-### Critical Processing Rules
+### Critical Processing Rules for SDMX
 
-1. **Column Selection**: Specify relevant columns in metadata configuration to optimize processing:
+#### Metadata Extraction and Usage Rules
+
+1. **Parse and Extract Metadata Fields**:
+   * Extract `<common:name>` and `<common:description>` from all levels (dataflow, codelists, concepts)
+   * Use these to build semantic context for better PV mapping generation
+   * Store metadata in comments or use for generating descriptive StatVar names
+
+2. **Language Priority**:
+   * When multiple languages exist (xml:lang attributes), prioritize English ("en")
+   * If English unavailable, select any available language consistently
+   * Use `#Eval` with string manipulation if needed to handle multi-language labels
+
+3. **Constraint-Based Code Selection**:
+   * **CRITICAL**: Check for `<structure:Constraints>` in metadata FIRST
+   * If constraints exist, map ONLY the code values specified in constraints (not entire codelist)
+   * If no constraints, use full codelist but sample data to verify which codes actually appear
+   * This optimization prevents creating unnecessary mappings and reduces processing time
+
+4. **Semantic Context Building**:
+   * Combine dataflow name + dimension names + code descriptions to generate meaningful StatVar names
+   * Use concept descriptions to determine appropriate Data Commons properties
+   * Example: "Central Bank Policy Rates" + "Monthly" + "Argentina" → helps map to appropriate properties
+
+#### Data Processing Rules
+
+5. **Column Selection**: Specify relevant columns in metadata configuration to optimize processing:
    * Add `input_columns,"REF_AREA,TIME_PERIOD,OBS_VALUE,UNIT_MEASURE"` to focus on essential columns
    * Exclude metadata or auxiliary columns that don't contribute to StatVars
 
-2. **Constraint Optimization**: When `<structure:Constraints>` is present in metadata:
-   * Use constraint definitions instead of reading entire data files
-   * Map only the codes that actually appear in the data
-   * This significantly reduces processing time for large datasets
+6. **Preserve Dimension Combinations**: Ensure each unique combination of dimensions maps to a distinct StatisticalVariable
 
-3. **Preserve Dimension Combinations**: Ensure each unique combination of dimensions maps to a distinct StatisticalVariable
+7. **Handle Missing Values**: Use `#Filter` or `#ignore` for SDMX missing value codes (M, NA, ":", "-")
 
-2. **Handle Missing Values**: Use `#Filter` or `#ignore` for SDMX missing value codes (M, NA, ":", "-")
-
-5. **Frequency Alignment**: When mixing frequencies, ensure proper date formatting:
+8. **Frequency Alignment**: When mixing frequencies, ensure proper date formatting:
    * Annual: YYYY
    * Quarterly: YYYY-MM (using last month of quarter)
    * Monthly: YYYY-MM
    * Daily: YYYY-MM-DD
 
-6. **Multi-lingual Labels**: If dataset has multiple language labels, prioritize English or use `#Eval` to select
-
-7. **Version Management**: For datasets with revisions, use `measurementMethod` to indicate revision status
+9. **Version Management**: For datasets with revisions, use `measurementMethod` to indicate revision status
 
 ### Example SDMX PV Map
 
@@ -1437,12 +1525,29 @@ Follow these steps sequentially.
 
 - Input files and configuration is listed in `INPUT DATA FOR THIS RUN` section
   below.
-- **Carefully** examine examine sample input data `input_data` and metadata
+- **Carefully** examine examine **sample** input data `input_data` and metadata
   `input_metadata` files to understand the structure and content of the data.
 
 {% if dataset_type == 'sdmx' -%}
 
-- **SDMX Analysis**: For SDMX datasets, pay special attention to: - SDMX data structure definitions (DSD) in the metadata - Dimension definitions and their codelists - Attribute definitions and their usage - Measure definitions and their statistical concepts - Constraint definitions that specify valid dimension combinations - Frequency and time period specifications
+- **SDMX Analysis**: For SDMX datasets, pay special attention to:
+  - SDMX data structure definitions (DSD) in the metadata
+  - Dimension definitions and their codelists
+  - Attribute definitions and their usage
+  - Measure definitions and their statistical concepts
+  - **IMPORTANT**: Check for `<structure:Constraints>` - if present, focus ONLY on codes specified there
+  - Frequency and time period specifications
+  
+- **Extract Semantic Context**: Refer to **"SDMX Metadata Elements for Context Building"** section:
+  - Extract `<common:name>` and `<common:description>` from dataflows, codelists, and concepts
+  - Use these metadata fields to understand the semantic meaning of data elements
+  - Build context to help generate accurate PV mappings
+  
+- **Apply SDMX Rules**: Follow **"Critical Processing Rules for SDMX"** section:
+  - Prioritize constraint-based code selection
+  - Handle multi-language labels appropriately
+  - Use metadata to generate meaningful StatVar names
+
   {%- endif %}
 
 **2. Generate `pvmap.csv` and `metadata.csv`**
@@ -1473,6 +1578,14 @@ Follow these steps sequentially.
   same place, date, and variable.
 
 # INPUT DATA FOR THIS RUN
+
+{% if dataset_type == 'sdmx' -%}
+**🚨 SDMX DATASET DETECTED 🚨**
+
+This is an SDMX (Statistical Data and Metadata eXchange) dataset with rich metadata.
+CRITICAL: Follow all SDMX-specific guidelines and use metadata for semantic mapping.
+
+{%- endif %}
 
 ```json
 {
