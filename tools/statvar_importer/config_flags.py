@@ -102,9 +102,9 @@ flags.DEFINE_integer('log_level', logging.INFO,
 flags.DEFINE_integer('log_every_n', 1, 'Log one in N messages.')
 
 # Flags for place name resolution
-flags.DEFINE_string('dc_api_key', '',
+flags.DEFINE_string('dc_api_key', os.environ.get('DC_API_KEY', ''),
                     'DataCommons v2 API key used for APIs such as v2/resolve')
-flags.DEFINE_string('maps_api_key', '',
+flags.DEFINE_string('maps_api_key', os.environ.get('MAPS_API_KEY', ''),
                     'Maps API key for place lookup by name.')
 flags.DEFINE_list('places_csv', [],
                   'CSV file with place names and dcids to match.')
@@ -310,9 +310,9 @@ def get_default_config() -> dict:
             30,
         # Settings for place name resolution
         'dc_api_key':
-            _FLAGS.dc_api_key or os.environ.get('DC_API_KEY', ''),
+            _FLAGS.dc_api_key,
         'maps_api_key':
-            _FLAGS.maps_api_key or os.environ.get('MAPS_API_KEY', ''),
+            _FLAGS.maps_api_key,
         'resolve_places':
             False,
         'places_csv':
