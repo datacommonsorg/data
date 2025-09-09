@@ -16,6 +16,7 @@
 
 import json
 import os
+import platform
 import subprocess
 import sys
 from datetime import datetime
@@ -44,8 +45,15 @@ flags.DEFINE_string('dc_api_key', None, 'Data Commons API key (optional)')
 flags.DEFINE_integer('max_iterations', 10,
                      'Maximum number of attempts for statvar processor.')
 
-flags.DEFINE_boolean('skip_confirmation', False,
-                     'Skip user confirmation before starting PV map generation')
+flags.DEFINE_boolean(
+    'skip_confirmation', False,
+    'Skip user confirmation before starting PV map generation')
+
+flags.DEFINE_boolean(
+    'enable_sandboxing',
+    platform.system() == 'Darwin',
+    'Enable sandboxing for Gemini CLI (default: True on macOS, False elsewhere)'
+)
 
 
 @dataclass
@@ -64,6 +72,7 @@ class Config:
     dc_api_key: str = None
     max_iterations: int = 10
     skip_confirmation: bool = False
+    enable_sandboxing: bool = False
 
 
 class PVMapGenerator:
@@ -115,18 +124,21 @@ class PVMapGenerator:
         Returns:
             True if user confirms, False otherwise
         """
-        print("\n" + "="*60)
+        print("\n" + "=" * 60)
         print("PV MAP GENERATION SUMMARY")
-        print("="*60)
+        print("=" * 60)
         print(f"Input data file: {self.config.data_config.input_data[0]}")
-        print(f"Dataset type: {'SDMX' if self.config.data_config.is_sdmx_dataset else 'CSV'}")
+        print(
+            f"Dataset type: {'SDMX' if self.config.data_config.is_sdmx_dataset else 'CSV'}"
+        )
         print(f"Generated prompt: {prompt_file}")
         print(f"Working directory: {self.working_dir}")
-        print("="*60)
-        
+        print("=" * 60)
+
         while True:
             try:
-                response = input("Ready to start PV map generation? (y/n): ").strip().lower()
+                response = input("Ready to start PV map generation? (y/n): "
+                                ).strip().lower()
                 if response in ['y', 'yes']:
                     return True
                 elif response in ['n', 'no']:
@@ -185,9 +197,8 @@ class PVMapGenerator:
         output_file = os.path.join(self.datacommons_dir,
                                    f'gemini_cli_{timestamp}.log')
 
-        # Execute Gemini CLI with the generated prompt file using cat | gemini
-        # Redirect stderr to stdout (2>&1) and tee to both file and terminal
-        gemini_command = f"cat '{prompt_file}' | gemini -y -c 2>&1 | tee '{output_file}'"
+        # Execute Gemini CLI with generated prompt
+        gemini_command = self._build_gemini_command(prompt_file, output_file)
         logging.info(
             f"Launching gemini (cwd: {self.working_dir}): {gemini_command} ")
         logging.info(f"Gemini output will be saved to: {output_file}")
@@ -210,6 +221,25 @@ class PVMapGenerator:
             return True
         except subprocess.CalledProcessError:
             return False
+
+    def _build_gemini_command(self, prompt_file: str, output_file: str) -> str:
+        """Build the gemini CLI command with appropriate flags.
+        
+        Uses cat to pipe prompt file to gemini CLI with:
+        - Optional --sandbox flag (enabled by default on macOS)
+        - -y flag for automatic confirmation
+        - stderr redirected to stdout (2>&1)
+        - tee to output to both file and terminal
+        
+        Args:
+            prompt_file: Path to the prompt file
+            output_file: Path to the output log file
+            
+        Returns:
+            Complete gemini command string
+        """
+        sandbox_flag = "--sandbox " if self.config.enable_sandboxing else ""
+        return f"cat '{prompt_file}' | gemini {sandbox_flag} -y 2>&1 | tee '{output_file}'"
 
     def _run_subprocess(self, command: str) -> int:
         """Run a subprocess command with real-time output streaming."""
@@ -304,7 +334,8 @@ def prepare_config() -> Config:
                   maps_api_key=FLAGS.maps_api_key,
                   dc_api_key=FLAGS.dc_api_key,
                   max_iterations=FLAGS.max_iterations,
-                  skip_confirmation=FLAGS.skip_confirmation)
+                  skip_confirmation=FLAGS.skip_confirmation,
+                  enable_sandboxing=FLAGS.enable_sandboxing)
 
 
 def main(argv):
