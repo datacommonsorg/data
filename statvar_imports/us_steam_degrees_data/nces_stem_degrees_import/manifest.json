@@ -20,7 +20,8 @@
             "cleaned_csv": "output/nces_steam_degree.csv"
           }
         ],
-        "cron_schedule": "0 05 4,18 * *"
+        "cron_schedule": "0 05 4,18 * *",
+        "resource_limits": {"cpu": 8, "memory": 32}
       }
     ]
   }

@@ -35,7 +35,8 @@
           "cleaned_csv": "output_files/nces_male_output_latest.csv"
         }
       ],
-      "cron_schedule": "0 05 * * 4"
+      "cron_schedule": "0 05 * * 4",
+      "resource_limits": {"cpu": 8, "memory": 32}
     }
   ]
 }

@@ -20,7 +20,8 @@
           "cleaned_csv": "output/state_domestic_product_output.csv"
         }
       ],
-      "cron_schedule": "0 09 4,18 * *"
+      "cron_schedule": "0 09 4,18 * *",
+      "resource_limits": {"cpu": 8, "memory": 32}
     }
   ]
 }

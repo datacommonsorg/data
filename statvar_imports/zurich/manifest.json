@@ -20,7 +20,8 @@
           "cleaned_csv": "wir_2552_wiki/output/zurich_population_wir_2552_wiki.csv"
         }
       ],
-      "cron_schedule": "0 2 29 * *"
+      "cron_schedule": "0 2 29 * *",
+      "resource_limits": {"cpu": 8, "memory": 32}
     },
     {
       "import_name": "Zurich_Population_By_Age",
@@ -42,7 +43,8 @@
           "cleaned_csv": "bev_3903_age10_wiki/output/zurich_population_bev_3903_age10_wiki.csv"
         }
       ],
-      "cron_schedule": "0 6 29 * *"
+      "cron_schedule": "0 6 29 * *",
+      "resource_limits": {"cpu": 8, "memory": 32}
     },
     {
       "import_name": "Zurich_Population",
@@ -64,7 +66,8 @@
           "cleaned_csv": "bev_3240_wiki/output/zurich_population_bev_3240_wiki.csv"
         }
       ],
-      "cron_schedule": "30 11 29 * *"
+      "cron_schedule": "30 11 29 * *",
+      "resource_limits": {"cpu": 8, "memory": 32}
     },
     {
       "import_name": "Zurich_Population_Number_Of_Birth_By_Origin",
@@ -86,7 +89,8 @@
           "cleaned_csv": "bev_4031_hel_wiki/output/zurich_bev_4031_hel_wiki.csv"
         }
       ],
-      "cron_schedule": "45 15 29 * *"
+      "cron_schedule": "45 15 29 * *",
+      "resource_limits": {"cpu": 8, "memory": 32}
     },
     {
       "import_name": "Zurich_Population_Number_Of_Birth",
@@ -108,7 +112,8 @@
           "cleaned_csv": "bev_4031_wiki/output/zurich_bev_4031_wiki.csv"
         }
       ],
-      "cron_schedule": "0 20 29 * *"
+      "cron_schedule": "0 20 29 * *",
+      "resource_limits": {"cpu": 8, "memory": 32}
     },
     {
       "import_name": "Zurich_Population_By_Origin",
@@ -131,7 +136,8 @@
           "cleaned_csv": "bev_3903_hel_wiki/output/zurich_population_bev_3903_hel_wiki.csv"
         }
       ],
-      "cron_schedule": "15 1 29 * *"
+      "cron_schedule": "15 1 29 * *",
+      "resource_limits": {"cpu": 8, "memory": 32}
     },
     {
       "import_name": "Zurich_Population_Number_Of_Birth_By_Sex",
@@ -153,7 +159,8 @@
           "cleaned_csv": "bev_4031_sex_wiki/output/zurich_bev_4031_sex_wiki.csv"
         }
       ],
-      "cron_schedule": "07 19 29 * *"
+      "cron_schedule": "07 19 29 * *",
+      "resource_limits": {"cpu": 8, "memory": 32}
     },
     {
       "import_name": "Zurich_Population_By_Sex",
@@ -175,7 +182,8 @@
           "cleaned_csv": "bev_3903_sex_wiki/output/zurich_population_bev_3903_sex_wiki.csv"
         }
       ],
-      "cron_schedule": "55 10 29 * *"
+      "cron_schedule": "55 10 29 * *",
+      "resource_limits": {"cpu": 8, "memory": 32}
     }
   ]
 }

@@ -22,7 +22,8 @@
           "cleaned_csv": "output_files/country_output.csv"
         }
       ],
-      "cron_schedule": "0 3 3 * *"
+      "cron_schedule": "0 3 3 * *",
+      "resource_limits": {"cpu": 2, "memory": 8}
     }
   ]
 }

@@ -19,7 +19,11 @@
           "cleaned_csv": "gcs_output/COAL/COAL.csv"
         }
       ],
-      "cron_schedule": "0 14 5,20 * *"
+      "cron_schedule": "0 14 5,20 * *",
+      "resource_limits": {
+            "cpu": "8",
+            "memory": "32"
+          }
     },
     {
       "import_name": "EIA_Electricity",
@@ -62,7 +66,12 @@
           "cleaned_csv": "gcs_output/NG/NG.csv"
         }
       ],
-      "cron_schedule": "0 8 5,20 * *"
+      "cron_schedule": "0 8 5,20 * *",
+      "resource_limits": {
+            "cpu": "8",
+            "memory": "32"
+          }
+      
     },
     {
       "import_name": "EIA_NuclearOutages",
@@ -83,7 +92,11 @@
           "cleaned_csv": "gcs_output/NUC_STATUS/NUC_STATUS.csv"
         }
       ],
-      "cron_schedule": "0 9 5,20 * *"
+      "cron_schedule": "0 9 5,20 * *",
+      "resource_limits": {
+            "cpu": "8",
+            "memory": "32"
+          }
     },
     {
       "import_name": "EIA_Petroleum",
@@ -104,7 +117,11 @@
           "cleaned_csv": "gcs_output/PET/PET.csv"
         }
       ],
-      "cron_schedule": "0 10 5,20 * *"
+      "cron_schedule": "0 10 5,20 * *",
+      "resource_limits": {
+            "cpu": "8",
+            "memory": "32"
+          }
     },
     {
       "import_name": "EIA_International",
@@ -125,7 +142,11 @@
           "cleaned_csv": "gcs_output/INTL/INTL.csv"
         }
       ],
-      "cron_schedule": "0 11 5,20 * * *"
+      "cron_schedule": "0 11 5,20 * * *",
+      "resource_limits": {
+            "cpu": "8",
+            "memory": "32"
+          }
     },
     {
       "import_name": "EIA_SEDS",
@@ -146,7 +167,11 @@
           "cleaned_csv": "gcs_output/SEDS/SEDS.csv"
         }
       ],
-      "cron_schedule": "0 12 5,20 * *"
+      "cron_schedule": "0 12 5,20 * *",
+      "resource_limits": {
+            "cpu": "8",
+            "memory": "32"
+          }
     },
     {
       "import_name": "EIA_TotalEnergy",
@@ -167,7 +192,11 @@
           "cleaned_csv": "gcs_output/TOTAL/TOTAL.csv"
         }
       ],
-      "cron_schedule": "0 13 5,20 * *"
+      "cron_schedule": "0 13 5,20 * *",
+      "resource_limits": {
+            "cpu": "8",
+            "memory": "32"
+          }
     }
   ]
 }

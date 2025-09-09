@@ -38,7 +38,11 @@
         "input_files/Population_Economic_sector/*.xlsx",
         "input_files/Employment_And_Unemployment_Labor_Force/*.xlsx"
       ],
-      "cron_schedule": "30 09 25 * *"
+      "cron_schedule": "30 09 25 * *",
+      "resource_limits": {
+            "cpu": "8",
+            "memory": "32G"
+          }
     }
   ]
 }

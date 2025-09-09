@@ -14,7 +14,11 @@
           "cleaned_csv": "national_prison_stats.csv"
         }
        ],
-      "cron_schedule": "0 9 5,25 * *"
+      "cron_schedule": "0 9 5,25 * *",
+      "resource_limits": {
+            "cpu": "8",
+            "memory": "32G"
+          }
     }
   ]
 }
